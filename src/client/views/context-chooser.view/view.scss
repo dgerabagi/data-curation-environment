@@ -15,10 +15,13 @@ body {
 .view-header {
     padding: 8px;
     border-bottom: 1px solid var(--vscode-panel-border);
+    display: flex;
+    gap: 8px;
+    align-items: center;
 }
 
 .flatten-button, .open-folder-button {
-    width: 100%;
+    flex-grow: 1;
     padding: 6px;
     border: 1px solid var(--vscode-button-border, var(--vscode-focusBorder));
     background-color: var(--vscode-button-background);
@@ -27,14 +30,24 @@ body {
     border-radius: 2px;
 }
 
+.selection-sets-dropdown {
+    flex-shrink: 0;
+    padding: 6px;
+    border: 1px solid var(--vscode-input-border);
+    background-color: var(--vscode-input-background);
+    color: var(--vscode-input-foreground);
+    border-radius: 2px;
+}
+
 .flatten-button:hover, .open-folder-button:hover {
     background-color: var(--vscode-button-hoverBackground);
 }
 
 .file-tree-container {
-    padding: 5px;
+    padding: 5px 5px 5px 0; // Remove left padding for alignment
     flex-grow: 1;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .loading-message, .empty-view-container {
@@ -54,46 +67,49 @@ body {
 }
 
 .treenode-li {
-    padding-left: 20px;
     position: relative;
 }
 
 .treenode-item-wrapper {
     display: flex;
     align-items: center;
-    cursor: pointer;
-    padding: 1px 4px;
-    border-radius: 3px;
-}
-
-.treenode-item-wrapper:hover {
-    background-color: var(--vscode-list-hoverBackground);
+    min-height: 22px; // Standard VS Code line height
 }
 
 .treenode-chevron {
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%) rotate(0deg);
-    transition: transform 0.1s ease-in-out;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 20px;
-    height: 20px;
+    height: 22px;
+    flex-shrink: 0;
+    cursor: pointer;
     color: var(--vscode-icon-foreground);
+    transform: rotate(0deg);
+    transition: transform 0.1s ease-in-out;
 }
 
 .treenode-chevron.expanded {
-    transform: translateY(-50%) rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.treenode-content {
+    flex-grow: 1;
+    overflow: hidden;
 }
 
 .file-item {
     display: flex;
     align-items: center;
     width: 100%;
-    padding: 1px;
+    padding: 1px 4px;
     gap: 6px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.file-item:hover {
+    background-color: var(--vscode-list-hoverBackground);
 }
 
 .file-item.active {
@@ -108,11 +124,20 @@ body {
 .file-icon {
     display: flex;
     align-items: center;
-    color: var(--vscode-icon-foreground);
+    font-size: 16px; // Standard icon size
 }
 
 .file-name {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    flex-grow: 1;
+}
+
+.token-count {
+    margin-left: auto;
+    padding-right: 8px;
+    font-size: 11px;
+    color: var(--vscode-descriptionForeground);
+    flex-shrink: 0;
 }

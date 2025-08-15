@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { VscChevronRight } from 'react-icons/vsc';
 import { getExpandedNodes } from './TreeView.utils';
 
@@ -12,23 +12,27 @@ export interface TreeNode {
 
 interface TreeViewProps {
     data: TreeNode[];
-    onNodeClick?: (node: TreeNode) => void;
     renderNodeContent?: (node: TreeNode, isExpanded: boolean) => React.ReactNode;
 }
 
-const TreeView: React.FC<TreeViewProps> = ({ data, onNodeClick, renderNodeContent }) => {
-    const [expandedNodes, setExpandedNodes] = useState<string[]>(getExpandedNodes(data));
+const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent }) => {
+    const [expandedNodes, setExpandedNodes] = useState<string[]>([]);
 
-    const handleNodeClick = (node: TreeNode) => {
-        if (node.children && node.children.length > 0) {
-            setExpandedNodes((prevExpandedNodes) => {
-                const isExpanded = prevExpandedNodes.includes(node.absolutePath);
-                return isExpanded
-                    ? prevExpandedNodes.filter((n) => n !== node.absolutePath)
-                    : [...prevExpandedNodes, node.absolutePath];
-            });
+    useEffect(() => {
+        // Set initial expanded state only once when data is first loaded
+        if (data.length > 0) {
+            setExpandedNodes(getExpandedNodes(data));
         }
-        onNodeClick && onNodeClick(node);
+    }, [data]);
+
+    const handleToggleNode = (e: React.MouseEvent, nodePath: string) => {
+        e.stopPropagation(); // Prevent the click from bubbling to the parent item wrapper
+        setExpandedNodes((prevExpandedNodes) => {
+            const isExpanded = prevExpandedNodes.includes(nodePath);
+            return isExpanded
+                ? prevExpandedNodes.filter((n) => n !== nodePath)
+                : [...prevExpandedNodes, nodePath];
+        });
     };
 
     const renderTreeNodes = (nodes: TreeNode[]) => {
@@ -38,14 +42,16 @@ const TreeView: React.FC<TreeViewProps> = ({ data, onNodeClick, renderNodeConten
 
             return (
                 <li key={node.absolutePath} className="treenode-li">
-                    <div
-                        onClick={() => handleNodeClick(node)}
-                        className={`treenode-item-wrapper`}
-                    >
-                        <span className={`treenode-chevron ${isExpanded ? 'expanded' : ''}`}>
+                    <div className={`treenode-item-wrapper`}>
+                        <span 
+                            className={`treenode-chevron ${isExpanded ? 'expanded' : ''}`}
+                            onClick={(e) => isDirectory && handleToggleNode(e, node.absolutePath)}
+                        >
                             {isDirectory && <VscChevronRight />}
                         </span>
-                        {renderNodeContent ? renderNodeContent(node, isExpanded) : node.name}
+                        <div className="treenode-content">
+                            {renderNodeContent ? renderNodeContent(node, isExpanded) : node.name}
+                        </div>
                     </div>
                     {isDirectory && isExpanded && (
                         <ul className="treenode-children">{renderTreeNodes(node.children)}</ul>

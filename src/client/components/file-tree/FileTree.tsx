@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import TreeView from '../tree-view/TreeView';
 import { FileNode } from '@/common/types/file-node';
-import { addRemovePathInSelectedFiles, getFileNodeByPath } from './FileTree.utils';
+import { addRemovePathInSelectedFiles } from './FileTree.utils';
 import Checkbox from '../Checkbox';
-import { VscFile, VscFolder, VscFolderOpened } from 'react-icons/vsc';
+import {
+    VscFile, VscFolder, VscFolderOpened, VscJson, VscMarkdown, VscSymbolFile
+} from 'react-icons/vsc';
+import { SiTypescript, SiReact, SiJavascript, SiSass } from 'react-icons/si';
 
 interface FileTreeProps {
   data: FileNode[];
@@ -13,12 +16,27 @@ interface FileTreeProps {
   updateSelectedFiles: (selectedFiles: string[]) => void;
 }
 
-// Helper to ensure path comparisons are safe against partial name matches (e.g., 'src' vs 'src-tiled')
-const isAncestor = (ancestor: string, descendent: string) => {
-    if (ancestor === descendent) return false;
-    // Normalize by ensuring ancestor path ends with a separator
-    const ancestorWithSlash = ancestor.endsWith('/') ? ancestor : `${ancestor}/`;
-    return descendent.startsWith(ancestorWithSlash);
+const getFileIcon = (fileName: string) => {
+    const extension = fileName.split('.').pop()?.toLowerCase();
+    switch (extension) {
+        case 'ts':
+            return <SiTypescript color="#3178C6" />;
+        case 'tsx':
+            return <SiReact color="#61DAFB" />;
+        case 'js':
+            return <SiJavascript color="#F7DF1E" />;
+        case 'json':
+            return <VscJson color="#F7DF1E" />;
+        case 'md':
+            return <VscMarkdown />;
+        case 'scss':
+        case 'css':
+            return <SiSass color="#CF649A"/>;
+        case 'svg':
+            return <VscSymbolFile />;
+        default:
+            return <VscFile />;
+    }
 };
 
 const FileTree: React.FC<FileTreeProps> = ({
@@ -29,33 +47,17 @@ const FileTree: React.FC<FileTreeProps> = ({
   updateSelectedFiles,
 }) => {
 
-  const rootNode = data.length > 0 ? data[0] : null;
-
-  const [expandedNodes, setExpandedNodes] = useState<string[]>(rootNode ? [rootNode.absolutePath] : []);
-
-  useEffect(() => {
-    const toExpand = new Set<string>();
-    selectedFiles?.forEach((selectedFile) => {
-        const node = getFileNodeByPath(data, selectedFile);
-        if (node && node.children) {
-            toExpand.add(node.absolutePath);
-        }
-    });
-
-    setExpandedNodes(prevExpandedNodes => [...new Set([...prevExpandedNodes, ...Array.from(toExpand)])]);
-  }, [selectedFiles, data]);
-
-  const handleNodeClick = (e: React.MouseEvent<HTMLElement, MouseEvent> | undefined, node: FileNode) => {
-    if (e && (e.target as HTMLElement)?.closest('.file-checkbox')) {
-        return;
+  const handleNodeClick = (node: FileNode) => {
+    if (!node.children) { // Only trigger onFileClick for files
+        onFileClick?.(node.absolutePath);
     }
-    onFileClick && onFileClick(node.absolutePath);
   };
 
   const renderCheckbox = (path: string) => {
     const isSelected = selectedFiles.includes(path);
-    const hasSelectedAncestor = selectedFiles.some(ancestor => isAncestor(ancestor, path));
-    const hasSelectedDescendant = selectedFiles.some(descendant => isAncestor(path, descendant));
+    // A node is an ancestor if the path starts with the ancestor's path and a separator
+    const hasSelectedAncestor = selectedFiles.some(ancestor => path.startsWith(ancestor + path.sep) && path !== ancestor);
+    const hasSelectedDescendant = selectedFiles.some(descendant => descendant.startsWith(path + path.sep) && descendant !== path);
     
     return (
       <Checkbox
@@ -69,7 +71,6 @@ const FileTree: React.FC<FileTreeProps> = ({
 
   const handleFileCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>, path: string) => {
     e.stopPropagation();
-    e.preventDefault();
     updateSelectedFiles(addRemovePathInSelectedFiles(data, path, selectedFiles));
   };
 
@@ -80,13 +81,16 @@ const FileTree: React.FC<FileTreeProps> = ({
     return (
       <div
         className={`file-item ${isActive ? 'active' : ''}`}
-        onClick={(e) => handleNodeClick(e, node)}
+        onClick={() => handleNodeClick(node)}
       >
         {renderCheckbox(node.absolutePath)}
         <span className="file-icon">
-            {isDirectory ? (isExpanded ? <VscFolderOpened /> : <VscFolder />) : <VscFile />}
+            {isDirectory ? (isExpanded ? <VscFolderOpened /> : <VscFolder />) : getFileIcon(node.name)}
         </span>
         <span className="file-name">{node.name}</span>
+        {node.tokenCount && node.tokenCount > 0 && (
+            <span className="token-count">{node.tokenCount}</span>
+        )}
       </div>
     );
   };
