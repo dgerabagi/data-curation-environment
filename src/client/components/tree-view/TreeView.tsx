@@ -20,7 +20,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent }) => {
 
     useEffect(() => {
         // Set initial expanded state only once when data is first loaded
-        if (data.length > 0) {
+        if (data.length > 0 && expandedNodes.length === 0) {
             setExpandedNodes(getExpandedNodes(data));
         }
     }, [data]);
@@ -49,7 +49,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent }) => {
                         >
                             {isDirectory && <VscChevronRight />}
                         </span>
-                        <div className="treenode-content">
+                        <div className="treenode-content" onClick={(e) => isDirectory && handleToggleNode(e, node.absolutePath)}>
                             {renderNodeContent ? renderNodeContent(node, isExpanded) : node.name}
                         </div>
                     </div>

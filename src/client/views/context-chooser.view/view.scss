@@ -44,7 +44,7 @@ body {
 }
 
 .file-tree-container {
-    padding: 5px 5px 5px 0; // Remove left padding for alignment
+    padding: 5px 5px 5px 0; /* Remove left padding for alignment */
     flex-grow: 1;
     overflow-y: auto;
     overflow-x: hidden;
@@ -68,12 +68,14 @@ body {
 
 .treenode-li {
     position: relative;
+    padding-left: 20px;
 }
 
 .treenode-item-wrapper {
     display: flex;
     align-items: center;
-    min-height: 22px; // Standard VS Code line height
+    min-height: 22px; /* Standard VS Code line height */
+    margin-left: -20px; /* Counteract the li padding to align content */
 }
 
 .treenode-chevron {
@@ -96,6 +98,8 @@ body {
 .treenode-content {
     flex-grow: 1;
     overflow: hidden;
+    /* The whole content area is now the click target for expansion */
+    cursor: pointer; 
 }
 
 .file-item {
@@ -105,7 +109,6 @@ body {
     padding: 1px 4px;
     gap: 6px;
     border-radius: 3px;
-    cursor: pointer;
 }
 
 .file-item:hover {
@@ -124,7 +127,7 @@ body {
 .file-icon {
     display: flex;
     align-items: center;
-    font-size: 16px; // Standard icon size
+    font-size: 16px; /* Standard icon size */
 }
 
 .file-name {

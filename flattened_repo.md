@@ -1,12 +1,12 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-15T22:20:21.673Z
+  Date Generated: 2025-08-15T22:47:48.583Z
   ---
   Total Files: 142
-  Total Lines: 11179
-  Total Characters: 401677
-  Approx. Tokens: 100474
+  Total Lines: 11192
+  Total Characters: 402347
+  Approx. Tokens: 100641
 -->
 
 <!-- Top 10 Files by Token Count -->
@@ -41,17 +41,17 @@
 17. src\backend\commands\commands.ts - Lines: 62 - Chars: 2633 - Tokens: 659
 18. src\backend\commands\register-commands.ts - Lines: 9 - Chars: 331 - Tokens: 83
 19. src\backend\services\flattener.service.ts - Lines: 156 - Chars: 5889 - Tokens: 1473
-20. src\backend\services\fs.service.ts - Lines: 83 - Chars: 3255 - Tokens: 814
+20. src\backend\services\fs.service.ts - Lines: 92 - Chars: 3784 - Tokens: 946
 21. src\backend\services\selection.service.ts - Lines: 39 - Chars: 1300 - Tokens: 325
 22. src\backend\services\services.ts - Lines: 17 - Chars: 552 - Tokens: 138
 23. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
-24. src\client\components\file-tree\FileTree.tsx - Lines: 108 - Chars: 3607 - Tokens: 902
-25. src\client\components\file-tree\FileTree.utils.ts - Lines: 83 - Chars: 3115 - Tokens: 779
-26. src\client\components\tree-view\TreeView.tsx - Lines: 71 - Chars: 2647 - Tokens: 662
+24. src\client\components\file-tree\FileTree.tsx - Lines: 108 - Chars: 3597 - Tokens: 900
+25. src\client\components\file-tree\FileTree.utils.ts - Lines: 84 - Chars: 2984 - Tokens: 746
+26. src\client\components\tree-view\TreeView.tsx - Lines: 71 - Chars: 2748 - Tokens: 687
 27. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 28. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 29. src\client\views\context-chooser.view\on-message.ts - Lines: 43 - Chars: 1840 - Tokens: 460
-30. src\client\views\context-chooser.view\view.scss - Lines: 143 - Chars: 3177 - Tokens: 795
+30. src\client\views\context-chooser.view\view.scss - Lines: 146 - Chars: 3358 - Tokens: 840
 31. src\client\views\context-chooser.view\view.tsx - Lines: 118 - Chars: 4924 - Tokens: 1231
 32. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
 33. src\common\ipc\channels.enum.ts - Lines: 19 - Chars: 770 - Tokens: 193
@@ -3774,7 +3774,7 @@ export class FSService {
     private async calculateTokenCount(filePath: string): Promise<number> {
         try {
             const stats = await fs.stat(filePath);
-            if (stats.isDirectory()) {
+            if (stats.isDirectory() || stats.size > 1_000_000) { // Ignore large files
                 return 0;
             }
             const content = await fs.readFile(filePath, 'utf-8');
@@ -3837,7 +3837,16 @@ export class FSService {
                         // It's a file, calculate token count
                         childNode.tokenCount = await this.calculateTokenCount(newPath);
                     }
+                    // Sort children: folders first, then files, alphabetically
                     currentNode.children?.push(childNode);
+                    currentNode.children?.sort((a, b) => {
+                        const aIsFolder = !!a.children;
+                        const bIsFolder = !!b.children;
+                        if (aIsFolder !== bIsFolder) {
+                            return aIsFolder ? -1 : 1;
+                        }
+                        return a.name.localeCompare(b.name);
+                    });
                 }
                 currentNode = childNode;
             }
@@ -3996,8 +4005,8 @@ const FileTree: React.FC<FileTreeProps> = ({
   const renderCheckbox = (path: string) => {
     const isSelected = selectedFiles.includes(path);
     // A node is an ancestor if the path starts with the ancestor's path and a separator
-    const hasSelectedAncestor = selectedFiles.some(ancestor => path.startsWith(ancestor + path.sep) && path !== ancestor);
-    const hasSelectedDescendant = selectedFiles.some(descendant => descendant.startsWith(path + path.sep) && descendant !== path);
+    const hasSelectedAncestor = selectedFiles.some(ancestor => path.startsWith(ancestor + '/') && path !== ancestor);
+    const hasSelectedDescendant = selectedFiles.some(descendant => descendant.startsWith(path + '/') && descendant !== path);
     
     return (
       <Checkbox
@@ -4062,58 +4071,11 @@ function getAllDescendantPaths(node: FileNode): string[] {
     return paths;
 }
 
-// Helper to ensure path comparisons are safe against partial name matches (e.g., 'src' vs 'src-tiled')
-const isAncestor = (ancestor: string, descendent: string) => {
-    if (ancestor === descendent) return false;
-    // Normalize by ensuring ancestor path ends with a separator
-    const ancestorWithSlash = ancestor.endsWith('/') ? ancestor : `${ancestor}/`;
-    return descendent.startsWith(ancestorWithSlash);
-};
-
-export const addRemovePathInSelectedFiles = (
-  fileTree: FileNode[],
-  path: string,
-  selectedFiles: string[]
-): string[] => {
-    const node = getFileNodeByPath(fileTree, path);
-    if (!node) return selectedFiles;
-
-    const descendantPaths = getAllDescendantPaths(node);
-    const isSelected = selectedFiles.includes(path);
-    const hasSelectedAncestor = selectedFiles.some(ancestor => isAncestor(ancestor, path));
-    
-    let newSelectedFiles = [...selectedFiles];
-
-    if (isSelected) {
-        // Uncheck: remove this path and all its descendants
-        newSelectedFiles = newSelectedFiles.filter(p => p !== path && !descendantPaths.includes(p));
-    } else if (hasSelectedAncestor) {
-        // Uncheck a child of an already checked folder.
-        // 1. Remove the ancestor.
-        const ancestor = selectedFiles.find(ancestor => isAncestor(ancestor, path))!;
-        const ancestorNode = getFileNodeByPath(fileTree, ancestor)!;
-        
-        newSelectedFiles = newSelectedFiles.filter(p => p !== ancestor);
-        
-        // 2. Add all children of the ancestor EXCEPT the one that was unchecked and its descendants.
-        const siblingsAndCousins = getAllDescendantPaths(ancestorNode).filter(p => p !== path && !isAncestor(path, p));
-        newSelectedFiles.push(...siblingsAndCousins);
-
-    } else {
-        // Check: remove all descendants that might be individually selected, then add the parent path.
-        newSelectedFiles = newSelectedFiles.filter(p => !isAncestor(path, p));
-        newSelectedFiles.push(path);
-    }
-  
-  return [...new Set(newSelectedFiles)]; // Remove duplicates for cleanliness
-};
-
 function findNode(node: FileNode, filePath: string): FileNode | null {
     if (node.absolutePath === filePath) {
         return node;
     }
-    // Use the isAncestor helper to prevent partial path segment matches
-    if (node.children && isAncestor(node.absolutePath, filePath)) {
+    if (node.children && filePath.startsWith(node.absolutePath + '/')) {
         for (const child of node.children) {
             const found = findNode(child, filePath);
             if(found) return found;
@@ -4131,6 +4093,54 @@ export const getFileNodeByPath = (
         if (found) return found;
     }
     return null;
+};
+
+export const addRemovePathInSelectedFiles = (
+  fileTree: FileNode[],
+  path: string,
+  selectedFiles: string[]
+): string[] => {
+    const node = getFileNodeByPath(fileTree, path);
+    if (!node) return selectedFiles;
+
+    let newSelectedFiles = [...selectedFiles];
+
+    const isDirectlySelected = newSelectedFiles.includes(path);
+    const selectedAncestor = newSelectedFiles.find(ancestor => path.startsWith(ancestor + '/') && path !== ancestor);
+
+    const isEffectivelySelected = isDirectlySelected || !!selectedAncestor;
+
+    if (isEffectivelySelected) {
+        // --- UNCHECK LOGIC ---
+        if (selectedAncestor) {
+            // Unchecking a child of an already checked folder
+            // 1. Remove the ancestor.
+            newSelectedFiles = newSelectedFiles.filter(p => p !== selectedAncestor);
+            const ancestorNode = getFileNodeByPath(fileTree, selectedAncestor);
+            if (ancestorNode && ancestorNode.children) {
+                // 2. Add all children of the ancestor EXCEPT the one that was just unchecked.
+                for (const child of ancestorNode.children) {
+                    if (child.absolutePath !== path) {
+                        newSelectedFiles.push(child.absolutePath);
+                    }
+                }
+            }
+        } else {
+            // Unchecking a parent or a file that was checked directly
+            const descendantPaths = getAllDescendantPaths(node);
+            newSelectedFiles = newSelectedFiles.filter(p => p !== path && !descendantPaths.includes(p));
+        }
+    } else {
+        // --- CHECK LOGIC ---
+        // 1. Remove all descendants that might already be individually selected
+        const descendantPaths = getAllDescendantPaths(node);
+        newSelectedFiles = newSelectedFiles.filter(p => !descendantPaths.includes(p));
+        
+        // 2. Add the new path
+        newSelectedFiles.push(path);
+    }
+  
+  return [...new Set(newSelectedFiles)]; // Remove duplicates for cleanliness
 };
 </file>
 
@@ -4157,7 +4167,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent }) => {
 
     useEffect(() => {
         // Set initial expanded state only once when data is first loaded
-        if (data.length > 0) {
+        if (data.length > 0 && expandedNodes.length === 0) {
             setExpandedNodes(getExpandedNodes(data));
         }
     }, [data]);
@@ -4186,7 +4196,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent }) => {
                         >
                             {isDirectory && <VscChevronRight />}
                         </span>
-                        <div className="treenode-content">
+                        <div className="treenode-content" onClick={(e) => isDirectory && handleToggleNode(e, node.absolutePath)}>
                             {renderNodeContent ? renderNodeContent(node, isExpanded) : node.name}
                         </div>
                     </div>
@@ -4327,7 +4337,7 @@ body {
 }
 
 .file-tree-container {
-    padding: 5px 5px 5px 0; // Remove left padding for alignment
+    padding: 5px 5px 5px 0; /* Remove left padding for alignment */
     flex-grow: 1;
     overflow-y: auto;
     overflow-x: hidden;
@@ -4351,12 +4361,14 @@ body {
 
 .treenode-li {
     position: relative;
+    padding-left: 20px;
 }
 
 .treenode-item-wrapper {
     display: flex;
     align-items: center;
-    min-height: 22px; // Standard VS Code line height
+    min-height: 22px; /* Standard VS Code line height */
+    margin-left: -20px; /* Counteract the li padding to align content */
 }
 
 .treenode-chevron {
@@ -4379,6 +4391,8 @@ body {
 .treenode-content {
     flex-grow: 1;
     overflow: hidden;
+    /* The whole content area is now the click target for expansion */
+    cursor: pointer; 
 }
 
 .file-item {
@@ -4388,7 +4402,6 @@ body {
     padding: 1px 4px;
     gap: 6px;
     border-radius: 3px;
-    cursor: pointer;
 }
 
 .file-item:hover {
@@ -4407,7 +4420,7 @@ body {
 .file-icon {
     display: flex;
     align-items: center;
-    font-size: 16px; // Standard icon size
+    font-size: 16px; /* Standard icon size */
 }
 
 .file-name {

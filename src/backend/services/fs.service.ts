@@ -10,7 +10,7 @@ export class FSService {
     private async calculateTokenCount(filePath: string): Promise<number> {
         try {
             const stats = await fs.stat(filePath);
-            if (stats.isDirectory()) {
+            if (stats.isDirectory() || stats.size > 1_000_000) { // Ignore large files
                 return 0;
             }
             const content = await fs.readFile(filePath, 'utf-8');
@@ -73,7 +73,16 @@ export class FSService {
                         // It's a file, calculate token count
                         childNode.tokenCount = await this.calculateTokenCount(newPath);
                     }
+                    // Sort children: folders first, then files, alphabetically
                     currentNode.children?.push(childNode);
+                    currentNode.children?.sort((a, b) => {
+                        const aIsFolder = !!a.children;
+                        const bIsFolder = !!b.children;
+                        if (aIsFolder !== bIsFolder) {
+                            return aIsFolder ? -1 : 1;
+                        }
+                        return a.name.localeCompare(b.name);
+                    });
                 }
                 currentNode = childNode;
             }

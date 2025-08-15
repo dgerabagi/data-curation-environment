@@ -90,24 +90,6 @@ now, as i continued through the responses, this one seemed the most aligned, it 
 
 <ts errors>
 
-ERROR in C:\Projects\DCE\src\client\components\file-tree\FileTree.tsx
-./src/client/components/file-tree/FileTree.tsx 59:95-98
-[tsl] ERROR in C:\Projects\DCE\src\client\components\file-tree\FileTree.tsx(59,96)
-      TS2339: Property 'sep' does not exist on type 'string'.
- @ ./src/client/views/context-chooser.view/view.tsx 6:0-59 80:75-83
-
-ERROR in C:\Projects\DCE\src\client\components\file-tree\FileTree.tsx
-./src/client/components/file-tree/FileTree.tsx 60:101-104
-[tsl] ERROR in C:\Projects\DCE\src\client\components\file-tree\FileTree.tsx(60,102)
-      TS2339: Property 'sep' does not exist on type 'string'.
- @ ./src/client/views/context-chooser.view/view.tsx 6:0-59 80:75-83
-
-2 errors have detailed information that is not shown.
-Use 'stats.errorDetails: true' resp. '--stats-error-details' to show it.
-
-webpack 5.101.1 compiled with 3 errors in 3233 ms
-    [webpack-cli] Compiler is watching files for updates...
-
 </ts errors>
 
 <previous cycle 12 summary of actions>
