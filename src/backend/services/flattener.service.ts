@@ -1,6 +1,10 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
+import { ServerPostMessageManager } from '@/common/ipc/server-ipc';
+import { Services } from './services';
+import { VIEW_TYPES } from '@/common/view-types';
+import { serverIPCs } from '@/client/views';
 
 interface FileStats {
     filePath: string;
@@ -39,6 +43,13 @@ export class FlattenerService {
             await fs.writeFile(outputFilePath, outputContent, 'utf-8');
             vscode.window.showInformationMessage(`Successfully flattened ${results.filter(r => !r.error).length} files to flattened_repo.md.`);
 
+            // After successful flattening, trigger a refresh of the file tree.
+            const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
+            if (serverIpc) {
+                console.log("Triggering file tree refresh after flattening.");
+                await Services.fsService.handleWorkspaceFilesRequest(serverIpc);
+            }
+
         } catch (error: any) {
             vscode.window.showErrorMessage(`Failed to flatten context: ${error.message}`);
             console.error(error);
@@ -69,6 +80,8 @@ export class FlattenerService {
             for (const entry of entries) {
                 const fullPath = path.join(dirPath, entry.name);
                 if (entry.isDirectory()) {
+                    // Skip node_modules at any level
+                    if (entry.name.toLowerCase() === 'node_modules') continue;
                     files = files.concat(await this.getAllFilesRecursive(fullPath));
                 } else {
                     files.push(fullPath);

@@ -35,6 +35,7 @@ export class FSService {
 
         } catch (error) {
             // Could be a binary file or permissions issue
+            console.warn(`Could not get stats for ${filePath}: ${error}`);
             return { tokenCount: 0, sizeInBytes: 0, isImage: false };
         }
     }
@@ -52,7 +53,7 @@ export class FSService {
             return;
         }
         const rootPath = rootUri.fsPath;
-        // Updated to correctly exclude node_modules
+        // CRITICAL FIX: Correctly exclude node_modules. The second argument is the exclude pattern.
         const files = await vscode.workspace.findFiles("**/*", '**/node_modules/**');
         const fileTree = await this.createFileTree(rootPath, files);
 
@@ -60,59 +61,59 @@ export class FSService {
     }
 
     private async createFileTree(rootPath: string, files: vscode.Uri[]): Promise<FileNode> {
+        const rootStats = await this.getFileStats(rootPath);
         const rootNode: FileNode = {
             name: path.basename(rootPath),
             absolutePath: rootPath,
             children: [],
-            tokenCount: 0,
-            fileCount: 0,
-            isImage: false,
-            sizeInBytes: 0,
+            ...rootStats,
+            fileCount: 0, // Will be calculated
         };
+
+        const allNodes = new Map<string, FileNode>();
+        allNodes.set(rootPath, rootNode);
 
         for (const file of files) {
             const relativePath = path.relative(rootPath, file.fsPath);
-            // Use forward slashes for consistency, preventing `path.sep` issues on client
-            const parts = relativePath.replace(/\\/g, '/').split('/');
-            let currentNode = rootNode;
+            const parts = relativePath.split(path.sep);
+            let currentPath = rootPath;
+            let parentNode = rootNode;
 
-            for (let i = 0; i < parts.length; i++) {
-                const part = parts[i];
-                if (!part) continue; // Skip empty parts from leading slashes etc.
-                
-                let childNode = currentNode.children?.find(c => c.name === part);
+            for (const part of parts) {
+                const oldPath = currentPath;
+                currentPath = path.join(currentPath, part);
+                let childNode = allNodes.get(currentPath);
 
                 if (!childNode) {
-                    const newPath = path.join(currentNode.absolutePath, part);
-                    const isDirectory = i < parts.length - 1;
-                    const stats = isDirectory ? { tokenCount: 0, sizeInBytes: 0, isImage: false } : await this.getFileStats(newPath);
-
-                    childNode = { 
-                        name: part, 
-                        absolutePath: newPath,
-                        tokenCount: stats.tokenCount,
-                        sizeInBytes: stats.sizeInBytes,
-                        isImage: stats.isImage,
+                    const stats = await this.getFileStats(currentPath);
+                    const isDirectory = stats.sizeInBytes === 0 && !stats.isImage; // Heuristic for directories
+                    childNode = {
+                        name: part,
+                        absolutePath: currentPath,
+                        ...stats,
                         fileCount: isDirectory ? 0 : 1
                     };
-
                     if (isDirectory) {
                         childNode.children = [];
                     }
-                    currentNode.children?.push(childNode);
+
+                    if (parentNode.children) {
+                        parentNode.children.push(childNode);
+                        allNodes.set(currentPath, childNode);
+                    }
                 }
-                currentNode = childNode;
+                parentNode = childNode;
             }
         }
         
-        // Post-process to calculate folder stats and sort
         this.processNode(rootNode);
 
         return rootNode;
     }
 
     private processNode(node: FileNode): void {
-        if (!node.children) {
+        if (!node.children) { // It's a file
+            node.fileCount = 1;
             return;
         }
 
@@ -128,6 +129,7 @@ export class FSService {
             if (aIsFolder !== bIsFolder) {
                 return aIsFolder ? -1 : 1;
             }
+            // Use localeCompare with numeric option for natural sorting (e.g., A1, A2, A10)
             return a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' });
         });
         

@@ -7,12 +7,39 @@ import { FileNode } from '@/common/types/file-node';
 import FileTree from '../../components/file-tree/FileTree';
 import { useState, useEffect, useMemo } from 'react';
 import { formatLargeNumber, formatNumberWithCommas } from '@/common/utils/formatting';
-import { VscFiles, VscSymbolNumeric } from 'react-icons/vsc';
+import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscClose } from 'react-icons/vsc';
+import { addRemovePathInSelectedFiles } from '@/client/components/file-tree/FileTree.utils';
+
+const SelectedFilesPanel = ({ selectedFileNodes, onRemove }: { selectedFileNodes: FileNode[], onRemove: (path: string) => void }) => {
+    if (selectedFileNodes.length === 0) {
+        return null;
+    }
+
+    return (
+        <div className="selected-files-panel">
+            <div className="panel-header">Selected Items</div>
+            <ul className="selected-files-list">
+                {selectedFileNodes.map((node, index) => (
+                    <li key={node.absolutePath}>
+                        <span className="list-number">{index + 1}.</span>
+                        <span className="file-name" title={node.absolutePath}>{node.name}</span>
+                        <span className="file-tokens">{formatLargeNumber(node.tokenCount, 1)}</span>
+                        <button className="remove-button" onClick={() => onRemove(node.absolutePath)} title="Remove from selection">
+                            <VscClose />
+                        </button>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+};
+
 
 const App = () => {
     const [files, setFiles] = useState<FileNode[]>([]);
     const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
     const [activeFile, setActiveFile] = useState<string | undefined>();
+    const [collapseTrigger, setCollapseTrigger] = useState(0);
     
     const clientIpc = ClientPostMessageManager.getInstance();
 
@@ -38,10 +65,25 @@ const App = () => {
         clientIpc.sendToServer(ClientToServerChannel.RequestFlattenContext, { selectedPaths: selectedFiles });
     };
 
-    const selectionSummary = useMemo(() => {
+    const handleRefresh = () => {
+        setFiles([]); // Clear files to show loading state
+        clientIpc.sendToServer(ClientToServerChannel.RequestWorkspaceFiles, {});
+    };
+
+    const handleCollapseAll = () => {
+        setCollapseTrigger(c => c + 1);
+    };
+
+    const handleRemoveFromSelection = (pathToRemove: string) => {
+        const newSelected = addRemovePathInSelectedFiles(files, pathToRemove, selectedFiles);
+        setSelectedFiles(newSelected);
+    };
+
+    const { totalFiles, totalTokens, selectedFileNodes } = useMemo(() => {
         let totalTokens = 0;
         let totalFiles = 0;
         const selectedFileSet = new Set<string>();
+        const selectedNodes: FileNode[] = [];
 
         const fileMap: Map<string, FileNode> = new Map();
         const buildFileMap = (node: FileNode) => {
@@ -56,7 +98,10 @@ const App = () => {
             if (!node.children) { // It's a file
                 if (!selectedFileSet.has(node.absolutePath)) {
                     selectedFileSet.add(node.absolutePath);
-                    totalTokens += node.tokenCount; // Images have 0 tokens
+                    if (!node.isImage) {
+                       totalTokens += node.tokenCount;
+                       selectedNodes.push(node);
+                    }
                     totalFiles++;
                 }
             } else { // It's a directory
@@ -70,17 +115,21 @@ const App = () => {
                 addNodeAndDescendants(node);
             }
         });
+        
+        selectedNodes.sort((a, b) => b.tokenCount - a.tokenCount);
 
-        return { totalFiles, totalTokens };
+        return { totalFiles, totalTokens, selectedFileNodes: selectedNodes };
     }, [selectedFiles, files]);
 
     return (
         <div className="view-container">
             <div className="view-header">
-                <button className="flatten-button" onClick={handleFlattenClick}>
-                    Flatten Context
-                </button>
+                 <div className="toolbar">
+                    <button onClick={handleRefresh} title="Refresh Explorer"><VscRefresh /></button>
+                    <button onClick={handleCollapseAll} title="Collapse Folders in View"><VscCollapseAll /></button>
+                 </div>
             </div>
+            <SelectedFilesPanel selectedFileNodes={selectedFileNodes} onRemove={handleRemoveFromSelection} />
             <div className="file-tree-container">
                 {files.length > 0 ? (
                     files.map((rootNode, index) => (
@@ -91,21 +140,27 @@ const App = () => {
                             selectedFiles={selectedFiles}
                             updateSelectedFiles={updateSelectedFiles}
                             activeFile={activeFile}
+                            collapseTrigger={collapseTrigger}
                         />
                     ))
                 ) : (
                     <div className="loading-message">Loading file tree...</div>
                 )}
             </div>
-            <div className="summary-panel">
-                <span className='summary-item'>
-                    <VscFiles />
-                    {formatNumberWithCommas(selectionSummary.totalFiles)} files
-                </span>
-                <span className='summary-item'>
-                    <VscSymbolNumeric />
-                    {formatLargeNumber(selectionSummary.totalTokens, 1)} tokens
-                </span>
+            <div className="view-footer">
+                <div className="summary-panel">
+                    <span className='summary-item' title="Total selected files">
+                        <VscFiles />
+                        {formatNumberWithCommas(totalFiles)}
+                    </span>
+                    <span className='summary-item' title="Total tokens in selected text files">
+                        <VscSymbolNumeric />
+                        {formatLargeNumber(totalTokens, 1)}
+                    </span>
+                </div>
+                <button className="flatten-button" onClick={handleFlattenClick}>
+                    Flatten Context
+                </button>
             </div>
         </div>
     );

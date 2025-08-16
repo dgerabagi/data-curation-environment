@@ -13,17 +13,33 @@ export interface TreeNode {
 interface TreeViewProps {
     data: TreeNode[];
     renderNodeContent?: (node: TreeNode, isExpanded: boolean) => React.ReactNode;
+    collapseTrigger?: number; // New prop to trigger collapse
 }
 
-const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent }) => {
+const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTrigger = 0 }) => {
     const [expandedNodes, setExpandedNodes] = useState<string[]>([]);
 
     useEffect(() => {
         // Set initial expanded state only once when data is first loaded
-        if (data.length > 0 && expandedNodes.length === 0) {
-            setExpandedNodes(getExpandedNodes(data));
+        if (data.length > 0) {
+            // Only expand the root node initially
+            const rootNode = data[0];
+            if (rootNode) {
+                setExpandedNodes([rootNode.absolutePath]);
+            }
         }
     }, [data]);
+
+    useEffect(() => {
+        // When collapseTrigger changes, collapse all nodes except the root
+        if (collapseTrigger > 0 && data.length > 0) {
+            const rootNode = data[0];
+            if (rootNode) {
+                setExpandedNodes([rootNode.absolutePath]);
+            }
+        }
+    }, [collapseTrigger, data]);
+
 
     const handleToggleNode = (e: React.MouseEvent, nodePath: string) => {
         // Robustness fix: Do not toggle if the click was on a checkbox.
