@@ -52,6 +52,7 @@ export class FSService {
             return;
         }
         const rootPath = rootUri.fsPath;
+        // Updated to correctly exclude node_modules
         const files = await vscode.workspace.findFiles("**/*", '**/node_modules/**');
         const fileTree = await this.createFileTree(rootPath, files);
 
@@ -71,11 +72,14 @@ export class FSService {
 
         for (const file of files) {
             const relativePath = path.relative(rootPath, file.fsPath);
-            const parts = relativePath.split(path.sep);
+            // Use forward slashes for consistency, preventing `path.sep` issues on client
+            const parts = relativePath.replace(/\\/g, '/').split('/');
             let currentNode = rootNode;
 
             for (let i = 0; i < parts.length; i++) {
                 const part = parts[i];
+                if (!part) continue; // Skip empty parts from leading slashes etc.
+                
                 let childNode = currentNode.children?.find(c => c.name === part);
 
                 if (!childNode) {

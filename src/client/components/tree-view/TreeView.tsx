@@ -26,6 +26,10 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent }) => {
     }, [data]);
 
     const handleToggleNode = (e: React.MouseEvent, nodePath: string) => {
+        // Robustness fix: Do not toggle if the click was on a checkbox.
+        if ((e.target as HTMLElement).closest('.file-checkbox')) {
+            return;
+        }
         e.stopPropagation(); // Prevent the click from bubbling to the parent item wrapper
         setExpandedNodes((prevExpandedNodes) => {
             const isExpanded = prevExpandedNodes.includes(nodePath);
@@ -42,14 +46,13 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent }) => {
 
             return (
                 <li key={node.absolutePath} className="treenode-li">
-                    <div className={`treenode-item-wrapper`}>
+                    <div className={`treenode-item-wrapper`} onClick={(e) => isDirectory && handleToggleNode(e, node.absolutePath)}>
                         <span 
                             className={`treenode-chevron ${isExpanded ? 'expanded' : ''}`}
-                            onClick={(e) => isDirectory && handleToggleNode(e, node.absolutePath)}
                         >
                             {isDirectory && <VscChevronRight />}
                         </span>
-                        <div className="treenode-content" onClick={(e) => isDirectory && handleToggleNode(e, node.absolutePath)}>
+                        <div className="treenode-content">
                             {renderNodeContent ? renderNodeContent(node, isExpanded) : node.name}
                         </div>
                     </div>
