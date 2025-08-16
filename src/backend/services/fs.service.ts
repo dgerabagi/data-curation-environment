@@ -5,29 +5,41 @@ import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { ServerToClientChannel } from "@/common/ipc/channels.enum";
 import { FileNode } from "@/common/types/file-node";
 import { Services } from "./services";
+import { serverIPCs } from "@/client/views";
+import { VIEW_TYPES } from "@/common/view-types";
 
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 
 export class FSService {
     private fileTreeCache: FileNode[] | null = null;
     private watcher: vscode.FileSystemWatcher | null = null;
+    private debounceTimer: NodeJS.Timeout | null = null;
+    private serverIpc: ServerPostMessageManager | null = null;
 
-    constructor() {
-        this.setupFileSystemWatcher();
-    }
-
-    private setupFileSystemWatcher() {
+    public initializeWatcher() {
         if (this.watcher) {
             this.watcher.dispose();
         }
-        // Watch for changes in all files
+        
         this.watcher = vscode.workspace.createFileSystemWatcher('**/*');
+        Services.loggerService.log("File system watcher initialized.");
 
         const changeHandler = (uri: vscode.Uri) => {
-            // Invalidate cache on any change
-            this.fileTreeCache = null;
-            Services.loggerService.log(`File system change detected at ${uri.fsPath}. Cache invalidated.`);
-            // Optionally, push an update to the client here.
+            // Debounce the refresh to handle rapid changes (like git checkout) gracefully
+            if (this.debounceTimer) {
+                clearTimeout(this.debounceTimer);
+            }
+            this.debounceTimer = setTimeout(() => {
+                Services.loggerService.log(`File system change detected at ${uri.fsPath}. Invalidating cache and triggering refresh.`);
+                this.fileTreeCache = null; // Invalidate cache
+                
+                const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
+                if (serverIpc) {
+                    this.handleWorkspaceFilesRequest(serverIpc, true);
+                } else {
+                    Services.loggerService.warn("Could not push file tree update, serverIpc not available.");
+                }
+            }, 500); // 500ms debounce window
         };
 
         this.watcher.onDidChange(changeHandler);
@@ -82,7 +94,7 @@ export class FSService {
         const rootUri = workspaceFolders[0].uri;
         const rootPath = rootUri.fsPath;
         
-        const excludePattern = '{**/node_modules/**,**/dist/**,**/out/**,**/.git/**}';
+        const excludePattern = '{**/node_modules/**,**/dist/**,**/out/**,**/.git/**,**/flattened_repo.md}';
         Services.loggerService.log(`Scanning for files with exclusion pattern: ${excludePattern}`);
         
         const files = await vscode.workspace.findFiles("**/*", excludePattern);

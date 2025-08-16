@@ -15,8 +15,8 @@ export function activate(context: vscode.ExtensionContext) {
         Services.initialize();
         console.log('DCE Extension: Services initialized.');
     } catch (error) {
-        console.error('DCE Extension: Error initializing services.', error);
-        vscode.window.showErrorMessage("Data Curation Environment failed to initialize services.");
+        console.error('DCE Extension: CRITICAL - Error initializing services.', error);
+        vscode.window.showErrorMessage("Data Curation Environment failed to initialize services. Check the debug console.");
         return;
     }
     
@@ -24,16 +24,19 @@ export function activate(context: vscode.ExtensionContext) {
         registerCommands(context);
         console.log('DCE Extension: Commands registered.');
     } catch (error) {
-        console.error('DCE Extension: Error registering commands.', error);
+        console.error('DCE Extension: CRITICAL - Error registering commands.', error);
+        vscode.window.showErrorMessage("Data Curation Environment failed to register commands. Check the debug console.");
     }
 
     try {
         registerViews(context);
         console.log('DCE Extension: Views registered.');
     } catch (error) {
-        console.error('DCE Extension: Error registering views.', error);
+        console.error('DCE Extension: CRITICAL - Error registering views.', error);
+         vscode.window.showErrorMessage("Data Curation Environment failed to register views. Check the debug console.");
     }
     
+    Services.loggerService.log('Congratulations, your extension "Data Curation Environment" is now active!');
     console.log('Congratulations, your extension "Data Curation Environment" is now active!');
 }
 

@@ -12,9 +12,10 @@ class ServiceContainer {
     public loggerService = LoggerService.getInstance();
     
     public initialize() {
-        this.loggerService.log("Services initialized.");
-        // C19: Initialize the file watcher after services are ready.
+        this.loggerService.log("Services initializing...");
+        // C20: Correctly call the watcher initialization method.
         this.fsService.initializeWatcher();
+        this.loggerService.log("Services initialized successfully.");
     }
 }
 

@@ -28,7 +28,8 @@ const App = () => {
     };
 
     useEffect(() => {
-        requestFiles(); // Initial request
+        logger.log("Initializing view and requesting workspace files.");
+        clientIpc.sendToServer(ClientToServerChannel.RequestWorkspaceFiles, {});
 
         const handleFileResponse = ({ files: receivedFiles }: { files: FileNode[] }) => {
             logger.log(`Received file tree from backend. Root node: ${receivedFiles[0]?.name}`);
@@ -43,13 +44,7 @@ const App = () => {
         };
         clientIpc.onServerMessage(ServerToClientChannel.ApplySelectionSet, handleApplySelectionSet);
 
-        const handleForceRefresh = () => {
-            logger.log("Received force refresh request from backend.");
-            requestFiles(true);
-        };
-        clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, handleForceRefresh);
-
-    }, [clientIpc]);
+    }, []); // C20: Changed dependency array to [] to prevent re-fetching on tab switch.
 
     const handleFileClick = (filePath: string) => {
         setActiveFile(filePath);

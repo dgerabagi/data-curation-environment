@@ -47,7 +47,8 @@ export class FlattenerService {
             const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
             if (serverIpc) {
                 Services.loggerService.log("Triggering file tree refresh after flattening.");
-                await Services.fsService.handleWorkspaceFilesRequest(serverIpc, true); // Force a refresh
+                // The file watcher will pick up the change automatically.
+                // No need for a forced refresh call, as it's now debounced.
             }
 
         } catch (error: any) {

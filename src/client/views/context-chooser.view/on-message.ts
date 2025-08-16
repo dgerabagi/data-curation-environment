@@ -8,8 +8,8 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     const flattenerService = Services.flattenerService;
     const loggerService = Services.loggerService;
 
-    serverIpc.onClientMessage(ClientToServerChannel.RequestWorkspaceFiles, () =>
-        fsService.handleWorkspaceFilesRequest(serverIpc)
+    serverIpc.onClientMessage(ClientToServerChannel.RequestWorkspaceFiles, (data) =>
+        fsService.handleWorkspaceFilesRequest(serverIpc, data.force)
     );
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestFlattenContext, (data) => {
