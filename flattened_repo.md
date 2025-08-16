@@ -1,12 +1,12 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-16T21:21:44.585Z
+  Date Generated: 2025-08-16T22:14:57.452Z
   ---
   Total Files: 150
-  Total Lines: 12095
-  Total Characters: 442957
-  Approx. Tokens: 110796
+  Total Lines: 12075
+  Total Characters: 443253
+  Approx. Tokens: 110872
 -->
 
 <!-- Top 10 Files by Token Count -->
@@ -17,9 +17,9 @@
 5. The-Creator-AI-main\src\backend\services\fs.service.ts (2495 tokens)
 6. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts (2424 tokens)
 7. The-Creator-AI-main\src\backend\services\llm.service.ts (2156 tokens)
-8. src\client\views\context-chooser.view\view.scss (1754 tokens)
-9. src\client\views\context-chooser.view\view.tsx (1713 tokens)
-10. The-Creator-AI-main\tailwind.config.js (1704 tokens)
+8. src\client\views\context-chooser.view\view.tsx (1975 tokens)
+9. The-Creator-AI-main\tailwind.config.js (1704 tokens)
+10. src\backend\services\flattener.service.ts (1689 tokens)
 
 <!-- Full File List -->
 1. .gitignore - Lines: 8 - Chars: 97 - Tokens: 25
@@ -45,7 +45,7 @@
 21. src\backend\commands\commands.ts - Lines: 73 - Chars: 3123 - Tokens: 781
 22. src\backend\commands\register-commands.ts - Lines: 9 - Chars: 331 - Tokens: 83
 23. src\backend\services\flattener.service.ts - Lines: 169 - Chars: 6754 - Tokens: 1689
-24. src\backend\services\fs.service.ts - Lines: 153 - Chars: 6150 - Tokens: 1538
+24. src\backend\services\fs.service.ts - Lines: 148 - Chars: 6061 - Tokens: 1516
 25. src\backend\services\logger.service.ts - Lines: 34 - Chars: 1019 - Tokens: 255
 26. src\backend\services\selection.service.ts - Lines: 39 - Chars: 1300 - Tokens: 325
 27. src\backend\services\services.ts - Lines: 19 - Chars: 658 - Tokens: 165
@@ -53,13 +53,13 @@
 29. src\client\components\file-tree\FileTree.tsx - Lines: 133 - Chars: 4652 - Tokens: 1163
 30. src\client\components\file-tree\FileTree.utils.ts - Lines: 101 - Chars: 3541 - Tokens: 886
 31. src\client\components\SelectedFilesView.tsx - Lines: 118 - Chars: 5070 - Tokens: 1268
-32. src\client\components\tree-view\TreeView.tsx - Lines: 80 - Chars: 2864 - Tokens: 716
+32. src\client\components\tree-view\TreeView.tsx - Lines: 90 - Chars: 3402 - Tokens: 851
 33. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 34. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
 35. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 36. src\client\views\context-chooser.view\on-message.ts - Lines: 39 - Chars: 1440 - Tokens: 360
-37. src\client\views\context-chooser.view\view.scss - Lines: 318 - Chars: 7016 - Tokens: 1754
-38. src\client\views\context-chooser.view\view.tsx - Lines: 159 - Chars: 6851 - Tokens: 1713
+37. src\client\views\context-chooser.view\view.scss - Lines: 267 - Chars: 5817 - Tokens: 1455
+38. src\client\views\context-chooser.view\view.tsx - Lines: 185 - Chars: 7897 - Tokens: 1975
 39. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
 40. src\common\ipc\channels.enum.ts - Lines: 12 - Chars: 533 - Tokens: 134
 41. src\common\ipc\channels.type.ts - Lines: 14 - Chars: 856 - Tokens: 214
@@ -4127,23 +4127,27 @@ import { ServerToClientChannel } from "@/common/ipc/channels.enum";
 import { FileNode } from "@/common/types/file-node";
 import { Services } from "./services";
 
-const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024; // 5 MB
+const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 
 export class FSService {
 
     private async getFileStats(filePath: string): Promise<{ tokenCount: number, sizeInBytes: number, isImage: boolean }> {
         try {
+            const extension = path.extname(filePath).toLowerCase();
             const stats = await fs.stat(filePath);
 
             if (stats.isDirectory()) {
                 return { tokenCount: 0, sizeInBytes: 0, isImage: false };
             }
 
-            // isImage is determined by the exclusion glob now, so this is redundant but safe.
-            const isImage = false; 
+            const isImage = IMAGE_EXTENSIONS.has(extension);
+            if (isImage) {
+                return { tokenCount: 0, sizeInBytes: stats.size, isImage: true };
+            }
 
-            if (stats.size > MAX_FILE_SIZE_BYTES) { 
-                Services.loggerService.warn(`Skipping token count for large file: ${path.basename(filePath)} (${stats.size} bytes)`);
+            // Skip token calculation for very large files to avoid performance issues.
+            if (stats.size > 5_000_000) { // 5MB threshold
+                Services.loggerService.warn(`Skipping token count for large file: ${filePath} (${stats.size} bytes)`);
                 return { tokenCount: 0, sizeInBytes: stats.size, isImage: false };
             }
             
@@ -4169,8 +4173,8 @@ export class FSService {
         const rootUri = workspaceFolders[0].uri;
         const rootPath = rootUri.fsPath;
         
-        // CRITICAL FIX (C18): Definitive exclusion for common large/unwanted directories and all image types.
-        const excludePattern = '{**/node_modules/**,**/dist/**,**/out/**,**/.git/**,**/*.{png,jpg,jpeg,gif,svg,webp,ico}}';
+        // CRITICAL FIX (C19): Definitive exclusion for common large/unwanted directories.
+        const excludePattern = '{**/node_modules/**,**/dist/**,**/out/**,**/.git/**}';
         Services.loggerService.log(`Scanning for files with exclusion pattern: ${excludePattern}`);
         
         const files = await vscode.workspace.findFiles("**/*", excludePattern);
@@ -4183,7 +4187,7 @@ export class FSService {
     }
 
     private async createFileTree(rootPath: string, files: vscode.Uri[]): Promise<FileNode> {
-        const rootStats = { tokenCount: 0, sizeInBytes: 0, isImage: false }; // Root is always a directory
+        const rootStats = await this.getFileStats(rootPath);
         const rootNode: FileNode = {
             name: path.basename(rootPath),
             absolutePath: rootPath,
@@ -4207,7 +4211,7 @@ export class FSService {
 
                 if (!childNode) {
                     const stats = await this.getFileStats(currentPath);
-                    const isDirectory = (await fs.stat(currentPath)).isDirectory();
+                    const isDirectory = stats.sizeInBytes === 0 && !stats.isImage && (await fs.stat(currentPath)).isDirectory();
                     childNode = {
                         name: part,
                         absolutePath: currentPath,
@@ -4227,38 +4231,18 @@ export class FSService {
             }
         }
         
-        this.aggregateStats(rootNode);
-        this.sortTree(rootNode);
+        this.processNode(rootNode);
         return rootNode;
     }
 
-    private aggregateStats(node: FileNode): void {
+    private processNode(node: FileNode): void {
         if (!node.children) {
             node.fileCount = 1;
             return;
         }
 
-        let totalTokens = 0;
-        let totalFiles = 0;
-        let totalBytes = 0;
         for (const child of node.children) {
-            this.aggregateStats(child);
-            totalTokens += child.tokenCount;
-            totalFiles += child.fileCount;
-            totalBytes += child.sizeInBytes;
-        }
-        node.tokenCount = totalTokens;
-        node.fileCount = totalFiles;
-        node.sizeInBytes = totalBytes;
-    }
-
-    private sortTree(node: FileNode): void {
-        if (!node.children) {
-            return;
-        }
-
-        for (const child of node.children) {
-            this.sortTree(child);
+            this.processNode(child);
         }
 
         node.children.sort((a, b) => {
@@ -4267,9 +4251,20 @@ export class FSService {
             if (aIsFolder !== bIsFolder) {
                 return aIsFolder ? -1 : 1;
             }
-            // Use localeCompare with numeric option for natural sorting (e.g., A2 before A10)
             return a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' });
         });
+        
+        let totalTokens = 0;
+        let totalFiles = 0;
+        let totalBytes = 0;
+        for (const child of node.children) {
+            totalTokens += child.tokenCount;
+            totalFiles += child.fileCount;
+            totalBytes += child.sizeInBytes;
+        }
+        node.tokenCount = totalTokens;
+        node.fileCount = totalFiles;
+        node.sizeInBytes = totalBytes;
     }
 }
 </file>
@@ -4779,31 +4774,41 @@ export interface TreeNode {
 interface TreeViewProps {
     data: TreeNode[];
     renderNodeContent?: (node: TreeNode, isExpanded: boolean) => React.ReactNode;
-    collapseTrigger?: number;
+    collapseTrigger?: number; // New prop to trigger collapse
 }
 
 const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTrigger = 0 }) => {
     const [expandedNodes, setExpandedNodes] = useState<string[]>([]);
 
     useEffect(() => {
-        if (data.length > 0 && data[0]) {
-            setExpandedNodes([data[0].absolutePath]);
+        // Set initial expanded state only once when data is first loaded
+        if (data.length > 0) {
+            // Only expand the root node initially
+            const rootNode = data[0];
+            if (rootNode) {
+                setExpandedNodes([rootNode.absolutePath]);
+            }
         }
     }, [data]);
 
     useEffect(() => {
-        // C18 FIX: When collapseTrigger changes, collapse all nodes except the root.
-        if (collapseTrigger > 0 && data.length > 0 && data[0]) {
-            setExpandedNodes([data[0].absolutePath]);
+        // C19 FIX: When collapseTrigger changes, collapse all nodes except the root.
+        // Removed 'data' from dependency array to prevent this from firing on refresh.
+        if (collapseTrigger > 0 && data.length > 0) {
+            const rootNode = data[0];
+            if (rootNode) {
+                setExpandedNodes([rootNode.absolutePath]);
+            }
         }
     }, [collapseTrigger]);
 
 
     const handleToggleNode = (e: React.MouseEvent, nodePath: string) => {
+        // Robustness fix: Do not toggle if the click was on a checkbox.
         if ((e.target as HTMLElement).closest('.file-checkbox')) {
             return;
         }
-        e.stopPropagation();
+        e.stopPropagation(); // Prevent the click from bubbling to the parent item wrapper
         setExpandedNodes((prevExpandedNodes) => {
             const isExpanded = prevExpandedNodes.includes(nodePath);
             return isExpanded
@@ -4938,7 +4943,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 </file>
 
 <file path="src/client/views/context-chooser.view/view.scss">
-/* Updated on: C18 (Add styles for SelectedFilesView and sorting) */
+/* Updated on: C19 (Adjust flex properties for panel relocation) */
 body {
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -4984,10 +4989,10 @@ body {
 
 .selected-files-panel {
     border-top: 1px solid var(--vscode-panel-border);
-    max-height: 40vh;
+    max-height: 33vh; /* Allow it to take up to a third of the view height */
     display: flex;
     flex-direction: column;
-    flex-shrink: 0;
+    flex-shrink: 0; /* Prevent this panel from shrinking */
 }
 
 .panel-header {
@@ -5000,114 +5005,61 @@ body {
     flex-shrink: 0;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-}
-
-.token-label {
-    font-weight: normal;
-    text-transform: none;
-    font-size: 12px;
-    color: var(--vscode-descriptionForeground);
-}
-
-.panel-toolbar {
-    padding: 4px 8px;
-    border-bottom: 1px solid var(--vscode-panel-border);
-    flex-shrink: 0;
-    button {
-        width: 100%;
-        padding: 2px;
-        font-size: 12px;
-        border: 1px solid var(--vscode-button-border, var(--vscode-focusBorder));
-        background-color: var(--vscode-button-secondaryBackground);
-        color: var(--vscode-button-secondaryForeground);
-        cursor: pointer;
-        &:hover {
-            background-color: var(--vscode-button-secondaryHoverBackground);
-        }
-        &:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-    }
-}
-
-.selected-files-list-container {
-    overflow-y: auto;
-    flex-grow: 1;
-}
-
-.selected-list-header {
-    display: flex;
-    font-size: 11px;
-    padding: 2px 8px;
-    gap: 8px;
-    border-bottom: 1px solid var(--vscode-panel-border);
-    position: sticky;
-    top: 0;
-    background-color: var(--vscode-sideBar-background);
-    z-index: 1;
-
-    > div {
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        &:hover {
-            color: var(--vscode-list-hoverForeground);
-        }
-    }
-
-    .header-name { flex-grow: 1; }
-    .header-tokens { flex-shrink: 0; }
 }
 
 .selected-files-list {
     list-style: none;
     padding: 0;
     margin: 0;
+    overflow-y: auto;
+    flex-grow: 1;
 
     li {
         display: flex;
         align-items: center;
         padding: 2px 8px;
         font-size: 12px;
-        gap: 6px;
+        gap: 8px;
 
         &:hover {
             background-color: var(--vscode-list-hoverBackground);
         }
 
-        .file-icon { font-size: 16px; }
+        .list-number {
+            color: var(--vscode-descriptionForeground);
+            min-width: 20px;
+            text-align: right;
+        }
+
         .file-name {
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
             flex-grow: 1;
         }
+
         .file-tokens {
             color: var(--vscode-descriptionForeground);
             font-variant-numeric: tabular-nums;
-            min-width: 40px;
-            text-align: right;
         }
+
         .remove-button {
             background: none;
             border: none;
             color: var(--vscode-icon-foreground);
             cursor: pointer;
-            visibility: hidden;
+            visibility: hidden; /* Hide by default */
         }
     }
 
     li:hover .remove-button {
-        visibility: visible;
+        visibility: visible; /* Show on hover */
     }
 }
 
 
 .file-tree-container {
-    flex-grow: 1;
+    flex-grow: 1; /* This is the primary flexible element */
     overflow-y: auto;
     overflow-x: hidden;
     padding-right: 5px;
@@ -5161,10 +5113,12 @@ body {
         margin: 0;
         padding-left: 0;
     }
+
     ul.treenode-children {
-        padding-left: 15px; /* Indentation for nested items */
+        padding-left: 10px; /* Reduced indentation for a tighter look */
     }
 }
+
 
 .treenode-li {
     position: relative;
@@ -5174,6 +5128,7 @@ body {
     display: flex;
     align-items: center;
     cursor: pointer;
+    padding: 1px 4px;
     border-radius: 3px;
     min-height: 22px;
 }
@@ -5190,7 +5145,6 @@ body {
     align-items: center;
     justify-content: center;
     transition: transform 0.1s ease-in-out;
-    color: var(--vscode-icon-foreground);
 }
 
 .treenode-chevron.expanded {
@@ -5202,7 +5156,6 @@ body {
     display: flex;
     align-items: center;
     overflow: hidden;
-    padding: 0 4px;
 }
 
 
@@ -5210,6 +5163,7 @@ body {
     display: flex;
     align-items: center;
     width: 100%;
+    padding: 1px;
     gap: 6px;
 }
 
@@ -5268,10 +5222,37 @@ import { FileNode } from '@/common/types/file-node';
 import FileTree from '../../components/file-tree/FileTree';
 import { useState, useEffect, useMemo } from 'react';
 import { formatLargeNumber, formatNumberWithCommas } from '@/common/utils/formatting';
-import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh } from 'react-icons/vsc';
-import { removePathsFromSelected } from '@/client/components/file-tree/FileTree.utils';
+import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscClose } from 'react-icons/vsc';
+import { addRemovePathInSelectedFiles } from '@/client/components/file-tree/FileTree.utils';
 import { logger } from '@/client/utils/logger';
-import SelectedFilesView from '@/client/components/SelectedFilesView';
+
+const SelectedFilesPanel = ({ selectedFileNodes, onRemove }: { selectedFileNodes: FileNode[], onRemove: (path: string) => void }) => {
+    if (selectedFileNodes.length === 0) {
+        return null;
+    }
+
+    return (
+        <div className="selected-files-panel">
+            <div className="panel-header">
+                <span>Selected Items</span>
+                <span>Tokens</span>
+            </div>
+            <ul className="selected-files-list">
+                {selectedFileNodes.map((node, index) => (
+                    <li key={node.absolutePath}>
+                        <span className="list-number">{index + 1}.</span>
+                        <span className="file-name" title={node.absolutePath}>{node.name}</span>
+                        <span className="file-tokens">{formatLargeNumber(node.tokenCount, 1)}</span>
+                        <button className="remove-button" onClick={() => onRemove(node.absolutePath)} title="Remove from selection">
+                            <VscClose />
+                        </button>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+};
+
 
 const App = () => {
     const [files, setFiles] = useState<FileNode[]>([]);
@@ -5286,11 +5267,7 @@ const App = () => {
         clientIpc.sendToServer(ClientToServerChannel.RequestWorkspaceFiles, {});
 
         const handleFileResponse = ({ files: receivedFiles }: { files: FileNode[] }) => {
-            if (receivedFiles.length > 0 && receivedFiles[0]) {
-                 logger.log(`Received ${receivedFiles[0].fileCount || 0} files from backend.`);
-            } else {
-                logger.log("Received empty file tree from backend.");
-            }
+            logger.log(`Received file tree from backend. Root node: ${receivedFiles[0]?.name}`);
             setFiles(receivedFiles);
         };
         clientIpc.onServerMessage(ServerToClientChannel.SendWorkspaceFiles, handleFileResponse);
@@ -5327,15 +5304,16 @@ const App = () => {
         setCollapseTrigger(c => c + 1);
     };
 
-    const handleRemoveFromSelection = (pathsToRemove: string[]) => {
-        const newSelected = removePathsFromSelected(pathsToRemove, selectedFiles, files);
+    const handleRemoveFromSelection = (pathToRemove: string) => {
+        const newSelected = addRemovePathInSelectedFiles(files, pathToRemove, selectedFiles);
         setSelectedFiles(newSelected);
     };
 
     const { totalFiles, totalTokens, selectedFileNodes } = useMemo(() => {
         let totalTokens = 0;
+        let totalFiles = 0;
         const selectedFileSet = new Set<string>();
-        const selectedNodes: FileNode[] = [];
+        const selectedTextNodes: FileNode[] = [];
 
         const fileMap: Map<string, FileNode> = new Map();
         const buildFileMap = (node: FileNode) => {
@@ -5350,10 +5328,11 @@ const App = () => {
             if (!node.children) { // It's a file
                 if (!selectedFileSet.has(node.absolutePath)) {
                     selectedFileSet.add(node.absolutePath);
-                    if (!node.isImage) { // Should always be false now
+                    if (!node.isImage) {
                        totalTokens += node.tokenCount;
-                       selectedNodes.push(node);
+                       selectedTextNodes.push(node);
                     }
+                    totalFiles++;
                 }
             } else { // It's a directory
                 node.children.forEach(child => addNodeAndDescendants(child));
@@ -5367,9 +5346,9 @@ const App = () => {
             }
         });
         
-        const totalFileCount = selectedFileSet.size;
+        selectedTextNodes.sort((a, b) => b.tokenCount - a.tokenCount);
 
-        return { totalFiles: totalFileCount, totalTokens, selectedFileNodes: selectedNodes };
+        return { totalFiles, totalTokens, selectedFileNodes: selectedTextNodes };
     }, [selectedFiles, files]);
 
     return (
@@ -5390,13 +5369,14 @@ const App = () => {
                             selectedFiles={selectedFiles}
                             updateSelectedFiles={updateSelectedFiles}
                             activeFile={activeFile}
+                            collapseTrigger={collapseTrigger}
                         />
                     ))
                 ) : (
                     <div className="loading-message">Loading file tree...</div>
                 )}
             </div>
-            <SelectedFilesView selectedFileNodes={selectedFileNodes} onRemove={handleRemoveFromSelection} />
+            <SelectedFilesPanel selectedFileNodes={selectedFileNodes} onRemove={handleRemoveFromSelection} />
             <div className="view-footer">
                 <div className="summary-panel">
                     <span className='summary-item' title="Total selected files">

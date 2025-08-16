@@ -7,10 +7,37 @@ import { FileNode } from '@/common/types/file-node';
 import FileTree from '../../components/file-tree/FileTree';
 import { useState, useEffect, useMemo } from 'react';
 import { formatLargeNumber, formatNumberWithCommas } from '@/common/utils/formatting';
-import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh } from 'react-icons/vsc';
-import { removePathsFromSelected } from '@/client/components/file-tree/FileTree.utils';
+import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscClose } from 'react-icons/vsc';
+import { addRemovePathInSelectedFiles } from '@/client/components/file-tree/FileTree.utils';
 import { logger } from '@/client/utils/logger';
-import SelectedFilesView from '@/client/components/SelectedFilesView';
+
+const SelectedFilesPanel = ({ selectedFileNodes, onRemove }: { selectedFileNodes: FileNode[], onRemove: (path: string) => void }) => {
+    if (selectedFileNodes.length === 0) {
+        return null;
+    }
+
+    return (
+        <div className="selected-files-panel">
+            <div className="panel-header">
+                <span>Selected Items</span>
+                <span>Tokens</span>
+            </div>
+            <ul className="selected-files-list">
+                {selectedFileNodes.map((node, index) => (
+                    <li key={node.absolutePath}>
+                        <span className="list-number">{index + 1}.</span>
+                        <span className="file-name" title={node.absolutePath}>{node.name}</span>
+                        <span className="file-tokens">{formatLargeNumber(node.tokenCount, 1)}</span>
+                        <button className="remove-button" onClick={() => onRemove(node.absolutePath)} title="Remove from selection">
+                            <VscClose />
+                        </button>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+};
+
 
 const App = () => {
     const [files, setFiles] = useState<FileNode[]>([]);
@@ -25,11 +52,7 @@ const App = () => {
         clientIpc.sendToServer(ClientToServerChannel.RequestWorkspaceFiles, {});
 
         const handleFileResponse = ({ files: receivedFiles }: { files: FileNode[] }) => {
-            if (receivedFiles.length > 0 && receivedFiles[0]) {
-                 logger.log(`Received ${receivedFiles[0].fileCount || 0} files from backend.`);
-            } else {
-                logger.log("Received empty file tree from backend.");
-            }
+            logger.log(`Received file tree from backend. Root node: ${receivedFiles[0]?.name}`);
             setFiles(receivedFiles);
         };
         clientIpc.onServerMessage(ServerToClientChannel.SendWorkspaceFiles, handleFileResponse);
@@ -66,15 +89,16 @@ const App = () => {
         setCollapseTrigger(c => c + 1);
     };
 
-    const handleRemoveFromSelection = (pathsToRemove: string[]) => {
-        const newSelected = removePathsFromSelected(pathsToRemove, selectedFiles, files);
+    const handleRemoveFromSelection = (pathToRemove: string) => {
+        const newSelected = addRemovePathInSelectedFiles(files, pathToRemove, selectedFiles);
         setSelectedFiles(newSelected);
     };
 
     const { totalFiles, totalTokens, selectedFileNodes } = useMemo(() => {
         let totalTokens = 0;
+        let totalFiles = 0;
         const selectedFileSet = new Set<string>();
-        const selectedNodes: FileNode[] = [];
+        const selectedTextNodes: FileNode[] = [];
 
         const fileMap: Map<string, FileNode> = new Map();
         const buildFileMap = (node: FileNode) => {
@@ -89,10 +113,11 @@ const App = () => {
             if (!node.children) { // It's a file
                 if (!selectedFileSet.has(node.absolutePath)) {
                     selectedFileSet.add(node.absolutePath);
-                    if (!node.isImage) { // Should always be false now
+                    if (!node.isImage) {
                        totalTokens += node.tokenCount;
-                       selectedNodes.push(node);
+                       selectedTextNodes.push(node);
                     }
+                    totalFiles++;
                 }
             } else { // It's a directory
                 node.children.forEach(child => addNodeAndDescendants(child));
@@ -106,9 +131,9 @@ const App = () => {
             }
         });
         
-        const totalFileCount = selectedFileSet.size;
+        selectedTextNodes.sort((a, b) => b.tokenCount - a.tokenCount);
 
-        return { totalFiles: totalFileCount, totalTokens, selectedFileNodes: selectedNodes };
+        return { totalFiles, totalTokens, selectedFileNodes: selectedTextNodes };
     }, [selectedFiles, files]);
 
     return (
@@ -129,13 +154,14 @@ const App = () => {
                             selectedFiles={selectedFiles}
                             updateSelectedFiles={updateSelectedFiles}
                             activeFile={activeFile}
+                            collapseTrigger={collapseTrigger}
                         />
                     ))
                 ) : (
                     <div className="loading-message">Loading file tree...</div>
                 )}
             </div>
-            <SelectedFilesView selectedFileNodes={selectedFileNodes} onRemove={handleRemoveFromSelection} />
+            <SelectedFilesPanel selectedFileNodes={selectedFileNodes} onRemove={handleRemoveFromSelection} />
             <div className="view-footer">
                 <div className="summary-panel">
                     <span className='summary-item' title="Total selected files">

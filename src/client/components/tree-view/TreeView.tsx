@@ -12,31 +12,41 @@ export interface TreeNode {
 interface TreeViewProps {
     data: TreeNode[];
     renderNodeContent?: (node: TreeNode, isExpanded: boolean) => React.ReactNode;
-    collapseTrigger?: number;
+    collapseTrigger?: number; // New prop to trigger collapse
 }
 
 const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTrigger = 0 }) => {
     const [expandedNodes, setExpandedNodes] = useState<string[]>([]);
 
     useEffect(() => {
-        if (data.length > 0 && data[0]) {
-            setExpandedNodes([data[0].absolutePath]);
+        // Set initial expanded state only once when data is first loaded
+        if (data.length > 0) {
+            // Only expand the root node initially
+            const rootNode = data[0];
+            if (rootNode) {
+                setExpandedNodes([rootNode.absolutePath]);
+            }
         }
     }, [data]);
 
     useEffect(() => {
-        // C18 FIX: When collapseTrigger changes, collapse all nodes except the root.
-        if (collapseTrigger > 0 && data.length > 0 && data[0]) {
-            setExpandedNodes([data[0].absolutePath]);
+        // C19 FIX: When collapseTrigger changes, collapse all nodes except the root.
+        // Removed 'data' from dependency array to prevent this from firing on refresh.
+        if (collapseTrigger > 0 && data.length > 0) {
+            const rootNode = data[0];
+            if (rootNode) {
+                setExpandedNodes([rootNode.absolutePath]);
+            }
         }
     }, [collapseTrigger]);
 
 
     const handleToggleNode = (e: React.MouseEvent, nodePath: string) => {
+        // Robustness fix: Do not toggle if the click was on a checkbox.
         if ((e.target as HTMLElement).closest('.file-checkbox')) {
             return;
         }
-        e.stopPropagation();
+        e.stopPropagation(); // Prevent the click from bubbling to the parent item wrapper
         setExpandedNodes((prevExpandedNodes) => {
             const isExpanded = prevExpandedNodes.includes(nodePath);
             return isExpanded
