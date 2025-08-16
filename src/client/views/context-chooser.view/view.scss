@@ -33,9 +33,10 @@ body {
 }
 
 .file-tree-container {
-    padding: 5px;
+    padding-right: 5px; /* Add some padding on the right */
     flex-grow: 1;
     overflow-y: auto;
+    overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 .loading-message {
@@ -94,7 +95,10 @@ body {
 .treenode-chevron {
     flex-shrink: 0;
     width: 20px;
-    text-align: center;
+    height: 22px; /* Match height of wrapper */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: transform 0.1s ease-in-out;
 }
 
@@ -125,6 +129,7 @@ body {
 
 .file-checkbox {
     cursor: pointer;
+    flex-shrink: 0;
 }
 
 .file-icon {

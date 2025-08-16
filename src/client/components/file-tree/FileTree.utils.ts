@@ -15,8 +15,11 @@ function findNode(node: FileNode, filePath: string): FileNode | null {
     if (node.absolutePath === filePath) {
         return node;
     }
-    // Use startsWith and a path separator to avoid partial matches (e.g., 'src' matching 'src-tiled')
-    if (node.children && filePath.startsWith(node.absolutePath + '/')) {
+    // Normalize paths for comparison to avoid issues with mixed slashes
+    const normalizedFilePath = filePath.replace(/\\/g, '/');
+    const normalizedNodePath = node.absolutePath.replace(/\\/g, '/');
+
+    if (node.children && normalizedFilePath.startsWith(normalizedNodePath + '/')) {
         for (const child of node.children) {
             const found = findNode(child, filePath);
             if(found) return found;
@@ -48,7 +51,12 @@ export const addRemovePathInSelectedFiles = (
 
     // Check if the node is directly selected or selected via an ancestor
     const isDirectlySelected = newSelectedFiles.includes(path);
-    const selectedAncestor = newSelectedFiles.find(ancestor => path.startsWith(ancestor + '/') && path !== ancestor);
+    const selectedAncestor = newSelectedFiles.find(ancestor => {
+        const normalizedPath = path.replace(/\\/g, '/');
+        const normalizedAncestor = ancestor.replace(/\\/g, '/');
+        return normalizedPath.startsWith(normalizedAncestor + '/') && path !== ancestor;
+    });
+
     const isEffectivelySelected = isDirectlySelected || !!selectedAncestor;
 
     if (isEffectivelySelected) {

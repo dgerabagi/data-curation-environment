@@ -61,7 +61,10 @@ const FileTree: React.FC<FileTreeProps> = ({
 
   const isChildPathOf = (child: string, parent: string) => {
     if (child === parent) return false;
-    return child.startsWith(parent + '/') || child.startsWith(parent + '\\');
+    // Normalize paths to use forward slashes for consistent comparison
+    const normalizedChild = child.replace(/\\/g, '/');
+    const normalizedParent = parent.replace(/\\/g, '/');
+    return normalizedChild.startsWith(normalizedParent + '/');
   };
 
   const renderCheckbox = (filePath: string) => {
@@ -89,7 +92,7 @@ const FileTree: React.FC<FileTreeProps> = ({
     const isDirectory = Array.isArray(node.children);
 
     return (
-      <div className={`file-item ${isActive ? 'active' : ''}`}>
+      <div className={`file-item ${isActive ? 'active' : ''}`} onClick={() => handleNodeClick(node)}>
         {renderCheckbox(node.absolutePath)}
         <span className="file-icon">
             {isDirectory ? (isExpanded ? <VscFolderOpened /> : <VscFolder />) : getFileIcon(node.name)}
@@ -121,7 +124,6 @@ const FileTree: React.FC<FileTreeProps> = ({
     <div className="file-tree">
       <TreeView 
         data={data} 
-        onNodeClick={handleNodeClick}
         renderNodeContent={(node, isExpanded) => renderFileNodeContent(node, isExpanded as boolean)} 
       />
     </div>
