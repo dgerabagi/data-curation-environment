@@ -5,21 +5,37 @@ import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { ServerToClientChannel } from "@/common/ipc/channels.enum";
 import { FileNode } from "@/common/types/file-node";
 
+const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
+
 export class FSService {
 
-    private async calculateTokenCount(filePath: string): Promise<number> {
+    private async getFileStats(filePath: string): Promise<{ tokenCount: number, sizeInBytes: number, isImage: boolean }> {
         try {
+            const extension = path.extname(filePath).toLowerCase();
             const stats = await fs.stat(filePath);
-            // Ignore large files to prevent performance issues
-            if (stats.isDirectory() || stats.size > 1_000_000) { 
-                return 0;
+
+            if (stats.isDirectory()) {
+                return { tokenCount: 0, sizeInBytes: 0, isImage: false };
             }
+
+            const isImage = IMAGE_EXTENSIONS.has(extension);
+            if (isImage) {
+                return { tokenCount: 0, sizeInBytes: stats.size, isImage: true };
+            }
+
+            // Ignore very large files to prevent performance issues
+            if (stats.size > 2_000_000) { 
+                return { tokenCount: 0, sizeInBytes: stats.size, isImage: false };
+            }
+            
             const content = await fs.readFile(filePath, 'utf-8');
             // Simple approximation: 1 token ~ 4 characters
-            return Math.ceil(content.length / 4);
+            const tokenCount = Math.ceil(content.length / 4);
+            return { tokenCount, sizeInBytes: stats.size, isImage: false };
+
         } catch (error) {
-            // Could be a binary file or permissions issue, just return 0
-            return 0;
+            // Could be a binary file or permissions issue
+            return { tokenCount: 0, sizeInBytes: 0, isImage: false };
         }
     }
 
@@ -36,7 +52,7 @@ export class FSService {
             return;
         }
         const rootPath = rootUri.fsPath;
-        const files = await vscode.workspace.findFiles("**/*");
+        const files = await vscode.workspace.findFiles("**/*", '**/node_modules/**');
         const fileTree = await this.createFileTree(rootPath, files);
 
         serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: [fileTree] });
@@ -49,6 +65,8 @@ export class FSService {
             children: [],
             tokenCount: 0,
             fileCount: 0,
+            isImage: false,
+            sizeInBytes: 0,
         };
 
         for (const file of files) {
@@ -63,18 +81,19 @@ export class FSService {
                 if (!childNode) {
                     const newPath = path.join(currentNode.absolutePath, part);
                     const isDirectory = i < parts.length - 1;
+                    const stats = isDirectory ? { tokenCount: 0, sizeInBytes: 0, isImage: false } : await this.getFileStats(newPath);
 
                     childNode = { 
                         name: part, 
                         absolutePath: newPath,
-                        tokenCount: 0,
+                        tokenCount: stats.tokenCount,
+                        sizeInBytes: stats.sizeInBytes,
+                        isImage: stats.isImage,
                         fileCount: isDirectory ? 0 : 1
                     };
 
                     if (isDirectory) {
                         childNode.children = [];
-                    } else {
-                        childNode.tokenCount = await this.calculateTokenCount(newPath);
                     }
                     currentNode.children?.push(childNode);
                 }
@@ -111,11 +130,14 @@ export class FSService {
         // Calculate totals for the current node
         let totalTokens = 0;
         let totalFiles = 0;
+        let totalBytes = 0;
         for (const child of node.children) {
             totalTokens += child.tokenCount;
             totalFiles += child.fileCount;
+            totalBytes += child.sizeInBytes;
         }
         node.tokenCount = totalTokens;
         node.fileCount = totalFiles;
+        node.sizeInBytes = totalBytes;
     }
 }

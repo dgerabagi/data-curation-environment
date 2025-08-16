@@ -1,12 +1,12 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-15T22:47:48.583Z
+  Date Generated: 2025-08-16T01:18:15.206Z
   ---
-  Total Files: 142
-  Total Lines: 11192
-  Total Characters: 402347
-  Approx. Tokens: 100641
+  Total Files: 145
+  Total Lines: 11538
+  Total Characters: 418680
+  Approx. Tokens: 104725
 -->
 
 <!-- Top 10 Files by Token Count -->
@@ -28,142 +28,145 @@
 4. deploy_scaffold.js - Lines: 1259 - Chars: 42400 - Tokens: 10600
 5. package.json - Lines: 72 - Chars: 2165 - Tokens: 542
 6. public\spiral.svg - Lines: 8 - Chars: 459 - Tokens: 115
-7. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 52 - Chars: 3127 - Tokens: 782
+7. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 66 - Chars: 4100 - Tokens: 1025
 8. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 38 - Chars: 3311 - Tokens: 828
-9. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 31 - Chars: 4278 - Tokens: 1070
-10. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
-11. src\Artifacts\A4. DCE - Analysis of The-Creator-AI Repo.md - Lines: 56 - Chars: 5722 - Tokens: 1431
-12. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
-13. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43689 - Tokens: 10923
-14. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
-15. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 74 - Chars: 5773 - Tokens: 1444
-16. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
-17. src\backend\commands\commands.ts - Lines: 62 - Chars: 2633 - Tokens: 659
-18. src\backend\commands\register-commands.ts - Lines: 9 - Chars: 331 - Tokens: 83
-19. src\backend\services\flattener.service.ts - Lines: 156 - Chars: 5889 - Tokens: 1473
-20. src\backend\services\fs.service.ts - Lines: 92 - Chars: 3784 - Tokens: 946
-21. src\backend\services\selection.service.ts - Lines: 39 - Chars: 1300 - Tokens: 325
-22. src\backend\services\services.ts - Lines: 17 - Chars: 552 - Tokens: 138
-23. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
-24. src\client\components\file-tree\FileTree.tsx - Lines: 108 - Chars: 3597 - Tokens: 900
-25. src\client\components\file-tree\FileTree.utils.ts - Lines: 84 - Chars: 2984 - Tokens: 746
-26. src\client\components\tree-view\TreeView.tsx - Lines: 71 - Chars: 2748 - Tokens: 687
-27. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
-28. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-29. src\client\views\context-chooser.view\on-message.ts - Lines: 43 - Chars: 1840 - Tokens: 460
-30. src\client\views\context-chooser.view\view.scss - Lines: 146 - Chars: 3358 - Tokens: 840
-31. src\client\views\context-chooser.view\view.tsx - Lines: 118 - Chars: 4924 - Tokens: 1231
-32. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
-33. src\common\ipc\channels.enum.ts - Lines: 19 - Chars: 770 - Tokens: 193
-34. src\common\ipc\channels.type.ts - Lines: 19 - Chars: 1074 - Tokens: 269
-35. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
-36. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-37. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-38. src\common\types\file-node.ts - Lines: 6 - Chars: 130 - Tokens: 33
-39. src\common\types\vscode-webview.d.ts - Lines: 9 - Chars: 282 - Tokens: 71
-40. src\common\utils\view-html.ts - Lines: 26 - Chars: 971 - Tokens: 243
-41. src\common\view-types.ts - Lines: 8 - Chars: 246 - Tokens: 62
-42. src\extension.ts - Lines: 24 - Chars: 730 - Tokens: 183
-43. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
-44. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
-45. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
-46. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
-47. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
-48. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
-49. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
-50. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
-51. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
-52. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
-53. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
-54. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
-55. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
-56. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
-57. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
-58. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
-59. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
-60. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
-61. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
-62. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
-63. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
-64. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
-65. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
-66. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
-67. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
-68. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
-69. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
-70. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
-71. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
-72. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
-73. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
-74. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
-75. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
-76. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
-77. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
-78. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
-79. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
-80. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
-81. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
-82. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
-83. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
-84. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
-85. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
-86. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
-87. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
-88. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
-89. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
-90. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
-91. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
-92. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
-93. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
-94. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
-95. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
-96. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
-97. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
-98. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
-99. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
-100. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
-101. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
-102. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
-103. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
-104. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
-105. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
-106. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
-107. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
-108. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
-109. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
-110. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-111. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
-112. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
-113. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
-114. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-115. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
-116. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
-117. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
-118. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-119. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
-120. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
-121. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
-122. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
-123. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
-124. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
-125. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
-126. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-127. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
-128. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
-129. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
-130. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
-131. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
-132. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
-133. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
-134. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
-135. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
-136. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
-137. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
-138. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
-139. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
-140. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
-141. tsconfig.json - Lines: 19 - Chars: 457 - Tokens: 115
-142. webpack.config.js - Lines: 63 - Chars: 1710 - Tokens: 428
+9. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 47 - Chars: 5207 - Tokens: 1302
+10. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
+11. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 31 - Chars: 4278 - Tokens: 1070
+12. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
+13. src\Artifacts\A4. DCE - Analysis of The-Creator-AI Repo.md - Lines: 56 - Chars: 5722 - Tokens: 1431
+14. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
+15. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43689 - Tokens: 10923
+16. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
+17. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 74 - Chars: 5773 - Tokens: 1444
+18. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
+19. src\backend\commands\commands.ts - Lines: 62 - Chars: 2633 - Tokens: 659
+20. src\backend\commands\register-commands.ts - Lines: 9 - Chars: 331 - Tokens: 83
+21. src\backend\services\flattener.service.ts - Lines: 156 - Chars: 5889 - Tokens: 1473
+22. src\backend\services\fs.service.ts - Lines: 143 - Chars: 5539 - Tokens: 1385
+23. src\backend\services\selection.service.ts - Lines: 39 - Chars: 1300 - Tokens: 325
+24. src\backend\services\services.ts - Lines: 17 - Chars: 552 - Tokens: 138
+25. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
+26. src\client\components\file-tree\FileTree.tsx - Lines: 131 - Chars: 4481 - Tokens: 1121
+27. src\client\components\file-tree\FileTree.utils.ts - Lines: 88 - Chars: 3350 - Tokens: 838
+28. src\client\components\tree-view\TreeView.tsx - Lines: 71 - Chars: 2748 - Tokens: 687
+29. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
+30. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
+31. src\client\views\context-chooser.view\on-message.ts - Lines: 43 - Chars: 1840 - Tokens: 460
+32. src\client\views\context-chooser.view\view.scss - Lines: 154 - Chars: 3196 - Tokens: 799
+33. src\client\views\context-chooser.view\view.tsx - Lines: 115 - Chars: 4434 - Tokens: 1109
+34. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
+35. src\common\ipc\channels.enum.ts - Lines: 19 - Chars: 770 - Tokens: 193
+36. src\common\ipc\channels.type.ts - Lines: 19 - Chars: 1074 - Tokens: 269
+37. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
+38. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+39. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
+40. src\common\types\file-node.ts - Lines: 9 - Chars: 276 - Tokens: 69
+41. src\common\types\vscode-webview.d.ts - Lines: 9 - Chars: 282 - Tokens: 71
+42. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
+43. src\common\utils\view-html.ts - Lines: 26 - Chars: 971 - Tokens: 243
+44. src\common\view-types.ts - Lines: 8 - Chars: 246 - Tokens: 62
+45. src\extension.ts - Lines: 24 - Chars: 730 - Tokens: 183
+46. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
+47. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
+48. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
+49. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
+50. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
+51. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
+52. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
+53. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
+54. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
+55. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
+56. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
+57. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
+58. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
+59. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
+60. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
+61. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
+62. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
+63. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
+64. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
+65. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
+66. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
+67. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
+68. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
+69. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
+70. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
+71. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
+72. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
+73. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
+74. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
+75. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
+76. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
+77. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
+78. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
+79. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
+80. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
+81. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
+82. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
+83. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
+84. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
+85. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
+86. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
+87. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
+88. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
+89. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
+90. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
+91. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
+92. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
+93. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
+94. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
+95. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
+96. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
+97. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
+98. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
+99. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
+100. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
+101. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
+102. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
+103. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
+104. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
+105. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
+106. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
+107. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
+108. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
+109. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
+110. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
+111. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
+112. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
+113. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+114. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
+115. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
+116. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
+117. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+118. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
+119. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
+120. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
+121. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+122. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
+123. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
+124. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
+125. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
+126. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
+127. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
+128. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
+129. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+130. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
+131. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
+132. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
+133. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
+134. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
+135. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
+136. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
+137. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
+138. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
+139. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
+140. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
+141. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
+142. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
+143. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
+144. tsconfig.json - Lines: 19 - Chars: 457 - Tokens: 115
+145. webpack.config.js - Lines: 63 - Chars: 1710 - Tokens: 428
 
 <file path=".gitignore">
 node_modules
@@ -1726,7 +1729,7 @@ deployScaffold();
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C11 (Add A8 for Selection Sets feature plan)
+# Updated on: C14 (Add A10 for Metadata Display and A189 for Number Formatting)
 
 ## 1. Purpose
 
@@ -1775,6 +1778,20 @@ deployScaffold();
 ### A8. DCE - Phase 1 - Selection Sets Feature Plan
 - **Description:** A plan outlining the user stories, UI/UX, and technical implementation for saving and loading different sets of selected files (selection profiles).
 - **Tags:** feature plan, selection sets, profiles, context management, phase 1
+
+### A9. DCE - GitHub Repository Setup Guide
+- **Description:** A step-by-step guide with the necessary git commands to initialize the project as a local repository and push it to a new remote repository on GitHub.
+- **Tags:** git, github, version control, setup, repository
+
+### A10. DCE - Metadata and Statistics Display
+- **Description:** Outlines the requirements and design for displaying live metadata (total selected files, total tokens) and for showing aggregate statistics (token and file counts) for folders in the file tree.
+- **Tags:** feature plan, metadata, statistics, token count, ui, ux
+
+## II. Standalone Utilities & Guides
+
+# A189. Number Formatting Reference Guide
+- **Description:** A standalone guide and utility script for formatting large numbers with K/M/B/T suffixes and dynamic decimal place adjustment for clean UI presentation.
+- **Tags:** utility, script, formatting, numbers, ui, ux, javascript, typescript
 </file>
 
 <file path="src/Artifacts/A1. DCE - Project Vision and Goals.md">
@@ -1816,6 +1833,177 @@ This phase aims to bring a critical part of the external workflow—comparing te
 
 -   **Core Functionality:** Create a simple diffing utility within a VS Code webview. The user should be able to select two text sources (e.g., two AI responses from the Phase 2 panel, or a new response and an existing file) and see a visual comparison.
 -   **Outcome:** Reduces the friction of copying and pasting text into external tools like WinMerge, keeping the entire curation and review workflow inside VS Code.
+</file>
+
+<file path="src/Artifacts/A10. DCE - Metadata and Statistics Display.md">
+# Artifact A10: DCE - Metadata and Statistics Display
+# Date Created: Cycle 14
+# Author: AI Model
+# Updated on: C15 (Add image file size handling and UI refinements)
+
+- **Key/Value for A0:**
+- **Description:** Outlines the requirements and design for displaying live metadata (total selected files, total tokens) and for showing aggregate statistics (token and file counts) for folders in the file tree.
+- **Tags:** feature plan, metadata, statistics, token count, ui, ux
+
+## 1. Overview & Goal
+
+To enhance the data curation process, it is critical for the user to have immediate, quantitative feedback on their selections. This feature will provide at-a-glance statistics at both the folder level and the overall selection level. The goal is to empower the user to make informed decisions about context size and composition without needing to perform manual calculations.
+
+## 2. User Stories
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| US-01 | **Folder Statistics** | As a data curator, I want to see the total token count and the total number of files contained within each folder, so I can quickly assess the size and complexity of different parts of my project. | - Next to each folder name in the file tree, a token count is displayed. <br> - This token count is the recursive sum of all tokens from all non-image files within that folder and its subfolders. <br> - Next to the token count, a file count is also displayed, formatted with commas (e.g., "1,234"). <br> - These numbers are calculated on the backend and provided with the initial file tree data. |
+| US-02 | **Live Selection Summary** | As a data curator, I want to see a live summary of my total selection as I check and uncheck files, so I can monitor the total size of my context in real-time. | - A dedicated summary panel/footer is visible in the UI. <br> - This panel displays "X files" and "Y tokens". <br> - "X" is the total count of all individual files included in the current selection, formatted with commas. <br> - "Y" is the sum of all token counts for those selected non-image files. <br> - These values update instantly whenever a checkbox is changed. |
+| US-03 | **Readable Numbers & Icons** | As a data curator, I want large token counts to be formatted in a compact and readable way (e.g., 1,234 becomes "1.2K"), and for icons to visually represent the data, so I can easily parse the information. | - All token counts use K/M/B suffixes for numbers over 1,000. <br> - All file counts use commas for thousands separators. <br> - An icon is displayed next to the token count and file count for visual distinction. <br> - The statistics are right-justified in the file tree for better readability. |
+| US-04 | **Image File Handling** | As a data curator, I want to see the file size for images instead of a token count, so I can understand their contribution to storage/transfer size rather than context length. | - The backend identifies common image file types (png, jpg, etc.). <br> - For image files, the token count is treated as 0. <br> - In the file tree, instead of a token count, the human-readable file size is displayed (e.g., "15.2 KB", "2.1 MB"). |
+
+## 3. Technical Implementation Plan
+
+1.  **Backend (`fs.service.ts`):**
+    *   The `FileNode` interface in `src/common/types/file-node.ts` will be updated to include `isImage: boolean` and `sizeInBytes: number`.
+    *   The backend service will maintain a list of image file extensions.
+    *   When building the tree, it will check each file's extension.
+    *   If it's an image, it will use `fs.stat` to get the `sizeInBytes`, set `isImage: true`, and set `tokenCount: 0`.
+    *   If it's not an image, it will calculate the `tokenCount` and get the `sizeInBytes`.
+    *   The recursive sum logic for folders will aggregate `tokenCount`, `fileCount`, and `sizeInBytes` from their children.
+    *   The `vscode.workspace.findFiles` call will be updated to exclude the `node_modules` directory.
+
+2.  **Frontend - Formatting (`formatting.ts`):**
+    *   A new `formatBytes(bytes)` utility will be created to convert bytes to KB, MB, etc.
+    *   A new `formatNumberWithCommas(number)` utility will be created.
+
+3.  **Frontend - File Tree (`FileTree.tsx` & `view.scss`):**
+    *   The `FileTree.tsx` component will be updated to render the new data.
+    *   It will conditionally display either a formatted token count (using `formatLargeNumber`) or a formatted file size (using `formatBytes`) based on the `isImage` flag.
+    *   It will display folder file counts using `formatNumberWithCommas`.
+    *   It will incorporate icons from `react-icons/vsc` for tokens and file counts.
+    *   The stylesheet (`view.scss`) will be updated to right-align all statistics, pushing them to the end of the file/folder row.
+
+4.  **Frontend - Live Summary Panel (`context-chooser.view.tsx`):**
+    *   The `useMemo` hook that calculates the summary will be updated to correctly sum the total number of files and total tokens from the selected items. It will continue to ignore image sizes for the token total to avoid mixing units.
+    *   The rendered output will use the new formatting utilities and icons.
+</file>
+
+<file path="src/Artifacts/A189. Number Formatting Reference Guide.md">
+# Artifact A189: Number Formatting Guide (K/M Suffixes & Dynamic Decimals)
+# Date Created: Cycle 14
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A standalone guide and utility script for formatting large numbers with K/M/B/T suffixes and dynamic decimal place adjustment for clean UI presentation.
+- **Tags:** utility, script, formatting, numbers, ui, ux, javascript, typescript
+
+## 1. Purpose
+
+This artifact provides a set of robust, reusable TypeScript functions for formatting numbers in a user-friendly way. The core function, `formatLargeNumber`, intelligently converts large numbers into a compact format using suffixes like 'K' (thousands), 'M' (millions), 'B' (billions), and 'T' (trillions).
+
+The key features of this utility are:
+*   **Automatic Suffixing:** Automatically scales numbers and adds the appropriate suffix.
+*   **Dynamic Decimal Precision:** Adjusts the number of decimal places shown based on the magnitude of the number, ensuring a clean and consistent look in the UI (e.g., `12.3K`, `123.5K`, `1.23M`).
+*   **Handling of Small Numbers:** Gracefully handles numbers below 1,000 without applying a suffix.
+*   **Specialized Wrappers:** Includes helper functions like `formatCurrency` and `formatCount` for common use cases.
+
+## 2. Core Utility Functions (from `src/utils.ts`)
+
+Below is the complete TypeScript code. You can save this as a `formatting.ts` file in a new project's `utils` directory.
+
+```typescript
+// src/common/utils/formatting.ts
+
+const KMBT_SUFFIXES = ['', 'K', 'M', 'B', 'T', 'Q']; // Extend as needed
+
+/**
+ * Formats a large number with appropriate K/M/B/T suffixes and dynamic decimal places.
+ * Handles very small near-zero numbers gracefully to avoid scientific notation.
+ *
+ * @param value The number to format.
+ * @param decimalPlaces The base number of decimal places to aim for.
+ * @returns A formatted string.
+ */
+export function formatLargeNumber(value: number | undefined | null, decimalPlaces: number = 2): string {
+    if (value === null || value === undefined || isNaN(value) || !Number.isFinite(value)) {
+        return '---';
+    }
+    if (value === 0) {
+        return '0';
+    }
+
+    const VERY_SMALL_THRESHOLD = 1e-6; // 0.000001
+    if (Math.abs(value) < VERY_SMALL_THRESHOLD) {
+        return (0).toFixed(decimalPlaces);
+    }
+
+    const isNegative = value < 0;
+    const absValue = Math.abs(value);
+
+    let unitIndex = 0;
+    let scaledValue = absValue;
+
+    if (absValue < 1000) {
+        return String(Math.round(value)); // Return whole number if less than 1000
+    }
+
+    if (absValue >= 1000) {
+        unitIndex = Math.floor(Math.log10(absValue) / 3);
+        unitIndex = Math.min(unitIndex, KMBT_SUFFIXES.length - 1);
+        scaledValue = absValue / Math.pow(1000, unitIndex);
+    }
+
+    let adjustedDecimalPlaces = decimalPlaces;
+    if (unitIndex > 0) { // If a suffix is used (K, M, B, T, Q)
+        if (scaledValue >= 100) adjustedDecimalPlaces = Math.max(0, decimalPlaces - 2);
+        else if (scaledValue >= 10) adjustedDecimalPlaces = Math.max(0, decimalPlaces - 1);
+    } else { // No unit suffix (value < 1000)
+        if (Math.abs(scaledValue) < 0.01 && scaledValue !== 0) {
+            adjustedDecimalPlaces = Math.max(decimalPlaces, 4);
+        } else if (Number.isInteger(scaledValue)) {
+             adjustedDecimalPlaces = 0;
+        }
+    }
+
+    const unit = KMBT_SUFFIXES[unitIndex] ?? '';
+    let formattedValue = scaledValue.toFixed(adjustedDecimalPlaces);
+
+    // Remove trailing .00 or .0
+    if (adjustedDecimalPlaces > 0 && formattedValue.endsWith('0')) {
+        formattedValue = formattedValue.replace(/\.?0+$/, '');
+    }
+
+
+    return `${isNegative ? '-' : ''}${formattedValue}${unit}`;
+}```
+
+## 3. Usage Examples
+
+Here is how you can use these functions in your code:
+
+```typescript
+import { formatLargeNumber } from './path/to/formatting';
+
+// formatLargeNumber examples
+console.log(formatLargeNumber(123));        // "123"
+console.log(formatLargeNumber(1234));       // "1.23K"
+console.log(formatLargeNumber(12345));      // "12.3K"
+console.log(formatLargeNumber(123456));     // "123K"
+console.log(formatLargeNumber(1234567));    // "1.23M"
+console.log(formatLargeNumber(9876543210)); // "9.88B"
+console.log(formatLargeNumber(-54321));     // "-54.3K"
+console.log(formatLargeNumber(0.0000001));  // "0.00"
+```
+
+## 4. Integration Guide
+
+1.  **Copy the Code:** Save the code from Section 2 into a file named `formatting.ts` inside your project's `src/common/utils` directory.
+2.  **Import and Use:** Import the function into your UI components.
+    ```typescript
+    import { formatLargeNumber } from '@/common/utils/formatting';
+
+    const MyComponent = () => {
+      const displayValue = formatLargeNumber(123456); // "123K"
+      return <div>Tokens: {displayValue}</div>;
+    };
+    ```
 </file>
 
 <file path="src/Artifacts/A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md">
@@ -3769,27 +3957,43 @@ import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { ServerToClientChannel } from "@/common/ipc/channels.enum";
 import { FileNode } from "@/common/types/file-node";
 
+const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
+
 export class FSService {
 
-    private async calculateTokenCount(filePath: string): Promise<number> {
+    private async getFileStats(filePath: string): Promise<{ tokenCount: number, sizeInBytes: number, isImage: boolean }> {
         try {
+            const extension = path.extname(filePath).toLowerCase();
             const stats = await fs.stat(filePath);
-            if (stats.isDirectory() || stats.size > 1_000_000) { // Ignore large files
-                return 0;
+
+            if (stats.isDirectory()) {
+                return { tokenCount: 0, sizeInBytes: 0, isImage: false };
             }
+
+            const isImage = IMAGE_EXTENSIONS.has(extension);
+            if (isImage) {
+                return { tokenCount: 0, sizeInBytes: stats.size, isImage: true };
+            }
+
+            // Ignore very large files to prevent performance issues
+            if (stats.size > 2_000_000) { 
+                return { tokenCount: 0, sizeInBytes: stats.size, isImage: false };
+            }
+            
             const content = await fs.readFile(filePath, 'utf-8');
             // Simple approximation: 1 token ~ 4 characters
-            return Math.ceil(content.length / 4);
+            const tokenCount = Math.ceil(content.length / 4);
+            return { tokenCount, sizeInBytes: stats.size, isImage: false };
+
         } catch (error) {
-            // Could be a binary file or permissions issue, just return 0
-            return 0;
+            // Could be a binary file or permissions issue
+            return { tokenCount: 0, sizeInBytes: 0, isImage: false };
         }
     }
 
     public async handleWorkspaceFilesRequest(serverIpc: ServerPostMessageManager) {
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (!workspaceFolders || workspaceFolders.length === 0) {
-            // Send empty array if no folder is open
             serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: [] });
             return;
         }
@@ -3800,7 +4004,7 @@ export class FSService {
             return;
         }
         const rootPath = rootUri.fsPath;
-        const files = await vscode.workspace.findFiles("**/*");
+        const files = await vscode.workspace.findFiles("**/*", '**/node_modules/**');
         const fileTree = await this.createFileTree(rootPath, files);
 
         serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: [fileTree] });
@@ -3811,7 +4015,10 @@ export class FSService {
             name: path.basename(rootPath),
             absolutePath: rootPath,
             children: [],
-            tokenCount: 0
+            tokenCount: 0,
+            fileCount: 0,
+            isImage: false,
+            sizeInBytes: 0,
         };
 
         for (const file of files) {
@@ -3825,33 +4032,65 @@ export class FSService {
 
                 if (!childNode) {
                     const newPath = path.join(currentNode.absolutePath, part);
+                    const isDirectory = i < parts.length - 1;
+                    const stats = isDirectory ? { tokenCount: 0, sizeInBytes: 0, isImage: false } : await this.getFileStats(newPath);
+
                     childNode = { 
                         name: part, 
                         absolutePath: newPath,
-                        tokenCount: 0 // Will be calculated below
+                        tokenCount: stats.tokenCount,
+                        sizeInBytes: stats.sizeInBytes,
+                        isImage: stats.isImage,
+                        fileCount: isDirectory ? 0 : 1
                     };
 
-                    if (i < parts.length - 1) {
+                    if (isDirectory) {
                         childNode.children = [];
-                    } else {
-                        // It's a file, calculate token count
-                        childNode.tokenCount = await this.calculateTokenCount(newPath);
                     }
-                    // Sort children: folders first, then files, alphabetically
                     currentNode.children?.push(childNode);
-                    currentNode.children?.sort((a, b) => {
-                        const aIsFolder = !!a.children;
-                        const bIsFolder = !!b.children;
-                        if (aIsFolder !== bIsFolder) {
-                            return aIsFolder ? -1 : 1;
-                        }
-                        return a.name.localeCompare(b.name);
-                    });
                 }
                 currentNode = childNode;
             }
         }
+        
+        // Post-process to calculate folder stats and sort
+        this.processNode(rootNode);
+
         return rootNode;
+    }
+
+    private processNode(node: FileNode): void {
+        if (!node.children) {
+            return;
+        }
+
+        // Recursively process children first
+        for (const child of node.children) {
+            this.processNode(child);
+        }
+
+        // Sort children: folders first, then files, then alphabetically
+        node.children.sort((a, b) => {
+            const aIsFolder = !!a.children;
+            const bIsFolder = !!b.children;
+            if (aIsFolder !== bIsFolder) {
+                return aIsFolder ? -1 : 1;
+            }
+            return a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' });
+        });
+        
+        // Calculate totals for the current node
+        let totalTokens = 0;
+        let totalFiles = 0;
+        let totalBytes = 0;
+        for (const child of node.children) {
+            totalTokens += child.tokenCount;
+            totalFiles += child.fileCount;
+            totalBytes += child.sizeInBytes;
+        }
+        node.tokenCount = totalTokens;
+        node.fileCount = totalFiles;
+        node.sizeInBytes = totalBytes;
     }
 }
 </file>
@@ -3953,9 +4192,10 @@ import { FileNode } from '@/common/types/file-node';
 import { addRemovePathInSelectedFiles } from './FileTree.utils';
 import Checkbox from '../Checkbox';
 import {
-    VscFile, VscFolder, VscFolderOpened, VscJson, VscMarkdown, VscSymbolFile
+    VscFile, VscFolder, VscFolderOpened, VscJson, VscMarkdown, VscSymbolFile, VscSymbolNumeric, VscFiles
 } from 'react-icons/vsc';
 import { SiTypescript, SiReact, SiJavascript, SiSass } from 'react-icons/si';
+import { formatLargeNumber, formatBytes, formatNumberWithCommas } from '@/common/utils/formatting';
 
 interface FileTreeProps {
   data: FileNode[];
@@ -3982,6 +4222,11 @@ const getFileIcon = (fileName: string) => {
         case 'css':
             return <SiSass color="#CF649A"/>;
         case 'svg':
+        case 'png':
+        case 'jpg':
+        case 'jpeg':
+        case 'ico':
+        case 'webp':
             return <VscSymbolFile />;
         default:
             return <VscFile />;
@@ -4002,25 +4247,29 @@ const FileTree: React.FC<FileTreeProps> = ({
     }
   };
 
-  const renderCheckbox = (path: string) => {
-    const isSelected = selectedFiles.includes(path);
-    // A node is an ancestor if the path starts with the ancestor's path and a separator
-    const hasSelectedAncestor = selectedFiles.some(ancestor => path.startsWith(ancestor + '/') && path !== ancestor);
-    const hasSelectedDescendant = selectedFiles.some(descendant => descendant.startsWith(path + '/') && descendant !== path);
+  const isChildPathOf = (child: string, parent: string) => {
+    if (child === parent) return false;
+    return child.startsWith(parent + '/') || child.startsWith(parent + '\\');
+  };
+
+  const renderCheckbox = (filePath: string) => {
+    const isSelected = selectedFiles.includes(filePath);
+    const hasSelectedAncestor = selectedFiles.some(ancestor => isChildPathOf(filePath, ancestor));
+    const hasSelectedDescendant = selectedFiles.some(descendant => isChildPathOf(descendant, filePath));
     
     return (
       <Checkbox
         className="file-checkbox"
         indeterminate={!isSelected && !hasSelectedAncestor && hasSelectedDescendant}
         checked={isSelected || hasSelectedAncestor}
-        onChange={(_, e) => handleFileCheckboxChange(e, path)}
+        onChange={(_, e) => handleFileCheckboxChange(e, filePath)}
       />
     );
   };
 
-  const handleFileCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>, path: string) => {
-    e.stopPropagation();
-    updateSelectedFiles(addRemovePathInSelectedFiles(data, path, selectedFiles));
+  const handleFileCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>, filePath: string) => {
+    e.stopPropagation(); // CRITICAL: This prevents the click from bubbling up to the tree node's expansion handler.
+    updateSelectedFiles(addRemovePathInSelectedFiles(data, filePath, selectedFiles));
   };
 
   const renderFileNodeContent = (node: FileNode, isExpanded: boolean) => {
@@ -4028,18 +4277,30 @@ const FileTree: React.FC<FileTreeProps> = ({
     const isDirectory = Array.isArray(node.children);
 
     return (
-      <div
-        className={`file-item ${isActive ? 'active' : ''}`}
-        onClick={() => handleNodeClick(node)}
-      >
+      <div className={`file-item ${isActive ? 'active' : ''}`}>
         {renderCheckbox(node.absolutePath)}
         <span className="file-icon">
             {isDirectory ? (isExpanded ? <VscFolderOpened /> : <VscFolder />) : getFileIcon(node.name)}
         </span>
         <span className="file-name">{node.name}</span>
-        {node.tokenCount && node.tokenCount > 0 && (
-            <span className="token-count">{node.tokenCount}</span>
-        )}
+        <div className="file-stats">
+            {isDirectory && node.fileCount > 0 && (
+                <>
+                    <VscFiles />
+                    <span>{formatNumberWithCommas(node.fileCount)}</span>
+                </>
+            )}
+            {node.isImage ? (
+                <span>{formatBytes(node.sizeInBytes)}</span>
+            ) : (
+                node.tokenCount > 0 && (
+                    <>
+                        <VscSymbolNumeric />
+                        <span>{formatLargeNumber(node.tokenCount, 1)}</span>
+                    </>
+                )
+            )}
+        </div>
       </div>
     );
   };
@@ -4048,6 +4309,7 @@ const FileTree: React.FC<FileTreeProps> = ({
     <div className="file-tree">
       <TreeView 
         data={data} 
+        onNodeClick={handleNodeClick}
         renderNodeContent={(node, isExpanded) => renderFileNodeContent(node, isExpanded as boolean)} 
       />
     </div>
@@ -4075,6 +4337,7 @@ function findNode(node: FileNode, filePath: string): FileNode | null {
     if (node.absolutePath === filePath) {
         return node;
     }
+    // Use startsWith and a path separator to avoid partial matches (e.g., 'src' matching 'src-tiled')
     if (node.children && filePath.startsWith(node.absolutePath + '/')) {
         for (const child of node.children) {
             const found = findNode(child, filePath);
@@ -4105,42 +4368,45 @@ export const addRemovePathInSelectedFiles = (
 
     let newSelectedFiles = [...selectedFiles];
 
+    // Check if the node is directly selected or selected via an ancestor
     const isDirectlySelected = newSelectedFiles.includes(path);
     const selectedAncestor = newSelectedFiles.find(ancestor => path.startsWith(ancestor + '/') && path !== ancestor);
-
     const isEffectivelySelected = isDirectlySelected || !!selectedAncestor;
 
     if (isEffectivelySelected) {
         // --- UNCHECK LOGIC ---
         if (selectedAncestor) {
-            // Unchecking a child of an already checked folder
+            // A child of an already checked folder is being unchecked.
             // 1. Remove the ancestor.
             newSelectedFiles = newSelectedFiles.filter(p => p !== selectedAncestor);
             const ancestorNode = getFileNodeByPath(fileTree, selectedAncestor);
             if (ancestorNode && ancestorNode.children) {
                 // 2. Add all children of the ancestor EXCEPT the one that was just unchecked.
                 for (const child of ancestorNode.children) {
+                    // Don't re-add the path that was clicked.
                     if (child.absolutePath !== path) {
-                        newSelectedFiles.push(child.absolutePath);
+                         newSelectedFiles.push(child.absolutePath);
                     }
                 }
             }
         } else {
-            // Unchecking a parent or a file that was checked directly
+            // A parent or a file that was checked directly is being unchecked.
+            // Remove it and all its descendants.
             const descendantPaths = getAllDescendantPaths(node);
             newSelectedFiles = newSelectedFiles.filter(p => p !== path && !descendantPaths.includes(p));
         }
     } else {
         // --- CHECK LOGIC ---
-        // 1. Remove all descendants that might already be individually selected
+        // 1. Remove any descendants that might already be individually selected,
+        // as the new parent selection will cover them.
         const descendantPaths = getAllDescendantPaths(node);
         newSelectedFiles = newSelectedFiles.filter(p => !descendantPaths.includes(p));
         
-        // 2. Add the new path
+        // 2. Add the new path.
         newSelectedFiles.push(path);
     }
   
-  return [...new Set(newSelectedFiles)]; // Remove duplicates for cleanliness
+  return [...new Set(newSelectedFiles)]; // Use Set to remove any duplicates.
 };
 </file>
 
@@ -4291,6 +4557,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 </file>
 
 <file path="src/client/views/context-chooser.view/view.scss">
+/* Updated on: C15 (Right-justify stats, add icons) */
 body {
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -4308,13 +4575,10 @@ body {
 .view-header {
     padding: 8px;
     border-bottom: 1px solid var(--vscode-panel-border);
-    display: flex;
-    gap: 8px;
-    align-items: center;
 }
 
-.flatten-button, .open-folder-button {
-    flex-grow: 1;
+.flatten-button {
+    width: 100%;
     padding: 6px;
     border: 1px solid var(--vscode-button-border, var(--vscode-focusBorder));
     background-color: var(--vscode-button-background);
@@ -4323,35 +4587,37 @@ body {
     border-radius: 2px;
 }
 
-.selection-sets-dropdown {
-    flex-shrink: 0;
-    padding: 6px;
-    border: 1px solid var(--vscode-input-border);
-    background-color: var(--vscode-input-background);
-    color: var(--vscode-input-foreground);
-    border-radius: 2px;
-}
-
-.flatten-button:hover, .open-folder-button:hover {
+.flatten-button:hover {
     background-color: var(--vscode-button-hoverBackground);
 }
 
 .file-tree-container {
-    padding: 5px 5px 5px 0; /* Remove left padding for alignment */
+    padding: 5px;
     flex-grow: 1;
     overflow-y: auto;
-    overflow-x: hidden;
 }
 
-.loading-message, .empty-view-container {
+.loading-message {
     padding: 8px;
     color: var(--vscode-descriptionForeground);
-    text-align: center;
 }
 
-.empty-view-container p {
-    margin-bottom: 8px;
+.summary-panel {
+    padding: 4px 8px;
+    border-top: 1px solid var(--vscode-panel-border);
+    font-size: 12px;
+    color: var(--vscode-descriptionForeground);
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
 }
+
+.summary-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
 
 .tree-view ul {
     padding-left: 0;
@@ -4361,26 +4627,25 @@ body {
 
 .treenode-li {
     position: relative;
-    padding-left: 20px;
 }
 
 .treenode-item-wrapper {
     display: flex;
     align-items: center;
-    min-height: 22px; /* Standard VS Code line height */
-    margin-left: -20px; /* Counteract the li padding to align content */
+    cursor: pointer;
+    padding: 1px 4px;
+    border-radius: 3px;
+    min-height: 22px;
+}
+
+.treenode-item-wrapper:hover {
+    background-color: var(--vscode-list-hoverBackground);
 }
 
 .treenode-chevron {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 20px;
-    height: 22px;
     flex-shrink: 0;
-    cursor: pointer;
-    color: var(--vscode-icon-foreground);
-    transform: rotate(0deg);
+    width: 20px;
+    text-align: center;
     transition: transform 0.1s ease-in-out;
 }
 
@@ -4390,22 +4655,18 @@ body {
 
 .treenode-content {
     flex-grow: 1;
-    overflow: hidden;
-    /* The whole content area is now the click target for expansion */
-    cursor: pointer; 
+    display: flex;
+    align-items: center;
+    overflow: hidden; /* Important for ellipsis */
 }
+
 
 .file-item {
     display: flex;
     align-items: center;
     width: 100%;
-    padding: 1px 4px;
+    padding: 1px;
     gap: 6px;
-    border-radius: 3px;
-}
-
-.file-item:hover {
-    background-color: var(--vscode-list-hoverBackground);
 }
 
 .file-item.active {
@@ -4420,7 +4681,8 @@ body {
 .file-icon {
     display: flex;
     align-items: center;
-    font-size: 16px; /* Standard icon size */
+    font-size: 16px;
+    flex-shrink: 0;
 }
 
 .file-name {
@@ -4430,12 +4692,24 @@ body {
     flex-grow: 1;
 }
 
-.token-count {
+.file-stats {
     margin-left: auto;
-    padding-right: 8px;
+    padding-left: 8px;
     font-size: 11px;
     color: var(--vscode-descriptionForeground);
     flex-shrink: 0;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between stat groups */
+    justify-content: flex-end;
+    text-align: right;
+}
+
+.file-stats > * {
+    display: flex;
+    align-items: center;
+    gap: 3px;
 }
 </file>
 
@@ -4447,36 +4721,24 @@ import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
 import { FileNode } from '@/common/types/file-node';
 import FileTree from '../../components/file-tree/FileTree';
-import { useState, useEffect } from 'react';
-import { SelectionSet } from '@/backend/services/selection.service';
+import { useState, useEffect, useMemo } from 'react';
+import { formatLargeNumber, formatNumberWithCommas } from '@/common/utils/formatting';
+import { VscFiles, VscSymbolNumeric } from 'react-icons/vsc';
 
 const App = () => {
     const [files, setFiles] = useState<FileNode[]>([]);
-    const [isLoaded, setIsLoaded] = useState(false);
     const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
     const [activeFile, setActiveFile] = useState<string | undefined>();
-    const [selectionSets, setSelectionSets] = useState<SelectionSet>({});
     
     const clientIpc = ClientPostMessageManager.getInstance();
 
     useEffect(() => {
         clientIpc.sendToServer(ClientToServerChannel.RequestWorkspaceFiles, {});
-        clientIpc.sendToServer(ClientToServerChannel.RequestSelectionSets, {});
 
         const handleFileResponse = ({ files: receivedFiles }: { files: FileNode[] }) => {
             setFiles(receivedFiles);
-            setIsLoaded(true);
         };
-        const handleSelectionSetsResponse = ({ sets }: { sets: SelectionSet }) => {
-            setSelectionSets(sets);
-        };
-        const handleApplySelectionSet = ({ paths }: { paths: string[] }) => {
-            setSelectedFiles(paths);
-        };
-
         clientIpc.onServerMessage(ServerToClientChannel.SendWorkspaceFiles, handleFileResponse);
-        clientIpc.onServerMessage(ServerToClientChannel.SendSelectionSets, handleSelectionSetsResponse);
-        clientIpc.onServerMessage(ServerToClientChannel.ApplySelectionSet, handleApplySelectionSet);
 
     }, [clientIpc]);
 
@@ -4492,65 +4754,74 @@ const App = () => {
         clientIpc.sendToServer(ClientToServerChannel.RequestFlattenContext, { selectedPaths: selectedFiles });
     };
 
-    const handleOpenFolderClick = () => {
-        clientIpc.sendToServer(ClientToServerChannel.OpenFolderDialog, {});
-    };
+    const selectionSummary = useMemo(() => {
+        let totalTokens = 0;
+        let totalFiles = 0;
+        const selectedFileSet = new Set<string>();
 
-    const handleSelectionSetChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        const value = event.target.value;
-        if (value === '__save__') {
-            clientIpc.sendToServer(ClientToServerChannel.RequestSaveSelectionSet, { selectedPaths: selectedFiles });
-        } else if (value === '__delete__') {
-            clientIpc.sendToServer(ClientToServerChannel.RequestDeleteSelectionSet, {});
-        } else if (value) {
-            clientIpc.sendToServer(ClientToServerChannel.LoadSelectionSet, { name: value });
-        }
-    };
+        const fileMap: Map<string, FileNode> = new Map();
+        const buildFileMap = (node: FileNode) => {
+            fileMap.set(node.absolutePath, node);
+            if (node.children) {
+                node.children.forEach(buildFileMap);
+            }
+        };
+        files.forEach(buildFileMap);
 
-    const renderContent = () => {
-        if (!isLoaded) {
-            return <div className="loading-message">Loading file tree...</div>;
-        }
-        if (files.length === 0) {
-            return (
-                <div className="empty-view-container">
-                    <p>No folder opened.</p>
-                    <button className="open-folder-button" onClick={handleOpenFolderClick}>
-                        Open Folder
-                    </button>
-                </div>
-            );
-        }
-        return files.map((rootNode, index) => (
-            <FileTree
-                key={index}
-                data={[rootNode]}
-                onFileClick={handleFileClick}
-                selectedFiles={selectedFiles}
-                updateSelectedFiles={updateSelectedFiles}
-                activeFile={activeFile}
-            />
-        ));
-    };
+        const addNodeAndDescendants = (node: FileNode) => {
+            if (!node.children) { // It's a file
+                if (!selectedFileSet.has(node.absolutePath)) {
+                    selectedFileSet.add(node.absolutePath);
+                    totalTokens += node.tokenCount; // Images have 0 tokens
+                    totalFiles++;
+                }
+            } else { // It's a directory
+                node.children.forEach(child => addNodeAndDescendants(child));
+            }
+        };
+
+        selectedFiles.forEach(path => {
+            const node = fileMap.get(path);
+            if (node) {
+                addNodeAndDescendants(node);
+            }
+        });
+
+        return { totalFiles, totalTokens };
+    }, [selectedFiles, files]);
 
     return (
         <div className="view-container">
             <div className="view-header">
-                 <select className="selection-sets-dropdown" onChange={handleSelectionSetChange} value="">
-                    <option value="" disabled>Selection Sets</option>
-                    {Object.keys(selectionSets).map(name => (
-                        <option key={name} value={name}>{name}</option>
-                    ))}
-                    <option disabled>──────────</option>
-                    <option value="__save__">Save Current Selection...</option>
-                    <option value="__delete__">Delete a Selection...</option>
-                </select>
                 <button className="flatten-button" onClick={handleFlattenClick}>
                     Flatten Context
                 </button>
             </div>
             <div className="file-tree-container">
-                {renderContent()}
+                {files.length > 0 ? (
+                    files.map((rootNode, index) => (
+                        <FileTree
+                            key={index}
+                            data={[rootNode]}
+                            onFileClick={handleFileClick}
+                            selectedFiles={selectedFiles}
+                            updateSelectedFiles={updateSelectedFiles}
+                            activeFile={activeFile}
+                        />
+                    ))
+                ) : (
+                    <div className="loading-message">Loading file tree...</div>
+                )}
+            </div>
+            <div className="summary-panel">
+                <span className='summary-item'>
+                    <VscFiles />
+                    {formatNumberWithCommas(selectionSummary.totalFiles)} files
+                </span>
+                <span className='summary-item'>
+                    <VscSymbolNumeric />
+                    {formatLargeNumber(selectionSummary.totalTokens, 1)} tokens
+                </span>
             </div>
         </div>
     );
@@ -4747,7 +5018,10 @@ export interface FileNode {
     name: string;
     absolutePath: string;
     children?: FileNode[];
-    tokenCount?: number;
+    tokenCount: number;
+    fileCount: number; // For directories, this is the count of files inside. For files, it's 1.
+    isImage: boolean;
+    sizeInBytes: number;
 }
 </file>
 
@@ -4760,6 +5034,90 @@ export interface WebviewApi<StateType> {
 
 declare global {
     function acquireVsCodeApi<StateType = unknown>(): WebviewApi<StateType>;
+}
+</file>
+
+<file path="src/common/utils/formatting.ts">
+// src/common/utils/formatting.ts
+
+const KMBT_SUFFIXES = ['', 'K', 'M', 'B', 'T', 'Q']; // Extend as needed
+
+/**
+ * Formats a large number with appropriate K/M/B/T suffixes and dynamic decimal places.
+ *
+ * @param value The number to format.
+ * @param decimalPlaces The base number of decimal places to aim for.
+ * @returns A formatted string.
+ */
+export function formatLargeNumber(value: number | undefined | null, decimalPlaces: number = 1): string {
+    if (value === null || value === undefined || isNaN(value) || !Number.isFinite(value)) {
+        return '---';
+    }
+    if (value === 0) {
+        return '0';
+    }
+
+    const isNegative = value < 0;
+    const absValue = Math.abs(value);
+
+    if (absValue < 1000) {
+        return String(Math.round(value)); // Return whole number if less than 1000
+    }
+
+    let unitIndex = 0;
+    let scaledValue = absValue;
+
+    unitIndex = Math.floor(Math.log10(absValue) / 3);
+    unitIndex = Math.min(unitIndex, KMBT_SUFFIXES.length - 1);
+    scaledValue = absValue / Math.pow(1000, unitIndex);
+
+    let adjustedDecimalPlaces = decimalPlaces;
+    if (scaledValue >= 100) adjustedDecimalPlaces = 0;
+    else if (scaledValue >= 10) adjustedDecimalPlaces = 1;
+    else adjustedDecimalPlaces = 2;
+
+
+    const unit = KMBT_SUFFIXES[unitIndex] ?? '';
+    let formattedValue = scaledValue.toFixed(adjustedDecimalPlaces);
+    
+    // Remove trailing .00 or .0
+    if (adjustedDecimalPlaces > 0 && formattedValue.endsWith('0')) {
+        formattedValue = formattedValue.replace(/\.?0+$/, '');
+    }
+
+
+    return `${isNegative ? '-' : ''}${formattedValue}${unit}`;
+}
+
+/**
+ * Formats a number with commas as thousands separators.
+ * @param value The number to format.
+ * @returns A formatted string with commas.
+ */
+export function formatNumberWithCommas(value: number | undefined | null): string {
+    if (value === null || value === undefined || isNaN(value)) {
+        return '---';
+    }
+    return value.toLocaleString();
+}
+
+/**
+ * Formats a file size in bytes into a human-readable string (KB, MB, GB, etc.).
+ * @param bytes The number of bytes.
+ * @param decimals The number of decimal places to use.
+ * @returns A formatted string representing the file size.
+ */
+export function formatBytes(bytes: number, decimals: number = 1): string {
+    if (bytes === 0) return '0 Bytes';
+    if (isNaN(bytes)) return '---';
+
+    const k = 1024;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
 </file>
 

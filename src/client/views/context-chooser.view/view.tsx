@@ -6,7 +6,8 @@ import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/chann
 import { FileNode } from '@/common/types/file-node';
 import FileTree from '../../components/file-tree/FileTree';
 import { useState, useEffect, useMemo } from 'react';
-import { formatLargeNumber } from '@/common/utils/formatting';
+import { formatLargeNumber, formatNumberWithCommas } from '@/common/utils/formatting';
+import { VscFiles, VscSymbolNumeric } from 'react-icons/vsc';
 
 const App = () => {
     const [files, setFiles] = useState<FileNode[]>([]);
@@ -55,7 +56,7 @@ const App = () => {
             if (!node.children) { // It's a file
                 if (!selectedFileSet.has(node.absolutePath)) {
                     selectedFileSet.add(node.absolutePath);
-                    totalTokens += node.tokenCount;
+                    totalTokens += node.tokenCount; // Images have 0 tokens
                     totalFiles++;
                 }
             } else { // It's a directory
@@ -97,8 +98,14 @@ const App = () => {
                 )}
             </div>
             <div className="summary-panel">
-                <span>Selected: {selectionSummary.totalFiles} files</span>
-                <span>Tokens: {formatLargeNumber(selectionSummary.totalTokens, 1)}</span>
+                <span className='summary-item'>
+                    <VscFiles />
+                    {formatNumberWithCommas(selectionSummary.totalFiles)} files
+                </span>
+                <span className='summary-item'>
+                    <VscSymbolNumeric />
+                    {formatLargeNumber(selectionSummary.totalTokens, 1)} tokens
+                </span>
             </div>
         </div>
     );

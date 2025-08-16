@@ -4,10 +4,10 @@ import { FileNode } from '@/common/types/file-node';
 import { addRemovePathInSelectedFiles } from './FileTree.utils';
 import Checkbox from '../Checkbox';
 import {
-    VscFile, VscFolder, VscFolderOpened, VscJson, VscMarkdown, VscSymbolFile
+    VscFile, VscFolder, VscFolderOpened, VscJson, VscMarkdown, VscSymbolFile, VscSymbolNumeric, VscFiles
 } from 'react-icons/vsc';
 import { SiTypescript, SiReact, SiJavascript, SiSass } from 'react-icons/si';
-import { formatLargeNumber } from '@/common/utils/formatting';
+import { formatLargeNumber, formatBytes, formatNumberWithCommas } from '@/common/utils/formatting';
 
 interface FileTreeProps {
   data: FileNode[];
@@ -34,6 +34,11 @@ const getFileIcon = (fileName: string) => {
         case 'css':
             return <SiSass color="#CF649A"/>;
         case 'svg':
+        case 'png':
+        case 'jpg':
+        case 'jpeg':
+        case 'ico':
+        case 'webp':
             return <VscSymbolFile />;
         default:
             return <VscFile />;
@@ -54,26 +59,29 @@ const FileTree: React.FC<FileTreeProps> = ({
     }
   };
 
-  const renderCheckbox = (path: string) => {
-    const isSelected = selectedFiles.includes(path);
-    // A node is an ancestor if the path starts with the ancestor's path and a separator
-    const hasSelectedAncestor = selectedFiles.some(ancestor => path.startsWith(ancestor + '/') && path !== ancestor);
-    // A node has a selected descendant if a selected path starts with the node's own path
-    const hasSelectedDescendant = selectedFiles.some(descendant => descendant.startsWith(path + '/') && descendant !== path);
+  const isChildPathOf = (child: string, parent: string) => {
+    if (child === parent) return false;
+    return child.startsWith(parent + '/') || child.startsWith(parent + '\\');
+  };
+
+  const renderCheckbox = (filePath: string) => {
+    const isSelected = selectedFiles.includes(filePath);
+    const hasSelectedAncestor = selectedFiles.some(ancestor => isChildPathOf(filePath, ancestor));
+    const hasSelectedDescendant = selectedFiles.some(descendant => isChildPathOf(descendant, filePath));
     
     return (
       <Checkbox
         className="file-checkbox"
         indeterminate={!isSelected && !hasSelectedAncestor && hasSelectedDescendant}
         checked={isSelected || hasSelectedAncestor}
-        onChange={(_, e) => handleFileCheckboxChange(e, path)}
+        onChange={(_, e) => handleFileCheckboxChange(e, filePath)}
       />
     );
   };
 
-  const handleFileCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>, path: string) => {
-    e.stopPropagation();
-    updateSelectedFiles(addRemovePathInSelectedFiles(data, path, selectedFiles));
+  const handleFileCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>, filePath: string) => {
+    e.stopPropagation(); // CRITICAL: This prevents the click from bubbling up to the tree node's expansion handler.
+    updateSelectedFiles(addRemovePathInSelectedFiles(data, filePath, selectedFiles));
   };
 
   const renderFileNodeContent = (node: FileNode, isExpanded: boolean) => {
@@ -81,20 +89,30 @@ const FileTree: React.FC<FileTreeProps> = ({
     const isDirectory = Array.isArray(node.children);
 
     return (
-      <div
-        className={`file-item ${isActive ? 'active' : ''}`}
-        // Let TreeView handle expansion, don't re-handle it here
-        // onClick={() => handleNodeClick(node)}
-      >
+      <div className={`file-item ${isActive ? 'active' : ''}`}>
         {renderCheckbox(node.absolutePath)}
         <span className="file-icon">
             {isDirectory ? (isExpanded ? <VscFolderOpened /> : <VscFolder />) : getFileIcon(node.name)}
         </span>
         <span className="file-name">{node.name}</span>
-        <span className="token-count">
-            {formatLargeNumber(node.tokenCount, 1)}
-            {isDirectory && node.fileCount > 0 && ` (${node.fileCount})`}
-        </span>
+        <div className="file-stats">
+            {isDirectory && node.fileCount > 0 && (
+                <>
+                    <VscFiles />
+                    <span>{formatNumberWithCommas(node.fileCount)}</span>
+                </>
+            )}
+            {node.isImage ? (
+                <span>{formatBytes(node.sizeInBytes)}</span>
+            ) : (
+                node.tokenCount > 0 && (
+                    <>
+                        <VscSymbolNumeric />
+                        <span>{formatLargeNumber(node.tokenCount, 1)}</span>
+                    </>
+                )
+            )}
+        </div>
       </div>
     );
   };
