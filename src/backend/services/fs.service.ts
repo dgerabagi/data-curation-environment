@@ -6,26 +6,23 @@ import { ServerToClientChannel } from "@/common/ipc/channels.enum";
 import { FileNode } from "@/common/types/file-node";
 import { Services } from "./services";
 
-const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
+const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024; // 5 MB
 
 export class FSService {
 
     private async getFileStats(filePath: string): Promise<{ tokenCount: number, sizeInBytes: number, isImage: boolean }> {
         try {
-            const extension = path.extname(filePath).toLowerCase();
             const stats = await fs.stat(filePath);
 
             if (stats.isDirectory()) {
                 return { tokenCount: 0, sizeInBytes: 0, isImage: false };
             }
 
-            const isImage = IMAGE_EXTENSIONS.has(extension);
-            if (isImage) {
-                return { tokenCount: 0, sizeInBytes: stats.size, isImage: true };
-            }
+            // isImage is determined by the exclusion glob now, so this is redundant but safe.
+            const isImage = false; 
 
-            if (stats.size > 5_000_000) { // Ignore files larger than 5MB
-                Services.loggerService.warn(`Ignoring large file: ${filePath} (${stats.size} bytes)`);
+            if (stats.size > MAX_FILE_SIZE_BYTES) { 
+                Services.loggerService.warn(`Skipping token count for large file: ${path.basename(filePath)} (${stats.size} bytes)`);
                 return { tokenCount: 0, sizeInBytes: stats.size, isImage: false };
             }
             
@@ -33,8 +30,8 @@ export class FSService {
             const tokenCount = Math.ceil(content.length / 4);
             return { tokenCount, sizeInBytes: stats.size, isImage: false };
 
-        } catch (error) {
-            Services.loggerService.warn(`Could not get stats for ${filePath}: ${error}`);
+        } catch (error: any) {
+            Services.loggerService.warn(`Could not get stats for ${filePath}: ${error.message}`);
             return { tokenCount: 0, sizeInBytes: 0, isImage: false };
         }
     }
@@ -51,8 +48,8 @@ export class FSService {
         const rootUri = workspaceFolders[0].uri;
         const rootPath = rootUri.fsPath;
         
-        // CRITICAL FIX (C19): Definitive exclusion for common large/unwanted directories.
-        const excludePattern = '{**/node_modules/**,**/dist/**,**/out/**,**/.git/**}';
+        // CRITICAL FIX (C18): Definitive exclusion for common large/unwanted directories and all image types.
+        const excludePattern = '{**/node_modules/**,**/dist/**,**/out/**,**/.git/**,**/*.{png,jpg,jpeg,gif,svg,webp,ico}}';
         Services.loggerService.log(`Scanning for files with exclusion pattern: ${excludePattern}`);
         
         const files = await vscode.workspace.findFiles("**/*", excludePattern);
@@ -65,7 +62,7 @@ export class FSService {
     }
 
     private async createFileTree(rootPath: string, files: vscode.Uri[]): Promise<FileNode> {
-        const rootStats = await this.getFileStats(rootPath);
+        const rootStats = { tokenCount: 0, sizeInBytes: 0, isImage: false }; // Root is always a directory
         const rootNode: FileNode = {
             name: path.basename(rootPath),
             absolutePath: rootPath,
@@ -89,7 +86,7 @@ export class FSService {
 
                 if (!childNode) {
                     const stats = await this.getFileStats(currentPath);
-                    const isDirectory = stats.sizeInBytes === 0 && !stats.isImage && (await fs.stat(currentPath)).isDirectory();
+                    const isDirectory = (await fs.stat(currentPath)).isDirectory();
                     childNode = {
                         name: part,
                         absolutePath: currentPath,
@@ -109,18 +106,38 @@ export class FSService {
             }
         }
         
-        this.processNode(rootNode);
+        this.aggregateStats(rootNode);
+        this.sortTree(rootNode);
         return rootNode;
     }
 
-    private processNode(node: FileNode): void {
+    private aggregateStats(node: FileNode): void {
         if (!node.children) {
             node.fileCount = 1;
             return;
         }
 
+        let totalTokens = 0;
+        let totalFiles = 0;
+        let totalBytes = 0;
         for (const child of node.children) {
-            this.processNode(child);
+            this.aggregateStats(child);
+            totalTokens += child.tokenCount;
+            totalFiles += child.fileCount;
+            totalBytes += child.sizeInBytes;
+        }
+        node.tokenCount = totalTokens;
+        node.fileCount = totalFiles;
+        node.sizeInBytes = totalBytes;
+    }
+
+    private sortTree(node: FileNode): void {
+        if (!node.children) {
+            return;
+        }
+
+        for (const child of node.children) {
+            this.sortTree(child);
         }
 
         node.children.sort((a, b) => {
@@ -129,19 +146,8 @@ export class FSService {
             if (aIsFolder !== bIsFolder) {
                 return aIsFolder ? -1 : 1;
             }
+            // Use localeCompare with numeric option for natural sorting (e.g., A2 before A10)
             return a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' });
         });
-        
-        let totalTokens = 0;
-        let totalFiles = 0;
-        let totalBytes = 0;
-        for (const child of node.children) {
-            totalTokens += child.tokenCount;
-            totalFiles += child.fileCount;
-            totalBytes += child.sizeInBytes;
-        }
-        node.tokenCount = totalTokens;
-        node.fileCount = totalFiles;
-        node.sizeInBytes = totalBytes;
     }
 }

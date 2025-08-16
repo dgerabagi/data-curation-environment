@@ -1,4 +1,4 @@
-/* Updated on: C19 (Adjust flex properties for panel relocation) */
+/* Updated on: C18 (Add styles for SelectedFilesView and sorting) */
 body {
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -44,11 +44,10 @@ body {
 
 .selected-files-panel {
     border-top: 1px solid var(--vscode-panel-border);
-    border-bottom: 1px solid var(--vscode-panel-border);
-    max-height: 33vh; /* Allow it to take up to a third of the view height */
+    max-height: 40vh;
     display: flex;
     flex-direction: column;
-    flex-shrink: 0; /* Prevent this panel from shrinking */
+    flex-shrink: 0;
 }
 
 .panel-header {
@@ -59,61 +58,116 @@ body {
     color: var(--vscode-sideBar-titleForeground);
     border-bottom: 1px solid var(--vscode-panel-border);
     flex-shrink: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.token-label {
+    font-weight: normal;
+    text-transform: none;
+    font-size: 12px;
+    color: var(--vscode-descriptionForeground);
+}
+
+.panel-toolbar {
+    padding: 4px 8px;
+    border-bottom: 1px solid var(--vscode-panel-border);
+    flex-shrink: 0;
+    button {
+        width: 100%;
+        padding: 2px;
+        font-size: 12px;
+        border: 1px solid var(--vscode-button-border, var(--vscode-focusBorder));
+        background-color: var(--vscode-button-secondaryBackground);
+        color: var(--vscode-button-secondaryForeground);
+        cursor: pointer;
+        &:hover {
+            background-color: var(--vscode-button-secondaryHoverBackground);
+        }
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
+}
+
+.selected-files-list-container {
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.selected-list-header {
+    display: flex;
+    font-size: 11px;
+    padding: 2px 8px;
+    gap: 8px;
+    border-bottom: 1px solid var(--vscode-panel-border);
+    position: sticky;
+    top: 0;
+    background-color: var(--vscode-sideBar-background);
+    z-index: 1;
+
+    > div {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        &:hover {
+            color: var(--vscode-list-hoverForeground);
+        }
+    }
+
+    .header-name { flex-grow: 1; }
+    .header-tokens { flex-shrink: 0; }
 }
 
 .selected-files-list {
     list-style: none;
     padding: 0;
     margin: 0;
-    overflow-y: auto;
-    flex-grow: 1;
 
     li {
         display: flex;
         align-items: center;
         padding: 2px 8px;
         font-size: 12px;
-        gap: 8px;
+        gap: 6px;
 
         &:hover {
             background-color: var(--vscode-list-hoverBackground);
         }
 
-        .list-number {
-            color: var(--vscode-descriptionForeground);
-            min-width: 20px;
-            text-align: right;
-        }
-
+        .file-icon { font-size: 16px; }
         .file-name {
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
             flex-grow: 1;
         }
-
         .file-tokens {
             color: var(--vscode-descriptionForeground);
             font-variant-numeric: tabular-nums;
+            min-width: 40px;
+            text-align: right;
         }
-
         .remove-button {
             background: none;
             border: none;
             color: var(--vscode-icon-foreground);
             cursor: pointer;
-            visibility: hidden; /* Hide by default */
+            visibility: hidden;
         }
     }
 
     li:hover .remove-button {
-        visibility: visible; /* Show on hover */
+        visibility: visible;
     }
 }
 
 
 .file-tree-container {
-    flex-grow: 1; /* This is the primary flexible element */
+    flex-grow: 1;
     overflow-y: auto;
     overflow-x: hidden;
     padding-right: 5px;
@@ -167,12 +221,10 @@ body {
         margin: 0;
         padding-left: 0;
     }
-
     ul.treenode-children {
-        padding-left: 20px;
+        padding-left: 15px; /* Indentation for nested items */
     }
 }
-
 
 .treenode-li {
     position: relative;
@@ -182,7 +234,6 @@ body {
     display: flex;
     align-items: center;
     cursor: pointer;
-    padding: 1px 4px;
     border-radius: 3px;
     min-height: 22px;
 }
@@ -199,6 +250,7 @@ body {
     align-items: center;
     justify-content: center;
     transition: transform 0.1s ease-in-out;
+    color: var(--vscode-icon-foreground);
 }
 
 .treenode-chevron.expanded {
@@ -210,6 +262,7 @@ body {
     display: flex;
     align-items: center;
     overflow: hidden;
+    padding: 0 4px;
 }
 
 
@@ -217,7 +270,6 @@ body {
     display: flex;
     align-items: center;
     width: 100%;
-    padding: 1px;
     gap: 6px;
 }
 
