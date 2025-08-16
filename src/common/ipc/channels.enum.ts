@@ -2,11 +2,11 @@ export enum ClientToServerChannel {
     RequestFlattenContext = "clientToServer.requestFlattenContext",
     RequestWorkspaceFiles = "clientToServer.requestWorkspaceFiles",
     RequestRefresh = "clientToServer.requestRefresh",
+    LogMessage = "clientToServer.logMessage", // For logging from webview
 }
 
 export enum ServerToClientChannel {
     SendWorkspaceFiles = "serverToClient.sendWorkspaceFiles",
-    // C18: Re-added to fix TS errors in commands.ts for saved selection set functionality
     ApplySelectionSet = "serverToClient.applySelectionSet",
     SendSelectionSets = "serverToClient.sendSelectionSets",
 }

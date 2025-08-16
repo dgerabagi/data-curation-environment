@@ -26,7 +26,8 @@ M7. artifacts
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 17 - checkboxes work! continue refinements
+Current Cycle 18 - Focus on cyclicly unsolved issues using hindsight from prior cycles
+Cycle 17 - checkboxes work! continue refinements
 Cycle 16 - checkboxes
 Cycle 15 - more progress! still cannot check a checkbox, token count adjustments, ignore node_modules, handle images differently
 Cycle 14 - Big progress! work through new feedback/observations
@@ -86,6 +87,132 @@ Phase 3. Diff Tool - Basically, winmerge but intergrated into a window within VS
 </M5. organized artifacts list>
 
 <M6. Cycles>
+<cycle 18>
+nice okay, this conversation seems to make the most progress.
+
+1. i like the selected items section at the bottom. i like how it is always visible. in its title, it says selected items, can we also say Tokens in the same header, right justified, in order to provide a label to the token counts represetned for the selected files below.
+
+2. we do not want images to get selected. currently (still) if i select a folder with images, the images are getting selected.
+
+3. we do not want to calculate 'token' sizes of images. applying our token count calculation to an image is not the appropriate medium to perform that calculation on, that calculation is made for text. instead, we want to display the filesize for the iamges, or nothing at all. images are not getting selected/used in our process. if a curator wants an image, they convert that image into a description of that image, because astronaut_shooting_another_astronaut_meme.jpg 'its all just text'.
+
+4. i -still- see the node_modules is being tallied up. i see a file count and a token count for it. this is something ive been requesting since the beginning. i have been capturing your attempts. please try new approaches to this problem.
+4.1. related to this is this observation, certain files, seemingly by random and not distinguished by filetype or file location, seem to not have the token counts displayed. the assumption is its being skipped. so the ability to skip over the tallying seems possible, its just you've yet to get it to function as intended.
+
+5. in the selected items, lets have a file icon column to display the file icons. lets allow sorting based on the name field, the icon field, and the token field for the selected items section.
+5.1 i should be able to make multiple seletions in the selected items menu in order to allow me to remove multiple at once.
+
+6. the collapse all button still does not work.
+
+7. i still do not see any logs in the 'output' for either my vs code where im coding the extension, nor in the vs code that is testing the extension in another vs code project window. is this where i should be expecting them?
+
+<previous cycle 17 summary of actions>
+
+
+Thank you for the clear feedback. The recurring `node_modules` issue is unacceptable and will be my top priority to fix permanently. I understand the frustration with the lack of a debugging mechanism, and I will implement a proper logging solution in this cycle. The UI layout change is also a straightforward improvement I will address.
+
+My plan is to deliver a more stable, performant, and debuggable extension.
+
+### Course of Action
+
+1.  **Documentation First (Logging Guide):**
+    *   I will create a new artifact, `A12. DCE - Logging and Debugging Guide.md`, to formally document how to access and interpret logs from the extension. This will provide a clear, reusable solution for future debugging.
+    *   I will update `A0. Master Artifact List.md` to include this new artifact.
+
+2.  **Implement a Robust Logging Solution:**
+    *   **Backend:** I will create a new `logger.service.ts` that utilizes VS Code's native `OutputChannel`. This will create a dedicated "Data Curation Environment" output pane in the VS Code "Output" tab, where all backend logs will be directed.
+    *   **Frontend-to-Backend Bridge:** I will add a new IPC channel (`LogMessage`) to allow the React frontend to send its logs to the backend `LoggerService`. This will centralize all extension-related logs in one place. I will also create a simple client-side utility to make sending these logs easy.
+    *   **Initial Logging:** I will add initial log statements to the file-scanning process in `fs.service.ts` so we can immediately verify that the system is working and see exactly what the file service is doing.
+
+3.  **Permanently Fix `node_modules` Exclusion (`fs.service.ts`):**
+    *   My previous attempts were not robust enough. I will correct the `vscode.workspace.findFiles` call to use a comprehensive exclusion glob in the correct `exclude` parameter.
+    *   The new pattern will be `'{**/node_modules/**,**/dist/**,**/out/**,**/.git/**}'`. This will explicitly and efficiently instruct VS Code to completely ignore these directories during the initial file discovery phase, resolving the performance bottleneck once and for all.
+
+4.  **Relocate "Selected Items" Panel (`view.tsx`, `view.scss`):**
+    *   In `src/client/views/context-chooser.view/view.tsx`, I will move the `SelectedFilesPanel` component to be rendered *after* the main file tree container but before the footer.
+    *   I will adjust the flexbox styles in `view.scss` to ensure the main file tree container grows to fill available space, while the "Selected Items" panel only grows as large as its content, with a set `max-height` and scrollbar to prevent it from pushing other elements off-screen. This will result in the desired UI behavior.
+
+### Files Updated This Cycle:
+*   `A0. Master Artifact List.md` (Updated)
+*   `A12. DCE - Logging and Debugging Guide.md` (New)
+*   `src/backend/services/logger.service.ts` (New)
+*   `src/client/utils/logger.ts` (New)
+*   `src/backend/services/services.ts` (Updated)
+*   `src/common/ipc/channels.enum.ts` (Updated)
+*   `src/common/ipc/channels.type.ts` (Updated)
+*   `src/client/views/context-chooser.view/on-message.ts` (Updated)
+*   `src/backend/services/fs.service.ts` (Updated)
+*   `src/client/views/context-chooser.view/view.tsx` (Updated)
+*   `src/client/views/context-chooser.view/view.scss` (Updated)
+
+***
+```xml
+<A0. Master Artifact List.md>
+
+</A0. Master Artifact List.md>
+```
+***
+```xml
+<A12. DCE - Logging and Debugging Guide.md>
+
+</A12. DCE - Logging and Debugging Guide.md>
+```
+***
+```xml
+<src/backend/services/logger.service.ts>
+
+</src/backend/services/logger.service.ts>
+```
+***
+```xml
+<src/client/utils/logger.ts>
+
+</src/client/utils/logger.ts>
+```
+***
+```xml
+<src/backend/services/services.ts>
+
+</src/backend/services/services.ts>
+```
+***
+```xml
+<src/common/ipc/channels.enum.ts>
+
+</src/common/ipc/channels.enum.ts>
+```
+***
+```xml
+<src/common/ipc/channels.type.ts>
+
+</src/common/ipc/channels.type.ts>
+```
+***
+```xml
+<src/client/views/context-chooser.view/on-message.ts>
+
+</src/client/views/context-chooser.view/on-message.ts>
+```
+***
+```xml
+<src/backend/services/fs.service.ts>
+
+</src/backend/services/fs.service.ts>
+```
+***
+```xml
+<src/client/views/context-chooser.view/view.tsx>
+
+</src/client/views/context-chooser.view/view.tsx>
+```
+***
+```xml
+<src/client/views/context-chooser.view/view.scss>
+
+</src/client/views/context-chooser.view/view.scss>```
+</previous cycle 17 summary of actions>
+</cycle 18>
+
 <cycle 17>
 nice! i can now check the boxes. however, im still seeing totals for the node_modules directory, this means we're still counting it up.
 

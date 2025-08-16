@@ -9,6 +9,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { formatLargeNumber, formatNumberWithCommas } from '@/common/utils/formatting';
 import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscClose } from 'react-icons/vsc';
 import { addRemovePathInSelectedFiles } from '@/client/components/file-tree/FileTree.utils';
+import { logger } from '@/client/utils/logger';
 
 const SelectedFilesPanel = ({ selectedFileNodes, onRemove }: { selectedFileNodes: FileNode[], onRemove: (path: string) => void }) => {
     if (selectedFileNodes.length === 0) {
@@ -44,15 +45,17 @@ const App = () => {
     const clientIpc = ClientPostMessageManager.getInstance();
 
     useEffect(() => {
+        logger.log("Initializing view and requesting workspace files.");
         clientIpc.sendToServer(ClientToServerChannel.RequestWorkspaceFiles, {});
 
         const handleFileResponse = ({ files: receivedFiles }: { files: FileNode[] }) => {
+            logger.log(`Received ${receivedFiles[0]?.fileCount || 0} files from backend.`);
             setFiles(receivedFiles);
         };
         clientIpc.onServerMessage(ServerToClientChannel.SendWorkspaceFiles, handleFileResponse);
 
-        // C18: Add listener to handle loading a saved selection set from the backend
         const handleApplySelectionSet = ({ paths }: { paths: string[] }) => {
+            logger.log(`Applying selection set with ${paths.length} paths.`);
             setSelectedFiles(paths);
         };
         clientIpc.onServerMessage(ServerToClientChannel.ApplySelectionSet, handleApplySelectionSet);
@@ -68,15 +71,18 @@ const App = () => {
     };
 
     const handleFlattenClick = () => {
+        logger.log(`Flatten Context button clicked with ${selectedFiles.length} paths.`);
         clientIpc.sendToServer(ClientToServerChannel.RequestFlattenContext, { selectedPaths: selectedFiles });
     };
 
     const handleRefresh = () => {
+        logger.log("Refresh button clicked.");
         setFiles([]); // Clear files to show loading state
         clientIpc.sendToServer(ClientToServerChannel.RequestWorkspaceFiles, {});
     };
 
     const handleCollapseAll = () => {
+        logger.log("Collapse All button clicked.");
         setCollapseTrigger(c => c + 1);
     };
 
@@ -135,7 +141,6 @@ const App = () => {
                     <button onClick={handleCollapseAll} title="Collapse Folders in View"><VscCollapseAll /></button>
                  </div>
             </div>
-            <SelectedFilesPanel selectedFileNodes={selectedFileNodes} onRemove={handleRemoveFromSelection} />
             <div className="file-tree-container">
                 {files.length > 0 ? (
                     files.map((rootNode, index) => (
@@ -153,6 +158,7 @@ const App = () => {
                     <div className="loading-message">Loading file tree...</div>
                 )}
             </div>
+            <SelectedFilesPanel selectedFileNodes={selectedFileNodes} onRemove={handleRemoveFromSelection} />
             <div className="view-footer">
                 <div className="summary-panel">
                     <span className='summary-item' title="Total selected files">

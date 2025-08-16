@@ -6,17 +6,34 @@ import * as vscode from "vscode";
 export function onMessage(serverIpc: ServerPostMessageManager) {
     const fsService = Services.fsService;
     const flattenerService = Services.flattenerService;
+    const loggerService = Services.loggerService;
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestWorkspaceFiles, () =>
         fsService.handleWorkspaceFilesRequest(serverIpc)
     );
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestFlattenContext, (data) => {
-        console.log("Flattening context for paths:", data.selectedPaths);
         flattenerService.flatten(data.selectedPaths);
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestRefresh, () => {
         fsService.handleWorkspaceFilesRequest(serverIpc);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.LogMessage, (data) => {
+        const { level, message } = data;
+        const logMessage = `[WebView] ${message}`;
+        switch (level) {
+            case 'warn':
+                loggerService.warn(logMessage);
+                break;
+            case 'error':
+                loggerService.error(logMessage);
+                break;
+            case 'info':
+            default:
+                loggerService.log(logMessage);
+                break;
+        }
     });
 }

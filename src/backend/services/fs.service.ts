@@ -4,8 +4,8 @@ import * as fs from "fs/promises";
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { ServerToClientChannel } from "@/common/ipc/channels.enum";
 import { FileNode } from "@/common/types/file-node";
+import { Services } from "./services";
 
-// Images are excluded from the tree view entirely as per user feedback.
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 
 export class FSService {
@@ -21,47 +21,46 @@ export class FSService {
 
             const isImage = IMAGE_EXTENSIONS.has(extension);
             if (isImage) {
-                // As per C18 feedback, images are excluded, but we'll handle them gracefully if they slip through.
                 return { tokenCount: 0, sizeInBytes: stats.size, isImage: true };
             }
 
-            // Ignore very large files to prevent performance issues
-            if (stats.size > 2_000_000) { 
+            if (stats.size > 5_000_000) { // Ignore files larger than 5MB
+                Services.loggerService.warn(`Ignoring large file: ${filePath} (${stats.size} bytes)`);
                 return { tokenCount: 0, sizeInBytes: stats.size, isImage: false };
             }
             
             const content = await fs.readFile(filePath, 'utf-8');
-            // Simple approximation: 1 token ~ 4 characters
             const tokenCount = Math.ceil(content.length / 4);
             return { tokenCount, sizeInBytes: stats.size, isImage: false };
 
         } catch (error) {
-            // Could be a binary file or permissions issue
-            console.warn(`Could not get stats for ${filePath}: ${error}`);
+            Services.loggerService.warn(`Could not get stats for ${filePath}: ${error}`);
             return { tokenCount: 0, sizeInBytes: 0, isImage: false };
         }
     }
 
     public async handleWorkspaceFilesRequest(serverIpc: ServerPostMessageManager) {
+        Services.loggerService.log("Received request for workspace files.");
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (!workspaceFolders || workspaceFolders.length === 0) {
+            Services.loggerService.warn("No workspace folder open. Sending empty file list.");
             serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: [] });
             return;
         }
         
         const rootUri = workspaceFolders[0].uri;
-        if (!rootUri) {
-            serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: [] });
-            return;
-        }
         const rootPath = rootUri.fsPath;
         
-        // CRITICAL FIX (C18): Robust exclusion for node_modules and all image types.
-        const excludePattern = '{**/node_modules/**,**/*.png,**/*.jpg,**/*.jpeg,**/*.gif,**/*.svg,**/*.ico,**/*.webp}';
+        // CRITICAL FIX (C19): Definitive exclusion for common large/unwanted directories.
+        const excludePattern = '{**/node_modules/**,**/dist/**,**/out/**,**/.git/**}';
+        Services.loggerService.log(`Scanning for files with exclusion pattern: ${excludePattern}`);
+        
         const files = await vscode.workspace.findFiles("**/*", excludePattern);
+        Services.loggerService.log(`Found ${files.length} files after exclusion.`);
         
         const fileTree = await this.createFileTree(rootPath, files);
 
+        Services.loggerService.log("Sending file tree to client.");
         serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: [fileTree] });
     }
 
@@ -72,7 +71,7 @@ export class FSService {
             absolutePath: rootPath,
             children: [],
             ...rootStats,
-            fileCount: 0, // Will be calculated
+            fileCount: 0,
         };
 
         const allNodes = new Map<string, FileNode>();
@@ -85,13 +84,12 @@ export class FSService {
             let parentNode = rootNode;
 
             for (const part of parts) {
-                const oldPath = currentPath;
                 currentPath = path.join(currentPath, part);
                 let childNode = allNodes.get(currentPath);
 
                 if (!childNode) {
                     const stats = await this.getFileStats(currentPath);
-                    const isDirectory = stats.sizeInBytes === 0 && !stats.isImage; // Heuristic for directories
+                    const isDirectory = stats.sizeInBytes === 0 && !stats.isImage && (await fs.stat(currentPath)).isDirectory();
                     childNode = {
                         name: part,
                         absolutePath: currentPath,
@@ -112,33 +110,28 @@ export class FSService {
         }
         
         this.processNode(rootNode);
-
         return rootNode;
     }
 
     private processNode(node: FileNode): void {
-        if (!node.children) { // It's a file
+        if (!node.children) {
             node.fileCount = 1;
             return;
         }
 
-        // Recursively process children first
         for (const child of node.children) {
             this.processNode(child);
         }
 
-        // Sort children: folders first, then files, then alphabetically
         node.children.sort((a, b) => {
             const aIsFolder = !!a.children;
             const bIsFolder = !!b.children;
             if (aIsFolder !== bIsFolder) {
                 return aIsFolder ? -1 : 1;
             }
-            // Use localeCompare with numeric option for natural sorting (e.g., A1, A2, A10)
             return a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' });
         });
         
-        // Calculate totals for the current node
         let totalTokens = 0;
         let totalFiles = 0;
         let totalBytes = 0;
