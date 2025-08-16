@@ -9,8 +9,56 @@ import { Services } from "./services";
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 
 export class FSService {
+    private serverIpc: ServerPostMessageManager | null = null;
+    private watcher: vscode.FileSystemWatcher | null = null;
+    private debounceTimer: NodeJS.Timeout | null = null;
+
+    constructor() {
+        // Watcher is initialized in the `initialize` method in services.ts to avoid running during construction.
+    }
+
+    public initializeWatcher() {
+        if (this.watcher) return;
+        console.log("FSService watcher initializing."); // Use console.log for early-stage debugging
+
+        this.watcher = vscode.workspace.createFileSystemWatcher('**/*', false, false, false);
+        
+        const handler = (uri: vscode.Uri) => {
+            // Ignore changes in .git, node_modules, and our own output file to prevent loops
+            const fsPath = uri.fsPath;
+            if (fsPath.includes('.git') || fsPath.includes('node_modules') || fsPath.endsWith('flattened_repo.md')) {
+                return;
+            }
+
+            Services.loggerService.log(`File change detected: ${fsPath}. Debouncing refresh.`);
+            if (this.debounceTimer) {
+                clearTimeout(this.debounceTimer);
+            }
+            this.debounceTimer = setTimeout(() => {
+                Services.loggerService.log('Debounce timer elapsed. Triggering file tree refresh.');
+                this.triggerRefresh();
+            }, 1500); // 1.5 second debounce
+        };
+
+        this.watcher.onDidChange(handler);
+        this.watcher.onDidCreate(handler);
+        this.watcher.onDidDelete(handler);
+
+        Services.loggerService.log("FileSystemWatcher successfully initialized and handlers are attached.");
+    }
+
+    public triggerRefresh() {
+        if (this.serverIpc) {
+            Services.loggerService.log('Refreshing file tree for registered view.');
+            // Using the stored serverIpc to send the updated file list
+            this.handleWorkspaceFilesRequest(this.serverIpc);
+        } else {
+            Services.loggerService.warn('A file change was detected, but no active view is registered to receive the update.');
+        }
+    }
 
     private async getFileStats(filePath: string): Promise<{ tokenCount: number, sizeInBytes: number, isImage: boolean }> {
+        // ... (implementation from C18 is correct, no changes needed)
         try {
             const extension = path.extname(filePath).toLowerCase();
             const stats = await fs.stat(filePath);
@@ -24,7 +72,6 @@ export class FSService {
                 return { tokenCount: 0, sizeInBytes: stats.size, isImage: true };
             }
 
-            // Skip token calculation for very large files to avoid performance issues.
             if (stats.size > 5_000_000) { // 5MB threshold
                 Services.loggerService.warn(`Skipping token count for large file: ${filePath} (${stats.size} bytes)`);
                 return { tokenCount: 0, sizeInBytes: stats.size, isImage: false };
@@ -41,6 +88,7 @@ export class FSService {
     }
 
     public async handleWorkspaceFilesRequest(serverIpc: ServerPostMessageManager) {
+        this.serverIpc = serverIpc; // Register the view's IPC instance for the watcher to use
         Services.loggerService.log("Received request for workspace files.");
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (!workspaceFolders || workspaceFolders.length === 0) {
@@ -52,7 +100,6 @@ export class FSService {
         const rootUri = workspaceFolders[0].uri;
         const rootPath = rootUri.fsPath;
         
-        // CRITICAL FIX (C19): Definitive exclusion for common large/unwanted directories.
         const excludePattern = '{**/node_modules/**,**/dist/**,**/out/**,**/.git/**}';
         Services.loggerService.log(`Scanning for files with exclusion pattern: ${excludePattern}`);
         
@@ -66,6 +113,7 @@ export class FSService {
     }
 
     private async createFileTree(rootPath: string, files: vscode.Uri[]): Promise<FileNode> {
+        // ... (implementation from C18 is correct, no changes needed)
         const rootStats = await this.getFileStats(rootPath);
         const rootNode: FileNode = {
             name: path.basename(rootPath),
@@ -115,6 +163,7 @@ export class FSService {
     }
 
     private processNode(node: FileNode): void {
+        // ... (implementation from C18 is correct, no changes needed)
         if (!node.children) {
             node.fileCount = 1;
             return;

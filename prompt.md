@@ -87,7 +87,7 @@ Phase 3. Diff Tool - Basically, winmerge but intergrated into a window within VS
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C19 (Add A12 for Logging and Debugging Guide)
+# Updated on: C19 (Add A13 for Right-Click Context Menu Plan)
 
 ## 1. Purpose
 
@@ -153,6 +153,10 @@ Phase 3. Diff Tool - Basically, winmerge but intergrated into a window within VS
 - **Description:** Explains how to access and use the integrated logging solution for debugging the extension's backend and frontend components.
 - **Tags:** logging, debugging, troubleshooting, development, output channel
 
+### A13. DCE - Phase 1 - Right-Click Context Menu
+- **Description:** A plan for implementing standard file explorer context menu actions (e.g., Rename, Delete, Copy Path) in the custom file tree.
+- **Tags:** feature plan, context menu, right-click, file operations, ux, phase 1
+
 ## II. Standalone Utilities & Guides
 
 ### A189. Number Formatting Reference Guide
@@ -161,6 +165,181 @@ Phase 3. Diff Tool - Basically, winmerge but intergrated into a window within VS
 </M5. organized artifacts list>
 
 <M6. Cycles>
+
+<cycle 19>
+1. it appears that there is no  **`Data Curation Environment`** in the drop-down list of either VS Code environment involved in this project. therefore, i cannot see any logs. here are the ones that i do see: (provided below).
+<VS Code with Extension Code>
+    CSS Language Server
+    Gemini Code Assist
+    Gemini Code Assist - Citations
+    Gemini Code Assist Agent
+    Git
+    GitHub
+    GitHub Authentication
+    GitHub Copilot
+    GitHub Copilot Chat
+    GitHub Copilot Log (Code References)
+    JSON Language Server
+   Markdown
+    TypeScript
+    Extension Host
+   Main
+    Pty Host
+    Remote Tunnel Service
+    Settings Sync
+    Shared
+    Tasks
+    Terminal
+    Text Model Changes Reason
+    Window
+</VS Code with Extension Code>
+<VS Code with Extension>
+    Gemini Code Assist
+    Gemini Code Assist - Citations
+    Gemini Code Assist Agent
+    Git
+    GitHub
+    GitHub Authentication
+    GitHub Copilot
+    GitHub Copilot Chat
+    GitHub Copilot Log (Code References)
+    JSON Language Server
+    Markdown
+    Markdown Language Server
+    Prisma Language Server
+    Extension Host
+    Main
+    Pty Host
+    Remote Tunnel Service
+    Settings Sync
+    Shared
+    Tasks
+    Terminal
+    Text Model Changes Reason
+    Window
+</VS Code with Extension>
+
+2. the long loading is only acceptable if it only happens initially. currently, when i switch from the extension tab back to it, it once again has to do: `Loading file tree...`, we need to make this intelligent please, a. it shouldnt have to load again after its already loaded. b. when its altered it needs to update because when theres no flattened_repo.md and i click `Flatten Context` and the flattened_repo.md gets created, i dont see it until i 'reload' the entire file tree again by switching tabs or using the refresh button. this was previously reported and so still is not working as intended.
+
+3. currently, when i right-click on a file, i see `Cut`, `Copy`, and `Paste`. I just tried a `Copy` and `Paste` on a non-essential project file, however due to the current blocker of the poor refresh/cache functionality, it doesn't make sense to test this when that's still ongoing. for now, lets create an artifact to capture this, but we will want to replicate the following right-click features: `Reveal in File Explorer`, `Delete`, `Rename`, `Copy Path`, `Copy Relative Path`, 
+
+
+<previous cycle 18 summary of actions>
+
+Thank you for the detailed feedback from Cycle 18. I understand the frustration with the recurring `node_modules` and logging issues. My top priority this cycle is to implement a definitive fix for the `node_modules` exclusion and provide a robust, clear logging mechanism to aid all future debugging efforts. I will also address the critical UI bugs and implement the requested high-value UX improvements.
+
+My plan is to deliver a more stable, functional, and debuggable extension.
+
+### Course of Action
+
+1.  **Implement a Robust Logging Solution:** To resolve the "no logs" issue once and for all, I will create a centralized logging system.
+    *   **Documentation:** I will create a new artifact, `A12. DCE - Logging and Debugging Guide.md`, to formally document how to access logs via the VS Code "Output" panel. I will also update `A0. Master Artifact List.md`.
+    *   **Backend:** I will create a new `logger.service.ts` that utilizes VS Code's native `OutputChannel` to create a dedicated "Data Curation Environment" output pane.
+    *   **Frontend-to-Backend Bridge:** I will create `src/client/utils/logger.ts` and add a new `LogMessage` IPC channel. This will allow the React frontend to send its logs to the backend `LoggerService`, centralizing all extension-related logs in one easily accessible place.
+    *   **Initial Logging:** I will add log statements to key processes (`fs.service.ts`, `view.tsx`) to immediately confirm the system is working.
+
+2.  **Permanently Fix `node_modules` Exclusion:** My previous attempts were insufficient.
+    *   In `src/backend/services/fs.service.ts`, I will update the `vscode.workspace.findFiles` call to use a comprehensive exclusion glob pattern: `'{**/node_modules/**,**/dist/**,**/out/**,**/.git/**}'`. This explicitly instructs VS Code to completely ignore these directories during file discovery, which will fix both the incorrect token counts and the performance lag.
+
+3.  **Address Critical UI Bugs:**
+    *   **Collapse All:** The "Collapse All" button was not working due to a faulty `useEffect` dependency. I will correct this in `src/client/components/tree-view/TreeView.tsx` by removing the unnecessary dependency, ensuring the collapse is only triggered by the button click.
+    *   **Image Handling:** I will refine the logic in `src/client/views/context-chooser.view/view.tsx`. The summary calculation will be updated to correctly count images for the "Total Files" metric but exclude them from the "Total Tokens" calculation and from the "Selected Items" list, as they do not contribute to the text context.
+
+4.  **Implement UI/UX Refinements:**
+    *   **Selected Items Header:** I will add a right-aligned "Tokens" label to the header of the "Selected Items" panel in `view.tsx`.
+    *   **Panel Relocation & Layout:** I will move the "Selected Items" panel so it is always visible at the bottom of the view, just above the footer. I will adjust the flexbox styles in `view.scss` to make the main file tree container scrollable while the other panels remain fixed.
+    *   **Refresh Button:** I will add a "Refresh" button to the header toolbar in `view.tsx` to allow manual reloading of the file tree.
+
+### Files Updated This Cycle:
+*   `A0. Master Artifact List.md` (Updated)
+*   `A12. DCE - Logging and Debugging Guide.md` (New)
+*   `src/backend/services/logger.service.ts` (New)
+*   `src/client/utils/logger.ts` (New)
+*   `src/backend/services/services.ts` (Updated)
+*   `src/common/ipc/channels.enum.ts` (Updated)
+*   `src/common/ipc/channels.type.ts` (Updated)
+*   `src/client/views/context-chooser.view/on-message.ts` (Updated)
+*   `src/backend/services/fs.service.ts` (Updated)
+*   `src/client/components/tree-view/TreeView.tsx` (Updated)
+*   `src/client/views/context-chooser.view/view.tsx` (Updated)
+*   `src/client/views/context-chooser.view/view.scss` (Updated)
+
+***
+```xml
+<A0. Master Artifact List.md>
+
+</A0. Master Artifact List.md>
+```
+***
+``````xml
+<A12. DCE - Logging and Debugging Guide.md>
+
+</A12. DCE - Logging and Debugging Guide.md>
+```
+***
+```xml
+<src/backend/services/logger.service.ts>
+
+</src/backend/services/logger.service.ts>
+```***
+```xml
+<src/client/utils/logger.ts>
+
+</src/client/utils/logger.ts>
+```
+***
+```xml
+<src/backend/services/services.ts>
+
+</src/backend/services/services.ts>
+```
+***
+```xml
+<src/common/ipc/channels.enum.ts>
+
+</src/common/ipc/channels.enum.ts>
+```
+***
+```xml
+<src/common/ipc/channels.type.ts>
+
+</src/common/ipc/channels.type.ts>
+```
+***
+```xml
+<src/client/views/context-chooser.view/on-message.ts>
+
+</src/client/views/context-chooser.view/on-message.ts>
+```
+***
+```xml
+<src/backend/services/fs.service.ts>
+
+</src/backend/services/fs.service.ts>
+```
+***
+```xml
+<src/client/components/tree-view/TreeView.tsx>
+
+</src/client/components/tree-view/TreeView.tsx>
+```
+***
+```xml
+<src/client/views/context-chooser.view/view.tsx>
+
+</src/client/views/context-chooser.view/view.tsx>
+```
+***
+```xml
+<src/client/views/context-chooser.view/view.scss>
+
+</src/client/views/context-chooser.view/view.scss>
+```
+
+</previous cycle 18 summary of actions>
+</cycle 19>
+
+
 <cycle 18>
 nice okay, this conversation seems to make the most progress.
 
@@ -2788,12 +2967,12 @@ asdf
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-16T14:50:20.951Z
+  Date Generated: 2025-08-16T22:14:57.452Z
   ---
   Total Files: 150
-  Total Lines: 11985
-  Total Characters: 439257
-  Approx. Tokens: 109872
+  Total Lines: 12075
+  Total Characters: 443253
+  Approx. Tokens: 110872
 -->
 
 <!-- Top 10 Files by Token Count -->
@@ -2804,7 +2983,7 @@ asdf
 5. The-Creator-AI-main\src\backend\services\fs.service.ts (2495 tokens)
 6. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts (2424 tokens)
 7. The-Creator-AI-main\src\backend\services\llm.service.ts (2156 tokens)
-8. src\client\views\context-chooser.view\view.tsx (1949 tokens)
+8. src\client\views\context-chooser.view\view.tsx (1975 tokens)
 9. The-Creator-AI-main\tailwind.config.js (1704 tokens)
 10. src\backend\services\flattener.service.ts (1689 tokens)
 
@@ -2819,7 +2998,7 @@ asdf
 8. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 38 - Chars: 3311 - Tokens: 828
 9. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 47 - Chars: 5207 - Tokens: 1302
 10. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 73 - Chars: 5105 - Tokens: 1277
-11. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 43 - Chars: 3071 - Tokens: 768
+11. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 53 - Chars: 3874 - Tokens: 969
 12. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
 13. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 31 - Chars: 4278 - Tokens: 1070
 14. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
@@ -2832,21 +3011,21 @@ asdf
 21. src\backend\commands\commands.ts - Lines: 73 - Chars: 3123 - Tokens: 781
 22. src\backend\commands\register-commands.ts - Lines: 9 - Chars: 331 - Tokens: 83
 23. src\backend\services\flattener.service.ts - Lines: 169 - Chars: 6754 - Tokens: 1689
-24. src\backend\services\fs.service.ts - Lines: 147 - Chars: 5958 - Tokens: 1490
+24. src\backend\services\fs.service.ts - Lines: 148 - Chars: 6061 - Tokens: 1516
 25. src\backend\services\logger.service.ts - Lines: 34 - Chars: 1019 - Tokens: 255
 26. src\backend\services\selection.service.ts - Lines: 39 - Chars: 1300 - Tokens: 325
 27. src\backend\services\services.ts - Lines: 19 - Chars: 658 - Tokens: 165
 28. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
 29. src\client\components\file-tree\FileTree.tsx - Lines: 133 - Chars: 4652 - Tokens: 1163
-30. src\client\components\file-tree\FileTree.utils.ts - Lines: 96 - Chars: 3630 - Tokens: 908
-31. src\client\components\SelectedFilesView.tsx - Lines: 48 - Chars: 2038 - Tokens: 510
+30. src\client\components\file-tree\FileTree.utils.ts - Lines: 101 - Chars: 3541 - Tokens: 886
+31. src\client\components\SelectedFilesView.tsx - Lines: 118 - Chars: 5070 - Tokens: 1268
 32. src\client\components\tree-view\TreeView.tsx - Lines: 90 - Chars: 3402 - Tokens: 851
 33. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 34. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
 35. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 36. src\client\views\context-chooser.view\on-message.ts - Lines: 39 - Chars: 1440 - Tokens: 360
-37. src\client\views\context-chooser.view\view.scss - Lines: 266 - Chars: 5773 - Tokens: 1444
-38. src\client\views\context-chooser.view\view.tsx - Lines: 182 - Chars: 7794 - Tokens: 1949
+37. src\client\views\context-chooser.view\view.scss - Lines: 267 - Chars: 5817 - Tokens: 1455
+38. src\client\views\context-chooser.view\view.tsx - Lines: 185 - Chars: 7897 - Tokens: 1975
 39. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
 40. src\common\ipc\channels.enum.ts - Lines: 12 - Chars: 533 - Tokens: 134
 41. src\common\ipc\channels.type.ts - Lines: 14 - Chars: 856 - Tokens: 214
@@ -4765,6 +4944,7 @@ This document serves as a living record of persistent or complex bugs that have 
 # Artifact A12: DCE - Logging and Debugging Guide
 # Date Created: Cycle 19
 # Author: AI Model
+# Updated on: C18 (Add explicit instructions and visuals for accessing the Output Channel.)
 
 - **Key/Value for A0:**
 - **Description:** Explains how to access and use the integrated logging solution for debugging the extension's backend and frontend components.
@@ -4776,17 +4956,31 @@ This document provides instructions on how to access and use the logging feature
 
 ## 2. The Output Channel
 
-The DCE extension centralizes all its logs—from both the backend (Node.js) and the frontend (React webview)—into a dedicated **Output Channel** within VS Code.
+The DCE extension centralizes all its logs—from both the backend (Node.js) and the frontend (React webview)—into a dedicated **Output Channel** within VS Code. This is the primary place to look for debugging information.
 
 ### How to Access the Logs
 
-1.  **Open the Output Panel:** Use the command palette (`Ctrl+Shift+P` or `Cmd+Shift+P`) and search for **`View: Toggle Output`**, or use the shortcut `Ctrl+Shift+U`.
+1.  **Open the Panel:** At the bottom of your VS Code window, ensure the panel is visible. You can toggle it with the command **`View: Toggle Panel`** (`Ctrl+J` or `Cmd+J`).
 
-2.  **Select the DCE Channel:** In the top-right corner of the Output panel, there is a dropdown menu. Click it and select **`Data Curation Environment`** from the list.
+2.  **Navigate to the "OUTPUT" Tab:** In the panel's toolbar, click on the **"OUTPUT"** tab. It is usually grouped with "PROBLEMS", "DEBUG CONSOLE", and "TERMINAL".
 
-    ![VS Code Output Panel Dropdown](https://i.imgur.com/your-image-url.png) <!-- Placeholder for a helpful image -->
+3.  **Select the DCE Channel:** In the top-right corner of the Output panel, there is a dropdown menu that shows the currently active channel (it might default to "Tasks" or "Git"). Click this dropdown and select **`Data Curation Environment`** from the list.
 
-3.  **View Logs:** The panel will now display all log messages generated by the extension. New messages will appear in real-time as you interact with the extension.
+    *If you followed these steps correctly, you will see a view similar to this:*
+    ```
+    -----------------------------------------------------------------------------------
+    | PROBLEMS    OUTPUT    DEBUG CONSOLE    TERMINAL                                 |
+    |---------------------------------------------------------------------------------|
+    |                                                 [Tasks v] [Clear Output Icon]   |
+    |                                                                                 |
+    |  [INFO] [2:30:00 PM] Services initialized.                                      |
+    |  [INFO] [2:30:01 PM] Received request for workspace files.                      |
+    |  [INFO] [2:30:01 PM] Scanning for files with exclusion pattern: ...             |
+    |  ...                                                                            |
+    -----------------------------------------------------------------------------------
+    ```
+
+4.  **View Logs:** The panel will now display all log messages generated by the extension. New messages will appear in real-time as you interact with the extension.
 
 ## 3. What is Logged?
 
@@ -4794,17 +4988,12 @@ The logging service is designed to provide insight into key operations:
 
 *   **Backend Initialization:** Messages indicating that services are starting.
 *   **File System Scans:**
-    *   A log message appears when the `FSService` begins scanning the workspace.
+    *   A log message appears when the `FSService` begins scanning the workspace, including the exact exclusion pattern being used.
     *   A confirmation message appears when the scan is complete, including the number of files found. This is useful for diagnosing performance issues related to file discovery (e.g., confirming that `node_modules` is being ignored).
+    *   Warnings for any large files that are skipped during token calculation.
 *   **Flattening Process:** Logs are generated when the "Flatten Context" process starts and when it completes successfully.
 *   **Errors:** Any caught exceptions or errors on both the backend and frontend are logged with an `[ERROR]` prefix, making them easy to spot.
-*   **Frontend Actions:** Key user interactions in the UI can be logged to trace application flow.
-
-## 4. Technical Implementation
-
-*   **Backend (`logger.service.ts`):** A backend service creates and manages the `vscode.OutputChannel`. It exposes simple methods like `log()`, `warn()`, and `error()`.
-*   **Frontend (`logger.ts`):** A lightweight utility on the client-side provides the same `log()`, `warn()`, and `error()` methods.
-*   **IPC Bridge:** When a log function is called in the frontend, it sends an IPC message (`ClientToServerChannel.LogMessage`) to the backend. The backend's message handler then forwards this message to the `LoggerService`, which writes it to the central Output Channel. This ensures all logs are collected in one place.
+*   **Frontend Actions:** Key user interactions in the UI (button clicks, etc.) are logged with a `[WebView]` prefix to trace application flow.
 </file>
 
 <file path="src/Artifacts/A189. Number Formatting Reference Guide.md">
@@ -6922,8 +7111,9 @@ export class FSService {
                 return { tokenCount: 0, sizeInBytes: stats.size, isImage: true };
             }
 
-            if (stats.size > 5_000_000) { // Ignore files larger than 5MB
-                Services.loggerService.warn(`Ignoring large file: ${filePath} (${stats.size} bytes)`);
+            // Skip token calculation for very large files to avoid performance issues.
+            if (stats.size > 5_000_000) { // 5MB threshold
+                Services.loggerService.warn(`Skipping token count for large file: ${filePath} (${stats.size} bytes)`);
                 return { tokenCount: 0, sizeInBytes: stats.size, isImage: false };
             }
             
@@ -6931,8 +7121,8 @@ export class FSService {
             const tokenCount = Math.ceil(content.length / 4);
             return { tokenCount, sizeInBytes: stats.size, isImage: false };
 
-        } catch (error) {
-            Services.loggerService.warn(`Could not get stats for ${filePath}: ${error}`);
+        } catch (error: any) {
+            Services.loggerService.warn(`Could not get stats for ${filePath}: ${error.message}`);
             return { tokenCount: 0, sizeInBytes: 0, isImage: false };
         }
     }
@@ -7362,7 +7552,6 @@ export const addRemovePathInSelectedFiles = (
 
     let newSelectedFiles = [...selectedFiles];
 
-    // Check if the node is directly selected or selected via an ancestor
     const isDirectlySelected = newSelectedFiles.includes(path);
     const selectedAncestor = newSelectedFiles.find(ancestor => {
         const normalizedPath = path.replace(/\\/g, '/');
@@ -7373,86 +7562,162 @@ export const addRemovePathInSelectedFiles = (
     const isEffectivelySelected = isDirectlySelected || !!selectedAncestor;
 
     if (isEffectivelySelected) {
-        // --- UNCHECK LOGIC ---
         if (selectedAncestor) {
-            // A child of an already checked folder is being unchecked.
-            // 1. Remove the ancestor.
             newSelectedFiles = newSelectedFiles.filter(p => p !== selectedAncestor);
             const ancestorNode = getFileNodeByPath(fileTree, selectedAncestor);
             if (ancestorNode && ancestorNode.children) {
-                // 2. Add all children of the ancestor EXCEPT the one that was just unchecked.
                 for (const child of ancestorNode.children) {
-                    // Don't re-add the path that was clicked.
                     if (child.absolutePath !== path) {
                          newSelectedFiles.push(child.absolutePath);
                     }
                 }
             }
         } else {
-            // A parent or a file that was checked directly is being unchecked.
-            // Remove it and all its descendants.
             const descendantPaths = getAllDescendantPaths(node);
             newSelectedFiles = newSelectedFiles.filter(p => p !== path && !descendantPaths.includes(p));
         }
     } else {
-        // --- CHECK LOGIC ---
-        // 1. Remove any descendants that might already be individually selected,
-        // as the new parent selection will cover them.
         const descendantPaths = getAllDescendantPaths(node);
         newSelectedFiles = newSelectedFiles.filter(p => !descendantPaths.includes(p));
-        
-        // 2. Add the new path.
         newSelectedFiles.push(path);
     }
   
-  return [...new Set(newSelectedFiles)]; // Use Set to remove any duplicates.
+  return [...new Set(newSelectedFiles)];
+};
+
+export const removePathsFromSelected = (
+    pathsToRemove: string[],
+    selectedFiles: string[],
+    fileTree: FileNode[]
+): string[] => {
+    let newSelectedFiles = [...selectedFiles];
+    for (const path of pathsToRemove) {
+        // This reuses the same logic as unchecking, which is complex.
+        // A simpler approach is to just remove the path and its descendants.
+        const node = getFileNodeByPath(fileTree, path);
+        if (!node) continue;
+
+        const descendantPaths = getAllDescendantPaths(node);
+        newSelectedFiles = newSelectedFiles.filter(p => p !== path && !descendantPaths.includes(p));
+    }
+    return newSelectedFiles;
 };
 </file>
 
 <file path="src/client/components/SelectedFilesView.tsx">
 import * as React from 'react';
+import { useState, useMemo } from 'react';
 import { FileNode } from '@/common/types/file-node';
-import { VscClose } from 'react-icons/vsc';
+import { VscClose, VscChevronUp, VscChevronDown, VscSymbolFile, VscSymbolNumeric } from 'react-icons/vsc';
 import { formatLargeNumber } from '@/common/utils/formatting';
-import * as path from 'path';
+import Checkbox from './Checkbox';
+import { SiReact, SiSass, SiTypescript, SiJavascript } from 'react-icons/si';
+import { VscFile, VscJson, VscMarkdown } from 'react-icons/vsc';
+
+type SortableColumn = 'name' | 'tokenCount';
+type SortDirection = 'asc' | 'desc';
+
+const getFileIcon = (fileName: string) => {
+    const extension = fileName.split('.').pop()?.toLowerCase();
+    switch (extension) {
+        case 'ts': return <SiTypescript color="#3178C6" />;
+        case 'tsx': return <SiReact color="#61DAFB" />;
+        case 'js': return <SiJavascript color="#F7DF1E" />;
+        case 'json': return <VscJson color="#F7DF1E" />;
+        case 'md': return <VscMarkdown />;
+        case 'scss': case 'css': return <SiSass color="#CF649A"/>;
+        default: return <VscFile />;
+    }
+};
 
 interface SelectedFilesViewProps {
-    files: FileNode[];
-    onRemoveFile: (filePath: string) => void;
+    selectedFileNodes: FileNode[];
+    onRemove: (pathsToRemove: string[]) => void;
 }
 
-const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ files, onRemoveFile }) => {
-    if (files.length === 0) {
-        return null;
-    }
+const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes, onRemove }) => {
+    const [sortColumn, setSortColumn] = useState<SortableColumn>('tokenCount');
+    const [sortDirection, setSortDirection] = useState<SortDirection>('desc');
+    const [itemsToRemove, setItemsToRemove] = useState<Set<string>>(new Set());
 
-    const workspaceFolders = (window as any).vscode.workspace.workspaceFolders;
-    const rootPath = workspaceFolders && workspaceFolders.length > 0 ? workspaceFolders[0].uri.fsPath : '';
+    const sortedFiles = useMemo(() => {
+        return [...selectedFileNodes].sort((a, b) => {
+            const dir = sortDirection === 'asc' ? 1 : -1;
+            if (sortColumn === 'name') {
+                return a.name.localeCompare(b.name) * dir;
+            }
+            return (a.tokenCount - b.tokenCount) * dir;
+        });
+    }, [selectedFileNodes, sortColumn, sortDirection]);
+
+    const handleSort = (column: SortableColumn) => {
+        if (column === sortColumn) {
+            setSortDirection(prev => prev === 'asc' ? 'desc' : 'asc');
+        } else {
+            setSortColumn(column);
+            setSortDirection('desc');
+        }
+    };
+
+    const handleToggleRemove = (path: string, checked: boolean) => {
+        setItemsToRemove(prev => {
+            const newSet = new Set(prev);
+            if (checked) {
+                newSet.add(path);
+            } else {
+                newSet.delete(path);
+            }
+            return newSet;
+        });
+    };
+
+    const handleRemoveSelected = () => {
+        onRemove(Array.from(itemsToRemove));
+        setItemsToRemove(new Set());
+    };
+    
+    const SortIndicator = ({ column }: { column: SortableColumn }) => {
+        if (sortColumn !== column) return null;
+        return sortDirection === 'asc' ? <VscChevronUp /> : <VscChevronDown />;
+    };
 
     return (
-        <div className="selected-files-view">
-            <div className="selected-files-header">
-                {files.length} Files Selected
+        <div className="selected-files-panel">
+            <div className="panel-header">
+                <span>Selected Items</span>
+                <span className="token-label">Tokens</span>
             </div>
-            <ol>
-                {files.slice(0, 15).map((file, index) => {
-                    const relativePath = rootPath ? path.relative(rootPath, file.absolutePath) : file.absolutePath;
-                    const dirname = path.dirname(relativePath);
-                    return (
-                        <li key={file.absolutePath} title={relativePath}>
-                            <span className="file-rank">{index + 1}.</span>
-                            <div className="file-info">
-                                <span>{file.name}</span>
-                                <span className="file-path"> — {dirname}</span>
-                            </div>
-                            <span className="file-token-count">{formatLargeNumber(file.tokenCount, 1)}</span>
-                            <button className="remove-button" title="Remove from selection" onClick={() => onRemoveFile(file.absolutePath)}>
+            <div className="panel-toolbar">
+                <button onClick={handleRemoveSelected} disabled={itemsToRemove.size === 0}>
+                    Remove selected ({itemsToRemove.size})
+                </button>
+            </div>
+            <div className="selected-files-list-container">
+                <div className="selected-list-header">
+                    <div className="header-name" onClick={() => handleSort('name')}>
+                        <VscSymbolFile /> File <SortIndicator column="name" />
+                    </div>
+                    <div className="header-tokens" onClick={() => handleSort('tokenCount')}>
+                        <VscSymbolNumeric /> Tokens <SortIndicator column="tokenCount" />
+                    </div>
+                </div>
+                <ul className="selected-files-list">
+                    {sortedFiles.map(node => (
+                        <li key={node.absolutePath}>
+                            <Checkbox
+                                checked={itemsToRemove.has(node.absolutePath)}
+                                onChange={(checked) => handleToggleRemove(node.absolutePath, checked)}
+                            />
+                            <span className="file-icon">{getFileIcon(node.name)}</span>
+                            <span className="file-name" title={node.absolutePath}>{node.name}</span>
+                            <span className="file-tokens">{formatLargeNumber(node.tokenCount, 1)}</span>
+                            <button className="remove-button" onClick={() => onRemove([node.absolutePath])} title="Remove from selection">
                                 <VscClose />
                             </button>
                         </li>
-                    );
-                })}
-            </ol>
+                    ))}
+                </ul>
+            </div>
         </div>
     );
 };
@@ -7493,7 +7758,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     }, [data]);
 
     useEffect(() => {
-        // C18 FIX: When collapseTrigger changes, collapse all nodes except the root.
+        // C19 FIX: When collapseTrigger changes, collapse all nodes except the root.
         // Removed 'data' from dependency array to prevent this from firing on refresh.
         if (collapseTrigger > 0 && data.length > 0) {
             const rootNode = data[0];
@@ -7690,7 +7955,6 @@ body {
 
 .selected-files-panel {
     border-top: 1px solid var(--vscode-panel-border);
-    border-bottom: 1px solid var(--vscode-panel-border);
     max-height: 33vh; /* Allow it to take up to a third of the view height */
     display: flex;
     flex-direction: column;
@@ -7705,6 +7969,8 @@ body {
     color: var(--vscode-sideBar-titleForeground);
     border-bottom: 1px solid var(--vscode-panel-border);
     flex-shrink: 0;
+    display: flex;
+    justify-content: space-between;
 }
 
 .selected-files-list {
@@ -7815,7 +8081,7 @@ body {
     }
 
     ul.treenode-children {
-        padding-left: 20px;
+        padding-left: 10px; /* Reduced indentation for a tighter look */
     }
 }
 
@@ -7933,7 +8199,10 @@ const SelectedFilesPanel = ({ selectedFileNodes, onRemove }: { selectedFileNodes
 
     return (
         <div className="selected-files-panel">
-            <div className="panel-header">Selected Items</div>
+            <div className="panel-header">
+                <span>Selected Items</span>
+                <span>Tokens</span>
+            </div>
             <ul className="selected-files-list">
                 {selectedFileNodes.map((node, index) => (
                     <li key={node.absolutePath}>
@@ -7964,7 +8233,7 @@ const App = () => {
         clientIpc.sendToServer(ClientToServerChannel.RequestWorkspaceFiles, {});
 
         const handleFileResponse = ({ files: receivedFiles }: { files: FileNode[] }) => {
-            logger.log(`Received ${receivedFiles[0]?.fileCount || 0} files from backend.`);
+            logger.log(`Received file tree from backend. Root node: ${receivedFiles[0]?.name}`);
             setFiles(receivedFiles);
         };
         clientIpc.onServerMessage(ServerToClientChannel.SendWorkspaceFiles, handleFileResponse);
@@ -8010,7 +8279,7 @@ const App = () => {
         let totalTokens = 0;
         let totalFiles = 0;
         const selectedFileSet = new Set<string>();
-        const selectedNodes: FileNode[] = [];
+        const selectedTextNodes: FileNode[] = [];
 
         const fileMap: Map<string, FileNode> = new Map();
         const buildFileMap = (node: FileNode) => {
@@ -8027,7 +8296,7 @@ const App = () => {
                     selectedFileSet.add(node.absolutePath);
                     if (!node.isImage) {
                        totalTokens += node.tokenCount;
-                       selectedNodes.push(node);
+                       selectedTextNodes.push(node);
                     }
                     totalFiles++;
                 }
@@ -8043,9 +8312,9 @@ const App = () => {
             }
         });
         
-        selectedNodes.sort((a, b) => b.tokenCount - a.tokenCount);
+        selectedTextNodes.sort((a, b) => b.tokenCount - a.tokenCount);
 
-        return { totalFiles, totalTokens, selectedFileNodes: selectedNodes };
+        return { totalFiles, totalTokens, selectedFileNodes: selectedTextNodes };
     }, [selectedFiles, files]);
 
     return (
@@ -15327,6 +15596,8 @@ const config = {
 };
 module.exports = [config];
 </file>
+
+
 
 
 

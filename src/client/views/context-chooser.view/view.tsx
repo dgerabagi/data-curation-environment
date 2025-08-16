@@ -63,7 +63,7 @@ const App = () => {
         };
         clientIpc.onServerMessage(ServerToClientChannel.ApplySelectionSet, handleApplySelectionSet);
 
-    }, [clientIpc]);
+    }, []); // C19 FIX: Empty dependency array ensures this runs only once on mount.
 
     const handleFileClick = (filePath: string) => {
         setActiveFile(filePath);

@@ -13,6 +13,8 @@ class ServiceContainer {
     
     public initialize() {
         this.loggerService.log("Services initialized.");
+        // C19: Initialize the file watcher after services are ready.
+        this.fsService.initializeWatcher();
     }
 }
 

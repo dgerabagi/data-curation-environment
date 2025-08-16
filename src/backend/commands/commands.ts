@@ -69,5 +69,17 @@ export const commands = [
                  }
             }
         }
+    },
+    {
+        commandId: 'dce.refreshTree',
+        callback: () => {
+            const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
+            if (serverIpc) {
+                Services.loggerService.log("Executing dce.refreshTree command.");
+                Services.fsService.handleWorkspaceFilesRequest(serverIpc);
+            } else {
+                Services.loggerService.warn("Could not refresh tree: serverIpc not found.");
+            }
+        }
     }
 ];

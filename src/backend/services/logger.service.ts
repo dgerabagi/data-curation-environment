@@ -15,6 +15,10 @@ export class LoggerService {
         return LoggerService.instance;
     }
 
+    public show() {
+        this.outputChannel.show(true); // true => preserve focus
+    }
+
     private logMessage(level: 'INFO' | 'WARN' | 'ERROR', message: string): void {
         const timestamp = new Date().toLocaleTimeString();
         this.outputChannel.appendLine(`[${level}] [${timestamp}] ${message}`);

@@ -16,8 +16,9 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         flattenerService.flatten(data.selectedPaths);
     });
 
+    // This is a legacy handler. Refresh is now handled by a command.
     serverIpc.onClientMessage(ClientToServerChannel.RequestRefresh, () => {
-        fsService.handleWorkspaceFilesRequest(serverIpc);
+        vscode.commands.executeCommand('dce.refreshTree');
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.LogMessage, (data) => {
