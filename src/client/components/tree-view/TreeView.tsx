@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { VscChevronRight } from 'react-icons/vsc';
-import { getExpandedNodes } from './TreeView.utils';
 
 export interface TreeNode {
     name: string;
@@ -31,14 +30,15 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     }, [data]);
 
     useEffect(() => {
-        // When collapseTrigger changes, collapse all nodes except the root
+        // C18 FIX: When collapseTrigger changes, collapse all nodes except the root.
+        // Removed 'data' from dependency array to prevent this from firing on refresh.
         if (collapseTrigger > 0 && data.length > 0) {
             const rootNode = data[0];
             if (rootNode) {
                 setExpandedNodes([rootNode.absolutePath]);
             }
         }
-    }, [collapseTrigger, data]);
+    }, [collapseTrigger]);
 
 
     const handleToggleNode = (e: React.MouseEvent, nodePath: string) => {

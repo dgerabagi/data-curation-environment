@@ -51,6 +51,12 @@ const App = () => {
         };
         clientIpc.onServerMessage(ServerToClientChannel.SendWorkspaceFiles, handleFileResponse);
 
+        // C18: Add listener to handle loading a saved selection set from the backend
+        const handleApplySelectionSet = ({ paths }: { paths: string[] }) => {
+            setSelectedFiles(paths);
+        };
+        clientIpc.onServerMessage(ServerToClientChannel.ApplySelectionSet, handleApplySelectionSet);
+
     }, [clientIpc]);
 
     const handleFileClick = (filePath: string) => {

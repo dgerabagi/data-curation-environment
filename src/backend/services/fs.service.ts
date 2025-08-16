@@ -5,6 +5,7 @@ import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { ServerToClientChannel } from "@/common/ipc/channels.enum";
 import { FileNode } from "@/common/types/file-node";
 
+// Images are excluded from the tree view entirely as per user feedback.
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 
 export class FSService {
@@ -20,6 +21,7 @@ export class FSService {
 
             const isImage = IMAGE_EXTENSIONS.has(extension);
             if (isImage) {
+                // As per C18 feedback, images are excluded, but we'll handle them gracefully if they slip through.
                 return { tokenCount: 0, sizeInBytes: stats.size, isImage: true };
             }
 
@@ -53,8 +55,11 @@ export class FSService {
             return;
         }
         const rootPath = rootUri.fsPath;
-        // CRITICAL FIX: Correctly exclude node_modules. The second argument is the exclude pattern.
-        const files = await vscode.workspace.findFiles("**/*", '**/node_modules/**');
+        
+        // CRITICAL FIX (C18): Robust exclusion for node_modules and all image types.
+        const excludePattern = '{**/node_modules/**,**/*.png,**/*.jpg,**/*.jpeg,**/*.gif,**/*.svg,**/*.ico,**/*.webp}';
+        const files = await vscode.workspace.findFiles("**/*", excludePattern);
+        
         const fileTree = await this.createFileTree(rootPath, files);
 
         serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: [fileTree] });

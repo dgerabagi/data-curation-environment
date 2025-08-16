@@ -1,12 +1,12 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-16T02:30:45.941Z
+  Date Generated: 2025-08-16T03:08:57.627Z
   ---
   Total Files: 147
-  Total Lines: 11833
-  Total Characters: 431474
-  Approx. Tokens: 107925
+  Total Lines: 11864
+  Total Characters: 433159
+  Approx. Tokens: 108346
 -->
 
 <!-- Top 10 Files by Token Count -->
@@ -17,7 +17,7 @@
 5. The-Creator-AI-main\src\backend\services\fs.service.ts (2495 tokens)
 6. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts (2424 tokens)
 7. The-Creator-AI-main\src\backend\services\llm.service.ts (2156 tokens)
-8. src\client\views\context-chooser.view\view.tsx (1769 tokens)
+8. src\client\views\context-chooser.view\view.tsx (1849 tokens)
 9. The-Creator-AI-main\tailwind.config.js (1704 tokens)
 10. src\backend\services\flattener.service.ts (1689 tokens)
 
@@ -41,25 +41,25 @@
 17. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
 18. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 74 - Chars: 5773 - Tokens: 1444
 19. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
-20. src\backend\commands\commands.ts - Lines: 62 - Chars: 2633 - Tokens: 659
+20. src\backend\commands\commands.ts - Lines: 73 - Chars: 3123 - Tokens: 781
 21. src\backend\commands\register-commands.ts - Lines: 9 - Chars: 331 - Tokens: 83
 22. src\backend\services\flattener.service.ts - Lines: 169 - Chars: 6754 - Tokens: 1689
-23. src\backend\services\fs.service.ts - Lines: 149 - Chars: 5912 - Tokens: 1478
+23. src\backend\services\fs.service.ts - Lines: 154 - Chars: 6223 - Tokens: 1556
 24. src\backend\services\selection.service.ts - Lines: 39 - Chars: 1300 - Tokens: 325
 25. src\backend\services\services.ts - Lines: 17 - Chars: 552 - Tokens: 138
 26. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
 27. src\client\components\file-tree\FileTree.tsx - Lines: 133 - Chars: 4652 - Tokens: 1163
 28. src\client\components\file-tree\FileTree.utils.ts - Lines: 96 - Chars: 3630 - Tokens: 908
 29. src\client\components\SelectedFilesView.tsx - Lines: 48 - Chars: 2038 - Tokens: 510
-30. src\client\components\tree-view\TreeView.tsx - Lines: 90 - Chars: 3363 - Tokens: 841
+30. src\client\components\tree-view\TreeView.tsx - Lines: 90 - Chars: 3402 - Tokens: 851
 31. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 32. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 33. src\client\views\context-chooser.view\on-message.ts - Lines: 22 - Chars: 925 - Tokens: 232
 34. src\client\views\context-chooser.view\view.scss - Lines: 262 - Chars: 5565 - Tokens: 1392
-35. src\client\views\context-chooser.view\view.tsx - Lines: 170 - Chars: 7074 - Tokens: 1769
+35. src\client\views\context-chooser.view\view.tsx - Lines: 176 - Chars: 7394 - Tokens: 1849
 36. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
-37. src\common\ipc\channels.enum.ts - Lines: 9 - Chars: 336 - Tokens: 84
-38. src\common\ipc\channels.type.ts - Lines: 9 - Chars: 529 - Tokens: 133
+37. src\common\ipc\channels.enum.ts - Lines: 12 - Chars: 550 - Tokens: 138
+38. src\common\ipc\channels.type.ts - Lines: 15 - Chars: 840 - Tokens: 210
 39. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
 40. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 41. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
@@ -3822,14 +3822,25 @@ export const commands = [
     },
     {
         commandId: 'dce.loadSelectionSet',
-        callback: async (name: string) => {
+        callback: async () => {
             const sets = Services.selectionService.getSelectionSets();
-            const paths = sets[name];
-            if (paths) {
-                const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
-                if(serverIpc) {
-                    serverIpc.sendToClient(ServerToClientChannel.ApplySelectionSet, { paths });
-                    vscode.window.showInformationMessage(`Loaded selection set '${name}'.`);
+            const setNames = Object.keys(sets);
+             if (setNames.length === 0) {
+                vscode.window.showInformationMessage("No saved selection sets.");
+                return;
+            }
+            const name = await vscode.window.showQuickPick(setNames, {
+                placeHolder: 'Select a selection set to load'
+            });
+
+            if (name) {
+                const paths = sets[name];
+                if (paths) {
+                    const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
+                    if(serverIpc) {
+                        serverIpc.sendToClient(ServerToClientChannel.ApplySelectionSet, { paths });
+                        vscode.window.showInformationMessage(`Loaded selection set '${name}'.`);
+                    }
                 }
             }
         }
@@ -4052,6 +4063,7 @@ import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { ServerToClientChannel } from "@/common/ipc/channels.enum";
 import { FileNode } from "@/common/types/file-node";
 
+// Images are excluded from the tree view entirely as per user feedback.
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 
 export class FSService {
@@ -4067,6 +4079,7 @@ export class FSService {
 
             const isImage = IMAGE_EXTENSIONS.has(extension);
             if (isImage) {
+                // As per C18 feedback, images are excluded, but we'll handle them gracefully if they slip through.
                 return { tokenCount: 0, sizeInBytes: stats.size, isImage: true };
             }
 
@@ -4100,8 +4113,11 @@ export class FSService {
             return;
         }
         const rootPath = rootUri.fsPath;
-        // CRITICAL FIX: Correctly exclude node_modules. The second argument is the exclude pattern.
-        const files = await vscode.workspace.findFiles("**/*", '**/node_modules/**');
+        
+        // CRITICAL FIX (C18): Robust exclusion for node_modules and all image types.
+        const excludePattern = '{**/node_modules/**,**/*.png,**/*.jpg,**/*.jpeg,**/*.gif,**/*.svg,**/*.ico,**/*.webp}';
+        const files = await vscode.workspace.findFiles("**/*", excludePattern);
+        
         const fileTree = await this.createFileTree(rootPath, files);
 
         serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: [fileTree] });
@@ -4575,7 +4591,6 @@ export default SelectedFilesView;
 <file path="src/client/components/tree-view/TreeView.tsx">
 import React, { useState, useEffect } from 'react';
 import { VscChevronRight } from 'react-icons/vsc';
-import { getExpandedNodes } from './TreeView.utils';
 
 export interface TreeNode {
     name: string;
@@ -4606,14 +4621,15 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     }, [data]);
 
     useEffect(() => {
-        // When collapseTrigger changes, collapse all nodes except the root
+        // C18 FIX: When collapseTrigger changes, collapse all nodes except the root.
+        // Removed 'data' from dependency array to prevent this from firing on refresh.
         if (collapseTrigger > 0 && data.length > 0) {
             const rootNode = data[0];
             if (rootNode) {
                 setExpandedNodes([rootNode.absolutePath]);
             }
         }
-    }, [collapseTrigger, data]);
+    }, [collapseTrigger]);
 
 
     const handleToggleNode = (e: React.MouseEvent, nodePath: string) => {
@@ -5035,6 +5051,12 @@ const App = () => {
         };
         clientIpc.onServerMessage(ServerToClientChannel.SendWorkspaceFiles, handleFileResponse);
 
+        // C18: Add listener to handle loading a saved selection set from the backend
+        const handleApplySelectionSet = ({ paths }: { paths: string[] }) => {
+            setSelectedFiles(paths);
+        };
+        clientIpc.onServerMessage(ServerToClientChannel.ApplySelectionSet, handleApplySelectionSet);
+
     }, [clientIpc]);
 
     const handleFileClick = (filePath: string) => {
@@ -5200,6 +5222,9 @@ export enum ClientToServerChannel {
 
 export enum ServerToClientChannel {
     SendWorkspaceFiles = "serverToClient.sendWorkspaceFiles",
+    // C18: Re-added to fix TS errors in commands.ts for saved selection set functionality
+    ApplySelectionSet = "serverToClient.applySelectionSet",
+    SendSelectionSets = "serverToClient.sendSelectionSets",
 }
 </file>
 
@@ -5207,11 +5232,17 @@ export enum ServerToClientChannel {
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 
+// C18: Added type for saved selection sets
+export type SelectionSet = { [name: string]: string[] };
+
 export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel> =
     T extends ClientToServerChannel.RequestFlattenContext ? { selectedPaths: string[] } :
     T extends ClientToServerChannel.RequestWorkspaceFiles ? {} :
     T extends ClientToServerChannel.RequestRefresh ? {} :
     T extends ServerToClientChannel.SendWorkspaceFiles ? { files: FileNode[] } :
+    // C18: Re-added types to fix TS errors
+    T extends ServerToClientChannel.ApplySelectionSet ? { paths: string[] } :
+    T extends ServerToClientChannel.SendSelectionSets ? { sets: SelectionSet } :
     never;
 </file>
 

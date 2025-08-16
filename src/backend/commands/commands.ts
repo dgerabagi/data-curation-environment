@@ -24,14 +24,25 @@ export const commands = [
     },
     {
         commandId: 'dce.loadSelectionSet',
-        callback: async (name: string) => {
+        callback: async () => {
             const sets = Services.selectionService.getSelectionSets();
-            const paths = sets[name];
-            if (paths) {
-                const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
-                if(serverIpc) {
-                    serverIpc.sendToClient(ServerToClientChannel.ApplySelectionSet, { paths });
-                    vscode.window.showInformationMessage(`Loaded selection set '${name}'.`);
+            const setNames = Object.keys(sets);
+             if (setNames.length === 0) {
+                vscode.window.showInformationMessage("No saved selection sets.");
+                return;
+            }
+            const name = await vscode.window.showQuickPick(setNames, {
+                placeHolder: 'Select a selection set to load'
+            });
+
+            if (name) {
+                const paths = sets[name];
+                if (paths) {
+                    const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
+                    if(serverIpc) {
+                        serverIpc.sendToClient(ServerToClientChannel.ApplySelectionSet, { paths });
+                        vscode.window.showInformationMessage(`Loaded selection set '${name}'.`);
+                    }
                 }
             }
         }
