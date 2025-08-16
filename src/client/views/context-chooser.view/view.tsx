@@ -7,53 +7,33 @@ import { FileNode } from '@/common/types/file-node';
 import FileTree from '../../components/file-tree/FileTree';
 import { useState, useEffect, useMemo } from 'react';
 import { formatLargeNumber, formatNumberWithCommas } from '@/common/utils/formatting';
-import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscClose } from 'react-icons/vsc';
-import { addRemovePathInSelectedFiles } from '@/client/components/file-tree/FileTree.utils';
+import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
-
-const SelectedFilesPanel = ({ selectedFileNodes, onRemove }: { selectedFileNodes: FileNode[], onRemove: (path: string) => void }) => {
-    if (selectedFileNodes.length === 0) {
-        return null;
-    }
-
-    return (
-        <div className="selected-files-panel">
-            <div className="panel-header">
-                <span>Selected Items</span>
-                <span>Tokens</span>
-            </div>
-            <ul className="selected-files-list">
-                {selectedFileNodes.map((node, index) => (
-                    <li key={node.absolutePath}>
-                        <span className="list-number">{index + 1}.</span>
-                        <span className="file-name" title={node.absolutePath}>{node.name}</span>
-                        <span className="file-tokens">{formatLargeNumber(node.tokenCount, 1)}</span>
-                        <button className="remove-button" onClick={() => onRemove(node.absolutePath)} title="Remove from selection">
-                            <VscClose />
-                        </button>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
-};
-
+import SelectedFilesView from '@/client/components/SelectedFilesView';
+import { removePathsFromSelected } from '@/client/components/file-tree/FileTree.utils';
 
 const App = () => {
     const [files, setFiles] = useState<FileNode[]>([]);
     const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
     const [activeFile, setActiveFile] = useState<string | undefined>();
     const [collapseTrigger, setCollapseTrigger] = useState(0);
+    const [isLoading, setIsLoading] = useState(true);
     
     const clientIpc = ClientPostMessageManager.getInstance();
 
+    const requestFiles = (force = false) => {
+        setIsLoading(true);
+        logger.log(`Requesting workspace files (force=${force}).`);
+        clientIpc.sendToServer(ClientToServerChannel.RequestWorkspaceFiles, { force });
+    };
+
     useEffect(() => {
-        logger.log("Initializing view and requesting workspace files.");
-        clientIpc.sendToServer(ClientToServerChannel.RequestWorkspaceFiles, {});
+        requestFiles(); // Initial request
 
         const handleFileResponse = ({ files: receivedFiles }: { files: FileNode[] }) => {
             logger.log(`Received file tree from backend. Root node: ${receivedFiles[0]?.name}`);
             setFiles(receivedFiles);
+            setIsLoading(false);
         };
         clientIpc.onServerMessage(ServerToClientChannel.SendWorkspaceFiles, handleFileResponse);
 
@@ -63,7 +43,13 @@ const App = () => {
         };
         clientIpc.onServerMessage(ServerToClientChannel.ApplySelectionSet, handleApplySelectionSet);
 
-    }, []); // C19 FIX: Empty dependency array ensures this runs only once on mount.
+        const handleForceRefresh = () => {
+            logger.log("Received force refresh request from backend.");
+            requestFiles(true);
+        };
+        clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, handleForceRefresh);
+
+    }, [clientIpc]);
 
     const handleFileClick = (filePath: string) => {
         setActiveFile(filePath);
@@ -80,8 +66,7 @@ const App = () => {
 
     const handleRefresh = () => {
         logger.log("Refresh button clicked.");
-        setFiles([]); // Clear files to show loading state
-        clientIpc.sendToServer(ClientToServerChannel.RequestWorkspaceFiles, {});
+        requestFiles(true);
     };
 
     const handleCollapseAll = () => {
@@ -89,8 +74,8 @@ const App = () => {
         setCollapseTrigger(c => c + 1);
     };
 
-    const handleRemoveFromSelection = (pathToRemove: string) => {
-        const newSelected = addRemovePathInSelectedFiles(files, pathToRemove, selectedFiles);
+    const handleRemoveFromSelection = (pathsToRemove: string[]) => {
+        const newSelected = removePathsFromSelected(pathsToRemove, selectedFiles, files);
         setSelectedFiles(newSelected);
     };
 
@@ -131,8 +116,6 @@ const App = () => {
             }
         });
         
-        selectedTextNodes.sort((a, b) => b.tokenCount - a.tokenCount);
-
         return { totalFiles, totalTokens, selectedFileNodes: selectedTextNodes };
     }, [selectedFiles, files]);
 
@@ -145,7 +128,9 @@ const App = () => {
                  </div>
             </div>
             <div className="file-tree-container">
-                {files.length > 0 ? (
+                {isLoading ? (
+                     <div className="loading-message">Loading file tree...</div>
+                ) : files.length > 0 ? (
                     files.map((rootNode, index) => (
                         <FileTree
                             key={index}
@@ -154,14 +139,13 @@ const App = () => {
                             selectedFiles={selectedFiles}
                             updateSelectedFiles={updateSelectedFiles}
                             activeFile={activeFile}
-                            collapseTrigger={collapseTrigger}
                         />
                     ))
                 ) : (
-                    <div className="loading-message">Loading file tree...</div>
+                    <div className="loading-message">No folder open.</div>
                 )}
             </div>
-            <SelectedFilesPanel selectedFileNodes={selectedFileNodes} onRemove={handleRemoveFromSelection} />
+            <SelectedFilesView selectedFileNodes={selectedFileNodes} onRemove={handleRemoveFromSelection} />
             <div className="view-footer">
                 <div className="summary-panel">
                     <span className='summary-item' title="Total selected files">

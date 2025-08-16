@@ -9,56 +9,33 @@ import { Services } from "./services";
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 
 export class FSService {
-    private serverIpc: ServerPostMessageManager | null = null;
+    private fileTreeCache: FileNode[] | null = null;
     private watcher: vscode.FileSystemWatcher | null = null;
-    private debounceTimer: NodeJS.Timeout | null = null;
 
     constructor() {
-        // Watcher is initialized in the `initialize` method in services.ts to avoid running during construction.
+        this.setupFileSystemWatcher();
     }
 
-    public initializeWatcher() {
-        if (this.watcher) return;
-        console.log("FSService watcher initializing."); // Use console.log for early-stage debugging
+    private setupFileSystemWatcher() {
+        if (this.watcher) {
+            this.watcher.dispose();
+        }
+        // Watch for changes in all files
+        this.watcher = vscode.workspace.createFileSystemWatcher('**/*');
 
-        this.watcher = vscode.workspace.createFileSystemWatcher('**/*', false, false, false);
-        
-        const handler = (uri: vscode.Uri) => {
-            // Ignore changes in .git, node_modules, and our own output file to prevent loops
-            const fsPath = uri.fsPath;
-            if (fsPath.includes('.git') || fsPath.includes('node_modules') || fsPath.endsWith('flattened_repo.md')) {
-                return;
-            }
-
-            Services.loggerService.log(`File change detected: ${fsPath}. Debouncing refresh.`);
-            if (this.debounceTimer) {
-                clearTimeout(this.debounceTimer);
-            }
-            this.debounceTimer = setTimeout(() => {
-                Services.loggerService.log('Debounce timer elapsed. Triggering file tree refresh.');
-                this.triggerRefresh();
-            }, 1500); // 1.5 second debounce
+        const changeHandler = (uri: vscode.Uri) => {
+            // Invalidate cache on any change
+            this.fileTreeCache = null;
+            Services.loggerService.log(`File system change detected at ${uri.fsPath}. Cache invalidated.`);
+            // Optionally, push an update to the client here.
         };
 
-        this.watcher.onDidChange(handler);
-        this.watcher.onDidCreate(handler);
-        this.watcher.onDidDelete(handler);
-
-        Services.loggerService.log("FileSystemWatcher successfully initialized and handlers are attached.");
-    }
-
-    public triggerRefresh() {
-        if (this.serverIpc) {
-            Services.loggerService.log('Refreshing file tree for registered view.');
-            // Using the stored serverIpc to send the updated file list
-            this.handleWorkspaceFilesRequest(this.serverIpc);
-        } else {
-            Services.loggerService.warn('A file change was detected, but no active view is registered to receive the update.');
-        }
+        this.watcher.onDidChange(changeHandler);
+        this.watcher.onDidCreate(changeHandler);
+        this.watcher.onDidDelete(changeHandler);
     }
 
     private async getFileStats(filePath: string): Promise<{ tokenCount: number, sizeInBytes: number, isImage: boolean }> {
-        // ... (implementation from C18 is correct, no changes needed)
         try {
             const extension = path.extname(filePath).toLowerCase();
             const stats = await fs.stat(filePath);
@@ -87,9 +64,14 @@ export class FSService {
         }
     }
 
-    public async handleWorkspaceFilesRequest(serverIpc: ServerPostMessageManager) {
-        this.serverIpc = serverIpc; // Register the view's IPC instance for the watcher to use
-        Services.loggerService.log("Received request for workspace files.");
+    public async handleWorkspaceFilesRequest(serverIpc: ServerPostMessageManager, forceRefresh: boolean = false) {
+        if (!forceRefresh && this.fileTreeCache) {
+            Services.loggerService.log("Serving file tree from cache.");
+            serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: this.fileTreeCache });
+            return;
+        }
+
+        Services.loggerService.log("Building file tree from scratch.");
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (!workspaceFolders || workspaceFolders.length === 0) {
             Services.loggerService.warn("No workspace folder open. Sending empty file list.");
@@ -108,12 +90,12 @@ export class FSService {
         
         const fileTree = await this.createFileTree(rootPath, files);
 
-        Services.loggerService.log("Sending file tree to client.");
-        serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: [fileTree] });
+        this.fileTreeCache = [fileTree]; // Cache the result
+        Services.loggerService.log("Sending file tree to client and caching result.");
+        serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: this.fileTreeCache });
     }
 
     private async createFileTree(rootPath: string, files: vscode.Uri[]): Promise<FileNode> {
-        // ... (implementation from C18 is correct, no changes needed)
         const rootStats = await this.getFileStats(rootPath);
         const rootNode: FileNode = {
             name: path.basename(rootPath),
@@ -163,7 +145,6 @@ export class FSService {
     }
 
     private processNode(node: FileNode): void {
-        // ... (implementation from C18 is correct, no changes needed)
         if (!node.children) {
             node.fileCount = 1;
             return;

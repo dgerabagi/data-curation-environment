@@ -1,7 +1,10 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
+import { ServerPostMessageManager } from '@/common/ipc/server-ipc';
 import { Services } from './services';
+import { VIEW_TYPES } from '@/common/view-types';
+import { serverIPCs } from '@/client/views';
 
 interface FileStats {
     filePath: string;
@@ -14,19 +17,15 @@ interface FileStats {
 
 export class FlattenerService {
 
-    public async flatten(selectedPaths: string[]): Promise<boolean> {
-        const logger = Services.loggerService;
-        logger.log(`Flattening requested for ${selectedPaths.length} paths.`);
+    public async flatten(selectedPaths: string[]) {
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (!workspaceFolders || workspaceFolders.length === 0) {
             vscode.window.showErrorMessage("Cannot flatten context: No workspace folder is open.");
-            logger.error("Flatten failed: No workspace folder open.");
-            return false;
+            return;
         }
         if (selectedPaths.length === 0) {
             vscode.window.showWarningMessage("Cannot flatten context: No files or folders are selected.");
-            logger.warn("Flatten skipped: No files selected.");
-            return false;
+            return;
         }
 
         const rootPath = workspaceFolders[0].uri.fsPath;
@@ -35,7 +34,6 @@ export class FlattenerService {
         try {
             const allFilePaths = await this.expandDirectories(selectedPaths);
             const uniqueFilePaths = [...new Set(allFilePaths)];
-            logger.log(`Expanded to ${uniqueFilePaths.length} unique files.`);
 
             const fileStatsPromises = uniqueFilePaths.map(filePath => this.getFileStatsAndContent(filePath));
             const results = await Promise.all(fileStatsPromises);
@@ -44,18 +42,17 @@ export class FlattenerService {
 
             await fs.writeFile(outputFilePath, outputContent, 'utf-8');
             vscode.window.showInformationMessage(`Successfully flattened ${results.filter(r => !r.error).length} files to flattened_repo.md.`);
-            logger.log(`Successfully wrote flattened file to ${outputFilePath}`);
-            
-            // C19 FIX: Execute refresh command after successful flatten.
-            vscode.commands.executeCommand('dce.refreshTree');
 
-            return true;
+            // After successful flattening, trigger a refresh of the file tree.
+            const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
+            if (serverIpc) {
+                Services.loggerService.log("Triggering file tree refresh after flattening.");
+                await Services.fsService.handleWorkspaceFilesRequest(serverIpc, true); // Force a refresh
+            }
 
         } catch (error: any) {
             vscode.window.showErrorMessage(`Failed to flatten context: ${error.message}`);
-            logger.error(`Failed to flatten context: ${error.message}`);
             console.error(error);
-            return false;
         }
     }
 
@@ -70,7 +67,7 @@ export class FlattenerService {
                     allFiles.push(p);
                 }
             } catch (e) {
-                Services.loggerService.warn(`Could not stat path ${p}, skipping.`);
+                console.warn(`Could not stat path ${p}, skipping.`);
             }
         }
         return allFiles;
@@ -83,14 +80,15 @@ export class FlattenerService {
             for (const entry of entries) {
                 const fullPath = path.join(dirPath, entry.name);
                 if (entry.isDirectory()) {
+                    // Skip node_modules at any level
                     if (entry.name.toLowerCase() === 'node_modules') continue;
                     files = files.concat(await this.getAllFilesRecursive(fullPath));
                 } else {
                     files.push(fullPath);
                 }
             }
-        } catch (e: any) {
-            Services.loggerService.error(`Error reading directory ${dirPath}: ${e.message}`);
+        } catch (e) {
+            console.error(`Error reading directory ${dirPath}:`, e);
         }
         return files;
     }
