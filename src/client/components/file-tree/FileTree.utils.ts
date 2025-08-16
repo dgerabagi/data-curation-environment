@@ -15,6 +15,7 @@ function findNode(node: FileNode, filePath: string): FileNode | null {
     if (node.absolutePath === filePath) {
         return node;
     }
+    // Use startsWith and a path separator to avoid partial matches (e.g., 'src' matching 'src-tiled')
     if (node.children && filePath.startsWith(node.absolutePath + '/')) {
         for (const child of node.children) {
             const found = findNode(child, filePath);
@@ -45,40 +46,43 @@ export const addRemovePathInSelectedFiles = (
 
     let newSelectedFiles = [...selectedFiles];
 
+    // Check if the node is directly selected or selected via an ancestor
     const isDirectlySelected = newSelectedFiles.includes(path);
     const selectedAncestor = newSelectedFiles.find(ancestor => path.startsWith(ancestor + '/') && path !== ancestor);
-
     const isEffectivelySelected = isDirectlySelected || !!selectedAncestor;
 
     if (isEffectivelySelected) {
         // --- UNCHECK LOGIC ---
         if (selectedAncestor) {
-            // Unchecking a child of an already checked folder
+            // A child of an already checked folder is being unchecked.
             // 1. Remove the ancestor.
             newSelectedFiles = newSelectedFiles.filter(p => p !== selectedAncestor);
             const ancestorNode = getFileNodeByPath(fileTree, selectedAncestor);
             if (ancestorNode && ancestorNode.children) {
                 // 2. Add all children of the ancestor EXCEPT the one that was just unchecked.
                 for (const child of ancestorNode.children) {
+                    // Don't re-add the path that was clicked.
                     if (child.absolutePath !== path) {
-                        newSelectedFiles.push(child.absolutePath);
+                         newSelectedFiles.push(child.absolutePath);
                     }
                 }
             }
         } else {
-            // Unchecking a parent or a file that was checked directly
+            // A parent or a file that was checked directly is being unchecked.
+            // Remove it and all its descendants.
             const descendantPaths = getAllDescendantPaths(node);
             newSelectedFiles = newSelectedFiles.filter(p => p !== path && !descendantPaths.includes(p));
         }
     } else {
         // --- CHECK LOGIC ---
-        // 1. Remove all descendants that might already be individually selected
+        // 1. Remove any descendants that might already be individually selected,
+        // as the new parent selection will cover them.
         const descendantPaths = getAllDescendantPaths(node);
         newSelectedFiles = newSelectedFiles.filter(p => !descendantPaths.includes(p));
         
-        // 2. Add the new path
+        // 2. Add the new path.
         newSelectedFiles.push(path);
     }
   
-  return [...new Set(newSelectedFiles)]; // Remove duplicates for cleanliness
+  return [...new Set(newSelectedFiles)]; // Use Set to remove any duplicates.
 };

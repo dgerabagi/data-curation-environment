@@ -7,6 +7,7 @@ import {
     VscFile, VscFolder, VscFolderOpened, VscJson, VscMarkdown, VscSymbolFile
 } from 'react-icons/vsc';
 import { SiTypescript, SiReact, SiJavascript, SiSass } from 'react-icons/si';
+import { formatLargeNumber } from '@/common/utils/formatting';
 
 interface FileTreeProps {
   data: FileNode[];
@@ -57,6 +58,7 @@ const FileTree: React.FC<FileTreeProps> = ({
     const isSelected = selectedFiles.includes(path);
     // A node is an ancestor if the path starts with the ancestor's path and a separator
     const hasSelectedAncestor = selectedFiles.some(ancestor => path.startsWith(ancestor + '/') && path !== ancestor);
+    // A node has a selected descendant if a selected path starts with the node's own path
     const hasSelectedDescendant = selectedFiles.some(descendant => descendant.startsWith(path + '/') && descendant !== path);
     
     return (
@@ -81,16 +83,18 @@ const FileTree: React.FC<FileTreeProps> = ({
     return (
       <div
         className={`file-item ${isActive ? 'active' : ''}`}
-        onClick={() => handleNodeClick(node)}
+        // Let TreeView handle expansion, don't re-handle it here
+        // onClick={() => handleNodeClick(node)}
       >
         {renderCheckbox(node.absolutePath)}
         <span className="file-icon">
             {isDirectory ? (isExpanded ? <VscFolderOpened /> : <VscFolder />) : getFileIcon(node.name)}
         </span>
         <span className="file-name">{node.name}</span>
-        {node.tokenCount && node.tokenCount > 0 && (
-            <span className="token-count">{node.tokenCount}</span>
-        )}
+        <span className="token-count">
+            {formatLargeNumber(node.tokenCount, 1)}
+            {isDirectory && node.fileCount > 0 && ` (${node.fileCount})`}
+        </span>
       </div>
     );
   };
@@ -99,6 +103,7 @@ const FileTree: React.FC<FileTreeProps> = ({
     <div className="file-tree">
       <TreeView 
         data={data} 
+        onNodeClick={handleNodeClick}
         renderNodeContent={(node, isExpanded) => renderFileNodeContent(node, isExpanded as boolean)} 
       />
     </div>

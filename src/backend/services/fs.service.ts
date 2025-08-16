@@ -10,7 +10,8 @@ export class FSService {
     private async calculateTokenCount(filePath: string): Promise<number> {
         try {
             const stats = await fs.stat(filePath);
-            if (stats.isDirectory() || stats.size > 1_000_000) { // Ignore large files
+            // Ignore large files to prevent performance issues
+            if (stats.isDirectory() || stats.size > 1_000_000) { 
                 return 0;
             }
             const content = await fs.readFile(filePath, 'utf-8');
@@ -25,7 +26,6 @@ export class FSService {
     public async handleWorkspaceFilesRequest(serverIpc: ServerPostMessageManager) {
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (!workspaceFolders || workspaceFolders.length === 0) {
-            // Send empty array if no folder is open
             serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: [] });
             return;
         }
@@ -47,7 +47,8 @@ export class FSService {
             name: path.basename(rootPath),
             absolutePath: rootPath,
             children: [],
-            tokenCount: 0
+            tokenCount: 0,
+            fileCount: 0,
         };
 
         for (const file of files) {
@@ -61,32 +62,60 @@ export class FSService {
 
                 if (!childNode) {
                     const newPath = path.join(currentNode.absolutePath, part);
+                    const isDirectory = i < parts.length - 1;
+
                     childNode = { 
                         name: part, 
                         absolutePath: newPath,
-                        tokenCount: 0 // Will be calculated below
+                        tokenCount: 0,
+                        fileCount: isDirectory ? 0 : 1
                     };
 
-                    if (i < parts.length - 1) {
+                    if (isDirectory) {
                         childNode.children = [];
                     } else {
-                        // It's a file, calculate token count
                         childNode.tokenCount = await this.calculateTokenCount(newPath);
                     }
-                    // Sort children: folders first, then files, alphabetically
                     currentNode.children?.push(childNode);
-                    currentNode.children?.sort((a, b) => {
-                        const aIsFolder = !!a.children;
-                        const bIsFolder = !!b.children;
-                        if (aIsFolder !== bIsFolder) {
-                            return aIsFolder ? -1 : 1;
-                        }
-                        return a.name.localeCompare(b.name);
-                    });
                 }
                 currentNode = childNode;
             }
         }
+        
+        // Post-process to calculate folder stats and sort
+        this.processNode(rootNode);
+
         return rootNode;
+    }
+
+    private processNode(node: FileNode): void {
+        if (!node.children) {
+            return;
+        }
+
+        // Recursively process children first
+        for (const child of node.children) {
+            this.processNode(child);
+        }
+
+        // Sort children: folders first, then files, then alphabetically
+        node.children.sort((a, b) => {
+            const aIsFolder = !!a.children;
+            const bIsFolder = !!b.children;
+            if (aIsFolder !== bIsFolder) {
+                return aIsFolder ? -1 : 1;
+            }
+            return a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' });
+        });
+        
+        // Calculate totals for the current node
+        let totalTokens = 0;
+        let totalFiles = 0;
+        for (const child of node.children) {
+            totalTokens += child.tokenCount;
+            totalFiles += child.fileCount;
+        }
+        node.tokenCount = totalTokens;
+        node.fileCount = totalFiles;
     }
 }

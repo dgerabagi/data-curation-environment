@@ -26,7 +26,10 @@ M7. artifacts
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 12 - Continue working on UI
+Current Cycle 15 - more progress! still cannot check a checkbox, token count adjustments, ignore node_modules, handle images differently
+Cycle 14 - Big progress! work through new feedback/observations
+Cycle 13 - ts errors
+Cycle 12 - Continue working on UI
 Cycle 11 - Spiral! okay feedback and lets build mOaR1~!1one!
 Cycle 10 - progress? new, now related error when pressing f5
 Cycle 9 - 2 ts errors
@@ -81,6 +84,384 @@ Phase 3. Diff Tool - Basically, winmerge but intergrated into a window within VS
 </M5. organized artifacts list>
 
 <M6. Cycles>
+<Cycle 15>
+okay this is great progress.
+
+1. i still cannot select a checkbox. it still instead expands the collapsable list which is not the intended behavior of the checkbox.
+
+2. the token count and file count is fantastic. lets display the file counts with commas as needed for the thousands place etc. lets also right-justify these numbers it makes them easier to read. lets also provide a token icon for the tokens and a file icon for the files to represent what they're measuring.
+
+3. lets ignore node_modules from the counting itll never be needed for our data curation processes.
+
+4. lets not count tokens for image files, instead just display that as the filesize total that makes more sense.
+<previous cycle 14 summary of actions>
+
+
+Of course. I've thoroughly reviewed your detailed feedback from Cycle 14. It's clear that while progress has been made, there are critical bugs in the core functionality (checkboxes) and several high-value features you'd like to see implemented to enhance the user experience. My primary focus will be on fixing the bugs to make the extension usable, and then implementing the requested UI/UX improvements.
+
+I will address each of your points systematically. The plan is to integrate the number formatting, fix the file sorting, correct the checkbox and expansion bugs, and then add the live metadata display and folder-level statistics.
+
+### Course of Action
+
+1.  **Documentation First:**
+    *   I will create a new artifact, `A10. DCE - Metadata and Statistics Display`, to codify the requirements for displaying live selection metadata and folder-level token/file counts.
+    *   I will formally create `A189. Number Formatting Guide`, using the content you provided, to serve as a source of truth for that utility.
+    *   I will update `A0. Master Artifact List` to include these new artifacts.
+
+2.  **Integrate Number Formatting (Request #1 & #5):**
+    *   I will create a new utility file, `src/common/utils/formatting.ts`, and place the `formatLargeNumber` function from `A189` into it.
+    *   In the backend (`fs.service.ts`), I will implement logic to recursively calculate the total token and file counts for each directory and include this data in the `FileNode` structure.
+    *   I will update the `FileTree.tsx` component to import and use the new formatting utility to display these counts for both files and folders, ensuring numbers are easy to read (e.g., "1.2K", "2.5M").
+
+3.  **Fix Core UI Bugs (Request #2 & #3):**
+    *   **Sorting:** I will update `fs.service.ts` to correctly sort the file tree. The new logic will ensure directories are listed before files, and both groups are sorted alphabetically, resolving the messy order.
+    *   **Checkbox Functionality:** This is a critical bug. I will rewrite the state management logic in `FileTree.utils.ts` to correctly handle parent/child checkbox relationships. I will also add `event.stopPropagation()` to the checkbox's `onChange` handler in `FileTree.tsx` to definitively separate the checking action from the folder expansion action.
+
+4.  **Implement Live Metadata Panel (Request #4):**
+    *   I will add a new "summary" panel to the UI in `context-chooser.view.tsx`.
+    *   This panel will listen for changes to the `selectedFiles` state.
+    *   On every change, it will recalculate and display the total number of selected files and the sum of their token counts, giving you immediate feedback on your context size.
+
+I will not be addressing the multi-select Quality of Life feature in this cycle, as fixing the fundamental bug of single-checkbox selection is the top priority.
+
+### Updated and New Files
+
+Here is the list of files I will be creating or modifying:
+
+*   `A0. Master Artifact List.md` (Updated)
+*   `A10. DCE - Metadata and Statistics Display.md` (New)
+*   `A189. Number Formatting Guide (K/M Suffixes & Dynamic Decimals)` (New)
+*   `src/common/utils/formatting.ts` (New)
+*   `src/common/types/file-node.ts` (Updated)
+*   `src/backend/services/fs.service.ts` (Updated)
+*   `src/client/components/file-tree/FileTree.tsx` (Updated)
+*   `src/client/components/file-tree/FileTree.utils.ts` (Updated)
+*   `src/client/views/context-chooser.view/view.tsx` (Updated)
+*   `src/client/views/context-chooser.view/view.scss` (Updated)
+
+***
+```xml
+<A0. Master Artifact List.md>
+
+</A0. Master Artifact List.md>
+```
+***
+```xml
+<A10. DCE - Metadata and Statistics Display.md>
+
+</A10. DCE - Metadata and Statistics Display.md>
+```
+***
+```xml
+<A189. Number Formatting Guide (K/M Suffixes & Dynamic Decimals)>
+
+</A189. Number Formatting Guide (K/M Suffixes & Dynamic Decimals)>
+```
+***
+```xml
+<src/common/utils/formatting.ts>
+
+</src/common/utils/formatting.ts>
+```
+***
+```xml
+<src/common/types/file-node.ts>
+
+</src/common/types/file-node.ts>```
+***
+```xml
+<src/backend/services/fs.service.ts>
+
+</src/backend/services/fs.service.ts>
+```
+***
+```xml
+<src/client/components/file-tree/FileTree.utils.ts>
+
+</src/client/components/file-tree/FileTree.utils.ts>
+```
+***
+```xml
+<src/client/components/file-tree/FileTree.tsx>
+
+```
+***
+```xml
+<src/client/views/context-chooser.view/view.scss>
+```
+***
+```xml
+<src/client/views/context-chooser.view/view.tsx>
+
+```
+</previous cycle 14 summary of actions>
+</Cycle 15>
+
+
+<Cycle 14>
+nice! this response was the longest, and it nailed it! now i see appropriate icons for their filetype. 
+
+1. i like the token counter, can we display them like i do in my ai ascent game. i loaded that context and i created a189 below from that context. it describes how we did the formatting of large numbers. we would like to do the same for ours to keep those numbers in a manageable length and easy interpretation from the human curator. see to it that the notion is written into one of our artifacts, we wont be keeping this large a189 artifact ill remove it from the <cycles> section after we process it this cycle.
+
+2. order of files is messy, it can be cleaned cleaned up. what i mean is, when i look at my artifacts folder, they go: `A0.`, `A1.`, `A101.`, ... the next artifact after `A1.` needs to be `A2.`, and then `A3.`, and so on. not in the way its currently sorted.
+
+3. i still am unable to actually check a checkbox. i can only actually check the root `ai-ascent` folder checklist. and when i do that, it still collapses/expands the `ai-ascent` list. we shouldnt expand/collapse just when a checkbox is clicked, only when the actual collapse arrow is clicked.
+
+4. we will want to provide live metadata calculations to the user, as they make selections that shows them total curated dataset size, file count, etc. basically our files_repo.txt header info right? but somehow displayed to the user as they make selections.
+
+5. why can't we display token counts for folders? so like sum up all the token counts for whats in that folder? can we do that too? and say how many files are in that folder too, why not? this is the kind of metadata needed for decisionmaking when curating data for LLMs.
+
+6. QoL feature: if i select multiple files and then check the checkbox, it should select/de-select the entire selection.
+<Artifact made from another context>
+Excellent. I understand the request from cycle 1408. The goal is to distill the logic we developed for formatting large numbers into a reusable, standalone artifact. This is a great example of codifying a solved problem for future projects, turning a development cycle's output into a durable asset.
+
+My plan is to:
+
+1.  **Create a New Artifact (`A189`):** I will author a new documentation artifact titled `A189. Number Formatting Guide (K/M Suffixes & Dynamic Decimals)`.
+2.  **Extract Core Logic:** I will extract the key functions (`formatLargeNumber`, `formatCurrency`, `formatCount`, and their helper constants) from our project's `src/utils.ts` file.
+3.  **Provide Context and Examples:** The new artifact will not just contain the code, but will also explain the purpose of the functions, provide clear usage examples for various inputs, and offer a brief guide on how to integrate this utility into another project.
+4.  **Update the Master List:** I will update `A0. Master Artifact List` to include this new artifact.
+
+This will result in a self-contained, easy-to-understand guide that perfectly captures the solution we engineered, making it simple for you to replicate in other projects.
+
+### Files Updated This Cycle:
+*   `A189. Number Formatting Guide (K/M Suffixes & Dynamic Decimals)` (New)
+*   `A0. Master Artifact List` (Update)
+
+***
+```xml
+<A189. Number Formatting Guide (K/M Suffixes & Dynamic Decimals)>
+# Artifact A189: Number Formatting Guide (K/M Suffixes & Dynamic Decimals)
+# Date Created: Cycle 1408
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A standalone guide and utility script for formatting large numbers with K/M/B/T suffixes and dynamic decimal place adjustment for clean UI presentation.
+- **Tags:** utility, script, formatting, numbers, ui, ux, javascript, typescript
+
+## 1. Purpose
+
+This artifact provides a set of robust, reusable TypeScript functions for formatting numbers in a user-friendly way. The core function, `formatLargeNumber`, intelligently converts large numbers into a compact format using suffixes like 'K' (thousands), 'M' (millions), 'B' (billions), and 'T' (trillions).
+
+The key features of this utility are:
+*   **Automatic Suffixing:** Automatically scales numbers and adds the appropriate suffix.
+*   **Dynamic Decimal Precision:** Adjusts the number of decimal places shown based on the magnitude of the number, ensuring a clean and consistent look in the UI (e.g., `12.3K`, `123.5K`, `1.23M`).
+*   **Handling of Small Numbers:** Gracefully handles numbers below 1,000 without applying a suffix.
+*   **Specialized Wrappers:** Includes helper functions like `formatCurrency` and `formatCount` for common use cases.
+
+## 2. Core Utility Functions (from `src/utils.ts`)
+
+Below is the complete TypeScript code. You can save this as a `formatUtils.ts` file in a new project.
+
+```typescript
+// formatUtils.ts
+
+const KMBT_SUFFIXES = ['', 'K', 'M', 'B', 'T', 'Q']; // Extend as needed
+
+/**
+ * Formats a large number with appropriate K/M/B/T suffixes and dynamic decimal places.
+ * Handles very small near-zero numbers gracefully to avoid scientific notation.
+ *
+ * @param value The number to format.
+ * @param decimalPlaces The base number of decimal places to aim for.
+ * @returns A formatted string.
+ */
+export function formatLargeNumber(value: number | undefined | null, decimalPlaces: number = 2): string {
+    if (value === null || value === undefined || isNaN(value) || !Number.isFinite(value)) {
+        return '---';
+    }
+    if (value === 0) {
+        return (0).toFixed(decimalPlaces);
+    }
+
+    const VERY_SMALL_THRESHOLD = 1e-6; // 0.000001
+    if (Math.abs(value) < VERY_SMALL_THRESHOLD) {
+        return (0).toFixed(decimalPlaces);
+    }
+
+    const isNegative = value < 0;
+    const absValue = Math.abs(value);
+
+    let unitIndex = 0;
+    let scaledValue = absValue;
+
+    if (absValue >= 1000) {
+        unitIndex = Math.floor(Math.log10(absValue) / 3);
+        unitIndex = Math.min(unitIndex, KMBT_SUFFIXES.length - 1);
+        scaledValue = absValue / Math.pow(1000, unitIndex);
+    }
+
+    let adjustedDecimalPlaces = decimalPlaces;
+    if (unitIndex > 0) { // If a suffix is used (K, M, B, T, Q)
+        if (scaledValue >= 100) adjustedDecimalPlaces = Math.max(0, decimalPlaces - 2);
+        else if (scaledValue >= 10) adjustedDecimalPlaces = Math.max(0, decimalPlaces - 1);
+    } else { // No unit suffix (value < 1000)
+        if (Math.abs(scaledValue) < 0.01 && scaledValue !== 0) {
+            adjustedDecimalPlaces = Math.max(decimalPlaces, 4);
+        } else if (Number.isInteger(scaledValue)) {
+             adjustedDecimalPlaces = 0;
+        }
+    }
+
+    const unit = KMBT_SUFFIXES[unitIndex] ?? '';
+    const formattedValue = scaledValue.toFixed(adjustedDecimalPlaces);
+
+    return `${isNegative ? '-' : ''}${formattedValue}${unit}`;
+}
+
+/**
+ * A wrapper for formatLargeNumber specifically for currency.
+ * @param value The currency value.
+ * @returns A formatted string with a '$' prefix.
+ */
+export function formatCurrency(value: number | undefined | null): string {
+    if (value === null || value === undefined || isNaN(value) || !Number.isFinite(value)) {
+      return '$---.--';
+    }
+    const isNegative = value < 0;
+    const absValue = Math.abs(value);
+    const formattedMagnitude = formatLargeNumber(absValue, 2);
+    return `${isNegative ? '-' : ''}$${formattedMagnitude}`;
+}
+
+/**
+ * A wrapper for formatLargeNumber specifically for integer counts (no decimals).
+ * @param value The count value.
+ * @returns A formatted string with no decimal places.
+ */
+export function formatCount(value: number | undefined | null): string {
+    return formatLargeNumber(value, 0);
+}
+```
+
+## 3. Usage Examples
+
+Here is how you can use these functions in your code:
+
+```typescript
+import { formatLargeNumber, formatCurrency, formatCount } from './formatUtils';
+
+// formatLargeNumber examples
+console.log(formatLargeNumber(123));        // "123"
+console.log(formatLargeNumber(1234));       // "1.23K"
+console.log(formatLargeNumber(12345));      // "12.3K"
+console.log(formatLargeNumber(123456));     // "123K"
+console.log(formatLargeNumber(1234567));    // "1.23M"
+console.log(formatLargeNumber(9876543210)); // "9.88B"
+console.log(formatLargeNumber(-54321));     // "-54.3K"
+console.log(formatLargeNumber(0.0000001));  // "0.00"
+
+// formatCurrency examples
+console.log(formatCurrency(54321.99));    // "$54.3K"
+console.log(formatCurrency(2500000));     // "$2.50M"
+console.log(formatCurrency(-75000));      // "-$75K"
+
+// formatCount examples
+console.log(formatCount(999));        // "999"
+console.log(formatCount(1000));       // "1K"
+console.log(formatCount(45678));      // "46K"
+```
+
+## 4. Integration Guide
+
+1.  **Copy the Code:** Save the code from Section 2 into a file named `formatUtils.ts` (or similar) inside your project's `utils` or `lib` directory.
+2.  **Import and Use:** Import the functions you need into your UI components or other utility files.
+    ```typescript
+    import { formatLargeNumber } from './path/to/formatUtils';
+
+    const MyComponent = () => {
+      const displayValue = formatLargeNumber(123456); // "123K"
+      return <div>Value: {displayValue}</div>;
+    };
+    ```
+</A189. Number Formatting Guide (K/M Suffixes & Dynamic Decimals)>
+``````xml
+
+</Artifact made from another context>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<previous cycle 13 summary of actions>
+
+Of course. I've reviewed the TypeScript errors and the detailed feedback from the last cycle. It's clear that my previous attempt to address the UI bugs was flawed and introduced new compilation errors. I apologize for the frustration. My primary goal for this cycle is to correct these errors and deliver a stable, functional UI that behaves as you've described.
+
+I will systematically address each issue, starting with the build-breaking errors and then moving on to the critical UI functionality and visual alignment with the native VS Code explorer.
+
+### Course of Action
+
+1.  **Fix Build Errors:**
+    *   **SCSS Syntax Error:** I will correct the comment format in `src/client/views/context-chooser.view/view.scss` from `//` to `/* ... */` to resolve the `Unknown word` error during CSS processing.
+    *   **TypeScript `path.sep` Error:** I will replace the erroneous use of `path.sep` (a Node.js concept) in the frontend component `src/client/components/file-tree/FileTree.tsx` with a hardcoded forward slash (`'/'`). This is a safe and correct approach for the webview environment, as all paths provided by the backend are normalized.
+
+2.  **Fix Critical UI Bugs:**
+    *   **Independent Checkbox/Expand Actions:** I will add the missing `event.stopPropagation()` to the checkbox `onChange` handler in `FileTree.tsx`. This will prevent a checkbox click from also toggling the folder's expansion state.
+    *   **Checkbox Selection Logic:** I will rewrite the state management logic in `src/client/components/file-tree/FileTree.utils.ts`. The current implementation is buggy and fails to correctly handle selections in sub-folders. The new logic will be more robust and correctly manage parent/child checkbox states, fixing the issue where only the root checkbox was functional.
+
+3.  **Enhance UI to Match VS Code Explorer:**
+    *   **Stabilize Expansion Arrow:** I will adjust the flexbox layout for tree nodes in `view.scss` and `TreeView.tsx` to ensure the expansion chevron/arrow remains perfectly stationary relative to its folder name when other folders are expanded or collapsed.
+    *   **Improve File-Specific Icons:** I will refine the `getFileIcon` function in `FileTree.tsx` to include a wider range of file type icons (`.md`, `.json`, `.scss`, etc.) to better match the native VS Code explorer's look and feel.
+    *   **Display Token Counts:** I will ensure the `tokenCount` data, which is already being calculated by the backend, is properly displayed next to each file name in `FileTree.tsx`.
+
+I will not be implementing the Selection Sets (Profiles) feature in this cycle, as my focus is on stabilizing the core UI and fixing the existing bugs you've reported. Once the file tree is functioning correctly, we can confidently build upon it.
+
+### Updated Files
+
+Here is the list of files I will be updating to implement these fixes:
+
+*   `src/client/components/file-tree/FileTree.tsx` (Updated)
+*   `src/client/components/file-tree/FileTree.utils.ts` (Updated)
+*   `src/client/components/tree-view/TreeView.tsx` (Updated)
+*   `src/client/views/context-chooser.view/view.scss` (Updated)
+*   `src/backend/services/fs.service.ts` (Updated)
+
+***
+```
+<src/backend/services/fs.service.ts>
+
+</src/backend/services/fs.service.ts>
+```
+***
+```
+<src/client/components/file-tree/FileTree.tsx>
+
+</src/client/components/file-tree/FileTree.tsx>
+```
+***
+```
+<src/client/components/file-tree/FileTree.utils.ts>
+
+</src/client/components/file-tree/FileTree.utils.ts>
+```
+***
+```
+<src/client/components/tree-view/TreeView.tsx>
+
+</src/client/components/tree-view/TreeView.tsx>
+```
+***
+```
+<src/client/views/context-chooser.view/view.scss>
+
+</src/client/views/context-chooser.view/view.scss>
+```
+</previous cycle 13 summary of actions>
+</cycle 14>
 <cycle 13>
 Okay, after testing most other responses, it just says `Loading file tree...` but it never actually loads. we havent seen or discussed how i can/should see/surface logs in this development process to you. we should have an artifact for logs, that once we figure it out, we can codify a streamlined process by which the logs get ingested into the prompt otherwise we're throwing darts and we dont know where the dartboard is.
 
@@ -2007,16 +2388,15 @@ Total Tokens (Text Files): 863638
 
 asdf
 
-
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-15T22:20:21.673Z
+  Date Generated: 2025-08-15T22:47:48.583Z
   ---
   Total Files: 142
-  Total Lines: 11179
-  Total Characters: 401677
-  Approx. Tokens: 100474
+  Total Lines: 11192
+  Total Characters: 402347
+  Approx. Tokens: 100641
 -->
 
 <!-- Top 10 Files by Token Count -->
@@ -2051,17 +2431,17 @@ asdf
 17. src\backend\commands\commands.ts - Lines: 62 - Chars: 2633 - Tokens: 659
 18. src\backend\commands\register-commands.ts - Lines: 9 - Chars: 331 - Tokens: 83
 19. src\backend\services\flattener.service.ts - Lines: 156 - Chars: 5889 - Tokens: 1473
-20. src\backend\services\fs.service.ts - Lines: 83 - Chars: 3255 - Tokens: 814
+20. src\backend\services\fs.service.ts - Lines: 92 - Chars: 3784 - Tokens: 946
 21. src\backend\services\selection.service.ts - Lines: 39 - Chars: 1300 - Tokens: 325
 22. src\backend\services\services.ts - Lines: 17 - Chars: 552 - Tokens: 138
 23. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
-24. src\client\components\file-tree\FileTree.tsx - Lines: 108 - Chars: 3607 - Tokens: 902
-25. src\client\components\file-tree\FileTree.utils.ts - Lines: 83 - Chars: 3115 - Tokens: 779
-26. src\client\components\tree-view\TreeView.tsx - Lines: 71 - Chars: 2647 - Tokens: 662
+24. src\client\components\file-tree\FileTree.tsx - Lines: 108 - Chars: 3597 - Tokens: 900
+25. src\client\components\file-tree\FileTree.utils.ts - Lines: 84 - Chars: 2984 - Tokens: 746
+26. src\client\components\tree-view\TreeView.tsx - Lines: 71 - Chars: 2748 - Tokens: 687
 27. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 28. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 29. src\client\views\context-chooser.view\on-message.ts - Lines: 43 - Chars: 1840 - Tokens: 460
-30. src\client\views\context-chooser.view\view.scss - Lines: 143 - Chars: 3177 - Tokens: 795
+30. src\client\views\context-chooser.view\view.scss - Lines: 146 - Chars: 3358 - Tokens: 840
 31. src\client\views\context-chooser.view\view.tsx - Lines: 118 - Chars: 4924 - Tokens: 1231
 32. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
 33. src\common\ipc\channels.enum.ts - Lines: 19 - Chars: 770 - Tokens: 193
@@ -5784,7 +6164,7 @@ export class FSService {
     private async calculateTokenCount(filePath: string): Promise<number> {
         try {
             const stats = await fs.stat(filePath);
-            if (stats.isDirectory()) {
+            if (stats.isDirectory() || stats.size > 1_000_000) { // Ignore large files
                 return 0;
             }
             const content = await fs.readFile(filePath, 'utf-8');
@@ -5847,7 +6227,16 @@ export class FSService {
                         // It's a file, calculate token count
                         childNode.tokenCount = await this.calculateTokenCount(newPath);
                     }
+                    // Sort children: folders first, then files, alphabetically
                     currentNode.children?.push(childNode);
+                    currentNode.children?.sort((a, b) => {
+                        const aIsFolder = !!a.children;
+                        const bIsFolder = !!b.children;
+                        if (aIsFolder !== bIsFolder) {
+                            return aIsFolder ? -1 : 1;
+                        }
+                        return a.name.localeCompare(b.name);
+                    });
                 }
                 currentNode = childNode;
             }
@@ -6006,8 +6395,8 @@ const FileTree: React.FC<FileTreeProps> = ({
   const renderCheckbox = (path: string) => {
     const isSelected = selectedFiles.includes(path);
     // A node is an ancestor if the path starts with the ancestor's path and a separator
-    const hasSelectedAncestor = selectedFiles.some(ancestor => path.startsWith(ancestor + path.sep) && path !== ancestor);
-    const hasSelectedDescendant = selectedFiles.some(descendant => descendant.startsWith(path + path.sep) && descendant !== path);
+    const hasSelectedAncestor = selectedFiles.some(ancestor => path.startsWith(ancestor + '/') && path !== ancestor);
+    const hasSelectedDescendant = selectedFiles.some(descendant => descendant.startsWith(path + '/') && descendant !== path);
     
     return (
       <Checkbox
@@ -6072,58 +6461,11 @@ function getAllDescendantPaths(node: FileNode): string[] {
     return paths;
 }
 
-// Helper to ensure path comparisons are safe against partial name matches (e.g., 'src' vs 'src-tiled')
-const isAncestor = (ancestor: string, descendent: string) => {
-    if (ancestor === descendent) return false;
-    // Normalize by ensuring ancestor path ends with a separator
-    const ancestorWithSlash = ancestor.endsWith('/') ? ancestor : `${ancestor}/`;
-    return descendent.startsWith(ancestorWithSlash);
-};
-
-export const addRemovePathInSelectedFiles = (
-  fileTree: FileNode[],
-  path: string,
-  selectedFiles: string[]
-): string[] => {
-    const node = getFileNodeByPath(fileTree, path);
-    if (!node) return selectedFiles;
-
-    const descendantPaths = getAllDescendantPaths(node);
-    const isSelected = selectedFiles.includes(path);
-    const hasSelectedAncestor = selectedFiles.some(ancestor => isAncestor(ancestor, path));
-    
-    let newSelectedFiles = [...selectedFiles];
-
-    if (isSelected) {
-        // Uncheck: remove this path and all its descendants
-        newSelectedFiles = newSelectedFiles.filter(p => p !== path && !descendantPaths.includes(p));
-    } else if (hasSelectedAncestor) {
-        // Uncheck a child of an already checked folder.
-        // 1. Remove the ancestor.
-        const ancestor = selectedFiles.find(ancestor => isAncestor(ancestor, path))!;
-        const ancestorNode = getFileNodeByPath(fileTree, ancestor)!;
-        
-        newSelectedFiles = newSelectedFiles.filter(p => p !== ancestor);
-        
-        // 2. Add all children of the ancestor EXCEPT the one that was unchecked and its descendants.
-        const siblingsAndCousins = getAllDescendantPaths(ancestorNode).filter(p => p !== path && !isAncestor(path, p));
-        newSelectedFiles.push(...siblingsAndCousins);
-
-    } else {
-        // Check: remove all descendants that might be individually selected, then add the parent path.
-        newSelectedFiles = newSelectedFiles.filter(p => !isAncestor(path, p));
-        newSelectedFiles.push(path);
-    }
-  
-  return [...new Set(newSelectedFiles)]; // Remove duplicates for cleanliness
-};
-
 function findNode(node: FileNode, filePath: string): FileNode | null {
     if (node.absolutePath === filePath) {
         return node;
     }
-    // Use the isAncestor helper to prevent partial path segment matches
-    if (node.children && isAncestor(node.absolutePath, filePath)) {
+    if (node.children && filePath.startsWith(node.absolutePath + '/')) {
         for (const child of node.children) {
             const found = findNode(child, filePath);
             if(found) return found;
@@ -6141,6 +6483,54 @@ export const getFileNodeByPath = (
         if (found) return found;
     }
     return null;
+};
+
+export const addRemovePathInSelectedFiles = (
+  fileTree: FileNode[],
+  path: string,
+  selectedFiles: string[]
+): string[] => {
+    const node = getFileNodeByPath(fileTree, path);
+    if (!node) return selectedFiles;
+
+    let newSelectedFiles = [...selectedFiles];
+
+    const isDirectlySelected = newSelectedFiles.includes(path);
+    const selectedAncestor = newSelectedFiles.find(ancestor => path.startsWith(ancestor + '/') && path !== ancestor);
+
+    const isEffectivelySelected = isDirectlySelected || !!selectedAncestor;
+
+    if (isEffectivelySelected) {
+        // --- UNCHECK LOGIC ---
+        if (selectedAncestor) {
+            // Unchecking a child of an already checked folder
+            // 1. Remove the ancestor.
+            newSelectedFiles = newSelectedFiles.filter(p => p !== selectedAncestor);
+            const ancestorNode = getFileNodeByPath(fileTree, selectedAncestor);
+            if (ancestorNode && ancestorNode.children) {
+                // 2. Add all children of the ancestor EXCEPT the one that was just unchecked.
+                for (const child of ancestorNode.children) {
+                    if (child.absolutePath !== path) {
+                        newSelectedFiles.push(child.absolutePath);
+                    }
+                }
+            }
+        } else {
+            // Unchecking a parent or a file that was checked directly
+            const descendantPaths = getAllDescendantPaths(node);
+            newSelectedFiles = newSelectedFiles.filter(p => p !== path && !descendantPaths.includes(p));
+        }
+    } else {
+        // --- CHECK LOGIC ---
+        // 1. Remove all descendants that might already be individually selected
+        const descendantPaths = getAllDescendantPaths(node);
+        newSelectedFiles = newSelectedFiles.filter(p => !descendantPaths.includes(p));
+        
+        // 2. Add the new path
+        newSelectedFiles.push(path);
+    }
+  
+  return [...new Set(newSelectedFiles)]; // Remove duplicates for cleanliness
 };
 </file>
 
@@ -6167,7 +6557,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent }) => {
 
     useEffect(() => {
         // Set initial expanded state only once when data is first loaded
-        if (data.length > 0) {
+        if (data.length > 0 && expandedNodes.length === 0) {
             setExpandedNodes(getExpandedNodes(data));
         }
     }, [data]);
@@ -6196,7 +6586,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent }) => {
                         >
                             {isDirectory && <VscChevronRight />}
                         </span>
-                        <div className="treenode-content">
+                        <div className="treenode-content" onClick={(e) => isDirectory && handleToggleNode(e, node.absolutePath)}>
                             {renderNodeContent ? renderNodeContent(node, isExpanded) : node.name}
                         </div>
                     </div>
@@ -6337,7 +6727,7 @@ body {
 }
 
 .file-tree-container {
-    padding: 5px 5px 5px 0; // Remove left padding for alignment
+    padding: 5px 5px 5px 0; /* Remove left padding for alignment */
     flex-grow: 1;
     overflow-y: auto;
     overflow-x: hidden;
@@ -6361,12 +6751,14 @@ body {
 
 .treenode-li {
     position: relative;
+    padding-left: 20px;
 }
 
 .treenode-item-wrapper {
     display: flex;
     align-items: center;
-    min-height: 22px; // Standard VS Code line height
+    min-height: 22px; /* Standard VS Code line height */
+    margin-left: -20px; /* Counteract the li padding to align content */
 }
 
 .treenode-chevron {
@@ -6389,6 +6781,8 @@ body {
 .treenode-content {
     flex-grow: 1;
     overflow: hidden;
+    /* The whole content area is now the click target for expansion */
+    cursor: pointer; 
 }
 
 .file-item {
@@ -6398,7 +6792,6 @@ body {
     padding: 1px 4px;
     gap: 6px;
     border-radius: 3px;
-    cursor: pointer;
 }
 
 .file-item:hover {
@@ -6417,7 +6810,7 @@ body {
 .file-icon {
     display: flex;
     align-items: center;
-    font-size: 16px; // Standard icon size
+    font-size: 16px; /* Standard icon size */
 }
 
 .file-name {
@@ -13712,8 +14105,6 @@ const config = {
 };
 module.exports = [config];
 </file>
-
-
 
 
 

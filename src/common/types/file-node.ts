@@ -2,5 +2,6 @@ export interface FileNode {
     name: string;
     absolutePath: string;
     children?: FileNode[];
-    tokenCount?: number;
+    tokenCount: number;
+    fileCount: number; // For directories, this is the count of files inside. For files, it's 1.
 }
