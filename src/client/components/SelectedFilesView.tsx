@@ -1,13 +1,12 @@
 import * as React from 'react';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef, useEffect } from 'react';
 import { FileNode } from '@/common/types/file-node';
-import { VscClose, VscChevronUp, VscChevronDown, VscSymbolFile, VscSymbolNumeric } from 'react-icons/vsc';
+import { VscChevronUp, VscChevronDown, VscSymbolFile, VscSymbolNumeric } from 'react-icons/vsc';
 import { formatLargeNumber } from '@/common/utils/formatting';
-import Checkbox from './Checkbox';
 import { SiReact, SiSass, SiTypescript, SiJavascript } from 'react-icons/si';
 import { VscFile, VscJson, VscMarkdown } from 'react-icons/vsc';
 
-type SortableColumn = 'name' | 'tokenCount';
+type SortableColumn = 'name' | 'tokenCount' | 'default';
 type SortDirection = 'asc' | 'desc';
 
 const getFileIcon = (fileName: string) => {
@@ -31,16 +30,24 @@ interface SelectedFilesViewProps {
 const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes, onRemove }) => {
     const [sortColumn, setSortColumn] = useState<SortableColumn>('tokenCount');
     const [sortDirection, setSortDirection] = useState<SortDirection>('desc');
-    const [itemsToRemove, setItemsToRemove] = useState<Set<string>>(new Set());
+    const [selection, setSelection] = useState<Set<string>>(new Set());
+    const lastClickedPath = useRef<string | null>(null);
+
+    // Reset selection when the list of files changes
+    useEffect(() => {
+        setSelection(new Set());
+    }, [selectedFileNodes]);
 
     const sortedFiles = useMemo(() => {
-        return [...selectedFileNodes].sort((a, b) => {
+        const sorted = [...selectedFileNodes].sort((a, b) => {
+            if (sortColumn === 'default') return 0; // Keep original order
             const dir = sortDirection === 'asc' ? 1 : -1;
             if (sortColumn === 'name') {
-                return a.name.localeCompare(b.name) * dir;
+                return a.name.localeCompare(b.name, undefined, { numeric: true }) * dir;
             }
             return (a.tokenCount - b.tokenCount) * dir;
         });
+        return sorted;
     }, [selectedFileNodes, sortColumn, sortDirection]);
 
     const handleSort = (column: SortableColumn) => {
@@ -48,25 +55,42 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
             setSortDirection(prev => prev === 'asc' ? 'desc' : 'asc');
         } else {
             setSortColumn(column);
-            setSortDirection('desc');
+            setSortDirection(column === 'tokenCount' ? 'desc' : 'asc');
         }
     };
 
-    const handleToggleRemove = (path: string, checked: boolean) => {
-        setItemsToRemove(prev => {
-            const newSet = new Set(prev);
-            if (checked) {
-                newSet.add(path);
-            } else {
-                newSet.delete(path);
+    const handleItemClick = (e: React.MouseEvent, path: string) => {
+        const newSelection = new Set(selection);
+
+        if (e.shiftKey && lastClickedPath.current) {
+            const lastIdx = sortedFiles.findIndex(f => f.absolutePath === lastClickedPath.current);
+            const currentIdx = sortedFiles.findIndex(f => f.absolutePath === path);
+            const start = Math.min(lastIdx, currentIdx);
+            const end = Math.max(lastIdx, currentIdx);
+            
+            if (!e.ctrlKey) newSelection.clear();
+
+            for (let i = start; i <= end; i++) {
+                newSelection.add(sortedFiles[i].absolutePath);
             }
-            return newSet;
-        });
+        } else if (e.ctrlKey) {
+            if (newSelection.has(path)) {
+                newSelection.delete(path);
+            } else {
+                newSelection.add(path);
+            }
+        } else {
+            newSelection.clear();
+            newSelection.add(path);
+        }
+        
+        setSelection(newSelection);
+        lastClickedPath.current = path;
     };
 
     const handleRemoveSelected = () => {
-        onRemove(Array.from(itemsToRemove));
-        setItemsToRemove(new Set());
+        onRemove(Array.from(selection));
+        setSelection(new Set());
     };
     
     const SortIndicator = ({ column }: { column: SortableColumn }) => {
@@ -77,12 +101,11 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
     return (
         <div className="selected-files-panel">
             <div className="panel-header">
-                <span>Selected Items</span>
-                <span className="token-label">Tokens</span>
+                <span>Selected Items ({selectedFileNodes.length})</span>
             </div>
             <div className="panel-toolbar">
-                <button onClick={handleRemoveSelected} disabled={itemsToRemove.size === 0}>
-                    Remove selected ({itemsToRemove.size})
+                <button onClick={handleRemoveSelected} disabled={selection.size === 0}>
+                    Remove selected ({selection.size})
                 </button>
             </div>
             <div className="selected-files-list-container">
@@ -96,17 +119,13 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
                 </div>
                 <ul className="selected-files-list">
                     {sortedFiles.map(node => (
-                        <li key={node.absolutePath}>
-                            <Checkbox
-                                checked={itemsToRemove.has(node.absolutePath)}
-                                onChange={(checked) => handleToggleRemove(node.absolutePath, checked)}
-                            />
+                        <li key={node.absolutePath} 
+                            className={selection.has(node.absolutePath) ? 'selected' : ''}
+                            onClick={(e) => handleItemClick(e, node.absolutePath)}
+                        >
                             <span className="file-icon">{getFileIcon(node.name)}</span>
                             <span className="file-name" title={node.absolutePath}>{node.name}</span>
                             <span className="file-tokens">{formatLargeNumber(node.tokenCount, 1)}</span>
-                            <button className="remove-button" onClick={() => onRemove([node.absolutePath])} title="Remove from selection">
-                                <VscClose />
-                            </button>
                         </li>
                     ))}
                 </ul>

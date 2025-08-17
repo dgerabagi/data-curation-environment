@@ -64,7 +64,9 @@ export const addRemovePathInSelectedFiles = (
             const ancestorNode = getFileNodeByPath(fileTree, selectedAncestor);
             if (ancestorNode && ancestorNode.children) {
                 for (const child of ancestorNode.children) {
-                    if (child.absolutePath !== path) {
+                    const normalizedChildPath = child.absolutePath.replace(/\\/g, '/');
+                    const normalizedPath = path.replace(/\\/g, '/');
+                    if (!normalizedChildPath.startsWith(normalizedPath)) {
                          newSelectedFiles.push(child.absolutePath);
                     }
                 }
@@ -75,7 +77,7 @@ export const addRemovePathInSelectedFiles = (
         }
     } else {
         const descendantPaths = getAllDescendantPaths(node);
-        newSelectedFiles = newSelectedFiles.filter(p => !descendantPaths.includes(p));
+        newSelectedFiles = newSelectedFiles.filter(p => !p.startsWith(path));
         newSelectedFiles.push(path);
     }
   
@@ -87,15 +89,46 @@ export const removePathsFromSelected = (
     selectedFiles: string[],
     fileTree: FileNode[]
 ): string[] => {
-    let newSelectedFiles = [...selectedFiles];
-    for (const path of pathsToRemove) {
-        // This reuses the same logic as unchecking, which is complex.
-        // A simpler approach is to just remove the path and its descendants.
-        const node = getFileNodeByPath(fileTree, path);
+    let selectionSet = new Set(selectedFiles);
+
+    // This function recursively finds all file paths under a given node path
+    const getAllFilePaths = (node: FileNode): string[] => {
+        if (!node.children) return [node.absolutePath];
+        return node.children.flatMap(getAllFilePaths);
+    };
+
+    // Create a map for quick node lookup
+    const fileMap: Map<string, FileNode> = new Map();
+    const buildFileMap = (node: FileNode) => {
+        fileMap.set(node.absolutePath, node);
+        if (node.children) node.children.forEach(buildFileMap);
+    };
+    fileTree.forEach(buildFileMap);
+
+    // First, remove all paths that are being explicitly removed
+    pathsToRemove.forEach(p => selectionSet.delete(p));
+
+    // Then, process the remaining selection to handle directory logic
+    const finalSelection = new Set<string>();
+    const processedPaths = new Set<string>();
+
+    for (const path of selectionSet) {
+        if (processedPaths.has(path)) continue;
+
+        const node = fileMap.get(path);
         if (!node) continue;
 
-        const descendantPaths = getAllDescendantPaths(node);
-        newSelectedFiles = newSelectedFiles.filter(p => p !== path && !descendantPaths.includes(p));
+        // If it's a directory, add it and mark all its children as processed
+        if (node.children) {
+            finalSelection.add(path);
+            const childPaths = getAllFilePaths(node);
+            childPaths.forEach(childPath => processedPaths.add(childPath));
+        } else {
+            // If it's a file, just add it
+            finalSelection.add(path);
+            processedPaths.add(path);
+        }
     }
-    return newSelectedFiles;
+
+    return Array.from(finalSelection);
 };

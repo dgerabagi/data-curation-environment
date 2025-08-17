@@ -7,7 +7,7 @@ import { FileNode } from '@/common/types/file-node';
 import FileTree from '../../components/file-tree/FileTree';
 import { useState, useEffect, useMemo } from 'react';
 import { formatLargeNumber, formatNumberWithCommas } from '@/common/utils/formatting';
-import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, VscNewFolder } from 'react-icons/vsc';
+import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, VscNewFolder, VscLoading } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import SelectedFilesView from '@/client/components/SelectedFilesView';
 import { removePathsFromSelected } from '@/client/components/file-tree/FileTree.utils';
@@ -29,7 +29,7 @@ const App = () => {
 
     useEffect(() => {
         logger.log("Initializing view and requesting workspace files.");
-        clientIpc.sendToServer(ClientToServerChannel.RequestWorkspaceFiles, {});
+        requestFiles();
 
         const handleFileResponse = ({ files: receivedFiles }: { files: FileNode[] }) => {
             logger.log(`Received file tree from backend. Root node: ${receivedFiles[0]?.name}`);
@@ -129,7 +129,9 @@ const App = () => {
     return (
         <div className="view-container">
             <div className="view-header">
+                 <span className="view-title">Data Curation</span>
                  <div className="toolbar">
+                    {isLoading && <span className="spinner" title="Refreshing..."><VscLoading /></span>}
                     <button onClick={handleNewFile} title="New File..."><VscNewFile /></button>
                     <button onClick={handleNewFolder} title="New Folder..."><VscNewFolder /></button>
                     <button onClick={handleRefresh} title="Refresh Explorer"><VscRefresh /></button>
@@ -137,7 +139,7 @@ const App = () => {
                  </div>
             </div>
             <div className="file-tree-container">
-                {isLoading ? (
+                {isLoading && files.length === 0 ? (
                      <div className="loading-message">Loading file tree...</div>
                 ) : files.length > 0 ? (
                     files.map((rootNode, index) => (
@@ -148,6 +150,7 @@ const App = () => {
                             selectedFiles={selectedFiles}
                             updateSelectedFiles={updateSelectedFiles}
                             activeFile={activeFile}
+                            collapseTrigger={collapseTrigger}
                         />
                     ))
                 ) : (
