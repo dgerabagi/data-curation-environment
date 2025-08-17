@@ -7,7 +7,7 @@ import { FileNode } from '@/common/types/file-node';
 import FileTree from '../../components/file-tree/FileTree';
 import { useState, useEffect, useMemo } from 'react';
 import { formatLargeNumber, formatNumberWithCommas } from '@/common/utils/formatting';
-import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh } from 'react-icons/vsc';
+import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, VscNewFolder } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import SelectedFilesView from '@/client/components/SelectedFilesView';
 import { removePathsFromSelected } from '@/client/components/file-tree/FileTree.utils';
@@ -44,7 +44,7 @@ const App = () => {
         };
         clientIpc.onServerMessage(ServerToClientChannel.ApplySelectionSet, handleApplySelectionSet);
 
-    }, []); // C20: Changed dependency array to [] to prevent re-fetching on tab switch.
+    }, []);
 
     const handleFileClick = (filePath: string) => {
         setActiveFile(filePath);
@@ -69,6 +69,18 @@ const App = () => {
         setCollapseTrigger(c => c + 1);
     };
 
+    const handleNewFile = () => {
+        const parentDirectory = files.length > 0 ? files[0].absolutePath : '';
+        logger.log(`Requesting new file in ${parentDirectory}`);
+        clientIpc.sendToServer(ClientToServerChannel.RequestNewFile, { parentDirectory });
+    };
+
+    const handleNewFolder = () => {
+        const parentDirectory = files.length > 0 ? files[0].absolutePath : '';
+        logger.log(`Requesting new folder in ${parentDirectory}`);
+        clientIpc.sendToServer(ClientToServerChannel.RequestNewFolder, { parentDirectory });
+    };
+
     const handleRemoveFromSelection = (pathsToRemove: string[]) => {
         const newSelected = removePathsFromSelected(pathsToRemove, selectedFiles, files);
         setSelectedFiles(newSelected);
@@ -90,7 +102,7 @@ const App = () => {
         files.forEach(buildFileMap);
 
         const addNodeAndDescendants = (node: FileNode) => {
-            if (!node.children) { // It's a file
+            if (!node.children) {
                 if (!selectedFileSet.has(node.absolutePath)) {
                     selectedFileSet.add(node.absolutePath);
                     if (!node.isImage) {
@@ -99,7 +111,7 @@ const App = () => {
                     }
                     totalFiles++;
                 }
-            } else { // It's a directory
+            } else {
                 node.children.forEach(child => addNodeAndDescendants(child));
             }
         };
@@ -118,6 +130,8 @@ const App = () => {
         <div className="view-container">
             <div className="view-header">
                  <div className="toolbar">
+                    <button onClick={handleNewFile} title="New File..."><VscNewFile /></button>
+                    <button onClick={handleNewFolder} title="New Folder..."><VscNewFolder /></button>
                     <button onClick={handleRefresh} title="Refresh Explorer"><VscRefresh /></button>
                     <button onClick={handleCollapseAll} title="Collapse Folders in View"><VscCollapseAll /></button>
                  </div>

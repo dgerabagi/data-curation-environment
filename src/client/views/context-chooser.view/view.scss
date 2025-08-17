@@ -1,4 +1,4 @@
-/* Updated on: C19 (Adjust flex properties for panel relocation) */
+/* Updated on: C21 (Add styles for context menu) */
 body {
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -44,10 +44,10 @@ body {
 
 .selected-files-panel {
     border-top: 1px solid var(--vscode-panel-border);
-    max-height: 33vh; /* Allow it to take up to a third of the view height */
+    max-height: 33vh; 
     display: flex;
     flex-direction: column;
-    flex-shrink: 0; /* Prevent this panel from shrinking */
+    flex-shrink: 0; 
 }
 
 .panel-header {
@@ -80,12 +80,6 @@ body {
             background-color: var(--vscode-list-hoverBackground);
         }
 
-        .list-number {
-            color: var(--vscode-descriptionForeground);
-            min-width: 20px;
-            text-align: right;
-        }
-
         .file-name {
             white-space: nowrap;
             overflow: hidden;
@@ -103,18 +97,18 @@ body {
             border: none;
             color: var(--vscode-icon-foreground);
             cursor: pointer;
-            visibility: hidden; /* Hide by default */
+            visibility: hidden; 
         }
     }
 
     li:hover .remove-button {
-        visibility: visible; /* Show on hover */
+        visibility: visible; 
     }
 }
 
 
 .file-tree-container {
-    flex-grow: 1; /* This is the primary flexible element */
+    flex-grow: 1; 
     overflow-y: auto;
     overflow-x: hidden;
     padding-right: 5px;
@@ -170,7 +164,7 @@ body {
     }
 
     ul.treenode-children {
-        padding-left: 10px; /* Reduced indentation for a tighter look */
+        padding-left: 10px; 
     }
 }
 
@@ -264,4 +258,63 @@ body {
     display: flex;
     align-items: center;
     gap: 3px;
+}
+
+/* Context Menu Styles */
+.context-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+}
+
+.context-menu {
+    position: absolute;
+    background-color: var(--vscode-menu-background);
+    border: 1px solid var(--vscode-menu-border);
+    color: var(--vscode-menu-foreground);
+    box-shadow: 0 2px 8px var(--vscode-widget-shadow);
+    border-radius: 4px;
+    padding: 4px 0;
+    min-width: 180px;
+    z-index: 1000;
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    li {
+        padding: 4px 12px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        &:hover {
+            background-color: var(--vscode-menu-selectionBackground);
+            color: var(--vscode-menu-selectionForeground);
+        }
+    }
+
+    hr {
+        border: none;
+        border-top: 1px solid var(--vscode-menu-separatorBackground);
+        margin: 4px 0;
+    }
+}
+
+.rename-input {
+    background-color: var(--vscode-input-background);
+    color: var(--vscode-input-foreground);
+    border: 1px solid var(--vscode-focusBorder);
+    outline: none;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    font-size: inherit;
+    font-family: inherit;
 }

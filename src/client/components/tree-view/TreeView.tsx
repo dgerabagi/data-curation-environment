@@ -12,16 +12,15 @@ export interface TreeNode {
 interface TreeViewProps {
     data: TreeNode[];
     renderNodeContent?: (node: TreeNode, isExpanded: boolean) => React.ReactNode;
-    collapseTrigger?: number; // New prop to trigger collapse
+    collapseTrigger?: number;
+    onContextMenu?: (event: React.MouseEvent, node: TreeNode) => void;
 }
 
-const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTrigger = 0 }) => {
+const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTrigger = 0, onContextMenu }) => {
     const [expandedNodes, setExpandedNodes] = useState<string[]>([]);
 
     useEffect(() => {
-        // Set initial expanded state only once when data is first loaded
         if (data.length > 0) {
-            // Only expand the root node initially
             const rootNode = data[0];
             if (rootNode) {
                 setExpandedNodes([rootNode.absolutePath]);
@@ -30,8 +29,6 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     }, [data]);
 
     useEffect(() => {
-        // C19 FIX: When collapseTrigger changes, collapse all nodes except the root.
-        // Removed 'data' from dependency array to prevent this from firing on refresh.
         if (collapseTrigger > 0 && data.length > 0) {
             const rootNode = data[0];
             if (rootNode) {
@@ -42,11 +39,10 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
 
 
     const handleToggleNode = (e: React.MouseEvent, nodePath: string) => {
-        // Robustness fix: Do not toggle if the click was on a checkbox.
-        if ((e.target as HTMLElement).closest('.file-checkbox')) {
+        if ((e.target as HTMLElement).closest('.file-checkbox') || (e.target as HTMLElement).closest('.rename-input')) {
             return;
         }
-        e.stopPropagation(); // Prevent the click from bubbling to the parent item wrapper
+        e.stopPropagation();
         setExpandedNodes((prevExpandedNodes) => {
             const isExpanded = prevExpandedNodes.includes(nodePath);
             return isExpanded
@@ -62,7 +58,11 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
 
             return (
                 <li key={node.absolutePath} className="treenode-li">
-                    <div className={`treenode-item-wrapper`} onClick={(e) => isDirectory && handleToggleNode(e, node.absolutePath)}>
+                    <div
+                        className={`treenode-item-wrapper`}
+                        onClick={(e) => isDirectory && handleToggleNode(e, node.absolutePath)}
+                        onContextMenu={(e) => onContextMenu?.(e, node)}
+                    >
                         <span 
                             className={`treenode-chevron ${isExpanded ? 'expanded' : ''}`}
                         >

@@ -16,10 +16,30 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         flattenerService.flatten(data.selectedPaths);
     });
 
-    // This is a legacy handler. Refresh is now handled by a command.
-    serverIpc.onClientMessage(ClientToServerChannel.RequestRefresh, () => {
-        vscode.commands.executeCommand('dce.refreshTree');
+    serverIpc.onClientMessage(ClientToServerChannel.RequestNewFile, (data) => {
+        fsService.handleNewFileRequest(data.parentDirectory);
     });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestNewFolder, (data) => {
+        fsService.handleNewFolderRequest(data.parentDirectory);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestFileRename, (data) => {
+        fsService.handleFileRenameRequest(data.oldPath, data.newName);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestFileDelete, (data) => {
+        fsService.handleFileDeleteRequest(data.path);
+    });
+    
+    serverIpc.onClientMessage(ClientToServerChannel.RequestRevealInExplorer, (data) => {
+        fsService.handleRevealInExplorerRequest(data.path);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestCopyPath, (data) => {
+        fsService.handleCopyPathRequest(data.path, data.relative);
+    });
+
 
     serverIpc.onClientMessage(ClientToServerChannel.LogMessage, (data) => {
         const { level, message } = data;

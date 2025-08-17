@@ -29,7 +29,7 @@
                 {
                     "type": "webview",
                     "id": "viewType.sidebar.contextChooser",
-                    "name": "Context Chooser"
+                    "name": "Data Curation"
                 }
             ]
         }

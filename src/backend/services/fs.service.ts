@@ -14,7 +14,6 @@ export class FSService {
     private fileTreeCache: FileNode[] | null = null;
     private watcher: vscode.FileSystemWatcher | null = null;
     private debounceTimer: NodeJS.Timeout | null = null;
-    private serverIpc: ServerPostMessageManager | null = null;
 
     public initializeWatcher() {
         if (this.watcher) {
@@ -25,13 +24,12 @@ export class FSService {
         Services.loggerService.log("File system watcher initialized.");
 
         const changeHandler = (uri: vscode.Uri) => {
-            // Debounce the refresh to handle rapid changes (like git checkout) gracefully
             if (this.debounceTimer) {
                 clearTimeout(this.debounceTimer);
             }
             this.debounceTimer = setTimeout(() => {
                 Services.loggerService.log(`File system change detected at ${uri.fsPath}. Invalidating cache and triggering refresh.`);
-                this.fileTreeCache = null; // Invalidate cache
+                this.fileTreeCache = null;
                 
                 const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
                 if (serverIpc) {
@@ -39,7 +37,7 @@ export class FSService {
                 } else {
                     Services.loggerService.warn("Could not push file tree update, serverIpc not available.");
                 }
-            }, 500); // 500ms debounce window
+            }, 500);
         };
 
         this.watcher.onDidChange(changeHandler);
@@ -61,7 +59,7 @@ export class FSService {
                 return { tokenCount: 0, sizeInBytes: stats.size, isImage: true };
             }
 
-            if (stats.size > 5_000_000) { // 5MB threshold
+            if (stats.size > 5_000_000) {
                 Services.loggerService.warn(`Skipping token count for large file: ${filePath} (${stats.size} bytes)`);
                 return { tokenCount: 0, sizeInBytes: stats.size, isImage: false };
             }
@@ -102,7 +100,7 @@ export class FSService {
         
         const fileTree = await this.createFileTree(rootPath, files);
 
-        this.fileTreeCache = [fileTree]; // Cache the result
+        this.fileTreeCache = [fileTree];
         Services.loggerService.log("Sending file tree to client and caching result.");
         serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: this.fileTreeCache });
     }
@@ -186,5 +184,75 @@ export class FSService {
         node.tokenCount = totalTokens;
         node.fileCount = totalFiles;
         node.sizeInBytes = totalBytes;
+    }
+
+    // --- File Operations ---
+
+    public async handleNewFileRequest(parentDirectory: string) {
+        const newFileName = await vscode.window.showInputBox({
+            prompt: "Enter the name of the new file",
+            value: "new-file.ts",
+        });
+        if (newFileName) {
+            const newFilePath = path.join(parentDirectory, newFileName);
+            try {
+                await vscode.workspace.fs.writeFile(vscode.Uri.file(newFilePath), new Uint8Array());
+            } catch (error: any) {
+                vscode.window.showErrorMessage(`Failed to create file: ${error.message}`);
+            }
+        }
+    }
+
+    public async handleNewFolderRequest(parentDirectory: string) {
+        const newFolderName = await vscode.window.showInputBox({
+            prompt: "Enter the name of the new folder",
+            value: "new-folder",
+        });
+        if (newFolderName) {
+            const newFolderPath = path.join(parentDirectory, newFolderName);
+            try {
+                await vscode.workspace.fs.createDirectory(vscode.Uri.file(newFolderPath));
+            } catch (error: any) {
+                vscode.window.showErrorMessage(`Failed to create folder: ${error.message}`);
+            }
+        }
+    }
+
+    public async handleFileRenameRequest(oldPath: string, newName: string) {
+        const newPath = path.join(path.dirname(oldPath), newName);
+        try {
+            await vscode.workspace.fs.rename(vscode.Uri.file(oldPath), vscode.Uri.file(newPath));
+        } catch (error: any) {
+            vscode.window.showErrorMessage(`Failed to rename: ${error.message}`);
+        }
+    }
+
+    public async handleFileDeleteRequest(filePath: string) {
+        const confirmation = await vscode.window.showWarningMessage(
+            `Are you sure you want to delete ${path.basename(filePath)}? This will move it to the trash.`,
+            { modal: true },
+            'Delete'
+        );
+        if (confirmation === 'Delete') {
+            try {
+                await vscode.workspace.fs.delete(vscode.Uri.file(filePath), { recursive: true, useTrash: true });
+            } catch (error: any) {
+                vscode.window.showErrorMessage(`Failed to delete: ${error.message}`);
+            }
+        }
+    }
+
+    public handleRevealInExplorerRequest(filePath: string) {
+        vscode.commands.executeCommand('revealInExplorer', vscode.Uri.file(filePath));
+    }
+
+    public handleCopyPathRequest(filePath: string, relative: boolean) {
+        const workspaceFolders = vscode.workspace.workspaceFolders;
+        let pathToCopy = filePath;
+        if (relative && workspaceFolders && workspaceFolders.length > 0) {
+            pathToCopy = path.relative(workspaceFolders[0].uri.fsPath, filePath);
+        }
+        vscode.env.clipboard.writeText(pathToCopy);
+        vscode.window.showInformationMessage(`Copied to clipboard: ${pathToCopy}`);
     }
 }
