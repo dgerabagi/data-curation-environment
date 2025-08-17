@@ -4,6 +4,10 @@ export interface WebviewApi<StateType> {
     setState<T extends StateType | undefined>(newState: T): T;
 }
 
+export interface ViewState {
+    selectedFiles: string[];
+}
+
 declare global {
-    function acquireVsCodeApi<StateType = unknown>(): WebviewApi<StateType>;
+    function acquireVsCodeApi<StateType = ViewState>(): WebviewApi<StateType>;
 }

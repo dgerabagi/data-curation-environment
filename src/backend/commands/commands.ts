@@ -6,15 +6,18 @@ import { VIEW_TYPES } from '@/common/view-types';
 
 export const commands = [
     {
-        commandId: 'dce.saveSelectionSet',
+        commandId: 'dce.saveCurrentSelection',
         callback: async (selectedPaths: string[]) => {
+            if (!selectedPaths || selectedPaths.length === 0) {
+                vscode.window.showWarningMessage("No files are selected to save.");
+                return;
+            }
             const name = await vscode.window.showInputBox({
                 prompt: 'Enter a name for the selection set',
                 placeHolder: 'e.g., "API Feature" or "Frontend Refactor"'
             });
             if (name) {
                 await Services.selectionService.saveSelectionSet(name, selectedPaths);
-                // Refresh the list in the webview
                 const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
                 if(serverIpc) {
                     serverIpc.sendToClient(ServerToClientChannel.SendSelectionSets, { sets: Services.selectionService.getSelectionSets() });
@@ -41,6 +44,7 @@ export const commands = [
                     const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
                     if(serverIpc) {
                         serverIpc.sendToClient(ServerToClientChannel.ApplySelectionSet, { paths });
+                        Services.loggerService.log(`Command: Loaded selection set '${name}'.`);
                         vscode.window.showInformationMessage(`Loaded selection set '${name}'.`);
                     }
                 }
@@ -48,12 +52,12 @@ export const commands = [
         }
     },
     {
-        commandId: 'dce.deleteSelectionSet',
+        commandId: 'dce.manageSelectionSets',
         callback: async () => {
             const sets = Services.selectionService.getSelectionSets();
             const setNames = Object.keys(sets);
             if (setNames.length === 0) {
-                vscode.window.showInformationMessage("No selection sets to delete.");
+                vscode.window.showInformationMessage("No selection sets to manage.");
                 return;
             }
             const setToDelete = await vscode.window.showQuickPick(setNames, {
@@ -62,7 +66,6 @@ export const commands = [
 
             if (setToDelete) {
                 await Services.selectionService.deleteSelectionSet(setToDelete);
-                 // Refresh the list in the webview
                  const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
                  if(serverIpc) {
                      serverIpc.sendToClient(ServerToClientChannel.SendSelectionSets, { sets: Services.selectionService.getSelectionSets() });
@@ -76,7 +79,7 @@ export const commands = [
             const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
             if (serverIpc) {
                 Services.loggerService.log("Executing dce.refreshTree command.");
-                Services.fsService.handleWorkspaceFilesRequest(serverIpc);
+                Services.fsService.handleWorkspaceFilesRequest(serverIpc, true);
             } else {
                 Services.loggerService.warn("Could not refresh tree: serverIpc not found.");
             }

@@ -1,4 +1,4 @@
-/* Updated on: C22 (Layout fixes for header and selected items panel) */
+/* Updated on: C23 (Layout fixes for header and selected items panel) */
 body {
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -34,7 +34,7 @@ body {
     display: flex;
     gap: 4px;
     
-    button {
+    button, .dropdown-button {
         background: none;
         border: none;
         color: var(--vscode-icon-foreground);
@@ -128,6 +128,16 @@ body {
         gap: 4px;
     }
 
+    .header-index {
+        width: 30px;
+        flex-shrink: 0;
+    }
+
+    .header-type {
+        width: 30px;
+        flex-shrink: 0;
+    }
+
     .header-name {
         flex-grow: 1;
     }
@@ -161,9 +171,20 @@ body {
         &:hover {
             background-color: var(--vscode-list-hoverBackground);
         }
+        
+        .file-index {
+            width: 30px;
+            flex-shrink: 0;
+            color: var(--vscode-descriptionForeground);
+            text-align: right;
+            padding-right: 10px;
+        }
 
         .file-icon {
             font-size: 16px;
+            width: 20px;
+            flex-shrink: 0;
+            text-align: center;
         }
 
         .file-name {

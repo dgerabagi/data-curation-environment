@@ -1,7 +1,6 @@
 export enum ClientToServerChannel {
     RequestFlattenContext = "clientToServer.requestFlattenContext",
     RequestWorkspaceFiles = "clientToServer.requestWorkspaceFiles",
-    RequestRefresh = "clientToServer.requestRefresh",
     LogMessage = "clientToServer.logMessage", // For logging from webview
 
     // File Operations
@@ -11,6 +10,13 @@ export enum ClientToServerChannel {
     RequestFileDelete = "clientToServer.requestFileDelete",
     RequestRevealInExplorer = "clientToServer.requestRevealInExplorer",
     RequestCopyPath = "clientToServer.requestCopyPath",
+
+    // Selection Persistence
+    SaveCurrentSelection = "clientToServer.saveCurrentSelection",
+    RequestLastSelection = "clientToServer.requestLastSelection",
+
+    // VS Code Command Proxy
+    VSCodeCommand = "clientToServer.vscodeCommand",
 }
 
 export enum ServerToClientChannel {

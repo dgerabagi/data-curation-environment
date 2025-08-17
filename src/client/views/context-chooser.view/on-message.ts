@@ -7,6 +7,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     const fsService = Services.fsService;
     const flattenerService = Services.flattenerService;
     const loggerService = Services.loggerService;
+    const selectionService = Services.selectionService;
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestWorkspaceFiles, (data) =>
         fsService.handleWorkspaceFilesRequest(serverIpc, data.force)
@@ -40,6 +41,22 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         fsService.handleCopyPathRequest(data.path, data.relative);
     });
 
+    serverIpc.onClientMessage(ClientToServerChannel.SaveCurrentSelection, (data) => {
+        selectionService.saveCurrentSelection(data.paths);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestLastSelection, () => {
+        const lastSelection = selectionService.getLastSelection();
+        serverIpc.sendToClient(ServerToClientChannel.ApplySelectionSet, { paths: lastSelection });
+        // Also send the list of named sets
+        const sets = selectionService.getSelectionSets();
+        serverIpc.sendToClient(ServerToClientChannel.SendSelectionSets, { sets });
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.VSCodeCommand, (data) => {
+        const { command, args = [] } = data;
+        vscode.commands.executeCommand(command, ...args);
+    });
 
     serverIpc.onClientMessage(ClientToServerChannel.LogMessage, (data) => {
         const { level, message } = data;

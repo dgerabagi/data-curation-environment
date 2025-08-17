@@ -45,32 +45,32 @@ export class FSService {
         this.watcher.onDidDelete(changeHandler);
     }
 
-    private async getFileStats(filePath: string): Promise<{ tokenCount: number, sizeInBytes: number, isImage: boolean }> {
+    private async getFileStats(filePath: string): Promise<{ tokenCount: number, sizeInBytes: number, isImage: boolean, extension: string }> {
+        const extension = path.extname(filePath).toLowerCase();
         try {
-            const extension = path.extname(filePath).toLowerCase();
             const stats = await fs.stat(filePath);
 
             if (stats.isDirectory()) {
-                return { tokenCount: 0, sizeInBytes: 0, isImage: false };
+                return { tokenCount: 0, sizeInBytes: 0, isImage: false, extension: '' };
             }
 
             const isImage = IMAGE_EXTENSIONS.has(extension);
             if (isImage) {
-                return { tokenCount: 0, sizeInBytes: stats.size, isImage: true };
+                return { tokenCount: 0, sizeInBytes: stats.size, isImage: true, extension };
             }
 
             if (stats.size > 5_000_000) {
                 Services.loggerService.warn(`Skipping token count for large file: ${filePath} (${stats.size} bytes)`);
-                return { tokenCount: 0, sizeInBytes: stats.size, isImage: false };
+                return { tokenCount: 0, sizeInBytes: stats.size, isImage: false, extension };
             }
             
             const content = await fs.readFile(filePath, 'utf-8');
             const tokenCount = Math.ceil(content.length / 4);
-            return { tokenCount, sizeInBytes: stats.size, isImage: false };
+            return { tokenCount, sizeInBytes: stats.size, isImage: false, extension };
 
         } catch (error: any) {
             Services.loggerService.warn(`Could not get stats for ${filePath}: ${error.message}`);
-            return { tokenCount: 0, sizeInBytes: 0, isImage: false };
+            return { tokenCount: 0, sizeInBytes: 0, isImage: false, extension };
         }
     }
 

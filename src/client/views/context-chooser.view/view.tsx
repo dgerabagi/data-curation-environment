@@ -5,12 +5,13 @@ import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
 import { FileNode } from '@/common/types/file-node';
 import FileTree from '../../components/file-tree/FileTree';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { formatLargeNumber, formatNumberWithCommas } from '@/common/utils/formatting';
-import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, VscNewFolder, VscLoading } from 'react-icons/vsc';
+import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, VscNewFolder, VscLoading, VscSave, VscFolderLibrary, VscSettingsGear } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import SelectedFilesView from '@/client/components/SelectedFilesView';
 import { removePathsFromSelected } from '@/client/components/file-tree/FileTree.utils';
+import { SelectionSet } from '@/backend/services/selection.service';
 
 const App = () => {
     const [files, setFiles] = useState<FileNode[]>([]);
@@ -18,6 +19,7 @@ const App = () => {
     const [activeFile, setActiveFile] = useState<string | undefined>();
     const [collapseTrigger, setCollapseTrigger] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
+    const [selectionSets, setSelectionSets] = useState<SelectionSet>({});
     
     const clientIpc = ClientPostMessageManager.getInstance();
 
@@ -27,31 +29,38 @@ const App = () => {
         clientIpc.sendToServer(ClientToServerChannel.RequestWorkspaceFiles, { force });
     };
 
+    const updateSelectedFiles = useCallback((newSelectedFiles: string[]) => {
+        setSelectedFiles(newSelectedFiles);
+        clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths: newSelectedFiles });
+    }, [clientIpc]);
+
     useEffect(() => {
         logger.log("Initializing view and requesting workspace files.");
         requestFiles();
 
-        const handleFileResponse = ({ files: receivedFiles }: { files: FileNode[] }) => {
+        clientIpc.onServerMessage(ServerToClientChannel.SendWorkspaceFiles, ({ files: receivedFiles }) => {
             logger.log(`Received file tree from backend. Root node: ${receivedFiles[0]?.name}`);
             setFiles(receivedFiles);
             setIsLoading(false);
-        };
-        clientIpc.onServerMessage(ServerToClientChannel.SendWorkspaceFiles, handleFileResponse);
-
-        const handleApplySelectionSet = ({ paths }: { paths: string[] }) => {
+        });
+        
+        clientIpc.onServerMessage(ServerToClientChannel.ApplySelectionSet, ({ paths }) => {
             logger.log(`Applying selection set with ${paths.length} paths.`);
-            setSelectedFiles(paths);
-        };
-        clientIpc.onServerMessage(ServerToClientChannel.ApplySelectionSet, handleApplySelectionSet);
+            updateSelectedFiles(paths);
+        });
 
-    }, []);
+        clientIpc.onServerMessage(ServerToClientChannel.SendSelectionSets, ({ sets }) => {
+            logger.log(`Received ${Object.keys(sets).length} selection sets.`);
+            setSelectionSets(sets);
+        });
+
+        clientIpc.sendToServer(ClientToServerChannel.RequestLastSelection, {});
+
+    }, [updateSelectedFiles]);
+
 
     const handleFileClick = (filePath: string) => {
         setActiveFile(filePath);
-    };
-
-    const updateSelectedFiles = (newSelectedFiles: string[]) => {
-        setSelectedFiles(newSelectedFiles);
     };
 
     const handleFlattenClick = () => {
@@ -83,14 +92,14 @@ const App = () => {
 
     const handleRemoveFromSelection = (pathsToRemove: string[]) => {
         const newSelected = removePathsFromSelected(pathsToRemove, selectedFiles, files);
-        setSelectedFiles(newSelected);
+        updateSelectedFiles(newSelected);
     };
 
     const { totalFiles, totalTokens, selectedFileNodes } = useMemo(() => {
         let totalTokens = 0;
         let totalFiles = 0;
         const selectedFileSet = new Set<string>();
-        const selectedTextNodes: FileNode[] = [];
+        const selectedNodes: FileNode[] = [];
 
         const fileMap: Map<string, FileNode> = new Map();
         const buildFileMap = (node: FileNode) => {
@@ -105,9 +114,9 @@ const App = () => {
             if (!node.children) {
                 if (!selectedFileSet.has(node.absolutePath)) {
                     selectedFileSet.add(node.absolutePath);
+                    selectedNodes.push(node);
                     if (!node.isImage) {
                        totalTokens += node.tokenCount;
-                       selectedTextNodes.push(node);
                     }
                     totalFiles++;
                 }
@@ -123,13 +132,17 @@ const App = () => {
             }
         });
         
-        return { totalFiles, totalTokens, selectedFileNodes: selectedTextNodes };
+        return { totalFiles, totalTokens, selectedFileNodes: selectedNodes.filter(n => !n.isImage) };
     }, [selectedFiles, files]);
 
     return (
         <div className="view-container">
             <div className="view-header">
-                 <span className="view-title">Data Curation</span>
+                 <div className="toolbar">
+                    <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.saveCurrentSelection', args: [selectedFiles] })} title="Save Selection Set..."><VscSave /></button>
+                    <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.loadSelectionSet' })} title="Load Selection Set..."><VscFolderLibrary /></button>
+                    <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.manageSelectionSets' })} title="Manage Selection Sets..."><VscSettingsGear /></button>
+                 </div>
                  <div className="toolbar">
                     {isLoading && <span className="spinner" title="Refreshing..."><VscLoading /></span>}
                     <button onClick={handleNewFile} title="New File..."><VscNewFile /></button>

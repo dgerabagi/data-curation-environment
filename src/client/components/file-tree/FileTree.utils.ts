@@ -1,4 +1,5 @@
 import { FileNode } from "@/common/types/file-node";
+import { logger } from "@/client/utils/logger";
 
 function getAllDescendantPaths(node: FileNode): string[] {
     let paths: string[] = [];
@@ -76,7 +77,6 @@ export const addRemovePathInSelectedFiles = (
             newSelectedFiles = newSelectedFiles.filter(p => p !== path && !descendantPaths.includes(p));
         }
     } else {
-        const descendantPaths = getAllDescendantPaths(node);
         newSelectedFiles = newSelectedFiles.filter(p => !p.startsWith(path));
         newSelectedFiles.push(path);
     }
@@ -89,13 +89,12 @@ export const removePathsFromSelected = (
     selectedFiles: string[],
     fileTree: FileNode[]
 ): string[] => {
-    let selectionSet = new Set(selectedFiles);
+    logger.log(`Attempting to remove ${pathsToRemove.length} paths from selection.`);
+    if (pathsToRemove.length === 0) {
+        return selectedFiles;
+    }
 
-    // This function recursively finds all file paths under a given node path
-    const getAllFilePaths = (node: FileNode): string[] => {
-        if (!node.children) return [node.absolutePath];
-        return node.children.flatMap(getAllFilePaths);
-    };
+    let selectionSet = new Set(selectedFiles);
 
     // Create a map for quick node lookup
     const fileMap: Map<string, FileNode> = new Map();
@@ -105,30 +104,17 @@ export const removePathsFromSelected = (
     };
     fileTree.forEach(buildFileMap);
 
-    // First, remove all paths that are being explicitly removed
-    pathsToRemove.forEach(p => selectionSet.delete(p));
-
-    // Then, process the remaining selection to handle directory logic
-    const finalSelection = new Set<string>();
-    const processedPaths = new Set<string>();
-
-    for (const path of selectionSet) {
-        if (processedPaths.has(path)) continue;
-
+    pathsToRemove.forEach(path => {
         const node = fileMap.get(path);
-        if (!node) continue;
-
-        // If it's a directory, add it and mark all its children as processed
-        if (node.children) {
-            finalSelection.add(path);
-            const childPaths = getAllFilePaths(node);
-            childPaths.forEach(childPath => processedPaths.add(childPath));
-        } else {
-            // If it's a file, just add it
-            finalSelection.add(path);
-            processedPaths.add(path);
+        if (node) {
+            // Remove the node itself and all its descendants from the selection
+            const descendants = getAllDescendantPaths(node);
+            selectionSet.delete(path);
+            descendants.forEach(d => selectionSet.delete(d));
         }
-    }
+    });
 
-    return Array.from(finalSelection);
+    const newSelectedFiles = Array.from(selectionSet);
+    logger.log(`Selection updated. New count: ${newSelectedFiles.length}.`);
+    return newSelectedFiles;
 };

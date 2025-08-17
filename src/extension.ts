@@ -2,6 +2,7 @@ import * as vscode from "vscode";
 import { registerViews } from "./client/views";
 import { registerCommands } from "./backend/commands/register-commands";
 import { Services } from "./backend/services/services";
+import { ClientToServerChannel } from "./common/ipc/channels.enum";
 
 let globalContext: vscode.ExtensionContext | null = null;
 

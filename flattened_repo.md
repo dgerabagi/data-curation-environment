@@ -1,25 +1,25 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-17T19:01:32.423Z
+  Date Generated: 2025-08-17T19:29:36.521Z
   ---
   Total Files: 156
-  Total Lines: 12761
-  Total Characters: 487147
-  Approx. Tokens: 121847
+  Total Lines: 12856
+  Total Characters: 493039
+  Approx. Tokens: 123318
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10923 tokens)
 2. deploy_scaffold.js (10600 tokens)
 3. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
-4. src\backend\services\fs.service.ts (2676 tokens)
+4. src\backend\services\fs.service.ts (2695 tokens)
 5. The-Creator-AI-main\src\backend\services\code.service.ts (2618 tokens)
 6. The-Creator-AI-main\src\backend\services\fs.service.ts (2495 tokens)
 7. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts (2424 tokens)
-8. src\client\views\context-chooser.view\view.scss (2184 tokens)
-9. The-Creator-AI-main\src\backend\services\llm.service.ts (2156 tokens)
-10. src\client\views\context-chooser.view\view.tsx (1989 tokens)
+8. src\client\views\context-chooser.view\view.scss (2304 tokens)
+9. src\client\views\context-chooser.view\view.tsx (2276 tokens)
+10. The-Creator-AI-main\src\backend\services\llm.service.ts (2156 tokens)
 
 <!-- Full File List -->
 1. .gitignore - Lines: 9 - Chars: 108 - Tokens: 27
@@ -28,14 +28,14 @@
 4. deploy_scaffold.js - Lines: 1259 - Chars: 42400 - Tokens: 10600
 5. package.json - Lines: 72 - Chars: 2163 - Tokens: 541
 6. public\spiral.svg - Lines: 8 - Chars: 459 - Tokens: 115
-7. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 94 - Chars: 6085 - Tokens: 1522
+7. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 94 - Chars: 6120 - Tokens: 1530
 8. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 38 - Chars: 3311 - Tokens: 828
 9. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 47 - Chars: 5207 - Tokens: 1302
 10. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 73 - Chars: 5105 - Tokens: 1277
 11. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 68 - Chars: 4497 - Tokens: 1125
 12. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 48 - Chars: 5680 - Tokens: 1420
-13. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 52 - Chars: 3992 - Tokens: 998
-14. src\Artifacts\A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md - Lines: 39 - Chars: 5438 - Tokens: 1360
+13. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
+14. src\Artifacts\A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md - Lines: 38 - Chars: 5805 - Tokens: 1452
 15. src\Artifacts\A16. DCE - Phase 1 - UI & UX Refinements Plan.md - Lines: 41 - Chars: 5412 - Tokens: 1353
 16. src\Artifacts\A17. DCE - Phase 1 - Advanced Tree View Features.md - Lines: 47 - Chars: 3888 - Tokens: 972
 17. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
@@ -45,39 +45,39 @@
 21. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
 22. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43689 - Tokens: 10923
 23. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
-24. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 74 - Chars: 5773 - Tokens: 1444
+24. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
 25. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
-26. src\backend\commands\commands.ts - Lines: 85 - Chars: 3614 - Tokens: 904
+26. src\backend\commands\commands.ts - Lines: 88 - Chars: 3807 - Tokens: 952
 27. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
 28. src\backend\services\flattener.service.ts - Lines: 170 - Chars: 6841 - Tokens: 1711
-29. src\backend\services\fs.service.ts - Lines: 258 - Chars: 10703 - Tokens: 2676
+29. src\backend\services\fs.service.ts - Lines: 258 - Chars: 10777 - Tokens: 2695
 30. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-31. src\backend\services\selection.service.ts - Lines: 39 - Chars: 1300 - Tokens: 325
+31. src\backend\services\selection.service.ts - Lines: 56 - Chars: 2039 - Tokens: 510
 32. src\backend\services\services.ts - Lines: 22 - Chars: 844 - Tokens: 211
 33. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
 34. src\client\components\ContextMenu.tsx - Lines: 61 - Chars: 2914 - Tokens: 729
-35. src\client\components\file-tree\FileTree.tsx - Lines: 119 - Chars: 5469 - Tokens: 1368
-36. src\client\components\file-tree\FileTree.utils.ts - Lines: 134 - Chars: 4836 - Tokens: 1209
-37. src\client\components\SelectedFilesView.tsx - Lines: 137 - Chars: 5827 - Tokens: 1457
-38. src\client\components\tree-view\TreeView.tsx - Lines: 90 - Chars: 3217 - Tokens: 805
+35. src\client\components\file-tree\FileTree.tsx - Lines: 124 - Chars: 5765 - Tokens: 1442
+36. src\client\components\file-tree\FileTree.utils.ts - Lines: 120 - Chars: 4321 - Tokens: 1081
+37. src\client\components\SelectedFilesView.tsx - Lines: 153 - Chars: 6838 - Tokens: 1710
+38. src\client\components\tree-view\TreeView.tsx - Lines: 91 - Chars: 3288 - Tokens: 822
 39. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 40. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
 41. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-42. src\client\views\context-chooser.view\on-message.ts - Lines: 60 - Chars: 2269 - Tokens: 568
-43. src\client\views\context-chooser.view\view.scss - Lines: 397 - Chars: 8734 - Tokens: 2184
-44. src\client\views\context-chooser.view\view.tsx - Lines: 181 - Chars: 7953 - Tokens: 1989
+42. src\client\views\context-chooser.view\on-message.ts - Lines: 77 - Chars: 3128 - Tokens: 782
+43. src\client\views\context-chooser.view\view.scss - Lines: 418 - Chars: 9215 - Tokens: 2304
+44. src\client\views\context-chooser.view\view.tsx - Lines: 194 - Chars: 9103 - Tokens: 2276
 45. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
-46. src\common\ipc\channels.enum.ts - Lines: 21 - Chars: 1013 - Tokens: 254
-47. src\common\ipc\channels.type.ts - Lines: 22 - Chars: 1453 - Tokens: 364
+46. src\common\ipc\channels.enum.ts - Lines: 27 - Chars: 1209 - Tokens: 303
+47. src\common\ipc\channels.type.ts - Lines: 24 - Chars: 1630 - Tokens: 408
 48. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
 49. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 50. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-51. src\common\types\file-node.ts - Lines: 9 - Chars: 276 - Tokens: 69
-52. src\common\types\vscode-webview.d.ts - Lines: 9 - Chars: 282 - Tokens: 71
+51. src\common\types\file-node.ts - Lines: 10 - Chars: 300 - Tokens: 75
+52. src\common\types\vscode-webview.d.ts - Lines: 13 - Chars: 345 - Tokens: 87
 53. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
 54. src\common\utils\view-html.ts - Lines: 26 - Chars: 971 - Tokens: 243
 55. src\common\view-types.ts - Lines: 8 - Chars: 246 - Tokens: 62
-56. src\extension.ts - Lines: 52 - Chars: 2001 - Tokens: 501
+56. src\extension.ts - Lines: 53 - Chars: 2070 - Tokens: 518
 57. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
 58. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
 59. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
@@ -1741,7 +1741,7 @@ deployScaffold();
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C22 (Add A15, A16, A17 for new feature plans)
+# Updated on: C23 (Refine plans for selection sets and multi-select)
 
 ## 1. Purpose
 
@@ -1788,8 +1788,8 @@ deployScaffold();
 - **Tags:** development, testing, debugging, workflow, vs code extension, f5
 
 ### A8. DCE - Phase 1 - Selection Sets Feature Plan
-- **Description:** A plan outlining the user stories, UI/UX, and technical implementation for saving and loading different sets of selected files (selection profiles).
-- **Tags:** feature plan, selection sets, profiles, context management, phase 1
+- **Description:** A plan outlining the user stories, UI/UX, and technical implementation for saving, loading, and persisting different sets of selected files (selection profiles).
+- **Tags:** feature plan, selection sets, profiles, context management, persistence, phase 1
 
 ### A9. DCE - GitHub Repository Setup Guide
 - **Description:** A step-by-step guide with the necessary git commands to initialize the project as a local repository and push it to a new remote repository on GitHub.
@@ -2127,6 +2127,7 @@ To enhance the user experience and make the Data Curation Environment's file tre
 # Artifact A14: DCE - Ongoing Development Issues
 # Date Created: C20
 # Author: AI Model & Curator
+# Updated on: C23 (Add issues for selection persistence and remove button)
 
 - **Key/Value for A0:**
 - **Description:** A tracking document for recurring or persistent issues that need to be monitored across development cycles until they are confirmed as resolved.
@@ -2140,47 +2141,60 @@ This artifact serves as a centralized list to track ongoing and recurring issues
 
 ---
 
+### Issue #5: Selection State is Not Persistent
+
+-   **Symptom:** When the user makes selections in the "Data Curation" view, then switches to another VS Code tab and back, all selections are lost.
+-   **First Reported:** Cycle 23
+-   **Status (C23):** **Active.** The frontend state for `selectedFiles` is not being persisted in the VS Code `workspaceState`.
+-   **Next Steps (C23):** Implement a mechanism to save the `selectedFiles` array to `workspaceState` on every change and load it when the view is initialized. This will involve both frontend (`view.tsx`) and backend (`selection.service.ts`) changes.
+
+---
+
+### Issue #6: "Remove selected" Button is Non-Functional
+
+-   **Symptom:** In the "Selected Items" view, selecting one or more files and clicking the "Remove selected" button does not remove them from the list or from the main selection. It also causes the file tree in the main view to collapse.
+-   **First Reported:** Cycle 23
+-   **Status (C23):** **Active.** The logic in `removePathsFromSelected` or the way its result is being used to update the state is flawed. The tree collapsing indicates an improper state update is causing a major re-render.
+-   **Next Steps (C23):** Debug the `removePathsFromSelected` function in `FileTree.utils.ts`. Add logging to the `onClick` handler in `SelectedFilesView.tsx` to trace the data flow. Fix the state update to prevent the side-effect of collapsing the tree.
+
+---
+
 ### Issue #1: Logging Visibility
 
 -   **Symptom:** The custom "Data Curation Environment" output channel is not visible in the "OUTPUT" tab's dropdown menu in the Extension Development Host window. This prevents the primary logging mechanism from being used for debugging.
 -   **First Reported:** Cycle 19
--   **Status (C20):** **Active.** The issue persists. The root cause is likely an error during extension activation that prevents the `LoggerService` or the `vscode.window.createOutputChannel` call from executing successfully.
--   **Next Steps (C20):** Add robust `try...catch` blocks with `console.error` logging (which appears in the **Debug Console**) around the service initialization in `extension.ts` to identify the point of failure.
+-   **Status (C23):** **Resolved (C21).** The issue was caused by an early-exit error during extension activation. Adding robust `try...catch` blocks around service initializations in `extension.ts` allowed the extension to fully load, making the output channel visible.
 
 ---
 
 ### Issue #2: `node_modules` Exclusion and Performance
 
--   **Symptom:** The `node_modules` directory is included in file tree scans, leading to incorrect file and token counts and a significant performance delay ("Loading file tree..." takes a long time).
+-   **Symptom:** The `node_modules` directory is included in file tree scans, leading to incorrect file and token counts and a significant performance delay.
 -   **First Reported:** Cycle 15 (and earlier)
--   **Status (C20):** **Active.** The exclusion pattern provided to `vscode.workspace.findFiles` in `fs.service.ts` has been ineffective so far.
--   **Next Steps (C20):** Refine the glob pattern to be more explicit (`'{**/node_modules/**, ...}'`) and add logging to the `fs.service.ts` to verify the list of files *after* the exclusion is applied to confirm if the issue is with the `findFiles` call itself or subsequent processing. Also, explicitly exclude the generated `flattened_repo.md` file.
+-   **Status (C23):** **Resolved (C20).** The `vscode.workspace.findFiles` call in `fs.service.ts` was updated with a more robust glob pattern `'{**/node_modules/**,**/dist/**,**/out/**,**/.git/**,**/flattened_repo.md}'` which now correctly excludes these directories.
 
 ---
 
 ### Issue #3: Incorrect Image Token Counting
 
--   **Symptom:** Image files (e.g., `.png`, `.jpg`) are being assigned a token count based on their file size, rather than being treated as having zero tokens. They should display their file size (e.g., "15 KB") instead of a token count.
+-   **Symptom:** Image files are being assigned a token count instead of displaying their file size.
 -   **First Reported:** Cycle 18
--   **Status (C20):** **Active.** The logic in `fs.service.ts` to identify image files and set their `tokenCount` to 0 is not working as intended, or the frontend is not correctly interpreting the `isImage` flag.
--   **Next Steps (C20):** Add logging to the `getFileStats` method in `fs.service.ts` to trace how image files are processed. Review the rendering logic in `FileTree.tsx` to ensure it correctly handles the `isImage` flag and displays the `sizeInBytes` instead of `tokenCount`.
+-   **Status (C23):** **Resolved (C20).** The logic in `fs.service.ts` was corrected to identify images by extension, set `tokenCount` to 0, and get their `sizeInBytes`. The frontend (`FileTree.tsx`) now uses an `isImage` flag to display the formatted byte size instead of tokens.
 
 ---
 
 ### Issue #4: File Tree Caching and Refresh Behavior
 
--   **Symptom:** The file tree reloads from scratch every time the user switches away from and back to the extension's tab, causing a long "Loading..." delay. Additionally, the tree does not automatically update when files are created or deleted on the file system (e.g., after running "Flatten Context").
+-   **Symptom:** The file tree reloaded from scratch on every tab switch and did not auto-update on file changes.
 -   **First Reported:** Cycle 19
--   **Status (C20):** **Active.** The frontend lacks a caching mechanism, and the backend lacks a file system watcher to push updates.
--   **Next Steps (C20):**
-    1.  **Frontend:** Change the `useEffect` dependency array in `view.tsx` to `[]` to fetch the tree only once on initial load.
-    2.  **Backend:** Implement a `FileSystemWatcher` in `fs.service.ts` to detect changes, invalidate the server-side cache, and push a "force refresh" message to the client.
+-   **Status (C23):** **Resolved (C20).** A frontend cache was implemented by changing the `useEffect` dependency array. A backend `FileSystemWatcher` was implemented in `fs.service.ts` to detect changes and push updates to the client, triggering a refresh.
 </file>
 
 <file path="src/Artifacts/A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md">
 # Artifact A15: DCE - Phase 1 - Multi-Select & Sorting Feature Plan
 # Date Created: Cycle 22
 # Author: AI Model
+# Updated on: C23 (Add main tree multi-select and multi-level sorting)
 
 - **Key/Value for A0:**
 - **Description:** Details the requirements for multi-selection (click, Ctrl, Shift) in both the main file tree and the "Selected Items" panel, and multi-level column sorting.
@@ -2194,10 +2208,10 @@ To elevate the Data Curation Environment beyond basic functionality, this plan i
 
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
-| US-01 | **"Selected Items" Multi-Selection** | As a curator, after selecting a large folder, I want to quickly remove a small group of unwanted files from the "Selected Items" list using standard Shift-click and Ctrl-click, so I don't have to uncheck them one by one in the main tree. | - Clicking a single item in the "Selected Items" list selects it and deselects all others. <br> - Ctrl-clicking an item toggles its selection state without affecting other items. <br> - Shift-clicking an item selects the range of items between the last clicked item and the current one. <br> - A "Remove Selected" button acts on all currently selected items in this list. |
-| US-02 | **"Selected Items" Column Sorting** | As a curator, I want to sort the "Selected Items" list by file name or token count, so I can easily find specific files or identify the largest contributors to my context. | - The "Selected Items" panel has a header row with clickable "File" and "Tokens" labels. <br> - Clicking a column header sorts the list by that column. <br> - Clicking the same header again reverses the sort direction (ascending/descending). <br> - A visual indicator (e.g., an arrow) shows the current sort column and direction. |
-| US-03 | **"Selected Items" Multi-Layer Sorting** | As a curator, I want to apply a secondary sort, so I can group my selected files by type and then see the largest files within each group. | - The sorting mechanism supports at least two levels of sorting. <br> - The UI provides a way to define a primary and secondary sort key (e.g., Shift-clicking a second column header). <br> - The list first organizes by the primary key, then sorts items within those groups by the secondary key. |
-| US-04 | **Main Tree Multi-Selection** | As a user, I want to select multiple files and folders in the main "Data Curation" file tree using standard OS conventions (Ctrl/Shift click), so I can perform context menu actions (like Delete or Rename) on multiple items at once. | - Standard multi-selection is implemented in the main file tree. <br> - This selection is distinct from the checkbox state. <br> - Right-clicking on any item within a multi-selected group opens a context menu that applies its actions to all selected items. |
+| US-01 | **"Selected Items" Multi-Selection** | As a curator, after selecting a large folder, I want to quickly remove a small group of unwanted files from the "Selected Items" list using standard Shift-click and Ctrl-click, so I don't have to uncheck them one by one in the main tree. | - Clicking a single item in the "Selected Items" list selects it and deselects all others. <br> - Ctrl-clicking an item toggles its selection state without affecting other items. <br> - Shift-clicking an item selects the range of items between the last-clicked anchor item and the current one. The anchor is set by the last non-Shift click. <br> - A "Remove Selected" button acts on all currently selected items in this list. |
+| US-02 | **"Selected Items" Column Sorting** | As a curator, I want to sort the "Selected Items" list by file name or token count, so I can easily find specific files or identify the largest contributors to my context. | - The "Selected Items" panel has a header row with clickable "File" and "Tokens" labels. <br> - Clicking a column header sorts the list by that column. <br> - Clicking the same header again reverses the sort direction (ascending/descending). <br> - A visual indicator (e.g., an arrow) shows the current sort column and direction. <br> - The default, initial sort is by Token Count, descending. |
+| US-03 | **"Selected Items" Multi-Layer Sorting** | As a curator, I want to apply a secondary sort, so I can group my selected files by type and then see the largest files within each group. | - The sorting mechanism supports at least two levels of sorting. <br> - The UI provides a way to define a primary and secondary sort key (e.g., Shift-clicking a second column header). <br> - The list first organizes by the primary key, then sorts items within those groups by the secondary key. For example, sort by Type (asc), then by Token Count (desc). |
+| US-04 | **Main Tree Multi-Selection** | As a user, I want to select multiple files and folders in the main "Data Curation" file tree using standard OS conventions (Ctrl/Shift click), so I can perform context menu actions (like Delete) on multiple items at once. | - Standard multi-selection is implemented in the main file tree. <br> - This selection is a separate state from the checkbox state and is used for contextual actions, not for flattening. <br> - Right-clicking on any item within a multi-selected group opens a context menu that applies its actions to all selected items. |
 | US-05 | **"As-Is" Sorting** | As a user, I want to be able to revert the "Selected Items" list to its default sort order, so I can see the files as they appear in the native VS Code explorer. | - A sort option for "Default" or "As-Is" is available. <br> - Selecting it sorts the items based on their original file system order (folders first, then files, all alphabetized). |
 
 ## 3. Technical Implementation Plan
@@ -2205,18 +2219,16 @@ To elevate the Data Curation Environment beyond basic functionality, this plan i
 1.  **`SelectedFilesView.tsx` Refactor:**
     *   **State Management:** Introduce new state variables to manage selection, sorting, and multi-selection.
         *   `const [selection, setSelection] = useState<Set<string>>(new Set());`
-        *   `const [lastClickedPath, setLastClickedPath] = useState<string | null>(null);`
+        *   `const [selectionAnchor, setSelectionAnchor] = useState<string | null>(null);` // For stable shift-click
         *   `const [sortConfig, setSortConfig] = useState<{ key: string; direction: 'asc' | 'desc' }[]>([{ key: 'tokenCount', direction: 'desc' }]);`
-    *   **Event Handling:** Implement a comprehensive `onClick` handler for list items that inspects `event.ctrlKey` and `event.shiftKey` to manage the `selection` set.
-    *   **Sorting Logic:** Create a `useMemo` hook that sorts the `selectedFileNodes` prop based on the `sortConfig` state. This memoized value will be what gets rendered, ensuring the list only re-sorts when necessary. The sorting function will need to handle multiple keys.
-    *   **UI:** Convert the layout from a simple `<ul>` to a more structured format (CSS Grid or Flexbox) to create distinct, clickable headers.
+    *   **Event Handling:** Implement a comprehensive `onClick` handler for list items that inspects `event.ctrlKey` and `event.shiftKey`. A non-modifier click will set both the `selection` and the `selectionAnchor`. A shift-click will select from the `selectionAnchor` to the current item.
+    *   **Sorting Logic:** The `useMemo` hook that sorts the `selectedFileNodes` prop will be updated to handle an array of `sortConfig` objects. It will perform a stable sort, iterating through the sort criteria until a non-zero comparison result is found. A new "Type" column will be added, requiring a utility to extract the file extension.
 
 2.  **`FileTree.tsx` & `TreeView.tsx` (Main Tree Multi-Select):**
     *   This is a more complex task that mirrors the `SelectedFilesView` implementation but within a recursive tree structure.
-    *   A similar selection state (`useState<Set<string>>`) will be managed at the top level (`view.tsx`).
+    *   A new selection state for contextual actions (`const [contextSelection, setContextSelection] = useState<Set<string>>(new Set())`) will be managed at the top level (`view.tsx`).
     *   The selection state and handler functions will need to be passed down through `FileTree` to `TreeView`.
-    *   The `onContextMenu` handler will need to be updated to check if the right-clicked node is part of the current selection and pass the entire selection to the backend if an action is chosen.
-    *   This functionality will be developed *after* the "Selected Items" panel is complete.
+    *   The `onContextMenu` handler will need to be updated to check if the right-clicked node is part of the current `contextSelection` and pass the entire selection to the backend if an action is chosen.
 </file>
 
 <file path="src/Artifacts/A16. DCE - Phase 1 - UI & UX Refinements Plan.md">
@@ -3994,77 +4006,68 @@ You only need to stop the debugger (Shift+F5) and restart it (F5) if you make ch
 # Artifact A8: DCE - Phase 1 - Selection Sets Feature Plan
 # Date Created: Cycle 11
 # Author: AI Model
+# Updated on: C23 (Add requirement for selection persistence)
 
-- **Description:** A plan outlining the user stories, UI/UX, and technical implementation for saving and loading different sets of selected files (selection profiles).
-- **Tags:** feature plan, selection sets, profiles, context management, phase 1
+- **Key/Value for A0:**
+- **Description:** A plan outlining the user stories, UI/UX, and technical implementation for saving, loading, and persisting different sets of selected files (selection profiles).
+- **Tags:** feature plan, selection sets, profiles, context management, persistence, phase 1
 
 ## 1. Overview & Goal
 
-The goal of the "Selection Sets" feature is to address the user feedback from Cycle 11 regarding the need to save and switch between different file selections. Users often work on multiple tasks or projects concurrently, each requiring a different context. Manually re-selecting dozens of files each time they switch tasks is tedious and inefficient. This feature will allow users to save a named "set" of their current selections and quickly load it back later.
+The goal of the "Selection Sets" feature is to address the user feedback regarding the need to save and switch between different file selections, and to ensure the current selection is not lost during a session. Users often work on multiple tasks or projects concurrently, each requiring a different context. Manually re-selecting files is tedious and losing the current selection when switching tabs is a critical usability flaw. This feature will allow users to save a named "set" of their current selections, quickly load it back later, and have their current selection state persist automatically.
 
 ## 2. User Stories
 
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
-| US-01 | **Save Current Selection** | As a developer, I want to save my currently checked files as a named set, so I don't have to re-select them manually when I switch tasks. | - A UI element (e.g., button or menu item) exists to "Save current selection". <br> - Clicking it prompts me to enter a name for the selection set. <br> - After providing a name, the current list of selected file paths is saved. <br> - I receive a confirmation that the set was saved. |
-| US-02 | **Load a Saved Selection** | As a developer, I want to load a previously saved selection set, so I can quickly restore a specific context. | - A UI element (e.g., a dropdown menu) lists all saved selection sets by name. <br> - Selecting a set from the list immediately updates the file tree, checking all the files and folders from that set. <br> - Any previously checked files that are not part of the loaded set become unchecked. |
-| US-03 | **Delete a Saved Selection** | As a developer, I want to delete a selection set that I no longer need, so I can keep my list of saved sets clean. | - A UI element exists to manage or delete saved sets. <br> - I can select a set to delete from a list. <br> - I am asked to confirm the deletion. <br> - Upon confirmation, the set is removed from the list of saved sets. |
+| US-01 | **Selection Persistence** | As a user, I expect my current selection of checked files to remain active when I switch to another VS Code tab and then return, so my work is not lost. | - The current array of selected file paths is automatically saved to the webview's persistent state whenever it changes. <br> - When the webview is re-activated (e.g., tab is clicked), it restores the last saved selection state. |
+| US-02 | **Save Current Selection** | As a developer, I want to save my currently checked files as a named set, so I don't have to re-select them manually when I switch tasks. | - A UI element (e.g., button or menu item) exists to "Save current selection". <br> - Clicking it prompts me to enter a name for the selection set. <br> - After providing a name, the current list of selected file paths is saved. <br> - I receive a confirmation that the set was saved. |
+| US-03 | **Load a Saved Selection** | As a developer, I want to load a previously saved selection set, so I can quickly restore a specific context. | - A UI element (e.g., a dropdown menu) lists all saved selection sets by name. <br> - Selecting a set from the list immediately updates the file tree, checking all the files and folders from that set. <br> - Any previously checked files that are not part of the loaded set become unchecked. |
+| US-04 | **Delete a Saved Selection** | As a developer, I want to delete a selection set that I no longer need, so I can keep my list of saved sets clean. | - A UI element exists to manage or delete saved sets. <br> - I can select a set to delete from a list. <br> - I am asked to confirm the deletion. <br> - Upon confirmation, the set is removed from the list of saved sets. |
 
 ## 3. Proposed UI/UX
 
-The most efficient place for this functionality is within the `view-header` of our Context Chooser panel.
+The functionality will be consolidated into the `view-header` of our Context Chooser panel for easy access.
 
 1.  **Header Controls:**
-    *   A dropdown menu will be added to the header, perhaps next to the "Flatten Context" button.
-    *   The dropdown's default text will be "Selection Sets".
-    *   The dropdown will contain:
-        *   A list of currently saved selection sets.
-        *   A separator.
-        *   An action item: "Save Current Selection..."
-        *   An action item: "Manage Selections..."
+    *   A dropdown menu and/or a set of dedicated toolbar buttons for managing selection sets.
+    *   Example: A "Save" icon button and a "Load" icon button.
+    *   Clicking "Save" would trigger the save workflow.
+    *   Clicking "Load" would open a Quick Pick menu of saved sets.
 
 2.  **Saving a Set:**
-    *   Clicking "Save Current Selection..." will trigger a VS Code input box (`vscode.window.showInputBox`).
+    *   Clicking the "Save" button will execute the `dce.saveSelectionSet` command.
+    *   This command will trigger a VS Code input box (`vscode.window.showInputBox`).
     *   The user will enter a name (e.g., "API Feature", "Frontend Refactor").
     *   On submission, the backend saves the current `selectedFiles` array under that name.
 
 3.  **Loading a Set:**
-    *   Clicking on a saved set's name in the dropdown will immediately trigger an IPC message to the frontend with the array of file paths for that set.
-    *   The frontend will update its `selectedFiles` state, causing the tree to re-render with the new selections.
-
-4.  **Managing Sets:**
-    *   Clicking "Manage Selections..." will open a Quick Pick list (`vscode.window.showQuickPick`).
-    *   The list will show all saved sets. Each item will have a trash can icon next to it.
-    *   Selecting an item will prompt for confirmation and then delete the set.
+    *   Clicking the "Load" button will execute the `dce.loadSelectionSet` command.
+    *   This command shows a Quick Pick list (`vscode.window.showQuickPick`) of all saved sets.
+    *   Selecting a set triggers an IPC message (`ApplySelectionSet`) to the frontend with the array of file paths for that set.
+    *   The frontend updates its `selectedFiles` state, causing the tree to re-render with the new selections.
 
 ## 4. Technical Implementation Plan
 
-1.  **Data Storage:**
-    *   Selection sets will be stored in the VS Code `workspaceState`. This is a key-value store specific to the current workspace.
+1.  **State Persistence (`view.tsx`):**
+    *   Define a state type in `vscode-webview.d.ts`: `interface ViewState { selectedFiles: string[] }`.
+    *   In the main `App` component in `view.tsx`, use a `useEffect` hook that triggers whenever the `selectedFiles` state changes. Inside this effect, call `vscode.setState({ selectedFiles })`.
+    *   On initial component mount, retrieve the persisted state using `const savedState = vscode.getState();` and if it exists, use it to initialize the `selectedFiles` state: `useState<string[]>(savedState?.selectedFiles || [])`.
+
+2.  **Data Storage (`selection.service.ts`):**
+    *   Selection sets will continue to be stored in the VS Code `workspaceState`. This is a key-value store specific to the current workspace.
     *   A single key, e.g., `dce.selectionSets`, will hold an object where keys are the set names and values are the `string[]` of absolute file paths.
-    *   Example: `{ "API Feature": ["/path/to/api.ts", "/path/to/service.ts"], "UI Bugfix": ["/path/to/component.tsx"] }`
 
-2.  **IPC Channels (New/Updated):**
-    *   **Client -> Server:**
-        *   `RequestSelectionSets`: Sent on view load to populate the dropdown.
-        *   `SaveSelectionSet`: Sent with `{ name: string, paths: string[] }`.
-        *   `DeleteSelectionSet`: Sent with `{ name: string }`.
-    *   **Server -> Client:**
-        *   `SendSelectionSets`: Sent with the entire map of saved sets.
-        *   `LoadSelectionSet`: Sent with a single `{ paths: string[] }` to update the view's state.
-
-3.  **Backend Logic (`on-message.ts` & new Service):**
-    *   Create a new `SelectionService.ts` to encapsulate all logic for getting, setting, and deleting sets from `workspaceState`.
-    *   Update `on-message.ts` to handle the new IPC messages and call the appropriate methods in `SelectionService`.
-    *   The `LoadSelectionSet` message will be sent from the backend to the client after a user selects a set to load from the UI (which would be handled by a command). A command would be better for showing the Quick Pick UI.
+3.  **IPC Channels & Commands (`commands.ts`):**
+    *   The existing commands (`dce.saveSelectionSet`, `dce.loadSelectionSet`, `dce.deleteSelectionSet`) are suitable.
+    *   The backend `loadSelectionSet` command will trigger the `ApplySelectionSet` IPC message to the client with the file paths.
 
 4.  **Frontend Logic (`view.tsx`):**
     *   Add state to store the map of selection sets: `const [selectionSets, setSelectionSets] = useState({});`
-    *   On mount, send `RequestSelectionSets`.
-    *   Implement an effect to listen for `SendSelectionSets` and update the local state.
-    *   Implement an effect to listen for `LoadSelectionSet` and call `setSelectedFiles()` with the new paths.
-    *   Render the new dropdown menu in the header.
-    *   Implement the `onClick` handler for "Save Current Selection..." which will trigger the `SaveSelectionSet` message.
+    *   On mount, request the list of sets from the backend to populate any UI elements.
+    *   Implement an effect to listen for `ApplySelectionSet` and call `setSelectedFiles()` with the new paths.
+    *   Render the new "Save" and "Load" buttons in the header toolbar.
+    *   The `onClick` handler for the "Save" button will trigger an IPC message that executes the `dce.saveSelectionSet` command, passing the current `selectedFiles` state.
 </file>
 
 <file path="src/Artifacts/A9. DCE - GitHub Repository Setup Guide.md">
@@ -4150,15 +4153,18 @@ import { VIEW_TYPES } from '@/common/view-types';
 
 export const commands = [
     {
-        commandId: 'dce.saveSelectionSet',
+        commandId: 'dce.saveCurrentSelection',
         callback: async (selectedPaths: string[]) => {
+            if (!selectedPaths || selectedPaths.length === 0) {
+                vscode.window.showWarningMessage("No files are selected to save.");
+                return;
+            }
             const name = await vscode.window.showInputBox({
                 prompt: 'Enter a name for the selection set',
                 placeHolder: 'e.g., "API Feature" or "Frontend Refactor"'
             });
             if (name) {
                 await Services.selectionService.saveSelectionSet(name, selectedPaths);
-                // Refresh the list in the webview
                 const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
                 if(serverIpc) {
                     serverIpc.sendToClient(ServerToClientChannel.SendSelectionSets, { sets: Services.selectionService.getSelectionSets() });
@@ -4185,6 +4191,7 @@ export const commands = [
                     const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
                     if(serverIpc) {
                         serverIpc.sendToClient(ServerToClientChannel.ApplySelectionSet, { paths });
+                        Services.loggerService.log(`Command: Loaded selection set '${name}'.`);
                         vscode.window.showInformationMessage(`Loaded selection set '${name}'.`);
                     }
                 }
@@ -4192,12 +4199,12 @@ export const commands = [
         }
     },
     {
-        commandId: 'dce.deleteSelectionSet',
+        commandId: 'dce.manageSelectionSets',
         callback: async () => {
             const sets = Services.selectionService.getSelectionSets();
             const setNames = Object.keys(sets);
             if (setNames.length === 0) {
-                vscode.window.showInformationMessage("No selection sets to delete.");
+                vscode.window.showInformationMessage("No selection sets to manage.");
                 return;
             }
             const setToDelete = await vscode.window.showQuickPick(setNames, {
@@ -4206,7 +4213,6 @@ export const commands = [
 
             if (setToDelete) {
                 await Services.selectionService.deleteSelectionSet(setToDelete);
-                 // Refresh the list in the webview
                  const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
                  if(serverIpc) {
                      serverIpc.sendToClient(ServerToClientChannel.SendSelectionSets, { sets: Services.selectionService.getSelectionSets() });
@@ -4220,7 +4226,7 @@ export const commands = [
             const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
             if (serverIpc) {
                 Services.loggerService.log("Executing dce.refreshTree command.");
-                Services.fsService.handleWorkspaceFilesRequest(serverIpc);
+                Services.fsService.handleWorkspaceFilesRequest(serverIpc, true);
             } else {
                 Services.loggerService.warn("Could not refresh tree: serverIpc not found.");
             }
@@ -4464,32 +4470,32 @@ export class FSService {
         this.watcher.onDidDelete(changeHandler);
     }
 
-    private async getFileStats(filePath: string): Promise<{ tokenCount: number, sizeInBytes: number, isImage: boolean }> {
+    private async getFileStats(filePath: string): Promise<{ tokenCount: number, sizeInBytes: number, isImage: boolean, extension: string }> {
+        const extension = path.extname(filePath).toLowerCase();
         try {
-            const extension = path.extname(filePath).toLowerCase();
             const stats = await fs.stat(filePath);
 
             if (stats.isDirectory()) {
-                return { tokenCount: 0, sizeInBytes: 0, isImage: false };
+                return { tokenCount: 0, sizeInBytes: 0, isImage: false, extension: '' };
             }
 
             const isImage = IMAGE_EXTENSIONS.has(extension);
             if (isImage) {
-                return { tokenCount: 0, sizeInBytes: stats.size, isImage: true };
+                return { tokenCount: 0, sizeInBytes: stats.size, isImage: true, extension };
             }
 
             if (stats.size > 5_000_000) {
                 Services.loggerService.warn(`Skipping token count for large file: ${filePath} (${stats.size} bytes)`);
-                return { tokenCount: 0, sizeInBytes: stats.size, isImage: false };
+                return { tokenCount: 0, sizeInBytes: stats.size, isImage: false, extension };
             }
             
             const content = await fs.readFile(filePath, 'utf-8');
             const tokenCount = Math.ceil(content.length / 4);
-            return { tokenCount, sizeInBytes: stats.size, isImage: false };
+            return { tokenCount, sizeInBytes: stats.size, isImage: false, extension };
 
         } catch (error: any) {
             Services.loggerService.warn(`Could not get stats for ${filePath}: ${error.message}`);
-            return { tokenCount: 0, sizeInBytes: 0, isImage: false };
+            return { tokenCount: 0, sizeInBytes: 0, isImage: false, extension };
         }
     }
 
@@ -4721,8 +4727,10 @@ export class LoggerService {
 <file path="src/backend/services/selection.service.ts">
 import * as vscode from 'vscode';
 import { getContext } from '@/extension';
+import { Services } from './services';
 
 const SELECTION_SETS_KEY = 'dce.selectionSets';
+const LAST_SELECTION_KEY = 'dce.lastSelection';
 
 export interface SelectionSet {
     [name: string]: string[];
@@ -4733,6 +4741,8 @@ export class SelectionService {
     private get context(): vscode.ExtensionContext {
         return getContext();
     }
+
+    // --- Named Selection Sets ---
 
     public getSelectionSets(): SelectionSet {
         return this.context.workspaceState.get<SelectionSet>(SELECTION_SETS_KEY, {});
@@ -4746,6 +4756,7 @@ export class SelectionService {
         const sets = this.getSelectionSets();
         sets[name] = paths;
         await this.context.workspaceState.update(SELECTION_SETS_KEY, sets);
+        Services.loggerService.log(`Selection set '${name}' saved with ${paths.length} paths.`);
         vscode.window.showInformationMessage(`Selection set '${name}' saved.`);
     }
 
@@ -4754,8 +4765,20 @@ export class SelectionService {
         if (sets[name]) {
             delete sets[name];
             await this.context.workspaceState.update(SELECTION_SETS_KEY, sets);
+            Services.loggerService.log(`Selection set '${name}' deleted.`);
             vscode.window.showInformationMessage(`Selection set '${name}' deleted.`);
         }
+    }
+
+    // --- Persistent Current Selection ---
+
+    public getLastSelection(): string[] {
+        return this.context.workspaceState.get<string[]>(LAST_SELECTION_KEY, []);
+    }
+
+    public async saveCurrentSelection(paths: string[]): Promise<void> {
+        await this.context.workspaceState.update(LAST_SELECTION_KEY, paths);
+        Services.loggerService.log(`Persisted current selection of ${paths.length} items.`);
     }
 }
 </file>
@@ -4898,6 +4921,7 @@ interface FileTreeProps {
   selectedFiles: string[];
   activeFile?: string;
   updateSelectedFiles: (selectedFiles: string[]) => void;
+  collapseTrigger?: number;
 }
 
 const getFileIcon = (fileName: string) => {
@@ -4914,7 +4938,7 @@ const getFileIcon = (fileName: string) => {
     }
 };
 
-const FileTree: React.FC<FileTreeProps> = ({ data, onFileClick, selectedFiles, activeFile, updateSelectedFiles }) => {
+const FileTree: React.FC<FileTreeProps> = ({ data, onFileClick, selectedFiles, activeFile, updateSelectedFiles, collapseTrigger }) => {
     const [contextMenu, setContextMenu] = useState<{ x: number, y: number, node: FileNode } | null>(null);
     const [renamingPath, setRenamingPath] = useState<string | null>(null);
     const [renameValue, setRenameValue] = useState('');
@@ -4955,6 +4979,10 @@ const FileTree: React.FC<FileTreeProps> = ({ data, onFileClick, selectedFiles, a
     const renderFileNodeContent = (node: FileNode, isExpanded: boolean) => {
         const isActive = activeFile === node.absolutePath;
         const isDirectory = Array.isArray(node.children);
+        
+        const isDirectlySelected = selectedFiles.includes(node.absolutePath);
+        const hasSelectedAncestor = selectedFiles.some(ancestor => node.absolutePath.startsWith(ancestor + path.sep) && node.absolutePath !== ancestor);
+        const isChecked = isDirectlySelected || hasSelectedAncestor;
 
         if (renamingPath === node.absolutePath) {
             return (
@@ -4974,8 +5002,8 @@ const FileTree: React.FC<FileTreeProps> = ({ data, onFileClick, selectedFiles, a
             <div className={`file-item ${isActive ? 'active' : ''}`} onClick={() => handleNodeClick(node)}>
                 <Checkbox
                     className="file-checkbox"
-                    checked={selectedFiles.includes(node.absolutePath) || selectedFiles.some(p => node.absolutePath.startsWith(p + '/'))}
-                    indeterminate={!selectedFiles.includes(node.absolutePath) && selectedFiles.some(p => p.startsWith(node.absolutePath))}
+                    checked={isChecked}
+                    indeterminate={!isDirectlySelected && !hasSelectedAncestor && selectedFiles.some(p => p.startsWith(node.absolutePath))}
                     onChange={(_, e) => handleFileCheckboxChange(e, node.absolutePath)}
                 />
                 <span className="file-icon">{isDirectory ? (isExpanded ? <VscFolderOpened /> : <VscFolder />) : getFileIcon(node.name)}</span>
@@ -4990,7 +5018,7 @@ const FileTree: React.FC<FileTreeProps> = ({ data, onFileClick, selectedFiles, a
 
     return (
         <div className="file-tree">
-            <TreeView data={data} renderNodeContent={(node, isExpanded) => renderFileNodeContent(node, isExpanded as boolean)} onContextMenu={handleContextMenu} />
+            <TreeView data={data} renderNodeContent={(node, isExpanded) => renderFileNodeContent(node, isExpanded as boolean)} onContextMenu={handleContextMenu} collapseTrigger={collapseTrigger} />
             {contextMenu && <ContextMenu menu={contextMenu} onClose={() => setContextMenu(null)} onRename={handleRename} />}
         </div>
     );
@@ -5001,6 +5029,7 @@ export default FileTree;
 
 <file path="src/client/components/file-tree/FileTree.utils.ts">
 import { FileNode } from "@/common/types/file-node";
+import { logger } from "@/client/utils/logger";
 
 function getAllDescendantPaths(node: FileNode): string[] {
     let paths: string[] = [];
@@ -5078,7 +5107,6 @@ export const addRemovePathInSelectedFiles = (
             newSelectedFiles = newSelectedFiles.filter(p => p !== path && !descendantPaths.includes(p));
         }
     } else {
-        const descendantPaths = getAllDescendantPaths(node);
         newSelectedFiles = newSelectedFiles.filter(p => !p.startsWith(path));
         newSelectedFiles.push(path);
     }
@@ -5091,13 +5119,12 @@ export const removePathsFromSelected = (
     selectedFiles: string[],
     fileTree: FileNode[]
 ): string[] => {
-    let selectionSet = new Set(selectedFiles);
+    logger.log(`Attempting to remove ${pathsToRemove.length} paths from selection.`);
+    if (pathsToRemove.length === 0) {
+        return selectedFiles;
+    }
 
-    // This function recursively finds all file paths under a given node path
-    const getAllFilePaths = (node: FileNode): string[] => {
-        if (!node.children) return [node.absolutePath];
-        return node.children.flatMap(getAllFilePaths);
-    };
+    let selectionSet = new Set(selectedFiles);
 
     // Create a map for quick node lookup
     const fileMap: Map<string, FileNode> = new Map();
@@ -5107,32 +5134,19 @@ export const removePathsFromSelected = (
     };
     fileTree.forEach(buildFileMap);
 
-    // First, remove all paths that are being explicitly removed
-    pathsToRemove.forEach(p => selectionSet.delete(p));
-
-    // Then, process the remaining selection to handle directory logic
-    const finalSelection = new Set<string>();
-    const processedPaths = new Set<string>();
-
-    for (const path of selectionSet) {
-        if (processedPaths.has(path)) continue;
-
+    pathsToRemove.forEach(path => {
         const node = fileMap.get(path);
-        if (!node) continue;
-
-        // If it's a directory, add it and mark all its children as processed
-        if (node.children) {
-            finalSelection.add(path);
-            const childPaths = getAllFilePaths(node);
-            childPaths.forEach(childPath => processedPaths.add(childPath));
-        } else {
-            // If it's a file, just add it
-            finalSelection.add(path);
-            processedPaths.add(path);
+        if (node) {
+            // Remove the node itself and all its descendants from the selection
+            const descendants = getAllDescendantPaths(node);
+            selectionSet.delete(path);
+            descendants.forEach(d => selectionSet.delete(d));
         }
-    }
+    });
 
-    return Array.from(finalSelection);
+    const newSelectedFiles = Array.from(selectionSet);
+    logger.log(`Selection updated. New count: ${newSelectedFiles.length}.`);
+    return newSelectedFiles;
 };
 </file>
 
@@ -5140,12 +5154,13 @@ export const removePathsFromSelected = (
 import * as React from 'react';
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { FileNode } from '@/common/types/file-node';
-import { VscChevronUp, VscChevronDown, VscSymbolFile, VscSymbolNumeric } from 'react-icons/vsc';
+import { VscChevronUp, VscChevronDown, VscSymbolFile, VscSymbolNumeric, VscTypeHierarchy } from 'react-icons/vsc';
 import { formatLargeNumber } from '@/common/utils/formatting';
 import { SiReact, SiSass, SiTypescript, SiJavascript } from 'react-icons/si';
 import { VscFile, VscJson, VscMarkdown } from 'react-icons/vsc';
+import { logger } from '../utils/logger';
 
-type SortableColumn = 'name' | 'tokenCount' | 'default';
+type SortableColumn = 'name' | 'tokenCount' | 'extension';
 type SortDirection = 'asc' | 'desc';
 
 const getFileIcon = (fileName: string) => {
@@ -5170,7 +5185,7 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
     const [sortColumn, setSortColumn] = useState<SortableColumn>('tokenCount');
     const [sortDirection, setSortDirection] = useState<SortDirection>('desc');
     const [selection, setSelection] = useState<Set<string>>(new Set());
-    const lastClickedPath = useRef<string | null>(null);
+    const firstClickedPath = useRef<string | null>(null); // Anchor for shift-click
 
     // Reset selection when the list of files changes
     useEffect(() => {
@@ -5178,15 +5193,23 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
     }, [selectedFileNodes]);
 
     const sortedFiles = useMemo(() => {
-        const sorted = [...selectedFileNodes].sort((a, b) => {
-            if (sortColumn === 'default') return 0; // Keep original order
+        return [...selectedFileNodes].sort((a, b) => {
             const dir = sortDirection === 'asc' ? 1 : -1;
             if (sortColumn === 'name') {
                 return a.name.localeCompare(b.name, undefined, { numeric: true }) * dir;
             }
+            if (sortColumn === 'extension') {
+                const extA = a.extension || '';
+                const extB = b.extension || '';
+                if (extA !== extB) {
+                    return extA.localeCompare(extB) * dir;
+                }
+                // Sub-sort by token count if extensions are the same
+                return (b.tokenCount - a.tokenCount);
+            }
+            // Default and tokenCount sort
             return (a.tokenCount - b.tokenCount) * dir;
         });
-        return sorted;
     }, [selectedFileNodes, sortColumn, sortDirection]);
 
     const handleSort = (column: SortableColumn) => {
@@ -5201,11 +5224,11 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
     const handleItemClick = (e: React.MouseEvent, path: string) => {
         const newSelection = new Set(selection);
 
-        if (e.shiftKey && lastClickedPath.current) {
-            const lastIdx = sortedFiles.findIndex(f => f.absolutePath === lastClickedPath.current);
+        if (e.shiftKey && firstClickedPath.current) {
+            const firstIdx = sortedFiles.findIndex(f => f.absolutePath === firstClickedPath.current);
             const currentIdx = sortedFiles.findIndex(f => f.absolutePath === path);
-            const start = Math.min(lastIdx, currentIdx);
-            const end = Math.max(lastIdx, currentIdx);
+            const start = Math.min(firstIdx, currentIdx);
+            const end = Math.max(firstIdx, currentIdx);
             
             if (!e.ctrlKey) newSelection.clear();
 
@@ -5218,16 +5241,18 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
             } else {
                 newSelection.add(path);
             }
+            firstClickedPath.current = path; // Update anchor on ctrl-click
         } else {
             newSelection.clear();
             newSelection.add(path);
+            firstClickedPath.current = path; // Set anchor on simple click
         }
         
         setSelection(newSelection);
-        lastClickedPath.current = path;
     };
 
     const handleRemoveSelected = () => {
+        logger.log(`"Remove selected" button clicked. Removing ${selection.size} items.`);
         onRemove(Array.from(selection));
         setSelection(new Set());
     };
@@ -5249,6 +5274,10 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
             </div>
             <div className="selected-files-list-container">
                 <div className="selected-list-header">
+                    <div className="header-index">#</div>
+                    <div className="header-type" onClick={() => handleSort('extension')} title="Sort by File Type">
+                        <VscTypeHierarchy /> <SortIndicator column="extension" />
+                    </div>
                     <div className="header-name" onClick={() => handleSort('name')}>
                         <VscSymbolFile /> File <SortIndicator column="name" />
                     </div>
@@ -5257,11 +5286,12 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
                     </div>
                 </div>
                 <ul className="selected-files-list">
-                    {sortedFiles.map(node => (
+                    {sortedFiles.map((node, index) => (
                         <li key={node.absolutePath} 
                             className={selection.has(node.absolutePath) ? 'selected' : ''}
                             onClick={(e) => handleItemClick(e, node.absolutePath)}
                         >
+                            <span className="file-index">{index + 1}</span>
                             <span className="file-icon">{getFileIcon(node.name)}</span>
                             <span className="file-name" title={node.absolutePath}>{node.name}</span>
                             <span className="file-tokens">{formatLargeNumber(node.tokenCount, 1)}</span>
@@ -5318,6 +5348,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
 
 
     const handleToggleNode = (e: React.MouseEvent, nodePath: string) => {
+        // Prevent toggling when clicking on checkbox or rename input
         if ((e.target as HTMLElement).closest('.file-checkbox') || (e.target as HTMLElement).closest('.rename-input')) {
             return;
         }
@@ -5427,6 +5458,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     const fsService = Services.fsService;
     const flattenerService = Services.flattenerService;
     const loggerService = Services.loggerService;
+    const selectionService = Services.selectionService;
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestWorkspaceFiles, (data) =>
         fsService.handleWorkspaceFilesRequest(serverIpc, data.force)
@@ -5460,6 +5492,22 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         fsService.handleCopyPathRequest(data.path, data.relative);
     });
 
+    serverIpc.onClientMessage(ClientToServerChannel.SaveCurrentSelection, (data) => {
+        selectionService.saveCurrentSelection(data.paths);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestLastSelection, () => {
+        const lastSelection = selectionService.getLastSelection();
+        serverIpc.sendToClient(ServerToClientChannel.ApplySelectionSet, { paths: lastSelection });
+        // Also send the list of named sets
+        const sets = selectionService.getSelectionSets();
+        serverIpc.sendToClient(ServerToClientChannel.SendSelectionSets, { sets });
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.VSCodeCommand, (data) => {
+        const { command, args = [] } = data;
+        vscode.commands.executeCommand(command, ...args);
+    });
 
     serverIpc.onClientMessage(ClientToServerChannel.LogMessage, (data) => {
         const { level, message } = data;
@@ -5481,7 +5529,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 </file>
 
 <file path="src/client/views/context-chooser.view/view.scss">
-/* Updated on: C22 (Layout fixes for header and selected items panel) */
+/* Updated on: C23 (Layout fixes for header and selected items panel) */
 body {
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -5517,7 +5565,7 @@ body {
     display: flex;
     gap: 4px;
     
-    button {
+    button, .dropdown-button {
         background: none;
         border: none;
         color: var(--vscode-icon-foreground);
@@ -5611,6 +5659,16 @@ body {
         gap: 4px;
     }
 
+    .header-index {
+        width: 30px;
+        flex-shrink: 0;
+    }
+
+    .header-type {
+        width: 30px;
+        flex-shrink: 0;
+    }
+
     .header-name {
         flex-grow: 1;
     }
@@ -5644,9 +5702,20 @@ body {
         &:hover {
             background-color: var(--vscode-list-hoverBackground);
         }
+        
+        .file-index {
+            width: 30px;
+            flex-shrink: 0;
+            color: var(--vscode-descriptionForeground);
+            text-align: right;
+            padding-right: 10px;
+        }
 
         .file-icon {
             font-size: 16px;
+            width: 20px;
+            flex-shrink: 0;
+            text-align: center;
         }
 
         .file-name {
@@ -5888,12 +5957,13 @@ import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
 import { FileNode } from '@/common/types/file-node';
 import FileTree from '../../components/file-tree/FileTree';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { formatLargeNumber, formatNumberWithCommas } from '@/common/utils/formatting';
-import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, VscNewFolder, VscLoading } from 'react-icons/vsc';
+import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, VscNewFolder, VscLoading, VscSave, VscFolderLibrary, VscSettingsGear } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import SelectedFilesView from '@/client/components/SelectedFilesView';
 import { removePathsFromSelected } from '@/client/components/file-tree/FileTree.utils';
+import { SelectionSet } from '@/backend/services/selection.service';
 
 const App = () => {
     const [files, setFiles] = useState<FileNode[]>([]);
@@ -5901,6 +5971,7 @@ const App = () => {
     const [activeFile, setActiveFile] = useState<string | undefined>();
     const [collapseTrigger, setCollapseTrigger] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
+    const [selectionSets, setSelectionSets] = useState<SelectionSet>({});
     
     const clientIpc = ClientPostMessageManager.getInstance();
 
@@ -5910,31 +5981,38 @@ const App = () => {
         clientIpc.sendToServer(ClientToServerChannel.RequestWorkspaceFiles, { force });
     };
 
+    const updateSelectedFiles = useCallback((newSelectedFiles: string[]) => {
+        setSelectedFiles(newSelectedFiles);
+        clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths: newSelectedFiles });
+    }, [clientIpc]);
+
     useEffect(() => {
         logger.log("Initializing view and requesting workspace files.");
         requestFiles();
 
-        const handleFileResponse = ({ files: receivedFiles }: { files: FileNode[] }) => {
+        clientIpc.onServerMessage(ServerToClientChannel.SendWorkspaceFiles, ({ files: receivedFiles }) => {
             logger.log(`Received file tree from backend. Root node: ${receivedFiles[0]?.name}`);
             setFiles(receivedFiles);
             setIsLoading(false);
-        };
-        clientIpc.onServerMessage(ServerToClientChannel.SendWorkspaceFiles, handleFileResponse);
-
-        const handleApplySelectionSet = ({ paths }: { paths: string[] }) => {
+        });
+        
+        clientIpc.onServerMessage(ServerToClientChannel.ApplySelectionSet, ({ paths }) => {
             logger.log(`Applying selection set with ${paths.length} paths.`);
-            setSelectedFiles(paths);
-        };
-        clientIpc.onServerMessage(ServerToClientChannel.ApplySelectionSet, handleApplySelectionSet);
+            updateSelectedFiles(paths);
+        });
 
-    }, []);
+        clientIpc.onServerMessage(ServerToClientChannel.SendSelectionSets, ({ sets }) => {
+            logger.log(`Received ${Object.keys(sets).length} selection sets.`);
+            setSelectionSets(sets);
+        });
+
+        clientIpc.sendToServer(ClientToServerChannel.RequestLastSelection, {});
+
+    }, [updateSelectedFiles]);
+
 
     const handleFileClick = (filePath: string) => {
         setActiveFile(filePath);
-    };
-
-    const updateSelectedFiles = (newSelectedFiles: string[]) => {
-        setSelectedFiles(newSelectedFiles);
     };
 
     const handleFlattenClick = () => {
@@ -5966,14 +6044,14 @@ const App = () => {
 
     const handleRemoveFromSelection = (pathsToRemove: string[]) => {
         const newSelected = removePathsFromSelected(pathsToRemove, selectedFiles, files);
-        setSelectedFiles(newSelected);
+        updateSelectedFiles(newSelected);
     };
 
     const { totalFiles, totalTokens, selectedFileNodes } = useMemo(() => {
         let totalTokens = 0;
         let totalFiles = 0;
         const selectedFileSet = new Set<string>();
-        const selectedTextNodes: FileNode[] = [];
+        const selectedNodes: FileNode[] = [];
 
         const fileMap: Map<string, FileNode> = new Map();
         const buildFileMap = (node: FileNode) => {
@@ -5988,9 +6066,9 @@ const App = () => {
             if (!node.children) {
                 if (!selectedFileSet.has(node.absolutePath)) {
                     selectedFileSet.add(node.absolutePath);
+                    selectedNodes.push(node);
                     if (!node.isImage) {
                        totalTokens += node.tokenCount;
-                       selectedTextNodes.push(node);
                     }
                     totalFiles++;
                 }
@@ -6006,13 +6084,17 @@ const App = () => {
             }
         });
         
-        return { totalFiles, totalTokens, selectedFileNodes: selectedTextNodes };
+        return { totalFiles, totalTokens, selectedFileNodes: selectedNodes.filter(n => !n.isImage) };
     }, [selectedFiles, files]);
 
     return (
         <div className="view-container">
             <div className="view-header">
-                 <span className="view-title">Data Curation</span>
+                 <div className="toolbar">
+                    <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.saveCurrentSelection', args: [selectedFiles] })} title="Save Selection Set..."><VscSave /></button>
+                    <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.loadSelectionSet' })} title="Load Selection Set..."><VscFolderLibrary /></button>
+                    <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.manageSelectionSets' })} title="Manage Selection Sets..."><VscSettingsGear /></button>
+                 </div>
                  <div className="toolbar">
                     {isLoading && <span className="spinner" title="Refreshing..."><VscLoading /></span>}
                     <button onClick={handleNewFile} title="New File..."><VscNewFile /></button>
@@ -6105,7 +6187,6 @@ export function registerViews(context: vscode.ExtensionContext) {
 export enum ClientToServerChannel {
     RequestFlattenContext = "clientToServer.requestFlattenContext",
     RequestWorkspaceFiles = "clientToServer.requestWorkspaceFiles",
-    RequestRefresh = "clientToServer.requestRefresh",
     LogMessage = "clientToServer.logMessage", // For logging from webview
 
     // File Operations
@@ -6115,6 +6196,13 @@ export enum ClientToServerChannel {
     RequestFileDelete = "clientToServer.requestFileDelete",
     RequestRevealInExplorer = "clientToServer.requestRevealInExplorer",
     RequestCopyPath = "clientToServer.requestCopyPath",
+
+    // Selection Persistence
+    SaveCurrentSelection = "clientToServer.saveCurrentSelection",
+    RequestLastSelection = "clientToServer.requestLastSelection",
+
+    // VS Code Command Proxy
+    VSCodeCommand = "clientToServer.vscodeCommand",
 }
 
 export enum ServerToClientChannel {
@@ -6134,7 +6222,6 @@ export type SelectionSet = { [name: string]: string[] };
 export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel> =
     T extends ClientToServerChannel.RequestFlattenContext ? { selectedPaths: string[] } :
     T extends ClientToServerChannel.RequestWorkspaceFiles ? { force?: boolean } :
-    T extends ClientToServerChannel.RequestRefresh ? {} :
     T extends ClientToServerChannel.LogMessage ? { level: 'info' | 'warn' | 'error', message: string } :
     T extends ClientToServerChannel.RequestNewFile ? { parentDirectory: string } :
     T extends ClientToServerChannel.RequestNewFolder ? { parentDirectory: string } :
@@ -6142,6 +6229,9 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestFileDelete ? { path: string } :
     T extends ClientToServerChannel.RequestRevealInExplorer ? { path: string } :
     T extends ClientToServerChannel.RequestCopyPath ? { path: string, relative: boolean } :
+    T extends ClientToServerChannel.SaveCurrentSelection ? { paths: string[] } :
+    T extends ClientToServerChannel.RequestLastSelection ? {} :
+    T extends ClientToServerChannel.VSCodeCommand ? { command: string, args?: any[] } :
     
     T extends ServerToClientChannel.SendWorkspaceFiles ? { files: FileNode[] } :
     T extends ServerToClientChannel.ApplySelectionSet ? { paths: string[] } :
@@ -6260,6 +6350,7 @@ export interface FileNode {
     fileCount: number; // For directories, this is the count of files inside. For files, it's 1.
     isImage: boolean;
     sizeInBytes: number;
+    extension: string;
 }
 </file>
 
@@ -6270,8 +6361,12 @@ export interface WebviewApi<StateType> {
     setState<T extends StateType | undefined>(newState: T): T;
 }
 
+export interface ViewState {
+    selectedFiles: string[];
+}
+
 declare global {
-    function acquireVsCodeApi<StateType = unknown>(): WebviewApi<StateType>;
+    function acquireVsCodeApi<StateType = ViewState>(): WebviewApi<StateType>;
 }
 </file>
 
@@ -6404,6 +6499,7 @@ import * as vscode from "vscode";
 import { registerViews } from "./client/views";
 import { registerCommands } from "./backend/commands/register-commands";
 import { Services } from "./backend/services/services";
+import { ClientToServerChannel } from "./common/ipc/channels.enum";
 
 let globalContext: vscode.ExtensionContext | null = null;
 

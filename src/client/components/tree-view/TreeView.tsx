@@ -39,6 +39,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
 
 
     const handleToggleNode = (e: React.MouseEvent, nodePath: string) => {
+        // Prevent toggling when clicking on checkbox or rename input
         if ((e.target as HTMLElement).closest('.file-checkbox') || (e.target as HTMLElement).closest('.rename-input')) {
             return;
         }

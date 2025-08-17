@@ -18,6 +18,7 @@ interface FileTreeProps {
   selectedFiles: string[];
   activeFile?: string;
   updateSelectedFiles: (selectedFiles: string[]) => void;
+  collapseTrigger?: number;
 }
 
 const getFileIcon = (fileName: string) => {
@@ -34,7 +35,7 @@ const getFileIcon = (fileName: string) => {
     }
 };
 
-const FileTree: React.FC<FileTreeProps> = ({ data, onFileClick, selectedFiles, activeFile, updateSelectedFiles }) => {
+const FileTree: React.FC<FileTreeProps> = ({ data, onFileClick, selectedFiles, activeFile, updateSelectedFiles, collapseTrigger }) => {
     const [contextMenu, setContextMenu] = useState<{ x: number, y: number, node: FileNode } | null>(null);
     const [renamingPath, setRenamingPath] = useState<string | null>(null);
     const [renameValue, setRenameValue] = useState('');
@@ -75,6 +76,10 @@ const FileTree: React.FC<FileTreeProps> = ({ data, onFileClick, selectedFiles, a
     const renderFileNodeContent = (node: FileNode, isExpanded: boolean) => {
         const isActive = activeFile === node.absolutePath;
         const isDirectory = Array.isArray(node.children);
+        
+        const isDirectlySelected = selectedFiles.includes(node.absolutePath);
+        const hasSelectedAncestor = selectedFiles.some(ancestor => node.absolutePath.startsWith(ancestor + path.sep) && node.absolutePath !== ancestor);
+        const isChecked = isDirectlySelected || hasSelectedAncestor;
 
         if (renamingPath === node.absolutePath) {
             return (
@@ -94,8 +99,8 @@ const FileTree: React.FC<FileTreeProps> = ({ data, onFileClick, selectedFiles, a
             <div className={`file-item ${isActive ? 'active' : ''}`} onClick={() => handleNodeClick(node)}>
                 <Checkbox
                     className="file-checkbox"
-                    checked={selectedFiles.includes(node.absolutePath) || selectedFiles.some(p => node.absolutePath.startsWith(p + '/'))}
-                    indeterminate={!selectedFiles.includes(node.absolutePath) && selectedFiles.some(p => p.startsWith(node.absolutePath))}
+                    checked={isChecked}
+                    indeterminate={!isDirectlySelected && !hasSelectedAncestor && selectedFiles.some(p => p.startsWith(node.absolutePath))}
                     onChange={(_, e) => handleFileCheckboxChange(e, node.absolutePath)}
                 />
                 <span className="file-icon">{isDirectory ? (isExpanded ? <VscFolderOpened /> : <VscFolder />) : getFileIcon(node.name)}</span>
@@ -110,7 +115,7 @@ const FileTree: React.FC<FileTreeProps> = ({ data, onFileClick, selectedFiles, a
 
     return (
         <div className="file-tree">
-            <TreeView data={data} renderNodeContent={(node, isExpanded) => renderFileNodeContent(node, isExpanded as boolean)} onContextMenu={handleContextMenu} />
+            <TreeView data={data} renderNodeContent={(node, isExpanded) => renderFileNodeContent(node, isExpanded as boolean)} onContextMenu={handleContextMenu} collapseTrigger={collapseTrigger} />
             {contextMenu && <ContextMenu menu={contextMenu} onClose={() => setContextMenu(null)} onRename={handleRename} />}
         </div>
     );
