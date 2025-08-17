@@ -1,12 +1,12 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-17T14:50:00.871Z
+  Date Generated: 2025-08-17T19:01:32.423Z
   ---
-  Total Files: 153
-  Total Lines: 12490
-  Total Characters: 467243
-  Approx. Tokens: 116870
+  Total Files: 156
+  Total Lines: 12761
+  Total Characters: 487147
+  Approx. Tokens: 121847
 -->
 
 <!-- Top 10 Files by Token Count -->
@@ -17,9 +17,9 @@
 5. The-Creator-AI-main\src\backend\services\code.service.ts (2618 tokens)
 6. The-Creator-AI-main\src\backend\services\fs.service.ts (2495 tokens)
 7. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts (2424 tokens)
-8. The-Creator-AI-main\src\backend\services\llm.service.ts (2156 tokens)
-9. src\client\views\context-chooser.view\view.tsx (1935 tokens)
-10. src\backend\services\flattener.service.ts (1711 tokens)
+8. src\client\views\context-chooser.view\view.scss (2184 tokens)
+9. The-Creator-AI-main\src\backend\services\llm.service.ts (2156 tokens)
+10. src\client\views\context-chooser.view\view.tsx (1989 tokens)
 
 <!-- Full File List -->
 1. .gitignore - Lines: 9 - Chars: 108 - Tokens: 27
@@ -28,153 +28,156 @@
 4. deploy_scaffold.js - Lines: 1259 - Chars: 42400 - Tokens: 10600
 5. package.json - Lines: 72 - Chars: 2163 - Tokens: 541
 6. public\spiral.svg - Lines: 8 - Chars: 459 - Tokens: 115
-7. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 82 - Chars: 5172 - Tokens: 1293
+7. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 94 - Chars: 6085 - Tokens: 1522
 8. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 38 - Chars: 3311 - Tokens: 828
 9. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 47 - Chars: 5207 - Tokens: 1302
 10. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 73 - Chars: 5105 - Tokens: 1277
 11. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 68 - Chars: 4497 - Tokens: 1125
 12. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 48 - Chars: 5680 - Tokens: 1420
 13. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 52 - Chars: 3992 - Tokens: 998
-14. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
-15. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 31 - Chars: 4278 - Tokens: 1070
-16. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
-17. src\Artifacts\A4. DCE - Analysis of The-Creator-AI Repo.md - Lines: 56 - Chars: 5722 - Tokens: 1431
-18. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
-19. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43689 - Tokens: 10923
-20. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
-21. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 74 - Chars: 5773 - Tokens: 1444
-22. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
-23. src\backend\commands\commands.ts - Lines: 85 - Chars: 3614 - Tokens: 904
-24. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
-25. src\backend\services\flattener.service.ts - Lines: 170 - Chars: 6841 - Tokens: 1711
-26. src\backend\services\fs.service.ts - Lines: 258 - Chars: 10703 - Tokens: 2676
-27. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-28. src\backend\services\selection.service.ts - Lines: 39 - Chars: 1300 - Tokens: 325
-29. src\backend\services\services.ts - Lines: 22 - Chars: 844 - Tokens: 211
-30. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
-31. src\client\components\ContextMenu.tsx - Lines: 61 - Chars: 2914 - Tokens: 729
-32. src\client\components\file-tree\FileTree.tsx - Lines: 119 - Chars: 5469 - Tokens: 1368
-33. src\client\components\file-tree\FileTree.utils.ts - Lines: 101 - Chars: 3541 - Tokens: 886
-34. src\client\components\SelectedFilesView.tsx - Lines: 118 - Chars: 5070 - Tokens: 1268
-35. src\client\components\tree-view\TreeView.tsx - Lines: 90 - Chars: 3217 - Tokens: 805
-36. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
-37. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
-38. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-39. src\client\views\context-chooser.view\on-message.ts - Lines: 60 - Chars: 2269 - Tokens: 568
-40. src\client\views\context-chooser.view\view.scss - Lines: 320 - Chars: 6747 - Tokens: 1687
-41. src\client\views\context-chooser.view\view.tsx - Lines: 178 - Chars: 7739 - Tokens: 1935
-42. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
-43. src\common\ipc\channels.enum.ts - Lines: 21 - Chars: 1013 - Tokens: 254
-44. src\common\ipc\channels.type.ts - Lines: 22 - Chars: 1453 - Tokens: 364
-45. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
-46. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-47. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-48. src\common\types\file-node.ts - Lines: 9 - Chars: 276 - Tokens: 69
-49. src\common\types\vscode-webview.d.ts - Lines: 9 - Chars: 282 - Tokens: 71
-50. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
-51. src\common\utils\view-html.ts - Lines: 26 - Chars: 971 - Tokens: 243
-52. src\common\view-types.ts - Lines: 8 - Chars: 246 - Tokens: 62
-53. src\extension.ts - Lines: 52 - Chars: 2001 - Tokens: 501
-54. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
-55. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
-56. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
-57. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
-58. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
-59. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
-60. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
-61. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
-62. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
-63. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
-64. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
-65. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
-66. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
-67. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
-68. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
-69. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
-70. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
-71. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
-72. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
-73. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
-74. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
-75. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
-76. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
-77. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
-78. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
-79. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
-80. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
-81. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
-82. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
-83. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
-84. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
-85. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
-86. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
-87. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
-88. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
-89. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
-90. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
-91. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
-92. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
-93. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
-94. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
-95. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
-96. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
-97. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
-98. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
-99. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
-100. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
-101. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
-102. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
-103. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
-104. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
-105. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
-106. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
-107. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
-108. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
-109. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
-110. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
-111. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
-112. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
-113. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
-114. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
-115. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
-116. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
-117. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
-118. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
-119. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
-120. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
-121. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-122. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
-123. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
-124. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
-125. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-126. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
-127. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
-128. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
-129. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-130. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
-131. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
-132. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
-133. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
-134. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
-135. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
-136. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
-137. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-138. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
-139. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
-140. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
-141. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
-142. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
-143. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
-144. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
-145. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
-146. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
-147. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
-148. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
-149. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
-150. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
-151. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
-152. tsconfig.json - Lines: 19 - Chars: 457 - Tokens: 115
-153. webpack.config.js - Lines: 63 - Chars: 1710 - Tokens: 428
+14. src\Artifacts\A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md - Lines: 39 - Chars: 5438 - Tokens: 1360
+15. src\Artifacts\A16. DCE - Phase 1 - UI & UX Refinements Plan.md - Lines: 41 - Chars: 5412 - Tokens: 1353
+16. src\Artifacts\A17. DCE - Phase 1 - Advanced Tree View Features.md - Lines: 47 - Chars: 3888 - Tokens: 972
+17. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
+18. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 31 - Chars: 4278 - Tokens: 1070
+19. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
+20. src\Artifacts\A4. DCE - Analysis of The-Creator-AI Repo.md - Lines: 56 - Chars: 5722 - Tokens: 1431
+21. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
+22. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43689 - Tokens: 10923
+23. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
+24. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 74 - Chars: 5773 - Tokens: 1444
+25. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
+26. src\backend\commands\commands.ts - Lines: 85 - Chars: 3614 - Tokens: 904
+27. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
+28. src\backend\services\flattener.service.ts - Lines: 170 - Chars: 6841 - Tokens: 1711
+29. src\backend\services\fs.service.ts - Lines: 258 - Chars: 10703 - Tokens: 2676
+30. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
+31. src\backend\services\selection.service.ts - Lines: 39 - Chars: 1300 - Tokens: 325
+32. src\backend\services\services.ts - Lines: 22 - Chars: 844 - Tokens: 211
+33. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
+34. src\client\components\ContextMenu.tsx - Lines: 61 - Chars: 2914 - Tokens: 729
+35. src\client\components\file-tree\FileTree.tsx - Lines: 119 - Chars: 5469 - Tokens: 1368
+36. src\client\components\file-tree\FileTree.utils.ts - Lines: 134 - Chars: 4836 - Tokens: 1209
+37. src\client\components\SelectedFilesView.tsx - Lines: 137 - Chars: 5827 - Tokens: 1457
+38. src\client\components\tree-view\TreeView.tsx - Lines: 90 - Chars: 3217 - Tokens: 805
+39. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
+40. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
+41. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
+42. src\client\views\context-chooser.view\on-message.ts - Lines: 60 - Chars: 2269 - Tokens: 568
+43. src\client\views\context-chooser.view\view.scss - Lines: 397 - Chars: 8734 - Tokens: 2184
+44. src\client\views\context-chooser.view\view.tsx - Lines: 181 - Chars: 7953 - Tokens: 1989
+45. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
+46. src\common\ipc\channels.enum.ts - Lines: 21 - Chars: 1013 - Tokens: 254
+47. src\common\ipc\channels.type.ts - Lines: 22 - Chars: 1453 - Tokens: 364
+48. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
+49. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+50. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
+51. src\common\types\file-node.ts - Lines: 9 - Chars: 276 - Tokens: 69
+52. src\common\types\vscode-webview.d.ts - Lines: 9 - Chars: 282 - Tokens: 71
+53. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
+54. src\common\utils\view-html.ts - Lines: 26 - Chars: 971 - Tokens: 243
+55. src\common\view-types.ts - Lines: 8 - Chars: 246 - Tokens: 62
+56. src\extension.ts - Lines: 52 - Chars: 2001 - Tokens: 501
+57. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
+58. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
+59. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
+60. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
+61. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
+62. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
+63. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
+64. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
+65. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
+66. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
+67. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
+68. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
+69. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
+70. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
+71. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
+72. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
+73. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
+74. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
+75. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
+76. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
+77. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
+78. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
+79. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
+80. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
+81. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
+82. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
+83. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
+84. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
+85. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
+86. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
+87. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
+88. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
+89. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
+90. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
+91. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
+92. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
+93. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
+94. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
+95. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
+96. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
+97. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
+98. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
+99. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
+100. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
+101. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
+102. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
+103. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
+104. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
+105. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
+106. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
+107. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
+108. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
+109. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
+110. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
+111. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
+112. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
+113. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
+114. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
+115. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
+116. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
+117. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
+118. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
+119. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
+120. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
+121. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
+122. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
+123. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
+124. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+125. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
+126. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
+127. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
+128. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+129. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
+130. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
+131. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
+132. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+133. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
+134. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
+135. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
+136. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
+137. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
+138. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
+139. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
+140. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+141. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
+142. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
+143. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
+144. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
+145. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
+146. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
+147. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
+148. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
+149. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
+150. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
+151. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
+152. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
+153. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
+154. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
+155. tsconfig.json - Lines: 19 - Chars: 457 - Tokens: 115
+156. webpack.config.js - Lines: 63 - Chars: 1710 - Tokens: 428
 
 <file path=".gitignore">
 node_modules
@@ -1738,7 +1741,7 @@ deployScaffold();
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C20 (Add A14 for Ongoing Development Issues)
+# Updated on: C22 (Add A15, A16, A17 for new feature plans)
 
 ## 1. Purpose
 
@@ -1811,6 +1814,18 @@ deployScaffold();
 ### A14. DCE - Ongoing Development Issues
 - **Description:** A tracking document for recurring or persistent issues that need to be monitored across development cycles until they are confirmed as resolved.
 - **Tags:** bugs, tracking, issues, logging, node_modules, performance
+
+### A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan
+- **Description:** Details the requirements for multi-selection (click, Ctrl, Shift) in both the main file tree and the "Selected Items" panel, and multi-level column sorting.
+- **Tags:** feature plan, multi-select, sorting, list view, ux, phase 1
+
+### A16. DCE - Phase 1 - UI & UX Refinements Plan
+- **Description:** Covers visual and usability improvements like fixing panel layouts, resolving overflow bugs, adding loading indicators, and improving scrollbar visibility.
+- **Tags:** feature plan, ui, ux, layout, bug fix, loading indicator, phase 1
+
+### A17. DCE - Phase 1 - Advanced Tree View Features
+- **Description:** Outlines the plan for advanced tree view interactions, specifically the implementation of scrollable, self-contained views for large, expanded folders.
+- **Tags:** feature plan, tree view, ux, scrollable, phase 1
 
 ## II. Standalone Utilities & Guides
 
@@ -2160,6 +2175,142 @@ This artifact serves as a centralized list to track ongoing and recurring issues
 -   **Next Steps (C20):**
     1.  **Frontend:** Change the `useEffect` dependency array in `view.tsx` to `[]` to fetch the tree only once on initial load.
     2.  **Backend:** Implement a `FileSystemWatcher` in `fs.service.ts` to detect changes, invalidate the server-side cache, and push a "force refresh" message to the client.
+</file>
+
+<file path="src/Artifacts/A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md">
+# Artifact A15: DCE - Phase 1 - Multi-Select & Sorting Feature Plan
+# Date Created: Cycle 22
+# Author: AI Model
+
+- **Key/Value for A0:**
+- **Description:** Details the requirements for multi-selection (click, Ctrl, Shift) in both the main file tree and the "Selected Items" panel, and multi-level column sorting.
+- **Tags:** feature plan, multi-select, sorting, list view, ux, phase 1
+
+## 1. Overview & Goal
+
+To elevate the Data Curation Environment beyond basic functionality, this plan introduces advanced list-interaction features common in modern applications. The goal is to provide users with powerful and intuitive tools for managing their file selections, mirroring the behavior of native operating system file explorers. This includes robust multi-selection capabilities in both the main file tree and the "Selected Items" panel, and comprehensive sorting for the "Selected Items" list.
+
+## 2. User Stories
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| US-01 | **"Selected Items" Multi-Selection** | As a curator, after selecting a large folder, I want to quickly remove a small group of unwanted files from the "Selected Items" list using standard Shift-click and Ctrl-click, so I don't have to uncheck them one by one in the main tree. | - Clicking a single item in the "Selected Items" list selects it and deselects all others. <br> - Ctrl-clicking an item toggles its selection state without affecting other items. <br> - Shift-clicking an item selects the range of items between the last clicked item and the current one. <br> - A "Remove Selected" button acts on all currently selected items in this list. |
+| US-02 | **"Selected Items" Column Sorting** | As a curator, I want to sort the "Selected Items" list by file name or token count, so I can easily find specific files or identify the largest contributors to my context. | - The "Selected Items" panel has a header row with clickable "File" and "Tokens" labels. <br> - Clicking a column header sorts the list by that column. <br> - Clicking the same header again reverses the sort direction (ascending/descending). <br> - A visual indicator (e.g., an arrow) shows the current sort column and direction. |
+| US-03 | **"Selected Items" Multi-Layer Sorting** | As a curator, I want to apply a secondary sort, so I can group my selected files by type and then see the largest files within each group. | - The sorting mechanism supports at least two levels of sorting. <br> - The UI provides a way to define a primary and secondary sort key (e.g., Shift-clicking a second column header). <br> - The list first organizes by the primary key, then sorts items within those groups by the secondary key. |
+| US-04 | **Main Tree Multi-Selection** | As a user, I want to select multiple files and folders in the main "Data Curation" file tree using standard OS conventions (Ctrl/Shift click), so I can perform context menu actions (like Delete or Rename) on multiple items at once. | - Standard multi-selection is implemented in the main file tree. <br> - This selection is distinct from the checkbox state. <br> - Right-clicking on any item within a multi-selected group opens a context menu that applies its actions to all selected items. |
+| US-05 | **"As-Is" Sorting** | As a user, I want to be able to revert the "Selected Items" list to its default sort order, so I can see the files as they appear in the native VS Code explorer. | - A sort option for "Default" or "As-Is" is available. <br> - Selecting it sorts the items based on their original file system order (folders first, then files, all alphabetized). |
+
+## 3. Technical Implementation Plan
+
+1.  **`SelectedFilesView.tsx` Refactor:**
+    *   **State Management:** Introduce new state variables to manage selection, sorting, and multi-selection.
+        *   `const [selection, setSelection] = useState<Set<string>>(new Set());`
+        *   `const [lastClickedPath, setLastClickedPath] = useState<string | null>(null);`
+        *   `const [sortConfig, setSortConfig] = useState<{ key: string; direction: 'asc' | 'desc' }[]>([{ key: 'tokenCount', direction: 'desc' }]);`
+    *   **Event Handling:** Implement a comprehensive `onClick` handler for list items that inspects `event.ctrlKey` and `event.shiftKey` to manage the `selection` set.
+    *   **Sorting Logic:** Create a `useMemo` hook that sorts the `selectedFileNodes` prop based on the `sortConfig` state. This memoized value will be what gets rendered, ensuring the list only re-sorts when necessary. The sorting function will need to handle multiple keys.
+    *   **UI:** Convert the layout from a simple `<ul>` to a more structured format (CSS Grid or Flexbox) to create distinct, clickable headers.
+
+2.  **`FileTree.tsx` & `TreeView.tsx` (Main Tree Multi-Select):**
+    *   This is a more complex task that mirrors the `SelectedFilesView` implementation but within a recursive tree structure.
+    *   A similar selection state (`useState<Set<string>>`) will be managed at the top level (`view.tsx`).
+    *   The selection state and handler functions will need to be passed down through `FileTree` to `TreeView`.
+    *   The `onContextMenu` handler will need to be updated to check if the right-clicked node is part of the current selection and pass the entire selection to the backend if an action is chosen.
+    *   This functionality will be developed *after* the "Selected Items" panel is complete.
+</file>
+
+<file path="src/Artifacts/A16. DCE - Phase 1 - UI & UX Refinements Plan.md">
+# Artifact A16: DCE - Phase 1 - UI & UX Refinements Plan
+# Date Created: Cycle 22
+# Author: AI Model
+
+- **Key/Value for A0:**
+- **Description:** Covers visual and usability improvements like fixing panel layouts, resolving overflow bugs, adding loading indicators, and improving scrollbar visibility.
+- **Tags:** feature plan, ui, ux, layout, bug fix, loading indicator, phase 1
+
+## 1. Overview & Goal
+
+This document outlines a series of user interface (UI) and user experience (UX) refinements identified during playtesting. The goal is to address layout bugs, provide better visual feedback to the user, and improve the overall professional feel of the extension. These changes focus on fixing immediate usability problems and making the extension more intuitive to operate.
+
+## 2. User Stories & Issues
+
+| ID | User Story / Issue | Acceptance Criteria |
+|---|---|---|
+| UI-01 | **Header Layout Bug** | As a user, I want the header of the "Data Curation" panel to be compact, without the extra vertical space between the title and the toolbar buttons, so it looks clean and professional. | - The vertical gap between the view title row and the toolbar button row is removed. <br> - The header area takes up minimal vertical space. <br> - This is a CSS fix, likely involving adjusting `padding`, `margin`, or `gap` in the flex container. |
+| UI-02 | **"Selected Items" Overflow Bug** | As a user, when I select many files, I want the "Selected Items" list to scroll within its panel instead of running off the screen behind the "Flatten Context" footer, so I can see and manage all my selections. | - The "Selected Items" panel has a defined `max-height`. <br> - When the content exceeds this height, a vertical scrollbar appears. <br> - The panel never overlaps or pushes the footer out of view. <br> - This is a CSS fix involving `flex-grow`, `flex-shrink`, `min-height: 0` on the file tree container, and `overflow-y: auto` on the list container. |
+| UI-03 | **Resizable "Selected Items" Panel** | As a user, I want to be able to vertically resize the "Selected Items" panel, so I can see more or fewer items as needed for my current task. | - A draggable handle or resizer element is added to the top border of the "Selected Items" panel. <br> - Clicking and dragging this handle adjusts the `height` or `max-height` of the panel. <br> - The main file tree above it resizes accordingly to fill the remaining space. |
+| UI-04 | **Visible Loading State** | As a user, when I perform a slow action like renaming a file or refreshing the explorer, I want to see a loading indicator, so I have clear feedback that the system is working and not frozen. | - A loading state (e.g., `isLoading`) is added to the main view's state. <br> - This state is set to `true` when a file system scan begins (e.g., on initial load or refresh). <br> - A loading indicator (e.g., a spinning icon) is displayed in the UI (e.g., in the header toolbar) while `isLoading` is true. <br> - The state is set to `false` when the file data is received from the backend. |
+| UI-05 | **Improved Scrollbar Gutter** | As a user, I find it difficult to distinguish between the extension's internal scrollbar and the main VS Code scrollbar when they are side-by-side. I want a clearer visual separation between them. | - A subtle vertical border (`border-right`) is added to the main file tree container. <br> - This creates a persistent, visible dividing line between the two scrollable areas, making it easier to position the mouse. |
+
+## 3. Technical Implementation Plan
+
+1.  **Layout Fixes (`view.scss`):**
+    *   **Header:** Inspect the `.view-header` and `.toolbar` classes. Remove any unnecessary `margin` or `padding`. Consolidate into a single flex container with `justify-content: space-between` if the title is to be included, or simply adjust the container of the toolbar.
+    *   **Overflow:** This is a classic flexbox problem. The main container (`.view-container`) should be `display: flex; flex-direction: column; height: 100vh;`. The content area (`.file-tree-container`) must have `flex-grow: 1;` and crucially `min-height: 0;` to allow it to shrink. The "Selected Items" panel (`.selected-files-panel`) should have `flex-shrink: 0;` and `overflow-y: auto;` on its list container.
+    *   **Scrollbar Gutter:** Add `border-right: 1px solid var(--vscode-panel-border);` to the `.file-tree-container`.
+
+2.  **Loading Indicator (`view.tsx`):**
+    *   Add `const [isLoading, setIsLoading] = useState(true);`.
+    *   Set `setIsLoading(true)` at the start of the `requestFiles` function.
+    *   Set `setIsLoading(false)` inside the `handleFileResponse` message handler after files are received and set.
+    *   In the JSX for the `.toolbar`, add conditional rendering: `{isLoading && <SpinnerComponent />}`. The spinner can be an SVG or a component using `react-icons`.
+
+3.  **Resizable Panel:**
+    *   This is the most complex part of this plan. It typically requires a custom React hook or component.
+    *   An invisible `div` will be placed on the top border of the panel.
+    *   `onMouseDown`, `onMouseMove`, and `onMouseUp` event listeners will be used to track the drag gesture and calculate the new height for the panel.
+    *   The height will be applied as an inline style to the panel.
+    *   This feature will be implemented after the more critical bug fixes are complete.
+</file>
+
+<file path="src/Artifacts/A17. DCE - Phase 1 - Advanced Tree View Features.md">
+# Artifact A17: DCE - Phase 1 - Advanced Tree View Features
+# Date Created: Cycle 22
+# Author: AI Model
+
+- **Key/Value for A0:**
+- **Description:** Outlines the plan for advanced tree view interactions, specifically the implementation of scrollable, self-contained views for large, expanded folders.
+- **Tags:** feature plan, tree view, ux, scrollable, phase 1
+
+## 1. Overview & Goal
+
+The current file tree view expands vertically, which can create a poor user experience when a folder containing hundreds of files is opened. The entire view becomes excessively long, forcing the user to scroll a great distance to see files or folders below the expanded one. The goal of this feature is to innovate on the traditional tree view by containing the contents of a large expanded folder within a scrollable, "inline" window, preventing the main view from becoming unmanageable.
+
+## 2. User Story
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| TV-01 | **Contained Folder Expansion** | As a user, when I expand a folder with a large number of children, I want its contents to appear in a scrollable sub-panel within the tree instead of pushing all subsequent items down, so I can browse the folder's contents without losing my place in the main file tree. | - When a folder is expanded, the extension checks the number of direct children. <br> - If the child count exceeds a certain threshold (e.g., 50), the children are rendered inside a nested, scrollable `div`. <br> - This `div` has a fixed `max-height`. <br> - A small 'x' icon is visible within this sub-panel. Clicking it closes the sub-panel and reverts the folder to the standard, fully expanded view for that session. |
+
+## 3. Technical Implementation Plan
+
+This is a significant UI/UX enhancement and will require careful implementation within the React component hierarchy.
+
+1.  **Component (`TreeView.tsx`):**
+    *   The core logic will reside in the `renderTreeNodes` function.
+    *   **Threshold Check:** When rendering a directory node, check `if (node.children && node.children.length > FOLDER_CONTENT_THRESHOLD)`. The threshold will be a configurable constant.
+    *   **State Management:** A new state variable will be needed to track which "large" folders have been reverted to the standard view by the user clicking the 'x' button. `const [standardViewFolders, setStandardViewFolders] = useState<Set<string>>(new Set());`
+    *   **Conditional Rendering:**
+        *   If the folder is expanded (`isExpanded`) AND its path is **not** in `standardViewFolders` AND it exceeds the threshold, render the children inside a special container:
+            ```jsx
+            <div className="large-folder-container" style={{ maxHeight: '300px', overflowY: 'auto' }}>
+              <button onClick={() => setStandardViewFolders(prev => new Set(prev).add(node.absolutePath))}>X</button>
+              <ul>{renderTreeNodes(node.children)}</ul>
+            </div>
+            ```
+        *   Otherwise, render the children normally as is currently done:
+            ```jsx
+            <ul className="treenode-children">{renderTreeNodes(node.children)}</ul>
+            ```
+
+2.  **Styling (`view.scss`):**
+    *   Create styles for `.large-folder-container`.
+    *   It will need `position: relative`, a subtle `border` or `background-color` to distinguish it from the rest of the tree.
+    *   The close button will need to be positioned appropriately within the container.
+
+3.  **Performance Considerations:**
+    *   This approach avoids virtualizing the entire tree, which is much more complex. It only contains the content of single, large folders.
+    *   Rendering hundreds of nodes within the scrollable container might still have a minor performance impact on initial render, but it will be contained and will not affect the performance of the main tree's scrolling.
 </file>
 
 <file path="src/Artifacts/A189. Number Formatting Reference Guide.md">
@@ -4915,7 +5066,9 @@ export const addRemovePathInSelectedFiles = (
             const ancestorNode = getFileNodeByPath(fileTree, selectedAncestor);
             if (ancestorNode && ancestorNode.children) {
                 for (const child of ancestorNode.children) {
-                    if (child.absolutePath !== path) {
+                    const normalizedChildPath = child.absolutePath.replace(/\\/g, '/');
+                    const normalizedPath = path.replace(/\\/g, '/');
+                    if (!normalizedChildPath.startsWith(normalizedPath)) {
                          newSelectedFiles.push(child.absolutePath);
                     }
                 }
@@ -4926,7 +5079,7 @@ export const addRemovePathInSelectedFiles = (
         }
     } else {
         const descendantPaths = getAllDescendantPaths(node);
-        newSelectedFiles = newSelectedFiles.filter(p => !descendantPaths.includes(p));
+        newSelectedFiles = newSelectedFiles.filter(p => !p.startsWith(path));
         newSelectedFiles.push(path);
     }
   
@@ -4938,31 +5091,61 @@ export const removePathsFromSelected = (
     selectedFiles: string[],
     fileTree: FileNode[]
 ): string[] => {
-    let newSelectedFiles = [...selectedFiles];
-    for (const path of pathsToRemove) {
-        // This reuses the same logic as unchecking, which is complex.
-        // A simpler approach is to just remove the path and its descendants.
-        const node = getFileNodeByPath(fileTree, path);
+    let selectionSet = new Set(selectedFiles);
+
+    // This function recursively finds all file paths under a given node path
+    const getAllFilePaths = (node: FileNode): string[] => {
+        if (!node.children) return [node.absolutePath];
+        return node.children.flatMap(getAllFilePaths);
+    };
+
+    // Create a map for quick node lookup
+    const fileMap: Map<string, FileNode> = new Map();
+    const buildFileMap = (node: FileNode) => {
+        fileMap.set(node.absolutePath, node);
+        if (node.children) node.children.forEach(buildFileMap);
+    };
+    fileTree.forEach(buildFileMap);
+
+    // First, remove all paths that are being explicitly removed
+    pathsToRemove.forEach(p => selectionSet.delete(p));
+
+    // Then, process the remaining selection to handle directory logic
+    const finalSelection = new Set<string>();
+    const processedPaths = new Set<string>();
+
+    for (const path of selectionSet) {
+        if (processedPaths.has(path)) continue;
+
+        const node = fileMap.get(path);
         if (!node) continue;
 
-        const descendantPaths = getAllDescendantPaths(node);
-        newSelectedFiles = newSelectedFiles.filter(p => p !== path && !descendantPaths.includes(p));
+        // If it's a directory, add it and mark all its children as processed
+        if (node.children) {
+            finalSelection.add(path);
+            const childPaths = getAllFilePaths(node);
+            childPaths.forEach(childPath => processedPaths.add(childPath));
+        } else {
+            // If it's a file, just add it
+            finalSelection.add(path);
+            processedPaths.add(path);
+        }
     }
-    return newSelectedFiles;
+
+    return Array.from(finalSelection);
 };
 </file>
 
 <file path="src/client/components/SelectedFilesView.tsx">
 import * as React from 'react';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef, useEffect } from 'react';
 import { FileNode } from '@/common/types/file-node';
-import { VscClose, VscChevronUp, VscChevronDown, VscSymbolFile, VscSymbolNumeric } from 'react-icons/vsc';
+import { VscChevronUp, VscChevronDown, VscSymbolFile, VscSymbolNumeric } from 'react-icons/vsc';
 import { formatLargeNumber } from '@/common/utils/formatting';
-import Checkbox from './Checkbox';
 import { SiReact, SiSass, SiTypescript, SiJavascript } from 'react-icons/si';
 import { VscFile, VscJson, VscMarkdown } from 'react-icons/vsc';
 
-type SortableColumn = 'name' | 'tokenCount';
+type SortableColumn = 'name' | 'tokenCount' | 'default';
 type SortDirection = 'asc' | 'desc';
 
 const getFileIcon = (fileName: string) => {
@@ -4986,16 +5169,24 @@ interface SelectedFilesViewProps {
 const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes, onRemove }) => {
     const [sortColumn, setSortColumn] = useState<SortableColumn>('tokenCount');
     const [sortDirection, setSortDirection] = useState<SortDirection>('desc');
-    const [itemsToRemove, setItemsToRemove] = useState<Set<string>>(new Set());
+    const [selection, setSelection] = useState<Set<string>>(new Set());
+    const lastClickedPath = useRef<string | null>(null);
+
+    // Reset selection when the list of files changes
+    useEffect(() => {
+        setSelection(new Set());
+    }, [selectedFileNodes]);
 
     const sortedFiles = useMemo(() => {
-        return [...selectedFileNodes].sort((a, b) => {
+        const sorted = [...selectedFileNodes].sort((a, b) => {
+            if (sortColumn === 'default') return 0; // Keep original order
             const dir = sortDirection === 'asc' ? 1 : -1;
             if (sortColumn === 'name') {
-                return a.name.localeCompare(b.name) * dir;
+                return a.name.localeCompare(b.name, undefined, { numeric: true }) * dir;
             }
             return (a.tokenCount - b.tokenCount) * dir;
         });
+        return sorted;
     }, [selectedFileNodes, sortColumn, sortDirection]);
 
     const handleSort = (column: SortableColumn) => {
@@ -5003,25 +5194,42 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
             setSortDirection(prev => prev === 'asc' ? 'desc' : 'asc');
         } else {
             setSortColumn(column);
-            setSortDirection('desc');
+            setSortDirection(column === 'tokenCount' ? 'desc' : 'asc');
         }
     };
 
-    const handleToggleRemove = (path: string, checked: boolean) => {
-        setItemsToRemove(prev => {
-            const newSet = new Set(prev);
-            if (checked) {
-                newSet.add(path);
-            } else {
-                newSet.delete(path);
+    const handleItemClick = (e: React.MouseEvent, path: string) => {
+        const newSelection = new Set(selection);
+
+        if (e.shiftKey && lastClickedPath.current) {
+            const lastIdx = sortedFiles.findIndex(f => f.absolutePath === lastClickedPath.current);
+            const currentIdx = sortedFiles.findIndex(f => f.absolutePath === path);
+            const start = Math.min(lastIdx, currentIdx);
+            const end = Math.max(lastIdx, currentIdx);
+            
+            if (!e.ctrlKey) newSelection.clear();
+
+            for (let i = start; i <= end; i++) {
+                newSelection.add(sortedFiles[i].absolutePath);
             }
-            return newSet;
-        });
+        } else if (e.ctrlKey) {
+            if (newSelection.has(path)) {
+                newSelection.delete(path);
+            } else {
+                newSelection.add(path);
+            }
+        } else {
+            newSelection.clear();
+            newSelection.add(path);
+        }
+        
+        setSelection(newSelection);
+        lastClickedPath.current = path;
     };
 
     const handleRemoveSelected = () => {
-        onRemove(Array.from(itemsToRemove));
-        setItemsToRemove(new Set());
+        onRemove(Array.from(selection));
+        setSelection(new Set());
     };
     
     const SortIndicator = ({ column }: { column: SortableColumn }) => {
@@ -5032,12 +5240,11 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
     return (
         <div className="selected-files-panel">
             <div className="panel-header">
-                <span>Selected Items</span>
-                <span className="token-label">Tokens</span>
+                <span>Selected Items ({selectedFileNodes.length})</span>
             </div>
             <div className="panel-toolbar">
-                <button onClick={handleRemoveSelected} disabled={itemsToRemove.size === 0}>
-                    Remove selected ({itemsToRemove.size})
+                <button onClick={handleRemoveSelected} disabled={selection.size === 0}>
+                    Remove selected ({selection.size})
                 </button>
             </div>
             <div className="selected-files-list-container">
@@ -5051,17 +5258,13 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
                 </div>
                 <ul className="selected-files-list">
                     {sortedFiles.map(node => (
-                        <li key={node.absolutePath}>
-                            <Checkbox
-                                checked={itemsToRemove.has(node.absolutePath)}
-                                onChange={(checked) => handleToggleRemove(node.absolutePath, checked)}
-                            />
+                        <li key={node.absolutePath} 
+                            className={selection.has(node.absolutePath) ? 'selected' : ''}
+                            onClick={(e) => handleItemClick(e, node.absolutePath)}
+                        >
                             <span className="file-icon">{getFileIcon(node.name)}</span>
                             <span className="file-name" title={node.absolutePath}>{node.name}</span>
                             <span className="file-tokens">{formatLargeNumber(node.tokenCount, 1)}</span>
-                            <button className="remove-button" onClick={() => onRemove([node.absolutePath])} title="Remove from selection">
-                                <VscClose />
-                            </button>
                         </li>
                     ))}
                 </ul>
@@ -5278,7 +5481,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 </file>
 
 <file path="src/client/views/context-chooser.view/view.scss">
-/* Updated on: C21 (Add styles for context menu) */
+/* Updated on: C22 (Layout fixes for header and selected items panel) */
 body {
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -5294,11 +5497,20 @@ body {
 }
 
 .view-header {
-    padding: 4px 8px;
+    padding: 0 8px;
     border-bottom: 1px solid var(--vscode-panel-border);
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
     flex-shrink: 0;
+    height: 35px; /* Standard VS Code header height */
+}
+
+.view-title {
+    font-weight: bold;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--vscode-sideBar-titleForeground);
 }
 
 .toolbar {
@@ -5320,14 +5532,26 @@ body {
             background-color: var(--vscode-toolbar-hoverBackground);
         }
     }
+
+    .spinner {
+        display: flex;
+        align-items: center;
+        padding: 4px;
+        animation: spin 1.5s linear infinite;
+    }
+
+    @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
 }
 
 .selected-files-panel {
-    border-top: 1px solid var(--vscode-panel-border);
-    max-height: 33vh; 
     display: flex;
     flex-direction: column;
     flex-shrink: 0; 
+    border-top: 1px solid var(--vscode-panel-border);
+    max-height: 40%; /* Give it a max height */
 }
 
 .panel-header {
@@ -5342,12 +5566,66 @@ body {
     justify-content: space-between;
 }
 
+.panel-toolbar {
+    padding: 4px 8px;
+    flex-shrink: 0;
+    border-bottom: 1px solid var(--vscode-panel-border);
+
+    button {
+        background-color: var(--vscode-button-secondaryBackground);
+        color: var(--vscode-button-secondaryForeground);
+        border: 1px solid var(--vscode-button-border, var(--vscode-focusBorder));
+        padding: 2px 8px;
+        font-size: 12px;
+        cursor: pointer;
+        border-radius: 2px;
+        
+        &:hover {
+            background-color: var(--vscode-button-secondaryHoverBackground);
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
+}
+
+.selected-files-list-container {
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.selected-list-header {
+    display: flex;
+    font-weight: bold;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-bottom: 1px solid var(--vscode-panel-border);
+    user-select: none;
+
+    > div {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .header-name {
+        flex-grow: 1;
+    }
+
+    .header-tokens {
+        flex-shrink: 0;
+        width: 80px;
+        justify-content: flex-end;
+    }
+}
+
 .selected-files-list {
     list-style: none;
     padding: 0;
     margin: 0;
-    overflow-y: auto;
-    flex-grow: 1;
 
     li {
         display: flex;
@@ -5355,9 +5633,20 @@ body {
         padding: 2px 8px;
         font-size: 12px;
         gap: 8px;
+        cursor: pointer;
+        user-select: none;
+
+        &.selected {
+            background-color: var(--vscode-list-activeSelectionBackground);
+            color: var(--vscode-list-activeSelectionForeground);
+        }
 
         &:hover {
             background-color: var(--vscode-list-hoverBackground);
+        }
+
+        .file-icon {
+            font-size: 16px;
         }
 
         .file-name {
@@ -5370,28 +5659,19 @@ body {
         .file-tokens {
             color: var(--vscode-descriptionForeground);
             font-variant-numeric: tabular-nums;
+            width: 80px;
+            text-align: right;
+            flex-shrink: 0;
         }
-
-        .remove-button {
-            background: none;
-            border: none;
-            color: var(--vscode-icon-foreground);
-            cursor: pointer;
-            visibility: hidden; 
-        }
-    }
-
-    li:hover .remove-button {
-        visibility: visible; 
     }
 }
-
 
 .file-tree-container {
     flex-grow: 1; 
     overflow-y: auto;
     overflow-x: hidden;
-    padding-right: 5px;
+    min-height: 0; /* CRITICAL FIX for flexbox overflow */
+    border-right: 1px solid var(--vscode-panel-border); /* Fix for scrollbar gutter visibility */
 }
 
 .view-footer {
@@ -5610,7 +5890,7 @@ import { FileNode } from '@/common/types/file-node';
 import FileTree from '../../components/file-tree/FileTree';
 import { useState, useEffect, useMemo } from 'react';
 import { formatLargeNumber, formatNumberWithCommas } from '@/common/utils/formatting';
-import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, VscNewFolder } from 'react-icons/vsc';
+import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, VscNewFolder, VscLoading } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import SelectedFilesView from '@/client/components/SelectedFilesView';
 import { removePathsFromSelected } from '@/client/components/file-tree/FileTree.utils';
@@ -5632,7 +5912,7 @@ const App = () => {
 
     useEffect(() => {
         logger.log("Initializing view and requesting workspace files.");
-        clientIpc.sendToServer(ClientToServerChannel.RequestWorkspaceFiles, {});
+        requestFiles();
 
         const handleFileResponse = ({ files: receivedFiles }: { files: FileNode[] }) => {
             logger.log(`Received file tree from backend. Root node: ${receivedFiles[0]?.name}`);
@@ -5732,7 +6012,9 @@ const App = () => {
     return (
         <div className="view-container">
             <div className="view-header">
+                 <span className="view-title">Data Curation</span>
                  <div className="toolbar">
+                    {isLoading && <span className="spinner" title="Refreshing..."><VscLoading /></span>}
                     <button onClick={handleNewFile} title="New File..."><VscNewFile /></button>
                     <button onClick={handleNewFolder} title="New Folder..."><VscNewFolder /></button>
                     <button onClick={handleRefresh} title="Refresh Explorer"><VscRefresh /></button>
@@ -5740,7 +6022,7 @@ const App = () => {
                  </div>
             </div>
             <div className="file-tree-container">
-                {isLoading ? (
+                {isLoading && files.length === 0 ? (
                      <div className="loading-message">Loading file tree...</div>
                 ) : files.length > 0 ? (
                     files.map((rootNode, index) => (
@@ -5751,6 +6033,7 @@ const App = () => {
                             selectedFiles={selectedFiles}
                             updateSelectedFiles={updateSelectedFiles}
                             activeFile={activeFile}
+                            collapseTrigger={collapseTrigger}
                         />
                     ))
                 ) : (

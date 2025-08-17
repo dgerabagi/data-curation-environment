@@ -26,7 +26,8 @@ M7. artifacts
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 21 - Success! build more features
+Current Cycle 23 - Great work! More playtesting feedback to roll in; be sure to update documentation first when necessary
+Cycle 21-22 - Success! build more features
 Cycle 18-20 - Focus on cyclicly unsolved issues using hindsight from prior cycles
 Cycle 17 - checkboxes work! continue refinements
 Cycle 16 - checkboxes
@@ -88,7 +89,7 @@ Phase 3. Diff Tool - Basically, winmerge but intergrated into a window within VS
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C20 (Add A14 for Ongoing Development Issues)
+# Updated on: C22 (Add A15, A16, A17 for new feature plans)
 
 ## 1. Purpose
 
@@ -162,6 +163,18 @@ Phase 3. Diff Tool - Basically, winmerge but intergrated into a window within VS
 - **Description:** A tracking document for recurring or persistent issues that need to be monitored across development cycles until they are confirmed as resolved.
 - **Tags:** bugs, tracking, issues, logging, node_modules, performance
 
+### A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan
+- **Description:** Details the requirements for multi-selection (click, Ctrl, Shift) in both the main file tree and the "Selected Items" panel, and multi-level column sorting.
+- **Tags:** feature plan, multi-select, sorting, list view, ux, phase 1
+
+### A16. DCE - Phase 1 - UI & UX Refinements Plan
+- **Description:** Covers visual and usability improvements like fixing panel layouts, resolving overflow bugs, adding loading indicators, and improving scrollbar visibility.
+- **Tags:** feature plan, ui, ux, layout, bug fix, loading indicator, phase 1
+
+### A17. DCE - Phase 1 - Advanced Tree View Features
+- **Description:** Outlines the plan for advanced tree view interactions, specifically the implementation of scrollable, self-contained views for large, expanded folders.
+- **Tags:** feature plan, tree view, ux, scrollable, phase 1
+
 ## II. Standalone Utilities & Guides
 
 ### A189. Number Formatting Reference Guide
@@ -170,6 +183,119 @@ Phase 3. Diff Tool - Basically, winmerge but intergrated into a window within VS
 </M5. organized artifacts list>
 
 <M6. Cycles>
+<Cycle 23>
+okay fantastic work! i have selected the conversation that seems the most aligned. here is my feedback, from top to bottom:
+
+1. instead of removing the extra space below `Data Curation` and above the four buttons on the right, we now have two instances of `DataCuration`. if we just remove the top one, then that will have solved the problem.
+
+2. now if you want to build in the nested scrollable view for a directory with a relatively large number of files, we could.
+
+3. i still cannot select multiple files in the data curation section. i want to be able to select multiple files in this section just like i can in the regular vscode `Explorer`
+
+4. i just selected the `src` checkbox, it selected 529 items. i then switched to another tab and then back to our `Data Curation` tab, and my `src` selection disappeared.
+4.1. We want this selection to be persistant.
+4.2. I had articulated a request for the ability to save and load selections. these UI features appeared but have subsequently disappeared. have we codified this request into a documentation artifact yet? if not, do so then lets get this back and solve the persistence issue.
+
+5. i am able to make selections of multiple files in the selected items section by holding ctrl. this is perfectly functional.
+
+6. the shift-click selection needs a little refinement. basically what happens, is if i select `File1.txt`, hold shift and then select `File6.txt`, it correctly selects all files in between. if i then, while still holding shift, select `File12.txt`, instead of updating the selection to `File1.txt` - `File12.txt`, it becomes `File6.txt` - `File12.txt`. 
+
+7. it seems the ctrl + shift + click is functioning as anticipated.
+
+8. The `Remove selected` button does not seem to actually remove the selected items. I see no logs in the `Data Curation Environment` `Output` section when clicking `Remove selected`, perhaps some logs can help with this issue?
+8.1. curiously, if i have some directories in my `Data Curation` tab expanded, when i click `Remove selected` with one or more files selected in the `Selected Items` view, it collapses my selection in the `Data Curation` view. this could become a bit frustrating for a user, who is looking at those files, and in a separate process, clicks the remove button, they will now have to re-expand that which they were browsing.
+
+9. i just selected the `src` checkbox, it shows that it selected 529 items. however, when i interrogate the `Data Curation` filetree further, no other files or folders within `src` have their checkbox selected. this is a bit of a disconnect between what both views are presenting to the user. the bottom one accurately shows 529 selected items. the top one, only has a single checkbox selected in the entire list. lets correct that disconnect.
+9.1. lets also add a count (number) on the files in the `Selected Items`, just like a table would have. in other words, i wanna be able to scroll down to the bottom and see sure enough the number of files listed is indeed 529.
+
+
+10. a quick discussion on what the desired behavior of the sorting of the `Selected Items` should be:
+10.1. the intial state should simply be sorted by token count. the user should see at first glance what files are largest. we should always apply a sort, or sub-sort that orders by token count.
+10.2. the next sort that a user would want would be to sort by file type. the idea would be that the user could then see at a glance, grouped by file type, which files of that type are the largest, cause at the end of the day, much of the decision-making in this process revolves around token counts.
+10.3. if the user tries to sort alphabetically, thats essentially going to swap with the token sort. so those two are interchangable cause you cant really do both of those at the same time.
+
+
+<previous cycle 22 summary of actions>
+
+
+Excellent, the detailed feedback from the playtesting session is incredibly valuable. It provides a clear roadmap for maturing the extension from a functional tool into a polished and intuitive environment. I'll address these points by first updating our documentation to capture the new requirements, and then implementing the necessary code changes, prioritizing critical bug fixes and high-impact UI refinements.
+
+### Course of Action
+
+1.  **Documentation Update:** I will create three new design artifacts to formally capture the requested features. This ensures our "Source of Truth" reflects the project's evolving scope before we write the code.
+    *   **New `A15. DCE - Multi-Select & Sorting Feature Plan.md`:** This artifact will detail the specifications for multi-selection (using click, Ctrl, and Shift) in both the main file tree and the "Selected Items" panel, as well as the requirements for multi-level column sorting in the "Selected Items" panel.
+    *   **New `A16. DCE - UI & UX Refinements Plan.md`:** This document will cover the visual and usability improvements, including fixing the header layout, resolving the "Selected Items" panel overflow bug, enhancing scrollbar visibility, and implementing loading indicators during file system operations.
+    *   **New `A17. DCE - Advanced Tree View Features.md`:** This will outline the plan for the more complex request of implementing scrollable, self-contained views for large, expanded folders in the main file tree.
+    *   **Update `A0. Master Artifact List.md`:** I will add entries for these new artifacts.
+
+2.  **High-Priority Bug Fixes and UI Cleanup:** I will immediately address the most critical UI bugs that impact usability.
+    *   **Fix Header Spacing (`view.scss`):** I will adjust the CSS for the main view header to eliminate the extra vertical space, aligning the title and the toolbar buttons cleanly.
+    *   **Fix "Selected Items" Overflow (`view.scss`):** I will correct the flexbox layout rules for the view's containers to ensure the "Selected Items" list is properly constrained within its panel and scrolls correctly, preventing it from rendering behind the footer.
+    *   **Add Loading Indicator (`view.tsx`):** I will introduce a new `isLoading` state that will be activated during file system scans. This will display a subtle loading animation in the toolbar, providing clear visual feedback to the user that an operation is in progress.
+
+3.  **Refactor "Selected Items" Panel:** I will overhaul the `SelectedFilesView.tsx` component to address the layout, sorting, and selection requests.
+    *   **Table-like Layout:** I will refactor the component's structure and styling to present the selected files in clear, sortable columns for the file name and token count.
+    *   **Sorting Logic:** I will implement state management for sort columns and direction. Clicking a column header will sort the list accordingly. I will also add a default sort option to reflect the standard VS Code explorer order.
+    *   **Multi-Selection for Removal:** I will replace the current checkbox-based removal system in this panel with a more intuitive click-based selection model, supporting standard Ctrl, Shift, and Ctrl+Shift multi-select patterns for removing multiple items at once.
+
+### Files Updated This Cycle:
+*   `A0. DCE Master Artifact List.md` (Updated)
+*   `A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md` (New)
+*   `A16. DCE - Phase 1 - UI & UX Refinements Plan.md` (New)
+*   `A17. DCE - Phase 1 - Advanced Tree View Features.md` (New)
+*   `src/client/views/context-chooser.view/view.tsx` (Updated)
+*   `src/client/views/context-chooser.view/view.scss` (Updated)
+*   `src/client/components/SelectedFilesView.tsx` (New - Replaces old component)
+*   `src/client/components/file-tree/FileTree.utils.ts` (Updated)
+
+***
+```xml
+<A0. DCE Master Artifact List.md>
+
+</A0. DCE Master Artifact List.md>
+```
+***
+```xml
+<A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md>
+
+</A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md>
+```***
+```xml
+<A16. DCE - Phase 1 - UI & UX Refinements Plan.md>
+
+</A16. DCE - Phase 1 - UI & UX Refinements Plan.md>
+```
+***
+```xml
+<A17. DCE - Phase 1 - Advanced Tree View Features.md>
+
+</A17. DCE - Phase 1 - Advanced Tree View Features.md>
+```
+***
+```xml
+<src/client/views/context-chooser.view/view.tsx>
+
+</src/client/views/context-chooser.view/view.tsx>
+```
+***
+```xml
+<src/client/views/context-chooser.view/view.scss>
+
+</src/client/views/context-chooser.view/view.scss>
+```
+***
+```xml
+<src/client/components/SelectedFilesView.tsx>
+
+</src/client/components/SelectedFilesView.tsx>
+```
+***```xml
+<src/client/components/file-tree/FileTree.utils.ts>
+
+```
+</previous cycle 22 summary of actions>
+</Cycle 23>
+
 
 <cycle 22>
 amazing work. here are the new features we want to implement after playtesting. first, align/add any documentation artifacts to capture these requests and then lets act upon them:
