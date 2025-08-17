@@ -21,4 +21,5 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.ApplySelectionSet ? { paths: string[] } :
     T extends ServerToClientChannel.SendSelectionSets ? { sets: SelectionSet } :
     T extends ServerToClientChannel.ForceRefresh ? {} :
+    T extends ServerToClientChannel.SetActiveFile ? { path: string } :
     never;

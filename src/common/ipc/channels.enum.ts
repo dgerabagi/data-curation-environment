@@ -24,4 +24,5 @@ export enum ServerToClientChannel {
     ApplySelectionSet = "serverToClient.applySelectionSet",
     SendSelectionSets = "serverToClient.sendSelectionSets",
     ForceRefresh = "serverToClient.forceRefresh", // Backend tells frontend to refresh
+    SetActiveFile = "serverToClient.setActiveFile", // For active file sync
 }

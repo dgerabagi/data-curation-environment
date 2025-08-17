@@ -1,49 +1,49 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-17T19:29:36.521Z
+  Date Generated: 2025-08-17T21:31:50.287Z
   ---
   Total Files: 156
-  Total Lines: 12856
-  Total Characters: 493039
-  Approx. Tokens: 123318
+  Total Lines: 11702
+  Total Characters: 457443
+  Approx. Tokens: 114419
 -->
 
 <!-- Top 10 Files by Token Count -->
-1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10923 tokens)
-2. deploy_scaffold.js (10600 tokens)
-3. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
-4. src\backend\services\fs.service.ts (2695 tokens)
-5. The-Creator-AI-main\src\backend\services\code.service.ts (2618 tokens)
-6. The-Creator-AI-main\src\backend\services\fs.service.ts (2495 tokens)
-7. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts (2424 tokens)
+1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
+2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
+3. src\backend\services\fs.service.ts (2695 tokens)
+4. The-Creator-AI-main\src\backend\services\code.service.ts (2618 tokens)
+5. The-Creator-AI-main\src\backend\services\fs.service.ts (2495 tokens)
+6. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts (2424 tokens)
+7. src\client\views\context-chooser.view\view.tsx (2356 tokens)
 8. src\client\views\context-chooser.view\view.scss (2304 tokens)
-9. src\client\views\context-chooser.view\view.tsx (2276 tokens)
-10. The-Creator-AI-main\src\backend\services\llm.service.ts (2156 tokens)
+9. The-Creator-AI-main\src\backend\services\llm.service.ts (2156 tokens)
+10. src\backend\services\flattener.service.ts (1711 tokens)
 
 <!-- Full File List -->
 1. .gitignore - Lines: 9 - Chars: 108 - Tokens: 27
 2. .vscodeignore - Lines: 7 - Chars: 76 - Tokens: 19
 3. bootstrap-flattener.js - Lines: 185 - Chars: 5834 - Tokens: 1459
-4. deploy_scaffold.js - Lines: 1259 - Chars: 42400 - Tokens: 10600
-5. package.json - Lines: 72 - Chars: 2163 - Tokens: 541
-6. public\spiral.svg - Lines: 8 - Chars: 459 - Tokens: 115
-7. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 94 - Chars: 6120 - Tokens: 1530
-8. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 38 - Chars: 3311 - Tokens: 828
-9. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 47 - Chars: 5207 - Tokens: 1302
-10. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 73 - Chars: 5105 - Tokens: 1277
-11. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 68 - Chars: 4497 - Tokens: 1125
-12. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 48 - Chars: 5680 - Tokens: 1420
-13. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
-14. src\Artifacts\A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md - Lines: 38 - Chars: 5805 - Tokens: 1452
-15. src\Artifacts\A16. DCE - Phase 1 - UI & UX Refinements Plan.md - Lines: 41 - Chars: 5412 - Tokens: 1353
-16. src\Artifacts\A17. DCE - Phase 1 - Advanced Tree View Features.md - Lines: 47 - Chars: 3888 - Tokens: 972
+4. package.json - Lines: 72 - Chars: 2163 - Tokens: 541
+5. public\spiral.svg - Lines: 8 - Chars: 459 - Tokens: 115
+6. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 98 - Chars: 6416 - Tokens: 1604
+7. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 38 - Chars: 3311 - Tokens: 828
+8. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 47 - Chars: 5207 - Tokens: 1302
+9. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 73 - Chars: 5105 - Tokens: 1277
+10. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 68 - Chars: 4497 - Tokens: 1125
+11. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 48 - Chars: 5680 - Tokens: 1420
+12. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
+13. src\Artifacts\A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md - Lines: 38 - Chars: 5805 - Tokens: 1452
+14. src\Artifacts\A16. DCE - Phase 1 - UI & UX Refinements Plan.md - Lines: 41 - Chars: 5412 - Tokens: 1353
+15. src\Artifacts\A17. DCE - Phase 1 - Advanced Tree View Features.md - Lines: 47 - Chars: 3888 - Tokens: 972
+16. src\Artifacts\A18. DCE - Phase 1 - Active File Sync Feature Plan.md - Lines: 38 - Chars: 3229 - Tokens: 808
 17. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
 18. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 31 - Chars: 4278 - Tokens: 1070
 19. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
 20. src\Artifacts\A4. DCE - Analysis of The-Creator-AI Repo.md - Lines: 56 - Chars: 5722 - Tokens: 1431
 21. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
-22. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43689 - Tokens: 10923
+22. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
 23. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
 24. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
 25. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
@@ -56,28 +56,28 @@
 32. src\backend\services\services.ts - Lines: 22 - Chars: 844 - Tokens: 211
 33. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
 34. src\client\components\ContextMenu.tsx - Lines: 61 - Chars: 2914 - Tokens: 729
-35. src\client\components\file-tree\FileTree.tsx - Lines: 124 - Chars: 5765 - Tokens: 1442
+35. src\client\components\file-tree\FileTree.tsx - Lines: 125 - Chars: 5856 - Tokens: 1464
 36. src\client\components\file-tree\FileTree.utils.ts - Lines: 120 - Chars: 4321 - Tokens: 1081
 37. src\client\components\SelectedFilesView.tsx - Lines: 153 - Chars: 6838 - Tokens: 1710
-38. src\client\components\tree-view\TreeView.tsx - Lines: 91 - Chars: 3288 - Tokens: 822
+38. src\client\components\tree-view\TreeView.tsx - Lines: 127 - Chars: 5079 - Tokens: 1270
 39. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 40. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
 41. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-42. src\client\views\context-chooser.view\on-message.ts - Lines: 77 - Chars: 3128 - Tokens: 782
+42. src\client\views\context-chooser.view\on-message.ts - Lines: 80 - Chars: 3388 - Tokens: 847
 43. src\client\views\context-chooser.view\view.scss - Lines: 418 - Chars: 9215 - Tokens: 2304
-44. src\client\views\context-chooser.view\view.tsx - Lines: 194 - Chars: 9103 - Tokens: 2276
+44. src\client\views\context-chooser.view\view.tsx - Lines: 200 - Chars: 9421 - Tokens: 2356
 45. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
-46. src\common\ipc\channels.enum.ts - Lines: 27 - Chars: 1209 - Tokens: 303
-47. src\common\ipc\channels.type.ts - Lines: 24 - Chars: 1630 - Tokens: 408
+46. src\common\ipc\channels.enum.ts - Lines: 28 - Chars: 1286 - Tokens: 322
+47. src\common\ipc\channels.type.ts - Lines: 25 - Chars: 1702 - Tokens: 426
 48. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
 49. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 50. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
 51. src\common\types\file-node.ts - Lines: 10 - Chars: 300 - Tokens: 75
-52. src\common\types\vscode-webview.d.ts - Lines: 13 - Chars: 345 - Tokens: 87
+52. src\common\types\vscode-webview.d.ts - Lines: 13 - Chars: 357 - Tokens: 90
 53. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
 54. src\common\utils\view-html.ts - Lines: 26 - Chars: 971 - Tokens: 243
 55. src\common\view-types.ts - Lines: 8 - Chars: 246 - Tokens: 62
-56. src\extension.ts - Lines: 53 - Chars: 2070 - Tokens: 518
+56. src\extension.ts - Lines: 68 - Chars: 2731 - Tokens: 683
 57. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
 58. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
 59. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
@@ -389,7 +389,1090 @@ main().catch(err => {
 });
 </file>
 
-<file path="deploy_scaffold.js">
+<file path="package.json">
+{
+    "name": "data-curation-environment",
+    "publisher": "DCE-Developer",
+    "displayName": "Data Curation Environment",
+    "description": "A VS Code extension for curating context for Large Language Models.",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.90.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onView:viewType.sidebar.contextChooser"
+    ],
+    "main": "./dist/extension.js",
+    "contributes": {
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "data-curation-environment",
+                    "title": "Data Curation",
+                    "icon": "public/spiral.svg"
+                }
+            ]
+        },
+        "views": {
+            "data-curation-environment": [
+                {
+                    "type": "webview",
+                    "id": "viewType.sidebar.contextChooser",
+                    "name": "Data Curation"
+                }
+            ]
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run package",
+        "compile": "webpack",
+        "watch": "webpack --watch",
+        "package": "webpack --mode production --devtool hidden-source-map",
+        "lint": "eslint src --ext ts"
+    },
+    "devDependencies": {
+        "@types/node": "18.x",
+        "@types/vscode": "^1.90.0",
+        "@typescript-eslint/eslint-plugin": "^7.7.1",
+        "@typescript-eslint/parser": "^7.7.1",
+        "eslint": "^8.57.0",
+        "ts-loader": "^9.5.1",
+        "typescript": "^5.4.5",
+        "webpack": "^5.91.0",
+        "webpack-cli": "^5.1.4",
+        "copy-webpack-plugin": "^12.0.2",
+        "style-loader": "^4.0.0",
+        "css-loader": "^7.1.2",
+        "sass-loader": "^16.0.1",
+        "sass": "^1.78.0",
+        "postcss-loader": "^8.1.1",
+        "babel-loader": "^9.1.3",
+        "@babel/preset-react": "^7.24.7",
+        "@babel/preset-typescript": "^7.24.7",
+        "process": "^0.11.10"
+    },
+    "dependencies": {
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "react-icons": "^5.3.0",
+        "rxjs": "^7.8.1",
+        "reflect-metadata": "^0.2.2"
+    }
+}
+</file>
+
+<file path="public/spiral.svg">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+    <g id="Page-1" stroke="none" fill="none" fill-rule="evenodd">
+        <g id="dep" transform="translate(4, 6)">
+            <path d="M100 100 m 0 -80 a 80 80 0 0 1 0 160 a 70 70 0 0 1 0 -140 a 60 60 0 0 1 0 120 a 50 50 0 0 1 0 -100 a 40 40 0 0 1 0 80 a 30 30 0 0 1 0 -60 a 20 20 0 0 1 0 40"
+                fill="none" stroke="white" stroke-width="8" id="Shape" />
+        </g>
+    </g>
+</svg>
+</file>
+
+<file path="src/Artifacts/A0. DCE Master Artifact List.md">
+# Artifact A0: DCE Master Artifact List
+# Date Created: C1
+# Author: AI Model & Curator
+# Updated on: C24 (Add A18 for Active File Sync feature)
+
+## 1. Purpose
+
+# This file serves as the definitive, parseable list of all documentation artifacts for the "Data Curation Environment" (DCE) VS Code Extension project.
+
+## 2. Formatting Rules for Parsing
+
+# *   Lines beginning with `#` are comments and are ignored.
+# *   `##` denotes a major category header and is ignored.
+# *   `###` denotes an artifact entry. The text following it is the artifact's full name and ID.
+# *   Lines beginning with `- **Description:**` provide context for the project.
+# *   Lines beginning with `- **Tags:**` provide keywords for Inference.
+
+## 3. Artifacts List
+
+## I. Project Planning & Design
+
+### A1. DCE - Project Vision and Goals
+- **Description:** High-level overview of the DCE VS Code extension, its purpose, and the three-phase development plan.
+- **Tags:** project vision, goals, scope, phase 1, phase 2, phase 3, vs code extension
+
+### A2. DCE - Phase 1 - Context Chooser - Requirements & Design
+- **Description:** Detailed functional and technical requirements for Phase 1, focusing on the file tree with checkboxes and the flattening functionality.
+- **Tags:** requirements, design, phase 1, context chooser, tree view, checkbox, flatten, vs code api
+
+### A3. DCE - Technical Scaffolding Plan
+- **Description:** Outlines the proposed file structure, technologies, and key VS Code API components for the extension, based on the `The-Creator-AI-main` reference repo.
+- **Tags:** technical plan, scaffolding, file structure, typescript, vs code extension, api
+
+### A4. DCE - Analysis of The-Creator-AI Repo
+- **Description:** Provides a detailed analysis of the `The-Creator-AI-main` reference repository, its architecture, and its mapping to the Data Curation Environment project goals.
+- **Tags:** analysis, repository, architecture, vscode-extension, project-planning
+
+### A5. DCE - Target File Structure
+- **Description:** A text-based representation of the target file structure for the DCE extension, outlining the layout of directories and key files.
+- **Tags:** file structure, architecture, project layout, scaffolding
+
+### A6. DCE - Initial Scaffolding Deployment Script
+- **Description:** Contains a Node.js script that, when executed, creates the entire initial directory structure and files for the DCE extension project.
+- **Tags:** deployment, script, scaffolding, bootstrap, nodejs, automation
+
+### A7. DCE - Development and Testing Guide
+- **Description:** A step-by-step guide explaining how to run, debug, and test the DCE extension within VS Code using the Extension Development Host.
+- **Tags:** development, testing, debugging, workflow, vs code extension, f5
+
+### A8. DCE - Phase 1 - Selection Sets Feature Plan
+- **Description:** A plan outlining the user stories, UI/UX, and technical implementation for saving, loading, and persisting different sets of selected files (selection profiles).
+- **Tags:** feature plan, selection sets, profiles, context management, persistence, phase 1
+
+### A9. DCE - GitHub Repository Setup Guide
+- **Description:** A step-by-step guide with the necessary git commands to initialize the project as a local repository and push it to a new remote repository on GitHub.
+- **Tags:** git, github, version control, setup, repository
+
+### A10. DCE - Metadata and Statistics Display
+- **Description:** Outlines the requirements and design for displaying live metadata (total selected files, total tokens) and for showing aggregate statistics (token and file counts) for folders in the file tree.
+- **Tags:** feature plan, metadata, statistics, token count, ui, ux
+
+### A11. DCE - Regression Case Studies
+- **Description:** Documents recurring bugs, their root causes, and codified solutions to prevent future regressions during development.
+- **Tags:** bugs, regression, troubleshooting, development, best practices
+
+### A12. DCE - Logging and Debugging Guide
+- **Description:** Explains how to access and use the integrated logging solution for debugging the extension's backend and frontend components.
+- **Tags:** logging, debugging, troubleshooting, development, output channel
+
+### A13. DCE - Phase 1 - Right-Click Context Menu
+- **Description:** A plan for implementing standard file explorer context menu actions (e.g., Rename, Delete, Copy Path) in the custom file tree.
+- **Tags:** feature plan, context menu, right-click, file operations, ux, phase 1
+
+### A14. DCE - Ongoing Development Issues
+- **Description:** A tracking document for recurring or persistent issues that need to be monitored across development cycles until they are confirmed as resolved.
+- **Tags:** bugs, tracking, issues, logging, node_modules, performance
+
+### A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan
+- **Description:** Details the requirements for multi-selection (click, Ctrl, Shift) in both the main file tree and the "Selected Items" panel, and multi-level column sorting.
+- **Tags:** feature plan, multi-select, sorting, list view, ux, phase 1
+
+### A16. DCE - Phase 1 - UI & UX Refinements Plan
+- **Description:** Covers visual and usability improvements like fixing panel layouts, resolving overflow bugs, adding loading indicators, and improving scrollbar visibility.
+- **Tags:** feature plan, ui, ux, layout, bug fix, loading indicator, phase 1
+
+### A17. DCE - Phase 1 - Advanced Tree View Features
+- **Description:** Outlines the plan for advanced tree view interactions, specifically the implementation of scrollable, self-contained views for large, expanded folders.
+- **Tags:** feature plan, tree view, ux, scrollable, phase 1
+
+### A18. DCE - Phase 1 - Active File Sync Feature Plan
+- **Description:** Details the requirements and implementation for automatically revealing and highlighting the active editor's file in the custom Data Curation file tree.
+- **Tags:** feature plan, active file, sync, reveal, tree view, ux, phase 1
+
+## II. Standalone Utilities & Guides
+
+### A189. Number Formatting Reference Guide
+- **Description:** A standalone guide and utility script for formatting large numbers with K/M/B/T suffixes and dynamic decimal place adjustment for clean UI presentation.
+- **Tags:** utility, script, formatting, numbers, ui, ux, javascript, typescript
+</file>
+
+<file path="src/Artifacts/A1. DCE - Project Vision and Goals.md">
+# Artifact A1: DCE - Project Vision and Goals
+# Date Created: Cycle 1
+# Author: AI Model
+# Updated on: Cycle 2 (Reflect findings from reference repository analysis)
+
+## 1. Project Vision
+
+The vision of the Data Curation Environment (DCE) is to create a seamless, integrated toolset within VS Code that streamlines the workflow of interacting with large language models. The core problem this project solves is the manual, cumbersome process of selecting, packaging, and managing the context (code files, documents, etc.) required for effective AI-assisted development.
+
+## 2. High-Level Goals & Phases
+
+The project will be developed in three distinct phases.
+
+**Note on Reference Repository:** The discovery of the `The-Creator-AI-main` repository in Cycle 2 has provided a significant head-start, especially for Phase 1 and 2. The project's focus shifts from building these components from the ground up to adapting and extending the powerful, existing foundation.
+
+### Phase 1: The Context Chooser
+
+The goal of this phase is to eliminate the manual management of a `files_list.txt`. Users should be able to intuitively select files and folders for their AI context directly within the VS Code file explorer UI.
+
+-   **Core Functionality:** Implement a file explorer view with checkboxes for every file and folder.
+-   **Action:** A "Flatten Context" button will take all checked items and generate a single `flattened_repo.md` file in the project root.
+-   **Outcome:** A user can curate a complex context with simple mouse clicks, completely removing the need to edit a text file.
+-   **Update (Cycle 2):** The reference repository contains a fully-featured `FileTree.tsx` component that already accomplishes most of this. The task is now to adapt this component and its backend `FSService` to produce the desired `flattened_repo.md` output.
+
+### Phase 2: The Parallel Co-Pilot Panel
+
+This phase addresses the limitation of being locked into a single conversation with an AI assistant. The goal is to enable multiple, parallel interactions to compare and contrast different prompts or approaches simultaneously.
+
+-   **Core Functionality:** Create a custom panel within VS Code that can host multiple, independent "chat" or "prompt" windows.
+-   **Outcome:** A user can send the same (or different) prompts to multiple AI instances and view the results side-by-side, dramatically improving the efficiency of prompt engineering and response evaluation.
+-   **Update (Cycle 2):** The reference repository's "Change Plan" view is an excellent, full-featured implementation of a *single* co-pilot panel. This provides a solid architectural base to build upon for the parallelization feature.
+
+### Phase 3: The Integrated Diff Tool
+
+This phase aims to bring a critical part of the external workflow—comparing text files—directly into the VS Code extension.
+
+-   **Core Functionality:** Create a simple diffing utility within a VS Code webview. The user should be able to select two text sources (e.g., two AI responses from the Phase 2 panel, or a new response and an existing file) and see a visual comparison.
+-   **Outcome:** Reduces the friction of copying and pasting text into external tools like WinMerge, keeping the entire curation and review workflow inside VS Code.
+</file>
+
+<file path="src/Artifacts/A10. DCE - Metadata and Statistics Display.md">
+# Artifact A10: DCE - Metadata and Statistics Display
+# Date Created: Cycle 14
+# Author: AI Model
+# Updated on: C15 (Add image file size handling and UI refinements)
+
+- **Key/Value for A0:**
+- **Description:** Outlines the requirements and design for displaying live metadata (total selected files, total tokens) and for showing aggregate statistics (token and file counts) for folders in the file tree.
+- **Tags:** feature plan, metadata, statistics, token count, ui, ux
+
+## 1. Overview & Goal
+
+To enhance the data curation process, it is critical for the user to have immediate, quantitative feedback on their selections. This feature will provide at-a-glance statistics at both the folder level and the overall selection level. The goal is to empower the user to make informed decisions about context size and composition without needing to perform manual calculations.
+
+## 2. User Stories
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| US-01 | **Folder Statistics** | As a data curator, I want to see the total token count and the total number of files contained within each folder, so I can quickly assess the size and complexity of different parts of my project. | - Next to each folder name in the file tree, a token count is displayed. <br> - This token count is the recursive sum of all tokens from all non-image files within that folder and its subfolders. <br> - Next to the token count, a file count is also displayed, formatted with commas (e.g., "1,234"). <br> - These numbers are calculated on the backend and provided with the initial file tree data. |
+| US-02 | **Live Selection Summary** | As a data curator, I want to see a live summary of my total selection as I check and uncheck files, so I can monitor the total size of my context in real-time. | - A dedicated summary panel/footer is visible in the UI. <br> - This panel displays "X files" and "Y tokens". <br> - "X" is the total count of all individual files included in the current selection, formatted with commas. <br> - "Y" is the sum of all token counts for those selected non-image files. <br> - These values update instantly whenever a checkbox is changed. |
+| US-03 | **Readable Numbers & Icons** | As a data curator, I want large token counts to be formatted in a compact and readable way (e.g., 1,234 becomes "1.2K"), and for icons to visually represent the data, so I can easily parse the information. | - All token counts use K/M/B suffixes for numbers over 1,000. <br> - All file counts use commas for thousands separators. <br> - An icon is displayed next to the token count and file count for visual distinction. <br> - The statistics are right-justified in the file tree for better readability. |
+| US-04 | **Image File Handling** | As a data curator, I want to see the file size for images instead of a token count, so I can understand their contribution to storage/transfer size rather than context length. | - The backend identifies common image file types (png, jpg, etc.). <br> - For image files, the token count is treated as 0. <br> - In the file tree, instead of a token count, the human-readable file size is displayed (e.g., "15.2 KB", "2.1 MB"). |
+
+## 3. Technical Implementation Plan
+
+1.  **Backend (`fs.service.ts`):**
+    *   The `FileNode` interface in `src/common/types/file-node.ts` will be updated to include `isImage: boolean` and `sizeInBytes: number`.
+    *   The backend service will maintain a list of image file extensions.
+    *   When building the tree, it will check each file's extension.
+    *   If it's an image, it will use `fs.stat` to get the `sizeInBytes`, set `isImage: true`, and set `tokenCount: 0`.
+    *   If it's not an image, it will calculate the `tokenCount` and get the `sizeInBytes`.
+    *   The recursive sum logic for folders will aggregate `tokenCount`, `fileCount`, and `sizeInBytes` from their children.
+    *   The `vscode.workspace.findFiles` call will be updated to exclude the `node_modules` directory.
+
+2.  **Frontend - Formatting (`formatting.ts`):**
+    *   A new `formatBytes(bytes)` utility will be created to convert bytes to KB, MB, etc.
+    *   A new `formatNumberWithCommas(number)` utility will be created.
+
+3.  **Frontend - File Tree (`FileTree.tsx` & `view.scss`):**
+    *   The `FileTree.tsx` component will be updated to render the new data.
+    *   It will conditionally display either a formatted token count (using `formatLargeNumber`) or a formatted file size (using `formatBytes`) based on the `isImage` flag.
+    *   It will display folder file counts using `formatNumberWithCommas`.
+    *   It will incorporate icons from `react-icons/vsc` for tokens and file counts.
+    *   The stylesheet (`view.scss`) will be updated to right-align all statistics, pushing them to the end of the file/folder row.
+
+4.  **Frontend - Live Summary Panel (`context-chooser.view.tsx`):**
+    *   The `useMemo` hook that calculates the summary will be updated to correctly sum the total number of files and total tokens from the selected items. It will continue to ignore image sizes for the token total to avoid mixing units.
+    *   The rendered output will use the new formatting utilities and icons.
+</file>
+
+<file path="src/Artifacts/A11. DCE - Regression Case Studies.md">
+# Artifact A11: DCE - Regression Case Studies
+# Date Created: Cycle 16
+# Author: AI Model & Curator
+# Updated on: C16 (Add Case Study for Checkbox State Management)
+
+- **Key/Value for A0:**
+- **Description:** Documents recurring bugs, their root causes, and codified solutions to prevent future regressions during development.
+- **Tags:** bugs, regression, troubleshooting, development, best practices
+
+## 1. Purpose
+
+This document serves as a living record of persistent or complex bugs that have recurred across multiple development cycles. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase.
+
+## 2. Case Studies
+
+---
+
+### Case Study 002: Checkbox State Management in File Tree
+
+-   **Artifacts Affected:** `src/client/components/file-tree/FileTree.utils.ts`, `src/client/components/file-tree/FileTree.tsx`
+-   **Cycles Observed:** 14, 15, 16
+-   **Symptom:** Checkbox functionality in the file tree is erratic. Only the root checkbox works as expected, but individual files or sub-folders cannot be checked or unchecked correctly. Clicking a checkbox on a child of an already-selected folder fails to deselect it.
+-   **Root Cause Analysis (RCA):**
+    The core issue was overly complex and flawed state management logic within the `addRemovePathInSelectedFiles` utility function. The logic attempted to handle the "unchecking a child of a selected parent" case by removing the parent and re-adding all of its other children (the "siblings"). This approach was brittle and failed to correctly calculate the new state, leading to a UI that did not update correctly. The complexity made the function difficult to debug and maintain.
+
+-   **Codified Solution & Best Practice:**
+    1.  **Simplify State Logic:** The state management logic was rewritten to be more direct and declarative, using a `Set` for efficient manipulation of selected paths.
+    2.  **Handle Cases Explicitly:** The new function explicitly handles the three primary user actions:
+        *   **CHECK:** When a node is checked, any of its descendants that are already in the selection are removed, and the node's own path is added. This ensures the most senior selected path is always the one stored in state.
+        *   **UNCHECK (Direct):** When a node that is explicitly in the selection list is unchecked, its path and the paths of all its descendants are removed.
+        *   **UNCHECK (Subtractive):** When a node is unchecked because its parent was checked, the parent is removed from the selection. Then, all of the parent's direct children *except for the one that was clicked* are added to the selection. This correctly "subtracts" the item from the parent's group selection without complex traversals.
+    3.  **Robust Event Handling:** Ensure the checkbox `onChange` handler in the React component uses `event.stopPropagation()` to prevent the click event from bubbling up and triggering other actions, such as folder expansion.
+
+-   **Example of Flawed Logic (Conceptual):**
+    ```typescript
+    // OLD LOGIC
+    if (unchecking a child of a selected parent) {
+      // 1. Remove parent from selected list.
+      // 2. Traverse the entire tree from the parent.
+      // 3. Add every descendant of the parent back, EXCEPT the clicked child.
+      // This was inefficient and error-prone.
+    }
+    ```
+
+-   **Example of Correct Logic (Conceptual):**
+    ```typescript
+    // NEW LOGIC
+    if (unchecking a child of a selected parent) {
+      // 1. Remove the parent from the selection set.
+      const parentNode = findParentNode(clickedPath);
+      // 2. Add all of the parent's *direct children* to the selection set,
+      //    except for the clicked child itself.
+      parentNode.children.forEach(child => {
+        if (child.path !== clickedPath) {
+          selectionSet.add(child.path);
+        }
+      });
+    }
+    ```
+
+---
+
+### Case Study 001: `path.sep` Usage in Frontend Components
+
+-   **Artifacts Affected:** `src/client/components/file-tree/FileTree.tsx`
+-   **Cycles Observed:** 13, 14, 16
+-   **Symptom:** The webpack build process fails with TypeScript errors similar to `TS2339: Property 'sep' does not exist on type 'string'`.
+-   **Root Cause Analysis (RCA):**
+    The error occurs when frontend code (React components running in a webview) attempts to use `path.sep`. The `path` module is a core part of the Node.js runtime, but it does not exist in the browser-like context of a webview.
+-   **Codified Solution & Best Practice:**
+    1.  **Strict Environment Separation:** All file system path manipulation **must** occur in the backend (`src/backend/`).
+    2.  **Normalized Paths:** The backend must normalize all paths to use forward slashes (`/`) before sending them to the frontend.
+    3.  **Frontend Simplicity:** The frontend code must treat all file paths as simple strings and should never attempt to parse or join them using path-specific separators.
+</file>
+
+<file path="src/Artifacts/A12. DCE - Logging and Debugging Guide.md">
+# Artifact A12: DCE - Logging and Debugging Guide
+# Date Created: Cycle 19
+# Author: AI Model
+# Updated on: C19 (Add explicit clarification on where to find different types of logs.)
+
+- **Key/Value for A0:**
+- **Description:** Explains how to access and use the integrated logging solution for debugging the extension's backend and frontend components.
+- **Tags:** logging, debugging, troubleshooting, development, output channel
+
+## 1. Purpose
+
+This document provides instructions on how to access and use the logging features built into the Data Curation Environment (DCE) extension. Effective logging is crucial for diagnosing performance issues, tracking down bugs, and understanding the extension's behavior during development.
+
+## 2. Two Primary Log Locations
+
+There are two separate places to look for logs, depending on where the code is running.
+
+### Location 1: The "Debug Console" (For `console.log`)
+
+This is where you find logs from the **backend** (the extension's main Node.js process).
+
+-   **What you'll see here:** `console.log()` statements from files in `src/backend/` and `src/extension.ts`. This is useful for debugging the extension's core activation and services *before* the UI is even visible.
+-   **Where to find it:** In your **main development window** (the one where you press `F5`), look in the bottom panel for the **"DEBUG CONSOLE"** tab.
+
+    ```
+    -----------------------------------------------------------------------------------
+    | PROBLEMS    OUTPUT    DEBUG CONSOLE    TERMINAL                                 |
+    |---------------------------------------------------------------------------------|
+    |                                                                                 |
+    |  > Congratulations, your extension "Data Curation Environment" is now active!   |
+    |  > FSService watcher initialized.                                               |
+    |  ...                                                                            |
+    -----------------------------------------------------------------------------------
+    ```
+
+### Location 2: The "Output" Channel (For Centralized Logging)
+
+This is the primary, centralized log for the entire extension, including messages from the **frontend (WebView)**.
+
+-   **What you'll see here:** Formatted log messages from both the backend (`LoggerService`) and the frontend (`logger.ts`). All messages are prefixed with a level (`[INFO]`, `[WARN]`, `[ERROR]`) and a timestamp. Frontend messages are also prefixed with `[WebView]`.
+-   **Where to find it:** In the **"[Extension Development Host]" window** (the new window that opens after you press `F5`), follow these steps:
+    1.  **Open the Panel:** Press `Ctrl+J` (or `Cmd+J` on Mac).
+    2.  **Navigate to the "OUTPUT" Tab.**
+    3.  In the dropdown menu on the right, select **`Data Curation Environment`**.
+
+    ```
+    -----------------------------------------------------------------------------------
+    | PROBLEMS    OUTPUT    DEBUG CONSOLE    TERMINAL                                 |
+    |---------------------------------------------------------------------------------|
+    |                                                 [Data Curation Environment v]   |
+    |                                                                                 |
+    |  [INFO] [2:30:00 PM] Services initialized.                                      |
+    |  [INFO] [2:30:01 PM] Received request for workspace files.                      |
+    |  [INFO] [2:30:01 PM] [WebView] Initializing view and requesting workspace files.|
+    |  [INFO] [2:30:01 PM] Scanning for files with exclusion pattern: ...             |
+    |  ...                                                                            |
+    -----------------------------------------------------------------------------------
+    ```
+
+## 3. What is Logged?
+
+*   **Backend Initialization:** Messages indicating that services are starting.
+*   **File System Scans & Refreshes:**
+    *   Confirmation when a file scan begins, including the exclusion pattern used.
+    *   Confirmation when a file change is detected by the watcher.
+    *   Confirmation when a refresh is triggered.
+*   **Errors:** Any caught exceptions on both the backend and frontend are logged with an `[ERROR]` prefix.
+*   **Frontend Actions:** Key user interactions in the UI (button clicks, etc.) are logged with a `[WebView]` prefix.
+</file>
+
+<file path="src/Artifacts/A13. DCE - Phase 1 - Right-Click Context Menu.md">
+# Artifact A13: DCE - Phase 1 - Right-Click Context Menu
+# Date Created: Cycle 19
+# Author: AI Model
+# Updated on: C21 (Reflect implementation details and new file/folder actions)
+
+- **Key/Value for A0:**
+- **Description:** A plan for implementing standard file explorer context menu actions (e.g., Rename, Delete, Copy Path) in the custom file tree.
+- **Tags:** feature plan, context menu, right-click, file operations, ux, phase 1
+
+## 1. Overview & Goal
+
+To enhance the user experience and make the Data Curation Environment's file tree a more complete replacement for the native VS Code explorer, this feature will add a standard right-click context menu and associated toolbar buttons. The goal is to provide essential file management operations directly within our extension's view, reducing the need for users to switch back to the native explorer for common tasks.
+
+## 2. User Stories
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| US-01 | **Copy Path** | As a user, I want to right-click a file or folder and copy its absolute or relative path to my clipboard, so I can easily reference it elsewhere. | - Right-clicking a node in the file tree opens a context menu. <br> - The menu contains "Copy Path" and "Copy Relative Path" options. <br> - Selecting an option copies the corresponding path string to the system clipboard. |
+| US-02 | **Rename File/Folder** | As a user, I want to right-click a file or folder and rename it, so I can correct mistakes or refactor my project structure. | - The context menu contains a "Rename" option. <br> - Selecting it turns the file/folder name into an editable input field. <br> - Pressing Enter or clicking away saves the new name. <br> - The underlying file/folder is renamed on the file system. <br> - The file tree updates to reflect the change. |
+| US-03 | **Delete File/Folder** | As a user, I want to right-click a file or folder and delete it, so I can remove unnecessary files from my project. | - The context menu contains a "Delete" option. <br> - Selecting it shows a confirmation dialog to prevent accidental deletion. <br> - Upon confirmation, the file or folder (and its contents, recursively) is moved to the trash/recycling bin. <br> - The file tree updates to reflect the change. |
+| US-04 | **Reveal in Explorer** | As a user, I want to right-click a file or folder and have it revealed in the native OS file explorer, so I can interact with it outside of VS Code. | - The context menu contains a "Reveal in File Explorer" (or "Reveal in Finder" on macOS) option. <br> - Selecting it opens the parent directory of the item in the operating system's default file manager with the item selected. |
+| US-05 | **New File/Folder** | As a user, I want to create new files and folders from the toolbar or context menu, so I can build out my project structure without leaving the view. | - The header toolbar has "New File" and "New Folder" buttons. <br> - The context menu has "New File..." and "New Folder..." options. <br> - Clicking either prompts for a name. <br> - The new file/folder is created in the appropriate directory (workspace root for toolbar, selected folder for context menu). <br> - The file tree automatically refreshes. |
+
+## 3. Technical Implementation Plan
+
+1.  **Frontend (`FileTree.tsx`, new `ContextMenu.tsx`):**
+    *   Create a new reusable `ContextMenu.tsx` component that can be triggered by an `onContextMenu` event. It will render at the mouse position.
+    *   In `TreeView.tsx`, add an `onContextMenu` event handler to each file/folder item wrapper.
+    *   This handler will prevent the default browser menu, get the file node's data, and render the `ContextMenu` component with the appropriate options.
+    *   For "Rename", the `FileTree.tsx` component will need to manage local state to switch between displaying the name and an `<input>` field for the specific node being renamed.
+
+2.  **IPC Channels (`channels.enum.ts`, `channels.type.ts`):**
+    *   New `ClientToServerChannel` messages will be required for each action:
+        *   `RequestFileRename`: Body `{ oldPath: string, newName: string }`
+        *   `RequestFileDelete`: Body `{ path: string }`
+        *   `RequestRevealInExplorer`: Body `{ path: string }`
+        *   `RequestCopyPath`: Body `{ path: string, relative: boolean }`
+        *   `RequestNewFile`: Body `{ parentDirectory: string }`
+        *   `RequestNewFolder`: Body `{ parentDirectory: string }`
+
+3.  **Backend (`fs.service.ts`, `on-message.ts`):**
+    *   Update `on-message.ts` to handle the new IPC messages and call corresponding methods in the `FSService`.
+    *   **Rename:** Implement a method that uses `vscode.workspace.fs.rename(oldUri, newUri)`.
+    *   **Delete:** Implement a method that uses `vscode.window.showWarningMessage` for confirmation, then `vscode.workspace.fs.delete(uri, { recursive: true, useTrash: true })`. The `useTrash` option is crucial for data safety.
+    *   **Reveal:** Implement a method that executes the built-in VS Code command: `vscode.commands.executeCommand('revealInExplorer', uri)`.
+    *   **Copy Path:** Implement a method that uses `vscode.env.clipboard.writeText()` to put the absolute or relative path (calculated using `path.relative`) on the clipboard.
+    *   **New File/Folder:** Implement methods that prompt for a name with `vscode.window.showInputBox`, then create the item with `vscode.workspace.fs.writeFile` or `vscode.workspace.fs.createDirectory`.
+    *   After any file system modification (rename, delete, create), the backend's `FileSystemWatcher` will automatically detect the change and trigger a debounced refresh of the UI.
+</file>
+
+<file path="src/Artifacts/A14. DCE - Ongoing Development Issues.md">
+# Artifact A14: DCE - Ongoing Development Issues
+# Date Created: C20
+# Author: AI Model & Curator
+# Updated on: C23 (Add issues for selection persistence and remove button)
+
+- **Key/Value for A0:**
+- **Description:** A tracking document for recurring or persistent issues that need to be monitored across development cycles until they are confirmed as resolved.
+- **Tags:** bugs, tracking, issues, logging, node_modules, performance
+
+## 1. Purpose
+
+This artifact serves as a centralized list to track ongoing and recurring issues during the development of the Data Curation Environment (DCE) extension. This ensures that persistent problems are not forgotten and are actively monitored across cycles until a definitive solution is implemented and verified.
+
+## 2. Active Issues
+
+---
+
+### Issue #5: Selection State is Not Persistent
+
+-   **Symptom:** When the user makes selections in the "Data Curation" view, then switches to another VS Code tab and back, all selections are lost.
+-   **First Reported:** Cycle 23
+-   **Status (C23):** **Active.** The frontend state for `selectedFiles` is not being persisted in the VS Code `workspaceState`.
+-   **Next Steps (C23):** Implement a mechanism to save the `selectedFiles` array to `workspaceState` on every change and load it when the view is initialized. This will involve both frontend (`view.tsx`) and backend (`selection.service.ts`) changes.
+
+---
+
+### Issue #6: "Remove selected" Button is Non-Functional
+
+-   **Symptom:** In the "Selected Items" view, selecting one or more files and clicking the "Remove selected" button does not remove them from the list or from the main selection. It also causes the file tree in the main view to collapse.
+-   **First Reported:** Cycle 23
+-   **Status (C23):** **Active.** The logic in `removePathsFromSelected` or the way its result is being used to update the state is flawed. The tree collapsing indicates an improper state update is causing a major re-render.
+-   **Next Steps (C23):** Debug the `removePathsFromSelected` function in `FileTree.utils.ts`. Add logging to the `onClick` handler in `SelectedFilesView.tsx` to trace the data flow. Fix the state update to prevent the side-effect of collapsing the tree.
+
+---
+
+### Issue #1: Logging Visibility
+
+-   **Symptom:** The custom "Data Curation Environment" output channel is not visible in the "OUTPUT" tab's dropdown menu in the Extension Development Host window. This prevents the primary logging mechanism from being used for debugging.
+-   **First Reported:** Cycle 19
+-   **Status (C23):** **Resolved (C21).** The issue was caused by an early-exit error during extension activation. Adding robust `try...catch` blocks around service initializations in `extension.ts` allowed the extension to fully load, making the output channel visible.
+
+---
+
+### Issue #2: `node_modules` Exclusion and Performance
+
+-   **Symptom:** The `node_modules` directory is included in file tree scans, leading to incorrect file and token counts and a significant performance delay.
+-   **First Reported:** Cycle 15 (and earlier)
+-   **Status (C23):** **Resolved (C20).** The `vscode.workspace.findFiles` call in `fs.service.ts` was updated with a more robust glob pattern `'{**/node_modules/**,**/dist/**,**/out/**,**/.git/**,**/flattened_repo.md}'` which now correctly excludes these directories.
+
+---
+
+### Issue #3: Incorrect Image Token Counting
+
+-   **Symptom:** Image files are being assigned a token count instead of displaying their file size.
+-   **First Reported:** Cycle 18
+-   **Status (C23):** **Resolved (C20).** The logic in `fs.service.ts` was corrected to identify images by extension, set `tokenCount` to 0, and get their `sizeInBytes`. The frontend (`FileTree.tsx`) now uses an `isImage` flag to display the formatted byte size instead of tokens.
+
+---
+
+### Issue #4: File Tree Caching and Refresh Behavior
+
+-   **Symptom:** The file tree reloaded from scratch on every tab switch and did not auto-update on file changes.
+-   **First Reported:** Cycle 19
+-   **Status (C23):** **Resolved (C20).** A frontend cache was implemented by changing the `useEffect` dependency array. A backend `FileSystemWatcher` was implemented in `fs.service.ts` to detect changes and push updates to the client, triggering a refresh.
+</file>
+
+<file path="src/Artifacts/A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md">
+# Artifact A15: DCE - Phase 1 - Multi-Select & Sorting Feature Plan
+# Date Created: Cycle 22
+# Author: AI Model
+# Updated on: C23 (Add main tree multi-select and multi-level sorting)
+
+- **Key/Value for A0:**
+- **Description:** Details the requirements for multi-selection (click, Ctrl, Shift) in both the main file tree and the "Selected Items" panel, and multi-level column sorting.
+- **Tags:** feature plan, multi-select, sorting, list view, ux, phase 1
+
+## 1. Overview & Goal
+
+To elevate the Data Curation Environment beyond basic functionality, this plan introduces advanced list-interaction features common in modern applications. The goal is to provide users with powerful and intuitive tools for managing their file selections, mirroring the behavior of native operating system file explorers. This includes robust multi-selection capabilities in both the main file tree and the "Selected Items" panel, and comprehensive sorting for the "Selected Items" list.
+
+## 2. User Stories
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| US-01 | **"Selected Items" Multi-Selection** | As a curator, after selecting a large folder, I want to quickly remove a small group of unwanted files from the "Selected Items" list using standard Shift-click and Ctrl-click, so I don't have to uncheck them one by one in the main tree. | - Clicking a single item in the "Selected Items" list selects it and deselects all others. <br> - Ctrl-clicking an item toggles its selection state without affecting other items. <br> - Shift-clicking an item selects the range of items between the last-clicked anchor item and the current one. The anchor is set by the last non-Shift click. <br> - A "Remove Selected" button acts on all currently selected items in this list. |
+| US-02 | **"Selected Items" Column Sorting** | As a curator, I want to sort the "Selected Items" list by file name or token count, so I can easily find specific files or identify the largest contributors to my context. | - The "Selected Items" panel has a header row with clickable "File" and "Tokens" labels. <br> - Clicking a column header sorts the list by that column. <br> - Clicking the same header again reverses the sort direction (ascending/descending). <br> - A visual indicator (e.g., an arrow) shows the current sort column and direction. <br> - The default, initial sort is by Token Count, descending. |
+| US-03 | **"Selected Items" Multi-Layer Sorting** | As a curator, I want to apply a secondary sort, so I can group my selected files by type and then see the largest files within each group. | - The sorting mechanism supports at least two levels of sorting. <br> - The UI provides a way to define a primary and secondary sort key (e.g., Shift-clicking a second column header). <br> - The list first organizes by the primary key, then sorts items within those groups by the secondary key. For example, sort by Type (asc), then by Token Count (desc). |
+| US-04 | **Main Tree Multi-Selection** | As a user, I want to select multiple files and folders in the main "Data Curation" file tree using standard OS conventions (Ctrl/Shift click), so I can perform context menu actions (like Delete) on multiple items at once. | - Standard multi-selection is implemented in the main file tree. <br> - This selection is a separate state from the checkbox state and is used for contextual actions, not for flattening. <br> - Right-clicking on any item within a multi-selected group opens a context menu that applies its actions to all selected items. |
+| US-05 | **"As-Is" Sorting** | As a user, I want to be able to revert the "Selected Items" list to its default sort order, so I can see the files as they appear in the native VS Code explorer. | - A sort option for "Default" or "As-Is" is available. <br> - Selecting it sorts the items based on their original file system order (folders first, then files, all alphabetized). |
+
+## 3. Technical Implementation Plan
+
+1.  **`SelectedFilesView.tsx` Refactor:**
+    *   **State Management:** Introduce new state variables to manage selection, sorting, and multi-selection.
+        *   `const [selection, setSelection] = useState<Set<string>>(new Set());`
+        *   `const [selectionAnchor, setSelectionAnchor] = useState<string | null>(null);` // For stable shift-click
+        *   `const [sortConfig, setSortConfig] = useState<{ key: string; direction: 'asc' | 'desc' }[]>([{ key: 'tokenCount', direction: 'desc' }]);`
+    *   **Event Handling:** Implement a comprehensive `onClick` handler for list items that inspects `event.ctrlKey` and `event.shiftKey`. A non-modifier click will set both the `selection` and the `selectionAnchor`. A shift-click will select from the `selectionAnchor` to the current item.
+    *   **Sorting Logic:** The `useMemo` hook that sorts the `selectedFileNodes` prop will be updated to handle an array of `sortConfig` objects. It will perform a stable sort, iterating through the sort criteria until a non-zero comparison result is found. A new "Type" column will be added, requiring a utility to extract the file extension.
+
+2.  **`FileTree.tsx` & `TreeView.tsx` (Main Tree Multi-Select):**
+    *   This is a more complex task that mirrors the `SelectedFilesView` implementation but within a recursive tree structure.
+    *   A new selection state for contextual actions (`const [contextSelection, setContextSelection] = useState<Set<string>>(new Set())`) will be managed at the top level (`view.tsx`).
+    *   The selection state and handler functions will need to be passed down through `FileTree` to `TreeView`.
+    *   The `onContextMenu` handler will need to be updated to check if the right-clicked node is part of the current `contextSelection` and pass the entire selection to the backend if an action is chosen.
+</file>
+
+<file path="src/Artifacts/A16. DCE - Phase 1 - UI & UX Refinements Plan.md">
+# Artifact A16: DCE - Phase 1 - UI & UX Refinements Plan
+# Date Created: Cycle 22
+# Author: AI Model
+
+- **Key/Value for A0:**
+- **Description:** Covers visual and usability improvements like fixing panel layouts, resolving overflow bugs, adding loading indicators, and improving scrollbar visibility.
+- **Tags:** feature plan, ui, ux, layout, bug fix, loading indicator, phase 1
+
+## 1. Overview & Goal
+
+This document outlines a series of user interface (UI) and user experience (UX) refinements identified during playtesting. The goal is to address layout bugs, provide better visual feedback to the user, and improve the overall professional feel of the extension. These changes focus on fixing immediate usability problems and making the extension more intuitive to operate.
+
+## 2. User Stories & Issues
+
+| ID | User Story / Issue | Acceptance Criteria |
+|---|---|---|
+| UI-01 | **Header Layout Bug** | As a user, I want the header of the "Data Curation" panel to be compact, without the extra vertical space between the title and the toolbar buttons, so it looks clean and professional. | - The vertical gap between the view title row and the toolbar button row is removed. <br> - The header area takes up minimal vertical space. <br> - This is a CSS fix, likely involving adjusting `padding`, `margin`, or `gap` in the flex container. |
+| UI-02 | **"Selected Items" Overflow Bug** | As a user, when I select many files, I want the "Selected Items" list to scroll within its panel instead of running off the screen behind the "Flatten Context" footer, so I can see and manage all my selections. | - The "Selected Items" panel has a defined `max-height`. <br> - When the content exceeds this height, a vertical scrollbar appears. <br> - The panel never overlaps or pushes the footer out of view. <br> - This is a CSS fix involving `flex-grow`, `flex-shrink`, `min-height: 0` on the file tree container, and `overflow-y: auto` on the list container. |
+| UI-03 | **Resizable "Selected Items" Panel** | As a user, I want to be able to vertically resize the "Selected Items" panel, so I can see more or fewer items as needed for my current task. | - A draggable handle or resizer element is added to the top border of the "Selected Items" panel. <br> - Clicking and dragging this handle adjusts the `height` or `max-height` of the panel. <br> - The main file tree above it resizes accordingly to fill the remaining space. |
+| UI-04 | **Visible Loading State** | As a user, when I perform a slow action like renaming a file or refreshing the explorer, I want to see a loading indicator, so I have clear feedback that the system is working and not frozen. | - A loading state (e.g., `isLoading`) is added to the main view's state. <br> - This state is set to `true` when a file system scan begins (e.g., on initial load or refresh). <br> - A loading indicator (e.g., a spinning icon) is displayed in the UI (e.g., in the header toolbar) while `isLoading` is true. <br> - The state is set to `false` when the file data is received from the backend. |
+| UI-05 | **Improved Scrollbar Gutter** | As a user, I find it difficult to distinguish between the extension's internal scrollbar and the main VS Code scrollbar when they are side-by-side. I want a clearer visual separation between them. | - A subtle vertical border (`border-right`) is added to the main file tree container. <br> - This creates a persistent, visible dividing line between the two scrollable areas, making it easier to position the mouse. |
+
+## 3. Technical Implementation Plan
+
+1.  **Layout Fixes (`view.scss`):**
+    *   **Header:** Inspect the `.view-header` and `.toolbar` classes. Remove any unnecessary `margin` or `padding`. Consolidate into a single flex container with `justify-content: space-between` if the title is to be included, or simply adjust the container of the toolbar.
+    *   **Overflow:** This is a classic flexbox problem. The main container (`.view-container`) should be `display: flex; flex-direction: column; height: 100vh;`. The content area (`.file-tree-container`) must have `flex-grow: 1;` and crucially `min-height: 0;` to allow it to shrink. The "Selected Items" panel (`.selected-files-panel`) should have `flex-shrink: 0;` and `overflow-y: auto;` on its list container.
+    *   **Scrollbar Gutter:** Add `border-right: 1px solid var(--vscode-panel-border);` to the `.file-tree-container`.
+
+2.  **Loading Indicator (`view.tsx`):**
+    *   Add `const [isLoading, setIsLoading] = useState(true);`.
+    *   Set `setIsLoading(true)` at the start of the `requestFiles` function.
+    *   Set `setIsLoading(false)` inside the `handleFileResponse` message handler after files are received and set.
+    *   In the JSX for the `.toolbar`, add conditional rendering: `{isLoading && <SpinnerComponent />}`. The spinner can be an SVG or a component using `react-icons`.
+
+3.  **Resizable Panel:**
+    *   This is the most complex part of this plan. It typically requires a custom React hook or component.
+    *   An invisible `div` will be placed on the top border of the panel.
+    *   `onMouseDown`, `onMouseMove`, and `onMouseUp` event listeners will be used to track the drag gesture and calculate the new height for the panel.
+    *   The height will be applied as an inline style to the panel.
+    *   This feature will be implemented after the more critical bug fixes are complete.
+</file>
+
+<file path="src/Artifacts/A17. DCE - Phase 1 - Advanced Tree View Features.md">
+# Artifact A17: DCE - Phase 1 - Advanced Tree View Features
+# Date Created: Cycle 22
+# Author: AI Model
+
+- **Key/Value for A0:**
+- **Description:** Outlines the plan for advanced tree view interactions, specifically the implementation of scrollable, self-contained views for large, expanded folders.
+- **Tags:** feature plan, tree view, ux, scrollable, phase 1
+
+## 1. Overview & Goal
+
+The current file tree view expands vertically, which can create a poor user experience when a folder containing hundreds of files is opened. The entire view becomes excessively long, forcing the user to scroll a great distance to see files or folders below the expanded one. The goal of this feature is to innovate on the traditional tree view by containing the contents of a large expanded folder within a scrollable, "inline" window, preventing the main view from becoming unmanageable.
+
+## 2. User Story
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| TV-01 | **Contained Folder Expansion** | As a user, when I expand a folder with a large number of children, I want its contents to appear in a scrollable sub-panel within the tree instead of pushing all subsequent items down, so I can browse the folder's contents without losing my place in the main file tree. | - When a folder is expanded, the extension checks the number of direct children. <br> - If the child count exceeds a certain threshold (e.g., 50), the children are rendered inside a nested, scrollable `div`. <br> - This `div` has a fixed `max-height`. <br> - A small 'x' icon is visible within this sub-panel. Clicking it closes the sub-panel and reverts the folder to the standard, fully expanded view for that session. |
+
+## 3. Technical Implementation Plan
+
+This is a significant UI/UX enhancement and will require careful implementation within the React component hierarchy.
+
+1.  **Component (`TreeView.tsx`):**
+    *   The core logic will reside in the `renderTreeNodes` function.
+    *   **Threshold Check:** When rendering a directory node, check `if (node.children && node.children.length > FOLDER_CONTENT_THRESHOLD)`. The threshold will be a configurable constant.
+    *   **State Management:** A new state variable will be needed to track which "large" folders have been reverted to the standard view by the user clicking the 'x' button. `const [standardViewFolders, setStandardViewFolders] = useState<Set<string>>(new Set());`
+    *   **Conditional Rendering:**
+        *   If the folder is expanded (`isExpanded`) AND its path is **not** in `standardViewFolders` AND it exceeds the threshold, render the children inside a special container:
+            ```jsx
+            <div className="large-folder-container" style={{ maxHeight: '300px', overflowY: 'auto' }}>
+              <button onClick={() => setStandardViewFolders(prev => new Set(prev).add(node.absolutePath))}>X</button>
+              <ul>{renderTreeNodes(node.children)}</ul>
+            </div>
+            ```
+        *   Otherwise, render the children normally as is currently done:
+            ```jsx
+            <ul className="treenode-children">{renderTreeNodes(node.children)}</ul>
+            ```
+
+2.  **Styling (`view.scss`):**
+    *   Create styles for `.large-folder-container`.
+    *   It will need `position: relative`, a subtle `border` or `background-color` to distinguish it from the rest of the tree.
+    *   The close button will need to be positioned appropriately within the container.
+
+3.  **Performance Considerations:**
+    *   This approach avoids virtualizing the entire tree, which is much more complex. It only contains the content of single, large folders.
+    *   Rendering hundreds of nodes within the scrollable container might still have a minor performance impact on initial render, but it will be contained and will not affect the performance of the main tree's scrolling.
+</file>
+
+<file path="src/Artifacts/A18. DCE - Phase 1 - Active File Sync Feature Plan.md">
+# Artifact A18: DCE - Phase 1 - Active File Sync Feature Plan
+# Date Created: Cycle 24
+# Author: AI Model
+
+- **Key/Value for A0:**
+- **Description:** Details the requirements and implementation for automatically revealing and highlighting the active editor's file in the custom Data Curation file tree.
+- **Tags:** feature plan, active file, sync, reveal, tree view, ux, phase 1
+
+## 1. Overview & Goal
+
+To create a more seamless and integrated experience, the Data Curation Environment's file tree should stay in sync with the user's focus in the main editor. Currently, selecting a file in the editor does not reflect in our custom view. The goal of this feature is to replicate the behavior of the native VS Code Explorer, where the active file is automatically revealed and highlighted in the file tree.
+
+## 2. User Story
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| UX-01 | **Sync with Active Editor** | As a user, when I click on a file in the VS Code editor tabs or the native Explorer, I want the "Data Curation" file tree to automatically scroll to and highlight that file, so I can easily see its location in the project hierarchy and interact with its checkbox without manually searching for it. | - When the active text editor changes in VS Code, the new file is highlighted in the "Data Curation" tree view. <br> - All parent folders of the active file are automatically expanded to ensure it is visible. <br> - The file tree view scrolls so that the active file item is visible on the screen. |
+
+## 3. Technical Implementation Plan
+
+1.  **Backend Listener (`extension.ts`):**
+    *   Utilize the `vscode.window.onDidChangeActiveTextEditor` event listener in the `activate` function.
+    *   This event provides the `TextEditor` object, from which `editor.document.uri.fsPath` can be extracted.
+    *   When the event fires and an editor is present, the backend will send an IPC message to the webview containing the active file's path.
+
+2.  **IPC Channel:**
+    *   A new `ServerToClientChannel` will be created: `SetActiveFile`.
+    *   Its `ChannelBody` in `channels.type.ts` will be `{ path: string }`.
+
+3.  **Frontend Message Handler (`view.tsx`):**
+    *   The main `App` component will listen for the `SetActiveFile` message from the backend.
+    *   Upon receiving the message, it will update its `activeFile` state with the new path. This state will be passed down to the `FileTree` component.
+
+4.  **Frontend View Logic (`FileTree.tsx`):**
+    *   A new `useEffect` hook will be added to the `FileTree` component that triggers whenever the `activeFile` prop changes.
+    *   This effect will be responsible for "revealing" the file:
+        *   **Expand Parents:** It will calculate all parent directory paths of the `activeFile`. This can be done by repeatedly taking the substring of the path before the last file separator (`/`). These parent paths will be added to the `expandedNodes` state.
+        *   **Scroll Into View:** To physically scroll the element, a `Map` of `ref`s will be maintained for each rendered file/folder node. After expanding the parents, the `scrollIntoView()` method will be called on the ref corresponding to the `activeFile`.
+</file>
+
+<file path="src/Artifacts/A189. Number Formatting Reference Guide.md">
+# Artifact A189: Number Formatting Guide (K/M Suffixes & Dynamic Decimals)
+# Date Created: Cycle 14
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A standalone guide and utility script for formatting large numbers with K/M/B/T suffixes and dynamic decimal place adjustment for clean UI presentation.
+- **Tags:** utility, script, formatting, numbers, ui, ux, javascript, typescript
+
+## 1. Purpose
+
+This artifact provides a set of robust, reusable TypeScript functions for formatting numbers in a user-friendly way. The core function, `formatLargeNumber`, intelligently converts large numbers into a compact format using suffixes like 'K' (thousands), 'M' (millions), 'B' (billions), and 'T' (trillions).
+
+The key features of this utility are:
+*   **Automatic Suffixing:** Automatically scales numbers and adds the appropriate suffix.
+*   **Dynamic Decimal Precision:** Adjusts the number of decimal places shown based on the magnitude of the number, ensuring a clean and consistent look in the UI (e.g., `12.3K`, `123.5K`, `1.23M`).
+*   **Handling of Small Numbers:** Gracefully handles numbers below 1,000 without applying a suffix.
+*   **Specialized Wrappers:** Includes helper functions like `formatCurrency` and `formatCount` for common use cases.
+
+## 2. Core Utility Functions (from `src/utils.ts`)
+
+Below is the complete TypeScript code. You can save this as a `formatting.ts` file in a new project's `utils` directory.
+
+```typescript
+// src/common/utils/formatting.ts
+
+const KMBT_SUFFIXES = ['', 'K', 'M', 'B', 'T', 'Q']; // Extend as needed
+
+/**
+ * Formats a large number with appropriate K/M/B/T suffixes and dynamic decimal places.
+ * Handles very small near-zero numbers gracefully to avoid scientific notation.
+ *
+ * @param value The number to format.
+ * @param decimalPlaces The base number of decimal places to aim for.
+ * @returns A formatted string.
+ */
+export function formatLargeNumber(value: number | undefined | null, decimalPlaces: number = 2): string {
+    if (value === null || value === undefined || isNaN(value) || !Number.isFinite(value)) {
+        return '---';
+    }
+    if (value === 0) {
+        return '0';
+    }
+
+    const VERY_SMALL_THRESHOLD = 1e-6; // 0.000001
+    if (Math.abs(value) < VERY_SMALL_THRESHOLD) {
+        return (0).toFixed(decimalPlaces);
+    }
+
+    const isNegative = value < 0;
+    const absValue = Math.abs(value);
+
+    let unitIndex = 0;
+    let scaledValue = absValue;
+
+    if (absValue < 1000) {
+        return String(Math.round(value)); // Return whole number if less than 1000
+    }
+
+    if (absValue >= 1000) {
+        unitIndex = Math.floor(Math.log10(absValue) / 3);
+        unitIndex = Math.min(unitIndex, KMBT_SUFFIXES.length - 1);
+        scaledValue = absValue / Math.pow(1000, unitIndex);
+    }
+
+    let adjustedDecimalPlaces = decimalPlaces;
+    if (unitIndex > 0) { // If a suffix is used (K, M, B, T, Q)
+        if (scaledValue >= 100) adjustedDecimalPlaces = Math.max(0, decimalPlaces - 2);
+        else if (scaledValue >= 10) adjustedDecimalPlaces = Math.max(0, decimalPlaces - 1);
+    } else { // No unit suffix (value < 1000)
+        if (Math.abs(scaledValue) < 0.01 && scaledValue !== 0) {
+            adjustedDecimalPlaces = Math.max(decimalPlaces, 4);
+        } else if (Number.isInteger(scaledValue)) {
+             adjustedDecimalPlaces = 0;
+        }
+    }
+
+    const unit = KMBT_SUFFIXES[unitIndex] ?? '';
+    let formattedValue = scaledValue.toFixed(adjustedDecimalPlaces);
+
+    // Remove trailing .00 or .0
+    if (adjustedDecimalPlaces > 0 && formattedValue.endsWith('0')) {
+        formattedValue = formattedValue.replace(/\.?0+$/, '');
+    }
+
+
+    return `${isNegative ? '-' : ''}${formattedValue}${unit}`;
+}```
+
+## 3. Usage Examples
+
+Here is how you can use these functions in your code:
+
+```typescript
+import { formatLargeNumber } from './path/to/formatting';
+
+// formatLargeNumber examples
+console.log(formatLargeNumber(123));        // "123"
+console.log(formatLargeNumber(1234));       // "1.23K"
+console.log(formatLargeNumber(12345));      // "12.3K"
+console.log(formatLargeNumber(123456));     // "123K"
+console.log(formatLargeNumber(1234567));    // "1.23M"
+console.log(formatLargeNumber(9876543210)); // "9.88B"
+console.log(formatLargeNumber(-54321));     // "-54.3K"
+console.log(formatLargeNumber(0.0000001));  // "0.00"
+```
+
+## 4. Integration Guide
+
+1.  **Copy the Code:** Save the code from Section 2 into a file named `formatting.ts` inside your project's `src/common/utils` directory.
+2.  **Import and Use:** Import the function into your UI components.
+    ```typescript
+    import { formatLargeNumber } from '@/common/utils/formatting';
+
+    const MyComponent = () => {
+      const displayValue = formatLargeNumber(123456); // "123K"
+      return <div>Tokens: {displayValue}</div>;
+    };
+    ```
+</file>
+
+<file path="src/Artifacts/A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md">
+# Artifact A2: DCE - Phase 1 - Context Chooser - Requirements & Design
+# Date Created: Cycle 1
+# Author: AI Model
+# Updated on: Cycle 2 (Revised based on analysis of reference repository)
+
+## 1. Overview
+
+This document outlines the requirements for Phase 1 of the Data Curation Environment (DCE) project. The primary goal of this phase is to replace the manual, error-prone process of managing context via a `files_list.txt` with an intuitive, UI-driven approach within VS Code.
+
+**Major Update (Cycle 2):** The analysis of the `The-Creator-AI-main` repository revealed an existing, highly-functional file tree component (`src/client/components/file-tree/FileTree.tsx`) with checkbox selection. The project requirements have been updated to reflect a shift from *building* this component from scratch to *analyzing, adapting, and integrating* the existing solution.
+
+## 2. Functional Requirements
+
+| ID | Requirement | User Story | Acceptance Criteria | Update (Cycle 2) |
+|---|---|---|---|---|
+| FR-01 | **Analyze Existing File Tree** | As a developer, I want to understand the capabilities of the `FileTree.tsx` component | - Analyze the component's props and state. <br> - Document its dependencies on other frontend components and backend services (`FSService`). <br> - Determine how checkbox state is managed and communicated. | **New** |
+| FR-02 | **Display File Tree in View** | As a user, I want to see a tree of all files and folders in my workspace within a dedicated VS Code view. | - The view should accurately reflect the workspace's file system structure. <br> - It should respect `.gitignore` rules to hide irrelevant files. | **Adaptation.** The `FileTree.tsx` component and `FSService` already provide this. We need to ensure it's correctly instantiated in our extension's view. |
+| FR-03 | **Checkbox Selection** | As a user, I want to select and deselect files and folders for my context using checkboxes. | - Every file and folder in the tree has a checkbox. <br> - Checking a folder checks all its children. <br> - Unchecking a folder unchecks all its children. <br> - A folder shows an "indeterminate" state if only some of its children are checked. | **Adaptation.** The reference component appears to support this logic. We must verify and adapt its state management (`selectedFiles` array). |
+| FR-04 | **Flatten Selected Context** | As a user, I want a single button to package all my selected files into one context file. | - A "Flatten Context" button is present in the view. <br> - Clicking it triggers a process that reads the content of all checked files. <br> - The contents are concatenated into a single `flattened_repo.md` file in the project root. | **Implementation.** The logic for this will need to be implemented, using the state from the `FileTree` component as input for our enhanced `bootstrap-flattener.js` logic. |
+
+## 3. Technical Design & Integration Plan
+
+1.  **Extension View:** We will create a new Webview-based view in the VS Code activity bar, as defined in `package.json`.
+2.  **Frontend Component:** This view will render the `Context.tsx` module (`src/client/modules/context.module/`), which in turn uses the `FileTree.tsx` component.
+3.  **Backend Service:** The frontend will communicate with the `FSService.ts` on the extension's backend via the established IPC channels.
+    -   On view load, the frontend sends a `RequestWorkspaceFiles` message.
+    -   The `FSService` gathers the file list (respecting `.gitignore`), creates the tree structure, and sends it back via a `SendWorkspaceFiles` message.
+4.  **State Management:** The list of selected file paths will be managed in the frontend's state store (`change-plan-view.store.ts`). The `FileTree.tsx` component will receive this list as a prop and use it to render the checkbox states. User interactions with checkboxes will dispatch actions to update this state.
+5.  **Flattening Logic:**
+    -   The "Flatten Context" button will trigger a new IPC message, `RequestFlattenContext`, sending the array of selected file paths to the backend.
+    -   A new handler in the backend will receive this list, read the content of each file, and then use the logic from `bootstrap-flattener.js` to generate the final `flattened_repo.md` file.
+</file>
+
+<file path="src/Artifacts/A3. DCE - Technical Scaffolding Plan.md">
+# Artifact A3: DCE - Technical Scaffolding Plan
+# Date Created: Cycle 1
+# Author: AI Model
+# Updated on: Cycle 2 (Adopted architecture from `The-Creator-AI-main` repository)
+
+## 1. Overview
+
+This document outlines the technical scaffolding and file structure for the Data Curation Environment (DCE) VS Code extension.
+
+**Major Update (Cycle 2):** The initial plan for a simple file structure has been superseded. We are officially adopting the mature and robust architecture of the `The-Creator-AI-main` reference repository as our project's blueprint. This provides a proven, scalable foundation for all three project phases.
+
+## 2. Adopted File Structure
+
+The project will adhere to the following directory structure, derived directly from the reference repository:
+
+```
+.
+├── public/                     # Static assets for webviews (icons, css)
+├── src/
+│   ├── backend/                # Extension Host code (Node.js environment)
+│   │   ├── commands/           # Command definitions and registration
+│   │   ├── repositories/       # Data persistence logic (workspace state)
+│   │   ├── services/           # Core backend services (LLM, FS, Git, etc.)
+│   │   ├── types/              # TypeScript types for the backend
+│   │   └── utils/              # Utility functions for the backend
+│   │
+│   ├── client/                 # Webview code (Browser environment)
+│   │   ├── components/         # Generic, reusable React components (FileTree, Modal)
+│   │   ├── modules/            # Feature-specific modules (Context, Plan)
+│   │   ├── store/              # Global state management for webviews (RxJS)
+│   │   └── views/              # Entry points for each webview panel
+│   │
+│   ├── common/                 # Code shared between backend and client
+│   │   ├── constants/
+│   │   ├── ipc/                # IPC channel definitions and managers
+│   │   ├── types/              # Shared TypeScript types (FileNode)
+│   │   └── utils/              # Shared utility functions (parse-json)
+│   │
+│   └── extension.ts            # Main entry point for the VS Code extension
+│
+├── package.json                # Extension manifest, dependencies, and scripts
+├── tsconfig.json               # TypeScript configuration
+├── webpack.config.js           # Webpack configuration for bundling client/server code
+└── ... (config files like .eslintrc.json, .gitignore)
+```
+
+## 3. Key Architectural Concepts
+
+-   **Separation of Concerns:** The structure strictly separates backend (Node.js) logic from frontend (React/webview) logic.
+-   **Shared Code:** The `src/common/` directory is critical for sharing types and IPC definitions, ensuring type safety and consistency between the extension host and the webview.
+-   **Service-Oriented Backend:** The `src/backend/services/` directory promotes modularity. Each service has a single responsibility (e.g., `FSService` for file operations, `LlmService` for AI interaction), making the system easier to maintain and test.
+-   **Dependency Injection:** The `Services.ts` class acts as a simple injector, managing the instantiation and provision of backend services.
+-   **Modular Frontend:** The `src/client/modules/` directory allows for building complex UIs by composing smaller, feature-focused modules.
+-   **Component-Based UI:** The `src/client/components/` directory holds the fundamental building blocks of the UI, promoting reusability.
+-   **Typed IPC Communication:** The use of `channels.enum.ts` and `channels.type.ts` in `src/common/ipc/` provides a strongly-typed and well-documented contract for communication between the webview and the extension host, reducing runtime errors.
+</file>
+
+<file path="src/Artifacts/A4. DCE - Analysis of The-Creator-AI Repo.md">
+# Artifact A4: DCE - Analysis of The-Creator-AI Repo
+# Date Created: Cycle 2
+# Author: AI Model
+- **Description:** Provides a detailed analysis of the `The-Creator-AI-main` reference repository, its architecture, and its mapping to the Data Curation Environment project goals.
+- **Tags:** analysis, repository, architecture, vscode-extension, project-planning
+
+## 1. Overview
+
+The `The-Creator-AI-main` repository is a comprehensive and well-structured VS Code extension that functions as a sophisticated AI coding assistant. It utilizes a modern tech stack including TypeScript, React for webviews, and TailwindCSS for styling. Its architecture is service-oriented on the backend (extension host) and modular on the frontend (webview). The discovery of this repository provides a massive head-start for our project, as it contains pre-built solutions for many of our planned features.
+
+## 2. Backend Architecture (Extension Host)
+
+The backend, located primarily in `src/backend/`, follows a clean, service-oriented architecture.
+
+-   **`extension.ts`**: The main entry point. It initializes services and registers the commands and webview providers.
+-   **`services/`**: A directory containing distinct services for handling specific concerns:
+    -   `LlmService.ts`: Manages interactions with multiple AI models (Gemini, OpenAI). It includes logic for API key management and prompt construction.
+    -   `FSService.ts`: Handles all file system operations, including reading files, creating a file tree, and respecting `.gitignore`.
+    -   `CodeService.ts`: Contains logic for applying code changes, parsing diffs, and generating code.
+    -   `GitService.ts`: Provides an interface for Git operations, like committing changes.
+    -   `MessageService.ts`: Orchestrates the flow of messages between the frontend and the LLM service.
+    -   `PlanExImService.ts`: Manages exporting and importing of "Change Plans".
+    -   `Services.ts`: A dependency injection container that initializes and provides access to all other services.
+-   **`repositories/`**: Manages data persistence within the VS Code workspace state (e.g., `PersistentStoreRepository.ts`, `SettingsRepository.ts`).
+-   **`commands/`**: Defines all the commands exposed by the extension in `package.json`.
+
+## 3. Frontend Architecture (Webview)
+
+The frontend, located in `src/client/`, is a React application bundled with Webpack.
+
+-   **`views/`**: The application is divided into distinct views, each with its own entry point, state management, and logic (e.g., `change-plan.view`).
+-   **`modules/`**: Contains reusable UI/logic modules that are composed into the main view, such as:
+    -   `context.module/Context.tsx`: Renders the file explorer.
+    -   `plan.module/Plan.tsx`: Handles displaying the AI-generated plan and user input.
+-   **`components/`**: A collection of generic, reusable React components:
+    -   `file-tree/FileTree.tsx`: A fully functional file tree component with checkbox selection, expansion state, and active file highlighting. This is directly applicable to our Phase 1 goal.
+    -   `AutoResizingTextarea.tsx`, `Modal.tsx`, `ProgressSteps.tsx`: Other useful UI components.
+-   **State Management**: Each view appears to have its own local store (`store/`), using RxJS `BehaviorSubject` for reactivity. This is a simple yet effective approach for managing state within a contained webview.
+-   **IPC**: Communication with the backend is handled via a robust `ClientPostMessageManager` (`src/common/ipc/`) which defines clear channels for client-server interaction.
+
+## 4. Mapping to DCE Project Goals
+
+The reference repository provides solutions or strong foundations for all three of our project phases.
+
+-   **Phase 1 (Context Chooser):** **Largely Complete.** The `FileTree.tsx` component in `src/client/components/file-tree/` combined with `FSService.ts` on the backend already provides the core functionality of a checkbox-based file explorer for context selection. Our work shifts from building this from scratch to adapting and integrating this existing, powerful component.
+
+-   **Phase 2 (Parallel 'Co-pilot' Panel):** **Partially Complete.** The "Change Plan" view (`src/client/views/change-plan.view/`) is essentially a single "co-pilot" panel. It allows a user to describe a change, get an AI-generated plan, and interact with it. Our goal of *parallel* panels is not implemented, but the foundation for a single panel is incredibly strong.
+
+-   **Phase 3 (Diff Tool):** **Not Present.** There is no integrated diff-viewing tool like WinMerge. However, the `CodeService.ts` *does* contain logic for parsing and applying diffs in a custom `<<<<<<< SEARCH` format, and the extension can trigger VS Code's native diff viewer (`git.openChange`).
+
+## 5. Recommendations & Path Forward
+
+1.  **Adopt the Architecture:** We should officially adopt the architecture of `The-Creator-AI-main` as the blueprint for our project. It is robust, scalable, and well-organized.
+2.  **Focus on Adaptation:** Our immediate efforts for Phase 1 should be to isolate the `FileTree` component and its backend dependencies (`FSService.ts`) and ensure they can be used to generate the `flattened_repo.md` as originally specified.
+3.  **De-risk Phase 2:** The "Change Plan" functionality is a perfect starting point for our parallel co-pilot. We should analyze its state management and IPC communication to understand how we might instantiate multiple, independent instances of it.
+4.  **Update All Documentation:** All planning artifacts (`A1`, `A2`, `A3`) must be updated immediately to reflect this new context. Our plan has evolved from "build" to "analyze, adapt, and extend".
+</file>
+
+<file path="src/Artifacts/A5. DCE - Target File Structure.md">
+# Artifact A5: DCE - Target File Structure
+# Date Created: Cycle 3
+# Author: AI Model
+
+- **Description:** A text-based representation of the target file structure for the DCE extension, outlining the layout of directories and key files.
+- **Tags:** file structure, architecture, project layout, scaffolding
+
+## 1. Overview
+
+This document provides a visual representation of the file structure that the `A6. DCE - Initial Scaffolding Deployment Script` will create. It is based on the robust and scalable architecture of the `The-Creator-AI-main` reference repository, as detailed in `A3. DCE - Technical Scaffolding Plan`.
+
+## 2. File Tree
+
+```
+DCE/
+├── .gitignore
+├── .vscodeignore
+├── package.json
+├── tsconfig.json
+├── webpack.config.js
+├── public/
+│   └── spiral.svg
+└── src/
+    ├── backend/
+    │   ├── commands/
+    │   │   ├── commands.ts
+    │   │   └── register-commands.ts
+    │   ├── repositories/
+    │   │   └── persistent-store.repository.ts
+    │   ├── services/
+    │   │   ├── fs.service.ts
+    │   │   ├── services.ts
+    │   │   └── flattener.service.ts
+    │   └── types/
+    │       └── storage-keys.enum.ts
+    │
+    ├── client/
+    │   ├── components/
+    │   │   └── file-tree/
+    │   │       ├── FileTree.tsx
+    │   │       └── FileTree.utils.ts
+    │   ├── views/
+    │   │   ├── context-chooser.view/
+    │   │   │   ├── index.ts
+    │   │   │   ├── on-message.ts
+    │   │   │   ├── view.scss
+    │   │   │   └── view.tsx
+    │   │   └── index.ts
+    │   └── store/
+    │       ├── store.ts
+    │       └── useStore.ts
+    │
+    ├── common/
+    │   ├── ipc/
+    │   │   ├── channels.enum.ts
+    │   │   ├── channels.type.ts
+    │   │   ├── client-ipc.ts
+    │   │   ├── get-vscode-api.ts
+    │   │   └── server-ipc.ts
+    │   ├── types/
+    │   │   ├── file-node.ts
+    │   │   └── vscode-webview.d.ts
+    │   └── utils/
+    │       └── view-html.ts
+    │
+    └── extension.ts
+```
+</file>
+
+<file path="src/Artifacts/A6. DCE - Initial Scaffolding Deployment Script.md">
+# Artifact A6: DCE - Initial Scaffolding Deployment Script
+# Date Created: Cycle 3
+# Author: AI Model
+# Updated on: Cycle 10 (Fix problemMatcher in tasks.json to resolve F5 launch error)
+
+- **Description:** Contains a Node.js script that, when executed, creates the entire initial directory structure and files for the DCE extension project.
+- **Tags:** deployment, script, scaffolding, bootstrap, nodejs, automation
+
+## 1. Overview
+
+This artifact contains the `deploy_scaffold.js` script. Its purpose is to automate the creation of the initial project structure for the Data Curation Environment (DCE) VS Code extension. This eliminates the need for manual file creation and ensures a consistent setup based on our agreed-upon architecture, including the necessary configurations for debugging.
+
+## 2. How to Use
+
+1.  Save the code below as `deploy_scaffold.js` in your project's root directory (e.g., `C:\Projects\DCE\`).
+2.  Open a terminal in that directory.
+3.  Run the script using Node.js: `node deploy_scaffold.js`
+4.  The script will create all the necessary directories and files, including the `.vscode` folder with `launch.json` and a corrected `tasks.json`, logging its progress to the console.
+
+## 3. Script: `deploy_scaffold.js`
+
+```javascript
 const fs = require('fs').promises;
 const path = require('path');
 
@@ -1649,2306 +2732,6 @@ async function deployScaffold() {
 }
 
 deployScaffold();
-</file>
-
-<file path="package.json">
-{
-    "name": "data-curation-environment",
-    "publisher": "DCE-Developer",
-    "displayName": "Data Curation Environment",
-    "description": "A VS Code extension for curating context for Large Language Models.",
-    "version": "0.0.1",
-    "engines": {
-        "vscode": "^1.90.0"
-    },
-    "categories": [
-        "Other"
-    ],
-    "activationEvents": [
-        "onView:viewType.sidebar.contextChooser"
-    ],
-    "main": "./dist/extension.js",
-    "contributes": {
-        "viewsContainers": {
-            "activitybar": [
-                {
-                    "id": "data-curation-environment",
-                    "title": "Data Curation",
-                    "icon": "public/spiral.svg"
-                }
-            ]
-        },
-        "views": {
-            "data-curation-environment": [
-                {
-                    "type": "webview",
-                    "id": "viewType.sidebar.contextChooser",
-                    "name": "Data Curation"
-                }
-            ]
-        }
-    },
-    "scripts": {
-        "vscode:prepublish": "npm run package",
-        "compile": "webpack",
-        "watch": "webpack --watch",
-        "package": "webpack --mode production --devtool hidden-source-map",
-        "lint": "eslint src --ext ts"
-    },
-    "devDependencies": {
-        "@types/node": "18.x",
-        "@types/vscode": "^1.90.0",
-        "@typescript-eslint/eslint-plugin": "^7.7.1",
-        "@typescript-eslint/parser": "^7.7.1",
-        "eslint": "^8.57.0",
-        "ts-loader": "^9.5.1",
-        "typescript": "^5.4.5",
-        "webpack": "^5.91.0",
-        "webpack-cli": "^5.1.4",
-        "copy-webpack-plugin": "^12.0.2",
-        "style-loader": "^4.0.0",
-        "css-loader": "^7.1.2",
-        "sass-loader": "^16.0.1",
-        "sass": "^1.78.0",
-        "postcss-loader": "^8.1.1",
-        "babel-loader": "^9.1.3",
-        "@babel/preset-react": "^7.24.7",
-        "@babel/preset-typescript": "^7.24.7",
-        "process": "^0.11.10"
-    },
-    "dependencies": {
-        "react": "^18.3.1",
-        "react-dom": "^18.3.1",
-        "react-icons": "^5.3.0",
-        "rxjs": "^7.8.1",
-        "reflect-metadata": "^0.2.2"
-    }
-}
-</file>
-
-<file path="public/spiral.svg">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-    <g id="Page-1" stroke="none" fill="none" fill-rule="evenodd">
-        <g id="dep" transform="translate(4, 6)">
-            <path d="M100 100 m 0 -80 a 80 80 0 0 1 0 160 a 70 70 0 0 1 0 -140 a 60 60 0 0 1 0 120 a 50 50 0 0 1 0 -100 a 40 40 0 0 1 0 80 a 30 30 0 0 1 0 -60 a 20 20 0 0 1 0 40"
-                fill="none" stroke="white" stroke-width="8" id="Shape" />
-        </g>
-    </g>
-</svg>
-</file>
-
-<file path="src/Artifacts/A0. DCE Master Artifact List.md">
-# Artifact A0: DCE Master Artifact List
-# Date Created: C1
-# Author: AI Model & Curator
-# Updated on: C23 (Refine plans for selection sets and multi-select)
-
-## 1. Purpose
-
-# This file serves as the definitive, parseable list of all documentation artifacts for the "Data Curation Environment" (DCE) VS Code Extension project.
-
-## 2. Formatting Rules for Parsing
-
-# *   Lines beginning with `#` are comments and are ignored.
-# *   `##` denotes a major category header and is ignored.
-# *   `###` denotes an artifact entry. The text following it is the artifact's full name and ID.
-# *   Lines beginning with `- **Description:**` provide context for the project.
-# *   Lines beginning with `- **Tags:**` provide keywords for Inference.
-
-## 3. Artifacts List
-
-## I. Project Planning & Design
-
-### A1. DCE - Project Vision and Goals
-- **Description:** High-level overview of the DCE VS Code extension, its purpose, and the three-phase development plan.
-- **Tags:** project vision, goals, scope, phase 1, phase 2, phase 3, vs code extension
-
-### A2. DCE - Phase 1 - Context Chooser - Requirements & Design
-- **Description:** Detailed functional and technical requirements for Phase 1, focusing on the file tree with checkboxes and the flattening functionality.
-- **Tags:** requirements, design, phase 1, context chooser, tree view, checkbox, flatten, vs code api
-
-### A3. DCE - Technical Scaffolding Plan
-- **Description:** Outlines the proposed file structure, technologies, and key VS Code API components for the extension, based on the `The-Creator-AI-main` reference repo.
-- **Tags:** technical plan, scaffolding, file structure, typescript, vs code extension, api
-
-### A4. DCE - Analysis of The-Creator-AI Repo
-- **Description:** Provides a detailed analysis of the `The-Creator-AI-main` reference repository, its architecture, and its mapping to the Data Curation Environment project goals.
-- **Tags:** analysis, repository, architecture, vscode-extension, project-planning
-
-### A5. DCE - Target File Structure
-- **Description:** A text-based representation of the target file structure for the DCE extension, outlining the layout of directories and key files.
-- **Tags:** file structure, architecture, project layout, scaffolding
-
-### A6. DCE - Initial Scaffolding Deployment Script
-- **Description:** Contains a Node.js script that, when executed, creates the entire initial directory structure and files for the DCE extension project.
-- **Tags:** deployment, script, scaffolding, bootstrap, nodejs, automation
-
-### A7. DCE - Development and Testing Guide
-- **Description:** A step-by-step guide explaining how to run, debug, and test the DCE extension within VS Code using the Extension Development Host.
-- **Tags:** development, testing, debugging, workflow, vs code extension, f5
-
-### A8. DCE - Phase 1 - Selection Sets Feature Plan
-- **Description:** A plan outlining the user stories, UI/UX, and technical implementation for saving, loading, and persisting different sets of selected files (selection profiles).
-- **Tags:** feature plan, selection sets, profiles, context management, persistence, phase 1
-
-### A9. DCE - GitHub Repository Setup Guide
-- **Description:** A step-by-step guide with the necessary git commands to initialize the project as a local repository and push it to a new remote repository on GitHub.
-- **Tags:** git, github, version control, setup, repository
-
-### A10. DCE - Metadata and Statistics Display
-- **Description:** Outlines the requirements and design for displaying live metadata (total selected files, total tokens) and for showing aggregate statistics (token and file counts) for folders in the file tree.
-- **Tags:** feature plan, metadata, statistics, token count, ui, ux
-
-### A11. DCE - Regression Case Studies
-- **Description:** Documents recurring bugs, their root causes, and codified solutions to prevent future regressions during development.
-- **Tags:** bugs, regression, troubleshooting, development, best practices
-
-### A12. DCE - Logging and Debugging Guide
-- **Description:** Explains how to access and use the integrated logging solution for debugging the extension's backend and frontend components.
-- **Tags:** logging, debugging, troubleshooting, development, output channel
-
-### A13. DCE - Phase 1 - Right-Click Context Menu
-- **Description:** A plan for implementing standard file explorer context menu actions (e.g., Rename, Delete, Copy Path) in the custom file tree.
-- **Tags:** feature plan, context menu, right-click, file operations, ux, phase 1
-
-### A14. DCE - Ongoing Development Issues
-- **Description:** A tracking document for recurring or persistent issues that need to be monitored across development cycles until they are confirmed as resolved.
-- **Tags:** bugs, tracking, issues, logging, node_modules, performance
-
-### A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan
-- **Description:** Details the requirements for multi-selection (click, Ctrl, Shift) in both the main file tree and the "Selected Items" panel, and multi-level column sorting.
-- **Tags:** feature plan, multi-select, sorting, list view, ux, phase 1
-
-### A16. DCE - Phase 1 - UI & UX Refinements Plan
-- **Description:** Covers visual and usability improvements like fixing panel layouts, resolving overflow bugs, adding loading indicators, and improving scrollbar visibility.
-- **Tags:** feature plan, ui, ux, layout, bug fix, loading indicator, phase 1
-
-### A17. DCE - Phase 1 - Advanced Tree View Features
-- **Description:** Outlines the plan for advanced tree view interactions, specifically the implementation of scrollable, self-contained views for large, expanded folders.
-- **Tags:** feature plan, tree view, ux, scrollable, phase 1
-
-## II. Standalone Utilities & Guides
-
-### A189. Number Formatting Reference Guide
-- **Description:** A standalone guide and utility script for formatting large numbers with K/M/B/T suffixes and dynamic decimal place adjustment for clean UI presentation.
-- **Tags:** utility, script, formatting, numbers, ui, ux, javascript, typescript
-</file>
-
-<file path="src/Artifacts/A1. DCE - Project Vision and Goals.md">
-# Artifact A1: DCE - Project Vision and Goals
-# Date Created: Cycle 1
-# Author: AI Model
-# Updated on: Cycle 2 (Reflect findings from reference repository analysis)
-
-## 1. Project Vision
-
-The vision of the Data Curation Environment (DCE) is to create a seamless, integrated toolset within VS Code that streamlines the workflow of interacting with large language models. The core problem this project solves is the manual, cumbersome process of selecting, packaging, and managing the context (code files, documents, etc.) required for effective AI-assisted development.
-
-## 2. High-Level Goals & Phases
-
-The project will be developed in three distinct phases.
-
-**Note on Reference Repository:** The discovery of the `The-Creator-AI-main` repository in Cycle 2 has provided a significant head-start, especially for Phase 1 and 2. The project's focus shifts from building these components from the ground up to adapting and extending the powerful, existing foundation.
-
-### Phase 1: The Context Chooser
-
-The goal of this phase is to eliminate the manual management of a `files_list.txt`. Users should be able to intuitively select files and folders for their AI context directly within the VS Code file explorer UI.
-
--   **Core Functionality:** Implement a file explorer view with checkboxes for every file and folder.
--   **Action:** A "Flatten Context" button will take all checked items and generate a single `flattened_repo.md` file in the project root.
--   **Outcome:** A user can curate a complex context with simple mouse clicks, completely removing the need to edit a text file.
--   **Update (Cycle 2):** The reference repository contains a fully-featured `FileTree.tsx` component that already accomplishes most of this. The task is now to adapt this component and its backend `FSService` to produce the desired `flattened_repo.md` output.
-
-### Phase 2: The Parallel Co-Pilot Panel
-
-This phase addresses the limitation of being locked into a single conversation with an AI assistant. The goal is to enable multiple, parallel interactions to compare and contrast different prompts or approaches simultaneously.
-
--   **Core Functionality:** Create a custom panel within VS Code that can host multiple, independent "chat" or "prompt" windows.
--   **Outcome:** A user can send the same (or different) prompts to multiple AI instances and view the results side-by-side, dramatically improving the efficiency of prompt engineering and response evaluation.
--   **Update (Cycle 2):** The reference repository's "Change Plan" view is an excellent, full-featured implementation of a *single* co-pilot panel. This provides a solid architectural base to build upon for the parallelization feature.
-
-### Phase 3: The Integrated Diff Tool
-
-This phase aims to bring a critical part of the external workflow—comparing text files—directly into the VS Code extension.
-
--   **Core Functionality:** Create a simple diffing utility within a VS Code webview. The user should be able to select two text sources (e.g., two AI responses from the Phase 2 panel, or a new response and an existing file) and see a visual comparison.
--   **Outcome:** Reduces the friction of copying and pasting text into external tools like WinMerge, keeping the entire curation and review workflow inside VS Code.
-</file>
-
-<file path="src/Artifacts/A10. DCE - Metadata and Statistics Display.md">
-# Artifact A10: DCE - Metadata and Statistics Display
-# Date Created: Cycle 14
-# Author: AI Model
-# Updated on: C15 (Add image file size handling and UI refinements)
-
-- **Key/Value for A0:**
-- **Description:** Outlines the requirements and design for displaying live metadata (total selected files, total tokens) and for showing aggregate statistics (token and file counts) for folders in the file tree.
-- **Tags:** feature plan, metadata, statistics, token count, ui, ux
-
-## 1. Overview & Goal
-
-To enhance the data curation process, it is critical for the user to have immediate, quantitative feedback on their selections. This feature will provide at-a-glance statistics at both the folder level and the overall selection level. The goal is to empower the user to make informed decisions about context size and composition without needing to perform manual calculations.
-
-## 2. User Stories
-
-| ID | User Story | Acceptance Criteria |
-|---|---|---|
-| US-01 | **Folder Statistics** | As a data curator, I want to see the total token count and the total number of files contained within each folder, so I can quickly assess the size and complexity of different parts of my project. | - Next to each folder name in the file tree, a token count is displayed. <br> - This token count is the recursive sum of all tokens from all non-image files within that folder and its subfolders. <br> - Next to the token count, a file count is also displayed, formatted with commas (e.g., "1,234"). <br> - These numbers are calculated on the backend and provided with the initial file tree data. |
-| US-02 | **Live Selection Summary** | As a data curator, I want to see a live summary of my total selection as I check and uncheck files, so I can monitor the total size of my context in real-time. | - A dedicated summary panel/footer is visible in the UI. <br> - This panel displays "X files" and "Y tokens". <br> - "X" is the total count of all individual files included in the current selection, formatted with commas. <br> - "Y" is the sum of all token counts for those selected non-image files. <br> - These values update instantly whenever a checkbox is changed. |
-| US-03 | **Readable Numbers & Icons** | As a data curator, I want large token counts to be formatted in a compact and readable way (e.g., 1,234 becomes "1.2K"), and for icons to visually represent the data, so I can easily parse the information. | - All token counts use K/M/B suffixes for numbers over 1,000. <br> - All file counts use commas for thousands separators. <br> - An icon is displayed next to the token count and file count for visual distinction. <br> - The statistics are right-justified in the file tree for better readability. |
-| US-04 | **Image File Handling** | As a data curator, I want to see the file size for images instead of a token count, so I can understand their contribution to storage/transfer size rather than context length. | - The backend identifies common image file types (png, jpg, etc.). <br> - For image files, the token count is treated as 0. <br> - In the file tree, instead of a token count, the human-readable file size is displayed (e.g., "15.2 KB", "2.1 MB"). |
-
-## 3. Technical Implementation Plan
-
-1.  **Backend (`fs.service.ts`):**
-    *   The `FileNode` interface in `src/common/types/file-node.ts` will be updated to include `isImage: boolean` and `sizeInBytes: number`.
-    *   The backend service will maintain a list of image file extensions.
-    *   When building the tree, it will check each file's extension.
-    *   If it's an image, it will use `fs.stat` to get the `sizeInBytes`, set `isImage: true`, and set `tokenCount: 0`.
-    *   If it's not an image, it will calculate the `tokenCount` and get the `sizeInBytes`.
-    *   The recursive sum logic for folders will aggregate `tokenCount`, `fileCount`, and `sizeInBytes` from their children.
-    *   The `vscode.workspace.findFiles` call will be updated to exclude the `node_modules` directory.
-
-2.  **Frontend - Formatting (`formatting.ts`):**
-    *   A new `formatBytes(bytes)` utility will be created to convert bytes to KB, MB, etc.
-    *   A new `formatNumberWithCommas(number)` utility will be created.
-
-3.  **Frontend - File Tree (`FileTree.tsx` & `view.scss`):**
-    *   The `FileTree.tsx` component will be updated to render the new data.
-    *   It will conditionally display either a formatted token count (using `formatLargeNumber`) or a formatted file size (using `formatBytes`) based on the `isImage` flag.
-    *   It will display folder file counts using `formatNumberWithCommas`.
-    *   It will incorporate icons from `react-icons/vsc` for tokens and file counts.
-    *   The stylesheet (`view.scss`) will be updated to right-align all statistics, pushing them to the end of the file/folder row.
-
-4.  **Frontend - Live Summary Panel (`context-chooser.view.tsx`):**
-    *   The `useMemo` hook that calculates the summary will be updated to correctly sum the total number of files and total tokens from the selected items. It will continue to ignore image sizes for the token total to avoid mixing units.
-    *   The rendered output will use the new formatting utilities and icons.
-</file>
-
-<file path="src/Artifacts/A11. DCE - Regression Case Studies.md">
-# Artifact A11: DCE - Regression Case Studies
-# Date Created: Cycle 16
-# Author: AI Model & Curator
-# Updated on: C16 (Add Case Study for Checkbox State Management)
-
-- **Key/Value for A0:**
-- **Description:** Documents recurring bugs, their root causes, and codified solutions to prevent future regressions during development.
-- **Tags:** bugs, regression, troubleshooting, development, best practices
-
-## 1. Purpose
-
-This document serves as a living record of persistent or complex bugs that have recurred across multiple development cycles. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase.
-
-## 2. Case Studies
-
----
-
-### Case Study 002: Checkbox State Management in File Tree
-
--   **Artifacts Affected:** `src/client/components/file-tree/FileTree.utils.ts`, `src/client/components/file-tree/FileTree.tsx`
--   **Cycles Observed:** 14, 15, 16
--   **Symptom:** Checkbox functionality in the file tree is erratic. Only the root checkbox works as expected, but individual files or sub-folders cannot be checked or unchecked correctly. Clicking a checkbox on a child of an already-selected folder fails to deselect it.
--   **Root Cause Analysis (RCA):**
-    The core issue was overly complex and flawed state management logic within the `addRemovePathInSelectedFiles` utility function. The logic attempted to handle the "unchecking a child of a selected parent" case by removing the parent and re-adding all of its other children (the "siblings"). This approach was brittle and failed to correctly calculate the new state, leading to a UI that did not update correctly. The complexity made the function difficult to debug and maintain.
-
--   **Codified Solution & Best Practice:**
-    1.  **Simplify State Logic:** The state management logic was rewritten to be more direct and declarative, using a `Set` for efficient manipulation of selected paths.
-    2.  **Handle Cases Explicitly:** The new function explicitly handles the three primary user actions:
-        *   **CHECK:** When a node is checked, any of its descendants that are already in the selection are removed, and the node's own path is added. This ensures the most senior selected path is always the one stored in state.
-        *   **UNCHECK (Direct):** When a node that is explicitly in the selection list is unchecked, its path and the paths of all its descendants are removed.
-        *   **UNCHECK (Subtractive):** When a node is unchecked because its parent was checked, the parent is removed from the selection. Then, all of the parent's direct children *except for the one that was clicked* are added to the selection. This correctly "subtracts" the item from the parent's group selection without complex traversals.
-    3.  **Robust Event Handling:** Ensure the checkbox `onChange` handler in the React component uses `event.stopPropagation()` to prevent the click event from bubbling up and triggering other actions, such as folder expansion.
-
--   **Example of Flawed Logic (Conceptual):**
-    ```typescript
-    // OLD LOGIC
-    if (unchecking a child of a selected parent) {
-      // 1. Remove parent from selected list.
-      // 2. Traverse the entire tree from the parent.
-      // 3. Add every descendant of the parent back, EXCEPT the clicked child.
-      // This was inefficient and error-prone.
-    }
-    ```
-
--   **Example of Correct Logic (Conceptual):**
-    ```typescript
-    // NEW LOGIC
-    if (unchecking a child of a selected parent) {
-      // 1. Remove the parent from the selection set.
-      const parentNode = findParentNode(clickedPath);
-      // 2. Add all of the parent's *direct children* to the selection set,
-      //    except for the clicked child itself.
-      parentNode.children.forEach(child => {
-        if (child.path !== clickedPath) {
-          selectionSet.add(child.path);
-        }
-      });
-    }
-    ```
-
----
-
-### Case Study 001: `path.sep` Usage in Frontend Components
-
--   **Artifacts Affected:** `src/client/components/file-tree/FileTree.tsx`
--   **Cycles Observed:** 13, 14, 16
--   **Symptom:** The webpack build process fails with TypeScript errors similar to `TS2339: Property 'sep' does not exist on type 'string'`.
--   **Root Cause Analysis (RCA):**
-    The error occurs when frontend code (React components running in a webview) attempts to use `path.sep`. The `path` module is a core part of the Node.js runtime, but it does not exist in the browser-like context of a webview.
--   **Codified Solution & Best Practice:**
-    1.  **Strict Environment Separation:** All file system path manipulation **must** occur in the backend (`src/backend/`).
-    2.  **Normalized Paths:** The backend must normalize all paths to use forward slashes (`/`) before sending them to the frontend.
-    3.  **Frontend Simplicity:** The frontend code must treat all file paths as simple strings and should never attempt to parse or join them using path-specific separators.
-</file>
-
-<file path="src/Artifacts/A12. DCE - Logging and Debugging Guide.md">
-# Artifact A12: DCE - Logging and Debugging Guide
-# Date Created: Cycle 19
-# Author: AI Model
-# Updated on: C19 (Add explicit clarification on where to find different types of logs.)
-
-- **Key/Value for A0:**
-- **Description:** Explains how to access and use the integrated logging solution for debugging the extension's backend and frontend components.
-- **Tags:** logging, debugging, troubleshooting, development, output channel
-
-## 1. Purpose
-
-This document provides instructions on how to access and use the logging features built into the Data Curation Environment (DCE) extension. Effective logging is crucial for diagnosing performance issues, tracking down bugs, and understanding the extension's behavior during development.
-
-## 2. Two Primary Log Locations
-
-There are two separate places to look for logs, depending on where the code is running.
-
-### Location 1: The "Debug Console" (For `console.log`)
-
-This is where you find logs from the **backend** (the extension's main Node.js process).
-
--   **What you'll see here:** `console.log()` statements from files in `src/backend/` and `src/extension.ts`. This is useful for debugging the extension's core activation and services *before* the UI is even visible.
--   **Where to find it:** In your **main development window** (the one where you press `F5`), look in the bottom panel for the **"DEBUG CONSOLE"** tab.
-
-    ```
-    -----------------------------------------------------------------------------------
-    | PROBLEMS    OUTPUT    DEBUG CONSOLE    TERMINAL                                 |
-    |---------------------------------------------------------------------------------|
-    |                                                                                 |
-    |  > Congratulations, your extension "Data Curation Environment" is now active!   |
-    |  > FSService watcher initialized.                                               |
-    |  ...                                                                            |
-    -----------------------------------------------------------------------------------
-    ```
-
-### Location 2: The "Output" Channel (For Centralized Logging)
-
-This is the primary, centralized log for the entire extension, including messages from the **frontend (WebView)**.
-
--   **What you'll see here:** Formatted log messages from both the backend (`LoggerService`) and the frontend (`logger.ts`). All messages are prefixed with a level (`[INFO]`, `[WARN]`, `[ERROR]`) and a timestamp. Frontend messages are also prefixed with `[WebView]`.
--   **Where to find it:** In the **"[Extension Development Host]" window** (the new window that opens after you press `F5`), follow these steps:
-    1.  **Open the Panel:** Press `Ctrl+J` (or `Cmd+J` on Mac).
-    2.  **Navigate to the "OUTPUT" Tab.**
-    3.  In the dropdown menu on the right, select **`Data Curation Environment`**.
-
-    ```
-    -----------------------------------------------------------------------------------
-    | PROBLEMS    OUTPUT    DEBUG CONSOLE    TERMINAL                                 |
-    |---------------------------------------------------------------------------------|
-    |                                                 [Data Curation Environment v]   |
-    |                                                                                 |
-    |  [INFO] [2:30:00 PM] Services initialized.                                      |
-    |  [INFO] [2:30:01 PM] Received request for workspace files.                      |
-    |  [INFO] [2:30:01 PM] [WebView] Initializing view and requesting workspace files.|
-    |  [INFO] [2:30:01 PM] Scanning for files with exclusion pattern: ...             |
-    |  ...                                                                            |
-    -----------------------------------------------------------------------------------
-    ```
-
-## 3. What is Logged?
-
-*   **Backend Initialization:** Messages indicating that services are starting.
-*   **File System Scans & Refreshes:**
-    *   Confirmation when a file scan begins, including the exclusion pattern used.
-    *   Confirmation when a file change is detected by the watcher.
-    *   Confirmation when a refresh is triggered.
-*   **Errors:** Any caught exceptions on both the backend and frontend are logged with an `[ERROR]` prefix.
-*   **Frontend Actions:** Key user interactions in the UI (button clicks, etc.) are logged with a `[WebView]` prefix.
-</file>
-
-<file path="src/Artifacts/A13. DCE - Phase 1 - Right-Click Context Menu.md">
-# Artifact A13: DCE - Phase 1 - Right-Click Context Menu
-# Date Created: Cycle 19
-# Author: AI Model
-# Updated on: C21 (Reflect implementation details and new file/folder actions)
-
-- **Key/Value for A0:**
-- **Description:** A plan for implementing standard file explorer context menu actions (e.g., Rename, Delete, Copy Path) in the custom file tree.
-- **Tags:** feature plan, context menu, right-click, file operations, ux, phase 1
-
-## 1. Overview & Goal
-
-To enhance the user experience and make the Data Curation Environment's file tree a more complete replacement for the native VS Code explorer, this feature will add a standard right-click context menu and associated toolbar buttons. The goal is to provide essential file management operations directly within our extension's view, reducing the need for users to switch back to the native explorer for common tasks.
-
-## 2. User Stories
-
-| ID | User Story | Acceptance Criteria |
-|---|---|---|
-| US-01 | **Copy Path** | As a user, I want to right-click a file or folder and copy its absolute or relative path to my clipboard, so I can easily reference it elsewhere. | - Right-clicking a node in the file tree opens a context menu. <br> - The menu contains "Copy Path" and "Copy Relative Path" options. <br> - Selecting an option copies the corresponding path string to the system clipboard. |
-| US-02 | **Rename File/Folder** | As a user, I want to right-click a file or folder and rename it, so I can correct mistakes or refactor my project structure. | - The context menu contains a "Rename" option. <br> - Selecting it turns the file/folder name into an editable input field. <br> - Pressing Enter or clicking away saves the new name. <br> - The underlying file/folder is renamed on the file system. <br> - The file tree updates to reflect the change. |
-| US-03 | **Delete File/Folder** | As a user, I want to right-click a file or folder and delete it, so I can remove unnecessary files from my project. | - The context menu contains a "Delete" option. <br> - Selecting it shows a confirmation dialog to prevent accidental deletion. <br> - Upon confirmation, the file or folder (and its contents, recursively) is moved to the trash/recycling bin. <br> - The file tree updates to reflect the change. |
-| US-04 | **Reveal in Explorer** | As a user, I want to right-click a file or folder and have it revealed in the native OS file explorer, so I can interact with it outside of VS Code. | - The context menu contains a "Reveal in File Explorer" (or "Reveal in Finder" on macOS) option. <br> - Selecting it opens the parent directory of the item in the operating system's default file manager with the item selected. |
-| US-05 | **New File/Folder** | As a user, I want to create new files and folders from the toolbar or context menu, so I can build out my project structure without leaving the view. | - The header toolbar has "New File" and "New Folder" buttons. <br> - The context menu has "New File..." and "New Folder..." options. <br> - Clicking either prompts for a name. <br> - The new file/folder is created in the appropriate directory (workspace root for toolbar, selected folder for context menu). <br> - The file tree automatically refreshes. |
-
-## 3. Technical Implementation Plan
-
-1.  **Frontend (`FileTree.tsx`, new `ContextMenu.tsx`):**
-    *   Create a new reusable `ContextMenu.tsx` component that can be triggered by an `onContextMenu` event. It will render at the mouse position.
-    *   In `TreeView.tsx`, add an `onContextMenu` event handler to each file/folder item wrapper.
-    *   This handler will prevent the default browser menu, get the file node's data, and render the `ContextMenu` component with the appropriate options.
-    *   For "Rename", the `FileTree.tsx` component will need to manage local state to switch between displaying the name and an `<input>` field for the specific node being renamed.
-
-2.  **IPC Channels (`channels.enum.ts`, `channels.type.ts`):**
-    *   New `ClientToServerChannel` messages will be required for each action:
-        *   `RequestFileRename`: Body `{ oldPath: string, newName: string }`
-        *   `RequestFileDelete`: Body `{ path: string }`
-        *   `RequestRevealInExplorer`: Body `{ path: string }`
-        *   `RequestCopyPath`: Body `{ path: string, relative: boolean }`
-        *   `RequestNewFile`: Body `{ parentDirectory: string }`
-        *   `RequestNewFolder`: Body `{ parentDirectory: string }`
-
-3.  **Backend (`fs.service.ts`, `on-message.ts`):**
-    *   Update `on-message.ts` to handle the new IPC messages and call corresponding methods in the `FSService`.
-    *   **Rename:** Implement a method that uses `vscode.workspace.fs.rename(oldUri, newUri)`.
-    *   **Delete:** Implement a method that uses `vscode.window.showWarningMessage` for confirmation, then `vscode.workspace.fs.delete(uri, { recursive: true, useTrash: true })`. The `useTrash` option is crucial for data safety.
-    *   **Reveal:** Implement a method that executes the built-in VS Code command: `vscode.commands.executeCommand('revealInExplorer', uri)`.
-    *   **Copy Path:** Implement a method that uses `vscode.env.clipboard.writeText()` to put the absolute or relative path (calculated using `path.relative`) on the clipboard.
-    *   **New File/Folder:** Implement methods that prompt for a name with `vscode.window.showInputBox`, then create the item with `vscode.workspace.fs.writeFile` or `vscode.workspace.fs.createDirectory`.
-    *   After any file system modification (rename, delete, create), the backend's `FileSystemWatcher` will automatically detect the change and trigger a debounced refresh of the UI.
-</file>
-
-<file path="src/Artifacts/A14. DCE - Ongoing Development Issues.md">
-# Artifact A14: DCE - Ongoing Development Issues
-# Date Created: C20
-# Author: AI Model & Curator
-# Updated on: C23 (Add issues for selection persistence and remove button)
-
-- **Key/Value for A0:**
-- **Description:** A tracking document for recurring or persistent issues that need to be monitored across development cycles until they are confirmed as resolved.
-- **Tags:** bugs, tracking, issues, logging, node_modules, performance
-
-## 1. Purpose
-
-This artifact serves as a centralized list to track ongoing and recurring issues during the development of the Data Curation Environment (DCE) extension. This ensures that persistent problems are not forgotten and are actively monitored across cycles until a definitive solution is implemented and verified.
-
-## 2. Active Issues
-
----
-
-### Issue #5: Selection State is Not Persistent
-
--   **Symptom:** When the user makes selections in the "Data Curation" view, then switches to another VS Code tab and back, all selections are lost.
--   **First Reported:** Cycle 23
--   **Status (C23):** **Active.** The frontend state for `selectedFiles` is not being persisted in the VS Code `workspaceState`.
--   **Next Steps (C23):** Implement a mechanism to save the `selectedFiles` array to `workspaceState` on every change and load it when the view is initialized. This will involve both frontend (`view.tsx`) and backend (`selection.service.ts`) changes.
-
----
-
-### Issue #6: "Remove selected" Button is Non-Functional
-
--   **Symptom:** In the "Selected Items" view, selecting one or more files and clicking the "Remove selected" button does not remove them from the list or from the main selection. It also causes the file tree in the main view to collapse.
--   **First Reported:** Cycle 23
--   **Status (C23):** **Active.** The logic in `removePathsFromSelected` or the way its result is being used to update the state is flawed. The tree collapsing indicates an improper state update is causing a major re-render.
--   **Next Steps (C23):** Debug the `removePathsFromSelected` function in `FileTree.utils.ts`. Add logging to the `onClick` handler in `SelectedFilesView.tsx` to trace the data flow. Fix the state update to prevent the side-effect of collapsing the tree.
-
----
-
-### Issue #1: Logging Visibility
-
--   **Symptom:** The custom "Data Curation Environment" output channel is not visible in the "OUTPUT" tab's dropdown menu in the Extension Development Host window. This prevents the primary logging mechanism from being used for debugging.
--   **First Reported:** Cycle 19
--   **Status (C23):** **Resolved (C21).** The issue was caused by an early-exit error during extension activation. Adding robust `try...catch` blocks around service initializations in `extension.ts` allowed the extension to fully load, making the output channel visible.
-
----
-
-### Issue #2: `node_modules` Exclusion and Performance
-
--   **Symptom:** The `node_modules` directory is included in file tree scans, leading to incorrect file and token counts and a significant performance delay.
--   **First Reported:** Cycle 15 (and earlier)
--   **Status (C23):** **Resolved (C20).** The `vscode.workspace.findFiles` call in `fs.service.ts` was updated with a more robust glob pattern `'{**/node_modules/**,**/dist/**,**/out/**,**/.git/**,**/flattened_repo.md}'` which now correctly excludes these directories.
-
----
-
-### Issue #3: Incorrect Image Token Counting
-
--   **Symptom:** Image files are being assigned a token count instead of displaying their file size.
--   **First Reported:** Cycle 18
--   **Status (C23):** **Resolved (C20).** The logic in `fs.service.ts` was corrected to identify images by extension, set `tokenCount` to 0, and get their `sizeInBytes`. The frontend (`FileTree.tsx`) now uses an `isImage` flag to display the formatted byte size instead of tokens.
-
----
-
-### Issue #4: File Tree Caching and Refresh Behavior
-
--   **Symptom:** The file tree reloaded from scratch on every tab switch and did not auto-update on file changes.
--   **First Reported:** Cycle 19
--   **Status (C23):** **Resolved (C20).** A frontend cache was implemented by changing the `useEffect` dependency array. A backend `FileSystemWatcher` was implemented in `fs.service.ts` to detect changes and push updates to the client, triggering a refresh.
-</file>
-
-<file path="src/Artifacts/A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md">
-# Artifact A15: DCE - Phase 1 - Multi-Select & Sorting Feature Plan
-# Date Created: Cycle 22
-# Author: AI Model
-# Updated on: C23 (Add main tree multi-select and multi-level sorting)
-
-- **Key/Value for A0:**
-- **Description:** Details the requirements for multi-selection (click, Ctrl, Shift) in both the main file tree and the "Selected Items" panel, and multi-level column sorting.
-- **Tags:** feature plan, multi-select, sorting, list view, ux, phase 1
-
-## 1. Overview & Goal
-
-To elevate the Data Curation Environment beyond basic functionality, this plan introduces advanced list-interaction features common in modern applications. The goal is to provide users with powerful and intuitive tools for managing their file selections, mirroring the behavior of native operating system file explorers. This includes robust multi-selection capabilities in both the main file tree and the "Selected Items" panel, and comprehensive sorting for the "Selected Items" list.
-
-## 2. User Stories
-
-| ID | User Story | Acceptance Criteria |
-|---|---|---|
-| US-01 | **"Selected Items" Multi-Selection** | As a curator, after selecting a large folder, I want to quickly remove a small group of unwanted files from the "Selected Items" list using standard Shift-click and Ctrl-click, so I don't have to uncheck them one by one in the main tree. | - Clicking a single item in the "Selected Items" list selects it and deselects all others. <br> - Ctrl-clicking an item toggles its selection state without affecting other items. <br> - Shift-clicking an item selects the range of items between the last-clicked anchor item and the current one. The anchor is set by the last non-Shift click. <br> - A "Remove Selected" button acts on all currently selected items in this list. |
-| US-02 | **"Selected Items" Column Sorting** | As a curator, I want to sort the "Selected Items" list by file name or token count, so I can easily find specific files or identify the largest contributors to my context. | - The "Selected Items" panel has a header row with clickable "File" and "Tokens" labels. <br> - Clicking a column header sorts the list by that column. <br> - Clicking the same header again reverses the sort direction (ascending/descending). <br> - A visual indicator (e.g., an arrow) shows the current sort column and direction. <br> - The default, initial sort is by Token Count, descending. |
-| US-03 | **"Selected Items" Multi-Layer Sorting** | As a curator, I want to apply a secondary sort, so I can group my selected files by type and then see the largest files within each group. | - The sorting mechanism supports at least two levels of sorting. <br> - The UI provides a way to define a primary and secondary sort key (e.g., Shift-clicking a second column header). <br> - The list first organizes by the primary key, then sorts items within those groups by the secondary key. For example, sort by Type (asc), then by Token Count (desc). |
-| US-04 | **Main Tree Multi-Selection** | As a user, I want to select multiple files and folders in the main "Data Curation" file tree using standard OS conventions (Ctrl/Shift click), so I can perform context menu actions (like Delete) on multiple items at once. | - Standard multi-selection is implemented in the main file tree. <br> - This selection is a separate state from the checkbox state and is used for contextual actions, not for flattening. <br> - Right-clicking on any item within a multi-selected group opens a context menu that applies its actions to all selected items. |
-| US-05 | **"As-Is" Sorting** | As a user, I want to be able to revert the "Selected Items" list to its default sort order, so I can see the files as they appear in the native VS Code explorer. | - A sort option for "Default" or "As-Is" is available. <br> - Selecting it sorts the items based on their original file system order (folders first, then files, all alphabetized). |
-
-## 3. Technical Implementation Plan
-
-1.  **`SelectedFilesView.tsx` Refactor:**
-    *   **State Management:** Introduce new state variables to manage selection, sorting, and multi-selection.
-        *   `const [selection, setSelection] = useState<Set<string>>(new Set());`
-        *   `const [selectionAnchor, setSelectionAnchor] = useState<string | null>(null);` // For stable shift-click
-        *   `const [sortConfig, setSortConfig] = useState<{ key: string; direction: 'asc' | 'desc' }[]>([{ key: 'tokenCount', direction: 'desc' }]);`
-    *   **Event Handling:** Implement a comprehensive `onClick` handler for list items that inspects `event.ctrlKey` and `event.shiftKey`. A non-modifier click will set both the `selection` and the `selectionAnchor`. A shift-click will select from the `selectionAnchor` to the current item.
-    *   **Sorting Logic:** The `useMemo` hook that sorts the `selectedFileNodes` prop will be updated to handle an array of `sortConfig` objects. It will perform a stable sort, iterating through the sort criteria until a non-zero comparison result is found. A new "Type" column will be added, requiring a utility to extract the file extension.
-
-2.  **`FileTree.tsx` & `TreeView.tsx` (Main Tree Multi-Select):**
-    *   This is a more complex task that mirrors the `SelectedFilesView` implementation but within a recursive tree structure.
-    *   A new selection state for contextual actions (`const [contextSelection, setContextSelection] = useState<Set<string>>(new Set())`) will be managed at the top level (`view.tsx`).
-    *   The selection state and handler functions will need to be passed down through `FileTree` to `TreeView`.
-    *   The `onContextMenu` handler will need to be updated to check if the right-clicked node is part of the current `contextSelection` and pass the entire selection to the backend if an action is chosen.
-</file>
-
-<file path="src/Artifacts/A16. DCE - Phase 1 - UI & UX Refinements Plan.md">
-# Artifact A16: DCE - Phase 1 - UI & UX Refinements Plan
-# Date Created: Cycle 22
-# Author: AI Model
-
-- **Key/Value for A0:**
-- **Description:** Covers visual and usability improvements like fixing panel layouts, resolving overflow bugs, adding loading indicators, and improving scrollbar visibility.
-- **Tags:** feature plan, ui, ux, layout, bug fix, loading indicator, phase 1
-
-## 1. Overview & Goal
-
-This document outlines a series of user interface (UI) and user experience (UX) refinements identified during playtesting. The goal is to address layout bugs, provide better visual feedback to the user, and improve the overall professional feel of the extension. These changes focus on fixing immediate usability problems and making the extension more intuitive to operate.
-
-## 2. User Stories & Issues
-
-| ID | User Story / Issue | Acceptance Criteria |
-|---|---|---|
-| UI-01 | **Header Layout Bug** | As a user, I want the header of the "Data Curation" panel to be compact, without the extra vertical space between the title and the toolbar buttons, so it looks clean and professional. | - The vertical gap between the view title row and the toolbar button row is removed. <br> - The header area takes up minimal vertical space. <br> - This is a CSS fix, likely involving adjusting `padding`, `margin`, or `gap` in the flex container. |
-| UI-02 | **"Selected Items" Overflow Bug** | As a user, when I select many files, I want the "Selected Items" list to scroll within its panel instead of running off the screen behind the "Flatten Context" footer, so I can see and manage all my selections. | - The "Selected Items" panel has a defined `max-height`. <br> - When the content exceeds this height, a vertical scrollbar appears. <br> - The panel never overlaps or pushes the footer out of view. <br> - This is a CSS fix involving `flex-grow`, `flex-shrink`, `min-height: 0` on the file tree container, and `overflow-y: auto` on the list container. |
-| UI-03 | **Resizable "Selected Items" Panel** | As a user, I want to be able to vertically resize the "Selected Items" panel, so I can see more or fewer items as needed for my current task. | - A draggable handle or resizer element is added to the top border of the "Selected Items" panel. <br> - Clicking and dragging this handle adjusts the `height` or `max-height` of the panel. <br> - The main file tree above it resizes accordingly to fill the remaining space. |
-| UI-04 | **Visible Loading State** | As a user, when I perform a slow action like renaming a file or refreshing the explorer, I want to see a loading indicator, so I have clear feedback that the system is working and not frozen. | - A loading state (e.g., `isLoading`) is added to the main view's state. <br> - This state is set to `true` when a file system scan begins (e.g., on initial load or refresh). <br> - A loading indicator (e.g., a spinning icon) is displayed in the UI (e.g., in the header toolbar) while `isLoading` is true. <br> - The state is set to `false` when the file data is received from the backend. |
-| UI-05 | **Improved Scrollbar Gutter** | As a user, I find it difficult to distinguish between the extension's internal scrollbar and the main VS Code scrollbar when they are side-by-side. I want a clearer visual separation between them. | - A subtle vertical border (`border-right`) is added to the main file tree container. <br> - This creates a persistent, visible dividing line between the two scrollable areas, making it easier to position the mouse. |
-
-## 3. Technical Implementation Plan
-
-1.  **Layout Fixes (`view.scss`):**
-    *   **Header:** Inspect the `.view-header` and `.toolbar` classes. Remove any unnecessary `margin` or `padding`. Consolidate into a single flex container with `justify-content: space-between` if the title is to be included, or simply adjust the container of the toolbar.
-    *   **Overflow:** This is a classic flexbox problem. The main container (`.view-container`) should be `display: flex; flex-direction: column; height: 100vh;`. The content area (`.file-tree-container`) must have `flex-grow: 1;` and crucially `min-height: 0;` to allow it to shrink. The "Selected Items" panel (`.selected-files-panel`) should have `flex-shrink: 0;` and `overflow-y: auto;` on its list container.
-    *   **Scrollbar Gutter:** Add `border-right: 1px solid var(--vscode-panel-border);` to the `.file-tree-container`.
-
-2.  **Loading Indicator (`view.tsx`):**
-    *   Add `const [isLoading, setIsLoading] = useState(true);`.
-    *   Set `setIsLoading(true)` at the start of the `requestFiles` function.
-    *   Set `setIsLoading(false)` inside the `handleFileResponse` message handler after files are received and set.
-    *   In the JSX for the `.toolbar`, add conditional rendering: `{isLoading && <SpinnerComponent />}`. The spinner can be an SVG or a component using `react-icons`.
-
-3.  **Resizable Panel:**
-    *   This is the most complex part of this plan. It typically requires a custom React hook or component.
-    *   An invisible `div` will be placed on the top border of the panel.
-    *   `onMouseDown`, `onMouseMove`, and `onMouseUp` event listeners will be used to track the drag gesture and calculate the new height for the panel.
-    *   The height will be applied as an inline style to the panel.
-    *   This feature will be implemented after the more critical bug fixes are complete.
-</file>
-
-<file path="src/Artifacts/A17. DCE - Phase 1 - Advanced Tree View Features.md">
-# Artifact A17: DCE - Phase 1 - Advanced Tree View Features
-# Date Created: Cycle 22
-# Author: AI Model
-
-- **Key/Value for A0:**
-- **Description:** Outlines the plan for advanced tree view interactions, specifically the implementation of scrollable, self-contained views for large, expanded folders.
-- **Tags:** feature plan, tree view, ux, scrollable, phase 1
-
-## 1. Overview & Goal
-
-The current file tree view expands vertically, which can create a poor user experience when a folder containing hundreds of files is opened. The entire view becomes excessively long, forcing the user to scroll a great distance to see files or folders below the expanded one. The goal of this feature is to innovate on the traditional tree view by containing the contents of a large expanded folder within a scrollable, "inline" window, preventing the main view from becoming unmanageable.
-
-## 2. User Story
-
-| ID | User Story | Acceptance Criteria |
-|---|---|---|
-| TV-01 | **Contained Folder Expansion** | As a user, when I expand a folder with a large number of children, I want its contents to appear in a scrollable sub-panel within the tree instead of pushing all subsequent items down, so I can browse the folder's contents without losing my place in the main file tree. | - When a folder is expanded, the extension checks the number of direct children. <br> - If the child count exceeds a certain threshold (e.g., 50), the children are rendered inside a nested, scrollable `div`. <br> - This `div` has a fixed `max-height`. <br> - A small 'x' icon is visible within this sub-panel. Clicking it closes the sub-panel and reverts the folder to the standard, fully expanded view for that session. |
-
-## 3. Technical Implementation Plan
-
-This is a significant UI/UX enhancement and will require careful implementation within the React component hierarchy.
-
-1.  **Component (`TreeView.tsx`):**
-    *   The core logic will reside in the `renderTreeNodes` function.
-    *   **Threshold Check:** When rendering a directory node, check `if (node.children && node.children.length > FOLDER_CONTENT_THRESHOLD)`. The threshold will be a configurable constant.
-    *   **State Management:** A new state variable will be needed to track which "large" folders have been reverted to the standard view by the user clicking the 'x' button. `const [standardViewFolders, setStandardViewFolders] = useState<Set<string>>(new Set());`
-    *   **Conditional Rendering:**
-        *   If the folder is expanded (`isExpanded`) AND its path is **not** in `standardViewFolders` AND it exceeds the threshold, render the children inside a special container:
-            ```jsx
-            <div className="large-folder-container" style={{ maxHeight: '300px', overflowY: 'auto' }}>
-              <button onClick={() => setStandardViewFolders(prev => new Set(prev).add(node.absolutePath))}>X</button>
-              <ul>{renderTreeNodes(node.children)}</ul>
-            </div>
-            ```
-        *   Otherwise, render the children normally as is currently done:
-            ```jsx
-            <ul className="treenode-children">{renderTreeNodes(node.children)}</ul>
-            ```
-
-2.  **Styling (`view.scss`):**
-    *   Create styles for `.large-folder-container`.
-    *   It will need `position: relative`, a subtle `border` or `background-color` to distinguish it from the rest of the tree.
-    *   The close button will need to be positioned appropriately within the container.
-
-3.  **Performance Considerations:**
-    *   This approach avoids virtualizing the entire tree, which is much more complex. It only contains the content of single, large folders.
-    *   Rendering hundreds of nodes within the scrollable container might still have a minor performance impact on initial render, but it will be contained and will not affect the performance of the main tree's scrolling.
-</file>
-
-<file path="src/Artifacts/A189. Number Formatting Reference Guide.md">
-# Artifact A189: Number Formatting Guide (K/M Suffixes & Dynamic Decimals)
-# Date Created: Cycle 14
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A standalone guide and utility script for formatting large numbers with K/M/B/T suffixes and dynamic decimal place adjustment for clean UI presentation.
-- **Tags:** utility, script, formatting, numbers, ui, ux, javascript, typescript
-
-## 1. Purpose
-
-This artifact provides a set of robust, reusable TypeScript functions for formatting numbers in a user-friendly way. The core function, `formatLargeNumber`, intelligently converts large numbers into a compact format using suffixes like 'K' (thousands), 'M' (millions), 'B' (billions), and 'T' (trillions).
-
-The key features of this utility are:
-*   **Automatic Suffixing:** Automatically scales numbers and adds the appropriate suffix.
-*   **Dynamic Decimal Precision:** Adjusts the number of decimal places shown based on the magnitude of the number, ensuring a clean and consistent look in the UI (e.g., `12.3K`, `123.5K`, `1.23M`).
-*   **Handling of Small Numbers:** Gracefully handles numbers below 1,000 without applying a suffix.
-*   **Specialized Wrappers:** Includes helper functions like `formatCurrency` and `formatCount` for common use cases.
-
-## 2. Core Utility Functions (from `src/utils.ts`)
-
-Below is the complete TypeScript code. You can save this as a `formatting.ts` file in a new project's `utils` directory.
-
-```typescript
-// src/common/utils/formatting.ts
-
-const KMBT_SUFFIXES = ['', 'K', 'M', 'B', 'T', 'Q']; // Extend as needed
-
-/**
- * Formats a large number with appropriate K/M/B/T suffixes and dynamic decimal places.
- * Handles very small near-zero numbers gracefully to avoid scientific notation.
- *
- * @param value The number to format.
- * @param decimalPlaces The base number of decimal places to aim for.
- * @returns A formatted string.
- */
-export function formatLargeNumber(value: number | undefined | null, decimalPlaces: number = 2): string {
-    if (value === null || value === undefined || isNaN(value) || !Number.isFinite(value)) {
-        return '---';
-    }
-    if (value === 0) {
-        return '0';
-    }
-
-    const VERY_SMALL_THRESHOLD = 1e-6; // 0.000001
-    if (Math.abs(value) < VERY_SMALL_THRESHOLD) {
-        return (0).toFixed(decimalPlaces);
-    }
-
-    const isNegative = value < 0;
-    const absValue = Math.abs(value);
-
-    let unitIndex = 0;
-    let scaledValue = absValue;
-
-    if (absValue < 1000) {
-        return String(Math.round(value)); // Return whole number if less than 1000
-    }
-
-    if (absValue >= 1000) {
-        unitIndex = Math.floor(Math.log10(absValue) / 3);
-        unitIndex = Math.min(unitIndex, KMBT_SUFFIXES.length - 1);
-        scaledValue = absValue / Math.pow(1000, unitIndex);
-    }
-
-    let adjustedDecimalPlaces = decimalPlaces;
-    if (unitIndex > 0) { // If a suffix is used (K, M, B, T, Q)
-        if (scaledValue >= 100) adjustedDecimalPlaces = Math.max(0, decimalPlaces - 2);
-        else if (scaledValue >= 10) adjustedDecimalPlaces = Math.max(0, decimalPlaces - 1);
-    } else { // No unit suffix (value < 1000)
-        if (Math.abs(scaledValue) < 0.01 && scaledValue !== 0) {
-            adjustedDecimalPlaces = Math.max(decimalPlaces, 4);
-        } else if (Number.isInteger(scaledValue)) {
-             adjustedDecimalPlaces = 0;
-        }
-    }
-
-    const unit = KMBT_SUFFIXES[unitIndex] ?? '';
-    let formattedValue = scaledValue.toFixed(adjustedDecimalPlaces);
-
-    // Remove trailing .00 or .0
-    if (adjustedDecimalPlaces > 0 && formattedValue.endsWith('0')) {
-        formattedValue = formattedValue.replace(/\.?0+$/, '');
-    }
-
-
-    return `${isNegative ? '-' : ''}${formattedValue}${unit}`;
-}```
-
-## 3. Usage Examples
-
-Here is how you can use these functions in your code:
-
-```typescript
-import { formatLargeNumber } from './path/to/formatting';
-
-// formatLargeNumber examples
-console.log(formatLargeNumber(123));        // "123"
-console.log(formatLargeNumber(1234));       // "1.23K"
-console.log(formatLargeNumber(12345));      // "12.3K"
-console.log(formatLargeNumber(123456));     // "123K"
-console.log(formatLargeNumber(1234567));    // "1.23M"
-console.log(formatLargeNumber(9876543210)); // "9.88B"
-console.log(formatLargeNumber(-54321));     // "-54.3K"
-console.log(formatLargeNumber(0.0000001));  // "0.00"
-```
-
-## 4. Integration Guide
-
-1.  **Copy the Code:** Save the code from Section 2 into a file named `formatting.ts` inside your project's `src/common/utils` directory.
-2.  **Import and Use:** Import the function into your UI components.
-    ```typescript
-    import { formatLargeNumber } from '@/common/utils/formatting';
-
-    const MyComponent = () => {
-      const displayValue = formatLargeNumber(123456); // "123K"
-      return <div>Tokens: {displayValue}</div>;
-    };
-    ```
-</file>
-
-<file path="src/Artifacts/A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md">
-# Artifact A2: DCE - Phase 1 - Context Chooser - Requirements & Design
-# Date Created: Cycle 1
-# Author: AI Model
-# Updated on: Cycle 2 (Revised based on analysis of reference repository)
-
-## 1. Overview
-
-This document outlines the requirements for Phase 1 of the Data Curation Environment (DCE) project. The primary goal of this phase is to replace the manual, error-prone process of managing context via a `files_list.txt` with an intuitive, UI-driven approach within VS Code.
-
-**Major Update (Cycle 2):** The analysis of the `The-Creator-AI-main` repository revealed an existing, highly-functional file tree component (`src/client/components/file-tree/FileTree.tsx`) with checkbox selection. The project requirements have been updated to reflect a shift from *building* this component from scratch to *analyzing, adapting, and integrating* the existing solution.
-
-## 2. Functional Requirements
-
-| ID | Requirement | User Story | Acceptance Criteria | Update (Cycle 2) |
-|---|---|---|---|---|
-| FR-01 | **Analyze Existing File Tree** | As a developer, I want to understand the capabilities of the `FileTree.tsx` component | - Analyze the component's props and state. <br> - Document its dependencies on other frontend components and backend services (`FSService`). <br> - Determine how checkbox state is managed and communicated. | **New** |
-| FR-02 | **Display File Tree in View** | As a user, I want to see a tree of all files and folders in my workspace within a dedicated VS Code view. | - The view should accurately reflect the workspace's file system structure. <br> - It should respect `.gitignore` rules to hide irrelevant files. | **Adaptation.** The `FileTree.tsx` component and `FSService` already provide this. We need to ensure it's correctly instantiated in our extension's view. |
-| FR-03 | **Checkbox Selection** | As a user, I want to select and deselect files and folders for my context using checkboxes. | - Every file and folder in the tree has a checkbox. <br> - Checking a folder checks all its children. <br> - Unchecking a folder unchecks all its children. <br> - A folder shows an "indeterminate" state if only some of its children are checked. | **Adaptation.** The reference component appears to support this logic. We must verify and adapt its state management (`selectedFiles` array). |
-| FR-04 | **Flatten Selected Context** | As a user, I want a single button to package all my selected files into one context file. | - A "Flatten Context" button is present in the view. <br> - Clicking it triggers a process that reads the content of all checked files. <br> - The contents are concatenated into a single `flattened_repo.md` file in the project root. | **Implementation.** The logic for this will need to be implemented, using the state from the `FileTree` component as input for our enhanced `bootstrap-flattener.js` logic. |
-
-## 3. Technical Design & Integration Plan
-
-1.  **Extension View:** We will create a new Webview-based view in the VS Code activity bar, as defined in `package.json`.
-2.  **Frontend Component:** This view will render the `Context.tsx` module (`src/client/modules/context.module/`), which in turn uses the `FileTree.tsx` component.
-3.  **Backend Service:** The frontend will communicate with the `FSService.ts` on the extension's backend via the established IPC channels.
-    -   On view load, the frontend sends a `RequestWorkspaceFiles` message.
-    -   The `FSService` gathers the file list (respecting `.gitignore`), creates the tree structure, and sends it back via a `SendWorkspaceFiles` message.
-4.  **State Management:** The list of selected file paths will be managed in the frontend's state store (`change-plan-view.store.ts`). The `FileTree.tsx` component will receive this list as a prop and use it to render the checkbox states. User interactions with checkboxes will dispatch actions to update this state.
-5.  **Flattening Logic:**
-    -   The "Flatten Context" button will trigger a new IPC message, `RequestFlattenContext`, sending the array of selected file paths to the backend.
-    -   A new handler in the backend will receive this list, read the content of each file, and then use the logic from `bootstrap-flattener.js` to generate the final `flattened_repo.md` file.
-</file>
-
-<file path="src/Artifacts/A3. DCE - Technical Scaffolding Plan.md">
-# Artifact A3: DCE - Technical Scaffolding Plan
-# Date Created: Cycle 1
-# Author: AI Model
-# Updated on: Cycle 2 (Adopted architecture from `The-Creator-AI-main` repository)
-
-## 1. Overview
-
-This document outlines the technical scaffolding and file structure for the Data Curation Environment (DCE) VS Code extension.
-
-**Major Update (Cycle 2):** The initial plan for a simple file structure has been superseded. We are officially adopting the mature and robust architecture of the `The-Creator-AI-main` reference repository as our project's blueprint. This provides a proven, scalable foundation for all three project phases.
-
-## 2. Adopted File Structure
-
-The project will adhere to the following directory structure, derived directly from the reference repository:
-
-```
-.
-├── public/                     # Static assets for webviews (icons, css)
-├── src/
-│   ├── backend/                # Extension Host code (Node.js environment)
-│   │   ├── commands/           # Command definitions and registration
-│   │   ├── repositories/       # Data persistence logic (workspace state)
-│   │   ├── services/           # Core backend services (LLM, FS, Git, etc.)
-│   │   ├── types/              # TypeScript types for the backend
-│   │   └── utils/              # Utility functions for the backend
-│   │
-│   ├── client/                 # Webview code (Browser environment)
-│   │   ├── components/         # Generic, reusable React components (FileTree, Modal)
-│   │   ├── modules/            # Feature-specific modules (Context, Plan)
-│   │   ├── store/              # Global state management for webviews (RxJS)
-│   │   └── views/              # Entry points for each webview panel
-│   │
-│   ├── common/                 # Code shared between backend and client
-│   │   ├── constants/
-│   │   ├── ipc/                # IPC channel definitions and managers
-│   │   ├── types/              # Shared TypeScript types (FileNode)
-│   │   └── utils/              # Shared utility functions (parse-json)
-│   │
-│   └── extension.ts            # Main entry point for the VS Code extension
-│
-├── package.json                # Extension manifest, dependencies, and scripts
-├── tsconfig.json               # TypeScript configuration
-├── webpack.config.js           # Webpack configuration for bundling client/server code
-└── ... (config files like .eslintrc.json, .gitignore)
-```
-
-## 3. Key Architectural Concepts
-
--   **Separation of Concerns:** The structure strictly separates backend (Node.js) logic from frontend (React/webview) logic.
--   **Shared Code:** The `src/common/` directory is critical for sharing types and IPC definitions, ensuring type safety and consistency between the extension host and the webview.
--   **Service-Oriented Backend:** The `src/backend/services/` directory promotes modularity. Each service has a single responsibility (e.g., `FSService` for file operations, `LlmService` for AI interaction), making the system easier to maintain and test.
--   **Dependency Injection:** The `Services.ts` class acts as a simple injector, managing the instantiation and provision of backend services.
--   **Modular Frontend:** The `src/client/modules/` directory allows for building complex UIs by composing smaller, feature-focused modules.
--   **Component-Based UI:** The `src/client/components/` directory holds the fundamental building blocks of the UI, promoting reusability.
--   **Typed IPC Communication:** The use of `channels.enum.ts` and `channels.type.ts` in `src/common/ipc/` provides a strongly-typed and well-documented contract for communication between the webview and the extension host, reducing runtime errors.
-</file>
-
-<file path="src/Artifacts/A4. DCE - Analysis of The-Creator-AI Repo.md">
-# Artifact A4: DCE - Analysis of The-Creator-AI Repo
-# Date Created: Cycle 2
-# Author: AI Model
-- **Description:** Provides a detailed analysis of the `The-Creator-AI-main` reference repository, its architecture, and its mapping to the Data Curation Environment project goals.
-- **Tags:** analysis, repository, architecture, vscode-extension, project-planning
-
-## 1. Overview
-
-The `The-Creator-AI-main` repository is a comprehensive and well-structured VS Code extension that functions as a sophisticated AI coding assistant. It utilizes a modern tech stack including TypeScript, React for webviews, and TailwindCSS for styling. Its architecture is service-oriented on the backend (extension host) and modular on the frontend (webview). The discovery of this repository provides a massive head-start for our project, as it contains pre-built solutions for many of our planned features.
-
-## 2. Backend Architecture (Extension Host)
-
-The backend, located primarily in `src/backend/`, follows a clean, service-oriented architecture.
-
--   **`extension.ts`**: The main entry point. It initializes services and registers the commands and webview providers.
--   **`services/`**: A directory containing distinct services for handling specific concerns:
-    -   `LlmService.ts`: Manages interactions with multiple AI models (Gemini, OpenAI). It includes logic for API key management and prompt construction.
-    -   `FSService.ts`: Handles all file system operations, including reading files, creating a file tree, and respecting `.gitignore`.
-    -   `CodeService.ts`: Contains logic for applying code changes, parsing diffs, and generating code.
-    -   `GitService.ts`: Provides an interface for Git operations, like committing changes.
-    -   `MessageService.ts`: Orchestrates the flow of messages between the frontend and the LLM service.
-    -   `PlanExImService.ts`: Manages exporting and importing of "Change Plans".
-    -   `Services.ts`: A dependency injection container that initializes and provides access to all other services.
--   **`repositories/`**: Manages data persistence within the VS Code workspace state (e.g., `PersistentStoreRepository.ts`, `SettingsRepository.ts`).
--   **`commands/`**: Defines all the commands exposed by the extension in `package.json`.
-
-## 3. Frontend Architecture (Webview)
-
-The frontend, located in `src/client/`, is a React application bundled with Webpack.
-
--   **`views/`**: The application is divided into distinct views, each with its own entry point, state management, and logic (e.g., `change-plan.view`).
--   **`modules/`**: Contains reusable UI/logic modules that are composed into the main view, such as:
-    -   `context.module/Context.tsx`: Renders the file explorer.
-    -   `plan.module/Plan.tsx`: Handles displaying the AI-generated plan and user input.
--   **`components/`**: A collection of generic, reusable React components:
-    -   `file-tree/FileTree.tsx`: A fully functional file tree component with checkbox selection, expansion state, and active file highlighting. This is directly applicable to our Phase 1 goal.
-    -   `AutoResizingTextarea.tsx`, `Modal.tsx`, `ProgressSteps.tsx`: Other useful UI components.
--   **State Management**: Each view appears to have its own local store (`store/`), using RxJS `BehaviorSubject` for reactivity. This is a simple yet effective approach for managing state within a contained webview.
--   **IPC**: Communication with the backend is handled via a robust `ClientPostMessageManager` (`src/common/ipc/`) which defines clear channels for client-server interaction.
-
-## 4. Mapping to DCE Project Goals
-
-The reference repository provides solutions or strong foundations for all three of our project phases.
-
--   **Phase 1 (Context Chooser):** **Largely Complete.** The `FileTree.tsx` component in `src/client/components/file-tree/` combined with `FSService.ts` on the backend already provides the core functionality of a checkbox-based file explorer for context selection. Our work shifts from building this from scratch to adapting and integrating this existing, powerful component.
-
--   **Phase 2 (Parallel 'Co-pilot' Panel):** **Partially Complete.** The "Change Plan" view (`src/client/views/change-plan.view/`) is essentially a single "co-pilot" panel. It allows a user to describe a change, get an AI-generated plan, and interact with it. Our goal of *parallel* panels is not implemented, but the foundation for a single panel is incredibly strong.
-
--   **Phase 3 (Diff Tool):** **Not Present.** There is no integrated diff-viewing tool like WinMerge. However, the `CodeService.ts` *does* contain logic for parsing and applying diffs in a custom `<<<<<<< SEARCH` format, and the extension can trigger VS Code's native diff viewer (`git.openChange`).
-
-## 5. Recommendations & Path Forward
-
-1.  **Adopt the Architecture:** We should officially adopt the architecture of `The-Creator-AI-main` as the blueprint for our project. It is robust, scalable, and well-organized.
-2.  **Focus on Adaptation:** Our immediate efforts for Phase 1 should be to isolate the `FileTree` component and its backend dependencies (`FSService.ts`) and ensure they can be used to generate the `flattened_repo.md` as originally specified.
-3.  **De-risk Phase 2:** The "Change Plan" functionality is a perfect starting point for our parallel co-pilot. We should analyze its state management and IPC communication to understand how we might instantiate multiple, independent instances of it.
-4.  **Update All Documentation:** All planning artifacts (`A1`, `A2`, `A3`) must be updated immediately to reflect this new context. Our plan has evolved from "build" to "analyze, adapt, and extend".
-</file>
-
-<file path="src/Artifacts/A5. DCE - Target File Structure.md">
-# Artifact A5: DCE - Target File Structure
-# Date Created: Cycle 3
-# Author: AI Model
-
-- **Description:** A text-based representation of the target file structure for the DCE extension, outlining the layout of directories and key files.
-- **Tags:** file structure, architecture, project layout, scaffolding
-
-## 1. Overview
-
-This document provides a visual representation of the file structure that the `A6. DCE - Initial Scaffolding Deployment Script` will create. It is based on the robust and scalable architecture of the `The-Creator-AI-main` reference repository, as detailed in `A3. DCE - Technical Scaffolding Plan`.
-
-## 2. File Tree
-
-```
-DCE/
-├── .gitignore
-├── .vscodeignore
-├── package.json
-├── tsconfig.json
-├── webpack.config.js
-├── public/
-│   └── spiral.svg
-└── src/
-    ├── backend/
-    │   ├── commands/
-    │   │   ├── commands.ts
-    │   │   └── register-commands.ts
-    │   ├── repositories/
-    │   │   └── persistent-store.repository.ts
-    │   ├── services/
-    │   │   ├── fs.service.ts
-    │   │   ├── services.ts
-    │   │   └── flattener.service.ts
-    │   └── types/
-    │       └── storage-keys.enum.ts
-    │
-    ├── client/
-    │   ├── components/
-    │   │   └── file-tree/
-    │   │       ├── FileTree.tsx
-    │   │       └── FileTree.utils.ts
-    │   ├── views/
-    │   │   ├── context-chooser.view/
-    │   │   │   ├── index.ts
-    │   │   │   ├── on-message.ts
-    │   │   │   ├── view.scss
-    │   │   │   └── view.tsx
-    │   │   └── index.ts
-    │   └── store/
-    │       ├── store.ts
-    │       └── useStore.ts
-    │
-    ├── common/
-    │   ├── ipc/
-    │   │   ├── channels.enum.ts
-    │   │   ├── channels.type.ts
-    │   │   ├── client-ipc.ts
-    │   │   ├── get-vscode-api.ts
-    │   │   └── server-ipc.ts
-    │   ├── types/
-    │   │   ├── file-node.ts
-    │   │   └── vscode-webview.d.ts
-    │   └── utils/
-    │       └── view-html.ts
-    │
-    └── extension.ts
-```
-</file>
-
-<file path="src/Artifacts/A6. DCE - Initial Scaffolding Deployment Script.md">
-# Artifact A6: DCE - Initial Scaffolding Deployment Script
-# Date Created: Cycle 3
-# Author: AI Model
-# Updated on: Cycle 10 (Fix problemMatcher in tasks.json to resolve F5 launch error)
-
-- **Description:** Contains a Node.js script that, when executed, creates the entire initial directory structure and files for the DCE extension project.
-- **Tags:** deployment, script, scaffolding, bootstrap, nodejs, automation
-
-## 1. Overview
-
-This artifact contains the `deploy_scaffold.js` script. Its purpose is to automate the creation of the initial project structure for the Data Curation Environment (DCE) VS Code extension. This eliminates the need for manual file creation and ensures a consistent setup based on our agreed-upon architecture, including the necessary configurations for debugging.
-
-## 2. How to Use
-
-1.  Save the code below as `deploy_scaffold.js` in your project's root directory (e.g., `C:\Projects\DCE\`).
-2.  Open a terminal in that directory.
-3.  Run the script using Node.js: `node deploy_scaffold.js`
-4.  The script will create all the necessary directories and files, including the `.vscode` folder with `launch.json` and a corrected `tasks.json`, logging its progress to the console.
-
-## 3. Script: `deploy_scaffold.js`
-
-```javascript
-const fs = require('fs').promises;
-const path = require('path');
-
-// --- File Content Definitions ---
-
-const filesToCreate = [
-    {
-        path: 'package.json',
-        content: `{
-    "name": "data-curation-environment",
-    "publisher": "DCE-Developer",
-    "displayName": "Data Curation Environment",
-    "description": "A VS Code extension for curating context for Large Language Models.",
-    "version": "0.0.1",
-    "engines": {
-        "vscode": "^1.90.0"
-    },
-    "categories": [
-        "Other"
-    ],
-    "activationEvents": [
-        "onView:viewType.sidebar.contextChooser"
-    ],
-    "main": "./dist/extension.js",
-    "contributes": {
-        "viewsContainers": {
-            "activitybar": [
-                {
-                    "id": "data-curation-environment",
-                    "title": "Data Curation",
-                    "icon": "public/spiral.svg"
-                }
-            ]
-        },
-        "views": {
-            "data-curation-environment": [
-                {
-                    "type": "webview",
-                    "id": "viewType.sidebar.contextChooser",
-                    "name": "Context Chooser"
-                }
-            ]
-        }
-    },
-    "scripts": {
-        "vscode:prepublish": "npm run package",
-        "compile": "webpack",
-        "watch": "webpack --watch",
-        "package": "webpack --mode production --devtool hidden-source-map",
-        "lint": "eslint src --ext ts"
-    },
-    "devDependencies": {
-        "@types/node": "18.x",
-        "@types/vscode": "^1.90.0",
-        "@typescript-eslint/eslint-plugin": "^7.7.1",
-        "@typescript-eslint/parser": "^7.7.1",
-        "eslint": "^8.57.0",
-        "ts-loader": "^9.5.1",
-        "typescript": "^5.4.5",
-        "webpack": "^5.91.0",
-        "webpack-cli": "^5.1.4",
-        "copy-webpack-plugin": "^12.0.2",
-        "style-loader": "^4.0.0",
-        "css-loader": "^7.1.2",
-        "sass-loader": "^16.0.1",
-        "sass": "^1.78.0",
-        "postcss-loader": "^8.1.1",
-        "babel-loader": "^9.1.3",
-        "@babel/preset-react": "^7.24.7",
-        "@babel/preset-typescript": "^7.24.7",
-        "process": "^0.11.10"
-    },
-    "dependencies": {
-        "react": "^18.3.1",
-        "react-dom": "^18.3.1",
-        "react-icons": "^5.3.0",
-        "rxjs": "^7.8.1",
-        "reflect-metadata": "^0.2.2"
-    }
-}`
-    },
-    {
-        path: 'tsconfig.json',
-        content: `{
-    "compilerOptions": {
-        "module": "esnext",
-        "moduleResolution": "node",
-        "target": "ESNext",
-        "lib": ["ES2022", "DOM"],
-        "jsx": "react",
-        "sourceMap": true,
-        "rootDir": ".",
-        "strict": false,
-        "baseUrl": ".",
-        "paths": {
-            "@/*": ["src/*"]
-        },
-        "experimentalDecorators": true,
-        "allowSyntheticDefaultImports": true
-    },
-    "include": ["src/**/*"]
-}`
-    },
-    {
-        path: 'webpack.config.js',
-        content: `const path = require('path');
-const CopyPlugin = require("copy-webpack-plugin");
-const webpack = require('webpack');
-
-/** @type {import('webpack').Configuration} */
-const config = {
-    target: 'node',
-    mode: 'none',
-    entry: {
-        extension: './src/extension.ts',
-        contextChooserView: './src/client/views/context-chooser.view/view.tsx',
-    },
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: '[name].js',
-        libraryTarget: 'commonjs2'
-    },
-    externals: {
-        vscode: 'commonjs vscode'
-    },
-    resolve: {
-        extensions: ['.ts', '.js', '.tsx', '.jsx'],
-        alias: {
-            "@": path.resolve(__dirname, 'src'),
-        }
-    },
-    module: {
-        rules: [
-            {
-                test: /\\.ts$/,
-                exclude: /node_modules/,
-                use: [{ loader: 'ts-loader' }]
-            },
-            {
-                test: /\\.?ts.?(x)$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: "babel-loader",
-                    options: {
-                        presets: ['@babel/preset-react', '@babel/preset-typescript']
-                    }
-                }
-            },
-            {
-                test: /\\.s[ac]ss$/i,
-                use: ["style-loader", "css-loader", "sass-loader", "postcss-loader"],
-            },
-        ]
-    },
-    plugins: [
-        new CopyPlugin({
-            patterns: [{ from: "public", to: "public" }],
-        }),
-        new webpack.ProvidePlugin({
-            process: 'process/browser',
-        }),
-    ],
-    devtool: 'nosources-source-map',
-    infrastructureLogging: {
-        level: "log",
-    },
-};
-module.exports = [config];`
-    },
-    {
-        path: '.gitignore',
-        content: `node_modules
-dist
-out
-*.vsix
-.vscode-test/
-.vscode/`
-    },
-    {
-        path: '.vscodeignore',
-        content: `node_modules
-src
-.gitignore
-webpack.config.js
-tsconfig.json
-**/*.map
-**/*.ts`
-    },
-    {
-        path: '.vscode/launch.json',
-        content: `{
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Run Extension",
-            "type": "extensionHost",
-            "request": "launch",
-            "args": ["--extensionDevelopmentPath=\${workspaceFolder}"],
-            "outFiles": ["\${workspaceFolder}/dist/**/*.js"],
-            "preLaunchTask": "npm: watch"
-        }
-    ]
-}`
-    },
-    {
-        path: '.vscode/tasks.json',
-        content: `{
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "type": "npm",
-            "script": "watch",
-            "isBackground": true,
-            "presentation": {
-                "reveal": "never"
-            },
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "problemMatcher": {
-                "base": "$ts-webpack-watch",
-                "background": {
-                    "activeOnStart": true,
-                    "beginsPattern": "Compilation starting...",
-                    "endsPattern": "compiled successfully"
-                }
-            }
-        }
-    ]
-}`
-    },
-    {
-        path: 'public/spiral.svg',
-        content: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-    <g id="Page-1" stroke="none" fill="none" fill-rule="evenodd">
-        <g id="dep" transform="translate(4, 6)">
-            <path d="M100 100 m 0 -80 a 80 80 0 0 1 0 160 a 70 70 0 0 1 0 -140 a 60 60 0 0 1 0 120 a 50 50 0 0 1 0 -100 a 40 40 0 0 1 0 80 a 30 30 0 0 1 0 -60 a 20 20 0 0 1 0 40"
-                fill="none" stroke="white" stroke-width="8" id="Shape" />
-        </g>
-    </g>
-</svg>`
-    },
-    {
-        path: 'src/extension.ts',
-        content: `import * as vscode from "vscode";
-import { registerViews } from "./client/views";
-import { registerCommands } from "./backend/commands/register-commands";
-import { Services } from "./backend/services/services";
-
-let globalContext: vscode.ExtensionContext | null = null;
-
-export function activate(context: vscode.ExtensionContext) {
-    console.log('Congratulations, your extension "Data Curation Environment" is now active!');
-    globalContext = context;
-
-    Services.initialize();
-    registerCommands(context);
-    registerViews(context);
-}
-
-export function getContext() {
-    if (!globalContext) {
-        throw new Error("Extension context not available.");
-    }
-    return globalContext;
-}
-
-export function deactivate() {}`
-    },
-    {
-        path: 'src/common/types/file-node.ts',
-        content: `export interface FileNode {
-    name: string;
-    absolutePath: string;
-    children?: FileNode[];
-}`
-    },
-    {
-        path: 'src/common/types/vscode-webview.d.ts',
-        content: `export interface WebviewApi<StateType> {
-    postMessage(message: unknown): void;
-    getState(): StateType | undefined;
-    setState<T extends StateType | undefined>(newState: T): T;
-}
-
-declare global {
-    function acquireVsCodeApi<StateType = unknown>(): WebviewApi<StateType>;
-}`
-    },
-    {
-        path: 'src/common/ipc/channels.enum.ts',
-        content: `export enum ClientToServerChannel {
-    RequestFlattenContext = "clientToServer.requestFlattenContext",
-    RequestWorkspaceFiles = "clientToServer.requestWorkspaceFiles",
-}
-
-export enum ServerToClientChannel {
-    SendWorkspaceFiles = "serverToClient.sendWorkspaceFiles",
-}`
-    },
-    {
-        path: 'src/common/ipc/channels.type.ts',
-        content: `import { FileNode } from "@/common/types/file-node";
-import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
-
-export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel> =
-    T extends ClientToServerChannel.RequestFlattenContext ? { selectedPaths: string[] } :
-    T extends ClientToServerChannel.RequestWorkspaceFiles ? {} :
-    T extends ServerToClientChannel.SendWorkspaceFiles ? { files: FileNode[] } :
-    never;`
-    },
-    {
-        path: 'src/common/ipc/get-vscode-api.ts',
-        content: `import { WebviewApi } from "../types/vscode-webview";
-
-let vscode: WebviewApi<unknown> | null = null;
-
-const getVscode = () => {
-    if (!vscode) {
-        vscode = acquireVsCodeApi();
-    }
-    return vscode;
-};
-
-export default getVscode;`
-    },
-    {
-        path: 'src/common/ipc/client-ipc.ts',
-        content: `import getVscode from "./get-vscode-api";
-import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
-import { ChannelBody } from "./channels.type";
-
-export class ClientPostMessageManager {
-    private static _instance?: ClientPostMessageManager;
-    private _listeners: {
-        channel: ServerToClientChannel,
-        callback: (body: ChannelBody<ServerToClientChannel>) => void
-    }[];
-
-    private constructor() {
-        this._listeners = [];
-        window.addEventListener('message', (event: MessageEvent) => {
-            const data = event.data;
-            this._listeners.forEach((listener) => {
-                if (listener.channel === data.channel) {
-                    listener.callback(data.body);
-                }
-            });
-        });
-    }
-
-    static getInstance(): ClientPostMessageManager {
-        if (!ClientPostMessageManager._instance) {
-            ClientPostMessageManager._instance = new ClientPostMessageManager();
-        }
-        return ClientPostMessageManager._instance;
-    }
-
-    sendToServer<T extends ClientToServerChannel>(channel: T, body: ChannelBody<T>): void {
-        getVscode().postMessage({ channel, body });
-    }
-
-    onServerMessage<T extends ServerToClientChannel>(channel: T, callback: (body: ChannelBody<T>) => void): void {
-        this._listeners.push({ channel, callback: callback as any });
-    }
-}`
-    },
-    {
-        path: 'src/common/ipc/server-ipc.ts',
-        content: `import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
-import { ChannelBody } from "./channels.type";
-
-export class ServerPostMessageManager {
-    private static _instance?: ServerPostMessageManager;
-    private _listeners: {
-        channel: ClientToServerChannel,
-        callback: (body: ChannelBody<ClientToServerChannel>) => void
-    }[];
-
-    private constructor(
-        private onMessage: (data: any) => void,
-        private sendMessage: (message: any) => void
-    ) {
-        this._listeners = [];
-        this.onMessage((data: any) => {
-            this._listeners.forEach((listener) => {
-                if (listener.channel === data.channel) {
-                    listener.callback(data.body);
-                }
-            });
-        });
-    }
-
-    static getInstance(onMessage?: (data: any) => void, sendMessage?: (message: any) => void) {
-        if (onMessage && sendMessage) {
-            ServerPostMessageManager._instance = new ServerPostMessageManager(onMessage, sendMessage);
-        }
-        if (!ServerPostMessageManager._instance) {
-            throw new Error("ServerPostMessageManager not initialized");
-        }
-        return ServerPostMessageManager._instance;
-    }
-
-    sendToClient<T extends ServerToClientChannel>(channel: T, body: ChannelBody<T>): void {
-        this.sendMessage({ channel, body });
-    }
-
-    onClientMessage<T extends ClientToServerChannel>(channel: T, callback: (body: ChannelBody<T>) => void): void {
-        this._listeners.push({ channel, callback: callback as any });
-    }
-}`
-    },
-    {
-        path: 'src/common/utils/view-html.ts',
-        content: `import * as vscode from "vscode";
-
-export function getViewHtml({ webview, nonce, scriptUri }: { webview: vscode.Webview; nonce: string; scriptUri: string; }): string {
-    return \`<!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src \${webview.cspSource} 'unsafe-inline'; script-src 'nonce-\${nonce}';">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        </head>
-        <body>
-            <div id="root"></div>
-            <script nonce="\${nonce}" src="\${scriptUri}"></script>
-        </body>
-        </html>\`;
-}
-
-function getNonce() {
-    let text = "";
-    const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    for (let i = 0; i < 32; i++) {
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    return text;
-}
-export { getNonce };`
-    },
-    {
-        path: 'src/client/views/index.ts',
-        content: `import { viewConfig as contextChooserViewConfig } from "./context-chooser.view";
-import * as vscode from "vscode";
-import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
-import { getNonce, getViewHtml } from "@/common/utils/view-html";
-
-export const views = [contextChooserViewConfig];
-export const serverIPCs: Record<string, ServerPostMessageManager> = {};
-
-export function registerViews(context: vscode.ExtensionContext) {
-    views.forEach((viewConfig) => {
-        context.subscriptions.push(
-            vscode.window.registerWebviewViewProvider(viewConfig.type, {
-                resolveWebviewView: (webviewView) => {
-                    webviewView.webview.options = {
-                        enableScripts: true,
-                        localResourceRoots: [context.extensionUri],
-                    };
-                    const nonce = getNonce();
-                    webviewView.webview.html = getViewHtml({
-                        webview: webviewView.webview,
-                        nonce,
-                        scriptUri: webviewView.webview.asWebviewUri(vscode.Uri.joinPath(context.extensionUri, "dist", viewConfig.entry)).toString(),
-                    });
-                    const serverIpc = ServerPostMessageManager.getInstance(
-                        webviewView.webview.onDidReceiveMessage,
-                        (data: any) => webviewView.webview.postMessage(data)
-                    );
-                    serverIPCs[viewConfig.type] = serverIpc;
-                    viewConfig.handleMessage(serverIpc);
-                },
-            })
-        );
-    });
-}`
-    },
-    {
-        path: 'src/client/views/context-chooser.view/index.ts',
-        content: `import { onMessage } from "./on-message";
-
-export const viewConfig = {
-    entry: "contextChooserView.js",
-    type: "viewType.sidebar.contextChooser",
-    handleMessage: onMessage,
-};`
-    },
-    {
-        path: 'src/client/views/context-chooser.view/on-message.ts',
-        content: `import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
-import { ClientToServerChannel } from "@/common/ipc/channels.enum";
-import { Services } from "@/backend/services/services";
-
-export function onMessage(serverIpc: ServerPostMessageManager) {
-    const fsService = Services.fsService;
-    const flattenerService = Services.flattenerService;
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestWorkspaceFiles, () =>
-        fsService.handleWorkspaceFilesRequest(serverIpc)
-    );
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestFlattenContext, (data) => {
-        console.log("Flattening context for paths:", data.selectedPaths);
-        flattenerService.flatten(data.selectedPaths);
-    });
-}`
-    },
-    {
-        path: 'src/client/views/context-chooser.view/view.tsx',
-        content: `import * as React from 'react';
-import * as ReactDOM from 'react-dom/client';
-import './view.scss';
-import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
-import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
-import { FileNode } from '@/common/types/file-node';
-import FileTree from '../../components/file-tree/FileTree';
-import { useState, useEffect } from 'react';
-
-const App = () => {
-    const [files, setFiles] = useState<FileNode[]>([]);
-    const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
-    const [activeFile, setActiveFile] = useState<string | undefined>();
-    
-    const clientIpc = ClientPostMessageManager.getInstance();
-
-    useEffect(() => {
-        clientIpc.sendToServer(ClientToServerChannel.RequestWorkspaceFiles, {});
-
-        const handleFileResponse = ({ files: receivedFiles }: { files: FileNode[] }) => {
-            setFiles(receivedFiles);
-        };
-        clientIpc.onServerMessage(ServerToClientChannel.SendWorkspaceFiles, handleFileResponse);
-
-    }, [clientIpc]);
-
-    const handleFileClick = (filePath: string) => {
-        setActiveFile(filePath);
-    };
-
-    const updateSelectedFiles = (newSelectedFiles: string[]) => {
-        setSelectedFiles(newSelectedFiles);
-    };
-
-    const handleFlattenClick = () => {
-        clientIpc.sendToServer(ClientToServerChannel.RequestFlattenContext, { selectedPaths: selectedFiles });
-    };
-
-    return (
-        <div className="view-container">
-            <div className="view-header">
-                <button className="flatten-button" onClick={handleFlattenClick}>
-                    Flatten Context
-                </button>
-            </div>
-            <div className="file-tree-container">
-                {files.length > 0 ? (
-                    files.map((rootNode, index) => (
-                        <FileTree
-                            key={index}
-                            data={[rootNode]}
-                            onFileClick={handleFileClick}
-                            selectedFiles={selectedFiles}
-                            updateSelectedFiles={updateSelectedFiles}
-                            activeFile={activeFile}
-                        />
-                    ))
-                ) : (
-                    <div className="loading-message">Loading file tree...</div>
-                )}
-            </div>
-        </div>
-    );
-};
-
-const root = ReactDOM.createRoot(document.getElementById('root')!);
-root.render(<App />);`
-    },
-    {
-        path: 'src/client/views/context-chooser.view/view.scss',
-        content: `body {
-    padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-size: 13px;
-    color: var(--vscode-editor-foreground);
-    background-color: var(--vscode-sideBar-background);
-}
-
-.view-container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-}
-
-.view-header {
-    padding: 8px;
-    border-bottom: 1px solid var(--vscode-panel-border);
-}
-
-.flatten-button {
-    width: 100%;
-    padding: 6px;
-    border: 1px solid var(--vscode-button-border, var(--vscode-focusBorder));
-    background-color: var(--vscode-button-background);
-    color: var(--vscode-button-foreground);
-    cursor: pointer;
-    border-radius: 2px;
-}
-
-.flatten-button:hover {
-    background-color: var(--vscode-button-hoverBackground);
-}
-
-.file-tree-container {
-    padding: 5px;
-    flex-grow: 1;
-    overflow-y: auto;
-}
-
-.loading-message {
-    padding: 8px;
-    color: var(--vscode-descriptionForeground);
-}
-
-.tree-view ul {
-    padding-left: 0;
-    list-style-type: none;
-    margin: 0;
-}
-
-.treenode-li {
-    padding-left: 20px;
-    position: relative;
-}
-
-.treenode-item-wrapper {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    padding: 1px 4px;
-    border-radius: 3px;
-}
-
-.treenode-item-wrapper:hover {
-    background-color: var(--vscode-list-hoverBackground);
-}
-
-.treenode-chevron {
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%) rotate(0deg);
-    transition: transform 0.1s ease-in-out;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 20px;
-    height: 20px;
-}
-
-.treenode-chevron.expanded {
-    transform: translateY(-50%) rotate(90deg);
-}
-
-.file-item {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding: 1px;
-}
-
-.file-item.active {
-    background-color: var(--vscode-list-activeSelectionBackground);
-    color: var(--vscode-list-activeSelectionForeground);
-}
-
-.file-checkbox {
-    margin-right: 6px;
-    cursor: pointer;
-}
-
-.file-name {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}`
-    },
-    {
-        path: 'src/backend/commands/commands.ts',
-        content: `// No commands are needed for now, but we'll keep the file for future use.
-export const commands = [];`
-    },
-    {
-        path: 'src/backend/commands/register-commands.ts',
-        content: `import * as vscode from "vscode";
-import { commands } from "./commands";
-
-export function registerCommands(context: vscode.ExtensionContext) {
-    commands.forEach(({ commandId, callback }) => {
-        let disposable = vscode.commands.registerCommand(commandId, callback);
-        context.subscriptions.push(disposable);
-    });
-}`
-    },
-    {
-        path: 'src/backend/services/services.ts',
-        content: `import "reflect-metadata";
-import { FSService } from "./fs.service";
-import { FlattenerService } from "./flattener.service";
-
-// A simple container for services
-class ServiceContainer {
-    public fsService = new FSService();
-    public flattenerService = new FlattenerService();
-    
-    public initialize() {
-        // This can be used for service initialization logic in the future
-    }
-}
-
-export const Services = new ServiceContainer();`
-    },
-    {
-        path: 'src/backend/services/fs.service.ts',
-        content: `import * as vscode from "vscode";
-import * as path from "path";
-import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
-import { ServerToClientChannel } from "@/common/ipc/channels.enum";
-import { FileNode } from "@/common/types/file-node";
-
-export class FSService {
-    public async handleWorkspaceFilesRequest(serverIpc: ServerPostMessageManager) {
-        const workspaceFolders = vscode.workspace.workspaceFolders;
-        if (!workspaceFolders || workspaceFolders.length === 0) {
-            serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: [] });
-            return;
-        }
-        
-        // For simplicity, we'll just use the first workspace folder.
-        const rootUri = workspaceFolders.uri;
-        if (!rootUri) {
-            // This case is unlikely if the above check passes, but good for safety.
-            serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: [] });
-            return;
-        }
-        const rootPath = rootUri.fsPath;
-        const files = await vscode.workspace.findFiles("**/*");
-        const fileTree = this.createFileTree(rootPath, files);
-
-        serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: [fileTree] });
-    }
-
-    private createFileTree(rootPath: string, files: vscode.Uri[]): FileNode {
-        const rootNode: FileNode = {
-            name: path.basename(rootPath),
-            absolutePath: rootPath,
-            children: []
-        };
-
-        for (const file of files) {
-            const relativePath = path.relative(rootPath, file.fsPath);
-            const parts = relativePath.split(path.sep);
-            let currentNode = rootNode;
-
-            for (let i = 0; i < parts.length; i++) {
-                const part = parts[i];
-                let childNode = currentNode.children?.find(c => c.name === part);
-
-                if (!childNode) {
-                    const newPath = path.join(currentNode.absolutePath, part);
-                    childNode = { name: part, absolutePath: newPath };
-                    if (i < parts.length - 1) {
-                        childNode.children = [];
-                    }
-                    currentNode.children?.push(childNode);
-                }
-                currentNode = childNode;
-            }
-        }
-        return rootNode;
-    }
-}`
-    },
-    {
-        path: 'src/client/components/Checkbox.tsx',
-        content: `import React from "react";
-import { useEffect, useRef } from "react";
-
-interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onChange'> {
-    checked: boolean;
-    indeterminate?: boolean;
-    onChange: (checked: boolean, event: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
-const Checkbox = (props: CheckboxProps) => {
-    const { checked, onChange, indeterminate, ...rest } = props;
-    const cRef = useRef<any>(null);
-
-    useEffect(() => {
-        if (cRef.current) {
-            cRef.current.indeterminate = indeterminate;
-        }
-    }, [cRef, indeterminate]);
-
-    return (
-        <input type="checkbox" ref={cRef} checked={checked} onChange={(e) => onChange(e.target.checked, e)} {...rest} />
-    );
-};
-
-export default Checkbox;`
-    },
-        {
-        path: 'src/client/components/file-tree/FileTree.tsx',
-        content: `import React, { useEffect, useState } from 'react';
-import TreeView from '../tree-view/TreeView';
-import { FileNode } from '@/common/types/file-node';
-import { addRemovePathInSelectedFiles, getFileNodeByPath } from './FileTree.utils';
-import Checkbox from '../Checkbox';
-
-interface FileTreeProps {
-  data: FileNode[];
-  onFileClick?: (filePath: string) => void;
-  selectedFiles: string[];
-  activeFile?: string;
-  updateSelectedFiles: (selectedFiles: string[]) => void;
-}
-
-const FileTree: React.FC<FileTreeProps> = ({
-  data,
-  onFileClick,
-  selectedFiles,
-  activeFile,
-  updateSelectedFiles,
-}) => {
-
-  const rootNode = data.length > 0 ? data : null;
-
-  const [expandedNodes, setExpandedNodes] = useState<string[]>(rootNode ? [rootNode.absolutePath] : []);
-
-  useEffect(() => {
-    const toExpand = new Set<string>();
-    selectedFiles?.forEach((selectedFile) => {
-        const node = getFileNodeByPath(data, selectedFile);
-        if (node && node.children) {
-            toExpand.add(node.absolutePath);
-        }
-    });
-
-    setExpandedNodes(prevExpandedNodes => [...new Set([...prevExpandedNodes, ...Array.from(toExpand)])]);
-  }, [selectedFiles, data]);
-
-  const handleNodeClick = (e: React.MouseEvent<HTMLElement, MouseEvent> | undefined, node: FileNode) => {
-    if (e && (e.target as HTMLElement)?.closest('.file-checkbox')) {
-        return;
-    }
-    onFileClick && onFileClick(node.absolutePath);
-  };
-
-  const renderCheckbox = (path: string) => {
-    const isSelected = selectedFiles.includes(path);
-    const hasSelectedAncestor = selectedFiles.some(ancestor => path.startsWith(ancestor) && path !== ancestor);
-    const hasSelectedDescendant = selectedFiles.some(descendant => descendant.startsWith(path) && descendant !== path);
-    
-    return (
-      <Checkbox
-        className="file-checkbox"
-        indeterminate={!isSelected && !hasSelectedAncestor && hasSelectedDescendant}
-        checked={isSelected || hasSelectedAncestor}
-        onChange={(_, e) => handleFileCheckboxChange(e, path)}
-      />
-    );
-  };
-
-  const handleFileCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>, path: string) => {
-    e.stopPropagation();
-    e.preventDefault();
-    updateSelectedFiles(addRemovePathInSelectedFiles(data, path, selectedFiles));
-  };
-
-  const renderFileNodeContent = (node: FileNode) => {
-    const isActive = activeFile === node.absolutePath;
-    const isDirectory = Array.isArray(node.children);
-
-    return (
-      <div
-        className={\`file-item \${isActive ? 'active' : ''} \${isDirectory ? 'directory' : 'file'}\`}
-        onClick={(e) => handleNodeClick(e, node)}
-      >
-        {renderCheckbox(node.absolutePath)}
-        <span className="file-name">{node.name}</span>
-      </div>
-    );
-  };
-
-  return (
-    <div className="file-tree">
-      <TreeView 
-        data={data} 
-        renderNodeContent={renderFileNodeContent} 
-      />
-    </div>
-  );
-};
-
-export default FileTree;`
-    },
-    {
-        path: 'src/client/components/file-tree/FileTree.utils.ts',
-        content: `import { FileNode } from "@/common/types/file-node";
-
-function getAllDescendantPaths(node: FileNode): string[] {
-    let paths: string[] = [];
-    if (node.children) {
-        for (const child of node.children) {
-            paths.push(child.absolutePath);
-            paths = paths.concat(getAllDescendantPaths(child));
-        }
-    }
-    return paths;
-}
-
-export const addRemovePathInSelectedFiles = (
-  fileTree: FileNode[],
-  path: string,
-  selectedFiles: string[]
-): string[] => {
-    const node = getFileNodeByPath(fileTree, path);
-    if (!node) return selectedFiles;
-
-    const descendantPaths = getAllDescendantPaths(node);
-    const isSelected = selectedFiles.includes(path);
-    const hasSelectedAncestor = selectedFiles.some(ancestor => path.startsWith(ancestor) && path !== ancestor);
-    
-    let newSelectedFiles = [...selectedFiles];
-
-    if (isSelected) {
-        // Uncheck: remove this path and all its descendants
-        newSelectedFiles = newSelectedFiles.filter(p => p !== path && !descendantPaths.includes(p));
-    } else if (hasSelectedAncestor) {
-        // Uncheck a child of an already checked folder.
-        // 1. Remove the ancestor.
-        // 2. Add all children of the ancestor EXCEPT the one that was unchecked.
-        const ancestor = selectedFiles.find(ancestor => path.startsWith(ancestor) && path !== ancestor)!;
-        const ancestorNode = getFileNodeByPath(fileTree, ancestor)!;
-        
-        newSelectedFiles = newSelectedFiles.filter(p => p !== ancestor);
-        
-        const siblingsAndCousins = getAllDescendantPaths(ancestorNode).filter(p => p !== path && !p.startsWith(path));
-        newSelectedFiles.push(...siblingsAndCousins);
-
-    } else {
-        // Check: remove all descendants that might be individually selected, then add the parent path.
-        newSelectedFiles = newSelectedFiles.filter(p => !p.startsWith(path));
-        newSelectedFiles.push(path);
-    }
-  
-  return [...new Set(newSelectedFiles)]; // Remove duplicates for cleanliness
-};
-
-export const getFileNodeByPath = (
-  fileNodes: FileNode[],
-  filePath: string
-): FileNode | null => {
-    for (const rootNode of fileNodes) {
-        const found = findNode(rootNode, filePath);
-        if (found) return found;
-    }
-    return null;
-};
-
-function findNode(node: FileNode, filePath: string): FileNode | null {
-    if (node.absolutePath === filePath) {
-        return node;
-    }
-    if (node.children && filePath.startsWith(node.absolutePath)) {
-        for (const child of node.children) {
-            const found = findNode(child, filePath);
-            if(found) return found;
-        }
-    }
-    return null;
-}`
-    },
-    {
-        path: 'src/client/components/tree-view/TreeView.tsx',
-        content: `import React, { useState } from 'react';
-import { MdChevronRight } from 'react-icons/md';
-import { getExpandedNodes } from './TreeView.utils';
-
-export interface TreeNode {
-    name: string;
-    absolutePath: string;
-    children?: TreeNode[];
-    isExpanded?: boolean;
-    [key: string]: any;
-}
-
-interface TreeViewProps {
-    data: TreeNode[];
-    onNodeClick?: (node: TreeNode) => void;
-    renderNodeContent?: (node: TreeNode) => React.ReactNode;
-}
-
-const TreeView: React.FC<TreeViewProps> = ({ data, onNodeClick, renderNodeContent }) => {
-    const [expandedNodes, setExpandedNodes] = useState<string[]>(getExpandedNodes(data));
-
-    const handleNodeClick = (node: TreeNode) => {
-        if (node.children && node.children.length > 0) {
-            setExpandedNodes((prevExpandedNodes) => {
-                const isExpanded = prevExpandedNodes.includes(node.absolutePath);
-                return isExpanded
-                    ? prevExpandedNodes.filter((n) => n !== node.absolutePath)
-                    : [...prevExpandedNodes, node.absolutePath];
-            });
-        }
-        onNodeClick && onNodeClick(node);
-    };
-
-    const renderTreeNodes = (nodes: TreeNode[]) => {
-        return nodes.map((node) => {
-            const isExpanded = expandedNodes.includes(node.absolutePath);
-            const isDirectory = !!(node.children && node.children.length > 0);
-
-            return (
-                <li key={node.absolutePath} className="treenode-li">
-                    <div
-                        onClick={() => handleNodeClick(node)}
-                        className={\`treenode-item-wrapper\`}
-                    >
-                        {isDirectory && (
-                            <span
-                                className={\`treenode-chevron \${isExpanded ? 'expanded' : ''}\`}
-                            >
-                                <MdChevronRight />
-                            </span>
-                        )}
-                        {renderNodeContent ? renderNodeContent(node) : node.name}
-                    </div>
-                    {isDirectory && isExpanded && (
-                        <ul className="treenode-children">{renderTreeNodes(node.children)}</ul>
-                    )}
-                </li>
-            );
-        });
-    };
-
-    return (
-        <div className="tree-view">
-            <ul>{renderTreeNodes(data)}</ul>
-        </div>
-    );
-};
-
-export default TreeView;`
-    },
-    {
-        path: 'src/client/components/tree-view/TreeView.utils.ts',
-        content: `import { TreeNode } from "./TreeView";
-
-export const getExpandedNodes = (data: TreeNode[]): string[] => {
-  return data.reduce((acc: string[], node) => {
-    if (node.isExpanded) {
-      acc.push(node.absolutePath);
-    }
-    if (node.children) {
-      acc.push(...getExpandedNodes(node.children));
-    }
-    return acc;
-  }, []);
-};`
-    },
-    {
-        path: 'src/backend/services/flattener.service.ts',
-        content: `import * as vscode from 'vscode';
-import * as path from 'path';
-import * as fs from 'fs/promises';
-
-interface FileStats {
-    filePath: string;
-    lines: number;
-    characters: number;
-    tokens: number;
-    content: string;
-    error: string | null;
-}
-
-export class FlattenerService {
-
-    public async flatten(selectedPaths: string[]) {
-        const workspaceFolders = vscode.workspace.workspaceFolders;
-        if (!workspaceFolders || workspaceFolders.length === 0) {
-            vscode.window.showErrorMessage("Cannot flatten context: No workspace folder is open.");
-            return;
-        }
-        if (selectedPaths.length === 0) {
-            vscode.window.showWarningMessage("Cannot flatten context: No files or folders are selected.");
-            return;
-        }
-
-        const rootPath = workspaceFolders.uri.fsPath;
-        const outputFilePath = path.join(rootPath, 'flattened_repo.md');
-
-        try {
-            const allFilePaths = await this.expandDirectories(selectedPaths);
-            const uniqueFilePaths = [...new Set(allFilePaths)];
-
-            const fileStatsPromises = uniqueFilePaths.map(filePath => this.getFileStatsAndContent(filePath));
-            const results = await Promise.all(fileStatsPromises);
-
-            const outputContent = this.generateOutputContent(results, rootPath, outputFilePath);
-
-            await fs.writeFile(outputFilePath, outputContent, 'utf-8');
-            vscode.window.showInformationMessage(\`Successfully flattened \${results.filter(r => !r.error).length} files to flattened_repo.md.\`);
-
-        } catch (error: any) {
-            vscode.window.showErrorMessage(\`Failed to flatten context: \${error.message}\`);
-            console.error(error);
-        }
-    }
-
-    private async expandDirectories(paths: string[]): Promise<string[]> {
-        const allFiles: string[] = [];
-        for (const p of paths) {
-            try {
-                const stats = await fs.stat(p);
-                if (stats.isDirectory()) {
-                    allFiles.push(...await this.getAllFilesRecursive(p));
-                } else {
-                    allFiles.push(p);
-                }
-            } catch (e) {
-                console.warn(\`Could not stat path \${p}, skipping.\`);
-            }
-        }
-        return allFiles;
-    }
-
-    private async getAllFilesRecursive(dirPath: string): Promise<string[]> {
-        let files: string[] = [];
-        try {
-            const entries = await fs.readdir(dirPath, { withFileTypes: true });
-            for (const entry of entries) {
-                const fullPath = path.join(dirPath, entry.name);
-                if (entry.isDirectory()) {
-                    files = files.concat(await this.getAllFilesRecursive(fullPath));
-                } else {
-                    files.push(fullPath);
-                }
-            }
-        } catch (e) {
-            console.error(\`Error reading directory \${dirPath}:\`, e);
-        }
-        return files;
-    }
-
-    private async getFileStatsAndContent(filePath: string): Promise<FileStats> {
-        try {
-            const content = await fs.readFile(filePath, 'utf-8');
-            const lines = content.split('\\n').length;
-            const characters = content.length;
-            const tokens = Math.ceil(characters / 4);
-            return { filePath, lines, characters, tokens, content, error: null };
-        } catch (error: any) {
-            return { filePath, lines: 0, characters: 0, tokens: 0, content: '', error: error.message };
-        }
-    }
-
-    private generateOutputContent(results: FileStats[], rootDir: string, outputFilename: string): string {
-        let totalLines = 0;
-        let totalCharacters = 0;
-        let totalTokens = 0;
-        let errorCount = 0;
-        const validResults = results.filter(r => !r.error);
-
-        for (const res of validResults) {
-            totalLines += res.lines;
-            totalCharacters += res.characters;
-            totalTokens += res.tokens;
-        }
-
-        let output = \`<!--\\n\`;
-        output += \`  File: \${path.basename(outputFilename)}\\n\`;
-        output += \`  Source Directory: \${rootDir}\\n\`;
-        output += \`  Date Generated: \${new Date().toISOString()}\\n\`;
-        output += \`  ---\\n\`;
-        output += \`  Total Files: \${validResults.length}\\n\`;
-        if (errorCount > 0) {
-            output += \`  Files with Errors: \${errorCount}\\n\`;
-        }
-        output += \`  Total Lines: \${totalLines}\\n\`;
-        output += \`  Total Characters: \${totalCharacters}\\n\`;
-        output += \`  Approx. Tokens: \${totalTokens}\\n\`;
-        output += \`-->\\n\\n\`;
-
-        const top10 = [...validResults].sort((a, b) => b.tokens - a.tokens).slice(0, 10);
-
-        output += \`<!-- Top 10 Files by Token Count -->\\n\`;
-        top10.forEach((r, i) => {
-            output += \`\${i + 1}. \${path.relative(rootDir, r.filePath)} (\${r.tokens} tokens)\\n\`;
-        });
-        output += \`\\n\`;
-
-        output += \`<!-- Full File List -->\\n\`;
-        results.forEach((r, i) => {
-            const relativePath = path.relative(rootDir, r.filePath);
-            if (r.error) {
-                output += \`\${i + 1}. \${relativePath} - ERROR: \${r.error}\\n\`;
-            } else {
-                output += \`\${i + 1}. \${relativePath} - Lines: \${r.lines} - Chars: \${r.characters} - Tokens: \${r.tokens}\\n\`;
-            }
-        });
-        output += \`\\n\`;
-
-        for (const { filePath, content, error } of results) {
-            const relativePath = path.relative(rootDir, filePath).replace(/\\\\/g, '/');
-            output += \`<file path="\${relativePath}">\\n\`;
-            if (error) {
-                output += \`Error reading file: \${error}\\n\`;
-            } else {
-                output += content;
-            }
-            if (!content.endsWith('\\n')) {
-                output += '\\n';
-            }
-            output += \`</file>\\n\\n\`;
-        }
-        return output;
-    }
-}`
-    }
-];
-
-// --- Main Execution ---
-
-async function deployScaffold() {
-    console.log('Starting scaffold deployment...');
-    const rootDir = process.cwd();
-
-    for (const file of filesToCreate) {
-        const fullPath = path.join(rootDir, file.path);
-        const dir = path.dirname(fullPath);
-
-        try {
-            await fs.mkdir(dir, { recursive: true });
-            await fs.writeFile(fullPath, file.content, 'utf-8');
-            console.log(\`✅ Created: \${file.path}\`);
-        } catch (error) {
-            console.error(\`❌ Failed to create \${file.path}: \${error.message}\`);
-        }
-    }
-
-    console.log('\\n🚀 Scaffold deployment complete! 🚀');
-    console.log('Next steps:');
-    console.log('1. Run `npm install` to install dependencies.');
-    console.log('2. Press F5 in VS Code to start the extension (this will also run `npm run watch`).');
-}
-
-deployScaffold();
 ```
 </file>
 
@@ -4901,7 +3684,7 @@ export default ContextMenu;
 </file>
 
 <file path="src/client/components/file-tree/FileTree.tsx">
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import TreeView from '../tree-view/TreeView';
 import { FileNode } from '@/common/types/file-node';
 import { addRemovePathInSelectedFiles } from './FileTree.utils';
@@ -4980,8 +3763,9 @@ const FileTree: React.FC<FileTreeProps> = ({ data, onFileClick, selectedFiles, a
         const isActive = activeFile === node.absolutePath;
         const isDirectory = Array.isArray(node.children);
         
+        // TS ERROR FIX: Replaced path.sep with '/'
+        const hasSelectedAncestor = selectedFiles.some(ancestor => node.absolutePath.startsWith(ancestor + '/') && node.absolutePath !== ancestor);
         const isDirectlySelected = selectedFiles.includes(node.absolutePath);
-        const hasSelectedAncestor = selectedFiles.some(ancestor => node.absolutePath.startsWith(ancestor + path.sep) && node.absolutePath !== ancestor);
         const isChecked = isDirectlySelected || hasSelectedAncestor;
 
         if (renamingPath === node.absolutePath) {
@@ -5018,7 +3802,7 @@ const FileTree: React.FC<FileTreeProps> = ({ data, onFileClick, selectedFiles, a
 
     return (
         <div className="file-tree">
-            <TreeView data={data} renderNodeContent={(node, isExpanded) => renderFileNodeContent(node, isExpanded as boolean)} onContextMenu={handleContextMenu} collapseTrigger={collapseTrigger} />
+            <TreeView data={data} renderNodeContent={(node, isExpanded) => renderFileNodeContent(node, isExpanded as boolean)} onContextMenu={handleContextMenu} collapseTrigger={collapseTrigger} activeFile={activeFile} />
             {contextMenu && <ContextMenu menu={contextMenu} onClose={() => setContextMenu(null)} onRename={handleRename} />}
         </div>
     );
@@ -5307,7 +4091,7 @@ export default SelectedFilesView;
 </file>
 
 <file path="src/client/components/tree-view/TreeView.tsx">
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { VscChevronRight } from 'react-icons/vsc';
 
 export interface TreeNode {
@@ -5323,20 +4107,24 @@ interface TreeViewProps {
     renderNodeContent?: (node: TreeNode, isExpanded: boolean) => React.ReactNode;
     collapseTrigger?: number;
     onContextMenu?: (event: React.MouseEvent, node: TreeNode) => void;
+    activeFile?: string;
 }
 
-const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTrigger = 0, onContextMenu }) => {
+const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTrigger = 0, onContextMenu, activeFile }) => {
     const [expandedNodes, setExpandedNodes] = useState<string[]>([]);
+    const nodeRefs = useRef<Map<string, HTMLLIElement | null>>(new Map());
 
+    // Effect to expand the root node by default
     useEffect(() => {
         if (data.length > 0) {
             const rootNode = data[0];
             if (rootNode) {
-                setExpandedNodes([rootNode.absolutePath]);
+                setExpandedNodes(prev => [...new Set([...prev, rootNode.absolutePath])]);
             }
         }
     }, [data]);
 
+    // Effect to handle collapsing all nodes
     useEffect(() => {
         if (collapseTrigger > 0 && data.length > 0) {
             const rootNode = data[0];
@@ -5344,11 +4132,43 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
                 setExpandedNodes([rootNode.absolutePath]);
             }
         }
-    }, [collapseTrigger]);
+    }, [collapseTrigger, data]);
+
+    // Effect to reveal and scroll to the active file
+    useEffect(() => {
+        if (activeFile) {
+            const getParentPaths = (filePath: string, rootPath: string): string[] => {
+                const normalizedFilePath = filePath.replace(/\\/g, '/');
+                const normalizedRootPath = rootPath.replace(/\\/g, '/');
+                if (!normalizedFilePath.startsWith(normalizedRootPath)) return [];
+
+                const relativePath = normalizedFilePath.substring(normalizedRootPath.lastIndexOf('/') + 1);
+                const parts = relativePath.split('/');
+                const paths = [];
+                let current = rootPath;
+                for (let i = 0; i < parts.length - 1; i++) {
+                    current += '/' + parts[i];
+                    paths.push(current.replace(rootPath, data[0].absolutePath));
+                }
+                return paths;
+            };
+
+            const rootPath = data[0]?.absolutePath;
+            if (rootPath) {
+                const parents = getParentPaths(activeFile, rootPath);
+                setExpandedNodes(prev => [...new Set([...prev, ...parents, rootPath])]);
+                
+                // Scroll into view on the next tick after state has updated
+                setTimeout(() => {
+                    const nodeElement = nodeRefs.current.get(activeFile);
+                    nodeElement?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 0);
+            }
+        }
+    }, [activeFile, data]);
 
 
     const handleToggleNode = (e: React.MouseEvent, nodePath: string) => {
-        // Prevent toggling when clicking on checkbox or rename input
         if ((e.target as HTMLElement).closest('.file-checkbox') || (e.target as HTMLElement).closest('.rename-input')) {
             return;
         }
@@ -5367,7 +4187,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
             const isDirectory = !!(node.children && node.children.length > 0);
 
             return (
-                <li key={node.absolutePath} className="treenode-li">
+                <li key={node.absolutePath} className="treenode-li" ref={el => nodeRefs.current.set(node.absolutePath, el)}>
                     <div
                         className={`treenode-item-wrapper`}
                         onClick={(e) => isDirectory && handleToggleNode(e, node.absolutePath)}
@@ -5450,7 +4270,7 @@ export const viewConfig = {
 
 <file path="src/client/views/context-chooser.view/on-message.ts">
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
-import { ClientToServerChannel } from "@/common/ipc/channels.enum";
+import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
 import { Services } from "@/backend/services/services";
 import * as vscode from "vscode";
 
@@ -5460,9 +4280,10 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     const loggerService = Services.loggerService;
     const selectionService = Services.selectionService;
 
-    serverIpc.onClientMessage(ClientToServerChannel.RequestWorkspaceFiles, (data) =>
-        fsService.handleWorkspaceFilesRequest(serverIpc, data.force)
-    );
+    serverIpc.onClientMessage(ClientToServerChannel.RequestWorkspaceFiles, (data) => {
+        loggerService.log(`Received RequestWorkspaceFiles from client (force=${data.force}).`);
+        fsService.handleWorkspaceFilesRequest(serverIpc, data.force);
+    });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestFlattenContext, (data) => {
         flattenerService.flatten(data.selectedPaths);
@@ -5497,9 +4318,11 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestLastSelection, () => {
+        loggerService.log('Received RequestLastSelection from client.');
         const lastSelection = selectionService.getLastSelection();
+        loggerService.log(`Found ${lastSelection.length} paths in last selection to restore.`);
         serverIpc.sendToClient(ServerToClientChannel.ApplySelectionSet, { paths: lastSelection });
-        // Also send the list of named sets
+        
         const sets = selectionService.getSelectionSets();
         serverIpc.sendToClient(ServerToClientChannel.SendSelectionSets, { sets });
     });
@@ -5987,9 +4810,8 @@ const App = () => {
     }, [clientIpc]);
 
     useEffect(() => {
-        logger.log("Initializing view and requesting workspace files.");
-        requestFiles();
-
+        logger.log("Initializing view and requesting initial data.");
+        
         clientIpc.onServerMessage(ServerToClientChannel.SendWorkspaceFiles, ({ files: receivedFiles }) => {
             logger.log(`Received file tree from backend. Root node: ${receivedFiles[0]?.name}`);
             setFiles(receivedFiles);
@@ -6006,6 +4828,13 @@ const App = () => {
             setSelectionSets(sets);
         });
 
+        clientIpc.onServerMessage(ServerToClientChannel.SetActiveFile, ({ path }) => {
+            logger.log(`Received set active file event for: ${path}`);
+            setActiveFile(path);
+        });
+
+        // Request initial state from backend
+        clientIpc.sendToServer(ClientToServerChannel.RequestWorkspaceFiles, {});
         clientIpc.sendToServer(ClientToServerChannel.RequestLastSelection, {});
 
     }, [updateSelectedFiles]);
@@ -6210,6 +5039,7 @@ export enum ServerToClientChannel {
     ApplySelectionSet = "serverToClient.applySelectionSet",
     SendSelectionSets = "serverToClient.sendSelectionSets",
     ForceRefresh = "serverToClient.forceRefresh", // Backend tells frontend to refresh
+    SetActiveFile = "serverToClient.setActiveFile", // For active file sync
 }
 </file>
 
@@ -6237,6 +5067,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.ApplySelectionSet ? { paths: string[] } :
     T extends ServerToClientChannel.SendSelectionSets ? { sets: SelectionSet } :
     T extends ServerToClientChannel.ForceRefresh ? {} :
+    T extends ServerToClientChannel.SetActiveFile ? { path: string } :
     never;
 </file>
 
@@ -6496,10 +5327,11 @@ export const VIEW_TYPES = {
 
 <file path="src/extension.ts">
 import * as vscode from "vscode";
-import { registerViews } from "./client/views";
+import { registerViews, serverIPCs } from "./client/views";
 import { registerCommands } from "./backend/commands/register-commands";
 import { Services } from "./backend/services/services";
-import { ClientToServerChannel } from "./common/ipc/channels.enum";
+import { VIEW_TYPES } from "./common/view-types";
+import { ServerToClientChannel } from "./common/ipc/channels.enum";
 
 let globalContext: vscode.ExtensionContext | null = null;
 
@@ -6534,6 +5366,20 @@ export function activate(context: vscode.ExtensionContext) {
          vscode.window.showErrorMessage("Data Curation Environment failed to register views. Check the debug console.");
     }
     
+    // Feature: Active File Sync
+    context.subscriptions.push(
+        vscode.window.onDidChangeActiveTextEditor(editor => {
+            if (editor) {
+                const filePath = editor.document.uri.fsPath;
+                const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
+                if (serverIpc) {
+                    Services.loggerService.log(`Active editor changed: ${filePath}. Notifying view.`);
+                    serverIpc.sendToClient(ServerToClientChannel.SetActiveFile, { path: filePath });
+                }
+            }
+        })
+    );
+
     Services.loggerService.log('Congratulations, your extension "Data Curation Environment" is now active!');
     console.log('Congratulations, your extension "Data Curation Environment" is now active!');
 }

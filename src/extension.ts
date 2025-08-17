@@ -1,8 +1,9 @@
 import * as vscode from "vscode";
-import { registerViews } from "./client/views";
+import { registerViews, serverIPCs } from "./client/views";
 import { registerCommands } from "./backend/commands/register-commands";
 import { Services } from "./backend/services/services";
-import { ClientToServerChannel } from "./common/ipc/channels.enum";
+import { VIEW_TYPES } from "./common/view-types";
+import { ServerToClientChannel } from "./common/ipc/channels.enum";
 
 let globalContext: vscode.ExtensionContext | null = null;
 
@@ -37,6 +38,20 @@ export function activate(context: vscode.ExtensionContext) {
          vscode.window.showErrorMessage("Data Curation Environment failed to register views. Check the debug console.");
     }
     
+    // Feature: Active File Sync
+    context.subscriptions.push(
+        vscode.window.onDidChangeActiveTextEditor(editor => {
+            if (editor) {
+                const filePath = editor.document.uri.fsPath;
+                const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
+                if (serverIpc) {
+                    Services.loggerService.log(`Active editor changed: ${filePath}. Notifying view.`);
+                    serverIpc.sendToClient(ServerToClientChannel.SetActiveFile, { path: filePath });
+                }
+            }
+        })
+    );
+
     Services.loggerService.log('Congratulations, your extension "Data Curation Environment" is now active!');
     console.log('Congratulations, your extension "Data Curation Environment" is now active!');
 }

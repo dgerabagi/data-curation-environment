@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import TreeView from '../tree-view/TreeView';
 import { FileNode } from '@/common/types/file-node';
 import { addRemovePathInSelectedFiles } from './FileTree.utils';
@@ -77,8 +77,9 @@ const FileTree: React.FC<FileTreeProps> = ({ data, onFileClick, selectedFiles, a
         const isActive = activeFile === node.absolutePath;
         const isDirectory = Array.isArray(node.children);
         
+        // TS ERROR FIX: Replaced path.sep with '/'
+        const hasSelectedAncestor = selectedFiles.some(ancestor => node.absolutePath.startsWith(ancestor + '/') && node.absolutePath !== ancestor);
         const isDirectlySelected = selectedFiles.includes(node.absolutePath);
-        const hasSelectedAncestor = selectedFiles.some(ancestor => node.absolutePath.startsWith(ancestor + path.sep) && node.absolutePath !== ancestor);
         const isChecked = isDirectlySelected || hasSelectedAncestor;
 
         if (renamingPath === node.absolutePath) {
@@ -115,7 +116,7 @@ const FileTree: React.FC<FileTreeProps> = ({ data, onFileClick, selectedFiles, a
 
     return (
         <div className="file-tree">
-            <TreeView data={data} renderNodeContent={(node, isExpanded) => renderFileNodeContent(node, isExpanded as boolean)} onContextMenu={handleContextMenu} collapseTrigger={collapseTrigger} />
+            <TreeView data={data} renderNodeContent={(node, isExpanded) => renderFileNodeContent(node, isExpanded as boolean)} onContextMenu={handleContextMenu} collapseTrigger={collapseTrigger} activeFile={activeFile} />
             {contextMenu && <ContextMenu menu={contextMenu} onClose={() => setContextMenu(null)} onRename={handleRename} />}
         </div>
     );

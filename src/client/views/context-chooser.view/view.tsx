@@ -35,9 +35,8 @@ const App = () => {
     }, [clientIpc]);
 
     useEffect(() => {
-        logger.log("Initializing view and requesting workspace files.");
-        requestFiles();
-
+        logger.log("Initializing view and requesting initial data.");
+        
         clientIpc.onServerMessage(ServerToClientChannel.SendWorkspaceFiles, ({ files: receivedFiles }) => {
             logger.log(`Received file tree from backend. Root node: ${receivedFiles[0]?.name}`);
             setFiles(receivedFiles);
@@ -54,6 +53,13 @@ const App = () => {
             setSelectionSets(sets);
         });
 
+        clientIpc.onServerMessage(ServerToClientChannel.SetActiveFile, ({ path }) => {
+            logger.log(`Received set active file event for: ${path}`);
+            setActiveFile(path);
+        });
+
+        // Request initial state from backend
+        clientIpc.sendToServer(ClientToServerChannel.RequestWorkspaceFiles, {});
         clientIpc.sendToServer(ClientToServerChannel.RequestLastSelection, {});
 
     }, [updateSelectedFiles]);

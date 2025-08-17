@@ -1,5 +1,5 @@
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
-import { ClientToServerChannel } from "@/common/ipc/channels.enum";
+import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
 import { Services } from "@/backend/services/services";
 import * as vscode from "vscode";
 
@@ -9,9 +9,10 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     const loggerService = Services.loggerService;
     const selectionService = Services.selectionService;
 
-    serverIpc.onClientMessage(ClientToServerChannel.RequestWorkspaceFiles, (data) =>
-        fsService.handleWorkspaceFilesRequest(serverIpc, data.force)
-    );
+    serverIpc.onClientMessage(ClientToServerChannel.RequestWorkspaceFiles, (data) => {
+        loggerService.log(`Received RequestWorkspaceFiles from client (force=${data.force}).`);
+        fsService.handleWorkspaceFilesRequest(serverIpc, data.force);
+    });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestFlattenContext, (data) => {
         flattenerService.flatten(data.selectedPaths);
@@ -46,9 +47,11 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestLastSelection, () => {
+        loggerService.log('Received RequestLastSelection from client.');
         const lastSelection = selectionService.getLastSelection();
+        loggerService.log(`Found ${lastSelection.length} paths in last selection to restore.`);
         serverIpc.sendToClient(ServerToClientChannel.ApplySelectionSet, { paths: lastSelection });
-        // Also send the list of named sets
+        
         const sets = selectionService.getSelectionSets();
         serverIpc.sendToClient(ServerToClientChannel.SendSelectionSets, { sets });
     });
