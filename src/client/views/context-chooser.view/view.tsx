@@ -7,7 +7,7 @@ import { FileNode } from '@/common/types/file-node';
 import FileTree from '../../components/file-tree/FileTree';
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { formatLargeNumber, formatNumberWithCommas } from '@/common/utils/formatting';
-import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, VscNewFolder, VscLoading, VscSave, VscFolderLibrary, VscSettingsGear, VscCheckAll } from 'react-icons/vsc';
+import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, VscNewFolder, VscLoading, VscSave, VscFolderLibrary, VscSettingsGear, VscCheckAll, VscSearch } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import SelectedFilesView from '@/client/components/SelectedFilesView';
 import { removePathsFromSelected } from '@/client/components/file-tree/FileTree.utils';
@@ -15,7 +15,7 @@ import { SelectionSet } from '@/backend/services/selection.service';
 
 const App = () => {
     const [files, setFiles] = useState<FileNode[]>([]);
-    const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
+    const [checkedFiles, setCheckedFiles] = useState<string[]>([]);
     const [activeFile, setActiveFile] = useState<string | undefined>();
     const [collapseTrigger, setCollapseTrigger] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
@@ -31,9 +31,9 @@ const App = () => {
         clientIpc.sendToServer(ClientToServerChannel.RequestWorkspaceFiles, { force });
     };
 
-    const updateSelectedFiles = useCallback((newSelectedFiles: string[]) => {
-        setSelectedFiles(newSelectedFiles);
-        clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths: newSelectedFiles });
+    const updateCheckedFiles = useCallback((newCheckedFiles: string[]) => {
+        setCheckedFiles(newCheckedFiles);
+        clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths: newCheckedFiles });
     }, [clientIpc]);
 
     useEffect(() => {
@@ -47,7 +47,7 @@ const App = () => {
         
         clientIpc.onServerMessage(ServerToClientChannel.ApplySelectionSet, ({ paths }) => {
             logger.log(`Applying selection set with ${paths.length} paths.`);
-            updateSelectedFiles(paths);
+            updateCheckedFiles(paths);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendSelectionSets, ({ sets }) => {
@@ -70,15 +70,23 @@ const App = () => {
             setIsAutoAddEnabled(enabled);
         });
 
+        // C29 Fix: When the backend forces a refresh (e.g., after a new file is created),
+        // we must also re-request the latest selection state, as it may have changed.
+        clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, () => {
+            logger.log("Force refresh triggered from backend.");
+            requestFiles(true);
+            clientIpc.sendToServer(ClientToServerChannel.RequestLastSelection, {});
+        });
+
         // Request initial state from backend
-        clientIpc.sendToServer(ClientToServerChannel.RequestWorkspaceFiles, {});
+        requestFiles();
         clientIpc.sendToServer(ClientToServerChannel.RequestLastSelection, {});
 
-    }, [updateSelectedFiles]);
+    }, [updateCheckedFiles]);
 
     const handleFlattenClick = () => {
-        logger.log(`Flatten Context button clicked with ${selectedFiles.length} paths.`);
-        clientIpc.sendToServer(ClientToServerChannel.RequestFlattenContext, { selectedPaths: selectedFiles });
+        logger.log(`Flatten Context button clicked with ${checkedFiles.length} paths.`);
+        clientIpc.sendToServer(ClientToServerChannel.RequestFlattenContext, { selectedPaths: checkedFiles });
     };
 
     const handleRefresh = () => {
@@ -126,8 +134,8 @@ const App = () => {
     };
 
     const handleRemoveFromSelection = (pathsToRemove: string[]) => {
-        const newSelected = removePathsFromSelected(pathsToRemove, selectedFiles, files);
-        updateSelectedFiles(newSelected);
+        const newSelected = removePathsFromSelected(pathsToRemove, checkedFiles, files);
+        updateCheckedFiles(newSelected);
     };
 
     const { totalFiles, totalTokens, selectedFileNodes } = useMemo(() => {
@@ -160,7 +168,7 @@ const App = () => {
             }
         };
 
-        selectedFiles.forEach(path => {
+        checkedFiles.forEach(path => {
             const node = fileMap.get(path);
             if (node) {
                 addNodeAndDescendants(node);
@@ -168,18 +176,19 @@ const App = () => {
         });
         
         return { totalFiles, totalTokens, selectedFileNodes: selectedNodes.filter(n => !n.isImage) };
-    }, [selectedFiles, files]);
+    }, [checkedFiles, files]);
 
     return (
         <div className="view-container">
             <div className="view-header">
                  <div className="toolbar">
-                    <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.saveCurrentSelection', args: [selectedFiles] })} title="Save Selection Set..."><VscSave /></button>
+                    <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.saveCurrentSelection', args: [checkedFiles] })} title="Save Selection Set..."><VscSave /></button>
                     <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.loadSelectionSet' })} title="Load Selection Set..."><VscFolderLibrary /></button>
                     <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.manageSelectionSets' })} title="Manage Selection Sets..."><VscSettingsGear /></button>
                  </div>
                  <div className="toolbar">
                     {isLoading && <span className="spinner" title="Refreshing..."><VscLoading /></span>}
+                    <button title="Search... (Coming Soon)"><VscSearch /></button>
                     <button onClick={handleToggleAutoAdd} title="Automatically add new files to selection" className={isAutoAddEnabled ? 'active' : ''}><VscCheckAll /></button>
                     <button onClick={handleNewFile} title="New File..."><VscNewFile /></button>
                     <button onClick={handleNewFolder} title="New Folder..."><VscNewFolder /></button>
@@ -195,8 +204,8 @@ const App = () => {
                         <FileTree
                             key={index}
                             data={[rootNode]}
-                            selectedFiles={selectedFiles}
-                            updateSelectedFiles={updateSelectedFiles}
+                            checkedFiles={checkedFiles}
+                            updateCheckedFiles={updateCheckedFiles}
                             activeFile={activeFile}
                             collapseTrigger={collapseTrigger}
                         />

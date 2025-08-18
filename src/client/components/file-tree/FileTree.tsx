@@ -14,9 +14,9 @@ import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 
 interface FileTreeProps {
   data: FileNode[];
-  selectedFiles: string[];
+  checkedFiles: string[];
   activeFile?: string;
-  updateSelectedFiles: (selectedFiles: string[]) => void;
+  updateCheckedFiles: (checkedFiles: string[]) => void;
   collapseTrigger?: number;
 }
 
@@ -34,7 +34,7 @@ const getFileIcon = (fileName: string) => {
     }
 };
 
-const FileTree: React.FC<FileTreeProps> = ({ data, selectedFiles, activeFile, updateSelectedFiles, collapseTrigger }) => {
+const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, updateCheckedFiles, collapseTrigger }) => {
     const [contextMenu, setContextMenu] = useState<{ x: number, y: number, node: FileNode } | null>(null);
     const [renamingPath, setRenamingPath] = useState<string | null>(null);
     const [renameValue, setRenameValue] = useState('');
@@ -42,7 +42,7 @@ const FileTree: React.FC<FileTreeProps> = ({ data, selectedFiles, activeFile, up
 
     const handleFileCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>, filePath: string) => {
         e.stopPropagation();
-        updateSelectedFiles(addRemovePathInSelectedFiles(data, filePath, selectedFiles));
+        updateCheckedFiles(addRemovePathInSelectedFiles(data, filePath, checkedFiles));
     };
 
     const handleContextMenu = (event: React.MouseEvent, node: FileNode) => {
@@ -66,27 +66,24 @@ const FileTree: React.FC<FileTreeProps> = ({ data, selectedFiles, activeFile, up
         setRenamingPath(null);
     };
     
-    const calculateSelectedTokens = useMemo(() => (node: FileNode): number => {
+    const calculateCheckedTokens = useMemo(() => (node: FileNode): number => {
         if (!node.children) {
-            return selectedFiles.includes(node.absolutePath) ? node.tokenCount : 0;
+            return checkedFiles.includes(node.absolutePath) ? node.tokenCount : 0;
         }
     
-        // If the folder itself is selected, all its tokens are selected
-        if (selectedFiles.includes(node.absolutePath)) {
+        if (checkedFiles.includes(node.absolutePath)) {
             return node.tokenCount;
         }
     
-        // Otherwise, sum up selected tokens from children
-        return node.children.reduce((acc, child) => acc + calculateSelectedTokens(child), 0);
-    }, [selectedFiles]);
+        return node.children.reduce((acc, child) => acc + calculateCheckedTokens(child), 0);
+    }, [checkedFiles]);
 
     const renderFileNodeContent = (node: FileNode, isExpanded: boolean) => {
-        const isActive = activeFile === node.absolutePath;
         const isDirectory = Array.isArray(node.children);
         
-        const hasSelectedAncestor = selectedFiles.some(ancestor => node.absolutePath.startsWith(ancestor + '/') && node.absolutePath !== ancestor);
-        const isDirectlySelected = selectedFiles.includes(node.absolutePath);
-        const isChecked = isDirectlySelected || hasSelectedAncestor;
+        const hasCheckedAncestor = checkedFiles.some(ancestor => node.absolutePath.startsWith(ancestor + '/') && node.absolutePath !== ancestor);
+        const isDirectlyChecked = checkedFiles.includes(node.absolutePath);
+        const isChecked = isDirectlyChecked || hasCheckedAncestor;
 
         if (renamingPath === node.absolutePath) {
             return (
@@ -102,25 +99,44 @@ const FileTree: React.FC<FileTreeProps> = ({ data, selectedFiles, activeFile, up
             );
         }
 
-        const selectedTokensInDir = isDirectory ? calculateSelectedTokens(node) : 0;
+        const checkedTokensInDir = isDirectory ? calculateCheckedTokens(node) : 0;
+        const isFullyChecked = isDirectory && checkedTokensInDir > 0 && checkedTokensInDir === node.tokenCount;
+
+        const renderTokenCount = () => {
+            if (node.isImage) {
+                return <span>{formatBytes(node.sizeInBytes)}</span>;
+            }
+            if (node.tokenCount > 0) {
+                let content;
+                if (isDirectory) {
+                    if (isFullyChecked) {
+                        content = `(${formatLargeNumber(node.tokenCount, 1)})`;
+                    } else if (checkedTokensInDir > 0) {
+                        content = <>{formatLargeNumber(node.tokenCount, 1)} <span className="selected-token-count">({formatLargeNumber(checkedTokensInDir, 1)})</span></>;
+                    } else {
+                        content = formatLargeNumber(node.tokenCount, 1);
+                    }
+                } else { // It's a file
+                    content = isChecked ? `(${formatLargeNumber(node.tokenCount, 1)})` : formatLargeNumber(node.tokenCount, 1);
+                }
+                return <><VscSymbolNumeric /> <span>{content}</span></>;
+            }
+            return null;
+        };
 
         return (
-            <div className={`file-item ${isActive ? 'active' : ''}`}>
+            <div className={`file-item`}>
                 <Checkbox
                     className="file-checkbox"
                     checked={isChecked}
-                    indeterminate={!isDirectlySelected && !hasSelectedAncestor && selectedFiles.some(p => p.startsWith(node.absolutePath))}
+                    indeterminate={!isDirectlyChecked && !hasCheckedAncestor && checkedFiles.some(p => p.startsWith(node.absolutePath))}
                     onChange={(_, e) => handleFileCheckboxChange(e, node.absolutePath)}
                 />
                 <span className="file-icon">{isDirectory ? (isExpanded ? <VscFolderOpened /> : <VscFolder />) : getFileIcon(node.name)}</span>
                 <span className="file-name">{node.name}</span>
                 <div className="file-stats">
                     {isDirectory && node.fileCount > 0 && (<> <VscFiles /> <span>{formatNumberWithCommas(node.fileCount)}</span> </>)}
-                    {node.isImage ? (<span>{formatBytes(node.sizeInBytes)}</span>) : (node.tokenCount > 0 && (<> <VscSymbolNumeric /> <span>{formatLargeNumber(node.tokenCount, 1)}
-                        {isDirectory && selectedTokensInDir > 0 && selectedTokensInDir < node.tokenCount && 
-                            <span className="selected-token-count"> ({formatLargeNumber(selectedTokensInDir, 1)})</span>
-                        }
-                    </span> </>))}
+                    {renderTokenCount()}
                 </div>
             </div>
         );
@@ -128,7 +144,13 @@ const FileTree: React.FC<FileTreeProps> = ({ data, selectedFiles, activeFile, up
 
     return (
         <div className="file-tree">
-            <TreeView data={data} renderNodeContent={(node, isExpanded) => renderFileNodeContent(node, isExpanded as boolean)} onContextMenu={handleContextMenu} collapseTrigger={collapseTrigger} activeFile={activeFile} />
+            <TreeView 
+                data={data} 
+                renderNodeContent={(node, isExpanded) => renderFileNodeContent(node, isExpanded as boolean)} 
+                onContextMenu={handleContextMenu} 
+                collapseTrigger={collapseTrigger} 
+                activeFile={activeFile} 
+            />
             {contextMenu && <ContextMenu menu={contextMenu} onClose={() => setContextMenu(null)} onRename={handleRename} />}
         </div>
     );

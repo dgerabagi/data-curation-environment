@@ -26,9 +26,9 @@ export class FSService {
         this.watcher = vscode.workspace.createFileSystemWatcher('**/*');
         Services.loggerService.log("File system watcher initialized.");
 
-        const changeHandler = (uri: vscode.Uri) => {
+        const triggerRefresh = (uri: vscode.Uri) => {
             if (uri.fsPath.includes(path.normalize('/.git/')) || uri.fsPath.includes(path.normalize('/node_modules/'))) {
-                return; // Ignore changes in .git or node_modules
+                return;
             }
 
             if (this.debounceTimer) {
@@ -40,7 +40,8 @@ export class FSService {
                 
                 const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
                 if (serverIpc) {
-                    this.handleWorkspaceFilesRequest(serverIpc, true);
+                    // Tell the client to refresh itself. This is better than pushing the whole tree.
+                    serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, {});
                 } else {
                     Services.loggerService.warn("Could not push file tree update, serverIpc not available.");
                 }
@@ -55,12 +56,12 @@ export class FSService {
                 const newSelection = [...new Set([...currentSelection, normalizePath(uri.fsPath)])];
                 await Services.selectionService.saveCurrentSelection(newSelection);
             }
-            changeHandler(uri); // Trigger the standard refresh
+            triggerRefresh(uri); // Trigger the standard refresh
         };
 
-        this.watcher.onDidChange(changeHandler);
+        this.watcher.onDidChange(triggerRefresh);
         this.watcher.onDidCreate(createHandler);
-        this.watcher.onDidDelete(changeHandler);
+        this.watcher.onDidDelete(triggerRefresh);
     }
 
     private async getFileStats(filePath: string): Promise<{ tokenCount: number, sizeInBytes: number, isImage: boolean, extension: string }> {
@@ -273,6 +274,7 @@ export class FSService {
     }
 
     public handleRevealInExplorerRequest(filePath: string) {
+        Services.loggerService.log(`Executing 'revealInExplorer' for path: ${filePath}`);
         vscode.commands.executeCommand('revealInExplorer', vscode.Uri.file(filePath));
     }
 
