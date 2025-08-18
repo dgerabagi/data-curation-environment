@@ -10,7 +10,7 @@ export enum ClientToServerChannel {
     RequestFileDelete = "clientToServer.requestFileDelete",
     RequestRevealInExplorer = "clientToServer.requestRevealInExplorer",
     RequestCopyPath = "clientToServer.requestCopyPath",
-    RequestOpenFile = "clientToServer.requestOpenFile", // New
+    RequestOpenFile = "clientToServer.requestOpenFile",
 
     // Selection Persistence
     SaveCurrentSelection = "clientToServer.saveCurrentSelection",
@@ -26,4 +26,5 @@ export enum ServerToClientChannel {
     SendSelectionSets = "serverToClient.sendSelectionSets",
     ForceRefresh = "serverToClient.forceRefresh", // Backend tells frontend to refresh
     SetActiveFile = "serverToClient.setActiveFile", // For active file sync
+    FocusFile = "serverToClient.focusFile", // For auto-revealing a specific file
 }

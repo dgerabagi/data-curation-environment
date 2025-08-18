@@ -1,4 +1,4 @@
-/* Updated on: C26 (Layout fixes for header and selected items panel) */
+/* Updated on: C27 (Alignment fixes for Selected Items panel) */
 body {
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -83,6 +83,7 @@ body {
     flex-shrink: 0;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .panel-toolbar {
@@ -135,8 +136,9 @@ body {
     .header-index {
         width: 30px;
         flex-shrink: 0;
-        text-align: right;
+        text-align: right; /* Right-align the '#' header */
         padding-right: 10px;
+        justify-content: flex-end; /* Ensure flex items are at the end */
     }
 
     .header-type {
@@ -183,9 +185,13 @@ body {
             width: 30px;
             flex-shrink: 0;
             color: var(--vscode-descriptionForeground);
-            text-align: right;
+            text-align: right; /* Right-align the numbers */
             padding-right: 10px;
             position: relative;
+            display: flex;
+            justify-content: flex-end; /* Right-align the content (number or icon) */
+            align-items: center;
+            height: 100%;
         }
 
         .quick-remove-icon {

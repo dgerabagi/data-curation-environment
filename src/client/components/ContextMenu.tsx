@@ -33,18 +33,24 @@ const ContextMenu: React.FC<ContextMenuProps> = ({ menu, onClose, onRename }) =>
     const { node } = menu;
     const isDirectory = !!node.children;
 
+    const getParentDirectory = () => {
+        if (isDirectory) {
+            return node.absolutePath;
+        }
+        // For files, get the parent directory by splitting the path.
+        const parts = node.absolutePath.split('/');
+        parts.pop();
+        return parts.join('/');
+    };
+
     return (
         <>
             <div className="context-menu-overlay" onClick={onClose}></div>
             <div ref={menuRef} className="context-menu" style={{ top: menu.y, left: menu.x }}>
                 <ul>
-                    {isDirectory && (
-                        <>
-                            <li onClick={() => handleAction(() => clientIpc.sendToServer(ClientToServerChannel.RequestNewFile, { parentDirectory: node.absolutePath }))}>New File...</li>
-                            <li onClick={() => handleAction(() => clientIpc.sendToServer(ClientToServerChannel.RequestNewFolder, { parentDirectory: node.absolutePath }))}>New Folder...</li>
-                            <hr />
-                        </>
-                    )}
+                    <li onClick={() => handleAction(() => clientIpc.sendToServer(ClientToServerChannel.RequestNewFile, { parentDirectory: getParentDirectory() }))}>New File...</li>
+                    <li onClick={() => handleAction(() => clientIpc.sendToServer(ClientToServerChannel.RequestNewFolder, { parentDirectory: getParentDirectory() }))}>New Folder...</li>
+                    <hr />
                     <li onClick={() => handleAction(() => onRename())}>Rename</li>
                     <li onClick={() => handleAction(() => clientIpc.sendToServer(ClientToServerChannel.RequestFileDelete, { path: node.absolutePath }))}>Delete</li>
                     <hr />

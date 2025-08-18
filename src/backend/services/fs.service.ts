@@ -27,6 +27,10 @@ export class FSService {
         Services.loggerService.log("File system watcher initialized.");
 
         const changeHandler = (uri: vscode.Uri) => {
+            if (uri.fsPath.includes(path.normalize('/.git/')) || uri.fsPath.includes(path.normalize('/node_modules/'))) {
+                return; // Ignore changes in .git or node_modules
+            }
+
             if (this.debounceTimer) {
                 clearTimeout(this.debounceTimer);
             }

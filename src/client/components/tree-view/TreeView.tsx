@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { VscChevronRight } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
+import { logger } from '@/client/utils/logger';
 
 export interface TreeNode {
     name: string;
@@ -47,8 +48,12 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     // Effect to reveal and scroll to the active file
     useEffect(() => {
         if (activeFile && data.length > 0) {
+            logger.log(`[TreeView] Active file changed: ${activeFile}. Attempting to reveal.`);
             const getParentPaths = (filePath: string, rootPath: string): string[] => {
-                if (!filePath.startsWith(rootPath)) return [];
+                if (!filePath.startsWith(rootPath)) {
+                    logger.warn(`[TreeView] Active file ${filePath} is not under root ${rootPath}`);
+                    return [];
+                }
     
                 const relativePath = filePath.substring(rootPath.length + 1);
                 const parts = relativePath.split('/');
@@ -66,12 +71,18 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
             if (rootPath) {
                 const parents = getParentPaths(activeFile, rootPath);
                 setExpandedNodes(prev => [...new Set([...prev, ...parents, rootPath])]);
+                logger.log(`[TreeView] Expanding parents: ${JSON.stringify(parents)}`);
                 
                 // Scroll into view on the next tick after state has updated
                 setTimeout(() => {
                     const nodeElement = nodeRefs.current.get(activeFile);
-                    nodeElement?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                }, 100); // A small delay can help ensure the DOM is updated
+                    if (nodeElement) {
+                        logger.log(`[TreeView] Scrolling node into view: ${activeFile}`);
+                        nodeElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    } else {
+                        logger.warn(`[TreeView] Could not find ref for active file to scroll: ${activeFile}`);
+                    }
+                }, 100);
             }
         }
     }, [activeFile, data]);

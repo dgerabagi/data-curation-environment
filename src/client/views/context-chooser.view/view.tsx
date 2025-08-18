@@ -20,6 +20,7 @@ const App = () => {
     const [collapseTrigger, setCollapseTrigger] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
     const [selectionSets, setSelectionSets] = useState<SelectionSet>({});
+    const [isSelectionListMinimized, setIsSelectionListMinimized] = useState(false);
     
     const clientIpc = ClientPostMessageManager.getInstance();
 
@@ -58,6 +59,11 @@ const App = () => {
             setActiveFile(path);
         });
 
+        clientIpc.onServerMessage(ServerToClientChannel.FocusFile, ({ path }) => {
+            logger.log(`Received focus file event for: ${path}`);
+            setActiveFile(path);
+        });
+
         // Request initial state from backend
         clientIpc.sendToServer(ClientToServerChannel.RequestWorkspaceFiles, {});
         clientIpc.sendToServer(ClientToServerChannel.RequestLastSelection, {});
@@ -84,14 +90,33 @@ const App = () => {
         setCollapseTrigger(c => c + 1);
     };
 
+    const getParentDirForNewItem = (): string => {
+        if (activeFile) {
+            // Check if active file is a directory or a file
+            // This requires a lookup in the file tree
+            const nodeMap = new Map<string, FileNode>();
+            const buildMap = (node: FileNode) => {
+                nodeMap.set(node.absolutePath, node);
+                node.children?.forEach(buildMap);
+            };
+            files.forEach(buildMap);
+            const activeNode = nodeMap.get(activeFile);
+            if (activeNode) {
+                return activeNode.children ? activeNode.absolutePath : activeFile.substring(0, activeFile.lastIndexOf('/'));
+            }
+        }
+        // Default to workspace root
+        return files.length > 0 ? files[0].absolutePath : '';
+    };
+
     const handleNewFile = () => {
-        const parentDirectory = files.length > 0 ? files[0].absolutePath : '';
+        const parentDirectory = getParentDirForNewItem();
         logger.log(`Requesting new file in ${parentDirectory}`);
         clientIpc.sendToServer(ClientToServerChannel.RequestNewFile, { parentDirectory });
     };
 
     const handleNewFolder = () => {
-        const parentDirectory = files.length > 0 ? files[0].absolutePath : '';
+        const parentDirectory = getParentDirForNewItem();
         logger.log(`Requesting new folder in ${parentDirectory}`);
         clientIpc.sendToServer(ClientToServerChannel.RequestNewFolder, { parentDirectory });
     };
@@ -176,7 +201,12 @@ const App = () => {
                     <div className="loading-message">No folder open.</div>
                 )}
             </div>
-            <SelectedFilesView selectedFileNodes={selectedFileNodes} onRemove={handleRemoveFromSelection} />
+            <SelectedFilesView 
+                selectedFileNodes={selectedFileNodes} 
+                onRemove={handleRemoveFromSelection}
+                isMinimized={isSelectionListMinimized}
+                onToggleMinimize={() => setIsSelectionListMinimized(prev => !prev)}
+            />
             <div className="view-footer">
                 <div className="summary-panel">
                     <span className='summary-item' title="Total selected files">

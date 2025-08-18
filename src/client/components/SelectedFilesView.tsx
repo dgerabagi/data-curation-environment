@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { FileNode } from '@/common/types/file-node';
-import { VscChevronUp, VscChevronDown, VscSymbolFile, VscSymbolNumeric, VscTypeHierarchy, VscClose } from 'react-icons/vsc';
+import { VscChevronUp, VscChevronDown, VscSymbolFile, VscSymbolNumeric, VscTypeHierarchy, VscClose, VscChevronRight, VscChevronLeft } from 'react-icons/vsc';
 import { formatLargeNumber } from '@/common/utils/formatting';
 import { SiReact, SiSass, SiTypescript, SiJavascript } from 'react-icons/si';
 import { VscFile, VscJson, VscMarkdown } from 'react-icons/vsc';
@@ -28,9 +28,11 @@ const getFileIcon = (fileName: string) => {
 interface SelectedFilesViewProps {
     selectedFileNodes: FileNode[];
     onRemove: (pathsToRemove: string[]) => void;
+    isMinimized: boolean;
+    onToggleMinimize: () => void;
 }
 
-const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes, onRemove }) => {
+const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes, onRemove, isMinimized, onToggleMinimize }) => {
     const [sortColumn, setSortColumn] = useState<SortableColumn>('tokenCount');
     const [sortDirection, setSortDirection] = useState<SortDirection>('desc');
     const [selection, setSelection] = useState<Set<string>>(new Set());
@@ -121,54 +123,61 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
         <div className="selected-files-panel">
             <div className="panel-header">
                 <span>Selected Items ({selectedFileNodes.length})</span>
-            </div>
-            <div className="panel-toolbar">
-                <button onClick={handleRemoveSelected} disabled={selection.size === 0}>
-                    Remove selected ({selection.size})
+                <button onClick={onToggleMinimize} className="toolbar-button" title={isMinimized ? "Expand" : "Minimize"}>
+                    {isMinimized ? <VscChevronLeft /> : <VscChevronDown />}
                 </button>
             </div>
-            <div className="selected-files-list-container">
-                <div className="selected-list-header">
-                    <div className="header-index">#</div>
-                    <div className="header-type" onClick={() => handleSort('extension')} title="Sort by File Type">
-                        <VscTypeHierarchy /> <SortIndicator column="extension" />
+            {!isMinimized && (
+                <>
+                    <div className="panel-toolbar">
+                        <button onClick={handleRemoveSelected} disabled={selection.size === 0}>
+                            Remove selected ({selection.size})
+                        </button>
                     </div>
-                    <div className="header-name" onClick={() => handleSort('name')}>
-                        <VscSymbolFile /> File <SortIndicator column="name" />
-                    </div>
-                    <div className="header-tokens" onClick={() => handleSort('tokenCount')}>
-                        <VscSymbolNumeric /> Tokens <SortIndicator column="tokenCount" />
-                    </div>
-                </div>
-                <ul className="selected-files-list">
-                    {sortedFiles.map((node, index) => (
-                        <li key={node.absolutePath} 
-                            className={selection.has(node.absolutePath) ? 'selected' : ''}
-                            onClick={(e) => handleItemClick(e, node.absolutePath)}
-                            onDoubleClick={() => handleDoubleClick(node.absolutePath)}
-                            onMouseEnter={() => setHoveredPath(node.absolutePath)}
-                            onMouseLeave={() => setHoveredPath(null)}
-                        >
-                            <span className="file-index">
-                                {hoveredPath === node.absolutePath ? (
-                                    <span 
-                                        className="quick-remove-icon" 
-                                        title="Remove from selection"
-                                        onClick={(e) => { e.stopPropagation(); onRemove([node.absolutePath]); }}
-                                    >
-                                        <VscClose />
+                    <div className="selected-files-list-container">
+                        <div className="selected-list-header">
+                            <div className="header-index">#</div>
+                            <div className="header-type" onClick={() => handleSort('extension')} title="Sort by File Type">
+                                <VscTypeHierarchy /> <SortIndicator column="extension" />
+                            </div>
+                            <div className="header-name" onClick={() => handleSort('name')}>
+                                <VscSymbolFile /> File <SortIndicator column="name" />
+                            </div>
+                            <div className="header-tokens" onClick={() => handleSort('tokenCount')}>
+                                <VscSymbolNumeric /> Tokens <SortIndicator column="tokenCount" />
+                            </div>
+                        </div>
+                        <ul className="selected-files-list">
+                            {sortedFiles.map((node, index) => (
+                                <li key={node.absolutePath} 
+                                    className={selection.has(node.absolutePath) ? 'selected' : ''}
+                                    onClick={(e) => handleItemClick(e, node.absolutePath)}
+                                    onDoubleClick={() => handleDoubleClick(node.absolutePath)}
+                                    onMouseEnter={() => setHoveredPath(node.absolutePath)}
+                                    onMouseLeave={() => setHoveredPath(null)}
+                                >
+                                    <span className="file-index">
+                                        {hoveredPath === node.absolutePath ? (
+                                            <span 
+                                                className="quick-remove-icon" 
+                                                title="Remove from selection"
+                                                onClick={(e) => { e.stopPropagation(); onRemove([node.absolutePath]); }}
+                                            >
+                                                <VscClose />
+                                            </span>
+                                        ) : (
+                                            index + 1
+                                        )}
                                     </span>
-                                ) : (
-                                    index + 1
-                                )}
-                            </span>
-                            <span className="file-icon">{getFileIcon(node.name)}</span>
-                            <span className="file-name" title={node.absolutePath}>{node.name}</span>
-                            <span className="file-tokens">{formatLargeNumber(node.tokenCount, 1)}</span>
-                        </li>
-                    ))}
-                </ul>
-            </div>
+                                    <span className="file-icon">{getFileIcon(node.name)}</span>
+                                    <span className="file-name" title={node.absolutePath}>{node.name}</span>
+                                    <span className="file-tokens">{formatLargeNumber(node.tokenCount, 1)}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </>
+            )}
         </div>
     );
 };

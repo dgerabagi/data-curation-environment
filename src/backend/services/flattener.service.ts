@@ -5,6 +5,7 @@ import { ServerPostMessageManager } from '@/common/ipc/server-ipc';
 import { Services } from './services';
 import { VIEW_TYPES } from '@/common/view-types';
 import { serverIPCs } from '@/client/views';
+import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 
 interface FileStats {
     filePath: string;
@@ -43,12 +44,15 @@ export class FlattenerService {
             await fs.writeFile(outputFilePath, outputContent, 'utf-8');
             vscode.window.showInformationMessage(`Successfully flattened ${results.filter(r => !r.error).length} files to flattened_repo.md.`);
 
-            // After successful flattening, trigger a refresh of the file tree.
+            // After successful flattening, tell the frontend to focus the new file.
+            // The file watcher will handle the refresh, but we want to guide the user.
             const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
             if (serverIpc) {
-                Services.loggerService.log("Triggering file tree refresh after flattening.");
-                // The file watcher will pick up the change automatically.
-                // No need for a forced refresh call, as it's now debounced.
+                Services.loggerService.log("Triggering file focus after flattening.");
+                // Give the watcher a moment to trigger the refresh
+                setTimeout(() => {
+                    serverIpc.sendToClient(ServerToClientChannel.FocusFile, { path: outputFilePath });
+                }, 500);
             }
 
         } catch (error: any) {
