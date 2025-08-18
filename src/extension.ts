@@ -7,50 +7,51 @@ import { ServerToClientChannel } from "./common/ipc/channels.enum";
 import { API as GitAPI, GitExtension } from "./backend/types/git";
 
 let globalContext: vscode.ExtensionContext | null = null;
-let gitApi: GitAPI | undefined;
 
-export function activate(context: vscode.ExtensionContext) {
+export async function activate(context: vscode.ExtensionContext) {
     // For debugging the activation process itself
     console.log('DCE Extension: Activating...');
+    Services.loggerService.log('Congratulations, your extension "Data Curation Environment" is now active!');
 
     globalContext = context;
 
-    // Get Git API
+    let gitApi: GitAPI | undefined;
     try {
-        const gitExtension = vscode.extensions.getExtension<GitExtension>('vscode.git')?.exports;
+        const gitExtension = vscode.extensions.getExtension<GitExtension>('vscode.git');
         if (gitExtension) {
-            gitApi = gitExtension.getAPI(1);
-            console.log('DCE Extension: Git API successfully retrieved.');
+            await gitExtension.activate(); // Ensure the extension is active
+            gitApi = gitExtension.exports.getAPI(1);
+            Services.loggerService.log('Git API successfully retrieved.');
         } else {
-            console.warn('DCE Extension: vscode.git extension not found.');
+            Services.loggerService.warn('vscode.git extension not found.');
         }
     } catch (error) {
+        Services.loggerService.error(`Failed to get Git API: ${error}`);
         console.error('DCE Extension: Failed to get Git API.', error);
     }
 
-
     try {
         Services.initialize(gitApi);
-        console.log('DCE Extension: Services initialized.');
     } catch (error) {
         console.error('DCE Extension: CRITICAL - Error initializing services.', error);
+        Services.loggerService.error(`CRITICAL - Error initializing services: ${error}`);
         vscode.window.showErrorMessage("Data Curation Environment failed to initialize services. Check the debug console.");
         return;
     }
     
     try {
         registerCommands(context);
-        console.log('DCE Extension: Commands registered.');
     } catch (error) {
         console.error('DCE Extension: CRITICAL - Error registering commands.', error);
+        Services.loggerService.error(`CRITICAL - Error registering commands: ${error}`);
         vscode.window.showErrorMessage("Data Curation Environment failed to register commands. Check the debug console.");
     }
 
     try {
         registerViews(context);
-        console.log('DCE Extension: Views registered.');
     } catch (error) {
         console.error('DCE Extension: CRITICAL - Error registering views.', error);
+        Services.loggerService.error(`CRITICAL - Error registering views: ${error}`);
          vscode.window.showErrorMessage("Data Curation Environment failed to register views. Check the debug console.");
     }
     
@@ -67,9 +68,6 @@ export function activate(context: vscode.ExtensionContext) {
             }
         })
     );
-
-    Services.loggerService.log('Congratulations, your extension "Data Curation Environment" is now active!');
-    console.log('Congratulations, your extension "Data Curation Environment" is now active!');
 }
 
 export function getContext() {
@@ -80,5 +78,6 @@ export function getContext() {
 }
 
 export function deactivate() {
+    Services.loggerService.log('DCE Extension: Deactivating.');
     console.log('DCE Extension: Deactivating.');
 }

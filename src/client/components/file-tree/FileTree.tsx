@@ -36,6 +36,18 @@ const getFileIcon = (fileName: string) => {
     }
 };
 
+const getGitStatusTooltip = (status?: string): string => {
+    switch (status) {
+        case 'M': return 'Modified';
+        case 'U': return 'Untracked';
+        case 'A': return 'Added';
+        case 'D': return 'Deleted';
+        case 'C': return 'Conflicted';
+        case 'I': return 'Ignored';
+        default: return 'Git Status';
+    }
+};
+
 const filterTree = (nodes: FileNode[], term: string): FileNode[] => {
     if (!term) return nodes;
     const lowerCaseTerm = term.toLowerCase();
@@ -191,7 +203,7 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
                 <span className="file-icon">{isDirectory ? (isExpanded ? <VscFolderOpened /> : <VscFolder />) : getFileIcon(node.name)}</span>
                 <span className="file-name">{node.name}</span>
                 <div className="file-stats">
-                    {node.gitStatus && <span className="git-status-badge" title={`Git Status: ${node.gitStatus}`}>{node.gitStatus}</span>}
+                    {node.gitStatus && <span className="git-status-badge" title={getGitStatusTooltip(node.gitStatus)}>{node.gitStatus}</span>}
                     {hasProblems && (
                         <span className="problem-badge" title={problemTooltip}>
                             {problemErrorCount > 0 && <><VscError/> {problemErrorCount}</>}

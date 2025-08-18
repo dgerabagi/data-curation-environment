@@ -1,24 +1,24 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-18T19:06:55.540Z
+  Date Generated: 2025-08-18T20:27:23.548Z
   ---
   Total Files: 165
-  Total Lines: 12757
-  Total Characters: 529144
-  Approx. Tokens: 132349
+  Total Lines: 12797
+  Total Characters: 531057
+  Approx. Tokens: 132827
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
 2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
-3. src\backend\services\fs.service.ts (3974 tokens)
+3. src\backend\services\fs.service.ts (4312 tokens)
 4. src\client\views\context-chooser.view\view.scss (3169 tokens)
 5. src\client\views\context-chooser.view\view.tsx (2994 tokens)
 6. src\client\components\SelectedFilesView.tsx (2716 tokens)
 7. The-Creator-AI-main\src\backend\services\code.service.ts (2618 tokens)
-8. The-Creator-AI-main\src\backend\services\fs.service.ts (2495 tokens)
-9. src\client\components\file-tree\FileTree.tsx (2457 tokens)
+8. src\client\components\file-tree\FileTree.tsx (2548 tokens)
+9. The-Creator-AI-main\src\backend\services\fs.service.ts (2495 tokens)
 10. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts (2424 tokens)
 
 <!-- Full File List -->
@@ -58,14 +58,14 @@
 34. src\backend\commands\commands.ts - Lines: 88 - Chars: 3807 - Tokens: 952
 35. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
 36. src\backend\services\flattener.service.ts - Lines: 174 - Chars: 7078 - Tokens: 1770
-37. src\backend\services\fs.service.ts - Lines: 364 - Chars: 15893 - Tokens: 3974
+37. src\backend\services\fs.service.ts - Lines: 393 - Chars: 17248 - Tokens: 4312
 38. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
 39. src\backend\services\selection.service.ts - Lines: 69 - Chars: 2510 - Tokens: 628
 40. src\backend\services\services.ts - Lines: 23 - Chars: 882 - Tokens: 221
 41. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
 42. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
 43. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
-44. src\client\components\file-tree\FileTree.tsx - Lines: 222 - Chars: 9825 - Tokens: 2457
+44. src\client\components\file-tree\FileTree.tsx - Lines: 234 - Chars: 10190 - Tokens: 2548
 45. src\client\components\file-tree\FileTree.utils.ts - Lines: 106 - Chars: 3947 - Tokens: 987
 46. src\client\components\SelectedFilesView.tsx - Lines: 223 - Chars: 10861 - Tokens: 2716
 47. src\client\components\tree-view\TreeView.tsx - Lines: 182 - Chars: 7901 - Tokens: 1976
@@ -86,7 +86,7 @@
 62. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
 63. src\common\utils\view-html.ts - Lines: 26 - Chars: 971 - Tokens: 243
 64. src\common\view-types.ts - Lines: 8 - Chars: 246 - Tokens: 62
-65. src\extension.ts - Lines: 84 - Chars: 3448 - Tokens: 862
+65. src\extension.ts - Lines: 83 - Chars: 3641 - Tokens: 911
 66. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
 67. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
 68. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
@@ -3723,9 +3723,13 @@ export class FSService {
     constructor(gitApi?: GitAPI) {
         this.gitApi = gitApi;
         if (this.gitApi) {
+            Services.loggerService.log(`FSService constructed with Git API. Found ${this.gitApi.repositories.length} repositories.`);
             this.gitApi.onDidOpenRepository(() => this.triggerRefresh());
             this.gitApi.repositories.forEach(repo => {
-                repo.state.onDidChange(() => this.triggerRefresh());
+                repo.state.onDidChange(() => {
+                    Services.loggerService.log(`Repo state changed for ${path.basename(repo.rootUri.fsPath)}`);
+                    this.triggerRefresh();
+                });
             });
         }
     }
@@ -3742,7 +3746,7 @@ export class FSService {
             if (serverIpc) {
                 serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, {});
             }
-        }, 1000); // Debounce for 1s
+        }, 500); // Debounce for 500ms
     }
 
     public initializeWatcher() {
@@ -3776,8 +3780,10 @@ export class FSService {
         this.watcher.onDidCreate(onFileCreate);
         this.watcher.onDidDelete(onFileChange);
 
-        // Watch for changes in diagnostics
-        vscode.languages.onDidChangeDiagnostics(() => this.triggerRefresh());
+        vscode.languages.onDidChangeDiagnostics(() => {
+            Services.loggerService.log("Diagnostics changed, triggering refresh.");
+            this.triggerRefresh();
+        });
     }
 
     private async getFileStats(filePath: string): Promise<{ tokenCount: number, sizeInBytes: number, isImage: boolean, extension: string }> {
@@ -3831,10 +3837,13 @@ export class FSService {
     private getGitStatusMap(): Map<string, string> {
         const statusMap = new Map<string, string>();
         if (!this.gitApi || this.gitApi.repositories.length === 0) {
+            Services.loggerService.warn("Git API not available or no repositories found.");
             return statusMap;
         }
         
         const repo = this.gitApi.repositories[0];
+        Services.loggerService.log(`Querying Git repo: ${repo.rootUri.fsPath}`);
+
         const getStatusChar = (status: Status): string => {
             switch (status) {
                 case Status.INDEX_ADDED: return 'A';
@@ -3846,12 +3855,26 @@ export class FSService {
                 default: return '';
             }
         };
+        
+        const changes = [
+            ...repo.state.workingTreeChanges, 
+            ...repo.state.indexChanges, 
+            ...repo.state.mergeChanges
+        ];
+        
+        Services.loggerService.log(`Found ${changes.length} changes in working tree/index/merge.`);
+        changes.forEach(change => {
+            const normPath = normalizePath(change.uri.fsPath);
+            const statusChar = getStatusChar(change.status);
+            if (statusChar) {
+                statusMap.set(normPath, statusChar);
+            }
+        });
 
-        repo.state.workingTreeChanges.forEach(change => statusMap.set(normalizePath(change.uri.fsPath), getStatusChar(change.status)));
-        repo.state.indexChanges.forEach(change => statusMap.set(normalizePath(change.uri.fsPath), getStatusChar(change.status)));
-        // Untracked files need to be handled separately as they are not in workingTreeChanges
-        repo.state.untrackedChanges.forEach(uri => statusMap.set(normalizePath(uri.fsPath), 'U'));
-
+        // The official git extension does not expose untrackedChanges directly on repo.state.
+        // A common workaround is needed if the above doesn't include them, but often they are part of workingTreeChanges with status UNTRACKED
+        // Let's log to see what we get.
+        
         return statusMap;
     }
 
@@ -3883,7 +3906,9 @@ export class FSService {
         Services.loggerService.log(`Starting traversal from root: ${rootName}`);
 
         const gitStatusMap = this.getGitStatusMap();
+        Services.loggerService.log(`Built Git status map with ${gitStatusMap.size} entries.`);
         const problemCountsMap = this.getProblemCountsMap();
+        Services.loggerService.log(`Built problem counts map with ${problemCountsMap.size} entries.`);
 
         const rootNode: FileNode = {
             name: rootName,
@@ -3925,12 +3950,16 @@ export class FSService {
                     children.push(dirNode);
                 } else if (type === vscode.FileType.File) {
                     const stats = await this.getFileStats(childPath);
+                    const gitStatus = gitStatusMap.get(childPath);
+                    if (gitStatus) {
+                        Services.loggerService.log(`[Git Status] Found status '${gitStatus}' for ${childPath}`);
+                    }
                     const fileNode: FileNode = {
                         name,
                         absolutePath: childPath,
                         ...stats,
                         fileCount: 1,
-                        gitStatus: gitStatusMap.get(childPath),
+                        gitStatus: gitStatus,
                         problemCounts: problemCountsMap.get(childPath)
                     };
                     children.push(fileNode);
@@ -4192,8 +4221,8 @@ class ServiceContainer {
     public loggerService = LoggerService.getInstance();
     
     public initialize(gitApi?: GitAPI) {
-        this.fsService = new FSService(gitApi);
         this.loggerService.log("Services initializing...");
+        this.fsService = new FSService(gitApi);
         this.fsService.initializeWatcher();
         this.loggerService.log("Services initialized successfully.");
     }
@@ -4421,6 +4450,18 @@ const getFileIcon = (fileName: string) => {
     }
 };
 
+const getGitStatusTooltip = (status?: string): string => {
+    switch (status) {
+        case 'M': return 'Modified';
+        case 'U': return 'Untracked';
+        case 'A': return 'Added';
+        case 'D': return 'Deleted';
+        case 'C': return 'Conflicted';
+        case 'I': return 'Ignored';
+        default: return 'Git Status';
+    }
+};
+
 const filterTree = (nodes: FileNode[], term: string): FileNode[] => {
     if (!term) return nodes;
     const lowerCaseTerm = term.toLowerCase();
@@ -4576,7 +4617,7 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
                 <span className="file-icon">{isDirectory ? (isExpanded ? <VscFolderOpened /> : <VscFolder />) : getFileIcon(node.name)}</span>
                 <span className="file-name">{node.name}</span>
                 <div className="file-stats">
-                    {node.gitStatus && <span className="git-status-badge" title={`Git Status: ${node.gitStatus}`}>{node.gitStatus}</span>}
+                    {node.gitStatus && <span className="git-status-badge" title={getGitStatusTooltip(node.gitStatus)}>{node.gitStatus}</span>}
                     {hasProblems && (
                         <span className="problem-badge" title={problemTooltip}>
                             {problemErrorCount > 0 && <><VscError/> {problemErrorCount}</>}
@@ -6410,50 +6451,51 @@ import { ServerToClientChannel } from "./common/ipc/channels.enum";
 import { API as GitAPI, GitExtension } from "./backend/types/git";
 
 let globalContext: vscode.ExtensionContext | null = null;
-let gitApi: GitAPI | undefined;
 
-export function activate(context: vscode.ExtensionContext) {
+export async function activate(context: vscode.ExtensionContext) {
     // For debugging the activation process itself
     console.log('DCE Extension: Activating...');
+    Services.loggerService.log('Congratulations, your extension "Data Curation Environment" is now active!');
 
     globalContext = context;
 
-    // Get Git API
+    let gitApi: GitAPI | undefined;
     try {
-        const gitExtension = vscode.extensions.getExtension<GitExtension>('vscode.git')?.exports;
+        const gitExtension = vscode.extensions.getExtension<GitExtension>('vscode.git');
         if (gitExtension) {
-            gitApi = gitExtension.getAPI(1);
-            console.log('DCE Extension: Git API successfully retrieved.');
+            await gitExtension.activate(); // Ensure the extension is active
+            gitApi = gitExtension.exports.getAPI(1);
+            Services.loggerService.log('Git API successfully retrieved.');
         } else {
-            console.warn('DCE Extension: vscode.git extension not found.');
+            Services.loggerService.warn('vscode.git extension not found.');
         }
     } catch (error) {
+        Services.loggerService.error(`Failed to get Git API: ${error}`);
         console.error('DCE Extension: Failed to get Git API.', error);
     }
 
-
     try {
         Services.initialize(gitApi);
-        console.log('DCE Extension: Services initialized.');
     } catch (error) {
         console.error('DCE Extension: CRITICAL - Error initializing services.', error);
+        Services.loggerService.error(`CRITICAL - Error initializing services: ${error}`);
         vscode.window.showErrorMessage("Data Curation Environment failed to initialize services. Check the debug console.");
         return;
     }
     
     try {
         registerCommands(context);
-        console.log('DCE Extension: Commands registered.');
     } catch (error) {
         console.error('DCE Extension: CRITICAL - Error registering commands.', error);
+        Services.loggerService.error(`CRITICAL - Error registering commands: ${error}`);
         vscode.window.showErrorMessage("Data Curation Environment failed to register commands. Check the debug console.");
     }
 
     try {
         registerViews(context);
-        console.log('DCE Extension: Views registered.');
     } catch (error) {
         console.error('DCE Extension: CRITICAL - Error registering views.', error);
+        Services.loggerService.error(`CRITICAL - Error registering views: ${error}`);
          vscode.window.showErrorMessage("Data Curation Environment failed to register views. Check the debug console.");
     }
     
@@ -6470,9 +6512,6 @@ export function activate(context: vscode.ExtensionContext) {
             }
         })
     );
-
-    Services.loggerService.log('Congratulations, your extension "Data Curation Environment" is now active!');
-    console.log('Congratulations, your extension "Data Curation Environment" is now active!');
 }
 
 export function getContext() {
@@ -6483,6 +6522,7 @@ export function getContext() {
 }
 
 export function deactivate() {
+    Services.loggerService.log('DCE Extension: Deactivating.');
     console.log('DCE Extension: Deactivating.');
 }
 </file>

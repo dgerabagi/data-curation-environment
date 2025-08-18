@@ -24,9 +24,13 @@ export class FSService {
     constructor(gitApi?: GitAPI) {
         this.gitApi = gitApi;
         if (this.gitApi) {
+            Services.loggerService.log(`FSService constructed with Git API. Found ${this.gitApi.repositories.length} repositories.`);
             this.gitApi.onDidOpenRepository(() => this.triggerRefresh());
             this.gitApi.repositories.forEach(repo => {
-                repo.state.onDidChange(() => this.triggerRefresh());
+                repo.state.onDidChange(() => {
+                    Services.loggerService.log(`Repo state changed for ${path.basename(repo.rootUri.fsPath)}`);
+                    this.triggerRefresh();
+                });
             });
         }
     }
@@ -43,7 +47,7 @@ export class FSService {
             if (serverIpc) {
                 serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, {});
             }
-        }, 1000); // Debounce for 1s
+        }, 500); // Debounce for 500ms
     }
 
     public initializeWatcher() {
@@ -77,8 +81,10 @@ export class FSService {
         this.watcher.onDidCreate(onFileCreate);
         this.watcher.onDidDelete(onFileChange);
 
-        // Watch for changes in diagnostics
-        vscode.languages.onDidChangeDiagnostics(() => this.triggerRefresh());
+        vscode.languages.onDidChangeDiagnostics(() => {
+            Services.loggerService.log("Diagnostics changed, triggering refresh.");
+            this.triggerRefresh();
+        });
     }
 
     private async getFileStats(filePath: string): Promise<{ tokenCount: number, sizeInBytes: number, isImage: boolean, extension: string }> {
@@ -132,10 +138,13 @@ export class FSService {
     private getGitStatusMap(): Map<string, string> {
         const statusMap = new Map<string, string>();
         if (!this.gitApi || this.gitApi.repositories.length === 0) {
+            Services.loggerService.warn("Git API not available or no repositories found.");
             return statusMap;
         }
         
         const repo = this.gitApi.repositories[0];
+        Services.loggerService.log(`Querying Git repo: ${repo.rootUri.fsPath}`);
+
         const getStatusChar = (status: Status): string => {
             switch (status) {
                 case Status.INDEX_ADDED: return 'A';
@@ -147,12 +156,26 @@ export class FSService {
                 default: return '';
             }
         };
+        
+        const changes = [
+            ...repo.state.workingTreeChanges, 
+            ...repo.state.indexChanges, 
+            ...repo.state.mergeChanges
+        ];
+        
+        Services.loggerService.log(`Found ${changes.length} changes in working tree/index/merge.`);
+        changes.forEach(change => {
+            const normPath = normalizePath(change.uri.fsPath);
+            const statusChar = getStatusChar(change.status);
+            if (statusChar) {
+                statusMap.set(normPath, statusChar);
+            }
+        });
 
-        repo.state.workingTreeChanges.forEach(change => statusMap.set(normalizePath(change.uri.fsPath), getStatusChar(change.status)));
-        repo.state.indexChanges.forEach(change => statusMap.set(normalizePath(change.uri.fsPath), getStatusChar(change.status)));
-        // Untracked files need to be handled separately as they are not in workingTreeChanges
-        repo.state.untrackedChanges.forEach(uri => statusMap.set(normalizePath(uri.fsPath), 'U'));
-
+        // The official git extension does not expose untrackedChanges directly on repo.state.
+        // A common workaround is needed if the above doesn't include them, but often they are part of workingTreeChanges with status UNTRACKED
+        // Let's log to see what we get.
+        
         return statusMap;
     }
 
@@ -184,7 +207,9 @@ export class FSService {
         Services.loggerService.log(`Starting traversal from root: ${rootName}`);
 
         const gitStatusMap = this.getGitStatusMap();
+        Services.loggerService.log(`Built Git status map with ${gitStatusMap.size} entries.`);
         const problemCountsMap = this.getProblemCountsMap();
+        Services.loggerService.log(`Built problem counts map with ${problemCountsMap.size} entries.`);
 
         const rootNode: FileNode = {
             name: rootName,
@@ -226,12 +251,16 @@ export class FSService {
                     children.push(dirNode);
                 } else if (type === vscode.FileType.File) {
                     const stats = await this.getFileStats(childPath);
+                    const gitStatus = gitStatusMap.get(childPath);
+                    if (gitStatus) {
+                        Services.loggerService.log(`[Git Status] Found status '${gitStatus}' for ${childPath}`);
+                    }
                     const fileNode: FileNode = {
                         name,
                         absolutePath: childPath,
                         ...stats,
                         fileCount: 1,
-                        gitStatus: gitStatusMap.get(childPath),
+                        gitStatus: gitStatus,
                         problemCounts: problemCountsMap.get(childPath)
                     };
                     children.push(fileNode);

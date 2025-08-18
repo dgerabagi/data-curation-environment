@@ -13,8 +13,8 @@ class ServiceContainer {
     public loggerService = LoggerService.getInstance();
     
     public initialize(gitApi?: GitAPI) {
-        this.fsService = new FSService(gitApi);
         this.loggerService.log("Services initializing...");
+        this.fsService = new FSService(gitApi);
         this.fsService.initializeWatcher();
         this.loggerService.log("Services initialized successfully.");
     }
