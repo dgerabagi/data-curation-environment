@@ -1,4 +1,4 @@
-/* Updated on: C30 (Add user-select: none to prevent text highlighting, add search styles) */
+/* Updated on: C32 (Add Git and Problem status styles) */
 body {
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -404,6 +404,30 @@ body {
     text-overflow: ellipsis;
     flex-grow: 1;
     user-select: none; /* Prevent text selection on click/drag */
+}
+
+/* Git Status & Problems Styling */
+.file-item.git-status-M .file-name, .file-item.git-status-M .git-status-badge { color: var(--vscode-gitDecoration-modifiedResourceForeground); }
+.file-item.git-status-U .file-name, .file-item.git-status-U .git-status-badge { color: var(--vscode-gitDecoration-untrackedResourceForeground); }
+.file-item.git-status-D .file-name, .file-item.git-status-D .git-status-badge { color: var(--vscode-gitDecoration-deletedResourceForeground); }
+.file-item.git-status-A .file-name, .file-item.git-status-A .git-status-badge { color: var(--vscode-gitDecoration-addedResourceForeground); }
+.file-item.git-status-C .file-name, .file-item.git-status-C .git-status-badge { color: var(--vscode-gitDecoration-conflictingResourceForeground); }
+.file-item.git-status-I .file-name, .file-item.git-status-I .git-status-badge { color: var(--vscode-gitDecoration-ignoredResourceForeground); }
+
+.file-item.problem-error .file-name { color: var(--vscode-list-errorForeground); }
+.file-item.problem-warning .file-name { color: var(--vscode-list-warningForeground); }
+
+.git-status-badge {
+    font-weight: bold;
+}
+
+.problem-badge {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    & > svg {
+        color: var(--vscode-list-errorForeground);
+    }
 }
 
 .file-stats {

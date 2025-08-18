@@ -7,6 +7,7 @@ import { FileNode } from "@/common/types/file-node";
 import { Services } from "./services";
 import { serverIPCs } from "@/client/views";
 import { VIEW_TYPES } from "@/common/view-types";
+import { API as GitAPI, Status } from "../types/git";
 
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 const EXCLUSION_PATTERNS = ['node_modules', 'dist', 'out', '.git', 'flattened_repo.md'];
@@ -18,6 +19,32 @@ export class FSService {
     private fileTreeCache: FileNode[] | null = null;
     private watcher: vscode.FileSystemWatcher | null = null;
     private debounceTimer: NodeJS.Timeout | null = null;
+    private gitApi?: GitAPI;
+
+    constructor(gitApi?: GitAPI) {
+        this.gitApi = gitApi;
+        if (this.gitApi) {
+            this.gitApi.onDidOpenRepository(() => this.triggerRefresh());
+            this.gitApi.repositories.forEach(repo => {
+                repo.state.onDidChange(() => this.triggerRefresh());
+            });
+        }
+    }
+
+    private triggerRefresh() {
+        if (this.debounceTimer) {
+            clearTimeout(this.debounceTimer);
+        }
+        this.debounceTimer = setTimeout(() => {
+            Services.loggerService.log(`Git state change detected. Invalidating cache and triggering refresh.`);
+            this.fileTreeCache = null;
+            
+            const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
+            if (serverIpc) {
+                serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, {});
+            }
+        }, 1000); // Debounce for 1s
+    }
 
     public initializeWatcher() {
         if (this.watcher) {
@@ -27,30 +54,15 @@ export class FSService {
         this.watcher = vscode.workspace.createFileSystemWatcher('**/*');
         Services.loggerService.log("File system watcher initialized.");
 
-        const triggerRefresh = (uri: vscode.Uri) => {
-            // More robust check for ignored paths
+        const onFileChange = (uri: vscode.Uri) => {
             const normalizedPath = normalizePath(uri.fsPath);
             if (EXCLUSION_PATTERNS.some(pattern => normalizedPath.includes(`/${pattern}/`))) {
                 return;
             }
-
-            if (this.debounceTimer) {
-                clearTimeout(this.debounceTimer);
-            }
-            this.debounceTimer = setTimeout(() => {
-                Services.loggerService.log(`File system change detected at ${uri.fsPath}. Invalidating cache and triggering refresh.`);
-                this.fileTreeCache = null;
-                
-                const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
-                if (serverIpc) {
-                    serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, {});
-                } else {
-                    Services.loggerService.warn("Could not push file tree update, serverIpc not available.");
-                }
-            }, 500);
+            this.triggerRefresh();
         };
 
-        const createHandler = async (uri: vscode.Uri) => {
+        const onFileCreate = async (uri: vscode.Uri) => {
             const autoAddEnabled = Services.selectionService.getAutoAddState();
             if (autoAddEnabled) {
                 Services.loggerService.log(`Auto-add enabled. Adding new file to selection: ${uri.fsPath}`);
@@ -58,12 +70,15 @@ export class FSService {
                 const newSelection = [...new Set([...currentSelection, normalizePath(uri.fsPath)])];
                 await Services.selectionService.saveCurrentSelection(newSelection);
             }
-            triggerRefresh(uri);
+            onFileChange(uri);
         };
 
-        this.watcher.onDidChange(triggerRefresh);
-        this.watcher.onDidCreate(createHandler);
-        this.watcher.onDidDelete(triggerRefresh);
+        this.watcher.onDidChange(onFileChange);
+        this.watcher.onDidCreate(onFileCreate);
+        this.watcher.onDidDelete(onFileChange);
+
+        // Watch for changes in diagnostics
+        vscode.languages.onDidChangeDiagnostics(() => this.triggerRefresh());
     }
 
     private async getFileStats(filePath: string): Promise<{ tokenCount: number, sizeInBytes: number, isImage: boolean, extension: string }> {
@@ -114,29 +129,79 @@ export class FSService {
         serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: this.fileTreeCache });
     }
 
+    private getGitStatusMap(): Map<string, string> {
+        const statusMap = new Map<string, string>();
+        if (!this.gitApi || this.gitApi.repositories.length === 0) {
+            return statusMap;
+        }
+        
+        const repo = this.gitApi.repositories[0];
+        const getStatusChar = (status: Status): string => {
+            switch (status) {
+                case Status.INDEX_ADDED: return 'A';
+                case Status.MODIFIED: return 'M';
+                case Status.DELETED: return 'D';
+                case Status.UNTRACKED: return 'U';
+                case Status.IGNORED: return 'I';
+                case Status.CONFLICT: return 'C';
+                default: return '';
+            }
+        };
+
+        repo.state.workingTreeChanges.forEach(change => statusMap.set(normalizePath(change.uri.fsPath), getStatusChar(change.status)));
+        repo.state.indexChanges.forEach(change => statusMap.set(normalizePath(change.uri.fsPath), getStatusChar(change.status)));
+        // Untracked files need to be handled separately as they are not in workingTreeChanges
+        repo.state.untrackedChanges.forEach(uri => statusMap.set(normalizePath(uri.fsPath), 'U'));
+
+        return statusMap;
+    }
+
+    private getProblemCountsMap(): Map<string, { error: number, warning: number }> {
+        const problemMap = new Map<string, { error: number, warning: number }>();
+        const diagnostics = vscode.languages.getDiagnostics();
+
+        for (const [uri, diagnosticArr] of diagnostics) {
+            const path = normalizePath(uri.fsPath);
+            let counts = problemMap.get(path);
+            if (!counts) {
+                counts = { error: 0, warning: 0 };
+                problemMap.set(path, counts);
+            }
+            for (const diag of diagnosticArr) {
+                if (diag.severity === vscode.DiagnosticSeverity.Error) {
+                    counts.error++;
+                } else if (diag.severity === vscode.DiagnosticSeverity.Warning) {
+                    counts.warning++;
+                }
+            }
+        }
+        return problemMap;
+    }
+
     private async buildTreeFromTraversal(rootUri: vscode.Uri): Promise<FileNode> {
         const rootPath = rootUri.fsPath;
         const rootName = path.basename(rootPath);
         Services.loggerService.log(`Starting traversal from root: ${rootName}`);
 
+        const gitStatusMap = this.getGitStatusMap();
+        const problemCountsMap = this.getProblemCountsMap();
+
         const rootNode: FileNode = {
             name: rootName,
             absolutePath: normalizePath(rootPath),
             children: [],
-            tokenCount: 0,
-            fileCount: 0,
-            isImage: false,
-            sizeInBytes: 0,
-            extension: ''
+            tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '',
+            gitStatus: gitStatusMap.get(normalizePath(rootPath)),
+            problemCounts: problemCountsMap.get(normalizePath(rootPath))
         };
 
-        rootNode.children = await this._traverseDirectory(rootUri);
+        rootNode.children = await this._traverseDirectory(rootUri, gitStatusMap, problemCountsMap);
         this._aggregateStats(rootNode);
 
         return rootNode;
     }
     
-    private async _traverseDirectory(dirUri: vscode.Uri): Promise<FileNode[]> {
+    private async _traverseDirectory(dirUri: vscode.Uri, gitStatusMap: Map<string, string>, problemCountsMap: Map<string, { error: number, warning: number }>): Promise<FileNode[]> {
         const children: FileNode[] = [];
         try {
             const entries = await vscode.workspace.fs.readDirectory(dirUri);
@@ -146,14 +211,16 @@ export class FSService {
                 }
 
                 const childUri = vscode.Uri.joinPath(dirUri, name);
-                const childPath = childUri.fsPath;
+                const childPath = normalizePath(childUri.fsPath);
 
                 if (type === vscode.FileType.Directory) {
                     const dirNode: FileNode = {
                         name,
-                        absolutePath: normalizePath(childPath),
-                        children: await this._traverseDirectory(childUri),
-                        tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: ''
+                        absolutePath: childPath,
+                        children: await this._traverseDirectory(childUri, gitStatusMap, problemCountsMap),
+                        tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '',
+                        gitStatus: gitStatusMap.get(childPath),
+                        problemCounts: problemCountsMap.get(childPath)
                     };
                     this._aggregateStats(dirNode);
                     children.push(dirNode);
@@ -161,9 +228,11 @@ export class FSService {
                     const stats = await this.getFileStats(childPath);
                     const fileNode: FileNode = {
                         name,
-                        absolutePath: normalizePath(childPath),
+                        absolutePath: childPath,
                         ...stats,
                         fileCount: 1,
+                        gitStatus: gitStatusMap.get(childPath),
+                        problemCounts: problemCountsMap.get(childPath)
                     };
                     children.push(fileNode);
                 }
@@ -191,14 +260,24 @@ export class FSService {
         let totalTokens = 0;
         let totalFiles = 0;
         let totalBytes = 0;
+        let totalErrors = node.problemCounts?.error || 0;
+        let totalWarnings = node.problemCounts?.warning || 0;
+
         for (const child of node.children) {
             totalTokens += child.tokenCount;
             totalFiles += child.fileCount;
             totalBytes += child.sizeInBytes;
+            if(child.problemCounts) {
+                totalErrors += child.problemCounts.error;
+                totalWarnings += child.problemCounts.warning;
+            }
         }
         node.tokenCount = totalTokens;
         node.fileCount = totalFiles;
         node.sizeInBytes = totalBytes;
+        if(totalErrors > 0 || totalWarnings > 0) {
+            node.problemCounts = { error: totalErrors, warning: totalWarnings };
+        }
     }
 
     // --- File Operations ---

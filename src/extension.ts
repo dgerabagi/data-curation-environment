@@ -4,8 +4,10 @@ import { registerCommands } from "./backend/commands/register-commands";
 import { Services } from "./backend/services/services";
 import { VIEW_TYPES } from "./common/view-types";
 import { ServerToClientChannel } from "./common/ipc/channels.enum";
+import { API as GitAPI, GitExtension } from "./backend/types/git";
 
 let globalContext: vscode.ExtensionContext | null = null;
+let gitApi: GitAPI | undefined;
 
 export function activate(context: vscode.ExtensionContext) {
     // For debugging the activation process itself
@@ -13,8 +15,22 @@ export function activate(context: vscode.ExtensionContext) {
 
     globalContext = context;
 
+    // Get Git API
     try {
-        Services.initialize();
+        const gitExtension = vscode.extensions.getExtension<GitExtension>('vscode.git')?.exports;
+        if (gitExtension) {
+            gitApi = gitExtension.getAPI(1);
+            console.log('DCE Extension: Git API successfully retrieved.');
+        } else {
+            console.warn('DCE Extension: vscode.git extension not found.');
+        }
+    } catch (error) {
+        console.error('DCE Extension: Failed to get Git API.', error);
+    }
+
+
+    try {
+        Services.initialize(gitApi);
         console.log('DCE Extension: Services initialized.');
     } catch (error) {
         console.error('DCE Extension: CRITICAL - Error initializing services.', error);

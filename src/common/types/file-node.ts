@@ -7,4 +7,6 @@ export interface FileNode {
     isImage: boolean;
     sizeInBytes: number;
     extension: string;
+    gitStatus?: string; // e.g., 'M', 'U', 'A', 'D', 'C'
+    problemCounts?: { error: number; warning: number; };
 }

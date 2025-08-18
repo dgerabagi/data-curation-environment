@@ -3,17 +3,18 @@ import { FSService } from "./fs.service";
 import { FlattenerService } from "./flattener.service";
 import { SelectionService } from "./selection.service";
 import { LoggerService } from "./logger.service";
+import { API as GitAPI } from "../types/git";
 
 // A simple container for services
 class ServiceContainer {
-    public fsService = new FSService();
+    public fsService!: FSService;
     public flattenerService = new FlattenerService();
     public selectionService = new SelectionService();
     public loggerService = LoggerService.getInstance();
     
-    public initialize() {
+    public initialize(gitApi?: GitAPI) {
+        this.fsService = new FSService(gitApi);
         this.loggerService.log("Services initializing...");
-        // C20: Correctly call the watcher initialization method.
         this.fsService.initializeWatcher();
         this.loggerService.log("Services initialized successfully.");
     }

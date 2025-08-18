@@ -1,25 +1,25 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-18T18:31:17.793Z
+  Date Generated: 2025-08-18T19:06:55.540Z
   ---
-  Total Files: 164
-  Total Lines: 12538
-  Total Characters: 520471
-  Approx. Tokens: 130179
+  Total Files: 165
+  Total Lines: 12757
+  Total Characters: 529144
+  Approx. Tokens: 132349
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
 2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
-3. src\backend\services\fs.service.ts (3073 tokens)
-4. src\client\views\context-chooser.view\view.tsx (2994 tokens)
-5. src\client\views\context-chooser.view\view.scss (2854 tokens)
+3. src\backend\services\fs.service.ts (3974 tokens)
+4. src\client\views\context-chooser.view\view.scss (3169 tokens)
+5. src\client\views\context-chooser.view\view.tsx (2994 tokens)
 6. src\client\components\SelectedFilesView.tsx (2716 tokens)
 7. The-Creator-AI-main\src\backend\services\code.service.ts (2618 tokens)
 8. The-Creator-AI-main\src\backend\services\fs.service.ts (2495 tokens)
-9. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts (2424 tokens)
-10. src\Artifacts\A0. DCE Master Artifact List.md (2257 tokens)
+9. src\client\components\file-tree\FileTree.tsx (2457 tokens)
+10. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts (2424 tokens)
 
 <!-- Full File List -->
 1. .gitignore - Lines: 9 - Chars: 108 - Tokens: 27
@@ -42,11 +42,11 @@
 18. src\Artifacts\A19. DCE - Phase 1 - Double-Click & Quick-Remove Feature Plan.md - Lines: 42 - Chars: 4603 - Tokens: 1151
 19. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 31 - Chars: 4278 - Tokens: 1070
 20. src\Artifacts\A20. DCE - Phase 1 - Advanced UX & Automation Plan.md - Lines: 44 - Chars: 6117 - Tokens: 1530
-21. src\Artifacts\A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer.md - Lines: 47 - Chars: 7282 - Tokens: 1821
+21. src\Artifacts\A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer.md - Lines: 47 - Chars: 7141 - Tokens: 1786
 22. src\Artifacts\A22. DCE - Phase 1 - Search & Filter Feature Plan.md - Lines: 58 - Chars: 3663 - Tokens: 916
 23. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 49 - Chars: 4801 - Tokens: 1201
 24. src\Artifacts\A24. DCE - Selection Paradigm Terminology.md - Lines: 57 - Chars: 3330 - Tokens: 833
-25. src\Artifacts\A25. DCE - Phase 1 - Git & Problems Integration Plan.md - Lines: 58 - Chars: 5124 - Tokens: 1281
+25. src\Artifacts\A25. DCE - Phase 1 - Git & Problems Integration Plan.md - Lines: 61 - Chars: 5315 - Tokens: 1329
 26. src\Artifacts\A26. DCE - Phase 1 - File System Traversal & Caching Strategy.md - Lines: 46 - Chars: 4009 - Tokens: 1003
 27. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
 28. src\Artifacts\A4. DCE - Analysis of The-Creator-AI Repo.md - Lines: 56 - Chars: 5722 - Tokens: 1431
@@ -58,134 +58,135 @@
 34. src\backend\commands\commands.ts - Lines: 88 - Chars: 3807 - Tokens: 952
 35. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
 36. src\backend\services\flattener.service.ts - Lines: 174 - Chars: 7078 - Tokens: 1770
-37. src\backend\services\fs.service.ts - Lines: 285 - Chars: 12291 - Tokens: 3073
+37. src\backend\services\fs.service.ts - Lines: 364 - Chars: 15893 - Tokens: 3974
 38. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
 39. src\backend\services\selection.service.ts - Lines: 69 - Chars: 2510 - Tokens: 628
-40. src\backend\services\services.ts - Lines: 22 - Chars: 844 - Tokens: 211
-41. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
-42. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
-43. src\client\components\file-tree\FileTree.tsx - Lines: 207 - Chars: 8762 - Tokens: 2191
-44. src\client\components\file-tree\FileTree.utils.ts - Lines: 106 - Chars: 3947 - Tokens: 987
-45. src\client\components\SelectedFilesView.tsx - Lines: 223 - Chars: 10861 - Tokens: 2716
-46. src\client\components\tree-view\TreeView.tsx - Lines: 182 - Chars: 7901 - Tokens: 1976
-47. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
-48. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
-49. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-50. src\client\views\context-chooser.view\on-message.ts - Lines: 90 - Chars: 3852 - Tokens: 963
-51. src\client\views\context-chooser.view\view.scss - Lines: 490 - Chars: 11415 - Tokens: 2854
-52. src\client\views\context-chooser.view\view.tsx - Lines: 252 - Chars: 11975 - Tokens: 2994
-53. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
-54. src\common\ipc\channels.enum.ts - Lines: 32 - Chars: 1544 - Tokens: 386
-55. src\common\ipc\channels.type.ts - Lines: 29 - Chars: 2002 - Tokens: 501
-56. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
-57. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-58. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-59. src\common\types\file-node.ts - Lines: 10 - Chars: 300 - Tokens: 75
-60. src\common\types\vscode-webview.d.ts - Lines: 13 - Chars: 357 - Tokens: 90
-61. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
-62. src\common\utils\view-html.ts - Lines: 26 - Chars: 971 - Tokens: 243
-63. src\common\view-types.ts - Lines: 8 - Chars: 246 - Tokens: 62
-64. src\extension.ts - Lines: 68 - Chars: 2848 - Tokens: 712
-65. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
-66. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
-67. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
-68. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
-69. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
-70. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
-71. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
-72. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
-73. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
-74. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
-75. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
-76. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
-77. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
-78. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
-79. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
-80. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
-81. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
-82. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
-83. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
-84. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
-85. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
-86. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
-87. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
-88. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
-89. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
-90. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
-91. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
-92. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
-93. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
-94. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
-95. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
-96. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
-97. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
-98. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
-99. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
-100. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
-101. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
-102. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
-103. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
-104. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
-105. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
-106. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
-107. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
-108. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
-109. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
-110. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
-111. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
-112. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
-113. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
-114. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
-115. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
-116. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
-117. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
-118. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
-119. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
-120. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
-121. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
-122. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
-123. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
-124. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
-125. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
-126. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
-127. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
-128. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
-129. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
-130. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
-131. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
-132. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-133. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
-134. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
-135. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
-136. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-137. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
-138. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
-139. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
-140. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-141. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
-142. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
-143. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
-144. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
-145. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
-146. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
-147. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
-148. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-149. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
-150. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
-151. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
-152. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
-153. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
-154. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
-155. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
-156. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
-157. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
-158. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
-159. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
-160. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
-161. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
-162. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
-163. tsconfig.json - Lines: 19 - Chars: 457 - Tokens: 115
-164. webpack.config.js - Lines: 63 - Chars: 1710 - Tokens: 428
+40. src\backend\services\services.ts - Lines: 23 - Chars: 882 - Tokens: 221
+41. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
+42. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
+43. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
+44. src\client\components\file-tree\FileTree.tsx - Lines: 222 - Chars: 9825 - Tokens: 2457
+45. src\client\components\file-tree\FileTree.utils.ts - Lines: 106 - Chars: 3947 - Tokens: 987
+46. src\client\components\SelectedFilesView.tsx - Lines: 223 - Chars: 10861 - Tokens: 2716
+47. src\client\components\tree-view\TreeView.tsx - Lines: 182 - Chars: 7901 - Tokens: 1976
+48. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
+49. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
+50. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
+51. src\client\views\context-chooser.view\on-message.ts - Lines: 90 - Chars: 3852 - Tokens: 963
+52. src\client\views\context-chooser.view\view.scss - Lines: 514 - Chars: 12675 - Tokens: 3169
+53. src\client\views\context-chooser.view\view.tsx - Lines: 252 - Chars: 11975 - Tokens: 2994
+54. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
+55. src\common\ipc\channels.enum.ts - Lines: 32 - Chars: 1544 - Tokens: 386
+56. src\common\ipc\channels.type.ts - Lines: 29 - Chars: 2002 - Tokens: 501
+57. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
+58. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+59. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
+60. src\common\types\file-node.ts - Lines: 12 - Chars: 416 - Tokens: 104
+61. src\common\types\vscode-webview.d.ts - Lines: 13 - Chars: 357 - Tokens: 90
+62. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
+63. src\common\utils\view-html.ts - Lines: 26 - Chars: 971 - Tokens: 243
+64. src\common\view-types.ts - Lines: 8 - Chars: 246 - Tokens: 62
+65. src\extension.ts - Lines: 84 - Chars: 3448 - Tokens: 862
+66. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
+67. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
+68. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
+69. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
+70. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
+71. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
+72. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
+73. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
+74. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
+75. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
+76. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
+77. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
+78. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
+79. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
+80. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
+81. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
+82. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
+83. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
+84. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
+85. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
+86. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
+87. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
+88. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
+89. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
+90. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
+91. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
+92. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
+93. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
+94. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
+95. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
+96. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
+97. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
+98. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
+99. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
+100. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
+101. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
+102. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
+103. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
+104. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
+105. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
+106. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
+107. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
+108. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
+109. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
+110. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
+111. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
+112. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
+113. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
+114. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
+115. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
+116. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
+117. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
+118. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
+119. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
+120. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
+121. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
+122. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
+123. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
+124. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
+125. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
+126. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
+127. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
+128. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
+129. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
+130. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
+131. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
+132. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
+133. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+134. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
+135. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
+136. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
+137. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+138. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
+139. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
+140. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
+141. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+142. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
+143. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
+144. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
+145. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
+146. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
+147. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
+148. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
+149. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+150. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
+151. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
+152. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
+153. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
+154. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
+155. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
+156. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
+157. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
+158. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
+159. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
+160. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
+161. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
+162. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
+163. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
+164. tsconfig.json - Lines: 19 - Chars: 457 - Tokens: 115
+165. webpack.config.js - Lines: 63 - Chars: 1710 - Tokens: 428
 
 <file path=".gitignore">
 node_modules
@@ -1417,7 +1418,7 @@ This document outlines a series of advanced user experience (UX) and automation 
 # Artifact A21: DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer
 # Date Created: C28
 # Author: AI Model
-# Updated on: C30 (Add notes on selection highlight bug and active file sync regression)
+# Updated on: C32 (Mark Git/Problems integration as In Progress)
 
 - **Key/Value for A0:**
 - **Description:** A comparative analysis documenting the functional and behavioral differences between the DCE custom file view and the native VS Code Explorer to guide future development and feature parity.
@@ -1429,37 +1430,37 @@ The primary goal of the Data Curation Environment (DCE) is to enhance, not repla
 
 ## 2. Feature Comparison Matrix
 
-| Feature Category            | Native VS Code Explorer         | DCE (as of C30)        | Status & Notes                                                                                                                                              |
+| Feature Category            | Native VS Code Explorer         | DCE (as of C32)        | Status & Notes                                                                                                                                              |
 | --------------------------- | ------------------------------- | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **File Display**            |                                 |                        |                                                                                                                                                             |
 | Hierarchical Tree           | ✅                              | ✅                     | **Complete.** Core functionality is present.                                                                                                                |
 | File/Folder Icons           | ✅                              | ✅                     | **Complete.** Icons match file types.                                                                                                                       |
-| Active File Highlighting    | ✅                              | ❌ (Regression)        | **Bug.** View is no longer syncing with the active editor. This was previously working and needs to be fixed.                                                |
-| Problems/Git Status         | ✅ (Colors, badges)             | ❌                     | **Missing.** No integration with Problems or Git status (e.g., file coloring for new/modified/untracked files). High-value feature for context awareness. Planned in A25. |
-| **Selection**               |                                  |                        |                                                                                                                                                             |
-| Single-Click (Files)        | ✅ Opens file                   | ✅ Opens & Selects file| **Complete.** Now aligns with native behavior.                                                                                                               |
+| Active File Highlighting    | ✅                              | ✅                     | **Complete.**                                                                                                                                               |
+| Problems/Git Status         | ✅ (Colors, badges)             | ⏳ In Progress         | **In Progress (C32).** Backend and frontend work is underway to display Git status colors and problem badges. Planned in A25.                               |
+| **Selection**               |                                 |                        |                                                                                                                                                             |
+| Single-Click (Files)        | ✅ Opens file                   | ✅ Opens & Selects file| **Complete.** Aligns with native behavior.                                                                                                                  |
 | Single-Click (Folders)      | ✅ Expands/Collapses            | ✅ Expands/Collapses   | **Complete.** |
-| Multi-Select (Ctrl)         | ✅                              | ✅                     | **Complete.** Critical feature for context menu actions is now implemented.                                                                                 |
-| Multi-Select (Shift)        | ✅ (Selects rows)               | ✅ (Selects rows and text) | **Bug.** Shift-clicking correctly selects the range of files, but also incorrectly highlights the file name text. This needs to be disabled via CSS (`user-select: none`). |
-| **Interaction**             |                                  |                        |                                                                                                                                                             |
+| Multi-Select (Ctrl)         | ✅                              | ✅                     | **Complete (Fixed in C31).**                                                                                                                                |
+| Multi-Select (Shift)        | ✅ (Selects rows)               | ✅ (Selects rows)      | **Complete (Fixed in C31).** Shift-click no longer incorrectly highlights text.                                                                             |
+| **Interaction**             |                                 |                        |                                                                                                                                                             |
 | Drag and Drop               | ✅ (Move files/folders)         | ❌                     | **Missing.** This is a complex but high-value feature. Requires VS Code Drag and Drop API integration. Planned in A23.                                     |
 | Right-Click Context Menu    | ✅ (Extensive options)          | ✅ (Basic options)     | **Partial.** DCE has basic operations (Rename, Delete, etc.). Missing advanced options like `Open in Integrated Terminal`, `Find in Folder...`, `Compare...`. |
 | Keyboard Navigation         | ✅ (Arrows, Enter, Space)       | ❌                     | **Missing.** Users cannot navigate the tree or select/open items using the keyboard. Planned in A23.                                                        |
 | Inline Rename               | ✅ (F2 or slow double-click)    | ✅                     | **Complete.** |
-| **File Operations**         |                                  |                        |                                                                                                                                                             |
+| **File Operations**         |                                 |                        |                                                                                                                                                             |
 | New File / Folder           | ✅                              | ✅                     | **Complete.** |
 | Delete (to Trash)           | ✅                              | ✅                     | **Complete.** |
 | Cut / Copy / Paste          | ✅                              | ❌                     | **Missing.** Standard file system operations are not yet implemented.                                                                                       |
-| **Search & Filter**         |                                  |                        |                                                                                                                                                             |
-| Filter by Name              | ✅ (Start typing)               | ⏳ In Progress         | **In Progress (C30).** Search button and UI are being implemented. Planned in A22.                                                                          |
+| **Search & Filter**         |                                 |                        |                                                                                                                                                             |
+| Filter by Name              | ✅ (Start typing)               | ✅                     | **Complete.**                                                                                                                                               |
 
 ## 3. High-Priority Features for Future Cycles
 
 Based on the analysis, the following features represent the most significant gaps in user experience and should be prioritized:
 
-1.  **Git Status Integration:** Providing visual cues (colors, letters like 'U' or 'M') for the Git status of files is a massive quality-of-life improvement that provides essential context at a glance.
+1.  **Keyboard Navigation:** Power users rely heavily on keyboard navigation (arrow keys to move, Enter to open/expand, Space to select). The lack of this makes the DCE feel incomplete.
 2.  **Drag and Drop:** The ability to move files and folders by dragging them is a core, intuitive part of any file explorer. While technically complex to implement in a webview, its absence is a major point of friction.
-3.  **Keyboard Navigation:** Power users rely heavily on keyboard navigation (arrow keys to move, Enter to open/expand, Space to select). The lack of this makes the DCE feel incomplete.
+3.  **Cut / Copy / Paste:** Adding standard clipboard operations for files is a key missing piece of basic file management.
 4.  **Expanded Context Menu:** Adding more of the native right-click options, especially `Open in Integrated Terminal` and `Compare Selected`, would significantly reduce the need for users to switch back to the native Explorer.
 </file>
 
@@ -1640,6 +1641,7 @@ By adhering to this terminology, we can ensure clarity in communication and prec
 # Artifact A25: DCE - Phase 1 - Git & Problems Integration Plan
 # Date Created: C30
 # Author: AI Model
+# Updated on: C32 (Marking as active work for this cycle)
 
 - **Key/Value for A0:**
 - **Description:** Outlines the user stories and technical approach for integrating Git status indicators and VS Code Problem Diagnostics into the custom file tree.
@@ -1648,6 +1650,8 @@ By adhering to this terminology, we can ensure clarity in communication and prec
 ## 1. Overview & Goal
 
 To achieve full feature parity with the native VS Code Explorer and provide critical context to the user, the Data Curation Environment (DCE) file tree must display information about a file's Git status and any associated problems (errors/warnings). The goal of this feature is to overlay this diagnostic and source control information directly onto the file tree, allowing users to make more informed decisions during context curation.
+
+**Status (C32):** This feature is the primary focus of the current development cycle.
 
 ## 2. User Stories
 
@@ -1665,34 +1669,34 @@ To achieve full feature parity with the native VS Code Explorer and provide crit
     ```typescript
     export interface FileNode {
         // ... existing properties
-        gitStatus?: string; // e.g., 'M', 'U', 'A', 'D'
-        problemCounts?: { error: number; warning: number; info: number; hint: number };
+        gitStatus?: string; // e.g., 'M', 'U', 'A', 'D', 'C' for Conflicted
+        problemCounts?: { error: number; warning: number; };
     }
     ```
 
 2.  **Git Status Integration (`fs.service.ts`):**
-    *   This is best achieved using the official Git extension API to ensure consistency and avoid shelling out to the git CLI.
-    *   In `services.ts` or `fs.service.ts`, get the API: `const gitExtension = vscode.extensions.getExtension('vscode.git')?.exports; const gitApi = gitExtension?.getAPI(1);`
+    *   This will be achieved by using the official Git extension API.
+    *   In `extension.ts`, get the API: `const gitExtension = vscode.extensions.getExtension('vscode.git')?.exports; const gitApi = gitExtension?.getAPI(1);`. This API object will be passed to the `FSService`.
     *   When building the file tree, after getting the list of files, iterate through the repositories provided by `gitApi.repositories`.
     *   For each file, check its status using `repository.state.workingTreeChanges`, `untrackedChanges`, etc. This will provide the status (Modified, Untracked, etc.).
     *   Map the status to a simple character code and add it to the `FileNode`.
 
 3.  **Problems Integration (`fs.service.ts`):**
     *   Use the `vscode.languages.getDiagnostics()` API. This returns all diagnostics for the entire workspace.
-    *   Create a `Map<string, { error: number; warning: number; ... }>` to store aggregated counts per file URI.
-    *   Iterate through the diagnostics and populate the map.
+    *   Create a `Map<string, { error: number; warning: number; }>` to store aggregated counts per file URI.
+    *   Iterate through the diagnostics and populate the map based on `diagnostic.severity`.
     *   When building the `FileNode` for a file, retrieve its counts from the map and add them to the `problemCounts` property.
-    *   The recursive aggregation logic for folders will need to be updated to also sum these `problemCounts`.
+    *   The recursive aggregation logic for folders (`_aggregateStats`) will be updated to also sum these `problemCounts`.
 
 ### Phase 2: Rendering (Frontend)
 
 1.  **CSS Styling (`view.scss`):**
-    *   Create new CSS classes for each Git status (e.g., `.git-status-modified`, `.git-status-untracked`).
+    *   Create new CSS classes for each Git status (e.g., `.git-status-M`, `.git-status-U`).
     *   Use VS Code theme variables for the colors to ensure consistency (e.g., `var(--vscode-gitDecoration-modifiedResourceForeground)`).
-    *   Create classes for problem severity colors (e.g., `.problem-error`, `.problem-warning`).
+    *   Create classes for problem severity colors (e.g., `.problem-error`, `.problem-warning`) and badges.
 
 2.  **Component Logic (`FileTree.tsx`):**
-    *   In `renderFileNodeContent`, add logic to conditionally apply the CSS classes based on the `gitStatus` and `problemCounts` properties of the `FileNode`.
+    *   In `renderFileNodeContent`, add logic to conditionally apply the CSS classes to the file name and the status badge based on the `gitStatus` and `problemCounts` properties of the `FileNode`.
     *   Add a new `<span>` element to render the Git status badge.
     *   Add another `<span>` to render the problem count badge, with a `title` attribute for the tooltip breakdown.
 </file>
@@ -3702,6 +3706,7 @@ import { FileNode } from "@/common/types/file-node";
 import { Services } from "./services";
 import { serverIPCs } from "@/client/views";
 import { VIEW_TYPES } from "@/common/view-types";
+import { API as GitAPI, Status } from "../types/git";
 
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 const EXCLUSION_PATTERNS = ['node_modules', 'dist', 'out', '.git', 'flattened_repo.md'];
@@ -3713,6 +3718,32 @@ export class FSService {
     private fileTreeCache: FileNode[] | null = null;
     private watcher: vscode.FileSystemWatcher | null = null;
     private debounceTimer: NodeJS.Timeout | null = null;
+    private gitApi?: GitAPI;
+
+    constructor(gitApi?: GitAPI) {
+        this.gitApi = gitApi;
+        if (this.gitApi) {
+            this.gitApi.onDidOpenRepository(() => this.triggerRefresh());
+            this.gitApi.repositories.forEach(repo => {
+                repo.state.onDidChange(() => this.triggerRefresh());
+            });
+        }
+    }
+
+    private triggerRefresh() {
+        if (this.debounceTimer) {
+            clearTimeout(this.debounceTimer);
+        }
+        this.debounceTimer = setTimeout(() => {
+            Services.loggerService.log(`Git state change detected. Invalidating cache and triggering refresh.`);
+            this.fileTreeCache = null;
+            
+            const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
+            if (serverIpc) {
+                serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, {});
+            }
+        }, 1000); // Debounce for 1s
+    }
 
     public initializeWatcher() {
         if (this.watcher) {
@@ -3722,30 +3753,15 @@ export class FSService {
         this.watcher = vscode.workspace.createFileSystemWatcher('**/*');
         Services.loggerService.log("File system watcher initialized.");
 
-        const triggerRefresh = (uri: vscode.Uri) => {
-            // More robust check for ignored paths
+        const onFileChange = (uri: vscode.Uri) => {
             const normalizedPath = normalizePath(uri.fsPath);
             if (EXCLUSION_PATTERNS.some(pattern => normalizedPath.includes(`/${pattern}/`))) {
                 return;
             }
-
-            if (this.debounceTimer) {
-                clearTimeout(this.debounceTimer);
-            }
-            this.debounceTimer = setTimeout(() => {
-                Services.loggerService.log(`File system change detected at ${uri.fsPath}. Invalidating cache and triggering refresh.`);
-                this.fileTreeCache = null;
-                
-                const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
-                if (serverIpc) {
-                    serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, {});
-                } else {
-                    Services.loggerService.warn("Could not push file tree update, serverIpc not available.");
-                }
-            }, 500);
+            this.triggerRefresh();
         };
 
-        const createHandler = async (uri: vscode.Uri) => {
+        const onFileCreate = async (uri: vscode.Uri) => {
             const autoAddEnabled = Services.selectionService.getAutoAddState();
             if (autoAddEnabled) {
                 Services.loggerService.log(`Auto-add enabled. Adding new file to selection: ${uri.fsPath}`);
@@ -3753,12 +3769,15 @@ export class FSService {
                 const newSelection = [...new Set([...currentSelection, normalizePath(uri.fsPath)])];
                 await Services.selectionService.saveCurrentSelection(newSelection);
             }
-            triggerRefresh(uri);
+            onFileChange(uri);
         };
 
-        this.watcher.onDidChange(triggerRefresh);
-        this.watcher.onDidCreate(createHandler);
-        this.watcher.onDidDelete(triggerRefresh);
+        this.watcher.onDidChange(onFileChange);
+        this.watcher.onDidCreate(onFileCreate);
+        this.watcher.onDidDelete(onFileChange);
+
+        // Watch for changes in diagnostics
+        vscode.languages.onDidChangeDiagnostics(() => this.triggerRefresh());
     }
 
     private async getFileStats(filePath: string): Promise<{ tokenCount: number, sizeInBytes: number, isImage: boolean, extension: string }> {
@@ -3809,29 +3828,79 @@ export class FSService {
         serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: this.fileTreeCache });
     }
 
+    private getGitStatusMap(): Map<string, string> {
+        const statusMap = new Map<string, string>();
+        if (!this.gitApi || this.gitApi.repositories.length === 0) {
+            return statusMap;
+        }
+        
+        const repo = this.gitApi.repositories[0];
+        const getStatusChar = (status: Status): string => {
+            switch (status) {
+                case Status.INDEX_ADDED: return 'A';
+                case Status.MODIFIED: return 'M';
+                case Status.DELETED: return 'D';
+                case Status.UNTRACKED: return 'U';
+                case Status.IGNORED: return 'I';
+                case Status.CONFLICT: return 'C';
+                default: return '';
+            }
+        };
+
+        repo.state.workingTreeChanges.forEach(change => statusMap.set(normalizePath(change.uri.fsPath), getStatusChar(change.status)));
+        repo.state.indexChanges.forEach(change => statusMap.set(normalizePath(change.uri.fsPath), getStatusChar(change.status)));
+        // Untracked files need to be handled separately as they are not in workingTreeChanges
+        repo.state.untrackedChanges.forEach(uri => statusMap.set(normalizePath(uri.fsPath), 'U'));
+
+        return statusMap;
+    }
+
+    private getProblemCountsMap(): Map<string, { error: number, warning: number }> {
+        const problemMap = new Map<string, { error: number, warning: number }>();
+        const diagnostics = vscode.languages.getDiagnostics();
+
+        for (const [uri, diagnosticArr] of diagnostics) {
+            const path = normalizePath(uri.fsPath);
+            let counts = problemMap.get(path);
+            if (!counts) {
+                counts = { error: 0, warning: 0 };
+                problemMap.set(path, counts);
+            }
+            for (const diag of diagnosticArr) {
+                if (diag.severity === vscode.DiagnosticSeverity.Error) {
+                    counts.error++;
+                } else if (diag.severity === vscode.DiagnosticSeverity.Warning) {
+                    counts.warning++;
+                }
+            }
+        }
+        return problemMap;
+    }
+
     private async buildTreeFromTraversal(rootUri: vscode.Uri): Promise<FileNode> {
         const rootPath = rootUri.fsPath;
         const rootName = path.basename(rootPath);
         Services.loggerService.log(`Starting traversal from root: ${rootName}`);
 
+        const gitStatusMap = this.getGitStatusMap();
+        const problemCountsMap = this.getProblemCountsMap();
+
         const rootNode: FileNode = {
             name: rootName,
             absolutePath: normalizePath(rootPath),
             children: [],
-            tokenCount: 0,
-            fileCount: 0,
-            isImage: false,
-            sizeInBytes: 0,
-            extension: ''
+            tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '',
+            gitStatus: gitStatusMap.get(normalizePath(rootPath)),
+            problemCounts: problemCountsMap.get(normalizePath(rootPath))
         };
 
-        rootNode.children = await this._traverseDirectory(rootUri);
+        rootNode.children = await this._traverseDirectory(rootUri, gitStatusMap, problemCountsMap);
         this._aggregateStats(rootNode);
 
         return rootNode;
     }
     
-    private async _traverseDirectory(dirUri: vscode.Uri): Promise<FileNode[]> {
+    private async _traverseDirectory(dirUri: vscode.Uri, gitStatusMap: Map<string, string>, problemCountsMap: Map<string, { error: number, warning: number }>): Promise<FileNode[]> {
         const children: FileNode[] = [];
         try {
             const entries = await vscode.workspace.fs.readDirectory(dirUri);
@@ -3841,14 +3910,16 @@ export class FSService {
                 }
 
                 const childUri = vscode.Uri.joinPath(dirUri, name);
-                const childPath = childUri.fsPath;
+                const childPath = normalizePath(childUri.fsPath);
 
                 if (type === vscode.FileType.Directory) {
                     const dirNode: FileNode = {
                         name,
-                        absolutePath: normalizePath(childPath),
-                        children: await this._traverseDirectory(childUri),
-                        tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: ''
+                        absolutePath: childPath,
+                        children: await this._traverseDirectory(childUri, gitStatusMap, problemCountsMap),
+                        tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '',
+                        gitStatus: gitStatusMap.get(childPath),
+                        problemCounts: problemCountsMap.get(childPath)
                     };
                     this._aggregateStats(dirNode);
                     children.push(dirNode);
@@ -3856,9 +3927,11 @@ export class FSService {
                     const stats = await this.getFileStats(childPath);
                     const fileNode: FileNode = {
                         name,
-                        absolutePath: normalizePath(childPath),
+                        absolutePath: childPath,
                         ...stats,
                         fileCount: 1,
+                        gitStatus: gitStatusMap.get(childPath),
+                        problemCounts: problemCountsMap.get(childPath)
                     };
                     children.push(fileNode);
                 }
@@ -3886,14 +3959,24 @@ export class FSService {
         let totalTokens = 0;
         let totalFiles = 0;
         let totalBytes = 0;
+        let totalErrors = node.problemCounts?.error || 0;
+        let totalWarnings = node.problemCounts?.warning || 0;
+
         for (const child of node.children) {
             totalTokens += child.tokenCount;
             totalFiles += child.fileCount;
             totalBytes += child.sizeInBytes;
+            if(child.problemCounts) {
+                totalErrors += child.problemCounts.error;
+                totalWarnings += child.problemCounts.warning;
+            }
         }
         node.tokenCount = totalTokens;
         node.fileCount = totalFiles;
         node.sizeInBytes = totalBytes;
+        if(totalErrors > 0 || totalWarnings > 0) {
+            node.problemCounts = { error: totalErrors, warning: totalWarnings };
+        }
     }
 
     // --- File Operations ---
@@ -4099,23 +4182,106 @@ import { FSService } from "./fs.service";
 import { FlattenerService } from "./flattener.service";
 import { SelectionService } from "./selection.service";
 import { LoggerService } from "./logger.service";
+import { API as GitAPI } from "../types/git";
 
 // A simple container for services
 class ServiceContainer {
-    public fsService = new FSService();
+    public fsService!: FSService;
     public flattenerService = new FlattenerService();
     public selectionService = new SelectionService();
     public loggerService = LoggerService.getInstance();
     
-    public initialize() {
+    public initialize(gitApi?: GitAPI) {
+        this.fsService = new FSService(gitApi);
         this.loggerService.log("Services initializing...");
-        // C20: Correctly call the watcher initialization method.
         this.fsService.initializeWatcher();
         this.loggerService.log("Services initialized successfully.");
     }
 }
 
 export const Services = new ServiceContainer();
+</file>
+
+<file path="src/backend/types/git.ts">
+// This file is a placeholder for the complex types from the vscode.git extension API.
+// It helps with type safety in our code without needing the full extension as a dev dependency.
+
+import * as vscode from 'vscode';
+
+export interface GitExtension {
+    getAPI(version: 1): API;
+}
+
+export interface API {
+    readonly state: 'uninitialized' | 'initialized';
+    readonly onDidOpenRepository: vscode.Event<Repository>;
+    readonly onDidCloseRepository: vscode.Event<Repository>;
+    readonly repositories: Repository[];
+}
+
+export interface Repository {
+    readonly rootUri: vscode.Uri;
+    readonly state: RepositoryState;
+}
+
+export interface RepositoryState {
+    readonly HEAD: Branch | undefined;
+    readonly workingTreeChanges: Change[];
+    readonly indexChanges: Change[];
+    readonly mergeChanges: Change[];
+    readonly untrackedChanges: vscode.Uri[]; // This is not in the official API, but we use it conceptually
+    readonly onDidChange: vscode.Event<void>;
+}
+
+export interface Change {
+    readonly uri: vscode.Uri;
+    readonly originalUri: vscode.Uri;
+    readonly renameUri: vscode.Uri | undefined;
+    readonly status: Status;
+}
+
+export interface Branch {
+    readonly type: RefType;
+    readonly name?: string;
+    readonly commit?: string;
+    readonly upstream?: Upstream;
+}
+
+export interface Upstream {
+    readonly remote: string;
+    readonly name: string;
+}
+
+export const enum RefType {
+    Head,
+    RemoteHead,
+    Tag
+}
+
+export const enum Status {
+    INDEX_MODIFIED,
+    INDEX_ADDED,
+    INDEX_DELETED,
+    INDEX_RENAMED,
+    INDEX_COPIED,
+
+    MODIFIED,
+    DELETED,
+    UNTRACKED,
+    IGNORED,
+    INTENT_TO_ADD,
+
+    ADDED_BY_US,
+    ADDED_BY_THEM,
+    DELETED_BY_US,
+    DELETED_BY_THEM,
+    MODIFIED_BY_US,
+    MODIFIED_BY_THEM,
+
+    CONFLICT, // Both Added
+    BOTH_DELETED, // Both Deleted
+    BOTH_MODIFIED, // Both Modified
+}
 </file>
 
 <file path="src/client/components/Checkbox.tsx">
@@ -4223,7 +4389,7 @@ import { FileNode } from '@/common/types/file-node';
 import { addRemovePathInSelectedFiles } from './FileTree.utils';
 import Checkbox from '../Checkbox';
 import {
-    VscFile, VscFolder, VscFolderOpened, VscJson, VscMarkdown, VscSymbolFile, VscSymbolNumeric, VscFiles
+    VscFile, VscFolder, VscFolderOpened, VscJson, VscMarkdown, VscSymbolFile, VscSymbolNumeric, VscFiles, VscError, VscWarning
 } from 'react-icons/vsc';
 import { SiTypescript, SiReact, SiJavascript, SiSass } from 'react-icons/si';
 import { formatLargeNumber, formatBytes, formatNumberWithCommas } from '@/common/utils/formatting';
@@ -4324,7 +4490,6 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
                 return node.tokenCount;
             }
             
-            // Check for ancestor
             for (const checkedPath of checkedSet) {
                 if (node.absolutePath.startsWith(checkedPath + '/')) {
                     memo.set(node.absolutePath, node.tokenCount);
@@ -4368,6 +4533,13 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
 
         const checkedTokensInDir = isDirectory ? calculateCheckedTokens(node) : 0;
         const isFullyChecked = isDirectory && checkedTokensInDir > 0 && checkedTokensInDir === node.tokenCount;
+        
+        const problemErrorCount = node.problemCounts?.error || 0;
+        const problemWarningCount = node.problemCounts?.warning || 0;
+        const hasProblems = problemErrorCount > 0 || problemWarningCount > 0;
+        const problemColorClass = problemErrorCount > 0 ? 'problem-error' : 'problem-warning';
+        const problemTooltip = `${problemErrorCount} Errors, ${problemWarningCount} Warnings`;
+
 
         const renderTokenCount = () => {
             if (node.isImage) {
@@ -4391,8 +4563,10 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
             return null;
         };
 
+        const gitStatusClass = node.gitStatus ? `git-status-${node.gitStatus}` : '';
+
         return (
-            <div className={`file-item`}>
+            <div className={`file-item ${gitStatusClass} ${hasProblems ? problemColorClass : ''}`}>
                 <Checkbox
                     className="file-checkbox"
                     checked={isChecked}
@@ -4402,6 +4576,13 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
                 <span className="file-icon">{isDirectory ? (isExpanded ? <VscFolderOpened /> : <VscFolder />) : getFileIcon(node.name)}</span>
                 <span className="file-name">{node.name}</span>
                 <div className="file-stats">
+                    {node.gitStatus && <span className="git-status-badge" title={`Git Status: ${node.gitStatus}`}>{node.gitStatus}</span>}
+                    {hasProblems && (
+                        <span className="problem-badge" title={problemTooltip}>
+                            {problemErrorCount > 0 && <><VscError/> {problemErrorCount}</>}
+                            {problemWarningCount > 0 && <><VscWarning/> {problemWarningCount}</>}
+                        </span>
+                    )}
                     {isDirectory && node.fileCount > 0 && (<> <VscFiles /> <span>{formatNumberWithCommas(node.fileCount)}</span> </>)}
                     {renderTokenCount()}
                 </div>
@@ -5088,7 +5269,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 </file>
 
 <file path="src/client/views/context-chooser.view/view.scss">
-/* Updated on: C30 (Add user-select: none to prevent text highlighting, add search styles) */
+/* Updated on: C32 (Add Git and Problem status styles) */
 body {
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -5494,6 +5675,30 @@ body {
     text-overflow: ellipsis;
     flex-grow: 1;
     user-select: none; /* Prevent text selection on click/drag */
+}
+
+/* Git Status & Problems Styling */
+.file-item.git-status-M .file-name, .file-item.git-status-M .git-status-badge { color: var(--vscode-gitDecoration-modifiedResourceForeground); }
+.file-item.git-status-U .file-name, .file-item.git-status-U .git-status-badge { color: var(--vscode-gitDecoration-untrackedResourceForeground); }
+.file-item.git-status-D .file-name, .file-item.git-status-D .git-status-badge { color: var(--vscode-gitDecoration-deletedResourceForeground); }
+.file-item.git-status-A .file-name, .file-item.git-status-A .git-status-badge { color: var(--vscode-gitDecoration-addedResourceForeground); }
+.file-item.git-status-C .file-name, .file-item.git-status-C .git-status-badge { color: var(--vscode-gitDecoration-conflictingResourceForeground); }
+.file-item.git-status-I .file-name, .file-item.git-status-I .git-status-badge { color: var(--vscode-gitDecoration-ignoredResourceForeground); }
+
+.file-item.problem-error .file-name { color: var(--vscode-list-errorForeground); }
+.file-item.problem-warning .file-name { color: var(--vscode-list-warningForeground); }
+
+.git-status-badge {
+    font-weight: bold;
+}
+
+.problem-badge {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    & > svg {
+        color: var(--vscode-list-errorForeground);
+    }
 }
 
 .file-stats {
@@ -6050,6 +6255,8 @@ export interface FileNode {
     isImage: boolean;
     sizeInBytes: number;
     extension: string;
+    gitStatus?: string; // e.g., 'M', 'U', 'A', 'D', 'C'
+    problemCounts?: { error: number; warning: number; };
 }
 </file>
 
@@ -6200,8 +6407,10 @@ import { registerCommands } from "./backend/commands/register-commands";
 import { Services } from "./backend/services/services";
 import { VIEW_TYPES } from "./common/view-types";
 import { ServerToClientChannel } from "./common/ipc/channels.enum";
+import { API as GitAPI, GitExtension } from "./backend/types/git";
 
 let globalContext: vscode.ExtensionContext | null = null;
+let gitApi: GitAPI | undefined;
 
 export function activate(context: vscode.ExtensionContext) {
     // For debugging the activation process itself
@@ -6209,8 +6418,22 @@ export function activate(context: vscode.ExtensionContext) {
 
     globalContext = context;
 
+    // Get Git API
     try {
-        Services.initialize();
+        const gitExtension = vscode.extensions.getExtension<GitExtension>('vscode.git')?.exports;
+        if (gitExtension) {
+            gitApi = gitExtension.getAPI(1);
+            console.log('DCE Extension: Git API successfully retrieved.');
+        } else {
+            console.warn('DCE Extension: vscode.git extension not found.');
+        }
+    } catch (error) {
+        console.error('DCE Extension: Failed to get Git API.', error);
+    }
+
+
+    try {
+        Services.initialize(gitApi);
         console.log('DCE Extension: Services initialized.');
     } catch (error) {
         console.error('DCE Extension: CRITICAL - Error initializing services.', error);

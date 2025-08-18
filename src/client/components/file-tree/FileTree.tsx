@@ -4,7 +4,7 @@ import { FileNode } from '@/common/types/file-node';
 import { addRemovePathInSelectedFiles } from './FileTree.utils';
 import Checkbox from '../Checkbox';
 import {
-    VscFile, VscFolder, VscFolderOpened, VscJson, VscMarkdown, VscSymbolFile, VscSymbolNumeric, VscFiles
+    VscFile, VscFolder, VscFolderOpened, VscJson, VscMarkdown, VscSymbolFile, VscSymbolNumeric, VscFiles, VscError, VscWarning
 } from 'react-icons/vsc';
 import { SiTypescript, SiReact, SiJavascript, SiSass } from 'react-icons/si';
 import { formatLargeNumber, formatBytes, formatNumberWithCommas } from '@/common/utils/formatting';
@@ -105,7 +105,6 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
                 return node.tokenCount;
             }
             
-            // Check for ancestor
             for (const checkedPath of checkedSet) {
                 if (node.absolutePath.startsWith(checkedPath + '/')) {
                     memo.set(node.absolutePath, node.tokenCount);
@@ -149,6 +148,13 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
 
         const checkedTokensInDir = isDirectory ? calculateCheckedTokens(node) : 0;
         const isFullyChecked = isDirectory && checkedTokensInDir > 0 && checkedTokensInDir === node.tokenCount;
+        
+        const problemErrorCount = node.problemCounts?.error || 0;
+        const problemWarningCount = node.problemCounts?.warning || 0;
+        const hasProblems = problemErrorCount > 0 || problemWarningCount > 0;
+        const problemColorClass = problemErrorCount > 0 ? 'problem-error' : 'problem-warning';
+        const problemTooltip = `${problemErrorCount} Errors, ${problemWarningCount} Warnings`;
+
 
         const renderTokenCount = () => {
             if (node.isImage) {
@@ -172,8 +178,10 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
             return null;
         };
 
+        const gitStatusClass = node.gitStatus ? `git-status-${node.gitStatus}` : '';
+
         return (
-            <div className={`file-item`}>
+            <div className={`file-item ${gitStatusClass} ${hasProblems ? problemColorClass : ''}`}>
                 <Checkbox
                     className="file-checkbox"
                     checked={isChecked}
@@ -183,6 +191,13 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
                 <span className="file-icon">{isDirectory ? (isExpanded ? <VscFolderOpened /> : <VscFolder />) : getFileIcon(node.name)}</span>
                 <span className="file-name">{node.name}</span>
                 <div className="file-stats">
+                    {node.gitStatus && <span className="git-status-badge" title={`Git Status: ${node.gitStatus}`}>{node.gitStatus}</span>}
+                    {hasProblems && (
+                        <span className="problem-badge" title={problemTooltip}>
+                            {problemErrorCount > 0 && <><VscError/> {problemErrorCount}</>}
+                            {problemWarningCount > 0 && <><VscWarning/> {problemWarningCount}</>}
+                        </span>
+                    )}
                     {isDirectory && node.fileCount > 0 && (<> <VscFiles /> <span>{formatNumberWithCommas(node.fileCount)}</span> </>)}
                     {renderTokenCount()}
                 </div>
