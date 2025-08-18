@@ -18,11 +18,14 @@ interface TreeViewProps {
     collapseTrigger?: number;
     onContextMenu?: (event: React.MouseEvent, node: TreeNode) => void;
     activeFile?: string;
+    updateCheckedFiles: (newChecked: string[]) => void;
+    checkedFiles: string[];
 }
 
-const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTrigger = 0, onContextMenu, activeFile }) => {
+const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTrigger = 0, onContextMenu, activeFile, updateCheckedFiles, checkedFiles }) => {
     const [expandedNodes, setExpandedNodes] = useState<string[]>([]);
     const [selectedPaths, setSelectedPaths] = useState<Set<string>>(new Set());
+    const [focusedNodePath, setFocusedNodePath] = useState<string | null>(null);
     const [lastClickedPath, setLastClickedPath] = useState<string | null>(null);
     const [draggedPath, setDraggedPath] = useState<string | null>(null);
     const [dropTarget, setDropTarget] = useState<string | null>(null);
@@ -44,7 +47,10 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
 
     useEffect(() => {
         flatNodeList.current = buildFlatNodeList(data, expandedNodes);
-    }, [data, expandedNodes, buildFlatNodeList]);
+        if (!focusedNodePath && flatNodeList.current.length > 0) {
+            setFocusedNodePath(flatNodeList.current[0].absolutePath);
+        }
+    }, [data, expandedNodes, buildFlatNodeList, focusedNodePath]);
 
     useEffect(() => {
         if (data.length > 0) {
@@ -87,6 +93,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
                 logger.log(`[TreeView] Parents to expand: ${JSON.stringify(parents)}`);
                 setExpandedNodes(prev => [...new Set([...prev, ...parents, rootPath])]);
                 setSelectedPaths(new Set([activeFile]));
+                setFocusedNodePath(activeFile);
                 setLastClickedPath(activeFile);
                 setTimeout(() => {
                     const nodeElement = nodeRefs.current.get(activeFile);
@@ -108,6 +115,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         e.stopPropagation();
 
         const path = node.absolutePath;
+        setFocusedNodePath(path);
         
         if (e.shiftKey && lastClickedPath) {
             const newSelection = new Set(e.ctrlKey ? selectedPaths : []);
@@ -143,6 +151,63 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
             } else {
                 clientIpc.sendToServer(ClientToServerChannel.RequestOpenFile, { path });
             }
+        }
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (!focusedNodePath) return;
+
+        const currentIndex = flatNodeList.current.findIndex(n => n.absolutePath === focusedNodePath);
+        if (currentIndex === -1) return;
+
+        const currentNode = flatNodeList.current[currentIndex];
+
+        const moveFocus = (nextIndex: number) => {
+            if (nextIndex >= 0 && nextIndex < flatNodeList.current.length) {
+                const nextNodePath = flatNodeList.current[nextIndex].absolutePath;
+                setFocusedNodePath(nextNodePath);
+                const nodeElement = nodeRefs.current.get(nextNodePath);
+                nodeElement?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+            }
+        };
+        
+        e.preventDefault();
+        switch (e.key) {
+            case 'ArrowUp':
+                moveFocus(currentIndex - 1);
+                break;
+            case 'ArrowDown':
+                moveFocus(currentIndex + 1);
+                break;
+            case 'ArrowRight':
+                if (currentNode.children) {
+                    setExpandedNodes(prev => [...new Set([...prev, currentNode.absolutePath])]);
+                }
+                break;
+            case 'ArrowLeft':
+                if (currentNode.children && expandedNodes.includes(currentNode.absolutePath)) {
+                    setExpandedNodes(prev => prev.filter(p => p !== currentNode.absolutePath));
+                }
+                break;
+            case ' ': // Spacebar
+                const newChecked = new Set(checkedFiles);
+                if (newChecked.has(currentNode.absolutePath)) {
+                    newChecked.delete(currentNode.absolutePath);
+                } else {
+                    newChecked.add(currentNode.absolutePath);
+                }
+                updateCheckedFiles(Array.from(newChecked));
+                break;
+            case 'Enter':
+                if (currentNode.children) {
+                     setExpandedNodes(prev => {
+                        const isExpanded = prev.includes(currentNode.absolutePath);
+                        return isExpanded ? prev.filter(p => p !== currentNode.absolutePath) : [...prev, currentNode.absolutePath];
+                    });
+                } else {
+                    clientIpc.sendToServer(ClientToServerChannel.RequestOpenFile, { path: currentNode.absolutePath });
+                }
+                break;
         }
     };
 
@@ -186,6 +251,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         return nodes.map((node) => {
             const isExpanded = expandedNodes.includes(node.absolutePath);
             const isSelected = selectedPaths.has(node.absolutePath);
+            const isFocused = focusedNodePath === node.absolutePath;
             const isDirectory = !!(node.children && node.children.length > 0);
             const isDropTarget = dropTarget === node.absolutePath;
 
@@ -200,7 +266,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
                     className={`treenode-li ${isDropTarget ? 'drop-target' : ''}`}
                 >
                     <div
-                        className={`treenode-item-wrapper ${isSelected ? 'selected' : ''}`}
+                        className={`treenode-item-wrapper ${isSelected ? 'selected' : ''} ${isFocused ? 'focused' : ''}`}
                         onClick={(e) => handleNodeClick(e, node)}
                         onContextMenu={(e) => onContextMenu?.(e, node)}
                     >
@@ -220,7 +286,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     };
 
     return (
-        <div className="tree-view">
+        <div className="tree-view" tabIndex={0} onKeyDown={handleKeyDown}>
             <ul>{renderTreeNodes(data)}</ul>
         </div>
     );

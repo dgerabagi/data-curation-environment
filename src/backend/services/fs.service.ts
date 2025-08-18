@@ -22,6 +22,7 @@ export class FSService {
     private refreshDebounceTimer: NodeJS.Timeout | null = null;
     private diagnosticsDebounceTimer: NodeJS.Timeout | null = null;
     private gitApi?: GitAPI;
+    private filesToIgnoreForAutoAdd: Set<string> = new Set();
 
     constructor(gitApi?: GitAPI) {
         this.gitApi = gitApi;
@@ -83,11 +84,17 @@ export class FSService {
         };
 
         const onFileCreate = async (uri: vscode.Uri) => {
+            const normalizedPath = normalizePath(uri.fsPath);
             const autoAddEnabled = Services.selectionService.getAutoAddState();
-            if (autoAddEnabled) {
+
+            // Bug Fix: Check if this file was part of a recent move and should be ignored
+            if (this.filesToIgnoreForAutoAdd.has(normalizedPath)) {
+                this.filesToIgnoreForAutoAdd.delete(normalizedPath);
+                Services.loggerService.log(`Ignoring auto-add for recently moved file: ${normalizedPath}`);
+            } else if (autoAddEnabled) {
                 Services.loggerService.log(`Auto-add enabled. Adding new file to selection: ${uri.fsPath}`);
                 const currentSelection = Services.selectionService.getLastSelection();
-                const newSelection = [...new Set([...currentSelection, normalizePath(uri.fsPath)])];
+                const newSelection = [...new Set([...currentSelection, normalizedPath])];
                 await Services.selectionService.saveCurrentSelection(newSelection);
             }
             onFileChange(uri);
@@ -374,6 +381,14 @@ export class FSService {
 
     public async handleMoveFileRequest(oldPath: string, newPath: string) {
         try {
+            // Bug Fix: Prevent auto-add for moved files that weren't checked
+            const isChecked = Services.selectionService.getLastSelection().some(p => p.startsWith(oldPath));
+            if (!isChecked) {
+                this.filesToIgnoreForAutoAdd.add(newPath);
+                // Clean up the ignore set after a short delay to prevent memory leaks
+                setTimeout(() => this.filesToIgnoreForAutoAdd.delete(newPath), 2000);
+            }
+
             await vscode.workspace.fs.rename(vscode.Uri.file(oldPath), vscode.Uri.file(newPath));
             await Services.selectionService.updatePathInSelections(oldPath, newPath);
         } catch (error: any) {
