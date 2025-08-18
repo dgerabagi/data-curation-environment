@@ -71,6 +71,7 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
     const [sortDirection, setSortDirection] = useState<SortDirection>('desc');
     const [selection, setSelection] = useState<Set<string>>(new Set());
     const [hoveredPath, setHoveredPath] = useState<string | null>(null);
+    const [contextMenu, setContextMenu] = useState<{ x: number; y: number } | null>(null);
     const firstClickedPath = useRef<string | null>(null); // Anchor for shift-click
     const listRef = useRef<HTMLUListElement>(null);
     const clientIpc = ClientPostMessageManager.getInstance();
@@ -162,6 +163,22 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
         onRemove(Array.from(selection));
         setSelection(new Set());
     };
+
+    const handleContextMenu = (event: React.MouseEvent) => {
+        event.preventDefault();
+        setContextMenu({ x: event.clientX, y: event.clientY });
+    };
+
+    const handleSelectAll = () => {
+        const allPaths = new Set(sortedFiles.map(f => f.absolutePath));
+        setSelection(allPaths);
+        setContextMenu(null);
+    };
+
+    const handleDeselectAll = () => {
+        setSelection(new Set());
+        setContextMenu(null);
+    };
     
     const SortIndicator = ({ column }: { column: SortableColumn }) => {
         if (sortColumn !== column) return null;
@@ -196,7 +213,7 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
                                 <VscSymbolNumeric /> Tokens <SortIndicator column="tokenCount" />
                             </div>
                         </div>
-                        <ul className="selected-files-list" ref={listRef} tabIndex={0} onKeyDown={handleKeyDown}>
+                        <ul className="selected-files-list" ref={listRef} tabIndex={0} onKeyDown={handleKeyDown} onContextMenu={handleContextMenu}>
                             {sortedFiles.map((node, index) => (
                                 <li key={node.absolutePath} 
                                     className={selection.has(node.absolutePath) ? 'selected' : ''}
@@ -224,6 +241,17 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
                                     <span className="file-tokens">{formatLargeNumber(node.tokenCount, 1)}</span>
                                 </li>
                             ))}
+                        </ul>
+                    </div>
+                </>
+            )}
+            {contextMenu && (
+                 <>
+                    <div className="context-menu-overlay" onClick={() => setContextMenu(null)}></div>
+                    <div className="context-menu" style={{ top: contextMenu.y, left: contextMenu.x }}>
+                        <ul>
+                            <li onClick={handleSelectAll}>Select All</li>
+                            <li onClick={handleDeselectAll}>Deselect All</li>
                         </ul>
                     </div>
                 </>

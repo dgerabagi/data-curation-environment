@@ -115,9 +115,6 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         }
         e.stopPropagation();
 
-        // Ensure the tree view has focus to capture keyboard events
-        treeViewRef.current?.focus();
-
         const path = node.absolutePath;
         setFocusedNodePath(path);
         
@@ -292,7 +289,13 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     };
 
     return (
-        <div className="tree-view" tabIndex={0} onKeyDown={handleKeyDown} ref={treeViewRef}>
+        <div 
+            className="tree-view" 
+            tabIndex={0} 
+            onKeyDown={handleKeyDown} 
+            ref={treeViewRef}
+            onClick={() => treeViewRef.current?.focus()} // Aggressive focus grab
+        >
             <ul>{renderTreeNodes(data)}</ul>
         </div>
     );

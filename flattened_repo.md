@@ -1,12 +1,12 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-18T21:33:49.479Z
+  Date Generated: 2025-08-18T22:04:24.347Z
   ---
   Total Files: 166
-  Total Lines: 13108
-  Total Characters: 548590
-  Approx. Tokens: 137209
+  Total Lines: 13131
+  Total Characters: 549127
+  Approx. Tokens: 137344
 -->
 
 <!-- Top 10 Files by Token Count -->
@@ -14,9 +14,9 @@
 2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
 3. src\backend\services\fs.service.ts (4770 tokens)
 4. src\client\views\context-chooser.view\view.scss (3347 tokens)
-5. src\client\components\tree-view\TreeView.tsx (3237 tokens)
+5. src\client\components\tree-view\TreeView.tsx (3247 tokens)
 6. src\client\views\context-chooser.view\view.tsx (3099 tokens)
-7. src\client\components\SelectedFilesView.tsx (2815 tokens)
+7. src\client\components\SelectedFilesView.tsx (3098 tokens)
 8. src\client\components\file-tree\FileTree.tsx (2627 tokens)
 9. The-Creator-AI-main\src\backend\services\code.service.ts (2618 tokens)
 10. The-Creator-AI-main\src\backend\services\fs.service.ts (2495 tokens)
@@ -32,7 +32,7 @@
 8. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 52 - Chars: 7022 - Tokens: 1756
 9. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 73 - Chars: 5105 - Tokens: 1277
 10. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 68 - Chars: 4497 - Tokens: 1125
-11. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 48 - Chars: 5967 - Tokens: 1492
+11. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 43 - Chars: 5476 - Tokens: 1369
 12. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
 13. src\Artifacts\A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md - Lines: 39 - Chars: 6270 - Tokens: 1568
 14. src\Artifacts\A16. DCE - Phase 1 - UI & UX Refinements Plan.md - Lines: 41 - Chars: 5412 - Tokens: 1353
@@ -42,9 +42,9 @@
 18. src\Artifacts\A19. DCE - Phase 1 - Double-Click & Quick-Remove Feature Plan.md - Lines: 42 - Chars: 4603 - Tokens: 1151
 19. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 31 - Chars: 4278 - Tokens: 1070
 20. src\Artifacts\A20. DCE - Phase 1 - Advanced UX & Automation Plan.md - Lines: 44 - Chars: 6117 - Tokens: 1530
-21. src\Artifacts\A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer.md - Lines: 48 - Chars: 7403 - Tokens: 1851
+21. src\Artifacts\A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer.md - Lines: 48 - Chars: 7421 - Tokens: 1856
 22. src\Artifacts\A22. DCE - Phase 1 - Search & Filter Feature Plan.md - Lines: 58 - Chars: 3663 - Tokens: 916
-23. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 52 - Chars: 5299 - Tokens: 1325
+23. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 49 - Chars: 5138 - Tokens: 1285
 24. src\Artifacts\A24. DCE - Selection Paradigm Terminology.md - Lines: 57 - Chars: 3330 - Tokens: 833
 25. src\Artifacts\A25. DCE - Phase 1 - Git & Problems Integration Plan.md - Lines: 61 - Chars: 5871 - Tokens: 1468
 26. src\Artifacts\A26. DCE - Phase 1 - File System Traversal & Caching Strategy.md - Lines: 46 - Chars: 4009 - Tokens: 1003
@@ -68,8 +68,8 @@
 44. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
 45. src\client\components\file-tree\FileTree.tsx - Lines: 238 - Chars: 10508 - Tokens: 2627
 46. src\client\components\file-tree\FileTree.utils.ts - Lines: 106 - Chars: 3947 - Tokens: 987
-47. src\client\components\SelectedFilesView.tsx - Lines: 235 - Chars: 11257 - Tokens: 2815
-48. src\client\components\tree-view\TreeView.tsx - Lines: 301 - Chars: 12948 - Tokens: 3237
+47. src\client\components\SelectedFilesView.tsx - Lines: 263 - Chars: 12390 - Tokens: 3098
+48. src\client\components\tree-view\TreeView.tsx - Lines: 304 - Chars: 12986 - Tokens: 3247
 49. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 50. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
 51. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
@@ -869,7 +869,7 @@ This is the primary, centralized log for the entire extension, including message
 # Artifact A13: DCE - Phase 1 - Right-Click Context Menu
 # Date Created: Cycle 19
 # Author: AI Model
-# Updated on: C29 (Clarify "Reveal in File Explorer" behavior)
+# Updated on: C37 (Add context menu for "Selected Items" panel)
 
 - **Key/Value for A0:**
 - **Description:** A plan for implementing standard file explorer context menu actions (e.g., Rename, Delete, Copy Path) in the custom file tree.
@@ -877,9 +877,11 @@ This is the primary, centralized log for the entire extension, including message
 
 ## 1. Overview & Goal
 
-To enhance the user experience and make the Data Curation Environment's file tree a more complete replacement for the native VS Code explorer, this feature will add a standard right-click context menu and associated toolbar buttons. The goal is to provide essential file management operations directly within our extension's view, reducing the need for users to switch back to the native explorer for common tasks.
+To enhance the user experience and make the Data Curation Environment a more complete replacement for the native VS Code explorer, this feature adds standard right-click context menus. The goal is to provide essential file and list management operations directly within our extension's view, reducing the need for users to switch contexts for common tasks.
 
-## 2. User Stories
+This plan covers two distinct context menus: one for the main file tree and one for the "Selected Items" list.
+
+## 2. Main File Tree Context Menu
 
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
@@ -889,31 +891,24 @@ To enhance the user experience and make the Data Curation Environment's file tre
 | US-04 | **Reveal in OS Explorer** | As a user, I want to right-click a file or folder and have it revealed in the native OS file explorer, so I can interact with it outside of VS Code. | - The context menu contains a "Reveal in File Explorer" (or "Reveal in Finder" on macOS) option. <br> - Selecting it opens the parent directory of the item in the **operating system's default file manager** (e.g., Windows File Explorer) with the item selected. This should not simply switch to the VS Code Explorer tab. |
 | US-05 | **New File/Folder** | As a user, I want to create new files and folders from the toolbar or context menu in the correct location, so I can build out my project structure without leaving the view. | - The header toolbar has "New File" and "New Folder" buttons. <br> - Clicking either prompts for a name. <br> - The new file/folder is created in the directory of the currently *active/highlighted* item in the tree. <br> - If the active item is a file, the new item is created in that file's parent directory. <br> - If no item is active, it defaults to the workspace root. <br> - The file tree automatically refreshes. |
 
-## 3. Technical Implementation Plan
+## 3. "Selected Items" Panel Context Menu
 
-1.  **Frontend (`FileTree.tsx`, new `ContextMenu.tsx`):**
-    *   Create a new reusable `ContextMenu.tsx` component that can be triggered by an `onContextMenu` event. It will render at the mouse position.
-    *   In `TreeView.tsx`, add an `onContextMenu` event handler to each file/folder item wrapper.
-    *   This handler will prevent the default browser menu, get the file node's data, and render the `ContextMenu` component with the appropriate options.
-    *   For "Rename", the `FileTree.tsx` component will need to manage local state to switch between displaying the name and an `<input>` field for the specific node being renamed.
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| US-06 | **Select All/Deselect All** | As a user, I want to right-click in the "Selected Items" panel to quickly select or deselect all items in the list, so I can perform batch removal operations more efficiently. | - Right-clicking anywhere within the list of selected files opens a context menu. <br> - The menu contains a "Select All" option. <br> - Clicking "Select All" highlights every item in the list, updating the "Remove selected" button count. <br> - The menu also contains a "Deselect All" option. <br> - Clicking "Deselect All" clears all selections in the list. |
 
-2.  **IPC Channels (`channels.enum.ts`, `channels.type.ts`):**
-    *   New `ClientToServerChannel` messages will be required for each action:
-        *   `RequestFileRename`: Body `{ oldPath: string, newName: string }`
-        *   `RequestFileDelete`: Body `{ path: string }`
-        *   `RequestRevealInExplorer`: Body `{ path: string }`
-        *   `RequestCopyPath`: Body `{ path: string, relative: boolean }`
-        *   `RequestNewFile`: Body `{ parentDirectory: string }`
-        *   `RequestNewFolder`: Body `{ parentDirectory: string }`
+## 4. Technical Implementation Plan
 
-3.  **Backend (`fs.service.ts`, `on-message.ts`):**
-    *   Update `on-message.ts` to handle the new IPC messages and call corresponding methods in the `FSService`.
-    *   **Rename:** Implement a method that uses `vscode.workspace.fs.rename(oldUri, newUri)`.
-    *   **Delete:** Implement a method that uses `vscode.window.showWarningMessage` for confirmation, then `vscode.workspace.fs.delete(uri, { recursive: true, useTrash: true })`. The `useTrash` option is crucial for data safety.
-    *   **Reveal:** Implement a method that executes the built-in VS Code command: `vscode.commands.executeCommand('revealInExplorer', uri)`. This command correctly targets the OS's native file explorer.
-    *   **Copy Path:** Implement a method that uses `vscode.env.clipboard.writeText()` to put the absolute or relative path (calculated using `path.relative`) on the clipboard.
-    *   **New File/Folder:** Implement methods that prompt for a name with `vscode.window.showInputBox`, then create the item with `vscode.workspace.fs.writeFile` or `vscode.workspace.fs.createDirectory`. The `parentDirectory` will be provided by the client.
-    *   After any file system modification (rename, delete, create), the backend's `FileSystemWatcher` will automatically detect the change and trigger a debounced refresh of the UI.
+-   **Main Tree Menu:** Implemented in `TreeView.tsx` and `ContextMenu.tsx` using an `onContextMenu` event handler and state management to control visibility and position.
+-   **"Selected Items" Menu (C37):**
+    1.  **State Management (`SelectedFilesView.tsx`):** Add state to manage the menu's visibility and coordinates: `const [contextMenu, setContextMenu] = useState<{ x: number, y: number } | null>(null);`.
+    2.  **Event Handling (`SelectedFilesView.tsx`):** Add an `onContextMenu` handler to the main `ul` element. This will prevent the default menu and set the state to render the custom menu.
+    3.  **Component Rendering (`SelectedFilesView.tsx`):** Conditionally render a new context menu component based on the state. The component will have two list items: "Select All" and "Deselect All".
+    4.  **Actions (`SelectedFilesView.tsx`):**
+        *   The "Select All" `onClick` handler will create a `Set` from all paths in the `sortedFiles` prop and call `setSelection` with it.
+        *   The "Deselect All" `onClick` handler will call `setSelection(new Set())`.
+        *   Both actions will close the menu by setting `setContextMenu(null)`.
+    5.  **Styling (`view.scss`):** Add CSS rules for the new context menu to match the existing one.
 </file>
 
 <file path="src/Artifacts/A14. DCE - Ongoing Development Issues.md">
@@ -1423,7 +1418,7 @@ This document outlines a series of advanced user experience (UX) and automation 
 # Artifact A21: DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer
 # Date Created: C28
 # Author: AI Model
-# Updated on: C36 (Update Keyboard Navigation status, add Ctrl+A)
+# Updated on: C37 (Update Keyboard Nav status, add Context Menu actions for lists)
 
 - **Key/Value for A0:**
 - **Description:** A comparative analysis documenting the functional and behavioral differences between the DCE custom file view and the native VS Code Explorer to guide future development and feature parity.
@@ -1435,7 +1430,7 @@ The primary goal of the Data Curation Environment (DCE) is to enhance, not repla
 
 ## 2. Feature Comparison Matrix
 
-| Feature Category            | Native VS Code Explorer         | DCE (as of C36)        | Status & Notes                                                                                                                                              |
+| Feature Category            | Native VS Code Explorer         | DCE (as of C37)        | Status & Notes                                                                                                                                              |
 | --------------------------- | ------------------------------- | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **File Display**            |                                 |                        |                                                                                                                                                             |
 | Hierarchical Tree           | ✅                              | ✅                     | **Complete.** Core functionality is present.                                                                                                                |
@@ -1447,11 +1442,11 @@ The primary goal of the Data Curation Environment (DCE) is to enhance, not repla
 | Single-Click (Folders)      | ✅ Expands/Collapses            | ✅ Expands/Collapses   | **Complete.** |
 | Multi-Select (Ctrl)         | ✅                              | ✅                     | **Complete.**                                                                                                                                               |
 | Multi-Select (Shift)        | ✅ (Selects rows)               | ✅ (Selects rows)      | **Complete.**                                                                                                                                               |
-| Select All (Ctrl+A)         | ✅ (In focused list)            | ⏳ In Progress         | **In Progress (C36).** `Ctrl+A` to select all items in the "Selected Items" list is being implemented.                                                       |
+| Select All (Ctrl+A)         | ✅ (In focused list)            | ⏳ In Progress         | **In Progress.** `Ctrl+A` in "Selected Items" list is implemented but buggy. Context menu alternative being added in C37.                                    |
 | **Interaction**             |                                 |                        |                                                                                                                                                             |
 | Drag and Drop               | ✅ (Move files/folders)         | ✅                     | **Complete.**                                                                                                                                               |
-| Right-Click Context Menu    | ✅ (Extensive options)          | ✅ (Basic options)     | **Partial.** DCE has basic operations (Rename, Delete, etc.). Missing advanced options like `Open in Integrated Terminal`, `Find in Folder...`, `Compare...`. |
-| Keyboard Navigation         | ✅ (Arrows, Enter, Space)       | ⏳ In Progress         | **In Progress (C36).** Basic implementation exists but suffers from focus-stealing bugs where events leak to the editor. Actively being fixed. Planned in A23. |
+| Right-Click Context Menu    | ✅ (Extensive options)          | ✅ (Basic + List actions) | **Partial.** DCE has basic file ops. Added "Select All" for lists in C37. Missing advanced options like `Open in Integrated Terminal`, `Compare...`.       |
+| Keyboard Navigation         | ✅ (Arrows, Enter, Space)       | ⏳ In Progress         | **In Progress (C37).** Basic implementation exists but suffers from focus-stealing bugs. Actively being fixed with a more aggressive focus management strategy. |
 | Inline Rename               | ✅ (F2 or slow double-click)    | ✅                     | **Complete.** |
 | **File Operations**         |                                 |                        |                                                                                                                                                             |
 | New File / Folder           | ✅                              | ✅                     | **Complete.** |
@@ -1535,7 +1530,7 @@ To improve navigation and usability in large projects, this feature introduces a
 # Artifact A23: DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan
 # Date Created: C29
 # Author: AI Model
-# Updated on: C36 (Add Ctrl+A requirement and focus management notes)
+# Updated on: C37 (Add context menu alternative for Select All)
 
 - **Key/Value for A0:**
 - **Description:** Details the requirements for implementing full keyboard navigation and drag-and-drop file/folder operations within the main file tree view.
@@ -1551,17 +1546,17 @@ To achieve true feature parity with the native VS Code Explorer and cater to pow
 |---|---|---|
 | AI-01 | **Keyboard Navigation** | As a power user, I want to navigate the file tree using only my keyboard, so I can find, select, and manage files without taking my hands off the keyboard. | - Arrow Up/Down keys move the focus between visible nodes. <br> - Arrow Right on a collapsed folder expands it. <br> - Arrow Right on an open folder or file moves focus to the first child. <br> - Arrow Left on an open folder collapses it. <br> - Arrow Left on a child node moves focus to its parent. <br> - `Enter` key opens the focused file or toggles expansion for a focused folder. <br> - `Spacebar` toggles the checkbox of the focused node. |
 | AI-02 | **Drag-and-Drop File Operations** | As a user, I want to be able to drag a file or folder and drop it into another folder to move it, so I can reorganize my project intuitively. | - Clicking and dragging a file or folder in the tree initiates a drag operation. <br> - Dragging over a folder highlights it as a potential drop target. <br> - Dropping a file/folder onto another folder moves the dragged item into the target folder. <br> - The backend file system is updated, and the tree view refreshes to reflect the new structure. |
-| AI-03 | **Select All in Selected List** | As a user, after curating a list, I want to click in the "Selected Items" panel and press `Ctrl+A` to select all files in that list, so I can quickly perform a batch action like "Remove selected". | - Clicking within the "Selected Items" panel gives it focus. <br> - Pressing `Ctrl+A` (or `Cmd+A`) selects all items currently rendered in the list. <br> - This action does not affect the main editor. <br> - The "Remove selected" button's count updates to reflect the total number of items in the list. |
+| AI-03 | **Select All in Selected List** | As a user, after curating a list, I want to click in the "Selected Items" panel and press `Ctrl+A` or use a context menu to select all files in that list, so I can quickly perform a batch action like "Remove selected". | - **(C37 Update)** Right-clicking in the "Selected Items" list shows a context menu with a "Select All" option. <br> - Clicking it selects all items currently rendered in the list. <br> - The "Remove selected" button's count updates to reflect the total number of items in the list. |
 
 ## 3. Technical Implementation Plan
 
-### Keyboard Navigation (In Progress - C36)
+### Keyboard Navigation (In Progress - C37)
 
 1.  **Focus Management (Frontend):**
-    *   **Root Cause:** The webview panel loses keyboard focus to the main editor pane. The solution is to programmatically re-focus the correct container after user interactions.
+    *   **Root Cause:** The webview panel loses keyboard focus to the main editor pane. The user discovery that right-clicking first fixes the issue confirms this. The solution is to programmatically re-focus the correct container after any user interaction.
     *   A state variable, `focusedNodePath: string | null`, tracks the currently focused node in the main tree.
     *   The `TreeView.tsx` component's main wrapper `div` has a `tabIndex={0}` attribute to make it programmatically focusable. A `ref` is attached to this `div`.
-    *   **Crucial Fix:** In all mouse-based interaction handlers (`handleNodeClick`, etc.), a call to `treeViewRef.current.focus()` must be made to ensure keyboard events are captured by the `onKeyDown` handler.
+    *   **Crucial Fix (C37):** Add an `onClick` handler to the main `div.tree-view` container itself. Any click inside this boundary will now explicitly call `treeViewRef.current.focus()` to aggressively reclaim focus from the editor.
 2.  **Event Handling (`TreeView.tsx`):**
     *   The `onKeyDown` handler contains a `switch` statement for `event.key`. It calls `event.preventDefault()` for handled keys to stop them from propagating to the editor.
     *   A memoized, flattened list of all *visible* nodes is used to calculate the next/previous node for Up/Down arrow navigation.
@@ -1572,18 +1567,15 @@ To achieve true feature parity with the native VS Code Explorer and cater to pow
 
 The native `vscode.TreeDragAndDropController` is designed for extensions using a `TreeDataProvider`. Since our UI is a custom React webview, a different approach using the HTML5 Drag and Drop API was successfully implemented.
 
-### Select All (`Ctrl+A`) in Selected Items (In Progress - C36)
+### Select All (`Ctrl+A`) / Context Menu in Selected Items (In Progress - C37)
 
-1.  **Focus Management (`SelectedFilesView.tsx`):**
-    *   The `ul.selected-files-list` element will be made focusable by adding `tabIndex={0}` and attaching a `ref` to it.
-    *   An `onClick` handler on the component's container will call `listRef.current.focus()` to ensure the list captures focus.
-2.  **Event Handling (`SelectedFilesView.tsx`):**
-    *   An `onKeyDown` handler will be added to the `ul` element.
-    *   It will check for `event.ctrlKey && event.key === 'a'` (and the Mac equivalent).
-    *   On match, it will call `event.preventDefault()`.
-    *   It will then create a new `Set` containing the `absolutePath` of all items in the `sortedFiles` array and call the `setSelection` state updater.
-3.  **Styling (`view.scss`):**
-    *   A `.selected-files-list:focus` style will be added to provide a visual outline, using `var(--vscode-focusBorder)`.
+The global `Ctrl+A` hotkey proved difficult due to focus management. The current plan is to provide this functionality via a more robust right-click context menu.
+
+1.  **Event Handling (`SelectedFilesView.tsx`):**
+    *   An `onContextMenu` handler will be added to the `ul` element to show a custom menu.
+2.  **Menu Actions (`SelectedFilesView.tsx`):**
+    *   The "Select All" option will create a new `Set` containing the `absolutePath` of all items in the `sortedFiles` array and call the `setSelection` state updater.
+    *   A "Deselect All" option will call `setSelection` with an empty `Set`.
 </file>
 
 <file path="src/Artifacts/A24. DCE - Selection Paradigm Terminology.md">
@@ -4972,6 +4964,7 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
     const [sortDirection, setSortDirection] = useState<SortDirection>('desc');
     const [selection, setSelection] = useState<Set<string>>(new Set());
     const [hoveredPath, setHoveredPath] = useState<string | null>(null);
+    const [contextMenu, setContextMenu] = useState<{ x: number; y: number } | null>(null);
     const firstClickedPath = useRef<string | null>(null); // Anchor for shift-click
     const listRef = useRef<HTMLUListElement>(null);
     const clientIpc = ClientPostMessageManager.getInstance();
@@ -5063,6 +5056,22 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
         onRemove(Array.from(selection));
         setSelection(new Set());
     };
+
+    const handleContextMenu = (event: React.MouseEvent) => {
+        event.preventDefault();
+        setContextMenu({ x: event.clientX, y: event.clientY });
+    };
+
+    const handleSelectAll = () => {
+        const allPaths = new Set(sortedFiles.map(f => f.absolutePath));
+        setSelection(allPaths);
+        setContextMenu(null);
+    };
+
+    const handleDeselectAll = () => {
+        setSelection(new Set());
+        setContextMenu(null);
+    };
     
     const SortIndicator = ({ column }: { column: SortableColumn }) => {
         if (sortColumn !== column) return null;
@@ -5097,7 +5106,7 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
                                 <VscSymbolNumeric /> Tokens <SortIndicator column="tokenCount" />
                             </div>
                         </div>
-                        <ul className="selected-files-list" ref={listRef} tabIndex={0} onKeyDown={handleKeyDown}>
+                        <ul className="selected-files-list" ref={listRef} tabIndex={0} onKeyDown={handleKeyDown} onContextMenu={handleContextMenu}>
                             {sortedFiles.map((node, index) => (
                                 <li key={node.absolutePath} 
                                     className={selection.has(node.absolutePath) ? 'selected' : ''}
@@ -5125,6 +5134,17 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
                                     <span className="file-tokens">{formatLargeNumber(node.tokenCount, 1)}</span>
                                 </li>
                             ))}
+                        </ul>
+                    </div>
+                </>
+            )}
+            {contextMenu && (
+                 <>
+                    <div className="context-menu-overlay" onClick={() => setContextMenu(null)}></div>
+                    <div className="context-menu" style={{ top: contextMenu.y, left: contextMenu.x }}>
+                        <ul>
+                            <li onClick={handleSelectAll}>Select All</li>
+                            <li onClick={handleDeselectAll}>Deselect All</li>
                         </ul>
                     </div>
                 </>
@@ -5253,9 +5273,6 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
             return;
         }
         e.stopPropagation();
-
-        // Ensure the tree view has focus to capture keyboard events
-        treeViewRef.current?.focus();
 
         const path = node.absolutePath;
         setFocusedNodePath(path);
@@ -5431,7 +5448,13 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     };
 
     return (
-        <div className="tree-view" tabIndex={0} onKeyDown={handleKeyDown} ref={treeViewRef}>
+        <div 
+            className="tree-view" 
+            tabIndex={0} 
+            onKeyDown={handleKeyDown} 
+            ref={treeViewRef}
+            onClick={() => treeViewRef.current?.focus()} // Aggressive focus grab
+        >
             <ul>{renderTreeNodes(data)}</ul>
         </div>
     );
@@ -5586,7 +5609,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 </file>
 
 <file path="src/client/views/context-chooser.view/view.scss">
-/* Updated on: C36 (Add focused styles for SelectedFilesView list) */
+/* Updated on: C37 (Add context menu styles for SelectedFilesView) */
 body {
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
