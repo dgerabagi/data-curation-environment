@@ -3,6 +3,7 @@ import { VscChevronRight } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 import { logger } from '@/client/utils/logger';
+import { addRemovePathInSelectedFiles } from '../file-tree/FileTree.utils';
 
 export interface TreeNode {
     name: string;
@@ -194,14 +195,9 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
                     setExpandedNodes(prev => prev.filter(p => p !== currentNode.absolutePath));
                 }
                 break;
-            case ' ': // Spacebar
-                const newChecked = new Set(checkedFiles);
-                if (newChecked.has(currentNode.absolutePath)) {
-                    newChecked.delete(currentNode.absolutePath);
-                } else {
-                    newChecked.add(currentNode.absolutePath);
-                }
-                updateCheckedFiles(Array.from(newChecked));
+            case ' ': // C39: Spacebar Toggles Checkbox
+                e.preventDefault();
+                updateCheckedFiles(addRemovePathInSelectedFiles(data, currentNode.absolutePath, checkedFiles));
                 break;
             case 'Enter':
                 if (currentNode.children) {

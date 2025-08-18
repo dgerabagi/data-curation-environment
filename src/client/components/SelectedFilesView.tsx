@@ -150,6 +150,7 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
     const handleKeyDown = (e: React.KeyboardEvent<HTMLUListElement>) => {
         if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
             e.preventDefault();
+            e.stopPropagation(); // C39 Fix: Prevent event from bubbling up
             logger.log('Ctrl+A detected in SelectedFilesView.');
             const allPaths = new Set(sortedFiles.map(f => f.absolutePath));
             setSelection(allPaths);

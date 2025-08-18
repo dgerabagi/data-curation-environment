@@ -1,12 +1,12 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-18T22:26:31.467Z
+  Date Generated: 2025-08-18T22:49:00.101Z
   ---
   Total Files: 166
-  Total Lines: 13127
-  Total Characters: 549108
-  Approx. Tokens: 137339
+  Total Lines: 13124
+  Total Characters: 549056
+  Approx. Tokens: 137325
 -->
 
 <!-- Top 10 Files by Token Count -->
@@ -14,8 +14,8 @@
 2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
 3. src\backend\services\fs.service.ts (4770 tokens)
 4. src\client\views\context-chooser.view\view.scss (3347 tokens)
-5. src\client\components\tree-view\TreeView.tsx (3288 tokens)
-6. src\client\components\SelectedFilesView.tsx (3136 tokens)
+5. src\client\components\tree-view\TreeView.tsx (3260 tokens)
+6. src\client\components\SelectedFilesView.tsx (3155 tokens)
 7. src\client\views\context-chooser.view\view.tsx (3099 tokens)
 8. src\client\components\file-tree\FileTree.tsx (2627 tokens)
 9. The-Creator-AI-main\src\backend\services\code.service.ts (2618 tokens)
@@ -42,9 +42,9 @@
 18. src\Artifacts\A19. DCE - Phase 1 - Double-Click & Quick-Remove Feature Plan.md - Lines: 42 - Chars: 4603 - Tokens: 1151
 19. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 31 - Chars: 4278 - Tokens: 1070
 20. src\Artifacts\A20. DCE - Phase 1 - Advanced UX & Automation Plan.md - Lines: 44 - Chars: 6117 - Tokens: 1530
-21. src\Artifacts\A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer.md - Lines: 48 - Chars: 7402 - Tokens: 1851
+21. src\Artifacts\A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer.md - Lines: 48 - Chars: 7385 - Tokens: 1847
 22. src\Artifacts\A22. DCE - Phase 1 - Search & Filter Feature Plan.md - Lines: 58 - Chars: 3663 - Tokens: 916
-23. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 41 - Chars: 4822 - Tokens: 1206
+23. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 41 - Chars: 4820 - Tokens: 1205
 24. src\Artifacts\A24. DCE - Selection Paradigm Terminology.md - Lines: 57 - Chars: 3330 - Tokens: 833
 25. src\Artifacts\A25. DCE - Phase 1 - Git & Problems Integration Plan.md - Lines: 61 - Chars: 5871 - Tokens: 1468
 26. src\Artifacts\A26. DCE - Phase 1 - File System Traversal & Caching Strategy.md - Lines: 46 - Chars: 4009 - Tokens: 1003
@@ -68,8 +68,8 @@
 44. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
 45. src\client\components\file-tree\FileTree.tsx - Lines: 238 - Chars: 10508 - Tokens: 2627
 46. src\client\components\file-tree\FileTree.utils.ts - Lines: 106 - Chars: 3947 - Tokens: 987
-47. src\client\components\SelectedFilesView.tsx - Lines: 265 - Chars: 12542 - Tokens: 3136
-48. src\client\components\tree-view\TreeView.tsx - Lines: 306 - Chars: 13150 - Tokens: 3288
+47. src\client\components\SelectedFilesView.tsx - Lines: 266 - Chars: 12619 - Tokens: 3155
+48. src\client\components\tree-view\TreeView.tsx - Lines: 302 - Chars: 13040 - Tokens: 3260
 49. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 50. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
 51. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
@@ -1418,7 +1418,7 @@ This document outlines a series of advanced user experience (UX) and automation 
 # Artifact A21: DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer
 # Date Created: C28
 # Author: AI Model
-# Updated on: C38 (Update Keyboard Nav status to reflect focus fix)
+# Updated on: C39 (Update Keyboard Nav status to Complete)
 
 - **Key/Value for A0:**
 - **Description:** A comparative analysis documenting the functional and behavioral differences between the DCE custom file view and the native VS Code Explorer to guide future development and feature parity.
@@ -1430,7 +1430,7 @@ The primary goal of the Data Curation Environment (DCE) is to enhance, not repla
 
 ## 2. Feature Comparison Matrix
 
-| Feature Category            | Native VS Code Explorer         | DCE (as of C38)        | Status & Notes                                                                                                                                              |
+| Feature Category            | Native VS Code Explorer         | DCE (as of C39)        | Status & Notes                                                                                                                                              |
 | --------------------------- | ------------------------------- | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **File Display**            |                                 |                        |                                                                                                                                                             |
 | Hierarchical Tree           | ✅                              | ✅                     | **Complete.** Core functionality is present.                                                                                                                |
@@ -1442,11 +1442,11 @@ The primary goal of the Data Curation Environment (DCE) is to enhance, not repla
 | Single-Click (Folders)      | ✅ Expands/Collapses            | ✅ Expands/Collapses   | **Complete.** |
 | Multi-Select (Ctrl)         | ✅                              | ✅                     | **Complete.**                                                                                                                                               |
 | Multi-Select (Shift)        | ✅ (Selects rows)               | ✅ (Selects rows)      | **Complete.**                                                                                                                                               |
-| Select All (Ctrl+A)         | ✅ (In focused list)            | ✅                     | **Complete (C38).** The focus-stealing bug is now resolved, making `Ctrl+A` in the "Selected Items" list reliable.                                           |
+| Select All (Ctrl+A)         | ✅ (In focused list)            | ✅                     | **Complete.** The focus-stealing bug is now resolved, making `Ctrl+A` in the "Selected Items" list reliable.                                           |
 | **Interaction**             |                                 |                        |                                                                                                                                                             |
 | Drag and Drop               | ✅ (Move files/folders)         | ✅                     | **Complete.**                                                                                                                                               |
 | Right-Click Context Menu    | ✅ (Extensive options)          | ✅ (Basic + List actions) | **Partial.** DCE has basic file ops. Added "Select All" for lists in C37. Missing advanced options like `Open in Integrated Terminal`, `Compare...`.       |
-| Keyboard Navigation         | ✅ (Arrows, Enter, Space)       | ✅                     | **Complete (C38).** The focus-stealing bug where left-clicking a file disabled arrow keys has been resolved with a delayed focus-reclaim strategy.          |
+| Keyboard Navigation         | ✅ (Arrows, Enter, Space)       | ✅                     | **Complete (C39).** Arrow keys, Enter, and Spacebar now function as expected. The focus-stealing bug has been resolved.                                   |
 | Inline Rename               | ✅ (F2 or slow double-click)    | ✅                     | **Complete.** |
 | **File Operations**         |                                 |                        |                                                                                                                                                             |
 | New File / Folder           | ✅                              | ✅                     | **Complete.** |
@@ -1530,7 +1530,7 @@ To improve navigation and usability in large projects, this feature introduces a
 # Artifact A23: DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan
 # Date Created: C29
 # Author: AI Model
-# Updated on: C38 (Document final fix for keyboard focus issue)
+# Updated on: C39 (Add Spacebar to toggle checkbox)
 
 - **Key/Value for A0:**
 - **Description:** Details the requirements for implementing full keyboard navigation and drag-and-drop file/folder operations within the main file tree view.
@@ -1544,13 +1544,13 @@ To achieve true feature parity with the native VS Code Explorer and cater to pow
 
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
-| AI-01 | **Keyboard Navigation** | As a power user, I want to navigate the file tree using only my keyboard, so I can find, select, and manage files without taking my hands off the keyboard. | - Arrow Up/Down keys move the focus between visible nodes. <br> - Arrow Right on a collapsed folder expands it. <br> - Arrow Right on an open folder or file moves focus to the first child. <br> - Arrow Left on an open folder collapses it. <br> - Arrow Left on a child node moves focus to its parent. <br> - `Enter` key opens the focused file or toggles expansion for a focused folder. <br> - `Spacebar` toggles the checkbox of the focused node. |
+| AI-01 | **Keyboard Navigation** | As a power user, I want to navigate the file tree using only my keyboard, so I can find, select, and manage files without taking my hands off the keyboard. | - Arrow Up/Down keys move the focus between visible nodes. <br> - Arrow Right on a collapsed folder expands it. <br> - Arrow Right on an open folder or file moves focus to the first child. <br> - Arrow Left on an open folder collapses it. <br> - Arrow Left on a child node moves focus to its parent. <br> - `Enter` key opens the focused file or toggles expansion for a focused folder. <br> - **(C39)** `Spacebar` toggles the checkbox of the focused node. |
 | AI-02 | **Drag-and-Drop File Operations** | As a user, I want to be able to drag a file or folder and drop it into another folder to move it, so I can reorganize my project intuitively. | - Clicking and dragging a file or folder in the tree initiates a drag operation. <br> - Dragging over a folder highlights it as a potential drop target. <br> - Dropping a file/folder onto another folder moves the dragged item into the target folder. <br> - The backend file system is updated, and the tree view refreshes to reflect the new structure. |
 | AI-03 | **Select All in Selected List** | As a user, after curating a list, I want to click in the "Selected Items" panel and press `Ctrl+A` or use a context menu to select all files in that list, so I can quickly perform a batch action like "Remove selected". | - **(C37 Update)** Right-clicking in the "Selected Items" list shows a context menu with a "Select All" option. <br> - Clicking it selects all items currently rendered in the list. <br> - The "Remove selected" button's count updates to reflect the total number of items in the list. |
 
 ## 3. Technical Implementation Plan
 
-### Keyboard Navigation (Completed - C38)
+### Keyboard Navigation (Completed - C39)
 
 1.  **Focus Management (Frontend):**
     *   **Root Cause Analysis (C38):** The primary bug was that after left-clicking a file, the main VS Code editor pane would open the file and aggressively steal keyboard focus from our webview. A simple `onClick` focus request was insufficient because it executed *before* the editor stole the focus.
@@ -5035,6 +5035,7 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
     const handleKeyDown = (e: React.KeyboardEvent<HTMLUListElement>) => {
         if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
             e.preventDefault();
+            e.stopPropagation(); // C39 Fix: Prevent event from bubbling up
             logger.log('Ctrl+A detected in SelectedFilesView.');
             const allPaths = new Set(sortedFiles.map(f => f.absolutePath));
             setSelection(allPaths);
@@ -5156,6 +5157,7 @@ import { VscChevronRight } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 import { logger } from '@/client/utils/logger';
+import { addRemovePathInSelectedFiles } from '../file-tree/FileTree.utils';
 
 export interface TreeNode {
     name: string;
@@ -5347,14 +5349,9 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
                     setExpandedNodes(prev => prev.filter(p => p !== currentNode.absolutePath));
                 }
                 break;
-            case ' ': // Spacebar
-                const newChecked = new Set(checkedFiles);
-                if (newChecked.has(currentNode.absolutePath)) {
-                    newChecked.delete(currentNode.absolutePath);
-                } else {
-                    newChecked.add(currentNode.absolutePath);
-                }
-                updateCheckedFiles(Array.from(newChecked));
+            case ' ': // C39: Spacebar Toggles Checkbox
+                e.preventDefault();
+                updateCheckedFiles(addRemovePathInSelectedFiles(data, currentNode.absolutePath, checkedFiles));
                 break;
             case 'Enter':
                 if (currentNode.children) {
