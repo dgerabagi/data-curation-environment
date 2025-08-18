@@ -1,7 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import TreeView from '../tree-view/TreeView';
 import { FileNode } from '@/common/types/file-node';
-import { addRemovePathInSelectedFiles } from './FileTree.utils';
 import Checkbox from '../Checkbox';
 import {
     VscFile, VscFolder, VscFolderOpened, VscJson, VscMarkdown, VscSymbolFile, VscSymbolNumeric, VscFiles, VscError, VscWarning
@@ -17,7 +16,7 @@ interface FileTreeProps {
   data: FileNode[];
   checkedFiles: string[];
   activeFile?: string;
-  updateCheckedFiles: (checkedFiles: string[]) => void;
+  updateCheckedFiles: (path: string) => void;
   collapseTrigger?: number;
   searchTerm: string;
   problemMap: ProblemCountsMap;
@@ -80,7 +79,7 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
 
     const handleFileCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>, filePath: string) => {
         e.stopPropagation();
-        updateCheckedFiles(addRemovePathInSelectedFiles(data, filePath, checkedFiles));
+        updateCheckedFiles(filePath);
     };
 
     const handleContextMenu = (event: React.MouseEvent, node: FileNode) => {
@@ -229,6 +228,7 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
                 onContextMenu={handleContextMenu} 
                 collapseTrigger={collapseTrigger} 
                 activeFile={activeFile} 
+                updateCheckedFiles={updateCheckedFiles}
             />
             {contextMenu && <ContextMenu menu={contextMenu} onClose={() => setContextMenu(null)} onRename={handleRename} />}
         </div>

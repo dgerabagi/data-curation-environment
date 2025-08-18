@@ -3,7 +3,6 @@ import { VscChevronRight } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 import { logger } from '@/client/utils/logger';
-import { addRemovePathInSelectedFiles } from '../file-tree/FileTree.utils';
 
 export interface TreeNode {
     name: string;
@@ -19,11 +18,10 @@ interface TreeViewProps {
     collapseTrigger?: number;
     onContextMenu?: (event: React.MouseEvent, node: TreeNode) => void;
     activeFile?: string;
-    updateCheckedFiles: (newChecked: string[]) => void;
-    checkedFiles: string[];
+    updateCheckedFiles: (path: string) => void;
 }
 
-const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTrigger = 0, onContextMenu, activeFile, updateCheckedFiles, checkedFiles }) => {
+const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTrigger = 0, onContextMenu, activeFile, updateCheckedFiles }) => {
     const [expandedNodes, setExpandedNodes] = useState<string[]>([]);
     const [selectedPaths, setSelectedPaths] = useState<Set<string>>(new Set());
     const [focusedNodePath, setFocusedNodePath] = useState<string | null>(null);
@@ -152,7 +150,6 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
                 });
             } else {
                 clientIpc.sendToServer(ClientToServerChannel.RequestOpenFile, { path });
-                // C38 Fix: After requesting a file open, reclaim focus after a short delay.
                 setTimeout(() => treeViewRef.current?.focus(), 100);
             }
         }
@@ -203,7 +200,8 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
             case ' ':
                 e.preventDefault();
                 e.stopPropagation();
-                updateCheckedFiles(addRemovePathInSelectedFiles(data, currentNode.absolutePath, checkedFiles));
+                logger.log(`Spacebar pressed on focused node: ${currentNode.absolutePath}`);
+                updateCheckedFiles(currentNode.absolutePath);
                 break;
             case 'Enter':
                 e.preventDefault();
@@ -220,7 +218,6 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         }
     };
 
-    // --- Drag and Drop Handlers ---
     const handleDragStart = (e: React.DragEvent, node: TreeNode) => {
         e.stopPropagation();
         setDraggedPath(node.absolutePath);
@@ -300,7 +297,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
             tabIndex={0} 
             onKeyDown={handleKeyDown} 
             ref={treeViewRef}
-            onClick={() => treeViewRef.current?.focus()} // Aggressive focus grab
+            onClick={() => treeViewRef.current?.focus()}
         >
             <ul>{renderTreeNodes(data)}</ul>
         </div>

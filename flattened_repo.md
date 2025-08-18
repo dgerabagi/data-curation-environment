@@ -1,12 +1,12 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-18T22:49:00.101Z
+  Date Generated: 2025-08-18T23:44:34.486Z
   ---
   Total Files: 166
-  Total Lines: 13124
-  Total Characters: 549056
-  Approx. Tokens: 137325
+  Total Lines: 13205
+  Total Characters: 553912
+  Approx. Tokens: 138541
 -->
 
 <!-- Top 10 Files by Token Count -->
@@ -14,11 +14,11 @@
 2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
 3. src\backend\services\fs.service.ts (4770 tokens)
 4. src\client\views\context-chooser.view\view.scss (3347 tokens)
-5. src\client\components\tree-view\TreeView.tsx (3260 tokens)
-6. src\client\components\SelectedFilesView.tsx (3155 tokens)
-7. src\client\views\context-chooser.view\view.tsx (3099 tokens)
-8. src\client\components\file-tree\FileTree.tsx (2627 tokens)
-9. The-Creator-AI-main\src\backend\services\code.service.ts (2618 tokens)
+5. src\client\components\tree-view\TreeView.tsx (3279 tokens)
+6. src\client\components\SelectedFilesView.tsx (3256 tokens)
+7. src\client\views\context-chooser.view\view.tsx (3222 tokens)
+8. The-Creator-AI-main\src\backend\services\code.service.ts (2618 tokens)
+9. src\client\components\file-tree\FileTree.tsx (2610 tokens)
 10. The-Creator-AI-main\src\backend\services\fs.service.ts (2495 tokens)
 
 <!-- Full File List -->
@@ -29,12 +29,12 @@
 5. public\spiral.svg - Lines: 8 - Chars: 459 - Tokens: 115
 6. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 134 - Chars: 9366 - Tokens: 2342
 7. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 38 - Chars: 3311 - Tokens: 828
-8. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 52 - Chars: 7022 - Tokens: 1756
+8. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
 9. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 73 - Chars: 5105 - Tokens: 1277
 10. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 68 - Chars: 4497 - Tokens: 1125
 11. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 43 - Chars: 5476 - Tokens: 1369
 12. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
-13. src\Artifacts\A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md - Lines: 39 - Chars: 6270 - Tokens: 1568
+13. src\Artifacts\A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md - Lines: 43 - Chars: 7263 - Tokens: 1816
 14. src\Artifacts\A16. DCE - Phase 1 - UI & UX Refinements Plan.md - Lines: 41 - Chars: 5412 - Tokens: 1353
 15. src\Artifacts\A17. DCE - Phase 1 - Advanced Tree View Features.md - Lines: 47 - Chars: 3888 - Tokens: 972
 16. src\Artifacts\A18. DCE - Phase 1 - Active File Sync Feature Plan.md - Lines: 50 - Chars: 4490 - Tokens: 1123
@@ -44,7 +44,7 @@
 20. src\Artifacts\A20. DCE - Phase 1 - Advanced UX & Automation Plan.md - Lines: 44 - Chars: 6117 - Tokens: 1530
 21. src\Artifacts\A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer.md - Lines: 48 - Chars: 7385 - Tokens: 1847
 22. src\Artifacts\A22. DCE - Phase 1 - Search & Filter Feature Plan.md - Lines: 58 - Chars: 3663 - Tokens: 916
-23. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 41 - Chars: 4820 - Tokens: 1205
+23. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 42 - Chars: 5398 - Tokens: 1350
 24. src\Artifacts\A24. DCE - Selection Paradigm Terminology.md - Lines: 57 - Chars: 3330 - Tokens: 833
 25. src\Artifacts\A25. DCE - Phase 1 - Git & Problems Integration Plan.md - Lines: 61 - Chars: 5871 - Tokens: 1468
 26. src\Artifacts\A26. DCE - Phase 1 - File System Traversal & Caching Strategy.md - Lines: 46 - Chars: 4009 - Tokens: 1003
@@ -66,16 +66,16 @@
 42. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
 43. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
 44. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
-45. src\client\components\file-tree\FileTree.tsx - Lines: 238 - Chars: 10508 - Tokens: 2627
-46. src\client\components\file-tree\FileTree.utils.ts - Lines: 106 - Chars: 3947 - Tokens: 987
-47. src\client\components\SelectedFilesView.tsx - Lines: 266 - Chars: 12619 - Tokens: 3155
-48. src\client\components\tree-view\TreeView.tsx - Lines: 302 - Chars: 13040 - Tokens: 3260
+45. src\client\components\file-tree\FileTree.tsx - Lines: 238 - Chars: 10439 - Tokens: 2610
+46. src\client\components\file-tree\FileTree.utils.ts - Lines: 159 - Chars: 6069 - Tokens: 1518
+47. src\client\components\SelectedFilesView.tsx - Lines: 278 - Chars: 13021 - Tokens: 3256
+48. src\client\components\tree-view\TreeView.tsx - Lines: 307 - Chars: 13116 - Tokens: 3279
 49. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 50. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
 51. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 52. src\client\views\context-chooser.view\on-message.ts - Lines: 94 - Chars: 4015 - Tokens: 1004
 53. src\client\views\context-chooser.view\view.scss - Lines: 541 - Chars: 13385 - Tokens: 3347
-54. src\client\views\context-chooser.view\view.tsx - Lines: 259 - Chars: 12396 - Tokens: 3099
+54. src\client\views\context-chooser.view\view.tsx - Lines: 264 - Chars: 12886 - Tokens: 3222
 55. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
 56. src\common\ipc\channels.enum.ts - Lines: 34 - Chars: 1718 - Tokens: 430
 57. src\common\ipc\channels.type.ts - Lines: 32 - Chars: 2279 - Tokens: 570
@@ -667,7 +667,7 @@ This phase aims to bring a critical part of the external workflow—comparing te
 # Artifact A10: DCE - Metadata and Statistics Display
 # Date Created: Cycle 14
 # Author: AI Model
-# Updated on: C29 (Add parenthesis rule for selected token counts)
+# Updated on: C40 (Clarify file counter label and tooltip)
 
 - **Key/Value for A0:**
 - **Description:** Outlines the requirements and design for displaying live metadata (total selected files, total tokens) and for showing aggregate statistics (token and file counts) for folders in the file tree.
@@ -682,7 +682,7 @@ To enhance the data curation process, it is critical for the user to have immedi
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
 | US-01 | **Folder Statistics** | As a data curator, I want to see the total token count and the total number of files contained within each folder, so I can quickly assess the size and complexity of different parts of my project. | - Next to each folder name in the file tree, a token count is displayed. <br> - This token count is the recursive sum of all tokens from all non-image files within that folder and its subfolders. <br> - Next to the token count, a file count is also displayed, formatted with commas (e.g., "1,234"). <br> - These numbers are calculated on the backend and provided with the initial file tree data. |
-| US-02 | **Live Selection Summary** | As a data curator, I want to see a live summary of my total selection as I check and uncheck files, so I can monitor the total size of my context in real-time. | - A dedicated summary panel/footer is visible in the UI. <br> - This panel displays "X files" and "Y tokens". <br> - "X" is the total count of all individual files included in the current selection, formatted with commas. <br> - "Y" is the sum of all token counts for those selected non-image files. <br> - These values update instantly whenever a checkbox is changed. |
+| US-02 | **Live Selection Summary** | As a data curator, I want to see a live summary of my total selection as I check and uncheck files, so I can monitor the total size of my context in real-time. | - A dedicated summary panel/footer is visible in the UI. <br> - This panel displays "X files" and "Y tokens". <br> - **(C40 Update)** The label for the file count is "Selected Files". The tooltip reads: "Total number of individual files selected for flattening. This does not include empty directories." <br> - "X" is the total count of all individual files included in the current selection, formatted with commas. <br> - "Y" is the sum of all token counts for those selected non-image files. <br> - These values update instantly whenever a checkbox is changed. |
 | US-03 | **Readable Numbers & Icons** | As a data curator, I want large token counts to be formatted in a compact and readable way (e.g., 1,234 becomes "1.2K"), and for icons to visually represent the data, so I can easily parse the information. | - All token counts use K/M/B suffixes for numbers over 1,000. <br> - All file counts use commas for thousands separators. <br> - An icon is displayed next to the token count and file count for visual distinction. <br> - The statistics are right-justified in the file tree for better readability. |
 | US-04 | **Image File Handling** | As a data curator, I want to see the file size for images instead of a token count, so I can understand their contribution to storage/transfer size rather than context length. | - The backend identifies common image file types (png, jpg, etc.). <br> - For image files, the token count is treated as 0. <br> - In the file tree, instead of a token count, the human-readable file size is displayed (e.g., "15.2 KB", "2.1 MB"). |
 | US-05 | **Selected Token Count in Folders** | As a data curator, I want to see how many tokens are selected within a folder, so I can understand the composition of my selection without expanding the entire directory. | - Next to a folder's total token count, a secondary count in parentheses `(x)` appears. <br> - `x` is the recursive sum of tokens from all selected files within that folder. <br> - The display format is `TotalTokens (SelectedTokens)`, e.g., `347K (13K)`. <br> - This count only appears if selected tokens are > 0 and less than the total tokens. |
@@ -716,6 +716,7 @@ To enhance the data curation process, it is critical for the user to have immedi
 4.  **Frontend - Live Summary Panel (`context-chooser.view.tsx`):**
     *   The `useMemo` hook that calculates the summary will be updated to correctly sum the total number of files and total tokens from the selected items. It will continue to ignore image sizes for the token total to avoid mixing units.
     *   The rendered output will use the new formatting utilities and icons.
+    *   **(C40)** The label and title attribute will be updated for clarity.
 </file>
 
 <file path="src/Artifacts/A11. DCE - Regression Case Studies.md">
@@ -982,7 +983,7 @@ This artifact serves as a centralized list to track ongoing and recurring issues
 # Artifact A15: DCE - Phase 1 - Multi-Select & Sorting Feature Plan
 # Date Created: Cycle 22
 # Author: AI Model
-# Updated on: C31 (Note buggy multi-select behavior in main tree as an active issue)
+# Updated on: C40 (Documented RCA and fix for batch removal bug)
 
 - **Key/Value for A0:**
 - **Description:** Details the requirements for multi-selection (click, Ctrl, Shift) in both the main file tree and the "Selected Items" panel, and multi-level column sorting.
@@ -1012,7 +1013,11 @@ To elevate the Data Curation Environment beyond basic functionality, this plan i
     *   **Event Handling:** Implement a comprehensive `onClick` handler for list items that inspects `event.ctrlKey` and `event.shiftKey`. A non-modifier click will set both the `selection` and the `selectionAnchor`. A shift-click will select from the `selectionAnchor` to the current item.
     *   **Sorting Logic:** The `useMemo` hook that sorts the `selectedFileNodes` prop will be updated to handle an array of `sortConfig` objects. It will perform a stable sort, iterating through the sort criteria until a non-zero comparison result is found. A new "Type" column will be added, requiring a utility to extract the file extension.
 
-2.  **`FileTree.tsx` & `TreeView.tsx` (Main Tree Multi-Select):**
+2.  **Batch Removal Logic (`FileTree.utils.ts`):**
+    *   **Root Cause of C40 Bug:** The `removePathsFromSelected` function was buggy. It iterated through the list of files to remove, calling the single-item removal utility (`addRemovePathInSelectedFiles`) on each. This created a race condition where the first removal would perform a "subtractive uncheck" (e.g., removing `src` and adding back all its other children), drastically changing the selection state that subsequent iterations of the loop were relying on.
+    *   **Codified Solution (C40):** The `removePathsFromSelected` function will be rewritten to be non-iterative and set-based. It will calculate the final desired state in a single pass by determining the full set of effectively selected files, removing the unwanted files from that set, and then "compressing" the remaining set of files back into the most efficient list of parent directories and individual files. This atomic approach is more robust and avoids the state mutation bug.
+
+3.  **`FileTree.tsx` & `TreeView.tsx` (Main Tree Multi-Select):**
     *   This is a more complex task that mirrors the `SelectedFilesView` implementation but within a recursive tree structure.
     *   A new selection state for contextual actions (`const [contextSelection, setContextSelection] = useState<Set<string>>(new Set())`) will be managed at the top level (`view.tsx`).
     *   The selection state and handler functions will need to be passed down through `FileTree` to `TreeView`.
@@ -1530,7 +1535,7 @@ To improve navigation and usability in large projects, this feature introduces a
 # Artifact A23: DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan
 # Date Created: C29
 # Author: AI Model
-# Updated on: C39 (Add Spacebar to toggle checkbox)
+# Updated on: C41 (Add Delete key functionality for selected items list)
 
 - **Key/Value for A0:**
 - **Description:** Details the requirements for implementing full keyboard navigation and drag-and-drop file/folder operations within the main file tree view.
@@ -1544,13 +1549,14 @@ To achieve true feature parity with the native VS Code Explorer and cater to pow
 
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
-| AI-01 | **Keyboard Navigation** | As a power user, I want to navigate the file tree using only my keyboard, so I can find, select, and manage files without taking my hands off the keyboard. | - Arrow Up/Down keys move the focus between visible nodes. <br> - Arrow Right on a collapsed folder expands it. <br> - Arrow Right on an open folder or file moves focus to the first child. <br> - Arrow Left on an open folder collapses it. <br> - Arrow Left on a child node moves focus to its parent. <br> - `Enter` key opens the focused file or toggles expansion for a focused folder. <br> - **(C39)** `Spacebar` toggles the checkbox of the focused node. |
+| AI-01 | **Keyboard Navigation** | As a power user, I want to navigate the file tree using only my keyboard, so I can find, select, and manage files without taking my hands off the keyboard. | - Arrow Up/Down keys move the focus between visible nodes. <br> - Arrow Right on a collapsed folder expands it. <br> - Arrow Right on an open folder or file moves focus to the first child. <br> - Arrow Left on an open folder collapses it. <br> - Arrow Left on a child node moves focus to its parent. <br> - `Enter` key opens the focused file or toggles expansion for a focused folder. <br> - `Spacebar` toggles the checkbox of the focused node. |
 | AI-02 | **Drag-and-Drop File Operations** | As a user, I want to be able to drag a file or folder and drop it into another folder to move it, so I can reorganize my project intuitively. | - Clicking and dragging a file or folder in the tree initiates a drag operation. <br> - Dragging over a folder highlights it as a potential drop target. <br> - Dropping a file/folder onto another folder moves the dragged item into the target folder. <br> - The backend file system is updated, and the tree view refreshes to reflect the new structure. |
 | AI-03 | **Select All in Selected List** | As a user, after curating a list, I want to click in the "Selected Items" panel and press `Ctrl+A` or use a context menu to select all files in that list, so I can quickly perform a batch action like "Remove selected". | - **(C37 Update)** Right-clicking in the "Selected Items" list shows a context menu with a "Select All" option. <br> - Clicking it selects all items currently rendered in the list. <br> - The "Remove selected" button's count updates to reflect the total number of items in the list. |
+| AI-04 | **Delete Key to Remove Selection** | As a user, when I have items selected in the "Selected Items" panel, I want to press the `Delete` key to remove them, so I can manage my list more quickly. | - When the "Selected Items" list has focus, pressing the `Delete` key performs the same action as clicking the "Remove selected" button. <br> - All currently selected items are removed from the overall checked files list. <br> - The local selection within the "Selected Items" panel is cleared. |
 
 ## 3. Technical Implementation Plan
 
-### Keyboard Navigation (Completed - C39)
+### Keyboard Navigation (In Progress - C41)
 
 1.  **Focus Management (Frontend):**
     *   **Root Cause Analysis (C38):** The primary bug was that after left-clicking a file, the main VS Code editor pane would open the file and aggressively steal keyboard focus from our webview. A simple `onClick` focus request was insufficient because it executed *before* the editor stole the focus.
@@ -1565,9 +1571,9 @@ To achieve true feature parity with the native VS Code Explorer and cater to pow
 
 The native `vscode.TreeDragAndDropController` is designed for extensions using a `TreeDataProvider`. Since our UI is a custom React webview, a different approach using the HTML5 Drag and Drop API was successfully implemented.
 
-### Select All (`Ctrl+A`) / Context Menu in Selected Items (Completed - C38)
+### Select All / Context Menu / Delete Key in Selected Items (In Progress - C41)
 
-The context menu approach from C37 combined with the focus fix in C38 has resolved this issue. `Ctrl+A` is now reliable because the `SelectedFilesView` correctly retains focus after a file is opened from it.
+The context menu approach from C37 combined with the focus fix in C38 has resolved the `Ctrl+A` issue. The `Delete` key functionality will be added to the `onKeyDown` handler in `SelectedFilesView.tsx` to call the same removal logic as the "Remove selected" button.
 </file>
 
 <file path="src/Artifacts/A24. DCE - Selection Paradigm Terminology.md">
@@ -4536,7 +4542,6 @@ export default ContextMenu;
 import React, { useState, useMemo } from 'react';
 import TreeView from '../tree-view/TreeView';
 import { FileNode } from '@/common/types/file-node';
-import { addRemovePathInSelectedFiles } from './FileTree.utils';
 import Checkbox from '../Checkbox';
 import {
     VscFile, VscFolder, VscFolderOpened, VscJson, VscMarkdown, VscSymbolFile, VscSymbolNumeric, VscFiles, VscError, VscWarning
@@ -4552,7 +4557,7 @@ interface FileTreeProps {
   data: FileNode[];
   checkedFiles: string[];
   activeFile?: string;
-  updateCheckedFiles: (checkedFiles: string[]) => void;
+  updateCheckedFiles: (path: string) => void;
   collapseTrigger?: number;
   searchTerm: string;
   problemMap: ProblemCountsMap;
@@ -4615,7 +4620,7 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
 
     const handleFileCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>, filePath: string) => {
         e.stopPropagation();
-        updateCheckedFiles(addRemovePathInSelectedFiles(data, filePath, checkedFiles));
+        updateCheckedFiles(filePath);
     };
 
     const handleContextMenu = (event: React.MouseEvent, node: FileNode) => {
@@ -4764,6 +4769,7 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
                 onContextMenu={handleContextMenu} 
                 collapseTrigger={collapseTrigger} 
                 activeFile={activeFile} 
+                updateCheckedFiles={updateCheckedFiles}
             />
             {contextMenu && <ContextMenu menu={contextMenu} onClose={() => setContextMenu(null)} onRename={handleRename} />}
         </div>
@@ -4777,12 +4783,14 @@ export default FileTree;
 import { FileNode } from "@/common/types/file-node";
 import { logger } from "@/client/utils/logger";
 
-function getAllDescendantPaths(node: FileNode): string[] {
+function getAllDescendantPaths(node: FileNode, includeFilesOnly: boolean = false): string[] {
     let paths: string[] = [];
     if (node.children) {
         for (const child of node.children) {
-            paths.push(child.absolutePath);
-            paths = paths.concat(getAllDescendantPaths(child));
+            if (!includeFilesOnly || !child.children) {
+                paths.push(child.absolutePath);
+            }
+            paths = paths.concat(getAllDescendantPaths(child, includeFilesOnly));
         }
     }
     return paths;
@@ -4831,14 +4839,13 @@ export const addRemovePathInSelectedFiles = (
     if (isEffectivelySelected) {
         // UNCHECKING
         if (selectedAncestor) {
-            // A child of a selected folder is being unchecked.
-            // This means we are "subtracting" it from the parent selection.
+            // A child of a selected folder is being unchecked ("subtractive uncheck").
             newSelectedFiles = newSelectedFiles.filter(p => p !== selectedAncestor);
             const ancestorNode = getFileNodeByPath(fileTree, selectedAncestor);
             if (ancestorNode && ancestorNode.children) {
-                // Add all siblings of the unchecked path back to the selection
+                // Add all direct children of the ancestor EXCEPT the one that was part of the uncheck path.
                 for (const child of ancestorNode.children) {
-                    if (!path.startsWith(child.absolutePath + '/')) {
+                    if (!path.startsWith(child.absolutePath)) {
                          newSelectedFiles.push(child.absolutePath);
                     }
                 }
@@ -4860,25 +4867,77 @@ export const addRemovePathInSelectedFiles = (
 
 export const removePathsFromSelected = (
     pathsToRemove: string[],
-    selectedFiles: string[],
+    currentSelectedFiles: string[],
     fileTree: FileNode[]
 ): string[] => {
-    logger.log(`Attempting to remove ${pathsToRemove.length} paths from selection.`);
-    if (pathsToRemove.length === 0) {
-        return selectedFiles;
+    logger.log(`[Batch Remove] Starting removal of ${pathsToRemove.length} paths.`);
+    if (pathsToRemove.length === 0) return currentSelectedFiles;
+
+    const fileMap = new Map<string, FileNode>();
+    const buildMap = (node: FileNode) => {
+        fileMap.set(node.absolutePath, node);
+        node.children?.forEach(buildMap);
+    };
+    fileTree.forEach(buildMap);
+
+    // 1. Get the full set of all individual files that are currently selected.
+    const effectiveFileSelection = new Set<string>();
+    for (const selectedPath of currentSelectedFiles) {
+        const node = fileMap.get(selectedPath);
+        if (node) {
+            if (node.children) { // It's a directory
+                getAllDescendantPaths(node, true).forEach(file => effectiveFileSelection.add(file));
+            } else { // It's a file
+                effectiveFileSelection.add(selectedPath);
+            }
+        }
     }
+    logger.log(`[Batch Remove] Expanded initial selection to ${effectiveFileSelection.size} effective files.`);
 
-    let newSelectedFiles = [...selectedFiles];
-
-    for (const path of pathsToRemove) {
-        // This simulates an "uncheck" action for each file to be removed.
-        // It correctly handles cases where the file is part of a larger selected directory.
-        newSelectedFiles = addRemovePathInSelectedFiles(fileTree, path, newSelectedFiles);
+    // 2. Remove the unwanted files from this effective set.
+    for (const pathToRemove of pathsToRemove) {
+        effectiveFileSelection.delete(pathToRemove);
     }
+    logger.log(`[Batch Remove] After removal, ${effectiveFileSelection.size} files remain.`);
 
-    const finalSelectedFiles = Array.from(new Set(newSelectedFiles));
-    logger.log(`Selection updated. New count: ${finalSelectedFiles.length}.`);
-    return finalSelectedFiles;
+
+    // 3. Compress the remaining set of files into the most efficient list of paths (folders + files).
+    const finalPaths = new Set<string>();
+    const checkedForCompression = new Set<string>();
+
+    const compress = (node: FileNode) => {
+        if (!node.children || checkedForCompression.has(node.absolutePath)) {
+            return;
+        }
+
+        const descendantFiles = getAllDescendantPaths(node, true);
+        if (descendantFiles.length === 0) {
+            return; // Don't add empty folders
+        }
+
+        const allDescendantsSelected = descendantFiles.every(file => effectiveFileSelection.has(file));
+
+        if (allDescendantsSelected) {
+            finalPaths.add(node.absolutePath);
+            // Mark all descendants as handled by this compression
+            descendantFiles.forEach(file => checkedForCompression.add(file));
+        } else {
+            // Recurse to children if not all are selected
+            node.children.forEach(compress);
+        }
+    };
+
+    fileTree.forEach(compress);
+
+    // Add any remaining files that were not part of a compressed folder
+    for (const file of effectiveFileSelection) {
+        if (!checkedForCompression.has(file)) {
+            finalPaths.add(file);
+        }
+    }
+    
+    logger.log(`[Batch Remove] Compressed final selection to ${finalPaths.size} paths.`);
+    return Array.from(finalPaths);
 };
 </file>
 
@@ -5032,24 +5091,36 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
         setSelection(newSelection);
     };
     
+    const handleRemoveSelected = () => {
+        logger.log(`"Remove selected" button clicked. Removing ${selection.size} items.`);
+        onRemove(Array.from(selection));
+        setSelection(new Set());
+    };
+
     const handleKeyDown = (e: React.KeyboardEvent<HTMLUListElement>) => {
-        if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
-            e.preventDefault();
-            e.stopPropagation(); // C39 Fix: Prevent event from bubbling up
-            logger.log('Ctrl+A detected in SelectedFilesView.');
-            const allPaths = new Set(sortedFiles.map(f => f.absolutePath));
-            setSelection(allPaths);
+        switch (e.key) {
+            case 'a':
+                if (e.ctrlKey || e.metaKey) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    logger.log('Ctrl+A detected in SelectedFilesView.');
+                    const allPaths = new Set(sortedFiles.map(f => f.absolutePath));
+                    setSelection(allPaths);
+                }
+                break;
+            case 'Delete':
+                e.preventDefault();
+                e.stopPropagation();
+                if (selection.size > 0) {
+                    logger.log(`Delete key pressed. Removing ${selection.size} items.`);
+                    handleRemoveSelected();
+                }
+                break;
         }
     };
 
     const handleContainerClick = () => {
         listRef.current?.focus();
-    };
-
-    const handleRemoveSelected = () => {
-        logger.log(`"Remove selected" button clicked. Removing ${selection.size} items.`);
-        onRemove(Array.from(selection));
-        setSelection(new Set());
     };
 
     const handleContextMenu = (event: React.MouseEvent) => {
@@ -5157,7 +5228,6 @@ import { VscChevronRight } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 import { logger } from '@/client/utils/logger';
-import { addRemovePathInSelectedFiles } from '../file-tree/FileTree.utils';
 
 export interface TreeNode {
     name: string;
@@ -5173,11 +5243,10 @@ interface TreeViewProps {
     collapseTrigger?: number;
     onContextMenu?: (event: React.MouseEvent, node: TreeNode) => void;
     activeFile?: string;
-    updateCheckedFiles: (newChecked: string[]) => void;
-    checkedFiles: string[];
+    updateCheckedFiles: (path: string) => void;
 }
 
-const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTrigger = 0, onContextMenu, activeFile, updateCheckedFiles, checkedFiles }) => {
+const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTrigger = 0, onContextMenu, activeFile, updateCheckedFiles }) => {
     const [expandedNodes, setExpandedNodes] = useState<string[]>([]);
     const [selectedPaths, setSelectedPaths] = useState<Set<string>>(new Set());
     const [focusedNodePath, setFocusedNodePath] = useState<string | null>(null);
@@ -5306,7 +5375,6 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
                 });
             } else {
                 clientIpc.sendToServer(ClientToServerChannel.RequestOpenFile, { path });
-                // C38 Fix: After requesting a file open, reclaim focus after a short delay.
                 setTimeout(() => treeViewRef.current?.focus(), 100);
             }
         }
@@ -5329,31 +5397,40 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
             }
         };
         
-        e.preventDefault();
-        e.stopPropagation();
-
         switch (e.key) {
             case 'ArrowUp':
+                e.preventDefault();
+                e.stopPropagation();
                 moveFocus(currentIndex - 1);
                 break;
             case 'ArrowDown':
+                e.preventDefault();
+                e.stopPropagation();
                 moveFocus(currentIndex + 1);
                 break;
             case 'ArrowRight':
+                e.preventDefault();
+                e.stopPropagation();
                 if (currentNode.children) {
                     setExpandedNodes(prev => [...new Set([...prev, currentNode.absolutePath])]);
                 }
                 break;
             case 'ArrowLeft':
+                e.preventDefault();
+                e.stopPropagation();
                 if (currentNode.children && expandedNodes.includes(currentNode.absolutePath)) {
                     setExpandedNodes(prev => prev.filter(p => p !== currentNode.absolutePath));
                 }
                 break;
-            case ' ': // C39: Spacebar Toggles Checkbox
+            case ' ':
                 e.preventDefault();
-                updateCheckedFiles(addRemovePathInSelectedFiles(data, currentNode.absolutePath, checkedFiles));
+                e.stopPropagation();
+                logger.log(`Spacebar pressed on focused node: ${currentNode.absolutePath}`);
+                updateCheckedFiles(currentNode.absolutePath);
                 break;
             case 'Enter':
+                e.preventDefault();
+                e.stopPropagation();
                 if (currentNode.children) {
                      setExpandedNodes(prev => {
                         const isExpanded = prev.includes(currentNode.absolutePath);
@@ -5366,7 +5443,6 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         }
     };
 
-    // --- Drag and Drop Handlers ---
     const handleDragStart = (e: React.DragEvent, node: TreeNode) => {
         e.stopPropagation();
         setDraggedPath(node.absolutePath);
@@ -5446,7 +5522,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
             tabIndex={0} 
             onKeyDown={handleKeyDown} 
             ref={treeViewRef}
-            onClick={() => treeViewRef.current?.focus()} // Aggressive focus grab
+            onClick={() => treeViewRef.current?.focus()}
         >
             <ul>{renderTreeNodes(data)}</ul>
         </div>
@@ -6158,7 +6234,7 @@ import { formatLargeNumber, formatNumberWithCommas } from '@/common/utils/format
 import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, VscNewFolder, VscLoading, VscSave, VscFolderLibrary, VscSettingsGear, VscCheckAll, VscSearch } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import SelectedFilesView from '@/client/components/SelectedFilesView';
-import { removePathsFromSelected } from '@/client/components/file-tree/FileTree.utils';
+import { addRemovePathInSelectedFiles, removePathsFromSelected } from '@/client/components/file-tree/FileTree.utils';
 import { SelectionSet, ProblemCountsMap } from '@/common/ipc/channels.type';
 
 const App = () => {
@@ -6182,10 +6258,13 @@ const App = () => {
         clientIpc.sendToServer(ClientToServerChannel.RequestWorkspaceFiles, { force });
     };
 
-    const updateCheckedFiles = useCallback((newCheckedFiles: string[]) => {
-        setCheckedFiles(newCheckedFiles);
-        clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths: newCheckedFiles });
-    }, [clientIpc]);
+    const updateCheckedFiles = useCallback((path: string) => {
+        setCheckedFiles(currentChecked => {
+            const newChecked = addRemovePathInSelectedFiles(files, path, currentChecked);
+            clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths: newChecked });
+            return newChecked;
+        });
+    }, [clientIpc, files]);
 
     useEffect(() => {
         logger.log("Initializing view and requesting initial data.");
@@ -6198,7 +6277,8 @@ const App = () => {
         
         clientIpc.onServerMessage(ServerToClientChannel.ApplySelectionSet, ({ paths }) => {
             logger.log(`Applying selection set with ${paths.length} paths.`);
-            updateCheckedFiles(paths);
+            setCheckedFiles(paths); // Direct set, not toggle
+            clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths });
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendSelectionSets, ({ sets }) => {
@@ -6235,7 +6315,7 @@ const App = () => {
         requestFiles();
         clientIpc.sendToServer(ClientToServerChannel.RequestLastSelection, {});
 
-    }, [updateCheckedFiles]);
+    }, [clientIpc]);
 
     const handleFlattenClick = () => {
         logger.log(`Flatten Context button clicked with ${checkedFiles.length} paths.`);
@@ -6287,22 +6367,22 @@ const App = () => {
     };
 
     const handleRemoveFromSelection = (pathsToRemove: string[]) => {
-        const newSelected = removePathsFromSelected(pathsToRemove, checkedFiles, files);
-        updateCheckedFiles(newSelected);
+        setCheckedFiles(currentChecked => {
+            const newChecked = removePathsFromSelected(pathsToRemove, currentChecked, files);
+            clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths: newChecked });
+            return newChecked;
+        });
     };
 
     const { totalFiles, totalTokens, selectedFileNodes } = useMemo(() => {
         let totalTokens = 0;
-        let totalFiles = 0;
         const selectedFileSet = new Set<string>();
         const selectedNodes: FileNode[] = [];
 
         const fileMap: Map<string, FileNode> = new Map();
         const buildFileMap = (node: FileNode) => {
             fileMap.set(node.absolutePath, node);
-            if (node.children) {
-                node.children.forEach(buildFileMap);
-            }
+            node.children?.forEach(buildFileMap);
         };
         files.forEach(buildFileMap);
 
@@ -6314,7 +6394,6 @@ const App = () => {
                     if (!node.isImage) {
                        totalTokens += node.tokenCount;
                     }
-                    totalFiles++;
                 }
             } else {
                 node.children.forEach(child => addNodeAndDescendants(child));
@@ -6328,7 +6407,9 @@ const App = () => {
             }
         });
         
-        return { totalFiles, totalTokens, selectedFileNodes: selectedNodes.filter(n => !n.isImage) };
+        const finalFileNodes = selectedNodes.filter(n => !n.isImage && !n.children);
+
+        return { totalFiles: finalFileNodes.length, totalTokens, selectedFileNodes: finalFileNodes };
     }, [checkedFiles, files]);
 
     return (
@@ -6386,9 +6467,9 @@ const App = () => {
             />
             <div className="view-footer">
                 <div className="summary-panel">
-                    <span className='summary-item' title="Total selected files">
+                    <span className='summary-item' title="Total number of individual files selected for flattening. This does not include empty directories.">
                         <VscFiles />
-                        {formatNumberWithCommas(totalFiles)}
+                        Selected Files: {formatNumberWithCommas(totalFiles)}
                     </span>
                     <span className='summary-item' title="Total tokens in selected text files">
                         <VscSymbolNumeric />

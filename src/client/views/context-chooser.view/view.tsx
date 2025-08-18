@@ -10,7 +10,7 @@ import { formatLargeNumber, formatNumberWithCommas } from '@/common/utils/format
 import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, VscNewFolder, VscLoading, VscSave, VscFolderLibrary, VscSettingsGear, VscCheckAll, VscSearch } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import SelectedFilesView from '@/client/components/SelectedFilesView';
-import { removePathsFromSelected } from '@/client/components/file-tree/FileTree.utils';
+import { addRemovePathInSelectedFiles, removePathsFromSelected } from '@/client/components/file-tree/FileTree.utils';
 import { SelectionSet, ProblemCountsMap } from '@/common/ipc/channels.type';
 
 const App = () => {
@@ -34,10 +34,13 @@ const App = () => {
         clientIpc.sendToServer(ClientToServerChannel.RequestWorkspaceFiles, { force });
     };
 
-    const updateCheckedFiles = useCallback((newCheckedFiles: string[]) => {
-        setCheckedFiles(newCheckedFiles);
-        clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths: newCheckedFiles });
-    }, [clientIpc]);
+    const updateCheckedFiles = useCallback((path: string) => {
+        setCheckedFiles(currentChecked => {
+            const newChecked = addRemovePathInSelectedFiles(files, path, currentChecked);
+            clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths: newChecked });
+            return newChecked;
+        });
+    }, [clientIpc, files]);
 
     useEffect(() => {
         logger.log("Initializing view and requesting initial data.");
@@ -50,7 +53,8 @@ const App = () => {
         
         clientIpc.onServerMessage(ServerToClientChannel.ApplySelectionSet, ({ paths }) => {
             logger.log(`Applying selection set with ${paths.length} paths.`);
-            updateCheckedFiles(paths);
+            setCheckedFiles(paths); // Direct set, not toggle
+            clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths });
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendSelectionSets, ({ sets }) => {
@@ -87,7 +91,7 @@ const App = () => {
         requestFiles();
         clientIpc.sendToServer(ClientToServerChannel.RequestLastSelection, {});
 
-    }, [updateCheckedFiles]);
+    }, [clientIpc]);
 
     const handleFlattenClick = () => {
         logger.log(`Flatten Context button clicked with ${checkedFiles.length} paths.`);
@@ -139,8 +143,11 @@ const App = () => {
     };
 
     const handleRemoveFromSelection = (pathsToRemove: string[]) => {
-        const newSelected = removePathsFromSelected(pathsToRemove, checkedFiles, files);
-        updateCheckedFiles(newSelected);
+        setCheckedFiles(currentChecked => {
+            const newChecked = removePathsFromSelected(pathsToRemove, currentChecked, files);
+            clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths: newChecked });
+            return newChecked;
+        });
     };
 
     const { totalFiles, totalTokens, selectedFileNodes } = useMemo(() => {
@@ -156,7 +163,6 @@ const App = () => {
         files.forEach(buildFileMap);
 
         const addNodeAndDescendants = (node: FileNode) => {
-            // C40 Fix: Explicitly check for children to only add files
             if (!node.children) {
                 if (!selectedFileSet.has(node.absolutePath)) {
                     selectedFileSet.add(node.absolutePath);
@@ -177,7 +183,6 @@ const App = () => {
             }
         });
         
-        // C40 Fix: Ensure only files are included in the final count and list
         const finalFileNodes = selectedNodes.filter(n => !n.isImage && !n.children);
 
         return { totalFiles: finalFileNodes.length, totalTokens, selectedFileNodes: finalFileNodes };
@@ -238,9 +243,9 @@ const App = () => {
             />
             <div className="view-footer">
                 <div className="summary-panel">
-                    <span className='summary-item' title="Total selected files">
+                    <span className='summary-item' title="Total number of individual files selected for flattening. This does not include empty directories.">
                         <VscFiles />
-                        {formatNumberWithCommas(totalFiles)}
+                        Selected Files: {formatNumberWithCommas(totalFiles)}
                     </span>
                     <span className='summary-item' title="Total tokens in selected text files">
                         <VscSymbolNumeric />

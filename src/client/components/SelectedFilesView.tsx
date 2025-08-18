@@ -147,24 +147,36 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
         setSelection(newSelection);
     };
     
+    const handleRemoveSelected = () => {
+        logger.log(`"Remove selected" button clicked. Removing ${selection.size} items.`);
+        onRemove(Array.from(selection));
+        setSelection(new Set());
+    };
+
     const handleKeyDown = (e: React.KeyboardEvent<HTMLUListElement>) => {
-        if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
-            e.preventDefault();
-            e.stopPropagation(); // C39 Fix: Prevent event from bubbling up
-            logger.log('Ctrl+A detected in SelectedFilesView.');
-            const allPaths = new Set(sortedFiles.map(f => f.absolutePath));
-            setSelection(allPaths);
+        switch (e.key) {
+            case 'a':
+                if (e.ctrlKey || e.metaKey) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    logger.log('Ctrl+A detected in SelectedFilesView.');
+                    const allPaths = new Set(sortedFiles.map(f => f.absolutePath));
+                    setSelection(allPaths);
+                }
+                break;
+            case 'Delete':
+                e.preventDefault();
+                e.stopPropagation();
+                if (selection.size > 0) {
+                    logger.log(`Delete key pressed. Removing ${selection.size} items.`);
+                    handleRemoveSelected();
+                }
+                break;
         }
     };
 
     const handleContainerClick = () => {
         listRef.current?.focus();
-    };
-
-    const handleRemoveSelected = () => {
-        logger.log(`"Remove selected" button clicked. Removing ${selection.size} items.`);
-        onRemove(Array.from(selection));
-        setSelection(new Set());
     };
 
     const handleContextMenu = (event: React.MouseEvent) => {
