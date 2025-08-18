@@ -175,31 +175,39 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
             }
         };
         
-        e.preventDefault();
-        e.stopPropagation();
-
         switch (e.key) {
             case 'ArrowUp':
+                e.preventDefault();
+                e.stopPropagation();
                 moveFocus(currentIndex - 1);
                 break;
             case 'ArrowDown':
+                e.preventDefault();
+                e.stopPropagation();
                 moveFocus(currentIndex + 1);
                 break;
             case 'ArrowRight':
+                e.preventDefault();
+                e.stopPropagation();
                 if (currentNode.children) {
                     setExpandedNodes(prev => [...new Set([...prev, currentNode.absolutePath])]);
                 }
                 break;
             case 'ArrowLeft':
+                e.preventDefault();
+                e.stopPropagation();
                 if (currentNode.children && expandedNodes.includes(currentNode.absolutePath)) {
                     setExpandedNodes(prev => prev.filter(p => p !== currentNode.absolutePath));
                 }
                 break;
-            case ' ': // C39: Spacebar Toggles Checkbox
+            case ' ':
                 e.preventDefault();
+                e.stopPropagation();
                 updateCheckedFiles(addRemovePathInSelectedFiles(data, currentNode.absolutePath, checkedFiles));
                 break;
             case 'Enter':
+                e.preventDefault();
+                e.stopPropagation();
                 if (currentNode.children) {
                      setExpandedNodes(prev => {
                         const isExpanded = prev.includes(currentNode.absolutePath);

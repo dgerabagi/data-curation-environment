@@ -145,20 +145,18 @@ const App = () => {
 
     const { totalFiles, totalTokens, selectedFileNodes } = useMemo(() => {
         let totalTokens = 0;
-        let totalFiles = 0;
         const selectedFileSet = new Set<string>();
         const selectedNodes: FileNode[] = [];
 
         const fileMap: Map<string, FileNode> = new Map();
         const buildFileMap = (node: FileNode) => {
             fileMap.set(node.absolutePath, node);
-            if (node.children) {
-                node.children.forEach(buildFileMap);
-            }
+            node.children?.forEach(buildFileMap);
         };
         files.forEach(buildFileMap);
 
         const addNodeAndDescendants = (node: FileNode) => {
+            // C40 Fix: Explicitly check for children to only add files
             if (!node.children) {
                 if (!selectedFileSet.has(node.absolutePath)) {
                     selectedFileSet.add(node.absolutePath);
@@ -166,7 +164,6 @@ const App = () => {
                     if (!node.isImage) {
                        totalTokens += node.tokenCount;
                     }
-                    totalFiles++;
                 }
             } else {
                 node.children.forEach(child => addNodeAndDescendants(child));
@@ -180,7 +177,10 @@ const App = () => {
             }
         });
         
-        return { totalFiles, totalTokens, selectedFileNodes: selectedNodes.filter(n => !n.isImage) };
+        // C40 Fix: Ensure only files are included in the final count and list
+        const finalFileNodes = selectedNodes.filter(n => !n.isImage && !n.children);
+
+        return { totalFiles: finalFileNodes.length, totalTokens, selectedFileNodes: finalFileNodes };
     }, [checkedFiles, files]);
 
     return (
