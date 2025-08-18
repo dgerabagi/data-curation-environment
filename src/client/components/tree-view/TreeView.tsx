@@ -151,6 +151,8 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
                 });
             } else {
                 clientIpc.sendToServer(ClientToServerChannel.RequestOpenFile, { path });
+                // C38 Fix: After requesting a file open, reclaim focus after a short delay.
+                setTimeout(() => treeViewRef.current?.focus(), 100);
             }
         }
     };

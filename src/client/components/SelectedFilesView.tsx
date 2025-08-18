@@ -137,6 +137,8 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
             firstClickedPath.current = path; // Update anchor on ctrl-click
         } else {
             clientIpc.sendToServer(ClientToServerChannel.RequestOpenFile, { path });
+            // C38 Fix: Re-focus the list after a delay to reclaim focus from the editor
+            setTimeout(() => listRef.current?.focus(), 100);
             newSelection.clear();
             newSelection.add(path);
             firstClickedPath.current = path;
