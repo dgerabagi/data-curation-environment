@@ -42,13 +42,11 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(
         vscode.window.onDidChangeActiveTextEditor(editor => {
             if (editor && editor.document.uri.scheme === 'file') { // Ensure it's a file URI
-                const filePath = editor.document.uri.fsPath;
+                const filePath = editor.document.uri.fsPath.replace(/\\/g, '/'); // Normalize path immediately
                 const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
                 if (serverIpc) {
                     Services.loggerService.log(`Active editor changed: ${filePath}. Notifying view.`);
                     serverIpc.sendToClient(ServerToClientChannel.SetActiveFile, { path: filePath });
-                } else {
-                    Services.loggerService.warn(`Active editor changed but serverIpc not found for view.`);
                 }
             }
         })

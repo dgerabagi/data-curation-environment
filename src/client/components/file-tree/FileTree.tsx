@@ -11,6 +11,7 @@ import { formatLargeNumber, formatBytes, formatNumberWithCommas } from '@/common
 import ContextMenu from '../ContextMenu';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
+import { logger } from '@/client/utils/logger';
 
 interface FileTreeProps {
   data: FileNode[];
@@ -18,6 +19,7 @@ interface FileTreeProps {
   activeFile?: string;
   updateCheckedFiles: (checkedFiles: string[]) => void;
   collapseTrigger?: number;
+  searchTerm: string;
 }
 
 const getFileIcon = (fileName: string) => {
@@ -34,11 +36,34 @@ const getFileIcon = (fileName: string) => {
     }
 };
 
-const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, updateCheckedFiles, collapseTrigger }) => {
+const filterTree = (nodes: FileNode[], term: string): FileNode[] => {
+    if (!term) return nodes;
+    const lowerCaseTerm = term.toLowerCase();
+
+    return nodes.reduce((acc, node) => {
+        if (node.name.toLowerCase().includes(lowerCaseTerm)) {
+            acc.push(node);
+            return acc;
+        }
+
+        if (node.children) {
+            const filteredChildren = filterTree(node.children, term);
+            if (filteredChildren.length > 0) {
+                acc.push({ ...node, children: filteredChildren });
+            }
+        }
+        return acc;
+    }, [] as FileNode[]);
+};
+
+
+const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, updateCheckedFiles, collapseTrigger, searchTerm }) => {
     const [contextMenu, setContextMenu] = useState<{ x: number, y: number, node: FileNode } | null>(null);
     const [renamingPath, setRenamingPath] = useState<string | null>(null);
     const [renameValue, setRenameValue] = useState('');
     const clientIpc = ClientPostMessageManager.getInstance();
+
+    const filteredData = useMemo(() => filterTree(data, searchTerm), [data, searchTerm]);
 
     const handleFileCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>, filePath: string) => {
         e.stopPropagation();
@@ -66,16 +91,39 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
         setRenamingPath(null);
     };
     
-    const calculateCheckedTokens = useMemo(() => (node: FileNode): number => {
-        if (!node.children) {
-            return checkedFiles.includes(node.absolutePath) ? node.tokenCount : 0;
-        }
+    const calculateCheckedTokens = useMemo(() => {
+        const checkedSet = new Set(checkedFiles);
+        const memo = new Map<string, number>();
+
+        const calculate = (node: FileNode): number => {
+            if (memo.has(node.absolutePath)) {
+                return memo.get(node.absolutePath)!;
+            }
+
+            if (checkedSet.has(node.absolutePath)) {
+                memo.set(node.absolutePath, node.tokenCount);
+                return node.tokenCount;
+            }
+            
+            // Check for ancestor
+            for (const checkedPath of checkedSet) {
+                if (node.absolutePath.startsWith(checkedPath + '/')) {
+                    memo.set(node.absolutePath, node.tokenCount);
+                    return node.tokenCount;
+                }
+            }
+
+            if (!node.children) {
+                const result = checkedSet.has(node.absolutePath) ? node.tokenCount : 0;
+                memo.set(node.absolutePath, result);
+                return result;
+            }
     
-        if (checkedFiles.includes(node.absolutePath)) {
-            return node.tokenCount;
-        }
-    
-        return node.children.reduce((acc, child) => acc + calculateCheckedTokens(child), 0);
+            const result = node.children.reduce((acc, child) => acc + calculate(child), 0);
+            memo.set(node.absolutePath, result);
+            return result;
+        };
+        return calculate;
     }, [checkedFiles]);
 
     const renderFileNodeContent = (node: FileNode, isExpanded: boolean) => {
@@ -145,7 +193,7 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
     return (
         <div className="file-tree">
             <TreeView 
-                data={data} 
+                data={filteredData} 
                 renderNodeContent={(node, isExpanded) => renderFileNodeContent(node, isExpanded as boolean)} 
                 onContextMenu={handleContextMenu} 
                 collapseTrigger={collapseTrigger} 

@@ -23,7 +23,7 @@ interface TreeViewProps {
 const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTrigger = 0, onContextMenu, activeFile }) => {
     const [expandedNodes, setExpandedNodes] = useState<string[]>([]);
     const [selectedPaths, setSelectedPaths] = useState<Set<string>>(new Set());
-    const [lastClickedPath, setLastClickedPath] = useState<string | null>(null);
+    const [lastClickedPath, setLastClickedPath] = useState<string | null>(null); // This is the anchor for shift-click
     const nodeRefs = useRef<Map<string, HTMLLIElement | null>>(new Map());
     const flatNodeList = useRef<TreeNode[]>([]);
     const clientIpc = ClientPostMessageManager.getInstance();
@@ -63,10 +63,9 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
 
     useEffect(() => {
         if (activeFile && data.length > 0) {
-            logger.log(`[TreeView] Active file changed: ${activeFile}. Attempting to reveal.`);
+            logger.log(`[TreeView] activeFile prop changed: ${activeFile}. Attempting to reveal.`);
             const getParentPaths = (filePath: string, rootPath: string): string[] => {
-                if (!filePath.startsWith(rootPath)) {
-                    logger.warn(`[TreeView] Active file ${filePath} is not under root ${rootPath}`);
+                if (!filePath.startsWith(rootPath) || filePath === rootPath) {
                     return [];
                 }
                 const relativePath = filePath.substring(rootPath.length + 1);
@@ -82,15 +81,19 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
             const rootPath = data[0]?.absolutePath;
             if (rootPath) {
                 const parents = getParentPaths(activeFile, rootPath);
+                logger.log(`[TreeView] Parents to expand: ${JSON.stringify(parents)}`);
                 setExpandedNodes(prev => [...new Set([...prev, ...parents, rootPath])]);
                 setSelectedPaths(new Set([activeFile]));
                 setLastClickedPath(activeFile);
                 setTimeout(() => {
                     const nodeElement = nodeRefs.current.get(activeFile);
                     if (nodeElement) {
+                        logger.log(`[TreeView] Scrolling to active file element.`);
                         nodeElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    } else {
+                        logger.warn(`[TreeView] Could not find ref for active file: ${activeFile}`);
                     }
-                }, 100);
+                }, 150);
             }
         }
     }, [activeFile, data]);
@@ -101,36 +104,43 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         }
         e.stopPropagation();
 
-        const newSelection = new Set(selectedPaths);
         const path = node.absolutePath;
-
+        
         if (e.shiftKey && lastClickedPath) {
+            const newSelection = new Set(e.ctrlKey ? selectedPaths : []); // Start with current selection if Ctrl is pressed
             const firstIdx = flatNodeList.current.findIndex(f => f.absolutePath === lastClickedPath);
             const currentIdx = flatNodeList.current.findIndex(f => f.absolutePath === path);
             const start = Math.min(firstIdx, currentIdx);
             const end = Math.max(firstIdx, currentIdx);
-            if (!e.ctrlKey) newSelection.clear();
-            for (let i = start; i <= end; i++) {
-                newSelection.add(flatNodeList.current[i].absolutePath);
+            if (start !== -1 && end !== -1) {
+                for (let i = start; i <= end; i++) {
+                    if (flatNodeList.current[i]) {
+                        newSelection.add(flatNodeList.current[i].absolutePath);
+                    }
+                }
             }
+            setSelectedPaths(newSelection);
         } else if (e.ctrlKey) {
-            if (newSelection.has(path)) newSelection.delete(path);
-            else newSelection.add(path);
-            setLastClickedPath(path);
+            const newSelection = new Set(selectedPaths);
+            if (newSelection.has(path)) {
+                newSelection.delete(path);
+            } else {
+                newSelection.add(path);
+            }
+            setSelectedPaths(newSelection);
+            setLastClickedPath(path); // Update anchor on ctrl-click
         } else {
-            newSelection.clear();
-            newSelection.add(path);
-            setLastClickedPath(path);
-        }
-        setSelectedPaths(newSelection);
-
-        if (node.children) {
-            setExpandedNodes(prev => {
-                const isExpanded = prev.includes(path);
-                return isExpanded ? prev.filter(p => p !== path) : [...prev, path];
-            });
-        } else {
-            clientIpc.sendToServer(ClientToServerChannel.RequestOpenFile, { path });
+            // Normal single click
+            setSelectedPaths(new Set([path]));
+            setLastClickedPath(path); // This is now the anchor for future shift-clicks
+            if (node.children) {
+                setExpandedNodes(prev => {
+                    const isExpanded = prev.includes(path);
+                    return isExpanded ? prev.filter(p => p !== path) : [...prev, path];
+                });
+            } else {
+                clientIpc.sendToServer(ClientToServerChannel.RequestOpenFile, { path });
+            }
         }
     };
 

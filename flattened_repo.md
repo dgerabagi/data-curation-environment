@@ -1,25 +1,25 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-18T12:06:26.022Z
+  Date Generated: 2025-08-18T18:31:17.793Z
   ---
-  Total Files: 159
-  Total Lines: 12099
-  Total Characters: 490129
-  Approx. Tokens: 122591
+  Total Files: 164
+  Total Lines: 12538
+  Total Characters: 520471
+  Approx. Tokens: 130179
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
 2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
-3. src\backend\services\fs.service.ts (3103 tokens)
-4. src\client\views\context-chooser.view\view.tsx (2767 tokens)
-5. src\client\views\context-chooser.view\view.scss (2740 tokens)
+3. src\backend\services\fs.service.ts (3073 tokens)
+4. src\client\views\context-chooser.view\view.tsx (2994 tokens)
+5. src\client\views\context-chooser.view\view.scss (2854 tokens)
 6. src\client\components\SelectedFilesView.tsx (2716 tokens)
 7. The-Creator-AI-main\src\backend\services\code.service.ts (2618 tokens)
 8. The-Creator-AI-main\src\backend\services\fs.service.ts (2495 tokens)
 9. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts (2424 tokens)
-10. The-Creator-AI-main\src\backend\services\llm.service.ts (2156 tokens)
+10. src\Artifacts\A0. DCE Master Artifact List.md (2257 tokens)
 
 <!-- Full File List -->
 1. .gitignore - Lines: 9 - Chars: 108 - Tokens: 27
@@ -27,160 +27,165 @@
 3. bootstrap-flattener.js - Lines: 185 - Chars: 5834 - Tokens: 1459
 4. package.json - Lines: 72 - Chars: 2163 - Tokens: 541
 5. public\spiral.svg - Lines: 8 - Chars: 459 - Tokens: 115
-6. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 110 - Chars: 7436 - Tokens: 1859
+6. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 130 - Chars: 9026 - Tokens: 2257
 7. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 38 - Chars: 3311 - Tokens: 828
-8. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 50 - Chars: 6114 - Tokens: 1529
+8. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 52 - Chars: 7022 - Tokens: 1756
 9. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 73 - Chars: 5105 - Tokens: 1277
 10. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 68 - Chars: 4497 - Tokens: 1125
-11. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 48 - Chars: 5807 - Tokens: 1452
+11. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 48 - Chars: 5967 - Tokens: 1492
 12. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
-13. src\Artifacts\A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md - Lines: 38 - Chars: 5805 - Tokens: 1452
+13. src\Artifacts\A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md - Lines: 39 - Chars: 6270 - Tokens: 1568
 14. src\Artifacts\A16. DCE - Phase 1 - UI & UX Refinements Plan.md - Lines: 41 - Chars: 5412 - Tokens: 1353
 15. src\Artifacts\A17. DCE - Phase 1 - Advanced Tree View Features.md - Lines: 47 - Chars: 3888 - Tokens: 972
-16. src\Artifacts\A18. DCE - Phase 1 - Active File Sync Feature Plan.md - Lines: 39 - Chars: 3446 - Tokens: 862
+16. src\Artifacts\A18. DCE - Phase 1 - Active File Sync Feature Plan.md - Lines: 50 - Chars: 4490 - Tokens: 1123
 17. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
 18. src\Artifacts\A19. DCE - Phase 1 - Double-Click & Quick-Remove Feature Plan.md - Lines: 42 - Chars: 4603 - Tokens: 1151
 19. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 31 - Chars: 4278 - Tokens: 1070
 20. src\Artifacts\A20. DCE - Phase 1 - Advanced UX & Automation Plan.md - Lines: 44 - Chars: 6117 - Tokens: 1530
-21. src\Artifacts\A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer.md - Lines: 49 - Chars: 7274 - Tokens: 1819
-22. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
-23. src\Artifacts\A4. DCE - Analysis of The-Creator-AI Repo.md - Lines: 56 - Chars: 5722 - Tokens: 1431
-24. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
-25. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
-26. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
-27. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
-28. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
-29. src\backend\commands\commands.ts - Lines: 88 - Chars: 3807 - Tokens: 952
-30. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
-31. src\backend\services\flattener.service.ts - Lines: 174 - Chars: 7078 - Tokens: 1770
-32. src\backend\services\fs.service.ts - Lines: 288 - Chars: 12411 - Tokens: 3103
-33. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-34. src\backend\services\selection.service.ts - Lines: 69 - Chars: 2510 - Tokens: 628
-35. src\backend\services\services.ts - Lines: 22 - Chars: 844 - Tokens: 211
-36. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
-37. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
-38. src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 6503 - Tokens: 1626
-39. src\client\components\file-tree\FileTree.utils.ts - Lines: 106 - Chars: 3947 - Tokens: 987
-40. src\client\components\SelectedFilesView.tsx - Lines: 223 - Chars: 10861 - Tokens: 2716
-41. src\client\components\tree-view\TreeView.tsx - Lines: 145 - Chars: 6077 - Tokens: 1520
-42. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
-43. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
-44. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-45. src\client\views\context-chooser.view\on-message.ts - Lines: 90 - Chars: 3852 - Tokens: 963
-46. src\client\views\context-chooser.view\view.scss - Lines: 471 - Chars: 10960 - Tokens: 2740
-47. src\client\views\context-chooser.view\view.tsx - Lines: 234 - Chars: 11068 - Tokens: 2767
-48. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
-49. src\common\ipc\channels.enum.ts - Lines: 32 - Chars: 1544 - Tokens: 386
-50. src\common\ipc\channels.type.ts - Lines: 29 - Chars: 2002 - Tokens: 501
-51. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
-52. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-53. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-54. src\common\types\file-node.ts - Lines: 10 - Chars: 300 - Tokens: 75
-55. src\common\types\vscode-webview.d.ts - Lines: 13 - Chars: 357 - Tokens: 90
-56. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
-57. src\common\utils\view-html.ts - Lines: 26 - Chars: 971 - Tokens: 243
-58. src\common\view-types.ts - Lines: 8 - Chars: 246 - Tokens: 62
-59. src\extension.ts - Lines: 70 - Chars: 2933 - Tokens: 734
-60. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
-61. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
-62. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
-63. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
-64. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
-65. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
-66. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
-67. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
-68. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
-69. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
-70. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
-71. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
-72. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
-73. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
-74. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
-75. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
-76. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
-77. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
-78. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
-79. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
-80. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
-81. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
-82. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
-83. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
-84. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
-85. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
-86. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
-87. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
-88. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
-89. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
-90. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
-91. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
-92. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
-93. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
-94. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
-95. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
-96. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
-97. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
-98. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
-99. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
-100. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
-101. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
-102. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
-103. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
-104. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
-105. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
-106. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
-107. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
-108. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
-109. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
-110. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
-111. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
-112. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
-113. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
-114. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
-115. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
-116. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
-117. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
-118. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
-119. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
-120. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
-121. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
-122. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
-123. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
-124. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
-125. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
-126. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
-127. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-128. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
-129. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
-130. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
-131. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-132. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
-133. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
-134. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
-135. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-136. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
-137. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
-138. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
-139. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
-140. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
-141. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
-142. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
-143. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-144. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
-145. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
-146. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
-147. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
-148. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
-149. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
-150. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
-151. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
-152. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
-153. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
-154. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
-155. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
-156. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
-157. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
-158. tsconfig.json - Lines: 19 - Chars: 457 - Tokens: 115
-159. webpack.config.js - Lines: 63 - Chars: 1710 - Tokens: 428
+21. src\Artifacts\A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer.md - Lines: 47 - Chars: 7282 - Tokens: 1821
+22. src\Artifacts\A22. DCE - Phase 1 - Search & Filter Feature Plan.md - Lines: 58 - Chars: 3663 - Tokens: 916
+23. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 49 - Chars: 4801 - Tokens: 1201
+24. src\Artifacts\A24. DCE - Selection Paradigm Terminology.md - Lines: 57 - Chars: 3330 - Tokens: 833
+25. src\Artifacts\A25. DCE - Phase 1 - Git & Problems Integration Plan.md - Lines: 58 - Chars: 5124 - Tokens: 1281
+26. src\Artifacts\A26. DCE - Phase 1 - File System Traversal & Caching Strategy.md - Lines: 46 - Chars: 4009 - Tokens: 1003
+27. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
+28. src\Artifacts\A4. DCE - Analysis of The-Creator-AI Repo.md - Lines: 56 - Chars: 5722 - Tokens: 1431
+29. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
+30. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
+31. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
+32. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
+33. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
+34. src\backend\commands\commands.ts - Lines: 88 - Chars: 3807 - Tokens: 952
+35. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
+36. src\backend\services\flattener.service.ts - Lines: 174 - Chars: 7078 - Tokens: 1770
+37. src\backend\services\fs.service.ts - Lines: 285 - Chars: 12291 - Tokens: 3073
+38. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
+39. src\backend\services\selection.service.ts - Lines: 69 - Chars: 2510 - Tokens: 628
+40. src\backend\services\services.ts - Lines: 22 - Chars: 844 - Tokens: 211
+41. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
+42. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
+43. src\client\components\file-tree\FileTree.tsx - Lines: 207 - Chars: 8762 - Tokens: 2191
+44. src\client\components\file-tree\FileTree.utils.ts - Lines: 106 - Chars: 3947 - Tokens: 987
+45. src\client\components\SelectedFilesView.tsx - Lines: 223 - Chars: 10861 - Tokens: 2716
+46. src\client\components\tree-view\TreeView.tsx - Lines: 182 - Chars: 7901 - Tokens: 1976
+47. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
+48. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
+49. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
+50. src\client\views\context-chooser.view\on-message.ts - Lines: 90 - Chars: 3852 - Tokens: 963
+51. src\client\views\context-chooser.view\view.scss - Lines: 490 - Chars: 11415 - Tokens: 2854
+52. src\client\views\context-chooser.view\view.tsx - Lines: 252 - Chars: 11975 - Tokens: 2994
+53. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
+54. src\common\ipc\channels.enum.ts - Lines: 32 - Chars: 1544 - Tokens: 386
+55. src\common\ipc\channels.type.ts - Lines: 29 - Chars: 2002 - Tokens: 501
+56. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
+57. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+58. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
+59. src\common\types\file-node.ts - Lines: 10 - Chars: 300 - Tokens: 75
+60. src\common\types\vscode-webview.d.ts - Lines: 13 - Chars: 357 - Tokens: 90
+61. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
+62. src\common\utils\view-html.ts - Lines: 26 - Chars: 971 - Tokens: 243
+63. src\common\view-types.ts - Lines: 8 - Chars: 246 - Tokens: 62
+64. src\extension.ts - Lines: 68 - Chars: 2848 - Tokens: 712
+65. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
+66. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
+67. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
+68. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
+69. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
+70. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
+71. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
+72. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
+73. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
+74. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
+75. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
+76. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
+77. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
+78. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
+79. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
+80. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
+81. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
+82. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
+83. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
+84. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
+85. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
+86. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
+87. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
+88. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
+89. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
+90. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
+91. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
+92. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
+93. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
+94. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
+95. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
+96. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
+97. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
+98. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
+99. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
+100. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
+101. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
+102. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
+103. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
+104. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
+105. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
+106. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
+107. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
+108. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
+109. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
+110. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
+111. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
+112. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
+113. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
+114. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
+115. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
+116. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
+117. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
+118. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
+119. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
+120. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
+121. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
+122. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
+123. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
+124. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
+125. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
+126. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
+127. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
+128. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
+129. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
+130. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
+131. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
+132. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+133. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
+134. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
+135. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
+136. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+137. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
+138. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
+139. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
+140. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+141. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
+142. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
+143. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
+144. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
+145. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
+146. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
+147. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
+148. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+149. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
+150. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
+151. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
+152. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
+153. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
+154. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
+155. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
+156. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
+157. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
+158. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
+159. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
+160. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
+161. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
+162. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
+163. tsconfig.json - Lines: 19 - Chars: 457 - Tokens: 115
+164. webpack.config.js - Lines: 63 - Chars: 1710 - Tokens: 428
 
 <file path=".gitignore">
 node_modules
@@ -482,7 +487,7 @@ main().catch(err => {
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C28 (Add A21 for Feature Drift Analysis)
+# Updated on: C31 (Add A26 for File System Traversal Strategy)
 
 ## 1. Purpose
 
@@ -584,6 +589,26 @@ main().catch(err => {
 - **Description:** A comparative analysis documenting the functional and behavioral differences between the DCE custom file view and the native VS Code Explorer to guide future development and feature parity.
 - **Tags:** feature plan, analysis, drift, ux, vs code explorer, parity
 
+### A22. DCE - Phase 1 - Search & Filter Feature Plan
+- **Description:** Outlines the requirements and implementation for a search bar to filter the main file tree view by file or folder name.
+- **Tags:** feature plan, search, filter, tree view, ux, phase 1
+
+### A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan
+- **Description:** Details the requirements for implementing full keyboard navigation and drag-and-drop file/folder operations within the main file tree view.
+- **Tags:** feature plan, keyboard navigation, drag and drop, file operations, accessibility, ux, phase 1
+
+### A24. DCE - Selection Paradigm Terminology
+- **Description:** A document to clarify the terminology used within the project to distinguish between different types of user selections (e.g., "checking" for flattening vs. "selecting" for actions).
+- **Tags:** documentation, terminology, selection, checking, design
+
+### A25. DCE - Phase 1 - Git & Problems Integration Plan
+- **Description:** Outlines the user stories and technical approach for integrating Git status indicators and VS Code Problem Diagnostics into the custom file tree.
+- **Tags:** feature plan, git, problems, diagnostics, ux, phase 1
+
+### A26. DCE - Phase 1 - File System Traversal & Caching Strategy
+- **Description:** Documents the root cause of the folder visibility bug and outlines the new strategy of using recursive directory traversal instead of `findFiles` to build a complete and accurate file system map.
+- **Tags:** bug fix, file system, traversal, refresh, cache, architecture
+
 ## II. Standalone Utilities & Guides
 
 ### A189. Number Formatting Reference Guide
@@ -636,7 +661,7 @@ This phase aims to bring a critical part of the external workflow—comparing te
 # Artifact A10: DCE - Metadata and Statistics Display
 # Date Created: Cycle 14
 # Author: AI Model
-# Updated on: C28 (Add selected token count display for folders)
+# Updated on: C29 (Add parenthesis rule for selected token counts)
 
 - **Key/Value for A0:**
 - **Description:** Outlines the requirements and design for displaying live metadata (total selected files, total tokens) and for showing aggregate statistics (token and file counts) for folders in the file tree.
@@ -655,6 +680,7 @@ To enhance the data curation process, it is critical for the user to have immedi
 | US-03 | **Readable Numbers & Icons** | As a data curator, I want large token counts to be formatted in a compact and readable way (e.g., 1,234 becomes "1.2K"), and for icons to visually represent the data, so I can easily parse the information. | - All token counts use K/M/B suffixes for numbers over 1,000. <br> - All file counts use commas for thousands separators. <br> - An icon is displayed next to the token count and file count for visual distinction. <br> - The statistics are right-justified in the file tree for better readability. |
 | US-04 | **Image File Handling** | As a data curator, I want to see the file size for images instead of a token count, so I can understand their contribution to storage/transfer size rather than context length. | - The backend identifies common image file types (png, jpg, etc.). <br> - For image files, the token count is treated as 0. <br> - In the file tree, instead of a token count, the human-readable file size is displayed (e.g., "15.2 KB", "2.1 MB"). |
 | US-05 | **Selected Token Count in Folders** | As a data curator, I want to see how many tokens are selected within a folder, so I can understand the composition of my selection without expanding the entire directory. | - Next to a folder's total token count, a secondary count in parentheses `(x)` appears. <br> - `x` is the recursive sum of tokens from all selected files within that folder. <br> - The display format is `TotalTokens (SelectedTokens)`, e.g., `347K (13K)`. <br> - This count only appears if selected tokens are > 0 and less than the total tokens. |
+| US-06 | **Visual Cue for Selected Tokens** | As a curator, I want a clear visual indicator on the token count itself when an item is included in the selection, so I can confirm its inclusion without looking at the checkbox. | - When an individual file is checked, its token count is wrapped in parentheses, e.g., `(168)`. <br> - When a folder is checked, and *all* of its children are included in the selection, its total token count is wrapped in parentheses, e.g., `(336)`. <br> - This complements the `Total (Selected)` format for partially selected folders. |
 
 ## 3. Technical Implementation Plan
 
@@ -677,6 +703,7 @@ To enhance the data curation process, it is critical for the user to have immedi
     *   It will display folder file counts using `formatNumberWithCommas`.
     *   **Selected Token Calculation:** A new memoized, recursive function will be created within `FileTree.tsx` to calculate the selected token count for a given directory node by checking its descendants against the `selectedFiles` prop.
     *   The rendering logic will be updated to display the `(SelectedTokens)` value conditionally.
+    *   **Parenthesis Logic (US-06):** The rendering logic will be further updated. For files, it will check if the file's path is in the `selectedFiles` list. For folders, it will compare the calculated `selectedTokensInDir` with the `node.tokenCount`. Based on these checks, it will conditionally wrap the output string in parentheses.
     *   It will incorporate icons from `react-icons/vsc` for tokens and file counts.
     *   The stylesheet (`view.scss`) will be updated to right-align all statistics, pushing them to the end of the file/folder row.
 
@@ -836,7 +863,7 @@ This is the primary, centralized log for the entire extension, including message
 # Artifact A13: DCE - Phase 1 - Right-Click Context Menu
 # Date Created: Cycle 19
 # Author: AI Model
-# Updated on: C27 (Clarify new file/folder creation pathing)
+# Updated on: C29 (Clarify "Reveal in File Explorer" behavior)
 
 - **Key/Value for A0:**
 - **Description:** A plan for implementing standard file explorer context menu actions (e.g., Rename, Delete, Copy Path) in the custom file tree.
@@ -853,7 +880,7 @@ To enhance the user experience and make the Data Curation Environment's file tre
 | US-01 | **Copy Path** | As a user, I want to right-click a file or folder and copy its absolute or relative path to my clipboard, so I can easily reference it elsewhere. | - Right-clicking a node in the file tree opens a context menu. <br> - The menu contains "Copy Path" and "Copy Relative Path" options. <br> - Selecting an option copies the corresponding path string to the system clipboard. |
 | US-02 | **Rename File/Folder** | As a user, I want to right-click a file or folder and rename it, so I can correct mistakes or refactor my project structure. | - The context menu contains a "Rename" option. <br> - Selecting it turns the file/folder name into an editable input field. <br> - Pressing Enter or clicking away saves the new name. <br> - The underlying file/folder is renamed on the file system. <br> - The file tree updates to reflect the change. |
 | US-03 | **Delete File/Folder** | As a user, I want to right-click a file or folder and delete it, so I can remove unnecessary files from my project. | - The context menu contains a "Delete" option. <br> - Selecting it shows a confirmation dialog to prevent accidental deletion. <br> - Upon confirmation, the file or folder (and its contents, recursively) is moved to the trash/recycling bin. <br> - The file tree updates to reflect the change. |
-| US-04 | **Reveal in Explorer** | As a user, I want to right-click a file or folder and have it revealed in the native OS file explorer, so I can interact with it outside of VS Code. | - The context menu contains a "Reveal in File Explorer" (or "Reveal in Finder" on macOS) option. <br> - Selecting it opens the parent directory of the item in the operating system's default file manager with the item selected. |
+| US-04 | **Reveal in OS Explorer** | As a user, I want to right-click a file or folder and have it revealed in the native OS file explorer, so I can interact with it outside of VS Code. | - The context menu contains a "Reveal in File Explorer" (or "Reveal in Finder" on macOS) option. <br> - Selecting it opens the parent directory of the item in the **operating system's default file manager** (e.g., Windows File Explorer) with the item selected. This should not simply switch to the VS Code Explorer tab. |
 | US-05 | **New File/Folder** | As a user, I want to create new files and folders from the toolbar or context menu in the correct location, so I can build out my project structure without leaving the view. | - The header toolbar has "New File" and "New Folder" buttons. <br> - Clicking either prompts for a name. <br> - The new file/folder is created in the directory of the currently *active/highlighted* item in the tree. <br> - If the active item is a file, the new item is created in that file's parent directory. <br> - If no item is active, it defaults to the workspace root. <br> - The file tree automatically refreshes. |
 
 ## 3. Technical Implementation Plan
@@ -877,7 +904,7 @@ To enhance the user experience and make the Data Curation Environment's file tre
     *   Update `on-message.ts` to handle the new IPC messages and call corresponding methods in the `FSService`.
     *   **Rename:** Implement a method that uses `vscode.workspace.fs.rename(oldUri, newUri)`.
     *   **Delete:** Implement a method that uses `vscode.window.showWarningMessage` for confirmation, then `vscode.workspace.fs.delete(uri, { recursive: true, useTrash: true })`. The `useTrash` option is crucial for data safety.
-    *   **Reveal:** Implement a method that executes the built-in VS Code command: `vscode.commands.executeCommand('revealInExplorer', uri)`.
+    *   **Reveal:** Implement a method that executes the built-in VS Code command: `vscode.commands.executeCommand('revealInExplorer', uri)`. This command correctly targets the OS's native file explorer.
     *   **Copy Path:** Implement a method that uses `vscode.env.clipboard.writeText()` to put the absolute or relative path (calculated using `path.relative`) on the clipboard.
     *   **New File/Folder:** Implement methods that prompt for a name with `vscode.window.showInputBox`, then create the item with `vscode.workspace.fs.writeFile` or `vscode.workspace.fs.createDirectory`. The `parentDirectory` will be provided by the client.
     *   After any file system modification (rename, delete, create), the backend's `FileSystemWatcher` will automatically detect the change and trigger a debounced refresh of the UI.
@@ -954,7 +981,7 @@ This artifact serves as a centralized list to track ongoing and recurring issues
 # Artifact A15: DCE - Phase 1 - Multi-Select & Sorting Feature Plan
 # Date Created: Cycle 22
 # Author: AI Model
-# Updated on: C23 (Add main tree multi-select and multi-level sorting)
+# Updated on: C31 (Note buggy multi-select behavior in main tree as an active issue)
 
 - **Key/Value for A0:**
 - **Description:** Details the requirements for multi-selection (click, Ctrl, Shift) in both the main file tree and the "Selected Items" panel, and multi-level column sorting.
@@ -971,7 +998,7 @@ To elevate the Data Curation Environment beyond basic functionality, this plan i
 | US-01 | **"Selected Items" Multi-Selection** | As a curator, after selecting a large folder, I want to quickly remove a small group of unwanted files from the "Selected Items" list using standard Shift-click and Ctrl-click, so I don't have to uncheck them one by one in the main tree. | - Clicking a single item in the "Selected Items" list selects it and deselects all others. <br> - Ctrl-clicking an item toggles its selection state without affecting other items. <br> - Shift-clicking an item selects the range of items between the last-clicked anchor item and the current one. The anchor is set by the last non-Shift click. <br> - A "Remove Selected" button acts on all currently selected items in this list. |
 | US-02 | **"Selected Items" Column Sorting** | As a curator, I want to sort the "Selected Items" list by file name or token count, so I can easily find specific files or identify the largest contributors to my context. | - The "Selected Items" panel has a header row with clickable "File" and "Tokens" labels. <br> - Clicking a column header sorts the list by that column. <br> - Clicking the same header again reverses the sort direction (ascending/descending). <br> - A visual indicator (e.g., an arrow) shows the current sort column and direction. <br> - The default, initial sort is by Token Count, descending. |
 | US-03 | **"Selected Items" Multi-Layer Sorting** | As a curator, I want to apply a secondary sort, so I can group my selected files by type and then see the largest files within each group. | - The sorting mechanism supports at least two levels of sorting. <br> - The UI provides a way to define a primary and secondary sort key (e.g., Shift-clicking a second column header). <br> - The list first organizes by the primary key, then sorts items within those groups by the secondary key. For example, sort by Type (asc), then by Token Count (desc). |
-| US-04 | **Main Tree Multi-Selection** | As a user, I want to select multiple files and folders in the main "Data Curation" file tree using standard OS conventions (Ctrl/Shift click), so I can perform context menu actions (like Delete) on multiple items at once. | - Standard multi-selection is implemented in the main file tree. <br> - This selection is a separate state from the checkbox state and is used for contextual actions, not for flattening. <br> - Right-clicking on any item within a multi-selected group opens a context menu that applies its actions to all selected items. |
+| US-04 | **Main Tree Multi-Selection** | As a user, I want to select multiple files and folders in the main "Data Curation" file tree using standard OS conventions (Ctrl/Shift click), so I can perform context menu actions (like Delete) on multiple items at once. | - Standard multi-selection is implemented in the main file tree. <br> - This selection is a separate state from the checkbox state and is used for contextual actions, not for flattening. <br> - Right-clicking on any item within a multi-selected group opens a context menu that applies its actions to all selected items. <br> - **(Bug C31):** Ctrl-click is non-functional. Shift-click is inconsistent and difficult to use. |
 | US-05 | **"As-Is" Sorting** | As a user, I want to be able to revert the "Selected Items" list to its default sort order, so I can see the files as they appear in the native VS Code explorer. | - A sort option for "Default" or "As-Is" is available. <br> - Selecting it sorts the items based on their original file system order (folders first, then files, all alphabetized). |
 
 ## 3. Technical Implementation Plan
@@ -988,6 +1015,7 @@ To elevate the Data Curation Environment beyond basic functionality, this plan i
     *   This is a more complex task that mirrors the `SelectedFilesView` implementation but within a recursive tree structure.
     *   A new selection state for contextual actions (`const [contextSelection, setContextSelection] = useState<Set<string>>(new Set())`) will be managed at the top level (`view.tsx`).
     *   The selection state and handler functions will need to be passed down through `FileTree` to `TreeView`.
+    *   **(Fix for C31):** The `handleNodeClick` event handler in `TreeView.tsx` must be corrected. The anchor for shift-click (`lastClickedPath`) must only be updated on a click *without* the Shift key pressed. The logic for Ctrl-click must be revised to correctly toggle a path's inclusion in the selection set without clearing other selections.
     *   The `onContextMenu` handler will need to be updated to check if the right-clicked node is part of the current `contextSelection` and pass the entire selection to the backend if an action is chosen.
 </file>
 
@@ -1089,7 +1117,7 @@ This is a significant UI/UX enhancement and will require careful implementation 
 # Artifact A18: DCE - Phase 1 - Active File Sync Feature Plan
 # Date Created: Cycle 24
 # Author: AI Model
-# Updated on: C27 (Confirming implementation)
+# Updated on: C30 (Add debugging notes regarding path normalization)
 
 - **Key/Value for A0:**
 - **Description:** Details the requirements and implementation for automatically revealing and highlighting the active editor's file in the custom Data Curation file tree.
@@ -1125,6 +1153,17 @@ To create a more seamless and integrated experience, the Data Curation Environme
     *   This effect will be responsible for "revealing" the file:
         *   **Expand Parents:** It will calculate all parent directory paths of the `activeFile`. This can be done by repeatedly taking the substring of the path before the last file separator (`/`). These parent paths will be added to the `expandedNodes` state.
         *   **Scroll Into View:** To physically scroll the element, a `Map` of `ref`s will be maintained for each rendered file/folder node. After expanding the parents, the `scrollIntoView()` method will be called on the ref corresponding to the `activeFile`. A short `setTimeout` will be used to ensure the DOM has updated with the expanded nodes before scrolling.
+
+## 4. Debugging Notes & Regression Prevention
+
+-   **Root Cause of C30 Regression:** The feature failed because of a path normalization mismatch. The `editor.document.uri.fsPath` property from the VS Code API returns paths with **backslashes (`\`)** on Windows. The frontend webview components, however, exclusively use and expect **forward slashes (`/`)** for path comparisons and manipulations.
+-   **Codified Solution:** The path from the `onDidChangeActiveTextEditor` event **must** be normalized to use forward slashes *before* it is sent to the frontend via the IPC channel.
+    ```typescript
+    // Correct implementation in extension.ts
+    const filePath = editor.document.uri.fsPath.replace(/\\/g, '/');
+    serverIpc.sendToClient(ServerToClientChannel.SetActiveFile, { path: filePath });
+    ```
+-   **Best Practice:** All path strings originating from the backend that are intended for consumption by the frontend must be normalized to use forward slashes to ensure platform-agnostic consistency.
 </file>
 
 <file path="src/Artifacts/A189. Number Formatting Reference Guide.md">
@@ -1378,6 +1417,7 @@ This document outlines a series of advanced user experience (UX) and automation 
 # Artifact A21: DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer
 # Date Created: C28
 # Author: AI Model
+# Updated on: C30 (Add notes on selection highlight bug and active file sync regression)
 
 - **Key/Value for A0:**
 - **Description:** A comparative analysis documenting the functional and behavioral differences between the DCE custom file view and the native VS Code Explorer to guide future development and feature parity.
@@ -1389,41 +1429,321 @@ The primary goal of the Data Curation Environment (DCE) is to enhance, not repla
 
 ## 2. Feature Comparison Matrix
 
-| Feature Category            | Native VS Code Explorer         | DCE (as of C28)        | Status & Notes                                                                                                                                              |
+| Feature Category            | Native VS Code Explorer         | DCE (as of C30)        | Status & Notes                                                                                                                                              |
 | --------------------------- | ------------------------------- | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **File Display**            |                                 |                        |                                                                                                                                                             |
 | Hierarchical Tree           | ✅                              | ✅                     | **Complete.** Core functionality is present.                                                                                                                |
 | File/Folder Icons           | ✅                              | ✅                     | **Complete.** Icons match file types.                                                                                                                       |
-| Active File Highlighting    | ✅                              | ✅                     | **Complete.** View syncs with active editor.                                                                                                                |
-| Problems/Git Status         | ✅                              | ❌                     | **Missing.** No integration with Problems or Git status (e.g., file coloring for changes).                                                                  |
+| Active File Highlighting    | ✅                              | ❌ (Regression)        | **Bug.** View is no longer syncing with the active editor. This was previously working and needs to be fixed.                                                |
+| Problems/Git Status         | ✅ (Colors, badges)             | ❌                     | **Missing.** No integration with Problems or Git status (e.g., file coloring for new/modified/untracked files). High-value feature for context awareness. Planned in A25. |
 | **Selection**               |                                  |                        |                                                                                                                                                             |
-| Single-Click (Files)        | ✅ Opens file                   | ✅ Opens file          | **Complete.** |
+| Single-Click (Files)        | ✅ Opens file                   | ✅ Opens & Selects file| **Complete.** Now aligns with native behavior.                                                                                                               |
 | Single-Click (Folders)      | ✅ Expands/Collapses            | ✅ Expands/Collapses   | **Complete.** |
-| Multi-Select (Ctrl)         | ✅                              | ❌                     | **Missing.** Critical feature for context menu actions. High priority.                                                                                      |
-| Multi-Select (Shift)        | ✅                              | ❌                     | **Missing.** Critical feature for context menu actions. High priority.                                                                                      |
+| Multi-Select (Ctrl)         | ✅                              | ✅                     | **Complete.** Critical feature for context menu actions is now implemented.                                                                                 |
+| Multi-Select (Shift)        | ✅ (Selects rows)               | ✅ (Selects rows and text) | **Bug.** Shift-clicking correctly selects the range of files, but also incorrectly highlights the file name text. This needs to be disabled via CSS (`user-select: none`). |
 | **Interaction**             |                                  |                        |                                                                                                                                                             |
-| Drag and Drop               | ✅ (Move files/folders)         | ❌                     | **Missing.** This is a complex but high-value feature. Requires VS Code Drag and Drop API integration.                                                      |
+| Drag and Drop               | ✅ (Move files/folders)         | ❌                     | **Missing.** This is a complex but high-value feature. Requires VS Code Drag and Drop API integration. Planned in A23.                                     |
 | Right-Click Context Menu    | ✅ (Extensive options)          | ✅ (Basic options)     | **Partial.** DCE has basic operations (Rename, Delete, etc.). Missing advanced options like `Open in Integrated Terminal`, `Find in Folder...`, `Compare...`. |
-| Keyboard Navigation         | ✅ (Arrows, Enter, Space)       | ❌                     | **Missing.** Users cannot navigate the tree or select/open items using the keyboard.                                                                        |
+| Keyboard Navigation         | ✅ (Arrows, Enter, Space)       | ❌                     | **Missing.** Users cannot navigate the tree or select/open items using the keyboard. Planned in A23.                                                        |
 | Inline Rename               | ✅ (F2 or slow double-click)    | ✅                     | **Complete.** |
 | **File Operations**         |                                  |                        |                                                                                                                                                             |
 | New File / Folder           | ✅                              | ✅                     | **Complete.** |
 | Delete (to Trash)           | ✅                              | ✅                     | **Complete.** |
 | Cut / Copy / Paste          | ✅                              | ❌                     | **Missing.** Standard file system operations are not yet implemented.                                                                                       |
 | **Search & Filter**         |                                  |                        |                                                                                                                                                             |
-| Filter by Name              | ✅ (Start typing)               | ❌                     | **Missing.** No functionality to filter the visible tree by typing a file name.                                                                             |
+| Filter by Name              | ✅ (Start typing)               | ⏳ In Progress         | **In Progress (C30).** Search button and UI are being implemented. Planned in A22.                                                                          |
 
 ## 3. High-Priority Features for Future Cycles
 
 Based on the analysis, the following features represent the most significant gaps in user experience and should be prioritized:
 
-1.  **Multi-Selection (Ctrl/Shift):** This is the most critical missing feature. It's a fundamental paradigm for file explorers and is required for performing actions (like deletion) on multiple files at once.
+1.  **Git Status Integration:** Providing visual cues (colors, letters like 'U' or 'M') for the Git status of files is a massive quality-of-life improvement that provides essential context at a glance.
 2.  **Drag and Drop:** The ability to move files and folders by dragging them is a core, intuitive part of any file explorer. While technically complex to implement in a webview, its absence is a major point of friction.
 3.  **Keyboard Navigation:** Power users rely heavily on keyboard navigation (arrow keys to move, Enter to open/expand, Space to select). The lack of this makes the DCE feel incomplete.
 4.  **Expanded Context Menu:** Adding more of the native right-click options, especially `Open in Integrated Terminal` and `Compare Selected`, would significantly reduce the need for users to switch back to the native Explorer.
-5.  **Filtering:** The ability to start typing to filter the tree is a major productivity feature in the native explorer.
+</file>
 
-By systematically addressing this drift, we can make the DCE an indispensable and seamless part of the developer's toolkit.
+<file path="src/Artifacts/A22. DCE - Phase 1 - Search & Filter Feature Plan.md">
+# Artifact A22: DCE - Phase 1 - Search & Filter Feature Plan
+# Date Created: C29
+# Author: AI Model
+
+- **Key/Value for A0:**
+- **Description:** Outlines the requirements and implementation for a search bar to filter the main file tree view by file or folder name.
+- **Tags:** feature plan, search, filter, tree view, ux, phase 1
+
+## 1. Overview & Goal
+
+To improve navigation and usability in large projects, this feature introduces a search and filter capability to the Data Curation Environment. The goal is to allow users to quickly find specific files or folders by typing a part of their name, mirroring the incremental filtering behavior of the native VS Code Explorer.
+
+## 2. User Story
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| SF-01 | **Filter File Tree** | As a user working in a large repository, I want to type in a search bar to filter the file tree in real-time, so I can quickly locate the files and folders I need without extensive scrolling. | - A search icon/button is present in the main header toolbar. <br> - Clicking the icon reveals a text input field. <br> - As I type into the input field, the file tree dynamically updates to show only the files and folders whose names match the search string. <br> - All parent directories of a matching file are also shown to preserve the tree structure. <br> - The search is case-insensitive. <br> - Clearing the search input restores the full, unfiltered tree. |
+
+## 3. Technical Implementation Plan
+
+1.  **Frontend - UI (`view.tsx`, `view.scss`):**
+    *   Add a new state variable to the main `App` component: `const [filterTerm, setFilterTerm] = useState('');`.
+    *   Add a search icon (`VscSearch`) to the header toolbar. A second state, `isSearchVisible`, can be used to toggle the visibility of the input field when the icon is clicked.
+    *   The search `<input>` element's `value` will be bound to `filterTerm`, and its `onChange` handler will call `setFilterTerm`.
+
+2.  **Frontend - Filtering Logic (`FileTree.tsx`):**
+    *   The `FileTree` component will receive the `filterTerm` as a new prop.
+    *   A `useMemo` hook will be used to compute the filtered tree whenever the source `data` or the `filterTerm` changes.
+    *   This hook will call a new recursive filtering function:
+        ```typescript
+        function filterTree(nodes: FileNode[], term: string): FileNode[] {
+            if (!term) return nodes;
+            const lowerCaseTerm = term.toLowerCase();
+
+            return nodes.reduce((acc, node) => {
+                if (node.name.toLowerCase().includes(lowerCaseTerm)) {
+                    // If the node itself matches, include it and all its children
+                    acc.push(node);
+                    return acc;
+                }
+
+                if (node.children) {
+                    // If the node is a directory, filter its children
+                    const filteredChildren = filterTree(node.children, term);
+                    if (filteredChildren.length > 0) {
+                        // If any children match, include the parent with its filtered children
+                        acc.push({ ...node, children: filteredChildren });
+                    }
+                }
+                return acc;
+            }, [] as FileNode[]);
+        }
+        ```
+    *   The `TreeView` component will then be rendered with this new, filtered data.
+
+3.  **State Management:**
+    *   The filtering is a pure frontend operation. No backend changes or IPC communication are required for this feature.
+    *   The search term is transient UI state and does not need to be persisted.
+</file>
+
+<file path="src/Artifacts/A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md">
+# Artifact A23: DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan
+# Date Created: C29
+# Author: AI Model
+
+- **Key/Value for A0:**
+- **Description:** Details the requirements for implementing full keyboard navigation and drag-and-drop file/folder operations within the main file tree view.
+- **Tags:** feature plan, keyboard navigation, drag and drop, file operations, accessibility, ux, phase 1
+
+## 1. Overview & Goal
+
+To achieve true feature parity with the native VS Code Explorer and cater to power users, the Data Curation Environment must support advanced interactions. This plan outlines the requirements for two major features: full keyboard navigation for accessibility and speed, and drag-and-drop functionality for intuitive file system manipulation.
+
+## 2. User Stories
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| AI-01 | **Keyboard Navigation** | As a power user, I want to navigate the file tree using only my keyboard, so I can find, select, and manage files without taking my hands off the keyboard. | - Arrow Up/Down keys move the focus between visible nodes. <br> - Arrow Right on a collapsed folder expands it. <br> - Arrow Right on an open folder or file moves focus to the first child. <br> - Arrow Left on an open folder collapses it. <br> - Arrow Left on a child node moves focus to its parent. <br> - `Enter` key opens the focused file or toggles expansion for a focused folder. <br> - `Spacebar` toggles the checkbox of the focused node. |
+| AI-02 | **Drag-and-Drop File Operations** | As a user, I want to be able to drag a file or folder and drop it into another folder to move it, so I can reorganize my project intuitively. | - Clicking and dragging a file or folder in the tree initiates a drag operation. <br> - Dragging over a folder highlights it as a potential drop target. <br> - Dropping a file/folder onto another folder moves the dragged item into the target folder. <br> - A confirmation dialog may be shown for destructive moves. <br> - The backend file system is updated, and the tree view refreshes to reflect the new structure. |
+
+## 3. Technical Implementation Plan
+
+### Keyboard Navigation
+
+1.  **Focus Management (Frontend):**
+    *   A new state variable, `focusedNodePath: string | null`, will be added to `view.tsx` to track the currently focused node.
+    *   The `TreeView.tsx` component will need a wrapper `div` with a `tabIndex={0}` to make it focusable.
+    *   An `onKeyDown` event handler will be attached to this wrapper.
+2.  **Event Handling (`TreeView.tsx`):**
+    *   The `onKeyDown` handler will contain a `switch` statement for `event.key`.
+    *   It will calculate the next node to focus based on the current `focusedNodePath` and the tree structure. This requires creating a flattened, ordered list of visible nodes.
+    *   It will call state update functions to change `focusedNodePath`, `expandedNodes`, or `checkedPaths` accordingly.
+    *   It will call `event.preventDefault()` to stop the default browser behavior for arrow keys (scrolling).
+
+### Drag and Drop
+
+This is a complex feature that requires leveraging the VS Code Tree Drag and Drop API. This cannot be implemented purely in the webview; it requires a native `TreeDataProvider`. This represents a significant architectural shift from a pure webview-based tree to a hybrid approach or a full `TreeDataProvider` implementation.
+
+1.  **Refactor to `TreeDataProvider`:**
+    *   The current approach of getting all files and rendering them in React will need to be replaced.
+    *   A new `DceTreeDataProvider.ts` class will be created on the **backend**.
+    *   This class will implement `vscode.TreeDataProvider`, including the `getChildren`, `getTreeItem`, and `getParent` methods.
+2.  **Implement Drag and Drop API:**
+    *   The `DceTreeDataProvider` will also implement `vscode.TreeDragAndDropController`.
+    *   The `dragMimeTypes` and `dropMimeTypes` properties will be set.
+    *   The `handleDrag` method will be implemented to provide the data for the dragged items.
+    *   The `handleDrop` method will be implemented to receive the dropped items and the target. This method will perform the file system move operation using `vscode.workspace.fs.rename` and then trigger a refresh of the tree data.
+3.  **Communication:** The checkbox state would need to be communicated from this new native view back to the webview that contains the "Selected Items" panel, or the entire UI would need to be rebuilt using native VS Code components, which is a much larger undertaking.
+
+**Conclusion:** Keyboard navigation is feasible within the current architecture. Drag-and-drop requires a fundamental change to using a native `TreeDataProvider` and will be a major effort for a future cycle.
+</file>
+
+<file path="src/Artifacts/A24. DCE - Selection Paradigm Terminology.md">
+# Artifact A24: DCE - Selection Paradigm Terminology
+# Date Created: C29
+# Author: AI Model
+
+- **Key/Value for A0:**
+- **Description:** A document to clarify the terminology used within the project to distinguish between different types of user selections (e.g., "checking" for flattening vs. "selecting" for actions).
+- **Tags:** documentation, terminology, selection, checking, design
+
+## 1. Problem Statement
+
+During development and feedback cycles, the term "select" has been used ambiguously, leading to confusion. It has been used to describe two distinct user actions with different purposes:
+1.  Clicking a checkbox to include a file/folder in the context to be flattened.
+2.  Clicking a file/folder row (with optional Ctrl/Shift modifiers) to highlight it for a contextual action (e.g., Rename, Delete).
+
+This ambiguity makes feature requests and technical discussions difficult. The goal of this document is to establish clear, consistent terminology for use in all future artifacts, code, and discussions.
+
+## 2. Defined Terminology
+
+Henceforth, the following terms will be used to describe user interactions with the file tree:
+
+### **Checking / Unchecking**
+
+*   **Action:** Clicking the `checkbox` next to a file or folder item.
+*   **Purpose:** To include or exclude an item from the set of files that will be processed by the **"Flatten Context"** action.
+*   **UI State:** A visible checkmark (`✓`), indeterminate mark (`-`), or empty state in the checkbox.
+*   **State Variable (conceptual):** `checkedPaths: Set<string>`
+*   **User Phrasing:** "I **checked** the `src` folder."
+
+---
+
+### **Selecting / Highlighting**
+
+*   **Action:** Single-clicking a file/folder row. Using `Ctrl+Click` or `Shift+Click` to highlight multiple rows.
+*   **Purpose:** To designate one or more items as the target for a contextual action, such as those in the **right-click context menu** (e.g., Rename, Delete, Copy Path). This is also used to identify the "active" item for operations like "New File".
+*   **UI State:** A visual highlight on the entire row, typically matching the VS Code theme's selection color.
+*   **State Variable (conceptual):** `selectedPaths: Set<string>`
+*   **User Phrasing:** "I **selected** three files and then right-clicked to delete them."
+
+---
+
+### **Focusing**
+
+*   **Action:** Navigating the tree with keyboard arrow keys.
+*   **Purpose:** To move a visual indicator (a focus ring or subtle highlight) to an item, making it the active target for keyboard actions (`Enter` to open, `Spacebar` to check/uncheck).
+*   **UI State:** A focus outline around the item row.
+*   **State Variable (conceptual):** `focusedPath: string | null`
+*   **User Phrasing:** "The `README.md` file is currently **focused**."
+
+## 3. Summary Table
+
+| Term | Action | Purpose | UI Cue | State Name |
+| :--- | :--- | :--- | :--- | :--- |
+| **Check** | Click checkbox | Include in Flatten Context | Checkmark | `checkedPaths` |
+| **Select** | Click / Ctrl+Click / Shift+Click row | Target for Context Menu Actions | Row highlight | `selectedPaths` |
+| **Focus** | Keyboard navigation | Target for Keyboard Actions | Focus ring | `focusedPath` |
+
+By adhering to this terminology, we can ensure clarity in communication and precision in our technical implementation.
+</file>
+
+<file path="src/Artifacts/A25. DCE - Phase 1 - Git & Problems Integration Plan.md">
+# Artifact A25: DCE - Phase 1 - Git & Problems Integration Plan
+# Date Created: C30
+# Author: AI Model
+
+- **Key/Value for A0:**
+- **Description:** Outlines the user stories and technical approach for integrating Git status indicators and VS Code Problem Diagnostics into the custom file tree.
+- **Tags:** feature plan, git, problems, diagnostics, ux, phase 1
+
+## 1. Overview & Goal
+
+To achieve full feature parity with the native VS Code Explorer and provide critical context to the user, the Data Curation Environment (DCE) file tree must display information about a file's Git status and any associated problems (errors/warnings). The goal of this feature is to overlay this diagnostic and source control information directly onto the file tree, allowing users to make more informed decisions during context curation.
+
+## 2. User Stories
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| GP-01 | **Git Status Coloring** | As a user, I want to see files and folders colored according to their Git status (e.g., green for new, yellow for modified, gray for ignored), so I can quickly identify changes in my workspace. | - The file/folder name text color in the tree view changes based on its Git status. <br> - Colors should align with the user's current VS Code theme for Git decorations. <br> - A new, untracked file is green. <br> - A modified file is yellow/orange. <br> - A deleted file (in some views) is red. <br> - An ignored file is gray. |
+| GP-02 | **Git Status Badges** | As a user, I want to see a letter badge next to a file's name indicating its specific Git status (e.g., 'U' for untracked, 'M' for modified), so I have an unambiguous indicator of its state. | - A small, colored badge with a letter appears to the right of the file name. <br> - 'U' for Untracked. <br> - 'M' for Modified. <br> - 'D' for Deleted. <br> - 'A' for Added. <br> - 'C' for Conflicted. |
+| GP-03 | **Problem Indicator Badges** | As a user, I want to see a badge with a count of errors and warnings on files and their parent folders, so I can immediately identify parts of the codebase that have issues. | - A file with problems displays a badge with the number of errors (e.g., in red). <br> - A folder recursively aggregates the problem counts of its children and displays a summary badge. <br> - Tooltips on the badge provide a breakdown (e.g., "2 Errors, 3 Warnings"). <br> - The file name may also be colored (e.g., red for errors, yellow for warnings) to match the Problems panel. |
+
+## 3. Technical Implementation Plan
+
+### Phase 1: Data Gathering (Backend)
+
+1.  **Extend `FileNode` Type:** The `FileNode` interface in `src/common/types/file-node.ts` will be extended to include optional properties:
+    ```typescript
+    export interface FileNode {
+        // ... existing properties
+        gitStatus?: string; // e.g., 'M', 'U', 'A', 'D'
+        problemCounts?: { error: number; warning: number; info: number; hint: number };
+    }
+    ```
+
+2.  **Git Status Integration (`fs.service.ts`):**
+    *   This is best achieved using the official Git extension API to ensure consistency and avoid shelling out to the git CLI.
+    *   In `services.ts` or `fs.service.ts`, get the API: `const gitExtension = vscode.extensions.getExtension('vscode.git')?.exports; const gitApi = gitExtension?.getAPI(1);`
+    *   When building the file tree, after getting the list of files, iterate through the repositories provided by `gitApi.repositories`.
+    *   For each file, check its status using `repository.state.workingTreeChanges`, `untrackedChanges`, etc. This will provide the status (Modified, Untracked, etc.).
+    *   Map the status to a simple character code and add it to the `FileNode`.
+
+3.  **Problems Integration (`fs.service.ts`):**
+    *   Use the `vscode.languages.getDiagnostics()` API. This returns all diagnostics for the entire workspace.
+    *   Create a `Map<string, { error: number; warning: number; ... }>` to store aggregated counts per file URI.
+    *   Iterate through the diagnostics and populate the map.
+    *   When building the `FileNode` for a file, retrieve its counts from the map and add them to the `problemCounts` property.
+    *   The recursive aggregation logic for folders will need to be updated to also sum these `problemCounts`.
+
+### Phase 2: Rendering (Frontend)
+
+1.  **CSS Styling (`view.scss`):**
+    *   Create new CSS classes for each Git status (e.g., `.git-status-modified`, `.git-status-untracked`).
+    *   Use VS Code theme variables for the colors to ensure consistency (e.g., `var(--vscode-gitDecoration-modifiedResourceForeground)`).
+    *   Create classes for problem severity colors (e.g., `.problem-error`, `.problem-warning`).
+
+2.  **Component Logic (`FileTree.tsx`):**
+    *   In `renderFileNodeContent`, add logic to conditionally apply the CSS classes based on the `gitStatus` and `problemCounts` properties of the `FileNode`.
+    *   Add a new `<span>` element to render the Git status badge.
+    *   Add another `<span>` to render the problem count badge, with a `title` attribute for the tooltip breakdown.
+</file>
+
+<file path="src/Artifacts/A26. DCE - Phase 1 - File System Traversal & Caching Strategy.md">
+# Artifact A26: DCE - Phase 1 - File System Traversal & Caching Strategy
+# Date Created: C31
+# Author: AI Model
+
+- **Key/Value for A0:**
+- **Description:** Documents the root cause of the folder visibility bug and outlines the new strategy of using recursive directory traversal instead of `findFiles` to build a complete and accurate file system map.
+- **Tags:** bug fix, file system, traversal, refresh, cache, architecture
+
+## 1. Overview & Goal
+
+This document addresses a critical bug identified in Cycle 31 where newly created empty folders do not appear in the Data Curation file tree, even after a refresh. The goal is to document the root cause and define a new, more robust file system traversal strategy that guarantees an accurate representation of the workspace, including empty directories.
+
+## 2. Root Cause Analysis (RCA)
+
+-   **Symptom:** Creating a new, empty folder in the workspace does not result in that folder appearing in the DCE file tree. The file watcher correctly detects a change and triggers a full refresh, but the new folder is still missing from the rendered output.
+-   **Root Cause:** The file discovery mechanism in `fs.service.ts` exclusively uses the `vscode.workspace.findFiles("**/*", ...)` API call. This API is optimized to return a flat list of **files** matching a glob pattern. It does **not** return directories, especially empty ones, as they are not considered "files".
+-   **Impact:** When the file tree is reconstructed from this file-only list, any empty directories are completely invisible to the tree-building logic, making it impossible for the UI to ever display them. This is a major regression that breaks core functionality.
+
+## 3. New Traversal Strategy
+
+To resolve this, the reliance on `vscode.workspace.findFiles` for building the tree structure will be eliminated and replaced with a manual, recursive directory traversal.
+
+### 3.1. Technical Implementation Plan
+
+1.  **Primary API:** The new strategy will be centered around the `vscode.workspace.fs.readDirectory(uri)` API. This function returns an array of `[name, fileType]` tuples for all immediate children of a given directory URI. `fileType` can be `File`, `Directory`, `SymbolicLink`, or `Unknown`.
+
+2.  **Recursive Function:** A new `private async _traverseDirectory(uri)` method will be implemented in `fs.service.ts`.
+    *   **Input:** The `vscode.Uri` of the directory to scan.
+    *   **Process:**
+        1.  Call `vscode.workspace.fs.readDirectory(uri)` to get the contents.
+        2.  Iterate through the `[name, fileType]` tuples.
+        3.  Apply the exclusion logic (e.g., skip `node_modules`, `.git`).
+        4.  For each entry, create a `FileNode` object.
+        5.  If `fileType` is `vscode.FileType.Directory`, recursively call `_traverseDirectory` for that child and assign the result to the `children` property of its `FileNode`.
+        6.  If `fileType` is `vscode.FileType.File`, calculate its stats (token count, etc.).
+        7.  Return the array of `FileNode` children.
+
+3.  **Integration (`handleWorkspaceFilesRequest`):**
+    *   The main `handleWorkspaceFilesRequest` function will now initiate the process by calling `_traverseDirectory` with the workspace root URI.
+    *   The result of this recursive traversal will be the complete, accurate file tree, which can then be cached and sent to the client.
+
+## 4. Benefits of the New Approach
+
+-   **Accuracy:** This method builds a true representation of the file system, including all directories, regardless of whether they are empty or not.
+-   **Control:** It gives us full control over the traversal, allowing for more sophisticated filtering or caching logic in the future.
+-   **Performance:** While potentially slower for extremely large workspaces than a highly optimized native `findFiles` call, it avoids the overhead of converting a flat path list into a tree structure, as the tree is built directly during the scan. Performance will be monitored.
 </file>
 
 <file path="src/Artifacts/A3. DCE - Technical Scaffolding Plan.md">
@@ -3384,6 +3704,7 @@ import { serverIPCs } from "@/client/views";
 import { VIEW_TYPES } from "@/common/view-types";
 
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
+const EXCLUSION_PATTERNS = ['node_modules', 'dist', 'out', '.git', 'flattened_repo.md'];
 
 // Helper to normalize paths to use forward slashes, which is consistent in webviews
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
@@ -3401,9 +3722,11 @@ export class FSService {
         this.watcher = vscode.workspace.createFileSystemWatcher('**/*');
         Services.loggerService.log("File system watcher initialized.");
 
-        const changeHandler = (uri: vscode.Uri) => {
-            if (uri.fsPath.includes(path.normalize('/.git/')) || uri.fsPath.includes(path.normalize('/node_modules/'))) {
-                return; // Ignore changes in .git or node_modules
+        const triggerRefresh = (uri: vscode.Uri) => {
+            // More robust check for ignored paths
+            const normalizedPath = normalizePath(uri.fsPath);
+            if (EXCLUSION_PATTERNS.some(pattern => normalizedPath.includes(`/${pattern}/`))) {
+                return;
             }
 
             if (this.debounceTimer) {
@@ -3415,7 +3738,7 @@ export class FSService {
                 
                 const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
                 if (serverIpc) {
-                    this.handleWorkspaceFilesRequest(serverIpc, true);
+                    serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, {});
                 } else {
                     Services.loggerService.warn("Could not push file tree update, serverIpc not available.");
                 }
@@ -3430,24 +3753,20 @@ export class FSService {
                 const newSelection = [...new Set([...currentSelection, normalizePath(uri.fsPath)])];
                 await Services.selectionService.saveCurrentSelection(newSelection);
             }
-            changeHandler(uri); // Trigger the standard refresh
+            triggerRefresh(uri);
         };
 
-        this.watcher.onDidChange(changeHandler);
+        this.watcher.onDidChange(triggerRefresh);
         this.watcher.onDidCreate(createHandler);
-        this.watcher.onDidDelete(changeHandler);
+        this.watcher.onDidDelete(triggerRefresh);
     }
 
     private async getFileStats(filePath: string): Promise<{ tokenCount: number, sizeInBytes: number, isImage: boolean, extension: string }> {
         const extension = path.extname(filePath).toLowerCase();
         try {
             const stats = await fs.stat(filePath);
-
-            if (stats.isDirectory()) {
-                return { tokenCount: 0, sizeInBytes: 0, isImage: false, extension: '' };
-            }
-
             const isImage = IMAGE_EXTENSIONS.has(extension);
+            
             if (isImage) {
                 return { tokenCount: 0, sizeInBytes: stats.size, isImage: true, extension };
             }
@@ -3483,89 +3802,86 @@ export class FSService {
         }
         
         const rootUri = workspaceFolders[0].uri;
-        const rootPath = rootUri.fsPath;
-        
-        const excludePattern = '{**/node_modules/**,**/dist/**,**/out/**,**/.git/**,**/flattened_repo.md}';
-        Services.loggerService.log(`Scanning for files with exclusion pattern: ${excludePattern}`);
-        
-        const files = await vscode.workspace.findFiles("**/*", excludePattern);
-        Services.loggerService.log(`Found ${files.length} files after exclusion.`);
-        
-        const fileTree = await this.createFileTree(rootPath, files);
+        const fileTree = await this.buildTreeFromTraversal(rootUri);
 
         this.fileTreeCache = [fileTree];
         Services.loggerService.log("Sending file tree to client and caching result.");
         serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: this.fileTreeCache });
     }
 
-    private async createFileTree(rootPath: string, files: vscode.Uri[]): Promise<FileNode> {
-        const rootStats = await this.getFileStats(rootPath);
+    private async buildTreeFromTraversal(rootUri: vscode.Uri): Promise<FileNode> {
+        const rootPath = rootUri.fsPath;
+        const rootName = path.basename(rootPath);
+        Services.loggerService.log(`Starting traversal from root: ${rootName}`);
+
         const rootNode: FileNode = {
-            name: path.basename(rootPath),
+            name: rootName,
             absolutePath: normalizePath(rootPath),
             children: [],
-            ...rootStats,
+            tokenCount: 0,
             fileCount: 0,
+            isImage: false,
+            sizeInBytes: 0,
+            extension: ''
         };
 
-        const allNodes = new Map<string, FileNode>();
-        allNodes.set(normalizePath(rootPath), rootNode);
+        rootNode.children = await this._traverseDirectory(rootUri);
+        this._aggregateStats(rootNode);
 
-        for (const file of files) {
-            const relativePath = path.relative(rootPath, file.fsPath);
-            const parts = relativePath.split(path.sep);
-            let currentPath = rootPath;
-            let parentNode = rootNode;
-
-            for (const part of parts) {
-                currentPath = path.join(currentPath, part);
-                const normalizedCurrentPath = normalizePath(currentPath);
-                let childNode = allNodes.get(normalizedCurrentPath);
-
-                if (!childNode) {
-                    const stats = await this.getFileStats(currentPath);
-                    const isDirectory = stats.sizeInBytes === 0 && !stats.isImage && (await fs.stat(currentPath)).isDirectory();
-                    childNode = {
-                        name: part,
-                        absolutePath: normalizedCurrentPath,
-                        ...stats,
-                        fileCount: isDirectory ? 0 : 1
-                    };
-                    if (isDirectory) {
-                        childNode.children = [];
-                    }
-
-                    if (parentNode.children) {
-                        parentNode.children.push(childNode);
-                        allNodes.set(normalizedCurrentPath, childNode);
-                    }
-                }
-                parentNode = childNode;
-            }
-        }
-        
-        this.processNode(rootNode);
         return rootNode;
     }
+    
+    private async _traverseDirectory(dirUri: vscode.Uri): Promise<FileNode[]> {
+        const children: FileNode[] = [];
+        try {
+            const entries = await vscode.workspace.fs.readDirectory(dirUri);
+            for (const [name, type] of entries) {
+                if (EXCLUSION_PATTERNS.includes(name)) {
+                    continue;
+                }
 
-    private processNode(node: FileNode): void {
+                const childUri = vscode.Uri.joinPath(dirUri, name);
+                const childPath = childUri.fsPath;
+
+                if (type === vscode.FileType.Directory) {
+                    const dirNode: FileNode = {
+                        name,
+                        absolutePath: normalizePath(childPath),
+                        children: await this._traverseDirectory(childUri),
+                        tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: ''
+                    };
+                    this._aggregateStats(dirNode);
+                    children.push(dirNode);
+                } else if (type === vscode.FileType.File) {
+                    const stats = await this.getFileStats(childPath);
+                    const fileNode: FileNode = {
+                        name,
+                        absolutePath: normalizePath(childPath),
+                        ...stats,
+                        fileCount: 1,
+                    };
+                    children.push(fileNode);
+                }
+            }
+        } catch (error: any) {
+            Services.loggerService.error(`Error traversing directory ${dirUri.fsPath}: ${error.message}`);
+        }
+
+        children.sort((a, b) => {
+            const aIsFolder = !!a.children;
+            const bIsFolder = !!b.children;
+            if (aIsFolder !== bIsFolder) return aIsFolder ? -1 : 1;
+            return a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' });
+        });
+
+        return children;
+    }
+
+    private _aggregateStats(node: FileNode): void {
         if (!node.children) {
             node.fileCount = 1;
             return;
         }
-
-        for (const child of node.children) {
-            this.processNode(child);
-        }
-
-        node.children.sort((a, b) => {
-            const aIsFolder = !!a.children;
-            const bIsFolder = !!b.children;
-            if (aIsFolder !== bIsFolder) {
-                return aIsFolder ? -1 : 1;
-            }
-            return a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' });
-        });
         
         let totalTokens = 0;
         let totalFiles = 0;
@@ -3648,6 +3964,7 @@ export class FSService {
     }
 
     public handleRevealInExplorerRequest(filePath: string) {
+        Services.loggerService.log(`Executing 'revealInExplorer' for path: ${filePath}`);
         vscode.commands.executeCommand('revealInExplorer', vscode.Uri.file(filePath));
     }
 
@@ -3913,13 +4230,15 @@ import { formatLargeNumber, formatBytes, formatNumberWithCommas } from '@/common
 import ContextMenu from '../ContextMenu';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
+import { logger } from '@/client/utils/logger';
 
 interface FileTreeProps {
   data: FileNode[];
-  selectedFiles: string[];
+  checkedFiles: string[];
   activeFile?: string;
-  updateSelectedFiles: (selectedFiles: string[]) => void;
+  updateCheckedFiles: (checkedFiles: string[]) => void;
   collapseTrigger?: number;
+  searchTerm: string;
 }
 
 const getFileIcon = (fileName: string) => {
@@ -3936,15 +4255,38 @@ const getFileIcon = (fileName: string) => {
     }
 };
 
-const FileTree: React.FC<FileTreeProps> = ({ data, selectedFiles, activeFile, updateSelectedFiles, collapseTrigger }) => {
+const filterTree = (nodes: FileNode[], term: string): FileNode[] => {
+    if (!term) return nodes;
+    const lowerCaseTerm = term.toLowerCase();
+
+    return nodes.reduce((acc, node) => {
+        if (node.name.toLowerCase().includes(lowerCaseTerm)) {
+            acc.push(node);
+            return acc;
+        }
+
+        if (node.children) {
+            const filteredChildren = filterTree(node.children, term);
+            if (filteredChildren.length > 0) {
+                acc.push({ ...node, children: filteredChildren });
+            }
+        }
+        return acc;
+    }, [] as FileNode[]);
+};
+
+
+const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, updateCheckedFiles, collapseTrigger, searchTerm }) => {
     const [contextMenu, setContextMenu] = useState<{ x: number, y: number, node: FileNode } | null>(null);
     const [renamingPath, setRenamingPath] = useState<string | null>(null);
     const [renameValue, setRenameValue] = useState('');
     const clientIpc = ClientPostMessageManager.getInstance();
 
+    const filteredData = useMemo(() => filterTree(data, searchTerm), [data, searchTerm]);
+
     const handleFileCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>, filePath: string) => {
         e.stopPropagation();
-        updateSelectedFiles(addRemovePathInSelectedFiles(data, filePath, selectedFiles));
+        updateCheckedFiles(addRemovePathInSelectedFiles(data, filePath, checkedFiles));
     };
 
     const handleContextMenu = (event: React.MouseEvent, node: FileNode) => {
@@ -3968,27 +4310,47 @@ const FileTree: React.FC<FileTreeProps> = ({ data, selectedFiles, activeFile, up
         setRenamingPath(null);
     };
     
-    const calculateSelectedTokens = useMemo(() => (node: FileNode): number => {
-        if (!node.children) {
-            return selectedFiles.includes(node.absolutePath) ? node.tokenCount : 0;
-        }
+    const calculateCheckedTokens = useMemo(() => {
+        const checkedSet = new Set(checkedFiles);
+        const memo = new Map<string, number>();
+
+        const calculate = (node: FileNode): number => {
+            if (memo.has(node.absolutePath)) {
+                return memo.get(node.absolutePath)!;
+            }
+
+            if (checkedSet.has(node.absolutePath)) {
+                memo.set(node.absolutePath, node.tokenCount);
+                return node.tokenCount;
+            }
+            
+            // Check for ancestor
+            for (const checkedPath of checkedSet) {
+                if (node.absolutePath.startsWith(checkedPath + '/')) {
+                    memo.set(node.absolutePath, node.tokenCount);
+                    return node.tokenCount;
+                }
+            }
+
+            if (!node.children) {
+                const result = checkedSet.has(node.absolutePath) ? node.tokenCount : 0;
+                memo.set(node.absolutePath, result);
+                return result;
+            }
     
-        // If the folder itself is selected, all its tokens are selected
-        if (selectedFiles.includes(node.absolutePath)) {
-            return node.tokenCount;
-        }
-    
-        // Otherwise, sum up selected tokens from children
-        return node.children.reduce((acc, child) => acc + calculateSelectedTokens(child), 0);
-    }, [selectedFiles]);
+            const result = node.children.reduce((acc, child) => acc + calculate(child), 0);
+            memo.set(node.absolutePath, result);
+            return result;
+        };
+        return calculate;
+    }, [checkedFiles]);
 
     const renderFileNodeContent = (node: FileNode, isExpanded: boolean) => {
-        const isActive = activeFile === node.absolutePath;
         const isDirectory = Array.isArray(node.children);
         
-        const hasSelectedAncestor = selectedFiles.some(ancestor => node.absolutePath.startsWith(ancestor + '/') && node.absolutePath !== ancestor);
-        const isDirectlySelected = selectedFiles.includes(node.absolutePath);
-        const isChecked = isDirectlySelected || hasSelectedAncestor;
+        const hasCheckedAncestor = checkedFiles.some(ancestor => node.absolutePath.startsWith(ancestor + '/') && node.absolutePath !== ancestor);
+        const isDirectlyChecked = checkedFiles.includes(node.absolutePath);
+        const isChecked = isDirectlyChecked || hasCheckedAncestor;
 
         if (renamingPath === node.absolutePath) {
             return (
@@ -4004,25 +4366,44 @@ const FileTree: React.FC<FileTreeProps> = ({ data, selectedFiles, activeFile, up
             );
         }
 
-        const selectedTokensInDir = isDirectory ? calculateSelectedTokens(node) : 0;
+        const checkedTokensInDir = isDirectory ? calculateCheckedTokens(node) : 0;
+        const isFullyChecked = isDirectory && checkedTokensInDir > 0 && checkedTokensInDir === node.tokenCount;
+
+        const renderTokenCount = () => {
+            if (node.isImage) {
+                return <span>{formatBytes(node.sizeInBytes)}</span>;
+            }
+            if (node.tokenCount > 0) {
+                let content;
+                if (isDirectory) {
+                    if (isFullyChecked) {
+                        content = `(${formatLargeNumber(node.tokenCount, 1)})`;
+                    } else if (checkedTokensInDir > 0) {
+                        content = <>{formatLargeNumber(node.tokenCount, 1)} <span className="selected-token-count">({formatLargeNumber(checkedTokensInDir, 1)})</span></>;
+                    } else {
+                        content = formatLargeNumber(node.tokenCount, 1);
+                    }
+                } else { // It's a file
+                    content = isChecked ? `(${formatLargeNumber(node.tokenCount, 1)})` : formatLargeNumber(node.tokenCount, 1);
+                }
+                return <><VscSymbolNumeric /> <span>{content}</span></>;
+            }
+            return null;
+        };
 
         return (
-            <div className={`file-item ${isActive ? 'active' : ''}`}>
+            <div className={`file-item`}>
                 <Checkbox
                     className="file-checkbox"
                     checked={isChecked}
-                    indeterminate={!isDirectlySelected && !hasSelectedAncestor && selectedFiles.some(p => p.startsWith(node.absolutePath))}
+                    indeterminate={!isDirectlyChecked && !hasCheckedAncestor && checkedFiles.some(p => p.startsWith(node.absolutePath))}
                     onChange={(_, e) => handleFileCheckboxChange(e, node.absolutePath)}
                 />
                 <span className="file-icon">{isDirectory ? (isExpanded ? <VscFolderOpened /> : <VscFolder />) : getFileIcon(node.name)}</span>
                 <span className="file-name">{node.name}</span>
                 <div className="file-stats">
                     {isDirectory && node.fileCount > 0 && (<> <VscFiles /> <span>{formatNumberWithCommas(node.fileCount)}</span> </>)}
-                    {node.isImage ? (<span>{formatBytes(node.sizeInBytes)}</span>) : (node.tokenCount > 0 && (<> <VscSymbolNumeric /> <span>{formatLargeNumber(node.tokenCount, 1)}
-                        {isDirectory && selectedTokensInDir > 0 && selectedTokensInDir < node.tokenCount && 
-                            <span className="selected-token-count"> ({formatLargeNumber(selectedTokensInDir, 1)})</span>
-                        }
-                    </span> </>))}
+                    {renderTokenCount()}
                 </div>
             </div>
         );
@@ -4030,7 +4411,13 @@ const FileTree: React.FC<FileTreeProps> = ({ data, selectedFiles, activeFile, up
 
     return (
         <div className="file-tree">
-            <TreeView data={data} renderNodeContent={(node, isExpanded) => renderFileNodeContent(node, isExpanded as boolean)} onContextMenu={handleContextMenu} collapseTrigger={collapseTrigger} activeFile={activeFile} />
+            <TreeView 
+                data={filteredData} 
+                renderNodeContent={(node, isExpanded) => renderFileNodeContent(node, isExpanded as boolean)} 
+                onContextMenu={handleContextMenu} 
+                collapseTrigger={collapseTrigger} 
+                activeFile={activeFile} 
+            />
             {contextMenu && <ContextMenu menu={contextMenu} onClose={() => setContextMenu(null)} onRename={handleRename} />}
         </div>
     );
@@ -4375,7 +4762,7 @@ export default SelectedFilesView;
 </file>
 
 <file path="src/client/components/tree-view/TreeView.tsx">
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { VscChevronRight } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -4399,10 +4786,27 @@ interface TreeViewProps {
 
 const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTrigger = 0, onContextMenu, activeFile }) => {
     const [expandedNodes, setExpandedNodes] = useState<string[]>([]);
+    const [selectedPaths, setSelectedPaths] = useState<Set<string>>(new Set());
+    const [lastClickedPath, setLastClickedPath] = useState<string | null>(null); // This is the anchor for shift-click
     const nodeRefs = useRef<Map<string, HTMLLIElement | null>>(new Map());
+    const flatNodeList = useRef<TreeNode[]>([]);
     const clientIpc = ClientPostMessageManager.getInstance();
 
-    // Effect to expand the root node by default
+    const buildFlatNodeList = useCallback((nodes: TreeNode[], expanded: string[]): TreeNode[] => {
+        let list: TreeNode[] = [];
+        for (const node of nodes) {
+            list.push(node);
+            if (node.children && expanded.includes(node.absolutePath)) {
+                list = list.concat(buildFlatNodeList(node.children, expanded));
+            }
+        }
+        return list;
+    }, []);
+
+    useEffect(() => {
+        flatNodeList.current = buildFlatNodeList(data, expandedNodes);
+    }, [data, expandedNodes, buildFlatNodeList]);
+
     useEffect(() => {
         if (data.length > 0) {
             const rootNode = data[0];
@@ -4412,7 +4816,6 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         }
     }, [data]);
 
-    // Effect to handle collapsing all nodes
     useEffect(() => {
         if (collapseTrigger > 0 && data.length > 0) {
             const rootNode = data[0];
@@ -4422,48 +4825,42 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         }
     }, [collapseTrigger, data]);
 
-    // Effect to reveal and scroll to the active file
     useEffect(() => {
         if (activeFile && data.length > 0) {
-            logger.log(`[TreeView] Active file changed: ${activeFile}. Attempting to reveal.`);
+            logger.log(`[TreeView] activeFile prop changed: ${activeFile}. Attempting to reveal.`);
             const getParentPaths = (filePath: string, rootPath: string): string[] => {
-                if (!filePath.startsWith(rootPath)) {
-                    logger.warn(`[TreeView] Active file ${filePath} is not under root ${rootPath}`);
+                if (!filePath.startsWith(rootPath) || filePath === rootPath) {
                     return [];
                 }
-    
                 const relativePath = filePath.substring(rootPath.length + 1);
                 const parts = relativePath.split('/');
                 const paths: string[] = [];
                 let current = rootPath;
-                // Iterate up to the second to last part to get only parent directories
                 for (let i = 0; i < parts.length - 1; i++) {
                     current += '/' + parts[i];
                     paths.push(current);
                 }
                 return paths;
             };
-    
             const rootPath = data[0]?.absolutePath;
             if (rootPath) {
                 const parents = getParentPaths(activeFile, rootPath);
+                logger.log(`[TreeView] Parents to expand: ${JSON.stringify(parents)}`);
                 setExpandedNodes(prev => [...new Set([...prev, ...parents, rootPath])]);
-                logger.log(`[TreeView] Expanding parents: ${JSON.stringify(parents)}`);
-                
-                // Scroll into view on the next tick after state has updated
+                setSelectedPaths(new Set([activeFile]));
+                setLastClickedPath(activeFile);
                 setTimeout(() => {
                     const nodeElement = nodeRefs.current.get(activeFile);
                     if (nodeElement) {
-                        logger.log(`[TreeView] Scrolling node into view: ${activeFile}`);
+                        logger.log(`[TreeView] Scrolling to active file element.`);
                         nodeElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                     } else {
-                        logger.warn(`[TreeView] Could not find ref for active file to scroll: ${activeFile}`);
+                        logger.warn(`[TreeView] Could not find ref for active file: ${activeFile}`);
                     }
-                }, 100);
+                }, 150);
             }
         }
     }, [activeFile, data]);
-
 
     const handleNodeClick = (e: React.MouseEvent, node: TreeNode) => {
         if ((e.target as HTMLElement).closest('.file-checkbox') || (e.target as HTMLElement).closest('.rename-input')) {
@@ -4471,33 +4868,60 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         }
         e.stopPropagation();
 
-        if (node.children) { // It's a directory
-            setExpandedNodes((prevExpandedNodes) => {
-                const isExpanded = prevExpandedNodes.includes(node.absolutePath);
-                return isExpanded
-                    ? prevExpandedNodes.filter((n) => n !== node.absolutePath)
-                    : [...prevExpandedNodes, node.absolutePath];
-            });
-        } else { // It's a file, open it
-            clientIpc.sendToServer(ClientToServerChannel.RequestOpenFile, { path: node.absolutePath });
+        const path = node.absolutePath;
+        
+        if (e.shiftKey && lastClickedPath) {
+            const newSelection = new Set(e.ctrlKey ? selectedPaths : []); // Start with current selection if Ctrl is pressed
+            const firstIdx = flatNodeList.current.findIndex(f => f.absolutePath === lastClickedPath);
+            const currentIdx = flatNodeList.current.findIndex(f => f.absolutePath === path);
+            const start = Math.min(firstIdx, currentIdx);
+            const end = Math.max(firstIdx, currentIdx);
+            if (start !== -1 && end !== -1) {
+                for (let i = start; i <= end; i++) {
+                    if (flatNodeList.current[i]) {
+                        newSelection.add(flatNodeList.current[i].absolutePath);
+                    }
+                }
+            }
+            setSelectedPaths(newSelection);
+        } else if (e.ctrlKey) {
+            const newSelection = new Set(selectedPaths);
+            if (newSelection.has(path)) {
+                newSelection.delete(path);
+            } else {
+                newSelection.add(path);
+            }
+            setSelectedPaths(newSelection);
+            setLastClickedPath(path); // Update anchor on ctrl-click
+        } else {
+            // Normal single click
+            setSelectedPaths(new Set([path]));
+            setLastClickedPath(path); // This is now the anchor for future shift-clicks
+            if (node.children) {
+                setExpandedNodes(prev => {
+                    const isExpanded = prev.includes(path);
+                    return isExpanded ? prev.filter(p => p !== path) : [...prev, path];
+                });
+            } else {
+                clientIpc.sendToServer(ClientToServerChannel.RequestOpenFile, { path });
+            }
         }
     };
 
     const renderTreeNodes = (nodes: TreeNode[]) => {
         return nodes.map((node) => {
             const isExpanded = expandedNodes.includes(node.absolutePath);
+            const isSelected = selectedPaths.has(node.absolutePath);
             const isDirectory = !!(node.children && node.children.length > 0);
 
             return (
                 <li key={node.absolutePath} className="treenode-li" ref={el => nodeRefs.current.set(node.absolutePath, el)}>
                     <div
-                        className={`treenode-item-wrapper`}
+                        className={`treenode-item-wrapper ${isSelected ? 'selected' : ''}`}
                         onClick={(e) => handleNodeClick(e, node)}
                         onContextMenu={(e) => onContextMenu?.(e, node)}
                     >
-                        <span 
-                            className={`treenode-chevron ${isExpanded ? 'expanded' : ''}`}
-                        >
+                        <span className={`treenode-chevron ${isExpanded ? 'expanded' : ''}`}>
                             {isDirectory && <VscChevronRight />}
                         </span>
                         <div className="treenode-content">
@@ -4664,7 +5088,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 </file>
 
 <file path="src/client/views/context-chooser.view/view.scss">
-/* Updated on: C28 (Minor layout tweaks and conditional coloring) */
+/* Updated on: C30 (Add user-select: none to prevent text highlighting, add search styles) */
 body {
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -4683,20 +5107,38 @@ body {
     padding: 0 8px; /* Remove vertical padding */
     border-bottom: 1px solid var(--vscode-panel-border);
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-shrink: 0;
-    min-height: 35px; /* Use min-height to be flexible */
-    gap: 16px; /* Add gap for spacing between button groups */
+    flex-direction: column; /* Stack title/search and toolbar */
+    gap: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
 
-.view-title {
-    font-weight: bold;
-    font-size: 11px;
-    text-transform: uppercase;
-    color: var(--vscode-sideBar-titleForeground);
-    white-space: nowrap;
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 28px; /* Ensure consistent height */
 }
+
+.search-container {
+    width: 100%;
+    padding-bottom: 4px;
+
+    input {
+        width: 100%;
+        background-color: var(--vscode-input-background);
+        color: var(--vscode-input-foreground);
+        border: 1px solid var(--vscode-input-border);
+        padding: 2px 4px;
+        border-radius: 2px;
+        outline: none;
+
+        &:focus {
+            border-color: var(--vscode-focusBorder);
+        }
+    }
+}
+
 
 .toolbar {
     display: flex;
@@ -4999,6 +5441,11 @@ body {
     background-color: var(--vscode-list-hoverBackground);
 }
 
+.treenode-item-wrapper.selected {
+    background-color: var(--vscode-list-activeSelectionBackground);
+    color: var(--vscode-list-activeSelectionForeground);
+}
+
 .treenode-chevron {
     flex-shrink: 0;
     width: 20px;
@@ -5029,11 +5476,6 @@ body {
     gap: 6px;
 }
 
-.file-item.active {
-    background-color: var(--vscode-list-activeSelectionBackground);
-    color: var(--vscode-list-activeSelectionForeground);
-}
-
 .file-checkbox {
     cursor: pointer;
     flex-shrink: 0;
@@ -5051,6 +5493,7 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     flex-grow: 1;
+    user-select: none; /* Prevent text selection on click/drag */
 }
 
 .file-stats {
@@ -5147,7 +5590,7 @@ import { FileNode } from '@/common/types/file-node';
 import FileTree from '../../components/file-tree/FileTree';
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { formatLargeNumber, formatNumberWithCommas } from '@/common/utils/formatting';
-import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, VscNewFolder, VscLoading, VscSave, VscFolderLibrary, VscSettingsGear, VscCheckAll } from 'react-icons/vsc';
+import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, VscNewFolder, VscLoading, VscSave, VscFolderLibrary, VscSettingsGear, VscCheckAll, VscSearch } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import SelectedFilesView from '@/client/components/SelectedFilesView';
 import { removePathsFromSelected } from '@/client/components/file-tree/FileTree.utils';
@@ -5155,13 +5598,15 @@ import { SelectionSet } from '@/backend/services/selection.service';
 
 const App = () => {
     const [files, setFiles] = useState<FileNode[]>([]);
-    const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
+    const [checkedFiles, setCheckedFiles] = useState<string[]>([]);
     const [activeFile, setActiveFile] = useState<string | undefined>();
     const [collapseTrigger, setCollapseTrigger] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
     const [selectionSets, setSelectionSets] = useState<SelectionSet>({});
     const [isSelectionListMinimized, setIsSelectionListMinimized] = useState(false);
     const [isAutoAddEnabled, setIsAutoAddEnabled] = useState(false);
+    const [isSearchVisible, setIsSearchVisible] = useState(false);
+    const [searchTerm, setSearchTerm] = useState('');
     
     const clientIpc = ClientPostMessageManager.getInstance();
 
@@ -5171,9 +5616,9 @@ const App = () => {
         clientIpc.sendToServer(ClientToServerChannel.RequestWorkspaceFiles, { force });
     };
 
-    const updateSelectedFiles = useCallback((newSelectedFiles: string[]) => {
-        setSelectedFiles(newSelectedFiles);
-        clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths: newSelectedFiles });
+    const updateCheckedFiles = useCallback((newCheckedFiles: string[]) => {
+        setCheckedFiles(newCheckedFiles);
+        clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths: newCheckedFiles });
     }, [clientIpc]);
 
     useEffect(() => {
@@ -5187,7 +5632,7 @@ const App = () => {
         
         clientIpc.onServerMessage(ServerToClientChannel.ApplySelectionSet, ({ paths }) => {
             logger.log(`Applying selection set with ${paths.length} paths.`);
-            updateSelectedFiles(paths);
+            updateCheckedFiles(paths);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendSelectionSets, ({ sets }) => {
@@ -5196,7 +5641,7 @@ const App = () => {
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SetActiveFile, ({ path }) => {
-            logger.log(`Received set active file event for: ${path}`);
+            logger.log(`[WebView] Received set active file event for: ${path}`);
             setActiveFile(path);
         });
 
@@ -5210,15 +5655,20 @@ const App = () => {
             setIsAutoAddEnabled(enabled);
         });
 
-        // Request initial state from backend
-        clientIpc.sendToServer(ClientToServerChannel.RequestWorkspaceFiles, {});
+        clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, () => {
+            logger.log("Force refresh triggered from backend.");
+            requestFiles(true);
+            clientIpc.sendToServer(ClientToServerChannel.RequestLastSelection, {});
+        });
+
+        requestFiles();
         clientIpc.sendToServer(ClientToServerChannel.RequestLastSelection, {});
 
-    }, [updateSelectedFiles]);
+    }, [updateCheckedFiles]);
 
     const handleFlattenClick = () => {
-        logger.log(`Flatten Context button clicked with ${selectedFiles.length} paths.`);
-        clientIpc.sendToServer(ClientToServerChannel.RequestFlattenContext, { selectedPaths: selectedFiles });
+        logger.log(`Flatten Context button clicked with ${checkedFiles.length} paths.`);
+        clientIpc.sendToServer(ClientToServerChannel.RequestFlattenContext, { selectedPaths: checkedFiles });
     };
 
     const handleRefresh = () => {
@@ -5266,8 +5716,8 @@ const App = () => {
     };
 
     const handleRemoveFromSelection = (pathsToRemove: string[]) => {
-        const newSelected = removePathsFromSelected(pathsToRemove, selectedFiles, files);
-        updateSelectedFiles(newSelected);
+        const newSelected = removePathsFromSelected(pathsToRemove, checkedFiles, files);
+        updateCheckedFiles(newSelected);
     };
 
     const { totalFiles, totalTokens, selectedFileNodes } = useMemo(() => {
@@ -5300,7 +5750,7 @@ const App = () => {
             }
         };
 
-        selectedFiles.forEach(path => {
+        checkedFiles.forEach(path => {
             const node = fileMap.get(path);
             if (node) {
                 addNodeAndDescendants(node);
@@ -5308,39 +5758,50 @@ const App = () => {
         });
         
         return { totalFiles, totalTokens, selectedFileNodes: selectedNodes.filter(n => !n.isImage) };
-    }, [selectedFiles, files]);
+    }, [checkedFiles, files]);
 
     return (
         <div className="view-container">
             <div className="view-header">
-                 <div className="toolbar">
-                    <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.saveCurrentSelection', args: [selectedFiles] })} title="Save Selection Set..."><VscSave /></button>
-                    <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.loadSelectionSet' })} title="Load Selection Set..."><VscFolderLibrary /></button>
-                    <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.manageSelectionSets' })} title="Manage Selection Sets..."><VscSettingsGear /></button>
+                 <div className="header-row">
+                    <div className="toolbar">
+                        <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.saveCurrentSelection', args: [checkedFiles] })} title="Save Selection Set..."><VscSave /></button>
+                        <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.loadSelectionSet' })} title="Load Selection Set..."><VscFolderLibrary /></button>
+                        <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.manageSelectionSets' })} title="Manage Selection Sets..."><VscSettingsGear /></button>
+                    </div>
+                    <div className="toolbar">
+                        {isLoading && <span className="spinner" title="Refreshing..."><VscLoading /></span>}
+                        <button onClick={() => setIsSearchVisible(v => !v)} title="Search..." className={isSearchVisible ? 'active' : ''}><VscSearch /></button>
+                        <button onClick={handleToggleAutoAdd} title="Automatically add new files to selection" className={isAutoAddEnabled ? 'active' : ''}><VscCheckAll /></button>
+                        <button onClick={handleNewFile} title="New File..."><VscNewFile /></button>
+                        <button onClick={handleNewFolder} title="New Folder..."><VscNewFolder /></button>
+                        <button onClick={handleRefresh} title="Refresh Explorer"><VscRefresh /></button>
+                        <button onClick={handleCollapseAll} title="Collapse Folders in View"><VscCollapseAll /></button>
+                    </div>
                  </div>
-                 <div className="toolbar">
-                    {isLoading && <span className="spinner" title="Refreshing..."><VscLoading /></span>}
-                    <button onClick={handleToggleAutoAdd} title="Automatically add new files to selection" className={isAutoAddEnabled ? 'active' : ''}><VscCheckAll /></button>
-                    <button onClick={handleNewFile} title="New File..."><VscNewFile /></button>
-                    <button onClick={handleNewFolder} title="New Folder..."><VscNewFolder /></button>
-                    <button onClick={handleRefresh} title="Refresh Explorer"><VscRefresh /></button>
-                    <button onClick={handleCollapseAll} title="Collapse Folders in View"><VscCollapseAll /></button>
-                 </div>
+                 {isSearchVisible && (
+                    <div className="search-container">
+                        <input
+                            type="text"
+                            placeholder="Filter files..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                    </div>
+                 )}
             </div>
             <div className="file-tree-container">
                 {isLoading && files.length === 0 ? (
                      <div className="loading-message">Loading file tree...</div>
                 ) : files.length > 0 ? (
-                    files.map((rootNode, index) => (
-                        <FileTree
-                            key={index}
-                            data={[rootNode]}
-                            selectedFiles={selectedFiles}
-                            updateSelectedFiles={updateSelectedFiles}
-                            activeFile={activeFile}
-                            collapseTrigger={collapseTrigger}
-                        />
-                    ))
+                    <FileTree
+                        data={files}
+                        checkedFiles={checkedFiles}
+                        updateCheckedFiles={updateCheckedFiles}
+                        activeFile={activeFile}
+                        collapseTrigger={collapseTrigger}
+                        searchTerm={searchTerm}
+                    />
                 ) : (
                     <div className="loading-message">No folder open.</div>
                 )}
@@ -5777,13 +6238,11 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(
         vscode.window.onDidChangeActiveTextEditor(editor => {
             if (editor && editor.document.uri.scheme === 'file') { // Ensure it's a file URI
-                const filePath = editor.document.uri.fsPath;
+                const filePath = editor.document.uri.fsPath.replace(/\\/g, '/'); // Normalize path immediately
                 const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
                 if (serverIpc) {
                     Services.loggerService.log(`Active editor changed: ${filePath}. Notifying view.`);
                     serverIpc.sendToClient(ServerToClientChannel.SetActiveFile, { path: filePath });
-                } else {
-                    Services.loggerService.warn(`Active editor changed but serverIpc not found for view.`);
                 }
             }
         })

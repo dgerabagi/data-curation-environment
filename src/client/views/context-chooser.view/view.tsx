@@ -22,6 +22,8 @@ const App = () => {
     const [selectionSets, setSelectionSets] = useState<SelectionSet>({});
     const [isSelectionListMinimized, setIsSelectionListMinimized] = useState(false);
     const [isAutoAddEnabled, setIsAutoAddEnabled] = useState(false);
+    const [isSearchVisible, setIsSearchVisible] = useState(false);
+    const [searchTerm, setSearchTerm] = useState('');
     
     const clientIpc = ClientPostMessageManager.getInstance();
 
@@ -56,7 +58,7 @@ const App = () => {
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SetActiveFile, ({ path }) => {
-            logger.log(`Received set active file event for: ${path}`);
+            logger.log(`[WebView] Received set active file event for: ${path}`);
             setActiveFile(path);
         });
 
@@ -70,15 +72,12 @@ const App = () => {
             setIsAutoAddEnabled(enabled);
         });
 
-        // C29 Fix: When the backend forces a refresh (e.g., after a new file is created),
-        // we must also re-request the latest selection state, as it may have changed.
         clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, () => {
             logger.log("Force refresh triggered from backend.");
             requestFiles(true);
             clientIpc.sendToServer(ClientToServerChannel.RequestLastSelection, {});
         });
 
-        // Request initial state from backend
         requestFiles();
         clientIpc.sendToServer(ClientToServerChannel.RequestLastSelection, {});
 
@@ -181,35 +180,45 @@ const App = () => {
     return (
         <div className="view-container">
             <div className="view-header">
-                 <div className="toolbar">
-                    <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.saveCurrentSelection', args: [checkedFiles] })} title="Save Selection Set..."><VscSave /></button>
-                    <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.loadSelectionSet' })} title="Load Selection Set..."><VscFolderLibrary /></button>
-                    <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.manageSelectionSets' })} title="Manage Selection Sets..."><VscSettingsGear /></button>
+                 <div className="header-row">
+                    <div className="toolbar">
+                        <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.saveCurrentSelection', args: [checkedFiles] })} title="Save Selection Set..."><VscSave /></button>
+                        <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.loadSelectionSet' })} title="Load Selection Set..."><VscFolderLibrary /></button>
+                        <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.manageSelectionSets' })} title="Manage Selection Sets..."><VscSettingsGear /></button>
+                    </div>
+                    <div className="toolbar">
+                        {isLoading && <span className="spinner" title="Refreshing..."><VscLoading /></span>}
+                        <button onClick={() => setIsSearchVisible(v => !v)} title="Search..." className={isSearchVisible ? 'active' : ''}><VscSearch /></button>
+                        <button onClick={handleToggleAutoAdd} title="Automatically add new files to selection" className={isAutoAddEnabled ? 'active' : ''}><VscCheckAll /></button>
+                        <button onClick={handleNewFile} title="New File..."><VscNewFile /></button>
+                        <button onClick={handleNewFolder} title="New Folder..."><VscNewFolder /></button>
+                        <button onClick={handleRefresh} title="Refresh Explorer"><VscRefresh /></button>
+                        <button onClick={handleCollapseAll} title="Collapse Folders in View"><VscCollapseAll /></button>
+                    </div>
                  </div>
-                 <div className="toolbar">
-                    {isLoading && <span className="spinner" title="Refreshing..."><VscLoading /></span>}
-                    <button title="Search... (Coming Soon)"><VscSearch /></button>
-                    <button onClick={handleToggleAutoAdd} title="Automatically add new files to selection" className={isAutoAddEnabled ? 'active' : ''}><VscCheckAll /></button>
-                    <button onClick={handleNewFile} title="New File..."><VscNewFile /></button>
-                    <button onClick={handleNewFolder} title="New Folder..."><VscNewFolder /></button>
-                    <button onClick={handleRefresh} title="Refresh Explorer"><VscRefresh /></button>
-                    <button onClick={handleCollapseAll} title="Collapse Folders in View"><VscCollapseAll /></button>
-                 </div>
+                 {isSearchVisible && (
+                    <div className="search-container">
+                        <input
+                            type="text"
+                            placeholder="Filter files..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                    </div>
+                 )}
             </div>
             <div className="file-tree-container">
                 {isLoading && files.length === 0 ? (
                      <div className="loading-message">Loading file tree...</div>
                 ) : files.length > 0 ? (
-                    files.map((rootNode, index) => (
-                        <FileTree
-                            key={index}
-                            data={[rootNode]}
-                            checkedFiles={checkedFiles}
-                            updateCheckedFiles={updateCheckedFiles}
-                            activeFile={activeFile}
-                            collapseTrigger={collapseTrigger}
-                        />
-                    ))
+                    <FileTree
+                        data={files}
+                        checkedFiles={checkedFiles}
+                        updateCheckedFiles={updateCheckedFiles}
+                        activeFile={activeFile}
+                        collapseTrigger={collapseTrigger}
+                        searchTerm={searchTerm}
+                    />
                 ) : (
                     <div className="loading-message">No folder open.</div>
                 )}

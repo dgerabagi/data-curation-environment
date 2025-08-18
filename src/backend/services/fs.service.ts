@@ -9,6 +9,7 @@ import { serverIPCs } from "@/client/views";
 import { VIEW_TYPES } from "@/common/view-types";
 
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
+const EXCLUSION_PATTERNS = ['node_modules', 'dist', 'out', '.git', 'flattened_repo.md'];
 
 // Helper to normalize paths to use forward slashes, which is consistent in webviews
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
@@ -27,7 +28,9 @@ export class FSService {
         Services.loggerService.log("File system watcher initialized.");
 
         const triggerRefresh = (uri: vscode.Uri) => {
-            if (uri.fsPath.includes(path.normalize('/.git/')) || uri.fsPath.includes(path.normalize('/node_modules/'))) {
+            // More robust check for ignored paths
+            const normalizedPath = normalizePath(uri.fsPath);
+            if (EXCLUSION_PATTERNS.some(pattern => normalizedPath.includes(`/${pattern}/`))) {
                 return;
             }
 
@@ -40,7 +43,6 @@ export class FSService {
                 
                 const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
                 if (serverIpc) {
-                    // Tell the client to refresh itself. This is better than pushing the whole tree.
                     serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, {});
                 } else {
                     Services.loggerService.warn("Could not push file tree update, serverIpc not available.");
@@ -56,7 +58,7 @@ export class FSService {
                 const newSelection = [...new Set([...currentSelection, normalizePath(uri.fsPath)])];
                 await Services.selectionService.saveCurrentSelection(newSelection);
             }
-            triggerRefresh(uri); // Trigger the standard refresh
+            triggerRefresh(uri);
         };
 
         this.watcher.onDidChange(triggerRefresh);
@@ -68,12 +70,8 @@ export class FSService {
         const extension = path.extname(filePath).toLowerCase();
         try {
             const stats = await fs.stat(filePath);
-
-            if (stats.isDirectory()) {
-                return { tokenCount: 0, sizeInBytes: 0, isImage: false, extension: '' };
-            }
-
             const isImage = IMAGE_EXTENSIONS.has(extension);
+            
             if (isImage) {
                 return { tokenCount: 0, sizeInBytes: stats.size, isImage: true, extension };
             }
@@ -109,89 +107,86 @@ export class FSService {
         }
         
         const rootUri = workspaceFolders[0].uri;
-        const rootPath = rootUri.fsPath;
-        
-        const excludePattern = '{**/node_modules/**,**/dist/**,**/out/**,**/.git/**,**/flattened_repo.md}';
-        Services.loggerService.log(`Scanning for files with exclusion pattern: ${excludePattern}`);
-        
-        const files = await vscode.workspace.findFiles("**/*", excludePattern);
-        Services.loggerService.log(`Found ${files.length} files after exclusion.`);
-        
-        const fileTree = await this.createFileTree(rootPath, files);
+        const fileTree = await this.buildTreeFromTraversal(rootUri);
 
         this.fileTreeCache = [fileTree];
         Services.loggerService.log("Sending file tree to client and caching result.");
         serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: this.fileTreeCache });
     }
 
-    private async createFileTree(rootPath: string, files: vscode.Uri[]): Promise<FileNode> {
-        const rootStats = await this.getFileStats(rootPath);
+    private async buildTreeFromTraversal(rootUri: vscode.Uri): Promise<FileNode> {
+        const rootPath = rootUri.fsPath;
+        const rootName = path.basename(rootPath);
+        Services.loggerService.log(`Starting traversal from root: ${rootName}`);
+
         const rootNode: FileNode = {
-            name: path.basename(rootPath),
+            name: rootName,
             absolutePath: normalizePath(rootPath),
             children: [],
-            ...rootStats,
+            tokenCount: 0,
             fileCount: 0,
+            isImage: false,
+            sizeInBytes: 0,
+            extension: ''
         };
 
-        const allNodes = new Map<string, FileNode>();
-        allNodes.set(normalizePath(rootPath), rootNode);
+        rootNode.children = await this._traverseDirectory(rootUri);
+        this._aggregateStats(rootNode);
 
-        for (const file of files) {
-            const relativePath = path.relative(rootPath, file.fsPath);
-            const parts = relativePath.split(path.sep);
-            let currentPath = rootPath;
-            let parentNode = rootNode;
-
-            for (const part of parts) {
-                currentPath = path.join(currentPath, part);
-                const normalizedCurrentPath = normalizePath(currentPath);
-                let childNode = allNodes.get(normalizedCurrentPath);
-
-                if (!childNode) {
-                    const stats = await this.getFileStats(currentPath);
-                    const isDirectory = stats.sizeInBytes === 0 && !stats.isImage && (await fs.stat(currentPath)).isDirectory();
-                    childNode = {
-                        name: part,
-                        absolutePath: normalizedCurrentPath,
-                        ...stats,
-                        fileCount: isDirectory ? 0 : 1
-                    };
-                    if (isDirectory) {
-                        childNode.children = [];
-                    }
-
-                    if (parentNode.children) {
-                        parentNode.children.push(childNode);
-                        allNodes.set(normalizedCurrentPath, childNode);
-                    }
-                }
-                parentNode = childNode;
-            }
-        }
-        
-        this.processNode(rootNode);
         return rootNode;
     }
+    
+    private async _traverseDirectory(dirUri: vscode.Uri): Promise<FileNode[]> {
+        const children: FileNode[] = [];
+        try {
+            const entries = await vscode.workspace.fs.readDirectory(dirUri);
+            for (const [name, type] of entries) {
+                if (EXCLUSION_PATTERNS.includes(name)) {
+                    continue;
+                }
 
-    private processNode(node: FileNode): void {
+                const childUri = vscode.Uri.joinPath(dirUri, name);
+                const childPath = childUri.fsPath;
+
+                if (type === vscode.FileType.Directory) {
+                    const dirNode: FileNode = {
+                        name,
+                        absolutePath: normalizePath(childPath),
+                        children: await this._traverseDirectory(childUri),
+                        tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: ''
+                    };
+                    this._aggregateStats(dirNode);
+                    children.push(dirNode);
+                } else if (type === vscode.FileType.File) {
+                    const stats = await this.getFileStats(childPath);
+                    const fileNode: FileNode = {
+                        name,
+                        absolutePath: normalizePath(childPath),
+                        ...stats,
+                        fileCount: 1,
+                    };
+                    children.push(fileNode);
+                }
+            }
+        } catch (error: any) {
+            Services.loggerService.error(`Error traversing directory ${dirUri.fsPath}: ${error.message}`);
+        }
+
+        children.sort((a, b) => {
+            const aIsFolder = !!a.children;
+            const bIsFolder = !!b.children;
+            if (aIsFolder !== bIsFolder) return aIsFolder ? -1 : 1;
+            return a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' });
+        });
+
+        return children;
+    }
+
+    private _aggregateStats(node: FileNode): void {
         if (!node.children) {
             node.fileCount = 1;
             return;
         }
-
-        for (const child of node.children) {
-            this.processNode(child);
-        }
-
-        node.children.sort((a, b) => {
-            const aIsFolder = !!a.children;
-            const bIsFolder = !!b.children;
-            if (aIsFolder !== bIsFolder) {
-                return aIsFolder ? -1 : 1;
-            }
-            return a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' });
-        });
         
         let totalTokens = 0;
         let totalFiles = 0;
