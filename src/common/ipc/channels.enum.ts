@@ -11,6 +11,7 @@ export enum ClientToServerChannel {
     RequestRevealInExplorer = "clientToServer.requestRevealInExplorer",
     RequestCopyPath = "clientToServer.requestCopyPath",
     RequestOpenFile = "clientToServer.requestOpenFile",
+    RequestMoveFile = "clientToServer.requestMoveFile", // New for Drag and Drop
 
     // Selection Persistence
     SaveCurrentSelection = "clientToServer.saveCurrentSelection",
@@ -29,4 +30,5 @@ export enum ServerToClientChannel {
     SetActiveFile = "serverToClient.setActiveFile", // For active file sync
     FocusFile = "serverToClient.focusFile", // For auto-revealing a specific file
     SendAutoAddState = "serverToClient.sendAutoAddState",
+    UpdateProblemCounts = "serverToClient.updateProblemCounts", // New for dynamic updates
 }

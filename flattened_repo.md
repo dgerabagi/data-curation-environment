@@ -1,23 +1,23 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-18T20:27:23.548Z
+  Date Generated: 2025-08-18T20:51:59.452Z
   ---
   Total Files: 165
-  Total Lines: 12797
-  Total Characters: 531057
-  Approx. Tokens: 132827
+  Total Lines: 12936
+  Total Characters: 537538
+  Approx. Tokens: 134447
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
 2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
-3. src\backend\services\fs.service.ts (4312 tokens)
-4. src\client\views\context-chooser.view\view.scss (3169 tokens)
-5. src\client\views\context-chooser.view\view.tsx (2994 tokens)
+3. src\backend\services\fs.service.ts (4536 tokens)
+4. src\client\views\context-chooser.view\view.scss (3246 tokens)
+5. src\client\views\context-chooser.view\view.tsx (3099 tokens)
 6. src\client\components\SelectedFilesView.tsx (2716 tokens)
-7. The-Creator-AI-main\src\backend\services\code.service.ts (2618 tokens)
-8. src\client\components\file-tree\FileTree.tsx (2548 tokens)
+7. src\client\components\file-tree\FileTree.tsx (2627 tokens)
+8. The-Creator-AI-main\src\backend\services\code.service.ts (2618 tokens)
 9. The-Creator-AI-main\src\backend\services\fs.service.ts (2495 tokens)
 10. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts (2424 tokens)
 
@@ -46,7 +46,7 @@
 22. src\Artifacts\A22. DCE - Phase 1 - Search & Filter Feature Plan.md - Lines: 58 - Chars: 3663 - Tokens: 916
 23. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 49 - Chars: 4801 - Tokens: 1201
 24. src\Artifacts\A24. DCE - Selection Paradigm Terminology.md - Lines: 57 - Chars: 3330 - Tokens: 833
-25. src\Artifacts\A25. DCE - Phase 1 - Git & Problems Integration Plan.md - Lines: 61 - Chars: 5315 - Tokens: 1329
+25. src\Artifacts\A25. DCE - Phase 1 - Git & Problems Integration Plan.md - Lines: 61 - Chars: 5871 - Tokens: 1468
 26. src\Artifacts\A26. DCE - Phase 1 - File System Traversal & Caching Strategy.md - Lines: 46 - Chars: 4009 - Tokens: 1003
 27. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
 28. src\Artifacts\A4. DCE - Analysis of The-Creator-AI Repo.md - Lines: 56 - Chars: 5722 - Tokens: 1431
@@ -58,26 +58,26 @@
 34. src\backend\commands\commands.ts - Lines: 88 - Chars: 3807 - Tokens: 952
 35. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
 36. src\backend\services\flattener.service.ts - Lines: 174 - Chars: 7078 - Tokens: 1770
-37. src\backend\services\fs.service.ts - Lines: 393 - Chars: 17248 - Tokens: 4312
+37. src\backend\services\fs.service.ts - Lines: 414 - Chars: 18142 - Tokens: 4536
 38. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-39. src\backend\services\selection.service.ts - Lines: 69 - Chars: 2510 - Tokens: 628
+39. src\backend\services\selection.service.ts - Lines: 108 - Chars: 4148 - Tokens: 1037
 40. src\backend\services\services.ts - Lines: 23 - Chars: 882 - Tokens: 221
 41. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
 42. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
 43. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
-44. src\client\components\file-tree\FileTree.tsx - Lines: 234 - Chars: 10190 - Tokens: 2548
+44. src\client\components\file-tree\FileTree.tsx - Lines: 238 - Chars: 10508 - Tokens: 2627
 45. src\client\components\file-tree\FileTree.utils.ts - Lines: 106 - Chars: 3947 - Tokens: 987
 46. src\client\components\SelectedFilesView.tsx - Lines: 223 - Chars: 10861 - Tokens: 2716
-47. src\client\components\tree-view\TreeView.tsx - Lines: 182 - Chars: 7901 - Tokens: 1976
+47. src\client\components\tree-view\TreeView.tsx - Lines: 229 - Chars: 9633 - Tokens: 2409
 48. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 49. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
 50. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-51. src\client\views\context-chooser.view\on-message.ts - Lines: 90 - Chars: 3852 - Tokens: 963
-52. src\client\views\context-chooser.view\view.scss - Lines: 514 - Chars: 12675 - Tokens: 3169
-53. src\client\views\context-chooser.view\view.tsx - Lines: 252 - Chars: 11975 - Tokens: 2994
+51. src\client\views\context-chooser.view\on-message.ts - Lines: 94 - Chars: 4015 - Tokens: 1004
+52. src\client\views\context-chooser.view\view.scss - Lines: 526 - Chars: 12983 - Tokens: 3246
+53. src\client\views\context-chooser.view\view.tsx - Lines: 259 - Chars: 12396 - Tokens: 3099
 54. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
-55. src\common\ipc\channels.enum.ts - Lines: 32 - Chars: 1544 - Tokens: 386
-56. src\common\ipc\channels.type.ts - Lines: 29 - Chars: 2002 - Tokens: 501
+55. src\common\ipc\channels.enum.ts - Lines: 34 - Chars: 1718 - Tokens: 430
+56. src\common\ipc\channels.type.ts - Lines: 32 - Chars: 2279 - Tokens: 570
 57. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
 58. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 59. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
@@ -1641,7 +1641,7 @@ By adhering to this terminology, we can ensure clarity in communication and prec
 # Artifact A25: DCE - Phase 1 - Git & Problems Integration Plan
 # Date Created: C30
 # Author: AI Model
-# Updated on: C32 (Marking as active work for this cycle)
+# Updated on: C33 (Refine technical plan based on debugging)
 
 - **Key/Value for A0:**
 - **Description:** Outlines the user stories and technical approach for integrating Git status indicators and VS Code Problem Diagnostics into the custom file tree.
@@ -1651,14 +1651,14 @@ By adhering to this terminology, we can ensure clarity in communication and prec
 
 To achieve full feature parity with the native VS Code Explorer and provide critical context to the user, the Data Curation Environment (DCE) file tree must display information about a file's Git status and any associated problems (errors/warnings). The goal of this feature is to overlay this diagnostic and source control information directly onto the file tree, allowing users to make more informed decisions during context curation.
 
-**Status (C32):** This feature is the primary focus of the current development cycle.
+**Status (C33):** Actively debugging and refining the implementation. The core issue appears to be in the backend's data gathering from the Git API.
 
 ## 2. User Stories
 
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
 | GP-01 | **Git Status Coloring** | As a user, I want to see files and folders colored according to their Git status (e.g., green for new, yellow for modified, gray for ignored), so I can quickly identify changes in my workspace. | - The file/folder name text color in the tree view changes based on its Git status. <br> - Colors should align with the user's current VS Code theme for Git decorations. <br> - A new, untracked file is green. <br> - A modified file is yellow/orange. <br> - A deleted file (in some views) is red. <br> - An ignored file is gray. |
-| GP-02 | **Git Status Badges** | As a user, I want to see a letter badge next to a file's name indicating its specific Git status (e.g., 'U' for untracked, 'M' for modified), so I have an unambiguous indicator of its state. | - A small, colored badge with a letter appears to the right of the file name. <br> - 'U' for Untracked. <br> - 'M' for Modified. <br> - 'D' for Deleted. <br> - 'A' for Added. <br> - 'C' for Conflicted. |
+| GP-02 | **Git Status Badges** | As a user, I want to see a letter badge next to a file's name indicating its specific Git status (e.g., 'U' for untracked, 'M' for modified), so I have an unambiguous indicator of its state. | - A small, colored badge with a letter appears to the right of the file name. <br> - 'U' for Untracked. <br> - 'M' for Modified. <br> - 'D' for Deleted. <br> - 'A' for Added. <br> - 'C' for Conflicted. <br> - The badge has a tooltip explaining the status (e.g., "Modified"). |
 | GP-03 | **Problem Indicator Badges** | As a user, I want to see a badge with a count of errors and warnings on files and their parent folders, so I can immediately identify parts of the codebase that have issues. | - A file with problems displays a badge with the number of errors (e.g., in red). <br> - A folder recursively aggregates the problem counts of its children and displays a summary badge. <br> - Tooltips on the badge provide a breakdown (e.g., "2 Errors, 3 Warnings"). <br> - The file name may also be colored (e.g., red for errors, yellow for warnings) to match the Problems panel. |
 
 ## 3. Technical Implementation Plan
@@ -1675,11 +1675,11 @@ To achieve full feature parity with the native VS Code Explorer and provide crit
     ```
 
 2.  **Git Status Integration (`fs.service.ts`):**
-    *   This will be achieved by using the official Git extension API.
-    *   In `extension.ts`, get the API: `const gitExtension = vscode.extensions.getExtension('vscode.git')?.exports; const gitApi = gitExtension?.getAPI(1);`. This API object will be passed to the `FSService`.
-    *   When building the file tree, after getting the list of files, iterate through the repositories provided by `gitApi.repositories`.
-    *   For each file, check its status using `repository.state.workingTreeChanges`, `untrackedChanges`, etc. This will provide the status (Modified, Untracked, etc.).
-    *   Map the status to a simple character code and add it to the `FileNode`.
+    *   **API Acquisition:** The Git extension API will be acquired in `extension.ts` and passed into the `FSService` during initialization. This ensures it's available and handles cases where the Git extension might not be ready immediately.
+    *   **Centralized Status Map:** A `private getGitStatusMap()` method will be created. This method builds a `Map<string, string>` of file paths to their status character.
+    *   **Critical: Path Normalization:** All file paths retrieved from the Git API (`change.uri.fsPath`) **must** be normalized to use forward slashes (`/`) immediately before being used as keys in the map. This is the root cause of many cross-platform bugs.
+    *   **Comprehensive Status Check:** The map will be populated by iterating through `repository.state.workingTreeChanges`, `repository.state.indexChanges`, and `repository.state.untrackedChanges`.
+    *   **Logging:** Add detailed logging to confirm the Git API was found, the number of repositories, and the number of changes detected.
 
 3.  **Problems Integration (`fs.service.ts`):**
     *   Use the `vscode.languages.getDiagnostics()` API. This returns all diagnostics for the entire workspace.
@@ -1697,7 +1697,7 @@ To achieve full feature parity with the native VS Code Explorer and provide crit
 
 2.  **Component Logic (`FileTree.tsx`):**
     *   In `renderFileNodeContent`, add logic to conditionally apply the CSS classes to the file name and the status badge based on the `gitStatus` and `problemCounts` properties of the `FileNode`.
-    *   Add a new `<span>` element to render the Git status badge.
+    *   Add a new `<span>` element to render the Git status badge. Add a `title` attribute to this span to provide a helpful tooltip.
     *   Add another `<span>` to render the problem count badge, with a `title` attribute for the tooltip breakdown.
 </file>
 
@@ -3707,6 +3707,7 @@ import { Services } from "./services";
 import { serverIPCs } from "@/client/views";
 import { VIEW_TYPES } from "@/common/view-types";
 import { API as GitAPI, Status } from "../types/git";
+import { ProblemCountsMap } from "@/common/ipc/channels.type";
 
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 const EXCLUSION_PATTERNS = ['node_modules', 'dist', 'out', '.git', 'flattened_repo.md'];
@@ -3717,29 +3718,30 @@ const normalizePath = (p: string) => p.replace(/\\/g, '/');
 export class FSService {
     private fileTreeCache: FileNode[] | null = null;
     private watcher: vscode.FileSystemWatcher | null = null;
-    private debounceTimer: NodeJS.Timeout | null = null;
+    private refreshDebounceTimer: NodeJS.Timeout | null = null;
+    private diagnosticsDebounceTimer: NodeJS.Timeout | null = null;
     private gitApi?: GitAPI;
 
     constructor(gitApi?: GitAPI) {
         this.gitApi = gitApi;
         if (this.gitApi) {
             Services.loggerService.log(`FSService constructed with Git API. Found ${this.gitApi.repositories.length} repositories.`);
-            this.gitApi.onDidOpenRepository(() => this.triggerRefresh());
+            this.gitApi.onDidOpenRepository(() => this.triggerFullRefresh());
             this.gitApi.repositories.forEach(repo => {
                 repo.state.onDidChange(() => {
                     Services.loggerService.log(`Repo state changed for ${path.basename(repo.rootUri.fsPath)}`);
-                    this.triggerRefresh();
+                    this.triggerFullRefresh();
                 });
             });
         }
     }
 
-    private triggerRefresh() {
-        if (this.debounceTimer) {
-            clearTimeout(this.debounceTimer);
+    private triggerFullRefresh() {
+        if (this.refreshDebounceTimer) {
+            clearTimeout(this.refreshDebounceTimer);
         }
-        this.debounceTimer = setTimeout(() => {
-            Services.loggerService.log(`Git state change detected. Invalidating cache and triggering refresh.`);
+        this.refreshDebounceTimer = setTimeout(() => {
+            Services.loggerService.log(`Git state change or file event detected. Invalidating cache and triggering full refresh.`);
             this.fileTreeCache = null;
             
             const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
@@ -3747,6 +3749,20 @@ export class FSService {
                 serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, {});
             }
         }, 500); // Debounce for 500ms
+    }
+
+    private triggerDiagnosticsUpdate() {
+        if (this.diagnosticsDebounceTimer) {
+            clearTimeout(this.diagnosticsDebounceTimer);
+        }
+        this.diagnosticsDebounceTimer = setTimeout(() => {
+            Services.loggerService.log("Diagnostics changed, triggering lightweight update.");
+            const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
+            if (serverIpc) {
+                const problemMap = this.getProblemCountsMap();
+                serverIpc.sendToClient(ServerToClientChannel.UpdateProblemCounts, { problemMap });
+            }
+        }, 750);
     }
 
     public initializeWatcher() {
@@ -3762,7 +3778,7 @@ export class FSService {
             if (EXCLUSION_PATTERNS.some(pattern => normalizedPath.includes(`/${pattern}/`))) {
                 return;
             }
-            this.triggerRefresh();
+            this.triggerFullRefresh();
         };
 
         const onFileCreate = async (uri: vscode.Uri) => {
@@ -3781,8 +3797,7 @@ export class FSService {
         this.watcher.onDidDelete(onFileChange);
 
         vscode.languages.onDidChangeDiagnostics(() => {
-            Services.loggerService.log("Diagnostics changed, triggering refresh.");
-            this.triggerRefresh();
+            this.triggerDiagnosticsUpdate();
         });
     }
 
@@ -3870,24 +3885,20 @@ export class FSService {
                 statusMap.set(normPath, statusChar);
             }
         });
-
-        // The official git extension does not expose untrackedChanges directly on repo.state.
-        // A common workaround is needed if the above doesn't include them, but often they are part of workingTreeChanges with status UNTRACKED
-        // Let's log to see what we get.
         
         return statusMap;
     }
 
-    private getProblemCountsMap(): Map<string, { error: number, warning: number }> {
-        const problemMap = new Map<string, { error: number, warning: number }>();
+    private getProblemCountsMap(): ProblemCountsMap {
+        const problemMap: ProblemCountsMap = {};
         const diagnostics = vscode.languages.getDiagnostics();
 
         for (const [uri, diagnosticArr] of diagnostics) {
             const path = normalizePath(uri.fsPath);
-            let counts = problemMap.get(path);
+            let counts = problemMap[path];
             if (!counts) {
                 counts = { error: 0, warning: 0 };
-                problemMap.set(path, counts);
+                problemMap[path] = counts;
             }
             for (const diag of diagnosticArr) {
                 if (diag.severity === vscode.DiagnosticSeverity.Error) {
@@ -3908,7 +3919,7 @@ export class FSService {
         const gitStatusMap = this.getGitStatusMap();
         Services.loggerService.log(`Built Git status map with ${gitStatusMap.size} entries.`);
         const problemCountsMap = this.getProblemCountsMap();
-        Services.loggerService.log(`Built problem counts map with ${problemCountsMap.size} entries.`);
+        Services.loggerService.log(`Built problem counts map with ${Object.keys(problemCountsMap).length} entries.`);
 
         const rootNode: FileNode = {
             name: rootName,
@@ -3916,7 +3927,7 @@ export class FSService {
             children: [],
             tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '',
             gitStatus: gitStatusMap.get(normalizePath(rootPath)),
-            problemCounts: problemCountsMap.get(normalizePath(rootPath))
+            problemCounts: problemCountsMap[normalizePath(rootPath)]
         };
 
         rootNode.children = await this._traverseDirectory(rootUri, gitStatusMap, problemCountsMap);
@@ -3925,7 +3936,7 @@ export class FSService {
         return rootNode;
     }
     
-    private async _traverseDirectory(dirUri: vscode.Uri, gitStatusMap: Map<string, string>, problemCountsMap: Map<string, { error: number, warning: number }>): Promise<FileNode[]> {
+    private async _traverseDirectory(dirUri: vscode.Uri, gitStatusMap: Map<string, string>, problemCountsMap: ProblemCountsMap): Promise<FileNode[]> {
         const children: FileNode[] = [];
         try {
             const entries = await vscode.workspace.fs.readDirectory(dirUri);
@@ -3944,7 +3955,7 @@ export class FSService {
                         children: await this._traverseDirectory(childUri, gitStatusMap, problemCountsMap),
                         tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '',
                         gitStatus: gitStatusMap.get(childPath),
-                        problemCounts: problemCountsMap.get(childPath)
+                        problemCounts: problemCountsMap[childPath]
                     };
                     this._aggregateStats(dirNode);
                     children.push(dirNode);
@@ -3960,7 +3971,7 @@ export class FSService {
                         ...stats,
                         fileCount: 1,
                         gitStatus: gitStatus,
-                        problemCounts: problemCountsMap.get(childPath)
+                        problemCounts: problemCountsMap[childPath]
                     };
                     children.push(fileNode);
                 }
@@ -4057,6 +4068,16 @@ export class FSService {
             await vscode.workspace.fs.rename(vscode.Uri.file(oldPath), vscode.Uri.file(newPath));
         } catch (error: any) {
             vscode.window.showErrorMessage(`Failed to rename: ${error.message}`);
+        }
+    }
+
+    public async handleMoveFileRequest(oldPath: string, newPath: string) {
+        try {
+            await vscode.workspace.fs.rename(vscode.Uri.file(oldPath), vscode.Uri.file(newPath));
+            await Services.selectionService.updatePathInSelections(oldPath, newPath);
+        } catch (error: any) {
+            vscode.window.showErrorMessage(`Failed to move file: ${error.message}`);
+            Services.loggerService.error(`Failed to move file from ${oldPath} to ${newPath}: ${error.message}`);
         }
     }
 
@@ -4191,6 +4212,45 @@ export class SelectionService {
         await this.context.workspaceState.update(LAST_SELECTION_KEY, paths);
         Services.loggerService.log(`Persisted current selection of ${paths.length} items.`);
     }
+
+    // --- Path Manipulation for File Moves ---
+    public async updatePathInSelections(oldPath: string, newPath: string): Promise<void> {
+        Services.loggerService.log(`Updating path in selections: ${oldPath} -> ${newPath}`);
+
+        // Update last active selection
+        const lastSelection = this.getLastSelection();
+        const updatedLastSelection = this.updatePathsInList(lastSelection, oldPath, newPath);
+        await this.saveCurrentSelection(updatedLastSelection);
+
+        // Update all named selection sets
+        const allSets = this.getSelectionSets();
+        let setsUpdated = false;
+        for (const setName in allSets) {
+            const updatedSet = this.updatePathsInList(allSets[setName], oldPath, newPath);
+            if (updatedSet.length !== allSets[setName].length || updatedSet.some((p, i) => p !== allSets[setName][i])) {
+                allSets[setName] = updatedSet;
+                setsUpdated = true;
+            }
+        }
+        if (setsUpdated) {
+            await this.context.workspaceState.update(SELECTION_SETS_KEY, allSets);
+            Services.loggerService.log(`Updated paths in named selection sets.`);
+        }
+    }
+
+    private updatePathsInList(paths: string[], oldPath: string, newPath: string): string[] {
+        return paths.map(p => {
+            if (p === oldPath) {
+                return newPath; // Exact match
+            }
+            if (p.startsWith(oldPath + '/')) {
+                // Descendant path
+                return newPath + p.substring(oldPath.length);
+            }
+            return p;
+        });
+    }
+
 
     // --- Auto-Add New Files State ---
 
@@ -4425,7 +4485,7 @@ import { formatLargeNumber, formatBytes, formatNumberWithCommas } from '@/common
 import ContextMenu from '../ContextMenu';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
-import { logger } from '@/client/utils/logger';
+import { ProblemCountsMap } from '@/common/ipc/channels.type';
 
 interface FileTreeProps {
   data: FileNode[];
@@ -4434,6 +4494,7 @@ interface FileTreeProps {
   updateCheckedFiles: (checkedFiles: string[]) => void;
   collapseTrigger?: number;
   searchTerm: string;
+  problemMap: ProblemCountsMap;
 }
 
 const getFileIcon = (fileName: string) => {
@@ -4483,7 +4544,7 @@ const filterTree = (nodes: FileNode[], term: string): FileNode[] => {
 };
 
 
-const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, updateCheckedFiles, collapseTrigger, searchTerm }) => {
+const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, updateCheckedFiles, collapseTrigger, searchTerm, problemMap }) => {
     const [contextMenu, setContextMenu] = useState<{ x: number, y: number, node: FileNode } | null>(null);
     const [renamingPath, setRenamingPath] = useState<string | null>(null);
     const [renameValue, setRenameValue] = useState('');
@@ -4575,12 +4636,15 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
         const checkedTokensInDir = isDirectory ? calculateCheckedTokens(node) : 0;
         const isFullyChecked = isDirectory && checkedTokensInDir > 0 && checkedTokensInDir === node.tokenCount;
         
-        const problemErrorCount = node.problemCounts?.error || 0;
-        const problemWarningCount = node.problemCounts?.warning || 0;
+        // Use live problem map if available, otherwise fallback to initial data
+        const liveProblems = problemMap[node.absolutePath];
+        const problemData = liveProblems || node.problemCounts;
+
+        const problemErrorCount = problemData?.error || 0;
+        const problemWarningCount = problemData?.warning || 0;
         const hasProblems = problemErrorCount > 0 || problemWarningCount > 0;
         const problemColorClass = problemErrorCount > 0 ? 'problem-error' : 'problem-warning';
         const problemTooltip = `${problemErrorCount} Errors, ${problemWarningCount} Warnings`;
-
 
         const renderTokenCount = () => {
             if (node.isImage) {
@@ -4620,8 +4684,8 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
                     {node.gitStatus && <span className="git-status-badge" title={getGitStatusTooltip(node.gitStatus)}>{node.gitStatus}</span>}
                     {hasProblems && (
                         <span className="problem-badge" title={problemTooltip}>
-                            {problemErrorCount > 0 && <><VscError/> {problemErrorCount}</>}
-                            {problemWarningCount > 0 && <><VscWarning/> {problemWarningCount}</>}
+                            {problemErrorCount > 0 && <span className='error-icon'><VscError/> {problemErrorCount}</span>}
+                            {problemWarningCount > 0 && <span className='warning-icon'><VscWarning/> {problemWarningCount}</span>}
                         </span>
                     )}
                     {isDirectory && node.fileCount > 0 && (<> <VscFiles /> <span>{formatNumberWithCommas(node.fileCount)}</span> </>)}
@@ -5009,7 +5073,10 @@ interface TreeViewProps {
 const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTrigger = 0, onContextMenu, activeFile }) => {
     const [expandedNodes, setExpandedNodes] = useState<string[]>([]);
     const [selectedPaths, setSelectedPaths] = useState<Set<string>>(new Set());
-    const [lastClickedPath, setLastClickedPath] = useState<string | null>(null); // This is the anchor for shift-click
+    const [lastClickedPath, setLastClickedPath] = useState<string | null>(null);
+    const [draggedPath, setDraggedPath] = useState<string | null>(null);
+    const [dropTarget, setDropTarget] = useState<string | null>(null);
+
     const nodeRefs = useRef<Map<string, HTMLLIElement | null>>(new Map());
     const flatNodeList = useRef<TreeNode[]>([]);
     const clientIpc = ClientPostMessageManager.getInstance();
@@ -5093,7 +5160,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         const path = node.absolutePath;
         
         if (e.shiftKey && lastClickedPath) {
-            const newSelection = new Set(e.ctrlKey ? selectedPaths : []); // Start with current selection if Ctrl is pressed
+            const newSelection = new Set(e.ctrlKey ? selectedPaths : []);
             const firstIdx = flatNodeList.current.findIndex(f => f.absolutePath === lastClickedPath);
             const currentIdx = flatNodeList.current.findIndex(f => f.absolutePath === path);
             const start = Math.min(firstIdx, currentIdx);
@@ -5114,11 +5181,10 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
                 newSelection.add(path);
             }
             setSelectedPaths(newSelection);
-            setLastClickedPath(path); // Update anchor on ctrl-click
+            setLastClickedPath(path);
         } else {
-            // Normal single click
             setSelectedPaths(new Set([path]));
-            setLastClickedPath(path); // This is now the anchor for future shift-clicks
+            setLastClickedPath(path);
             if (node.children) {
                 setExpandedNodes(prev => {
                     const isExpanded = prev.includes(path);
@@ -5130,14 +5196,59 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         }
     };
 
+    // --- Drag and Drop Handlers ---
+    const handleDragStart = (e: React.DragEvent, node: TreeNode) => {
+        e.stopPropagation();
+        setDraggedPath(node.absolutePath);
+        e.dataTransfer.effectAllowed = 'move';
+    };
+
+    const handleDragOver = (e: React.DragEvent, node: TreeNode) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (node.children && node.absolutePath !== draggedPath) {
+            setDropTarget(node.absolutePath);
+        }
+    };
+
+    const handleDragLeave = (e: React.DragEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setDropTarget(null);
+    };
+
+    const handleDrop = (e: React.DragEvent, dropNode: TreeNode) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setDropTarget(null);
+        if (draggedPath && dropNode.children && dropNode.absolutePath !== draggedPath) {
+            const draggedName = draggedPath.split('/').pop();
+            if (draggedName) {
+                const newPath = `${dropNode.absolutePath}/${draggedName}`;
+                logger.log(`Requesting move from ${draggedPath} to ${newPath}`);
+                clientIpc.sendToServer(ClientToServerChannel.RequestMoveFile, { oldPath: draggedPath, newPath });
+            }
+        }
+        setDraggedPath(null);
+    };
+
     const renderTreeNodes = (nodes: TreeNode[]) => {
         return nodes.map((node) => {
             const isExpanded = expandedNodes.includes(node.absolutePath);
             const isSelected = selectedPaths.has(node.absolutePath);
             const isDirectory = !!(node.children && node.children.length > 0);
+            const isDropTarget = dropTarget === node.absolutePath;
 
             return (
-                <li key={node.absolutePath} className="treenode-li" ref={el => nodeRefs.current.set(node.absolutePath, el)}>
+                <li key={node.absolutePath} 
+                    ref={el => nodeRefs.current.set(node.absolutePath, el)}
+                    draggable="true"
+                    onDragStart={(e) => handleDragStart(e, node)}
+                    onDragOver={(e) => handleDragOver(e, node)}
+                    onDragLeave={handleDragLeave}
+                    onDrop={(e) => handleDrop(e, node)}
+                    className={`treenode-li ${isDropTarget ? 'drop-target' : ''}`}
+                >
                     <div
                         className={`treenode-item-wrapper ${isSelected ? 'selected' : ''}`}
                         onClick={(e) => handleNodeClick(e, node)}
@@ -5265,6 +5376,10 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         fsService.handleOpenFileRequest(data.path);
     });
 
+    serverIpc.onClientMessage(ClientToServerChannel.RequestMoveFile, (data) => {
+        fsService.handleMoveFileRequest(data.oldPath, data.newPath);
+    });
+
     serverIpc.onClientMessage(ClientToServerChannel.SaveCurrentSelection, (data) => {
         selectionService.saveCurrentSelection(data.paths);
     });
@@ -5310,7 +5425,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 </file>
 
 <file path="src/client/views/context-chooser.view/view.scss">
-/* Updated on: C32 (Add Git and Problem status styles) */
+/* Updated on: C34 (Add Drag and Drop styles) */
 body {
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -5648,6 +5763,13 @@ body {
 
 .treenode-li {
     position: relative;
+    border-radius: 3px;
+}
+
+/* Drag and Drop style */
+.treenode-li.drop-target > .treenode-item-wrapper {
+    background-color: var(--vscode-list-dropBackground);
+    outline: 1px solid var(--vscode-focusBorder);
 }
 
 .treenode-item-wrapper {
@@ -5737,8 +5859,13 @@ body {
     display: flex;
     align-items: center;
     gap: 3px;
-    & > svg {
-        color: var(--vscode-list-errorForeground);
+    
+    & .error-icon {
+      color: var(--vscode-list-errorForeground);
+    }
+    
+    & .warning-icon {
+      color: var(--vscode-list-warningForeground);
     }
 }
 
@@ -5840,7 +5967,7 @@ import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, Vsc
 import { logger } from '@/client/utils/logger';
 import SelectedFilesView from '@/client/components/SelectedFilesView';
 import { removePathsFromSelected } from '@/client/components/file-tree/FileTree.utils';
-import { SelectionSet } from '@/backend/services/selection.service';
+import { SelectionSet, ProblemCountsMap } from '@/common/ipc/channels.type';
 
 const App = () => {
     const [files, setFiles] = useState<FileNode[]>([]);
@@ -5853,6 +5980,7 @@ const App = () => {
     const [isAutoAddEnabled, setIsAutoAddEnabled] = useState(false);
     const [isSearchVisible, setIsSearchVisible] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
+    const [problemMap, setProblemMap] = useState<ProblemCountsMap>({});
     
     const clientIpc = ClientPostMessageManager.getInstance();
 
@@ -5905,6 +6033,11 @@ const App = () => {
             logger.log("Force refresh triggered from backend.");
             requestFiles(true);
             clientIpc.sendToServer(ClientToServerChannel.RequestLastSelection, {});
+        });
+
+        clientIpc.onServerMessage(ServerToClientChannel.UpdateProblemCounts, ({ problemMap: newProblemMap }) => {
+            logger.log(`Received dynamic problem counts update with ${Object.keys(newProblemMap).length} entries.`);
+            setProblemMap(newProblemMap);
         });
 
         requestFiles();
@@ -6047,6 +6180,7 @@ const App = () => {
                         activeFile={activeFile}
                         collapseTrigger={collapseTrigger}
                         searchTerm={searchTerm}
+                        problemMap={problemMap}
                     />
                 ) : (
                     <div className="loading-message">No folder open.</div>
@@ -6132,6 +6266,7 @@ export enum ClientToServerChannel {
     RequestRevealInExplorer = "clientToServer.requestRevealInExplorer",
     RequestCopyPath = "clientToServer.requestCopyPath",
     RequestOpenFile = "clientToServer.requestOpenFile",
+    RequestMoveFile = "clientToServer.requestMoveFile", // New for Drag and Drop
 
     // Selection Persistence
     SaveCurrentSelection = "clientToServer.saveCurrentSelection",
@@ -6150,6 +6285,7 @@ export enum ServerToClientChannel {
     SetActiveFile = "serverToClient.setActiveFile", // For active file sync
     FocusFile = "serverToClient.focusFile", // For auto-revealing a specific file
     SendAutoAddState = "serverToClient.sendAutoAddState",
+    UpdateProblemCounts = "serverToClient.updateProblemCounts", // New for dynamic updates
 }
 </file>
 
@@ -6158,6 +6294,7 @@ import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 
 export type SelectionSet = { [name: string]: string[] };
+export type ProblemCountsMap = { [path: string]: { error: number; warning: number; } };
 
 export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel> =
     T extends ClientToServerChannel.RequestFlattenContext ? { selectedPaths: string[] } :
@@ -6170,6 +6307,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestRevealInExplorer ? { path: string } :
     T extends ClientToServerChannel.RequestCopyPath ? { path: string, relative: boolean } :
     T extends ClientToServerChannel.RequestOpenFile ? { path: string } :
+    T extends ClientToServerChannel.RequestMoveFile ? { oldPath: string, newPath: string } :
     T extends ClientToServerChannel.SaveCurrentSelection ? { paths: string[] } :
     T extends ClientToServerChannel.RequestLastSelection ? {} :
     T extends ClientToServerChannel.SaveAutoAddState ? { enabled: boolean } :
@@ -6182,6 +6320,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SetActiveFile ? { path: string } :
     T extends ServerToClientChannel.FocusFile ? { path: string } :
     T extends ServerToClientChannel.SendAutoAddState ? { enabled: boolean } :
+    T extends ServerToClientChannel.UpdateProblemCounts ? { problemMap: ProblemCountsMap } :
     never;
 </file>
 

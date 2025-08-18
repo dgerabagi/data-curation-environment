@@ -11,7 +11,7 @@ import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, Vsc
 import { logger } from '@/client/utils/logger';
 import SelectedFilesView from '@/client/components/SelectedFilesView';
 import { removePathsFromSelected } from '@/client/components/file-tree/FileTree.utils';
-import { SelectionSet } from '@/backend/services/selection.service';
+import { SelectionSet, ProblemCountsMap } from '@/common/ipc/channels.type';
 
 const App = () => {
     const [files, setFiles] = useState<FileNode[]>([]);
@@ -24,6 +24,7 @@ const App = () => {
     const [isAutoAddEnabled, setIsAutoAddEnabled] = useState(false);
     const [isSearchVisible, setIsSearchVisible] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
+    const [problemMap, setProblemMap] = useState<ProblemCountsMap>({});
     
     const clientIpc = ClientPostMessageManager.getInstance();
 
@@ -76,6 +77,11 @@ const App = () => {
             logger.log("Force refresh triggered from backend.");
             requestFiles(true);
             clientIpc.sendToServer(ClientToServerChannel.RequestLastSelection, {});
+        });
+
+        clientIpc.onServerMessage(ServerToClientChannel.UpdateProblemCounts, ({ problemMap: newProblemMap }) => {
+            logger.log(`Received dynamic problem counts update with ${Object.keys(newProblemMap).length} entries.`);
+            setProblemMap(newProblemMap);
         });
 
         requestFiles();
@@ -218,6 +224,7 @@ const App = () => {
                         activeFile={activeFile}
                         collapseTrigger={collapseTrigger}
                         searchTerm={searchTerm}
+                        problemMap={problemMap}
                     />
                 ) : (
                     <div className="loading-message">No folder open.</div>

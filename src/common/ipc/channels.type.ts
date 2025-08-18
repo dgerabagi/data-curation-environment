@@ -2,6 +2,7 @@ import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 
 export type SelectionSet = { [name: string]: string[] };
+export type ProblemCountsMap = { [path: string]: { error: number; warning: number; } };
 
 export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel> =
     T extends ClientToServerChannel.RequestFlattenContext ? { selectedPaths: string[] } :
@@ -14,6 +15,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestRevealInExplorer ? { path: string } :
     T extends ClientToServerChannel.RequestCopyPath ? { path: string, relative: boolean } :
     T extends ClientToServerChannel.RequestOpenFile ? { path: string } :
+    T extends ClientToServerChannel.RequestMoveFile ? { oldPath: string, newPath: string } :
     T extends ClientToServerChannel.SaveCurrentSelection ? { paths: string[] } :
     T extends ClientToServerChannel.RequestLastSelection ? {} :
     T extends ClientToServerChannel.SaveAutoAddState ? { enabled: boolean } :
@@ -26,4 +28,5 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SetActiveFile ? { path: string } :
     T extends ServerToClientChannel.FocusFile ? { path: string } :
     T extends ServerToClientChannel.SendAutoAddState ? { enabled: boolean } :
+    T extends ServerToClientChannel.UpdateProblemCounts ? { problemMap: ProblemCountsMap } :
     never;

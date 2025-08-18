@@ -11,7 +11,7 @@ import { formatLargeNumber, formatBytes, formatNumberWithCommas } from '@/common
 import ContextMenu from '../ContextMenu';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
-import { logger } from '@/client/utils/logger';
+import { ProblemCountsMap } from '@/common/ipc/channels.type';
 
 interface FileTreeProps {
   data: FileNode[];
@@ -20,6 +20,7 @@ interface FileTreeProps {
   updateCheckedFiles: (checkedFiles: string[]) => void;
   collapseTrigger?: number;
   searchTerm: string;
+  problemMap: ProblemCountsMap;
 }
 
 const getFileIcon = (fileName: string) => {
@@ -69,7 +70,7 @@ const filterTree = (nodes: FileNode[], term: string): FileNode[] => {
 };
 
 
-const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, updateCheckedFiles, collapseTrigger, searchTerm }) => {
+const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, updateCheckedFiles, collapseTrigger, searchTerm, problemMap }) => {
     const [contextMenu, setContextMenu] = useState<{ x: number, y: number, node: FileNode } | null>(null);
     const [renamingPath, setRenamingPath] = useState<string | null>(null);
     const [renameValue, setRenameValue] = useState('');
@@ -161,12 +162,15 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
         const checkedTokensInDir = isDirectory ? calculateCheckedTokens(node) : 0;
         const isFullyChecked = isDirectory && checkedTokensInDir > 0 && checkedTokensInDir === node.tokenCount;
         
-        const problemErrorCount = node.problemCounts?.error || 0;
-        const problemWarningCount = node.problemCounts?.warning || 0;
+        // Use live problem map if available, otherwise fallback to initial data
+        const liveProblems = problemMap[node.absolutePath];
+        const problemData = liveProblems || node.problemCounts;
+
+        const problemErrorCount = problemData?.error || 0;
+        const problemWarningCount = problemData?.warning || 0;
         const hasProblems = problemErrorCount > 0 || problemWarningCount > 0;
         const problemColorClass = problemErrorCount > 0 ? 'problem-error' : 'problem-warning';
         const problemTooltip = `${problemErrorCount} Errors, ${problemWarningCount} Warnings`;
-
 
         const renderTokenCount = () => {
             if (node.isImage) {
@@ -206,8 +210,8 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
                     {node.gitStatus && <span className="git-status-badge" title={getGitStatusTooltip(node.gitStatus)}>{node.gitStatus}</span>}
                     {hasProblems && (
                         <span className="problem-badge" title={problemTooltip}>
-                            {problemErrorCount > 0 && <><VscError/> {problemErrorCount}</>}
-                            {problemWarningCount > 0 && <><VscWarning/> {problemWarningCount}</>}
+                            {problemErrorCount > 0 && <span className='error-icon'><VscError/> {problemErrorCount}</span>}
+                            {problemWarningCount > 0 && <span className='warning-icon'><VscWarning/> {problemWarningCount}</span>}
                         </span>
                     )}
                     {isDirectory && node.fileCount > 0 && (<> <VscFiles /> <span>{formatNumberWithCommas(node.fileCount)}</span> </>)}

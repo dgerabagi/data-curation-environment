@@ -56,6 +56,45 @@ export class SelectionService {
         Services.loggerService.log(`Persisted current selection of ${paths.length} items.`);
     }
 
+    // --- Path Manipulation for File Moves ---
+    public async updatePathInSelections(oldPath: string, newPath: string): Promise<void> {
+        Services.loggerService.log(`Updating path in selections: ${oldPath} -> ${newPath}`);
+
+        // Update last active selection
+        const lastSelection = this.getLastSelection();
+        const updatedLastSelection = this.updatePathsInList(lastSelection, oldPath, newPath);
+        await this.saveCurrentSelection(updatedLastSelection);
+
+        // Update all named selection sets
+        const allSets = this.getSelectionSets();
+        let setsUpdated = false;
+        for (const setName in allSets) {
+            const updatedSet = this.updatePathsInList(allSets[setName], oldPath, newPath);
+            if (updatedSet.length !== allSets[setName].length || updatedSet.some((p, i) => p !== allSets[setName][i])) {
+                allSets[setName] = updatedSet;
+                setsUpdated = true;
+            }
+        }
+        if (setsUpdated) {
+            await this.context.workspaceState.update(SELECTION_SETS_KEY, allSets);
+            Services.loggerService.log(`Updated paths in named selection sets.`);
+        }
+    }
+
+    private updatePathsInList(paths: string[], oldPath: string, newPath: string): string[] {
+        return paths.map(p => {
+            if (p === oldPath) {
+                return newPath; // Exact match
+            }
+            if (p.startsWith(oldPath + '/')) {
+                // Descendant path
+                return newPath + p.substring(oldPath.length);
+            }
+            return p;
+        });
+    }
+
+
     // --- Auto-Add New Files State ---
 
     public getAutoAddState(): boolean {

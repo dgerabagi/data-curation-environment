@@ -8,6 +8,7 @@ import { Services } from "./services";
 import { serverIPCs } from "@/client/views";
 import { VIEW_TYPES } from "@/common/view-types";
 import { API as GitAPI, Status } from "../types/git";
+import { ProblemCountsMap } from "@/common/ipc/channels.type";
 
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 const EXCLUSION_PATTERNS = ['node_modules', 'dist', 'out', '.git', 'flattened_repo.md'];
@@ -18,29 +19,30 @@ const normalizePath = (p: string) => p.replace(/\\/g, '/');
 export class FSService {
     private fileTreeCache: FileNode[] | null = null;
     private watcher: vscode.FileSystemWatcher | null = null;
-    private debounceTimer: NodeJS.Timeout | null = null;
+    private refreshDebounceTimer: NodeJS.Timeout | null = null;
+    private diagnosticsDebounceTimer: NodeJS.Timeout | null = null;
     private gitApi?: GitAPI;
 
     constructor(gitApi?: GitAPI) {
         this.gitApi = gitApi;
         if (this.gitApi) {
             Services.loggerService.log(`FSService constructed with Git API. Found ${this.gitApi.repositories.length} repositories.`);
-            this.gitApi.onDidOpenRepository(() => this.triggerRefresh());
+            this.gitApi.onDidOpenRepository(() => this.triggerFullRefresh());
             this.gitApi.repositories.forEach(repo => {
                 repo.state.onDidChange(() => {
                     Services.loggerService.log(`Repo state changed for ${path.basename(repo.rootUri.fsPath)}`);
-                    this.triggerRefresh();
+                    this.triggerFullRefresh();
                 });
             });
         }
     }
 
-    private triggerRefresh() {
-        if (this.debounceTimer) {
-            clearTimeout(this.debounceTimer);
+    private triggerFullRefresh() {
+        if (this.refreshDebounceTimer) {
+            clearTimeout(this.refreshDebounceTimer);
         }
-        this.debounceTimer = setTimeout(() => {
-            Services.loggerService.log(`Git state change detected. Invalidating cache and triggering refresh.`);
+        this.refreshDebounceTimer = setTimeout(() => {
+            Services.loggerService.log(`Git state change or file event detected. Invalidating cache and triggering full refresh.`);
             this.fileTreeCache = null;
             
             const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
@@ -48,6 +50,20 @@ export class FSService {
                 serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, {});
             }
         }, 500); // Debounce for 500ms
+    }
+
+    private triggerDiagnosticsUpdate() {
+        if (this.diagnosticsDebounceTimer) {
+            clearTimeout(this.diagnosticsDebounceTimer);
+        }
+        this.diagnosticsDebounceTimer = setTimeout(() => {
+            Services.loggerService.log("Diagnostics changed, triggering lightweight update.");
+            const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
+            if (serverIpc) {
+                const problemMap = this.getProblemCountsMap();
+                serverIpc.sendToClient(ServerToClientChannel.UpdateProblemCounts, { problemMap });
+            }
+        }, 750);
     }
 
     public initializeWatcher() {
@@ -63,7 +79,7 @@ export class FSService {
             if (EXCLUSION_PATTERNS.some(pattern => normalizedPath.includes(`/${pattern}/`))) {
                 return;
             }
-            this.triggerRefresh();
+            this.triggerFullRefresh();
         };
 
         const onFileCreate = async (uri: vscode.Uri) => {
@@ -82,8 +98,7 @@ export class FSService {
         this.watcher.onDidDelete(onFileChange);
 
         vscode.languages.onDidChangeDiagnostics(() => {
-            Services.loggerService.log("Diagnostics changed, triggering refresh.");
-            this.triggerRefresh();
+            this.triggerDiagnosticsUpdate();
         });
     }
 
@@ -171,24 +186,20 @@ export class FSService {
                 statusMap.set(normPath, statusChar);
             }
         });
-
-        // The official git extension does not expose untrackedChanges directly on repo.state.
-        // A common workaround is needed if the above doesn't include them, but often they are part of workingTreeChanges with status UNTRACKED
-        // Let's log to see what we get.
         
         return statusMap;
     }
 
-    private getProblemCountsMap(): Map<string, { error: number, warning: number }> {
-        const problemMap = new Map<string, { error: number, warning: number }>();
+    private getProblemCountsMap(): ProblemCountsMap {
+        const problemMap: ProblemCountsMap = {};
         const diagnostics = vscode.languages.getDiagnostics();
 
         for (const [uri, diagnosticArr] of diagnostics) {
             const path = normalizePath(uri.fsPath);
-            let counts = problemMap.get(path);
+            let counts = problemMap[path];
             if (!counts) {
                 counts = { error: 0, warning: 0 };
-                problemMap.set(path, counts);
+                problemMap[path] = counts;
             }
             for (const diag of diagnosticArr) {
                 if (diag.severity === vscode.DiagnosticSeverity.Error) {
@@ -209,7 +220,7 @@ export class FSService {
         const gitStatusMap = this.getGitStatusMap();
         Services.loggerService.log(`Built Git status map with ${gitStatusMap.size} entries.`);
         const problemCountsMap = this.getProblemCountsMap();
-        Services.loggerService.log(`Built problem counts map with ${problemCountsMap.size} entries.`);
+        Services.loggerService.log(`Built problem counts map with ${Object.keys(problemCountsMap).length} entries.`);
 
         const rootNode: FileNode = {
             name: rootName,
@@ -217,7 +228,7 @@ export class FSService {
             children: [],
             tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '',
             gitStatus: gitStatusMap.get(normalizePath(rootPath)),
-            problemCounts: problemCountsMap.get(normalizePath(rootPath))
+            problemCounts: problemCountsMap[normalizePath(rootPath)]
         };
 
         rootNode.children = await this._traverseDirectory(rootUri, gitStatusMap, problemCountsMap);
@@ -226,7 +237,7 @@ export class FSService {
         return rootNode;
     }
     
-    private async _traverseDirectory(dirUri: vscode.Uri, gitStatusMap: Map<string, string>, problemCountsMap: Map<string, { error: number, warning: number }>): Promise<FileNode[]> {
+    private async _traverseDirectory(dirUri: vscode.Uri, gitStatusMap: Map<string, string>, problemCountsMap: ProblemCountsMap): Promise<FileNode[]> {
         const children: FileNode[] = [];
         try {
             const entries = await vscode.workspace.fs.readDirectory(dirUri);
@@ -245,7 +256,7 @@ export class FSService {
                         children: await this._traverseDirectory(childUri, gitStatusMap, problemCountsMap),
                         tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '',
                         gitStatus: gitStatusMap.get(childPath),
-                        problemCounts: problemCountsMap.get(childPath)
+                        problemCounts: problemCountsMap[childPath]
                     };
                     this._aggregateStats(dirNode);
                     children.push(dirNode);
@@ -261,7 +272,7 @@ export class FSService {
                         ...stats,
                         fileCount: 1,
                         gitStatus: gitStatus,
-                        problemCounts: problemCountsMap.get(childPath)
+                        problemCounts: problemCountsMap[childPath]
                     };
                     children.push(fileNode);
                 }
@@ -358,6 +369,16 @@ export class FSService {
             await vscode.workspace.fs.rename(vscode.Uri.file(oldPath), vscode.Uri.file(newPath));
         } catch (error: any) {
             vscode.window.showErrorMessage(`Failed to rename: ${error.message}`);
+        }
+    }
+
+    public async handleMoveFileRequest(oldPath: string, newPath: string) {
+        try {
+            await vscode.workspace.fs.rename(vscode.Uri.file(oldPath), vscode.Uri.file(newPath));
+            await Services.selectionService.updatePathInSelections(oldPath, newPath);
+        } catch (error: any) {
+            vscode.window.showErrorMessage(`Failed to move file: ${error.message}`);
+            Services.loggerService.error(`Failed to move file from ${oldPath} to ${newPath}: ${error.message}`);
         }
     }
 

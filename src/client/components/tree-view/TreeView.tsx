@@ -23,7 +23,10 @@ interface TreeViewProps {
 const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTrigger = 0, onContextMenu, activeFile }) => {
     const [expandedNodes, setExpandedNodes] = useState<string[]>([]);
     const [selectedPaths, setSelectedPaths] = useState<Set<string>>(new Set());
-    const [lastClickedPath, setLastClickedPath] = useState<string | null>(null); // This is the anchor for shift-click
+    const [lastClickedPath, setLastClickedPath] = useState<string | null>(null);
+    const [draggedPath, setDraggedPath] = useState<string | null>(null);
+    const [dropTarget, setDropTarget] = useState<string | null>(null);
+
     const nodeRefs = useRef<Map<string, HTMLLIElement | null>>(new Map());
     const flatNodeList = useRef<TreeNode[]>([]);
     const clientIpc = ClientPostMessageManager.getInstance();
@@ -107,7 +110,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         const path = node.absolutePath;
         
         if (e.shiftKey && lastClickedPath) {
-            const newSelection = new Set(e.ctrlKey ? selectedPaths : []); // Start with current selection if Ctrl is pressed
+            const newSelection = new Set(e.ctrlKey ? selectedPaths : []);
             const firstIdx = flatNodeList.current.findIndex(f => f.absolutePath === lastClickedPath);
             const currentIdx = flatNodeList.current.findIndex(f => f.absolutePath === path);
             const start = Math.min(firstIdx, currentIdx);
@@ -128,11 +131,10 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
                 newSelection.add(path);
             }
             setSelectedPaths(newSelection);
-            setLastClickedPath(path); // Update anchor on ctrl-click
+            setLastClickedPath(path);
         } else {
-            // Normal single click
             setSelectedPaths(new Set([path]));
-            setLastClickedPath(path); // This is now the anchor for future shift-clicks
+            setLastClickedPath(path);
             if (node.children) {
                 setExpandedNodes(prev => {
                     const isExpanded = prev.includes(path);
@@ -144,14 +146,59 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         }
     };
 
+    // --- Drag and Drop Handlers ---
+    const handleDragStart = (e: React.DragEvent, node: TreeNode) => {
+        e.stopPropagation();
+        setDraggedPath(node.absolutePath);
+        e.dataTransfer.effectAllowed = 'move';
+    };
+
+    const handleDragOver = (e: React.DragEvent, node: TreeNode) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (node.children && node.absolutePath !== draggedPath) {
+            setDropTarget(node.absolutePath);
+        }
+    };
+
+    const handleDragLeave = (e: React.DragEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setDropTarget(null);
+    };
+
+    const handleDrop = (e: React.DragEvent, dropNode: TreeNode) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setDropTarget(null);
+        if (draggedPath && dropNode.children && dropNode.absolutePath !== draggedPath) {
+            const draggedName = draggedPath.split('/').pop();
+            if (draggedName) {
+                const newPath = `${dropNode.absolutePath}/${draggedName}`;
+                logger.log(`Requesting move from ${draggedPath} to ${newPath}`);
+                clientIpc.sendToServer(ClientToServerChannel.RequestMoveFile, { oldPath: draggedPath, newPath });
+            }
+        }
+        setDraggedPath(null);
+    };
+
     const renderTreeNodes = (nodes: TreeNode[]) => {
         return nodes.map((node) => {
             const isExpanded = expandedNodes.includes(node.absolutePath);
             const isSelected = selectedPaths.has(node.absolutePath);
             const isDirectory = !!(node.children && node.children.length > 0);
+            const isDropTarget = dropTarget === node.absolutePath;
 
             return (
-                <li key={node.absolutePath} className="treenode-li" ref={el => nodeRefs.current.set(node.absolutePath, el)}>
+                <li key={node.absolutePath} 
+                    ref={el => nodeRefs.current.set(node.absolutePath, el)}
+                    draggable="true"
+                    onDragStart={(e) => handleDragStart(e, node)}
+                    onDragOver={(e) => handleDragOver(e, node)}
+                    onDragLeave={handleDragLeave}
+                    onDrop={(e) => handleDrop(e, node)}
+                    className={`treenode-li ${isDropTarget ? 'drop-target' : ''}`}
+                >
                     <div
                         className={`treenode-item-wrapper ${isSelected ? 'selected' : ''}`}
                         onClick={(e) => handleNodeClick(e, node)}
