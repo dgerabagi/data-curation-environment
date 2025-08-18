@@ -42,6 +42,10 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         fsService.handleCopyPathRequest(data.path, data.relative);
     });
 
+    serverIpc.onClientMessage(ClientToServerChannel.RequestOpenFile, (data) => {
+        fsService.handleOpenFileRequest(data.path);
+    });
+
     serverIpc.onClientMessage(ClientToServerChannel.SaveCurrentSelection, (data) => {
         selectionService.saveCurrentSelection(data.paths);
     });

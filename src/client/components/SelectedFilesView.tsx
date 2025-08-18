@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { FileNode } from '@/common/types/file-node';
-import { VscChevronUp, VscChevronDown, VscSymbolFile, VscSymbolNumeric, VscTypeHierarchy } from 'react-icons/vsc';
+import { VscChevronUp, VscChevronDown, VscSymbolFile, VscSymbolNumeric, VscTypeHierarchy, VscClose } from 'react-icons/vsc';
 import { formatLargeNumber } from '@/common/utils/formatting';
 import { SiReact, SiSass, SiTypescript, SiJavascript } from 'react-icons/si';
 import { VscFile, VscJson, VscMarkdown } from 'react-icons/vsc';
 import { logger } from '../utils/logger';
+import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
+import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 
 type SortableColumn = 'name' | 'tokenCount' | 'extension';
 type SortDirection = 'asc' | 'desc';
@@ -32,7 +34,9 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
     const [sortColumn, setSortColumn] = useState<SortableColumn>('tokenCount');
     const [sortDirection, setSortDirection] = useState<SortDirection>('desc');
     const [selection, setSelection] = useState<Set<string>>(new Set());
+    const [hoveredPath, setHoveredPath] = useState<string | null>(null);
     const firstClickedPath = useRef<string | null>(null); // Anchor for shift-click
+    const clientIpc = ClientPostMessageManager.getInstance();
 
     // Reset selection when the list of files changes
     useEffect(() => {
@@ -98,6 +102,10 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
         setSelection(newSelection);
     };
 
+    const handleDoubleClick = (path: string) => {
+        clientIpc.sendToServer(ClientToServerChannel.RequestOpenFile, { path });
+    };
+
     const handleRemoveSelected = () => {
         logger.log(`"Remove selected" button clicked. Removing ${selection.size} items.`);
         onRemove(Array.from(selection));
@@ -137,8 +145,23 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
                         <li key={node.absolutePath} 
                             className={selection.has(node.absolutePath) ? 'selected' : ''}
                             onClick={(e) => handleItemClick(e, node.absolutePath)}
+                            onDoubleClick={() => handleDoubleClick(node.absolutePath)}
+                            onMouseEnter={() => setHoveredPath(node.absolutePath)}
+                            onMouseLeave={() => setHoveredPath(null)}
                         >
-                            <span className="file-index">{index + 1}</span>
+                            <span className="file-index">
+                                {hoveredPath === node.absolutePath ? (
+                                    <span 
+                                        className="quick-remove-icon" 
+                                        title="Remove from selection"
+                                        onClick={(e) => { e.stopPropagation(); onRemove([node.absolutePath]); }}
+                                    >
+                                        <VscClose />
+                                    </span>
+                                ) : (
+                                    index + 1
+                                )}
+                            </span>
                             <span className="file-icon">{getFileIcon(node.name)}</span>
                             <span className="file-name" title={node.absolutePath}>{node.name}</span>
                             <span className="file-tokens">{formatLargeNumber(node.tokenCount, 1)}</span>

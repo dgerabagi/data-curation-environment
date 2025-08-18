@@ -10,6 +10,7 @@ export enum ClientToServerChannel {
     RequestFileDelete = "clientToServer.requestFileDelete",
     RequestRevealInExplorer = "clientToServer.requestRevealInExplorer",
     RequestCopyPath = "clientToServer.requestCopyPath",
+    RequestOpenFile = "clientToServer.requestOpenFile", // New
 
     // Selection Persistence
     SaveCurrentSelection = "clientToServer.saveCurrentSelection",

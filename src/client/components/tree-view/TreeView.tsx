@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { VscChevronRight } from 'react-icons/vsc';
+import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
+import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 
 export interface TreeNode {
     name: string;
@@ -20,6 +22,7 @@ interface TreeViewProps {
 const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTrigger = 0, onContextMenu, activeFile }) => {
     const [expandedNodes, setExpandedNodes] = useState<string[]>([]);
     const nodeRefs = useRef<Map<string, HTMLLIElement | null>>(new Map());
+    const clientIpc = ClientPostMessageManager.getInstance();
 
     // Effect to expand the root node by default
     useEffect(() => {
@@ -43,23 +46,22 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
 
     // Effect to reveal and scroll to the active file
     useEffect(() => {
-        if (activeFile) {
+        if (activeFile && data.length > 0) {
             const getParentPaths = (filePath: string, rootPath: string): string[] => {
-                const normalizedFilePath = filePath.replace(/\\/g, '/');
-                const normalizedRootPath = rootPath.replace(/\\/g, '/');
-                if (!normalizedFilePath.startsWith(normalizedRootPath)) return [];
-
-                const relativePath = normalizedFilePath.substring(normalizedRootPath.lastIndexOf('/') + 1);
+                if (!filePath.startsWith(rootPath)) return [];
+    
+                const relativePath = filePath.substring(rootPath.length + 1);
                 const parts = relativePath.split('/');
-                const paths = [];
+                const paths: string[] = [];
                 let current = rootPath;
+                // Iterate up to the second to last part to get only parent directories
                 for (let i = 0; i < parts.length - 1; i++) {
                     current += '/' + parts[i];
-                    paths.push(current.replace(rootPath, data[0].absolutePath));
+                    paths.push(current);
                 }
                 return paths;
             };
-
+    
             const rootPath = data[0]?.absolutePath;
             if (rootPath) {
                 const parents = getParentPaths(activeFile, rootPath);
@@ -69,24 +71,33 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
                 setTimeout(() => {
                     const nodeElement = nodeRefs.current.get(activeFile);
                     nodeElement?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                }, 0);
+                }, 100); // A small delay can help ensure the DOM is updated
             }
         }
     }, [activeFile, data]);
 
 
-    const handleToggleNode = (e: React.MouseEvent, nodePath: string) => {
+    const handleToggleNode = (e: React.MouseEvent, node: TreeNode) => {
         if ((e.target as HTMLElement).closest('.file-checkbox') || (e.target as HTMLElement).closest('.rename-input')) {
             return;
         }
         e.stopPropagation();
-        setExpandedNodes((prevExpandedNodes) => {
-            const isExpanded = prevExpandedNodes.includes(nodePath);
-            return isExpanded
-                ? prevExpandedNodes.filter((n) => n !== nodePath)
-                : [...prevExpandedNodes, nodePath];
-        });
+        if (node.children) {
+            setExpandedNodes((prevExpandedNodes) => {
+                const isExpanded = prevExpandedNodes.includes(node.absolutePath);
+                return isExpanded
+                    ? prevExpandedNodes.filter((n) => n !== node.absolutePath)
+                    : [...prevExpandedNodes, node.absolutePath];
+            });
+        }
     };
+    
+    const handleDoubleClick = (node: TreeNode) => {
+        if (!node.children) { // It's a file
+            clientIpc.sendToServer(ClientToServerChannel.RequestOpenFile, { path: node.absolutePath });
+        }
+    };
+
 
     const renderTreeNodes = (nodes: TreeNode[]) => {
         return nodes.map((node) => {
@@ -97,7 +108,8 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
                 <li key={node.absolutePath} className="treenode-li" ref={el => nodeRefs.current.set(node.absolutePath, el)}>
                     <div
                         className={`treenode-item-wrapper`}
-                        onClick={(e) => isDirectory && handleToggleNode(e, node.absolutePath)}
+                        onClick={(e) => handleToggleNode(e, node)}
+                        onDoubleClick={() => handleDoubleClick(node)}
                         onContextMenu={(e) => onContextMenu?.(e, node)}
                     >
                         <span 

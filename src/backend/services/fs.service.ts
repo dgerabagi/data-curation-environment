@@ -10,6 +10,9 @@ import { VIEW_TYPES } from "@/common/view-types";
 
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 
+// Helper to normalize paths to use forward slashes, which is consistent in webviews
+const normalizePath = (p: string) => p.replace(/\\/g, '/');
+
 export class FSService {
     private fileTreeCache: FileNode[] | null = null;
     private watcher: vscode.FileSystemWatcher | null = null;
@@ -109,14 +112,14 @@ export class FSService {
         const rootStats = await this.getFileStats(rootPath);
         const rootNode: FileNode = {
             name: path.basename(rootPath),
-            absolutePath: rootPath,
+            absolutePath: normalizePath(rootPath),
             children: [],
             ...rootStats,
             fileCount: 0,
         };
 
         const allNodes = new Map<string, FileNode>();
-        allNodes.set(rootPath, rootNode);
+        allNodes.set(normalizePath(rootPath), rootNode);
 
         for (const file of files) {
             const relativePath = path.relative(rootPath, file.fsPath);
@@ -126,14 +129,15 @@ export class FSService {
 
             for (const part of parts) {
                 currentPath = path.join(currentPath, part);
-                let childNode = allNodes.get(currentPath);
+                const normalizedCurrentPath = normalizePath(currentPath);
+                let childNode = allNodes.get(normalizedCurrentPath);
 
                 if (!childNode) {
                     const stats = await this.getFileStats(currentPath);
                     const isDirectory = stats.sizeInBytes === 0 && !stats.isImage && (await fs.stat(currentPath)).isDirectory();
                     childNode = {
                         name: part,
-                        absolutePath: currentPath,
+                        absolutePath: normalizedCurrentPath,
                         ...stats,
                         fileCount: isDirectory ? 0 : 1
                     };
@@ -143,7 +147,7 @@ export class FSService {
 
                     if (parentNode.children) {
                         parentNode.children.push(childNode);
-                        allNodes.set(currentPath, childNode);
+                        allNodes.set(normalizedCurrentPath, childNode);
                     }
                 }
                 parentNode = childNode;
@@ -187,6 +191,17 @@ export class FSService {
     }
 
     // --- File Operations ---
+
+    public async handleOpenFileRequest(filePath: string) {
+        try {
+            const uri = vscode.Uri.file(filePath);
+            const doc = await vscode.workspace.openTextDocument(uri);
+            await vscode.window.showTextDocument(doc);
+        } catch (error: any) {
+            vscode.window.showErrorMessage(`Failed to open file: ${error.message}`);
+            Services.loggerService.error(`Failed to open file ${filePath}: ${error.message}`);
+        }
+    }
 
     public async handleNewFileRequest(parentDirectory: string) {
         const newFileName = await vscode.window.showInputBox({
