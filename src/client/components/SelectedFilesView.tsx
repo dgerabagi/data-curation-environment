@@ -72,6 +72,7 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
     const [selection, setSelection] = useState<Set<string>>(new Set());
     const [hoveredPath, setHoveredPath] = useState<string | null>(null);
     const firstClickedPath = useRef<string | null>(null); // Anchor for shift-click
+    const listRef = useRef<HTMLUListElement>(null);
     const clientIpc = ClientPostMessageManager.getInstance();
 
     // Reset selection when the list of files changes
@@ -110,7 +111,7 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
 
     const handleItemClick = (e: React.MouseEvent, path: string) => {
         if ((e.target as HTMLElement).closest('.quick-remove-icon')) {
-            return; // Don't process selection if the remove icon was clicked
+            return;
         }
         
         const newSelection = new Set(selection);
@@ -134,15 +135,26 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
             }
             firstClickedPath.current = path; // Update anchor on ctrl-click
         } else {
-            // This is now a single click to open, not select
             clientIpc.sendToServer(ClientToServerChannel.RequestOpenFile, { path });
-            // We still set the selection anchor for subsequent shift-clicks
             newSelection.clear();
             newSelection.add(path);
             firstClickedPath.current = path;
         }
         
         setSelection(newSelection);
+    };
+    
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLUListElement>) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
+            e.preventDefault();
+            logger.log('Ctrl+A detected in SelectedFilesView.');
+            const allPaths = new Set(sortedFiles.map(f => f.absolutePath));
+            setSelection(allPaths);
+        }
+    };
+
+    const handleContainerClick = () => {
+        listRef.current?.focus();
     };
 
     const handleRemoveSelected = () => {
@@ -157,7 +169,7 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
     };
 
     return (
-        <div className="selected-files-panel">
+        <div className="selected-files-panel" onClick={handleContainerClick}>
             <div className="panel-header">
                 <span>Selected Items ({selectedFileNodes.length})</span>
                 <button onClick={onToggleMinimize} className="toolbar-button" title={isMinimized ? "Expand" : "Minimize"}>
@@ -184,7 +196,7 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
                                 <VscSymbolNumeric /> Tokens <SortIndicator column="tokenCount" />
                             </div>
                         </div>
-                        <ul className="selected-files-list">
+                        <ul className="selected-files-list" ref={listRef} tabIndex={0} onKeyDown={handleKeyDown}>
                             {sortedFiles.map((node, index) => (
                                 <li key={node.absolutePath} 
                                     className={selection.has(node.absolutePath) ? 'selected' : ''}

@@ -31,6 +31,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     const [dropTarget, setDropTarget] = useState<string | null>(null);
 
     const nodeRefs = useRef<Map<string, HTMLLIElement | null>>(new Map());
+    const treeViewRef = useRef<HTMLDivElement>(null);
     const flatNodeList = useRef<TreeNode[]>([]);
     const clientIpc = ClientPostMessageManager.getInstance();
 
@@ -114,6 +115,9 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         }
         e.stopPropagation();
 
+        // Ensure the tree view has focus to capture keyboard events
+        treeViewRef.current?.focus();
+
         const path = node.absolutePath;
         setFocusedNodePath(path);
         
@@ -172,6 +176,8 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         };
         
         e.preventDefault();
+        e.stopPropagation();
+
         switch (e.key) {
             case 'ArrowUp':
                 moveFocus(currentIndex - 1);
@@ -286,7 +292,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     };
 
     return (
-        <div className="tree-view" tabIndex={0} onKeyDown={handleKeyDown}>
+        <div className="tree-view" tabIndex={0} onKeyDown={handleKeyDown} ref={treeViewRef}>
             <ul>{renderTreeNodes(data)}</ul>
         </div>
     );

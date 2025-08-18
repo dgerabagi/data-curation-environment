@@ -1,22 +1,22 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-18T21:17:03.715Z
+  Date Generated: 2025-08-18T21:33:49.479Z
   ---
   Total Files: 166
-  Total Lines: 13084
-  Total Characters: 547336
-  Approx. Tokens: 136895
+  Total Lines: 13108
+  Total Characters: 548590
+  Approx. Tokens: 137209
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
 2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
 3. src\backend\services\fs.service.ts (4770 tokens)
-4. src\client\views\context-chooser.view\view.scss (3318 tokens)
-5. src\client\components\tree-view\TreeView.tsx (3183 tokens)
+4. src\client\views\context-chooser.view\view.scss (3347 tokens)
+5. src\client\components\tree-view\TreeView.tsx (3237 tokens)
 6. src\client\views\context-chooser.view\view.tsx (3099 tokens)
-7. src\client\components\SelectedFilesView.tsx (2716 tokens)
+7. src\client\components\SelectedFilesView.tsx (2815 tokens)
 8. src\client\components\file-tree\FileTree.tsx (2627 tokens)
 9. The-Creator-AI-main\src\backend\services\code.service.ts (2618 tokens)
 10. The-Creator-AI-main\src\backend\services\fs.service.ts (2495 tokens)
@@ -42,9 +42,9 @@
 18. src\Artifacts\A19. DCE - Phase 1 - Double-Click & Quick-Remove Feature Plan.md - Lines: 42 - Chars: 4603 - Tokens: 1151
 19. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 31 - Chars: 4278 - Tokens: 1070
 20. src\Artifacts\A20. DCE - Phase 1 - Advanced UX & Automation Plan.md - Lines: 44 - Chars: 6117 - Tokens: 1530
-21. src\Artifacts\A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer.md - Lines: 47 - Chars: 7139 - Tokens: 1785
+21. src\Artifacts\A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer.md - Lines: 48 - Chars: 7403 - Tokens: 1851
 22. src\Artifacts\A22. DCE - Phase 1 - Search & Filter Feature Plan.md - Lines: 58 - Chars: 3663 - Tokens: 916
-23. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 52 - Chars: 5034 - Tokens: 1259
+23. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 52 - Chars: 5299 - Tokens: 1325
 24. src\Artifacts\A24. DCE - Selection Paradigm Terminology.md - Lines: 57 - Chars: 3330 - Tokens: 833
 25. src\Artifacts\A25. DCE - Phase 1 - Git & Problems Integration Plan.md - Lines: 61 - Chars: 5871 - Tokens: 1468
 26. src\Artifacts\A26. DCE - Phase 1 - File System Traversal & Caching Strategy.md - Lines: 46 - Chars: 4009 - Tokens: 1003
@@ -68,13 +68,13 @@
 44. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
 45. src\client\components\file-tree\FileTree.tsx - Lines: 238 - Chars: 10508 - Tokens: 2627
 46. src\client\components\file-tree\FileTree.utils.ts - Lines: 106 - Chars: 3947 - Tokens: 987
-47. src\client\components\SelectedFilesView.tsx - Lines: 223 - Chars: 10861 - Tokens: 2716
-48. src\client\components\tree-view\TreeView.tsx - Lines: 295 - Chars: 12732 - Tokens: 3183
+47. src\client\components\SelectedFilesView.tsx - Lines: 235 - Chars: 11257 - Tokens: 2815
+48. src\client\components\tree-view\TreeView.tsx - Lines: 301 - Chars: 12948 - Tokens: 3237
 49. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 50. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
 51. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 52. src\client\views\context-chooser.view\on-message.ts - Lines: 94 - Chars: 4015 - Tokens: 1004
-53. src\client\views\context-chooser.view\view.scss - Lines: 536 - Chars: 13272 - Tokens: 3318
+53. src\client\views\context-chooser.view\view.scss - Lines: 541 - Chars: 13385 - Tokens: 3347
 54. src\client\views\context-chooser.view\view.tsx - Lines: 259 - Chars: 12396 - Tokens: 3099
 55. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
 56. src\common\ipc\channels.enum.ts - Lines: 34 - Chars: 1718 - Tokens: 430
@@ -1423,7 +1423,7 @@ This document outlines a series of advanced user experience (UX) and automation 
 # Artifact A21: DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer
 # Date Created: C28
 # Author: AI Model
-# Updated on: C35 (Add Undo/Redo for file operations)
+# Updated on: C36 (Update Keyboard Navigation status, add Ctrl+A)
 
 - **Key/Value for A0:**
 - **Description:** A comparative analysis documenting the functional and behavioral differences between the DCE custom file view and the native VS Code Explorer to guide future development and feature parity.
@@ -1435,7 +1435,7 @@ The primary goal of the Data Curation Environment (DCE) is to enhance, not repla
 
 ## 2. Feature Comparison Matrix
 
-| Feature Category            | Native VS Code Explorer         | DCE (as of C35)        | Status & Notes                                                                                                                                              |
+| Feature Category            | Native VS Code Explorer         | DCE (as of C36)        | Status & Notes                                                                                                                                              |
 | --------------------------- | ------------------------------- | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **File Display**            |                                 |                        |                                                                                                                                                             |
 | Hierarchical Tree           | ✅                              | ✅                     | **Complete.** Core functionality is present.                                                                                                                |
@@ -1447,10 +1447,11 @@ The primary goal of the Data Curation Environment (DCE) is to enhance, not repla
 | Single-Click (Folders)      | ✅ Expands/Collapses            | ✅ Expands/Collapses   | **Complete.** |
 | Multi-Select (Ctrl)         | ✅                              | ✅                     | **Complete.**                                                                                                                                               |
 | Multi-Select (Shift)        | ✅ (Selects rows)               | ✅ (Selects rows)      | **Complete.**                                                                                                                                               |
+| Select All (Ctrl+A)         | ✅ (In focused list)            | ⏳ In Progress         | **In Progress (C36).** `Ctrl+A` to select all items in the "Selected Items" list is being implemented.                                                       |
 | **Interaction**             |                                 |                        |                                                                                                                                                             |
 | Drag and Drop               | ✅ (Move files/folders)         | ✅                     | **Complete.**                                                                                                                                               |
 | Right-Click Context Menu    | ✅ (Extensive options)          | ✅ (Basic options)     | **Partial.** DCE has basic operations (Rename, Delete, etc.). Missing advanced options like `Open in Integrated Terminal`, `Find in Folder...`, `Compare...`. |
-| Keyboard Navigation         | ✅ (Arrows, Enter, Space)       | ⏳ In Progress         | **In Progress (C35).** Users cannot yet navigate the tree or select/open items using the keyboard. Planned in A23.                                          |
+| Keyboard Navigation         | ✅ (Arrows, Enter, Space)       | ⏳ In Progress         | **In Progress (C36).** Basic implementation exists but suffers from focus-stealing bugs where events leak to the editor. Actively being fixed. Planned in A23. |
 | Inline Rename               | ✅ (F2 or slow double-click)    | ✅                     | **Complete.** |
 | **File Operations**         |                                 |                        |                                                                                                                                                             |
 | New File / Folder           | ✅                              | ✅                     | **Complete.** |
@@ -1534,7 +1535,7 @@ To improve navigation and usability in large projects, this feature introduces a
 # Artifact A23: DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan
 # Date Created: C29
 # Author: AI Model
-# Updated on: C35 (Mark Keyboard Navigation as In Progress)
+# Updated on: C36 (Add Ctrl+A requirement and focus management notes)
 
 - **Key/Value for A0:**
 - **Description:** Details the requirements for implementing full keyboard navigation and drag-and-drop file/folder operations within the main file tree view.
@@ -1549,40 +1550,40 @@ To achieve true feature parity with the native VS Code Explorer and cater to pow
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
 | AI-01 | **Keyboard Navigation** | As a power user, I want to navigate the file tree using only my keyboard, so I can find, select, and manage files without taking my hands off the keyboard. | - Arrow Up/Down keys move the focus between visible nodes. <br> - Arrow Right on a collapsed folder expands it. <br> - Arrow Right on an open folder or file moves focus to the first child. <br> - Arrow Left on an open folder collapses it. <br> - Arrow Left on a child node moves focus to its parent. <br> - `Enter` key opens the focused file or toggles expansion for a focused folder. <br> - `Spacebar` toggles the checkbox of the focused node. |
-| AI-02 | **Drag-and-Drop File Operations** | As a user, I want to be able to drag a file or folder and drop it into another folder to move it, so I can reorganize my project intuitively. | - Clicking and dragging a file or folder in the tree initiates a drag operation. <br> - Dragging over a folder highlights it as a potential drop target. <br> - Dropping a file/folder onto another folder moves the dragged item into the target folder. <br> - A confirmation dialog may be shown for destructive moves. <br> - The backend file system is updated, and the tree view refreshes to reflect the new structure. |
+| AI-02 | **Drag-and-Drop File Operations** | As a user, I want to be able to drag a file or folder and drop it into another folder to move it, so I can reorganize my project intuitively. | - Clicking and dragging a file or folder in the tree initiates a drag operation. <br> - Dragging over a folder highlights it as a potential drop target. <br> - Dropping a file/folder onto another folder moves the dragged item into the target folder. <br> - The backend file system is updated, and the tree view refreshes to reflect the new structure. |
+| AI-03 | **Select All in Selected List** | As a user, after curating a list, I want to click in the "Selected Items" panel and press `Ctrl+A` to select all files in that list, so I can quickly perform a batch action like "Remove selected". | - Clicking within the "Selected Items" panel gives it focus. <br> - Pressing `Ctrl+A` (or `Cmd+A`) selects all items currently rendered in the list. <br> - This action does not affect the main editor. <br> - The "Remove selected" button's count updates to reflect the total number of items in the list. |
 
 ## 3. Technical Implementation Plan
 
-### Keyboard Navigation (In Progress - C35)
+### Keyboard Navigation (In Progress - C36)
 
 1.  **Focus Management (Frontend):**
-    *   A new state variable, `focusedNodePath: string | null`, will be added to `view.tsx` to track the currently focused node.
-    *   The `TreeView.tsx` component's main wrapper `div` will get a `tabIndex={0}` attribute to make it programmatically focusable.
-    *   An `onKeyDown` event handler will be attached to this wrapper.
+    *   **Root Cause:** The webview panel loses keyboard focus to the main editor pane. The solution is to programmatically re-focus the correct container after user interactions.
+    *   A state variable, `focusedNodePath: string | null`, tracks the currently focused node in the main tree.
+    *   The `TreeView.tsx` component's main wrapper `div` has a `tabIndex={0}` attribute to make it programmatically focusable. A `ref` is attached to this `div`.
+    *   **Crucial Fix:** In all mouse-based interaction handlers (`handleNodeClick`, etc.), a call to `treeViewRef.current.focus()` must be made to ensure keyboard events are captured by the `onKeyDown` handler.
 2.  **Event Handling (`TreeView.tsx`):**
-    *   The `onKeyDown` handler will contain a `switch` statement for `event.key`. It will call `event.preventDefault()` for handled keys to stop them from propagating to the editor.
-    *   A memoized, flattened list of all *visible* nodes will be created and maintained. This is crucial for calculating the next/previous node for Up/Down arrow navigation.
-    *   The handler will update `focusedNodePath`, `expandedNodes` (for Left/Right arrows), or trigger the checkbox toggle function (for Spacebar).
-    *   The component will apply a `.focused` CSS class to the node wrapper whose path matches `focusedNodePath`.
-3.  **Styling (`view.scss`):**
-    *   A new `.treenode-item-wrapper.focused` class will be added to provide a visual outline, using `var(--vscode-focusBorder)`.
+    *   The `onKeyDown` handler contains a `switch` statement for `event.key`. It calls `event.preventDefault()` for handled keys to stop them from propagating to the editor.
+    *   A memoized, flattened list of all *visible* nodes is used to calculate the next/previous node for Up/Down arrow navigation.
+    *   The handler updates `focusedNodePath`, `expandedNodes` (for Left/Right arrows), or triggers the checkbox toggle function (for Spacebar).
+    *   The component applies a `.focused` CSS class to the node wrapper whose path matches `focusedNodePath`.
 
 ### Drag and Drop (Completed - C34)
 
-The native `vscode.TreeDragAndDropController` is designed for extensions using a `TreeDataProvider`. Since our UI is a custom React webview, a different approach was required and has been implemented.
+The native `vscode.TreeDragAndDropController` is designed for extensions using a `TreeDataProvider`. Since our UI is a custom React webview, a different approach using the HTML5 Drag and Drop API was successfully implemented.
 
-1.  **HTML5 Drag and Drop API (Frontend - `TreeView.tsx`):**
-    *   Tree items (`<li>`) are made draggable by setting the `draggable="true"` attribute.
-    *   Event handlers (`onDragStart`, `onDragOver`, `onDragLeave`, `onDrop`) are implemented.
-    *   `onDragStart`: Stores the `absolutePath` of the dragged node in a state variable.
-    *   `onDragOver`: Prevents the default behavior to allow dropping and adds a CSS class (`.drop-target`) to valid folder nodes to provide visual feedback.
-    *   `onDrop`: Captures the dragged path and the drop target path, then sends a new `RequestMoveFile` IPC message to the backend.
-2.  **IPC Channel:**
-    *   A `ClientToServerChannel.RequestMoveFile` channel was created, carrying a payload of `{ oldPath: string, newPath: string }`.
-3.  **Backend Logic (`fs.service.ts`):**
-    *   A new handler for `RequestMoveFile` was created. It uses `vscode.workspace.fs.rename()` to perform the actual file system move.
-4.  **State Preservation (`selection.service.ts`):**
-    *   After a successful move, the backend calls a new method in the `SelectionService` to update all persisted selections (both the last active selection and any named sets), replacing the `oldPath` with the `newPath`. This ensures that a file's "checked" state is preserved across moves.
+### Select All (`Ctrl+A`) in Selected Items (In Progress - C36)
+
+1.  **Focus Management (`SelectedFilesView.tsx`):**
+    *   The `ul.selected-files-list` element will be made focusable by adding `tabIndex={0}` and attaching a `ref` to it.
+    *   An `onClick` handler on the component's container will call `listRef.current.focus()` to ensure the list captures focus.
+2.  **Event Handling (`SelectedFilesView.tsx`):**
+    *   An `onKeyDown` handler will be added to the `ul` element.
+    *   It will check for `event.ctrlKey && event.key === 'a'` (and the Mac equivalent).
+    *   On match, it will call `event.preventDefault()`.
+    *   It will then create a new `Set` containing the `absolutePath` of all items in the `sortedFiles` array and call the `setSelection` state updater.
+3.  **Styling (`view.scss`):**
+    *   A `.selected-files-list:focus` style will be added to provide a visual outline, using `var(--vscode-focusBorder)`.
 </file>
 
 <file path="src/Artifacts/A24. DCE - Selection Paradigm Terminology.md">
@@ -4972,6 +4973,7 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
     const [selection, setSelection] = useState<Set<string>>(new Set());
     const [hoveredPath, setHoveredPath] = useState<string | null>(null);
     const firstClickedPath = useRef<string | null>(null); // Anchor for shift-click
+    const listRef = useRef<HTMLUListElement>(null);
     const clientIpc = ClientPostMessageManager.getInstance();
 
     // Reset selection when the list of files changes
@@ -5010,7 +5012,7 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
 
     const handleItemClick = (e: React.MouseEvent, path: string) => {
         if ((e.target as HTMLElement).closest('.quick-remove-icon')) {
-            return; // Don't process selection if the remove icon was clicked
+            return;
         }
         
         const newSelection = new Set(selection);
@@ -5034,15 +5036,26 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
             }
             firstClickedPath.current = path; // Update anchor on ctrl-click
         } else {
-            // This is now a single click to open, not select
             clientIpc.sendToServer(ClientToServerChannel.RequestOpenFile, { path });
-            // We still set the selection anchor for subsequent shift-clicks
             newSelection.clear();
             newSelection.add(path);
             firstClickedPath.current = path;
         }
         
         setSelection(newSelection);
+    };
+    
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLUListElement>) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
+            e.preventDefault();
+            logger.log('Ctrl+A detected in SelectedFilesView.');
+            const allPaths = new Set(sortedFiles.map(f => f.absolutePath));
+            setSelection(allPaths);
+        }
+    };
+
+    const handleContainerClick = () => {
+        listRef.current?.focus();
     };
 
     const handleRemoveSelected = () => {
@@ -5057,7 +5070,7 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
     };
 
     return (
-        <div className="selected-files-panel">
+        <div className="selected-files-panel" onClick={handleContainerClick}>
             <div className="panel-header">
                 <span>Selected Items ({selectedFileNodes.length})</span>
                 <button onClick={onToggleMinimize} className="toolbar-button" title={isMinimized ? "Expand" : "Minimize"}>
@@ -5084,7 +5097,7 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
                                 <VscSymbolNumeric /> Tokens <SortIndicator column="tokenCount" />
                             </div>
                         </div>
-                        <ul className="selected-files-list">
+                        <ul className="selected-files-list" ref={listRef} tabIndex={0} onKeyDown={handleKeyDown}>
                             {sortedFiles.map((node, index) => (
                                 <li key={node.absolutePath} 
                                     className={selection.has(node.absolutePath) ? 'selected' : ''}
@@ -5157,6 +5170,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     const [dropTarget, setDropTarget] = useState<string | null>(null);
 
     const nodeRefs = useRef<Map<string, HTMLLIElement | null>>(new Map());
+    const treeViewRef = useRef<HTMLDivElement>(null);
     const flatNodeList = useRef<TreeNode[]>([]);
     const clientIpc = ClientPostMessageManager.getInstance();
 
@@ -5240,6 +5254,9 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         }
         e.stopPropagation();
 
+        // Ensure the tree view has focus to capture keyboard events
+        treeViewRef.current?.focus();
+
         const path = node.absolutePath;
         setFocusedNodePath(path);
         
@@ -5298,6 +5315,8 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         };
         
         e.preventDefault();
+        e.stopPropagation();
+
         switch (e.key) {
             case 'ArrowUp':
                 moveFocus(currentIndex - 1);
@@ -5412,7 +5431,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     };
 
     return (
-        <div className="tree-view" tabIndex={0} onKeyDown={handleKeyDown}>
+        <div className="tree-view" tabIndex={0} onKeyDown={handleKeyDown} ref={treeViewRef}>
             <ul>{renderTreeNodes(data)}</ul>
         </div>
     );
@@ -5567,7 +5586,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 </file>
 
 <file path="src/client/views/context-chooser.view/view.scss">
-/* Updated on: C35 (Add focused styles for keyboard navigation) */
+/* Updated on: C36 (Add focused styles for SelectedFilesView list) */
 body {
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -5770,6 +5789,11 @@ body {
     list-style: none;
     padding: 0;
     margin: 0;
+
+    &:focus {
+        outline: 1px solid var(--vscode-focusBorder);
+        outline-offset: -1px;
+    }
 
     li {
         display: flex;
