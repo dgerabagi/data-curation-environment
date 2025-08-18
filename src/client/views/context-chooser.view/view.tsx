@@ -7,7 +7,7 @@ import { FileNode } from '@/common/types/file-node';
 import FileTree from '../../components/file-tree/FileTree';
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { formatLargeNumber, formatNumberWithCommas } from '@/common/utils/formatting';
-import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, VscNewFolder, VscLoading, VscSave, VscFolderLibrary, VscSettingsGear } from 'react-icons/vsc';
+import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, VscNewFolder, VscLoading, VscSave, VscFolderLibrary, VscSettingsGear, VscCheckAll } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import SelectedFilesView from '@/client/components/SelectedFilesView';
 import { removePathsFromSelected } from '@/client/components/file-tree/FileTree.utils';
@@ -21,6 +21,7 @@ const App = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [selectionSets, setSelectionSets] = useState<SelectionSet>({});
     const [isSelectionListMinimized, setIsSelectionListMinimized] = useState(false);
+    const [isAutoAddEnabled, setIsAutoAddEnabled] = useState(false);
     
     const clientIpc = ClientPostMessageManager.getInstance();
 
@@ -64,16 +65,16 @@ const App = () => {
             setActiveFile(path);
         });
 
+        clientIpc.onServerMessage(ServerToClientChannel.SendAutoAddState, ({ enabled }) => {
+            logger.log(`Received auto-add state: ${enabled}`);
+            setIsAutoAddEnabled(enabled);
+        });
+
         // Request initial state from backend
         clientIpc.sendToServer(ClientToServerChannel.RequestWorkspaceFiles, {});
         clientIpc.sendToServer(ClientToServerChannel.RequestLastSelection, {});
 
     }, [updateSelectedFiles]);
-
-
-    const handleFileClick = (filePath: string) => {
-        setActiveFile(filePath);
-    };
 
     const handleFlattenClick = () => {
         logger.log(`Flatten Context button clicked with ${selectedFiles.length} paths.`);
@@ -92,8 +93,6 @@ const App = () => {
 
     const getParentDirForNewItem = (): string => {
         if (activeFile) {
-            // Check if active file is a directory or a file
-            // This requires a lookup in the file tree
             const nodeMap = new Map<string, FileNode>();
             const buildMap = (node: FileNode) => {
                 nodeMap.set(node.absolutePath, node);
@@ -105,7 +104,6 @@ const App = () => {
                 return activeNode.children ? activeNode.absolutePath : activeFile.substring(0, activeFile.lastIndexOf('/'));
             }
         }
-        // Default to workspace root
         return files.length > 0 ? files[0].absolutePath : '';
     };
 
@@ -119,6 +117,12 @@ const App = () => {
         const parentDirectory = getParentDirForNewItem();
         logger.log(`Requesting new folder in ${parentDirectory}`);
         clientIpc.sendToServer(ClientToServerChannel.RequestNewFolder, { parentDirectory });
+    };
+
+    const handleToggleAutoAdd = () => {
+        const newState = !isAutoAddEnabled;
+        setIsAutoAddEnabled(newState);
+        clientIpc.sendToServer(ClientToServerChannel.SaveAutoAddState, { enabled: newState });
     };
 
     const handleRemoveFromSelection = (pathsToRemove: string[]) => {
@@ -176,6 +180,7 @@ const App = () => {
                  </div>
                  <div className="toolbar">
                     {isLoading && <span className="spinner" title="Refreshing..."><VscLoading /></span>}
+                    <button onClick={handleToggleAutoAdd} title="Automatically add new files to selection" className={isAutoAddEnabled ? 'active' : ''}><VscCheckAll /></button>
                     <button onClick={handleNewFile} title="New File..."><VscNewFile /></button>
                     <button onClick={handleNewFolder} title="New Folder..."><VscNewFolder /></button>
                     <button onClick={handleRefresh} title="Refresh Explorer"><VscRefresh /></button>
@@ -190,7 +195,6 @@ const App = () => {
                         <FileTree
                             key={index}
                             data={[rootNode]}
-                            onFileClick={handleFileClick}
                             selectedFiles={selectedFiles}
                             updateSelectedFiles={updateSelectedFiles}
                             activeFile={activeFile}

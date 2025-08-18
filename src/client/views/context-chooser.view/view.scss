@@ -1,4 +1,4 @@
-/* Updated on: C27 (Alignment fixes for Selected Items panel) */
+/* Updated on: C28 (Minor layout tweaks and conditional coloring) */
 body {
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -20,7 +20,7 @@ body {
     justify-content: space-between;
     align-items: center;
     flex-shrink: 0;
-    height: 35px; /* Standard VS Code header height */
+    min-height: 35px; /* Use min-height to be flexible */
     gap: 16px; /* Add gap for spacing between button groups */
 }
 
@@ -49,6 +49,11 @@ body {
 
         &:hover {
             background-color: var(--vscode-toolbar-hoverBackground);
+        }
+
+        &.active {
+             background-color: var(--vscode-toolbar-hoverBackground);
+             color: var(--vscode-focusBorder);
         }
     }
 
@@ -84,6 +89,22 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    .toolbar-button {
+        background: none;
+        border: none;
+        color: var(--vscode-icon-foreground);
+        cursor: pointer;
+        padding: 2px;
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+            background-color: var(--vscode-toolbar-hoverBackground);
+        }
+    }
 }
 
 .panel-toolbar {
@@ -171,10 +192,12 @@ body {
         gap: 8px;
         cursor: pointer;
         user-select: none;
+        border-radius: 2px;
+        margin: 1px 2px;
 
         &.selected {
-            background-color: var(--vscode-list-activeSelectionBackground);
-            color: var(--vscode-list-activeSelectionForeground);
+            background-color: var(--vscode-list-activeSelectionBackground) !important; /* Use important to override token color */
+            color: var(--vscode-list-activeSelectionForeground) !important;
         }
 
         &:hover {
@@ -382,6 +405,10 @@ body {
     display: flex;
     align-items: center;
     gap: 3px;
+}
+
+.selected-token-count {
+    font-style: italic;
 }
 
 /* Context Menu Styles */

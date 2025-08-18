@@ -15,6 +15,7 @@ export enum ClientToServerChannel {
     // Selection Persistence
     SaveCurrentSelection = "clientToServer.saveCurrentSelection",
     RequestLastSelection = "clientToServer.requestLastSelection",
+    SaveAutoAddState = "clientToServer.saveAutoAddState",
 
     // VS Code Command Proxy
     VSCodeCommand = "clientToServer.vscodeCommand",
@@ -27,4 +28,5 @@ export enum ServerToClientChannel {
     ForceRefresh = "serverToClient.forceRefresh", // Backend tells frontend to refresh
     SetActiveFile = "serverToClient.setActiveFile", // For active file sync
     FocusFile = "serverToClient.focusFile", // For auto-revealing a specific file
+    SendAutoAddState = "serverToClient.sendAutoAddState",
 }

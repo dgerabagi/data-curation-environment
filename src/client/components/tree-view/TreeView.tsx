@@ -88,27 +88,23 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     }, [activeFile, data]);
 
 
-    const handleToggleNode = (e: React.MouseEvent, node: TreeNode) => {
+    const handleNodeClick = (e: React.MouseEvent, node: TreeNode) => {
         if ((e.target as HTMLElement).closest('.file-checkbox') || (e.target as HTMLElement).closest('.rename-input')) {
             return;
         }
         e.stopPropagation();
-        if (node.children) {
+
+        if (node.children) { // It's a directory
             setExpandedNodes((prevExpandedNodes) => {
                 const isExpanded = prevExpandedNodes.includes(node.absolutePath);
                 return isExpanded
                     ? prevExpandedNodes.filter((n) => n !== node.absolutePath)
                     : [...prevExpandedNodes, node.absolutePath];
             });
-        }
-    };
-    
-    const handleDoubleClick = (node: TreeNode) => {
-        if (!node.children) { // It's a file
+        } else { // It's a file, open it
             clientIpc.sendToServer(ClientToServerChannel.RequestOpenFile, { path: node.absolutePath });
         }
     };
-
 
     const renderTreeNodes = (nodes: TreeNode[]) => {
         return nodes.map((node) => {
@@ -119,8 +115,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
                 <li key={node.absolutePath} className="treenode-li" ref={el => nodeRefs.current.set(node.absolutePath, el)}>
                     <div
                         className={`treenode-item-wrapper`}
-                        onClick={(e) => handleToggleNode(e, node)}
-                        onDoubleClick={() => handleDoubleClick(node)}
+                        onClick={(e) => handleNodeClick(e, node)}
                         onContextMenu={(e) => onContextMenu?.(e, node)}
                     >
                         <span 

@@ -4,6 +4,8 @@ import { Services } from './services';
 
 const SELECTION_SETS_KEY = 'dce.selectionSets';
 const LAST_SELECTION_KEY = 'dce.lastSelection';
+const AUTO_ADD_STATE_KEY = 'dce.autoAddState';
+
 
 export interface SelectionSet {
     [name: string]: string[];
@@ -52,5 +54,16 @@ export class SelectionService {
     public async saveCurrentSelection(paths: string[]): Promise<void> {
         await this.context.workspaceState.update(LAST_SELECTION_KEY, paths);
         Services.loggerService.log(`Persisted current selection of ${paths.length} items.`);
+    }
+
+    // --- Auto-Add New Files State ---
+
+    public getAutoAddState(): boolean {
+        return this.context.workspaceState.get<boolean>(AUTO_ADD_STATE_KEY, false);
+    }
+
+    public async saveAutoAddState(enabled: boolean): Promise<void> {
+        await this.context.workspaceState.update(AUTO_ADD_STATE_KEY, enabled);
+        Services.loggerService.log(`Auto-add new files state saved: ${enabled}.`);
     }
 }

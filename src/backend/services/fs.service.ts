@@ -47,8 +47,19 @@ export class FSService {
             }, 500);
         };
 
+        const createHandler = async (uri: vscode.Uri) => {
+            const autoAddEnabled = Services.selectionService.getAutoAddState();
+            if (autoAddEnabled) {
+                Services.loggerService.log(`Auto-add enabled. Adding new file to selection: ${uri.fsPath}`);
+                const currentSelection = Services.selectionService.getLastSelection();
+                const newSelection = [...new Set([...currentSelection, normalizePath(uri.fsPath)])];
+                await Services.selectionService.saveCurrentSelection(newSelection);
+            }
+            changeHandler(uri); // Trigger the standard refresh
+        };
+
         this.watcher.onDidChange(changeHandler);
-        this.watcher.onDidCreate(changeHandler);
+        this.watcher.onDidCreate(createHandler);
         this.watcher.onDidDelete(changeHandler);
     }
 

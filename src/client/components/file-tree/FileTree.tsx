@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useMemo } from 'react';
 import TreeView from '../tree-view/TreeView';
 import { FileNode } from '@/common/types/file-node';
 import { addRemovePathInSelectedFiles } from './FileTree.utils';
@@ -14,7 +14,6 @@ import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 
 interface FileTreeProps {
   data: FileNode[];
-  onFileClick?: (filePath: string) => void;
   selectedFiles: string[];
   activeFile?: string;
   updateSelectedFiles: (selectedFiles: string[]) => void;
@@ -35,17 +34,11 @@ const getFileIcon = (fileName: string) => {
     }
 };
 
-const FileTree: React.FC<FileTreeProps> = ({ data, onFileClick, selectedFiles, activeFile, updateSelectedFiles, collapseTrigger }) => {
+const FileTree: React.FC<FileTreeProps> = ({ data, selectedFiles, activeFile, updateSelectedFiles, collapseTrigger }) => {
     const [contextMenu, setContextMenu] = useState<{ x: number, y: number, node: FileNode } | null>(null);
     const [renamingPath, setRenamingPath] = useState<string | null>(null);
     const [renameValue, setRenameValue] = useState('');
     const clientIpc = ClientPostMessageManager.getInstance();
-
-    const handleNodeClick = (node: FileNode) => {
-        if (!node.children) {
-            onFileClick?.(node.absolutePath);
-        }
-    };
 
     const handleFileCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>, filePath: string) => {
         e.stopPropagation();
@@ -72,12 +65,25 @@ const FileTree: React.FC<FileTreeProps> = ({ data, onFileClick, selectedFiles, a
         }
         setRenamingPath(null);
     };
+    
+    const calculateSelectedTokens = useMemo(() => (node: FileNode): number => {
+        if (!node.children) {
+            return selectedFiles.includes(node.absolutePath) ? node.tokenCount : 0;
+        }
+    
+        // If the folder itself is selected, all its tokens are selected
+        if (selectedFiles.includes(node.absolutePath)) {
+            return node.tokenCount;
+        }
+    
+        // Otherwise, sum up selected tokens from children
+        return node.children.reduce((acc, child) => acc + calculateSelectedTokens(child), 0);
+    }, [selectedFiles]);
 
     const renderFileNodeContent = (node: FileNode, isExpanded: boolean) => {
         const isActive = activeFile === node.absolutePath;
         const isDirectory = Array.isArray(node.children);
         
-        // TS ERROR FIX: Replaced path.sep with '/'
         const hasSelectedAncestor = selectedFiles.some(ancestor => node.absolutePath.startsWith(ancestor + '/') && node.absolutePath !== ancestor);
         const isDirectlySelected = selectedFiles.includes(node.absolutePath);
         const isChecked = isDirectlySelected || hasSelectedAncestor;
@@ -96,8 +102,10 @@ const FileTree: React.FC<FileTreeProps> = ({ data, onFileClick, selectedFiles, a
             );
         }
 
+        const selectedTokensInDir = isDirectory ? calculateSelectedTokens(node) : 0;
+
         return (
-            <div className={`file-item ${isActive ? 'active' : ''}`} onClick={() => handleNodeClick(node)}>
+            <div className={`file-item ${isActive ? 'active' : ''}`}>
                 <Checkbox
                     className="file-checkbox"
                     checked={isChecked}
@@ -108,7 +116,11 @@ const FileTree: React.FC<FileTreeProps> = ({ data, onFileClick, selectedFiles, a
                 <span className="file-name">{node.name}</span>
                 <div className="file-stats">
                     {isDirectory && node.fileCount > 0 && (<> <VscFiles /> <span>{formatNumberWithCommas(node.fileCount)}</span> </>)}
-                    {node.isImage ? (<span>{formatBytes(node.sizeInBytes)}</span>) : (node.tokenCount > 0 && (<> <VscSymbolNumeric /> <span>{formatLargeNumber(node.tokenCount, 1)}</span> </>))}
+                    {node.isImage ? (<span>{formatBytes(node.sizeInBytes)}</span>) : (node.tokenCount > 0 && (<> <VscSymbolNumeric /> <span>{formatLargeNumber(node.tokenCount, 1)}
+                        {isDirectory && selectedTokensInDir > 0 && selectedTokensInDir < node.tokenCount && 
+                            <span className="selected-token-count"> ({formatLargeNumber(selectedTokensInDir, 1)})</span>
+                        }
+                    </span> </>))}
                 </div>
             </div>
         );

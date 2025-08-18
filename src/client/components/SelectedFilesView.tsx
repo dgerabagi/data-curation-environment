@@ -25,6 +25,40 @@ const getFileIcon = (fileName: string) => {
     }
 };
 
+const getTokenBackgroundColor = (tokenCount: number): string => {
+    // 0 - 8k: green
+    if (tokenCount <= 8000) return 'hsla(120, 60%, 50%, 0.1)';
+    // 8k - 10k: green to yellow
+    if (tokenCount <= 10000) {
+        const percentage = (tokenCount - 8000) / 2000;
+        const hue = 120 - (percentage * 60); // 120 (green) -> 60 (yellow)
+        return `hsla(${hue}, 70%, 50%, 0.15)`;
+    }
+    // 10k - 12k: yellow to red
+    if (tokenCount <= 12000) {
+        const percentage = (tokenCount - 10000) / 2000;
+        const hue = 60 - (percentage * 60); // 60 (yellow) -> 0 (red)
+        return `hsla(${hue}, 70%, 50%, 0.2)`;
+    }
+    // 12k - 40k: red to orange
+    if (tokenCount <= 40000) {
+        const percentage = (tokenCount - 12000) / 28000;
+        const hue = 0 + (percentage * 30); // 0 (red) -> 30 (orange)
+        return `hsla(${hue}, 80%, 50%, 0.25)`;
+    }
+    // 40k+: max orange
+    return 'hsla(30, 90%, 50%, 0.3)';
+};
+
+const getTokenRiskTooltip = (tokenCount: number): string => {
+    if (tokenCount <= 8000) return 'Low token count, suitable for most workloads.';
+    if (tokenCount <= 10000) return 'Slightly elevated token count, small chance of performance degradation.';
+    if (tokenCount <= 12000) return 'Moderate token count, may impact performance on complex tasks.';
+    if (tokenCount <= 40000) return 'High token count, increased chance of performance degradation or truncation.';
+    return 'Very high token count. Consider refactoring to reduce size for reliable AI processing.';
+};
+
+
 interface SelectedFilesViewProps {
     selectedFileNodes: FileNode[];
     onRemove: (pathsToRemove: string[]) => void;
@@ -75,6 +109,10 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
     };
 
     const handleItemClick = (e: React.MouseEvent, path: string) => {
+        if ((e.target as HTMLElement).closest('.quick-remove-icon')) {
+            return; // Don't process selection if the remove icon was clicked
+        }
+        
         const newSelection = new Set(selection);
 
         if (e.shiftKey && firstClickedPath.current) {
@@ -96,16 +134,15 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
             }
             firstClickedPath.current = path; // Update anchor on ctrl-click
         } else {
+            // This is now a single click to open, not select
+            clientIpc.sendToServer(ClientToServerChannel.RequestOpenFile, { path });
+            // We still set the selection anchor for subsequent shift-clicks
             newSelection.clear();
             newSelection.add(path);
-            firstClickedPath.current = path; // Set anchor on simple click
+            firstClickedPath.current = path;
         }
         
         setSelection(newSelection);
-    };
-
-    const handleDoubleClick = (path: string) => {
-        clientIpc.sendToServer(ClientToServerChannel.RequestOpenFile, { path });
     };
 
     const handleRemoveSelected = () => {
@@ -124,7 +161,7 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
             <div className="panel-header">
                 <span>Selected Items ({selectedFileNodes.length})</span>
                 <button onClick={onToggleMinimize} className="toolbar-button" title={isMinimized ? "Expand" : "Minimize"}>
-                    {isMinimized ? <VscChevronLeft /> : <VscChevronDown />}
+                    {isMinimized ? <VscChevronRight /> : <VscChevronDown />}
                 </button>
             </div>
             {!isMinimized && (
@@ -152,9 +189,10 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
                                 <li key={node.absolutePath} 
                                     className={selection.has(node.absolutePath) ? 'selected' : ''}
                                     onClick={(e) => handleItemClick(e, node.absolutePath)}
-                                    onDoubleClick={() => handleDoubleClick(node.absolutePath)}
                                     onMouseEnter={() => setHoveredPath(node.absolutePath)}
                                     onMouseLeave={() => setHoveredPath(null)}
+                                    style={{ backgroundColor: getTokenBackgroundColor(node.tokenCount) }}
+                                    title={getTokenRiskTooltip(node.tokenCount)}
                                 >
                                     <span className="file-index">
                                         {hoveredPath === node.absolutePath ? (

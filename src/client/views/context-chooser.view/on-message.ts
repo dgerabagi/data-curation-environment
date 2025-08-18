@@ -53,11 +53,17 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     serverIpc.onClientMessage(ClientToServerChannel.RequestLastSelection, () => {
         loggerService.log('Received RequestLastSelection from client.');
         const lastSelection = selectionService.getLastSelection();
+        const autoAddState = selectionService.getAutoAddState();
         loggerService.log(`Found ${lastSelection.length} paths in last selection to restore.`);
         serverIpc.sendToClient(ServerToClientChannel.ApplySelectionSet, { paths: lastSelection });
         
         const sets = selectionService.getSelectionSets();
         serverIpc.sendToClient(ServerToClientChannel.SendSelectionSets, { sets });
+        serverIpc.sendToClient(ServerToClientChannel.SendAutoAddState, { enabled: autoAddState });
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.SaveAutoAddState, (data) => {
+        selectionService.saveAutoAddState(data.enabled);
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.VSCodeCommand, (data) => {

@@ -16,6 +16,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestOpenFile ? { path: string } :
     T extends ClientToServerChannel.SaveCurrentSelection ? { paths: string[] } :
     T extends ClientToServerChannel.RequestLastSelection ? {} :
+    T extends ClientToServerChannel.SaveAutoAddState ? { enabled: boolean } :
     T extends ClientToServerChannel.VSCodeCommand ? { command: string, args?: any[] } :
     
     T extends ServerToClientChannel.SendWorkspaceFiles ? { files: FileNode[] } :
@@ -24,4 +25,5 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.ForceRefresh ? {} :
     T extends ServerToClientChannel.SetActiveFile ? { path: string } :
     T extends ServerToClientChannel.FocusFile ? { path: string } :
+    T extends ServerToClientChannel.SendAutoAddState ? { enabled: boolean } :
     never;
