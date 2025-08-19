@@ -20,9 +20,10 @@ interface TreeViewProps {
     onContextMenu?: (event: React.MouseEvent, node: TreeNode) => void;
     activeFile?: string;
     updateCheckedFiles: (path: string) => void;
+    onNodeDrop?: (event: React.DragEvent, node: TreeNode) => void;
 }
 
-const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTrigger = 0, expandAllTrigger = 0, onContextMenu, activeFile, updateCheckedFiles }) => {
+const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTrigger = 0, expandAllTrigger = 0, onContextMenu, activeFile, updateCheckedFiles, onNodeDrop }) => {
     const [expandedNodes, setExpandedNodes] = useState<string[]>([]);
     const [selectedPaths, setSelectedPaths] = useState<Set<string>>(new Set());
     const [focusedNodePath, setFocusedNodePath] = useState<string | null>(null);
@@ -171,93 +172,53 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     };
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
-        // Undo/Redo
         if (e.ctrlKey && e.key.toLowerCase() === 'z') {
-            e.preventDefault();
-            e.stopPropagation();
-            logger.log("Undo requested from view.");
+            e.preventDefault(); e.stopPropagation();
             clientIpc.sendToServer(ClientToServerChannel.RequestUndo, {});
             return;
         }
         if (e.ctrlKey && e.key.toLowerCase() === 'y') {
-            e.preventDefault();
-            e.stopPropagation();
-            logger.log("Redo requested from view.");
+            e.preventDefault(); e.stopPropagation();
             clientIpc.sendToServer(ClientToServerChannel.RequestRedo, {});
             return;
         }
 
         if (!focusedNodePath) return;
-
         const currentIndex = flatNodeList.current.findIndex(n => n.absolutePath === focusedNodePath);
         if (currentIndex === -1) return;
-
         const currentNode = flatNodeList.current[currentIndex];
 
         const moveFocus = (nextIndex: number) => {
             if (nextIndex >= 0 && nextIndex < flatNodeList.current.length) {
                 const nextNodePath = flatNodeList.current[nextIndex].absolutePath;
                 setFocusedNodePath(nextNodePath);
-                const nodeElement = nodeRefs.current.get(nextNodePath);
-                nodeElement?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+                nodeRefs.current.get(nextNodePath)?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
             }
         };
         
         switch (e.key) {
-            case 'ArrowUp':
-                e.preventDefault();
-                e.stopPropagation();
-                moveFocus(currentIndex - 1);
-                break;
-            case 'ArrowDown':
-                e.preventDefault();
-                e.stopPropagation();
-                moveFocus(currentIndex + 1);
-                break;
-            case 'ArrowRight':
-                e.preventDefault();
-                e.stopPropagation();
-                if (currentNode.children) {
-                    setExpandedNodes(prev => [...new Set([...prev, currentNode.absolutePath])]);
-                }
-                break;
-            case 'ArrowLeft':
-                e.preventDefault();
-                e.stopPropagation();
-                if (currentNode.children && expandedNodes.includes(currentNode.absolutePath)) {
-                    setExpandedNodes(prev => prev.filter(p => p !== currentNode.absolutePath));
-                }
-                break;
-            case ' ':
-                e.preventDefault();
-                e.stopPropagation();
-                logger.log(`Spacebar pressed on focused node: ${currentNode.absolutePath}`);
-                updateCheckedFiles(currentNode.absolutePath);
-                break;
-            case 'Enter':
-                e.preventDefault();
-                e.stopPropagation();
-                if (currentNode.children) {
-                     setExpandedNodes(prev => {
-                        const isExpanded = prev.includes(currentNode.absolutePath);
-                        return isExpanded ? prev.filter(p => p !== currentNode.absolutePath) : [...prev, currentNode.absolutePath];
-                    });
-                } else {
-                    clientIpc.sendToServer(ClientToServerChannel.RequestOpenFile, { path: currentNode.absolutePath });
-                }
-                break;
+            case 'ArrowUp': e.preventDefault(); e.stopPropagation(); moveFocus(currentIndex - 1); break;
+            case 'ArrowDown': e.preventDefault(); e.stopPropagation(); moveFocus(currentIndex + 1); break;
+            case 'ArrowRight': e.preventDefault(); e.stopPropagation(); if (currentNode.children) setExpandedNodes(prev => [...new Set([...prev, currentNode.absolutePath])]); break;
+            case 'ArrowLeft': e.preventDefault(); e.stopPropagation(); if (currentNode.children && expandedNodes.includes(currentNode.absolutePath)) setExpandedNodes(prev => prev.filter(p => p !== currentNode.absolutePath)); break;
+            case ' ': e.preventDefault(); e.stopPropagation(); updateCheckedFiles(currentNode.absolutePath); break;
+            case 'Enter': e.preventDefault(); e.stopPropagation(); if (currentNode.children) setExpandedNodes(prev => prev.includes(currentNode.absolutePath) ? prev.filter(p => p !== currentNode.absolutePath) : [...prev, currentNode.absolutePath]); else clientIpc.sendToServer(ClientToServerChannel.RequestOpenFile, { path: currentNode.absolutePath }); break;
         }
     };
 
-    const handleDragStart = (e: React.DragEvent, node: TreeNode) => {
+    // --- Internal Drag/Drop ---
+    const handleInternalDragStart = (e: React.DragEvent, node: TreeNode) => {
         e.stopPropagation();
         setDraggedPath(node.absolutePath);
         e.dataTransfer.effectAllowed = 'move';
+        logger.log(`Internal Drag Start: ${node.name}`);
     };
 
-    const handleDragOver = (e: React.DragEvent, node: TreeNode) => {
+    // --- External Drag/Drop ---
+    const handleDragEnter = (e: React.DragEvent, node: TreeNode) => {
         e.preventDefault();
         e.stopPropagation();
+        logger.log(`Drag Enter on: ${node.name}`);
         if (node.children && node.absolutePath !== draggedPath) {
             setDropTarget(node.absolutePath);
         }
@@ -269,19 +230,23 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         setDropTarget(null);
     };
 
-    const handleDrop = (e: React.DragEvent, dropNode: TreeNode) => {
+    const handleDrop = (e: React.DragEvent, node: TreeNode) => {
         e.preventDefault();
         e.stopPropagation();
         setDropTarget(null);
-        if (draggedPath && dropNode.children && dropNode.absolutePath !== draggedPath) {
-            const draggedName = draggedPath.split('/').pop();
-            if (draggedName) {
-                const newPath = `${dropNode.absolutePath}/${draggedName}`;
-                logger.log(`Requesting move from ${draggedPath} to ${newPath}`);
-                clientIpc.sendToServer(ClientToServerChannel.RequestMoveFile, { oldPath: draggedPath, newPath });
+        if (draggedPath) { // Internal move
+            if (node.children && node.absolutePath !== draggedPath) {
+                const draggedName = draggedPath.split('/').pop();
+                if (draggedName) {
+                    const newPath = `${node.absolutePath}/${draggedName}`;
+                    logger.log(`Requesting internal move from ${draggedPath} to ${newPath}`);
+                    clientIpc.sendToServer(ClientToServerChannel.RequestMoveFile, { oldPath: draggedPath, newPath });
+                }
             }
+            setDraggedPath(null);
+        } else if (onNodeDrop) { // External drop
+            onNodeDrop(e, node);
         }
-        setDraggedPath(null);
     };
 
     const renderTreeNodes = (nodes: TreeNode[]) => {
@@ -296,8 +261,8 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
                 <li key={node.absolutePath} 
                     ref={el => nodeRefs.current.set(node.absolutePath, el)}
                     draggable="true"
-                    onDragStart={(e) => handleDragStart(e, node)}
-                    onDragEnter={(e) => handleDragOver(e, node)}
+                    onDragStart={(e) => handleInternalDragStart(e, node)}
+                    onDragEnter={(e) => handleDragEnter(e, node)}
                     onDragLeave={handleDragLeave}
                     onDrop={(e) => handleDrop(e, node)}
                     className={`treenode-li ${isDropTarget ? 'drop-target' : ''}`}

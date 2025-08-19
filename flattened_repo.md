@@ -1,24 +1,24 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-19T22:27:44.795Z
+  Date Generated: 2025-08-19T22:43:58.228Z
   ---
   Total Files: 172
-  Total Lines: 14013
-  Total Characters: 595126
-  Approx. Tokens: 148847
+  Total Lines: 13994
+  Total Characters: 596273
+  Approx. Tokens: 149134
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
 2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
 3. src\backend\services\fs.service.ts (5576 tokens)
-4. src\client\views\context-chooser.view\view.tsx (4624 tokens)
-5. src\client\components\tree-view\TreeView.tsx (3580 tokens)
-6. src\client\views\context-chooser.view\view.scss (3446 tokens)
+4. src\client\views\context-chooser.view\view.tsx (4503 tokens)
+5. src\client\views\context-chooser.view\view.scss (3453 tokens)
+6. src\client\components\tree-view\TreeView.tsx (3440 tokens)
 7. src\client\components\SelectedFilesView.tsx (3256 tokens)
-8. src\backend\services\flattener.service.ts (2805 tokens)
-9. src\client\components\file-tree\FileTree.tsx (2715 tokens)
+8. src\client\components\file-tree\FileTree.tsx (3088 tokens)
+9. src\backend\services\flattener.service.ts (2805 tokens)
 10. src\Artifacts\A0. DCE Master Artifact List.md (2657 tokens)
 
 <!-- Full File List -->
@@ -45,7 +45,7 @@
 21. src\Artifacts\A20. DCE - Phase 1 - Advanced UX & Automation Plan.md - Lines: 44 - Chars: 6117 - Tokens: 1530
 22. src\Artifacts\A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer.md - Lines: 48 - Chars: 7385 - Tokens: 1847
 23. src\Artifacts\A22. DCE - Phase 1 - Search & Filter Feature Plan.md - Lines: 58 - Chars: 3663 - Tokens: 916
-24. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 61 - Chars: 6098 - Tokens: 1525
+24. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 53 - Chars: 6772 - Tokens: 1693
 25. src\Artifacts\A24. DCE - Selection Paradigm Terminology.md - Lines: 57 - Chars: 3330 - Tokens: 833
 26. src\Artifacts\A25. DCE - Phase 1 - Git & Problems Integration Plan.md - Lines: 61 - Chars: 5871 - Tokens: 1468
 27. src\Artifacts\A26. DCE - Phase 1 - File System Traversal & Caching Strategy.md - Lines: 46 - Chars: 4009 - Tokens: 1003
@@ -72,16 +72,16 @@
 48. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
 49. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
 50. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
-51. src\client\components\file-tree\FileTree.tsx - Lines: 246 - Chars: 10858 - Tokens: 2715
+51. src\client\components\file-tree\FileTree.tsx - Lines: 275 - Chars: 12352 - Tokens: 3088
 52. src\client\components\file-tree\FileTree.utils.ts - Lines: 159 - Chars: 6069 - Tokens: 1518
 53. src\client\components\SelectedFilesView.tsx - Lines: 278 - Chars: 13021 - Tokens: 3256
-54. src\client\components\tree-view\TreeView.tsx - Lines: 339 - Chars: 14319 - Tokens: 3580
+54. src\client\components\tree-view\TreeView.tsx - Lines: 304 - Chars: 13757 - Tokens: 3440
 55. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 56. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
 57. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 58. src\client\views\context-chooser.view\on-message.ts - Lines: 111 - Chars: 4643 - Tokens: 1161
-59. src\client\views\context-chooser.view\view.scss - Lines: 563 - Chars: 13783 - Tokens: 3446
-60. src\client\views\context-chooser.view\view.tsx - Lines: 384 - Chars: 18496 - Tokens: 4624
+59. src\client\views\context-chooser.view\view.scss - Lines: 564 - Chars: 13811 - Tokens: 3453
+60. src\client\views\context-chooser.view\view.tsx - Lines: 378 - Chars: 18009 - Tokens: 4503
 61. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
 62. src\common\ipc\channels.enum.ts - Lines: 41 - Chars: 2037 - Tokens: 510
 63. src\common\ipc\channels.type.ts - Lines: 37 - Chars: 2713 - Tokens: 679
@@ -1582,7 +1582,7 @@ To improve navigation and usability in large projects, this feature introduces a
 # Artifact A23: DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan
 # Date Created: C29
 # Author: AI Model
-# Updated on: C54 (Refine technical plan for external drag-and-drop)
+# Updated on: C55 (Refine technical plan for external drag-and-drop with detailed event flow)
 
 - **Key/Value for A0:**
 - **Description:** Details the requirements for implementing full keyboard navigation and drag-and-drop file/folder operations within the main file tree view.
@@ -1605,41 +1605,33 @@ To achieve true feature parity with the native VS Code Explorer and cater to pow
 ## 3. Technical Implementation Plan
 
 ### Keyboard Navigation (Completed)
-
 The focus management and event handling for keyboard navigation are complete and stable.
 
 ### Internal Drag and Drop (Completed)
-
 The HTML5 Drag and Drop API implementation within the React webview is complete and functional.
 
-### External Drag and Drop (Implementation C54)
+### External Drag and Drop (Implementation C55)
+This requires a multi-layered event handling strategy to provide clear visual feedback and robust functionality.
 
-1.  **Frontend - Main Container (`view.tsx`):**
-    *   Add state to track the drag-over state: `const [isDragging, setIsDragging] = useState(false);`.
-    *   Attach `onDragOver`, `onDragLeave`, and `onDrop` handlers to the main container `div`.
-    *   `onDragOver`: Must call `event.preventDefault()` to allow dropping. Set `isDragging(true)`.
-    *   `onDragLeave`: Set `isDragging(false)`.
-    *   `onDrop`:
-        *   Must call `event.preventDefault()`.
-        *   Set `isDragging(false)`.
-        *   Determine the target directory by checking `event.target` and traversing up to find the closest element with a `data-path` attribute. If none is found, default to the workspace root.
-        *   Iterate through `event.dataTransfer.items` to get the dropped files.
-        *   For each file, use `FileReader` to read it as an `ArrayBuffer`.
-        *   Send an IPC message (`RequestAddFileFromBuffer`) to the backend with the target directory path, file name, and the file data as a `Uint8Array`.
+1.  **Main Container Handlers (`view.tsx`):**
+    *   The main `div.view-container` will have `onDragEnter`, `onDragOver`, `onDragLeave`, and `onDrop` handlers.
+    *   `onDragEnter` and `onDragLeave` will toggle a component-level state (`isDragging`) which adds a `.drag-over` class to the container, providing a visual border around the entire view. **Crucially, they must call `event.preventDefault()` and `event.stopPropagation()` and include logging.**
+    *   `onDragOver` **must** call `event.preventDefault()` to signal that the container is a valid drop zone. This is the key to making the `onDrop` event fire.
+    *   `onDrop` on this container acts as a fallback. If a user drops a file on an empty area of the view, this handler will trigger and treat the project's root directory as the target. It will contain the `FileReader` and IPC logic.
 
-2.  **Frontend - Target Highlighting (`TreeView.tsx`):**
-    *   Add state to track the specific drop target: `const [dropTarget, setDropTarget] = useState<string | null>(null);`.
-    *   Add `onDragEnter` to the folder `<li>` elements. It will check if the dragged item is not the folder itself and then call `setDropTarget` with the folder's path.
-    *   The `className` of the `<li>` will be updated to include a `drop-target` class when its path matches the `dropTarget` state, providing visual feedback.
+2.  **Individual Node Handlers (`TreeView.tsx`):**
+    *   The generic `TreeView` component will be enhanced to handle drag events on its `<li>` elements.
+    *   It will manage a local state (`dropTarget: string | null`) to track the path of the node currently being hovered over.
+    *   `onDragEnter`: Will be attached to each `<li>`. It will call `event.stopPropagation()` to prevent the container's handler from firing. It will check if the node is a directory and, if so, call `setDropTarget` with its path.
+    *   `onDragLeave`: Will clear the `dropTarget` state.
+    *   `onDrop`: Will be attached to each `<li>`. It will call `event.stopPropagation()` and then call a new prop function, `onNodeDrop(event, node)`, delegating the file processing logic to a more specialized parent component. The `className` will be updated to reflect the `drop-target` state for highlighting.
 
-3.  **Backend (`fs.service.ts`):**
-    *   The existing `handleAddFileFromBuffer` handler is sufficient. It receives the full target path and the file's buffer.
-    *   It uses `vscode.workspace.fs.writeFile` to create the file.
-    *   The existing `FileSystemWatcher` will detect the new file and trigger a full UI refresh automatically.
+3.  **File Processing Logic (`FileTree.tsx`):**
+    *   The `FileTree` component will define the `handleNodeDrop` function and pass it as the `onNodeDrop` prop to `TreeView`.
+    *   `handleNodeDrop`: This function receives the drop event and the target `FileNode`. It will determine the final target directory (the node's path if it's a directory, or its parent's path if it's a file). It will then execute the `FileReader` logic to read the dropped files and send them to the backend via the `RequestAddFileFromBuffer` IPC message. **This function will contain extensive logging.**
 
-### Select All / Context Menu / Delete Key in Selected Items (Completed)
-
-The context menu and keyboard shortcuts for the "Selected Items" panel are complete and functional.
+4.  **Backend (`fs.service.ts`):**
+    *   The existing `handleAddFileFromBuffer` handler is sufficient. It receives the full target path and the file's buffer, writes the file, and relies on the existing `FileSystemWatcher` to trigger a UI refresh.
 </file>
 
 <file path="src/Artifacts/A24. DCE - Selection Paradigm Terminology.md">
@@ -5152,6 +5144,7 @@ import ContextMenu from '../ContextMenu';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 import { ProblemCountsMap } from '@/common/ipc/channels.type';
+import { logger } from '@/client/utils/logger';
 
 interface FileTreeProps {
   data: FileNode[];
@@ -5279,6 +5272,34 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
         return calculate;
     }, [checkedFiles]);
 
+    const handleNodeDrop = (event: React.DragEvent, dropNode: FileNode) => {
+        logger.log(`--- DROP ON NODE: ${dropNode.name} ---`);
+        let targetDir = dropNode.absolutePath;
+        if (!dropNode.children) { // If dropped on a file, use its parent
+            targetDir = dropNode.absolutePath.substring(0, dropNode.absolutePath.lastIndexOf('/'));
+        }
+        logger.log(`Drop target directory: ${targetDir}`);
+
+        if (event.dataTransfer.files && event.dataTransfer.files.length > 0) {
+            const filesArray = Array.from(event.dataTransfer.files);
+            filesArray.forEach((file: File) => {
+                const reader = new FileReader();
+                reader.onload = (readEvent) => {
+                    const buffer = readEvent.target?.result;
+                    if (buffer instanceof ArrayBuffer) {
+                        const data = new Uint8Array(buffer);
+                        const finalTargetPath = `${targetDir}/${file.name}`.replace(/\\/g, '/');
+                        logger.log(`Sending file ${file.name} to backend for creation at ${finalTargetPath}`);
+                        clientIpc.sendToServer(ClientToServerChannel.RequestAddFileFromBuffer, { targetPath: finalTargetPath, data });
+                    }
+                };
+                reader.readAsArrayBuffer(file);
+            });
+        } else {
+            logger.warn('Drop event on node but no files found.');
+        }
+    };
+
     const renderFileNodeContent = (node: FileNode, isExpanded: boolean) => {
         const isDirectory = Array.isArray(node.children);
         
@@ -5303,7 +5324,6 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
         const checkedTokensInDir = isDirectory ? calculateCheckedTokens(node) : 0;
         const isFullyChecked = isDirectory && checkedTokensInDir > 0 && checkedTokensInDir === node.tokenCount;
         
-        // Use live problem map if available, otherwise fallback to initial data
         const liveProblems = problemMap[node.absolutePath];
         const problemData = liveProblems || node.problemCounts;
 
@@ -5378,6 +5398,7 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
                 expandAllTrigger={expandAllTrigger}
                 activeFile={activeFile} 
                 updateCheckedFiles={updateCheckedFiles}
+                onNodeDrop={handleNodeDrop}
             />
             {contextMenu && <ContextMenu menu={contextMenu} onClose={() => setContextMenu(null)} onRename={handleRename} />}
         </div>
@@ -5853,9 +5874,10 @@ interface TreeViewProps {
     onContextMenu?: (event: React.MouseEvent, node: TreeNode) => void;
     activeFile?: string;
     updateCheckedFiles: (path: string) => void;
+    onNodeDrop?: (event: React.DragEvent, node: TreeNode) => void;
 }
 
-const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTrigger = 0, expandAllTrigger = 0, onContextMenu, activeFile, updateCheckedFiles }) => {
+const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTrigger = 0, expandAllTrigger = 0, onContextMenu, activeFile, updateCheckedFiles, onNodeDrop }) => {
     const [expandedNodes, setExpandedNodes] = useState<string[]>([]);
     const [selectedPaths, setSelectedPaths] = useState<Set<string>>(new Set());
     const [focusedNodePath, setFocusedNodePath] = useState<string | null>(null);
@@ -6004,93 +6026,53 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     };
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
-        // Undo/Redo
         if (e.ctrlKey && e.key.toLowerCase() === 'z') {
-            e.preventDefault();
-            e.stopPropagation();
-            logger.log("Undo requested from view.");
+            e.preventDefault(); e.stopPropagation();
             clientIpc.sendToServer(ClientToServerChannel.RequestUndo, {});
             return;
         }
         if (e.ctrlKey && e.key.toLowerCase() === 'y') {
-            e.preventDefault();
-            e.stopPropagation();
-            logger.log("Redo requested from view.");
+            e.preventDefault(); e.stopPropagation();
             clientIpc.sendToServer(ClientToServerChannel.RequestRedo, {});
             return;
         }
 
         if (!focusedNodePath) return;
-
         const currentIndex = flatNodeList.current.findIndex(n => n.absolutePath === focusedNodePath);
         if (currentIndex === -1) return;
-
         const currentNode = flatNodeList.current[currentIndex];
 
         const moveFocus = (nextIndex: number) => {
             if (nextIndex >= 0 && nextIndex < flatNodeList.current.length) {
                 const nextNodePath = flatNodeList.current[nextIndex].absolutePath;
                 setFocusedNodePath(nextNodePath);
-                const nodeElement = nodeRefs.current.get(nextNodePath);
-                nodeElement?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+                nodeRefs.current.get(nextNodePath)?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
             }
         };
         
         switch (e.key) {
-            case 'ArrowUp':
-                e.preventDefault();
-                e.stopPropagation();
-                moveFocus(currentIndex - 1);
-                break;
-            case 'ArrowDown':
-                e.preventDefault();
-                e.stopPropagation();
-                moveFocus(currentIndex + 1);
-                break;
-            case 'ArrowRight':
-                e.preventDefault();
-                e.stopPropagation();
-                if (currentNode.children) {
-                    setExpandedNodes(prev => [...new Set([...prev, currentNode.absolutePath])]);
-                }
-                break;
-            case 'ArrowLeft':
-                e.preventDefault();
-                e.stopPropagation();
-                if (currentNode.children && expandedNodes.includes(currentNode.absolutePath)) {
-                    setExpandedNodes(prev => prev.filter(p => p !== currentNode.absolutePath));
-                }
-                break;
-            case ' ':
-                e.preventDefault();
-                e.stopPropagation();
-                logger.log(`Spacebar pressed on focused node: ${currentNode.absolutePath}`);
-                updateCheckedFiles(currentNode.absolutePath);
-                break;
-            case 'Enter':
-                e.preventDefault();
-                e.stopPropagation();
-                if (currentNode.children) {
-                     setExpandedNodes(prev => {
-                        const isExpanded = prev.includes(currentNode.absolutePath);
-                        return isExpanded ? prev.filter(p => p !== currentNode.absolutePath) : [...prev, currentNode.absolutePath];
-                    });
-                } else {
-                    clientIpc.sendToServer(ClientToServerChannel.RequestOpenFile, { path: currentNode.absolutePath });
-                }
-                break;
+            case 'ArrowUp': e.preventDefault(); e.stopPropagation(); moveFocus(currentIndex - 1); break;
+            case 'ArrowDown': e.preventDefault(); e.stopPropagation(); moveFocus(currentIndex + 1); break;
+            case 'ArrowRight': e.preventDefault(); e.stopPropagation(); if (currentNode.children) setExpandedNodes(prev => [...new Set([...prev, currentNode.absolutePath])]); break;
+            case 'ArrowLeft': e.preventDefault(); e.stopPropagation(); if (currentNode.children && expandedNodes.includes(currentNode.absolutePath)) setExpandedNodes(prev => prev.filter(p => p !== currentNode.absolutePath)); break;
+            case ' ': e.preventDefault(); e.stopPropagation(); updateCheckedFiles(currentNode.absolutePath); break;
+            case 'Enter': e.preventDefault(); e.stopPropagation(); if (currentNode.children) setExpandedNodes(prev => prev.includes(currentNode.absolutePath) ? prev.filter(p => p !== currentNode.absolutePath) : [...prev, currentNode.absolutePath]); else clientIpc.sendToServer(ClientToServerChannel.RequestOpenFile, { path: currentNode.absolutePath }); break;
         }
     };
 
-    const handleDragStart = (e: React.DragEvent, node: TreeNode) => {
+    // --- Internal Drag/Drop ---
+    const handleInternalDragStart = (e: React.DragEvent, node: TreeNode) => {
         e.stopPropagation();
         setDraggedPath(node.absolutePath);
         e.dataTransfer.effectAllowed = 'move';
+        logger.log(`Internal Drag Start: ${node.name}`);
     };
 
-    const handleDragOver = (e: React.DragEvent, node: TreeNode) => {
+    // --- External Drag/Drop ---
+    const handleDragEnter = (e: React.DragEvent, node: TreeNode) => {
         e.preventDefault();
         e.stopPropagation();
+        logger.log(`Drag Enter on: ${node.name}`);
         if (node.children && node.absolutePath !== draggedPath) {
             setDropTarget(node.absolutePath);
         }
@@ -6102,19 +6084,23 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         setDropTarget(null);
     };
 
-    const handleDrop = (e: React.DragEvent, dropNode: TreeNode) => {
+    const handleDrop = (e: React.DragEvent, node: TreeNode) => {
         e.preventDefault();
         e.stopPropagation();
         setDropTarget(null);
-        if (draggedPath && dropNode.children && dropNode.absolutePath !== draggedPath) {
-            const draggedName = draggedPath.split('/').pop();
-            if (draggedName) {
-                const newPath = `${dropNode.absolutePath}/${draggedName}`;
-                logger.log(`Requesting move from ${draggedPath} to ${newPath}`);
-                clientIpc.sendToServer(ClientToServerChannel.RequestMoveFile, { oldPath: draggedPath, newPath });
+        if (draggedPath) { // Internal move
+            if (node.children && node.absolutePath !== draggedPath) {
+                const draggedName = draggedPath.split('/').pop();
+                if (draggedName) {
+                    const newPath = `${node.absolutePath}/${draggedName}`;
+                    logger.log(`Requesting internal move from ${draggedPath} to ${newPath}`);
+                    clientIpc.sendToServer(ClientToServerChannel.RequestMoveFile, { oldPath: draggedPath, newPath });
+                }
             }
+            setDraggedPath(null);
+        } else if (onNodeDrop) { // External drop
+            onNodeDrop(e, node);
         }
-        setDraggedPath(null);
     };
 
     const renderTreeNodes = (nodes: TreeNode[]) => {
@@ -6129,8 +6115,8 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
                 <li key={node.absolutePath} 
                     ref={el => nodeRefs.current.set(node.absolutePath, el)}
                     draggable="true"
-                    onDragStart={(e) => handleDragStart(e, node)}
-                    onDragEnter={(e) => handleDragOver(e, node)}
+                    onDragStart={(e) => handleInternalDragStart(e, node)}
+                    onDragEnter={(e) => handleDragEnter(e, node)}
                     onDragLeave={handleDragLeave}
                     onDrop={(e) => handleDrop(e, node)}
                     className={`treenode-li ${isDropTarget ? 'drop-target' : ''}`}
@@ -6335,7 +6321,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 </file>
 
 <file path="src/client/views/context-chooser.view/view.scss">
-/* Updated on: C54 (Add drag-and-drop styling) */
+/* Updated on: C55 (Add drag-and-drop styling) */
 body {
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -6354,6 +6340,7 @@ body {
 
 .view-container.drag-over {
     outline-color: var(--vscode-focusBorder);
+    outline-style: dashed;
 }
 
 
@@ -7106,65 +7093,58 @@ const App = () => {
         });
     };
 
-    const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+    const processAndSendFiles = (filesToProcess: FileList | null, targetDir: string) => {
+        if (!filesToProcess || filesToProcess.length === 0) {
+            logger.warn('processAndSendFiles called with no files.');
+            return;
+        }
+
+        const filesArray = Array.from(filesToProcess);
+        logger.log(`Processing ${filesArray.length} files from drop.`);
+        filesArray.forEach(file => {
+            const reader = new FileReader();
+            reader.onload = (readEvent) => {
+                const buffer = readEvent.target?.result;
+                if (buffer instanceof ArrayBuffer) {
+                    const data = new Uint8Array(buffer);
+                    const finalTargetPath = `${targetDir}/${file.name}`.replace(/\\/g, '/');
+                    logger.log(`Sending file ${file.name} to backend for creation at ${finalTargetPath}`);
+                    clientIpc.sendToServer(ClientToServerChannel.RequestAddFileFromBuffer, { targetPath: finalTargetPath, data });
+                }
+            };
+            reader.readAsArrayBuffer(file);
+        });
+    };
+
+    const handleDropOnContainer = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         event.stopPropagation();
         setIsDragging(false);
-        logger.log("Drop event detected on view container.");
-    
-        const targetElement = event.target as HTMLElement;
-        const dropTargetNodeElement = targetElement.closest('.treenode-li');
-        let targetPath = files.length > 0 ? files[0].absolutePath : ''; // Default to root
-    
-        if (dropTargetNodeElement && dropTargetNodeElement.getAttribute('data-path')) {
-            const potentialPath = dropTargetNodeElement.getAttribute('data-path')!;
-            // Check if the drop target is a directory
-            const nodeMap = new Map<string, FileNode>();
-            const buildMap = (node: FileNode) => {
-                nodeMap.set(node.absolutePath, node);
-                node.children?.forEach(buildMap);
-            };
-            files.forEach(buildMap);
-            const targetNode = nodeMap.get(potentialPath);
-            if (targetNode?.children) { // It's a directory
-                targetPath = potentialPath;
-            } else { // It's a file, use its parent
-                 targetPath = potentialPath.substring(0, potentialPath.lastIndexOf('/'));
-            }
-        }
+        logger.log('--- DROP ON MAIN CONTAINER (FALLBACK) ---');
         
-        if (event.dataTransfer.items) {
-            for (const item of event.dataTransfer.items) {
-                if (item.kind === 'file') {
-                    const file = item.getAsFile();
-                    if (file) {
-                        const reader = new FileReader();
-                        reader.onload = (e) => {
-                            const buffer = e.target?.result;
-                            if (buffer instanceof ArrayBuffer) {
-                                const data = new Uint8Array(buffer);
-                                const finalTargetPath = `${targetPath}/${file.name}`;
-                                logger.log(`Sending file ${file.name} to backend to be saved at ${finalTargetPath}`);
-                                clientIpc.sendToServer(ClientToServerChannel.RequestAddFileFromBuffer, { targetPath: finalTargetPath, data });
-                            }
-                        };
-                        reader.readAsArrayBuffer(file);
-                    }
-                }
-            }
-        }
+        const targetDir = files.length > 0 ? files[0].absolutePath : '';
+        logger.log(`Drop target directory identified as root: ${targetDir}`);
+        processAndSendFiles(event.dataTransfer.files, targetDir);
     };
     
     const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault(); // Necessary to allow drop
-        if (!isDragging) setIsDragging(true);
+    };
+
+    const handleDragEnter = (event: React.DragEvent<HTMLDivElement>) => {
+        event.preventDefault();
+        event.stopPropagation();
+        logger.log('Drag Enter on main container.');
+        setIsDragging(true);
     };
 
     const handleDragLeave = (event: React.DragEvent<HTMLDivElement>) => {
-        // Prevent flickering when moving over child elements
+        event.preventDefault();
+        event.stopPropagation();
         if (event.currentTarget.contains(event.relatedTarget as Node)) {
             return;
         }
+        logger.log('Drag Leave from main container.');
         setIsDragging(false);
     };
 
@@ -7207,8 +7187,9 @@ const App = () => {
     return (
         <div 
             className={`view-container ${isDragging ? 'drag-over' : ''}`} 
-            onDrop={handleDrop} 
+            onDrop={handleDropOnContainer} 
             onDragOver={handleDragOver}
+            onDragEnter={handleDragEnter}
             onDragLeave={handleDragLeave}
         >
             <div className="view-header">

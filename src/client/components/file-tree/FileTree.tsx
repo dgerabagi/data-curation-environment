@@ -11,6 +11,7 @@ import ContextMenu from '../ContextMenu';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 import { ProblemCountsMap } from '@/common/ipc/channels.type';
+import { logger } from '@/client/utils/logger';
 
 interface FileTreeProps {
   data: FileNode[];
@@ -138,6 +139,34 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
         return calculate;
     }, [checkedFiles]);
 
+    const handleNodeDrop = (event: React.DragEvent, dropNode: FileNode) => {
+        logger.log(`--- DROP ON NODE: ${dropNode.name} ---`);
+        let targetDir = dropNode.absolutePath;
+        if (!dropNode.children) { // If dropped on a file, use its parent
+            targetDir = dropNode.absolutePath.substring(0, dropNode.absolutePath.lastIndexOf('/'));
+        }
+        logger.log(`Drop target directory: ${targetDir}`);
+
+        if (event.dataTransfer.files && event.dataTransfer.files.length > 0) {
+            const filesArray = Array.from(event.dataTransfer.files);
+            filesArray.forEach((file: File) => {
+                const reader = new FileReader();
+                reader.onload = (readEvent) => {
+                    const buffer = readEvent.target?.result;
+                    if (buffer instanceof ArrayBuffer) {
+                        const data = new Uint8Array(buffer);
+                        const finalTargetPath = `${targetDir}/${file.name}`.replace(/\\/g, '/');
+                        logger.log(`Sending file ${file.name} to backend for creation at ${finalTargetPath}`);
+                        clientIpc.sendToServer(ClientToServerChannel.RequestAddFileFromBuffer, { targetPath: finalTargetPath, data });
+                    }
+                };
+                reader.readAsArrayBuffer(file);
+            });
+        } else {
+            logger.warn('Drop event on node but no files found.');
+        }
+    };
+
     const renderFileNodeContent = (node: FileNode, isExpanded: boolean) => {
         const isDirectory = Array.isArray(node.children);
         
@@ -162,7 +191,6 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
         const checkedTokensInDir = isDirectory ? calculateCheckedTokens(node) : 0;
         const isFullyChecked = isDirectory && checkedTokensInDir > 0 && checkedTokensInDir === node.tokenCount;
         
-        // Use live problem map if available, otherwise fallback to initial data
         const liveProblems = problemMap[node.absolutePath];
         const problemData = liveProblems || node.problemCounts;
 
@@ -237,6 +265,7 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
                 expandAllTrigger={expandAllTrigger}
                 activeFile={activeFile} 
                 updateCheckedFiles={updateCheckedFiles}
+                onNodeDrop={handleNodeDrop}
             />
             {contextMenu && <ContextMenu menu={contextMenu} onClose={() => setContextMenu(null)} onRename={handleRename} />}
         </div>

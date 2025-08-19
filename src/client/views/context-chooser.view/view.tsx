@@ -203,65 +203,58 @@ const App = () => {
         });
     };
 
-    const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+    const processAndSendFiles = (filesToProcess: FileList | null, targetDir: string) => {
+        if (!filesToProcess || filesToProcess.length === 0) {
+            logger.warn('processAndSendFiles called with no files.');
+            return;
+        }
+
+        const filesArray = Array.from(filesToProcess);
+        logger.log(`Processing ${filesArray.length} files from drop.`);
+        filesArray.forEach(file => {
+            const reader = new FileReader();
+            reader.onload = (readEvent) => {
+                const buffer = readEvent.target?.result;
+                if (buffer instanceof ArrayBuffer) {
+                    const data = new Uint8Array(buffer);
+                    const finalTargetPath = `${targetDir}/${file.name}`.replace(/\\/g, '/');
+                    logger.log(`Sending file ${file.name} to backend for creation at ${finalTargetPath}`);
+                    clientIpc.sendToServer(ClientToServerChannel.RequestAddFileFromBuffer, { targetPath: finalTargetPath, data });
+                }
+            };
+            reader.readAsArrayBuffer(file);
+        });
+    };
+
+    const handleDropOnContainer = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         event.stopPropagation();
         setIsDragging(false);
-        logger.log("Drop event detected on view container.");
-    
-        const targetElement = event.target as HTMLElement;
-        const dropTargetNodeElement = targetElement.closest('.treenode-li');
-        let targetPath = files.length > 0 ? files[0].absolutePath : ''; // Default to root
-    
-        if (dropTargetNodeElement && dropTargetNodeElement.getAttribute('data-path')) {
-            const potentialPath = dropTargetNodeElement.getAttribute('data-path')!;
-            // Check if the drop target is a directory
-            const nodeMap = new Map<string, FileNode>();
-            const buildMap = (node: FileNode) => {
-                nodeMap.set(node.absolutePath, node);
-                node.children?.forEach(buildMap);
-            };
-            files.forEach(buildMap);
-            const targetNode = nodeMap.get(potentialPath);
-            if (targetNode?.children) { // It's a directory
-                targetPath = potentialPath;
-            } else { // It's a file, use its parent
-                 targetPath = potentialPath.substring(0, potentialPath.lastIndexOf('/'));
-            }
-        }
+        logger.log('--- DROP ON MAIN CONTAINER (FALLBACK) ---');
         
-        if (event.dataTransfer.items) {
-            for (const item of event.dataTransfer.items) {
-                if (item.kind === 'file') {
-                    const file = item.getAsFile();
-                    if (file) {
-                        const reader = new FileReader();
-                        reader.onload = (e) => {
-                            const buffer = e.target?.result;
-                            if (buffer instanceof ArrayBuffer) {
-                                const data = new Uint8Array(buffer);
-                                const finalTargetPath = `${targetPath}/${file.name}`;
-                                logger.log(`Sending file ${file.name} to backend to be saved at ${finalTargetPath}`);
-                                clientIpc.sendToServer(ClientToServerChannel.RequestAddFileFromBuffer, { targetPath: finalTargetPath, data });
-                            }
-                        };
-                        reader.readAsArrayBuffer(file);
-                    }
-                }
-            }
-        }
+        const targetDir = files.length > 0 ? files[0].absolutePath : '';
+        logger.log(`Drop target directory identified as root: ${targetDir}`);
+        processAndSendFiles(event.dataTransfer.files, targetDir);
     };
     
     const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault(); // Necessary to allow drop
-        if (!isDragging) setIsDragging(true);
+    };
+
+    const handleDragEnter = (event: React.DragEvent<HTMLDivElement>) => {
+        event.preventDefault();
+        event.stopPropagation();
+        logger.log('Drag Enter on main container.');
+        setIsDragging(true);
     };
 
     const handleDragLeave = (event: React.DragEvent<HTMLDivElement>) => {
-        // Prevent flickering when moving over child elements
+        event.preventDefault();
+        event.stopPropagation();
         if (event.currentTarget.contains(event.relatedTarget as Node)) {
             return;
         }
+        logger.log('Drag Leave from main container.');
         setIsDragging(false);
     };
 
@@ -304,8 +297,9 @@ const App = () => {
     return (
         <div 
             className={`view-container ${isDragging ? 'drag-over' : ''}`} 
-            onDrop={handleDrop} 
+            onDrop={handleDropOnContainer} 
             onDragOver={handleDragOver}
+            onDragEnter={handleDragEnter}
             onDragLeave={handleDragLeave}
         >
             <div className="view-header">
