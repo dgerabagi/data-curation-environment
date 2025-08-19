@@ -12,7 +12,6 @@ import { ProblemCountsMap } from "@/common/ipc/channels.type";
 import { Action, MoveActionPayload } from "./action.service";
 
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
-const BINARY_EXTENSIONS = new Set(['.exe', '.dll', '.bin', '.pdf', '.zip', '.gz', '.7z', '.mp3', '.wav', '.mov', '.mp4', '.dem']);
 const EXCLUSION_PATTERNS = ['node_modules', 'dist', 'out', '.git'];
 
 // Helper to normalize paths to use forward slashes, which is consistent in webviews
@@ -111,30 +110,28 @@ export class FSService {
         });
     }
 
-    private async getFileStats(filePath: string): Promise<{ tokenCount: number, sizeInBytes: number, isImage: boolean, extension: string, isSelectable: boolean }> {
+    private async getFileStats(filePath: string): Promise<{ tokenCount: number, sizeInBytes: number, isImage: boolean, extension: string }> {
         const extension = path.extname(filePath).toLowerCase();
         try {
             const stats = await fs.stat(filePath);
             const isImage = IMAGE_EXTENSIONS.has(extension);
-            const isBinary = BINARY_EXTENSIONS.has(extension);
-            const isSelectable = !isImage && !isBinary;
             
-            if (!isSelectable) {
-                return { tokenCount: 0, sizeInBytes: stats.size, isImage, extension, isSelectable };
+            if (isImage) {
+                return { tokenCount: 0, sizeInBytes: stats.size, isImage, extension };
             }
 
             if (stats.size > 5_000_000) {
                 Services.loggerService.warn(`Skipping token count for large file: ${filePath} (${stats.size} bytes)`);
-                return { tokenCount: 0, sizeInBytes: stats.size, isImage: false, extension, isSelectable: true };
+                return { tokenCount: 0, sizeInBytes: stats.size, isImage: false, extension };
             }
             
             const content = await fs.readFile(filePath, 'utf-8');
             const tokenCount = Math.ceil(content.length / 4);
-            return { tokenCount, sizeInBytes: stats.size, isImage: false, extension, isSelectable };
+            return { tokenCount, sizeInBytes: stats.size, isImage: false, extension };
 
         } catch (error: any) {
             Services.loggerService.warn(`Could not get stats for ${filePath}: ${error.message}`);
-            return { tokenCount: 0, sizeInBytes: 0, isImage: false, extension, isSelectable: false };
+            return { tokenCount: 0, sizeInBytes: 0, isImage: false, extension };
         }
     }
 
@@ -237,7 +234,7 @@ export class FSService {
             name: rootName,
             absolutePath: normalizePath(rootPath),
             children: [],
-            tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isSelectable: true,
+            tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '',
             gitStatus: gitStatusMap.get(normalizePath(rootPath)),
             problemCounts: problemCountsMap[normalizePath(rootPath)]
         };
@@ -265,7 +262,7 @@ export class FSService {
                         name,
                         absolutePath: childPath,
                         children: await this._traverseDirectory(childUri, gitStatusMap, problemCountsMap),
-                        tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isSelectable: true,
+                        tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '',
                         gitStatus: gitStatusMap.get(childPath),
                         problemCounts: problemCountsMap[childPath]
                     };

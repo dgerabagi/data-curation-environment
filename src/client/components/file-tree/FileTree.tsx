@@ -173,7 +173,7 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
         const problemTooltip = `${problemErrorCount} Errors, ${problemWarningCount} Warnings`;
 
         const renderTokenCount = () => {
-            if (node.isImage || node.isSelectable === false) {
+            if (node.isImage) {
                 return <span>{formatBytes(node.sizeInBytes)}</span>;
             }
             if (node.tokenCount > 0) {
@@ -203,8 +203,6 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
                     checked={isChecked}
                     indeterminate={!isDirectlyChecked && !hasCheckedAncestor && checkedFiles.some(p => p.startsWith(node.absolutePath))}
                     onChange={(_, e) => handleFileCheckboxChange(e, node.absolutePath)}
-                    disabled={node.isSelectable === false}
-                    title={node.isSelectable === false ? "Binary files cannot be added to context" : ""}
                 />
                 <span className="file-icon">{isDirectory ? (isExpanded ? <VscFolderOpened /> : <VscFolder />) : getFileIcon(node.name)}</span>
                 <span className="file-name">{node.name}</span>

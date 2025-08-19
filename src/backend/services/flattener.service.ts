@@ -16,6 +16,8 @@ interface FileStats {
     error: string | null;
 }
 
+const BINARY_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico', '.exe', '.dll', '.bin', '.pdf', '.zip', '.gz', '.7z', '.mp3', '.wav', '.mov', '.mp4']);
+
 export class FlattenerService {
 
     public async flatten(selectedPaths: string[]) {
@@ -44,12 +46,9 @@ export class FlattenerService {
             await fs.writeFile(outputFilePath, outputContent, 'utf-8');
             vscode.window.showInformationMessage(`Successfully flattened ${results.filter(r => !r.error).length} files to flattened_repo.md.`);
 
-            // After successful flattening, tell the frontend to focus the new file.
-            // The file watcher will handle the refresh, but we want to guide the user.
             const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
             if (serverIpc) {
                 Services.loggerService.log("Triggering file focus after flattening.");
-                // Give the watcher a moment to trigger the refresh
                 setTimeout(() => {
                     serverIpc.sendToClient(ServerToClientChannel.FocusFile, { path: outputFilePath });
                 }, 500);
@@ -85,7 +84,6 @@ export class FlattenerService {
             for (const entry of entries) {
                 const fullPath = path.join(dirPath, entry.name);
                 if (entry.isDirectory()) {
-                    // Skip node_modules at any level
                     if (entry.name.toLowerCase() === 'node_modules') continue;
                     files = files.concat(await this.getAllFilesRecursive(fullPath));
                 } else {
@@ -99,6 +97,17 @@ export class FlattenerService {
     }
 
     private async getFileStatsAndContent(filePath: string): Promise<FileStats> {
+        const extension = path.extname(filePath).toLowerCase();
+        if (BINARY_EXTENSIONS.has(extension)) {
+            try {
+                const stats = await fs.stat(filePath);
+                const metadataContent = `<metadata format="${extension.substring(1).toUpperCase()}" sizeInBytes="${stats.size}" />`;
+                return { filePath, lines: 0, characters: 0, tokens: 0, content: metadataContent, error: null };
+            } catch (error: any) {
+                 return { filePath, lines: 0, characters: 0, tokens: 0, content: '', error: `Could not get stats for binary file: ${error.message}` };
+            }
+        }
+
         try {
             const content = await fs.readFile(filePath, 'utf-8');
             const lines = content.split('\n').length;
@@ -137,9 +146,9 @@ export class FlattenerService {
         output += `  Approx. Tokens: ${totalTokens}\n`;
         output += `-->\n\n`;
 
-        const top10 = [...validResults].sort((a, b) => b.tokens - a.tokens).slice(0, 10);
+        const top10 = [...validResults].filter(r => r.tokens > 0).sort((a, b) => b.tokens - a.tokens).slice(0, 10);
 
-        output += `<!-- Top 10 Files by Token Count -->\n`;
+        output += `<!-- Top 10 Text Files by Token Count -->\n`;
         top10.forEach((r, i) => {
             output += `${i + 1}. ${path.relative(rootDir, r.filePath)} (${r.tokens} tokens)\n`;
         });
