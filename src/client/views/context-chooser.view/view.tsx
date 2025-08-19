@@ -214,7 +214,20 @@ const App = () => {
         let targetPath = files.length > 0 ? files[0].absolutePath : ''; // Default to root
     
         if (dropTargetNodeElement && dropTargetNodeElement.getAttribute('data-path')) {
-            targetPath = dropTargetNodeElement.getAttribute('data-path')!;
+            const potentialPath = dropTargetNodeElement.getAttribute('data-path')!;
+            // Check if the drop target is a directory
+            const nodeMap = new Map<string, FileNode>();
+            const buildMap = (node: FileNode) => {
+                nodeMap.set(node.absolutePath, node);
+                node.children?.forEach(buildMap);
+            };
+            files.forEach(buildMap);
+            const targetNode = nodeMap.get(potentialPath);
+            if (targetNode?.children) { // It's a directory
+                targetPath = potentialPath;
+            } else { // It's a file, use its parent
+                 targetPath = potentialPath.substring(0, potentialPath.lastIndexOf('/'));
+            }
         }
         
         if (event.dataTransfer.items) {
@@ -241,11 +254,14 @@ const App = () => {
     
     const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault(); // Necessary to allow drop
-        setIsDragging(true);
+        if (!isDragging) setIsDragging(true);
     };
 
     const handleDragLeave = (event: React.DragEvent<HTMLDivElement>) => {
-        event.preventDefault();
+        // Prevent flickering when moving over child elements
+        if (event.currentTarget.contains(event.relatedTarget as Node)) {
+            return;
+        }
         setIsDragging(false);
     };
 

@@ -297,10 +297,11 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
                     ref={el => nodeRefs.current.set(node.absolutePath, el)}
                     draggable="true"
                     onDragStart={(e) => handleDragStart(e, node)}
-                    onDragOver={(e) => handleDragOver(e, node)}
+                    onDragEnter={(e) => handleDragOver(e, node)}
                     onDragLeave={handleDragLeave}
                     onDrop={(e) => handleDrop(e, node)}
                     className={`treenode-li ${isDropTarget ? 'drop-target' : ''}`}
+                    data-path={node.absolutePath}
                 >
                     <div
                         className={`treenode-item-wrapper ${isSelected ? 'selected' : ''} ${isFocused ? 'focused' : ''}`}

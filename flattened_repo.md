@@ -1,21 +1,21 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-19T22:10:41.771Z
+  Date Generated: 2025-08-19T22:27:44.795Z
   ---
   Total Files: 172
-  Total Lines: 13983
-  Total Characters: 593265
-  Approx. Tokens: 148382
+  Total Lines: 14013
+  Total Characters: 595126
+  Approx. Tokens: 148847
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
 2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
 3. src\backend\services\fs.service.ts (5576 tokens)
-4. src\client\views\context-chooser.view\view.tsx (4421 tokens)
-5. src\client\components\tree-view\TreeView.tsx (3567 tokens)
-6. src\client\views\context-chooser.view\view.scss (3444 tokens)
+4. src\client\views\context-chooser.view\view.tsx (4624 tokens)
+5. src\client\components\tree-view\TreeView.tsx (3580 tokens)
+6. src\client\views\context-chooser.view\view.scss (3446 tokens)
 7. src\client\components\SelectedFilesView.tsx (3256 tokens)
 8. src\backend\services\flattener.service.ts (2805 tokens)
 9. src\client\components\file-tree\FileTree.tsx (2715 tokens)
@@ -45,7 +45,7 @@
 21. src\Artifacts\A20. DCE - Phase 1 - Advanced UX & Automation Plan.md - Lines: 44 - Chars: 6117 - Tokens: 1530
 22. src\Artifacts\A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer.md - Lines: 48 - Chars: 7385 - Tokens: 1847
 23. src\Artifacts\A22. DCE - Phase 1 - Search & Filter Feature Plan.md - Lines: 58 - Chars: 3663 - Tokens: 916
-24. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 48 - Chars: 5110 - Tokens: 1278
+24. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 61 - Chars: 6098 - Tokens: 1525
 25. src\Artifacts\A24. DCE - Selection Paradigm Terminology.md - Lines: 57 - Chars: 3330 - Tokens: 833
 26. src\Artifacts\A25. DCE - Phase 1 - Git & Problems Integration Plan.md - Lines: 61 - Chars: 5871 - Tokens: 1468
 27. src\Artifacts\A26. DCE - Phase 1 - File System Traversal & Caching Strategy.md - Lines: 46 - Chars: 4009 - Tokens: 1003
@@ -75,13 +75,13 @@
 51. src\client\components\file-tree\FileTree.tsx - Lines: 246 - Chars: 10858 - Tokens: 2715
 52. src\client\components\file-tree\FileTree.utils.ts - Lines: 159 - Chars: 6069 - Tokens: 1518
 53. src\client\components\SelectedFilesView.tsx - Lines: 278 - Chars: 13021 - Tokens: 3256
-54. src\client\components\tree-view\TreeView.tsx - Lines: 338 - Chars: 14267 - Tokens: 3567
+54. src\client\components\tree-view\TreeView.tsx - Lines: 339 - Chars: 14319 - Tokens: 3580
 55. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 56. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
 57. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 58. src\client\views\context-chooser.view\on-message.ts - Lines: 111 - Chars: 4643 - Tokens: 1161
-59. src\client\views\context-chooser.view\view.scss - Lines: 563 - Chars: 13775 - Tokens: 3444
-60. src\client\views\context-chooser.view\view.tsx - Lines: 368 - Chars: 17683 - Tokens: 4421
+59. src\client\views\context-chooser.view\view.scss - Lines: 563 - Chars: 13783 - Tokens: 3446
+60. src\client\views\context-chooser.view\view.tsx - Lines: 384 - Chars: 18496 - Tokens: 4624
 61. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
 62. src\common\ipc\channels.enum.ts - Lines: 41 - Chars: 2037 - Tokens: 510
 63. src\common\ipc\channels.type.ts - Lines: 37 - Chars: 2713 - Tokens: 679
@@ -1582,7 +1582,7 @@ To improve navigation and usability in large projects, this feature introduces a
 # Artifact A23: DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan
 # Date Created: C29
 # Author: AI Model
-# Updated on: C49 (Add user story for dragging external files into the view)
+# Updated on: C54 (Refine technical plan for external drag-and-drop)
 
 - **Key/Value for A0:**
 - **Description:** Details the requirements for implementing full keyboard navigation and drag-and-drop file/folder operations within the main file tree view.
@@ -1612,17 +1612,30 @@ The focus management and event handling for keyboard navigation are complete and
 
 The HTML5 Drag and Drop API implementation within the React webview is complete and functional.
 
-### External Drag and Drop (In Progress - C49)
+### External Drag and Drop (Implementation C54)
 
-1.  **Frontend (`view.tsx`):**
-    *   Add `onDragEnter`, `onDragOver`, `onDragLeave`, and `onDrop` handlers to the main view container.
-    *   The `onDrop` handler will access `event.dataTransfer.files`. It will iterate through the `FileList`, read each file as an `ArrayBuffer` using the `FileReader` API.
-    *   For each file, it will send an IPC message (`RequestAddFileFromBuffer`) to the backend containing the target directory path and the file data (as a `Uint8Array`).
-2.  **Backend (`fs.service.ts`):**
-    *   Create a new IPC handler for `RequestAddFileFromBuffer`.
-    *   This handler will receive the target path and the `Uint8Array` data.
-    *   It will use `vscode.workspace.fs.writeFile(uri, buffer)` to create the new file on the file system.
-    *   The existing `FileSystemWatcher` will automatically detect the new file and trigger a full UI refresh.
+1.  **Frontend - Main Container (`view.tsx`):**
+    *   Add state to track the drag-over state: `const [isDragging, setIsDragging] = useState(false);`.
+    *   Attach `onDragOver`, `onDragLeave`, and `onDrop` handlers to the main container `div`.
+    *   `onDragOver`: Must call `event.preventDefault()` to allow dropping. Set `isDragging(true)`.
+    *   `onDragLeave`: Set `isDragging(false)`.
+    *   `onDrop`:
+        *   Must call `event.preventDefault()`.
+        *   Set `isDragging(false)`.
+        *   Determine the target directory by checking `event.target` and traversing up to find the closest element with a `data-path` attribute. If none is found, default to the workspace root.
+        *   Iterate through `event.dataTransfer.items` to get the dropped files.
+        *   For each file, use `FileReader` to read it as an `ArrayBuffer`.
+        *   Send an IPC message (`RequestAddFileFromBuffer`) to the backend with the target directory path, file name, and the file data as a `Uint8Array`.
+
+2.  **Frontend - Target Highlighting (`TreeView.tsx`):**
+    *   Add state to track the specific drop target: `const [dropTarget, setDropTarget] = useState<string | null>(null);`.
+    *   Add `onDragEnter` to the folder `<li>` elements. It will check if the dragged item is not the folder itself and then call `setDropTarget` with the folder's path.
+    *   The `className` of the `<li>` will be updated to include a `drop-target` class when its path matches the `dropTarget` state, providing visual feedback.
+
+3.  **Backend (`fs.service.ts`):**
+    *   The existing `handleAddFileFromBuffer` handler is sufficient. It receives the full target path and the file's buffer.
+    *   It uses `vscode.workspace.fs.writeFile` to create the file.
+    *   The existing `FileSystemWatcher` will detect the new file and trigger a full UI refresh automatically.
 
 ### Select All / Context Menu / Delete Key in Selected Items (Completed)
 
@@ -6117,10 +6130,11 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
                     ref={el => nodeRefs.current.set(node.absolutePath, el)}
                     draggable="true"
                     onDragStart={(e) => handleDragStart(e, node)}
-                    onDragOver={(e) => handleDragOver(e, node)}
+                    onDragEnter={(e) => handleDragOver(e, node)}
                     onDragLeave={handleDragLeave}
                     onDrop={(e) => handleDrop(e, node)}
                     className={`treenode-li ${isDropTarget ? 'drop-target' : ''}`}
+                    data-path={node.absolutePath}
                 >
                     <div
                         className={`treenode-item-wrapper ${isSelected ? 'selected' : ''} ${isFocused ? 'focused' : ''}`}
@@ -6321,7 +6335,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 </file>
 
 <file path="src/client/views/context-chooser.view/view.scss">
-/* Updated on: C51 (Add error styling) */
+/* Updated on: C54 (Add drag-and-drop styling) */
 body {
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -7103,7 +7117,20 @@ const App = () => {
         let targetPath = files.length > 0 ? files[0].absolutePath : ''; // Default to root
     
         if (dropTargetNodeElement && dropTargetNodeElement.getAttribute('data-path')) {
-            targetPath = dropTargetNodeElement.getAttribute('data-path')!;
+            const potentialPath = dropTargetNodeElement.getAttribute('data-path')!;
+            // Check if the drop target is a directory
+            const nodeMap = new Map<string, FileNode>();
+            const buildMap = (node: FileNode) => {
+                nodeMap.set(node.absolutePath, node);
+                node.children?.forEach(buildMap);
+            };
+            files.forEach(buildMap);
+            const targetNode = nodeMap.get(potentialPath);
+            if (targetNode?.children) { // It's a directory
+                targetPath = potentialPath;
+            } else { // It's a file, use its parent
+                 targetPath = potentialPath.substring(0, potentialPath.lastIndexOf('/'));
+            }
         }
         
         if (event.dataTransfer.items) {
@@ -7130,11 +7157,14 @@ const App = () => {
     
     const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault(); // Necessary to allow drop
-        setIsDragging(true);
+        if (!isDragging) setIsDragging(true);
     };
 
     const handleDragLeave = (event: React.DragEvent<HTMLDivElement>) => {
-        event.preventDefault();
+        // Prevent flickering when moving over child elements
+        if (event.currentTarget.contains(event.relatedTarget as Node)) {
+            return;
+        }
         setIsDragging(false);
     };
 
