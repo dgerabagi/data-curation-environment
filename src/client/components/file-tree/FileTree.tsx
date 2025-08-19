@@ -171,8 +171,12 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
         const hasProblems = problemErrorCount > 0 || problemWarningCount > 0;
         const problemColorClass = problemErrorCount > 0 ? 'problem-error' : 'problem-warning';
         const problemTooltip = `${problemErrorCount} Errors, ${problemWarningCount} Warnings`;
+        const hasError = !!node.error;
 
         const renderTokenCount = () => {
+            if (hasError) {
+                return <span>---</span>;
+            }
             if (node.isImage) {
                 return <span>{formatBytes(node.sizeInBytes)}</span>;
             }
@@ -197,16 +201,18 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
         const gitStatusClass = node.gitStatus ? `git-status-${node.gitStatus}` : '';
 
         return (
-            <div className={`file-item ${gitStatusClass} ${hasProblems ? problemColorClass : ''}`}>
+            <div className={`file-item ${gitStatusClass} ${hasProblems ? problemColorClass : ''} ${hasError ? 'has-error' : ''}`} title={node.error}>
                 <Checkbox
                     className="file-checkbox"
                     checked={isChecked}
                     indeterminate={!isDirectlyChecked && !hasCheckedAncestor && checkedFiles.some(p => p.startsWith(node.absolutePath))}
                     onChange={(_, e) => handleFileCheckboxChange(e, node.absolutePath)}
+                    disabled={hasError}
                 />
                 <span className="file-icon">{isDirectory ? (isExpanded ? <VscFolderOpened /> : <VscFolder />) : getFileIcon(node.name)}</span>
                 <span className="file-name">{node.name}</span>
                 <div className="file-stats">
+                    {hasError && <span className="error-icon" title={node.error}><VscError/></span>}
                     {node.gitStatus && <span className="git-status-badge" title={getGitStatusTooltip(node.gitStatus)}>{node.gitStatus}</span>}
                     {hasProblems && (
                         <span className="problem-badge" title={problemTooltip}>

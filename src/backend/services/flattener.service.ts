@@ -16,7 +16,7 @@ interface FileStats {
     error: string | null;
 }
 
-const BINARY_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico', '.exe', '.dll', '.bin', '.pdf', '.zip', '.gz', '.7z', '.mp3', '.wav', '.mov', '.mp4']);
+const BINARY_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico', '.exe', '.dll', '.bin', '.zip', '.gz', '.7z', '.mp3', '.wav', '.mov', '.mp4']);
 
 export class FlattenerService {
 
@@ -156,6 +156,22 @@ export class FlattenerService {
 
     private async getFileStatsAndContent(filePath: string): Promise<FileStats> {
         const extension = path.extname(filePath).toLowerCase();
+        
+        if (extension === '.pdf') {
+            const virtualContent = Services.fsService.getVirtualPdfContent(filePath);
+            if (virtualContent) {
+                return {
+                    filePath,
+                    content: virtualContent.text,
+                    lines: virtualContent.text.split('\n').length,
+                    characters: virtualContent.text.length,
+                    tokens: virtualContent.tokenCount,
+                    error: null
+                };
+            }
+            return { filePath, lines: 0, characters: 0, tokens: 0, content: '<!-- PDF content not processed or cached -->', error: null };
+        }
+
         if (BINARY_EXTENSIONS.has(extension)) {
             try {
                 const imageMetadata = await this._parseImageMetadata(filePath);

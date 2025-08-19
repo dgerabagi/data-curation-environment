@@ -51,6 +51,14 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         fsService.handleMoveFileRequest(data.oldPath, data.newPath);
     });
 
+    serverIpc.onClientMessage(ClientToServerChannel.RequestAddFileFromBuffer, (data) => {
+        fsService.handleAddFileFromBuffer(data.targetPath, data.data);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestPdfToText, (data) => {
+        fsService.handlePdfToTextRequest(data.path, serverIpc);
+    });
+
     serverIpc.onClientMessage(ClientToServerChannel.RequestUndo, () => {
         actionService.undo();
     });

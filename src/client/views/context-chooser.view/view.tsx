@@ -26,6 +26,7 @@ const App = () => {
     const [isSearchVisible, setIsSearchVisible] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [problemMap, setProblemMap] = useState<ProblemCountsMap>({});
+    const [isDragging, setIsDragging] = useState(false);
     const suppressActiveFileReveal = useRef(false);
     
     const clientIpc = ClientPostMessageManager.getInstance();
@@ -37,12 +38,19 @@ const App = () => {
     };
 
     const updateCheckedFiles = useCallback((path: string) => {
+        const isChecking = !checkedFiles.some(checkedPath => path.startsWith(checkedPath));
+
         setCheckedFiles(currentChecked => {
             const newChecked = addRemovePathInSelectedFiles(files, path, currentChecked);
             clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths: newChecked });
             return newChecked;
         });
-    }, [clientIpc, files]);
+
+        if (isChecking && path.toLowerCase().endsWith('.pdf')) {
+            logger.log(`Requesting text for PDF: ${path}`);
+            clientIpc.sendToServer(ClientToServerChannel.RequestPdfToText, { path });
+        }
+    }, [clientIpc, files, checkedFiles]);
 
     useEffect(() => {
         logger.log("Initializing view and requesting initial data.");
@@ -97,6 +105,35 @@ const App = () => {
         clientIpc.onServerMessage(ServerToClientChannel.UpdateProblemCounts, ({ problemMap: newProblemMap }) => {
             logger.log(`Received dynamic problem counts update with ${Object.keys(newProblemMap).length} entries.`);
             setProblemMap(newProblemMap);
+        });
+
+        clientIpc.onServerMessage(ServerToClientChannel.UpdateNodeStats, ({ path, tokenCount, error }) => {
+            logger.log(`Received stats update for ${path}. New token count: ${tokenCount}, Error: ${error}`);
+            setFiles(currentFiles => {
+                const newFiles = JSON.parse(JSON.stringify(currentFiles)); // Deep copy for mutation
+                let nodeUpdated = false;
+
+                const findAndUpdate = (nodes: FileNode[]) => {
+                    for (const node of nodes) {
+                        if (node.absolutePath === path) {
+                            node.tokenCount = tokenCount;
+                            node.error = error;
+                            nodeUpdated = true;
+                            return true;
+                        }
+                        if (node.children && findAndUpdate(node.children)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                };
+
+                findAndUpdate(newFiles);
+                if (nodeUpdated) {
+                    return newFiles;
+                }
+                return currentFiles;
+            });
         });
 
         requestFiles();
@@ -166,6 +203,52 @@ const App = () => {
         });
     };
 
+    const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+        event.preventDefault();
+        event.stopPropagation();
+        setIsDragging(false);
+        logger.log("Drop event detected on view container.");
+    
+        const targetElement = event.target as HTMLElement;
+        const dropTargetNodeElement = targetElement.closest('.treenode-li');
+        let targetPath = files.length > 0 ? files[0].absolutePath : ''; // Default to root
+    
+        if (dropTargetNodeElement && dropTargetNodeElement.getAttribute('data-path')) {
+            targetPath = dropTargetNodeElement.getAttribute('data-path')!;
+        }
+        
+        if (event.dataTransfer.items) {
+            for (const item of event.dataTransfer.items) {
+                if (item.kind === 'file') {
+                    const file = item.getAsFile();
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            const buffer = e.target?.result;
+                            if (buffer instanceof ArrayBuffer) {
+                                const data = new Uint8Array(buffer);
+                                const finalTargetPath = `${targetPath}/${file.name}`;
+                                logger.log(`Sending file ${file.name} to backend to be saved at ${finalTargetPath}`);
+                                clientIpc.sendToServer(ClientToServerChannel.RequestAddFileFromBuffer, { targetPath: finalTargetPath, data });
+                            }
+                        };
+                        reader.readAsArrayBuffer(file);
+                    }
+                }
+            }
+        }
+    };
+    
+    const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
+        event.preventDefault(); // Necessary to allow drop
+        setIsDragging(true);
+    };
+
+    const handleDragLeave = (event: React.DragEvent<HTMLDivElement>) => {
+        event.preventDefault();
+        setIsDragging(false);
+    };
+
     const { totalFiles, totalTokens, selectedFileNodes } = useMemo(() => {
         let totalTokens = 0;
         const selectedFileSet = new Set<string>();
@@ -179,15 +262,13 @@ const App = () => {
         files.forEach(buildFileMap);
 
         const addNodeAndDescendants = (node: FileNode) => {
-            if (!node.children) {
+            if (!node.children) { // Is a file
                 if (!selectedFileSet.has(node.absolutePath)) {
                     selectedFileSet.add(node.absolutePath);
                     selectedNodes.push(node);
-                    if (!node.isImage) {
-                       totalTokens += node.tokenCount;
-                    }
+                    totalTokens += node.tokenCount;
                 }
-            } else {
+            } else { // Is a directory
                 node.children.forEach(child => addNodeAndDescendants(child));
             }
         };
@@ -199,13 +280,18 @@ const App = () => {
             }
         });
         
-        const finalFileNodes = selectedNodes.filter(n => !n.isImage && !n.children);
+        const finalFileNodes = selectedNodes.filter(n => !n.isImage);
 
         return { totalFiles: finalFileNodes.length, totalTokens, selectedFileNodes: finalFileNodes };
     }, [checkedFiles, files]);
 
     return (
-        <div className="view-container">
+        <div 
+            className={`view-container ${isDragging ? 'drag-over' : ''}`} 
+            onDrop={handleDrop} 
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+        >
             <div className="view-header">
                  <div className="header-row">
                     <div className="toolbar">

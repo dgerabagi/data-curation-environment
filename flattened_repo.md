@@ -1,34 +1,34 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-19T20:28:38.166Z
+  Date Generated: 2025-08-19T21:08:27.355Z
   ---
-  Total Files: 170
-  Total Lines: 13645
-  Total Characters: 573358
-  Approx. Tokens: 143405
+  Total Files: 173
+  Total Lines: 13945
+  Total Characters: 591219
+  Approx. Tokens: 147871
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
 2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
-3. src\backend\services\fs.service.ts (4849 tokens)
-4. src\client\components\tree-view\TreeView.tsx (3567 tokens)
-5. src\client\views\context-chooser.view\view.tsx (3465 tokens)
-6. src\client\views\context-chooser.view\view.scss (3347 tokens)
+3. src\backend\services\fs.service.ts (5430 tokens)
+4. src\client\views\context-chooser.view\view.tsx (4348 tokens)
+5. src\client\components\tree-view\TreeView.tsx (3567 tokens)
+6. src\client\views\context-chooser.view\view.scss (3382 tokens)
 7. src\client\components\SelectedFilesView.tsx (3256 tokens)
-8. src\backend\services\flattener.service.ts (2636 tokens)
-9. src\client\components\file-tree\FileTree.tsx (2635 tokens)
-10. The-Creator-AI-main\src\backend\services\code.service.ts (2618 tokens)
+8. src\backend\services\flattener.service.ts (2805 tokens)
+9. src\Artifacts\A0. DCE Master Artifact List.md (2657 tokens)
+10. src\client\components\file-tree\FileTree.tsx (2635 tokens)
 
 <!-- Full File List -->
-1. .gitignore - Lines: 9 - Chars: 108 - Tokens: 27
+1. .gitignore - Lines: 10 - Chars: 128 - Tokens: 32
 2. .vscodeignore - Lines: 7 - Chars: 76 - Tokens: 19
 3. bootstrap-flattener.js - Lines: 186 - Chars: 5877 - Tokens: 1470
 4. LICENSE - Lines: 21 - Chars: 1090 - Tokens: 273
-5. package.json - Lines: 76 - Chars: 2289 - Tokens: 573
+5. package.json - Lines: 77 - Chars: 2320 - Tokens: 580
 6. public\spiral.svg - Lines: 8 - Chars: 459 - Tokens: 115
-7. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 142 - Chars: 9941 - Tokens: 2486
+7. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 150 - Chars: 10625 - Tokens: 2657
 8. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 38 - Chars: 3311 - Tokens: 828
 9. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
 10. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 73 - Chars: 5105 - Tokens: 1277
@@ -45,7 +45,7 @@
 21. src\Artifacts\A20. DCE - Phase 1 - Advanced UX & Automation Plan.md - Lines: 44 - Chars: 6117 - Tokens: 1530
 22. src\Artifacts\A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer.md - Lines: 48 - Chars: 7385 - Tokens: 1847
 23. src\Artifacts\A22. DCE - Phase 1 - Search & Filter Feature Plan.md - Lines: 58 - Chars: 3663 - Tokens: 916
-24. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 42 - Chars: 5398 - Tokens: 1350
+24. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 48 - Chars: 5110 - Tokens: 1278
 25. src\Artifacts\A24. DCE - Selection Paradigm Terminology.md - Lines: 57 - Chars: 3330 - Tokens: 833
 26. src\Artifacts\A25. DCE - Phase 1 - Git & Problems Integration Plan.md - Lines: 61 - Chars: 5871 - Tokens: 1468
 27. src\Artifacts\A26. DCE - Phase 1 - File System Traversal & Caching Strategy.md - Lines: 46 - Chars: 4009 - Tokens: 1003
@@ -53,145 +53,148 @@
 29. src\Artifacts\A28. DCE - Packaging and Distribution Guide.md - Lines: 96 - Chars: 4075 - Tokens: 1019
 30. src\Artifacts\A29. DCE - Phase 1 - Binary and Image File Handling Strategy.md - Lines: 81 - Chars: 4217 - Tokens: 1055
 31. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
-32. src\Artifacts\A4. DCE - Analysis of The-Creator-AI Repo.md - Lines: 56 - Chars: 5722 - Tokens: 1431
-33. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
-34. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
-35. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
-36. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
-37. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
-38. src\backend\commands\commands.ts - Lines: 88 - Chars: 3807 - Tokens: 952
-39. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
-40. src\backend\services\action.service.ts - Lines: 73 - Chars: 2471 - Tokens: 618
-41. src\backend\services\flattener.service.ts - Lines: 250 - Chars: 10543 - Tokens: 2636
-42. src\backend\services\fs.service.ts - Lines: 436 - Chars: 19394 - Tokens: 4849
-43. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-44. src\backend\services\selection.service.ts - Lines: 108 - Chars: 4148 - Tokens: 1037
-45. src\backend\services\services.ts - Lines: 25 - Chars: 982 - Tokens: 246
-46. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
-47. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
-48. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
-49. src\client\components\file-tree\FileTree.tsx - Lines: 240 - Chars: 10539 - Tokens: 2635
-50. src\client\components\file-tree\FileTree.utils.ts - Lines: 159 - Chars: 6069 - Tokens: 1518
-51. src\client\components\SelectedFilesView.tsx - Lines: 278 - Chars: 13021 - Tokens: 3256
-52. src\client\components\tree-view\TreeView.tsx - Lines: 338 - Chars: 14267 - Tokens: 3567
-53. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
-54. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
-55. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-56. src\client\views\context-chooser.view\on-message.ts - Lines: 103 - Chars: 4298 - Tokens: 1075
-57. src\client\views\context-chooser.view\view.scss - Lines: 541 - Chars: 13385 - Tokens: 3347
-58. src\client\views\context-chooser.view\view.tsx - Lines: 282 - Chars: 13860 - Tokens: 3465
-59. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
-60. src\common\ipc\channels.enum.ts - Lines: 36 - Chars: 1816 - Tokens: 454
-61. src\common\ipc\channels.type.ts - Lines: 34 - Chars: 2421 - Tokens: 606
-62. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
-63. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-64. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-65. src\common\types\file-node.ts - Lines: 12 - Chars: 416 - Tokens: 104
-66. src\common\types\vscode-webview.d.ts - Lines: 13 - Chars: 357 - Tokens: 90
-67. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
-68. src\common\utils\view-html.ts - Lines: 26 - Chars: 971 - Tokens: 243
-69. src\common\view-types.ts - Lines: 8 - Chars: 246 - Tokens: 62
-70. src\extension.ts - Lines: 96 - Chars: 3743 - Tokens: 936
-71. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
-72. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
-73. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
-74. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
-75. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
-76. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
-77. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
-78. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
-79. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
-80. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
-81. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
-82. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
-83. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
-84. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
-85. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
-86. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
-87. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
-88. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
-89. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
-90. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
-91. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
-92. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
-93. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
-94. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
-95. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
-96. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
-97. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
-98. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
-99. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
-100. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
-101. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
-102. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
-103. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
-104. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
-105. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
-106. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
-107. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
-108. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
-109. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
-110. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
-111. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
-112. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
-113. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
-114. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
-115. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
-116. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
-117. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
-118. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
-119. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
-120. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
-121. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
-122. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
-123. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
-124. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
-125. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
-126. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
-127. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
-128. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
-129. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
-130. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
-131. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
-132. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
-133. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
-134. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
-135. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
-136. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
-137. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
-138. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-139. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
-140. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
-141. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
-142. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-143. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
-144. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
-145. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
-146. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-147. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
-148. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
-149. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
-150. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
-151. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
-152. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
-153. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
-154. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-155. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
-156. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
-157. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
-158. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
-159. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
-160. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
-161. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
-162. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
-163. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
-164. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
-165. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
-166. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
-167. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
-168. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
-169. tsconfig.json - Lines: 19 - Chars: 457 - Tokens: 115
-170. webpack.config.js - Lines: 63 - Chars: 1710 - Tokens: 428
+32. src\Artifacts\A30. DCE - Phase 1 - PDF Handling and Virtualization Strategy.md - Lines: 44 - Chars: 4431 - Tokens: 1108
+33. src\Artifacts\A31. DCE - Phase 2 - Multimodal Content Extraction (PDF Images).md - Lines: 44 - Chars: 4035 - Tokens: 1009
+34. src\Artifacts\A4. DCE - Analysis of The-Creator-AI Repo.md - Lines: 56 - Chars: 5722 - Tokens: 1431
+35. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
+36. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
+37. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
+38. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
+39. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
+40. src\backend\commands\commands.ts - Lines: 88 - Chars: 3807 - Tokens: 952
+41. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
+42. src\backend\services\action.service.ts - Lines: 73 - Chars: 2471 - Tokens: 618
+43. src\backend\services\flattener.service.ts - Lines: 266 - Chars: 11218 - Tokens: 2805
+44. src\backend\services\fs.service.ts - Lines: 484 - Chars: 21717 - Tokens: 5430
+45. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
+46. src\backend\services\pdf.service.ts - Lines: 28 - Chars: 1336 - Tokens: 334
+47. src\backend\services\selection.service.ts - Lines: 108 - Chars: 4148 - Tokens: 1037
+48. src\backend\services\services.ts - Lines: 27 - Chars: 1070 - Tokens: 268
+49. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
+50. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
+51. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
+52. src\client\components\file-tree\FileTree.tsx - Lines: 240 - Chars: 10539 - Tokens: 2635
+53. src\client\components\file-tree\FileTree.utils.ts - Lines: 159 - Chars: 6069 - Tokens: 1518
+54. src\client\components\SelectedFilesView.tsx - Lines: 278 - Chars: 13021 - Tokens: 3256
+55. src\client\components\tree-view\TreeView.tsx - Lines: 338 - Chars: 14267 - Tokens: 3567
+56. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
+57. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
+58. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
+59. src\client\views\context-chooser.view\on-message.ts - Lines: 111 - Chars: 4631 - Tokens: 1158
+60. src\client\views\context-chooser.view\view.scss - Lines: 548 - Chars: 13528 - Tokens: 3382
+61. src\client\views\context-chooser.view\view.tsx - Lines: 360 - Chars: 17392 - Tokens: 4348
+62. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
+63. src\common\ipc\channels.enum.ts - Lines: 41 - Chars: 2037 - Tokens: 510
+64. src\common\ipc\channels.type.ts - Lines: 37 - Chars: 2697 - Tokens: 675
+65. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
+66. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+67. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
+68. src\common\types\file-node.ts - Lines: 13 - Chars: 437 - Tokens: 110
+69. src\common\types\vscode-webview.d.ts - Lines: 13 - Chars: 357 - Tokens: 90
+70. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
+71. src\common\utils\view-html.ts - Lines: 26 - Chars: 971 - Tokens: 243
+72. src\common\view-types.ts - Lines: 8 - Chars: 246 - Tokens: 62
+73. src\extension.ts - Lines: 96 - Chars: 3743 - Tokens: 936
+74. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
+75. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
+76. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
+77. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
+78. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
+79. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
+80. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
+81. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
+82. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
+83. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
+84. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
+85. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
+86. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
+87. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
+88. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
+89. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
+90. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
+91. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
+92. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
+93. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
+94. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
+95. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
+96. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
+97. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
+98. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
+99. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
+100. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
+101. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
+102. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
+103. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
+104. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
+105. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
+106. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
+107. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
+108. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
+109. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
+110. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
+111. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
+112. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
+113. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
+114. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
+115. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
+116. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
+117. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
+118. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
+119. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
+120. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
+121. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
+122. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
+123. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
+124. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
+125. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
+126. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
+127. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
+128. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
+129. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
+130. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
+131. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
+132. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
+133. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
+134. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
+135. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
+136. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
+137. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
+138. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
+139. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
+140. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
+141. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+142. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
+143. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
+144. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
+145. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+146. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
+147. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
+148. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
+149. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+150. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
+151. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
+152. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
+153. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
+154. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
+155. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
+156. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
+157. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+158. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
+159. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
+160. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
+161. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
+162. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
+163. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
+164. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
+165. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
+166. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
+167. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
+168. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
+169. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
+170. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
+171. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
+172. tsconfig.json - Lines: 19 - Chars: 457 - Tokens: 115
+173. webpack.config.js - Lines: 63 - Chars: 1710 - Tokens: 428
 
 <file path=".gitignore">
 node_modules
@@ -203,6 +206,7 @@ out
 .vscode/
 The-Creator-AI-main/
 prompt.md
+.vscode/dce_cache/
 </file>
 
 <file path=".vscodeignore">
@@ -502,7 +506,8 @@ SOFTWARE.
         "react-dom": "^18.3.1",
         "react-icons": "^5.3.0",
         "rxjs": "^7.8.1",
-        "reflect-metadata": "^0.2.2"
+        "reflect-metadata": "^0.2.2",
+        "pdf-parse": "^1.1.1"
     }
 }
 </file>
@@ -522,7 +527,7 @@ SOFTWARE.
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C46 (Add A29 for Binary File Handling Strategy)
+# Updated on: C49 (Add A30 for PDF Handling and A31 for Multimodal Extraction)
 
 ## 1. Purpose
 
@@ -629,7 +634,7 @@ SOFTWARE.
 - **Tags:** feature plan, search, filter, tree view, ux, phase 1
 
 ### A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan
-- **Description:** Details the requirements for implementing full keyboard navigation and drag-and-drop file/folder operations within the main file tree view.
+- **Description:** Details the requirements for implementing full keyboard navigation and drag-and-drop file/folder operations within the main file tree.
 - **Tags:** feature plan, keyboard navigation, drag and drop, file operations, accessibility, ux, phase 1
 
 ### A24. DCE - Selection Paradigm Terminology
@@ -655,6 +660,14 @@ SOFTWARE.
 ### A29. DCE - Phase 1 - Binary and Image File Handling Strategy
 - **Description:** Defines the strategy for handling binary files; they can be checked, but only their metadata (path, size) is included in the flattened output, not their content.
 - **Tags:** feature plan, binary, image, metadata, flatten, phase 1
+
+### A30. DCE - Phase 1 - PDF Handling and Virtualization Strategy
+- **Description:** Defines the strategy for handling PDF files. Text is extracted on-demand and cached in memory for flattening, creating a "virtual" markdown file without modifying the user's workspace.
+- **Tags:** feature plan, pdf, text extraction, virtualization, cache, phase 1
+
+### A31. DCE - Phase 2 - Multimodal Content Extraction (PDF Images)
+- **Description:** A plan for a future feature to extract images from PDF files and use a multimodal LLM to generate rich, textual descriptions for inclusion in the context.
+- **Tags:** feature plan, multimodal, image to text, pdf, llm, phase 2
 
 ## II. Standalone Utilities & Guides
 
@@ -1570,7 +1583,7 @@ To improve navigation and usability in large projects, this feature introduces a
 # Artifact A23: DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan
 # Date Created: C29
 # Author: AI Model
-# Updated on: C41 (Add Delete key functionality for selected items list)
+# Updated on: C49 (Add user story for dragging external files into the view)
 
 - **Key/Value for A0:**
 - **Description:** Details the requirements for implementing full keyboard navigation and drag-and-drop file/folder operations within the main file tree view.
@@ -1585,30 +1598,36 @@ To achieve true feature parity with the native VS Code Explorer and cater to pow
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
 | AI-01 | **Keyboard Navigation** | As a power user, I want to navigate the file tree using only my keyboard, so I can find, select, and manage files without taking my hands off the keyboard. | - Arrow Up/Down keys move the focus between visible nodes. <br> - Arrow Right on a collapsed folder expands it. <br> - Arrow Right on an open folder or file moves focus to the first child. <br> - Arrow Left on an open folder collapses it. <br> - Arrow Left on a child node moves focus to its parent. <br> - `Enter` key opens the focused file or toggles expansion for a focused folder. <br> - `Spacebar` toggles the checkbox of the focused node. |
-| AI-02 | **Drag-and-Drop File Operations** | As a user, I want to be able to drag a file or folder and drop it into another folder to move it, so I can reorganize my project intuitively. | - Clicking and dragging a file or folder in the tree initiates a drag operation. <br> - Dragging over a folder highlights it as a potential drop target. <br> - Dropping a file/folder onto another folder moves the dragged item into the target folder. <br> - The backend file system is updated, and the tree view refreshes to reflect the new structure. |
-| AI-03 | **Select All in Selected List** | As a user, after curating a list, I want to click in the "Selected Items" panel and press `Ctrl+A` or use a context menu to select all files in that list, so I can quickly perform a batch action like "Remove selected". | - **(C37 Update)** Right-clicking in the "Selected Items" list shows a context menu with a "Select All" option. <br> - Clicking it selects all items currently rendered in the list. <br> - The "Remove selected" button's count updates to reflect the total number of items in the list. |
-| AI-04 | **Delete Key to Remove Selection** | As a user, when I have items selected in the "Selected Items" panel, I want to press the `Delete` key to remove them, so I can manage my list more quickly. | - When the "Selected Items" list has focus, pressing the `Delete` key performs the same action as clicking the "Remove selected" button. <br> - All currently selected items are removed from the overall checked files list. <br> - The local selection within the "Selected Items" panel is cleared. |
+| AI-02 | **Internal Drag-and-Drop** | As a user, I want to be able to drag a file or folder and drop it into another folder within the DCE view to move it, so I can reorganize my project intuitively. | - Clicking and dragging a file or folder in the tree initiates a drag operation. <br> - Dragging over a folder highlights it as a potential drop target. <br> - Dropping a file/folder onto another folder moves the dragged item into the target folder. <br> - The backend file system is updated, and the tree view refreshes to reflect the new structure. |
+| AI-03 | **External Drag-and-Drop** | As a user, I want to drag a file (e.g., a PDF) from my computer's file explorer and drop it into a folder in the DCE view to add it to my project, so I can quickly incorporate new assets. | - Dragging a file from the OS and dropping it onto a folder in the DCE view copies that file into the target folder in the workspace. <br> - The backend file system is updated. <br> - The file tree automatically refreshes to show the newly added file. |
+| AI-04 | **Select All in Selected List** | As a user, after curating a list, I want to click in the "Selected Items" panel and press `Ctrl+A` or use a context menu to select all files in that list, so I can quickly perform a batch action like "Remove selected". | - **(C37 Update)** Right-clicking in the "Selected Items" list shows a context menu with a "Select All" option. <br> - Clicking it selects all items currently rendered in the list. <br> - The "Remove selected" button's count updates to reflect the total number of items in the list. |
+| AI-05 | **Delete Key to Remove Selection** | As a user, when I have items selected in the "Selected Items" panel, I want to press the `Delete` key to remove them, so I can manage my list more quickly. | - When the "Selected Items" list has focus, pressing the `Delete` key performs the same action as clicking the "Remove selected" button. <br> - All currently selected items are removed from the overall checked files list. <br> - The local selection within the "Selected Items" panel is cleared. |
 
 ## 3. Technical Implementation Plan
 
-### Keyboard Navigation (In Progress - C41)
+### Keyboard Navigation (Completed)
 
-1.  **Focus Management (Frontend):**
-    *   **Root Cause Analysis (C38):** The primary bug was that after left-clicking a file, the main VS Code editor pane would open the file and aggressively steal keyboard focus from our webview. A simple `onClick` focus request was insufficient because it executed *before* the editor stole the focus.
-    *   **Codified Solution (C38):** The definitive fix is to reclaim focus *after* the editor has taken it. In the `onClick` handlers for file items (`TreeView.tsx` and `SelectedFilesView.tsx`), a `setTimeout` with a minimal delay (e.g., 100ms) is now used. This delayed callback executes *after* the `RequestOpenFile` IPC message has been processed and the editor has become active. The callback then programmatically calls `.focus()` on the appropriate list/tree container, pulling focus back to our extension and enabling subsequent keyboard events.
-2.  **Event Handling (`TreeView.tsx`):**
-    *   The `onKeyDown` handler contains a `switch` statement for `event.key`. It calls `event.preventDefault()` for handled keys to stop them from propagating to the editor.
-    *   A memoized, flattened list of all *visible* nodes is used to calculate the next/previous node for Up/Down arrow navigation.
-    *   The handler updates `focusedNodePath`, `expandedNodes` (for Left/Right arrows), or triggers the checkbox toggle function (for Spacebar).
-    *   The component applies a `.focused` CSS class to the node wrapper whose path matches `focusedNodePath`.
+The focus management and event handling for keyboard navigation are complete and stable.
 
-### Drag and Drop (Completed - C34)
+### Internal Drag and Drop (Completed)
 
-The native `vscode.TreeDragAndDropController` is designed for extensions using a `TreeDataProvider`. Since our UI is a custom React webview, a different approach using the HTML5 Drag and Drop API was successfully implemented.
+The HTML5 Drag and Drop API implementation within the React webview is complete and functional.
 
-### Select All / Context Menu / Delete Key in Selected Items (In Progress - C41)
+### External Drag and Drop (In Progress - C49)
 
-The context menu approach from C37 combined with the focus fix in C38 has resolved the `Ctrl+A` issue. The `Delete` key functionality will be added to the `onKeyDown` handler in `SelectedFilesView.tsx` to call the same removal logic as the "Remove selected" button.
+1.  **Frontend (`view.tsx`):**
+    *   Add `onDragEnter`, `onDragOver`, `onDragLeave`, and `onDrop` handlers to the main view container.
+    *   The `onDrop` handler will access `event.dataTransfer.files`. It will iterate through the `FileList`, read each file as an `ArrayBuffer` using the `FileReader` API.
+    *   For each file, it will send an IPC message (`RequestAddFileFromBuffer`) to the backend containing the target directory path and the file data (as a `Uint8Array`).
+2.  **Backend (`fs.service.ts`):**
+    *   Create a new IPC handler for `RequestAddFileFromBuffer`.
+    *   This handler will receive the target path and the `Uint8Array` data.
+    *   It will use `vscode.workspace.fs.writeFile(uri, buffer)` to create the new file on the file system.
+    *   The existing `FileSystemWatcher` will automatically detect the new file and trigger a full UI refresh.
+
+### Select All / Context Menu / Delete Key in Selected Items (Completed)
+
+The context menu and keyboard shortcuts for the "Selected Items" panel are complete and functional.
 </file>
 
 <file path="src/Artifacts/A24. DCE - Selection Paradigm Terminology.md">
@@ -2076,6 +2095,100 @@ The project will adhere to the following directory structure, derived directly f
 -   **Modular Frontend:** The `src/client/modules/` directory allows for building complex UIs by composing smaller, feature-focused modules.
 -   **Component-Based UI:** The `src/client/components/` directory holds the fundamental building blocks of the UI, promoting reusability.
 -   **Typed IPC Communication:** The use of `channels.enum.ts` and `channels.type.ts` in `src/common/ipc/` provides a strongly-typed and well-documented contract for communication between the webview and the extension host, reducing runtime errors.
+</file>
+
+<file path="src/Artifacts/A30. DCE - Phase 1 - PDF Handling and Virtualization Strategy.md">
+# Artifact A30: DCE - Phase 1 - PDF Handling and Virtualization Strategy
+# Date Created: C49
+# Author: AI Model
+
+- **Key/Value for A0:**
+- **Description:** Defines the strategy for handling PDF files. Text is extracted on-demand and cached in memory for flattening, creating a "virtual" markdown file without modifying the user's workspace.
+- **Tags:** feature plan, pdf, text extraction, virtualization, cache, phase 1
+
+## 1. Overview & Goal
+
+Users need to include the textual content of PDF documents in their flattened context. However, creating physical `.md` files for each PDF in the user's workspace is undesirable as it clutters their project. The goal of this strategy is to implement a "virtual file" system for PDFs. The extension will extract text from PDF files on demand and hold it in an in-memory cache, using this virtual content during the flattening process without ever writing new files to the user's disk.
+
+## 2. User Stories
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| PDF-01 | **Include PDF Text in Context** | As a user, when I check a `.pdf` file in the DCE view, I want its textual content to be included in the `flattened_repo.md` file, so I can use documents and papers as context. | - Checking a `.pdf` file is allowed. <br> - The token count displayed for the PDF reflects its extracted text content, not its binary size. <br> - When flattened, the text from the PDF is included within a `<file>` tag, just like a normal text file. <br> - No `.md` file is ever created in the user's workspace. |
+| PDF-02 | **Drag-Drop PDF to Add** | As a user, I want to drag a PDF from my computer's file explorer and drop it into the DCE view, so I can quickly add it to my project and include it in my context. | - Dropping a PDF file into a folder in the DCE view copies the PDF into that workspace directory. <br> - The new PDF immediately appears in the file tree. <br> - The user can then check it to include its text content for flattening. |
+
+## 3. Technical Implementation Plan
+
+1.  **Dependency:**
+    *   The `pdf-parse` library will be added as a dependency to `package.json` to handle text extraction from PDF buffers.
+
+2.  **Backend (`fs.service.ts`):**
+    *   **In-Memory Cache:** A new private cache will be added: `private pdfTextCache = new Map<string, { text: string; tokenCount: number }>();`. This will store the extracted text and calculated token count, keyed by the PDF's absolute path.
+    *   **New IPC Handler (`RequestPdfToText`):**
+        *   This handler will receive a file path for a PDF.
+        *   It will first check the `pdfTextCache`. If the content is present, it will return the cached data.
+        *   If not cached, it will read the PDF file into a buffer, use `pdf-parse` to extract the text, calculate the token count, store the result in the cache, and then return it.
+        *   It will send a `UpdateNodeStats` message back to the client with the new token count.
+
+3.  **Frontend (`view.tsx`):**
+    *   **On-Demand Extraction:** The `updateCheckedFiles` function will be modified. When a path that ends in `.pdf` is being checked for the first time, it will send a `RequestPdfToText` message to the backend.
+    *   **Dynamic Stats Update:** A new IPC listener for `UpdateNodeStats` will be added. When it receives a message, it will find the corresponding `FileNode` in the `files` state and update its `tokenCount` property, causing the UI to re-render with the correct information.
+
+4.  **Backend (`flattener.service.ts`):**
+    *   **Virtual Content Retrieval:** The `getFileStatsAndContent` method will be updated.
+    *   If it encounters a file path ending in `.pdf`, it will **not** attempt to read the file from the disk.
+    *   Instead, it will call a new method on the `FSService` (e.g., `getVirtualPdfContent(filePath)`) to retrieve the text from the `pdfTextCache`.
+    *   It will then use this cached text to generate the `FileStats` object, effectively treating the PDF as if it were a markdown file. If the content is not in the cache (e.g., the file was never checked), it will be flattened with empty content.
+
+5.  **External Drag-and-Drop:**
+    *   This will be handled by the generic "External Drag-and-Drop" feature planned in `A23`. The implementation will read the file buffer and send it to the backend for creation, which works for PDFs just as it does for any other file type.
+</file>
+
+<file path="src/Artifacts/A31. DCE - Phase 2 - Multimodal Content Extraction (PDF Images).md">
+# Artifact A31: DCE - Phase 2 - Multimodal Content Extraction (PDF Images)
+# Date Created: C49
+# Author: AI Model
+
+- **Key/Value for A0:**
+- **Description:** A plan for a future feature to extract images from PDF files and use a multimodal LLM to generate rich, textual descriptions for inclusion in the context.
+- **Tags:** feature plan, multimodal, image to text, pdf, llm, phase 2
+
+## 1. Overview & Goal
+
+Building on the PDF text extraction in Phase 1, this plan outlines a powerful Phase 2 enhancement: making the visual information within PDFs accessible to language models. Many technical papers, reports, and documents rely on diagrams, charts, and images to convey critical information. The goal of this feature is to extract these images from a PDF and use a multimodal vision-language model (VLM) to generate rich, textual descriptions. These descriptions can then be included in the flattened context, allowing an LLM to "understand" the visual elements of the document.
+
+## 2. User Story
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| MM-01 | **Understand PDF Images** | As a data curator, when I include a PDF containing charts and diagrams in my context, I want the extension to generate textual descriptions of those images, so the LLM I'm prompting can reason about the visual data. | - When a PDF is processed, the extension identifies and extracts embedded images. <br> - For each extracted image, the extension sends it to a configured multimodal LLM API (e.g., Gemini). <br> - The LLM API returns a detailed textual description of the image's content. <br> - These descriptions are inserted into the virtual markdown content of the PDF at the appropriate locations (e.g., `[Image: A bar chart showing user growth from 2022 to 2024...]`). <br> - This feature can be enabled/disabled in the extension's settings to manage API costs. |
+
+## 3. Technical Implementation Plan (High-Level)
+
+This is a complex feature that will require new services and dependencies, likely as part of the project's Phase 2.
+
+1.  **PDF Image Extraction Library:**
+    *   **Research:** The first step is to research and select a robust Node.js library capable of extracting raw image data (e.g., as buffers) from a PDF file. `pdf-lib` or native command-line tools like `pdfimages` (wrapped in a Node.js process) are potential candidates.
+    *   **Implementation:** A new method in `fs.service.ts`, `_extractImagesFromPdf(buffer)`, will be created to handle this process.
+
+2.  **New Service: `ImageDescriptionService`:**
+    *   A new backend service, `ImageDescriptionService`, will be created.
+    *   This service will be responsible for communicating with a multimodal LLM provider (e.g., Google's Gemini API).
+    *   It will have a method like `describeImage(imageBuffer: Buffer): Promise<string>`.
+    *   This method will handle the API request, sending the image data and receiving the text description.
+    *   It will require API key management, likely extending the existing settings infrastructure.
+
+3.  **Integration with PDF Processing:**
+    *   The `RequestPdfToText` handler in `fs.service.ts` will be significantly enhanced.
+    *   After parsing the text with `pdf-parse`, it would ideally also call the new image extraction method.
+    *   It would then iterate through the extracted images, call the `ImageDescriptionService` for each, and intelligently weave the resulting descriptions back into the main text content to create a comprehensive markdown representation of the entire PDF.
+    *   This process would be computationally expensive and time-consuming, requiring clear user feedback (e.g., progress indicators) in the UI.
+
+4.  **Configuration:**
+    *   New settings will be added to `package.json` and managed via a settings service to allow the user to:
+        *   Enable/disable this feature.
+        *   Configure their multimodal API provider and key.
+        *   Potentially set a budget or limit on the number of images to process per document.
 </file>
 
 <file path="src/Artifacts/A4. DCE - Analysis of The-Creator-AI Repo.md">
@@ -3884,7 +3997,7 @@ interface FileStats {
     error: string | null;
 }
 
-const BINARY_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico', '.exe', '.dll', '.bin', '.pdf', '.zip', '.gz', '.7z', '.mp3', '.wav', '.mov', '.mp4']);
+const BINARY_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico', '.exe', '.dll', '.bin', '.zip', '.gz', '.7z', '.mp3', '.wav', '.mov', '.mp4']);
 
 export class FlattenerService {
 
@@ -4024,6 +4137,22 @@ export class FlattenerService {
 
     private async getFileStatsAndContent(filePath: string): Promise<FileStats> {
         const extension = path.extname(filePath).toLowerCase();
+        
+        if (extension === '.pdf') {
+            const virtualContent = Services.fsService.getVirtualPdfContent(filePath);
+            if (virtualContent) {
+                return {
+                    filePath,
+                    content: virtualContent.text,
+                    lines: virtualContent.text.split('\n').length,
+                    characters: virtualContent.text.length,
+                    tokens: virtualContent.tokenCount,
+                    error: null
+                };
+            }
+            return { filePath, lines: 0, characters: 0, tokens: 0, content: '<!-- PDF content not processed or cached -->', error: null };
+        }
+
         if (BINARY_EXTENSIONS.has(extension)) {
             try {
                 const imageMetadata = await this._parseImageMetadata(filePath);
@@ -4131,9 +4260,10 @@ import { VIEW_TYPES } from "@/common/view-types";
 import { API as GitAPI, Status } from "../types/git";
 import { ProblemCountsMap } from "@/common/ipc/channels.type";
 import { Action, MoveActionPayload } from "./action.service";
+import pdf from 'pdf-parse';
 
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
-const EXCLUSION_PATTERNS = ['node_modules', 'dist', 'out', '.git'];
+const EXCLUSION_PATTERNS = ['node_modules', 'dist', 'out', '.git', 'dce_cache'];
 
 // Helper to normalize paths to use forward slashes, which is consistent in webviews
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
@@ -4145,6 +4275,7 @@ export class FSService {
     private diagnosticsDebounceTimer: NodeJS.Timeout | null = null;
     private gitApi?: GitAPI;
     private filesToIgnoreForAutoAdd: Set<string> = new Set();
+    private pdfTextCache = new Map<string, { text: string; tokenCount: number }>();
 
     constructor(gitApi?: GitAPI) {
         this.gitApi = gitApi;
@@ -4231,28 +4362,34 @@ export class FSService {
         });
     }
 
-    private async getFileStats(filePath: string): Promise<{ tokenCount: number, sizeInBytes: number, isImage: boolean, extension: string }> {
+    private async getFileStats(filePath: string): Promise<{ tokenCount: number, sizeInBytes: number, isImage: boolean, extension: string, isPdf: boolean }> {
         const extension = path.extname(filePath).toLowerCase();
         try {
             const stats = await fs.stat(filePath);
             const isImage = IMAGE_EXTENSIONS.has(extension);
+            const isPdf = extension === '.pdf';
             
             if (isImage) {
-                return { tokenCount: 0, sizeInBytes: stats.size, isImage, extension };
+                return { tokenCount: 0, sizeInBytes: stats.size, isImage, extension, isPdf: false };
+            }
+
+            if (isPdf) {
+                 const cached = this.pdfTextCache.get(filePath);
+                 return { tokenCount: cached?.tokenCount || 0, sizeInBytes: stats.size, isImage: false, extension, isPdf: true };
             }
 
             if (stats.size > 5_000_000) {
                 Services.loggerService.warn(`Skipping token count for large file: ${filePath} (${stats.size} bytes)`);
-                return { tokenCount: 0, sizeInBytes: stats.size, isImage: false, extension };
+                return { tokenCount: 0, sizeInBytes: stats.size, isImage: false, extension, isPdf: false };
             }
             
             const content = await fs.readFile(filePath, 'utf-8');
             const tokenCount = Math.ceil(content.length / 4);
-            return { tokenCount, sizeInBytes: stats.size, isImage: false, extension };
+            return { tokenCount, sizeInBytes: stats.size, isImage: false, extension, isPdf: false };
 
         } catch (error: any) {
             Services.loggerService.warn(`Could not get stats for ${filePath}: ${error.message}`);
-            return { tokenCount: 0, sizeInBytes: 0, isImage: false, extension };
+            return { tokenCount: 0, sizeInBytes: 0, isImage: false, extension, isPdf: false };
         }
     }
 
@@ -4355,7 +4492,7 @@ export class FSService {
             name: rootName,
             absolutePath: normalizePath(rootPath),
             children: [],
-            tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '',
+            tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false,
             gitStatus: gitStatusMap.get(normalizePath(rootPath)),
             problemCounts: problemCountsMap[normalizePath(rootPath)]
         };
@@ -4383,7 +4520,7 @@ export class FSService {
                         name,
                         absolutePath: childPath,
                         children: await this._traverseDirectory(childUri, gitStatusMap, problemCountsMap),
-                        tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '',
+                        tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false,
                         gitStatus: gitStatusMap.get(childPath),
                         problemCounts: problemCountsMap[childPath]
                     };
@@ -4449,7 +4586,47 @@ export class FSService {
         }
     }
 
+    public getVirtualPdfContent(filePath: string) {
+        return this.pdfTextCache.get(filePath);
+    }
+
     // --- File Operations ---
+
+    public async handleAddFileFromBuffer(targetPath: string, data: Uint8Array) {
+        try {
+            const uri = vscode.Uri.file(targetPath);
+            await vscode.workspace.fs.writeFile(uri, data);
+            Services.loggerService.log(`Successfully added file from buffer to ${targetPath}`);
+        } catch (error: any) {
+            const errorMessage = `Failed to add file from buffer: ${error.message}`;
+            vscode.window.showErrorMessage(errorMessage);
+            Services.loggerService.error(errorMessage);
+        }
+    }
+
+    public async handlePdfToTextRequest(filePath: string, serverIpc: ServerPostMessageManager) {
+        if (this.pdfTextCache.has(filePath)) {
+            const cached = this.pdfTextCache.get(filePath)!;
+            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: cached.tokenCount });
+            return;
+        }
+
+        try {
+            const buffer = await fs.readFile(filePath);
+            const data = await pdf(buffer);
+            const text = data.text;
+            const tokenCount = Math.ceil(text.length / 4);
+            
+            this.pdfTextCache.set(filePath, { text, tokenCount });
+            Services.loggerService.log(`Parsed and cached PDF: ${filePath} (${tokenCount} tokens)`);
+
+            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount });
+        } catch (error: any) {
+            const errorMessage = `Failed to parse PDF ${filePath}: ${error.message}`;
+            vscode.window.showErrorMessage(errorMessage);
+            Services.loggerService.error(errorMessage);
+        }
+    }
 
     public async handleOpenFileRequest(filePath: string) {
         try {
@@ -4598,6 +4775,37 @@ export class LoggerService {
 }
 </file>
 
+<file path="src/backend/services/pdf.service.ts">
+import * as pdfParse from 'pdf-parse';
+import { Services } from './services';
+
+export class PdfService {
+    public async processPdf(buffer: Buffer): Promise<string> {
+        try {
+            const data = await pdfParse(buffer);
+            
+            // TODO: Phase 2 - Image Extraction and Description
+            // This is where the logic for extracting images from the PDF would go.
+            // 1. Use a library like `pdf-lib` or `pdf.js` to parse the PDF and extract image objects.
+            // 2. For each image buffer:
+            //    a. Convert the image buffer to a base64 string.
+            //    b. Send the string to a multimodal LLM API (e.g., Gemini) with a detailed prompt.
+            //    c. Await the textual description.
+            //    d. Insert the description into the markdown output below.
+            Services.loggerService.log("PDF text extraction successful. Image extraction is a Phase 2 feature.");
+
+            let markdownContent = `<!-- This content was auto-generated from a PDF -->\n\n`;
+            markdownContent += data.text;
+
+            return markdownContent;
+        } catch (error: any) {
+            Services.loggerService.error(`Failed to parse PDF: ${error.message}`);
+            throw new Error('Failed to parse PDF content.');
+        }
+    }
+}
+</file>
+
 <file path="src/backend/services/selection.service.ts">
 import * as vscode from 'vscode';
 import { getContext } from '@/extension';
@@ -4717,6 +4925,7 @@ import { SelectionService } from "./selection.service";
 import { LoggerService } from "./logger.service";
 import { ActionService } from "./action.service";
 import { API as GitAPI } from "../types/git";
+import { PdfService } from "./pdf.service";
 
 // A simple container for services
 class ServiceContainer {
@@ -4725,6 +4934,7 @@ class ServiceContainer {
     public selectionService = new SelectionService();
     public loggerService = LoggerService.getInstance();
     public actionService = new ActionService();
+    public pdfService = new PdfService();
     
     public initialize(gitApi?: GitAPI) {
         this.loggerService.log("Services initializing...");
@@ -6046,6 +6256,14 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         fsService.handleMoveFileRequest(data.oldPath, data.newPath);
     });
 
+    serverIpc.onClientMessage(ClientToServerChannel.RequestAddFileFromBuffer, (data) => {
+        fsService.handleAddFileFromBuffer(data.targetPath, data.data);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestPdfToText, (data) => {
+        fsService.handlePdfToTextRequest(data.path, serverIpc);
+    });
+
     serverIpc.onClientMessage(ClientToServerChannel.RequestUndo, () => {
         actionService.undo();
     });
@@ -6099,7 +6317,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 </file>
 
 <file path="src/client/views/context-chooser.view/view.scss">
-/* Updated on: C37 (Add context menu styles for SelectedFilesView) */
+/* Updated on: C50 (Add drag-over style) */
 body {
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -6112,7 +6330,14 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
+    outline: 2px solid transparent;
+    transition: outline-color 0.2s ease-in-out;
 }
+
+.view-container.drag-over {
+    outline-color: var(--vscode-focusBorder);
+}
+
 
 .view-header {
     padding: 0 8px; /* Remove vertical padding */
@@ -6671,6 +6896,7 @@ const App = () => {
     const [isSearchVisible, setIsSearchVisible] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [problemMap, setProblemMap] = useState<ProblemCountsMap>({});
+    const [isDragging, setIsDragging] = useState(false);
     const suppressActiveFileReveal = useRef(false);
     
     const clientIpc = ClientPostMessageManager.getInstance();
@@ -6682,12 +6908,19 @@ const App = () => {
     };
 
     const updateCheckedFiles = useCallback((path: string) => {
+        const isChecking = !checkedFiles.some(checkedPath => path.startsWith(checkedPath));
+
         setCheckedFiles(currentChecked => {
             const newChecked = addRemovePathInSelectedFiles(files, path, currentChecked);
             clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths: newChecked });
             return newChecked;
         });
-    }, [clientIpc, files]);
+
+        if (isChecking && path.toLowerCase().endsWith('.pdf')) {
+            logger.log(`Requesting text for PDF: ${path}`);
+            clientIpc.sendToServer(ClientToServerChannel.RequestPdfToText, { path });
+        }
+    }, [clientIpc, files, checkedFiles]);
 
     useEffect(() => {
         logger.log("Initializing view and requesting initial data.");
@@ -6742,6 +6975,27 @@ const App = () => {
         clientIpc.onServerMessage(ServerToClientChannel.UpdateProblemCounts, ({ problemMap: newProblemMap }) => {
             logger.log(`Received dynamic problem counts update with ${Object.keys(newProblemMap).length} entries.`);
             setProblemMap(newProblemMap);
+        });
+
+        clientIpc.onServerMessage(ServerToClientChannel.UpdateNodeStats, ({ path, tokenCount }) => {
+            logger.log(`Received stats update for ${path}. New token count: ${tokenCount}`);
+            setFiles(currentFiles => {
+                const newFiles = JSON.parse(JSON.stringify(currentFiles));
+                const findAndUpdate = (nodes: FileNode[]) => {
+                    for (const node of nodes) {
+                        if (node.absolutePath === path) {
+                            node.tokenCount = tokenCount;
+                            return true;
+                        }
+                        if (node.children && findAndUpdate(node.children)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                };
+                findAndUpdate(newFiles);
+                return newFiles;
+            });
         });
 
         requestFiles();
@@ -6811,6 +7065,52 @@ const App = () => {
         });
     };
 
+    const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+        event.preventDefault();
+        event.stopPropagation();
+        setIsDragging(false);
+        logger.log("Drop event detected on view container.");
+    
+        const targetElement = event.target as HTMLElement;
+        const dropTargetNodeElement = targetElement.closest('.treenode-li');
+        let targetPath = files.length > 0 ? files[0].absolutePath : ''; // Default to root
+    
+        if (dropTargetNodeElement && dropTargetNodeElement.getAttribute('data-path')) {
+            targetPath = dropTargetNodeElement.getAttribute('data-path')!;
+        }
+        
+        if (event.dataTransfer.items) {
+            for (const item of event.dataTransfer.items) {
+                if (item.kind === 'file') {
+                    const file = item.getAsFile();
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            const buffer = e.target?.result;
+                            if (buffer instanceof ArrayBuffer) {
+                                const data = new Uint8Array(buffer);
+                                const finalTargetPath = `${targetPath}/${file.name}`;
+                                logger.log(`Sending file ${file.name} to backend to be saved at ${finalTargetPath}`);
+                                clientIpc.sendToServer(ClientToServerChannel.RequestAddFileFromBuffer, { targetPath: finalTargetPath, data });
+                            }
+                        };
+                        reader.readAsArrayBuffer(file);
+                    }
+                }
+            }
+        }
+    };
+    
+    const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
+        event.preventDefault(); // Necessary to allow drop
+        setIsDragging(true);
+    };
+
+    const handleDragLeave = (event: React.DragEvent<HTMLDivElement>) => {
+        event.preventDefault();
+        setIsDragging(false);
+    };
+
     const { totalFiles, totalTokens, selectedFileNodes } = useMemo(() => {
         let totalTokens = 0;
         const selectedFileSet = new Set<string>();
@@ -6824,15 +7124,13 @@ const App = () => {
         files.forEach(buildFileMap);
 
         const addNodeAndDescendants = (node: FileNode) => {
-            if (!node.children) {
+            if (!node.children) { // Is a file
                 if (!selectedFileSet.has(node.absolutePath)) {
                     selectedFileSet.add(node.absolutePath);
                     selectedNodes.push(node);
-                    if (!node.isImage) {
-                       totalTokens += node.tokenCount;
-                    }
+                    totalTokens += node.tokenCount;
                 }
-            } else {
+            } else { // Is a directory
                 node.children.forEach(child => addNodeAndDescendants(child));
             }
         };
@@ -6844,13 +7142,18 @@ const App = () => {
             }
         });
         
-        const finalFileNodes = selectedNodes.filter(n => !n.isImage && !n.children);
+        const finalFileNodes = selectedNodes.filter(n => !n.isImage);
 
         return { totalFiles: finalFileNodes.length, totalTokens, selectedFileNodes: finalFileNodes };
     }, [checkedFiles, files]);
 
     return (
-        <div className="view-container">
+        <div 
+            className={`view-container ${isDragging ? 'drag-over' : ''}`} 
+            onDrop={handleDrop} 
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+        >
             <div className="view-header">
                  <div className="header-row">
                     <div className="toolbar">
@@ -6978,9 +7281,13 @@ export enum ClientToServerChannel {
     RequestRevealInExplorer = "clientToServer.requestRevealInExplorer",
     RequestCopyPath = "clientToServer.requestCopyPath",
     RequestOpenFile = "clientToServer.requestOpenFile",
-    RequestMoveFile = "clientToServer.requestMoveFile", // New for Drag and Drop
+    RequestMoveFile = "clientToServer.requestMoveFile",
     RequestUndo = "clientToServer.requestUndo",
     RequestRedo = "clientToServer.requestRedo",
+    RequestAddFileFromBuffer = "clientToServer.requestAddFileFromBuffer", // For external drag-drop
+
+    // PDF Handling
+    RequestPdfToText = "clientToServer.requestPdfToText",
 
     // Selection Persistence
     SaveCurrentSelection = "clientToServer.saveCurrentSelection",
@@ -6999,7 +7306,8 @@ export enum ServerToClientChannel {
     SetActiveFile = "serverToClient.setActiveFile", // For active file sync
     FocusFile = "serverToClient.focusFile", // For auto-revealing a specific file
     SendAutoAddState = "serverToClient.sendAutoAddState",
-    UpdateProblemCounts = "serverToClient.updateProblemCounts", // New for dynamic updates
+    UpdateProblemCounts = "serverToClient.updateProblemCounts",
+    UpdateNodeStats = "serverToClient.updateNodeStats", // For updating PDF token counts
 }
 </file>
 
@@ -7024,6 +7332,8 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestMoveFile ? { oldPath: string, newPath: string } :
     T extends ClientToServerChannel.RequestUndo ? {} :
     T extends ClientToServerChannel.RequestRedo ? {} :
+    T extends ClientToServerChannel.RequestAddFileFromBuffer ? { targetPath: string, data: Uint8Array } :
+    T extends ClientToServerChannel.RequestPdfToText ? { path: string } :
     T extends ClientToServerChannel.SaveCurrentSelection ? { paths: string[] } :
     T extends ClientToServerChannel.RequestLastSelection ? {} :
     T extends ClientToServerChannel.SaveAutoAddState ? { enabled: boolean } :
@@ -7037,6 +7347,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.FocusFile ? { path: string } :
     T extends ServerToClientChannel.SendAutoAddState ? { enabled: boolean } :
     T extends ServerToClientChannel.UpdateProblemCounts ? { problemMap: ProblemCountsMap } :
+    T extends ServerToClientChannel.UpdateNodeStats ? { path: string, tokenCount: number } :
     never;
 </file>
 
@@ -7151,6 +7462,7 @@ export interface FileNode {
     isImage: boolean;
     sizeInBytes: number;
     extension: string;
+    isPdf: boolean;
     gitStatus?: string; // e.g., 'M', 'U', 'A', 'D', 'C'
     problemCounts?: { error: number; warning: number; };
 }

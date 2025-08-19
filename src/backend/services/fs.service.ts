@@ -10,9 +10,10 @@ import { VIEW_TYPES } from "@/common/view-types";
 import { API as GitAPI, Status } from "../types/git";
 import { ProblemCountsMap } from "@/common/ipc/channels.type";
 import { Action, MoveActionPayload } from "./action.service";
+import pdf from 'pdf-parse';
 
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
-const EXCLUSION_PATTERNS = ['node_modules', 'dist', 'out', '.git'];
+const EXCLUSION_PATTERNS = ['node_modules', 'dist', 'out', '.git', 'dce_cache'];
 
 // Helper to normalize paths to use forward slashes, which is consistent in webviews
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
@@ -24,6 +25,7 @@ export class FSService {
     private diagnosticsDebounceTimer: NodeJS.Timeout | null = null;
     private gitApi?: GitAPI;
     private filesToIgnoreForAutoAdd: Set<string> = new Set();
+    private pdfTextCache = new Map<string, { text: string; tokenCount: number }>();
 
     constructor(gitApi?: GitAPI) {
         this.gitApi = gitApi;
@@ -110,28 +112,34 @@ export class FSService {
         });
     }
 
-    private async getFileStats(filePath: string): Promise<{ tokenCount: number, sizeInBytes: number, isImage: boolean, extension: string }> {
+    private async getFileStats(filePath: string): Promise<{ tokenCount: number, sizeInBytes: number, isImage: boolean, extension: string, isPdf: boolean }> {
         const extension = path.extname(filePath).toLowerCase();
         try {
             const stats = await fs.stat(filePath);
             const isImage = IMAGE_EXTENSIONS.has(extension);
+            const isPdf = extension === '.pdf';
             
             if (isImage) {
-                return { tokenCount: 0, sizeInBytes: stats.size, isImage, extension };
+                return { tokenCount: 0, sizeInBytes: stats.size, isImage, extension, isPdf: false };
+            }
+
+            if (isPdf) {
+                 const cached = this.pdfTextCache.get(filePath);
+                 return { tokenCount: cached?.tokenCount || 0, sizeInBytes: stats.size, isImage: false, extension, isPdf: true };
             }
 
             if (stats.size > 5_000_000) {
                 Services.loggerService.warn(`Skipping token count for large file: ${filePath} (${stats.size} bytes)`);
-                return { tokenCount: 0, sizeInBytes: stats.size, isImage: false, extension };
+                return { tokenCount: 0, sizeInBytes: stats.size, isImage: false, extension, isPdf: false };
             }
             
             const content = await fs.readFile(filePath, 'utf-8');
             const tokenCount = Math.ceil(content.length / 4);
-            return { tokenCount, sizeInBytes: stats.size, isImage: false, extension };
+            return { tokenCount, sizeInBytes: stats.size, isImage: false, extension, isPdf: false };
 
         } catch (error: any) {
             Services.loggerService.warn(`Could not get stats for ${filePath}: ${error.message}`);
-            return { tokenCount: 0, sizeInBytes: 0, isImage: false, extension };
+            return { tokenCount: 0, sizeInBytes: 0, isImage: false, extension, isPdf: false };
         }
     }
 
@@ -234,7 +242,7 @@ export class FSService {
             name: rootName,
             absolutePath: normalizePath(rootPath),
             children: [],
-            tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '',
+            tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false,
             gitStatus: gitStatusMap.get(normalizePath(rootPath)),
             problemCounts: problemCountsMap[normalizePath(rootPath)]
         };
@@ -262,7 +270,7 @@ export class FSService {
                         name,
                         absolutePath: childPath,
                         children: await this._traverseDirectory(childUri, gitStatusMap, problemCountsMap),
-                        tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '',
+                        tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false,
                         gitStatus: gitStatusMap.get(childPath),
                         problemCounts: problemCountsMap[childPath]
                     };
@@ -328,7 +336,54 @@ export class FSService {
         }
     }
 
+    public getVirtualPdfContent(filePath: string) {
+        return this.pdfTextCache.get(filePath);
+    }
+
     // --- File Operations ---
+
+    public async handleAddFileFromBuffer(targetPath: string, data: Uint8Array) {
+        try {
+            const uri = vscode.Uri.file(targetPath);
+            await vscode.workspace.fs.writeFile(uri, data);
+            Services.loggerService.log(`Successfully added file from buffer to ${targetPath}`);
+        } catch (error: any) {
+            const errorMessage = `Failed to add file from buffer: ${error.message}`;
+            vscode.window.showErrorMessage(errorMessage);
+            Services.loggerService.error(errorMessage);
+        }
+    }
+
+    public async handlePdfToTextRequest(filePath: string, serverIpc: ServerPostMessageManager) {
+        if (this.pdfTextCache.has(filePath)) {
+            const cached = this.pdfTextCache.get(filePath)!;
+            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: cached.tokenCount });
+            return;
+        }
+
+        try {
+            // Check if file exists before reading
+            await fs.access(filePath); 
+            const buffer = await fs.readFile(filePath);
+            const data = await pdf(buffer);
+            const text = data.text;
+            const tokenCount = Math.ceil(text.length / 4);
+            
+            this.pdfTextCache.set(filePath, { text, tokenCount });
+            Services.loggerService.log(`Parsed and cached PDF: ${filePath} (${tokenCount} tokens)`);
+
+            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: tokenCount });
+        } catch (error: any) {
+            const isEnoent = error.code === 'ENOENT';
+            const errorMessage = isEnoent 
+                ? `File not found. It may have been moved or deleted.`
+                : `Failed to parse PDF: ${path.basename(filePath)}`;
+            
+            Services.loggerService.error(`Error in handlePdfToTextRequest for ${filePath}: ${error.message}`);
+            // Send an update that signifies an error state
+            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: 0, error: errorMessage });
+        }
+    }
 
     public async handleOpenFileRequest(filePath: string) {
         try {

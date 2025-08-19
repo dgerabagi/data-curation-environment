@@ -18,6 +18,8 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestMoveFile ? { oldPath: string, newPath: string } :
     T extends ClientToServerChannel.RequestUndo ? {} :
     T extends ClientToServerChannel.RequestRedo ? {} :
+    T extends ClientToServerChannel.RequestAddFileFromBuffer ? { targetPath: string, data: Uint8Array } :
+    T extends ClientToServerChannel.RequestPdfToText ? { path: string } :
     T extends ClientToServerChannel.SaveCurrentSelection ? { paths: string[] } :
     T extends ClientToServerChannel.RequestLastSelection ? {} :
     T extends ClientToServerChannel.SaveAutoAddState ? { enabled: boolean } :
@@ -31,4 +33,5 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.FocusFile ? { path: string } :
     T extends ServerToClientChannel.SendAutoAddState ? { enabled: boolean } :
     T extends ServerToClientChannel.UpdateProblemCounts ? { problemMap: ProblemCountsMap } :
+    T extends ServerToClientChannel.UpdateNodeStats ? { path: string, tokenCount: number, error?: string } :
     never;

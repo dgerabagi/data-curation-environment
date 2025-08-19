@@ -5,6 +5,7 @@ import { SelectionService } from "./selection.service";
 import { LoggerService } from "./logger.service";
 import { ActionService } from "./action.service";
 import { API as GitAPI } from "../types/git";
+import { PdfService } from "./pdf.service";
 
 // A simple container for services
 class ServiceContainer {
@@ -13,6 +14,7 @@ class ServiceContainer {
     public selectionService = new SelectionService();
     public loggerService = LoggerService.getInstance();
     public actionService = new ActionService();
+    public pdfService = new PdfService();
     
     public initialize(gitApi?: GitAPI) {
         this.loggerService.log("Services initializing...");
