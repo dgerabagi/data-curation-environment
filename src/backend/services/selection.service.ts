@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { getContext } from '@/extension';
 import { Services } from './services';
+import * as fs from 'fs/promises';
 
 const SELECTION_SETS_KEY = 'dce.selectionSets';
 const LAST_SELECTION_KEY = 'dce.lastSelection';
@@ -47,8 +48,36 @@ export class SelectionService {
 
     // --- Persistent Current Selection ---
 
-    public getLastSelection(): string[] {
-        return this.context.workspaceState.get<string[]>(LAST_SELECTION_KEY, []);
+    public async getLastSelection(): Promise<string[]> {
+        const savedPaths = this.context.workspaceState.get<string[]>(LAST_SELECTION_KEY, []);
+        if (savedPaths.length === 0) {
+            return [];
+        }
+    
+        Services.loggerService.log(`Validating ${savedPaths.length} paths from persisted selection.`);
+    
+        const validationPromises = savedPaths.map(async (path) => {
+            try {
+                await fs.access(path); // fs.access throws if the file does not exist
+                return { path, exists: true };
+            } catch {
+                return { path, exists: false };
+            }
+        });
+    
+        const validationResults = await Promise.all(validationPromises);
+        const validPaths = validationResults
+            .filter(result => result.exists)
+            .map(result => result.path);
+    
+        const invalidPathCount = savedPaths.length - validPaths.length;
+        if (invalidPathCount > 0) {
+            Services.loggerService.warn(`Removed ${invalidPathCount} non-existent paths from persisted selection.`);
+            // Self-heal the state
+            await this.saveCurrentSelection(validPaths);
+        }
+    
+        return validPaths;
     }
 
     public async saveCurrentSelection(paths: string[]): Promise<void> {
@@ -61,7 +90,7 @@ export class SelectionService {
         Services.loggerService.log(`Updating path in selections: ${oldPath} -> ${newPath}`);
 
         // Update last active selection
-        const lastSelection = this.getLastSelection();
+        const lastSelection = await this.getLastSelection();
         const updatedLastSelection = this.updatePathsInList(lastSelection, oldPath, newPath);
         await this.saveCurrentSelection(updatedLastSelection);
 

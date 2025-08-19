@@ -1,21 +1,21 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-19T21:23:18.684Z
+  Date Generated: 2025-08-19T21:54:15.480Z
   ---
   Total Files: 173
-  Total Lines: 13983
-  Total Characters: 593203
-  Approx. Tokens: 148367
+  Total Lines: 14016
+  Total Characters: 594467
+  Approx. Tokens: 148683
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
 2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
-3. src\backend\services\fs.service.ts (5529 tokens)
+3. src\backend\services\fs.service.ts (5544 tokens)
 4. src\client\views\context-chooser.view\view.tsx (4421 tokens)
 5. src\client\components\tree-view\TreeView.tsx (3567 tokens)
-6. src\client\views\context-chooser.view\view.scss (3439 tokens)
+6. src\client\views\context-chooser.view\view.scss (3444 tokens)
 7. src\client\components\SelectedFilesView.tsx (3256 tokens)
 8. src\backend\services\flattener.service.ts (2805 tokens)
 9. src\client\components\file-tree\FileTree.tsx (2715 tokens)
@@ -65,10 +65,10 @@
 41. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
 42. src\backend\services\action.service.ts - Lines: 73 - Chars: 2471 - Tokens: 618
 43. src\backend\services\flattener.service.ts - Lines: 266 - Chars: 11218 - Tokens: 2805
-44. src\backend\services\fs.service.ts - Lines: 489 - Chars: 22113 - Tokens: 5529
+44. src\backend\services\fs.service.ts - Lines: 490 - Chars: 22175 - Tokens: 5544
 45. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
 46. src\backend\services\pdf.service.ts - Lines: 28 - Chars: 1336 - Tokens: 334
-47. src\backend\services\selection.service.ts - Lines: 108 - Chars: 4148 - Tokens: 1037
+47. src\backend\services\selection.service.ts - Lines: 137 - Chars: 5318 - Tokens: 1330
 48. src\backend\services\services.ts - Lines: 27 - Chars: 1070 - Tokens: 268
 49. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
 50. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
@@ -80,8 +80,8 @@
 56. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 57. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
 58. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-59. src\client\views\context-chooser.view\on-message.ts - Lines: 111 - Chars: 4631 - Tokens: 1158
-60. src\client\views\context-chooser.view\view.scss - Lines: 560 - Chars: 13755 - Tokens: 3439
+59. src\client\views\context-chooser.view\on-message.ts - Lines: 111 - Chars: 4643 - Tokens: 1161
+60. src\client\views\context-chooser.view\view.scss - Lines: 563 - Chars: 13775 - Tokens: 3444
 61. src\client\views\context-chooser.view\view.tsx - Lines: 368 - Chars: 17683 - Tokens: 4421
 62. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
 63. src\common\ipc\channels.enum.ts - Lines: 41 - Chars: 2037 - Tokens: 510
@@ -4346,7 +4346,7 @@ export class FSService {
                 Services.loggerService.log(`Ignoring auto-add for recently moved file: ${normalizedPath}`);
             } else if (autoAddEnabled) {
                 Services.loggerService.log(`Auto-add enabled. Adding new file to selection: ${uri.fsPath}`);
-                const currentSelection = Services.selectionService.getLastSelection();
+                const currentSelection = await Services.selectionService.getLastSelection();
                 const newSelection = [...new Set([...currentSelection, normalizedPath])];
                 await Services.selectionService.saveCurrentSelection(newSelection);
             }
@@ -4686,7 +4686,8 @@ export class FSService {
     public async handleMoveFileRequest(oldPath: string, newPath: string) {
         try {
             // Bug Fix: Prevent auto-add for moved files that weren't checked
-            const isChecked = Services.selectionService.getLastSelection().some(p => p.startsWith(oldPath));
+            const lastSelection = await Services.selectionService.getLastSelection();
+            const isChecked = lastSelection.some(p => p.startsWith(oldPath));
             if (!isChecked) {
                 this.filesToIgnoreForAutoAdd.add(newPath);
                 // Clean up the ignore set after a short delay to prevent memory leaks
@@ -4815,6 +4816,7 @@ export class PdfService {
 import * as vscode from 'vscode';
 import { getContext } from '@/extension';
 import { Services } from './services';
+import * as fs from 'fs/promises';
 
 const SELECTION_SETS_KEY = 'dce.selectionSets';
 const LAST_SELECTION_KEY = 'dce.lastSelection';
@@ -4861,8 +4863,36 @@ export class SelectionService {
 
     // --- Persistent Current Selection ---
 
-    public getLastSelection(): string[] {
-        return this.context.workspaceState.get<string[]>(LAST_SELECTION_KEY, []);
+    public async getLastSelection(): Promise<string[]> {
+        const savedPaths = this.context.workspaceState.get<string[]>(LAST_SELECTION_KEY, []);
+        if (savedPaths.length === 0) {
+            return [];
+        }
+    
+        Services.loggerService.log(`Validating ${savedPaths.length} paths from persisted selection.`);
+    
+        const validationPromises = savedPaths.map(async (path) => {
+            try {
+                await fs.access(path); // fs.access throws if the file does not exist
+                return { path, exists: true };
+            } catch {
+                return { path, exists: false };
+            }
+        });
+    
+        const validationResults = await Promise.all(validationPromises);
+        const validPaths = validationResults
+            .filter(result => result.exists)
+            .map(result => result.path);
+    
+        const invalidPathCount = savedPaths.length - validPaths.length;
+        if (invalidPathCount > 0) {
+            Services.loggerService.warn(`Removed ${invalidPathCount} non-existent paths from persisted selection.`);
+            // Self-heal the state
+            await this.saveCurrentSelection(validPaths);
+        }
+    
+        return validPaths;
     }
 
     public async saveCurrentSelection(paths: string[]): Promise<void> {
@@ -4875,7 +4905,7 @@ export class SelectionService {
         Services.loggerService.log(`Updating path in selections: ${oldPath} -> ${newPath}`);
 
         // Update last active selection
-        const lastSelection = this.getLastSelection();
+        const lastSelection = await this.getLastSelection();
         const updatedLastSelection = this.updatePathsInList(lastSelection, oldPath, newPath);
         await this.saveCurrentSelection(updatedLastSelection);
 
@@ -6287,9 +6317,9 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         selectionService.saveCurrentSelection(data.paths);
     });
 
-    serverIpc.onClientMessage(ClientToServerChannel.RequestLastSelection, () => {
+    serverIpc.onClientMessage(ClientToServerChannel.RequestLastSelection, async () => {
         loggerService.log('Received RequestLastSelection from client.');
-        const lastSelection = selectionService.getLastSelection();
+        const lastSelection = await selectionService.getLastSelection();
         const autoAddState = selectionService.getAutoAddState();
         loggerService.log(`Found ${lastSelection.length} paths in last selection to restore.`);
         serverIpc.sendToClient(ServerToClientChannel.ApplySelectionSet, { paths: lastSelection });
@@ -6766,10 +6796,13 @@ body {
 }
 
 /* Error Styling */
-.file-item.has-error .file-name {
+.file-item.has-error {
     color: var(--vscode-list-errorForeground);
-    text-decoration: line-through;
     opacity: 0.7;
+
+    .file-name {
+        text-decoration: line-through;
+    }
 }
 
 .error-icon {

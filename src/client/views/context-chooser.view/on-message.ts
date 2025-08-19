@@ -71,9 +71,9 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         selectionService.saveCurrentSelection(data.paths);
     });
 
-    serverIpc.onClientMessage(ClientToServerChannel.RequestLastSelection, () => {
+    serverIpc.onClientMessage(ClientToServerChannel.RequestLastSelection, async () => {
         loggerService.log('Received RequestLastSelection from client.');
-        const lastSelection = selectionService.getLastSelection();
+        const lastSelection = await selectionService.getLastSelection();
         const autoAddState = selectionService.getAutoAddState();
         loggerService.log(`Found ${lastSelection.length} paths in last selection to restore.`);
         serverIpc.sendToClient(ServerToClientChannel.ApplySelectionSet, { paths: lastSelection });

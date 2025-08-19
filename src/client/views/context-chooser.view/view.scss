@@ -436,10 +436,13 @@ body {
 }
 
 /* Error Styling */
-.file-item.has-error .file-name {
+.file-item.has-error {
     color: var(--vscode-list-errorForeground);
-    text-decoration: line-through;
     opacity: 0.7;
+
+    .file-name {
+        text-decoration: line-through;
+    }
 }
 
 .error-icon {

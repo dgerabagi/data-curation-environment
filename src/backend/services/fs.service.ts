@@ -96,7 +96,7 @@ export class FSService {
                 Services.loggerService.log(`Ignoring auto-add for recently moved file: ${normalizedPath}`);
             } else if (autoAddEnabled) {
                 Services.loggerService.log(`Auto-add enabled. Adding new file to selection: ${uri.fsPath}`);
-                const currentSelection = Services.selectionService.getLastSelection();
+                const currentSelection = await Services.selectionService.getLastSelection();
                 const newSelection = [...new Set([...currentSelection, normalizedPath])];
                 await Services.selectionService.saveCurrentSelection(newSelection);
             }
@@ -436,7 +436,8 @@ export class FSService {
     public async handleMoveFileRequest(oldPath: string, newPath: string) {
         try {
             // Bug Fix: Prevent auto-add for moved files that weren't checked
-            const isChecked = Services.selectionService.getLastSelection().some(p => p.startsWith(oldPath));
+            const lastSelection = await Services.selectionService.getLastSelection();
+            const isChecked = lastSelection.some(p => p.startsWith(oldPath));
             if (!isChecked) {
                 this.filesToIgnoreForAutoAdd.add(newPath);
                 // Clean up the ignore set after a short delay to prevent memory leaks
