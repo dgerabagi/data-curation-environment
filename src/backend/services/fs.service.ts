@@ -50,7 +50,7 @@ export class FSService {
             
             const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
             if (serverIpc) {
-                serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, {});
+                serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, { reason: 'fileOp' });
             }
         }, 500); // Debounce for 500ms
     }

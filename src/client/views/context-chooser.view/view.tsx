@@ -5,7 +5,7 @@ import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
 import { FileNode } from '@/common/types/file-node';
 import FileTree from '../../components/file-tree/FileTree';
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { formatLargeNumber, formatNumberWithCommas } from '@/common/utils/formatting';
 import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, VscNewFolder, VscLoading, VscSave, VscFolderLibrary, VscSettingsGear, VscCheckAll, VscSearch, VscExpandAll } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
@@ -26,6 +26,7 @@ const App = () => {
     const [isSearchVisible, setIsSearchVisible] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [problemMap, setProblemMap] = useState<ProblemCountsMap>({});
+    const suppressActiveFileReveal = useRef(false);
     
     const clientIpc = ClientPostMessageManager.getInstance();
 
@@ -64,6 +65,11 @@ const App = () => {
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SetActiveFile, ({ path }) => {
+            if (suppressActiveFileReveal.current) {
+                logger.log(`[WebView] Suppressing set active file event for: ${path}`);
+                suppressActiveFileReveal.current = false; // Reset after first suppression
+                return;
+            }
             logger.log(`[WebView] Received set active file event for: ${path}`);
             setActiveFile(path);
         });
@@ -78,8 +84,12 @@ const App = () => {
             setIsAutoAddEnabled(enabled);
         });
 
-        clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, () => {
-            logger.log("Force refresh triggered from backend.");
+        clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => {
+            logger.log(`Force refresh triggered from backend. Reason: ${reason || 'unknown'}`);
+            if (reason === 'fileOp') {
+                suppressActiveFileReveal.current = true;
+                setTimeout(() => { suppressActiveFileReveal.current = false; }, 2000);
+            }
             requestFiles(true);
             clientIpc.sendToServer(ClientToServerChannel.RequestLastSelection, {});
         });
