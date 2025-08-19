@@ -51,32 +51,28 @@ export class SelectionService {
     public async getLastSelection(): Promise<string[]> {
         const savedPaths = this.context.workspaceState.get<string[]>(LAST_SELECTION_KEY, []);
         if (savedPaths.length === 0) {
+            Services.loggerService.log("[SelectionService] No last selection found in state.");
             return [];
         }
     
-        Services.loggerService.log(`Validating ${savedPaths.length} paths from persisted selection.`);
+        Services.loggerService.log(`[SelectionService] Found ${savedPaths.length} paths in persisted state. Validating...`);
+        
+        const validationPromises = savedPaths.map(path => 
+            fs.stat(path).then(() => ({ path, valid: true })).catch(() => ({ path, valid: false }))
+        );
     
-        const validationPromises = savedPaths.map(async (path) => {
-            try {
-                await fs.access(path); // fs.access throws if the file does not exist
-                return { path, exists: true };
-            } catch {
-                return { path, exists: false };
-            }
-        });
+        const results = await Promise.all(validationPromises);
     
-        const validationResults = await Promise.all(validationPromises);
-        const validPaths = validationResults
-            .filter(result => result.exists)
-            .map(result => result.path);
+        const validPaths = results.filter(r => r.valid).map(r => r.path);
+        const invalidPaths = results.filter(r => !r.valid).map(r => r.path);
     
-        const invalidPathCount = savedPaths.length - validPaths.length;
-        if (invalidPathCount > 0) {
-            Services.loggerService.warn(`Removed ${invalidPathCount} non-existent paths from persisted selection.`);
-            // Self-heal the state
+        if (invalidPaths.length > 0) {
+            Services.loggerService.warn(`[SelectionService] Removing ${invalidPaths.length} invalid paths from persisted state: ${invalidPaths.join(', ')}`);
+            // Self-heal the state by saving only the valid paths
             await this.saveCurrentSelection(validPaths);
         }
     
+        Services.loggerService.log(`[SelectionService] Returning ${validPaths.length} valid paths.`);
         return validPaths;
     }
 

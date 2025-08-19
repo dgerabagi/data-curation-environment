@@ -10,7 +10,8 @@ import { VIEW_TYPES } from "@/common/view-types";
 import { API as GitAPI, Status } from "../types/git";
 import { ProblemCountsMap } from "@/common/ipc/channels.type";
 import { Action, MoveActionPayload } from "./action.service";
-import pdf from 'pdf-parse';
+// @ts-ignore - This is a workaround for a bug in pdf-parse that causes an ENOENT error in VS Code extensions.
+import pdf from 'pdf-parse/lib/pdf-parse.js';
 
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 const EXCLUSION_PATTERNS = ['node_modules', 'dist', 'out', '.git', 'dce_cache'];

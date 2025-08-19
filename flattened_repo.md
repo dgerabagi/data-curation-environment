@@ -1,18 +1,18 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-19T21:54:15.480Z
+  Date Generated: 2025-08-19T22:10:41.771Z
   ---
-  Total Files: 173
-  Total Lines: 14016
-  Total Characters: 594467
-  Approx. Tokens: 148683
+  Total Files: 172
+  Total Lines: 13983
+  Total Characters: 593265
+  Approx. Tokens: 148382
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
 2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
-3. src\backend\services\fs.service.ts (5544 tokens)
+3. src\backend\services\fs.service.ts (5576 tokens)
 4. src\client\views\context-chooser.view\view.tsx (4421 tokens)
 5. src\client\components\tree-view\TreeView.tsx (3567 tokens)
 6. src\client\views\context-chooser.view\view.scss (3444 tokens)
@@ -65,136 +65,135 @@
 41. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
 42. src\backend\services\action.service.ts - Lines: 73 - Chars: 2471 - Tokens: 618
 43. src\backend\services\flattener.service.ts - Lines: 266 - Chars: 11218 - Tokens: 2805
-44. src\backend\services\fs.service.ts - Lines: 490 - Chars: 22175 - Tokens: 5544
+44. src\backend\services\fs.service.ts - Lines: 491 - Chars: 22304 - Tokens: 5576
 45. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-46. src\backend\services\pdf.service.ts - Lines: 28 - Chars: 1336 - Tokens: 334
-47. src\backend\services\selection.service.ts - Lines: 137 - Chars: 5318 - Tokens: 1330
-48. src\backend\services\services.ts - Lines: 27 - Chars: 1070 - Tokens: 268
-49. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
-50. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
-51. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
-52. src\client\components\file-tree\FileTree.tsx - Lines: 246 - Chars: 10858 - Tokens: 2715
-53. src\client\components\file-tree\FileTree.utils.ts - Lines: 159 - Chars: 6069 - Tokens: 1518
-54. src\client\components\SelectedFilesView.tsx - Lines: 278 - Chars: 13021 - Tokens: 3256
-55. src\client\components\tree-view\TreeView.tsx - Lines: 338 - Chars: 14267 - Tokens: 3567
-56. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
-57. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
-58. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-59. src\client\views\context-chooser.view\on-message.ts - Lines: 111 - Chars: 4643 - Tokens: 1161
-60. src\client\views\context-chooser.view\view.scss - Lines: 563 - Chars: 13775 - Tokens: 3444
-61. src\client\views\context-chooser.view\view.tsx - Lines: 368 - Chars: 17683 - Tokens: 4421
-62. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
-63. src\common\ipc\channels.enum.ts - Lines: 41 - Chars: 2037 - Tokens: 510
-64. src\common\ipc\channels.type.ts - Lines: 37 - Chars: 2713 - Tokens: 679
-65. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
-66. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-67. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-68. src\common\types\file-node.ts - Lines: 14 - Chars: 512 - Tokens: 128
-69. src\common\types\vscode-webview.d.ts - Lines: 13 - Chars: 357 - Tokens: 90
-70. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
-71. src\common\utils\view-html.ts - Lines: 26 - Chars: 971 - Tokens: 243
-72. src\common\view-types.ts - Lines: 8 - Chars: 246 - Tokens: 62
-73. src\extension.ts - Lines: 102 - Chars: 4403 - Tokens: 1101
-74. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
-75. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
-76. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
-77. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
-78. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
-79. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
-80. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
-81. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
-82. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
-83. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
-84. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
-85. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
-86. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
-87. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
-88. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
-89. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
-90. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
-91. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
-92. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
-93. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
-94. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
-95. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
-96. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
-97. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
-98. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
-99. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
-100. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
-101. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
-102. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
-103. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
-104. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
-105. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
-106. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
-107. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
-108. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
-109. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
-110. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
-111. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
-112. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
-113. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
-114. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
-115. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
-116. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
-117. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
-118. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
-119. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
-120. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
-121. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
-122. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
-123. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
-124. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
-125. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
-126. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
-127. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
-128. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
-129. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
-130. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
-131. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
-132. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
-133. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
-134. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
-135. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
-136. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
-137. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
-138. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
-139. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
-140. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
-141. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-142. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
-143. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
-144. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
-145. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-146. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
-147. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
-148. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
-149. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-150. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
-151. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
-152. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
-153. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
-154. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
-155. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
-156. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
-157. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-158. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
-159. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
-160. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
-161. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
-162. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
-163. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
-164. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
-165. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
-166. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
-167. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
-168. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
-169. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
-170. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
-171. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
-172. tsconfig.json - Lines: 19 - Chars: 457 - Tokens: 115
-173. webpack.config.js - Lines: 63 - Chars: 1710 - Tokens: 428
+46. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
+47. src\backend\services\services.ts - Lines: 25 - Chars: 982 - Tokens: 246
+48. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
+49. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
+50. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
+51. src\client\components\file-tree\FileTree.tsx - Lines: 246 - Chars: 10858 - Tokens: 2715
+52. src\client\components\file-tree\FileTree.utils.ts - Lines: 159 - Chars: 6069 - Tokens: 1518
+53. src\client\components\SelectedFilesView.tsx - Lines: 278 - Chars: 13021 - Tokens: 3256
+54. src\client\components\tree-view\TreeView.tsx - Lines: 338 - Chars: 14267 - Tokens: 3567
+55. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
+56. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
+57. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
+58. src\client\views\context-chooser.view\on-message.ts - Lines: 111 - Chars: 4643 - Tokens: 1161
+59. src\client\views\context-chooser.view\view.scss - Lines: 563 - Chars: 13775 - Tokens: 3444
+60. src\client\views\context-chooser.view\view.tsx - Lines: 368 - Chars: 17683 - Tokens: 4421
+61. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
+62. src\common\ipc\channels.enum.ts - Lines: 41 - Chars: 2037 - Tokens: 510
+63. src\common\ipc\channels.type.ts - Lines: 37 - Chars: 2713 - Tokens: 679
+64. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
+65. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+66. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
+67. src\common\types\file-node.ts - Lines: 14 - Chars: 512 - Tokens: 128
+68. src\common\types\vscode-webview.d.ts - Lines: 13 - Chars: 357 - Tokens: 90
+69. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
+70. src\common\utils\view-html.ts - Lines: 26 - Chars: 971 - Tokens: 243
+71. src\common\view-types.ts - Lines: 8 - Chars: 246 - Tokens: 62
+72. src\extension.ts - Lines: 102 - Chars: 4403 - Tokens: 1101
+73. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
+74. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
+75. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
+76. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
+77. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
+78. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
+79. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
+80. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
+81. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
+82. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
+83. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
+84. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
+85. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
+86. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
+87. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
+88. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
+89. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
+90. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
+91. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
+92. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
+93. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
+94. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
+95. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
+96. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
+97. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
+98. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
+99. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
+100. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
+101. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
+102. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
+103. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
+104. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
+105. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
+106. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
+107. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
+108. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
+109. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
+110. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
+111. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
+112. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
+113. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
+114. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
+115. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
+116. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
+117. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
+118. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
+119. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
+120. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
+121. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
+122. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
+123. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
+124. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
+125. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
+126. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
+127. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
+128. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
+129. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
+130. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
+131. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
+132. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
+133. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
+134. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
+135. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
+136. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
+137. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
+138. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
+139. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
+140. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+141. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
+142. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
+143. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
+144. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+145. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
+146. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
+147. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
+148. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+149. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
+150. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
+151. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
+152. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
+153. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
+154. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
+155. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
+156. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+157. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
+158. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
+159. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
+160. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
+161. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
+162. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
+163. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
+164. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
+165. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
+166. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
+167. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
+168. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
+169. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
+170. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
+171. tsconfig.json - Lines: 19 - Chars: 457 - Tokens: 115
+172. webpack.config.js - Lines: 63 - Chars: 1710 - Tokens: 428
 
 <file path=".gitignore">
 node_modules
@@ -4260,7 +4259,8 @@ import { VIEW_TYPES } from "@/common/view-types";
 import { API as GitAPI, Status } from "../types/git";
 import { ProblemCountsMap } from "@/common/ipc/channels.type";
 import { Action, MoveActionPayload } from "./action.service";
-import pdf from 'pdf-parse';
+// @ts-ignore - This is a workaround for a bug in pdf-parse that causes an ENOENT error in VS Code extensions.
+import pdf from 'pdf-parse/lib/pdf-parse.js';
 
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 const EXCLUSION_PATTERNS = ['node_modules', 'dist', 'out', '.git', 'dce_cache'];
@@ -4781,37 +4781,6 @@ export class LoggerService {
 }
 </file>
 
-<file path="src/backend/services/pdf.service.ts">
-import * as pdfParse from 'pdf-parse';
-import { Services } from './services';
-
-export class PdfService {
-    public async processPdf(buffer: Buffer): Promise<string> {
-        try {
-            const data = await pdfParse(buffer);
-            
-            // TODO: Phase 2 - Image Extraction and Description
-            // This is where the logic for extracting images from the PDF would go.
-            // 1. Use a library like `pdf-lib` or `pdf.js` to parse the PDF and extract image objects.
-            // 2. For each image buffer:
-            //    a. Convert the image buffer to a base64 string.
-            //    b. Send the string to a multimodal LLM API (e.g., Gemini) with a detailed prompt.
-            //    c. Await the textual description.
-            //    d. Insert the description into the markdown output below.
-            Services.loggerService.log("PDF text extraction successful. Image extraction is a Phase 2 feature.");
-
-            let markdownContent = `<!-- This content was auto-generated from a PDF -->\n\n`;
-            markdownContent += data.text;
-
-            return markdownContent;
-        } catch (error: any) {
-            Services.loggerService.error(`Failed to parse PDF: ${error.message}`);
-            throw new Error('Failed to parse PDF content.');
-        }
-    }
-}
-</file>
-
 <file path="src/backend/services/selection.service.ts">
 import * as vscode from 'vscode';
 import { getContext } from '@/extension';
@@ -4866,32 +4835,28 @@ export class SelectionService {
     public async getLastSelection(): Promise<string[]> {
         const savedPaths = this.context.workspaceState.get<string[]>(LAST_SELECTION_KEY, []);
         if (savedPaths.length === 0) {
+            Services.loggerService.log("[SelectionService] No last selection found in state.");
             return [];
         }
     
-        Services.loggerService.log(`Validating ${savedPaths.length} paths from persisted selection.`);
+        Services.loggerService.log(`[SelectionService] Found ${savedPaths.length} paths in persisted state. Validating...`);
+        
+        const validationPromises = savedPaths.map(path => 
+            fs.stat(path).then(() => ({ path, valid: true })).catch(() => ({ path, valid: false }))
+        );
     
-        const validationPromises = savedPaths.map(async (path) => {
-            try {
-                await fs.access(path); // fs.access throws if the file does not exist
-                return { path, exists: true };
-            } catch {
-                return { path, exists: false };
-            }
-        });
+        const results = await Promise.all(validationPromises);
     
-        const validationResults = await Promise.all(validationPromises);
-        const validPaths = validationResults
-            .filter(result => result.exists)
-            .map(result => result.path);
+        const validPaths = results.filter(r => r.valid).map(r => r.path);
+        const invalidPaths = results.filter(r => !r.valid).map(r => r.path);
     
-        const invalidPathCount = savedPaths.length - validPaths.length;
-        if (invalidPathCount > 0) {
-            Services.loggerService.warn(`Removed ${invalidPathCount} non-existent paths from persisted selection.`);
-            // Self-heal the state
+        if (invalidPaths.length > 0) {
+            Services.loggerService.warn(`[SelectionService] Removing ${invalidPaths.length} invalid paths from persisted state: ${invalidPaths.join(', ')}`);
+            // Self-heal the state by saving only the valid paths
             await this.saveCurrentSelection(validPaths);
         }
     
+        Services.loggerService.log(`[SelectionService] Returning ${validPaths.length} valid paths.`);
         return validPaths;
     }
 
@@ -4960,7 +4925,6 @@ import { SelectionService } from "./selection.service";
 import { LoggerService } from "./logger.service";
 import { ActionService } from "./action.service";
 import { API as GitAPI } from "../types/git";
-import { PdfService } from "./pdf.service";
 
 // A simple container for services
 class ServiceContainer {
@@ -4969,7 +4933,6 @@ class ServiceContainer {
     public selectionService = new SelectionService();
     public loggerService = LoggerService.getInstance();
     public actionService = new ActionService();
-    public pdfService = new PdfService();
     
     public initialize(gitApi?: GitAPI) {
         this.loggerService.log("Services initializing...");
