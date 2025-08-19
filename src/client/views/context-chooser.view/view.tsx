@@ -7,7 +7,7 @@ import { FileNode } from '@/common/types/file-node';
 import FileTree from '../../components/file-tree/FileTree';
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { formatLargeNumber, formatNumberWithCommas } from '@/common/utils/formatting';
-import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, VscNewFolder, VscLoading, VscSave, VscFolderLibrary, VscSettingsGear, VscCheckAll, VscSearch } from 'react-icons/vsc';
+import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, VscNewFolder, VscLoading, VscSave, VscFolderLibrary, VscSettingsGear, VscCheckAll, VscSearch, VscExpandAll } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import SelectedFilesView from '@/client/components/SelectedFilesView';
 import { addRemovePathInSelectedFiles, removePathsFromSelected } from '@/client/components/file-tree/FileTree.utils';
@@ -18,6 +18,7 @@ const App = () => {
     const [checkedFiles, setCheckedFiles] = useState<string[]>([]);
     const [activeFile, setActiveFile] = useState<string | undefined>();
     const [collapseTrigger, setCollapseTrigger] = useState(0);
+    const [expandAllTrigger, setExpandAllTrigger] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
     const [selectionSets, setSelectionSets] = useState<SelectionSet>({});
     const [isSelectionListMinimized, setIsSelectionListMinimized] = useState(false);
@@ -101,6 +102,11 @@ const App = () => {
     const handleRefresh = () => {
         logger.log("Refresh button clicked.");
         requestFiles(true);
+    };
+    
+    const handleExpandAll = () => {
+        logger.log("Expand All button clicked.");
+        setExpandAllTrigger(c => c + 1);
     };
 
     const handleCollapseAll = () => {
@@ -204,6 +210,7 @@ const App = () => {
                         <button onClick={handleNewFile} title="New File..."><VscNewFile /></button>
                         <button onClick={handleNewFolder} title="New Folder..."><VscNewFolder /></button>
                         <button onClick={handleRefresh} title="Refresh Explorer"><VscRefresh /></button>
+                        <button onClick={handleExpandAll} title="Expand All Folders"><VscExpandAll /></button>
                         <button onClick={handleCollapseAll} title="Collapse Folders in View"><VscCollapseAll /></button>
                     </div>
                  </div>
@@ -228,6 +235,7 @@ const App = () => {
                         updateCheckedFiles={updateCheckedFiles}
                         activeFile={activeFile}
                         collapseTrigger={collapseTrigger}
+                        expandAllTrigger={expandAllTrigger}
                         searchTerm={searchTerm}
                         problemMap={problemMap}
                     />

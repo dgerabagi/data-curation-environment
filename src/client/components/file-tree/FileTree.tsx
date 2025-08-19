@@ -18,6 +18,7 @@ interface FileTreeProps {
   activeFile?: string;
   updateCheckedFiles: (path: string) => void;
   collapseTrigger?: number;
+  expandAllTrigger?: number;
   searchTerm: string;
   problemMap: ProblemCountsMap;
 }
@@ -69,7 +70,7 @@ const filterTree = (nodes: FileNode[], term: string): FileNode[] => {
 };
 
 
-const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, updateCheckedFiles, collapseTrigger, searchTerm, problemMap }) => {
+const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, updateCheckedFiles, collapseTrigger, expandAllTrigger, searchTerm, problemMap }) => {
     const [contextMenu, setContextMenu] = useState<{ x: number, y: number, node: FileNode } | null>(null);
     const [renamingPath, setRenamingPath] = useState<string | null>(null);
     const [renameValue, setRenameValue] = useState('');
@@ -172,7 +173,7 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
         const problemTooltip = `${problemErrorCount} Errors, ${problemWarningCount} Warnings`;
 
         const renderTokenCount = () => {
-            if (node.isImage) {
+            if (node.isImage || node.isSelectable === false) {
                 return <span>{formatBytes(node.sizeInBytes)}</span>;
             }
             if (node.tokenCount > 0) {
@@ -202,6 +203,8 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
                     checked={isChecked}
                     indeterminate={!isDirectlyChecked && !hasCheckedAncestor && checkedFiles.some(p => p.startsWith(node.absolutePath))}
                     onChange={(_, e) => handleFileCheckboxChange(e, node.absolutePath)}
+                    disabled={node.isSelectable === false}
+                    title={node.isSelectable === false ? "Binary files cannot be added to context" : ""}
                 />
                 <span className="file-icon">{isDirectory ? (isExpanded ? <VscFolderOpened /> : <VscFolder />) : getFileIcon(node.name)}</span>
                 <span className="file-name">{node.name}</span>
@@ -226,7 +229,8 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
                 data={filteredData} 
                 renderNodeContent={(node, isExpanded) => renderFileNodeContent(node, isExpanded as boolean)} 
                 onContextMenu={handleContextMenu} 
-                collapseTrigger={collapseTrigger} 
+                collapseTrigger={collapseTrigger}
+                expandAllTrigger={expandAllTrigger}
                 activeFile={activeFile} 
                 updateCheckedFiles={updateCheckedFiles}
             />

@@ -12,6 +12,8 @@ export enum ClientToServerChannel {
     RequestCopyPath = "clientToServer.requestCopyPath",
     RequestOpenFile = "clientToServer.requestOpenFile",
     RequestMoveFile = "clientToServer.requestMoveFile", // New for Drag and Drop
+    RequestUndo = "clientToServer.requestUndo",
+    RequestRedo = "clientToServer.requestRedo",
 
     // Selection Persistence
     SaveCurrentSelection = "clientToServer.saveCurrentSelection",

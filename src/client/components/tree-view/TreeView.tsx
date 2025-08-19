@@ -16,12 +16,13 @@ interface TreeViewProps {
     data: TreeNode[];
     renderNodeContent?: (node: TreeNode, isExpanded: boolean) => React.ReactNode;
     collapseTrigger?: number;
+    expandAllTrigger?: number;
     onContextMenu?: (event: React.MouseEvent, node: TreeNode) => void;
     activeFile?: string;
     updateCheckedFiles: (path: string) => void;
 }
 
-const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTrigger = 0, onContextMenu, activeFile, updateCheckedFiles }) => {
+const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTrigger = 0, expandAllTrigger = 0, onContextMenu, activeFile, updateCheckedFiles }) => {
     const [expandedNodes, setExpandedNodes] = useState<string[]>([]);
     const [selectedPaths, setSelectedPaths] = useState<Set<string>>(new Set());
     const [focusedNodePath, setFocusedNodePath] = useState<string | null>(null);
@@ -69,6 +70,20 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
             }
         }
     }, [collapseTrigger, data]);
+
+    useEffect(() => {
+        if (expandAllTrigger > 0 && data.length > 0) {
+            const allDirPaths: string[] = [];
+            const collectDirs = (node: TreeNode) => {
+                if (node.children) {
+                    allDirPaths.push(node.absolutePath);
+                    node.children.forEach(collectDirs);
+                }
+            };
+            data.forEach(collectDirs);
+            setExpandedNodes(allDirPaths);
+        }
+    }, [expandAllTrigger, data]);
 
     useEffect(() => {
         if (activeFile && data.length > 0) {
@@ -156,6 +171,22 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     };
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
+        // Undo/Redo
+        if (e.ctrlKey && e.key.toLowerCase() === 'z') {
+            e.preventDefault();
+            e.stopPropagation();
+            logger.log("Undo requested from view.");
+            clientIpc.sendToServer(ClientToServerChannel.RequestUndo, {});
+            return;
+        }
+        if (e.ctrlKey && e.key.toLowerCase() === 'y') {
+            e.preventDefault();
+            e.stopPropagation();
+            logger.log("Redo requested from view.");
+            clientIpc.sendToServer(ClientToServerChannel.RequestRedo, {});
+            return;
+        }
+
         if (!focusedNodePath) return;
 
         const currentIndex = flatNodeList.current.findIndex(n => n.absolutePath === focusedNodePath);

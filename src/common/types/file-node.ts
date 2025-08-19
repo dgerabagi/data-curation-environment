@@ -9,4 +9,5 @@ export interface FileNode {
     extension: string;
     gitStatus?: string; // e.g., 'M', 'U', 'A', 'D', 'C'
     problemCounts?: { error: number; warning: number; };
+    isSelectable?: boolean; // Can this item be checked?
 }

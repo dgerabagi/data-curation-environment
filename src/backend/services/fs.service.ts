@@ -9,9 +9,11 @@ import { serverIPCs } from "@/client/views";
 import { VIEW_TYPES } from "@/common/view-types";
 import { API as GitAPI, Status } from "../types/git";
 import { ProblemCountsMap } from "@/common/ipc/channels.type";
+import { Action, MoveActionPayload } from "./action.service";
 
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
-const EXCLUSION_PATTERNS = ['node_modules', 'dist', 'out', '.git', 'flattened_repo.md'];
+const BINARY_EXTENSIONS = new Set(['.exe', '.dll', '.bin', '.pdf', '.zip', '.gz', '.7z', '.mp3', '.wav', '.mov', '.mp4', '.dem']);
+const EXCLUSION_PATTERNS = ['node_modules', 'dist', 'out', '.git'];
 
 // Helper to normalize paths to use forward slashes, which is consistent in webviews
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
@@ -109,28 +111,30 @@ export class FSService {
         });
     }
 
-    private async getFileStats(filePath: string): Promise<{ tokenCount: number, sizeInBytes: number, isImage: boolean, extension: string }> {
+    private async getFileStats(filePath: string): Promise<{ tokenCount: number, sizeInBytes: number, isImage: boolean, extension: string, isSelectable: boolean }> {
         const extension = path.extname(filePath).toLowerCase();
         try {
             const stats = await fs.stat(filePath);
             const isImage = IMAGE_EXTENSIONS.has(extension);
+            const isBinary = BINARY_EXTENSIONS.has(extension);
+            const isSelectable = !isImage && !isBinary;
             
-            if (isImage) {
-                return { tokenCount: 0, sizeInBytes: stats.size, isImage: true, extension };
+            if (!isSelectable) {
+                return { tokenCount: 0, sizeInBytes: stats.size, isImage, extension, isSelectable };
             }
 
             if (stats.size > 5_000_000) {
                 Services.loggerService.warn(`Skipping token count for large file: ${filePath} (${stats.size} bytes)`);
-                return { tokenCount: 0, sizeInBytes: stats.size, isImage: false, extension };
+                return { tokenCount: 0, sizeInBytes: stats.size, isImage: false, extension, isSelectable: true };
             }
             
             const content = await fs.readFile(filePath, 'utf-8');
             const tokenCount = Math.ceil(content.length / 4);
-            return { tokenCount, sizeInBytes: stats.size, isImage: false, extension };
+            return { tokenCount, sizeInBytes: stats.size, isImage: false, extension, isSelectable };
 
         } catch (error: any) {
             Services.loggerService.warn(`Could not get stats for ${filePath}: ${error.message}`);
-            return { tokenCount: 0, sizeInBytes: 0, isImage: false, extension };
+            return { tokenCount: 0, sizeInBytes: 0, isImage: false, extension, isSelectable: false };
         }
     }
 
@@ -233,7 +237,7 @@ export class FSService {
             name: rootName,
             absolutePath: normalizePath(rootPath),
             children: [],
-            tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '',
+            tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isSelectable: true,
             gitStatus: gitStatusMap.get(normalizePath(rootPath)),
             problemCounts: problemCountsMap[normalizePath(rootPath)]
         };
@@ -261,7 +265,7 @@ export class FSService {
                         name,
                         absolutePath: childPath,
                         children: await this._traverseDirectory(childUri, gitStatusMap, problemCountsMap),
-                        tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '',
+                        tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isSelectable: true,
                         gitStatus: gitStatusMap.get(childPath),
                         problemCounts: problemCountsMap[childPath]
                     };
@@ -391,6 +395,11 @@ export class FSService {
 
             await vscode.workspace.fs.rename(vscode.Uri.file(oldPath), vscode.Uri.file(newPath));
             await Services.selectionService.updatePathInSelections(oldPath, newPath);
+
+            // Push to undo stack
+            const action: Action = { type: 'move', payload: { fromPath: oldPath, toPath: newPath } as MoveActionPayload };
+            Services.actionService.push(action);
+
         } catch (error: any) {
             vscode.window.showErrorMessage(`Failed to move file: ${error.message}`);
             Services.loggerService.error(`Failed to move file from ${oldPath} to ${newPath}: ${error.message}`);
@@ -406,6 +415,7 @@ export class FSService {
         if (confirmation === 'Delete') {
             try {
                 await vscode.workspace.fs.delete(vscode.Uri.file(filePath), { recursive: true, useTrash: true });
+                // Note: Undo for delete is not implemented due to API limitations
             } catch (error: any) {
                 vscode.window.showErrorMessage(`Failed to delete: ${error.message}`);
             }

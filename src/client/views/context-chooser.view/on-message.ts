@@ -8,6 +8,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     const flattenerService = Services.flattenerService;
     const loggerService = Services.loggerService;
     const selectionService = Services.selectionService;
+    const actionService = Services.actionService;
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestWorkspaceFiles, (data) => {
         loggerService.log(`Received RequestWorkspaceFiles from client (force=${data.force}).`);
@@ -48,6 +49,14 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestMoveFile, (data) => {
         fsService.handleMoveFileRequest(data.oldPath, data.newPath);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestUndo, () => {
+        actionService.undo();
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestRedo, () => {
+        actionService.redo();
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.SaveCurrentSelection, (data) => {
