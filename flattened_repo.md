@@ -1,25 +1,25 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-19T21:08:27.355Z
+  Date Generated: 2025-08-19T21:23:18.684Z
   ---
   Total Files: 173
-  Total Lines: 13945
-  Total Characters: 591219
-  Approx. Tokens: 147871
+  Total Lines: 13983
+  Total Characters: 593203
+  Approx. Tokens: 148367
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
 2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
-3. src\backend\services\fs.service.ts (5430 tokens)
-4. src\client\views\context-chooser.view\view.tsx (4348 tokens)
+3. src\backend\services\fs.service.ts (5529 tokens)
+4. src\client\views\context-chooser.view\view.tsx (4421 tokens)
 5. src\client\components\tree-view\TreeView.tsx (3567 tokens)
-6. src\client\views\context-chooser.view\view.scss (3382 tokens)
+6. src\client\views\context-chooser.view\view.scss (3439 tokens)
 7. src\client\components\SelectedFilesView.tsx (3256 tokens)
 8. src\backend\services\flattener.service.ts (2805 tokens)
-9. src\Artifacts\A0. DCE Master Artifact List.md (2657 tokens)
-10. src\client\components\file-tree\FileTree.tsx (2635 tokens)
+9. src\client\components\file-tree\FileTree.tsx (2715 tokens)
+10. src\Artifacts\A0. DCE Master Artifact List.md (2657 tokens)
 
 <!-- Full File List -->
 1. .gitignore - Lines: 10 - Chars: 128 - Tokens: 32
@@ -65,7 +65,7 @@
 41. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
 42. src\backend\services\action.service.ts - Lines: 73 - Chars: 2471 - Tokens: 618
 43. src\backend\services\flattener.service.ts - Lines: 266 - Chars: 11218 - Tokens: 2805
-44. src\backend\services\fs.service.ts - Lines: 484 - Chars: 21717 - Tokens: 5430
+44. src\backend\services\fs.service.ts - Lines: 489 - Chars: 22113 - Tokens: 5529
 45. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
 46. src\backend\services\pdf.service.ts - Lines: 28 - Chars: 1336 - Tokens: 334
 47. src\backend\services\selection.service.ts - Lines: 108 - Chars: 4148 - Tokens: 1037
@@ -73,7 +73,7 @@
 49. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
 50. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
 51. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
-52. src\client\components\file-tree\FileTree.tsx - Lines: 240 - Chars: 10539 - Tokens: 2635
+52. src\client\components\file-tree\FileTree.tsx - Lines: 246 - Chars: 10858 - Tokens: 2715
 53. src\client\components\file-tree\FileTree.utils.ts - Lines: 159 - Chars: 6069 - Tokens: 1518
 54. src\client\components\SelectedFilesView.tsx - Lines: 278 - Chars: 13021 - Tokens: 3256
 55. src\client\components\tree-view\TreeView.tsx - Lines: 338 - Chars: 14267 - Tokens: 3567
@@ -81,20 +81,20 @@
 57. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
 58. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 59. src\client\views\context-chooser.view\on-message.ts - Lines: 111 - Chars: 4631 - Tokens: 1158
-60. src\client\views\context-chooser.view\view.scss - Lines: 548 - Chars: 13528 - Tokens: 3382
-61. src\client\views\context-chooser.view\view.tsx - Lines: 360 - Chars: 17392 - Tokens: 4348
+60. src\client\views\context-chooser.view\view.scss - Lines: 560 - Chars: 13755 - Tokens: 3439
+61. src\client\views\context-chooser.view\view.tsx - Lines: 368 - Chars: 17683 - Tokens: 4421
 62. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
 63. src\common\ipc\channels.enum.ts - Lines: 41 - Chars: 2037 - Tokens: 510
-64. src\common\ipc\channels.type.ts - Lines: 37 - Chars: 2697 - Tokens: 675
+64. src\common\ipc\channels.type.ts - Lines: 37 - Chars: 2713 - Tokens: 679
 65. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
 66. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 67. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-68. src\common\types\file-node.ts - Lines: 13 - Chars: 437 - Tokens: 110
+68. src\common\types\file-node.ts - Lines: 14 - Chars: 512 - Tokens: 128
 69. src\common\types\vscode-webview.d.ts - Lines: 13 - Chars: 357 - Tokens: 90
 70. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
 71. src\common\utils\view-html.ts - Lines: 26 - Chars: 971 - Tokens: 243
 72. src\common\view-types.ts - Lines: 8 - Chars: 246 - Tokens: 62
-73. src\extension.ts - Lines: 96 - Chars: 3743 - Tokens: 936
+73. src\extension.ts - Lines: 102 - Chars: 4403 - Tokens: 1101
 74. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
 75. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
 76. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
@@ -4620,11 +4620,16 @@ export class FSService {
             this.pdfTextCache.set(filePath, { text, tokenCount });
             Services.loggerService.log(`Parsed and cached PDF: ${filePath} (${tokenCount} tokens)`);
 
-            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount });
+            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: tokenCount });
         } catch (error: any) {
-            const errorMessage = `Failed to parse PDF ${filePath}: ${error.message}`;
-            vscode.window.showErrorMessage(errorMessage);
-            Services.loggerService.error(errorMessage);
+            const isEnoent = (error as NodeJS.ErrnoException).code === 'ENOENT';
+            const errorMessage = isEnoent 
+                ? `File not found. It may have been moved or deleted.`
+                : `Failed to parse PDF: ${path.basename(filePath)}`;
+            
+            Services.loggerService.error(`Error in handlePdfToTextRequest for ${filePath}: ${error.message}`);
+            // Send an update that signifies an error state
+            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: 0, error: errorMessage });
         }
     }
 
@@ -5301,8 +5306,12 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
         const hasProblems = problemErrorCount > 0 || problemWarningCount > 0;
         const problemColorClass = problemErrorCount > 0 ? 'problem-error' : 'problem-warning';
         const problemTooltip = `${problemErrorCount} Errors, ${problemWarningCount} Warnings`;
+        const hasError = !!node.error;
 
         const renderTokenCount = () => {
+            if (hasError) {
+                return <span>---</span>;
+            }
             if (node.isImage) {
                 return <span>{formatBytes(node.sizeInBytes)}</span>;
             }
@@ -5327,16 +5336,18 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
         const gitStatusClass = node.gitStatus ? `git-status-${node.gitStatus}` : '';
 
         return (
-            <div className={`file-item ${gitStatusClass} ${hasProblems ? problemColorClass : ''}`}>
+            <div className={`file-item ${gitStatusClass} ${hasProblems ? problemColorClass : ''} ${hasError ? 'has-error' : ''}`} title={node.error}>
                 <Checkbox
                     className="file-checkbox"
                     checked={isChecked}
                     indeterminate={!isDirectlyChecked && !hasCheckedAncestor && checkedFiles.some(p => p.startsWith(node.absolutePath))}
                     onChange={(_, e) => handleFileCheckboxChange(e, node.absolutePath)}
+                    disabled={hasError}
                 />
                 <span className="file-icon">{isDirectory ? (isExpanded ? <VscFolderOpened /> : <VscFolder />) : getFileIcon(node.name)}</span>
                 <span className="file-name">{node.name}</span>
                 <div className="file-stats">
+                    {hasError && <span className="error-icon" title={node.error}><VscError/></span>}
                     {node.gitStatus && <span className="git-status-badge" title={getGitStatusTooltip(node.gitStatus)}>{node.gitStatus}</span>}
                     {hasProblems && (
                         <span className="problem-badge" title={problemTooltip}>
@@ -6317,7 +6328,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 </file>
 
 <file path="src/client/views/context-chooser.view/view.scss">
-/* Updated on: C50 (Add drag-over style) */
+/* Updated on: C51 (Add error styling) */
 body {
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -6754,6 +6765,18 @@ body {
     user-select: none; /* Prevent text selection on click/drag */
 }
 
+/* Error Styling */
+.file-item.has-error .file-name {
+    color: var(--vscode-list-errorForeground);
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+.error-icon {
+    color: var(--vscode-errorForeground);
+}
+
+
 /* Git Status & Problems Styling */
 .file-item.git-status-M .file-name, .file-item.git-status-M .git-status-badge { color: var(--vscode-gitDecoration-modifiedResourceForeground); }
 .file-item.git-status-U .file-name, .file-item.git-status-U .git-status-badge { color: var(--vscode-gitDecoration-untrackedResourceForeground); }
@@ -6977,14 +7000,18 @@ const App = () => {
             setProblemMap(newProblemMap);
         });
 
-        clientIpc.onServerMessage(ServerToClientChannel.UpdateNodeStats, ({ path, tokenCount }) => {
-            logger.log(`Received stats update for ${path}. New token count: ${tokenCount}`);
+        clientIpc.onServerMessage(ServerToClientChannel.UpdateNodeStats, ({ path, tokenCount, error }) => {
+            logger.log(`Received stats update for ${path}. New token count: ${tokenCount}, Error: ${error}`);
             setFiles(currentFiles => {
-                const newFiles = JSON.parse(JSON.stringify(currentFiles));
+                const newFiles = JSON.parse(JSON.stringify(currentFiles)); // Deep copy for mutation
+                let nodeUpdated = false;
+
                 const findAndUpdate = (nodes: FileNode[]) => {
                     for (const node of nodes) {
                         if (node.absolutePath === path) {
                             node.tokenCount = tokenCount;
+                            node.error = error;
+                            nodeUpdated = true;
                             return true;
                         }
                         if (node.children && findAndUpdate(node.children)) {
@@ -6993,8 +7020,12 @@ const App = () => {
                     }
                     return false;
                 };
+
                 findAndUpdate(newFiles);
-                return newFiles;
+                if (nodeUpdated) {
+                    return newFiles;
+                }
+                return currentFiles;
             });
         });
 
@@ -7347,7 +7378,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.FocusFile ? { path: string } :
     T extends ServerToClientChannel.SendAutoAddState ? { enabled: boolean } :
     T extends ServerToClientChannel.UpdateProblemCounts ? { problemMap: ProblemCountsMap } :
-    T extends ServerToClientChannel.UpdateNodeStats ? { path: string, tokenCount: number } :
+    T extends ServerToClientChannel.UpdateNodeStats ? { path: string, tokenCount: number, error?: string } :
     never;
 </file>
 
@@ -7465,6 +7496,7 @@ export interface FileNode {
     isPdf: boolean;
     gitStatus?: string; // e.g., 'M', 'U', 'A', 'D', 'C'
     problemCounts?: { error: number; warning: number; };
+    error?: string; // To store processing errors, e.g., "File not found"
 }
 </file>
 
@@ -7620,7 +7652,10 @@ import { API as GitAPI, GitExtension } from "./backend/types/git";
 let globalContext: vscode.ExtensionContext | null = null;
 
 export async function activate(context: vscode.ExtensionContext) {
-    console.log('DCE Extension: Activating...');
+    // Use console.log for the very first message in case the logger service itself fails.
+    console.log('DCE Extension: Activating...'); 
+    
+    // Once logger is available, use it.
     Services.loggerService.log('Congratulations, your extension "Data Curation Environment" is now active!');
 
     globalContext = context;
@@ -7631,44 +7666,47 @@ export async function activate(context: vscode.ExtensionContext) {
         if (gitExtension) {
             await gitExtension.activate();
             gitApi = gitExtension.exports.getAPI(1);
-            Services.loggerService.log('Git API successfully retrieved.');
+            Services.loggerService.log('[extension.activate] Git API successfully retrieved.');
         } else {
-            Services.loggerService.warn('vscode.git extension not found.');
+            Services.loggerService.warn('[extension.activate] vscode.git extension not found.');
         }
     } catch (error) {
-        Services.loggerService.error(`Failed to get Git API: ${error}`);
+        Services.loggerService.error(`[extension.activate] Failed to get Git API: ${error}`);
     }
 
     try {
+        Services.loggerService.log('[extension.activate] Initializing services...');
         Services.initialize(gitApi);
+        Services.loggerService.log('[extension.activate] Services initialized successfully.');
     } catch (error: any) {
-        Services.loggerService.error(`CRITICAL - Error initializing services: ${error.message}`);
-        vscode.window.showErrorMessage("Data Curation Environment failed to initialize services. Check the debug console.");
+        Services.loggerService.error(`[extension.activate] CRITICAL - Error initializing services: ${error.message}`);
+        vscode.window.showErrorMessage("Data Curation Environment failed to initialize services. Check the debug console and logs.");
         return;
     }
     
     try {
+        Services.loggerService.log('[extension.activate] Registering commands...');
         registerCommands(context);
+        Services.loggerService.log('[extension.activate] Commands registered successfully.');
     } catch (error: any) {
-        Services.loggerService.error(`CRITICAL - Error registering commands: ${error.message}`);
+        Services.loggerService.error(`[extension.activate] CRITICAL - Error registering commands: ${error.message}`);
     }
 
     try {
+        Services.loggerService.log('[extension.activate] Registering views...');
         registerViews(context);
+        Services.loggerService.log('[extension.activate] Views registered successfully.');
     } catch (error: any) {
-        Services.loggerService.error(`CRITICAL - Error registering views: ${error.message}`);
+        Services.loggerService.error(`[extension.activate] CRITICAL - Error registering views: ${error.message}`);
     }
     
-    // C48: Refactored Active File Sync to support binary files
     const updateActiveFile = () => {
         let fileUri: vscode.Uri | undefined;
         
-        // Prioritize the active text editor, as it's most reliable for text files
         const activeEditor = vscode.window.activeTextEditor;
         if (activeEditor && activeEditor.document.uri.scheme === 'file') {
             fileUri = activeEditor.document.uri;
         } else {
-            // Fallback for non-text editors (e.g., image viewer)
             const activeTab = vscode.window.tabGroups.activeTabGroup.activeTab;
             const tabInput = activeTab?.input as { uri?: vscode.Uri };
             if (tabInput?.uri && tabInput.uri.scheme === 'file') {
@@ -7680,7 +7718,7 @@ export async function activate(context: vscode.ExtensionContext) {
             const filePath = fileUri.fsPath.replace(/\\/g, '/');
             const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
             if (serverIpc) {
-                Services.loggerService.log(`Active file changed: ${filePath}. Notifying view.`);
+                Services.loggerService.log(`[extension.activate] Active file changed: ${filePath}. Notifying view.`);
                 serverIpc.sendToClient(ServerToClientChannel.SetActiveFile, { path: filePath });
             }
         }
@@ -7691,8 +7729,8 @@ export async function activate(context: vscode.ExtensionContext) {
         vscode.window.tabGroups.onDidChangeTabs(updateActiveFile)
     );
 
-    // Initial sync on activation
     setTimeout(updateActiveFile, 500);
+    Services.loggerService.log('[extension.activate] Activation complete.');
 }
 
 export function getContext() {

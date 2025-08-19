@@ -362,8 +362,6 @@ export class FSService {
         }
 
         try {
-            // Check if file exists before reading
-            await fs.access(filePath); 
             const buffer = await fs.readFile(filePath);
             const data = await pdf(buffer);
             const text = data.text;
@@ -374,7 +372,7 @@ export class FSService {
 
             serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: tokenCount });
         } catch (error: any) {
-            const isEnoent = error.code === 'ENOENT';
+            const isEnoent = (error as NodeJS.ErrnoException).code === 'ENOENT';
             const errorMessage = isEnoent 
                 ? `File not found. It may have been moved or deleted.`
                 : `Failed to parse PDF: ${path.basename(filePath)}`;
