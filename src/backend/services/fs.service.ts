@@ -333,11 +333,11 @@ export class FSService {
     public async handleOpenFileRequest(filePath: string) {
         try {
             const uri = vscode.Uri.file(filePath);
-            const doc = await vscode.workspace.openTextDocument(uri);
-            await vscode.window.showTextDocument(doc);
+            await vscode.commands.executeCommand('vscode.open', uri);
         } catch (error: any) {
-            vscode.window.showErrorMessage(`Failed to open file: ${error.message}`);
-            Services.loggerService.error(`Failed to open file ${filePath}: ${error.message}`);
+            const errorMessage = `Failed to open file ${filePath}: ${error.message}`;
+            vscode.window.showErrorMessage(errorMessage);
+            Services.loggerService.error(errorMessage);
         }
     }
 

@@ -96,12 +96,79 @@ export class FlattenerService {
         return files;
     }
 
+    private async _parseImageMetadata(filePath: string): Promise<any> {
+        try {
+            const buffer = await fs.readFile(filePath);
+            const sizeInBytes = buffer.length;
+            const metadata: any = { sizeInBytes };
+
+            // PNG
+            if (buffer.length > 24 && buffer.toString('hex', 0, 8) === '89504e470d0a1a0a') {
+                const ihdrIndex = buffer.indexOf('IHDR');
+                if (ihdrIndex !== -1) {
+                    metadata.dimensions = {
+                        width: buffer.readUInt32BE(ihdrIndex + 4),
+                        height: buffer.readUInt32BE(ihdrIndex + 8)
+                    };
+                }
+                return metadata;
+            }
+
+            // GIF
+            if (buffer.length > 10 && buffer.toString('utf8', 0, 3) === 'GIF') {
+                 metadata.dimensions = {
+                    width: buffer.readUInt16LE(6),
+                    height: buffer.readUInt16LE(8)
+                };
+                return metadata;
+            }
+
+            // JPEG
+            if (buffer.length > 11 && buffer[0] === 0xff && buffer[1] === 0xd8) {
+                let pos = 2;
+                while (pos < buffer.length - 9) {
+                    if (buffer[pos] === 0xff && (buffer[pos + 1] & 0xf0) === 0xc0) {
+                        const height = buffer.readUInt16BE(pos + 5);
+                        const width = buffer.readUInt16BE(pos + 7);
+                        if (width > 0 && height > 0) {
+                            metadata.dimensions = { width, height };
+                            return metadata;
+                        }
+                    }
+                    if (buffer[pos] === 0xff && buffer[pos + 1] !== 0x00 && buffer[pos + 1] !== 0xff && (buffer[pos+1] < 0xd0 || buffer[pos+1] > 0xd9)) {
+                        if (pos + 3 < buffer.length) {
+                            pos += buffer.readUInt16BE(pos + 2) + 2;
+                        } else { pos++; }
+                    } else { pos++; }
+                }
+            }
+            return metadata;
+        } catch (err: any) {
+            Services.loggerService.warn(`Could not parse image metadata for ${filePath}: ${err.message}`);
+            try {
+                const stats = await fs.stat(filePath);
+                return { sizeInBytes: stats.size };
+            } catch {
+                return { sizeInBytes: -1 };
+            }
+        }
+    }
+
     private async getFileStatsAndContent(filePath: string): Promise<FileStats> {
         const extension = path.extname(filePath).toLowerCase();
         if (BINARY_EXTENSIONS.has(extension)) {
             try {
-                const stats = await fs.stat(filePath);
-                const metadataContent = `<metadata format="${extension.substring(1).toUpperCase()}" sizeInBytes="${stats.size}" />`;
+                const imageMetadata = await this._parseImageMetadata(filePath);
+                
+                const metadata = {
+                    name: path.basename(filePath),
+                    directory: path.dirname(filePath),
+                    fileType: extension.substring(1).toUpperCase(),
+                    sizeInBytes: imageMetadata.sizeInBytes,
+                    ...(imageMetadata.dimensions && { dimensions: imageMetadata.dimensions })
+                };
+
+                const metadataContent = `<metadata>\n${JSON.stringify(metadata, null, 2)}\n</metadata>`;
                 return { filePath, lines: 0, characters: 0, tokens: 0, content: metadataContent, error: null };
             } catch (error: any) {
                  return { filePath, lines: 0, characters: 0, tokens: 0, content: '', error: `Could not get stats for binary file: ${error.message}` };

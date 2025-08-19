@@ -1,25 +1,25 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-19T01:24:31.342Z
+  Date Generated: 2025-08-19T20:28:38.166Z
   ---
   Total Files: 170
-  Total Lines: 13540
-  Total Characters: 569646
-  Approx. Tokens: 142478
+  Total Lines: 13645
+  Total Characters: 573358
+  Approx. Tokens: 143405
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
 2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
-3. src\backend\services\fs.service.ts (4858 tokens)
+3. src\backend\services\fs.service.ts (4849 tokens)
 4. src\client\components\tree-view\TreeView.tsx (3567 tokens)
 5. src\client\views\context-chooser.view\view.tsx (3465 tokens)
 6. src\client\views\context-chooser.view\view.scss (3347 tokens)
 7. src\client\components\SelectedFilesView.tsx (3256 tokens)
-8. src\client\components\file-tree\FileTree.tsx (2635 tokens)
-9. The-Creator-AI-main\src\backend\services\code.service.ts (2618 tokens)
-10. The-Creator-AI-main\src\backend\services\fs.service.ts (2495 tokens)
+8. src\backend\services\flattener.service.ts (2636 tokens)
+9. src\client\components\file-tree\FileTree.tsx (2635 tokens)
+10. The-Creator-AI-main\src\backend\services\code.service.ts (2618 tokens)
 
 <!-- Full File List -->
 1. .gitignore - Lines: 9 - Chars: 108 - Tokens: 27
@@ -51,7 +51,7 @@
 27. src\Artifacts\A26. DCE - Phase 1 - File System Traversal & Caching Strategy.md - Lines: 46 - Chars: 4009 - Tokens: 1003
 28. src\Artifacts\A27. DCE - Phase 1 - Undo-Redo Feature Plan.md - Lines: 50 - Chars: 4903 - Tokens: 1226
 29. src\Artifacts\A28. DCE - Packaging and Distribution Guide.md - Lines: 96 - Chars: 4075 - Tokens: 1019
-30. src\Artifacts\A29. DCE - Phase 1 - Binary and Image File Handling Strategy.md - Lines: 56 - Chars: 3461 - Tokens: 866
+30. src\Artifacts\A29. DCE - Phase 1 - Binary and Image File Handling Strategy.md - Lines: 81 - Chars: 4217 - Tokens: 1055
 31. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
 32. src\Artifacts\A4. DCE - Analysis of The-Creator-AI Repo.md - Lines: 56 - Chars: 5722 - Tokens: 1431
 33. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
@@ -62,8 +62,8 @@
 38. src\backend\commands\commands.ts - Lines: 88 - Chars: 3807 - Tokens: 952
 39. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
 40. src\backend\services\action.service.ts - Lines: 73 - Chars: 2471 - Tokens: 618
-41. src\backend\services\flattener.service.ts - Lines: 183 - Chars: 7654 - Tokens: 1914
-42. src\backend\services\fs.service.ts - Lines: 436 - Chars: 19429 - Tokens: 4858
+41. src\backend\services\flattener.service.ts - Lines: 250 - Chars: 10543 - Tokens: 2636
+42. src\backend\services\fs.service.ts - Lines: 436 - Chars: 19394 - Tokens: 4849
 43. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
 44. src\backend\services\selection.service.ts - Lines: 108 - Chars: 4148 - Tokens: 1037
 45. src\backend\services\services.ts - Lines: 25 - Chars: 982 - Tokens: 246
@@ -91,7 +91,7 @@
 67. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
 68. src\common\utils\view-html.ts - Lines: 26 - Chars: 971 - Tokens: 243
 69. src\common\view-types.ts - Lines: 8 - Chars: 246 - Tokens: 62
-70. src\extension.ts - Lines: 83 - Chars: 3641 - Tokens: 911
+70. src\extension.ts - Lines: 96 - Chars: 3743 - Tokens: 936
 71. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
 72. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
 73. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
@@ -1940,6 +1940,7 @@ You will see the `.vsix` file in the root of your project directory.
 # Artifact A29: DCE - Phase 1 - Binary and Image File Handling Strategy
 # Date Created: C46
 # Author: AI Model
+# Updated on: C47 (Richer metadata format and JSON output)
 
 - **Key/Value for A0:**
 - **Description:** Defines the strategy for handling binary files; they can be checked, but only their metadata (path, size) is included in the flattened output, not their content.
@@ -1954,6 +1955,7 @@ During beta testing, a use case emerged for including information about binary f
 -   **Initial Problem:** Flattening a folder containing images (`.png`, `.gif`) resulted in binary gibberish being written to `flattened_repo.md`.
 -   **Initial Solution (C43):** Prevent selection of binary files by disabling their checkboxes.
 -   **Refined Requirement (C46):** The user realized they *do* want to capture the existence and properties of these files (e.g., path, size) as part of the context, just not their content.
+-   **Refined Requirement (C47):** The metadata should be richer, including name, directory, dimensions, and file type, and be presented in a structured format.
 
 ## 3. The New Strategy
 
@@ -1962,37 +1964,60 @@ The extension will now adopt a "metadata-only" approach for a predefined list of
 ### 3.1. User Experience
 
 1.  **Selection is Always Allowed:** All files in the file tree, regardless of type, will have an enabled checkbox. The user is free to check any file or folder.
-2.  **Flattening Behavior is Differentiated:**
+2.  **File Opening:** Clicking on any file in the tree view will open it using VS Code's default viewer for that file type (e.g., text editor for `.ts`, image preview for `.png`).
+3.  **Flattening Behavior is Differentiated:**
     *   When a **text file** is checked and the "Flatten Context" button is pressed, its full content is read and included in `flattened_repo.md`.
     *   When a **binary or image file** is checked, its content is **not** read. Instead, the flattener service will gather its metadata and include a structured, human-readable entry for it in `flattened_repo.md`.
 
 ### 3.2. Output Format for Binary Files
 
-When a binary file is included, its entry in the `<files content>` section of `flattened_repo.md` will look like this:
+When a binary file is included, its entry in the `<files content>` section of `flattened_repo.md` will contain a `<metadata>` tag with a JSON object. Dimensions will be included on a best-effort basis for common formats (PNG, JPG, GIF).
 
+**Example (with dimensions):**
 ```xml
-<file path="docs/assets/screenshot.png">
-<metadata format="PNG" sizeInBytes="4340" />
+<file path="public/images/logo.png">
+<metadata>
+{
+  "name": "logo.png",
+  "directory": "public/images",
+  "fileType": "PNG",
+  "sizeInBytes": 12345,
+  "dimensions": {
+    "width": 256,
+    "height": 256
+  }
+}
+</metadata>
 </file>
 ```
 
-This format is clean, parseable, and provides the necessary context without including corrupting data.
+**Example (without dimensions):**
+```xml
+<file path="assets/archive.zip">
+<metadata>
+{
+  "name": "archive.zip",
+  "directory": "assets",
+  "fileType": "ZIP",
+  "sizeInBytes": 102400
+}
+</metadata>
+</file>
+```
 
 ## 4. Technical Implementation Plan
 
-1.  **Frontend Simplification:**
-    *   The `isSelectable` property will be removed from the `FileNode` type (`src/common/types/file-node.ts`).
-    *   The logic in `fs.service.ts` that determines `isSelectable` will be removed.
-    *   The `disabled` attribute on the `Checkbox` in `FileTree.tsx` will be removed.
+1.  **File Opening (`fs.service.ts`):**
+    *   The `handleOpenFileRequest` method will be updated to use `vscode.commands.executeCommand('vscode.open', uri)`. This delegates opening to VS Code, which correctly selects the appropriate viewer for any file type.
 
 2.  **Backend Flattener Logic (`flattener.service.ts`):**
-    *   A constant set of binary/image extensions (e.g., `.png`, `.jpg`, `.gif`, `.webp`, `.pdf`, `.zip`) will be defined.
-    *   The `getFileStatsAndContent` method will be updated. Before attempting to read a file, it will check the file's extension against the binary list.
-    *   If it's a binary file, it will:
-        *   Use `fs.stat` to get the `sizeInBytes`.
-        *   Construct the `<metadata ... />` string.
-        *   Return a `FileStats` object where `content` is this metadata string, and `tokens` is 0.
-    *   If it's a text file, the existing logic of reading content and calculating tokens will proceed as normal.
+    *   A constant set of binary/image extensions will be defined.
+    *   A new private method, `_parseImageMetadata`, will be added. It will read a file's buffer and attempt to parse dimensions for PNG, JPG, and GIF files, adapting logic from `flattenv2.js`.
+    *   The `getFileStatsAndContent` method will be updated. When it encounters a binary file, it will:
+        *   Call `_parseImageMetadata`.
+        *   Collect the name, directory, type, size, and (if available) dimensions.
+        *   Construct the formatted JSON string.
+        *   Return a `FileStats` object where `content` is this JSON string, and `tokens` is 0.
 </file>
 
 <file path="src/Artifacts/A3. DCE - Technical Scaffolding Plan.md">
@@ -3939,12 +3964,79 @@ export class FlattenerService {
         return files;
     }
 
+    private async _parseImageMetadata(filePath: string): Promise<any> {
+        try {
+            const buffer = await fs.readFile(filePath);
+            const sizeInBytes = buffer.length;
+            const metadata: any = { sizeInBytes };
+
+            // PNG
+            if (buffer.length > 24 && buffer.toString('hex', 0, 8) === '89504e470d0a1a0a') {
+                const ihdrIndex = buffer.indexOf('IHDR');
+                if (ihdrIndex !== -1) {
+                    metadata.dimensions = {
+                        width: buffer.readUInt32BE(ihdrIndex + 4),
+                        height: buffer.readUInt32BE(ihdrIndex + 8)
+                    };
+                }
+                return metadata;
+            }
+
+            // GIF
+            if (buffer.length > 10 && buffer.toString('utf8', 0, 3) === 'GIF') {
+                 metadata.dimensions = {
+                    width: buffer.readUInt16LE(6),
+                    height: buffer.readUInt16LE(8)
+                };
+                return metadata;
+            }
+
+            // JPEG
+            if (buffer.length > 11 && buffer[0] === 0xff && buffer[1] === 0xd8) {
+                let pos = 2;
+                while (pos < buffer.length - 9) {
+                    if (buffer[pos] === 0xff && (buffer[pos + 1] & 0xf0) === 0xc0) {
+                        const height = buffer.readUInt16BE(pos + 5);
+                        const width = buffer.readUInt16BE(pos + 7);
+                        if (width > 0 && height > 0) {
+                            metadata.dimensions = { width, height };
+                            return metadata;
+                        }
+                    }
+                    if (buffer[pos] === 0xff && buffer[pos + 1] !== 0x00 && buffer[pos + 1] !== 0xff && (buffer[pos+1] < 0xd0 || buffer[pos+1] > 0xd9)) {
+                        if (pos + 3 < buffer.length) {
+                            pos += buffer.readUInt16BE(pos + 2) + 2;
+                        } else { pos++; }
+                    } else { pos++; }
+                }
+            }
+            return metadata;
+        } catch (err: any) {
+            Services.loggerService.warn(`Could not parse image metadata for ${filePath}: ${err.message}`);
+            try {
+                const stats = await fs.stat(filePath);
+                return { sizeInBytes: stats.size };
+            } catch {
+                return { sizeInBytes: -1 };
+            }
+        }
+    }
+
     private async getFileStatsAndContent(filePath: string): Promise<FileStats> {
         const extension = path.extname(filePath).toLowerCase();
         if (BINARY_EXTENSIONS.has(extension)) {
             try {
-                const stats = await fs.stat(filePath);
-                const metadataContent = `<metadata format="${extension.substring(1).toUpperCase()}" sizeInBytes="${stats.size}" />`;
+                const imageMetadata = await this._parseImageMetadata(filePath);
+                
+                const metadata = {
+                    name: path.basename(filePath),
+                    directory: path.dirname(filePath),
+                    fileType: extension.substring(1).toUpperCase(),
+                    sizeInBytes: imageMetadata.sizeInBytes,
+                    ...(imageMetadata.dimensions && { dimensions: imageMetadata.dimensions })
+                };
+
+                const metadataContent = `<metadata>\n${JSON.stringify(metadata, null, 2)}\n</metadata>`;
                 return { filePath, lines: 0, characters: 0, tokens: 0, content: metadataContent, error: null };
             } catch (error: any) {
                  return { filePath, lines: 0, characters: 0, tokens: 0, content: '', error: `Could not get stats for binary file: ${error.message}` };
@@ -4362,11 +4454,11 @@ export class FSService {
     public async handleOpenFileRequest(filePath: string) {
         try {
             const uri = vscode.Uri.file(filePath);
-            const doc = await vscode.workspace.openTextDocument(uri);
-            await vscode.window.showTextDocument(doc);
+            await vscode.commands.executeCommand('vscode.open', uri);
         } catch (error: any) {
-            vscode.window.showErrorMessage(`Failed to open file: ${error.message}`);
-            Services.loggerService.error(`Failed to open file ${filePath}: ${error.message}`);
+            const errorMessage = `Failed to open file ${filePath}: ${error.message}`;
+            vscode.window.showErrorMessage(errorMessage);
+            Services.loggerService.error(errorMessage);
         }
     }
 
@@ -7216,7 +7308,6 @@ import { API as GitAPI, GitExtension } from "./backend/types/git";
 let globalContext: vscode.ExtensionContext | null = null;
 
 export async function activate(context: vscode.ExtensionContext) {
-    // For debugging the activation process itself
     console.log('DCE Extension: Activating...');
     Services.loggerService.log('Congratulations, your extension "Data Curation Environment" is now active!');
 
@@ -7226,7 +7317,7 @@ export async function activate(context: vscode.ExtensionContext) {
     try {
         const gitExtension = vscode.extensions.getExtension<GitExtension>('vscode.git');
         if (gitExtension) {
-            await gitExtension.activate(); // Ensure the extension is active
+            await gitExtension.activate();
             gitApi = gitExtension.exports.getAPI(1);
             Services.loggerService.log('Git API successfully retrieved.');
         } else {
@@ -7234,47 +7325,62 @@ export async function activate(context: vscode.ExtensionContext) {
         }
     } catch (error) {
         Services.loggerService.error(`Failed to get Git API: ${error}`);
-        console.error('DCE Extension: Failed to get Git API.', error);
     }
 
     try {
         Services.initialize(gitApi);
-    } catch (error) {
-        console.error('DCE Extension: CRITICAL - Error initializing services.', error);
-        Services.loggerService.error(`CRITICAL - Error initializing services: ${error}`);
+    } catch (error: any) {
+        Services.loggerService.error(`CRITICAL - Error initializing services: ${error.message}`);
         vscode.window.showErrorMessage("Data Curation Environment failed to initialize services. Check the debug console.");
         return;
     }
     
     try {
         registerCommands(context);
-    } catch (error) {
-        console.error('DCE Extension: CRITICAL - Error registering commands.', error);
-        Services.loggerService.error(`CRITICAL - Error registering commands: ${error}`);
-        vscode.window.showErrorMessage("Data Curation Environment failed to register commands. Check the debug console.");
+    } catch (error: any) {
+        Services.loggerService.error(`CRITICAL - Error registering commands: ${error.message}`);
     }
 
     try {
         registerViews(context);
-    } catch (error) {
-        console.error('DCE Extension: CRITICAL - Error registering views.', error);
-        Services.loggerService.error(`CRITICAL - Error registering views: ${error}`);
-         vscode.window.showErrorMessage("Data Curation Environment failed to register views. Check the debug console.");
+    } catch (error: any) {
+        Services.loggerService.error(`CRITICAL - Error registering views: ${error.message}`);
     }
     
-    // Feature: Active File Sync
-    context.subscriptions.push(
-        vscode.window.onDidChangeActiveTextEditor(editor => {
-            if (editor && editor.document.uri.scheme === 'file') { // Ensure it's a file URI
-                const filePath = editor.document.uri.fsPath.replace(/\\/g, '/'); // Normalize path immediately
-                const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
-                if (serverIpc) {
-                    Services.loggerService.log(`Active editor changed: ${filePath}. Notifying view.`);
-                    serverIpc.sendToClient(ServerToClientChannel.SetActiveFile, { path: filePath });
-                }
+    // C48: Refactored Active File Sync to support binary files
+    const updateActiveFile = () => {
+        let fileUri: vscode.Uri | undefined;
+        
+        // Prioritize the active text editor, as it's most reliable for text files
+        const activeEditor = vscode.window.activeTextEditor;
+        if (activeEditor && activeEditor.document.uri.scheme === 'file') {
+            fileUri = activeEditor.document.uri;
+        } else {
+            // Fallback for non-text editors (e.g., image viewer)
+            const activeTab = vscode.window.tabGroups.activeTabGroup.activeTab;
+            const tabInput = activeTab?.input as { uri?: vscode.Uri };
+            if (tabInput?.uri && tabInput.uri.scheme === 'file') {
+                fileUri = tabInput.uri;
             }
-        })
+        }
+
+        if (fileUri) {
+            const filePath = fileUri.fsPath.replace(/\\/g, '/');
+            const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
+            if (serverIpc) {
+                Services.loggerService.log(`Active file changed: ${filePath}. Notifying view.`);
+                serverIpc.sendToClient(ServerToClientChannel.SetActiveFile, { path: filePath });
+            }
+        }
+    };
+
+    context.subscriptions.push(
+        vscode.window.onDidChangeActiveTextEditor(updateActiveFile),
+        vscode.window.tabGroups.onDidChangeTabs(updateActiveFile)
     );
+
+    // Initial sync on activation
+    setTimeout(updateActiveFile, 500);
 }
 
 export function getContext() {
@@ -7286,7 +7392,6 @@ export function getContext() {
 
 export function deactivate() {
     Services.loggerService.log('DCE Extension: Deactivating.');
-    console.log('DCE Extension: Deactivating.');
 }
 </file>
 
