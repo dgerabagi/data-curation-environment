@@ -51,7 +51,7 @@ export async function activate(context: vscode.ExtensionContext) {
 
     try {
         Services.loggerService.log('[extension.activate] Registering views...');
-        registerViews(context);
+        registerViews(context); // This now sends the trust state
         Services.loggerService.log('[extension.activate] Views registered successfully.');
     } catch (error: any) {
         Services.loggerService.error(`[extension.activate] CRITICAL - Error registering views: ${error.message}`);
@@ -83,7 +83,15 @@ export async function activate(context: vscode.ExtensionContext) {
 
     context.subscriptions.push(
         vscode.window.onDidChangeActiveTextEditor(updateActiveFile),
-        vscode.window.tabGroups.onDidChangeTabs(updateActiveFile)
+        vscode.window.tabGroups.onDidChangeTabs(updateActiveFile),
+        // Add a listener for when workspace trust changes
+        vscode.workspace.onDidGrantWorkspaceTrust(() => {
+            Services.loggerService.log("Workspace trust granted. Notifying webview.");
+            const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
+            if (serverIpc) {
+                serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceTrustState, { isTrusted: true });
+            }
+        })
     );
 
     setTimeout(updateActiveFile, 500);

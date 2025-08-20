@@ -1,21 +1,21 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-20T01:34:04.156Z
+  Date Generated: 2025-08-20T01:59:17.274Z
   ---
   Total Files: 172
-  Total Lines: 14060
-  Total Characters: 598173
-  Approx. Tokens: 149609
+  Total Lines: 14030
+  Total Characters: 597517
+  Approx. Tokens: 149445
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
 2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
 3. src\backend\services\fs.service.ts (5576 tokens)
-4. src\client\views\context-chooser.view\view.tsx (5089 tokens)
+4. src\client\views\context-chooser.view\view.tsx (4446 tokens)
 5. src\client\components\tree-view\TreeView.tsx (3697 tokens)
-6. src\client\views\context-chooser.view\view.scss (3461 tokens)
+6. src\client\views\context-chooser.view\view.scss (3638 tokens)
 7. src\client\components\SelectedFilesView.tsx (3256 tokens)
 8. src\client\components\file-tree\FileTree.tsx (3116 tokens)
 9. src\backend\services\flattener.service.ts (2805 tokens)
@@ -79,12 +79,12 @@
 55. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 56. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
 57. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-58. src\client\views\context-chooser.view\on-message.ts - Lines: 111 - Chars: 4643 - Tokens: 1161
-59. src\client\views\context-chooser.view\view.scss - Lines: 564 - Chars: 13843 - Tokens: 3461
-60. src\client\views\context-chooser.view\view.tsx - Lines: 426 - Chars: 20356 - Tokens: 5089
+58. src\client\views\context-chooser.view\on-message.ts - Lines: 120 - Chars: 5068 - Tokens: 1267
+59. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
+60. src\client\views\context-chooser.view\view.tsx - Lines: 348 - Chars: 17781 - Tokens: 4446
 61. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
-62. src\common\ipc\channels.enum.ts - Lines: 41 - Chars: 2037 - Tokens: 510
-63. src\common\ipc\channels.type.ts - Lines: 37 - Chars: 2713 - Tokens: 679
+62. src\common\ipc\channels.enum.ts - Lines: 43 - Chars: 2187 - Tokens: 547
+63. src\common\ipc\channels.type.ts - Lines: 39 - Chars: 2864 - Tokens: 716
 64. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
 65. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 66. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
@@ -93,7 +93,7 @@
 69. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
 70. src\common\utils\view-html.ts - Lines: 26 - Chars: 971 - Tokens: 243
 71. src\common\view-types.ts - Lines: 8 - Chars: 246 - Tokens: 62
-72. src\extension.ts - Lines: 102 - Chars: 4403 - Tokens: 1101
+72. src\extension.ts - Lines: 110 - Chars: 4890 - Tokens: 1223
 73. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
 74. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
 75. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
@@ -6237,6 +6237,15 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     const selectionService = Services.selectionService;
     const actionService = Services.actionService;
 
+    serverIpc.onClientMessage(ClientToServerChannel.RequestInitialData, () => {
+        loggerService.log("WebView is ready. Sending initial data.");
+        // Send trust state first
+        serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceTrustState, { isTrusted: vscode.workspace.isTrusted });
+        // Then request other data
+        fsService.handleWorkspaceFilesRequest(serverIpc, false);
+    });
+
+
     serverIpc.onClientMessage(ClientToServerChannel.RequestWorkspaceFiles, (data) => {
         loggerService.log(`Received RequestWorkspaceFiles from client (force=${data.force}).`);
         fsService.handleWorkspaceFilesRequest(serverIpc, data.force);
@@ -6339,7 +6348,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 </file>
 
 <file path="src/client/views/context-chooser.view/view.scss">
-/* Updated on: C57 (Add prominent drag-and-drop styling) */
+/* Updated on: C59 (Add Workspace Trust banner styling) */
 body {
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -6347,6 +6356,32 @@ body {
     color: var(--vscode-editor-foreground);
     background-color: var(--vscode-sideBar-background);
 }
+
+.workspace-trust-banner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    background-color: var(--vscode-statusBarItem-warningBackground);
+    color: var(--vscode-statusBarItem-warningForeground);
+    font-size: 12px;
+    flex-shrink: 0;
+
+    button {
+        background: none;
+        border: 1px solid var(--vscode-button-border, var(--vscode-contrastBorder));
+        color: var(--vscode-button-foreground);
+        padding: 2px 8px;
+        border-radius: 2px;
+        cursor: pointer;
+        margin-left: auto;
+
+        &:hover {
+            background-color: var(--vscode-button-hoverBackground);
+        }
+    }
+}
+
 
 .view-container {
     display: flex;
@@ -6370,6 +6405,7 @@ body {
     gap: 4px;
     padding-top: 4px;
     padding-bottom: 4px;
+    flex-shrink: 0;
 }
 
 .header-row {
@@ -6915,7 +6951,7 @@ import { FileNode } from '@/common/types/file-node';
 import FileTree from '../../components/file-tree/FileTree';
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { formatLargeNumber, formatNumberWithCommas } from '@/common/utils/formatting';
-import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, VscNewFolder, VscLoading, VscSave, VscFolderLibrary, VscSettingsGear, VscCheckAll, VscSearch, VscExpandAll } from 'react-icons/vsc';
+import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, VscNewFolder, VscLoading, VscSave, VscFolderLibrary, VscSettingsGear, VscCheckAll, VscSearch, VscExpandAll, VscShield } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import SelectedFilesView from '@/client/components/SelectedFilesView';
 import { addRemovePathInSelectedFiles, removePathsFromSelected } from '@/client/components/file-tree/FileTree.utils';
@@ -6935,37 +6971,10 @@ const App = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [problemMap, setProblemMap] = useState<ProblemCountsMap>({});
     const [isDraggingOver, setIsDraggingOver] = useState(false);
+    const [isWorkspaceTrusted, setIsWorkspaceTrusted] = useState(true); // Assume trusted by default
     const suppressActiveFileReveal = useRef(false);
     
     const clientIpc = ClientPostMessageManager.getInstance();
-
-    // CRITICAL FIX: Prevent VS Code/Browser from intercepting drag events globally.
-    useEffect(() => {
-        logger.log('[DND] Attaching global drag/drop prevention listeners.');
-
-        const handleGlobalDragOver = (e: DragEvent) => {
-            e.preventDefault();
-            // Set the drop effect globally to ensure the cursor shows the correct icon (e.g., '+').
-            if (e.dataTransfer) {
-                e.dataTransfer.dropEffect = 'copy';
-            }
-        };
-
-        const handleGlobalDrop = (e: DragEvent) => {
-            // Prevent default behavior (e.g., opening file in browser/VS Code).
-            // Specific drop zones handle the actual logic via stopPropagation().
-            e.preventDefault();
-            logger.log('[GlobalDrop] Prevented default drop behavior.');
-        };
-
-        document.addEventListener('dragover', handleGlobalDragOver);
-        document.addEventListener('drop', handleGlobalDrop);
-
-        return () => {
-            document.removeEventListener('dragover', handleGlobalDragOver);
-            document.removeEventListener('drop', handleGlobalDrop);
-        };
-    }, []);
 
     const requestFiles = (force = false) => {
         setIsLoading(true);
@@ -6991,6 +7000,11 @@ const App = () => {
     useEffect(() => {
         logger.log("Initializing view and requesting initial data.");
         
+        clientIpc.onServerMessage(ServerToClientChannel.SendWorkspaceTrustState, ({ isTrusted }) => {
+            logger.log(`Received workspace trust state: ${isTrusted}`);
+            setIsWorkspaceTrusted(isTrusted);
+        });
+
         clientIpc.onServerMessage(ServerToClientChannel.SendWorkspaceFiles, ({ files: receivedFiles }) => {
             logger.log(`Received file tree from backend. Root node: ${receivedFiles[0]?.name}`);
             setFiles(receivedFiles);
@@ -6999,7 +7013,7 @@ const App = () => {
         
         clientIpc.onServerMessage(ServerToClientChannel.ApplySelectionSet, ({ paths }) => {
             logger.log(`Applying selection set with ${paths.length} paths.`);
-            setCheckedFiles(paths); // Direct set, not toggle
+            setCheckedFiles(paths);
             clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths });
         });
 
@@ -7011,7 +7025,7 @@ const App = () => {
         clientIpc.onServerMessage(ServerToClientChannel.SetActiveFile, ({ path }) => {
             if (suppressActiveFileReveal.current) {
                 logger.log(`[WebView] Suppressing set active file event for: ${path}`);
-                suppressActiveFileReveal.current = false; // Reset after first suppression
+                suppressActiveFileReveal.current = false;
                 return;
             }
             logger.log(`[WebView] Received set active file event for: ${path}`);
@@ -7046,9 +7060,8 @@ const App = () => {
         clientIpc.onServerMessage(ServerToClientChannel.UpdateNodeStats, ({ path, tokenCount, error }) => {
             logger.log(`Received stats update for ${path}. New token count: ${tokenCount}, Error: ${error}`);
             setFiles(currentFiles => {
-                const newFiles = JSON.parse(JSON.stringify(currentFiles)); // Deep copy for mutation
+                const newFiles = JSON.parse(JSON.stringify(currentFiles));
                 let nodeUpdated = false;
-
                 const findAndUpdate = (nodes: FileNode[]) => {
                     for (const node of nodes) {
                         if (node.absolutePath === path) {
@@ -7057,22 +7070,16 @@ const App = () => {
                             nodeUpdated = true;
                             return true;
                         }
-                        if (node.children && findAndUpdate(node.children)) {
-                            return true;
-                        }
+                        if (node.children && findAndUpdate(node.children)) return true;
                     }
                     return false;
                 };
-
                 findAndUpdate(newFiles);
-                if (nodeUpdated) {
-                    return newFiles;
-                }
-                return currentFiles;
+                return nodeUpdated ? newFiles : currentFiles;
             });
         });
 
-        requestFiles();
+        clientIpc.sendToServer(ClientToServerChannel.RequestInitialData, {});
         clientIpc.sendToServer(ClientToServerChannel.RequestLastSelection, {});
 
     }, [clientIpc]);
@@ -7113,17 +7120,8 @@ const App = () => {
         return files.length > 0 ? files[0].absolutePath : '';
     };
 
-    const handleNewFile = () => {
-        const parentDirectory = getParentDirForNewItem();
-        logger.log(`Requesting new file in ${parentDirectory}`);
-        clientIpc.sendToServer(ClientToServerChannel.RequestNewFile, { parentDirectory });
-    };
-
-    const handleNewFolder = () => {
-        const parentDirectory = getParentDirForNewItem();
-        logger.log(`Requesting new folder in ${parentDirectory}`);
-        clientIpc.sendToServer(ClientToServerChannel.RequestNewFolder, { parentDirectory });
-    };
+    const handleNewFile = () => clientIpc.sendToServer(ClientToServerChannel.RequestNewFile, { parentDirectory: getParentDirForNewItem() });
+    const handleNewFolder = () => clientIpc.sendToServer(ClientToServerChannel.RequestNewFolder, { parentDirectory: getParentDirForNewItem() });
 
     const handleToggleAutoAdd = () => {
         const newState = !isAutoAddEnabled;
@@ -7140,64 +7138,53 @@ const App = () => {
     };
 
     const processAndSendFiles = (filesToProcess: FileList | null, targetDir: string) => {
-        if (!filesToProcess || filesToProcess.length === 0) {
-            logger.warn('processAndSendFiles called with no files.');
+        if (!isWorkspaceTrusted) {
+            logger.warn('File drop ignored: Workspace is not trusted.');
             return;
         }
-
-        const filesArray = Array.from(filesToProcess);
-        logger.log(`Processing ${filesArray.length} files from drop into target: ${targetDir}`);
-        filesArray.forEach(file => {
+        if (!filesToProcess || filesToProcess.length === 0) return;
+        
+        Array.from(filesToProcess).forEach(file => {
             const reader = new FileReader();
             reader.onload = (readEvent) => {
-                const buffer = readEvent.target?.result;
-                if (buffer instanceof ArrayBuffer) {
-                    const data = new Uint8Array(buffer);
+                if (readEvent.target?.result instanceof ArrayBuffer) {
+                    const data = new Uint8Array(readEvent.target.result);
                     const finalTargetPath = `${targetDir}/${file.name}`.replace(/\\/g, '/');
-                    logger.log(`Sending file ${file.name} to backend for creation at ${finalTargetPath}`);
                     clientIpc.sendToServer(ClientToServerChannel.RequestAddFileFromBuffer, { targetPath: finalTargetPath, data });
                 }
             };
-            reader.onerror = () => logger.error(`FileReader error for file: ${file.name}`);
             reader.readAsArrayBuffer(file);
         });
     };
 
-    const handleDropOnContainer = (event: React.DragEvent<HTMLDivElement>) => {
+    const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
-        event.stopPropagation(); // Stop propagation so the global drop handler doesn't fire
+        event.stopPropagation();
         setIsDraggingOver(false);
-        logger.log('--- DROP ON MAIN CONTAINER (FALLBACK) ---');
+        if (!isWorkspaceTrusted) return;
         
         const targetDir = files.length > 0 ? files[0].absolutePath : '';
         if (!targetDir) {
             logger.error("Cannot drop file, no workspace root identified.");
             return;
         }
-        logger.log(`Drop target directory identified as root: ${targetDir}`);
         processAndSendFiles(event.dataTransfer.files, targetDir);
     };
     
     const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
-        event.preventDefault(); // This is CRITICAL for onDrop to fire.
+        event.preventDefault();
         event.stopPropagation();
-
-        // Ensure correct visual feedback if the drag contains files.
-        const containsFiles = Array.from(event.dataTransfer.types).some(type => typeof type === 'string' && type.toLowerCase() === 'files');
-        if (containsFiles) {
+        if (isWorkspaceTrusted && event.dataTransfer.types.includes('Files')) {
              event.dataTransfer.dropEffect = 'copy';
+        } else {
+            event.dataTransfer.dropEffect = 'none';
         }
     };
 
     const handleDragEnter = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         event.stopPropagation();
-        logger.log('Drag ENTER on main container.');
-
-        // Use a robust, case-insensitive check
-        const containsFiles = Array.from(event.dataTransfer.types).some(type => typeof type === 'string' && type.toLowerCase() === 'files');
-        
-        if (containsFiles) {
+        if (isWorkspaceTrusted && event.dataTransfer.types.includes('Files')) {
             setIsDraggingOver(true);
         }
     };
@@ -7205,11 +7192,7 @@ const App = () => {
     const handleDragLeave = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         event.stopPropagation();
-        
-        // Robust check: Ensure the related target (the element being entered) is outside the current target (the container).
-        // This prevents flickering when moving between child elements within the container.
         if (!event.currentTarget.contains(event.relatedTarget as Node)) {
-            logger.log('Drag LEAVE from main container.');
             setIsDraggingOver(false);
         }
     };
@@ -7218,46 +7201,48 @@ const App = () => {
         let totalTokens = 0;
         const selectedFileSet = new Set<string>();
         const selectedNodes: FileNode[] = [];
-
         const fileMap: Map<string, FileNode> = new Map();
         const buildFileMap = (node: FileNode) => {
             fileMap.set(node.absolutePath, node);
             node.children?.forEach(buildFileMap);
         };
         files.forEach(buildFileMap);
-
         const addNodeAndDescendants = (node: FileNode) => {
-            if (!node.children) { // Is a file
+            if (!node.children) {
                 if (!selectedFileSet.has(node.absolutePath)) {
                     selectedFileSet.add(node.absolutePath);
                     selectedNodes.push(node);
                     totalTokens += node.tokenCount;
                 }
-            } else { // Is a directory
-                node.children.forEach(child => addNodeAndDescendants(child));
+            } else {
+                node.children.forEach(addNodeAndDescendants);
             }
         };
-
         checkedFiles.forEach(path => {
             const node = fileMap.get(path);
-            if (node) {
-                addNodeAndDescendants(node);
-            }
+            if (node) addNodeAndDescendants(node);
         });
-        
         const finalFileNodes = selectedNodes.filter(n => !n.isImage);
-
         return { totalFiles: finalFileNodes.length, totalTokens, selectedFileNodes: finalFileNodes };
     }, [checkedFiles, files]);
 
     return (
         <div 
             className={`view-container ${isDraggingOver ? 'drag-over' : ''}`} 
-            onDrop={handleDropOnContainer} 
+            onDrop={handleDrop} 
             onDragOver={handleDragOver}
             onDragEnter={handleDragEnter}
             onDragLeave={handleDragLeave}
         >
+            {!isWorkspaceTrusted && (
+                <div className="workspace-trust-banner">
+                    <VscShield />
+                    <span>Drag and drop is disabled because this workspace is not trusted.</span>
+                    <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'workbench.action.manageWorkspaceTrust' })}>
+                        Manage Trust
+                    </button>
+                </div>
+            )}
             <div className="view-header">
                  <div className="header-row">
                      <div className="toolbar">
@@ -7278,12 +7263,7 @@ const App = () => {
                  </div>
                 {isSearchVisible && (
                     <div className="search-container">
-                        <input
-                            type="text"
-                            placeholder="Filter files..."
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                        />
+                        <input type="text" placeholder="Filter files..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
                     </div>
                 )}
             </div>
@@ -7291,40 +7271,18 @@ const App = () => {
                 {isLoading && files.length === 0 ? (
                      <div className="loading-message">Loading file tree...</div>
                 ) : files.length > 0 ? (
-                    <FileTree
-                        data={files}
-                        checkedFiles={checkedFiles}
-                        updateCheckedFiles={updateCheckedFiles}
-                        activeFile={activeFile}
-                        collapseTrigger={collapseTrigger}
-                        expandAllTrigger={expandAllTrigger}
-                        searchTerm={searchTerm}
-                        problemMap={problemMap}
-                    />
+                    <FileTree data={files} checkedFiles={checkedFiles} updateCheckedFiles={updateCheckedFiles} activeFile={activeFile} collapseTrigger={collapseTrigger} expandAllTrigger={expandAllTrigger} searchTerm={searchTerm} problemMap={problemMap} />
                 ) : (
                     <div className="loading-message">No folder open.</div>
                 )}
             </div>
-            <SelectedFilesView 
-                selectedFileNodes={selectedFileNodes} 
-                onRemove={handleRemoveFromSelection}
-                isMinimized={isSelectionListMinimized}
-                onToggleMinimize={() => setIsSelectionListMinimized(prev => !prev)}
-            />
+            <SelectedFilesView selectedFileNodes={selectedFileNodes} onRemove={handleRemoveFromSelection} isMinimized={isSelectionListMinimized} onToggleMinimize={() => setIsSelectionListMinimized(prev => !prev)} />
             <div className="view-footer">
                 <div className="summary-panel">
-                    <span className='summary-item' title="Total number of individual files selected for flattening. This does not include empty directories.">
-                        <VscFiles />
-                        Selected Files: {formatNumberWithCommas(totalFiles)}
-                    </span>
-                    <span className='summary-item' title="Total tokens in selected text files">
-                        <VscSymbolNumeric />
-                        {formatLargeNumber(totalTokens, 1)}
-                    </span>
+                    <span className='summary-item' title="Total number of individual files selected for flattening. This does not include empty directories."><VscFiles /> Selected Files: {formatNumberWithCommas(totalFiles)}</span>
+                    <span className='summary-item' title="Total tokens in selected text files"><VscSymbolNumeric /> {formatLargeNumber(totalTokens, 1)}</span>
                 </div>
-                <button className="flatten-button" onClick={handleFlattenClick}>
-                    Flatten Context
-                </button>
+                <button className="flatten-button" onClick={handleFlattenClick}>Flatten Context</button>
             </div>
         </div>
     );
@@ -7373,6 +7331,7 @@ export function registerViews(context: vscode.ExtensionContext) {
 
 <file path="src/common/ipc/channels.enum.ts">
 export enum ClientToServerChannel {
+    RequestInitialData = "clientToServer.requestInitialData", // New
     RequestFlattenContext = "clientToServer.requestFlattenContext",
     RequestWorkspaceFiles = "clientToServer.requestWorkspaceFiles",
     LogMessage = "clientToServer.logMessage", // For logging from webview
@@ -7404,6 +7363,7 @@ export enum ClientToServerChannel {
 
 export enum ServerToClientChannel {
     SendWorkspaceFiles = "serverToClient.sendWorkspaceFiles",
+    SendWorkspaceTrustState = "serverToClient.sendWorkspaceTrustState", // New
     ApplySelectionSet = "serverToClient.applySelectionSet",
     SendSelectionSets = "serverToClient.sendSelectionSets",
     ForceRefresh = "serverToClient.forceRefresh", // Backend tells frontend to refresh
@@ -7423,6 +7383,7 @@ export type SelectionSet = { [name: string]: string[] };
 export type ProblemCountsMap = { [path: string]: { error: number; warning: number; } };
 
 export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel> =
+    T extends ClientToServerChannel.RequestInitialData ? {} :
     T extends ClientToServerChannel.RequestFlattenContext ? { selectedPaths: string[] } :
     T extends ClientToServerChannel.RequestWorkspaceFiles ? { force?: boolean } :
     T extends ClientToServerChannel.LogMessage ? { level: 'info' | 'warn' | 'error', message: string } :
@@ -7444,6 +7405,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.VSCodeCommand ? { command: string, args?: any[] } :
     
     T extends ServerToClientChannel.SendWorkspaceFiles ? { files: FileNode[] } :
+    T extends ServerToClientChannel.SendWorkspaceTrustState ? { isTrusted: boolean } :
     T extends ServerToClientChannel.ApplySelectionSet ? { paths: string[] } :
     T extends ServerToClientChannel.SendSelectionSets ? { sets: SelectionSet } :
     T extends ServerToClientChannel.ForceRefresh ? { reason?: 'fileOp' | 'manual' } :
@@ -7767,7 +7729,7 @@ export async function activate(context: vscode.ExtensionContext) {
 
     try {
         Services.loggerService.log('[extension.activate] Registering views...');
-        registerViews(context);
+        registerViews(context); // This now sends the trust state
         Services.loggerService.log('[extension.activate] Views registered successfully.');
     } catch (error: any) {
         Services.loggerService.error(`[extension.activate] CRITICAL - Error registering views: ${error.message}`);
@@ -7799,7 +7761,15 @@ export async function activate(context: vscode.ExtensionContext) {
 
     context.subscriptions.push(
         vscode.window.onDidChangeActiveTextEditor(updateActiveFile),
-        vscode.window.tabGroups.onDidChangeTabs(updateActiveFile)
+        vscode.window.tabGroups.onDidChangeTabs(updateActiveFile),
+        // Add a listener for when workspace trust changes
+        vscode.workspace.onDidGrantWorkspaceTrust(() => {
+            Services.loggerService.log("Workspace trust granted. Notifying webview.");
+            const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
+            if (serverIpc) {
+                serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceTrustState, { isTrusted: true });
+            }
+        })
     );
 
     setTimeout(updateActiveFile, 500);

@@ -1,4 +1,5 @@
 export enum ClientToServerChannel {
+    RequestInitialData = "clientToServer.requestInitialData", // New
     RequestFlattenContext = "clientToServer.requestFlattenContext",
     RequestWorkspaceFiles = "clientToServer.requestWorkspaceFiles",
     LogMessage = "clientToServer.logMessage", // For logging from webview
@@ -30,6 +31,7 @@ export enum ClientToServerChannel {
 
 export enum ServerToClientChannel {
     SendWorkspaceFiles = "serverToClient.sendWorkspaceFiles",
+    SendWorkspaceTrustState = "serverToClient.sendWorkspaceTrustState", // New
     ApplySelectionSet = "serverToClient.applySelectionSet",
     SendSelectionSets = "serverToClient.sendSelectionSets",
     ForceRefresh = "serverToClient.forceRefresh", // Backend tells frontend to refresh

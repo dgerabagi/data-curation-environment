@@ -7,7 +7,7 @@ import { FileNode } from '@/common/types/file-node';
 import FileTree from '../../components/file-tree/FileTree';
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { formatLargeNumber, formatNumberWithCommas } from '@/common/utils/formatting';
-import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, VscNewFolder, VscLoading, VscSave, VscFolderLibrary, VscSettingsGear, VscCheckAll, VscSearch, VscExpandAll } from 'react-icons/vsc';
+import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, VscNewFolder, VscLoading, VscSave, VscFolderLibrary, VscSettingsGear, VscCheckAll, VscSearch, VscExpandAll, VscShield } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import SelectedFilesView from '@/client/components/SelectedFilesView';
 import { addRemovePathInSelectedFiles, removePathsFromSelected } from '@/client/components/file-tree/FileTree.utils';
@@ -27,37 +27,10 @@ const App = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [problemMap, setProblemMap] = useState<ProblemCountsMap>({});
     const [isDraggingOver, setIsDraggingOver] = useState(false);
+    const [isWorkspaceTrusted, setIsWorkspaceTrusted] = useState(true); // Assume trusted by default
     const suppressActiveFileReveal = useRef(false);
     
     const clientIpc = ClientPostMessageManager.getInstance();
-
-    // CRITICAL FIX: Prevent VS Code/Browser from intercepting drag events globally.
-    useEffect(() => {
-        logger.log('[DND] Attaching global drag/drop prevention listeners.');
-
-        const handleGlobalDragOver = (e: DragEvent) => {
-            e.preventDefault();
-            // Set the drop effect globally to ensure the cursor shows the correct icon (e.g., '+').
-            if (e.dataTransfer) {
-                e.dataTransfer.dropEffect = 'copy';
-            }
-        };
-
-        const handleGlobalDrop = (e: DragEvent) => {
-            // Prevent default behavior (e.g., opening file in browser/VS Code).
-            // Specific drop zones handle the actual logic via stopPropagation().
-            e.preventDefault();
-            logger.log('[GlobalDrop] Prevented default drop behavior.');
-        };
-
-        document.addEventListener('dragover', handleGlobalDragOver);
-        document.addEventListener('drop', handleGlobalDrop);
-
-        return () => {
-            document.removeEventListener('dragover', handleGlobalDragOver);
-            document.removeEventListener('drop', handleGlobalDrop);
-        };
-    }, []);
 
     const requestFiles = (force = false) => {
         setIsLoading(true);
@@ -83,6 +56,11 @@ const App = () => {
     useEffect(() => {
         logger.log("Initializing view and requesting initial data.");
         
+        clientIpc.onServerMessage(ServerToClientChannel.SendWorkspaceTrustState, ({ isTrusted }) => {
+            logger.log(`Received workspace trust state: ${isTrusted}`);
+            setIsWorkspaceTrusted(isTrusted);
+        });
+
         clientIpc.onServerMessage(ServerToClientChannel.SendWorkspaceFiles, ({ files: receivedFiles }) => {
             logger.log(`Received file tree from backend. Root node: ${receivedFiles[0]?.name}`);
             setFiles(receivedFiles);
@@ -91,7 +69,7 @@ const App = () => {
         
         clientIpc.onServerMessage(ServerToClientChannel.ApplySelectionSet, ({ paths }) => {
             logger.log(`Applying selection set with ${paths.length} paths.`);
-            setCheckedFiles(paths); // Direct set, not toggle
+            setCheckedFiles(paths);
             clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths });
         });
 
@@ -103,7 +81,7 @@ const App = () => {
         clientIpc.onServerMessage(ServerToClientChannel.SetActiveFile, ({ path }) => {
             if (suppressActiveFileReveal.current) {
                 logger.log(`[WebView] Suppressing set active file event for: ${path}`);
-                suppressActiveFileReveal.current = false; // Reset after first suppression
+                suppressActiveFileReveal.current = false;
                 return;
             }
             logger.log(`[WebView] Received set active file event for: ${path}`);
@@ -138,9 +116,8 @@ const App = () => {
         clientIpc.onServerMessage(ServerToClientChannel.UpdateNodeStats, ({ path, tokenCount, error }) => {
             logger.log(`Received stats update for ${path}. New token count: ${tokenCount}, Error: ${error}`);
             setFiles(currentFiles => {
-                const newFiles = JSON.parse(JSON.stringify(currentFiles)); // Deep copy for mutation
+                const newFiles = JSON.parse(JSON.stringify(currentFiles));
                 let nodeUpdated = false;
-
                 const findAndUpdate = (nodes: FileNode[]) => {
                     for (const node of nodes) {
                         if (node.absolutePath === path) {
@@ -149,22 +126,16 @@ const App = () => {
                             nodeUpdated = true;
                             return true;
                         }
-                        if (node.children && findAndUpdate(node.children)) {
-                            return true;
-                        }
+                        if (node.children && findAndUpdate(node.children)) return true;
                     }
                     return false;
                 };
-
                 findAndUpdate(newFiles);
-                if (nodeUpdated) {
-                    return newFiles;
-                }
-                return currentFiles;
+                return nodeUpdated ? newFiles : currentFiles;
             });
         });
 
-        requestFiles();
+        clientIpc.sendToServer(ClientToServerChannel.RequestInitialData, {});
         clientIpc.sendToServer(ClientToServerChannel.RequestLastSelection, {});
 
     }, [clientIpc]);
@@ -205,17 +176,8 @@ const App = () => {
         return files.length > 0 ? files[0].absolutePath : '';
     };
 
-    const handleNewFile = () => {
-        const parentDirectory = getParentDirForNewItem();
-        logger.log(`Requesting new file in ${parentDirectory}`);
-        clientIpc.sendToServer(ClientToServerChannel.RequestNewFile, { parentDirectory });
-    };
-
-    const handleNewFolder = () => {
-        const parentDirectory = getParentDirForNewItem();
-        logger.log(`Requesting new folder in ${parentDirectory}`);
-        clientIpc.sendToServer(ClientToServerChannel.RequestNewFolder, { parentDirectory });
-    };
+    const handleNewFile = () => clientIpc.sendToServer(ClientToServerChannel.RequestNewFile, { parentDirectory: getParentDirForNewItem() });
+    const handleNewFolder = () => clientIpc.sendToServer(ClientToServerChannel.RequestNewFolder, { parentDirectory: getParentDirForNewItem() });
 
     const handleToggleAutoAdd = () => {
         const newState = !isAutoAddEnabled;
@@ -232,64 +194,53 @@ const App = () => {
     };
 
     const processAndSendFiles = (filesToProcess: FileList | null, targetDir: string) => {
-        if (!filesToProcess || filesToProcess.length === 0) {
-            logger.warn('processAndSendFiles called with no files.');
+        if (!isWorkspaceTrusted) {
+            logger.warn('File drop ignored: Workspace is not trusted.');
             return;
         }
-
-        const filesArray = Array.from(filesToProcess);
-        logger.log(`Processing ${filesArray.length} files from drop into target: ${targetDir}`);
-        filesArray.forEach(file => {
+        if (!filesToProcess || filesToProcess.length === 0) return;
+        
+        Array.from(filesToProcess).forEach(file => {
             const reader = new FileReader();
             reader.onload = (readEvent) => {
-                const buffer = readEvent.target?.result;
-                if (buffer instanceof ArrayBuffer) {
-                    const data = new Uint8Array(buffer);
+                if (readEvent.target?.result instanceof ArrayBuffer) {
+                    const data = new Uint8Array(readEvent.target.result);
                     const finalTargetPath = `${targetDir}/${file.name}`.replace(/\\/g, '/');
-                    logger.log(`Sending file ${file.name} to backend for creation at ${finalTargetPath}`);
                     clientIpc.sendToServer(ClientToServerChannel.RequestAddFileFromBuffer, { targetPath: finalTargetPath, data });
                 }
             };
-            reader.onerror = () => logger.error(`FileReader error for file: ${file.name}`);
             reader.readAsArrayBuffer(file);
         });
     };
 
-    const handleDropOnContainer = (event: React.DragEvent<HTMLDivElement>) => {
+    const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
-        event.stopPropagation(); // Stop propagation so the global drop handler doesn't fire
+        event.stopPropagation();
         setIsDraggingOver(false);
-        logger.log('--- DROP ON MAIN CONTAINER (FALLBACK) ---');
+        if (!isWorkspaceTrusted) return;
         
         const targetDir = files.length > 0 ? files[0].absolutePath : '';
         if (!targetDir) {
             logger.error("Cannot drop file, no workspace root identified.");
             return;
         }
-        logger.log(`Drop target directory identified as root: ${targetDir}`);
         processAndSendFiles(event.dataTransfer.files, targetDir);
     };
     
     const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
-        event.preventDefault(); // This is CRITICAL for onDrop to fire.
+        event.preventDefault();
         event.stopPropagation();
-
-        // Ensure correct visual feedback if the drag contains files.
-        const containsFiles = Array.from(event.dataTransfer.types).some(type => typeof type === 'string' && type.toLowerCase() === 'files');
-        if (containsFiles) {
+        if (isWorkspaceTrusted && event.dataTransfer.types.includes('Files')) {
              event.dataTransfer.dropEffect = 'copy';
+        } else {
+            event.dataTransfer.dropEffect = 'none';
         }
     };
 
     const handleDragEnter = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         event.stopPropagation();
-        logger.log('Drag ENTER on main container.');
-
-        // Use a robust, case-insensitive check
-        const containsFiles = Array.from(event.dataTransfer.types).some(type => typeof type === 'string' && type.toLowerCase() === 'files');
-        
-        if (containsFiles) {
+        if (isWorkspaceTrusted && event.dataTransfer.types.includes('Files')) {
             setIsDraggingOver(true);
         }
     };
@@ -297,11 +248,7 @@ const App = () => {
     const handleDragLeave = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         event.stopPropagation();
-        
-        // Robust check: Ensure the related target (the element being entered) is outside the current target (the container).
-        // This prevents flickering when moving between child elements within the container.
         if (!event.currentTarget.contains(event.relatedTarget as Node)) {
-            logger.log('Drag LEAVE from main container.');
             setIsDraggingOver(false);
         }
     };
@@ -310,46 +257,48 @@ const App = () => {
         let totalTokens = 0;
         const selectedFileSet = new Set<string>();
         const selectedNodes: FileNode[] = [];
-
         const fileMap: Map<string, FileNode> = new Map();
         const buildFileMap = (node: FileNode) => {
             fileMap.set(node.absolutePath, node);
             node.children?.forEach(buildFileMap);
         };
         files.forEach(buildFileMap);
-
         const addNodeAndDescendants = (node: FileNode) => {
-            if (!node.children) { // Is a file
+            if (!node.children) {
                 if (!selectedFileSet.has(node.absolutePath)) {
                     selectedFileSet.add(node.absolutePath);
                     selectedNodes.push(node);
                     totalTokens += node.tokenCount;
                 }
-            } else { // Is a directory
-                node.children.forEach(child => addNodeAndDescendants(child));
+            } else {
+                node.children.forEach(addNodeAndDescendants);
             }
         };
-
         checkedFiles.forEach(path => {
             const node = fileMap.get(path);
-            if (node) {
-                addNodeAndDescendants(node);
-            }
+            if (node) addNodeAndDescendants(node);
         });
-        
         const finalFileNodes = selectedNodes.filter(n => !n.isImage);
-
         return { totalFiles: finalFileNodes.length, totalTokens, selectedFileNodes: finalFileNodes };
     }, [checkedFiles, files]);
 
     return (
         <div 
             className={`view-container ${isDraggingOver ? 'drag-over' : ''}`} 
-            onDrop={handleDropOnContainer} 
+            onDrop={handleDrop} 
             onDragOver={handleDragOver}
             onDragEnter={handleDragEnter}
             onDragLeave={handleDragLeave}
         >
+            {!isWorkspaceTrusted && (
+                <div className="workspace-trust-banner">
+                    <VscShield />
+                    <span>Drag and drop is disabled because this workspace is not trusted.</span>
+                    <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'workbench.action.manageWorkspaceTrust' })}>
+                        Manage Trust
+                    </button>
+                </div>
+            )}
             <div className="view-header">
                  <div className="header-row">
                      <div className="toolbar">
@@ -370,12 +319,7 @@ const App = () => {
                  </div>
                 {isSearchVisible && (
                     <div className="search-container">
-                        <input
-                            type="text"
-                            placeholder="Filter files..."
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                        />
+                        <input type="text" placeholder="Filter files..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
                     </div>
                 )}
             </div>
@@ -383,40 +327,18 @@ const App = () => {
                 {isLoading && files.length === 0 ? (
                      <div className="loading-message">Loading file tree...</div>
                 ) : files.length > 0 ? (
-                    <FileTree
-                        data={files}
-                        checkedFiles={checkedFiles}
-                        updateCheckedFiles={updateCheckedFiles}
-                        activeFile={activeFile}
-                        collapseTrigger={collapseTrigger}
-                        expandAllTrigger={expandAllTrigger}
-                        searchTerm={searchTerm}
-                        problemMap={problemMap}
-                    />
+                    <FileTree data={files} checkedFiles={checkedFiles} updateCheckedFiles={updateCheckedFiles} activeFile={activeFile} collapseTrigger={collapseTrigger} expandAllTrigger={expandAllTrigger} searchTerm={searchTerm} problemMap={problemMap} />
                 ) : (
                     <div className="loading-message">No folder open.</div>
                 )}
             </div>
-            <SelectedFilesView 
-                selectedFileNodes={selectedFileNodes} 
-                onRemove={handleRemoveFromSelection}
-                isMinimized={isSelectionListMinimized}
-                onToggleMinimize={() => setIsSelectionListMinimized(prev => !prev)}
-            />
+            <SelectedFilesView selectedFileNodes={selectedFileNodes} onRemove={handleRemoveFromSelection} isMinimized={isSelectionListMinimized} onToggleMinimize={() => setIsSelectionListMinimized(prev => !prev)} />
             <div className="view-footer">
                 <div className="summary-panel">
-                    <span className='summary-item' title="Total number of individual files selected for flattening. This does not include empty directories.">
-                        <VscFiles />
-                        Selected Files: {formatNumberWithCommas(totalFiles)}
-                    </span>
-                    <span className='summary-item' title="Total tokens in selected text files">
-                        <VscSymbolNumeric />
-                        {formatLargeNumber(totalTokens, 1)}
-                    </span>
+                    <span className='summary-item' title="Total number of individual files selected for flattening. This does not include empty directories."><VscFiles /> Selected Files: {formatNumberWithCommas(totalFiles)}</span>
+                    <span className='summary-item' title="Total tokens in selected text files"><VscSymbolNumeric /> {formatLargeNumber(totalTokens, 1)}</span>
                 </div>
-                <button className="flatten-button" onClick={handleFlattenClick}>
-                    Flatten Context
-                </button>
+                <button className="flatten-button" onClick={handleFlattenClick}>Flatten Context</button>
             </div>
         </div>
     );

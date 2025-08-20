@@ -10,6 +10,15 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     const selectionService = Services.selectionService;
     const actionService = Services.actionService;
 
+    serverIpc.onClientMessage(ClientToServerChannel.RequestInitialData, () => {
+        loggerService.log("WebView is ready. Sending initial data.");
+        // Send trust state first
+        serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceTrustState, { isTrusted: vscode.workspace.isTrusted });
+        // Then request other data
+        fsService.handleWorkspaceFilesRequest(serverIpc, false);
+    });
+
+
     serverIpc.onClientMessage(ClientToServerChannel.RequestWorkspaceFiles, (data) => {
         loggerService.log(`Received RequestWorkspaceFiles from client (force=${data.force}).`);
         fsService.handleWorkspaceFilesRequest(serverIpc, data.force);

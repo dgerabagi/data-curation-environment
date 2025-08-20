@@ -5,6 +5,7 @@ export type SelectionSet = { [name: string]: string[] };
 export type ProblemCountsMap = { [path: string]: { error: number; warning: number; } };
 
 export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel> =
+    T extends ClientToServerChannel.RequestInitialData ? {} :
     T extends ClientToServerChannel.RequestFlattenContext ? { selectedPaths: string[] } :
     T extends ClientToServerChannel.RequestWorkspaceFiles ? { force?: boolean } :
     T extends ClientToServerChannel.LogMessage ? { level: 'info' | 'warn' | 'error', message: string } :
@@ -26,6 +27,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.VSCodeCommand ? { command: string, args?: any[] } :
     
     T extends ServerToClientChannel.SendWorkspaceFiles ? { files: FileNode[] } :
+    T extends ServerToClientChannel.SendWorkspaceTrustState ? { isTrusted: boolean } :
     T extends ServerToClientChannel.ApplySelectionSet ? { paths: string[] } :
     T extends ServerToClientChannel.SendSelectionSets ? { sets: SelectionSet } :
     T extends ServerToClientChannel.ForceRefresh ? { reason?: 'fileOp' | 'manual' } :
