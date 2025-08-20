@@ -392,29 +392,26 @@ export class FSService {
         }
 
         try {
+            Services.loggerService.log(`[PDF] Processing: ${filePath}`);
             const buffer = await fs.readFile(filePath);
+            Services.loggerService.log(`[PDF] File buffer read. Size: ${buffer.length}. Parsing with pdf-parse...`);
             const data = await pdf(buffer);
             const text = data.text;
             const tokenCount = Math.ceil(text.length / 4);
             
             this.pdfTextCache.set(filePath, { text, tokenCount });
-            Services.loggerService.log(`Parsed and cached PDF: ${filePath} (${tokenCount} tokens)`);
+            Services.loggerService.log(`[PDF] Parsed and cached: ${path.basename(filePath)} (${tokenCount} tokens)`);
 
             serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: tokenCount });
         } catch (error: any) {
-            const isEnoent = (error as NodeJS.ErrnoException).code === 'ENOENT';
-            const errorMessage = isEnoent 
-                ? `File not found. It may have been moved or deleted.`
-                : `Failed to parse PDF: ${path.basename(filePath)}`;
-            
-            Services.loggerService.error(`Error in handlePdfToTextRequest for ${filePath}: ${error.message}`);
-            // Send an update that signifies an error state
+            const errorMessage = `Failed to parse PDF: ${path.basename(filePath)}`;
+            Services.loggerService.error(`[PDF] Error processing ${filePath}: ${error.stack || error.message}`);
+            console.error(error);
             serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: 0, error: errorMessage });
         }
     }
 
     public async handleExcelToTextRequest(filePath: string, serverIpc: ServerPostMessageManager) {
-        Services.loggerService.log(`[Excel] Received request to process: ${filePath}`);
         if (this.excelMarkdownCache.has(filePath)) {
             const cached = this.excelMarkdownCache.get(filePath)!;
             serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: cached.tokenCount });
@@ -423,9 +420,9 @@ export class FSService {
         }
 
         try {
-            Services.loggerService.log(`[Excel] Reading file buffer for: ${filePath}`);
+            Services.loggerService.log(`[Excel] Processing: ${filePath}`);
             const buffer = await fs.readFile(filePath);
-            Services.loggerService.log(`[Excel] File buffer read. Parsing with xlsx...`);
+            Services.loggerService.log(`[Excel] File buffer read. Size: ${buffer.length}. Parsing with xlsx...`);
             const workbook = xlsx.read(buffer, { type: 'buffer' });
             Services.loggerService.log(`[Excel] Workbook parsed. Found sheets: ${workbook.SheetNames.join(', ')}`);
             let markdown = '';
@@ -433,7 +430,6 @@ export class FSService {
             workbook.SheetNames.forEach(sheetName => {
                 const worksheet = workbook.Sheets[sheetName];
                 markdown += `### Sheet: ${sheetName}\n\n`;
-                // FIX: Cast to any to bypass incorrect type definitions
                 markdown += (xlsx.utils as any).sheet_to_markdown(worksheet);
                 markdown += '\n\n';
             });
@@ -441,14 +437,14 @@ export class FSService {
 
             const tokenCount = Math.ceil(markdown.length / 4);
             this.excelMarkdownCache.set(filePath, { markdown, tokenCount });
-            Services.loggerService.log(`[Excel] Parsed and cached Excel/CSV: ${filePath} (${tokenCount} tokens)`);
+            Services.loggerService.log(`[Excel] Parsed and cached: ${path.basename(filePath)} (${tokenCount} tokens)`);
 
             serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: tokenCount });
 
         } catch (error: any) {
              const errorMessage = `Failed to parse Excel/CSV file: ${path.basename(filePath)}`;
-             Services.loggerService.error(`[Excel] Error in handleExcelToTextRequest for ${filePath}: ${error.stack || error.message}`);
-             console.error(error); // Also log to debug console
+             Services.loggerService.error(`[Excel] Error processing ${filePath}: ${error.stack || error.message}`);
+             console.error(error);
              serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: 0, error: errorMessage });
         }
     }

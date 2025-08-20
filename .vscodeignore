@@ -1,4 +1,8 @@
-node_modules
+# This file tells the VS Code packaging tool which files to ignore.
+# We are removing 'node_modules' because our external dependencies (like xlsx)
+# need to be included in the final package to be available at runtime.
+# The `vsce` tool is smart enough to only bundle production dependencies.
+
 src
 .gitignore
 webpack.config.js

@@ -52,7 +52,7 @@ export class FlattenerService {
             await fs.writeFile(outputFilePath, outputContent, 'utf-8');
             vscode.window.showInformationMessage(`Successfully flattened ${validResults.length} files to flattened_repo.md.`);
 
-            // Open the generated file
+            // Open the generated file in the editor
             Services.loggerService.log(`Opening flattened file: ${outputFilePath}`);
             await Services.fsService.handleOpenFileRequest(outputFilePath);
 

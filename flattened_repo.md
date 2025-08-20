@@ -1,29 +1,29 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-20T11:07:28.227Z
+  Date Generated: 2025-08-20T11:19:47.555Z
   ---
   Total Files: 173
   Total Lines: 14285
-  Total Characters: 615252
-  Approx. Tokens: 153878
+  Total Characters: 615379
+  Approx. Tokens: 153909
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
 2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
-3. src\backend\services\fs.service.ts (6568 tokens)
+3. src\backend\services\fs.service.ts (6515 tokens)
 4. src\client\views\context-chooser.view\view.tsx (4889 tokens)
 5. src\client\components\tree-view\TreeView.tsx (3780 tokens)
 6. src\client\views\context-chooser.view\view.scss (3638 tokens)
-7. src\backend\services\flattener.service.ts (3370 tokens)
+7. src\backend\services\flattener.service.ts (3373 tokens)
 8. src\client\components\SelectedFilesView.tsx (3275 tokens)
 9. src\client\components\file-tree\FileTree.tsx (2760 tokens)
 10. src\Artifacts\A0. DCE Master Artifact List.md (2732 tokens)
 
 <!-- Full File List -->
 1. .gitignore - Lines: 10 - Chars: 128 - Tokens: 32
-2. .vscodeignore - Lines: 7 - Chars: 76 - Tokens: 19
+2. .vscodeignore - Lines: 11 - Chars: 356 - Tokens: 89
 3. bootstrap-flattener.js - Lines: 187 - Chars: 5920 - Tokens: 1480
 4. LICENSE - Lines: 21 - Chars: 1090 - Tokens: 273
 5. package.json - Lines: 78 - Chars: 2424 - Tokens: 606
@@ -65,8 +65,8 @@
 41. src\backend\commands\commands.ts - Lines: 88 - Chars: 3807 - Tokens: 952
 42. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
 43. src\backend\services\action.service.ts - Lines: 73 - Chars: 2471 - Tokens: 618
-44. src\backend\services\flattener.service.ts - Lines: 303 - Chars: 13478 - Tokens: 3370
-45. src\backend\services\fs.service.ts - Lines: 560 - Chars: 26269 - Tokens: 6568
+44. src\backend\services\flattener.service.ts - Lines: 303 - Chars: 13492 - Tokens: 3373
+45. src\backend\services\fs.service.ts - Lines: 556 - Chars: 26060 - Tokens: 6515
 46. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
 47. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
 48. src\backend\services\services.ts - Lines: 25 - Chars: 982 - Tokens: 246
@@ -194,7 +194,7 @@
 170. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
 171. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
 172. tsconfig.json - Lines: 19 - Chars: 457 - Tokens: 115
-173. webpack.config.js - Lines: 84 - Chars: 2359 - Tokens: 590
+173. webpack.config.js - Lines: 84 - Chars: 2401 - Tokens: 601
 
 <file path=".gitignore">
 node_modules
@@ -210,7 +210,11 @@ prompt.md
 </file>
 
 <file path=".vscodeignore">
-node_modules
+# This file tells the VS Code packaging tool which files to ignore.
+# We are removing 'node_modules' because our external dependencies (like xlsx)
+# need to be included in the final package to be available at runtime.
+# The `vsce` tool is smart enough to only bundle production dependencies.
+
 src
 .gitignore
 webpack.config.js
@@ -4105,7 +4109,7 @@ export class FlattenerService {
             await fs.writeFile(outputFilePath, outputContent, 'utf-8');
             vscode.window.showInformationMessage(`Successfully flattened ${validResults.length} files to flattened_repo.md.`);
 
-            // Open the generated file
+            // Open the generated file in the editor
             Services.loggerService.log(`Opening flattened file: ${outputFilePath}`);
             await Services.fsService.handleOpenFileRequest(outputFilePath);
 
@@ -4751,29 +4755,26 @@ export class FSService {
         }
 
         try {
+            Services.loggerService.log(`[PDF] Processing: ${filePath}`);
             const buffer = await fs.readFile(filePath);
+            Services.loggerService.log(`[PDF] File buffer read. Size: ${buffer.length}. Parsing with pdf-parse...`);
             const data = await pdf(buffer);
             const text = data.text;
             const tokenCount = Math.ceil(text.length / 4);
             
             this.pdfTextCache.set(filePath, { text, tokenCount });
-            Services.loggerService.log(`Parsed and cached PDF: ${filePath} (${tokenCount} tokens)`);
+            Services.loggerService.log(`[PDF] Parsed and cached: ${path.basename(filePath)} (${tokenCount} tokens)`);
 
             serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: tokenCount });
         } catch (error: any) {
-            const isEnoent = (error as NodeJS.ErrnoException).code === 'ENOENT';
-            const errorMessage = isEnoent 
-                ? `File not found. It may have been moved or deleted.`
-                : `Failed to parse PDF: ${path.basename(filePath)}`;
-            
-            Services.loggerService.error(`Error in handlePdfToTextRequest for ${filePath}: ${error.message}`);
-            // Send an update that signifies an error state
+            const errorMessage = `Failed to parse PDF: ${path.basename(filePath)}`;
+            Services.loggerService.error(`[PDF] Error processing ${filePath}: ${error.stack || error.message}`);
+            console.error(error);
             serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: 0, error: errorMessage });
         }
     }
 
     public async handleExcelToTextRequest(filePath: string, serverIpc: ServerPostMessageManager) {
-        Services.loggerService.log(`[Excel] Received request to process: ${filePath}`);
         if (this.excelMarkdownCache.has(filePath)) {
             const cached = this.excelMarkdownCache.get(filePath)!;
             serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: cached.tokenCount });
@@ -4782,9 +4783,9 @@ export class FSService {
         }
 
         try {
-            Services.loggerService.log(`[Excel] Reading file buffer for: ${filePath}`);
+            Services.loggerService.log(`[Excel] Processing: ${filePath}`);
             const buffer = await fs.readFile(filePath);
-            Services.loggerService.log(`[Excel] File buffer read. Parsing with xlsx...`);
+            Services.loggerService.log(`[Excel] File buffer read. Size: ${buffer.length}. Parsing with xlsx...`);
             const workbook = xlsx.read(buffer, { type: 'buffer' });
             Services.loggerService.log(`[Excel] Workbook parsed. Found sheets: ${workbook.SheetNames.join(', ')}`);
             let markdown = '';
@@ -4792,7 +4793,6 @@ export class FSService {
             workbook.SheetNames.forEach(sheetName => {
                 const worksheet = workbook.Sheets[sheetName];
                 markdown += `### Sheet: ${sheetName}\n\n`;
-                // FIX: Cast to any to bypass incorrect type definitions
                 markdown += (xlsx.utils as any).sheet_to_markdown(worksheet);
                 markdown += '\n\n';
             });
@@ -4800,14 +4800,14 @@ export class FSService {
 
             const tokenCount = Math.ceil(markdown.length / 4);
             this.excelMarkdownCache.set(filePath, { markdown, tokenCount });
-            Services.loggerService.log(`[Excel] Parsed and cached Excel/CSV: ${filePath} (${tokenCount} tokens)`);
+            Services.loggerService.log(`[Excel] Parsed and cached: ${path.basename(filePath)} (${tokenCount} tokens)`);
 
             serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: tokenCount });
 
         } catch (error: any) {
              const errorMessage = `Failed to parse Excel/CSV file: ${path.basename(filePath)}`;
-             Services.loggerService.error(`[Excel] Error in handleExcelToTextRequest for ${filePath}: ${error.stack || error.message}`);
-             console.error(error); // Also log to debug console
+             Services.loggerService.error(`[Excel] Error processing ${filePath}: ${error.stack || error.message}`);
+             console.error(error);
              serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: 0, error: errorMessage });
         }
     }
@@ -14903,7 +14903,7 @@ const extensionConfig = {
     },
     externals: {
         vscode: 'commonjs vscode', // the vscode-module is created on-the-fly and must be excluded.
-        xlsx: 'commonjs xlsx' // Exclude xlsx from the bundle
+        // We want xlsx and pdf-parse to be bundled with the extension, so they should NOT be external.
     },
 };
 

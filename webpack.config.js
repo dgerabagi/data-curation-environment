@@ -54,7 +54,7 @@ const extensionConfig = {
     },
     externals: {
         vscode: 'commonjs vscode', // the vscode-module is created on-the-fly and must be excluded.
-        xlsx: 'commonjs xlsx' // Exclude xlsx from the bundle
+        // We want xlsx and pdf-parse to be bundled with the extension, so they should NOT be external.
     },
 };
 
