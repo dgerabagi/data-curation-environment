@@ -157,7 +157,13 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
                     value={renameValue}
                     onChange={(e) => setRenameValue(e.target.value)}
                     onBlur={handleRenameSubmit}
-                    onKeyDown={(e) => e.key === 'Enter' && handleRenameSubmit()}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') handleRenameSubmit();
+                        // Stop propagation for text editing shortcuts
+                        if ((e.ctrlKey || e.metaKey) && ['c', 'v', 'x'].includes(e.key.toLowerCase())) {
+                            e.stopPropagation();
+                        }
+                    }}
                     autoFocus
                     className="rename-input"
                 />

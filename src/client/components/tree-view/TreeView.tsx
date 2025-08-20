@@ -179,6 +179,11 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     };
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
+        // C72 Fix: If the event is coming from an input field, ignore it.
+        if ((e.target as HTMLElement).tagName === 'INPUT') {
+            return;
+        }
+
         if (e.ctrlKey || e.metaKey) {
             switch (e.key.toLowerCase()) {
                 case 'c':
