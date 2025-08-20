@@ -1,0 +1,45 @@
+/* Styles for Parallel Co-Pilot View */
+body {
+    padding: 0;
+    font-family: var(--vscode-font-family);
+    font-size: var(--vscode-font-size);
+    color: var(--vscode-editor-foreground);
+    background-color: var(--vscode-sideBar-background);
+}
+
+.pc-view-container {
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    gap: 8px;
+}
+
+.cycle-navigator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--vscode-panel-border);
+}
+
+.tab-bar {
+    display: flex;
+    border-bottom: 1px solid var(--vscode-panel-border);
+}
+
+.tab {
+    padding: 6px 12px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    color: var(--vscode-tab-inactiveForeground);
+}
+
+.tab.active {
+    color: var(--vscode-tab-activeForeground);
+    border-bottom-color: var(--vscode-tab-activeBorder);
+}
+
+.tab-content {
+    padding-top: 8px;
+}
