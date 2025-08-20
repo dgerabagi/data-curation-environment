@@ -1,19 +1,19 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-20T11:19:47.555Z
+  Date Generated: 2025-08-20T11:54:42.685Z
   ---
   Total Files: 173
-  Total Lines: 14285
-  Total Characters: 615379
-  Approx. Tokens: 153909
+  Total Lines: 14298
+  Total Characters: 616221
+  Approx. Tokens: 154119
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
 2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
 3. src\backend\services\fs.service.ts (6515 tokens)
-4. src\client\views\context-chooser.view\view.tsx (4889 tokens)
+4. src\client\views\context-chooser.view\view.tsx (5099 tokens)
 5. src\client\components\tree-view\TreeView.tsx (3780 tokens)
 6. src\client\views\context-chooser.view\view.scss (3638 tokens)
 7. src\backend\services\flattener.service.ts (3373 tokens)
@@ -82,7 +82,7 @@
 58. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 59. src\client\views\context-chooser.view\on-message.ts - Lines: 130 - Chars: 5569 - Tokens: 1393
 60. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
-61. src\client\views\context-chooser.view\view.tsx - Lines: 375 - Chars: 19554 - Tokens: 4889
+61. src\client\views\context-chooser.view\view.tsx - Lines: 388 - Chars: 20396 - Tokens: 5099
 62. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
 63. src\common\ipc\channels.enum.ts - Lines: 45 - Chars: 2358 - Tokens: 590
 64. src\common\ipc\channels.type.ts - Lines: 41 - Chars: 3046 - Tokens: 762
@@ -7229,6 +7229,19 @@ const App = () => {
             logger.log(`Applying selection set with ${paths.length} paths.`);
             setCheckedFiles(paths);
             clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths });
+
+            // CRITICAL FIX: Trigger text extraction for any PDF/Excel files in the loaded selection
+            logger.log(`[Cache Fix] Pre-warming cache for ${paths.length} restored paths.`);
+            paths.forEach(path => {
+                const extension = path.split('.').pop()?.toLowerCase() || '';
+                 if (extension === 'pdf') {
+                    logger.log(`[Cache Fix] Requesting text for restored PDF: ${path}`);
+                    clientIpc.sendToServer(ClientToServerChannel.RequestPdfToText, { path });
+                } else if (EXCEL_EXTENSIONS.has(`.${extension}`)) {
+                    logger.log(`[Cache Fix] Requesting text for restored Excel/CSV: ${path}`);
+                    clientIpc.sendToServer(ClientToServerChannel.RequestExcelToText, { path });
+                }
+            });
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendSelectionSets, ({ sets }) => {

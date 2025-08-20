@@ -79,6 +79,19 @@ const App = () => {
             logger.log(`Applying selection set with ${paths.length} paths.`);
             setCheckedFiles(paths);
             clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths });
+
+            // CRITICAL FIX: Trigger text extraction for any PDF/Excel files in the loaded selection
+            logger.log(`[Cache Fix] Pre-warming cache for ${paths.length} restored paths.`);
+            paths.forEach(path => {
+                const extension = path.split('.').pop()?.toLowerCase() || '';
+                 if (extension === 'pdf') {
+                    logger.log(`[Cache Fix] Requesting text for restored PDF: ${path}`);
+                    clientIpc.sendToServer(ClientToServerChannel.RequestPdfToText, { path });
+                } else if (EXCEL_EXTENSIONS.has(`.${extension}`)) {
+                    logger.log(`[Cache Fix] Requesting text for restored Excel/CSV: ${path}`);
+                    clientIpc.sendToServer(ClientToServerChannel.RequestExcelToText, { path });
+                }
+            });
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendSelectionSets, ({ sets }) => {
