@@ -1,23 +1,23 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-19T22:43:58.228Z
+  Date Generated: 2025-08-20T00:02:43.227Z
   ---
   Total Files: 172
-  Total Lines: 13994
-  Total Characters: 596273
-  Approx. Tokens: 149134
+  Total Lines: 14035
+  Total Characters: 598312
+  Approx. Tokens: 149644
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
 2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
 3. src\backend\services\fs.service.ts (5576 tokens)
-4. src\client\views\context-chooser.view\view.tsx (4503 tokens)
-5. src\client\views\context-chooser.view\view.scss (3453 tokens)
-6. src\client\components\tree-view\TreeView.tsx (3440 tokens)
+4. src\client\views\context-chooser.view\view.tsx (4636 tokens)
+5. src\client\components\tree-view\TreeView.tsx (3701 tokens)
+6. src\client\views\context-chooser.view\view.scss (3454 tokens)
 7. src\client\components\SelectedFilesView.tsx (3256 tokens)
-8. src\client\components\file-tree\FileTree.tsx (3088 tokens)
+8. src\client\components\file-tree\FileTree.tsx (3116 tokens)
 9. src\backend\services\flattener.service.ts (2805 tokens)
 10. src\Artifacts\A0. DCE Master Artifact List.md (2657 tokens)
 
@@ -45,7 +45,7 @@
 21. src\Artifacts\A20. DCE - Phase 1 - Advanced UX & Automation Plan.md - Lines: 44 - Chars: 6117 - Tokens: 1530
 22. src\Artifacts\A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer.md - Lines: 48 - Chars: 7385 - Tokens: 1847
 23. src\Artifacts\A22. DCE - Phase 1 - Search & Filter Feature Plan.md - Lines: 58 - Chars: 3663 - Tokens: 916
-24. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 53 - Chars: 6772 - Tokens: 1693
+24. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 55 - Chars: 7119 - Tokens: 1780
 25. src\Artifacts\A24. DCE - Selection Paradigm Terminology.md - Lines: 57 - Chars: 3330 - Tokens: 833
 26. src\Artifacts\A25. DCE - Phase 1 - Git & Problems Integration Plan.md - Lines: 61 - Chars: 5871 - Tokens: 1468
 27. src\Artifacts\A26. DCE - Phase 1 - File System Traversal & Caching Strategy.md - Lines: 46 - Chars: 4009 - Tokens: 1003
@@ -72,16 +72,16 @@
 48. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
 49. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
 50. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
-51. src\client\components\file-tree\FileTree.tsx - Lines: 275 - Chars: 12352 - Tokens: 3088
+51. src\client\components\file-tree\FileTree.tsx - Lines: 276 - Chars: 12461 - Tokens: 3116
 52. src\client\components\file-tree\FileTree.utils.ts - Lines: 159 - Chars: 6069 - Tokens: 1518
 53. src\client\components\SelectedFilesView.tsx - Lines: 278 - Chars: 13021 - Tokens: 3256
-54. src\client\components\tree-view\TreeView.tsx - Lines: 304 - Chars: 13757 - Tokens: 3440
+54. src\client\components\tree-view\TreeView.tsx - Lines: 332 - Chars: 14801 - Tokens: 3701
 55. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 56. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
 57. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 58. src\client\views\context-chooser.view\on-message.ts - Lines: 111 - Chars: 4643 - Tokens: 1161
-59. src\client\views\context-chooser.view\view.scss - Lines: 564 - Chars: 13811 - Tokens: 3453
-60. src\client\views\context-chooser.view\view.tsx - Lines: 378 - Chars: 18009 - Tokens: 4503
+59. src\client\views\context-chooser.view\view.scss - Lines: 564 - Chars: 13815 - Tokens: 3454
+60. src\client\views\context-chooser.view\view.tsx - Lines: 388 - Chars: 18544 - Tokens: 4636
 61. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
 62. src\common\ipc\channels.enum.ts - Lines: 41 - Chars: 2037 - Tokens: 510
 63. src\common\ipc\channels.type.ts - Lines: 37 - Chars: 2713 - Tokens: 679
@@ -1582,7 +1582,7 @@ To improve navigation and usability in large projects, this feature introduces a
 # Artifact A23: DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan
 # Date Created: C29
 # Author: AI Model
-# Updated on: C55 (Refine technical plan for external drag-and-drop with detailed event flow)
+# Updated on: C56 (Add hover-to-expand feature and refine event handling strategy)
 
 - **Key/Value for A0:**
 - **Description:** Details the requirements for implementing full keyboard navigation and drag-and-drop file/folder operations within the main file tree view.
@@ -1601,6 +1601,7 @@ To achieve true feature parity with the native VS Code Explorer and cater to pow
 | AI-03 | **External Drag-and-Drop** | As a user, I want to drag a file (e.g., a PDF) from my computer's file explorer and drop it into a folder in the DCE view to add it to my project, so I can quickly incorporate new assets. | - Dragging a file from the OS and dropping it onto a folder in the DCE view copies that file into the target folder in the workspace. <br> - The backend file system is updated. <br> - The file tree automatically refreshes to show the newly added file. |
 | AI-04 | **Select All in Selected List** | As a user, after curating a list, I want to click in the "Selected Items" panel and press `Ctrl+A` or use a context menu to select all files in that list, so I can quickly perform a batch action like "Remove selected". | - **(C37 Update)** Right-clicking in the "Selected Items" list shows a context menu with a "Select All" option. <br> - Clicking it selects all items currently rendered in the list. <br> - The "Remove selected" button's count updates to reflect the total number of items in the list. |
 | AI-05 | **Delete Key to Remove Selection** | As a user, when I have items selected in the "Selected Items" panel, I want to press the `Delete` key to remove them, so I can manage my list more quickly. | - When the "Selected Items" list has focus, pressing the `Delete` key performs the same action as clicking the "Remove selected" button. <br> - All currently selected items are removed from the overall checked files list. <br> - The local selection within the "Selected Items" panel is cleared. |
+| AI-06 | **Hover to Expand Folder** | As a user dragging a file, when I hover over a collapsed folder for a moment, I want it to automatically expand, so I can drop the file into a nested subdirectory without having to cancel the drag operation. | - During a drag operation, hovering over a collapsed folder for ~500ms triggers its expansion. <br> - Moving the mouse away from the folder before the timer completes cancels the expansion. <br> - The tree view updates to show the folder's contents, and the user can continue dragging into the newly visible children. |
 
 ## 3. Technical Implementation Plan
 
@@ -1610,28 +1611,29 @@ The focus management and event handling for keyboard navigation are complete and
 ### Internal Drag and Drop (Completed)
 The HTML5 Drag and Drop API implementation within the React webview is complete and functional.
 
-### External Drag and Drop (Implementation C55)
-This requires a multi-layered event handling strategy to provide clear visual feedback and robust functionality.
+### External Drag and Drop (Implementation C56)
+This requires a multi-layered event handling strategy to provide clear visual feedback and robust functionality, including hover-to-expand.
 
-1.  **Main Container Handlers (`view.tsx`):**
-    *   The main `div.view-container` will have `onDragEnter`, `onDragOver`, `onDragLeave`, and `onDrop` handlers.
-    *   `onDragEnter` and `onDragLeave` will toggle a component-level state (`isDragging`) which adds a `.drag-over` class to the container, providing a visual border around the entire view. **Crucially, they must call `event.preventDefault()` and `event.stopPropagation()` and include logging.**
-    *   `onDragOver` **must** call `event.preventDefault()` to signal that the container is a valid drop zone. This is the key to making the `onDrop` event fire.
-    *   `onDrop` on this container acts as a fallback. If a user drops a file on an empty area of the view, this handler will trigger and treat the project's root directory as the target. It will contain the `FileReader` and IPC logic.
+1.  **Critical: `onDragOver` Behavior:** The most common failure point for HTML drag-and-drop is neglecting to call `event.preventDefault()` in the `onDragOver` handler. This call is **mandatory** to signal to the browser that the element is a valid drop target. Without it, the `onDrop` event will never fire. This must be implemented on all potential drop zones.
 
-2.  **Individual Node Handlers (`TreeView.tsx`):**
-    *   The generic `TreeView` component will be enhanced to handle drag events on its `<li>` elements.
-    *   It will manage a local state (`dropTarget: string | null`) to track the path of the node currently being hovered over.
-    *   `onDragEnter`: Will be attached to each `<li>`. It will call `event.stopPropagation()` to prevent the container's handler from firing. It will check if the node is a directory and, if so, call `setDropTarget` with its path.
-    *   `onDragLeave`: Will clear the `dropTarget` state.
-    *   `onDrop`: Will be attached to each `<li>`. It will call `event.stopPropagation()` and then call a new prop function, `onNodeDrop(event, node)`, delegating the file processing logic to a more specialized parent component. The `className` will be updated to reflect the `drop-target` state for highlighting.
+2.  **Main Container Handlers (`view.tsx`):**
+    *   The main container will have `onDragEnter`, `onDragOver`, `onDragLeave`, and `onDrop` handlers.
+    *   `onDragEnter`/`onDragLeave` will toggle a `.drag-over` class for visual feedback (e.g., a dashed border around the whole view).
+    *   `onDragOver` will call `event.preventDefault()`.
+    *   `onDrop` on the container acts as a fallback for drops in empty space, targeting the workspace root directory.
 
-3.  **File Processing Logic (`FileTree.tsx`):**
-    *   The `FileTree` component will define the `handleNodeDrop` function and pass it as the `onNodeDrop` prop to `TreeView`.
-    *   `handleNodeDrop`: This function receives the drop event and the target `FileNode`. It will determine the final target directory (the node's path if it's a directory, or its parent's path if it's a file). It will then execute the `FileReader` logic to read the dropped files and send them to the backend via the `RequestAddFileFromBuffer` IPC message. **This function will contain extensive logging.**
+3.  **Individual Node Handlers & Hover-to-Expand (`TreeView.tsx`):**
+    *   The generic `TreeView` component will be enhanced to manage drag events and the expansion timer.
+    *   **State:** It will manage `dropTarget` (for highlighting) and a `useRef` for a `setTimeout` timer.
+    *   `onDragEnter` (on `<li>`): It will call `event.stopPropagation()`. If the node is a collapsed directory, it will start a 500ms timer. If the timer completes, it will call the function to expand the node.
+    *   `onDragLeave` (on `<li>`): It will call `event.stopPropagation()` and, critically, **clear the expansion timer** to prevent unwanted expansions.
+    *   `onDrop` (on `<li>`): It will call `event.stopPropagation()`, clear the timer, and delegate the file processing logic to the parent `FileTree` component via a prop function (`onNodeDrop`).
 
-4.  **Backend (`fs.service.ts`):**
-    *   The existing `handleAddFileFromBuffer` handler is sufficient. It receives the full target path and the file's buffer, writes the file, and relies on the existing `FileSystemWatcher` to trigger a UI refresh.
+4.  **File Processing Logic (`FileTree.tsx`):**
+    *   The `FileTree` component will define `handleNodeDrop(event, node)`.
+    *   This function determines the final target directory (the node's path if it's a directory, or its parent's path if it's a file).
+    *   It will iterate through `event.dataTransfer.files`, read each using the `FileReader` API, and send the file's name and buffer to the backend via the `RequestAddFileFromBuffer` IPC message.
+    *   **Logging:** All event handlers (`onDragEnter`, `onDragOver`, `onDragLeave`, `onDrop`) in all components will have detailed `logger.log()` statements to trace the event flow and diagnose any failures.
 </file>
 
 <file path="src/Artifacts/A24. DCE - Selection Paradigm Terminology.md">
@@ -5273,7 +5275,7 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
     }, [checkedFiles]);
 
     const handleNodeDrop = (event: React.DragEvent, dropNode: FileNode) => {
-        logger.log(`--- DROP ON NODE: ${dropNode.name} ---`);
+        logger.log(`--- DROP ON NODE in FileTree: ${dropNode.name} ---`);
         let targetDir = dropNode.absolutePath;
         if (!dropNode.children) { // If dropped on a file, use its parent
             targetDir = dropNode.absolutePath.substring(0, dropNode.absolutePath.lastIndexOf('/'));
@@ -5293,6 +5295,7 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
                         clientIpc.sendToServer(ClientToServerChannel.RequestAddFileFromBuffer, { targetPath: finalTargetPath, data });
                     }
                 };
+                reader.onerror = () => logger.error(`FileReader error for file: ${file.name}`);
                 reader.readAsArrayBuffer(file);
             });
         } else {
@@ -5884,6 +5887,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     const [lastClickedPath, setLastClickedPath] = useState<string | null>(null);
     const [draggedPath, setDraggedPath] = useState<string | null>(null);
     const [dropTarget, setDropTarget] = useState<string | null>(null);
+    const expansionTimer = useRef<NodeJS.Timeout | null>(null);
 
     const nodeRefs = useRef<Map<string, HTMLLIElement | null>>(new Map());
     const treeViewRef = useRef<HTMLDivElement>(null);
@@ -5908,11 +5912,15 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         }
     }, [data, expandedNodes, buildFlatNodeList, focusedNodePath]);
 
+    const expandNode = (path: string) => {
+        setExpandedNodes(prev => [...new Set([...prev, path])]);
+    };
+
     useEffect(() => {
         if (data.length > 0) {
             const rootNode = data[0];
             if (rootNode) {
-                setExpandedNodes(prev => [...new Set([...prev, rootNode.absolutePath])]);
+                expandNode(rootNode.absolutePath);
             }
         }
     }, [data]);
@@ -6053,14 +6061,14 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         switch (e.key) {
             case 'ArrowUp': e.preventDefault(); e.stopPropagation(); moveFocus(currentIndex - 1); break;
             case 'ArrowDown': e.preventDefault(); e.stopPropagation(); moveFocus(currentIndex + 1); break;
-            case 'ArrowRight': e.preventDefault(); e.stopPropagation(); if (currentNode.children) setExpandedNodes(prev => [...new Set([...prev, currentNode.absolutePath])]); break;
+            case 'ArrowRight': e.preventDefault(); e.stopPropagation(); if (currentNode.children) expandNode(currentNode.absolutePath); break;
             case 'ArrowLeft': e.preventDefault(); e.stopPropagation(); if (currentNode.children && expandedNodes.includes(currentNode.absolutePath)) setExpandedNodes(prev => prev.filter(p => p !== currentNode.absolutePath)); break;
             case ' ': e.preventDefault(); e.stopPropagation(); updateCheckedFiles(currentNode.absolutePath); break;
             case 'Enter': e.preventDefault(); e.stopPropagation(); if (currentNode.children) setExpandedNodes(prev => prev.includes(currentNode.absolutePath) ? prev.filter(p => p !== currentNode.absolutePath) : [...prev, currentNode.absolutePath]); else clientIpc.sendToServer(ClientToServerChannel.RequestOpenFile, { path: currentNode.absolutePath }); break;
         }
     };
 
-    // --- Internal Drag/Drop ---
+    // --- Drag/Drop ---
     const handleInternalDragStart = (e: React.DragEvent, node: TreeNode) => {
         e.stopPropagation();
         setDraggedPath(node.absolutePath);
@@ -6068,26 +6076,43 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         logger.log(`Internal Drag Start: ${node.name}`);
     };
 
-    // --- External Drag/Drop ---
     const handleDragEnter = (e: React.DragEvent, node: TreeNode) => {
         e.preventDefault();
         e.stopPropagation();
-        logger.log(`Drag Enter on: ${node.name}`);
+        logger.log(`Drag Enter on node: ${node.name}`);
         if (node.children && node.absolutePath !== draggedPath) {
             setDropTarget(node.absolutePath);
+            // Hover-to-expand logic
+            if (!expandedNodes.includes(node.absolutePath)) {
+                expansionTimer.current = setTimeout(() => {
+                    logger.log(`Hover-expanding node: ${node.name}`);
+                    expandNode(node.absolutePath);
+                }, 500);
+            }
         }
     };
 
-    const handleDragLeave = (e: React.DragEvent) => {
+    const handleDragLeave = (e: React.DragEvent, node: TreeNode) => {
         e.preventDefault();
         e.stopPropagation();
+        logger.log(`Drag Leave from node: ${node.name}`);
         setDropTarget(null);
+        if (expansionTimer.current) {
+            clearTimeout(expansionTimer.current);
+            expansionTimer.current = null;
+        }
     };
 
     const handleDrop = (e: React.DragEvent, node: TreeNode) => {
         e.preventDefault();
         e.stopPropagation();
+        logger.log(`Drop on node: ${node.name}`);
         setDropTarget(null);
+        if (expansionTimer.current) {
+            clearTimeout(expansionTimer.current);
+            expansionTimer.current = null;
+        }
+
         if (draggedPath) { // Internal move
             if (node.children && node.absolutePath !== draggedPath) {
                 const draggedName = draggedPath.split('/').pop();
@@ -6101,6 +6126,11 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         } else if (onNodeDrop) { // External drop
             onNodeDrop(e, node);
         }
+    };
+    
+    const handleDragOver = (e: React.DragEvent) => {
+        e.preventDefault(); // This is CRITICAL for onDrop to fire.
+        e.stopPropagation();
     };
 
     const renderTreeNodes = (nodes: TreeNode[]) => {
@@ -6117,7 +6147,8 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
                     draggable="true"
                     onDragStart={(e) => handleInternalDragStart(e, node)}
                     onDragEnter={(e) => handleDragEnter(e, node)}
-                    onDragLeave={handleDragLeave}
+                    onDragLeave={(e) => handleDragLeave(e, node)}
+                    onDragOver={handleDragOver}
                     onDrop={(e) => handleDrop(e, node)}
                     className={`treenode-li ${isDropTarget ? 'drop-target' : ''}`}
                     data-path={node.absolutePath}
@@ -6321,7 +6352,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 </file>
 
 <file path="src/client/views/context-chooser.view/view.scss">
-/* Updated on: C55 (Add drag-and-drop styling) */
+/* Updated on: C56 (Refined drag-and-drop styling) */
 body {
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -6916,7 +6947,7 @@ const App = () => {
     const [isSearchVisible, setIsSearchVisible] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [problemMap, setProblemMap] = useState<ProblemCountsMap>({});
-    const [isDragging, setIsDragging] = useState(false);
+    const [isDraggingOver, setIsDraggingOver] = useState(false);
     const suppressActiveFileReveal = useRef(false);
     
     const clientIpc = ClientPostMessageManager.getInstance();
@@ -7100,7 +7131,7 @@ const App = () => {
         }
 
         const filesArray = Array.from(filesToProcess);
-        logger.log(`Processing ${filesArray.length} files from drop.`);
+        logger.log(`Processing ${filesArray.length} files from drop into target: ${targetDir}`);
         filesArray.forEach(file => {
             const reader = new FileReader();
             reader.onload = (readEvent) => {
@@ -7112,6 +7143,7 @@ const App = () => {
                     clientIpc.sendToServer(ClientToServerChannel.RequestAddFileFromBuffer, { targetPath: finalTargetPath, data });
                 }
             };
+            reader.onerror = () => logger.error(`FileReader error for file: ${file.name}`);
             reader.readAsArrayBuffer(file);
         });
     };
@@ -7119,33 +7151,42 @@ const App = () => {
     const handleDropOnContainer = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         event.stopPropagation();
-        setIsDragging(false);
+        setIsDraggingOver(false);
         logger.log('--- DROP ON MAIN CONTAINER (FALLBACK) ---');
         
         const targetDir = files.length > 0 ? files[0].absolutePath : '';
+        if (!targetDir) {
+            logger.error("Cannot drop file, no workspace root identified.");
+            return;
+        }
         logger.log(`Drop target directory identified as root: ${targetDir}`);
         processAndSendFiles(event.dataTransfer.files, targetDir);
     };
     
     const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
-        event.preventDefault(); // Necessary to allow drop
+        event.preventDefault(); // This is CRITICAL for onDrop to fire.
+        event.stopPropagation();
+        logger.log("Drag over main view.");
     };
 
     const handleDragEnter = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         event.stopPropagation();
-        logger.log('Drag Enter on main container.');
-        setIsDragging(true);
+        logger.log('Drag ENTER on main container.');
+        if (event.dataTransfer.types.includes('Files')) {
+            setIsDraggingOver(true);
+        }
     };
 
     const handleDragLeave = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         event.stopPropagation();
+        // Only deactivate if leaving the container entirely, not just moving to a child
         if (event.currentTarget.contains(event.relatedTarget as Node)) {
             return;
         }
-        logger.log('Drag Leave from main container.');
-        setIsDragging(false);
+        logger.log('Drag LEAVE from main container.');
+        setIsDraggingOver(false);
     };
 
     const { totalFiles, totalTokens, selectedFileNodes } = useMemo(() => {
@@ -7186,7 +7227,7 @@ const App = () => {
 
     return (
         <div 
-            className={`view-container ${isDragging ? 'drag-over' : ''}`} 
+            className={`view-container ${isDraggingOver ? 'drag-over' : ''}`} 
             onDrop={handleDropOnContainer} 
             onDragOver={handleDragOver}
             onDragEnter={handleDragEnter}

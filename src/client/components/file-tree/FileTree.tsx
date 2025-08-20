@@ -140,7 +140,7 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
     }, [checkedFiles]);
 
     const handleNodeDrop = (event: React.DragEvent, dropNode: FileNode) => {
-        logger.log(`--- DROP ON NODE: ${dropNode.name} ---`);
+        logger.log(`--- DROP ON NODE in FileTree: ${dropNode.name} ---`);
         let targetDir = dropNode.absolutePath;
         if (!dropNode.children) { // If dropped on a file, use its parent
             targetDir = dropNode.absolutePath.substring(0, dropNode.absolutePath.lastIndexOf('/'));
@@ -160,6 +160,7 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
                         clientIpc.sendToServer(ClientToServerChannel.RequestAddFileFromBuffer, { targetPath: finalTargetPath, data });
                     }
                 };
+                reader.onerror = () => logger.error(`FileReader error for file: ${file.name}`);
                 reader.readAsArrayBuffer(file);
             });
         } else {

@@ -26,7 +26,7 @@ const App = () => {
     const [isSearchVisible, setIsSearchVisible] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [problemMap, setProblemMap] = useState<ProblemCountsMap>({});
-    const [isDragging, setIsDragging] = useState(false);
+    const [isDraggingOver, setIsDraggingOver] = useState(false);
     const suppressActiveFileReveal = useRef(false);
     
     const clientIpc = ClientPostMessageManager.getInstance();
@@ -210,7 +210,7 @@ const App = () => {
         }
 
         const filesArray = Array.from(filesToProcess);
-        logger.log(`Processing ${filesArray.length} files from drop.`);
+        logger.log(`Processing ${filesArray.length} files from drop into target: ${targetDir}`);
         filesArray.forEach(file => {
             const reader = new FileReader();
             reader.onload = (readEvent) => {
@@ -222,6 +222,7 @@ const App = () => {
                     clientIpc.sendToServer(ClientToServerChannel.RequestAddFileFromBuffer, { targetPath: finalTargetPath, data });
                 }
             };
+            reader.onerror = () => logger.error(`FileReader error for file: ${file.name}`);
             reader.readAsArrayBuffer(file);
         });
     };
@@ -229,33 +230,42 @@ const App = () => {
     const handleDropOnContainer = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         event.stopPropagation();
-        setIsDragging(false);
+        setIsDraggingOver(false);
         logger.log('--- DROP ON MAIN CONTAINER (FALLBACK) ---');
         
         const targetDir = files.length > 0 ? files[0].absolutePath : '';
+        if (!targetDir) {
+            logger.error("Cannot drop file, no workspace root identified.");
+            return;
+        }
         logger.log(`Drop target directory identified as root: ${targetDir}`);
         processAndSendFiles(event.dataTransfer.files, targetDir);
     };
     
     const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
-        event.preventDefault(); // Necessary to allow drop
+        event.preventDefault(); // This is CRITICAL for onDrop to fire.
+        event.stopPropagation();
+        logger.log("Drag over main view.");
     };
 
     const handleDragEnter = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         event.stopPropagation();
-        logger.log('Drag Enter on main container.');
-        setIsDragging(true);
+        logger.log('Drag ENTER on main container.');
+        if (event.dataTransfer.types.includes('Files')) {
+            setIsDraggingOver(true);
+        }
     };
 
     const handleDragLeave = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         event.stopPropagation();
+        // Only deactivate if leaving the container entirely, not just moving to a child
         if (event.currentTarget.contains(event.relatedTarget as Node)) {
             return;
         }
-        logger.log('Drag Leave from main container.');
-        setIsDragging(false);
+        logger.log('Drag LEAVE from main container.');
+        setIsDraggingOver(false);
     };
 
     const { totalFiles, totalTokens, selectedFileNodes } = useMemo(() => {
@@ -296,7 +306,7 @@ const App = () => {
 
     return (
         <div 
-            className={`view-container ${isDragging ? 'drag-over' : ''}`} 
+            className={`view-container ${isDraggingOver ? 'drag-over' : ''}`} 
             onDrop={handleDropOnContainer} 
             onDragOver={handleDragOver}
             onDragEnter={handleDragEnter}
