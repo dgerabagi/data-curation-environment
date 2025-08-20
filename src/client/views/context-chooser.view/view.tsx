@@ -14,7 +14,7 @@ import { addRemovePathInSelectedFiles, removePathsFromSelected } from '@/client/
 import { SelectionSet, ProblemCountsMap } from '@/common/ipc/channels.type';
 
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
-const WORD_EXTENSIONS = new Set(['.docx']);
+const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
 
 const App = () => {
     const [files, setFiles] = useState<FileNode[]>([]);
@@ -43,7 +43,7 @@ const App = () => {
     };
 
     const updateCheckedFiles = useCallback((path: string) => {
-        const extension = path.split('.').pop()?.toLowerCase() || '';
+        const extension = `.${path.split('.').pop()?.toLowerCase() || ''}`;
         const isChecking = !checkedFiles.some(checkedPath => path.startsWith(checkedPath));
 
         setCheckedFiles(currentChecked => {
@@ -53,13 +53,13 @@ const App = () => {
         });
 
         if (isChecking) {
-            if (extension === 'pdf') {
+            if (extension === '.pdf') {
                 logger.log(`Requesting text for PDF: ${path}`);
                 clientIpc.sendToServer(ClientToServerChannel.RequestPdfToText, { path });
-            } else if (EXCEL_EXTENSIONS.has(`.${extension}`)) {
+            } else if (EXCEL_EXTENSIONS.has(extension)) {
                 logger.log(`Requesting text for Excel/CSV: ${path}`);
                 clientIpc.sendToServer(ClientToServerChannel.RequestExcelToText, { path });
-            } else if (WORD_EXTENSIONS.has(`.${extension}`)) {
+            } else if (WORD_EXTENSIONS.has(extension)) {
                 logger.log(`Requesting text for Word Doc: ${path}`);
                 clientIpc.sendToServer(ClientToServerChannel.RequestWordToText, { path });
             }
@@ -85,17 +85,17 @@ const App = () => {
             setCheckedFiles(paths);
             clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths });
 
-            // CRITICAL FIX: Trigger text extraction for any PDF/Excel files in the loaded selection
+            // CRITICAL FIX: Trigger text extraction for any special files in the loaded selection
             logger.log(`[Cache Fix] Pre-warming cache for ${paths.length} restored paths.`);
             paths.forEach(path => {
-                const extension = path.split('.').pop()?.toLowerCase() || '';
-                 if (extension === 'pdf') {
+                const extension = `.${path.split('.').pop()?.toLowerCase() || ''}`;
+                 if (extension === '.pdf') {
                     logger.log(`[Cache Fix] Requesting text for restored PDF: ${path}`);
                     clientIpc.sendToServer(ClientToServerChannel.RequestPdfToText, { path });
-                } else if (EXCEL_EXTENSIONS.has(`.${extension}`)) {
+                } else if (EXCEL_EXTENSIONS.has(extension)) {
                     logger.log(`[Cache Fix] Requesting text for restored Excel/CSV: ${path}`);
                     clientIpc.sendToServer(ClientToServerChannel.RequestExcelToText, { path });
-                } else if (WORD_EXTENSIONS.has(`.${extension}`)) {
+                } else if (WORD_EXTENSIONS.has(extension)) {
                     logger.log(`[Cache Fix] Requesting text for restored Word Doc: ${path}`);
                     clientIpc.sendToServer(ClientToServerChannel.RequestWordToText, { path });
                 }

@@ -26,6 +26,11 @@
                     "id": "data-curation-environment",
                     "title": "Data Curation",
                     "icon": "public/spiral.svg"
+                },
+                {
+                    "id": "dce-parallel-copilot",
+                    "title": "DCE Parallel Co-Pilot",
+                    "icon": "public/copilot.svg"
                 }
             ]
         },
@@ -35,7 +40,9 @@
                     "type": "webview",
                     "id": "viewType.sidebar.contextChooser",
                     "name": "Data Curation"
-                },
+                }
+            ],
+            "dce-parallel-copilot": [
                 {
                     "type": "webview",
                     "id": "viewType.sidebar.parallelCopilot",

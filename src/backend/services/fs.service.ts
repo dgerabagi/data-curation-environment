@@ -17,7 +17,7 @@ import mammoth from 'mammoth';
 
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
-const WORD_EXTENSIONS = new Set(['.docx']);
+const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
 const EXCLUSION_PATTERNS = ['node_modules', 'dist', 'out', '.git', 'dce_cache'];
 
 // Helper to normalize paths to use forward slashes, which is consistent in webviews
@@ -541,6 +541,15 @@ export class FSService {
         if (this.wordTextCache.has(filePath)) {
             const cached = this.wordTextCache.get(filePath)!;
             serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: cached.tokenCount });
+            return;
+        }
+
+        const extension = path.extname(filePath).toLowerCase();
+        if (extension === '.doc') {
+            const unsupportedMessage = "UNSUPPORTED_FORMAT";
+            this.wordTextCache.set(filePath, { text: unsupportedMessage, tokenCount: 0 });
+            Services.loggerService.warn(`[Word] Legacy .doc format is not supported for file: ${filePath}`);
+            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: 0, error: "Legacy .doc format not supported." });
             return;
         }
 

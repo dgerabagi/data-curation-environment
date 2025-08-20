@@ -21,7 +21,7 @@ interface FileStats {
 
 const BINARY_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico', '.exe', '.dll', '.bin', '.zip', '.gz', '.7z', '.mp3', '.wav', '.mov', '.mp4']);
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
-const WORD_EXTENSIONS = new Set(['.docx']);
+const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
 
 
 export class FlattenerService {
@@ -211,11 +211,15 @@ export class FlattenerService {
             const virtualContent = Services.fsService.getVirtualWordContent(filePath);
             Services.loggerService.log(`[Flattener] Word check for ${filePath}. Cache result: ${virtualContent ? 'FOUND' : 'NOT FOUND'}`);
             if (virtualContent) {
+                const content = virtualContent.text === "UNSUPPORTED_FORMAT" 
+                    ? `<!-- Content of .doc file '${path.basename(filePath)}' could not be extracted. Legacy .doc format is not supported. Please convert to .docx. -->` 
+                    : virtualContent.text;
+
                 return {
                     filePath,
-                    content: virtualContent.text,
-                    lines: virtualContent.text.split('\n').length,
-                    characters: virtualContent.text.length,
+                    content: content,
+                    lines: content.split('\n').length,
+                    characters: content.length,
                     tokens: virtualContent.tokenCount,
                     error: null,
                     isBinary: false,
