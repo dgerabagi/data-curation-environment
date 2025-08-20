@@ -58,15 +58,13 @@ export const addRemovePathInSelectedFiles = (
         // UNCHECKING
         if (selectedAncestor) {
             // A child of a selected folder is being unchecked ("subtractive uncheck").
+            // This is the user's desired behavior: remove the parent and add back all files except the one clicked.
             newSelectedFiles = newSelectedFiles.filter(p => p !== selectedAncestor);
             const ancestorNode = getFileNodeByPath(fileTree, selectedAncestor);
-            if (ancestorNode && ancestorNode.children) {
-                // Add all direct children of the ancestor EXCEPT the one that was part of the uncheck path.
-                for (const child of ancestorNode.children) {
-                    if (!path.startsWith(child.absolutePath)) {
-                         newSelectedFiles.push(child.absolutePath);
-                    }
-                }
+            if (ancestorNode) {
+                const allDescendantFiles = getAllDescendantPaths(ancestorNode, true);
+                const filesToAdd = allDescendantFiles.filter(p => p !== path);
+                newSelectedFiles.push(...filesToAdd);
             }
         } else {
             // A directly selected item is being unchecked. Remove it and all its descendants.

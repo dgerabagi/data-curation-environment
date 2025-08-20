@@ -1,20 +1,20 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-20T01:59:17.274Z
+  Date Generated: 2025-08-20T02:50:50.275Z
   ---
   Total Files: 172
-  Total Lines: 14030
-  Total Characters: 597517
-  Approx. Tokens: 149445
+  Total Lines: 14078
+  Total Characters: 600412
+  Approx. Tokens: 150169
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
 2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
-3. src\backend\services\fs.service.ts (5576 tokens)
-4. src\client\views\context-chooser.view\view.tsx (4446 tokens)
-5. src\client\components\tree-view\TreeView.tsx (3697 tokens)
+3. src\backend\services\fs.service.ts (5783 tokens)
+4. src\client\views\context-chooser.view\view.tsx (4767 tokens)
+5. src\client\components\tree-view\TreeView.tsx (3780 tokens)
 6. src\client\views\context-chooser.view\view.scss (3638 tokens)
 7. src\client\components\SelectedFilesView.tsx (3256 tokens)
 8. src\client\components\file-tree\FileTree.tsx (3116 tokens)
@@ -45,7 +45,7 @@
 21. src\Artifacts\A20. DCE - Phase 1 - Advanced UX & Automation Plan.md - Lines: 44 - Chars: 6117 - Tokens: 1530
 22. src\Artifacts\A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer.md - Lines: 48 - Chars: 7385 - Tokens: 1847
 23. src\Artifacts\A22. DCE - Phase 1 - Search & Filter Feature Plan.md - Lines: 58 - Chars: 3663 - Tokens: 916
-24. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 41 - Chars: 5154 - Tokens: 1289
+24. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 43 - Chars: 5223 - Tokens: 1306
 25. src\Artifacts\A24. DCE - Selection Paradigm Terminology.md - Lines: 57 - Chars: 3330 - Tokens: 833
 26. src\Artifacts\A25. DCE - Phase 1 - Git & Problems Integration Plan.md - Lines: 61 - Chars: 5871 - Tokens: 1468
 27. src\Artifacts\A26. DCE - Phase 1 - File System Traversal & Caching Strategy.md - Lines: 46 - Chars: 4009 - Tokens: 1003
@@ -65,7 +65,7 @@
 41. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
 42. src\backend\services\action.service.ts - Lines: 73 - Chars: 2471 - Tokens: 618
 43. src\backend\services\flattener.service.ts - Lines: 266 - Chars: 11218 - Tokens: 2805
-44. src\backend\services\fs.service.ts - Lines: 491 - Chars: 22304 - Tokens: 5576
+44. src\backend\services\fs.service.ts - Lines: 507 - Chars: 23132 - Tokens: 5783
 45. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
 46. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
 47. src\backend\services\services.ts - Lines: 25 - Chars: 982 - Tokens: 246
@@ -75,16 +75,16 @@
 51. src\client\components\file-tree\FileTree.tsx - Lines: 276 - Chars: 12461 - Tokens: 3116
 52. src\client\components\file-tree\FileTree.utils.ts - Lines: 159 - Chars: 6069 - Tokens: 1518
 53. src\client\components\SelectedFilesView.tsx - Lines: 278 - Chars: 13021 - Tokens: 3256
-54. src\client\components\tree-view\TreeView.tsx - Lines: 333 - Chars: 14787 - Tokens: 3697
+54. src\client\components\tree-view\TreeView.tsx - Lines: 338 - Chars: 15118 - Tokens: 3780
 55. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 56. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
 57. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-58. src\client\views\context-chooser.view\on-message.ts - Lines: 120 - Chars: 5068 - Tokens: 1267
+58. src\client\views\context-chooser.view\on-message.ts - Lines: 124 - Chars: 5242 - Tokens: 1311
 59. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
-60. src\client\views\context-chooser.view\view.tsx - Lines: 348 - Chars: 17781 - Tokens: 4446
+60. src\client\views\context-chooser.view\view.tsx - Lines: 366 - Chars: 19068 - Tokens: 4767
 61. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
-62. src\common\ipc\channels.enum.ts - Lines: 43 - Chars: 2187 - Tokens: 547
-63. src\common\ipc\channels.type.ts - Lines: 39 - Chars: 2864 - Tokens: 716
+62. src\common\ipc\channels.enum.ts - Lines: 45 - Chars: 2288 - Tokens: 572
+63. src\common\ipc\channels.type.ts - Lines: 40 - Chars: 2969 - Tokens: 743
 64. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
 65. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 66. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
@@ -1582,7 +1582,7 @@ To improve navigation and usability in large projects, this feature introduces a
 # Artifact A23: DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan
 # Date Created: C29
 # Author: AI Model
-# Updated on: C58 (Codify robust URI-based drag-and-drop solution)
+# Updated on: C61 (Codify robust URI-based drag-and-drop solution from external sources)
 
 - **Key/Value for A0:**
 - **Description:** Details the requirements for implementing full keyboard navigation and drag-and-drop file/folder operations within the main file tree view.
@@ -1606,20 +1606,22 @@ To achieve true feature parity with the native VS Code Explorer and cater to pow
 ### Keyboard Navigation & Internal Drag-Drop (Completed)
 These features are stable and complete. The internal drag-drop includes robust validation to prevent invalid moves.
 
-### External Drag and Drop (Implementation C58)
+### External Drag and Drop (Implementation C61)
 This requires a multi-layered strategy to correctly handle drops from different sources (OS vs. VS Code Explorer) due to webview security constraints.
 
-1.  **Problem:** When dragging from the native VS Code Explorer, the `DataTransfer` object does **not** contain `File` objects. Instead, it contains URIs in proprietary (`vscode-resource`) or standard (`text/uri-list`) formats. The webview cannot access the file system with these URIs directly.
+1.  **Problem:** When dragging from the native VS Code Explorer, the `DataTransfer` object does **not** contain `File` objects for security reasons. Instead, it contains a URI string in the `text/uri-list` data type. The webview cannot access the file system with this URI directly. Drops from the OS *do* use the standard `Files` API.
 
 2.  **Solution:**
-    *   **Client-Side Utility (`drag-drop.utils.ts`):** A centralized utility will parse the `DataTransfer` object. It will check for data types in a specific order of precedence:
-        1.  `vscode-resource`: A JSON string array of file URIs.
-        2.  `text/uri-list`: A newline-separated list of file URIs.
-        3.  `Files`: The standard `FileList` for drops from the OS.
-    *   **New IPC Channel (`RequestCopyFiles`):** If URI-based data is found, the client utility will send a new `RequestCopyFiles` message to the backend, containing the array of source URIs and the target directory path. For standard file drops, it will continue to use `RequestAddFileFromBuffer`.
-    *   **Backend Handler (`fs.service.ts`):** A new message handler for `RequestCopyFiles` will use the `vscode.workspace.fs.copy()` API to perform the file operation. This is the secure and correct way for the extension host to act on a URI provided by the webview.
-    *   **Robust State Tracking (`view.tsx`):** A "drag counter" (`useRef`) will be used instead of a simple boolean state to track `onDragEnter` and `onDragLeave` events. This correctly handles events firing on nested child elements and prevents the UI from flickering.
-    *   **Global Event Interception (`view.tsx`):** Global `dragover` and `drop` listeners will be attached to the `window` object. These will call `event.preventDefault()`, which is **critical** to stop VS Code from hijacking the event and opening the file in a new editor tab instead of allowing our view to handle the drop.
+    *   **Frontend Drop Handler (`view.tsx`, `TreeView.tsx`):** The `onDrop` handler must be multi-faceted.
+        1.  It must first check `event.dataTransfer.files`. If it has a `length > 0`, it's a drop from the OS. The handler will read the files as buffers and send them to the backend via the existing `RequestAddFileFromBuffer` IPC channel.
+        2.  If `event.dataTransfer.files` is empty, it must then check `event.dataTransfer.getData('text/uri-list')`. If this returns a non-empty string, it's a drop from the VS Code Explorer.
+        3.  The handler will parse this string (which is a URI like `file:///c:/path/to/file.txt`) and send it to the backend via a **new IPC channel**: `RequestCopyFileFromUri`.
+    *   **New IPC Channel (`RequestCopyFileFromUri`):** A new channel will be created to pass the source URI string and the target directory path from the frontend to the backend.
+    *   **Backend Handler (`fs.service.ts`):** A new message handler for `RequestCopyFileFromUri` will be created. It will:
+        1.  Convert the source URI string into a `vscode.Uri` object.
+        2.  Construct a destination `vscode.Uri` object by combining the target directory path and the basename of the source file.
+        3.  Use the `vscode.workspace.fs.copy()` API to perform the file operation. This is the secure and correct way for the extension host to act on a URI provided by the webview.
+    *   **Logging:** The drop handlers will include detailed logging to inspect all available `event.dataTransfer.types` to ensure robustness.
 </file>
 
 <file path="src/Artifacts/A24. DCE - Selection Paradigm Terminology.md">
@@ -4585,6 +4587,22 @@ export class FSService {
 
     // --- File Operations ---
 
+    public async handleCopyFileFromUri(sourceUriString: string, targetDir: string) {
+        try {
+            const sourceUri = vscode.Uri.parse(sourceUriString);
+            const fileName = path.basename(sourceUri.fsPath);
+            const targetUri = vscode.Uri.file(path.join(targetDir, fileName));
+
+            Services.loggerService.log(`Copying file from URI: ${sourceUri.toString()} to ${targetUri.toString()}`);
+            await vscode.workspace.fs.copy(sourceUri, targetUri);
+            Services.loggerService.log(`Successfully copied file from URI.`);
+        } catch (error: any) {
+            const errorMessage = `Failed to copy file from URI: ${error.message}`;
+            vscode.window.showErrorMessage(errorMessage);
+            Services.loggerService.error(errorMessage);
+        }
+    }
+
     public async handleAddFileFromBuffer(targetPath: string, data: Uint8Array) {
         try {
             const uri = vscode.Uri.file(targetPath);
@@ -6101,7 +6119,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         }
 
         if (draggedPath) { // Internal move
-            if (node.children && node.absolutePath !== draggedPath) {
+            if (node.children && node.absolutePath !== draggedPath && !node.absolutePath.startsWith(draggedPath + '/')) {
                 const draggedName = draggedPath.split('/').pop();
                 if (draggedName) {
                     const newPath = `${node.absolutePath}/${draggedName}`;
@@ -6115,9 +6133,14 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         }
     };
     
-    const handleDragOver = (e: React.DragEvent) => {
+    const handleDragOver = (e: React.DragEvent, node: TreeNode) => {
         e.preventDefault();
         e.stopPropagation();
+        if (draggedPath && node.absolutePath.startsWith(draggedPath + '/')) {
+            e.dataTransfer.dropEffect = 'none'; // Prevent dropping a folder into itself
+        } else {
+            e.dataTransfer.dropEffect = 'move';
+        }
     };
 
     const renderTreeNodes = (nodes: TreeNode[]) => {
@@ -6135,7 +6158,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
                     onDragStart={(e) => handleInternalDragStart(e, node)}
                     onDragEnter={(e) => handleDragEnter(e, node)}
                     onDragLeave={(e) => handleDragLeave(e, node)}
-                    onDragOver={handleDragOver}
+                    onDragOver={(e) => handleDragOver(e, node)}
                     onDrop={(e) => handleDrop(e, node)}
                     className={`treenode-li ${isDropTarget ? 'drop-target' : ''}`}
                     data-path={node.absolutePath}
@@ -6289,6 +6312,10 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestAddFileFromBuffer, (data) => {
         fsService.handleAddFileFromBuffer(data.targetPath, data.data);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestCopyFileFromUri, (data) => {
+        fsService.handleCopyFileFromUri(data.sourceUri, data.targetDir);
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestPdfToText, (data) => {
@@ -7137,24 +7164,42 @@ const App = () => {
         });
     };
 
-    const processAndSendFiles = (filesToProcess: FileList | null, targetDir: string) => {
-        if (!isWorkspaceTrusted) {
-            logger.warn('File drop ignored: Workspace is not trusted.');
+    const processDrop = (event: React.DragEvent, targetDir: string) => {
+        logger.log(`[Drop] Drop detected on target: ${targetDir}`);
+        logger.log(`[Drop] Available types: ${Array.from(event.dataTransfer.types).join(', ')}`);
+
+        // Case 1: Drop from OS File Explorer
+        if (event.dataTransfer.files && event.dataTransfer.files.length > 0) {
+            logger.log(`[Drop] Handling as OS file drop (${event.dataTransfer.files.length} files).`);
+            const filesArray = Array.from(event.dataTransfer.files);
+            filesArray.forEach((file: File) => {
+                const reader = new FileReader();
+                reader.onload = (readEvent) => {
+                    if (readEvent.target?.result instanceof ArrayBuffer) {
+                        const data = new Uint8Array(readEvent.target.result);
+                        const finalTargetPath = `${targetDir}/${file.name}`.replace(/\\/g, '/');
+                        logger.log(`[Drop] Sending file buffer ${file.name} to backend for creation at ${finalTargetPath}`);
+                        clientIpc.sendToServer(ClientToServerChannel.RequestAddFileFromBuffer, { targetPath: finalTargetPath, data });
+                    }
+                };
+                reader.onerror = () => logger.error(`[Drop] FileReader error for file: ${file.name}`);
+                reader.readAsArrayBuffer(file);
+            });
             return;
         }
-        if (!filesToProcess || filesToProcess.length === 0) return;
+
+        // Case 2: Drop from VS Code Explorer
+        const uriList = event.dataTransfer.getData('text/uri-list');
+        if (uriList) {
+            logger.log(`[Drop] Handling as VS Code URI drop. URI List: ${uriList}`);
+            const sourceUri = uriList.split('\n')[0].trim(); // Handle multiple URIs if needed, for now just take the first
+            if (sourceUri) {
+                 clientIpc.sendToServer(ClientToServerChannel.RequestCopyFileFromUri, { sourceUri, targetDir });
+            }
+            return;
+        }
         
-        Array.from(filesToProcess).forEach(file => {
-            const reader = new FileReader();
-            reader.onload = (readEvent) => {
-                if (readEvent.target?.result instanceof ArrayBuffer) {
-                    const data = new Uint8Array(readEvent.target.result);
-                    const finalTargetPath = `${targetDir}/${file.name}`.replace(/\\/g, '/');
-                    clientIpc.sendToServer(ClientToServerChannel.RequestAddFileFromBuffer, { targetPath: finalTargetPath, data });
-                }
-            };
-            reader.readAsArrayBuffer(file);
-        });
+        logger.warn('[Drop] Drop event occurred but no compatible data type was found.');
     };
 
     const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
@@ -7168,13 +7213,13 @@ const App = () => {
             logger.error("Cannot drop file, no workspace root identified.");
             return;
         }
-        processAndSendFiles(event.dataTransfer.files, targetDir);
+        processDrop(event, targetDir);
     };
     
     const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         event.stopPropagation();
-        if (isWorkspaceTrusted && event.dataTransfer.types.includes('Files')) {
+        if (isWorkspaceTrusted && (event.dataTransfer.types.includes('Files') || event.dataTransfer.types.includes('text/uri-list'))) {
              event.dataTransfer.dropEffect = 'copy';
         } else {
             event.dataTransfer.dropEffect = 'none';
@@ -7184,7 +7229,7 @@ const App = () => {
     const handleDragEnter = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         event.stopPropagation();
-        if (isWorkspaceTrusted && event.dataTransfer.types.includes('Files')) {
+        if (isWorkspaceTrusted && (event.dataTransfer.types.includes('Files') || event.dataTransfer.types.includes('text/uri-list'))) {
             setIsDraggingOver(true);
         }
     };
@@ -7271,7 +7316,7 @@ const App = () => {
                 {isLoading && files.length === 0 ? (
                      <div className="loading-message">Loading file tree...</div>
                 ) : files.length > 0 ? (
-                    <FileTree data={files} checkedFiles={checkedFiles} updateCheckedFiles={updateCheckedFiles} activeFile={activeFile} collapseTrigger={collapseTrigger} expandAllTrigger={expandAllTrigger} searchTerm={searchTerm} problemMap={problemMap} />
+                    <FileTree data={files} checkedFiles={checkedFiles} updateCheckedFiles={updateCheckedFiles} activeFile={activeFile} collapseTrigger={collapseTrigger} expandAllTrigger={expandAllTrigger} searchTerm={searchTerm} problemMap={problemMap} onNodeDrop={processDrop} />
                 ) : (
                     <div className="loading-message">No folder open.</div>
                 )}
@@ -7347,7 +7392,8 @@ export enum ClientToServerChannel {
     RequestMoveFile = "clientToServer.requestMoveFile",
     RequestUndo = "clientToServer.requestUndo",
     RequestRedo = "clientToServer.requestRedo",
-    RequestAddFileFromBuffer = "clientToServer.requestAddFileFromBuffer", // For external drag-drop
+    RequestAddFileFromBuffer = "clientToServer.requestAddFileFromBuffer", // For OS drag-drop
+    RequestCopyFileFromUri = "clientToServer.requestCopyFileFromUri", // For VS Code explorer drag-drop
 
     // PDF Handling
     RequestPdfToText = "clientToServer.requestPdfToText",
@@ -7398,6 +7444,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestUndo ? {} :
     T extends ClientToServerChannel.RequestRedo ? {} :
     T extends ClientToServerChannel.RequestAddFileFromBuffer ? { targetPath: string, data: Uint8Array } :
+    T extends ClientToServerChannel.RequestCopyFileFromUri ? { sourceUri: string, targetDir: string } :
     T extends ClientToServerChannel.RequestPdfToText ? { path: string } :
     T extends ClientToServerChannel.SaveCurrentSelection ? { paths: string[] } :
     T extends ClientToServerChannel.RequestLastSelection ? {} :

@@ -40,11 +40,13 @@ export class FlattenerService {
 
             const fileStatsPromises = uniqueFilePaths.map(filePath => this.getFileStatsAndContent(filePath));
             const results = await Promise.all(fileStatsPromises);
+            
+            const validResults = results.filter(r => !r.error);
 
             const outputContent = this.generateOutputContent(results, rootPath, outputFilePath);
 
             await fs.writeFile(outputFilePath, outputContent, 'utf-8');
-            vscode.window.showInformationMessage(`Successfully flattened ${results.filter(r => !r.error).length} files to flattened_repo.md.`);
+            vscode.window.showInformationMessage(`Successfully flattened ${validResults.length} files to flattened_repo.md.`);
 
             const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
             if (serverIpc) {
@@ -206,8 +208,9 @@ export class FlattenerService {
         let totalLines = 0;
         let totalCharacters = 0;
         let totalTokens = 0;
-        let errorCount = 0;
+        
         const validResults = results.filter(r => !r.error);
+        const errorCount = results.length - validResults.length;
 
         for (const res of validResults) {
             totalLines += res.lines;
@@ -256,7 +259,7 @@ export class FlattenerService {
             } else {
                 output += content;
             }
-            if (!content.endsWith('\n')) {
+            if (content && !content.endsWith('\n')) {
                 output += '\n';
             }
             output += `</file>\n\n`;

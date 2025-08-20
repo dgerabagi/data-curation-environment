@@ -235,8 +235,8 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
                                     onClick={(e) => handleItemClick(e, node.absolutePath)}
                                     onMouseEnter={() => setHoveredPath(node.absolutePath)}
                                     onMouseLeave={() => setHoveredPath(null)}
-                                    style={{ backgroundColor: getTokenBackgroundColor(node.tokenCount) }}
-                                    title={getTokenRiskTooltip(node.tokenCount)}
+                                    style={{ backgroundColor: node.isImage ? 'transparent' : getTokenBackgroundColor(node.tokenCount) }}
+                                    title={node.isImage ? `Binary file: ${node.name}` : getTokenRiskTooltip(node.tokenCount)}
                                 >
                                     <span className="file-index">
                                         {hoveredPath === node.absolutePath ? (
