@@ -15,7 +15,8 @@ export enum ClientToServerChannel {
     RequestMoveFile = "clientToServer.requestMoveFile",
     RequestUndo = "clientToServer.requestUndo",
     RequestRedo = "clientToServer.requestRedo",
-    RequestAddFileFromBuffer = "clientToServer.requestAddFileFromBuffer", // For external drag-drop
+    RequestAddFileFromBuffer = "clientToServer.requestAddFileFromBuffer", // For OS drag-drop
+    RequestCopyFileFromUri = "clientToServer.requestCopyFileFromUri", // For VS Code explorer drag-drop
 
     // PDF Handling
     RequestPdfToText = "clientToServer.requestPdfToText",

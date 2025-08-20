@@ -64,6 +64,10 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         fsService.handleAddFileFromBuffer(data.targetPath, data.data);
     });
 
+    serverIpc.onClientMessage(ClientToServerChannel.RequestCopyFileFromUri, (data) => {
+        fsService.handleCopyFileFromUri(data.sourceUri, data.targetDir);
+    });
+
     serverIpc.onClientMessage(ClientToServerChannel.RequestPdfToText, (data) => {
         fsService.handlePdfToTextRequest(data.path, serverIpc);
     });

@@ -193,24 +193,42 @@ const App = () => {
         });
     };
 
-    const processAndSendFiles = (filesToProcess: FileList | null, targetDir: string) => {
-        if (!isWorkspaceTrusted) {
-            logger.warn('File drop ignored: Workspace is not trusted.');
+    const processDrop = (event: React.DragEvent, targetDir: string) => {
+        logger.log(`[Drop] Drop detected on target: ${targetDir}`);
+        logger.log(`[Drop] Available types: ${Array.from(event.dataTransfer.types).join(', ')}`);
+
+        // Case 1: Drop from OS File Explorer
+        if (event.dataTransfer.files && event.dataTransfer.files.length > 0) {
+            logger.log(`[Drop] Handling as OS file drop (${event.dataTransfer.files.length} files).`);
+            const filesArray = Array.from(event.dataTransfer.files);
+            filesArray.forEach((file: File) => {
+                const reader = new FileReader();
+                reader.onload = (readEvent) => {
+                    if (readEvent.target?.result instanceof ArrayBuffer) {
+                        const data = new Uint8Array(readEvent.target.result);
+                        const finalTargetPath = `${targetDir}/${file.name}`.replace(/\\/g, '/');
+                        logger.log(`[Drop] Sending file buffer ${file.name} to backend for creation at ${finalTargetPath}`);
+                        clientIpc.sendToServer(ClientToServerChannel.RequestAddFileFromBuffer, { targetPath: finalTargetPath, data });
+                    }
+                };
+                reader.onerror = () => logger.error(`[Drop] FileReader error for file: ${file.name}`);
+                reader.readAsArrayBuffer(file);
+            });
             return;
         }
-        if (!filesToProcess || filesToProcess.length === 0) return;
+
+        // Case 2: Drop from VS Code Explorer
+        const uriList = event.dataTransfer.getData('text/uri-list');
+        if (uriList) {
+            logger.log(`[Drop] Handling as VS Code URI drop. URI List: ${uriList}`);
+            const sourceUri = uriList.split('\n')[0].trim(); // Handle multiple URIs if needed, for now just take the first
+            if (sourceUri) {
+                 clientIpc.sendToServer(ClientToServerChannel.RequestCopyFileFromUri, { sourceUri, targetDir });
+            }
+            return;
+        }
         
-        Array.from(filesToProcess).forEach(file => {
-            const reader = new FileReader();
-            reader.onload = (readEvent) => {
-                if (readEvent.target?.result instanceof ArrayBuffer) {
-                    const data = new Uint8Array(readEvent.target.result);
-                    const finalTargetPath = `${targetDir}/${file.name}`.replace(/\\/g, '/');
-                    clientIpc.sendToServer(ClientToServerChannel.RequestAddFileFromBuffer, { targetPath: finalTargetPath, data });
-                }
-            };
-            reader.readAsArrayBuffer(file);
-        });
+        logger.warn('[Drop] Drop event occurred but no compatible data type was found.');
     };
 
     const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
@@ -224,13 +242,13 @@ const App = () => {
             logger.error("Cannot drop file, no workspace root identified.");
             return;
         }
-        processAndSendFiles(event.dataTransfer.files, targetDir);
+        processDrop(event, targetDir);
     };
     
     const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         event.stopPropagation();
-        if (isWorkspaceTrusted && event.dataTransfer.types.includes('Files')) {
+        if (isWorkspaceTrusted && (event.dataTransfer.types.includes('Files') || event.dataTransfer.types.includes('text/uri-list'))) {
              event.dataTransfer.dropEffect = 'copy';
         } else {
             event.dataTransfer.dropEffect = 'none';
@@ -240,7 +258,7 @@ const App = () => {
     const handleDragEnter = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         event.stopPropagation();
-        if (isWorkspaceTrusted && event.dataTransfer.types.includes('Files')) {
+        if (isWorkspaceTrusted && (event.dataTransfer.types.includes('Files') || event.dataTransfer.types.includes('text/uri-list'))) {
             setIsDraggingOver(true);
         }
     };
@@ -327,7 +345,7 @@ const App = () => {
                 {isLoading && files.length === 0 ? (
                      <div className="loading-message">Loading file tree...</div>
                 ) : files.length > 0 ? (
-                    <FileTree data={files} checkedFiles={checkedFiles} updateCheckedFiles={updateCheckedFiles} activeFile={activeFile} collapseTrigger={collapseTrigger} expandAllTrigger={expandAllTrigger} searchTerm={searchTerm} problemMap={problemMap} />
+                    <FileTree data={files} checkedFiles={checkedFiles} updateCheckedFiles={updateCheckedFiles} activeFile={activeFile} collapseTrigger={collapseTrigger} expandAllTrigger={expandAllTrigger} searchTerm={searchTerm} problemMap={problemMap} onNodeDrop={processDrop} />
                 ) : (
                     <div className="loading-message">No folder open.</div>
                 )}

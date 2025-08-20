@@ -343,6 +343,22 @@ export class FSService {
 
     // --- File Operations ---
 
+    public async handleCopyFileFromUri(sourceUriString: string, targetDir: string) {
+        try {
+            const sourceUri = vscode.Uri.parse(sourceUriString);
+            const fileName = path.basename(sourceUri.fsPath);
+            const targetUri = vscode.Uri.file(path.join(targetDir, fileName));
+
+            Services.loggerService.log(`Copying file from URI: ${sourceUri.toString()} to ${targetUri.toString()}`);
+            await vscode.workspace.fs.copy(sourceUri, targetUri);
+            Services.loggerService.log(`Successfully copied file from URI.`);
+        } catch (error: any) {
+            const errorMessage = `Failed to copy file from URI: ${error.message}`;
+            vscode.window.showErrorMessage(errorMessage);
+            Services.loggerService.error(errorMessage);
+        }
+    }
+
     public async handleAddFileFromBuffer(targetPath: string, data: Uint8Array) {
         try {
             const uri = vscode.Uri.file(targetPath);

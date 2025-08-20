@@ -258,7 +258,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         }
 
         if (draggedPath) { // Internal move
-            if (node.children && node.absolutePath !== draggedPath) {
+            if (node.children && node.absolutePath !== draggedPath && !node.absolutePath.startsWith(draggedPath + '/')) {
                 const draggedName = draggedPath.split('/').pop();
                 if (draggedName) {
                     const newPath = `${node.absolutePath}/${draggedName}`;
@@ -272,9 +272,14 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         }
     };
     
-    const handleDragOver = (e: React.DragEvent) => {
+    const handleDragOver = (e: React.DragEvent, node: TreeNode) => {
         e.preventDefault();
         e.stopPropagation();
+        if (draggedPath && node.absolutePath.startsWith(draggedPath + '/')) {
+            e.dataTransfer.dropEffect = 'none'; // Prevent dropping a folder into itself
+        } else {
+            e.dataTransfer.dropEffect = 'move';
+        }
     };
 
     const renderTreeNodes = (nodes: TreeNode[]) => {
@@ -292,7 +297,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
                     onDragStart={(e) => handleInternalDragStart(e, node)}
                     onDragEnter={(e) => handleDragEnter(e, node)}
                     onDragLeave={(e) => handleDragLeave(e, node)}
-                    onDragOver={handleDragOver}
+                    onDragOver={(e) => handleDragOver(e, node)}
                     onDrop={(e) => handleDrop(e, node)}
                     className={`treenode-li ${isDropTarget ? 'drop-target' : ''}`}
                     data-path={node.absolutePath}
