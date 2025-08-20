@@ -13,6 +13,7 @@ export enum ClientToServerChannel {
     RequestCopyPath = "clientToServer.requestCopyPath",
     RequestOpenFile = "clientToServer.requestOpenFile",
     RequestMoveFile = "clientToServer.requestMoveFile",
+    RequestCopyFile = "clientToServer.requestCopyFile", // New
     RequestUndo = "clientToServer.requestUndo",
     RequestRedo = "clientToServer.requestRedo",
     RequestAddFileFromBuffer = "clientToServer.requestAddFileFromBuffer", // For OS drag-drop

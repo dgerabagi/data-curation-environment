@@ -63,25 +63,23 @@ export const addRemovePathInSelectedFiles = (
         logger.log(`[Selection] Unchecking logic initiated.`);
         if (selectedAncestor) {
             logger.log(`[Selection] Performing 'subtractive uncheck'. Ancestor: ${selectedAncestor}`);
-            // A child of a selected folder is being unchecked.
+            // A child of a selected folder is being unchecked. This is the BUGGY part.
             const ancestorNode = getFileNodeByPath(fileTree, selectedAncestor);
-            if (!ancestorNode || !ancestorNode.children) {
-                logger.error(`[Selection] Could not find ancestor node or it has no children. Aborting.`);
-                return selectedFiles;
-            }
+            if (!ancestorNode) return selectedFiles;
 
             // 1. Remove the ancestor from the selection.
             currentSelection.delete(selectedAncestor);
             
-            // 2. Add back all direct children of the ancestor EXCEPT the one on the path of the clicked node.
-            for (const child of ancestorNode.children) {
-                if (!path.startsWith(child.absolutePath)) {
-                    logger.log(`[Selection] Adding sibling: ${child.absolutePath}`);
-                    currentSelection.add(child.absolutePath);
-                } else {
-                    logger.log(`[Selection] Skipping branch: ${child.absolutePath}`);
+            // 2. Get ALL descendant files of the ancestor.
+            const allDescendantFiles = getAllDescendantPaths(ancestorNode, true);
+
+            // 3. Add all descendants back, EXCEPT for the one that was unchecked.
+            for (const file of allDescendantFiles) {
+                if (file !== path) {
+                    currentSelection.add(file);
                 }
             }
+
         } else {
             // A directly selected item is being unchecked. Remove it.
             logger.log(`[Selection] Unchecking directly selected item: ${path}`);

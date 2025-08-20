@@ -356,6 +356,55 @@ export class FSService {
 
     // --- File Operations ---
 
+    private async _findAvailableCopyName(destinationPath: string): Promise<string> {
+        try {
+            await vscode.workspace.fs.stat(vscode.Uri.file(destinationPath));
+        } catch (error) {
+            // If stat fails, the file doesn't exist, so the original name is available.
+            return destinationPath;
+        }
+    
+        const dir = path.dirname(destinationPath);
+        const ext = path.extname(destinationPath);
+        const baseName = path.basename(destinationPath, ext);
+    
+        // First try with "-copy"
+        let copyNum = 1;
+        let nextPath = path.join(dir, `${baseName}-copy${ext}`);
+        
+        while (true) {
+            try {
+                await vscode.workspace.fs.stat(vscode.Uri.file(nextPath));
+                // File exists, increment and try again
+                copyNum++;
+                nextPath = path.join(dir, `${baseName}-copy-${copyNum}${ext}`);
+            } catch (error) {
+                // File does not exist, we found an available name
+                return nextPath;
+            }
+        }
+    }
+
+    public async handleCopyFileRequest(sourcePath: string, destinationDir: string) {
+        try {
+            const sourceName = path.basename(sourcePath);
+            const initialDestinationPath = path.join(destinationDir, sourceName);
+            
+            const finalDestinationPath = await this._findAvailableCopyName(initialDestinationPath);
+
+            const sourceUri = vscode.Uri.file(sourcePath);
+            const destinationUri = vscode.Uri.file(finalDestinationPath);
+
+            Services.loggerService.log(`Copying from ${sourceUri.fsPath} to ${destinationUri.fsPath}`);
+            await vscode.workspace.fs.copy(sourceUri, destinationUri, { overwrite: false });
+            Services.loggerService.log(`Successfully copied file.`);
+        } catch (error: any) {
+            const errorMessage = `Failed to copy file: ${error.message}`;
+            vscode.window.showErrorMessage(errorMessage);
+            Services.loggerService.error(errorMessage);
+        }
+    }
+
     public async handleCopyFileFromUri(sourceUriString: string, targetDir: string) {
         try {
             const sourceUri = vscode.Uri.parse(sourceUriString);

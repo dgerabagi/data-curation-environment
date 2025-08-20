@@ -30,6 +30,7 @@ const App = () => {
     const [problemMap, setProblemMap] = useState<ProblemCountsMap>({});
     const [isDraggingOver, setIsDraggingOver] = useState(false);
     const [isWorkspaceTrusted, setIsWorkspaceTrusted] = useState(true); // Assume trusted by default
+    const [clipboard, setClipboard] = useState<{ path: string; type: 'copy' } | null>(null);
     const suppressActiveFileReveal = useRef(false);
     
     const clientIpc = ClientPostMessageManager.getInstance();
@@ -367,7 +368,7 @@ const App = () => {
                 {isLoading && files.length === 0 ? (
                      <div className="loading-message">Loading file tree...</div>
                 ) : files.length > 0 ? (
-                    <FileTree data={files} checkedFiles={checkedFiles} updateCheckedFiles={updateCheckedFiles} activeFile={activeFile} collapseTrigger={collapseTrigger} expandAllTrigger={expandAllTrigger} searchTerm={searchTerm} problemMap={problemMap} onNodeDrop={processDrop} />
+                    <FileTree data={files} checkedFiles={checkedFiles} updateCheckedFiles={updateCheckedFiles} activeFile={activeFile} collapseTrigger={collapseTrigger} expandAllTrigger={expandAllTrigger} searchTerm={searchTerm} problemMap={problemMap} onNodeDrop={processDrop} onCopy={(path) => setClipboard({ path, type: 'copy' })} clipboard={clipboard} />
                 ) : (
                     <div className="loading-message">No folder open.</div>
                 )}

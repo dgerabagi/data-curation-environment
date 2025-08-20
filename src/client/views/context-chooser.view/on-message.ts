@@ -60,6 +60,10 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         fsService.handleMoveFileRequest(data.oldPath, data.newPath);
     });
 
+    serverIpc.onClientMessage(ClientToServerChannel.RequestCopyFile, (data) => {
+        fsService.handleCopyFileRequest(data.sourcePath, data.destinationDir);
+    });
+
     serverIpc.onClientMessage(ClientToServerChannel.RequestAddFileFromBuffer, (data) => {
         fsService.handleAddFileFromBuffer(data.targetPath, data.data);
     });

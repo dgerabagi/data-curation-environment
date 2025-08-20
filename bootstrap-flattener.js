@@ -32,15 +32,6 @@ const DEFAULT_IGNORE = new Set([
   '.DS_Store',
   '.npm',
   '.yarn',
-  'data-curation-environment-0.0.1.vsix',
-  'data-curation-environment-0.0.2.vsix',
-  'data-curation-environment-0.0.3.vsix',
-  'data-curation-environment-0.0.4.vsix',
-  'data-curation-environment-0.0.5.vsix',
-  'data-curation-environment-0.0.6.vsix',
-  'data-curation-environment-0.0.7.vsix',
-  'data-curation-environment-0.0.8.vsix',
-  'data-curation-environment-0.0.9.vsix',
   'flattened_repo.md',
   'prompt.md'
 ]);

@@ -21,9 +21,11 @@ interface TreeViewProps {
     activeFile?: string;
     updateCheckedFiles: (path: string) => void;
     onNodeDrop?: (event: React.DragEvent, node: TreeNode) => void;
+    onCopy: (path: string) => void;
+    clipboard: { path: string; type: 'copy' } | null;
 }
 
-const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTrigger = 0, expandAllTrigger = 0, onContextMenu, activeFile, updateCheckedFiles, onNodeDrop }) => {
+const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTrigger = 0, expandAllTrigger = 0, onContextMenu, activeFile, updateCheckedFiles, onNodeDrop, onCopy, clipboard }) => {
     const [expandedNodes, setExpandedNodes] = useState<string[]>([]);
     const [selectedPaths, setSelectedPaths] = useState<Set<string>>(new Set());
     const [focusedNodePath, setFocusedNodePath] = useState<string | null>(null);
@@ -177,15 +179,35 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     };
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
-        if (e.ctrlKey && e.key.toLowerCase() === 'z') {
-            e.preventDefault(); e.stopPropagation();
-            clientIpc.sendToServer(ClientToServerChannel.RequestUndo, {});
-            return;
-        }
-        if (e.ctrlKey && e.key.toLowerCase() === 'y') {
-            e.preventDefault(); e.stopPropagation();
-            clientIpc.sendToServer(ClientToServerChannel.RequestRedo, {});
-            return;
+        if (e.ctrlKey || e.metaKey) {
+            switch (e.key.toLowerCase()) {
+                case 'c':
+                    e.preventDefault(); e.stopPropagation();
+                    if (focusedNodePath) {
+                        logger.log(`Copying path to clipboard: ${focusedNodePath}`);
+                        onCopy(focusedNodePath);
+                    }
+                    return;
+                case 'v':
+                    e.preventDefault(); e.stopPropagation();
+                    if (clipboard && focusedNodePath) {
+                        const targetNode = flatNodeList.current.find(n => n.absolutePath === focusedNodePath);
+                        if (targetNode) {
+                            const destinationDir = targetNode.children ? targetNode.absolutePath : targetNode.absolutePath.substring(0, targetNode.absolutePath.lastIndexOf('/'));
+                            logger.log(`Pasting ${clipboard.path} into ${destinationDir}`);
+                            clientIpc.sendToServer(ClientToServerChannel.RequestCopyFile, { sourcePath: clipboard.path, destinationDir });
+                        }
+                    }
+                    return;
+                case 'z':
+                    e.preventDefault(); e.stopPropagation();
+                    clientIpc.sendToServer(ClientToServerChannel.RequestUndo, {});
+                    return;
+                case 'y':
+                    e.preventDefault(); e.stopPropagation();
+                    clientIpc.sendToServer(ClientToServerChannel.RequestRedo, {});
+                    return;
+            }
         }
 
         if (!focusedNodePath) return;

@@ -1,18 +1,18 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-20T12:07:25.835Z
+  Date Generated: 2025-08-20T12:27:13.516Z
   ---
   Total Files: 173
-  Total Lines: 14356
-  Total Characters: 618438
-  Approx. Tokens: 154674
+  Total Lines: 14330
+  Total Characters: 617852
+  Approx. Tokens: 154528
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
 2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
-3. src\backend\services\fs.service.ts (7063 tokens)
+3. src\backend\services\fs.service.ts (6747 tokens)
 4. src\client\views\context-chooser.view\view.tsx (5099 tokens)
 5. src\client\components\tree-view\TreeView.tsx (3780 tokens)
 6. src\client\views\context-chooser.view\view.scss (3638 tokens)
@@ -24,9 +24,9 @@
 <!-- Full File List -->
 1. .gitignore - Lines: 10 - Chars: 128 - Tokens: 32
 2. .vscodeignore - Lines: 11 - Chars: 356 - Tokens: 89
-3. bootstrap-flattener.js - Lines: 187 - Chars: 5920 - Tokens: 1480
+3. bootstrap-flattener.js - Lines: 194 - Chars: 6221 - Tokens: 1556
 4. LICENSE - Lines: 21 - Chars: 1090 - Tokens: 273
-5. package.json - Lines: 78 - Chars: 2426 - Tokens: 607
+5. package.json - Lines: 78 - Chars: 2424 - Tokens: 606
 6. public\spiral.svg - Lines: 8 - Chars: 459 - Tokens: 115
 7. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 154 - Chars: 10928 - Tokens: 2732
 8. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 38 - Chars: 3311 - Tokens: 828
@@ -55,7 +55,7 @@
 31. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
 32. src\Artifacts\A30. DCE - Phase 1 - PDF Handling and Virtualization Strategy.md - Lines: 44 - Chars: 4431 - Tokens: 1108
 33. src\Artifacts\A31. DCE - Phase 2 - Multimodal Content Extraction (PDF Images).md - Lines: 44 - Chars: 4035 - Tokens: 1009
-34. src\Artifacts\A32. DCE - Phase 1 - Excel and CSV Handling Strategy.md - Lines: 44 - Chars: 3916 - Tokens: 979
+34. src\Artifacts\A32. DCE - Phase 1 - Excel and CSV Handling Strategy.md - Lines: 44 - Chars: 4295 - Tokens: 1074
 35. src\Artifacts\A4. DCE - Analysis of The-Creator-AI Repo.md - Lines: 56 - Chars: 5722 - Tokens: 1431
 36. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
 37. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
@@ -66,7 +66,7 @@
 42. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
 43. src\backend\services\action.service.ts - Lines: 73 - Chars: 2471 - Tokens: 618
 44. src\backend\services\flattener.service.ts - Lines: 303 - Chars: 13492 - Tokens: 3373
-45. src\backend\services\fs.service.ts - Lines: 615 - Chars: 28249 - Tokens: 7063
+45. src\backend\services\fs.service.ts - Lines: 582 - Chars: 26985 - Tokens: 6747
 46. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
 47. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
 48. src\backend\services\services.ts - Lines: 25 - Chars: 982 - Tokens: 246
@@ -260,6 +260,13 @@ const DEFAULT_IGNORE = new Set([
   '.yarn',
   'data-curation-environment-0.0.1.vsix',
   'data-curation-environment-0.0.2.vsix',
+  'data-curation-environment-0.0.3.vsix',
+  'data-curation-environment-0.0.4.vsix',
+  'data-curation-environment-0.0.5.vsix',
+  'data-curation-environment-0.0.6.vsix',
+  'data-curation-environment-0.0.7.vsix',
+  'data-curation-environment-0.0.8.vsix',
+  'data-curation-environment-0.0.9.vsix',
   'flattened_repo.md',
   'prompt.md'
 ]);
@@ -443,7 +450,7 @@ SOFTWARE.
     "publisher": "DCE-Developer",
     "displayName": "Data Curation Environment",
     "description": "A VS Code extension for curating context for Large Language Models.",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "repository": {
         "type": "git",
         "url": "https://github.com/dgerabagi/data-curation-environment.git"
@@ -513,7 +520,7 @@ SOFTWARE.
         "rxjs": "^7.8.1",
         "reflect-metadata": "^0.2.2",
         "pdf-parse": "^1.1.1",
-        "exceljs": "^4.4.0"
+        "xlsx": "^0.18.5"
     }
 }
 </file>
@@ -2223,7 +2230,7 @@ This is a complex feature that will require new services and dependencies, likel
 # Artifact A32: DCE - Phase 1 - Excel and CSV Handling Strategy
 # Date Created: C62
 # Author: AI Model
-# Updated on: C66 (Switch to exceljs and custom Markdown converter)
+# Updated on: C67 (Revert to xlsx and custom Markdown converter for stability)
 
 - **Key/Value for A0:**
 - **Description:** Defines the strategy for handling tabular data files (.xlsx, .xls, .csv) by converting them to Markdown tables on-demand and caching them in memory for flattening.
@@ -2239,31 +2246,31 @@ Following the successful implementation of PDF virtualization, users now require
 |---|---|---|
 | XLS-01 | **Include Tabular Data in Context** | As a user, when I check an Excel or CSV file, I want its data to be converted to Markdown tables and included in the `flattened_repo.md`, so I can use structured data as context for the LLM. | - Checking `.xlsx`, `.xls`, and `.csv` files is allowed. <br> - The token count displayed for the file reflects its Markdown table content. <br> - When flattened, the content is included within a `<file>` tag. <br> - For Excel files with multiple sheets, each sheet is converted to a separate named Markdown table. <br> - No temporary `.md` files are created in the user's workspace. |
 
-## 3. Technical Implementation Plan (C66 Update)
+## 3. Technical Implementation Plan (C67 Update)
 
 1.  **Dependency:**
-    *   The `xlsx` (SheetJS) library has been removed due to a high-severity vulnerability and persistent bundling issues.
-    *   It has been replaced with the **`exceljs`** package, a modern and well-maintained library for parsing various spreadsheet formats. This will be added as a dependency in `package.json`.
+    *   After encountering critical parsing bugs and format limitations with `exceljs`, the project has reverted to using the more robust **`xlsx` (SheetJS)** library. This will be the sole dependency for parsing tabular data.
+    *   **Vulnerability Note:** The `xlsx` package has a known high-severity vulnerability. While a direct fix from the library maintainers is not yet available, our implementation mitigates risk by using it only for its core data parsing and implementing our own logic for converting that data to Markdown, rather than using the library's more complex and less-audited utility functions.
 
 2.  **Backend (`fs.service.ts`):**
     *   **In-Memory Cache:** A private cache will be maintained: `private excelMarkdownCache = new Map<string, { markdown: string; tokenCount: number }>();`.
-    *   **New IPC Handler (`RequestExcelToText`):**
+    *   **IPC Handler (`RequestExcelToText`):**
         *   This handler will receive a file path. It will first check the cache.
         *   If not cached, it will read the file buffer.
-        *   It will use `workbook.xlsx.load(buffer)` from `exceljs` to parse the file.
-        *   It will iterate through each worksheet in the workbook.
-        *   For each sheet, it will call a new **custom private helper method, `_worksheetToMarkdown`**.
-    *   **Custom Markdown Converter (`_worksheetToMarkdown`):**
-        *   This new function will take an `exceljs` worksheet object as input.
-        *   It will iterate through the worksheet's rows to determine the table headers and data.
-        *   It will manually construct a Markdown table string by creating the header row (`| Col1 | Col2 |`), the separator line (`|---|---|`), and each data row (`| Val1 | Val2 |`).
-        *   This custom implementation gives us full control over the output and resolves the previous runtime errors.
+        *   It will use `XLSX.read(buffer)` to parse the file into a workbook object. This works for `.xlsx`, `.xls`, and `.csv`.
+        *   It will iterate through each sheet name in the `workbook.SheetNames`.
+        *   For each sheet, it will call a **custom private helper method, `_sheetToMarkdown`**.
+    *   **Custom Markdown Converter (`_sheetToMarkdown`):**
+        *   This new function will take a worksheet object from `xlsx` as input.
+        *   It will use `XLSX.utils.sheet_to_json(worksheet, { header: 1 })` to get an array-of-arrays representation of the sheet.
+        *   It will then manually iterate over these arrays to construct a Markdown table string, creating the header row (`| Col1 | Col2 |`), the separator line (`|---|---|`), and all data rows.
+        *   This custom implementation provides stability and avoids potential bundling issues with the library's own `sheet_to_markdown` utility.
         *   The final Markdown string (including headers for each sheet) will be concatenated, its token count calculated, and the result stored in the cache.
         *   It will then send an `UpdateNodeStats` message back to the client with the new token count.
 
 3.  **Frontend & Flattener Integration:**
-    *   The frontend (`view.tsx`) will continue to trigger the `RequestExcelToText` message on-demand when a relevant file is checked.
-    *   The backend (`flattener.service.ts`) will continue to retrieve the virtual Markdown content from the `FSService`'s cache when flattening. No changes are needed in these files.
+    *   The frontend (`view.tsx`) will continue to trigger the `RequestExcelToText` message on-demand.
+    *   The backend (`flattener.service.ts`) will continue to retrieve the virtual Markdown content from the `FSService`'s cache. No changes are needed in these files.
 </file>
 
 <file path="src/Artifacts/A4. DCE - Analysis of The-Creator-AI Repo.md">
@@ -4374,7 +4381,7 @@ import { ProblemCountsMap } from "@/common/ipc/channels.type";
 import { Action, MoveActionPayload } from "./action.service";
 // @ts-ignore - This is a workaround for a bug in pdf-parse that causes an ENOENT error in VS Code extensions.
 import pdf from 'pdf-parse/lib/pdf-parse.js';
-import * as ExcelJS from 'exceljs';
+import * as XLSX from 'xlsx';
 
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
@@ -4773,57 +4780,29 @@ export class FSService {
         }
     }
 
-    private _worksheetToMarkdown(worksheet: ExcelJS.Worksheet): string {
-        let markdown = "";
-        const rows: (string | number | null)[][] = [];
-        let colWidths: number[] = [];
-    
-        worksheet.eachRow((row, rowNumber) => {
-            const rowValues: (string | number | null)[] = [];
-            row.eachCell({ includeEmpty: true }, (cell, colNumber) => {
-                const cellValue = cell.value ? cell.value.toString() : '';
-                const sanitizedValue = cellValue.replace(/\|/g, '\\|').replace(/\r?\n/g, '<br/>');
-                rowValues[colNumber - 1] = sanitizedValue;
-    
-                if (!colWidths[colNumber - 1] || sanitizedValue.length > colWidths[colNumber - 1]) {
-                    colWidths[colNumber - 1] = sanitizedValue.length;
-                }
-            });
-            rows.push(rowValues);
-        });
-    
-        if (rows.length === 0) return "";
-    
-        const maxCols = colWidths.length;
-    
-        // Header
-        const header = rows[0];
-        let headerString = "|";
-        for (let i = 0; i < maxCols; i++) {
-            const cell = header[i] || '';
-            headerString += ` ${cell.toString().padEnd(colWidths[i])} |`;
-        }
-        markdown += headerString + "\n";
-    
-        // Separator
-        let separatorString = "|";
-        for (let i = 0; i < maxCols; i++) {
-            separatorString += `${'-'.repeat(colWidths[i] + 2)}|`;
-        }
-        markdown += separatorString + "\n";
-    
-        // Body
-        for (let i = 1; i < rows.length; i++) {
-            const row = rows[i];
-            let rowString = "|";
-            for (let j = 0; j < maxCols; j++) {
-                const cell = row[j] || '';
-                rowString += ` ${cell.toString().padEnd(colWidths[j])} |`;
-            }
-            markdown += rowString + "\n";
+    private _sheetToMarkdown(sheet: XLSX.WorkSheet): string {
+        const data: any[][] = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+        if (data.length === 0) {
+            return "";
         }
     
-        return markdown;
+        // Sanitize all cell data to escape pipe characters
+        const sanitizedData = data.map(row => 
+            row.map(cell => {
+                const cellStr = cell ? String(cell) : '';
+                return cellStr.replace(/\|/g, '\\|').replace(/\r?\n/g, '<br/>');
+            })
+        );
+    
+        const header = sanitizedData[0];
+        const body = sanitizedData.slice(1);
+    
+        const headerLine = `| ${header.join(' | ')} |`;
+        const separatorLine = `| ${header.map(() => '---').join(' | ')} |`;
+    
+        const bodyLines = body.map(row => `| ${row.join(' | ')} |`).join('\n');
+    
+        return `${headerLine}\n${separatorLine}\n${bodyLines}`;
     }
 
     public async handleExcelToTextRequest(filePath: string, serverIpc: ServerPostMessageManager) {
@@ -4836,22 +4815,17 @@ export class FSService {
 
         try {
             Services.loggerService.log(`[Excel] Processing: ${filePath}`);
-            const workbook = new ExcelJS.Workbook();
-            const ext = path.extname(filePath).toLowerCase();
-            if (ext === '.csv') {
-                Services.loggerService.log(`[Excel] Detected CSV. Reading via workbook.csv.readFile...`);
-                await workbook.csv.readFile(filePath);
-            } else {
-                Services.loggerService.log(`[Excel] Detected Excel format. Reading via workbook.xlsx.readFile...`);
-                await workbook.xlsx.readFile(filePath);
-            }
+            const buffer = await fs.readFile(filePath);
+            Services.loggerService.log(`[Excel] File buffer read. Size: ${buffer.length}. Parsing with xlsx...`);
+            const workbook = XLSX.read(buffer, { type: 'buffer' });
             
-            Services.loggerService.log(`[Excel] Workbook parsed. Found sheets: ${workbook.worksheets.map(w => w.name).join(', ')}`);
+            Services.loggerService.log(`[Excel] Workbook parsed. Found sheets: ${workbook.SheetNames.join(', ')}`);
             let markdown = '';
 
-            workbook.eachSheet((worksheet) => {
-                markdown += `### Sheet: ${worksheet.name}\n\n`;
-                markdown += this._worksheetToMarkdown(worksheet);
+            workbook.SheetNames.forEach(sheetName => {
+                markdown += `### Sheet: ${sheetName}\n\n`;
+                const worksheet = workbook.Sheets[sheetName];
+                markdown += this._sheetToMarkdown(worksheet);
                 markdown += '\n\n';
             });
             Services.loggerService.log(`[Excel] Markdown conversion complete.`);
