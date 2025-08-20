@@ -15,7 +15,8 @@
         "Other"
     ],
     "activationEvents": [
-        "onView:viewType.sidebar.contextChooser"
+        "onView:viewType.sidebar.contextChooser",
+        "onView:viewType.sidebar.parallelCopilot"
     ],
     "main": "./dist/extension.js",
     "contributes": {
@@ -34,6 +35,11 @@
                     "type": "webview",
                     "id": "viewType.sidebar.contextChooser",
                     "name": "Data Curation"
+                },
+                {
+                    "type": "webview",
+                    "id": "viewType.sidebar.parallelCopilot",
+                    "name": "Parallel Co-Pilot"
                 }
             ]
         }
@@ -73,6 +79,7 @@
         "rxjs": "^7.8.1",
         "reflect-metadata": "^0.2.2",
         "pdf-parse": "^1.1.1",
-        "xlsx": "^0.18.5"
+        "xlsx": "^0.18.5",
+        "mammoth": "^1.8.0"
     }
 }

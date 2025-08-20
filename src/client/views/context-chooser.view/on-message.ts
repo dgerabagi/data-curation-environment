@@ -86,6 +86,11 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         fsService.handleExcelToTextRequest(data.path, serverIpc);
     });
 
+    serverIpc.onClientMessage(ClientToServerChannel.RequestWordToText, (data) => {
+        loggerService.log(`[IPC] Received RequestWordToText for: ${data.path}`);
+        fsService.handleWordToTextRequest(data.path, serverIpc);
+    });
+
     serverIpc.onClientMessage(ClientToServerChannel.RequestUndo, () => {
         actionService.undo();
     });

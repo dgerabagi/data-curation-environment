@@ -53,8 +53,7 @@ const extensionConfig = {
         libraryTarget: 'commonjs2'
     },
     externals: {
-        vscode: 'commonjs vscode', // the vscode-module is created on-the-fly and must be excluded.
-        // We want xlsx and pdf-parse to be bundled with the extension, so they should NOT be external.
+        vscode: 'commonjs vscode',
     },
 };
 
@@ -64,10 +63,11 @@ const webviewConfig = {
     target: 'web',
     entry: {
         contextChooserView: './src/client/views/context-chooser.view/view.tsx',
+        parallelCopilotView: './src/client/views/parallel-copilot.view/view.tsx', // New Entry
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'contextChooserView.js',
+        filename: '[name].js', // Use [name] to generate separate files
         libraryTarget: 'commonjs2'
     },
     plugins: [

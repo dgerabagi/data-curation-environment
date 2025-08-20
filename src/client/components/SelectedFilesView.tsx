@@ -4,10 +4,11 @@ import { FileNode } from '@/common/types/file-node';
 import { VscChevronUp, VscChevronDown, VscSymbolFile, VscSymbolNumeric, VscTypeHierarchy, VscClose, VscChevronRight, VscChevronLeft } from 'react-icons/vsc';
 import { formatLargeNumber } from '@/common/utils/formatting';
 import { SiReact, SiSass, SiTypescript, SiJavascript } from 'react-icons/si';
-import { VscFile, VscJson, VscMarkdown } from 'react-icons/vsc';
+import { VscFile, VscJson, VscMarkdown, VscTable } from 'react-icons/vsc';
 import { logger } from '../utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
+import { FaFileWord } from 'react-icons/fa';
 
 type SortableColumn = 'name' | 'tokenCount' | 'extension';
 type SortDirection = 'asc' | 'desc';
@@ -21,6 +22,8 @@ const getFileIcon = (fileName: string) => {
         case 'json': return <VscJson color="#F7DF1E" />;
         case 'md': return <VscMarkdown />;
         case 'scss': case 'css': return <SiSass color="#CF649A"/>;
+        case 'xlsx': case 'xls': case 'csv': return <VscTable color="#217346" />;
+        case 'docx': return <FaFileWord color="#2B579A" />;
         default: return <VscFile />;
     }
 };
@@ -34,28 +37,23 @@ const getTokenBackgroundColor = (tokenCount: number): string => {
         const hue = 120 - (percentage * 60); // 120 (green) -> 60 (yellow)
         return `hsla(${hue}, 70%, 50%, 0.15)`;
     }
-    // 10k - 12k: yellow to red
+    // 10k - 12k: yellow to orange
     if (tokenCount <= 12000) {
         const percentage = (tokenCount - 10000) / 2000;
-        const hue = 60 - (percentage * 60); // 60 (yellow) -> 0 (red)
-        return `hsla(${hue}, 70%, 50%, 0.2)`;
+        const hue = 60 - (percentage * 30); // 60 (yellow) -> 30 (orange)
+        return `hsla(${hue}, 80%, 50%, 0.2)`;
     }
-    // 12k - 40k: red to orange
-    if (tokenCount <= 40000) {
-        const percentage = (tokenCount - 12000) / 28000;
-        const hue = 0 + (percentage * 30); // 0 (red) -> 30 (orange)
-        return `hsla(${hue}, 80%, 50%, 0.25)`;
-    }
-    // 40k+: max orange
-    return 'hsla(30, 90%, 50%, 0.3)';
+    // 12k+: orange to red
+    const percentage = Math.min((tokenCount - 12000) / 28000, 1.0); // Cap at 40k for max red
+    const hue = 30 - (percentage * 30); // 30 (orange) -> 0 (red)
+    return `hsla(${hue}, 80%, 50%, 0.25)`;
 };
 
 const getTokenRiskTooltip = (tokenCount: number): string => {
     if (tokenCount <= 8000) return 'Low token count, suitable for most workloads.';
     if (tokenCount <= 10000) return 'Slightly elevated token count, small chance of performance degradation.';
     if (tokenCount <= 12000) return 'Moderate token count, may impact performance on complex tasks.';
-    if (tokenCount <= 40000) return 'High token count, increased chance of performance degradation or truncation.';
-    return 'Very high token count. Consider refactoring to reduce size for reliable AI processing.';
+    return 'High token count, increased chance of performance degradation or truncation.';
 };
 
 

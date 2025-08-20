@@ -21,6 +21,8 @@ interface FileStats {
 
 const BINARY_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico', '.exe', '.dll', '.bin', '.zip', '.gz', '.7z', '.mp3', '.wav', '.mov', '.mp4']);
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
+const WORD_EXTENSIONS = new Set(['.docx']);
+
 
 export class FlattenerService {
 
@@ -203,6 +205,24 @@ export class FlattenerService {
                 };
             }
             return { filePath, lines: 0, characters: 0, tokens: 0, content: '<!-- Excel/CSV content not processed or cached -->', error: null, isBinary: false, sizeInBytes: 0 };
+        }
+
+        if (WORD_EXTENSIONS.has(extension)) {
+            const virtualContent = Services.fsService.getVirtualWordContent(filePath);
+            Services.loggerService.log(`[Flattener] Word check for ${filePath}. Cache result: ${virtualContent ? 'FOUND' : 'NOT FOUND'}`);
+            if (virtualContent) {
+                return {
+                    filePath,
+                    content: virtualContent.text,
+                    lines: virtualContent.text.split('\n').length,
+                    characters: virtualContent.text.length,
+                    tokens: virtualContent.tokenCount,
+                    error: null,
+                    isBinary: false,
+                    sizeInBytes: 0
+                };
+            }
+            return { filePath, lines: 0, characters: 0, tokens: 0, content: '<!-- Word content not processed or cached -->', error: null, isBinary: false, sizeInBytes: 0 };
         }
 
         if (BINARY_EXTENSIONS.has(extension)) {

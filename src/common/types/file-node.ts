@@ -9,6 +9,7 @@ export interface FileNode {
     extension: string;
     isPdf: boolean;
     isExcel: boolean;
+    isWordDoc: boolean; // New
     gitStatus?: string; // e.g., 'M', 'U', 'A', 'D', 'C'
     problemCounts?: { error: number; warning: number; };
     error?: string; // To store processing errors, e.g., "File not found"

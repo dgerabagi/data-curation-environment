@@ -23,6 +23,7 @@ export enum ClientToServerChannel {
     // Special File Handling
     RequestPdfToText = "clientToServer.requestPdfToText",
     RequestExcelToText = "clientToServer.requestExcelToText",
+    RequestWordToText = "clientToServer.requestWordToText", // New
 
     // Selection Persistence
     SaveCurrentSelection = "clientToServer.saveCurrentSelection",

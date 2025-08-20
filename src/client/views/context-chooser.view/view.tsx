@@ -14,6 +14,7 @@ import { addRemovePathInSelectedFiles, removePathsFromSelected } from '@/client/
 import { SelectionSet, ProblemCountsMap } from '@/common/ipc/channels.type';
 
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
+const WORD_EXTENSIONS = new Set(['.docx']);
 
 const App = () => {
     const [files, setFiles] = useState<FileNode[]>([]);
@@ -58,6 +59,9 @@ const App = () => {
             } else if (EXCEL_EXTENSIONS.has(`.${extension}`)) {
                 logger.log(`Requesting text for Excel/CSV: ${path}`);
                 clientIpc.sendToServer(ClientToServerChannel.RequestExcelToText, { path });
+            } else if (WORD_EXTENSIONS.has(`.${extension}`)) {
+                logger.log(`Requesting text for Word Doc: ${path}`);
+                clientIpc.sendToServer(ClientToServerChannel.RequestWordToText, { path });
             }
         }
     }, [clientIpc, files, checkedFiles]);
@@ -91,6 +95,9 @@ const App = () => {
                 } else if (EXCEL_EXTENSIONS.has(`.${extension}`)) {
                     logger.log(`[Cache Fix] Requesting text for restored Excel/CSV: ${path}`);
                     clientIpc.sendToServer(ClientToServerChannel.RequestExcelToText, { path });
+                } else if (WORD_EXTENSIONS.has(`.${extension}`)) {
+                    logger.log(`[Cache Fix] Requesting text for restored Word Doc: ${path}`);
+                    clientIpc.sendToServer(ClientToServerChannel.RequestWordToText, { path });
                 }
             });
         });

@@ -13,9 +13,11 @@ import { Action, MoveActionPayload } from "./action.service";
 // @ts-ignore - This is a workaround for a bug in pdf-parse that causes an ENOENT error in VS Code extensions.
 import pdf from 'pdf-parse/lib/pdf-parse.js';
 import * as XLSX from 'xlsx';
+import mammoth from 'mammoth';
 
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
+const WORD_EXTENSIONS = new Set(['.docx']);
 const EXCLUSION_PATTERNS = ['node_modules', 'dist', 'out', '.git', 'dce_cache'];
 
 // Helper to normalize paths to use forward slashes, which is consistent in webviews
@@ -30,6 +32,7 @@ export class FSService {
     private filesToIgnoreForAutoAdd: Set<string> = new Set();
     private pdfTextCache = new Map<string, { text: string; tokenCount: number }>();
     private excelMarkdownCache = new Map<string, { markdown: string; tokenCount: number }>();
+    private wordTextCache = new Map<string, { text: string; tokenCount: number }>();
 
     constructor(gitApi?: GitAPI) {
         this.gitApi = gitApi;
@@ -116,40 +119,46 @@ export class FSService {
         });
     }
 
-    private async getFileStats(filePath: string): Promise<{ tokenCount: number, sizeInBytes: number, isImage: boolean, extension: string, isPdf: boolean, isExcel: boolean }> {
+    private async getFileStats(filePath: string): Promise<{ tokenCount: number, sizeInBytes: number, isImage: boolean, extension: string, isPdf: boolean, isExcel: boolean, isWordDoc: boolean }> {
         const extension = path.extname(filePath).toLowerCase();
         try {
             const stats = await fs.stat(filePath);
             const isImage = IMAGE_EXTENSIONS.has(extension);
             const isPdf = extension === '.pdf';
             const isExcel = EXCEL_EXTENSIONS.has(extension);
+            const isWordDoc = WORD_EXTENSIONS.has(extension);
             
             if (isImage) {
-                return { tokenCount: 0, sizeInBytes: stats.size, isImage, extension, isPdf: false, isExcel: false };
+                return { tokenCount: 0, sizeInBytes: stats.size, isImage, extension, isPdf: false, isExcel: false, isWordDoc: false };
             }
 
             if (isPdf) {
                  const cached = this.pdfTextCache.get(filePath);
-                 return { tokenCount: cached?.tokenCount || 0, sizeInBytes: stats.size, isImage: false, extension, isPdf: true, isExcel: false };
+                 return { tokenCount: cached?.tokenCount || 0, sizeInBytes: stats.size, isImage: false, extension, isPdf: true, isExcel: false, isWordDoc: false };
             }
             
             if (isExcel) {
                 const cached = this.excelMarkdownCache.get(filePath);
-                return { tokenCount: cached?.tokenCount || 0, sizeInBytes: stats.size, isImage: false, extension, isPdf: false, isExcel: true };
+                return { tokenCount: cached?.tokenCount || 0, sizeInBytes: stats.size, isImage: false, extension, isPdf: false, isExcel: true, isWordDoc: false };
+            }
+
+            if (isWordDoc) {
+                const cached = this.wordTextCache.get(filePath);
+                return { tokenCount: cached?.tokenCount || 0, sizeInBytes: stats.size, isImage: false, extension, isPdf: false, isExcel: false, isWordDoc: true };
             }
 
             if (stats.size > 5_000_000) {
                 Services.loggerService.warn(`Skipping token count for large file: ${filePath} (${stats.size} bytes)`);
-                return { tokenCount: 0, sizeInBytes: stats.size, isImage: false, extension, isPdf: false, isExcel: false };
+                return { tokenCount: 0, sizeInBytes: stats.size, isImage: false, extension, isPdf: false, isExcel: false, isWordDoc: false };
             }
             
             const content = await fs.readFile(filePath, 'utf-8');
             const tokenCount = Math.ceil(content.length / 4);
-            return { tokenCount, sizeInBytes: stats.size, isImage: false, extension, isPdf: false, isExcel: false };
+            return { tokenCount, sizeInBytes: stats.size, isImage: false, extension, isPdf: false, isExcel: false, isWordDoc: false };
 
         } catch (error: any) {
             Services.loggerService.warn(`Could not get stats for ${filePath}: ${error.message}`);
-            return { tokenCount: 0, sizeInBytes: 0, isImage: false, extension, isPdf: false, isExcel: false };
+            return { tokenCount: 0, sizeInBytes: 0, isImage: false, extension, isPdf: false, isExcel: false, isWordDoc: false };
         }
     }
 
@@ -252,7 +261,7 @@ export class FSService {
             name: rootName,
             absolutePath: normalizePath(rootPath),
             children: [],
-            tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false,
+            tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false,
             gitStatus: gitStatusMap.get(normalizePath(rootPath)),
             problemCounts: problemCountsMap[normalizePath(rootPath)]
         };
@@ -280,7 +289,7 @@ export class FSService {
                         name,
                         absolutePath: childPath,
                         children: await this._traverseDirectory(childUri, gitStatusMap, problemCountsMap),
-                        tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false,
+                        tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false,
                         gitStatus: gitStatusMap.get(childPath),
                         problemCounts: problemCountsMap[childPath]
                     };
@@ -352,6 +361,10 @@ export class FSService {
 
     public getVirtualExcelContent(filePath: string) {
         return this.excelMarkdownCache.get(filePath);
+    }
+
+    public getVirtualWordContent(filePath: string) {
+        return this.wordTextCache.get(filePath);
     }
 
     // --- File Operations ---
@@ -521,6 +534,31 @@ export class FSService {
              Services.loggerService.error(`[Excel] Error processing ${filePath}: ${error.stack || error.message}`);
              console.error(error);
              serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: 0, error: errorMessage });
+        }
+    }
+
+    public async handleWordToTextRequest(filePath: string, serverIpc: ServerPostMessageManager) {
+        if (this.wordTextCache.has(filePath)) {
+            const cached = this.wordTextCache.get(filePath)!;
+            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: cached.tokenCount });
+            return;
+        }
+
+        try {
+            Services.loggerService.log(`[Word] Processing: ${filePath}`);
+            const buffer = await fs.readFile(filePath);
+            const result = await mammoth.extractRawText({ buffer });
+            const text = result.value;
+            const tokenCount = Math.ceil(text.length / 4);
+            
+            this.wordTextCache.set(filePath, { text, tokenCount });
+            Services.loggerService.log(`[Word] Parsed and cached: ${path.basename(filePath)} (${tokenCount} tokens)`);
+
+            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: tokenCount });
+        } catch (error: any) {
+            const errorMessage = `Failed to parse Word file: ${path.basename(filePath)}`;
+            Services.loggerService.error(`[Word] Error processing ${filePath}: ${error.stack || error.message}`);
+            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: 0, error: errorMessage });
         }
     }
 

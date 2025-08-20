@@ -6,6 +6,7 @@ import {
     VscFile, VscFolder, VscFolderOpened, VscJson, VscMarkdown, VscSymbolFile, VscSymbolNumeric, VscFiles, VscError, VscWarning, VscTable
 } from 'react-icons/vsc';
 import { SiTypescript, SiReact, SiJavascript, SiSass } from 'react-icons/si';
+import { FaFileWord } from 'react-icons/fa';
 import { formatLargeNumber, formatBytes, formatNumberWithCommas } from '@/common/utils/formatting';
 import ContextMenu from '../ContextMenu';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -38,6 +39,7 @@ const getFileIcon = (fileName: string) => {
         case 'scss': case 'css': return <SiSass color="#CF649A"/>;
         case 'svg': case 'png': case 'jpg': case 'jpeg': case 'ico': case 'webp': return <VscSymbolFile />;
         case 'xlsx': case 'xls': case 'csv': return <VscTable color="#217346" />;
+        case 'docx': return <FaFileWord color="#2B579A" />;
         default: return <VscFile />;
     }
 };
