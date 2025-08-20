@@ -1,12 +1,12 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-20T13:53:49.287Z
+  Date Generated: 2025-08-20T15:53:09.810Z
   ---
-  Total Files: 180
-  Total Lines: 14882
-  Total Characters: 656901
-  Approx. Tokens: 164292
+  Total Files: 187
+  Total Lines: 15284
+  Total Characters: 689055
+  Approx. Tokens: 172332
 -->
 
 <!-- Top 10 Files by Token Count -->
@@ -15,9 +15,9 @@
 3. src\backend\services\fs.service.ts (7277 tokens)
 4. src\client\views\context-chooser.view\view.tsx (5142 tokens)
 5. src\client\components\tree-view\TreeView.tsx (4210 tokens)
-6. src\client\views\context-chooser.view\view.scss (3638 tokens)
-7. src\backend\services\flattener.service.ts (3373 tokens)
-8. src\Artifacts\A0. DCE Master Artifact List.md (3312 tokens)
+6. src\Artifacts\A0. DCE Master Artifact List.md (3770 tokens)
+7. src\client\views\context-chooser.view\view.scss (3638 tokens)
+8. src\backend\services\flattener.service.ts (3373 tokens)
 9. src\client\components\SelectedFilesView.tsx (3275 tokens)
 10. src\client\components\file-tree\FileTree.tsx (2804 tokens)
 
@@ -28,180 +28,187 @@
 4. LICENSE - Lines: 21 - Chars: 1090 - Tokens: 273
 5. package.json - Lines: 78 - Chars: 2424 - Tokens: 606
 6. public\spiral.svg - Lines: 8 - Chars: 459 - Tokens: 115
-7. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 182 - Chars: 13246 - Tokens: 3312
+7. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 206 - Chars: 15080 - Tokens: 3770
 8. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 39 - Chars: 3757 - Tokens: 940
 9. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
 10. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 117 - Chars: 9568 - Tokens: 2392
 11. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 68 - Chars: 4497 - Tokens: 1125
 12. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 43 - Chars: 5476 - Tokens: 1369
 13. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
-14. src\Artifacts\A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md - Lines: 43 - Chars: 7263 - Tokens: 1816
-15. src\Artifacts\A16. DCE - Phase 1 - UI & UX Refinements Plan.md - Lines: 50 - Chars: 6421 - Tokens: 1606
-16. src\Artifacts\A17. DCE - Phase 1 - Advanced Tree View Features.md - Lines: 47 - Chars: 3888 - Tokens: 972
-17. src\Artifacts\A18. DCE - Phase 1 - Active File Sync Feature Plan.md - Lines: 46 - Chars: 4548 - Tokens: 1137
-18. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
-19. src\Artifacts\A19. DCE - Phase 1 - Double-Click & Quick-Remove Feature Plan.md - Lines: 42 - Chars: 4603 - Tokens: 1151
-20. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
-21. src\Artifacts\A20. DCE - Phase 1 - Advanced UX & Automation Plan.md - Lines: 47 - Chars: 7155 - Tokens: 1789
-22. src\Artifacts\A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer.md - Lines: 48 - Chars: 7385 - Tokens: 1847
-23. src\Artifacts\A22. DCE - Phase 1 - Search & Filter Feature Plan.md - Lines: 58 - Chars: 3663 - Tokens: 916
-24. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 35 - Chars: 4927 - Tokens: 1232
-25. src\Artifacts\A24. DCE - Selection Paradigm Terminology.md - Lines: 57 - Chars: 3330 - Tokens: 833
-26. src\Artifacts\A25. DCE - Phase 1 - Git & Problems Integration Plan.md - Lines: 61 - Chars: 5871 - Tokens: 1468
-27. src\Artifacts\A26. DCE - Phase 1 - File System Traversal & Caching Strategy.md - Lines: 46 - Chars: 4009 - Tokens: 1003
-28. src\Artifacts\A27. DCE - Phase 1 - Undo-Redo Feature Plan.md - Lines: 50 - Chars: 4903 - Tokens: 1226
-29. src\Artifacts\A28. DCE - Packaging and Distribution Guide.md - Lines: 96 - Chars: 4075 - Tokens: 1019
-30. src\Artifacts\A29. DCE - Phase 1 - Binary and Image File Handling Strategy.md - Lines: 81 - Chars: 4217 - Tokens: 1055
-31. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
-32. src\Artifacts\A30. DCE - Phase 1 - PDF Handling and Virtualization Strategy.md - Lines: 44 - Chars: 4431 - Tokens: 1108
-33. src\Artifacts\A31. DCE - Phase 2 - Multimodal Content Extraction (PDF Images).md - Lines: 44 - Chars: 4035 - Tokens: 1009
-34. src\Artifacts\A32. DCE - Phase 1 - Excel and CSV Handling Strategy.md - Lines: 44 - Chars: 4295 - Tokens: 1074
-35. src\Artifacts\A33. DCE - Phase 1 - Copy-Paste Feature Plan.md - Lines: 42 - Chars: 4456 - Tokens: 1114
-36. src\Artifacts\A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements.md - Lines: 29 - Chars: 4040 - Tokens: 1010
-37. src\Artifacts\A35. DCE - Phase 2 - UI Mockups and Flow.md - Lines: 84 - Chars: 5742 - Tokens: 1436
-38. src\Artifacts\A36. DCE - Phase 2 - Technical Implementation Plan.md - Lines: 81 - Chars: 3794 - Tokens: 949
-39. src\Artifacts\A37. DCE - Phase 2 - Cycle Navigator & Knowledge Graph - Vision.md - Lines: 28 - Chars: 3242 - Tokens: 811
-40. src\Artifacts\A38. DCE - Phase 2 - Cycle Navigator - UI Mockup.md - Lines: 69 - Chars: 4621 - Tokens: 1156
-41. src\Artifacts\A39. DCE - Phase 2 - Cycle Navigator - Technical Plan.md - Lines: 98 - Chars: 4641 - Tokens: 1161
-42. src\Artifacts\A4. DCE - Analysis of The-Creator-AI Repo.md - Lines: 56 - Chars: 5722 - Tokens: 1431
-43. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
-44. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
-45. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
-46. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
-47. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
-48. src\backend\commands\commands.ts - Lines: 88 - Chars: 3807 - Tokens: 952
-49. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
-50. src\backend\services\action.service.ts - Lines: 73 - Chars: 2471 - Tokens: 618
-51. src\backend\services\flattener.service.ts - Lines: 303 - Chars: 13492 - Tokens: 3373
-52. src\backend\services\fs.service.ts - Lines: 631 - Chars: 29108 - Tokens: 7277
-53. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-54. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
-55. src\backend\services\services.ts - Lines: 25 - Chars: 982 - Tokens: 246
-56. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
-57. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
-58. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
-59. src\client\components\file-tree\FileTree.tsx - Lines: 253 - Chars: 11216 - Tokens: 2804
-60. src\client\components\file-tree\FileTree.utils.ts - Lines: 189 - Chars: 7284 - Tokens: 1821
-61. src\client\components\SelectedFilesView.tsx - Lines: 278 - Chars: 13097 - Tokens: 3275
-62. src\client\components\tree-view\TreeView.tsx - Lines: 365 - Chars: 16838 - Tokens: 4210
-63. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
-64. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
-65. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-66. src\client\views\context-chooser.view\on-message.ts - Lines: 134 - Chars: 5742 - Tokens: 1436
-67. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
-68. src\client\views\context-chooser.view\view.tsx - Lines: 389 - Chars: 20568 - Tokens: 5142
-69. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
-70. src\common\ipc\channels.enum.ts - Lines: 46 - Chars: 2422 - Tokens: 606
-71. src\common\ipc\channels.type.ts - Lines: 42 - Chars: 3150 - Tokens: 788
-72. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
-73. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-74. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-75. src\common\types\file-node.ts - Lines: 15 - Chars: 535 - Tokens: 134
-76. src\common\types\vscode-webview.d.ts - Lines: 13 - Chars: 357 - Tokens: 90
-77. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
-78. src\common\utils\view-html.ts - Lines: 26 - Chars: 971 - Tokens: 243
-79. src\common\view-types.ts - Lines: 8 - Chars: 246 - Tokens: 62
-80. src\extension.ts - Lines: 110 - Chars: 4890 - Tokens: 1223
-81. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
-82. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
-83. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
-84. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
-85. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
-86. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
-87. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
-88. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
-89. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
-90. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
-91. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
-92. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
-93. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
-94. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
-95. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
-96. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
-97. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
-98. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
-99. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
-100. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
-101. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
-102. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
-103. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
-104. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
-105. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
-106. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
-107. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
-108. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
-109. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
-110. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
-111. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
-112. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
-113. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
-114. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
-115. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
-116. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
-117. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
-118. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
-119. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
-120. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
-121. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
-122. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
-123. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
-124. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
-125. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
-126. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
-127. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
-128. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
-129. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
-130. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
-131. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
-132. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
-133. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
-134. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
-135. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
-136. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
-137. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
-138. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
-139. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
-140. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
-141. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
-142. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
-143. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
-144. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
-145. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
-146. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
-147. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
-148. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-149. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
-150. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
-151. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
-152. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-153. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
-154. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
-155. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
-156. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-157. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
-158. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
-159. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
-160. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
-161. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
-162. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
-163. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
-164. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-165. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
-166. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
-167. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
-168. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
-169. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
-170. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
-171. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
-172. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
-173. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
-174. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
-175. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
-176. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
-177. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
-178. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
-179. tsconfig.json - Lines: 19 - Chars: 457 - Tokens: 115
-180. webpack.config.js - Lines: 84 - Chars: 2401 - Tokens: 601
+14. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
+15. src\Artifacts\A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md - Lines: 43 - Chars: 7263 - Tokens: 1816
+16. src\Artifacts\A16. DCE - Phase 1 - UI & UX Refinements Plan.md - Lines: 50 - Chars: 6421 - Tokens: 1606
+17. src\Artifacts\A17. DCE - Phase 1 - Advanced Tree View Features.md - Lines: 47 - Chars: 3888 - Tokens: 972
+18. src\Artifacts\A18. DCE - Phase 1 - Active File Sync Feature Plan.md - Lines: 46 - Chars: 4548 - Tokens: 1137
+19. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
+20. src\Artifacts\A19. DCE - Phase 1 - Double-Click & Quick-Remove Feature Plan.md - Lines: 42 - Chars: 4603 - Tokens: 1151
+21. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
+22. src\Artifacts\A20. DCE - Phase 1 - Advanced UX & Automation Plan.md - Lines: 47 - Chars: 7155 - Tokens: 1789
+23. src\Artifacts\A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer.md - Lines: 48 - Chars: 7385 - Tokens: 1847
+24. src\Artifacts\A22. DCE - Phase 1 - Search & Filter Feature Plan.md - Lines: 58 - Chars: 3663 - Tokens: 916
+25. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 35 - Chars: 4927 - Tokens: 1232
+26. src\Artifacts\A24. DCE - Selection Paradigm Terminology.md - Lines: 57 - Chars: 3330 - Tokens: 833
+27. src\Artifacts\A25. DCE - Phase 1 - Git & Problems Integration Plan.md - Lines: 61 - Chars: 5871 - Tokens: 1468
+28. src\Artifacts\A26. DCE - Phase 1 - File System Traversal & Caching Strategy.md - Lines: 46 - Chars: 4009 - Tokens: 1003
+29. src\Artifacts\A27. DCE - Phase 1 - Undo-Redo Feature Plan.md - Lines: 50 - Chars: 4903 - Tokens: 1226
+30. src\Artifacts\A28. DCE - Packaging and Distribution Guide.md - Lines: 96 - Chars: 4075 - Tokens: 1019
+31. src\Artifacts\A29. DCE - Phase 1 - Binary and Image File Handling Strategy.md - Lines: 81 - Chars: 4217 - Tokens: 1055
+32. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
+33. src\Artifacts\A30. DCE - Phase 1 - PDF Handling and Virtualization Strategy.md - Lines: 44 - Chars: 4431 - Tokens: 1108
+34. src\Artifacts\A31. DCE - Phase 2 - Multimodal Content Extraction (PDF Images).md - Lines: 44 - Chars: 4035 - Tokens: 1009
+35. src\Artifacts\A32. DCE - Phase 1 - Excel and CSV Handling Strategy.md - Lines: 44 - Chars: 4295 - Tokens: 1074
+36. src\Artifacts\A33. DCE - Phase 1 - Copy-Paste Feature Plan.md - Lines: 42 - Chars: 4456 - Tokens: 1114
+37. src\Artifacts\A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements.md - Lines: 29 - Chars: 4040 - Tokens: 1010
+38. src\Artifacts\A35. DCE - Phase 2 - UI Mockups and Flow.md - Lines: 84 - Chars: 5742 - Tokens: 1436
+39. src\Artifacts\A36. DCE - Phase 2 - Technical Implementation Plan.md - Lines: 81 - Chars: 3794 - Tokens: 949
+40. src\Artifacts\A37. DCE - Phase 2 - Cycle Navigator & Knowledge Graph - Vision.md - Lines: 28 - Chars: 3242 - Tokens: 811
+41. src\Artifacts\A38. DCE - Phase 2 - Cycle Navigator - UI Mockup.md - Lines: 69 - Chars: 4621 - Tokens: 1156
+42. src\Artifacts\A39. DCE - Phase 2 - Cycle Navigator - Technical Plan.md - Lines: 98 - Chars: 4641 - Tokens: 1161
+43. src\Artifacts\A4. DCE - Analysis of The-Creator-AI Repo.md - Lines: 56 - Chars: 5722 - Tokens: 1431
+44. src\Artifacts\A40. DCE - Phase 2 - Parallel Co-Pilot - Target File Structure.md - Lines: 64 - Chars: 3321 - Tokens: 831
+45. src\Artifacts\A40.1. DCE - Phase 2 - Competitive Analysis & Feature Ideas.md - Lines: 43 - Chars: 4284 - Tokens: 1071
+46. src\Artifacts\A40.2. DCE - Phase 2 - Competitive Analysis & Feature Ideas.md - Lines: 40 - Chars: 4280 - Tokens: 1070
+47. src\Artifacts\A41. DCE - Phase 2 - API Key Management - Feature Plan.md - Lines: 44 - Chars: 3894 - Tokens: 974
+48. src\Artifacts\A41.1. DCE - Phase 2 - Advanced Features & Integrations Plan.md - Lines: 44 - Chars: 3864 - Tokens: 966
+49. src\Artifacts\A41.2. DCE - Phase 2 - Feature Ideation & Competitive Analysis.md - Lines: 44 - Chars: 4469 - Tokens: 1118
+50. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
+51. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
+52. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
+53. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
+54. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
+55. src\backend\commands\commands.ts - Lines: 88 - Chars: 3807 - Tokens: 952
+56. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
+57. src\backend\services\action.service.ts - Lines: 73 - Chars: 2471 - Tokens: 618
+58. src\backend\services\flattener.service.ts - Lines: 303 - Chars: 13492 - Tokens: 3373
+59. src\backend\services\fs.service.ts - Lines: 631 - Chars: 29108 - Tokens: 7277
+60. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
+61. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
+62. src\backend\services\services.ts - Lines: 25 - Chars: 982 - Tokens: 246
+63. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
+64. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
+65. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
+66. src\client\components\file-tree\FileTree.tsx - Lines: 253 - Chars: 11216 - Tokens: 2804
+67. src\client\components\file-tree\FileTree.utils.ts - Lines: 189 - Chars: 7284 - Tokens: 1821
+68. src\client\components\SelectedFilesView.tsx - Lines: 278 - Chars: 13097 - Tokens: 3275
+69. src\client\components\tree-view\TreeView.tsx - Lines: 365 - Chars: 16838 - Tokens: 4210
+70. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
+71. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
+72. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
+73. src\client\views\context-chooser.view\on-message.ts - Lines: 134 - Chars: 5742 - Tokens: 1436
+74. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
+75. src\client\views\context-chooser.view\view.tsx - Lines: 389 - Chars: 20568 - Tokens: 5142
+76. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
+77. src\common\ipc\channels.enum.ts - Lines: 46 - Chars: 2422 - Tokens: 606
+78. src\common\ipc\channels.type.ts - Lines: 42 - Chars: 3150 - Tokens: 788
+79. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
+80. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+81. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
+82. src\common\types\file-node.ts - Lines: 15 - Chars: 535 - Tokens: 134
+83. src\common\types\vscode-webview.d.ts - Lines: 13 - Chars: 357 - Tokens: 90
+84. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
+85. src\common\utils\view-html.ts - Lines: 26 - Chars: 971 - Tokens: 243
+86. src\common\view-types.ts - Lines: 8 - Chars: 246 - Tokens: 62
+87. src\extension.ts - Lines: 110 - Chars: 4890 - Tokens: 1223
+88. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
+89. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
+90. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
+91. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
+92. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
+93. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
+94. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
+95. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
+96. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
+97. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
+98. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
+99. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
+100. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
+101. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
+102. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
+103. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
+104. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
+105. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
+106. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
+107. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
+108. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
+109. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
+110. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
+111. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
+112. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
+113. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
+114. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
+115. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
+116. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
+117. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
+118. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
+119. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
+120. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
+121. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
+122. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
+123. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
+124. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
+125. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
+126. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
+127. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
+128. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
+129. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
+130. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
+131. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
+132. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
+133. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
+134. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
+135. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
+136. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
+137. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
+138. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
+139. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
+140. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
+141. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
+142. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
+143. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
+144. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
+145. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
+146. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
+147. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
+148. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
+149. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
+150. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
+151. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
+152. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
+153. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
+154. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
+155. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+156. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
+157. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
+158. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
+159. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+160. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
+161. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
+162. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
+163. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+164. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
+165. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
+166. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
+167. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
+168. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
+169. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
+170. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
+171. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+172. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
+173. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
+174. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
+175. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
+176. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
+177. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
+178. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
+179. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
+180. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
+181. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
+182. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
+183. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
+184. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
+185. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
+186. tsconfig.json - Lines: 19 - Chars: 457 - Tokens: 115
+187. webpack.config.js - Lines: 84 - Chars: 2401 - Tokens: 601
 
 <file path=".gitignore">
 node_modules
@@ -538,7 +545,7 @@ SOFTWARE.
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C70 (Add Phase 2 Cycle Navigator Artifacts)
+# Updated on: C71 (Add Phase 2 File Structure and API Key Management plans)
 
 ## 1. Purpose
 
@@ -712,7 +719,31 @@ SOFTWARE.
 - **Description:** Details the technical approach for implementing the Cycle Navigator, including data structures for storing cycle-specific responses and the state management for historical navigation.
 - **Tags:** feature plan, phase 2, technical plan, architecture, state management, data model
 
+### A40. DCE - Phase 2 - Parallel Co-Pilot - Target File Structure
+- **Description:** A text-based representation of the target file structure for the new Phase 2 Parallel Co-Pilot panel, outlining the layout of new directories and key files.
+- **Tags:** file structure, architecture, project layout, scaffolding, phase 2
+
+### A40.1. DCE - Phase 2 - Competitive Analysis & Feature Ideas
+- **Description:** An analysis of existing tools and extensions for managing multiple AI responses, with a list of potential features to incorporate into the Parallel Co-Pilot panel.
+- **Tags:** feature plan, phase 2, research, competitive analysis, co-pilot
+
+### A41. DCE - Phase 2 - API Key Management - Feature Plan
+- **Description:** Outlines the user stories and technical plan for a settings UI where users can securely input and manage their API keys for various LLM services.
+- **Tags:** feature plan, phase 2, settings, api key, configuration, security
+
+### A41.1. DCE - Phase 2 - Advanced Features & Integrations Plan
+- **Description:** Explores future enhancements for the Parallel Co-Pilot, such as applying AI responses as diff patches and integrating with Git for direct commits.
+- **Tags:** feature plan, phase 2, ideation, diff, patch, git, workflow
+
+### A41.2. DCE - Phase 2 - Feature Ideation & Competitive Analysis
+- **Description:** An analysis of similar AI coding assistant tools (e.g., Cursor.sh, Copilot Chat) and a brainstorm of potential advanced features for the Parallel Co-Pilot panel.
+- **Tags:** feature plan, phase 2, research, competitive analysis, ideation, roadmap
+
 ## II. Standalone Utilities & Guides
+
+### A149. Local LLM Integration Plan
+- **Description:** The technical plan for integrating a locally hosted LLM into the game via a secure backend proxy.
+- **Tags:** llm, integration, plan, backend, api
 
 ### A189. Number Formatting Reference Guide
 - **Description:** A standalone guide and utility script for formatting large numbers with K/M/B/T suffixes and dynamic decimal place adjustment for clean UI presentation.
@@ -1119,6 +1150,108 @@ This artifact serves as a centralized list to track ongoing and recurring issues
 -   **Symptom:** The file tree reloaded from scratch on every tab switch and did not auto-update on file changes.
 -   **First Reported:** Cycle 19
 -   **Status (C23):** **Resolved (C20).** A frontend cache was implemented by changing the `useEffect` dependency array. A backend `FileSystemWatcher` was implemented in `fs.service.ts` to detect changes and push updates to the client, triggering a refresh.
+</file>
+
+<file path="src/Artifacts/A149. Local LLM Integration Plan.md">
+# Artifact: A149. Local LLM Integration Plan
+# Updated on: C1280 (Add documentation for REMOTE_LLM_URL environment variable.)
+# Updated on: C1217 (Update architecture to reflect that @Ascentia now uses a streaming Socket.IO event.)
+# Updated on: C1216 (Reflect change from /chat/completions to /completions endpoint for chatbot streaming.)
+# Date Created: Cycle 1211
+# Author: AI Model
+
+## 1. Overview & Goal
+
+This document outlines the technical plan for integrating a locally hosted Large Language Model (LLM) into the "AI Ascent" game. The goal is to create a secure and robust connection between the game client/server and a local LLM endpoint (like one provided by LM Studio) to power new, dynamic gameplay features.
+
+This integration will enable:
+1.  An in-game helper bot, `@Ascentia`, that can answer player questions about the game.
+2.  Interactive sessions where players can "talk" to their own AI products.
+3.  A new "Poetry Battle" PvP competition between players' chatbot products.
+
+## 2. Core Architecture: Backend Proxy
+
+To ensure security and control, the game client will **never** directly call the local LLM endpoint. All communication will be routed through a dedicated backend API endpoint or WebSocket handler that acts as a proxy.
+
+### 2.1. Rationale for a Backend Proxy
+*   **Security:** Prevents malicious clients from directly accessing or overloading the local LLM server. It keeps the endpoint address and any potential API keys hidden from the client.
+*   **Control:** Allows the server to inject, modify, or augment prompts before they are sent to the LLM. This is critical for:
+    *   Adding system prompts and context for the `@Ascentia` helper bot.
+    *   Injecting parameters to simulate quality degradation for the Poetry Battle.
+    *   Enforcing rate limiting and preventing abuse.
+*   **Flexibility:** The client-facing API remains consistent even if the underlying LLM provider or endpoint changes in the future.
+*   **State Management:** The server can access the game's database (`prisma`) to fetch context for prompts (e.g., player stats, game rules from documentation artifacts).
+
+### 2.2. Implementation: API Handlers in `server.ts`
+*   The existing Express server (`src/server.ts`) will handle all LLM-related requests.
+*   **Socket.IO `'start_ascentia_stream'` event:** This event is now used for all `@Ascentia` queries. It provides a streaming response for a better user experience.
+*   **Socket.IO `'start_chatbot_stream'` event:** This event will be used for all streaming requests, specifically for the "Chat with Service" feature.
+*   **`/api/llm/proxy` (POST):** This endpoint now handles only non-streaming, single-turn requests for features like the Player LLM Terminal.
+*   The handlers for these routes and events will:
+    1.  Authenticate the user session.
+    2.  Based on the request's `context`, construct a final prompt string, potentially adding system instructions, game rules, or degradation parameters.
+    3.  Use a server-side `fetch` to send the final, formatted request to the appropriate local LLM endpoint specified in an environment variable.
+    4.  **For streaming:** The handler will read the `ReadableStream`, parse the SSE chunks, and emit the relevant `_stream_chunk` and `_stream_end` events back to the originating client socket.
+    5.  **For non-streaming:** The handler will return the full response in the JSON body.
+
+## 3. Local LLM Server Configuration (LM Studio)
+
+### 3.1. Environment Variables (`.env` file)
+
+To allow for flexible connections to different LLM servers (local, remote on the same network, or even production endpoints), the `server.ts` logic will prioritize URLs in the following order:
+
+1.  **`REMOTE_LLM_URL` (NEW):** Use this to specify the address of an LLM running on a different machine on your local network. This is ideal for a two-PC development setup.
+    *   **Example:** `REMOTE_LLM_URL=http://192.168.1.85:1234`
+2.  **`LOCAL_LLM_URL`:** The standard variable for an LLM running on the same machine as the game server.
+    *   **Example:** `LOCAL_LLM_URL=http://127.0.0.1:1234`
+3.  **Hardcoded Default:** If neither environment variable is set, the server will fall back to `http://127.0.0.1:1234`.
+
+The server will log which URL it is using upon startup for easy debugging.
+
+### 3.2. Recommended Model & Settings
+*   **Model:**
+    *   **Identifier:** `qwen/qwen3-30b-a3b`
+    *   **Context Length:** 32,768
+*   **Server:**
+    *   **Address:** Match the address in your `.env` file (e.g., `http://192.168.1.85:1234`).
+    *   **Enable "Serve on Local Network"** in LM Studio if you are using `REMOTE_LLM_URL`.
+    *   **Preset:** OpenAI API
+*   **Hardware & Performance:**
+    *   **GPU Offload:** Max
+*   **Inference Parameters (Default for Creative/Chat Tasks):**
+    *   **Temperature:** 0.8
+    *   **Top K Sampling:** 40
+    *   **Repeat Penalty:** 1.1
+    *   **Top P Sampling:** 0.95
+*   **Prompt Format:** For chatbot conversations sent to the `/v1/completions` endpoint, the prompt must be manually constructed using the model's chat template.
+
+## 4. State Management: `llmStore.ts`
+
+A new Zustand store will be created to manage the state of LLM-related interactions.
+
+*   **`src/state/llmStore.ts`**
+*   **State:**
+    *   `isPlayerLlmTerminalOpen: boolean`
+    *   `isPlayerChatbotInterfaceOpen: boolean`
+    *   `isPoetryBattleViewerOpen: boolean`
+    *   `productIdForInteraction: string | null`
+    *   `activePoetryBattle: PoetryBattleState | null`
+*   **Actions:**
+    *   `openLlmTerminal(productId)`
+    *   `openChatbotInterface(productId)`
+    *   `closeInteractions()`
+    *   ...and other actions for managing poetry battles.
+
+## 5. New Files & Components
+
+*   **Frontend UI:**
+    *   `src/components/menus/llm/PlayerLlmTerminal.tsx`
+    *   `src/components/menus/llm/PlayerChatbotInterface.tsx`
+    *   `src/components/menus/llm/PoetryBattleViewer.tsx`
+*   **Game Logic:** `src/game/systems/PoetryBattleSystem.ts`
+*   **State:** `src/state/llmStore.ts`
+
+This plan establishes a secure and extensible foundation for integrating LLM-powered features into AI Ascent.
 </file>
 
 <file path="src/Artifacts/A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md">
@@ -2825,6 +2958,302 @@ The reference repository provides solutions or strong foundations for all three 
 2.  **Focus on Adaptation:** Our immediate efforts for Phase 1 should be to isolate the `FileTree` component and its backend dependencies (`FSService.ts`) and ensure they can be used to generate the `flattened_repo.md` as originally specified.
 3.  **De-risk Phase 2:** The "Change Plan" functionality is a perfect starting point for our parallel co-pilot. We should analyze its state management and IPC communication to understand how we might instantiate multiple, independent instances of it.
 4.  **Update All Documentation:** All planning artifacts (`A1`, `A2`, `A3`) must be updated immediately to reflect this new context. Our plan has evolved from "build" to "analyze, adapt, and extend".
+</file>
+
+<file path="src/Artifacts/A40. DCE - Phase 2 - Parallel Co-Pilot - Target File Structure.md">
+# Artifact A40: DCE - Phase 2 - Parallel Co-Pilot - Target File Structure
+# Date Created: C71
+# Author: AI Model
+
+- **Key/Value for A0:**
+- **Description:** A text-based representation of the new files and components required to build the Phase 2 Parallel Co-Pilot and Cycle Navigator features.
+- **Tags:** file structure, architecture, project layout, scaffolding, phase 2
+
+## 1. Overview
+
+This document outlines the new files and directories that will be created to support the development of the Phase 2 features: the Parallel Co-Pilot Panel and the Cycle Navigator. This structure is designed to be modular and integrate cleanly with our existing architecture.
+
+## 2. New File Tree for Phase 2
+
+This tree shows only the **new** files and directories to be added. Existing directories will be modified to import and use these new components.
+
+```
+src/
+├── backend/
+│   └── services/
+│       └── history.service.ts      # New: Manages reading/writing dce_history.json
+│
+└── client/
+    ├── components/
+    │   ├── DiffViewer.tsx          # New (for Phase 3, but can be stubbed): A component for side-by-side text diffing.
+    │   ├── Slider.tsx              # New: A simple reusable slider component for the tab count.
+    │   └── TabbedEditor.tsx        # (New) The core multi-tab editor component
+    │
+    ├── views/
+    │   └── parallel-copilot.view/  # New View for Phase 2
+    │       ├── index.ts
+    │       ├── on-message.ts
+    │       ├── view.scss
+    │       └── view.tsx            # Main React component for the Parallel Co-Pilot panel
+    │
+    └── utils/
+        └── string-similarity.ts    # New: A lightweight utility for calculating string similarity scores.
+
+.vscode/
+└── dce_history.json                # New (auto-generated): Stores the cycle history and AI responses.
+```
+
+## 3. Component & Service Descriptions
+
+### Backend
+
+-   **`src/backend/services/history.service.ts`:**
+    -   **Responsibility:** Solely responsible for abstracting the file I/O for the `dce_history.json` file.
+    -   **Methods:** `getCycleHistory()`, `getCycleData(cycleId)`, `saveResponseToCycle(...)`. This keeps the main `fs.service.ts` clean from business logic.
+
+### Frontend Components
+
+-   **`src/client/views/parallel-copilot.view/`:**
+    -   This new directory will contain everything needed for the new panel, following the same structure as our existing `context-chooser.view`.
+    -   `view.tsx` will be the main component, managing the state for all tabs, the current cycle, and orchestrating IPC communication.
+-   **`src/client/components/Slider.tsx`:**
+    -   A simple, reusable slider component to control the number of tabs. This extracts UI logic from the main view.
+-   **`src/client/utils/string-similarity.ts`:**
+    -   Will contain a function to calculate the similarity between two strings, likely implementing the Dice Coefficient or a similar algorithm. This keeps the calculation logic separate and testable.
+
+### Root Directory
+
+-   **`.vscode/dce_history.json`:**
+    -   This file will be automatically created and managed by the `HistoryService`. Storing it in `.vscode` is standard practice for workspace-specific extension data that should not typically be checked into source control. It will be added to `.gitignore`.
+</file>
+
+<file path="src/Artifacts/A40.1. DCE - Phase 2 - Competitive Analysis & Feature Ideas.md">
+# Artifact A40.1: DCE - Phase 2 - Competitive Analysis & Feature Ideas
+# Date Created: C71
+# Author: AI Model
+
+- **Key/Value for A0:**
+- **Description:** An analysis of existing tools and extensions for managing multiple AI responses, with a list of potential features to incorporate into the Parallel Co-Pilot panel.
+- **Tags:** feature plan, phase 2, research, competitive analysis, co-pilot
+
+## 1. Overview
+
+As requested in Cycle 71, this document summarizes research into existing tools that address the problem of managing and comparing multiple AI-generated code responses. The goal is to identify common features, discover innovative ideas, and ensure our Phase 2 "Parallel Co-Pilot Panel" is a best-in-class solution.
+
+## 2. Research Summary
+
+A search for "VS Code extensions for comparing AI responses" and similar terms reveals that while many extensions integrate a single AI chat (like GitHub Copilot Chat), very few are designed for the specific workflow of managing *multiple, parallel* responses to the *same* prompt. This represents a significant opportunity for our project.
+
+Most developers still use a manual process involving external tools:
+1.  Pasting responses into separate tabs in a text editor (Notepad++, Sublime Text).
+2.  Using a dedicated diff tool (WinMerge, Beyond Compare, VS Code's native diff) to compare two responses at a time.
+
+The key pain point is the friction of moving text between applications and the lack of an integrated testing loop.
+
+## 3. Existing Tools & Inspirations
+
+| Tool / Extension | Relevant Features | How It Inspires DCE |
+| :--- | :--- | :--- |
+| **Bito** | - "Compare Code" feature shows a side-by-side diff of a code block vs. AI suggestion. <br> - History panel to review past interactions. | Bito's diff view is a good model for our Phase 3 goal. The history panel is similar to our "Cycle Navigator" concept, validating its usefulness. |
+| **Codeium** | - Provides multiple suggestions inline, but for code completion, not large blocks. | The idea of offering multiple choices is core to our vision, but we are focused on entire file/block replacements, not single-line completions. |
+| **Cursor.sh (IDE)** | - A fork of VS Code built around an AI-first workflow. <br> - "Auto-debug" feature attempts to fix errors. | Cursor's deep integration is a long-term inspiration. An "Auto-fix TS Errors" button in our panel could be a powerful feature, where we send the code + errors back to the AI. |
+| **External Diff Tools (WinMerge, etc.)** | - Three-way merge/diff capabilities. <br> - Folder comparison. | These tools are powerful but external. Our goal is to bring this core diffing capability *inside* VS Code for a seamless workflow (Phase 3). |
+
+## 4. New Feature Ideas for DCE Phase 2
+
+Based on the analysis and our project goals, here are some new or refined feature ideas for the Parallel Co-Pilot Panel:
+
+| Feature Idea | Description |
+| :--- | :--- |
+| **"Promote to Next Cycle" Button** | On each tab, a button to "Promote" or "Use as Base" for the next cycle. This would copy the tab's content into the main prompt area for the next iteration, streamlining the refinement process. |
+| **One-Click Diff View** | A button that opens VS Code's native diff viewer, comparing the tab's content with the original source file. This is a great stepping stone to our fully integrated Phase 3 diff tool. |
+| **AI-Powered Summary of Changes** | A button that sends the original code and the tab's code to an LLM with a prompt like "Summarize the key changes between these two code blocks." The summary would be displayed in the tab's metadata area. |
+| **Tagging & Annotation** | Allow the user to add short tags (e.g., `refactor`, `bug-fix`, `best-approach`) or notes to each response tab. This helps organize different solution types and aids in later review via the Cycle Navigator. |
+| **"Auto-Fix TS Errors" Button** | When a "swap" results in TypeScript errors, a button could appear. Clicking it would automatically package the new code and the list of TS errors and send them back to the AI with a prompt to fix them. |
+| **Cost/Token Tracking** | If we integrate directly with APIs, display an estimated cost for each generation, helping users manage their API usage. |
+</file>
+
+<file path="src/Artifacts/A40.2. DCE - Phase 2 - Competitive Analysis & Feature Ideas.md">
+# Artifact A40.2: DCE - Phase 2 - Competitive Analysis & Feature Ideas
+# Date Created: C71
+# Author: AI Model
+
+- **Key/Value for A0:**
+- **Description:** A research document analyzing similar developer tools and extensions to identify potential features and UI/UX patterns that could be incorporated into the Parallel Co-Pilot Panel.
+- **Tags:** feature plan, phase 2, research, competitive analysis, ideation
+
+## 1. Overview & Goal
+
+To ensure the Phase 2 "Parallel Co-Pilot Panel" is a best-in-class tool, it's valuable to analyze existing solutions that tackle similar problems. This document explores features from other VS Code extensions and developer tools to inspire and refine our own feature set. The goal is to identify proven UI/UX patterns and functionalities that would enhance our core vision of managing and testing multiple AI-generated responses.
+
+## 2. Conceptual Search & Inspirations
+
+*   **Cursor:** A fork of VS Code that is "AI-first." Its primary innovation is the deep integration of AI into the core editor experience. While its model is different from our "panel" approach, its focus on "AI edits" and inline diffing is relevant.
+*   **Codeium / GitHub Copilot Chat:** These tools excel at the conversational aspect of AI-assisted development. Their strength is the "chat" interface where a user can iterate on a piece of code. Their weakness, which we aim to solve, is the difficulty in managing and comparing multiple distinct solutions to the same problem.
+*   **Diff Tools (e.g., WinMerge, VS Code's built-in diff):** These are the tools our users are currently forced to use. Their strength is the clear, side-by-side comparison. Their weakness is the friction of getting the code into them (copy-paste) and the lack of integration with the build/test process.
+*   **"Warp" Terminal:** While a terminal, Warp's concept of "blocks" for commands and their outputs is interesting. It treats each interaction as a discrete, reusable unit, similar to how we envision treating each AI response.
+
+## 3. Potential Feature Enhancements for Phase 2
+
+Based on this analysis, here are several feature ideas that align with and enhance our existing Phase 2 vision.
+
+| Feature Idea | Inspiration | Description | Benefit |
+| :--- | :--- | :--- | :--- |
+| **Inline Diffing within Tabs** | Cursor, VS Code Diff | Instead of just showing the full code, each tab could have a toggle to show a diff view between its content and the original source file. | Allows for a much quicker understanding of what the AI *actually changed*, without needing to perform a "swap". |
+| **One-Click "Accept Block"** | Cursor | In the diff view, each changed block (hunk) could have an "Accept" button to apply just that specific change to the source file. | Provides granular control over applying AI suggestions, allowing the user to mix and match the best parts of a response. |
+| **"Promote to Source" Button** | Internal Idea | The "Swap" button is good for testing, but a more permanent action is needed. A "Promote" or "Accept" button would overwrite the source file without swapping. | Clarifies user intent. "Swap" is for temporary testing; "Promote" is for committing to a solution. |
+| **Response Tagging/Rating** | General UX | Allow the user to add tags (e.g., "works", "buggy", "refactor") or a simple star rating to each response tab. | Helps the user keep track of their evaluation of each response, especially when managing many options. This metadata would be saved with the cycle history. |
+| **Prompt History per Tab** | Copilot Chat | Each tab could maintain a mini-history of the prompts used to generate its content, allowing for easy iteration and refinement of a specific solution. | Improves traceability and allows the user to tweak a promising response without starting from scratch. |
+| **Pre-computation of Files** | Internal Idea | Create a set of files that will be needed to be created for phase 2. | Helps to have a draft of files outlined prior to initiation. |
+
+## 4. Proposed Phase 2 File Structure
+
+To support the Parallel Co-Pilot, Cycle Navigator, and the new features above, the following new files will likely be needed:
+
+```
+See: `A40. DCE - Phase 2 - Parallel Co-Pilot - Target File Structure.md`
+```
+</file>
+
+<file path="src/Artifacts/A41. DCE - Phase 2 - API Key Management - Feature Plan.md">
+# Artifact A41: DCE - Phase 2 - API Key Management - Feature Plan
+# Date Created: C71
+# Author: AI Model
+
+- **Key/Value for A0:**
+- **Description:** Outlines the user stories and technical plan for a settings UI where users can securely input and manage their API keys for various LLM services.
+- **Tags:** feature plan, phase 2, settings, api key, configuration, security
+
+## 1. Overview & Goal
+
+As the DCE project moves into Phase 2, it will begin to make its own API calls to LLM providers. To do this securely and effectively, the extension needs a dedicated interface for users to manage their API keys. The goal of this feature is to provide a simple, secure, and intuitive settings panel for adding, viewing, and deleting API keys for different services (e.g., Google Gemini, OpenAI, Anthropic).
+
+This functionality is heavily inspired by the `ApiKeysManagement.tsx` module in the `The-Creator-AI-main` reference repository.
+
+## 2. User Stories
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| P2-API-01 | **Add a New API Key** | As a user, I want to add an API key for a specific service (e.g., Gemini), so the extension can make API calls on my behalf. | - A UI is available to add a new API key. <br> - I can select the LLM provider from a dropdown list. <br> - I can paste my key into a text field. <br> - The key is stored securely in the VS Code workspace or global state. |
+| P2-API-02 | **View Saved Keys** | As a user, I want to see a list of my saved API keys (partially masked), so I can confirm which keys I have configured. | - The settings UI displays a list of all saved API keys. <br> - Keys are grouped by service. <br> - The key values are partially masked for security (e.g., `sk-xxxx...1234`). |
+| P2-API-03 | **Delete an API Key** | As a user, I want to delete an API key that I no longer use, so I can manage my credentials. | - Each listed API key has a "Delete" button. <br> - Clicking "Delete" prompts for confirmation. <br> - Upon confirmation, the key is removed from the extension's storage. |
+| P2-API-04 | **Secure Storage** | As a developer, I want API keys to be stored securely using VS Code's `SecretStorage` API, so sensitive user credentials are not exposed. | - API keys are not stored in plain text in the workspace state. <br> - The `SecretStorage` API is used to encrypt and store the keys. |
+
+## 3. Technical Implementation Plan
+
+1.  **New View / Command:**
+    *   A new command, `dce.openApiSettings`, will be created. This command will open a new webview panel dedicated to API key management. This keeps the UI clean and separate from the main workflow panels.
+    *   Alternatively, this could be a new "tab" within the Parallel Co-pilot view, accessible via a settings icon.
+
+2.  **Backend (`settings.service.ts` - New):**
+    *   A new `SettingsService` will be created to handle the logic for storing and retrieving secrets.
+    *   **Storage:** It will use `vscode.ExtensionContext.secrets` (the `SecretStorage` API) for all API key operations.
+    *   **Methods:** It will expose methods like `setApiKey(service: string, key: string)`, `getApiKeys()`, and `deleteApiKey(service: string, key: string)`. The `getApiKeys` method will return a structure with masked keys for the UI.
+
+3.  **Frontend (New `api-settings.view.tsx`):**
+    *   This new React view will render the UI for managing keys.
+    *   It will communicate with the backend `SettingsService` via new IPC channels.
+    *   It will manage the state for the list of keys, the "add new key" modal/form, and user input.
+
+4.  **IPC Channels:**
+    *   `RequestApiKeys`: Frontend asks for the list of saved (masked) keys.
+    *   `SendApiKeys`: Backend sends the list of keys.
+    *   `SaveApiKey`: Frontend sends a new service and key to the backend.
+    *   `DeleteApiKey`: Frontend requests the deletion of a specific key.
+</file>
+
+<file path="src/Artifacts/A41.1. DCE - Phase 2 - Advanced Features & Integrations Plan.md">
+# Artifact A41.1: DCE - Phase 2 - Advanced Features & Integrations Plan
+# Date Created: C71
+# Author: AI Model
+
+- **Key/Value for A0:**
+- **Description:** Explores future enhancements for the Parallel Co-Pilot, such as applying AI responses as diff patches and integrating with Git for direct commits.
+- **Tags:** feature plan, phase 2, ideation, diff, patch, git, workflow
+
+## 1. Overview & Goal
+
+This document explores potential high-impact features that could be built on top of the core Parallel Co-Pilot panel. The goal is to move beyond simple "swap" functionality and create a more powerful, integrated, and intelligent workflow for reviewing and applying AI-generated code. These ideas are intended for consideration and prioritization during Phase 2 development.
+
+## 2. Proposed Advanced Features
+
+### 2.1. Idea: Apply as Diff/Patch
+
+-   **Problem:** The current "swap" feature is a blunt instrument. It replaces the entire file, which can be risky if the AI only intended to change a small part of it and made a mistake elsewhere. It also makes it hard to see exactly what changed.
+-   **Proposed Solution:**
+    1.  **Diff Generation:** When an AI response is pasted into a tab, the extension automatically generates a diff between the tab's content and the original source file.
+    2.  **Inline Diff View:** The editor in the tab could be enhanced to show an inline diff view (similar to VS Code's source control view), highlighting added and removed lines.
+    3.  **"Apply Patch" Button:** The "Swap" button is replaced with an "Apply Patch" button. Clicking it would attempt to apply only the identified changes to the source file, leaving the rest of the file untouched. This is a much safer and more precise way to integrate AI suggestions.
+-   **Technical Notes:** This would require a diffing library (e.g., `diff-match-patch` or `jsdiff`) on the frontend or backend to generate and apply patches.
+
+### 2.2. Idea: Integrated Git Workflow
+
+-   **Problem:** After a developer tests and accepts an AI suggestion, the next step is almost always to commit the change. This requires leaving the co-pilot panel and using the source control view.
+-   **Proposed Solution:**
+    1.  **"Commit This Change" Button:** Add a new button to each tab in the Parallel Co-Pilot panel.
+    2.  **Workflow:**
+        *   The user swaps in the AI code and verifies it works.
+        *   They click "Commit This Change".
+        *   The extension automatically stages the modified file (`git add <file_path>`).
+        *   The extension opens the Source Control commit input box.
+        *   **Enhancement:** The commit message box could be pre-populated with a summary of the changes, potentially generated by another AI call based on the diff.
+-   **Technical Notes:** This requires deeper integration with the `vscode.git` extension API to programmatically stage files and interact with the commit box.
+
+### 2.3. Idea: Response Annotation and Rating
+
+-   **Problem:** It's difficult to remember why a particular AI response was good or bad, especially when looking back at the history via the Cycle Navigator.
+-   **Proposed Solution:**
+    1.  **Rating/Annotation UI:** Add a small section to each tab allowing the user to give a thumbs up/down rating and add a short text note (e.g., "Works, but inefficient" or "Best solution, very clean").
+    2.  **Persistence:** These annotations would be saved as part of the `dce_history.json` file, associated with that specific response.
+    3.  **Benefit:** When navigating back through cycles, these notes would provide valuable context about the quality and outcome of each AI suggestion, enhancing the "knowledge graph" of the project.
+-   **Technical Notes:** This requires extending the data model in `A39` and adding the corresponding UI elements and state management.
+</file>
+
+<file path="src/Artifacts/A41.2. DCE - Phase 2 - Feature Ideation & Competitive Analysis.md">
+# Artifact A41.2: DCE - Phase 2 - Feature Ideation & Competitive Analysis
+# Date Created: C71
+# Author: AI Model
+
+- **Key/Value for A0:**
+- **Description:** An analysis of similar AI coding assistant tools (e.g., Cursor.sh, Copilot Chat) and a brainstorm of potential advanced features for the Parallel Co-Pilot panel.
+- **Tags:** feature plan, phase 2, research, competitive analysis, ideation, roadmap
+
+## 1. Overview & Goal
+
+The core vision of the Parallel Co-Pilot panel is to solve the "single-threaded" limitation of current AI chat interfaces. As we plan its implementation, it's valuable to analyze existing tools to identify best-in-class features and brainstorm new ideas that could give our extension a unique advantage. The goal of this document is to explore this landscape and generate a backlog of potential enhancements for Phase 2 and beyond.
+
+## 2. Competitive Analysis
+
+### 2.1. GitHub Copilot Chat
+
+-   **Strengths:** Deeply integrated, understands editor context, uses "slash commands" (`/fix`, `/doc`, `/explain`) for specific intents, can reference specific files with `@workspace`.
+-   **Weakness (Our Opportunity):** Fundamentally a linear, single-threaded chat. Comparing multiple responses to a single prompt is difficult and requires manual copy-pasting.
+-   **Idea to Borrow:** The concept of **intent-driven actions**. We could add buttons to our tabs like "Add Documentation," "Find Bugs," or "Refactor for Readability" that would re-prompt the AI with the tab's content and a specific instruction.
+
+### 2.2. Cursor.sh
+
+-   **Strengths:** An "AI-first" fork of VS Code. Has an "AI-diff" feature that applies changes directly in the editor with an intuitive diff view. Its chat can reference the entire codebase ("@Codebase").
+-   **Weakness (Our Opportunity):** It's a separate application, not an extension. Users must leave their standard VS Code setup. Our tool integrates into the existing environment.
+-   **Idea to Borrow:** The **inline AI-diff view**. This is a perfect evolution for our "Swap" feature and a natural step toward Phase 3. Instead of a blind swap, we could show a diff of the changes and allow the user to accept/reject individual hunks.
+
+### 2.3. Continue.dev
+
+-   **Strengths:** Open-source and highly customizable. Strong concept of "Context Providers" which is very similar to our Phase 1. Can easily add highlighted code, terminal output, and files to context.
+-   **Weakness (Our Opportunity):** Still primarily a linear chat interface.
+-   **Idea to Borrow:** The idea of a **flexible context**. While our Phase 1 focuses on files, a future enhancement could allow highlighting a specific function and sending *just that* to the Parallel Co-Pilot panel for iteration.
+
+## 3. Brainstormed Feature Enhancements for DCE
+
+This is a backlog of potential features for the Parallel Co-Pilot panel, inspired by the analysis and our project's unique goals.
+
+| Feature ID | Feature Name | Description | Priority |
+| :--- | :--- | :--- | :--- |
+| **P2-F01** | **Inline Diff View** | Instead of a blind "swap", clicking the button opens a diff view within the tab, comparing the AI response to the source file. The user can then accept the full change or apply it line-by-line. | High |
+| **P2-F02** | **AI Refinement Actions** | Each tab has a small toolbar with buttons like "Make More Concise," "Add Error Handling," "Add Docstrings." Clicking one sends the tab's content back to the LLM with that specific instruction, replacing the content with the refined response. | High |
+| **P2-F03** | **Model Selection Per Tab** | Allow the user to select a different backend LLM (e.g., Gemini, Claude, GPT-4) for each tab. This would require a settings page for API key management. | Medium |
+| **P2-F04** | **Prompt Library** | A UI to save, name, and reuse common prompts (e.g., "Write a unit test for the following code..."). This would pre-fill a new tab's content with the selected prompt. | Medium |
+| **P2-F05** | **"Pin" a Response** | Add a "pin" icon to a tab. Pinned tabs are preserved when navigating between cycles with the Cycle Navigator, allowing a user to carry a "best-so-far" solution forward for comparison. | Low |
+| **P2-F06** | **Highlight-to-Context** | Allow a user to highlight a block of code in the main editor, right-click, and select "Send to Parallel Co-Pilot". This would open a new tab in the panel, pre-filled with the highlighted code. | Medium |
 </file>
 
 <file path="src/Artifacts/A5. DCE - Target File Structure.md">
