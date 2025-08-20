@@ -43,6 +43,10 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     serverIpc.onClientMessage(ClientToServerChannel.RequestFileDelete, (data) => {
         fsService.handleFileDeleteRequest(data.path);
     });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestBatchFileDelete, (data) => {
+        fsService.handleBatchFileDeleteRequest(data.paths);
+    });
     
     serverIpc.onClientMessage(ClientToServerChannel.RequestRevealInExplorer, (data) => {
         fsService.handleRevealInExplorerRequest(data.path);

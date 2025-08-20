@@ -215,6 +215,22 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
             }
         }
 
+        if (e.key === 'Delete') {
+            e.preventDefault();
+            e.stopPropagation();
+            let pathsToDelete: string[] = [];
+            if (selectedPaths.size > 0) {
+                pathsToDelete = Array.from(selectedPaths);
+            } else if (focusedNodePath) {
+                pathsToDelete = [focusedNodePath];
+            }
+            if (pathsToDelete.length > 0) {
+                logger.log(`[Delete] Delete key pressed. Requesting deletion of ${pathsToDelete.length} items.`);
+                clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileDelete, { paths: pathsToDelete });
+            }
+            return;
+        }
+
         if (!focusedNodePath) return;
         const currentIndex = flatNodeList.current.findIndex(n => n.absolutePath === focusedNodePath);
         if (currentIndex === -1) return;

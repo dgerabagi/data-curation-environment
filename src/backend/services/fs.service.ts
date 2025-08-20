@@ -614,6 +614,24 @@ export class FSService {
         }
     }
 
+    public async handleBatchFileDeleteRequest(paths: string[]) {
+        if (paths.length === 0) return;
+        const confirmation = await vscode.window.showWarningMessage(
+            `Are you sure you want to delete ${paths.length} item(s)? This will move them to the trash.`,
+            { modal: true },
+            'Delete'
+        );
+        if (confirmation === 'Delete') {
+            try {
+                await Promise.all(paths.map(p => vscode.workspace.fs.delete(vscode.Uri.file(p), { recursive: true, useTrash: true })));
+                Services.loggerService.log(`Successfully deleted ${paths.length} items.`);
+            } catch (error: any) {
+                vscode.window.showErrorMessage(`Failed to delete items: ${error.message}`);
+                Services.loggerService.error(`Failed to delete items: ${error.message}`);
+            }
+        }
+    }
+
     public handleRevealInExplorerRequest(filePath: string) {
         Services.loggerService.log(`Executing 'revealInExplorer' for path: ${filePath}`);
         vscode.commands.executeCommand('revealInExplorer', vscode.Uri.file(filePath));

@@ -9,6 +9,7 @@ export enum ClientToServerChannel {
     RequestNewFolder = "clientToServer.requestNewFolder",
     RequestFileRename = "clientToServer.requestFileRename",
     RequestFileDelete = "clientToServer.requestFileDelete",
+    RequestBatchFileDelete = "clientToServer.requestBatchFileDelete", // New
     RequestRevealInExplorer = "clientToServer.requestRevealInExplorer",
     RequestCopyPath = "clientToServer.requestCopyPath",
     RequestOpenFile = "clientToServer.requestOpenFile",

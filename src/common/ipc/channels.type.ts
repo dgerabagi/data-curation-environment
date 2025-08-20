@@ -13,6 +13,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestNewFolder ? { parentDirectory: string } :
     T extends ClientToServerChannel.RequestFileRename ? { oldPath: string, newName: string } :
     T extends ClientToServerChannel.RequestFileDelete ? { path: string } :
+    T extends ClientToServerChannel.RequestBatchFileDelete ? { paths: string[] } :
     T extends ClientToServerChannel.RequestRevealInExplorer ? { path: string } :
     T extends ClientToServerChannel.RequestCopyPath ? { path: string, relative: boolean } :
     T extends ClientToServerChannel.RequestOpenFile ? { path: string } :
