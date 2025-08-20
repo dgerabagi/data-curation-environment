@@ -1,21 +1,21 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-20T00:02:43.227Z
+  Date Generated: 2025-08-20T00:37:03.741Z
   ---
   Total Files: 172
-  Total Lines: 14035
-  Total Characters: 598312
-  Approx. Tokens: 149644
+  Total Lines: 14033
+  Total Characters: 596973
+  Approx. Tokens: 149310
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
 2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
 3. src\backend\services\fs.service.ts (5576 tokens)
-4. src\client\views\context-chooser.view\view.tsx (4636 tokens)
-5. src\client\components\tree-view\TreeView.tsx (3701 tokens)
-6. src\client\views\context-chooser.view\view.scss (3454 tokens)
+4. src\client\views\context-chooser.view\view.tsx (4608 tokens)
+5. src\client\components\tree-view\TreeView.tsx (3697 tokens)
+6. src\client\views\context-chooser.view\view.scss (3461 tokens)
 7. src\client\components\SelectedFilesView.tsx (3256 tokens)
 8. src\client\components\file-tree\FileTree.tsx (3116 tokens)
 9. src\backend\services\flattener.service.ts (2805 tokens)
@@ -45,7 +45,7 @@
 21. src\Artifacts\A20. DCE - Phase 1 - Advanced UX & Automation Plan.md - Lines: 44 - Chars: 6117 - Tokens: 1530
 22. src\Artifacts\A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer.md - Lines: 48 - Chars: 7385 - Tokens: 1847
 23. src\Artifacts\A22. DCE - Phase 1 - Search & Filter Feature Plan.md - Lines: 58 - Chars: 3663 - Tokens: 916
-24. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 55 - Chars: 7119 - Tokens: 1780
+24. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 53 - Chars: 5881 - Tokens: 1471
 25. src\Artifacts\A24. DCE - Selection Paradigm Terminology.md - Lines: 57 - Chars: 3330 - Tokens: 833
 26. src\Artifacts\A25. DCE - Phase 1 - Git & Problems Integration Plan.md - Lines: 61 - Chars: 5871 - Tokens: 1468
 27. src\Artifacts\A26. DCE - Phase 1 - File System Traversal & Caching Strategy.md - Lines: 46 - Chars: 4009 - Tokens: 1003
@@ -75,13 +75,13 @@
 51. src\client\components\file-tree\FileTree.tsx - Lines: 276 - Chars: 12461 - Tokens: 3116
 52. src\client\components\file-tree\FileTree.utils.ts - Lines: 159 - Chars: 6069 - Tokens: 1518
 53. src\client\components\SelectedFilesView.tsx - Lines: 278 - Chars: 13021 - Tokens: 3256
-54. src\client\components\tree-view\TreeView.tsx - Lines: 332 - Chars: 14801 - Tokens: 3701
+54. src\client\components\tree-view\TreeView.tsx - Lines: 333 - Chars: 14787 - Tokens: 3697
 55. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 56. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
 57. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 58. src\client\views\context-chooser.view\on-message.ts - Lines: 111 - Chars: 4643 - Tokens: 1161
-59. src\client\views\context-chooser.view\view.scss - Lines: 564 - Chars: 13815 - Tokens: 3454
-60. src\client\views\context-chooser.view\view.tsx - Lines: 388 - Chars: 18544 - Tokens: 4636
+59. src\client\views\context-chooser.view\view.scss - Lines: 564 - Chars: 13843 - Tokens: 3461
+60. src\client\views\context-chooser.view\view.tsx - Lines: 387 - Chars: 18429 - Tokens: 4608
 61. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
 62. src\common\ipc\channels.enum.ts - Lines: 41 - Chars: 2037 - Tokens: 510
 63. src\common\ipc\channels.type.ts - Lines: 37 - Chars: 2713 - Tokens: 679
@@ -1582,7 +1582,7 @@ To improve navigation and usability in large projects, this feature introduces a
 # Artifact A23: DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan
 # Date Created: C29
 # Author: AI Model
-# Updated on: C56 (Add hover-to-expand feature and refine event handling strategy)
+# Updated on: C57 (Finalized robust event handling strategy for external drag-drop)
 
 - **Key/Value for A0:**
 - **Description:** Details the requirements for implementing full keyboard navigation and drag-and-drop file/folder operations within the main file tree view.
@@ -1596,43 +1596,41 @@ To achieve true feature parity with the native VS Code Explorer and cater to pow
 
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
-| AI-01 | **Keyboard Navigation** | As a power user, I want to navigate the file tree using only my keyboard, so I can find, select, and manage files without taking my hands off the keyboard. | - Arrow Up/Down keys move the focus between visible nodes. <br> - Arrow Right on a collapsed folder expands it. <br> - Arrow Right on an open folder or file moves focus to the first child. <br> - Arrow Left on an open folder collapses it. <br> - Arrow Left on a child node moves focus to its parent. <br> - `Enter` key opens the focused file or toggles expansion for a focused folder. <br> - `Spacebar` toggles the checkbox of the focused node. |
-| AI-02 | **Internal Drag-and-Drop** | As a user, I want to be able to drag a file or folder and drop it into another folder within the DCE view to move it, so I can reorganize my project intuitively. | - Clicking and dragging a file or folder in the tree initiates a drag operation. <br> - Dragging over a folder highlights it as a potential drop target. <br> - Dropping a file/folder onto another folder moves the dragged item into the target folder. <br> - The backend file system is updated, and the tree view refreshes to reflect the new structure. |
-| AI-03 | **External Drag-and-Drop** | As a user, I want to drag a file (e.g., a PDF) from my computer's file explorer and drop it into a folder in the DCE view to add it to my project, so I can quickly incorporate new assets. | - Dragging a file from the OS and dropping it onto a folder in the DCE view copies that file into the target folder in the workspace. <br> - The backend file system is updated. <br> - The file tree automatically refreshes to show the newly added file. |
-| AI-04 | **Select All in Selected List** | As a user, after curating a list, I want to click in the "Selected Items" panel and press `Ctrl+A` or use a context menu to select all files in that list, so I can quickly perform a batch action like "Remove selected". | - **(C37 Update)** Right-clicking in the "Selected Items" list shows a context menu with a "Select All" option. <br> - Clicking it selects all items currently rendered in the list. <br> - The "Remove selected" button's count updates to reflect the total number of items in the list. |
-| AI-05 | **Delete Key to Remove Selection** | As a user, when I have items selected in the "Selected Items" panel, I want to press the `Delete` key to remove them, so I can manage my list more quickly. | - When the "Selected Items" list has focus, pressing the `Delete` key performs the same action as clicking the "Remove selected" button. <br> - All currently selected items are removed from the overall checked files list. <br> - The local selection within the "Selected Items" panel is cleared. |
-| AI-06 | **Hover to Expand Folder** | As a user dragging a file, when I hover over a collapsed folder for a moment, I want it to automatically expand, so I can drop the file into a nested subdirectory without having to cancel the drag operation. | - During a drag operation, hovering over a collapsed folder for ~500ms triggers its expansion. <br> - Moving the mouse away from the folder before the timer completes cancels the expansion. <br> - The tree view updates to show the folder's contents, and the user can continue dragging into the newly visible children. |
+| AI-01 | **Keyboard Navigation** | As a power user, I want to navigate the file tree using only my keyboard, so I can find, select, and manage files without taking my hands off the keyboard. | - Arrow Up/Down keys move the focus between visible nodes. <br> - Arrow Right on a collapsed folder expands it. <br> - Arrow Left on an open folder collapses it. <br> - `Enter` key opens the focused file or toggles expansion. <br> - `Spacebar` toggles the checkbox of the focused node. |
+| AI-02 | **Internal Drag-and-Drop** | As a user, I want to be able to drag a file or folder and drop it into another folder within the DCE view to move it, so I can reorganize my project intuitively. | - Clicking and dragging a file or folder initiates a drag operation. <br> - Dragging over a folder highlights it as a potential drop target. <br> - Dropping a file/folder onto another folder moves the dragged item. |
+| AI-03 | **External Drag-and-Drop** | As a user, I want to drag a file (e.g., a PDF) from my computer's file explorer and drop it into a folder in the DCE view to add it to my project, so I can quickly incorporate new assets. | - Dragging a file from the OS and dropping it onto a folder in the DCE view copies that file into the target folder in the workspace. <br> - The file tree automatically refreshes to show the newly added file. |
+| AI-06 | **Hover to Expand Folder** | As a user dragging a file, when I hover over a collapsed folder for a moment, I want it to automatically expand, so I can drop the file into a nested subdirectory without having to cancel the drag operation. | - During a drag operation, hovering over a collapsed folder for ~500ms triggers its expansion. <br> - Moving the mouse away from the folder before the timer completes cancels the expansion. |
 
 ## 3. Technical Implementation Plan
 
-### Keyboard Navigation (Completed)
-The focus management and event handling for keyboard navigation are complete and stable.
+### Keyboard Navigation & Internal Drag-Drop (Completed)
+These features are stable and complete.
 
-### Internal Drag and Drop (Completed)
-The HTML5 Drag and Drop API implementation within the React webview is complete and functional.
+### External Drag and Drop (Implementation C57)
+This requires a multi-layered event handling strategy to provide clear visual feedback and robust functionality.
 
-### External Drag and Drop (Implementation C56)
-This requires a multi-layered event handling strategy to provide clear visual feedback and robust functionality, including hover-to-expand.
+1.  **Critical: `event.preventDefault()` in `onDragOver`:** The most common failure point for HTML drag-and-drop is neglecting to call `event.preventDefault()` in the `onDragOver` handler. This call is **mandatory** to signal to the browser that the element is a valid drop target. Without it, the `onDrop` event will **never fire**. This must be implemented on all potential drop zones.
 
-1.  **Critical: `onDragOver` Behavior:** The most common failure point for HTML drag-and-drop is neglecting to call `event.preventDefault()` in the `onDragOver` handler. This call is **mandatory** to signal to the browser that the element is a valid drop target. Without it, the `onDrop` event will never fire. This must be implemented on all potential drop zones.
+2.  **Event Propagation (`event.stopPropagation()`):** To prevent conflicting drop handlers (e.g., a node and its parent container), `stopPropagation()` must be called in the node-level handlers to stop the event from bubbling up to the main view container.
 
-2.  **Main Container Handlers (`view.tsx`):**
-    *   The main container will have `onDragEnter`, `onDragOver`, `onDragLeave`, and `onDrop` handlers.
+3.  **Main Container Handlers (`view.tsx`):**
+    *   The main container will have `onDragEnter`, `onDragOver`, `onDragLeave`, and `onDrop`.
     *   `onDragEnter`/`onDragLeave` will toggle a `.drag-over` class for visual feedback (e.g., a dashed border around the whole view).
-    *   `onDragOver` will call `event.preventDefault()`.
-    *   `onDrop` on the container acts as a fallback for drops in empty space, targeting the workspace root directory.
+    *   `onDragOver` will call `event.preventDefault()` and log its execution.
+    *   `onDrop` on the container acts as a fallback for drops in empty space, targeting the workspace root directory. It will prevent default behavior and process the files.
 
-3.  **Individual Node Handlers & Hover-to-Expand (`TreeView.tsx`):**
-    *   The generic `TreeView` component will be enhanced to manage drag events and the expansion timer.
+4.  **Individual Node Handlers & Hover-to-Expand (`TreeView.tsx`):**
+    *   The generic `TreeView` component will manage drag events for each `<li>` node.
     *   **State:** It will manage `dropTarget` (for highlighting) and a `useRef` for a `setTimeout` timer.
     *   `onDragEnter` (on `<li>`): It will call `event.stopPropagation()`. If the node is a collapsed directory, it will start a 500ms timer. If the timer completes, it will call the function to expand the node.
-    *   `onDragLeave` (on `<li>`): It will call `event.stopPropagation()` and, critically, **clear the expansion timer** to prevent unwanted expansions.
+    *   `onDragLeave` (on `<li>`): It will call `event.stopPropagation()` and, critically, **clear the expansion timer**.
+    *   `onDragOver` (on `<li>`): It will call `event.preventDefault()` and `event.stopPropagation()`.
     *   `onDrop` (on `<li>`): It will call `event.stopPropagation()`, clear the timer, and delegate the file processing logic to the parent `FileTree` component via a prop function (`onNodeDrop`).
 
-4.  **File Processing Logic (`FileTree.tsx`):**
-    *   The `FileTree` component will define `handleNodeDrop(event, node)`.
+5.  **File Processing Logic (`FileTree.tsx`):**
+    *   The `FileTree` component will define the `handleNodeDrop(event, node)` function.
     *   This function determines the final target directory (the node's path if it's a directory, or its parent's path if it's a file).
-    *   It will iterate through `event.dataTransfer.files`, read each using the `FileReader` API, and send the file's name and buffer to the backend via the `RequestAddFileFromBuffer` IPC message.
+    *   It will iterate through `event.dataTransfer.files`, read each using the `FileReader` API to get an `ArrayBuffer`, convert it to a `Uint8Array`, and send the file's name and buffer to the backend via the `RequestAddFileFromBuffer` IPC message.
     *   **Logging:** All event handlers (`onDragEnter`, `onDragOver`, `onDragLeave`, `onDrop`) in all components will have detailed `logger.log()` statements to trace the event flow and diagnose any failures.
 </file>
 
@@ -6082,7 +6080,6 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         logger.log(`Drag Enter on node: ${node.name}`);
         if (node.children && node.absolutePath !== draggedPath) {
             setDropTarget(node.absolutePath);
-            // Hover-to-expand logic
             if (!expandedNodes.includes(node.absolutePath)) {
                 expansionTimer.current = setTimeout(() => {
                     logger.log(`Hover-expanding node: ${node.name}`);
@@ -6096,7 +6093,9 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         e.preventDefault();
         e.stopPropagation();
         logger.log(`Drag Leave from node: ${node.name}`);
-        setDropTarget(null);
+        if (dropTarget === node.absolutePath) {
+            setDropTarget(null);
+        }
         if (expansionTimer.current) {
             clearTimeout(expansionTimer.current);
             expansionTimer.current = null;
@@ -6129,7 +6128,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     };
     
     const handleDragOver = (e: React.DragEvent) => {
-        e.preventDefault(); // This is CRITICAL for onDrop to fire.
+        e.preventDefault();
         e.stopPropagation();
     };
 
@@ -6352,7 +6351,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 </file>
 
 <file path="src/client/views/context-chooser.view/view.scss">
-/* Updated on: C56 (Refined drag-and-drop styling) */
+/* Updated on: C57 (Add prominent drag-and-drop styling) */
 body {
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -6712,8 +6711,8 @@ body {
 
 /* Drag and Drop style */
 .treenode-li.drop-target > .treenode-item-wrapper {
-    background-color: var(--vscode-list-dropBackground);
-    outline: 1px solid var(--vscode-focusBorder);
+    background-color: var(--vscode-list-dropBackground) !important;
+    outline: 1px solid var(--vscode-focusBorder) !important;
 }
 
 .treenode-item-wrapper {
@@ -7164,7 +7163,7 @@ const App = () => {
     };
     
     const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
-        event.preventDefault(); // This is CRITICAL for onDrop to fire.
+        event.preventDefault();
         event.stopPropagation();
         logger.log("Drag over main view.");
     };
@@ -7172,8 +7171,8 @@ const App = () => {
     const handleDragEnter = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         event.stopPropagation();
-        logger.log('Drag ENTER on main container.');
         if (event.dataTransfer.types.includes('Files')) {
+            logger.log('Drag ENTER on main container with files.');
             setIsDraggingOver(true);
         }
     };
@@ -7181,7 +7180,6 @@ const App = () => {
     const handleDragLeave = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         event.stopPropagation();
-        // Only deactivate if leaving the container entirely, not just moving to a child
         if (event.currentTarget.contains(event.relatedTarget as Node)) {
             return;
         }

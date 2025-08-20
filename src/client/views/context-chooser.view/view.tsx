@@ -243,7 +243,7 @@ const App = () => {
     };
     
     const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
-        event.preventDefault(); // This is CRITICAL for onDrop to fire.
+        event.preventDefault();
         event.stopPropagation();
         logger.log("Drag over main view.");
     };
@@ -251,8 +251,8 @@ const App = () => {
     const handleDragEnter = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         event.stopPropagation();
-        logger.log('Drag ENTER on main container.');
         if (event.dataTransfer.types.includes('Files')) {
+            logger.log('Drag ENTER on main container with files.');
             setIsDraggingOver(true);
         }
     };
@@ -260,7 +260,6 @@ const App = () => {
     const handleDragLeave = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         event.stopPropagation();
-        // Only deactivate if leaving the container entirely, not just moving to a child
         if (event.currentTarget.contains(event.relatedTarget as Node)) {
             return;
         }

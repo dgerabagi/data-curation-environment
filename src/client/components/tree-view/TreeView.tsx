@@ -225,7 +225,6 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         logger.log(`Drag Enter on node: ${node.name}`);
         if (node.children && node.absolutePath !== draggedPath) {
             setDropTarget(node.absolutePath);
-            // Hover-to-expand logic
             if (!expandedNodes.includes(node.absolutePath)) {
                 expansionTimer.current = setTimeout(() => {
                     logger.log(`Hover-expanding node: ${node.name}`);
@@ -239,7 +238,9 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         e.preventDefault();
         e.stopPropagation();
         logger.log(`Drag Leave from node: ${node.name}`);
-        setDropTarget(null);
+        if (dropTarget === node.absolutePath) {
+            setDropTarget(null);
+        }
         if (expansionTimer.current) {
             clearTimeout(expansionTimer.current);
             expansionTimer.current = null;
@@ -272,7 +273,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     };
     
     const handleDragOver = (e: React.DragEvent) => {
-        e.preventDefault(); // This is CRITICAL for onDrop to fire.
+        e.preventDefault();
         e.stopPropagation();
     };
 
