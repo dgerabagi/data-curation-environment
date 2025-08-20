@@ -12,7 +12,7 @@ import { ProblemCountsMap } from "@/common/ipc/channels.type";
 import { Action, MoveActionPayload } from "./action.service";
 // @ts-ignore - This is a workaround for a bug in pdf-parse that causes an ENOENT error in VS Code extensions.
 import pdf from 'pdf-parse/lib/pdf-parse.js';
-import * as xlsx from 'xlsx';
+import * as ExcelJS from 'exceljs';
 
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
@@ -411,6 +411,59 @@ export class FSService {
         }
     }
 
+    private _worksheetToMarkdown(worksheet: ExcelJS.Worksheet): string {
+        let markdown = "";
+        const rows: (string | number | null)[][] = [];
+        let colWidths: number[] = [];
+    
+        worksheet.eachRow((row, rowNumber) => {
+            const rowValues: (string | number | null)[] = [];
+            row.eachCell({ includeEmpty: true }, (cell, colNumber) => {
+                const cellValue = cell.value ? cell.value.toString() : '';
+                const sanitizedValue = cellValue.replace(/\|/g, '\\|').replace(/\r?\n/g, '<br/>');
+                rowValues[colNumber - 1] = sanitizedValue;
+    
+                if (!colWidths[colNumber - 1] || sanitizedValue.length > colWidths[colNumber - 1]) {
+                    colWidths[colNumber - 1] = sanitizedValue.length;
+                }
+            });
+            rows.push(rowValues);
+        });
+    
+        if (rows.length === 0) return "";
+    
+        const maxCols = colWidths.length;
+    
+        // Header
+        const header = rows[0];
+        let headerString = "|";
+        for (let i = 0; i < maxCols; i++) {
+            const cell = header[i] || '';
+            headerString += ` ${cell.toString().padEnd(colWidths[i])} |`;
+        }
+        markdown += headerString + "\n";
+    
+        // Separator
+        let separatorString = "|";
+        for (let i = 0; i < maxCols; i++) {
+            separatorString += `${'-'.repeat(colWidths[i] + 2)}|`;
+        }
+        markdown += separatorString + "\n";
+    
+        // Body
+        for (let i = 1; i < rows.length; i++) {
+            const row = rows[i];
+            let rowString = "|";
+            for (let j = 0; j < maxCols; j++) {
+                const cell = row[j] || '';
+                rowString += ` ${cell.toString().padEnd(colWidths[j])} |`;
+            }
+            markdown += rowString + "\n";
+        }
+    
+        return markdown;
+    }
+
     public async handleExcelToTextRequest(filePath: string, serverIpc: ServerPostMessageManager) {
         if (this.excelMarkdownCache.has(filePath)) {
             const cached = this.excelMarkdownCache.get(filePath)!;
@@ -421,16 +474,22 @@ export class FSService {
 
         try {
             Services.loggerService.log(`[Excel] Processing: ${filePath}`);
-            const buffer = await fs.readFile(filePath);
-            Services.loggerService.log(`[Excel] File buffer read. Size: ${buffer.length}. Parsing with xlsx...`);
-            const workbook = xlsx.read(buffer, { type: 'buffer' });
-            Services.loggerService.log(`[Excel] Workbook parsed. Found sheets: ${workbook.SheetNames.join(', ')}`);
+            const workbook = new ExcelJS.Workbook();
+            const ext = path.extname(filePath).toLowerCase();
+            if (ext === '.csv') {
+                Services.loggerService.log(`[Excel] Detected CSV. Reading via workbook.csv.readFile...`);
+                await workbook.csv.readFile(filePath);
+            } else {
+                Services.loggerService.log(`[Excel] Detected Excel format. Reading via workbook.xlsx.readFile...`);
+                await workbook.xlsx.readFile(filePath);
+            }
+            
+            Services.loggerService.log(`[Excel] Workbook parsed. Found sheets: ${workbook.worksheets.map(w => w.name).join(', ')}`);
             let markdown = '';
 
-            workbook.SheetNames.forEach(sheetName => {
-                const worksheet = workbook.Sheets[sheetName];
-                markdown += `### Sheet: ${sheetName}\n\n`;
-                markdown += (xlsx.utils as any).sheet_to_markdown(worksheet);
+            workbook.eachSheet((worksheet) => {
+                markdown += `### Sheet: ${worksheet.name}\n\n`;
+                markdown += this._worksheetToMarkdown(worksheet);
                 markdown += '\n\n';
             });
             Services.loggerService.log(`[Excel] Markdown conversion complete.`);
