@@ -33,6 +33,7 @@ const DEFAULT_IGNORE = new Set([
   '.npm',
   '.yarn',
   'data-curation-environment-0.0.1.vsix',
+  'data-curation-environment-0.0.2.vsix',
   'flattened_repo.md',
   'prompt.md'
 ]);

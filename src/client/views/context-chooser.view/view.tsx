@@ -13,6 +13,8 @@ import SelectedFilesView from '../../components/SelectedFilesView';
 import { addRemovePathInSelectedFiles, removePathsFromSelected } from '@/client/components/file-tree/FileTree.utils';
 import { SelectionSet, ProblemCountsMap } from '@/common/ipc/channels.type';
 
+const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
+
 const App = () => {
     const [files, setFiles] = useState<FileNode[]>([]);
     const [checkedFiles, setCheckedFiles] = useState<string[]>([]);
@@ -39,6 +41,7 @@ const App = () => {
     };
 
     const updateCheckedFiles = useCallback((path: string) => {
+        const extension = path.split('.').pop()?.toLowerCase() || '';
         const isChecking = !checkedFiles.some(checkedPath => path.startsWith(checkedPath));
 
         setCheckedFiles(currentChecked => {
@@ -47,9 +50,14 @@ const App = () => {
             return newChecked;
         });
 
-        if (isChecking && path.toLowerCase().endsWith('.pdf')) {
-            logger.log(`Requesting text for PDF: ${path}`);
-            clientIpc.sendToServer(ClientToServerChannel.RequestPdfToText, { path });
+        if (isChecking) {
+            if (extension === 'pdf') {
+                logger.log(`Requesting text for PDF: ${path}`);
+                clientIpc.sendToServer(ClientToServerChannel.RequestPdfToText, { path });
+            } else if (EXCEL_EXTENSIONS.has(`.${extension}`)) {
+                logger.log(`Requesting text for Excel/CSV: ${path}`);
+                clientIpc.sendToServer(ClientToServerChannel.RequestExcelToText, { path });
+            }
         }
     }, [clientIpc, files, checkedFiles]);
 

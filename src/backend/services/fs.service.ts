@@ -12,8 +12,10 @@ import { ProblemCountsMap } from "@/common/ipc/channels.type";
 import { Action, MoveActionPayload } from "./action.service";
 // @ts-ignore - This is a workaround for a bug in pdf-parse that causes an ENOENT error in VS Code extensions.
 import pdf from 'pdf-parse/lib/pdf-parse.js';
+import * as xlsx from 'xlsx';
 
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
+const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const EXCLUSION_PATTERNS = ['node_modules', 'dist', 'out', '.git', 'dce_cache'];
 
 // Helper to normalize paths to use forward slashes, which is consistent in webviews
@@ -27,6 +29,7 @@ export class FSService {
     private gitApi?: GitAPI;
     private filesToIgnoreForAutoAdd: Set<string> = new Set();
     private pdfTextCache = new Map<string, { text: string; tokenCount: number }>();
+    private excelMarkdownCache = new Map<string, { markdown: string; tokenCount: number }>();
 
     constructor(gitApi?: GitAPI) {
         this.gitApi = gitApi;
@@ -113,34 +116,40 @@ export class FSService {
         });
     }
 
-    private async getFileStats(filePath: string): Promise<{ tokenCount: number, sizeInBytes: number, isImage: boolean, extension: string, isPdf: boolean }> {
+    private async getFileStats(filePath: string): Promise<{ tokenCount: number, sizeInBytes: number, isImage: boolean, extension: string, isPdf: boolean, isExcel: boolean }> {
         const extension = path.extname(filePath).toLowerCase();
         try {
             const stats = await fs.stat(filePath);
             const isImage = IMAGE_EXTENSIONS.has(extension);
             const isPdf = extension === '.pdf';
+            const isExcel = EXCEL_EXTENSIONS.has(extension);
             
             if (isImage) {
-                return { tokenCount: 0, sizeInBytes: stats.size, isImage, extension, isPdf: false };
+                return { tokenCount: 0, sizeInBytes: stats.size, isImage, extension, isPdf: false, isExcel: false };
             }
 
             if (isPdf) {
                  const cached = this.pdfTextCache.get(filePath);
-                 return { tokenCount: cached?.tokenCount || 0, sizeInBytes: stats.size, isImage: false, extension, isPdf: true };
+                 return { tokenCount: cached?.tokenCount || 0, sizeInBytes: stats.size, isImage: false, extension, isPdf: true, isExcel: false };
+            }
+            
+            if (isExcel) {
+                const cached = this.excelMarkdownCache.get(filePath);
+                return { tokenCount: cached?.tokenCount || 0, sizeInBytes: stats.size, isImage: false, extension, isPdf: false, isExcel: true };
             }
 
             if (stats.size > 5_000_000) {
                 Services.loggerService.warn(`Skipping token count for large file: ${filePath} (${stats.size} bytes)`);
-                return { tokenCount: 0, sizeInBytes: stats.size, isImage: false, extension, isPdf: false };
+                return { tokenCount: 0, sizeInBytes: stats.size, isImage: false, extension, isPdf: false, isExcel: false };
             }
             
             const content = await fs.readFile(filePath, 'utf-8');
             const tokenCount = Math.ceil(content.length / 4);
-            return { tokenCount, sizeInBytes: stats.size, isImage: false, extension, isPdf: false };
+            return { tokenCount, sizeInBytes: stats.size, isImage: false, extension, isPdf: false, isExcel: false };
 
         } catch (error: any) {
             Services.loggerService.warn(`Could not get stats for ${filePath}: ${error.message}`);
-            return { tokenCount: 0, sizeInBytes: 0, isImage: false, extension, isPdf: false };
+            return { tokenCount: 0, sizeInBytes: 0, isImage: false, extension, isPdf: false, isExcel: false };
         }
     }
 
@@ -243,7 +252,7 @@ export class FSService {
             name: rootName,
             absolutePath: normalizePath(rootPath),
             children: [],
-            tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false,
+            tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false,
             gitStatus: gitStatusMap.get(normalizePath(rootPath)),
             problemCounts: problemCountsMap[normalizePath(rootPath)]
         };
@@ -271,7 +280,7 @@ export class FSService {
                         name,
                         absolutePath: childPath,
                         children: await this._traverseDirectory(childUri, gitStatusMap, problemCountsMap),
-                        tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false,
+                        tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false,
                         gitStatus: gitStatusMap.get(childPath),
                         problemCounts: problemCountsMap[childPath]
                     };
@@ -341,6 +350,10 @@ export class FSService {
         return this.pdfTextCache.get(filePath);
     }
 
+    public getVirtualExcelContent(filePath: string) {
+        return this.excelMarkdownCache.get(filePath);
+    }
+
     // --- File Operations ---
 
     public async handleCopyFileFromUri(sourceUriString: string, targetDir: string) {
@@ -397,6 +410,38 @@ export class FSService {
             Services.loggerService.error(`Error in handlePdfToTextRequest for ${filePath}: ${error.message}`);
             // Send an update that signifies an error state
             serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: 0, error: errorMessage });
+        }
+    }
+
+    public async handleExcelToTextRequest(filePath: string, serverIpc: ServerPostMessageManager) {
+        if (this.excelMarkdownCache.has(filePath)) {
+            const cached = this.excelMarkdownCache.get(filePath)!;
+            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: cached.tokenCount });
+            return;
+        }
+
+        try {
+            const buffer = await fs.readFile(filePath);
+            const workbook = xlsx.read(buffer, { type: 'buffer' });
+            let markdown = '';
+
+            workbook.SheetNames.forEach(sheetName => {
+                const worksheet = workbook.Sheets[sheetName];
+                markdown += `### Sheet: ${sheetName}\n\n`;
+                markdown += xlsx.utils.sheet_to_markdown(worksheet);
+                markdown += '\n\n';
+            });
+
+            const tokenCount = Math.ceil(markdown.length / 4);
+            this.excelMarkdownCache.set(filePath, { markdown, tokenCount });
+            Services.loggerService.log(`Parsed and cached Excel/CSV: ${filePath} (${tokenCount} tokens)`);
+
+            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: tokenCount });
+
+        } catch (error: any) {
+             const errorMessage = `Failed to parse Excel/CSV file: ${path.basename(filePath)}`;
+             Services.loggerService.error(`Error in handleExcelToTextRequest for ${filePath}: ${error.message}`);
+             serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: 0, error: errorMessage });
         }
     }
 

@@ -18,8 +18,9 @@ export enum ClientToServerChannel {
     RequestAddFileFromBuffer = "clientToServer.requestAddFileFromBuffer", // For OS drag-drop
     RequestCopyFileFromUri = "clientToServer.requestCopyFileFromUri", // For VS Code explorer drag-drop
 
-    // PDF Handling
+    // Special File Handling
     RequestPdfToText = "clientToServer.requestPdfToText",
+    RequestExcelToText = "clientToServer.requestExcelToText",
 
     // Selection Persistence
     SaveCurrentSelection = "clientToServer.saveCurrentSelection",

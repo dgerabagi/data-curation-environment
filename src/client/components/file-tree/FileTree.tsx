@@ -3,7 +3,7 @@ import TreeView from '../tree-view/TreeView';
 import { FileNode } from '@/common/types/file-node';
 import Checkbox from '../Checkbox';
 import {
-    VscFile, VscFolder, VscFolderOpened, VscJson, VscMarkdown, VscSymbolFile, VscSymbolNumeric, VscFiles, VscError, VscWarning
+    VscFile, VscFolder, VscFolderOpened, VscJson, VscMarkdown, VscSymbolFile, VscSymbolNumeric, VscFiles, VscError, VscWarning, VscTable
 } from 'react-icons/vsc';
 import { SiTypescript, SiReact, SiJavascript, SiSass } from 'react-icons/si';
 import { formatLargeNumber, formatBytes, formatNumberWithCommas } from '@/common/utils/formatting';
@@ -22,6 +22,7 @@ interface FileTreeProps {
   expandAllTrigger?: number;
   searchTerm: string;
   problemMap: ProblemCountsMap;
+  onNodeDrop?: (event: React.DragEvent, node: FileNode) => void;
 }
 
 const getFileIcon = (fileName: string) => {
@@ -34,6 +35,7 @@ const getFileIcon = (fileName: string) => {
         case 'md': return <VscMarkdown />;
         case 'scss': case 'css': return <SiSass color="#CF649A"/>;
         case 'svg': case 'png': case 'jpg': case 'jpeg': case 'ico': case 'webp': return <VscSymbolFile />;
+        case 'xlsx': case 'xls': case 'csv': return <VscTable color="#217346" />;
         default: return <VscFile />;
     }
 };
@@ -71,7 +73,7 @@ const filterTree = (nodes: FileNode[], term: string): FileNode[] => {
 };
 
 
-const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, updateCheckedFiles, collapseTrigger, expandAllTrigger, searchTerm, problemMap }) => {
+const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, updateCheckedFiles, collapseTrigger, expandAllTrigger, searchTerm, problemMap, onNodeDrop }) => {
     const [contextMenu, setContextMenu] = useState<{ x: number, y: number, node: FileNode } | null>(null);
     const [renamingPath, setRenamingPath] = useState<string | null>(null);
     const [renameValue, setRenameValue] = useState('');
@@ -138,35 +140,6 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
         };
         return calculate;
     }, [checkedFiles]);
-
-    const handleNodeDrop = (event: React.DragEvent, dropNode: FileNode) => {
-        logger.log(`--- DROP ON NODE in FileTree: ${dropNode.name} ---`);
-        let targetDir = dropNode.absolutePath;
-        if (!dropNode.children) { // If dropped on a file, use its parent
-            targetDir = dropNode.absolutePath.substring(0, dropNode.absolutePath.lastIndexOf('/'));
-        }
-        logger.log(`Drop target directory: ${targetDir}`);
-
-        if (event.dataTransfer.files && event.dataTransfer.files.length > 0) {
-            const filesArray = Array.from(event.dataTransfer.files);
-            filesArray.forEach((file: File) => {
-                const reader = new FileReader();
-                reader.onload = (readEvent) => {
-                    const buffer = readEvent.target?.result;
-                    if (buffer instanceof ArrayBuffer) {
-                        const data = new Uint8Array(buffer);
-                        const finalTargetPath = `${targetDir}/${file.name}`.replace(/\\/g, '/');
-                        logger.log(`Sending file ${file.name} to backend for creation at ${finalTargetPath}`);
-                        clientIpc.sendToServer(ClientToServerChannel.RequestAddFileFromBuffer, { targetPath: finalTargetPath, data });
-                    }
-                };
-                reader.onerror = () => logger.error(`FileReader error for file: ${file.name}`);
-                reader.readAsArrayBuffer(file);
-            });
-        } else {
-            logger.warn('Drop event on node but no files found.');
-        }
-    };
 
     const renderFileNodeContent = (node: FileNode, isExpanded: boolean) => {
         const isDirectory = Array.isArray(node.children);
@@ -266,7 +239,7 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
                 expandAllTrigger={expandAllTrigger}
                 activeFile={activeFile} 
                 updateCheckedFiles={updateCheckedFiles}
-                onNodeDrop={handleNodeDrop}
+                onNodeDrop={onNodeDrop}
             />
             {contextMenu && <ContextMenu menu={contextMenu} onClose={() => setContextMenu(null)} onRename={handleRename} />}
         </div>

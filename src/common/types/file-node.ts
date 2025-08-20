@@ -8,6 +8,7 @@ export interface FileNode {
     sizeInBytes: number;
     extension: string;
     isPdf: boolean;
+    isExcel: boolean;
     gitStatus?: string; // e.g., 'M', 'U', 'A', 'D', 'C'
     problemCounts?: { error: number; warning: number; };
     error?: string; // To store processing errors, e.g., "File not found"

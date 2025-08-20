@@ -72,6 +72,10 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         fsService.handlePdfToTextRequest(data.path, serverIpc);
     });
 
+    serverIpc.onClientMessage(ClientToServerChannel.RequestExcelToText, (data) => {
+        fsService.handleExcelToTextRequest(data.path, serverIpc);
+    });
+
     serverIpc.onClientMessage(ClientToServerChannel.RequestUndo, () => {
         actionService.undo();
     });
