@@ -52,9 +52,15 @@ export class FlattenerService {
             await fs.writeFile(outputFilePath, outputContent, 'utf-8');
             vscode.window.showInformationMessage(`Successfully flattened ${validResults.length} files to flattened_repo.md.`);
 
+            // Open the generated file
+            Services.loggerService.log(`Opening flattened file: ${outputFilePath}`);
+            await Services.fsService.handleOpenFileRequest(outputFilePath);
+
             const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
             if (serverIpc) {
                 Services.loggerService.log("Triggering file focus after flattening.");
+                // A short delay helps ensure the file watcher has time to notify VS Code of the new file
+                // before we try to focus it in our tree.
                 setTimeout(() => {
                     serverIpc.sendToClient(ServerToClientChannel.FocusFile, { path: outputFilePath });
                 }, 500);
@@ -165,6 +171,7 @@ export class FlattenerService {
         
         if (extension === '.pdf') {
             const virtualContent = Services.fsService.getVirtualPdfContent(filePath);
+            Services.loggerService.log(`[Flattener] PDF check for ${filePath}. Cache result: ${virtualContent ? 'FOUND' : 'NOT FOUND'}`);
             if (virtualContent) {
                 return {
                     filePath,
@@ -182,6 +189,7 @@ export class FlattenerService {
 
         if (EXCEL_EXTENSIONS.has(extension)) {
             const virtualContent = Services.fsService.getVirtualExcelContent(filePath);
+            Services.loggerService.log(`[Flattener] Excel/CSV check for ${filePath}. Cache result: ${virtualContent ? 'FOUND' : 'NOT FOUND'}`);
             if (virtualContent) {
                 return {
                     filePath,

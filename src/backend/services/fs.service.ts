@@ -347,11 +347,21 @@ export class FSService {
     }
 
     public getVirtualPdfContent(filePath: string) {
-        return this.pdfTextCache.get(filePath);
+        if (this.pdfTextCache.has(filePath)) {
+            Services.loggerService.log(`[Cache] HIT for PDF: ${filePath}`);
+            return this.pdfTextCache.get(filePath);
+        }
+        Services.loggerService.warn(`[Cache] MISS for PDF: ${filePath}`);
+        return undefined;
     }
 
     public getVirtualExcelContent(filePath: string) {
-        return this.excelMarkdownCache.get(filePath);
+        if (this.excelMarkdownCache.has(filePath)) {
+            Services.loggerService.log(`[Cache] HIT for Excel/CSV: ${filePath}`);
+            return this.excelMarkdownCache.get(filePath);
+        }
+        Services.loggerService.warn(`[Cache] MISS for Excel/CSV: ${filePath}`);
+        return undefined;
     }
 
     // --- File Operations ---
@@ -385,6 +395,7 @@ export class FSService {
     }
 
     public async handlePdfToTextRequest(filePath: string, serverIpc: ServerPostMessageManager) {
+        Services.loggerService.log(`[PDF] Starting text extraction for: ${filePath}`);
         if (this.pdfTextCache.has(filePath)) {
             const cached = this.pdfTextCache.get(filePath)!;
             serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: cached.tokenCount });
@@ -393,12 +404,14 @@ export class FSService {
 
         try {
             const buffer = await fs.readFile(filePath);
+            Services.loggerService.log(`[PDF] Read file into buffer. Size: ${buffer.length} bytes.`);
             const data = await pdf(buffer);
-            const text = data.text;
+            const text = data.text || ''; // Ensure text is not undefined
+            Services.loggerService.log(`[PDF] Extracted text length: ${text.length} characters.`);
             const tokenCount = Math.ceil(text.length / 4);
             
             this.pdfTextCache.set(filePath, { text, tokenCount });
-            Services.loggerService.log(`Parsed and cached PDF: ${filePath} (${tokenCount} tokens)`);
+            Services.loggerService.log(`[PDF] Parsed and cached PDF: ${filePath} (${tokenCount} tokens)`);
 
             serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: tokenCount });
         } catch (error: any) {
@@ -414,6 +427,7 @@ export class FSService {
     }
 
     public async handleExcelToTextRequest(filePath: string, serverIpc: ServerPostMessageManager) {
+        Services.loggerService.log(`[Excel] Starting markdown conversion for: ${filePath}`);
         if (this.excelMarkdownCache.has(filePath)) {
             const cached = this.excelMarkdownCache.get(filePath)!;
             serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: cached.tokenCount });
@@ -422,19 +436,23 @@ export class FSService {
 
         try {
             const buffer = await fs.readFile(filePath);
+            Services.loggerService.log(`[Excel] Read file into buffer. Size: ${buffer.length} bytes.`);
             const workbook = xlsx.read(buffer, { type: 'buffer' });
             let markdown = '';
+            Services.loggerService.log(`[Excel] Parsed workbook. Found sheets: ${workbook.SheetNames.join(', ')}`);
 
             workbook.SheetNames.forEach(sheetName => {
                 const worksheet = workbook.Sheets[sheetName];
                 markdown += `### Sheet: ${sheetName}\n\n`;
-                markdown += xlsx.utils.sheet_to_markdown(worksheet);
+                // FIX: Cast to any to bypass incorrect type definitions
+                markdown += (xlsx.utils as any).sheet_to_markdown(worksheet);
                 markdown += '\n\n';
             });
+            Services.loggerService.log(`[Excel] Converted to markdown. Length: ${markdown.length} characters.`);
 
             const tokenCount = Math.ceil(markdown.length / 4);
             this.excelMarkdownCache.set(filePath, { markdown, tokenCount });
-            Services.loggerService.log(`Parsed and cached Excel/CSV: ${filePath} (${tokenCount} tokens)`);
+            Services.loggerService.log(`[Excel] Parsed and cached Excel/CSV: ${filePath} (${tokenCount} tokens)`);
 
             serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: tokenCount });
 

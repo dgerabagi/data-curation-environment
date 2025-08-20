@@ -69,10 +69,12 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestPdfToText, (data) => {
+        loggerService.log(`[IPC] Received RequestPdfToText for: ${data.path}`);
         fsService.handlePdfToTextRequest(data.path, serverIpc);
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestExcelToText, (data) => {
+        loggerService.log(`[IPC] Received RequestExcelToText for: ${data.path}`);
         fsService.handleExcelToTextRequest(data.path, serverIpc);
     });
 

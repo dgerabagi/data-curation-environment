@@ -3,20 +3,10 @@ const CopyPlugin = require("copy-webpack-plugin");
 const webpack = require('webpack');
 
 /** @type {import('webpack').Configuration} */
-const config = {
-    target: 'node',
-    mode: 'none',
-    entry: {
-        extension: './src/extension.ts',
-        contextChooserView: './src/client/views/context-chooser.view/view.tsx',
-    },
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: '[name].js',
-        libraryTarget: 'commonjs2'
-    },
+const baseConfig = {
+    mode: 'none', // this leaves the source code as close as possible to the original (when packaging we set this to 'production')
     externals: {
-        vscode: 'commonjs vscode'
+        vscode: 'commonjs vscode' // the vscode-module is created on-the-fly and must be excluded.
     },
     resolve: {
         extensions: ['.ts', '.js', '.tsx', '.jsx'],
@@ -47,6 +37,38 @@ const config = {
             },
         ]
     },
+    devtool: 'nosources-source-map',
+    infrastructureLogging: {
+        level: "log",
+    },
+};
+
+/** @type {import('webpack').Configuration} */
+const extensionConfig = {
+    ...baseConfig,
+    target: 'node',
+    entry: {
+        extension: './src/extension.ts',
+    },
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'extension.js',
+        libraryTarget: 'commonjs2'
+    },
+};
+
+/** @type {import('webpack').Configuration} */
+const webviewConfig = {
+    ...baseConfig,
+    target: 'web',
+    entry: {
+        contextChooserView: './src/client/views/context-chooser.view/view.tsx',
+    },
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'contextChooserView.js',
+        libraryTarget: 'commonjs2'
+    },
     plugins: [
         new CopyPlugin({
             patterns: [{ from: "public", to: "public" }],
@@ -55,9 +77,7 @@ const config = {
             process: 'process/browser',
         }),
     ],
-    devtool: 'nosources-source-map',
-    infrastructureLogging: {
-        level: "log",
-    },
 };
-module.exports = [config];
+
+
+module.exports = [extensionConfig, webviewConfig];

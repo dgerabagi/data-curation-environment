@@ -1,23 +1,23 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-20T03:45:16.708Z
+  Date Generated: 2025-08-20T03:58:42.222Z
   ---
   Total Files: 173
-  Total Lines: 14246
-  Total Characters: 613054
-  Approx. Tokens: 153328
+  Total Lines: 14273
+  Total Characters: 614094
+  Approx. Tokens: 153588
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
 2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
-3. src\backend\services\fs.service.ts (6385 tokens)
+3. src\backend\services\fs.service.ts (6406 tokens)
 4. src\client\views\context-chooser.view\view.tsx (4889 tokens)
 5. src\client\components\tree-view\TreeView.tsx (3780 tokens)
 6. src\client\views\context-chooser.view\view.scss (3638 tokens)
-7. src\client\components\SelectedFilesView.tsx (3275 tokens)
-8. src\backend\services\flattener.service.ts (3206 tokens)
+7. src\backend\services\flattener.service.ts (3299 tokens)
+8. src\client\components\SelectedFilesView.tsx (3275 tokens)
 9. src\client\components\file-tree\FileTree.tsx (2760 tokens)
 10. src\Artifacts\A0. DCE Master Artifact List.md (2732 tokens)
 
@@ -65,8 +65,8 @@
 41. src\backend\commands\commands.ts - Lines: 88 - Chars: 3807 - Tokens: 952
 42. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
 43. src\backend\services\action.service.ts - Lines: 73 - Chars: 2471 - Tokens: 618
-44. src\backend\services\flattener.service.ts - Lines: 295 - Chars: 12823 - Tokens: 3206
-45. src\backend\services\fs.service.ts - Lines: 552 - Chars: 25539 - Tokens: 6385
+44. src\backend\services\flattener.service.ts - Lines: 301 - Chars: 13194 - Tokens: 3299
+45. src\backend\services\fs.service.ts - Lines: 553 - Chars: 25622 - Tokens: 6406
 46. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
 47. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
 48. src\backend\services\services.ts - Lines: 25 - Chars: 982 - Tokens: 246
@@ -194,7 +194,7 @@
 170. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
 171. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
 172. tsconfig.json - Lines: 19 - Chars: 457 - Tokens: 115
-173. webpack.config.js - Lines: 63 - Chars: 1710 - Tokens: 428
+173. webpack.config.js - Lines: 83 - Chars: 2296 - Tokens: 574
 
 <file path=".gitignore">
 node_modules
@@ -4105,9 +4105,15 @@ export class FlattenerService {
             await fs.writeFile(outputFilePath, outputContent, 'utf-8');
             vscode.window.showInformationMessage(`Successfully flattened ${validResults.length} files to flattened_repo.md.`);
 
+            // Open the generated file
+            Services.loggerService.log(`Opening flattened file: ${outputFilePath}`);
+            await Services.fsService.handleOpenFileRequest(outputFilePath);
+
             const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
             if (serverIpc) {
                 Services.loggerService.log("Triggering file focus after flattening.");
+                // A short delay helps ensure the file watcher has time to notify VS Code of the new file
+                // before we try to focus it in our tree.
                 setTimeout(() => {
                     serverIpc.sendToClient(ServerToClientChannel.FocusFile, { path: outputFilePath });
                 }, 500);
@@ -4779,7 +4785,8 @@ export class FSService {
             workbook.SheetNames.forEach(sheetName => {
                 const worksheet = workbook.Sheets[sheetName];
                 markdown += `### Sheet: ${sheetName}\n\n`;
-                markdown += xlsx.utils.sheet_to_markdown(worksheet);
+                // FIX: Cast to any to bypass incorrect type definitions
+                markdown += (xlsx.utils as any).sheet_to_markdown(worksheet);
                 markdown += '\n\n';
             });
 
@@ -14834,20 +14841,10 @@ const CopyPlugin = require("copy-webpack-plugin");
 const webpack = require('webpack');
 
 /** @type {import('webpack').Configuration} */
-const config = {
-    target: 'node',
-    mode: 'none',
-    entry: {
-        extension: './src/extension.ts',
-        contextChooserView: './src/client/views/context-chooser.view/view.tsx',
-    },
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: '[name].js',
-        libraryTarget: 'commonjs2'
-    },
+const baseConfig = {
+    mode: 'none', // this leaves the source code as close as possible to the original (when packaging we set this to 'production')
     externals: {
-        vscode: 'commonjs vscode'
+        vscode: 'commonjs vscode' // the vscode-module is created on-the-fly and must be excluded.
     },
     resolve: {
         extensions: ['.ts', '.js', '.tsx', '.jsx'],
@@ -14878,6 +14875,38 @@ const config = {
             },
         ]
     },
+    devtool: 'nosources-source-map',
+    infrastructureLogging: {
+        level: "log",
+    },
+};
+
+/** @type {import('webpack').Configuration} */
+const extensionConfig = {
+    ...baseConfig,
+    target: 'node',
+    entry: {
+        extension: './src/extension.ts',
+    },
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'extension.js',
+        libraryTarget: 'commonjs2'
+    },
+};
+
+/** @type {import('webpack').Configuration} */
+const webviewConfig = {
+    ...baseConfig,
+    target: 'web',
+    entry: {
+        contextChooserView: './src/client/views/context-chooser.view/view.tsx',
+    },
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'contextChooserView.js',
+        libraryTarget: 'commonjs2'
+    },
     plugins: [
         new CopyPlugin({
             patterns: [{ from: "public", to: "public" }],
@@ -14886,11 +14915,9 @@ const config = {
             process: 'process/browser',
         }),
     ],
-    devtool: 'nosources-source-map',
-    infrastructureLogging: {
-        level: "log",
-    },
 };
-module.exports = [config];
+
+
+module.exports = [extensionConfig, webviewConfig];
 </file>
 
