@@ -44,41 +44,68 @@ export const addRemovePathInSelectedFiles = (
   path: string,
   selectedFiles: string[]
 ): string[] => {
+    logger.log(`[Selection] Toggling path: ${path}`);
     const node = getFileNodeByPath(fileTree, path);
-    if (!node) return selectedFiles;
+    if (!node) {
+        logger.error(`[Selection] Node not found for path: ${path}`);
+        return selectedFiles;
+    }
 
-    let newSelectedFiles = [...selectedFiles];
-
-    const isDirectlySelected = newSelectedFiles.includes(path);
-    const selectedAncestor = newSelectedFiles.find(ancestor => path.startsWith(ancestor + '/') && path !== ancestor);
+    const currentSelection = new Set(selectedFiles);
+    const isDirectlySelected = currentSelection.has(path);
+    const selectedAncestor = selectedFiles.find(ancestor => path.startsWith(ancestor + '/') && path !== ancestor);
 
     const isEffectivelySelected = isDirectlySelected || !!selectedAncestor;
+    logger.log(`[Selection] isDirectlySelected: ${isDirectlySelected}, hasSelectedAncestor: ${!!selectedAncestor}`);
 
     if (isEffectivelySelected) {
-        // UNCHECKING
+        // --- UNCHECKING ---
+        logger.log(`[Selection] Unchecking logic initiated.`);
         if (selectedAncestor) {
-            // A child of a selected folder is being unchecked ("subtractive uncheck").
-            // This is the user's desired behavior: remove the parent and add back all files except the one clicked.
-            newSelectedFiles = newSelectedFiles.filter(p => p !== selectedAncestor);
+            logger.log(`[Selection] Performing 'subtractive uncheck'. Ancestor: ${selectedAncestor}`);
+            // A child of a selected folder is being unchecked.
             const ancestorNode = getFileNodeByPath(fileTree, selectedAncestor);
-            if (ancestorNode) {
-                const allDescendantFiles = getAllDescendantPaths(ancestorNode, true);
-                const filesToAdd = allDescendantFiles.filter(p => p !== path);
-                newSelectedFiles.push(...filesToAdd);
+            if (!ancestorNode || !ancestorNode.children) {
+                logger.error(`[Selection] Could not find ancestor node or it has no children. Aborting.`);
+                return selectedFiles;
+            }
+
+            // 1. Remove the ancestor from the selection.
+            currentSelection.delete(selectedAncestor);
+            
+            // 2. Add back all direct children of the ancestor EXCEPT the one on the path of the clicked node.
+            for (const child of ancestorNode.children) {
+                if (!path.startsWith(child.absolutePath)) {
+                    logger.log(`[Selection] Adding sibling: ${child.absolutePath}`);
+                    currentSelection.add(child.absolutePath);
+                } else {
+                    logger.log(`[Selection] Skipping branch: ${child.absolutePath}`);
+                }
             }
         } else {
-            // A directly selected item is being unchecked. Remove it and all its descendants.
-            const descendantPaths = getAllDescendantPaths(node);
-            newSelectedFiles = newSelectedFiles.filter(p => p !== path && !descendantPaths.includes(p));
+            // A directly selected item is being unchecked. Remove it.
+            logger.log(`[Selection] Unchecking directly selected item: ${path}`);
+            currentSelection.delete(path);
         }
     } else {
-        // CHECKING
-        // Remove all descendants that might be individually selected, as the parent selection now covers them.
-        newSelectedFiles = newSelectedFiles.filter(p => !p.startsWith(path + '/'));
-        newSelectedFiles.push(path);
+        // --- CHECKING ---
+        logger.log(`[Selection] Checking logic initiated.`);
+        // Remove any descendants that are already selected, as the new parent selection covers them.
+        const newSelection = new Set<string>();
+        for (const p of currentSelection) {
+            if (!p.startsWith(path + '/')) {
+                newSelection.add(p);
+            } else {
+                logger.log(`[Selection] Removing descendant '${p}' because parent '${path}' is being checked.`);
+            }
+        }
+        newSelection.add(path);
+        return Array.from(newSelection);
     }
   
-  return [...new Set(newSelectedFiles)]; // Remove duplicates for cleanliness
+  const finalSelection = Array.from(currentSelection);
+  logger.log(`[Selection] Final selection count: ${finalSelection.length}`);
+  return finalSelection;
 };
 
 export const removePathsFromSelected = (
@@ -112,7 +139,14 @@ export const removePathsFromSelected = (
 
     // 2. Remove the unwanted files from this effective set.
     for (const pathToRemove of pathsToRemove) {
-        effectiveFileSelection.delete(pathToRemove);
+        const nodeToRemove = fileMap.get(pathToRemove);
+        if (nodeToRemove) {
+            if (nodeToRemove.children) { // It's a directory
+                getAllDescendantPaths(nodeToRemove, true).forEach(file => effectiveFileSelection.delete(file));
+            } else { // It's a file
+                effectiveFileSelection.delete(pathToRemove);
+            }
+        }
     }
     logger.log(`[Batch Remove] After removal, ${effectiveFileSelection.size} files remain.`);
 

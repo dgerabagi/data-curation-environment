@@ -9,7 +9,7 @@ import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { formatLargeNumber, formatNumberWithCommas } from '@/common/utils/formatting';
 import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, VscNewFolder, VscLoading, VscSave, VscFolderLibrary, VscSettingsGear, VscCheckAll, VscSearch, VscExpandAll, VscShield } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
-import SelectedFilesView from '@/client/components/SelectedFilesView';
+import SelectedFilesView from '../../components/SelectedFilesView';
 import { addRemovePathInSelectedFiles, removePathsFromSelected } from '@/client/components/file-tree/FileTree.utils';
 import { SelectionSet, ProblemCountsMap } from '@/common/ipc/channels.type';
 
@@ -282,13 +282,13 @@ const App = () => {
         };
         files.forEach(buildFileMap);
         const addNodeAndDescendants = (node: FileNode) => {
-            if (!node.children) {
+            if (!node.children) { // It's a file
                 if (!selectedFileSet.has(node.absolutePath)) {
                     selectedFileSet.add(node.absolutePath);
                     selectedNodes.push(node);
                     totalTokens += node.tokenCount;
                 }
-            } else {
+            } else { // It's a directory
                 node.children.forEach(addNodeAndDescendants);
             }
         };
@@ -296,8 +296,9 @@ const App = () => {
             const node = fileMap.get(path);
             if (node) addNodeAndDescendants(node);
         });
-        const finalFileNodes = selectedNodes.filter(n => !n.isImage);
-        return { totalFiles: finalFileNodes.length, totalTokens, selectedFileNodes: finalFileNodes };
+        // C61 Fix: Do NOT filter out image files from the displayed list.
+        // The UI should accurately reflect what is selected.
+        return { totalFiles: selectedNodes.length, totalTokens, selectedFileNodes: selectedNodes };
     }, [checkedFiles, files]);
 
     return (

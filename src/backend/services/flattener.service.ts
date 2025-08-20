@@ -6,6 +6,7 @@ import { Services } from './services';
 import { VIEW_TYPES } from '@/common/view-types';
 import { serverIPCs } from '@/client/views';
 import { ServerToClientChannel } from '@/common/ipc/channels.enum';
+import { formatBytes } from '@/common/utils/formatting';
 
 interface FileStats {
     filePath: string;
@@ -14,6 +15,8 @@ interface FileStats {
     tokens: number;
     content: string;
     error: string | null;
+    isBinary: boolean;
+    sizeInBytes: number;
 }
 
 const BINARY_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico', '.exe', '.dll', '.bin', '.zip', '.gz', '.7z', '.mp3', '.wav', '.mov', '.mp4']);
@@ -40,13 +43,11 @@ export class FlattenerService {
 
             const fileStatsPromises = uniqueFilePaths.map(filePath => this.getFileStatsAndContent(filePath));
             const results = await Promise.all(fileStatsPromises);
-            
-            const validResults = results.filter(r => !r.error);
 
             const outputContent = this.generateOutputContent(results, rootPath, outputFilePath);
 
             await fs.writeFile(outputFilePath, outputContent, 'utf-8');
-            vscode.window.showInformationMessage(`Successfully flattened ${validResults.length} files to flattened_repo.md.`);
+            vscode.window.showInformationMessage(`Successfully flattened ${results.filter(r => !r.error).length} files to flattened_repo.md.`);
 
             const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
             if (serverIpc) {
@@ -168,10 +169,12 @@ export class FlattenerService {
                     lines: virtualContent.text.split('\n').length,
                     characters: virtualContent.text.length,
                     tokens: virtualContent.tokenCount,
-                    error: null
+                    error: null,
+                    isBinary: false,
+                    sizeInBytes: 0 // Size is not relevant for virtual content
                 };
             }
-            return { filePath, lines: 0, characters: 0, tokens: 0, content: '<!-- PDF content not processed or cached -->', error: null };
+            return { filePath, lines: 0, characters: 0, tokens: 0, content: '<!-- PDF content not processed or cached -->', error: null, isBinary: false, sizeInBytes: 0 };
         }
 
         if (BINARY_EXTENSIONS.has(extension)) {
@@ -187,9 +190,9 @@ export class FlattenerService {
                 };
 
                 const metadataContent = `<metadata>\n${JSON.stringify(metadata, null, 2)}\n</metadata>`;
-                return { filePath, lines: 0, characters: 0, tokens: 0, content: metadataContent, error: null };
+                return { filePath, lines: 0, characters: 0, tokens: 0, content: metadataContent, error: null, isBinary: true, sizeInBytes: imageMetadata.sizeInBytes };
             } catch (error: any) {
-                 return { filePath, lines: 0, characters: 0, tokens: 0, content: '', error: `Could not get stats for binary file: ${error.message}` };
+                 return { filePath, lines: 0, characters: 0, tokens: 0, content: '', error: `Could not get stats for binary file: ${error.message}`, isBinary: true, sizeInBytes: -1 };
             }
         }
 
@@ -198,9 +201,10 @@ export class FlattenerService {
             const lines = content.split('\n').length;
             const characters = content.length;
             const tokens = Math.ceil(characters / 4);
-            return { filePath, lines, characters, tokens, content, error: null };
+            const stats = await fs.stat(filePath);
+            return { filePath, lines, characters, tokens, content, error: null, isBinary: false, sizeInBytes: stats.size };
         } catch (error: any) {
-            return { filePath, lines: 0, characters: 0, tokens: 0, content: '', error: error.message };
+            return { filePath, lines: 0, characters: 0, tokens: 0, content: '', error: error.message, isBinary: false, sizeInBytes: -1 };
         }
     }
 
@@ -208,9 +212,8 @@ export class FlattenerService {
         let totalLines = 0;
         let totalCharacters = 0;
         let totalTokens = 0;
-        
+        let errorCount = 0;
         const validResults = results.filter(r => !r.error);
-        const errorCount = results.length - validResults.length;
 
         for (const res of validResults) {
             totalLines += res.lines;
@@ -245,7 +248,10 @@ export class FlattenerService {
             const relativePath = path.relative(rootDir, r.filePath);
             if (r.error) {
                 output += `${i + 1}. ${relativePath} - ERROR: ${r.error}\n`;
-            } else {
+            } else if (r.isBinary) {
+                output += `${i + 1}. ${relativePath} - [Binary] Size: ${formatBytes(r.sizeInBytes)}\n`;
+            }
+            else {
                 output += `${i + 1}. ${relativePath} - Lines: ${r.lines} - Chars: ${r.characters} - Tokens: ${r.tokens}\n`;
             }
         });
