@@ -1,12 +1,12 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-20T13:03:10.656Z
+  Date Generated: 2025-08-20T13:53:49.287Z
   ---
-  Total Files: 174
-  Total Lines: 14459
-  Total Characters: 627782
-  Approx. Tokens: 157009
+  Total Files: 180
+  Total Lines: 14882
+  Total Characters: 656901
+  Approx. Tokens: 164292
 -->
 
 <!-- Top 10 Files by Token Count -->
@@ -14,12 +14,12 @@
 2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
 3. src\backend\services\fs.service.ts (7277 tokens)
 4. src\client\views\context-chooser.view\view.tsx (5142 tokens)
-5. src\client\components\tree-view\TreeView.tsx (4105 tokens)
+5. src\client\components\tree-view\TreeView.tsx (4210 tokens)
 6. src\client\views\context-chooser.view\view.scss (3638 tokens)
 7. src\backend\services\flattener.service.ts (3373 tokens)
-8. src\client\components\SelectedFilesView.tsx (3275 tokens)
-9. src\Artifacts\A0. DCE Master Artifact List.md (2813 tokens)
-10. src\client\components\file-tree\FileTree.tsx (2760 tokens)
+8. src\Artifacts\A0. DCE Master Artifact List.md (3312 tokens)
+9. src\client\components\SelectedFilesView.tsx (3275 tokens)
+10. src\client\components\file-tree\FileTree.tsx (2804 tokens)
 
 <!-- Full File List -->
 1. .gitignore - Lines: 10 - Chars: 128 - Tokens: 32
@@ -28,8 +28,8 @@
 4. LICENSE - Lines: 21 - Chars: 1090 - Tokens: 273
 5. package.json - Lines: 78 - Chars: 2424 - Tokens: 606
 6. public\spiral.svg - Lines: 8 - Chars: 459 - Tokens: 115
-7. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 158 - Chars: 11252 - Tokens: 2813
-8. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 38 - Chars: 3311 - Tokens: 828
+7. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 182 - Chars: 13246 - Tokens: 3312
+8. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 39 - Chars: 3757 - Tokens: 940
 9. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
 10. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 117 - Chars: 9568 - Tokens: 2392
 11. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 68 - Chars: 4497 - Tokens: 1125
@@ -57,145 +57,151 @@
 33. src\Artifacts\A31. DCE - Phase 2 - Multimodal Content Extraction (PDF Images).md - Lines: 44 - Chars: 4035 - Tokens: 1009
 34. src\Artifacts\A32. DCE - Phase 1 - Excel and CSV Handling Strategy.md - Lines: 44 - Chars: 4295 - Tokens: 1074
 35. src\Artifacts\A33. DCE - Phase 1 - Copy-Paste Feature Plan.md - Lines: 42 - Chars: 4456 - Tokens: 1114
-36. src\Artifacts\A4. DCE - Analysis of The-Creator-AI Repo.md - Lines: 56 - Chars: 5722 - Tokens: 1431
-37. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
-38. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
-39. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
-40. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
-41. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
-42. src\backend\commands\commands.ts - Lines: 88 - Chars: 3807 - Tokens: 952
-43. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
-44. src\backend\services\action.service.ts - Lines: 73 - Chars: 2471 - Tokens: 618
-45. src\backend\services\flattener.service.ts - Lines: 303 - Chars: 13492 - Tokens: 3373
-46. src\backend\services\fs.service.ts - Lines: 631 - Chars: 29108 - Tokens: 7277
-47. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-48. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
-49. src\backend\services\services.ts - Lines: 25 - Chars: 982 - Tokens: 246
-50. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
-51. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
-52. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
-53. src\client\components\file-tree\FileTree.tsx - Lines: 249 - Chars: 11037 - Tokens: 2760
-54. src\client\components\file-tree\FileTree.utils.ts - Lines: 189 - Chars: 7284 - Tokens: 1821
-55. src\client\components\SelectedFilesView.tsx - Lines: 278 - Chars: 13097 - Tokens: 3275
-56. src\client\components\tree-view\TreeView.tsx - Lines: 360 - Chars: 16418 - Tokens: 4105
-57. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
-58. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
-59. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-60. src\client\views\context-chooser.view\on-message.ts - Lines: 134 - Chars: 5742 - Tokens: 1436
-61. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
-62. src\client\views\context-chooser.view\view.tsx - Lines: 389 - Chars: 20568 - Tokens: 5142
-63. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
-64. src\common\ipc\channels.enum.ts - Lines: 46 - Chars: 2422 - Tokens: 606
-65. src\common\ipc\channels.type.ts - Lines: 42 - Chars: 3150 - Tokens: 788
-66. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
-67. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-68. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-69. src\common\types\file-node.ts - Lines: 15 - Chars: 535 - Tokens: 134
-70. src\common\types\vscode-webview.d.ts - Lines: 13 - Chars: 357 - Tokens: 90
-71. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
-72. src\common\utils\view-html.ts - Lines: 26 - Chars: 971 - Tokens: 243
-73. src\common\view-types.ts - Lines: 8 - Chars: 246 - Tokens: 62
-74. src\extension.ts - Lines: 110 - Chars: 4890 - Tokens: 1223
-75. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
-76. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
-77. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
-78. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
-79. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
-80. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
-81. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
-82. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
-83. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
-84. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
-85. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
-86. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
-87. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
-88. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
-89. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
-90. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
-91. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
-92. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
-93. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
-94. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
-95. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
-96. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
-97. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
-98. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
-99. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
-100. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
-101. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
-102. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
-103. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
-104. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
-105. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
-106. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
-107. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
-108. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
-109. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
-110. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
-111. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
-112. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
-113. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
-114. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
-115. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
-116. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
-117. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
-118. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
-119. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
-120. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
-121. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
-122. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
-123. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
-124. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
-125. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
-126. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
-127. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
-128. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
-129. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
-130. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
-131. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
-132. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
-133. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
-134. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
-135. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
-136. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
-137. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
-138. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
-139. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
-140. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
-141. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
-142. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-143. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
-144. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
-145. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
-146. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-147. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
-148. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
-149. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
-150. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-151. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
-152. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
-153. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
-154. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
-155. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
-156. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
-157. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
-158. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-159. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
-160. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
-161. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
-162. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
-163. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
-164. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
-165. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
-166. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
-167. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
-168. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
-169. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
-170. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
-171. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
-172. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
-173. tsconfig.json - Lines: 19 - Chars: 457 - Tokens: 115
-174. webpack.config.js - Lines: 84 - Chars: 2401 - Tokens: 601
+36. src\Artifacts\A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements.md - Lines: 29 - Chars: 4040 - Tokens: 1010
+37. src\Artifacts\A35. DCE - Phase 2 - UI Mockups and Flow.md - Lines: 84 - Chars: 5742 - Tokens: 1436
+38. src\Artifacts\A36. DCE - Phase 2 - Technical Implementation Plan.md - Lines: 81 - Chars: 3794 - Tokens: 949
+39. src\Artifacts\A37. DCE - Phase 2 - Cycle Navigator & Knowledge Graph - Vision.md - Lines: 28 - Chars: 3242 - Tokens: 811
+40. src\Artifacts\A38. DCE - Phase 2 - Cycle Navigator - UI Mockup.md - Lines: 69 - Chars: 4621 - Tokens: 1156
+41. src\Artifacts\A39. DCE - Phase 2 - Cycle Navigator - Technical Plan.md - Lines: 98 - Chars: 4641 - Tokens: 1161
+42. src\Artifacts\A4. DCE - Analysis of The-Creator-AI Repo.md - Lines: 56 - Chars: 5722 - Tokens: 1431
+43. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
+44. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
+45. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
+46. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
+47. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
+48. src\backend\commands\commands.ts - Lines: 88 - Chars: 3807 - Tokens: 952
+49. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
+50. src\backend\services\action.service.ts - Lines: 73 - Chars: 2471 - Tokens: 618
+51. src\backend\services\flattener.service.ts - Lines: 303 - Chars: 13492 - Tokens: 3373
+52. src\backend\services\fs.service.ts - Lines: 631 - Chars: 29108 - Tokens: 7277
+53. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
+54. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
+55. src\backend\services\services.ts - Lines: 25 - Chars: 982 - Tokens: 246
+56. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
+57. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
+58. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
+59. src\client\components\file-tree\FileTree.tsx - Lines: 253 - Chars: 11216 - Tokens: 2804
+60. src\client\components\file-tree\FileTree.utils.ts - Lines: 189 - Chars: 7284 - Tokens: 1821
+61. src\client\components\SelectedFilesView.tsx - Lines: 278 - Chars: 13097 - Tokens: 3275
+62. src\client\components\tree-view\TreeView.tsx - Lines: 365 - Chars: 16838 - Tokens: 4210
+63. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
+64. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
+65. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
+66. src\client\views\context-chooser.view\on-message.ts - Lines: 134 - Chars: 5742 - Tokens: 1436
+67. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
+68. src\client\views\context-chooser.view\view.tsx - Lines: 389 - Chars: 20568 - Tokens: 5142
+69. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
+70. src\common\ipc\channels.enum.ts - Lines: 46 - Chars: 2422 - Tokens: 606
+71. src\common\ipc\channels.type.ts - Lines: 42 - Chars: 3150 - Tokens: 788
+72. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
+73. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+74. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
+75. src\common\types\file-node.ts - Lines: 15 - Chars: 535 - Tokens: 134
+76. src\common\types\vscode-webview.d.ts - Lines: 13 - Chars: 357 - Tokens: 90
+77. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
+78. src\common\utils\view-html.ts - Lines: 26 - Chars: 971 - Tokens: 243
+79. src\common\view-types.ts - Lines: 8 - Chars: 246 - Tokens: 62
+80. src\extension.ts - Lines: 110 - Chars: 4890 - Tokens: 1223
+81. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
+82. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
+83. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
+84. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
+85. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
+86. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
+87. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
+88. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
+89. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
+90. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
+91. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
+92. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
+93. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
+94. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
+95. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
+96. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
+97. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
+98. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
+99. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
+100. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
+101. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
+102. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
+103. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
+104. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
+105. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
+106. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
+107. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
+108. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
+109. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
+110. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
+111. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
+112. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
+113. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
+114. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
+115. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
+116. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
+117. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
+118. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
+119. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
+120. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
+121. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
+122. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
+123. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
+124. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
+125. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
+126. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
+127. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
+128. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
+129. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
+130. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
+131. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
+132. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
+133. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
+134. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
+135. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
+136. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
+137. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
+138. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
+139. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
+140. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
+141. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
+142. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
+143. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
+144. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
+145. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
+146. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
+147. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
+148. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+149. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
+150. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
+151. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
+152. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+153. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
+154. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
+155. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
+156. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+157. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
+158. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
+159. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
+160. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
+161. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
+162. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
+163. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
+164. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+165. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
+166. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
+167. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
+168. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
+169. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
+170. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
+171. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
+172. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
+173. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
+174. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
+175. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
+176. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
+177. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
+178. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
+179. tsconfig.json - Lines: 19 - Chars: 457 - Tokens: 115
+180. webpack.config.js - Lines: 84 - Chars: 2401 - Tokens: 601
 
 <file path=".gitignore">
 node_modules
@@ -532,7 +538,7 @@ SOFTWARE.
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C68 (Add A33 for Copy-Paste Feature)
+# Updated on: C70 (Add Phase 2 Cycle Navigator Artifacts)
 
 ## 1. Purpose
 
@@ -682,6 +688,30 @@ SOFTWARE.
 - **Description:** Details the requirements and implementation for copying and pasting files and folders within the DCE file tree using standard keyboard shortcuts (Ctrl+C, Ctrl+V).
 - **Tags:** feature plan, copy, paste, file operations, keyboard shortcuts, ux, phase 1
 
+### A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements
+- **Description:** Outlines the high-level vision and user stories for the Phase 2 multi-tabbed editor panel, designed for comparing and managing multiple AI-generated responses.
+- **Tags:** feature plan, phase 2, co-pilot, multi-tab, ui, ux, requirements
+
+### A35. DCE - Phase 2 - UI Mockups and Flow
+- **Description:** Provides a detailed textual description and flow diagram for the user interface of the Parallel Co-Pilot Panel, including tab management and the "swap" interaction.
+- **Tags:** feature plan, phase 2, ui, ux, mockup, workflow
+
+### A36. DCE - Phase 2 - Technical Implementation Plan
+- **Description:** Details the technical approach for building the Parallel Co-Pilot Panel, including the new webview provider, state management, IPC channels, and backend logic for file content swapping.
+- **Tags:** feature plan, phase 2, technical plan, architecture, webview, ipc
+
+### A37. DCE - Phase 2 - Cycle Navigator & Knowledge Graph - Vision
+- **Description:** Outlines the vision for a cycle-based navigation system to browse the history of AI-generated responses and project states, creating a navigable knowledge graph.
+- **Tags:** feature plan, phase 2, knowledge graph, history, cycle navigator, ui, ux
+
+### A38. DCE - Phase 2 - Cycle Navigator - UI Mockup
+- **Description:** Provides a textual mockup and interaction flow for the Cycle Navigator UI, including the cycle counter and navigation controls within the Parallel Co-Pilot Panel.
+- **Tags:** feature plan, phase 2, ui, ux, mockup, workflow, cycle navigator
+
+### A39. DCE - Phase 2 - Cycle Navigator - Technical Plan
+- **Description:** Details the technical approach for implementing the Cycle Navigator, including data structures for storing cycle-specific responses and the state management for historical navigation.
+- **Tags:** feature plan, phase 2, technical plan, architecture, state management, data model
+
 ## II. Standalone Utilities & Guides
 
 ### A189. Number Formatting Reference Guide
@@ -693,7 +723,7 @@ SOFTWARE.
 # Artifact A1: DCE - Project Vision and Goals
 # Date Created: Cycle 1
 # Author: AI Model
-# Updated on: Cycle 2 (Reflect findings from reference repository analysis)
+# Updated on: C70 (Incorporate Cycle Navigator vision into Phase 2)
 
 ## 1. Project Vision
 
@@ -714,13 +744,14 @@ The goal of this phase is to eliminate the manual management of a `files_list.tx
 -   **Outcome:** A user can curate a complex context with simple mouse clicks, completely removing the need to edit a text file.
 -   **Update (Cycle 2):** The reference repository contains a fully-featured `FileTree.tsx` component that already accomplishes most of this. The task is now to adapt this component and its backend `FSService` to produce the desired `flattened_repo.md` output.
 
-### Phase 2: The Parallel Co-Pilot Panel
+### Phase 2: The Parallel Co-Pilot Panel & Cycle Navigator
 
-This phase addresses the limitation of being locked into a single conversation with an AI assistant. The goal is to enable multiple, parallel interactions to compare and contrast different prompts or approaches simultaneously.
+This phase addresses the limitation of being locked into a single conversation with an AI assistant and introduces a way to navigate the project's history. The goal is to enable multiple, parallel interactions and to create a navigable record of the AI-driven development process.
 
--   **Core Functionality:** Create a custom panel within VS Code that can host multiple, independent "chat" or "prompt" windows.
--   **Outcome:** A user can send the same (or different) prompts to multiple AI instances and view the results side-by-side, dramatically improving the efficiency of prompt engineering and response evaluation.
--   **Update (Cycle 2):** The reference repository's "Change Plan" view is an excellent, full-featured implementation of a *single* co-pilot panel. This provides a solid architectural base to build upon for the parallelization feature.
+-   **Core Functionality (Parallel Co-Pilot):** Create a custom panel within VS Code that hosts a multi-tabbed text editor. Users can manually paste different AI-generated code responses into each tab for side-by-side comparison.
+-   **Key Feature ("The Switcharoo"):** A button on each tab allows the user to "swap" the content of that tab with the corresponding source file in their workspace. This provides an immediate, low-friction way to test a given AI response.
+-   **Core Functionality (Cycle Navigator):** Integrate a UI element to navigate back and forth between development cycles. Each cycle will be associated with the set of AI responses generated during that cycle.
+-   **Outcome:** A user can efficiently manage and test multiple AI solutions, and also review the historical evolution of the code by navigating through past cycles and their corresponding AI suggestions, creating a powerful "knowledge graph" of the project's development.
 
 ### Phase 3: The Integrated Diff Tool
 
@@ -2328,6 +2359,413 @@ To achieve greater feature parity with the native VS Code Explorer and improve w
         *   It will return the first available unique path.
     *   **File Copy:** The main handler will call `_findAvailableCopyName` to get the final target path and then use `vscode.workspace.fs.copy(sourceUri, targetUri)` to perform the recursive copy.
     *   The existing file system watcher will automatically detect the new file/folder and trigger a UI refresh.
+</file>
+
+<file path="src/Artifacts/A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements.md">
+# Artifact A34: DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements
+# Date Created: C69
+# Author: AI Model
+
+- **Key/Value for A0:**
+- **Description:** Outlines the high-level vision and user stories for the Phase 2 multi-tabbed editor panel, designed for comparing and managing multiple AI-generated responses.
+- **Tags:** feature plan, phase 2, co-pilot, multi-tab, ui, ux, requirements
+
+## 1. Vision & Goal
+
+Phase 2 of the Data Curation Environment aims to solve the "single-threaded" nature of interacting with AI assistants. The current workflow for developers often involves sending the same prompt to multiple models or conversations, copying the results to separate text files, and then manually integrating them into their project to test. This is inefficient and cumbersome.
+
+The goal of the **Parallel Co-Pilot Panel** is to create an integrated environment within VS Code specifically for managing, comparing, and testing multiple AI-generated code responses. It will function as a temporary "workbench" for AI outputs before they are committed to the source code.
+
+## 2. Core Concepts
+
+1.  **Multi-Tab Editor:** A new webview panel that presents a simple, multi-tabbed text editor interface, similar to Notepad++.
+2.  **Manual Ingestion:** Initially, the user will manually copy and paste AI-generated code from external sources (like a browser-based AI chat) into the tabs.
+3.  **Live Testing via "Swap":** The core innovation is a "swap" feature. The user can, with a single click, exchange the content of a tab with its corresponding source file in the workspace. This allows for immediate testing of the AI-generated code within the actual project environment (e.g., to see if it causes TypeScript errors). The original code is safely held in the tab, allowing for an equally simple "swap back."
+
+## 3. User Stories
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| P2-US-01 | **Manage Multiple Responses** | As a developer, I want a panel with multiple tabs (from 1 to 8) where I can paste different AI-generated code responses, so I can keep them organized and view them side-by-side. | - A new view/panel is available in VS Code. <br> - The panel contains a slider or input to select the number of visible tabs (1-8). <br> - Each tab is a fully functional text editor where I can paste and modify code. |
+| P2-US-02 | **See Response Metadata** | As a developer, I want to see metadata for the code in each tab, such as token count and line count, so I can quickly assess its size and complexity. | - Each tab displays the token count and line count of its current content. <br> - The panel also shows the token/line count of the corresponding original file in the workspace for easy comparison. |
+| P2-US-03 | **Test Response with "Swap"** | As a developer, I want to click a button to temporarily swap the code from a tab with the actual source file in my project, so I can immediately see if the new code works and compiles correctly. | - Each tab has a "Swap with Source" button. <br> - Clicking it replaces the content of the source file on disk with the content of the tab. <br> - Simultaneously, the original content of the source file is loaded into the tab. <br> - The VS Code editor and Problems view update instantly, showing any new compilation errors. |
+| P2-US-04 | **Revert with "Swap Back"** | As a developer, after testing a swapped response, I want to easily swap the original code back into my source file, so I can restore the project to its previous state. | - Clicking the "Swap with Source" button again performs the reverse operation, restoring the original code from the tab back into the file. |
+| P2-US-05 | **Analyze Response Similarity** | As a developer, I want to see a similarity score comparing the AI-generated code in a tab to the original source file, so I can get a quick sense of how significant the proposed changes are. | - Each tab displays a similarity percentage (e.g., "85% similar") comparing its content to the original file. |
+</file>
+
+<file path="src/Artifacts/A35. DCE - Phase 2 - UI Mockups and Flow.md">
+# Artifact A35: DCE - Phase 2 - UI Mockups and Flow
+# Date Created: C69
+# Author: AI Model
+
+- **Key/Value for A0:**
+- **Description:** Provides a detailed textual description and flow diagram for the user interface of the Parallel Co-Pilot Panel, including tab management and the "swap" interaction.
+- **Tags:** feature plan, phase 2, ui, ux, mockup, workflow
+
+## 1. Overview
+
+This document describes the user interface (UI) and interaction flow for the Parallel Co-Pilot Panel. The design aims for simplicity and clarity, presenting a familiar tabbed-editor interface with powerful integrated controls.
+
+## 2. UI Mockup (Textual Description)
+
+The Parallel Co-Pilot Panel will be a new webview, likely occupying its own view container in the sidebar or secondary sidebar.
+
+```
++-----------------------------------------------------------------+
+| [Parallel Co-Pilot] [Settings Icon]                             |
+|-----------------------------------------------------------------|
+| Cycle: [ < ] [ C70 ] [ > ]                                      |
+|-----------------------------------------------------------------|
+| Number of Tabs: [Slider: 1 to 8]  (Current: 4)                  |
+|=================================================================|
+| [ Tab 1 (active) ] [ Tab 2 ] [ Tab 3 ] [ Tab 4 ] [ + ]           |
+|-----------------------------------------------------------------|
+|                                                                 |
+|   [Swap with Source]                                            |
+|                                                                 |
+|   Source: src/services/user.service.ts                          |
+|   ------------------------------------------------------------  |
+|   |          | Original Source      | This Tab (Response 1) |  |
+|   | Lines    | 150                  | 165                   |  |
+|   | Tokens   | 2.1K                 | 2.4K                  |  |
+|   |----------|----------------------|-----------------------|  |
+|   | Similarity Score: 85%                                   |  |
+|   ------------------------------------------------------------  |
+|                                                                 |
+|   [Text editor area where user pastes AI-generated code...]     |
+|   |                                                         |   |
+|   | export class UserService {                              |   |
+|   |   // ... AI generated code ...                           |   |
+|   | }                                                       |   |
+|   |                                                         |   |
+|                                                                 |
++-----------------------------------------------------------------+
+```
+
+### 2.1. UI Components Breakdown
+
+1.  **Main Header:**
+    *   **Title:** "Parallel Co-Pilot".
+    *   **Settings Icon:** (Future) For configuring API keys, etc.
+
+2.  **Tab Configuration Bar:**
+    *   **Label:** "Number of Tabs:".
+    *   **Slider/Input:** Allows the user to select how many tabs (1-8) are visible.
+
+3.  **Tab Bar:**
+    *   Standard tab interface. The active tab is highlighted.
+    *   A `[+]` button could potentially be used to add more tabs up to the limit.
+
+4.  **Tab Content Area:**
+    *   **"Swap with Source" Button:** The primary action button for the tab. It should be clearly visible. Its text might change to "Swap Back to Original" after the first swap to provide better context.
+    *   **Source File Display:** A read-only display of the source file path that this tab's content is intended to replace. This needs to be determined/set by the user.
+    *   **Metadata Table:** A compact table showing a side-by-side comparison of Line Count and Token Count for the original file vs. the content in the tab.
+    *   **Similarity Score:** A clear display of the calculated similarity percentage.
+    *   **Text Editor:** A simple, multi-line text input area that takes up the majority of the panel space.
+
+## 3. User Interaction Flow: The "Swap"
+
+1.  **Initial State:** The user has a file open in the main VS Code editor, `src/services/user.service.ts`. They generate an alternative version of this file with an AI.
+2.  **Paste:** The user navigates to the "Parallel Co-Pilot" panel, selects a tab, and pastes the AI-generated code into the text editor area. They also set `src/services/user.service.ts` as the "Source" for this tab.
+3.  **First Swap (Test AI Code):**
+    *   The user clicks the **[Swap with Source]** button in "Tab 1".
+    *   **Action:** The extension backend reads the content of "Tab 1" and overwrites `src/services/user.service.ts` on the disk.
+    *   **Action:** The extension backend reads the *original* content of `src/services/user.service.ts` and places it into the text editor of "Tab 1".
+    *   **Result:** The main VS Code editor for `user.service.ts` instantly updates to show the AI code. The Problems panel updates, showing any new TS errors. "Tab 1" now contains the original, safe code.
+4.  **Second Swap (Revert):**
+    *   The user decides the AI code is faulty.
+    *   They click the **[Swap with Source]** button in "Tab 1" again.
+    *   **Action:** The extension backend reads the content of "Tab 1" (which is the original code) and overwrites `src/services/user.service.ts` on the disk.
+    *   **Action:** The extension backend reads the content of `src/services/user.service.ts` (which is the AI code) and places it back into "Tab 1".
+    *   **Result:** The project is restored to its exact previous state. The user can now modify the AI code in the tab and try again, or move to another tab to test a different AI response.
+</file>
+
+<file path="src/Artifacts/A36. DCE - Phase 2 - Technical Implementation Plan.md">
+# Artifact A36: DCE - Phase 2 - Technical Implementation Plan
+# Date Created: C69
+# Author: AI Model
+
+- **Key/Value for A0:**
+- **Description:** Details the technical approach for building the Parallel Co-Pilot Panel, including the new webview provider, state management, IPC channels, and backend logic for file content swapping.
+- **Tags:** feature plan, phase 2, technical plan, architecture, webview, ipc
+
+## 1. Overview
+
+This document outlines the technical implementation strategy for the Parallel Co-Pilot Panel. It involves creating a new, dedicated webview and the associated backend services to manage its state and perform file operations.
+
+## 2. Core Components
+
+### 2.1. New Webview Provider
+
+*   A new view will be registered in `package.json` and a new view provider will be created, similar to the existing `context-chooser.view`.
+*   **Location:** `src/client/views/parallel-copilot.view/`
+*   **Entry:** It will have its own `view.tsx` entry point to render the React application.
+
+### 2.2. Frontend State Management (`view.tsx`)
+
+The main state for the webview will be an array of objects, where each object represents a tab.
+
+```typescript
+interface TabState {
+  id: number;
+  content: string;
+  sourceFilePath: string | null;
+  originalSourceContent: string | null; // Stores the original file content after the first swap
+  metadata: {
+    lines: number;
+    tokens: number;
+    similarity: number;
+  };
+}
+
+const [tabs, setTabs] = useState<TabState[]>([]);
+```
+
+*   The number of items in the `tabs` array will be controlled by the UI slider.
+*   The `sourceFilePath` will need to be set by the user, perhaps via a text input or a "Use Active File" button.
+
+### 2.3. IPC Communication
+
+New channels will be required to handle the core functionality.
+
+*   `ClientToServerChannel.RequestFileContent`:
+    *   **Payload:** `{ path: string }`
+    *   **Action:** Frontend requests the content of a source file from the backend to calculate original metadata.
+*   `ClientToServerChannel.RequestSwapFileContent`:
+    *   **Payload:** `{ path: string, newContent: string }`
+    *   **Action:** Frontend requests the backend to perform the "swap" operation.
+*   `ServerToClientChannel.SendFileContent`:
+    *   **Payload:** `{ path: string, content: string }`
+    *   **Action:** Backend sends the requested file content back to the frontend.
+
+### 2.4. Backend Logic (`fs.service.ts`)
+
+New handlers will be added to `FSService` to support the webview's needs.
+
+1.  **`handleRequestFileContent`:**
+    *   Receives a file path.
+    *   Reads the file using `vscode.workspace.fs.readFile`.
+    *   Returns the content via the `SendFileContent` IPC channel.
+
+2.  **`handleSwapFileContentRequest`:**
+    *   This is the core of the "swap" feature.
+    *   **Input:** `{ path: string, newContent: string }`.
+    *   **Steps:**
+        1.  Reads the current content of the file at `path` into a variable (`originalContent`).
+        2.  Writes `newContent` to the file at `path` using `vscode.workspace.fs.writeFile`.
+        3.  Returns `originalContent` to the frontend via the `SendFileContent` channel.
+    *   This single, atomic operation ensures the swap is clean and the original content is immediately sent back to be stored in the tab.
+
+### 2.5. Similarity Scoring
+
+*   A lightweight string similarity library will be needed on the frontend.
+*   **Recommendation:** `string-similarity` (uses Dice's Coefficient) or a similar small library.
+*   A utility function will be created: `calculateSimilarity(stringA, stringB): number`.
+*   This calculation will be performed in the frontend whenever the content of a tab or the original source file changes. The result will be stored in the tab's state.
+</file>
+
+<file path="src/Artifacts/A37. DCE - Phase 2 - Cycle Navigator & Knowledge Graph - Vision.md">
+# Artifact A37: DCE - Phase 2 - Cycle Navigator & Knowledge Graph - Vision
+# Date Created: C70
+# Author: AI Model
+
+- **Key/Value for A0:**
+- **Description:** Outlines the vision for a cycle-based navigation system to browse the history of AI-generated responses and project states, creating a navigable knowledge graph.
+- **Tags:** feature plan, phase 2, knowledge graph, history, cycle navigator, ui, ux
+
+## 1. Vision & Goal
+
+As the Data Curation Environment matures, the interaction history with the AI becomes a valuable asset in itself. Currently, this history is ephemeral, existing only within the context of a single session. The vision for the **Cycle Navigator & Knowledge Graph** is to capture this history and make it a persistent, navigable, and core feature of the development workflow.
+
+The goal is to transform the series of AI interactions from a linear conversation into a structured, explorable history of the project's evolution. This creates a "knowledge graph" where each node is a development cycle, and the edges are the AI-generated solutions that led from one cycle to the next.
+
+## 2. Core Concepts
+
+1.  **Cycle-Based History:** The fundamental unit of history is the "Cycle." Every time the curator sends a prompt and receives responses, that entire transaction is associated with a unique Cycle ID (e.g., `C70`).
+2.  **Persistent Response Storage:** All AI-generated responses (the content that would be pasted into the Parallel Co-Pilot tabs) are saved and tagged with their corresponding Cycle ID.
+3.  **UI for Navigation:** A simple, non-intrusive UI will be added to the Parallel Co-Pilot panel, allowing the user to step backward and forward through the cycles.
+4.  **Historical Context Loading:** As the user navigates to a past cycle (e.g., from `C70` to `C69`), the Parallel Co-Pilot panel will automatically load the set of AI responses that were generated during that cycle.
+
+## 3. User Stories
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| P2-US-06 | **Navigate Project History** | As a developer, I want to navigate backward and forward through my project's development cycles, so I can review past decisions and the AI suggestions that prompted them. | - A UI control (e.g., left/right arrows and a cycle number display) is present in the Parallel Co-Pilot panel. <br> - Clicking the arrows changes the currently viewed cycle. |
+| P2-US-07 | **View Historical Responses** | As a developer, when I navigate to a previous cycle, I want the Parallel Co-Pilot tabs to automatically populate with the AI-generated responses from that specific cycle, so I can see exactly what options I was considering at that time. | - Navigating to a cycle loads the associated set of AI responses into the tabs. <br> - The metadata (token counts, etc.) for these historical responses is also displayed. |
+| P2-US-08 | **Preserve Interaction Context** | As a developer, I want every AI response to be automatically saved and associated with the current cycle, so a complete and accurate history of the project is built over time. | - A mechanism exists to automatically persist all AI responses received. <br> - Each response is tagged with a Cycle ID and a unique response UUID. |
+</file>
+
+<file path="src/Artifacts/A38. DCE - Phase 2 - Cycle Navigator - UI Mockup.md">
+# Artifact A38: DCE - Phase 2 - Cycle Navigator - UI Mockup
+# Date Created: C70
+# Author: AI Model
+
+- **Key/Value for A0:**
+- **Description:** Provides a textual mockup and interaction flow for the Cycle Navigator UI, including the cycle counter and navigation controls within the Parallel Co-Pilot Panel.
+- **Tags:** feature plan, phase 2, ui, ux, mockup, workflow, cycle navigator
+
+## 1. Overview
+
+This document describes the proposed user interface (UI) for the Cycle Navigator. The design prioritizes simplicity and integration, placing the navigation controls directly within the Parallel Co-Pilot Panel, reinforcing the connection between the cycle history and the AI responses.
+
+## 2. UI Mockup (Textual Description)
+
+The Cycle Navigator will be a new UI element added to the top of the Parallel Co-Pilot Panel, positioned just below the main header and above the tab configuration slider.
+
+```
++-----------------------------------------------------------------+
+| [Parallel Co-Pilot] [Settings Icon]                             |
+|-----------------------------------------------------------------|
+| Cycle: [ < ] [ C70 ] [ > ]                                      |
+|-----------------------------------------------------------------|
+| Number of Tabs: [Slider: 1 to 8]  (Current: 4)                  |
+|=================================================================|
+| [ Tab 1 (active) ] [ Tab 2 ] [ Tab 3 ] [ Tab 4 ] [ + ]           |
+|-----------------------------------------------------------------|
+|                                                                 |
+|   [Swap with Source]                                            |
+|                                                                 |
+|   Source: src/services/user.service.ts                          |
+|   ------------------------------------------------------------  |
+|   |          | Original Source      | This Tab (Response 1) |  |
+|   | Lines    | 150                  | 165                   |  |
+|   | Tokens   | 2.1K                 | 2.4K                  |  |
+|   |----------|----------------------|-----------------------|  |
+|   | Similarity Score: 85%                                   |  |
+|   ------------------------------------------------------------  |
+|                                                                 |
+|   [Text editor area where user pastes AI-generated code...]     |
+|   |                                                         |   |
+|   | export class UserService {                              |   |
+|   |   // ... AI generated code ...                           |   |
+|   | }                                                       |   |
+|   |                                                         |   |
+|                                                                 |
++-----------------------------------------------------------------+
+```
+
+### 2.1. UI Components Breakdown
+
+1.  **Cycle Navigator Bar:**
+    *   A new horizontal bar containing the navigation controls.
+    *   **Label:** "Cycle:".
+    *   **Previous Button (`<`):** A button with a left-arrow icon. Clicking it navigates to the previous cycle (e.g., `C69`). The button is disabled if the user is at the very first recorded cycle.
+    *   **Cycle Display (`C70`):** A read-only (or potentially editable) text field showing the ID of the currently viewed cycle.
+    *   **Next Button (`>`):** A button with a right-arrow icon. Clicking it navigates to the next cycle (e.g., `C71`). The button is disabled if the user is at the most recent cycle.
+
+## 3. User Interaction Flow
+
+1.  **Initial State:** The user is working on Cycle 70. The Cycle Display shows `C70`. The `>` button is disabled. The Parallel Co-Pilot tabs show the AI responses generated for Cycle 70.
+2.  **Navigate Back:**
+    *   The user clicks the **`<`** button.
+    *   **Action:** The extension's state updates to the previous cycle, `C69`.
+    *   **UI Update:** The Cycle Display changes to `C69`.
+    *   **Data Load:** The Parallel Co-Pilot panel fetches the historical data for Cycle 69. The tabs are cleared and re-populated with the AI responses that were generated during that cycle. The metadata and similarity scores all update to reflect this historical data. Both `<` and `>` buttons are now enabled.
+3.  **Navigate Forward:**
+    *   The user is viewing Cycle 69 and clicks the **`>`** button.
+    *   **Action:** The state moves forward to `C70`.
+    *   **UI Update & Data Load:** The UI returns to the state described in step 1. The `>` button becomes disabled again.
+</file>
+
+<file path="src/Artifacts/A39. DCE - Phase 2 - Cycle Navigator - Technical Plan.md">
+# Artifact A39: DCE - Phase 2 - Cycle Navigator - Technical Plan
+# Date Created: C70
+# Author: AI Model
+
+- **Key/Value for A0:**
+- **Description:** Details the technical approach for implementing the Cycle Navigator, including data structures for storing cycle-specific responses and the state management for historical navigation.
+- **Tags:** feature plan, phase 2, technical plan, architecture, state management, data model
+
+## 1. Overview
+
+This document outlines the technical strategy for implementing the Cycle Navigator feature. The implementation will require new data structures for storing historical responses, enhancements to the frontend state management, new IPC channels, and backend logic for data persistence.
+
+## 2. Data Structure and Persistence
+
+A structured approach to storing the historical data is critical. A simple JSON file stored within the workspace's `.vscode` directory is a suitable starting point.
+
+### 2.1. `dce_history.json` (Example)
+
+```json
+{
+  "version": 1,
+  "cycles": [
+    {
+      "cycleId": "C69",
+      "timestamp": "2025-08-19T10:00:00Z",
+      "prompt": "The full prompt text for cycle 69...",
+      "responses": [
+        {
+          "responseId": "uuid-v4-for-response-1",
+          "model": "gemini-pro",
+          "content": "<src/file1.ts>...</src/file1.ts>"
+        },
+        {
+          "responseId": "uuid-v4-for-response-2",
+          "model": "claude-3-opus",
+          "content": "<src/file1.ts>...</src/file1.ts>"
+        }
+      ]
+    },
+    {
+      "cycleId": "C70",
+      "timestamp": "2025-08-20T12:30:00Z",
+      "prompt": "The prompt for cycle 70...",
+      "responses": [
+        {
+          "responseId": "uuid-v4-for-response-3",
+          "model": "gemini-pro",
+          "content": "<src/client/views/view.tsx>...</src/client/views/view.tsx>"
+        }
+      ]
+    }
+  ]
+}
+```
+
+*   **Backend (`history.service.ts` - New):** A new service will be created to manage reading from and writing to `dce_history.json`. It will handle file locking to prevent race conditions and provide methods like `getCycle(cycleId)` and `addResponse(cycleId, response)`.
+
+## 3. Frontend State Management (`parallel-copilot.view.tsx`)
+
+The main view's state will be expanded to manage the historical context.
+
+```typescript
+interface CoPilotState {
+  // ... existing state for tabs ...
+  currentCycleId: string;
+  cycleHistory: string[]; // An ordered list of all known cycle IDs, e.g., ["C69", "C70"]
+}
+```
+
+*   `currentCycleId` will drive the UI display and data fetching.
+*   The navigation buttons will simply increment or decrement the index within the `cycleHistory` array to determine the next `currentCycleId`.
+*   Changing `currentCycleId` will trigger a `useEffect` hook to request the data for that cycle from the backend.
+
+## 4. IPC Communication
+
+New channels will be needed to orchestrate the data flow.
+
+*   `ClientToServerChannel.RequestCycleData`:
+    *   **Payload:** `{ cycleId: string }`
+    *   **Action:** Frontend requests the full data object for a specific cycle from the backend.
+*   `ClientToServerChannel.RequestCycleHistory`:
+    *   **Payload:** `{}`
+    *   **Action:** Frontend requests the ordered list of all available cycle IDs to populate its navigation state.
+*   `ClientToServerChannel.SaveResponse`:
+    *   **Payload:** `{ cycleId: string, response: { responseId: string, model: string, content: string } }`
+    *   **Action:** Frontend sends a new AI response to the backend to be persisted in the history file.
+*   `ServerToClientChannel.SendCycleData`:
+    *   **Payload:** `{ cycleData: Cycle }` // Where Cycle is the object from the JSON file
+    *   **Action:** Backend sends the requested cycle data to the frontend.
+*   `ServerToClientChannel.SendCycleHistory`:
+    *   **Payload:** `{ history: string[] }`
+    *   **Action:** Backend sends the list of all cycle IDs.
+
+## 5. Workflow Integration
+
+1.  **On Load:** The Parallel Co-Pilot view requests the full cycle history. It defaults `currentCycleId` to the last item in the received list.
+2.  **On Navigate:** Clicking `<` or `>` changes `currentCycleId`. A `useEffect` hook detects this change and sends `RequestCycleData` to the backend. The backend's `SendCycleData` response triggers a state update that re-renders the tabs with the historical content.
+3.  **On New Response:** When a new AI response is received (in the future, via API), it will be displayed in a tab and simultaneously sent to the backend via `SaveResponse` to be added to the `dce_history.json` file for the current cycle.
 </file>
 
 <file path="src/Artifacts/A4. DCE - Analysis of The-Creator-AI Repo.md">
@@ -5468,6 +5906,8 @@ interface FileTreeProps {
   searchTerm: string;
   problemMap: ProblemCountsMap;
   onNodeDrop?: (event: React.DragEvent, node: FileNode) => void;
+  onCopy: (path: string) => void;
+  clipboard: { path: string; type: 'copy' } | null;
 }
 
 const getFileIcon = (fileName: string) => {
@@ -5518,7 +5958,7 @@ const filterTree = (nodes: FileNode[], term: string): FileNode[] => {
 };
 
 
-const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, updateCheckedFiles, collapseTrigger, expandAllTrigger, searchTerm, problemMap, onNodeDrop }) => {
+const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, updateCheckedFiles, collapseTrigger, expandAllTrigger, searchTerm, problemMap, onNodeDrop, onCopy, clipboard }) => {
     const [contextMenu, setContextMenu] = useState<{ x: number, y: number, node: FileNode } | null>(null);
     const [renamingPath, setRenamingPath] = useState<string | null>(null);
     const [renameValue, setRenameValue] = useState('');
@@ -5685,6 +6125,8 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
                 activeFile={activeFile} 
                 updateCheckedFiles={updateCheckedFiles}
                 onNodeDrop={onNodeDrop}
+                onCopy={onCopy}
+                clipboard={clipboard}
             />
             {contextMenu && <ContextMenu menu={contextMenu} onClose={() => setContextMenu(null)} onRename={handleRename} />}
         </div>
@@ -6354,18 +6796,23 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
                 case 'c':
                     e.preventDefault(); e.stopPropagation();
                     if (focusedNodePath) {
-                        logger.log(`Copying path to clipboard: ${focusedNodePath}`);
+                        logger.log(`[Copy-Paste] Ctrl+C detected. Copying path: ${focusedNodePath}`);
                         onCopy(focusedNodePath);
                     }
                     return;
                 case 'v':
                     e.preventDefault(); e.stopPropagation();
+                    logger.log(`[Copy-Paste] Ctrl+V detected. Clipboard prop: ${JSON.stringify(clipboard)}. Focused node: ${focusedNodePath}`);
                     if (clipboard && focusedNodePath) {
                         const targetNode = flatNodeList.current.find(n => n.absolutePath === focusedNodePath);
                         if (targetNode) {
-                            const destinationDir = targetNode.children ? targetNode.absolutePath : targetNode.absolutePath.substring(0, targetNode.absolutePath.lastIndexOf('/'));
-                            logger.log(`Pasting ${clipboard.path} into ${destinationDir}`);
+                            const destinationDir = targetNode.children 
+                                ? targetNode.absolutePath 
+                                : targetNode.absolutePath.substring(0, targetNode.absolutePath.lastIndexOf('/'));
+                            logger.log(`[Copy-Paste] Pasting '${clipboard.path}' into determined destination: '${destinationDir}'`);
                             clientIpc.sendToServer(ClientToServerChannel.RequestCopyFile, { sourcePath: clipboard.path, destinationDir });
+                        } else {
+                            logger.error(`[Copy-Paste] Could not find target node for path: ${focusedNodePath}`);
                         }
                     }
                     return;

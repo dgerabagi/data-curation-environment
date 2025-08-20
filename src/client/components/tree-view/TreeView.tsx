@@ -184,18 +184,23 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
                 case 'c':
                     e.preventDefault(); e.stopPropagation();
                     if (focusedNodePath) {
-                        logger.log(`Copying path to clipboard: ${focusedNodePath}`);
+                        logger.log(`[Copy-Paste] Ctrl+C detected. Copying path: ${focusedNodePath}`);
                         onCopy(focusedNodePath);
                     }
                     return;
                 case 'v':
                     e.preventDefault(); e.stopPropagation();
+                    logger.log(`[Copy-Paste] Ctrl+V detected. Clipboard prop: ${JSON.stringify(clipboard)}. Focused node: ${focusedNodePath}`);
                     if (clipboard && focusedNodePath) {
                         const targetNode = flatNodeList.current.find(n => n.absolutePath === focusedNodePath);
                         if (targetNode) {
-                            const destinationDir = targetNode.children ? targetNode.absolutePath : targetNode.absolutePath.substring(0, targetNode.absolutePath.lastIndexOf('/'));
-                            logger.log(`Pasting ${clipboard.path} into ${destinationDir}`);
+                            const destinationDir = targetNode.children 
+                                ? targetNode.absolutePath 
+                                : targetNode.absolutePath.substring(0, targetNode.absolutePath.lastIndexOf('/'));
+                            logger.log(`[Copy-Paste] Pasting '${clipboard.path}' into determined destination: '${destinationDir}'`);
                             clientIpc.sendToServer(ClientToServerChannel.RequestCopyFile, { sourcePath: clipboard.path, destinationDir });
+                        } else {
+                            logger.error(`[Copy-Paste] Could not find target node for path: ${focusedNodePath}`);
                         }
                     }
                     return;

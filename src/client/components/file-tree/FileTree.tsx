@@ -23,6 +23,8 @@ interface FileTreeProps {
   searchTerm: string;
   problemMap: ProblemCountsMap;
   onNodeDrop?: (event: React.DragEvent, node: FileNode) => void;
+  onCopy: (path: string) => void;
+  clipboard: { path: string; type: 'copy' } | null;
 }
 
 const getFileIcon = (fileName: string) => {
@@ -73,7 +75,7 @@ const filterTree = (nodes: FileNode[], term: string): FileNode[] => {
 };
 
 
-const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, updateCheckedFiles, collapseTrigger, expandAllTrigger, searchTerm, problemMap, onNodeDrop }) => {
+const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, updateCheckedFiles, collapseTrigger, expandAllTrigger, searchTerm, problemMap, onNodeDrop, onCopy, clipboard }) => {
     const [contextMenu, setContextMenu] = useState<{ x: number, y: number, node: FileNode } | null>(null);
     const [renamingPath, setRenamingPath] = useState<string | null>(null);
     const [renameValue, setRenameValue] = useState('');
@@ -240,6 +242,8 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
                 activeFile={activeFile} 
                 updateCheckedFiles={updateCheckedFiles}
                 onNodeDrop={onNodeDrop}
+                onCopy={onCopy}
+                clipboard={clipboard}
             />
             {contextMenu && <ContextMenu menu={contextMenu} onClose={() => setContextMenu(null)} onRename={handleRename} />}
         </div>
