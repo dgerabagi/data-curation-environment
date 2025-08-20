@@ -1,19 +1,19 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-20T00:37:03.741Z
+  Date Generated: 2025-08-20T01:34:04.156Z
   ---
   Total Files: 172
-  Total Lines: 14033
-  Total Characters: 596973
-  Approx. Tokens: 149310
+  Total Lines: 14060
+  Total Characters: 598173
+  Approx. Tokens: 149609
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
 2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
 3. src\backend\services\fs.service.ts (5576 tokens)
-4. src\client\views\context-chooser.view\view.tsx (4608 tokens)
+4. src\client\views\context-chooser.view\view.tsx (5089 tokens)
 5. src\client\components\tree-view\TreeView.tsx (3697 tokens)
 6. src\client\views\context-chooser.view\view.scss (3461 tokens)
 7. src\client\components\SelectedFilesView.tsx (3256 tokens)
@@ -45,7 +45,7 @@
 21. src\Artifacts\A20. DCE - Phase 1 - Advanced UX & Automation Plan.md - Lines: 44 - Chars: 6117 - Tokens: 1530
 22. src\Artifacts\A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer.md - Lines: 48 - Chars: 7385 - Tokens: 1847
 23. src\Artifacts\A22. DCE - Phase 1 - Search & Filter Feature Plan.md - Lines: 58 - Chars: 3663 - Tokens: 916
-24. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 53 - Chars: 5881 - Tokens: 1471
+24. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 41 - Chars: 5154 - Tokens: 1289
 25. src\Artifacts\A24. DCE - Selection Paradigm Terminology.md - Lines: 57 - Chars: 3330 - Tokens: 833
 26. src\Artifacts\A25. DCE - Phase 1 - Git & Problems Integration Plan.md - Lines: 61 - Chars: 5871 - Tokens: 1468
 27. src\Artifacts\A26. DCE - Phase 1 - File System Traversal & Caching Strategy.md - Lines: 46 - Chars: 4009 - Tokens: 1003
@@ -81,7 +81,7 @@
 57. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 58. src\client\views\context-chooser.view\on-message.ts - Lines: 111 - Chars: 4643 - Tokens: 1161
 59. src\client\views\context-chooser.view\view.scss - Lines: 564 - Chars: 13843 - Tokens: 3461
-60. src\client\views\context-chooser.view\view.tsx - Lines: 387 - Chars: 18429 - Tokens: 4608
+60. src\client\views\context-chooser.view\view.tsx - Lines: 426 - Chars: 20356 - Tokens: 5089
 61. src\client\views\index.ts - Lines: 34 - Chars: 1604 - Tokens: 401
 62. src\common\ipc\channels.enum.ts - Lines: 41 - Chars: 2037 - Tokens: 510
 63. src\common\ipc\channels.type.ts - Lines: 37 - Chars: 2713 - Tokens: 679
@@ -1582,7 +1582,7 @@ To improve navigation and usability in large projects, this feature introduces a
 # Artifact A23: DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan
 # Date Created: C29
 # Author: AI Model
-# Updated on: C57 (Finalized robust event handling strategy for external drag-drop)
+# Updated on: C58 (Codify robust URI-based drag-and-drop solution)
 
 - **Key/Value for A0:**
 - **Description:** Details the requirements for implementing full keyboard navigation and drag-and-drop file/folder operations within the main file tree view.
@@ -1597,41 +1597,29 @@ To achieve true feature parity with the native VS Code Explorer and cater to pow
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
 | AI-01 | **Keyboard Navigation** | As a power user, I want to navigate the file tree using only my keyboard, so I can find, select, and manage files without taking my hands off the keyboard. | - Arrow Up/Down keys move the focus between visible nodes. <br> - Arrow Right on a collapsed folder expands it. <br> - Arrow Left on an open folder collapses it. <br> - `Enter` key opens the focused file or toggles expansion. <br> - `Spacebar` toggles the checkbox of the focused node. |
-| AI-02 | **Internal Drag-and-Drop** | As a user, I want to be able to drag a file or folder and drop it into another folder within the DCE view to move it, so I can reorganize my project intuitively. | - Clicking and dragging a file or folder initiates a drag operation. <br> - Dragging over a folder highlights it as a potential drop target. <br> - Dropping a file/folder onto another folder moves the dragged item. |
-| AI-03 | **External Drag-and-Drop** | As a user, I want to drag a file (e.g., a PDF) from my computer's file explorer and drop it into a folder in the DCE view to add it to my project, so I can quickly incorporate new assets. | - Dragging a file from the OS and dropping it onto a folder in the DCE view copies that file into the target folder in the workspace. <br> - The file tree automatically refreshes to show the newly added file. |
+| AI-02 | **Internal Drag-and-Drop** | As a user, I want to be able to drag a file or folder and drop it into another folder within the DCE view to move it, so I can reorganize my project intuitively. | - Clicking and dragging a file or folder initiates a drag operation. <br> - Dragging over a folder highlights it as a potential drop target. <br> - Dropping a file/folder onto another folder moves the dragged item. <br> - **Validation:** A folder cannot be dropped into itself or one of its own descendants. |
+| AI-03 | **External Drag-and-Drop** | As a user, I want to drag a file (e.g., a PDF) from my computer's file explorer or the VS Code Explorer and drop it into a folder in the DCE view to add it to my project, so I can quickly incorporate new assets. | - Dragging a file from the OS or VS Code Explorer and dropping it onto a folder in the DCE view copies that file into the target folder in the workspace. <br> - The file tree automatically refreshes to show the newly added file. |
 | AI-06 | **Hover to Expand Folder** | As a user dragging a file, when I hover over a collapsed folder for a moment, I want it to automatically expand, so I can drop the file into a nested subdirectory without having to cancel the drag operation. | - During a drag operation, hovering over a collapsed folder for ~500ms triggers its expansion. <br> - Moving the mouse away from the folder before the timer completes cancels the expansion. |
 
 ## 3. Technical Implementation Plan
 
 ### Keyboard Navigation & Internal Drag-Drop (Completed)
-These features are stable and complete.
+These features are stable and complete. The internal drag-drop includes robust validation to prevent invalid moves.
 
-### External Drag and Drop (Implementation C57)
-This requires a multi-layered event handling strategy to provide clear visual feedback and robust functionality.
+### External Drag and Drop (Implementation C58)
+This requires a multi-layered strategy to correctly handle drops from different sources (OS vs. VS Code Explorer) due to webview security constraints.
 
-1.  **Critical: `event.preventDefault()` in `onDragOver`:** The most common failure point for HTML drag-and-drop is neglecting to call `event.preventDefault()` in the `onDragOver` handler. This call is **mandatory** to signal to the browser that the element is a valid drop target. Without it, the `onDrop` event will **never fire**. This must be implemented on all potential drop zones.
+1.  **Problem:** When dragging from the native VS Code Explorer, the `DataTransfer` object does **not** contain `File` objects. Instead, it contains URIs in proprietary (`vscode-resource`) or standard (`text/uri-list`) formats. The webview cannot access the file system with these URIs directly.
 
-2.  **Event Propagation (`event.stopPropagation()`):** To prevent conflicting drop handlers (e.g., a node and its parent container), `stopPropagation()` must be called in the node-level handlers to stop the event from bubbling up to the main view container.
-
-3.  **Main Container Handlers (`view.tsx`):**
-    *   The main container will have `onDragEnter`, `onDragOver`, `onDragLeave`, and `onDrop`.
-    *   `onDragEnter`/`onDragLeave` will toggle a `.drag-over` class for visual feedback (e.g., a dashed border around the whole view).
-    *   `onDragOver` will call `event.preventDefault()` and log its execution.
-    *   `onDrop` on the container acts as a fallback for drops in empty space, targeting the workspace root directory. It will prevent default behavior and process the files.
-
-4.  **Individual Node Handlers & Hover-to-Expand (`TreeView.tsx`):**
-    *   The generic `TreeView` component will manage drag events for each `<li>` node.
-    *   **State:** It will manage `dropTarget` (for highlighting) and a `useRef` for a `setTimeout` timer.
-    *   `onDragEnter` (on `<li>`): It will call `event.stopPropagation()`. If the node is a collapsed directory, it will start a 500ms timer. If the timer completes, it will call the function to expand the node.
-    *   `onDragLeave` (on `<li>`): It will call `event.stopPropagation()` and, critically, **clear the expansion timer**.
-    *   `onDragOver` (on `<li>`): It will call `event.preventDefault()` and `event.stopPropagation()`.
-    *   `onDrop` (on `<li>`): It will call `event.stopPropagation()`, clear the timer, and delegate the file processing logic to the parent `FileTree` component via a prop function (`onNodeDrop`).
-
-5.  **File Processing Logic (`FileTree.tsx`):**
-    *   The `FileTree` component will define the `handleNodeDrop(event, node)` function.
-    *   This function determines the final target directory (the node's path if it's a directory, or its parent's path if it's a file).
-    *   It will iterate through `event.dataTransfer.files`, read each using the `FileReader` API to get an `ArrayBuffer`, convert it to a `Uint8Array`, and send the file's name and buffer to the backend via the `RequestAddFileFromBuffer` IPC message.
-    *   **Logging:** All event handlers (`onDragEnter`, `onDragOver`, `onDragLeave`, `onDrop`) in all components will have detailed `logger.log()` statements to trace the event flow and diagnose any failures.
+2.  **Solution:**
+    *   **Client-Side Utility (`drag-drop.utils.ts`):** A centralized utility will parse the `DataTransfer` object. It will check for data types in a specific order of precedence:
+        1.  `vscode-resource`: A JSON string array of file URIs.
+        2.  `text/uri-list`: A newline-separated list of file URIs.
+        3.  `Files`: The standard `FileList` for drops from the OS.
+    *   **New IPC Channel (`RequestCopyFiles`):** If URI-based data is found, the client utility will send a new `RequestCopyFiles` message to the backend, containing the array of source URIs and the target directory path. For standard file drops, it will continue to use `RequestAddFileFromBuffer`.
+    *   **Backend Handler (`fs.service.ts`):** A new message handler for `RequestCopyFiles` will use the `vscode.workspace.fs.copy()` API to perform the file operation. This is the secure and correct way for the extension host to act on a URI provided by the webview.
+    *   **Robust State Tracking (`view.tsx`):** A "drag counter" (`useRef`) will be used instead of a simple boolean state to track `onDragEnter` and `onDragLeave` events. This correctly handles events firing on nested child elements and prevents the UI from flickering.
+    *   **Global Event Interception (`view.tsx`):** Global `dragover` and `drop` listeners will be attached to the `window` object. These will call `event.preventDefault()`, which is **critical** to stop VS Code from hijacking the event and opening the file in a new editor tab instead of allowing our view to handle the drop.
 </file>
 
 <file path="src/Artifacts/A24. DCE - Selection Paradigm Terminology.md">
@@ -6951,6 +6939,34 @@ const App = () => {
     
     const clientIpc = ClientPostMessageManager.getInstance();
 
+    // CRITICAL FIX: Prevent VS Code/Browser from intercepting drag events globally.
+    useEffect(() => {
+        logger.log('[DND] Attaching global drag/drop prevention listeners.');
+
+        const handleGlobalDragOver = (e: DragEvent) => {
+            e.preventDefault();
+            // Set the drop effect globally to ensure the cursor shows the correct icon (e.g., '+').
+            if (e.dataTransfer) {
+                e.dataTransfer.dropEffect = 'copy';
+            }
+        };
+
+        const handleGlobalDrop = (e: DragEvent) => {
+            // Prevent default behavior (e.g., opening file in browser/VS Code).
+            // Specific drop zones handle the actual logic via stopPropagation().
+            e.preventDefault();
+            logger.log('[GlobalDrop] Prevented default drop behavior.');
+        };
+
+        document.addEventListener('dragover', handleGlobalDragOver);
+        document.addEventListener('drop', handleGlobalDrop);
+
+        return () => {
+            document.removeEventListener('dragover', handleGlobalDragOver);
+            document.removeEventListener('drop', handleGlobalDrop);
+        };
+    }, []);
+
     const requestFiles = (force = false) => {
         setIsLoading(true);
         logger.log(`Requesting workspace files (force=${force}).`);
@@ -7149,7 +7165,7 @@ const App = () => {
 
     const handleDropOnContainer = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
-        event.stopPropagation();
+        event.stopPropagation(); // Stop propagation so the global drop handler doesn't fire
         setIsDraggingOver(false);
         logger.log('--- DROP ON MAIN CONTAINER (FALLBACK) ---');
         
@@ -7163,16 +7179,25 @@ const App = () => {
     };
     
     const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
-        event.preventDefault();
+        event.preventDefault(); // This is CRITICAL for onDrop to fire.
         event.stopPropagation();
-        logger.log("Drag over main view.");
+
+        // Ensure correct visual feedback if the drag contains files.
+        const containsFiles = Array.from(event.dataTransfer.types).some(type => typeof type === 'string' && type.toLowerCase() === 'files');
+        if (containsFiles) {
+             event.dataTransfer.dropEffect = 'copy';
+        }
     };
 
     const handleDragEnter = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         event.stopPropagation();
-        if (event.dataTransfer.types.includes('Files')) {
-            logger.log('Drag ENTER on main container with files.');
+        logger.log('Drag ENTER on main container.');
+
+        // Use a robust, case-insensitive check
+        const containsFiles = Array.from(event.dataTransfer.types).some(type => typeof type === 'string' && type.toLowerCase() === 'files');
+        
+        if (containsFiles) {
             setIsDraggingOver(true);
         }
     };
@@ -7180,11 +7205,13 @@ const App = () => {
     const handleDragLeave = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         event.stopPropagation();
-        if (event.currentTarget.contains(event.relatedTarget as Node)) {
-            return;
+        
+        // Robust check: Ensure the related target (the element being entered) is outside the current target (the container).
+        // This prevents flickering when moving between child elements within the container.
+        if (!event.currentTarget.contains(event.relatedTarget as Node)) {
+            logger.log('Drag LEAVE from main container.');
+            setIsDraggingOver(false);
         }
-        logger.log('Drag LEAVE from main container.');
-        setIsDraggingOver(false);
     };
 
     const { totalFiles, totalTokens, selectedFileNodes } = useMemo(() => {
@@ -7233,23 +7260,23 @@ const App = () => {
         >
             <div className="view-header">
                  <div className="header-row">
-                    <div className="toolbar">
-                        <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.saveCurrentSelection', args: [checkedFiles] })} title="Save Selection Set..."><VscSave /></button>
-                        <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.loadSelectionSet' })} title="Load Selection Set..."><VscFolderLibrary /></button>
-                        <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.manageSelectionSets' })} title="Manage Selection Sets..."><VscSettingsGear /></button>
-                    </div>
-                    <div className="toolbar">
-                        {isLoading && <span className="spinner" title="Refreshing..."><VscLoading /></span>}
-                        <button onClick={() => setIsSearchVisible(v => !v)} title="Search..." className={isSearchVisible ? 'active' : ''}><VscSearch /></button>
-                        <button onClick={handleToggleAutoAdd} title="Automatically add new files to selection" className={isAutoAddEnabled ? 'active' : ''}><VscCheckAll /></button>
-                        <button onClick={handleNewFile} title="New File..."><VscNewFile /></button>
-                        <button onClick={handleNewFolder} title="New Folder..."><VscNewFolder /></button>
-                        <button onClick={handleRefresh} title="Refresh Explorer"><VscRefresh /></button>
-                        <button onClick={handleExpandAll} title="Expand All Folders"><VscExpandAll /></button>
-                        <button onClick={handleCollapseAll} title="Collapse Folders in View"><VscCollapseAll /></button>
-                    </div>
+                     <div className="toolbar">
+                         <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.saveCurrentSelection', args: [checkedFiles] })} title="Save Selection Set..."><VscSave /></button>
+                         <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.loadSelectionSet' })} title="Load Selection Set..."><VscFolderLibrary /></button>
+                         <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.manageSelectionSets' })} title="Manage Selection Sets..."><VscSettingsGear /></button>
+                     </div>
+                     <div className="toolbar">
+                         {isLoading && <span className="spinner" title="Refreshing..."><VscLoading /></span>}
+                         <button onClick={() => setIsSearchVisible(v => !v)} title="Search..." className={isSearchVisible ? 'active' : ''}><VscSearch /></button>
+                         <button onClick={handleToggleAutoAdd} title="Automatically add new files to selection" className={isAutoAddEnabled ? 'active' : ''}><VscCheckAll /></button>
+                         <button onClick={handleNewFile} title="New File..."><VscNewFile /></button>
+                         <button onClick={handleNewFolder} title="New Folder..."><VscNewFolder /></button>
+                         <button onClick={handleRefresh} title="Refresh Explorer"><VscRefresh /></button>
+                         <button onClick={handleExpandAll} title="Expand All Folders"><VscExpandAll /></button>
+                         <button onClick={handleCollapseAll} title="Collapse Folders in View"><VscCollapseAll /></button>
+                     </div>
                  </div>
-                 {isSearchVisible && (
+                {isSearchVisible && (
                     <div className="search-container">
                         <input
                             type="text"
@@ -7258,7 +7285,7 @@ const App = () => {
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
                     </div>
-                 )}
+                )}
             </div>
             <div className="file-tree-container">
                 {isLoading && files.length === 0 ? (

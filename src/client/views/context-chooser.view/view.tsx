@@ -31,6 +31,34 @@ const App = () => {
     
     const clientIpc = ClientPostMessageManager.getInstance();
 
+    // CRITICAL FIX: Prevent VS Code/Browser from intercepting drag events globally.
+    useEffect(() => {
+        logger.log('[DND] Attaching global drag/drop prevention listeners.');
+
+        const handleGlobalDragOver = (e: DragEvent) => {
+            e.preventDefault();
+            // Set the drop effect globally to ensure the cursor shows the correct icon (e.g., '+').
+            if (e.dataTransfer) {
+                e.dataTransfer.dropEffect = 'copy';
+            }
+        };
+
+        const handleGlobalDrop = (e: DragEvent) => {
+            // Prevent default behavior (e.g., opening file in browser/VS Code).
+            // Specific drop zones handle the actual logic via stopPropagation().
+            e.preventDefault();
+            logger.log('[GlobalDrop] Prevented default drop behavior.');
+        };
+
+        document.addEventListener('dragover', handleGlobalDragOver);
+        document.addEventListener('drop', handleGlobalDrop);
+
+        return () => {
+            document.removeEventListener('dragover', handleGlobalDragOver);
+            document.removeEventListener('drop', handleGlobalDrop);
+        };
+    }, []);
+
     const requestFiles = (force = false) => {
         setIsLoading(true);
         logger.log(`Requesting workspace files (force=${force}).`);
@@ -229,7 +257,7 @@ const App = () => {
 
     const handleDropOnContainer = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
-        event.stopPropagation();
+        event.stopPropagation(); // Stop propagation so the global drop handler doesn't fire
         setIsDraggingOver(false);
         logger.log('--- DROP ON MAIN CONTAINER (FALLBACK) ---');
         
@@ -243,16 +271,25 @@ const App = () => {
     };
     
     const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
-        event.preventDefault();
+        event.preventDefault(); // This is CRITICAL for onDrop to fire.
         event.stopPropagation();
-        logger.log("Drag over main view.");
+
+        // Ensure correct visual feedback if the drag contains files.
+        const containsFiles = Array.from(event.dataTransfer.types).some(type => typeof type === 'string' && type.toLowerCase() === 'files');
+        if (containsFiles) {
+             event.dataTransfer.dropEffect = 'copy';
+        }
     };
 
     const handleDragEnter = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         event.stopPropagation();
-        if (event.dataTransfer.types.includes('Files')) {
-            logger.log('Drag ENTER on main container with files.');
+        logger.log('Drag ENTER on main container.');
+
+        // Use a robust, case-insensitive check
+        const containsFiles = Array.from(event.dataTransfer.types).some(type => typeof type === 'string' && type.toLowerCase() === 'files');
+        
+        if (containsFiles) {
             setIsDraggingOver(true);
         }
     };
@@ -260,11 +297,13 @@ const App = () => {
     const handleDragLeave = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         event.stopPropagation();
-        if (event.currentTarget.contains(event.relatedTarget as Node)) {
-            return;
+        
+        // Robust check: Ensure the related target (the element being entered) is outside the current target (the container).
+        // This prevents flickering when moving between child elements within the container.
+        if (!event.currentTarget.contains(event.relatedTarget as Node)) {
+            logger.log('Drag LEAVE from main container.');
+            setIsDraggingOver(false);
         }
-        logger.log('Drag LEAVE from main container.');
-        setIsDraggingOver(false);
     };
 
     const { totalFiles, totalTokens, selectedFileNodes } = useMemo(() => {
@@ -313,23 +352,23 @@ const App = () => {
         >
             <div className="view-header">
                  <div className="header-row">
-                    <div className="toolbar">
-                        <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.saveCurrentSelection', args: [checkedFiles] })} title="Save Selection Set..."><VscSave /></button>
-                        <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.loadSelectionSet' })} title="Load Selection Set..."><VscFolderLibrary /></button>
-                        <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.manageSelectionSets' })} title="Manage Selection Sets..."><VscSettingsGear /></button>
-                    </div>
-                    <div className="toolbar">
-                        {isLoading && <span className="spinner" title="Refreshing..."><VscLoading /></span>}
-                        <button onClick={() => setIsSearchVisible(v => !v)} title="Search..." className={isSearchVisible ? 'active' : ''}><VscSearch /></button>
-                        <button onClick={handleToggleAutoAdd} title="Automatically add new files to selection" className={isAutoAddEnabled ? 'active' : ''}><VscCheckAll /></button>
-                        <button onClick={handleNewFile} title="New File..."><VscNewFile /></button>
-                        <button onClick={handleNewFolder} title="New Folder..."><VscNewFolder /></button>
-                        <button onClick={handleRefresh} title="Refresh Explorer"><VscRefresh /></button>
-                        <button onClick={handleExpandAll} title="Expand All Folders"><VscExpandAll /></button>
-                        <button onClick={handleCollapseAll} title="Collapse Folders in View"><VscCollapseAll /></button>
-                    </div>
+                     <div className="toolbar">
+                         <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.saveCurrentSelection', args: [checkedFiles] })} title="Save Selection Set..."><VscSave /></button>
+                         <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.loadSelectionSet' })} title="Load Selection Set..."><VscFolderLibrary /></button>
+                         <button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.manageSelectionSets' })} title="Manage Selection Sets..."><VscSettingsGear /></button>
+                     </div>
+                     <div className="toolbar">
+                         {isLoading && <span className="spinner" title="Refreshing..."><VscLoading /></span>}
+                         <button onClick={() => setIsSearchVisible(v => !v)} title="Search..." className={isSearchVisible ? 'active' : ''}><VscSearch /></button>
+                         <button onClick={handleToggleAutoAdd} title="Automatically add new files to selection" className={isAutoAddEnabled ? 'active' : ''}><VscCheckAll /></button>
+                         <button onClick={handleNewFile} title="New File..."><VscNewFile /></button>
+                         <button onClick={handleNewFolder} title="New Folder..."><VscNewFolder /></button>
+                         <button onClick={handleRefresh} title="Refresh Explorer"><VscRefresh /></button>
+                         <button onClick={handleExpandAll} title="Expand All Folders"><VscExpandAll /></button>
+                         <button onClick={handleCollapseAll} title="Collapse Folders in View"><VscCollapseAll /></button>
+                     </div>
                  </div>
-                 {isSearchVisible && (
+                {isSearchVisible && (
                     <div className="search-container">
                         <input
                             type="text"
@@ -338,7 +377,7 @@ const App = () => {
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
                     </div>
-                 )}
+                )}
             </div>
             <div className="file-tree-container">
                 {isLoading && files.length === 0 ? (
