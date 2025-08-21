@@ -14,6 +14,9 @@ import { Action, MoveActionPayload } from "./action.service";
 import pdf from 'pdf-parse/lib/pdf-parse.js';
 import * as XLSX from 'xlsx';
 import mammoth from 'mammoth';
+import { createStarryNight, common } from '@wooorm/starry-night';
+import { toHtml } from 'hast-util-to-html';
+
 
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
@@ -33,6 +36,7 @@ export class FSService {
     private pdfTextCache = new Map<string, { text: string; tokenCount: number }>();
     private excelMarkdownCache = new Map<string, { markdown: string; tokenCount: number }>();
     private wordTextCache = new Map<string, { text: string; tokenCount: number }>();
+    private starryNight: any = null;
 
     constructor(gitApi?: GitAPI) {
         this.gitApi = gitApi;
@@ -45,6 +49,51 @@ export class FSService {
                     this.triggerFullRefresh();
                 });
             });
+        }
+        this.initializeStarryNight();
+    }
+
+    private async initializeStarryNight() {
+        try {
+            // Dynamically import grammars
+            const grammars = await Promise.all([
+                import('@wooorm/starry-night/lang/source.css'),
+                import('@wooorm/starry-night/lang/source.js'),
+                import('@wooorm/starry-night/lang/source.json'),
+                import('@wooorm/starry-night/lang/source.shell'),
+                import('@wooorm/starry-night/lang/source.ts'),
+                import('@wooorm/starry-night/lang/source.tsx'),
+                import('@wooorm/starry-night/lang/text.md'),
+              ]);
+
+            this.starryNight = await createStarryNight([...common, ...grammars.map(g => g.default)]);
+            Services.loggerService.log('Starry Night syntax highlighter initialized.');
+        } catch (error) {
+            Services.loggerService.error(`Failed to initialize Starry Night: ${error}`);
+        }
+    }
+
+    public async handleSyntaxHighlightRequest(code: string, lang: string, id: string, serverIpc: ServerPostMessageManager) {
+        if (!this.starryNight) {
+            Services.loggerService.error('Starry Night not initialized, cannot highlight.');
+            serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml: `<pre><code>${code}</code></pre>`, id });
+            return;
+        }
+
+        const scope = this.starryNight.flagToScope(lang);
+        if (!scope) {
+            Services.loggerService.warn(`No Starry Night scope found for language: ${lang}`);
+            serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml: `<pre><code>${code}</code></pre>`, id });
+            return;
+        }
+
+        try {
+            const tree = this.starryNight.highlight(code, scope);
+            const highlightedHtml = toHtml(tree);
+            serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml, id });
+        } catch (error) {
+            Services.loggerService.error(`Starry Night highlighting failed for lang ${lang}: ${error}`);
+            serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml: `<pre><code>${code}</code></pre>`, id });
         }
     }
 

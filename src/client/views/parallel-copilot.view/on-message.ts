@@ -14,4 +14,8 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     serverIpc.onClientMessage(ClientToServerChannel.RequestFileExistence, (data) => {
         Services.fsService.handleFileExistenceRequest(data.paths, serverIpc);
     });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestSyntaxHighlight, (data) => {
+        Services.fsService.handleSyntaxHighlightRequest(data.code, data.lang, data.id, serverIpc);
+    });
 }

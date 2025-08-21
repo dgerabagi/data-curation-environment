@@ -1,20 +1,20 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-21T15:22:00.941Z
+  Date Generated: 2025-08-21T17:10:20.803Z
   ---
   Total Files: 201
-  Total Lines: 16880
-  Total Characters: 780968
-  Approx. Tokens: 195319
+  Total Lines: 16991
+  Total Characters: 787035
+  Approx. Tokens: 196836
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
 2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
-3. src\backend\services\fs.service.ts (8520 tokens)
-4. src\client\views\context-chooser.view\view.tsx (5482 tokens)
-5. src\client\components\tree-view\TreeView.tsx (4424 tokens)
+3. src\backend\services\fs.service.ts (9134 tokens)
+4. src\client\views\context-chooser.view\view.tsx (5562 tokens)
+5. src\client\components\tree-view\TreeView.tsx (4508 tokens)
 6. src\Artifacts\A0. DCE Master Artifact List.md (4396 tokens)
 7. src\backend\services\flattener.service.ts (3685 tokens)
 8. src\client\views\context-chooser.view\view.scss (3638 tokens)
@@ -26,7 +26,7 @@
 2. .vscodeignore - Lines: 11 - Chars: 356 - Tokens: 89
 3. bootstrap-flattener.js - Lines: 185 - Chars: 5834 - Tokens: 1459
 4. LICENSE - Lines: 21 - Chars: 1090 - Tokens: 273
-5. package.json - Lines: 133 - Chars: 4361 - Tokens: 1091
+5. package.json - Lines: 135 - Chars: 4445 - Tokens: 1112
 6. public\copilot.svg - Lines: 5 - Chars: 445 - Tokens: 112
 7. public\spiral.svg - Lines: 8 - Chars: 459 - Tokens: 115
 8. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 238 - Chars: 17581 - Tokens: 4396
@@ -77,7 +77,7 @@
 53. src\Artifacts\A45. DCE - Phase 2 - Pop-out Co-Pilot Window - Feature Plan.md - Lines: 49 - Chars: 4156 - Tokens: 1039
 54. src\Artifacts\A46. DCE - Phase 2 - Paste and Parse Response - Feature Plan.md - Lines: 38 - Chars: 3587 - Tokens: 897
 55. src\Artifacts\A47. DCE - Phase 2 - Prompt Amalgamation Feature Plan.md - Lines: 42 - Chars: 3499 - Tokens: 875
-56. src\Artifacts\A48. DCE - Phase 2 - Advanced Syntax Highlighting Plan.md - Lines: 53 - Chars: 4323 - Tokens: 1081
+56. src\Artifacts\A48. DCE - Phase 2 - Advanced Syntax Highlighting Plan.md - Lines: 50 - Chars: 4606 - Tokens: 1152
 57. src\Artifacts\A49. DCE - Phase 2 - File Association & Diffing Plan.md - Lines: 43 - Chars: 4390 - Tokens: 1098
 58. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
 59. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
@@ -88,7 +88,7 @@
 64. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
 65. src\backend\services\action.service.ts - Lines: 73 - Chars: 2471 - Tokens: 618
 66. src\backend\services\flattener.service.ts - Lines: 327 - Chars: 14740 - Tokens: 3685
-67. src\backend\services\fs.service.ts - Lines: 718 - Chars: 34077 - Tokens: 8520
+67. src\backend\services\fs.service.ts - Lines: 767 - Chars: 36535 - Tokens: 9134
 68. src\backend\services\history.service.ts - Lines: 63 - Chars: 2186 - Tokens: 547
 69. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
 70. src\backend\services\prompt.service.ts - Lines: 113 - Chars: 13923 - Tokens: 3481
@@ -97,23 +97,23 @@
 73. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
 74. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
 75. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
-76. src\client\components\file-tree\FileTree.tsx - Lines: 261 - Chars: 11631 - Tokens: 2908
+76. src\client\components\file-tree\FileTree.tsx - Lines: 262 - Chars: 11897 - Tokens: 2975
 77. src\client\components\file-tree\FileTree.utils.ts - Lines: 189 - Chars: 7284 - Tokens: 1821
 78. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13099 - Tokens: 3275
-79. src\client\components\tree-view\TreeView.tsx - Lines: 386 - Chars: 17694 - Tokens: 4424
+79. src\client\components\tree-view\TreeView.tsx - Lines: 394 - Chars: 18029 - Tokens: 4508
 80. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 81. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
 82. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 83. src\client\views\context-chooser.view\on-message.ts - Lines: 143 - Chars: 6146 - Tokens: 1537
 84. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
-85. src\client\views\context-chooser.view\view.tsx - Lines: 432 - Chars: 21927 - Tokens: 5482
+85. src\client\views\context-chooser.view\view.tsx - Lines: 435 - Chars: 22245 - Tokens: 5562
 86. src\client\views\index.ts - Lines: 35 - Chars: 1714 - Tokens: 429
 87. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-88. src\client\views\parallel-copilot.view\on-message.ts - Lines: 17 - Chars: 801 - Tokens: 201
+88. src\client\views\parallel-copilot.view\on-message.ts - Lines: 21 - Chars: 997 - Tokens: 250
 89. src\client\views\parallel-copilot.view\view.scss - Lines: 233 - Chars: 5250 - Tokens: 1313
-90. src\client\views\parallel-copilot.view\view.tsx - Lines: 163 - Chars: 8067 - Tokens: 2017
-91. src\common\ipc\channels.enum.ts - Lines: 55 - Chars: 2821 - Tokens: 706
-92. src\common\ipc\channels.type.ts - Lines: 47 - Chars: 3607 - Tokens: 902
+90. src\client\views\parallel-copilot.view\view.tsx - Lines: 200 - Chars: 9712 - Tokens: 2428
+91. src\common\ipc\channels.enum.ts - Lines: 57 - Chars: 2957 - Tokens: 740
+92. src\common\ipc\channels.type.ts - Lines: 49 - Chars: 3815 - Tokens: 954
 93. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
 94. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 95. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
@@ -222,7 +222,7 @@
 198. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
 199. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
 200. tsconfig.json - Lines: 19 - Chars: 457 - Tokens: 115
-201. webpack.config.js - Lines: 84 - Chars: 2302 - Tokens: 576
+201. webpack.config.js - Lines: 90 - Chars: 2440 - Tokens: 610
 
 <file path=".gitignore">
 node_modules
@@ -583,9 +583,12 @@ SOFTWARE.
         "babel-loader": "^9.1.3",
         "@babel/preset-react": "^7.24.7",
         "@babel/preset-typescript": "^7.24.7",
-        "process": "^0.11.10"
+        "process": "^0.11.10",
+        "path-browserify": "^1.0.1"
     },
     "dependencies": {
+        "@wooorm/starry-night": "^3.2.0",
+        "hast-util-to-html": "^9.0.1",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
         "react-icons": "^5.3.0",
@@ -593,8 +596,7 @@ SOFTWARE.
         "reflect-metadata": "^0.2.2",
         "pdf-parse": "^1.1.1",
         "xlsx": "^0.18.5",
-        "mammoth": "^1.8.0",
-        "react-markdown": "^9.0.1"
+        "mammoth": "^1.8.0"
     }
 }
 </file>
@@ -3926,10 +3928,7 @@ The process of constructing the final `prompt.md` file is a core part of the cur
 # Artifact A48: DCE - Phase 2 - Advanced Syntax Highlighting Plan
 # Date Created: C82
 # Author: AI Model
-
-- **Key/Value for A0:**
-- **Description:** Outlines the strategy to replace the plain textarea in response tabs with a proper code editor component to provide rich syntax highlighting for Markdown and embedded code.
-- **Tags:** feature plan, phase 2, ui, ux, syntax highlighting, monaco, codemirror
+# Updated on: C85 (Codify rationale for using starry-night)
 
 ## 1. Overview & Goal
 
@@ -3939,43 +3938,43 @@ AI-generated responses are complex documents, containing both explanatory Markdo
 
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
-| P2-SYNTAX-01 | **View Highlighted Responses** | As a developer, I want to see AI responses with full syntax highlighting inside the Parallel Co-Pilot tabs, so I can easily distinguish between comments, keywords, and code, just like in a real editor. | - The content area of each response tab renders with syntax highlighting. <br> - Standard Markdown elements (headers, lists, bold, italics, backticks) are formatted correctly. <br> - Code blocks (e.g., ` ```typescript ... ``` `) are highlighted with the correct grammar for the specified language. <br> - The editor component should be theme-aware, matching the user's current VS Code theme. |
+| P2-SYNTAX-01 | **View Highlighted Responses** | As a developer, I want to see AI responses with full syntax highlighting inside the Parallel Co-Pilot tabs, so I can easily distinguish between comments, keywords, and code, just like in a real editor. | - The content area of each response tab renders with syntax highlighting. <br> - Standard Markdown elements (headers, lists, bold, italics, backticks) are formatted correctly. <br> - Code blocks (e.g., ` ```typescript ... ``` `) are highlighted with the correct grammar for the specified language. <br> - The highlighting should be theme-aware, matching the user's current VS Code theme. |
 
-## 3. Technical Implementation Strategy
+## 3. Technical Implementation Strategy (C83 & C85)
 
-### 3.1. Choosing a Library
+### 3.1. Chosen Library: `starry-night`
 
-A simple Markdown renderer is insufficient because it cannot handle language-specific highlighting within code blocks. A full-featured code editor component is required.
+After research and consideration of alternatives like `refractor`, **`@wooorm/starry-night`** remains the chosen library for syntax highlighting.
 
--   **Option A: Monaco Editor (`@monaco-editor/react`)**
-    -   **Pros:** This is the editor that powers VS Code itself. It provides the most authentic look and feel, supports all the same languages and themes, and is extremely powerful.
-    -   **Cons:** It can be heavy and complex to configure within a Webpack-based webview.
--   **Option B: CodeMirror (`@uiw/react-codemirror`)**
-    -   **Pros:** More lightweight and modular than Monaco. Excellent language support and theming capabilities. Often easier to integrate into React projects.
-    -   **Cons:** The look and feel might not be a 100% perfect match for the native VS Code editor.
+-   **Rationale (C85):**
+    -   **High Fidelity:** It uses the same TextMate grammars as VS Code itself. This is the most important factor, as it ensures the highlighting in our panel will be a perfect visual match to the user's native editor experience.
+    -   **Backend Architecture:** Our implementation performs highlighting on the backend (in the Node.js extension host) and sends pre-rendered HTML to the frontend webview. This means the primary drawback of `starry-night`—its large bundle size and WASM dependency—is a non-issue for the client. The "heavy lifting" is done by the extension's server-side process, keeping the webview lightweight and performant.
+    -   **AST Output:** It produces a HAST (HTML Abstract Syntax Tree), which provides flexibility, though our current implementation serializes it directly to an HTML string.
 
--   **Decision:** Start with `react-markdown` with a syntax highlighting plugin (like `rehype-prism-plus`) as an immediate, lightweight improvement. Plan for a future migration to a full editor like CodeMirror or Monaco as the feature set grows. This phased approach balances immediate value with long-term goals.
+### 3.2. Implementation Plan
 
-### 3.2. Implementation Plan (Phase 1: `react-markdown`)
+1.  **Dependencies (`package.json`):**
+    *   Add `@wooorm/starry-night` as the core dependency.
+    *   Add `hast-util-to-html` to convert the abstract syntax tree to HTML.
+    *   The grammars are now dynamically imported by `starry-night` itself, removing the need to add individual language packages.
 
-1.  **Dependencies:** Add `react-markdown` and a syntax highlighting plugin (e.g., `rehype-prism-plus` or `react-syntax-highlighter`) to `package.json`.
-2.  **Component (`parallel-copilot.view/view.tsx`):**
-    *   Create a new component, e.g., `ResponseViewer`.
-    *   This component will take the AI response text as a prop.
-    *   It will use the `ReactMarkdown` component to render the text.
-    *   The renderer will be configured to use the syntax highlighting plugin for code blocks.
-    *   The main view will need a toggle to switch between the `ResponseViewer` (read-only) and a `<textarea>` (for editing/pasting).
-3.  **Styling:** CSS for the chosen syntax highlighting theme will need to be imported or configured.
+2.  **Backend (`fs.service.ts`):**
+    *   Create a new `async handleSyntaxHighlightRequest({ code, lang, id })` method.
+    *   This method will initialize `starry-night` with all common grammars.
+    *   It will use `starryNight.highlight(code, scope)` where `scope` is determined from the language identifier (e.g., 'typescript' -> 'source.ts').
+    *   It will convert the resulting `hast` tree to an HTML string using `toHtml`.
+    *   This HTML string will be sent back to the client via a new IPC channel, including the `id` to match the request.
 
-### 3.3. Implementation Plan (Phase 2: Full Editor Integration)
+3.  **IPC Channels:**
+    *   `ClientToServerChannel.RequestSyntaxHighlight`: Payload `{ code: string, lang: string, id: string }`.
+    *   `ServerToClientChannel.SendSyntaxHighlight`: Payload `{ highlightedHtml: string, id: string }`.
 
-1.  **Dependency:** Add the chosen editor library (`@uiw/react-codemirror` or `@monaco-editor/react`) to `package.json`.
-2.  **Webpack Configuration:** Adjust `webpack.config.js` to correctly bundle the editor's assets and web workers, which can be complex.
-3.  **Component (`parallel-copilot.view/view.tsx`):**
-    *   Replace the `textarea`/`ReactMarkdown` toggle with the new editor component.
-    *   Configure the editor component to be read-only initially, with a prop to enable editing.
-    *   Set the language mode to "markdown".
-    *   Configure the theme to match the VS Code theme variables.
+4.  **Frontend (`parallel-copilot.view/view.tsx`):**
+    *   The view will be split into two panes: an editable `<textarea>` on the left and a read-only preview `<div>` on the right.
+    *   The `onPaste` and `onChange` handlers for the textarea will be updated. They will parse the content to find code blocks (e.g., ` ```typescript ... ``` `).
+    *   For each code block found, it will generate a unique ID (the full block content itself) and send a `RequestSyntaxHighlight` message to the backend with the block's content, language, and the ID.
+    *   A new state variable, e.g., `highlightedBlocks: Map<string, string>`, will store the HTML returned from the backend, keyed by the unique ID.
+    *   The right-hand preview pane will render the full response. When it encounters a code block, it will look up the highlighted HTML in the state and render it using `dangerouslySetInnerHTML`. This provides a live, highlighted preview as the user edits or pastes content.
 </file>
 
 <file path="src/Artifacts/A49. DCE - Phase 2 - File Association & Diffing Plan.md">
@@ -6109,6 +6108,9 @@ import { Action, MoveActionPayload } from "./action.service";
 import pdf from 'pdf-parse/lib/pdf-parse.js';
 import * as XLSX from 'xlsx';
 import mammoth from 'mammoth';
+import { createStarryNight, common } from '@wooorm/starry-night';
+import { toHtml } from 'hast-util-to-html';
+
 
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
@@ -6128,6 +6130,7 @@ export class FSService {
     private pdfTextCache = new Map<string, { text: string; tokenCount: number }>();
     private excelMarkdownCache = new Map<string, { markdown: string; tokenCount: number }>();
     private wordTextCache = new Map<string, { text: string; tokenCount: number }>();
+    private starryNight: any = null;
 
     constructor(gitApi?: GitAPI) {
         this.gitApi = gitApi;
@@ -6140,6 +6143,51 @@ export class FSService {
                     this.triggerFullRefresh();
                 });
             });
+        }
+        this.initializeStarryNight();
+    }
+
+    private async initializeStarryNight() {
+        try {
+            // Dynamically import grammars
+            const grammars = await Promise.all([
+                import('@wooorm/starry-night/lang/source.css'),
+                import('@wooorm/starry-night/lang/source.js'),
+                import('@wooorm/starry-night/lang/source.json'),
+                import('@wooorm/starry-night/lang/source.shell'),
+                import('@wooorm/starry-night/lang/source.ts'),
+                import('@wooorm/starry-night/lang/source.tsx'),
+                import('@wooorm/starry-night/lang/text.md'),
+              ]);
+
+            this.starryNight = await createStarryNight([...common, ...grammars.map(g => g.default)]);
+            Services.loggerService.log('Starry Night syntax highlighter initialized.');
+        } catch (error) {
+            Services.loggerService.error(`Failed to initialize Starry Night: ${error}`);
+        }
+    }
+
+    public async handleSyntaxHighlightRequest(code: string, lang: string, id: string, serverIpc: ServerPostMessageManager) {
+        if (!this.starryNight) {
+            Services.loggerService.error('Starry Night not initialized, cannot highlight.');
+            serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml: `<pre><code>${code}</code></pre>`, id });
+            return;
+        }
+
+        const scope = this.starryNight.flagToScope(lang);
+        if (!scope) {
+            Services.loggerService.warn(`No Starry Night scope found for language: ${lang}`);
+            serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml: `<pre><code>${code}</code></pre>`, id });
+            return;
+        }
+
+        try {
+            const tree = this.starryNight.highlight(code, scope);
+            const highlightedHtml = toHtml(tree);
+            serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml, id });
+        } catch (error) {
+            Services.loggerService.error(`Starry Night highlighting failed for lang ${lang}: ${error}`);
+            serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml: `<pre><code>${code}</code></pre>`, id });
         }
     }
 
@@ -7386,7 +7434,7 @@ export default ContextMenu;
 
 <file path="src/client/components/file-tree/FileTree.tsx">
 import React, { useState, useMemo } from 'react';
-import TreeView from '../tree-view/TreeView';
+import TreeView, { TreeNode } from '../tree-view/TreeView';
 import { FileNode } from '@/common/types/file-node';
 import Checkbox from '../Checkbox';
 import {
@@ -7532,14 +7580,15 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
         return calculate;
     }, [checkedFiles]);
 
-    const renderFileNodeContent = (node: FileNode, isExpanded: boolean) => {
-        const isDirectory = Array.isArray(node.children);
+    const renderFileNodeContent = (node: TreeNode, isExpanded: boolean) => {
+        const fileNode = node as FileNode;
+        const isDirectory = Array.isArray(fileNode.children);
         
-        const hasCheckedAncestor = checkedFiles.some(ancestor => node.absolutePath.startsWith(ancestor + '/') && node.absolutePath !== ancestor);
-        const isDirectlyChecked = checkedFiles.includes(node.absolutePath);
+        const hasCheckedAncestor = checkedFiles.some(ancestor => fileNode.absolutePath.startsWith(ancestor + '/') && fileNode.absolutePath !== ancestor);
+        const isDirectlyChecked = checkedFiles.includes(fileNode.absolutePath);
         const isChecked = isDirectlyChecked || hasCheckedAncestor;
 
-        if (renamingPath === node.absolutePath) {
+        if (renamingPath === fileNode.absolutePath) {
             return (
                 <input
                     type="text"
@@ -7559,67 +7608,67 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
             );
         }
 
-        const checkedTokensInDir = isDirectory ? calculateCheckedTokens(node) : 0;
-        const isFullyChecked = isDirectory && checkedTokensInDir > 0 && checkedTokensInDir === node.tokenCount;
+        const checkedTokensInDir = isDirectory ? calculateCheckedTokens(fileNode) : 0;
+        const isFullyChecked = isDirectory && checkedTokensInDir > 0 && checkedTokensInDir === fileNode.tokenCount;
         
-        const liveProblems = problemMap[node.absolutePath];
-        const problemData = liveProblems || node.problemCounts;
+        const liveProblems = problemMap[fileNode.absolutePath];
+        const problemData = liveProblems || fileNode.problemCounts;
 
         const problemErrorCount = problemData?.error || 0;
         const problemWarningCount = problemData?.warning || 0;
         const hasProblems = problemErrorCount > 0 || problemWarningCount > 0;
         const problemColorClass = problemErrorCount > 0 ? 'problem-error' : 'problem-warning';
         const problemTooltip = `${problemErrorCount} Errors, ${problemWarningCount} Warnings`;
-        const hasError = !!node.error;
+        const hasError = !!fileNode.error;
 
         const renderTokenCount = () => {
             if (hasError) {
                 return <span>---</span>;
             }
-            if (node.isImage) {
-                return <span>{formatBytes(node.sizeInBytes)}</span>;
+            if (fileNode.isImage) {
+                return <span>{formatBytes(fileNode.sizeInBytes)}</span>;
             }
-            if (node.tokenCount > 0) {
+            if (fileNode.tokenCount > 0) {
                 let content;
                 if (isDirectory) {
                     if (isFullyChecked) {
-                        content = `(${formatLargeNumber(node.tokenCount, 1)})`;
+                        content = `(${formatLargeNumber(fileNode.tokenCount, 1)})`;
                     } else if (checkedTokensInDir > 0) {
-                        content = <>{formatLargeNumber(node.tokenCount, 1)} <span className="selected-token-count">({formatLargeNumber(checkedTokensInDir, 1)})</span></>;
+                        content = <>{formatLargeNumber(fileNode.tokenCount, 1)} <span className="selected-token-count">({formatLargeNumber(checkedTokensInDir, 1)})</span></>;
                     } else {
-                        content = formatLargeNumber(node.tokenCount, 1);
+                        content = formatLargeNumber(fileNode.tokenCount, 1);
                     }
                 } else { // It's a file
-                    content = isChecked ? `(${formatLargeNumber(node.tokenCount, 1)})` : formatLargeNumber(node.tokenCount, 1);
+                    content = isChecked ? `(${formatLargeNumber(fileNode.tokenCount, 1)})` : formatLargeNumber(fileNode.tokenCount, 1);
                 }
                 return <><VscSymbolNumeric /> <span>{content}</span></>;
             }
             return null;
         };
 
-        const gitStatusClass = node.gitStatus ? `git-status-${node.gitStatus}` : '';
+        const gitStatusClass = fileNode.gitStatus ? `git-status-${fileNode.gitStatus}` : '';
 
         return (
-            <div className={`file-item ${gitStatusClass} ${hasProblems ? problemColorClass : ''} ${hasError ? 'has-error' : ''}`} title={node.error}>
+            <div className={`file-item ${gitStatusClass} ${hasProblems ? problemColorClass : ''} ${hasError ? 'has-error' : ''}`} title={fileNode.error}>
                 <Checkbox
                     className="file-checkbox"
                     checked={isChecked}
-                    indeterminate={!isDirectlyChecked && !hasCheckedAncestor && checkedFiles.some(p => p.startsWith(node.absolutePath))}
-                    onChange={(_, e) => handleFileCheckboxChange(e, node.absolutePath)}
+                    indeterminate={!isDirectlyChecked && !hasCheckedAncestor && checkedFiles.some(p => p.startsWith(fileNode.absolutePath))}
+                    onChange={(_, e) => handleFileCheckboxChange(e, fileNode.absolutePath)}
                     disabled={hasError}
                 />
-                <span className="file-icon">{isDirectory ? (isExpanded ? <VscFolderOpened /> : <VscFolder />) : getFileIcon(node.name)}</span>
-                <span className="file-name">{node.name}</span>
+                <span className="file-icon">{isDirectory ? (isExpanded ? <VscFolderOpened /> : <VscFolder />) : getFileIcon(fileNode.name)}</span>
+                <span className="file-name">{fileNode.name}</span>
                 <div className="file-stats">
-                    {hasError && <span className="error-icon" title={node.error}><VscError/></span>}
-                    {node.gitStatus && <span className="git-status-badge" title={getGitStatusTooltip(node.gitStatus)}>{node.gitStatus}</span>}
+                    {hasError && <span className="error-icon" title={fileNode.error}><VscError/></span>}
+                    {fileNode.gitStatus && <span className="git-status-badge" title={getGitStatusTooltip(fileNode.gitStatus)}>{fileNode.gitStatus}</span>}
                     {hasProblems && (
                         <span className="problem-badge" title={problemTooltip}>
                             {problemErrorCount > 0 && <span className='error-icon'><VscError/> {problemErrorCount}</span>}
                             {problemWarningCount > 0 && <span className='warning-icon'><VscWarning/> {problemWarningCount}</span>}
                         </span>
                     )}
-                    {isDirectory && node.fileCount > 0 && (<> <VscFiles /> <span>{formatNumberWithCommas(node.fileCount)}</span> </>)}
+                    {isDirectory && fileNode.fileCount > 0 && (<> <VscFiles /> <span>{formatNumberWithCommas(fileNode.fileCount)}</span> </>)}
                     {renderTokenCount()}
                 </div>
             </div>
@@ -7629,14 +7678,14 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
     return (
         <div className="file-tree">
             <TreeView 
-                data={filteredData} 
+                data={filteredData as TreeNode[]} 
                 renderNodeContent={(node, isExpanded) => renderFileNodeContent(node, isExpanded as boolean)} 
-                onContextMenu={handleContextMenu} 
+                onContextMenu={(e, node) => handleContextMenu(e, node as FileNode)} 
                 collapseTrigger={collapseTrigger}
                 expandAllTrigger={expandAllTrigger}
                 activeFile={activeFile} 
                 updateCheckedFiles={updateCheckedFiles}
-                onNodeDrop={onNodeDrop}
+                onNodeDrop={(e, node) => onNodeDrop?.(e, node as FileNode)}
                 onCopy={onCopy}
                 clipboard={clipboard}
             />
@@ -8120,11 +8169,13 @@ export default SelectedFilesView;
 </file>
 
 <file path="src/client/components/tree-view/TreeView.tsx">
+// Updated on: C83 (Fix ref assignment type error)
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { VscChevronRight } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 import { logger } from '@/client/utils/logger';
+import { FileNode } from '@/common/types/file-node';
 
 export interface TreeNode {
     name: string;
@@ -8142,7 +8193,7 @@ interface TreeViewProps {
     onContextMenu?: (event: React.MouseEvent, node: TreeNode) => void;
     activeFile?: string;
     updateCheckedFiles: (path: string) => void;
-    onNodeDrop?: (event: React.DragEvent, node: TreeNode) => void;
+    onNodeDrop?: (event: React.DragEvent, node: FileNode) => void;
     onCopy: (path: string) => void;
     clipboard: { path: string; type: 'copy' } | null;
 }
@@ -8156,7 +8207,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     const [dropTarget, setDropTarget] = useState<string | null>(null);
     const expansionTimer = useRef<NodeJS.Timeout | null>(null);
 
-    const nodeRefs = useRef<Map<string, HTMLLIElement | null>>(new Map());
+    const nodeRefs = useRef<Map<string, HTMLLIElement>>(new Map());
     const treeViewRef = useRef<HTMLDivElement>(null);
     const flatNodeList = useRef<TreeNode[]>([]);
     const clientIpc = ClientPostMessageManager.getInstance();
@@ -8438,7 +8489,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
             }
             setDraggedPath(null);
         } else if (onNodeDrop) { // External drop
-            onNodeDrop(e, node);
+            onNodeDrop(e, node as FileNode);
         }
     };
     
@@ -8462,7 +8513,13 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
 
             return (
                 <li key={node.absolutePath} 
-                    ref={el => nodeRefs.current.set(node.absolutePath, el)}
+                    ref={el => {
+                        if (el) {
+                            nodeRefs.current.set(node.absolutePath, el);
+                        } else {
+                            nodeRefs.current.delete(node.absolutePath);
+                        }
+                    }}
                     draggable="true"
                     onDragStart={(e) => handleInternalDragStart(e, node)}
                     onDragEnter={(e) => handleDragEnter(e, node)}
@@ -9297,7 +9354,7 @@ body {
 </file>
 
 <file path="src/client/views/context-chooser.view/view.tsx">
-// Updated on: C80 (Fix cache pre-warming logic to correctly expand directories and process files on load)
+// Updated on: C83 (Fix onNodeDrop type)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -9312,6 +9369,7 @@ import { logger } from '@/client/utils/logger';
 import SelectedFilesView from '../../components/SelectedFilesView';
 import { addRemovePathInSelectedFiles, removePathsFromSelected } from '@/client/components/file-tree/FileTree.utils';
 import { SelectionSet, ProblemCountsMap } from '@/common/ipc/channels.type';
+import path from 'path-browserify';
 
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
@@ -9559,7 +9617,8 @@ const App = () => {
         });
     };
 
-    const processDrop = (event: React.DragEvent, targetDir: string) => {
+    const processDrop = (event: React.DragEvent, node: FileNode) => {
+        const targetDir = node.children ? node.absolutePath : path.dirname(node.absolutePath);
         logger.log(`[Drop] Drop detected on target: ${targetDir}`);
         logger.log(`[Drop] Available types: ${Array.from(event.dataTransfer.types).join(', ')}`);
 
@@ -9597,18 +9656,19 @@ const App = () => {
         logger.warn('[Drop] Drop event occurred but no compatible data type was found.');
     };
 
-    const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+    const handleContainerDrop = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         event.stopPropagation();
         setIsDraggingOver(false);
         if (!isWorkspaceTrusted) return;
         
-        const targetDir = files.length > 0 ? files[0].absolutePath : '';
-        if (!targetDir) {
+        const rootDir = files.length > 0 ? files[0].absolutePath : '';
+        if (!rootDir) {
             logger.error("Cannot drop file, no workspace root identified.");
             return;
         }
-        processDrop(event, targetDir);
+        const dummyRootNode: FileNode = { absolutePath: rootDir, name: path.basename(rootDir), children: [], tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false };
+        processDrop(event, dummyRootNode);
     };
     
     const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
@@ -9668,7 +9728,7 @@ const App = () => {
     return (
         <div 
             className={`view-container ${isDraggingOver ? 'drag-over' : ''}`} 
-            onDrop={handleDrop} 
+            onDrop={handleContainerDrop} 
             onDragOver={handleDragOver}
             onDragEnter={handleDragEnter}
             onDragLeave={handleDragLeave}
@@ -9796,6 +9856,10 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestFileExistence, (data) => {
         Services.fsService.handleFileExistenceRequest(data.paths, serverIpc);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestSyntaxHighlight, (data) => {
+        Services.fsService.handleSyntaxHighlightRequest(data.code, data.lang, data.id, serverIpc);
     });
 }
 </file>
@@ -10037,7 +10101,7 @@ body {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
-// Updated on: C82 (Add prompt generation, markdown rendering, and file association)
+// Updated on: C86 (Fix all TS errors from C85)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -10045,13 +10109,33 @@ import { VscChevronLeft, VscChevronRight, VscComment, VscGoToFile, VscReplaceAll
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
-import ReactMarkdown from 'react-markdown';
 
-const AssociatedFile = ({ path, exists }: { path: string, exists: boolean }) => {
+const AssociatedFile: React.FC<{ path: string, exists: boolean }> = ({ path, exists }) => {
     return (
         <div className="associated-file" title={path}>
-            {exists ? <VscCheck className="icon-success" /> : <VscError className="icon-error" />}
+            {exists ? <span className="icon-success"><VscCheck/></span> : <span className="icon-error"><VscError/></span>}
             <span className="file-path">{path.split('/').pop()}</span>
+        </div>
+    );
+};
+
+const HighlightedCodeViewer = ({ content, highlightedBlocks }: { content: string; highlightedBlocks: Map<string, string> }) => {
+    const parts = content.split(/(```[\s\S]*?```)/g);
+
+    return (
+        <div className="response-markdown-preview">
+            {parts.map((part, index) => {
+                if (part.startsWith('```')) {
+                    const highlightedHtml = highlightedBlocks.get(part);
+                    if (highlightedHtml) {
+                        return <div key={index} dangerouslySetInnerHTML={{ __html: highlightedHtml }} />;
+                    }
+                    // Fallback for un-highlighted code
+                    return <pre key={index}><code>{part.replace(/```(\w+)?\n|```/g, '')}</code></pre>;
+                }
+                // Naive markdown for non-code parts
+                return <span key={index}>{part}</span>;
+            })}
         </div>
     );
 };
@@ -10061,9 +10145,10 @@ const App = () => {
     const [tabContent, setTabContent] = React.useState<{ [key: number]: string }>({});
     const [detectedFiles, setDetectedFiles] = React.useState<{ [key: number]: string[] }>({});
     const [fileExistence, setFileExistence] = React.useState<{ [path: string]: boolean }>({});
+    const [highlightedBlocks, setHighlightedBlocks] = React.useState<Map<string, string>>(new Map());
     const [tabCount, setTabCount] = React.useState(4);
-    const [cycle, setCycle] = React.useState(82);
-    const [cycleTitle, setCycleTitle] = React.useState('Continue refinement/delivery of pcpp');
+    const [cycle, setCycle] = React.useState(86);
+    const [cycleTitle, setCycleTitle] = React.useState('ts errors');
     const [ephemeralContext, setEphemeralContext] = React.useState('');
 
     const clientIpc = ClientPostMessageManager.getInstance();
@@ -10073,23 +10158,41 @@ const App = () => {
             logger.log(`[PCPP] Received file existence map.`);
             setFileExistence(prev => ({ ...prev, ...existenceMap }));
         });
+        clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => {
+            setHighlightedBlocks(prev => new Map(prev).set(id, highlightedHtml));
+        });
     }, [clientIpc]);
+
+    const handleContentChange = (newContent: string, tabIndex: number) => {
+        setTabContent(prev => ({ ...prev, [tabIndex]: newContent }));
+
+        const codeBlockRegex = /```(\w+)?\n([\s\S]*?)```/g;
+        const matches = newContent.matchAll(codeBlockRegex);
+
+        for (const match of matches) {
+            const fullBlock = match[0];
+            const lang = match[1] || 'plaintext';
+            const code = match[2] || '';
+
+            if (fullBlock && !highlightedBlocks.has(fullBlock)) {
+                clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code, lang, id: fullBlock });
+            }
+        }
+    };
 
     const handlePaste = (e: React.ClipboardEvent<HTMLTextAreaElement>, tabIndex: number) => {
         const pastedText = e.clipboardData.getData('text');
-        
-        setTabContent(prev => ({...prev, [tabIndex]: pastedText}));
+        handleContentChange(pastedText, tabIndex);
 
         logger.log(`[PCPP PARSE] Pasted content into tab ${tabIndex}. Parsing for file paths...`);
-        
         const fileRegex = /<file path="([^"]+)">/g;
         const matches = pastedText.matchAll(fileRegex);
-        const paths = Array.from(matches, m => m[1]);
+        
+        const paths = Array.from(matches, m => m[1]).filter(Boolean);
 
         if (paths.length > 0) {
             logger.log(`[PCPP PARSE] Detected file paths: ${paths.join(', ')}`);
             setDetectedFiles(prev => ({...prev, [tabIndex]: paths}));
-            // Request existence check from backend
             clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths });
         } else {
             logger.log('[PCPP PARSE] No file paths detected in pasted content.');
@@ -10184,12 +10287,10 @@ const App = () => {
                                 className="response-textarea"
                                 placeholder={`Paste AI response for tab ${activeTab} here...`}
                                 value={tabContent[activeTab] || ''}
-                                onChange={(e) => setTabContent(prev => ({...prev, [activeTab]: e.target.value}))}
+                                onChange={(e) => handleContentChange(e.target.value, activeTab)}
                                 onPaste={(e) => handlePaste(e, activeTab)}
                             />
-                            <div className="response-markdown-preview">
-                                <ReactMarkdown>{tabContent[activeTab] || '*Paste or type in the text area to see a preview.*'}</ReactMarkdown>
-                            </div>
+                            <HighlightedCodeViewer content={tabContent[activeTab] || '*Paste or type in the text area to see a preview.*'} highlightedBlocks={highlightedBlocks} />
                         </div>
                     </div>
                 )}
@@ -10241,6 +10342,7 @@ export enum ClientToServerChannel {
     // Phase 2: PCPP
     RequestCreatePromptFile = "clientToServer.requestCreatePromptFile",
     RequestFileExistence = "clientToServer.requestFileExistence",
+    RequestSyntaxHighlight = "clientToServer.requestSyntaxHighlight",
 }
 
 export enum ServerToClientChannel {
@@ -10257,6 +10359,7 @@ export enum ServerToClientChannel {
     
     // Phase 2: PCPP
     SendFileExistence = "serverToClient.sendFileExistence",
+    SendSyntaxHighlight = "serverToClient.sendSyntaxHighlight",
 }
 </file>
 
@@ -10295,6 +10398,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.VSCodeCommand ? { command: string, args?: any[] } :
     T extends ClientToServerChannel.RequestCreatePromptFile ? { cycleTitle: string; currentCycle: number } :
     T extends ClientToServerChannel.RequestFileExistence ? { paths: string[] } :
+    T extends ClientToServerChannel.RequestSyntaxHighlight ? { code: string; lang: string, id: string } :
     
     T extends ServerToClientChannel.SendWorkspaceFiles ? { files: FileNode[] } :
     T extends ServerToClientChannel.SendWorkspaceTrustState ? { isTrusted: boolean } :
@@ -10307,6 +10411,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.UpdateProblemCounts ? { problemMap: ProblemCountsMap } :
     T extends ServerToClientChannel.UpdateNodeStats ? { path: string, tokenCount: number, error?: string } :
     T extends ServerToClientChannel.SendFileExistence ? { existenceMap: { [path: string]: boolean } } :
+    T extends ServerToClientChannel.SendSyntaxHighlight ? { highlightedHtml: string, id: string } :
     never;
 </file>
 
@@ -17624,6 +17729,12 @@ const webviewConfig = {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].js',
         libraryTarget: 'commonjs2'
+    },
+    resolve: {
+        ...baseConfig.resolve,
+        fallback: {
+            "path": require.resolve("path-browserify")
+        }
     },
     plugins: [
         new CopyPlugin({

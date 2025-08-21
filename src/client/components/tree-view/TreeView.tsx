@@ -1,8 +1,10 @@
+// Updated on: C83 (Fix ref assignment type error)
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { VscChevronRight } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 import { logger } from '@/client/utils/logger';
+import { FileNode } from '@/common/types/file-node';
 
 export interface TreeNode {
     name: string;
@@ -20,7 +22,7 @@ interface TreeViewProps {
     onContextMenu?: (event: React.MouseEvent, node: TreeNode) => void;
     activeFile?: string;
     updateCheckedFiles: (path: string) => void;
-    onNodeDrop?: (event: React.DragEvent, node: TreeNode) => void;
+    onNodeDrop?: (event: React.DragEvent, node: FileNode) => void;
     onCopy: (path: string) => void;
     clipboard: { path: string; type: 'copy' } | null;
 }
@@ -34,7 +36,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     const [dropTarget, setDropTarget] = useState<string | null>(null);
     const expansionTimer = useRef<NodeJS.Timeout | null>(null);
 
-    const nodeRefs = useRef<Map<string, HTMLLIElement | null>>(new Map());
+    const nodeRefs = useRef<Map<string, HTMLLIElement>>(new Map());
     const treeViewRef = useRef<HTMLDivElement>(null);
     const flatNodeList = useRef<TreeNode[]>([]);
     const clientIpc = ClientPostMessageManager.getInstance();
@@ -316,7 +318,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
             }
             setDraggedPath(null);
         } else if (onNodeDrop) { // External drop
-            onNodeDrop(e, node);
+            onNodeDrop(e, node as FileNode);
         }
     };
     
@@ -340,7 +342,13 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
 
             return (
                 <li key={node.absolutePath} 
-                    ref={el => nodeRefs.current.set(node.absolutePath, el)}
+                    ref={el => {
+                        if (el) {
+                            nodeRefs.current.set(node.absolutePath, el);
+                        } else {
+                            nodeRefs.current.delete(node.absolutePath);
+                        }
+                    }}
                     draggable="true"
                     onDragStart={(e) => handleInternalDragStart(e, node)}
                     onDragEnter={(e) => handleDragEnter(e, node)}

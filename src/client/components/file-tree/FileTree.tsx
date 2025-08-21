@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import TreeView from '../tree-view/TreeView';
+import TreeView, { TreeNode } from '../tree-view/TreeView';
 import { FileNode } from '@/common/types/file-node';
 import Checkbox from '../Checkbox';
 import {
@@ -145,14 +145,15 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
         return calculate;
     }, [checkedFiles]);
 
-    const renderFileNodeContent = (node: FileNode, isExpanded: boolean) => {
-        const isDirectory = Array.isArray(node.children);
+    const renderFileNodeContent = (node: TreeNode, isExpanded: boolean) => {
+        const fileNode = node as FileNode;
+        const isDirectory = Array.isArray(fileNode.children);
         
-        const hasCheckedAncestor = checkedFiles.some(ancestor => node.absolutePath.startsWith(ancestor + '/') && node.absolutePath !== ancestor);
-        const isDirectlyChecked = checkedFiles.includes(node.absolutePath);
+        const hasCheckedAncestor = checkedFiles.some(ancestor => fileNode.absolutePath.startsWith(ancestor + '/') && fileNode.absolutePath !== ancestor);
+        const isDirectlyChecked = checkedFiles.includes(fileNode.absolutePath);
         const isChecked = isDirectlyChecked || hasCheckedAncestor;
 
-        if (renamingPath === node.absolutePath) {
+        if (renamingPath === fileNode.absolutePath) {
             return (
                 <input
                     type="text"
@@ -172,67 +173,67 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
             );
         }
 
-        const checkedTokensInDir = isDirectory ? calculateCheckedTokens(node) : 0;
-        const isFullyChecked = isDirectory && checkedTokensInDir > 0 && checkedTokensInDir === node.tokenCount;
+        const checkedTokensInDir = isDirectory ? calculateCheckedTokens(fileNode) : 0;
+        const isFullyChecked = isDirectory && checkedTokensInDir > 0 && checkedTokensInDir === fileNode.tokenCount;
         
-        const liveProblems = problemMap[node.absolutePath];
-        const problemData = liveProblems || node.problemCounts;
+        const liveProblems = problemMap[fileNode.absolutePath];
+        const problemData = liveProblems || fileNode.problemCounts;
 
         const problemErrorCount = problemData?.error || 0;
         const problemWarningCount = problemData?.warning || 0;
         const hasProblems = problemErrorCount > 0 || problemWarningCount > 0;
         const problemColorClass = problemErrorCount > 0 ? 'problem-error' : 'problem-warning';
         const problemTooltip = `${problemErrorCount} Errors, ${problemWarningCount} Warnings`;
-        const hasError = !!node.error;
+        const hasError = !!fileNode.error;
 
         const renderTokenCount = () => {
             if (hasError) {
                 return <span>---</span>;
             }
-            if (node.isImage) {
-                return <span>{formatBytes(node.sizeInBytes)}</span>;
+            if (fileNode.isImage) {
+                return <span>{formatBytes(fileNode.sizeInBytes)}</span>;
             }
-            if (node.tokenCount > 0) {
+            if (fileNode.tokenCount > 0) {
                 let content;
                 if (isDirectory) {
                     if (isFullyChecked) {
-                        content = `(${formatLargeNumber(node.tokenCount, 1)})`;
+                        content = `(${formatLargeNumber(fileNode.tokenCount, 1)})`;
                     } else if (checkedTokensInDir > 0) {
-                        content = <>{formatLargeNumber(node.tokenCount, 1)} <span className="selected-token-count">({formatLargeNumber(checkedTokensInDir, 1)})</span></>;
+                        content = <>{formatLargeNumber(fileNode.tokenCount, 1)} <span className="selected-token-count">({formatLargeNumber(checkedTokensInDir, 1)})</span></>;
                     } else {
-                        content = formatLargeNumber(node.tokenCount, 1);
+                        content = formatLargeNumber(fileNode.tokenCount, 1);
                     }
                 } else { // It's a file
-                    content = isChecked ? `(${formatLargeNumber(node.tokenCount, 1)})` : formatLargeNumber(node.tokenCount, 1);
+                    content = isChecked ? `(${formatLargeNumber(fileNode.tokenCount, 1)})` : formatLargeNumber(fileNode.tokenCount, 1);
                 }
                 return <><VscSymbolNumeric /> <span>{content}</span></>;
             }
             return null;
         };
 
-        const gitStatusClass = node.gitStatus ? `git-status-${node.gitStatus}` : '';
+        const gitStatusClass = fileNode.gitStatus ? `git-status-${fileNode.gitStatus}` : '';
 
         return (
-            <div className={`file-item ${gitStatusClass} ${hasProblems ? problemColorClass : ''} ${hasError ? 'has-error' : ''}`} title={node.error}>
+            <div className={`file-item ${gitStatusClass} ${hasProblems ? problemColorClass : ''} ${hasError ? 'has-error' : ''}`} title={fileNode.error}>
                 <Checkbox
                     className="file-checkbox"
                     checked={isChecked}
-                    indeterminate={!isDirectlyChecked && !hasCheckedAncestor && checkedFiles.some(p => p.startsWith(node.absolutePath))}
-                    onChange={(_, e) => handleFileCheckboxChange(e, node.absolutePath)}
+                    indeterminate={!isDirectlyChecked && !hasCheckedAncestor && checkedFiles.some(p => p.startsWith(fileNode.absolutePath))}
+                    onChange={(_, e) => handleFileCheckboxChange(e, fileNode.absolutePath)}
                     disabled={hasError}
                 />
-                <span className="file-icon">{isDirectory ? (isExpanded ? <VscFolderOpened /> : <VscFolder />) : getFileIcon(node.name)}</span>
-                <span className="file-name">{node.name}</span>
+                <span className="file-icon">{isDirectory ? (isExpanded ? <VscFolderOpened /> : <VscFolder />) : getFileIcon(fileNode.name)}</span>
+                <span className="file-name">{fileNode.name}</span>
                 <div className="file-stats">
-                    {hasError && <span className="error-icon" title={node.error}><VscError/></span>}
-                    {node.gitStatus && <span className="git-status-badge" title={getGitStatusTooltip(node.gitStatus)}>{node.gitStatus}</span>}
+                    {hasError && <span className="error-icon" title={fileNode.error}><VscError/></span>}
+                    {fileNode.gitStatus && <span className="git-status-badge" title={getGitStatusTooltip(fileNode.gitStatus)}>{fileNode.gitStatus}</span>}
                     {hasProblems && (
                         <span className="problem-badge" title={problemTooltip}>
                             {problemErrorCount > 0 && <span className='error-icon'><VscError/> {problemErrorCount}</span>}
                             {problemWarningCount > 0 && <span className='warning-icon'><VscWarning/> {problemWarningCount}</span>}
                         </span>
                     )}
-                    {isDirectory && node.fileCount > 0 && (<> <VscFiles /> <span>{formatNumberWithCommas(node.fileCount)}</span> </>)}
+                    {isDirectory && fileNode.fileCount > 0 && (<> <VscFiles /> <span>{formatNumberWithCommas(fileNode.fileCount)}</span> </>)}
                     {renderTokenCount()}
                 </div>
             </div>
@@ -242,14 +243,14 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
     return (
         <div className="file-tree">
             <TreeView 
-                data={filteredData} 
+                data={filteredData as TreeNode[]} 
                 renderNodeContent={(node, isExpanded) => renderFileNodeContent(node, isExpanded as boolean)} 
-                onContextMenu={handleContextMenu} 
+                onContextMenu={(e, node) => handleContextMenu(e, node as FileNode)} 
                 collapseTrigger={collapseTrigger}
                 expandAllTrigger={expandAllTrigger}
                 activeFile={activeFile} 
                 updateCheckedFiles={updateCheckedFiles}
-                onNodeDrop={onNodeDrop}
+                onNodeDrop={(e, node) => onNodeDrop?.(e, node as FileNode)}
                 onCopy={onCopy}
                 clipboard={clipboard}
             />

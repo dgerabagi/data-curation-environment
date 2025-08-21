@@ -1,4 +1,4 @@
-// Updated on: C82 (Add prompt generation, markdown rendering, and file association)
+// Updated on: C86 (Fix all TS errors from C85)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -6,13 +6,33 @@ import { VscChevronLeft, VscChevronRight, VscComment, VscGoToFile, VscReplaceAll
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
-import ReactMarkdown from 'react-markdown';
 
-const AssociatedFile = ({ path, exists }: { path: string, exists: boolean }) => {
+const AssociatedFile: React.FC<{ path: string, exists: boolean }> = ({ path, exists }) => {
     return (
         <div className="associated-file" title={path}>
-            {exists ? <VscCheck className="icon-success" /> : <VscError className="icon-error" />}
+            {exists ? <span className="icon-success"><VscCheck/></span> : <span className="icon-error"><VscError/></span>}
             <span className="file-path">{path.split('/').pop()}</span>
+        </div>
+    );
+};
+
+const HighlightedCodeViewer = ({ content, highlightedBlocks }: { content: string; highlightedBlocks: Map<string, string> }) => {
+    const parts = content.split(/(```[\s\S]*?```)/g);
+
+    return (
+        <div className="response-markdown-preview">
+            {parts.map((part, index) => {
+                if (part.startsWith('```')) {
+                    const highlightedHtml = highlightedBlocks.get(part);
+                    if (highlightedHtml) {
+                        return <div key={index} dangerouslySetInnerHTML={{ __html: highlightedHtml }} />;
+                    }
+                    // Fallback for un-highlighted code
+                    return <pre key={index}><code>{part.replace(/```(\w+)?\n|```/g, '')}</code></pre>;
+                }
+                // Naive markdown for non-code parts
+                return <span key={index}>{part}</span>;
+            })}
         </div>
     );
 };
@@ -22,9 +42,10 @@ const App = () => {
     const [tabContent, setTabContent] = React.useState<{ [key: number]: string }>({});
     const [detectedFiles, setDetectedFiles] = React.useState<{ [key: number]: string[] }>({});
     const [fileExistence, setFileExistence] = React.useState<{ [path: string]: boolean }>({});
+    const [highlightedBlocks, setHighlightedBlocks] = React.useState<Map<string, string>>(new Map());
     const [tabCount, setTabCount] = React.useState(4);
-    const [cycle, setCycle] = React.useState(82);
-    const [cycleTitle, setCycleTitle] = React.useState('Continue refinement/delivery of pcpp');
+    const [cycle, setCycle] = React.useState(86);
+    const [cycleTitle, setCycleTitle] = React.useState('ts errors');
     const [ephemeralContext, setEphemeralContext] = React.useState('');
 
     const clientIpc = ClientPostMessageManager.getInstance();
@@ -34,23 +55,41 @@ const App = () => {
             logger.log(`[PCPP] Received file existence map.`);
             setFileExistence(prev => ({ ...prev, ...existenceMap }));
         });
+        clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => {
+            setHighlightedBlocks(prev => new Map(prev).set(id, highlightedHtml));
+        });
     }, [clientIpc]);
+
+    const handleContentChange = (newContent: string, tabIndex: number) => {
+        setTabContent(prev => ({ ...prev, [tabIndex]: newContent }));
+
+        const codeBlockRegex = /```(\w+)?\n([\s\S]*?)```/g;
+        const matches = newContent.matchAll(codeBlockRegex);
+
+        for (const match of matches) {
+            const fullBlock = match[0];
+            const lang = match[1] || 'plaintext';
+            const code = match[2] || '';
+
+            if (fullBlock && !highlightedBlocks.has(fullBlock)) {
+                clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code, lang, id: fullBlock });
+            }
+        }
+    };
 
     const handlePaste = (e: React.ClipboardEvent<HTMLTextAreaElement>, tabIndex: number) => {
         const pastedText = e.clipboardData.getData('text');
-        
-        setTabContent(prev => ({...prev, [tabIndex]: pastedText}));
+        handleContentChange(pastedText, tabIndex);
 
         logger.log(`[PCPP PARSE] Pasted content into tab ${tabIndex}. Parsing for file paths...`);
-        
         const fileRegex = /<file path="([^"]+)">/g;
         const matches = pastedText.matchAll(fileRegex);
-        const paths = Array.from(matches, m => m[1]);
+        
+        const paths = Array.from(matches, m => m[1]).filter(Boolean);
 
         if (paths.length > 0) {
             logger.log(`[PCPP PARSE] Detected file paths: ${paths.join(', ')}`);
             setDetectedFiles(prev => ({...prev, [tabIndex]: paths}));
-            // Request existence check from backend
             clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths });
         } else {
             logger.log('[PCPP PARSE] No file paths detected in pasted content.');
@@ -145,12 +184,10 @@ const App = () => {
                                 className="response-textarea"
                                 placeholder={`Paste AI response for tab ${activeTab} here...`}
                                 value={tabContent[activeTab] || ''}
-                                onChange={(e) => setTabContent(prev => ({...prev, [activeTab]: e.target.value}))}
+                                onChange={(e) => handleContentChange(e.target.value, activeTab)}
                                 onPaste={(e) => handlePaste(e, activeTab)}
                             />
-                            <div className="response-markdown-preview">
-                                <ReactMarkdown>{tabContent[activeTab] || '*Paste or type in the text area to see a preview.*'}</ReactMarkdown>
-                            </div>
+                            <HighlightedCodeViewer content={tabContent[activeTab] || '*Paste or type in the text area to see a preview.*'} highlightedBlocks={highlightedBlocks} />
                         </div>
                     </div>
                 )}

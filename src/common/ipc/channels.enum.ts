@@ -36,6 +36,7 @@ export enum ClientToServerChannel {
     // Phase 2: PCPP
     RequestCreatePromptFile = "clientToServer.requestCreatePromptFile",
     RequestFileExistence = "clientToServer.requestFileExistence",
+    RequestSyntaxHighlight = "clientToServer.requestSyntaxHighlight",
 }
 
 export enum ServerToClientChannel {
@@ -52,4 +53,5 @@ export enum ServerToClientChannel {
     
     // Phase 2: PCPP
     SendFileExistence = "serverToClient.sendFileExistence",
+    SendSyntaxHighlight = "serverToClient.sendSyntaxHighlight",
 }

@@ -70,6 +70,12 @@ const webviewConfig = {
         filename: '[name].js',
         libraryTarget: 'commonjs2'
     },
+    resolve: {
+        ...baseConfig.resolve,
+        fallback: {
+            "path": require.resolve("path-browserify")
+        }
+    },
     plugins: [
         new CopyPlugin({
             patterns: [{ from: "public", to: "public" }],

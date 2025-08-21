@@ -1,4 +1,4 @@
-// Updated on: C80 (Fix cache pre-warming logic to correctly expand directories and process files on load)
+// Updated on: C83 (Fix onNodeDrop type)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -13,6 +13,7 @@ import { logger } from '@/client/utils/logger';
 import SelectedFilesView from '../../components/SelectedFilesView';
 import { addRemovePathInSelectedFiles, removePathsFromSelected } from '@/client/components/file-tree/FileTree.utils';
 import { SelectionSet, ProblemCountsMap } from '@/common/ipc/channels.type';
+import path from 'path-browserify';
 
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
@@ -260,7 +261,8 @@ const App = () => {
         });
     };
 
-    const processDrop = (event: React.DragEvent, targetDir: string) => {
+    const processDrop = (event: React.DragEvent, node: FileNode) => {
+        const targetDir = node.children ? node.absolutePath : path.dirname(node.absolutePath);
         logger.log(`[Drop] Drop detected on target: ${targetDir}`);
         logger.log(`[Drop] Available types: ${Array.from(event.dataTransfer.types).join(', ')}`);
 
@@ -298,18 +300,19 @@ const App = () => {
         logger.warn('[Drop] Drop event occurred but no compatible data type was found.');
     };
 
-    const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+    const handleContainerDrop = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         event.stopPropagation();
         setIsDraggingOver(false);
         if (!isWorkspaceTrusted) return;
         
-        const targetDir = files.length > 0 ? files[0].absolutePath : '';
-        if (!targetDir) {
+        const rootDir = files.length > 0 ? files[0].absolutePath : '';
+        if (!rootDir) {
             logger.error("Cannot drop file, no workspace root identified.");
             return;
         }
-        processDrop(event, targetDir);
+        const dummyRootNode: FileNode = { absolutePath: rootDir, name: path.basename(rootDir), children: [], tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false };
+        processDrop(event, dummyRootNode);
     };
     
     const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
@@ -369,7 +372,7 @@ const App = () => {
     return (
         <div 
             className={`view-container ${isDraggingOver ? 'drag-over' : ''}`} 
-            onDrop={handleDrop} 
+            onDrop={handleContainerDrop} 
             onDragOver={handleDragOver}
             onDragEnter={handleDragEnter}
             onDragLeave={handleDragLeave}
