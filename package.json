@@ -16,7 +16,7 @@
     ],
     "activationEvents": [
         "onView:viewType.sidebar.contextChooser",
-        "onView:viewType.sidebar.parallelCopilot"
+        "onCommand:dce.showParallelCopilot"
     ],
     "main": "./dist/extension.js",
     "contributes": {
@@ -44,7 +44,12 @@
             {
                 "command": "dce.openParallelCopilot",
                 "title": "DCE: Open Parallel Co-Pilot",
-                "category": "DCE"
+                "category": "DCE",
+                "icon": "$(multiple-windows)"
+            },
+            {
+                "command": "dce.showParallelCopilot",
+                "title": "DCE: Show Parallel Co-Pilot"
             }
         ],
         "viewsContainers": {
@@ -55,7 +60,7 @@
                     "icon": "public/spiral.svg"
                 },
                 {
-                    "id": "dce-parallel-copilot",
+                    "id": "dce-parallel-copilot-container",
                     "title": "DCE Parallel Co-Pilot",
                     "icon": "public/copilot.svg"
                 }
@@ -68,12 +73,20 @@
                     "id": "viewType.sidebar.contextChooser",
                     "name": "Data Curation"
                 }
-            ],
-            "dce-parallel-copilot": [
+            ]
+        },
+        "menus": {
+            "view/title": [
                 {
-                    "type": "webview",
-                    "id": "viewType.sidebar.parallelCopilot",
-                    "name": "Parallel Co-Pilot"
+                    "command": "dce.openParallelCopilot",
+                    "when": "view == viewType.sidebar.contextChooser",
+                    "group": "navigation"
+                }
+            ],
+            "activityBar/view/title": [
+                 {
+                    "command": "dce.showParallelCopilot",
+                    "when": "viewContainer == dce-parallel-copilot-container"
                 }
             ]
         }

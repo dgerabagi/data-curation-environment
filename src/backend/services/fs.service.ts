@@ -447,9 +447,11 @@ export class FSService {
     }
 
     public async handlePdfToTextRequest(filePath: string, serverIpc: ServerPostMessageManager) {
+        Services.loggerService.log(`[C78 CACHE FIX] Backend handling RequestPdfToText for: ${filePath}`);
         if (this.pdfTextCache.has(filePath)) {
             const cached = this.pdfTextCache.get(filePath)!;
             serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: cached.tokenCount });
+            Services.loggerService.log(`[C78 CACHE FIX] PDF served from cache: ${filePath}`);
             return;
         }
 
@@ -462,7 +464,7 @@ export class FSService {
             const tokenCount = Math.ceil(text.length / 4);
             
             this.pdfTextCache.set(filePath, { text, tokenCount });
-            Services.loggerService.log(`[PDF] Parsed and cached: ${path.basename(filePath)} (${tokenCount} tokens)`);
+            Services.loggerService.log(`[C78 CACHE FIX] PDF Parsed and cached: ${path.basename(filePath)} (${tokenCount} tokens)`);
 
             serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: tokenCount });
         } catch (error: any) {
@@ -499,10 +501,11 @@ export class FSService {
     }
 
     public async handleExcelToTextRequest(filePath: string, serverIpc: ServerPostMessageManager) {
+        Services.loggerService.log(`[C78 CACHE FIX] Backend handling RequestExcelToText for: ${filePath}`);
         if (this.excelMarkdownCache.has(filePath)) {
             const cached = this.excelMarkdownCache.get(filePath)!;
             serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: cached.tokenCount });
-            Services.loggerService.log(`[Excel] Served from cache: ${filePath}`);
+            Services.loggerService.log(`[C78 CACHE FIX] Excel served from cache: ${filePath}`);
             return;
         }
 
@@ -525,7 +528,7 @@ export class FSService {
 
             const tokenCount = Math.ceil(markdown.length / 4);
             this.excelMarkdownCache.set(filePath, { markdown, tokenCount });
-            Services.loggerService.log(`[Excel] Parsed and cached: ${path.basename(filePath)} (${tokenCount} tokens)`);
+            Services.loggerService.log(`[C78 CACHE FIX] Excel Parsed and cached: ${path.basename(filePath)} (${tokenCount} tokens)`);
 
             serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: tokenCount });
 
@@ -538,9 +541,11 @@ export class FSService {
     }
 
     public async handleWordToTextRequest(filePath: string, serverIpc: ServerPostMessageManager) {
+        Services.loggerService.log(`[C78 CACHE FIX] Backend handling RequestWordToText for: ${filePath}`);
         if (this.wordTextCache.has(filePath)) {
             const cached = this.wordTextCache.get(filePath)!;
             serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: cached.tokenCount });
+            Services.loggerService.log(`[C78 CACHE FIX] Word served from cache: ${filePath}`);
             return;
         }
 
@@ -561,7 +566,7 @@ export class FSService {
             const tokenCount = Math.ceil(text.length / 4);
             
             this.wordTextCache.set(filePath, { text, tokenCount });
-            Services.loggerService.log(`[Word] Parsed and cached: ${path.basename(filePath)} (${tokenCount} tokens)`);
+            Services.loggerService.log(`[C78 CACHE FIX] Word Parsed and cached: ${path.basename(filePath)} (${tokenCount} tokens)`);
 
             serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: tokenCount });
         } catch (error: any) {

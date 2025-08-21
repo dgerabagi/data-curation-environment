@@ -81,21 +81,22 @@ const App = () => {
         });
         
         clientIpc.onServerMessage(ServerToClientChannel.ApplySelectionSet, ({ paths }) => {
-            logger.log(`[WebView] Applying selection set with ${paths.length} paths.`);
+            logger.log(`[C78 CACHE FIX] Applying selection set with ${paths.length} paths.`);
             setCheckedFiles(paths);
             clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths });
 
-            logger.log(`[WebView] [Cache Fix] Pre-warming cache for ${paths.length} restored paths.`);
+            logger.log(`[C78 CACHE FIX] Pre-warming cache for ${paths.length} restored paths.`);
             paths.forEach(path => {
                 const extension = `.${path.split('.').pop()?.toLowerCase() || ''}`;
+                logger.log(`[C78 CACHE FIX] Checking path: ${path}, extension: ${extension}`);
                  if (extension === '.pdf') {
-                    logger.log(`[WebView] [Cache Fix] Requesting text for restored PDF: ${path}`);
+                    logger.log(`[C78 CACHE FIX] Requesting text for restored PDF: ${path}`);
                     clientIpc.sendToServer(ClientToServerChannel.RequestPdfToText, { path });
                 } else if (EXCEL_EXTENSIONS.has(extension)) {
-                    logger.log(`[WebView] [Cache Fix] Requesting text for restored Excel/CSV: ${path}`);
+                    logger.log(`[C78 CACHE FIX] Requesting text for restored Excel/CSV: ${path}`);
                     clientIpc.sendToServer(ClientToServerChannel.RequestExcelToText, { path });
                 } else if (WORD_EXTENSIONS.has(extension)) {
-                    logger.log(`[WebView] [Cache Fix] Requesting text for restored Word Doc: ${path}`);
+                    logger.log(`[C78 CACHE FIX] Requesting text for restored Word Doc: ${path}`);
                     clientIpc.sendToServer(ClientToServerChannel.RequestWordToText, { path });
                 }
             });

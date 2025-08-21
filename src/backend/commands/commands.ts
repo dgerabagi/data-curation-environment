@@ -1,4 +1,4 @@
-// Updated on: C77 (Re-supply from C76 as it was not testable)
+// Updated on: C78 (Change openParallelCopilot to trigger a command)
 import * as vscode from 'vscode';
 import { Services } from '../services/services';
 import { serverIPCs } from '@/client/views';
@@ -89,8 +89,10 @@ export const commands = [
     {
         commandId: 'dce.openParallelCopilot',
         callback: () => {
-            Services.loggerService.log("Executing dce.openParallelCopilot command.");
-            vscode.commands.executeCommand('workbench.view.extension.dce-parallel-copilot-container');
+            Services.loggerService.log("Executing dce.openParallelCopilot command to open WebviewPanel.");
+            // This command is now handled directly in extension.ts to manage the panel's lifecycle.
+            // We execute a proxy command that the extension will catch.
+            vscode.commands.executeCommand('dce.showParallelCopilot');
         }
     }
 ];

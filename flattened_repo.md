@@ -1,19 +1,19 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-20T22:42:48.498Z
+  Date Generated: 2025-08-21T11:25:29.746Z
   ---
   Total Files: 197
-  Total Lines: 16221
-  Total Characters: 735722
-  Approx. Tokens: 184002
+  Total Lines: 16324
+  Total Characters: 739655
+  Approx. Tokens: 184987
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
 2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
-3. src\backend\services\fs.service.ts (8187 tokens)
-4. src\client\views\context-chooser.view\view.tsx (5274 tokens)
+3. src\backend\services\fs.service.ts (8260 tokens)
+4. src\client\views\context-chooser.view\view.tsx (5256 tokens)
 5. src\client\components\tree-view\TreeView.tsx (4424 tokens)
 6. src\Artifacts\A0. DCE Master Artifact List.md (4150 tokens)
 7. src\backend\services\flattener.service.ts (3685 tokens)
@@ -26,7 +26,7 @@
 2. .vscodeignore - Lines: 11 - Chars: 356 - Tokens: 89
 3. bootstrap-flattener.js - Lines: 185 - Chars: 5834 - Tokens: 1459
 4. LICENSE - Lines: 21 - Chars: 1090 - Tokens: 273
-5. package.json - Lines: 86 - Chars: 2666 - Tokens: 667
+5. package.json - Lines: 119 - Chars: 3853 - Tokens: 964
 6. public\copilot.svg - Lines: 5 - Chars: 445 - Tokens: 112
 7. public\spiral.svg - Lines: 8 - Chars: 459 - Tokens: 115
 8. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 226 - Chars: 16597 - Tokens: 4150
@@ -81,11 +81,11 @@
 57. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
 58. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
 59. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
-60. src\backend\commands\commands.ts - Lines: 96 - Chars: 4143 - Tokens: 1036
+60. src\backend\commands\commands.ts - Lines: 104 - Chars: 4545 - Tokens: 1137
 61. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
 62. src\backend\services\action.service.ts - Lines: 73 - Chars: 2471 - Tokens: 618
 63. src\backend\services\flattener.service.ts - Lines: 327 - Chars: 14740 - Tokens: 3685
-64. src\backend\services\fs.service.ts - Lines: 696 - Chars: 32748 - Tokens: 8187
+64. src\backend\services\fs.service.ts - Lines: 699 - Chars: 33038 - Tokens: 8260
 65. src\backend\services\history.service.ts - Lines: 63 - Chars: 2186 - Tokens: 547
 66. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
 67. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
@@ -102,12 +102,12 @@
 78. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 79. src\client\views\context-chooser.view\on-message.ts - Lines: 143 - Chars: 6146 - Tokens: 1537
 80. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
-81. src\client\views\context-chooser.view\view.tsx - Lines: 396 - Chars: 21096 - Tokens: 5274
-82. src\client\views\index.ts - Lines: 35 - Chars: 1728 - Tokens: 432
+81. src\client\views\context-chooser.view\view.tsx - Lines: 394 - Chars: 21023 - Tokens: 5256
+82. src\client\views\index.ts - Lines: 35 - Chars: 1714 - Tokens: 429
 83. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 84. src\client\views\parallel-copilot.view\on-message.ts - Lines: 12 - Chars: 522 - Tokens: 131
-85. src\client\views\parallel-copilot.view\view.scss - Lines: 117 - Chars: 2553 - Tokens: 639
-86. src\client\views\parallel-copilot.view\view.tsx - Lines: 84 - Chars: 3831 - Tokens: 958
+85. src\client\views\parallel-copilot.view\view.scss - Lines: 150 - Chars: 3263 - Tokens: 816
+86. src\client\views\parallel-copilot.view\view.tsx - Lines: 112 - Chars: 5316 - Tokens: 1329
 87. src\common\ipc\channels.enum.ts - Lines: 48 - Chars: 2568 - Tokens: 642
 88. src\common\ipc\channels.type.ts - Lines: 44 - Chars: 3310 - Tokens: 828
 89. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
@@ -218,7 +218,7 @@
 194. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
 195. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
 196. tsconfig.json - Lines: 19 - Chars: 457 - Tokens: 115
-197. webpack.config.js - Lines: 84 - Chars: 2356 - Tokens: 589
+197. webpack.config.js - Lines: 84 - Chars: 2302 - Tokens: 576
 
 <file path=".gitignore">
 node_modules
@@ -477,11 +477,32 @@ SOFTWARE.
         "Other"
     ],
     "activationEvents": [
-        "onView:viewType.sidebar.contextChooser"
+        "onView:viewType.sidebar.contextChooser",
+        "onView:viewType.sidebar.parallelCopilot"
     ],
     "main": "./dist/extension.js",
     "contributes": {
         "commands": [
+            {
+                "command": "dce.saveCurrentSelection",
+                "title": "DCE: Save Current Selection Set",
+                "category": "DCE"
+            },
+            {
+                "command": "dce.loadSelectionSet",
+                "title": "DCE: Load Selection Set",
+                "category": "DCE"
+            },
+            {
+                "command": "dce.manageSelectionSets",
+                "title": "DCE: Manage Selection Sets",
+                "category": "DCE"
+            },
+            {
+                "command": "dce.refreshTree",
+                "title": "DCE: Refresh Explorer",
+                "category": "DCE"
+            },
             {
                 "command": "dce.openParallelCopilot",
                 "title": "DCE: Open Parallel Co-Pilot",
@@ -494,6 +515,11 @@ SOFTWARE.
                     "id": "data-curation-environment",
                     "title": "Data Curation",
                     "icon": "public/spiral.svg"
+                },
+                {
+                    "id": "dce-parallel-copilot",
+                    "title": "DCE Parallel Co-Pilot",
+                    "icon": "public/copilot.svg"
                 }
             ]
         },
@@ -503,6 +529,13 @@ SOFTWARE.
                     "type": "webview",
                     "id": "viewType.sidebar.contextChooser",
                     "name": "Data Curation"
+                }
+            ],
+            "dce-parallel-copilot": [
+                {
+                    "type": "webview",
+                    "id": "viewType.sidebar.parallelCopilot",
+                    "name": "Parallel Co-Pilot"
                 }
             ]
         }
@@ -5338,6 +5371,7 @@ After these commands complete, refresh your GitHub repository page. You should s
 </file>
 
 <file path="src/backend/commands/commands.ts">
+// Updated on: C78 (Add popOutCopilot command)
 import * as vscode from 'vscode';
 import { Services } from '../services/services';
 import { serverIPCs } from '@/client/views';
@@ -5426,10 +5460,17 @@ export const commands = [
         }
     },
     {
+        commandId: 'dce.openParallelCopilot',
+        callback: () => {
+            Services.loggerService.log("Executing dce.openParallelCopilot command.");
+            vscode.commands.executeCommand('workbench.view.extension.dce-parallel-copilot-container');
+        }
+    },
+    {
         commandId: 'dce.popOutCopilot',
         callback: () => {
-            Services.loggerService.log("Executing dce.popOutCopilot command.");
-            // Future implementation will open a WebviewPanel here.
+            Services.loggerService.log("Executing dce.popOutCopilot command. (Placeholder for WebviewPanel implementation)");
+            // Future implementation will use vscode.window.createWebviewPanel here.
             vscode.window.showInformationMessage("Pop-out feature is under development.");
         }
     }
@@ -6306,6 +6347,7 @@ export class FSService {
     }
 
     public async handlePdfToTextRequest(filePath: string, serverIpc: ServerPostMessageManager) {
+        Services.loggerService.log(`[Cache] Received request to process PDF: ${filePath}`);
         if (this.pdfTextCache.has(filePath)) {
             const cached = this.pdfTextCache.get(filePath)!;
             serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: cached.tokenCount });
@@ -6358,6 +6400,7 @@ export class FSService {
     }
 
     public async handleExcelToTextRequest(filePath: string, serverIpc: ServerPostMessageManager) {
+        Services.loggerService.log(`[Cache] Received request to process Excel/CSV: ${filePath}`);
         if (this.excelMarkdownCache.has(filePath)) {
             const cached = this.excelMarkdownCache.get(filePath)!;
             serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: cached.tokenCount });
@@ -6397,6 +6440,7 @@ export class FSService {
     }
 
     public async handleWordToTextRequest(filePath: string, serverIpc: ServerPostMessageManager) {
+        Services.loggerService.log(`[Cache] Received request to process Word doc: ${filePath}`);
         if (this.wordTextCache.has(filePath)) {
             const cached = this.wordTextCache.get(filePath)!;
             serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: cached.tokenCount });
@@ -9002,29 +9046,29 @@ const App = () => {
         });
         
         clientIpc.onServerMessage(ServerToClientChannel.ApplySelectionSet, ({ paths }) => {
-            logger.log(`Applying selection set with ${paths.length} paths.`);
+            logger.log(`[Cache Fix] Applying selection set with ${paths.length} paths.`);
             setCheckedFiles(paths);
             clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths });
 
-            // CRITICAL FIX (C76): Pre-warm cache for ALL special file types in the loaded selection
             logger.log(`[Cache Fix] Pre-warming cache for ${paths.length} restored paths.`);
             paths.forEach(path => {
                 const extension = `.${path.split('.').pop()?.toLowerCase() || ''}`;
+                logger.log(`[Cache Fix] Checking path: ${path} with extension: ${extension}`);
                  if (extension === '.pdf') {
-                    logger.log(`[Cache Fix] Requesting text for restored PDF: ${path}`);
+                    logger.log(`[Cache Fix] Matched PDF. Sending request for: ${path}`);
                     clientIpc.sendToServer(ClientToServerChannel.RequestPdfToText, { path });
                 } else if (EXCEL_EXTENSIONS.has(extension)) {
-                    logger.log(`[Cache Fix] Requesting text for restored Excel/CSV: ${path}`);
+                    logger.log(`[Cache Fix] Matched Excel/CSV. Sending request for: ${path}`);
                     clientIpc.sendToServer(ClientToServerChannel.RequestExcelToText, { path });
                 } else if (WORD_EXTENSIONS.has(extension)) {
-                    logger.log(`[Cache Fix] Requesting text for restored Word Doc: ${path}`);
+                    logger.log(`[Cache Fix] Matched Word Doc. Sending request for: ${path}`);
                     clientIpc.sendToServer(ClientToServerChannel.RequestWordToText, { path });
                 }
             });
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendSelectionSets, ({ sets }) => {
-            logger.log(`Received ${Object.keys(sets).length} selection sets.`);
+            logger.log(`[WebView] Received ${Object.keys(sets).length} selection sets.`);
             setSelectionSets(sets);
         });
 
@@ -9034,22 +9078,22 @@ const App = () => {
                 suppressActiveFileReveal.current = false;
                 return;
             }
-            logger.log(`[WebView] Received set active file event for: ${path}`);
+            logger.log(`[WebView] [WebView] Received set active file event for: ${path}`);
             setActiveFile(path);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.FocusFile, ({ path }) => {
-            logger.log(`Received focus file event for: ${path}`);
+            logger.log(`[WebView] Received focus file event for: ${path}`);
             setActiveFile(path);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendAutoAddState, ({ enabled }) => {
-            logger.log(`Received auto-add state: ${enabled}`);
+            logger.log(`[WebView] Received auto-add state: ${enabled}`);
             setIsAutoAddEnabled(enabled);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => {
-            logger.log(`Force refresh triggered from backend. Reason: ${reason || 'unknown'}`);
+            logger.log(`[WebView] Force refresh triggered from backend. Reason: ${reason || 'unknown'}`);
             if (reason === 'fileOp') {
                 suppressActiveFileReveal.current = true;
                 setTimeout(() => { suppressActiveFileReveal.current = false; }, 2000);
@@ -9059,7 +9103,7 @@ const App = () => {
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.UpdateProblemCounts, ({ problemMap: newProblemMap }) => {
-            logger.log(`Received dynamic problem counts update with ${Object.keys(newProblemMap).length} entries.`);
+            logger.log(`[WebView] Received dynamic problem counts update with ${Object.keys(newProblemMap).length} entries.`);
             setProblemMap(newProblemMap);
         });
 
@@ -9246,8 +9290,6 @@ const App = () => {
             const node = fileMap.get(path);
             if (node) addNodeAndDescendants(node);
         });
-        // C61 Fix: Do NOT filter out image files from the displayed list.
-        // The UI should accurately reflect what is selected.
         return { totalFiles: selectedNodes.length, totalTokens, selectedFileNodes: selectedNodes };
     }, [checkedFiles, files]);
 
@@ -9319,12 +9361,12 @@ root.render(<App />);
 
 <file path="src/client/views/index.ts">
 import { viewConfig as contextChooserViewConfig } from "./context-chooser.view";
-import { viewConfig as parallelCopilotViewConfig } from "./parallel-copilot.view"; // New
+import { viewConfig as parallelCopilotViewConfig } from "./parallel-copilot.view";
 import * as vscode from "vscode";
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { getNonce, getViewHtml } from "@/common/utils/view-html";
 
-export const views = [contextChooserViewConfig, parallelCopilotViewConfig]; // New
+export const views = [contextChooserViewConfig, parallelCopilotViewConfig];
 export const serverIPCs: Record<string, ServerPostMessageManager> = {};
 
 export function registerViews(context: vscode.ExtensionContext) {
@@ -9381,7 +9423,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
-/* Styles for Parallel Co-Pilot View */
+/* Updated on: C78 (Add styles for new context fields) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -9402,8 +9444,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--vscode-panel-border);
+    flex-shrink: 0;
 }
 
 .cycle-navigator {
@@ -9428,9 +9469,41 @@ body {
     }
 }
 
+.context-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex-shrink: 0;
+
+    textarea {
+        width: 100%;
+        background-color: var(--vscode-input-background);
+        color: var(--vscode-input-foreground);
+        border: 1px solid var(--vscode-input-border);
+        border-radius: 2px;
+        padding: 4px;
+        font-family: var(--vscode-editor-font-family);
+        font-size: var(--vscode-editor-font-size);
+        resize: vertical;
+        min-height: 40px;
+
+        &:focus {
+            outline: 1px solid var(--vscode-focusBorder);
+        }
+    }
+}
+
+.tab-config {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+}
+
 .tab-bar {
     display: flex;
     border-bottom: 1px solid var(--vscode-panel-border);
+    flex-shrink: 0;
 }
 
 .tab {
@@ -9450,6 +9523,7 @@ body {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+    min-height: 0;
 }
 
 .tab-pane {
@@ -9463,6 +9537,7 @@ body {
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
+    flex-shrink: 0;
     
     button {
         background-color: var(--vscode-button-secondaryBackground);
@@ -9501,36 +9576,47 @@ body {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
-// src/client/views/parallel-copilot.view/view.tsx
+// Updated on: C78 (Implement initial UI enhancements and PoC paste parsing)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
 import { VscChevronLeft, VscChevronRight, VscComment, VscGoToFile, VscReplaceAll, VscThumbsdown, VscThumbsup, VscWindow } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
+import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
+import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 
 const App = () => {
+    const [cycle, setCycle] = React.useState(1);
+    const [tabCount, setTabCount] = React.useState(4);
     const [activeTab, setActiveTab] = React.useState(1);
     const [tabContent, setTabContent] = React.useState<{ [key: number]: string }>({});
-    const tabCount = 4; // Example tab count
+    const clientIpc = ClientPostMessageManager.getInstance();
 
     const handlePaste = (e: React.ClipboardEvent<HTMLTextAreaElement>, tabIndex: number) => {
         const pastedText = e.clipboardData.getData('text');
         
-        // Update the content for the specific tab
         setTabContent(prev => ({...prev, [tabIndex]: pastedText}));
 
-        logger.log(`Pasted content into tab ${tabIndex}. Parsing for file paths...`);
+        logger.log(`[Parse] Pasted content into tab ${tabIndex}. Parsing for file paths...`);
 
-        const fileRegex = /<file path="([^"]+)">/g;
+        // Use a regex that captures content between the tags, handling multiline content with the 's' flag.
+        const fileRegex = /<file path="([^"]+)">([\s\S]*?)<\/file>/gs;
         const matches = pastedText.matchAll(fileRegex);
-        const paths = Array.from(matches, m => m[1]);
+        const paths = Array.from(matches, m => ({ path: m[1], content: m[2].trim() }));
 
         if (paths.length > 0) {
-            logger.log(`Detected file paths: ${paths.join(', ')}`);
-            // Here you would update the state for the tab with the detected files
+            logger.log(`[Parse] Detected ${paths.length} file blocks.`);
+            paths.forEach(p => {
+                logger.log(`[Parse] -> Path: ${p.path}, Content Length: ${p.content.length}`);
+            });
         } else {
-            logger.log('No file paths detected in pasted content.');
+            logger.log('[Parse] No file blocks detected in pasted content.');
         }
+    };
+
+    const handlePopOut = () => {
+        logger.log("Pop-out button clicked. Executing command...");
+        clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.popOutCopilot' });
     };
 
     return (
@@ -9538,15 +9624,32 @@ const App = () => {
             <div className="pc-header">
                 <div className="cycle-navigator">
                     <span>Cycle:</span>
-                    <button><VscChevronLeft /></button>
-                    <span>C76</span>
-                    <button><VscChevronRight /></button>
+                    <button onClick={() => setCycle(c => Math.max(1, c - 1))}><VscChevronLeft /></button>
+                    <span>C{cycle}</span>
+                    <button onClick={() => setCycle(c => c + 1)}><VscChevronRight /></button>
                 </div>
                 <div className="pc-toolbar">
-                    <button title="Pop-out into new window" onClick={() => logger.log("Pop-out clicked")}><VscWindow /></button>
+                    <button title="Pop-out into new window" onClick={handlePopOut}><VscWindow /></button>
                 </div>
             </div>
             
+            <div className="context-fields">
+                <textarea placeholder="User Cycle Context (persistent across cycles)..." rows={3}></textarea>
+                <textarea placeholder="Ephemeral Cycle Context (e.g., error logs for this cycle only)..." rows={3}></textarea>
+            </div>
+
+            <div className="tab-config">
+                <label htmlFor="tab-slider">Responses: {tabCount}</label>
+                <input 
+                    type="range" 
+                    id="tab-slider" 
+                    min="1" 
+                    max="20" 
+                    value={tabCount} 
+                    onChange={e => setTabCount(parseInt(e.target.value, 10))} 
+                />
+            </div>
+
             <div className="tab-bar">
                 {[...Array(tabCount)].map((_, i) => (
                     <div 
@@ -16942,11 +17045,11 @@ const webviewConfig = {
     target: 'web',
     entry: {
         contextChooserView: './src/client/views/context-chooser.view/view.tsx',
-        parallelCopilotView: './src/client/views/parallel-copilot.view/view.tsx', // New Entry
+        parallelCopilotView: './src/client/views/parallel-copilot.view/view.tsx',
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: '[name].js', // Use [name] to generate separate files
+        filename: '[name].js',
         libraryTarget: 'commonjs2'
     },
     plugins: [
