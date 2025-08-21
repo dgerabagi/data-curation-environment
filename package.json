@@ -20,6 +20,33 @@
     ],
     "main": "./dist/extension.js",
     "contributes": {
+        "commands": [
+            {
+                "command": "dce.saveCurrentSelection",
+                "title": "DCE: Save Current Selection Set",
+                "category": "DCE"
+            },
+            {
+                "command": "dce.loadSelectionSet",
+                "title": "DCE: Load Selection Set",
+                "category": "DCE"
+            },
+            {
+                "command": "dce.manageSelectionSets",
+                "title": "DCE: Manage Selection Sets",
+                "category": "DCE"
+            },
+            {
+                "command": "dce.refreshTree",
+                "title": "DCE: Refresh Explorer",
+                "category": "DCE"
+            },
+            {
+                "command": "dce.openParallelCopilot",
+                "title": "DCE: Open Parallel Co-Pilot",
+                "category": "DCE"
+            }
+        ],
         "viewsContainers": {
             "activitybar": [
                 {

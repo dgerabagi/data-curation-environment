@@ -1,12 +1,12 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-20T22:07:39.841Z
+  Date Generated: 2025-08-20T22:42:48.498Z
   ---
-  Total Files: 195
-  Total Lines: 16008
-  Total Characters: 723102
-  Approx. Tokens: 180847
+  Total Files: 197
+  Total Lines: 16221
+  Total Characters: 735722
+  Approx. Tokens: 184002
 -->
 
 <!-- Top 10 Files by Token Count -->
@@ -15,7 +15,7 @@
 3. src\backend\services\fs.service.ts (8187 tokens)
 4. src\client\views\context-chooser.view\view.tsx (5274 tokens)
 5. src\client\components\tree-view\TreeView.tsx (4424 tokens)
-6. src\Artifacts\A0. DCE Master Artifact List.md (3988 tokens)
+6. src\Artifacts\A0. DCE Master Artifact List.md (4150 tokens)
 7. src\backend\services\flattener.service.ts (3685 tokens)
 8. src\client\views\context-chooser.view\view.scss (3638 tokens)
 9. src\client\components\SelectedFilesView.tsx (3275 tokens)
@@ -26,10 +26,10 @@
 2. .vscodeignore - Lines: 11 - Chars: 356 - Tokens: 89
 3. bootstrap-flattener.js - Lines: 185 - Chars: 5834 - Tokens: 1459
 4. LICENSE - Lines: 21 - Chars: 1090 - Tokens: 273
-5. package.json - Lines: 92 - Chars: 2946 - Tokens: 737
+5. package.json - Lines: 86 - Chars: 2666 - Tokens: 667
 6. public\copilot.svg - Lines: 5 - Chars: 445 - Tokens: 112
 7. public\spiral.svg - Lines: 8 - Chars: 459 - Tokens: 115
-8. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 218 - Chars: 15950 - Tokens: 3988
+8. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 226 - Chars: 16597 - Tokens: 4150
 9. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3976 - Tokens: 994
 10. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
 11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 117 - Chars: 9568 - Tokens: 2392
@@ -74,149 +74,151 @@
 50. src\Artifacts\A42. DCE - Phase 2 - Initial Scaffolding Deployment Script.md - Lines: 246 - Chars: 8264 - Tokens: 2066
 51. src\Artifacts\A43. DCE - Phase 2 - Implementation Roadmap.md - Lines: 72 - Chars: 4909 - Tokens: 1228
 52. src\Artifacts\A44. DCE - Phase 1 - Word Document Handling Strategy.md - Lines: 47 - Chars: 4394 - Tokens: 1099
-53. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
-54. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
-55. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
-56. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
-57. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
-58. src\backend\commands\commands.ts - Lines: 88 - Chars: 3807 - Tokens: 952
-59. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
-60. src\backend\services\action.service.ts - Lines: 73 - Chars: 2471 - Tokens: 618
-61. src\backend\services\flattener.service.ts - Lines: 327 - Chars: 14740 - Tokens: 3685
-62. src\backend\services\fs.service.ts - Lines: 696 - Chars: 32748 - Tokens: 8187
-63. src\backend\services\history.service.ts - Lines: 63 - Chars: 2186 - Tokens: 547
-64. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-65. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
-66. src\backend\services\services.ts - Lines: 25 - Chars: 982 - Tokens: 246
-67. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
-68. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
-69. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
-70. src\client\components\file-tree\FileTree.tsx - Lines: 261 - Chars: 11631 - Tokens: 2908
-71. src\client\components\file-tree\FileTree.utils.ts - Lines: 189 - Chars: 7284 - Tokens: 1821
-72. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13099 - Tokens: 3275
-73. src\client\components\tree-view\TreeView.tsx - Lines: 386 - Chars: 17694 - Tokens: 4424
-74. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
-75. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
-76. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-77. src\client\views\context-chooser.view\on-message.ts - Lines: 143 - Chars: 6146 - Tokens: 1537
-78. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
-79. src\client\views\context-chooser.view\view.tsx - Lines: 396 - Chars: 21094 - Tokens: 5274
-80. src\client\views\index.ts - Lines: 35 - Chars: 1728 - Tokens: 432
-81. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-82. src\client\views\parallel-copilot.view\on-message.ts - Lines: 12 - Chars: 522 - Tokens: 131
-83. src\client\views\parallel-copilot.view\view.scss - Lines: 46 - Chars: 929 - Tokens: 233
-84. src\client\views\parallel-copilot.view\view.tsx - Lines: 43 - Chars: 1415 - Tokens: 354
-85. src\common\ipc\channels.enum.ts - Lines: 48 - Chars: 2568 - Tokens: 642
-86. src\common\ipc\channels.type.ts - Lines: 44 - Chars: 3310 - Tokens: 828
-87. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
-88. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-89. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-90. src\common\types\file-node.ts - Lines: 16 - Chars: 567 - Tokens: 142
-91. src\common\types\vscode-webview.d.ts - Lines: 13 - Chars: 357 - Tokens: 90
-92. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
-93. src\common\utils\view-html.ts - Lines: 26 - Chars: 971 - Tokens: 243
-94. src\common\view-types.ts - Lines: 6 - Chars: 167 - Tokens: 42
-95. src\extension.ts - Lines: 110 - Chars: 4890 - Tokens: 1223
-96. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
-97. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
-98. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
-99. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
-100. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
-101. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
-102. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
-103. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
-104. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
-105. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
-106. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
-107. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
-108. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
-109. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
-110. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
-111. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
-112. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
-113. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
-114. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
-115. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
-116. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
-117. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
-118. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
-119. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
-120. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
-121. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
-122. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
-123. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
-124. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
-125. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
-126. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
-127. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
-128. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
-129. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
-130. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
-131. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
-132. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
-133. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
-134. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
-135. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
-136. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
-137. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
-138. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
-139. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
-140. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
-141. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
-142. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
-143. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
-144. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
-145. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
-146. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
-147. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
-148. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
-149. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
-150. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
-151. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
-152. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
-153. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
-154. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
-155. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
-156. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
-157. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
-158. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
-159. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
-160. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
-161. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
-162. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
-163. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-164. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
-165. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
-166. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
-167. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-168. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
-169. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
-170. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
-171. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-172. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
-173. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
-174. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
-175. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
-176. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
-177. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
-178. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
-179. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-180. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
-181. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
-182. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
-183. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
-184. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
-185. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
-186. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
-187. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
-188. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
-189. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
-190. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
-191. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
-192. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
-193. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
-194. tsconfig.json - Lines: 19 - Chars: 457 - Tokens: 115
-195. webpack.config.js - Lines: 84 - Chars: 2356 - Tokens: 589
+53. src\Artifacts\A45. DCE - Phase 2 - Pop-out Co-Pilot Window - Feature Plan.md - Lines: 53 - Chars: 4288 - Tokens: 1072
+54. src\Artifacts\A46. DCE - Phase 2 - Paste and Parse Response - Feature Plan.md - Lines: 38 - Chars: 3587 - Tokens: 897
+55. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
+56. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
+57. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
+58. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
+59. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
+60. src\backend\commands\commands.ts - Lines: 96 - Chars: 4143 - Tokens: 1036
+61. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
+62. src\backend\services\action.service.ts - Lines: 73 - Chars: 2471 - Tokens: 618
+63. src\backend\services\flattener.service.ts - Lines: 327 - Chars: 14740 - Tokens: 3685
+64. src\backend\services\fs.service.ts - Lines: 696 - Chars: 32748 - Tokens: 8187
+65. src\backend\services\history.service.ts - Lines: 63 - Chars: 2186 - Tokens: 547
+66. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
+67. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
+68. src\backend\services\services.ts - Lines: 25 - Chars: 982 - Tokens: 246
+69. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
+70. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
+71. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
+72. src\client\components\file-tree\FileTree.tsx - Lines: 261 - Chars: 11631 - Tokens: 2908
+73. src\client\components\file-tree\FileTree.utils.ts - Lines: 189 - Chars: 7284 - Tokens: 1821
+74. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13099 - Tokens: 3275
+75. src\client\components\tree-view\TreeView.tsx - Lines: 386 - Chars: 17694 - Tokens: 4424
+76. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
+77. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
+78. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
+79. src\client\views\context-chooser.view\on-message.ts - Lines: 143 - Chars: 6146 - Tokens: 1537
+80. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
+81. src\client\views\context-chooser.view\view.tsx - Lines: 396 - Chars: 21096 - Tokens: 5274
+82. src\client\views\index.ts - Lines: 35 - Chars: 1728 - Tokens: 432
+83. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
+84. src\client\views\parallel-copilot.view\on-message.ts - Lines: 12 - Chars: 522 - Tokens: 131
+85. src\client\views\parallel-copilot.view\view.scss - Lines: 117 - Chars: 2553 - Tokens: 639
+86. src\client\views\parallel-copilot.view\view.tsx - Lines: 84 - Chars: 3831 - Tokens: 958
+87. src\common\ipc\channels.enum.ts - Lines: 48 - Chars: 2568 - Tokens: 642
+88. src\common\ipc\channels.type.ts - Lines: 44 - Chars: 3310 - Tokens: 828
+89. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
+90. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+91. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
+92. src\common\types\file-node.ts - Lines: 16 - Chars: 567 - Tokens: 142
+93. src\common\types\vscode-webview.d.ts - Lines: 13 - Chars: 357 - Tokens: 90
+94. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
+95. src\common\utils\view-html.ts - Lines: 26 - Chars: 971 - Tokens: 243
+96. src\common\view-types.ts - Lines: 6 - Chars: 167 - Tokens: 42
+97. src\extension.ts - Lines: 110 - Chars: 4890 - Tokens: 1223
+98. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
+99. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
+100. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
+101. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
+102. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
+103. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
+104. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
+105. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
+106. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
+107. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
+108. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
+109. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
+110. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
+111. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
+112. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
+113. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
+114. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
+115. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
+116. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
+117. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
+118. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
+119. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
+120. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
+121. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
+122. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
+123. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
+124. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
+125. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
+126. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
+127. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
+128. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
+129. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
+130. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
+131. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
+132. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
+133. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
+134. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
+135. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
+136. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
+137. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
+138. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
+139. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
+140. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
+141. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
+142. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
+143. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
+144. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
+145. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
+146. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
+147. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
+148. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
+149. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
+150. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
+151. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
+152. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
+153. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
+154. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
+155. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
+156. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
+157. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
+158. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
+159. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
+160. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
+161. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
+162. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
+163. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
+164. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
+165. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+166. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
+167. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
+168. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
+169. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+170. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
+171. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
+172. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
+173. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+174. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
+175. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
+176. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
+177. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
+178. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
+179. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
+180. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
+181. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+182. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
+183. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
+184. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
+185. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
+186. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
+187. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
+188. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
+189. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
+190. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
+191. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
+192. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
+193. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
+194. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
+195. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
+196. tsconfig.json - Lines: 19 - Chars: 457 - Tokens: 115
+197. webpack.config.js - Lines: 84 - Chars: 2356 - Tokens: 589
 
 <file path=".gitignore">
 node_modules
@@ -475,22 +477,23 @@ SOFTWARE.
         "Other"
     ],
     "activationEvents": [
-        "onView:viewType.sidebar.contextChooser",
-        "onView:viewType.sidebar.parallelCopilot"
+        "onView:viewType.sidebar.contextChooser"
     ],
     "main": "./dist/extension.js",
     "contributes": {
+        "commands": [
+            {
+                "command": "dce.openParallelCopilot",
+                "title": "DCE: Open Parallel Co-Pilot",
+                "category": "DCE"
+            }
+        ],
         "viewsContainers": {
             "activitybar": [
                 {
                     "id": "data-curation-environment",
                     "title": "Data Curation",
                     "icon": "public/spiral.svg"
-                },
-                {
-                    "id": "dce-parallel-copilot",
-                    "title": "DCE Parallel Co-Pilot",
-                    "icon": "public/copilot.svg"
                 }
             ]
         },
@@ -500,13 +503,6 @@ SOFTWARE.
                     "type": "webview",
                     "id": "viewType.sidebar.contextChooser",
                     "name": "Data Curation"
-                }
-            ],
-            "dce-parallel-copilot": [
-                {
-                    "type": "webview",
-                    "id": "viewType.sidebar.parallelCopilot",
-                    "name": "Parallel Co-Pilot"
                 }
             ]
         }
@@ -575,7 +571,7 @@ SOFTWARE.
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C73 (Add Word Document Handling Strategy)
+# Updated on: C76 (Add plans for Pop-out Window and Paste/Parse)
 
 ## 1. Purpose
 
@@ -780,6 +776,14 @@ SOFTWARE.
 ### A44. DCE - Phase 1 - Word Document Handling Strategy
 - **Description:** Defines the strategy for handling Word document files (.docx) by converting them to text on-demand and caching them in memory for flattening.
 - **Tags:** feature plan, docx, text extraction, virtualization, cache, phase 1
+
+### A45. DCE - Phase 2 - Pop-out Co-Pilot Window - Feature Plan
+- **Description:** Outlines the technical strategy to allow the Parallel Co-Pilot panel to be "popped out" into a separate window by re-implementing it as a main editor WebviewPanel.
+- **Tags:** feature plan, phase 2, pop-out, window, webview, ux
+
+### A46. DCE - Phase 2 - Paste and Parse Response - Feature Plan
+- **Description:** Details the plan for allowing users to paste a full AI response into a tab, which the extension will then parse to identify file paths referenced within XML tags.
+- **Tags:** feature plan, phase 2, paste, parse, workflow, automation
 
 ## II. Standalone Utilities & Guides
 
@@ -3689,6 +3693,103 @@ To further expand the data curation capabilities of the extension, users need to
     *   **Icon (`FileTree.tsx`):** A suitable icon for Word documents will be added to the `getFileIcon` utility.
 </file>
 
+<file path="src/Artifacts/A45. DCE - Phase 2 - Pop-out Co-Pilot Window - Feature Plan.md">
+# Artifact A45: DCE - Phase 2 - Pop-out Co-Pilot Window - Feature Plan
+# Date Created: C76
+# Author: AI Model
+
+- **Key/Value for A0:**
+- **Description:** Outlines the technical strategy to allow the Parallel Co-Pilot panel to be "popped out" into a separate window by re-implementing it as a main editor WebviewPanel.
+- **Tags:** feature plan, phase 2, pop-out, window, webview, ux
+
+## 1. Overview & Goal
+
+The Parallel Co-Pilot panel is designed for intensive, side-by-side comparison of code, a task that benefits greatly from maximum screen real estate. Many developers use multiple monitors and would prefer to move this panel to a secondary display. The goal of this feature is to enable the user to "pop out" the Parallel Co-Pilot panel into its own floating window.
+
+## 2. Problem & Proposed Solution
+
+A direct `popOut()` API for a sidebar webview does not exist in the VS Code extension API. The most robust and user-friendly way to achieve this is to leverage a native VS Code feature: users can drag any editor tab into its own floating window.
+
+Therefore, the proposed solution is to **re-architect the Parallel Co-Pilot from a sidebar view (`WebviewViewProvider`) into a main editor view (`WebviewPanel`)**.
+
+### 2.1. User Experience Flow
+
+1.  The user clicks a "Pop-out" icon in the Parallel Co-Pilot header (or runs a command from the palette).
+2.  Instead of opening in the sidebar, the Parallel Co-Pilot panel opens as a new tab in the main editor group.
+3.  The user can then click and drag this tab out of the main VS Code window, and it will become its own floating window, which can be moved to another monitor.
+
+## 3. User Stories
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| P2-WIN-01 | **Open Co-Pilot in Main Editor**| As a developer, I want a command or button to open the Parallel Co-Pilot panel in a main editor tab, so I have more horizontal space to view and compare responses. | - A "Pop-out" icon or similar button exists in the Co-Pilot UI. <br> - Clicking it closes the sidebar view (if open) and opens a new editor tab containing the full Co-Pilot UI. <br> - The state of the panel (e.g., current cycle, tab content) is preserved during this transition. |
+| P2-WIN-02 | **Move Co-Pilot to New Window** | As a developer with multiple monitors, after opening the Co-Pilot in an editor tab, I want to drag that tab out of my main VS Code window to turn it into a separate, floating window, so I can place it on my second monitor. | - The Co-Pilot editor tab behaves like any other editor tab. <br> - It can be dragged to create new editor groups or dragged outside the main window to create a new floating window. |
+
+## 4. Technical Implementation Plan
+
+This is a significant architectural change.
+
+1.  **Remove Sidebar Contribution (`package.json`):**
+    *   The `dce-parallel-copilot` entry in `contributes.viewsContainers.activitybar` will be removed.
+    *   The corresponding entry in `contributes.views` will also be removed.
+
+2.  **Create a `WebviewPanel` (`extension.ts` or a new provider file):**
+    *   The logic that currently lives in the `resolveWebviewView` method of our `WebviewViewProvider` will be moved.
+    *   A new command, `dce.openParallelCopilot`, will be registered.
+    *   When this command is executed, it will call `vscode.window.createWebviewPanel`.
+    *   This function creates a webview in an editor tab. We will need to configure its `viewType`, `title`, and `column`.
+    *   The logic for setting the webview's HTML, options, and message handlers will be nearly identical to the current implementation.
+
+3.  **State Management:**
+    *   A key challenge is managing the panel's state. Since `createWebviewPanel` can be called multiple times, we need to ensure we don't create duplicate panels. The implementation should check if a panel already exists and, if so, simply reveal it (`panel.reveal()`).
+    *   The state (tab content, cycle number) must be managed in a backend service so it can be restored if the panel is closed and reopened.
+
+4.  **UI Trigger:**
+    *   The "Pop-out" button in the (now legacy) sidebar view will trigger the `dce.openParallelCopilot` command.
+    *   We can also add a command to the Command Palette for direct access.
+</file>
+
+<file path="src/Artifacts/A46. DCE - Phase 2 - Paste and Parse Response - Feature Plan.md">
+# Artifact A46: DCE - Phase 2 - Paste and Parse Response - Feature Plan
+# Date Created: C76
+# Author: AI Model
+
+- **Key/Value for A0:**
+- **Description:** Details the plan for allowing users to paste a full AI response into a tab, which the extension will then parse to identify file paths referenced within XML tags.
+- **Tags:** feature plan, phase 2, paste, parse, workflow, automation
+
+## 1. Overview & Goal
+
+The manual workflow for using the Parallel Co-Pilot involves copying an entire AI response and pasting it into one of the response tabs. These responses often contain multiple file updates, each wrapped in XML-like tags (e.g., `<file path="...">...</file>`). The goal of this feature is to make the extension "intelligent" about this pasted content. It should automatically parse the text, identify the files being modified, and associate them with the response tab.
+
+## 2. User Story
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| P2-PARSE-01 | **Parse Pasted Content** | As a developer, when I paste a full AI response into a tab, I want the extension to automatically detect the file paths mentioned in the `<file>` tags, so I can see a list of affected files and use them for "Swap" and "Diff" operations. | - Pasting text into a response tab's editor triggers a parsing event. <br> - The extension uses a regular expression to find all occurrences of `<file path="...">`. <br> - The extracted file paths are stored in the state for that tab. <br> - The UI for the tab is updated to display the list of detected files. |
+| P2-PARSE-02 | **Set Primary Source File** | As a developer, after pasting a response with multiple files, I want the first file detected to be automatically set as the primary "source file" for the "Swap" and "Diff" actions, so I don't have to select it manually. | - After parsing, if the tab's `sourceFilePath` is not already set, it is automatically populated with the path of the first file found in the pasted content. <br> - The metadata table (comparing original vs. response) updates accordingly. |
+
+## 3. Technical Implementation Plan
+
+1.  **Frontend Logic (`parallel-copilot.view/view.tsx`):**
+    *   **Event Handler:** An `onPaste` event handler will be added to the `<textarea>` or code editor component for each tab.
+    *   **Parsing Function:** A new utility function, `parseFilePathsFromResponse(text: string): string[]`, will be created.
+        *   It will use a regular expression: `/<file path="([^"]+)">/g`.
+        *   It will execute this regex on the input text to extract all captured file paths.
+    *   **State Update:**
+        *   Inside the `onPaste` handler, it will call `event.clipboardData.getData('text')` to get the pasted content.
+        *   It will pass this content to the `parseFilePathsFromResponse` function.
+        *   The resulting array of paths will be stored in the state for the active tab (e.g., in a new `detectedFiles: string[]` property).
+        *   If the tab's primary `sourceFilePath` is empty, it will be set to the first path in the array.
+
+2.  **UI Update (`parallel-copilot.view/view.tsx`):**
+    *   A new UI element will be added to each tab's content area.
+    *   It will conditionally render if `detectedFiles` has items.
+    *   It will display a list of the detected file paths, perhaps as clickable links that could set the active `sourceFilePath` for the tab.
+
+3.  **No Backend Changes:** This feature is entirely a frontend concern, involving UI event handling, string parsing, and state management within the React component.
+</file>
+
 <file path="src/Artifacts/A5. DCE - Target File Structure.md">
 # Artifact A5: DCE - Target File Structure
 # Date Created: Cycle 3
@@ -5322,6 +5423,14 @@ export const commands = [
             } else {
                 Services.loggerService.warn("Could not refresh tree: serverIpc not found.");
             }
+        }
+    },
+    {
+        commandId: 'dce.popOutCopilot',
+        callback: () => {
+            Services.loggerService.log("Executing dce.popOutCopilot command.");
+            // Future implementation will open a WebviewPanel here.
+            vscode.window.showInformationMessage("Pop-out feature is under development.");
         }
     }
 ];
@@ -8897,7 +9006,7 @@ const App = () => {
             setCheckedFiles(paths);
             clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths });
 
-            // CRITICAL FIX: Trigger text extraction for any special files in the loaded selection
+            // CRITICAL FIX (C76): Pre-warm cache for ALL special file types in the loaded selection
             logger.log(`[Cache Fix] Pre-warming cache for ${paths.length} restored paths.`);
             paths.forEach(path => {
                 const extension = `.${path.split('.').pop()?.toLowerCase() || ''}`;
@@ -9289,12 +9398,34 @@ body {
     gap: 8px;
 }
 
+.pc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--vscode-panel-border);
+}
+
 .cycle-navigator {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--vscode-panel-border);
+}
+
+.cycle-navigator button, .pc-toolbar button {
+    background: none;
+    border: none;
+    color: var(--vscode-icon-foreground);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        background-color: var(--vscode-toolbar-hoverBackground);
+    }
 }
 
 .tab-bar {
@@ -9316,6 +9447,56 @@ body {
 
 .tab-content {
     padding-top: 8px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.tab-pane {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 8px;
+}
+
+.tab-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    
+    button {
+        background-color: var(--vscode-button-secondaryBackground);
+        color: var(--vscode-button-secondaryForeground);
+        border: 1px solid var(--vscode-button-border, transparent);
+        padding: 4px 10px;
+        font-size: 12px;
+        cursor: pointer;
+        border-radius: 2px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        
+        &:hover {
+            background-color: var(--vscode-button-secondaryHoverBackground);
+        }
+    }
+}
+
+.response-textarea {
+    width: 100%;
+    flex-grow: 1;
+    background-color: var(--vscode-input-background);
+    color: var(--vscode-input-foreground);
+    border: 1px solid var(--vscode-input-border);
+    border-radius: 2px;
+    padding: 4px;
+    font-family: var(--vscode-editor-font-family);
+    font-size: var(--vscode-editor-font-size);
+    resize: none;
+
+    &:focus {
+        outline: 1px solid var(--vscode-focusBorder);
+    }
 }
 </file>
 
@@ -9324,19 +9505,46 @@ body {
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscComment, VscGoToFile, VscReplaceAll, VscThumbsdown, VscThumbsup, VscWindow } from 'react-icons/vsc';
+import { logger } from '@/client/utils/logger';
 
 const App = () => {
     const [activeTab, setActiveTab] = React.useState(1);
+    const [tabContent, setTabContent] = React.useState<{ [key: number]: string }>({});
     const tabCount = 4; // Example tab count
+
+    const handlePaste = (e: React.ClipboardEvent<HTMLTextAreaElement>, tabIndex: number) => {
+        const pastedText = e.clipboardData.getData('text');
+        
+        // Update the content for the specific tab
+        setTabContent(prev => ({...prev, [tabIndex]: pastedText}));
+
+        logger.log(`Pasted content into tab ${tabIndex}. Parsing for file paths...`);
+
+        const fileRegex = /<file path="([^"]+)">/g;
+        const matches = pastedText.matchAll(fileRegex);
+        const paths = Array.from(matches, m => m[1]);
+
+        if (paths.length > 0) {
+            logger.log(`Detected file paths: ${paths.join(', ')}`);
+            // Here you would update the state for the tab with the detected files
+        } else {
+            logger.log('No file paths detected in pasted content.');
+        }
+    };
 
     return (
         <div className="pc-view-container">
-            <div className="cycle-navigator">
-                <span>Cycle:</span>
-                <button><VscChevronLeft /></button>
-                <span>C73</span>
-                <button><VscChevronRight /></button>
+            <div className="pc-header">
+                <div className="cycle-navigator">
+                    <span>Cycle:</span>
+                    <button><VscChevronLeft /></button>
+                    <span>C76</span>
+                    <button><VscChevronRight /></button>
+                </div>
+                <div className="pc-toolbar">
+                    <button title="Pop-out into new window" onClick={() => logger.log("Pop-out clicked")}><VscWindow /></button>
+                </div>
             </div>
             
             <div className="tab-bar">
@@ -9352,9 +9560,24 @@ const App = () => {
             </div>
 
             <div className="tab-content">
-                {[...Array(tabCount)].map((_, i) => (
-                    activeTab === i + 1 && <div key={i}>Content for Response {i + 1}</div>
-                ))}
+                {activeTab !== null && (
+                    <div className="tab-pane">
+                        <div className="tab-actions">
+                            <button onClick={() => logger.log('Accept Response clicked')}><VscGoToFile/> Accept Response</button>
+                            <button onClick={() => logger.log('Swap clicked')}><VscReplaceAll/> Swap with Source</button>
+                            <button onClick={() => logger.log('Thumbs up clicked')}><VscThumbsup/></button>
+                            <button onClick={() => logger.log('Thumbs down clicked')}><VscThumbsdown/></button>
+                            <button onClick={() => logger.log('Add Comment clicked')}><VscComment/> Add Comment</button>
+                        </div>
+                        <textarea 
+                            className="response-textarea"
+                            placeholder={`Paste AI response for tab ${activeTab} here...`}
+                            value={tabContent[activeTab] || ''}
+                            onChange={(e) => setTabContent(prev => ({...prev, [activeTab]: e.target.value}))}
+                            onPaste={(e) => handlePaste(e, activeTab)}
+                        />
+                    </div>
+                )}
             </div>
         </div>
     );

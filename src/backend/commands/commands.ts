@@ -1,3 +1,4 @@
+// Updated on: C77 (Re-supply from C76 as it was not testable)
 import * as vscode from 'vscode';
 import { Services } from '../services/services';
 import { serverIPCs } from '@/client/views';
@@ -83,6 +84,13 @@ export const commands = [
             } else {
                 Services.loggerService.warn("Could not refresh tree: serverIpc not found.");
             }
+        }
+    },
+    {
+        commandId: 'dce.openParallelCopilot',
+        callback: () => {
+            Services.loggerService.log("Executing dce.openParallelCopilot command.");
+            vscode.commands.executeCommand('workbench.view.extension.dce-parallel-copilot-container');
         }
     }
 ];

@@ -63,11 +63,11 @@ const webviewConfig = {
     target: 'web',
     entry: {
         contextChooserView: './src/client/views/context-chooser.view/view.tsx',
-        parallelCopilotView: './src/client/views/parallel-copilot.view/view.tsx', // New Entry
+        parallelCopilotView: './src/client/views/parallel-copilot.view/view.tsx',
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: '[name].js', // Use [name] to generate separate files
+        filename: '[name].js',
         libraryTarget: 'commonjs2'
     },
     plugins: [

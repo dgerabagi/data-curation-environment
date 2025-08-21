@@ -81,29 +81,28 @@ const App = () => {
         });
         
         clientIpc.onServerMessage(ServerToClientChannel.ApplySelectionSet, ({ paths }) => {
-            logger.log(`Applying selection set with ${paths.length} paths.`);
+            logger.log(`[WebView] Applying selection set with ${paths.length} paths.`);
             setCheckedFiles(paths);
             clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths });
 
-            // CRITICAL FIX: Trigger text extraction for any special files in the loaded selection
-            logger.log(`[Cache Fix] Pre-warming cache for ${paths.length} restored paths.`);
+            logger.log(`[WebView] [Cache Fix] Pre-warming cache for ${paths.length} restored paths.`);
             paths.forEach(path => {
                 const extension = `.${path.split('.').pop()?.toLowerCase() || ''}`;
                  if (extension === '.pdf') {
-                    logger.log(`[Cache Fix] Requesting text for restored PDF: ${path}`);
+                    logger.log(`[WebView] [Cache Fix] Requesting text for restored PDF: ${path}`);
                     clientIpc.sendToServer(ClientToServerChannel.RequestPdfToText, { path });
                 } else if (EXCEL_EXTENSIONS.has(extension)) {
-                    logger.log(`[Cache Fix] Requesting text for restored Excel/CSV: ${path}`);
+                    logger.log(`[WebView] [Cache Fix] Requesting text for restored Excel/CSV: ${path}`);
                     clientIpc.sendToServer(ClientToServerChannel.RequestExcelToText, { path });
                 } else if (WORD_EXTENSIONS.has(extension)) {
-                    logger.log(`[Cache Fix] Requesting text for restored Word Doc: ${path}`);
+                    logger.log(`[WebView] [Cache Fix] Requesting text for restored Word Doc: ${path}`);
                     clientIpc.sendToServer(ClientToServerChannel.RequestWordToText, { path });
                 }
             });
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendSelectionSets, ({ sets }) => {
-            logger.log(`Received ${Object.keys(sets).length} selection sets.`);
+            logger.log(`[WebView] Received ${Object.keys(sets).length} selection sets.`);
             setSelectionSets(sets);
         });
 
@@ -113,22 +112,22 @@ const App = () => {
                 suppressActiveFileReveal.current = false;
                 return;
             }
-            logger.log(`[WebView] Received set active file event for: ${path}`);
+            logger.log(`[WebView] [WebView] Received set active file event for: ${path}`);
             setActiveFile(path);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.FocusFile, ({ path }) => {
-            logger.log(`Received focus file event for: ${path}`);
+            logger.log(`[WebView] Received focus file event for: ${path}`);
             setActiveFile(path);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendAutoAddState, ({ enabled }) => {
-            logger.log(`Received auto-add state: ${enabled}`);
+            logger.log(`[WebView] Received auto-add state: ${enabled}`);
             setIsAutoAddEnabled(enabled);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => {
-            logger.log(`Force refresh triggered from backend. Reason: ${reason || 'unknown'}`);
+            logger.log(`[WebView] Force refresh triggered from backend. Reason: ${reason || 'unknown'}`);
             if (reason === 'fileOp') {
                 suppressActiveFileReveal.current = true;
                 setTimeout(() => { suppressActiveFileReveal.current = false; }, 2000);
@@ -138,7 +137,7 @@ const App = () => {
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.UpdateProblemCounts, ({ problemMap: newProblemMap }) => {
-            logger.log(`Received dynamic problem counts update with ${Object.keys(newProblemMap).length} entries.`);
+            logger.log(`[WebView] Received dynamic problem counts update with ${Object.keys(newProblemMap).length} entries.`);
             setProblemMap(newProblemMap);
         });
 
@@ -325,8 +324,6 @@ const App = () => {
             const node = fileMap.get(path);
             if (node) addNodeAndDescendants(node);
         });
-        // C61 Fix: Do NOT filter out image files from the displayed list.
-        // The UI should accurately reflect what is selected.
         return { totalFiles: selectedNodes.length, totalTokens, selectedFileNodes: selectedNodes };
     }, [checkedFiles, files]);
 
