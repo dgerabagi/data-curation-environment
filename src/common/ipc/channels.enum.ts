@@ -19,6 +19,7 @@ export enum ClientToServerChannel {
     RequestRedo = "clientToServer.requestRedo",
     RequestAddFileFromBuffer = "clientToServer.requestAddFileFromBuffer", // For OS drag-drop
     RequestCopyFileFromUri = "clientToServer.requestCopyFileFromUri", // For VS Code explorer drag-drop
+    RequestFileContent = "clientToServer.requestFileContent", // For diffing
 
     // Special File Handling
     RequestPdfToText = "clientToServer.requestPdfToText",
@@ -37,6 +38,9 @@ export enum ClientToServerChannel {
     RequestCreatePromptFile = "clientToServer.requestCreatePromptFile",
     RequestFileExistence = "clientToServer.requestFileExistence",
     RequestSyntaxHighlight = "clientToServer.requestSyntaxHighlight",
+    RequestCycleHistoryList = "clientToServer.requestCycleHistoryList",
+    RequestCycleData = "clientToServer.requestCycleData",
+    SaveCycleData = "clientToServer.saveCycleData",
 }
 
 export enum ServerToClientChannel {
@@ -50,8 +54,11 @@ export enum ServerToClientChannel {
     SendAutoAddState = "serverToClient.sendAutoAddState",
     UpdateProblemCounts = "serverToClient.updateProblemCounts",
     UpdateNodeStats = "serverToClient.updateNodeStats", // For updating PDF token counts
+    SendFileContent = "serverToClient.sendFileContent", // For diffing
     
     // Phase 2: PCPP
     SendFileExistence = "serverToClient.sendFileExistence",
     SendSyntaxHighlight = "serverToClient.sendSyntaxHighlight",
+    SendCycleHistoryList = "serverToClient.sendCycleHistoryList",
+    SendCycleData = "serverToClient.sendCycleData",
 }

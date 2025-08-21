@@ -418,6 +418,19 @@ export class FSService {
 
     // --- File Operations ---
 
+    public async handleFileContentRequest(filePath: string, serverIpc: ServerPostMessageManager) {
+        Services.loggerService.log(`Received request for content of: ${filePath}`);
+        try {
+            const uri = vscode.Uri.file(filePath);
+            const contentBuffer = await vscode.workspace.fs.readFile(uri);
+            const content = Buffer.from(contentBuffer).toString('utf-8');
+            serverIpc.sendToClient(ServerToClientChannel.SendFileContent, { path: filePath, content });
+        } catch (error) {
+            Services.loggerService.error(`Failed to read file content for ${filePath}: ${error}`);
+            serverIpc.sendToClient(ServerToClientChannel.SendFileContent, { path: filePath, content: null });
+        }
+    }
+
     public async handleFileExistenceRequest(paths: string[], serverIpc: ServerPostMessageManager) {
         const existenceMap: { [path: string]: boolean } = {};
         const checks = paths.map(async (p) => {

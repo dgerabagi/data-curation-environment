@@ -3,23 +3,23 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
 
-// Basic structure for history data
-interface CycleResponse {
-    responseId: string;
-    model: string;
+export interface PcppResponse {
     content: string;
+    // Add other response metadata like ratings, comments in the future
 }
 
-interface Cycle {
-    cycleId: string;
+export interface PcppCycle {
+    cycleId: number;
     timestamp: string;
-    prompt: string;
-    responses: CycleResponse[];
+    title: string;
+    cycleContext: string;
+    ephemeralContext: string;
+    responses: { [tabId: number]: PcppResponse };
 }
 
-interface HistoryFile {
+export interface PcppHistoryFile {
     version: number;
-    cycles: Cycle[];
+    cycles: PcppCycle[];
 }
 
 export class HistoryService {
@@ -32,7 +32,7 @@ export class HistoryService {
         }
     }
 
-    private async _readHistoryFile(): Promise<HistoryFile> {
+    private async _readHistoryFile(): Promise<PcppHistoryFile> {
         if (!this.historyFilePath) return { version: 1, cycles: [] };
         try {
             const content = await vscode.workspace.fs.readFile(vscode.Uri.file(this.historyFilePath));
@@ -43,7 +43,7 @@ export class HistoryService {
         }
     }
 
-    private async _writeHistoryFile(data: HistoryFile): Promise<void> {
+    private async _writeHistoryFile(data: PcppHistoryFile): Promise<void> {
         if (!this.historyFilePath) return;
         const dir = path.dirname(this.historyFilePath);
         try {
@@ -55,9 +55,34 @@ export class HistoryService {
         }
     }
 
-    public async getCycleHistory() {
-        Services.loggerService.log("HistoryService: getCycleHistory called.");
+    public async getCycleHistoryList(): Promise<number[]> {
+        Services.loggerService.log("HistoryService: getCycleHistoryList called.");
         const history = await this._readHistoryFile();
-        return history.cycles.map(c => c.cycleId).sort(); // Return sorted list of cycle IDs
+        return history.cycles.map(c => c.cycleId).sort((a, b) => a - b);
+    }
+
+    public async getCycleData(cycleId: number): Promise<PcppCycle | null> {
+        Services.loggerService.log(`HistoryService: getting data for cycle ${cycleId}.`);
+        const history = await this._readHistoryFile();
+        return history.cycles.find(c => c.cycleId === cycleId) || null;
+    }
+
+    public async saveCycleData(cycleData: PcppCycle): Promise<void> {
+        Services.loggerService.log(`HistoryService: saving data for cycle ${cycleData.cycleId}.`);
+        const history = await this._readHistoryFile();
+        const cycleIndex = history.cycles.findIndex(c => c.cycleId === cycleData.cycleId);
+
+        if (cycleIndex > -1) {
+            // Update existing cycle
+            history.cycles[cycleIndex] = cycleData;
+        } else {
+            // Add new cycle
+            history.cycles.push(cycleData);
+        }
+        
+        // Sort cycles by ID to maintain order
+        history.cycles.sort((a, b) => a.cycleId - b.cycleId);
+
+        await this._writeHistoryFile(history);
     }
 }

@@ -1,4 +1,4 @@
-/* Updated on: C82 (Add styles for prompt generation and file association) */
+/* Updated on: C88 (Add styles for metadata bar) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -71,6 +71,7 @@ body {
 
 .context-inputs {
     display: flex;
+    flex-direction: column; /* Stack them vertically */
     gap: 8px;
     flex-shrink: 0;
 }
@@ -116,6 +117,17 @@ body {
 .tab.active {
     color: var(--vscode-tab-activeForeground);
     border-bottom-color: var(--vscode-tab-activeBorder);
+}
+
+.metadata-bar {
+    font-size: 11px;
+    padding: 4px 8px;
+    background-color: var(--vscode-editorWidget-background);
+    border-bottom: 1px solid var(--vscode-panel-border);
+    color: var(--vscode-descriptionForeground);
+    display: flex;
+    gap: 16px;
+    flex-shrink: 0;
 }
 
 .tab-content {
@@ -179,6 +191,10 @@ body {
         padding: 2px 6px;
         background-color: var(--vscode-input-background);
         border-radius: 10px;
+        cursor: pointer;
+        &:hover {
+            background-color: var(--vscode-list-hoverBackground);
+        }
         .icon-success { color: var(--vscode-testing-iconPassed); }
         .icon-error { color: var(--vscode-testing-iconFailed); }
     }
@@ -229,5 +245,59 @@ body {
         display: block;
         padding: 16px;
         overflow: auto;
+    }
+}
+
+/* Diff Viewer Modal */
+.diff-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.diff-modal-content {
+    background-color: var(--vscode-editor-background);
+    border: 1px solid var(--vscode-panel-border);
+    border-radius: 4px;
+    width: 90%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+}
+
+.diff-viewer {
+    flex-grow: 1;
+    overflow: auto;
+    font-family: var(--vscode-editor-font-family);
+    font-size: var(--vscode-editor-font-size);
+    white-space: pre-wrap;
+    
+    .line {
+        display: flex;
+    }
+    .line-num {
+        flex-shrink: 0;
+        width: 40px;
+        text-align: right;
+        padding-right: 10px;
+        color: var(--vscode-editorLineNumber-foreground);
+        user-select: none;
+    }
+    .line-content {
+        flex-grow: 1;
+    }
+    .added {
+        background-color: var(--vscode-diffEditor-insertedTextBackground);
+    }
+    .removed {
+        background-color: var(--vscode-diffEditor-removedTextBackground);
     }
 }
