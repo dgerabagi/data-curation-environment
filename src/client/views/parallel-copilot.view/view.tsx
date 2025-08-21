@@ -1,13 +1,16 @@
-// Updated on: C88 (Add metadata bar and conditional diff view)
+// Updated on: C90 (Implement collapsible sections and markdown rendering)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscCheck, VscError, VscSymbolNumeric } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
 import { PcppCycle } from '@/backend/services/history.service';
-import DiffViewer from '@/client/components/DiffViewer';
+import { ParsedResponse } from '@/common/types/pcpp.types';
+import { parseResponse } from '@/client/utils/response-parser';
+import ReactMarkdown from 'react-markdown';
+import crypto from 'crypto';
 
 // Debounce hook
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
@@ -22,19 +25,36 @@ const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     };
 };
 
+interface TabState {
+    rawContent: string;
+    parsedContent: ParsedResponse | null;
+}
+
+const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; }> = ({ title, children, isCollapsed, onToggle }) => (
+    <div className="collapsible-section">
+        <div className="collapsible-header" onClick={onToggle}>
+            <VscChevronDown className={`chevron ${isCollapsed ? 'collapsed' : ''}`} />
+            <span>{title}</span>
+        </div>
+        {!isCollapsed && <div className="collapsible-content">{children}</div>}
+    </div>
+);
+
+
 const App = () => {
     // State
     const [activeTab, setActiveTab] = React.useState(1);
     const [tabCount, setTabCount] = React.useState(4);
-    const [currentCycle, setCurrentCycle] = React.useState(88);
-    const [maxCycle, setMaxCycle] = React.useState(88);
-    const [cycleTitle, setCycleTitle] = React.useState('1 ts error, continue delivering phase 2');
+    const [currentCycle, setCurrentCycle] = React.useState(90);
+    const [maxCycle, setMaxCycle] = React.useState(90);
+    const [cycleTitle, setCycleTitle] = React.useState('markdown rendering, collapsible sections');
     const [cycleContext, setCycleContext] = React.useState('');
     const [ephemeralContext, setEphemeralContext] = React.useState('');
-    const [tabContent, setTabContent] = React.useState<{ [key: number]: string }>({});
-    const [detectedFiles, setDetectedFiles] = React.useState<{ [key: number]: string[] }>({});
-    const [fileExistence, setFileExistence] = React.useState<{ [path: string]: boolean }>({});
-    const [diffData, setDiffData] = React.useState<{ original: string; modified: string; path: string } | null>(null);
+    const [tabs, setTabs] = React.useState<{ [key: number]: TabState }>({});
+    const [highlightedCodeBlocks, setHighlightedCodeBlocks] = React.useState<Map<string, string>>(new Map());
+
+    // Collapsible sections state
+    const [isCycleCollapsed, setIsCycleCollapsed] = React.useState(false);
 
     const clientIpc = ClientPostMessageManager.getInstance();
 
@@ -42,7 +62,7 @@ const App = () => {
     const saveCurrentCycleState = React.useCallback(() => {
         const responses: { [key: number]: { content: string } } = {};
         for (let i = 1; i <= tabCount; i++) {
-            responses[i] = { content: tabContent[i] || '' };
+            responses[i] = { content: tabs[i]?.rawContent || '' };
         }
 
         const cycleData: PcppCycle = {
@@ -55,22 +75,17 @@ const App = () => {
         };
         logger.log(`Saving state for cycle ${currentCycle}`);
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
-    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabContent, tabCount, clientIpc]);
+    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, clientIpc]);
 
     const debouncedSave = useDebounce(saveCurrentCycleState, 1000);
 
-    // Trigger save on any state change
     React.useEffect(() => {
         debouncedSave();
-    }, [cycleTitle, cycleContext, ephemeralContext, tabContent, debouncedSave]);
+    }, [cycleTitle, cycleContext, ephemeralContext, tabs, debouncedSave]);
 
 
     // --- Data Loading & IPC Handlers ---
     React.useEffect(() => {
-        clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => {
-            setFileExistence(prev => ({ ...prev, ...existenceMap }));
-        });
-
         clientIpc.onServerMessage(ServerToClientChannel.SendCycleHistoryList, ({ cycleIds }) => {
             const max = Math.max(...cycleIds, 0);
             setMaxCycle(max > 0 ? max : currentCycle);
@@ -82,58 +97,61 @@ const App = () => {
                 setCycleTitle(cycleData.title);
                 setCycleContext(cycleData.cycleContext);
                 setEphemeralContext(cycleData.ephemeralContext);
-                const newTabContent: { [key: number]: string } = {};
+                const newTabs: { [key: number]: TabState } = {};
                 Object.entries(cycleData.responses).forEach(([tabId, response]) => {
-                    newTabContent[Number(tabId)] = response.content;
+                    newTabs[Number(tabId)] = { rawContent: response.content, parsedContent: null };
                 });
-                setTabContent(newTabContent);
-                // Trigger parsing for loaded content
-                Object.entries(newTabContent).forEach(([tabId, content]) => {
-                    parseResponseForFiles(content, Number(tabId));
-                });
+                setTabs(newTabs);
             } else {
                 logger.warn(`No data found for cycle. Clearing fields.`);
-                // Clear fields for a new/empty cycle
                 setCycleTitle('');
                 setCycleContext('');
                 setEphemeralContext('');
-                setTabContent({});
-                setDetectedFiles({});
+                setTabs({});
             }
         });
         
-        clientIpc.onServerMessage(ServerToClientChannel.SendFileContent, ({ path, content }) => {
-            if (content !== null) {
-                const responseContent = tabContent[activeTab] || '';
-                const fileRegex = new RegExp(`<file path="${path.replace(/\\/g, '\\\\')}">([\\s\\S]*?)<\\/file>`, 's');
-                const match = responseContent.match(fileRegex);
-                const modified = match ? match[1].trim() : `<!-- Could not find content for ${path} in response -->`;
-                setDiffData({ original: content, modified, path });
-            }
+        clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => {
+            setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml));
         });
-
-        // Initial data load
+        
         clientIpc.sendToServer(ClientToServerChannel.RequestCycleHistoryList, {});
         clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: currentCycle });
 
     }, [clientIpc]);
 
-    const parseResponseForFiles = (text: string, tabIndex: number) => {
-        const fileRegex = /<file path="([^"]+)">/g;
-        const matches = text.matchAll(fileRegex);
-        const paths = Array.from(matches, m => m[1]).filter(Boolean);
+    const handleRawContentChange = (newContent: string, tabIndex: number) => {
+        setTabs(prev => ({
+            ...prev,
+            [tabIndex]: { ...prev[tabIndex], rawContent: newContent, parsedContent: null }
+        }));
+    };
 
-        if (paths.length > 0) {
-            setDetectedFiles(prev => ({...prev, [tabIndex]: paths}));
-            clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths });
-        } else {
-            setDetectedFiles(prev => ({...prev, [tabIndex]: []}));
+    const handleParseResponse = (tabIndex: number) => {
+        const tabState = tabs[tabIndex];
+        if (tabState && tabState.rawContent) {
+            const parsed = parseResponse(tabState.rawContent);
+            setTabs(prev => ({
+                ...prev,
+                [tabIndex]: { ...prev[tabIndex], parsedContent: parsed }
+            }));
+
+            // Request syntax highlighting for all code blocks
+            parsed.files.forEach(file => {
+                const lang = file.path.split('.').pop() || 'plaintext';
+                const id = `${file.path}::${file.content}`; // Simple unique ID
+                if (!highlightedCodeBlocks.has(id)) {
+                    clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
+                }
+            });
         }
     };
 
-    const handleContentChange = (newContent: string, tabIndex: number) => {
-        setTabContent(prev => ({ ...prev, [tabIndex]: newContent }));
-        parseResponseForFiles(newContent, tabIndex);
+    const handleUnparseResponse = (tabIndex: number) => {
+        setTabs(prev => ({
+            ...prev,
+            [tabIndex]: { ...prev[tabIndex], parsedContent: null }
+        }));
     };
 
     const handleCycleChange = (newCycle: number) => {
@@ -143,30 +161,25 @@ const App = () => {
         }
     };
 
-    const handleDiffRequest = (filePath: string) => {
-        setDiffData(null); // Clear previous diff
-        clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: filePath });
-    };
-
-    const currentTokenCount = Math.ceil((tabContent[activeTab] || '').length / 4);
-    const matchedFileCount = (detectedFiles[activeTab] || []).filter(path => fileExistence[path]).length;
+    const activeTabData = tabs[activeTab];
 
     return (
         <div className="pc-view-container">
-            <div className="pc-header">
-                <div className="cycle-navigator">
-                    <span>Cycle:</span>
-                    <button onClick={() => handleCycleChange(currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button>
-                    <input type="number" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 1)} className="cycle-input" />
-                    <button onClick={() => handleCycleChange(currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button>
-                    <input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} />
+            <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)}>
+                <div className="pc-header">
+                    <div className="cycle-navigator">
+                        <span>Cycle:</span>
+                        <button onClick={() => handleCycleChange(currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button>
+                        <input type="number" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 1)} className="cycle-input" />
+                        <button onClick={() => handleCycleChange(currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button>
+                        <input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} />
+                    </div>
                 </div>
-            </div>
-            
-            <div className="context-inputs">
-                 <textarea className="context-textarea" placeholder="Cycle Context (notes for this cycle)..." value={cycleContext} onChange={e => setCycleContext(e.target.value)} />
-                 <textarea className="context-textarea" placeholder="Ephemeral Context (for this cycle's prompt only)..." value={ephemeralContext} onChange={e => setEphemeralContext(e.target.value)} />
-            </div>
+                <div className="context-inputs">
+                    <textarea className="context-textarea" placeholder="Cycle Context (notes for this cycle)..." value={cycleContext} onChange={e => setCycleContext(e.target.value)} />
+                    <textarea className="context-textarea" placeholder="Ephemeral Context (for this cycle's prompt only)..." value={ephemeralContext} onChange={e => setEphemeralContext(e.target.value)} />
+                </div>
+            </CollapsibleSection>
 
             <div className="tab-bar">
                 {[...Array(tabCount)].map((_, i) => (
@@ -176,36 +189,50 @@ const App = () => {
                 ))}
             </div>
 
-            <div className="metadata-bar">
-                <span><VscSymbolNumeric/> Tokens: {currentTokenCount.toLocaleString()}</span>
-                <span>Similarity: TBD</span>
-                <span>Files: {(detectedFiles[activeTab] || []).length} ({matchedFileCount} matched ✓)</span>
-            </div>
-
             <div className="tab-content">
                 {activeTab !== null && (
                     <div className="tab-pane">
-                         {detectedFiles[activeTab] && detectedFiles[activeTab].length > 0 && (
-                            <div className="associated-files-container">
-                                <div className="associated-files-list">
-                                    {detectedFiles[activeTab].map(path => (
-                                        <div key={path} className="associated-file" onClick={() => handleDiffRequest(path)} title={`Click to diff ${path}`}>
-                                            {fileExistence[path] ? <span className="icon-success"><VscCheck/></span> : <span className="icon-error"><VscError/></span>}
-                                            <span className="file-path">{path.split('/').pop()}</span>
-                                        </div>
-                                    ))}
+                        <div className="pc-toolbar">
+                            {activeTabData?.parsedContent ? (
+                                <button onClick={() => handleUnparseResponse(activeTab)}>Un-Parse</button>
+                            ) : (
+                                <button onClick={() => handleParseResponse(activeTab)}><VscWand /> Parse Response</button>
+                            )}
+                        </div>
+
+                        {activeTabData?.parsedContent ? (
+                            <div className="parsed-view">
+                                <div className="parsed-section">
+                                    <ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown>
                                 </div>
+                                <div className="parsed-section">
+                                     <ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown>
+                                </div>
+                                {activeTabData.parsedContent.files.map(file => {
+                                    const id = `${file.path}::${file.content}`;
+                                    const highlightedHtml = highlightedCodeBlocks.get(id);
+                                    return (
+                                        <div key={file.path} className="file-block">
+                                            <div className="file-header">
+                                                <span className="file-path">{file.path}</span>
+                                                <div className="file-actions">
+                                                    <button>Diff</button>
+                                                    <button>Swap</button>
+                                                </div>
+                                            </div>
+                                            <div className="file-content-viewer"
+                                                 dangerouslySetInnerHTML={{ __html: highlightedHtml || `<pre><code>${file.content}</code></pre>` }}>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
                             </div>
-                        )}
-                        {diffData ? (
-                             <DiffViewer original={diffData.original} modified={diffData.modified} filePath={diffData.path} onClose={() => setDiffData(null)} />
                         ) : (
                             <textarea 
                                 className="response-textarea"
-                                style={{ flexGrow: 1 }}
                                 placeholder={`Paste AI response for tab ${activeTab} here...`}
-                                value={tabContent[activeTab] || ''}
-                                onChange={(e) => handleContentChange(e.target.value, activeTab)}
+                                value={activeTabData?.rawContent || ''}
+                                onChange={(e) => handleRawContentChange(e.target.value, activeTab)}
                             />
                         )}
                     </div>

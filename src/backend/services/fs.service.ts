@@ -55,18 +55,7 @@ export class FSService {
 
     private async initializeStarryNight() {
         try {
-            // Dynamically import grammars
-            const grammars = await Promise.all([
-                import('@wooorm/starry-night/lang/source.css'),
-                import('@wooorm/starry-night/lang/source.js'),
-                import('@wooorm/starry-night/lang/source.json'),
-                import('@wooorm/starry-night/lang/source.shell'),
-                import('@wooorm/starry-night/lang/source.ts'),
-                import('@wooorm/starry-night/lang/source.tsx'),
-                import('@wooorm/starry-night/lang/text.md'),
-              ]);
-
-            this.starryNight = await createStarryNight([...common, ...grammars.map(g => g.default)]);
+            this.starryNight = await createStarryNight(common);
             Services.loggerService.log('Starry Night syntax highlighter initialized.');
         } catch (error) {
             Services.loggerService.error(`Failed to initialize Starry Night: ${error}`);
@@ -419,14 +408,14 @@ export class FSService {
     // --- File Operations ---
 
     public async handleFileContentRequest(filePath: string, serverIpc: ServerPostMessageManager) {
-        Services.loggerService.log(`Received request for content of: ${filePath}`);
+        Services.loggerService.log(`[C88 Fix] Received request for content of: ${filePath}`);
         try {
             const uri = vscode.Uri.file(filePath);
             const contentBuffer = await vscode.workspace.fs.readFile(uri);
             const content = Buffer.from(contentBuffer).toString('utf-8');
             serverIpc.sendToClient(ServerToClientChannel.SendFileContent, { path: filePath, content });
         } catch (error) {
-            Services.loggerService.error(`Failed to read file content for ${filePath}: ${error}`);
+            Services.loggerService.error(`[C88 Fix] Failed to read file content for ${filePath}: ${error}`);
             serverIpc.sendToClient(ServerToClientChannel.SendFileContent, { path: filePath, content: null });
         }
     }

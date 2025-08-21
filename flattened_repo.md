@@ -1,17 +1,17 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-21T18:06:01.394Z
+  Date Generated: 2025-08-21T19:20:52.242Z
   ---
-  Total Files: 203
-  Total Lines: 17242
-  Total Characters: 801308
-  Approx. Tokens: 200405
+  Total Files: 205
+  Total Lines: 17247
+  Total Characters: 802877
+  Approx. Tokens: 200796
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
-2. src\backend\services\fs.service.ts (9326 tokens)
+2. src\backend\services\fs.service.ts (9179 tokens)
 3. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
 4. src\client\views\context-chooser.view\view.tsx (5562 tokens)
 5. src\client\components\tree-view\TreeView.tsx (4508 tokens)
@@ -26,7 +26,7 @@
 2. .vscodeignore - Lines: 11 - Chars: 356 - Tokens: 89
 3. bootstrap-flattener.js - Lines: 185 - Chars: 5834 - Tokens: 1459
 4. LICENSE - Lines: 21 - Chars: 1090 - Tokens: 273
-5. package.json - Lines: 137 - Chars: 4506 - Tokens: 1127
+5. package.json - Lines: 138 - Chars: 4543 - Tokens: 1136
 6. public\copilot.svg - Lines: 5 - Chars: 445 - Tokens: 112
 7. public\spiral.svg - Lines: 8 - Chars: 459 - Tokens: 115
 8. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 242 - Chars: 17853 - Tokens: 4464
@@ -59,9 +59,9 @@
 35. src\Artifacts\A31. DCE - Phase 2 - Multimodal Content Extraction (PDF Images).md - Lines: 44 - Chars: 4035 - Tokens: 1009
 36. src\Artifacts\A32. DCE - Phase 1 - Excel and CSV Handling Strategy.md - Lines: 44 - Chars: 4295 - Tokens: 1074
 37. src\Artifacts\A33. DCE - Phase 1 - Copy-Paste Feature Plan.md - Lines: 42 - Chars: 4456 - Tokens: 1114
-38. src\Artifacts\A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements.md - Lines: 38 - Chars: 5782 - Tokens: 1446
-39. src\Artifacts\A35. DCE - Phase 2 - UI Mockups and Flow.md - Lines: 91 - Chars: 6725 - Tokens: 1682
-40. src\Artifacts\A36. DCE - Phase 2 - Technical Implementation Plan.md - Lines: 96 - Chars: 4418 - Tokens: 1105
+38. src\Artifacts\A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements.md - Lines: 42 - Chars: 6006 - Tokens: 1502
+39. src\Artifacts\A35. DCE - Phase 2 - UI Mockups and Flow.md - Lines: 109 - Chars: 8162 - Tokens: 2041
+40. src\Artifacts\A36. DCE - Phase 2 - Technical Implementation Plan.md - Lines: 58 - Chars: 3839 - Tokens: 960
 41. src\Artifacts\A37. DCE - Phase 2 - Cycle Navigator & Knowledge Graph - Vision.md - Lines: 28 - Chars: 3242 - Tokens: 811
 42. src\Artifacts\A38. DCE - Phase 2 - Cycle Navigator - UI Mockup.md - Lines: 69 - Chars: 4621 - Tokens: 1156
 43. src\Artifacts\A39. DCE - Phase 2 - Cycle Navigator - Technical Plan.md - Lines: 100 - Chars: 4993 - Tokens: 1249
@@ -77,7 +77,7 @@
 53. src\Artifacts\A45. DCE - Phase 2 - Pop-out Co-Pilot Window - Feature Plan.md - Lines: 49 - Chars: 4156 - Tokens: 1039
 54. src\Artifacts\A46. DCE - Phase 2 - Paste and Parse Response - Feature Plan.md - Lines: 38 - Chars: 3587 - Tokens: 897
 55. src\Artifacts\A47. DCE - Phase 2 - Prompt Amalgamation Feature Plan.md - Lines: 42 - Chars: 3499 - Tokens: 875
-56. src\Artifacts\A48. DCE - Phase 2 - Advanced Syntax Highlighting Plan.md - Lines: 50 - Chars: 4606 - Tokens: 1152
+56. src\Artifacts\A48. DCE - Phase 2 - Advanced Syntax Highlighting Plan.md - Lines: 49 - Chars: 4044 - Tokens: 1011
 57. src\Artifacts\A49. DCE - Phase 2 - File Association & Diffing Plan.md - Lines: 43 - Chars: 4390 - Tokens: 1098
 58. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
 59. src\Artifacts\A50. DCE - Phase 2 - UI Component Plan (Resizable Panes & Inner Editors).md - Lines: 48 - Chars: 4790 - Tokens: 1198
@@ -89,7 +89,7 @@
 65. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
 66. src\backend\services\action.service.ts - Lines: 73 - Chars: 2471 - Tokens: 618
 67. src\backend\services\flattener.service.ts - Lines: 327 - Chars: 14740 - Tokens: 3685
-68. src\backend\services\fs.service.ts - Lines: 780 - Chars: 37301 - Tokens: 9326
+68. src\backend\services\fs.service.ts - Lines: 769 - Chars: 36715 - Tokens: 9179
 69. src\backend\services\history.service.ts - Lines: 88 - Chars: 3308 - Tokens: 827
 70. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
 71. src\backend\services\prompt.service.ts - Lines: 113 - Chars: 13923 - Tokens: 3481
@@ -105,126 +105,128 @@
 81. src\client\components\tree-view\TreeView.tsx - Lines: 394 - Chars: 18029 - Tokens: 4508
 82. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 83. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
-84. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-85. src\client\views\context-chooser.view\on-message.ts - Lines: 143 - Chars: 6146 - Tokens: 1537
-86. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
-87. src\client\views\context-chooser.view\view.tsx - Lines: 435 - Chars: 22245 - Tokens: 5562
-88. src\client\views\index.ts - Lines: 35 - Chars: 1714 - Tokens: 429
-89. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-90. src\client\views\parallel-copilot.view\on-message.ts - Lines: 39 - Chars: 1845 - Tokens: 462
-91. src\client\views\parallel-copilot.view\view.scss - Lines: 303 - Chars: 6863 - Tokens: 1716
-92. src\client\views\parallel-copilot.view\view.tsx - Lines: 219 - Chars: 10790 - Tokens: 2698
-93. src\common\ipc\channels.enum.ts - Lines: 64 - Chars: 3412 - Tokens: 853
-94. src\common\ipc\channels.type.ts - Lines: 57 - Chars: 4453 - Tokens: 1114
-95. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
-96. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-97. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-98. src\common\types\file-node.ts - Lines: 16 - Chars: 567 - Tokens: 142
-99. src\common\types\vscode-webview.d.ts - Lines: 13 - Chars: 357 - Tokens: 90
-100. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
-101. src\common\utils\view-html.ts - Lines: 26 - Chars: 971 - Tokens: 243
-102. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
-103. src\extension.ts - Lines: 159 - Chars: 6869 - Tokens: 1718
-104. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
-105. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
-106. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
-107. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
-108. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
-109. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
-110. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
-111. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
-112. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
-113. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
-114. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
-115. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
-116. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
-117. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
-118. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
-119. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
-120. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
-121. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
-122. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
-123. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
-124. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
-125. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
-126. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
-127. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
-128. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
-129. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
-130. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
-131. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
-132. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
-133. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
-134. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
-135. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
-136. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
-137. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
-138. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
-139. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
-140. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
-141. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
-142. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
-143. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
-144. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
-145. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
-146. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
-147. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
-148. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
-149. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
-150. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
-151. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
-152. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
-153. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
-154. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
-155. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
-156. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
-157. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
-158. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
-159. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
-160. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
-161. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
-162. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
-163. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
-164. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
-165. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
-166. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
-167. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
-168. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
-169. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
-170. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
-171. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-172. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
-173. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
-174. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
-175. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-176. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
-177. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
-178. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
-179. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-180. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
-181. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
-182. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
-183. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
-184. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
-185. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
-186. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
-187. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-188. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
-189. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
-190. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
-191. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
-192. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
-193. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
-194. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
-195. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
-196. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
-197. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
-198. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
-199. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
-200. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
-201. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
-202. tsconfig.json - Lines: 19 - Chars: 457 - Tokens: 115
-203. webpack.config.js - Lines: 90 - Chars: 2440 - Tokens: 610
+84. src\client\utils\response-parser.ts - Lines: 40 - Chars: 1698 - Tokens: 425
+85. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
+86. src\client\views\context-chooser.view\on-message.ts - Lines: 143 - Chars: 6146 - Tokens: 1537
+87. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
+88. src\client\views\context-chooser.view\view.tsx - Lines: 435 - Chars: 22245 - Tokens: 5562
+89. src\client\views\index.ts - Lines: 35 - Chars: 1714 - Tokens: 429
+90. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
+91. src\client\views\parallel-copilot.view\on-message.ts - Lines: 39 - Chars: 1845 - Tokens: 462
+92. src\client\views\parallel-copilot.view\view.scss - Lines: 255 - Chars: 5610 - Tokens: 1403
+93. src\client\views\parallel-copilot.view\view.tsx - Lines: 246 - Chars: 11687 - Tokens: 2922
+94. src\common\ipc\channels.enum.ts - Lines: 64 - Chars: 3412 - Tokens: 853
+95. src\common\ipc\channels.type.ts - Lines: 57 - Chars: 4453 - Tokens: 1114
+96. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
+97. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+98. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
+99. src\common\types\file-node.ts - Lines: 16 - Chars: 567 - Tokens: 142
+100. src\common\types\pcpp.types.ts - Lines: 13 - Chars: 256 - Tokens: 64
+101. src\common\types\vscode-webview.d.ts - Lines: 13 - Chars: 357 - Tokens: 90
+102. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
+103. src\common\utils\view-html.ts - Lines: 26 - Chars: 971 - Tokens: 243
+104. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
+105. src\extension.ts - Lines: 159 - Chars: 6869 - Tokens: 1718
+106. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
+107. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
+108. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
+109. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
+110. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
+111. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
+112. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
+113. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
+114. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
+115. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
+116. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
+117. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
+118. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
+119. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
+120. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
+121. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
+122. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
+123. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
+124. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
+125. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
+126. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
+127. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
+128. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
+129. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
+130. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
+131. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
+132. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
+133. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
+134. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
+135. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
+136. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
+137. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
+138. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
+139. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
+140. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
+141. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
+142. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
+143. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
+144. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
+145. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
+146. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
+147. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
+148. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
+149. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
+150. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
+151. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
+152. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
+153. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
+154. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
+155. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
+156. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
+157. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
+158. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
+159. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
+160. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
+161. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
+162. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
+163. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
+164. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
+165. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
+166. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
+167. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
+168. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
+169. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
+170. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
+171. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
+172. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
+173. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+174. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
+175. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
+176. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
+177. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+178. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
+179. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
+180. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
+181. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+182. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
+183. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
+184. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
+185. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
+186. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
+187. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
+188. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
+189. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+190. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
+191. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
+192. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
+193. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
+194. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
+195. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
+196. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
+197. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
+198. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
+199. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
+200. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
+201. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
+202. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
+203. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
+204. tsconfig.json - Lines: 19 - Chars: 457 - Tokens: 115
+205. webpack.config.js - Lines: 90 - Chars: 2440 - Tokens: 610
 
 <file path=".gitignore">
 node_modules
@@ -594,6 +596,7 @@ SOFTWARE.
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
         "react-icons": "^5.3.0",
+        "react-markdown": "^9.0.1",
         "rxjs": "^7.8.1",
         "reflect-metadata": "^0.2.2",
         "pdf-parse": "^1.1.1",
@@ -2651,234 +2654,218 @@ To achieve greater feature parity with the native VS Code Explorer and improve w
 # Artifact A34: DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements
 # Date Created: C69
 # Author: AI Model
-# Updated on: C88 (Add metadata display requirements)
+# Updated on: C90 (Add Markdown rendering and collapsible sections)
 
 - **Key/Value for A0:**
 - **Description:** Outlines the high-level vision and user stories for the Phase 2 multi-tabbed editor panel, designed for comparing and managing multiple AI-generated responses. Includes plans for response annotation and a "Cycles Context" field.
-- **Tags:** feature plan, phase 2, co-pilot, multi-tab, ui, ux, requirements, annotation, persistence, diff
+- **Tags:** feature plan, phase 2, co-pilot, multi-tab, ui, ux, requirements, annotation, persistence, diff, parsing
 
 ## 1. Vision & Goal
 
 Phase 2 of the Data Curation Environment aims to solve the "single-threaded" nature of interacting with AI assistants. The current workflow for developers often involves sending the same prompt to multiple models or conversations, copying the results to separate text files, and then manually integrating them into their project to test. This is inefficient and cumbersome.
 
-The goal of the **Parallel Co-Pilot Panel** is to create an integrated, **persistent** environment within VS Code specifically for managing, comparing, diffing, and testing multiple AI-generated code responses. It will function as a temporary "workbench" for AI outputs before they are committed to the source code.
+The goal of the **Parallel Co-Pilot Panel** is to create an integrated, **persistent** environment within VS Code specifically for managing, comparing, diffing, and testing multiple AI-generated code responses.
 
-**Architectural Vision (C75 Update):** The Parallel Co-Pilot will be a top-level view, accessible via its own icon in the VS Code Activity Bar. It will **not** be a sub-panel within the "Data Curation" file tree view. This provides a larger, dedicated space for comparing responses, aligning with its role as a primary workflow tool.
+**Core Workflow (C89 Update):** The primary interaction model is now **parse-centric**. The user pastes a raw, complete AI response into a simple text area. The extension then parses this raw text into a structured, read-only view, separating the AI's plan from its code artifacts. This transforms the panel from a simple text editor into an intelligent review and analysis tool.
 
 ## 2. Core Concepts
 
 1.  **Dedicated View Container:** The panel has its own icon in the Activity Bar, providing a distinct, full-height space for its UI.
 2.  **Stateful & Persistent:** The content of all tabs, context fields, and the current cycle number are automatically saved. The state persists across sessions and when moving the panel to a new window.
-3.  **Multi-Tab Editor:** A multi-tabbed text editor interface for managing multiple AI responses.
-4.  **Live Testing via "Swap":** The core innovation is a "swap" feature. The user can, with a single click, exchange the content of a tab with its corresponding source file in the workspace.
-5.  **Integrated Diffing:** Users can click on a file detected in a response to see an immediate diff view comparing the AI's suggestion against the current workspace file.
-6.  **Cycle Navigator:** A UI to navigate back and forth through the history of development cycles, loading the corresponding AI responses for each cycle.
-7.  **Metadata Display:** Each response tab will display key metadata, such as token counts and similarity scores, to help the user quickly evaluate the AI's output.
+3.  **Parse-on-Demand:** Each tab starts as a simple `textarea`. After the user pastes a response, a "Parse Response" button processes the raw text.
+4.  **Structured, Readable View:** After parsing, the `textarea` is replaced by a static, read-only view that:
+    *   Renders the AI's summary and plan as **formatted Markdown**.
+    *   Uses **collapsible sections** for the main UI areas (Cycle Info, Summary, etc.) to manage screen real estate.
+    *   Displays individual, **syntax-highlighted** code blocks for each file.
+5.  **Live Testing via "Swap":** The core innovation is a "swap" feature. The user can, with a single click, exchange the content of a parsed file block with its corresponding source file in the workspace.
+6.  **Integrated Diffing:** Users can click on a file detected in a response to see an immediate diff view comparing the AI's suggestion against the current workspace file.
+7.  **Cycle Navigator:** A UI to navigate back and forth through the history of development cycles, loading the corresponding AI responses for each cycle.
+8.  **Metadata Display:** Each response tab will display key metadata, such as token counts and similarity scores, to help the user quickly evaluate the AI's output.
 
 ## 3. User Stories
 
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
-| P2-US-01 | **Manage Multiple Responses** | As a developer, I want a dedicated panel with multiple tabs where I can place different AI-generated code responses, so I can keep them organized. | - A new icon in the Activity Bar opens the Parallel Co-Pilot panel. <br> - The panel contains a slider or input to select the number of visible tabs. <br> - Each tab is a fully functional text editor with syntax highlighting. |
-| P2-US-02 | **Persistent State** | As a developer, I want all the text I've entered into the panel (response tabs, context fields) to be saved automatically, so I don't lose my work if I close the panel, move it, or restart VS Code. | - All text content is saved to a history file (`.vscode/dce_history.json`). <br> - When the panel is reopened, it loads the state from the most recent cycle. <br> - Moving the panel into a new window preserves its state. |
-| P2-US-03 | **Test Response with "Swap"** | As a developer, I want to click a button to temporarily swap the code from a tab with the actual source file in my project, so I can immediately see if the new code works. | - Each tab has a "Swap with Source" button. <br> - Clicking it replaces the content of the source file on disk with the content of the tab. <br> - Simultaneously, the original content of the source file is loaded into the tab. |
-| P2-US-04 | **Review Changes with Diff** | As a developer, I want to see a list of files affected by an AI response and click on any of them to see a diff, so I can review the exact changes before testing. | - The panel parses responses and lists all detected file paths. <br> - A checkmark appears next to files that exist in the workspace. <br> - Clicking a file path opens a diff view (e.g., in a modal) comparing the workspace version with the AI's version. |
-| P2-US-05 | **Navigate Cycle History** | As a developer, I want to navigate backward and forward through my project's development cycles, so I can review past AI suggestions. | - UI controls exist to move between cycles. <br> - Navigating to a past cycle loads its saved responses and context into the panel. <br> - The navigator starts at Cycle 1 and cannot go past the latest cycle containing data. |
-| P2-US-06 | **Manage Temporary Context** | As a developer, I want separate text areas for "Cycle Context" (long-term notes) and "Ephemeral Context" (temporary logs), so I can manage my prompt inputs effectively. | - Two dedicated, multi-line text input fields are present in the UI. <br> - Their content is saved and restored with the cycle data. |
-| P2-US-07 | **View Response Metadata** | As a developer, I want to see key metrics like token counts and similarity scores for each response, so I can quickly compare and evaluate the AI's outputs. | - A dedicated area in each tab displays the total token count of the response. <br> - It also shows a similarity score comparing the response to the original source file. |
+| P2-US-01 | **Manage Multiple Responses** | As a developer, I want a dedicated panel with multiple tabs where I can place different AI-generated code responses, so I can keep them organized. | - A new icon in the Activity Bar opens the Parallel Co-Pilot panel. <br> - The panel contains a slider or input to select the number of visible tabs. <br> - Each tab initially contains a large text input area. |
+| P2-US-02 | **Parse Raw Responses** | As a developer, after pasting an AI response, I want to click a button to parse it into a structured view, so I can easily distinguish between the AI's plan and the code it produced. | - Each tab has a "Parse Response" button. <br> - Clicking it processes the raw text. <br> - The UI transforms to show distinct, labeled sections for the AI's summary, course of action, and individual file blocks. |
+| P2-US-03 | **View Formatted Text** | As a developer, I want the AI's summary and plan to be rendered as formatted Markdown, so I can easily read lists, bolded text, and other formatting. | - The summary and course of action sections correctly render Markdown syntax (headers, lists, bold, inline code, etc.). |
+| P2-US-04 | **Manage UI Space** | As a developer, I want to be able to collapse the main sections of the UI (like the cycle context area or the summary), so I can focus on the code blocks without excessive scrolling. | - The Cycle Info, Summary, and Course of Action sections have headers with chevrons. <br> - Clicking a section header collapses or expands its content. <br> - The collapsed state is managed independently for each section. |
+| P2-US-05 | **Persistent State** | As a developer, I want all the text I've entered into the panel (response tabs, context fields) to be saved automatically, so I don't lose my work if I close the panel, move it, or restart VS Code. | - All raw text content is saved to a history file (`.vscode/dce_history.json`). <br> - When the panel is reopened, it loads the state from the most recent cycle. |
+| P2-US-06 | **Review Changes with Diff** | As a developer, I want to see a list of files affected by an AI response and click on any of them to see a diff, so I can review the exact changes before testing. | - The parsed view lists all detected file paths. <br> - A checkmark appears next to files that exist in the workspace. <br> - Clicking a file path opens a diff view comparing the workspace version with the AI's version. |
+| P2-US-07 | **Navigate Cycle History** | As a developer, I want to navigate backward and forward through my project's development cycles, so I can review past AI suggestions. | - UI controls exist to move between cycles. <br> - Navigating to a past cycle loads its saved raw responses into the panel. |
 </file>
 
 <file path="src/Artifacts/A35. DCE - Phase 2 - UI Mockups and Flow.md">
 # Artifact A35: DCE - Phase 2 - UI Mockups and Flow
 # Date Created: C69
 # Author: AI Model
-# Updated on: C88 (Integrate metadata display and diff view interaction)
+# Updated on: C90 (Add collapsible sections and specify markdown rendering)
 
 ## 1. Overview
 
-This document describes the user interface (UI) and interaction flow for the Parallel Co-Pilot Panel. The design aims for a clear, multi-pane layout that evolves based on user interaction, starting with an overview of associated files and response blocks, and transitioning to a detailed diff view on demand. The entire UI is housed within its own dedicated view in the VS Code Activity Bar and its state is persistent.
+This document describes the user interface (UI) and interaction flow for the Parallel Co-Pilot Panel. The design is now centered around a two-stage workflow: **Input & Parse**, followed by **Review & Act**. The UI transforms from a simple text input to a structured, read-only view to support this workflow, with collapsible sections for better layout management.
 
 ## 2. UI Mockup (Textual Description)
 
-This mockup represents the view that appears when the user clicks the Parallel Co-Pilot icon in the Activity Bar.
+### 2.1. Stage 1: Raw Input View
 
-### 2.1. Default View State
+This is the initial state of a tab, or the state before the "Parse" button is clicked.
 
 ```
 +-------------------------------------------------------------------------------------+
 | [Parallel Co-Pilot] [Toolbar: Generate Prompt, Settings, etc.]                      |
 |-------------------------------------------------------------------------------------|
-| Cycle: [ < ] [ C88 ] [ > ]  [ Cycle Title Input: fix ts error, continue... ]        |
+| [v] Cycle Info & Context                                                            |
+| |-----------------------------------------------------------------------------------|
+| | Cycle: [ < ] [ C88 ] [ > ]  [ Cycle Title Input: fix ts error, continue... ]      |
+| |-----------------------------------------------------------------------------------|
+| | [Cycle Context (Permanent notes)]          [Ephemeral Context (Temp logs)]        |
+| | +----------------------------------------+ +------------------------------------+ |
+| | | Multi-line text area...                | | Multi-line text area...            | |
+| | +----------------------------------------+ +------------------------------------+ |
 |-------------------------------------------------------------------------------------|
-| [Cycle Context (Permanent notes for this cycle)] [Ephemeral Context (Temp logs)]   |
-| +------------------------------------------------+ +------------------------------+ |
-| | Multi-line text area...                        | | Multi-line text area...      | |
-| +------------------------------------------------+ +------------------------------+ |
+| [ Response 1 (active) ] [ Response 2 ] [ Response 3 ] [ + ]                         |
 |-------------------------------------------------------------------------------------|
-| [ Response 1 (active) ] [ Response 2 ] [ Response 3 ] [ Response 4 ] [ + ]          |
-|-------------------------------------------------------------------------------------|
-| [METADATA] Tokens: 5.4K | Similarity: 85% | Files: 2 (2 matched ✓)                 |
-|-------------------------------------------------------------------------------------|
-| [ Response 1 Content Area - Stretches to fill vertical space ]                      |
-| | [Associated Files] | [File Blocks]                                              | |
-| | +----------------+ | +--------------------------------------------------------+ | |
-| | | ✓ src/file1.ts | | | <src/file1.ts>                                         | | |
-| | | ✓ src/file2.ts | | | [Swap] [Comment]                                       | | |
-| | |                | | | +----------------------------------------------------+ | | |
-| | |                | | | | Scrollable code viewer for file1...              | | | |
-| | |                | | | +----------------------------------------------------+ | | |
-| | |                | | | <src/file2.ts>                                         | | |
-| | +----------------+ | +--------------------------------------------------------+ | |
-+-------------------------------------------------------------------------------------+
-```
-
-### 2.2. Diff View State
-
-This view appears after the user clicks on `✓ src/file1.ts` in the `[Associated Files]` list.
-
-```
-+-------------------------------------------------------------------------------------+
-| [ ... Same Header and Context Areas as above ... ]                                  |
-|-------------------------------------------------------------------------------------|
-| [ Response 1 (active) ] [ Response 2 ] [ Response 3 ] [ Response 4 ] [ + ]          |
-|-------------------------------------------------------------------------------------|
-| [METADATA] Tokens: 5.4K | Similarity: 85% | Files: 2 (2 matched ✓)                 |
+| [ Toolbar: [ Parse Response ] ]                                                     |
 |-------------------------------------------------------------------------------------|
 | [ Response 1 Content Area - Stretches to fill vertical space ]                      |
-| | [Associated Files] | [Diff Viewer for src/file1.ts]                             | |
-| | +----------------+ | +--------------------------------------------------------+ | |
-| | | ✓ src/file1.ts | | | [Close Diff] [Swap]                                    | | |
-| | | ✓ src/file2.ts | | | | [Original: src/file1.ts] | [Response 1 Version]  | | | |
-| | |                | | | |--------------------------|-----------------------| | | |
-| | |                | | | | Scrollable diff view...  | Scrollable diff view..| | | |
-| | |                | | | |                          |                       | | | |
-| | +----------------+ | +--------------------------------------------------------+ | |
+| |                                                                                 | |
+| | +-----------------------------------------------------------------------------+ | |
+| | | <textarea>                                                                  | | |
+| | | I've analyzed the request...                                                | | |
+| | |                                                                             | | |
+| | | ### Course of Action                                                        | | |
+| | | ...                                                                         | | |
+| | | <src/main.ts>...</main.ts>                                                  | | |
+| | |                                                                             | | |
+| | +-----------------------------------------------------------------------------+ | |
+| |                                                                                 | |
 +-------------------------------------------------------------------------------------+
 ```
 
-### 2.3. UI Components Breakdown
+### 2.2. Stage 2: Parsed View
 
-1.  **Header, Cycle Navigator, Context Areas:** Unchanged. These provide top-level control and context input.
+```
++-------------------------------------------------------------------------------------+
+| [Parallel Co-Pilot] [Toolbar: Generate Prompt, Settings, etc.]                      |
+|-------------------------------------------------------------------------------------|
+| [v] CYCLE & CONTEXT                                                                 |
+| |---------------------------------------------------------------------------------| |
+| | Cycle: [ < ] [ C90 ] [ > ]  [ Cycle Title Input: markdown rendering... ]        | |
+| |---------------------------------------------------------------------------------| |
+| | [Cycle Context (Permanent notes)]      [Ephemeral Context (Temp logs)]          | |
+| | +--------------------------------------+ +------------------------------------+ | |
+| | | Multi-line text area...              | | Multi-line text area...            | | |
+| | +--------------------------------------+ +------------------------------------+ | |
+|-------------------------------------------------------------------------------------|
+| [ Response 1 (active) ] [ Response 2 ] [ Response 3 ] [ + ]                         |
+|-------------------------------------------------------------------------------------|
+| [ Toolbar: [ Un-Parse ] [METADATA] Tokens: 8.1K | Files: 3 (3 matched ✓) ]          |
+|-------------------------------------------------------------------------------------|
+| [ Response 1 Content Area - Stretches to fill vertical space, scrollable ]          |
+| |                                                                                 | |
+| | [v] SUMMARY & PLAN                                                              | |
+| | |-----------------------------------------------------------------------------| | |
+| | | > I've analyzed your feedback...                                            | | |
+| | | > The next steps are to implement **markdown rendering**.                   | | |
+| |                                                                                 | |
+| | [v] COURSE OF ACTION                                                            | |
+| | |-----------------------------------------------------------------------------| | |
+| | | 1.  **Documentation First:** I will update the artifacts.                   | | |
+| | | 2.  **Implement UI:** I will add collapsible sections.                      | | |
+| |                                                                                 | |
+| | [ FILE: src/main.ts ] [Diff] [Swap]                                             | |
+| | +-----------------------------------------------------------------------------+ | |
+| | | [ Read-only, syntax-highlighted code viewer for main.ts ]                   | | |
+| | +-----------------------------------------------------------------------------+ | |
+| |                                                                                 | |
++-------------------------------------------------------------------------------------+
+```
 
-2.  **Metadata Bar (New):**
-    *   A new, persistent bar below the tabs.
-    *   Displays key metrics for the active response tab: total token count, similarity score (compared to a primary source file), and a count of associated files (e.g., "2 matched ✓", "1 new file ?").
+### 2.1. UI Components Breakdown
 
-3.  **Tab Content Area:**
-    *   This is the main workspace, now a flexible two-pane layout.
-    *   **`[Associated Files]`:** A side panel listing all file paths parsed from the response.
-        *   A checkmark (`✓`) appears next to files that are successfully found in the user's workspace.
-        *   A question mark (`?`) or other indicator appears for files not found (new files).
-        *   **This list is the primary control for the main content area.**
-    *   **`[File Blocks]` (Default View):** A vertical list of individual file components, each with its own scrollable code viewer and action buttons.
-    *   **`[Diff Viewer]` (Active View):** When a user clicks a file in the `[Associated Files]` list, the entire `[File Blocks]` area is replaced by a dedicated Diff Viewer component, showing a side-by-side comparison for that specific file. A "Close Diff" button returns to the `[File Blocks]` view.
+1.  **Collapsible Sections:**
+    *   The main UI is now organized into collapsible "accordion" sections.
+    *   **`[v] CYCLE & CONTEXT`**: This section contains the Cycle Navigator and the two context `textarea` fields. Clicking the header toggles its visibility.
+    *   **`[v] SUMMARY & PLAN`**: In the parsed view, this section contains the AI's high-level summary. It is also collapsible.
+    *   **`[v] COURSE OF ACTION`**: Contains the AI's course of action, also collapsible.
+    *   Each header shows a chevron (`v` or `>`) to indicate its expanded or collapsed state.
+
+2.  **Markdown Content Rendering:**
+    *   The content within the "Summary & Plan" and "Course of Action" sections is no longer plain text.
+    *   It is rendered as rich markdown, correctly displaying formatting such as **bold text**, `inline code`, bulleted lists (`*` or `-`), and numbered lists (`1.`).
+
+3.  **File Blocks:**
+    *   Each file block remains distinct.
+    *   The code content within each block is rendered with full, theme-aware syntax highlighting.
 
 ## 3. User Interaction Flow
 
-1.  **Paste & Parse:** The user pastes a response. The `[Associated Files]` list populates, and the `[File Blocks]` view appears. The `[Metadata Bar]` updates with token counts and file match status.
-2.  **Review:** The user can scroll through the individual file blocks.
-3.  **Diff:** The user clicks on `✓ src/file1.ts`. The `[File Blocks]` view is hidden, and the `[Diff Viewer]` for `src/file1.ts` is shown.
-4.  **Close Diff:** The user clicks "Close Diff". The `[Diff Viewer]` is hidden, and the `[File Blocks]` view is shown again.
-5.  **Test:** The user clicks the `[Swap]` button on either a file block or from within the diff view to test the code.
+1.  **Paste & Parse:** The user pastes a raw AI response and clicks `[ Parse Response ]`. The UI transforms into the structured view.
+2.  **Layout Management:** The user can now click the headers for "CYCLE & CONTEXT", "SUMMARY & PLAN", etc., to collapse any sections they don't currently need, allowing them to focus on the file blocks or the plan itself.
+3.  **Review:** The user reviews the formatted summary and course of action, which are now much easier to read with proper markdown rendering.
+4.  **Act:** The user can scroll down to the file blocks to review the syntax-highlighted code and use the `[Diff]` or `[Swap]` actions.
 </file>
 
 <file path="src/Artifacts/A36. DCE - Phase 2 - Technical Implementation Plan.md">
 # Artifact A36: DCE - Phase 2 - Technical Implementation Plan
 # Date Created: C69
 # Author: AI Model
-# Updated on: C88 (Add plan for metadata and diff view state)
+# Updated on: C90 (Add plan for collapsible sections and markdown rendering)
 
 - **Key/Value for A0:**
 - **Description:** Details the technical approach for building the Parallel Co-Pilot Panel, including the new webview provider, state management, IPC channels, and backend logic for file content swapping.
-- **Tags:** feature plan, phase 2, technical plan, architecture, webview, ipc
+- **Tags:** feature plan, phase 2, technical plan, architecture, webview, ipc, parsing, markdown
 
 ## 1. Overview
 
-This document outlines the technical implementation strategy for the Parallel Co-Pilot Panel. It involves creating a new, dedicated webview in its own activity bar container and the associated backend services to manage its state and perform file operations.
+This document outlines the technical implementation strategy for the Parallel Co-Pilot Panel. It involves creating a new, dedicated webview and the associated backend services to manage its state and perform file operations. The core of this plan is the new parse-centric workflow, with a rich UI featuring collapsible sections and full markdown/syntax highlighting.
 
 ## 2. Core Components
 
-### 2.1. New View Container & Webview Provider (`package.json`)
+### 2.1. Frontend State Management (`view.tsx`)
 
-*   The `contributes` section of `package.json` will be modified to create a new, independent panel.
-*   A new entry will be added to `contributes.viewsContainers.activitybar` to define the container for the Parallel Co-Pilot.
-*   A new entry will be added to `contributes.views` to place the webview inside the new container.
-
-### 2.2. Frontend State Management (`view.tsx`)
-
-The main state for the webview will be a single, comprehensive object.
+The main component state will be expanded to manage the UI's collapsible sections.
 
 ```typescript
-interface TabState {
-  id: number;
-  content: string;
-  detectedFiles: string[];
-  // Future: annotations, ratings, etc.
-}
-
+// State within the view.tsx component
 interface PcppState {
-  // ... state for cycle nav, context fields, etc.
-  tabs: { [tabId: number]: TabState };
-  fileExistence: { [path: string]: boolean };
-  
-  // New state for managing the diff view
-  diffTarget: {
-    path: string;
-    originalContent: string;
-    modifiedContent: string;
-  } | null;
-
-  // New state for metadata
-  metadata: {
-      [tabId: number]: {
-          tokenCount: number;
-          similarityScore: number;
-      }
-  }
+  // ... state for cycle nav, context fields, tabs, etc.
+  isCycleSectionCollapsed: boolean;
+  isSummaryCollapsed: boolean;
+  isCourseOfActionCollapsed: boolean;
+  highlightedCodeBlocks: Map<string, string>; // Maps file content to highlighted HTML
 }
 ```
+*   **Collapsible State:** Three new boolean state variables will control the visibility of the main UI sections. `onClick` handlers on the section headers will toggle these states.
+*   **Conditional Rendering:** The content divs for these sections will be conditionally rendered based on these state flags.
+*   **Highlighted Code Cache:** A new `Map` will be added to the state to cache the syntax-highlighted HTML for code blocks, preventing redundant IPC calls.
 
-*   **Diff View Logic:** When a user clicks a file to diff, the `diffTarget` state is populated. The main render function will have a condition: `if (diffTarget) { render DiffViewer } else { render FileBlocks }`. This handles swapping the main view area.
-*   **Metadata Logic:** Similarity scores and token counts will be calculated in `useEffect` hooks that watch for changes in `tabContent`. The results will be stored in the `metadata` state object.
+### 2.2. Frontend Rendering (`view.tsx`)
 
-### 2.3. IPC Communication
+1.  **Markdown Rendering:**
+    *   **Dependency:** The `react-markdown` library will be added to `package.json`.
+    *   **Implementation:** The `summary` and `courseOfAction` strings from the `parsedContent` object will be rendered using the `<ReactMarkdown>` component. This will handle all standard markdown formatting (lists, bold, etc.) automatically.
 
-New and updated channels will be required.
+2.  **Syntax Highlighting:**
+    *   **IPC:** The `RequestSyntaxHighlight` and `SendSyntaxHighlight` channels will be used.
+    *   **Workflow:**
+        1.  After parsing a response, the frontend will iterate through `parsedContent.files`.
+        2.  For each file, it will generate a unique key (e.g., the file path + content hash) and check if the highlighted HTML already exists in the `highlightedCodeBlocks` map.
+        3.  If not, it will send a `RequestSyntaxHighlight` message to the backend with the code content, language, and the unique key.
+        4.  An IPC listener for `SendSyntaxHighlight` will update the `highlightedCodeBlocks` map with the returned HTML.
+    *   **Rendering:** The component that renders a file block will look up its content in the map and use `dangerouslySetInnerHTML` to display the highlighted code.
 
-*   `ClientToServerChannel.RequestFileContent`:
-    *   **Payload:** `{ path: string }`
-    *   **Action:** Frontend requests the content of a source file from the backend for diffing.
-*   `ClientToServerChannel.RequestSwapFileContent`:
-    *   **Payload:** `{ path: string, newContent: string }`
-    *   **Action:** Frontend requests the backend to perform the "swap" operation.
-*   `ServerToClientChannel.SendFileContent`:
-    *   **Payload:** `{ path: string, content: string | null }` // Null if file not found
-    *   **Action:** Backend sends the requested file content back to the frontend.
+### 2.3. Backend Syntax Highlighting (`fs.service.ts`)
 
-### 2.4. Backend Logic (`fs.service.ts`)
-
-New handlers will be added to `FSService`.
-
-1.  **`handleFileContentRequest` (New):**
-    *   Receives a file path.
-    *   Reads the file using `vscode.workspace.fs.readFile`.
-    *   Handles errors gracefully if the file doesn't exist.
-    *   Returns the content (or `null`) via the `SendFileContent` IPC channel.
-
-2.  **`handleSwapFileContentRequest`:**
-    *   This is the core of the "swap" feature.
-    *   **Input:** `{ path: string, newContent: string }`.
-    *   **Steps:**
-        1.  Reads the current content of the file at `path` into a variable (`originalContent`).
-        2.  Writes `newContent` to the file at `path` using `vscode.workspace.fs.writeFile`.
-        3.  Returns `originalContent` to the frontend via the `SendFileContent` channel.
-    *   This single, atomic operation ensures the swap is clean and the original content is immediately sent back to be stored in the tab.
-
-### 2.5. Similarity Scoring
-
-*   A lightweight string similarity library (e.g., `diff` library's functions) will be used on the frontend.
-*   A utility function will be created: `calculateSimilarity(stringA, stringB): number`.
-*   This calculation will be performed in the frontend whenever the content of a tab changes, and the result stored in the tab's metadata state.
+*   A new handler, `handleSyntaxHighlightRequest`, will be implemented.
+*   **Library:** It will use the `@wooorm/starry-night` library.
+*   **Logic:**
+    1.  It will receive the code string, language identifier (e.g., "typescript"), and the unique key.
+    2.  It will map the language identifier to a `starry-night` scope (e.g., "typescript" -> "source.ts").
+    3.  It will call `starryNight.highlight(code, scope)`.
+    4.  It will convert the resulting HAST (HTML Abstract Syntax Tree) to an HTML string using `hast-util-to-html`.
+    5.  It will send the HTML string and the unique key back to the client via `SendSyntaxHighlight`.
 </file>
 
 <file path="src/Artifacts/A37. DCE - Phase 2 - Cycle Navigator & Knowledge Graph - Vision.md">
@@ -3912,7 +3899,7 @@ The process of constructing the final `prompt.md` file is a core part of the cur
 # Artifact A48: DCE - Phase 2 - Advanced Syntax Highlighting Plan
 # Date Created: C82
 # Author: AI Model
-# Updated on: C85 (Codify rationale for using starry-night)
+# Updated on: C90 (Update plan to reflect implementation)
 
 ## 1. Overview & Goal
 
@@ -3924,41 +3911,40 @@ AI-generated responses are complex documents, containing both explanatory Markdo
 |---|---|---|
 | P2-SYNTAX-01 | **View Highlighted Responses** | As a developer, I want to see AI responses with full syntax highlighting inside the Parallel Co-Pilot tabs, so I can easily distinguish between comments, keywords, and code, just like in a real editor. | - The content area of each response tab renders with syntax highlighting. <br> - Standard Markdown elements (headers, lists, bold, italics, backticks) are formatted correctly. <br> - Code blocks (e.g., ` ```typescript ... ``` `) are highlighted with the correct grammar for the specified language. <br> - The highlighting should be theme-aware, matching the user's current VS Code theme. |
 
-## 3. Technical Implementation Strategy (C83 & C85)
+## 3. Technical Implementation Strategy (C90)
 
 ### 3.1. Chosen Library: `starry-night`
 
-After research and consideration of alternatives like `refractor`, **`@wooorm/starry-night`** remains the chosen library for syntax highlighting.
+After research and consideration of alternatives like `refractor`, **`@wooorm/starry-night`** is the chosen library for syntax highlighting.
 
 -   **Rationale (C85):**
     -   **High Fidelity:** It uses the same TextMate grammars as VS Code itself. This is the most important factor, as it ensures the highlighting in our panel will be a perfect visual match to the user's native editor experience.
-    -   **Backend Architecture:** Our implementation performs highlighting on the backend (in the Node.js extension host) and sends pre-rendered HTML to the frontend webview. This means the primary drawback of `starry-night`—its large bundle size and WASM dependency—is a non-issue for the client. The "heavy lifting" is done by the extension's server-side process, keeping the webview lightweight and performant.
-    -   **AST Output:** It produces a HAST (HTML Abstract Syntax Tree), which provides flexibility, though our current implementation serializes it directly to an HTML string.
+    -   **Backend Architecture:** Our implementation performs highlighting on the backend (in the Node.js extension host) and sends pre-rendered HTML to the frontend webview. This means the primary drawback of `starry-night`—its large bundle size—is a non-issue for the client. The "heavy lifting" is done by the extension's server-side process, keeping the webview lightweight and performant.
 
 ### 3.2. Implementation Plan
 
 1.  **Dependencies (`package.json`):**
-    *   Add `@wooorm/starry-night` as the core dependency.
-    *   Add `hast-util-to-html` to convert the abstract syntax tree to HTML.
-    *   The grammars are now dynamically imported by `starry-night` itself, removing the need to add individual language packages.
+    *   `@wooorm/starry-night` is the core backend dependency.
+    *   `hast-util-to-html` is used to convert the abstract syntax tree to an HTML string.
+    *   `react-markdown` is added as a frontend dependency to handle the rendering of non-code markdown content (lists, bold, etc.).
 
 2.  **Backend (`fs.service.ts`):**
-    *   Create a new `async handleSyntaxHighlightRequest({ code, lang, id })` method.
-    *   This method will initialize `starry-night` with all common grammars.
-    *   It will use `starryNight.highlight(code, scope)` where `scope` is determined from the language identifier (e.g., 'typescript' -> 'source.ts').
-    *   It will convert the resulting `hast` tree to an HTML string using `toHtml`.
-    *   This HTML string will be sent back to the client via a new IPC channel, including the `id` to match the request.
+    *   The `handleSyntaxHighlightRequest({ code, lang, id })` method is implemented.
+    *   It initializes `starry-night` with a set of common grammars.
+    *   It uses `starryNight.highlight(code, scope)` where `scope` is determined from the language identifier (e.g., 'typescript' -> 'source.ts').
+    *   It converts the resulting `hast` tree to an HTML string using `toHtml`.
+    *   This HTML string is sent back to the client via the `SendSyntaxHighlight` IPC channel, including the `id` to match the request.
 
 3.  **IPC Channels:**
-    *   `ClientToServerChannel.RequestSyntaxHighlight`: Payload `{ code: string, lang: string, id: string }`.
+    *   `ClientToServerChannel.RequestSyntaxHighlight`: Payload `{ code: string; lang: string, id: string }`.
     *   `ServerToClientChannel.SendSyntaxHighlight`: Payload `{ highlightedHtml: string, id: string }`.
 
 4.  **Frontend (`parallel-copilot.view/view.tsx`):**
-    *   The view will be split into two panes: an editable `<textarea>` on the left and a read-only preview `<div>` on the right.
-    *   The `onPaste` and `onChange` handlers for the textarea will be updated. They will parse the content to find code blocks (e.g., ` ```typescript ... ``` `).
-    *   For each code block found, it will generate a unique ID (the full block content itself) and send a `RequestSyntaxHighlight` message to the backend with the block's content, language, and the ID.
-    *   A new state variable, e.g., `highlightedBlocks: Map<string, string>`, will store the HTML returned from the backend, keyed by the unique ID.
-    *   The right-hand preview pane will render the full response. When it encounters a code block, it will look up the highlighted HTML in the state and render it using `dangerouslySetInnerHTML`. This provides a live, highlighted preview as the user edits or pastes content.
+    *   After a response is parsed into `parsedContent`, the view iterates through `parsedContent.files`.
+    *   For each file block, it sends a `RequestSyntaxHighlight` message to the backend.
+    *   A state map (`highlightedCodeBlocks: Map<string, string>`) caches the HTML returned from the backend.
+    *   The component that renders the file's code uses `dangerouslySetInnerHTML` to display the highlighted HTML.
+    *   The `summary` and `courseOfAction` sections are rendered using the `<ReactMarkdown>` component to display formatted text.
 </file>
 
 <file path="src/Artifacts/A49. DCE - Phase 2 - File Association & Diffing Plan.md">
@@ -6184,18 +6170,7 @@ export class FSService {
 
     private async initializeStarryNight() {
         try {
-            // Dynamically import grammars
-            const grammars = await Promise.all([
-                import('@wooorm/starry-night/lang/source.css'),
-                import('@wooorm/starry-night/lang/source.js'),
-                import('@wooorm/starry-night/lang/source.json'),
-                import('@wooorm/starry-night/lang/source.shell'),
-                import('@wooorm/starry-night/lang/source.ts'),
-                import('@wooorm/starry-night/lang/source.tsx'),
-                import('@wooorm/starry-night/lang/text.md'),
-              ]);
-
-            this.starryNight = await createStarryNight([...common, ...grammars.map(g => g.default)]);
+            this.starryNight = await createStarryNight(common);
             Services.loggerService.log('Starry Night syntax highlighter initialized.');
         } catch (error) {
             Services.loggerService.error(`Failed to initialize Starry Night: ${error}`);
@@ -6548,14 +6523,14 @@ export class FSService {
     // --- File Operations ---
 
     public async handleFileContentRequest(filePath: string, serverIpc: ServerPostMessageManager) {
-        Services.loggerService.log(`Received request for content of: ${filePath}`);
+        Services.loggerService.log(`[C88 Fix] Received request for content of: ${filePath}`);
         try {
             const uri = vscode.Uri.file(filePath);
             const contentBuffer = await vscode.workspace.fs.readFile(uri);
             const content = Buffer.from(contentBuffer).toString('utf-8');
             serverIpc.sendToClient(ServerToClientChannel.SendFileContent, { path: filePath, content });
         } catch (error) {
-            Services.loggerService.error(`Failed to read file content for ${filePath}: ${error}`);
+            Services.loggerService.error(`[C88 Fix] Failed to read file content for ${filePath}: ${error}`);
             serverIpc.sendToClient(ServerToClientChannel.SendFileContent, { path: filePath, content: null });
         }
     }
@@ -8740,6 +8715,49 @@ export const logger = {
 };
 </file>
 
+<file path="src/client/utils/response-parser.ts">
+// src/client/utils/response-parser.ts
+import { ParsedResponse, ParsedFile } from "@/common/types/pcpp.types";
+
+const SUMMARY_REGEX = /^([\s\S]*?)(?=### Course of Action)/;
+const COURSE_OF_ACTION_REGEX = /### Course of Action\s*([\s\S]*?)(?=### Files Updated This Cycle|(?=^\s*`{3,}))/m;
+const FILES_UPDATED_REGEX = /### Files Updated This Cycle\s*([\s\S]*?)(?=^\s*`{3,})/m;
+const FILE_BLOCK_REGEX = /<file path="([^"]+)">([\s\S]*?)<\/file>/g;
+
+export function parseResponse(rawText: string): ParsedResponse {
+    const summaryMatch = rawText.match(SUMMARY_REGEX);
+    const courseOfActionMatch = rawText.match(COURSE_OF_ACTION_REGEX);
+    const filesUpdatedMatch = rawText.match(FILES_UPDATED_REGEX);
+
+    const files: ParsedFile[] = [];
+    const fileMatches = rawText.matchAll(FILE_BLOCK_REGEX);
+    for (const match of fileMatches) {
+        files.push({
+            path: match[1].trim(),
+            content: match[2].trim(),
+        });
+    }
+    
+    // Fallback for files updated list if the dedicated section is missing
+    let filesUpdatedList: string[] = [];
+    if (filesUpdatedMatch && filesUpdatedMatch[1]) {
+        filesUpdatedList = filesUpdatedMatch[1]
+            .split('\n')
+            .map(line => line.replace(/[-\*]\s*/, '').trim())
+            .filter(line => line.length > 0);
+    } else {
+        filesUpdatedList = files.map(f => f.path);
+    }
+
+    return {
+        summary: summaryMatch ? summaryMatch[1].trim() : 'Could not parse summary.',
+        courseOfAction: courseOfActionMatch ? courseOfActionMatch[1].trim() : 'Could not parse course of action.',
+        filesUpdated: filesUpdatedList,
+        files: files,
+    };
+}
+</file>
+
 <file path="src/client/views/context-chooser.view/index.ts">
 import { onMessage } from "./on-message";
 
@@ -10020,7 +10038,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
-/* Updated on: C88 (Add styles for metadata bar) */
+/* Updated on: C90 (Add styles for collapsible sections) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -10038,6 +10056,39 @@ body {
     box-sizing: border-box;
 }
 
+.collapsible-section {
+    border: 1px solid var(--vscode-panel-border);
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.collapsible-header {
+    background-color: var(--vscode-sideBar-sectionHeaderBackground);
+    padding: 4px 8px;
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    .chevron {
+        transition: transform 0.2s ease-in-out;
+    }
+    .chevron.collapsed {
+        transform: rotate(-90deg);
+    }
+}
+
+.collapsible-content {
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+
 .pc-header {
     display: flex;
     justify-content: space-between;
@@ -10046,6 +10097,13 @@ body {
 }
 
 .cycle-navigator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.pc-toolbar {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -10093,14 +10151,14 @@ body {
 
 .context-inputs {
     display: flex;
-    flex-direction: column; /* Stack them vertically */
+    flex-direction: column;
     gap: 8px;
     flex-shrink: 0;
 }
 
 .context-textarea {
     width: 100%;
-    height: 60px; /* Reduced height */
+    height: 60px;
     background-color: var(--vscode-input-background);
     color: var(--vscode-input-foreground);
     border: 1px solid var(--vscode-input-border);
@@ -10109,18 +10167,6 @@ body {
     font-family: var(--vscode-editor-font-family);
     font-size: var(--vscode-editor-font-size);
     resize: vertical;
-}
-
-.tab-config {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 12px;
-    flex-shrink: 0;
-
-    input[type="range"] {
-        flex-grow: 1;
-    }
 }
 
 .tab-bar {
@@ -10141,17 +10187,6 @@ body {
     border-bottom-color: var(--vscode-tab-activeBorder);
 }
 
-.metadata-bar {
-    font-size: 11px;
-    padding: 4px 8px;
-    background-color: var(--vscode-editorWidget-background);
-    border-bottom: 1px solid var(--vscode-panel-border);
-    color: var(--vscode-descriptionForeground);
-    display: flex;
-    gap: 16px;
-    flex-shrink: 0;
-}
-
 .tab-content {
     flex-grow: 1;
     display: flex;
@@ -10167,70 +10202,7 @@ body {
     height: 100%;
 }
 
-.tab-actions {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    flex-shrink: 0;
-    
-    button {
-        background-color: var(--vscode-button-secondaryBackground);
-        color: var(--vscode-button-secondaryForeground);
-        border: 1px solid var(--vscode-button-border, transparent);
-        padding: 4px 10px;
-        font-size: 12px;
-        cursor: pointer;
-        border-radius: 2px;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        
-        &:hover {
-            background-color: var(--vscode-button-secondaryHoverBackground);
-        }
-    }
-}
-
-.associated-files-container {
-    flex-shrink: 0;
-    padding: 4px;
-    border: 1px solid var(--vscode-panel-border);
-    border-radius: 2px;
-    font-size: 12px;
-    .associated-files-title {
-        font-weight: bold;
-        margin-bottom: 4px;
-    }
-    .associated-files-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-    }
-    .associated-file {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        padding: 2px 6px;
-        background-color: var(--vscode-input-background);
-        border-radius: 10px;
-        cursor: pointer;
-        &:hover {
-            background-color: var(--vscode-list-hoverBackground);
-        }
-        .icon-success { color: var(--vscode-testing-iconPassed); }
-        .icon-error { color: var(--vscode-testing-iconFailed); }
-    }
-}
-
-.response-editor-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    flex-grow: 1;
-    min-height: 0;
-}
-
-.response-textarea, .response-markdown-preview {
+.response-textarea {
     width: 100%;
     height: 100%;
     background-color: var(--vscode-input-background);
@@ -10240,102 +10212,103 @@ body {
     padding: 4px;
     font-family: var(--vscode-editor-font-family);
     font-size: var(--vscode-editor-font-size);
-}
-
-.response-textarea {
     resize: none;
      &:focus {
         outline: 1px solid var(--vscode-focusBorder);
     }
 }
 
-.response-markdown-preview {
+/* Styles for Parsed View */
+.parsed-view {
     overflow-y: auto;
-    h1, h2, h3 {
-        border-bottom: 1px solid var(--vscode-panel-border);
-        padding-bottom: 0.3em;
-        margin-top: 24px;
-        margin-bottom: 16px;
+    padding-right: 8px; /* For scrollbar */
+    flex-grow: 1;
+}
+
+.parsed-section {
+    margin-bottom: 16px;
+
+    .content {
+        padding: 8px;
+        white-space: pre-wrap; /* Preserve whitespace and line breaks */
+        font-size: 12px;
+        background-color: var(--vscode-textBlockQuote-background);
+        border: 1px solid var(--vscode-textBlockQuote-border);
+        border-radius: 4px;
+
+        p, ul, ol {
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+
+        ul, ol {
+            padding-left: 20px;
+        }
+
+        code {
+            background-color: var(--vscode-textCodeBlock-background);
+            padding: 1px 3px;
+            border-radius: 3px;
+            font-family: var(--vscode-editor-font-family);
+        }
     }
-    code {
-        background-color: var(--vscode-textCodeBlock-background);
-        padding: 0.2em 0.4em;
-        border-radius: 3px;
+}
+
+.file-block {
+    margin-bottom: 12px;
+
+    .file-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: var(--vscode-editorGroupHeader-tabsBackground);
+        padding: 4px 8px;
+        border: 1px solid var(--vscode-panel-border);
+        border-bottom: none;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
         font-family: var(--vscode-editor-font-family);
     }
-    pre > code {
-        display: block;
-        padding: 16px;
-        overflow: auto;
-    }
-}
 
-/* Diff Viewer Modal */
-.diff-modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-}
+    .file-path {
+        font-weight: bold;
+    }
 
-.diff-modal-content {
-    background-color: var(--vscode-editor-background);
-    border: 1px solid var(--vscode-panel-border);
-    border-radius: 4px;
-    width: 90%;
-    height: 90%;
-    display: flex;
-    flex-direction: column;
-    padding: 8px;
-}
+    .file-actions button {
+        margin-left: 8px;
+    }
 
-.diff-viewer {
-    flex-grow: 1;
-    overflow: auto;
-    font-family: var(--vscode-editor-font-family);
-    font-size: var(--vscode-editor-font-size);
-    white-space: pre-wrap;
-    
-    .line {
-        display: flex;
-    }
-    .line-num {
-        flex-shrink: 0;
-        width: 40px;
-        text-align: right;
-        padding-right: 10px;
-        color: var(--vscode-editorLineNumber-foreground);
-        user-select: none;
-    }
-    .line-content {
-        flex-grow: 1;
-    }
-    .added {
-        background-color: var(--vscode-diffEditor-insertedTextBackground);
-    }
-    .removed {
-        background-color: var(--vscode-diffEditor-removedTextBackground);
+    .file-content-viewer {
+        padding: 8px;
+        background-color: var(--vscode-editor-background);
+        border: 1px solid var(--vscode-panel-border);
+        border-top: none;
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+
+        pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
     }
 }
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
-// Updated on: C88 (Add metadata bar and conditional diff view)
+// Updated on: C90 (Implement collapsible sections and markdown rendering)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscCheck, VscError, VscSymbolNumeric } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
 import { PcppCycle } from '@/backend/services/history.service';
-import DiffViewer from '@/client/components/DiffViewer';
+import { ParsedResponse } from '@/common/types/pcpp.types';
+import { parseResponse } from '@/client/utils/response-parser';
+import ReactMarkdown from 'react-markdown';
+import crypto from 'crypto';
 
 // Debounce hook
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
@@ -10350,19 +10323,36 @@ const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     };
 };
 
+interface TabState {
+    rawContent: string;
+    parsedContent: ParsedResponse | null;
+}
+
+const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; }> = ({ title, children, isCollapsed, onToggle }) => (
+    <div className="collapsible-section">
+        <div className="collapsible-header" onClick={onToggle}>
+            <VscChevronDown className={`chevron ${isCollapsed ? 'collapsed' : ''}`} />
+            <span>{title}</span>
+        </div>
+        {!isCollapsed && <div className="collapsible-content">{children}</div>}
+    </div>
+);
+
+
 const App = () => {
     // State
     const [activeTab, setActiveTab] = React.useState(1);
     const [tabCount, setTabCount] = React.useState(4);
-    const [currentCycle, setCurrentCycle] = React.useState(88);
-    const [maxCycle, setMaxCycle] = React.useState(88);
-    const [cycleTitle, setCycleTitle] = React.useState('1 ts error, continue delivering phase 2');
+    const [currentCycle, setCurrentCycle] = React.useState(90);
+    const [maxCycle, setMaxCycle] = React.useState(90);
+    const [cycleTitle, setCycleTitle] = React.useState('markdown rendering, collapsible sections');
     const [cycleContext, setCycleContext] = React.useState('');
     const [ephemeralContext, setEphemeralContext] = React.useState('');
-    const [tabContent, setTabContent] = React.useState<{ [key: number]: string }>({});
-    const [detectedFiles, setDetectedFiles] = React.useState<{ [key: number]: string[] }>({});
-    const [fileExistence, setFileExistence] = React.useState<{ [path: string]: boolean }>({});
-    const [diffData, setDiffData] = React.useState<{ original: string; modified: string; path: string } | null>(null);
+    const [tabs, setTabs] = React.useState<{ [key: number]: TabState }>({});
+    const [highlightedCodeBlocks, setHighlightedCodeBlocks] = React.useState<Map<string, string>>(new Map());
+
+    // Collapsible sections state
+    const [isCycleCollapsed, setIsCycleCollapsed] = React.useState(false);
 
     const clientIpc = ClientPostMessageManager.getInstance();
 
@@ -10370,7 +10360,7 @@ const App = () => {
     const saveCurrentCycleState = React.useCallback(() => {
         const responses: { [key: number]: { content: string } } = {};
         for (let i = 1; i <= tabCount; i++) {
-            responses[i] = { content: tabContent[i] || '' };
+            responses[i] = { content: tabs[i]?.rawContent || '' };
         }
 
         const cycleData: PcppCycle = {
@@ -10383,22 +10373,17 @@ const App = () => {
         };
         logger.log(`Saving state for cycle ${currentCycle}`);
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
-    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabContent, tabCount, clientIpc]);
+    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, clientIpc]);
 
     const debouncedSave = useDebounce(saveCurrentCycleState, 1000);
 
-    // Trigger save on any state change
     React.useEffect(() => {
         debouncedSave();
-    }, [cycleTitle, cycleContext, ephemeralContext, tabContent, debouncedSave]);
+    }, [cycleTitle, cycleContext, ephemeralContext, tabs, debouncedSave]);
 
 
     // --- Data Loading & IPC Handlers ---
     React.useEffect(() => {
-        clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => {
-            setFileExistence(prev => ({ ...prev, ...existenceMap }));
-        });
-
         clientIpc.onServerMessage(ServerToClientChannel.SendCycleHistoryList, ({ cycleIds }) => {
             const max = Math.max(...cycleIds, 0);
             setMaxCycle(max > 0 ? max : currentCycle);
@@ -10410,58 +10395,61 @@ const App = () => {
                 setCycleTitle(cycleData.title);
                 setCycleContext(cycleData.cycleContext);
                 setEphemeralContext(cycleData.ephemeralContext);
-                const newTabContent: { [key: number]: string } = {};
+                const newTabs: { [key: number]: TabState } = {};
                 Object.entries(cycleData.responses).forEach(([tabId, response]) => {
-                    newTabContent[Number(tabId)] = response.content;
+                    newTabs[Number(tabId)] = { rawContent: response.content, parsedContent: null };
                 });
-                setTabContent(newTabContent);
-                // Trigger parsing for loaded content
-                Object.entries(newTabContent).forEach(([tabId, content]) => {
-                    parseResponseForFiles(content, Number(tabId));
-                });
+                setTabs(newTabs);
             } else {
                 logger.warn(`No data found for cycle. Clearing fields.`);
-                // Clear fields for a new/empty cycle
                 setCycleTitle('');
                 setCycleContext('');
                 setEphemeralContext('');
-                setTabContent({});
-                setDetectedFiles({});
+                setTabs({});
             }
         });
         
-        clientIpc.onServerMessage(ServerToClientChannel.SendFileContent, ({ path, content }) => {
-            if (content !== null) {
-                const responseContent = tabContent[activeTab] || '';
-                const fileRegex = new RegExp(`<file path="${path.replace(/\\/g, '\\\\')}">([\\s\\S]*?)<\\/file>`, 's');
-                const match = responseContent.match(fileRegex);
-                const modified = match ? match[1].trim() : `<!-- Could not find content for ${path} in response -->`;
-                setDiffData({ original: content, modified, path });
-            }
+        clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => {
+            setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml));
         });
-
-        // Initial data load
+        
         clientIpc.sendToServer(ClientToServerChannel.RequestCycleHistoryList, {});
         clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: currentCycle });
 
     }, [clientIpc]);
 
-    const parseResponseForFiles = (text: string, tabIndex: number) => {
-        const fileRegex = /<file path="([^"]+)">/g;
-        const matches = text.matchAll(fileRegex);
-        const paths = Array.from(matches, m => m[1]).filter(Boolean);
+    const handleRawContentChange = (newContent: string, tabIndex: number) => {
+        setTabs(prev => ({
+            ...prev,
+            [tabIndex]: { ...prev[tabIndex], rawContent: newContent, parsedContent: null }
+        }));
+    };
 
-        if (paths.length > 0) {
-            setDetectedFiles(prev => ({...prev, [tabIndex]: paths}));
-            clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths });
-        } else {
-            setDetectedFiles(prev => ({...prev, [tabIndex]: []}));
+    const handleParseResponse = (tabIndex: number) => {
+        const tabState = tabs[tabIndex];
+        if (tabState && tabState.rawContent) {
+            const parsed = parseResponse(tabState.rawContent);
+            setTabs(prev => ({
+                ...prev,
+                [tabIndex]: { ...prev[tabIndex], parsedContent: parsed }
+            }));
+
+            // Request syntax highlighting for all code blocks
+            parsed.files.forEach(file => {
+                const lang = file.path.split('.').pop() || 'plaintext';
+                const id = `${file.path}::${file.content}`; // Simple unique ID
+                if (!highlightedCodeBlocks.has(id)) {
+                    clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
+                }
+            });
         }
     };
 
-    const handleContentChange = (newContent: string, tabIndex: number) => {
-        setTabContent(prev => ({ ...prev, [tabIndex]: newContent }));
-        parseResponseForFiles(newContent, tabIndex);
+    const handleUnparseResponse = (tabIndex: number) => {
+        setTabs(prev => ({
+            ...prev,
+            [tabIndex]: { ...prev[tabIndex], parsedContent: null }
+        }));
     };
 
     const handleCycleChange = (newCycle: number) => {
@@ -10471,30 +10459,25 @@ const App = () => {
         }
     };
 
-    const handleDiffRequest = (filePath: string) => {
-        setDiffData(null); // Clear previous diff
-        clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: filePath });
-    };
-
-    const currentTokenCount = Math.ceil((tabContent[activeTab] || '').length / 4);
-    const matchedFileCount = (detectedFiles[activeTab] || []).filter(path => fileExistence[path]).length;
+    const activeTabData = tabs[activeTab];
 
     return (
         <div className="pc-view-container">
-            <div className="pc-header">
-                <div className="cycle-navigator">
-                    <span>Cycle:</span>
-                    <button onClick={() => handleCycleChange(currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button>
-                    <input type="number" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 1)} className="cycle-input" />
-                    <button onClick={() => handleCycleChange(currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button>
-                    <input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} />
+            <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)}>
+                <div className="pc-header">
+                    <div className="cycle-navigator">
+                        <span>Cycle:</span>
+                        <button onClick={() => handleCycleChange(currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button>
+                        <input type="number" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 1)} className="cycle-input" />
+                        <button onClick={() => handleCycleChange(currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button>
+                        <input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} />
+                    </div>
                 </div>
-            </div>
-            
-            <div className="context-inputs">
-                 <textarea className="context-textarea" placeholder="Cycle Context (notes for this cycle)..." value={cycleContext} onChange={e => setCycleContext(e.target.value)} />
-                 <textarea className="context-textarea" placeholder="Ephemeral Context (for this cycle's prompt only)..." value={ephemeralContext} onChange={e => setEphemeralContext(e.target.value)} />
-            </div>
+                <div className="context-inputs">
+                    <textarea className="context-textarea" placeholder="Cycle Context (notes for this cycle)..." value={cycleContext} onChange={e => setCycleContext(e.target.value)} />
+                    <textarea className="context-textarea" placeholder="Ephemeral Context (for this cycle's prompt only)..." value={ephemeralContext} onChange={e => setEphemeralContext(e.target.value)} />
+                </div>
+            </CollapsibleSection>
 
             <div className="tab-bar">
                 {[...Array(tabCount)].map((_, i) => (
@@ -10504,36 +10487,50 @@ const App = () => {
                 ))}
             </div>
 
-            <div className="metadata-bar">
-                <span><VscSymbolNumeric/> Tokens: {currentTokenCount.toLocaleString()}</span>
-                <span>Similarity: TBD</span>
-                <span>Files: {(detectedFiles[activeTab] || []).length} ({matchedFileCount} matched ✓)</span>
-            </div>
-
             <div className="tab-content">
                 {activeTab !== null && (
                     <div className="tab-pane">
-                         {detectedFiles[activeTab] && detectedFiles[activeTab].length > 0 && (
-                            <div className="associated-files-container">
-                                <div className="associated-files-list">
-                                    {detectedFiles[activeTab].map(path => (
-                                        <div key={path} className="associated-file" onClick={() => handleDiffRequest(path)} title={`Click to diff ${path}`}>
-                                            {fileExistence[path] ? <span className="icon-success"><VscCheck/></span> : <span className="icon-error"><VscError/></span>}
-                                            <span className="file-path">{path.split('/').pop()}</span>
-                                        </div>
-                                    ))}
+                        <div className="pc-toolbar">
+                            {activeTabData?.parsedContent ? (
+                                <button onClick={() => handleUnparseResponse(activeTab)}>Un-Parse</button>
+                            ) : (
+                                <button onClick={() => handleParseResponse(activeTab)}><VscWand /> Parse Response</button>
+                            )}
+                        </div>
+
+                        {activeTabData?.parsedContent ? (
+                            <div className="parsed-view">
+                                <div className="parsed-section">
+                                    <ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown>
                                 </div>
+                                <div className="parsed-section">
+                                     <ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown>
+                                </div>
+                                {activeTabData.parsedContent.files.map(file => {
+                                    const id = `${file.path}::${file.content}`;
+                                    const highlightedHtml = highlightedCodeBlocks.get(id);
+                                    return (
+                                        <div key={file.path} className="file-block">
+                                            <div className="file-header">
+                                                <span className="file-path">{file.path}</span>
+                                                <div className="file-actions">
+                                                    <button>Diff</button>
+                                                    <button>Swap</button>
+                                                </div>
+                                            </div>
+                                            <div className="file-content-viewer"
+                                                 dangerouslySetInnerHTML={{ __html: highlightedHtml || `<pre><code>${file.content}</code></pre>` }}>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
                             </div>
-                        )}
-                        {diffData ? (
-                             <DiffViewer original={diffData.original} modified={diffData.modified} filePath={diffData.path} onClose={() => setDiffData(null)} />
                         ) : (
                             <textarea 
                                 className="response-textarea"
-                                style={{ flexGrow: 1 }}
                                 placeholder={`Paste AI response for tab ${activeTab} here...`}
-                                value={tabContent[activeTab] || ''}
-                                onChange={(e) => handleContentChange(e.target.value, activeTab)}
+                                value={activeTabData?.rawContent || ''}
+                                onChange={(e) => handleRawContentChange(e.target.value, activeTab)}
                             />
                         )}
                     </div>
@@ -10791,6 +10788,22 @@ export interface FileNode {
     gitStatus?: string; // e.g., 'M', 'U', 'A', 'D', 'C'
     problemCounts?: { error: number; warning: number; };
     error?: string; // To store processing errors, e.g., "File not found"
+}
+</file>
+
+<file path="src/common/types/pcpp.types.ts">
+// src/common/types/pcpp.types.ts
+
+export interface ParsedFile {
+    path: string;
+    content: string;
+}
+
+export interface ParsedResponse {
+    summary: string;
+    courseOfAction: string;
+    filesUpdated: string[];
+    files: ParsedFile[];
 }
 </file>
 
