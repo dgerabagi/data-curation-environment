@@ -1,3 +1,4 @@
+// Updated on: C80 (Fix cache pre-warming logic to correctly expand directories and process files on load)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -33,6 +34,7 @@ const App = () => {
     const [isWorkspaceTrusted, setIsWorkspaceTrusted] = useState(true); // Assume trusted by default
     const [clipboard, setClipboard] = useState<{ path: string; type: 'copy' } | null>(null);
     const suppressActiveFileReveal = useRef(false);
+    const processedFilesCache = useRef(new Set<string>());
     
     const clientIpc = ClientPostMessageManager.getInstance();
 
@@ -43,28 +45,78 @@ const App = () => {
     };
 
     const updateCheckedFiles = useCallback((path: string) => {
-        const extension = `.${path.split('.').pop()?.toLowerCase() || ''}`;
-        const isChecking = !checkedFiles.some(checkedPath => path.startsWith(checkedPath));
-
         setCheckedFiles(currentChecked => {
             const newChecked = addRemovePathInSelectedFiles(files, path, currentChecked);
             clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths: newChecked });
             return newChecked;
         });
+    }, [clientIpc, files]);
 
-        if (isChecking) {
-            if (extension === '.pdf') {
-                logger.log(`Requesting text for PDF: ${path}`);
-                clientIpc.sendToServer(ClientToServerChannel.RequestPdfToText, { path });
-            } else if (EXCEL_EXTENSIONS.has(extension)) {
-                logger.log(`Requesting text for Excel/CSV: ${path}`);
-                clientIpc.sendToServer(ClientToServerChannel.RequestExcelToText, { path });
-            } else if (WORD_EXTENSIONS.has(extension)) {
-                logger.log(`Requesting text for Word Doc: ${path}`);
-                clientIpc.sendToServer(ClientToServerChannel.RequestWordToText, { path });
-            }
+    // Effect for pre-warming cache when selection or file tree changes
+    useEffect(() => {
+        if (files.length === 0 || checkedFiles.length === 0) {
+            return;
         }
-    }, [clientIpc, files, checkedFiles]);
+
+        const effectivelySelectedFiles = new Set<string>();
+        const fileMap = new Map<string, FileNode>();
+        
+        const buildFileMap = (node: FileNode) => {
+            fileMap.set(node.absolutePath, node);
+            node.children?.forEach(buildFileMap);
+        };
+        files.forEach(buildFileMap);
+
+        const addDescendantFiles = (node: FileNode) => {
+            if (!node.children) {
+                effectivelySelectedFiles.add(node.absolutePath);
+            } else {
+                node.children.forEach(addDescendantFiles);
+            }
+        };
+
+        checkedFiles.forEach(path => {
+            const node = fileMap.get(path);
+            if (node) {
+                if (node.children) {
+                    addDescendantFiles(node);
+                } else {
+                    effectivelySelectedFiles.add(path);
+                }
+            }
+        });
+
+        logger.log(`[Cache Pre-warm] Found ${effectivelySelectedFiles.size} effectively selected files.`);
+
+        effectivelySelectedFiles.forEach(path => {
+            if (processedFilesCache.current.has(path)) {
+                return; // Already processed
+            }
+
+            const extension = `.${path.split('.').pop()?.toLowerCase() || ''}`;
+            
+            let requested = false;
+            if (extension === '.pdf') {
+                logger.log(`[Cache Pre-warm] Requesting PDF processing for: ${path}`);
+                clientIpc.sendToServer(ClientToServerChannel.RequestPdfToText, { path });
+                requested = true;
+            } else if (EXCEL_EXTENSIONS.has(extension)) {
+                logger.log(`[Cache Pre-warm] Requesting Excel processing for: ${path}`);
+                clientIpc.sendToServer(ClientToServerChannel.RequestExcelToText, { path });
+                requested = true;
+            } else if (WORD_EXTENSIONS.has(extension)) {
+                logger.log(`[Cache Pre-warm] Requesting Word processing for: ${path}`);
+                clientIpc.sendToServer(ClientToServerChannel.RequestWordToText, { path });
+                requested = true;
+            }
+
+            if (requested) {
+                processedFilesCache.current.add(path);
+            }
+        });
+
+    }, [checkedFiles, files, clientIpc]);
+
 
     useEffect(() => {
         logger.log("Initializing view and requesting initial data.");
@@ -81,25 +133,9 @@ const App = () => {
         });
         
         clientIpc.onServerMessage(ServerToClientChannel.ApplySelectionSet, ({ paths }) => {
-            logger.log(`[C78 CACHE FIX] Applying selection set with ${paths.length} paths.`);
+            logger.log(`[C80 CACHE FIX] Applying selection set with ${paths.length} paths.`);
             setCheckedFiles(paths);
             clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths });
-
-            logger.log(`[C78 CACHE FIX] Pre-warming cache for ${paths.length} restored paths.`);
-            paths.forEach(path => {
-                const extension = `.${path.split('.').pop()?.toLowerCase() || ''}`;
-                logger.log(`[C78 CACHE FIX] Checking path: ${path}, extension: ${extension}`);
-                 if (extension === '.pdf') {
-                    logger.log(`[C78 CACHE FIX] Requesting text for restored PDF: ${path}`);
-                    clientIpc.sendToServer(ClientToServerChannel.RequestPdfToText, { path });
-                } else if (EXCEL_EXTENSIONS.has(extension)) {
-                    logger.log(`[C78 CACHE FIX] Requesting text for restored Excel/CSV: ${path}`);
-                    clientIpc.sendToServer(ClientToServerChannel.RequestExcelToText, { path });
-                } else if (WORD_EXTENSIONS.has(extension)) {
-                    logger.log(`[C78 CACHE FIX] Requesting text for restored Word Doc: ${path}`);
-                    clientIpc.sendToServer(ClientToServerChannel.RequestWordToText, { path });
-                }
-            });
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendSelectionSets, ({ sets }) => {
@@ -144,6 +180,7 @@ const App = () => {
 
         clientIpc.onServerMessage(ServerToClientChannel.UpdateNodeStats, ({ path, tokenCount, error }) => {
             logger.log(`Received stats update for ${path}. New token count: ${tokenCount}, Error: ${error}`);
+            processedFilesCache.current.add(path); // Mark as processed so we don't request it again
             setFiles(currentFiles => {
                 const newFiles = JSON.parse(JSON.stringify(currentFiles));
                 let nodeUpdated = false;
@@ -176,6 +213,7 @@ const App = () => {
 
     const handleRefresh = () => {
         logger.log("Refresh button clicked.");
+        processedFilesCache.current.clear(); // Clear cache on manual refresh
         requestFiles(true);
     };
     
