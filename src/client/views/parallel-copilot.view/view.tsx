@@ -1,8 +1,8 @@
-// Updated on: C92 (Implement persistence, fix UI bugs)
+// Updated on: C92 (Implement robust persistence and state sync)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -39,23 +39,20 @@ const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; i
     </div>
 );
 
-const AssociatedFilesList: React.FC<{ files: string[], existenceMap: Map<string, boolean> }> = ({ files, existenceMap }) => {
-    logger.log(`[AssociatedFilesList] Rendering with ${files.length} files.`);
-    return (
-        <ul className="associated-files-list">
-            {files.map(file => (
-                <li key={file}>
-                    {existenceMap.get(file) ? (
-                        <VscCheck className="status-icon exists" title="File exists in workspace" />
-                    ) : (
-                        <VscError className="status-icon not-exists" title="File not found in workspace" />
-                    )}
-                    <span>`{file}`</span>
-                </li>
-            ))}
-        </ul>
-    );
-};
+const AssociatedFilesList: React.FC<{ files: string[], existenceMap: Map<string, boolean> }> = ({ files, existenceMap }) => (
+    <ul className="associated-files-list">
+        {files.map(file => (
+            <li key={file}>
+                {existenceMap.get(file) ? (
+                    <VscCheck className="status-icon exists" title="File exists in workspace" />
+                ) : (
+                    <VscError className="status-icon not-exists" title="File not found in workspace" />
+                )}
+                <span>{file}</span>
+            </li>
+        ))}
+    </ul>
+);
 
 
 const App = () => {
@@ -67,7 +64,7 @@ const App = () => {
     const [cycleTitle, setCycleTitle] = React.useState('');
     const [cycleContext, setCycleContext] = React.useState('');
     const [ephemeralContext, setEphemeralContext] = React.useState('');
-    const [tabs, setTabs] = React.useState<{ [key: number]: TabState }>({});
+    const [tabs, setTabs] = React.useState<{ [key: string]: TabState }>({});
     const [highlightedCodeBlocks, setHighlightedCodeBlocks] = React.useState<Map<string, string>>(new Map());
     const [fileExistenceMap, setFileExistenceMap] = React.useState<Map<string, boolean>>(new Map());
     const [isParsedMode, setIsParsedMode] = React.useState(false);
@@ -75,7 +72,7 @@ const App = () => {
     // Collapsible sections state
     const [isCycleCollapsed, setIsCycleCollapsed] = React.useState(false);
     const [isSummaryCollapsed, setIsSummaryCollapsed] = React.useState(false);
-    const [isActionCollapsed, setIsActionCollapsed] = React.useState(false);
+    const [isPlanCollapsed, setIsPlanCollapsed] = React.useState(false);
     const [isFilesCollapsed, setIsFilesCollapsed] = React.useState(false);
 
 
@@ -83,9 +80,9 @@ const App = () => {
 
     // --- Data Saving ---
     const saveCurrentCycleState = React.useCallback(() => {
-        const responses: { [key: number]: PcppResponse } = {};
+        const responses: { [key: string]: PcppResponse } = {};
         for (let i = 1; i <= tabCount; i++) {
-            responses[i] = { content: tabs[i]?.rawContent || '' };
+            responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' };
         }
 
         const cycleData: PcppCycle = {
@@ -100,7 +97,7 @@ const App = () => {
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
     }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, clientIpc]);
 
-    const debouncedSave = useDebounce(saveCurrentCycleState, 1500);
+    const debouncedSave = useDebounce(saveCurrentCycleState, 1000);
 
     React.useEffect(() => {
         debouncedSave();
@@ -109,32 +106,29 @@ const App = () => {
 
     // --- Data Loading & IPC Handlers ---
     React.useEffect(() => {
-        clientIpc.onServerMessage(ServerToClientChannel.SendCycleHistoryList, ({ cycleIds }) => {
-            const max = Math.max(...cycleIds, 0);
-            const newMax = max > 0 ? max : 1;
-            setMaxCycle(newMax);
-            setCurrentCycle(newMax); // Go to the latest cycle on load
-            logger.log(`Cycle history received. Max cycle set to: ${newMax}`);
-            clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newMax });
+        const loadCycleData = (cycleData: PcppCycle) => {
+             logger.log(`Loading state for cycle ${cycleData.cycleId}`);
+            setCurrentCycle(cycleData.cycleId);
+            setCycleTitle(cycleData.title);
+            setCycleContext(cycleData.cycleContext);
+            setEphemeralContext(cycleData.ephemeralContext);
+            const newTabs: { [key: string]: TabState } = {};
+            Object.entries(cycleData.responses).forEach(([tabId, response]) => {
+                newTabs[tabId] = { rawContent: response.content, parsedContent: null };
+            });
+            setTabs(newTabs);
+        };
+
+        clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData }) => {
+            loadCycleData(cycleData);
+            setMaxCycle(cycleData.cycleId);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData }) => {
             if (cycleData) {
-                logger.log(`Loading state for cycle ${cycleData.cycleId}`);
-                setCycleTitle(cycleData.title);
-                setCycleContext(cycleData.cycleContext);
-                setEphemeralContext(cycleData.ephemeralContext);
-                const newTabs: { [key: number]: TabState } = {};
-                Object.entries(cycleData.responses).forEach(([tabId, response]) => {
-                    newTabs[Number(tabId)] = { rawContent: response.content, parsedContent: null };
-                });
-                setTabs(newTabs);
+                loadCycleData(cycleData);
             } else {
-                logger.warn(`No data found for cycle ${currentCycle}. Clearing fields.`);
-                setCycleTitle('');
-                setCycleContext('');
-                setEphemeralContext('');
-                setTabs({});
+                logger.warn(`No data found for requested cycle.`);
             }
         });
         
@@ -146,14 +140,14 @@ const App = () => {
             setFileExistenceMap(new Map(Object.entries(existenceMap)));
         });
 
-        clientIpc.sendToServer(ClientToServerChannel.RequestCycleHistoryList, {});
+        clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});
 
     }, [clientIpc]);
 
     const handleRawContentChange = (newContent: string, tabIndex: number) => {
         setTabs(prev => ({
             ...prev,
-            [tabIndex]: { ...prev[tabIndex], rawContent: newContent, parsedContent: null }
+            [tabIndex.toString()]: { ...(prev[tabIndex.toString()] || { parsedContent: null }), rawContent: newContent, parsedContent: isParsedMode ? parseResponse(newContent) : null }
         }));
     };
 
@@ -171,15 +165,15 @@ const App = () => {
                     updatedTabs[Number(tabId)].parsedContent = parsed;
                     
                     parsed.files.forEach(file => {
-                        const id = `${file.path}::${file.content}`; // Unique ID for highlighting
+                        allFilePaths.add(file.path);
+                        const lang = file.path.split('.').pop() || 'plaintext';
+                        const id = `${file.path}::${file.content}`;
                         if (!highlightedCodeBlocks.has(id)) {
-                             const lang = file.path.split('.').pop() || 'plaintext';
                              clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
                         }
                     });
-                     parsed.filesUpdated.forEach(path => allFilePaths.add(path));
                 } else if (tabState.parsedContent) {
-                    tabState.parsedContent.filesUpdated.forEach(path => allFilePaths.add(path));
+                    tabState.parsedContent.filesUpdated.forEach(file => allFilePaths.add(file));
                 }
             });
             setTabs(updatedTabs);
@@ -196,7 +190,20 @@ const App = () => {
         }
     };
 
-    const activeTabData = tabs[activeTab];
+    const handleNewCycle = () => {
+        const newCycleId = maxCycle + 1;
+        setMaxCycle(newCycleId);
+        setCurrentCycle(newCycleId);
+        // Clear all fields for the new cycle
+        setCycleTitle('New Cycle');
+        setCycleContext('');
+        setEphemeralContext('');
+        setTabs({});
+        setIsParsedMode(false);
+        // The useEffect for state change will trigger the save
+    };
+
+    const activeTabData = tabs[activeTab.toString()];
 
     return (
         <div className="pc-view-container">
@@ -214,6 +221,7 @@ const App = () => {
                     <button onClick={() => handleCycleChange(currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button>
                     <input type="number" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 1)} className="cycle-input" />
                     <button onClick={() => handleCycleChange(currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button>
+                    <button onClick={handleNewCycle} title="New Cycle"><VscAdd /></button>
                     <input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} />
                 </div>
                 <div className="context-inputs">
@@ -238,7 +246,7 @@ const App = () => {
                                 <CollapsibleSection title="Summary & Plan" isCollapsed={isSummaryCollapsed} onToggle={() => setIsSummaryCollapsed(p => !p)}>
                                     <ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown>
                                 </CollapsibleSection>
-                                <CollapsibleSection title="Course of Action" isCollapsed={isActionCollapsed} onToggle={() => setIsActionCollapsed(p => !p)}>
+                                <CollapsibleSection title="Course of Action" isCollapsed={isPlanCollapsed} onToggle={() => setIsPlanCollapsed(p => !p)}>
                                      <ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown>
                                 </CollapsibleSection>
                                 <CollapsibleSection title="Associated Files" isCollapsed={isFilesCollapsed} onToggle={() => setIsFilesCollapsed(p => !p)}>

@@ -35,7 +35,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestCreatePromptFile ? { cycleTitle: string; currentCycle: number } :
     T extends ClientToServerChannel.RequestFileExistence ? { paths: string[] } :
     T extends ClientToServerChannel.RequestSyntaxHighlight ? { code: string; lang: string, id: string } :
-    T extends ClientToServerChannel.RequestCycleHistoryList ? {} :
+    T extends ClientToServerChannel.RequestLatestCycleData ? {} :
     T extends ClientToServerChannel.RequestCycleData ? { cycleId: number } :
     T extends ClientToServerChannel.SaveCycleData ? { cycleData: PcppCycle } :
     
@@ -52,6 +52,6 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SendFileContent ? { path: string, content: string | null } :
     T extends ServerToClientChannel.SendFileExistence ? { existenceMap: { [path: string]: boolean } } :
     T extends ServerToClientChannel.SendSyntaxHighlight ? { highlightedHtml: string, id: string } :
-    T extends ServerToClientChannel.SendCycleHistoryList ? { cycleIds: number[] } :
+    T extends ServerToClientChannel.SendLatestCycleData ? { cycleData: PcppCycle } :
     T extends ServerToClientChannel.SendCycleData ? { cycleData: PcppCycle | null } :
     never;

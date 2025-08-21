@@ -8,6 +8,6 @@ export interface ParsedFile {
 export interface ParsedResponse {
     summary: string;
     courseOfAction: string;
-    filesUpdated: string[];
-    files: ParsedFile[];
+    filesUpdated: string[]; // List of file paths from the "Files Updated This Cycle" section
+    files: ParsedFile[]; // Parsed file blocks with content
 }

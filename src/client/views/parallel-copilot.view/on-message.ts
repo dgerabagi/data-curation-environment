@@ -19,9 +19,9 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         fsService.handleSyntaxHighlightRequest(data.code, data.lang, data.id, serverIpc);
     });
 
-    serverIpc.onClientMessage(ClientToServerChannel.RequestCycleHistoryList, async () => {
-        const cycleIds = await historyService.getCycleHistoryList();
-        serverIpc.sendToClient(ServerToClientChannel.SendCycleHistoryList, { cycleIds });
+    serverIpc.onClientMessage(ClientToServerChannel.RequestLatestCycleData, async () => {
+        const cycleData = await historyService.getLatestCycle();
+        serverIpc.sendToClient(ServerToClientChannel.SendLatestCycleData, { cycleData });
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestCycleData, async (data) => {

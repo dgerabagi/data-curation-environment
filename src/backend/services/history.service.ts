@@ -14,7 +14,7 @@ export interface PcppCycle {
     title: string;
     cycleContext: string;
     ephemeralContext: string;
-    responses: { [tabId: number]: PcppResponse };
+    responses: { [tabId: string]: PcppResponse };
 }
 
 export interface PcppHistoryFile {
@@ -55,10 +55,28 @@ export class HistoryService {
         }
     }
 
-    public async getCycleHistoryList(): Promise<number[]> {
-        Services.loggerService.log("HistoryService: getCycleHistoryList called.");
+    public async getLatestCycle(): Promise<PcppCycle> {
+        Services.loggerService.log("HistoryService: getLatestCycle called.");
         const history = await this._readHistoryFile();
-        return history.cycles.map(c => c.cycleId).sort((a, b) => a - b);
+        if (history.cycles.length === 0) {
+            Services.loggerService.log("No history found, creating default cycle 1.");
+            const defaultCycle: PcppCycle = {
+                cycleId: 1,
+                timestamp: new Date().toISOString(),
+                title: 'New Cycle',
+                cycleContext: '',
+                ephemeralContext: '',
+                responses: { "1": { content: "" }, "2": { content: "" }, "3": { content: "" }, "4": { content: "" } },
+            };
+            // Save this default cycle so it exists for the next load
+            await this.saveCycleData(defaultCycle);
+            return defaultCycle;
+        }
+        
+        // Find the cycle with the highest ID
+        const latestCycle = history.cycles.reduce((latest, current) => current.cycleId > latest.cycleId ? current : latest);
+        Services.loggerService.log(`Latest cycle found: ${latestCycle.cycleId}`);
+        return latestCycle;
     }
 
     public async getCycleData(cycleId: number): Promise<PcppCycle | null> {

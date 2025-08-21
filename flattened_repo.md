@@ -1,12 +1,12 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-21T19:38:44.482Z
+  Date Generated: 2025-08-21T21:22:05.224Z
   ---
   Total Files: 205
-  Total Lines: 17298
-  Total Characters: 803926
-  Approx. Tokens: 201059
+  Total Lines: 17312
+  Total Characters: 805129
+  Approx. Tokens: 201359
 -->
 
 <!-- Top 10 Files by Token Count -->
@@ -19,7 +19,7 @@
 7. src\backend\services\flattener.service.ts (3685 tokens)
 8. src\client\views\context-chooser.view\view.scss (3638 tokens)
 9. src\backend\services\prompt.service.ts (3481 tokens)
-10. src\Artifacts\A11. DCE - Regression Case Studies.md (3388 tokens)
+10. src\client\views\parallel-copilot.view\view.tsx (3399 tokens)
 
 <!-- Full File List -->
 1. .gitignore - Lines: 10 - Chars: 128 - Tokens: 32
@@ -60,11 +60,11 @@
 36. src\Artifacts\A32. DCE - Phase 1 - Excel and CSV Handling Strategy.md - Lines: 44 - Chars: 4295 - Tokens: 1074
 37. src\Artifacts\A33. DCE - Phase 1 - Copy-Paste Feature Plan.md - Lines: 42 - Chars: 4456 - Tokens: 1114
 38. src\Artifacts\A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements.md - Lines: 44 - Chars: 6403 - Tokens: 1601
-39. src\Artifacts\A35. DCE - Phase 2 - UI Mockups and Flow.md - Lines: 102 - Chars: 7210 - Tokens: 1803
+39. src\Artifacts\A35. DCE - Phase 2 - UI Mockups and Flow.md - Lines: 96 - Chars: 6987 - Tokens: 1747
 40. src\Artifacts\A36. DCE - Phase 2 - Technical Implementation Plan.md - Lines: 65 - Chars: 3766 - Tokens: 942
 41. src\Artifacts\A37. DCE - Phase 2 - Cycle Navigator & Knowledge Graph - Vision.md - Lines: 28 - Chars: 3242 - Tokens: 811
 42. src\Artifacts\A38. DCE - Phase 2 - Cycle Navigator - UI Mockup.md - Lines: 69 - Chars: 4621 - Tokens: 1156
-43. src\Artifacts\A39. DCE - Phase 2 - Cycle Navigator - Technical Plan.md - Lines: 100 - Chars: 4993 - Tokens: 1249
+43. src\Artifacts\A39. DCE - Phase 2 - Cycle Navigator - Technical Plan.md - Lines: 84 - Chars: 4595 - Tokens: 1149
 44. src\Artifacts\A4. DCE - Analysis of The-Creator-AI Repo.md - Lines: 56 - Chars: 5722 - Tokens: 1431
 45. src\Artifacts\A40. DCE - Phase 2 - Parallel Co-Pilot - Target File Structure.md - Lines: 66 - Chars: 3659 - Tokens: 915
 46. src\Artifacts\A40.1. DCE - Phase 2 - Competitive Analysis & Feature Ideas.md - Lines: 43 - Chars: 4784 - Tokens: 1196
@@ -90,7 +90,7 @@
 66. src\backend\services\action.service.ts - Lines: 73 - Chars: 2471 - Tokens: 618
 67. src\backend\services\flattener.service.ts - Lines: 327 - Chars: 14740 - Tokens: 3685
 68. src\backend\services\fs.service.ts - Lines: 769 - Chars: 36715 - Tokens: 9179
-69. src\backend\services\history.service.ts - Lines: 88 - Chars: 3308 - Tokens: 827
+69. src\backend\services\history.service.ts - Lines: 106 - Chars: 4180 - Tokens: 1045
 70. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
 71. src\backend\services\prompt.service.ts - Lines: 113 - Chars: 13923 - Tokens: 3481
 72. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
@@ -105,23 +105,23 @@
 81. src\client\components\tree-view\TreeView.tsx - Lines: 394 - Chars: 18029 - Tokens: 4508
 82. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 83. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
-84. src\client\utils\response-parser.ts - Lines: 40 - Chars: 1698 - Tokens: 425
+84. src\client\utils\response-parser.ts - Lines: 40 - Chars: 1740 - Tokens: 435
 85. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 86. src\client\views\context-chooser.view\on-message.ts - Lines: 143 - Chars: 6146 - Tokens: 1537
 87. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
 88. src\client\views\context-chooser.view\view.tsx - Lines: 435 - Chars: 22245 - Tokens: 5562
 89. src\client\views\index.ts - Lines: 35 - Chars: 1714 - Tokens: 429
 90. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-91. src\client\views\parallel-copilot.view\on-message.ts - Lines: 39 - Chars: 1845 - Tokens: 462
+91. src\client\views\parallel-copilot.view\on-message.ts - Lines: 39 - Chars: 1840 - Tokens: 460
 92. src\client\views\parallel-copilot.view\view.scss - Lines: 280 - Chars: 6073 - Tokens: 1519
-93. src\client\views\parallel-copilot.view\view.tsx - Lines: 265 - Chars: 12789 - Tokens: 3198
-94. src\common\ipc\channels.enum.ts - Lines: 64 - Chars: 3412 - Tokens: 853
+93. src\client\views\parallel-copilot.view\view.tsx - Lines: 283 - Chars: 13593 - Tokens: 3399
+94. src\common\ipc\channels.enum.ts - Lines: 64 - Chars: 3422 - Tokens: 856
 95. src\common\ipc\channels.type.ts - Lines: 57 - Chars: 4453 - Tokens: 1114
 96. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
 97. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 98. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
 99. src\common\types\file-node.ts - Lines: 16 - Chars: 567 - Tokens: 142
-100. src\common\types\pcpp.types.ts - Lines: 13 - Chars: 256 - Tokens: 64
+100. src\common\types\pcpp.types.ts - Lines: 13 - Chars: 357 - Tokens: 90
 101. src\common\types\vscode-webview.d.ts - Lines: 13 - Chars: 357 - Tokens: 90
 102. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
 103. src\common\utils\view-html.ts - Lines: 26 - Chars: 971 - Tokens: 243
@@ -2701,11 +2701,11 @@ The goal of the **Parallel Co-Pilot Panel** is to create an integrated, **persis
 # Artifact A35: DCE - Phase 2 - UI Mockups and Flow
 # Date Created: C69
 # Author: AI Model
-# Updated on: C91 (Add global parse toggle and Associated Files list)
+# Updated on: C92 (Add "New Cycle" button and clarify section collapse state)
 
 ## 1. Overview
 
-This document describes the user interface (UI) and interaction flow for the Parallel Co-Pilot Panel. The design is centered around a two-stage workflow: **Input**, followed by a global **Parse** that transforms the entire panel into a **Review & Act** mode. The UI now includes an "Associated Files" list for quick validation.
+This document describes the user interface (UI) and interaction flow for the Parallel Co-Pilot Panel. The design is centered around a two-stage workflow: **Input**, followed by a global **Parse** that transforms the entire panel into a **Review & Act** mode. The UI now includes an "Associated Files" list for quick validation and a "New Cycle" button for explicit history management.
 
 ## 2. UI Mockup (Textual Description)
 
@@ -2719,7 +2719,7 @@ This is the initial state of the panel.
 |-------------------------------------------------------------------------------------|
 | [v] Cycle Info & Context                                                            |
 | |-----------------------------------------------------------------------------------|
-| | Cycle: [ < ] [ C91 ] [ > ]  [ Cycle Title Input: global parse toggle... ]         |
+| | Cycle: [ < ] [ C92 ] [ > ] [ + ] [ Cycle Title Input: persistence fix... ]         |
 | |-----------------------------------------------------------------------------------|
 | | [Cycle Context (Permanent notes)]          [Ephemeral Context (Temp logs)]        |
 | | +----------------------------------------+ +------------------------------------+ |
@@ -2778,28 +2778,22 @@ After clicking `[ Parse All ]`, all tabs transform simultaneously.
 
 ### 2.1. UI Components Breakdown
 
-1.  **Global Toolbar:**
-    *   The `[ Parse All ]` / `[ Un-Parse All ]` button is now in the main header, controlling the state of all tabs at once.
+1.  **Cycle Navigator:**
+    *   The navigator now includes a `[ + ]` (New Cycle) button. This is the primary way to advance to a new, empty cycle.
+    *   The `[ > ]` (Next) button is disabled when the user is viewing the latest cycle.
 
 2.  **Collapsible Sections:**
-    *   The UI is organized into collapsible "accordion" sections.
-    *   **`[v] CYCLE & CONTEXT`**: Contains the Cycle Navigator and context fields.
-    *   **`[v] SUMMARY & PLAN`**: Renders the AI's summary as formatted Markdown.
-    *   **`[v] COURSE OF ACTION`**: Renders the AI's plan as formatted Markdown.
-    *   **`[v] ASSOCIATED FILES`**: A new section that lists all file paths detected in the response.
-
-3.  **Associated Files List:**
-    *   This new component provides a scannable list of all files the AI response intends to modify.
-    *   **Status Icon:** A `✓` indicates the file exists in the workspace. A `✗` indicates it does not.
-    *   **Actions:** Each file has a `[Diff]` button to compare changes. Non-existent files could have a `[Create]` button.
+    *   Each collapsible section (`CYCLE & CONTEXT`, `SUMMARY & PLAN`, `COURSE OF ACTION`, etc.) will have its own independent open/closed state. The state for one section will not affect the others.
 
 ## 3. User Interaction Flow
 
-1.  **Paste & Parse:** The user pastes raw AI responses into one or more tabs. They then click the global `[ Parse All ]` button.
-2.  **Global UI Transform:** All tabs switch from their `textarea` view to the structured, parsed view.
-3.  **Validation:** The user can immediately look at the "Associated Files" list in a tab to see if the AI has hallucinated any file paths (`✗`) or is correctly targeting existing ones (`✓`).
-4.  **Review:** The user can collapse sections they don't need (e.g., the plan) to focus on the file list or the code blocks.
-5.  **Act:** The user can click `[Diff]` on an associated file to review changes, or `[Swap]` on a file block to test the code.
+1.  **Load:** On startup, the panel loads the data from the *latest* cycle in its history. The Cycle Navigator displays this cycle number, and the `[ > ]` button is disabled.
+2.  **Work:** The user edits the cycle title, context, and response tabs. All changes are debounced and saved automatically to the current cycle's record in `dce_history.json`.
+3.  **New Cycle:** When ready to start a new iteration, the user clicks the `[ + ]` button.
+    *   **Action:** The cycle number increments. `maxCycle` and `currentCycle` are both updated.
+    *   **UI Update:** The UI clears all fields (title, context, responses) for the new cycle.
+    *   **Save:** A new, empty cycle object is created and saved to the history file. The `[ > ]` button remains disabled.
+4.  **Review History:** The user can click the `[ < ]` button to navigate to past cycles, loading their saved state for review.
 </file>
 
 <file path="src/Artifacts/A36. DCE - Phase 2 - Technical Implementation Plan.md">
@@ -2977,7 +2971,7 @@ The Cycle Navigator will be a new UI element added to the top of the Parallel Co
 # Artifact A39: DCE - Phase 2 - Cycle Navigator - Technical Plan
 # Date Created: C70
 # Author: AI Model
-# Updated on: C87 (Refine data model and specify cycle bounds logic)
+# Updated on: C92 (Revise initialization flow to fix persistence issues)
 
 - **Key/Value for A0:**
 - **Description:** Details the technical approach for implementing the Cycle Navigator, including data structures for storing cycle-specific responses and the state management for historical navigation.
@@ -2985,7 +2979,7 @@ The Cycle Navigator will be a new UI element added to the top of the Parallel Co
 
 ## 1. Overview
 
-This document outlines the technical strategy for implementing the Cycle Navigator and PCPP persistence. The implementation will require a structured data format for storing historical data, enhancements to the frontend state management, new IPC channels, and robust backend logic for data persistence.
+This document outlines the technical strategy for implementing the Cycle Navigator and PCPP persistence. The implementation will require a structured data format for storing historical data, enhancements to the frontend state management, new IPC channels, and robust backend logic for data persistence. The key change in this revision is a new initialization flow to make the backend the single source of truth, resolving state loss on reload or window pop-out.
 
 ## 2. Data Structure and Persistence
 
@@ -2998,82 +2992,66 @@ A structured approach to storing the historical data is critical. A simple JSON 
   "version": 1,
   "cycles": [
     {
-      "cycleId": 86,
+      "cycleId": 91,
       "timestamp": "2025-08-20T12:30:00Z",
-      "title": "ts errors",
-      "cycleContext": "Long-term notes about the goal of cycle 86...",
+      "title": "Initial implementation",
+      "cycleContext": "Long-term notes...",
       "ephemeralContext": "<console_log>...</console_log>",
       "responses": {
-        "1": "<src/client/views/parallel-copilot.view/view.tsx>...</file>",
-        "2": "...",
-        "3": ""
+        "1": { "content": "<src/client/views/view.tsx>...</file>" },
+        "2": { "content": "..." },
+        "3": { "content": "" }
       }
     },
     {
-      "cycleId": 87,
+      "cycleId": 92,
       "timestamp": "2025-08-21T10:00:00Z",
-      "title": "virtuous cycle, phase 2 perfection",
-      "cycleContext": "Focus on persistence and diffing.",
+      "title": "Persistence fix",
+      "cycleContext": "Focus on fixing state loss.",
       "ephemeralContext": "",
       "responses": {
-        "1": "", "2": "", "3": "", "4": ""
+        "1": { "content": "" }, "2": { "content": "" }, "3": { "content": "" }, "4": { "content": "" }
       }
     }
   ]
 }
 ```
 
-*   **Backend (`history.service.ts`):** This service will manage reading from and writing to `dce_history.json`. It will handle file locking to prevent race conditions and provide methods like `getCycle(cycleId)`, `saveCycle(cycleData)`, and `getCycleList()`.
+*   **Backend (`history.service.ts`):** This service will manage reading from and writing to `dce_history.json`. It will handle file locking to prevent race conditions and provide methods like `getCycle(cycleId)`, `saveCycle(cycleData)`, `getCycleList()`, and a new `getLatestCycle()`.
 
-## 3. Frontend State Management (`parallel-copilot.view.tsx`)
+## 3. Frontend State Management & Initialization Flow (C92 Revision)
 
-The main view's state will be expanded to manage the historical context.
+### 3.1. Initialization
+1.  **Problem:** Previously, the frontend managed its own state and only requested pieces of data, leading to state loss when the webview was re-initialized (e.g., on reload or pop-out).
+2.  **Solution:** The new flow makes the backend the single source of truth.
+    *   On component mount, the frontend sends a single new IPC message: `RequestLatestCycleData`.
+    *   The backend's `HistoryService` finds the cycle with the highest `cycleId` in `dce_history.json`. If the file is empty, it creates a default "Cycle 1" object.
+    *   The backend sends this complete `PcppCycle` object back to the client via `SendLatestCycleData`.
+    *   The frontend's message handler uses this single object to populate its *entire* initial state: `currentCycleId`, `maxCycleId`, `cycleTitle`, `cycleContext`, `ephemeralContext`, and all `tabs` content. This guarantees the UI always starts with the latest saved data.
 
+### 3.2. State Management (`parallel-copilot.view.tsx`)
 ```typescript
 interface PcppState {
   currentCycleId: number;
   maxCycleId: number;
   cycleTitle: string;
-  cycleContext: string;
-  ephemeralContext: string;
-  tabCount: number;
-  activeTab: number;
-  tabContent: { [tabId: number]: string };
-  // ... other state for diffing, file association, etc.
+  // ... other state
 }
 ```
-
-*   `currentCycleId` will drive the UI display and data fetching.
-*   `maxCycleId` will be determined by the highest cycle number in the history file, preventing the user from navigating into the future. The minimum will be hardcoded to 1.
-*   The navigation buttons will increment or decrement `currentCycleId` within the bounds `[1, maxCycleId]`.
-*   Changing `currentCycleId` will trigger a `useEffect` hook to request the data for that cycle from the backend.
-*   Changes to any text field will trigger a debounced save operation to the backend.
+*   The state remains largely the same, but it is now initialized from a single backend message.
+*   A "New Cycle" button (`+`) will be added. Its handler will increment `maxCycleId`, set `currentCycleId = maxCycleId`, clear the UI fields, and trigger a `saveCycleData` call to create the new empty cycle record.
 
 ## 4. IPC Communication
 
-New and updated channels are needed to orchestrate the data flow.
-
-*   `ClientToServerChannel.RequestCycleData`:
-    *   **Payload:** `{ cycleId: number }`
-    *   **Action:** Frontend requests the full data object for a specific cycle from the backend.
-*   `ClientToServerChannel.RequestCycleHistoryList`:
+*   **REMOVED:** `RequestCycleHistoryList`.
+*   **NEW:** `ClientToServerChannel.RequestLatestCycleData`:
     *   **Payload:** `{}`
-    *   **Action:** Frontend requests the list of all available cycle IDs to determine the `maxCycleId`.
-*   `ClientToServerChannel.SaveCycleData`:
-    *   **Payload:** `{ cycleData: Cycle }`
-    *   **Action:** Frontend sends the complete state for a cycle to the backend to be persisted.
-*   `ServerToClientChannel.SendCycleData`:
-    *   **Payload:** `{ cycleData: Cycle | null }` // Can be null if cycle doesn't exist
-    *   **Action:** Backend sends the requested cycle data to the frontend.
-*   `ServerToClientChannel.SendCycleHistoryList`:
-    *   **Payload:** `{ cycleIds: number[] }`
-    *   **Action:** Backend sends the list of all cycle IDs.
-
-## 5. Workflow Integration
-
-1.  **On Load:** The Parallel Co-Pilot view requests the full cycle history list. It sets `maxCycleId` to the highest number received (or the current cycle number if history is empty). It then requests the data for the `maxCycleId`.
-2.  **On Navigate:** Clicking `<` or `>` changes `currentCycleId`. A `useEffect` hook detects this change and sends `RequestCycleData` to the backend. The backend's `SendCycleData` response triggers a state update that re-renders the entire panel with the historical data.
-3.  **On Change:** Any change to a text area (`tabContent`, `cycleContext`, etc.) triggers a debounced function that gathers the entire current UI state into a `Cycle` object and sends it to the backend via `SaveCycleData`. The backend service then finds the corresponding cycle in the JSON file and overwrites it.
+    *   **Action:** Frontend requests the full data object for the most recent cycle.
+*   **NEW:** `ServerToClientChannel.SendLatestCycleData`:
+    *   **Payload:** `{ cycleData: PcppCycle }`
+    *   **Action:** Backend sends the complete, latest cycle data to the frontend for initialization.
+*   `ClientToServerChannel.RequestCycleData`: Still used for navigating to *older* cycles.
+*   `ClientToServerChannel.SaveCycleData`: Unchanged. It sends the entire state of the *current* cycle to the backend to be persisted. It's critical that the `cycleId` in the payload is correct.
 </file>
 
 <file path="src/Artifacts/A4. DCE - Analysis of The-Creator-AI Repo.md">
@@ -6908,7 +6886,7 @@ export interface PcppCycle {
     title: string;
     cycleContext: string;
     ephemeralContext: string;
-    responses: { [tabId: number]: PcppResponse };
+    responses: { [tabId: string]: PcppResponse };
 }
 
 export interface PcppHistoryFile {
@@ -6949,10 +6927,28 @@ export class HistoryService {
         }
     }
 
-    public async getCycleHistoryList(): Promise<number[]> {
-        Services.loggerService.log("HistoryService: getCycleHistoryList called.");
+    public async getLatestCycle(): Promise<PcppCycle> {
+        Services.loggerService.log("HistoryService: getLatestCycle called.");
         const history = await this._readHistoryFile();
-        return history.cycles.map(c => c.cycleId).sort((a, b) => a - b);
+        if (history.cycles.length === 0) {
+            Services.loggerService.log("No history found, creating default cycle 1.");
+            const defaultCycle: PcppCycle = {
+                cycleId: 1,
+                timestamp: new Date().toISOString(),
+                title: 'New Cycle',
+                cycleContext: '',
+                ephemeralContext: '',
+                responses: { "1": { content: "" }, "2": { content: "" }, "3": { content: "" }, "4": { content: "" } },
+            };
+            // Save this default cycle so it exists for the next load
+            await this.saveCycleData(defaultCycle);
+            return defaultCycle;
+        }
+        
+        // Find the cycle with the highest ID
+        const latestCycle = history.cycles.reduce((latest, current) => current.cycleId > latest.cycleId ? current : latest);
+        Services.loggerService.log(`Latest cycle found: ${latestCycle.cycleId}`);
+        return latestCycle;
     }
 
     public async getCycleData(cycleId: number): Promise<PcppCycle | null> {
@@ -8751,7 +8747,7 @@ export function parseResponse(rawText: string): ParsedResponse {
         filesUpdatedList = filesUpdatedMatch[1]
             .split('\n')
             .map(line => line.replace(/[-\*]\s*/, '').trim())
-            .filter(line => line.length > 0);
+            .filter(line => line.trim().length > 0); // C92 Fix: Filter out empty lines
     } else {
         filesUpdatedList = files.map(f => f.path);
     }
@@ -10024,9 +10020,9 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         fsService.handleSyntaxHighlightRequest(data.code, data.lang, data.id, serverIpc);
     });
 
-    serverIpc.onClientMessage(ClientToServerChannel.RequestCycleHistoryList, async () => {
-        const cycleIds = await historyService.getCycleHistoryList();
-        serverIpc.sendToClient(ServerToClientChannel.SendCycleHistoryList, { cycleIds });
+    serverIpc.onClientMessage(ClientToServerChannel.RequestLatestCycleData, async () => {
+        const cycleData = await historyService.getLatestCycle();
+        serverIpc.sendToClient(ServerToClientChannel.SendLatestCycleData, { cycleData });
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestCycleData, async (data) => {
@@ -10328,15 +10324,15 @@ body {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
-// Updated on: C91 (Implement global parse toggle and Associated Files list)
+// Updated on: C92 (Implement robust persistence and state sync)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
-import { PcppCycle } from '@/backend/services/history.service';
+import { PcppCycle, PcppResponse } from '@/backend/services/history.service';
 import { ParsedResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
 import ReactMarkdown from 'react-markdown';
@@ -10389,26 +10385,30 @@ const App = () => {
     // State
     const [activeTab, setActiveTab] = React.useState(1);
     const [tabCount, setTabCount] = React.useState(4);
-    const [currentCycle, setCurrentCycle] = React.useState(91);
-    const [maxCycle, setMaxCycle] = React.useState(91);
-    const [cycleTitle, setCycleTitle] = React.useState('implement feedback');
+    const [currentCycle, setCurrentCycle] = React.useState(1);
+    const [maxCycle, setMaxCycle] = React.useState(1);
+    const [cycleTitle, setCycleTitle] = React.useState('');
     const [cycleContext, setCycleContext] = React.useState('');
     const [ephemeralContext, setEphemeralContext] = React.useState('');
-    const [tabs, setTabs] = React.useState<{ [key: number]: TabState }>({});
+    const [tabs, setTabs] = React.useState<{ [key: string]: TabState }>({});
     const [highlightedCodeBlocks, setHighlightedCodeBlocks] = React.useState<Map<string, string>>(new Map());
     const [fileExistenceMap, setFileExistenceMap] = React.useState<Map<string, boolean>>(new Map());
     const [isParsedMode, setIsParsedMode] = React.useState(false);
 
     // Collapsible sections state
     const [isCycleCollapsed, setIsCycleCollapsed] = React.useState(false);
+    const [isSummaryCollapsed, setIsSummaryCollapsed] = React.useState(false);
+    const [isPlanCollapsed, setIsPlanCollapsed] = React.useState(false);
+    const [isFilesCollapsed, setIsFilesCollapsed] = React.useState(false);
+
 
     const clientIpc = ClientPostMessageManager.getInstance();
 
     // --- Data Saving ---
     const saveCurrentCycleState = React.useCallback(() => {
-        const responses: { [key: number]: { content: string } } = {};
+        const responses: { [key: string]: PcppResponse } = {};
         for (let i = 1; i <= tabCount; i++) {
-            responses[i] = { content: tabs[i]?.rawContent || '' };
+            responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' };
         }
 
         const cycleData: PcppCycle = {
@@ -10432,28 +10432,29 @@ const App = () => {
 
     // --- Data Loading & IPC Handlers ---
     React.useEffect(() => {
-        clientIpc.onServerMessage(ServerToClientChannel.SendCycleHistoryList, ({ cycleIds }) => {
-            const max = Math.max(...cycleIds, 0);
-            setMaxCycle(max > 0 ? max : currentCycle);
+        const loadCycleData = (cycleData: PcppCycle) => {
+             logger.log(`Loading state for cycle ${cycleData.cycleId}`);
+            setCurrentCycle(cycleData.cycleId);
+            setCycleTitle(cycleData.title);
+            setCycleContext(cycleData.cycleContext);
+            setEphemeralContext(cycleData.ephemeralContext);
+            const newTabs: { [key: string]: TabState } = {};
+            Object.entries(cycleData.responses).forEach(([tabId, response]) => {
+                newTabs[tabId] = { rawContent: response.content, parsedContent: null };
+            });
+            setTabs(newTabs);
+        };
+
+        clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData }) => {
+            loadCycleData(cycleData);
+            setMaxCycle(cycleData.cycleId);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData }) => {
             if (cycleData) {
-                logger.log(`Loading state for cycle ${cycleData.cycleId}`);
-                setCycleTitle(cycleData.title);
-                setCycleContext(cycleData.cycleContext);
-                setEphemeralContext(cycleData.ephemeralContext);
-                const newTabs: { [key: number]: TabState } = {};
-                Object.entries(cycleData.responses).forEach(([tabId, response]) => {
-                    newTabs[Number(tabId)] = { rawContent: response.content, parsedContent: null };
-                });
-                setTabs(newTabs);
+                loadCycleData(cycleData);
             } else {
-                logger.warn(`No data found for cycle. Clearing fields.`);
-                setCycleTitle('');
-                setCycleContext('');
-                setEphemeralContext('');
-                setTabs({});
+                logger.warn(`No data found for requested cycle.`);
             }
         });
         
@@ -10465,15 +10466,14 @@ const App = () => {
             setFileExistenceMap(new Map(Object.entries(existenceMap)));
         });
 
-        clientIpc.sendToServer(ClientToServerChannel.RequestCycleHistoryList, {});
-        clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: currentCycle });
+        clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});
 
     }, [clientIpc]);
 
     const handleRawContentChange = (newContent: string, tabIndex: number) => {
         setTabs(prev => ({
             ...prev,
-            [tabIndex]: { ...prev[tabIndex], rawContent: newContent, parsedContent: null }
+            [tabIndex.toString()]: { ...(prev[tabIndex.toString()] || { parsedContent: null }), rawContent: newContent, parsedContent: isParsedMode ? parseResponse(newContent) : null }
         }));
     };
 
@@ -10499,7 +10499,7 @@ const App = () => {
                         }
                     });
                 } else if (tabState.parsedContent) {
-                    tabState.parsedContent.files.forEach(file => allFilePaths.add(file.path));
+                    tabState.parsedContent.filesUpdated.forEach(file => allFilePaths.add(file));
                 }
             });
             setTabs(updatedTabs);
@@ -10516,7 +10516,20 @@ const App = () => {
         }
     };
 
-    const activeTabData = tabs[activeTab];
+    const handleNewCycle = () => {
+        const newCycleId = maxCycle + 1;
+        setMaxCycle(newCycleId);
+        setCurrentCycle(newCycleId);
+        // Clear all fields for the new cycle
+        setCycleTitle('New Cycle');
+        setCycleContext('');
+        setEphemeralContext('');
+        setTabs({});
+        setIsParsedMode(false);
+        // The useEffect for state change will trigger the save
+    };
+
+    const activeTabData = tabs[activeTab.toString()];
 
     return (
         <div className="pc-view-container">
@@ -10534,6 +10547,7 @@ const App = () => {
                     <button onClick={() => handleCycleChange(currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button>
                     <input type="number" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 1)} className="cycle-input" />
                     <button onClick={() => handleCycleChange(currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button>
+                    <button onClick={handleNewCycle} title="New Cycle"><VscAdd /></button>
                     <input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} />
                 </div>
                 <div className="context-inputs">
@@ -10555,13 +10569,13 @@ const App = () => {
                     <div className="tab-pane">
                         {isParsedMode && activeTabData?.parsedContent ? (
                             <div className="parsed-view">
-                                <CollapsibleSection title="Summary & Plan" isCollapsed={false} onToggle={() => {}}>
+                                <CollapsibleSection title="Summary & Plan" isCollapsed={isSummaryCollapsed} onToggle={() => setIsSummaryCollapsed(p => !p)}>
                                     <ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown>
                                 </CollapsibleSection>
-                                <CollapsibleSection title="Course of Action" isCollapsed={false} onToggle={() => {}}>
+                                <CollapsibleSection title="Course of Action" isCollapsed={isPlanCollapsed} onToggle={() => setIsPlanCollapsed(p => !p)}>
                                      <ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown>
                                 </CollapsibleSection>
-                                <CollapsibleSection title="Associated Files" isCollapsed={false} onToggle={() => {}}>
+                                <CollapsibleSection title="Associated Files" isCollapsed={isFilesCollapsed} onToggle={() => setIsFilesCollapsed(p => !p)}>
                                     <AssociatedFilesList files={activeTabData.parsedContent.filesUpdated} existenceMap={fileExistenceMap} />
                                 </CollapsibleSection>
 
@@ -10636,7 +10650,7 @@ export enum ClientToServerChannel {
     RequestCreatePromptFile = "clientToServer.requestCreatePromptFile",
     RequestFileExistence = "clientToServer.requestFileExistence",
     RequestSyntaxHighlight = "clientToServer.requestSyntaxHighlight",
-    RequestCycleHistoryList = "clientToServer.requestCycleHistoryList",
+    RequestLatestCycleData = "clientToServer.requestLatestCycleData", // New
     RequestCycleData = "clientToServer.requestCycleData",
     SaveCycleData = "clientToServer.saveCycleData",
 }
@@ -10657,7 +10671,7 @@ export enum ServerToClientChannel {
     // Phase 2: PCPP
     SendFileExistence = "serverToClient.sendFileExistence",
     SendSyntaxHighlight = "serverToClient.sendSyntaxHighlight",
-    SendCycleHistoryList = "serverToClient.sendCycleHistoryList",
+    SendLatestCycleData = "serverToClient.sendLatestCycleData", // New
     SendCycleData = "serverToClient.sendCycleData",
 }
 </file>
@@ -10700,7 +10714,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestCreatePromptFile ? { cycleTitle: string; currentCycle: number } :
     T extends ClientToServerChannel.RequestFileExistence ? { paths: string[] } :
     T extends ClientToServerChannel.RequestSyntaxHighlight ? { code: string; lang: string, id: string } :
-    T extends ClientToServerChannel.RequestCycleHistoryList ? {} :
+    T extends ClientToServerChannel.RequestLatestCycleData ? {} :
     T extends ClientToServerChannel.RequestCycleData ? { cycleId: number } :
     T extends ClientToServerChannel.SaveCycleData ? { cycleData: PcppCycle } :
     
@@ -10717,7 +10731,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SendFileContent ? { path: string, content: string | null } :
     T extends ServerToClientChannel.SendFileExistence ? { existenceMap: { [path: string]: boolean } } :
     T extends ServerToClientChannel.SendSyntaxHighlight ? { highlightedHtml: string, id: string } :
-    T extends ServerToClientChannel.SendCycleHistoryList ? { cycleIds: number[] } :
+    T extends ServerToClientChannel.SendLatestCycleData ? { cycleData: PcppCycle } :
     T extends ServerToClientChannel.SendCycleData ? { cycleData: PcppCycle | null } :
     never;
 </file>
@@ -10853,8 +10867,8 @@ export interface ParsedFile {
 export interface ParsedResponse {
     summary: string;
     courseOfAction: string;
-    filesUpdated: string[];
-    files: ParsedFile[];
+    filesUpdated: string[]; // List of file paths from the "Files Updated This Cycle" section
+    files: ParsedFile[]; // Parsed file blocks with content
 }
 </file>
 
