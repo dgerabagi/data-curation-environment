@@ -570,7 +570,10 @@ export class FSService {
 
             serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: tokenCount });
         } catch (error: any) {
-            const errorMessage = `Failed to parse Word file: ${path.basename(filePath)}`;
+            let errorMessage = `Failed to parse Word file: ${path.basename(filePath)}`;
+            if (error instanceof Error && error.message.includes("Can't find end of central directory")) {
+                errorMessage = "File may be corrupted or is not a valid .docx format.";
+            }
             Services.loggerService.error(`[Word] Error processing ${filePath}: ${error.stack || error.message}`);
             serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: 0, error: errorMessage });
         }
