@@ -1,4 +1,4 @@
-/* Updated on: C90 (Add styles for collapsible sections) */
+/* Updated on: C91 (Add styles for Associated Files list) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -211,6 +211,31 @@ body {
             border-radius: 3px;
             font-family: var(--vscode-editor-font-family);
         }
+    }
+}
+
+.associated-files-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 2px 4px;
+        font-size: 12px;
+        border-radius: 3px;
+    }
+
+    .status-icon {
+        flex-shrink: 0;
+    }
+    .status-icon.exists {
+        color: var(--vscode-testing-iconPassed);
+    }
+    .status-icon.not-exists {
+        color: var(--vscode-testing-iconFailed);
     }
 }
 

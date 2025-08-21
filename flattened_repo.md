@@ -1,12 +1,12 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-21T19:20:52.242Z
+  Date Generated: 2025-08-21T19:38:44.482Z
   ---
   Total Files: 205
-  Total Lines: 17247
-  Total Characters: 802877
-  Approx. Tokens: 200796
+  Total Lines: 17298
+  Total Characters: 803926
+  Approx. Tokens: 201059
 -->
 
 <!-- Top 10 Files by Token Count -->
@@ -59,9 +59,9 @@
 35. src\Artifacts\A31. DCE - Phase 2 - Multimodal Content Extraction (PDF Images).md - Lines: 44 - Chars: 4035 - Tokens: 1009
 36. src\Artifacts\A32. DCE - Phase 1 - Excel and CSV Handling Strategy.md - Lines: 44 - Chars: 4295 - Tokens: 1074
 37. src\Artifacts\A33. DCE - Phase 1 - Copy-Paste Feature Plan.md - Lines: 42 - Chars: 4456 - Tokens: 1114
-38. src\Artifacts\A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements.md - Lines: 42 - Chars: 6006 - Tokens: 1502
-39. src\Artifacts\A35. DCE - Phase 2 - UI Mockups and Flow.md - Lines: 109 - Chars: 8162 - Tokens: 2041
-40. src\Artifacts\A36. DCE - Phase 2 - Technical Implementation Plan.md - Lines: 58 - Chars: 3839 - Tokens: 960
+38. src\Artifacts\A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements.md - Lines: 44 - Chars: 6403 - Tokens: 1601
+39. src\Artifacts\A35. DCE - Phase 2 - UI Mockups and Flow.md - Lines: 102 - Chars: 7210 - Tokens: 1803
+40. src\Artifacts\A36. DCE - Phase 2 - Technical Implementation Plan.md - Lines: 65 - Chars: 3766 - Tokens: 942
 41. src\Artifacts\A37. DCE - Phase 2 - Cycle Navigator & Knowledge Graph - Vision.md - Lines: 28 - Chars: 3242 - Tokens: 811
 42. src\Artifacts\A38. DCE - Phase 2 - Cycle Navigator - UI Mockup.md - Lines: 69 - Chars: 4621 - Tokens: 1156
 43. src\Artifacts\A39. DCE - Phase 2 - Cycle Navigator - Technical Plan.md - Lines: 100 - Chars: 4993 - Tokens: 1249
@@ -78,7 +78,7 @@
 54. src\Artifacts\A46. DCE - Phase 2 - Paste and Parse Response - Feature Plan.md - Lines: 38 - Chars: 3587 - Tokens: 897
 55. src\Artifacts\A47. DCE - Phase 2 - Prompt Amalgamation Feature Plan.md - Lines: 42 - Chars: 3499 - Tokens: 875
 56. src\Artifacts\A48. DCE - Phase 2 - Advanced Syntax Highlighting Plan.md - Lines: 49 - Chars: 4044 - Tokens: 1011
-57. src\Artifacts\A49. DCE - Phase 2 - File Association & Diffing Plan.md - Lines: 43 - Chars: 4390 - Tokens: 1098
+57. src\Artifacts\A49. DCE - Phase 2 - File Association & Diffing Plan.md - Lines: 48 - Chars: 4502 - Tokens: 1126
 58. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
 59. src\Artifacts\A50. DCE - Phase 2 - UI Component Plan (Resizable Panes & Inner Editors).md - Lines: 48 - Chars: 4790 - Tokens: 1198
 60. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
@@ -113,8 +113,8 @@
 89. src\client\views\index.ts - Lines: 35 - Chars: 1714 - Tokens: 429
 90. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 91. src\client\views\parallel-copilot.view\on-message.ts - Lines: 39 - Chars: 1845 - Tokens: 462
-92. src\client\views\parallel-copilot.view\view.scss - Lines: 255 - Chars: 5610 - Tokens: 1403
-93. src\client\views\parallel-copilot.view\view.tsx - Lines: 246 - Chars: 11687 - Tokens: 2922
+92. src\client\views\parallel-copilot.view\view.scss - Lines: 280 - Chars: 6073 - Tokens: 1519
+93. src\client\views\parallel-copilot.view\view.tsx - Lines: 265 - Chars: 12789 - Tokens: 3198
 94. src\common\ipc\channels.enum.ts - Lines: 64 - Chars: 3412 - Tokens: 853
 95. src\common\ipc\channels.type.ts - Lines: 57 - Chars: 4453 - Tokens: 1114
 96. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
@@ -2654,7 +2654,7 @@ To achieve greater feature parity with the native VS Code Explorer and improve w
 # Artifact A34: DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements
 # Date Created: C69
 # Author: AI Model
-# Updated on: C90 (Add Markdown rendering and collapsible sections)
+# Updated on: C91 (Add global parse toggle and Associated Files list)
 
 - **Key/Value for A0:**
 - **Description:** Outlines the high-level vision and user stories for the Phase 2 multi-tabbed editor panel, designed for comparing and managing multiple AI-generated responses. Includes plans for response annotation and a "Cycles Context" field.
@@ -2666,19 +2666,20 @@ Phase 2 of the Data Curation Environment aims to solve the "single-threaded" nat
 
 The goal of the **Parallel Co-Pilot Panel** is to create an integrated, **persistent** environment within VS Code specifically for managing, comparing, diffing, and testing multiple AI-generated code responses.
 
-**Core Workflow (C89 Update):** The primary interaction model is now **parse-centric**. The user pastes a raw, complete AI response into a simple text area. The extension then parses this raw text into a structured, read-only view, separating the AI's plan from its code artifacts. This transforms the panel from a simple text editor into an intelligent review and analysis tool.
+**Core Workflow (C91 Update):** The primary interaction model is now **parse-centric** and **globally controlled**. The user pastes raw AI responses into simple text areas in each tab. A single, global "Parse All" button then processes the raw text in all tabs simultaneously, transforming their UIs into a structured, read-only view. This view separates the AI's plan from its code artifacts and includes a new "Associated Files" list for at-a-glance validation.
 
 ## 2. Core Concepts
 
 1.  **Dedicated View Container:** The panel has its own icon in the Activity Bar, providing a distinct, full-height space for its UI.
 2.  **Stateful & Persistent:** The content of all tabs, context fields, and the current cycle number are automatically saved. The state persists across sessions and when moving the panel to a new window.
-3.  **Parse-on-Demand:** Each tab starts as a simple `textarea`. After the user pastes a response, a "Parse Response" button processes the raw text.
-4.  **Structured, Readable View:** After parsing, the `textarea` is replaced by a static, read-only view that:
+3.  **Global Parse-on-Demand:** A single "Parse All Responses" button in the main header controls the view mode for all tabs.
+4.  **Structured, Readable View:** After parsing, each tab's `textarea` is replaced by a static, read-only view that:
     *   Renders the AI's summary and plan as **formatted Markdown**.
     *   Uses **collapsible sections** for the main UI areas (Cycle Info, Summary, etc.) to manage screen real estate.
+    *   Displays an **"Associated Files" list** with indicators (`✓`/`✗`) showing if the files exist in the workspace.
     *   Displays individual, **syntax-highlighted** code blocks for each file.
 5.  **Live Testing via "Swap":** The core innovation is a "swap" feature. The user can, with a single click, exchange the content of a parsed file block with its corresponding source file in the workspace.
-6.  **Integrated Diffing:** Users can click on a file detected in a response to see an immediate diff view comparing the AI's suggestion against the current workspace file.
+6.  **Integrated Diffing:** Users can click on a file in the "Associated Files" list to see an immediate diff view comparing the AI's suggestion against the current workspace file.
 7.  **Cycle Navigator:** A UI to navigate back and forth through the history of development cycles, loading the corresponding AI responses for each cycle.
 8.  **Metadata Display:** Each response tab will display key metadata, such as token counts and similarity scores, to help the user quickly evaluate the AI's output.
 
@@ -2687,37 +2688,38 @@ The goal of the **Parallel Co-Pilot Panel** is to create an integrated, **persis
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
 | P2-US-01 | **Manage Multiple Responses** | As a developer, I want a dedicated panel with multiple tabs where I can place different AI-generated code responses, so I can keep them organized. | - A new icon in the Activity Bar opens the Parallel Co-Pilot panel. <br> - The panel contains a slider or input to select the number of visible tabs. <br> - Each tab initially contains a large text input area. |
-| P2-US-02 | **Parse Raw Responses** | As a developer, after pasting an AI response, I want to click a button to parse it into a structured view, so I can easily distinguish between the AI's plan and the code it produced. | - Each tab has a "Parse Response" button. <br> - Clicking it processes the raw text. <br> - The UI transforms to show distinct, labeled sections for the AI's summary, course of action, and individual file blocks. |
-| P2-US-03 | **View Formatted Text** | As a developer, I want the AI's summary and plan to be rendered as formatted Markdown, so I can easily read lists, bolded text, and other formatting. | - The summary and course of action sections correctly render Markdown syntax (headers, lists, bold, inline code, etc.). |
-| P2-US-04 | **Manage UI Space** | As a developer, I want to be able to collapse the main sections of the UI (like the cycle context area or the summary), so I can focus on the code blocks without excessive scrolling. | - The Cycle Info, Summary, and Course of Action sections have headers with chevrons. <br> - Clicking a section header collapses or expands its content. <br> - The collapsed state is managed independently for each section. |
-| P2-US-05 | **Persistent State** | As a developer, I want all the text I've entered into the panel (response tabs, context fields) to be saved automatically, so I don't lose my work if I close the panel, move it, or restart VS Code. | - All raw text content is saved to a history file (`.vscode/dce_history.json`). <br> - When the panel is reopened, it loads the state from the most recent cycle. |
-| P2-US-06 | **Review Changes with Diff** | As a developer, I want to see a list of files affected by an AI response and click on any of them to see a diff, so I can review the exact changes before testing. | - The parsed view lists all detected file paths. <br> - A checkmark appears next to files that exist in the workspace. <br> - Clicking a file path opens a diff view comparing the workspace version with the AI's version. |
-| P2-US-07 | **Navigate Cycle History** | As a developer, I want to navigate backward and forward through my project's development cycles, so I can review past AI suggestions. | - UI controls exist to move between cycles. <br> - Navigating to a past cycle loads its saved raw responses into the panel. |
+| P2-US-02 | **Parse All Responses** | As a developer, after pasting responses into multiple tabs, I want to click a single button to parse all of them into a structured view, so I can easily review them without repetitive clicking. | - A global "Parse All Responses" button exists in the panel's header. <br> - Clicking it processes the raw text in every tab. <br> - Each tab's UI transforms to show distinct sections for summary, action plan, and file blocks. <br> - A corresponding "Un-Parse All" button reverts all tabs to their raw text view. |
+| P2-US-03 | **View Formatted Text** | As a developer, I want the AI's summary and plan to be rendered as formatted Markdown, so I can easily read lists, bolded text, and other formatting. | - The summary and course of action sections correctly render Markdown syntax. |
+| P2-US-04 | **Manage UI Space** | As a developer, I want to be able to collapse the main sections of the UI, so I can focus on the code blocks without excessive scrolling. | - The Cycle Info, Summary, Course of Action, and Associated Files sections have collapsible headers. |
+| P2-US-05 | **Verify Response Validity** | As a developer, I want to see a list of all files an AI response intends to modify, with a clear indicator of whether those files exist in my project, so I can immediately spot hallucinations or new file suggestions. | - After parsing, a list of "Associated Files" is displayed. <br> - A checkmark (`✓`) appears next to files that exist in the workspace. <br> - An 'x' (`✗`) appears next to files that do not exist. |
+| P2-US-06 | **Persistent State** | As a developer, I want all the text I've entered into the panel to be saved automatically, so I don't lose my work if I close the panel, move it, or restart VS Code. | - All raw text content is saved to a history file (`.vscode/dce_history.json`). <br> - When the panel is reopened, it loads the state from the most recent cycle. |
+| P2-US-07 | **Review Changes with Diff** | As a developer, I want to click on any file in the "Associated Files" list to see a diff, so I can review the exact changes before testing. | - Clicking a file path in the list opens a diff view comparing the workspace version with the AI's version. |
+| P2-US-08 | **Navigate Cycle History** | As a developer, I want to navigate backward and forward through my project's development cycles, so I can review past AI suggestions. | - UI controls exist to move between cycles. <br> - Navigating to a past cycle loads its saved raw responses into the panel. |
 </file>
 
 <file path="src/Artifacts/A35. DCE - Phase 2 - UI Mockups and Flow.md">
 # Artifact A35: DCE - Phase 2 - UI Mockups and Flow
 # Date Created: C69
 # Author: AI Model
-# Updated on: C90 (Add collapsible sections and specify markdown rendering)
+# Updated on: C91 (Add global parse toggle and Associated Files list)
 
 ## 1. Overview
 
-This document describes the user interface (UI) and interaction flow for the Parallel Co-Pilot Panel. The design is now centered around a two-stage workflow: **Input & Parse**, followed by **Review & Act**. The UI transforms from a simple text input to a structured, read-only view to support this workflow, with collapsible sections for better layout management.
+This document describes the user interface (UI) and interaction flow for the Parallel Co-Pilot Panel. The design is centered around a two-stage workflow: **Input**, followed by a global **Parse** that transforms the entire panel into a **Review & Act** mode. The UI now includes an "Associated Files" list for quick validation.
 
 ## 2. UI Mockup (Textual Description)
 
 ### 2.1. Stage 1: Raw Input View
 
-This is the initial state of a tab, or the state before the "Parse" button is clicked.
+This is the initial state of the panel.
 
 ```
 +-------------------------------------------------------------------------------------+
-| [Parallel Co-Pilot] [Toolbar: Generate Prompt, Settings, etc.]                      |
+| [Parallel Co-Pilot] [Toolbar: Generate Prompt, [ Parse All ], Settings, etc.]       |
 |-------------------------------------------------------------------------------------|
 | [v] Cycle Info & Context                                                            |
 | |-----------------------------------------------------------------------------------|
-| | Cycle: [ < ] [ C88 ] [ > ]  [ Cycle Title Input: fix ts error, continue... ]      |
+| | Cycle: [ < ] [ C91 ] [ > ]  [ Cycle Title Input: global parse toggle... ]         |
 | |-----------------------------------------------------------------------------------|
 | | [Cycle Context (Permanent notes)]          [Ephemeral Context (Temp logs)]        |
 | | +----------------------------------------+ +------------------------------------+ |
@@ -2726,18 +2728,13 @@ This is the initial state of a tab, or the state before the "Parse" button is cl
 |-------------------------------------------------------------------------------------|
 | [ Response 1 (active) ] [ Response 2 ] [ Response 3 ] [ + ]                         |
 |-------------------------------------------------------------------------------------|
-| [ Toolbar: [ Parse Response ] ]                                                     |
-|-------------------------------------------------------------------------------------|
 | [ Response 1 Content Area - Stretches to fill vertical space ]                      |
 | |                                                                                 | |
 | | +-----------------------------------------------------------------------------+ | |
 | | | <textarea>                                                                  | | |
-| | | I've analyzed the request...                                                | | |
-| | |                                                                             | | |
-| | | ### Course of Action                                                        | | |
+| | | I've analyzed your feedback...                                                | | |
 | | | ...                                                                         | | |
-| | | <src/main.ts>...</main.ts>                                                  | | |
-| | |                                                                             | | |
+| | | <src/main.ts>...</src/main.ts>                                                  | | |
 | | +-----------------------------------------------------------------------------+ | |
 | |                                                                                 | |
 +-------------------------------------------------------------------------------------+
@@ -2745,38 +2742,35 @@ This is the initial state of a tab, or the state before the "Parse" button is cl
 
 ### 2.2. Stage 2: Parsed View
 
+After clicking `[ Parse All ]`, all tabs transform simultaneously.
+
 ```
 +-------------------------------------------------------------------------------------+
-| [Parallel Co-Pilot] [Toolbar: Generate Prompt, Settings, etc.]                      |
+| [Parallel Co-Pilot] [Toolbar: Generate Prompt, [ Un-Parse All ], Settings, etc.]    |
 |-------------------------------------------------------------------------------------|
 | [v] CYCLE & CONTEXT                                                                 |
-| |---------------------------------------------------------------------------------| |
-| | Cycle: [ < ] [ C90 ] [ > ]  [ Cycle Title Input: markdown rendering... ]        | |
-| |---------------------------------------------------------------------------------| |
-| | [Cycle Context (Permanent notes)]      [Ephemeral Context (Temp logs)]          | |
-| | +--------------------------------------+ +------------------------------------+ | |
-| | | Multi-line text area...              | | Multi-line text area...            | | |
-| | +--------------------------------------+ +------------------------------------+ | |
+| | ... (content is the same as above, but may be collapsed) ...                    | |
 |-------------------------------------------------------------------------------------|
 | [ Response 1 (active) ] [ Response 2 ] [ Response 3 ] [ + ]                         |
-|-------------------------------------------------------------------------------------|
-| [ Toolbar: [ Un-Parse ] [METADATA] Tokens: 8.1K | Files: 3 (3 matched ✓) ]          |
 |-------------------------------------------------------------------------------------|
 | [ Response 1 Content Area - Stretches to fill vertical space, scrollable ]          |
 | |                                                                                 | |
 | | [v] SUMMARY & PLAN                                                              | |
 | | |-----------------------------------------------------------------------------| | |
 | | | > I've analyzed your feedback...                                            | | |
-| | | > The next steps are to implement **markdown rendering**.                   | | |
 | |                                                                                 | |
 | | [v] COURSE OF ACTION                                                            | |
 | | |-----------------------------------------------------------------------------| | |
 | | | 1.  **Documentation First:** I will update the artifacts.                   | | |
-| | | 2.  **Implement UI:** I will add collapsible sections.                      | | |
 | |                                                                                 | |
-| | [ FILE: src/main.ts ] [Diff] [Swap]                                             | |
+| | [v] ASSOCIATED FILES                                                            | |
+| | |-----------------------------------------------------------------------------| | |
+| | | [✓] src/client/views/parallel-copilot.view/view.tsx [Diff]                  | | |
+| | | [✗] src/client/views/a-new-file.ts [Create]                                 | | |
+| |                                                                                 | |
+| | [ FILE: src/client/views/parallel-copilot.view/view.tsx ] [Swap]                | |
 | | +-----------------------------------------------------------------------------+ | |
-| | | [ Read-only, syntax-highlighted code viewer for main.ts ]                   | | |
+| | | [ Read-only, syntax-highlighted code viewer... ]                            | | |
 | | +-----------------------------------------------------------------------------+ | |
 | |                                                                                 | |
 +-------------------------------------------------------------------------------------+
@@ -2784,34 +2778,35 @@ This is the initial state of a tab, or the state before the "Parse" button is cl
 
 ### 2.1. UI Components Breakdown
 
-1.  **Collapsible Sections:**
-    *   The main UI is now organized into collapsible "accordion" sections.
-    *   **`[v] CYCLE & CONTEXT`**: This section contains the Cycle Navigator and the two context `textarea` fields. Clicking the header toggles its visibility.
-    *   **`[v] SUMMARY & PLAN`**: In the parsed view, this section contains the AI's high-level summary. It is also collapsible.
-    *   **`[v] COURSE OF ACTION`**: Contains the AI's course of action, also collapsible.
-    *   Each header shows a chevron (`v` or `>`) to indicate its expanded or collapsed state.
+1.  **Global Toolbar:**
+    *   The `[ Parse All ]` / `[ Un-Parse All ]` button is now in the main header, controlling the state of all tabs at once.
 
-2.  **Markdown Content Rendering:**
-    *   The content within the "Summary & Plan" and "Course of Action" sections is no longer plain text.
-    *   It is rendered as rich markdown, correctly displaying formatting such as **bold text**, `inline code`, bulleted lists (`*` or `-`), and numbered lists (`1.`).
+2.  **Collapsible Sections:**
+    *   The UI is organized into collapsible "accordion" sections.
+    *   **`[v] CYCLE & CONTEXT`**: Contains the Cycle Navigator and context fields.
+    *   **`[v] SUMMARY & PLAN`**: Renders the AI's summary as formatted Markdown.
+    *   **`[v] COURSE OF ACTION`**: Renders the AI's plan as formatted Markdown.
+    *   **`[v] ASSOCIATED FILES`**: A new section that lists all file paths detected in the response.
 
-3.  **File Blocks:**
-    *   Each file block remains distinct.
-    *   The code content within each block is rendered with full, theme-aware syntax highlighting.
+3.  **Associated Files List:**
+    *   This new component provides a scannable list of all files the AI response intends to modify.
+    *   **Status Icon:** A `✓` indicates the file exists in the workspace. A `✗` indicates it does not.
+    *   **Actions:** Each file has a `[Diff]` button to compare changes. Non-existent files could have a `[Create]` button.
 
 ## 3. User Interaction Flow
 
-1.  **Paste & Parse:** The user pastes a raw AI response and clicks `[ Parse Response ]`. The UI transforms into the structured view.
-2.  **Layout Management:** The user can now click the headers for "CYCLE & CONTEXT", "SUMMARY & PLAN", etc., to collapse any sections they don't currently need, allowing them to focus on the file blocks or the plan itself.
-3.  **Review:** The user reviews the formatted summary and course of action, which are now much easier to read with proper markdown rendering.
-4.  **Act:** The user can scroll down to the file blocks to review the syntax-highlighted code and use the `[Diff]` or `[Swap]` actions.
+1.  **Paste & Parse:** The user pastes raw AI responses into one or more tabs. They then click the global `[ Parse All ]` button.
+2.  **Global UI Transform:** All tabs switch from their `textarea` view to the structured, parsed view.
+3.  **Validation:** The user can immediately look at the "Associated Files" list in a tab to see if the AI has hallucinated any file paths (`✗`) or is correctly targeting existing ones (`✓`).
+4.  **Review:** The user can collapse sections they don't need (e.g., the plan) to focus on the file list or the code blocks.
+5.  **Act:** The user can click `[Diff]` on an associated file to review changes, or `[Swap]` on a file block to test the code.
 </file>
 
 <file path="src/Artifacts/A36. DCE - Phase 2 - Technical Implementation Plan.md">
 # Artifact A36: DCE - Phase 2 - Technical Implementation Plan
 # Date Created: C69
 # Author: AI Model
-# Updated on: C90 (Add plan for collapsible sections and markdown rendering)
+# Updated on: C91 (Add plan for global parse toggle and file existence check)
 
 - **Key/Value for A0:**
 - **Description:** Details the technical approach for building the Parallel Co-Pilot Panel, including the new webview provider, state management, IPC channels, and backend logic for file content swapping.
@@ -2819,53 +2814,60 @@ This is the initial state of a tab, or the state before the "Parse" button is cl
 
 ## 1. Overview
 
-This document outlines the technical implementation strategy for the Parallel Co-Pilot Panel. It involves creating a new, dedicated webview and the associated backend services to manage its state and perform file operations. The core of this plan is the new parse-centric workflow, with a rich UI featuring collapsible sections and full markdown/syntax highlighting.
+This document outlines the technical implementation strategy for the Parallel Co-Pilot Panel. The plan is updated to reflect two major changes: a global parse/un-parse toggle and a new "Associated Files" list with backend-driven file existence validation.
 
 ## 2. Core Components
 
 ### 2.1. Frontend State Management (`view.tsx`)
 
-The main component state will be expanded to manage the UI's collapsible sections.
+The main component state will be refactored to handle the global view mode.
 
 ```typescript
 // State within the view.tsx component
 interface PcppState {
   // ... state for cycle nav, context fields, tabs, etc.
-  isCycleSectionCollapsed: boolean;
-  isSummaryCollapsed: boolean;
-  isCourseOfActionCollapsed: boolean;
-  highlightedCodeBlocks: Map<string, string>; // Maps file content to highlighted HTML
+  isParsedMode: boolean; // NEW: Global toggle for all tabs
+  fileExistenceMap: Map<string, boolean>; // NEW: Caches file existence status
+  // ... collapsible section states
+}
+
+interface TabState {
+    rawContent: string;
+    parsedContent: ParsedResponse | null;
 }
 ```
-*   **Collapsible State:** Three new boolean state variables will control the visibility of the main UI sections. `onClick` handlers on the section headers will toggle these states.
-*   **Conditional Rendering:** The content divs for these sections will be conditionally rendered based on these state flags.
-*   **Highlighted Code Cache:** A new `Map` will be added to the state to cache the syntax-highlighted HTML for code blocks, preventing redundant IPC calls.
+*   **Global Parse State:** A new `isParsedMode` boolean will control the rendering of all tabs. The main toolbar button will toggle this state.
+*   **File Existence Cache:** A new `Map` will store the results from the backend about whether a file path exists.
+*   **Parsing on Demand:** The `onClick` handler for the "Parse All" button will iterate through the `tabs` state object. For any tab where `rawContent` exists but `parsedContent` is `null`, it will call the `parseResponse` utility and update that tab's state.
 
-### 2.2. Frontend Rendering (`view.tsx`)
+### 2.2. Frontend Rendering & Logic (`view.tsx`)
 
-1.  **Markdown Rendering:**
-    *   **Dependency:** The `react-markdown` library will be added to `package.json`.
-    *   **Implementation:** The `summary` and `courseOfAction` strings from the `parsedContent` object will be rendered using the `<ReactMarkdown>` component. This will handle all standard markdown formatting (lists, bold, etc.) automatically.
+1.  **Associated Files List:**
+    *   After parsing a response, the frontend will collect all unique file paths from all tabs.
+    *   It will send a single `RequestFileExistence` IPC message to the backend with this aggregated list of paths.
+    *   An IPC listener for `SendFileExistence` will update the `fileExistenceMap` state.
+    *   A new `AssociatedFilesList` component will be rendered in each tab's parsed view. It will receive the `parsedContent.filesUpdated` array and the `fileExistenceMap` as props. It will then render the list with the correct status icons (`✓`/`✗`).
 
-2.  **Syntax Highlighting:**
-    *   **IPC:** The `RequestSyntaxHighlight` and `SendSyntaxHighlight` channels will be used.
-    *   **Workflow:**
-        1.  After parsing a response, the frontend will iterate through `parsedContent.files`.
-        2.  For each file, it will generate a unique key (e.g., the file path + content hash) and check if the highlighted HTML already exists in the `highlightedCodeBlocks` map.
-        3.  If not, it will send a `RequestSyntaxHighlight` message to the backend with the code content, language, and the unique key.
-        4.  An IPC listener for `SendSyntaxHighlight` will update the `highlightedCodeBlocks` map with the returned HTML.
-    *   **Rendering:** The component that renders a file block will look up its content in the map and use `dangerouslySetInnerHTML` to display the highlighted code.
+2.  **Markdown & Syntax Highlighting:**
+    *   This implementation remains the same as in C90. `react-markdown` will render the plan sections, and `@wooorm/starry-night` on the backend will provide HTML for syntax-highlighted code blocks.
 
-### 2.3. Backend Syntax Highlighting (`fs.service.ts`)
+### 2.3. Backend File Existence Check (`fs.service.ts`)
 
-*   A new handler, `handleSyntaxHighlightRequest`, will be implemented.
-*   **Library:** It will use the `@wooorm/starry-night` library.
+*   **New IPC Handler:** A new handler, `handleFileExistenceRequest`, will be implemented.
 *   **Logic:**
-    1.  It will receive the code string, language identifier (e.g., "typescript"), and the unique key.
-    2.  It will map the language identifier to a `starry-night` scope (e.g., "typescript" -> "source.ts").
-    3.  It will call `starryNight.highlight(code, scope)`.
-    4.  It will convert the resulting HAST (HTML Abstract Syntax Tree) to an HTML string using `hast-util-to-html`.
-    5.  It will send the HTML string and the unique key back to the client via `SendSyntaxHighlight`.
+    1.  It will receive an array of file paths: `{ paths: string[] }`.
+    2.  It will iterate through the paths. For each path, it will use `vscode.workspace.fs.stat(vscode.Uri.file(path))` inside a `try...catch` block.
+    3.  It will build a result map: `existenceMap: { [path: string]: boolean }`. If `stat` succeeds, the value is `true`; if it throws an error (e.g., `ENOENT`), the value is `false`.
+    4.  It will send this map back to the client via the `SendFileExistence` IPC channel.
+
+### 2.4. IPC Channel Updates
+
+*   **New Channel (`RequestFileExistence`):**
+    *   **Direction:** Client -> Server
+    *   **Payload:** `{ paths: string[] }`
+*   **New Channel (`SendFileExistence`):**
+    *   **Direction:** Server -> Client
+    *   **Payload:** `{ existenceMap: { [path: string]: boolean } }`
 </file>
 
 <file path="src/Artifacts/A37. DCE - Phase 2 - Cycle Navigator & Knowledge Graph - Vision.md">
@@ -3951,6 +3953,7 @@ After research and consideration of alternatives like `refractor`, **`@wooorm/st
 # Artifact A49: DCE - Phase 2 - File Association & Diffing Plan
 # Date Created: C82
 # Author: AI Model
+# Updated on: C91 (Mark file existence check as in-progress)
 
 - **Key/Value for A0:**
 - **Description:** Plans the UI and backend logic to visually link file blocks in an AI response to workspace files and sets the stage for an integrated diff tool.
@@ -3960,31 +3963,35 @@ After research and consideration of alternatives like `refractor`, **`@wooorm/st
 
 To make the "Swap with Source" feature trustworthy and intuitive, users need a clear visual confirmation of which local file an AI-generated code block is intended to replace. This feature introduces a "file association" mechanism that parses AI responses, verifies the existence of the mentioned files, and displays this status to the user. This is the foundational step required before an integrated diff tool can be built.
 
+**Status (C91):** Implementation of the "Associated Files" list and the backend file existence check is in progress.
+
 ## 2. User Stories
 
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
-| P2-ASSOC-01 | **See Affected Files** | As a developer, when I paste an AI response, I want the extension to automatically parse it and show me a list of all the file paths it intends to modify, so I can understand the scope of the proposed changes. | - Pasting a response into a tab triggers a parsing event. <br> - A list of all file paths found in `<file path="...">` tags is displayed within the tab's UI. |
-| P2-ASSOC-02 | **Verify File Existence** | As a developer, for each file listed, I want to see a visual indicator of whether that file already exists in my workspace, so I can spot potential errors or new files proposed by the AI. | - Next to each listed file path, an icon is displayed. <br> - A green checkmark (`✓`) indicates the file exists at that path. <br> - A red cross (`✗`) or question mark (`?`) indicates the file does not exist, alerting me to a potential hallucination or a new file creation. |
+| P2-ASSOC-01 | **See Affected Files** | As a developer, when I parse an AI response, I want the extension to automatically show me a list of all the file paths it intends to modify, so I can understand the scope of the proposed changes. | - After parsing, a collapsible "Associated Files" section appears in the tab's UI. <br> - This section displays a list of all file paths found in the response. |
+| P2-ASSOC-02 | **Verify File Existence** | As a developer, for each file listed, I want to see a visual indicator of whether that file already exists in my workspace, so I can spot potential errors or new files proposed by the AI. | - Next to each listed file path, an icon is displayed. <br> - A green checkmark (`✓`) indicates the file exists at that path. <br> - A red cross (`✗`) indicates the file does not exist, alerting me to a potential hallucination or a new file creation. |
 | P2-ASSOC-03 | **Preview Changes (Diff)** | As a developer, I want to click a "Diff" button next to an associated file to see a side-by-side comparison of the original file and the AI's proposed changes, so I can review the changes before swapping. | - A "Diff" button appears next to each file that is successfully associated (i.e., exists). <br> - Clicking it opens a diff view (modal or new tab) showing the changes. |
 
 ## 3. Technical Implementation Plan
 
 1.  **Frontend - Parsing (`parallel-copilot.view/view.tsx`):**
-    *   Implement the `onPaste` handler as detailed in `A46`. It will use a regex (`/<file path="([^"]+)">/g`) to extract an array of file paths from the pasted text.
-    *   Store this array in the state for the active tab, e.g., `detectedFiles: string[]`.
+    *   The `parseResponse` utility extracts an array of file paths from the pasted text. This is already implemented.
+    *   This array is stored in the `parsedContent.filesUpdated` property of the tab's state.
 
 2.  **Backend - Verification (`fs.service.ts`):**
+    *   **Status (C91):** **In Progress.**
     *   Create a new IPC channel, `RequestFileExistence`, that accepts `{ paths: string[] }`.
-    *   Create a handler `handleFileExistenceRequest` in `fs.service.ts`. This handler will iterate through the received paths, check each one's existence using `vscode.workspace.fs.stat`, and return a map of the results. Using `stat` is better than `access` as it doesn't throw an error for non-existent files.
+    *   Create a handler `handleFileExistenceRequest` in `fs.service.ts`. This handler will iterate through the received paths, check each one's existence using `vscode.workspace.fs.stat`, and return a map of the results.
     *   Create a corresponding `SendFileExistence` channel that sends back `{ existenceMap: { [path: string]: boolean } }`.
 
 3.  **Frontend - UI & State (`parallel-copilot.view/view.tsx`):**
-    *   After parsing paths on paste, immediately send them to the backend via `RequestFileExistence`.
-    *   Add a new state variable to store the result: `const [fileExistence, setFileExistence] = useState<{ [path: string]: boolean }>({});`.
+    *   **Status (C91):** **In Progress.**
+    *   After parsing paths, immediately send them to the backend via `RequestFileExistence`.
+    *   Add a new state variable to store the result: `const [fileExistenceMap, setFileExistenceMap] = useState<Map<string, boolean>>(new Map());`.
     *   Listen for the `SendFileExistence` message and update this state.
-    *   Create a new component, e.g., `AssociatedFilesList`. This component will receive the `detectedFiles` and `fileExistence` maps as props.
-    *   It will render a list of the file paths. For each path, it will look up its status in the `fileExistence` map and display the appropriate icon (e.g., `VscCheck` or `VscError` from `react-icons/vsc`).
+    *   Create a new component, `AssociatedFilesList`. This component will receive the `parsedContent.filesUpdated` array and the `fileExistenceMap` as props.
+    *   It will render a list of the file paths. For each path, it will look up its status in the `fileExistenceMap` and display the appropriate icon (e.g., `VscCheck` or `VscError` from `react-icons/vsc`).
 
 4.  **Diffing (Future Step):**
     *   The "Diff" button will initially be disabled or hidden.
@@ -10038,7 +10045,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
-/* Updated on: C90 (Add styles for collapsible sections) */
+/* Updated on: C91 (Add styles for Associated Files list) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -10254,6 +10261,31 @@ body {
     }
 }
 
+.associated-files-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 2px 4px;
+        font-size: 12px;
+        border-radius: 3px;
+    }
+
+    .status-icon {
+        flex-shrink: 0;
+    }
+    .status-icon.exists {
+        color: var(--vscode-testing-iconPassed);
+    }
+    .status-icon.not-exists {
+        color: var(--vscode-testing-iconFailed);
+    }
+}
+
 .file-block {
     margin-bottom: 12px;
 
@@ -10296,11 +10328,11 @@ body {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
-// Updated on: C90 (Implement collapsible sections and markdown rendering)
+// Updated on: C91 (Implement global parse toggle and Associated Files list)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -10308,7 +10340,6 @@ import { PcppCycle } from '@/backend/services/history.service';
 import { ParsedResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
 import ReactMarkdown from 'react-markdown';
-import crypto from 'crypto';
 
 // Debounce hook
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
@@ -10338,18 +10369,35 @@ const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; i
     </div>
 );
 
+const AssociatedFilesList: React.FC<{ files: string[], existenceMap: Map<string, boolean> }> = ({ files, existenceMap }) => (
+    <ul className="associated-files-list">
+        {files.map(file => (
+            <li key={file}>
+                {existenceMap.get(file) ? (
+                    <VscCheck className="status-icon exists" title="File exists in workspace" />
+                ) : (
+                    <VscError className="status-icon not-exists" title="File not found in workspace" />
+                )}
+                <span>{file}</span>
+            </li>
+        ))}
+    </ul>
+);
+
 
 const App = () => {
     // State
     const [activeTab, setActiveTab] = React.useState(1);
     const [tabCount, setTabCount] = React.useState(4);
-    const [currentCycle, setCurrentCycle] = React.useState(90);
-    const [maxCycle, setMaxCycle] = React.useState(90);
-    const [cycleTitle, setCycleTitle] = React.useState('markdown rendering, collapsible sections');
+    const [currentCycle, setCurrentCycle] = React.useState(91);
+    const [maxCycle, setMaxCycle] = React.useState(91);
+    const [cycleTitle, setCycleTitle] = React.useState('implement feedback');
     const [cycleContext, setCycleContext] = React.useState('');
     const [ephemeralContext, setEphemeralContext] = React.useState('');
     const [tabs, setTabs] = React.useState<{ [key: number]: TabState }>({});
     const [highlightedCodeBlocks, setHighlightedCodeBlocks] = React.useState<Map<string, string>>(new Map());
+    const [fileExistenceMap, setFileExistenceMap] = React.useState<Map<string, boolean>>(new Map());
+    const [isParsedMode, setIsParsedMode] = React.useState(false);
 
     // Collapsible sections state
     const [isCycleCollapsed, setIsCycleCollapsed] = React.useState(false);
@@ -10413,6 +10461,10 @@ const App = () => {
             setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml));
         });
         
+        clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => {
+            setFileExistenceMap(new Map(Object.entries(existenceMap)));
+        });
+
         clientIpc.sendToServer(ClientToServerChannel.RequestCycleHistoryList, {});
         clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: currentCycle });
 
@@ -10425,31 +10477,36 @@ const App = () => {
         }));
     };
 
-    const handleParseResponse = (tabIndex: number) => {
-        const tabState = tabs[tabIndex];
-        if (tabState && tabState.rawContent) {
-            const parsed = parseResponse(tabState.rawContent);
-            setTabs(prev => ({
-                ...prev,
-                [tabIndex]: { ...prev[tabIndex], parsedContent: parsed }
-            }));
+    const handleGlobalParseToggle = () => {
+        const newParseMode = !isParsedMode;
+        setIsParsedMode(newParseMode);
 
-            // Request syntax highlighting for all code blocks
-            parsed.files.forEach(file => {
-                const lang = file.path.split('.').pop() || 'plaintext';
-                const id = `${file.path}::${file.content}`; // Simple unique ID
-                if (!highlightedCodeBlocks.has(id)) {
-                    clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
+        if (newParseMode) {
+            const allFilePaths = new Set<string>();
+            const updatedTabs = { ...tabs };
+
+            Object.entries(updatedTabs).forEach(([tabId, tabState]) => {
+                if (tabState.rawContent && !tabState.parsedContent) {
+                    const parsed = parseResponse(tabState.rawContent);
+                    updatedTabs[Number(tabId)].parsedContent = parsed;
+                    
+                    parsed.files.forEach(file => {
+                        allFilePaths.add(file.path);
+                        const lang = file.path.split('.').pop() || 'plaintext';
+                        const id = `${file.path}::${file.content}`;
+                        if (!highlightedCodeBlocks.has(id)) {
+                             clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
+                        }
+                    });
+                } else if (tabState.parsedContent) {
+                    tabState.parsedContent.files.forEach(file => allFilePaths.add(file.path));
                 }
             });
+            setTabs(updatedTabs);
+            if (allFilePaths.size > 0) {
+                clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) });
+            }
         }
-    };
-
-    const handleUnparseResponse = (tabIndex: number) => {
-        setTabs(prev => ({
-            ...prev,
-            [tabIndex]: { ...prev[tabIndex], parsedContent: null }
-        }));
     };
 
     const handleCycleChange = (newCycle: number) => {
@@ -10463,15 +10520,21 @@ const App = () => {
 
     return (
         <div className="pc-view-container">
+            <div className="pc-header">
+                <div className="pc-toolbar">
+                    <button onClick={handleGlobalParseToggle}>
+                        <VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}
+                    </button>
+                </div>
+            </div>
+
             <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)}>
-                <div className="pc-header">
-                    <div className="cycle-navigator">
-                        <span>Cycle:</span>
-                        <button onClick={() => handleCycleChange(currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button>
-                        <input type="number" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 1)} className="cycle-input" />
-                        <button onClick={() => handleCycleChange(currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button>
-                        <input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} />
-                    </div>
+                <div className="cycle-navigator">
+                    <span>Cycle:</span>
+                    <button onClick={() => handleCycleChange(currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button>
+                    <input type="number" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 1)} className="cycle-input" />
+                    <button onClick={() => handleCycleChange(currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button>
+                    <input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} />
                 </div>
                 <div className="context-inputs">
                     <textarea className="context-textarea" placeholder="Cycle Context (notes for this cycle)..." value={cycleContext} onChange={e => setCycleContext(e.target.value)} />
@@ -10490,37 +10553,25 @@ const App = () => {
             <div className="tab-content">
                 {activeTab !== null && (
                     <div className="tab-pane">
-                        <div className="pc-toolbar">
-                            {activeTabData?.parsedContent ? (
-                                <button onClick={() => handleUnparseResponse(activeTab)}>Un-Parse</button>
-                            ) : (
-                                <button onClick={() => handleParseResponse(activeTab)}><VscWand /> Parse Response</button>
-                            )}
-                        </div>
-
-                        {activeTabData?.parsedContent ? (
+                        {isParsedMode && activeTabData?.parsedContent ? (
                             <div className="parsed-view">
-                                <div className="parsed-section">
+                                <CollapsibleSection title="Summary & Plan" isCollapsed={false} onToggle={() => {}}>
                                     <ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown>
-                                </div>
-                                <div className="parsed-section">
+                                </CollapsibleSection>
+                                <CollapsibleSection title="Course of Action" isCollapsed={false} onToggle={() => {}}>
                                      <ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown>
-                                </div>
+                                </CollapsibleSection>
+                                <CollapsibleSection title="Associated Files" isCollapsed={false} onToggle={() => {}}>
+                                    <AssociatedFilesList files={activeTabData.parsedContent.filesUpdated} existenceMap={fileExistenceMap} />
+                                </CollapsibleSection>
+
                                 {activeTabData.parsedContent.files.map(file => {
                                     const id = `${file.path}::${file.content}`;
                                     const highlightedHtml = highlightedCodeBlocks.get(id);
                                     return (
                                         <div key={file.path} className="file-block">
-                                            <div className="file-header">
-                                                <span className="file-path">{file.path}</span>
-                                                <div className="file-actions">
-                                                    <button>Diff</button>
-                                                    <button>Swap</button>
-                                                </div>
-                                            </div>
-                                            <div className="file-content-viewer"
-                                                 dangerouslySetInnerHTML={{ __html: highlightedHtml || `<pre><code>${file.content}</code></pre>` }}>
-                                            </div>
+                                            <div className="file-header"><span className="file-path">{file.path}</span></div>
+                                            <div className="file-content-viewer" dangerouslySetInnerHTML={{ __html: highlightedHtml || `<pre><code>${file.content}</code></pre>` }} />
                                         </div>
                                     );
                                 })}
