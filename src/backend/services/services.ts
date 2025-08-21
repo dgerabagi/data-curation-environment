@@ -4,6 +4,8 @@ import { FlattenerService } from "./flattener.service";
 import { SelectionService } from "./selection.service";
 import { LoggerService } from "./logger.service";
 import { ActionService } from "./action.service";
+import { HistoryService } from "./history.service"; // Import HistoryService
+import { PromptService } from "./prompt.service"; // Import PromptService
 import { API as GitAPI } from "../types/git";
 
 // A simple container for services
@@ -13,6 +15,8 @@ class ServiceContainer {
     public selectionService = new SelectionService();
     public loggerService = LoggerService.getInstance();
     public actionService = new ActionService();
+    public historyService = new HistoryService(); // Instantiate HistoryService
+    public promptService = new PromptService(); // Instantiate PromptService
     
     public initialize(gitApi?: GitAPI) {
         this.loggerService.log("Services initializing...");

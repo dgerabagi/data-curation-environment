@@ -1,38 +1,38 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-21T12:32:04.045Z
+  Date Generated: 2025-08-21T15:22:00.941Z
   ---
-  Total Files: 197
-  Total Lines: 16450
-  Total Characters: 745678
-  Approx. Tokens: 186493
+  Total Files: 201
+  Total Lines: 16880
+  Total Characters: 780968
+  Approx. Tokens: 195319
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
 2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
-3. src\backend\services\fs.service.ts (8324 tokens)
+3. src\backend\services\fs.service.ts (8520 tokens)
 4. src\client\views\context-chooser.view\view.tsx (5482 tokens)
 5. src\client\components\tree-view\TreeView.tsx (4424 tokens)
-6. src\Artifacts\A0. DCE Master Artifact List.md (4150 tokens)
+6. src\Artifacts\A0. DCE Master Artifact List.md (4396 tokens)
 7. src\backend\services\flattener.service.ts (3685 tokens)
 8. src\client\views\context-chooser.view\view.scss (3638 tokens)
-9. src\client\components\SelectedFilesView.tsx (3275 tokens)
-10. src\Artifacts\A11. DCE - Regression Case Studies.md (2988 tokens)
+9. src\backend\services\prompt.service.ts (3481 tokens)
+10. src\Artifacts\A11. DCE - Regression Case Studies.md (3388 tokens)
 
 <!-- Full File List -->
 1. .gitignore - Lines: 10 - Chars: 128 - Tokens: 32
 2. .vscodeignore - Lines: 11 - Chars: 356 - Tokens: 89
 3. bootstrap-flattener.js - Lines: 185 - Chars: 5834 - Tokens: 1459
 4. LICENSE - Lines: 21 - Chars: 1090 - Tokens: 273
-5. package.json - Lines: 132 - Chars: 4324 - Tokens: 1081
+5. package.json - Lines: 133 - Chars: 4361 - Tokens: 1091
 6. public\copilot.svg - Lines: 5 - Chars: 445 - Tokens: 112
 7. public\spiral.svg - Lines: 8 - Chars: 459 - Tokens: 115
-8. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 226 - Chars: 16597 - Tokens: 4150
+8. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 238 - Chars: 17581 - Tokens: 4396
 9. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3976 - Tokens: 994
 10. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
-11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 131 - Chars: 11952 - Tokens: 2988
+11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 147 - Chars: 13550 - Tokens: 3388
 12. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 68 - Chars: 4497 - Tokens: 1125
 13. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 43 - Chars: 5476 - Tokens: 1369
 14. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
@@ -73,152 +73,156 @@
 49. src\Artifacts\A41.2. DCE - Phase 2 - Feature Ideation & Competitive Analysis.md - Lines: 40 - Chars: 4566 - Tokens: 1142
 50. src\Artifacts\A42. DCE - Phase 2 - Initial Scaffolding Deployment Script.md - Lines: 246 - Chars: 8264 - Tokens: 2066
 51. src\Artifacts\A43. DCE - Phase 2 - Implementation Roadmap.md - Lines: 72 - Chars: 4909 - Tokens: 1228
-52. src\Artifacts\A44. DCE - Phase 1 - Word Document Handling Strategy.md - Lines: 47 - Chars: 4394 - Tokens: 1099
+52. src\Artifacts\A44. DCE - Phase 1 - Word Document Handling Strategy.md - Lines: 45 - Chars: 4626 - Tokens: 1157
 53. src\Artifacts\A45. DCE - Phase 2 - Pop-out Co-Pilot Window - Feature Plan.md - Lines: 49 - Chars: 4156 - Tokens: 1039
 54. src\Artifacts\A46. DCE - Phase 2 - Paste and Parse Response - Feature Plan.md - Lines: 38 - Chars: 3587 - Tokens: 897
-55. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
-56. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
-57. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
-58. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
-59. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
-60. src\backend\commands\commands.ts - Lines: 98 - Chars: 4333 - Tokens: 1084
-61. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
-62. src\backend\services\action.service.ts - Lines: 73 - Chars: 2471 - Tokens: 618
-63. src\backend\services\flattener.service.ts - Lines: 327 - Chars: 14740 - Tokens: 3685
-64. src\backend\services\fs.service.ts - Lines: 701 - Chars: 33295 - Tokens: 8324
-65. src\backend\services\history.service.ts - Lines: 63 - Chars: 2186 - Tokens: 547
-66. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-67. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
-68. src\backend\services\services.ts - Lines: 25 - Chars: 982 - Tokens: 246
-69. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
-70. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
-71. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
-72. src\client\components\file-tree\FileTree.tsx - Lines: 261 - Chars: 11631 - Tokens: 2908
-73. src\client\components\file-tree\FileTree.utils.ts - Lines: 189 - Chars: 7284 - Tokens: 1821
-74. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13099 - Tokens: 3275
-75. src\client\components\tree-view\TreeView.tsx - Lines: 386 - Chars: 17694 - Tokens: 4424
-76. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
-77. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
-78. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-79. src\client\views\context-chooser.view\on-message.ts - Lines: 143 - Chars: 6146 - Tokens: 1537
-80. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
-81. src\client\views\context-chooser.view\view.tsx - Lines: 432 - Chars: 21927 - Tokens: 5482
-82. src\client\views\index.ts - Lines: 35 - Chars: 1714 - Tokens: 429
-83. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-84. src\client\views\parallel-copilot.view\on-message.ts - Lines: 12 - Chars: 522 - Tokens: 131
-85. src\client\views\parallel-copilot.view\view.scss - Lines: 165 - Chars: 3610 - Tokens: 903
-86. src\client\views\parallel-copilot.view\view.tsx - Lines: 115 - Chars: 5326 - Tokens: 1332
-87. src\common\ipc\channels.enum.ts - Lines: 48 - Chars: 2568 - Tokens: 642
-88. src\common\ipc\channels.type.ts - Lines: 44 - Chars: 3310 - Tokens: 828
-89. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
-90. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-91. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-92. src\common\types\file-node.ts - Lines: 16 - Chars: 567 - Tokens: 142
-93. src\common\types\vscode-webview.d.ts - Lines: 13 - Chars: 357 - Tokens: 90
-94. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
-95. src\common\utils\view-html.ts - Lines: 26 - Chars: 971 - Tokens: 243
-96. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
-97. src\extension.ts - Lines: 159 - Chars: 6869 - Tokens: 1718
-98. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
-99. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
-100. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
-101. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
-102. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
-103. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
-104. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
-105. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
-106. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
-107. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
-108. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
-109. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
-110. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
-111. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
-112. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
-113. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
-114. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
-115. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
-116. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
-117. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
-118. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
-119. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
-120. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
-121. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
-122. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
-123. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
-124. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
-125. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
-126. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
-127. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
-128. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
-129. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
-130. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
-131. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
-132. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
-133. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
-134. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
-135. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
-136. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
-137. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
-138. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
-139. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
-140. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
-141. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
-142. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
-143. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
-144. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
-145. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
-146. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
-147. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
-148. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
-149. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
-150. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
-151. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
-152. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
-153. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
-154. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
-155. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
-156. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
-157. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
-158. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
-159. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
-160. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
-161. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
-162. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
-163. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
-164. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
-165. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-166. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
-167. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
-168. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
-169. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-170. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
-171. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
-172. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
-173. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-174. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
-175. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
-176. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
-177. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
-178. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
-179. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
-180. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
-181. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-182. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
-183. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
-184. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
-185. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
-186. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
-187. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
-188. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
-189. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
-190. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
-191. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
-192. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
-193. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
-194. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
-195. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
-196. tsconfig.json - Lines: 19 - Chars: 457 - Tokens: 115
-197. webpack.config.js - Lines: 84 - Chars: 2302 - Tokens: 576
+55. src\Artifacts\A47. DCE - Phase 2 - Prompt Amalgamation Feature Plan.md - Lines: 42 - Chars: 3499 - Tokens: 875
+56. src\Artifacts\A48. DCE - Phase 2 - Advanced Syntax Highlighting Plan.md - Lines: 53 - Chars: 4323 - Tokens: 1081
+57. src\Artifacts\A49. DCE - Phase 2 - File Association & Diffing Plan.md - Lines: 43 - Chars: 4390 - Tokens: 1098
+58. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
+59. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
+60. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
+61. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
+62. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
+63. src\backend\commands\commands.ts - Lines: 98 - Chars: 4333 - Tokens: 1084
+64. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
+65. src\backend\services\action.service.ts - Lines: 73 - Chars: 2471 - Tokens: 618
+66. src\backend\services\flattener.service.ts - Lines: 327 - Chars: 14740 - Tokens: 3685
+67. src\backend\services\fs.service.ts - Lines: 718 - Chars: 34077 - Tokens: 8520
+68. src\backend\services\history.service.ts - Lines: 63 - Chars: 2186 - Tokens: 547
+69. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
+70. src\backend\services\prompt.service.ts - Lines: 113 - Chars: 13923 - Tokens: 3481
+71. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
+72. src\backend\services\services.ts - Lines: 29 - Chars: 1294 - Tokens: 324
+73. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
+74. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
+75. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
+76. src\client\components\file-tree\FileTree.tsx - Lines: 261 - Chars: 11631 - Tokens: 2908
+77. src\client\components\file-tree\FileTree.utils.ts - Lines: 189 - Chars: 7284 - Tokens: 1821
+78. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13099 - Tokens: 3275
+79. src\client\components\tree-view\TreeView.tsx - Lines: 386 - Chars: 17694 - Tokens: 4424
+80. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
+81. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
+82. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
+83. src\client\views\context-chooser.view\on-message.ts - Lines: 143 - Chars: 6146 - Tokens: 1537
+84. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
+85. src\client\views\context-chooser.view\view.tsx - Lines: 432 - Chars: 21927 - Tokens: 5482
+86. src\client\views\index.ts - Lines: 35 - Chars: 1714 - Tokens: 429
+87. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
+88. src\client\views\parallel-copilot.view\on-message.ts - Lines: 17 - Chars: 801 - Tokens: 201
+89. src\client\views\parallel-copilot.view\view.scss - Lines: 233 - Chars: 5250 - Tokens: 1313
+90. src\client\views\parallel-copilot.view\view.tsx - Lines: 163 - Chars: 8067 - Tokens: 2017
+91. src\common\ipc\channels.enum.ts - Lines: 55 - Chars: 2821 - Tokens: 706
+92. src\common\ipc\channels.type.ts - Lines: 47 - Chars: 3607 - Tokens: 902
+93. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
+94. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+95. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
+96. src\common\types\file-node.ts - Lines: 16 - Chars: 567 - Tokens: 142
+97. src\common\types\vscode-webview.d.ts - Lines: 13 - Chars: 357 - Tokens: 90
+98. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
+99. src\common\utils\view-html.ts - Lines: 26 - Chars: 971 - Tokens: 243
+100. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
+101. src\extension.ts - Lines: 159 - Chars: 6869 - Tokens: 1718
+102. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
+103. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
+104. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
+105. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
+106. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
+107. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
+108. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
+109. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
+110. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
+111. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
+112. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
+113. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
+114. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
+115. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
+116. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
+117. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
+118. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
+119. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
+120. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
+121. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
+122. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
+123. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
+124. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
+125. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
+126. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
+127. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
+128. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
+129. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
+130. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
+131. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
+132. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
+133. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
+134. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
+135. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
+136. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
+137. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
+138. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
+139. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
+140. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
+141. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
+142. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
+143. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
+144. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
+145. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
+146. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
+147. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
+148. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
+149. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
+150. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
+151. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
+152. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
+153. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
+154. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
+155. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
+156. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
+157. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
+158. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
+159. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
+160. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
+161. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
+162. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
+163. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
+164. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
+165. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
+166. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
+167. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
+168. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
+169. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+170. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
+171. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
+172. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
+173. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+174. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
+175. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
+176. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
+177. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+178. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
+179. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
+180. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
+181. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
+182. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
+183. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
+184. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
+185. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+186. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
+187. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
+188. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
+189. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
+190. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
+191. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
+192. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
+193. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
+194. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
+195. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
+196. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
+197. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
+198. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
+199. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
+200. tsconfig.json - Lines: 19 - Chars: 457 - Tokens: 115
+201. webpack.config.js - Lines: 84 - Chars: 2302 - Tokens: 576
 
 <file path=".gitignore">
 node_modules
@@ -589,7 +593,8 @@ SOFTWARE.
         "reflect-metadata": "^0.2.2",
         "pdf-parse": "^1.1.1",
         "xlsx": "^0.18.5",
-        "mammoth": "^1.8.0"
+        "mammoth": "^1.8.0",
+        "react-markdown": "^9.0.1"
     }
 }
 </file>
@@ -617,7 +622,7 @@ SOFTWARE.
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C76 (Add plans for Pop-out Window and Paste/Parse)
+# Updated on: C82 (Add artifacts for Prompt Generation, Syntax Highlighting, and File Association)
 
 ## 1. Purpose
 
@@ -831,6 +836,18 @@ SOFTWARE.
 - **Description:** Details the plan for allowing users to paste a full AI response into a tab, which the extension will then parse to identify file paths referenced within XML tags.
 - **Tags:** feature plan, phase 2, paste, parse, workflow, automation
 
+### A47. DCE - Phase 2 - Prompt Amalgamation Feature Plan
+- **Description:** Details the plan for a "Generate prompt.md" button that will assemble the static schemas, cycle history, and flattened code into a single, complete prompt file.
+- **Tags:** feature plan, phase 2, prompt engineering, automation, workflow
+
+### A48. DCE - Phase 2 - Advanced Syntax Highlighting Plan
+- **Description:** Outlines the strategy to replace the plain textarea in response tabs with a proper code editor component to provide rich syntax highlighting for Markdown and embedded code.
+- **Tags:** feature plan, phase 2, ui, ux, syntax highlighting, monaco, codemirror
+
+### A49. DCE - Phase 2 - File Association & Diffing Plan
+- **Description:** Plans the UI and backend logic to visually link file blocks in an AI response to workspace files and sets the stage for an integrated diff tool.
+- **Tags:** feature plan, phase 2, ui, ux, diff, file association
+
 ## II. Standalone Utilities & Guides
 
 ### A149. Local LLM Integration Plan
@@ -946,7 +963,7 @@ To enhance the data curation process, it is critical for the user to have immedi
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: Cycle 16
 # Author: AI Model & Curator
-# Updated on: C80 (Add details on React race condition for caching)
+# Updated on: C81 (Add case for corrupted/unsupported document files)
 
 - **Key/Value for A0:**
 - **Description:** Documents recurring bugs, their root causes, and codified solutions to prevent future regressions during development.
@@ -957,6 +974,22 @@ To enhance the data curation process, it is critical for the user to have immedi
 This document serves as a living record of persistent or complex bugs that have recurred across multiple development cycles. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 007: Corrupted or Unsupported Document Files
+
+-   **Artifacts Affected:** `src/backend/services/fs.service.ts`, `A44. DCE - Phase 1 - Word Document Handling Strategy.md`
+-   **Cycles Observed:** 81
+-   **Symptom:** Some `.docx` files fail to process with a `Can't find end of central directory` error in the logs, while legacy `.doc` files show an "Unsupported format" message in the UI.
+-   **Root Cause Analysis (RCA):** This is not a bug, but rather the system correctly handling invalid inputs.
+    1.  **Corrupted `.docx`:** The `.docx` format is a standard zip archive. The parsing library (`mammoth`, which uses `jszip`) throws the "central directory" error when a file is not a valid zip archive. This indicates the source file itself is corrupted or was saved incorrectly.
+    2.  **Legacy `.doc`:** The `mammoth` library does not support the old binary `.doc` format. Our documented strategy in `A44` is to explicitly reject these files.
+-   **Codified Solution & Best Practice:**
+    1.  The error handling in `fs.service.ts` is working as intended.
+    2.  The `catch` block in `handleWordToTextRequest` should be enhanced to check for the specific "central directory" error message.
+    3.  When this specific error is caught, a more user-friendly message like "File appears to be corrupted or is not a valid .docx format" should be sent to the frontend.
+    4.  The system should continue to correctly identify `.doc` files and send the "Legacy .doc format not supported" message. This confirms the system is robust against invalid user inputs.
 
 ---
 
@@ -3707,7 +3740,7 @@ This document provides a clear, step-by-step roadmap for the implementation of P
 # Artifact A44: DCE - Phase 1 - Word Document Handling Strategy
 # Date Created: C73
 # Author: AI Model
-# Updated on: C75 (Clarify that legacy .doc format is not supported)
+# Updated on: C81 (Add handling for corrupted .docx files)
 
 - **Key/Value for A0:**
 - **Description:** Defines the strategy for handling Word document files (.docx) by converting them to text on-demand and caching them in memory for flattening.
@@ -3717,16 +3750,20 @@ This document provides a clear, step-by-step roadmap for the implementation of P
 
 To further expand the data curation capabilities of the extension, users need to be able to include the content of Microsoft Word documents (`.docx`). Following the successful virtualization pattern used for PDFs and Excel files, the goal is to extract text from Word documents on-demand and hold it in an in-memory cache. This allows their content to be included in the flattened context without creating temporary files in the user's workspace.
 
-**Note on file formats (C75 Update):** This strategy focuses exclusively on the modern, XML-based `.docx` format. The legacy binary `.doc` format is significantly more complex to parse and is **not supported**. The extension will identify `.doc` files and insert a placeholder in the flattened output rather than attempting to process them.
+## 2. Supported & Unsupported Formats
 
-## 2. User Stories
+-   **Supported:** This strategy focuses exclusively on the modern, XML-based **`.docx`** format.
+-   **Unsupported:** The legacy binary **`.doc`** format is significantly more complex to parse and is **not supported**. The extension will identify `.doc` files and insert a placeholder in the flattened output rather than attempting to process them.
+
+## 3. User Stories
 
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
 | DOCX-01 | **Include Word Document Text in Context** | As a user, when I check a `.docx` file, I want its text content to be extracted and included in the `flattened_repo.md`, so I can use reports and documents as context for the LLM. | - Checking `.docx` files is allowed. <br> - The token count displayed for the file reflects its extracted text content. <br> - When flattened, the text from the document is included within a `<file>` tag. <br> - No temporary files are created in the user's workspace. |
 | DOCX-02 | **Handle Unsupported `.doc` format** | As a user, when I check a legacy `.doc` file, I want the system to acknowledge it but inform me in the output that its content could not be processed, so I am not confused by missing data or corrupted text. | - Checking `.doc` files is allowed. <br> - The token count for `.doc` files remains 0. <br> - When flattened, a clear placeholder comment is included for the `.doc` file, stating that the format is unsupported. |
+| DOCX-03 | **Handle Corrupted `.docx` files** | As a user, if I check a `.docx` file that is corrupted or invalid, I want the extension to fail gracefully and show me an error in the UI, so I know the file has a problem. | - The extension attempts to parse the `.docx` file. <br> - If parsing fails due to file corruption (e.g., it's not a valid zip archive), the token count is set to 0. <br> - An error message (e.g., "File may be corrupted") is displayed in the file's tooltip in the UI. <br> - The flattened output includes a comment indicating the failure. |
 
-## 3. Technical Implementation Plan
+## 4. Technical Implementation Plan
 
 1.  **Dependency:**
     *   The `mammoth` library will be added to `package.json`. It is a popular and effective library for converting `.docx` files to HTML and raw text.
@@ -3734,23 +3771,17 @@ To further expand the data curation capabilities of the extension, users need to
 2.  **Backend (`fs.service.ts`):**
     *   **In-Memory Cache:** A new private cache will be added: `private wordTextCache = new Map<string, { text: string; tokenCount: number }>();`.
     *   **New IPC Handler (`RequestWordToText`):**
-        *   This handler will receive a file path.
-        *   It will first check the `wordTextCache`.
-        *   **If the file is a `.doc` (legacy format):** It will cache a specific "Unsupported Format" message and a token count of 0, then notify the client.
-        *   **If the file is a `.docx` (modern format):** It will read the file buffer, use `mammoth.extractRawText({ buffer })` to get the plain text content, calculate the token count, store the result in the cache, and then return it.
-        *   It will send an `UpdateNodeStats` message back to the client with the new token count.
+        *   This handler will receive a file path. It will first check the cache.
+        *   **If `.doc`:** It will cache an "Unsupported Format" message and a token count of 0, then notify the client.
+        *   **If `.docx`:** It will read the file buffer and attempt to parse it with `mammoth.extractRawText()`.
+        *   **Success:** On success, it will calculate the token count, store the result in the cache, and send the stats to the client.
+        *   **Failure:** The `try...catch` block will inspect the error. If the error message indicates a corrupted file (e.g., from `jszip`), it will create a specific, user-friendly error message and send that to the client with a token count of 0.
 
 3.  **Frontend (`view.tsx`):**
-    *   **On-Demand Extraction:** The main `updateCheckedFiles` function (and the `useEffect` for restored selections) will be modified. When a path ending in `.docx` or `.doc` is checked, it will send a `RequestWordToText` message to the backend.
+    *   **On-Demand Extraction:** The logic for handling checked files and restored selections will be updated to send a `RequestWordToText` message to the backend for `.docx` and `.doc` files.
 
 4.  **Backend (`flattener.service.ts`):**
-    *   **Virtual Content Retrieval:** The `getFileStatsAndContent` method will be updated.
-    *   If it encounters a file path ending in `.docx` or `.doc`, it will retrieve the text from the `wordTextCache` in the `FSService` instead of reading the binary file. If the cached content is the "Unsupported Format" message, that will be used as the file's content.
-
-5.  **UI & Configuration:**
-    *   **IPC:** A new `ClientToServerChannel.RequestWordToText` will be added.
-    *   **File Node:** The `FileNode` type will be updated with an `isWordDoc` flag.
-    *   **Icon (`FileTree.tsx`):** A suitable icon for Word documents will be added to the `getFileIcon` utility.
+    *   **Virtual Content Retrieval:** The flattener will retrieve the text from the `wordTextCache` in the `FSService` instead of reading the binary file. It will correctly handle the "Unsupported Format" and "Corrupted File" messages from the cache.
 </file>
 
 <file path="src/Artifacts/A45. DCE - Phase 2 - Pop-out Co-Pilot Window - Feature Plan.md">
@@ -3844,6 +3875,153 @@ The manual workflow for using the Parallel Co-Pilot involves copying an entire A
     *   It will display a list of the detected file paths, perhaps as clickable links that could set the active `sourceFilePath` for the tab.
 
 3.  **No Backend Changes:** This feature is entirely a frontend concern, involving UI event handling, string parsing, and state management within the React component.
+</file>
+
+<file path="src/Artifacts/A47. DCE - Phase 2 - Prompt Amalgamation Feature Plan.md">
+# Artifact A47: DCE - Phase 2 - Prompt Amalgamation Feature Plan
+# Date Created: C82
+# Author: AI Model
+
+- **Key/Value for A0:**
+- **Description:** Details the plan for a "Generate prompt.md" button that will assemble the static schemas, cycle history, and flattened code into a single, complete prompt file.
+- **Tags:** feature plan, phase 2, prompt engineering, automation, workflow
+
+## 1. Overview & Goal
+
+The process of constructing the final `prompt.md` file is a core part of the curator's workflow. It involves manually assembling several distinct pieces of content: static schemas, the cycle history, and the dynamically generated `flattened_repo.md`. This is a repetitive and error-prone task. The goal of this feature is to automate this process with a single button click, generating a complete, perfectly formatted `prompt.md` file on demand.
+
+## 2. User Story
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| P2-PROMPT-01 | **Generate Complete Prompt** | As a curator, I want to click a button to generate a complete `prompt.md` file that includes all my standard schemas, the project's cycle history, and the latest flattened code, so I can start my next development cycle with zero manual setup. | - A "Generate `prompt.md`" button is available in the Parallel Co-Pilot Panel UI. <br> - A "Cycle Title" input field is available next to the cycle navigator. <br> - Clicking the button creates or overwrites `prompt.md` in the workspace root. <br> - The generated file has the correct structure: static schemas, then the dynamic cycle overview, then the content of `flattened_repo.md`. <br> - The cycle overview is built from the `dce_history.json` file and includes the title from the new input field. |
+
+## 3. Technical Implementation Plan
+
+1.  **UI (`parallel-copilot.view/view.tsx`):**
+    *   Add a "Generate `prompt.md`" button to the main header toolbar.
+    *   Add a new state variable and a corresponding `<input type="text">` element for the "Cycle Title" next to the cycle navigator.
+    *   The button's `onClick` handler will send a new IPC message to the backend.
+
+2.  **IPC Channels:**
+    *   `ClientToServerChannel.RequestCreatePromptFile`: Payload will be `{ cycleTitle: string, currentCycle: number }`.
+
+3.  **Backend (New `prompt.service.ts`):**
+    *   Create a new `PromptService` to encapsulate the logic.
+    *   **Static Templates:** The service will contain private string constants holding the content for `<M1. artifact schema>`, `<M3. Interaction Schema>`, and `<M4. current project scope>`.
+    *   **`generatePromptFile` Method:** This method will be the core of the service.
+        1.  It will receive the `cycleTitle` and `currentCycle` from the IPC message.
+        2.  It will read the `dce_history.json` file (using `HistoryService`) to build the `<M2. cycle overview>` section dynamically.
+        3.  It will read the entire content of `flattened_repo.md`.
+        4.  It will assemble these strings in the correct order into a single, large string.
+        5.  It will write this final string to `prompt.md` in the workspace root using `vscode.workspace.fs.writeFile`.
+        6.  It will show a `showInformationMessage` to confirm completion.
+
+4.  **Integration:**
+    *   The new `PromptService` will be instantiated in `services.ts`.
+    *   A new handler for `RequestCreatePromptFile` will be added to the `on-message.ts` for the Parallel Co-Pilot view, which will call the `PromptService`.
+</file>
+
+<file path="src/Artifacts/A48. DCE - Phase 2 - Advanced Syntax Highlighting Plan.md">
+# Artifact A48: DCE - Phase 2 - Advanced Syntax Highlighting Plan
+# Date Created: C82
+# Author: AI Model
+
+- **Key/Value for A0:**
+- **Description:** Outlines the strategy to replace the plain textarea in response tabs with a proper code editor component to provide rich syntax highlighting for Markdown and embedded code.
+- **Tags:** feature plan, phase 2, ui, ux, syntax highlighting, monaco, codemirror
+
+## 1. Overview & Goal
+
+AI-generated responses are complex documents, containing both explanatory Markdown text and code blocks in various languages. A plain `<textarea>` element does not provide any syntax highlighting, making these responses difficult to read and analyze. The goal of this feature is to significantly enhance the readability of AI responses by replacing the textareas with a proper code editor component that can provide rich, language-aware syntax highlighting.
+
+## 2. User Story
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| P2-SYNTAX-01 | **View Highlighted Responses** | As a developer, I want to see AI responses with full syntax highlighting inside the Parallel Co-Pilot tabs, so I can easily distinguish between comments, keywords, and code, just like in a real editor. | - The content area of each response tab renders with syntax highlighting. <br> - Standard Markdown elements (headers, lists, bold, italics, backticks) are formatted correctly. <br> - Code blocks (e.g., ` ```typescript ... ``` `) are highlighted with the correct grammar for the specified language. <br> - The editor component should be theme-aware, matching the user's current VS Code theme. |
+
+## 3. Technical Implementation Strategy
+
+### 3.1. Choosing a Library
+
+A simple Markdown renderer is insufficient because it cannot handle language-specific highlighting within code blocks. A full-featured code editor component is required.
+
+-   **Option A: Monaco Editor (`@monaco-editor/react`)**
+    -   **Pros:** This is the editor that powers VS Code itself. It provides the most authentic look and feel, supports all the same languages and themes, and is extremely powerful.
+    -   **Cons:** It can be heavy and complex to configure within a Webpack-based webview.
+-   **Option B: CodeMirror (`@uiw/react-codemirror`)**
+    -   **Pros:** More lightweight and modular than Monaco. Excellent language support and theming capabilities. Often easier to integrate into React projects.
+    -   **Cons:** The look and feel might not be a 100% perfect match for the native VS Code editor.
+
+-   **Decision:** Start with `react-markdown` with a syntax highlighting plugin (like `rehype-prism-plus`) as an immediate, lightweight improvement. Plan for a future migration to a full editor like CodeMirror or Monaco as the feature set grows. This phased approach balances immediate value with long-term goals.
+
+### 3.2. Implementation Plan (Phase 1: `react-markdown`)
+
+1.  **Dependencies:** Add `react-markdown` and a syntax highlighting plugin (e.g., `rehype-prism-plus` or `react-syntax-highlighter`) to `package.json`.
+2.  **Component (`parallel-copilot.view/view.tsx`):**
+    *   Create a new component, e.g., `ResponseViewer`.
+    *   This component will take the AI response text as a prop.
+    *   It will use the `ReactMarkdown` component to render the text.
+    *   The renderer will be configured to use the syntax highlighting plugin for code blocks.
+    *   The main view will need a toggle to switch between the `ResponseViewer` (read-only) and a `<textarea>` (for editing/pasting).
+3.  **Styling:** CSS for the chosen syntax highlighting theme will need to be imported or configured.
+
+### 3.3. Implementation Plan (Phase 2: Full Editor Integration)
+
+1.  **Dependency:** Add the chosen editor library (`@uiw/react-codemirror` or `@monaco-editor/react`) to `package.json`.
+2.  **Webpack Configuration:** Adjust `webpack.config.js` to correctly bundle the editor's assets and web workers, which can be complex.
+3.  **Component (`parallel-copilot.view/view.tsx`):**
+    *   Replace the `textarea`/`ReactMarkdown` toggle with the new editor component.
+    *   Configure the editor component to be read-only initially, with a prop to enable editing.
+    *   Set the language mode to "markdown".
+    *   Configure the theme to match the VS Code theme variables.
+</file>
+
+<file path="src/Artifacts/A49. DCE - Phase 2 - File Association & Diffing Plan.md">
+# Artifact A49: DCE - Phase 2 - File Association & Diffing Plan
+# Date Created: C82
+# Author: AI Model
+
+- **Key/Value for A0:**
+- **Description:** Plans the UI and backend logic to visually link file blocks in an AI response to workspace files and sets the stage for an integrated diff tool.
+- **Tags:** feature plan, phase 2, ui, ux, diff, file association
+
+## 1. Overview & Goal
+
+To make the "Swap with Source" feature trustworthy and intuitive, users need a clear visual confirmation of which local file an AI-generated code block is intended to replace. This feature introduces a "file association" mechanism that parses AI responses, verifies the existence of the mentioned files, and displays this status to the user. This is the foundational step required before an integrated diff tool can be built.
+
+## 2. User Stories
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| P2-ASSOC-01 | **See Affected Files** | As a developer, when I paste an AI response, I want the extension to automatically parse it and show me a list of all the file paths it intends to modify, so I can understand the scope of the proposed changes. | - Pasting a response into a tab triggers a parsing event. <br> - A list of all file paths found in `<file path="...">` tags is displayed within the tab's UI. |
+| P2-ASSOC-02 | **Verify File Existence** | As a developer, for each file listed, I want to see a visual indicator of whether that file already exists in my workspace, so I can spot potential errors or new files proposed by the AI. | - Next to each listed file path, an icon is displayed. <br> - A green checkmark (`✓`) indicates the file exists at that path. <br> - A red cross (`✗`) or question mark (`?`) indicates the file does not exist, alerting me to a potential hallucination or a new file creation. |
+| P2-ASSOC-03 | **Preview Changes (Diff)** | As a developer, I want to click a "Diff" button next to an associated file to see a side-by-side comparison of the original file and the AI's proposed changes, so I can review the changes before swapping. | - A "Diff" button appears next to each file that is successfully associated (i.e., exists). <br> - Clicking it opens a diff view (modal or new tab) showing the changes. |
+
+## 3. Technical Implementation Plan
+
+1.  **Frontend - Parsing (`parallel-copilot.view/view.tsx`):**
+    *   Implement the `onPaste` handler as detailed in `A46`. It will use a regex (`/<file path="([^"]+)">/g`) to extract an array of file paths from the pasted text.
+    *   Store this array in the state for the active tab, e.g., `detectedFiles: string[]`.
+
+2.  **Backend - Verification (`fs.service.ts`):**
+    *   Create a new IPC channel, `RequestFileExistence`, that accepts `{ paths: string[] }`.
+    *   Create a handler `handleFileExistenceRequest` in `fs.service.ts`. This handler will iterate through the received paths, check each one's existence using `vscode.workspace.fs.stat`, and return a map of the results. Using `stat` is better than `access` as it doesn't throw an error for non-existent files.
+    *   Create a corresponding `SendFileExistence` channel that sends back `{ existenceMap: { [path: string]: boolean } }`.
+
+3.  **Frontend - UI & State (`parallel-copilot.view/view.tsx`):**
+    *   After parsing paths on paste, immediately send them to the backend via `RequestFileExistence`.
+    *   Add a new state variable to store the result: `const [fileExistence, setFileExistence] = useState<{ [path: string]: boolean }>({});`.
+    *   Listen for the `SendFileExistence` message and update this state.
+    *   Create a new component, e.g., `AssociatedFilesList`. This component will receive the `detectedFiles` and `fileExistence` maps as props.
+    *   It will render a list of the file paths. For each path, it will look up its status in the `fileExistence` map and display the appropriate icon (e.g., `VscCheck` or `VscError` from `react-icons/vsc`).
+
+4.  **Diffing (Future Step):**
+    *   The "Diff" button will initially be disabled or hidden.
+    *   Its implementation will require a new IPC channel to request the content of the original file from the backend.
+    *   A diffing library (like `diff`) will be used to compare the original content with the relevant section from the AI response.
+    *   The result will be rendered in a new component, `DiffViewer`, as planned in `A43`.
 </file>
 
 <file path="src/Artifacts/A5. DCE - Target File Structure.md">
@@ -6286,6 +6464,20 @@ export class FSService {
 
     // --- File Operations ---
 
+    public async handleFileExistenceRequest(paths: string[], serverIpc: ServerPostMessageManager) {
+        const existenceMap: { [path: string]: boolean } = {};
+        const checks = paths.map(async (p) => {
+            try {
+                await vscode.workspace.fs.stat(vscode.Uri.file(p));
+                existenceMap[p] = true;
+            } catch {
+                existenceMap[p] = false;
+            }
+        });
+        await Promise.all(checks);
+        serverIpc.sendToClient(ServerToClientChannel.SendFileExistence, { existenceMap });
+    }
+
     private async _findAvailableCopyName(destinationPath: string): Promise<string> {
         try {
             await vscode.workspace.fs.stat(vscode.Uri.file(destinationPath));
@@ -6487,7 +6679,10 @@ export class FSService {
 
             serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: tokenCount });
         } catch (error: any) {
-            const errorMessage = `Failed to parse Word file: ${path.basename(filePath)}`;
+            let errorMessage = `Failed to parse Word file: ${path.basename(filePath)}`;
+            if (error instanceof Error && error.message.includes("Can't find end of central directory")) {
+                errorMessage = "File may be corrupted or is not a valid .docx format.";
+            }
             Services.loggerService.error(`[Word] Error processing ${filePath}: ${error.stack || error.message}`);
             serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: 0, error: errorMessage });
         }
@@ -6725,6 +6920,122 @@ export class LoggerService {
 }
 </file>
 
+<file path="src/backend/services/prompt.service.ts">
+import * as vscode from 'vscode';
+import * as path from 'path';
+import * as fs from 'fs/promises';
+import { Services } from './services';
+
+export class PromptService {
+    private artifactSchemaTemplate = `<M1. artifact schema>
+M1. artifact schema
+M2. cycle overview
+M3. interaction schema
+M4. current project scope
+M5. organized artifacts list
+M6. cycles
+M7. artifacts
+</M1. artifact schema>`;
+
+    private interactionSchemaTemplate = `<M3. Interaction Schema>
+1.  Artifacts are complete, individual texts enclosed in \`<xmltags>\` and separated by three backticks. Different content sections can be separated with three asterisks. Please always output a summary of your thoughts/plan/course of action befoare providing your artifact outputs, whether they be Document artifacts, Code artifacts, or both.
+2.  Our Document Artifacts serve as our \`Source of Truth\` throughout multiple cycles. As such, over time, as issues occur, or code repeatedly regresses in the same way, seek to align our \`Source of Truth\` such that the Root Cause of such occurances is codified so it can be avoided on subsequent cycles visits to those Code artifacts. **See A106 (Regression Case Studies) for examples.**
+3.  Please output entire Document or Code artifacts. Do not worry about Token length. If your length continues for too long, and you reach the 600 second timeout, I will simply incorporate the work you did complete, and we can simply continue from where you left off. Better to have half of a solution to get started with, than not to have it. **Preference is for larger, more complete updates over smaller, incremental ones to align with the human curator's parallel processing workflow.** The human curator often sends the same prompt to multiple AI instances simultaneously and selects the most comprehensive response as the primary base for the next cycle, using other responses as supplementary information. Providing more complete updates increases the likelihood of a response being selected as the primary base.
+4.  Do not output artifacts that do not require updates in this cycle. (Eg. Do not do this: // Updated on: Cycle 1040 (No functional changes, only cycle header))
+5.  **Critical: \`flattened_repo_v2.txt\` contains all project files. Output updated *individual* files that are part of it (like \`<src/state/coreStore.ts>...\`). However, do **NOT** output the surrounding Artifact container tags (\`<flattened_repo_v2.txt>...</flattened_repo_v2.txt>\`) or any auto-generated metadata sections within it (like the Total Files summary, Top 10 list, or the \`<files list>\` section) which are created by the \`flatten.js\` script.**
+5.1. \`flattened_repo_v2.txt\` is a copy of the codebase, generated by a script; assume its an accurate representation of the existing codebase, but not necessarily a 'source of truth' like we treat our documents as, our codebase is a living artifact, documents, while we can update them, should be considered less transient.
+5.2. **\`.local\` File Convention:** To manage token count, some large data files (e.g., \`researchNodes.ts\`) may be represented by a truncated \`.local.ts\` version in the context. This version contains the essential structure and a few examples. If the full content of a file is required for a task (e.g., a comprehensive data refactor or fixing a bug related to a specific entry), explicitly state this need in your summary of actions and request that the curator swap the \`.local.ts\` file with the full \`.ts\` version in the \`files_list.txt\` for the subsequent cycle.
+6.  remember to output complete artifacts without placeholders, im taking your output, putting it in winmerge, and confirming we arent losing data in the update. when you provide placeholders, my cursory review turns into a meticulous file parsing, taking me from what is 5 seconds per artifact to upwards of 5 minutes, only to realize that the output is actually un-parseable, due to the nature of relativity, as the theory of relativity also applies to code. if you give me a code snippet, and do not give me the code surrounding that snippet, i do not know where that code should go. by providing the complete file, on the other hand, i can put it in a diff, see easily what was altered, and if anything was accidentally omitted or lost, i can be sure that it's retained.
+7.  **Update documentation before writing code.** document artifacts are like our project readme files, our source of truth. they are our blueprints. they guide the code we write. when we realize we need to alter our approach or invent new game mechanics, we update the source of truth first, cause english is easy and flexible, then we codify that.
+8.  this query is part of a larger software engineering project
+9.  After you complete delivery on a code artifact, review it to make sure you did not miss any intermediary files. for instance, if we have a DevelopmentSystem.ts, using the componentData.ts, which is displaying on the ComponentProductionTab.tsx. But then theres also still a DevPanel.tsx file that is in-between that *could*, but shouldnt, get overlooked.
+10. If you are deciding where to put a particular piece of code or function, and due to its nature, there are one or more candidate files that it could be placed in, choose the smaller file (in tokens).
+11. Begin your response with a course of action and end with a review of your work, surface any self corrections in the summary of changes for the subsequent cycle.
+12. do not underestimate how much you can accomplish in a given cycle; you'd only accomplish handicapping yourself. (Eg. you've authored this whole thing with just my guidance. good job, keep it up.)
+13. Not as relevant for this project: **Log State Button:** The 'Log State' button in the \`DevInfoOverlay\` is a dynamic debugging tool. Modify the \`triggerDebugLogs\` action in \`uiStore.ts\` to output specific state information relevant to the current bug being investigated. **See A85 (Logging Guide) for usage details.**
+14. Not as relevant for this project: **Regression Case Studies:** Use Artifact A106 to document persistent or complex bugs and their resolutions. Add entries *after* a fix is confirmed to codify the RCA and solution, preventing future regressions.
+15. Include in your cycle summary, a short list of files you've updated. This makes it easy for my reviews.
+16. if you seem to have spare time in a cycle, see if you can spot any particular file with excessive levels of comments or logging that seems extensive and for troubleshooting an error that has since been resolved, see to it to clean those files but preserve their functionalities. im just looking to shave off excess tokens wherever possible in the master_content.txt file.
+17. if you see \`(No change from C850)\` such language, it's data loss. there was supposed to be actual language behind that placeholder, but in one iteration (C850, in this case) you had provided a placeholder, and i 'missed it' and did not capture the initial information. you either need to deliver the placeholder in such a way as i can easily press the left arrow instead of the rigth arrow in winmerge to not accept that part, but to also not have winmerge confuse it with the rest, otherwise i must manually parse the information. when the process is a single keystroke, i can manage it quickly enough. when we remove that ability because you provided me data in a format that has placeholders AND the placeholders do not parse within winmerge such that it removes the benefit winmerge is adding, then we have our problem. when you see this, try to correct it using whatever current relevant context you have.
+18. basically, you should not worry about brevity, because when you go too long, your response gets interrupted by the system anyway. its better that the products you do deliver are all complete except for the last one, rather than you delivering all incomplete products, including the last one. does that make sense?
+19. remember, do not stop outputting for the reason of preventing a potential artifact interruption mid-output. you actually end up stopping yourself from producting two or three additional files before you actually get interrupted. what i mean is, in the outputs where you do not do this, you produce for 500 seconds, producing 7-9 files, and only the last one is interrupted and unusable. compared to when you stop yourself prematurely, for the reason stated, and you produce for 180 seconds and provide maybe 3-4 files. even with the -1, producing as much as you can still outperforms the alternative.
+20. This is a misaligned statement: \`// (For full history, see master_content.txt)\` because your changes get rolled into master_content.txt. therefore, if you remove the history, then when your updates are rolled in, they will remove the full history. understand? after a while, the history is not relevant and can be rolled out, for a while, it ought to stay. you can see what we're working on + the current cycle and make this determination.
+New Since Cycle 1300:
+21. Each time we create a new documentation artifact, lets also create the key/value pairs needed for me to add it into our Master Artifact List. they can simply be added into the new artifact itself and ill make the new entry in A0. this will solve for me manually generating a description and tag for each new documentation artifact. also, dont place \`/\` in the title/name of a documentation artifact. VSCode treats it as a folder separator.
+21.1. when creating a new documentation artifact, also just update the master artifacts list itself.
+</M3. Interaction Schema>`;
+
+    private projectScopeTemplate = `<M4. current project scope>
+The plan is to create a Data Curation Environment. We will do this by creating a VS Code extension. The three main components will be:
+
+Phase 1. Context chooser - Choose files/folders (checkmark option in the file explorer) that will be packaged as artifacts into a \`flattened_repo.md\` file.
+Phase 2. parallel 'co-pilot' panel. Basically, we need our own AI Studio interface that is parallelizable. so thats what is wrong with the curernt co-pilot panel, that you are 'locked in' to a single conversation flow. my process involves sending the same prompt to up to 8 different conversation windows and then scrutinizing the responses in winmerge.
+Phase 3. Diff Tool - Basically, winmerge but intergrated into a window within VS Code. My workflow is often comparing two identical responses, or comparing a new artifact with the current version. Currently, I'm first copying and pasting responses into separate notepad files, and then for which ever i need to compare given my task, i then manually move that one into winmerge to compare against another that i manually move. instead, the ability to just select between two to compare would be a massive decrease in the manual workload.
+</M4. current project scope>`;
+
+    public async generatePromptFile(cycleTitle: string, currentCycle: number) {
+        const workspaceFolders = vscode.workspace.workspaceFolders;
+        if (!workspaceFolders || workspaceFolders.length === 0) {
+            vscode.window.showErrorMessage("Cannot generate prompt: No workspace folder is open.");
+            return;
+        }
+        const rootPath = workspaceFolders[0].uri.fsPath;
+        const flattenedRepoPath = path.join(rootPath, 'flattened_repo.md');
+        const promptMdPath = path.join(rootPath, 'prompt.md');
+
+        try {
+            Services.loggerService.log("Generating prompt.md file...");
+
+            // 1. Get flattened_repo.md content
+            const flattenedContent = await fs.readFile(flattenedRepoPath, 'utf-8');
+
+            // 2. Build Cycle Overview
+            // This is a simplified version. A more robust implementation would read dce_history.json
+            const cycleOverview = `<M2. cycle overview>
+Current Cycle ${currentCycle} - ${cycleTitle}
+</M2. cycle overview>`;
+
+            // 3. Get Master Artifact List (A0)
+            // This assumes A0 is located at a known path relative to the root.
+            let masterArtifactListContent = '<!-- Master Artifact List (A0) not found -->';
+            try {
+                const a0Path = path.join(rootPath, 'src', 'Artifacts', 'A0. DCE Master Artifact List.md');
+                masterArtifactListContent = await fs.readFile(a0Path, 'utf-8');
+            } catch (e) {
+                Services.loggerService.warn("Could not read A0. DCE Master Artifact List.md");
+            }
+
+            // 4. Assemble the final prompt
+            const promptParts = [
+                this.artifactSchemaTemplate,
+                cycleOverview,
+                this.interactionSchemaTemplate,
+                this.projectScopeTemplate,
+                `<M5. organized artifacts list>\n${masterArtifactListContent}\n</M5. organized artifacts list>`,
+                // A placeholder for M6. Cycles for the user to fill in
+                `<M6. Cycles>\n\n</M6. Cycles>`, 
+                flattenedContent
+            ];
+
+            const finalPrompt = promptParts.join('\n\n');
+
+            // 5. Write to prompt.md
+            await fs.writeFile(promptMdPath, finalPrompt, 'utf-8');
+            vscode.window.showInformationMessage(`Successfully generated prompt.md.`);
+            Services.loggerService.log("Successfully generated prompt.md file.");
+
+        } catch (error: any) {
+            let errorMessage = `Failed to generate prompt.md: ${error.message}`;
+            if (error.code === 'ENOENT' && error.path.includes('flattened_repo.md')) {
+                errorMessage = "Failed to generate prompt.md: 'flattened_repo.md' not found. Please flatten context first.";
+            }
+            vscode.window.showErrorMessage(errorMessage);
+            Services.loggerService.error(errorMessage);
+        }
+    }
+}
+</file>
+
 <file path="src/backend/services/selection.service.ts">
 import * as vscode from 'vscode';
 import { getContext } from '@/extension';
@@ -6868,6 +7179,8 @@ import { FlattenerService } from "./flattener.service";
 import { SelectionService } from "./selection.service";
 import { LoggerService } from "./logger.service";
 import { ActionService } from "./action.service";
+import { HistoryService } from "./history.service"; // Import HistoryService
+import { PromptService } from "./prompt.service"; // Import PromptService
 import { API as GitAPI } from "../types/git";
 
 // A simple container for services
@@ -6877,6 +7190,8 @@ class ServiceContainer {
     public selectionService = new SelectionService();
     public loggerService = LoggerService.getInstance();
     public actionService = new ActionService();
+    public historyService = new HistoryService(); // Instantiate HistoryService
+    public promptService = new PromptService(); // Instantiate PromptService
     
     public initialize(gitApi?: GitAPI) {
         this.loggerService.log("Services initializing...");
@@ -9469,18 +9784,24 @@ export const viewConfig = {
 // src/client/views/parallel-copilot.view/on-message.ts
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
+import { ClientToServerChannel } from "@/common/ipc/channels.enum";
 
 export function onMessage(serverIpc: ServerPostMessageManager) {
     const loggerService = Services.loggerService;
     loggerService.log("Parallel Co-Pilot view message handler initialized.");
 
-    // TODO: Add message handlers for Phase 2 features
-    // e.g., serverIpc.onClientMessage(ClientToServerChannel.RequestSwapFileContent, ...)
+    serverIpc.onClientMessage(ClientToServerChannel.RequestCreatePromptFile, (data) => {
+        Services.promptService.generatePromptFile(data.cycleTitle, data.currentCycle);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestFileExistence, (data) => {
+        Services.fsService.handleFileExistenceRequest(data.paths, serverIpc);
+    });
 }
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
-/* Updated on: C78 (Add styling for new context inputs) */
+/* Updated on: C82 (Add styles for prompt generation and file association) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -9521,6 +9842,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 6px;
 
     &:hover {
         background-color: var(--vscode-toolbar-hoverBackground);
@@ -9541,6 +9863,15 @@ body {
     border-radius: 2px;
 }
 
+.cycle-title-input {
+    flex-grow: 1;
+    background-color: var(--vscode-input-background);
+    color: var(--vscode-input-foreground);
+    border: 1px solid var(--vscode-input-border);
+    padding: 2px 4px;
+    border-radius: 2px;
+}
+
 .context-inputs {
     display: flex;
     gap: 8px;
@@ -9549,7 +9880,7 @@ body {
 
 .context-textarea {
     width: 100%;
-    height: 80px;
+    height: 60px; /* Reduced height */
     background-color: var(--vscode-input-background);
     color: var(--vscode-input-foreground);
     border: 1px solid var(--vscode-input-border);
@@ -9594,7 +9925,7 @@ body {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    min-height: 0; /* Important for flex-grow to work in a flex column */
+    min-height: 0;
 }
 
 .tab-pane {
@@ -9629,9 +9960,44 @@ body {
     }
 }
 
-.response-textarea {
-    width: 100%;
+.associated-files-container {
+    flex-shrink: 0;
+    padding: 4px;
+    border: 1px solid var(--vscode-panel-border);
+    border-radius: 2px;
+    font-size: 12px;
+    .associated-files-title {
+        font-weight: bold;
+        margin-bottom: 4px;
+    }
+    .associated-files-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .associated-file {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding: 2px 6px;
+        background-color: var(--vscode-input-background);
+        border-radius: 10px;
+        .icon-success { color: var(--vscode-testing-iconPassed); }
+        .icon-error { color: var(--vscode-testing-iconFailed); }
+    }
+}
+
+.response-editor-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
     flex-grow: 1;
+    min-height: 0;
+}
+
+.response-textarea, .response-markdown-preview {
+    width: 100%;
+    height: 100%;
     background-color: var(--vscode-input-background);
     color: var(--vscode-input-foreground);
     border: 1px solid var(--vscode-input-border);
@@ -9639,33 +10005,75 @@ body {
     padding: 4px;
     font-family: var(--vscode-editor-font-family);
     font-size: var(--vscode-editor-font-size);
-    resize: none;
+}
 
-    &:focus {
+.response-textarea {
+    resize: none;
+     &:focus {
         outline: 1px solid var(--vscode-focusBorder);
+    }
+}
+
+.response-markdown-preview {
+    overflow-y: auto;
+    h1, h2, h3 {
+        border-bottom: 1px solid var(--vscode-panel-border);
+        padding-bottom: 0.3em;
+        margin-top: 24px;
+        margin-bottom: 16px;
+    }
+    code {
+        background-color: var(--vscode-textCodeBlock-background);
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+        font-family: var(--vscode-editor-font-family);
+    }
+    pre > code {
+        display: block;
+        padding: 16px;
+        overflow: auto;
     }
 }
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
-// Updated on: C78 (Implement Cycle Navigator, Context Inputs, and Paste Parsing)
+// Updated on: C82 (Add prompt generation, markdown rendering, and file association)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscComment, VscGoToFile, VscReplaceAll, VscThumbsdown, VscThumbsup, VscWindow } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscComment, VscGoToFile, VscReplaceAll, VscThumbsdown, VscThumbsup, VscFileCode, VscCheck, VscError } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
-import { ClientToServerChannel } from '@/common/ipc/channels.enum';
+import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
+import ReactMarkdown from 'react-markdown';
+
+const AssociatedFile = ({ path, exists }: { path: string, exists: boolean }) => {
+    return (
+        <div className="associated-file" title={path}>
+            {exists ? <VscCheck className="icon-success" /> : <VscError className="icon-error" />}
+            <span className="file-path">{path.split('/').pop()}</span>
+        </div>
+    );
+};
 
 const App = () => {
     const [activeTab, setActiveTab] = React.useState(1);
     const [tabContent, setTabContent] = React.useState<{ [key: number]: string }>({});
+    const [detectedFiles, setDetectedFiles] = React.useState<{ [key: number]: string[] }>({});
+    const [fileExistence, setFileExistence] = React.useState<{ [path: string]: boolean }>({});
     const [tabCount, setTabCount] = React.useState(4);
-    const [cycle, setCycle] = React.useState(1);
-    const [cycleContext, setCycleContext] = React.useState('');
+    const [cycle, setCycle] = React.useState(82);
+    const [cycleTitle, setCycleTitle] = React.useState('Continue refinement/delivery of pcpp');
     const [ephemeralContext, setEphemeralContext] = React.useState('');
 
     const clientIpc = ClientPostMessageManager.getInstance();
+
+    React.useEffect(() => {
+        clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => {
+            logger.log(`[PCPP] Received file existence map.`);
+            setFileExistence(prev => ({ ...prev, ...existenceMap }));
+        });
+    }, [clientIpc]);
 
     const handlePaste = (e: React.ClipboardEvent<HTMLTextAreaElement>, tabIndex: number) => {
         const pastedText = e.clipboardData.getData('text');
@@ -9673,18 +10081,28 @@ const App = () => {
         setTabContent(prev => ({...prev, [tabIndex]: pastedText}));
 
         logger.log(`[PCPP PARSE] Pasted content into tab ${tabIndex}. Parsing for file paths...`);
-        logger.log(`[PCPP PARSE] Content: ${pastedText.substring(0, 500)}...`);
-
-
+        
         const fileRegex = /<file path="([^"]+)">/g;
         const matches = pastedText.matchAll(fileRegex);
         const paths = Array.from(matches, m => m[1]);
 
         if (paths.length > 0) {
             logger.log(`[PCPP PARSE] Detected file paths: ${paths.join(', ')}`);
+            setDetectedFiles(prev => ({...prev, [tabIndex]: paths}));
+            // Request existence check from backend
+            clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths });
         } else {
             logger.log('[PCPP PARSE] No file paths detected in pasted content.');
+            setDetectedFiles(prev => ({...prev, [tabIndex]: []}));
         }
+    };
+
+    const handleGeneratePrompt = () => {
+        logger.log(`Requesting prompt.md generation for cycle C${cycle} with title: ${cycleTitle}`);
+        clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, {
+            currentCycle: cycle,
+            cycleTitle: cycleTitle,
+        });
     };
 
     return (
@@ -9695,16 +10113,20 @@ const App = () => {
                     <button onClick={() => setCycle(c => Math.max(1, c - 1))} disabled={cycle <= 1}><VscChevronLeft /></button>
                     <input type="number" value={cycle} onChange={e => setCycle(parseInt(e.target.value, 10) || 1)} className="cycle-input" />
                     <button onClick={() => setCycle(c => c + 1)}><VscChevronRight /></button>
+                    <input 
+                        type="text"
+                        className="cycle-title-input"
+                        placeholder="Cycle Title..."
+                        value={cycleTitle}
+                        onChange={e => setCycleTitle(e.target.value)}
+                    />
+                </div>
+                 <div className="pc-toolbar">
+                    <button onClick={handleGeneratePrompt} title="Generate prompt.md"><VscFileCode/> Generate Prompt</button>
                 </div>
             </div>
             
             <div className="context-inputs">
-                <textarea 
-                    className="context-textarea"
-                    placeholder="Cycle Context (persists with cycle)..."
-                    value={cycleContext}
-                    onChange={e => setCycleContext(e.target.value)}
-                />
                 <textarea 
                     className="context-textarea"
                     placeholder="Ephemeral Context (for this cycle only, e.g., error logs)..."
@@ -9747,13 +10169,28 @@ const App = () => {
                             <button onClick={() => logger.log('Thumbs down clicked')}><VscThumbsdown/></button>
                             <button onClick={() => logger.log('Add Comment clicked')}><VscComment/> Comment</button>
                         </div>
-                        <textarea 
-                            className="response-textarea"
-                            placeholder={`Paste AI response for tab ${activeTab} here...`}
-                            value={tabContent[activeTab] || ''}
-                            onChange={(e) => setTabContent(prev => ({...prev, [activeTab]: e.target.value}))}
-                            onPaste={(e) => handlePaste(e, activeTab)}
-                        />
+                        {detectedFiles[activeTab] && detectedFiles[activeTab].length > 0 && (
+                            <div className="associated-files-container">
+                                <span className="associated-files-title">Associated Files:</span>
+                                <div className="associated-files-list">
+                                    {detectedFiles[activeTab].map(path => (
+                                        <AssociatedFile key={path} path={path} exists={fileExistence[path]} />
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                        <div className="response-editor-container">
+                             <textarea 
+                                className="response-textarea"
+                                placeholder={`Paste AI response for tab ${activeTab} here...`}
+                                value={tabContent[activeTab] || ''}
+                                onChange={(e) => setTabContent(prev => ({...prev, [activeTab]: e.target.value}))}
+                                onPaste={(e) => handlePaste(e, activeTab)}
+                            />
+                            <div className="response-markdown-preview">
+                                <ReactMarkdown>{tabContent[activeTab] || '*Paste or type in the text area to see a preview.*'}</ReactMarkdown>
+                            </div>
+                        </div>
                     </div>
                 )}
             </div>
@@ -9800,6 +10237,10 @@ export enum ClientToServerChannel {
 
     // VS Code Command Proxy
     VSCodeCommand = "clientToServer.vscodeCommand",
+
+    // Phase 2: PCPP
+    RequestCreatePromptFile = "clientToServer.requestCreatePromptFile",
+    RequestFileExistence = "clientToServer.requestFileExistence",
 }
 
 export enum ServerToClientChannel {
@@ -9813,6 +10254,9 @@ export enum ServerToClientChannel {
     SendAutoAddState = "serverToClient.sendAutoAddState",
     UpdateProblemCounts = "serverToClient.updateProblemCounts",
     UpdateNodeStats = "serverToClient.updateNodeStats", // For updating PDF token counts
+    
+    // Phase 2: PCPP
+    SendFileExistence = "serverToClient.sendFileExistence",
 }
 </file>
 
@@ -9849,6 +10293,8 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestLastSelection ? {} :
     T extends ClientToServerChannel.SaveAutoAddState ? { enabled: boolean } :
     T extends ClientToServerChannel.VSCodeCommand ? { command: string, args?: any[] } :
+    T extends ClientToServerChannel.RequestCreatePromptFile ? { cycleTitle: string; currentCycle: number } :
+    T extends ClientToServerChannel.RequestFileExistence ? { paths: string[] } :
     
     T extends ServerToClientChannel.SendWorkspaceFiles ? { files: FileNode[] } :
     T extends ServerToClientChannel.SendWorkspaceTrustState ? { isTrusted: boolean } :
@@ -9860,6 +10306,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SendAutoAddState ? { enabled: boolean } :
     T extends ServerToClientChannel.UpdateProblemCounts ? { problemMap: ProblemCountsMap } :
     T extends ServerToClientChannel.UpdateNodeStats ? { path: string, tokenCount: number, error?: string } :
+    T extends ServerToClientChannel.SendFileExistence ? { existenceMap: { [path: string]: boolean } } :
     never;
 </file>
 

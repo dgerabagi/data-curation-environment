@@ -369,6 +369,20 @@ export class FSService {
 
     // --- File Operations ---
 
+    public async handleFileExistenceRequest(paths: string[], serverIpc: ServerPostMessageManager) {
+        const existenceMap: { [path: string]: boolean } = {};
+        const checks = paths.map(async (p) => {
+            try {
+                await vscode.workspace.fs.stat(vscode.Uri.file(p));
+                existenceMap[p] = true;
+            } catch {
+                existenceMap[p] = false;
+            }
+        });
+        await Promise.all(checks);
+        serverIpc.sendToClient(ServerToClientChannel.SendFileExistence, { existenceMap });
+    }
+
     private async _findAvailableCopyName(destinationPath: string): Promise<string> {
         try {
             await vscode.workspace.fs.stat(vscode.Uri.file(destinationPath));

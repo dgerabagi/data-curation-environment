@@ -32,6 +32,10 @@ export enum ClientToServerChannel {
 
     // VS Code Command Proxy
     VSCodeCommand = "clientToServer.vscodeCommand",
+
+    // Phase 2: PCPP
+    RequestCreatePromptFile = "clientToServer.requestCreatePromptFile",
+    RequestFileExistence = "clientToServer.requestFileExistence",
 }
 
 export enum ServerToClientChannel {
@@ -45,4 +49,7 @@ export enum ServerToClientChannel {
     SendAutoAddState = "serverToClient.sendAutoAddState",
     UpdateProblemCounts = "serverToClient.updateProblemCounts",
     UpdateNodeStats = "serverToClient.updateNodeStats", // For updating PDF token counts
+    
+    // Phase 2: PCPP
+    SendFileExistence = "serverToClient.sendFileExistence",
 }
