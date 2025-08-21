@@ -1,4 +1,4 @@
-// Updated on: C91 (Implement global parse toggle and Associated Files list)
+// Updated on: C92 (Implement persistence, fix UI bugs)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -6,7 +6,7 @@ import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, Vsc
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
-import { PcppCycle } from '@/backend/services/history.service';
+import { PcppCycle, PcppResponse } from '@/backend/services/history.service';
 import { ParsedResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
 import ReactMarkdown from 'react-markdown';
@@ -39,29 +39,32 @@ const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; i
     </div>
 );
 
-const AssociatedFilesList: React.FC<{ files: string[], existenceMap: Map<string, boolean> }> = ({ files, existenceMap }) => (
-    <ul className="associated-files-list">
-        {files.map(file => (
-            <li key={file}>
-                {existenceMap.get(file) ? (
-                    <VscCheck className="status-icon exists" title="File exists in workspace" />
-                ) : (
-                    <VscError className="status-icon not-exists" title="File not found in workspace" />
-                )}
-                <span>{file}</span>
-            </li>
-        ))}
-    </ul>
-);
+const AssociatedFilesList: React.FC<{ files: string[], existenceMap: Map<string, boolean> }> = ({ files, existenceMap }) => {
+    logger.log(`[AssociatedFilesList] Rendering with ${files.length} files.`);
+    return (
+        <ul className="associated-files-list">
+            {files.map(file => (
+                <li key={file}>
+                    {existenceMap.get(file) ? (
+                        <VscCheck className="status-icon exists" title="File exists in workspace" />
+                    ) : (
+                        <VscError className="status-icon not-exists" title="File not found in workspace" />
+                    )}
+                    <span>`{file}`</span>
+                </li>
+            ))}
+        </ul>
+    );
+};
 
 
 const App = () => {
     // State
     const [activeTab, setActiveTab] = React.useState(1);
     const [tabCount, setTabCount] = React.useState(4);
-    const [currentCycle, setCurrentCycle] = React.useState(91);
-    const [maxCycle, setMaxCycle] = React.useState(91);
-    const [cycleTitle, setCycleTitle] = React.useState('implement feedback');
+    const [currentCycle, setCurrentCycle] = React.useState(1);
+    const [maxCycle, setMaxCycle] = React.useState(1);
+    const [cycleTitle, setCycleTitle] = React.useState('');
     const [cycleContext, setCycleContext] = React.useState('');
     const [ephemeralContext, setEphemeralContext] = React.useState('');
     const [tabs, setTabs] = React.useState<{ [key: number]: TabState }>({});
@@ -71,12 +74,16 @@ const App = () => {
 
     // Collapsible sections state
     const [isCycleCollapsed, setIsCycleCollapsed] = React.useState(false);
+    const [isSummaryCollapsed, setIsSummaryCollapsed] = React.useState(false);
+    const [isActionCollapsed, setIsActionCollapsed] = React.useState(false);
+    const [isFilesCollapsed, setIsFilesCollapsed] = React.useState(false);
+
 
     const clientIpc = ClientPostMessageManager.getInstance();
 
     // --- Data Saving ---
     const saveCurrentCycleState = React.useCallback(() => {
-        const responses: { [key: number]: { content: string } } = {};
+        const responses: { [key: number]: PcppResponse } = {};
         for (let i = 1; i <= tabCount; i++) {
             responses[i] = { content: tabs[i]?.rawContent || '' };
         }
@@ -93,7 +100,7 @@ const App = () => {
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
     }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, clientIpc]);
 
-    const debouncedSave = useDebounce(saveCurrentCycleState, 1000);
+    const debouncedSave = useDebounce(saveCurrentCycleState, 1500);
 
     React.useEffect(() => {
         debouncedSave();
@@ -104,7 +111,11 @@ const App = () => {
     React.useEffect(() => {
         clientIpc.onServerMessage(ServerToClientChannel.SendCycleHistoryList, ({ cycleIds }) => {
             const max = Math.max(...cycleIds, 0);
-            setMaxCycle(max > 0 ? max : currentCycle);
+            const newMax = max > 0 ? max : 1;
+            setMaxCycle(newMax);
+            setCurrentCycle(newMax); // Go to the latest cycle on load
+            logger.log(`Cycle history received. Max cycle set to: ${newMax}`);
+            clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newMax });
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData }) => {
@@ -119,7 +130,7 @@ const App = () => {
                 });
                 setTabs(newTabs);
             } else {
-                logger.warn(`No data found for cycle. Clearing fields.`);
+                logger.warn(`No data found for cycle ${currentCycle}. Clearing fields.`);
                 setCycleTitle('');
                 setCycleContext('');
                 setEphemeralContext('');
@@ -136,7 +147,6 @@ const App = () => {
         });
 
         clientIpc.sendToServer(ClientToServerChannel.RequestCycleHistoryList, {});
-        clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: currentCycle });
 
     }, [clientIpc]);
 
@@ -161,15 +171,15 @@ const App = () => {
                     updatedTabs[Number(tabId)].parsedContent = parsed;
                     
                     parsed.files.forEach(file => {
-                        allFilePaths.add(file.path);
-                        const lang = file.path.split('.').pop() || 'plaintext';
-                        const id = `${file.path}::${file.content}`;
+                        const id = `${file.path}::${file.content}`; // Unique ID for highlighting
                         if (!highlightedCodeBlocks.has(id)) {
+                             const lang = file.path.split('.').pop() || 'plaintext';
                              clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
                         }
                     });
+                     parsed.filesUpdated.forEach(path => allFilePaths.add(path));
                 } else if (tabState.parsedContent) {
-                    tabState.parsedContent.files.forEach(file => allFilePaths.add(file.path));
+                    tabState.parsedContent.filesUpdated.forEach(path => allFilePaths.add(path));
                 }
             });
             setTabs(updatedTabs);
@@ -225,13 +235,13 @@ const App = () => {
                     <div className="tab-pane">
                         {isParsedMode && activeTabData?.parsedContent ? (
                             <div className="parsed-view">
-                                <CollapsibleSection title="Summary & Plan" isCollapsed={false} onToggle={() => {}}>
+                                <CollapsibleSection title="Summary & Plan" isCollapsed={isSummaryCollapsed} onToggle={() => setIsSummaryCollapsed(p => !p)}>
                                     <ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown>
                                 </CollapsibleSection>
-                                <CollapsibleSection title="Course of Action" isCollapsed={false} onToggle={() => {}}>
+                                <CollapsibleSection title="Course of Action" isCollapsed={isActionCollapsed} onToggle={() => setIsActionCollapsed(p => !p)}>
                                      <ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown>
                                 </CollapsibleSection>
-                                <CollapsibleSection title="Associated Files" isCollapsed={false} onToggle={() => {}}>
+                                <CollapsibleSection title="Associated Files" isCollapsed={isFilesCollapsed} onToggle={() => setIsFilesCollapsed(p => !p)}>
                                     <AssociatedFilesList files={activeTabData.parsedContent.filesUpdated} existenceMap={fileExistenceMap} />
                                 </CollapsibleSection>
 
