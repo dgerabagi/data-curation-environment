@@ -1,8 +1,8 @@
-// Updated on: C99 (Add hover logs and auto-selection for diff view)
+// Updated on: C100 (Add aggressive diagnostics: test button, hover logs, auto-diff logs)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscBeaker } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -143,7 +143,7 @@ const App = () => {
             setFileExistenceMap(new Map(Object.entries(existenceMap)));
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendFileContent, ({ path, content }) => {
-            logger.log(`[C99 DEBUG] Received file content for ${path}`);
+            logger.log(`[C100 DEBUG] Received file content for ${path}`);
             if (diffTarget?.path === path) {
                 setOriginalFileContent(content);
             }
@@ -191,10 +191,10 @@ const App = () => {
     };
 
     const handleSelectForDiff = React.useCallback((file: ParsedFile) => {
-        logger.log(`[C99 DEBUG] handleSelectForDiff called for: ${file.path}`);
+        logger.log(`[C100 DIAGNOSTIC] handleSelectForDiff called for: ${file.path}`);
         setDiffTarget(file);
-        setOriginalFileContent(null);
-        logger.log(`[C99 DEBUG] Sending IPC RequestFileContent for: ${file.path}`);
+        setOriginalFileContent(null); // Reset to show loading state
+        logger.log(`[C100 DIAGNOSTIC] Sending IPC RequestFileContent for: ${file.path}`);
         clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: file.path });
     }, [clientIpc]);
 
@@ -206,8 +206,9 @@ const App = () => {
         return !hasTitle && !hasContext && !hasResponseContent;
     }, [cycleTitle, cycleContext, ephemeralContext, tabs]);
     
-    // C99: Auto-select first valid file for diffing
+    // C100: Auto-select first valid file for diffing
     React.useEffect(() => {
+        logger.log(`[C100 AUTO-DIFF-EFFECT] Running effect. Parsed Mode: ${isParsedMode}, Cycle: ${currentCycle}, AutoSelectedFor: ${autoSelectedForCycle.current}`);
         if (isParsedMode && activeTabData?.parsedContent && fileExistenceMap.size > 0 && autoSelectedForCycle.current !== currentCycle) {
             const firstExistingFile = activeTabData.parsedContent.filesUpdated.find(
                 file => fileExistenceMap.get(file) === true
@@ -216,14 +217,31 @@ const App = () => {
             if (firstExistingFile) {
                 const parsedFileObject = activeTabData.parsedContent.files.find(f => f.path === firstExistingFile);
                 if (parsedFileObject) {
-                    logger.log(`[AUTO-SELECT] Automatically selecting first existing file for diff: ${firstExistingFile}`);
+                    logger.log(`[C100 AUTO-DIFF-EFFECT] Automatically selecting first existing file for diff: ${firstExistingFile}`);
                     handleSelectForDiff(parsedFileObject);
-                    autoSelectedForCycle.current = currentCycle; // Mark as auto-selected for this cycle
+                    autoSelectedForCycle.current = currentCycle;
+                } else {
+                     logger.log(`[C100 AUTO-DIFF-EFFECT] Found existing file '${firstExistingFile}' but no corresponding parsed file object.`);
                 }
+            } else {
+                logger.log(`[C100 AUTO-DIFF-EFFECT] No existing files found in the parsed response to auto-select.`);
             }
         }
     }, [isParsedMode, activeTabData, fileExistenceMap, currentCycle, handleSelectForDiff]);
 
+    const handleTestDiff = () => {
+        if (isParsedMode && activeTabData?.parsedContent && fileExistenceMap.size > 0) {
+            const firstValidFile = activeTabData.parsedContent.files.find(f => fileExistenceMap.get(f.path));
+            if (firstValidFile) {
+                logger.log(`[C100 TEST-BUTTON] Manually triggering diff for: ${firstValidFile.path}`);
+                handleSelectForDiff(firstValidFile);
+            } else {
+                logger.log(`[C100 TEST-BUTTON] No valid file found in active tab to test.`);
+            }
+        } else {
+            logger.log(`[C100 TEST-BUTTON] Cannot test: Not in parsed mode or no data available.`);
+        }
+    };
 
     const collapsedNavigator = (
         <div className="collapsed-navigator">
@@ -239,6 +257,7 @@ const App = () => {
                 <div className="pc-toolbar">
                     <button onClick={handleGeneratePrompt} title="Generate prompt.md"><VscFileCode /> Generate prompt.md</button>
                     <button onClick={handleGlobalParseToggle}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button>
+                    {isParsedMode && <button onClick={handleTestDiff} title="Test Diffing First File"><VscBeaker /> Test Diff</button>}
                 </div>
                 <div className="tab-count-input">
                     <label htmlFor="tab-count">Responses:</label>
@@ -283,10 +302,10 @@ const App = () => {
                                         <ul className="associated-files-list">
                                             {activeTabData.parsedContent.filesUpdated.map(file => (
                                                 <li key={file} 
-                                                    onMouseEnter={() => logger.log(`[HOVER-TEST] Mouse ENTER on ${file}`)}
-                                                    onMouseLeave={() => logger.log(`[HOVER-TEST] Mouse LEAVE from ${file}`)}
+                                                    onMouseEnter={() => logger.log(`[C100 HOVER-TEST] Mouse ENTER on ${file}`)}
+                                                    onMouseLeave={() => logger.log(`[C100 HOVER-TEST] Mouse LEAVE from ${file}`)}
                                                     onClick={() => {
-                                                        logger.log(`[C99 CLICK-TEST] LI element clicked for: ${file}`);
+                                                        logger.log(`[C100 CLICK-TEST] LI element clicked for: ${file}`);
                                                         const parsedFile = activeTabData.parsedContent?.files.find(f => f.path === file);
                                                         if (parsedFile && fileExistenceMap.get(file)) {
                                                             handleSelectForDiff(parsedFile);

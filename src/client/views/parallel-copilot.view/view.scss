@@ -1,4 +1,13 @@
-/* Updated on: C98 (Add styles for header and collapsed navigator) */
+/* Updated on: C100 (No functional changes, added comment confirming z-index review) */
+/*
+    Review for C100:
+    Checked for any potential z-index issues or pointer-events: none properties
+    that could be causing an invisible overlay and blocking clicks on the
+    associated-files-list. No obvious culprits found. The .context-menu-overlay
+    has a high z-index but should only be active when a context menu is open,
+    which is not the case in this view. The main layout seems to be a standard
+    flexbox layout.
+*/
 body {
     padding: 0;
     font-family: var(--vscode-font-family);

@@ -21,7 +21,7 @@ import { toHtml } from 'hast-util-to-html';
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
-const EXCLUSION_PATTERNS = ['node_modules', 'dist', 'out', '.git', 'dce_cache'];
+const EXCLUSION_PATTERNS = ['node_modules', 'dist', 'out', '.git', 'dce_cache', '.vscode'];
 
 // Helper to normalize paths to use forward slashes, which is consistent in webviews
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
@@ -408,15 +408,15 @@ export class FSService {
     // --- File Operations ---
 
     public async handleFileContentRequest(filePath: string, serverIpc: ServerPostMessageManager) {
-        Services.loggerService.log(`[C98 DEBUG] handleFileContentRequest initiated for: ${filePath}`);
+        Services.loggerService.log(`handleFileContentRequest initiated for: ${filePath}`);
         try {
             const uri = vscode.Uri.file(filePath);
             const contentBuffer = await vscode.workspace.fs.readFile(uri);
             const content = Buffer.from(contentBuffer).toString('utf-8');
-            Services.loggerService.log(`[C98 DEBUG] Successfully read content for: ${filePath}. Sending to client.`);
+            Services.loggerService.log(`Successfully read content for: ${filePath}. Sending to client.`);
             serverIpc.sendToClient(ServerToClientChannel.SendFileContent, { path: filePath, content });
         } catch (error) {
-            Services.loggerService.error(`[C98 DEBUG] Failed to read file content for ${filePath}: ${error}`);
+            Services.loggerService.error(`Failed to read file content for ${filePath}: ${error}`);
             serverIpc.sendToClient(ServerToClientChannel.SendFileContent, { path: filePath, content: null });
         }
     }

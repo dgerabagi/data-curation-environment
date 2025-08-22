@@ -1,20 +1,20 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-22T10:59:43.021Z
+  Date Generated: 2025-08-22T11:21:45.159Z
   ---
   Total Files: 205
-  Total Lines: 17460
-  Total Characters: 813287
-  Approx. Tokens: 203399
+  Total Lines: 17484
+  Total Characters: 814587
+  Approx. Tokens: 203724
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
-2. src\backend\services\fs.service.ts (9662 tokens)
+2. src\backend\services\fs.service.ts (9656 tokens)
 3. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
 4. src\client\views\context-chooser.view\view.tsx (5562 tokens)
-5. src\client\views\parallel-copilot.view\view.tsx (4539 tokens)
+5. src\client\views\parallel-copilot.view\view.tsx (4877 tokens)
 6. src\client\components\tree-view\TreeView.tsx (4508 tokens)
 7. src\Artifacts\A0. DCE Master Artifact List.md (4464 tokens)
 8. src\backend\services\flattener.service.ts (3685 tokens)
@@ -60,7 +60,7 @@
 36. src\Artifacts\A32. DCE - Phase 1 - Excel and CSV Handling Strategy.md - Lines: 44 - Chars: 4295 - Tokens: 1074
 37. src\Artifacts\A33. DCE - Phase 1 - Copy-Paste Feature Plan.md - Lines: 42 - Chars: 4456 - Tokens: 1114
 38. src\Artifacts\A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements.md - Lines: 44 - Chars: 6403 - Tokens: 1601
-39. src\Artifacts\A35. DCE - Phase 2 - UI Mockups and Flow.md - Lines: 72 - Chars: 4493 - Tokens: 1124
+39. src\Artifacts\A35. DCE - Phase 2 - UI Mockups and Flow.md - Lines: 73 - Chars: 4758 - Tokens: 1190
 40. src\Artifacts\A36. DCE - Phase 2 - Technical Implementation Plan.md - Lines: 77 - Chars: 4173 - Tokens: 1044
 41. src\Artifacts\A37. DCE - Phase 2 - Cycle Navigator & Knowledge Graph - Vision.md - Lines: 28 - Chars: 3242 - Tokens: 811
 42. src\Artifacts\A38. DCE - Phase 2 - Cycle Navigator - UI Mockup.md - Lines: 69 - Chars: 4621 - Tokens: 1156
@@ -78,7 +78,7 @@
 54. src\Artifacts\A46. DCE - Phase 2 - Paste and Parse Response - Feature Plan.md - Lines: 38 - Chars: 3587 - Tokens: 897
 55. src\Artifacts\A47. DCE - Phase 2 - Prompt Amalgamation Feature Plan.md - Lines: 42 - Chars: 3499 - Tokens: 875
 56. src\Artifacts\A48. DCE - Phase 2 - Advanced Syntax Highlighting Plan.md - Lines: 49 - Chars: 4044 - Tokens: 1011
-57. src\Artifacts\A49. DCE - Phase 2 - File Association & Diffing Plan.md - Lines: 47 - Chars: 5031 - Tokens: 1258
+57. src\Artifacts\A49. DCE - Phase 2 - File Association & Diffing Plan.md - Lines: 41 - Chars: 4202 - Tokens: 1051
 58. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
 59. src\Artifacts\A50. DCE - Phase 2 - UI Component Plan (Resizable Panes & Inner Editors).md - Lines: 48 - Chars: 4790 - Tokens: 1198
 60. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
@@ -89,7 +89,7 @@
 65. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
 66. src\backend\services\action.service.ts - Lines: 73 - Chars: 2471 - Tokens: 618
 67. src\backend\services\flattener.service.ts - Lines: 327 - Chars: 14740 - Tokens: 3685
-68. src\backend\services\fs.service.ts - Lines: 799 - Chars: 38648 - Tokens: 9662
+68. src\backend\services\fs.service.ts - Lines: 799 - Chars: 38623 - Tokens: 9656
 69. src\backend\services\history.service.ts - Lines: 103 - Chars: 3981 - Tokens: 996
 70. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
 71. src\backend\services\prompt.service.ts - Lines: 113 - Chars: 13923 - Tokens: 3481
@@ -112,9 +112,9 @@
 88. src\client\views\context-chooser.view\view.tsx - Lines: 435 - Chars: 22245 - Tokens: 5562
 89. src\client\views\index.ts - Lines: 35 - Chars: 1714 - Tokens: 429
 90. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-91. src\client\views\parallel-copilot.view\on-message.ts - Lines: 40 - Chars: 1940 - Tokens: 485
-92. src\client\views\parallel-copilot.view\view.scss - Lines: 337 - Chars: 7279 - Tokens: 1820
-93. src\client\views\parallel-copilot.view\view.tsx - Lines: 323 - Chars: 18153 - Tokens: 4539
+91. src\client\views\parallel-copilot.view\on-message.ts - Lines: 41 - Chars: 2019 - Tokens: 505
+92. src\client\views\parallel-copilot.view\view.scss - Lines: 346 - Chars: 7735 - Tokens: 1934
+93. src\client\views\parallel-copilot.view\view.tsx - Lines: 342 - Chars: 19507 - Tokens: 4877
 94. src\common\ipc\channels.enum.ts - Lines: 64 - Chars: 3422 - Tokens: 856
 95. src\common\ipc\channels.type.ts - Lines: 57 - Chars: 4453 - Tokens: 1114
 96. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
@@ -2713,7 +2713,7 @@ The goal of the **Parallel Co-Pilot Panel** is to create an integrated, **persis
 # Artifact A35: DCE - Phase 2 - UI Mockups and Flow
 # Date Created: C69
 # Author: AI Model
-# Updated on: C98 (Move response count to header, add collapsed cycle navigator)
+# Updated on: C99 (Add auto-diff for first file)
 
 ## 1. Overview
 
@@ -2747,7 +2747,7 @@ This section has two states: expanded (default) and collapsed.
 | | +----------------------------------------+ +------------------------------------+ |
 ```
 
-**Collapsed State (New in C98):**
+**Collapsed State:**
 ```
 | [>] Cycle & Context         [ < ] [ C98 ] [ > ]                                     |
 ```
@@ -2775,13 +2775,14 @@ The two-pane layout for the parsed view remains the same.
 
 ## 3. User Interaction Flow
 
-1.  **Load & Parse:** User loads the panel and clicks "Parse All". The UI transforms into the two-pane layout. The right pane is empty.
-2.  **Select for Diff:** The user clicks on a file with a `✓` in the "Associated Files" list (left pane).
-    *   **Action:** The frontend sends a `RequestFileContent` message to the backend with the file's path.
+1.  **Load & Parse:** User loads the panel and clicks "Parse All". The UI transforms into the two-pane layout.
+2.  **Auto-Diff (C99 Update):** The extension immediately finds the **first file** in the "Associated Files" list that exists in the workspace. It automatically fetches its content and displays a diff for that file in the right-hand pane. This provides an immediate, useful view without requiring a click.
+3.  **Manual Diff Selection:** The user can then click on any other file with a `✓` in the "Associated Files" list (left pane).
+    *   **Action:** The frontend sends a `RequestFileContent` message to the backend with the new file's path.
     *   The backend reads the file from the workspace and sends its content back via `SendFileContent`.
     *   The frontend receives the original content. It already has the AI's proposed content from the parsed response.
-    *   **UI Update:** The `DiffViewer` component is rendered in the **right pane**, showing a comparison of the two versions.
-3.  **Navigate While Collapsed:** The user collapses the "Cycle & Context" section. They can still click the `<` and `>` buttons in the header to load previous/next cycles without re-expanding the panel.
+    *   **UI Update:** The `DiffViewer` component in the **right pane** updates to show a comparison of the newly selected file.
+4.  **Navigate While Collapsed:** The user collapses the "Cycle & Context" section. They can still click the `<` and `>` buttons in the header to load previous/next cycles without re-expanding the panel.
 </file>
 
 <file path="src/Artifacts/A36. DCE - Phase 2 - Technical Implementation Plan.md">
@@ -3931,7 +3932,7 @@ After research and consideration of alternatives like `refractor`, **`@wooorm/st
 # Artifact A49: DCE - Phase 2 - File Association & Diffing Plan
 # Date Created: C82
 # Author: AI Model
-# Updated on: C98 (Escalate debugging plan with direct JSX logging)
+# Updated on: C99 (Add auto-diff and hover logging to debug plan)
 
 - **Key/Value for A0:**
 - **Description:** Plans the UI and backend logic to visually link file blocks in an AI response to workspace files and sets the stage for an integrated diff tool.
@@ -3949,32 +3950,26 @@ To make the "Swap with Source" feature trustworthy and intuitive, users need a c
 |---|---|---|
 | P2-ASSOC-01 | **See Affected Files** | As a developer, when I parse an AI response, I want the extension to automatically show me a list of all the file paths it intends to modify, so I can understand the scope of the proposed changes. | - After parsing, a collapsible "Associated Files" section appears in the tab's UI. <br> - This section displays a list of all file paths found in the response. |
 | P2-ASSOC-02 | **Verify File Existence** | As a developer, for each file listed, I want to see a visual indicator of whether that file already exists in my workspace, so I can spot potential errors or new files proposed by the AI. | - Next to each listed file path, an icon is displayed. <br> - A green checkmark (`✓`) indicates the file exists at that path. <br> - A red cross (`✗`) indicates the file does not exist, alerting me to a potential hallucination or a new file creation. |
-| P2-ASSOC-03 | **Preview Changes with Diff** | As a developer, I want to click on an existing file in the "Associated Files" list to immediately see a side-by-side comparison of the original file and the AI's proposed changes, so I can review the changes before swapping. | - Clicking a file with a `✓` in the list opens a diff view in a new panel to the right. <br> - The diff view clearly shows added, removed, and common lines. <br> - The diff view is the primary way to inspect changes. |
+| P2-ASSOC-03 | **Preview Changes with Diff** | As a developer, I want to click on an existing file in the "Associated Files" list to immediately see a side-by-side comparison of the original file and the AI's proposed changes, so I can review the changes before swapping. | - Clicking a file with a `✓` in the list opens a diff view in a new panel to the right. <br> - The diff view clearly shows added, removed, and common lines. <br> - **(C99 Update)** The diff view automatically loads with the *first valid file* upon parsing. |
 
-## 3. Technical Implementation Plan (C98)
+## 3. Technical Implementation Plan (C99)
 
 1.  **Frontend - Parsing (`response-parser.ts`):**
-    *   **Status:** **Complete.** The parser has been enhanced to check for angle-bracket paths first.
+    *   **Status:** **Complete.**
 
 2.  **Backend - Verification & Content Fetching (`fs.service.ts`):**
-    *   **Status:** **Complete.** The `handleFileExistenceRequest` and `handleFileContentRequest` handlers are implemented.
+    *   **Status:** **Complete.**
 
 3.  **Frontend - UI & State (`view.tsx`):**
-    *   **Status:** **Debugging.** The diff view is not appearing on click. The lack of logs indicates the event is not being captured or the IPC message is not being sent.
-    *   **Workflow:**
-        1.  User clicks a file in the list.
-        2.  The `onClick` handler calls a function, `handleSelectForDiff`.
-        3.  `handleSelectForDiff` sets the `diffTarget` state and sends a `RequestFileContent` IPC message.
-        4.  The `onmessage` handler for `SendFileContent` receives the original file's text and sets the `originalFileContent` state.
-        5.  The `DiffViewer` component renders when `diffTarget` and `originalFileContent` are both non-null.
-    *   **Debugging Plan (C98 - Escalated):**
-        *   **Step 1 (Client - JSX):** Add `onClick={() => logger.log('Associated file LI clicked: ' + file.path)}` directly to the `<li>` element in the `AssociatedFilesList` component. This is the most critical diagnostic step. If this log does not appear, the event is being blocked by styling or another element before React can handle it.
-        *   **Step 2 (Client - Handler):** Add `logger.log()` inside `handleSelectForDiff` to confirm it's being called by the `onClick`.
-        *   **Step 3 (Client - IPC Send):** Add `logger.log()` immediately before the `clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, ...)` call.
-        *   **Step 4 (Backend - IPC Receive):** Add `loggerService.log()` at the very beginning of the `on-message.ts` handler for `ClientToServerChannel.RequestFileContent`.
-        *   **Step 5 (Backend - Service):** Add `loggerService.log()` at the beginning of the `handleFileContentRequest` method in `fs.service.ts`.
-        *   **Step 6 (Client - IPC Receive):** Add `logger.log()` at the beginning of the `onServerMessage` handler for `ServerToClientChannel.SendFileContent` in `view.tsx`.
-        *   **Step 7 (Client - State):** Add `console.log({ diffTarget, originalFileContent })` just before the `return` statement in the `App` component to inspect state on every render.
+    *   **Status:** **Debugging.** The diff view is not appearing on manual click.
+    *   **Auto-Diff Logic (New in C99):**
+        *   A new `useEffect` hook will be added. It will trigger when `isParsedMode`, `activeTabData`, and `fileExistenceMap` are all populated.
+        *   It will find the first file path in `activeTabData.parsedContent.filesUpdated` that is `true` in the `fileExistenceMap`.
+        *   If found, it will call the existing `handleSelectForDiff` function to automatically load the diff for that file.
+    *   **Debugging Plan (C99 - Escalated):**
+        *   **Step 1 (Hover Logging):** Add `onMouseEnter` and `onMouseLeave` handlers to the `<li>` element for each associated file. These handlers will only call `logger.log()`. This will prove whether basic mouse events are being registered by the component.
+        *   **Step 2 (Click Logging):** Ensure a `logger.log()` statement is the *very first line* inside the `onClick` handler for the `<li>` element. If the hover logs from Step 1 appear but this click log does not, the click event is being blocked by a CSS overlay or another component.
+        *   **Step 3 (Trace Data Flow):** Add logs at every subsequent step of the data flow (IPC send, backend receive, file read, IPC response, frontend receive) to trace the entire process from click to render.
 </file>
 
 <file path="src/Artifacts/A5. DCE - Target File Structure.md">
@@ -6120,7 +6115,7 @@ import { toHtml } from 'hast-util-to-html';
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
-const EXCLUSION_PATTERNS = ['node_modules', 'dist', 'out', '.git', 'dce_cache'];
+const EXCLUSION_PATTERNS = ['node_modules', 'dist', 'out', '.git', 'dce_cache', '.vscode'];
 
 // Helper to normalize paths to use forward slashes, which is consistent in webviews
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
@@ -6507,15 +6502,15 @@ export class FSService {
     // --- File Operations ---
 
     public async handleFileContentRequest(filePath: string, serverIpc: ServerPostMessageManager) {
-        Services.loggerService.log(`[C98 DEBUG] handleFileContentRequest initiated for: ${filePath}`);
+        Services.loggerService.log(`handleFileContentRequest initiated for: ${filePath}`);
         try {
             const uri = vscode.Uri.file(filePath);
             const contentBuffer = await vscode.workspace.fs.readFile(uri);
             const content = Buffer.from(contentBuffer).toString('utf-8');
-            Services.loggerService.log(`[C98 DEBUG] Successfully read content for: ${filePath}. Sending to client.`);
+            Services.loggerService.log(`Successfully read content for: ${filePath}. Sending to client.`);
             serverIpc.sendToClient(ServerToClientChannel.SendFileContent, { path: filePath, content });
         } catch (error) {
-            Services.loggerService.error(`[C98 DEBUG] Failed to read file content for ${filePath}: ${error}`);
+            Services.loggerService.error(`Failed to read file content for ${filePath}: ${error}`);
             serverIpc.sendToClient(ServerToClientChannel.SendFileContent, { path: filePath, content: null });
         }
     }
@@ -10085,14 +10080,24 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     });
     
     serverIpc.onClientMessage(ClientToServerChannel.RequestFileContent, (data) => {
-        loggerService.log(`[C98 DEBUG] IPC Handler received RequestFileContent for: ${data.path}`);
+        // C100: Add high-visibility log to confirm message receipt on backend
+        loggerService.log(`[C100 IPC-TEST] Backend received RequestFileContent for: ${data.path}`);
         fsService.handleFileContentRequest(data.path, serverIpc);
     });
 }
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
-/* Updated on: C98 (Add styles for header and collapsed navigator) */
+/* Updated on: C100 (No functional changes, added comment confirming z-index review) */
+/*
+    Review for C100:
+    Checked for any potential z-index issues or pointer-events: none properties
+    that could be causing an invisible overlay and blocking clicks on the
+    associated-files-list. No obvious culprits found. The .context-menu-overlay
+    has a high z-index but should only be active when a context menu is open,
+    which is not the case in this view. The main layout seems to be a standard
+    flexbox layout.
+*/
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -10432,11 +10437,11 @@ body {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
-// Updated on: C99 (Add hover logs and auto-selection for diff view)
+// Updated on: C100 (Add aggressive diagnostics: test button, hover logs, auto-diff logs)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscBeaker } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -10577,7 +10582,7 @@ const App = () => {
             setFileExistenceMap(new Map(Object.entries(existenceMap)));
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendFileContent, ({ path, content }) => {
-            logger.log(`[C99 DEBUG] Received file content for ${path}`);
+            logger.log(`[C100 DEBUG] Received file content for ${path}`);
             if (diffTarget?.path === path) {
                 setOriginalFileContent(content);
             }
@@ -10625,10 +10630,10 @@ const App = () => {
     };
 
     const handleSelectForDiff = React.useCallback((file: ParsedFile) => {
-        logger.log(`[C99 DEBUG] handleSelectForDiff called for: ${file.path}`);
+        logger.log(`[C100 DIAGNOSTIC] handleSelectForDiff called for: ${file.path}`);
         setDiffTarget(file);
-        setOriginalFileContent(null);
-        logger.log(`[C99 DEBUG] Sending IPC RequestFileContent for: ${file.path}`);
+        setOriginalFileContent(null); // Reset to show loading state
+        logger.log(`[C100 DIAGNOSTIC] Sending IPC RequestFileContent for: ${file.path}`);
         clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: file.path });
     }, [clientIpc]);
 
@@ -10640,8 +10645,9 @@ const App = () => {
         return !hasTitle && !hasContext && !hasResponseContent;
     }, [cycleTitle, cycleContext, ephemeralContext, tabs]);
     
-    // C99: Auto-select first valid file for diffing
+    // C100: Auto-select first valid file for diffing
     React.useEffect(() => {
+        logger.log(`[C100 AUTO-DIFF-EFFECT] Running effect. Parsed Mode: ${isParsedMode}, Cycle: ${currentCycle}, AutoSelectedFor: ${autoSelectedForCycle.current}`);
         if (isParsedMode && activeTabData?.parsedContent && fileExistenceMap.size > 0 && autoSelectedForCycle.current !== currentCycle) {
             const firstExistingFile = activeTabData.parsedContent.filesUpdated.find(
                 file => fileExistenceMap.get(file) === true
@@ -10650,14 +10656,31 @@ const App = () => {
             if (firstExistingFile) {
                 const parsedFileObject = activeTabData.parsedContent.files.find(f => f.path === firstExistingFile);
                 if (parsedFileObject) {
-                    logger.log(`[AUTO-SELECT] Automatically selecting first existing file for diff: ${firstExistingFile}`);
+                    logger.log(`[C100 AUTO-DIFF-EFFECT] Automatically selecting first existing file for diff: ${firstExistingFile}`);
                     handleSelectForDiff(parsedFileObject);
-                    autoSelectedForCycle.current = currentCycle; // Mark as auto-selected for this cycle
+                    autoSelectedForCycle.current = currentCycle;
+                } else {
+                     logger.log(`[C100 AUTO-DIFF-EFFECT] Found existing file '${firstExistingFile}' but no corresponding parsed file object.`);
                 }
+            } else {
+                logger.log(`[C100 AUTO-DIFF-EFFECT] No existing files found in the parsed response to auto-select.`);
             }
         }
     }, [isParsedMode, activeTabData, fileExistenceMap, currentCycle, handleSelectForDiff]);
 
+    const handleTestDiff = () => {
+        if (isParsedMode && activeTabData?.parsedContent && fileExistenceMap.size > 0) {
+            const firstValidFile = activeTabData.parsedContent.files.find(f => fileExistenceMap.get(f.path));
+            if (firstValidFile) {
+                logger.log(`[C100 TEST-BUTTON] Manually triggering diff for: ${firstValidFile.path}`);
+                handleSelectForDiff(firstValidFile);
+            } else {
+                logger.log(`[C100 TEST-BUTTON] No valid file found in active tab to test.`);
+            }
+        } else {
+            logger.log(`[C100 TEST-BUTTON] Cannot test: Not in parsed mode or no data available.`);
+        }
+    };
 
     const collapsedNavigator = (
         <div className="collapsed-navigator">
@@ -10673,6 +10696,7 @@ const App = () => {
                 <div className="pc-toolbar">
                     <button onClick={handleGeneratePrompt} title="Generate prompt.md"><VscFileCode /> Generate prompt.md</button>
                     <button onClick={handleGlobalParseToggle}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button>
+                    {isParsedMode && <button onClick={handleTestDiff} title="Test Diffing First File"><VscBeaker /> Test Diff</button>}
                 </div>
                 <div className="tab-count-input">
                     <label htmlFor="tab-count">Responses:</label>
@@ -10717,10 +10741,10 @@ const App = () => {
                                         <ul className="associated-files-list">
                                             {activeTabData.parsedContent.filesUpdated.map(file => (
                                                 <li key={file} 
-                                                    onMouseEnter={() => logger.log(`[HOVER-TEST] Mouse ENTER on ${file}`)}
-                                                    onMouseLeave={() => logger.log(`[HOVER-TEST] Mouse LEAVE from ${file}`)}
+                                                    onMouseEnter={() => logger.log(`[C100 HOVER-TEST] Mouse ENTER on ${file}`)}
+                                                    onMouseLeave={() => logger.log(`[C100 HOVER-TEST] Mouse LEAVE from ${file}`)}
                                                     onClick={() => {
-                                                        logger.log(`[C99 CLICK-TEST] LI element clicked for: ${file}`);
+                                                        logger.log(`[C100 CLICK-TEST] LI element clicked for: ${file}`);
                                                         const parsedFile = activeTabData.parsedContent?.files.find(f => f.path === file);
                                                         if (parsedFile && fileExistenceMap.get(file)) {
                                                             handleSelectForDiff(parsedFile);
