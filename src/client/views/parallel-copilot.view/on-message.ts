@@ -34,7 +34,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     });
     
     serverIpc.onClientMessage(ClientToServerChannel.RequestFileContent, (data) => {
-        loggerService.log(`[on-message.ts] Received RequestFileContent for: ${data.path}`);
+        loggerService.log(`[C98 DEBUG] IPC Handler received RequestFileContent for: ${data.path}`);
         fsService.handleFileContentRequest(data.path, serverIpc);
     });
 }

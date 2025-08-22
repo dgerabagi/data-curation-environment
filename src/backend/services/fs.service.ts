@@ -408,15 +408,15 @@ export class FSService {
     // --- File Operations ---
 
     public async handleFileContentRequest(filePath: string, serverIpc: ServerPostMessageManager) {
-        Services.loggerService.log(`[fs.service] Received request for content of: ${filePath}`);
+        Services.loggerService.log(`[C98 DEBUG] handleFileContentRequest initiated for: ${filePath}`);
         try {
             const uri = vscode.Uri.file(filePath);
             const contentBuffer = await vscode.workspace.fs.readFile(uri);
             const content = Buffer.from(contentBuffer).toString('utf-8');
-            Services.loggerService.log(`[fs.service] Successfully read content for: ${filePath}. Sending to client.`);
+            Services.loggerService.log(`[C98 DEBUG] Successfully read content for: ${filePath}. Sending to client.`);
             serverIpc.sendToClient(ServerToClientChannel.SendFileContent, { path: filePath, content });
         } catch (error) {
-            Services.loggerService.error(`[fs.service] Failed to read file content for ${filePath}: ${error}`);
+            Services.loggerService.error(`[C98 DEBUG] Failed to read file content for ${filePath}: ${error}`);
             serverIpc.sendToClient(ServerToClientChannel.SendFileContent, { path: filePath, content: null });
         }
     }

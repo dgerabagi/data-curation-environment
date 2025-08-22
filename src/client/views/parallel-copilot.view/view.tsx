@@ -1,4 +1,4 @@
-// Updated on: C97 (Fix all reported UI bugs and add features)
+// Updated on: C98 (Fix all reported UI bugs and add features)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -139,7 +139,7 @@ const App = () => {
             setFileExistenceMap(new Map(Object.entries(existenceMap)));
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendFileContent, ({ path, content }) => {
-            logger.log(`[WebView IPC Receive] Received file content for ${path}`);
+            logger.log(`[C98 DEBUG] Received file content for ${path}`);
             if (diffTarget?.path === path) {
                 setOriginalFileContent(content);
             }
@@ -186,10 +186,10 @@ const App = () => {
     };
 
     const handleSelectForDiff = (file: ParsedFile) => {
-        logger.log(`[handleSelectForDiff] Function called for: ${file.path}`);
+        logger.log(`[C98 DEBUG] handleSelectForDiff called for: ${file.path}`);
         setDiffTarget(file);
         setOriginalFileContent(null);
-        logger.log(`[handleSelectForDiff] Sending IPC RequestFileContent for: ${file.path}`);
+        logger.log(`[C98 DEBUG] Sending IPC RequestFileContent for: ${file.path}`);
         clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: file.path });
     };
 
@@ -259,7 +259,7 @@ const App = () => {
                                         <ul className="associated-files-list">
                                             {activeTabData.parsedContent.filesUpdated.map(file => (
                                                 <li key={file} onClick={() => {
-                                                    logger.log(`[Diff Click] LI element clicked for: ${file}`);
+                                                    logger.log(`[C98 DEBUG] LI element clicked for: ${file}`);
                                                     const parsedFile = activeTabData.parsedContent?.files.find(f => f.path === file);
                                                     if (parsedFile && fileExistenceMap.get(file)) {
                                                         handleSelectForDiff(parsedFile);
