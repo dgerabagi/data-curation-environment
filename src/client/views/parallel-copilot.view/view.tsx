@@ -1,4 +1,4 @@
-// Updated on: C95 (Implement two-pane diff view)
+// Updated on: C96 (Fix all reported UI bugs and add features)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -12,16 +12,11 @@ import { parseResponse } from '@/client/utils/response-parser';
 import ReactMarkdown from 'react-markdown';
 import DiffViewer from '@/client/components/DiffViewer';
 
-// Debounce hook
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
     return (...args: any[]) => {
-        if (timeoutRef.current) {
-            clearTimeout(timeoutRef.current);
-        }
-        timeoutRef.current = setTimeout(() => {
-            callback(...args);
-        }, delay);
+        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        timeoutRef.current = setTimeout(() => callback(...args), delay);
     };
 };
 
@@ -41,7 +36,6 @@ const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; i
 );
 
 const App = () => {
-    // State
     const [activeTab, setActiveTab] = React.useState(1);
     const [tabCount, setTabCount] = React.useState(4);
     const [currentCycle, setCurrentCycle] = React.useState(1);
@@ -56,8 +50,10 @@ const App = () => {
     const [diffTarget, setDiffTarget] = React.useState<ParsedFile | null>(null);
     const [originalFileContent, setOriginalFileContent] = React.useState<string | null>(null);
 
-    // Collapsible sections state
     const [isCycleCollapsed, setIsCycleCollapsed] = React.useState(false);
+    const [isSummaryCollapsed, setIsSummaryCollapsed] = React.useState(false);
+    const [isCourseOfActionCollapsed, setIsCourseOfActionCollapsed] = React.useState(false);
+    const [isAssociatedFilesCollapsed, setIsAssociatedFilesCollapsed] = React.useState(false);
     
     const clientIpc = ClientPostMessageManager.getInstance();
 
@@ -73,15 +69,40 @@ const App = () => {
             cycleContext,
             ephemeralContext,
             responses,
+            isParsedMode,
         };
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
-    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, clientIpc]);
+    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, clientIpc]);
 
     const debouncedSave = useDebounce(saveCurrentCycleState, 1000);
 
     React.useEffect(() => {
         debouncedSave();
-    }, [cycleTitle, cycleContext, ephemeralContext, tabs, debouncedSave]);
+    }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, debouncedSave]);
+    
+    const parseAllTabs = React.useCallback((tabsToParse: { [key: string]: TabState }) => {
+        const allFilePaths = new Set<string>();
+        const updatedTabs = { ...tabsToParse };
+        Object.entries(updatedTabs).forEach(([tabId, tabState]) => {
+            if (tabState.rawContent) {
+                const parsed = parseResponse(tabState.rawContent);
+                updatedTabs[Number(tabId)].parsedContent = parsed;
+                parsed.filesUpdated.forEach(file => allFilePaths.add(file));
+                parsed.files.forEach(file => {
+                    const lang = file.path.split('.').pop() || 'plaintext';
+                    const id = `${file.path}::${file.content}`;
+                    if (!highlightedCodeBlocks.has(id)) {
+                         clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
+                    }
+                });
+            }
+        });
+        setTabs(updatedTabs);
+        if (allFilePaths.size > 0) {
+            clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) });
+        }
+    }, [clientIpc, highlightedCodeBlocks]);
+
 
     React.useEffect(() => {
         const loadCycleData = (cycleData: PcppCycle) => {
@@ -94,6 +115,11 @@ const App = () => {
                 newTabs[tabId] = { rawContent: response.content, parsedContent: null };
             });
             setTabs(newTabs);
+            const loadedParseMode = cycleData.isParsedMode || false;
+            setIsParsedMode(loadedParseMode);
+            if (loadedParseMode) {
+                parseAllTabs(newTabs);
+            }
         };
 
         clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData }) => {
@@ -110,15 +136,16 @@ const App = () => {
             setFileExistenceMap(new Map(Object.entries(existenceMap)));
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendFileContent, ({ path, content }) => {
+            logger.log(`[WebView] Received file content for ${path}`);
             if (diffTarget?.path === path) {
                 setOriginalFileContent(content);
             }
         });
         clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});
-    }, [clientIpc, diffTarget]);
+    }, [clientIpc, diffTarget, parseAllTabs]);
 
     const handleRawContentChange = (newContent: string, tabIndex: number) => {
-        setTabs(prev => ({ ...prev, [tabIndex.toString()]: { ...(prev[tabIndex.toString()] || { parsedContent: null }), rawContent: newContent, parsedContent: isParsedMode ? parseResponse(newContent) : null }}));
+        setTabs(prev => ({ ...prev, [tabIndex.toString()]: { ...(prev[tabIndex.toString()] || { parsedContent: null }), rawContent: newContent }}));
     };
 
     const handleGlobalParseToggle = () => {
@@ -126,30 +153,8 @@ const App = () => {
         setIsParsedMode(newParseMode);
         setDiffTarget(null);
         setOriginalFileContent(null);
-
         if (newParseMode) {
-            const allFilePaths = new Set<string>();
-            const updatedTabs = { ...tabs };
-            Object.entries(updatedTabs).forEach(([tabId, tabState]) => {
-                if (tabState.rawContent && !tabState.parsedContent) {
-                    const parsed = parseResponse(tabState.rawContent);
-                    updatedTabs[Number(tabId)].parsedContent = parsed;
-                    parsed.filesUpdated.forEach(file => allFilePaths.add(file));
-                    parsed.files.forEach(file => {
-                        const lang = file.path.split('.').pop() || 'plaintext';
-                        const id = `${file.path}::${file.content}`;
-                        if (!highlightedCodeBlocks.has(id)) {
-                             clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
-                        }
-                    });
-                } else if (tabState.parsedContent) {
-                    tabState.parsedContent.filesUpdated.forEach(file => allFilePaths.add(file));
-                }
-            });
-            setTabs(updatedTabs);
-            if (allFilePaths.size > 0) {
-                clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) });
-            }
+            parseAllTabs(tabs);
         }
     };
 
@@ -176,14 +181,20 @@ const App = () => {
     };
 
     const handleSelectForDiff = (file: ParsedFile) => {
+        logger.log(`[Diff Click] Clicked on file: ${file.path}`);
         setDiffTarget(file);
-        setOriginalFileContent(null); // Clear previous content
-        logger.log(`Requesting content for diff: ${file.path}`);
+        setOriginalFileContent(null);
+        logger.log(`[Diff Click] Sending IPC RequestFileContent for: ${file.path}`);
         clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: file.path });
     };
 
     const activeTabData = tabs[activeTab.toString()];
-    const isNewCycleButtonDisabled = !cycleTitle && !cycleContext && !ephemeralContext && Object.values(tabs).every(t => !t.rawContent);
+    const isNewCycleButtonDisabled = React.useMemo(() => {
+        const hasTitle = cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== '';
+        const hasContext = cycleContext.trim() || ephemeralContext.trim();
+        const hasResponseContent = Object.values(tabs).some(t => t.rawContent.trim());
+        return !hasTitle && !hasContext && !hasResponseContent;
+    }, [cycleTitle, cycleContext, ephemeralContext, tabs]);
 
     return (
         <div className="pc-view-container">
@@ -207,6 +218,10 @@ const App = () => {
                     <textarea className="context-textarea" placeholder="Cycle Context (notes for this cycle)..." value={cycleContext} onChange={e => setCycleContext(e.target.value)} />
                     <textarea className="context-textarea" placeholder="Ephemeral Context (for this cycle's prompt only)..." value={ephemeralContext} onChange={e => setEphemeralContext(e.target.value)} />
                 </div>
+                <div className="tab-count-input">
+                    <label htmlFor="tab-count">Number of Responses:</label>
+                    <input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} />
+                </div>
             </CollapsibleSection>
 
             <div className="tab-bar">
@@ -221,15 +236,21 @@ const App = () => {
                         ) : (
                             <div className="parsed-view-grid">
                                 <div className="parsed-view-left">
-                                    <ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown>
-                                    <ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown>
-                                    <CollapsibleSection title="Associated Files" isCollapsed={false} onToggle={() => {}}>
+                                    <CollapsibleSection title="Thoughts / Response" isCollapsed={isSummaryCollapsed} onToggle={() => setIsSummaryCollapsed(p => !p)}>
+                                        <ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown>
+                                    </CollapsibleSection>
+                                    <CollapsibleSection title="Course of Action" isCollapsed={isCourseOfActionCollapsed} onToggle={() => setIsCourseOfActionCollapsed(p => !p)}>
+                                        <ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown>
+                                    </CollapsibleSection>
+                                    <CollapsibleSection title="Associated Files" isCollapsed={isAssociatedFilesCollapsed} onToggle={() => setIsAssociatedFilesCollapsed(p => !p)}>
                                         <ul className="associated-files-list">
                                             {activeTabData.parsedContent.filesUpdated.map(file => (
                                                 <li key={file} onClick={() => {
                                                     const parsedFile = activeTabData.parsedContent?.files.find(f => f.path === file);
                                                     if (parsedFile && fileExistenceMap.get(file)) {
                                                         handleSelectForDiff(parsedFile);
+                                                    } else {
+                                                        logger.warn(`Cannot diff: File '${file}' not found in parsed content or does not exist.`);
                                                     }
                                                 }}>
                                                     {fileExistenceMap.get(file) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}

@@ -15,6 +15,7 @@ export interface PcppCycle {
     cycleContext: string;
     ephemeralContext: string;
     responses: { [tabId: string]: PcppResponse };
+    isParsedMode?: boolean; // New: To persist parse state
 }
 
 export interface PcppHistoryFile {
@@ -66,14 +67,13 @@ export class HistoryService {
                 title: 'New Cycle',
                 cycleContext: '',
                 ephemeralContext: '',
-                responses: { "1": { content: "" }, "2": { content: "" }, "3": { content: "" }, "4": { content: "" } },
+                responses: { "1": { content: "" } },
+                isParsedMode: false,
             };
-            // Save this default cycle so it exists for the next load
             await this.saveCycleData(defaultCycle);
             return defaultCycle;
         }
         
-        // Find the cycle with the highest ID
         const latestCycle = history.cycles.reduce((latest, current) => current.cycleId > latest.cycleId ? current : latest);
         Services.loggerService.log(`Latest cycle found: ${latestCycle.cycleId}`);
         return latestCycle;
@@ -91,14 +91,11 @@ export class HistoryService {
         const cycleIndex = history.cycles.findIndex(c => c.cycleId === cycleData.cycleId);
 
         if (cycleIndex > -1) {
-            // Update existing cycle
             history.cycles[cycleIndex] = cycleData;
         } else {
-            // Add new cycle
             history.cycles.push(cycleData);
         }
         
-        // Sort cycles by ID to maintain order
         history.cycles.sort((a, b) => a.cycleId - b.cycleId);
 
         await this._writeHistoryFile(history);
