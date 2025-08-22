@@ -1,4 +1,4 @@
-// Updated on: C98 (Fix all reported UI bugs and add features)
+// Updated on: C99 (Add hover logs and auto-selection for diff view)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -57,6 +57,7 @@ const App = () => {
     const [isSummaryCollapsed, setIsSummaryCollapsed] = React.useState(false);
     const [isCourseOfActionCollapsed, setIsCourseOfActionCollapsed] = React.useState(false);
     const [isAssociatedFilesCollapsed, setIsAssociatedFilesCollapsed] = React.useState(false);
+    const autoSelectedForCycle = React.useRef<number | null>(null);
     
     const clientIpc = ClientPostMessageManager.getInstance();
 
@@ -130,7 +131,10 @@ const App = () => {
             setMaxCycle(cycleData.cycleId);
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData }) => {
-            if (cycleData) loadCycleData(cycleData);
+            if (cycleData) {
+                loadCycleData(cycleData);
+                autoSelectedForCycle.current = null; // Reset auto-select on cycle change
+            }
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => {
             setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml));
@@ -139,7 +143,7 @@ const App = () => {
             setFileExistenceMap(new Map(Object.entries(existenceMap)));
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendFileContent, ({ path, content }) => {
-            logger.log(`[C98 DEBUG] Received file content for ${path}`);
+            logger.log(`[C99 DEBUG] Received file content for ${path}`);
             if (diffTarget?.path === path) {
                 setOriginalFileContent(content);
             }
@@ -156,6 +160,7 @@ const App = () => {
         setIsParsedMode(newParseMode);
         setDiffTarget(null);
         setOriginalFileContent(null);
+        autoSelectedForCycle.current = null; // Reset auto-select on parse toggle
         if (newParseMode) {
             parseAllTabs(tabs);
         }
@@ -185,13 +190,13 @@ const App = () => {
         clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle });
     };
 
-    const handleSelectForDiff = (file: ParsedFile) => {
-        logger.log(`[C98 DEBUG] handleSelectForDiff called for: ${file.path}`);
+    const handleSelectForDiff = React.useCallback((file: ParsedFile) => {
+        logger.log(`[C99 DEBUG] handleSelectForDiff called for: ${file.path}`);
         setDiffTarget(file);
         setOriginalFileContent(null);
-        logger.log(`[C98 DEBUG] Sending IPC RequestFileContent for: ${file.path}`);
+        logger.log(`[C99 DEBUG] Sending IPC RequestFileContent for: ${file.path}`);
         clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: file.path });
-    };
+    }, [clientIpc]);
 
     const activeTabData = tabs[activeTab.toString()];
     const isNewCycleButtonDisabled = React.useMemo(() => {
@@ -200,6 +205,25 @@ const App = () => {
         const hasResponseContent = Object.values(tabs).some(t => t.rawContent.trim());
         return !hasTitle && !hasContext && !hasResponseContent;
     }, [cycleTitle, cycleContext, ephemeralContext, tabs]);
+    
+    // C99: Auto-select first valid file for diffing
+    React.useEffect(() => {
+        if (isParsedMode && activeTabData?.parsedContent && fileExistenceMap.size > 0 && autoSelectedForCycle.current !== currentCycle) {
+            const firstExistingFile = activeTabData.parsedContent.filesUpdated.find(
+                file => fileExistenceMap.get(file) === true
+            );
+
+            if (firstExistingFile) {
+                const parsedFileObject = activeTabData.parsedContent.files.find(f => f.path === firstExistingFile);
+                if (parsedFileObject) {
+                    logger.log(`[AUTO-SELECT] Automatically selecting first existing file for diff: ${firstExistingFile}`);
+                    handleSelectForDiff(parsedFileObject);
+                    autoSelectedForCycle.current = currentCycle; // Mark as auto-selected for this cycle
+                }
+            }
+        }
+    }, [isParsedMode, activeTabData, fileExistenceMap, currentCycle, handleSelectForDiff]);
+
 
     const collapsedNavigator = (
         <div className="collapsed-navigator">
@@ -258,14 +282,17 @@ const App = () => {
                                     <CollapsibleSection title="Associated Files" isCollapsed={isAssociatedFilesCollapsed} onToggle={() => setIsAssociatedFilesCollapsed(p => !p)}>
                                         <ul className="associated-files-list">
                                             {activeTabData.parsedContent.filesUpdated.map(file => (
-                                                <li key={file} onClick={() => {
-                                                    logger.log(`[C98 DEBUG] LI element clicked for: ${file}`);
-                                                    const parsedFile = activeTabData.parsedContent?.files.find(f => f.path === file);
-                                                    if (parsedFile && fileExistenceMap.get(file)) {
-                                                        handleSelectForDiff(parsedFile);
-                                                    } else {
-                                                        logger.warn(`Cannot diff: File '${file}' not found in parsed content or does not exist.`);
-                                                    }
+                                                <li key={file} 
+                                                    onMouseEnter={() => logger.log(`[HOVER-TEST] Mouse ENTER on ${file}`)}
+                                                    onMouseLeave={() => logger.log(`[HOVER-TEST] Mouse LEAVE from ${file}`)}
+                                                    onClick={() => {
+                                                        logger.log(`[C99 CLICK-TEST] LI element clicked for: ${file}`);
+                                                        const parsedFile = activeTabData.parsedContent?.files.find(f => f.path === file);
+                                                        if (parsedFile && fileExistenceMap.get(file)) {
+                                                            handleSelectForDiff(parsedFile);
+                                                        } else {
+                                                            logger.warn(`Cannot diff: File '${file}' not found in parsed content or does not exist.`);
+                                                        }
                                                 }}>
                                                     {fileExistenceMap.get(file) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
                                                     <span>{file}</span>
