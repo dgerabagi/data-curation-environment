@@ -1,12 +1,12 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-22T12:57:15.051Z
+  Date Generated: 2025-08-22T13:22:53.634Z
   ---
   Total Files: 209
-  Total Lines: 17675
-  Total Characters: 824874
-  Approx. Tokens: 206298
+  Total Lines: 17670
+  Total Characters: 825816
+  Approx. Tokens: 206534
 -->
 
 <!-- Top 10 Files by Token Count -->
@@ -16,7 +16,7 @@
 4. src\client\views\context-chooser.view\view.tsx (5562 tokens)
 5. src\Artifacts\A0. DCE Master Artifact List.md (4539 tokens)
 6. src\client\components\tree-view\TreeView.tsx (4508 tokens)
-7. src\client\views\parallel-copilot.view\view.tsx (4420 tokens)
+7. src\client\views\parallel-copilot.view\view.tsx (4408 tokens)
 8. src\backend\services\flattener.service.ts (3685 tokens)
 9. src\client\views\context-chooser.view\view.scss (3638 tokens)
 10. src\backend\services\prompt.service.ts (3481 tokens)
@@ -81,7 +81,7 @@
 57. src\Artifacts\A49. DCE - Phase 2 - File Association & Diffing Plan.md - Lines: 36 - Chars: 3857 - Tokens: 965
 58. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
 59. src\Artifacts\A50. DCE - Phase 2 - UI Component Plan (Resizable Panes & Inner Editors).md - Lines: 48 - Chars: 4790 - Tokens: 1198
-60. src\Artifacts\A51. DCE - A-B-C Testing Strategy for UI Bugs.md - Lines: 41 - Chars: 4298 - Tokens: 1075
+60. src\Artifacts\A51. DCE - A-B-C Testing Strategy for UI Bugs.md - Lines: 81 - Chars: 5490 - Tokens: 1373
 61. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
 62. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
 63. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
@@ -114,11 +114,11 @@
 90. src\client\views\index.ts - Lines: 35 - Chars: 1714 - Tokens: 429
 91. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 92. src\client\views\parallel-copilot.view\on-message.ts - Lines: 41 - Chars: 2019 - Tokens: 505
-93. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 41 - Chars: 1849 - Tokens: 463
-94. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 56 - Chars: 2515 - Tokens: 629
-95. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 61 - Chars: 2788 - Tokens: 697
-96. src\client\views\parallel-copilot.view\view.scss - Lines: 360 - Chars: 8335 - Tokens: 2084
-97. src\client\views\parallel-copilot.view\view.tsx - Lines: 320 - Chars: 17679 - Tokens: 4420
+93. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 41 - Chars: 1889 - Tokens: 473
+94. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 56 - Chars: 2555 - Tokens: 639
+95. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 61 - Chars: 2828 - Tokens: 707
+96. src\client\views\parallel-copilot.view\view.scss - Lines: 371 - Chars: 8013 - Tokens: 2004
+97. src\client\views\parallel-copilot.view\view.tsx - Lines: 264 - Chars: 17631 - Tokens: 4408
 98. src\common\ipc\channels.enum.ts - Lines: 64 - Chars: 3422 - Tokens: 856
 99. src\common\ipc\channels.type.ts - Lines: 57 - Chars: 4453 - Tokens: 1114
 100. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
@@ -4100,6 +4100,7 @@ These features represent a significant refactor of the PCPP's rendering logic an
 # Artifact A51: DCE - A-B-C Testing Strategy for UI Bugs
 # Date Created: C102
 # Author: AI Model & Curator
+# Updated on: C103 (Refine to "Original-A-B-C" parallel testing model)
 
 - **Key/Value for A0:**
 - **Description:** Outlines a development pattern for creating parallel, isolated test components to diagnose and resolve persistent UI bugs, such as event handling or rendering issues.
@@ -4107,37 +4108,76 @@ These features represent a significant refactor of the PCPP's rendering logic an
 
 ## 1. Overview & Goal
 
-When a user interface (UI) bug, particularly related to event handling (`onClick`, `onDrop`, etc.) or component rendering, proves resistant to conventional debugging, it often indicates a complex or non-obvious root cause. This can be due to silent rendering errors in React, improper event propagation, conflicting CSS properties, or subtle issues with component lifecycle and state.
+When a user interface (UI) bug, particularly related to event handling (`onClick`, `onDrop`, etc.) or component rendering, proves resistant to conventional debugging, it often indicates a complex or non-obvious root cause. Continuously attempting small, incremental fixes on the main, complex component can be inefficient and can lead to regressions.
 
-Continuously attempting small, incremental fixes on the main, complex component can be inefficient and frustrating. The goal of the **A/B/C Testing Strategy** is to break this cycle by stripping away all complexity and testing the core functionality in parallel, isolated environments.
+The goal of the **"Original-A-B-C" Testing Strategy** is to break this cycle by creating a test harness that runs the original, complex component in parallel with multiple, simplified, independent test components. Each test component attempts to solve the same basic problem using a slightly different technical approach, allowing for rapid diagnosis.
 
 ## 2. The Strategy
 
-The core idea is to replace the single, complex, and failing UI component with multiple, simplified, independent test components. Each test component attempts to solve the same basic problem using a slightly different technical approach.
+### 2.1. Core Principles
+1.  **Preserve the Original:** Never gut or remove existing, working functionality to build a test case. The original component should remain available as the "control" in the experiment.
+2.  **Isolate Variables:** Each test case should be as simple as possible, designed to test a single variable (e.g., raw event handling, local state updates, prop drilling).
+3.  **Run in Parallel:** The original component and all test components should be accessible from the same UI, typically via a simple tab switcher, allowing for immediate comparison.
 
-### 2.1. Steps
+### 2.2. Steps
+1.  **Identify the Core Problem:** Isolate the most fundamental action that is failing (e.g., "A click on a list item is not being registered").
+2.  **Create Test Harness:** Refactor the main view to act as a "test harness."
+    *   Introduce a top-level state to control which view is active (e.g., `activeView: 'Original' | 'TestA' | 'TestB'`).
+    *   Create a simple tab bar UI to switch this state.
+    *   Encapsulate the existing, complex component so it can be rendered when `activeView === 'Original'`.
+3.  **Lift Necessary State:** Identify the minimum state required for the test components to function (e.g., `parsedContent`). Lift this state up to the test harness level. The "Original" component can then pass data up to the harness via a callback prop.
+4.  **Implement Isolated Test Components:** Create new, simple components for each test case, which receive the shared state as props.
+    *   **Test A (Barebones):** The simplest possible implementation. Use raw HTML elements with inline event handlers that only `logger.log()`.
+    *   **Test B (Local State):** Introduce `useState` to test the component's ability to manage its own state and re-render on an event.
+    *   **Test C (Prop-Driven):** Use a child component that calls a function passed down via props, testing the prop-drilling pattern.
+5.  **Analyze Results:** Interact with each tab to see which implementation succeeds, thereby isolating the architectural pattern that is failing.
 
-1.  **Identify the Core Problem:** Isolate the most fundamental action that is failing. For example: "A click on a list item is not being registered."
-2.  **Pause Feature Development:** Temporarily halt all work on the complex feature (e.g., diffing, syntax highlighting) that surrounds the bug.
-3.  **Create Test Harness:** Refactor the main view to act as a "test harness." Replace the primary UI with a simple tabbed interface where each tab corresponds to a different test case (e.g., "Test 1", "Test 2", "Test 3").
-4.  **Implement Isolated Test Components:** Create a new, simple component for each test case. These components should be self-contained and have minimal dependencies.
-    *   **Test A (The "Barebones" Test):** The simplest possible implementation. Use raw HTML elements (`div`, `ul`, `li`) with inline event handlers that only contain a single `logger.log()` statement. No state, no props, no complex styling. This tests the absolute baseline of event capturing.
-    *   **Test B (The "Local State" Test):** Introduce basic React `useState`. The event handler now calls a state setter function. The component renders something based on that state. This tests the component's ability to manage its own state and re-render correctly.
-    *   **Test C (The "Prop-Driven" Test):** Re-introduce the concept of passing data and callbacks via props. A parent component holds the state, and the child component (the list) calls a function prop (`onClickItem`) when an event occurs. This tests for issues related to prop drilling and component composition.
-5.  **Analyze Results:** By running the extension and interacting with each test tab, the developer can quickly determine which architectural pattern works and which fails.
-    *   If Test A fails, the problem is likely fundamental (e.g., a CSS overlay, an environmental issue with the webview).
-    *   If Test A works but Test B fails, the issue is with React's state or re-rendering loop.
-    *   If Test B works but Test C fails, the issue is with how props are being passed between components.
+## 3. Cleanup Process
 
-## 3. Case Study: The Unclickable "Associated Files" List (Cycle 102)
+Once a working pattern is identified in a test component:
+1.  **Codify Findings:** Document the successful pattern and the root cause of the failure in a relevant artifact (e.g., `A11. Regression Case Studies`).
+2.  **Integrate Solution:** Refactor the "Original" component to use the successful pattern.
+3.  **Remove Test Artifacts:**
+    *   Remove the test harness tabs and view-switching logic from the main view component.
+    *   Delete the temporary `TestPane*.tsx` component files.
+    *   Remove any extra styling related to the test harness from the SCSS file.
 
--   **Problem:** For over 10 cycles, the `onClick` handler for files in the "Associated Files" list in the PCPP would not fire. No logs were generated.
--   **Application of Strategy:**
-    1.  The main PCPP view was refactored to show three tabs: "Test Pane 1", "Test Pane 2", "Test Pane 3".
-    2.  `TestPane1.tsx` was created with a raw `<ul>` and a simple `onClick={() => logger.log(...) }`.
-    3.  `TestPane2.tsx` was created with its own `useState` to manage the selected file.
-    4.  `TestPane3.tsx` was created with a parent/child structure to test prop drilling.
--   **Outcome:** This strategy will isolate the point of failure, allowing a working pattern to be identified and then used to rebuild the original, more complex feature on a solid foundation.
+## 4. Sample Test Data for Parser
+
+To ensure consistent testing of the PCPP parser, use the following sample raw response. Paste this into a response tab in the "Original" view and click "Parse All".
+
+```
+I've analyzed the request and the provided context. The main goal is to add a new test harness to the Parallel Co-Pilot panel without removing the existing functionality. This involves refactoring `view.tsx` to support multiple, switchable views.
+
+### Course of Action
+
+1.  **Update Documentation:** I will first update `A51` to reflect the new "Original-A-B-C" parallel testing strategy.
+2.  **Refactor `view.tsx`:** I will refactor the main component into a test harness that can switch between the original view and the new test panes.
+3.  **Re-supply Test Panes:** I will provide the code for the three isolated test panes again.
+
+### Files Updated This Cycle:
+*   `A51. DCE - A-B-C Testing Strategy for UI Bugs.md` (Updated)
+*   `src/client/views/parallel-copilot.view/view.tsx` (Updated)
+*   `src/client/views/parallel-copilot.view/view.scss` (Updated)
+
+<file path="src/client/views/parallel-copilot.view/view.tsx">
+// This is a sample file content block.
+// It will be parsed and displayed.
+import * as React from 'react';
+
+const TestComponent = () => {
+    return <div>Hello, World!</div>;
+};
+
+export default TestComponent;
+</file>
+<file path="src/client/views/parallel-copilot.view/view.scss">
+/* This is a sample SCSS file content block. */
+.test-harness-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--vscode-panel-border);
+}
+```
 </file>
 
 <file path="src/Artifacts/A6. DCE - Initial Scaffolding Deployment Script.md">
@@ -10149,12 +10189,12 @@ interface TestPane1Props {
 
 const TestPane1: React.FC<TestPane1Props> = ({ parsedContent, fileExistenceMap }) => {
     if (!parsedContent) {
-        return <div className="test-pane-container">Paste a response and click "Parse All" to begin.</div>;
+        return <div className="test-pane-container">Go to the "Original" tab, paste a response, and click "Parse All" to populate test data.</div>;
     }
 
     return (
         <div className="test-pane-container">
-            <h3>Test Pane 1: Barebones Click Logger</h3>
+            <h3>Test Pane A: Barebones Click Logger</h3>
             <p>This test uses a raw list with a simple `onClick` that only calls `logger.log()`. If clicks are logged here, the fundamental event capture is working.</p>
             <hr style={{ margin: '8px 0', borderColor: 'var(--vscode-panel-border)' }} />
             <ul className="associated-files-list">
@@ -10162,10 +10202,10 @@ const TestPane1: React.FC<TestPane1Props> = ({ parsedContent, fileExistenceMap }
                     <li 
                         key={file} 
                         onClick={() => {
-                            logger.log(`[TEST PANE 1] CLICKED: ${file}`);
+                            logger.log(`[TEST PANE A] CLICKED: ${file}`);
                         }}
-                        onMouseEnter={() => logger.log(`[TEST PANE 1] Mouse ENTER on: ${file}`)}
-                        onMouseLeave={() => logger.log(`[TEST PANE 1] Mouse LEAVE from: ${file}`)}
+                        onMouseEnter={() => logger.log(`[TEST PANE A] Mouse ENTER on: ${file}`)}
+                        onMouseLeave={() => logger.log(`[TEST PANE A] Mouse LEAVE from: ${file}`)}
                     >
                         {fileExistenceMap.get(file) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
                         <span>{file}</span>
@@ -10195,17 +10235,17 @@ const TestPane2: React.FC<TestPane2Props> = ({ parsedContent, fileExistenceMap }
     const [selectedFile, setSelectedFile] = React.useState<ParsedFile | null>(null);
 
     if (!parsedContent) {
-        return <div className="test-pane-container">Paste a response and click "Parse All" to begin.</div>;
+        return <div className="test-pane-container">Go to the "Original" tab, paste a response, and click "Parse All" to populate test data.</div>;
     }
 
     const handleFileClick = (file: ParsedFile) => {
-        logger.log(`[TEST PANE 2] CLICKED: ${file.path}. Setting local state.`);
+        logger.log(`[TEST PANE B] CLICKED: ${file.path}. Setting local state.`);
         setSelectedFile(file);
     };
 
     return (
         <div className="test-pane-container">
-            <h3>Test Pane 2: Local State Update</h3>
+            <h3>Test Pane B: Local State Update</h3>
             <p>This test uses local `useState` to manage the selected file. Clicking a file should update the content displayed below.</p>
             <hr style={{ margin: '8px 0', borderColor: 'var(--vscode-panel-border)' }} />
             <div style={{ display: 'flex', gap: '8px' }}>
@@ -10266,17 +10306,17 @@ const TestPane3: React.FC<TestPane3Props> = ({ parsedContent, fileExistenceMap }
     const [selectedFile, setSelectedFile] = React.useState<ParsedFile | null>(null);
 
     if (!parsedContent) {
-        return <div className="test-pane-container">Paste a response and click "Parse All" to begin.</div>;
+        return <div className="test-pane-container">Go to the "Original" tab, paste a response, and click "Parse All" to populate test data.</div>;
     }
 
     const handleFileSelect = (file: ParsedFile) => {
-        logger.log(`[TEST PANE 3] Child component called onFileSelect prop for: ${file.path}.`);
+        logger.log(`[TEST PANE C] Child component called onFileSelect prop for: ${file.path}.`);
         setSelectedFile(file);
     };
 
     return (
         <div className="test-pane-container">
-            <h3>Test Pane 3: Prop-Driven Update</h3>
+            <h3>Test Pane C: Prop-Driven Update</h3>
             <p>This test uses a child component for the list, passing the click handler down as a prop. This tests for issues with prop drilling.</p>
             <hr style={{ margin: '8px 0', borderColor: 'var(--vscode-panel-border)' }} />
              <div style={{ display: 'flex', gap: '8px' }}>
@@ -10303,21 +10343,7 @@ export default TestPane3;
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
-/* Updated on: C102 (Add styles for test tabs) */
-/*
-    Review for C101:
-    Meticulously reviewed for any potential z-index issues, pointer-events: none properties,
-    or absolute positioning that could create an invisible overlay and block clicks on the
-    .associated-files-list. 
-    - The `.context-menu-overlay` has a high z-index but is only rendered when `contextMenu` state is not null.
-    - The main layout is a standard flexbox layout. There are no obvious culprits that would
-      create an element layered on top of the file list.
-    - The `.parsed-view-right` and `.parsed-view-left` panes are siblings in a flex container,
-      so they should not overlap.
-    Given the lack of a clear CSS cause, the issue is more likely a silent React rendering error
-    that is preventing event handlers from being attached to the DOM elements. The simplification
-    in view.tsx for C101 is intended to isolate this potential error.
-*/
+/* Updated on: C103 (Add styles for test harness tabs) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -10333,6 +10359,31 @@ body {
     height: 100vh;
     gap: 8px;
     box-sizing: border-box;
+}
+
+.test-harness-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--vscode-panel-border);
+    flex-shrink: 0;
+
+    .harness-tab {
+        padding: 6px 12px;
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+        color: var(--vscode-tab-inactiveForeground);
+        
+        &.active {
+            color: var(--vscode-tab-activeForeground);
+            border-bottom-color: var(--vscode-tab-activeBorder);
+        }
+    }
+}
+
+.test-harness-content {
+    flex-grow: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .collapsible-section {
@@ -10666,11 +10717,11 @@ body {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
-// Updated on: C101 (Radically simplify to "view AI content" instead of diffing to isolate bug)
+// Updated on: C103 (Refactor to Original-A-B-C test harness)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscBeaker } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -10678,7 +10729,9 @@ import { PcppCycle, PcppResponse } from '@/backend/services/history.service';
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
 import ReactMarkdown from 'react-markdown';
-import DiffViewer from '@/client/components/DiffViewer';
+import TestPane1 from './TestPane1';
+import TestPane2 from './TestPane2';
+import TestPane3 from './TestPane3';
 
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -10706,7 +10759,8 @@ const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; i
     </div>
 );
 
-const App = () => {
+// Encapsulates the original, complex view logic
+const OriginalView: React.FC<{ onDataParsed: (parsed: ParsedResponse, map: Map<string, boolean>) => void }> = ({ onDataParsed }) => {
     const [activeTab, setActiveTab] = React.useState(1);
     const [tabCount, setTabCount] = React.useState(4);
     const [currentCycle, setCurrentCycle] = React.useState(1);
@@ -10718,10 +10772,7 @@ const App = () => {
     const [highlightedCodeBlocks, setHighlightedCodeBlocks] = React.useState<Map<string, string>>(new Map());
     const [fileExistenceMap, setFileExistenceMap] = React.useState<Map<string, boolean>>(new Map());
     const [isParsedMode, setIsParsedMode] = React.useState(false);
-    
-    // C101: State simplification. Instead of diffing, just show the selected AI-generated file content.
     const [selectedFile, setSelectedFile] = React.useState<ParsedFile | null>(null);
-
     const [isCycleCollapsed, setIsCycleCollapsed] = React.useState(false);
     const [isSummaryCollapsed, setIsSummaryCollapsed] = React.useState(false);
     const [isCourseOfActionCollapsed, setIsCourseOfActionCollapsed] = React.useState(false);
@@ -10735,23 +10786,13 @@ const App = () => {
         for (let i = 1; i <= tabCount; i++) {
             responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' };
         }
-        const cycleData: PcppCycle = {
-            cycleId: currentCycle,
-            timestamp: new Date().toISOString(),
-            title: cycleTitle,
-            cycleContext,
-            ephemeralContext,
-            responses,
-            isParsedMode,
-        };
+        const cycleData: PcppCycle = { cycleId: currentCycle, timestamp: new Date().toISOString(), title: cycleTitle, cycleContext, ephemeralContext, responses, isParsedMode };
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
     }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, clientIpc]);
 
     const debouncedSave = useDebounce(saveCurrentCycleState, 1000);
 
-    React.useEffect(() => {
-        debouncedSave();
-    }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, debouncedSave]);
+    React.useEffect(() => { debouncedSave(); }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, debouncedSave]);
     
     const parseAllTabs = React.useCallback((tabsToParse: { [key: string]: TabState }) => {
         const allFilePaths = new Set<string>();
@@ -10761,10 +10802,9 @@ const App = () => {
                 const parsed = parseResponse(tabState.rawContent);
                 updatedTabs[Number(tabId)].parsedContent = parsed;
                 parsed.filesUpdated.forEach(file => allFilePaths.add(file));
-                // Request syntax highlighting for all parsed file blocks
                 parsed.files.forEach(file => {
                     const lang = file.path.split('.').pop() || 'plaintext';
-                    const id = `${file.path}::${file.content}`; // Create a unique ID
+                    const id = `${file.path}::${file.content}`;
                     if (!highlightedCodeBlocks.has(id)) {
                          clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
                     }
@@ -10776,7 +10816,6 @@ const App = () => {
             clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) });
         }
     }, [clientIpc, highlightedCodeBlocks]);
-
 
     React.useEffect(() => {
         const loadCycleData = (cycleData: PcppCycle) => {
@@ -10791,113 +10830,53 @@ const App = () => {
             setTabs(newTabs);
             const loadedParseMode = cycleData.isParsedMode || false;
             setIsParsedMode(loadedParseMode);
-            if (loadedParseMode) {
-                parseAllTabs(newTabs);
-            }
+            if (loadedParseMode) { parseAllTabs(newTabs); }
         };
 
-        clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData }) => {
-            loadCycleData(cycleData);
-            setMaxCycle(cycleData.cycleId);
-        });
-        clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData }) => {
-            if (cycleData) {
-                loadCycleData(cycleData);
-                autoSelectedForCycle.current = null; // Reset auto-select on cycle change
-            }
-        });
-        clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => {
-            setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml));
-        });
+        clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData }) => { loadCycleData(cycleData); setMaxCycle(cycleData.cycleId); });
+        clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData }) => { if (cycleData) { loadCycleData(cycleData); autoSelectedForCycle.current = null; } });
+        clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml)));
         clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => {
-            setFileExistenceMap(new Map(Object.entries(existenceMap)));
+            const newMap = new Map(Object.entries(existenceMap));
+            setFileExistenceMap(newMap);
+            // Lift state up when file existence is confirmed
+            const activeTabData = tabs[activeTab.toString()];
+            if(activeTabData?.parsedContent) {
+                onDataParsed(activeTabData.parsedContent, newMap);
+            }
         });
         
         clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});
-    }, [clientIpc, parseAllTabs]);
+    }, [clientIpc, parseAllTabs, onDataParsed, tabs, activeTab]);
 
-    const handleRawContentChange = (newContent: string, tabIndex: number) => {
-        setTabs(prev => ({ ...prev, [tabIndex.toString()]: { ...(prev[tabIndex.toString()] || { parsedContent: null }), rawContent: newContent }}));
-    };
-
+    const handleRawContentChange = (newContent: string, tabIndex: number) => setTabs(prev => ({ ...prev, [tabIndex.toString()]: { ...(prev[tabIndex.toString()] || { parsedContent: null }), rawContent: newContent }}));
     const handleGlobalParseToggle = () => {
         const newParseMode = !isParsedMode;
         setIsParsedMode(newParseMode);
-        setSelectedFile(null); // Clear selection on parse toggle
-        autoSelectedForCycle.current = null; // Reset auto-select on parse toggle
-        if (newParseMode) {
-            parseAllTabs(tabs);
-        }
+        setSelectedFile(null);
+        autoSelectedForCycle.current = null;
+        if (newParseMode) { parseAllTabs(tabs); }
     };
-
-    const handleCycleChange = (e: React.MouseEvent, newCycle: number) => {
-        e.stopPropagation(); // Prevent toggling the collapsible section
-        if (newCycle > 0 && newCycle <= maxCycle) {
-            setCurrentCycle(newCycle);
-            clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle });
-        }
-    };
-
-    const handleNewCycle = (e: React.MouseEvent) => {
-        e.stopPropagation();
-        const newCycleId = maxCycle + 1;
-        setMaxCycle(newCycleId);
-        setCurrentCycle(newCycleId);
-        setCycleTitle('New Cycle');
-        setCycleContext('');
-        setEphemeralContext('');
-        setTabs({});
-        setIsParsedMode(false);
-    };
-    
-    const handleGeneratePrompt = () => {
-        clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle });
-    };
-
+    const handleCycleChange = (e: React.MouseEvent, newCycle: number) => { e.stopPropagation(); if (newCycle > 0 && newCycle <= maxCycle) { setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); } };
+    const handleNewCycle = (e: React.MouseEvent) => { e.stopPropagation(); const newCycleId = maxCycle + 1; setMaxCycle(newCycleId); setCurrentCycle(newCycleId); setCycleTitle('New Cycle'); setCycleContext(''); setEphemeralContext(''); setTabs({}); setIsParsedMode(false); };
+    const handleGeneratePrompt = () => clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle });
     const activeTabData = tabs[activeTab.toString()];
-
-    const isNewCycleButtonDisabled = React.useMemo(() => {
-        const hasTitle = cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== '';
-        const hasContext = cycleContext.trim() || ephemeralContext.trim();
-        const hasResponseContent = Object.values(tabs).some(t => t.rawContent.trim());
-        return !hasTitle && !hasContext && !hasResponseContent;
-    }, [cycleTitle, cycleContext, ephemeralContext, tabs]);
+    const isNewCycleButtonDisabled = React.useMemo(() => !((cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== '') || cycleContext.trim() || ephemeralContext.trim() || Object.values(tabs).some(t => t.rawContent.trim())), [cycleTitle, cycleContext, ephemeralContext, tabs]);
     
-    // C101: Auto-select first valid file for VIEWING
     React.useEffect(() => {
         if (isParsedMode && activeTabData?.parsedContent && fileExistenceMap.size > 0 && autoSelectedForCycle.current !== currentCycle) {
-            const firstExistingFile = activeTabData.parsedContent.filesUpdated.find(
-                file => fileExistenceMap.get(file) === true
-            );
-
+            const firstExistingFile = activeTabData.parsedContent.filesUpdated.find(file => fileExistenceMap.get(file) === true);
             if (firstExistingFile) {
                 const parsedFileObject = activeTabData.parsedContent.files.find(f => f.path === firstExistingFile);
-                if (parsedFileObject) {
-                    logger.log(`[C101 AUTO-VIEW] Automatically selecting first file to view: ${firstExistingFile}`);
-                    setSelectedFile(parsedFileObject);
-                    autoSelectedForCycle.current = currentCycle;
-                }
+                if (parsedFileObject) { setSelectedFile(parsedFileObject); autoSelectedForCycle.current = currentCycle; }
             }
         }
     }, [isParsedMode, activeTabData, fileExistenceMap, currentCycle]);
 
-
-    const collapsedNavigator = (
-        <div className="collapsed-navigator">
-            <button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button>
-            <span className="cycle-display">C{currentCycle}</span>
-            <button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button>
-        </div>
-    );
-
-    const getHighlightedHtml = (file: ParsedFile | null) => {
-        if (!file) return '';
-        const id = `${file.path}::${file.content}`;
-        return highlightedCodeBlocks.get(id) || `<pre><code>${file.content}</code></pre>`;
-    };
+    const getHighlightedHtml = (file: ParsedFile | null) => file ? (highlightedCodeBlocks.get(`${file.path}::${file.content}`) || `<pre><code>${file.content}</code></pre>`) : '';
 
     return (
-        <div className="pc-view-container">
+        <>
             <div className="pc-header">
                 <div className="pc-toolbar">
                     <button onClick={handleGeneratePrompt} title="Generate prompt.md"><VscFileCode /> Generate prompt.md</button>
@@ -10908,8 +10887,7 @@ const App = () => {
                     <input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} />
                 </div>
             </div>
-
-            <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator}>
+            <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={ <div className="collapsed-navigator"> <button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button> <span className="cycle-display">C{currentCycle}</span> <button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button> </div> }>
                 <div className="cycle-navigator">
                     <span>Cycle:</span>
                     <button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button>
@@ -10923,11 +10901,9 @@ const App = () => {
                     <textarea className="context-textarea" placeholder="Ephemeral Context (for this cycle's prompt only)..." value={ephemeralContext} onChange={e => setEphemeralContext(e.target.value)} />
                 </div>
             </CollapsibleSection>
-
             <div className="tab-bar">
                 {[...Array(tabCount)].map((_, i) => <div key={i} className={`tab ${activeTab === i + 1 ? 'active' : ''}`} onClick={() => setActiveTab(i + 1)}>Resp {i + 1}</div>)}
             </div>
-
             <div className="tab-content">
                 {activeTab !== null && (
                     <div className="tab-pane">
@@ -10936,25 +10912,14 @@ const App = () => {
                         ) : (
                             <div className="parsed-view-grid">
                                 <div className="parsed-view-left">
-                                    <CollapsibleSection title="Thoughts / Response" isCollapsed={isSummaryCollapsed} onToggle={() => setIsSummaryCollapsed(p => !p)}>
-                                        <ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown>
-                                    </CollapsibleSection>
-                                    <CollapsibleSection title="Course of Action" isCollapsed={isCourseOfActionCollapsed} onToggle={() => setIsCourseOfActionCollapsed(p => !p)}>
-                                        <ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown>
-                                    </CollapsibleSection>
+                                    <CollapsibleSection title="Thoughts / Response" isCollapsed={isSummaryCollapsed} onToggle={() => setIsSummaryCollapsed(p => !p)}> <ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown> </CollapsibleSection>
+                                    <CollapsibleSection title="Course of Action" isCollapsed={isCourseOfActionCollapsed} onToggle={() => setIsCourseOfActionCollapsed(p => !p)}> <ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown> </CollapsibleSection>
                                     <CollapsibleSection title="Associated Files" isCollapsed={isAssociatedFilesCollapsed} onToggle={() => setIsAssociatedFilesCollapsed(p => !p)}>
                                         <ul className="associated-files-list">
                                             {activeTabData.parsedContent.filesUpdated.map(file => {
                                                 const parsedFile = activeTabData.parsedContent?.files.find(f => f.path === file);
                                                 return (
-                                                    <li key={file} onClick={() => {
-                                                        logger.log(`[C101 CLICK] Clicked on file: ${file}`);
-                                                        if (parsedFile) {
-                                                            setSelectedFile(parsedFile);
-                                                        } else {
-                                                            logger.warn(`Could not find parsed file object for path: ${file}`);
-                                                        }
-                                                    }}>
+                                                    <li key={file} onClick={() => { if (parsedFile) { setSelectedFile(parsedFile); } else { logger.warn(`Could not find parsed file object for path: ${file}`); } }}>
                                                         {fileExistenceMap.get(file) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
                                                         <span>{file}</span>
                                                     </li>
@@ -10964,21 +10929,51 @@ const App = () => {
                                     </CollapsibleSection>
                                 </div>
                                 <div className="parsed-view-right">
-                                    {selectedFile ? (
-                                        <div className="file-block">
-                                            <div className="file-header">
-                                                <span className="file-path">{selectedFile.path}</span>
-                                            </div>
-                                            <div className="file-content-viewer" dangerouslySetInnerHTML={{ __html: getHighlightedHtml(selectedFile) }} />
-                                        </div>
-                                    ) : (
-                                        <div>Select a file to view its content.</div>
-                                    )}
+                                    {selectedFile ? ( <div className="file-block"> <div className="file-header"> <span className="file-path">{selectedFile.path}</span> </div> <div className="file-content-viewer" dangerouslySetInnerHTML={{ __html: getHighlightedHtml(selectedFile) }} /> </div> ) : ( <div>Select a file to view its content.</div> )}
                                 </div>
                             </div>
                         )}
                     </div>
                 )}
+            </div>
+        </>
+    );
+};
+
+// Main App component acting as the test harness
+const App = () => {
+    type View = 'Original' | 'TestA' | 'TestB' | 'TestC';
+    const [activeView, setActiveView] = React.useState<View>('Original');
+
+    // State lifted from OriginalView to be shared with Test Panes
+    const [sharedParsedContent, setSharedParsedContent] = React.useState<ParsedResponse | null>(null);
+    const [sharedFileExistenceMap, setSharedFileExistenceMap] = React.useState<Map<string, boolean>>(new Map());
+
+    const handleDataParsed = (parsed: ParsedResponse, map: Map<string, boolean>) => {
+        setSharedParsedContent(parsed);
+        setSharedFileExistenceMap(map);
+    };
+
+    const views: View[] = ['Original', 'TestA', 'TestB', 'TestC'];
+
+    return (
+        <div className="pc-view-container">
+            <div className="test-harness-tabs">
+                {views.map(view => (
+                    <div 
+                        key={view}
+                        className={`harness-tab ${activeView === view ? 'active' : ''}`}
+                        onClick={() => setActiveView(view)}
+                    >
+                        {view === 'Original' ? 'Original' : `Test ${view.replace('Test', '')}`}
+                    </div>
+                ))}
+            </div>
+            <div className="test-harness-content">
+                {activeView === 'Original' && <OriginalView onDataParsed={handleDataParsed} />}
+                {activeView === 'TestA' && <TestPane1 parsedContent={sharedParsedContent} fileExistenceMap={sharedFileExistenceMap} />}
+                {activeView === 'TestB' && <TestPane2 parsedContent={sharedParsedContent} fileExistenceMap={sharedFileExistenceMap} />}
+                {activeView === 'TestC' && <TestPane3 parsedContent={sharedParsedContent} fileExistenceMap={sharedFileExistenceMap} />}
             </div>
         </div>
     );

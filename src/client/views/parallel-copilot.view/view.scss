@@ -1,18 +1,4 @@
-/* Updated on: C102 (Add styles for test tabs) */
-/*
-    Review for C101:
-    Meticulously reviewed for any potential z-index issues, pointer-events: none properties,
-    or absolute positioning that could create an invisible overlay and block clicks on the
-    .associated-files-list. 
-    - The `.context-menu-overlay` has a high z-index but is only rendered when `contextMenu` state is not null.
-    - The main layout is a standard flexbox layout. There are no obvious culprits that would
-      create an element layered on top of the file list.
-    - The `.parsed-view-right` and `.parsed-view-left` panes are siblings in a flex container,
-      so they should not overlap.
-    Given the lack of a clear CSS cause, the issue is more likely a silent React rendering error
-    that is preventing event handlers from being attached to the DOM elements. The simplification
-    in view.tsx for C101 is intended to isolate this potential error.
-*/
+/* Updated on: C104 (Add styles for selected items in test panes) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -28,6 +14,31 @@ body {
     height: 100vh;
     gap: 8px;
     box-sizing: border-box;
+}
+
+.test-harness-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--vscode-panel-border);
+    flex-shrink: 0;
+
+    .harness-tab {
+        padding: 6px 12px;
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+        color: var(--vscode-tab-inactiveForeground);
+        
+        &.active {
+            color: var(--vscode-tab-activeForeground);
+            border-bottom-color: var(--vscode-tab-activeBorder);
+        }
+    }
+}
+
+.test-harness-content {
+    flex-grow: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .collapsible-section {
@@ -289,6 +300,11 @@ body {
 
         &:hover {
             background-color: var(--vscode-list-hoverBackground);
+        }
+
+        &.selected {
+            background-color: var(--vscode-list-activeSelectionBackground) !important;
+            color: var(--vscode-list-activeSelectionForeground) !important;
         }
     }
 
