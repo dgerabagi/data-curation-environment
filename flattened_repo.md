@@ -1,12 +1,12 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-22T19:54:44.661Z
+  Date Generated: 2025-08-22T20:30:59.437Z
   ---
   Total Files: 209
-  Total Lines: 17714
-  Total Characters: 827583
-  Approx. Tokens: 206975
+  Total Lines: 17768
+  Total Characters: 827962
+  Approx. Tokens: 207070
 -->
 
 <!-- Top 10 Files by Token Count -->
@@ -14,9 +14,9 @@
 2. src\backend\services\fs.service.ts (9684 tokens)
 3. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
 4. src\client\views\context-chooser.view\view.tsx (5562 tokens)
-5. src\client\views\parallel-copilot.view\view.tsx (4680 tokens)
-6. src\Artifacts\A0. DCE Master Artifact List.md (4539 tokens)
-7. src\client\components\tree-view\TreeView.tsx (4508 tokens)
+5. src\Artifacts\A0. DCE Master Artifact List.md (4539 tokens)
+6. src\client\components\tree-view\TreeView.tsx (4508 tokens)
+7. src\client\views\parallel-copilot.view\view.tsx (4420 tokens)
 8. src\backend\services\flattener.service.ts (3685 tokens)
 9. src\client\views\context-chooser.view\view.scss (3638 tokens)
 10. src\backend\services\prompt.service.ts (3481 tokens)
@@ -115,10 +115,10 @@
 91. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 92. src\client\views\parallel-copilot.view\on-message.ts - Lines: 41 - Chars: 2019 - Tokens: 505
 93. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 43 - Chars: 1890 - Tokens: 473
-94. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 61 - Chars: 2792 - Tokens: 698
-95. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 66 - Chars: 3062 - Tokens: 766
+94. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
+95. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
 96. src\client\views\parallel-copilot.view\view.scss - Lines: 376 - Chars: 8219 - Tokens: 2055
-97. src\client\views\parallel-copilot.view\view.tsx - Lines: 291 - Chars: 18720 - Tokens: 4680
+97. src\client\views\parallel-copilot.view\view.tsx - Lines: 320 - Chars: 17679 - Tokens: 4420
 98. src\common\ipc\channels.enum.ts - Lines: 64 - Chars: 3422 - Tokens: 856
 99. src\common\ipc\channels.type.ts - Lines: 57 - Chars: 4453 - Tokens: 1114
 100. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
@@ -10222,7 +10222,7 @@ export default TestPane1;
 </file>
 
 <file path="src/client/views/parallel-copilot.view/TestPane2.tsx">
-// src/client/views/parallel-copilot.view/TestPane2.tsx
+// Updated on: C106 (Fix click handler and add separate state for content)
 import * as React from 'react';
 import { VscCheck, VscError } from 'react-icons/vsc';
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
@@ -10234,19 +10234,24 @@ interface TestPane2Props {
 }
 
 const TestPane2: React.FC<TestPane2Props> = ({ parsedContent, fileExistenceMap }) => {
-    const [selectedFile, setSelectedFile] = React.useState<ParsedFile | null>(null);
+    const [lastClickedFile, setLastClickedFile] = React.useState<string | null>(null);
+    const [selectedFileContent, setSelectedFileContent] = React.useState<string | null>(null);
 
     if (!parsedContent) {
-        return <div className="test-pane-container">Go to the "Original" tab, paste a response, and click "Parse All" to populate test data.</div>;
+        return <div className="test-pane-container">Go to the main input, paste a response, and click "Parse for Tests" to populate data.</div>;
     }
 
     const handleFileClick = (filePath: string) => {
+        logger.log(`[TEST PANE B] CLICKED: ${filePath}.`);
+        setLastClickedFile(filePath); // First, simple state update
+
         const file = parsedContent.files.find(f => f.path === filePath);
         if (file) {
-            logger.log(`[TEST PANE B] CLICKED: ${file.path}. Setting local state.`);
-            setSelectedFile(file);
+            logger.log(`[TEST PANE B] Found file content. Setting content state.`);
+            setSelectedFileContent(file.content); // Second, update content
         } else {
             logger.error(`[TEST PANE B] Could not find file object for path: ${filePath}`);
+            setSelectedFileContent(`Error: Could not find content for ${filePath}`);
         }
     };
 
@@ -10254,13 +10259,18 @@ const TestPane2: React.FC<TestPane2Props> = ({ parsedContent, fileExistenceMap }
         <div className="test-pane-container">
             <h3>Test Pane B: Local State Update</h3>
             <p>This test uses local `useState` to manage the selected file. Clicking a file should update the content displayed below.</p>
+            <p><strong>Last Clicked:</strong> {lastClickedFile || 'None'}</p>
             <hr style={{ margin: '8px 0', borderColor: 'var(--vscode-panel-border)' }} />
             <div style={{ display: 'flex', gap: '8px' }}>
                 <div style={{ flex: 1 }}>
                     <h4>Files</h4>
                     <ul className="associated-files-list">
                         {parsedContent.filesUpdated.map(filePath => (
-                            <li key={filePath} onClick={() => handleFileClick(filePath)}>
+                            <li 
+                                key={filePath} 
+                                onClick={() => handleFileClick(filePath)}
+                                className={lastClickedFile === filePath ? 'selected' : ''}
+                            >
                                 {fileExistenceMap.get(filePath) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
                                 <span>{filePath}</span>
                             </li>
@@ -10269,9 +10279,9 @@ const TestPane2: React.FC<TestPane2Props> = ({ parsedContent, fileExistenceMap }
                 </div>
                 <div style={{ flex: 2, borderLeft: '1px solid var(--vscode-panel-border)', paddingLeft: '8px' }}>
                     <h4>Content</h4>
-                    {selectedFile ? (
+                    {selectedFileContent !== null ? (
                         <pre style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>
-                            <code>{selectedFile.content}</code>
+                            <code>{selectedFileContent}</code>
                         </pre>
                     ) : (
                         <div>Select a file to see its content.</div>
@@ -10286,17 +10296,21 @@ export default TestPane2;
 </file>
 
 <file path="src/client/views/parallel-copilot.view/TestPane3.tsx">
-// src/client/views/parallel-copilot.view/TestPane3.tsx
+// Updated on: C106 (Fix click handler and add separate state for content)
 import * as React from 'react';
 import { VscCheck, VscError } from 'react-icons/vsc';
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 import { logger } from '@/client/utils/logger';
 
 // Child component to test prop drilling
-const FileList = ({ files, fileExistenceMap, onFileSelect }: { files: string[], fileExistenceMap: Map<string, boolean>, onFileSelect: (filePath: string) => void }) => (
+const FileList = ({ files, fileExistenceMap, onFileSelect, lastClickedFile }: { files: string[], fileExistenceMap: Map<string, boolean>, onFileSelect: (filePath: string) => void, lastClickedFile: string | null }) => (
     <ul className="associated-files-list">
         {files.map(filePath => (
-            <li key={filePath} onClick={() => onFileSelect(filePath)}>
+            <li 
+                key={filePath} 
+                onClick={() => onFileSelect(filePath)}
+                className={lastClickedFile === filePath ? 'selected' : ''}
+            >
                 {fileExistenceMap.get(filePath) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
                 <span>{filePath}</span>
             </li>
@@ -10310,19 +10324,24 @@ interface TestPane3Props {
 }
 
 const TestPane3: React.FC<TestPane3Props> = ({ parsedContent, fileExistenceMap }) => {
-    const [selectedFile, setSelectedFile] = React.useState<ParsedFile | null>(null);
+    const [lastClickedFile, setLastClickedFile] = React.useState<string | null>(null);
+    const [selectedFileContent, setSelectedFileContent] = React.useState<string | null>(null);
 
     if (!parsedContent) {
-        return <div className="test-pane-container">Go to the "Original" tab, paste a response, and click "Parse All" to populate test data.</div>;
+        return <div className="test-pane-container">Go to the main input, paste a response, and click "Parse for Tests" to populate data.</div>;
     }
 
     const handleFileSelect = (filePath: string) => {
+        logger.log(`[TEST PANE C] Child component called onFileSelect prop for: ${filePath}.`);
+        setLastClickedFile(filePath);
+
         const file = parsedContent.files.find(f => f.path === filePath);
         if (file) {
-            logger.log(`[TEST PANE C] Child component called onFileSelect prop for: ${file.path}.`);
-            setSelectedFile(file);
+             logger.log(`[TEST PANE C] Found file content. Setting content state.`);
+            setSelectedFileContent(file.content);
         } else {
              logger.error(`[TEST PANE C] Could not find file object for path: ${filePath}`);
+             setSelectedFileContent(`Error: Could not find content for ${filePath}`);
         }
     };
 
@@ -10330,17 +10349,23 @@ const TestPane3: React.FC<TestPane3Props> = ({ parsedContent, fileExistenceMap }
         <div className="test-pane-container">
             <h3>Test Pane C: Prop-Driven Update</h3>
             <p>This test uses a child component for the list, passing the click handler down as a prop. This tests for issues with prop drilling.</p>
+            <p><strong>Last Clicked:</strong> {lastClickedFile || 'None'}</p>
             <hr style={{ margin: '8px 0', borderColor: 'var(--vscode-panel-border)' }} />
              <div style={{ display: 'flex', gap: '8px' }}>
                 <div style={{ flex: 1 }}>
                     <h4>Files (Child Component)</h4>
-                    <FileList files={parsedContent.filesUpdated} fileExistenceMap={fileExistenceMap} onFileSelect={handleFileSelect} />
+                    <FileList 
+                        files={parsedContent.filesUpdated} 
+                        fileExistenceMap={fileExistenceMap} 
+                        onFileSelect={handleFileSelect}
+                        lastClickedFile={lastClickedFile}
+                    />
                 </div>
                 <div style={{ flex: 2, borderLeft: '1px solid var(--vscode-panel-border)', paddingLeft: '8px' }}>
                     <h4>Content (Parent Component)</h4>
-                    {selectedFile ? (
+                    {selectedFileContent !== null ? (
                         <pre style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>
-                            <code>{selectedFile.content}</code>
+                            <code>{selectedFileContent}</code>
                         </pre>
                     ) : (
                         <div>Select a file to see its content.</div>
@@ -10734,11 +10759,11 @@ body {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
-// Updated on: C104 (Fix infinite loop in test harness)
+// Updated on: C101 (Radically simplify to "view AI content" instead of diffing to isolate bug)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscBeaker } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -10746,9 +10771,7 @@ import { PcppCycle, PcppResponse } from '@/backend/services/history.service';
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
 import ReactMarkdown from 'react-markdown';
-import TestPane1 from './TestPane1';
-import TestPane2 from './TestPane2';
-import TestPane3 from './TestPane3';
+import DiffViewer from '@/client/components/DiffViewer';
 
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -10776,8 +10799,7 @@ const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; i
     </div>
 );
 
-// Encapsulates the original, complex view logic
-const OriginalView: React.FC<{ onDataParsed: (parsed: ParsedResponse) => void }> = ({ onDataParsed }) => {
+const App = () => {
     const [activeTab, setActiveTab] = React.useState(1);
     const [tabCount, setTabCount] = React.useState(4);
     const [currentCycle, setCurrentCycle] = React.useState(1);
@@ -10789,7 +10811,10 @@ const OriginalView: React.FC<{ onDataParsed: (parsed: ParsedResponse) => void }>
     const [highlightedCodeBlocks, setHighlightedCodeBlocks] = React.useState<Map<string, string>>(new Map());
     const [fileExistenceMap, setFileExistenceMap] = React.useState<Map<string, boolean>>(new Map());
     const [isParsedMode, setIsParsedMode] = React.useState(false);
+    
+    // C101: State simplification. Instead of diffing, just show the selected AI-generated file content.
     const [selectedFile, setSelectedFile] = React.useState<ParsedFile | null>(null);
+
     const [isCycleCollapsed, setIsCycleCollapsed] = React.useState(false);
     const [isSummaryCollapsed, setIsSummaryCollapsed] = React.useState(false);
     const [isCourseOfActionCollapsed, setIsCourseOfActionCollapsed] = React.useState(false);
@@ -10803,28 +10828,36 @@ const OriginalView: React.FC<{ onDataParsed: (parsed: ParsedResponse) => void }>
         for (let i = 1; i <= tabCount; i++) {
             responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' };
         }
-        const cycleData: PcppCycle = { cycleId: currentCycle, timestamp: new Date().toISOString(), title: cycleTitle, cycleContext, ephemeralContext, responses, isParsedMode };
+        const cycleData: PcppCycle = {
+            cycleId: currentCycle,
+            timestamp: new Date().toISOString(),
+            title: cycleTitle,
+            cycleContext,
+            ephemeralContext,
+            responses,
+            isParsedMode,
+        };
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
     }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, clientIpc]);
 
     const debouncedSave = useDebounce(saveCurrentCycleState, 1000);
 
-    React.useEffect(() => { debouncedSave(); }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, debouncedSave]);
+    React.useEffect(() => {
+        debouncedSave();
+    }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, debouncedSave]);
     
-    const parseAllTabs = React.useCallback(() => {
+    const parseAllTabs = React.useCallback((tabsToParse: { [key: string]: TabState }) => {
         const allFilePaths = new Set<string>();
-        const updatedTabs = { ...tabs };
-        let firstParsed: ParsedResponse | null = null;
-
+        const updatedTabs = { ...tabsToParse };
         Object.entries(updatedTabs).forEach(([tabId, tabState]) => {
             if (tabState.rawContent) {
                 const parsed = parseResponse(tabState.rawContent);
-                if (!firstParsed) firstParsed = parsed;
                 updatedTabs[Number(tabId)].parsedContent = parsed;
                 parsed.filesUpdated.forEach(file => allFilePaths.add(file));
+                // Request syntax highlighting for all parsed file blocks
                 parsed.files.forEach(file => {
                     const lang = file.path.split('.').pop() || 'plaintext';
-                    const id = `${file.path}::${file.content}`; // Unique ID
+                    const id = `${file.path}::${file.content}`; // Create a unique ID
                     if (!highlightedCodeBlocks.has(id)) {
                          clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
                     }
@@ -10835,10 +10868,7 @@ const OriginalView: React.FC<{ onDataParsed: (parsed: ParsedResponse) => void }>
         if (allFilePaths.size > 0) {
             clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) });
         }
-        if(firstParsed) {
-            onDataParsed(firstParsed); // Lift the first parsed content up
-        }
-    }, [clientIpc, highlightedCodeBlocks, tabs, onDataParsed]);
+    }, [clientIpc, highlightedCodeBlocks]);
 
 
     React.useEffect(() => {
@@ -10854,58 +10884,113 @@ const OriginalView: React.FC<{ onDataParsed: (parsed: ParsedResponse) => void }>
             setTabs(newTabs);
             const loadedParseMode = cycleData.isParsedMode || false;
             setIsParsedMode(loadedParseMode);
-            if (loadedParseMode) { 
-                // We call parseAllTabs from here now, but it needs the `tabs` state
-                // This will be handled by the parse button logic instead for simplicity on load
+            if (loadedParseMode) {
+                parseAllTabs(newTabs);
             }
         };
 
-        clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData }) => { loadCycleData(cycleData); setMaxCycle(cycleData.cycleId); });
-        clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData }) => { if (cycleData) { loadCycleData(cycleData); autoSelectedForCycle.current = null; } });
-        clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml)));
+        clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData }) => {
+            loadCycleData(cycleData);
+            setMaxCycle(cycleData.cycleId);
+        });
+        clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData }) => {
+            if (cycleData) {
+                loadCycleData(cycleData);
+                autoSelectedForCycle.current = null; // Reset auto-select on cycle change
+            }
+        });
+        clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => {
+            setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml));
+        });
         clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => {
-            const newMap = new Map(Object.entries(existenceMap));
-            setFileExistenceMap(newMap);
+            setFileExistenceMap(new Map(Object.entries(existenceMap)));
         });
         
         clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});
-    }, [clientIpc]);
+    }, [clientIpc, parseAllTabs]);
 
-    const handleRawContentChange = (newContent: string, tabIndex: number) => setTabs(prev => ({ ...prev, [tabIndex.toString()]: { ...(prev[tabIndex.toString()] || { parsedContent: null }), rawContent: newContent }}));
+    const handleRawContentChange = (newContent: string, tabIndex: number) => {
+        setTabs(prev => ({ ...prev, [tabIndex.toString()]: { ...(prev[tabIndex.toString()] || { parsedContent: null }), rawContent: newContent }}));
+    };
+
     const handleGlobalParseToggle = () => {
         const newParseMode = !isParsedMode;
         setIsParsedMode(newParseMode);
-        setSelectedFile(null);
-        autoSelectedForCycle.current = null;
-        if (newParseMode) { parseAllTabs(); } else {
-            // Un-parse: clear parsed content
-            const clearedTabs = {...tabs};
-            Object.keys(clearedTabs).forEach(key => {
-                clearedTabs[key].parsedContent = null;
-            });
-            setTabs(clearedTabs);
+        setSelectedFile(null); // Clear selection on parse toggle
+        autoSelectedForCycle.current = null; // Reset auto-select on parse toggle
+        if (newParseMode) {
+            parseAllTabs(tabs);
         }
     };
-    const handleCycleChange = (e: React.MouseEvent, newCycle: number) => { e.stopPropagation(); if (newCycle > 0 && newCycle <= maxCycle) { setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); } };
-    const handleNewCycle = (e: React.MouseEvent) => { e.stopPropagation(); const newCycleId = maxCycle + 1; setMaxCycle(newCycleId); setCurrentCycle(newCycleId); setCycleTitle('New Cycle'); setCycleContext(''); setEphemeralContext(''); setTabs({}); setIsParsedMode(false); };
-    const handleGeneratePrompt = () => clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle });
-    const activeTabData = tabs[activeTab.toString()];
-    const isNewCycleButtonDisabled = React.useMemo(() => !((cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== '') || cycleContext.trim() || ephemeralContext.trim() || Object.values(tabs).some(t => t.rawContent.trim())), [cycleTitle, cycleContext, ephemeralContext, tabs]);
+
+    const handleCycleChange = (e: React.MouseEvent, newCycle: number) => {
+        e.stopPropagation(); // Prevent toggling the collapsible section
+        if (newCycle > 0 && newCycle <= maxCycle) {
+            setCurrentCycle(newCycle);
+            clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle });
+        }
+    };
+
+    const handleNewCycle = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        const newCycleId = maxCycle + 1;
+        setMaxCycle(newCycleId);
+        setCurrentCycle(newCycleId);
+        setCycleTitle('New Cycle');
+        setCycleContext('');
+        setEphemeralContext('');
+        setTabs({});
+        setIsParsedMode(false);
+    };
     
+    const handleGeneratePrompt = () => {
+        clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle });
+    };
+
+    const activeTabData = tabs[activeTab.toString()];
+
+    const isNewCycleButtonDisabled = React.useMemo(() => {
+        const hasTitle = cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== '';
+        const hasContext = cycleContext.trim() || ephemeralContext.trim();
+        const hasResponseContent = Object.values(tabs).some(t => t.rawContent.trim());
+        return !hasTitle && !hasContext && !hasResponseContent;
+    }, [cycleTitle, cycleContext, ephemeralContext, tabs]);
+    
+    // C101: Auto-select first valid file for VIEWING
     React.useEffect(() => {
         if (isParsedMode && activeTabData?.parsedContent && fileExistenceMap.size > 0 && autoSelectedForCycle.current !== currentCycle) {
-            const firstExistingFile = activeTabData.parsedContent.filesUpdated.find(file => fileExistenceMap.get(file) === true);
+            const firstExistingFile = activeTabData.parsedContent.filesUpdated.find(
+                file => fileExistenceMap.get(file) === true
+            );
+
             if (firstExistingFile) {
                 const parsedFileObject = activeTabData.parsedContent.files.find(f => f.path === firstExistingFile);
-                if (parsedFileObject) { setSelectedFile(parsedFileObject); autoSelectedForCycle.current = currentCycle; }
+                if (parsedFileObject) {
+                    logger.log(`[C101 AUTO-VIEW] Automatically selecting first file to view: ${firstExistingFile}`);
+                    setSelectedFile(parsedFileObject);
+                    autoSelectedForCycle.current = currentCycle;
+                }
             }
         }
     }, [isParsedMode, activeTabData, fileExistenceMap, currentCycle]);
 
-    const getHighlightedHtml = (file: ParsedFile | null) => file ? (highlightedCodeBlocks.get(`${file.path}::${file.content}`) || `<pre><code>${file.content}</code></pre>`) : '';
+
+    const collapsedNavigator = (
+        <div className="collapsed-navigator">
+            <button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button>
+            <span className="cycle-display">C{currentCycle}</span>
+            <button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button>
+        </div>
+    );
+
+    const getHighlightedHtml = (file: ParsedFile | null) => {
+        if (!file) return '';
+        const id = `${file.path}::${file.content}`;
+        return highlightedCodeBlocks.get(id) || `<pre><code>${file.content}</code></pre>`;
+    };
 
     return (
-        <>
+        <div className="pc-view-container">
             <div className="pc-header">
                 <div className="pc-toolbar">
                     <button onClick={handleGeneratePrompt} title="Generate prompt.md"><VscFileCode /> Generate prompt.md</button>
@@ -10916,7 +11001,8 @@ const OriginalView: React.FC<{ onDataParsed: (parsed: ParsedResponse) => void }>
                     <input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} />
                 </div>
             </div>
-            <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={ <div className="collapsed-navigator"> <button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button> <span className="cycle-display">C{currentCycle}</span> <button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button> </div> }>
+
+            <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator}>
                 <div className="cycle-navigator">
                     <span>Cycle:</span>
                     <button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button>
@@ -10930,9 +11016,11 @@ const OriginalView: React.FC<{ onDataParsed: (parsed: ParsedResponse) => void }>
                     <textarea className="context-textarea" placeholder="Ephemeral Context (for this cycle's prompt only)..." value={ephemeralContext} onChange={e => setEphemeralContext(e.target.value)} />
                 </div>
             </CollapsibleSection>
+
             <div className="tab-bar">
                 {[...Array(tabCount)].map((_, i) => <div key={i} className={`tab ${activeTab === i + 1 ? 'active' : ''}`} onClick={() => setActiveTab(i + 1)}>Resp {i + 1}</div>)}
             </div>
+
             <div className="tab-content">
                 {activeTab !== null && (
                     <div className="tab-pane">
@@ -10941,14 +11029,25 @@ const OriginalView: React.FC<{ onDataParsed: (parsed: ParsedResponse) => void }>
                         ) : (
                             <div className="parsed-view-grid">
                                 <div className="parsed-view-left">
-                                    <CollapsibleSection title="Thoughts / Response" isCollapsed={isSummaryCollapsed} onToggle={() => setIsSummaryCollapsed(p => !p)}> <ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown> </CollapsibleSection>
-                                    <CollapsibleSection title="Course of Action" isCollapsed={isCourseOfActionCollapsed} onToggle={() => setIsCourseOfActionCollapsed(p => !p)}> <ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown> </CollapsibleSection>
+                                    <CollapsibleSection title="Thoughts / Response" isCollapsed={isSummaryCollapsed} onToggle={() => setIsSummaryCollapsed(p => !p)}>
+                                        <ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown>
+                                    </CollapsibleSection>
+                                    <CollapsibleSection title="Course of Action" isCollapsed={isCourseOfActionCollapsed} onToggle={() => setIsCourseOfActionCollapsed(p => !p)}>
+                                        <ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown>
+                                    </CollapsibleSection>
                                     <CollapsibleSection title="Associated Files" isCollapsed={isAssociatedFilesCollapsed} onToggle={() => setIsAssociatedFilesCollapsed(p => !p)}>
                                         <ul className="associated-files-list">
                                             {activeTabData.parsedContent.filesUpdated.map(file => {
                                                 const parsedFile = activeTabData.parsedContent?.files.find(f => f.path === file);
                                                 return (
-                                                    <li key={file} onClick={() => { if (parsedFile) { setSelectedFile(parsedFile); } else { logger.warn(`Could not find parsed file object for path: ${file}`); } }}>
+                                                    <li key={file} onClick={() => {
+                                                        logger.log(`[C101 CLICK] Clicked on file: ${file}`);
+                                                        if (parsedFile) {
+                                                            setSelectedFile(parsedFile);
+                                                        } else {
+                                                            logger.warn(`Could not find parsed file object for path: ${file}`);
+                                                        }
+                                                    }}>
                                                         {fileExistenceMap.get(file) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
                                                         <span>{file}</span>
                                                     </li>
@@ -10958,66 +11057,21 @@ const OriginalView: React.FC<{ onDataParsed: (parsed: ParsedResponse) => void }>
                                     </CollapsibleSection>
                                 </div>
                                 <div className="parsed-view-right">
-                                    {selectedFile ? ( <div className="file-block"> <div className="file-header"> <span className="file-path">{selectedFile.path}</span> </div> <div className="file-content-viewer" dangerouslySetInnerHTML={{ __html: getHighlightedHtml(selectedFile) }} /> </div> ) : ( <div>Select a file to view its content.</div> )}
+                                    {selectedFile ? (
+                                        <div className="file-block">
+                                            <div className="file-header">
+                                                <span className="file-path">{selectedFile.path}</span>
+                                            </div>
+                                            <div className="file-content-viewer" dangerouslySetInnerHTML={{ __html: getHighlightedHtml(selectedFile) }} />
+                                        </div>
+                                    ) : (
+                                        <div>Select a file to view its content.</div>
+                                    )}
                                 </div>
                             </div>
                         )}
                     </div>
                 )}
-            </div>
-        </>
-    );
-};
-
-// Main App component acting as the test harness
-const App = () => {
-    type View = 'Original' | 'TestA' | 'TestB' | 'TestC';
-    const [activeView, setActiveView] = React.useState<View>('Original');
-
-    // State lifted from OriginalView to be shared with Test Panes
-    const [sharedParsedContent, setSharedParsedContent] = React.useState<ParsedResponse | null>(null);
-    const [sharedFileExistenceMap, setSharedFileExistenceMap] = React.useState<Map<string, boolean>>(new Map());
-
-    const clientIpc = ClientPostMessageManager.getInstance();
-
-    // Fix: This effect was causing the infinite loop. Now it only sets up the listener once.
-    React.useEffect(() => {
-        const handleFileExistence = ({ existenceMap }: { existenceMap: { [path: string]: boolean } }) => {
-            const newMap = new Map(Object.entries(existenceMap));
-            setSharedFileExistenceMap(newMap);
-        };
-        clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, handleFileExistence);
-    }, [clientIpc]);
-
-    const handleDataParsed = React.useCallback((parsed: ParsedResponse) => {
-        setSharedParsedContent(parsed);
-        // Request file existence check when data is parsed
-        const allFilePaths = parsed.filesUpdated;
-        if (allFilePaths.length > 0) {
-            clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) });
-        }
-    }, [clientIpc]);
-
-    const views: View[] = ['Original', 'TestA', 'TestB', 'TestC'];
-
-    return (
-        <div className="pc-view-container">
-            <div className="test-harness-tabs">
-                {views.map(view => (
-                    <div 
-                        key={view}
-                        className={`harness-tab ${activeView === view ? 'active' : ''}`}
-                        onClick={() => setActiveView(view)}
-                    >
-                        {view === 'Original' ? 'Original' : `Test ${view.replace('Test', '')}`}
-                    </div>
-                ))}
-            </div>
-            <div className="test-harness-content">
-                {activeView === 'Original' && <OriginalView onDataParsed={handleDataParsed} />}
-                {activeView === 'TestA' && <TestPane1 parsedContent={sharedParsedContent} fileExistenceMap={sharedFileExistenceMap} />}
-                {activeView === 'TestB' && <TestPane2 parsedContent={sharedParsedContent} fileExistenceMap={sharedFileExistenceMap} />}
-                {activeView === 'TestC' && <TestPane3 parsedContent={sharedParsedContent} fileExistenceMap={sharedFileExistenceMap} />}
             </div>
         </div>
     );
