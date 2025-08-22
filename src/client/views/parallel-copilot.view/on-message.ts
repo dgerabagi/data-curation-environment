@@ -34,8 +34,8 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     });
     
     serverIpc.onClientMessage(ClientToServerChannel.RequestFileContent, (data) => {
-        // C100: Add high-visibility log to confirm message receipt on backend
-        loggerService.log(`[C100 IPC-TEST] Backend received RequestFileContent for: ${data.path}`);
+        // C101: Add high-visibility log to confirm message receipt on backend
+        loggerService.log(`[C101 IPC-TEST] Backend received RequestFileContent for: ${data.path}`);
         fsService.handleFileContentRequest(data.path, serverIpc);
     });
 }

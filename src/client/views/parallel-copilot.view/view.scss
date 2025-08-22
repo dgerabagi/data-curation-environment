@@ -1,6 +1,6 @@
-/* Updated on: C100 (No functional changes, added comment confirming z-index review) */
+/* Updated on: C101 (No functional changes, added comment confirming z-index review) */
 /*
-    Review for C100:
+    Review for C101:
     Checked for any potential z-index issues or pointer-events: none properties
     that could be causing an invisible overlay and blocking clicks on the
     associated-files-list. No obvious culprits found. The .context-menu-overlay

@@ -1,4 +1,4 @@
-// Updated on: C100 (Add aggressive diagnostics: test button, hover logs, auto-diff logs)
+// Updated on: C101 (Synthesize diagnostics: test button, hover/click logs, useCallback)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -143,7 +143,7 @@ const App = () => {
             setFileExistenceMap(new Map(Object.entries(existenceMap)));
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendFileContent, ({ path, content }) => {
-            logger.log(`[C100 DEBUG] Received file content for ${path}`);
+            logger.log(`[C101 DEBUG] Received file content for ${path}`);
             if (diffTarget?.path === path) {
                 setOriginalFileContent(content);
             }
@@ -191,10 +191,10 @@ const App = () => {
     };
 
     const handleSelectForDiff = React.useCallback((file: ParsedFile) => {
-        logger.log(`[C100 DIAGNOSTIC] handleSelectForDiff called for: ${file.path}`);
+        logger.log(`[C101 DIAGNOSTIC] handleSelectForDiff called for: ${file.path}`);
         setDiffTarget(file);
         setOriginalFileContent(null); // Reset to show loading state
-        logger.log(`[C100 DIAGNOSTIC] Sending IPC RequestFileContent for: ${file.path}`);
+        logger.log(`[C101 DIAGNOSTIC] Sending IPC RequestFileContent for: ${file.path}`);
         clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: file.path });
     }, [clientIpc]);
 
@@ -206,9 +206,9 @@ const App = () => {
         return !hasTitle && !hasContext && !hasResponseContent;
     }, [cycleTitle, cycleContext, ephemeralContext, tabs]);
     
-    // C100: Auto-select first valid file for diffing
+    // Auto-select first valid file for diffing
     React.useEffect(() => {
-        logger.log(`[C100 AUTO-DIFF-EFFECT] Running effect. Parsed Mode: ${isParsedMode}, Cycle: ${currentCycle}, AutoSelectedFor: ${autoSelectedForCycle.current}`);
+        logger.log(`[C101 AUTO-DIFF-EFFECT] Running effect. Parsed Mode: ${isParsedMode}, Cycle: ${currentCycle}, AutoSelectedFor: ${autoSelectedForCycle.current}`);
         if (isParsedMode && activeTabData?.parsedContent && fileExistenceMap.size > 0 && autoSelectedForCycle.current !== currentCycle) {
             const firstExistingFile = activeTabData.parsedContent.filesUpdated.find(
                 file => fileExistenceMap.get(file) === true
@@ -217,14 +217,14 @@ const App = () => {
             if (firstExistingFile) {
                 const parsedFileObject = activeTabData.parsedContent.files.find(f => f.path === firstExistingFile);
                 if (parsedFileObject) {
-                    logger.log(`[C100 AUTO-DIFF-EFFECT] Automatically selecting first existing file for diff: ${firstExistingFile}`);
+                    logger.log(`[C101 AUTO-DIFF-EFFECT] Automatically selecting first existing file for diff: ${firstExistingFile}`);
                     handleSelectForDiff(parsedFileObject);
                     autoSelectedForCycle.current = currentCycle;
                 } else {
-                     logger.log(`[C100 AUTO-DIFF-EFFECT] Found existing file '${firstExistingFile}' but no corresponding parsed file object.`);
+                     logger.log(`[C101 AUTO-DIFF-EFFECT] Found existing file '${firstExistingFile}' but no corresponding parsed file object.`);
                 }
             } else {
-                logger.log(`[C100 AUTO-DIFF-EFFECT] No existing files found in the parsed response to auto-select.`);
+                logger.log(`[C101 AUTO-DIFF-EFFECT] No existing files found in the parsed response to auto-select.`);
             }
         }
     }, [isParsedMode, activeTabData, fileExistenceMap, currentCycle, handleSelectForDiff]);
@@ -233,13 +233,13 @@ const App = () => {
         if (isParsedMode && activeTabData?.parsedContent && fileExistenceMap.size > 0) {
             const firstValidFile = activeTabData.parsedContent.files.find(f => fileExistenceMap.get(f.path));
             if (firstValidFile) {
-                logger.log(`[C100 TEST-BUTTON] Manually triggering diff for: ${firstValidFile.path}`);
+                logger.log(`[C101 TEST-BUTTON] Manually triggering diff for: ${firstValidFile.path}`);
                 handleSelectForDiff(firstValidFile);
             } else {
-                logger.log(`[C100 TEST-BUTTON] No valid file found in active tab to test.`);
+                logger.log(`[C101 TEST-BUTTON] No valid file found in active tab to test.`);
             }
         } else {
-            logger.log(`[C100 TEST-BUTTON] Cannot test: Not in parsed mode or no data available.`);
+            logger.log(`[C101 TEST-BUTTON] Cannot test: Not in parsed mode or no data available.`);
         }
     };
 
@@ -302,10 +302,10 @@ const App = () => {
                                         <ul className="associated-files-list">
                                             {activeTabData.parsedContent.filesUpdated.map(file => (
                                                 <li key={file} 
-                                                    onMouseEnter={() => logger.log(`[C100 HOVER-TEST] Mouse ENTER on ${file}`)}
-                                                    onMouseLeave={() => logger.log(`[C100 HOVER-TEST] Mouse LEAVE from ${file}`)}
+                                                    onMouseEnter={() => logger.log(`[C101 HOVER-TEST] Mouse ENTER on ${file}`)}
+                                                    onMouseLeave={() => logger.log(`[C101 HOVER-TEST] Mouse LEAVE from ${file}`)}
                                                     onClick={() => {
-                                                        logger.log(`[C100 CLICK-TEST] LI element clicked for: ${file}`);
+                                                        logger.log(`[C101 CLICK-TEST] LI element clicked for: ${file}`);
                                                         const parsedFile = activeTabData.parsedContent?.files.find(f => f.path === file);
                                                         if (parsedFile && fileExistenceMap.get(file)) {
                                                             handleSelectForDiff(parsedFile);
