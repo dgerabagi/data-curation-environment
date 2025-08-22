@@ -1,4 +1,4 @@
-/* Updated on: C102 (No functional changes, header update only.) */
+/* Updated on: C102 (Add styles for test tabs) */
 /*
     Review for C101:
     Meticulously reviewed for any potential z-index issues, pointer-events: none properties,
@@ -183,6 +183,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 0;
+    padding-top: 8px;
 }
 
 .tab-pane {
@@ -207,6 +208,14 @@ body {
      &:focus {
         outline: 1px solid var(--vscode-focusBorder);
     }
+}
+
+.test-pane-container {
+    border: 1px solid var(--vscode-panel-border);
+    padding: 8px;
+    border-radius: 4px;
+    flex-grow: 1;
+    overflow-y: auto;
 }
 
 /* Styles for Parsed View */
