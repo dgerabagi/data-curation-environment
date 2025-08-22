@@ -1,12 +1,12 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-22T12:12:10.480Z
+  Date Generated: 2025-08-22T12:26:38.635Z
   ---
   Total Files: 205
-  Total Lines: 17452
-  Total Characters: 812738
-  Approx. Tokens: 203263
+  Total Lines: 17471
+  Total Characters: 813923
+  Approx. Tokens: 203559
 -->
 
 <!-- Top 10 Files by Token Count -->
@@ -16,7 +16,7 @@
 4. src\client\views\context-chooser.view\view.tsx (5562 tokens)
 5. src\client\components\tree-view\TreeView.tsx (4508 tokens)
 6. src\Artifacts\A0. DCE Master Artifact List.md (4464 tokens)
-7. src\client\views\parallel-copilot.view\view.tsx (4119 tokens)
+7. src\client\views\parallel-copilot.view\view.tsx (4420 tokens)
 8. src\backend\services\flattener.service.ts (3685 tokens)
 9. src\client\views\context-chooser.view\view.scss (3638 tokens)
 10. src\backend\services\prompt.service.ts (3481 tokens)
@@ -113,8 +113,8 @@
 89. src\client\views\index.ts - Lines: 35 - Chars: 1714 - Tokens: 429
 90. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 91. src\client\views\parallel-copilot.view\on-message.ts - Lines: 41 - Chars: 2019 - Tokens: 505
-92. src\client\views\parallel-copilot.view\view.scss - Lines: 351 - Chars: 8193 - Tokens: 2049
-93. src\client\views\parallel-copilot.view\view.tsx - Lines: 301 - Chars: 16474 - Tokens: 4119
+92. src\client\views\parallel-copilot.view\view.scss - Lines: 351 - Chars: 8173 - Tokens: 2044
+93. src\client\views\parallel-copilot.view\view.tsx - Lines: 320 - Chars: 17679 - Tokens: 4420
 94. src\common\ipc\channels.enum.ts - Lines: 64 - Chars: 3422 - Tokens: 856
 95. src\common\ipc\channels.type.ts - Lines: 57 - Chars: 4453 - Tokens: 1114
 96. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
@@ -10092,7 +10092,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
-/* Updated on: C101 (No functional changes, added comment confirming z-index review) */
+/* Updated on: C102 (No functional changes, header update only.) */
 /*
     Review for C101:
     Meticulously reviewed for any potential z-index issues, pointer-events: none properties,
@@ -10446,11 +10446,11 @@ body {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
-// Updated on: C101 (Radically simplify to fix interaction bug)
+// Updated on: C101 (Radically simplify to "view AI content" instead of diffing to isolate bug)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscBeaker } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -10458,6 +10458,7 @@ import { PcppCycle, PcppResponse } from '@/backend/services/history.service';
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
 import ReactMarkdown from 'react-markdown';
+import DiffViewer from '@/client/components/DiffViewer';
 
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -10494,12 +10495,12 @@ const App = () => {
     const [cycleContext, setCycleContext] = React.useState('');
     const [ephemeralContext, setEphemeralContext] = React.useState('');
     const [tabs, setTabs] = React.useState<{ [key: string]: TabState }>({});
+    const [highlightedCodeBlocks, setHighlightedCodeBlocks] = React.useState<Map<string, string>>(new Map());
     const [fileExistenceMap, setFileExistenceMap] = React.useState<Map<string, boolean>>(new Map());
     const [isParsedMode, setIsParsedMode] = React.useState(false);
     
-    // C101 Simplification: State for highlighted content, not diffing
-    const [selectedFileHtmlContent, setSelectedFileHtmlContent] = React.useState<string | null>(null);
-    const [highlightedCodeBlocks, setHighlightedCodeBlocks] = React.useState<Map<string, string>>(new Map());
+    // C101: State simplification. Instead of diffing, just show the selected AI-generated file content.
+    const [selectedFile, setSelectedFile] = React.useState<ParsedFile | null>(null);
 
     const [isCycleCollapsed, setIsCycleCollapsed] = React.useState(false);
     const [isSummaryCollapsed, setIsSummaryCollapsed] = React.useState(false);
@@ -10540,21 +10541,22 @@ const App = () => {
                 const parsed = parseResponse(tabState.rawContent);
                 updatedTabs[Number(tabId)].parsedContent = parsed;
                 parsed.filesUpdated.forEach(file => allFilePaths.add(file));
+                // Request syntax highlighting for all parsed file blocks
+                parsed.files.forEach(file => {
+                    const lang = file.path.split('.').pop() || 'plaintext';
+                    const id = `${file.path}::${file.content}`; // Create a unique ID
+                    if (!highlightedCodeBlocks.has(id)) {
+                         clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
+                    }
+                });
             }
         });
         setTabs(updatedTabs);
         if (allFilePaths.size > 0) {
             clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) });
         }
-    }, [clientIpc]);
+    }, [clientIpc, highlightedCodeBlocks]);
 
-    const handleSelectFile = React.useCallback((file: ParsedFile) => {
-        logger.log(`[C101] handleSelectFile called for: ${file.path}`);
-        setSelectedFileHtmlContent('<div>Loading highlighted content...</div>'); // Show loading state
-        const lang = file.path.split('.').pop() || 'plaintext';
-        const id = `${file.path}::${file.content}`; // Unique ID for this specific content
-        clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
-    }, [clientIpc]);
 
     React.useEffect(() => {
         const loadCycleData = (cycleData: PcppCycle) => {
@@ -10581,14 +10583,11 @@ const App = () => {
         clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData }) => {
             if (cycleData) {
                 loadCycleData(cycleData);
-                autoSelectedForCycle.current = null;
-                setSelectedFileHtmlContent(null);
+                autoSelectedForCycle.current = null; // Reset auto-select on cycle change
             }
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => {
-            // Update both the general cache and the specific selected content view
             setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml));
-            setSelectedFileHtmlContent(highlightedHtml);
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => {
             setFileExistenceMap(new Map(Object.entries(existenceMap)));
@@ -10604,15 +10603,15 @@ const App = () => {
     const handleGlobalParseToggle = () => {
         const newParseMode = !isParsedMode;
         setIsParsedMode(newParseMode);
-        setSelectedFileHtmlContent(null);
-        autoSelectedForCycle.current = null;
+        setSelectedFile(null); // Clear selection on parse toggle
+        autoSelectedForCycle.current = null; // Reset auto-select on parse toggle
         if (newParseMode) {
             parseAllTabs(tabs);
         }
     };
 
     const handleCycleChange = (e: React.MouseEvent, newCycle: number) => {
-        e.stopPropagation();
+        e.stopPropagation(); // Prevent toggling the collapsible section
         if (newCycle > 0 && newCycle <= maxCycle) {
             setCurrentCycle(newCycle);
             clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle });
@@ -10636,6 +10635,7 @@ const App = () => {
     };
 
     const activeTabData = tabs[activeTab.toString()];
+
     const isNewCycleButtonDisabled = React.useMemo(() => {
         const hasTitle = cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== '';
         const hasContext = cycleContext.trim() || ephemeralContext.trim();
@@ -10643,20 +10643,24 @@ const App = () => {
         return !hasTitle && !hasContext && !hasResponseContent;
     }, [cycleTitle, cycleContext, ephemeralContext, tabs]);
     
-    // Auto-select first valid file for viewing
+    // C101: Auto-select first valid file for VIEWING
     React.useEffect(() => {
         if (isParsedMode && activeTabData?.parsedContent && fileExistenceMap.size > 0 && autoSelectedForCycle.current !== currentCycle) {
-            const firstExistingFile = activeTabData.parsedContent.files.find(
-                file => fileExistenceMap.get(file.path) === true
+            const firstExistingFile = activeTabData.parsedContent.filesUpdated.find(
+                file => fileExistenceMap.get(file) === true
             );
 
             if (firstExistingFile) {
-                logger.log(`[C101 AUTO-SELECT] Automatically selecting first existing file for view: ${firstExistingFile.path}`);
-                handleSelectFile(firstExistingFile);
-                autoSelectedForCycle.current = currentCycle;
+                const parsedFileObject = activeTabData.parsedContent.files.find(f => f.path === firstExistingFile);
+                if (parsedFileObject) {
+                    logger.log(`[C101 AUTO-VIEW] Automatically selecting first file to view: ${firstExistingFile}`);
+                    setSelectedFile(parsedFileObject);
+                    autoSelectedForCycle.current = currentCycle;
+                }
             }
         }
-    }, [isParsedMode, activeTabData, fileExistenceMap, currentCycle, handleSelectFile]);
+    }, [isParsedMode, activeTabData, fileExistenceMap, currentCycle]);
+
 
     const collapsedNavigator = (
         <div className="collapsed-navigator">
@@ -10665,6 +10669,12 @@ const App = () => {
             <button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button>
         </div>
     );
+
+    const getHighlightedHtml = (file: ParsedFile | null) => {
+        if (!file) return '';
+        const id = `${file.path}::${file.content}`;
+        return highlightedCodeBlocks.get(id) || `<pre><code>${file.content}</code></pre>`;
+    };
 
     return (
         <div className="pc-view-container">
@@ -10714,24 +10724,33 @@ const App = () => {
                                     </CollapsibleSection>
                                     <CollapsibleSection title="Associated Files" isCollapsed={isAssociatedFilesCollapsed} onToggle={() => setIsAssociatedFilesCollapsed(p => !p)}>
                                         <ul className="associated-files-list">
-                                            {activeTabData.parsedContent.files.map(file => (
-                                                <li key={file.path} 
-                                                    onClick={() => {
-                                                        logger.log(`[C101 CLICK-TEST] LI element clicked for: ${file.path}`);
-                                                        if (fileExistenceMap.get(file.path)) {
-                                                            handleSelectFile(file);
+                                            {activeTabData.parsedContent.filesUpdated.map(file => {
+                                                const parsedFile = activeTabData.parsedContent?.files.find(f => f.path === file);
+                                                return (
+                                                    <li key={file} onClick={() => {
+                                                        logger.log(`[C101 CLICK] Clicked on file: ${file}`);
+                                                        if (parsedFile) {
+                                                            setSelectedFile(parsedFile);
+                                                        } else {
+                                                            logger.warn(`Could not find parsed file object for path: ${file}`);
                                                         }
-                                                }}>
-                                                    {fileExistenceMap.get(file.path) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
-                                                    <span>{file.path}</span>
-                                                </li>
-                                            ))}
+                                                    }}>
+                                                        {fileExistenceMap.get(file) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
+                                                        <span>{file}</span>
+                                                    </li>
+                                                );
+                                            })}
                                         </ul>
                                     </CollapsibleSection>
                                 </div>
                                 <div className="parsed-view-right">
-                                    {selectedFileHtmlContent ? (
-                                        <div dangerouslySetInnerHTML={{ __html: selectedFileHtmlContent }} />
+                                    {selectedFile ? (
+                                        <div className="file-block">
+                                            <div className="file-header">
+                                                <span className="file-path">{selectedFile.path}</span>
+                                            </div>
+                                            <div className="file-content-viewer" dangerouslySetInnerHTML={{ __html: getHighlightedHtml(selectedFile) }} />
+                                        </div>
                                     ) : (
                                         <div>Select a file to view its content.</div>
                                     )}
