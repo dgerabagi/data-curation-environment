@@ -1,4 +1,4 @@
-/* Updated on: C96 (Add styles for tab count input) */
+/* Updated on: C97 (Add styles for header and collapsed navigator) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -32,6 +32,7 @@ body {
     display: flex;
     align-items: center;
     gap: 4px;
+    justify-content: space-between; /* For collapsed navigator */
 
     .chevron {
         transition: transform 0.2s ease-in-out;
@@ -48,12 +49,12 @@ body {
     gap: 8px;
 }
 
-
 .pc-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-shrink: 0;
+    gap: 16px; /* Add gap between toolbar groups */
 }
 
 .cycle-navigator {
@@ -121,6 +122,7 @@ body {
     align-items: center;
     gap: 8px;
     font-size: 12px;
+    
     input {
         width: 50px;
         background-color: var(--vscode-input-background);
@@ -315,5 +317,21 @@ body {
             white-space: pre-wrap;
             word-wrap: break-word;
         }
+    }
+}
+
+.collapsed-navigator {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: normal; /* De-emphasize from header title */
+    
+    button {
+        padding: 0 4px;
+    }
+    
+    .cycle-display {
+        font-size: 11px;
+        color: var(--vscode-descriptionForeground);
     }
 }

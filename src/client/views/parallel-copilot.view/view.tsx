@@ -1,4 +1,4 @@
-// Updated on: C96 (Fix all reported UI bugs and add features)
+// Updated on: C97 (Fix all reported UI bugs and add features)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -25,11 +25,14 @@ interface TabState {
     parsedContent: ParsedResponse | null;
 }
 
-const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; }> = ({ title, children, isCollapsed, onToggle }) => (
+const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; collapsedContent?: React.ReactNode; }> = ({ title, children, isCollapsed, onToggle, collapsedContent }) => (
     <div className="collapsible-section">
         <div className="collapsible-header" onClick={onToggle}>
-            <VscChevronDown className={`chevron ${isCollapsed ? 'collapsed' : ''}`} />
-            <span>{title}</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <VscChevronDown className={`chevron ${isCollapsed ? 'collapsed' : ''}`} />
+                <span>{title}</span>
+            </div>
+            {isCollapsed && collapsedContent}
         </div>
         {!isCollapsed && <div className="collapsible-content">{children}</div>}
     </div>
@@ -136,7 +139,7 @@ const App = () => {
             setFileExistenceMap(new Map(Object.entries(existenceMap)));
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendFileContent, ({ path, content }) => {
-            logger.log(`[WebView] Received file content for ${path}`);
+            logger.log(`[WebView IPC Receive] Received file content for ${path}`);
             if (diffTarget?.path === path) {
                 setOriginalFileContent(content);
             }
@@ -158,14 +161,16 @@ const App = () => {
         }
     };
 
-    const handleCycleChange = (newCycle: number) => {
+    const handleCycleChange = (e: React.MouseEvent, newCycle: number) => {
+        e.stopPropagation(); // Prevent toggling the collapsible section
         if (newCycle > 0 && newCycle <= maxCycle) {
             setCurrentCycle(newCycle);
             clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle });
         }
     };
 
-    const handleNewCycle = () => {
+    const handleNewCycle = (e: React.MouseEvent) => {
+        e.stopPropagation();
         const newCycleId = maxCycle + 1;
         setMaxCycle(newCycleId);
         setCurrentCycle(newCycleId);
@@ -181,10 +186,10 @@ const App = () => {
     };
 
     const handleSelectForDiff = (file: ParsedFile) => {
-        logger.log(`[Diff Click] Clicked on file: ${file.path}`);
+        logger.log(`[handleSelectForDiff] Function called for: ${file.path}`);
         setDiffTarget(file);
         setOriginalFileContent(null);
-        logger.log(`[Diff Click] Sending IPC RequestFileContent for: ${file.path}`);
+        logger.log(`[handleSelectForDiff] Sending IPC RequestFileContent for: ${file.path}`);
         clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: file.path });
     };
 
@@ -196,6 +201,14 @@ const App = () => {
         return !hasTitle && !hasContext && !hasResponseContent;
     }, [cycleTitle, cycleContext, ephemeralContext, tabs]);
 
+    const collapsedNavigator = (
+        <div className="collapsed-navigator">
+            <button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button>
+            <span className="cycle-display">C{currentCycle}</span>
+            <button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button>
+        </div>
+    );
+
     return (
         <div className="pc-view-container">
             <div className="pc-header">
@@ -203,24 +216,24 @@ const App = () => {
                     <button onClick={handleGeneratePrompt} title="Generate prompt.md"><VscFileCode /> Generate prompt.md</button>
                     <button onClick={handleGlobalParseToggle}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button>
                 </div>
+                <div className="tab-count-input">
+                    <label htmlFor="tab-count">Responses:</label>
+                    <input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} />
+                </div>
             </div>
 
-            <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)}>
+            <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator}>
                 <div className="cycle-navigator">
                     <span>Cycle:</span>
-                    <button onClick={() => handleCycleChange(currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button>
+                    <button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button>
                     <input type="number" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 1)} className="cycle-input" />
-                    <button onClick={() => handleCycleChange(currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button>
+                    <button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button>
                     <button onClick={handleNewCycle} title="New Cycle" disabled={isNewCycleButtonDisabled}><VscAdd /></button>
                     <input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} />
                 </div>
                 <div className="context-inputs">
                     <textarea className="context-textarea" placeholder="Cycle Context (notes for this cycle)..." value={cycleContext} onChange={e => setCycleContext(e.target.value)} />
                     <textarea className="context-textarea" placeholder="Ephemeral Context (for this cycle's prompt only)..." value={ephemeralContext} onChange={e => setEphemeralContext(e.target.value)} />
-                </div>
-                <div className="tab-count-input">
-                    <label htmlFor="tab-count">Number of Responses:</label>
-                    <input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} />
                 </div>
             </CollapsibleSection>
 
@@ -246,6 +259,7 @@ const App = () => {
                                         <ul className="associated-files-list">
                                             {activeTabData.parsedContent.filesUpdated.map(file => (
                                                 <li key={file} onClick={() => {
+                                                    logger.log(`[Diff Click] LI element clicked for: ${file}`);
                                                     const parsedFile = activeTabData.parsedContent?.files.find(f => f.path === file);
                                                     if (parsedFile && fileExistenceMap.get(file)) {
                                                         handleSelectForDiff(parsedFile);

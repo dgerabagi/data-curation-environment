@@ -1,22 +1,22 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-22T00:50:21.277Z
+  Date Generated: 2025-08-22T01:12:16.658Z
   ---
   Total Files: 205
-  Total Lines: 17414
-  Total Characters: 811365
-  Approx. Tokens: 202918
+  Total Lines: 17433
+  Total Characters: 811555
+  Approx. Tokens: 202965
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
-2. src\backend\services\fs.service.ts (9625 tokens)
+2. src\backend\services\fs.service.ts (9661 tokens)
 3. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
 4. src\client\views\context-chooser.view\view.tsx (5562 tokens)
 5. src\client\components\tree-view\TreeView.tsx (4508 tokens)
 6. src\Artifacts\A0. DCE Master Artifact List.md (4464 tokens)
-7. src\client\views\parallel-copilot.view\view.tsx (3889 tokens)
+7. src\client\views\parallel-copilot.view\view.tsx (4132 tokens)
 8. src\backend\services\flattener.service.ts (3685 tokens)
 9. src\client\views\context-chooser.view\view.scss (3638 tokens)
 10. src\backend\services\prompt.service.ts (3481 tokens)
@@ -60,7 +60,7 @@
 36. src\Artifacts\A32. DCE - Phase 1 - Excel and CSV Handling Strategy.md - Lines: 44 - Chars: 4295 - Tokens: 1074
 37. src\Artifacts\A33. DCE - Phase 1 - Copy-Paste Feature Plan.md - Lines: 42 - Chars: 4456 - Tokens: 1114
 38. src\Artifacts\A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements.md - Lines: 44 - Chars: 6403 - Tokens: 1601
-39. src\Artifacts\A35. DCE - Phase 2 - UI Mockups and Flow.md - Lines: 90 - Chars: 6431 - Tokens: 1608
+39. src\Artifacts\A35. DCE - Phase 2 - UI Mockups and Flow.md - Lines: 72 - Chars: 4493 - Tokens: 1124
 40. src\Artifacts\A36. DCE - Phase 2 - Technical Implementation Plan.md - Lines: 77 - Chars: 4173 - Tokens: 1044
 41. src\Artifacts\A37. DCE - Phase 2 - Cycle Navigator & Knowledge Graph - Vision.md - Lines: 28 - Chars: 3242 - Tokens: 811
 42. src\Artifacts\A38. DCE - Phase 2 - Cycle Navigator - UI Mockup.md - Lines: 69 - Chars: 4621 - Tokens: 1156
@@ -78,7 +78,7 @@
 54. src\Artifacts\A46. DCE - Phase 2 - Paste and Parse Response - Feature Plan.md - Lines: 38 - Chars: 3587 - Tokens: 897
 55. src\Artifacts\A47. DCE - Phase 2 - Prompt Amalgamation Feature Plan.md - Lines: 42 - Chars: 3499 - Tokens: 875
 56. src\Artifacts\A48. DCE - Phase 2 - Advanced Syntax Highlighting Plan.md - Lines: 49 - Chars: 4044 - Tokens: 1011
-57. src\Artifacts\A49. DCE - Phase 2 - File Association & Diffing Plan.md - Lines: 44 - Chars: 4460 - Tokens: 1115
+57. src\Artifacts\A49. DCE - Phase 2 - File Association & Diffing Plan.md - Lines: 47 - Chars: 4936 - Tokens: 1234
 58. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
 59. src\Artifacts\A50. DCE - Phase 2 - UI Component Plan (Resizable Panes & Inner Editors).md - Lines: 48 - Chars: 4790 - Tokens: 1198
 60. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
@@ -89,7 +89,7 @@
 65. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
 66. src\backend\services\action.service.ts - Lines: 73 - Chars: 2471 - Tokens: 618
 67. src\backend\services\flattener.service.ts - Lines: 327 - Chars: 14740 - Tokens: 3685
-68. src\backend\services\fs.service.ts - Lines: 798 - Chars: 38498 - Tokens: 9625
+68. src\backend\services\fs.service.ts - Lines: 799 - Chars: 38644 - Tokens: 9661
 69. src\backend\services\history.service.ts - Lines: 103 - Chars: 3981 - Tokens: 996
 70. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
 71. src\backend\services\prompt.service.ts - Lines: 113 - Chars: 13923 - Tokens: 3481
@@ -112,9 +112,9 @@
 88. src\client\views\context-chooser.view\view.tsx - Lines: 435 - Chars: 22245 - Tokens: 5562
 89. src\client\views\index.ts - Lines: 35 - Chars: 1714 - Tokens: 429
 90. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-91. src\client\views\parallel-copilot.view\on-message.ts - Lines: 39 - Chars: 1840 - Tokens: 460
-92. src\client\views\parallel-copilot.view\view.scss - Lines: 319 - Chars: 6839 - Tokens: 1710
-93. src\client\views\parallel-copilot.view\view.tsx - Lines: 282 - Chars: 15554 - Tokens: 3889
+91. src\client\views\parallel-copilot.view\on-message.ts - Lines: 40 - Chars: 1932 - Tokens: 483
+92. src\client\views\parallel-copilot.view\view.scss - Lines: 337 - Chars: 7279 - Tokens: 1820
+93. src\client\views\parallel-copilot.view\view.tsx - Lines: 296 - Chars: 16528 - Tokens: 4132
 94. src\common\ipc\channels.enum.ts - Lines: 64 - Chars: 3422 - Tokens: 856
 95. src\common\ipc\channels.type.ts - Lines: 57 - Chars: 4453 - Tokens: 1114
 96. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
@@ -2713,7 +2713,7 @@ The goal of the **Parallel Co-Pilot Panel** is to create an integrated, **persis
 # Artifact A35: DCE - Phase 2 - UI Mockups and Flow
 # Date Created: C69
 # Author: AI Model
-# Updated on: C95 (Change parsed view to a two-pane layout with diff viewer)
+# Updated on: C97 (Move response count to header, add collapsed cycle navigator)
 
 ## 1. Overview
 
@@ -2721,46 +2721,45 @@ This document describes the user interface (UI) and interaction flow for the Par
 
 ## 2. UI Mockup (Textual Description)
 
-### 2.1. Stage 1: Raw Input View
+### 2.1. Main Header
 
-This is the initial state of the panel. It remains unchanged.
+The main header is now a single row containing all primary actions.
 
 ```
-+-------------------------------------------------------------------------------------+
-| [Parallel Co-Pilot] [Toolbar: [ Generate prompt.md ], [ Parse All ], Settings]      |
-|-------------------------------------------------------------------------------------|
-| [v] Cycle Info & Context                                                            |
++-------------------------------------------------------------------------------------------------+
+| [Parallel Co-Pilot] [ Gen prompt.md ] [ Parse All ] [ Settings ]   [ Number of Responses: [ 4 ] ] |
+|-------------------------------------------------------------------------------------------------|
+```
+
+### 2.2. Cycle & Context Section
+
+This section has two states: expanded (default) and collapsed.
+
+**Expanded State:**
+```
+| [v] Cycle & Context                                                                 |
 | |-----------------------------------------------------------------------------------|
-| | Cycle: [ < ] [ C95 ] [ > ] [ + (disabled) ] [ Cycle Title Input: ... ]             |
+| | Cycle: [ < ] [ C97 ] [ > ] [ + ] [ Cycle Title Input: ... ]                        |
 | |-----------------------------------------------------------------------------------|
 | | [Cycle Context (Permanent notes)]          [Ephemeral Context (Temp logs)]        |
 | | +----------------------------------------+ +------------------------------------+ |
 | | | Multi-line text area...                | | Multi-line text area...            | |
 | | +----------------------------------------+ +------------------------------------+ |
-|-------------------------------------------------------------------------------------|
-| [ Response 1 (active) ] [ Response 2 ] [ Response 3 ] [ + ]                         |
-|-------------------------------------------------------------------------------------|
-| [ Response 1 Content Area - Stretches to fill vertical space ]                      |
-| |                                                                                 | |
-| | +-----------------------------------------------------------------------------+ | |
-| | | <textarea>                                                                  | | |
-| | | ...                                                                         | | |
-| | +-----------------------------------------------------------------------------+ | |
-| |                                                                                 | |
-+-------------------------------------------------------------------------------------+
 ```
 
-### 2.2. Stage 2: Parsed View (C95 Update)
+**Collapsed State (New in C97):**
+```
+| [>] Cycle & Context         [ < ] [ C97 ] [ > ]                                     |
+```
+*   When collapsed, the header bar itself contains the essential navigation controls, allowing the user to change cycles without expanding the full section.
 
-After clicking `[ Parse All ]`, all tabs transform simultaneously into a **two-pane layout**. The left pane shows the summary and file list, while the right pane shows the diff viewer or file content.
+### 2.3. Parsed View
+
+The two-pane layout for the parsed view remains the same.
 
 ```
-+-------------------------------------------------------------------------------------------------+
-| [Parallel Co-Pilot] [Toolbar: [ Generate prompt.md ], [ Un-Parse All ], Settings]               |
 |-------------------------------------------------------------------------------------------------|
-| ... (Cycle Info & Context section remains the same) ...                                         |
-|-------------------------------------------------------------------------------------------------|
-| [ Response 1 (active) ] [ Response 2 ] [ Response 3 ] [ + ]                                     |
+| [ Response 1 (active) ] [ Response 2 ] [ ... ]                                                |
 |-------------------------------------------------------------------------------------------------|
 | [ Left Pane (File List & Summary) ] | [ Right Pane (Diff Viewer / Content) ]                    |
 | |-----------------------------------| |-------------------------------------------------------| |
@@ -2769,26 +2768,10 @@ After clicking `[ Parse All ]`, all tabs transform simultaneously into a **two-p
 | |                                   | | | [ DiffViewer Component showing changes... ]       | | |
 | | [v] ASSOCIATED FILES (Clickable)  | | +---------------------------------------------------+ | |
 | | |-------------------------------| |                                                       | |
-| | | [✓] src/client/views/view.tsx | | [ FILE: src/client/views/view.tsx ] [Swap]            | |
-| | | [✗] src/client/new-file.ts    | | +---------------------------------------------------+ | |
-| |                                   | | | [ Read-only, syntax-highlighted code viewer... ]  | | |
-| |                                   | | +---------------------------------------------------+ | |
+| | | [✓] src/client/views/view.tsx | |                                                       | |
+| | | [✗] src/client/new-file.ts    | |                                                       | |
 | |                                   | |                                                       | |
-+-------------------------------------------------------------------------------------------------+
-```
-
-### 2.3. UI Components Breakdown
-
-1.  **Main Toolbar:**
-    *   Unchanged.
-
-2.  **Cycle Navigator:**
-    *   Unchanged.
-
-3.  **Parsed View Layout:**
-    *   The content area for a parsed tab is now a two-column layout.
-    *   **Left Pane:** Contains the collapsible sections for "Summary & Plan," "Course of Action," and the "Associated Files" list. This pane is scrollable.
-    *   **Right Pane:** This is the content viewer. It is initially empty or shows a placeholder. When a user clicks a file in the "Associated Files" list, this pane will render the appropriate content (a diff view or the full file content).
++-------------------------------------------------------------------------------------------------+```
 
 ## 3. User Interaction Flow
 
@@ -2798,8 +2781,7 @@ After clicking `[ Parse All ]`, all tabs transform simultaneously into a **two-p
     *   The backend reads the file from the workspace and sends its content back via `SendFileContent`.
     *   The frontend receives the original content. It already has the AI's proposed content from the parsed response.
     *   **UI Update:** The `DiffViewer` component is rendered in the **right pane**, showing a comparison of the two versions.
-3.  **View Full Content:** The user clicks a file block header in the right pane.
-    *   **UI Update:** The right pane switches from the `DiffViewer` to showing the full, syntax-highlighted content of that single file.
+3.  **Navigate While Collapsed:** The user collapses the "Cycle & Context" section. They can still click the `<` and `>` buttons in the header to load previous/next cycles without re-expanding the panel.
 </file>
 
 <file path="src/Artifacts/A36. DCE - Phase 2 - Technical Implementation Plan.md">
@@ -3949,7 +3931,7 @@ After research and consideration of alternatives like `refractor`, **`@wooorm/st
 # Artifact A49: DCE - Phase 2 - File Association & Diffing Plan
 # Date Created: C82
 # Author: AI Model
-# Updated on: C96 (Add logging for debugging non-functional diff view)
+# Updated on: C97 (Escalate debugging plan with end-to-end logging)
 
 - **Key/Value for A0:**
 - **Description:** Plans the UI and backend logic to visually link file blocks in an AI response to workspace files and sets the stage for an integrated diff tool.
@@ -3969,7 +3951,7 @@ To make the "Swap with Source" feature trustworthy and intuitive, users need a c
 | P2-ASSOC-02 | **Verify File Existence** | As a developer, for each file listed, I want to see a visual indicator of whether that file already exists in my workspace, so I can spot potential errors or new files proposed by the AI. | - Next to each listed file path, an icon is displayed. <br> - A green checkmark (`✓`) indicates the file exists at that path. <br> - A red cross (`✗`) indicates the file does not exist, alerting me to a potential hallucination or a new file creation. |
 | P2-ASSOC-03 | **Preview Changes with Diff** | As a developer, I want to click on an existing file in the "Associated Files" list to immediately see a side-by-side comparison of the original file and the AI's proposed changes, so I can review the changes before swapping. | - Clicking a file with a `✓` in the list opens a diff view in a new panel to the right. <br> - The diff view clearly shows added, removed, and common lines. <br> - The diff view is the primary way to inspect changes. |
 
-## 3. Technical Implementation Plan (C96)
+## 3. Technical Implementation Plan (C97)
 
 1.  **Frontend - Parsing (`response-parser.ts`):**
     *   **Status:** **Complete.** The parser has been enhanced to check for angle-bracket paths first.
@@ -3978,18 +3960,21 @@ To make the "Swap with Source" feature trustworthy and intuitive, users need a c
     *   **Status:** **Complete.** The `handleFileExistenceRequest` and `handleFileContentRequest` handlers are implemented.
 
 3.  **Frontend - UI & State (`view.tsx`):**
-    *   **Status:** **Debugging.** The diff view is not appearing on click.
+    *   **Status:** **Debugging.** The diff view is not appearing on click. The lack of logs indicates the event is not being captured or the IPC message is not being sent.
     *   **Workflow:**
         1.  User clicks a file in the list.
         2.  The `onClick` handler calls a function, `handleSelectForDiff`.
         3.  `handleSelectForDiff` sets the `diffTarget` state and sends a `RequestFileContent` IPC message.
         4.  The `onmessage` handler for `SendFileContent` receives the original file's text and sets the `originalFileContent` state.
         5.  The `DiffViewer` component renders when `diffTarget` and `originalFileContent` are both non-null.
-    *   **Debugging Plan (C96):**
-        *   **Step 1:** Add `logger.log()` inside the `onClick` handler in the `AssociatedFilesList` to confirm the click event is firing and `handleSelectForDiff` is being called with the correct `ParsedFile` object.
-        *   **Step 2:** Add `logger.log()` just before the `clientIpc.sendToServer` call for `RequestFileContent` to confirm the IPC message is being sent.
-        *   **Step 3:** Add `logger.log()` at the very beginning of the `onmessage` handler for `SendFileContent` to confirm the frontend is receiving the response from the backend.
-        *   **Step 4:** Add `console.log()` statements inside the main `App` component's render body to inspect the values of `diffTarget` and `originalFileContent` on every re-render. This will reveal if the state is being set correctly but failing to trigger the render, or if the state is not being set at all.
+    *   **Debugging Plan (C97 - End-to-End Logging):**
+        *   **Step 1 (Client - JSX):** Add `onClick={() => logger.log('Associated file LI clicked: ' + file.path)}` directly to the `<li>` element in the `AssociatedFilesList` component. This will confirm the React event handler is firing.
+        *   **Step 2 (Client - Handler):** Add `logger.log()` inside `handleSelectForDiff` to confirm it's being called by the `onClick`.
+        *   **Step 3 (Client - IPC Send):** Add `logger.log()` immediately before the `clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, ...)` call.
+        *   **Step 4 (Backend - IPC Receive):** Add `loggerService.log()` at the very beginning of the `on-message.ts` handler for `ClientToServerChannel.RequestFileContent`.
+        *   **Step 5 (Backend - Service):** Add `loggerService.log()` at the beginning of the `handleFileContentRequest` method in `fs.service.ts`.
+        *   **Step 6 (Client - IPC Receive):** Add `logger.log()` at the beginning of the `onServerMessage` handler for `ServerToClientChannel.SendFileContent` in `view.tsx`.
+        *   **Step 7 (Client - State):** Add `console.log({ diffTarget, originalFileContent })` just before the `return` statement in the `App` component to inspect state on every render.
 </file>
 
 <file path="src/Artifacts/A5. DCE - Target File Structure.md">
@@ -6522,14 +6507,15 @@ export class FSService {
     // --- File Operations ---
 
     public async handleFileContentRequest(filePath: string, serverIpc: ServerPostMessageManager) {
-        Services.loggerService.log(`Received request for content of: ${filePath}`);
+        Services.loggerService.log(`[fs.service] Received request for content of: ${filePath}`);
         try {
             const uri = vscode.Uri.file(filePath);
             const contentBuffer = await vscode.workspace.fs.readFile(uri);
             const content = Buffer.from(contentBuffer).toString('utf-8');
+            Services.loggerService.log(`[fs.service] Successfully read content for: ${filePath}. Sending to client.`);
             serverIpc.sendToClient(ServerToClientChannel.SendFileContent, { path: filePath, content });
         } catch (error) {
-            Services.loggerService.error(`Failed to read file content for ${filePath}: ${error}`);
+            Services.loggerService.error(`[fs.service] Failed to read file content for ${filePath}: ${error}`);
             serverIpc.sendToClient(ServerToClientChannel.SendFileContent, { path: filePath, content: null });
         }
     }
@@ -10099,13 +10085,14 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     });
     
     serverIpc.onClientMessage(ClientToServerChannel.RequestFileContent, (data) => {
+        loggerService.log(`[on-message.ts] Received RequestFileContent for: ${data.path}`);
         fsService.handleFileContentRequest(data.path, serverIpc);
     });
 }
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
-/* Updated on: C96 (Add styles for tab count input) */
+/* Updated on: C97 (Add styles for header and collapsed navigator) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -10139,6 +10126,7 @@ body {
     display: flex;
     align-items: center;
     gap: 4px;
+    justify-content: space-between; /* For collapsed navigator */
 
     .chevron {
         transition: transform 0.2s ease-in-out;
@@ -10155,12 +10143,12 @@ body {
     gap: 8px;
 }
 
-
 .pc-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-shrink: 0;
+    gap: 16px; /* Add gap between toolbar groups */
 }
 
 .cycle-navigator {
@@ -10228,6 +10216,7 @@ body {
     align-items: center;
     gap: 8px;
     font-size: 12px;
+    
     input {
         width: 50px;
         background-color: var(--vscode-input-background);
@@ -10424,10 +10413,26 @@ body {
         }
     }
 }
+
+.collapsed-navigator {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: normal; /* De-emphasize from header title */
+    
+    button {
+        padding: 0 4px;
+    }
+    
+    .cycle-display {
+        font-size: 11px;
+        color: var(--vscode-descriptionForeground);
+    }
+}
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
-// Updated on: C96 (Fix all reported UI bugs and add features)
+// Updated on: C97 (Fix all reported UI bugs and add features)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -10454,11 +10459,14 @@ interface TabState {
     parsedContent: ParsedResponse | null;
 }
 
-const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; }> = ({ title, children, isCollapsed, onToggle }) => (
+const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; collapsedContent?: React.ReactNode; }> = ({ title, children, isCollapsed, onToggle, collapsedContent }) => (
     <div className="collapsible-section">
         <div className="collapsible-header" onClick={onToggle}>
-            <VscChevronDown className={`chevron ${isCollapsed ? 'collapsed' : ''}`} />
-            <span>{title}</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <VscChevronDown className={`chevron ${isCollapsed ? 'collapsed' : ''}`} />
+                <span>{title}</span>
+            </div>
+            {isCollapsed && collapsedContent}
         </div>
         {!isCollapsed && <div className="collapsible-content">{children}</div>}
     </div>
@@ -10565,7 +10573,7 @@ const App = () => {
             setFileExistenceMap(new Map(Object.entries(existenceMap)));
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendFileContent, ({ path, content }) => {
-            logger.log(`[WebView] Received file content for ${path}`);
+            logger.log(`[WebView IPC Receive] Received file content for ${path}`);
             if (diffTarget?.path === path) {
                 setOriginalFileContent(content);
             }
@@ -10587,14 +10595,16 @@ const App = () => {
         }
     };
 
-    const handleCycleChange = (newCycle: number) => {
+    const handleCycleChange = (e: React.MouseEvent, newCycle: number) => {
+        e.stopPropagation(); // Prevent toggling the collapsible section
         if (newCycle > 0 && newCycle <= maxCycle) {
             setCurrentCycle(newCycle);
             clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle });
         }
     };
 
-    const handleNewCycle = () => {
+    const handleNewCycle = (e: React.MouseEvent) => {
+        e.stopPropagation();
         const newCycleId = maxCycle + 1;
         setMaxCycle(newCycleId);
         setCurrentCycle(newCycleId);
@@ -10610,10 +10620,10 @@ const App = () => {
     };
 
     const handleSelectForDiff = (file: ParsedFile) => {
-        logger.log(`[Diff Click] Clicked on file: ${file.path}`);
+        logger.log(`[handleSelectForDiff] Function called for: ${file.path}`);
         setDiffTarget(file);
         setOriginalFileContent(null);
-        logger.log(`[Diff Click] Sending IPC RequestFileContent for: ${file.path}`);
+        logger.log(`[handleSelectForDiff] Sending IPC RequestFileContent for: ${file.path}`);
         clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: file.path });
     };
 
@@ -10625,6 +10635,14 @@ const App = () => {
         return !hasTitle && !hasContext && !hasResponseContent;
     }, [cycleTitle, cycleContext, ephemeralContext, tabs]);
 
+    const collapsedNavigator = (
+        <div className="collapsed-navigator">
+            <button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button>
+            <span className="cycle-display">C{currentCycle}</span>
+            <button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button>
+        </div>
+    );
+
     return (
         <div className="pc-view-container">
             <div className="pc-header">
@@ -10632,24 +10650,24 @@ const App = () => {
                     <button onClick={handleGeneratePrompt} title="Generate prompt.md"><VscFileCode /> Generate prompt.md</button>
                     <button onClick={handleGlobalParseToggle}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button>
                 </div>
+                <div className="tab-count-input">
+                    <label htmlFor="tab-count">Responses:</label>
+                    <input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} />
+                </div>
             </div>
 
-            <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)}>
+            <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator}>
                 <div className="cycle-navigator">
                     <span>Cycle:</span>
-                    <button onClick={() => handleCycleChange(currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button>
+                    <button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button>
                     <input type="number" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 1)} className="cycle-input" />
-                    <button onClick={() => handleCycleChange(currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button>
+                    <button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button>
                     <button onClick={handleNewCycle} title="New Cycle" disabled={isNewCycleButtonDisabled}><VscAdd /></button>
                     <input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} />
                 </div>
                 <div className="context-inputs">
                     <textarea className="context-textarea" placeholder="Cycle Context (notes for this cycle)..." value={cycleContext} onChange={e => setCycleContext(e.target.value)} />
                     <textarea className="context-textarea" placeholder="Ephemeral Context (for this cycle's prompt only)..." value={ephemeralContext} onChange={e => setEphemeralContext(e.target.value)} />
-                </div>
-                <div className="tab-count-input">
-                    <label htmlFor="tab-count">Number of Responses:</label>
-                    <input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} />
                 </div>
             </CollapsibleSection>
 
@@ -10675,6 +10693,7 @@ const App = () => {
                                         <ul className="associated-files-list">
                                             {activeTabData.parsedContent.filesUpdated.map(file => (
                                                 <li key={file} onClick={() => {
+                                                    logger.log(`[Diff Click] LI element clicked for: ${file}`);
                                                     const parsedFile = activeTabData.parsedContent?.files.find(f => f.path === file);
                                                     if (parsedFile && fileExistenceMap.get(file)) {
                                                         handleSelectForDiff(parsedFile);
