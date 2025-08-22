@@ -1,61 +1,68 @@
-// src/client/utils/response-parser.ts
+// Updated on: C109 (Implement robust two-stage parsing)
 import { ParsedResponse, ParsedFile } from "@/common/types/pcpp.types";
 
 // Regex to find the summary/plan before any major headers
-const SUMMARY_REGEX = /^([\s\S]*?)(?=### Course of Action|### Files Updated This Cycle|<[a-zA-Z0-9\.\/_-]+\.[a-zA-Z]{2,}>)/;
+const SUMMARY_REGEX = /^([\s\S]*?)(?=### Course of Action|### Files Updated This Cycle|<file path=")/;
 
 // Regex to find the course of action
-const COURSE_OF_ACTION_REGEX = /### Course of Action\s*([\s\S]*?)(?=### Files Updated This Cycle|<[a-zA-Z0-9\.\/_-]+\.[a-zA-Z]{2,}>)/m;
+const COURSE_OF_ACTION_REGEX = /### Course of Action\s*([\s\S]*?)(?=### Files Updated This Cycle|<file path=")/m;
 
 // Regex for the "Files Updated" markdown list (as a fallback)
-const FILES_UPDATED_LIST_REGEX = /### Files Updated This Cycle\s*([\s\S]*?)(?=<[a-zA-Z0-9\.\/_-]+\.[a-zA-Z]{2,}>|`{3,})/m;
+const FILES_UPDATED_LIST_REGEX = /### Files Updated This Cycle\s*([\s\S]*?)(?=<file path="|`{3,})/m;
 
-// C108: More robust regex to handle <path>...</file> and <path>...</path>
-const FILE_BLOCK_REGEX = /<([a-zA-Z0-9\.\/_-]+\.[a-zA-Z]{2,})>([\s\S]*?)<\/(?:file|\1)>/g;
+// C109: New approach - Find file tags first, then extract content between them.
+const FILE_TAG_REGEX = /<file path="([^"]+)">/g;
 
 
 export function parseResponse(rawText: string): ParsedResponse {
-    // 1. Extract file blocks first, as they are the most reliable source of data.
     const files: ParsedFile[] = [];
-    const fileMatches = rawText.matchAll(FILE_BLOCK_REGEX);
-    for (const match of fileMatches) {
-        files.push({
-            path: match[1].trim(),
-            content: match[2].trim(),
-        });
-    }
+    const filesUpdatedList: string[] = [];
 
-    // 2. Extract summary and course of action
+    // Stage 1: Find all file tags and their positions
+    const tagMatches = [...rawText.matchAll(FILE_TAG_REGEX)];
+
+    // Stage 2: Extract content between tags
+    tagMatches.forEach((match, index) => {
+        const path = match[1].trim();
+        const contentStart = match.index! + match[0].length;
+        
+        const nextMatch = tagMatches[index + 1];
+        const contentEnd = nextMatch ? nextMatch.index! : rawText.length;
+        
+        let content = rawText.substring(contentStart, contentEnd).trim();
+
+        // Clean up potential closing tags from the end of the content
+        const closingTagSimple = `</file>`;
+        const closingTagWithPath = `</${path}>`;
+        if (content.endsWith(closingTagSimple)) {
+            content = content.slice(0, -closingTagSimple.length).trim();
+        } else if (content.endsWith(closingTagWithPath)) {
+            content = content.slice(0, -closingTagWithPath.length).trim();
+        }
+
+        files.push({ path, content });
+        filesUpdatedList.push(path);
+    });
+
+    // Extract summary and course of action using the file tags as boundaries
     const summaryMatch = rawText.match(SUMMARY_REGEX);
     const courseOfActionMatch = rawText.match(COURSE_OF_ACTION_REGEX);
     
     const summary = summaryMatch ? summaryMatch[1].trim() : 'Could not parse summary.';
     const courseOfAction = courseOfActionMatch ? courseOfActionMatch[1].trim() : 'Could not parse course of action.';
 
-    // 3. Determine the list of updated files
-    let filesUpdatedList: string[] = [];
-    if (files.length > 0) {
-        // Primary method: Use the paths from the file blocks we found.
-        filesUpdatedList = files.map(f => f.path);
-    } else {
-        // Fallback method: Parse the markdown list
+    // Fallback for filesUpdated list if no file blocks were found
+    if (filesUpdatedList.length === 0) {
         const filesUpdatedMatch = rawText.match(FILES_UPDATED_LIST_REGEX);
         if (filesUpdatedMatch && filesUpdatedMatch[1]) {
-            filesUpdatedList = filesUpdatedMatch[1]
+            filesUpdatedList.push(...filesUpdatedMatch[1]
                 .split('\n')
                 .map(line => {
                     const backtickMatch = /`([^`]+)`/.exec(line);
-                    if (backtickMatch && backtickMatch[1]) {
-                        return backtickMatch[1].trim();
-                    }
-                    return line
-                        .replace(/^\[.\]\s*/, '')
-                        .replace(/^[-*]\s*/, '')
-                        .replace(/\((?:Updated|New|Re-supplied|Deleted)\)/ig, '')
-                        .replace(/`/g, '')
-                        .trim();
+                    return backtickMatch ? backtickMatch[1].trim() : '';
                 })
-                .filter(line => line.length > 0 && line.includes('.')); // Basic validation
+                .filter(line => line.length > 0 && line.includes('.'))
+            );
         }
     }
 

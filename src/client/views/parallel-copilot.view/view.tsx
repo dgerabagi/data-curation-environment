@@ -1,4 +1,4 @@
-// Updated on: C108 (No functional changes from C107, re-supplying for completeness with new parser)
+// Updated on: C109 (Fix infinite loop and stabilize data fetching)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -7,7 +7,7 @@ import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
 import { PcppCycle, PcppResponse } from '@/backend/services/history.service';
-import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
+import { ParsedResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
 import ReactMarkdown from 'react-markdown';
 
@@ -57,6 +57,9 @@ const App = () => {
     const [isCourseOfActionCollapsed, setIsCourseOfActionCollapsed] = React.useState(false);
     const [isAssociatedFilesCollapsed, setIsAssociatedFilesCollapsed] = React.useState(false);
     
+    // C109: Ref to track processed content to prevent re-fetching
+    const processedContentRef = React.useRef(new Set<string>());
+    
     const clientIpc = ClientPostMessageManager.getInstance();
 
     const saveCurrentCycleState = React.useCallback(() => {
@@ -90,11 +93,15 @@ const App = () => {
                 const parsed = parseResponse(tabState.rawContent);
                 updatedTabs[Number(tabId)].parsedContent = parsed;
                 parsed.filesUpdated.forEach(file => allFilePaths.add(file));
+                
+                // C109: Process files for highlighting, but only if not already processed
                 parsed.files.forEach(file => {
                     const lang = file.path.split('.').pop() || 'plaintext';
                     const id = `${file.path}::${file.content}`;
-                    if (!highlightedCodeBlocks.has(id)) {
+                    if (!processedContentRef.current.has(id)) {
+                         logger.log(`[C109 LOOP FIX] Requesting syntax highlight for new content: ${file.path}`);
                          clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
+                         processedContentRef.current.add(id);
                     }
                 });
             }
@@ -103,11 +110,12 @@ const App = () => {
         if (allFilePaths.size > 0) {
             clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) });
         }
-    }, [clientIpc, highlightedCodeBlocks]);
+    }, [clientIpc]);
 
 
     React.useEffect(() => {
         const loadCycleData = (cycleData: PcppCycle) => {
+            processedContentRef.current.clear(); // Clear processed cache on cycle load
             setCurrentCycle(cycleData.cycleId);
             setCycleTitle(cycleData.title);
             setCycleContext(cycleData.cycleContext);
@@ -159,13 +167,18 @@ const App = () => {
         const highlightedHtml = highlightedCodeBlocks.get(id);
 
         if (highlightedHtml) {
-            logger.log(`[Content Display] Found highlighted content for ${selectedFilePath}`);
             return highlightedHtml;
         } else {
-            logger.warn(`[Content Display] Highlighted content not found for ${selectedFilePath}. Falling back to plain text.`);
+            // C109: Request highlighting if it's missing (should only happen if there was a load issue)
+            if (!processedContentRef.current.has(id)) {
+                logger.warn(`[Content Display] Highlighted content not found for ${selectedFilePath}. Requesting it now.`);
+                const lang = file.path.split('.').pop() || 'plaintext';
+                clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
+                processedContentRef.current.add(id);
+            }
             return `<pre><code>${file.content.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code></pre>`;
         }
-    }, [selectedFilePath, activeTabData?.parsedContent, highlightedCodeBlocks]);
+    }, [selectedFilePath, activeTabData?.parsedContent, highlightedCodeBlocks, clientIpc]);
 
 
     const handleRawContentChange = (newContent: string, tabIndex: number) => {
