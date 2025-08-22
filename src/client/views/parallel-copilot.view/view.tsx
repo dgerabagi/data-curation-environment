@@ -1,4 +1,4 @@
-// Updated on: C104 (Fix infinite loop, fix state lifting for test harness, add visual feedback to test panes)
+// Updated on: C104 (Fix infinite loop in test harness)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -41,10 +41,7 @@ const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; i
 );
 
 // Encapsulates the original, complex view logic
-const OriginalView: React.FC<{ 
-    onDataParsed: (parsed: ParsedResponse | null) => void;
-    fileExistenceMap: Map<string, boolean>;
-}> = ({ onDataParsed, fileExistenceMap }) => {
+const OriginalView: React.FC<{ onDataParsed: (parsed: ParsedResponse) => void }> = ({ onDataParsed }) => {
     const [activeTab, setActiveTab] = React.useState(1);
     const [tabCount, setTabCount] = React.useState(4);
     const [currentCycle, setCurrentCycle] = React.useState(1);
@@ -54,6 +51,7 @@ const OriginalView: React.FC<{
     const [ephemeralContext, setEphemeralContext] = React.useState('');
     const [tabs, setTabs] = React.useState<{ [key: string]: TabState }>({});
     const [highlightedCodeBlocks, setHighlightedCodeBlocks] = React.useState<Map<string, string>>(new Map());
+    const [fileExistenceMap, setFileExistenceMap] = React.useState<Map<string, boolean>>(new Map());
     const [isParsedMode, setIsParsedMode] = React.useState(false);
     const [selectedFile, setSelectedFile] = React.useState<ParsedFile | null>(null);
     const [isCycleCollapsed, setIsCycleCollapsed] = React.useState(false);
@@ -77,19 +75,20 @@ const OriginalView: React.FC<{
 
     React.useEffect(() => { debouncedSave(); }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, debouncedSave]);
     
-    const parseAllTabs = React.useCallback((tabsToParse: { [key: string]: TabState }) => {
-        let combinedParsedContent: ParsedResponse | null = null;
-        const updatedTabs = { ...tabsToParse };
+    const parseAllTabs = React.useCallback(() => {
+        const allFilePaths = new Set<string>();
+        const updatedTabs = { ...tabs };
+        let firstParsed: ParsedResponse | null = null;
+
         Object.entries(updatedTabs).forEach(([tabId, tabState]) => {
             if (tabState.rawContent) {
                 const parsed = parseResponse(tabState.rawContent);
+                if (!firstParsed) firstParsed = parsed;
                 updatedTabs[Number(tabId)].parsedContent = parsed;
-                if (Number(tabId) === activeTab) {
-                    combinedParsedContent = parsed;
-                }
+                parsed.filesUpdated.forEach(file => allFilePaths.add(file));
                 parsed.files.forEach(file => {
                     const lang = file.path.split('.').pop() || 'plaintext';
-                    const id = `${file.path}::${file.content}`;
+                    const id = `${file.path}::${file.content}`; // Unique ID
                     if (!highlightedCodeBlocks.has(id)) {
                          clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
                     }
@@ -97,8 +96,14 @@ const OriginalView: React.FC<{
             }
         });
         setTabs(updatedTabs);
-        onDataParsed(combinedParsedContent); // Lift the parsed data of the active tab up
-    }, [clientIpc, highlightedCodeBlocks, onDataParsed, activeTab]);
+        if (allFilePaths.size > 0) {
+            clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) });
+        }
+        if(firstParsed) {
+            onDataParsed(firstParsed); // Lift the first parsed content up
+        }
+    }, [clientIpc, highlightedCodeBlocks, tabs, onDataParsed]);
+
 
     React.useEffect(() => {
         const loadCycleData = (cycleData: PcppCycle) => {
@@ -113,15 +118,22 @@ const OriginalView: React.FC<{
             setTabs(newTabs);
             const loadedParseMode = cycleData.isParsedMode || false;
             setIsParsedMode(loadedParseMode);
-            if (loadedParseMode) { parseAllTabs(newTabs); }
+            if (loadedParseMode) { 
+                // We call parseAllTabs from here now, but it needs the `tabs` state
+                // This will be handled by the parse button logic instead for simplicity on load
+            }
         };
 
         clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData }) => { loadCycleData(cycleData); setMaxCycle(cycleData.cycleId); });
         clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData }) => { if (cycleData) { loadCycleData(cycleData); autoSelectedForCycle.current = null; } });
         clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml)));
+        clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => {
+            const newMap = new Map(Object.entries(existenceMap));
+            setFileExistenceMap(newMap);
+        });
         
         clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});
-    }, [clientIpc, parseAllTabs]);
+    }, [clientIpc]);
 
     const handleRawContentChange = (newContent: string, tabIndex: number) => setTabs(prev => ({ ...prev, [tabIndex.toString()]: { ...(prev[tabIndex.toString()] || { parsedContent: null }), rawContent: newContent }}));
     const handleGlobalParseToggle = () => {
@@ -129,10 +141,17 @@ const OriginalView: React.FC<{
         setIsParsedMode(newParseMode);
         setSelectedFile(null);
         autoSelectedForCycle.current = null;
-        if (newParseMode) { parseAllTabs(tabs); } else { onDataParsed(null); }
+        if (newParseMode) { parseAllTabs(); } else {
+            // Un-parse: clear parsed content
+            const clearedTabs = {...tabs};
+            Object.keys(clearedTabs).forEach(key => {
+                clearedTabs[key].parsedContent = null;
+            });
+            setTabs(clearedTabs);
+        }
     };
     const handleCycleChange = (e: React.MouseEvent, newCycle: number) => { e.stopPropagation(); if (newCycle > 0 && newCycle <= maxCycle) { setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); } };
-    const handleNewCycle = (e: React.MouseEvent) => { e.stopPropagation(); const newCycleId = maxCycle + 1; setMaxCycle(newCycleId); setCurrentCycle(newCycleId); setCycleTitle('New Cycle'); setCycleContext(''); setEphemeralContext(''); setTabs({}); setIsParsedMode(false); onDataParsed(null); };
+    const handleNewCycle = (e: React.MouseEvent) => { e.stopPropagation(); const newCycleId = maxCycle + 1; setMaxCycle(newCycleId); setCurrentCycle(newCycleId); setCycleTitle('New Cycle'); setCycleContext(''); setEphemeralContext(''); setTabs({}); setIsParsedMode(false); };
     const handleGeneratePrompt = () => clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle });
     const activeTabData = tabs[activeTab.toString()];
     const isNewCycleButtonDisabled = React.useMemo(() => !((cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== '') || cycleContext.trim() || ephemeralContext.trim() || Object.values(tabs).some(t => t.rawContent.trim())), [cycleTitle, cycleContext, ephemeralContext, tabs]);
@@ -146,14 +165,6 @@ const OriginalView: React.FC<{
             }
         }
     }, [isParsedMode, activeTabData, fileExistenceMap, currentCycle]);
-    
-    // Switch parsed content when active tab changes
-    React.useEffect(() => {
-        if (isParsedMode) {
-            onDataParsed(tabs[activeTab.toString()]?.parsedContent || null);
-        }
-    }, [activeTab, isParsedMode, onDataParsed, tabs]);
-
 
     const getHighlightedHtml = (file: ParsedFile | null) => file ? (highlightedCodeBlocks.get(`${file.path}::${file.content}`) || `<pre><code>${file.content}</code></pre>`) : '';
 
@@ -230,28 +241,26 @@ const App = () => {
     // State lifted from OriginalView to be shared with Test Panes
     const [sharedParsedContent, setSharedParsedContent] = React.useState<ParsedResponse | null>(null);
     const [sharedFileExistenceMap, setSharedFileExistenceMap] = React.useState<Map<string, boolean>>(new Map());
-    
+
     const clientIpc = ClientPostMessageManager.getInstance();
 
-    const handleDataParsed = React.useCallback((parsed: ParsedResponse | null) => {
-        logger.log(`[HARNESS] Data parsed in Original view. Lifting state.`);
+    // Fix: This effect was causing the infinite loop. Now it only sets up the listener once.
+    React.useEffect(() => {
+        const handleFileExistence = ({ existenceMap }: { existenceMap: { [path: string]: boolean } }) => {
+            const newMap = new Map(Object.entries(existenceMap));
+            setSharedFileExistenceMap(newMap);
+        };
+        clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, handleFileExistence);
+    }, [clientIpc]);
+
+    const handleDataParsed = React.useCallback((parsed: ParsedResponse) => {
         setSharedParsedContent(parsed);
-        if (parsed && parsed.filesUpdated.length > 0) {
-            const allFilePaths = new Set<string>(parsed.filesUpdated);
+        // Request file existence check when data is parsed
+        const allFilePaths = parsed.filesUpdated;
+        if (allFilePaths.length > 0) {
             clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) });
-        } else {
-            setSharedFileExistenceMap(new Map());
         }
     }, [clientIpc]);
-
-    React.useEffect(() => {
-        clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => {
-            const newMap = new Map(Object.entries(existenceMap));
-            logger.log(`[HARNESS] Received file existence map with ${newMap.size} entries. Setting shared state.`);
-            setSharedFileExistenceMap(newMap);
-        });
-    }, [clientIpc]);
-
 
     const views: View[] = ['Original', 'TestA', 'TestB', 'TestC'];
 
@@ -269,7 +278,7 @@ const App = () => {
                 ))}
             </div>
             <div className="test-harness-content">
-                {activeView === 'Original' && <OriginalView onDataParsed={handleDataParsed} fileExistenceMap={sharedFileExistenceMap} />}
+                {activeView === 'Original' && <OriginalView onDataParsed={handleDataParsed} />}
                 {activeView === 'TestA' && <TestPane1 parsedContent={sharedParsedContent} fileExistenceMap={sharedFileExistenceMap} />}
                 {activeView === 'TestB' && <TestPane2 parsedContent={sharedParsedContent} fileExistenceMap={sharedFileExistenceMap} />}
                 {activeView === 'TestC' && <TestPane3 parsedContent={sharedParsedContent} fileExistenceMap={sharedFileExistenceMap} />}

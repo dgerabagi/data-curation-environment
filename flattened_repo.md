@@ -1,12 +1,12 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-22T13:22:53.634Z
+  Date Generated: 2025-08-22T19:54:44.661Z
   ---
   Total Files: 209
-  Total Lines: 17670
-  Total Characters: 825816
-  Approx. Tokens: 206534
+  Total Lines: 17714
+  Total Characters: 827583
+  Approx. Tokens: 206975
 -->
 
 <!-- Top 10 Files by Token Count -->
@@ -14,9 +14,9 @@
 2. src\backend\services\fs.service.ts (9684 tokens)
 3. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
 4. src\client\views\context-chooser.view\view.tsx (5562 tokens)
-5. src\Artifacts\A0. DCE Master Artifact List.md (4539 tokens)
-6. src\client\components\tree-view\TreeView.tsx (4508 tokens)
-7. src\client\views\parallel-copilot.view\view.tsx (4408 tokens)
+5. src\client\views\parallel-copilot.view\view.tsx (4680 tokens)
+6. src\Artifacts\A0. DCE Master Artifact List.md (4539 tokens)
+7. src\client\components\tree-view\TreeView.tsx (4508 tokens)
 8. src\backend\services\flattener.service.ts (3685 tokens)
 9. src\client\views\context-chooser.view\view.scss (3638 tokens)
 10. src\backend\services\prompt.service.ts (3481 tokens)
@@ -114,11 +114,11 @@
 90. src\client\views\index.ts - Lines: 35 - Chars: 1714 - Tokens: 429
 91. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 92. src\client\views\parallel-copilot.view\on-message.ts - Lines: 41 - Chars: 2019 - Tokens: 505
-93. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 41 - Chars: 1889 - Tokens: 473
-94. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 56 - Chars: 2555 - Tokens: 639
-95. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 61 - Chars: 2828 - Tokens: 707
-96. src\client\views\parallel-copilot.view\view.scss - Lines: 371 - Chars: 8013 - Tokens: 2004
-97. src\client\views\parallel-copilot.view\view.tsx - Lines: 264 - Chars: 17631 - Tokens: 4408
+93. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 43 - Chars: 1890 - Tokens: 473
+94. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 61 - Chars: 2792 - Tokens: 698
+95. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 66 - Chars: 3062 - Tokens: 766
+96. src\client\views\parallel-copilot.view\view.scss - Lines: 376 - Chars: 8219 - Tokens: 2055
+97. src\client\views\parallel-copilot.view\view.tsx - Lines: 291 - Chars: 18720 - Tokens: 4680
 98. src\common\ipc\channels.enum.ts - Lines: 64 - Chars: 3422 - Tokens: 856
 99. src\common\ipc\channels.type.ts - Lines: 57 - Chars: 4453 - Tokens: 1114
 100. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
@@ -10188,6 +10188,8 @@ interface TestPane1Props {
 }
 
 const TestPane1: React.FC<TestPane1Props> = ({ parsedContent, fileExistenceMap }) => {
+    const [lastClicked, setLastClicked] = React.useState<string | null>(null);
+
     if (!parsedContent) {
         return <div className="test-pane-container">Go to the "Original" tab, paste a response, and click "Parse All" to populate test data.</div>;
     }
@@ -10195,7 +10197,8 @@ const TestPane1: React.FC<TestPane1Props> = ({ parsedContent, fileExistenceMap }
     return (
         <div className="test-pane-container">
             <h3>Test Pane A: Barebones Click Logger</h3>
-            <p>This test uses a raw list with a simple `onClick` that only calls `logger.log()`. If clicks are logged here, the fundamental event capture is working.</p>
+            <p>This test uses a raw list with a simple `onClick`. If clicks are logged and the text below updates, the fundamental event capture is working.</p>
+            <p><strong>Last Clicked:</strong> {lastClicked || 'None'}</p>
             <hr style={{ margin: '8px 0', borderColor: 'var(--vscode-panel-border)' }} />
             <ul className="associated-files-list">
                 {parsedContent.filesUpdated.map(file => (
@@ -10203,9 +10206,8 @@ const TestPane1: React.FC<TestPane1Props> = ({ parsedContent, fileExistenceMap }
                         key={file} 
                         onClick={() => {
                             logger.log(`[TEST PANE A] CLICKED: ${file}`);
+                            setLastClicked(file);
                         }}
-                        onMouseEnter={() => logger.log(`[TEST PANE A] Mouse ENTER on: ${file}`)}
-                        onMouseLeave={() => logger.log(`[TEST PANE A] Mouse LEAVE from: ${file}`)}
                     >
                         {fileExistenceMap.get(file) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
                         <span>{file}</span>
@@ -10238,9 +10240,14 @@ const TestPane2: React.FC<TestPane2Props> = ({ parsedContent, fileExistenceMap }
         return <div className="test-pane-container">Go to the "Original" tab, paste a response, and click "Parse All" to populate test data.</div>;
     }
 
-    const handleFileClick = (file: ParsedFile) => {
-        logger.log(`[TEST PANE B] CLICKED: ${file.path}. Setting local state.`);
-        setSelectedFile(file);
+    const handleFileClick = (filePath: string) => {
+        const file = parsedContent.files.find(f => f.path === filePath);
+        if (file) {
+            logger.log(`[TEST PANE B] CLICKED: ${file.path}. Setting local state.`);
+            setSelectedFile(file);
+        } else {
+            logger.error(`[TEST PANE B] Could not find file object for path: ${filePath}`);
+        }
     };
 
     return (
@@ -10252,10 +10259,10 @@ const TestPane2: React.FC<TestPane2Props> = ({ parsedContent, fileExistenceMap }
                 <div style={{ flex: 1 }}>
                     <h4>Files</h4>
                     <ul className="associated-files-list">
-                        {parsedContent.files.map(file => (
-                            <li key={file.path} onClick={() => handleFileClick(file)}>
-                                {fileExistenceMap.get(file.path) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
-                                <span>{file.path}</span>
+                        {parsedContent.filesUpdated.map(filePath => (
+                            <li key={filePath} onClick={() => handleFileClick(filePath)}>
+                                {fileExistenceMap.get(filePath) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
+                                <span>{filePath}</span>
                             </li>
                         ))}
                     </ul>
@@ -10286,12 +10293,12 @@ import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 import { logger } from '@/client/utils/logger';
 
 // Child component to test prop drilling
-const FileList = ({ files, fileExistenceMap, onFileSelect }: { files: ParsedFile[], fileExistenceMap: Map<string, boolean>, onFileSelect: (file: ParsedFile) => void }) => (
+const FileList = ({ files, fileExistenceMap, onFileSelect }: { files: string[], fileExistenceMap: Map<string, boolean>, onFileSelect: (filePath: string) => void }) => (
     <ul className="associated-files-list">
-        {files.map(file => (
-            <li key={file.path} onClick={() => onFileSelect(file)}>
-                {fileExistenceMap.get(file.path) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
-                <span>{file.path}</span>
+        {files.map(filePath => (
+            <li key={filePath} onClick={() => onFileSelect(filePath)}>
+                {fileExistenceMap.get(filePath) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
+                <span>{filePath}</span>
             </li>
         ))}
     </ul>
@@ -10309,9 +10316,14 @@ const TestPane3: React.FC<TestPane3Props> = ({ parsedContent, fileExistenceMap }
         return <div className="test-pane-container">Go to the "Original" tab, paste a response, and click "Parse All" to populate test data.</div>;
     }
 
-    const handleFileSelect = (file: ParsedFile) => {
-        logger.log(`[TEST PANE C] Child component called onFileSelect prop for: ${file.path}.`);
-        setSelectedFile(file);
+    const handleFileSelect = (filePath: string) => {
+        const file = parsedContent.files.find(f => f.path === filePath);
+        if (file) {
+            logger.log(`[TEST PANE C] Child component called onFileSelect prop for: ${file.path}.`);
+            setSelectedFile(file);
+        } else {
+             logger.error(`[TEST PANE C] Could not find file object for path: ${filePath}`);
+        }
     };
 
     return (
@@ -10322,7 +10334,7 @@ const TestPane3: React.FC<TestPane3Props> = ({ parsedContent, fileExistenceMap }
              <div style={{ display: 'flex', gap: '8px' }}>
                 <div style={{ flex: 1 }}>
                     <h4>Files (Child Component)</h4>
-                    <FileList files={parsedContent.files} fileExistenceMap={fileExistenceMap} onFileSelect={handleFileSelect} />
+                    <FileList files={parsedContent.filesUpdated} fileExistenceMap={fileExistenceMap} onFileSelect={handleFileSelect} />
                 </div>
                 <div style={{ flex: 2, borderLeft: '1px solid var(--vscode-panel-border)', paddingLeft: '8px' }}>
                     <h4>Content (Parent Component)</h4>
@@ -10343,7 +10355,7 @@ export default TestPane3;
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
-/* Updated on: C103 (Add styles for test harness tabs) */
+/* Updated on: C104 (Add styles for selected items in test panes) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -10646,6 +10658,11 @@ body {
         &:hover {
             background-color: var(--vscode-list-hoverBackground);
         }
+
+        &.selected {
+            background-color: var(--vscode-list-activeSelectionBackground) !important;
+            color: var(--vscode-list-activeSelectionForeground) !important;
+        }
     }
 
     .status-icon {
@@ -10717,7 +10734,7 @@ body {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
-// Updated on: C103 (Refactor to Original-A-B-C test harness)
+// Updated on: C104 (Fix infinite loop in test harness)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -10760,7 +10777,7 @@ const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; i
 );
 
 // Encapsulates the original, complex view logic
-const OriginalView: React.FC<{ onDataParsed: (parsed: ParsedResponse, map: Map<string, boolean>) => void }> = ({ onDataParsed }) => {
+const OriginalView: React.FC<{ onDataParsed: (parsed: ParsedResponse) => void }> = ({ onDataParsed }) => {
     const [activeTab, setActiveTab] = React.useState(1);
     const [tabCount, setTabCount] = React.useState(4);
     const [currentCycle, setCurrentCycle] = React.useState(1);
@@ -10794,17 +10811,20 @@ const OriginalView: React.FC<{ onDataParsed: (parsed: ParsedResponse, map: Map<s
 
     React.useEffect(() => { debouncedSave(); }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, debouncedSave]);
     
-    const parseAllTabs = React.useCallback((tabsToParse: { [key: string]: TabState }) => {
+    const parseAllTabs = React.useCallback(() => {
         const allFilePaths = new Set<string>();
-        const updatedTabs = { ...tabsToParse };
+        const updatedTabs = { ...tabs };
+        let firstParsed: ParsedResponse | null = null;
+
         Object.entries(updatedTabs).forEach(([tabId, tabState]) => {
             if (tabState.rawContent) {
                 const parsed = parseResponse(tabState.rawContent);
+                if (!firstParsed) firstParsed = parsed;
                 updatedTabs[Number(tabId)].parsedContent = parsed;
                 parsed.filesUpdated.forEach(file => allFilePaths.add(file));
                 parsed.files.forEach(file => {
                     const lang = file.path.split('.').pop() || 'plaintext';
-                    const id = `${file.path}::${file.content}`;
+                    const id = `${file.path}::${file.content}`; // Unique ID
                     if (!highlightedCodeBlocks.has(id)) {
                          clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
                     }
@@ -10815,7 +10835,11 @@ const OriginalView: React.FC<{ onDataParsed: (parsed: ParsedResponse, map: Map<s
         if (allFilePaths.size > 0) {
             clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) });
         }
-    }, [clientIpc, highlightedCodeBlocks]);
+        if(firstParsed) {
+            onDataParsed(firstParsed); // Lift the first parsed content up
+        }
+    }, [clientIpc, highlightedCodeBlocks, tabs, onDataParsed]);
+
 
     React.useEffect(() => {
         const loadCycleData = (cycleData: PcppCycle) => {
@@ -10830,7 +10854,10 @@ const OriginalView: React.FC<{ onDataParsed: (parsed: ParsedResponse, map: Map<s
             setTabs(newTabs);
             const loadedParseMode = cycleData.isParsedMode || false;
             setIsParsedMode(loadedParseMode);
-            if (loadedParseMode) { parseAllTabs(newTabs); }
+            if (loadedParseMode) { 
+                // We call parseAllTabs from here now, but it needs the `tabs` state
+                // This will be handled by the parse button logic instead for simplicity on load
+            }
         };
 
         clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData }) => { loadCycleData(cycleData); setMaxCycle(cycleData.cycleId); });
@@ -10839,15 +10866,10 @@ const OriginalView: React.FC<{ onDataParsed: (parsed: ParsedResponse, map: Map<s
         clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => {
             const newMap = new Map(Object.entries(existenceMap));
             setFileExistenceMap(newMap);
-            // Lift state up when file existence is confirmed
-            const activeTabData = tabs[activeTab.toString()];
-            if(activeTabData?.parsedContent) {
-                onDataParsed(activeTabData.parsedContent, newMap);
-            }
         });
         
         clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});
-    }, [clientIpc, parseAllTabs, onDataParsed, tabs, activeTab]);
+    }, [clientIpc]);
 
     const handleRawContentChange = (newContent: string, tabIndex: number) => setTabs(prev => ({ ...prev, [tabIndex.toString()]: { ...(prev[tabIndex.toString()] || { parsedContent: null }), rawContent: newContent }}));
     const handleGlobalParseToggle = () => {
@@ -10855,7 +10877,14 @@ const OriginalView: React.FC<{ onDataParsed: (parsed: ParsedResponse, map: Map<s
         setIsParsedMode(newParseMode);
         setSelectedFile(null);
         autoSelectedForCycle.current = null;
-        if (newParseMode) { parseAllTabs(tabs); }
+        if (newParseMode) { parseAllTabs(); } else {
+            // Un-parse: clear parsed content
+            const clearedTabs = {...tabs};
+            Object.keys(clearedTabs).forEach(key => {
+                clearedTabs[key].parsedContent = null;
+            });
+            setTabs(clearedTabs);
+        }
     };
     const handleCycleChange = (e: React.MouseEvent, newCycle: number) => { e.stopPropagation(); if (newCycle > 0 && newCycle <= maxCycle) { setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); } };
     const handleNewCycle = (e: React.MouseEvent) => { e.stopPropagation(); const newCycleId = maxCycle + 1; setMaxCycle(newCycleId); setCurrentCycle(newCycleId); setCycleTitle('New Cycle'); setCycleContext(''); setEphemeralContext(''); setTabs({}); setIsParsedMode(false); };
@@ -10949,10 +10978,25 @@ const App = () => {
     const [sharedParsedContent, setSharedParsedContent] = React.useState<ParsedResponse | null>(null);
     const [sharedFileExistenceMap, setSharedFileExistenceMap] = React.useState<Map<string, boolean>>(new Map());
 
-    const handleDataParsed = (parsed: ParsedResponse, map: Map<string, boolean>) => {
+    const clientIpc = ClientPostMessageManager.getInstance();
+
+    // Fix: This effect was causing the infinite loop. Now it only sets up the listener once.
+    React.useEffect(() => {
+        const handleFileExistence = ({ existenceMap }: { existenceMap: { [path: string]: boolean } }) => {
+            const newMap = new Map(Object.entries(existenceMap));
+            setSharedFileExistenceMap(newMap);
+        };
+        clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, handleFileExistence);
+    }, [clientIpc]);
+
+    const handleDataParsed = React.useCallback((parsed: ParsedResponse) => {
         setSharedParsedContent(parsed);
-        setSharedFileExistenceMap(map);
-    };
+        // Request file existence check when data is parsed
+        const allFilePaths = parsed.filesUpdated;
+        if (allFilePaths.length > 0) {
+            clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) });
+        }
+    }, [clientIpc]);
 
     const views: View[] = ['Original', 'TestA', 'TestB', 'TestC'];
 

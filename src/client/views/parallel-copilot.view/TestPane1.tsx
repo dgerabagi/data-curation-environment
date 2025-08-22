@@ -10,28 +10,26 @@ interface TestPane1Props {
 }
 
 const TestPane1: React.FC<TestPane1Props> = ({ parsedContent, fileExistenceMap }) => {
-    const [selectedFile, setSelectedFile] = React.useState<string | null>(null);
-    
-    if (!parsedContent || parsedContent.filesUpdated.length === 0) {
+    const [lastClicked, setLastClicked] = React.useState<string | null>(null);
+
+    if (!parsedContent) {
         return <div className="test-pane-container">Go to the "Original" tab, paste a response, and click "Parse All" to populate test data.</div>;
     }
 
     return (
         <div className="test-pane-container">
             <h3>Test Pane A: Barebones Click Logger</h3>
-            <p>This test uses a raw list with a simple `onClick` that only calls `logger.log()` and sets a local state for highlighting. If clicks are logged and items highlight, the fundamental event capture is working.</p>
+            <p>This test uses a raw list with a simple `onClick`. If clicks are logged and the text below updates, the fundamental event capture is working.</p>
+            <p><strong>Last Clicked:</strong> {lastClicked || 'None'}</p>
             <hr style={{ margin: '8px 0', borderColor: 'var(--vscode-panel-border)' }} />
             <ul className="associated-files-list">
                 {parsedContent.filesUpdated.map(file => (
                     <li 
-                        key={file}
-                        className={selectedFile === file ? 'selected' : ''}
+                        key={file} 
                         onClick={() => {
                             logger.log(`[TEST PANE A] CLICKED: ${file}`);
-                            setSelectedFile(file);
+                            setLastClicked(file);
                         }}
-                        onMouseEnter={() => logger.log(`[TEST PANE A] Mouse ENTER on: ${file}`)}
-                        onMouseLeave={() => logger.log(`[TEST PANE A] Mouse LEAVE from: ${file}`)}
                     >
                         {fileExistenceMap.get(file) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
                         <span>{file}</span>

@@ -12,37 +12,38 @@ interface TestPane2Props {
 const TestPane2: React.FC<TestPane2Props> = ({ parsedContent, fileExistenceMap }) => {
     const [selectedFile, setSelectedFile] = React.useState<ParsedFile | null>(null);
 
-    if (!parsedContent || parsedContent.files.length === 0) {
+    if (!parsedContent) {
         return <div className="test-pane-container">Go to the "Original" tab, paste a response, and click "Parse All" to populate test data.</div>;
     }
 
-    const handleFileClick = (file: ParsedFile) => {
-        logger.log(`[TEST PANE B] CLICKED: ${file.path}. Setting local state.`);
-        setSelectedFile(file);
+    const handleFileClick = (filePath: string) => {
+        const file = parsedContent.files.find(f => f.path === filePath);
+        if (file) {
+            logger.log(`[TEST PANE B] CLICKED: ${file.path}. Setting local state.`);
+            setSelectedFile(file);
+        } else {
+            logger.error(`[TEST PANE B] Could not find file object for path: ${filePath}`);
+        }
     };
 
     return (
         <div className="test-pane-container">
             <h3>Test Pane B: Local State Update</h3>
-            <p>This test uses local `useState` to manage the selected file. Clicking a file should highlight it and update the content displayed below.</p>
+            <p>This test uses local `useState` to manage the selected file. Clicking a file should update the content displayed below.</p>
             <hr style={{ margin: '8px 0', borderColor: 'var(--vscode-panel-border)' }} />
-            <div style={{ display: 'flex', gap: '8px', height: '100%' }}>
-                <div style={{ flex: 1, overflowY: 'auto' }}>
+            <div style={{ display: 'flex', gap: '8px' }}>
+                <div style={{ flex: 1 }}>
                     <h4>Files</h4>
                     <ul className="associated-files-list">
-                        {parsedContent.files.map(file => (
-                            <li 
-                                key={file.path} 
-                                className={selectedFile?.path === file.path ? 'selected' : ''}
-                                onClick={() => handleFileClick(file)}
-                            >
-                                {fileExistenceMap.get(file.path) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
-                                <span>{file.path}</span>
+                        {parsedContent.filesUpdated.map(filePath => (
+                            <li key={filePath} onClick={() => handleFileClick(filePath)}>
+                                {fileExistenceMap.get(filePath) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
+                                <span>{filePath}</span>
                             </li>
                         ))}
                     </ul>
                 </div>
-                <div style={{ flex: 2, borderLeft: '1px solid var(--vscode-panel-border)', paddingLeft: '8px', overflowY: 'auto' }}>
+                <div style={{ flex: 2, borderLeft: '1px solid var(--vscode-panel-border)', paddingLeft: '8px' }}>
                     <h4>Content</h4>
                     {selectedFile ? (
                         <pre style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>
