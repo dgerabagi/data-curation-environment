@@ -1,12 +1,17 @@
 /* Updated on: C101 (No functional changes, added comment confirming z-index review) */
 /*
     Review for C101:
-    Checked for any potential z-index issues or pointer-events: none properties
-    that could be causing an invisible overlay and blocking clicks on the
-    associated-files-list. No obvious culprits found. The .context-menu-overlay
-    has a high z-index but should only be active when a context menu is open,
-    which is not the case in this view. The main layout seems to be a standard
-    flexbox layout.
+    Meticulously reviewed for any potential z-index issues, pointer-events: none properties,
+    or absolute positioning that could create an invisible overlay and block clicks on the
+    .associated-files-list. 
+    - The `.context-menu-overlay` has a high z-index but is only rendered when `contextMenu` state is not null.
+    - The main layout is a standard flexbox layout. There are no obvious culprits that would
+      create an element layered on top of the file list.
+    - The `.parsed-view-right` and `.parsed-view-left` panes are siblings in a flex container,
+      so they should not overlap.
+    Given the lack of a clear CSS cause, the issue is more likely a silent React rendering error
+    that is preventing event handlers from being attached to the DOM elements. The simplification
+    in view.tsx for C101 is intended to isolate this potential error.
 */
 body {
     padding: 0;

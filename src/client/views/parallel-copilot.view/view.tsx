@@ -1,8 +1,8 @@
-// Updated on: C101 (Synthesize diagnostics: test button, hover/click logs, useCallback)
+// Updated on: C101 (Radically simplify to fix interaction bug)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscBeaker } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -10,7 +10,6 @@ import { PcppCycle, PcppResponse } from '@/backend/services/history.service';
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
 import ReactMarkdown from 'react-markdown';
-import DiffViewer from '@/client/components/DiffViewer';
 
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -47,11 +46,12 @@ const App = () => {
     const [cycleContext, setCycleContext] = React.useState('');
     const [ephemeralContext, setEphemeralContext] = React.useState('');
     const [tabs, setTabs] = React.useState<{ [key: string]: TabState }>({});
-    const [highlightedCodeBlocks, setHighlightedCodeBlocks] = React.useState<Map<string, string>>(new Map());
     const [fileExistenceMap, setFileExistenceMap] = React.useState<Map<string, boolean>>(new Map());
     const [isParsedMode, setIsParsedMode] = React.useState(false);
-    const [diffTarget, setDiffTarget] = React.useState<ParsedFile | null>(null);
-    const [originalFileContent, setOriginalFileContent] = React.useState<string | null>(null);
+    
+    // C101 Simplification: State for highlighted content, not diffing
+    const [selectedFileHtmlContent, setSelectedFileHtmlContent] = React.useState<string | null>(null);
+    const [highlightedCodeBlocks, setHighlightedCodeBlocks] = React.useState<Map<string, string>>(new Map());
 
     const [isCycleCollapsed, setIsCycleCollapsed] = React.useState(false);
     const [isSummaryCollapsed, setIsSummaryCollapsed] = React.useState(false);
@@ -92,21 +92,21 @@ const App = () => {
                 const parsed = parseResponse(tabState.rawContent);
                 updatedTabs[Number(tabId)].parsedContent = parsed;
                 parsed.filesUpdated.forEach(file => allFilePaths.add(file));
-                parsed.files.forEach(file => {
-                    const lang = file.path.split('.').pop() || 'plaintext';
-                    const id = `${file.path}::${file.content}`;
-                    if (!highlightedCodeBlocks.has(id)) {
-                         clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
-                    }
-                });
             }
         });
         setTabs(updatedTabs);
         if (allFilePaths.size > 0) {
             clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) });
         }
-    }, [clientIpc, highlightedCodeBlocks]);
+    }, [clientIpc]);
 
+    const handleSelectFile = React.useCallback((file: ParsedFile) => {
+        logger.log(`[C101] handleSelectFile called for: ${file.path}`);
+        setSelectedFileHtmlContent('<div>Loading highlighted content...</div>'); // Show loading state
+        const lang = file.path.split('.').pop() || 'plaintext';
+        const id = `${file.path}::${file.content}`; // Unique ID for this specific content
+        clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
+    }, [clientIpc]);
 
     React.useEffect(() => {
         const loadCycleData = (cycleData: PcppCycle) => {
@@ -133,23 +133,21 @@ const App = () => {
         clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData }) => {
             if (cycleData) {
                 loadCycleData(cycleData);
-                autoSelectedForCycle.current = null; // Reset auto-select on cycle change
+                autoSelectedForCycle.current = null;
+                setSelectedFileHtmlContent(null);
             }
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => {
+            // Update both the general cache and the specific selected content view
             setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml));
+            setSelectedFileHtmlContent(highlightedHtml);
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => {
             setFileExistenceMap(new Map(Object.entries(existenceMap)));
         });
-        clientIpc.onServerMessage(ServerToClientChannel.SendFileContent, ({ path, content }) => {
-            logger.log(`[C101 DEBUG] Received file content for ${path}`);
-            if (diffTarget?.path === path) {
-                setOriginalFileContent(content);
-            }
-        });
+        
         clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});
-    }, [clientIpc, diffTarget, parseAllTabs]);
+    }, [clientIpc, parseAllTabs]);
 
     const handleRawContentChange = (newContent: string, tabIndex: number) => {
         setTabs(prev => ({ ...prev, [tabIndex.toString()]: { ...(prev[tabIndex.toString()] || { parsedContent: null }), rawContent: newContent }}));
@@ -158,16 +156,15 @@ const App = () => {
     const handleGlobalParseToggle = () => {
         const newParseMode = !isParsedMode;
         setIsParsedMode(newParseMode);
-        setDiffTarget(null);
-        setOriginalFileContent(null);
-        autoSelectedForCycle.current = null; // Reset auto-select on parse toggle
+        setSelectedFileHtmlContent(null);
+        autoSelectedForCycle.current = null;
         if (newParseMode) {
             parseAllTabs(tabs);
         }
     };
 
     const handleCycleChange = (e: React.MouseEvent, newCycle: number) => {
-        e.stopPropagation(); // Prevent toggling the collapsible section
+        e.stopPropagation();
         if (newCycle > 0 && newCycle <= maxCycle) {
             setCurrentCycle(newCycle);
             clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle });
@@ -190,14 +187,6 @@ const App = () => {
         clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle });
     };
 
-    const handleSelectForDiff = React.useCallback((file: ParsedFile) => {
-        logger.log(`[C101 DIAGNOSTIC] handleSelectForDiff called for: ${file.path}`);
-        setDiffTarget(file);
-        setOriginalFileContent(null); // Reset to show loading state
-        logger.log(`[C101 DIAGNOSTIC] Sending IPC RequestFileContent for: ${file.path}`);
-        clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: file.path });
-    }, [clientIpc]);
-
     const activeTabData = tabs[activeTab.toString()];
     const isNewCycleButtonDisabled = React.useMemo(() => {
         const hasTitle = cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== '';
@@ -206,42 +195,20 @@ const App = () => {
         return !hasTitle && !hasContext && !hasResponseContent;
     }, [cycleTitle, cycleContext, ephemeralContext, tabs]);
     
-    // Auto-select first valid file for diffing
+    // Auto-select first valid file for viewing
     React.useEffect(() => {
-        logger.log(`[C101 AUTO-DIFF-EFFECT] Running effect. Parsed Mode: ${isParsedMode}, Cycle: ${currentCycle}, AutoSelectedFor: ${autoSelectedForCycle.current}`);
         if (isParsedMode && activeTabData?.parsedContent && fileExistenceMap.size > 0 && autoSelectedForCycle.current !== currentCycle) {
-            const firstExistingFile = activeTabData.parsedContent.filesUpdated.find(
-                file => fileExistenceMap.get(file) === true
+            const firstExistingFile = activeTabData.parsedContent.files.find(
+                file => fileExistenceMap.get(file.path) === true
             );
 
             if (firstExistingFile) {
-                const parsedFileObject = activeTabData.parsedContent.files.find(f => f.path === firstExistingFile);
-                if (parsedFileObject) {
-                    logger.log(`[C101 AUTO-DIFF-EFFECT] Automatically selecting first existing file for diff: ${firstExistingFile}`);
-                    handleSelectForDiff(parsedFileObject);
-                    autoSelectedForCycle.current = currentCycle;
-                } else {
-                     logger.log(`[C101 AUTO-DIFF-EFFECT] Found existing file '${firstExistingFile}' but no corresponding parsed file object.`);
-                }
-            } else {
-                logger.log(`[C101 AUTO-DIFF-EFFECT] No existing files found in the parsed response to auto-select.`);
+                logger.log(`[C101 AUTO-SELECT] Automatically selecting first existing file for view: ${firstExistingFile.path}`);
+                handleSelectFile(firstExistingFile);
+                autoSelectedForCycle.current = currentCycle;
             }
         }
-    }, [isParsedMode, activeTabData, fileExistenceMap, currentCycle, handleSelectForDiff]);
-
-    const handleTestDiff = () => {
-        if (isParsedMode && activeTabData?.parsedContent && fileExistenceMap.size > 0) {
-            const firstValidFile = activeTabData.parsedContent.files.find(f => fileExistenceMap.get(f.path));
-            if (firstValidFile) {
-                logger.log(`[C101 TEST-BUTTON] Manually triggering diff for: ${firstValidFile.path}`);
-                handleSelectForDiff(firstValidFile);
-            } else {
-                logger.log(`[C101 TEST-BUTTON] No valid file found in active tab to test.`);
-            }
-        } else {
-            logger.log(`[C101 TEST-BUTTON] Cannot test: Not in parsed mode or no data available.`);
-        }
-    };
+    }, [isParsedMode, activeTabData, fileExistenceMap, currentCycle, handleSelectFile]);
 
     const collapsedNavigator = (
         <div className="collapsed-navigator">
@@ -257,7 +224,6 @@ const App = () => {
                 <div className="pc-toolbar">
                     <button onClick={handleGeneratePrompt} title="Generate prompt.md"><VscFileCode /> Generate prompt.md</button>
                     <button onClick={handleGlobalParseToggle}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button>
-                    {isParsedMode && <button onClick={handleTestDiff} title="Test Diffing First File"><VscBeaker /> Test Diff</button>}
                 </div>
                 <div className="tab-count-input">
                     <label htmlFor="tab-count">Responses:</label>
@@ -300,33 +266,26 @@ const App = () => {
                                     </CollapsibleSection>
                                     <CollapsibleSection title="Associated Files" isCollapsed={isAssociatedFilesCollapsed} onToggle={() => setIsAssociatedFilesCollapsed(p => !p)}>
                                         <ul className="associated-files-list">
-                                            {activeTabData.parsedContent.filesUpdated.map(file => (
-                                                <li key={file} 
-                                                    onMouseEnter={() => logger.log(`[C101 HOVER-TEST] Mouse ENTER on ${file}`)}
-                                                    onMouseLeave={() => logger.log(`[C101 HOVER-TEST] Mouse LEAVE from ${file}`)}
+                                            {activeTabData.parsedContent.files.map(file => (
+                                                <li key={file.path} 
                                                     onClick={() => {
-                                                        logger.log(`[C101 CLICK-TEST] LI element clicked for: ${file}`);
-                                                        const parsedFile = activeTabData.parsedContent?.files.find(f => f.path === file);
-                                                        if (parsedFile && fileExistenceMap.get(file)) {
-                                                            handleSelectForDiff(parsedFile);
-                                                        } else {
-                                                            logger.warn(`Cannot diff: File '${file}' not found in parsed content or does not exist.`);
+                                                        logger.log(`[C101 CLICK-TEST] LI element clicked for: ${file.path}`);
+                                                        if (fileExistenceMap.get(file.path)) {
+                                                            handleSelectFile(file);
                                                         }
                                                 }}>
-                                                    {fileExistenceMap.get(file) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
-                                                    <span>{file}</span>
+                                                    {fileExistenceMap.get(file.path) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
+                                                    <span>{file.path}</span>
                                                 </li>
                                             ))}
                                         </ul>
                                     </CollapsibleSection>
                                 </div>
                                 <div className="parsed-view-right">
-                                    {diffTarget && originalFileContent !== null ? (
-                                        <DiffViewer original={originalFileContent} modified={diffTarget.content} filePath={diffTarget.path} onClose={() => setDiffTarget(null)} />
-                                    ) : diffTarget ? (
-                                        <div>Loading original file...</div>
+                                    {selectedFileHtmlContent ? (
+                                        <div dangerouslySetInnerHTML={{ __html: selectedFileHtmlContent }} />
                                     ) : (
-                                        <div>Select a file to view diff.</div>
+                                        <div>Select a file to view its content.</div>
                                     )}
                                 </div>
                             </div>

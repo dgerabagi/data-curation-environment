@@ -63,6 +63,7 @@ export class FSService {
     }
 
     public async handleSyntaxHighlightRequest(code: string, lang: string, id: string, serverIpc: ServerPostMessageManager) {
+        Services.loggerService.log(`[C101 SYNTAX-HIGHLIGHT] Received request for lang: ${lang}, id: ${id}`);
         if (!this.starryNight) {
             Services.loggerService.error('Starry Night not initialized, cannot highlight.');
             serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml: `<pre><code>${code}</code></pre>`, id });

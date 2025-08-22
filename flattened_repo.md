@@ -1,22 +1,22 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-22T11:21:45.159Z
+  Date Generated: 2025-08-22T12:12:10.480Z
   ---
   Total Files: 205
-  Total Lines: 17484
-  Total Characters: 814587
-  Approx. Tokens: 203724
+  Total Lines: 17452
+  Total Characters: 812738
+  Approx. Tokens: 203263
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
-2. src\backend\services\fs.service.ts (9656 tokens)
+2. src\backend\services\fs.service.ts (9684 tokens)
 3. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
 4. src\client\views\context-chooser.view\view.tsx (5562 tokens)
-5. src\client\views\parallel-copilot.view\view.tsx (4877 tokens)
-6. src\client\components\tree-view\TreeView.tsx (4508 tokens)
-7. src\Artifacts\A0. DCE Master Artifact List.md (4464 tokens)
+5. src\client\components\tree-view\TreeView.tsx (4508 tokens)
+6. src\Artifacts\A0. DCE Master Artifact List.md (4464 tokens)
+7. src\client\views\parallel-copilot.view\view.tsx (4119 tokens)
 8. src\backend\services\flattener.service.ts (3685 tokens)
 9. src\client\views\context-chooser.view\view.scss (3638 tokens)
 10. src\backend\services\prompt.service.ts (3481 tokens)
@@ -78,7 +78,7 @@
 54. src\Artifacts\A46. DCE - Phase 2 - Paste and Parse Response - Feature Plan.md - Lines: 38 - Chars: 3587 - Tokens: 897
 55. src\Artifacts\A47. DCE - Phase 2 - Prompt Amalgamation Feature Plan.md - Lines: 42 - Chars: 3499 - Tokens: 875
 56. src\Artifacts\A48. DCE - Phase 2 - Advanced Syntax Highlighting Plan.md - Lines: 49 - Chars: 4044 - Tokens: 1011
-57. src\Artifacts\A49. DCE - Phase 2 - File Association & Diffing Plan.md - Lines: 41 - Chars: 4202 - Tokens: 1051
+57. src\Artifacts\A49. DCE - Phase 2 - File Association & Diffing Plan.md - Lines: 44 - Chars: 4818 - Tokens: 1205
 58. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
 59. src\Artifacts\A50. DCE - Phase 2 - UI Component Plan (Resizable Panes & Inner Editors).md - Lines: 48 - Chars: 4790 - Tokens: 1198
 60. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
@@ -89,7 +89,7 @@
 65. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
 66. src\backend\services\action.service.ts - Lines: 73 - Chars: 2471 - Tokens: 618
 67. src\backend\services\flattener.service.ts - Lines: 327 - Chars: 14740 - Tokens: 3685
-68. src\backend\services\fs.service.ts - Lines: 799 - Chars: 38623 - Tokens: 9656
+68. src\backend\services\fs.service.ts - Lines: 800 - Chars: 38733 - Tokens: 9684
 69. src\backend\services\history.service.ts - Lines: 103 - Chars: 3981 - Tokens: 996
 70. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
 71. src\backend\services\prompt.service.ts - Lines: 113 - Chars: 13923 - Tokens: 3481
@@ -113,8 +113,8 @@
 89. src\client\views\index.ts - Lines: 35 - Chars: 1714 - Tokens: 429
 90. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 91. src\client\views\parallel-copilot.view\on-message.ts - Lines: 41 - Chars: 2019 - Tokens: 505
-92. src\client\views\parallel-copilot.view\view.scss - Lines: 346 - Chars: 7735 - Tokens: 1934
-93. src\client\views\parallel-copilot.view\view.tsx - Lines: 342 - Chars: 19507 - Tokens: 4877
+92. src\client\views\parallel-copilot.view\view.scss - Lines: 351 - Chars: 8193 - Tokens: 2049
+93. src\client\views\parallel-copilot.view\view.tsx - Lines: 301 - Chars: 16474 - Tokens: 4119
 94. src\common\ipc\channels.enum.ts - Lines: 64 - Chars: 3422 - Tokens: 856
 95. src\common\ipc\channels.type.ts - Lines: 57 - Chars: 4453 - Tokens: 1114
 96. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
@@ -3932,7 +3932,7 @@ After research and consideration of alternatives like `refractor`, **`@wooorm/st
 # Artifact A49: DCE - Phase 2 - File Association & Diffing Plan
 # Date Created: C82
 # Author: AI Model
-# Updated on: C99 (Add auto-diff and hover logging to debug plan)
+# Updated on: C101 (Simplify to staged approach: single view first, then diff)
 
 - **Key/Value for A0:**
 - **Description:** Plans the UI and backend logic to visually link file blocks in an AI response to workspace files and sets the stage for an integrated diff tool.
@@ -3942,34 +3942,37 @@ After research and consideration of alternatives like `refractor`, **`@wooorm/st
 
 To make the "Swap with Source" feature trustworthy and intuitive, users need a clear visual confirmation of which local file an AI-generated code block is intended to replace. This feature introduces a "file association" mechanism that parses AI responses, verifies the existence of the mentioned files, and displays this status to the user.
 
-**Update (C95):** This plan is now evolved. The "Associated Files" list is not just for verification but is the primary interaction point for viewing changes. Clicking a file in this list now drives the UI, displaying a diff view in an adjacent panel.
+**Update (C101):** This plan is now a two-stage implementation to address a persistent bug. The immediate goal is simplified to rendering a single, syntax-highlighted view of the AI-generated code. The more complex diff view will be re-introduced only after the single-view functionality is stable and confirmed to be working.
 
 ## 2. User Stories
 
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
 | P2-ASSOC-01 | **See Affected Files** | As a developer, when I parse an AI response, I want the extension to automatically show me a list of all the file paths it intends to modify, so I can understand the scope of the proposed changes. | - After parsing, a collapsible "Associated Files" section appears in the tab's UI. <br> - This section displays a list of all file paths found in the response. |
-| P2-ASSOC-02 | **Verify File Existence** | As a developer, for each file listed, I want to see a visual indicator of whether that file already exists in my workspace, so I can spot potential errors or new files proposed by the AI. | - Next to each listed file path, an icon is displayed. <br> - A green checkmark (`✓`) indicates the file exists at that path. <br> - A red cross (`✗`) indicates the file does not exist, alerting me to a potential hallucination or a new file creation. |
-| P2-ASSOC-03 | **Preview Changes with Diff** | As a developer, I want to click on an existing file in the "Associated Files" list to immediately see a side-by-side comparison of the original file and the AI's proposed changes, so I can review the changes before swapping. | - Clicking a file with a `✓` in the list opens a diff view in a new panel to the right. <br> - The diff view clearly shows added, removed, and common lines. <br> - **(C99 Update)** The diff view automatically loads with the *first valid file* upon parsing. |
+| P2-ASSOC-02 | **Verify File Existence** | As a developer, for each file listed, I want to see a visual indicator of whether that file already exists in my workspace, so I can spot potential errors or new files proposed by the AI. | - Next to each listed file path, an icon is displayed. <br> - A green checkmark (`✓`) indicates the file exists at that path. <br> - A red cross (`✗`) indicates the file does not exist. |
+| P2-ASSOC-03 | **Preview AI Code (Stage 1)** | As a developer, I want to click on an existing file in the "Associated Files" list to immediately see a syntax-highlighted view of the AI's proposed code, so I can review the changes. | - Clicking a file with a `✓` in the list opens a single-pane view in the right-hand panel. <br> - This view displays only the AI's proposed code, with full syntax highlighting. <br> - The view automatically loads with the *first valid file* upon parsing. |
+| P2-ASSOC-04 | **Preview Changes with Diff (Stage 2)** | As a developer, after Stage 1 is complete, I want the view to be enhanced to show a side-by-side comparison of the original file and the AI's proposed changes, so I can review the exact changes before swapping. | - The single-pane view is replaced with a two-pane diff component. <br> - The diff view clearly shows added, removed, and common lines. |
 
-## 3. Technical Implementation Plan (C99)
+## 3. Technical Implementation Plan (C101)
 
 1.  **Frontend - Parsing (`response-parser.ts`):**
     *   **Status:** **Complete.**
 
-2.  **Backend - Verification & Content Fetching (`fs.service.ts`):**
-    *   **Status:** **Complete.**
+2.  **Backend - Verification & Highlighting (`fs.service.ts`):**
+    *   **Status:** **Complete.** The `handleFileExistenceRequest` and `handleSyntaxHighlightRequest` handlers are working.
 
 3.  **Frontend - UI & State (`view.tsx`):**
-    *   **Status:** **Debugging.** The diff view is not appearing on manual click.
-    *   **Auto-Diff Logic (New in C99):**
-        *   A new `useEffect` hook will be added. It will trigger when `isParsedMode`, `activeTabData`, and `fileExistenceMap` are all populated.
-        *   It will find the first file path in `activeTabData.parsedContent.filesUpdated` that is `true` in the `fileExistenceMap`.
-        *   If found, it will call the existing `handleSelectForDiff` function to automatically load the diff for that file.
-    *   **Debugging Plan (C99 - Escalated):**
-        *   **Step 1 (Hover Logging):** Add `onMouseEnter` and `onMouseLeave` handlers to the `<li>` element for each associated file. These handlers will only call `logger.log()`. This will prove whether basic mouse events are being registered by the component.
-        *   **Step 2 (Click Logging):** Ensure a `logger.log()` statement is the *very first line* inside the `onClick` handler for the `<li>` element. If the hover logs from Step 1 appear but this click log does not, the click event is being blocked by a CSS overlay or another component.
-        *   **Step 3 (Trace Data Flow):** Add logs at every subsequent step of the data flow (IPC send, backend receive, file read, IPC response, frontend receive) to trace the entire process from click to render.
+    *   **Status:** **Refactoring in Progress.**
+    *   **State Simplification:** The `diffTarget` and `originalFileContent` state will be replaced with `selectedFileForViewing: ParsedFile | null` and `highlightedContent: string | null`.
+    *   **Data Flow:**
+        *   When a file is selected (manually or automatically), a `RequestSyntaxHighlight` message will be sent to the backend with the AI's proposed code.
+        *   The handler for `SendSyntaxHighlight` will update the `highlightedContent` state.
+        *   The `RequestFileContent` message will **not** be used in this stage.
+    *   **Rendering:** The right pane will render a `div` using `dangerouslySetInnerHTML={{ __html: highlightedContent }}`. The `DiffViewer` component will be temporarily removed from the render path.
+    *   **Debugging Plan (Ongoing):**
+        *   **Step 1 (Hover Logging):** Add `onMouseEnter` and `onMouseLeave` handlers to the `<li>` element for each associated file to confirm basic mouse event registration.
+        *   **Step 2 (Click Logging):** Ensure a `logger.log()` statement is the *very first line* inside the `onClick` handler for the `<li>` element. If hover logs appear but click logs do not, the event is being blocked.
+        *   **Step 3 (Test Button):** A "Test View" button will bypass the list's `onClick` and directly trigger the `handleSelectForViewing` function for the first valid file, allowing for isolated testing of the backend highlighting pipeline.
 </file>
 
 <file path="src/Artifacts/A5. DCE - Target File Structure.md">
@@ -6157,6 +6160,7 @@ export class FSService {
     }
 
     public async handleSyntaxHighlightRequest(code: string, lang: string, id: string, serverIpc: ServerPostMessageManager) {
+        Services.loggerService.log(`[C101 SYNTAX-HIGHLIGHT] Received request for lang: ${lang}, id: ${id}`);
         if (!this.starryNight) {
             Services.loggerService.error('Starry Night not initialized, cannot highlight.');
             serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml: `<pre><code>${code}</code></pre>`, id });
@@ -10080,23 +10084,28 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     });
     
     serverIpc.onClientMessage(ClientToServerChannel.RequestFileContent, (data) => {
-        // C100: Add high-visibility log to confirm message receipt on backend
-        loggerService.log(`[C100 IPC-TEST] Backend received RequestFileContent for: ${data.path}`);
+        // C101: Add high-visibility log to confirm message receipt on backend
+        loggerService.log(`[C101 IPC-TEST] Backend received RequestFileContent for: ${data.path}`);
         fsService.handleFileContentRequest(data.path, serverIpc);
     });
 }
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
-/* Updated on: C100 (No functional changes, added comment confirming z-index review) */
+/* Updated on: C101 (No functional changes, added comment confirming z-index review) */
 /*
-    Review for C100:
-    Checked for any potential z-index issues or pointer-events: none properties
-    that could be causing an invisible overlay and blocking clicks on the
-    associated-files-list. No obvious culprits found. The .context-menu-overlay
-    has a high z-index but should only be active when a context menu is open,
-    which is not the case in this view. The main layout seems to be a standard
-    flexbox layout.
+    Review for C101:
+    Meticulously reviewed for any potential z-index issues, pointer-events: none properties,
+    or absolute positioning that could create an invisible overlay and block clicks on the
+    .associated-files-list. 
+    - The `.context-menu-overlay` has a high z-index but is only rendered when `contextMenu` state is not null.
+    - The main layout is a standard flexbox layout. There are no obvious culprits that would
+      create an element layered on top of the file list.
+    - The `.parsed-view-right` and `.parsed-view-left` panes are siblings in a flex container,
+      so they should not overlap.
+    Given the lack of a clear CSS cause, the issue is more likely a silent React rendering error
+    that is preventing event handlers from being attached to the DOM elements. The simplification
+    in view.tsx for C101 is intended to isolate this potential error.
 */
 body {
     padding: 0;
@@ -10437,11 +10446,11 @@ body {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
-// Updated on: C100 (Add aggressive diagnostics: test button, hover logs, auto-diff logs)
+// Updated on: C101 (Radically simplify to fix interaction bug)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscBeaker } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -10449,7 +10458,6 @@ import { PcppCycle, PcppResponse } from '@/backend/services/history.service';
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
 import ReactMarkdown from 'react-markdown';
-import DiffViewer from '@/client/components/DiffViewer';
 
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -10486,11 +10494,12 @@ const App = () => {
     const [cycleContext, setCycleContext] = React.useState('');
     const [ephemeralContext, setEphemeralContext] = React.useState('');
     const [tabs, setTabs] = React.useState<{ [key: string]: TabState }>({});
-    const [highlightedCodeBlocks, setHighlightedCodeBlocks] = React.useState<Map<string, string>>(new Map());
     const [fileExistenceMap, setFileExistenceMap] = React.useState<Map<string, boolean>>(new Map());
     const [isParsedMode, setIsParsedMode] = React.useState(false);
-    const [diffTarget, setDiffTarget] = React.useState<ParsedFile | null>(null);
-    const [originalFileContent, setOriginalFileContent] = React.useState<string | null>(null);
+    
+    // C101 Simplification: State for highlighted content, not diffing
+    const [selectedFileHtmlContent, setSelectedFileHtmlContent] = React.useState<string | null>(null);
+    const [highlightedCodeBlocks, setHighlightedCodeBlocks] = React.useState<Map<string, string>>(new Map());
 
     const [isCycleCollapsed, setIsCycleCollapsed] = React.useState(false);
     const [isSummaryCollapsed, setIsSummaryCollapsed] = React.useState(false);
@@ -10531,21 +10540,21 @@ const App = () => {
                 const parsed = parseResponse(tabState.rawContent);
                 updatedTabs[Number(tabId)].parsedContent = parsed;
                 parsed.filesUpdated.forEach(file => allFilePaths.add(file));
-                parsed.files.forEach(file => {
-                    const lang = file.path.split('.').pop() || 'plaintext';
-                    const id = `${file.path}::${file.content}`;
-                    if (!highlightedCodeBlocks.has(id)) {
-                         clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
-                    }
-                });
             }
         });
         setTabs(updatedTabs);
         if (allFilePaths.size > 0) {
             clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) });
         }
-    }, [clientIpc, highlightedCodeBlocks]);
+    }, [clientIpc]);
 
+    const handleSelectFile = React.useCallback((file: ParsedFile) => {
+        logger.log(`[C101] handleSelectFile called for: ${file.path}`);
+        setSelectedFileHtmlContent('<div>Loading highlighted content...</div>'); // Show loading state
+        const lang = file.path.split('.').pop() || 'plaintext';
+        const id = `${file.path}::${file.content}`; // Unique ID for this specific content
+        clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
+    }, [clientIpc]);
 
     React.useEffect(() => {
         const loadCycleData = (cycleData: PcppCycle) => {
@@ -10572,23 +10581,21 @@ const App = () => {
         clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData }) => {
             if (cycleData) {
                 loadCycleData(cycleData);
-                autoSelectedForCycle.current = null; // Reset auto-select on cycle change
+                autoSelectedForCycle.current = null;
+                setSelectedFileHtmlContent(null);
             }
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => {
+            // Update both the general cache and the specific selected content view
             setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml));
+            setSelectedFileHtmlContent(highlightedHtml);
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => {
             setFileExistenceMap(new Map(Object.entries(existenceMap)));
         });
-        clientIpc.onServerMessage(ServerToClientChannel.SendFileContent, ({ path, content }) => {
-            logger.log(`[C100 DEBUG] Received file content for ${path}`);
-            if (diffTarget?.path === path) {
-                setOriginalFileContent(content);
-            }
-        });
+        
         clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});
-    }, [clientIpc, diffTarget, parseAllTabs]);
+    }, [clientIpc, parseAllTabs]);
 
     const handleRawContentChange = (newContent: string, tabIndex: number) => {
         setTabs(prev => ({ ...prev, [tabIndex.toString()]: { ...(prev[tabIndex.toString()] || { parsedContent: null }), rawContent: newContent }}));
@@ -10597,16 +10604,15 @@ const App = () => {
     const handleGlobalParseToggle = () => {
         const newParseMode = !isParsedMode;
         setIsParsedMode(newParseMode);
-        setDiffTarget(null);
-        setOriginalFileContent(null);
-        autoSelectedForCycle.current = null; // Reset auto-select on parse toggle
+        setSelectedFileHtmlContent(null);
+        autoSelectedForCycle.current = null;
         if (newParseMode) {
             parseAllTabs(tabs);
         }
     };
 
     const handleCycleChange = (e: React.MouseEvent, newCycle: number) => {
-        e.stopPropagation(); // Prevent toggling the collapsible section
+        e.stopPropagation();
         if (newCycle > 0 && newCycle <= maxCycle) {
             setCurrentCycle(newCycle);
             clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle });
@@ -10629,14 +10635,6 @@ const App = () => {
         clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle });
     };
 
-    const handleSelectForDiff = React.useCallback((file: ParsedFile) => {
-        logger.log(`[C100 DIAGNOSTIC] handleSelectForDiff called for: ${file.path}`);
-        setDiffTarget(file);
-        setOriginalFileContent(null); // Reset to show loading state
-        logger.log(`[C100 DIAGNOSTIC] Sending IPC RequestFileContent for: ${file.path}`);
-        clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: file.path });
-    }, [clientIpc]);
-
     const activeTabData = tabs[activeTab.toString()];
     const isNewCycleButtonDisabled = React.useMemo(() => {
         const hasTitle = cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== '';
@@ -10645,42 +10643,20 @@ const App = () => {
         return !hasTitle && !hasContext && !hasResponseContent;
     }, [cycleTitle, cycleContext, ephemeralContext, tabs]);
     
-    // C100: Auto-select first valid file for diffing
+    // Auto-select first valid file for viewing
     React.useEffect(() => {
-        logger.log(`[C100 AUTO-DIFF-EFFECT] Running effect. Parsed Mode: ${isParsedMode}, Cycle: ${currentCycle}, AutoSelectedFor: ${autoSelectedForCycle.current}`);
         if (isParsedMode && activeTabData?.parsedContent && fileExistenceMap.size > 0 && autoSelectedForCycle.current !== currentCycle) {
-            const firstExistingFile = activeTabData.parsedContent.filesUpdated.find(
-                file => fileExistenceMap.get(file) === true
+            const firstExistingFile = activeTabData.parsedContent.files.find(
+                file => fileExistenceMap.get(file.path) === true
             );
 
             if (firstExistingFile) {
-                const parsedFileObject = activeTabData.parsedContent.files.find(f => f.path === firstExistingFile);
-                if (parsedFileObject) {
-                    logger.log(`[C100 AUTO-DIFF-EFFECT] Automatically selecting first existing file for diff: ${firstExistingFile}`);
-                    handleSelectForDiff(parsedFileObject);
-                    autoSelectedForCycle.current = currentCycle;
-                } else {
-                     logger.log(`[C100 AUTO-DIFF-EFFECT] Found existing file '${firstExistingFile}' but no corresponding parsed file object.`);
-                }
-            } else {
-                logger.log(`[C100 AUTO-DIFF-EFFECT] No existing files found in the parsed response to auto-select.`);
+                logger.log(`[C101 AUTO-SELECT] Automatically selecting first existing file for view: ${firstExistingFile.path}`);
+                handleSelectFile(firstExistingFile);
+                autoSelectedForCycle.current = currentCycle;
             }
         }
-    }, [isParsedMode, activeTabData, fileExistenceMap, currentCycle, handleSelectForDiff]);
-
-    const handleTestDiff = () => {
-        if (isParsedMode && activeTabData?.parsedContent && fileExistenceMap.size > 0) {
-            const firstValidFile = activeTabData.parsedContent.files.find(f => fileExistenceMap.get(f.path));
-            if (firstValidFile) {
-                logger.log(`[C100 TEST-BUTTON] Manually triggering diff for: ${firstValidFile.path}`);
-                handleSelectForDiff(firstValidFile);
-            } else {
-                logger.log(`[C100 TEST-BUTTON] No valid file found in active tab to test.`);
-            }
-        } else {
-            logger.log(`[C100 TEST-BUTTON] Cannot test: Not in parsed mode or no data available.`);
-        }
-    };
+    }, [isParsedMode, activeTabData, fileExistenceMap, currentCycle, handleSelectFile]);
 
     const collapsedNavigator = (
         <div className="collapsed-navigator">
@@ -10696,7 +10672,6 @@ const App = () => {
                 <div className="pc-toolbar">
                     <button onClick={handleGeneratePrompt} title="Generate prompt.md"><VscFileCode /> Generate prompt.md</button>
                     <button onClick={handleGlobalParseToggle}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button>
-                    {isParsedMode && <button onClick={handleTestDiff} title="Test Diffing First File"><VscBeaker /> Test Diff</button>}
                 </div>
                 <div className="tab-count-input">
                     <label htmlFor="tab-count">Responses:</label>
@@ -10739,33 +10714,26 @@ const App = () => {
                                     </CollapsibleSection>
                                     <CollapsibleSection title="Associated Files" isCollapsed={isAssociatedFilesCollapsed} onToggle={() => setIsAssociatedFilesCollapsed(p => !p)}>
                                         <ul className="associated-files-list">
-                                            {activeTabData.parsedContent.filesUpdated.map(file => (
-                                                <li key={file} 
-                                                    onMouseEnter={() => logger.log(`[C100 HOVER-TEST] Mouse ENTER on ${file}`)}
-                                                    onMouseLeave={() => logger.log(`[C100 HOVER-TEST] Mouse LEAVE from ${file}`)}
+                                            {activeTabData.parsedContent.files.map(file => (
+                                                <li key={file.path} 
                                                     onClick={() => {
-                                                        logger.log(`[C100 CLICK-TEST] LI element clicked for: ${file}`);
-                                                        const parsedFile = activeTabData.parsedContent?.files.find(f => f.path === file);
-                                                        if (parsedFile && fileExistenceMap.get(file)) {
-                                                            handleSelectForDiff(parsedFile);
-                                                        } else {
-                                                            logger.warn(`Cannot diff: File '${file}' not found in parsed content or does not exist.`);
+                                                        logger.log(`[C101 CLICK-TEST] LI element clicked for: ${file.path}`);
+                                                        if (fileExistenceMap.get(file.path)) {
+                                                            handleSelectFile(file);
                                                         }
                                                 }}>
-                                                    {fileExistenceMap.get(file) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
-                                                    <span>{file}</span>
+                                                    {fileExistenceMap.get(file.path) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
+                                                    <span>{file.path}</span>
                                                 </li>
                                             ))}
                                         </ul>
                                     </CollapsibleSection>
                                 </div>
                                 <div className="parsed-view-right">
-                                    {diffTarget && originalFileContent !== null ? (
-                                        <DiffViewer original={originalFileContent} modified={diffTarget.content} filePath={diffTarget.path} onClose={() => setDiffTarget(null)} />
-                                    ) : diffTarget ? (
-                                        <div>Loading original file...</div>
+                                    {selectedFileHtmlContent ? (
+                                        <div dangerouslySetInnerHTML={{ __html: selectedFileHtmlContent }} />
                                     ) : (
-                                        <div>Select a file to view diff.</div>
+                                        <div>Select a file to view its content.</div>
                                     )}
                                 </div>
                             </div>
