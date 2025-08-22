@@ -1,4 +1,4 @@
-// Updated on: C106 (Integrated successful click-handling pattern and removed test harness)
+// Updated on: C108 (No functional changes from C107, re-supplying for completeness with new parser)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -50,9 +50,7 @@ const App = () => {
     const [fileExistenceMap, setFileExistenceMap] = React.useState<Map<string, boolean>>(new Map());
     const [isParsedMode, setIsParsedMode] = React.useState(false);
     
-    // C106 FIX: State management refactor based on successful test pattern
     const [selectedFilePath, setSelectedFilePath] = React.useState<string | null>(null);
-    const [selectedFileForViewing, setSelectedFileForViewing] = React.useState<ParsedFile | null>(null);
 
     const [isCycleCollapsed, setIsCycleCollapsed] = React.useState(false);
     const [isSummaryCollapsed, setIsSummaryCollapsed] = React.useState(false);
@@ -147,21 +145,28 @@ const App = () => {
     
     const activeTabData = tabs[activeTab.toString()];
 
-    // C106 FIX: useEffect hook to handle complex state updates after a simple click
-    React.useEffect(() => {
-        if (selectedFilePath && activeTabData?.parsedContent) {
-            const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath);
-            if (file) {
-                logger.log(`[C106 EFFECT] Found file object for path ${selectedFilePath}. Setting state.`);
-                setSelectedFileForViewing(file);
-            } else {
-                logger.warn(`[C106 EFFECT] Could not find file object for path: ${selectedFilePath}`);
-                setSelectedFileForViewing(null);
-            }
-        } else {
-            setSelectedFileForViewing(null);
+    const viewableContent = React.useMemo(() => {
+        if (!selectedFilePath || !activeTabData?.parsedContent) {
+            return null;
         }
-    }, [selectedFilePath, activeTabData?.parsedContent]);
+        const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath);
+        if (!file) {
+            logger.error(`[Content Display] Could not find file object for path: ${selectedFilePath}`);
+            return '<div>Error: File data not found in parsed response.</div>';
+        }
+        
+        const id = `${file.path}::${file.content}`;
+        const highlightedHtml = highlightedCodeBlocks.get(id);
+
+        if (highlightedHtml) {
+            logger.log(`[Content Display] Found highlighted content for ${selectedFilePath}`);
+            return highlightedHtml;
+        } else {
+            logger.warn(`[Content Display] Highlighted content not found for ${selectedFilePath}. Falling back to plain text.`);
+            return `<pre><code>${file.content.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code></pre>`;
+        }
+    }, [selectedFilePath, activeTabData?.parsedContent, highlightedCodeBlocks]);
+
 
     const handleRawContentChange = (newContent: string, tabIndex: number) => {
         setTabs(prev => ({ ...prev, [tabIndex.toString()]: { ...(prev[tabIndex.toString()] || { parsedContent: null }), rawContent: newContent }}));
@@ -171,7 +176,6 @@ const App = () => {
         const newParseMode = !isParsedMode;
         setIsParsedMode(newParseMode);
         setSelectedFilePath(null);
-        setSelectedFileForViewing(null);
         if (newParseMode) {
             parseAllTabs(tabs);
         }
@@ -215,12 +219,6 @@ const App = () => {
             <button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button>
         </div>
     );
-
-    const getHighlightedHtml = (file: ParsedFile | null) => {
-        if (!file) return '';
-        const id = `${file.path}::${file.content}`;
-        return highlightedCodeBlocks.get(id) || `<pre><code>${file.content}</code></pre>`;
-    };
 
     return (
         <div className="pc-view-container">
@@ -275,7 +273,7 @@ const App = () => {
                                                     key={file} 
                                                     className={selectedFilePath === file ? 'selected' : ''}
                                                     onClick={() => {
-                                                        logger.log(`[C106 CLICK] Click registered on file: ${file}`);
+                                                        logger.log(`[File Click] Click registered on file: ${file}`);
                                                         setSelectedFilePath(file);
                                                     }}
                                                 >
@@ -287,13 +285,8 @@ const App = () => {
                                     </CollapsibleSection>
                                 </div>
                                 <div className="parsed-view-right">
-                                    {selectedFileForViewing ? (
-                                        <div className="file-block">
-                                            <div className="file-header">
-                                                <span className="file-path">{selectedFileForViewing.path}</span>
-                                            </div>
-                                            <div className="file-content-viewer" dangerouslySetInnerHTML={{ __html: getHighlightedHtml(selectedFileForViewing) }} />
-                                        </div>
+                                    {viewableContent ? (
+                                        <div className="file-content-viewer" dangerouslySetInnerHTML={{ __html: viewableContent }} />
                                     ) : (
                                         <div>Select a file to view its content.</div>
                                     )}
