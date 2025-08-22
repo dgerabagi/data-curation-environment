@@ -16,43 +16,42 @@ const DiffViewer: React.FC<DiffViewerProps> = ({ original, modified, filePath, o
     let modifiedLineNum = 1;
 
     return (
-        <div className="diff-modal-overlay" onClick={onClose}>
-            <div className="diff-modal-content" onClick={e => e.stopPropagation()}>
+        <div className="diff-viewer-container">
+            <div className="diff-header">
                 <h3>Diff for {filePath}</h3>
-                <button onClick={onClose} style={{ alignSelf: 'flex-end' }}>Close</button>
-                <div className="diff-viewer">
-                    {changes.map((part, index) => {
-                        const lines = part.value.split('\n').filter((line, i, arr) => i < arr.length - 1 || line !== '');
-                        const partClassName = part.added ? 'added' : part.removed ? 'removed' : 'common';
-                        
-                        return (
-                            <div key={index} className={partClassName}>
-                                {lines.map((line, lineIndex) => {
-                                    let displayOriginalLineNum = '';
-                                    let displayModifiedLineNum = '';
+            </div>
+            <div className="diff-content">
+                {changes.map((part, index) => {
+                    const lines = part.value.split('\n').filter((line, i, arr) => i < arr.length - 1 || line !== '');
+                    const partClassName = part.added ? 'added' : part.removed ? 'removed' : 'common';
+                    
+                    return (
+                        <div key={index} className={`diff-part ${partClassName}`}>
+                            {lines.map((line, lineIndex) => {
+                                let displayOriginalLineNum = '';
+                                let displayModifiedLineNum = '';
 
-                                    if (!part.added) {
-                                        displayOriginalLineNum = (originalLineNum++).toString();
-                                    }
-                                    if (!part.removed) {
-                                        displayModifiedLineNum = (modifiedLineNum++).toString();
-                                    }
+                                if (!part.added) {
+                                    displayOriginalLineNum = (originalLineNum++).toString();
+                                }
+                                if (!part.removed) {
+                                    displayModifiedLineNum = (modifiedLineNum++).toString();
+                                }
 
-                                    return (
-                                        <div key={lineIndex} className="line">
-                                            <span className="line-num">{displayOriginalLineNum}</span>
-                                            <span className="line-num">{displayModifiedLineNum}</span>
-                                            <span className="line-content">
-                                                {part.added ? '+ ' : part.removed ? '- ' : '  '}
-                                                {line}
-                                            </span>
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        );
-                    })}
-                </div>
+                                return (
+                                    <div key={lineIndex} className="line">
+                                        <span className="line-num orig-num">{displayOriginalLineNum}</span>
+                                        <span className="line-num mod-num">{displayModifiedLineNum}</span>
+                                        <span className="line-content">
+                                            <span className="line-prefix">{part.added ? '+' : part.removed ? '-' : ' '}</span>
+                                            {line}
+                                        </span>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    );
+                })}
             </div>
         </div>
     );

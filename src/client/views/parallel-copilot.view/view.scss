@@ -1,4 +1,4 @@
-/* Updated on: C91 (Add styles for Associated Files list) */
+/* Updated on: C95 (Add styles for two-pane diff view) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -179,10 +179,27 @@ body {
 }
 
 /* Styles for Parsed View */
-.parsed-view {
-    overflow-y: auto;
-    padding-right: 8px; /* For scrollbar */
+.parsed-view-grid {
+    display: flex;
+    gap: 8px;
     flex-grow: 1;
+    min-height: 0;
+}
+
+.parsed-view-left {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.parsed-view-right {
+    flex: 2;
+    overflow-y: auto;
+    border: 1px solid var(--vscode-panel-border);
+    border-radius: 4px;
+    padding: 8px;
 }
 
 .parsed-section {
@@ -226,6 +243,11 @@ body {
         padding: 2px 4px;
         font-size: 12px;
         border-radius: 3px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: var(--vscode-list-hoverBackground);
+        }
     }
 
     .status-icon {

@@ -408,26 +408,55 @@ export class FSService {
     // --- File Operations ---
 
     public async handleFileContentRequest(filePath: string, serverIpc: ServerPostMessageManager) {
-        Services.loggerService.log(`[C88 Fix] Received request for content of: ${filePath}`);
+        Services.loggerService.log(`Received request for content of: ${filePath}`);
         try {
             const uri = vscode.Uri.file(filePath);
             const contentBuffer = await vscode.workspace.fs.readFile(uri);
             const content = Buffer.from(contentBuffer).toString('utf-8');
             serverIpc.sendToClient(ServerToClientChannel.SendFileContent, { path: filePath, content });
         } catch (error) {
-            Services.loggerService.error(`[C88 Fix] Failed to read file content for ${filePath}: ${error}`);
+            Services.loggerService.error(`Failed to read file content for ${filePath}: ${error}`);
             serverIpc.sendToClient(ServerToClientChannel.SendFileContent, { path: filePath, content: null });
         }
     }
 
     public async handleFileExistenceRequest(paths: string[], serverIpc: ServerPostMessageManager) {
+        Services.loggerService.log(`[File Existence] Received request to check paths: ${JSON.stringify(paths)}`);
+        const workspaceFolders = vscode.workspace.workspaceFolders;
+        if (!workspaceFolders || workspaceFolders.length === 0) {
+            Services.loggerService.error("[File Existence] Cannot check for files, no workspace folder is open.");
+            serverIpc.sendToClient(ServerToClientChannel.SendFileExistence, { existenceMap: {} });
+            return;
+        }
+        const rootPath = workspaceFolders[0].uri.fsPath;
+        Services.loggerService.log(`[File Existence] Using workspace root: ${rootPath}`);
+    
         const existenceMap: { [path: string]: boolean } = {};
-        const checks = paths.map(async (p) => {
+        const checks = paths.map(async (p_raw) => {
+            const p = p_raw.trim().replace(/^[`"']|[`"']$/g, '');
+            if (!p) return;
+    
+            let absolutePath = path.resolve(rootPath, p);
+            let normalizedPath = normalizePath(absolutePath);
+    
             try {
-                await vscode.workspace.fs.stat(vscode.Uri.file(p));
-                existenceMap[p] = true;
+                await vscode.workspace.fs.stat(vscode.Uri.file(normalizedPath));
+                existenceMap[p_raw] = true;
+                Services.loggerService.log(`[File Existence] SUCCESS: Found file at '${normalizedPath}'`);
             } catch {
-                existenceMap[p] = false;
+                // Fallback for documentation artifacts
+                if (/^A\d+/.test(p)) {
+                    const artifactPath = path.resolve(rootPath, 'src/Artifacts', p);
+                    const normalizedArtifactPath = normalizePath(artifactPath);
+                    try {
+                        await vscode.workspace.fs.stat(vscode.Uri.file(normalizedArtifactPath));
+                        existenceMap[p_raw] = true;
+                        Services.loggerService.log(`[File Existence] SUCCESS (Fallback): Found doc artifact at '${normalizedArtifactPath}'`);
+                        return;
+                    } catch {}
+                }
+                existenceMap[p_raw] = false;
+                Services.loggerService.warn(`[File Existence] FAILED: Could not find file at '${normalizedPath}'`);
             }
         });
         await Promise.all(checks);

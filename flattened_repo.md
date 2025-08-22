@@ -1,17 +1,17 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-21T21:22:05.224Z
+  Date Generated: 2025-08-22T00:04:42.537Z
   ---
   Total Files: 205
-  Total Lines: 17312
-  Total Characters: 805129
-  Approx. Tokens: 201359
+  Total Lines: 17369
+  Total Characters: 808918
+  Approx. Tokens: 202305
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
-2. src\backend\services\fs.service.ts (9179 tokens)
+2. src\backend\services\fs.service.ts (9625 tokens)
 3. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
 4. src\client\views\context-chooser.view\view.tsx (5562 tokens)
 5. src\client\components\tree-view\TreeView.tsx (4508 tokens)
@@ -19,7 +19,7 @@
 7. src\backend\services\flattener.service.ts (3685 tokens)
 8. src\client\views\context-chooser.view\view.scss (3638 tokens)
 9. src\backend\services\prompt.service.ts (3481 tokens)
-10. src\client\views\parallel-copilot.view\view.tsx (3399 tokens)
+10. src\client\views\parallel-copilot.view\view.tsx (3445 tokens)
 
 <!-- Full File List -->
 1. .gitignore - Lines: 10 - Chars: 128 - Tokens: 32
@@ -33,7 +33,7 @@
 9. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 10. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
 11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 147 - Chars: 13550 - Tokens: 3388
-12. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 68 - Chars: 4497 - Tokens: 1125
+12. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5851 - Tokens: 1463
 13. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 43 - Chars: 5476 - Tokens: 1369
 14. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
 15. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
@@ -60,8 +60,8 @@
 36. src\Artifacts\A32. DCE - Phase 1 - Excel and CSV Handling Strategy.md - Lines: 44 - Chars: 4295 - Tokens: 1074
 37. src\Artifacts\A33. DCE - Phase 1 - Copy-Paste Feature Plan.md - Lines: 42 - Chars: 4456 - Tokens: 1114
 38. src\Artifacts\A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements.md - Lines: 44 - Chars: 6403 - Tokens: 1601
-39. src\Artifacts\A35. DCE - Phase 2 - UI Mockups and Flow.md - Lines: 96 - Chars: 6987 - Tokens: 1747
-40. src\Artifacts\A36. DCE - Phase 2 - Technical Implementation Plan.md - Lines: 65 - Chars: 3766 - Tokens: 942
+39. src\Artifacts\A35. DCE - Phase 2 - UI Mockups and Flow.md - Lines: 90 - Chars: 6431 - Tokens: 1608
+40. src\Artifacts\A36. DCE - Phase 2 - Technical Implementation Plan.md - Lines: 66 - Chars: 3958 - Tokens: 990
 41. src\Artifacts\A37. DCE - Phase 2 - Cycle Navigator & Knowledge Graph - Vision.md - Lines: 28 - Chars: 3242 - Tokens: 811
 42. src\Artifacts\A38. DCE - Phase 2 - Cycle Navigator - UI Mockup.md - Lines: 69 - Chars: 4621 - Tokens: 1156
 43. src\Artifacts\A39. DCE - Phase 2 - Cycle Navigator - Technical Plan.md - Lines: 84 - Chars: 4595 - Tokens: 1149
@@ -78,7 +78,7 @@
 54. src\Artifacts\A46. DCE - Phase 2 - Paste and Parse Response - Feature Plan.md - Lines: 38 - Chars: 3587 - Tokens: 897
 55. src\Artifacts\A47. DCE - Phase 2 - Prompt Amalgamation Feature Plan.md - Lines: 42 - Chars: 3499 - Tokens: 875
 56. src\Artifacts\A48. DCE - Phase 2 - Advanced Syntax Highlighting Plan.md - Lines: 49 - Chars: 4044 - Tokens: 1011
-57. src\Artifacts\A49. DCE - Phase 2 - File Association & Diffing Plan.md - Lines: 48 - Chars: 4502 - Tokens: 1126
+57. src\Artifacts\A49. DCE - Phase 2 - File Association & Diffing Plan.md - Lines: 45 - Chars: 4191 - Tokens: 1048
 58. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
 59. src\Artifacts\A50. DCE - Phase 2 - UI Component Plan (Resizable Panes & Inner Editors).md - Lines: 48 - Chars: 4790 - Tokens: 1198
 60. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
@@ -89,7 +89,7 @@
 65. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
 66. src\backend\services\action.service.ts - Lines: 73 - Chars: 2471 - Tokens: 618
 67. src\backend\services\flattener.service.ts - Lines: 327 - Chars: 14740 - Tokens: 3685
-68. src\backend\services\fs.service.ts - Lines: 769 - Chars: 36715 - Tokens: 9179
+68. src\backend\services\fs.service.ts - Lines: 798 - Chars: 38498 - Tokens: 9625
 69. src\backend\services\history.service.ts - Lines: 106 - Chars: 4180 - Tokens: 1045
 70. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
 71. src\backend\services\prompt.service.ts - Lines: 113 - Chars: 13923 - Tokens: 3481
@@ -98,14 +98,14 @@
 74. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
 75. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
 76. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
-77. src\client\components\DiffViewer.tsx - Lines: 61 - Chars: 2755 - Tokens: 689
+77. src\client\components\DiffViewer.tsx - Lines: 60 - Chars: 2549 - Tokens: 638
 78. src\client\components\file-tree\FileTree.tsx - Lines: 262 - Chars: 11897 - Tokens: 2975
 79. src\client\components\file-tree\FileTree.utils.ts - Lines: 189 - Chars: 7284 - Tokens: 1821
 80. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13099 - Tokens: 3275
 81. src\client\components\tree-view\TreeView.tsx - Lines: 394 - Chars: 18029 - Tokens: 4508
 82. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 83. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
-84. src\client\utils\response-parser.ts - Lines: 40 - Chars: 1740 - Tokens: 435
+84. src\client\utils\response-parser.ts - Lines: 65 - Chars: 2708 - Tokens: 677
 85. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 86. src\client\views\context-chooser.view\on-message.ts - Lines: 143 - Chars: 6146 - Tokens: 1537
 87. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
@@ -113,8 +113,8 @@
 89. src\client\views\index.ts - Lines: 35 - Chars: 1714 - Tokens: 429
 90. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 91. src\client\views\parallel-copilot.view\on-message.ts - Lines: 39 - Chars: 1840 - Tokens: 460
-92. src\client\views\parallel-copilot.view\view.scss - Lines: 280 - Chars: 6073 - Tokens: 1519
-93. src\client\views\parallel-copilot.view\view.tsx - Lines: 283 - Chars: 13593 - Tokens: 3399
+92. src\client\views\parallel-copilot.view\view.scss - Lines: 302 - Chars: 6451 - Tokens: 1613
+93. src\client\views\parallel-copilot.view\view.tsx - Lines: 261 - Chars: 13780 - Tokens: 3445
 94. src\common\ipc\channels.enum.ts - Lines: 64 - Chars: 3422 - Tokens: 856
 95. src\common\ipc\channels.type.ts - Lines: 57 - Chars: 4453 - Tokens: 1114
 96. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
@@ -1125,8 +1125,8 @@ This document serves as a living record of persistent or complex bugs that have 
 <file path="src/Artifacts/A12. DCE - Logging and Debugging Guide.md">
 # Artifact A12: DCE - Logging and Debugging Guide
 # Date Created: Cycle 19
-# Author: AI Model
-# Updated on: C19 (Add explicit clarification on where to find different types of logs.)
+# Author: AI Model & Curator
+# Updated on: C93 (Add section on Tactical Debugging)
 
 - **Key/Value for A0:**
 - **Description:** Explains how to access and use the integrated logging solution for debugging the extension's backend and frontend components.
@@ -1182,15 +1182,27 @@ This is the primary, centralized log for the entire extension, including message
     -----------------------------------------------------------------------------------
     ```
 
-## 3. What is Logged?
+## 3. Tactical Debugging with Logs (C93)
 
-*   **Backend Initialization:** Messages indicating that services are starting.
-*   **File System Scans & Refreshes:**
-    *   Confirmation when a file scan begins, including the exclusion pattern used.
-    *   Confirmation when a file change is detected by the watcher.
-    *   Confirmation when a refresh is triggered.
-*   **Errors:** Any caught exceptions on both the backend and frontend are logged with an `[ERROR]` prefix.
-*   **Frontend Actions:** Key user interactions in the UI (button clicks, etc.) are logged with a `[WebView]` prefix.
+When a feature is not working as expected, especially one that involves communication between the frontend and backend, the most effective debugging technique is to add **tactical logs** at every step of the data's journey.
+
+### Case Study: Fixing the "Associated Files" Parser (Cycle 93)
+
+-   **Problem:** The UI was incorrectly reporting that files from a parsed AI response did not exist in the workspace.
+-   **Data Flow:**
+    1.  **Frontend (`view.tsx`):** User clicks "Parse All".
+    2.  **Frontend (`response-parser.ts`):** Raw text is parsed into a list of relative file paths (e.g., `src/main.ts`).
+    3.  **IPC (`RequestFileExistence`):** The list of relative paths is sent to the backend.
+    4.  **Backend (`fs.service.ts`):** The backend receives the list and compares it against its own list of known workspace files, which are stored as absolute paths (e.g., `c:/project/src/main.ts`). The comparison fails.
+
+-   **Tactical Logging Strategy:**
+    1.  **Log at Step 2:** In `view.tsx`, log the array of paths immediately after they are returned from `response-parser.ts`. **Result:** Confirmed paths were relative and used forward slashes.
+    2.  **Log at Step 3:** In `view.tsx`, log the payload being sent over the IPC channel. **Result:** Confirmed the same relative paths were being sent.
+    3.  **Log at Step 4 (Backend):** In `fs.service.ts`'s `handleFileExistenceRequest` handler:
+        *   Log the array of paths *as received* from the client.
+        *   Log the workspace root path being used for resolution.
+        *   Inside the loop, log the comparison being made for each file: `[DEBUG] Checking for existence. Relative: 'src/main.ts', Resolved Absolute: 'c:/project/src/main.ts'`.
+    *   **Conclusion:** The logs immediately revealed the mismatch between relative and absolute paths, pinpointing the exact location where a path resolution step was needed.
 </file>
 
 <file path="src/Artifacts/A13. DCE - Phase 1 - Right-Click Context Menu.md">
@@ -2701,25 +2713,25 @@ The goal of the **Parallel Co-Pilot Panel** is to create an integrated, **persis
 # Artifact A35: DCE - Phase 2 - UI Mockups and Flow
 # Date Created: C69
 # Author: AI Model
-# Updated on: C92 (Add "New Cycle" button and clarify section collapse state)
+# Updated on: C95 (Change parsed view to a two-pane layout with diff viewer)
 
 ## 1. Overview
 
-This document describes the user interface (UI) and interaction flow for the Parallel Co-Pilot Panel. The design is centered around a two-stage workflow: **Input**, followed by a global **Parse** that transforms the entire panel into a **Review & Act** mode. The UI now includes an "Associated Files" list for quick validation and a "New Cycle" button for explicit history management.
+This document describes the user interface (UI) and interaction flow for the Parallel Co-Pilot Panel. The design is centered around a two-stage workflow: **Input**, followed by a global **Parse** that transforms the entire panel into a **Review & Act** mode.
 
 ## 2. UI Mockup (Textual Description)
 
 ### 2.1. Stage 1: Raw Input View
 
-This is the initial state of the panel.
+This is the initial state of the panel. It remains unchanged.
 
 ```
 +-------------------------------------------------------------------------------------+
-| [Parallel Co-Pilot] [Toolbar: Generate Prompt, [ Parse All ], Settings, etc.]       |
+| [Parallel Co-Pilot] [Toolbar: [ Generate prompt.md ], [ Parse All ], Settings]      |
 |-------------------------------------------------------------------------------------|
 | [v] Cycle Info & Context                                                            |
 | |-----------------------------------------------------------------------------------|
-| | Cycle: [ < ] [ C92 ] [ > ] [ + ] [ Cycle Title Input: persistence fix... ]         |
+| | Cycle: [ < ] [ C95 ] [ > ] [ + (disabled) ] [ Cycle Title Input: ... ]             |
 | |-----------------------------------------------------------------------------------|
 | | [Cycle Context (Permanent notes)]          [Ephemeral Context (Temp logs)]        |
 | | +----------------------------------------+ +------------------------------------+ |
@@ -2732,136 +2744,131 @@ This is the initial state of the panel.
 | |                                                                                 | |
 | | +-----------------------------------------------------------------------------+ | |
 | | | <textarea>                                                                  | | |
-| | | I've analyzed your feedback...                                                | | |
 | | | ...                                                                         | | |
-| | | <src/main.ts>...</src/main.ts>                                                  | | |
 | | +-----------------------------------------------------------------------------+ | |
 | |                                                                                 | |
 +-------------------------------------------------------------------------------------+
 ```
 
-### 2.2. Stage 2: Parsed View
+### 2.2. Stage 2: Parsed View (C95 Update)
 
-After clicking `[ Parse All ]`, all tabs transform simultaneously.
+After clicking `[ Parse All ]`, all tabs transform simultaneously into a **two-pane layout**. The left pane shows the summary and file list, while the right pane shows the diff viewer or file content.
 
 ```
-+-------------------------------------------------------------------------------------+
-| [Parallel Co-Pilot] [Toolbar: Generate Prompt, [ Un-Parse All ], Settings, etc.]    |
-|-------------------------------------------------------------------------------------|
-| [v] CYCLE & CONTEXT                                                                 |
-| | ... (content is the same as above, but may be collapsed) ...                    | |
-|-------------------------------------------------------------------------------------|
-| [ Response 1 (active) ] [ Response 2 ] [ Response 3 ] [ + ]                         |
-|-------------------------------------------------------------------------------------|
-| [ Response 1 Content Area - Stretches to fill vertical space, scrollable ]          |
-| |                                                                                 | |
-| | [v] SUMMARY & PLAN                                                              | |
-| | |-----------------------------------------------------------------------------| | |
-| | | > I've analyzed your feedback...                                            | | |
-| |                                                                                 | |
-| | [v] COURSE OF ACTION                                                            | |
-| | |-----------------------------------------------------------------------------| | |
-| | | 1.  **Documentation First:** I will update the artifacts.                   | | |
-| |                                                                                 | |
-| | [v] ASSOCIATED FILES                                                            | |
-| | |-----------------------------------------------------------------------------| | |
-| | | [✓] src/client/views/parallel-copilot.view/view.tsx [Diff]                  | | |
-| | | [✗] src/client/views/a-new-file.ts [Create]                                 | | |
-| |                                                                                 | |
-| | [ FILE: src/client/views/parallel-copilot.view/view.tsx ] [Swap]                | |
-| | +-----------------------------------------------------------------------------+ | |
-| | | [ Read-only, syntax-highlighted code viewer... ]                            | | |
-| | +-----------------------------------------------------------------------------+ | |
-| |                                                                                 | |
-+-------------------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------+
+| [Parallel Co-Pilot] [Toolbar: [ Generate prompt.md ], [ Un-Parse All ], Settings]               |
+|-------------------------------------------------------------------------------------------------|
+| ... (Cycle Info & Context section remains the same) ...                                         |
+|-------------------------------------------------------------------------------------------------|
+| [ Response 1 (active) ] [ Response 2 ] [ Response 3 ] [ + ]                                     |
+|-------------------------------------------------------------------------------------------------|
+| [ Left Pane (File List & Summary) ] | [ Right Pane (Diff Viewer / Content) ]                    |
+| |-----------------------------------| |-------------------------------------------------------| |
+| | [v] SUMMARY & PLAN                | | [ Diff for: src/client/views/view.tsx ]               | |
+| | | Rendered Markdown...            | | +---------------------------------------------------+ | |
+| |                                   | | | [ DiffViewer Component showing changes... ]       | | |
+| | [v] ASSOCIATED FILES (Clickable)  | | +---------------------------------------------------+ | |
+| | |-------------------------------| |                                                       | |
+| | | [✓] src/client/views/view.tsx | | [ FILE: src/client/views/view.tsx ] [Swap]            | |
+| | | [✗] src/client/new-file.ts    | | +---------------------------------------------------+ | |
+| |                                   | | | [ Read-only, syntax-highlighted code viewer... ]  | | |
+| |                                   | | +---------------------------------------------------+ | |
+| |                                   | |                                                       | |
++-------------------------------------------------------------------------------------------------+
 ```
 
-### 2.1. UI Components Breakdown
+### 2.3. UI Components Breakdown
 
-1.  **Cycle Navigator:**
-    *   The navigator now includes a `[ + ]` (New Cycle) button. This is the primary way to advance to a new, empty cycle.
-    *   The `[ > ]` (Next) button is disabled when the user is viewing the latest cycle.
+1.  **Main Toolbar:**
+    *   Unchanged.
 
-2.  **Collapsible Sections:**
-    *   Each collapsible section (`CYCLE & CONTEXT`, `SUMMARY & PLAN`, `COURSE OF ACTION`, etc.) will have its own independent open/closed state. The state for one section will not affect the others.
+2.  **Cycle Navigator:**
+    *   Unchanged.
+
+3.  **Parsed View Layout:**
+    *   The content area for a parsed tab is now a two-column layout.
+    *   **Left Pane:** Contains the collapsible sections for "Summary & Plan," "Course of Action," and the "Associated Files" list. This pane is scrollable.
+    *   **Right Pane:** This is the content viewer. It is initially empty or shows a placeholder. When a user clicks a file in the "Associated Files" list, this pane will render the appropriate content (a diff view or the full file content).
 
 ## 3. User Interaction Flow
 
-1.  **Load:** On startup, the panel loads the data from the *latest* cycle in its history. The Cycle Navigator displays this cycle number, and the `[ > ]` button is disabled.
-2.  **Work:** The user edits the cycle title, context, and response tabs. All changes are debounced and saved automatically to the current cycle's record in `dce_history.json`.
-3.  **New Cycle:** When ready to start a new iteration, the user clicks the `[ + ]` button.
-    *   **Action:** The cycle number increments. `maxCycle` and `currentCycle` are both updated.
-    *   **UI Update:** The UI clears all fields (title, context, responses) for the new cycle.
-    *   **Save:** A new, empty cycle object is created and saved to the history file. The `[ > ]` button remains disabled.
-4.  **Review History:** The user can click the `[ < ]` button to navigate to past cycles, loading their saved state for review.
+1.  **Load & Parse:** User loads the panel and clicks "Parse All". The UI transforms into the two-pane layout. The right pane is empty.
+2.  **Select for Diff:** The user clicks on a file with a `✓` in the "Associated Files" list (left pane).
+    *   **Action:** The frontend sends a `RequestFileContent` message to the backend with the file's path.
+    *   The backend reads the file from the workspace and sends its content back via `SendFileContent`.
+    *   The frontend receives the original content. It already has the AI's proposed content from the parsed response.
+    *   **UI Update:** The `DiffViewer` component is rendered in the **right pane**, showing a comparison of the two versions.
+3.  **View Full Content:** The user clicks a file block header in the right pane.
+    *   **UI Update:** The right pane switches from the `DiffViewer` to showing the full, syntax-highlighted content of that single file.
 </file>
 
 <file path="src/Artifacts/A36. DCE - Phase 2 - Technical Implementation Plan.md">
 # Artifact A36: DCE - Phase 2 - Technical Implementation Plan
 # Date Created: C69
 # Author: AI Model
-# Updated on: C91 (Add plan for global parse toggle and file existence check)
+# Updated on: C95 (Add plan for diff view and enhanced parsing)
 
 - **Key/Value for A0:**
 - **Description:** Details the technical approach for building the Parallel Co-Pilot Panel, including the new webview provider, state management, IPC channels, and backend logic for file content swapping.
-- **Tags:** feature plan, phase 2, technical plan, architecture, webview, ipc, parsing, markdown
+- **Tags:** feature plan, phase 2, technical plan, architecture, webview, ipc, parsing, markdown, diff
 
 ## 1. Overview
 
-This document outlines the technical implementation strategy for the Parallel Co-Pilot Panel. The plan is updated to reflect two major changes: a global parse/un-parse toggle and a new "Associated Files" list with backend-driven file existence validation.
+This document outlines the technical implementation strategy for the Parallel Co-Pilot Panel. The plan is updated to reflect a two-pane UI for diffing, a smarter parser, and more resilient backend path resolution.
 
 ## 2. Core Components
 
 ### 2.1. Frontend State Management (`view.tsx`)
 
-The main component state will be refactored to handle the global view mode.
+The component state will be expanded to manage the new diffing UI.
 
 ```typescript
 // State within the view.tsx component
 interface PcppState {
-  // ... state for cycle nav, context fields, tabs, etc.
-  isParsedMode: boolean; // NEW: Global toggle for all tabs
-  fileExistenceMap: Map<string, boolean>; // NEW: Caches file existence status
-  // ... collapsible section states
-}
-
-interface TabState {
-    rawContent: string;
-    parsedContent: ParsedResponse | null;
+  // ... existing state
+  isParsedMode: boolean;
+  fileExistenceMap: Map<string, boolean>;
+  
+  // NEW for Diffing
+  diffTarget: ParsedFile | null; // The AI-generated file currently being diffed
+  originalFileContent: string | null; // The content of the workspace file for comparison
 }
 ```
-*   **Global Parse State:** A new `isParsedMode` boolean will control the rendering of all tabs. The main toolbar button will toggle this state.
-*   **File Existence Cache:** A new `Map` will store the results from the backend about whether a file path exists.
-*   **Parsing on Demand:** The `onClick` handler for the "Parse All" button will iterate through the `tabs` state object. For any tab where `rawContent` exists but `parsedContent` is `null`, it will call the `parseResponse` utility and update that tab's state.
+*   **`diffTarget`**: When a user clicks a file in the "Associated Files" list, this state will be populated with the `ParsedFile` object from the AI response.
+*   **`originalFileContent`**: After the backend sends the workspace file's content, this state will be populated, triggering the rendering of the `DiffViewer`.
 
-### 2.2. Frontend Rendering & Logic (`view.tsx`)
+### 2.2. Frontend Parsing & Path Resolution (`response-parser.ts`)
 
-1.  **Associated Files List:**
-    *   After parsing a response, the frontend will collect all unique file paths from all tabs.
-    *   It will send a single `RequestFileExistence` IPC message to the backend with this aggregated list of paths.
-    *   An IPC listener for `SendFileExistence` will update the `fileExistenceMap` state.
-    *   A new `AssociatedFilesList` component will be rendered in each tab's parsed view. It will receive the `parsedContent.filesUpdated` array and the `fileExistenceMap` as props. It will then render the list with the correct status icons (`✓`/`✗`).
+*   **Enhanced Parser:** The `parseResponse` function will be updated.
+    1.  It will first attempt to find file paths using a new regex that looks for paths within angle brackets: `/<([\w\/\.-]+)>/g`. This handles `<src/main.ts>` style tags.
+    2.  If that fails, it will fall back to the existing logic of parsing the "Files Updated This Cycle" list. This makes the parser more robust.
 
-2.  **Markdown & Syntax Highlighting:**
-    *   This implementation remains the same as in C90. `react-markdown` will render the plan sections, and `@wooorm/starry-night` on the backend will provide HTML for syntax-highlighted code blocks.
+### 2.3. Backend File Existence & Content (`fs.service.ts`)
 
-### 2.3. Backend File Existence Check (`fs.service.ts`)
-
-*   **New IPC Handler:** A new handler, `handleFileExistenceRequest`, will be implemented.
-*   **Logic:**
-    1.  It will receive an array of file paths: `{ paths: string[] }`.
-    2.  It will iterate through the paths. For each path, it will use `vscode.workspace.fs.stat(vscode.Uri.file(path))` inside a `try...catch` block.
-    3.  It will build a result map: `existenceMap: { [path: string]: boolean }`. If `stat` succeeds, the value is `true`; if it throws an error (e.g., `ENOENT`), the value is `false`.
-    4.  It will send this map back to the client via the `SendFileExistence` IPC channel.
+*   **Smarter Path Resolution:** The `handleFileExistenceRequest` method will be enhanced.
+    *   If it receives a path that starts with `A` and a number (e.g., `A36. ... .md`) and fails to find it at the workspace root, it will automatically prepend `src/Artifacts/` and try again. This makes it resilient to incomplete doc artifact paths.
+*   **New IPC Handler (`handleFileContentRequest`):**
+    *   This handler will be implemented to service the new `RequestFileContent` channel.
+    *   It will receive a file path, read the file using `vscode.workspace.fs.readFile`, convert the buffer to a string, and send it back in the `SendFileContent` message. It will handle errors gracefully if the file cannot be read.
 
 ### 2.4. IPC Channel Updates
 
-*   **New Channel (`RequestFileExistence`):**
+*   **New Channel (`RequestFileContent`):**
     *   **Direction:** Client -> Server
-    *   **Payload:** `{ paths: string[] }`
-*   **New Channel (`SendFileExistence`):**
+    *   **Payload:** `{ path: string }`
+*   **New Channel (`SendFileContent`):**
     *   **Direction:** Server -> Client
-    *   **Payload:** `{ existenceMap: { [path: string]: boolean } }`
+    *   **Payload:** `{ path: string, content: string | null }` (`null` on error)
+
+### 2.5. Frontend UI Flow for Diffing (`view.tsx`)
+
+1.  User clicks a file in the `AssociatedFilesList` component.
+2.  The `onClick` handler calls a new function, e.g., `handleSelectForDiff(file: ParsedFile)`.
+3.  `handleSelectForDiff` does two things:
+    *   Sets the `diffTarget` state to the clicked `file`.
+    *   Sends a `RequestFileContent` IPC message to the backend with `file.path`.
+4.  The frontend listens for the `SendFileContent` message. When the message for the correct path arrives, its handler sets the `originalFileContent` state.
+5.  The main render function has a condition: `if (diffTarget && originalFileContent)`. When true, it renders the `<DiffViewer original={originalFileContent} modified={diffTarget.content} />` component in the right-hand pane.
 </file>
 
 <file path="src/Artifacts/A37. DCE - Phase 2 - Cycle Navigator & Knowledge Graph - Vision.md">
@@ -3931,7 +3938,7 @@ After research and consideration of alternatives like `refractor`, **`@wooorm/st
 # Artifact A49: DCE - Phase 2 - File Association & Diffing Plan
 # Date Created: C82
 # Author: AI Model
-# Updated on: C91 (Mark file existence check as in-progress)
+# Updated on: C95 (Update UI flow to a two-pane diff view)
 
 - **Key/Value for A0:**
 - **Description:** Plans the UI and backend logic to visually link file blocks in an AI response to workspace files and sets the stage for an integrated diff tool.
@@ -3939,9 +3946,9 @@ After research and consideration of alternatives like `refractor`, **`@wooorm/st
 
 ## 1. Overview & Goal
 
-To make the "Swap with Source" feature trustworthy and intuitive, users need a clear visual confirmation of which local file an AI-generated code block is intended to replace. This feature introduces a "file association" mechanism that parses AI responses, verifies the existence of the mentioned files, and displays this status to the user. This is the foundational step required before an integrated diff tool can be built.
+To make the "Swap with Source" feature trustworthy and intuitive, users need a clear visual confirmation of which local file an AI-generated code block is intended to replace. This feature introduces a "file association" mechanism that parses AI responses, verifies the existence of the mentioned files, and displays this status to the user.
 
-**Status (C91):** Implementation of the "Associated Files" list and the backend file existence check is in progress.
+**Update (C95):** This plan is now evolved. The "Associated Files" list is not just for verification but is the primary interaction point for viewing changes. Clicking a file in this list now drives the UI, displaying a diff view in an adjacent panel.
 
 ## 2. User Stories
 
@@ -3949,33 +3956,30 @@ To make the "Swap with Source" feature trustworthy and intuitive, users need a c
 |---|---|---|
 | P2-ASSOC-01 | **See Affected Files** | As a developer, when I parse an AI response, I want the extension to automatically show me a list of all the file paths it intends to modify, so I can understand the scope of the proposed changes. | - After parsing, a collapsible "Associated Files" section appears in the tab's UI. <br> - This section displays a list of all file paths found in the response. |
 | P2-ASSOC-02 | **Verify File Existence** | As a developer, for each file listed, I want to see a visual indicator of whether that file already exists in my workspace, so I can spot potential errors or new files proposed by the AI. | - Next to each listed file path, an icon is displayed. <br> - A green checkmark (`✓`) indicates the file exists at that path. <br> - A red cross (`✗`) indicates the file does not exist, alerting me to a potential hallucination or a new file creation. |
-| P2-ASSOC-03 | **Preview Changes (Diff)** | As a developer, I want to click a "Diff" button next to an associated file to see a side-by-side comparison of the original file and the AI's proposed changes, so I can review the changes before swapping. | - A "Diff" button appears next to each file that is successfully associated (i.e., exists). <br> - Clicking it opens a diff view (modal or new tab) showing the changes. |
+| P2-ASSOC-03 | **Preview Changes with Diff** | As a developer, I want to click on an existing file in the "Associated Files" list to immediately see a side-by-side comparison of the original file and the AI's proposed changes, so I can review the changes before swapping. | - Clicking a file with a `✓` in the list opens a diff view in a new panel to the right. <br> - The diff view clearly shows added, removed, and common lines. <br> - The diff view is the primary way to inspect changes. |
 
-## 3. Technical Implementation Plan
+## 3. Technical Implementation Plan (C95)
 
-1.  **Frontend - Parsing (`parallel-copilot.view/view.tsx`):**
-    *   The `parseResponse` utility extracts an array of file paths from the pasted text. This is already implemented.
-    *   This array is stored in the `parsedContent.filesUpdated` property of the tab's state.
+1.  **Frontend - Parsing (`response-parser.ts`):**
+    *   **Status:** **In Progress.**
+    *   The parser will be enhanced to first look for file paths inside angle brackets (e.g., `<src/main.ts>`), making it more robust. It will fall back to parsing list formats if the primary method fails.
 
-2.  **Backend - Verification (`fs.service.ts`):**
-    *   **Status (C91):** **In Progress.**
-    *   Create a new IPC channel, `RequestFileExistence`, that accepts `{ paths: string[] }`.
-    *   Create a handler `handleFileExistenceRequest` in `fs.service.ts`. This handler will iterate through the received paths, check each one's existence using `vscode.workspace.fs.stat`, and return a map of the results.
-    *   Create a corresponding `SendFileExistence` channel that sends back `{ existenceMap: { [path: string]: boolean } }`.
+2.  **Backend - Verification & Content Fetching (`fs.service.ts`):**
+    *   **Status:** **In Progress.**
+    *   The `handleFileExistenceRequest` handler will be enhanced to intelligently check for documentation artifacts in the `src/Artifacts/` directory if they are not found at the root.
+    *   A **new handler**, `handleFileContentRequest`, will be created. It will receive a file path from the client, read that file's content, and send it back.
 
-3.  **Frontend - UI & State (`parallel-copilot.view/view.tsx`):**
-    *   **Status (C91):** **In Progress.**
-    *   After parsing paths, immediately send them to the backend via `RequestFileExistence`.
-    *   Add a new state variable to store the result: `const [fileExistenceMap, setFileExistenceMap] = useState<Map<string, boolean>>(new Map());`.
-    *   Listen for the `SendFileExistence` message and update this state.
-    *   Create a new component, `AssociatedFilesList`. This component will receive the `parsedContent.filesUpdated` array and the `fileExistenceMap` as props.
-    *   It will render a list of the file paths. For each path, it will look up its status in the `fileExistenceMap` and display the appropriate icon (e.g., `VscCheck` or `VscError` from `react-icons/vsc`).
-
-4.  **Diffing (Future Step):**
-    *   The "Diff" button will initially be disabled or hidden.
-    *   Its implementation will require a new IPC channel to request the content of the original file from the backend.
-    *   A diffing library (like `diff`) will be used to compare the original content with the relevant section from the AI response.
-    *   The result will be rendered in a new component, `DiffViewer`, as planned in `A43`.
+3.  **Frontend - UI & State (`view.tsx`):**
+    *   **Status:** **In Progress.**
+    *   The UI will be refactored into a two-pane layout when in parsed mode.
+    *   New state variables `diffTarget` and `originalFileContent` will be added.
+    *   The `AssociatedFilesList` component will be made clickable.
+    *   **Workflow:**
+        1.  User clicks a file in the list.
+        2.  The `onClick` handler sets the `diffTarget` state to the corresponding `ParsedFile` object from the response.
+        3.  It then sends a `RequestFileContent` IPC message to the backend.
+        4.  The `onmessage` handler for `SendFileContent` receives the original file's text and sets the `originalFileContent` state.
+        5.  The `DiffViewer` component, which is already present in the right pane, now has both `original` and `modified` props and renders the diff.
 </file>
 
 <file path="src/Artifacts/A5. DCE - Target File Structure.md">
@@ -6508,26 +6512,55 @@ export class FSService {
     // --- File Operations ---
 
     public async handleFileContentRequest(filePath: string, serverIpc: ServerPostMessageManager) {
-        Services.loggerService.log(`[C88 Fix] Received request for content of: ${filePath}`);
+        Services.loggerService.log(`Received request for content of: ${filePath}`);
         try {
             const uri = vscode.Uri.file(filePath);
             const contentBuffer = await vscode.workspace.fs.readFile(uri);
             const content = Buffer.from(contentBuffer).toString('utf-8');
             serverIpc.sendToClient(ServerToClientChannel.SendFileContent, { path: filePath, content });
         } catch (error) {
-            Services.loggerService.error(`[C88 Fix] Failed to read file content for ${filePath}: ${error}`);
+            Services.loggerService.error(`Failed to read file content for ${filePath}: ${error}`);
             serverIpc.sendToClient(ServerToClientChannel.SendFileContent, { path: filePath, content: null });
         }
     }
 
     public async handleFileExistenceRequest(paths: string[], serverIpc: ServerPostMessageManager) {
+        Services.loggerService.log(`[File Existence] Received request to check paths: ${JSON.stringify(paths)}`);
+        const workspaceFolders = vscode.workspace.workspaceFolders;
+        if (!workspaceFolders || workspaceFolders.length === 0) {
+            Services.loggerService.error("[File Existence] Cannot check for files, no workspace folder is open.");
+            serverIpc.sendToClient(ServerToClientChannel.SendFileExistence, { existenceMap: {} });
+            return;
+        }
+        const rootPath = workspaceFolders[0].uri.fsPath;
+        Services.loggerService.log(`[File Existence] Using workspace root: ${rootPath}`);
+    
         const existenceMap: { [path: string]: boolean } = {};
-        const checks = paths.map(async (p) => {
+        const checks = paths.map(async (p_raw) => {
+            const p = p_raw.trim().replace(/^[`"']|[`"']$/g, '');
+            if (!p) return;
+    
+            let absolutePath = path.resolve(rootPath, p);
+            let normalizedPath = normalizePath(absolutePath);
+    
             try {
-                await vscode.workspace.fs.stat(vscode.Uri.file(p));
-                existenceMap[p] = true;
+                await vscode.workspace.fs.stat(vscode.Uri.file(normalizedPath));
+                existenceMap[p_raw] = true;
+                Services.loggerService.log(`[File Existence] SUCCESS: Found file at '${normalizedPath}'`);
             } catch {
-                existenceMap[p] = false;
+                // Fallback for documentation artifacts
+                if (/^A\d+/.test(p)) {
+                    const artifactPath = path.resolve(rootPath, 'src/Artifacts', p);
+                    const normalizedArtifactPath = normalizePath(artifactPath);
+                    try {
+                        await vscode.workspace.fs.stat(vscode.Uri.file(normalizedArtifactPath));
+                        existenceMap[p_raw] = true;
+                        Services.loggerService.log(`[File Existence] SUCCESS (Fallback): Found doc artifact at '${normalizedArtifactPath}'`);
+                        return;
+                    } catch {}
+                }
+                existenceMap[p_raw] = false;
+                Services.loggerService.warn(`[File Existence] FAILED: Could not find file at '${normalizedPath}'`);
             }
         });
         await Promise.all(checks);
@@ -7502,43 +7535,42 @@ const DiffViewer: React.FC<DiffViewerProps> = ({ original, modified, filePath, o
     let modifiedLineNum = 1;
 
     return (
-        <div className="diff-modal-overlay" onClick={onClose}>
-            <div className="diff-modal-content" onClick={e => e.stopPropagation()}>
+        <div className="diff-viewer-container">
+            <div className="diff-header">
                 <h3>Diff for {filePath}</h3>
-                <button onClick={onClose} style={{ alignSelf: 'flex-end' }}>Close</button>
-                <div className="diff-viewer">
-                    {changes.map((part, index) => {
-                        const lines = part.value.split('\n').filter((line, i, arr) => i < arr.length - 1 || line !== '');
-                        const partClassName = part.added ? 'added' : part.removed ? 'removed' : 'common';
-                        
-                        return (
-                            <div key={index} className={partClassName}>
-                                {lines.map((line, lineIndex) => {
-                                    let displayOriginalLineNum = '';
-                                    let displayModifiedLineNum = '';
+            </div>
+            <div className="diff-content">
+                {changes.map((part, index) => {
+                    const lines = part.value.split('\n').filter((line, i, arr) => i < arr.length - 1 || line !== '');
+                    const partClassName = part.added ? 'added' : part.removed ? 'removed' : 'common';
+                    
+                    return (
+                        <div key={index} className={`diff-part ${partClassName}`}>
+                            {lines.map((line, lineIndex) => {
+                                let displayOriginalLineNum = '';
+                                let displayModifiedLineNum = '';
 
-                                    if (!part.added) {
-                                        displayOriginalLineNum = (originalLineNum++).toString();
-                                    }
-                                    if (!part.removed) {
-                                        displayModifiedLineNum = (modifiedLineNum++).toString();
-                                    }
+                                if (!part.added) {
+                                    displayOriginalLineNum = (originalLineNum++).toString();
+                                }
+                                if (!part.removed) {
+                                    displayModifiedLineNum = (modifiedLineNum++).toString();
+                                }
 
-                                    return (
-                                        <div key={lineIndex} className="line">
-                                            <span className="line-num">{displayOriginalLineNum}</span>
-                                            <span className="line-num">{displayModifiedLineNum}</span>
-                                            <span className="line-content">
-                                                {part.added ? '+ ' : part.removed ? '- ' : '  '}
-                                                {line}
-                                            </span>
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        );
-                    })}
-                </div>
+                                return (
+                                    <div key={lineIndex} className="line">
+                                        <span className="line-num orig-num">{displayOriginalLineNum}</span>
+                                        <span className="line-num mod-num">{displayModifiedLineNum}</span>
+                                        <span className="line-content">
+                                            <span className="line-prefix">{part.added ? '+' : part.removed ? '-' : ' '}</span>
+                                            {line}
+                                        </span>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    );
+                })}
             </div>
         </div>
     );
@@ -8723,9 +8755,10 @@ export const logger = {
 import { ParsedResponse, ParsedFile } from "@/common/types/pcpp.types";
 
 const SUMMARY_REGEX = /^([\s\S]*?)(?=### Course of Action)/;
-const COURSE_OF_ACTION_REGEX = /### Course of Action\s*([\s\S]*?)(?=### Files Updated This Cycle|(?=^\s*`{3,}))/m;
-const FILES_UPDATED_REGEX = /### Files Updated This Cycle\s*([\s\S]*?)(?=^\s*`{3,})/m;
+const COURSE_OF_ACTION_REGEX = /### Course of Action\s*([\s\S]*?)(?=### Files Updated This Cycle|(?=^\s*`{3,}|<file path="))/m;
+const FILES_UPDATED_REGEX = /### Files Updated This Cycle\s*([\s\S]*?)(?=^\s*`{3,}|<file path=")/m;
 const FILE_BLOCK_REGEX = /<file path="([^"]+)">([\s\S]*?)<\/file>/g;
+const ANGLE_BRACKET_PATH_REGEX = /<([a-zA-Z0-9\.\/_-]+)>/g; // New regex for <path/to/file.ts>
 
 export function parseResponse(rawText: string): ParsedResponse {
     const summaryMatch = rawText.match(SUMMARY_REGEX);
@@ -8741,21 +8774,45 @@ export function parseResponse(rawText: string): ParsedResponse {
         });
     }
     
-    // Fallback for files updated list if the dedicated section is missing
     let filesUpdatedList: string[] = [];
-    if (filesUpdatedMatch && filesUpdatedMatch[1]) {
+    
+    // 1. Prioritize files from <xml> tags
+    if (files.length > 0) {
+        filesUpdatedList = files.map(f => f.path);
+    }
+    
+    // 2. Fallback to parsing "Files Updated This Cycle" list
+    else if (filesUpdatedMatch && filesUpdatedMatch[1]) {
         filesUpdatedList = filesUpdatedMatch[1]
             .split('\n')
-            .map(line => line.replace(/[-\*]\s*/, '').trim())
-            .filter(line => line.trim().length > 0); // C92 Fix: Filter out empty lines
-    } else {
-        filesUpdatedList = files.map(f => f.path);
+            .map(line => {
+                const trimmedLine = line.trim();
+                const backtickMatch = /`([^`]+)`/.exec(trimmedLine);
+                if (backtickMatch && backtickMatch[1]) {
+                    return backtickMatch[1].trim();
+                }
+                return trimmedLine
+                    .replace(/^\[.\]\s*/, '')
+                    .replace(/^[-*]\s*/, '')
+                    .replace(/\(Updated\)/ig, '')
+                    .replace(/`/g, '')
+                    .trim();
+            })
+            .filter(line => line.length > 0 && line !== ':');
+    }
+    
+    // 3. Final fallback: check for simple angle bracket paths
+    else {
+        const angleBracketMatches = rawText.matchAll(ANGLE_BRACKET_PATH_REGEX);
+        for (const match of angleBracketMatches) {
+            filesUpdatedList.push(match[1].trim());
+        }
     }
 
     return {
         summary: summaryMatch ? summaryMatch[1].trim() : 'Could not parse summary.',
         courseOfAction: courseOfActionMatch ? courseOfActionMatch[1].trim() : 'Could not parse course of action.',
-        filesUpdated: filesUpdatedList,
+        filesUpdated: [...new Set(filesUpdatedList)], // Ensure uniqueness
         files: files,
     };
 }
@@ -10041,7 +10098,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
-/* Updated on: C91 (Add styles for Associated Files list) */
+/* Updated on: C95 (Add styles for two-pane diff view) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -10222,10 +10279,27 @@ body {
 }
 
 /* Styles for Parsed View */
-.parsed-view {
-    overflow-y: auto;
-    padding-right: 8px; /* For scrollbar */
+.parsed-view-grid {
+    display: flex;
+    gap: 8px;
     flex-grow: 1;
+    min-height: 0;
+}
+
+.parsed-view-left {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.parsed-view-right {
+    flex: 2;
+    overflow-y: auto;
+    border: 1px solid var(--vscode-panel-border);
+    border-radius: 4px;
+    padding: 8px;
 }
 
 .parsed-section {
@@ -10269,6 +10343,11 @@ body {
         padding: 2px 4px;
         font-size: 12px;
         border-radius: 3px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: var(--vscode-list-hoverBackground);
+        }
     }
 
     .status-icon {
@@ -10324,18 +10403,19 @@ body {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
-// Updated on: C92 (Implement robust persistence and state sync)
+// Updated on: C95 (Implement two-pane diff view)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
 import { PcppCycle, PcppResponse } from '@/backend/services/history.service';
-import { ParsedResponse } from '@/common/types/pcpp.types';
+import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
 import ReactMarkdown from 'react-markdown';
+import DiffViewer from '@/client/components/DiffViewer';
 
 // Debounce hook
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
@@ -10365,22 +10445,6 @@ const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; i
     </div>
 );
 
-const AssociatedFilesList: React.FC<{ files: string[], existenceMap: Map<string, boolean> }> = ({ files, existenceMap }) => (
-    <ul className="associated-files-list">
-        {files.map(file => (
-            <li key={file}>
-                {existenceMap.get(file) ? (
-                    <VscCheck className="status-icon exists" title="File exists in workspace" />
-                ) : (
-                    <VscError className="status-icon not-exists" title="File not found in workspace" />
-                )}
-                <span>{file}</span>
-            </li>
-        ))}
-    </ul>
-);
-
-
 const App = () => {
     // State
     const [activeTab, setActiveTab] = React.useState(1);
@@ -10394,23 +10458,19 @@ const App = () => {
     const [highlightedCodeBlocks, setHighlightedCodeBlocks] = React.useState<Map<string, string>>(new Map());
     const [fileExistenceMap, setFileExistenceMap] = React.useState<Map<string, boolean>>(new Map());
     const [isParsedMode, setIsParsedMode] = React.useState(false);
+    const [diffTarget, setDiffTarget] = React.useState<ParsedFile | null>(null);
+    const [originalFileContent, setOriginalFileContent] = React.useState<string | null>(null);
 
     // Collapsible sections state
     const [isCycleCollapsed, setIsCycleCollapsed] = React.useState(false);
-    const [isSummaryCollapsed, setIsSummaryCollapsed] = React.useState(false);
-    const [isPlanCollapsed, setIsPlanCollapsed] = React.useState(false);
-    const [isFilesCollapsed, setIsFilesCollapsed] = React.useState(false);
-
-
+    
     const clientIpc = ClientPostMessageManager.getInstance();
 
-    // --- Data Saving ---
     const saveCurrentCycleState = React.useCallback(() => {
         const responses: { [key: string]: PcppResponse } = {};
         for (let i = 1; i <= tabCount; i++) {
             responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' };
         }
-
         const cycleData: PcppCycle = {
             cycleId: currentCycle,
             timestamp: new Date().toISOString(),
@@ -10419,7 +10479,6 @@ const App = () => {
             ephemeralContext,
             responses,
         };
-        logger.log(`Saving state for cycle ${currentCycle}`);
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
     }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, clientIpc]);
 
@@ -10429,11 +10488,8 @@ const App = () => {
         debouncedSave();
     }, [cycleTitle, cycleContext, ephemeralContext, tabs, debouncedSave]);
 
-
-    // --- Data Loading & IPC Handlers ---
     React.useEffect(() => {
         const loadCycleData = (cycleData: PcppCycle) => {
-             logger.log(`Loading state for cycle ${cycleData.cycleId}`);
             setCurrentCycle(cycleData.cycleId);
             setCycleTitle(cycleData.title);
             setCycleContext(cycleData.cycleContext);
@@ -10449,49 +10505,42 @@ const App = () => {
             loadCycleData(cycleData);
             setMaxCycle(cycleData.cycleId);
         });
-
         clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData }) => {
-            if (cycleData) {
-                loadCycleData(cycleData);
-            } else {
-                logger.warn(`No data found for requested cycle.`);
-            }
+            if (cycleData) loadCycleData(cycleData);
         });
-        
         clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => {
             setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml));
         });
-        
         clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => {
             setFileExistenceMap(new Map(Object.entries(existenceMap)));
         });
-
+        clientIpc.onServerMessage(ServerToClientChannel.SendFileContent, ({ path, content }) => {
+            if (diffTarget?.path === path) {
+                setOriginalFileContent(content);
+            }
+        });
         clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});
-
-    }, [clientIpc]);
+    }, [clientIpc, diffTarget]);
 
     const handleRawContentChange = (newContent: string, tabIndex: number) => {
-        setTabs(prev => ({
-            ...prev,
-            [tabIndex.toString()]: { ...(prev[tabIndex.toString()] || { parsedContent: null }), rawContent: newContent, parsedContent: isParsedMode ? parseResponse(newContent) : null }
-        }));
+        setTabs(prev => ({ ...prev, [tabIndex.toString()]: { ...(prev[tabIndex.toString()] || { parsedContent: null }), rawContent: newContent, parsedContent: isParsedMode ? parseResponse(newContent) : null }}));
     };
 
     const handleGlobalParseToggle = () => {
         const newParseMode = !isParsedMode;
         setIsParsedMode(newParseMode);
+        setDiffTarget(null);
+        setOriginalFileContent(null);
 
         if (newParseMode) {
             const allFilePaths = new Set<string>();
             const updatedTabs = { ...tabs };
-
             Object.entries(updatedTabs).forEach(([tabId, tabState]) => {
                 if (tabState.rawContent && !tabState.parsedContent) {
                     const parsed = parseResponse(tabState.rawContent);
                     updatedTabs[Number(tabId)].parsedContent = parsed;
-                    
+                    parsed.filesUpdated.forEach(file => allFilePaths.add(file));
                     parsed.files.forEach(file => {
-                        allFilePaths.add(file.path);
                         const lang = file.path.split('.').pop() || 'plaintext';
                         const id = `${file.path}::${file.content}`;
                         if (!highlightedCodeBlocks.has(id)) {
@@ -10520,24 +10569,33 @@ const App = () => {
         const newCycleId = maxCycle + 1;
         setMaxCycle(newCycleId);
         setCurrentCycle(newCycleId);
-        // Clear all fields for the new cycle
         setCycleTitle('New Cycle');
         setCycleContext('');
         setEphemeralContext('');
         setTabs({});
         setIsParsedMode(false);
-        // The useEffect for state change will trigger the save
+    };
+    
+    const handleGeneratePrompt = () => {
+        clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle });
+    };
+
+    const handleSelectForDiff = (file: ParsedFile) => {
+        setDiffTarget(file);
+        setOriginalFileContent(null); // Clear previous content
+        logger.log(`Requesting content for diff: ${file.path}`);
+        clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: file.path });
     };
 
     const activeTabData = tabs[activeTab.toString()];
+    const isNewCycleButtonDisabled = !cycleTitle && !cycleContext && !ephemeralContext && Object.values(tabs).every(t => !t.rawContent);
 
     return (
         <div className="pc-view-container">
             <div className="pc-header">
                 <div className="pc-toolbar">
-                    <button onClick={handleGlobalParseToggle}>
-                        <VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}
-                    </button>
+                    <button onClick={handleGeneratePrompt} title="Generate prompt.md"><VscFileCode /> Generate prompt.md</button>
+                    <button onClick={handleGlobalParseToggle}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button>
                 </div>
             </div>
 
@@ -10547,7 +10605,7 @@ const App = () => {
                     <button onClick={() => handleCycleChange(currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button>
                     <input type="number" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 1)} className="cycle-input" />
                     <button onClick={() => handleCycleChange(currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button>
-                    <button onClick={handleNewCycle} title="New Cycle"><VscAdd /></button>
+                    <button onClick={handleNewCycle} title="New Cycle" disabled={isNewCycleButtonDisabled}><VscAdd /></button>
                     <input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} />
                 </div>
                 <div className="context-inputs">
@@ -10557,46 +10615,45 @@ const App = () => {
             </CollapsibleSection>
 
             <div className="tab-bar">
-                {[...Array(tabCount)].map((_, i) => (
-                    <div key={i} className={`tab ${activeTab === i + 1 ? 'active' : ''}`} onClick={() => setActiveTab(i + 1)}>
-                        Resp {i + 1}
-                    </div>
-                ))}
+                {[...Array(tabCount)].map((_, i) => <div key={i} className={`tab ${activeTab === i + 1 ? 'active' : ''}`} onClick={() => setActiveTab(i + 1)}>Resp {i + 1}</div>)}
             </div>
 
             <div className="tab-content">
                 {activeTab !== null && (
                     <div className="tab-pane">
-                        {isParsedMode && activeTabData?.parsedContent ? (
-                            <div className="parsed-view">
-                                <CollapsibleSection title="Summary & Plan" isCollapsed={isSummaryCollapsed} onToggle={() => setIsSummaryCollapsed(p => !p)}>
-                                    <ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown>
-                                </CollapsibleSection>
-                                <CollapsibleSection title="Course of Action" isCollapsed={isPlanCollapsed} onToggle={() => setIsPlanCollapsed(p => !p)}>
-                                     <ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown>
-                                </CollapsibleSection>
-                                <CollapsibleSection title="Associated Files" isCollapsed={isFilesCollapsed} onToggle={() => setIsFilesCollapsed(p => !p)}>
-                                    <AssociatedFilesList files={activeTabData.parsedContent.filesUpdated} existenceMap={fileExistenceMap} />
-                                </CollapsibleSection>
-
-                                {activeTabData.parsedContent.files.map(file => {
-                                    const id = `${file.path}::${file.content}`;
-                                    const highlightedHtml = highlightedCodeBlocks.get(id);
-                                    return (
-                                        <div key={file.path} className="file-block">
-                                            <div className="file-header"><span className="file-path">{file.path}</span></div>
-                                            <div className="file-content-viewer" dangerouslySetInnerHTML={{ __html: highlightedHtml || `<pre><code>${file.content}</code></pre>` }} />
-                                        </div>
-                                    );
-                                })}
-                            </div>
+                        {!isParsedMode || !activeTabData?.parsedContent ? (
+                            <textarea className="response-textarea" placeholder={`Paste AI response for tab ${activeTab} here...`} value={activeTabData?.rawContent || ''} onChange={(e) => handleRawContentChange(e.target.value, activeTab)} />
                         ) : (
-                            <textarea 
-                                className="response-textarea"
-                                placeholder={`Paste AI response for tab ${activeTab} here...`}
-                                value={activeTabData?.rawContent || ''}
-                                onChange={(e) => handleRawContentChange(e.target.value, activeTab)}
-                            />
+                            <div className="parsed-view-grid">
+                                <div className="parsed-view-left">
+                                    <ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown>
+                                    <ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown>
+                                    <CollapsibleSection title="Associated Files" isCollapsed={false} onToggle={() => {}}>
+                                        <ul className="associated-files-list">
+                                            {activeTabData.parsedContent.filesUpdated.map(file => (
+                                                <li key={file} onClick={() => {
+                                                    const parsedFile = activeTabData.parsedContent?.files.find(f => f.path === file);
+                                                    if (parsedFile && fileExistenceMap.get(file)) {
+                                                        handleSelectForDiff(parsedFile);
+                                                    }
+                                                }}>
+                                                    {fileExistenceMap.get(file) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
+                                                    <span>{file}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </CollapsibleSection>
+                                </div>
+                                <div className="parsed-view-right">
+                                    {diffTarget && originalFileContent !== null ? (
+                                        <DiffViewer original={originalFileContent} modified={diffTarget.content} filePath={diffTarget.path} onClose={() => setDiffTarget(null)} />
+                                    ) : diffTarget ? (
+                                        <div>Loading original file...</div>
+                                    ) : (
+                                        <div>Select a file to view diff.</div>
+                                    )}
+                                </div>
+                            </div>
                         )}
                     </div>
                 )}
