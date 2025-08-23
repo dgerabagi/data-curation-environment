@@ -1,27 +1,33 @@
 import "reflect-metadata";
-import { FSService } from "./fs.service";
 import { FlattenerService } from "./flattener.service";
 import { SelectionService } from "./selection.service";
 import { LoggerService } from "./logger.service";
 import { ActionService } from "./action.service";
-import { HistoryService } from "./history.service"; // Import HistoryService
-import { PromptService } from "./prompt.service"; // Import PromptService
+import { HistoryService } from "./history.service";
+import { PromptService } from "./prompt.service";
 import { API as GitAPI } from "../types/git";
+import { FileTreeService } from "./file-tree.service";
+import { FileOperationService } from "./file-operation.service";
+import { ContentExtractionService } from "./content-extraction.service";
+import { HighlightingService } from "./highlighting.service";
 
-// A simple container for services
 class ServiceContainer {
-    public fsService!: FSService;
+    public fileTreeService!: FileTreeService;
+    public fileOperationService = new FileOperationService();
+    public contentExtractionService = new ContentExtractionService();
+    public highlightingService = new HighlightingService();
+    
     public flattenerService = new FlattenerService();
     public selectionService = new SelectionService();
     public loggerService = LoggerService.getInstance();
     public actionService = new ActionService();
-    public historyService = new HistoryService(); // Instantiate HistoryService
-    public promptService = new PromptService(); // Instantiate PromptService
+    public historyService = new HistoryService();
+    public promptService = new PromptService();
     
     public initialize(gitApi?: GitAPI) {
         this.loggerService.log("Services initializing...");
-        this.fsService = new FSService(gitApi);
-        this.fsService.initializeWatcher();
+        this.fileTreeService = new FileTreeService(gitApi);
+        this.fileTreeService.initializeWatcher();
         this.loggerService.log("Services initialized successfully.");
     }
 }

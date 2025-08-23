@@ -1,4 +1,4 @@
-// Updated on: C78 (Change openParallelCopilot to trigger a command)
+// Updated on: C115 (Fix fsService reference)
 import * as vscode from 'vscode';
 import { Services } from '../services/services';
 import { serverIPCs } from '@/client/views';
@@ -80,7 +80,8 @@ export const commands = [
             const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
             if (serverIpc) {
                 Services.loggerService.log("Executing dce.refreshTree command.");
-                Services.fsService.handleWorkspaceFilesRequest(serverIpc, true);
+                // C115 Fix: Use fileTreeService instead of fsService
+                Services.fileTreeService.handleWorkspaceFilesRequest(serverIpc, true);
             } else {
                 Services.loggerService.warn("Could not refresh tree: serverIpc not found.");
             }
@@ -90,8 +91,6 @@ export const commands = [
         commandId: 'dce.openParallelCopilot',
         callback: () => {
             Services.loggerService.log("Executing dce.openParallelCopilot command to open WebviewPanel.");
-            // This command is now handled directly in extension.ts to manage the panel's lifecycle.
-            // We execute a proxy command that the extension will catch.
             vscode.commands.executeCommand('dce.showParallelCopilot');
         }
     }

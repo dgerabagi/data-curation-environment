@@ -1,25 +1,25 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-23T15:22:05.842Z
+  Date Generated: 2025-08-23T16:03:47.126Z
   ---
-  Total Files: 212
-  Total Lines: 19746
-  Total Characters: 939624
-  Approx. Tokens: 234986
+  Total Files: 216
+  Total Lines: 20202
+  Total Characters: 968735
+  Approx. Tokens: 242266
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A54. starry-night-readme.md (25577 tokens)
 2. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
-3. src\backend\services\fs.service.ts (9852 tokens)
+3. src\Artifacts\A55. DCE - FSService Refactoring Plan.md (10842 tokens)
 4. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
 5. src\client\views\context-chooser.view\view.tsx (5562 tokens)
-6. src\Artifacts\A0. DCE Master Artifact List.md (4698 tokens)
+6. src\Artifacts\A0. DCE Master Artifact List.md (4838 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4508 tokens)
 8. src\client\views\parallel-copilot.view\view.tsx (4315 tokens)
-9. src\backend\services\flattener.service.ts (3685 tokens)
-10. src\client\views\context-chooser.view\view.scss (3638 tokens)
+9. src\client\views\context-chooser.view\view.scss (3638 tokens)
+10. src\backend\services\prompt.service.ts (3481 tokens)
 
 <!-- Full File List -->
 1. .gitignore - Lines: 10 - Chars: 128 - Tokens: 32
@@ -29,7 +29,7 @@
 5. package.json - Lines: 138 - Chars: 4543 - Tokens: 1136
 6. public\copilot.svg - Lines: 5 - Chars: 445 - Tokens: 112
 7. public\spiral.svg - Lines: 8 - Chars: 459 - Tokens: 115
-8. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 254 - Chars: 18792 - Tokens: 4698
+8. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 262 - Chars: 19350 - Tokens: 4838
 9. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 10. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
 11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 147 - Chars: 13550 - Tokens: 3388
@@ -85,155 +85,159 @@
 61. src\Artifacts\A52. DCE - Interaction Schema Refinement.md - Lines: 60 - Chars: 3560 - Tokens: 890
 62. src\Artifacts\A53. DCE - Phase 2 - Token Count and Similarity Analysis.md - Lines: 50 - Chars: 3971 - Tokens: 993
 63. src\Artifacts\A54. starry-night-readme.md - Lines: 1824 - Chars: 102305 - Tokens: 25577
-64. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
-65. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
-66. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
-67. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
-68. src\backend\commands\commands.ts - Lines: 98 - Chars: 4333 - Tokens: 1084
-69. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
-70. src\backend\services\action.service.ts - Lines: 73 - Chars: 2471 - Tokens: 618
-71. src\backend\services\flattener.service.ts - Lines: 327 - Chars: 14740 - Tokens: 3685
-72. src\backend\services\fs.service.ts - Lines: 810 - Chars: 39407 - Tokens: 9852
-73. src\backend\services\history.service.ts - Lines: 103 - Chars: 3981 - Tokens: 996
-74. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-75. src\backend\services\prompt.service.ts - Lines: 113 - Chars: 13923 - Tokens: 3481
-76. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
-77. src\backend\services\services.ts - Lines: 29 - Chars: 1294 - Tokens: 324
-78. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
-79. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
-80. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
-81. src\client\components\DiffViewer.tsx - Lines: 60 - Chars: 2549 - Tokens: 638
-82. src\client\components\file-tree\FileTree.tsx - Lines: 262 - Chars: 11897 - Tokens: 2975
-83. src\client\components\file-tree\FileTree.utils.ts - Lines: 189 - Chars: 7284 - Tokens: 1821
-84. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13099 - Tokens: 3275
-85. src\client\components\tree-view\TreeView.tsx - Lines: 394 - Chars: 18029 - Tokens: 4508
-86. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
-87. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
-88. src\client\utils\response-parser.ts - Lines: 84 - Chars: 3342 - Tokens: 836
-89. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-90. src\client\views\context-chooser.view\on-message.ts - Lines: 143 - Chars: 6146 - Tokens: 1537
-91. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
-92. src\client\views\context-chooser.view\view.tsx - Lines: 435 - Chars: 22245 - Tokens: 5562
-93. src\client\views\index.ts - Lines: 35 - Chars: 1714 - Tokens: 429
-94. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-95. src\client\views\parallel-copilot.view\on-message.ts - Lines: 41 - Chars: 2019 - Tokens: 505
-96. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 43 - Chars: 1890 - Tokens: 473
-97. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
-98. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
-99. src\client\views\parallel-copilot.view\view.scss - Lines: 368 - Chars: 8253 - Tokens: 2064
-100. src\client\views\parallel-copilot.view\view.tsx - Lines: 333 - Chars: 17258 - Tokens: 4315
-101. src\common\ipc\channels.enum.ts - Lines: 64 - Chars: 3422 - Tokens: 856
-102. src\common\ipc\channels.type.ts - Lines: 57 - Chars: 4453 - Tokens: 1114
-103. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
-104. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-105. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-106. src\common\types\file-node.ts - Lines: 16 - Chars: 567 - Tokens: 142
-107. src\common\types\pcpp.types.ts - Lines: 13 - Chars: 357 - Tokens: 90
-108. src\common\types\vscode-webview.d.ts - Lines: 13 - Chars: 357 - Tokens: 90
-109. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
-110. src\common\utils\view-html.ts - Lines: 26 - Chars: 971 - Tokens: 243
-111. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
-112. src\extension.ts - Lines: 159 - Chars: 6869 - Tokens: 1718
-113. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
-114. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
-115. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
-116. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
-117. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
-118. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
-119. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
-120. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
-121. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
-122. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
-123. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
-124. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
-125. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
-126. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
-127. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
-128. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
-129. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
-130. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
-131. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
-132. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
-133. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
-134. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
-135. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
-136. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
-137. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
-138. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
-139. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
-140. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
-141. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
-142. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
-143. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
-144. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
-145. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
-146. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
-147. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
-148. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
-149. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
-150. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
-151. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
-152. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
-153. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
-154. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
-155. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
-156. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
-157. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
-158. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
-159. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
-160. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
-161. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
-162. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
-163. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
-164. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
-165. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
-166. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
-167. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
-168. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
-169. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
-170. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
-171. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
-172. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
-173. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
-174. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
-175. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
-176. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
-177. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
-178. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
-179. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
-180. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-181. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
-182. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
-183. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
-184. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-185. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
-186. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
-187. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
-188. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-189. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
-190. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
-191. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
-192. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
-193. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
-194. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
-195. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
-196. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-197. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
-198. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
-199. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
-200. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
-201. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
-202. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
-203. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
-204. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
-205. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
-206. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
-207. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
-208. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
-209. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
-210. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
-211. tsconfig.json - Lines: 19 - Chars: 478 - Tokens: 120
-212. webpack.config.js - Lines: 90 - Chars: 2440 - Tokens: 610
+64. src\Artifacts\A55. DCE - FSService Refactoring Plan.md - Lines: 887 - Chars: 43367 - Tokens: 10842
+65. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
+66. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
+67. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
+68. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
+69. src\backend\commands\commands.ts - Lines: 98 - Chars: 4333 - Tokens: 1084
+70. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
+71. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
+72. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
+73. src\backend\services\file-operation.service.ts - Lines: 226 - Chars: 10503 - Tokens: 2626
+74. src\backend\services\file-tree.service.ts - Lines: 204 - Chars: 11188 - Tokens: 2797
+75. src\backend\services\flattener.service.ts - Lines: 210 - Chars: 11271 - Tokens: 2818
+76. src\backend\services\highlighting.service.ts - Lines: 55 - Chars: 2721 - Tokens: 681
+77. src\backend\services\history.service.ts - Lines: 103 - Chars: 3981 - Tokens: 996
+78. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
+79. src\backend\services\prompt.service.ts - Lines: 113 - Chars: 13923 - Tokens: 3481
+80. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
+81. src\backend\services\services.ts - Lines: 35 - Chars: 1597 - Tokens: 400
+82. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
+83. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
+84. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
+85. src\client\components\DiffViewer.tsx - Lines: 60 - Chars: 2549 - Tokens: 638
+86. src\client\components\file-tree\FileTree.tsx - Lines: 262 - Chars: 11897 - Tokens: 2975
+87. src\client\components\file-tree\FileTree.utils.ts - Lines: 189 - Chars: 7284 - Tokens: 1821
+88. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13099 - Tokens: 3275
+89. src\client\components\tree-view\TreeView.tsx - Lines: 394 - Chars: 18029 - Tokens: 4508
+90. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
+91. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
+92. src\client\utils\response-parser.ts - Lines: 84 - Chars: 3342 - Tokens: 836
+93. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
+94. src\client\views\context-chooser.view\on-message.ts - Lines: 53 - Chars: 4853 - Tokens: 1214
+95. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
+96. src\client\views\context-chooser.view\view.tsx - Lines: 435 - Chars: 22245 - Tokens: 5562
+97. src\client\views\index.ts - Lines: 35 - Chars: 1714 - Tokens: 429
+98. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
+99. src\client\views\parallel-copilot.view\on-message.ts - Lines: 39 - Chars: 1836 - Tokens: 459
+100. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 43 - Chars: 1890 - Tokens: 473
+101. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
+102. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
+103. src\client\views\parallel-copilot.view\view.scss - Lines: 368 - Chars: 8253 - Tokens: 2064
+104. src\client\views\parallel-copilot.view\view.tsx - Lines: 333 - Chars: 17258 - Tokens: 4315
+105. src\common\ipc\channels.enum.ts - Lines: 64 - Chars: 3422 - Tokens: 856
+106. src\common\ipc\channels.type.ts - Lines: 57 - Chars: 4453 - Tokens: 1114
+107. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
+108. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+109. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
+110. src\common\types\file-node.ts - Lines: 16 - Chars: 567 - Tokens: 142
+111. src\common\types\pcpp.types.ts - Lines: 13 - Chars: 357 - Tokens: 90
+112. src\common\types\vscode-webview.d.ts - Lines: 13 - Chars: 357 - Tokens: 90
+113. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
+114. src\common\utils\view-html.ts - Lines: 26 - Chars: 971 - Tokens: 243
+115. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
+116. src\extension.ts - Lines: 113 - Chars: 4651 - Tokens: 1163
+117. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
+118. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
+119. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
+120. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
+121. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
+122. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
+123. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
+124. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
+125. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
+126. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
+127. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
+128. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
+129. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
+130. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
+131. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
+132. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
+133. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
+134. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
+135. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
+136. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
+137. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
+138. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
+139. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
+140. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
+141. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
+142. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
+143. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
+144. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
+145. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
+146. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
+147. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
+148. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
+149. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
+150. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
+151. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
+152. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
+153. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
+154. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
+155. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
+156. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
+157. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
+158. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
+159. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
+160. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
+161. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
+162. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
+163. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
+164. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
+165. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
+166. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
+167. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
+168. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
+169. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
+170. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
+171. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
+172. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
+173. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
+174. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
+175. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
+176. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
+177. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
+178. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
+179. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
+180. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
+181. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
+182. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
+183. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
+184. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+185. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
+186. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
+187. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
+188. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+189. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
+190. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
+191. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
+192. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+193. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
+194. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
+195. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
+196. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
+197. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
+198. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
+199. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
+200. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+201. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
+202. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
+203. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
+204. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
+205. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
+206. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
+207. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
+208. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
+209. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
+210. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
+211. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
+212. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
+213. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
+214. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
+215. tsconfig.json - Lines: 19 - Chars: 478 - Tokens: 120
+216. webpack.config.js - Lines: 90 - Chars: 2440 - Tokens: 610
 
 <file path=".gitignore">
 node_modules
@@ -638,7 +642,7 @@ SOFTWARE.
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C111 (Add A53 for Token Count & Similarity Analysis)
+# Updated on: C113 (Add A55 for FSService Refactoring Plan)
 
 ## 1. Purpose
 
@@ -879,6 +883,14 @@ SOFTWARE.
 ### A53. DCE - Phase 2 - Token Count and Similarity Analysis
 - **Description:** Details the plan to implement token counting for raw and parsed responses, and to calculate a similarity score between AI-generated files and their workspace originals.
 - **Tags:** feature plan, phase 2, token count, similarity, metrics, ui, ux
+
+### A54. starry-night Readme
+- **Description:** A copy of the readme.md file for the `@wooorm/starry-night` syntax highlighting library, providing a reference for available languages and API usage.
+- **Tags:** documentation, library, syntax highlighting, starry-night
+
+### A55. DCE - FSService Refactoring Plan
+- **Description:** Outlines a strategic plan to refactor the monolithic `FSService` into smaller, more focused services to improve modularity, maintainability, and reduce token count.
+- **Tags:** refactor, architecture, technical debt, services
 
 ## II. Standalone Utilities & Guides
 
@@ -6136,6 +6148,896 @@ All other files [MIT][file-license] © [Titus Wormer][wooorm]
 [wooorm]: https://wooorm.com
 </file>
 
+<file path="src/Artifacts/A55. DCE - FSService Refactoring Plan.md">
+# Artifact A55: DCE - FSService Refactoring Plan
+# Date Created: C113
+# Author: AI Model & Curator
+# Updated on: C114 (Mark refactor as complete)
+
+- **Key/Value for A0:**
+- **Description:** Outlines a strategic plan to refactor the monolithic `FSService` into smaller, more focused services to improve modularity, maintainability, and reduce token count.
+- **Tags:** refactor, architecture, technical debt, services
+
+## 1. Problem Statement
+
+The `FSService` has become a "god object," handling a wide range of responsibilities beyond basic file system interactions and now violates the Single Responsibility Principle. Its large size (over 800 lines) makes it difficult to maintain, debug, and reason about. The service currently manages at least four distinct areas of concern:
+1.  **Workspace State:** Building, caching, and watching the file tree.
+2.  **File Operations:** Handling requests to create, move, delete, and modify files.
+3.  **Content Virtualization:** Processing special file types like PDF, Word, and Excel into text.
+4.  **Syntax Highlighting:** Managing the `starry-night` library and processing highlighting requests.
+
+## 2. Refactoring Plan (Completed in C114)
+
+The `FSService` has been successfully broken down into four new, more focused services. This has improved code organization, reduced the token count of individual files, and made the system more modular and maintainable.
+
+### 2.1. New Service Structure
+
+#### 1. `FileTreeService`
+-   **Responsibility:** All "read" operations related to the workspace structure. This service is the source of truth for what the workspace looks like.
+-   **Methods moved here:**
+    -   `handleWorkspaceFilesRequest`
+    -   `buildTreeFromTraversal`, `_traverseDirectory`, `_aggregateStats`
+    -   `getFileStats`
+    -   `getGitStatusMap`, `getProblemCountsMap`
+    -   `initializeWatcher`, `triggerFullRefresh`, `triggerDiagnosticsUpdate`
+    -   `fileTreeCache` property
+
+#### 2. `FileOperationService`
+-   **Responsibility:** All "write" or direct modification operations on the file system.
+-   **Methods moved here:**
+    -   `handleNewFileRequest`
+    -   `handleNewFolderRequest`
+    -   `handleFileRenameRequest`
+    -   `handleMoveFileRequest`
+    -   `handleFileDeleteRequest`, `handleBatchFileDeleteRequest`
+    -   `handleCopyFileRequest`, `handleCopyFileFromUri`, `handleAddFileFromBuffer`
+    -   `handleOpenFileRequest`
+    -   `handleRevealInExplorerRequest`
+    -   `handleCopyPathRequest`
+
+#### 3. `ContentExtractionService`
+-   **Responsibility:** Handling the on-demand parsing and virtualization of special, non-text file formats.
+-   **Methods moved here:**
+    -   `handlePdfToTextRequest`, `getVirtualPdfContent`, `pdfTextCache`
+    -   `handleExcelToTextRequest`, `getVirtualExcelContent`, `excelMarkdownCache`
+    -   `handleWordToTextRequest`, `getVirtualWordContent`, `wordTextCache`
+    -   `_sheetToMarkdown` (private helper)
+
+#### 4. `HighlightingService`
+-   **Responsibility:** All logic related to syntax highlighting.
+-   **Methods moved here:**
+    -   `initializeStarryNight`
+    -   `handleSyntaxHighlightRequest`
+    -   `starryNight` property
+
+### 2.2. Integration
+
+-   The main `services.ts` container was updated to instantiate all four new services.
+-   The `on-message.ts` handlers were updated to call the correct methods on the new, more specific services.
+-   The original `fs.service.ts` file has been deleted.
+
+## 3. Benefits Achieved
+
+-   **Reduced Complexity:** Each service is now significantly smaller and easier to understand.
+-   **Improved Maintainability:** Bugs or feature requests will be easier to implement in the correct, isolated service.
+-   **Clear Separation of Concerns:** The architecture now follows best practices.
+-   **Lower Token Count:** Splitting the large file into four smaller ones makes each file more manageable.
+
+<Original fs.service.ts>
+// Updated on: C113 (Fix starry-night grammar import paths)
+import * as vscode from "vscode";
+import * as path from "path";
+import * as fs from "fs/promises";
+import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
+import { ServerToClientChannel } from "@/common/ipc/channels.enum";
+import { FileNode } from "@/common/types/file-node";
+import { Services } from "./services";
+import { serverIPCs } from "@/client/views";
+import { VIEW_TYPES } from "@/common/view-types";
+import { API as GitAPI, Status } from "../types/git";
+import { ProblemCountsMap } from "@/common/ipc/channels.type";
+import { Action, MoveActionPayload } from "./action.service";
+// @ts-ignore - This is a workaround for a bug in pdf-parse that causes an ENOENT error in VS Code extensions.
+import pdf from 'pdf-parse/lib/pdf-parse.js';
+import * as XLSX from 'xlsx';
+import mammoth from 'mammoth';
+import { createStarryNight, common } from '@wooorm/starry-night';
+import sourceTsx from '@wooorm/starry-night/source.tsx';
+import sourceJs from '@wooorm/starry-night/source.js';
+// Removed incorrect source.js.jsx import
+import sourceTs from '@wooorm/starry-night/source.ts';
+import sourceCss from '@wooorm/starry-night/source.css';
+// Corrected scss import path
+import sourceScss from '@wooorm/starry-night/source.css.scss';
+import textHtml from '@wooorm/starry-night/text.html.basic';
+import { toHtml } from 'hast-util-to-html';
+
+
+const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
+const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
+const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
+const EXCLUSION_PATTERNS = ['node_modules', 'dist', 'out', '.git', 'dce_cache', '.vscode'];
+
+// Helper to normalize paths to use forward slashes, which is consistent in webviews
+const normalizePath = (p: string) => p.replace(/\\/g, '/');
+
+export class FSService {
+    private fileTreeCache: FileNode[] | null = null;
+    private watcher: vscode.FileSystemWatcher | null = null;
+    private refreshDebounceTimer: NodeJS.Timeout | null = null;
+    private diagnosticsDebounceTimer: NodeJS.Timeout | null = null;
+    private gitApi?: GitAPI;
+    private filesToIgnoreForAutoAdd: Set<string> = new Set();
+    private pdfTextCache = new Map<string, { text: string; tokenCount: number }>();
+    private excelMarkdownCache = new Map<string, { markdown: string; tokenCount: number }>();
+    private wordTextCache = new Map<string, { text: string; tokenCount: number }>();
+    private starryNight: any = null;
+
+    constructor(gitApi?: GitAPI) {
+        this.gitApi = gitApi;
+        if (this.gitApi) {
+            Services.loggerService.log(`FSService constructed with Git API. Found ${this.gitApi.repositories.length} repositories.`);
+            this.gitApi.onDidOpenRepository(() => this.triggerFullRefresh());
+            this.gitApi.repositories.forEach(repo => {
+                repo.state.onDidChange(() => {
+                    Services.loggerService.log(`Repo state changed for ${path.basename(repo.rootUri.fsPath)}`);
+                    this.triggerFullRefresh();
+                });
+            });
+        }
+        this.initializeStarryNight();
+    }
+
+    private async initializeStarryNight() {
+        try {
+            // C113: Corrected grammars list
+            const grammars = [...common, sourceTsx, sourceJs, sourceTs, sourceCss, sourceScss, textHtml];
+            this.starryNight = await createStarryNight(grammars);
+            Services.loggerService.log('Starry Night syntax highlighter initialized.');
+        } catch (error) {
+            Services.loggerService.error(`Failed to initialize Starry Night: ${error}`);
+        }
+    }
+
+    public async handleSyntaxHighlightRequest(code: string, lang: string, id: string, serverIpc: ServerPostMessageManager) {
+        Services.loggerService.log(`[SYNTAX-HIGHLIGHT] Received request for lang: ${lang}, id: ${id}`);
+        if (!this.starryNight) {
+            Services.loggerService.error('Starry Night not initialized, cannot highlight.');
+            serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml: `<pre><code>${code}</code></pre>`, id });
+            return;
+        }
+
+        const scope = this.starryNight.flagToScope(lang);
+        if (!scope) {
+            Services.loggerService.warn(`[WARN] No Starry Night scope found for language: ${lang}`);
+            serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml: `<pre><code>${code}</code></pre>`, id });
+            return;
+        }
+
+        try {
+            const tree = this.starryNight.highlight(code, scope);
+            const highlightedHtml = toHtml(tree);
+            serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml, id });
+        } catch (error) {
+            Services.loggerService.error(`Starry Night highlighting failed for lang ${lang}: ${error}`);
+            serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml: `<pre><code>${code}</code></pre>`, id });
+        }
+    }
+
+    private triggerFullRefresh() {
+        if (this.refreshDebounceTimer) {
+            clearTimeout(this.refreshDebounceTimer);
+        }
+        this.refreshDebounceTimer = setTimeout(() => {
+            Services.loggerService.log(`Git state change or file event detected. Invalidating cache and triggering full refresh.`);
+            this.fileTreeCache = null;
+            
+            const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
+            if (serverIpc) {
+                serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, { reason: 'fileOp' });
+            }
+        }, 500); // Debounce for 500ms
+    }
+
+    private triggerDiagnosticsUpdate() {
+        if (this.diagnosticsDebounceTimer) {
+            clearTimeout(this.diagnosticsDebounceTimer);
+        }
+        this.diagnosticsDebounceTimer = setTimeout(() => {
+            Services.loggerService.log("Diagnostics changed, triggering lightweight update.");
+            const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
+            if (serverIpc) {
+                const problemMap = this.getProblemCountsMap();
+                serverIpc.sendToClient(ServerToClientChannel.UpdateProblemCounts, { problemMap });
+            }
+        }, 750);
+    }
+
+    public initializeWatcher() {
+        if (this.watcher) {
+            this.watcher.dispose();
+        }
+        
+        this.watcher = vscode.workspace.createFileSystemWatcher('**/*');
+        Services.loggerService.log("File system watcher initialized.");
+
+        const onFileChange = (uri: vscode.Uri) => {
+            const normalizedPath = normalizePath(uri.fsPath);
+            if (EXCLUSION_PATTERNS.some(pattern => normalizedPath.includes(`/${pattern}/`))) {
+                return;
+            }
+            this.triggerFullRefresh();
+        };
+
+        const onFileCreate = async (uri: vscode.Uri) => {
+            const normalizedPath = normalizePath(uri.fsPath);
+            const autoAddEnabled = Services.selectionService.getAutoAddState();
+
+            // Bug Fix: Check if this file was part of a recent move and should be ignored
+            if (this.filesToIgnoreForAutoAdd.has(normalizedPath)) {
+                this.filesToIgnoreForAutoAdd.delete(normalizedPath);
+                Services.loggerService.log(`Ignoring auto-add for recently moved file: ${normalizedPath}`);
+            } else if (autoAddEnabled) {
+                Services.loggerService.log(`Auto-add enabled. Adding new file to selection: ${uri.fsPath}`);
+                const currentSelection = await Services.selectionService.getLastSelection();
+                const newSelection = [...new Set([...currentSelection, normalizedPath])];
+                await Services.selectionService.saveCurrentSelection(newSelection);
+            }
+            onFileChange(uri);
+        };
+
+        this.watcher.onDidChange(onFileChange);
+        this.watcher.onDidCreate(onFileCreate);
+        this.watcher.onDidDelete(onFileChange);
+
+        vscode.languages.onDidChangeDiagnostics(() => {
+            this.triggerDiagnosticsUpdate();
+        });
+    }
+
+    private async getFileStats(filePath: string): Promise<{ tokenCount: number, sizeInBytes: number, isImage: boolean, extension: string, isPdf: boolean, isExcel: boolean, isWordDoc: boolean }> {
+        const extension = path.extname(filePath).toLowerCase();
+        try {
+            const stats = await fs.stat(filePath);
+            const isImage = IMAGE_EXTENSIONS.has(extension);
+            const isPdf = extension === '.pdf';
+            const isExcel = EXCEL_EXTENSIONS.has(extension);
+            const isWordDoc = WORD_EXTENSIONS.has(extension);
+            
+            if (isImage) {
+                return { tokenCount: 0, sizeInBytes: stats.size, isImage, extension, isPdf: false, isExcel: false, isWordDoc: false };
+            }
+
+            if (isPdf) {
+                 const cached = this.pdfTextCache.get(filePath);
+                 return { tokenCount: cached?.tokenCount || 0, sizeInBytes: stats.size, isImage: false, extension, isPdf: true, isExcel: false, isWordDoc: false };
+            }
+            
+            if (isExcel) {
+                const cached = this.excelMarkdownCache.get(filePath);
+                return { tokenCount: cached?.tokenCount || 0, sizeInBytes: stats.size, isImage: false, extension, isPdf: false, isExcel: true, isWordDoc: false };
+            }
+
+            if (isWordDoc) {
+                const cached = this.wordTextCache.get(filePath);
+                return { tokenCount: cached?.tokenCount || 0, sizeInBytes: stats.size, isImage: false, extension, isPdf: false, isExcel: false, isWordDoc: true };
+            }
+
+            if (stats.size > 5_000_000) {
+                Services.loggerService.warn(`Skipping token count for large file: ${filePath} (${stats.size} bytes)`);
+                return { tokenCount: 0, sizeInBytes: stats.size, isImage: false, extension, isPdf: false, isExcel: false, isWordDoc: false };
+            }
+            
+            const content = await fs.readFile(filePath, 'utf-8');
+            const tokenCount = Math.ceil(content.length / 4);
+            return { tokenCount, sizeInBytes: stats.size, isImage: false, extension, isPdf: false, isExcel: false, isWordDoc: false };
+
+        } catch (error: any) {
+            Services.loggerService.warn(`Could not get stats for ${filePath}: ${error.message}`);
+            return { tokenCount: 0, sizeInBytes: 0, isImage: false, extension, isPdf: false, isExcel: false, isWordDoc: false };
+        }
+    }
+
+    public async handleWorkspaceFilesRequest(serverIpc: ServerPostMessageManager, forceRefresh: boolean = false) {
+        if (!forceRefresh && this.fileTreeCache) {
+            Services.loggerService.log("Serving file tree from cache.");
+            serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: this.fileTreeCache });
+            return;
+        }
+
+        Services.loggerService.log("Building file tree from scratch.");
+        const workspaceFolders = vscode.workspace.workspaceFolders;
+        if (!workspaceFolders || workspaceFolders.length === 0) {
+            Services.loggerService.warn("No workspace folder open. Sending empty file list.");
+            serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: [] });
+            return;
+        }
+        
+        const rootUri = workspaceFolders[0].uri;
+        const fileTree = await this.buildTreeFromTraversal(rootUri);
+
+        this.fileTreeCache = [fileTree];
+        Services.loggerService.log("Sending file tree to client and caching result.");
+        serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: this.fileTreeCache });
+    }
+
+    private getGitStatusMap(): Map<string, string> {
+        const statusMap = new Map<string, string>();
+        if (!this.gitApi || this.gitApi.repositories.length === 0) {
+            Services.loggerService.warn("Git API not available or no repositories found.");
+            return statusMap;
+        }
+        
+        const repo = this.gitApi.repositories[0];
+        Services.loggerService.log(`Querying Git repo: ${repo.rootUri.fsPath}`);
+
+        const getStatusChar = (status: Status): string => {
+            switch (status) {
+                case Status.INDEX_ADDED: return 'A';
+                case Status.MODIFIED: return 'M';
+                case Status.DELETED: return 'D';
+                case Status.UNTRACKED: return 'U';
+                case Status.IGNORED: return 'I';
+                case Status.CONFLICT: return 'C';
+                default: return '';
+            }
+        };
+        
+        const changes = [
+            ...repo.state.workingTreeChanges, 
+            ...repo.state.indexChanges, 
+            ...repo.state.mergeChanges
+        ];
+        
+        Services.loggerService.log(`Found ${changes.length} changes in working tree/index/merge.`);
+        changes.forEach(change => {
+            const normPath = normalizePath(change.uri.fsPath);
+            const statusChar = getStatusChar(change.status);
+            if (statusChar) {
+                statusMap.set(normPath, statusChar);
+            }
+        });
+        
+        return statusMap;
+    }
+
+    private getProblemCountsMap(): ProblemCountsMap {
+        const problemMap: ProblemCountsMap = {};
+        const diagnostics = vscode.languages.getDiagnostics();
+
+        for (const [uri, diagnosticArr] of diagnostics) {
+            const path = normalizePath(uri.fsPath);
+            let counts = problemMap[path];
+            if (!counts) {
+                counts = { error: 0, warning: 0 };
+                problemMap[path] = counts;
+            }
+            for (const diag of diagnosticArr) {
+                if (diag.severity === vscode.DiagnosticSeverity.Error) {
+                    counts.error++;
+                } else if (diag.severity === vscode.DiagnosticSeverity.Warning) {
+                    counts.warning++;
+                }
+            }
+        }
+        return problemMap;
+    }
+
+    private async buildTreeFromTraversal(rootUri: vscode.Uri): Promise<FileNode> {
+        const rootPath = rootUri.fsPath;
+        const rootName = path.basename(rootPath);
+        Services.loggerService.log(`Starting traversal from root: ${rootName}`);
+
+        const gitStatusMap = this.getGitStatusMap();
+        Services.loggerService.log(`Built Git status map with ${gitStatusMap.size} entries.`);
+        const problemCountsMap = this.getProblemCountsMap();
+        Services.loggerService.log(`Built problem counts map with ${Object.keys(problemCountsMap).length} entries.`);
+
+        const rootNode: FileNode = {
+            name: rootName,
+            absolutePath: normalizePath(rootPath),
+            children: [],
+            tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false,
+            gitStatus: gitStatusMap.get(normalizePath(rootPath)),
+            problemCounts: problemCountsMap[normalizePath(rootPath)]
+        };
+
+        rootNode.children = await this._traverseDirectory(rootUri, gitStatusMap, problemCountsMap);
+        this._aggregateStats(rootNode);
+
+        return rootNode;
+    }
+    
+    private async _traverseDirectory(dirUri: vscode.Uri, gitStatusMap: Map<string, string>, problemCountsMap: ProblemCountsMap): Promise<FileNode[]> {
+        const children: FileNode[] = [];
+        try {
+            const entries = await vscode.workspace.fs.readDirectory(dirUri);
+            for (const [name, type] of entries) {
+                if (EXCLUSION_PATTERNS.includes(name)) {
+                    continue;
+                }
+
+                const childUri = vscode.Uri.joinPath(dirUri, name);
+                const childPath = normalizePath(childUri.fsPath);
+
+                if (type === vscode.FileType.Directory) {
+                    const dirNode: FileNode = {
+                        name,
+                        absolutePath: childPath,
+                        children: await this._traverseDirectory(childUri, gitStatusMap, problemCountsMap),
+                        tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false,
+                        gitStatus: gitStatusMap.get(childPath),
+                        problemCounts: problemCountsMap[childPath]
+                    };
+                    this._aggregateStats(dirNode);
+                    children.push(dirNode);
+                } else if (type === vscode.FileType.File) {
+                    const stats = await this.getFileStats(childPath);
+                    const gitStatus = gitStatusMap.get(childPath);
+                    if (gitStatus) {
+                        Services.loggerService.log(`[Git Status] Found status '${gitStatus}' for ${childPath}`);
+                    }
+                    const fileNode: FileNode = {
+                        name,
+                        absolutePath: childPath,
+                        ...stats,
+                        fileCount: 1,
+                        gitStatus: gitStatus,
+                        problemCounts: problemCountsMap[childPath]
+                    };
+                    children.push(fileNode);
+                }
+            }
+        } catch (error: any) {
+            Services.loggerService.error(`Error traversing directory ${dirUri.fsPath}: ${error.message}`);
+        }
+
+        children.sort((a, b) => {
+            const aIsFolder = !!a.children;
+            const bIsFolder = !!b.children;
+            if (aIsFolder !== bIsFolder) return aIsFolder ? -1 : 1;
+            return a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' });
+        });
+
+        return children;
+    }
+
+    private _aggregateStats(node: FileNode): void {
+        if (!node.children) {
+            node.fileCount = 1;
+            return;
+        }
+        
+        let totalTokens = 0;
+        let totalFiles = 0;
+        let totalBytes = 0;
+        let totalErrors = node.problemCounts?.error || 0;
+        let totalWarnings = node.problemCounts?.warning || 0;
+
+        for (const child of node.children) {
+            totalTokens += child.tokenCount;
+            totalFiles += child.fileCount;
+            totalBytes += child.sizeInBytes;
+            if(child.problemCounts) {
+                totalErrors += child.problemCounts.error;
+                totalWarnings += child.problemCounts.warning;
+            }
+        }
+        node.tokenCount = totalTokens;
+        node.fileCount = totalFiles;
+        node.sizeInBytes = totalBytes;
+        if(totalErrors > 0 || totalWarnings > 0) {
+            node.problemCounts = { error: totalErrors, warning: totalWarnings };
+        }
+    }
+
+    public getVirtualPdfContent(filePath: string) {
+        return this.pdfTextCache.get(filePath);
+    }
+
+    public getVirtualExcelContent(filePath: string) {
+        return this.excelMarkdownCache.get(filePath);
+    }
+
+    public getVirtualWordContent(filePath: string) {
+        return this.wordTextCache.get(filePath);
+    }
+
+    // --- File Operations ---
+
+    public async handleFileContentRequest(filePath: string, serverIpc: ServerPostMessageManager) {
+        Services.loggerService.log(`handleFileContentRequest initiated for: ${filePath}`);
+        try {
+            const uri = vscode.Uri.file(filePath);
+            const contentBuffer = await vscode.workspace.fs.readFile(uri);
+            const content = Buffer.from(contentBuffer).toString('utf-8');
+            Services.loggerService.log(`Successfully read content for: ${filePath}. Sending to client.`);
+            serverIpc.sendToClient(ServerToClientChannel.SendFileContent, { path: filePath, content });
+        } catch (error) {
+            Services.loggerService.error(`Failed to read file content for ${filePath}: ${error}`);
+            serverIpc.sendToClient(ServerToClientChannel.SendFileContent, { path: filePath, content: null });
+        }
+    }
+
+    public async handleFileExistenceRequest(paths: string[], serverIpc: ServerPostMessageManager) {
+        Services.loggerService.log(`[File Existence] Received request to check paths: ${JSON.stringify(paths)}`);
+        const workspaceFolders = vscode.workspace.workspaceFolders;
+        if (!workspaceFolders || workspaceFolders.length === 0) {
+            Services.loggerService.error("[File Existence] Cannot check for files, no workspace folder is open.");
+            serverIpc.sendToClient(ServerToClientChannel.SendFileExistence, { existenceMap: {} });
+            return;
+        }
+        const rootPath = workspaceFolders[0].uri.fsPath;
+        Services.loggerService.log(`[File Existence] Using workspace root: ${rootPath}`);
+    
+        const existenceMap: { [path: string]: boolean } = {};
+        const checks = paths.map(async (p_raw) => {
+            const p = p_raw.trim().replace(/^[`"']|[`"']$/g, '');
+            if (!p) return;
+    
+            let absolutePath = path.resolve(rootPath, p);
+            let normalizedPath = normalizePath(absolutePath);
+    
+            try {
+                await vscode.workspace.fs.stat(vscode.Uri.file(normalizedPath));
+                existenceMap[p_raw] = true;
+                Services.loggerService.log(`[File Existence] SUCCESS: Found file at '${normalizedPath}'`);
+            } catch {
+                // Fallback for documentation artifacts
+                if (/^A\d+/.test(p)) {
+                    const artifactPath = path.resolve(rootPath, 'src/Artifacts', p);
+                    const normalizedArtifactPath = normalizePath(artifactPath);
+                    try {
+                        await vscode.workspace.fs.stat(vscode.Uri.file(normalizedArtifactPath));
+                        existenceMap[p_raw] = true;
+                        Services.loggerService.log(`[File Existence] SUCCESS (Fallback): Found doc artifact at '${normalizedArtifactPath}'`);
+                        return;
+                    } catch {}
+                }
+                existenceMap[p_raw] = false;
+                Services.loggerService.warn(`[File Existence] FAILED: Could not find file at '${normalizedPath}'`);
+            }
+        });
+        await Promise.all(checks);
+        serverIpc.sendToClient(ServerToClientChannel.SendFileExistence, { existenceMap });
+    }
+
+    private async _findAvailableCopyName(destinationPath: string): Promise<string> {
+        try {
+            await vscode.workspace.fs.stat(vscode.Uri.file(destinationPath));
+        } catch (error) {
+            // If stat fails, the file doesn't exist, so the original name is available.
+            return destinationPath;
+        }
+    
+        const dir = path.dirname(destinationPath);
+        const ext = path.extname(destinationPath);
+        const baseName = path.basename(destinationPath, ext);
+    
+        // First try with "-copy"
+        let copyNum = 1;
+        let nextPath = path.join(dir, `${baseName}-copy${ext}`);
+        
+        while (true) {
+            try {
+                await vscode.workspace.fs.stat(vscode.Uri.file(nextPath));
+                // File exists, increment and try again
+                copyNum++;
+                nextPath = path.join(dir, `${baseName}-copy-${copyNum}${ext}`);
+            } catch (error) {
+                // File does not exist, we found an available name
+                return nextPath;
+            }
+        }
+    }
+
+    public async handleCopyFileRequest(sourcePath: string, destinationDir: string) {
+        try {
+            const sourceName = path.basename(sourcePath);
+            const initialDestinationPath = path.join(destinationDir, sourceName);
+            
+            const finalDestinationPath = await this._findAvailableCopyName(initialDestinationPath);
+
+            const sourceUri = vscode.Uri.file(sourcePath);
+            const destinationUri = vscode.Uri.file(finalDestinationPath);
+
+            Services.loggerService.log(`Copying from ${sourceUri.fsPath} to ${destinationUri.fsPath}`);
+            await vscode.workspace.fs.copy(sourceUri, destinationUri, { overwrite: false });
+            Services.loggerService.log(`Successfully copied file.`);
+        } catch (error: any) {
+            const errorMessage = `Failed to copy file: ${error.message}`;
+            vscode.window.showErrorMessage(errorMessage);
+            Services.loggerService.error(errorMessage);
+        }
+    }
+
+    public async handleCopyFileFromUri(sourceUriString: string, targetDir: string) {
+        try {
+            const sourceUri = vscode.Uri.parse(sourceUriString);
+            const fileName = path.basename(sourceUri.fsPath);
+            const targetUri = vscode.Uri.file(path.join(targetDir, fileName));
+
+            Services.loggerService.log(`Copying file from URI: ${sourceUri.toString()} to ${targetUri.toString()}`);
+            await vscode.workspace.fs.copy(sourceUri, targetUri);
+            Services.loggerService.log(`Successfully copied file from URI.`);
+        } catch (error: any) {
+            const errorMessage = `Failed to copy file from URI: ${error.message}`;
+            vscode.window.showErrorMessage(errorMessage);
+            Services.loggerService.error(errorMessage);
+        }
+    }
+
+    public async handleAddFileFromBuffer(targetPath: string, data: Uint8Array) {
+        try {
+            const uri = vscode.Uri.file(targetPath);
+            await vscode.workspace.fs.writeFile(uri, data);
+            Services.loggerService.log(`Successfully added file from buffer to ${targetPath}`);
+        } catch (error: any) {
+            const errorMessage = `Failed to add file from buffer: ${error.message}`;
+            vscode.window.showErrorMessage(errorMessage);
+            Services.loggerService.error(errorMessage);
+        }
+    }
+
+    public async handlePdfToTextRequest(filePath: string, serverIpc: ServerPostMessageManager) {
+        Services.loggerService.log(`[C79 CACHE FIX] Received RequestPdfToText for: ${filePath}`);
+        if (this.pdfTextCache.has(filePath)) {
+            const cached = this.pdfTextCache.get(filePath)!;
+            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: cached.tokenCount });
+            Services.loggerService.log(`[C79 CACHE FIX] PDF served from cache: ${filePath}`);
+            return;
+        }
+
+        try {
+            Services.loggerService.log(`[PDF] Processing: ${filePath}`);
+            const buffer = await fs.readFile(filePath);
+            Services.loggerService.log(`[PDF] File buffer read. Size: ${buffer.length}. Parsing with pdf-parse...`);
+            const data = await pdf(buffer);
+            const text = data.text;
+            const tokenCount = Math.ceil(text.length / 4);
+            
+            this.pdfTextCache.set(filePath, { text, tokenCount });
+            Services.loggerService.log(`[C79 CACHE FIX] PDF Parsed and cached: ${path.basename(filePath)} (${tokenCount} tokens)`);
+
+            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: tokenCount });
+        } catch (error: any) {
+            const errorMessage = `Failed to parse PDF: ${path.basename(filePath)}`;
+            Services.loggerService.error(`[PDF] Error processing ${filePath}: ${error.stack || error.message}`);
+            console.error(error);
+            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: 0, error: errorMessage });
+        }
+    }
+
+    private _sheetToMarkdown(sheet: XLSX.WorkSheet): string {
+        const data: any[][] = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+        if (data.length === 0) {
+            return "";
+        }
+    
+        // Sanitize all cell data to escape pipe characters
+        const sanitizedData = data.map(row => 
+            row.map(cell => {
+                const cellStr = cell ? String(cell) : '';
+                return cellStr.replace(/\|/g, '\\|').replace(/\r?\n/g, '<br/>');
+            })
+        );
+    
+        const header = sanitizedData[0];
+        const body = sanitizedData.slice(1);
+    
+        const headerLine = `| ${header.join(' | ')} |`;
+        const separatorLine = `| ${header.map(() => '---').join(' | ')} |`;
+    
+        const bodyLines = body.map(row => `| ${row.join(' | ')} |`).join('\n');
+    
+        return `${headerLine}\n${separatorLine}\n${bodyLines}`;
+    }
+
+    public async handleExcelToTextRequest(filePath: string, serverIpc: ServerPostMessageManager) {
+        Services.loggerService.log(`[C79 CACHE FIX] Received RequestExcelToText for: ${filePath}`);
+        if (this.excelMarkdownCache.has(filePath)) {
+            const cached = this.excelMarkdownCache.get(filePath)!;
+            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: cached.tokenCount });
+            Services.loggerService.log(`[C79 CACHE FIX] Excel served from cache: ${filePath}`);
+            return;
+        }
+
+        try {
+            Services.loggerService.log(`[Excel] Processing: ${filePath}`);
+            const buffer = await fs.readFile(filePath);
+            Services.loggerService.log(`[Excel] File buffer read. Size: ${buffer.length}. Parsing with xlsx...`);
+            const workbook = XLSX.read(buffer, { type: 'buffer' });
+            
+            Services.loggerService.log(`[Excel] Workbook parsed. Found sheets: ${workbook.SheetNames.join(', ')}`);
+            let markdown = '';
+
+            workbook.SheetNames.forEach(sheetName => {
+                markdown += `### Sheet: ${sheetName}\n\n`;
+                const worksheet = workbook.Sheets[sheetName];
+                markdown += this._sheetToMarkdown(worksheet);
+                markdown += '\n\n';
+            });
+            Services.loggerService.log(`[Excel] Markdown conversion complete.`);
+
+            const tokenCount = Math.ceil(markdown.length / 4);
+            this.excelMarkdownCache.set(filePath, { markdown, tokenCount });
+            Services.loggerService.log(`[C79 CACHE FIX] Excel Parsed and cached: ${path.basename(filePath)} (${tokenCount} tokens)`);
+
+            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: tokenCount });
+
+        } catch (error: any) {
+             const errorMessage = `Failed to parse Excel/CSV file: ${path.basename(filePath)}`;
+             Services.loggerService.error(`[Excel] Error processing ${filePath}: ${error.stack || error.message}`);
+             console.error(error);
+             serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: 0, error: errorMessage });
+        }
+    }
+
+    public async handleWordToTextRequest(filePath: string, serverIpc: ServerPostMessageManager) {
+        Services.loggerService.log(`[C79 CACHE FIX] Received RequestWordToText for: ${filePath}`);
+        if (this.wordTextCache.has(filePath)) {
+            const cached = this.wordTextCache.get(filePath)!;
+            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: cached.tokenCount });
+            Services.loggerService.log(`[C79 CACHE FIX] Word served from cache: ${filePath}`);
+            return;
+        }
+
+        const extension = path.extname(filePath).toLowerCase();
+        if (extension === '.doc') {
+            const unsupportedMessage = "UNSUPPORTED_FORMAT";
+            this.wordTextCache.set(filePath, { text: unsupportedMessage, tokenCount: 0 });
+            Services.loggerService.warn(`[Word] Legacy .doc format is not supported for file: ${filePath}`);
+            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: 0, error: "Legacy .doc format not supported." });
+            return;
+        }
+
+        try {
+            Services.loggerService.log(`[Word] Processing: ${filePath}`);
+            const buffer = await fs.readFile(filePath);
+            const result = await mammoth.extractRawText({ buffer });
+            const text = result.value;
+            const tokenCount = Math.ceil(text.length / 4);
+            
+            this.wordTextCache.set(filePath, { text, tokenCount });
+            Services.loggerService.log(`[C79 CACHE FIX] Word Parsed and cached: ${path.basename(filePath)} (${tokenCount} tokens)`);
+
+            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: tokenCount });
+        } catch (error: any) {
+            let errorMessage = `Failed to parse Word file: ${path.basename(filePath)}`;
+            if (error instanceof Error && error.message.includes("Can't find end of central directory")) {
+                errorMessage = "File may be corrupted or is not a valid .docx format.";
+            }
+            Services.loggerService.error(`[Word] Error processing ${filePath}: ${error.stack || error.message}`);
+            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: 0, error: errorMessage });
+        }
+    }
+
+    public async handleOpenFileRequest(filePath: string) {
+        try {
+            const uri = vscode.Uri.file(filePath);
+            await vscode.commands.executeCommand('vscode.open', uri);
+        } catch (error: any) {
+            const errorMessage = `Failed to open file ${filePath}: ${error.message}`;
+            vscode.window.showErrorMessage(errorMessage);
+            Services.loggerService.error(errorMessage);
+        }
+    }
+
+    public async handleNewFileRequest(parentDirectory: string) {
+        const newFileName = await vscode.window.showInputBox({
+            prompt: "Enter the name of the new file",
+            value: "new-file.ts",
+        });
+        if (newFileName) {
+            const newFilePath = path.join(parentDirectory, newFileName);
+            try {
+                await vscode.workspace.fs.writeFile(vscode.Uri.file(newFilePath), new Uint8Array());
+            } catch (error: any) {
+                vscode.window.showErrorMessage(`Failed to create file: ${error.message}`);
+            }
+        }
+    }
+
+    public async handleNewFolderRequest(parentDirectory: string) {
+        const newFolderName = await vscode.window.showInputBox({
+            prompt: "Enter the name of the new folder",
+            value: "new-folder",
+        });
+        if (newFolderName) {
+            const newFolderPath = path.join(parentDirectory, newFolderName);
+            try {
+                await vscode.workspace.fs.createDirectory(vscode.Uri.file(newFolderPath));
+            } catch (error: any) {
+                vscode.window.showErrorMessage(`Failed to create folder: ${error.message}`);
+            }
+        }
+    }
+
+    public async handleFileRenameRequest(oldPath: string, newName: string) {
+        const newPath = path.join(path.dirname(oldPath), newName);
+        try {
+            await vscode.workspace.fs.rename(vscode.Uri.file(oldPath), vscode.Uri.file(newPath));
+        } catch (error: any) {
+            vscode.window.showErrorMessage(`Failed to rename: ${error.message}`);
+        }
+    }
+
+    public async handleMoveFileRequest(oldPath: string, newPath: string) {
+        try {
+            // Bug Fix: Prevent auto-add for moved files that weren't checked
+            const lastSelection = await Services.selectionService.getLastSelection();
+            const isChecked = lastSelection.some(p => p.startsWith(oldPath));
+            if (!isChecked) {
+                this.filesToIgnoreForAutoAdd.add(newPath);
+                // Clean up the ignore set after a short delay to prevent memory leaks
+                setTimeout(() => this.filesToIgnoreForAutoAdd.delete(newPath), 2000);
+            }
+
+            await vscode.workspace.fs.rename(vscode.Uri.file(oldPath), vscode.Uri.file(newPath));
+            await Services.selectionService.updatePathInSelections(oldPath, newPath);
+
+            // Push to undo stack
+            const action: Action = { type: 'move', payload: { fromPath: oldPath, toPath: newPath } as MoveActionPayload };
+            Services.actionService.push(action);
+
+        } catch (error: any) {
+            vscode.window.showErrorMessage(`Failed to move file: ${error.message}`);
+            Services.loggerService.error(`Failed to move file from ${oldPath} to ${newPath}: ${error.message}`);
+        }
+    }
+
+    public async handleFileDeleteRequest(filePath: string) {
+        const confirmation = await vscode.window.showWarningMessage(
+            `Are you sure you want to delete ${path.basename(filePath)}? This will move it to the trash.`,
+            { modal: true },
+            'Delete'
+        );
+        if (confirmation === 'Delete') {
+            try {
+                await vscode.workspace.fs.delete(vscode.Uri.file(filePath), { recursive: true, useTrash: true });
+                // Note: Undo for delete is not implemented due to API limitations
+            } catch (error: any) {
+                vscode.window.showErrorMessage(`Failed to delete: ${error.message}`);
+            }
+        }
+    }
+
+    public async handleBatchFileDeleteRequest(paths: string[]) {
+        if (paths.length === 0) return;
+        const confirmation = await vscode.window.showWarningMessage(
+            `Are you sure you want to delete ${paths.length} item(s)? This will move them to the trash.`,
+            { modal: true },
+            'Delete'
+        );
+        if (confirmation === 'Delete') {
+            try {
+                await Promise.all(paths.map(p => vscode.workspace.fs.delete(vscode.Uri.file(p), { recursive: true, useTrash: true })));
+                Services.loggerService.log(`Successfully deleted ${paths.length} items.`);
+            } catch (error: any) {
+                vscode.window.showErrorMessage(`Failed to delete items: ${error.message}`);
+                Services.loggerService.error(`Failed to delete items: ${error.message}`);
+            }
+        }
+    }
+
+    public handleRevealInExplorerRequest(filePath: string) {
+        Services.loggerService.log(`Executing 'revealInExplorer' for path: ${filePath}`);
+        vscode.commands.executeCommand('revealInExplorer', vscode.Uri.file(filePath));
+    }
+
+    public handleCopyPathRequest(filePath: string, relative: boolean) {
+        const workspaceFolders = vscode.workspace.workspaceFolders;
+        let pathToCopy = filePath;
+        if (relative && workspaceFolders && workspaceFolders.length > 0) {
+            pathToCopy = path.relative(workspaceFolders[0].uri.fsPath, filePath);
+        }
+        vscode.env.clipboard.writeText(pathToCopy);
+        vscode.window.showInformationMessage(`Copied to clipboard: ${pathToCopy}`);
+    }
+}
+</Original fs.service.ts>
+</file>
+
 <file path="src/Artifacts/A6. DCE - Initial Scaffolding Deployment Script.md">
 # Artifact A6: DCE - Initial Scaffolding Deployment Script
 # Date Created: Cycle 3
@@ -7729,6 +8631,7 @@ export function registerCommands(context: vscode.ExtensionContext) {
 </file>
 
 <file path="src/backend/services/action.service.ts">
+// Updated on: C114 (Refactor to use new services)
 import * as vscode from 'vscode';
 import { Services } from './services';
 
@@ -7750,31 +8653,19 @@ export class ActionService {
 
     public push(action: Action) {
         this.undoStack.push(action);
-        // Any new action clears the redo stack
         this.redoStack = [];
-        Services.loggerService.log(`Pushed action to undo stack: ${action.type}. Stack size: ${this.undoStack.length}`);
     }
 
     public async undo() {
         const action = this.undoStack.pop();
-        if (!action) {
-            Services.loggerService.log("Undo stack empty.");
-            return;
-        }
-
-        Services.loggerService.log(`Undoing action: ${action.type}`);
+        if (!action) return;
         await this.performReverseAction(action);
         this.redoStack.push(action);
     }
 
     public async redo() {
         const action = this.redoStack.pop();
-        if (!action) {
-            Services.loggerService.log("Redo stack empty.");
-            return;
-        }
-
-        Services.loggerService.log(`Redoing action: ${action.type}`);
+        if (!action) return;
         await this.performOriginalAction(action);
         this.undoStack.push(action);
     }
@@ -7785,8 +8676,6 @@ export class ActionService {
                 const { fromPath, toPath } = action.payload as MoveActionPayload;
                 await vscode.workspace.fs.rename(vscode.Uri.file(toPath), vscode.Uri.file(fromPath));
                 break;
-            // 'delete' undo is complex with trash; for now, we focus on 'move'.
-            // A full implementation would require restoring from trash, which VS Code API doesn't expose directly.
         }
     }
 
@@ -7804,11 +8693,598 @@ export class ActionService {
 }
 </file>
 
+<file path="src/backend/services/content-extraction.service.ts">
+// src/backend/services/content-extraction.service.ts
+import * as vscode from "vscode";
+import * as path from "path";
+import * as fs from "fs/promises";
+import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
+import { ServerToClientChannel } from "@/common/ipc/channels.enum";
+import { Services } from "./services";
+// @ts-ignore
+import pdf from 'pdf-parse/lib/pdf-parse.js';
+import * as XLSX from 'xlsx';
+import mammoth from 'mammoth';
+
+export class ContentExtractionService {
+    private pdfTextCache = new Map<string, { text: string; tokenCount: number }>();
+    private excelMarkdownCache = new Map<string, { markdown: string; tokenCount: number }>();
+    private wordTextCache = new Map<string, { text: string; tokenCount: number }>();
+
+    public getVirtualPdfContent(filePath: string) {
+        return this.pdfTextCache.get(filePath);
+    }
+
+    public getVirtualExcelContent(filePath: string) {
+        return this.excelMarkdownCache.get(filePath);
+    }
+
+    public getVirtualWordContent(filePath: string) {
+        return this.wordTextCache.get(filePath);
+    }
+
+    public async handlePdfToTextRequest(filePath: string, serverIpc: ServerPostMessageManager) {
+        Services.loggerService.log(`Received RequestPdfToText for: ${filePath}`);
+        if (this.pdfTextCache.has(filePath)) {
+            const cached = this.pdfTextCache.get(filePath)!;
+            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: cached.tokenCount });
+            Services.loggerService.log(`PDF served from cache: ${filePath}`);
+            return;
+        }
+
+        try {
+            Services.loggerService.log(`[PDF] Processing: ${filePath}`);
+            const buffer = await fs.readFile(filePath);
+            const data = await pdf(buffer);
+            const text = data.text;
+            const tokenCount = Math.ceil(text.length / 4);
+            
+            this.pdfTextCache.set(filePath, { text, tokenCount });
+            Services.loggerService.log(`PDF Parsed and cached: ${path.basename(filePath)} (${tokenCount} tokens)`);
+
+            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: tokenCount });
+        } catch (error: any) {
+            const errorMessage = `Failed to parse PDF: ${path.basename(filePath)}`;
+            Services.loggerService.error(`[PDF] Error processing ${filePath}: ${error.stack || error.message}`);
+            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: 0, error: errorMessage });
+        }
+    }
+
+    private _sheetToMarkdown(sheet: XLSX.WorkSheet): string {
+        const data: any[][] = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+        if (data.length === 0) return "";
+    
+        const sanitizedData = data.map(row => 
+            row.map(cell => {
+                const cellStr = cell ? String(cell) : '';
+                return cellStr.replace(/\|/g, '\\|').replace(/\r?\n/g, '<br/>');
+            })
+        );
+    
+        const header = sanitizedData[0];
+        const body = sanitizedData.slice(1);
+        const headerLine = `| ${header.join(' | ')} |`;
+        const separatorLine = `| ${header.map(() => '---').join(' | ')} |`;
+        const bodyLines = body.map(row => `| ${row.join(' | ')} |`).join('\n');
+        return `${headerLine}\n${separatorLine}\n${bodyLines}`;
+    }
+
+    public async handleExcelToTextRequest(filePath: string, serverIpc: ServerPostMessageManager) {
+        Services.loggerService.log(`Received RequestExcelToText for: ${filePath}`);
+        if (this.excelMarkdownCache.has(filePath)) {
+            const cached = this.excelMarkdownCache.get(filePath)!;
+            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: cached.tokenCount });
+            Services.loggerService.log(`Excel served from cache: ${filePath}`);
+            return;
+        }
+
+        try {
+            Services.loggerService.log(`[Excel] Processing: ${filePath}`);
+            const buffer = await fs.readFile(filePath);
+            const workbook = XLSX.read(buffer, { type: 'buffer' });
+            
+            let markdown = '';
+            workbook.SheetNames.forEach(sheetName => {
+                markdown += `### Sheet: ${sheetName}\n\n`;
+                const worksheet = workbook.Sheets[sheetName];
+                markdown += this._sheetToMarkdown(worksheet);
+                markdown += '\n\n';
+            });
+
+            const tokenCount = Math.ceil(markdown.length / 4);
+            this.excelMarkdownCache.set(filePath, { markdown, tokenCount });
+            Services.loggerService.log(`Excel Parsed and cached: ${path.basename(filePath)} (${tokenCount} tokens)`);
+
+            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: tokenCount });
+        } catch (error: any) {
+             const errorMessage = `Failed to parse Excel/CSV file: ${path.basename(filePath)}`;
+             Services.loggerService.error(`[Excel] Error processing ${filePath}: ${error.stack || error.message}`);
+             serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: 0, error: errorMessage });
+        }
+    }
+
+    public async handleWordToTextRequest(filePath: string, serverIpc: ServerPostMessageManager) {
+        Services.loggerService.log(`Received RequestWordToText for: ${filePath}`);
+        if (this.wordTextCache.has(filePath)) {
+            const cached = this.wordTextCache.get(filePath)!;
+            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: cached.tokenCount });
+            Services.loggerService.log(`Word served from cache: ${filePath}`);
+            return;
+        }
+
+        const extension = path.extname(filePath).toLowerCase();
+        if (extension === '.doc') {
+            const unsupportedMessage = "UNSUPPORTED_FORMAT";
+            this.wordTextCache.set(filePath, { text: unsupportedMessage, tokenCount: 0 });
+            Services.loggerService.warn(`[Word] Legacy .doc format is not supported for file: ${filePath}`);
+            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: 0, error: "Legacy .doc format not supported." });
+            return;
+        }
+
+        try {
+            Services.loggerService.log(`[Word] Processing: ${filePath}`);
+            const buffer = await fs.readFile(filePath);
+            const result = await mammoth.extractRawText({ buffer });
+            const text = result.value;
+            const tokenCount = Math.ceil(text.length / 4);
+            
+            this.wordTextCache.set(filePath, { text, tokenCount });
+            Services.loggerService.log(`Word Parsed and cached: ${path.basename(filePath)} (${tokenCount} tokens)`);
+
+            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: tokenCount });
+        } catch (error: any) {
+            let errorMessage = `Failed to parse Word file: ${path.basename(filePath)}`;
+            if (error instanceof Error && error.message.includes("Can't find end of central directory")) {
+                errorMessage = "File may be corrupted or is not a valid .docx format.";
+            }
+            Services.loggerService.error(`[Word] Error processing ${filePath}: ${error.stack || error.message}`);
+            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: 0, error: errorMessage });
+        }
+    }
+}
+</file>
+
+<file path="src/backend/services/file-operation.service.ts">
+// src/backend/services/file-operation.service.ts
+import * as vscode from "vscode";
+import * as path from "path";
+import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
+import { ServerToClientChannel } from "@/common/ipc/channels.enum";
+import { Services } from "./services";
+import { Action, MoveActionPayload } from "./action.service";
+
+const normalizePath = (p: string) => p.replace(/\\/g, '/');
+
+export class FileOperationService {
+    private filesToIgnoreForAutoAdd: Set<string> = new Set();
+
+    public async handleFileContentRequest(filePath: string, serverIpc: ServerPostMessageManager) {
+        Services.loggerService.log(`handleFileContentRequest initiated for: ${filePath}`);
+        try {
+            const uri = vscode.Uri.file(filePath);
+            const contentBuffer = await vscode.workspace.fs.readFile(uri);
+            const content = Buffer.from(contentBuffer).toString('utf-8');
+            Services.loggerService.log(`Successfully read content for: ${filePath}. Sending to client.`);
+            serverIpc.sendToClient(ServerToClientChannel.SendFileContent, { path: filePath, content });
+        } catch (error) {
+            Services.loggerService.error(`Failed to read file content for ${filePath}: ${error}`);
+            serverIpc.sendToClient(ServerToClientChannel.SendFileContent, { path: filePath, content: null });
+        }
+    }
+
+    public async handleFileExistenceRequest(paths: string[], serverIpc: ServerPostMessageManager) {
+        Services.loggerService.log(`[File Existence] Received request to check paths: ${JSON.stringify(paths)}`);
+        const workspaceFolders = vscode.workspace.workspaceFolders;
+        if (!workspaceFolders || workspaceFolders.length === 0) {
+            Services.loggerService.error("[File Existence] Cannot check for files, no workspace folder is open.");
+            serverIpc.sendToClient(ServerToClientChannel.SendFileExistence, { existenceMap: {} });
+            return;
+        }
+        const rootPath = workspaceFolders[0].uri.fsPath;
+    
+        const existenceMap: { [path: string]: boolean } = {};
+        const checks = paths.map(async (p_raw) => {
+            const p = p_raw.trim().replace(/^[`"']|[`"']$/g, '');
+            if (!p) return;
+    
+            let absolutePath = path.resolve(rootPath, p);
+            let normalizedPath = normalizePath(absolutePath);
+    
+            try {
+                await vscode.workspace.fs.stat(vscode.Uri.file(normalizedPath));
+                existenceMap[p_raw] = true;
+            } catch {
+                if (/^A\d+/.test(p)) {
+                    const artifactPath = path.resolve(rootPath, 'src/Artifacts', p);
+                    const normalizedArtifactPath = normalizePath(artifactPath);
+                    try {
+                        await vscode.workspace.fs.stat(vscode.Uri.file(normalizedArtifactPath));
+                        existenceMap[p_raw] = true;
+                        return;
+                    } catch {}
+                }
+                existenceMap[p_raw] = false;
+            }
+        });
+        await Promise.all(checks);
+        serverIpc.sendToClient(ServerToClientChannel.SendFileExistence, { existenceMap });
+    }
+
+    private async _findAvailableCopyName(destinationPath: string): Promise<string> {
+        try {
+            await vscode.workspace.fs.stat(vscode.Uri.file(destinationPath));
+        } catch (error) {
+            return destinationPath;
+        }
+    
+        const dir = path.dirname(destinationPath);
+        const ext = path.extname(destinationPath);
+        const baseName = path.basename(destinationPath, ext);
+    
+        let copyNum = 1;
+        let nextPath = path.join(dir, `${baseName}-copy${ext}`);
+        
+        while (true) {
+            try {
+                await vscode.workspace.fs.stat(vscode.Uri.file(nextPath));
+                copyNum++;
+                nextPath = path.join(dir, `${baseName}-copy-${copyNum}${ext}`);
+            } catch (error) {
+                return nextPath;
+            }
+        }
+    }
+
+    public async handleCopyFileRequest(sourcePath: string, destinationDir: string) {
+        try {
+            const sourceName = path.basename(sourcePath);
+            const initialDestinationPath = path.join(destinationDir, sourceName);
+            const finalDestinationPath = await this._findAvailableCopyName(initialDestinationPath);
+            const sourceUri = vscode.Uri.file(sourcePath);
+            const destinationUri = vscode.Uri.file(finalDestinationPath);
+
+            await vscode.workspace.fs.copy(sourceUri, destinationUri, { overwrite: false });
+        } catch (error: any) {
+            vscode.window.showErrorMessage(`Failed to copy file: ${error.message}`);
+        }
+    }
+
+    public async handleCopyFileFromUri(sourceUriString: string, targetDir: string) {
+        try {
+            const sourceUri = vscode.Uri.parse(sourceUriString);
+            const fileName = path.basename(sourceUri.fsPath);
+            const targetUri = vscode.Uri.file(path.join(targetDir, fileName));
+            await vscode.workspace.fs.copy(sourceUri, targetUri);
+        } catch (error: any) {
+            vscode.window.showErrorMessage(`Failed to copy file from URI: ${error.message}`);
+        }
+    }
+
+    public async handleAddFileFromBuffer(targetPath: string, data: Uint8Array) {
+        try {
+            await vscode.workspace.fs.writeFile(vscode.Uri.file(targetPath), data);
+        } catch (error: any) {
+            vscode.window.showErrorMessage(`Failed to add file from buffer: ${error.message}`);
+        }
+    }
+
+    public async handleOpenFileRequest(filePath: string) {
+        try {
+            await vscode.commands.executeCommand('vscode.open', vscode.Uri.file(filePath));
+        } catch (error: any) {
+            vscode.window.showErrorMessage(`Failed to open file ${filePath}: ${error.message}`);
+        }
+    }
+
+    public async handleNewFileRequest(parentDirectory: string) {
+        const newFileName = await vscode.window.showInputBox({ prompt: "Enter the name of the new file", value: "new-file.ts" });
+        if (newFileName) {
+            try {
+                await vscode.workspace.fs.writeFile(vscode.Uri.file(path.join(parentDirectory, newFileName)), new Uint8Array());
+            } catch (error: any) {
+                vscode.window.showErrorMessage(`Failed to create file: ${error.message}`);
+            }
+        }
+    }
+
+    public async handleNewFolderRequest(parentDirectory: string) {
+        const newFolderName = await vscode.window.showInputBox({ prompt: "Enter the name of the new folder", value: "new-folder" });
+        if (newFolderName) {
+            try {
+                await vscode.workspace.fs.createDirectory(vscode.Uri.file(path.join(parentDirectory, newFolderName)));
+            } catch (error: any) {
+                vscode.window.showErrorMessage(`Failed to create folder: ${error.message}`);
+            }
+        }
+    }
+
+    public async handleFileRenameRequest(oldPath: string, newName: string) {
+        try {
+            await vscode.workspace.fs.rename(vscode.Uri.file(oldPath), vscode.Uri.file(path.join(path.dirname(oldPath), newName)));
+        } catch (error: any) {
+            vscode.window.showErrorMessage(`Failed to rename: ${error.message}`);
+        }
+    }
+
+    public async handleMoveFileRequest(oldPath: string, newPath: string) {
+        try {
+            const lastSelection = await Services.selectionService.getLastSelection();
+            if (!lastSelection.some(p => p.startsWith(oldPath))) {
+                this.filesToIgnoreForAutoAdd.add(newPath);
+                setTimeout(() => this.filesToIgnoreForAutoAdd.delete(newPath), 2000);
+            }
+
+            await vscode.workspace.fs.rename(vscode.Uri.file(oldPath), vscode.Uri.file(newPath));
+            await Services.selectionService.updatePathInSelections(oldPath, newPath);
+            Services.actionService.push({ type: 'move', payload: { fromPath: oldPath, toPath: newPath } as MoveActionPayload });
+        } catch (error: any) {
+            vscode.window.showErrorMessage(`Failed to move file: ${error.message}`);
+        }
+    }
+
+    public async handleFileDeleteRequest(filePath: string) {
+        const confirmation = await vscode.window.showWarningMessage(`Are you sure you want to delete ${path.basename(filePath)}?`, { modal: true }, 'Delete');
+        if (confirmation === 'Delete') {
+            try {
+                await vscode.workspace.fs.delete(vscode.Uri.file(filePath), { recursive: true, useTrash: true });
+            } catch (error: any) {
+                vscode.window.showErrorMessage(`Failed to delete: ${error.message}`);
+            }
+        }
+    }
+
+    public async handleBatchFileDeleteRequest(paths: string[]) {
+        if (paths.length === 0) return;
+        const confirmation = await vscode.window.showWarningMessage(`Are you sure you want to delete ${paths.length} item(s)?`, { modal: true }, 'Delete');
+        if (confirmation === 'Delete') {
+            try {
+                await Promise.all(paths.map(p => vscode.workspace.fs.delete(vscode.Uri.file(p), { recursive: true, useTrash: true })));
+            } catch (error: any) {
+                vscode.window.showErrorMessage(`Failed to delete items: ${error.message}`);
+            }
+        }
+    }
+
+    public handleRevealInExplorerRequest(filePath: string) {
+        vscode.commands.executeCommand('revealInExplorer', vscode.Uri.file(filePath));
+    }
+
+    public handleCopyPathRequest(filePath: string, relative: boolean) {
+        const workspaceFolders = vscode.workspace.workspaceFolders;
+        let pathToCopy = filePath;
+        if (relative && workspaceFolders?.[0]) {
+            pathToCopy = path.relative(workspaceFolders[0].uri.fsPath, filePath);
+        }
+        vscode.env.clipboard.writeText(pathToCopy);
+        vscode.window.showInformationMessage(`Copied to clipboard: ${pathToCopy}`);
+    }
+
+    public addFileToIgnoreForAutoAdd(filePath: string) {
+        this.filesToIgnoreForAutoAdd.add(filePath);
+    }
+
+    public hasFileToIgnoreForAutoAdd(filePath: string): boolean {
+        return this.filesToIgnoreForAutoAdd.has(filePath);
+    }
+
+    public removeFileToIgnoreForAutoAdd(filePath: string) {
+        this.filesToIgnoreForAutoAdd.delete(filePath);
+    }
+}
+</file>
+
+<file path="src/backend/services/file-tree.service.ts">
+// src/backend/services/file-tree.service.ts
+import * as vscode from "vscode";
+import * as path from "path";
+import * as fs from "fs/promises";
+import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
+import { ServerToClientChannel } from "@/common/ipc/channels.enum";
+import { FileNode } from "@/common/types/file-node";
+import { Services } from "./services";
+import { serverIPCs } from "@/client/views";
+import { VIEW_TYPES } from "@/common/view-types";
+import { API as GitAPI, Status } from "../types/git";
+import { ProblemCountsMap } from "@/common/ipc/channels.type";
+
+const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
+const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
+const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
+const EXCLUSION_PATTERNS = ['node_modules', 'dist', 'out', '.git', 'dce_cache', '.vscode'];
+
+const normalizePath = (p: string) => p.replace(/\\/g, '/');
+
+export class FileTreeService {
+    private fileTreeCache: FileNode[] | null = null;
+    private watcher: vscode.FileSystemWatcher | null = null;
+    private refreshDebounceTimer: NodeJS.Timeout | null = null;
+    private diagnosticsDebounceTimer: NodeJS.Timeout | null = null;
+    private gitApi?: GitAPI;
+
+    constructor(gitApi?: GitAPI) {
+        this.gitApi = gitApi;
+        if (this.gitApi) {
+            this.gitApi.onDidOpenRepository(() => this.triggerFullRefresh());
+            this.gitApi.repositories.forEach(repo => {
+                repo.state.onDidChange(() => this.triggerFullRefresh());
+            });
+        }
+    }
+
+    private triggerFullRefresh() {
+        if (this.refreshDebounceTimer) clearTimeout(this.refreshDebounceTimer);
+        this.refreshDebounceTimer = setTimeout(() => {
+            this.fileTreeCache = null;
+            const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
+            if (serverIpc) {
+                serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, { reason: 'fileOp' });
+            }
+        }, 500);
+    }
+
+    private triggerDiagnosticsUpdate() {
+        if (this.diagnosticsDebounceTimer) clearTimeout(this.diagnosticsDebounceTimer);
+        this.diagnosticsDebounceTimer = setTimeout(() => {
+            const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
+            if (serverIpc) {
+                serverIpc.sendToClient(ServerToClientChannel.UpdateProblemCounts, { problemMap: this.getProblemCountsMap() });
+            }
+        }, 750);
+    }
+
+    public initializeWatcher() {
+        if (this.watcher) this.watcher.dispose();
+        
+        this.watcher = vscode.workspace.createFileSystemWatcher('**/*');
+        const onFileChange = (uri: vscode.Uri) => {
+            if (EXCLUSION_PATTERNS.some(pattern => normalizePath(uri.fsPath).includes(`/${pattern}/`))) return;
+            this.triggerFullRefresh();
+        };
+
+        this.watcher.onDidCreate(async (uri: vscode.Uri) => {
+            const normalizedPath = normalizePath(uri.fsPath);
+            if (Services.fileOperationService.hasFileToIgnoreForAutoAdd(normalizedPath)) {
+                Services.fileOperationService.removeFileToIgnoreForAutoAdd(normalizedPath);
+            } else if (Services.selectionService.getAutoAddState()) {
+                const currentSelection = await Services.selectionService.getLastSelection();
+                await Services.selectionService.saveCurrentSelection([...new Set([...currentSelection, normalizedPath])]);
+            }
+            onFileChange(uri);
+        });
+        this.watcher.onDidChange(onFileChange);
+        this.watcher.onDidDelete(onFileChange);
+        vscode.languages.onDidChangeDiagnostics(() => this.triggerDiagnosticsUpdate());
+    }
+
+    private async getFileStats(filePath: string): Promise<Omit<FileNode, 'name' | 'absolutePath' | 'children'>> {
+        const extension = path.extname(filePath).toLowerCase();
+        try {
+            const stats = await fs.stat(filePath);
+            const isImage = IMAGE_EXTENSIONS.has(extension);
+            const isPdf = extension === '.pdf';
+            const isExcel = EXCEL_EXTENSIONS.has(extension);
+            const isWordDoc = WORD_EXTENSIONS.has(extension);
+            
+            if (isImage) return { tokenCount: 0, sizeInBytes: stats.size, isImage, extension, isPdf, isExcel, isWordDoc, fileCount: 1 };
+            if (isPdf) return { tokenCount: Services.contentExtractionService.getVirtualPdfContent(filePath)?.tokenCount || 0, sizeInBytes: stats.size, isImage, extension, isPdf, isExcel, isWordDoc, fileCount: 1 };
+            if (isExcel) return { tokenCount: Services.contentExtractionService.getVirtualExcelContent(filePath)?.tokenCount || 0, sizeInBytes: stats.size, isImage, extension, isPdf, isExcel, isWordDoc, fileCount: 1 };
+            if (isWordDoc) return { tokenCount: Services.contentExtractionService.getVirtualWordContent(filePath)?.tokenCount || 0, sizeInBytes: stats.size, isImage, extension, isPdf, isExcel, isWordDoc, fileCount: 1 };
+
+            if (stats.size > 5_000_000) return { tokenCount: 0, sizeInBytes: stats.size, isImage, extension, isPdf, isExcel, isWordDoc, fileCount: 1 };
+            
+            const content = await fs.readFile(filePath, 'utf-8');
+            return { tokenCount: Math.ceil(content.length / 4), sizeInBytes: stats.size, isImage, extension, isPdf, isExcel, isWordDoc, fileCount: 1 };
+        } catch (error: any) {
+            return { tokenCount: 0, sizeInBytes: 0, isImage: false, extension, isPdf: false, isExcel: false, isWordDoc: false, fileCount: 1, error: error.message };
+        }
+    }
+
+    public async handleWorkspaceFilesRequest(serverIpc: ServerPostMessageManager, forceRefresh: boolean = false) {
+        if (!forceRefresh && this.fileTreeCache) {
+            serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: this.fileTreeCache });
+            return;
+        }
+
+        const workspaceFolders = vscode.workspace.workspaceFolders;
+        if (!workspaceFolders?.[0]) {
+            serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: [] });
+            return;
+        }
+        
+        const fileTree = await this.buildTreeFromTraversal(workspaceFolders[0].uri);
+        this.fileTreeCache = [fileTree];
+        serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: this.fileTreeCache });
+    }
+
+    private getGitStatusMap(): Map<string, string> {
+        if (!this.gitApi?.repositories[0]) return new Map();
+        
+        const repo = this.gitApi.repositories[0];
+        const getStatusChar = (s: Status) => ({ [Status.INDEX_ADDED]: 'A', [Status.MODIFIED]: 'M', [Status.DELETED]: 'D', [Status.UNTRACKED]: 'U', [Status.IGNORED]: 'I', [Status.CONFLICT]: 'C' }[s] || '');
+        
+        const changes = [...repo.state.workingTreeChanges, ...repo.state.indexChanges, ...repo.state.mergeChanges];
+        return new Map(changes.map(c => [normalizePath(c.uri.fsPath), getStatusChar(c.status)]).filter(([, s]) => s));
+    }
+
+    private getProblemCountsMap(): ProblemCountsMap {
+        const problemMap: ProblemCountsMap = {};
+        for (const [uri, diagnosticArr] of vscode.languages.getDiagnostics()) {
+            const path = normalizePath(uri.fsPath);
+            problemMap[path] = problemMap[path] || { error: 0, warning: 0 };
+            for (const diag of diagnosticArr) {
+                if (diag.severity === vscode.DiagnosticSeverity.Error) problemMap[path].error++;
+                else if (diag.severity === vscode.DiagnosticSeverity.Warning) problemMap[path].warning++;
+            }
+        }
+        return problemMap;
+    }
+
+    private async buildTreeFromTraversal(rootUri: vscode.Uri): Promise<FileNode> {
+        const rootPath = rootUri.fsPath;
+        const gitStatusMap = this.getGitStatusMap();
+        const problemCountsMap = this.getProblemCountsMap();
+
+        const rootNode: FileNode = {
+            name: path.basename(rootPath),
+            absolutePath: normalizePath(rootPath),
+            children: await this._traverseDirectory(rootUri, gitStatusMap, problemCountsMap),
+            tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false,
+            gitStatus: gitStatusMap.get(normalizePath(rootPath)),
+            problemCounts: problemCountsMap[normalizePath(rootPath)]
+        };
+        this._aggregateStats(rootNode);
+        return rootNode;
+    }
+    
+    private async _traverseDirectory(dirUri: vscode.Uri, gitStatusMap: Map<string, string>, problemCountsMap: ProblemCountsMap): Promise<FileNode[]> {
+        const children: FileNode[] = [];
+        try {
+            for (const [name, type] of await vscode.workspace.fs.readDirectory(dirUri)) {
+                if (EXCLUSION_PATTERNS.includes(name)) continue;
+
+                const childUri = vscode.Uri.joinPath(dirUri, name);
+                const childPath = normalizePath(childUri.fsPath);
+
+                if (type === vscode.FileType.Directory) {
+                    const dirNode: FileNode = { name, absolutePath: childPath, children: await this._traverseDirectory(childUri, gitStatusMap, problemCountsMap), tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false, gitStatus: gitStatusMap.get(childPath), problemCounts: problemCountsMap[childPath] };
+                    this._aggregateStats(dirNode);
+                    children.push(dirNode);
+                } else if (type === vscode.FileType.File) {
+                    const stats = await this.getFileStats(childPath);
+                    children.push({ name, absolutePath: childPath, ...stats, gitStatus: gitStatusMap.get(childPath), problemCounts: problemCountsMap[childPath] });
+                }
+            }
+        } catch (error: any) {
+            Services.loggerService.error(`Error traversing directory ${dirUri.fsPath}: ${error.message}`);
+        }
+        return children.sort((a, b) => (!!a.children === !!b.children) ? a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' }) : (!!a.children ? -1 : 1));
+    }
+
+    private _aggregateStats(node: FileNode): void {
+        if (!node.children) return;
+        let totalTokens = 0, totalFiles = 0, totalBytes = 0, totalErrors = node.problemCounts?.error || 0, totalWarnings = node.problemCounts?.warning || 0;
+        for (const child of node.children) {
+            totalTokens += child.tokenCount;
+            totalFiles += child.fileCount;
+            totalBytes += child.sizeInBytes;
+            if(child.problemCounts) {
+                totalErrors += child.problemCounts.error;
+                totalWarnings += child.problemCounts.warning;
+            }
+        }
+        node.tokenCount = totalTokens;
+        node.fileCount = totalFiles;
+        node.sizeInBytes = totalBytes;
+        if(totalErrors > 0 || totalWarnings > 0) node.problemCounts = { error: totalErrors, warning: totalWarnings };
+    }
+}
+</file>
+
 <file path="src/backend/services/flattener.service.ts">
+// Updated on: C114 (Refactor to use new services)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
-import { ServerPostMessageManager } from '@/common/ipc/server-ipc';
 import { Services } from './services';
 import { VIEW_TYPES } from '@/common/view-types';
 import { serverIPCs } from '@/client/views';
@@ -7861,15 +9337,11 @@ export class FlattenerService {
             await fs.writeFile(outputFilePath, outputContent, 'utf-8');
             vscode.window.showInformationMessage(`Successfully flattened ${validResults.length} files to flattened_repo.md.`);
 
-            // Open the generated file in the editor
             Services.loggerService.log(`Opening flattened file: ${outputFilePath}`);
-            await Services.fsService.handleOpenFileRequest(outputFilePath);
+            await Services.fileOperationService.handleOpenFileRequest(outputFilePath);
 
             const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
             if (serverIpc) {
-                Services.loggerService.log("Triggering file focus after flattening.");
-                // A short delay helps ensure the file watcher has time to notify VS Code of the new file
-                // before we try to focus it in our tree.
                 setTimeout(() => {
                     serverIpc.sendToClient(ServerToClientChannel.FocusFile, { path: outputFilePath });
                 }, 500);
@@ -7923,55 +9395,24 @@ export class FlattenerService {
             const sizeInBytes = buffer.length;
             const metadata: any = { sizeInBytes };
 
-            // PNG
-            if (buffer.length > 24 && buffer.toString('hex', 0, 8) === '89504e470d0a1a0a') {
+            if (buffer.length > 24 && buffer.toString('hex', 0, 8) === '89504e470d0a1a0a') { // PNG
                 const ihdrIndex = buffer.indexOf('IHDR');
-                if (ihdrIndex !== -1) {
-                    metadata.dimensions = {
-                        width: buffer.readUInt32BE(ihdrIndex + 4),
-                        height: buffer.readUInt32BE(ihdrIndex + 8)
-                    };
-                }
-                return metadata;
-            }
-
-            // GIF
-            if (buffer.length > 10 && buffer.toString('utf8', 0, 3) === 'GIF') {
-                 metadata.dimensions = {
-                    width: buffer.readUInt16LE(6),
-                    height: buffer.readUInt16LE(8)
-                };
-                return metadata;
-            }
-
-            // JPEG
-            if (buffer.length > 11 && buffer[0] === 0xff && buffer[1] === 0xd8) {
+                if (ihdrIndex !== -1) metadata.dimensions = { width: buffer.readUInt32BE(ihdrIndex + 4), height: buffer.readUInt32BE(ihdrIndex + 8) };
+            } else if (buffer.length > 10 && buffer.toString('utf8', 0, 3) === 'GIF') { // GIF
+                 metadata.dimensions = { width: buffer.readUInt16LE(6), height: buffer.readUInt16LE(8) };
+            } else if (buffer.length > 11 && buffer[0] === 0xff && buffer[1] === 0xd8) { // JPEG
                 let pos = 2;
                 while (pos < buffer.length - 9) {
                     if (buffer[pos] === 0xff && (buffer[pos + 1] & 0xf0) === 0xc0) {
-                        const height = buffer.readUInt16BE(pos + 5);
-                        const width = buffer.readUInt16BE(pos + 7);
-                        if (width > 0 && height > 0) {
-                            metadata.dimensions = { width, height };
-                            return metadata;
-                        }
+                        metadata.dimensions = { width: buffer.readUInt16BE(pos + 7), height: buffer.readUInt16BE(pos + 5) };
+                        break;
                     }
-                    if (buffer[pos] === 0xff && buffer[pos + 1] !== 0x00 && buffer[pos + 1] !== 0xff && (buffer[pos+1] < 0xd0 || buffer[pos+1] > 0xd9)) {
-                        if (pos + 3 < buffer.length) {
-                            pos += buffer.readUInt16BE(pos + 2) + 2;
-                        } else { pos++; }
-                    } else { pos++; }
+                    pos += buffer[pos + 2] ? buffer.readUInt16BE(pos + 2) + 2 : 1;
                 }
             }
             return metadata;
         } catch (err: any) {
-            Services.loggerService.warn(`Could not parse image metadata for ${filePath}: ${err.message}`);
-            try {
-                const stats = await fs.stat(filePath);
-                return { sizeInBytes: stats.size };
-            } catch {
-                return { sizeInBytes: -1 };
-            }
+            try { return { sizeInBytes: (await fs.stat(filePath)).size }; } catch { return { sizeInBytes: -1 }; }
         }
     }
 
@@ -7979,59 +9420,22 @@ export class FlattenerService {
         const extension = path.extname(filePath).toLowerCase();
         
         if (extension === '.pdf') {
-            const virtualContent = Services.fsService.getVirtualPdfContent(filePath);
-            Services.loggerService.log(`[Flattener] PDF check for ${filePath}. Cache result: ${virtualContent ? 'FOUND' : 'NOT FOUND'}`);
-            if (virtualContent) {
-                return {
-                    filePath,
-                    content: virtualContent.text,
-                    lines: virtualContent.text.split('\n').length,
-                    characters: virtualContent.text.length,
-                    tokens: virtualContent.tokenCount,
-                    error: null,
-                    isBinary: false,
-                    sizeInBytes: 0 // Size is not relevant for virtual content
-                };
-            }
+            const virtualContent = Services.contentExtractionService.getVirtualPdfContent(filePath);
+            if (virtualContent) return { filePath, content: virtualContent.text, lines: virtualContent.text.split('\n').length, characters: virtualContent.text.length, tokens: virtualContent.tokenCount, error: null, isBinary: false, sizeInBytes: 0 };
             return { filePath, lines: 0, characters: 0, tokens: 0, content: '<!-- PDF content not processed or cached -->', error: null, isBinary: false, sizeInBytes: 0 };
         }
 
         if (EXCEL_EXTENSIONS.has(extension)) {
-            const virtualContent = Services.fsService.getVirtualExcelContent(filePath);
-            Services.loggerService.log(`[Flattener] Excel/CSV check for ${filePath}. Cache result: ${virtualContent ? 'FOUND' : 'NOT FOUND'}`);
-            if (virtualContent) {
-                return {
-                    filePath,
-                    content: virtualContent.markdown,
-                    lines: virtualContent.markdown.split('\n').length,
-                    characters: virtualContent.markdown.length,
-                    tokens: virtualContent.tokenCount,
-                    error: null,
-                    isBinary: false,
-                    sizeInBytes: 0
-                };
-            }
+            const virtualContent = Services.contentExtractionService.getVirtualExcelContent(filePath);
+            if (virtualContent) return { filePath, content: virtualContent.markdown, lines: virtualContent.markdown.split('\n').length, characters: virtualContent.markdown.length, tokens: virtualContent.tokenCount, error: null, isBinary: false, sizeInBytes: 0 };
             return { filePath, lines: 0, characters: 0, tokens: 0, content: '<!-- Excel/CSV content not processed or cached -->', error: null, isBinary: false, sizeInBytes: 0 };
         }
 
         if (WORD_EXTENSIONS.has(extension)) {
-            const virtualContent = Services.fsService.getVirtualWordContent(filePath);
-            Services.loggerService.log(`[Flattener] Word check for ${filePath}. Cache result: ${virtualContent ? 'FOUND' : 'NOT FOUND'}`);
+            const virtualContent = Services.contentExtractionService.getVirtualWordContent(filePath);
             if (virtualContent) {
-                const content = virtualContent.text === "UNSUPPORTED_FORMAT" 
-                    ? `<!-- Content of .doc file '${path.basename(filePath)}' could not be extracted. Legacy .doc format is not supported. Please convert to .docx. -->` 
-                    : virtualContent.text;
-
-                return {
-                    filePath,
-                    content: content,
-                    lines: content.split('\n').length,
-                    characters: content.length,
-                    tokens: virtualContent.tokenCount,
-                    error: null,
-                    isBinary: false,
-                    sizeInBytes: 0
-                };
+                const content = virtualContent.text === "UNSUPPORTED_FORMAT" ? `<!-- Content of .doc file '${path.basename(filePath)}' could not be extracted. Legacy .doc format is not supported. Please convert to .docx. -->` : virtualContent.text;
+                return { filePath, content: content, lines: content.split('\n').length, characters: content.length, tokens: virtualContent.tokenCount, error: null, isBinary: false, sizeInBytes: 0 };
             }
             return { filePath, lines: 0, characters: 0, tokens: 0, content: '<!-- Word content not processed or cached -->', error: null, isBinary: false, sizeInBytes: 0 };
         }
@@ -8039,15 +9443,7 @@ export class FlattenerService {
         if (BINARY_EXTENSIONS.has(extension)) {
             try {
                 const imageMetadata = await this._parseImageMetadata(filePath);
-                
-                const metadata = {
-                    name: path.basename(filePath),
-                    directory: path.dirname(filePath),
-                    fileType: extension.substring(1).toUpperCase(),
-                    sizeInBytes: imageMetadata.sizeInBytes,
-                    ...(imageMetadata.dimensions && { dimensions: imageMetadata.dimensions })
-                };
-
+                const metadata = { name: path.basename(filePath), directory: path.dirname(filePath), fileType: extension.substring(1).toUpperCase(), sizeInBytes: imageMetadata.sizeInBytes, ...(imageMetadata.dimensions && { dimensions: imageMetadata.dimensions }) };
                 const metadataContent = `<metadata>\n${JSON.stringify(metadata, null, 2)}\n</metadata>`;
                 return { filePath, lines: 0, characters: 0, tokens: 0, content: metadataContent, error: null, isBinary: true, sizeInBytes: imageMetadata.sizeInBytes };
             } catch (error: any) {
@@ -8057,76 +9453,39 @@ export class FlattenerService {
 
         try {
             const content = await fs.readFile(filePath, 'utf-8');
-            const lines = content.split('\n').length;
-            const characters = content.length;
-            const tokens = Math.ceil(characters / 4);
             const stats = await fs.stat(filePath);
-            return { filePath, lines, characters, tokens, content, error: null, isBinary: false, sizeInBytes: stats.size };
+            return { filePath, lines: content.split('\n').length, characters: content.length, tokens: Math.ceil(content.length / 4), content, error: null, isBinary: false, sizeInBytes: stats.size };
         } catch (error: any) {
             return { filePath, lines: 0, characters: 0, tokens: 0, content: '', error: error.message, isBinary: false, sizeInBytes: -1 };
         }
     }
 
     private generateOutputContent(results: FileStats[], rootDir: string, outputFilename: string): string {
-        let totalLines = 0;
-        let totalCharacters = 0;
-        let totalTokens = 0;
         const validResults = results.filter(r => !r.error);
-        const errorCount = results.length - validResults.length;
-
-        for (const res of validResults) {
-            totalLines += res.lines;
-            totalCharacters += res.characters;
-            totalTokens += res.tokens;
-        }
-
-        let output = `<!--\n`;
-        output += `  File: ${path.basename(outputFilename)}\n`;
-        output += `  Source Directory: ${rootDir}\n`;
-        output += `  Date Generated: ${new Date().toISOString()}\n`;
-        output += `  ---\n`;
-        output += `  Total Files: ${validResults.length}\n`;
-        if (errorCount > 0) {
-            output += `  Files with Errors: ${errorCount}\n`;
-        }
-        output += `  Total Lines: ${totalLines}\n`;
-        output += `  Total Characters: ${totalCharacters}\n`;
-        output += `  Approx. Tokens: ${totalTokens}\n`;
-        output += `-->\n\n`;
-
-        const top10 = [...validResults].filter(r => r.tokens > 0).sort((a, b) => b.tokens - a.tokens).slice(0, 10);
-
+        const totalTokens = validResults.reduce((sum, r) => sum + r.tokens, 0);
+        
+        let output = `<!--\n  File: ${path.basename(outputFilename)}\n  Source Directory: ${rootDir}\n  Date Generated: ${new Date().toISOString()}\n  ---\n`;
+        output += `  Total Files: ${validResults.length}\n  Approx. Tokens: ${totalTokens}\n-->\n\n`;
+        
         output += `<!-- Top 10 Text Files by Token Count -->\n`;
-        top10.forEach((r, i) => {
-            output += `${i + 1}. ${path.relative(rootDir, r.filePath)} (${r.tokens} tokens)\n`;
-        });
+        [...validResults].filter(r => r.tokens > 0).sort((a, b) => b.tokens - a.tokens).slice(0, 10)
+            .forEach((r, i) => output += `${i + 1}. ${path.relative(rootDir, r.filePath)} (${r.tokens} tokens)\n`);
         output += `\n`;
 
         output += `<!-- Full File List -->\n`;
         results.forEach((r, i) => {
-            const relativePath = path.relative(rootDir, r.filePath);
-            if (r.error) {
-                output += `${i + 1}. ${relativePath} - ERROR: ${r.error}\n`;
-            } else if (r.isBinary) {
-                output += `${i + 1}. ${relativePath} - [Binary] Size: ${formatBytes(r.sizeInBytes)}\n`;
-            }
-            else {
-                output += `${i + 1}. ${relativePath} - Lines: ${r.lines} - Chars: ${r.characters} - Tokens: ${r.tokens}\n`;
-            }
+            const relPath = path.relative(rootDir, r.filePath);
+            if (r.error) output += `${i + 1}. ${relPath} - ERROR: ${r.error}\n`;
+            else if (r.isBinary) output += `${i + 1}. ${relPath} - [Binary] Size: ${formatBytes(r.sizeInBytes)}\n`;
+            else output += `${i + 1}. ${relPath} - Lines: ${r.lines} - Chars: ${r.characters} - Tokens: ${r.tokens}\n`;
         });
         output += `\n`;
 
         for (const { filePath, content, error } of results) {
             const relativePath = path.relative(rootDir, filePath).replace(/\\/g, '/');
             output += `<file path="${relativePath}">\n`;
-            if (error) {
-                output += `Error reading file: ${error}\n`;
-            } else {
-                output += content;
-            }
-            if (content && !content.endsWith('\n')) {
-                output += '\n';
-            }
+            output += error ? `Error reading file: ${error}\n` : content;
+            if (content && !content.endsWith('\n')) output += '\n';
             output += `</file>\n\n`;
         }
         return output;
@@ -8134,74 +9493,30 @@ export class FlattenerService {
 }
 </file>
 
-<file path="src/backend/services/fs.service.ts">
-// Updated on: C112 (Fix starry-night imports and add more grammars)
-import * as vscode from "vscode";
-import * as path from "path";
-import * as fs from "fs/promises";
-import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
-import { ServerToClientChannel } from "@/common/ipc/channels.enum";
-import { FileNode } from "@/common/types/file-node";
-import { Services } from "./services";
-import { serverIPCs } from "@/client/views";
-import { VIEW_TYPES } from "@/common/view-types";
-import { API as GitAPI, Status } from "../types/git";
-import { ProblemCountsMap } from "@/common/ipc/channels.type";
-import { Action, MoveActionPayload } from "./action.service";
-// @ts-ignore - This is a workaround for a bug in pdf-parse that causes an ENOENT error in VS Code extensions.
-import pdf from 'pdf-parse/lib/pdf-parse.js';
-import * as XLSX from 'xlsx';
-import mammoth from 'mammoth';
+<file path="src/backend/services/highlighting.service.ts">
+// src/backend/services/highlighting.service.ts
 import { createStarryNight, common } from '@wooorm/starry-night';
 import sourceTsx from '@wooorm/starry-night/source.tsx';
 import sourceJs from '@wooorm/starry-night/source.js';
-import sourceJsx from '@wooorm/starry-night/source.js.jsx';
 import sourceTs from '@wooorm/starry-night/source.ts';
 import sourceCss from '@wooorm/starry-night/source.css';
-import sourceScss from '@wooorm/starry-night/source.scss';
+import sourceScss from '@wooorm/starry-night/source.css.scss';
 import textHtml from '@wooorm/starry-night/text.html.basic';
 import { toHtml } from 'hast-util-to-html';
+import { Services } from './services';
+import { ServerPostMessageManager } from '@/common/ipc/server-ipc';
+import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 
-
-const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
-const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
-const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
-const EXCLUSION_PATTERNS = ['node_modules', 'dist', 'out', '.git', 'dce_cache', '.vscode'];
-
-// Helper to normalize paths to use forward slashes, which is consistent in webviews
-const normalizePath = (p: string) => p.replace(/\\/g, '/');
-
-export class FSService {
-    private fileTreeCache: FileNode[] | null = null;
-    private watcher: vscode.FileSystemWatcher | null = null;
-    private refreshDebounceTimer: NodeJS.Timeout | null = null;
-    private diagnosticsDebounceTimer: NodeJS.Timeout | null = null;
-    private gitApi?: GitAPI;
-    private filesToIgnoreForAutoAdd: Set<string> = new Set();
-    private pdfTextCache = new Map<string, { text: string; tokenCount: number }>();
-    private excelMarkdownCache = new Map<string, { markdown: string; tokenCount: number }>();
-    private wordTextCache = new Map<string, { text: string; tokenCount: number }>();
+export class HighlightingService {
     private starryNight: any = null;
 
-    constructor(gitApi?: GitAPI) {
-        this.gitApi = gitApi;
-        if (this.gitApi) {
-            Services.loggerService.log(`FSService constructed with Git API. Found ${this.gitApi.repositories.length} repositories.`);
-            this.gitApi.onDidOpenRepository(() => this.triggerFullRefresh());
-            this.gitApi.repositories.forEach(repo => {
-                repo.state.onDidChange(() => {
-                    Services.loggerService.log(`Repo state changed for ${path.basename(repo.rootUri.fsPath)}`);
-                    this.triggerFullRefresh();
-                });
-            });
-        }
+    constructor() {
         this.initializeStarryNight();
     }
 
     private async initializeStarryNight() {
         try {
-            // C112: Add more grammars for better TSX/JS highlighting
-            const grammars = [...common, sourceTsx, sourceJs, sourceJsx, sourceTs, sourceCss, sourceScss, textHtml];
+            const grammars = [...common, sourceTsx, sourceJs, sourceTs, sourceCss, sourceScss, textHtml];
             this.starryNight = await createStarryNight(grammars);
             Services.loggerService.log('Starry Night syntax highlighter initialized.');
         } catch (error) {
@@ -8232,717 +9547,6 @@ export class FSService {
             Services.loggerService.error(`Starry Night highlighting failed for lang ${lang}: ${error}`);
             serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml: `<pre><code>${code}</code></pre>`, id });
         }
-    }
-
-    private triggerFullRefresh() {
-        if (this.refreshDebounceTimer) {
-            clearTimeout(this.refreshDebounceTimer);
-        }
-        this.refreshDebounceTimer = setTimeout(() => {
-            Services.loggerService.log(`Git state change or file event detected. Invalidating cache and triggering full refresh.`);
-            this.fileTreeCache = null;
-            
-            const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
-            if (serverIpc) {
-                serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, { reason: 'fileOp' });
-            }
-        }, 500); // Debounce for 500ms
-    }
-
-    private triggerDiagnosticsUpdate() {
-        if (this.diagnosticsDebounceTimer) {
-            clearTimeout(this.diagnosticsDebounceTimer);
-        }
-        this.diagnosticsDebounceTimer = setTimeout(() => {
-            Services.loggerService.log("Diagnostics changed, triggering lightweight update.");
-            const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
-            if (serverIpc) {
-                const problemMap = this.getProblemCountsMap();
-                serverIpc.sendToClient(ServerToClientChannel.UpdateProblemCounts, { problemMap });
-            }
-        }, 750);
-    }
-
-    public initializeWatcher() {
-        if (this.watcher) {
-            this.watcher.dispose();
-        }
-        
-        this.watcher = vscode.workspace.createFileSystemWatcher('**/*');
-        Services.loggerService.log("File system watcher initialized.");
-
-        const onFileChange = (uri: vscode.Uri) => {
-            const normalizedPath = normalizePath(uri.fsPath);
-            if (EXCLUSION_PATTERNS.some(pattern => normalizedPath.includes(`/${pattern}/`))) {
-                return;
-            }
-            this.triggerFullRefresh();
-        };
-
-        const onFileCreate = async (uri: vscode.Uri) => {
-            const normalizedPath = normalizePath(uri.fsPath);
-            const autoAddEnabled = Services.selectionService.getAutoAddState();
-
-            // Bug Fix: Check if this file was part of a recent move and should be ignored
-            if (this.filesToIgnoreForAutoAdd.has(normalizedPath)) {
-                this.filesToIgnoreForAutoAdd.delete(normalizedPath);
-                Services.loggerService.log(`Ignoring auto-add for recently moved file: ${normalizedPath}`);
-            } else if (autoAddEnabled) {
-                Services.loggerService.log(`Auto-add enabled. Adding new file to selection: ${uri.fsPath}`);
-                const currentSelection = await Services.selectionService.getLastSelection();
-                const newSelection = [...new Set([...currentSelection, normalizedPath])];
-                await Services.selectionService.saveCurrentSelection(newSelection);
-            }
-            onFileChange(uri);
-        };
-
-        this.watcher.onDidChange(onFileChange);
-        this.watcher.onDidCreate(onFileCreate);
-        this.watcher.onDidDelete(onFileChange);
-
-        vscode.languages.onDidChangeDiagnostics(() => {
-            this.triggerDiagnosticsUpdate();
-        });
-    }
-
-    private async getFileStats(filePath: string): Promise<{ tokenCount: number, sizeInBytes: number, isImage: boolean, extension: string, isPdf: boolean, isExcel: boolean, isWordDoc: boolean }> {
-        const extension = path.extname(filePath).toLowerCase();
-        try {
-            const stats = await fs.stat(filePath);
-            const isImage = IMAGE_EXTENSIONS.has(extension);
-            const isPdf = extension === '.pdf';
-            const isExcel = EXCEL_EXTENSIONS.has(extension);
-            const isWordDoc = WORD_EXTENSIONS.has(extension);
-            
-            if (isImage) {
-                return { tokenCount: 0, sizeInBytes: stats.size, isImage, extension, isPdf: false, isExcel: false, isWordDoc: false };
-            }
-
-            if (isPdf) {
-                 const cached = this.pdfTextCache.get(filePath);
-                 return { tokenCount: cached?.tokenCount || 0, sizeInBytes: stats.size, isImage: false, extension, isPdf: true, isExcel: false, isWordDoc: false };
-            }
-            
-            if (isExcel) {
-                const cached = this.excelMarkdownCache.get(filePath);
-                return { tokenCount: cached?.tokenCount || 0, sizeInBytes: stats.size, isImage: false, extension, isPdf: false, isExcel: true, isWordDoc: false };
-            }
-
-            if (isWordDoc) {
-                const cached = this.wordTextCache.get(filePath);
-                return { tokenCount: cached?.tokenCount || 0, sizeInBytes: stats.size, isImage: false, extension, isPdf: false, isExcel: false, isWordDoc: true };
-            }
-
-            if (stats.size > 5_000_000) {
-                Services.loggerService.warn(`Skipping token count for large file: ${filePath} (${stats.size} bytes)`);
-                return { tokenCount: 0, sizeInBytes: stats.size, isImage: false, extension, isPdf: false, isExcel: false, isWordDoc: false };
-            }
-            
-            const content = await fs.readFile(filePath, 'utf-8');
-            const tokenCount = Math.ceil(content.length / 4);
-            return { tokenCount, sizeInBytes: stats.size, isImage: false, extension, isPdf: false, isExcel: false, isWordDoc: false };
-
-        } catch (error: any) {
-            Services.loggerService.warn(`Could not get stats for ${filePath}: ${error.message}`);
-            return { tokenCount: 0, sizeInBytes: 0, isImage: false, extension, isPdf: false, isExcel: false, isWordDoc: false };
-        }
-    }
-
-    public async handleWorkspaceFilesRequest(serverIpc: ServerPostMessageManager, forceRefresh: boolean = false) {
-        if (!forceRefresh && this.fileTreeCache) {
-            Services.loggerService.log("Serving file tree from cache.");
-            serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: this.fileTreeCache });
-            return;
-        }
-
-        Services.loggerService.log("Building file tree from scratch.");
-        const workspaceFolders = vscode.workspace.workspaceFolders;
-        if (!workspaceFolders || workspaceFolders.length === 0) {
-            Services.loggerService.warn("No workspace folder open. Sending empty file list.");
-            serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: [] });
-            return;
-        }
-        
-        const rootUri = workspaceFolders[0].uri;
-        const fileTree = await this.buildTreeFromTraversal(rootUri);
-
-        this.fileTreeCache = [fileTree];
-        Services.loggerService.log("Sending file tree to client and caching result.");
-        serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: this.fileTreeCache });
-    }
-
-    private getGitStatusMap(): Map<string, string> {
-        const statusMap = new Map<string, string>();
-        if (!this.gitApi || this.gitApi.repositories.length === 0) {
-            Services.loggerService.warn("Git API not available or no repositories found.");
-            return statusMap;
-        }
-        
-        const repo = this.gitApi.repositories[0];
-        Services.loggerService.log(`Querying Git repo: ${repo.rootUri.fsPath}`);
-
-        const getStatusChar = (status: Status): string => {
-            switch (status) {
-                case Status.INDEX_ADDED: return 'A';
-                case Status.MODIFIED: return 'M';
-                case Status.DELETED: return 'D';
-                case Status.UNTRACKED: return 'U';
-                case Status.IGNORED: return 'I';
-                case Status.CONFLICT: return 'C';
-                default: return '';
-            }
-        };
-        
-        const changes = [
-            ...repo.state.workingTreeChanges, 
-            ...repo.state.indexChanges, 
-            ...repo.state.mergeChanges
-        ];
-        
-        Services.loggerService.log(`Found ${changes.length} changes in working tree/index/merge.`);
-        changes.forEach(change => {
-            const normPath = normalizePath(change.uri.fsPath);
-            const statusChar = getStatusChar(change.status);
-            if (statusChar) {
-                statusMap.set(normPath, statusChar);
-            }
-        });
-        
-        return statusMap;
-    }
-
-    private getProblemCountsMap(): ProblemCountsMap {
-        const problemMap: ProblemCountsMap = {};
-        const diagnostics = vscode.languages.getDiagnostics();
-
-        for (const [uri, diagnosticArr] of diagnostics) {
-            const path = normalizePath(uri.fsPath);
-            let counts = problemMap[path];
-            if (!counts) {
-                counts = { error: 0, warning: 0 };
-                problemMap[path] = counts;
-            }
-            for (const diag of diagnosticArr) {
-                if (diag.severity === vscode.DiagnosticSeverity.Error) {
-                    counts.error++;
-                } else if (diag.severity === vscode.DiagnosticSeverity.Warning) {
-                    counts.warning++;
-                }
-            }
-        }
-        return problemMap;
-    }
-
-    private async buildTreeFromTraversal(rootUri: vscode.Uri): Promise<FileNode> {
-        const rootPath = rootUri.fsPath;
-        const rootName = path.basename(rootPath);
-        Services.loggerService.log(`Starting traversal from root: ${rootName}`);
-
-        const gitStatusMap = this.getGitStatusMap();
-        Services.loggerService.log(`Built Git status map with ${gitStatusMap.size} entries.`);
-        const problemCountsMap = this.getProblemCountsMap();
-        Services.loggerService.log(`Built problem counts map with ${Object.keys(problemCountsMap).length} entries.`);
-
-        const rootNode: FileNode = {
-            name: rootName,
-            absolutePath: normalizePath(rootPath),
-            children: [],
-            tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false,
-            gitStatus: gitStatusMap.get(normalizePath(rootPath)),
-            problemCounts: problemCountsMap[normalizePath(rootPath)]
-        };
-
-        rootNode.children = await this._traverseDirectory(rootUri, gitStatusMap, problemCountsMap);
-        this._aggregateStats(rootNode);
-
-        return rootNode;
-    }
-    
-    private async _traverseDirectory(dirUri: vscode.Uri, gitStatusMap: Map<string, string>, problemCountsMap: ProblemCountsMap): Promise<FileNode[]> {
-        const children: FileNode[] = [];
-        try {
-            const entries = await vscode.workspace.fs.readDirectory(dirUri);
-            for (const [name, type] of entries) {
-                if (EXCLUSION_PATTERNS.includes(name)) {
-                    continue;
-                }
-
-                const childUri = vscode.Uri.joinPath(dirUri, name);
-                const childPath = normalizePath(childUri.fsPath);
-
-                if (type === vscode.FileType.Directory) {
-                    const dirNode: FileNode = {
-                        name,
-                        absolutePath: childPath,
-                        children: await this._traverseDirectory(childUri, gitStatusMap, problemCountsMap),
-                        tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false,
-                        gitStatus: gitStatusMap.get(childPath),
-                        problemCounts: problemCountsMap[childPath]
-                    };
-                    this._aggregateStats(dirNode);
-                    children.push(dirNode);
-                } else if (type === vscode.FileType.File) {
-                    const stats = await this.getFileStats(childPath);
-                    const gitStatus = gitStatusMap.get(childPath);
-                    if (gitStatus) {
-                        Services.loggerService.log(`[Git Status] Found status '${gitStatus}' for ${childPath}`);
-                    }
-                    const fileNode: FileNode = {
-                        name,
-                        absolutePath: childPath,
-                        ...stats,
-                        fileCount: 1,
-                        gitStatus: gitStatus,
-                        problemCounts: problemCountsMap[childPath]
-                    };
-                    children.push(fileNode);
-                }
-            }
-        } catch (error: any) {
-            Services.loggerService.error(`Error traversing directory ${dirUri.fsPath}: ${error.message}`);
-        }
-
-        children.sort((a, b) => {
-            const aIsFolder = !!a.children;
-            const bIsFolder = !!b.children;
-            if (aIsFolder !== bIsFolder) return aIsFolder ? -1 : 1;
-            return a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' });
-        });
-
-        return children;
-    }
-
-    private _aggregateStats(node: FileNode): void {
-        if (!node.children) {
-            node.fileCount = 1;
-            return;
-        }
-        
-        let totalTokens = 0;
-        let totalFiles = 0;
-        let totalBytes = 0;
-        let totalErrors = node.problemCounts?.error || 0;
-        let totalWarnings = node.problemCounts?.warning || 0;
-
-        for (const child of node.children) {
-            totalTokens += child.tokenCount;
-            totalFiles += child.fileCount;
-            totalBytes += child.sizeInBytes;
-            if(child.problemCounts) {
-                totalErrors += child.problemCounts.error;
-                totalWarnings += child.problemCounts.warning;
-            }
-        }
-        node.tokenCount = totalTokens;
-        node.fileCount = totalFiles;
-        node.sizeInBytes = totalBytes;
-        if(totalErrors > 0 || totalWarnings > 0) {
-            node.problemCounts = { error: totalErrors, warning: totalWarnings };
-        }
-    }
-
-    public getVirtualPdfContent(filePath: string) {
-        return this.pdfTextCache.get(filePath);
-    }
-
-    public getVirtualExcelContent(filePath: string) {
-        return this.excelMarkdownCache.get(filePath);
-    }
-
-    public getVirtualWordContent(filePath: string) {
-        return this.wordTextCache.get(filePath);
-    }
-
-    // --- File Operations ---
-
-    public async handleFileContentRequest(filePath: string, serverIpc: ServerPostMessageManager) {
-        Services.loggerService.log(`handleFileContentRequest initiated for: ${filePath}`);
-        try {
-            const uri = vscode.Uri.file(filePath);
-            const contentBuffer = await vscode.workspace.fs.readFile(uri);
-            const content = Buffer.from(contentBuffer).toString('utf-8');
-            Services.loggerService.log(`Successfully read content for: ${filePath}. Sending to client.`);
-            serverIpc.sendToClient(ServerToClientChannel.SendFileContent, { path: filePath, content });
-        } catch (error) {
-            Services.loggerService.error(`Failed to read file content for ${filePath}: ${error}`);
-            serverIpc.sendToClient(ServerToClientChannel.SendFileContent, { path: filePath, content: null });
-        }
-    }
-
-    public async handleFileExistenceRequest(paths: string[], serverIpc: ServerPostMessageManager) {
-        Services.loggerService.log(`[File Existence] Received request to check paths: ${JSON.stringify(paths)}`);
-        const workspaceFolders = vscode.workspace.workspaceFolders;
-        if (!workspaceFolders || workspaceFolders.length === 0) {
-            Services.loggerService.error("[File Existence] Cannot check for files, no workspace folder is open.");
-            serverIpc.sendToClient(ServerToClientChannel.SendFileExistence, { existenceMap: {} });
-            return;
-        }
-        const rootPath = workspaceFolders[0].uri.fsPath;
-        Services.loggerService.log(`[File Existence] Using workspace root: ${rootPath}`);
-    
-        const existenceMap: { [path: string]: boolean } = {};
-        const checks = paths.map(async (p_raw) => {
-            const p = p_raw.trim().replace(/^[`"']|[`"']$/g, '');
-            if (!p) return;
-    
-            let absolutePath = path.resolve(rootPath, p);
-            let normalizedPath = normalizePath(absolutePath);
-    
-            try {
-                await vscode.workspace.fs.stat(vscode.Uri.file(normalizedPath));
-                existenceMap[p_raw] = true;
-                Services.loggerService.log(`[File Existence] SUCCESS: Found file at '${normalizedPath}'`);
-            } catch {
-                // Fallback for documentation artifacts
-                if (/^A\d+/.test(p)) {
-                    const artifactPath = path.resolve(rootPath, 'src/Artifacts', p);
-                    const normalizedArtifactPath = normalizePath(artifactPath);
-                    try {
-                        await vscode.workspace.fs.stat(vscode.Uri.file(normalizedArtifactPath));
-                        existenceMap[p_raw] = true;
-                        Services.loggerService.log(`[File Existence] SUCCESS (Fallback): Found doc artifact at '${normalizedArtifactPath}'`);
-                        return;
-                    } catch {}
-                }
-                existenceMap[p_raw] = false;
-                Services.loggerService.warn(`[File Existence] FAILED: Could not find file at '${normalizedPath}'`);
-            }
-        });
-        await Promise.all(checks);
-        serverIpc.sendToClient(ServerToClientChannel.SendFileExistence, { existenceMap });
-    }
-
-    private async _findAvailableCopyName(destinationPath: string): Promise<string> {
-        try {
-            await vscode.workspace.fs.stat(vscode.Uri.file(destinationPath));
-        } catch (error) {
-            // If stat fails, the file doesn't exist, so the original name is available.
-            return destinationPath;
-        }
-    
-        const dir = path.dirname(destinationPath);
-        const ext = path.extname(destinationPath);
-        const baseName = path.basename(destinationPath, ext);
-    
-        // First try with "-copy"
-        let copyNum = 1;
-        let nextPath = path.join(dir, `${baseName}-copy${ext}`);
-        
-        while (true) {
-            try {
-                await vscode.workspace.fs.stat(vscode.Uri.file(nextPath));
-                // File exists, increment and try again
-                copyNum++;
-                nextPath = path.join(dir, `${baseName}-copy-${copyNum}${ext}`);
-            } catch (error) {
-                // File does not exist, we found an available name
-                return nextPath;
-            }
-        }
-    }
-
-    public async handleCopyFileRequest(sourcePath: string, destinationDir: string) {
-        try {
-            const sourceName = path.basename(sourcePath);
-            const initialDestinationPath = path.join(destinationDir, sourceName);
-            
-            const finalDestinationPath = await this._findAvailableCopyName(initialDestinationPath);
-
-            const sourceUri = vscode.Uri.file(sourcePath);
-            const destinationUri = vscode.Uri.file(finalDestinationPath);
-
-            Services.loggerService.log(`Copying from ${sourceUri.fsPath} to ${destinationUri.fsPath}`);
-            await vscode.workspace.fs.copy(sourceUri, destinationUri, { overwrite: false });
-            Services.loggerService.log(`Successfully copied file.`);
-        } catch (error: any) {
-            const errorMessage = `Failed to copy file: ${error.message}`;
-            vscode.window.showErrorMessage(errorMessage);
-            Services.loggerService.error(errorMessage);
-        }
-    }
-
-    public async handleCopyFileFromUri(sourceUriString: string, targetDir: string) {
-        try {
-            const sourceUri = vscode.Uri.parse(sourceUriString);
-            const fileName = path.basename(sourceUri.fsPath);
-            const targetUri = vscode.Uri.file(path.join(targetDir, fileName));
-
-            Services.loggerService.log(`Copying file from URI: ${sourceUri.toString()} to ${targetUri.toString()}`);
-            await vscode.workspace.fs.copy(sourceUri, targetUri);
-            Services.loggerService.log(`Successfully copied file from URI.`);
-        } catch (error: any) {
-            const errorMessage = `Failed to copy file from URI: ${error.message}`;
-            vscode.window.showErrorMessage(errorMessage);
-            Services.loggerService.error(errorMessage);
-        }
-    }
-
-    public async handleAddFileFromBuffer(targetPath: string, data: Uint8Array) {
-        try {
-            const uri = vscode.Uri.file(targetPath);
-            await vscode.workspace.fs.writeFile(uri, data);
-            Services.loggerService.log(`Successfully added file from buffer to ${targetPath}`);
-        } catch (error: any) {
-            const errorMessage = `Failed to add file from buffer: ${error.message}`;
-            vscode.window.showErrorMessage(errorMessage);
-            Services.loggerService.error(errorMessage);
-        }
-    }
-
-    public async handlePdfToTextRequest(filePath: string, serverIpc: ServerPostMessageManager) {
-        Services.loggerService.log(`[C79 CACHE FIX] Received RequestPdfToText for: ${filePath}`);
-        if (this.pdfTextCache.has(filePath)) {
-            const cached = this.pdfTextCache.get(filePath)!;
-            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: cached.tokenCount });
-            Services.loggerService.log(`[C79 CACHE FIX] PDF served from cache: ${filePath}`);
-            return;
-        }
-
-        try {
-            Services.loggerService.log(`[PDF] Processing: ${filePath}`);
-            const buffer = await fs.readFile(filePath);
-            Services.loggerService.log(`[PDF] File buffer read. Size: ${buffer.length}. Parsing with pdf-parse...`);
-            const data = await pdf(buffer);
-            const text = data.text;
-            const tokenCount = Math.ceil(text.length / 4);
-            
-            this.pdfTextCache.set(filePath, { text, tokenCount });
-            Services.loggerService.log(`[C79 CACHE FIX] PDF Parsed and cached: ${path.basename(filePath)} (${tokenCount} tokens)`);
-
-            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: tokenCount });
-        } catch (error: any) {
-            const errorMessage = `Failed to parse PDF: ${path.basename(filePath)}`;
-            Services.loggerService.error(`[PDF] Error processing ${filePath}: ${error.stack || error.message}`);
-            console.error(error);
-            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: 0, error: errorMessage });
-        }
-    }
-
-    private _sheetToMarkdown(sheet: XLSX.WorkSheet): string {
-        const data: any[][] = XLSX.utils.sheet_to_json(sheet, { header: 1 });
-        if (data.length === 0) {
-            return "";
-        }
-    
-        // Sanitize all cell data to escape pipe characters
-        const sanitizedData = data.map(row => 
-            row.map(cell => {
-                const cellStr = cell ? String(cell) : '';
-                return cellStr.replace(/\|/g, '\\|').replace(/\r?\n/g, '<br/>');
-            })
-        );
-    
-        const header = sanitizedData[0];
-        const body = sanitizedData.slice(1);
-    
-        const headerLine = `| ${header.join(' | ')} |`;
-        const separatorLine = `| ${header.map(() => '---').join(' | ')} |`;
-    
-        const bodyLines = body.map(row => `| ${row.join(' | ')} |`).join('\n');
-    
-        return `${headerLine}\n${separatorLine}\n${bodyLines}`;
-    }
-
-    public async handleExcelToTextRequest(filePath: string, serverIpc: ServerPostMessageManager) {
-        Services.loggerService.log(`[C79 CACHE FIX] Received RequestExcelToText for: ${filePath}`);
-        if (this.excelMarkdownCache.has(filePath)) {
-            const cached = this.excelMarkdownCache.get(filePath)!;
-            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: cached.tokenCount });
-            Services.loggerService.log(`[C79 CACHE FIX] Excel served from cache: ${filePath}`);
-            return;
-        }
-
-        try {
-            Services.loggerService.log(`[Excel] Processing: ${filePath}`);
-            const buffer = await fs.readFile(filePath);
-            Services.loggerService.log(`[Excel] File buffer read. Size: ${buffer.length}. Parsing with xlsx...`);
-            const workbook = XLSX.read(buffer, { type: 'buffer' });
-            
-            Services.loggerService.log(`[Excel] Workbook parsed. Found sheets: ${workbook.SheetNames.join(', ')}`);
-            let markdown = '';
-
-            workbook.SheetNames.forEach(sheetName => {
-                markdown += `### Sheet: ${sheetName}\n\n`;
-                const worksheet = workbook.Sheets[sheetName];
-                markdown += this._sheetToMarkdown(worksheet);
-                markdown += '\n\n';
-            });
-            Services.loggerService.log(`[Excel] Markdown conversion complete.`);
-
-            const tokenCount = Math.ceil(markdown.length / 4);
-            this.excelMarkdownCache.set(filePath, { markdown, tokenCount });
-            Services.loggerService.log(`[C79 CACHE FIX] Excel Parsed and cached: ${path.basename(filePath)} (${tokenCount} tokens)`);
-
-            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: tokenCount });
-
-        } catch (error: any) {
-             const errorMessage = `Failed to parse Excel/CSV file: ${path.basename(filePath)}`;
-             Services.loggerService.error(`[Excel] Error processing ${filePath}: ${error.stack || error.message}`);
-             console.error(error);
-             serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: 0, error: errorMessage });
-        }
-    }
-
-    public async handleWordToTextRequest(filePath: string, serverIpc: ServerPostMessageManager) {
-        Services.loggerService.log(`[C79 CACHE FIX] Received RequestWordToText for: ${filePath}`);
-        if (this.wordTextCache.has(filePath)) {
-            const cached = this.wordTextCache.get(filePath)!;
-            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: cached.tokenCount });
-            Services.loggerService.log(`[C79 CACHE FIX] Word served from cache: ${filePath}`);
-            return;
-        }
-
-        const extension = path.extname(filePath).toLowerCase();
-        if (extension === '.doc') {
-            const unsupportedMessage = "UNSUPPORTED_FORMAT";
-            this.wordTextCache.set(filePath, { text: unsupportedMessage, tokenCount: 0 });
-            Services.loggerService.warn(`[Word] Legacy .doc format is not supported for file: ${filePath}`);
-            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: 0, error: "Legacy .doc format not supported." });
-            return;
-        }
-
-        try {
-            Services.loggerService.log(`[Word] Processing: ${filePath}`);
-            const buffer = await fs.readFile(filePath);
-            const result = await mammoth.extractRawText({ buffer });
-            const text = result.value;
-            const tokenCount = Math.ceil(text.length / 4);
-            
-            this.wordTextCache.set(filePath, { text, tokenCount });
-            Services.loggerService.log(`[C79 CACHE FIX] Word Parsed and cached: ${path.basename(filePath)} (${tokenCount} tokens)`);
-
-            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: tokenCount });
-        } catch (error: any) {
-            let errorMessage = `Failed to parse Word file: ${path.basename(filePath)}`;
-            if (error instanceof Error && error.message.includes("Can't find end of central directory")) {
-                errorMessage = "File may be corrupted or is not a valid .docx format.";
-            }
-            Services.loggerService.error(`[Word] Error processing ${filePath}: ${error.stack || error.message}`);
-            serverIpc.sendToClient(ServerToClientChannel.UpdateNodeStats, { path: filePath, tokenCount: 0, error: errorMessage });
-        }
-    }
-
-    public async handleOpenFileRequest(filePath: string) {
-        try {
-            const uri = vscode.Uri.file(filePath);
-            await vscode.commands.executeCommand('vscode.open', uri);
-        } catch (error: any) {
-            const errorMessage = `Failed to open file ${filePath}: ${error.message}`;
-            vscode.window.showErrorMessage(errorMessage);
-            Services.loggerService.error(errorMessage);
-        }
-    }
-
-    public async handleNewFileRequest(parentDirectory: string) {
-        const newFileName = await vscode.window.showInputBox({
-            prompt: "Enter the name of the new file",
-            value: "new-file.ts",
-        });
-        if (newFileName) {
-            const newFilePath = path.join(parentDirectory, newFileName);
-            try {
-                await vscode.workspace.fs.writeFile(vscode.Uri.file(newFilePath), new Uint8Array());
-            } catch (error: any) {
-                vscode.window.showErrorMessage(`Failed to create file: ${error.message}`);
-            }
-        }
-    }
-
-    public async handleNewFolderRequest(parentDirectory: string) {
-        const newFolderName = await vscode.window.showInputBox({
-            prompt: "Enter the name of the new folder",
-            value: "new-folder",
-        });
-        if (newFolderName) {
-            const newFolderPath = path.join(parentDirectory, newFolderName);
-            try {
-                await vscode.workspace.fs.createDirectory(vscode.Uri.file(newFolderPath));
-            } catch (error: any) {
-                vscode.window.showErrorMessage(`Failed to create folder: ${error.message}`);
-            }
-        }
-    }
-
-    public async handleFileRenameRequest(oldPath: string, newName: string) {
-        const newPath = path.join(path.dirname(oldPath), newName);
-        try {
-            await vscode.workspace.fs.rename(vscode.Uri.file(oldPath), vscode.Uri.file(newPath));
-        } catch (error: any) {
-            vscode.window.showErrorMessage(`Failed to rename: ${error.message}`);
-        }
-    }
-
-    public async handleMoveFileRequest(oldPath: string, newPath: string) {
-        try {
-            // Bug Fix: Prevent auto-add for moved files that weren't checked
-            const lastSelection = await Services.selectionService.getLastSelection();
-            const isChecked = lastSelection.some(p => p.startsWith(oldPath));
-            if (!isChecked) {
-                this.filesToIgnoreForAutoAdd.add(newPath);
-                // Clean up the ignore set after a short delay to prevent memory leaks
-                setTimeout(() => this.filesToIgnoreForAutoAdd.delete(newPath), 2000);
-            }
-
-            await vscode.workspace.fs.rename(vscode.Uri.file(oldPath), vscode.Uri.file(newPath));
-            await Services.selectionService.updatePathInSelections(oldPath, newPath);
-
-            // Push to undo stack
-            const action: Action = { type: 'move', payload: { fromPath: oldPath, toPath: newPath } as MoveActionPayload };
-            Services.actionService.push(action);
-
-        } catch (error: any) {
-            vscode.window.showErrorMessage(`Failed to move file: ${error.message}`);
-            Services.loggerService.error(`Failed to move file from ${oldPath} to ${newPath}: ${error.message}`);
-        }
-    }
-
-    public async handleFileDeleteRequest(filePath: string) {
-        const confirmation = await vscode.window.showWarningMessage(
-            `Are you sure you want to delete ${path.basename(filePath)}? This will move it to the trash.`,
-            { modal: true },
-            'Delete'
-        );
-        if (confirmation === 'Delete') {
-            try {
-                await vscode.workspace.fs.delete(vscode.Uri.file(filePath), { recursive: true, useTrash: true });
-                // Note: Undo for delete is not implemented due to API limitations
-            } catch (error: any) {
-                vscode.window.showErrorMessage(`Failed to delete: ${error.message}`);
-            }
-        }
-    }
-
-    public async handleBatchFileDeleteRequest(paths: string[]) {
-        if (paths.length === 0) return;
-        const confirmation = await vscode.window.showWarningMessage(
-            `Are you sure you want to delete ${paths.length} item(s)? This will move them to the trash.`,
-            { modal: true },
-            'Delete'
-        );
-        if (confirmation === 'Delete') {
-            try {
-                await Promise.all(paths.map(p => vscode.workspace.fs.delete(vscode.Uri.file(p), { recursive: true, useTrash: true })));
-                Services.loggerService.log(`Successfully deleted ${paths.length} items.`);
-            } catch (error: any) {
-                vscode.window.showErrorMessage(`Failed to delete items: ${error.message}`);
-                Services.loggerService.error(`Failed to delete items: ${error.message}`);
-            }
-        }
-    }
-
-    public handleRevealInExplorerRequest(filePath: string) {
-        Services.loggerService.log(`Executing 'revealInExplorer' for path: ${filePath}`);
-        vscode.commands.executeCommand('revealInExplorer', vscode.Uri.file(filePath));
-    }
-
-    public handleCopyPathRequest(filePath: string, relative: boolean) {
-        const workspaceFolders = vscode.workspace.workspaceFolders;
-        let pathToCopy = filePath;
-        if (relative && workspaceFolders && workspaceFolders.length > 0) {
-            pathToCopy = path.relative(workspaceFolders[0].uri.fsPath, filePath);
-        }
-        vscode.env.clipboard.writeText(pathToCopy);
-        vscode.window.showInformationMessage(`Copied to clipboard: ${pathToCopy}`);
     }
 }
 </file>
@@ -9348,29 +9952,35 @@ export class SelectionService {
 
 <file path="src/backend/services/services.ts">
 import "reflect-metadata";
-import { FSService } from "./fs.service";
 import { FlattenerService } from "./flattener.service";
 import { SelectionService } from "./selection.service";
 import { LoggerService } from "./logger.service";
 import { ActionService } from "./action.service";
-import { HistoryService } from "./history.service"; // Import HistoryService
-import { PromptService } from "./prompt.service"; // Import PromptService
+import { HistoryService } from "./history.service";
+import { PromptService } from "./prompt.service";
 import { API as GitAPI } from "../types/git";
+import { FileTreeService } from "./file-tree.service";
+import { FileOperationService } from "./file-operation.service";
+import { ContentExtractionService } from "./content-extraction.service";
+import { HighlightingService } from "./highlighting.service";
 
-// A simple container for services
 class ServiceContainer {
-    public fsService!: FSService;
+    public fileTreeService!: FileTreeService;
+    public fileOperationService = new FileOperationService();
+    public contentExtractionService = new ContentExtractionService();
+    public highlightingService = new HighlightingService();
+    
     public flattenerService = new FlattenerService();
     public selectionService = new SelectionService();
     public loggerService = LoggerService.getInstance();
     public actionService = new ActionService();
-    public historyService = new HistoryService(); // Instantiate HistoryService
-    public promptService = new PromptService(); // Instantiate PromptService
+    public historyService = new HistoryService();
+    public promptService = new PromptService();
     
     public initialize(gitApi?: GitAPI) {
         this.loggerService.log("Services initializing...");
-        this.fsService = new FSService(gitApi);
-        this.fsService.initializeWatcher();
+        this.fileTreeService = new FileTreeService(gitApi);
+        this.fileTreeService.initializeWatcher();
         this.loggerService.log("Services initialized successfully.");
     }
 }
@@ -10890,147 +11500,57 @@ export const viewConfig = {
 </file>
 
 <file path="src/client/views/context-chooser.view/on-message.ts">
+// Updated on: C114 (Refactor to use new services)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
-import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
+import { ClientToServerChannel } from "@/common/ipc/channels.enum";
 import { Services } from "@/backend/services/services";
 import * as vscode from "vscode";
 
 export function onMessage(serverIpc: ServerPostMessageManager) {
-    const fsService = Services.fsService;
-    const flattenerService = Services.flattenerService;
-    const loggerService = Services.loggerService;
-    const selectionService = Services.selectionService;
-    const actionService = Services.actionService;
+    const { fileTreeService, fileOperationService, contentExtractionService, flattenerService, selectionService, actionService, loggerService } = Services;
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestInitialData, () => {
-        loggerService.log("WebView is ready. Sending initial data.");
-        // Send trust state first
-        serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceTrustState, { isTrusted: vscode.workspace.isTrusted });
-        // Then request other data
-        fsService.handleWorkspaceFilesRequest(serverIpc, false);
+        serverIpc.sendToClient(vscode.workspace.isTrusted ? "SendWorkspaceTrustState" : "SendWorkspaceTrustState", { isTrusted: vscode.workspace.isTrusted });
+        fileTreeService.handleWorkspaceFilesRequest(serverIpc, false);
     });
 
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestWorkspaceFiles, (data) => {
-        loggerService.log(`Received RequestWorkspaceFiles from client (force=${data.force}).`);
-        fsService.handleWorkspaceFilesRequest(serverIpc, data.force);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestFlattenContext, (data) => {
-        flattenerService.flatten(data.selectedPaths);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestNewFile, (data) => {
-        fsService.handleNewFileRequest(data.parentDirectory);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestNewFolder, (data) => {
-        fsService.handleNewFolderRequest(data.parentDirectory);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestFileRename, (data) => {
-        fsService.handleFileRenameRequest(data.oldPath, data.newName);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestFileDelete, (data) => {
-        fsService.handleFileDeleteRequest(data.path);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestBatchFileDelete, (data) => {
-        fsService.handleBatchFileDeleteRequest(data.paths);
-    });
-    
-    serverIpc.onClientMessage(ClientToServerChannel.RequestRevealInExplorer, (data) => {
-        fsService.handleRevealInExplorerRequest(data.path);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestCopyPath, (data) => {
-        fsService.handleCopyPathRequest(data.path, data.relative);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestOpenFile, (data) => {
-        fsService.handleOpenFileRequest(data.path);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestMoveFile, (data) => {
-        fsService.handleMoveFileRequest(data.oldPath, data.newPath);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestCopyFile, (data) => {
-        fsService.handleCopyFileRequest(data.sourcePath, data.destinationDir);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestAddFileFromBuffer, (data) => {
-        fsService.handleAddFileFromBuffer(data.targetPath, data.data);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestCopyFileFromUri, (data) => {
-        fsService.handleCopyFileFromUri(data.sourceUri, data.targetDir);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestPdfToText, (data) => {
-        loggerService.log(`[IPC] Received RequestPdfToText for: ${data.path}`);
-        fsService.handlePdfToTextRequest(data.path, serverIpc);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestExcelToText, (data) => {
-        loggerService.log(`[IPC] Received RequestExcelToText for: ${data.path}`);
-        fsService.handleExcelToTextRequest(data.path, serverIpc);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestWordToText, (data) => {
-        loggerService.log(`[IPC] Received RequestWordToText for: ${data.path}`);
-        fsService.handleWordToTextRequest(data.path, serverIpc);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestUndo, () => {
-        actionService.undo();
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestRedo, () => {
-        actionService.redo();
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.SaveCurrentSelection, (data) => {
-        selectionService.saveCurrentSelection(data.paths);
-    });
+    serverIpc.onClientMessage(ClientToServerChannel.RequestWorkspaceFiles, (data) => fileTreeService.handleWorkspaceFilesRequest(serverIpc, data.force));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestFlattenContext, (data) => flattenerService.flatten(data.selectedPaths));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestNewFile, (data) => fileOperationService.handleNewFileRequest(data.parentDirectory));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestNewFolder, (data) => fileOperationService.handleNewFolderRequest(data.parentDirectory));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestFileRename, (data) => fileOperationService.handleFileRenameRequest(data.oldPath, data.newName));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestFileDelete, (data) => fileOperationService.handleFileDeleteRequest(data.path));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestBatchFileDelete, (data) => fileOperationService.handleBatchFileDeleteRequest(data.paths));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestRevealInExplorer, (data) => fileOperationService.handleRevealInExplorerRequest(data.path));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestCopyPath, (data) => fileOperationService.handleCopyPathRequest(data.path, data.relative));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestOpenFile, (data) => fileOperationService.handleOpenFileRequest(data.path));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestMoveFile, (data) => fileOperationService.handleMoveFileRequest(data.oldPath, data.newPath));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestCopyFile, (data) => fileOperationService.handleCopyFileRequest(data.sourcePath, data.destinationDir));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestAddFileFromBuffer, (data) => fileOperationService.handleAddFileFromBuffer(data.targetPath, data.data));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestCopyFileFromUri, (data) => fileOperationService.handleCopyFileFromUri(data.sourceUri, data.targetDir));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestPdfToText, (data) => contentExtractionService.handlePdfToTextRequest(data.path, serverIpc));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestExcelToText, (data) => contentExtractionService.handleExcelToTextRequest(data.path, serverIpc));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestWordToText, (data) => contentExtractionService.handleWordToTextRequest(data.path, serverIpc));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestUndo, () => actionService.undo());
+    serverIpc.onClientMessage(ClientToServerChannel.RequestRedo, () => actionService.redo());
+    serverIpc.onClientMessage(ClientToServerChannel.SaveCurrentSelection, (data) => selectionService.saveCurrentSelection(data.paths));
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestLastSelection, async () => {
-        loggerService.log('Received RequestLastSelection from client.');
         const lastSelection = await selectionService.getLastSelection();
         const autoAddState = selectionService.getAutoAddState();
-        loggerService.log(`Found ${lastSelection.length} paths in last selection to restore.`);
-        serverIpc.sendToClient(ServerToClientChannel.ApplySelectionSet, { paths: lastSelection });
-        
-        const sets = selectionService.getSelectionSets();
-        serverIpc.sendToClient(ServerToClientChannel.SendSelectionSets, { sets });
-        serverIpc.sendToClient(ServerToClientChannel.SendAutoAddState, { enabled: autoAddState });
+        serverIpc.sendToClient("ApplySelectionSet", { paths: lastSelection });
+        serverIpc.sendToClient("SendSelectionSets", { sets: selectionService.getSelectionSets() });
+        serverIpc.sendToClient("SendAutoAddState", { enabled: autoAddState });
     });
 
-    serverIpc.onClientMessage(ClientToServerChannel.SaveAutoAddState, (data) => {
-        selectionService.saveAutoAddState(data.enabled);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.VSCodeCommand, (data) => {
-        const { command, args = [] } = data;
-        vscode.commands.executeCommand(command, ...args);
-    });
+    serverIpc.onClientMessage(ClientToServerChannel.SaveAutoAddState, (data) => selectionService.saveAutoAddState(data.enabled));
+    serverIpc.onClientMessage(ClientToServerChannel.VSCodeCommand, (data) => vscode.commands.executeCommand(data.command, ...(data.args || [])));
 
     serverIpc.onClientMessage(ClientToServerChannel.LogMessage, (data) => {
-        const { level, message } = data;
-        const logMessage = `[WebView] ${message}`;
-        switch (level) {
-            case 'warn':
-                loggerService.warn(logMessage);
-                break;
-            case 'error':
-                loggerService.error(logMessage);
-                break;
-            case 'info':
-            default:
-                loggerService.log(logMessage);
-                break;
-        }
+        const logMessage = `[WebView] ${data.message}`;
+        if (data.level === 'warn') loggerService.warn(logMessage);
+        else if (data.level === 'error') loggerService.error(logMessage);
+        else loggerService.log(logMessage);
     });
 }
 </file>
@@ -12117,13 +12637,13 @@ export const viewConfig = {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/on-message.ts">
-// src/client/views/parallel-copilot.view/on-message.ts
+// Updated on: C114 (Refactor to use new services)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
-import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
+import { ClientToServerChannel } from "@/common/ipc/channels.enum";
 
 export function onMessage(serverIpc: ServerPostMessageManager) {
-    const { loggerService, promptService, fsService, historyService } = Services;
+    const { loggerService, promptService, fileOperationService, highlightingService, historyService } = Services;
     loggerService.log("Parallel Co-Pilot view message handler initialized.");
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestCreatePromptFile, (data) => {
@@ -12131,21 +12651,21 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestFileExistence, (data) => {
-        fsService.handleFileExistenceRequest(data.paths, serverIpc);
+        fileOperationService.handleFileExistenceRequest(data.paths, serverIpc);
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestSyntaxHighlight, (data) => {
-        fsService.handleSyntaxHighlightRequest(data.code, data.lang, data.id, serverIpc);
+        highlightingService.handleSyntaxHighlightRequest(data.code, data.lang, data.id, serverIpc);
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestLatestCycleData, async () => {
         const cycleData = await historyService.getLatestCycle();
-        serverIpc.sendToClient(ServerToClientChannel.SendLatestCycleData, { cycleData });
+        serverIpc.sendToClient("SendLatestCycleData", { cycleData });
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestCycleData, async (data) => {
         const cycleData = await historyService.getCycleData(data.cycleId);
-        serverIpc.sendToClient(ServerToClientChannel.SendCycleData, { cycleData });
+        serverIpc.sendToClient("SendCycleData", { cycleData });
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.SaveCycleData, (data) => {
@@ -12153,9 +12673,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     });
     
     serverIpc.onClientMessage(ClientToServerChannel.RequestFileContent, (data) => {
-        // C101: Add high-visibility log to confirm message receipt on backend
-        loggerService.log(`[C101 IPC-TEST] Backend received RequestFileContent for: ${data.path}`);
-        fsService.handleFileContentRequest(data.path, serverIpc);
+        fileOperationService.handleFileContentRequest(data.path, serverIpc);
     });
 }
 </file>
@@ -13490,21 +14008,17 @@ let globalContext: vscode.ExtensionContext | null = null;
 let parallelCopilotPanel: vscode.WebviewPanel | undefined;
 
 function createOrShowParallelCopilotPanel(context: vscode.ExtensionContext) {
-    const column = vscode.window.activeTextEditor
-        ? vscode.window.activeTextEditor.viewColumn
-        : undefined;
+    const column = vscode.window.activeTextEditor?.viewColumn;
 
-    // If we already have a panel, show it.
     if (parallelCopilotPanel) {
         parallelCopilotPanel.reveal(column);
         return;
     }
 
-    // Otherwise, create a new panel.
     parallelCopilotPanel = vscode.window.createWebviewPanel(
-        VIEW_TYPES.PANEL.PARALLEL_COPILOT, // Identifies the type of the webview. Used internally
-        'DCE Parallel Co-Pilot', // Title of the panel displayed to the user
-        column || vscode.ViewColumn.One, // Editor column to show the new webview panel in.
+        VIEW_TYPES.PANEL.PARALLEL_COPILOT,
+        'DCE Parallel Co-Pilot',
+        column || vscode.ViewColumn.One,
         {
             enableScripts: true,
             localResourceRoots: [context.extensionUri],
@@ -13523,20 +14037,12 @@ function createOrShowParallelCopilotPanel(context: vscode.ExtensionContext) {
     serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT] = serverIpc;
     onParallelCopilotMessage(serverIpc);
 
-
-    // Reset when the panel is closed
-    parallelCopilotPanel.onDidDispose(
-        () => {
-            parallelCopilotPanel = undefined;
-        },
-        null,
-        context.subscriptions
-    );
+    parallelCopilotPanel.onDidDispose(() => {
+        parallelCopilotPanel = undefined;
+    }, null, context.subscriptions);
 }
 
-
 export async function activate(context: vscode.ExtensionContext) {
-    console.log('DCE Extension: Activating...'); 
     Services.loggerService.log('Congratulations, your extension "Data Curation Environment" is now active!');
     globalContext = context;
 
@@ -13546,64 +14052,38 @@ export async function activate(context: vscode.ExtensionContext) {
         if (gitExtension) {
             await gitExtension.activate();
             gitApi = gitExtension.exports.getAPI(1);
-            Services.loggerService.log('[extension.activate] Git API successfully retrieved.');
-        } else {
-            Services.loggerService.warn('[extension.activate] vscode.git extension not found.');
         }
     } catch (error) {
-        Services.loggerService.error(`[extension.activate] Failed to get Git API: ${error}`);
+        Services.loggerService.error(`Failed to get Git API: ${error}`);
     }
 
     try {
-        Services.loggerService.log('[extension.activate] Initializing services...');
         Services.initialize(gitApi);
-        Services.loggerService.log('[extension.activate] Services initialized successfully.');
-    } catch (error: any) {
-        Services.loggerService.error(`[extension.activate] CRITICAL - Error initializing services: ${error.message}`);
-        vscode.window.showErrorMessage("Data Curation Environment failed to initialize services. Check the debug console and logs.");
-        return;
-    }
-    
-    try {
-        Services.loggerService.log('[extension.activate] Registering commands...');
         registerCommands(context);
-        // Register the command to show the panel
         context.subscriptions.push(vscode.commands.registerCommand('dce.showParallelCopilot', () => {
             createOrShowParallelCopilotPanel(context);
         }));
-        Services.loggerService.log('[extension.activate] Commands registered successfully.');
-    } catch (error: any) {
-        Services.loggerService.error(`[extension.activate] CRITICAL - Error registering commands: ${error.message}`);
-    }
-
-    try {
-        Services.loggerService.log('[extension.activate] Registering views...');
         registerViews(context);
-        Services.loggerService.log('[extension.activate] Views registered successfully.');
     } catch (error: any) {
-        Services.loggerService.error(`[extension.activate] CRITICAL - Error registering views: ${error.message}`);
+        Services.loggerService.error(`CRITICAL - Error during activation: ${error.message}`);
+        vscode.window.showErrorMessage("Data Curation Environment failed to activate.");
+        return;
     }
     
     const updateActiveFile = () => {
         let fileUri: vscode.Uri | undefined;
-        
         const activeEditor = vscode.window.activeTextEditor;
-        if (activeEditor && activeEditor.document.uri.scheme === 'file') {
+        if (activeEditor?.document.uri.scheme === 'file') {
             fileUri = activeEditor.document.uri;
         } else {
-            const activeTab = vscode.window.tabGroups.activeTabGroup.activeTab;
-            const tabInput = activeTab?.input as { uri?: vscode.Uri };
-            if (tabInput?.uri && tabInput.uri.scheme === 'file') {
-                fileUri = tabInput.uri;
-            }
+            const tabInput = vscode.window.tabGroups.activeTabGroup.activeTab?.input as { uri?: vscode.Uri };
+            if (tabInput?.uri?.scheme === 'file') fileUri = tabInput.uri;
         }
 
         if (fileUri) {
-            const filePath = fileUri.fsPath.replace(/\\/g, '/');
             const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
             if (serverIpc) {
-                Services.loggerService.log(`[extension.activate] Active file changed: ${filePath}. Notifying view.`);
-                serverIpc.sendToClient(ServerToClientChannel.SetActiveFile, { path: filePath });
+                serverIpc.sendToClient(ServerToClientChannel.SetActiveFile, { path: fileUri.fsPath.replace(/\\/g, '/') });
             }
         }
     };
@@ -13612,28 +14092,20 @@ export async function activate(context: vscode.ExtensionContext) {
         vscode.window.onDidChangeActiveTextEditor(updateActiveFile),
         vscode.window.tabGroups.onDidChangeTabs(updateActiveFile),
         vscode.workspace.onDidGrantWorkspaceTrust(() => {
-            Services.loggerService.log("Workspace trust granted. Notifying webview.");
             const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
-            if (serverIpc) {
-                serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceTrustState, { isTrusted: true });
-            }
+            if (serverIpc) serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceTrustState, { isTrusted: true });
         })
     );
 
     setTimeout(updateActiveFile, 500);
-    Services.loggerService.log('[extension.activate] Activation complete.');
 }
 
 export function getContext() {
-    if (!globalContext) {
-        throw new Error("Extension context not available.");
-    }
+    if (!globalContext) throw new Error("Extension context not available.");
     return globalContext;
 }
 
-export function deactivate() {
-    Services.loggerService.log('DCE Extension: Deactivating.');
-}
+export function deactivate() {}
 </file>
 
 <file path="The-Creator-AI-main/.eslintrc.json">

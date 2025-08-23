@@ -1,3 +1,4 @@
+// Updated on: C114 (Refactor to use new services)
 import * as vscode from 'vscode';
 import { Services } from './services';
 
@@ -19,31 +20,19 @@ export class ActionService {
 
     public push(action: Action) {
         this.undoStack.push(action);
-        // Any new action clears the redo stack
         this.redoStack = [];
-        Services.loggerService.log(`Pushed action to undo stack: ${action.type}. Stack size: ${this.undoStack.length}`);
     }
 
     public async undo() {
         const action = this.undoStack.pop();
-        if (!action) {
-            Services.loggerService.log("Undo stack empty.");
-            return;
-        }
-
-        Services.loggerService.log(`Undoing action: ${action.type}`);
+        if (!action) return;
         await this.performReverseAction(action);
         this.redoStack.push(action);
     }
 
     public async redo() {
         const action = this.redoStack.pop();
-        if (!action) {
-            Services.loggerService.log("Redo stack empty.");
-            return;
-        }
-
-        Services.loggerService.log(`Redoing action: ${action.type}`);
+        if (!action) return;
         await this.performOriginalAction(action);
         this.undoStack.push(action);
     }
@@ -54,8 +43,6 @@ export class ActionService {
                 const { fromPath, toPath } = action.payload as MoveActionPayload;
                 await vscode.workspace.fs.rename(vscode.Uri.file(toPath), vscode.Uri.file(fromPath));
                 break;
-            // 'delete' undo is complex with trash; for now, we focus on 'move'.
-            // A full implementation would require restoring from trash, which VS Code API doesn't expose directly.
         }
     }
 

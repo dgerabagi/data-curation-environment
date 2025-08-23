@@ -1,10 +1,10 @@
-// src/client/views/parallel-copilot.view/on-message.ts
+// Updated on: C115 (Ensure file reflects correct service calls)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
 
 export function onMessage(serverIpc: ServerPostMessageManager) {
-    const { loggerService, promptService, fsService, historyService } = Services;
+    const { loggerService, promptService, fileOperationService, highlightingService, historyService } = Services;
     loggerService.log("Parallel Co-Pilot view message handler initialized.");
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestCreatePromptFile, (data) => {
@@ -12,11 +12,11 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestFileExistence, (data) => {
-        fsService.handleFileExistenceRequest(data.paths, serverIpc);
+        fileOperationService.handleFileExistenceRequest(data.paths, serverIpc);
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestSyntaxHighlight, (data) => {
-        fsService.handleSyntaxHighlightRequest(data.code, data.lang, data.id, serverIpc);
+        highlightingService.handleSyntaxHighlightRequest(data.code, data.lang, data.id, serverIpc);
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestLatestCycleData, async () => {
@@ -34,8 +34,6 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     });
     
     serverIpc.onClientMessage(ClientToServerChannel.RequestFileContent, (data) => {
-        // C101: Add high-visibility log to confirm message receipt on backend
-        loggerService.log(`[C101 IPC-TEST] Backend received RequestFileContent for: ${data.path}`);
-        fsService.handleFileContentRequest(data.path, serverIpc);
+        fileOperationService.handleFileContentRequest(data.path, serverIpc);
     });
 }

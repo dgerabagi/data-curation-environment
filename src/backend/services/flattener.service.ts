@@ -1,7 +1,7 @@
+// Updated on: C114 (Refactor to use new services)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
-import { ServerPostMessageManager } from '@/common/ipc/server-ipc';
 import { Services } from './services';
 import { VIEW_TYPES } from '@/common/view-types';
 import { serverIPCs } from '@/client/views';
@@ -54,15 +54,11 @@ export class FlattenerService {
             await fs.writeFile(outputFilePath, outputContent, 'utf-8');
             vscode.window.showInformationMessage(`Successfully flattened ${validResults.length} files to flattened_repo.md.`);
 
-            // Open the generated file in the editor
             Services.loggerService.log(`Opening flattened file: ${outputFilePath}`);
-            await Services.fsService.handleOpenFileRequest(outputFilePath);
+            await Services.fileOperationService.handleOpenFileRequest(outputFilePath);
 
             const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
             if (serverIpc) {
-                Services.loggerService.log("Triggering file focus after flattening.");
-                // A short delay helps ensure the file watcher has time to notify VS Code of the new file
-                // before we try to focus it in our tree.
                 setTimeout(() => {
                     serverIpc.sendToClient(ServerToClientChannel.FocusFile, { path: outputFilePath });
                 }, 500);
@@ -116,55 +112,24 @@ export class FlattenerService {
             const sizeInBytes = buffer.length;
             const metadata: any = { sizeInBytes };
 
-            // PNG
-            if (buffer.length > 24 && buffer.toString('hex', 0, 8) === '89504e470d0a1a0a') {
+            if (buffer.length > 24 && buffer.toString('hex', 0, 8) === '89504e470d0a1a0a') { // PNG
                 const ihdrIndex = buffer.indexOf('IHDR');
-                if (ihdrIndex !== -1) {
-                    metadata.dimensions = {
-                        width: buffer.readUInt32BE(ihdrIndex + 4),
-                        height: buffer.readUInt32BE(ihdrIndex + 8)
-                    };
-                }
-                return metadata;
-            }
-
-            // GIF
-            if (buffer.length > 10 && buffer.toString('utf8', 0, 3) === 'GIF') {
-                 metadata.dimensions = {
-                    width: buffer.readUInt16LE(6),
-                    height: buffer.readUInt16LE(8)
-                };
-                return metadata;
-            }
-
-            // JPEG
-            if (buffer.length > 11 && buffer[0] === 0xff && buffer[1] === 0xd8) {
+                if (ihdrIndex !== -1) metadata.dimensions = { width: buffer.readUInt32BE(ihdrIndex + 4), height: buffer.readUInt32BE(ihdrIndex + 8) };
+            } else if (buffer.length > 10 && buffer.toString('utf8', 0, 3) === 'GIF') { // GIF
+                 metadata.dimensions = { width: buffer.readUInt16LE(6), height: buffer.readUInt16LE(8) };
+            } else if (buffer.length > 11 && buffer[0] === 0xff && buffer[1] === 0xd8) { // JPEG
                 let pos = 2;
                 while (pos < buffer.length - 9) {
                     if (buffer[pos] === 0xff && (buffer[pos + 1] & 0xf0) === 0xc0) {
-                        const height = buffer.readUInt16BE(pos + 5);
-                        const width = buffer.readUInt16BE(pos + 7);
-                        if (width > 0 && height > 0) {
-                            metadata.dimensions = { width, height };
-                            return metadata;
-                        }
+                        metadata.dimensions = { width: buffer.readUInt16BE(pos + 7), height: buffer.readUInt16BE(pos + 5) };
+                        break;
                     }
-                    if (buffer[pos] === 0xff && buffer[pos + 1] !== 0x00 && buffer[pos + 1] !== 0xff && (buffer[pos+1] < 0xd0 || buffer[pos+1] > 0xd9)) {
-                        if (pos + 3 < buffer.length) {
-                            pos += buffer.readUInt16BE(pos + 2) + 2;
-                        } else { pos++; }
-                    } else { pos++; }
+                    pos += buffer[pos + 2] ? buffer.readUInt16BE(pos + 2) + 2 : 1;
                 }
             }
             return metadata;
         } catch (err: any) {
-            Services.loggerService.warn(`Could not parse image metadata for ${filePath}: ${err.message}`);
-            try {
-                const stats = await fs.stat(filePath);
-                return { sizeInBytes: stats.size };
-            } catch {
-                return { sizeInBytes: -1 };
-            }
+            try { return { sizeInBytes: (await fs.stat(filePath)).size }; } catch { return { sizeInBytes: -1 }; }
         }
     }
 
@@ -172,59 +137,22 @@ export class FlattenerService {
         const extension = path.extname(filePath).toLowerCase();
         
         if (extension === '.pdf') {
-            const virtualContent = Services.fsService.getVirtualPdfContent(filePath);
-            Services.loggerService.log(`[Flattener] PDF check for ${filePath}. Cache result: ${virtualContent ? 'FOUND' : 'NOT FOUND'}`);
-            if (virtualContent) {
-                return {
-                    filePath,
-                    content: virtualContent.text,
-                    lines: virtualContent.text.split('\n').length,
-                    characters: virtualContent.text.length,
-                    tokens: virtualContent.tokenCount,
-                    error: null,
-                    isBinary: false,
-                    sizeInBytes: 0 // Size is not relevant for virtual content
-                };
-            }
+            const virtualContent = Services.contentExtractionService.getVirtualPdfContent(filePath);
+            if (virtualContent) return { filePath, content: virtualContent.text, lines: virtualContent.text.split('\n').length, characters: virtualContent.text.length, tokens: virtualContent.tokenCount, error: null, isBinary: false, sizeInBytes: 0 };
             return { filePath, lines: 0, characters: 0, tokens: 0, content: '<!-- PDF content not processed or cached -->', error: null, isBinary: false, sizeInBytes: 0 };
         }
 
         if (EXCEL_EXTENSIONS.has(extension)) {
-            const virtualContent = Services.fsService.getVirtualExcelContent(filePath);
-            Services.loggerService.log(`[Flattener] Excel/CSV check for ${filePath}. Cache result: ${virtualContent ? 'FOUND' : 'NOT FOUND'}`);
-            if (virtualContent) {
-                return {
-                    filePath,
-                    content: virtualContent.markdown,
-                    lines: virtualContent.markdown.split('\n').length,
-                    characters: virtualContent.markdown.length,
-                    tokens: virtualContent.tokenCount,
-                    error: null,
-                    isBinary: false,
-                    sizeInBytes: 0
-                };
-            }
+            const virtualContent = Services.contentExtractionService.getVirtualExcelContent(filePath);
+            if (virtualContent) return { filePath, content: virtualContent.markdown, lines: virtualContent.markdown.split('\n').length, characters: virtualContent.markdown.length, tokens: virtualContent.tokenCount, error: null, isBinary: false, sizeInBytes: 0 };
             return { filePath, lines: 0, characters: 0, tokens: 0, content: '<!-- Excel/CSV content not processed or cached -->', error: null, isBinary: false, sizeInBytes: 0 };
         }
 
         if (WORD_EXTENSIONS.has(extension)) {
-            const virtualContent = Services.fsService.getVirtualWordContent(filePath);
-            Services.loggerService.log(`[Flattener] Word check for ${filePath}. Cache result: ${virtualContent ? 'FOUND' : 'NOT FOUND'}`);
+            const virtualContent = Services.contentExtractionService.getVirtualWordContent(filePath);
             if (virtualContent) {
-                const content = virtualContent.text === "UNSUPPORTED_FORMAT" 
-                    ? `<!-- Content of .doc file '${path.basename(filePath)}' could not be extracted. Legacy .doc format is not supported. Please convert to .docx. -->` 
-                    : virtualContent.text;
-
-                return {
-                    filePath,
-                    content: content,
-                    lines: content.split('\n').length,
-                    characters: content.length,
-                    tokens: virtualContent.tokenCount,
-                    error: null,
-                    isBinary: false,
-                    sizeInBytes: 0
-                };
+                const content = virtualContent.text === "UNSUPPORTED_FORMAT" ? `<!-- Content of .doc file '${path.basename(filePath)}' could not be extracted. Legacy .doc format is not supported. Please convert to .docx. -->` : virtualContent.text;
+                return { filePath, content: content, lines: content.split('\n').length, characters: content.length, tokens: virtualContent.tokenCount, error: null, isBinary: false, sizeInBytes: 0 };
             }
             return { filePath, lines: 0, characters: 0, tokens: 0, content: '<!-- Word content not processed or cached -->', error: null, isBinary: false, sizeInBytes: 0 };
         }
@@ -232,15 +160,7 @@ export class FlattenerService {
         if (BINARY_EXTENSIONS.has(extension)) {
             try {
                 const imageMetadata = await this._parseImageMetadata(filePath);
-                
-                const metadata = {
-                    name: path.basename(filePath),
-                    directory: path.dirname(filePath),
-                    fileType: extension.substring(1).toUpperCase(),
-                    sizeInBytes: imageMetadata.sizeInBytes,
-                    ...(imageMetadata.dimensions && { dimensions: imageMetadata.dimensions })
-                };
-
+                const metadata = { name: path.basename(filePath), directory: path.dirname(filePath), fileType: extension.substring(1).toUpperCase(), sizeInBytes: imageMetadata.sizeInBytes, ...(imageMetadata.dimensions && { dimensions: imageMetadata.dimensions }) };
                 const metadataContent = `<metadata>\n${JSON.stringify(metadata, null, 2)}\n</metadata>`;
                 return { filePath, lines: 0, characters: 0, tokens: 0, content: metadataContent, error: null, isBinary: true, sizeInBytes: imageMetadata.sizeInBytes };
             } catch (error: any) {
@@ -250,76 +170,39 @@ export class FlattenerService {
 
         try {
             const content = await fs.readFile(filePath, 'utf-8');
-            const lines = content.split('\n').length;
-            const characters = content.length;
-            const tokens = Math.ceil(characters / 4);
             const stats = await fs.stat(filePath);
-            return { filePath, lines, characters, tokens, content, error: null, isBinary: false, sizeInBytes: stats.size };
+            return { filePath, lines: content.split('\n').length, characters: content.length, tokens: Math.ceil(content.length / 4), content, error: null, isBinary: false, sizeInBytes: stats.size };
         } catch (error: any) {
             return { filePath, lines: 0, characters: 0, tokens: 0, content: '', error: error.message, isBinary: false, sizeInBytes: -1 };
         }
     }
 
     private generateOutputContent(results: FileStats[], rootDir: string, outputFilename: string): string {
-        let totalLines = 0;
-        let totalCharacters = 0;
-        let totalTokens = 0;
         const validResults = results.filter(r => !r.error);
-        const errorCount = results.length - validResults.length;
-
-        for (const res of validResults) {
-            totalLines += res.lines;
-            totalCharacters += res.characters;
-            totalTokens += res.tokens;
-        }
-
-        let output = `<!--\n`;
-        output += `  File: ${path.basename(outputFilename)}\n`;
-        output += `  Source Directory: ${rootDir}\n`;
-        output += `  Date Generated: ${new Date().toISOString()}\n`;
-        output += `  ---\n`;
-        output += `  Total Files: ${validResults.length}\n`;
-        if (errorCount > 0) {
-            output += `  Files with Errors: ${errorCount}\n`;
-        }
-        output += `  Total Lines: ${totalLines}\n`;
-        output += `  Total Characters: ${totalCharacters}\n`;
-        output += `  Approx. Tokens: ${totalTokens}\n`;
-        output += `-->\n\n`;
-
-        const top10 = [...validResults].filter(r => r.tokens > 0).sort((a, b) => b.tokens - a.tokens).slice(0, 10);
-
+        const totalTokens = validResults.reduce((sum, r) => sum + r.tokens, 0);
+        
+        let output = `<!--\n  File: ${path.basename(outputFilename)}\n  Source Directory: ${rootDir}\n  Date Generated: ${new Date().toISOString()}\n  ---\n`;
+        output += `  Total Files: ${validResults.length}\n  Approx. Tokens: ${totalTokens}\n-->\n\n`;
+        
         output += `<!-- Top 10 Text Files by Token Count -->\n`;
-        top10.forEach((r, i) => {
-            output += `${i + 1}. ${path.relative(rootDir, r.filePath)} (${r.tokens} tokens)\n`;
-        });
+        [...validResults].filter(r => r.tokens > 0).sort((a, b) => b.tokens - a.tokens).slice(0, 10)
+            .forEach((r, i) => output += `${i + 1}. ${path.relative(rootDir, r.filePath)} (${r.tokens} tokens)\n`);
         output += `\n`;
 
         output += `<!-- Full File List -->\n`;
         results.forEach((r, i) => {
-            const relativePath = path.relative(rootDir, r.filePath);
-            if (r.error) {
-                output += `${i + 1}. ${relativePath} - ERROR: ${r.error}\n`;
-            } else if (r.isBinary) {
-                output += `${i + 1}. ${relativePath} - [Binary] Size: ${formatBytes(r.sizeInBytes)}\n`;
-            }
-            else {
-                output += `${i + 1}. ${relativePath} - Lines: ${r.lines} - Chars: ${r.characters} - Tokens: ${r.tokens}\n`;
-            }
+            const relPath = path.relative(rootDir, r.filePath);
+            if (r.error) output += `${i + 1}. ${relPath} - ERROR: ${r.error}\n`;
+            else if (r.isBinary) output += `${i + 1}. ${relPath} - [Binary] Size: ${formatBytes(r.sizeInBytes)}\n`;
+            else output += `${i + 1}. ${relPath} - Lines: ${r.lines} - Chars: ${r.characters} - Tokens: ${r.tokens}\n`;
         });
         output += `\n`;
 
         for (const { filePath, content, error } of results) {
             const relativePath = path.relative(rootDir, filePath).replace(/\\/g, '/');
             output += `<file path="${relativePath}">\n`;
-            if (error) {
-                output += `Error reading file: ${error}\n`;
-            } else {
-                output += content;
-            }
-            if (content && !content.endsWith('\n')) {
-                output += '\n';
-            }
+            output += error ? `Error reading file: ${error}\n` : content;
+            if (content && !content.endsWith('\n')) output += '\n';
             output += `</file>\n\n`;
         }
         return output;

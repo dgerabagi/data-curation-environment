@@ -1,143 +1,53 @@
+// Updated on: C115 (Ensure file reflects correct service calls)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
 import { Services } from "@/backend/services/services";
 import * as vscode from "vscode";
 
 export function onMessage(serverIpc: ServerPostMessageManager) {
-    const fsService = Services.fsService;
-    const flattenerService = Services.flattenerService;
-    const loggerService = Services.loggerService;
-    const selectionService = Services.selectionService;
-    const actionService = Services.actionService;
+    const { fileTreeService, fileOperationService, contentExtractionService, flattenerService, selectionService, actionService, loggerService } = Services;
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestInitialData, () => {
-        loggerService.log("WebView is ready. Sending initial data.");
-        // Send trust state first
         serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceTrustState, { isTrusted: vscode.workspace.isTrusted });
-        // Then request other data
-        fsService.handleWorkspaceFilesRequest(serverIpc, false);
+        fileTreeService.handleWorkspaceFilesRequest(serverIpc, false);
     });
 
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestWorkspaceFiles, (data) => {
-        loggerService.log(`Received RequestWorkspaceFiles from client (force=${data.force}).`);
-        fsService.handleWorkspaceFilesRequest(serverIpc, data.force);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestFlattenContext, (data) => {
-        flattenerService.flatten(data.selectedPaths);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestNewFile, (data) => {
-        fsService.handleNewFileRequest(data.parentDirectory);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestNewFolder, (data) => {
-        fsService.handleNewFolderRequest(data.parentDirectory);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestFileRename, (data) => {
-        fsService.handleFileRenameRequest(data.oldPath, data.newName);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestFileDelete, (data) => {
-        fsService.handleFileDeleteRequest(data.path);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestBatchFileDelete, (data) => {
-        fsService.handleBatchFileDeleteRequest(data.paths);
-    });
-    
-    serverIpc.onClientMessage(ClientToServerChannel.RequestRevealInExplorer, (data) => {
-        fsService.handleRevealInExplorerRequest(data.path);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestCopyPath, (data) => {
-        fsService.handleCopyPathRequest(data.path, data.relative);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestOpenFile, (data) => {
-        fsService.handleOpenFileRequest(data.path);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestMoveFile, (data) => {
-        fsService.handleMoveFileRequest(data.oldPath, data.newPath);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestCopyFile, (data) => {
-        fsService.handleCopyFileRequest(data.sourcePath, data.destinationDir);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestAddFileFromBuffer, (data) => {
-        fsService.handleAddFileFromBuffer(data.targetPath, data.data);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestCopyFileFromUri, (data) => {
-        fsService.handleCopyFileFromUri(data.sourceUri, data.targetDir);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestPdfToText, (data) => {
-        loggerService.log(`[IPC] Received RequestPdfToText for: ${data.path}`);
-        fsService.handlePdfToTextRequest(data.path, serverIpc);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestExcelToText, (data) => {
-        loggerService.log(`[IPC] Received RequestExcelToText for: ${data.path}`);
-        fsService.handleExcelToTextRequest(data.path, serverIpc);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestWordToText, (data) => {
-        loggerService.log(`[IPC] Received RequestWordToText for: ${data.path}`);
-        fsService.handleWordToTextRequest(data.path, serverIpc);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestUndo, () => {
-        actionService.undo();
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestRedo, () => {
-        actionService.redo();
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.SaveCurrentSelection, (data) => {
-        selectionService.saveCurrentSelection(data.paths);
-    });
+    serverIpc.onClientMessage(ClientToServerChannel.RequestWorkspaceFiles, (data) => fileTreeService.handleWorkspaceFilesRequest(serverIpc, data.force));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestFlattenContext, (data) => flattenerService.flatten(data.selectedPaths));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestNewFile, (data) => fileOperationService.handleNewFileRequest(data.parentDirectory));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestNewFolder, (data) => fileOperationService.handleNewFolderRequest(data.parentDirectory));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestFileRename, (data) => fileOperationService.handleFileRenameRequest(data.oldPath, data.newName));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestFileDelete, (data) => fileOperationService.handleFileDeleteRequest(data.path));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestBatchFileDelete, (data) => fileOperationService.handleBatchFileDeleteRequest(data.paths));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestRevealInExplorer, (data) => fileOperationService.handleRevealInExplorerRequest(data.path));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestCopyPath, (data) => fileOperationService.handleCopyPathRequest(data.path, data.relative));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestOpenFile, (data) => fileOperationService.handleOpenFileRequest(data.path));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestMoveFile, (data) => fileOperationService.handleMoveFileRequest(data.oldPath, data.newPath));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestCopyFile, (data) => fileOperationService.handleCopyFileRequest(data.sourcePath, data.destinationDir));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestAddFileFromBuffer, (data) => fileOperationService.handleAddFileFromBuffer(data.targetPath, data.data));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestCopyFileFromUri, (data) => fileOperationService.handleCopyFileFromUri(data.sourceUri, data.targetDir));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestPdfToText, (data) => contentExtractionService.handlePdfToTextRequest(data.path, serverIpc));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestExcelToText, (data) => contentExtractionService.handleExcelToTextRequest(data.path, serverIpc));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestWordToText, (data) => contentExtractionService.handleWordToTextRequest(data.path, serverIpc));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestUndo, () => actionService.undo());
+    serverIpc.onClientMessage(ClientToServerChannel.RequestRedo, () => actionService.redo());
+    serverIpc.onClientMessage(ClientToServerChannel.SaveCurrentSelection, (data) => selectionService.saveCurrentSelection(data.paths));
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestLastSelection, async () => {
-        loggerService.log('Received RequestLastSelection from client.');
         const lastSelection = await selectionService.getLastSelection();
         const autoAddState = selectionService.getAutoAddState();
-        loggerService.log(`Found ${lastSelection.length} paths in last selection to restore.`);
         serverIpc.sendToClient(ServerToClientChannel.ApplySelectionSet, { paths: lastSelection });
-        
-        const sets = selectionService.getSelectionSets();
-        serverIpc.sendToClient(ServerToClientChannel.SendSelectionSets, { sets });
+        serverIpc.sendToClient(ServerToClientChannel.SendSelectionSets, { sets: selectionService.getSelectionSets() });
         serverIpc.sendToClient(ServerToClientChannel.SendAutoAddState, { enabled: autoAddState });
     });
 
-    serverIpc.onClientMessage(ClientToServerChannel.SaveAutoAddState, (data) => {
-        selectionService.saveAutoAddState(data.enabled);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.VSCodeCommand, (data) => {
-        const { command, args = [] } = data;
-        vscode.commands.executeCommand(command, ...args);
-    });
+    serverIpc.onClientMessage(ClientToServerChannel.SaveAutoAddState, (data) => selectionService.saveAutoAddState(data.enabled));
+    serverIpc.onClientMessage(ClientToServerChannel.VSCodeCommand, (data) => vscode.commands.executeCommand(data.command, ...(data.args || [])));
 
     serverIpc.onClientMessage(ClientToServerChannel.LogMessage, (data) => {
-        const { level, message } = data;
-        const logMessage = `[WebView] ${message}`;
-        switch (level) {
-            case 'warn':
-                loggerService.warn(logMessage);
-                break;
-            case 'error':
-                loggerService.error(logMessage);
-                break;
-            case 'info':
-            default:
-                loggerService.log(logMessage);
-                break;
-        }
+        const logMessage = `[WebView] ${data.message}`;
+        if (data.level === 'warn') loggerService.warn(logMessage);
+        else if (data.level === 'error') loggerService.error(logMessage);
+        else loggerService.log(logMessage);
     });
 }
