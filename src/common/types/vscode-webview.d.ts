@@ -1,3 +1,4 @@
+// Updated on: C118 (Add pcppLeftPaneWidth to ViewState)
 export interface WebviewApi<StateType> {
     postMessage(message: unknown): void;
     getState(): StateType | undefined;
@@ -5,7 +6,8 @@ export interface WebviewApi<StateType> {
 }
 
 export interface ViewState {
-    selectedFiles: string[];
+    selectedFiles?: string[];
+    pcppLeftPaneWidth?: number;
 }
 
 declare global {

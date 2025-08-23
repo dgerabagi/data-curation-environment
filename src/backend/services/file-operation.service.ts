@@ -14,14 +14,19 @@ export class FileOperationService {
     public async handleFileContentRequest(filePath: string, serverIpc: ServerPostMessageManager) {
         Services.loggerService.log(`handleFileContentRequest initiated for: ${filePath}`);
         try {
-            const uri = vscode.Uri.file(filePath);
+            const workspaceFolders = vscode.workspace.workspaceFolders;
+            if (!workspaceFolders?.[0]) {
+                throw new Error("No workspace folder open.");
+            }
+            const absolutePath = path.resolve(workspaceFolders[0].uri.fsPath, filePath);
+            const uri = vscode.Uri.file(absolutePath);
             const contentBuffer = await vscode.workspace.fs.readFile(uri);
             const content = Buffer.from(contentBuffer).toString('utf-8');
             Services.loggerService.log(`Successfully read content for: ${filePath}. Sending to client.`);
             serverIpc.sendToClient(ServerToClientChannel.SendFileContent, { path: filePath, content });
         } catch (error) {
             Services.loggerService.error(`Failed to read file content for ${filePath}: ${error}`);
-            serverIpc.sendToClient(ServerToClientChannel.SendFileContent, { path: filePath, content: null });
+            serverIpc.sendToClient(ServerToClientChannel.SendFileContent, { path: filePath, content: `// Error: Could not read file content for ${filePath}. It may not exist in the workspace.` });
         }
     }
 

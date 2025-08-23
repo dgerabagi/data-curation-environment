@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 
-export function getViewHtml({ webview, nonce, scriptUri, styleUri }: { webview: vscode.Webview; nonce: string; scriptUri: string; styleUri: vscode.Uri; }): string {
+export function getViewHtml({ webview, nonce, scriptUri, styleUri, starryNightStyleUri }: { webview: vscode.Webview; nonce: string; scriptUri: string; styleUri: vscode.Uri; starryNightStyleUri?: vscode.Uri; }): string {
     return `<!DOCTYPE html>
         <html lang="en">
         <head>
@@ -8,6 +8,7 @@ export function getViewHtml({ webview, nonce, scriptUri, styleUri }: { webview: 
             <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource}; script-src 'nonce-${nonce}';">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <link href="${styleUri}" rel="stylesheet">
+            ${starryNightStyleUri ? `<link href="${starryNightStyleUri}" rel="stylesheet">` : ''}
         </head>
         <body>
             <div id="root"></div>

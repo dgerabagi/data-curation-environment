@@ -1,9 +1,10 @@
-// Updated on: C116 (Overhaul to generate full, dynamic prompt)
+// Updated on: C118 (Reverse cycle order in prompt.md)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
 import { Services } from './services';
 import { parseResponse } from '@/client/utils/response-parser';
+import { PcppCycle } from './history.service';
 
 export class PromptService {
     private artifactSchemaTemplate = `<M1. artifact schema>
@@ -45,17 +46,11 @@ M7. Flattened Repo
 </M3. Interaction Schema>`;
 
     private projectScopeTemplate = `<M4. current project scope>
-The Data Curation Environment (DCE) is an iterative development tool designed to enhance the workflow between a human curator and a large language model (LLM). It functions as a sophisticated scaffolding and context management system within VS Code.
+The plan is to create a Data Curation Environment. We will do this by creating a VS Code extension. The three main components will be:
 
-The core interaction revolves around a "virtuous cycle":
-1.  **Curate:** The user selects a precise set of files from their workspace using the DCE's file tree (Phase 1). This selection forms the context for the LLM.
-2.  **Amalgamate:** The user clicks "Generate prompt.md", which packages the selected files, project documentation, and historical cycle data into a single, comprehensive prompt file.
-3.  **Prompt:** The user submits this prompt to one or more LLMs.
-4.  **Review:** The AI responses are pasted into the Parallel Co-Pilot Panel (Phase 2). This panel allows for side-by-side comparison, syntax highlighting, and integrated diffing (Phase 3) of the AI's suggestions against the current codebase.
-5.  **Test & Accept:** With a single click, the user can "swap" an AI's suggested file changes into their live workspace to immediately test for correctness and compilation errors.
-6.  **Repeat:** The user accepts the best response, and the cycle begins again with a newly updated codebase.
-
-DCE is most analogous to tools like GitHub Copilot Chat or Cursor.sh, but with a key philosophical difference: it emphasizes a **whole-file, parallelized, and stateful** approach over inline, chunk-based suggestions. It is built to support a workflow where multiple complete solutions are generated and scrutinized in parallel, with the full history of these interactions being a navigable part of the project's "knowledge graph."
+Phase 1. Context chooser - Choose files/folders (checkmark option in the file explorer) that will be packaged as artifacts into a \`flattened_repo.md\` file.
+Phase 2. parallel 'co-pilot' panel. Basically, we need our own AI Studio interface that is parallelizable. so thats what is wrong with the curernt co-pilot panel, that you are 'locked in' to a single conversation flow. my process involves sending the same prompt to up to 8 different conversation windows and then scrutinizing the responses in winmerge.
+Phase 3. Diff Tool - Basically, winmerge but intergrated into a window within VS Code. My workflow is often comparing two identical responses, or comparing a new artifact with the current version. Currently, I'm first copying and pasting responses into separate notepad files, and then for which ever i need to compare given my task, i then manually move that one into winmerge to compare against another that i manually move. instead, the ability to just select between two to compare would be a massive decrease in the manual workload.
 </M4. current project scope>`;
 
     public async generatePromptFile(cycleTitle: string, currentCycle: number) {
@@ -72,23 +67,30 @@ DCE is most analogous to tools like GitHub Copilot Chat or Cursor.sh, but with a
             Services.loggerService.log("Generating prompt.md file...");
 
             const flattenedContent = await fs.readFile(flattenedRepoPath, 'utf-8');
-            const fullHistory = await Services.historyService.getFullHistory();
+            const fullHistory: PcppCycle[] = await Services.historyService.getFullHistory();
 
-            // Build M2 and M6 from history
+            // C118 FIX: Sort history in descending order for M2
+            const sortedHistoryForM2 = [...fullHistory].sort((a, b) => b.cycleId - a.cycleId);
+
             let cycleOverview = '<M2. cycle overview>\n';
             cycleOverview += `Current Cycle ${currentCycle} - ${cycleTitle}\n`;
-            for (let i = fullHistory.length - 1; i >= 0; i--) {
-                const cycle = fullHistory[i];
+            for (const cycle of sortedHistoryForM2) {
                 if (cycle.cycleId < currentCycle) {
                      cycleOverview += `Cycle ${cycle.cycleId} - ${cycle.title}\n`;
                 }
             }
             cycleOverview += '</M2. cycle overview>';
             
+            // M6 should remain in ascending order
+            const sortedHistoryForM6 = [...fullHistory].sort((a, b) => a.cycleId - b.cycleId);
+
             let cyclesContent = '<M6. Cycles>\n\n';
-            for (const cycle of fullHistory) {
+            // Add the current, unsaved cycle first
+            cyclesContent += `<Cycle ${currentCycle}>\n${cycleTitle}\n</Cycle ${currentCycle}>\n\n`;
+
+            for (const cycle of sortedHistoryForM6) {
+                if (cycle.cycleId === currentCycle) continue; // Skip if it's the current cycle, already added
                 cyclesContent += `<Cycle ${cycle.cycleId}>\n`;
-                // Assume Resp 1 is the "winning" response for summary generation
                 const previousResponseContent = cycle.responses['1']?.content || '';
                 const parsed = parseResponse(previousResponseContent);
                 const summary = `${parsed.summary}\n\n${parsed.courseOfAction}`;

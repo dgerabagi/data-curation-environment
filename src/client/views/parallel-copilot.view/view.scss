@@ -1,4 +1,4 @@
-/* Updated on: C117 (Restore UI styles to fix rendering issues) */
+/* Updated on: C118 (Add styles for diff view) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -14,31 +14,6 @@ body {
     height: 100vh;
     gap: 8px;
     box-sizing: border-box;
-}
-
-.test-harness-tabs {
-    display: flex;
-    border-bottom: 1px solid var(--vscode-panel-border);
-    flex-shrink: 0;
-
-    .harness-tab {
-        padding: 6px 12px;
-        cursor: pointer;
-        border-bottom: 2px solid transparent;
-        color: var(--vscode-tab-inactiveForeground);
-        
-        &.active {
-            color: var(--vscode-tab-activeForeground);
-            border-bottom-color: var(--vscode-tab-activeBorder);
-        }
-    }
-}
-
-.test-harness-content {
-    flex-grow: 1;
-    min-height: 0;
-    display: flex;
-    flex-direction: column;
 }
 
 .collapsible-section {
@@ -221,14 +196,6 @@ body {
     }
 }
 
-.test-pane-container {
-    border: 1px solid var(--vscode-panel-border);
-    padding: 8px;
-    border-radius: 4px;
-    flex-grow: 1;
-    overflow-y: auto;
-}
-
 .parsed-view-grid {
     display: flex;
     gap: 0;
@@ -243,6 +210,14 @@ body {
     gap: 8px;
     min-width: 150px;
     padding-right: 8px;
+    transition: flex-basis 0.3s ease, padding-right 0.3s ease, min-width 0.3s ease;
+}
+
+.parsed-view-left.collapsed {
+    flex-basis: 0 !important;
+    min-width: 0;
+    padding-right: 0;
+    overflow: hidden;
 }
 
 .resizer {
@@ -278,17 +253,33 @@ body {
 
     .file-path {
         font-weight: bold;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
-    .file-actions button {
-        margin-left: 8px;
+    .file-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        button {
+            margin-left: 8px;
+        }
     }
     .metrics {
         color: var(--vscode-descriptionForeground);
     }
 }
 
-.file-content-viewer {
+.code-viewer-wrapper {
+    display: flex;
     flex-grow: 1;
+    min-height: 0;
+    gap: 8px;
+}
+
+.file-content-viewer {
+    flex: 1;
     background-color: var(--vscode-editor-background);
     border: 1px solid var(--vscode-panel-border);
     border-radius: 4px;
@@ -298,18 +289,20 @@ body {
     font-family: var(--vscode-editor-font-family);
     font-size: var(--vscode-editor-font-size);
     display: flex;
+    min-width: 0;
 }
 
 .line-numbers {
     padding: 8px 10px 8px 8px;
     text-align: right;
     color: var(--vscode-editorLineNumber-foreground);
+    background-color: var(--vscode-editor-background);
     user-select: none;
     border-right: 1px solid var(--vscode-panel-border);
     
     span {
         display: block;
-        line-height: 1.5; /* Match typical editor line height */
+        line-height: 1.5;
     }
 }
 
@@ -336,6 +329,9 @@ body {
         font-size: 12px;
         border-radius: 3px;
         cursor: pointer;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
 
         &:hover {
             background-color: var(--vscode-list-hoverBackground);

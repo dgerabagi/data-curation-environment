@@ -1,5 +1,5 @@
+// Updated on: C118 (Add starry-night stylesheet)
 import { viewConfig as contextChooserViewConfig } from "./context-chooser.view";
-import { viewConfig as parallelCopilotViewConfig } from "./parallel-copilot.view";
 import * as vscode from "vscode";
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { getNonce, getViewHtml } from "@/common/utils/view-html";
@@ -18,13 +18,14 @@ export function registerViews(context: vscode.ExtensionContext) {
                     };
                     const nonce = getNonce();
                     const scriptUri = webviewView.webview.asWebviewUri(vscode.Uri.joinPath(context.extensionUri, "dist", viewConfig.entry));
-                    const styleUri = webviewView.webview.asWebviewUri(vscode.Uri.joinPath(context.extensionUri, "dist", "contextChooserView.css"));
+                    const styleUri = webviewView.webview.asWebviewUri(vscode.Uri.joinPath(context.extensionUri, "dist", `${viewConfig.entry.replace('.js', '')}.css`));
+                    const starryNightStyleUri = webviewView.webview.asWebviewUri(vscode.Uri.joinPath(context.extensionUri, "dist", "starry-night.css"));
                     
                     webviewView.webview.html = getViewHtml({
                         webview: webviewView.webview,
                         nonce,
                         scriptUri: scriptUri.toString(),
-                        styleUri: styleUri,
+                        styleUris: [styleUri, starryNightStyleUri],
                     });
 
                     const serverIpc = ServerPostMessageManager.getInstance(

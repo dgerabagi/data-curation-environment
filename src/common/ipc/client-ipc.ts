@@ -1,6 +1,8 @@
+// Updated on: C118 (Add getVscodeApi method)
 import getVscode from "./get-vscode-api";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { ChannelBody } from "./channels.type";
+import { WebviewApi, ViewState } from "../types/vscode-webview";
 
 export class ClientPostMessageManager {
     private static _instance?: ClientPostMessageManager;
@@ -28,8 +30,12 @@ export class ClientPostMessageManager {
         return ClientPostMessageManager._instance;
     }
 
+    public getVscodeApi(): WebviewApi<ViewState> {
+        return getVscode();
+    }
+
     sendToServer<T extends ClientToServerChannel>(channel: T, body: ChannelBody<T>): void {
-        getVscode().postMessage({ channel, body });
+        this.getVscodeApi().postMessage({ channel, body });
     }
 
     onServerMessage<T extends ServerToClientChannel>(channel: T, callback: (body: ChannelBody<T>) => void): void {

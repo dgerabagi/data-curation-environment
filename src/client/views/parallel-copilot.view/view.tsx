@@ -1,12 +1,12 @@
-// Updated on: C117 (Restore UI component to fix rendering issues)
+// Updated on: C118 (Fix resizable pane, add diff view, simplify buttons)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscVm, VscSave } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscVm, VscSave, VscCompareChanges, VscArrowSwap } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
-import { PcppCycle, PcppResponse } from '@/backend/services/history.service';
+import { PcppCycle } from '@/backend/services/history.service';
 import { ParsedResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
 import ReactMarkdown from 'react-markdown';
@@ -26,18 +26,16 @@ const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     return debouncedFunction;
 };
 
-const CodeViewer: React.FC<{ htmlContent: string | undefined }> = ({ htmlContent }) => {
-    if (htmlContent === undefined) {
+const CodeViewer: React.FC<{ htmlContent: string | undefined | null }> = ({ htmlContent }) => {
+    if (htmlContent === undefined || htmlContent === null) {
         return <div style={{ padding: '8px' }}>Select a file to view its content.</div>;
     }
-    // Handle specific error message from parser
     if (htmlContent.startsWith('<div>Error:')) {
         return <div style={{ padding: '8px' }} dangerouslySetInnerHTML={{ __html: htmlContent }} />;
     }
 
-    // This regex is designed to find the inner content of the top-level <code> tag
     const codeContentMatch = /<pre><code>([\s\S]*)<\/code><\/pre>/s.exec(htmlContent);
-    const code = codeContentMatch ? codeContentMatch[1] : htmlContent;
+    const code = codeContentMatch ? codeContentMatch[1] : `<code>${htmlContent}</code>`; // Fallback for raw text
 
     const lines = code.split('\n');
     if (lines.length > 0 && lines[lines.length - 1] === '') {
@@ -87,6 +85,8 @@ const App = () => {
     const [selectedFilePath, setSelectedFilePath] = React.useState<string | null>(null);
     const [isCycleCollapsed, setIsCycleCollapsed] = React.useState(false);
     const [leftPaneWidth, setLeftPaneWidth] = React.useState(33);
+    const [isDiffMode, setIsDiffMode] = React.useState(false);
+    const [originalFileContent, setOriginalFileContent] = React.useState<string | null>(null);
     const isResizing = React.useRef(false);
 
     const clientIpc = ClientPostMessageManager.getInstance();
@@ -169,9 +169,14 @@ const App = () => {
         clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => {
             setFileExistenceMap(new Map(Object.entries(existenceMap)));
         });
+        clientIpc.onServerMessage(ServerToClientChannel.SendFileContent, ({ path, content }) => {
+            if (path === selectedFilePath) {
+                setOriginalFileContent(content);
+            }
+        });
         
         clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});
-    }, [clientIpc]);
+    }, [clientIpc, selectedFilePath]);
 
     React.useEffect(() => {
         if (isParsedMode) {
@@ -198,6 +203,7 @@ const App = () => {
         const newParseMode = !isParsedMode;
         setIsParsedMode(newParseMode);
         setSelectedFilePath(null);
+        setIsDiffMode(false);
         if (!newParseMode) {
             setTabs(prev => {
                 const newTabs = {...prev};
@@ -234,10 +240,10 @@ const App = () => {
         clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle });
     };
 
-    const handleMouseDown = (e: React.MouseEvent) => {
+    const handleMouseDown = React.useCallback((e: React.MouseEvent) => {
         e.preventDefault();
         isResizing.current = true;
-    };
+    }, []);
 
     const handleMouseMove = React.useCallback((e: MouseEvent) => {
         if (!isResizing.current) return;
@@ -252,17 +258,24 @@ const App = () => {
     }, []);
 
     React.useEffect(() => {
-        const moveHandler = (e: MouseEvent) => handleMouseMove(e);
-        const upHandler = () => handleMouseUp();
-        
-        window.addEventListener('mousemove', moveHandler);
-        window.addEventListener('mouseup', upHandler);
+        window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('mouseup', handleMouseUp);
         
         return () => {
-            window.removeEventListener('mousemove', moveHandler);
-            window.removeEventListener('mouseup', upHandler);
+            window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('mouseup', handleMouseUp);
         };
     }, [handleMouseMove, handleMouseUp]);
+    
+    const handleDiffClick = () => {
+        const newDiffMode = !isDiffMode;
+        setIsDiffMode(newDiffMode);
+        if (newDiffMode && selectedFilePath) {
+            clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: selectedFilePath });
+        } else {
+            setOriginalFileContent(null);
+        }
+    };
 
 
     const isNewCycleButtonDisabled = React.useMemo(() => {
@@ -319,14 +332,15 @@ const App = () => {
                             <textarea className="response-textarea" placeholder={`Paste AI response for tab ${activeTab} here...`} value={activeTabData?.rawContent || ''} onChange={(e) => handleRawContentChange(e.target.value, activeTab)} />
                         ) : (
                             <div className="parsed-view-grid">
-                                <div className="parsed-view-left" style={{ flexBasis: `${leftPaneWidth}%` }}>
+                                <div className={`parsed-view-left ${isDiffMode ? 'collapsed' : ''}`} style={!isDiffMode ? { flexBasis: `${leftPaneWidth}%` } : {}}>
                                      <CollapsibleSection title="Associated Files" isCollapsed={false} onToggle={() => {}}>
                                         <ul className="associated-files-list">
                                             {activeTabData.parsedContent.filesUpdated.map(file => (
                                                 <li 
                                                     key={file} 
                                                     className={selectedFilePath === file ? 'selected' : ''}
-                                                    onClick={() => setSelectedFilePath(prev => prev === file ? null : file)}
+                                                    onClick={() => {setSelectedFilePath(prev => prev === file ? null : file); setIsDiffMode(false);}}
+                                                    title={file}
                                                 >
                                                     {fileExistenceMap.get(file) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
                                                     <span>{file}</span>
@@ -341,18 +355,19 @@ const App = () => {
                                         <ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown>
                                     </CollapsibleSection>
                                 </div>
-                                <div className="resizer" onMouseDown={handleMouseDown} />
+                                {!isDiffMode && <div className="resizer" onMouseDown={handleMouseDown} />}
                                 <div className="parsed-view-right">
                                     <div className="file-content-viewer-header">
-                                        <span className="file-path">{selectedFilePath || 'No file selected'}</span>
+                                        <span className="file-path" title={selectedFilePath || ''}>{selectedFilePath ? path.basename(selectedFilePath) : 'No file selected'}</span>
                                         <div className="file-actions">
-                                            <span className="metrics">Original: 4.1K | New: 4.2K | Sim: 98%</span>
-                                            <button disabled title="Diff View">Diff</button>
-                                            <button disabled title="Swap with Workspace File"><VscVm /></button>
-                                            <button disabled title="Accept into Workspace"><VscSave /></button>
+                                            <button onClick={handleDiffClick} disabled={!selectedFilePath} title="Toggle Diff View"><VscCompareChanges /></button>
+                                            <button disabled={!selectedFilePath} title="Swap with Workspace File"><VscArrowSwap /></button>
                                         </div>
                                     </div>
-                                    <CodeViewer htmlContent={viewableContent} />
+                                    <div className="code-viewer-wrapper">
+                                        <CodeViewer htmlContent={viewableContent} />
+                                        {isDiffMode && <CodeViewer htmlContent={originalFileContent} />}
+                                    </div>
                                 </div>
                             </div>
                         )}

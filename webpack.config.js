@@ -90,6 +90,8 @@ const webviewConfig = {
         new CopyPlugin({
             patterns: [
                 { from: "public", to: "public" },
+                // C118: Copy the starry-night CSS theme to the dist folder so it can be loaded in the webview.
+                { from: "node_modules/@wooorm/starry-night/style/both.css", to: "starry-night.css" }
             ],
         }),
         new webpack.ProvidePlugin({

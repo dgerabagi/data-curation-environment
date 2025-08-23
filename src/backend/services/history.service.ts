@@ -15,6 +15,7 @@ export interface PcppCycle {
     ephemeralContext: string;
     responses: { [tabId: string]: PcppResponse };
     isParsedMode?: boolean;
+    leftPaneWidth?: number; // C118: Add pane width for persistence
 }
 
 export interface PcppHistoryFile {
@@ -28,7 +29,7 @@ export class HistoryService {
     constructor() {
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (workspaceFolders && workspaceFolders.length > 0) {
-            this.historyFilePath = path.join(workspaceFolders[0].uri.fsPath, '.vscode', 'dce_history.json');
+            this.historyFilePath = path.join(workspaceFolders.uri.fsPath, '.vscode', 'dce_history.json');
         }
     }
 
@@ -73,6 +74,7 @@ export class HistoryService {
                 ephemeralContext: '',
                 responses: { "1": { content: "" } },
                 isParsedMode: false,
+                leftPaneWidth: 33, // C118: Default width
             };
             await this.saveCycleData(defaultCycle);
             return defaultCycle;

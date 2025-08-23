@@ -1,4 +1,4 @@
-// Updated on: C115 (Ensure file reflects correct service calls)
+// Updated on: C118 (Add file content handler)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
