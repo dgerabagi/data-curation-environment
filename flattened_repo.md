@@ -1,12 +1,12 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-23T21:45:19.414Z
+  Date Generated: 2025-08-23T22:11:22.923Z
   ---
   Total Files: 217
-  Total Lines: 19663
-  Total Characters: 943107
-  Approx. Tokens: 235858
+  Total Lines: 19723
+  Total Characters: 945769
+  Approx. Tokens: 236524
 -->
 
 <!-- Top 10 Files by Token Count -->
@@ -14,8 +14,8 @@
 2. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
 3. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
 4. src\client\views\context-chooser.view\view.tsx (5562 tokens)
-5. src\client\views\parallel-copilot.view\view.tsx (5184 tokens)
-6. src\Artifacts\A0. DCE Master Artifact List.md (4911 tokens)
+5. src\client\views\parallel-copilot.view\view.tsx (5070 tokens)
+6. src\Artifacts\A0. DCE Master Artifact List.md (4915 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4508 tokens)
 8. src\backend\services\prompt.service.ts (4132 tokens)
 9. src\client\views\context-chooser.view\view.scss (3638 tokens)
@@ -26,10 +26,10 @@
 2. .vscodeignore - Lines: 11 - Chars: 356 - Tokens: 89
 3. bootstrap-flattener.js - Lines: 185 - Chars: 5834 - Tokens: 1459
 4. LICENSE - Lines: 21 - Chars: 1090 - Tokens: 273
-5. package.json - Lines: 138 - Chars: 4538 - Tokens: 1135
+5. package.json - Lines: 139 - Chars: 4583 - Tokens: 1146
 6. public\copilot.svg - Lines: 5 - Chars: 445 - Tokens: 112
 7. public\spiral.svg - Lines: 8 - Chars: 459 - Tokens: 115
-8. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 266 - Chars: 19643 - Tokens: 4911
+8. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 266 - Chars: 19657 - Tokens: 4915
 9. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 10. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
 11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 147 - Chars: 13550 - Tokens: 3388
@@ -86,7 +86,7 @@
 62. src\Artifacts\A53. DCE - Phase 2 - Token Count and Similarity Analysis.md - Lines: 50 - Chars: 3971 - Tokens: 993
 63. src\Artifacts\A54. starry-night-readme.md - Lines: 1824 - Chars: 102305 - Tokens: 25577
 64. src\Artifacts\A55. DCE - FSService Refactoring Plan.md - Lines: 77 - Chars: 4022 - Tokens: 1006
-65. src\Artifacts\A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md - Lines: 45 - Chars: 4172 - Tokens: 1043
+65. src\Artifacts\A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md - Lines: 46 - Chars: 4915 - Tokens: 1229
 66. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
 67. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
 68. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
@@ -107,7 +107,7 @@
 83. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
 84. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
 85. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
-86. src\client\components\DiffViewer.tsx - Lines: 51 - Chars: 2315 - Tokens: 579
+86. src\client\components\DiffViewer.tsx - Lines: 107 - Chars: 4188 - Tokens: 1047
 87. src\client\components\file-tree\FileTree.tsx - Lines: 262 - Chars: 11897 - Tokens: 2975
 88. src\client\components\file-tree\FileTree.utils.ts - Lines: 189 - Chars: 7284 - Tokens: 1821
 89. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13099 - Tokens: 3275
@@ -125,8 +125,8 @@
 101. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 43 - Chars: 1890 - Tokens: 473
 102. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
 103. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
-104. src\client\views\parallel-copilot.view\view.scss - Lines: 407 - Chars: 9077 - Tokens: 2270
-105. src\client\views\parallel-copilot.view\view.tsx - Lines: 399 - Chars: 20735 - Tokens: 5184
+104. src\client\views\parallel-copilot.view\view.scss - Lines: 415 - Chars: 9490 - Tokens: 2373
+105. src\client\views\parallel-copilot.view\view.tsx - Lines: 392 - Chars: 20277 - Tokens: 5070
 106. src\common\ipc\channels.enum.ts - Lines: 64 - Chars: 3129 - Tokens: 783
 107. src\common\ipc\channels.type.ts - Lines: 57 - Chars: 4453 - Tokens: 1114
 108. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1590 - Tokens: 398
@@ -237,7 +237,7 @@
 213. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
 214. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
 215. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
-216. tsconfig.json - Lines: 25 - Chars: 567 - Tokens: 142
+216. tsconfig.json - Lines: 26 - Chars: 599 - Tokens: 150
 217. webpack.config.js - Lines: 103 - Chars: 2830 - Tokens: 708
 
 <file path=".gitignore">
@@ -497,6 +497,7 @@ SOFTWARE.
         "Other"
     ],
     "activationEvents": [
+        "onView:data-curation-environment",
         "onCommand:dce.showParallelCopilot"
     ],
     "main": "./dist/extension.js",
@@ -643,7 +644,7 @@ SOFTWARE.
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C120 (Add A56 for Advanced Diff Viewer Plan)
+# Updated on: C121 (Update A56 for Side-by-Side Diff View)
 
 ## 1. Purpose
 
@@ -895,7 +896,7 @@ SOFTWARE.
 
 ### A56. DCE - Phase 2 - Advanced Diff Viewer Plan
 - **Description:** Details the plan to enhance the integrated diff viewer with background coloring for changes and WinMerge-like navigation controls to jump between differences.
-- **Tags:** feature plan, phase 2, ui, ux, diff, navigation
+- **Tags:** feature plan, phase 2, ui, ux, diff, navigation, side-by-side
 
 ## II. Standalone Utilities & Guides
 
@@ -6237,6 +6238,7 @@ Removed after completing refactor.
 # Artifact A56: DCE - Phase 2 - Advanced Diff Viewer Plan
 # Date Created: C120
 # Author: AI Model & Curator
+# Updated on: C121 (Change to side-by-side view with line alignment)
 
 - **Key/Value for A0:**
 - **Description:** Details the plan to enhance the integrated diff viewer with background coloring for changes and WinMerge-like navigation controls to jump between differences.
@@ -6244,41 +6246,41 @@ Removed after completing refactor.
 
 ## 1. Overview & Goal
 
-The current diff view is functional but lacks key usability features found in mature diff tools like WinMerge. The goal of this plan is to enhance the diff viewer to provide a much clearer and more efficient user experience. This involves two primary enhancements: adding background coloring to highlight changed lines and implementing navigation controls to allow the user to quickly jump between blocks of differences.
+The current diff view is functional but lacks key usability features found in mature diff tools like WinMerge. The goal of this plan is to enhance the diff viewer to provide a much clearer and more efficient user experience. This involves three primary enhancements:
+1.  **Side-by-Side Layout:** Displaying the original and modified files in two parallel panes.
+2.  **Line Alignment:** Inserting placeholder lines to ensure that common (unchanged) code blocks remain horizontally aligned.
+3.  **Navigation Controls:** Adding buttons to allow the user to quickly jump between blocks of differences.
 
 ## 2. User Stories
 
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
-| P2-DIFF-01 | **Colored Diffs** | As a developer, I want to see a colored background for lines that have been added or removed in the diff view, so I can immediately identify the changes at a glance. | - Lines that exist in the new version but not the old have a distinct background color (e.g., light green). <br> - Lines that exist in the old version but not the new have a different background color (e.g., light red). <br> - Unchanged lines have the standard editor background color. |
-| P2-DIFF-02 | **Navigate Between Diffs** | As a developer reviewing a large file with scattered changes, I want "Next Difference" and "Previous Difference" buttons, so I can quickly jump between changed blocks without manually scrolling and searching. | - "Next Difference" (`↓`) and "Previous Difference" (`↑`) buttons are added to the diff viewer's header. <br> - Clicking "Next Difference" scrolls the view to the start of the next block of added or removed lines. <br> - Clicking "Previous Difference" scrolls to the previous block. <br> - The buttons are disabled when at the start or end of the diff list. |
+| P2-DIFF-01 | **Colored Side-by-Side Diffs** | As a developer, I want to see a side-by-side view of the original and modified code with a colored background for changed lines, so I can immediately identify changes at a glance. | - The diff view is split into two vertical panes: "Original" on the left, "Modified" on the right. <br> - Lines that exist in the new version but not the old have a distinct background color (e.g., light green) in the right pane. <br> - Lines that exist in the old version but not the new have a different background color (e.g., light red) in the left pane. <br> - Unchanged lines have the standard editor background color in both panes. |
+| P2-DIFF-02 | **Aligned Content** | As a developer, when a block of lines is added or removed, I want the other pane to show empty space, so that the lines of code below the change remain horizontally aligned. | - When lines are added in the right pane, an equal number of empty placeholder rows are rendered in the left pane. <br> - When lines are removed from the left pane, an equal number of empty placeholder rows are rendered in the right pane. <br> - This ensures that a common line `X` appears at the same vertical position in both panes, regardless of changes above it. |
+| P2-DIFF-03 | **Navigate Between Diffs** | As a developer reviewing a large file, I want "Next Difference" and "Previous Difference" buttons, so I can quickly jump between changed blocks without manually scrolling. | - "Next Difference" (`↓`) and "Previous Difference" (`↑`) buttons are added to the diff viewer's header. <br> - Clicking "Next Difference" scrolls the view to the start of the next block of added or removed lines. <br> - Clicking "Previous Difference" scrolls to the previous block. <br> - The buttons are disabled when at the start or end of the diff list. |
 
 ## 3. Technical Implementation Plan
 
-### 3.1. Diff Coloring
+### 3.1. Side-by-Side Diff Logic (`DiffViewer.tsx`)
 
--   **Component (`DiffViewer.tsx`):**
-    1.  The existing logic already uses the `diff` library to get an array of `Change` objects.
-    2.  The rendering logic will be updated to apply a CSS class to each line's container `div` based on the `part.added` or `part.removed` properties.
--   **Styling (`view.scss`):**
-    1.  New CSS classes (`.line.added`, `.line.removed`) will be created.
-    2.  These classes will use VS Code theme variables for the background colors to ensure a native look and feel:
-        *   `--vscode-diffEditor-insertedTextBackground` for added lines.
-        *   `--vscode-diffEditor-removedTextBackground` for removed lines.
+-   **Processing:** The component will receive the `original` and `modified` strings. It will use the `diffLines` function from the `diff` library.
+-   **Data Structure:** It will process the resulting `Change[]` array into a new, unified data structure: `PairedLine[]`, where `PairedLine` is `{ left: DiffLine, right: DiffLine }`.
+-   **Algorithm:**
+    1.  Iterate through the `Change` array from `diffLines`.
+    2.  If a `removed` block is immediately followed by an `added` block, treat this as a "change". Create pairs of lines, padding the shorter block with placeholders so they align.
+    3.  If a block is only `removed`, create pairs where the left side has the content and the right side is a placeholder.
+    4.  If a block is only `added`, create pairs where the left side is a placeholder and the right side has the content.
+    5.  If a block is `common`, create pairs where both sides have the same content.
+-   **Rendering:** The component will render two main `div`s (`.diff-pane`). Each pane will contain its own line number gutter and a content area. It will map over the `PairedLine[]` array, rendering the `left` data in the left pane and the `right` data in the right pane for each row.
 
-### 3.2. Diff Navigation
+### 3.2. Styling (`view.scss`)
 
--   **Component (`view.tsx`):**
-    1.  The main view component will need to manage the state for diff navigation as the `DiffViewer` itself is a more presentational component.
--   **Component (`DiffViewer.tsx`):**
-    1.  **Identify Change Locations:** A `useMemo` hook will be added. When the `original` and `modified` props change, it will re-calculate the diff and also identify the line numbers where changes begin. It will store these line numbers in an array (e.g., `[5, 25, 42]`). This array will be passed up to the parent `view.tsx` component.
-    2.  **Scrolling:** The component will use `useRef` to get a reference to the main scrollable container. When a "scroll to line" prop is received from the parent, a `useEffect` will trigger that finds the corresponding line element and calls `.scrollIntoView()`.
--   **UI & State (`view.tsx`):**
-    1.  **State:** New state variables will be added: `const [diffLocations, setDiffLocations] = useState<number[]>([]);` and `const [currentDiffIndex, setCurrentDiffIndex] = useState(-1);`.
-    2.  **Buttons:** "Next" and "Previous" buttons will be added to the UI, likely in the `file-content-viewer-header`.
-    3.  **Logic:**
-        *   The "Next" button will increment `currentDiffIndex` and trigger a scroll to the line number at `diffLocations[newIndex]`.
-        *   The "Previous" button will decrement `currentDiffIndex`.
+-   The `.diff-viewer-container` will be a flexbox or grid container to hold the two `.diff-pane` children.
+-   Each `.diff-pane` will also be a flexbox container for its line numbers and content.
+-   New CSS classes will be used:
+    *   `.line.added`: `background-color: var(--vscode-diffEditor-insertedTextBackground);`
+    *   `.line.removed`: `background-color: var(--vscode-diffEditor-removedTextBackground);`
+    *   `.line.placeholder`: A subtle background color, like `var(--vscode-editor-inactiveSelectionBackground)`, to indicate it's just for alignment.
 </file>
 
 <file path="src/Artifacts/A6. DCE - Initial Scaffolding Deployment Script.md">
@@ -9480,41 +9482,97 @@ interface DiffViewerProps {
     modified: string;
 }
 
-const DiffViewer: React.FC<DiffViewerProps> = ({ original, modified }) => {
-    const changes = diffLines(original, modified);
+interface DiffLine {
+    type: 'added' | 'removed' | 'common' | 'placeholder';
+    content?: string;
+}
 
-    let originalLineNum = 1;
-    let modifiedLineNum = 1;
+interface PairedLine {
+    left: DiffLine & { lineNum?: number };
+    right: DiffLine & { lineNum?: number };
+}
+
+const DiffViewer: React.FC<DiffViewerProps> = ({ original, modified }) => {
+    
+    const pairedLines = React.useMemo(() => {
+        const changes = diffLines(original, modified);
+        const result: PairedLine[] = [];
+        let leftLineNum = 1;
+        let rightLineNum = 1;
+
+        let i = 0;
+        while (i < changes.length) {
+            const current = changes[i];
+            const next = changes[i + 1];
+
+            if (current.removed && next && next.added) {
+                const leftLines = current.value.split('\n').slice(0, -1);
+                const rightLines = next.value.split('\n').slice(0, -1);
+                const maxLen = Math.max(leftLines.length, rightLines.length);
+
+                for (let j = 0; j < maxLen; j++) {
+                    result.push({
+                        left: { type: 'removed', content: leftLines[j], lineNum: leftLines[j] !== undefined ? leftLineNum++ : undefined },
+                        right: { type: 'added', content: rightLines[j], lineNum: rightLines[j] !== undefined ? rightLineNum++ : undefined }
+                    });
+                }
+                i += 2;
+            } else if (current.removed) {
+                const lines = current.value.split('\n').slice(0, -1);
+                lines.forEach(line => {
+                    result.push({
+                        left: { type: 'removed', content: line, lineNum: leftLineNum++ },
+                        right: { type: 'placeholder' }
+                    });
+                });
+                i++;
+            } else if (current.added) {
+                const lines = current.value.split('\n').slice(0, -1);
+                lines.forEach(line => {
+                    result.push({
+                        left: { type: 'placeholder' },
+                        right: { type: 'added', content: line, lineNum: rightLineNum++ }
+                    });
+                });
+                i++;
+            } else { // common
+                const lines = current.value.split('\n').slice(0, -1);
+                lines.forEach(line => {
+                    result.push({
+                        left: { type: 'common', content: line, lineNum: leftLineNum++ },
+                        right: { type: 'common', content: line, lineNum: rightLineNum++ }
+                    });
+                });
+                i++;
+            }
+        }
+        return result;
+    }, [original, modified]);
 
     return (
         <div className="diff-viewer-container">
-            <div className="diff-content">
-                <div className="line-numbers original">
-                    {changes.map((part, index) => {
-                        if (part.added) return null;
-                        const lines = part.value.split('\n').filter((line, i, arr) => i < arr.length - 1 || line !== '');
-                        return lines.map((_, lineIndex) => <span key={`${index}-${lineIndex}`}>{originalLineNum++}</span>);
-                    })}
+            <div className="diff-pane">
+                <div className="line-numbers">
+                    {pairedLines.map((line, i) => <span key={`L${i}`}>{line.left.lineNum || ' '}</span>)}
                 </div>
                 <div className="diff-lines">
-                    {changes.map((part, index) => {
-                        const lines = part.value.split('\n').filter((line, i, arr) => i < arr.length - 1 || line !== '');
-                        const partClassName = part.added ? 'added' : part.removed ? 'removed' : 'common';
-                        
-                        return lines.map((line, lineIndex) => (
-                            <div key={`${index}-${lineIndex}`} className={`line ${partClassName}`}>
-                                <span className="line-prefix">{part.added ? '+' : part.removed ? '-' : ' '}</span>
-                                <pre><code>{line}</code></pre>
-                            </div>
-                        ));
-                    })}
+                    {pairedLines.map((line, i) => (
+                        <div key={`L${i}`} className={`line ${line.left.type}`}>
+                            <pre><code>{line.left.content || ' '}</code></pre>
+                        </div>
+                    ))}
                 </div>
-                 <div className="line-numbers modified">
-                    {changes.map((part, index) => {
-                        if (part.removed) return null;
-                        const lines = part.value.split('\n').filter((line, i, arr) => i < arr.length - 1 || line !== '');
-                        return lines.map((_, lineIndex) => <span key={`${index}-${lineIndex}`}>{modifiedLineNum++}</span>);
-                    })}
+            </div>
+            <div className="diff-pane">
+                <div className="line-numbers">
+                    {pairedLines.map((line, i) => <span key={`R${i}`}>{line.right.lineNum || ' '}</span>)}
+                </div>
+                <div className="diff-lines">
+                    {pairedLines.map((line, i) => (
+                        <div key={`R${i}`} className={`line ${line.right.type}`}>
+                            <pre><code>{line.right.content || ' '}</code></pre>
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>
@@ -12182,7 +12240,7 @@ export default TestPane3;
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
-/* Updated on: C120 (Add styles for colored diff view) */
+/* Updated on: C121 (Add styles for side-by-side diff view) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -12457,6 +12515,7 @@ body {
     border-top: none;
     border-radius: 0 0 4px 4px;
     background-color: var(--vscode-editor-background);
+    overflow: hidden; /* Prevent children from overflowing */
 }
 
 .file-content-viewer {
@@ -12546,41 +12605,48 @@ body {
     }
 }
 
-/* Diff Viewer Specific Styles */
+/* Side-by-Side Diff Viewer Styles */
 .diff-viewer-container {
     display: flex;
-    flex-direction: column;
     width: 100%;
     overflow: auto;
     font-family: var(--vscode-editor-font-family);
+    font-size: var(--vscode-editor-font-size);
 }
 
-.diff-content {
+.diff-pane {
+    flex: 1;
     display: flex;
-    flex-grow: 1;
+    min-width: 0;
+    &:first-child {
+        border-right: 1px solid var(--vscode-panel-border);
+    }
 }
 
-.diff-viewer-container .line-numbers {
+.diff-pane .line-numbers {
     flex-shrink: 0;
     padding: 8px 4px;
     line-height: 1.5;
-    border-right: none;
     background-color: var(--vscode-editorGutter-background);
+    color: var(--vscode-editorLineNumber-foreground);
+    text-align: right;
+    user-select: none;
+    border-right: 1px solid var(--vscode-panel-border);
+    span {
+        display: block;
+        min-height: 1.5em; /* Ensure empty lines take up space */
+    }
 }
 
-.diff-lines {
+.diff-pane .diff-lines {
     flex-grow: 1;
     .line {
-        display: flex;
         line-height: 1.5;
         padding-left: 8px;
+        min-height: 1.5em;
         &.added { background-color: var(--vscode-diffEditor-insertedTextBackground); }
         &.removed { background-color: var(--vscode-diffEditor-removedTextBackground); }
-        .line-prefix {
-            width: 15px;
-            flex-shrink: 0;
-            user-select: none;
-        }
+        &.placeholder { background-color: var(--vscode-editor-inactiveSelectionBackground); }
         pre {
             margin: 0;
             padding: 0;
@@ -12592,7 +12658,7 @@ body {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
-// Updated on: C120 (Fix diff view bugs and UI)
+// Updated on: C121 (Fix diff view bugs and UI)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -12603,7 +12669,6 @@ import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/chann
 import { ParsedResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
 import ReactMarkdown from 'react-markdown';
-import * as path from 'path-browserify';
 import DiffViewer from '@/client/components/DiffViewer';
 import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
 
@@ -12871,13 +12936,7 @@ const App = () => {
         const newDiffMode = !isDiffMode;
         setIsDiffMode(newDiffMode);
         if (newDiffMode && selectedFilePath) {
-            // C120 Bug Fix: The lang was being passed as an object. Correctly get the extension.
-            const lang = selectedFilePath.split('.').pop() || 'plaintext';
-            const id = `original::${selectedFilePath}`;
             clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: selectedFilePath });
-            if (originalFileContent) {
-                 clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: originalFileContent, lang, id });
-            }
         } else {
             setOriginalFileContent(null);
         }
@@ -20375,7 +20434,8 @@ module.exports = [ extensionConfig ];
     ],
     "exclude": [
         "node_modules",
-        ".vscode-test"
+        ".vscode-test",
+        "The-Creator-AI-main"
     ]
 }
 </file>

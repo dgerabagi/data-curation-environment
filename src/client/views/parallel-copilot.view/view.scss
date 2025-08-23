@@ -1,4 +1,4 @@
-/* Updated on: C121 (Add styles for side-by-side diff view) */
+/* Updated on: C122 (Add styles for side-by-side diff view header) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -251,6 +251,13 @@ body {
     font-size: 12px;
     flex-shrink: 0;
 
+    &.diff-header {
+        .file-path {
+            flex: 1;
+            text-align: center;
+        }
+    }
+
     .file-path {
         font-weight: bold;
         white-space: nowrap;
@@ -268,7 +275,6 @@ body {
     display: flex;
     flex-grow: 1;
     min-height: 0;
-    gap: 8px;
     border: 1px solid var(--vscode-panel-border);
     border-top: none;
     border-radius: 0 0 4px 4px;
@@ -373,7 +379,7 @@ body {
 }
 
 .diff-pane {
-    flex: 1;
+    flex: 1 1 50%;
     display: flex;
     min-width: 0;
     &:first-child {
@@ -392,7 +398,8 @@ body {
     border-right: 1px solid var(--vscode-panel-border);
     span {
         display: block;
-        min-height: 1.5em; /* Ensure empty lines take up space */
+        min-height: 1.5em;
+        padding-right: 6px;
     }
 }
 
@@ -404,7 +411,10 @@ body {
         min-height: 1.5em;
         &.added { background-color: var(--vscode-diffEditor-insertedTextBackground); }
         &.removed { background-color: var(--vscode-diffEditor-removedTextBackground); }
-        &.placeholder { background-color: var(--vscode-editor-inactiveSelectionBackground); }
+        &.placeholder { 
+            background-color: var(--vscode-editor-inactiveSelectionBackground);
+            opacity: 0.5;
+        }
         pre {
             margin: 0;
             padding: 0;

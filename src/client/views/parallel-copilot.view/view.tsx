@@ -1,4 +1,4 @@
-// Updated on: C121 (Fix diff view bugs and UI)
+// Updated on: C122 (Fix diff view title regression, integrate side-by-side diff viewer)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -11,6 +11,7 @@ import { parseResponse } from '@/client/utils/response-parser';
 import ReactMarkdown from 'react-markdown';
 import DiffViewer from '@/client/components/DiffViewer';
 import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
+import * as path from 'path-browserify';
 
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -117,26 +118,22 @@ const App = () => {
     }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, debouncedSave]);
     
     const parseAllTabs = React.useCallback(() => {
-        logger.log("Parsing all tabs...");
         const allFilePaths = new Set<string>();
         const updatedTabs = { ...tabs };
-        let shouldUpdate = false;
-        Object.entries(updatedTabs).forEach(([tabId, tabState]) => {
+        Object.values(updatedTabs).forEach(tabState => {
             if (tabState.rawContent && !tabState.parsedContent) {
-                shouldUpdate = true;
                 const parsed = parseResponse(tabState.rawContent);
-                updatedTabs[Number(tabId)].parsedContent = parsed;
+                tabState.parsedContent = parsed;
                 parsed.filesUpdated.forEach(file => allFilePaths.add(file));
                 parsed.files.forEach(file => {
-                    const lang = file.path.split('.').pop() || 'plaintext';
+                    // C119: Use path-browserify to get the extension safely on the frontend.
+                    const lang = path.extname(file.path).substring(1) || 'plaintext';
                     const id = `${file.path}::${file.content}`;
                      clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
                 });
             }
         });
-        if (shouldUpdate) {
-            setTabs(updatedTabs);
-        }
+        setTabs(updatedTabs);
         if (allFilePaths.size > 0) {
             clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) });
         }
@@ -276,7 +273,11 @@ const App = () => {
         const newDiffMode = !isDiffMode;
         setIsDiffMode(newDiffMode);
         if (newDiffMode && selectedFilePath) {
+            // C120 Fix: Correctly get file extension for language.
+            const lang = path.extname(selectedFilePath).substring(1);
             clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: selectedFilePath });
+            // Also request syntax highlighting for the original file content for the diff viewer
+            clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: originalFileContent || '', lang, id: `original::${selectedFilePath}` });
         } else {
             setOriginalFileContent(null);
         }
@@ -296,6 +297,16 @@ const App = () => {
             <button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button>
         </div>
     );
+
+    const renderDiffHeader = () => {
+        if (!isDiffMode || !selectedFilePath) return null;
+        return (
+             <div className="file-content-viewer-header diff-header">
+                <span className="file-path left" title={selectedFilePath}>Original: {selectedFilePath}</span>
+                <span className="file-path right" title={selectedFilePath}>Response {activeTab}: {path.basename(selectedFilePath)}</span>
+            </div>
+        );
+    };
 
     return (
         <div className="pc-view-container">
@@ -361,13 +372,15 @@ const App = () => {
                                 </div>
                                 {!isDiffMode && <div className="resizer" onMouseDown={handleMouseDown} />}
                                 <div className="parsed-view-right">
-                                    <div className="file-content-viewer-header">
-                                        <span className="file-path" title={selectedFilePath || ''}>{selectedFilePath || 'No file selected'}</span>
-                                        <div className="file-actions">
-                                            <button onClick={handleDiffClick} disabled={!selectedFilePath} title="Toggle Diff View"><VscDiff /></button>
-                                            <button disabled={!selectedFilePath} title="Swap with Workspace File"><VscArrowSwap /></button>
+                                    {isDiffMode ? renderDiffHeader() : (
+                                        <div className="file-content-viewer-header">
+                                            <span className="file-path" title={selectedFilePath || ''}>{selectedFilePath ? `Response ${activeTab}: ${selectedFilePath}` : 'No file selected'}</span>
+                                            <div className="file-actions">
+                                                <button onClick={handleDiffClick} disabled={!selectedFilePath} title="Toggle Diff View"><VscDiff /></button>
+                                                <button disabled={!selectedFilePath} title="Swap with Workspace File"><VscArrowSwap /></button>
+                                            </div>
                                         </div>
-                                    </div>
+                                    )}
                                     <div className="code-viewer-wrapper">
                                         {isDiffMode && activeTabData.parsedContent && selectedFilePath && originalFileContent ? (
                                             <DiffViewer 

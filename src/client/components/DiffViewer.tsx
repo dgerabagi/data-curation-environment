@@ -2,11 +2,6 @@
 import * as React from 'react';
 import { diffLines, Change } from 'diff';
 
-interface DiffViewerProps {
-    original: string;
-    modified: string;
-}
-
 interface DiffLine {
     type: 'added' | 'removed' | 'common' | 'placeholder';
     content?: string;
@@ -17,7 +12,7 @@ interface PairedLine {
     right: DiffLine & { lineNum?: number };
 }
 
-const DiffViewer: React.FC<DiffViewerProps> = ({ original, modified }) => {
+const DiffViewer: React.FC<{ original: string; modified: string; }> = ({ original, modified }) => {
     
     const pairedLines = React.useMemo(() => {
         const changes = diffLines(original, modified);
@@ -30,9 +25,10 @@ const DiffViewer: React.FC<DiffViewerProps> = ({ original, modified }) => {
             const current = changes[i];
             const next = changes[i + 1];
 
+            // Heuristic to treat adjacent removed/added blocks as a "change"
             if (current.removed && next && next.added) {
-                const leftLines = current.value.split('\n').slice(0, -1);
-                const rightLines = next.value.split('\n').slice(0, -1);
+                const leftLines = current.value.split('\n').filter(l => l.length > 0);
+                const rightLines = next.value.split('\n').filter(l => l.length > 0);
                 const maxLen = Math.max(leftLines.length, rightLines.length);
 
                 for (let j = 0; j < maxLen; j++) {
@@ -43,7 +39,7 @@ const DiffViewer: React.FC<DiffViewerProps> = ({ original, modified }) => {
                 }
                 i += 2;
             } else if (current.removed) {
-                const lines = current.value.split('\n').slice(0, -1);
+                const lines = current.value.split('\n').filter(l => l.length > 0);
                 lines.forEach(line => {
                     result.push({
                         left: { type: 'removed', content: line, lineNum: leftLineNum++ },
@@ -52,7 +48,7 @@ const DiffViewer: React.FC<DiffViewerProps> = ({ original, modified }) => {
                 });
                 i++;
             } else if (current.added) {
-                const lines = current.value.split('\n').slice(0, -1);
+                const lines = current.value.split('\n').filter(l => l.length > 0);
                 lines.forEach(line => {
                     result.push({
                         left: { type: 'placeholder' },
@@ -60,8 +56,8 @@ const DiffViewer: React.FC<DiffViewerProps> = ({ original, modified }) => {
                     });
                 });
                 i++;
-            } else { // common
-                const lines = current.value.split('\n').slice(0, -1);
+            } else { // common block
+                const lines = current.value.split('\n').filter(l => l.length > 0);
                 lines.forEach(line => {
                     result.push({
                         left: { type: 'common', content: line, lineNum: leftLineNum++ },
@@ -78,24 +74,24 @@ const DiffViewer: React.FC<DiffViewerProps> = ({ original, modified }) => {
         <div className="diff-viewer-container">
             <div className="diff-pane">
                 <div className="line-numbers">
-                    {pairedLines.map((line, i) => <span key={`L${i}`}>{line.left.lineNum || ' '}</span>)}
+                    {pairedLines.map((line, i) => <span key={`L${i}`}>{line.left.lineNum || ''}</span>)}
                 </div>
                 <div className="diff-lines">
                     {pairedLines.map((line, i) => (
                         <div key={`L${i}`} className={`line ${line.left.type}`}>
-                            <pre><code>{line.left.content || ' '}</code></pre>
+                            <pre><code>{line.left.content || ''}</code></pre>
                         </div>
                     ))}
                 </div>
             </div>
             <div className="diff-pane">
                 <div className="line-numbers">
-                    {pairedLines.map((line, i) => <span key={`R${i}`}>{line.right.lineNum || ' '}</span>)}
+                    {pairedLines.map((line, i) => <span key={`R${i}`}>{line.right.lineNum || ''}</span>)}
                 </div>
                 <div className="diff-lines">
                     {pairedLines.map((line, i) => (
                         <div key={`R${i}`} className={`line ${line.right.type}`}>
-                            <pre><code>{line.right.content || ' '}</code></pre>
+                            <pre><code>{line.right.content || ''}</code></pre>
                         </div>
                     ))}
                 </div>
