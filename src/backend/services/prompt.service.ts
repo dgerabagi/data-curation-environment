@@ -1,4 +1,4 @@
-// Updated on: C120 (Fix cycle sorting for M2 and M6)
+// Updated on: C120 (Fix cycle order in prompt.md)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -69,28 +69,45 @@ Phase 3. Diff Tool - Basically, winmerge but intergrated into a window within VS
             const flattenedContent = await fs.readFile(flattenedRepoPath, 'utf-8');
             const fullHistory: PcppCycle[] = await Services.historyService.getFullHistory();
 
-            // C120 FIX: Ensure descending sort with explicit number conversion for robustness.
-            const sortedHistory = [...fullHistory].sort((a, b) => Number(b.cycleId) - Number(a.cycleId));
+            // C120 FIX: Sort history in descending order for M2
+            const sortedHistoryForM2 = [...fullHistory].sort((a, b) => b.cycleId - a.cycleId);
 
             let cycleOverview = '<M2. cycle overview>\n';
             cycleOverview += `Current Cycle ${currentCycle} - ${cycleTitle}\n`;
-            for (const cycle of sortedHistory) {
-                if (cycle.cycleId < currentCycle) {
+            for (const cycle of sortedHistoryForM2) {
+                // Ensure we don't duplicate the current cycle entry if it's already in history
+                if (cycle.cycleId !== currentCycle) {
                      cycleOverview += `Cycle ${cycle.cycleId} - ${cycle.title}\n`;
                 }
             }
             cycleOverview += '</M2. cycle overview>';
             
+            // C120 Fix: Also sort the history for M6 in descending order
+            const sortedHistoryForM6 = [...fullHistory].sort((a, b) => b.cycleId - a.cycleId);
+
             let cyclesContent = '<M6. Cycles>\n\n';
             cyclesContent += `<Cycle ${currentCycle}>\n${cycleTitle}\n`;
-            
-            // C120 FIX: Use the same descending sorted history for M6.
-            for (const cycle of sortedHistory) {
-                if (cycle.cycleId === currentCycle) continue; 
-                const previousResponseContent = cycle.responses['1']?.content || '';
+            // Find the previous cycle's data to generate the summary
+            const previousCycle = sortedHistoryForM6.find(c => c.cycleId === currentCycle - 1);
+            if (previousCycle) {
+                const previousResponseContent = previousCycle.responses['1']?.content || '';
                 const parsed = parseResponse(previousResponseContent);
                 const summary = `${parsed.summary}\n\n${parsed.courseOfAction}`;
-                cyclesContent += `<Previous Cycle ${cycle.cycleId - 1} Summary of Actions>\n${summary}\n</Previous Cycle ${cycle.cycleId - 1} Summary of Actions>\n`;
+                cyclesContent += `<Previous Cycle ${previousCycle.cycleId} Summary of Actions>\n${summary}\n</Previous Cycle ${previousCycle.cycleId} Summary of Actions>\n`;
+            }
+            cyclesContent += `</Cycle ${currentCycle}>\n\n`;
+
+
+            for (const cycle of sortedHistoryForM6) {
+                if (cycle.cycleId === currentCycle) continue; 
+                cyclesContent += `<Cycle ${cycle.cycleId}>\n`;
+                const prevCycleForSummary = sortedHistoryForM6.find(c => c.cycleId === cycle.cycleId - 1);
+                 if (prevCycleForSummary) {
+                    const previousResponseContent = prevCycleForSummary.responses['1']?.content || '';
+                    const parsed = parseResponse(previousResponseContent);
+                    const summary = `${parsed.summary}\n\n${parsed.courseOfAction}`;
+                    cyclesContent += `<Previous Cycle ${prevCycleForSummary.cycleId} Summary of Actions>\n${summary}\n</Previous Cycle ${prevCycleForSummary.cycleId} Summary of Actions>\n`;
+                 }
                 cyclesContent += `</Cycle ${cycle.cycleId}>\n\n`;
             }
             cyclesContent += '</M6. Cycles>';

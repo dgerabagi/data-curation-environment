@@ -1,4 +1,4 @@
-// Updated on: C120 (Fix diff view highlighting and layout)
+// Updated on: C120 (Fix diff view bugs and UI)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -7,10 +7,11 @@ import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
 import { ParsedResponse } from '@/common/types/pcpp.types';
-import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
 import ReactMarkdown from 'react-markdown';
 import * as path from 'path-browserify';
+import DiffViewer from '@/client/components/DiffViewer';
+import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
 
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -31,12 +32,12 @@ const CodeViewer: React.FC<{ htmlContent: string | undefined | null }> = ({ html
     if (htmlContent === undefined || htmlContent === null) {
         return <div style={{ padding: '8px' }}>Select a file to view its content.</div>;
     }
-    if (htmlContent.startsWith('<div>Error:')) {
-        return <div style={{ padding: '8px' }} dangerouslySetInnerHTML={{ __html: htmlContent }} />;
+    if (htmlContent.startsWith('// Error:')) {
+         return <div style={{ padding: '8px', color: 'var(--vscode-errorForeground)' }}>{htmlContent}</div>;
     }
 
     const codeContentMatch = /<pre><code>([\s\S]*)<\/code><\/pre>/s.exec(htmlContent);
-    const code = codeContentMatch ? codeContentMatch[1] : `<code>${htmlContent}</code>`;
+    const code = codeContentMatch ? codeContentMatch[1] : `<code>${htmlContent}</code>`; 
 
     const lines = code.split('\n');
     if (lines.length > 0 && lines[lines.length - 1] === '') {
@@ -81,7 +82,6 @@ const App = () => {
     const [ephemeralContext, setEphemeralContext] = React.useState('');
     const [tabs, setTabs] = React.useState<{ [key: string]: TabState }>({});
     const [highlightedCodeBlocks, setHighlightedCodeBlocks] = React.useState<Map<string, string>>(new Map());
-    const [highlightedOriginalFile, setHighlightedOriginalFile] = React.useState<string | null>(null);
     const [fileExistenceMap, setFileExistenceMap] = React.useState<Map<string, boolean>>(new Map());
     const [isParsedMode, setIsParsedMode] = React.useState(false);
     const [selectedFilePath, setSelectedFilePath] = React.useState<string | null>(null);
@@ -130,7 +130,7 @@ const App = () => {
                 parsed.filesUpdated.forEach(file => allFilePaths.add(file));
                 parsed.files.forEach(file => {
                     const lang = file.path.split('.').pop() || 'plaintext';
-                    const id = `ai::${file.path}`;
+                    const id = `${file.path}::${file.content}`;
                      clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
                 });
             }
@@ -168,21 +168,14 @@ const App = () => {
             }
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => {
-            if (id.startsWith('original::')) {
-                setHighlightedOriginalFile(highlightedHtml);
-            } else {
-                setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml));
-            }
+            setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml));
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => {
             setFileExistenceMap(new Map(Object.entries(existenceMap)));
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendFileContent, ({ path: filePath, content }) => {
-            if (filePath === selectedFilePath && content) {
+            if (filePath === selectedFilePath) {
                 setOriginalFileContent(content);
-                const lang = filePath.split('.').pop() || 'plaintext';
-                const id = `original::${filePath}`;
-                clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: content, lang, id });
             }
         });
         
@@ -201,7 +194,7 @@ const App = () => {
         if (!selectedFilePath || !activeTabData?.parsedContent) return undefined;
         const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath);
         if (!file) return '<div>Error: File data not found in parsed response.</div>';
-        const id = `ai::${file.path}`;
+        const id = `${file.path}::${file.content}`;
         return highlightedCodeBlocks.get(id);
     }, [selectedFilePath, activeTabData?.parsedContent, highlightedCodeBlocks]);
 
@@ -284,13 +277,17 @@ const App = () => {
         const newDiffMode = !isDiffMode;
         setIsDiffMode(newDiffMode);
         if (newDiffMode && selectedFilePath) {
+            // C120 Bug Fix: The lang was being passed as an object. Correctly get the extension.
+            const lang = selectedFilePath.split('.').pop() || 'plaintext';
+            const id = `original::${selectedFilePath}`;
             clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: selectedFilePath });
+            if (originalFileContent) {
+                 clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: originalFileContent, lang, id });
+            }
         } else {
             setOriginalFileContent(null);
-            setHighlightedOriginalFile(null);
         }
     };
-
 
     const isNewCycleButtonDisabled = React.useMemo(() => {
         const hasTitle = cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== '';
@@ -371,24 +368,21 @@ const App = () => {
                                 </div>
                                 {!isDiffMode && <div className="resizer" onMouseDown={handleMouseDown} />}
                                 <div className="parsed-view-right">
-                                    <div className="code-viewer-wrapper">
-                                        <div className="code-viewer-pane">
-                                            <div className="file-content-viewer-header">
-                                                <span className="file-path" title={selectedFilePath || ''}>AI: {selectedFilePath || 'No file selected'}</span>
-                                                <div className="file-actions">
-                                                    <button onClick={handleDiffClick} disabled={!selectedFilePath} title="Toggle Diff View"><VscDiff /></button>
-                                                    <button disabled={!selectedFilePath} title="Swap with Workspace File"><VscArrowSwap /></button>
-                                                </div>
-                                            </div>
-                                            <CodeViewer htmlContent={viewableContent} />
+                                    <div className="file-content-viewer-header">
+                                        <span className="file-path" title={selectedFilePath || ''}>{selectedFilePath || 'No file selected'}</span>
+                                        <div className="file-actions">
+                                            <button onClick={handleDiffClick} disabled={!selectedFilePath} title="Toggle Diff View"><VscDiff /></button>
+                                            <button disabled={!selectedFilePath} title="Swap with Workspace File"><VscArrowSwap /></button>
                                         </div>
-                                        {isDiffMode && (
-                                            <div className="code-viewer-pane">
-                                                <div className="file-content-viewer-header">
-                                                    <span className="file-path" title={selectedFilePath || ''}>Workspace: {selectedFilePath || 'No file selected'}</span>
-                                                </div>
-                                                <CodeViewer htmlContent={highlightedOriginalFile} />
-                                            </div>
+                                    </div>
+                                    <div className="code-viewer-wrapper">
+                                        {isDiffMode && activeTabData.parsedContent && selectedFilePath && originalFileContent ? (
+                                            <DiffViewer 
+                                                original={originalFileContent}
+                                                modified={activeTabData.parsedContent.files.find(f => f.path === selectedFilePath)?.content || ''}
+                                            />
+                                        ) : (
+                                            <CodeViewer htmlContent={viewableContent} />
                                         )}
                                     </div>
                                 </div>

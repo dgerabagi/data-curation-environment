@@ -1,4 +1,4 @@
-/* Updated on: C120 (Add styles for side-by-side diff pane) */
+/* Updated on: C120 (Add styles for colored diff view) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -261,13 +261,6 @@ body {
         display: flex;
         align-items: center;
         gap: 8px;
-
-        button {
-            margin-left: 8px;
-        }
-    }
-    .metrics {
-        color: var(--vscode-descriptionForeground);
     }
 }
 
@@ -276,22 +269,14 @@ body {
     flex-grow: 1;
     min-height: 0;
     gap: 8px;
-}
-
-.code-viewer-pane {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
+    border: 1px solid var(--vscode-panel-border);
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    background-color: var(--vscode-editor-background);
 }
 
 .file-content-viewer {
     flex: 1;
-    background-color: var(--vscode-editor-background);
-    border: 1px solid var(--vscode-panel-border);
-    border-radius: 4px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
     overflow: auto;
     font-family: var(--vscode-editor-font-family);
     font-size: var(--vscode-editor-font-size);
@@ -318,12 +303,8 @@ body {
     flex-grow: 1;
     white-space: pre;
     
-    span {
+    code > span {
         line-height: 1.5;
-    }
-
-    code {
-        white-space: pre !important;
     }
 }
 
@@ -378,5 +359,49 @@ body {
     .cycle-display {
         font-size: 11px;
         color: var(--vscode-descriptionForeground);
+    }
+}
+
+/* Diff Viewer Specific Styles */
+.diff-viewer-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: auto;
+    font-family: var(--vscode-editor-font-family);
+}
+
+.diff-content {
+    display: flex;
+    flex-grow: 1;
+}
+
+.diff-viewer-container .line-numbers {
+    flex-shrink: 0;
+    padding: 8px 4px;
+    line-height: 1.5;
+    border-right: none;
+    background-color: var(--vscode-editorGutter-background);
+}
+
+.diff-lines {
+    flex-grow: 1;
+    .line {
+        display: flex;
+        line-height: 1.5;
+        padding-left: 8px;
+        &.added { background-color: var(--vscode-diffEditor-insertedTextBackground); }
+        &.removed { background-color: var(--vscode-diffEditor-removedTextBackground); }
+        .line-prefix {
+            width: 15px;
+            flex-shrink: 0;
+            user-select: none;
+        }
+        pre {
+            margin: 0;
+            padding: 0;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
     }
 }

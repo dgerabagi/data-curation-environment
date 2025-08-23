@@ -20,6 +20,7 @@ export class HighlightingService {
 
     private async initializeStarryNight() {
         try {
+            // C120 Fix: Ensure grammars for standard JS and TS are included.
             const grammars = [...common, sourceTsx, sourceJs, sourceTs, sourceCss, sourceScss, textHtml];
             this.starryNight = await createStarryNight(grammars);
             Services.loggerService.log('Starry Night syntax highlighter initialized.');
@@ -46,7 +47,6 @@ export class HighlightingService {
         try {
             const tree = this.starryNight.highlight(code, scope);
             const hastHtml = toHtml(tree);
-            // C116 FIX: Wrap the generated hast-html in <pre><code> tags to preserve whitespace and enable proper styling.
             const finalHtml = `<pre><code>${hastHtml}</code></pre>`;
             serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml: finalHtml, id });
         } catch (error) {

@@ -1,12 +1,12 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-23T20:52:37.460Z
+  Date Generated: 2025-08-23T21:45:19.414Z
   ---
-  Total Files: 216
-  Total Lines: 19564
-  Total Characters: 936406
-  Approx. Tokens: 234183
+  Total Files: 217
+  Total Lines: 19663
+  Total Characters: 943107
+  Approx. Tokens: 235858
 -->
 
 <!-- Top 10 Files by Token Count -->
@@ -14,10 +14,10 @@
 2. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
 3. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
 4. src\client\views\context-chooser.view\view.tsx (5562 tokens)
-5. src\client\views\parallel-copilot.view\view.tsx (4970 tokens)
-6. src\Artifacts\A0. DCE Master Artifact List.md (4838 tokens)
+5. src\client\views\parallel-copilot.view\view.tsx (5184 tokens)
+6. src\Artifacts\A0. DCE Master Artifact List.md (4911 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4508 tokens)
-8. src\backend\services\prompt.service.ts (3903 tokens)
+8. src\backend\services\prompt.service.ts (4132 tokens)
 9. src\client\views\context-chooser.view\view.scss (3638 tokens)
 10. src\Artifacts\A11. DCE - Regression Case Studies.md (3388 tokens)
 
@@ -26,10 +26,10 @@
 2. .vscodeignore - Lines: 11 - Chars: 356 - Tokens: 89
 3. bootstrap-flattener.js - Lines: 185 - Chars: 5834 - Tokens: 1459
 4. LICENSE - Lines: 21 - Chars: 1090 - Tokens: 273
-5. package.json - Lines: 139 - Chars: 4589 - Tokens: 1148
+5. package.json - Lines: 138 - Chars: 4538 - Tokens: 1135
 6. public\copilot.svg - Lines: 5 - Chars: 445 - Tokens: 112
 7. public\spiral.svg - Lines: 8 - Chars: 459 - Tokens: 115
-8. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 262 - Chars: 19350 - Tokens: 4838
+8. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 266 - Chars: 19643 - Tokens: 4911
 9. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 10. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
 11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 147 - Chars: 13550 - Tokens: 3388
@@ -86,158 +86,159 @@
 62. src\Artifacts\A53. DCE - Phase 2 - Token Count and Similarity Analysis.md - Lines: 50 - Chars: 3971 - Tokens: 993
 63. src\Artifacts\A54. starry-night-readme.md - Lines: 1824 - Chars: 102305 - Tokens: 25577
 64. src\Artifacts\A55. DCE - FSService Refactoring Plan.md - Lines: 77 - Chars: 4022 - Tokens: 1006
-65. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
-66. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
-67. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
-68. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
-69. src\backend\commands\commands.ts - Lines: 97 - Chars: 4211 - Tokens: 1053
-70. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
-71. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
-72. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
-73. src\backend\services\file-operation.service.ts - Lines: 231 - Chars: 10878 - Tokens: 2720
-74. src\backend\services\file-tree.service.ts - Lines: 212 - Chars: 11447 - Tokens: 2862
-75. src\backend\services\flattener.service.ts - Lines: 210 - Chars: 11271 - Tokens: 2818
-76. src\backend\services\highlighting.service.ts - Lines: 57 - Chars: 2920 - Tokens: 730
-77. src\backend\services\history.service.ts - Lines: 110 - Chars: 4161 - Tokens: 1041
-78. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-79. src\backend\services\prompt.service.ts - Lines: 138 - Chars: 15611 - Tokens: 3903
-80. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
-81. src\backend\services\services.ts - Lines: 35 - Chars: 1597 - Tokens: 400
-82. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
-83. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
-84. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
-85. src\client\components\DiffViewer.tsx - Lines: 60 - Chars: 2549 - Tokens: 638
-86. src\client\components\file-tree\FileTree.tsx - Lines: 262 - Chars: 11897 - Tokens: 2975
-87. src\client\components\file-tree\FileTree.utils.ts - Lines: 189 - Chars: 7284 - Tokens: 1821
-88. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13099 - Tokens: 3275
-89. src\client\components\tree-view\TreeView.tsx - Lines: 394 - Chars: 18029 - Tokens: 4508
-90. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
-91. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
-92. src\client\utils\response-parser.ts - Lines: 86 - Chars: 3247 - Tokens: 812
-93. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-94. src\client\views\context-chooser.view\on-message.ts - Lines: 53 - Chars: 4913 - Tokens: 1229
-95. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
-96. src\client\views\context-chooser.view\view.tsx - Lines: 435 - Chars: 22245 - Tokens: 5562
-97. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
-98. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-99. src\client\views\parallel-copilot.view\on-message.ts - Lines: 39 - Chars: 1895 - Tokens: 474
-100. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 43 - Chars: 1890 - Tokens: 473
-101. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
-102. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
-103. src\client\views\parallel-copilot.view\view.scss - Lines: 371 - Chars: 8184 - Tokens: 2046
-104. src\client\views\parallel-copilot.view\view.tsx - Lines: 387 - Chars: 19879 - Tokens: 4970
-105. src\common\ipc\channels.enum.ts - Lines: 64 - Chars: 3129 - Tokens: 783
-106. src\common\ipc\channels.type.ts - Lines: 57 - Chars: 4453 - Tokens: 1114
-107. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1590 - Tokens: 398
-108. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-109. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-110. src\common\types\file-node.ts - Lines: 16 - Chars: 567 - Tokens: 142
-111. src\common\types\pcpp.types.ts - Lines: 36 - Chars: 876 - Tokens: 219
-112. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 449 - Tokens: 113
-113. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
-114. src\common\utils\view-html.ts - Lines: 29 - Chars: 1117 - Tokens: 280
-115. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
-116. src\extension.ts - Lines: 121 - Chars: 5044 - Tokens: 1261
-117. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
-118. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
-119. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
-120. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
-121. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
-122. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
-123. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
-124. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
-125. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
-126. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
-127. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
-128. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
-129. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
-130. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
-131. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
-132. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
-133. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
-134. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
-135. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
-136. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
-137. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
-138. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
-139. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
-140. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
-141. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
-142. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
-143. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
-144. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
-145. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
-146. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
-147. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
-148. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
-149. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
-150. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
-151. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
-152. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
-153. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
-154. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
-155. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
-156. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
-157. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
-158. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
-159. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
-160. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
-161. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
-162. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
-163. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
-164. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
-165. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
-166. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
-167. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
-168. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
-169. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
-170. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
-171. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
-172. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
-173. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
-174. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
-175. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
-176. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
-177. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
-178. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
-179. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
-180. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
-181. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
-182. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
-183. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
-184. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-185. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
-186. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
-187. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
-188. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-189. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
-190. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
-191. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
-192. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-193. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
-194. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
-195. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
-196. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
-197. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
-198. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
-199. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
-200. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-201. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
-202. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
-203. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
-204. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
-205. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
-206. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
-207. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
-208. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
-209. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
-210. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
-211. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
-212. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
-213. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
-214. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
-215. tsconfig.json - Lines: 26 - Chars: 665 - Tokens: 167
-216. webpack.config.js - Lines: 103 - Chars: 2830 - Tokens: 708
+65. src\Artifacts\A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md - Lines: 45 - Chars: 4172 - Tokens: 1043
+66. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
+67. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
+68. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
+69. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
+70. src\backend\commands\commands.ts - Lines: 97 - Chars: 4211 - Tokens: 1053
+71. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
+72. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
+73. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
+74. src\backend\services\file-operation.service.ts - Lines: 231 - Chars: 10878 - Tokens: 2720
+75. src\backend\services\file-tree.service.ts - Lines: 212 - Chars: 11447 - Tokens: 2862
+76. src\backend\services\flattener.service.ts - Lines: 210 - Chars: 11271 - Tokens: 2818
+77. src\backend\services\highlighting.service.ts - Lines: 57 - Chars: 2874 - Tokens: 719
+78. src\backend\services\history.service.ts - Lines: 110 - Chars: 4161 - Tokens: 1041
+79. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
+80. src\backend\services\prompt.service.ts - Lines: 151 - Chars: 16527 - Tokens: 4132
+81. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
+82. src\backend\services\services.ts - Lines: 35 - Chars: 1597 - Tokens: 400
+83. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
+84. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
+85. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
+86. src\client\components\DiffViewer.tsx - Lines: 51 - Chars: 2315 - Tokens: 579
+87. src\client\components\file-tree\FileTree.tsx - Lines: 262 - Chars: 11897 - Tokens: 2975
+88. src\client\components\file-tree\FileTree.utils.ts - Lines: 189 - Chars: 7284 - Tokens: 1821
+89. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13099 - Tokens: 3275
+90. src\client\components\tree-view\TreeView.tsx - Lines: 394 - Chars: 18029 - Tokens: 4508
+91. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
+92. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
+93. src\client\utils\response-parser.ts - Lines: 86 - Chars: 3247 - Tokens: 812
+94. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
+95. src\client\views\context-chooser.view\on-message.ts - Lines: 53 - Chars: 4913 - Tokens: 1229
+96. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
+97. src\client\views\context-chooser.view\view.tsx - Lines: 435 - Chars: 22245 - Tokens: 5562
+98. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
+99. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
+100. src\client\views\parallel-copilot.view\on-message.ts - Lines: 39 - Chars: 1895 - Tokens: 474
+101. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 43 - Chars: 1890 - Tokens: 473
+102. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
+103. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
+104. src\client\views\parallel-copilot.view\view.scss - Lines: 407 - Chars: 9077 - Tokens: 2270
+105. src\client\views\parallel-copilot.view\view.tsx - Lines: 399 - Chars: 20735 - Tokens: 5184
+106. src\common\ipc\channels.enum.ts - Lines: 64 - Chars: 3129 - Tokens: 783
+107. src\common\ipc\channels.type.ts - Lines: 57 - Chars: 4453 - Tokens: 1114
+108. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1590 - Tokens: 398
+109. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+110. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
+111. src\common\types\file-node.ts - Lines: 16 - Chars: 567 - Tokens: 142
+112. src\common\types\pcpp.types.ts - Lines: 36 - Chars: 876 - Tokens: 219
+113. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 449 - Tokens: 113
+114. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
+115. src\common\utils\view-html.ts - Lines: 29 - Chars: 1117 - Tokens: 280
+116. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
+117. src\extension.ts - Lines: 121 - Chars: 5044 - Tokens: 1261
+118. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
+119. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
+120. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
+121. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
+122. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
+123. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
+124. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
+125. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
+126. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
+127. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
+128. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
+129. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
+130. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
+131. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
+132. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
+133. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
+134. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
+135. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
+136. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
+137. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
+138. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
+139. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
+140. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
+141. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
+142. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
+143. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
+144. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
+145. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
+146. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
+147. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
+148. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
+149. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
+150. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
+151. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
+152. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
+153. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
+154. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
+155. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
+156. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
+157. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
+158. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
+159. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
+160. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
+161. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
+162. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
+163. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
+164. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
+165. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
+166. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
+167. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
+168. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
+169. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
+170. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
+171. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
+172. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
+173. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
+174. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
+175. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
+176. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
+177. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
+178. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
+179. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
+180. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
+181. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
+182. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
+183. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
+184. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
+185. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+186. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
+187. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
+188. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
+189. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+190. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
+191. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
+192. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
+193. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+194. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
+195. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
+196. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
+197. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
+198. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
+199. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
+200. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
+201. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+202. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
+203. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
+204. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
+205. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
+206. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
+207. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
+208. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
+209. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
+210. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
+211. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
+212. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
+213. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
+214. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
+215. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
+216. tsconfig.json - Lines: 25 - Chars: 567 - Tokens: 142
+217. webpack.config.js - Lines: 103 - Chars: 2830 - Tokens: 708
 
 <file path=".gitignore">
 node_modules
@@ -496,7 +497,6 @@ SOFTWARE.
         "Other"
     ],
     "activationEvents": [
-        "onView:viewType.sidebar.contextChooser",
         "onCommand:dce.showParallelCopilot"
     ],
     "main": "./dist/extension.js",
@@ -643,7 +643,7 @@ SOFTWARE.
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C113 (Add A55 for FSService Refactoring Plan)
+# Updated on: C120 (Add A56 for Advanced Diff Viewer Plan)
 
 ## 1. Purpose
 
@@ -892,6 +892,10 @@ SOFTWARE.
 ### A55. DCE - FSService Refactoring Plan
 - **Description:** Outlines a strategic plan to refactor the monolithic `FSService` into smaller, more focused services to improve modularity, maintainability, and reduce token count.
 - **Tags:** refactor, architecture, technical debt, services
+
+### A56. DCE - Phase 2 - Advanced Diff Viewer Plan
+- **Description:** Details the plan to enhance the integrated diff viewer with background coloring for changes and WinMerge-like navigation controls to jump between differences.
+- **Tags:** feature plan, phase 2, ui, ux, diff, navigation
 
 ## II. Standalone Utilities & Guides
 
@@ -6229,6 +6233,54 @@ Removed after completing refactor.
 </Original fs.service.ts>
 </file>
 
+<file path="src/Artifacts/A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md">
+# Artifact A56: DCE - Phase 2 - Advanced Diff Viewer Plan
+# Date Created: C120
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** Details the plan to enhance the integrated diff viewer with background coloring for changes and WinMerge-like navigation controls to jump between differences.
+- **Tags:** feature plan, phase 2, ui, ux, diff, navigation
+
+## 1. Overview & Goal
+
+The current diff view is functional but lacks key usability features found in mature diff tools like WinMerge. The goal of this plan is to enhance the diff viewer to provide a much clearer and more efficient user experience. This involves two primary enhancements: adding background coloring to highlight changed lines and implementing navigation controls to allow the user to quickly jump between blocks of differences.
+
+## 2. User Stories
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| P2-DIFF-01 | **Colored Diffs** | As a developer, I want to see a colored background for lines that have been added or removed in the diff view, so I can immediately identify the changes at a glance. | - Lines that exist in the new version but not the old have a distinct background color (e.g., light green). <br> - Lines that exist in the old version but not the new have a different background color (e.g., light red). <br> - Unchanged lines have the standard editor background color. |
+| P2-DIFF-02 | **Navigate Between Diffs** | As a developer reviewing a large file with scattered changes, I want "Next Difference" and "Previous Difference" buttons, so I can quickly jump between changed blocks without manually scrolling and searching. | - "Next Difference" (`↓`) and "Previous Difference" (`↑`) buttons are added to the diff viewer's header. <br> - Clicking "Next Difference" scrolls the view to the start of the next block of added or removed lines. <br> - Clicking "Previous Difference" scrolls to the previous block. <br> - The buttons are disabled when at the start or end of the diff list. |
+
+## 3. Technical Implementation Plan
+
+### 3.1. Diff Coloring
+
+-   **Component (`DiffViewer.tsx`):**
+    1.  The existing logic already uses the `diff` library to get an array of `Change` objects.
+    2.  The rendering logic will be updated to apply a CSS class to each line's container `div` based on the `part.added` or `part.removed` properties.
+-   **Styling (`view.scss`):**
+    1.  New CSS classes (`.line.added`, `.line.removed`) will be created.
+    2.  These classes will use VS Code theme variables for the background colors to ensure a native look and feel:
+        *   `--vscode-diffEditor-insertedTextBackground` for added lines.
+        *   `--vscode-diffEditor-removedTextBackground` for removed lines.
+
+### 3.2. Diff Navigation
+
+-   **Component (`view.tsx`):**
+    1.  The main view component will need to manage the state for diff navigation as the `DiffViewer` itself is a more presentational component.
+-   **Component (`DiffViewer.tsx`):**
+    1.  **Identify Change Locations:** A `useMemo` hook will be added. When the `original` and `modified` props change, it will re-calculate the diff and also identify the line numbers where changes begin. It will store these line numbers in an array (e.g., `[5, 25, 42]`). This array will be passed up to the parent `view.tsx` component.
+    2.  **Scrolling:** The component will use `useRef` to get a reference to the main scrollable container. When a "scroll to line" prop is received from the parent, a `useEffect` will trigger that finds the corresponding line element and calls `.scrollIntoView()`.
+-   **UI & State (`view.tsx`):**
+    1.  **State:** New state variables will be added: `const [diffLocations, setDiffLocations] = useState<number[]>([]);` and `const [currentDiffIndex, setCurrentDiffIndex] = useState(-1);`.
+    2.  **Buttons:** "Next" and "Previous" buttons will be added to the UI, likely in the `file-content-viewer-header`.
+    3.  **Logic:**
+        *   The "Next" button will increment `currentDiffIndex` and trigger a scroll to the line number at `diffLocations[newIndex]`.
+        *   The "Previous" button will decrement `currentDiffIndex`.
+</file>
+
 <file path="src/Artifacts/A6. DCE - Initial Scaffolding Deployment Script.md">
 # Artifact A6: DCE - Initial Scaffolding Deployment Script
 # Date Created: Cycle 3
@@ -8719,6 +8771,7 @@ export class HighlightingService {
 
     private async initializeStarryNight() {
         try {
+            // C120 Fix: Ensure grammars for standard JS and TS are included.
             const grammars = [...common, sourceTsx, sourceJs, sourceTs, sourceCss, sourceScss, textHtml];
             this.starryNight = await createStarryNight(grammars);
             Services.loggerService.log('Starry Night syntax highlighter initialized.');
@@ -8745,7 +8798,6 @@ export class HighlightingService {
         try {
             const tree = this.starryNight.highlight(code, scope);
             const hastHtml = toHtml(tree);
-            // C116 FIX: Wrap the generated hast-html in <pre><code> tags to preserve whitespace and enable proper styling.
             const finalHtml = `<pre><code>${hastHtml}</code></pre>`;
             serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml: finalHtml, id });
         } catch (error) {
@@ -8911,7 +8963,7 @@ export class LoggerService {
 </file>
 
 <file path="src/backend/services/prompt.service.ts">
-// Updated on: C118 (Reverse cycle order in prompt.md)
+// Updated on: C120 (Fix cycle order in prompt.md)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -8982,32 +9034,45 @@ Phase 3. Diff Tool - Basically, winmerge but intergrated into a window within VS
             const flattenedContent = await fs.readFile(flattenedRepoPath, 'utf-8');
             const fullHistory: PcppCycle[] = await Services.historyService.getFullHistory();
 
-            // C118 FIX: Sort history in descending order for M2
+            // C120 FIX: Sort history in descending order for M2
             const sortedHistoryForM2 = [...fullHistory].sort((a, b) => b.cycleId - a.cycleId);
 
             let cycleOverview = '<M2. cycle overview>\n';
             cycleOverview += `Current Cycle ${currentCycle} - ${cycleTitle}\n`;
             for (const cycle of sortedHistoryForM2) {
-                if (cycle.cycleId < currentCycle) {
+                // Ensure we don't duplicate the current cycle entry if it's already in history
+                if (cycle.cycleId !== currentCycle) {
                      cycleOverview += `Cycle ${cycle.cycleId} - ${cycle.title}\n`;
                 }
             }
             cycleOverview += '</M2. cycle overview>';
             
-            // M6 should remain in ascending order
-            const sortedHistoryForM6 = [...fullHistory].sort((a, b) => a.cycleId - b.cycleId);
+            // C120 Fix: Also sort the history for M6 in descending order
+            const sortedHistoryForM6 = [...fullHistory].sort((a, b) => b.cycleId - a.cycleId);
 
             let cyclesContent = '<M6. Cycles>\n\n';
-            // Add the current, unsaved cycle first
-            cyclesContent += `<Cycle ${currentCycle}>\n${cycleTitle}\n</Cycle ${currentCycle}>\n\n`;
-
-            for (const cycle of sortedHistoryForM6) {
-                if (cycle.cycleId === currentCycle) continue; // Skip if it's the current cycle, already added
-                cyclesContent += `<Cycle ${cycle.cycleId}>\n`;
-                const previousResponseContent = cycle.responses['1']?.content || '';
+            cyclesContent += `<Cycle ${currentCycle}>\n${cycleTitle}\n`;
+            // Find the previous cycle's data to generate the summary
+            const previousCycle = sortedHistoryForM6.find(c => c.cycleId === currentCycle - 1);
+            if (previousCycle) {
+                const previousResponseContent = previousCycle.responses['1']?.content || '';
                 const parsed = parseResponse(previousResponseContent);
                 const summary = `${parsed.summary}\n\n${parsed.courseOfAction}`;
-                cyclesContent += `<Previous Cycle ${cycle.cycleId - 1} Summary of Actions>\n${summary}\n</Previous Cycle ${cycle.cycleId - 1} Summary of Actions>\n`;
+                cyclesContent += `<Previous Cycle ${previousCycle.cycleId} Summary of Actions>\n${summary}\n</Previous Cycle ${previousCycle.cycleId} Summary of Actions>\n`;
+            }
+            cyclesContent += `</Cycle ${currentCycle}>\n\n`;
+
+
+            for (const cycle of sortedHistoryForM6) {
+                if (cycle.cycleId === currentCycle) continue; 
+                cyclesContent += `<Cycle ${cycle.cycleId}>\n`;
+                const prevCycleForSummary = sortedHistoryForM6.find(c => c.cycleId === cycle.cycleId - 1);
+                 if (prevCycleForSummary) {
+                    const previousResponseContent = prevCycleForSummary.responses['1']?.content || '';
+                    const parsed = parseResponse(previousResponseContent);
+                    const summary = `${parsed.summary}\n\n${parsed.courseOfAction}`;
+                    cyclesContent += `<Previous Cycle ${prevCycleForSummary.cycleId} Summary of Actions>\n${summary}\n</Previous Cycle ${prevCycleForSummary.cycleId} Summary of Actions>\n`;
+                 }
                 cyclesContent += `</Cycle ${cycle.cycleId}>\n\n`;
             }
             cyclesContent += '</M6. Cycles>';
@@ -9413,11 +9478,9 @@ import { diffLines, Change } from 'diff';
 interface DiffViewerProps {
     original: string;
     modified: string;
-    filePath: string;
-    onClose: () => void;
 }
 
-const DiffViewer: React.FC<DiffViewerProps> = ({ original, modified, filePath, onClose }) => {
+const DiffViewer: React.FC<DiffViewerProps> = ({ original, modified }) => {
     const changes = diffLines(original, modified);
 
     let originalLineNum = 1;
@@ -9425,41 +9488,34 @@ const DiffViewer: React.FC<DiffViewerProps> = ({ original, modified, filePath, o
 
     return (
         <div className="diff-viewer-container">
-            <div className="diff-header">
-                <h3>Diff for {filePath}</h3>
-            </div>
             <div className="diff-content">
-                {changes.map((part, index) => {
-                    const lines = part.value.split('\n').filter((line, i, arr) => i < arr.length - 1 || line !== '');
-                    const partClassName = part.added ? 'added' : part.removed ? 'removed' : 'common';
-                    
-                    return (
-                        <div key={index} className={`diff-part ${partClassName}`}>
-                            {lines.map((line, lineIndex) => {
-                                let displayOriginalLineNum = '';
-                                let displayModifiedLineNum = '';
-
-                                if (!part.added) {
-                                    displayOriginalLineNum = (originalLineNum++).toString();
-                                }
-                                if (!part.removed) {
-                                    displayModifiedLineNum = (modifiedLineNum++).toString();
-                                }
-
-                                return (
-                                    <div key={lineIndex} className="line">
-                                        <span className="line-num orig-num">{displayOriginalLineNum}</span>
-                                        <span className="line-num mod-num">{displayModifiedLineNum}</span>
-                                        <span className="line-content">
-                                            <span className="line-prefix">{part.added ? '+' : part.removed ? '-' : ' '}</span>
-                                            {line}
-                                        </span>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    );
-                })}
+                <div className="line-numbers original">
+                    {changes.map((part, index) => {
+                        if (part.added) return null;
+                        const lines = part.value.split('\n').filter((line, i, arr) => i < arr.length - 1 || line !== '');
+                        return lines.map((_, lineIndex) => <span key={`${index}-${lineIndex}`}>{originalLineNum++}</span>);
+                    })}
+                </div>
+                <div className="diff-lines">
+                    {changes.map((part, index) => {
+                        const lines = part.value.split('\n').filter((line, i, arr) => i < arr.length - 1 || line !== '');
+                        const partClassName = part.added ? 'added' : part.removed ? 'removed' : 'common';
+                        
+                        return lines.map((line, lineIndex) => (
+                            <div key={`${index}-${lineIndex}`} className={`line ${partClassName}`}>
+                                <span className="line-prefix">{part.added ? '+' : part.removed ? '-' : ' '}</span>
+                                <pre><code>{line}</code></pre>
+                            </div>
+                        ));
+                    })}
+                </div>
+                 <div className="line-numbers modified">
+                    {changes.map((part, index) => {
+                        if (part.removed) return null;
+                        const lines = part.value.split('\n').filter((line, i, arr) => i < arr.length - 1 || line !== '');
+                        return lines.map((_, lineIndex) => <span key={`${index}-${lineIndex}`}>{modifiedLineNum++}</span>);
+                    })}
+                </div>
             </div>
         </div>
     );
@@ -12126,7 +12182,7 @@ export default TestPane3;
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
-/* Updated on: C118 (Add styles for diff view) */
+/* Updated on: C120 (Add styles for colored diff view) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -12389,13 +12445,6 @@ body {
         display: flex;
         align-items: center;
         gap: 8px;
-
-        button {
-            margin-left: 8px;
-        }
-    }
-    .metrics {
-        color: var(--vscode-descriptionForeground);
     }
 }
 
@@ -12404,15 +12453,14 @@ body {
     flex-grow: 1;
     min-height: 0;
     gap: 8px;
+    border: 1px solid var(--vscode-panel-border);
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    background-color: var(--vscode-editor-background);
 }
 
 .file-content-viewer {
     flex: 1;
-    background-color: var(--vscode-editor-background);
-    border: 1px solid var(--vscode-panel-border);
-    border-radius: 4px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
     overflow: auto;
     font-family: var(--vscode-editor-font-family);
     font-size: var(--vscode-editor-font-size);
@@ -12439,7 +12487,7 @@ body {
     flex-grow: 1;
     white-space: pre;
     
-    span {
+    code > span {
         line-height: 1.5;
     }
 }
@@ -12497,10 +12545,54 @@ body {
         color: var(--vscode-descriptionForeground);
     }
 }
+
+/* Diff Viewer Specific Styles */
+.diff-viewer-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: auto;
+    font-family: var(--vscode-editor-font-family);
+}
+
+.diff-content {
+    display: flex;
+    flex-grow: 1;
+}
+
+.diff-viewer-container .line-numbers {
+    flex-shrink: 0;
+    padding: 8px 4px;
+    line-height: 1.5;
+    border-right: none;
+    background-color: var(--vscode-editorGutter-background);
+}
+
+.diff-lines {
+    flex-grow: 1;
+    .line {
+        display: flex;
+        line-height: 1.5;
+        padding-left: 8px;
+        &.added { background-color: var(--vscode-diffEditor-insertedTextBackground); }
+        &.removed { background-color: var(--vscode-diffEditor-removedTextBackground); }
+        .line-prefix {
+            width: 15px;
+            flex-shrink: 0;
+            user-select: none;
+        }
+        pre {
+            margin: 0;
+            padding: 0;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+    }
+}
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
-// Updated on: C119 (Fix TS errors for icon, type, and path imports)
+// Updated on: C120 (Fix diff view bugs and UI)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -12508,11 +12600,12 @@ import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, Vsc
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
-import { PcppCycle, PcppResponse } from '@/backend/services/history.service';
 import { ParsedResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
 import ReactMarkdown from 'react-markdown';
-import * as path from 'path';
+import * as path from 'path-browserify';
+import DiffViewer from '@/client/components/DiffViewer';
+import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
 
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -12533,12 +12626,12 @@ const CodeViewer: React.FC<{ htmlContent: string | undefined | null }> = ({ html
     if (htmlContent === undefined || htmlContent === null) {
         return <div style={{ padding: '8px' }}>Select a file to view its content.</div>;
     }
-    if (htmlContent.startsWith('<div>Error:')) {
-        return <div style={{ padding: '8px' }} dangerouslySetInnerHTML={{ __html: htmlContent }} />;
+    if (htmlContent.startsWith('// Error:')) {
+         return <div style={{ padding: '8px', color: 'var(--vscode-errorForeground)' }}>{htmlContent}</div>;
     }
 
     const codeContentMatch = /<pre><code>([\s\S]*)<\/code><\/pre>/s.exec(htmlContent);
-    const code = codeContentMatch ? codeContentMatch[1] : `<code>${htmlContent}</code>`; // Fallback for raw text
+    const code = codeContentMatch ? codeContentMatch[1] : `<code>${htmlContent}</code>`; 
 
     const lines = code.split('\n');
     if (lines.length > 0 && lines[lines.length - 1] === '') {
@@ -12778,12 +12871,17 @@ const App = () => {
         const newDiffMode = !isDiffMode;
         setIsDiffMode(newDiffMode);
         if (newDiffMode && selectedFilePath) {
+            // C120 Bug Fix: The lang was being passed as an object. Correctly get the extension.
+            const lang = selectedFilePath.split('.').pop() || 'plaintext';
+            const id = `original::${selectedFilePath}`;
             clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: selectedFilePath });
+            if (originalFileContent) {
+                 clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: originalFileContent, lang, id });
+            }
         } else {
             setOriginalFileContent(null);
         }
     };
-
 
     const isNewCycleButtonDisabled = React.useMemo(() => {
         const hasTitle = cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== '';
@@ -12865,15 +12963,21 @@ const App = () => {
                                 {!isDiffMode && <div className="resizer" onMouseDown={handleMouseDown} />}
                                 <div className="parsed-view-right">
                                     <div className="file-content-viewer-header">
-                                        <span className="file-path" title={selectedFilePath || ''}>{selectedFilePath ? path.basename(selectedFilePath) : 'No file selected'}</span>
+                                        <span className="file-path" title={selectedFilePath || ''}>{selectedFilePath || 'No file selected'}</span>
                                         <div className="file-actions">
                                             <button onClick={handleDiffClick} disabled={!selectedFilePath} title="Toggle Diff View"><VscDiff /></button>
                                             <button disabled={!selectedFilePath} title="Swap with Workspace File"><VscArrowSwap /></button>
                                         </div>
                                     </div>
                                     <div className="code-viewer-wrapper">
-                                        <CodeViewer htmlContent={viewableContent} />
-                                        {isDiffMode && <CodeViewer htmlContent={originalFileContent} />}
+                                        {isDiffMode && activeTabData.parsedContent && selectedFilePath && originalFileContent ? (
+                                            <DiffViewer 
+                                                original={originalFileContent}
+                                                modified={activeTabData.parsedContent.files.find(f => f.path === selectedFilePath)?.content || ''}
+                                            />
+                                        ) : (
+                                            <CodeViewer htmlContent={viewableContent} />
+                                        )}
                                     </div>
                                 </div>
                             </div>
@@ -20257,9 +20361,9 @@ module.exports = [ extensionConfig ];
         "lib": ["ES2022", "DOM"],
         "jsx": "react",
         "sourceMap": true,
-        "rootDir": ".",
+        "rootDir": "src",
         "strict": false,
-        "baseUrl": ".",
+        "baseUrl": "./",
         "paths": {
             "@/*": ["src/*"]
         },
@@ -20267,12 +20371,11 @@ module.exports = [ extensionConfig ];
         "allowSyntheticDefaultImports": true
     },
     "include": [
-        "src/**/*"
+        "src"
     ],
-    "files": [
-        "src/extension.ts",
-        "src/client/views/context-chooser.view/view.tsx",
-        "src/client/views/parallel-copilot.view/view.tsx"
+    "exclude": [
+        "node_modules",
+        ".vscode-test"
     ]
 }
 </file>

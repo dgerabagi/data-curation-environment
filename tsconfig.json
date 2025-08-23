@@ -6,9 +6,9 @@
         "lib": ["ES2022", "DOM"],
         "jsx": "react",
         "sourceMap": true,
-        "rootDir": ".",
+        "rootDir": "src",
         "strict": false,
-        "baseUrl": ".",
+        "baseUrl": "./",
         "paths": {
             "@/*": ["src/*"]
         },
@@ -16,6 +16,10 @@
         "allowSyntheticDefaultImports": true
     },
     "include": [
-        "src/**/*"
+        "src"
+    ],
+    "exclude": [
+        "node_modules",
+        ".vscode-test"
     ]
 }
