@@ -1,4 +1,4 @@
-// Updated on: C109 (Implement robust two-stage parsing)
+// Updated on: C111 (Add cleanup for trailing code fences)
 import { ParsedResponse, ParsedFile } from "@/common/types/pcpp.types";
 
 // Regex to find the summary/plan before any major headers
@@ -10,13 +10,13 @@ const COURSE_OF_ACTION_REGEX = /### Course of Action\s*([\s\S]*?)(?=### Files Up
 // Regex for the "Files Updated" markdown list (as a fallback)
 const FILES_UPDATED_LIST_REGEX = /### Files Updated This Cycle\s*([\s\S]*?)(?=<file path="|`{3,})/m;
 
-// C109: New approach - Find file tags first, then extract content between them.
+// Find file tags first, then extract content between them.
 const FILE_TAG_REGEX = /<file path="([^"]+)">/g;
 
 
 export function parseResponse(rawText: string): ParsedResponse {
     const files: ParsedFile[] = [];
-    const filesUpdatedList: string[] = [];
+    let filesUpdatedList: string[] = [];
 
     // Stage 1: Find all file tags and their positions
     const tagMatches = [...rawText.matchAll(FILE_TAG_REGEX)];
@@ -31,17 +31,21 @@ export function parseResponse(rawText: string): ParsedResponse {
         
         let content = rawText.substring(contentStart, contentEnd).trim();
 
-        // Clean up potential closing tags from the end of the content
-        const closingTagSimple = `</file>`;
-        const closingTagWithPath = `</${path}>`;
-        if (content.endsWith(closingTagSimple)) {
-            content = content.slice(0, -closingTagSimple.length).trim();
-        } else if (content.endsWith(closingTagWithPath)) {
-            content = content.slice(0, -closingTagWithPath.length).trim();
-        }
+        // C111: Clean up potential closing tags and code fences from the end of the content
+        const patternsToRemove = [
+            `</file>`,
+            `</${path}>`,
+            '```xml',
+            '```',
+        ];
+
+        patternsToRemove.forEach(pattern => {
+            if (content.endsWith(pattern)) {
+                content = content.slice(0, -pattern.length).trim();
+            }
+        });
 
         files.push({ path, content });
-        filesUpdatedList.push(path);
     });
 
     // Extract summary and course of action using the file tags as boundaries
@@ -51,8 +55,11 @@ export function parseResponse(rawText: string): ParsedResponse {
     const summary = summaryMatch ? summaryMatch[1].trim() : 'Could not parse summary.';
     const courseOfAction = courseOfActionMatch ? courseOfActionMatch[1].trim() : 'Could not parse course of action.';
 
-    // Fallback for filesUpdated list if no file blocks were found
-    if (filesUpdatedList.length === 0) {
+    // The primary source for filesUpdated is the list of successfully parsed file blocks.
+    if (files.length > 0) {
+        filesUpdatedList = files.map(f => f.path);
+    } else {
+        // Fallback for filesUpdated list if no file blocks were found
         const filesUpdatedMatch = rawText.match(FILES_UPDATED_LIST_REGEX);
         if (filesUpdatedMatch && filesUpdatedMatch[1]) {
             filesUpdatedList.push(...filesUpdatedMatch[1]

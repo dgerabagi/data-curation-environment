@@ -1,4 +1,4 @@
-// Updated on: C110 (Fix infinite loop, add line numbers, improve presentation)
+// Updated on: C111 (Implement resizable panes, reorder layout, add metric placeholders, fix rendering)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -13,15 +13,10 @@ import ReactMarkdown from 'react-markdown';
 
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
-
-    const debouncedFn = React.useCallback((...args: any[]) => {
+    return (...args: any[]) => {
         if (timeoutRef.current) clearTimeout(timeoutRef.current);
-        timeoutRef.current = setTimeout(() => {
-            callback(...args);
-        }, delay);
-    }, [callback, delay]);
-
-    return debouncedFn;
+        timeoutRef.current = setTimeout(() => callback(...args), delay);
+    };
 };
 
 interface TabState {
@@ -42,23 +37,6 @@ const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; i
     </div>
 );
 
-const CodeViewer: React.FC<{ htmlContent: string | undefined }> = ({ htmlContent }) => {
-    const lines = React.useMemo(() => htmlContent ? htmlContent.split('\n') : [], [htmlContent]);
-    
-    if (!htmlContent) {
-        return <div className="code-viewer-container">Loading code...</div>;
-    }
-
-    return (
-        <div className="code-viewer-container">
-            <div className="line-numbers">
-                {lines.map((_, index) => <div key={index}>{index + 1}</div>)}
-            </div>
-            <div className="code-content" dangerouslySetInnerHTML={{ __html: htmlContent }} />
-        </div>
-    );
-};
-
 const App = () => {
     const [activeTab, setActiveTab] = React.useState(1);
     const [tabCount, setTabCount] = React.useState(4);
@@ -71,16 +49,11 @@ const App = () => {
     const [highlightedCodeBlocks, setHighlightedCodeBlocks] = React.useState<Map<string, string>>(new Map());
     const [fileExistenceMap, setFileExistenceMap] = React.useState<Map<string, boolean>>(new Map());
     const [isParsedMode, setIsParsedMode] = React.useState(false);
-    
     const [selectedFilePath, setSelectedFilePath] = React.useState<string | null>(null);
-
     const [isCycleCollapsed, setIsCycleCollapsed] = React.useState(false);
-    const [isSummaryCollapsed, setIsSummaryCollapsed] = React.useState(false);
-    const [isCourseOfActionCollapsed, setIsCourseOfActionCollapsed] = React.useState(false);
-    const [isAssociatedFilesCollapsed, setIsAssociatedFilesCollapsed] = React.useState(false);
-    
-    const processedContentRef = React.useRef(new Set<string>());
-    
+    const [leftPaneWidth, setLeftPaneWidth] = React.useState(33);
+    const isResizing = React.useRef(false);
+
     const clientIpc = ClientPostMessageManager.getInstance();
 
     const saveCurrentCycleState = React.useCallback(() => {
@@ -106,36 +79,34 @@ const App = () => {
         debouncedSave();
     }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, debouncedSave]);
     
-    const parseAllTabs = React.useCallback((tabsToParse: { [key: string]: TabState }) => {
+    const parseAllTabs = React.useCallback(() => {
+        logger.log("Parsing all tabs...");
         const allFilePaths = new Set<string>();
-        const updatedTabs = { ...tabsToParse };
-        Object.values(updatedTabs).forEach((tabState, index) => {
-            const tabId = (index + 1).toString();
-            if (tabState.rawContent) {
+        const updatedTabs = { ...tabs };
+        let shouldUpdate = false;
+        Object.entries(updatedTabs).forEach(([tabId, tabState]) => {
+            if (tabState.rawContent && !tabState.parsedContent) {
+                shouldUpdate = true;
                 const parsed = parseResponse(tabState.rawContent);
-                updatedTabs[tabId].parsedContent = parsed;
+                updatedTabs[Number(tabId)].parsedContent = parsed;
                 parsed.filesUpdated.forEach(file => allFilePaths.add(file));
-                
                 parsed.files.forEach(file => {
                     const lang = file.path.split('.').pop() || 'plaintext';
                     const id = `${file.path}::${file.content}`;
-                    if (!processedContentRef.current.has(id)) {
-                         logger.log(`[C110 PARSE] Requesting syntax highlight for: ${file.path}`);
-                         clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
-                         processedContentRef.current.add(id);
-                    }
+                     clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
                 });
             }
         });
-        setTabs(updatedTabs);
+        if (shouldUpdate) {
+            setTabs(updatedTabs);
+        }
         if (allFilePaths.size > 0) {
             clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) });
         }
-    }, [clientIpc]);
+    }, [clientIpc, tabs]);
 
     React.useEffect(() => {
         const loadCycleData = (cycleData: PcppCycle) => {
-            processedContentRef.current.clear();
             setCurrentCycle(cycleData.cycleId);
             setCycleTitle(cycleData.title);
             setCycleContext(cycleData.cycleContext);
@@ -145,11 +116,7 @@ const App = () => {
                 newTabs[tabId] = { rawContent: response.content, parsedContent: null };
             });
             setTabs(newTabs);
-            const loadedParseMode = cycleData.isParsedMode || false;
-            setIsParsedMode(loadedParseMode);
-            if (loadedParseMode) {
-                parseAllTabs(newTabs);
-            }
+            setIsParsedMode(cycleData.isParsedMode || false);
         };
 
         clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData }) => {
@@ -157,7 +124,9 @@ const App = () => {
             setMaxCycle(cycleData.cycleId);
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData }) => {
-            if (cycleData) loadCycleData(cycleData);
+            if (cycleData) {
+                loadCycleData(cycleData);
+            }
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => {
             setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml));
@@ -167,35 +136,53 @@ const App = () => {
         });
         
         clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});
-    }, [clientIpc, parseAllTabs]);
+    }, [clientIpc]);
+
+    React.useEffect(() => {
+        if (isParsedMode) {
+            parseAllTabs();
+        }
+    }, [isParsedMode, tabs, parseAllTabs]);
     
     const activeTabData = tabs[activeTab.toString()];
 
     const viewableContent = React.useMemo(() => {
-        if (!selectedFilePath || !activeTabData?.parsedContent) return undefined;
-        
+        if (!selectedFilePath || !activeTabData?.parsedContent) {
+            return '<div>Select a file to view its content.</div>';
+        }
         const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath);
         if (!file) {
             logger.error(`[Content Display] Could not find file object for path: ${selectedFilePath}`);
-            return `Error: File data not found in parsed response.`;
+            return '<div>Error: File data not found in parsed response.</div>';
         }
         
         const id = `${file.path}::${file.content}`;
-        return highlightedCodeBlocks.get(id);
+        const highlightedHtml = highlightedCodeBlocks.get(id);
 
-    }, [selectedFilePath, activeTabData, highlightedCodeBlocks]);
+        if (highlightedHtml) {
+            return highlightedHtml;
+        } else {
+            return `<pre><code>${file.content.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code></pre>`;
+        }
+    }, [selectedFilePath, activeTabData?.parsedContent, highlightedCodeBlocks]);
 
 
     const handleRawContentChange = (newContent: string, tabIndex: number) => {
-        setTabs(prev => ({ ...prev, [tabIndex.toString()]: { ...(prev[tabIndex.toString()] || { parsedContent: null }), rawContent: newContent }}));
+        setTabs(prev => ({ ...prev, [tabIndex.toString()]: { rawContent: newContent, parsedContent: null }}));
     };
 
     const handleGlobalParseToggle = () => {
         const newParseMode = !isParsedMode;
         setIsParsedMode(newParseMode);
         setSelectedFilePath(null);
-        if (newParseMode) {
-            parseAllTabs(tabs);
+        if (!newParseMode) {
+            setTabs(prev => {
+                const newTabs = {...prev};
+                Object.keys(newTabs).forEach(key => {
+                    newTabs[key].parsedContent = null;
+                });
+                return newTabs;
+            });
         }
     };
 
@@ -222,6 +209,32 @@ const App = () => {
     const handleGeneratePrompt = () => {
         clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle });
     };
+
+    const handleMouseDown = (e: React.MouseEvent) => {
+        isResizing.current = true;
+    };
+
+    const handleMouseMove = React.useCallback((e: MouseEvent) => {
+        if (!isResizing.current) return;
+        const newWidth = (e.clientX / window.innerWidth) * 100;
+        if (newWidth > 10 && newWidth < 90) { // Set bounds
+            setLeftPaneWidth(newWidth);
+        }
+    }, []);
+
+    const handleMouseUp = React.useCallback(() => {
+        isResizing.current = false;
+    }, []);
+
+    React.useEffect(() => {
+        window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('mouseup', handleMouseUp);
+        return () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('mouseup', handleMouseUp);
+        };
+    }, [handleMouseMove, handleMouseUp]);
+
 
     const isNewCycleButtonDisabled = React.useMemo(() => {
         const hasTitle = cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== '';
@@ -277,14 +290,8 @@ const App = () => {
                             <textarea className="response-textarea" placeholder={`Paste AI response for tab ${activeTab} here...`} value={activeTabData?.rawContent || ''} onChange={(e) => handleRawContentChange(e.target.value, activeTab)} />
                         ) : (
                             <div className="parsed-view-grid">
-                                <div className="parsed-view-left">
-                                    <CollapsibleSection title="Thoughts / Response" isCollapsed={isSummaryCollapsed} onToggle={() => setIsSummaryCollapsed(p => !p)}>
-                                        <ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown>
-                                    </CollapsibleSection>
-                                    <CollapsibleSection title="Course of Action" isCollapsed={isCourseOfActionCollapsed} onToggle={() => setIsCourseOfActionCollapsed(p => !p)}>
-                                        <ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown>
-                                    </CollapsibleSection>
-                                    <CollapsibleSection title="Associated Files" isCollapsed={isAssociatedFilesCollapsed} onToggle={() => setIsAssociatedFilesCollapsed(p => !p)}>
+                                <div className="parsed-view-left" style={{ flexBasis: `${leftPaneWidth}%` }}>
+                                     <CollapsibleSection title="Associated Files" isCollapsed={false} onToggle={() => {}}>
                                         <ul className="associated-files-list">
                                             {activeTabData.parsedContent.filesUpdated.map(file => (
                                                 <li 
@@ -298,13 +305,20 @@ const App = () => {
                                             ))}
                                         </ul>
                                     </CollapsibleSection>
+                                    <CollapsibleSection title="Thoughts / Response" isCollapsed={false} onToggle={() => {}}>
+                                        <ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown>
+                                    </CollapsibleSection>
+                                    <CollapsibleSection title="Course of Action" isCollapsed={false} onToggle={() => {}}>
+                                        <ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown>
+                                    </CollapsibleSection>
                                 </div>
+                                <div className="resizer" onMouseDown={handleMouseDown} />
                                 <div className="parsed-view-right">
-                                    {selectedFilePath ? (
-                                        <CodeViewer htmlContent={viewableContent} />
-                                    ) : (
-                                        <div>Select a file to view its content.</div>
-                                    )}
+                                    <div className="file-content-viewer-header">
+                                        <span className="file-path">{selectedFilePath || 'No file selected'}</span>
+                                        <span className="metrics">Original: 4.1K | New: 4.2K | Sim: 98%</span>
+                                    </div>
+                                    <div className="file-content-viewer" dangerouslySetInnerHTML={{ __html: viewableContent }} />
                                 </div>
                             </div>
                         )}

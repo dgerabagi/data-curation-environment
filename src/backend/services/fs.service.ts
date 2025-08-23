@@ -1,3 +1,4 @@
+// Updated on: C111 (Add more grammars for better TSX highlighting)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -15,6 +16,13 @@ import pdf from 'pdf-parse/lib/pdf-parse.js';
 import * as XLSX from 'xlsx';
 import mammoth from 'mammoth';
 import { createStarryNight, common } from '@wooorm/starry-night';
+import sourceTsx from '@wooorm/starry-night/source.tsx';
+import sourceJs from '@wooorm/starry-night/source.js';
+import sourceJsx from '@wooorm/starry-night/source.js.jsx';
+import sourceTs from '@wooorm/starry-night/source.ts';
+import sourceCss from '@wooorm/starry-night/source.css';
+import sourceScss from '@wooorm/starry-night/source.scss';
+import textHtml from '@wooorm/starry-night/text.html.basic';
 import { toHtml } from 'hast-util-to-html';
 
 
@@ -37,33 +45,9 @@ export class FSService {
     private excelMarkdownCache = new Map<string, { markdown: string; tokenCount: number }>();
     private wordTextCache = new Map<string, { text: string; tokenCount: number }>();
     private starryNight: any = null;
-    private langToScopeMap: Map<string, string>;
 
     constructor(gitApi?: GitAPI) {
         this.gitApi = gitApi;
-        this.langToScopeMap = new Map([
-            ['js', 'source.js'],
-            ['jsx', 'source.js.jsx'],
-            ['ts', 'source.ts'],
-            ['tsx', 'source.tsx'],
-            ['json', 'source.json'],
-            ['css', 'source.css'],
-            ['scss', 'source.css.scss'],
-            ['html', 'text.html.basic'],
-            ['xml', 'text.xml'],
-            ['md', 'text.md'],
-            ['py', 'source.python'],
-            ['java', 'source.java'],
-            ['c', 'source.c'],
-            ['cpp', 'source.cpp'],
-            ['cs', 'source.cs'],
-            ['go', 'source.go'],
-            ['rb', 'source.ruby'],
-            ['php', 'source.php'],
-            ['sh', 'source.shell'],
-            ['yaml', 'source.yaml'],
-            ['yml', 'source.yaml'],
-        ]);
         if (this.gitApi) {
             Services.loggerService.log(`FSService constructed with Git API. Found ${this.gitApi.repositories.length} repositories.`);
             this.gitApi.onDidOpenRepository(() => this.triggerFullRefresh());
@@ -79,7 +63,9 @@ export class FSService {
 
     private async initializeStarryNight() {
         try {
-            this.starryNight = await createStarryNight(common);
+            // C111: Add more grammars for better TSX/JS highlighting
+            const grammars = [...common, sourceTsx, sourceJs, sourceJsx, sourceTs, sourceCss, sourceScss, textHtml];
+            this.starryNight = await createStarryNight(grammars);
             Services.loggerService.log('Starry Night syntax highlighter initialized.');
         } catch (error) {
             Services.loggerService.error(`Failed to initialize Starry Night: ${error}`);
@@ -94,15 +80,14 @@ export class FSService {
             return;
         }
 
-        const scope = this.langToScopeMap.get(lang) || this.starryNight.flagToScope(lang);
+        const scope = this.starryNight.flagToScope(lang);
         if (!scope) {
-            Services.loggerService.warn(`No Starry Night scope found for language: ${lang}`);
+            Services.loggerService.warn(`[WARN] No Starry Night scope found for language: ${lang}`);
             serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml: `<pre><code>${code}</code></pre>`, id });
             return;
         }
 
         try {
-            Services.loggerService.log(`Highlighting with scope: ${scope}`);
             const tree = this.starryNight.highlight(code, scope);
             const highlightedHtml = toHtml(tree);
             serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml, id });
