@@ -15,7 +15,6 @@
         "Other"
     ],
     "activationEvents": [
-        "onView:viewType.sidebar.contextChooser",
         "onCommand:dce.showParallelCopilot"
     ],
     "main": "./dist/extension.js",

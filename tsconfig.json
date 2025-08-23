@@ -17,10 +17,5 @@
     },
     "include": [
         "src/**/*"
-    ],
-    "files": [
-        "src/extension.ts",
-        "src/client/views/context-chooser.view/view.tsx",
-        "src/client/views/parallel-copilot.view/view.tsx"
     ]
 }

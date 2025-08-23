@@ -1,4 +1,4 @@
-// Updated on: C118 (Reverse cycle order in prompt.md)
+// Updated on: C120 (Fix cycle sorting for M2 and M6)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -69,28 +69,24 @@ Phase 3. Diff Tool - Basically, winmerge but intergrated into a window within VS
             const flattenedContent = await fs.readFile(flattenedRepoPath, 'utf-8');
             const fullHistory: PcppCycle[] = await Services.historyService.getFullHistory();
 
-            // C118 FIX: Sort history in descending order for M2
-            const sortedHistoryForM2 = [...fullHistory].sort((a, b) => b.cycleId - a.cycleId);
+            // C120 FIX: Ensure descending sort with explicit number conversion for robustness.
+            const sortedHistory = [...fullHistory].sort((a, b) => Number(b.cycleId) - Number(a.cycleId));
 
             let cycleOverview = '<M2. cycle overview>\n';
             cycleOverview += `Current Cycle ${currentCycle} - ${cycleTitle}\n`;
-            for (const cycle of sortedHistoryForM2) {
+            for (const cycle of sortedHistory) {
                 if (cycle.cycleId < currentCycle) {
                      cycleOverview += `Cycle ${cycle.cycleId} - ${cycle.title}\n`;
                 }
             }
             cycleOverview += '</M2. cycle overview>';
             
-            // M6 should remain in ascending order
-            const sortedHistoryForM6 = [...fullHistory].sort((a, b) => a.cycleId - b.cycleId);
-
             let cyclesContent = '<M6. Cycles>\n\n';
-            // Add the current, unsaved cycle first
-            cyclesContent += `<Cycle ${currentCycle}>\n${cycleTitle}\n</Cycle ${currentCycle}>\n\n`;
-
-            for (const cycle of sortedHistoryForM6) {
-                if (cycle.cycleId === currentCycle) continue; // Skip if it's the current cycle, already added
-                cyclesContent += `<Cycle ${cycle.cycleId}>\n`;
+            cyclesContent += `<Cycle ${currentCycle}>\n${cycleTitle}\n`;
+            
+            // C120 FIX: Use the same descending sorted history for M6.
+            for (const cycle of sortedHistory) {
+                if (cycle.cycleId === currentCycle) continue; 
                 const previousResponseContent = cycle.responses['1']?.content || '';
                 const parsed = parseResponse(previousResponseContent);
                 const summary = `${parsed.summary}\n\n${parsed.courseOfAction}`;

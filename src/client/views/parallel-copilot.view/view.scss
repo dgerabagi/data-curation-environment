@@ -1,4 +1,4 @@
-/* Updated on: C118 (Add styles for diff view) */
+/* Updated on: C120 (Add styles for side-by-side diff pane) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -278,6 +278,13 @@ body {
     gap: 8px;
 }
 
+.code-viewer-pane {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
 .file-content-viewer {
     flex: 1;
     background-color: var(--vscode-editor-background);
@@ -313,6 +320,10 @@ body {
     
     span {
         line-height: 1.5;
+    }
+
+    code {
+        white-space: pre !important;
     }
 }
 
