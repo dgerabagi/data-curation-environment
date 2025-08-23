@@ -1,4 +1,4 @@
-// Updated on: C120 (Fix diff view bugs and UI)
+// Updated on: C121 (Fix diff view bugs and UI)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -9,7 +9,6 @@ import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/chann
 import { ParsedResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
 import ReactMarkdown from 'react-markdown';
-import * as path from 'path-browserify';
 import DiffViewer from '@/client/components/DiffViewer';
 import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
 
@@ -277,13 +276,7 @@ const App = () => {
         const newDiffMode = !isDiffMode;
         setIsDiffMode(newDiffMode);
         if (newDiffMode && selectedFilePath) {
-            // C120 Bug Fix: The lang was being passed as an object. Correctly get the extension.
-            const lang = selectedFilePath.split('.').pop() || 'plaintext';
-            const id = `original::${selectedFilePath}`;
             clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: selectedFilePath });
-            if (originalFileContent) {
-                 clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: originalFileContent, lang, id });
-            }
         } else {
             setOriginalFileContent(null);
         }

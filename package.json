@@ -15,6 +15,7 @@
         "Other"
     ],
     "activationEvents": [
+        "onView:data-curation-environment",
         "onCommand:dce.showParallelCopilot"
     ],
     "main": "./dist/extension.js",

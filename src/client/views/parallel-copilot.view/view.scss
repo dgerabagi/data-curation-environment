@@ -1,4 +1,4 @@
-/* Updated on: C120 (Add styles for colored diff view) */
+/* Updated on: C121 (Add styles for side-by-side diff view) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -273,6 +273,7 @@ body {
     border-top: none;
     border-radius: 0 0 4px 4px;
     background-color: var(--vscode-editor-background);
+    overflow: hidden; /* Prevent children from overflowing */
 }
 
 .file-content-viewer {
@@ -362,41 +363,48 @@ body {
     }
 }
 
-/* Diff Viewer Specific Styles */
+/* Side-by-Side Diff Viewer Styles */
 .diff-viewer-container {
     display: flex;
-    flex-direction: column;
     width: 100%;
     overflow: auto;
     font-family: var(--vscode-editor-font-family);
+    font-size: var(--vscode-editor-font-size);
 }
 
-.diff-content {
+.diff-pane {
+    flex: 1;
     display: flex;
-    flex-grow: 1;
+    min-width: 0;
+    &:first-child {
+        border-right: 1px solid var(--vscode-panel-border);
+    }
 }
 
-.diff-viewer-container .line-numbers {
+.diff-pane .line-numbers {
     flex-shrink: 0;
     padding: 8px 4px;
     line-height: 1.5;
-    border-right: none;
     background-color: var(--vscode-editorGutter-background);
+    color: var(--vscode-editorLineNumber-foreground);
+    text-align: right;
+    user-select: none;
+    border-right: 1px solid var(--vscode-panel-border);
+    span {
+        display: block;
+        min-height: 1.5em; /* Ensure empty lines take up space */
+    }
 }
 
-.diff-lines {
+.diff-pane .diff-lines {
     flex-grow: 1;
     .line {
-        display: flex;
         line-height: 1.5;
         padding-left: 8px;
+        min-height: 1.5em;
         &.added { background-color: var(--vscode-diffEditor-insertedTextBackground); }
         &.removed { background-color: var(--vscode-diffEditor-removedTextBackground); }
-        .line-prefix {
-            width: 15px;
-            flex-shrink: 0;
-            user-select: none;
-        }
+        &.placeholder { background-color: var(--vscode-editor-inactiveSelectionBackground); }
         pre {
             margin: 0;
             padding: 0;
