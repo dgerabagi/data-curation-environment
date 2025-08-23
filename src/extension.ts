@@ -30,16 +30,16 @@ function createOrShowParallelCopilotPanel(context: vscode.ExtensionContext) {
         }
     );
     
-    const scriptUri = parallelCopilotPanel.webview.asWebviewUri(vscode.Uri.joinPath(context.extensionUri, "dist", "parallelCopilotView.js")).toString();
+    const scriptUri = parallelCopilotPanel.webview.asWebviewUri(vscode.Uri.joinPath(context.extensionUri, "dist", "parallelCopilotView.js"));
     const styleUri = parallelCopilotPanel.webview.asWebviewUri(vscode.Uri.joinPath(context.extensionUri, "dist", "parallelCopilotView.css"));
     const starryNightStyleUri = parallelCopilotPanel.webview.asWebviewUri(vscode.Uri.joinPath(context.extensionUri, "dist", "starry-night.css"));
     const nonce = getNonce();
+    
     parallelCopilotPanel.webview.html = getViewHtml({
         webview: parallelCopilotPanel.webview,
         nonce,
-        scriptUri,
-        styleUri,
-        starryNightStyleUri
+        scriptUri: scriptUri.toString(),
+        styleUris: [styleUri, starryNightStyleUri],
     });
     
     const serverIpc = ServerPostMessageManager.getInstance(

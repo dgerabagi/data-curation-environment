@@ -29,10 +29,8 @@ export class HistoryService {
     constructor() {
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (workspaceFolders && workspaceFolders.length > 0) {
-            // C119 FIX: Correctly access the first workspace folder from the array
+            // C119 Fix: Correctly access the first workspace folder
             this.historyFilePath = path.join(workspaceFolders[0].uri.fsPath, '.vscode', 'dce_history.json');
-        } else {
-            Services.loggerService.warn("HistoryService: No workspace folder open, history will not be saved.");
         }
     }
 

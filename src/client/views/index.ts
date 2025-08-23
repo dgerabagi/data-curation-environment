@@ -1,4 +1,3 @@
-// Updated on: C119 (Fix styleUris property name)
 import { viewConfig as contextChooserViewConfig } from "./context-chooser.view";
 import * as vscode from "vscode";
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
@@ -19,15 +18,12 @@ export function registerViews(context: vscode.ExtensionContext) {
                     const nonce = getNonce();
                     const scriptUri = webviewView.webview.asWebviewUri(vscode.Uri.joinPath(context.extensionUri, "dist", viewConfig.entry));
                     const styleUri = webviewView.webview.asWebviewUri(vscode.Uri.joinPath(context.extensionUri, "dist", `${viewConfig.entry.replace('.js', '')}.css`));
-                    const starryNightStyleUri = webviewView.webview.asWebviewUri(vscode.Uri.joinPath(context.extensionUri, "dist", "starry-night.css"));
                     
-                    // C119 FIX: Pass style URIs as separate properties to match the function definition
                     webviewView.webview.html = getViewHtml({
                         webview: webviewView.webview,
                         nonce,
                         scriptUri: scriptUri.toString(),
-                        styleUri: styleUri,
-                        starryNightStyleUri: starryNightStyleUri,
+                        styleUris: [styleUri],
                     });
 
                     const serverIpc = ServerPostMessageManager.getInstance(

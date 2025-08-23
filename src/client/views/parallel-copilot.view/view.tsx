@@ -1,19 +1,16 @@
-// Updated on: C119 (Fix all TS errors)
+// Updated on: C119 (Fix TS errors for icon, type, and path imports)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-// C119 FIX: VscCompareChanges doesn't exist, use VscDiff instead.
 import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
-// C119 FIX: Import PcppCycle and PcppResponse types
 import { PcppCycle, PcppResponse } from '@/backend/services/history.service';
 import { ParsedResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
 import ReactMarkdown from 'react-markdown';
-// C119 FIX: Import path for frontend usage
-import path from 'path-browserify';
+import * as path from 'path';
 
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -34,12 +31,12 @@ const CodeViewer: React.FC<{ htmlContent: string | undefined | null }> = ({ html
     if (htmlContent === undefined || htmlContent === null) {
         return <div style={{ padding: '8px' }}>Select a file to view its content.</div>;
     }
-    if (htmlContent.startsWith('// Error:')) {
-         return <div style={{ padding: '8px', whiteSpace: 'pre-wrap' }}>{htmlContent}</div>;
+    if (htmlContent.startsWith('<div>Error:')) {
+        return <div style={{ padding: '8px' }} dangerouslySetInnerHTML={{ __html: htmlContent }} />;
     }
 
     const codeContentMatch = /<pre><code>([\s\S]*)<\/code><\/pre>/s.exec(htmlContent);
-    const code = codeContentMatch ? codeContentMatch[1] : `<code>${htmlContent}</code>`;
+    const code = codeContentMatch ? codeContentMatch[1] : `<code>${htmlContent}</code>`; // Fallback for raw text
 
     const lines = code.split('\n');
     if (lines.length > 0 && lines[lines.length - 1] === '') {
@@ -151,13 +148,13 @@ const App = () => {
             setCycleTitle(cycleData.title);
             setCycleContext(cycleData.cycleContext);
             setEphemeralContext(cycleData.ephemeralContext);
-            setLeftPaneWidth(cycleData.leftPaneWidth || 33);
             const newTabs: { [key: string]: TabState } = {};
             Object.entries(cycleData.responses).forEach(([tabId, response]) => {
                 newTabs[tabId] = { rawContent: response.content, parsedContent: null };
             });
             setTabs(newTabs);
             setIsParsedMode(cycleData.isParsedMode || false);
+            setLeftPaneWidth(cycleData.leftPaneWidth || 33);
         };
 
         clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData }) => {
@@ -175,8 +172,8 @@ const App = () => {
         clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => {
             setFileExistenceMap(new Map(Object.entries(existenceMap)));
         });
-        clientIpc.onServerMessage(ServerToClientChannel.SendFileContent, ({ path, content }) => {
-            if (path === selectedFilePath) {
+        clientIpc.onServerMessage(ServerToClientChannel.SendFileContent, ({ path: filePath, content }) => {
+            if (filePath === selectedFilePath) {
                 setOriginalFileContent(content);
             }
         });
@@ -264,12 +261,14 @@ const App = () => {
     }, []);
 
     React.useEffect(() => {
-        window.addEventListener('mousemove', handleMouseMove);
-        window.addEventListener('mouseup', handleMouseUp);
+        const mm = (e: MouseEvent) => handleMouseMove(e);
+        const mu = () => handleMouseUp();
+        window.addEventListener('mousemove', mm);
+        window.addEventListener('mouseup', mu);
         
         return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-            window.removeEventListener('mouseup', handleMouseUp);
+            window.removeEventListener('mousemove', mm);
+            window.removeEventListener('mouseup', mu);
         };
     }, [handleMouseMove, handleMouseUp]);
     
