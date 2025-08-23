@@ -1,4 +1,4 @@
-// Updated on: C109 (Fix infinite loop and stabilize data fetching)
+// Updated on: C110 (Fix infinite loop, add line numbers, improve presentation)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -13,10 +13,15 @@ import ReactMarkdown from 'react-markdown';
 
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
-    return (...args: any[]) => {
+
+    const debouncedFn = React.useCallback((...args: any[]) => {
         if (timeoutRef.current) clearTimeout(timeoutRef.current);
-        timeoutRef.current = setTimeout(() => callback(...args), delay);
-    };
+        timeoutRef.current = setTimeout(() => {
+            callback(...args);
+        }, delay);
+    }, [callback, delay]);
+
+    return debouncedFn;
 };
 
 interface TabState {
@@ -36,6 +41,23 @@ const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; i
         {!isCollapsed && <div className="collapsible-content">{children}</div>}
     </div>
 );
+
+const CodeViewer: React.FC<{ htmlContent: string | undefined }> = ({ htmlContent }) => {
+    const lines = React.useMemo(() => htmlContent ? htmlContent.split('\n') : [], [htmlContent]);
+    
+    if (!htmlContent) {
+        return <div className="code-viewer-container">Loading code...</div>;
+    }
+
+    return (
+        <div className="code-viewer-container">
+            <div className="line-numbers">
+                {lines.map((_, index) => <div key={index}>{index + 1}</div>)}
+            </div>
+            <div className="code-content" dangerouslySetInnerHTML={{ __html: htmlContent }} />
+        </div>
+    );
+};
 
 const App = () => {
     const [activeTab, setActiveTab] = React.useState(1);
@@ -57,7 +79,6 @@ const App = () => {
     const [isCourseOfActionCollapsed, setIsCourseOfActionCollapsed] = React.useState(false);
     const [isAssociatedFilesCollapsed, setIsAssociatedFilesCollapsed] = React.useState(false);
     
-    // C109: Ref to track processed content to prevent re-fetching
     const processedContentRef = React.useRef(new Set<string>());
     
     const clientIpc = ClientPostMessageManager.getInstance();
@@ -88,18 +109,18 @@ const App = () => {
     const parseAllTabs = React.useCallback((tabsToParse: { [key: string]: TabState }) => {
         const allFilePaths = new Set<string>();
         const updatedTabs = { ...tabsToParse };
-        Object.entries(updatedTabs).forEach(([tabId, tabState]) => {
+        Object.values(updatedTabs).forEach((tabState, index) => {
+            const tabId = (index + 1).toString();
             if (tabState.rawContent) {
                 const parsed = parseResponse(tabState.rawContent);
-                updatedTabs[Number(tabId)].parsedContent = parsed;
+                updatedTabs[tabId].parsedContent = parsed;
                 parsed.filesUpdated.forEach(file => allFilePaths.add(file));
                 
-                // C109: Process files for highlighting, but only if not already processed
                 parsed.files.forEach(file => {
                     const lang = file.path.split('.').pop() || 'plaintext';
                     const id = `${file.path}::${file.content}`;
                     if (!processedContentRef.current.has(id)) {
-                         logger.log(`[C109 LOOP FIX] Requesting syntax highlight for new content: ${file.path}`);
+                         logger.log(`[C110 PARSE] Requesting syntax highlight for: ${file.path}`);
                          clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
                          processedContentRef.current.add(id);
                     }
@@ -112,10 +133,9 @@ const App = () => {
         }
     }, [clientIpc]);
 
-
     React.useEffect(() => {
         const loadCycleData = (cycleData: PcppCycle) => {
-            processedContentRef.current.clear(); // Clear processed cache on cycle load
+            processedContentRef.current.clear();
             setCurrentCycle(cycleData.cycleId);
             setCycleTitle(cycleData.title);
             setCycleContext(cycleData.cycleContext);
@@ -137,9 +157,7 @@ const App = () => {
             setMaxCycle(cycleData.cycleId);
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData }) => {
-            if (cycleData) {
-                loadCycleData(cycleData);
-            }
+            if (cycleData) loadCycleData(cycleData);
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => {
             setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml));
@@ -154,31 +172,18 @@ const App = () => {
     const activeTabData = tabs[activeTab.toString()];
 
     const viewableContent = React.useMemo(() => {
-        if (!selectedFilePath || !activeTabData?.parsedContent) {
-            return null;
-        }
+        if (!selectedFilePath || !activeTabData?.parsedContent) return undefined;
+        
         const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath);
         if (!file) {
             logger.error(`[Content Display] Could not find file object for path: ${selectedFilePath}`);
-            return '<div>Error: File data not found in parsed response.</div>';
+            return `Error: File data not found in parsed response.`;
         }
         
         const id = `${file.path}::${file.content}`;
-        const highlightedHtml = highlightedCodeBlocks.get(id);
+        return highlightedCodeBlocks.get(id);
 
-        if (highlightedHtml) {
-            return highlightedHtml;
-        } else {
-            // C109: Request highlighting if it's missing (should only happen if there was a load issue)
-            if (!processedContentRef.current.has(id)) {
-                logger.warn(`[Content Display] Highlighted content not found for ${selectedFilePath}. Requesting it now.`);
-                const lang = file.path.split('.').pop() || 'plaintext';
-                clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
-                processedContentRef.current.add(id);
-            }
-            return `<pre><code>${file.content.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code></pre>`;
-        }
-    }, [selectedFilePath, activeTabData?.parsedContent, highlightedCodeBlocks, clientIpc]);
+    }, [selectedFilePath, activeTabData, highlightedCodeBlocks]);
 
 
     const handleRawContentChange = (newContent: string, tabIndex: number) => {
@@ -285,10 +290,7 @@ const App = () => {
                                                 <li 
                                                     key={file} 
                                                     className={selectedFilePath === file ? 'selected' : ''}
-                                                    onClick={() => {
-                                                        logger.log(`[File Click] Click registered on file: ${file}`);
-                                                        setSelectedFilePath(file);
-                                                    }}
+                                                    onClick={() => setSelectedFilePath(file)}
                                                 >
                                                     {fileExistenceMap.get(file) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
                                                     <span>{file}</span>
@@ -298,8 +300,8 @@ const App = () => {
                                     </CollapsibleSection>
                                 </div>
                                 <div className="parsed-view-right">
-                                    {viewableContent ? (
-                                        <div className="file-content-viewer" dangerouslySetInnerHTML={{ __html: viewableContent }} />
+                                    {selectedFilePath ? (
+                                        <CodeViewer htmlContent={viewableContent} />
                                     ) : (
                                         <div>Select a file to view its content.</div>
                                     )}

@@ -1,4 +1,4 @@
-/* Updated on: C104 (Add styles for selected items in test panes) */
+/* Updated on: C110 (Add styles for code viewer with line numbers) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -249,10 +249,9 @@ body {
 .parsed-view-right {
     flex: 2;
     overflow-y: auto;
-    border: 1px solid var(--vscode-panel-border);
-    border-radius: 4px;
-    padding: 8px;
     min-width: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .parsed-section {
@@ -319,46 +318,6 @@ body {
     }
 }
 
-.file-block {
-    margin-bottom: 12px;
-
-    .file-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: var(--vscode-editorGroupHeader-tabsBackground);
-        padding: 4px 8px;
-        border: 1px solid var(--vscode-panel-border);
-        border-bottom: none;
-        border-top-left-radius: 4px;
-        border-top-right-radius: 4px;
-        font-family: var(--vscode-editor-font-family);
-    }
-
-    .file-path {
-        font-weight: bold;
-    }
-
-    .file-actions button {
-        margin-left: 8px;
-    }
-
-    .file-content-viewer {
-        padding: 8px;
-        background-color: var(--vscode-editor-background);
-        border: 1px solid var(--vscode-panel-border);
-        border-top: none;
-        border-bottom-left-radius: 4px;
-        border-bottom-right-radius: 4px;
-
-        pre {
-            margin: 0;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-        }
-    }
-}
-
 .collapsed-navigator {
     display: flex;
     align-items: center;
@@ -372,5 +331,38 @@ body {
     .cycle-display {
         font-size: 11px;
         color: var(--vscode-descriptionForeground);
+    }
+}
+
+/* C110: Code Viewer Styles */
+.code-viewer-container {
+    background-color: var(--vscode-editor-background);
+    border: 1px solid var(--vscode-panel-border);
+    border-radius: 4px;
+    padding: 8px;
+    overflow: auto;
+    font-family: var(--vscode-editor-font-family);
+    font-size: var(--vscode-editor-font-size);
+    display: flex;
+    flex-grow: 1;
+
+    .line-numbers {
+        padding-right: 12px;
+        text-align: right;
+        color: var(--vscode-editorLineNumber-foreground);
+        user-select: none;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .code-content {
+        flex-grow: 1;
+        white-space: pre;
+        
+        /* Starry-night compatibility */
+        pre {
+            margin: 0;
+            padding: 0;
+            background-color: transparent !important;
+        }
     }
 }

@@ -1,12 +1,12 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-22T21:49:27.523Z
+  Date Generated: 2025-08-23T13:14:09.378Z
   ---
   Total Files: 210
-  Total Lines: 17820
-  Total Characters: 830791
-  Approx. Tokens: 207778
+  Total Lines: 17840
+  Total Characters: 831760
+  Approx. Tokens: 208020
 -->
 
 <!-- Top 10 Files by Token Count -->
@@ -16,7 +16,7 @@
 4. src\client\views\context-chooser.view\view.tsx (5562 tokens)
 5. src\Artifacts\A0. DCE Master Artifact List.md (4615 tokens)
 6. src\client\components\tree-view\TreeView.tsx (4508 tokens)
-7. src\client\views\parallel-copilot.view\view.tsx (4089 tokens)
+7. src\client\views\parallel-copilot.view\view.tsx (4283 tokens)
 8. src\backend\services\flattener.service.ts (3685 tokens)
 9. src\client\views\context-chooser.view\view.scss (3638 tokens)
 10. src\backend\services\prompt.service.ts (3481 tokens)
@@ -107,7 +107,7 @@
 83. src\client\components\tree-view\TreeView.tsx - Lines: 394 - Chars: 18029 - Tokens: 4508
 84. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 85. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
-86. src\client\utils\response-parser.ts - Lines: 69 - Chars: 2998 - Tokens: 750
+86. src\client\utils\response-parser.ts - Lines: 76 - Chars: 3189 - Tokens: 798
 87. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 88. src\client\views\context-chooser.view\on-message.ts - Lines: 143 - Chars: 6146 - Tokens: 1537
 89. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
@@ -119,7 +119,7 @@
 95. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
 96. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
 97. src\client\views\parallel-copilot.view\view.scss - Lines: 376 - Chars: 8219 - Tokens: 2055
-98. src\client\views\parallel-copilot.view\view.tsx - Lines: 304 - Chars: 16353 - Tokens: 4089
+98. src\client\views\parallel-copilot.view\view.tsx - Lines: 317 - Chars: 17131 - Tokens: 4283
 99. src\common\ipc\channels.enum.ts - Lines: 64 - Chars: 3422 - Tokens: 856
 100. src\common\ipc\channels.type.ts - Lines: 57 - Chars: 4453 - Tokens: 1114
 101. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
@@ -596,7 +596,7 @@ SOFTWARE.
         "path-browserify": "^1.0.1"
     },
     "dependencies": {
-        "@wooorm/starry-night": "^3.2.0",
+        "@wooorm/starry-night": "^3.8.0",
         "hast-util-to-html": "^9.0.1",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
@@ -8895,64 +8895,71 @@ export const logger = {
 </file>
 
 <file path="src/client/utils/response-parser.ts">
-// src/client/utils/response-parser.ts
+// Updated on: C109 (Implement robust two-stage parsing)
 import { ParsedResponse, ParsedFile } from "@/common/types/pcpp.types";
 
 // Regex to find the summary/plan before any major headers
-const SUMMARY_REGEX = /^([\s\S]*?)(?=### Course of Action|### Files Updated This Cycle|<[a-zA-Z0-9\.\/_-]+\.[a-zA-Z]{2,}>)/;
+const SUMMARY_REGEX = /^([\s\S]*?)(?=### Course of Action|### Files Updated This Cycle|<file path=")/;
 
 // Regex to find the course of action
-const COURSE_OF_ACTION_REGEX = /### Course of Action\s*([\s\S]*?)(?=### Files Updated This Cycle|<[a-zA-Z0-9\.\/_-]+\.[a-zA-Z]{2,}>)/m;
+const COURSE_OF_ACTION_REGEX = /### Course of Action\s*([\s\S]*?)(?=### Files Updated This Cycle|<file path=")/m;
 
 // Regex for the "Files Updated" markdown list (as a fallback)
-const FILES_UPDATED_LIST_REGEX = /### Files Updated This Cycle\s*([\s\S]*?)(?=<[a-zA-Z0-9\.\/_-]+\.[a-zA-Z]{2,}>|`{3,})/m;
+const FILES_UPDATED_LIST_REGEX = /### Files Updated This Cycle\s*([\s\S]*?)(?=<file path="|`{3,})/m;
 
-// C108: More robust regex to handle <path>...</file> and <path>...</path>
-const FILE_BLOCK_REGEX = /<([a-zA-Z0-9\.\/_-]+\.[a-zA-Z]{2,})>([\s\S]*?)<\/(?:file|\1)>/g;
+// C109: New approach - Find file tags first, then extract content between them.
+const FILE_TAG_REGEX = /<file path="([^"]+)">/g;
 
 
 export function parseResponse(rawText: string): ParsedResponse {
-    // 1. Extract file blocks first, as they are the most reliable source of data.
     const files: ParsedFile[] = [];
-    const fileMatches = rawText.matchAll(FILE_BLOCK_REGEX);
-    for (const match of fileMatches) {
-        files.push({
-            path: match[1].trim(),
-            content: match[2].trim(),
-        });
-    }
+    const filesUpdatedList: string[] = [];
 
-    // 2. Extract summary and course of action
+    // Stage 1: Find all file tags and their positions
+    const tagMatches = [...rawText.matchAll(FILE_TAG_REGEX)];
+
+    // Stage 2: Extract content between tags
+    tagMatches.forEach((match, index) => {
+        const path = match[1].trim();
+        const contentStart = match.index! + match[0].length;
+        
+        const nextMatch = tagMatches[index + 1];
+        const contentEnd = nextMatch ? nextMatch.index! : rawText.length;
+        
+        let content = rawText.substring(contentStart, contentEnd).trim();
+
+        // Clean up potential closing tags from the end of the content
+        const closingTagSimple = `</file>`;
+        const closingTagWithPath = `</${path}>`;
+        if (content.endsWith(closingTagSimple)) {
+            content = content.slice(0, -closingTagSimple.length).trim();
+        } else if (content.endsWith(closingTagWithPath)) {
+            content = content.slice(0, -closingTagWithPath.length).trim();
+        }
+
+        files.push({ path, content });
+        filesUpdatedList.push(path);
+    });
+
+    // Extract summary and course of action using the file tags as boundaries
     const summaryMatch = rawText.match(SUMMARY_REGEX);
     const courseOfActionMatch = rawText.match(COURSE_OF_ACTION_REGEX);
     
     const summary = summaryMatch ? summaryMatch[1].trim() : 'Could not parse summary.';
     const courseOfAction = courseOfActionMatch ? courseOfActionMatch[1].trim() : 'Could not parse course of action.';
 
-    // 3. Determine the list of updated files
-    let filesUpdatedList: string[] = [];
-    if (files.length > 0) {
-        // Primary method: Use the paths from the file blocks we found.
-        filesUpdatedList = files.map(f => f.path);
-    } else {
-        // Fallback method: Parse the markdown list
+    // Fallback for filesUpdated list if no file blocks were found
+    if (filesUpdatedList.length === 0) {
         const filesUpdatedMatch = rawText.match(FILES_UPDATED_LIST_REGEX);
         if (filesUpdatedMatch && filesUpdatedMatch[1]) {
-            filesUpdatedList = filesUpdatedMatch[1]
+            filesUpdatedList.push(...filesUpdatedMatch[1]
                 .split('\n')
                 .map(line => {
                     const backtickMatch = /`([^`]+)`/.exec(line);
-                    if (backtickMatch && backtickMatch[1]) {
-                        return backtickMatch[1].trim();
-                    }
-                    return line
-                        .replace(/^\[.\]\s*/, '')
-                        .replace(/^[-*]\s*/, '')
-                        .replace(/\((?:Updated|New|Re-supplied|Deleted)\)/ig, '')
-                        .replace(/`/g, '')
-                        .trim();
+                    return backtickMatch ? backtickMatch[1].trim() : '';
                 })
-                .filter(line => line.length > 0 && line.includes('.')); // Basic validation
+                .filter(line => line.length > 0 && line.includes('.'))
+            );
         }
     }
 
@@ -10831,7 +10838,7 @@ body {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
-// Updated on: C108 (No functional changes from C107, re-supplying for completeness with new parser)
+// Updated on: C109 (Fix infinite loop and stabilize data fetching)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -10840,7 +10847,7 @@ import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
 import { PcppCycle, PcppResponse } from '@/backend/services/history.service';
-import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
+import { ParsedResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
 import ReactMarkdown from 'react-markdown';
 
@@ -10890,6 +10897,9 @@ const App = () => {
     const [isCourseOfActionCollapsed, setIsCourseOfActionCollapsed] = React.useState(false);
     const [isAssociatedFilesCollapsed, setIsAssociatedFilesCollapsed] = React.useState(false);
     
+    // C109: Ref to track processed content to prevent re-fetching
+    const processedContentRef = React.useRef(new Set<string>());
+    
     const clientIpc = ClientPostMessageManager.getInstance();
 
     const saveCurrentCycleState = React.useCallback(() => {
@@ -10923,11 +10933,15 @@ const App = () => {
                 const parsed = parseResponse(tabState.rawContent);
                 updatedTabs[Number(tabId)].parsedContent = parsed;
                 parsed.filesUpdated.forEach(file => allFilePaths.add(file));
+                
+                // C109: Process files for highlighting, but only if not already processed
                 parsed.files.forEach(file => {
                     const lang = file.path.split('.').pop() || 'plaintext';
                     const id = `${file.path}::${file.content}`;
-                    if (!highlightedCodeBlocks.has(id)) {
+                    if (!processedContentRef.current.has(id)) {
+                         logger.log(`[C109 LOOP FIX] Requesting syntax highlight for new content: ${file.path}`);
                          clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
+                         processedContentRef.current.add(id);
                     }
                 });
             }
@@ -10936,11 +10950,12 @@ const App = () => {
         if (allFilePaths.size > 0) {
             clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) });
         }
-    }, [clientIpc, highlightedCodeBlocks]);
+    }, [clientIpc]);
 
 
     React.useEffect(() => {
         const loadCycleData = (cycleData: PcppCycle) => {
+            processedContentRef.current.clear(); // Clear processed cache on cycle load
             setCurrentCycle(cycleData.cycleId);
             setCycleTitle(cycleData.title);
             setCycleContext(cycleData.cycleContext);
@@ -10992,13 +11007,18 @@ const App = () => {
         const highlightedHtml = highlightedCodeBlocks.get(id);
 
         if (highlightedHtml) {
-            logger.log(`[Content Display] Found highlighted content for ${selectedFilePath}`);
             return highlightedHtml;
         } else {
-            logger.warn(`[Content Display] Highlighted content not found for ${selectedFilePath}. Falling back to plain text.`);
+            // C109: Request highlighting if it's missing (should only happen if there was a load issue)
+            if (!processedContentRef.current.has(id)) {
+                logger.warn(`[Content Display] Highlighted content not found for ${selectedFilePath}. Requesting it now.`);
+                const lang = file.path.split('.').pop() || 'plaintext';
+                clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
+                processedContentRef.current.add(id);
+            }
             return `<pre><code>${file.content.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code></pre>`;
         }
-    }, [selectedFilePath, activeTabData?.parsedContent, highlightedCodeBlocks]);
+    }, [selectedFilePath, activeTabData?.parsedContent, highlightedCodeBlocks, clientIpc]);
 
 
     const handleRawContentChange = (newContent: string, tabIndex: number) => {

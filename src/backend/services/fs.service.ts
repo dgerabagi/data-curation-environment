@@ -37,9 +37,33 @@ export class FSService {
     private excelMarkdownCache = new Map<string, { markdown: string; tokenCount: number }>();
     private wordTextCache = new Map<string, { text: string; tokenCount: number }>();
     private starryNight: any = null;
+    private langToScopeMap: Map<string, string>;
 
     constructor(gitApi?: GitAPI) {
         this.gitApi = gitApi;
+        this.langToScopeMap = new Map([
+            ['js', 'source.js'],
+            ['jsx', 'source.js.jsx'],
+            ['ts', 'source.ts'],
+            ['tsx', 'source.tsx'],
+            ['json', 'source.json'],
+            ['css', 'source.css'],
+            ['scss', 'source.css.scss'],
+            ['html', 'text.html.basic'],
+            ['xml', 'text.xml'],
+            ['md', 'text.md'],
+            ['py', 'source.python'],
+            ['java', 'source.java'],
+            ['c', 'source.c'],
+            ['cpp', 'source.cpp'],
+            ['cs', 'source.cs'],
+            ['go', 'source.go'],
+            ['rb', 'source.ruby'],
+            ['php', 'source.php'],
+            ['sh', 'source.shell'],
+            ['yaml', 'source.yaml'],
+            ['yml', 'source.yaml'],
+        ]);
         if (this.gitApi) {
             Services.loggerService.log(`FSService constructed with Git API. Found ${this.gitApi.repositories.length} repositories.`);
             this.gitApi.onDidOpenRepository(() => this.triggerFullRefresh());
@@ -63,14 +87,14 @@ export class FSService {
     }
 
     public async handleSyntaxHighlightRequest(code: string, lang: string, id: string, serverIpc: ServerPostMessageManager) {
-        Services.loggerService.log(`[C101 SYNTAX-HIGHLIGHT] Received request for lang: ${lang}, id: ${id}`);
+        Services.loggerService.log(`[SYNTAX-HIGHLIGHT] Received request for lang: ${lang}, id: ${id}`);
         if (!this.starryNight) {
             Services.loggerService.error('Starry Night not initialized, cannot highlight.');
             serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml: `<pre><code>${code}</code></pre>`, id });
             return;
         }
 
-        const scope = this.starryNight.flagToScope(lang);
+        const scope = this.langToScopeMap.get(lang) || this.starryNight.flagToScope(lang);
         if (!scope) {
             Services.loggerService.warn(`No Starry Night scope found for language: ${lang}`);
             serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml: `<pre><code>${code}</code></pre>`, id });
@@ -78,6 +102,7 @@ export class FSService {
         }
 
         try {
+            Services.loggerService.log(`Highlighting with scope: ${scope}`);
             const tree = this.starryNight.highlight(code, scope);
             const highlightedHtml = toHtml(tree);
             serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml, id });
