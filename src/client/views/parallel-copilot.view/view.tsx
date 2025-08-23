@@ -1,8 +1,8 @@
-// Updated on: C112 (Implement resizable panes, reorder layout, add metric placeholders, fix rendering)
+// Updated on: C117 (Restore UI component to fix rendering issues)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscVm, VscSave } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -13,10 +13,45 @@ import ReactMarkdown from 'react-markdown';
 
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
-    return (...args: any[]) => {
-        if (timeoutRef.current) clearTimeout(timeoutRef.current);
-        timeoutRef.current = setTimeout(() => callback(...args), delay);
-    };
+
+    const debouncedFunction = React.useCallback((...args: any[]) => {
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+        }
+        timeoutRef.current = setTimeout(() => {
+            callback(...args);
+        }, delay);
+    }, [callback, delay]);
+
+    return debouncedFunction;
+};
+
+const CodeViewer: React.FC<{ htmlContent: string | undefined }> = ({ htmlContent }) => {
+    if (htmlContent === undefined) {
+        return <div style={{ padding: '8px' }}>Select a file to view its content.</div>;
+    }
+    // Handle specific error message from parser
+    if (htmlContent.startsWith('<div>Error:')) {
+        return <div style={{ padding: '8px' }} dangerouslySetInnerHTML={{ __html: htmlContent }} />;
+    }
+
+    // This regex is designed to find the inner content of the top-level <code> tag
+    const codeContentMatch = /<pre><code>([\s\S]*)<\/code><\/pre>/s.exec(htmlContent);
+    const code = codeContentMatch ? codeContentMatch[1] : htmlContent;
+
+    const lines = code.split('\n');
+    if (lines.length > 0 && lines[lines.length - 1] === '') {
+        lines.pop();
+    }
+
+    return (
+        <div className="file-content-viewer">
+            <div className="line-numbers">
+                {lines.map((_, i) => <span key={i}>{i + 1}</span>)}
+            </div>
+            <div className="code-content" dangerouslySetInnerHTML={{ __html: code }} />
+        </div>
+    );
 };
 
 interface TabState {
@@ -56,7 +91,7 @@ const App = () => {
 
     const clientIpc = ClientPostMessageManager.getInstance();
 
-    const saveCurrentCycleState = React.useCallback(() => {
+    const saveCurrentCycleState = React.useCallback((force = false) => {
         const responses: { [key: string]: PcppResponse } = {};
         for (let i = 1; i <= tabCount; i++) {
             responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' };
@@ -147,23 +182,11 @@ const App = () => {
     const activeTabData = tabs[activeTab.toString()];
 
     const viewableContent = React.useMemo(() => {
-        if (!selectedFilePath || !activeTabData?.parsedContent) {
-            return '<div>Select a file to view its content.</div>';
-        }
+        if (!selectedFilePath || !activeTabData?.parsedContent) return undefined;
         const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath);
-        if (!file) {
-            logger.error(`[Content Display] Could not find file object for path: ${selectedFilePath}`);
-            return '<div>Error: File data not found in parsed response.</div>';
-        }
-        
+        if (!file) return '<div>Error: File data not found in parsed response.</div>';
         const id = `${file.path}::${file.content}`;
-        const highlightedHtml = highlightedCodeBlocks.get(id);
-
-        if (highlightedHtml) {
-            return highlightedHtml;
-        } else {
-            return `<pre><code>${file.content.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code></pre>`;
-        }
+        return highlightedCodeBlocks.get(id);
     }, [selectedFilePath, activeTabData?.parsedContent, highlightedCodeBlocks]);
 
 
@@ -189,6 +212,7 @@ const App = () => {
     const handleCycleChange = (e: React.MouseEvent, newCycle: number) => {
         e.stopPropagation();
         if (newCycle > 0 && newCycle <= maxCycle) {
+            saveCurrentCycleState(true);
             setCurrentCycle(newCycle);
             clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle });
         }
@@ -211,13 +235,14 @@ const App = () => {
     };
 
     const handleMouseDown = (e: React.MouseEvent) => {
+        e.preventDefault();
         isResizing.current = true;
     };
 
     const handleMouseMove = React.useCallback((e: MouseEvent) => {
         if (!isResizing.current) return;
         const newWidth = (e.clientX / window.innerWidth) * 100;
-        if (newWidth > 10 && newWidth < 90) { // Set bounds
+        if (newWidth > 10 && newWidth < 90) {
             setLeftPaneWidth(newWidth);
         }
     }, []);
@@ -227,11 +252,15 @@ const App = () => {
     }, []);
 
     React.useEffect(() => {
-        window.addEventListener('mousemove', handleMouseMove);
-        window.addEventListener('mouseup', handleMouseUp);
+        const moveHandler = (e: MouseEvent) => handleMouseMove(e);
+        const upHandler = () => handleMouseUp();
+        
+        window.addEventListener('mousemove', moveHandler);
+        window.addEventListener('mouseup', upHandler);
+        
         return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-            window.removeEventListener('mouseup', handleMouseUp);
+            window.removeEventListener('mousemove', moveHandler);
+            window.removeEventListener('mouseup', upHandler);
         };
     }, [handleMouseMove, handleMouseUp]);
 
@@ -297,7 +326,7 @@ const App = () => {
                                                 <li 
                                                     key={file} 
                                                     className={selectedFilePath === file ? 'selected' : ''}
-                                                    onClick={() => setSelectedFilePath(file)}
+                                                    onClick={() => setSelectedFilePath(prev => prev === file ? null : file)}
                                                 >
                                                     {fileExistenceMap.get(file) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
                                                     <span>{file}</span>
@@ -316,9 +345,14 @@ const App = () => {
                                 <div className="parsed-view-right">
                                     <div className="file-content-viewer-header">
                                         <span className="file-path">{selectedFilePath || 'No file selected'}</span>
-                                        <span className="metrics">Original: 4.1K | New: 4.2K | Sim: 98%</span>
+                                        <div className="file-actions">
+                                            <span className="metrics">Original: 4.1K | New: 4.2K | Sim: 98%</span>
+                                            <button disabled title="Diff View">Diff</button>
+                                            <button disabled title="Swap with Workspace File"><VscVm /></button>
+                                            <button disabled title="Accept into Workspace"><VscSave /></button>
+                                        </div>
                                     </div>
-                                    <div className="file-content-viewer" dangerouslySetInnerHTML={{ __html: viewableContent }} />
+                                    <CodeViewer htmlContent={viewableContent} />
                                 </div>
                             </div>
                         )}

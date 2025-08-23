@@ -4,7 +4,7 @@ import * as vscode from "vscode";
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { getNonce, getViewHtml } from "@/common/utils/view-html";
 
-export const views = [contextChooserViewConfig, parallelCopilotViewConfig];
+export const views = [contextChooserViewConfig];
 export const serverIPCs: Record<string, ServerPostMessageManager> = {};
 
 export function registerViews(context: vscode.ExtensionContext) {
@@ -17,11 +17,16 @@ export function registerViews(context: vscode.ExtensionContext) {
                         localResourceRoots: [context.extensionUri],
                     };
                     const nonce = getNonce();
+                    const scriptUri = webviewView.webview.asWebviewUri(vscode.Uri.joinPath(context.extensionUri, "dist", viewConfig.entry));
+                    const styleUri = webviewView.webview.asWebviewUri(vscode.Uri.joinPath(context.extensionUri, "dist", "contextChooserView.css"));
+                    
                     webviewView.webview.html = getViewHtml({
                         webview: webviewView.webview,
                         nonce,
-                        scriptUri: webviewView.webview.asWebviewUri(vscode.Uri.joinPath(context.extensionUri, "dist", viewConfig.entry)).toString(),
+                        scriptUri: scriptUri.toString(),
+                        styleUri: styleUri,
                     });
+
                     const serverIpc = ServerPostMessageManager.getInstance(
                         webviewView.webview.onDidReceiveMessage,
                         (data: any) => webviewView.webview.postMessage(data)

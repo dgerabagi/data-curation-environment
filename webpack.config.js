@@ -1,10 +1,11 @@
 const path = require('path');
 const CopyPlugin = require("copy-webpack-plugin");
 const webpack = require('webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 /** @type {import('webpack').Configuration} */
 const baseConfig = {
-    mode: 'none', // this leaves the source code as close as possible to the original (when packaging we set this to 'production')
+    mode: 'none',
     resolve: {
         extensions: ['.ts', '.js', '.tsx', '.jsx'],
         alias: {
@@ -27,10 +28,6 @@ const baseConfig = {
                         presets: ['@babel/preset-react', '@babel/preset-typescript']
                     }
                 }
-            },
-            {
-                test: /\.s[ac]ss$/i,
-                use: ["style-loader", "css-loader", "sass-loader", "postcss-loader"],
             },
         ]
     },
@@ -70,6 +67,16 @@ const webviewConfig = {
         filename: '[name].js',
         libraryTarget: 'commonjs2'
     },
+    module: {
+        ...baseConfig.module,
+        rules: [
+            ...baseConfig.module.rules,
+            {
+                test: /\.s[ac]ss$/i,
+                use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+            },
+        ]
+    },
     resolve: {
         ...baseConfig.resolve,
         fallback: {
@@ -77,14 +84,18 @@ const webviewConfig = {
         }
     },
     plugins: [
+        new MiniCssExtractPlugin({
+            filename: '[name].css'
+        }),
         new CopyPlugin({
-            patterns: [{ from: "public", to: "public" }],
+            patterns: [
+                { from: "public", to: "public" },
+            ],
         }),
         new webpack.ProvidePlugin({
             process: 'process/browser',
         }),
     ],
 };
-
 
 module.exports = [extensionConfig, webviewConfig];

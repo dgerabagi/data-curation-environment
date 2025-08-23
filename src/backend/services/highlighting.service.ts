@@ -45,8 +45,10 @@ export class HighlightingService {
 
         try {
             const tree = this.starryNight.highlight(code, scope);
-            const highlightedHtml = toHtml(tree);
-            serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml, id });
+            const hastHtml = toHtml(tree);
+            // C116 FIX: Wrap the generated hast-html in <pre><code> tags to preserve whitespace and enable proper styling.
+            const finalHtml = `<pre><code>${hastHtml}</code></pre>`;
+            serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml: finalHtml, id });
         } catch (error) {
             Services.loggerService.error(`Starry Night highlighting failed for lang ${lang}: ${error}`);
             serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml: `<pre><code>${code}</code></pre>`, id });

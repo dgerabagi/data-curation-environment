@@ -5,7 +5,6 @@ import { Services } from './services';
 
 export interface PcppResponse {
     content: string;
-    // Add other response metadata like ratings, comments in the future
 }
 
 export interface PcppCycle {
@@ -15,7 +14,7 @@ export interface PcppCycle {
     cycleContext: string;
     ephemeralContext: string;
     responses: { [tabId: string]: PcppResponse };
-    isParsedMode?: boolean; // New: To persist parse state
+    isParsedMode?: boolean;
 }
 
 export interface PcppHistoryFile {
@@ -54,6 +53,11 @@ export class HistoryService {
         } catch (error) {
             Services.loggerService.error(`Failed to write to dce_history.json: ${error}`);
         }
+    }
+
+    public async getFullHistory(): Promise<PcppCycle[]> {
+        const history = await this._readHistoryFile();
+        return history.cycles;
     }
 
     public async getLatestCycle(): Promise<PcppCycle> {

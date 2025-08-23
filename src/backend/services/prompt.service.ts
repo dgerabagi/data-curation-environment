@@ -1,7 +1,9 @@
+// Updated on: C116 (Overhaul to generate full, dynamic prompt)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
 import { Services } from './services';
+import { parseResponse } from '@/client/utils/response-parser';
 
 export class PromptService {
     private artifactSchemaTemplate = `<M1. artifact schema>
@@ -11,12 +13,13 @@ M3. interaction schema
 M4. current project scope
 M5. organized artifacts list
 M6. cycles
-M7. artifacts
+M7. Flattened Repo
 </M1. artifact schema>`;
 
     private interactionSchemaTemplate = `<M3. Interaction Schema>
 1.  Artifacts are complete, individual texts enclosed in \`<xmltags>\` and separated by three backticks. Different content sections can be separated with three asterisks. Please always output a summary of your thoughts/plan/course of action befoare providing your artifact outputs, whether they be Document artifacts, Code artifacts, or both.
-2.  Our Document Artifacts serve as our \`Source of Truth\` throughout multiple cycles. As such, over time, as issues occur, or code repeatedly regresses in the same way, seek to align our \`Source of Truth\` such that the Root Cause of such occurances is codified so it can be avoided on subsequent cycles visits to those Code artifacts. **See A106 (Regression Case Studies) for examples.**
+1.1. **New (C108):** To ensure consistent parsing by the DCE extension, all file artifacts **must** be enclosed in \`<file path="path/to/file.ts">...</file>\` tags. The path must be relative to the workspace root. The closing tag must be a simple \`</file>\`. Do not use the file path in the closing tag.
+2.  Our Document Artifacts serve as our \`Source of Truth\` throughout multiple cycles. As such, over time, as issues occur, or code repeatedly regresses in the same way, seek to align our \`Source of Truth\` such that the Root Cause of such occurances is codified so it can be avoided on subsequent cycles visits to those Code artifacts.
 3.  Please output entire Document or Code artifacts. Do not worry about Token length. If your length continues for too long, and you reach the 600 second timeout, I will simply incorporate the work you did complete, and we can simply continue from where you left off. Better to have half of a solution to get started with, than not to have it. **Preference is for larger, more complete updates over smaller, incremental ones to align with the human curator's parallel processing workflow.** The human curator often sends the same prompt to multiple AI instances simultaneously and selects the most comprehensive response as the primary base for the next cycle, using other responses as supplementary information. Providing more complete updates increases the likelihood of a response being selected as the primary base.
 4.  Do not output artifacts that do not require updates in this cycle. (Eg. Do not do this: // Updated on: Cycle 1040 (No functional changes, only cycle header))
 5.  **Critical: \`flattened_repo_v2.txt\` contains all project files. Output updated *individual* files that are part of it (like \`<src/state/coreStore.ts>...\`). However, do **NOT** output the surrounding Artifact container tags (\`<flattened_repo_v2.txt>...</flattened_repo_v2.txt>\`) or any auto-generated metadata sections within it (like the Total Files summary, Top 10 list, or the \`<files list>\` section) which are created by the \`flatten.js\` script.**
@@ -37,22 +40,27 @@ M7. artifacts
 18. basically, you should not worry about brevity, because when you go too long, your response gets interrupted by the system anyway. its better that the products you do deliver are all complete except for the last one, rather than you delivering all incomplete products, including the last one. does that make sense?
 19. remember, do not stop outputting for the reason of preventing a potential artifact interruption mid-output. you actually end up stopping yourself from producting two or three additional files before you actually get interrupted. what i mean is, in the outputs where you do not do this, you produce for 500 seconds, producing 7-9 files, and only the last one is interrupted and unusable. compared to when you stop yourself prematurely, for the reason stated, and you produce for 180 seconds and provide maybe 3-4 files. even with the -1, producing as much as you can still outperforms the alternative.
 20. This is a misaligned statement: \`// (For full history, see master_content.txt)\` because your changes get rolled into master_content.txt. therefore, if you remove the history, then when your updates are rolled in, they will remove the full history. understand? after a while, the history is not relevant and can be rolled out, for a while, it ought to stay. you can see what we're working on + the current cycle and make this determination.
-New Since Cycle 1300:
 21. Each time we create a new documentation artifact, lets also create the key/value pairs needed for me to add it into our Master Artifact List. they can simply be added into the new artifact itself and ill make the new entry in A0. this will solve for me manually generating a description and tag for each new documentation artifact. also, dont place \`/\` in the title/name of a documentation artifact. VSCode treats it as a folder separator.
 21.1. when creating a new documentation artifact, also just update the master artifacts list itself.
 </M3. Interaction Schema>`;
 
     private projectScopeTemplate = `<M4. current project scope>
-The plan is to create a Data Curation Environment. We will do this by creating a VS Code extension. The three main components will be:
+The Data Curation Environment (DCE) is an iterative development tool designed to enhance the workflow between a human curator and a large language model (LLM). It functions as a sophisticated scaffolding and context management system within VS Code.
 
-Phase 1. Context chooser - Choose files/folders (checkmark option in the file explorer) that will be packaged as artifacts into a \`flattened_repo.md\` file.
-Phase 2. parallel 'co-pilot' panel. Basically, we need our own AI Studio interface that is parallelizable. so thats what is wrong with the curernt co-pilot panel, that you are 'locked in' to a single conversation flow. my process involves sending the same prompt to up to 8 different conversation windows and then scrutinizing the responses in winmerge.
-Phase 3. Diff Tool - Basically, winmerge but intergrated into a window within VS Code. My workflow is often comparing two identical responses, or comparing a new artifact with the current version. Currently, I'm first copying and pasting responses into separate notepad files, and then for which ever i need to compare given my task, i then manually move that one into winmerge to compare against another that i manually move. instead, the ability to just select between two to compare would be a massive decrease in the manual workload.
+The core interaction revolves around a "virtuous cycle":
+1.  **Curate:** The user selects a precise set of files from their workspace using the DCE's file tree (Phase 1). This selection forms the context for the LLM.
+2.  **Amalgamate:** The user clicks "Generate prompt.md", which packages the selected files, project documentation, and historical cycle data into a single, comprehensive prompt file.
+3.  **Prompt:** The user submits this prompt to one or more LLMs.
+4.  **Review:** The AI responses are pasted into the Parallel Co-Pilot Panel (Phase 2). This panel allows for side-by-side comparison, syntax highlighting, and integrated diffing (Phase 3) of the AI's suggestions against the current codebase.
+5.  **Test & Accept:** With a single click, the user can "swap" an AI's suggested file changes into their live workspace to immediately test for correctness and compilation errors.
+6.  **Repeat:** The user accepts the best response, and the cycle begins again with a newly updated codebase.
+
+DCE is most analogous to tools like GitHub Copilot Chat or Cursor.sh, but with a key philosophical difference: it emphasizes a **whole-file, parallelized, and stateful** approach over inline, chunk-based suggestions. It is built to support a workflow where multiple complete solutions are generated and scrutinized in parallel, with the full history of these interactions being a navigable part of the project's "knowledge graph."
 </M4. current project scope>`;
 
     public async generatePromptFile(cycleTitle: string, currentCycle: number) {
         const workspaceFolders = vscode.workspace.workspaceFolders;
-        if (!workspaceFolders || workspaceFolders.length === 0) {
+        if (!workspaceFolders?.[0]) {
             vscode.window.showErrorMessage("Cannot generate prompt: No workspace folder is open.");
             return;
         }
@@ -63,17 +71,33 @@ Phase 3. Diff Tool - Basically, winmerge but intergrated into a window within VS
         try {
             Services.loggerService.log("Generating prompt.md file...");
 
-            // 1. Get flattened_repo.md content
             const flattenedContent = await fs.readFile(flattenedRepoPath, 'utf-8');
+            const fullHistory = await Services.historyService.getFullHistory();
 
-            // 2. Build Cycle Overview
-            // This is a simplified version. A more robust implementation would read dce_history.json
-            const cycleOverview = `<M2. cycle overview>
-Current Cycle ${currentCycle} - ${cycleTitle}
-</M2. cycle overview>`;
+            // Build M2 and M6 from history
+            let cycleOverview = '<M2. cycle overview>\n';
+            cycleOverview += `Current Cycle ${currentCycle} - ${cycleTitle}\n`;
+            for (let i = fullHistory.length - 1; i >= 0; i--) {
+                const cycle = fullHistory[i];
+                if (cycle.cycleId < currentCycle) {
+                     cycleOverview += `Cycle ${cycle.cycleId} - ${cycle.title}\n`;
+                }
+            }
+            cycleOverview += '</M2. cycle overview>';
+            
+            let cyclesContent = '<M6. Cycles>\n\n';
+            for (const cycle of fullHistory) {
+                cyclesContent += `<Cycle ${cycle.cycleId}>\n`;
+                // Assume Resp 1 is the "winning" response for summary generation
+                const previousResponseContent = cycle.responses['1']?.content || '';
+                const parsed = parseResponse(previousResponseContent);
+                const summary = `${parsed.summary}\n\n${parsed.courseOfAction}`;
+                cyclesContent += `<Previous Cycle ${cycle.cycleId - 1} Summary of Actions>\n${summary}\n</Previous Cycle ${cycle.cycleId - 1} Summary of Actions>\n`;
+                cyclesContent += `</Cycle ${cycle.cycleId}>\n\n`;
+            }
+            cyclesContent += '</M6. Cycles>';
 
-            // 3. Get Master Artifact List (A0)
-            // This assumes A0 is located at a known path relative to the root.
+
             let masterArtifactListContent = '<!-- Master Artifact List (A0) not found -->';
             try {
                 const a0Path = path.join(rootPath, 'src', 'Artifacts', 'A0. DCE Master Artifact List.md');
@@ -82,28 +106,27 @@ Current Cycle ${currentCycle} - ${cycleTitle}
                 Services.loggerService.warn("Could not read A0. DCE Master Artifact List.md");
             }
 
-            // 4. Assemble the final prompt
             const promptParts = [
+                `<prompt.md>`,
                 this.artifactSchemaTemplate,
                 cycleOverview,
                 this.interactionSchemaTemplate,
                 this.projectScopeTemplate,
                 `<M5. organized artifacts list>\n${masterArtifactListContent}\n</M5. organized artifacts list>`,
-                // A placeholder for M6. Cycles for the user to fill in
-                `<M6. Cycles>\n\n</M6. Cycles>`, 
-                flattenedContent
+                cyclesContent,
+                `<M7. Flattened Repo>\n${flattenedContent}\n</M7. Flattened Repo>`,
+                `</prompt.md>`
             ];
 
             const finalPrompt = promptParts.join('\n\n');
 
-            // 5. Write to prompt.md
             await fs.writeFile(promptMdPath, finalPrompt, 'utf-8');
             vscode.window.showInformationMessage(`Successfully generated prompt.md.`);
             Services.loggerService.log("Successfully generated prompt.md file.");
 
         } catch (error: any) {
             let errorMessage = `Failed to generate prompt.md: ${error.message}`;
-            if (error.code === 'ENOENT' && error.path.includes('flattened_repo.md')) {
+            if (error.code === 'ENOENT' && error.path?.includes('flattened_repo.md')) {
                 errorMessage = "Failed to generate prompt.md: 'flattened_repo.md' not found. Please flatten context first.";
             }
             vscode.window.showErrorMessage(errorMessage);

@@ -1,4 +1,4 @@
-/* Updated on: C112 (Overhaul code viewer styles, add resizable pane) */
+/* Updated on: C117 (Restore UI styles to fix rendering issues) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -229,10 +229,9 @@ body {
     overflow-y: auto;
 }
 
-/* Styles for Parsed View */
 .parsed-view-grid {
     display: flex;
-    gap: 0; /* Remove gap, divider will handle it */
+    gap: 0;
     flex-grow: 1;
     min-height: 0;
 }
@@ -242,7 +241,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    min-width: 150px; /* Minimum width before collapse */
+    min-width: 150px;
     padding-right: 8px;
 }
 
@@ -280,11 +279,13 @@ body {
     .file-path {
         font-weight: bold;
     }
+    .file-actions button {
+        margin-left: 8px;
+    }
     .metrics {
         color: var(--vscode-descriptionForeground);
     }
 }
-
 
 .file-content-viewer {
     flex-grow: 1;
@@ -293,28 +294,34 @@ body {
     border-radius: 4px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-    padding: 8px;
     overflow: auto;
     font-family: var(--vscode-editor-font-family);
     font-size: var(--vscode-editor-font-size);
+    display: flex;
+}
+
+.line-numbers {
+    padding: 8px 10px 8px 8px;
+    text-align: right;
+    color: var(--vscode-editorLineNumber-foreground);
+    user-select: none;
+    border-right: 1px solid var(--vscode-panel-border);
     
-    pre {
-        margin: 0;
-        white-space: pre-wrap;
-        word-wrap: break-word;
-    }
-
-    code {
-        font-family: inherit;
-        font-size: inherit;
-    }
-
-    /* Fix for starry-night adding its own background */
-    pre.shiki, pre.shiki code {
-        background-color: transparent !important;
+    span {
+        display: block;
+        line-height: 1.5; /* Match typical editor line height */
     }
 }
 
+.code-content {
+    padding: 8px;
+    flex-grow: 1;
+    white-space: pre;
+    
+    span {
+        line-height: 1.5;
+    }
+}
 
 .associated-files-list {
     list-style: none;

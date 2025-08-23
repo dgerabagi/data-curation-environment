@@ -1,12 +1,12 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-23T16:03:47.126Z
+  Date Generated: 2025-08-23T17:14:00.079Z
   ---
   Total Files: 216
-  Total Lines: 20202
-  Total Characters: 968735
-  Approx. Tokens: 242266
+  Total Lines: 20294
+  Total Characters: 972531
+  Approx. Tokens: 243215
 -->
 
 <!-- Top 10 Files by Token Count -->
@@ -16,10 +16,10 @@
 4. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
 5. src\client\views\context-chooser.view\view.tsx (5562 tokens)
 6. src\Artifacts\A0. DCE Master Artifact List.md (4838 tokens)
-7. src\client\components\tree-view\TreeView.tsx (4508 tokens)
-8. src\client\views\parallel-copilot.view\view.tsx (4315 tokens)
-9. src\client\views\context-chooser.view\view.scss (3638 tokens)
-10. src\backend\services\prompt.service.ts (3481 tokens)
+7. src\client\views\parallel-copilot.view\view.tsx (4595 tokens)
+8. src\client\components\tree-view\TreeView.tsx (4508 tokens)
+9. src\backend\services\prompt.service.ts (3915 tokens)
+10. src\client\views\context-chooser.view\view.scss (3638 tokens)
 
 <!-- Full File List -->
 1. .gitignore - Lines: 10 - Chars: 128 - Tokens: 32
@@ -90,17 +90,17 @@
 66. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
 67. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
 68. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
-69. src\backend\commands\commands.ts - Lines: 98 - Chars: 4333 - Tokens: 1084
+69. src\backend\commands\commands.ts - Lines: 97 - Chars: 4211 - Tokens: 1053
 70. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
 71. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
 72. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
 73. src\backend\services\file-operation.service.ts - Lines: 226 - Chars: 10503 - Tokens: 2626
-74. src\backend\services\file-tree.service.ts - Lines: 204 - Chars: 11188 - Tokens: 2797
+74. src\backend\services\file-tree.service.ts - Lines: 212 - Chars: 11447 - Tokens: 2862
 75. src\backend\services\flattener.service.ts - Lines: 210 - Chars: 11271 - Tokens: 2818
-76. src\backend\services\highlighting.service.ts - Lines: 55 - Chars: 2721 - Tokens: 681
-77. src\backend\services\history.service.ts - Lines: 103 - Chars: 3981 - Tokens: 996
+76. src\backend\services\highlighting.service.ts - Lines: 57 - Chars: 2920 - Tokens: 730
+77. src\backend\services\history.service.ts - Lines: 107 - Chars: 4029 - Tokens: 1008
 78. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-79. src\backend\services\prompt.service.ts - Lines: 113 - Chars: 13923 - Tokens: 3481
+79. src\backend\services\prompt.service.ts - Lines: 136 - Chars: 15658 - Tokens: 3915
 80. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
 81. src\backend\services\services.ts - Lines: 35 - Chars: 1597 - Tokens: 400
 82. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
@@ -113,20 +113,20 @@
 89. src\client\components\tree-view\TreeView.tsx - Lines: 394 - Chars: 18029 - Tokens: 4508
 90. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 91. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
-92. src\client\utils\response-parser.ts - Lines: 84 - Chars: 3342 - Tokens: 836
+92. src\client\utils\response-parser.ts - Lines: 86 - Chars: 3247 - Tokens: 812
 93. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-94. src\client\views\context-chooser.view\on-message.ts - Lines: 53 - Chars: 4853 - Tokens: 1214
+94. src\client\views\context-chooser.view\on-message.ts - Lines: 53 - Chars: 4913 - Tokens: 1229
 95. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
 96. src\client\views\context-chooser.view\view.tsx - Lines: 435 - Chars: 22245 - Tokens: 5562
-97. src\client\views\index.ts - Lines: 35 - Chars: 1714 - Tokens: 429
+97. src\client\views\index.ts - Lines: 38 - Chars: 1918 - Tokens: 480
 98. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-99. src\client\views\parallel-copilot.view\on-message.ts - Lines: 39 - Chars: 1836 - Tokens: 459
+99. src\client\views\parallel-copilot.view\on-message.ts - Lines: 39 - Chars: 1913 - Tokens: 479
 100. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 43 - Chars: 1890 - Tokens: 473
 101. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
 102. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
-103. src\client\views\parallel-copilot.view\view.scss - Lines: 368 - Chars: 8253 - Tokens: 2064
-104. src\client\views\parallel-copilot.view\view.tsx - Lines: 333 - Chars: 17258 - Tokens: 4315
-105. src\common\ipc\channels.enum.ts - Lines: 64 - Chars: 3422 - Tokens: 856
+103. src\client\views\parallel-copilot.view\view.scss - Lines: 384 - Chars: 8542 - Tokens: 2136
+104. src\client\views\parallel-copilot.view\view.tsx - Lines: 357 - Chars: 18379 - Tokens: 4595
+105. src\common\ipc\channels.enum.ts - Lines: 64 - Chars: 3129 - Tokens: 783
 106. src\common\ipc\channels.type.ts - Lines: 57 - Chars: 4453 - Tokens: 1114
 107. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
 108. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
@@ -135,9 +135,9 @@
 111. src\common\types\pcpp.types.ts - Lines: 13 - Chars: 357 - Tokens: 90
 112. src\common\types\vscode-webview.d.ts - Lines: 13 - Chars: 357 - Tokens: 90
 113. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
-114. src\common\utils\view-html.ts - Lines: 26 - Chars: 971 - Tokens: 243
+114. src\common\utils\view-html.ts - Lines: 27 - Chars: 1042 - Tokens: 261
 115. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
-116. src\extension.ts - Lines: 113 - Chars: 4651 - Tokens: 1163
+116. src\extension.ts - Lines: 119 - Chars: 4814 - Tokens: 1204
 117. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
 118. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
 119. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
@@ -237,7 +237,7 @@
 213. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
 214. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
 215. tsconfig.json - Lines: 19 - Chars: 478 - Tokens: 120
-216. webpack.config.js - Lines: 90 - Chars: 2440 - Tokens: 610
+216. webpack.config.js - Lines: 94 - Chars: 2520 - Tokens: 630
 
 <file path=".gitignore">
 node_modules
@@ -8516,7 +8516,7 @@ After these commands complete, refresh your GitHub repository page. You should s
 </file>
 
 <file path="src/backend/commands/commands.ts">
-// Updated on: C78 (Change openParallelCopilot to trigger a command)
+// Updated on: C115 (Fix fsService reference)
 import * as vscode from 'vscode';
 import { Services } from '../services/services';
 import { serverIPCs } from '@/client/views';
@@ -8598,7 +8598,8 @@ export const commands = [
             const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
             if (serverIpc) {
                 Services.loggerService.log("Executing dce.refreshTree command.");
-                Services.fsService.handleWorkspaceFilesRequest(serverIpc, true);
+                // C115 Fix: Use fileTreeService instead of fsService
+                Services.fileTreeService.handleWorkspaceFilesRequest(serverIpc, true);
             } else {
                 Services.loggerService.warn("Could not refresh tree: serverIpc not found.");
             }
@@ -8608,8 +8609,6 @@ export const commands = [
         commandId: 'dce.openParallelCopilot',
         callback: () => {
             Services.loggerService.log("Executing dce.openParallelCopilot command to open WebviewPanel.");
-            // This command is now handled directly in extension.ts to manage the panel's lifecycle.
-            // We execute a proxy command that the extension will catch.
             vscode.commands.executeCommand('dce.showParallelCopilot');
         }
     }
@@ -9074,7 +9073,7 @@ export class FileOperationService {
 </file>
 
 <file path="src/backend/services/file-tree.service.ts">
-// src/backend/services/file-tree.service.ts
+// Updated on: C115 (Fix type error in getGitStatusMap)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -9203,7 +9202,15 @@ export class FileTreeService {
         const getStatusChar = (s: Status) => ({ [Status.INDEX_ADDED]: 'A', [Status.MODIFIED]: 'M', [Status.DELETED]: 'D', [Status.UNTRACKED]: 'U', [Status.IGNORED]: 'I', [Status.CONFLICT]: 'C' }[s] || '');
         
         const changes = [...repo.state.workingTreeChanges, ...repo.state.indexChanges, ...repo.state.mergeChanges];
-        return new Map(changes.map(c => [normalizePath(c.uri.fsPath), getStatusChar(c.status)]).filter(([, s]) => s));
+        
+        // C115: Use reduce for a more type-safe map creation
+        return changes.reduce((acc, change) => {
+            const statusChar = getStatusChar(change.status);
+            if (statusChar) {
+                acc.set(normalizePath(change.uri.fsPath), statusChar);
+            }
+            return acc;
+        }, new Map<string, string>());
     }
 
     private getProblemCountsMap(): ProblemCountsMap {
@@ -9541,8 +9548,10 @@ export class HighlightingService {
 
         try {
             const tree = this.starryNight.highlight(code, scope);
-            const highlightedHtml = toHtml(tree);
-            serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml, id });
+            const hastHtml = toHtml(tree);
+            // C116 FIX: Wrap the generated hast-html in <pre><code> tags to preserve whitespace and enable proper styling.
+            const finalHtml = `<pre><code>${hastHtml}</code></pre>`;
+            serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml: finalHtml, id });
         } catch (error) {
             Services.loggerService.error(`Starry Night highlighting failed for lang ${lang}: ${error}`);
             serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml: `<pre><code>${code}</code></pre>`, id });
@@ -9559,7 +9568,6 @@ import { Services } from './services';
 
 export interface PcppResponse {
     content: string;
-    // Add other response metadata like ratings, comments in the future
 }
 
 export interface PcppCycle {
@@ -9569,7 +9577,7 @@ export interface PcppCycle {
     cycleContext: string;
     ephemeralContext: string;
     responses: { [tabId: string]: PcppResponse };
-    isParsedMode?: boolean; // New: To persist parse state
+    isParsedMode?: boolean;
 }
 
 export interface PcppHistoryFile {
@@ -9608,6 +9616,11 @@ export class HistoryService {
         } catch (error) {
             Services.loggerService.error(`Failed to write to dce_history.json: ${error}`);
         }
+    }
+
+    public async getFullHistory(): Promise<PcppCycle[]> {
+        const history = await this._readHistoryFile();
+        return history.cycles;
     }
 
     public async getLatestCycle(): Promise<PcppCycle> {
@@ -9699,10 +9712,12 @@ export class LoggerService {
 </file>
 
 <file path="src/backend/services/prompt.service.ts">
+// Updated on: C116 (Overhaul to generate full, dynamic prompt)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
 import { Services } from './services';
+import { parseResponse } from '@/client/utils/response-parser';
 
 export class PromptService {
     private artifactSchemaTemplate = `<M1. artifact schema>
@@ -9712,12 +9727,13 @@ M3. interaction schema
 M4. current project scope
 M5. organized artifacts list
 M6. cycles
-M7. artifacts
+M7. Flattened Repo
 </M1. artifact schema>`;
 
     private interactionSchemaTemplate = `<M3. Interaction Schema>
 1.  Artifacts are complete, individual texts enclosed in \`<xmltags>\` and separated by three backticks. Different content sections can be separated with three asterisks. Please always output a summary of your thoughts/plan/course of action befoare providing your artifact outputs, whether they be Document artifacts, Code artifacts, or both.
-2.  Our Document Artifacts serve as our \`Source of Truth\` throughout multiple cycles. As such, over time, as issues occur, or code repeatedly regresses in the same way, seek to align our \`Source of Truth\` such that the Root Cause of such occurances is codified so it can be avoided on subsequent cycles visits to those Code artifacts. **See A106 (Regression Case Studies) for examples.**
+1.1. **New (C108):** To ensure consistent parsing by the DCE extension, all file artifacts **must** be enclosed in \`<file path="path/to/file.ts">...</file>\` tags. The path must be relative to the workspace root. The closing tag must be a simple \`</file>\`. Do not use the file path in the closing tag.
+2.  Our Document Artifacts serve as our \`Source of Truth\` throughout multiple cycles. As such, over time, as issues occur, or code repeatedly regresses in the same way, seek to align our \`Source of Truth\` such that the Root Cause of such occurances is codified so it can be avoided on subsequent cycles visits to those Code artifacts.
 3.  Please output entire Document or Code artifacts. Do not worry about Token length. If your length continues for too long, and you reach the 600 second timeout, I will simply incorporate the work you did complete, and we can simply continue from where you left off. Better to have half of a solution to get started with, than not to have it. **Preference is for larger, more complete updates over smaller, incremental ones to align with the human curator's parallel processing workflow.** The human curator often sends the same prompt to multiple AI instances simultaneously and selects the most comprehensive response as the primary base for the next cycle, using other responses as supplementary information. Providing more complete updates increases the likelihood of a response being selected as the primary base.
 4.  Do not output artifacts that do not require updates in this cycle. (Eg. Do not do this: // Updated on: Cycle 1040 (No functional changes, only cycle header))
 5.  **Critical: \`flattened_repo_v2.txt\` contains all project files. Output updated *individual* files that are part of it (like \`<src/state/coreStore.ts>...\`). However, do **NOT** output the surrounding Artifact container tags (\`<flattened_repo_v2.txt>...</flattened_repo_v2.txt>\`) or any auto-generated metadata sections within it (like the Total Files summary, Top 10 list, or the \`<files list>\` section) which are created by the \`flatten.js\` script.**
@@ -9738,22 +9754,27 @@ M7. artifacts
 18. basically, you should not worry about brevity, because when you go too long, your response gets interrupted by the system anyway. its better that the products you do deliver are all complete except for the last one, rather than you delivering all incomplete products, including the last one. does that make sense?
 19. remember, do not stop outputting for the reason of preventing a potential artifact interruption mid-output. you actually end up stopping yourself from producting two or three additional files before you actually get interrupted. what i mean is, in the outputs where you do not do this, you produce for 500 seconds, producing 7-9 files, and only the last one is interrupted and unusable. compared to when you stop yourself prematurely, for the reason stated, and you produce for 180 seconds and provide maybe 3-4 files. even with the -1, producing as much as you can still outperforms the alternative.
 20. This is a misaligned statement: \`// (For full history, see master_content.txt)\` because your changes get rolled into master_content.txt. therefore, if you remove the history, then when your updates are rolled in, they will remove the full history. understand? after a while, the history is not relevant and can be rolled out, for a while, it ought to stay. you can see what we're working on + the current cycle and make this determination.
-New Since Cycle 1300:
 21. Each time we create a new documentation artifact, lets also create the key/value pairs needed for me to add it into our Master Artifact List. they can simply be added into the new artifact itself and ill make the new entry in A0. this will solve for me manually generating a description and tag for each new documentation artifact. also, dont place \`/\` in the title/name of a documentation artifact. VSCode treats it as a folder separator.
 21.1. when creating a new documentation artifact, also just update the master artifacts list itself.
 </M3. Interaction Schema>`;
 
     private projectScopeTemplate = `<M4. current project scope>
-The plan is to create a Data Curation Environment. We will do this by creating a VS Code extension. The three main components will be:
+The Data Curation Environment (DCE) is an iterative development tool designed to enhance the workflow between a human curator and a large language model (LLM). It functions as a sophisticated scaffolding and context management system within VS Code.
 
-Phase 1. Context chooser - Choose files/folders (checkmark option in the file explorer) that will be packaged as artifacts into a \`flattened_repo.md\` file.
-Phase 2. parallel 'co-pilot' panel. Basically, we need our own AI Studio interface that is parallelizable. so thats what is wrong with the curernt co-pilot panel, that you are 'locked in' to a single conversation flow. my process involves sending the same prompt to up to 8 different conversation windows and then scrutinizing the responses in winmerge.
-Phase 3. Diff Tool - Basically, winmerge but intergrated into a window within VS Code. My workflow is often comparing two identical responses, or comparing a new artifact with the current version. Currently, I'm first copying and pasting responses into separate notepad files, and then for which ever i need to compare given my task, i then manually move that one into winmerge to compare against another that i manually move. instead, the ability to just select between two to compare would be a massive decrease in the manual workload.
+The core interaction revolves around a "virtuous cycle":
+1.  **Curate:** The user selects a precise set of files from their workspace using the DCE's file tree (Phase 1). This selection forms the context for the LLM.
+2.  **Amalgamate:** The user clicks "Generate prompt.md", which packages the selected files, project documentation, and historical cycle data into a single, comprehensive prompt file.
+3.  **Prompt:** The user submits this prompt to one or more LLMs.
+4.  **Review:** The AI responses are pasted into the Parallel Co-Pilot Panel (Phase 2). This panel allows for side-by-side comparison, syntax highlighting, and integrated diffing (Phase 3) of the AI's suggestions against the current codebase.
+5.  **Test & Accept:** With a single click, the user can "swap" an AI's suggested file changes into their live workspace to immediately test for correctness and compilation errors.
+6.  **Repeat:** The user accepts the best response, and the cycle begins again with a newly updated codebase.
+
+DCE is most analogous to tools like GitHub Copilot Chat or Cursor.sh, but with a key philosophical difference: it emphasizes a **whole-file, parallelized, and stateful** approach over inline, chunk-based suggestions. It is built to support a workflow where multiple complete solutions are generated and scrutinized in parallel, with the full history of these interactions being a navigable part of the project's "knowledge graph."
 </M4. current project scope>`;
 
     public async generatePromptFile(cycleTitle: string, currentCycle: number) {
         const workspaceFolders = vscode.workspace.workspaceFolders;
-        if (!workspaceFolders || workspaceFolders.length === 0) {
+        if (!workspaceFolders?.[0]) {
             vscode.window.showErrorMessage("Cannot generate prompt: No workspace folder is open.");
             return;
         }
@@ -9764,17 +9785,33 @@ Phase 3. Diff Tool - Basically, winmerge but intergrated into a window within VS
         try {
             Services.loggerService.log("Generating prompt.md file...");
 
-            // 1. Get flattened_repo.md content
             const flattenedContent = await fs.readFile(flattenedRepoPath, 'utf-8');
+            const fullHistory = await Services.historyService.getFullHistory();
 
-            // 2. Build Cycle Overview
-            // This is a simplified version. A more robust implementation would read dce_history.json
-            const cycleOverview = `<M2. cycle overview>
-Current Cycle ${currentCycle} - ${cycleTitle}
-</M2. cycle overview>`;
+            // Build M2 and M6 from history
+            let cycleOverview = '<M2. cycle overview>\n';
+            cycleOverview += `Current Cycle ${currentCycle} - ${cycleTitle}\n`;
+            for (let i = fullHistory.length - 1; i >= 0; i--) {
+                const cycle = fullHistory[i];
+                if (cycle.cycleId < currentCycle) {
+                     cycleOverview += `Cycle ${cycle.cycleId} - ${cycle.title}\n`;
+                }
+            }
+            cycleOverview += '</M2. cycle overview>';
+            
+            let cyclesContent = '<M6. Cycles>\n\n';
+            for (const cycle of fullHistory) {
+                cyclesContent += `<Cycle ${cycle.cycleId}>\n`;
+                // Assume Resp 1 is the "winning" response for summary generation
+                const previousResponseContent = cycle.responses['1']?.content || '';
+                const parsed = parseResponse(previousResponseContent);
+                const summary = `${parsed.summary}\n\n${parsed.courseOfAction}`;
+                cyclesContent += `<Previous Cycle ${cycle.cycleId - 1} Summary of Actions>\n${summary}\n</Previous Cycle ${cycle.cycleId - 1} Summary of Actions>\n`;
+                cyclesContent += `</Cycle ${cycle.cycleId}>\n\n`;
+            }
+            cyclesContent += '</M6. Cycles>';
 
-            // 3. Get Master Artifact List (A0)
-            // This assumes A0 is located at a known path relative to the root.
+
             let masterArtifactListContent = '<!-- Master Artifact List (A0) not found -->';
             try {
                 const a0Path = path.join(rootPath, 'src', 'Artifacts', 'A0. DCE Master Artifact List.md');
@@ -9783,28 +9820,27 @@ Current Cycle ${currentCycle} - ${cycleTitle}
                 Services.loggerService.warn("Could not read A0. DCE Master Artifact List.md");
             }
 
-            // 4. Assemble the final prompt
             const promptParts = [
+                `<prompt.md>`,
                 this.artifactSchemaTemplate,
                 cycleOverview,
                 this.interactionSchemaTemplate,
                 this.projectScopeTemplate,
                 `<M5. organized artifacts list>\n${masterArtifactListContent}\n</M5. organized artifacts list>`,
-                // A placeholder for M6. Cycles for the user to fill in
-                `<M6. Cycles>\n\n</M6. Cycles>`, 
-                flattenedContent
+                cyclesContent,
+                `<M7. Flattened Repo>\n${flattenedContent}\n</M7. Flattened Repo>`,
+                `</prompt.md>`
             ];
 
             const finalPrompt = promptParts.join('\n\n');
 
-            // 5. Write to prompt.md
             await fs.writeFile(promptMdPath, finalPrompt, 'utf-8');
             vscode.window.showInformationMessage(`Successfully generated prompt.md.`);
             Services.loggerService.log("Successfully generated prompt.md file.");
 
         } catch (error: any) {
             let errorMessage = `Failed to generate prompt.md: ${error.message}`;
-            if (error.code === 'ENOENT' && error.path.includes('flattened_repo.md')) {
+            if (error.code === 'ENOENT' && error.path?.includes('flattened_repo.md')) {
                 errorMessage = "Failed to generate prompt.md: 'flattened_repo.md' not found. Please flatten context first.";
             }
             vscode.window.showErrorMessage(errorMessage);
@@ -11403,30 +11439,20 @@ export const logger = {
 </file>
 
 <file path="src/client/utils/response-parser.ts">
-// Updated on: C112 (Add cleanup for trailing code fences)
+// Updated on: C116 (Fix trimming of trailing </file> tag and other artifacts)
 import { ParsedResponse, ParsedFile } from "@/common/types/pcpp.types";
 
-// Regex to find the summary/plan before any major headers
 const SUMMARY_REGEX = /^([\s\S]*?)(?=### Course of Action|### Files Updated This Cycle|<file path=")/;
-
-// Regex to find the course of action
 const COURSE_OF_ACTION_REGEX = /### Course of Action\s*([\s\S]*?)(?=### Files Updated This Cycle|<file path=")/m;
-
-// Regex for the "Files Updated" markdown list (as a fallback)
 const FILES_UPDATED_LIST_REGEX = /### Files Updated This Cycle\s*([\s\S]*?)(?=<file path="|`{3,})/m;
-
-// Find file tags first, then extract content between them.
 const FILE_TAG_REGEX = /<file path="([^"]+)">/g;
-
 
 export function parseResponse(rawText: string): ParsedResponse {
     const files: ParsedFile[] = [];
     let filesUpdatedList: string[] = [];
 
-    // Stage 1: Find all file tags and their positions
     const tagMatches = [...rawText.matchAll(FILE_TAG_REGEX)];
 
-    // Stage 2: Extract content between tags
     tagMatches.forEach((match, index) => {
         const path = match[1].trim();
         const contentStart = match.index! + match[0].length;
@@ -11434,9 +11460,10 @@ export function parseResponse(rawText: string): ParsedResponse {
         const nextMatch = tagMatches[index + 1];
         const contentEnd = nextMatch ? nextMatch.index! : rawText.length;
         
-        let content = rawText.substring(contentStart, contentEnd).trim();
+        let content = rawText.substring(contentStart, contentEnd);
 
-        // C112: Clean up potential closing tags and code fences from the end of the content
+        // C116: More aggressive cleanup of trailing artifacts.
+        // The loop is important for cases like `...content</file>```
         const patternsToRemove = [
             `</file>`,
             `</${path}>`,
@@ -11444,28 +11471,40 @@ export function parseResponse(rawText: string): ParsedResponse {
             '```',
         ];
 
-        patternsToRemove.forEach(pattern => {
-            // Use a loop to remove multiple occurrences from the end
-            while (content.endsWith(pattern)) {
-                content = content.slice(0, -pattern.length).trim();
+        let changed = true;
+        while(changed) {
+            changed = false;
+            const startingContent = content.trim();
+            for (const pattern of patternsToRemove) {
+                if (content.trim().endsWith(pattern)) {
+                    content = content.trim().slice(0, -pattern.length);
+                    changed = true;
+                }
             }
-        });
+            if (content.trim() === startingContent) {
+                changed = false;
+            }
+        }
+        
+        content = content.trim();
 
+        // Also remove leading newline if it exists
+        if (content.startsWith('\n')) {
+            content = content.substring(1);
+        }
+        
         files.push({ path, content });
     });
 
-    // Extract summary and course of action using the file tags as boundaries
     const summaryMatch = rawText.match(SUMMARY_REGEX);
     const courseOfActionMatch = rawText.match(COURSE_OF_ACTION_REGEX);
     
     const summary = summaryMatch ? summaryMatch[1].trim() : 'Could not parse summary.';
     const courseOfAction = courseOfActionMatch ? courseOfActionMatch[1].trim() : 'Could not parse course of action.';
 
-    // The primary source for filesUpdated is the list of successfully parsed file blocks.
     if (files.length > 0) {
         filesUpdatedList = files.map(f => f.path);
     } else {
-        // Fallback for filesUpdated list if no file blocks were found
         const filesUpdatedMatch = rawText.match(FILES_UPDATED_LIST_REGEX);
         if (filesUpdatedMatch && filesUpdatedMatch[1]) {
             filesUpdatedList.push(...filesUpdatedMatch[1]
@@ -11479,11 +11518,10 @@ export function parseResponse(rawText: string): ParsedResponse {
         }
     }
 
-
     return {
         summary,
         courseOfAction,
-        filesUpdated: [...new Set(filesUpdatedList)], // Ensure uniqueness
+        filesUpdated: [...new Set(filesUpdatedList)],
         files,
     };
 }
@@ -11500,9 +11538,9 @@ export const viewConfig = {
 </file>
 
 <file path="src/client/views/context-chooser.view/on-message.ts">
-// Updated on: C114 (Refactor to use new services)
+// Updated on: C115 (Ensure file reflects correct service calls)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
-import { ClientToServerChannel } from "@/common/ipc/channels.enum";
+import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
 import { Services } from "@/backend/services/services";
 import * as vscode from "vscode";
 
@@ -11510,7 +11548,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     const { fileTreeService, fileOperationService, contentExtractionService, flattenerService, selectionService, actionService, loggerService } = Services;
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestInitialData, () => {
-        serverIpc.sendToClient(vscode.workspace.isTrusted ? "SendWorkspaceTrustState" : "SendWorkspaceTrustState", { isTrusted: vscode.workspace.isTrusted });
+        serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceTrustState, { isTrusted: vscode.workspace.isTrusted });
         fileTreeService.handleWorkspaceFilesRequest(serverIpc, false);
     });
 
@@ -11538,9 +11576,9 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     serverIpc.onClientMessage(ClientToServerChannel.RequestLastSelection, async () => {
         const lastSelection = await selectionService.getLastSelection();
         const autoAddState = selectionService.getAutoAddState();
-        serverIpc.sendToClient("ApplySelectionSet", { paths: lastSelection });
-        serverIpc.sendToClient("SendSelectionSets", { sets: selectionService.getSelectionSets() });
-        serverIpc.sendToClient("SendAutoAddState", { enabled: autoAddState });
+        serverIpc.sendToClient(ServerToClientChannel.ApplySelectionSet, { paths: lastSelection });
+        serverIpc.sendToClient(ServerToClientChannel.SendSelectionSets, { sets: selectionService.getSelectionSets() });
+        serverIpc.sendToClient(ServerToClientChannel.SendAutoAddState, { enabled: autoAddState });
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.SaveAutoAddState, (data) => selectionService.saveAutoAddState(data.enabled));
@@ -12610,7 +12648,10 @@ export function registerViews(context: vscode.ExtensionContext) {
                     webviewView.webview.html = getViewHtml({
                         webview: webviewView.webview,
                         nonce,
-                        scriptUri: webviewView.webview.asWebviewUri(vscode.Uri.joinPath(context.extensionUri, "dist", viewConfig.entry)).toString(),
+                            scriptUri: webviewView.webview.asWebviewUri(
+                                vscode.Uri.joinPath(context.extensionUri, "dist", viewConfig.entry)
+                            ).toString(),
+                            styleUri: webviewView.webview.asWebviewUri(vscode.Uri.joinPath(context.extensionUri, "dist", "sidebar.css")),
                     });
                     const serverIpc = ServerPostMessageManager.getInstance(
                         webviewView.webview.onDidReceiveMessage,
@@ -12637,10 +12678,10 @@ export const viewConfig = {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/on-message.ts">
-// Updated on: C114 (Refactor to use new services)
+// Updated on: C115 (Ensure file reflects correct service calls)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
-import { ClientToServerChannel } from "@/common/ipc/channels.enum";
+import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
 
 export function onMessage(serverIpc: ServerPostMessageManager) {
     const { loggerService, promptService, fileOperationService, highlightingService, historyService } = Services;
@@ -12660,12 +12701,12 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestLatestCycleData, async () => {
         const cycleData = await historyService.getLatestCycle();
-        serverIpc.sendToClient("SendLatestCycleData", { cycleData });
+        serverIpc.sendToClient(ServerToClientChannel.SendLatestCycleData, { cycleData });
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestCycleData, async (data) => {
         const cycleData = await historyService.getCycleData(data.cycleId);
-        serverIpc.sendToClient("SendCycleData", { cycleData });
+        serverIpc.sendToClient(ServerToClientChannel.SendCycleData, { cycleData });
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.SaveCycleData, (data) => {
@@ -12883,7 +12924,7 @@ export default TestPane3;
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
-/* Updated on: C112 (Overhaul code viewer styles, add resizable pane) */
+/* Updated on: C116 (Add styles for line numbers) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -13114,10 +13155,9 @@ body {
     overflow-y: auto;
 }
 
-/* Styles for Parsed View */
 .parsed-view-grid {
     display: flex;
-    gap: 0; /* Remove gap, divider will handle it */
+    gap: 0;
     flex-grow: 1;
     min-height: 0;
 }
@@ -13127,7 +13167,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    min-width: 150px; /* Minimum width before collapse */
+    min-width: 150px;
     padding-right: 8px;
 }
 
@@ -13165,11 +13205,13 @@ body {
     .file-path {
         font-weight: bold;
     }
+    .file-actions button {
+        margin-left: 8px;
+    }
     .metrics {
         color: var(--vscode-descriptionForeground);
     }
 }
-
 
 .file-content-viewer {
     flex-grow: 1;
@@ -13178,28 +13220,43 @@ body {
     border-radius: 4px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-    padding: 8px;
     overflow: auto;
     font-family: var(--vscode-editor-font-family);
     font-size: var(--vscode-editor-font-size);
+    display: flex; /* For line numbers */
+}
+
+.line-numbers {
+    padding: 8px 10px 8px 8px;
+    text-align: right;
+    color: var(--vscode-editorLineNumber-foreground);
+    user-select: none;
+    border-right: 1px solid var(--vscode-panel-border);
+    
+    span {
+        display: block;
+    }
+}
+
+.code-content {
+    padding: 8px;
+    flex-grow: 1;
     
     pre {
         margin: 0;
-        white-space: pre-wrap;
-        word-wrap: break-word;
+        white-space: pre; /* Use pre to respect all whitespace */
+        word-wrap: normal; /* Allow horizontal scrolling */
     }
 
     code {
         font-family: inherit;
         font-size: inherit;
     }
-
-    /* Fix for starry-night adding its own background */
+    
     pre.shiki, pre.shiki code {
         background-color: transparent !important;
     }
 }
-
 
 .associated-files-list {
     list-style: none;
@@ -13254,11 +13311,11 @@ body {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
-// Updated on: C112 (Implement resizable panes, reorder layout, add metric placeholders, fix rendering)
+// Updated on: C116 (Fix data loss, code rendering, resizer, and un-select)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscVm, VscSave } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -13274,6 +13331,32 @@ const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
         timeoutRef.current = setTimeout(() => callback(...args), delay);
     };
 };
+
+// C116: New component to handle code rendering with line numbers
+const CodeViewer: React.FC<{ htmlContent: string | undefined }> = ({ htmlContent }) => {
+    if (htmlContent === undefined) {
+        return <div>Select a file to view its content.</div>;
+    }
+    if (htmlContent.startsWith('<div>')) {
+        return <div dangerouslySetInnerHTML={{ __html: htmlContent }} />;
+    }
+
+    const lines = htmlContent.split('\n');
+    // Remove a trailing empty line if it exists, which can happen from splitting
+    if (lines[lines.length - 1] === '') {
+        lines.pop();
+    }
+
+    return (
+        <div className="file-content-viewer">
+            <div className="line-numbers">
+                {lines.map((_, i) => <span key={i}>{i + 1}</span>)}
+            </div>
+            <div className="code-content" dangerouslySetInnerHTML={{ __html: htmlContent }} />
+        </div>
+    );
+};
+
 
 interface TabState {
     rawContent: string;
@@ -13403,23 +13486,11 @@ const App = () => {
     const activeTabData = tabs[activeTab.toString()];
 
     const viewableContent = React.useMemo(() => {
-        if (!selectedFilePath || !activeTabData?.parsedContent) {
-            return '<div>Select a file to view its content.</div>';
-        }
+        if (!selectedFilePath || !activeTabData?.parsedContent) return undefined;
         const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath);
-        if (!file) {
-            logger.error(`[Content Display] Could not find file object for path: ${selectedFilePath}`);
-            return '<div>Error: File data not found in parsed response.</div>';
-        }
-        
+        if (!file) return '<div>Error: File data not found in parsed response.</div>';
         const id = `${file.path}::${file.content}`;
-        const highlightedHtml = highlightedCodeBlocks.get(id);
-
-        if (highlightedHtml) {
-            return highlightedHtml;
-        } else {
-            return `<pre><code>${file.content.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code></pre>`;
-        }
+        return highlightedCodeBlocks.get(id);
     }, [selectedFilePath, activeTabData?.parsedContent, highlightedCodeBlocks]);
 
 
@@ -13445,6 +13516,8 @@ const App = () => {
     const handleCycleChange = (e: React.MouseEvent, newCycle: number) => {
         e.stopPropagation();
         if (newCycle > 0 && newCycle <= maxCycle) {
+            // C116: Fix data loss by saving immediately before changing cycle
+            saveCurrentCycleState();
             setCurrentCycle(newCycle);
             clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle });
         }
@@ -13467,19 +13540,22 @@ const App = () => {
     };
 
     const handleMouseDown = (e: React.MouseEvent) => {
+        e.preventDefault();
         isResizing.current = true;
+        logger.log("Resizer mouse down.");
     };
 
     const handleMouseMove = React.useCallback((e: MouseEvent) => {
         if (!isResizing.current) return;
         const newWidth = (e.clientX / window.innerWidth) * 100;
-        if (newWidth > 10 && newWidth < 90) { // Set bounds
+        if (newWidth > 10 && newWidth < 90) {
             setLeftPaneWidth(newWidth);
         }
     }, []);
 
     const handleMouseUp = React.useCallback(() => {
         isResizing.current = false;
+        logger.log("Resizer mouse up.");
     }, []);
 
     React.useEffect(() => {
@@ -13553,7 +13629,7 @@ const App = () => {
                                                 <li 
                                                     key={file} 
                                                     className={selectedFilePath === file ? 'selected' : ''}
-                                                    onClick={() => setSelectedFilePath(file)}
+                                                    onClick={() => setSelectedFilePath(prev => prev === file ? null : file)}
                                                 >
                                                     {fileExistenceMap.get(file) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
                                                     <span>{file}</span>
@@ -13572,9 +13648,14 @@ const App = () => {
                                 <div className="parsed-view-right">
                                     <div className="file-content-viewer-header">
                                         <span className="file-path">{selectedFilePath || 'No file selected'}</span>
-                                        <span className="metrics">Original: 4.1K | New: 4.2K | Sim: 98%</span>
+                                        <div className="file-actions">
+                                            <span className="metrics">Original: 4.1K | New: 4.2K | Sim: 98%</span>
+                                            <button disabled title="Diff View">Diff</button>
+                                            <button disabled title="Swap with Workspace File"><VscVm /></button>
+                                            <button disabled title="Accept into Workspace"><VscSave /></button>
+                                        </div>
                                     </div>
-                                    <div className="file-content-viewer" dangerouslySetInnerHTML={{ __html: viewableContent }} />
+                                    <CodeViewer htmlContent={viewableContent} />
                                 </div>
                             </div>
                         )}
@@ -13591,32 +13672,32 @@ root.render(<App />);
 
 <file path="src/common/ipc/channels.enum.ts">
 export enum ClientToServerChannel {
-    RequestInitialData = "clientToServer.requestInitialData", // New
+    RequestInitialData = "clientToServer.requestInitialData",
     RequestFlattenContext = "clientToServer.requestFlattenContext",
     RequestWorkspaceFiles = "clientToServer.requestWorkspaceFiles",
-    LogMessage = "clientToServer.logMessage", // For logging from webview
+    LogMessage = "clientToServer.logMessage",
 
     // File Operations
     RequestNewFile = "clientToServer.requestNewFile",
     RequestNewFolder = "clientToServer.requestNewFolder",
     RequestFileRename = "clientToServer.requestFileRename",
     RequestFileDelete = "clientToServer.requestFileDelete",
-    RequestBatchFileDelete = "clientToServer.requestBatchFileDelete", // New
+    RequestBatchFileDelete = "clientToServer.requestBatchFileDelete",
     RequestRevealInExplorer = "clientToServer.requestRevealInExplorer",
     RequestCopyPath = "clientToServer.requestCopyPath",
     RequestOpenFile = "clientToServer.requestOpenFile",
     RequestMoveFile = "clientToServer.requestMoveFile",
-    RequestCopyFile = "clientToServer.requestCopyFile", // New
+    RequestCopyFile = "clientToServer.requestCopyFile",
     RequestUndo = "clientToServer.requestUndo",
     RequestRedo = "clientToServer.requestRedo",
-    RequestAddFileFromBuffer = "clientToServer.requestAddFileFromBuffer", // For OS drag-drop
-    RequestCopyFileFromUri = "clientToServer.requestCopyFileFromUri", // For VS Code explorer drag-drop
-    RequestFileContent = "clientToServer.requestFileContent", // For diffing
+    RequestAddFileFromBuffer = "clientToServer.requestAddFileFromBuffer",
+    RequestCopyFileFromUri = "clientToServer.requestCopyFileFromUri",
+    RequestFileContent = "clientToServer.requestFileContent",
 
     // Special File Handling
     RequestPdfToText = "clientToServer.requestPdfToText",
     RequestExcelToText = "clientToServer.requestExcelToText",
-    RequestWordToText = "clientToServer.requestWordToText", // New
+    RequestWordToText = "clientToServer.requestWordToText",
 
     // Selection Persistence
     SaveCurrentSelection = "clientToServer.saveCurrentSelection",
@@ -13630,28 +13711,28 @@ export enum ClientToServerChannel {
     RequestCreatePromptFile = "clientToServer.requestCreatePromptFile",
     RequestFileExistence = "clientToServer.requestFileExistence",
     RequestSyntaxHighlight = "clientToServer.requestSyntaxHighlight",
-    RequestLatestCycleData = "clientToServer.requestLatestCycleData", // New
+    RequestLatestCycleData = "clientToServer.requestLatestCycleData",
     RequestCycleData = "clientToServer.requestCycleData",
     SaveCycleData = "clientToServer.saveCycleData",
 }
 
 export enum ServerToClientChannel {
     SendWorkspaceFiles = "serverToClient.sendWorkspaceFiles",
-    SendWorkspaceTrustState = "serverToClient.sendWorkspaceTrustState", // New
+    SendWorkspaceTrustState = "serverToClient.sendWorkspaceTrustState",
     ApplySelectionSet = "serverToClient.applySelectionSet",
     SendSelectionSets = "serverToClient.sendSelectionSets",
-    ForceRefresh = "serverToClient.forceRefresh", // Backend tells frontend to refresh
-    SetActiveFile = "serverToClient.setActiveFile", // For active file sync
-    FocusFile = "serverToClient.focusFile", // For auto-revealing a specific file
+    ForceRefresh = "serverToClient.forceRefresh",
+    SetActiveFile = "serverToClient.setActiveFile",
+    FocusFile = "serverToClient.focusFile",
     SendAutoAddState = "serverToClient.sendAutoAddState",
     UpdateProblemCounts = "serverToClient.updateProblemCounts",
-    UpdateNodeStats = "serverToClient.updateNodeStats", // For updating PDF token counts
-    SendFileContent = "serverToClient.sendFileContent", // For diffing
+    UpdateNodeStats = "serverToClient.updateNodeStats",
+    SendFileContent = "serverToClient.sendFileContent",
     
     // Phase 2: PCPP
     SendFileExistence = "serverToClient.sendFileExistence",
     SendSyntaxHighlight = "serverToClient.sendSyntaxHighlight",
-    SendLatestCycleData = "serverToClient.sendLatestCycleData", // New
+    SendLatestCycleData = "serverToClient.sendLatestCycleData",
     SendCycleData = "serverToClient.sendCycleData",
 }
 </file>
@@ -13955,13 +14036,14 @@ export function formatBytes(bytes: number, decimals: number = 1): string {
 <file path="src/common/utils/view-html.ts">
 import * as vscode from "vscode";
 
-export function getViewHtml({ webview, nonce, scriptUri }: { webview: vscode.Webview; nonce: string; scriptUri: string; }): string {
+export function getViewHtml({ webview, nonce, scriptUri, styleUri }: { webview: vscode.Webview; nonce: string; scriptUri: string; styleUri: vscode.Uri; }): string {
     return `<!DOCTYPE html>
         <html lang="en">
         <head>
             <meta charset="UTF-8">
-            <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource} 'unsafe-inline'; script-src 'nonce-${nonce}';">
+            <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource}; script-src 'nonce-${nonce}';">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link href="${styleUri}" rel="stylesheet">
         </head>
         <body>
             <div id="root"></div>
@@ -14026,8 +14108,14 @@ function createOrShowParallelCopilotPanel(context: vscode.ExtensionContext) {
     );
     
     const scriptUri = parallelCopilotPanel.webview.asWebviewUri(vscode.Uri.joinPath(context.extensionUri, "dist", "parallelCopilotView.js")).toString();
+    const styleUri = parallelCopilotPanel.webview.asWebviewUri(vscode.Uri.joinPath(context.extensionUri, "dist", "parallelCopilotView.css"));
     const nonce = getNonce();
-    parallelCopilotPanel.webview.html = getViewHtml({ webview: parallelCopilotPanel.webview, nonce, scriptUri });
+    parallelCopilotPanel.webview.html = getViewHtml({
+ webview: parallelCopilotPanel.webview,
+ nonce,
+ scriptUri,
+ styleUri
+ });
     
     const serverIpc = ServerPostMessageManager.getInstance(
         parallelCopilotPanel.webview.onDidReceiveMessage,
@@ -20935,7 +21023,7 @@ const webpack = require('webpack');
 
 /** @type {import('webpack').Configuration} */
 const baseConfig = {
-    mode: 'none', // this leaves the source code as close as possible to the original (when packaging we set this to 'production')
+    mode: 'none',
     resolve: {
         extensions: ['.ts', '.js', '.tsx', '.jsx'],
         alias: {
@@ -21009,7 +21097,11 @@ const webviewConfig = {
     },
     plugins: [
         new CopyPlugin({
-            patterns: [{ from: "public", to: "public" }],
+            patterns: [
+                { from: "public", to: "public" },
+                // C116: Copy starry-night CSS to dist
+                { from: "node_modules/@wooorm/starry-night/style/both.css", to: "style/starry-night.css" }
+            ],
         }),
         new webpack.ProvidePlugin({
             process: 'process/browser',
