@@ -1,25 +1,25 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-23T13:55:18.836Z
+  Date Generated: 2025-08-23T15:22:05.842Z
   ---
-  Total Files: 210
-  Total Lines: 17859
-  Total Characters: 831977
-  Approx. Tokens: 208074
+  Total Files: 212
+  Total Lines: 19746
+  Total Characters: 939624
+  Approx. Tokens: 234986
 -->
 
 <!-- Top 10 Files by Token Count -->
-1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
-2. src\backend\services\fs.service.ts (9927 tokens)
-3. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
-4. src\client\views\context-chooser.view\view.tsx (5562 tokens)
-5. src\Artifacts\A0. DCE Master Artifact List.md (4615 tokens)
-6. src\client\components\tree-view\TreeView.tsx (4508 tokens)
-7. src\client\views\parallel-copilot.view\view.tsx (4144 tokens)
-8. src\backend\services\flattener.service.ts (3685 tokens)
-9. src\client\views\context-chooser.view\view.scss (3638 tokens)
-10. src\backend\services\prompt.service.ts (3481 tokens)
+1. src\Artifacts\A54. starry-night-readme.md (25577 tokens)
+2. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
+3. src\backend\services\fs.service.ts (9852 tokens)
+4. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
+5. src\client\views\context-chooser.view\view.tsx (5562 tokens)
+6. src\Artifacts\A0. DCE Master Artifact List.md (4698 tokens)
+7. src\client\components\tree-view\TreeView.tsx (4508 tokens)
+8. src\client\views\parallel-copilot.view\view.tsx (4315 tokens)
+9. src\backend\services\flattener.service.ts (3685 tokens)
+10. src\client\views\context-chooser.view\view.scss (3638 tokens)
 
 <!-- Full File List -->
 1. .gitignore - Lines: 10 - Chars: 128 - Tokens: 32
@@ -29,7 +29,7 @@
 5. package.json - Lines: 138 - Chars: 4543 - Tokens: 1136
 6. public\copilot.svg - Lines: 5 - Chars: 445 - Tokens: 112
 7. public\spiral.svg - Lines: 8 - Chars: 459 - Tokens: 115
-8. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 250 - Chars: 18458 - Tokens: 4615
+8. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 254 - Chars: 18792 - Tokens: 4698
 9. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 10. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
 11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 147 - Chars: 13550 - Tokens: 3388
@@ -60,7 +60,7 @@
 36. src\Artifacts\A32. DCE - Phase 1 - Excel and CSV Handling Strategy.md - Lines: 44 - Chars: 4295 - Tokens: 1074
 37. src\Artifacts\A33. DCE - Phase 1 - Copy-Paste Feature Plan.md - Lines: 42 - Chars: 4456 - Tokens: 1114
 38. src\Artifacts\A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements.md - Lines: 44 - Chars: 6403 - Tokens: 1601
-39. src\Artifacts\A35. DCE - Phase 2 - UI Mockups and Flow.md - Lines: 73 - Chars: 4758 - Tokens: 1190
+39. src\Artifacts\A35. DCE - Phase 2 - UI Mockups and Flow.md - Lines: 72 - Chars: 4665 - Tokens: 1167
 40. src\Artifacts\A36. DCE - Phase 2 - Technical Implementation Plan.md - Lines: 77 - Chars: 4173 - Tokens: 1044
 41. src\Artifacts\A37. DCE - Phase 2 - Cycle Navigator & Knowledge Graph - Vision.md - Lines: 28 - Chars: 3242 - Tokens: 811
 42. src\Artifacts\A38. DCE - Phase 2 - Cycle Navigator - UI Mockup.md - Lines: 69 - Chars: 4621 - Tokens: 1156
@@ -80,158 +80,160 @@
 56. src\Artifacts\A48. DCE - Phase 2 - Advanced Syntax Highlighting Plan.md - Lines: 49 - Chars: 4044 - Tokens: 1011
 57. src\Artifacts\A49. DCE - Phase 2 - File Association & Diffing Plan.md - Lines: 36 - Chars: 3857 - Tokens: 965
 58. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
-59. src\Artifacts\A50. DCE - Phase 2 - UI Component Plan (Resizable Panes & Inner Editors).md - Lines: 48 - Chars: 4790 - Tokens: 1198
+59. src\Artifacts\A50. DCE - Phase 2 - UI Component Plan (Resizable Panes & Inner Editors).md - Lines: 51 - Chars: 5128 - Tokens: 1282
 60. src\Artifacts\A51. DCE - A-B-C Testing Strategy for UI Bugs.md - Lines: 81 - Chars: 5490 - Tokens: 1373
 61. src\Artifacts\A52. DCE - Interaction Schema Refinement.md - Lines: 60 - Chars: 3560 - Tokens: 890
-62. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
-63. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
-64. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
-65. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
-66. src\backend\commands\commands.ts - Lines: 98 - Chars: 4333 - Tokens: 1084
-67. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
-68. src\backend\services\action.service.ts - Lines: 73 - Chars: 2471 - Tokens: 618
-69. src\backend\services\flattener.service.ts - Lines: 327 - Chars: 14740 - Tokens: 3685
-70. src\backend\services\fs.service.ts - Lines: 825 - Chars: 39706 - Tokens: 9927
-71. src\backend\services\history.service.ts - Lines: 103 - Chars: 3981 - Tokens: 996
-72. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-73. src\backend\services\prompt.service.ts - Lines: 113 - Chars: 13923 - Tokens: 3481
-74. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
-75. src\backend\services\services.ts - Lines: 29 - Chars: 1294 - Tokens: 324
-76. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
-77. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
-78. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
-79. src\client\components\DiffViewer.tsx - Lines: 60 - Chars: 2549 - Tokens: 638
-80. src\client\components\file-tree\FileTree.tsx - Lines: 262 - Chars: 11897 - Tokens: 2975
-81. src\client\components\file-tree\FileTree.utils.ts - Lines: 189 - Chars: 7284 - Tokens: 1821
-82. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13099 - Tokens: 3275
-83. src\client\components\tree-view\TreeView.tsx - Lines: 394 - Chars: 18029 - Tokens: 4508
-84. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
-85. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
-86. src\client\utils\response-parser.ts - Lines: 76 - Chars: 3189 - Tokens: 798
-87. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-88. src\client\views\context-chooser.view\on-message.ts - Lines: 143 - Chars: 6146 - Tokens: 1537
-89. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
-90. src\client\views\context-chooser.view\view.tsx - Lines: 435 - Chars: 22245 - Tokens: 5562
-91. src\client\views\index.ts - Lines: 35 - Chars: 1714 - Tokens: 429
-92. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-93. src\client\views\parallel-copilot.view\on-message.ts - Lines: 41 - Chars: 2019 - Tokens: 505
-94. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 43 - Chars: 1890 - Tokens: 473
-95. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
-96. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
-97. src\client\views\parallel-copilot.view\view.scss - Lines: 368 - Chars: 8020 - Tokens: 2005
-98. src\client\views\parallel-copilot.view\view.tsx - Lines: 319 - Chars: 16574 - Tokens: 4144
-99. src\common\ipc\channels.enum.ts - Lines: 64 - Chars: 3422 - Tokens: 856
-100. src\common\ipc\channels.type.ts - Lines: 57 - Chars: 4453 - Tokens: 1114
-101. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
-102. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-103. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-104. src\common\types\file-node.ts - Lines: 16 - Chars: 567 - Tokens: 142
-105. src\common\types\pcpp.types.ts - Lines: 13 - Chars: 357 - Tokens: 90
-106. src\common\types\vscode-webview.d.ts - Lines: 13 - Chars: 357 - Tokens: 90
-107. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
-108. src\common\utils\view-html.ts - Lines: 26 - Chars: 971 - Tokens: 243
-109. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
-110. src\extension.ts - Lines: 159 - Chars: 6869 - Tokens: 1718
-111. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
-112. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
-113. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
-114. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
-115. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
-116. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
-117. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
-118. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
-119. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
-120. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
-121. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
-122. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
-123. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
-124. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
-125. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
-126. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
-127. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
-128. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
-129. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
-130. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
-131. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
-132. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
-133. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
-134. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
-135. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
-136. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
-137. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
-138. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
-139. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
-140. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
-141. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
-142. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
-143. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
-144. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
-145. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
-146. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
-147. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
-148. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
-149. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
-150. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
-151. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
-152. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
-153. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
-154. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
-155. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
-156. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
-157. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
-158. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
-159. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
-160. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
-161. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
-162. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
-163. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
-164. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
-165. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
-166. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
-167. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
-168. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
-169. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
-170. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
-171. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
-172. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
-173. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
-174. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
-175. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
-176. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
-177. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
-178. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-179. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
-180. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
-181. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
-182. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-183. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
-184. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
-185. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
-186. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-187. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
-188. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
-189. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
-190. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
-191. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
-192. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
-193. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
-194. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-195. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
-196. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
-197. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
-198. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
-199. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
-200. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
-201. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
-202. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
-203. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
-204. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
-205. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
-206. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
-207. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
-208. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
-209. tsconfig.json - Lines: 19 - Chars: 457 - Tokens: 115
-210. webpack.config.js - Lines: 90 - Chars: 2440 - Tokens: 610
+62. src\Artifacts\A53. DCE - Phase 2 - Token Count and Similarity Analysis.md - Lines: 50 - Chars: 3971 - Tokens: 993
+63. src\Artifacts\A54. starry-night-readme.md - Lines: 1824 - Chars: 102305 - Tokens: 25577
+64. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
+65. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
+66. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
+67. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
+68. src\backend\commands\commands.ts - Lines: 98 - Chars: 4333 - Tokens: 1084
+69. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
+70. src\backend\services\action.service.ts - Lines: 73 - Chars: 2471 - Tokens: 618
+71. src\backend\services\flattener.service.ts - Lines: 327 - Chars: 14740 - Tokens: 3685
+72. src\backend\services\fs.service.ts - Lines: 810 - Chars: 39407 - Tokens: 9852
+73. src\backend\services\history.service.ts - Lines: 103 - Chars: 3981 - Tokens: 996
+74. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
+75. src\backend\services\prompt.service.ts - Lines: 113 - Chars: 13923 - Tokens: 3481
+76. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
+77. src\backend\services\services.ts - Lines: 29 - Chars: 1294 - Tokens: 324
+78. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
+79. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
+80. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
+81. src\client\components\DiffViewer.tsx - Lines: 60 - Chars: 2549 - Tokens: 638
+82. src\client\components\file-tree\FileTree.tsx - Lines: 262 - Chars: 11897 - Tokens: 2975
+83. src\client\components\file-tree\FileTree.utils.ts - Lines: 189 - Chars: 7284 - Tokens: 1821
+84. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13099 - Tokens: 3275
+85. src\client\components\tree-view\TreeView.tsx - Lines: 394 - Chars: 18029 - Tokens: 4508
+86. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
+87. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
+88. src\client\utils\response-parser.ts - Lines: 84 - Chars: 3342 - Tokens: 836
+89. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
+90. src\client\views\context-chooser.view\on-message.ts - Lines: 143 - Chars: 6146 - Tokens: 1537
+91. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
+92. src\client\views\context-chooser.view\view.tsx - Lines: 435 - Chars: 22245 - Tokens: 5562
+93. src\client\views\index.ts - Lines: 35 - Chars: 1714 - Tokens: 429
+94. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
+95. src\client\views\parallel-copilot.view\on-message.ts - Lines: 41 - Chars: 2019 - Tokens: 505
+96. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 43 - Chars: 1890 - Tokens: 473
+97. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
+98. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
+99. src\client\views\parallel-copilot.view\view.scss - Lines: 368 - Chars: 8253 - Tokens: 2064
+100. src\client\views\parallel-copilot.view\view.tsx - Lines: 333 - Chars: 17258 - Tokens: 4315
+101. src\common\ipc\channels.enum.ts - Lines: 64 - Chars: 3422 - Tokens: 856
+102. src\common\ipc\channels.type.ts - Lines: 57 - Chars: 4453 - Tokens: 1114
+103. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
+104. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+105. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
+106. src\common\types\file-node.ts - Lines: 16 - Chars: 567 - Tokens: 142
+107. src\common\types\pcpp.types.ts - Lines: 13 - Chars: 357 - Tokens: 90
+108. src\common\types\vscode-webview.d.ts - Lines: 13 - Chars: 357 - Tokens: 90
+109. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
+110. src\common\utils\view-html.ts - Lines: 26 - Chars: 971 - Tokens: 243
+111. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
+112. src\extension.ts - Lines: 159 - Chars: 6869 - Tokens: 1718
+113. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
+114. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
+115. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
+116. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
+117. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
+118. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
+119. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
+120. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
+121. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
+122. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
+123. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
+124. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
+125. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
+126. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
+127. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
+128. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
+129. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
+130. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
+131. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
+132. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
+133. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
+134. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
+135. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
+136. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
+137. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
+138. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
+139. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
+140. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
+141. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
+142. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
+143. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
+144. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
+145. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
+146. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
+147. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
+148. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
+149. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
+150. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
+151. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
+152. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
+153. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
+154. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
+155. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
+156. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
+157. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
+158. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
+159. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
+160. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
+161. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
+162. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
+163. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
+164. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
+165. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
+166. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
+167. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
+168. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
+169. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
+170. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
+171. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
+172. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
+173. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
+174. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
+175. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
+176. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
+177. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
+178. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
+179. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
+180. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+181. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
+182. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
+183. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
+184. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+185. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
+186. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
+187. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
+188. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+189. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
+190. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
+191. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
+192. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
+193. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
+194. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
+195. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
+196. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+197. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
+198. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
+199. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
+200. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
+201. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
+202. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
+203. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
+204. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
+205. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
+206. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
+207. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
+208. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
+209. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
+210. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
+211. tsconfig.json - Lines: 19 - Chars: 478 - Tokens: 120
+212. webpack.config.js - Lines: 90 - Chars: 2440 - Tokens: 610
 
 <file path=".gitignore">
 node_modules
@@ -636,7 +638,7 @@ SOFTWARE.
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C110 (Add A52 for Interaction Schema Refinement)
+# Updated on: C111 (Add A53 for Token Count & Similarity Analysis)
 
 ## 1. Purpose
 
@@ -873,6 +875,10 @@ SOFTWARE.
 ### A52. DCE - Interaction Schema Refinement
 - **Description:** Proposes a set of refined rules for the AI's output format to improve the reliability and consistency of automated parsing within the Parallel Co-Pilot Panel.
 - **Tags:** documentation, process, parsing, interaction schema, roadmap
+
+### A53. DCE - Phase 2 - Token Count and Similarity Analysis
+- **Description:** Details the plan to implement token counting for raw and parsed responses, and to calculate a similarity score between AI-generated files and their workspace originals.
+- **Tags:** feature plan, phase 2, token count, similarity, metrics, ui, ux
 
 ## II. Standalone Utilities & Guides
 
@@ -2726,7 +2732,7 @@ The goal of the **Parallel Co-Pilot Panel** is to create an integrated, **persis
 # Artifact A35: DCE - Phase 2 - UI Mockups and Flow
 # Date Created: C69
 # Author: AI Model
-# Updated on: C99 (Add auto-diff for first file)
+# Updated on: C112 (Reorder left pane, add token/similarity metrics)
 
 ## 1. Overview
 
@@ -2736,13 +2742,12 @@ This document describes the user interface (UI) and interaction flow for the Par
 
 ### 2.1. Main Header
 
-The main header is now a single row containing all primary actions.
+The main header is a single row containing all primary actions.
 
 ```
 +-------------------------------------------------------------------------------------------------+
 | [Parallel Co-Pilot] [ Gen prompt.md ] [ Parse All ] [ Settings ]   [ Number of Responses: [ 4 ] ] |
-|-------------------------------------------------------------------------------------------------|
-```
+|-------------------------------------------------------------------------------------------------|```
 
 ### 2.2. Cycle & Context Section
 
@@ -2764,38 +2769,38 @@ This section has two states: expanded (default) and collapsed.
 ```
 | [>] Cycle & Context         [ < ] [ C98 ] [ > ]                                     |
 ```
-*   When collapsed, the header bar itself contains the essential navigation controls, allowing the user to change cycles without expanding the full section.
 
 ### 2.3. Parsed View
 
-The two-pane layout for the parsed view remains the same.
+The parsed view uses a **resizable two-pane layout**. The left pane provides summary information and navigation, while the right pane displays the detailed code content.
 
 ```
 |-------------------------------------------------------------------------------------------------|
 | [ Response 1 (active) ] [ Response 2 ] [ ... ]                                                |
 |-------------------------------------------------------------------------------------------------|
-| [ Left Pane (File List & Summary) ] | [ Right Pane (Diff Viewer / Content) ]                    |
-| |-----------------------------------| |-------------------------------------------------------| |
-| | [v] SUMMARY & PLAN                | | [ Diff for: src/client/views/view.tsx ]               | |
-| | | Rendered Markdown...            | | +---------------------------------------------------+ | |
-| |                                   | | | [ DiffViewer Component showing changes... ]       | | |
-| | [v] ASSOCIATED FILES (Clickable)  | | +---------------------------------------------------+ | |
-| | |-------------------------------| |                                                       | |
-| | | [✓] src/client/views/view.tsx | |                                                       | |
-| | | [✗] src/client/new-file.ts    | |                                                       | |
-| |                                   | |                                                       | |
-+-------------------------------------------------------------------------------------------------+```
+| [ Left Pane ]<--->[ Right Pane (Code Viewer) ]                                                 |
+| |-------------||------------------------------------------------------------------------------| |
+| | [v] ASSOCIATED FILES (Clickable)  | | [ File: src/.../view.tsx ] [ Original: 4.1K | New: 4.2K | Sim: 98% ] | |
+| | |-------------------------------| | +------------------------------------------------------------------+ | |
+| | | [✓] src/.../view.tsx (selected)| | | [ Read-only editor with line numbers and syntax highlighting ] | | |
+| | | [✗] src/.../new-file.ts       | | |                                                                  | | |
+| |                                   | | +------------------------------------------------------------------+ | |
+| | [v] THOUGHTS / RESPONSE           | |                                                                    | |
+| | | Rendered Markdown...            | |                                                                    | |
+| |                                   | |                                                                    | |
+| | [v] COURSE OF ACTION              | |                                                                    | |
+| | | Rendered Markdown...            | |                                                                    | |
++-------------------------------------------------------------------------------------------------+
+```
+*   **Resizable Divider (`<--->`):** The user can click and drag the divider to resize the left and right panes.
+*   **Reordered Left Pane (C112):** The "Associated Files" list is now the first item in the left pane for better information hierarchy.
+*   **Token/Similarity Metrics (C112):** The right pane's header now displays the token counts for the original and new file versions, along with a similarity score.
 
 ## 3. User Interaction Flow
 
 1.  **Load & Parse:** User loads the panel and clicks "Parse All". The UI transforms into the two-pane layout.
-2.  **Auto-Diff (C99 Update):** The extension immediately finds the **first file** in the "Associated Files" list that exists in the workspace. It automatically fetches its content and displays a diff for that file in the right-hand pane. This provides an immediate, useful view without requiring a click.
-3.  **Manual Diff Selection:** The user can then click on any other file with a `✓` in the "Associated Files" list (left pane).
-    *   **Action:** The frontend sends a `RequestFileContent` message to the backend with the new file's path.
-    *   The backend reads the file from the workspace and sends its content back via `SendFileContent`.
-    *   The frontend receives the original content. It already has the AI's proposed content from the parsed response.
-    *   **UI Update:** The `DiffViewer` component in the **right pane** updates to show a comparison of the newly selected file.
-4.  **Navigate While Collapsed:** The user collapses the "Cycle & Context" section. They can still click the `<` and `>` buttons in the header to load previous/next cycles without re-expanding the panel.
+2.  **Select File:** The user clicks on a file in the "Associated Files" list (left pane).
+3.  **Display Content:** The **right pane** updates. Its header shows the file path and placeholder metrics. The code viewer displays the syntax-highlighted content of the newly selected file.
 </file>
 
 <file path="src/Artifacts/A36. DCE - Phase 2 - Technical Implementation Plan.md">
@@ -4054,6 +4059,7 @@ DCE/
 # Artifact A50: DCE - Phase 2 - UI Component Plan (Resizable Panes & Inner Editors)
 # Date Created: C87
 # Author: AI Model
+# Updated on: C112 (Prioritize resizable panes implementation)
 
 - **Key/Value for A0:**
 - **Description:** Documents the plan for advanced UI components like resizable panes and nested, scrollable editors within the Parallel Co-Pilot panel.
@@ -4061,31 +4067,33 @@ DCE/
 
 ## 1. Overview & Goal
 
-As the Parallel Co-Pilot Panel (PCPP) becomes more feature-rich, its UI needs to be flexible and efficient. This document outlines the plan for two advanced UI components requested in Cycle 87: a resizable pane for the diff/editor view and a system of nested, scrollable "inner editors" for individual file blocks within a response. The goal is to create a highly readable and customizable interface that prevents "endless scrolling" and allows users to focus on the information that matters most to them.
+As the Parallel Co-Pilot Panel (PCPP) becomes more feature-rich, its UI needs to be flexible and efficient. This document outlines the plan for two advanced UI components: a **resizable pane** for the summary/code view and a system of **nested, scrollable "inner editors"** for individual file blocks within a response. The goal is to create a highly readable and customizable interface that prevents "endless scrolling" and allows users to focus on the information that matters most to them.
 
 ## 2. User Stories
 
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
-| P2-UI-01 | **Resizable Editor Panes** | As a developer, I want to be able to drag the vertical divider between the raw text input and the syntax-highlighted preview, so I can give more space to the view that is most important for my current task. | - A draggable handle exists on the vertical divider between the two editor panes. <br> - Clicking and dragging the handle adjusts the relative width of the two panes. <br> - The layout is responsive and does not break during resizing. |
+| P2-UI-01 | **Resizable Panes** | As a developer, I want to be able to drag the vertical divider between the summary/file list pane and the code viewer pane, so I can give more space to the view that is most important for my current task. | - A draggable handle exists on the vertical divider between the two main panes in the parsed view. <br> - Clicking and dragging the handle adjusts the relative width of the two panes. <br> - The layout is responsive and does not break during resizing. <br> - The left pane should be collapsible. |
 | P2-UI-02 | **Contained File Editors** | As a developer, when viewing a large AI response with multiple files, I want each file's code to be contained within its own fixed-height, scrollable text area, so I can quickly scroll past entire files without having to scroll through all of their content. | - The extension parses the AI response and identifies individual file blocks (e.g., content within `<file>` tags). <br> - Each file block is rendered inside its own container with a fixed `max-height` and `overflow-y: auto`. <br> - This allows the user to scroll through the list of files quickly, only scrolling within a specific file's content when needed. |
 | P2-UI-03 | **File-Level Action Buttons** | As a developer, I want action buttons (like "Accept", "Diff", "Comment") to be associated with each individual file block within a response, so I can act on a single file at a time. | - In the "inner editor" view, each file container has its own set of action buttons. <br> - Clicking "Accept" on one file block only affects that specific file, not the entire response. |
 
-## 3. Technical Implementation Plan (High-Level)
+## 3. Technical Implementation Plan
 
-These features represent a significant refactor of the PCPP's rendering logic and will be implemented after the core persistence and diffing functionality is stable.
+### 3.1. Resizable Panes (Priority for C112)
 
-### 3.1. Resizable Panes
+-   **Strategy:** Implement a custom, lightweight resizable pane component directly within `view.tsx`.
+-   **Component Logic:**
+    *   The main `.parsed-view-grid` will be the flex container.
+    *   A new `div` element with a `.resizer` class will be added between the left and right panes to act as the draggable handle.
+    *   **State:** A new state variable, `const [leftPaneWidth, setLeftPaneWidth] = useState(33);`, will manage the width of the left pane as a percentage.
+    *   **Event Handling:**
+        *   The resizer `div` will have an `onMouseDown` handler.
+        *   This handler will attach `onMouseMove` and `onMouseUp` listeners to the `window`.
+        *   The `onMouseMove` handler will calculate the new percentage width based on `event.clientX` and update the `leftPaneWidth` state, respecting min/max width constraints.
+        *   The `onMouseUp` handler will remove the `mousemove` and `mouseup` listeners from the window.
+-   **Integration:** The `style` attribute of the left pane will be bound to this state (e.g., `flex-basis: `${leftPaneWidth}%`).
 
--   **Strategy:** Implement a custom React component or use a lightweight third-party library for creating resizable split panes.
--   **Component (`ResizablePanes.tsx`):**
-    -   Will accept two children (the left and right panes).
-    -   Will render a `div` as a draggable handle between them.
-    -   Will use `onMouseDown`, `onMouseMove`, and `onMouseUp` events on the handle to track the drag gesture and calculate the new flex-basis or width for the panes.
-    -   The component will manage its own internal state for the pane sizes.
--   **Integration:** In `parallel-copilot.view/view.tsx`, the `<textarea>` and the `HighlightedCodeViewer` will be wrapped in this new `ResizablePanes` component.
-
-### 3.2. Inner Editors / Contained File Blocks
+### 3.2. Inner Editors / Contained File Blocks (Future Cycle)
 
 -   **Strategy:** This requires a significant change to how the response content is rendered. Instead of treating the response as a single block of text to be rendered as Markdown, it must be parsed into a structured array of objects.
 -   **Parsing Logic (`view.tsx`):**
@@ -4246,6 +4254,1886 @@ By enforcing this stricter contract on the AI's output, we significantly reduce 
 *   **Increased Reliability:** Parsing is less likely to fail on subtle format changes.
 *   **Improved Maintainability:** The parser code becomes simpler and easier to understand.
 *   **Predictable Behavior:** The PCPP's features will behave more consistently across all responses.
+</file>
+
+<file path="src/Artifacts/A53. DCE - Phase 2 - Token Count and Similarity Analysis.md">
+# Artifact A53: DCE - Phase 2 - Token Count and Similarity Analysis
+# Date Created: C112
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** Details the plan to implement token counting for raw and parsed responses, and to calculate a similarity score between AI-generated files and their workspace originals.
+- **Tags:** feature plan, phase 2, token count, similarity, metrics, ui, ux
+
+## 1. Overview & Goal
+
+To enhance the curator's decision-making process, the Parallel Co-Pilot Panel (PCPP) must provide quantitative metrics about the AI's responses. The goal of this feature is to display token counts for various pieces of content and a similarity score to gauge the extent of changes proposed by the AI. This allows the user to quickly assess response verbosity, parser effectiveness, and the magnitude of code modifications.
+
+## 2. User Stories
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| P2-MET-01 | **Raw Response Token Count** | As a user, I want to see the total token count of the raw AI response I've pasted, so I can understand the overall size of the output. | - A token count is displayed for the raw content in each response tab. <br> - This count updates in real-time as I type or paste content. |
+| P2-MET-02 | **Parsed vs. Original Token Count** | As a user, when viewing a parsed file, I want to see a comparison of the token count between the original workspace file and the AI's new version, so I can quickly see if the code is growing or shrinking. | - In the header of the code viewer pane, the token counts for both the original and new versions of the selected file are displayed (e.g., "Original: 4.1K | New: 4.2K"). |
+| P2-MET-03 | **File Similarity Score** | As a user, along with the token counts, I want to see a percentage-based similarity score, so I can gauge how substantially the AI has altered the file. | - A similarity score (e.g., "Sim: 98%") is displayed in the code viewer header. <br> - A score of 100% indicates identical files. <br> - A low score indicates a major rewrite. |
+
+## 3. Technical Implementation Plan
+
+### Phase 1: UI Placeholders (Current Cycle)
+
+1.  **`parallel-copilot.view/view.tsx`:**
+    *   Add placeholder elements in the UI to display the token counts and similarity score.
+    *   Raw response token count: Calculate and display this on the frontend via `rawContent.length / 4`.
+    *   Parsed file metrics: Display static placeholder text in the code viewer header.
+
+### Phase 2: Backend Logic & Integration (Future Cycle)
+
+1.  **New IPC Channel:**
+    *   Create `ClientToServerChannel.RequestFileComparison`.
+    *   Payload: `{ filePath: string; modifiedContent: string; }`.
+    *   Response channel: `ServerToClientChannel.SendFileComparison`.
+    *   Payload: `{ originalTokens: number; modifiedTokens: number; similarity: number; }`.
+
+2.  **Backend (`fs.service.ts`):**
+    *   Implement `handleFileComparisonRequest`.
+    *   It will read the content of the original `filePath` from the workspace.
+    *   It will calculate the token count for the original content.
+    *   It will calculate the token count for the `modifiedContent` received in the payload.
+    *   It will compute a similarity score. A simple and effective algorithm for this is the **Sørensen-Dice coefficient** on sets of n-grams (e.g., 2-grams) from each string.
+    *   It will send the results back to the client via `SendFileComparison`.
+
+3.  **Frontend (`parallel-copilot.view/view.tsx`):**
+    *   When a file is selected for viewing (`setSelectedFilePath`), send the `RequestFileComparison` message.
+    *   Create new state variables to hold the comparison results: `const [comparisonMetrics, setComparisonMetrics] = useState(null);`.
+    *   The message handler for `SendFileComparison` will update this state.
+    *   The UI will be updated to render the live data from the `comparisonMetrics` state instead of the placeholders.
+</file>
+
+<file path="src/Artifacts/A54. starry-night-readme.md">
+[![](media/cover-dark.jpg)](https://artsandculture.google.com/asset/the-starry-night/bgEuwDxel93-Pg#gh-dark-mode-only)
+[![](media/cover-light.jpg#gh-dark-mode-only)](https://artsandculture.google.com/asset/the-starry-night/bgEuwDxel93-Pg#gh-light-mode-only)
+
+<p align="center">Close up of <b>The Starry Night</b> by Vincent van Gogh (1889)<br>with examples of <code>starry-night</code> over it</p>
+
+<br>
+
+# starry-night
+
+[![Build][badge-build-image]][badge-build-url]
+[![Coverage][badge-coverage-image]][badge-coverage-url]
+[![Downloads][badge-downloads-image]][badge-downloads-url]
+[![Size][badge-size-image]][badge-size-url]
+
+Syntax highlighting,
+like what GitHub uses to highlight code,
+but free and open source and JavaScript!
+
+## Contents
+
+* [What is this?](#what-is-this)
+* [When should I use this?](#when-should-i-use-this)
+* [What is `PrettyLights`?](#what-is-prettylights)
+* [Install](#install)
+* [Use](#use)
+* [API](#api)
+  * [`all`](#all)
+  * [`common`](#common)
+  * [`createStarryNight(grammars[, options])`](#createstarrynightgrammars-options)
+  * [`starryNight.flagToScope(flag)`](#starrynightflagtoscopeflag)
+  * [`starryNight.highlight(value, scope)`](#starrynighthighlightvalue-scope)
+  * [`starryNight.missingScopes()`](#starrynightmissingscopes)
+  * [`starryNight.register(grammars)`](#starrynightregistergrammars)
+  * [`starryNight.scopes()`](#starrynightscopes)
+  * [`GetOnigurumaUrl`](#getonigurumaurl)
+  * [`Grammar`](#grammar)
+  * [`Options`](#options)
+* [Examples](#examples)
+  * [Example: serializing hast as html](#example-serializing-hast-as-html)
+  * [Example: using `starry-night` on the client](#example-using-starry-night-on-the-client)
+  * [Example: turning hast into react nodes](#example-turning-hast-into-react-nodes)
+  * [Example: adding line numbers](#example-adding-line-numbers)
+  * [Example: integrate with unified, remark, and rehype](#example-integrate-with-unified-remark-and-rehype)
+  * [Example: integrating with `markdown-it`](#example-integrating-with-markdown-it)
+* [Syntax tree](#syntax-tree)
+* [CSS](#css)
+* [Languages](#languages)
+* [Compatibility](#compatibility)
+* [Security](#security)
+* [Related](#related)
+* [Contribute](#contribute)
+* [License](#license)
+
+## What is this?
+
+This package is an open source version of GitHub’s closed-source `PrettyLights`
+project (more on that later).
+It supports **600+ grammars** and its **extremely high quality**.
+It uses TextMate grammars which are also used in popular editors
+(SublimeText, Atom, VS Code, \&c).
+They’re heavy but high quality.
+
+## When should I use this?
+
+`starry-night` is a **high quality** highlighter
+(when your readers or authors are programmers,
+you want this!)
+that can support **tons of grammars**
+(from new things like MDX to much more!)
+which approaches how GitHub renders code.
+
+It has a WASM dependency,
+and rather big grammars,
+which means that `starry-night` might be too heavy particularly in browsers,
+in which case [`lowlight`][github-lowlight] or [`refractor`][github-refractor]
+might be more suitable.
+
+This project is similar to the excellent [`shiki`][github-shiki],
+and it uses the same underlying dependencies,
+but `starry-night` is meant to match GitHub in that it produces classes and
+works with the CSS it ships,
+making it easier to add dark mode and other themes with CSS compared to inline
+styles.
+
+Finally,
+this package produces objects (an AST),
+which makes it useful when you want to perform syntax highlighting in a place
+where serialized HTML wouldn’t work or wouldn’t work well.
+For example,
+when you want to show code in a CLI by rendering to ANSI sequences,
+when you’re using virtual DOM frameworks (such as React or Preact) so that
+diffing can be performant,
+or when you’re working with [`hast`][github-hast] or [`rehype`][github-rehype].
+
+Bundled,
+minified,
+and gzipped,
+`starry-night` and the WASM binary are 185 kB.
+There are two lists of grammars you can use:
+[`common`][api-common]
+(±35 languages, good for your own site)
+adds 250 kB and [`all`][api-all]
+(\~600 languages, useful if you are making a site like GitHub)
+is 1.6 MB.
+You can also manually choose which grammars to include
+(or add to `common`):
+a language is typically between 3 and 5 kB.
+To illustrate,
+Astro costs 2.1 kB and TSX costs 25.4 kB.
+
+## What is `PrettyLights`?
+
+`PrettyLights` is the syntax highlighter that GitHub uses to turn this:
+
+````markdown
+```markdown
+# Hello, world!
+```
+````
+
+…into this:
+
+```html
+<span class="pl-mh"><span class="pl-mh">#</span><span class="pl-mh"> </span>Hello, world!</span>
+```
+
+…which is what `starry-night` does too
+(some small differences in markup,
+but essentially the same)!
+
+`PrettyLights` is responsible for taking the flag `markdown`,
+looking it up in
+[`languages.yml` from `github-linguist`][github-linguist-languages-yml]
+to figure out that that means markdown,
+taking a corresponding grammar
+(in this case
+[`wooorm/markdown-tm-language`][github-markdown-tm-language]),
+doing some GPL magic in C,
+and turning it into spans with classes.
+
+GitHub is using `PrettyLights` since December 2014,
+when it [replaced `Pygments`][github-pages-pygments].
+They wanted to open source it,
+but [were unable][github-pages-license] due to licensing issues.
+Recently ([Feb 2019][github-tree-sitter-tree-lights]?),
+GitHub has slowly started to move towards `TreeLights`,
+which is based on TreeSitter,
+and also closed source.
+If `TreeLights` includes a language
+(currently: C, C#, CSS, CodeQL, EJS, Elixir, ERB, Gleam, Go, HTML, Java, JS,
+Nix, PHP, Python, RegEx, Ruby, Rust, TLA, TS),
+that’ll be used,
+for everything else `PrettyLights` is used.
+
+`starry-night` does what `PrettyLights` does,
+not what `TreeLights` does.
+I’m hopeful that that will be open sourced in the future and we can mimic both.
+
+<br>
+
+[![](media/slice-1.jpg)][artsandculture-google-starry-night]
+
+## Install
+
+This package is [ESM only][github-gist-esm].
+In Node.js (version 16+),
+install with [npm][npmjs-install]:
+
+```sh
+npm install @wooorm/starry-night
+```
+
+In Deno with [`esm.sh`][esmsh]:
+
+```js
+import {common, createStarryNight} from 'https://esm.sh/@wooorm/starry-night@3'
+```
+
+In browsers with [`esm.sh`][esmsh]:
+
+```html
+<script type="module">
+  import {common, createStarryNight} from 'https://esm.sh/@wooorm/starry-night@3?bundle'
+</script>
+```
+
+To get the CSS in browsers,
+do
+(see [CSS][section-css] for more info):
+
+```html
+<!-- This supports light and dark mode automatically. -->
+<link rel="stylesheet" href="https://esm.sh/@wooorm/starry-night@3/style/both">
+```
+
+## Use
+
+```js
+import {common, createStarryNight} from '@wooorm/starry-night'
+
+const starryNight = await createStarryNight(common)
+
+const scope = starryNight.flagToScope('markdown')
+const tree = starryNight.highlight('# hi', scope)
+
+console.log(tree)
+```
+
+Yields:
+
+```js
+{
+  type: 'root',
+  children: [
+    {
+      type: 'element',
+      tagName: 'span',
+      properties: {className: ['pl-mh']},
+      children: [
+        {type: 'text', value: '# '},
+        {
+          type: 'element',
+          tagName: 'span',
+          properties: {className: ['pl-en']},
+          children: [{type: 'text', value: 'hi'}]
+        }
+      ]
+    }
+  ]
+}
+```
+
+## API
+
+This package exports the identifiers
+[`all`][api-all],
+[`common`][api-common],
+and
+[`createStarryNight`][api-create-starry-night]
+from the main module.
+It exports the additional [TypeScript][] types
+[`GetOnigurumaUrl`][api-get-oniguruma-url],
+[`Grammar`][api-grammar],
+and [`Options`][api-options].
+There is no default export.
+
+It also includes grammars directly in its export map,
+which each expose a [`Grammar`][api-grammar] as the default export.
+**Do not** use the `lang/` folder or the `.js` extension.
+
+For CSS files,
+do use `style/` and don’t use `.css`:
+
+```js
+import sourceMdx from '@wooorm/starry-night/source.mdx' // Grammar.
+import styleTritanopiaDark from '@wooorm/starry-night/style/tritanopia-dark' // CSS.
+```
+
+### `all`
+
+List of all grammars ([`Array<Grammar>`][api-grammar])
+
+### `common`
+
+List of ±35 common grammars ([`Array<Grammar>`][api-grammar])
+
+### `createStarryNight(grammars[, options])`
+
+Create a `StarryNight` that can highlight things with the given `grammars`.
+This is async to allow async loading and registering,
+which is currently only used for WASM.
+
+###### Parameters
+
+* `grammars`
+  ([`Array<Grammar>`][api-grammar])
+  — grammars to support
+* `options`
+  ([`Options`][api-options], optional)
+  — configuration
+
+###### Returns
+
+Promise that resolves to an instance which highlights with the bound
+grammars (`Promise<StarryNight>`).
+
+### `starryNight.flagToScope(flag)`
+
+Get the grammar scope (such as `text.md`) associated with a grammar name
+(such as `markdown`) or grammar extension (such as `.mdwn`).
+
+This function uses the first word (when splitting on spaces and tabs) that is
+used after the opening of a fenced code block:
+
+````markdown
+```js
+console.log(1)
+```
+````
+
+To match GitHub,
+this also accepts entire paths:
+
+````markdown
+```path/to/example.js
+console.log(1)
+```
+````
+
+> 👉 **Note**:
+> languages can use the same extensions.
+> For example,
+> `.h` is reused by many languages.
+> In those cases,
+> you will get one scope back,
+> but it might not be the most popular language associated with an extension.
+
+###### Parameters
+
+* `flag`
+  (`string`)
+  — grammar name
+  (such as `'markdown'`),
+  grammar extension
+  (such as `'.mdwn'`),
+  or entire file path ending in extension
+
+###### Returns
+
+Grammar scope,
+such as `'text.md'`
+(`string` or `undefined`).
+
+###### Example
+
+```js
+import {common, createStarryNight} from '@wooorm/starry-night'
+
+const starryNight = await createStarryNight(common)
+
+console.log(starryNight.flagToScope('pandoc')) // `'text.md'`
+console.log(starryNight.flagToScope('workbook')) // `'text.md'`
+console.log(starryNight.flagToScope('.workbook')) // `'text.md'`
+console.log(starryNight.flagToScope('path/to/example.js')) // `'source.js'`
+console.log(starryNight.flagToScope('whatever')) // `undefined`
+```
+
+### `starryNight.highlight(value, scope)`
+
+Highlight programming code.
+
+###### Parameters
+
+* `value` (`string`)
+  — code to highlight
+* `scope` (`string`)
+  — registered grammar scope to highlight as (such as `'text.md'`)
+
+###### Returns
+
+Node representing highlighted code ([`Root`][github-hast-root]).
+
+###### Example
+
+```js
+import sourceCss from '@wooorm/starry-night/source.css'
+import {createStarryNight} from '@wooorm/starry-night'
+
+const starryNight = await createStarryNight([sourceCss])
+
+console.log(starryNight.highlight('em { color: red }', 'source.css'))
+```
+
+Yields:
+
+```js
+{
+  type: 'root',
+  children: [
+    {type: 'element', tagName: 'span', properties: [Object], children: [Array]},
+    {type: 'text', value: ' { '},
+    {type: 'element', tagName: 'span', properties: [Object], children: [Array]},
+    {type: 'text', value: ': '},
+    {type: 'element', tagName: 'span', properties: [Object], children: [Array]},
+    {type: 'text', value: ' }'}
+  ]
+}
+```
+
+### `starryNight.missingScopes()`
+
+List scopes that are needed by the registered grammars but that are
+missing.
+
+To illustrate,
+the `text.xml.svg` grammar needs the `text.xml` grammar.
+When you register `text.xml.svg` without `text.xml`,
+it will be listed here.
+
+###### Returns
+
+List of grammar scopes,
+such as `'text.md'`
+(`Array<string>`).
+
+###### Example
+
+```js
+import textXmlSvg from '@wooorm/starry-night/text.xml.svg'
+import textXml from '@wooorm/starry-night/text.xml'
+import {createStarryNight} from '@wooorm/starry-night'
+
+const svg = await createStarryNight([textXmlSvg])
+console.log(svg.missingScopes()) //=> ['text.xml']
+
+const svgAndXml = await createStarryNight([textXmlSvg, textXml])
+console.log(svgAndXml.missingScopes()) //=> []
+```
+
+### `starryNight.register(grammars)`
+
+Add more grammars.
+
+###### Parameters
+
+* `grammars` ([`Array<Grammar>`][api-grammar])
+  — grammars to support
+
+###### Returns
+
+Promise resolving to nothing (`Promise<undefined>`).
+
+###### Example
+
+````js
+import sourceCss from '@wooorm/starry-night/source.css'
+import textMd from '@wooorm/starry-night/text.md'
+import {createStarryNight} from '@wooorm/starry-night'
+import {toHtml} from 'hast-util-to-html'
+
+const markdown = '```css\nem { color: red }\n```'
+
+const starryNight = await createStarryNight([textMd])
+
+console.log(toHtml(starryNight.highlight(markdown, 'text.md')))
+
+await starryNight.register([sourceCss])
+
+console.log(toHtml(starryNight.highlight(markdown, 'text.md')))
+````
+
+Yields:
+
+````html
+<span class="pl-s">```</span><span class="pl-en">css</span>
+<span class="pl-c1">em { color: red }</span>
+<span class="pl-s">```</span>
+````
+
+````html
+<span class="pl-s">```</span><span class="pl-en">css</span>
+<span class="pl-ent">em</span> { <span class="pl-c1">color</span>: <span class="pl-c1">red</span> }
+<span class="pl-s">```</span>
+````
+
+### `starryNight.scopes()`
+
+List all registered scopes.
+
+###### Returns
+
+List of grammar scopes,
+such as `'text.md'`
+(`Array<string>`).
+
+###### Example
+
+```js
+import {common, createStarryNight} from '@wooorm/starry-night'
+
+const starryNight = await createStarryNight(common)
+
+console.log(starryNight.scopes())
+```
+
+Yields:
+
+```js
+[
+  'source.c',
+  'source.c++',
+  // …
+  'text.xml',
+  'text.xml.svg'
+]
+```
+
+### `GetOnigurumaUrl`
+
+Function to get a URL to the oniguruma WASM (TypeScript type).
+
+> 👉 **Note**:
+> this must currently result in a version 2 URL of `onig.wasm` from
+> [`vscode-oniguruma`][github-vscode-oniguruma].
+
+> ⚠️ **Danger**:
+> when you use this functionality,
+> your project might break at any time
+> (when reinstalling dependencies),
+> except when you make sure that the WASM binary you load manually is what our
+> internally used `vscode-oniguruma` dependency expects.
+> To solve this, you could for example use an npm script called
+> [`dependencies`][npmjs-using-npm-script-dependencies]
+> (which runs everytime `node_modules` is changed)
+> which copies `vscode-oniguruma/release/onig.wasm` to the place you want to
+> host it.
+
+###### Returns
+
+URL object to a WASM binary (`Promise<URL>` or `URL`).
+
+###### Example
+
+```js
+import {common, createStarryNight} from '@wooorm/starry-night'
+
+const starryNight = await createStarryNight(common, {
+  getOnigurumaUrlFetch() {
+    return new URL('/onig.wasm', window.location.href);
+  }
+})
+```
+
+### `Grammar`
+
+TextMate grammar with some extra info (TypeScript type).
+
+###### Fields
+
+* `dependencies`
+  (`Array<string>`, optional, example: `['source.tsx']`)
+  — list of scopes that are needed for this grammar to work
+* `extensions`
+  (`Array<string>`, example: `['.mdx']`)
+  — list of extensions
+* `extensionsWithDot`
+  (`Array<string>`, optional, example: `['.php']`)
+  — list of extensions that only match if used w/ a dot
+* `injections`
+  (`Record<string, Rule>`, optional)
+  — TextMate injections
+* `names`
+  (`Array<string>`, example: `['mdx']`)
+  — list of names
+* `patterns`
+  (`Array<Rule>`)
+  — TextMate patterns
+* `repository`
+  (`Record<string, Rule>`, optional)
+  — TextMate repository
+* `scopeName`
+  (`string`, example: `'source.mdx'`)
+  — scope
+
+### `Options`
+
+Configuration (TypeScript type).
+
+###### Fields
+
+* `getOnigurumaUrlFetch`
+  ([`GetOnigurumaUrl`][api-get-oniguruma-url], optional)
+  — get a URL to the oniguruma WASM,
+  typically used in browsers
+* `getOnigurumaUrlFs`
+  ([`GetOnigurumaUrl`][api-get-oniguruma-url], optional)
+  — get a URL to the oniguruma WASM,
+  typically used in Node.js
+
+## Examples
+
+### Example: serializing hast as html
+
+[`hast`][github-hast] trees as returned by `starry-night` can be serialized with
+[`hast-util-to-html`][github-hast-util-to-html]:
+
+```js
+import {common, createStarryNight} from '@wooorm/starry-night'
+import {toHtml} from 'hast-util-to-html'
+
+const starryNight = await createStarryNight(common)
+
+const tree = starryNight.highlight('"use strict";', 'source.js')
+
+console.log(toHtml(tree))
+```
+
+Yields:
+
+```html
+<span class="pl-s"><span class="pl-pds">"</span>use strict<span class="pl-pds">"</span></span>;
+```
+
+### Example: using `starry-night` on the client
+
+You don’t *have* to do preprocess things on a server.
+Particularly,
+when you are not using Node.js or so.
+Or,
+when you have a lot of often changing content
+(likely markdown),
+such as on a page of comments.
+
+In those cases,
+you can run `starry-night` in the browser.
+Here is an example.
+It also uses [`hast-util-to-dom`][github-hast-util-to-dom],
+which is a light way to turn the AST into DOM nodes.
+
+Say we have this `example.js` on our browser (no bundling needed!):
+
+```js
+import {
+  common,
+  createStarryNight
+} from 'https://esm.sh/@wooorm/starry-night@3?bundle'
+import {toDom} from 'https://esm.sh/hast-util-to-dom@4?bundle'
+
+const starryNight = await createStarryNight(common)
+const prefix = 'language-'
+
+const nodes = Array.from(document.body.querySelectorAll('code'))
+
+for (const node of nodes) {
+  const className = Array.from(node.classList).find(function (d) {
+    return d.startsWith(prefix)
+  })
+  if (!className) continue
+  const scope = starryNight.flagToScope(className.slice(prefix.length))
+  if (!scope) continue
+  const tree = starryNight.highlight(node.textContent, scope)
+  node.replaceChildren(toDom(tree, {fragment: true}))
+}
+```
+
+…and then,
+if we would have an `index.html` for our document:
+
+```html
+<!doctype html>
+<meta charset=utf8>
+<title>Hello</title>
+<link rel=stylesheet href=https://esm.sh/@wooorm/starry-night@3/style/both>
+<body>
+<h1>Hello</h1>
+<p>…world!</p>
+<pre><code class=language-js>console.log('it works!')
+</code></pre>
+<script type=module src=./example.js></script>
+</body>
+```
+
+Opening that page in a browser,
+we’d see the `<code>` being swapped with:
+
+```html
+<code class="language-js"><span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-s"><span class="pl-pds">'</span>it works!<span class="pl-pds">'</span></span>)
+</code>
+```
+
+### Example: turning hast into react nodes
+
+hast trees as returned by `starry-night` can be turned into
+preact, react, solid, svelte, vue, etc.,
+with
+[`hast-util-to-jsx-runtime`][github-hast-util-to-jsx-runtime]:
+
+```js
+import {common, createStarryNight} from '@wooorm/starry-night'
+import {toJsxRuntime} from 'hast-util-to-jsx-runtime'
+import {Fragment, jsx, jsxs} from 'react/jsx-runtime'
+
+const starryNight = await createStarryNight(common)
+
+const tree = starryNight.highlight('"use strict";', 'source.js')
+const reactNode = toJsxRuntime(tree, {Fragment, jsx, jsxs})
+
+console.log(reactNode)
+```
+
+Yields:
+
+```js
+{
+  '$$typeof': Symbol(react.element),
+  type: Symbol(react.fragment),
+  key: null,
+  ref: null,
+  props: { children: [ [Object], ';' ] },
+  _owner: null,
+  _store: {}
+}
+```
+
+### Example: adding line numbers
+
+GitHub itself does not add line numbers to the code they highlight.
+You can do that,
+by transforming the AST.
+Here’s an example of a utility that wraps each line into a span with a class and
+a data attribute with its line number.
+That way,
+you can style the lines as you please.
+Or you can generate different elements for each line,
+of course.
+
+Say we have our utility as `hast-util-starry-night-gutter.js`:
+
+```js
+/**
+ * @import {ElementContent, Element, RootContent, Root} from 'hast'
+ */
+
+/**
+ * @param {Root} tree
+ *   Tree.
+ * @returns {undefined}
+ *   Nothing.
+ */
+export function starryNightGutter(tree) {
+  /** @type {Array<RootContent>} */
+  const replacement = []
+  const search = /\r?\n|\r/g
+  let index = -1
+  let start = 0
+  let startTextRemainder = ''
+  let lineNumber = 0
+
+  while (++index < tree.children.length) {
+    const child = tree.children[index]
+
+    if (child.type === 'text') {
+      let textStart = 0
+      let match = search.exec(child.value)
+
+      while (match) {
+        // Nodes in this line.
+        const line = /** @type {Array<ElementContent>} */ (
+          tree.children.slice(start, index)
+        )
+
+        // Prepend text from a partial matched earlier text.
+        if (startTextRemainder) {
+          line.unshift({type: 'text', value: startTextRemainder})
+          startTextRemainder = ''
+        }
+
+        // Append text from this text.
+        if (match.index > textStart) {
+          line.push({
+            type: 'text',
+            value: child.value.slice(textStart, match.index)
+          })
+        }
+
+        // Add a line, and the eol.
+        lineNumber += 1
+        replacement.push(createLine(line, lineNumber), {
+          type: 'text',
+          value: match[0]
+        })
+
+        start = index + 1
+        textStart = match.index + match[0].length
+        match = search.exec(child.value)
+      }
+
+      // If we matched, make sure to not drop the text after the last line ending.
+      if (start === index + 1) {
+        startTextRemainder = child.value.slice(textStart)
+      }
+    }
+  }
+
+  const line = /** @type {Array<ElementContent>} */ (tree.children.slice(start))
+  // Prepend text from a partial matched earlier text.
+  if (startTextRemainder) {
+    line.unshift({type: 'text', value: startTextRemainder})
+    startTextRemainder = ''
+  }
+
+  if (line.length > 0) {
+    lineNumber += 1
+    replacement.push(createLine(line, lineNumber))
+  }
+
+  // Replace children with new array.
+  tree.children = replacement
+}
+
+/**
+ * @param {Array<ElementContent>} children
+ * @param {number} line
+ * @returns {Element}
+ */
+function createLine(children, line) {
+  return {
+    type: 'element',
+    tagName: 'span',
+    properties: {className: 'line', dataLineNumber: line},
+    children
+  }
+}
+```
+
+…and a module `example.js`:
+
+````js
+import {common, createStarryNight} from '@wooorm/starry-night'
+import {toHtml} from 'hast-util-to-html'
+import {starryNightGutter} from './hast-util-starry-night-gutter.js'
+
+const starryNight = await createStarryNight(common)
+
+const tree = starryNight.highlight(
+  '# Some heading\n\n```js\nalert(1)\n```\n***',
+  'text.md'
+)
+
+starryNightGutter(tree)
+
+console.log(toHtml(tree))
+````
+
+Now running `node example.js` yields:
+
+````html
+<span class="line" data-line-number="1"><span class="pl-mh"># <span class="pl-en">Some heading</span></span></span>
+<span class="line" data-line-number="2"></span>
+<span class="line" data-line-number="3"><span class="pl-s">```</span><span class="pl-en">js</span></span>
+<span class="line" data-line-number="4"><span class="pl-en">alert</span>(<span class="pl-c1">1</span>)</span>
+<span class="line" data-line-number="5"><span class="pl-s">```</span></span>
+<span class="line" data-line-number="6"><span class="pl-ms">***</span></span>
+````
+
+### Example: integrate with unified, remark, and rehype
+
+This example shows how to use
+[`rehype-starry-night`][github-rehype-starry-night] with
+[`unified`][github-unified].
+If we have a markdown file `example.md`:
+
+````markdown
+# Hello
+
+…world!
+
+```js
+console.log('it works!')
+```
+````
+
+…and a module `example.js`:
+
+```js
+import fs from 'node:fs/promises'
+import rehypeStarryNight from 'rehype-starry-night'
+import rehypeStringify from 'rehype-stringify'
+import remarkParse from 'remark-parse'
+import remarkRehype from 'remark-rehype'
+import {unified} from 'unified'
+
+const file = await unified()
+  .use(remarkParse)
+  .use(remarkRehype)
+  .use(rehypeStarryNight)
+  .use(rehypeStringify)
+  .process(await fs.readFile('example.md'))
+
+console.log(String(file))
+```
+
+…then running `node example.js` yields:
+
+```html
+<h1>Hello</h1>
+<p>…world!</p>
+<pre><code class="language-js"><span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-s"><span class="pl-pds">'</span>it works!<span class="pl-pds">'</span></span>)
+</code></pre>
+```
+
+### Example: integrating with `markdown-it`
+
+This example shows how to combine `starry-night` with `markdown-it`.
+If we have a markdown file `example.md`:
+
+````markdown
+# Hello
+
+…world!
+
+```js
+console.log('it works!')
+```
+````
+
+…and a module `example.js`:
+
+```js
+/**
+ * @import {ElementContent} from 'hast'
+ */
+
+import fs from 'node:fs/promises'
+import {common, createStarryNight} from '@wooorm/starry-night'
+import {toHtml} from 'hast-util-to-html'
+import markdownIt from 'markdown-it'
+
+const file = await fs.readFile('example.md')
+const starryNight = await createStarryNight(common)
+
+const markdownItInstance = markdownIt({
+  highlight(value, lang) {
+    const scope = starryNight.flagToScope(lang)
+
+    return toHtml({
+      type: 'element',
+      tagName: 'pre',
+      properties: {
+        className: scope
+          ? [
+              'highlight',
+              'highlight-' + scope.replace(/^source\./, '').replace(/\./g, '-')
+            ]
+          : undefined
+      },
+      children: scope
+        ? /** @type {Array<ElementContent>} */ (
+            starryNight.highlight(value, scope).children
+          )
+        : [{type: 'text', value}]
+    })
+  }
+})
+
+const html = markdownItInstance.render(String(file))
+
+console.log(html)
+```
+
+Now running `node example.js` yields:
+
+```html
+<h1>Hello</h1>
+<p>…world!</p>
+<pre class="highlight highlight-js"><span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-s"><span class="pl-pds">'</span>it works!<span class="pl-pds">'</span></span>)
+</pre>
+```
+
+<br>
+
+[![](media/slice-2.jpg)][artsandculture-google-starry-night]
+
+## Syntax tree
+
+The generated [`hast`][github-hast] starts with a `root` node,
+that represents the fragment.
+It contains up to three levels of `<span>` `element`s,
+each with a single class.
+All these levels can contain text nodes with the actual code.
+Interestingly,
+TextMate grammars work per line,
+so all line endings are in the root directly,
+meaning that creating a gutter to display line numbers can be generated rather
+naïvely by only looking through the root node.
+
+## CSS
+
+`starry-night` does not inject CSS for the syntax highlighted code
+(because well,
+`starry-night` doesn’t have to be turned into HTML and might not run in a
+browser!).
+If you are in a browser,
+you can use the packaged themes,
+or get creative with CSS!
+💅
+
+All themes accept CSS variables (custom properties).
+With the theme `core.css`,
+you have to define your own properties.
+All other themes define the colors on `:root`.
+Themes either have a `dark` or `light` suffix,
+or none,
+in which case they automatically switch colors based on a
+`@media (prefers-color-scheme: dark)`.
+All themes are tiny (under 1 kB).
+The shipped themes are as follows:
+
+| name | Includes light scheme | Includes dark scheme |
+| - | - | - |
+| [`@wooorm/starry-night/style/core`](style/core.css) | | |
+| [`@wooorm/starry-night/style/light`](style/light.css) | ✅ | |
+| [`@wooorm/starry-night/style/dark`](style/dark.css) | | ✅ |
+| [`@wooorm/starry-night/style/both`](style/both.css) | ✅ | ✅ |
+| [`@wooorm/starry-night/style/colorblind-light`](style/colorblind-light.css) | ✅ | |
+| [`@wooorm/starry-night/style/colorblind-dark`](style/colorblind-dark.css) | | ✅ |
+| [`@wooorm/starry-night/style/colorblind`](style/colorblind.css) | ✅ | ✅ |
+| [`@wooorm/starry-night/style/dimmed-dark`](style/dimmed-dark.css) | | ✅ |
+| [`@wooorm/starry-night/style/dimmed`](style/dimmed.css) | ✅ | ✅ |
+| [`@wooorm/starry-night/style/high-contrast-light`](style/high-contrast-light.css) | ✅ | |
+| [`@wooorm/starry-night/style/high-contrast-dark`](style/high-contrast-dark.css) | | ✅ |
+| [`@wooorm/starry-night/style/high-contrast`](style/high-contrast.css) | ✅ | ✅ |
+| [`@wooorm/starry-night/style/tritanopia-light`](style/tritanopia-light.css) | ✅ | |
+| [`@wooorm/starry-night/style/tritanopia-dark`](style/tritanopia-dark.css) | | ✅ |
+| [`@wooorm/starry-night/style/tritanopia`](style/tritanopia.css) | ✅ | ✅ |
+
+## Languages
+
+Checked grammars are included in [`common`][api-common].
+Everything (that’s needed) is available through
+[`all`][api-all].
+You can add more grammars as you please.
+
+Each grammar has several associated names and extensions.
+See source files for which are known and use `flagToScope` to turn them into
+scopes.
+
+Some grammars need other grammars to work.
+You are responsible for loading those,
+use `missingScopes` to find which dependencies are needed.
+
+All licenses are permissive and made available in [`notice`][file-notice].
+Changes should go to upstream repos and
+[`languages.yml` in `github-linguist`][github-linguist-languages-yml].
+
+<!--support start-->
+
+* [x] [`source.c`](lang/source.c.js) — [upstream](https://github.com/mikomikotaishi/c.tmbundle)
+* [x] [`source.c++`](lang/source.c++.js) — [upstream](https://github.com/mikomikotaishi/c.tmbundle) — needs: `source.c`
+* [x] [`source.cs`](lang/source.cs.js) (mit) — [upstream](https://github.com/dotnet/csharp-tmLanguage)
+* [x] [`source.css`](lang/source.css.js) (mit) — [upstream](https://github.com/atom/language-css)
+* [x] [`source.css.less`](lang/source.css.less.js) (mit) — [upstream](https://github.com/atom/language-less) — needs: `source.css`
+* [x] [`source.css.scss`](lang/source.css.scss.js) (mit) — [upstream](https://github.com/atom/language-sass) — needs: `source.css`
+* [x] [`source.diff`](lang/source.diff.js)
+* [x] [`source.go`](lang/source.go.js) (bsd-3-clause) — [upstream](https://github.com/AlanQuatermain/go-tmbundle)
+* [x] [`source.graphql`](lang/source.graphql.js) (mit) — [upstream](https://github.com/graphql/graphiql)
+* [x] [`source.ini`](lang/source.ini.js)
+* [x] [`source.java`](lang/source.java.js) — [upstream](https://github.com/textmate/java.tmbundle)
+* [x] [`source.js`](lang/source.js.js) (mit) — [upstream](https://github.com/atom/language-javascript)
+* [x] [`source.json`](lang/source.json.js) (isc) — [upstream](https://github.com/Nixinova/NovaGrammars)
+* [x] [`source.kotlin`](lang/source.kotlin.js) (apache-2.0) — [upstream](https://github.com/nishtahir/language-kotlin)
+* [x] [`source.lua`](lang/source.lua.js) (mit) — [upstream](https://github.com/LuaLS/lua.tmbundle)
+* [x] [`source.makefile`](lang/source.makefile.js) — [upstream](https://github.com/textmate/make.tmbundle) — needs: `source.shell`
+* [x] [`source.objc`](lang/source.objc.js) — needs: `source.c`, `source.objc.platform`
+* [x] [`source.objc.platform`](lang/source.objc.platform.js)
+* [x] [`source.perl`](lang/source.perl.js) — [upstream](https://github.com/textmate/perl.tmbundle)
+* [x] [`source.python`](lang/source.python.js) (mit) — [upstream](https://github.com/MagicStack/MagicPython)
+* [x] [`source.r`](lang/source.r.js)
+* [x] [`source.ruby`](lang/source.ruby.js) (mit) — [upstream](https://github.com/atom/language-ruby)
+* [x] [`source.rust`](lang/source.rust.js) (mit) — [upstream](https://github.com/dustypomerleau/rust-syntax)
+* [x] [`source.shell`](lang/source.shell.js) (mit) — [upstream](https://github.com/atom/language-shellscript)
+* [x] [`source.sql`](lang/source.sql.js)
+* [x] [`source.swift`](lang/source.swift.js) (mit) — [upstream](https://github.com/jtbandes/swift-tmlanguage)
+* [x] [`source.ts`](lang/source.ts.js) (mit) — [upstream](https://github.com/Microsoft/TypeScript-TmLanguage)
+* [x] [`source.vbnet`](lang/source.vbnet.js) (apache-2.0) — [upstream](https://github.com/angryant0007/VBDotNetSyntax)
+* [x] [`source.yaml`](lang/source.yaml.js) (mit) — [upstream](https://github.com/atom/language-yaml)
+* [x] [`text.html.basic`](lang/text.html.basic.js) (mit) — [upstream](https://github.com/atom/language-html)
+* [x] [`text.html.php`](lang/text.html.php.js) — needs: `text.html.basic`
+* [x] [`text.md`](lang/text.md.js) (mit) — [upstream](https://github.com/wooorm/markdown-tm-language)
+* [x] [`text.xml`](lang/text.xml.js)
+* [x] [`text.xml.svg`](lang/text.xml.svg.js) (isc) — [upstream](https://github.com/Alhadis/language-etc) — needs: `text.xml`
+* [ ] [`config.xcompose`](lang/config.xcompose.js) (mit)
+* [ ] [`etc`](lang/etc.js) (isc) — [upstream](https://github.com/Alhadis/language-etc) — needs: `source.regexp.posix`
+* [ ] [`file.lasso`](lang/file.lasso.js) (public domain)
+* [ ] [`go.mod`](lang/go.mod.js) (mit) — [upstream](https://github.com/golang/vscode-go)
+* [ ] [`go.sum`](lang/go.sum.js) (mit) — [upstream](https://github.com/golang/vscode-go)
+* [ ] [`injections.etc`](lang/injections.etc.js) (isc) — [upstream](https://github.com/Alhadis/language-etc)
+* [ ] [`objdump.x86asm`](lang/objdump.x86asm.js) (mit) — needs: `source.c`, `source.c++`
+* [ ] [`source.2da`](lang/source.2da.js) (isc) — [upstream](https://github.com/Alhadis/language-etc)
+* [ ] [`source.4dm`](lang/source.4dm.js) (mit)
+* [ ] [`source.8xp`](lang/source.8xp.js) (bsd-3-clause) — [upstream](https://github.com/TIny-Hacker/language-ti-basic)
+* [ ] [`source.abap`](lang/source.abap.js) — [upstream](https://github.com/pvl/abap.tmbundle)
+* [ ] [`source.abapcds`](lang/source.abapcds.js) (unlicense) — [upstream](https://github.com/FreHu/abap-cds-grammar)
+* [ ] [`source.abl`](lang/source.abl.js) (mit) — [upstream](https://github.com/chriscamicas/abl-tmlanguage)
+* [ ] [`source.abnf`](lang/source.abnf.js) (isc) — [upstream](https://github.com/Alhadis/language-grammars)
+* [ ] [`source.actionscript.3`](lang/source.actionscript.3.js) (mit) — [upstream](https://github.com/simongregory/actionscript3-tmbundle) — needs: `text.html.asdoc`, `text.xml`
+* [ ] [`source.ada`](lang/source.ada.js)
+* [ ] [`source.afm`](lang/source.afm.js) (isc) — [upstream](https://github.com/Alhadis/language-fontforge)
+* [ ] [`source.agc`](lang/source.agc.js) (isc)
+* [ ] [`source.agda`](lang/source.agda.js) (mit) — [upstream](https://github.com/agda/agda-github-syntax-highlighting)
+* [ ] [`source.ahk`](lang/source.ahk.js) (unlicense) — [upstream](https://github.com/ahkscript/SublimeAutoHotkey)
+* [ ] [`source.aidl`](lang/source.aidl.js) (apache-2.0) — [upstream](https://github.com/google/aidl-language)
+* [ ] [`source.aiken`](lang/source.aiken.js) (apache-2.0) — [upstream](https://github.com/aiken-lang/vscode-aiken)
+* [ ] [`source.al`](lang/source.al.js) (mit) — [upstream](https://github.com/microsoft/AL)
+* [ ] [`source.alloy`](lang/source.alloy.js) (apache-2.0) — [upstream](https://github.com/macekond/Alloy.tmbundle)
+* [ ] [`source.ampl`](lang/source.ampl.js) (mit)
+* [ ] [`source.angelscript`](lang/source.angelscript.js) (unlicense) — [upstream](https://github.com/wronex/sublime-angelscript)
+* [ ] [`source.answersetprogramming`](lang/source.answersetprogramming.js) (mit) — [upstream](https://github.com/nickswalker/asp-syntax-highlight)
+* [ ] [`source.antlr`](lang/source.antlr.js)
+* [ ] [`source.apacheconf`](lang/source.apacheconf.js) (mit) — [upstream](https://github.com/mrmlnc/vscode-apache)
+* [ ] [`source.apex`](lang/source.apex.js) (bsd-3-clause) — [upstream](https://github.com/forcedotcom/apex-tmLanguage)
+* [ ] [`source.apl`](lang/source.apl.js) (isc) — [upstream](https://github.com/Alhadis/language-apl)
+* [ ] [`source.applescript`](lang/source.applescript.js)
+* [ ] [`source.arr`](lang/source.arr.js) (mit) — [upstream](https://github.com/samuela/language-pyret)
+* [ ] [`source.asl`](lang/source.asl.js) (mit) — [upstream](https://github.com/sebadur/language-asl)
+* [ ] [`source.asn`](lang/source.asn.js) (mit) — [upstream](https://github.com/ajlangley/language-asn1)
+* [ ] [`source.asp`](lang/source.asp.js)
+* [ ] [`source.aspectj`](lang/source.aspectj.js) (mit)
+* [ ] [`source.assembly`](lang/source.assembly.js) (bsd-3-clause) — [upstream](https://github.com/Nessphoro/sublimeassembly)
+* [ ] [`source.astro`](lang/source.astro.js) (mit) — [upstream](https://github.com/withastro/language-tools) — needs: `source.js`, `source.ts`, `source.tsx`
+* [ ] [`source.ats`](lang/source.ats.js) (mit)
+* [ ] [`source.autoit`](lang/source.autoit.js) (mit)
+* [ ] [`source.avro`](lang/source.avro.js) (mit) — [upstream](https://github.com/Jason3S/avro.tmLanguage)
+* [ ] [`source.awk`](lang/source.awk.js) (mit)
+* [ ] [`source.ballerina`](lang/source.ballerina.js) (apache-2.0) — [upstream](https://github.com/ballerina-platform/ballerina-grammar)
+* [ ] [`source.basic`](lang/source.basic.js) (apache-2.0) — [upstream](https://github.com/telnet23/language-basic)
+* [ ] [`source.batchfile`](lang/source.batchfile.js) (mit) — [upstream](https://github.com/mmims/language-batchfile)
+* [ ] [`source.bb`](lang/source.bb.js) (mit) — [upstream](https://github.com/yoctoproject/vscode-bitbake)
+* [ ] [`source.bdf`](lang/source.bdf.js) (isc) — [upstream](https://github.com/Alhadis/language-fontforge) — needs: `source.xlfd`
+* [ ] [`source.befunge`](lang/source.befunge.js) (mit)
+* [ ] [`source.berry`](lang/source.berry.js) (mit) — [upstream](https://github.com/berry-lang/berry-grammar)
+* [ ] [`source.bf`](lang/source.bf.js) (mit) — [upstream](https://github.com/Drako/SublimeBrainfuck)
+* [ ] [`source.bh`](lang/source.bh.js) (bsd-3-clause) — [upstream](https://github.com/B-Lang-org/language-bh)
+* [ ] [`source.bicep`](lang/source.bicep.js) (mit) — [upstream](https://github.com/azure/bicep)
+* [ ] [`source.blitzmax`](lang/source.blitzmax.js)
+* [ ] [`source.boo`](lang/source.boo.js) (mit) — [upstream](https://github.com/drslump/sublime-boo)
+* [ ] [`source.boogie`](lang/source.boogie.js) (mit) — [upstream](https://github.com/boogie-org/boogie-vscode)
+* [ ] [`source.bp`](lang/source.bp.js) (mit) — [upstream](https://github.com/flimberger/android-system-tools)
+* [ ] [`source.bqn`](lang/source.bqn.js) (mit) — [upstream](https://github.com/razetime/bqn-vscode)
+* [ ] [`source.brs`](lang/source.brs.js) (mit) — [upstream](https://github.com/rokucommunity/vscode-brightscript-language)
+* [ ] [`source.bsl`](lang/source.bsl.js) (mit) — [upstream](https://github.com/1c-syntax/vsc-language-1c-bsl) — needs: `source.sdbl`
+* [ ] [`source.bst`](lang/source.bst.js) (mit) — [upstream](https://github.com/zyoshoka/bst.tmLanguage)
+* [ ] [`source.bsv`](lang/source.bsv.js) (mit)
+* [ ] [`source.c.ec`](lang/source.c.ec.js) (unlicense) — [upstream](https://github.com/ecere/ec.tmbundle) — needs: `source.c`
+* [ ] [`source.c.linker`](lang/source.c.linker.js) (mit) — [upstream](https://github.com/donno2048/Linker.tmLanguage)
+* [ ] [`source.c.nwscript`](lang/source.c.nwscript.js) (isc) — [upstream](https://github.com/Alhadis/language-etc) — needs: `source.c`
+* [ ] [`source.cabal`](lang/source.cabal.js) (mit) — [upstream](https://github.com/atom-haskell/language-haskell)
+* [ ] [`source.Caddyfile`](lang/source.Caddyfile.js) (mit) — [upstream](https://github.com/caddyserver/vscode-caddyfile)
+* [ ] [`source.cadence`](lang/source.cadence.js) (apache-2.0) — [upstream](https://github.com/onflow/vscode-cadence)
+* [ ] [`source.cairo`](lang/source.cairo.js) (apache-2.0) — [upstream](https://github.com/software-mansion-labs/cairo-tm-grammar)
+* [ ] [`source.cairo0`](lang/source.cairo0.js) (apache-2.0) — [upstream](https://github.com/software-mansion-labs/cairo-tm-grammar)
+* [ ] [`source.camlp4.ocaml`](lang/source.camlp4.ocaml.js) — needs: `source.ocaml`
+* [ ] [`source.capnp`](lang/source.capnp.js)
+* [ ] [`source.cds`](lang/source.cds.js) (apache-2.0) — [upstream](https://github.com/SAP/cds-textmate-grammar)
+* [ ] [`source.ceylon`](lang/source.ceylon.js) (apache-2.0)
+* [ ] [`source.cfscript`](lang/source.cfscript.js) (mit) — needs: `source.sql`
+* [ ] [`source.changelogs.rpm-spec`](lang/source.changelogs.rpm-spec.js) (mit)
+* [ ] [`source.chapel`](lang/source.chapel.js) (apache-2.0) — [upstream](https://github.com/chapel-lang/chapel-tmbundle)
+* [ ] [`source.cil`](lang/source.cil.js) (apache-2.0) — [upstream](https://github.com/google/selinux-policy-languages)
+* [ ] [`source.circom`](lang/source.circom.js) (mit) — [upstream](https://github.com/iden3/circom-highlighting-vscode)
+* [ ] [`source.cirru`](lang/source.cirru.js) (mit) — [upstream](https://github.com/Cirru/sublime-cirru)
+* [ ] [`source.clar`](lang/source.clar.js) (mit) — [upstream](https://github.com/hirosystems/clarity.tmbundle)
+* [ ] [`source.clarion`](lang/source.clarion.js) (mit) — [upstream](https://github.com/fushnisoft/SublimeClarion)
+* [ ] [`source.clean`](lang/source.clean.js) (mit)
+* [ ] [`source.click`](lang/source.click.js) (mit)
+* [ ] [`source.clips`](lang/source.clips.js) (mit)
+* [ ] [`source.clojure`](lang/source.clojure.js) (mit) — [upstream](https://github.com/atom/language-clojure)
+* [ ] [`source.clue`](lang/source.clue.js) (mit) — [upstream](https://github.com/ClueLang/Clue-for-VSCode)
+* [ ] [`source.cmake`](lang/source.cmake.js) (mit) — [upstream](https://github.com/microsoft/vscode-cmake-tools)
+* [ ] [`source.cobol`](lang/source.cobol.js) (mit) — [upstream](https://github.com/spgennard/vscode_cobol)
+* [ ] [`source.coffee`](lang/source.coffee.js) (mit) — [upstream](https://github.com/atom/language-coffee-script) — needs: `source.js`
+* [ ] [`source.commonlisp`](lang/source.commonlisp.js) (mit) — [upstream](https://github.com/qingpeng9802/common-lisp-tmlanguage)
+* [ ] [`source.cool`](lang/source.cool.js) (mit)
+* [ ] [`source.coq`](lang/source.coq.js) (mit)
+* [ ] [`source.crystal`](lang/source.crystal.js) (mit) — [upstream](https://github.com/atom-crystal/language-crystal) — needs: `text.html.basic`
+* [ ] [`source.csound`](lang/source.csound.js) (mit) — [upstream](https://github.com/nwhetsell/language-csound)
+* [ ] [`source.csound-document`](lang/source.csound-document.js) (mit) — [upstream](https://github.com/nwhetsell/language-csound) — needs: `source.csound`, `text.xml`
+* [ ] [`source.csound-score`](lang/source.csound-score.js) (mit) — [upstream](https://github.com/nwhetsell/language-csound) — needs: `source.csound`
+* [ ] [`source.css.mss`](lang/source.css.mss.js) (mit)
+* [ ] [`source.css.postcss.sugarss`](lang/source.css.postcss.sugarss.js) (mit)
+* [ ] [`source.csswg`](lang/source.csswg.js) (cc0-1.0) — [upstream](https://github.com/tabatkins/bikeshed)
+* [ ] [`source.cuda-c++`](lang/source.cuda-c++.js) (bsd-3-clause) — [upstream](https://github.com/harrism/sublimetext-cuda-cpp) — needs: `source.c++`
+* [ ] [`source.cue`](lang/source.cue.js) (mit) — [upstream](https://github.com/cue-sh/vscode-cue)
+* [ ] [`source.cuesheet`](lang/source.cuesheet.js) (mit) — [upstream](https://github.com/relikd/CUE-Sheet_sublime)
+* [ ] [`source.curlrc`](lang/source.curlrc.js) (isc) — [upstream](https://github.com/Alhadis/language-etc) — needs: `etc`
+* [ ] [`source.curry`](lang/source.curry.js) (mit) — [upstream](https://github.com/fwcd/vscode-curry)
+* [ ] [`source.cwl`](lang/source.cwl.js) (mit)
+* [ ] [`source.cylc`](lang/source.cylc.js) (bsd-3-clause) — [upstream](https://github.com/cylc/Cylc.tmbundle)
+* [ ] [`source.cypher`](lang/source.cypher.js) (apache-2.0) — [upstream](https://github.com/fredbenenson/sublime-cypher)
+* [ ] [`source.cython`](lang/source.cython.js) — needs: `source.regexp.python`
+* [ ] [`source.d`](lang/source.d.js) — [upstream](https://github.com/textmate/d.tmbundle) — needs: `text.html.javadoc`
+* [ ] [`source.d2`](lang/source.d2.js) (bsd-3-clause) — [upstream](https://github.com/terrastruct/d2-vscode)
+* [ ] [`source.dart`](lang/source.dart.js) (bsd-3-clause) — [upstream](https://github.com/dart-lang/dart-syntax-highlight)
+* [ ] [`source.daslang`](lang/source.daslang.js) (mit) — [upstream](https://github.com/moleium/daslang-grammar)
+* [ ] [`source.data-weave`](lang/source.data-weave.js) (mit) — [upstream](https://github.com/mulesoft-labs/data-weave-tmLanguage)
+* [ ] [`source.deb-control`](lang/source.deb-control.js) (mit) — [upstream](https://github.com/tsbarnes/language-debian)
+* [ ] [`source.denizenscript`](lang/source.denizenscript.js) (mit) — [upstream](https://github.com/DenizenScript/denizenscript-grammar)
+* [ ] [`source.desktop`](lang/source.desktop.js)
+* [ ] [`source.dircolors`](lang/source.dircolors.js) (mit)
+* [ ] [`source.ditroff`](lang/source.ditroff.js) (isc) — [upstream](https://github.com/Alhadis/language-roff) — needs: `source.ditroff.desc`, `text.roff`
+* [ ] [`source.ditroff.desc`](lang/source.ditroff.desc.js) (isc) — [upstream](https://github.com/Alhadis/language-roff)
+* [ ] [`source.dm`](lang/source.dm.js) (mit) — [upstream](https://github.com/spacestation13/dm-syntax)
+* [ ] [`source.dockerfile`](lang/source.dockerfile.js) (mit) — [upstream](https://github.com/asbjornenge/Docker.tmbundle)
+* [ ] [`source.dot`](lang/source.dot.js)
+* [ ] [`source.dotenv`](lang/source.dotenv.js) (isc) — [upstream](https://github.com/Alhadis/language-etc)
+* [ ] [`source.dune`](lang/source.dune.js) (mit) — [upstream](https://github.com/maelvls/vscode-dune)
+* [ ] [`source.dylan`](lang/source.dylan.js)
+* [ ] [`source.earthfile`](lang/source.earthfile.js) (mpl-2.0) — [upstream](https://github.com/earthly/earthfile-grammar)
+* [ ] [`source.ebnf`](lang/source.ebnf.js) (isc) — [upstream](https://github.com/Alhadis/language-grammars) — needs: `source.lex.regexp`
+* [ ] [`source.ecl`](lang/source.ecl.js) (apache-2.0) — [upstream](https://github.com/hpcc-systems/ecl-tmLanguage)
+* [ ] [`source.edgeql`](lang/source.edgeql.js) (mit) — [upstream](https://github.com/edgedb/edgedb-editor-plugin)
+* [ ] [`source.editorconfig`](lang/source.editorconfig.js) (mit) — [upstream](https://github.com/sindresorhus/atom-editorconfig)
+* [ ] [`source.eiffel`](lang/source.eiffel.js)
+* [ ] [`source.elixir`](lang/source.elixir.js) (apache-2.0) — [upstream](https://github.com/elixir-lang/elixir-tmbundle) — needs: `text.elixir`
+* [ ] [`source.elm`](lang/source.elm.js) (mit) — [upstream](https://github.com/elm-community/Elm.tmLanguage)
+* [ ] [`source.elvish`](lang/source.elvish.js) (bsd-2-clause) — [upstream](https://github.com/elves/elvish)
+* [ ] [`source.elvish-transcript`](lang/source.elvish-transcript.js) (bsd-2-clause) — [upstream](https://github.com/elves/elvish) — needs: `source.elvish`
+* [ ] [`source.emacs.lisp`](lang/source.emacs.lisp.js) (isc) — [upstream](https://github.com/Alhadis/language-emacs-lisp)
+* [ ] [`source.erlang`](lang/source.erlang.js) (apache-2.0) — [upstream](https://github.com/erlang-ls/grammar)
+* [ ] [`source.euphoria`](lang/source.euphoria.js) (mit) — [upstream](https://github.com/OpenEuphoria/vscode-euphoria)
+* [ ] [`source.factor`](lang/source.factor.js) (bsd-2-clause)
+* [ ] [`source.fan`](lang/source.fan.js) (mit)
+* [ ] [`source.fancy`](lang/source.fancy.js) (bsd-3-clause) — [upstream](https://github.com/fancy-lang/fancy-tmbundle)
+* [ ] [`source.faust`](lang/source.faust.js) (mit)
+* [ ] [`source.figfont`](lang/source.figfont.js) (isc) — [upstream](https://github.com/Alhadis/language-fontforge)
+* [ ] [`source.firestore`](lang/source.firestore.js) (mit)
+* [ ] [`source.firrtl`](lang/source.firrtl.js) (apache-2.0) — [upstream](https://github.com/chipsalliance/firrtl-syntax)
+* [ ] [`source.fish`](lang/source.fish.js) (mit)
+* [ ] [`source.fnl`](lang/source.fnl.js) (mit) — [upstream](https://github.com/kongeor/vsc-fennel)
+* [ ] [`source.fontdir`](lang/source.fontdir.js) (isc) — [upstream](https://github.com/Alhadis/language-fontforge) — needs: `source.xlfd`
+* [ ] [`source.fontforge`](lang/source.fontforge.js) (isc) — [upstream](https://github.com/Alhadis/language-fontforge)
+* [ ] [`source.forth`](lang/source.forth.js)
+* [ ] [`source.fortran`](lang/source.fortran.js)
+* [ ] [`source.fortran.modern`](lang/source.fortran.modern.js) — needs: `source.fortran`
+* [ ] [`source.fsharp`](lang/source.fsharp.js) (mit) — [upstream](https://github.com/ionide/ionide-fsgrammar)
+* [ ] [`source.fstar`](lang/source.fstar.js) (apache-2.0) — [upstream](https://github.com/FStarLang/atom-fstar)
+* [ ] [`source.ftl`](lang/source.ftl.js) (mit) — [upstream](https://github.com/macabeus/vscode-fluent)
+* [ ] [`source.futhark`](lang/source.futhark.js) (isc) — [upstream](https://github.com/Alhadis/language-etc) — needs: `etc`
+* [ ] [`source.gap`](lang/source.gap.js) — [upstream](https://github.com/dhowden/gap-tmbundle)
+* [ ] [`source.gcode`](lang/source.gcode.js) (mit) — [upstream](https://github.com/appliedengdesign/vscode-gcode-syntax)
+* [ ] [`source.gdb`](lang/source.gdb.js) (zlib) — [upstream](https://github.com/quarnster/SublimeGDB)
+* [ ] [`source.gdresource`](lang/source.gdresource.js) (mit) — [upstream](https://github.com/godotengine/godot-vscode-plugin)
+* [ ] [`source.gdscript`](lang/source.gdscript.js) (mit) — [upstream](https://github.com/godotengine/godot-vscode-plugin)
+* [ ] [`source.gdshader`](lang/source.gdshader.js) (mit) — [upstream](https://github.com/godotengine/godot-vscode-plugin)
+* [ ] [`source.gedcom`](lang/source.gedcom.js) (apache-2.0) — [upstream](https://github.com/fguitton/vscode-gedcom)
+* [ ] [`source.gemfile-lock`](lang/source.gemfile-lock.js) (mit) — [upstream](https://github.com/hmarr/gemfile-lock-tmlanguage)
+* [ ] [`source.gemini`](lang/source.gemini.js) (mit) — [upstream](https://github.com/printfn/gemini-vscode)
+* [ ] [`source.generic-db`](lang/source.generic-db.js) (isc) — [upstream](https://github.com/Alhadis/language-etc) — needs: `etc`
+* [ ] [`source.genero-4gl`](lang/source.genero-4gl.js) (unlicense) — [upstream](https://github.com/FourjsGenero/GeneroFgl.tmbundle)
+* [ ] [`source.genero-per`](lang/source.genero-per.js) (unlicense) — [upstream](https://github.com/FourjsGenero/GeneroFgl.tmbundle)
+* [ ] [`source.gerber`](lang/source.gerber.js) (isc) — [upstream](https://github.com/Alhadis/language-pcb)
+* [ ] [`source.gf`](lang/source.gf.js) (mit) — [upstream](https://github.com/johnjcamilleri/language-gf)
+* [ ] [`source.git-revlist`](lang/source.git-revlist.js) (isc) — [upstream](https://github.com/Nixinova/NovaGrammars)
+* [ ] [`source.gitattributes`](lang/source.gitattributes.js) (isc) — [upstream](https://github.com/Alhadis/language-etc) — needs: `etc`, `source.gitignore`
+* [ ] [`source.gitconfig`](lang/source.gitconfig.js) (isc) — [upstream](https://github.com/Alhadis/language-etc) — needs: `source.shell`
+* [ ] [`source.gitignore`](lang/source.gitignore.js) (isc) — [upstream](https://github.com/Alhadis/language-etc) — needs: `etc`
+* [ ] [`source.gjs`](lang/source.gjs.js) (mit) — [upstream](https://github.com/lifeart/vsc-ember-syntax) — needs: `source.js`
+* [ ] [`source.gleam`](lang/source.gleam.js) (apache-2.0) — [upstream](https://github.com/gleam-lang/vscode-gleam)
+* [ ] [`source.glsl`](lang/source.glsl.js) (unlicense) — [upstream](https://github.com/euler0/sublime-glsl)
+* [ ] [`source.gn`](lang/source.gn.js) (bsd-3-clause) — [upstream](https://github.com/devoncarew/language-gn)
+* [ ] [`source.gnuplot`](lang/source.gnuplot.js) (mit)
+* [ ] [`source.golo`](lang/source.golo.js) (mit) — [upstream](https://github.com/TypeUnsafe/sublime-golo)
+* [ ] [`source.gosu.2`](lang/source.gosu.2.js) (apache-2.0) — [upstream](https://github.com/jpcamara/Textmate-Gosu-Bundle)
+* [ ] [`source.grace`](lang/source.grace.js) (mit)
+* [ ] [`source.gremlin`](lang/source.gremlin.js) (isc) — [upstream](https://github.com/Alhadis/language-roff) — needs: `text.roff`
+* [ ] [`source.groovy`](lang/source.groovy.js)
+* [ ] [`source.groovy.gradle`](lang/source.groovy.gradle.js) (apache-2.0) — needs: `source.groovy`
+* [ ] [`source.gsc`](lang/source.gsc.js) (unlicense) — [upstream](https://github.com/Jake-NotTheMuss/CoDT7-Sublime)
+* [ ] [`source.gts`](lang/source.gts.js) (mit) — [upstream](https://github.com/lifeart/vsc-ember-syntax) — needs: `source.ts`
+* [ ] [`source.hack`](lang/source.hack.js) (mit) — [upstream](https://github.com/slackhq/vscode-hack) — needs: `text.html.basic`
+* [ ] [`source.haproxy-config`](lang/source.haproxy-config.js) (mit)
+* [ ] [`source.harbour`](lang/source.harbour.js) (mit)
+* [ ] [`source.haskell`](lang/source.haskell.js) (mit) — [upstream](https://github.com/atom-haskell/language-haskell)
+* [ ] [`source.hc`](lang/source.hc.js) (unlicense)
+* [ ] [`source.hcl`](lang/source.hcl.js) (mpl-2.0) — [upstream](https://github.com/hashicorp/syntax)
+* [ ] [`source.hcl.terraform`](lang/source.hcl.terraform.js) (mpl-2.0) — [upstream](https://github.com/hashicorp/syntax)
+* [ ] [`source.hlsl`](lang/source.hlsl.js) (mit)
+* [ ] [`source.hocon`](lang/source.hocon.js) (mit) — [upstream](https://github.com/jacobwgillespie/language-hocon)
+* [ ] [`source.hoon`](lang/source.hoon.js) (mit) — [upstream](https://github.com/pkova/hoon-grammar)
+* [ ] [`source.hosts`](lang/source.hosts.js) (isc) — [upstream](https://github.com/Alhadis/language-etc) — needs: `etc`
+* [ ] [`source.hql`](lang/source.hql.js) (mit)
+* [ ] [`source.httpspec`](lang/source.httpspec.js) (mit) — [upstream](https://github.com/samsalisbury/Sublime-HTTP) — needs: `source.json`
+* [ ] [`source.hx`](lang/source.hx.js) (mit) — [upstream](https://github.com/vshaxe/haxe-TmLanguage)
+* [ ] [`source.hxml`](lang/source.hxml.js) (mit) — [upstream](https://github.com/vshaxe/haxe-TmLanguage) — needs: `source.hx`
+* [ ] [`source.hy`](lang/source.hy.js) (mit) — [upstream](https://github.com/tshakalekholoane/vscode-hy)
+* [ ] [`source.iCalendar`](lang/source.iCalendar.js) (mit) — [upstream](https://github.com/kimsey0/iCalendar-sublime)
+* [ ] [`source.ice`](lang/source.ice.js) (bsd-3-clause) — [upstream](https://github.com/zeroc-ice/vscode-slice)
+* [ ] [`source.ideal`](lang/source.ideal.js) (isc) — [upstream](https://github.com/Alhadis/language-roff) — needs: `source.pic`, `text.roff`
+* [ ] [`source.idl`](lang/source.idl.js) (bsd-3-clause) — [upstream](https://github.com/mgalloy/idl.tmbundle)
+* [ ] [`source.idris`](lang/source.idris.js) (mit) — [upstream](https://github.com/idris-hackers/idris-sublime)
+* [ ] [`source.igor`](lang/source.igor.js) (bsd-3-clause) — [upstream](https://github.com/byte-physics/language-igor)
+* [ ] [`source.imba`](lang/source.imba.js) (mit) — [upstream](https://github.com/imba/imba-linguist-grammar)
+* [ ] [`source.inform7`](lang/source.inform7.js) (mit) — [upstream](https://github.com/erkyrath/language-inform7)
+* [ ] [`source.ini.npmrc`](lang/source.ini.npmrc.js) (isc) — [upstream](https://github.com/Alhadis/language-etc) — needs: `etc`
+* [ ] [`source.ink`](lang/source.ink.js) (mit) — [upstream](https://github.com/inkle/ink-tmlanguage)
+* [ ] [`source.inno`](lang/source.inno.js) (mit) — [upstream](https://github.com/idleberg/atom-language-innosetup) — needs: `source.pascal`
+* [ ] [`source.inputrc`](lang/source.inputrc.js) (isc) — [upstream](https://github.com/Alhadis/language-etc) — needs: `etc`
+* [ ] [`source.io`](lang/source.io.js)
+* [ ] [`source.ioke`](lang/source.ioke.js) (mit)
+* [ ] [`source.isabelle.root`](lang/source.isabelle.root.js) (bsd-2-clause) — [upstream](https://github.com/lsf37/Isabelle.tmbundle)
+* [ ] [`source.isabelle.theory`](lang/source.isabelle.theory.js) (bsd-2-clause) — [upstream](https://github.com/lsf37/Isabelle.tmbundle)
+* [ ] [`source.ispc`](lang/source.ispc.js) (bsd-3-clause) — [upstream](https://github.com/ispc/ispc.syntax)
+* [ ] [`source.j`](lang/source.j.js) (mit) — [upstream](https://github.com/tikkanz/JSyntax)
+* [ ] [`source.jai`](lang/source.jai.js) (mit) — [upstream](https://github.com/SogoCZE/Jails)
+* [ ] [`source.janet`](lang/source.janet.js) (mit) — [upstream](https://github.com/janet-lang/vscode-janet)
+* [ ] [`source.jasmin`](lang/source.jasmin.js) (wtfpl) — [upstream](https://github.com/atmarksharp/jasmin-sublime)
+* [ ] [`source.java-properties`](lang/source.java-properties.js) — [upstream](https://github.com/textmate/java.tmbundle)
+* [ ] [`source.jcl`](lang/source.jcl.js) (mit) — [upstream](https://github.com/spgennard/vscode_cobol)
+* [ ] [`source.jest.snap`](lang/source.jest.snap.js) (mit) — [upstream](https://github.com/jest-community/vscode-jest)
+* [ ] [`source.jflex`](lang/source.jflex.js) (bsd-2-clause) — [upstream](https://github.com/jflex-de/jflex.tmbundle) — needs: `source.java`
+* [ ] [`source.jison`](lang/source.jison.js) (mit) — needs: `source.jisonlex`
+* [ ] [`source.jisonlex`](lang/source.jisonlex.js) (mit) — needs: `source.jison`, `source.js`
+* [ ] [`source.jolie`](lang/source.jolie.js) (mit)
+* [ ] [`source.jq`](lang/source.jq.js) (mit) — [upstream](https://github.com/wader/language-jq)
+* [ ] [`source.js.objj`](lang/source.js.objj.js) — needs: `source.js`
+* [ ] [`source.json.comments`](lang/source.json.comments.js) (mit) — [upstream](https://github.com/DecimalTurn/vscode-jsonc-syntax-highlighting)
+* [ ] [`source.jsoniq`](lang/source.jsoniq.js) (apache-2.0) — [upstream](https://github.com/wcandillon/language-jsoniq)
+* [ ] [`source.jsonnet`](lang/source.jsonnet.js) (apache-2.0) — [upstream](https://github.com/google/language-jsonnet)
+* [ ] [`source.julia`](lang/source.julia.js) (mit) — [upstream](https://github.com/JuliaEditorSupport/atom-language-julia)
+* [ ] [`source.julia.console`](lang/source.julia.console.js) (mit) — [upstream](https://github.com/JuliaEditorSupport/atom-language-julia) — needs: `source.julia`, `source.shell`
+* [ ] [`source.just`](lang/source.just.js) (mit) — [upstream](https://github.com/nefrob/vscode-just)
+* [ ] [`source.kakscript`](lang/source.kakscript.js) (unlicense) — [upstream](https://github.com/kakoune-editor/language-kak)
+* [ ] [`source.kdl`](lang/source.kdl.js) (apache-2.0) — [upstream](https://github.com/kdl-org/vscode-kdl)
+* [ ] [`source.kerboscript`](lang/source.kerboscript.js) (mit) — [upstream](https://github.com/KSP-KOS/language-kerboscript)
+* [ ] [`source.keyvalues`](lang/source.keyvalues.js) (isc) — [upstream](https://github.com/Nixinova/NovaGrammars)
+* [ ] [`source.kickstart`](lang/source.kickstart.js) (mit) — [upstream](https://github.com/wgwoods/language-kickstart)
+* [ ] [`source.koka`](lang/source.koka.js) (apache-2.0) — [upstream](https://github.com/koka-community/koka-textmate-grammar)
+* [ ] [`source.kusto`](lang/source.kusto.js) (apache-2.0) — [upstream](https://github.com/mmanela/kusto-sublime)
+* [ ] [`source.lark`](lang/source.lark.js) (isc) — [upstream](https://github.com/Alhadis/language-grammars)
+* [ ] [`source.lean`](lang/source.lean.js) (apache-2.0) — [upstream](https://github.com/leanprover/vscode-lean)
+* [ ] [`source.lean4`](lang/source.lean4.js) (apache-2.0) — [upstream](https://github.com/leanprover/vscode-lean4)
+* [ ] [`source.leo`](lang/source.leo.js) (apache-2.0) — [upstream](https://github.com/ProvableHQ/leo-linguist)
+* [ ] [`source.lex`](lang/source.lex.js) (isc) — [upstream](https://github.com/Alhadis/language-grammars) — needs: `source.c++`, `source.jflex`
+* [ ] [`source.lex.regexp`](lang/source.lex.regexp.js) (isc) — [upstream](https://github.com/Alhadis/language-grammars)
+* [ ] [`source.ligo`](lang/source.ligo.js) (mit) — [upstream](https://github.com/pewulfman/Ligo-grammar)
+* [ ] [`source.lilypond`](lang/source.lilypond.js) (mit) — [upstream](https://github.com/nwhetsell/linter-lilypond) — needs: `source.lisp`
+* [ ] [`source.lisp`](lang/source.lisp.js)
+* [ ] [`source.litcoffee`](lang/source.litcoffee.js) (mit) — [upstream](https://github.com/atom/language-coffee-script) — needs: `source.coffee`, `text.html.basic`
+* [ ] [`source.livecodescript`](lang/source.livecodescript.js) (bsd-3-clause) — [upstream](https://github.com/Ferruslogic/vscode-livecodescript)
+* [ ] [`source.livescript`](lang/source.livescript.js) (apache-2.0) — [upstream](https://github.com/sharktide/livescript-vscode)
+* [ ] [`source.llvm`](lang/source.llvm.js) (mit) — [upstream](https://github.com/whitequark/llvm.tmbundle)
+* [ ] [`source.logos`](lang/source.logos.js) (mit) — [upstream](https://github.com/Cykey/Sublime-Logos) — needs: `source.c++`, `source.objc`
+* [ ] [`source.logtalk`](lang/source.logtalk.js)
+* [ ] [`source.lolcode`](lang/source.lolcode.js) (mit) — [upstream](https://github.com/KrazIvan/LOLCODE-grammar-vscode)
+* [ ] [`source.loomscript`](lang/source.loomscript.js) (mit)
+* [ ] [`source.lsl`](lang/source.lsl.js)
+* [ ] [`source.ltspice.symbol`](lang/source.ltspice.symbol.js) (isc) — [upstream](https://github.com/Alhadis/language-pcb)
+* [ ] [`source.luau`](lang/source.luau.js) (mit) — [upstream](https://github.com/JohnnyMorganz/Luau.tmLanguage)
+* [ ] [`source.m2`](lang/source.m2.js) (mit) — [upstream](https://github.com/Macaulay2/language-macaulay2)
+* [ ] [`source.m3u`](lang/source.m3u.js) (isc) — [upstream](https://github.com/Alhadis/language-etc) — needs: `etc`
+* [ ] [`source.m4`](lang/source.m4.js) (isc) — [upstream](https://github.com/Alhadis/language-etc) — needs: `etc`
+* [ ] [`source.m68k`](lang/source.m68k.js) (mit)
+* [ ] [`source.mask`](lang/source.mask.js) (mit) — needs: `source.js`, `text.html.basic`
+* [ ] [`source.mathematica`](lang/source.mathematica.js) (apache-2.0) — [upstream](https://github.com/shadanan/mathematica-tmbundle)
+* [ ] [`source.matlab`](lang/source.matlab.js) (bsd-2-clause) — [upstream](https://github.com/mathworks/MATLAB-Language-grammar)
+* [ ] [`source.maxscript`](lang/source.maxscript.js) (isc)
+* [ ] [`source.mc`](lang/source.mc.js) (mit)
+* [ ] [`source.mcfunction`](lang/source.mcfunction.js) (mit) — [upstream](https://github.com/MinecraftCommands/syntax-mcfunction)
+* [ ] [`source.mdx`](lang/source.mdx.js) (mit) — [upstream](https://github.com/wooorm/markdown-tm-language) — needs: `source.tsx`
+* [ ] [`source.mercury`](lang/source.mercury.js) (mit)
+* [ ] [`source.mermaid`](lang/source.mermaid.js) (isc) — [upstream](https://github.com/Alhadis/language-mermaid) — needs: `source.mermaid.c4c-diagram`, `source.mermaid.class-diagram`, `source.mermaid.er-diagram`, `source.mermaid.flowchart`, `source.mermaid.gantt`, `source.mermaid.gitgraph`, `source.mermaid.mindmap`, `source.mermaid.pie-chart`, `source.mermaid.requirement-diagram`, `source.mermaid.sequence-diagram`, `source.mermaid.state-diagram`, `source.mermaid.user-journey`
+* [ ] [`source.mermaid.c4c-diagram`](lang/source.mermaid.c4c-diagram.js) (isc) — [upstream](https://github.com/Alhadis/language-mermaid) — needs: `source.mermaid`, `source.mermaid.user-journey`, `source.wsd`
+* [ ] [`source.mermaid.class-diagram`](lang/source.mermaid.class-diagram.js) (isc) — [upstream](https://github.com/Alhadis/language-mermaid) — needs: `source.mermaid`, `source.mermaid.flowchart`
+* [ ] [`source.mermaid.er-diagram`](lang/source.mermaid.er-diagram.js) (isc) — [upstream](https://github.com/Alhadis/language-mermaid) — needs: `source.mermaid`
+* [ ] [`source.mermaid.flowchart`](lang/source.mermaid.flowchart.js) (isc) — [upstream](https://github.com/Alhadis/language-mermaid) — needs: `source.mermaid`
+* [ ] [`source.mermaid.gantt`](lang/source.mermaid.gantt.js) (isc) — [upstream](https://github.com/Alhadis/language-mermaid) — needs: `source.mermaid`, `source.mermaid.flowchart`
+* [ ] [`source.mermaid.gitgraph`](lang/source.mermaid.gitgraph.js) (isc) — [upstream](https://github.com/Alhadis/language-mermaid) — needs: `source.json`, `source.mermaid`
+* [ ] [`source.mermaid.mindmap`](lang/source.mermaid.mindmap.js) (isc) — [upstream](https://github.com/Alhadis/language-mermaid) — needs: `source.mermaid`, `source.mermaid.flowchart`
+* [ ] [`source.mermaid.pie-chart`](lang/source.mermaid.pie-chart.js) (isc) — [upstream](https://github.com/Alhadis/language-mermaid) — needs: `source.mermaid`
+* [ ] [`source.mermaid.requirement-diagram`](lang/source.mermaid.requirement-diagram.js) (isc) — [upstream](https://github.com/Alhadis/language-mermaid) — needs: `source.mermaid`
+* [ ] [`source.mermaid.sequence-diagram`](lang/source.mermaid.sequence-diagram.js) (isc) — [upstream](https://github.com/Alhadis/language-mermaid) — needs: `source.json`, `source.mermaid`
+* [ ] [`source.mermaid.state-diagram`](lang/source.mermaid.state-diagram.js) (isc) — [upstream](https://github.com/Alhadis/language-mermaid) — needs: `source.mermaid`
+* [ ] [`source.mermaid.user-journey`](lang/source.mermaid.user-journey.js) (isc) — [upstream](https://github.com/Alhadis/language-mermaid) — needs: `source.mermaid`
+* [ ] [`source.meson`](lang/source.meson.js) (apache-2.0) — [upstream](https://github.com/TingPing/language-meson)
+* [ ] [`source.miniyaml`](lang/source.miniyaml.js) (mit) — [upstream](https://github.com/OpenRA/atom-miniyaml)
+* [ ] [`source.mint`](lang/source.mint.js) (mit) — [upstream](https://github.com/mint-lang/mint-vscode) — needs: `source.css`, `source.css.scss`, `source.js`
+* [ ] [`source.ml`](lang/source.ml.js) — [upstream](https://github.com/textmate/standard-ml.tmbundle)
+* [ ] [`source.mligo`](lang/source.mligo.js) (mit) — [upstream](https://github.com/pewulfman/Ligo-grammar)
+* [ ] [`source.mlir`](lang/source.mlir.js) (apache-2.0) — [upstream](https://github.com/jpienaar/mlir-grammar)
+* [ ] [`source.mo`](lang/source.mo.js) (apache-2.0) — [upstream](https://github.com/dfinity/vscode-motoko)
+* [ ] [`source.modelica`](lang/source.modelica.js) (mit) — [upstream](https://github.com/BorisChumichev/modelicaSublimeTextPackage)
+* [ ] [`source.modula-3`](lang/source.modula-3.js) (bsd-3-clause) — [upstream](https://github.com/newgrammars/m3)
+* [ ] [`source.modula2`](lang/source.modula2.js) (mit) — [upstream](https://github.com/harogaston/Sublime-Modula-2)
+* [ ] [`source.mojo`](lang/source.mojo.js) (mit) — [upstream](https://github.com/modularml/mojo-syntax)
+* [ ] [`source.monkey`](lang/source.monkey.js) (mit)
+* [ ] [`source.moonbit`](lang/source.moonbit.js) (apache-2.0) — [upstream](https://github.com/moonbitlang/moonbit-tmLanguage)
+* [ ] [`source.moonscript`](lang/source.moonscript.js) (mit)
+* [ ] [`source.move`](lang/source.move.js) (mit) — [upstream](https://github.com/damirka/vscode-move-syntax)
+* [ ] [`source.mql5`](lang/source.mql5.js) (mit)
+* [ ] [`source.msg`](lang/source.msg.js) (mit) — [upstream](https://github.com/omnetpp/omnetpp-textmate-msg)
+* [ ] [`source.msl`](lang/source.msl.js) (mit) — [upstream](https://github.com/gen-angry/language-msl)
+* [ ] [`source.mupad`](lang/source.mupad.js) (mit) — [upstream](https://github.com/ccreutzig/sublime-MuPAD)
+* [ ] [`source.mzn`](lang/source.mzn.js) (mpl-2.0) — [upstream](https://github.com/Dekker1/vscode-minizinc)
+* [ ] [`source.nanorc`](lang/source.nanorc.js) (isc) — [upstream](https://github.com/Alhadis/language-etc) — needs: `etc`, `injections.etc`
+* [ ] [`source.nasal`](lang/source.nasal.js) (mit) — [upstream](https://github.com/BobDotCom/Nasal.tmbundle)
+* [ ] [`source.nasl`](lang/source.nasl.js) (mit) — [upstream](https://github.com/tenable/sublimetext-nasl)
+* [ ] [`source.ncl`](lang/source.ncl.js) (mit)
+* [ ] [`source.ne`](lang/source.ne.js) (unlicense) — [upstream](https://github.com/Hardmath123/sublime-nearley)
+* [ ] [`source.ned`](lang/source.ned.js) (mit) — [upstream](https://github.com/omnetpp/omnetpp-textmate-ned)
+* [ ] [`source.nemerle`](lang/source.nemerle.js)
+* [ ] [`source.neon`](lang/source.neon.js) (isc) — [upstream](https://github.com/Alhadis/language-etc)
+* [ ] [`source.nesc`](lang/source.nesc.js) (mit) — needs: `source.c`
+* [ ] [`source.netlinx`](lang/source.netlinx.js) (mit)
+* [ ] [`source.netlinx.erb`](lang/source.netlinx.erb.js) (mit) — needs: `source.netlinx`
+* [ ] [`source.nextflow`](lang/source.nextflow.js) (mit) — needs: `source.nextflow-groovy`
+* [ ] [`source.nextflow-groovy`](lang/source.nextflow-groovy.js) (mit)
+* [ ] [`source.nginx`](lang/source.nginx.js) (mit) — [upstream](https://github.com/brandonwamboldt/sublime-nginx)
+* [ ] [`source.nim`](lang/source.nim.js) (mit) — [upstream](https://github.com/nim-lang/NimLime)
+* [ ] [`source.ninja`](lang/source.ninja.js) (mit)
+* [ ] [`source.nit`](lang/source.nit.js) (wtfpl)
+* [ ] [`source.nix`](lang/source.nix.js) (mit) — [upstream](https://github.com/sambacha/nix-linguist)
+* [ ] [`source.nr`](lang/source.nr.js) (apache-2.0) — [upstream](https://github.com/noir-lang/vscode-noir)
+* [ ] [`source.nsis`](lang/source.nsis.js) (apache-2.0)
+* [ ] [`source.nu`](lang/source.nu.js) (apache-2.0)
+* [ ] [`source.nunjucks`](lang/source.nunjucks.js) (mit)
+* [ ] [`source.nushell`](lang/source.nushell.js) (mit) — [upstream](https://github.com/hustcer/nu-grammar)
+* [ ] [`source.nut`](lang/source.nut.js) (mit)
+* [ ] [`source.objc++`](lang/source.objc++.js) — needs: `source.c++`, `source.objc`
+* [ ] [`source.objectscript`](lang/source.objectscript.js) (mit) — needs: `source.objectscript_macros`
+* [ ] [`source.objectscript_macros`](lang/source.objectscript_macros.js) (mit) — needs: `source.objectscript`
+* [ ] [`source.ocaml`](lang/source.ocaml.js) — needs: `source.camlp4.ocaml`
+* [ ] [`source.odin`](lang/source.odin.js) (mit) — [upstream](https://github.com/odin-lang/sublime-odin)
+* [ ] [`source.odin-ehr`](lang/source.odin-ehr.js) (isc) — [upstream](https://github.com/Alhadis/language-etc) — needs: `etc`
+* [ ] [`source.ooc`](lang/source.ooc.js) (bsd-2-clause)
+* [ ] [`source.opa`](lang/source.opa.js) (mit) — [upstream](https://github.com/mads379/opa.tmbundle)
+* [ ] [`source.opal`](lang/source.opal.js) (mit) — [upstream](https://github.com/artifactz/sublime-opal)
+* [ ] [`source.opentype`](lang/source.opentype.js) (isc) — [upstream](https://github.com/Alhadis/language-fontforge)
+* [ ] [`source.opts`](lang/source.opts.js) (isc) — [upstream](https://github.com/Alhadis/language-etc) — needs: `etc`
+* [ ] [`source.overpassql`](lang/source.overpassql.js) (mpl-2.0) — [upstream](https://github.com/nickswalker/overpassql-tmlanguage)
+* [ ] [`source.ox`](lang/source.ox.js) (mit)
+* [ ] [`source.oz`](lang/source.oz.js) (mit)
+* [ ] [`source.p4`](lang/source.p4.js) (mit)
+* [ ] [`source.pact`](lang/source.pact.js) (bsd-3-clause) — [upstream](https://github.com/kadena-io/pact-atom)
+* [ ] [`source.pan`](lang/source.pan.js) (mit)
+* [ ] [`source.papyrus.skyrim`](lang/source.papyrus.skyrim.js) (mit)
+* [ ] [`source.parrot.pir`](lang/source.parrot.pir.js)
+* [ ] [`source.pascal`](lang/source.pascal.js)
+* [ ] [`source.pawn`](lang/source.pawn.js) (mit)
+* [ ] [`source.pcb.board`](lang/source.pcb.board.js) (isc) — [upstream](https://github.com/Alhadis/language-pcb) — needs: `source.pcb.sexp`
+* [ ] [`source.pcb.schematic`](lang/source.pcb.schematic.js) (isc) — [upstream](https://github.com/Alhadis/language-pcb) — needs: `source.pcb.sexp`, `source.scheme`
+* [ ] [`source.pcb.sexp`](lang/source.pcb.sexp.js) (isc) — [upstream](https://github.com/Alhadis/language-pcb)
+* [ ] [`source.pddl`](lang/source.pddl.js) (mit) — [upstream](https://github.com/jan-dolejsi/vscode-pddl)
+* [ ] [`source.peggy`](lang/source.peggy.js) (mit) — [upstream](https://github.com/peggyjs/code-peggy-language) — needs: `source.js`
+* [ ] [`source.pep8`](lang/source.pep8.js) (wtfpl)
+* [ ] [`source.php.zephir`](lang/source.php.zephir.js) — [upstream](https://github.com/phalcon/zephir-sublime)
+* [ ] [`source.pic`](lang/source.pic.js) (isc) — [upstream](https://github.com/Alhadis/language-roff) — needs: `source.shell`, `text.html.basic`, `text.roff`
+* [ ] [`source.pig_latin`](lang/source.pig_latin.js) (mit)
+* [ ] [`source.pike`](lang/source.pike.js) (unlicense)
+* [ ] [`source.pip-requirements`](lang/source.pip-requirements.js) (mit) — [upstream](https://github.com/microsoft/vscode-python)
+* [ ] [`source.pkl`](lang/source.pkl.js) (apache-2.0) — [upstream](https://github.com/apple/pkl.tmbundle)
+* [ ] [`source.plist`](lang/source.plist.js) (mit) — [upstream](https://github.com/atom/language-property-list)
+* [ ] [`source.po`](lang/source.po.js)
+* [ ] [`source.pogoscript`](lang/source.pogoscript.js) (mit)
+* [ ] [`source.polar`](lang/source.polar.js) (apache-2.0) — [upstream](https://github.com/osohq/polar-grammar)
+* [ ] [`source.pony`](lang/source.pony.js) (bsd-2-clause) — [upstream](https://github.com/CausalityLtd/sublime-pony)
+* [ ] [`source.portugol`](lang/source.portugol.js) (mit) — [upstream](https://github.com/luisgbr1el/portugol-grammar)
+* [ ] [`source.postcss`](lang/source.postcss.js) (mit)
+* [ ] [`source.postscript`](lang/source.postscript.js) (isc) — [upstream](https://github.com/Alhadis/Atom-PostScript)
+* [ ] [`source.pov-ray sdl`](<lang/source.pov-ray sdl.js>) (mit)
+* [ ] [`source.powerbuilder`](lang/source.powerbuilder.js) (mit) — [upstream](https://github.com/informaticon/PowerBuilder.tmbundle)
+* [ ] [`source.powershell`](lang/source.powershell.js) (mit) — [upstream](https://github.com/PowerShell/EditorSyntax)
+* [ ] [`source.praat`](lang/source.praat.js) (mit) — [upstream](https://github.com/orhunulusahin/praatvscode)
+* [ ] [`source.prisma`](lang/source.prisma.js) (apache-2.0) — [upstream](https://github.com/prisma/vscode-prisma)
+* [ ] [`source.processing`](lang/source.processing.js)
+* [ ] [`source.procfile`](lang/source.procfile.js) (bsd-3-clause) — [upstream](https://github.com/benspaulding/vscode-procfile) — needs: `source.shell`
+* [ ] [`source.prolog`](lang/source.prolog.js) (mpl-2.0)
+* [ ] [`source.prolog.eclipse`](lang/source.prolog.eclipse.js) (mpl-2.0) — needs: `source.prolog`
+* [ ] [`source.promela`](lang/source.promela.js) (mit) — [upstream](https://github.com/corbanmailloux/sublime-promela-spin)
+* [ ] [`source.proto`](lang/source.proto.js) (mit) — [upstream](https://github.com/zxh0/vscode-proto3)
+* [ ] [`source.puppet`](lang/source.puppet.js) (mit) — [upstream](https://github.com/russCloak/SublimePuppet)
+* [ ] [`source.purescript`](lang/source.purescript.js) (mit) — [upstream](https://github.com/purescript-contrib/atom-language-purescript)
+* [ ] [`source.python.kivy`](lang/source.python.kivy.js) (mit) — [upstream](https://github.com/p0lygun/kivy-language-grammer) — needs: `source.python`
+* [ ] [`source.q`](lang/source.q.js) (mit) — [upstream](https://github.com/komsit37/sublime-q)
+* [ ] [`source.qasm`](lang/source.qasm.js) (mit)
+* [ ] [`source.QB64`](lang/source.QB64.js) (mit) — [upstream](https://github.com/QB64Official/vscode)
+* [ ] [`source.ql`](lang/source.ql.js) (mit) — [upstream](https://github.com/github/vscode-codeql)
+* [ ] [`source.qmake`](lang/source.qmake.js)
+* [ ] [`source.qml`](lang/source.qml.js) (mit) — needs: `source.js`
+* [ ] [`source.qsharp`](lang/source.qsharp.js) (mit) — [upstream](https://github.com/microsoft/qsharp)
+* [ ] [`source.quake`](lang/source.quake.js) (bsd-3-clause)
+* [ ] [`source.quoting.raku`](lang/source.quoting.raku.js) — [upstream](https://github.com/perl6/atom-language-perl6) — needs: `source.raku`
+* [ ] [`source.racket`](lang/source.racket.js) (mit)
+* [ ] [`source.raku`](lang/source.raku.js) — [upstream](https://github.com/perl6/atom-language-perl6) — needs: `source.quoting.raku`
+* [ ] [`source.rascal`](lang/source.rascal.js) (bsd-2-clause) — [upstream](https://github.com/usethesource/rascal-syntax-highlighting)
+* [ ] [`source.rbs`](lang/source.rbs.js) (mit) — [upstream](https://github.com/soutaro/vscode-rbs-syntax)
+* [ ] [`source.reason`](lang/source.reason.js) (mit) — [upstream](https://github.com/reasonml-editor/language-reason)
+* [ ] [`source.rebol`](lang/source.rebol.js) (mit) — [upstream](https://github.com/Oldes/Sublime-REBOL)
+* [ ] [`source.record-jar`](lang/source.record-jar.js) (isc) — [upstream](https://github.com/Alhadis/language-etc) — needs: `etc`
+* [ ] [`source.red`](lang/source.red.js) (mit) — [upstream](https://github.com/Oldes/Sublime-Red)
+* [ ] [`source.redirects`](lang/source.redirects.js) (isc) — [upstream](https://github.com/Nixinova/NovaGrammars)
+* [ ] [`source.reg`](lang/source.reg.js) (mit)
+* [ ] [`source.regexp`](lang/source.regexp.js) (isc) — [upstream](https://github.com/Alhadis/language-regexp) — needs: `source.regexp.extended`, `source.regexp.posix`, `source.sy`
+* [ ] [`source.regexp.extended`](lang/source.regexp.extended.js) (isc) — [upstream](https://github.com/Alhadis/language-regexp) — needs: `source.regexp`
+* [ ] [`source.regexp.posix`](lang/source.regexp.posix.js) (isc) — [upstream](https://github.com/Alhadis/language-regexp) — needs: `source.regexp`
+* [ ] [`source.regexp.python`](lang/source.regexp.python.js) (mit) — [upstream](https://github.com/MagicStack/MagicPython)
+* [ ] [`source.rego`](lang/source.rego.js) (apache-2.0) — [upstream](https://github.com/open-policy-agent/vscode-opa)
+* [ ] [`source.religo`](lang/source.religo.js) (mit) — [upstream](https://github.com/pewulfman/Ligo-grammar)
+* [ ] [`source.renpy`](lang/source.renpy.js) (mit) — [upstream](https://github.com/williamd1k0/language-renpy) — needs: `source.regexp.python`
+* [ ] [`source.rescript`](lang/source.rescript.js) (mit) — [upstream](https://github.com/rescript-lang/rescript-vscode)
+* [ ] [`source.rexx`](lang/source.rexx.js) (mit) — [upstream](https://github.com/mblocker/rexx-sublime)
+* [ ] [`source.rez`](lang/source.rez.js) — [upstream](https://github.com/textmate/rez.tmbundle)
+* [ ] [`source.ring`](lang/source.ring.js) (mit)
+* [ ] [`source.roc`](lang/source.roc.js) (mit) — [upstream](https://github.com/ivan-demchenko/roc-vscode-unofficial)
+* [ ] [`source.ron`](lang/source.ron.js) (mit) — [upstream](https://github.com/a5huynh/vscode-ron)
+* [ ] [`source.rpgle`](lang/source.rpgle.js) (mit) — [upstream](https://github.com/barrettotte/vscode-ibmi-languages) — needs: `source.sql`
+* [ ] [`source.rpm-spec`](lang/source.rpm-spec.js) (mit) — needs: `source.changelogs.rpm-spec`, `source.shell`
+* [ ] [`source.sail`](lang/source.sail.js) (mit) — [upstream](https://github.com/Timmmm/sail_vscode)
+* [ ] [`source.sas`](lang/source.sas.js) (mit) — [upstream](https://github.com/rpardee/sas.tmbundle)
+* [ ] [`source.sass`](lang/source.sass.js) (mit) — [upstream](https://github.com/atom/language-sass) — needs: `source.css`
+* [ ] [`source.scad`](lang/source.scad.js) (mit) — [upstream](https://github.com/tbuser/openscad.tmbundle)
+* [ ] [`source.scala`](lang/source.scala.js) (mit) — [upstream](https://github.com/scala/vscode-scala-syntax)
+* [ ] [`source.scaml`](lang/source.scaml.js) (apache-2.0) — [upstream](https://github.com/scalate/Scalate.tmbundle) — needs: `source.scala`
+* [ ] [`source.scenic`](lang/source.scenic.js) (mit) — [upstream](https://github.com/UCSCFormalMethods/Scenic-tmLanguage)
+* [ ] [`source.scheme`](lang/source.scheme.js)
+* [ ] [`source.scilab`](lang/source.scilab.js)
+* [ ] [`source.scm`](lang/source.scm.js) (mit) — [upstream](https://github.com/jrieken/vscode-tree-sitter-query)
+* [ ] [`source.sdbl`](lang/source.sdbl.js) (mit) — [upstream](https://github.com/1c-syntax/vsc-language-1c-bsl)
+* [ ] [`source.sed`](lang/source.sed.js) (isc) — [upstream](https://github.com/Alhadis/language-sed)
+* [ ] [`source.sepolicy`](lang/source.sepolicy.js) (apache-2.0) — [upstream](https://github.com/google/selinux-policy-languages)
+* [ ] [`source.sfv`](lang/source.sfv.js) (isc) — [upstream](https://github.com/Alhadis/language-etc)
+* [ ] [`source.shaderlab`](lang/source.shaderlab.js) (mit)
+* [ ] [`source.shellcheckrc`](lang/source.shellcheckrc.js) (isc) — [upstream](https://github.com/Alhadis/language-etc) — needs: `etc`
+* [ ] [`source.shen`](lang/source.shen.js) (bsd-3-clause)
+* [ ] [`source.sieve`](lang/source.sieve.js) (isc) — [upstream](https://github.com/Alhadis/language-etc)
+* [ ] [`source.singularity`](lang/source.singularity.js) (mit) — [upstream](https://github.com/onnovalkering/vscode-singularity)
+* [ ] [`source.slang`](lang/source.slang.js) (apache-2.0) — [upstream](https://github.com/shader-slang/slang-vscode-extension)
+* [ ] [`source.slint`](lang/source.slint.js) (mit) — [upstream](https://github.com/slint-ui/slint-tmLanguage)
+* [ ] [`source.smali`](lang/source.smali.js) (mit) — [upstream](https://github.com/ShaneWilton/sublime-smali)
+* [ ] [`source.smalltalk`](lang/source.smalltalk.js) (mit)
+* [ ] [`source.smithy`](lang/source.smithy.js) (apache-2.0) — [upstream](https://github.com/awslabs/smithy-vscode)
+* [ ] [`source.smpl`](lang/source.smpl.js) (isc) — [upstream](https://github.com/Alhadis/language-etc) — needs: `etc`
+* [ ] [`source.smt`](lang/source.smt.js) (unlicense)
+* [ ] [`source.solidity`](lang/source.solidity.js) (mit) — [upstream](https://github.com/davidhq/SublimeEthereum)
+* [ ] [`source.solution`](lang/source.solution.js) (isc) — [upstream](https://github.com/Nixinova/NovaGrammars)
+* [ ] [`source.sourcepawn`](lang/source.sourcepawn.js) (mit) — [upstream](https://github.com/Sarrus1/sourcepawn-vscode)
+* [ ] [`source.sparql`](lang/source.sparql.js) (mit) — [upstream](https://github.com/peta/turtle.tmbundle) — needs: `source.turtle`
+* [ ] [`source.spin`](lang/source.spin.js) (zlib) — [upstream](https://github.com/bitbased/sublime-spintools)
+* [ ] [`source.sqf`](lang/source.sqf.js) (apache-2.0) — [upstream](https://github.com/JonBons/Sublime-SQF-Language)
+* [ ] [`source.ssh-config`](lang/source.ssh-config.js) (isc) — [upstream](https://github.com/Alhadis/language-etc)
+* [ ] [`source.stan`](lang/source.stan.js) (mit) — [upstream](https://github.com/stan-dev/atom-language-stan)
+* [ ] [`source.star`](lang/source.star.js) (isc) — [upstream](https://github.com/Alhadis/language-etc)
+* [ ] [`source.stata`](lang/source.stata.js) (mit) — [upstream](https://github.com/pschumm/Stata.tmbundle)
+* [ ] [`source.stl`](lang/source.stl.js) (isc) — [upstream](https://github.com/Alhadis/language-etc) — needs: `etc`
+* [ ] [`source.string-template`](lang/source.string-template.js) (isc) — [upstream](https://github.com/Alhadis/language-etc) — needs: `etc`
+* [ ] [`source.stylus`](lang/source.stylus.js) (mit)
+* [ ] [`source.supercollider`](lang/source.supercollider.js) (mit) — [upstream](https://github.com/supercollider/language-supercollider)
+* [ ] [`source.svelte`](lang/source.svelte.js) (mit) — [upstream](https://github.com/sebastinez/svelte-atom) — needs: `source.css`, `source.js`, `source.ts`
+* [ ] [`source.sway`](lang/source.sway.js) (apache-2.0) — [upstream](https://github.com/FuelLabs/sway-vscode-plugin)
+* [ ] [`source.sy`](lang/source.sy.js) (isc) — [upstream](https://github.com/Alhadis/language-regexp) — needs: `source.regexp`
+* [ ] [`source.systemverilog`](lang/source.systemverilog.js) (apache-2.0) — [upstream](https://github.com/TheClams/SystemVerilog)
+* [ ] [`source.tact`](lang/source.tact.js) (mit) — [upstream](https://github.com/tact-lang/tact-sublime)
+* [ ] [`source.talon`](lang/source.talon.js) (mit) — [upstream](https://github.com/mrob95/vscode-TalonScript)
+* [ ] [`source.tcl`](lang/source.tcl.js)
+* [ ] [`source.tea`](lang/source.tea.js) (apache-2.0) — needs: `source.js`, `text.html.basic`, `text.xml`
+* [ ] [`source.templ`](lang/source.templ.js) (mit) — [upstream](https://github.com/templ-go/templ-vscode) — needs: `source.go`
+* [ ] [`source.terra`](lang/source.terra.js) (bsd-3-clause)
+* [ ] [`source.textgrid`](lang/source.textgrid.js) (mit) — [upstream](https://github.com/orhunulusahin/praatvscode)
+* [ ] [`source.textproto`](lang/source.textproto.js) (mit) — [upstream](https://github.com/thejustinwalsh/textproto-grammar)
+* [ ] [`source.thrift`](lang/source.thrift.js)
+* [ ] [`source.tl`](lang/source.tl.js) (mit)
+* [ ] [`source.tla`](lang/source.tla.js) (mit)
+* [ ] [`source.tlverilog`](lang/source.tlverilog.js) (mit) — [upstream](https://github.com/adamint/tlv-vscode)
+* [ ] [`source.tm-properties`](lang/source.tm-properties.js) — [upstream](https://github.com/textmate/textmate.tmbundle)
+* [ ] [`source.toc`](lang/source.toc.js) (unlicense) — [upstream](https://github.com/nebularg/language-toc-wow)
+* [ ] [`source.toit`](lang/source.toit.js) (mit) — [upstream](https://github.com/toitware/ide-tools)
+* [ ] [`source.toml`](lang/source.toml.js) — [upstream](https://github.com/textmate/toml.tmbundle)
+* [ ] [`source.torrc`](lang/source.torrc.js) (isc) — [upstream](https://github.com/Alhadis/language-etc) — needs: `etc`, `source.hosts`
+* [ ] [`source.tsp`](lang/source.tsp.js) (mit) — [upstream](https://github.com/microsoft/typespec)
+* [ ] [`source.tsql`](lang/source.tsql.js) (mit) — [upstream](https://github.com/beau-witter/language-tsql)
+* [ ] [`source.tsx`](lang/source.tsx.js) (mit) — [upstream](https://github.com/Microsoft/TypeScript-TmLanguage)
+* [ ] [`source.turing`](lang/source.turing.js) (isc) — [upstream](https://github.com/Alhadis/language-turing)
+* [ ] [`source.turtle`](lang/source.turtle.js) (mit) — [upstream](https://github.com/peta/turtle.tmbundle)
+* [ ] [`source.txl`](lang/source.txl.js) (apache-2.0) — [upstream](https://github.com/MikeHoffert/Sublime-Text-TXL-syntax)
+* [ ] [`source.typst`](lang/source.typst.js) (apache-2.0) — [upstream](https://github.com/michidk/typst-grammar)
+* [ ] [`source.uplc`](lang/source.uplc.js) (apache-2.0) — [upstream](https://github.com/aiken-lang/vscode-aiken)
+* [ ] [`source.ur`](lang/source.ur.js) (mit)
+* [ ] [`source.v`](lang/source.v.js) (mit) — [upstream](https://github.com/0x9ef/vscode-vlang)
+* [ ] [`source.vala`](lang/source.vala.js) (mit) — [upstream](https://github.com/technosophos/Vala-TMBundle)
+* [ ] [`source.varnish.vcl`](lang/source.varnish.vcl.js) (mit) — [upstream](https://github.com/brandonwamboldt/sublime-varnish)
+* [ ] [`source.vba`](lang/source.vba.js) (mpl-2.0) — [upstream](https://github.com/serkonda7/vscode-vba)
+* [ ] [`source.vcard`](lang/source.vcard.js) (mit) — [upstream](https://github.com/cstrachan88/vscode-vcard)
+* [ ] [`source.velocity`](lang/source.velocity.js) (mit) — [upstream](https://github.com/animecyc/AtomLanguageVelocity)
+* [ ] [`source.vento`](lang/source.vento.js) (mit) — [upstream](https://github.com/ventojs/vscode-vento) — needs: `source.js`
+* [ ] [`source.verilog`](lang/source.verilog.js)
+* [ ] [`source.vhdl`](lang/source.vhdl.js)
+* [ ] [`source.vim-snippet`](lang/source.vim-snippet.js) (mit) — [upstream](https://github.com/Alhadis/language-viml)
+* [ ] [`source.viml`](lang/source.viml.js) (mit) — [upstream](https://github.com/Alhadis/language-viml)
+* [ ] [`source.vue`](lang/source.vue.js) (mit) — [upstream](https://github.com/vuejs/language-tools) — needs: `source.css`, `text.html.basic`
+* [ ] [`source.vyper`](lang/source.vyper.js) (mit) — [upstream](https://github.com/davidhq/SublimeEthereum)
+* [ ] [`source.wavefront.mtl`](lang/source.wavefront.mtl.js) (isc) — [upstream](https://github.com/Alhadis/language-wavefront)
+* [ ] [`source.wavefront.obj`](lang/source.wavefront.obj.js) (isc) — [upstream](https://github.com/Alhadis/language-wavefront)
+* [ ] [`source.wdl`](lang/source.wdl.js) (apache-2.0) — [upstream](https://github.com/stjude-rust-labs/sprocket-vscode)
+* [ ] [`source.webassembly`](lang/source.webassembly.js) (isc) — [upstream](https://github.com/Alhadis/language-webassembly)
+* [ ] [`source.webidl`](lang/source.webidl.js) (mit) — [upstream](https://github.com/andik/IDL-Syntax)
+* [ ] [`source.wgetrc`](lang/source.wgetrc.js) (isc) — [upstream](https://github.com/Alhadis/language-etc) — needs: `etc`
+* [ ] [`source.wgsl`](lang/source.wgsl.js) (mit) — [upstream](https://github.com/wgsl-analyzer/wgsl-analyzer)
+* [ ] [`source.whiley`](lang/source.whiley.js) (apache-2.0) — [upstream](https://github.com/Whiley/WhileySyntaxBundle)
+* [ ] [`source.win32-messages`](lang/source.win32-messages.js) (isc) — [upstream](https://github.com/Nixinova/NovaGrammars)
+* [ ] [`source.wit`](lang/source.wit.js) (apache-2.0) — [upstream](https://github.com/bytecodealliance/vscode-wit)
+* [ ] [`source.witcherscript`](lang/source.witcherscript.js) (mit) — [upstream](https://github.com/ADawesomeguy/witcherscript-grammar)
+* [ ] [`source.wollok`](lang/source.wollok.js) (mit)
+* [ ] [`source.wren`](lang/source.wren.js) (mit) — [upstream](https://github.com/Nelarius/vscode-wren)
+* [ ] [`source.wsd`](lang/source.wsd.js) (mit) — [upstream](https://github.com/qjebbs/vscode-plantuml)
+* [ ] [`source.x10`](lang/source.x10.js) (apache-2.0)
+* [ ] [`source.x86`](lang/source.x86.js) (mit) — [upstream](https://github.com/calculuswhiz/Assembly-Syntax-Definition)
+* [ ] [`source.xc`](lang/source.xc.js) — needs: `source.c`
+* [ ] [`source.xlfd`](lang/source.xlfd.js) (isc) — [upstream](https://github.com/Alhadis/language-fontforge)
+* [ ] [`source.xmake`](lang/source.xmake.js) (mit) — [upstream](https://github.com/xmake-io/xmake-lua.tmbundle)
+* [ ] [`source.xojo`](lang/source.xojo.js) (apache-2.0) — [upstream](https://github.com/jimmckay/XojoSyntaxTM)
+* [ ] [`source.xq`](lang/source.xq.js) (apache-2.0) — [upstream](https://github.com/wcandillon/language-jsoniq)
+* [ ] [`source.xtend`](lang/source.xtend.js) (mit)
+* [ ] [`source.yacc`](lang/source.yacc.js) (isc) — [upstream](https://github.com/Alhadis/language-grammars) — needs: `source.c++`, `source.java`
+* [ ] [`source.yaml.salt`](lang/source.yaml.salt.js) (mit) — [upstream](https://github.com/saltstack/atom-salt) — needs: `source.python`
+* [ ] [`source.yang`](lang/source.yang.js) (mit)
+* [ ] [`source.yara`](lang/source.yara.js) (mit) — [upstream](https://github.com/infosec-intern/vscode-yara)
+* [ ] [`source.yasnippet`](lang/source.yasnippet.js) (isc) — [upstream](https://github.com/Alhadis/language-emacs-lisp) — needs: `source.emacs.lisp`
+* [ ] [`source.yul`](lang/source.yul.js) (mit) — [upstream](https://github.com/davidhq/SublimeEthereum)
+* [ ] [`source.zap`](lang/source.zap.js)
+* [ ] [`source.zeek`](lang/source.zeek.js) (bsd-3-clause) — [upstream](https://github.com/zeek/zeek-sublime)
+* [ ] [`source.zenscript`](lang/source.zenscript.js) (mit) — [upstream](https://github.com/CraftTweaker/ZenScript-tmLanguage)
+* [ ] [`source.zig`](lang/source.zig.js) (mit) — [upstream](https://github.com/ziglang/sublime-zig-language)
+* [ ] [`source.zil`](lang/source.zil.js)
+* [ ] [`source.zmodel`](lang/source.zmodel.js) (mit) — [upstream](https://github.com/zenstackhq/zenstack)
+* [ ] [`text.adblock`](lang/text.adblock.js) (mit) — [upstream](https://github.com/AdguardTeam/VscodeAdblockSyntax)
+* [ ] [`text.bibtex`](lang/text.bibtex.js) — [upstream](https://github.com/textmate/latex.tmbundle)
+* [ ] [`text.browserslist`](lang/text.browserslist.js) (mit) — [upstream](https://github.com/browserslist/browserslist-vscode)
+* [ ] [`text.cfml.basic`](lang/text.cfml.basic.js) (mit)
+* [ ] [`text.checksums`](lang/text.checksums.js) (isc) — [upstream](https://github.com/Alhadis/language-etc) — needs: `etc`
+* [ ] [`text.codeowners`](lang/text.codeowners.js) (isc) — [upstream](https://github.com/Alhadis/language-etc) — needs: `etc`
+* [ ] [`text.conllu`](lang/text.conllu.js) (apache-2.0)
+* [ ] [`text.crontab`](lang/text.crontab.js)
+* [ ] [`text.dfy.dafny`](lang/text.dfy.dafny.js) (mit) — [upstream](https://github.com/DafnyVSCode/Dafny-VSCode)
+* [ ] [`text.elixir`](lang/text.elixir.js) (apache-2.0) — [upstream](https://github.com/elixir-lang/elixir-tmbundle) — needs: `source.elixir`
+* [ ] [`text.eml.basic`](lang/text.eml.basic.js) (mit) — [upstream](https://github.com/mariozaizar/language-eml)
+* [ ] [`text.gherkin.feature`](lang/text.gherkin.feature.js) (mit) — [upstream](https://github.com/cucumber/cucumber-tmbundle)
+* [ ] [`text.grammarkdown`](lang/text.grammarkdown.js) (isc) — [upstream](https://github.com/Alhadis/language-grammars)
+* [ ] [`text.haml`](lang/text.haml.js) (mit) — needs: `source.ruby`
+* [ ] [`text.html.asciidoc`](lang/text.html.asciidoc.js) (mit) — [upstream](https://github.com/zuckschwerdt/asciidoc.tmbundle) — needs: `text.html.basic`
+* [ ] [`text.html.asdoc`](lang/text.html.asdoc.js) (mit) — [upstream](https://github.com/simongregory/actionscript3-tmbundle) — needs: `text.html.basic`
+* [ ] [`text.html.asp`](lang/text.html.asp.js) — needs: `source.asp`, `text.html.basic`
+* [ ] [`text.html.cfm`](lang/text.html.cfm.js) (mit) — needs: `source.cfscript`, `text.cfml.basic`
+* [ ] [`text.html.creole`](lang/text.html.creole.js) (mit) — [upstream](https://github.com/Siddley/Creole) — needs: `text.html.basic`
+* [ ] [`text.html.cshtml`](lang/text.html.cshtml.js) (mit) — [upstream](https://github.com/github-linguist/razor-plus) — needs: `source.cs`, `text.html.basic`
+* [ ] [`text.html.django`](lang/text.html.django.js) — needs: `text.html.basic`
+* [ ] [`text.html.ecmarkup`](lang/text.html.ecmarkup.js) (isc) — [upstream](https://github.com/Alhadis/language-etc) — needs: `etc`, `source.yaml`, `text.grammarkdown`, `text.html.basic`
+* [ ] [`text.html.ecr`](lang/text.html.ecr.js) (mit) — [upstream](https://github.com/atom-crystal/language-crystal) — needs: `source.crystal`, `text.html.basic`
+* [ ] [`text.html.edge`](lang/text.html.edge.js) (mit) — [upstream](https://github.com/edge-js/edge-vscode)
+* [ ] [`text.html.elixir`](lang/text.html.elixir.js) (apache-2.0) — [upstream](https://github.com/elixir-lang/elixir-tmbundle) — needs: `text.elixir`, `text.html.basic`
+* [ ] [`text.html.erb`](lang/text.html.erb.js) (mit) — [upstream](https://github.com/atom/language-ruby) — needs: `source.ruby`, `text.html.basic`
+* [ ] [`text.html.ftl`](lang/text.html.ftl.js) (mit) — needs: `text.html.basic`
+* [ ] [`text.html.handlebars`](lang/text.html.handlebars.js) (mit) — [upstream](https://github.com/daaain/Handlebars) — needs: `text.html.basic`
+* [ ] [`text.html.javadoc`](lang/text.html.javadoc.js)
+* [ ] [`text.html.js`](lang/text.html.js.js) (mit) — needs: `text.html.basic`
+* [ ] [`text.html.jsp`](lang/text.html.jsp.js) — [upstream](https://github.com/textmate/java.tmbundle) — needs: `text.html.basic`
+* [ ] [`text.html.jte`](lang/text.html.jte.js) (apache-2.0) — [upstream](https://github.com/maj2c/jte-template-syntax-highlight) — needs: `source.java`, `text.html.basic`
+* [ ] [`text.html.liquid`](lang/text.html.liquid.js) (mit) — [upstream](https://github.com/Shopify/liquid-tm-grammar) — needs: `text.html.basic`
+* [ ] [`text.html.mako`](lang/text.html.mako.js) (mit) — needs: `text.html.basic`
+* [ ] [`text.html.markdown.source.gfm.apib`](lang/text.html.markdown.source.gfm.apib.js) (mit) — [upstream](https://github.com/apiaryio/api-blueprint-sublime-plugin) — needs: `source.js`, `text.html.markdown.source.gfm.mson`
+* [ ] [`text.html.markdown.source.gfm.mson`](lang/text.html.markdown.source.gfm.mson.js) (mit) — [upstream](https://github.com/apiaryio/api-blueprint-sublime-plugin)
+* [ ] [`text.html.mediawiki`](lang/text.html.mediawiki.js)
+* [ ] [`text.html.nunjucks`](lang/text.html.nunjucks.js) (mit) — needs: `source.nunjucks`, `text.html.basic`
+* [ ] [`text.html.php.blade`](lang/text.html.php.blade.js) (mit) — needs: `text.html.basic`
+* [ ] [`text.html.riot`](lang/text.html.riot.js) (mit)
+* [ ] [`text.html.slash`](lang/text.html.slash.js) (mit) — needs: `text.html.basic`
+* [ ] [`text.html.smarty`](lang/text.html.smarty.js) — needs: `text.html.basic`
+* [ ] [`text.html.soy`](lang/text.html.soy.js) (mit) — needs: `text.html.basic`
+* [ ] [`text.html.statamic`](lang/text.html.statamic.js) (mit) — [upstream](https://github.com/Stillat/vscode-antlers-language-server) — needs: `text.html.basic`
+* [ ] [`text.html.twig`](lang/text.html.twig.js) (bsd-3-clause) — [upstream](https://github.com/Anomareh/PHP-Twig.tmbundle)
+* [ ] [`text.jade`](lang/text.jade.js) (mit) — needs: `source.js`, `text.html.basic`
+* [ ] [`text.marko`](lang/text.marko.js) (mit) — [upstream](https://github.com/marko-js/marko-tmbundle) — needs: `source.js`
+* [ ] [`text.muse`](lang/text.muse.js) (isc) — [upstream](https://github.com/Alhadis/language-emacs-lisp)
+* [ ] [`text.python.console`](lang/text.python.console.js) (mit) — [upstream](https://github.com/MagicStack/MagicPython) — needs: `source.python`
+* [ ] [`text.python.traceback`](lang/text.python.traceback.js) (mit) — [upstream](https://github.com/MagicStack/MagicPython) — needs: `source.python`
+* [ ] [`text.rdoc`](lang/text.rdoc.js) (mit)
+* [ ] [`text.restructuredtext`](lang/text.restructuredtext.js) (mit) — [upstream](https://github.com/Lukasa/language-restructuredtext)
+* [ ] [`text.robot`](lang/text.robot.js) (apache-2.0) — [upstream](https://github.com/shellderp/sublime-robot-plugin)
+* [ ] [`text.robots-txt`](lang/text.robots-txt.js) (isc) — [upstream](https://github.com/Nixinova/NovaGrammars)
+* [ ] [`text.roff`](lang/text.roff.js) (isc) — [upstream](https://github.com/Alhadis/language-roff) — needs: `source.ditroff`, `source.gremlin`, `source.ideal`, `source.pic`
+* [ ] [`text.rtf`](lang/text.rtf.js) (mit) — [upstream](https://github.com/nwhetsell/language-rtf)
+* [ ] [`text.runoff`](lang/text.runoff.js) (isc) — [upstream](https://github.com/Alhadis/language-roff)
+* [ ] [`text.sfd`](lang/text.sfd.js) (isc) — [upstream](https://github.com/Alhadis/language-fontforge) — needs: `source.fontforge`
+* [ ] [`text.shell-session`](lang/text.shell-session.js) (mit) — [upstream](https://github.com/atom/language-shellscript) — needs: `source.shell`
+* [ ] [`text.slim`](lang/text.slim.js) (mit) — needs: `text.html.basic`
+* [ ] [`text.srt`](lang/text.srt.js) (isc) — [upstream](https://github.com/Alhadis/language-subtitles) — needs: `text.html.basic`
+* [ ] [`text.tex`](lang/text.tex.js) — [upstream](https://github.com/textmate/latex.tmbundle) — needs: `source.r`
+* [ ] [`text.tex.latex`](lang/text.tex.latex.js) — [upstream](https://github.com/textmate/latex.tmbundle) — needs: `text.tex`
+* [ ] [`text.tex.latex.haskell`](lang/text.tex.latex.haskell.js) (mit) — [upstream](https://github.com/atom-haskell/language-haskell) — needs: `source.haskell`, `text.tex.latex`
+* [ ] [`text.tex.latex.sweave`](lang/text.tex.latex.sweave.js) — [upstream](https://github.com/textmate/sweave.tmbundle) — needs: `source.r`, `text.tex.latex`
+* [ ] [`text.texinfo`](lang/text.texinfo.js) (isc) — [upstream](https://github.com/Alhadis/language-texinfo)
+* [ ] [`text.vim-help`](lang/text.vim-help.js) (mit) — [upstream](https://github.com/Alhadis/language-viml) — needs: `source.viml`
+* [ ] [`text.vtt`](lang/text.vtt.js) (isc) — [upstream](https://github.com/Alhadis/language-subtitles) — needs: `text.html.basic`
+* [ ] [`text.xml.ant`](lang/text.xml.ant.js) (mit) — needs: `text.xml`
+* [ ] [`text.xml.plist`](lang/text.xml.plist.js) (mit) — [upstream](https://github.com/atom/language-property-list) — needs: `text.xml`
+* [ ] [`text.xml.pom`](lang/text.xml.pom.js) — needs: `source.groovy`, `text.xml`
+* [ ] [`text.xml.xsl`](lang/text.xml.xsl.js) — needs: `text.xml`
+* [ ] [`text.zone_file`](lang/text.zone_file.js) (mit) — [upstream](https://github.com/sixty4k/st2-zonefile)
+
+<!--support end-->
+
+## Compatibility
+
+This project is compatible with maintained versions of Node.js.
+
+When we cut a new major release,
+we drop support for unmaintained versions of Node.
+This means we try to keep the current release line,
+`wooorm@starry-night@3`,
+compatible with Node.js 16.
+
+You can pass your own TextMate grammars,
+provided that they work with
+[`vscode-textmate`][github-vscode-textmate],
+and that they have the added fields `extensions`,
+`names`,
+and `scopeName`
+(see types for the definitions and the grammars in `lang/` for examples).
+
+## Security
+
+This package is safe.
+
+## Related
+
+* [`lowlight`][github-lowlight]
+  — similar but based on `highlight.js`
+* [`refractor`][github-refractor]
+  — similar but based on `Prism`
+
+## Contribute
+
+Yes please!
+See [How to Contribute to Open Source][opensource-guide-contribute].
+
+## License
+
+The grammars included in this package are covered by their repositories’
+respective licenses,
+which are permissive
+(`apache-2.0`, `mit`, etc),
+and made available in [`notice`][file-notice].
+
+All other files [MIT][file-license] © [Titus Wormer][wooorm]
+
+<br>
+
+[![](media/slice-3.jpg)][artsandculture-google-starry-night]
+
+<!-- Definitions -->
+
+[api-all]: #all
+
+[api-common]: #common
+
+[api-create-starry-night]: #createstarrynightgrammars-options
+
+[api-get-oniguruma-url]: #getonigurumaurl
+
+[api-grammar]: #grammar
+
+[api-options]: #options
+
+[artsandculture-google-starry-night]: https://artsandculture.google.com/asset/the-starry-night/bgEuwDxel93-Pg
+
+[badge-build-image]: https://github.com/wooorm/starry-night/workflows/main/badge.svg
+
+[badge-build-url]: https://github.com/wooorm/starry-night/actions
+
+[badge-coverage-image]: https://img.shields.io/codecov/c/github/wooorm/starry-night.svg
+
+[badge-coverage-url]: https://codecov.io/github/wooorm/starry-night
+
+[badge-downloads-image]: https://img.shields.io/npm/dm/@wooorm/starry-night.svg
+
+[badge-downloads-url]: https://www.npmjs.com/package/@wooorm/starry-night
+
+[badge-size-image]: https://img.shields.io/bundlejs/size/@wooorm/starry-night?exports=createStarryNight
+
+[badge-size-url]: https://bundlejs.com/?q=@wooorm/starry-night
+
+[esmsh]: https://esm.sh
+
+[file-license]: license
+
+[file-notice]: notice
+
+[github-gist-esm]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
+
+[github-hast]: https://github.com/syntax-tree/hast
+
+[github-hast-root]: https://github.com/syntax-tree/hast#root
+
+[github-hast-util-to-dom]: https://github.com/syntax-tree/hast-util-to-dom
+
+[github-hast-util-to-html]: https://github.com/syntax-tree/hast-util-to-html
+
+[github-hast-util-to-jsx-runtime]: https://github.com/syntax-tree/hast-util-to-jsx-runtime
+
+[github-linguist-languages-yml]: https://github.com/github-linguist/linguist/blob/b5432eb/lib/linguist/languages.yml#L4031
+
+[github-lowlight]: https://github.com/wooorm/lowlight
+
+[github-markdown-tm-language]: https://github.com/wooorm/markdown-tm-language
+
+[github-pages-license]: https://github.com/github/pages-gem/issues/160#issuecomment-134565796
+
+[github-pages-pygments]: https://github.com/github/pages-gem/pull/79#issuecomment-85997762
+
+[github-refractor]: https://github.com/wooorm/refractor
+
+[github-rehype]: https://github.com/rehypejs/rehype
+
+[github-rehype-starry-night]: https://github.com/rehypejs/rehype-starry-night
+
+[github-shiki]: https://github.com/shikijs/shiki
+
+[github-tree-sitter-tree-lights]: https://github.com/tree-sitter/tree-sitter/pull/283#issuecomment-465509157
+
+[github-unified]: https://github.com/unifiedjs/unified
+
+[github-vscode-oniguruma]: https://github.com/microsoft/vscode-oniguruma
+
+[github-vscode-textmate]: https://github.com/microsoft/vscode-textmate
+
+[npmjs-install]: https://docs.npmjs.com/cli/install
+
+[npmjs-using-npm-script-dependencies]: https://docs.npmjs.com/cli/v11/using-npm/scripts#dependencies
+
+[opensource-guide-contribute]: https://opensource.guide/how-to-contribute/
+
+[section-css]: #css
+
+[typescript]: https://www.typescriptlang.org
+
+[wooorm]: https://wooorm.com
 </file>
 
 <file path="src/Artifacts/A6. DCE - Initial Scaffolding Deployment Script.md">
@@ -6247,6 +8135,7 @@ export class FlattenerService {
 </file>
 
 <file path="src/backend/services/fs.service.ts">
+// Updated on: C112 (Fix starry-night imports and add more grammars)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -6264,6 +8153,13 @@ import pdf from 'pdf-parse/lib/pdf-parse.js';
 import * as XLSX from 'xlsx';
 import mammoth from 'mammoth';
 import { createStarryNight, common } from '@wooorm/starry-night';
+import sourceTsx from '@wooorm/starry-night/source.tsx';
+import sourceJs from '@wooorm/starry-night/source.js';
+import sourceJsx from '@wooorm/starry-night/source.js.jsx';
+import sourceTs from '@wooorm/starry-night/source.ts';
+import sourceCss from '@wooorm/starry-night/source.css';
+import sourceScss from '@wooorm/starry-night/source.scss';
+import textHtml from '@wooorm/starry-night/text.html.basic';
 import { toHtml } from 'hast-util-to-html';
 
 
@@ -6286,33 +8182,9 @@ export class FSService {
     private excelMarkdownCache = new Map<string, { markdown: string; tokenCount: number }>();
     private wordTextCache = new Map<string, { text: string; tokenCount: number }>();
     private starryNight: any = null;
-    private langToScopeMap: Map<string, string>;
 
     constructor(gitApi?: GitAPI) {
         this.gitApi = gitApi;
-        this.langToScopeMap = new Map([
-            ['js', 'source.js'],
-            ['jsx', 'source.js.jsx'],
-            ['ts', 'source.ts'],
-            ['tsx', 'source.tsx'],
-            ['json', 'source.json'],
-            ['css', 'source.css'],
-            ['scss', 'source.css.scss'],
-            ['html', 'text.html.basic'],
-            ['xml', 'text.xml'],
-            ['md', 'text.md'],
-            ['py', 'source.python'],
-            ['java', 'source.java'],
-            ['c', 'source.c'],
-            ['cpp', 'source.cpp'],
-            ['cs', 'source.cs'],
-            ['go', 'source.go'],
-            ['rb', 'source.ruby'],
-            ['php', 'source.php'],
-            ['sh', 'source.shell'],
-            ['yaml', 'source.yaml'],
-            ['yml', 'source.yaml'],
-        ]);
         if (this.gitApi) {
             Services.loggerService.log(`FSService constructed with Git API. Found ${this.gitApi.repositories.length} repositories.`);
             this.gitApi.onDidOpenRepository(() => this.triggerFullRefresh());
@@ -6328,7 +8200,9 @@ export class FSService {
 
     private async initializeStarryNight() {
         try {
-            this.starryNight = await createStarryNight(common);
+            // C112: Add more grammars for better TSX/JS highlighting
+            const grammars = [...common, sourceTsx, sourceJs, sourceJsx, sourceTs, sourceCss, sourceScss, textHtml];
+            this.starryNight = await createStarryNight(grammars);
             Services.loggerService.log('Starry Night syntax highlighter initialized.');
         } catch (error) {
             Services.loggerService.error(`Failed to initialize Starry Night: ${error}`);
@@ -6343,15 +8217,14 @@ export class FSService {
             return;
         }
 
-        const scope = this.langToScopeMap.get(lang) || this.starryNight.flagToScope(lang);
+        const scope = this.starryNight.flagToScope(lang);
         if (!scope) {
-            Services.loggerService.warn(`No Starry Night scope found for language: ${lang}`);
+            Services.loggerService.warn(`[WARN] No Starry Night scope found for language: ${lang}`);
             serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml: `<pre><code>${code}</code></pre>`, id });
             return;
         }
 
         try {
-            Services.loggerService.log(`Highlighting with scope: ${scope}`);
             const tree = this.starryNight.highlight(code, scope);
             const highlightedHtml = toHtml(tree);
             serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml, id });
@@ -8920,7 +10793,7 @@ export const logger = {
 </file>
 
 <file path="src/client/utils/response-parser.ts">
-// Updated on: C109 (Implement robust two-stage parsing)
+// Updated on: C112 (Add cleanup for trailing code fences)
 import { ParsedResponse, ParsedFile } from "@/common/types/pcpp.types";
 
 // Regex to find the summary/plan before any major headers
@@ -8932,13 +10805,13 @@ const COURSE_OF_ACTION_REGEX = /### Course of Action\s*([\s\S]*?)(?=### Files Up
 // Regex for the "Files Updated" markdown list (as a fallback)
 const FILES_UPDATED_LIST_REGEX = /### Files Updated This Cycle\s*([\s\S]*?)(?=<file path="|`{3,})/m;
 
-// C109: New approach - Find file tags first, then extract content between them.
+// Find file tags first, then extract content between them.
 const FILE_TAG_REGEX = /<file path="([^"]+)">/g;
 
 
 export function parseResponse(rawText: string): ParsedResponse {
     const files: ParsedFile[] = [];
-    const filesUpdatedList: string[] = [];
+    let filesUpdatedList: string[] = [];
 
     // Stage 1: Find all file tags and their positions
     const tagMatches = [...rawText.matchAll(FILE_TAG_REGEX)];
@@ -8953,17 +10826,22 @@ export function parseResponse(rawText: string): ParsedResponse {
         
         let content = rawText.substring(contentStart, contentEnd).trim();
 
-        // Clean up potential closing tags from the end of the content
-        const closingTagSimple = `</file>`;
-        const closingTagWithPath = `</${path}>`;
-        if (content.endsWith(closingTagSimple)) {
-            content = content.slice(0, -closingTagSimple.length).trim();
-        } else if (content.endsWith(closingTagWithPath)) {
-            content = content.slice(0, -closingTagWithPath.length).trim();
-        }
+        // C112: Clean up potential closing tags and code fences from the end of the content
+        const patternsToRemove = [
+            `</file>`,
+            `</${path}>`,
+            '```xml',
+            '```',
+        ];
+
+        patternsToRemove.forEach(pattern => {
+            // Use a loop to remove multiple occurrences from the end
+            while (content.endsWith(pattern)) {
+                content = content.slice(0, -pattern.length).trim();
+            }
+        });
 
         files.push({ path, content });
-        filesUpdatedList.push(path);
     });
 
     // Extract summary and course of action using the file tags as boundaries
@@ -8973,8 +10851,11 @@ export function parseResponse(rawText: string): ParsedResponse {
     const summary = summaryMatch ? summaryMatch[1].trim() : 'Could not parse summary.';
     const courseOfAction = courseOfActionMatch ? courseOfActionMatch[1].trim() : 'Could not parse course of action.';
 
-    // Fallback for filesUpdated list if no file blocks were found
-    if (filesUpdatedList.length === 0) {
+    // The primary source for filesUpdated is the list of successfully parsed file blocks.
+    if (files.length > 0) {
+        filesUpdatedList = files.map(f => f.path);
+    } else {
+        // Fallback for filesUpdated list if no file blocks were found
         const filesUpdatedMatch = rawText.match(FILES_UPDATED_LIST_REGEX);
         if (filesUpdatedMatch && filesUpdatedMatch[1]) {
             filesUpdatedList.push(...filesUpdatedMatch[1]
@@ -10484,7 +12365,7 @@ export default TestPane3;
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
-/* Updated on: C110 (Add styles for code viewer with line numbers) */
+/* Updated on: C112 (Overhaul code viewer styles, add resizable pane) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -10543,7 +12424,7 @@ body {
     display: flex;
     align-items: center;
     gap: 4px;
-    justify-content: space-between; /* For collapsed navigator */
+    justify-content: space-between;
 
     .chevron {
         transition: transform 0.2s ease-in-out;
@@ -10565,7 +12446,7 @@ body {
     justify-content: space-between;
     align-items: center;
     flex-shrink: 0;
-    gap: 16px; /* Add gap between toolbar groups */
+    gap: 16px;
 }
 
 .cycle-navigator {
@@ -10718,56 +12599,89 @@ body {
 /* Styles for Parsed View */
 .parsed-view-grid {
     display: flex;
-    gap: 8px;
+    gap: 0; /* Remove gap, divider will handle it */
     flex-grow: 1;
     min-height: 0;
 }
 
 .parsed-view-left {
-    flex: 1;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
     gap: 8px;
-    min-width: 0;
+    min-width: 150px; /* Minimum width before collapse */
+    padding-right: 8px;
+}
+
+.resizer {
+    width: 5px;
+    cursor: col-resize;
+    background-color: var(--vscode-panel-border);
+    flex-shrink: 0;
+    &:hover {
+        background-color: var(--vscode-focusBorder);
+    }
 }
 
 .parsed-view-right {
-    flex: 2;
-    overflow-y: auto;
-    min-width: 0;
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
+    min-width: 0;
+    padding-left: 8px;
 }
 
-.parsed-section {
-    margin-bottom: 16px;
+.file-content-viewer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 8px;
+    background-color: var(--vscode-editorGroupHeader-tabsBackground);
+    border: 1px solid var(--vscode-panel-border);
+    border-bottom: none;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    font-size: 12px;
+    flex-shrink: 0;
 
-    .content {
-        padding: 8px;
-        white-space: pre-wrap; /* Preserve whitespace and line breaks */
-        font-size: 12px;
-        background-color: var(--vscode-textBlockQuote-background);
-        border: 1px solid var(--vscode-textBlockQuote-border);
-        border-radius: 4px;
-
-        p, ul, ol {
-            margin-top: 0;
-            margin-bottom: 8px;
-        }
-
-        ul, ol {
-            padding-left: 20px;
-        }
-
-        code {
-            background-color: var(--vscode-textCodeBlock-background);
-            padding: 1px 3px;
-            border-radius: 3px;
-            font-family: var(--vscode-editor-font-family);
-        }
+    .file-path {
+        font-weight: bold;
+    }
+    .metrics {
+        color: var(--vscode-descriptionForeground);
     }
 }
+
+
+.file-content-viewer {
+    flex-grow: 1;
+    background-color: var(--vscode-editor-background);
+    border: 1px solid var(--vscode-panel-border);
+    border-radius: 4px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    padding: 8px;
+    overflow: auto;
+    font-family: var(--vscode-editor-font-family);
+    font-size: var(--vscode-editor-font-size);
+    
+    pre {
+        margin: 0;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+
+    code {
+        font-family: inherit;
+        font-size: inherit;
+    }
+
+    /* Fix for starry-night adding its own background */
+    pre.shiki, pre.shiki code {
+        background-color: transparent !important;
+    }
+}
+
 
 .associated-files-list {
     list-style: none;
@@ -10808,7 +12722,7 @@ body {
     display: flex;
     align-items: center;
     gap: 4px;
-    font-weight: normal; /* De-emphasize from header title */
+    font-weight: normal;
     
     button {
         padding: 0 4px;
@@ -10819,43 +12733,10 @@ body {
         color: var(--vscode-descriptionForeground);
     }
 }
-
-/* C110: Code Viewer Styles */
-.code-viewer-container {
-    background-color: var(--vscode-editor-background);
-    border: 1px solid var(--vscode-panel-border);
-    border-radius: 4px;
-    padding: 8px;
-    overflow: auto;
-    font-family: var(--vscode-editor-font-family);
-    font-size: var(--vscode-editor-font-size);
-    display: flex;
-    flex-grow: 1;
-
-    .line-numbers {
-        padding-right: 12px;
-        text-align: right;
-        color: var(--vscode-editorLineNumber-foreground);
-        user-select: none;
-        font-variant-numeric: tabular-nums;
-    }
-
-    .code-content {
-        flex-grow: 1;
-        white-space: pre;
-        
-        /* Starry-night compatibility */
-        pre {
-            margin: 0;
-            padding: 0;
-            background-color: transparent !important;
-        }
-    }
-}
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
-// Updated on: C110 (Fix infinite loop, add line numbers, improve presentation)
+// Updated on: C112 (Implement resizable panes, reorder layout, add metric placeholders, fix rendering)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -10870,15 +12751,10 @@ import ReactMarkdown from 'react-markdown';
 
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
-
-    const debouncedFn = React.useCallback((...args: any[]) => {
+    return (...args: any[]) => {
         if (timeoutRef.current) clearTimeout(timeoutRef.current);
-        timeoutRef.current = setTimeout(() => {
-            callback(...args);
-        }, delay);
-    }, [callback, delay]);
-
-    return debouncedFn;
+        timeoutRef.current = setTimeout(() => callback(...args), delay);
+    };
 };
 
 interface TabState {
@@ -10899,23 +12775,6 @@ const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; i
     </div>
 );
 
-const CodeViewer: React.FC<{ htmlContent: string | undefined }> = ({ htmlContent }) => {
-    const lines = React.useMemo(() => htmlContent ? htmlContent.split('\n') : [], [htmlContent]);
-    
-    if (!htmlContent) {
-        return <div className="code-viewer-container">Loading code...</div>;
-    }
-
-    return (
-        <div className="code-viewer-container">
-            <div className="line-numbers">
-                {lines.map((_, index) => <div key={index}>{index + 1}</div>)}
-            </div>
-            <div className="code-content" dangerouslySetInnerHTML={{ __html: htmlContent }} />
-        </div>
-    );
-};
-
 const App = () => {
     const [activeTab, setActiveTab] = React.useState(1);
     const [tabCount, setTabCount] = React.useState(4);
@@ -10928,16 +12787,11 @@ const App = () => {
     const [highlightedCodeBlocks, setHighlightedCodeBlocks] = React.useState<Map<string, string>>(new Map());
     const [fileExistenceMap, setFileExistenceMap] = React.useState<Map<string, boolean>>(new Map());
     const [isParsedMode, setIsParsedMode] = React.useState(false);
-    
     const [selectedFilePath, setSelectedFilePath] = React.useState<string | null>(null);
-
     const [isCycleCollapsed, setIsCycleCollapsed] = React.useState(false);
-    const [isSummaryCollapsed, setIsSummaryCollapsed] = React.useState(false);
-    const [isCourseOfActionCollapsed, setIsCourseOfActionCollapsed] = React.useState(false);
-    const [isAssociatedFilesCollapsed, setIsAssociatedFilesCollapsed] = React.useState(false);
-    
-    const processedContentRef = React.useRef(new Set<string>());
-    
+    const [leftPaneWidth, setLeftPaneWidth] = React.useState(33);
+    const isResizing = React.useRef(false);
+
     const clientIpc = ClientPostMessageManager.getInstance();
 
     const saveCurrentCycleState = React.useCallback(() => {
@@ -10963,36 +12817,34 @@ const App = () => {
         debouncedSave();
     }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, debouncedSave]);
     
-    const parseAllTabs = React.useCallback((tabsToParse: { [key: string]: TabState }) => {
+    const parseAllTabs = React.useCallback(() => {
+        logger.log("Parsing all tabs...");
         const allFilePaths = new Set<string>();
-        const updatedTabs = { ...tabsToParse };
-        Object.values(updatedTabs).forEach((tabState, index) => {
-            const tabId = (index + 1).toString();
-            if (tabState.rawContent) {
+        const updatedTabs = { ...tabs };
+        let shouldUpdate = false;
+        Object.entries(updatedTabs).forEach(([tabId, tabState]) => {
+            if (tabState.rawContent && !tabState.parsedContent) {
+                shouldUpdate = true;
                 const parsed = parseResponse(tabState.rawContent);
-                updatedTabs[tabId].parsedContent = parsed;
+                updatedTabs[Number(tabId)].parsedContent = parsed;
                 parsed.filesUpdated.forEach(file => allFilePaths.add(file));
-                
                 parsed.files.forEach(file => {
                     const lang = file.path.split('.').pop() || 'plaintext';
                     const id = `${file.path}::${file.content}`;
-                    if (!processedContentRef.current.has(id)) {
-                         logger.log(`[C110 PARSE] Requesting syntax highlight for: ${file.path}`);
-                         clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
-                         processedContentRef.current.add(id);
-                    }
+                     clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
                 });
             }
         });
-        setTabs(updatedTabs);
+        if (shouldUpdate) {
+            setTabs(updatedTabs);
+        }
         if (allFilePaths.size > 0) {
             clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) });
         }
-    }, [clientIpc]);
+    }, [clientIpc, tabs]);
 
     React.useEffect(() => {
         const loadCycleData = (cycleData: PcppCycle) => {
-            processedContentRef.current.clear();
             setCurrentCycle(cycleData.cycleId);
             setCycleTitle(cycleData.title);
             setCycleContext(cycleData.cycleContext);
@@ -11002,11 +12854,7 @@ const App = () => {
                 newTabs[tabId] = { rawContent: response.content, parsedContent: null };
             });
             setTabs(newTabs);
-            const loadedParseMode = cycleData.isParsedMode || false;
-            setIsParsedMode(loadedParseMode);
-            if (loadedParseMode) {
-                parseAllTabs(newTabs);
-            }
+            setIsParsedMode(cycleData.isParsedMode || false);
         };
 
         clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData }) => {
@@ -11014,7 +12862,9 @@ const App = () => {
             setMaxCycle(cycleData.cycleId);
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData }) => {
-            if (cycleData) loadCycleData(cycleData);
+            if (cycleData) {
+                loadCycleData(cycleData);
+            }
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => {
             setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml));
@@ -11024,35 +12874,53 @@ const App = () => {
         });
         
         clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});
-    }, [clientIpc, parseAllTabs]);
+    }, [clientIpc]);
+
+    React.useEffect(() => {
+        if (isParsedMode) {
+            parseAllTabs();
+        }
+    }, [isParsedMode, tabs, parseAllTabs]);
     
     const activeTabData = tabs[activeTab.toString()];
 
     const viewableContent = React.useMemo(() => {
-        if (!selectedFilePath || !activeTabData?.parsedContent) return undefined;
-        
+        if (!selectedFilePath || !activeTabData?.parsedContent) {
+            return '<div>Select a file to view its content.</div>';
+        }
         const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath);
         if (!file) {
             logger.error(`[Content Display] Could not find file object for path: ${selectedFilePath}`);
-            return `Error: File data not found in parsed response.`;
+            return '<div>Error: File data not found in parsed response.</div>';
         }
         
         const id = `${file.path}::${file.content}`;
-        return highlightedCodeBlocks.get(id);
+        const highlightedHtml = highlightedCodeBlocks.get(id);
 
-    }, [selectedFilePath, activeTabData, highlightedCodeBlocks]);
+        if (highlightedHtml) {
+            return highlightedHtml;
+        } else {
+            return `<pre><code>${file.content.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code></pre>`;
+        }
+    }, [selectedFilePath, activeTabData?.parsedContent, highlightedCodeBlocks]);
 
 
     const handleRawContentChange = (newContent: string, tabIndex: number) => {
-        setTabs(prev => ({ ...prev, [tabIndex.toString()]: { ...(prev[tabIndex.toString()] || { parsedContent: null }), rawContent: newContent }}));
+        setTabs(prev => ({ ...prev, [tabIndex.toString()]: { rawContent: newContent, parsedContent: null }}));
     };
 
     const handleGlobalParseToggle = () => {
         const newParseMode = !isParsedMode;
         setIsParsedMode(newParseMode);
         setSelectedFilePath(null);
-        if (newParseMode) {
-            parseAllTabs(tabs);
+        if (!newParseMode) {
+            setTabs(prev => {
+                const newTabs = {...prev};
+                Object.keys(newTabs).forEach(key => {
+                    newTabs[key].parsedContent = null;
+                });
+                return newTabs;
+            });
         }
     };
 
@@ -11079,6 +12947,32 @@ const App = () => {
     const handleGeneratePrompt = () => {
         clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle });
     };
+
+    const handleMouseDown = (e: React.MouseEvent) => {
+        isResizing.current = true;
+    };
+
+    const handleMouseMove = React.useCallback((e: MouseEvent) => {
+        if (!isResizing.current) return;
+        const newWidth = (e.clientX / window.innerWidth) * 100;
+        if (newWidth > 10 && newWidth < 90) { // Set bounds
+            setLeftPaneWidth(newWidth);
+        }
+    }, []);
+
+    const handleMouseUp = React.useCallback(() => {
+        isResizing.current = false;
+    }, []);
+
+    React.useEffect(() => {
+        window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('mouseup', handleMouseUp);
+        return () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('mouseup', handleMouseUp);
+        };
+    }, [handleMouseMove, handleMouseUp]);
+
 
     const isNewCycleButtonDisabled = React.useMemo(() => {
         const hasTitle = cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== '';
@@ -11134,14 +13028,8 @@ const App = () => {
                             <textarea className="response-textarea" placeholder={`Paste AI response for tab ${activeTab} here...`} value={activeTabData?.rawContent || ''} onChange={(e) => handleRawContentChange(e.target.value, activeTab)} />
                         ) : (
                             <div className="parsed-view-grid">
-                                <div className="parsed-view-left">
-                                    <CollapsibleSection title="Thoughts / Response" isCollapsed={isSummaryCollapsed} onToggle={() => setIsSummaryCollapsed(p => !p)}>
-                                        <ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown>
-                                    </CollapsibleSection>
-                                    <CollapsibleSection title="Course of Action" isCollapsed={isCourseOfActionCollapsed} onToggle={() => setIsCourseOfActionCollapsed(p => !p)}>
-                                        <ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown>
-                                    </CollapsibleSection>
-                                    <CollapsibleSection title="Associated Files" isCollapsed={isAssociatedFilesCollapsed} onToggle={() => setIsAssociatedFilesCollapsed(p => !p)}>
+                                <div className="parsed-view-left" style={{ flexBasis: `${leftPaneWidth}%` }}>
+                                     <CollapsibleSection title="Associated Files" isCollapsed={false} onToggle={() => {}}>
                                         <ul className="associated-files-list">
                                             {activeTabData.parsedContent.filesUpdated.map(file => (
                                                 <li 
@@ -11155,13 +13043,20 @@ const App = () => {
                                             ))}
                                         </ul>
                                     </CollapsibleSection>
+                                    <CollapsibleSection title="Thoughts / Response" isCollapsed={false} onToggle={() => {}}>
+                                        <ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown>
+                                    </CollapsibleSection>
+                                    <CollapsibleSection title="Course of Action" isCollapsed={false} onToggle={() => {}}>
+                                        <ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown>
+                                    </CollapsibleSection>
                                 </div>
+                                <div className="resizer" onMouseDown={handleMouseDown} />
                                 <div className="parsed-view-right">
-                                    {selectedFilePath ? (
-                                        <CodeViewer htmlContent={viewableContent} />
-                                    ) : (
-                                        <div>Select a file to view its content.</div>
-                                    )}
+                                    <div className="file-content-viewer-header">
+                                        <span className="file-path">{selectedFilePath || 'No file selected'}</span>
+                                        <span className="metrics">Original: 4.1K | New: 4.2K | Sim: 98%</span>
+                                    </div>
+                                    <div className="file-content-viewer" dangerouslySetInnerHTML={{ __html: viewableContent }} />
                                 </div>
                             </div>
                         )}
@@ -18543,7 +20438,7 @@ module.exports = [ extensionConfig ];
 {
     "compilerOptions": {
         "module": "esnext",
-        "moduleResolution": "node",
+        "moduleResolution": "bundler",
         "target": "ESNext",
         "lib": ["ES2022", "DOM"],
         "jsx": "react",

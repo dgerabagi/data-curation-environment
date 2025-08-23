@@ -1,4 +1,4 @@
-// Updated on: C111 (Add cleanup for trailing code fences)
+// Updated on: C112 (Add cleanup for trailing code fences)
 import { ParsedResponse, ParsedFile } from "@/common/types/pcpp.types";
 
 // Regex to find the summary/plan before any major headers
@@ -31,7 +31,7 @@ export function parseResponse(rawText: string): ParsedResponse {
         
         let content = rawText.substring(contentStart, contentEnd).trim();
 
-        // C111: Clean up potential closing tags and code fences from the end of the content
+        // C112: Clean up potential closing tags and code fences from the end of the content
         const patternsToRemove = [
             `</file>`,
             `</${path}>`,
@@ -40,7 +40,8 @@ export function parseResponse(rawText: string): ParsedResponse {
         ];
 
         patternsToRemove.forEach(pattern => {
-            if (content.endsWith(pattern)) {
+            // Use a loop to remove multiple occurrences from the end
+            while (content.endsWith(pattern)) {
                 content = content.slice(0, -pattern.length).trim();
             }
         });

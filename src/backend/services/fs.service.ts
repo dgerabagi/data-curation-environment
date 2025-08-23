@@ -1,4 +1,4 @@
-// Updated on: C111 (Add more grammars for better TSX highlighting)
+// Updated on: C113 (Fix starry-night grammar import paths)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -18,10 +18,11 @@ import mammoth from 'mammoth';
 import { createStarryNight, common } from '@wooorm/starry-night';
 import sourceTsx from '@wooorm/starry-night/source.tsx';
 import sourceJs from '@wooorm/starry-night/source.js';
-import sourceJsx from '@wooorm/starry-night/source.js.jsx';
+// Removed incorrect source.js.jsx import
 import sourceTs from '@wooorm/starry-night/source.ts';
 import sourceCss from '@wooorm/starry-night/source.css';
-import sourceScss from '@wooorm/starry-night/source.scss';
+// Corrected scss import path
+import sourceScss from '@wooorm/starry-night/source.css.scss';
 import textHtml from '@wooorm/starry-night/text.html.basic';
 import { toHtml } from 'hast-util-to-html';
 
@@ -63,8 +64,8 @@ export class FSService {
 
     private async initializeStarryNight() {
         try {
-            // C111: Add more grammars for better TSX/JS highlighting
-            const grammars = [...common, sourceTsx, sourceJs, sourceJsx, sourceTs, sourceCss, sourceScss, textHtml];
+            // C113: Corrected grammars list
+            const grammars = [...common, sourceTsx, sourceJs, sourceTs, sourceCss, sourceScss, textHtml];
             this.starryNight = await createStarryNight(grammars);
             Services.loggerService.log('Starry Night syntax highlighter initialized.');
         } catch (error) {
