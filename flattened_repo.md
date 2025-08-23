@@ -1,22 +1,22 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-23T13:14:09.378Z
+  Date Generated: 2025-08-23T13:55:18.836Z
   ---
   Total Files: 210
-  Total Lines: 17840
-  Total Characters: 831760
-  Approx. Tokens: 208020
+  Total Lines: 17859
+  Total Characters: 831977
+  Approx. Tokens: 208074
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
-2. src\backend\services\fs.service.ts (9684 tokens)
+2. src\backend\services\fs.service.ts (9927 tokens)
 3. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
 4. src\client\views\context-chooser.view\view.tsx (5562 tokens)
 5. src\Artifacts\A0. DCE Master Artifact List.md (4615 tokens)
 6. src\client\components\tree-view\TreeView.tsx (4508 tokens)
-7. src\client\views\parallel-copilot.view\view.tsx (4283 tokens)
+7. src\client\views\parallel-copilot.view\view.tsx (4144 tokens)
 8. src\backend\services\flattener.service.ts (3685 tokens)
 9. src\client\views\context-chooser.view\view.scss (3638 tokens)
 10. src\backend\services\prompt.service.ts (3481 tokens)
@@ -91,7 +91,7 @@
 67. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
 68. src\backend\services\action.service.ts - Lines: 73 - Chars: 2471 - Tokens: 618
 69. src\backend\services\flattener.service.ts - Lines: 327 - Chars: 14740 - Tokens: 3685
-70. src\backend\services\fs.service.ts - Lines: 800 - Chars: 38733 - Tokens: 9684
+70. src\backend\services\fs.service.ts - Lines: 825 - Chars: 39706 - Tokens: 9927
 71. src\backend\services\history.service.ts - Lines: 103 - Chars: 3981 - Tokens: 996
 72. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
 73. src\backend\services\prompt.service.ts - Lines: 113 - Chars: 13923 - Tokens: 3481
@@ -118,8 +118,8 @@
 94. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 43 - Chars: 1890 - Tokens: 473
 95. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
 96. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
-97. src\client\views\parallel-copilot.view\view.scss - Lines: 376 - Chars: 8219 - Tokens: 2055
-98. src\client\views\parallel-copilot.view\view.tsx - Lines: 317 - Chars: 17131 - Tokens: 4283
+97. src\client\views\parallel-copilot.view\view.scss - Lines: 368 - Chars: 8020 - Tokens: 2005
+98. src\client\views\parallel-copilot.view\view.tsx - Lines: 319 - Chars: 16574 - Tokens: 4144
 99. src\common\ipc\channels.enum.ts - Lines: 64 - Chars: 3422 - Tokens: 856
 100. src\common\ipc\channels.type.ts - Lines: 57 - Chars: 4453 - Tokens: 1114
 101. src\common\ipc\client-ipc.ts - Lines: 38 - Chars: 1385 - Tokens: 347
@@ -636,7 +636,7 @@ SOFTWARE.
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C108 (Add A52 for Interaction Schema Refinement)
+# Updated on: C110 (Add A52 for Interaction Schema Refinement)
 
 ## 1. Purpose
 
@@ -4187,7 +4187,7 @@ export default TestComponent;
 
 <file path="src/Artifacts/A52. DCE - Interaction Schema Refinement.md">
 # Artifact A52: DCE - Interaction Schema Refinement
-# Date Created: C108
+# Date Created: C110
 # Author: AI Model & Curator
 
 - **Key/Value for A0:**
@@ -6286,9 +6286,33 @@ export class FSService {
     private excelMarkdownCache = new Map<string, { markdown: string; tokenCount: number }>();
     private wordTextCache = new Map<string, { text: string; tokenCount: number }>();
     private starryNight: any = null;
+    private langToScopeMap: Map<string, string>;
 
     constructor(gitApi?: GitAPI) {
         this.gitApi = gitApi;
+        this.langToScopeMap = new Map([
+            ['js', 'source.js'],
+            ['jsx', 'source.js.jsx'],
+            ['ts', 'source.ts'],
+            ['tsx', 'source.tsx'],
+            ['json', 'source.json'],
+            ['css', 'source.css'],
+            ['scss', 'source.css.scss'],
+            ['html', 'text.html.basic'],
+            ['xml', 'text.xml'],
+            ['md', 'text.md'],
+            ['py', 'source.python'],
+            ['java', 'source.java'],
+            ['c', 'source.c'],
+            ['cpp', 'source.cpp'],
+            ['cs', 'source.cs'],
+            ['go', 'source.go'],
+            ['rb', 'source.ruby'],
+            ['php', 'source.php'],
+            ['sh', 'source.shell'],
+            ['yaml', 'source.yaml'],
+            ['yml', 'source.yaml'],
+        ]);
         if (this.gitApi) {
             Services.loggerService.log(`FSService constructed with Git API. Found ${this.gitApi.repositories.length} repositories.`);
             this.gitApi.onDidOpenRepository(() => this.triggerFullRefresh());
@@ -6312,14 +6336,14 @@ export class FSService {
     }
 
     public async handleSyntaxHighlightRequest(code: string, lang: string, id: string, serverIpc: ServerPostMessageManager) {
-        Services.loggerService.log(`[C101 SYNTAX-HIGHLIGHT] Received request for lang: ${lang}, id: ${id}`);
+        Services.loggerService.log(`[SYNTAX-HIGHLIGHT] Received request for lang: ${lang}, id: ${id}`);
         if (!this.starryNight) {
             Services.loggerService.error('Starry Night not initialized, cannot highlight.');
             serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml: `<pre><code>${code}</code></pre>`, id });
             return;
         }
 
-        const scope = this.starryNight.flagToScope(lang);
+        const scope = this.langToScopeMap.get(lang) || this.starryNight.flagToScope(lang);
         if (!scope) {
             Services.loggerService.warn(`No Starry Night scope found for language: ${lang}`);
             serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml: `<pre><code>${code}</code></pre>`, id });
@@ -6327,6 +6351,7 @@ export class FSService {
         }
 
         try {
+            Services.loggerService.log(`Highlighting with scope: ${scope}`);
             const tree = this.starryNight.highlight(code, scope);
             const highlightedHtml = toHtml(tree);
             serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml, id });
@@ -10459,7 +10484,7 @@ export default TestPane3;
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
-/* Updated on: C104 (Add styles for selected items in test panes) */
+/* Updated on: C110 (Add styles for code viewer with line numbers) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -10710,10 +10735,9 @@ body {
 .parsed-view-right {
     flex: 2;
     overflow-y: auto;
-    border: 1px solid var(--vscode-panel-border);
-    border-radius: 4px;
-    padding: 8px;
     min-width: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .parsed-section {
@@ -10780,46 +10804,6 @@ body {
     }
 }
 
-.file-block {
-    margin-bottom: 12px;
-
-    .file-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: var(--vscode-editorGroupHeader-tabsBackground);
-        padding: 4px 8px;
-        border: 1px solid var(--vscode-panel-border);
-        border-bottom: none;
-        border-top-left-radius: 4px;
-        border-top-right-radius: 4px;
-        font-family: var(--vscode-editor-font-family);
-    }
-
-    .file-path {
-        font-weight: bold;
-    }
-
-    .file-actions button {
-        margin-left: 8px;
-    }
-
-    .file-content-viewer {
-        padding: 8px;
-        background-color: var(--vscode-editor-background);
-        border: 1px solid var(--vscode-panel-border);
-        border-top: none;
-        border-bottom-left-radius: 4px;
-        border-bottom-right-radius: 4px;
-
-        pre {
-            margin: 0;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-        }
-    }
-}
-
 .collapsed-navigator {
     display: flex;
     align-items: center;
@@ -10835,10 +10819,43 @@ body {
         color: var(--vscode-descriptionForeground);
     }
 }
+
+/* C110: Code Viewer Styles */
+.code-viewer-container {
+    background-color: var(--vscode-editor-background);
+    border: 1px solid var(--vscode-panel-border);
+    border-radius: 4px;
+    padding: 8px;
+    overflow: auto;
+    font-family: var(--vscode-editor-font-family);
+    font-size: var(--vscode-editor-font-size);
+    display: flex;
+    flex-grow: 1;
+
+    .line-numbers {
+        padding-right: 12px;
+        text-align: right;
+        color: var(--vscode-editorLineNumber-foreground);
+        user-select: none;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .code-content {
+        flex-grow: 1;
+        white-space: pre;
+        
+        /* Starry-night compatibility */
+        pre {
+            margin: 0;
+            padding: 0;
+            background-color: transparent !important;
+        }
+    }
+}
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
-// Updated on: C109 (Fix infinite loop and stabilize data fetching)
+// Updated on: C110 (Fix infinite loop, add line numbers, improve presentation)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -10853,10 +10870,15 @@ import ReactMarkdown from 'react-markdown';
 
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
-    return (...args: any[]) => {
+
+    const debouncedFn = React.useCallback((...args: any[]) => {
         if (timeoutRef.current) clearTimeout(timeoutRef.current);
-        timeoutRef.current = setTimeout(() => callback(...args), delay);
-    };
+        timeoutRef.current = setTimeout(() => {
+            callback(...args);
+        }, delay);
+    }, [callback, delay]);
+
+    return debouncedFn;
 };
 
 interface TabState {
@@ -10876,6 +10898,23 @@ const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; i
         {!isCollapsed && <div className="collapsible-content">{children}</div>}
     </div>
 );
+
+const CodeViewer: React.FC<{ htmlContent: string | undefined }> = ({ htmlContent }) => {
+    const lines = React.useMemo(() => htmlContent ? htmlContent.split('\n') : [], [htmlContent]);
+    
+    if (!htmlContent) {
+        return <div className="code-viewer-container">Loading code...</div>;
+    }
+
+    return (
+        <div className="code-viewer-container">
+            <div className="line-numbers">
+                {lines.map((_, index) => <div key={index}>{index + 1}</div>)}
+            </div>
+            <div className="code-content" dangerouslySetInnerHTML={{ __html: htmlContent }} />
+        </div>
+    );
+};
 
 const App = () => {
     const [activeTab, setActiveTab] = React.useState(1);
@@ -10897,7 +10936,6 @@ const App = () => {
     const [isCourseOfActionCollapsed, setIsCourseOfActionCollapsed] = React.useState(false);
     const [isAssociatedFilesCollapsed, setIsAssociatedFilesCollapsed] = React.useState(false);
     
-    // C109: Ref to track processed content to prevent re-fetching
     const processedContentRef = React.useRef(new Set<string>());
     
     const clientIpc = ClientPostMessageManager.getInstance();
@@ -10928,18 +10966,18 @@ const App = () => {
     const parseAllTabs = React.useCallback((tabsToParse: { [key: string]: TabState }) => {
         const allFilePaths = new Set<string>();
         const updatedTabs = { ...tabsToParse };
-        Object.entries(updatedTabs).forEach(([tabId, tabState]) => {
+        Object.values(updatedTabs).forEach((tabState, index) => {
+            const tabId = (index + 1).toString();
             if (tabState.rawContent) {
                 const parsed = parseResponse(tabState.rawContent);
-                updatedTabs[Number(tabId)].parsedContent = parsed;
+                updatedTabs[tabId].parsedContent = parsed;
                 parsed.filesUpdated.forEach(file => allFilePaths.add(file));
                 
-                // C109: Process files for highlighting, but only if not already processed
                 parsed.files.forEach(file => {
                     const lang = file.path.split('.').pop() || 'plaintext';
                     const id = `${file.path}::${file.content}`;
                     if (!processedContentRef.current.has(id)) {
-                         logger.log(`[C109 LOOP FIX] Requesting syntax highlight for new content: ${file.path}`);
+                         logger.log(`[C110 PARSE] Requesting syntax highlight for: ${file.path}`);
                          clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
                          processedContentRef.current.add(id);
                     }
@@ -10952,10 +10990,9 @@ const App = () => {
         }
     }, [clientIpc]);
 
-
     React.useEffect(() => {
         const loadCycleData = (cycleData: PcppCycle) => {
-            processedContentRef.current.clear(); // Clear processed cache on cycle load
+            processedContentRef.current.clear();
             setCurrentCycle(cycleData.cycleId);
             setCycleTitle(cycleData.title);
             setCycleContext(cycleData.cycleContext);
@@ -10977,9 +11014,7 @@ const App = () => {
             setMaxCycle(cycleData.cycleId);
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData }) => {
-            if (cycleData) {
-                loadCycleData(cycleData);
-            }
+            if (cycleData) loadCycleData(cycleData);
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => {
             setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml));
@@ -10994,31 +11029,18 @@ const App = () => {
     const activeTabData = tabs[activeTab.toString()];
 
     const viewableContent = React.useMemo(() => {
-        if (!selectedFilePath || !activeTabData?.parsedContent) {
-            return null;
-        }
+        if (!selectedFilePath || !activeTabData?.parsedContent) return undefined;
+        
         const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath);
         if (!file) {
             logger.error(`[Content Display] Could not find file object for path: ${selectedFilePath}`);
-            return '<div>Error: File data not found in parsed response.</div>';
+            return `Error: File data not found in parsed response.`;
         }
         
         const id = `${file.path}::${file.content}`;
-        const highlightedHtml = highlightedCodeBlocks.get(id);
+        return highlightedCodeBlocks.get(id);
 
-        if (highlightedHtml) {
-            return highlightedHtml;
-        } else {
-            // C109: Request highlighting if it's missing (should only happen if there was a load issue)
-            if (!processedContentRef.current.has(id)) {
-                logger.warn(`[Content Display] Highlighted content not found for ${selectedFilePath}. Requesting it now.`);
-                const lang = file.path.split('.').pop() || 'plaintext';
-                clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
-                processedContentRef.current.add(id);
-            }
-            return `<pre><code>${file.content.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code></pre>`;
-        }
-    }, [selectedFilePath, activeTabData?.parsedContent, highlightedCodeBlocks, clientIpc]);
+    }, [selectedFilePath, activeTabData, highlightedCodeBlocks]);
 
 
     const handleRawContentChange = (newContent: string, tabIndex: number) => {
@@ -11125,10 +11147,7 @@ const App = () => {
                                                 <li 
                                                     key={file} 
                                                     className={selectedFilePath === file ? 'selected' : ''}
-                                                    onClick={() => {
-                                                        logger.log(`[File Click] Click registered on file: ${file}`);
-                                                        setSelectedFilePath(file);
-                                                    }}
+                                                    onClick={() => setSelectedFilePath(file)}
                                                 >
                                                     {fileExistenceMap.get(file) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
                                                     <span>{file}</span>
@@ -11138,8 +11157,8 @@ const App = () => {
                                     </CollapsibleSection>
                                 </div>
                                 <div className="parsed-view-right">
-                                    {viewableContent ? (
-                                        <div className="file-content-viewer" dangerouslySetInnerHTML={{ __html: viewableContent }} />
+                                    {selectedFilePath ? (
+                                        <CodeViewer htmlContent={viewableContent} />
                                     ) : (
                                         <div>Select a file to view its content.</div>
                                     )}
