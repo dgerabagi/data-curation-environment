@@ -1,15 +1,19 @@
-// Updated on: C118 (Fix resizable pane, add diff view, simplify buttons)
+// Updated on: C119 (Fix all TS errors)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscVm, VscSave, VscCompareChanges, VscArrowSwap } from 'react-icons/vsc';
+// C119 FIX: VscCompareChanges doesn't exist, use VscDiff instead.
+import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
-import { PcppCycle } from '@/backend/services/history.service';
+// C119 FIX: Import PcppCycle and PcppResponse types
+import { PcppCycle, PcppResponse } from '@/backend/services/history.service';
 import { ParsedResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
 import ReactMarkdown from 'react-markdown';
+// C119 FIX: Import path for frontend usage
+import path from 'path-browserify';
 
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -30,12 +34,12 @@ const CodeViewer: React.FC<{ htmlContent: string | undefined | null }> = ({ html
     if (htmlContent === undefined || htmlContent === null) {
         return <div style={{ padding: '8px' }}>Select a file to view its content.</div>;
     }
-    if (htmlContent.startsWith('<div>Error:')) {
-        return <div style={{ padding: '8px' }} dangerouslySetInnerHTML={{ __html: htmlContent }} />;
+    if (htmlContent.startsWith('// Error:')) {
+         return <div style={{ padding: '8px', whiteSpace: 'pre-wrap' }}>{htmlContent}</div>;
     }
 
     const codeContentMatch = /<pre><code>([\s\S]*)<\/code><\/pre>/s.exec(htmlContent);
-    const code = codeContentMatch ? codeContentMatch[1] : `<code>${htmlContent}</code>`; // Fallback for raw text
+    const code = codeContentMatch ? codeContentMatch[1] : `<code>${htmlContent}</code>`;
 
     const lines = code.split('\n');
     if (lines.length > 0 && lines[lines.length - 1] === '') {
@@ -104,15 +108,16 @@ const App = () => {
             ephemeralContext,
             responses,
             isParsedMode,
+            leftPaneWidth,
         };
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
-    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, clientIpc]);
+    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, clientIpc]);
 
     const debouncedSave = useDebounce(saveCurrentCycleState, 1000);
 
     React.useEffect(() => {
         debouncedSave();
-    }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, debouncedSave]);
+    }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, debouncedSave]);
     
     const parseAllTabs = React.useCallback(() => {
         logger.log("Parsing all tabs...");
@@ -146,6 +151,7 @@ const App = () => {
             setCycleTitle(cycleData.title);
             setCycleContext(cycleData.cycleContext);
             setEphemeralContext(cycleData.ephemeralContext);
+            setLeftPaneWidth(cycleData.leftPaneWidth || 33);
             const newTabs: { [key: string]: TabState } = {};
             Object.entries(cycleData.responses).forEach(([tabId, response]) => {
                 newTabs[tabId] = { rawContent: response.content, parsedContent: null };
@@ -360,7 +366,7 @@ const App = () => {
                                     <div className="file-content-viewer-header">
                                         <span className="file-path" title={selectedFilePath || ''}>{selectedFilePath ? path.basename(selectedFilePath) : 'No file selected'}</span>
                                         <div className="file-actions">
-                                            <button onClick={handleDiffClick} disabled={!selectedFilePath} title="Toggle Diff View"><VscCompareChanges /></button>
+                                            <button onClick={handleDiffClick} disabled={!selectedFilePath} title="Toggle Diff View"><VscDiff /></button>
                                             <button disabled={!selectedFilePath} title="Swap with Workspace File"><VscArrowSwap /></button>
                                         </div>
                                     </div>

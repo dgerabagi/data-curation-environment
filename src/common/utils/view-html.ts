@@ -1,14 +1,16 @@
+// Updated on: C119 (Ensure function signature is correct)
 import * as vscode from "vscode";
 
 export function getViewHtml({ webview, nonce, scriptUri, styleUri, starryNightStyleUri }: { webview: vscode.Webview; nonce: string; scriptUri: string; styleUri: vscode.Uri; starryNightStyleUri?: vscode.Uri; }): string {
+    const styles = [styleUri, starryNightStyleUri].filter(Boolean);
+
     return `<!DOCTYPE html>
         <html lang="en">
         <head>
             <meta charset="UTF-8">
             <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource}; script-src 'nonce-${nonce}';">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link href="${styleUri}" rel="stylesheet">
-            ${starryNightStyleUri ? `<link href="${starryNightStyleUri}" rel="stylesheet">` : ''}
+            ${styles.map(uri => `<link href="${uri}" rel="stylesheet">`).join('\n')}
         </head>
         <body>
             <div id="root"></div>
