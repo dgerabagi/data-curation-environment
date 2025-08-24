@@ -3,6 +3,9 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
 import { PcppCycle, PcppHistoryFile } from '@/common/types/pcpp.types';
+import { serverIPCs } from '@/client/views';
+import { VIEW_TYPES } from '@/common/view-types';
+import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 
 export class HistoryService {
     private historyFilePath: string | undefined;
@@ -91,25 +94,36 @@ export class HistoryService {
     public async deleteCycle(cycleId: number): Promise<void> {
         Services.loggerService.log(`HistoryService: Deleting cycle ${cycleId}.`);
         const history = await this._readHistoryFile();
-        const updatedCycles = history.cycles.filter(c => c.cycleId !== cycleId);
-
-        if (updatedCycles.length === 0) {
-            await this.resetHistory();
+        
+        if (history.cycles.length <= 1) {
+            Services.loggerService.warn("Cannot delete the last remaining cycle.");
+            vscode.window.showWarningMessage("Cannot delete the last cycle.");
             return;
         }
 
-        history.cycles = updatedCycles;
+        history.cycles = history.cycles.filter(c => c.cycleId !== cycleId);
         await this._writeHistoryFile(history);
-        Services.loggerService.log(`Cycle ${cycleId} deleted.`);
+        Services.loggerService.log(`Cycle ${cycleId} deleted successfully.`);
+        
+        const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
+        if (serverIpc) {
+            serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, { reason: 'history' });
+        }
     }
 
     public async resetHistory(): Promise<void> {
         Services.loggerService.log(`HistoryService: Resetting all cycle history.`);
-        const defaultHistory: PcppHistoryFile = {
-            version: 1,
-            cycles: [] // getLatestCycle will auto-create cycle 1
-        };
-        await this._writeHistoryFile(defaultHistory);
-        Services.loggerService.log(`Cycle history has been reset.`);
+        if (this.historyFilePath) {
+            try {
+                await vscode.workspace.fs.delete(vscode.Uri.file(this.historyFilePath));
+                Services.loggerService.log("dce_history.json deleted successfully.");
+                 const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
+                if (serverIpc) {
+                    serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, { reason: 'history' });
+                }
+            } catch (error) {
+                Services.loggerService.error(`Failed to delete dce_history.json: ${error}`);
+            }
+        }
     }
 }

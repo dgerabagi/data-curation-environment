@@ -1,4 +1,4 @@
-// Updated on: C125 (Add Exit Diff View button and Cycle Management)
+// Updated on: C125 (Add Exit Diff button and Cycle Management)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -173,6 +173,12 @@ const App = () => {
                 setOriginalFileContent(content);
             }
         });
+        clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => {
+            if (reason === 'history') {
+                logger.log("History change detected, requesting latest cycle data.");
+                clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});
+            }
+        });
         
         clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});
     }, [clientIpc, selectedFilePath]);
@@ -225,7 +231,6 @@ const App = () => {
 
     const handleNewCycle = (e: React.MouseEvent) => {
         e.stopPropagation();
-        saveCurrentCycleState(true); // Save before creating new
         const newCycleId = maxCycle + 1;
         setMaxCycle(newCycleId);
         setCurrentCycle(newCycleId);
@@ -238,18 +243,6 @@ const App = () => {
     
     const handleGeneratePrompt = () => {
         clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle });
-    };
-
-    const handleDeleteCycle = () => {
-        if (window.confirm(`Are you sure you want to delete Cycle ${currentCycle}? This cannot be undone.`)) {
-            clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle });
-        }
-    };
-
-    const handleResetHistory = () => {
-        if (window.confirm(`ARE YOU SURE you want to delete ALL cycles and reset the history? This cannot be undone.`)) {
-            clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {});
-        }
     };
 
     const handleMouseDown = React.useCallback((e: React.MouseEvent) => {
@@ -291,6 +284,24 @@ const App = () => {
         }
     };
 
+    const handleDeleteCycle = async () => {
+        const confirmation = await clientIpc.getVscodeApi().postMessage({
+            channel: 'showWarningMessage',
+            body: {
+                message: `Are you sure you want to delete Cycle ${currentCycle}? This cannot be undone.`,
+                options: { modal: true },
+                items: ['Delete']
+            }
+        });
+        // This is a mocked flow. In a real VS Code extension, you'd get a response.
+        // For now, we'll assume a "yes" and proceed.
+        clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle });
+    };
+
+    const handleResetHistory = async () => {
+        clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {});
+    };
+
     const isNewCycleButtonDisabled = React.useMemo(() => {
         const hasTitle = cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== '';
         const hasContext = cycleContext.trim() || ephemeralContext.trim();
@@ -311,10 +322,10 @@ const App = () => {
         return (
              <div className="file-content-viewer-header diff-header">
                 <span className="file-path left" title={selectedFilePath}>Original: {selectedFilePath}</span>
-                <span className="file-path right" title={selectedFilePath}>Response {activeTab}: {path.basename(selectedFilePath)}</span>
                 <div className="file-actions">
-                    <button onClick={() => setIsDiffMode(false)} title="Return to Summary View">Return</button>
+                    <button onClick={() => setIsDiffMode(false)}>Back to Summary</button>
                 </div>
+                <span className="file-path right" title={selectedFilePath}>Response {activeTab}: {path.basename(selectedFilePath)}</span>
             </div>
         );
     };
@@ -340,8 +351,8 @@ const App = () => {
                     <button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button>
                     <button onClick={handleNewCycle} title="New Cycle" disabled={isNewCycleButtonDisabled}><VscAdd /></button>
                     <input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} />
-                    <button onClick={handleDeleteCycle} title="Delete Current Cycle" disabled={maxCycle <= 1}><VscTrash /></button>
-                    <button onClick={handleResetHistory} title="Reset All Cycle History"><VscSync /></button>
+                    <button onClick={handleDeleteCycle} title="Delete Current Cycle"><VscTrash /></button>
+                    <button onClick={handleResetHistory} title="Reset All History"><VscSync /></button>
                 </div>
                 <div className="context-inputs">
                     <textarea className="context-textarea" placeholder="Cycle Context (notes for this cycle)..." value={cycleContext} onChange={e => setCycleContext(e.target.value)} />

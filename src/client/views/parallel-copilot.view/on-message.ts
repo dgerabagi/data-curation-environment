@@ -37,15 +37,11 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         fileOperationService.handleFileContentRequest(data.path, serverIpc);
     });
 
-    serverIpc.onClientMessage(ClientToServerChannel.RequestDeleteCycle, async (data) => {
-        await historyService.deleteCycle(data.cycleId);
-        const cycleData = await historyService.getLatestCycle();
-        serverIpc.sendToClient(ServerToClientChannel.SendLatestCycleData, { cycleData });
+    serverIpc.onClientMessage(ClientToServerChannel.RequestDeleteCycle, (data) => {
+        historyService.deleteCycle(data.cycleId);
     });
 
-    serverIpc.onClientMessage(ClientToServerChannel.RequestResetHistory, async () => {
-        await historyService.resetHistory();
-        const cycleData = await historyService.getLatestCycle();
-        serverIpc.sendToClient(ServerToClientChannel.SendLatestCycleData, { cycleData });
+    serverIpc.onClientMessage(ClientToServerChannel.RequestResetHistory, () => {
+        historyService.resetHistory();
     });
 }

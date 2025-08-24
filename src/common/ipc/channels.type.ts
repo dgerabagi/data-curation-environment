@@ -45,7 +45,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SendWorkspaceTrustState ? { isTrusted: boolean } :
     T extends ServerToClientChannel.ApplySelectionSet ? { paths: string[] } :
     T extends ServerToClientChannel.SendSelectionSets ? { sets: SelectionSet } :
-    T extends ServerToClientChannel.ForceRefresh ? { reason?: 'fileOp' | 'manual' } :
+    T extends ServerToClientChannel.ForceRefresh ? { reason?: 'fileOp' | 'manual' | 'history' } :
     T extends ServerToClientChannel.SetActiveFile ? { path: string } :
     T extends ServerToClientChannel.FocusFile ? { path: string } :
     T extends ServerToClientChannel.SendAutoAddState ? { enabled: boolean } :

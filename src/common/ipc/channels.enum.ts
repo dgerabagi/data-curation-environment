@@ -41,8 +41,8 @@ export enum ClientToServerChannel {
     RequestLatestCycleData = "clientToServer.requestLatestCycleData",
     RequestCycleData = "clientToServer.requestCycleData",
     SaveCycleData = "clientToServer.saveCycleData",
-    RequestDeleteCycle = "clientToServer.requestDeleteCycle", // New
-    RequestResetHistory = "clientToServer.requestResetHistory", // New
+    RequestDeleteCycle = "clientToServer.requestDeleteCycle",
+    RequestResetHistory = "clientToServer.requestResetHistory",
 }
 
 export enum ServerToClientChannel {
