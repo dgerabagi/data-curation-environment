@@ -1,25 +1,25 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-24T01:46:52.434Z
+  Date Generated: 2025-08-24T02:25:03.404Z
   ---
   Total Files: 218
-  Total Lines: 19934
-  Total Characters: 959370
-  Approx. Tokens: 239924
+  Total Lines: 19955
+  Total Characters: 961157
+  Approx. Tokens: 240372
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A54. starry-night-readme.md (25577 tokens)
 2. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
 3. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
-4. src\client\views\parallel-copilot.view\view.tsx (5585 tokens)
-5. src\client\views\context-chooser.view\view.tsx (5562 tokens)
-6. src\Artifacts\A0. DCE Master Artifact List.md (4974 tokens)
+4. src\client\views\context-chooser.view\view.tsx (5562 tokens)
+5. src\client\views\parallel-copilot.view\view.tsx (5538 tokens)
+6. src\Artifacts\A0. DCE Master Artifact List.md (4979 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4508 tokens)
 8. src\backend\services\prompt.service.ts (4134 tokens)
-9. src\client\views\context-chooser.view\view.scss (3638 tokens)
-10. src\Artifacts\A11. DCE - Regression Case Studies.md (3388 tokens)
+9. src\Artifacts\A11. DCE - Regression Case Studies.md (3772 tokens)
+10. src\client\views\context-chooser.view\view.scss (3638 tokens)
 
 <!-- Full File List -->
 1. .gitignore - Lines: 10 - Chars: 128 - Tokens: 32
@@ -29,11 +29,11 @@
 5. package.json - Lines: 139 - Chars: 4583 - Tokens: 1146
 6. public\copilot.svg - Lines: 5 - Chars: 445 - Tokens: 112
 7. public\spiral.svg - Lines: 8 - Chars: 459 - Tokens: 115
-8. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 270 - Chars: 19895 - Tokens: 4974
+8. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 270 - Chars: 19913 - Tokens: 4979
 9. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 10. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
-11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 147 - Chars: 13550 - Tokens: 3388
-12. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5851 - Tokens: 1463
+11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 160 - Chars: 15088 - Tokens: 3772
+12. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5710 - Tokens: 1428
 13. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 43 - Chars: 5476 - Tokens: 1369
 14. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
 15. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
@@ -82,7 +82,7 @@
 58. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
 59. src\Artifacts\A50. DCE - Phase 2 - UI Component Plan (Resizable Panes & Inner Editors).md - Lines: 51 - Chars: 5128 - Tokens: 1282
 60. src\Artifacts\A51. DCE - A-B-C Testing Strategy for UI Bugs.md - Lines: 81 - Chars: 5490 - Tokens: 1373
-61. src\Artifacts\A52. DCE - Interaction Schema Refinement.md - Lines: 60 - Chars: 3560 - Tokens: 890
+61. src\Artifacts\A52. DCE - Interaction Schema Refinement.md - Lines: 61 - Chars: 3735 - Tokens: 934
 62. src\Artifacts\A53. DCE - Phase 2 - Token Count and Similarity Analysis.md - Lines: 50 - Chars: 3971 - Tokens: 993
 63. src\Artifacts\A54. starry-night-readme.md - Lines: 1824 - Chars: 102305 - Tokens: 25577
 64. src\Artifacts\A55. DCE - FSService Refactoring Plan.md - Lines: 77 - Chars: 4022 - Tokens: 1006
@@ -99,7 +99,7 @@
 75. src\backend\services\file-operation.service.ts - Lines: 231 - Chars: 10878 - Tokens: 2720
 76. src\backend\services\file-tree.service.ts - Lines: 212 - Chars: 11447 - Tokens: 2862
 77. src\backend\services\flattener.service.ts - Lines: 210 - Chars: 11271 - Tokens: 2818
-78. src\backend\services\highlighting.service.ts - Lines: 57 - Chars: 2874 - Tokens: 719
+78. src\backend\services\highlighting.service.ts - Lines: 58 - Chars: 2920 - Tokens: 730
 79. src\backend\services\history.service.ts - Lines: 129 - Chars: 5675 - Tokens: 1419
 80. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
 81. src\backend\services\prompt.service.ts - Lines: 151 - Chars: 16535 - Tokens: 4134
@@ -115,7 +115,7 @@
 91. src\client\components\tree-view\TreeView.tsx - Lines: 394 - Chars: 18029 - Tokens: 4508
 92. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 93. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
-94. src\client\utils\response-parser.ts - Lines: 86 - Chars: 3247 - Tokens: 812
+94. src\client\utils\response-parser.ts - Lines: 83 - Chars: 3053 - Tokens: 764
 95. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 96. src\client\views\context-chooser.view\on-message.ts - Lines: 53 - Chars: 4913 - Tokens: 1229
 97. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
@@ -127,7 +127,7 @@
 103. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
 104. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
 105. src\client\views\parallel-copilot.view\view.scss - Lines: 458 - Chars: 10715 - Tokens: 2679
-106. src\client\views\parallel-copilot.view\view.tsx - Lines: 429 - Chars: 22339 - Tokens: 5585
+106. src\client\views\parallel-copilot.view\view.tsx - Lines: 424 - Chars: 22149 - Tokens: 5538
 107. src\common\ipc\channels.enum.ts - Lines: 66 - Chars: 3257 - Tokens: 815
 108. src\common\ipc\channels.type.ts - Lines: 59 - Chars: 4600 - Tokens: 1150
 109. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1590 - Tokens: 398
@@ -136,7 +136,7 @@
 112. src\common\types\file-node.ts - Lines: 16 - Chars: 567 - Tokens: 142
 113. src\common\types\pcpp.types.ts - Lines: 36 - Chars: 914 - Tokens: 229
 114. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 449 - Tokens: 113
-115. src\common\utils\formatting.ts - Lines: 81 - Chars: 2716 - Tokens: 679
+115. src\common\utils\formatting.ts - Lines: 95 - Chars: 3251 - Tokens: 813
 116. src\common\utils\view-html.ts - Lines: 29 - Chars: 1117 - Tokens: 280
 117. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
 118. src\extension.ts - Lines: 121 - Chars: 5044 - Tokens: 1261
@@ -645,7 +645,7 @@ SOFTWARE.
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C125 (Add A57 for Cycle Management)
+# Updated on: C126 (Update A11, A12, A52 for bug fixes and logging)
 
 ## 1. Purpose
 
@@ -1018,7 +1018,7 @@ To enhance the data curation process, it is critical for the user to have immedi
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: Cycle 16
 # Author: AI Model & Curator
-# Updated on: C81 (Add case for corrupted/unsupported document files)
+# Updated on: C126 (Add case for PCPP Parse/Un-Parse bug)
 
 - **Key/Value for A0:**
 - **Description:** Documents recurring bugs, their root causes, and codified solutions to prevent future regressions during development.
@@ -1032,16 +1032,31 @@ This document serves as a living record of persistent or complex bugs that have 
 
 ---
 
-### Case Study 007: Corrupted or Unsupported Document Files
+### Case Study 008: PCPP Parse/Un-Parse State Instability
 
--   **Artifacts Affected:** `src/backend/services/fs.service.ts`, `A44. DCE - Phase 1 - Word Document Handling Strategy.md`
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`
+-   **Cycles Observed:** 124, 126
+-   **Symptom:** The "Parse All" button exhibits unstable behavior.
+    1.  Clicking it toggles the UI to the "Un-Parse All" state but immediately reverts to "Parse All". A second click is required for the state to stick.
+    2.  When the UI is in the "Un-Parse All" state, selecting a file from the "Associated Files" list incorrectly toggles the mode back to "Parse All", making it impossible to view files.
+-   **Root Cause Analysis (RCA):** The bug is caused by a dependency cycle in the React component's state management. The `parseAllTabs` function, which was wrapped in a `useCallback`, had a dependency on the `tabs` state. Inside the function, it called `setTabs`. This created a loop where the `useEffect` hook responsible for parsing would run, call `parseAllTabs`, which would update the `tabs` state, which would create a new `parseAllTabs` function on re-render, which would re-trigger the `useEffect`. This loop caused rapid, unpredictable state changes, leading to the observed UI flickering and instability.
+-   **Codified Solution & Best Practice:**
+    1.  **Break Dependency Cycle:** The `useCallback` hook for the `parseAllTabs` function was refactored. It now uses the functional update form of its `setTabs` call (e.g., `setTabs(prevTabs => ...)`).
+    2.  This removes the need for the `tabs` state to be in the `useCallback` dependency array. The function is now stable across re-renders.
+    3.  **Refine `useEffect`:** The `useEffect` that triggers the parsing logic can now safely depend on `parseAllTabs` without causing a loop. Its dependency array should be limited to `isParsedMode` and the raw content of the tabs, preventing it from running on unrelated UI state changes like file selection.
+    4.  **Best Practice:** When a memoized callback (`useCallback`) needs to update a state that it also depends on, always use the functional update form to break the dependency cycle.
+
+---
+
+### Case Study 007: Corrupted or Unsupported Document Files
+-   **Artifacts Affected:** `src/backend/services/content-extraction.service.ts`, `A44. DCE - Phase 1 - Word Document Handling Strategy.md`
 -   **Cycles Observed:** 81
 -   **Symptom:** Some `.docx` files fail to process with a `Can't find end of central directory` error in the logs, while legacy `.doc` files show an "Unsupported format" message in the UI.
 -   **Root Cause Analysis (RCA):** This is not a bug, but rather the system correctly handling invalid inputs.
     1.  **Corrupted `.docx`:** The `.docx` format is a standard zip archive. The parsing library (`mammoth`, which uses `jszip`) throws the "central directory" error when a file is not a valid zip archive. This indicates the source file itself is corrupted or was saved incorrectly.
     2.  **Legacy `.doc`:** The `mammoth` library does not support the old binary `.doc` format. Our documented strategy in `A44` is to explicitly reject these files.
 -   **Codified Solution & Best Practice:**
-    1.  The error handling in `fs.service.ts` is working as intended.
+    1.  The error handling in `content-extraction.service.ts` is working as intended.
     2.  The `catch` block in `handleWordToTextRequest` should be enhanced to check for the specific "central directory" error message.
     3.  When this specific error is caught, a more user-friendly message like "File appears to be corrupted or is not a valid .docx format" should be sent to the frontend.
     4.  The system should continue to correctly identify `.doc` files and send the "Legacy .doc format not supported" message. This confirms the system is robust against invalid user inputs.
@@ -1049,17 +1064,15 @@ This document serves as a living record of persistent or complex bugs that have 
 ---
 
 ### Case Study 006: Special File Type Caching Fails on Initialization
-
--   **Artifacts Affected:** `src/client/views/context-chooser.view/view.tsx`, `src/backend/services/fs.service.ts`
--   **Cycles Observed:** 65, 66, 75, 76, 78, 79
+-   **Artifacts Affected:** `src/client/views/context-chooser.view/view.tsx`
+-   **Cycles Observed:** 65, 66, 75, 76, 78, 79, 80, 81
 -   **Symptom:** When the extension loads and restores the previous selection, special file types (`.pdf`, `.xlsx`, `.docx`) have a token count of 0. When "Flatten Context" is clicked, the output shows `<!-- content not processed or cached -->`. The caching only works if the user manually un-checks and re-checks the file.
--   **Root Cause Analysis (RCA):** The frontend was experiencing a **race condition**. The `ApplySelectionSet` message (containing the paths to restore) was being received and processed *before* the `SendWorkspaceFiles` message (containing the file tree data). The pre-warming logic would attempt to find the file nodes for the restored paths in the frontend's `files` state, but this state was still empty. This failure was confirmed by the log `[WebView] [CACHE-FIX] File tree not loaded yet, cannot pre-warm cache.` The initial fix attempt in C79 was also flawed because it relied on a `useEffect` with a stale closure over the empty `files` state.
+-   **Root Cause Analysis (RCA):** The frontend logic for "pre-warming" the cache was flawed. It was attempting to find the file nodes for the restored selection paths *before* the main file tree had been loaded from the backend. This race condition meant it found no files to process, so the cache was never populated on startup.
 -   **Codified Solution & Best Practice:**
     1.  **Decouple and Defer Pre-warming:** The logic must be architected to handle asynchronous data arrival gracefully.
     2.  **Use a Trigger State:** In `view.tsx`, the `ApplySelectionSet` message handler should do nothing more than set two state variables: one for the `checkedFiles` (for the UI) and a separate "trigger" state (e.g., `selectionToPrewarm: string[]`).
     3.  **Use a Multi-Dependency `useEffect`:** A dedicated `useEffect` hook must be created to perform the pre-warming logic. Its dependency array **must** include both the trigger state and the file tree state (e.g., `[selectionToPrewarm, files]`).
     4.  This ensures the pre-warming code only executes when both the selection and the file tree data are guaranteed to be present, eliminating the race condition. After executing, the trigger state should be reset to `null` to prevent re-runs.
-    5.  **Logging is critical:** The backend handlers in `fs.service.ts` must have detailed `[CACHE] HIT/MISS/SUCCESS/FAIL` logs to confirm that the pre-warming requests from the frontend are being received and processed correctly.
 
 ---
 
@@ -1168,7 +1181,7 @@ This document serves as a living record of persistent or complex bugs that have 
 # Artifact A12: DCE - Logging and Debugging Guide
 # Date Created: Cycle 19
 # Author: AI Model & Curator
-# Updated on: C93 (Add section on Tactical Debugging)
+# Updated on: C126 (Add section on truncated logging)
 
 - **Key/Value for A0:**
 - **Description:** Explains how to access and use the integrated logging solution for debugging the extension's backend and frontend components.
@@ -1237,14 +1250,14 @@ When a feature is not working as expected, especially one that involves communic
     3.  **IPC (`RequestFileExistence`):** The list of relative paths is sent to the backend.
     4.  **Backend (`fs.service.ts`):** The backend receives the list and compares it against its own list of known workspace files, which are stored as absolute paths (e.g., `c:/project/src/main.ts`). The comparison fails.
 
--   **Tactical Logging Strategy:**
-    1.  **Log at Step 2:** In `view.tsx`, log the array of paths immediately after they are returned from `response-parser.ts`. **Result:** Confirmed paths were relative and used forward slashes.
-    2.  **Log at Step 3:** In `view.tsx`, log the payload being sent over the IPC channel. **Result:** Confirmed the same relative paths were being sent.
-    3.  **Log at Step 4 (Backend):** In `fs.service.ts`'s `handleFileExistenceRequest` handler:
-        *   Log the array of paths *as received* from the client.
-        *   Log the workspace root path being used for resolution.
-        *   Inside the loop, log the comparison being made for each file: `[DEBUG] Checking for existence. Relative: 'src/main.ts', Resolved Absolute: 'c:/project/src/main.ts'`.
-    *   **Conclusion:** The logs immediately revealed the mismatch between relative and absolute paths, pinpointing the exact location where a path resolution step was needed.
+## 4. Truncated Logging for Large Content (C126)
+
+To prevent the output channel from becoming overwhelmed with large blocks of text (e.g., entire file contents), a logging utility has been implemented to truncate long strings.
+
+-   **Behavior:** When a service logs a large piece of content (like a code block for syntax highlighting), it will use the `truncateStringForLogging` utility.
+-   **Format:** If a string is longer than a set threshold (e.g., 100 characters), it will be displayed in the logs in a format like this:
+    `[First 50 characters]...[Last 50 characters]`
+-   **Benefit:** This keeps the logs clean and readable, allowing you to see that a large piece of data was processed without having its entire content flood the output. You can still see the beginning and end of the content to verify its identity.
 </file>
 
 <file path="src/Artifacts/A13. DCE - Phase 1 - Right-Click Context Menu.md">
@@ -4220,6 +4233,7 @@ export default TestComponent;
 # Artifact A52: DCE - Interaction Schema Refinement
 # Date Created: C110
 # Author: AI Model & Curator
+# Updated on: C126 (Specify case-insensitive header parsing)
 
 - **Key/Value for A0:**
 - **Description:** Proposes a set of refined rules for the AI's output format to improve the reliability and consistency of automated parsing within the Parallel Co-Pilot Panel.
@@ -4238,7 +4252,7 @@ The goal of this artifact is to define a refined, stricter set of rules for the 
 To ensure predictable parsing, all responses must adhere to the following structure and order:
 
 1.  **Summary/Plan:** The response must begin with a high-level summary, thoughts, or plan. This section ends at the first occurrence of a standardized header.
-2.  **Course of Action Header:** This section must begin with the exact markdown header: `### Course of Action`.
+2.  **Course of Action Header:** This section must begin with a markdown header like `### Course of Action`. **(C126 Update)** The parser will treat this header case-insensitively (e.g., `### Course of action` is also valid).
 3.  **Files Updated Header:** This section must begin with the exact markdown header: `### Files Updated This Cycle:`.
 4.  **File Blocks:** The response must conclude with the code/document artifact blocks.
 
@@ -8817,7 +8831,7 @@ export class FlattenerService {
 </file>
 
 <file path="src/backend/services/highlighting.service.ts">
-// src/backend/services/highlighting.service.ts
+// Updated on: C126 (Truncate log output for code snippets)
 import { createStarryNight, common } from '@wooorm/starry-night';
 import sourceTsx from '@wooorm/starry-night/source.tsx';
 import sourceJs from '@wooorm/starry-night/source.js';
@@ -8839,7 +8853,6 @@ export class HighlightingService {
 
     private async initializeStarryNight() {
         try {
-            // C120 Fix: Ensure grammars for standard JS and TS are included.
             const grammars = [...common, sourceTsx, sourceJs, sourceTs, sourceCss, sourceScss, textHtml];
             this.starryNight = await createStarryNight(grammars);
             Services.loggerService.log('Starry Night syntax highlighter initialized.');
@@ -8849,7 +8862,9 @@ export class HighlightingService {
     }
 
     public async handleSyntaxHighlightRequest(code: string, lang: string, id: string, serverIpc: ServerPostMessageManager) {
-        Services.loggerService.log(`[SYNTAX-HIGHLIGHT] Received request for lang: ${lang}, id: ${id}`);
+        const truncatedCode = code.length > 20 ? `${code.substring(0, 20)}[...]` : code;
+        Services.loggerService.log(`[SYNTAX-HIGHLIGHT] Received request for lang: ${lang}, code: ${truncatedCode}`);
+        
         if (!this.starryNight) {
             Services.loggerService.error('Starry Night not initialized, cannot highlight.');
             serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml: `<pre><code>${code}</code></pre>`, id });
@@ -10877,11 +10892,11 @@ export const logger = {
 </file>
 
 <file path="src/client/utils/response-parser.ts">
-// Updated on: C116 (Fix trimming of trailing </file> tag and other artifacts)
+// Updated on: C126 (Make Course of Action regex case-insensitive)
 import { ParsedResponse, ParsedFile } from "@/common/types/pcpp.types";
 
-const SUMMARY_REGEX = /^([\s\S]*?)(?=### Course of Action|### Files Updated This Cycle|<file path=")/;
-const COURSE_OF_ACTION_REGEX = /### Course of Action\s*([\s\S]*?)(?=### Files Updated This Cycle|<file path=")/m;
+const SUMMARY_REGEX = /^([\s\S]*?)(?=### Course of [Aa]ction|### Files Updated This Cycle|<file path=")/;
+const COURSE_OF_ACTION_REGEX = /### Course of [Aa]ction\s*([\s\S]*?)(?=### Files Updated This Cycle|<file path=")/im;
 const FILES_UPDATED_LIST_REGEX = /### Files Updated This Cycle\s*([\s\S]*?)(?=<file path="|`{3,})/m;
 const FILE_TAG_REGEX = /<file path="([^"]+)">/g;
 
@@ -10900,8 +10915,6 @@ export function parseResponse(rawText: string): ParsedResponse {
         
         let content = rawText.substring(contentStart, contentEnd);
 
-        // C116: More aggressive cleanup of trailing artifacts.
-        // The loop is important for cases like `...content</file>```
         const patternsToRemove = [
             `</file>`,
             `</${path}>`,
@@ -10926,7 +10939,6 @@ export function parseResponse(rawText: string): ParsedResponse {
         
         content = content.trim();
 
-        // Also remove leading newline if it exists
         if (content.startsWith('\n')) {
             content = content.substring(1);
         }
@@ -12832,7 +12844,7 @@ body {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
-// Updated on: C125 (Add Exit Diff button and Cycle Management)
+// Updated on: C126 (Fix state management bug causing parse mode to revert)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -12971,7 +12983,8 @@ const App = () => {
             clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) });
         }
     }, [clientIpc, tabs]);
-
+    
+    // C126 Fix: Setup listeners only once to prevent re-renders from causing state resets.
     React.useEffect(() => {
         const loadCycleData = (cycleData: PcppCycle) => {
             setCurrentCycle(cycleData.cycleId);
@@ -13003,9 +13016,13 @@ const App = () => {
             setFileExistenceMap(new Map(Object.entries(existenceMap)));
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendFileContent, ({ path: filePath, content }) => {
-            if (filePath === selectedFilePath) {
-                setOriginalFileContent(content);
-            }
+            // Only update if the content is for the currently selected file for diffing
+            setSelectedFilePath(currentSelectedPath => {
+                if (filePath === currentSelectedPath) {
+                    setOriginalFileContent(content);
+                }
+                return currentSelectedPath;
+            });
         });
         clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => {
             if (reason === 'history') {
@@ -13015,7 +13032,7 @@ const App = () => {
         });
         
         clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});
-    }, [clientIpc, selectedFilePath]);
+    }, [clientIpc]);
 
     React.useEffect(() => {
         if (isParsedMode) {
@@ -13118,21 +13135,11 @@ const App = () => {
         }
     };
 
-    const handleDeleteCycle = async () => {
-        const confirmation = await clientIpc.getVscodeApi().postMessage({
-            channel: 'showWarningMessage',
-            body: {
-                message: `Are you sure you want to delete Cycle ${currentCycle}? This cannot be undone.`,
-                options: { modal: true },
-                items: ['Delete']
-            }
-        });
-        // This is a mocked flow. In a real VS Code extension, you'd get a response.
-        // For now, we'll assume a "yes" and proceed.
+    const handleDeleteCycle = () => {
         clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle });
     };
 
-    const handleResetHistory = async () => {
+    const handleResetHistory = () => {
         clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {});
     };
 
@@ -13658,6 +13665,20 @@ export function formatBytes(bytes: number, decimals: number = 1): string {
     const i = Math.floor(Math.log(bytes) / Math.log(k));
 
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+}
+
+/**
+ * Truncates a long string for logging purposes.
+ * @param str The string to truncate.
+ * @param maxLength The total maximum length of the output string.
+ * @returns A truncated string in the format "start...end".
+ */
+export function truncateStringForLogging(str: string, maxLength: number = 100): string {
+    if (str.length <= maxLength) {
+        return str;
+    }
+    const halfLength = Math.floor((maxLength - 3) / 2);
+    return `${str.substring(0, halfLength)}...${str.substring(str.length - halfLength)}`;
 }
 </file>
 
