@@ -1,4 +1,4 @@
-// src/backend/services/highlighting.service.ts
+// Updated on: C126 (Truncate log output for code snippets)
 import { createStarryNight, common } from '@wooorm/starry-night';
 import sourceTsx from '@wooorm/starry-night/source.tsx';
 import sourceJs from '@wooorm/starry-night/source.js';
@@ -20,7 +20,6 @@ export class HighlightingService {
 
     private async initializeStarryNight() {
         try {
-            // C120 Fix: Ensure grammars for standard JS and TS are included.
             const grammars = [...common, sourceTsx, sourceJs, sourceTs, sourceCss, sourceScss, textHtml];
             this.starryNight = await createStarryNight(grammars);
             Services.loggerService.log('Starry Night syntax highlighter initialized.');
@@ -30,7 +29,9 @@ export class HighlightingService {
     }
 
     public async handleSyntaxHighlightRequest(code: string, lang: string, id: string, serverIpc: ServerPostMessageManager) {
-        Services.loggerService.log(`[SYNTAX-HIGHLIGHT] Received request for lang: ${lang}, id: ${id}`);
+        const truncatedCode = code.length > 20 ? `${code.substring(0, 20)}[...]` : code;
+        Services.loggerService.log(`[SYNTAX-HIGHLIGHT] Received request for lang: ${lang}, code: ${truncatedCode}`);
+        
         if (!this.starryNight) {
             Services.loggerService.error('Starry Night not initialized, cannot highlight.');
             serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml: `<pre><code>${code}</code></pre>`, id });

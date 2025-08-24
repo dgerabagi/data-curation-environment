@@ -1,8 +1,8 @@
-// Updated on: C116 (Fix trimming of trailing </file> tag and other artifacts)
+// Updated on: C126 (Make Course of Action regex case-insensitive)
 import { ParsedResponse, ParsedFile } from "@/common/types/pcpp.types";
 
-const SUMMARY_REGEX = /^([\s\S]*?)(?=### Course of Action|### Files Updated This Cycle|<file path=")/;
-const COURSE_OF_ACTION_REGEX = /### Course of Action\s*([\s\S]*?)(?=### Files Updated This Cycle|<file path=")/m;
+const SUMMARY_REGEX = /^([\s\S]*?)(?=### Course of [Aa]ction|### Files Updated This Cycle|<file path=")/;
+const COURSE_OF_ACTION_REGEX = /### Course of [Aa]ction\s*([\s\S]*?)(?=### Files Updated This Cycle|<file path=")/im;
 const FILES_UPDATED_LIST_REGEX = /### Files Updated This Cycle\s*([\s\S]*?)(?=<file path="|`{3,})/m;
 const FILE_TAG_REGEX = /<file path="([^"]+)">/g;
 
@@ -21,8 +21,6 @@ export function parseResponse(rawText: string): ParsedResponse {
         
         let content = rawText.substring(contentStart, contentEnd);
 
-        // C116: More aggressive cleanup of trailing artifacts.
-        // The loop is important for cases like `...content</file>```
         const patternsToRemove = [
             `</file>`,
             `</${path}>`,
@@ -47,7 +45,6 @@ export function parseResponse(rawText: string): ParsedResponse {
         
         content = content.trim();
 
-        // Also remove leading newline if it exists
         if (content.startsWith('\n')) {
             content = content.substring(1);
         }

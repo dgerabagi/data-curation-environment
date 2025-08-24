@@ -79,3 +79,17 @@ export function formatBytes(bytes: number, decimals: number = 1): string {
 
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
+
+/**
+ * Truncates a long string for logging purposes.
+ * @param str The string to truncate.
+ * @param maxLength The total maximum length of the output string.
+ * @returns A truncated string in the format "start...end".
+ */
+export function truncateStringForLogging(str: string, maxLength: number = 100): string {
+    if (str.length <= maxLength) {
+        return str;
+    }
+    const halfLength = Math.floor((maxLength - 3) / 2);
+    return `${str.substring(0, halfLength)}...${str.substring(str.length - halfLength)}`;
+}

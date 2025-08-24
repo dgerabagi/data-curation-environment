@@ -1,4 +1,4 @@
-// Updated on: C125 (Add Exit Diff button and Cycle Management)
+// Updated on: C126 (Fix state management bug causing parse mode to revert)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -137,7 +137,8 @@ const App = () => {
             clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) });
         }
     }, [clientIpc, tabs]);
-
+    
+    // C126 Fix: Setup listeners only once to prevent re-renders from causing state resets.
     React.useEffect(() => {
         const loadCycleData = (cycleData: PcppCycle) => {
             setCurrentCycle(cycleData.cycleId);
@@ -169,9 +170,13 @@ const App = () => {
             setFileExistenceMap(new Map(Object.entries(existenceMap)));
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendFileContent, ({ path: filePath, content }) => {
-            if (filePath === selectedFilePath) {
-                setOriginalFileContent(content);
-            }
+            // Only update if the content is for the currently selected file for diffing
+            setSelectedFilePath(currentSelectedPath => {
+                if (filePath === currentSelectedPath) {
+                    setOriginalFileContent(content);
+                }
+                return currentSelectedPath;
+            });
         });
         clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => {
             if (reason === 'history') {
@@ -181,7 +186,7 @@ const App = () => {
         });
         
         clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});
-    }, [clientIpc, selectedFilePath]);
+    }, [clientIpc]);
 
     React.useEffect(() => {
         if (isParsedMode) {
@@ -284,21 +289,11 @@ const App = () => {
         }
     };
 
-    const handleDeleteCycle = async () => {
-        const confirmation = await clientIpc.getVscodeApi().postMessage({
-            channel: 'showWarningMessage',
-            body: {
-                message: `Are you sure you want to delete Cycle ${currentCycle}? This cannot be undone.`,
-                options: { modal: true },
-                items: ['Delete']
-            }
-        });
-        // This is a mocked flow. In a real VS Code extension, you'd get a response.
-        // For now, we'll assume a "yes" and proceed.
+    const handleDeleteCycle = () => {
         clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle });
     };
 
-    const handleResetHistory = async () => {
+    const handleResetHistory = () => {
         clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {});
     };
 
