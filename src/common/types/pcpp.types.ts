@@ -12,7 +12,7 @@ export interface PcppCycle {
     cycleContext: string;
     ephemeralContext: string;
     responses: { [tabId: string]: PcppResponse };
-    isParsedMode?: boolean;
+    isParsedMode?: boolean; // This will now be managed per-cycle
     leftPaneWidth?: number;
 }
 

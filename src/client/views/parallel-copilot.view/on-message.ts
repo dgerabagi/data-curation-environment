@@ -1,4 +1,4 @@
-// Updated on: C118 (Add file content handler)
+// Updated on: C125 (Add cycle management handlers)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -35,5 +35,17 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     
     serverIpc.onClientMessage(ClientToServerChannel.RequestFileContent, (data) => {
         fileOperationService.handleFileContentRequest(data.path, serverIpc);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestDeleteCycle, async (data) => {
+        await historyService.deleteCycle(data.cycleId);
+        const cycleData = await historyService.getLatestCycle();
+        serverIpc.sendToClient(ServerToClientChannel.SendLatestCycleData, { cycleData });
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestResetHistory, async () => {
+        await historyService.resetHistory();
+        const cycleData = await historyService.getLatestCycle();
+        serverIpc.sendToClient(ServerToClientChannel.SendLatestCycleData, { cycleData });
     });
 }

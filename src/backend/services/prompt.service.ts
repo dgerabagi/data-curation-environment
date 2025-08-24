@@ -4,7 +4,7 @@ import * as path from 'path';
 import * as fs from 'fs/promises';
 import { Services } from './services';
 import { parseResponse } from '@/client/utils/response-parser';
-import { PcppCycle } from './history.service';
+import { PcppCycle } from '@/common/types/pcpp.types';
 
 export class PromptService {
     private artifactSchemaTemplate = `<M1. artifact schema>

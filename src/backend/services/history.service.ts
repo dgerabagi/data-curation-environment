@@ -2,26 +2,7 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
-
-export interface PcppResponse {
-    content: string;
-}
-
-export interface PcppCycle {
-    cycleId: number;
-    timestamp: string;
-    title: string;
-    cycleContext: string;
-    ephemeralContext: string;
-    responses: { [tabId: string]: PcppResponse };
-    isParsedMode?: boolean;
-    leftPaneWidth?: number;
-}
-
-export interface PcppHistoryFile {
-    version: number;
-    cycles: PcppCycle[];
-}
+import { PcppCycle, PcppHistoryFile } from '@/common/types/pcpp.types';
 
 export class HistoryService {
     private historyFilePath: string | undefined;
@@ -29,7 +10,6 @@ export class HistoryService {
     constructor() {
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (workspaceFolders && workspaceFolders.length > 0) {
-            // C119 Fix: Correctly access the first workspace folder
             this.historyFilePath = path.join(workspaceFolders[0].uri.fsPath, '.vscode', 'dce_history.json');
         }
     }
@@ -106,5 +86,30 @@ export class HistoryService {
         history.cycles.sort((a, b) => a.cycleId - b.cycleId);
 
         await this._writeHistoryFile(history);
+    }
+
+    public async deleteCycle(cycleId: number): Promise<void> {
+        Services.loggerService.log(`HistoryService: Deleting cycle ${cycleId}.`);
+        const history = await this._readHistoryFile();
+        const updatedCycles = history.cycles.filter(c => c.cycleId !== cycleId);
+
+        if (updatedCycles.length === 0) {
+            await this.resetHistory();
+            return;
+        }
+
+        history.cycles = updatedCycles;
+        await this._writeHistoryFile(history);
+        Services.loggerService.log(`Cycle ${cycleId} deleted.`);
+    }
+
+    public async resetHistory(): Promise<void> {
+        Services.loggerService.log(`HistoryService: Resetting all cycle history.`);
+        const defaultHistory: PcppHistoryFile = {
+            version: 1,
+            cycles: [] // getLatestCycle will auto-create cycle 1
+        };
+        await this._writeHistoryFile(defaultHistory);
+        Services.loggerService.log(`Cycle history has been reset.`);
     }
 }

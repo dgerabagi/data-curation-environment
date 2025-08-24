@@ -1,8 +1,8 @@
-// Updated on: C122 (Fix diff view title regression, integrate side-by-side diff viewer)
+// Updated on: C125 (Add Exit Diff View button and Cycle Management)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap, VscTrash, VscSync } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -126,7 +126,6 @@ const App = () => {
                 tabState.parsedContent = parsed;
                 parsed.filesUpdated.forEach(file => allFilePaths.add(file));
                 parsed.files.forEach(file => {
-                    // C119: Use path-browserify to get the extension safely on the frontend.
                     const lang = path.extname(file.path).substring(1) || 'plaintext';
                     const id = `${file.path}::${file.content}`;
                      clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
@@ -226,6 +225,7 @@ const App = () => {
 
     const handleNewCycle = (e: React.MouseEvent) => {
         e.stopPropagation();
+        saveCurrentCycleState(true); // Save before creating new
         const newCycleId = maxCycle + 1;
         setMaxCycle(newCycleId);
         setCurrentCycle(newCycleId);
@@ -238,6 +238,18 @@ const App = () => {
     
     const handleGeneratePrompt = () => {
         clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle });
+    };
+
+    const handleDeleteCycle = () => {
+        if (window.confirm(`Are you sure you want to delete Cycle ${currentCycle}? This cannot be undone.`)) {
+            clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle });
+        }
+    };
+
+    const handleResetHistory = () => {
+        if (window.confirm(`ARE YOU SURE you want to delete ALL cycles and reset the history? This cannot be undone.`)) {
+            clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {});
+        }
     };
 
     const handleMouseDown = React.useCallback((e: React.MouseEvent) => {
@@ -273,11 +285,7 @@ const App = () => {
         const newDiffMode = !isDiffMode;
         setIsDiffMode(newDiffMode);
         if (newDiffMode && selectedFilePath) {
-            // C120 Fix: Correctly get file extension for language.
-            const lang = path.extname(selectedFilePath).substring(1);
             clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: selectedFilePath });
-            // Also request syntax highlighting for the original file content for the diff viewer
-            clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: originalFileContent || '', lang, id: `original::${selectedFilePath}` });
         } else {
             setOriginalFileContent(null);
         }
@@ -304,6 +312,9 @@ const App = () => {
              <div className="file-content-viewer-header diff-header">
                 <span className="file-path left" title={selectedFilePath}>Original: {selectedFilePath}</span>
                 <span className="file-path right" title={selectedFilePath}>Response {activeTab}: {path.basename(selectedFilePath)}</span>
+                <div className="file-actions">
+                    <button onClick={() => setIsDiffMode(false)} title="Return to Summary View">Return</button>
+                </div>
             </div>
         );
     };
@@ -329,6 +340,8 @@ const App = () => {
                     <button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button>
                     <button onClick={handleNewCycle} title="New Cycle" disabled={isNewCycleButtonDisabled}><VscAdd /></button>
                     <input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} />
+                    <button onClick={handleDeleteCycle} title="Delete Current Cycle" disabled={maxCycle <= 1}><VscTrash /></button>
+                    <button onClick={handleResetHistory} title="Reset All Cycle History"><VscSync /></button>
                 </div>
                 <div className="context-inputs">
                     <textarea className="context-textarea" placeholder="Cycle Context (notes for this cycle)..." value={cycleContext} onChange={e => setCycleContext(e.target.value)} />

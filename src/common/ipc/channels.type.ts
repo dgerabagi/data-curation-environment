@@ -1,6 +1,6 @@
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
-import { PcppCycle } from "@/backend/services/history.service";
+import { PcppCycle } from "@/common/types/pcpp.types";
 
 export type SelectionSet = { [name: string]: string[] };
 export type ProblemCountsMap = { [path: string]: { error: number; warning: number; } };
@@ -38,6 +38,8 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestLatestCycleData ? {} :
     T extends ClientToServerChannel.RequestCycleData ? { cycleId: number } :
     T extends ClientToServerChannel.SaveCycleData ? { cycleData: PcppCycle } :
+    T extends ClientToServerChannel.RequestDeleteCycle ? { cycleId: number } :
+    T extends ClientToServerChannel.RequestResetHistory ? {} :
     
     T extends ServerToClientChannel.SendWorkspaceFiles ? { files: FileNode[] } :
     T extends ServerToClientChannel.SendWorkspaceTrustState ? { isTrusted: boolean } :

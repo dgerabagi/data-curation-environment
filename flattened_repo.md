@@ -1,12 +1,12 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-23T22:11:22.923Z
+  Date Generated: 2025-08-24T00:48:26.313Z
   ---
   Total Files: 217
-  Total Lines: 19723
-  Total Characters: 945769
-  Approx. Tokens: 236524
+  Total Lines: 19742
+  Total Characters: 947228
+  Approx. Tokens: 236889
 -->
 
 <!-- Top 10 Files by Token Count -->
@@ -14,7 +14,7 @@
 2. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
 3. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
 4. src\client\views\context-chooser.view\view.tsx (5562 tokens)
-5. src\client\views\parallel-copilot.view\view.tsx (5070 tokens)
+5. src\client\views\parallel-copilot.view\view.tsx (5336 tokens)
 6. src\Artifacts\A0. DCE Master Artifact List.md (4915 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4508 tokens)
 8. src\backend\services\prompt.service.ts (4132 tokens)
@@ -99,7 +99,7 @@
 75. src\backend\services\file-tree.service.ts - Lines: 212 - Chars: 11447 - Tokens: 2862
 76. src\backend\services\flattener.service.ts - Lines: 210 - Chars: 11271 - Tokens: 2818
 77. src\backend\services\highlighting.service.ts - Lines: 57 - Chars: 2874 - Tokens: 719
-78. src\backend\services\history.service.ts - Lines: 110 - Chars: 4161 - Tokens: 1041
+78. src\backend\services\history.service.ts - Lines: 110 - Chars: 4270 - Tokens: 1068
 79. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
 80. src\backend\services\prompt.service.ts - Lines: 151 - Chars: 16527 - Tokens: 4132
 81. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
@@ -107,7 +107,7 @@
 83. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
 84. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
 85. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
-86. src\client\components\DiffViewer.tsx - Lines: 107 - Chars: 4188 - Tokens: 1047
+86. src\client\components\DiffViewer.tsx - Lines: 103 - Chars: 4278 - Tokens: 1070
 87. src\client\components\file-tree\FileTree.tsx - Lines: 262 - Chars: 11897 - Tokens: 2975
 88. src\client\components\file-tree\FileTree.utils.ts - Lines: 189 - Chars: 7284 - Tokens: 1821
 89. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13099 - Tokens: 3275
@@ -121,12 +121,12 @@
 97. src\client\views\context-chooser.view\view.tsx - Lines: 435 - Chars: 22245 - Tokens: 5562
 98. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
 99. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-100. src\client\views\parallel-copilot.view\on-message.ts - Lines: 39 - Chars: 1895 - Tokens: 474
+100. src\client\views\parallel-copilot.view\on-message.ts - Lines: 39 - Chars: 1933 - Tokens: 484
 101. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 43 - Chars: 1890 - Tokens: 473
 102. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
 103. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
-104. src\client\views\parallel-copilot.view\view.scss - Lines: 415 - Chars: 9490 - Tokens: 2373
-105. src\client\views\parallel-copilot.view\view.tsx - Lines: 392 - Chars: 20277 - Tokens: 5070
+104. src\client\views\parallel-copilot.view\view.scss - Lines: 425 - Chars: 9646 - Tokens: 2412
+105. src\client\views\parallel-copilot.view\view.tsx - Lines: 405 - Chars: 21343 - Tokens: 5336
 106. src\common\ipc\channels.enum.ts - Lines: 64 - Chars: 3129 - Tokens: 783
 107. src\common\ipc\channels.type.ts - Lines: 57 - Chars: 4453 - Tokens: 1114
 108. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1590 - Tokens: 398
@@ -9477,11 +9477,6 @@ export default ContextMenu;
 import * as React from 'react';
 import { diffLines, Change } from 'diff';
 
-interface DiffViewerProps {
-    original: string;
-    modified: string;
-}
-
 interface DiffLine {
     type: 'added' | 'removed' | 'common' | 'placeholder';
     content?: string;
@@ -9492,7 +9487,7 @@ interface PairedLine {
     right: DiffLine & { lineNum?: number };
 }
 
-const DiffViewer: React.FC<DiffViewerProps> = ({ original, modified }) => {
+const DiffViewer: React.FC<{ original: string; modified: string; }> = ({ original, modified }) => {
     
     const pairedLines = React.useMemo(() => {
         const changes = diffLines(original, modified);
@@ -9505,9 +9500,10 @@ const DiffViewer: React.FC<DiffViewerProps> = ({ original, modified }) => {
             const current = changes[i];
             const next = changes[i + 1];
 
+            // Heuristic to treat adjacent removed/added blocks as a "change"
             if (current.removed && next && next.added) {
-                const leftLines = current.value.split('\n').slice(0, -1);
-                const rightLines = next.value.split('\n').slice(0, -1);
+                const leftLines = current.value.split('\n').filter(l => l.length > 0);
+                const rightLines = next.value.split('\n').filter(l => l.length > 0);
                 const maxLen = Math.max(leftLines.length, rightLines.length);
 
                 for (let j = 0; j < maxLen; j++) {
@@ -9518,7 +9514,7 @@ const DiffViewer: React.FC<DiffViewerProps> = ({ original, modified }) => {
                 }
                 i += 2;
             } else if (current.removed) {
-                const lines = current.value.split('\n').slice(0, -1);
+                const lines = current.value.split('\n').filter(l => l.length > 0);
                 lines.forEach(line => {
                     result.push({
                         left: { type: 'removed', content: line, lineNum: leftLineNum++ },
@@ -9527,7 +9523,7 @@ const DiffViewer: React.FC<DiffViewerProps> = ({ original, modified }) => {
                 });
                 i++;
             } else if (current.added) {
-                const lines = current.value.split('\n').slice(0, -1);
+                const lines = current.value.split('\n').filter(l => l.length > 0);
                 lines.forEach(line => {
                     result.push({
                         left: { type: 'placeholder' },
@@ -9535,8 +9531,8 @@ const DiffViewer: React.FC<DiffViewerProps> = ({ original, modified }) => {
                     });
                 });
                 i++;
-            } else { // common
-                const lines = current.value.split('\n').slice(0, -1);
+            } else { // common block
+                const lines = current.value.split('\n').filter(l => l.length > 0);
                 lines.forEach(line => {
                     result.push({
                         left: { type: 'common', content: line, lineNum: leftLineNum++ },
@@ -9553,24 +9549,24 @@ const DiffViewer: React.FC<DiffViewerProps> = ({ original, modified }) => {
         <div className="diff-viewer-container">
             <div className="diff-pane">
                 <div className="line-numbers">
-                    {pairedLines.map((line, i) => <span key={`L${i}`}>{line.left.lineNum || ' '}</span>)}
+                    {pairedLines.map((line, i) => <span key={`L${i}`}>{line.left.lineNum || ''}</span>)}
                 </div>
                 <div className="diff-lines">
                     {pairedLines.map((line, i) => (
                         <div key={`L${i}`} className={`line ${line.left.type}`}>
-                            <pre><code>{line.left.content || ' '}</code></pre>
+                            <pre><code>{line.left.content || ''}</code></pre>
                         </div>
                     ))}
                 </div>
             </div>
             <div className="diff-pane">
                 <div className="line-numbers">
-                    {pairedLines.map((line, i) => <span key={`R${i}`}>{line.right.lineNum || ' '}</span>)}
+                    {pairedLines.map((line, i) => <span key={`R${i}`}>{line.right.lineNum || ''}</span>)}
                 </div>
                 <div className="diff-lines">
                     {pairedLines.map((line, i) => (
                         <div key={`R${i}`} className={`line ${line.right.type}`}>
-                            <pre><code>{line.right.content || ' '}</code></pre>
+                            <pre><code>{line.right.content || ''}</code></pre>
                         </div>
                     ))}
                 </div>
@@ -12240,7 +12236,7 @@ export default TestPane3;
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
-/* Updated on: C121 (Add styles for side-by-side diff view) */
+/* Updated on: C122 (Add styles for side-by-side diff view header) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -12493,6 +12489,13 @@ body {
     font-size: 12px;
     flex-shrink: 0;
 
+    &.diff-header {
+        .file-path {
+            flex: 1;
+            text-align: center;
+        }
+    }
+
     .file-path {
         font-weight: bold;
         white-space: nowrap;
@@ -12510,7 +12513,6 @@ body {
     display: flex;
     flex-grow: 1;
     min-height: 0;
-    gap: 8px;
     border: 1px solid var(--vscode-panel-border);
     border-top: none;
     border-radius: 0 0 4px 4px;
@@ -12615,7 +12617,7 @@ body {
 }
 
 .diff-pane {
-    flex: 1;
+    flex: 1 1 50%;
     display: flex;
     min-width: 0;
     &:first-child {
@@ -12634,7 +12636,8 @@ body {
     border-right: 1px solid var(--vscode-panel-border);
     span {
         display: block;
-        min-height: 1.5em; /* Ensure empty lines take up space */
+        min-height: 1.5em;
+        padding-right: 6px;
     }
 }
 
@@ -12646,7 +12649,10 @@ body {
         min-height: 1.5em;
         &.added { background-color: var(--vscode-diffEditor-insertedTextBackground); }
         &.removed { background-color: var(--vscode-diffEditor-removedTextBackground); }
-        &.placeholder { background-color: var(--vscode-editor-inactiveSelectionBackground); }
+        &.placeholder { 
+            background-color: var(--vscode-editor-inactiveSelectionBackground);
+            opacity: 0.5;
+        }
         pre {
             margin: 0;
             padding: 0;
@@ -12658,7 +12664,7 @@ body {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
-// Updated on: C121 (Fix diff view bugs and UI)
+// Updated on: C122 (Fix diff view title regression, integrate side-by-side diff viewer)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -12671,6 +12677,7 @@ import { parseResponse } from '@/client/utils/response-parser';
 import ReactMarkdown from 'react-markdown';
 import DiffViewer from '@/client/components/DiffViewer';
 import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
+import * as path from 'path-browserify';
 
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -12777,26 +12784,22 @@ const App = () => {
     }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, debouncedSave]);
     
     const parseAllTabs = React.useCallback(() => {
-        logger.log("Parsing all tabs...");
         const allFilePaths = new Set<string>();
         const updatedTabs = { ...tabs };
-        let shouldUpdate = false;
-        Object.entries(updatedTabs).forEach(([tabId, tabState]) => {
+        Object.values(updatedTabs).forEach(tabState => {
             if (tabState.rawContent && !tabState.parsedContent) {
-                shouldUpdate = true;
                 const parsed = parseResponse(tabState.rawContent);
-                updatedTabs[Number(tabId)].parsedContent = parsed;
+                tabState.parsedContent = parsed;
                 parsed.filesUpdated.forEach(file => allFilePaths.add(file));
                 parsed.files.forEach(file => {
-                    const lang = file.path.split('.').pop() || 'plaintext';
+                    // C119: Use path-browserify to get the extension safely on the frontend.
+                    const lang = path.extname(file.path).substring(1) || 'plaintext';
                     const id = `${file.path}::${file.content}`;
                      clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
                 });
             }
         });
-        if (shouldUpdate) {
-            setTabs(updatedTabs);
-        }
+        setTabs(updatedTabs);
         if (allFilePaths.size > 0) {
             clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) });
         }
@@ -12936,7 +12939,11 @@ const App = () => {
         const newDiffMode = !isDiffMode;
         setIsDiffMode(newDiffMode);
         if (newDiffMode && selectedFilePath) {
+            // C120 Fix: Correctly get file extension for language.
+            const lang = path.extname(selectedFilePath).substring(1);
             clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: selectedFilePath });
+            // Also request syntax highlighting for the original file content for the diff viewer
+            clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: originalFileContent || '', lang, id: `original::${selectedFilePath}` });
         } else {
             setOriginalFileContent(null);
         }
@@ -12956,6 +12963,16 @@ const App = () => {
             <button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button>
         </div>
     );
+
+    const renderDiffHeader = () => {
+        if (!isDiffMode || !selectedFilePath) return null;
+        return (
+             <div className="file-content-viewer-header diff-header">
+                <span className="file-path left" title={selectedFilePath}>Original: {selectedFilePath}</span>
+                <span className="file-path right" title={selectedFilePath}>Response {activeTab}: {path.basename(selectedFilePath)}</span>
+            </div>
+        );
+    };
 
     return (
         <div className="pc-view-container">
@@ -13021,13 +13038,15 @@ const App = () => {
                                 </div>
                                 {!isDiffMode && <div className="resizer" onMouseDown={handleMouseDown} />}
                                 <div className="parsed-view-right">
-                                    <div className="file-content-viewer-header">
-                                        <span className="file-path" title={selectedFilePath || ''}>{selectedFilePath || 'No file selected'}</span>
-                                        <div className="file-actions">
-                                            <button onClick={handleDiffClick} disabled={!selectedFilePath} title="Toggle Diff View"><VscDiff /></button>
-                                            <button disabled={!selectedFilePath} title="Swap with Workspace File"><VscArrowSwap /></button>
+                                    {isDiffMode ? renderDiffHeader() : (
+                                        <div className="file-content-viewer-header">
+                                            <span className="file-path" title={selectedFilePath || ''}>{selectedFilePath ? `Response ${activeTab}: ${selectedFilePath}` : 'No file selected'}</span>
+                                            <div className="file-actions">
+                                                <button onClick={handleDiffClick} disabled={!selectedFilePath} title="Toggle Diff View"><VscDiff /></button>
+                                                <button disabled={!selectedFilePath} title="Swap with Workspace File"><VscArrowSwap /></button>
+                                            </div>
                                         </div>
-                                    </div>
+                                    )}
                                     <div className="code-viewer-wrapper">
                                         {isDiffMode && activeTabData.parsedContent && selectedFilePath && originalFileContent ? (
                                             <DiffViewer 

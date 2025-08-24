@@ -1,4 +1,4 @@
-/* Updated on: C122 (Add styles for side-by-side diff view header) */
+/* Updated on: C125 (Add styles for diff viewer wrapper, nav, and detail panes) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -273,13 +273,14 @@ body {
 
 .code-viewer-wrapper {
     display: flex;
+    flex-direction: column; /* Changed to column */
     flex-grow: 1;
     min-height: 0;
     border: 1px solid var(--vscode-panel-border);
     border-top: none;
     border-radius: 0 0 4px 4px;
     background-color: var(--vscode-editor-background);
-    overflow: hidden; /* Prevent children from overflowing */
+    overflow: hidden;
 }
 
 .file-content-viewer {
@@ -369,13 +370,31 @@ body {
     }
 }
 
-/* Side-by-Side Diff Viewer Styles */
+/* New Diff Viewer Styles */
+.diff-viewer-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.diff-nav-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding: 4px;
+    border-bottom: 1px solid var(--vscode-panel-border);
+    flex-shrink: 0;
+}
+
 .diff-viewer-container {
     display: flex;
-    width: 100%;
+    flex-grow: 1;
     overflow: auto;
     font-family: var(--vscode-editor-font-family);
     font-size: var(--vscode-editor-font-size);
+    white-space: pre;
 }
 
 .diff-pane {
@@ -389,7 +408,7 @@ body {
 
 .diff-pane .line-numbers {
     flex-shrink: 0;
-    padding: 8px 4px;
+    padding: 0 4px;
     line-height: 1.5;
     background-color: var(--vscode-editorGutter-background);
     color: var(--vscode-editorLineNumber-foreground);
@@ -418,8 +437,28 @@ body {
         pre {
             margin: 0;
             padding: 0;
-            white-space: pre-wrap;
-            word-break: break-all;
         }
+    }
+}
+
+.diff-detail-footer {
+    display: flex;
+    flex-shrink: 0;
+    height: 100px;
+    border-top: 1px solid var(--vscode-panel-border);
+}
+
+.diff-detail-pane {
+    flex: 1 1 50%;
+    overflow: auto;
+    padding: 4px;
+    background-color: var(--vscode-editorGutter-background);
+    &:first-child {
+        border-right: 1px solid var(--vscode-panel-border);
+    }
+    pre {
+        margin: 0;
+        white-space: pre-wrap;
+        word-break: break-all;
     }
 }
