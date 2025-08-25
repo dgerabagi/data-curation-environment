@@ -257,9 +257,15 @@ ${cyclesContent}
                 }
             }
 
-            const cycle0Content = `<Cycle 0>
+            // C146 Fix: Add explicit instructions for the AI
+            const cycle0Context = `<Cycle 0>
 <Cycle Context>
-Review the user's project scope in M4. Your task is to act as a senior project architect and begin establishing the necessary documentation to achieve the user's goals. You have been provided with a set of best-practice templates for software engineering documentation as static context. Use these examples to guide your output. Your first response should be to generate a starter set of artifacts for this new project. Begin by creating a Master Artifact List (A0), similar to the provided template, and then create the first few essential planning documents (e.g., Project Vision, High-Level Requirements).
+You are a senior software developer tasked with scaffolding a new project. Review the user's project scope in M4. Your goal is to generate the initial set of files needed to start the project, based on the provided templates.
+
+**CRITICAL INSTRUCTIONS:**
+1.  Your output MUST be a series of code/configuration files.
+2.  You MUST NOT output documentation artifacts (e.g., <A1_project_vision.md>). Instead, create the actual files (e.g., package.json, src/main.ts).
+3.  Every file you generate MUST be enclosed in the strict XML format: \`<file path="path/to/file.ext">...</file>\`.
 </Cycle Context>
 <Static Context>
 ${staticContext.trim()}
@@ -269,7 +275,7 @@ ${staticContext.trim()}
             const projectScopeContent = `<M4. current project scope>\n${projectScope}\n</M4. current project scope>`;
 
             const promptParts = [
-                `<prompt.md>`, this.artifactSchemaTemplate, `<M2. cycle overview>\nCurrent Cycle 0 - Project Initialization\n</M2. cycle overview>`, this.interactionSchemaTemplate, projectScopeContent, `<M5. organized artifacts list>\n# No artifacts exist yet.\n</M5. organized artifacts list>`, `<M6. Cycles>\n${cycle0Content}\n</M6. Cycles>`, `<M7. Flattened Repo>\n<!-- No files selected for initial prompt -->\n</M7. Flattened Repo>`, `</prompt.md>`
+                `<prompt.md>`, this.artifactSchemaTemplate, `<M2. cycle overview>\nCurrent Cycle 0 - Project Initialization\n</M2. cycle overview>`, this.interactionSchemaTemplate, projectScopeContent, `<M5. organized artifacts list>\n# No artifacts exist yet.\n</M5. organized artifacts list>`, `<M6. Cycles>\n${cycle0Context}\n</M6. Cycles>`, `<M7. Flattened Repo>\n<!-- No files selected for initial prompt -->\n</M7. Flattened Repo>`, `</prompt.md>`
             ];
 
             const finalPrompt = promptParts.join('\n\n');
@@ -285,7 +291,6 @@ ${staticContext.trim()}
             
             vscode.window.showInformationMessage(`Successfully generated initial prompt.md and created src/Artifacts/A0...`);
 
-            // C144 FIX: Construct and send Cycle 1 data directly to avoid race condition.
             const cycle1Data: PcppCycle = {
                 cycleId: 1,
                 timestamp: new Date().toISOString(),
@@ -297,9 +302,10 @@ ${staticContext.trim()}
                 leftPaneWidth: 33,
                 selectedResponseId: null,
                 selectedFilesForReplacement: [],
+                tabCount: 4
             };
 
-            await Services.historyService.saveCycleData(cycle1Data); // Initialize the history file
+            await Services.historyService.saveCycleData(cycle1Data);
             serverIpc.sendToClient(ServerToClientChannel.SendLatestCycleData, { cycleData: cycle1Data });
 
         } catch (error: any) {

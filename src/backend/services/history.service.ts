@@ -71,6 +71,7 @@ export class HistoryService {
             leftPaneWidth: 33,
             selectedResponseId: null,
             selectedFilesForReplacement: [],
+            tabCount: 4, // C146 Fix: Add default tab count
         };
 
         if (isFreshEnvironment) {
@@ -101,7 +102,8 @@ export class HistoryService {
                 cycleContext: '',
                 ephemeralContext: '',
                 responses: {},
-                isParsedMode: false
+                isParsedMode: false,
+                tabCount: 4,
             };
         }
 
