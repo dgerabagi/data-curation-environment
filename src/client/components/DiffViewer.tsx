@@ -1,4 +1,4 @@
-// Updated on: C129 (Vertical layout, fixed panes, block highlight, buttons below)
+// Updated on: C131 (Side-by-side main view, top/bottom detail, scroll-lock)
 import * as React from 'react';
 import { diffArrays, diffChars } from 'diff';
 import { VscArrowUp, VscArrowDown } from 'react-icons/vsc';
@@ -22,6 +22,11 @@ interface DiffBlock {
 const DiffViewer: React.FC<{ original: { content: string, path: string }, modified: { content: string, path: string } }> = ({ original, modified }) => {
     const [selectedDiffIndex, setSelectedDiffIndex] = React.useState<number>(0);
     const diffLineRefs = React.useRef<Map<number, HTMLDivElement>>(new Map());
+    const leftPaneRef = React.useRef<HTMLDivElement>(null);
+    const rightPaneRef = React.useRef<HTMLDivElement>(null);
+    const leftDetailRef = React.useRef<HTMLDivElement>(null);
+    const rightDetailRef = React.useRef<HTMLDivElement>(null);
+
 
     const { pairedLines, diffBlocks } = React.useMemo(() => {
         const originalLines = original.content.split('\n');
@@ -63,11 +68,24 @@ const DiffViewer: React.FC<{ original: { content: string, path: string }, modifi
         }
     };
 
-    const isLineInSelectedBlock = (lineIndex: number): boolean => {
-        if (diffBlocks.length === 0) return false;
-        const currentDiff = diffBlocks[selectedDiffIndex];
-        return lineIndex >= currentDiff.start && lineIndex <= currentDiff.end;
+    const handleScroll = (scroller: 'left' | 'right') => {
+        if (!leftPaneRef.current || !rightPaneRef.current) return;
+        if (scroller === 'left') {
+            rightPaneRef.current.scrollTop = leftPaneRef.current.scrollTop;
+        } else {
+            leftPaneRef.current.scrollTop = rightPaneRef.current.scrollTop;
+        }
     };
+
+    const handleDetailScroll = (scroller: 'left' | 'right') => {
+        if (!leftDetailRef.current || !rightDetailRef.current) return;
+        if (scroller === 'left') {
+            rightDetailRef.current.scrollLeft = leftDetailRef.current.scrollLeft;
+        } else {
+            leftDetailRef.current.scrollLeft = rightDetailRef.current.scrollLeft;
+        }
+    };
+
 
     const renderCharDiff = (originalText: string, modifiedText: string) => {
         const charChanges = diffChars(originalText, modifiedText);
@@ -103,28 +121,32 @@ const DiffViewer: React.FC<{ original: { content: string, path: string }, modifi
     return (
         <div className="diff-viewer-wrapper">
             <div className="diff-viewer-main-container">
-                {/* Original Pane (Top) */}
-                <div className="diff-pane-header">Original: {original.path}</div>
-                <div className="diff-pane">
-                    <div className="line-numbers">{pairedLines.map((line, i) => <span key={`L${i}`}>{line.left.lineNum || ' '}</span>)}</div>
-                    <div className="diff-lines">
-                        {pairedLines.map((line, i) => (
-                             <div key={`L${i}`} className={`line ${line.left.type}`} ref={ref => { if (ref) diffLineRefs.current.set(i, ref); }}>
-                                <pre><code>{line.left.content || ''}</code></pre>
-                             </div>
-                        ))}
+                {/* Original Pane (Left) */}
+                <div className="diff-pane" onScroll={() => handleScroll('left')} ref={leftPaneRef}>
+                    <div className="diff-pane-header">Original: {original.path}</div>
+                    <div className="diff-pane-content">
+                        <div className="line-numbers">{pairedLines.map((line, i) => <span key={`L${i}`}>{line.left.lineNum || ' '}</span>)}</div>
+                        <div className="diff-lines">
+                            {pairedLines.map((line, i) => (
+                                <div key={`L${i}`} className={`line ${line.left.type}`} ref={ref => { if (ref) diffLineRefs.current.set(i, ref); }}>
+                                    <pre><code>{line.left.content || ''}</code></pre>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
-                {/* Modified Pane (Bottom) */}
-                <div className="diff-pane-header">Response: {modified.path}</div>
-                <div className="diff-pane">
-                    <div className="line-numbers">{pairedLines.map((line, i) => <span key={`R${i}`}>{line.right.lineNum || ' '}</span>)}</div>
-                    <div className="diff-lines">
-                         {pairedLines.map((line, i) => (
-                             <div key={`R${i}`} className={`line ${line.right.type}`}>
-                                 <pre><code>{line.right.content || ''}</code></pre>
-                             </div>
-                         ))}
+                {/* Modified Pane (Right) */}
+                <div className="diff-pane right-pane" onScroll={() => handleScroll('right')} ref={rightPaneRef}>
+                     <div className="diff-pane-header">Response: {modified.path}</div>
+                     <div className="diff-pane-content">
+                        <div className="line-numbers">{pairedLines.map((line, i) => <span key={`R${i}`}>{line.right.lineNum || ' '}</span>)}</div>
+                        <div className="diff-lines">
+                            {pairedLines.map((line, i) => (
+                                <div key={`R${i}`} className={`line ${line.right.type}`}>
+                                    <pre><code>{line.right.content || ''}</code></pre>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -137,8 +159,8 @@ const DiffViewer: React.FC<{ original: { content: string, path: string }, modifi
                     </div>
                 </div>
                 <div className="diff-detail-panes">
-                    <div className="diff-detail-pane removed"><pre><code>{selectedDiffContent.left}</code></pre></div>
-                    <div className="diff-detail-pane added"><pre><code>{selectedDiffContent.right}</code></pre></div>
+                    <div className="diff-detail-pane removed" ref={leftDetailRef} onScroll={() => handleDetailScroll('left')}><pre><code>{selectedDiffContent.left}</code></pre></div>
+                    <div className="diff-detail-pane added" ref={rightDetailRef} onScroll={() => handleDetailScroll('right')}><pre><code>{selectedDiffContent.right}</code></pre></div>
                 </div>
             </div>
         </div>

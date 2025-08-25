@@ -1,12 +1,12 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-25T13:15:47.713Z
+  Date Generated: 2025-08-25T15:03:02.995Z
   ---
   Total Files: 220
-  Total Lines: 53223
-  Total Characters: 1955836
-  Approx. Tokens: 489042
+  Total Lines: 53279
+  Total Characters: 1958564
+  Approx. Tokens: 489723
 -->
 
 <!-- Top 10 Files by Token Count -->
@@ -14,7 +14,7 @@
 2. src\Artifacts\A54. starry-night-readme.md (25577 tokens)
 3. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
 4. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
-5. src\client\views\parallel-copilot.view\view.tsx (5566 tokens)
+5. src\client\views\parallel-copilot.view\view.tsx (5855 tokens)
 6. src\client\views\context-chooser.view\view.tsx (5562 tokens)
 7. src\Artifacts\A0. DCE Master Artifact List.md (5057 tokens)
 8. src\client\components\tree-view\TreeView.tsx (4508 tokens)
@@ -34,7 +34,7 @@
 10. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
 11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 182 - Chars: 17035 - Tokens: 4259
 12. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5710 - Tokens: 1428
-13. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 43 - Chars: 5476 - Tokens: 1369
+13. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
 14. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
 15. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
 16. src\Artifacts\A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md - Lines: 43 - Chars: 7263 - Tokens: 1816
@@ -60,7 +60,7 @@
 36. src\Artifacts\A32. DCE - Phase 1 - Excel and CSV Handling Strategy.md - Lines: 44 - Chars: 4295 - Tokens: 1074
 37. src\Artifacts\A33. DCE - Phase 1 - Copy-Paste Feature Plan.md - Lines: 42 - Chars: 4456 - Tokens: 1114
 38. src\Artifacts\A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements.md - Lines: 44 - Chars: 6403 - Tokens: 1601
-39. src\Artifacts\A35. DCE - Phase 2 - UI Mockups and Flow.md - Lines: 72 - Chars: 4665 - Tokens: 1167
+39. src\Artifacts\A35. DCE - Phase 2 - UI Mockups and Flow.md - Lines: 77 - Chars: 5008 - Tokens: 1252
 40. src\Artifacts\A36. DCE - Phase 2 - Technical Implementation Plan.md - Lines: 77 - Chars: 4173 - Tokens: 1044
 41. src\Artifacts\A37. DCE - Phase 2 - Cycle Navigator & Knowledge Graph - Vision.md - Lines: 28 - Chars: 3242 - Tokens: 811
 42. src\Artifacts\A38. DCE - Phase 2 - Cycle Navigator - UI Mockup.md - Lines: 69 - Chars: 4621 - Tokens: 1156
@@ -86,7 +86,7 @@
 62. src\Artifacts\A53. DCE - Phase 2 - Token Count and Similarity Analysis.md - Lines: 50 - Chars: 3971 - Tokens: 993
 63. src\Artifacts\A54. starry-night-readme.md - Lines: 1824 - Chars: 102305 - Tokens: 25577
 64. src\Artifacts\A55. DCE - FSService Refactoring Plan.md - Lines: 77 - Chars: 4022 - Tokens: 1006
-65. src\Artifacts\A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md - Lines: 54 - Chars: 6122 - Tokens: 1531
+65. src\Artifacts\A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md - Lines: 46 - Chars: 4937 - Tokens: 1235
 66. src\Artifacts\A57. DCE - Phase 2 - Cycle Management Plan.md - Lines: 44 - Chars: 3625 - Tokens: 907
 67. src\Artifacts\A58. DCE - WinMerge Source Code Analysis.md - Lines: 56 - Chars: 5322 - Tokens: 1331
 68. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
@@ -109,14 +109,14 @@
 85. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
 86. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
 87. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
-88. src\client\components\DiffViewer.tsx - Lines: 148 - Chars: 7315 - Tokens: 1829
+88. src\client\components\DiffViewer.tsx - Lines: 170 - Chars: 8520 - Tokens: 2130
 89. src\client\components\file-tree\FileTree.tsx - Lines: 262 - Chars: 11897 - Tokens: 2975
 90. src\client\components\file-tree\FileTree.utils.ts - Lines: 189 - Chars: 7284 - Tokens: 1821
 91. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13099 - Tokens: 3275
 92. src\client\components\tree-view\TreeView.tsx - Lines: 394 - Chars: 18029 - Tokens: 4508
 93. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 94. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
-95. src\client\utils\response-parser.ts - Lines: 77 - Chars: 2854 - Tokens: 714
+95. src\client\utils\response-parser.ts - Lines: 81 - Chars: 3048 - Tokens: 762
 96. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 97. src\client\views\context-chooser.view\on-message.ts - Lines: 53 - Chars: 4913 - Tokens: 1229
 98. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
@@ -127,8 +127,8 @@
 103. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 43 - Chars: 1890 - Tokens: 473
 104. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
 105. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
-106. src\client\views\parallel-copilot.view\view.scss - Lines: 477 - Chars: 11138 - Tokens: 2785
-107. src\client\views\parallel-copilot.view\view.tsx - Lines: 430 - Chars: 22264 - Tokens: 5566
+106. src\client\views\parallel-copilot.view\view.scss - Lines: 491 - Chars: 11563 - Tokens: 2891
+107. src\client\views\parallel-copilot.view\view.tsx - Lines: 447 - Chars: 23418 - Tokens: 5855
 108. src\common\ipc\channels.enum.ts - Lines: 66 - Chars: 3257 - Tokens: 815
 109. src\common\ipc\channels.type.ts - Lines: 59 - Chars: 4600 - Tokens: 1150
 110. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1590 - Tokens: 398
@@ -1290,19 +1290,19 @@ To prevent the output channel from becoming overwhelmed with large blocks of tex
 
 <file path="src/Artifacts/A13. DCE - Phase 1 - Right-Click Context Menu.md">
 # Artifact A13: DCE - Phase 1 - Right-Click Context Menu
-# Date Created: Cycle 19
+# Date Created: C19
 # Author: AI Model
-# Updated on: C37 (Add context menu for "Selected Items" panel)
+# Updated on: C131 (Add Create File action for non-existent associated files)
 
 - **Key/Value for A0:**
-- **Description:** A plan for implementing standard file explorer context menu actions (e.g., Rename, Delete, Copy Path) in the custom file tree.
+- **Description:** A plan for implementing standard file explorer context menu actions (e.g., Rename, Delete, Copy Path) in the custom file tree and other UI lists.
 - **Tags:** feature plan, context menu, right-click, file operations, ux, phase 1
 
 ## 1. Overview & Goal
 
 To enhance the user experience and make the Data Curation Environment a more complete replacement for the native VS Code explorer, this feature adds standard right-click context menus. The goal is to provide essential file and list management operations directly within our extension's view, reducing the need for users to switch contexts for common tasks.
 
-This plan covers two distinct context menus: one for the main file tree and one for the "Selected Items" list.
+This plan covers three distinct context menus: one for the main file tree, one for the "Selected Items" list, and one for the "Associated Files" list in the Parallel Co-Pilot Panel.
 
 ## 2. Main File Tree Context Menu
 
@@ -1320,18 +1320,20 @@ This plan covers two distinct context menus: one for the main file tree and one 
 |---|---|---|
 | US-06 | **Select All/Deselect All** | As a user, I want to right-click in the "Selected Items" panel to quickly select or deselect all items in the list, so I can perform batch removal operations more efficiently. | - Right-clicking anywhere within the list of selected files opens a context menu. <br> - The menu contains a "Select All" option. <br> - Clicking "Select All" highlights every item in the list, updating the "Remove selected" button count. <br> - The menu also contains a "Deselect All" option. <br> - Clicking "Deselect All" clears all selections in the list. |
 
-## 4. Technical Implementation Plan
+## 4. "Associated Files" List Actions (C131)
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| US-07 | **Create Missing File** | As a developer, when an AI response refers to a file that doesn't exist, I want an easy way to create it directly from the "Associated Files" list, so I can quickly implement the AI's suggestion for a new file. | - In the "Associated Files" list, a file that does not exist is marked with an '✗'. <br> - When I hover over this item, a "Create File" button appears next to it. <br> - Clicking the button creates a new, empty file at that path in the workspace. <br> - The file tree and the "Associated Files" list automatically refresh, and the indicator changes to a '✓'. |
+
+## 5. Technical Implementation Plan
 
 -   **Main Tree Menu:** Implemented in `TreeView.tsx` and `ContextMenu.tsx` using an `onContextMenu` event handler and state management to control visibility and position.
--   **"Selected Items" Menu (C37):**
-    1.  **State Management (`SelectedFilesView.tsx`):** Add state to manage the menu's visibility and coordinates: `const [contextMenu, setContextMenu] = useState<{ x: number, y: number } | null>(null);`.
-    2.  **Event Handling (`SelectedFilesView.tsx`):** Add an `onContextMenu` handler to the main `ul` element. This will prevent the default menu and set the state to render the custom menu.
-    3.  **Component Rendering (`SelectedFilesView.tsx`):** Conditionally render a new context menu component based on the state. The component will have two list items: "Select All" and "Deselect All".
-    4.  **Actions (`SelectedFilesView.tsx`):**
-        *   The "Select All" `onClick` handler will create a `Set` from all paths in the `sortedFiles` prop and call `setSelection` with it.
-        *   The "Deselect All" `onClick` handler will call `setSelection(new Set())`.
-        *   Both actions will close the menu by setting `setContextMenu(null)`.
-    5.  **Styling (`view.scss`):** Add CSS rules for the new context menu to match the existing one.
+-   **"Selected Items" Menu (C37):** Implemented in `SelectedFilesView.tsx` with its own context menu state and handlers for "Select All" / "Deselect All".
+-   **"Create Missing File" Action (C131):**
+    1.  **IPC:** Create a new `ClientToServerChannel.RequestCreateFile` channel with a payload of `{ filePath: string }`.
+    2.  **Backend (`file-operation.service.ts`):** Implement `handleCreateFileRequest`. It will receive the relative path, resolve it to an absolute path, and use `vscode.workspace.fs.writeFile` with an empty `Uint8Array` to create the file. The file watcher will trigger a refresh.
+    3.  **Frontend (`view.tsx`):** In the "Associated Files" list rendering logic, if a file does not exist (`!fileExistenceMap.get(file)`), render a "Create File" button. The button will be visible on hover. Its `onClick` handler will send the new IPC message.
 </file>
 
 <file path="src/Artifacts/A14. DCE - Ongoing Development Issues.md">
@@ -2796,7 +2798,7 @@ The goal of the **Parallel Co-Pilot Panel** is to create an integrated, **persis
 # Artifact A35: DCE - Phase 2 - UI Mockups and Flow
 # Date Created: C69
 # Author: AI Model
-# Updated on: C112 (Reorder left pane, add token/similarity metrics)
+# Updated on: C131 (Add collapsible left pane sections and response tab metadata)
 
 ## 1. Overview
 
@@ -2810,14 +2812,13 @@ The main header is a single row containing all primary actions.
 
 ```
 +-------------------------------------------------------------------------------------------------+
-| [Parallel Co-Pilot] [ Gen prompt.md ] [ Parse All ] [ Settings ]   [ Number of Responses: [ 4 ] ] |
+| [Parallel Co-Pilot] [ Gen prompt.md ] [ Parse All ] [ Sort by Longest ] [ Settings ] [ Resp#: [4] ] |
 |-------------------------------------------------------------------------------------------------|```
 
 ### 2.2. Cycle & Context Section
 
 This section has two states: expanded (default) and collapsed.
 
-**Expanded State:**
 ```
 | [v] Cycle & Context                                                                 |
 | |-----------------------------------------------------------------------------------|
@@ -2829,25 +2830,28 @@ This section has two states: expanded (default) and collapsed.
 | | +----------------------------------------+ +------------------------------------+ |
 ```
 
-**Collapsed State:**
-```
-| [>] Cycle & Context         [ < ] [ C98 ] [ > ]                                     |
-```
+### 2.3. Response Tabs
 
-### 2.3. Parsed View
-
-The parsed view uses a **resizable two-pane layout**. The left pane provides summary information and navigation, while the right pane displays the detailed code content.
+The tab bar displays metadata for each response once parsed.
 
 ```
 |-------------------------------------------------------------------------------------------------|
-| [ Response 1 (active) ] [ Response 2 ] [ ... ]                                                |
+| [ Resp 1 (active) | 10 Files | 8.2K Tokens ] [ Resp 2 | 8 Files | 7.5K Tokens ] [ ... ]         |
+|-------------------------------------------------------------------------------------------------|
+```
+
+### 2.4. Parsed View
+
+The parsed view uses a **resizable two-pane layout**. The left pane provides summary information and navigation, with each section being collapsible.
+
+```
 |-------------------------------------------------------------------------------------------------|
 | [ Left Pane ]<--->[ Right Pane (Code Viewer) ]                                                 |
 | |-------------||------------------------------------------------------------------------------| |
-| | [v] ASSOCIATED FILES (Clickable)  | | [ File: src/.../view.tsx ] [ Original: 4.1K | New: 4.2K | Sim: 98% ] | |
+| | [v] ASSOCIATED FILES (Clickable)  | | [ Original: view.scss | 1.1K Tokens ]                            | |
 | | |-------------------------------| | +------------------------------------------------------------------+ | |
 | | | [✓] src/.../view.tsx (selected)| | | [ Read-only editor with line numbers and syntax highlighting ] | | |
-| | | [✗] src/.../new-file.ts       | | |                                                                  | | |
+| | | [✗] src/.../new-file.ts [Create]| | |                                                                  | | |
 | |                                   | | +------------------------------------------------------------------+ | |
 | | [v] THOUGHTS / RESPONSE           | |                                                                    | |
 | | | Rendered Markdown...            | |                                                                    | |
@@ -2856,15 +2860,18 @@ The parsed view uses a **resizable two-pane layout**. The left pane provides sum
 | | | Rendered Markdown...            | |                                                                    | |
 +-------------------------------------------------------------------------------------------------+
 ```
-*   **Resizable Divider (`<--->`):** The user can click and drag the divider to resize the left and right panes.
-*   **Reordered Left Pane (C112):** The "Associated Files" list is now the first item in the left pane for better information hierarchy.
-*   **Token/Similarity Metrics (C112):** The right pane's header now displays the token counts for the original and new file versions, along with a similarity score.
+*   **Collapsible Left Pane (C131):** The "Associated Files", "Thoughts / Response", and "Course of Action" sections are now independently collapsible to save vertical space.
+*   **Response Tab Metadata (C131):** After parsing, each tab displays the number of associated files and the total token count of those files.
+*   **Sort by Longest (C131):** A new button in the header re-orders the response tabs based on their total token count.
+*   **Create File Button (C131):** A "[Create]" button appears on hover for files that do not exist in the workspace.
 
 ## 3. User Interaction Flow
 
-1.  **Load & Parse:** User loads the panel and clicks "Parse All". The UI transforms into the two-pane layout.
-2.  **Select File:** The user clicks on a file in the "Associated Files" list (left pane).
-3.  **Display Content:** The **right pane** updates. Its header shows the file path and placeholder metrics. The code viewer displays the syntax-highlighted content of the newly selected file.
+1.  **Paste & Parse:** User pastes responses into tabs and clicks "Parse All".
+2.  **Sort:** User clicks "Sort by Longest". The tabs are re-ordered, with the one containing the most tokens becoming "Resp 1".
+3.  **Select File:** The user clicks on a file in the "Associated Files" list (left pane).
+4.  **Display Content:** The right pane updates, showing the syntax-highlighted content of the selected file from that response.
+5.  **View Diff:** User clicks the "View Diff" button. The right pane transitions to a side-by-side diff view.
 </file>
 
 <file path="src/Artifacts/A36. DCE - Phase 2 - Technical Implementation Plan.md">
@@ -6285,57 +6292,49 @@ Removed after completing refactor.
 # Artifact A56: DCE - Phase 2 - Advanced Diff Viewer Plan
 # Date Created: C120
 # Author: AI Model & Curator
-# Updated on: C129 (Switch to vertical layout, fixed panes, and bottom controls)
+# Updated on: C131 (Correct layout to side-by-side main view, add resizer and scroll-lock)
 
 - **Key/Value for A0:**
-- **Description:** Details the plan to enhance the integrated diff viewer with a vertical layout, fixed-size panes, and WinMerge-like navigation controls to jump between differences.
-- **Tags:** feature plan, phase 2, ui, ux, diff, navigation, vertical-layout
+- **Description:** Details the plan to enhance the integrated diff viewer with a side-by-side layout, fixed-size panes, scroll-locking, and WinMerge-like navigation controls.
+- **Tags:** feature plan, phase 2, ui, ux, diff, navigation, side-by-side, scroll-lock
 
 ## 1. Overview & Goal
 
 The current diff view is functional but lacks key usability features found in mature diff tools like WinMerge. The goal of this plan is to enhance the diff viewer to provide a much clearer and more efficient user experience. This involves several key enhancements:
-1.  **Vertical Layout:** Displaying the original and modified files in two panes, one on top of the other, to better facilitate line-by-line comparison.
-2.  **Fixed-Size Panes:** The two panes will have a fixed height and will be internally scrollable, preventing the overall UI from shifting when navigating between diffs of different lengths.
-3.  **Relocated Navigation Controls:** The "Next/Previous Difference" buttons will be moved to a stable location below the diff panes.
-4.  **Difference Detail Panes:** Adding two panes at the bottom of the view to show the specific lines of the currently selected difference, with character-level highlighting.
-5.  **Exit Mechanism:** Providing a clear button to exit the diff view and return to the summary view.
+1.  **Side-by-Side Main Layout:** Displaying the original and modified files in two parallel, vertical panes.
+2.  **Top-and-Bottom Detail Layout:** Displaying the character-level diff in two panes stacked vertically at the bottom.
+3.  **Resizable Panes:** Allowing the user to drag the dividers between the main view and detail view, and between the two main panes.
+4.  **Scroll-Locking:** Synchronizing the scroll position of the two main panes and the two detail panes.
+5.  **Fixed-Size Panes:** The panes will be internally scrollable and will not resize with their content.
 
 ## 2. User Stories
 
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
-| P2-DIFF-01 | **Vertical Colored Diffs** | As a developer, I want to see a top-and-bottom view of the original and modified code with a colored background for changed lines, so I can immediately identify changes at a glance. | - The diff view is split into two horizontal panes: "Original" on top, "Modified" on the bottom. <br> - Lines that exist in the new version but not the old have a distinct background color (e.g., light green) in the bottom pane. <br> - Lines that exist in the old version but not the new have a different background color (e.g., light red) in the top pane. <br> - Unchanged lines have the standard editor background color in both panes. |
-| P2-DIFF-02 | **Fixed-Size Panes** | As a developer, I want the diff panes to remain a constant size when I navigate between differences, so the UI controls do not move around. | - Each diff pane has a fixed height (e.g., `flex-basis: 50%` or a pixel value). <br> - If the code content exceeds the pane's height, a vertical scrollbar appears within that pane. |
-| P2-DIFF-03 | **Navigate Between Diffs** | As a developer reviewing a large file, I want "Next Difference" and "Previous Difference" buttons located below the diff panes, so I can quickly jump between changed blocks without the buttons moving. | - "Next Difference" (`↓`) and "Previous Difference" (`↑`) buttons are located in a stable toolbar below the main diff panes. <br> - Clicking "Next Difference" scrolls the view to the start of the next block of added or removed lines and highlights it as a single block. |
-| P2-DIFF-04 | **Exit Diff View** | As a developer in the diff view, I want a clear way to return to the summary and file list view, so I can select a different file or review the AI's plan. | - A "Back to Code" or similar button is present in the UI. <br> - Clicking it returns the UI to the two-pane summary/code viewer layout. |
-| P2-DIFF-05 | **View Diff Details with Phantom Spaces**| As a developer, I want the detail pane to show a character-level diff of the selected change, using phantom spaces to align the unchanged parts of the text. | - The detail panes at the bottom show the character-level differences for the selected line(s). <br> - Unchanged text is aligned vertically between the two panes through the insertion of non-breaking spaces. |
+| P2-DIFF-01 | **Side-by-Side Diffs** | As a developer, I want to see a side-by-side view of the original and modified code with a colored background for changed lines, so I can immediately identify changes at a glance. | - The main diff view is split into two vertical panes: "Original" on the left, "AI Response" on the right. <br> - Lines are colored appropriately for additions and removals. |
+| P2-DIFF-02 | **Fixed-Size Panes** | As a developer, I want the diff panes to remain a constant size when I navigate between differences, so the UI controls do not move around. | - Each diff pane has a defined `flex-basis`. <br> - If the code content exceeds the pane's height, a vertical scrollbar appears *within* that pane. |
+| P2-DIFF-03 | **Navigate Between Diffs** | As a developer reviewing a large file, I want "Next Difference" and "Previous Difference" buttons, so I can quickly jump between changed blocks without the buttons moving. | - "Next Difference" (`↓`) and "Previous Difference" (`↑`) buttons are located in a stable toolbar. <br> - Clicking scrolls the view to the start of the next/previous block of changes and highlights it. |
+| P2-DIFF-04 | **Scroll-Locking** | As a developer, when I scroll one of the main diff panes vertically, I want the other main pane to scroll with it, so I can keep the corresponding code aligned. | - The two main diff panes are scroll-locked vertically. <br> - The two bottom detail panes are scroll-locked horizontally. <br> - Each pair of panes has only one visible scrollbar. |
+| P2-DIFF-05 | **Resizable Panes** | As a developer, I want to be able to drag the divider between the main diff view and the bottom detail view, so I can allocate more or less space to each section based on my needs. | - A horizontal resizer allows the user to change the vertical space allocated to the main diff view vs. the bottom detail view. |
 
 ## 3. Technical Implementation Plan
 
-### 3.1. Vertical Diff Logic (`DiffViewer.tsx`)
+### 3.1. Layout (`DiffViewer.tsx`, `view.scss`)
+-   **Main View:** The main container (`.diff-viewer-main-container`) will have `flex-direction: row` to place the two `.diff-pane` elements side-by-side.
+-   **Detail View:** The detail pane container (`.diff-detail-panes`) will have `flex-direction: column` to stack the two `.diff-detail-pane` elements vertically.
+-   **Fixed Panes:** All panes will use CSS properties like `flex-basis`, `min-height: 0`, `min-width: 0`, and `overflow: auto` to enforce fixed, internally scrollable behavior.
 
--   **Layout:** The main container for the two panes will have `flex-direction: column`.
--   **Data Structure:** The existing `PairedLine` data structure is still valid for generating the content of each pane.
--   **Block Highlighting:**
-    *   A new function will identify the start and end indices of a contiguous diff block.
-    *   The render logic will be refactored. Instead of applying a class to each `.line`, it will map over the `pairedLines` array and group consecutive `isDiff: true` lines. Each group will be wrapped in a single `<div class="diff-block selected-diff">` to create the block highlight effect.
+### 3.2. Scroll-Locking (`DiffViewer.tsx`)
+-   Use `useRef` to create references to the scrollable `div` elements for each of the four panes.
+-   Add `onScroll` event handlers to the panes.
+-   The handler for the left main pane will programmatically set `rightPaneRef.current.scrollTop = leftPaneRef.current.scrollTop`. The right pane's handler will do the inverse. This creates a two-way binding.
+-   A similar logic will be applied for the `scrollLeft` property of the two bottom detail panes.
+-   CSS will be used to hide the scrollbar on the "follower" pane in each pair.
 
-### 3.2. Detail Panes & UI Controls (`DiffViewer.tsx`, `view.tsx`)
-
--   **Relocated Controls (`DiffViewer.tsx`):** The navigation buttons will be moved out of the main PCPP header and into a new `.diff-detail-header` div within the `DiffViewer` component itself, positioning them between the main diff view and the bottom detail panes.
--   **Character-Level Diff with Phantom Spaces (`DiffViewer.tsx`):**
-    *   A new `renderCharDiff` function will be implemented.
-    *   It will take the original and modified text of a diff block.
-    *   It will use `diffChars` from the `diff` library.
-    *   It will iterate through the changes. For `added` parts, it will render the text in the "modified" pane and an equivalent number of non-breaking spaces (`&nbsp;`) in the "original" pane. For `removed` parts, it will do the opposite. `common` parts are rendered in both. This will achieve the desired alignment.
-
-### 3.3. Styling (`view.scss`)
-
--   Update the `.diff-viewer-container` to use `flex-direction: column`.
--   Add `flex-basis`, `min-height: 0`, and `overflow-y: auto` to the `.diff-pane` class to enforce fixed, scrollable panes.
--   Add styling for the new `.diff-block` and `.selected-diff` classes to create the block highlight effect.
--   Add styling for the new `.diff-detail-header` and the navigation controls within it.
--   Add styles for `.phantom-space` to render the alignment characters correctly (e.g., with a subtle background).
+### 3.3. Horizontal Resizer (`DiffViewer.tsx`)
+-   A new state variable will be added to manage the height percentage of the main diff container.
+-   A horizontal resizer `div` will be placed between the main container and the detail container.
+-   `onMouseDown`, `onMouseMove`, and `onMouseUp` event handlers will be used to track the drag gesture and update the height state, similar to the existing vertical resizer.
 </file>
 
 <file path="src/Artifacts/A57. DCE - Phase 2 - Cycle Management Plan.md">
@@ -9654,7 +9653,7 @@ export default ContextMenu;
 </file>
 
 <file path="src/client/components/DiffViewer.tsx">
-// Updated on: C129 (Vertical layout, fixed panes, block highlight, buttons below)
+// Updated on: C131 (Side-by-side main view, top/bottom detail, scroll-lock)
 import * as React from 'react';
 import { diffArrays, diffChars } from 'diff';
 import { VscArrowUp, VscArrowDown } from 'react-icons/vsc';
@@ -9678,6 +9677,11 @@ interface DiffBlock {
 const DiffViewer: React.FC<{ original: { content: string, path: string }, modified: { content: string, path: string } }> = ({ original, modified }) => {
     const [selectedDiffIndex, setSelectedDiffIndex] = React.useState<number>(0);
     const diffLineRefs = React.useRef<Map<number, HTMLDivElement>>(new Map());
+    const leftPaneRef = React.useRef<HTMLDivElement>(null);
+    const rightPaneRef = React.useRef<HTMLDivElement>(null);
+    const leftDetailRef = React.useRef<HTMLDivElement>(null);
+    const rightDetailRef = React.useRef<HTMLDivElement>(null);
+
 
     const { pairedLines, diffBlocks } = React.useMemo(() => {
         const originalLines = original.content.split('\n');
@@ -9719,11 +9723,24 @@ const DiffViewer: React.FC<{ original: { content: string, path: string }, modifi
         }
     };
 
-    const isLineInSelectedBlock = (lineIndex: number): boolean => {
-        if (diffBlocks.length === 0) return false;
-        const currentDiff = diffBlocks[selectedDiffIndex];
-        return lineIndex >= currentDiff.start && lineIndex <= currentDiff.end;
+    const handleScroll = (scroller: 'left' | 'right') => {
+        if (!leftPaneRef.current || !rightPaneRef.current) return;
+        if (scroller === 'left') {
+            rightPaneRef.current.scrollTop = leftPaneRef.current.scrollTop;
+        } else {
+            leftPaneRef.current.scrollTop = rightPaneRef.current.scrollTop;
+        }
     };
+
+    const handleDetailScroll = (scroller: 'left' | 'right') => {
+        if (!leftDetailRef.current || !rightDetailRef.current) return;
+        if (scroller === 'left') {
+            rightDetailRef.current.scrollLeft = leftDetailRef.current.scrollLeft;
+        } else {
+            leftDetailRef.current.scrollLeft = rightDetailRef.current.scrollLeft;
+        }
+    };
+
 
     const renderCharDiff = (originalText: string, modifiedText: string) => {
         const charChanges = diffChars(originalText, modifiedText);
@@ -9759,28 +9776,32 @@ const DiffViewer: React.FC<{ original: { content: string, path: string }, modifi
     return (
         <div className="diff-viewer-wrapper">
             <div className="diff-viewer-main-container">
-                {/* Original Pane (Top) */}
-                <div className="diff-pane-header">Original: {original.path}</div>
-                <div className="diff-pane">
-                    <div className="line-numbers">{pairedLines.map((line, i) => <span key={`L${i}`}>{line.left.lineNum || ' '}</span>)}</div>
-                    <div className="diff-lines">
-                        {pairedLines.map((line, i) => (
-                             <div key={`L${i}`} className={`line ${line.left.type}`} ref={ref => { if (ref) diffLineRefs.current.set(i, ref); }}>
-                                <pre><code>{line.left.content || ''}</code></pre>
-                             </div>
-                        ))}
+                {/* Original Pane (Left) */}
+                <div className="diff-pane" onScroll={() => handleScroll('left')} ref={leftPaneRef}>
+                    <div className="diff-pane-header">Original: {original.path}</div>
+                    <div className="diff-pane-content">
+                        <div className="line-numbers">{pairedLines.map((line, i) => <span key={`L${i}`}>{line.left.lineNum || ' '}</span>)}</div>
+                        <div className="diff-lines">
+                            {pairedLines.map((line, i) => (
+                                <div key={`L${i}`} className={`line ${line.left.type}`} ref={ref => { if (ref) diffLineRefs.current.set(i, ref); }}>
+                                    <pre><code>{line.left.content || ''}</code></pre>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
-                {/* Modified Pane (Bottom) */}
-                <div className="diff-pane-header">Response: {modified.path}</div>
-                <div className="diff-pane">
-                    <div className="line-numbers">{pairedLines.map((line, i) => <span key={`R${i}`}>{line.right.lineNum || ' '}</span>)}</div>
-                    <div className="diff-lines">
-                         {pairedLines.map((line, i) => (
-                             <div key={`R${i}`} className={`line ${line.right.type}`}>
-                                 <pre><code>{line.right.content || ''}</code></pre>
-                             </div>
-                         ))}
+                {/* Modified Pane (Right) */}
+                <div className="diff-pane right-pane" onScroll={() => handleScroll('right')} ref={rightPaneRef}>
+                     <div className="diff-pane-header">Response: {modified.path}</div>
+                     <div className="diff-pane-content">
+                        <div className="line-numbers">{pairedLines.map((line, i) => <span key={`R${i}`}>{line.right.lineNum || ' '}</span>)}</div>
+                        <div className="diff-lines">
+                            {pairedLines.map((line, i) => (
+                                <div key={`R${i}`} className={`line ${line.right.type}`}>
+                                    <pre><code>{line.right.content || ''}</code></pre>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -9793,8 +9814,8 @@ const DiffViewer: React.FC<{ original: { content: string, path: string }, modifi
                     </div>
                 </div>
                 <div className="diff-detail-panes">
-                    <div className="diff-detail-pane removed"><pre><code>{selectedDiffContent.left}</code></pre></div>
-                    <div className="diff-detail-pane added"><pre><code>{selectedDiffContent.right}</code></pre></div>
+                    <div className="diff-detail-pane removed" ref={leftDetailRef} onScroll={() => handleDetailScroll('left')}><pre><code>{selectedDiffContent.left}</code></pre></div>
+                    <div className="diff-detail-pane added" ref={rightDetailRef} onScroll={() => handleDetailScroll('right')}><pre><code>{selectedDiffContent.right}</code></pre></div>
                 </div>
             </div>
         </div>
@@ -10976,7 +10997,7 @@ export const logger = {
 </file>
 
 <file path="src/client/utils/response-parser.ts">
-// Updated on: C130 (Fix TypeScript errors with RegExp results)
+// Updated on: C131 (Add more aggressive final cleanup)
 import { ParsedResponse } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /^([\s\S]*?)(?=### Course of [Aa]ction|### Files Updated This Cycle|<file path=")/;
@@ -10994,7 +11015,7 @@ export function parseResponse(rawText: string): ParsedResponse {
 
     for (const match of tagMatches) {
         const path = (match?.[1] ?? '').trim();
-        let content = (match?.[2] ?? '').trim();
+        let content = (match?.[2] ?? ''); // Start with raw content
 
         if (path) {
             // C129: Aggressive multi-pass cleanup
@@ -11012,7 +11033,7 @@ export function parseResponse(rawText: string): ParsedResponse {
                 const originalContent = content;
                 for (const pattern of patternsToRemove) {
                     if (content.trim().endsWith(pattern)) {
-                        content = content.trim().slice(0, -pattern.length).trim();
+                        content = content.trim().slice(0, -pattern.length);
                     }
                 }
                 if (content === originalContent) {
@@ -11020,6 +11041,10 @@ export function parseResponse(rawText: string): ParsedResponse {
                 }
             }
             
+            // C131: Final aggressive trim to remove any leading/trailing whitespace or newlines
+            // that could interfere with diffing.
+            content = content.trim();
+
             files.push({ path, content });
         }
     }
@@ -12461,7 +12486,7 @@ export default TestPane3;
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
-/* Updated on: C129 (Styles for vertical diff layout and fixed panes) */
+/* Updated on: C131 (Styles for side-by-side diff layout and scroll-locking) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -12839,9 +12864,23 @@ body {
     flex-grow: 1;
     min-height: 0;
     display: flex;
-    flex-direction: column;
+    flex-direction: row; /* Side-by-side */
     border: 1px solid var(--vscode-panel-border);
     border-radius: 4px;
+}
+
+.diff-pane {
+    flex: 1 1 50%;
+    display: flex;
+    flex-direction: column; /* Stack header and content */
+    min-width: 0;
+    overflow: hidden; /* Hide outer scrollbars */
+    &.right-pane {
+        .diff-pane-content {
+            overflow-y: hidden; /* Hide scrollbar on follower */
+        }
+    }
+    &:first-of-type { border-right: 1px solid var(--vscode-panel-border); }
 }
 
 .diff-pane-header {
@@ -12853,12 +12892,11 @@ body {
     flex-shrink: 0;
 }
 
-.diff-pane {
-    flex: 1 1 50%;
-    display: flex;
+.diff-pane-content {
+    flex-grow: 1;
     min-height: 0;
-    overflow-y: auto;
-    &:first-of-type { border-bottom: 1px solid var(--vscode-panel-border); }
+    overflow-y: auto; /* Internal scrolling */
+    display: flex;
 }
 
 .diff-pane .line-numbers {
@@ -12920,20 +12958,21 @@ body {
 
 .diff-detail-panes {
     display: flex;
-    max-height: 150px;
-    overflow: auto;
+    flex-direction: column; /* Top and bottom */
+    max-height: 200px;
+    overflow: hidden;
 }
 
 .diff-detail-pane {
     flex: 1 1 50%;
     padding: 8px;
-    white-space: pre-wrap;
+    white-space: pre;
     overflow-x: auto;
     font-family: var(--vscode-editor-font-family);
     font-size: var(--vscode-editor-font-size);
     &.removed { background-color: var(--vscode-diffEditor-removedTextBackground); }
     &.added { background-color: var(--vscode-diffEditor-insertedTextBackground); }
-    &:first-child { border-right: 1px solid var(--vscode-panel-border); }
+    &:first-child { border-bottom: 1px solid var(--vscode-panel-border); }
 
     .char-added { background-color: var(--vscode-diffEditor-insertedLineBackground); }
     .char-removed { background-color: var(--vscode-diffEditor-removedLineBackground); }
@@ -12941,7 +12980,7 @@ body {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
-// Updated on: C129 (Fix left pane not updating in diff, restore titles)
+// Updated on: C131 (Fix crash, add collapsible sections)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -13000,6 +13039,7 @@ const CodeViewer: React.FC<{ htmlContent: string | undefined | null }> = ({ html
 interface TabState {
     rawContent: string;
     parsedContent: ParsedResponse | null;
+    totalTokens?: number;
 }
 
 const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; collapsedContent?: React.ReactNode; }> = ({ title, children, isCollapsed, onToggle, collapsedContent }) => (
@@ -13033,6 +13073,11 @@ const App = () => {
     const [isDiffMode, setIsDiffMode] = React.useState(false);
     const [originalFileContent, setOriginalFileContent] = React.useState<string | null>(null);
     const isResizing = React.useRef(false);
+
+    // C131: State for collapsible left pane sections
+    const [isAssociatedFilesCollapsed, setAssociatedFilesCollapsed] = React.useState(false);
+    const [isThoughtsCollapsed, setThoughtsCollapsed] = React.useState(false);
+    const [isActionCollapsed, setActionCollapsed] = React.useState(false);
 
     const clientIpc = ClientPostMessageManager.getInstance();
 
@@ -13071,6 +13116,7 @@ const App = () => {
                     needsUpdate = true;
                     const parsed = parseResponse(tabState.rawContent);
                     tabState.parsedContent = parsed;
+                    tabState.totalTokens = parsed.files.reduce((acc, file) => acc + Math.ceil(file.content.length / 4), 0);
                     parsed.filesUpdated.forEach(file => allFilePaths.add(file));
                     parsed.files.forEach(file => {
                         const lang = path.extname(file.path).substring(1) || 'plaintext';
@@ -13119,6 +13165,7 @@ const App = () => {
             setFileExistenceMap(new Map(Object.entries(existenceMap)));
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendFileContent, ({ path: filePath, content }) => {
+            logger.log(`[View] Received original content for ${filePath}`);
             setOriginalFileContent(content);
         });
         clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => {
@@ -13223,9 +13270,18 @@ const App = () => {
     }, [handleMouseMove, handleMouseUp]);
     
     const handleSelectForViewing = (filePath: string) => {
+        logger.log(`[View] handleSelectForViewing called for: ${filePath}`);
         const newPath = selectedFilePath === filePath ? null : filePath;
+        
+        // C131 Crash Fix: Reset original content if deselecting or changing file
+        if (newPath !== selectedFilePath) {
+            setOriginalFileContent(null);
+        }
+
         setSelectedFilePath(newPath);
+
         if (isDiffMode && newPath) {
+            logger.log(`[View] In diff mode, requesting original content for: ${newPath}`);
             clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: newPath });
         }
     };
@@ -13262,7 +13318,7 @@ const App = () => {
             return (
                 <div className="parsed-view-grid">
                     <div className="parsed-view-left" style={{ flexBasis: `${leftPaneWidth}%` }}>
-                        <CollapsibleSection title="Associated Files" isCollapsed={false} onToggle={() => {}}>
+                        <CollapsibleSection title="Associated Files" isCollapsed={isAssociatedFilesCollapsed} onToggle={() => setAssociatedFilesCollapsed(p => !p)}>
                             <ul className="associated-files-list">
                                 {activeTabData.parsedContent.filesUpdated.map(file => (
                                     <li key={file} className={selectedFilePath === file ? 'selected' : ''} onClick={() => handleSelectForViewing(file)} title={file}>
@@ -13272,8 +13328,8 @@ const App = () => {
                                 ))}
                             </ul>
                         </CollapsibleSection>
-                        <CollapsibleSection title="Thoughts / Response" isCollapsed={false} onToggle={() => {}}><ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown></CollapsibleSection>
-                        <CollapsibleSection title="Course of Action" isCollapsed={false} onToggle={() => {}}><ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown></CollapsibleSection>
+                        <CollapsibleSection title="Thoughts / Response" isCollapsed={isThoughtsCollapsed} onToggle={() => setThoughtsCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown></CollapsibleSection>
+                        <CollapsibleSection title="Course of Action" isCollapsed={isActionCollapsed} onToggle={() => setActionCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown></CollapsibleSection>
                         <button className="exit-diff-button" onClick={() => setIsDiffMode(false)}><VscClose/> Back to Code</button>
                     </div>
                     <div className="resizer" onMouseDown={handleMouseDown} />
@@ -13294,7 +13350,7 @@ const App = () => {
         return (
             <div className="parsed-view-grid">
                 <div className="parsed-view-left" style={{ flexBasis: `${leftPaneWidth}%` }}>
-                    <CollapsibleSection title="Associated Files" isCollapsed={false} onToggle={() => {}}>
+                    <CollapsibleSection title="Associated Files" isCollapsed={isAssociatedFilesCollapsed} onToggle={() => setAssociatedFilesCollapsed(p => !p)}>
                         <ul className="associated-files-list">
                             {activeTabData.parsedContent.filesUpdated.map(file => (
                                 <li key={file} className={selectedFilePath === file ? 'selected' : ''} onClick={() => handleSelectForViewing(file)} title={file}>
@@ -13304,8 +13360,8 @@ const App = () => {
                             ))}
                         </ul>
                     </CollapsibleSection>
-                    <CollapsibleSection title="Thoughts / Response" isCollapsed={false} onToggle={() => {}}><ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown></CollapsibleSection>
-                    <CollapsibleSection title="Course of Action" isCollapsed={false} onToggle={() => {}}><ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown></CollapsibleSection>
+                    <CollapsibleSection title="Thoughts / Response" isCollapsed={isThoughtsCollapsed} onToggle={() => setThoughtsCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown></CollapsibleSection>
+                    <CollapsibleSection title="Course of Action" isCollapsed={isActionCollapsed} onToggle={() => setActionCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown></CollapsibleSection>
                 </div>
                 <div className="resizer" onMouseDown={handleMouseDown} />
                 <div className="parsed-view-right">

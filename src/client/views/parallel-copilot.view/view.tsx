@@ -1,4 +1,4 @@
-// Updated on: C129 (Fix left pane not updating in diff, restore titles)
+// Updated on: C131 (Fix crash, add collapsible sections)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -57,6 +57,7 @@ const CodeViewer: React.FC<{ htmlContent: string | undefined | null }> = ({ html
 interface TabState {
     rawContent: string;
     parsedContent: ParsedResponse | null;
+    totalTokens?: number;
 }
 
 const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; collapsedContent?: React.ReactNode; }> = ({ title, children, isCollapsed, onToggle, collapsedContent }) => (
@@ -90,6 +91,11 @@ const App = () => {
     const [isDiffMode, setIsDiffMode] = React.useState(false);
     const [originalFileContent, setOriginalFileContent] = React.useState<string | null>(null);
     const isResizing = React.useRef(false);
+
+    // C131: State for collapsible left pane sections
+    const [isAssociatedFilesCollapsed, setAssociatedFilesCollapsed] = React.useState(false);
+    const [isThoughtsCollapsed, setThoughtsCollapsed] = React.useState(false);
+    const [isActionCollapsed, setActionCollapsed] = React.useState(false);
 
     const clientIpc = ClientPostMessageManager.getInstance();
 
@@ -128,6 +134,7 @@ const App = () => {
                     needsUpdate = true;
                     const parsed = parseResponse(tabState.rawContent);
                     tabState.parsedContent = parsed;
+                    tabState.totalTokens = parsed.files.reduce((acc, file) => acc + Math.ceil(file.content.length / 4), 0);
                     parsed.filesUpdated.forEach(file => allFilePaths.add(file));
                     parsed.files.forEach(file => {
                         const lang = path.extname(file.path).substring(1) || 'plaintext';
@@ -176,6 +183,7 @@ const App = () => {
             setFileExistenceMap(new Map(Object.entries(existenceMap)));
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendFileContent, ({ path: filePath, content }) => {
+            logger.log(`[View] Received original content for ${filePath}`);
             setOriginalFileContent(content);
         });
         clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => {
@@ -280,9 +288,18 @@ const App = () => {
     }, [handleMouseMove, handleMouseUp]);
     
     const handleSelectForViewing = (filePath: string) => {
+        logger.log(`[View] handleSelectForViewing called for: ${filePath}`);
         const newPath = selectedFilePath === filePath ? null : filePath;
+        
+        // C131 Crash Fix: Reset original content if deselecting or changing file
+        if (newPath !== selectedFilePath) {
+            setOriginalFileContent(null);
+        }
+
         setSelectedFilePath(newPath);
+
         if (isDiffMode && newPath) {
+            logger.log(`[View] In diff mode, requesting original content for: ${newPath}`);
             clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: newPath });
         }
     };
@@ -319,7 +336,7 @@ const App = () => {
             return (
                 <div className="parsed-view-grid">
                     <div className="parsed-view-left" style={{ flexBasis: `${leftPaneWidth}%` }}>
-                        <CollapsibleSection title="Associated Files" isCollapsed={false} onToggle={() => {}}>
+                        <CollapsibleSection title="Associated Files" isCollapsed={isAssociatedFilesCollapsed} onToggle={() => setAssociatedFilesCollapsed(p => !p)}>
                             <ul className="associated-files-list">
                                 {activeTabData.parsedContent.filesUpdated.map(file => (
                                     <li key={file} className={selectedFilePath === file ? 'selected' : ''} onClick={() => handleSelectForViewing(file)} title={file}>
@@ -329,8 +346,8 @@ const App = () => {
                                 ))}
                             </ul>
                         </CollapsibleSection>
-                        <CollapsibleSection title="Thoughts / Response" isCollapsed={false} onToggle={() => {}}><ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown></CollapsibleSection>
-                        <CollapsibleSection title="Course of Action" isCollapsed={false} onToggle={() => {}}><ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown></CollapsibleSection>
+                        <CollapsibleSection title="Thoughts / Response" isCollapsed={isThoughtsCollapsed} onToggle={() => setThoughtsCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown></CollapsibleSection>
+                        <CollapsibleSection title="Course of Action" isCollapsed={isActionCollapsed} onToggle={() => setActionCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown></CollapsibleSection>
                         <button className="exit-diff-button" onClick={() => setIsDiffMode(false)}><VscClose/> Back to Code</button>
                     </div>
                     <div className="resizer" onMouseDown={handleMouseDown} />
@@ -351,7 +368,7 @@ const App = () => {
         return (
             <div className="parsed-view-grid">
                 <div className="parsed-view-left" style={{ flexBasis: `${leftPaneWidth}%` }}>
-                    <CollapsibleSection title="Associated Files" isCollapsed={false} onToggle={() => {}}>
+                    <CollapsibleSection title="Associated Files" isCollapsed={isAssociatedFilesCollapsed} onToggle={() => setAssociatedFilesCollapsed(p => !p)}>
                         <ul className="associated-files-list">
                             {activeTabData.parsedContent.filesUpdated.map(file => (
                                 <li key={file} className={selectedFilePath === file ? 'selected' : ''} onClick={() => handleSelectForViewing(file)} title={file}>
@@ -361,8 +378,8 @@ const App = () => {
                             ))}
                         </ul>
                     </CollapsibleSection>
-                    <CollapsibleSection title="Thoughts / Response" isCollapsed={false} onToggle={() => {}}><ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown></CollapsibleSection>
-                    <CollapsibleSection title="Course of Action" isCollapsed={false} onToggle={() => {}}><ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown></CollapsibleSection>
+                    <CollapsibleSection title="Thoughts / Response" isCollapsed={isThoughtsCollapsed} onToggle={() => setThoughtsCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown></CollapsibleSection>
+                    <CollapsibleSection title="Course of Action" isCollapsed={isActionCollapsed} onToggle={() => setActionCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown></CollapsibleSection>
                 </div>
                 <div className="resizer" onMouseDown={handleMouseDown} />
                 <div className="parsed-view-right">

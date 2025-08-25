@@ -1,4 +1,4 @@
-// Updated on: C130 (Fix TypeScript errors with RegExp results)
+// Updated on: C131 (Add more aggressive final cleanup)
 import { ParsedResponse } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /^([\s\S]*?)(?=### Course of [Aa]ction|### Files Updated This Cycle|<file path=")/;
@@ -16,7 +16,7 @@ export function parseResponse(rawText: string): ParsedResponse {
 
     for (const match of tagMatches) {
         const path = (match?.[1] ?? '').trim();
-        let content = (match?.[2] ?? '').trim();
+        let content = (match?.[2] ?? ''); // Start with raw content
 
         if (path) {
             // C129: Aggressive multi-pass cleanup
@@ -34,7 +34,7 @@ export function parseResponse(rawText: string): ParsedResponse {
                 const originalContent = content;
                 for (const pattern of patternsToRemove) {
                     if (content.trim().endsWith(pattern)) {
-                        content = content.trim().slice(0, -pattern.length).trim();
+                        content = content.trim().slice(0, -pattern.length);
                     }
                 }
                 if (content === originalContent) {
@@ -42,6 +42,10 @@ export function parseResponse(rawText: string): ParsedResponse {
                 }
             }
             
+            // C131: Final aggressive trim to remove any leading/trailing whitespace or newlines
+            // that could interfere with diffing.
+            content = content.trim();
+
             files.push({ path, content });
         }
     }

@@ -1,4 +1,4 @@
-/* Updated on: C129 (Styles for vertical diff layout and fixed panes) */
+/* Updated on: C131 (Styles for side-by-side diff layout and scroll-locking) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -376,9 +376,23 @@ body {
     flex-grow: 1;
     min-height: 0;
     display: flex;
-    flex-direction: column;
+    flex-direction: row; /* Side-by-side */
     border: 1px solid var(--vscode-panel-border);
     border-radius: 4px;
+}
+
+.diff-pane {
+    flex: 1 1 50%;
+    display: flex;
+    flex-direction: column; /* Stack header and content */
+    min-width: 0;
+    overflow: hidden; /* Hide outer scrollbars */
+    &.right-pane {
+        .diff-pane-content {
+            overflow-y: hidden; /* Hide scrollbar on follower */
+        }
+    }
+    &:first-of-type { border-right: 1px solid var(--vscode-panel-border); }
 }
 
 .diff-pane-header {
@@ -390,12 +404,11 @@ body {
     flex-shrink: 0;
 }
 
-.diff-pane {
-    flex: 1 1 50%;
-    display: flex;
+.diff-pane-content {
+    flex-grow: 1;
     min-height: 0;
-    overflow-y: auto;
-    &:first-of-type { border-bottom: 1px solid var(--vscode-panel-border); }
+    overflow-y: auto; /* Internal scrolling */
+    display: flex;
 }
 
 .diff-pane .line-numbers {
@@ -457,20 +470,21 @@ body {
 
 .diff-detail-panes {
     display: flex;
-    max-height: 150px;
-    overflow: auto;
+    flex-direction: column; /* Top and bottom */
+    max-height: 200px;
+    overflow: hidden;
 }
 
 .diff-detail-pane {
     flex: 1 1 50%;
     padding: 8px;
-    white-space: pre-wrap;
+    white-space: pre;
     overflow-x: auto;
     font-family: var(--vscode-editor-font-family);
     font-size: var(--vscode-editor-font-size);
     &.removed { background-color: var(--vscode-diffEditor-removedTextBackground); }
     &.added { background-color: var(--vscode-diffEditor-insertedTextBackground); }
-    &:first-child { border-right: 1px solid var(--vscode-panel-border); }
+    &:first-child { border-bottom: 1px solid var(--vscode-panel-border); }
 
     .char-added { background-color: var(--vscode-diffEditor-insertedLineBackground); }
     .char-removed { background-color: var(--vscode-diffEditor-removedLineBackground); }
