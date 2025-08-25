@@ -1,4 +1,4 @@
-// Updated on: C138 (Fix regex handling in CodeViewer)
+// Updated on: C138 (Fix new cycle state creation)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -37,7 +37,7 @@ const CodeViewer: React.FC<{ htmlContent: string | undefined | null }> = ({ html
     }
 
     const codeContentMatch = /<pre><code>([\s\S]*)<\/code><\/pre>/s.exec(htmlContent);
-    const code = codeContentMatch ? codeContentMatch[1] : `<code>${htmlContent}</code>`; 
+    const code = codeContentMatch ? codeContentMatch[1] : htmlContent;
 
     const lines = code.split('\n');
     if (lines.length > 1 && lines[lines.length - 1] === '') {
@@ -50,7 +50,7 @@ const CodeViewer: React.FC<{ htmlContent: string | undefined | null }> = ({ html
                 <div className="line-numbers">
                     {lines.map((_, i) => <span key={i}>{i + 1}</span>)}
                 </div>
-                <div className="code-content" dangerouslySetInnerHTML={{ __html: code }} />
+                <div className="code-content" dangerouslySetInnerHTML={{ __html: htmlContent }} />
             </div>
         </div>
     );
@@ -200,7 +200,25 @@ const App = () => {
         if (!newParseMode) setTabs(prev => { const newTabs = {...prev}; Object.keys(newTabs).forEach(key => { newTabs[key].parsedContent = null; }); return newTabs; });
     };
     const handleCycleChange = (e: React.MouseEvent, newCycle: number) => { e.stopPropagation(); if (newCycle > 0 && newCycle <= maxCycle) { saveCurrentCycleState(); setSelectedFilesForReplacement(new Set()); setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); } };
-    const handleNewCycle = (e: React.MouseEvent) => { e.stopPropagation(); const newCycleId = maxCycle + 1; setMaxCycle(newCycleId); setCurrentCycle(newCycleId); setCycleTitle('New Cycle'); setCycleContext(''); setEphemeralContext(''); setTabs({}); setIsParsedMode(false); setSelectedResponseId(null); setSelectedFilesForReplacement(new Set()); };
+    
+    const handleNewCycle = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        saveCurrentCycleState(); // Save the state of the cycle we are leaving
+    
+        const newCycleId = maxCycle + 1;
+        setMaxCycle(newCycleId);
+        setCurrentCycle(newCycleId);
+        
+        // Reset all user-input fields for the new cycle to prevent data bleeding
+        setCycleTitle('New Cycle');
+        setCycleContext('');
+        setEphemeralContext('');
+        setTabs({}); // Reset all response tabs
+        setIsParsedMode(false);
+        setSelectedResponseId(null);
+        setSelectedFilesForReplacement(new Set());
+    };
+
     const handleGeneratePrompt = () => clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle });
     const handleMouseDown = React.useCallback((e: React.MouseEvent) => { e.preventDefault(); isResizing.current = true; }, []);
     const handleMouseMove = React.useCallback((e: MouseEvent) => { if (!isResizing.current) return; const newWidth = (e.clientX / window.innerWidth) * 100; if (newWidth > 10 && newWidth < 90) setLeftPaneWidth(newWidth); }, []);
