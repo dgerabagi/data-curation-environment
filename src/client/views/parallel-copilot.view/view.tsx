@@ -1,8 +1,8 @@
-// Updated on: C133 (Fix persistence, restore metadata, improve UI)
+// Updated on: C134 (Implement all feedback points)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap, VscTrash, VscSync, VscClose, VscSave } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap, VscTrash, VscSync, VscClose, VscSave, VscBug, VscCheckAll } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -29,7 +29,7 @@ const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     return debouncedFunction;
 };
 
-const CodeViewer: React.FC<{ htmlContent: string | undefined | null, metadata?: { originalTokens: number, newTokens: number, similarity: number } }> = ({ htmlContent, metadata }) => {
+const CodeViewer: React.FC<{ htmlContent: string | undefined | null }> = ({ htmlContent }) => {
     if (htmlContent === undefined || htmlContent === null) {
         return <div style={{ padding: '8px' }}>Select a file to view its content.</div>;
     }
@@ -37,21 +37,17 @@ const CodeViewer: React.FC<{ htmlContent: string | undefined | null, metadata?: 
          return <div style={{ padding: '8px', color: 'var(--vscode-errorForeground)' }}>{htmlContent}</div>;
     }
 
-    const codeContentMatch = /<pre><code>([\s\S]*)<\/code><\/pre>/s.exec(htmlContent);
-    const code = codeContentMatch ? codeContentMatch[1] : `<code>${htmlContent}</code>`; 
+    const codeContentMatch = /<pre><code>([\s\S]*)<\/code><\/pre>/s.exec(htmlContent)?.[1];
+    const code = codeContentMatch ? codeContentMatch : `<code>${htmlContent}</code>`; 
 
     const lines = code.split('\n');
-    if (lines.length > 0 && lines[lines.length - 1] === '') {
+    // C134 Fix: Don't pop the last element if it's the only line or if it's not empty.
+    if (lines.length > 1 && lines[lines.length - 1] === '') {
         lines.pop();
     }
 
     return (
         <div className="code-viewer-wrapper">
-            {metadata && (
-                <div className="code-viewer-metadata">
-                    Original Tokens: {metadata.originalTokens} | New Tokens: {metadata.newTokens} | Similarity: {metadata.similarity.toFixed(2)}%
-                </div>
-            )}
             <div className="file-content-viewer">
                 <div className="line-numbers">
                     {lines.map((_, i) => <span key={i}>{i + 1}</span>)}
@@ -209,8 +205,8 @@ const App = () => {
         setIsDiffMode(false);
         if (!newParseMode) setTabs(prev => { const newTabs = {...prev}; Object.keys(newTabs).forEach(key => { newTabs[key].parsedContent = null; }); return newTabs; });
     };
-    const handleCycleChange = (e: React.MouseEvent, newCycle: number) => { e.stopPropagation(); if (newCycle > 0 && newCycle <= maxCycle) { saveCurrentCycleState(); setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); } };
-    const handleNewCycle = (e: React.MouseEvent) => { e.stopPropagation(); const newCycleId = maxCycle + 1; setMaxCycle(newCycleId); setCurrentCycle(newCycleId); setCycleTitle('New Cycle'); setCycleContext(''); setEphemeralContext(''); setTabs({}); setIsParsedMode(false); setSelectedResponseId(null); };
+    const handleCycleChange = (e: React.MouseEvent, newCycle: number) => { e.stopPropagation(); if (newCycle > 0 && newCycle <= maxCycle) { saveCurrentCycleState(); setSelectedFilesForReplacement(new Set()); setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); } };
+    const handleNewCycle = (e: React.MouseEvent) => { e.stopPropagation(); const newCycleId = maxCycle + 1; setMaxCycle(newCycleId); setCurrentCycle(newCycleId); setCycleTitle('New Cycle'); setCycleContext(''); setEphemeralContext(''); setTabs({}); setIsParsedMode(false); setSelectedResponseId(null); setSelectedFilesForReplacement(new Set()); };
     const handleGeneratePrompt = () => clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle });
     const handleMouseDown = React.useCallback((e: React.MouseEvent) => { e.preventDefault(); isResizing.current = true; }, []);
     const handleMouseMove = React.useCallback((e: MouseEvent) => { if (!isResizing.current) return; const newWidth = (e.clientX / window.innerWidth) * 100; if (newWidth > 10 && newWidth < 90) setLeftPaneWidth(newWidth); }, []);
@@ -232,7 +228,15 @@ const App = () => {
     const handleDeleteCycle = () => clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle });
     const handleResetHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {});
     const handleFileSelectionToggle = (filePath: string) => setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); if (newSet.has(filePath)) newSet.delete(filePath); else newSet.add(filePath); return newSet; });
-    const handleSelectAllFilesToggle = (e: React.ChangeEvent<HTMLInputElement>) => { if (e.target.checked) setSelectedFilesForReplacement(new Set(activeTabData?.parsedContent?.filesUpdated || [])); else setSelectedFilesForReplacement(new Set()); };
+    
+    const handleSelectAllFilesToggle = () => {
+        if (isAllFilesSelected) {
+            setSelectedFilesForReplacement(new Set());
+        } else {
+            setSelectedFilesForReplacement(new Set(activeTabData?.parsedContent?.filesUpdated || []));
+        }
+    };
+
     const handleAcceptSelectedFiles = () => {
         if (selectedFilesForReplacement.size === 0 || !activeTabData?.parsedContent) return;
         const filesToWrite: BatchWriteFile[] = [];
@@ -255,12 +259,31 @@ const App = () => {
 
     const isNewCycleButtonDisabled = React.useMemo(() => {
         const hasTitle = cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== '';
-        const hasContext = cycleContext.trim() || ephemeralContext.trim();
-        const hasResponseContent = Object.values(tabs).some(t => t.rawContent.trim());
-        return !hasTitle && !hasContext && !hasResponseContent;
-    }, [cycleTitle, cycleContext, ephemeralContext, tabs]);
+        const hasContext = cycleContext.trim() !== '';
+        const hasSelectedResponse = selectedResponseId !== null;
+        return !hasTitle || !hasContext || !hasSelectedResponse;
+    }, [cycleTitle, cycleContext, selectedResponseId]);
+    
+    const handleLogState = () => {
+        const responses: { [key: string]: PcppResponse } = {};
+        for (let i = 1; i <= tabCount; i++) {
+            responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' };
+        }
+        const currentState: PcppCycle = {
+            cycleId: currentCycle,
+            timestamp: new Date().toISOString(),
+            title: cycleTitle,
+            cycleContext,
+            ephemeralContext,
+            responses,
+            isParsedMode,
+            leftPaneWidth,
+            selectedResponseId,
+        };
+        clientIpc.sendToServer(ClientToServerChannel.RequestLogState, { currentState });
+    };
 
-    const isReadyForNextCycle = cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== '' && cycleContext.trim() !== '' && selectedResponseId !== null;
+    const isReadyForNextCycle = !isNewCycleButtonDisabled;
 
     const collapsedNavigator = <div className="collapsed-navigator"><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button><span className="cycle-display">C{currentCycle}</span><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button></div>;
     
@@ -286,7 +309,7 @@ const App = () => {
             <div className="parsed-view-left" style={{ flexBasis: `${leftPaneWidth}%` }}>{commonLeftPane}</div>
             <div className="resizer" onMouseDown={handleMouseDown} />
             <div className="parsed-view-right">
-                <div className="response-acceptance-header"><button className={`styled-button ${selectedResponseId === activeTab.toString() ? 'toggled' : ''}`} onClick={() => setSelectedResponseId(prev => prev === activeTab.toString() ? null : activeTab.toString())}>{selectedResponseId === activeTab.toString() ? 'Response Selected' : 'Select This Response'}</button><button className="styled-button" onClick={handleAcceptSelectedFiles} disabled={selectedFilesForReplacement.size === 0}><VscSave/> Accept Selected Files</button></div>
+                <div className="response-acceptance-header"><button className={`styled-button ${selectedResponseId === activeTab.toString() ? 'toggled' : ''}`} onClick={() => setSelectedResponseId(prev => prev === activeTab.toString() ? null : activeTab.toString())}>{selectedResponseId === activeTab.toString() ? 'Response Selected' : 'Select This Response'}</button><button className="styled-button" onClick={handleSelectAllFilesToggle}><VscCheckAll/> {isAllFilesSelected ? 'Deselect All' : 'Select All'}</button><button className="styled-button" onClick={handleAcceptSelectedFiles} disabled={selectedFilesForReplacement.size === 0}><VscSave/> Accept Selected Files</button></div>
                 <div className="file-content-viewer-header"><span className="file-path" title={selectedFilePath || ''}>{selectedFilePath ? path.basename(selectedFilePath) : 'No file selected'}</span><div className="file-actions"><button onClick={() => handleAcceptSingleFile(selectedFilePath!)} disabled={!selectedFilePath} title="Accept this file into workspace"><VscArrowSwap /></button></div></div>
                 <CodeViewer htmlContent={viewableContent} />
             </div>
@@ -294,7 +317,7 @@ const App = () => {
     };
 
     return <div className="pc-view-container">
-        <div className="pc-header"><div className="pc-toolbar"><button onClick={handleGeneratePrompt} title="Generate prompt.md"><VscFileCode /> Generate prompt.md</button><button onClick={handleGlobalParseToggle}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} /></div></div>
+        <div className="pc-header"><div className="pc-toolbar"><button onClick={handleGeneratePrompt} title="Generate prompt.md"><VscFileCode /> Generate prompt.md</button><button onClick={handleLogState} title="Log Current State"><VscBug/></button><button onClick={handleGlobalParseToggle}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} /></div></div>
         <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''}><div className="cycle-navigator"><span>Cycle:</span><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button><input type="number" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 1)} className="cycle-input" /><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button><button onClick={handleNewCycle} title="New Cycle" disabled={isNewCycleButtonDisabled}><VscAdd /></button><input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} /><button onClick={handleDeleteCycle} title="Delete Current Cycle"><VscTrash /></button><button onClick={handleResetHistory} title="Reset All History"><VscSync /></button></div><div className="context-inputs"><textarea className="context-textarea" placeholder="Cycle Context (notes for this cycle)..." value={cycleContext} onChange={e => setCycleContext(e.target.value)} /><textarea className="context-textarea" placeholder="Ephemeral Context (for this cycle's prompt only)..." value={ephemeralContext} onChange={e => setEphemeralContext(e.target.value)} /></div></CollapsibleSection>
         <div className="tab-bar">{[...Array(tabCount)].map((_, i) => <div key={i} className={`tab ${activeTab === i + 1 ? 'active' : ''} ${selectedResponseId === (i + 1).toString() ? 'selected' : ''}`} onClick={() => setActiveTab(i + 1)}>Resp {i + 1}</div>)}</div>
         <div className="tab-content">{activeTab !== null && <div className="tab-pane">{renderContent()}</div>}</div>

@@ -1,4 +1,4 @@
-// Updated on: C133 (Use selectedResponseId from history for prompt generation)
+// Updated on: C134 (Add generateStateLog method)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -53,6 +53,59 @@ Phase 2. parallel 'co-pilot' panel. Basically, we need our own AI Studio interfa
 Phase 3. Diff Tool - Basically, winmerge but intergrated into a window within VS Code. My workflow is often comparing two identical responses, or comparing a new artifact with the current version. Currently, I'm first copying and pasting responses into separate notepad files, and then for which ever i need to compare given my task, i then manually move that one into winmerge to compare against another that i manually move. instead, the ability to just select between two to compare would be a massive decrease in the manual workload.
 </M4. current project scope>`;
 
+    private async _generateCyclesContent(currentCycleData: PcppCycle, fullHistory: PcppCycle[]): Promise<string> {
+        const allCycles = [...fullHistory.filter(c => c.cycleId !== currentCycleData.cycleId), currentCycleData];
+        const sortedHistory = allCycles.sort((a, b) => b.cycleId - a.cycleId);
+
+        let cyclesContent = '<M6. Cycles>\n';
+
+        for (const cycle of sortedHistory) {
+            cyclesContent += `\n<Cycle ${cycle.cycleId}>\n${cycle.title}\n`;
+            
+            const previousCycle = sortedHistory.find(c => c.cycleId === cycle.cycleId - 1);
+            if (previousCycle) {
+                const selectedResponseId = previousCycle.selectedResponseId || '1';
+                const previousResponseContent = previousCycle.responses[selectedResponseId]?.content || '';
+                if (previousResponseContent) {
+                    const parsed = parseResponse(previousResponseContent);
+                    const summary = `${parsed.summary}\n\n${parsed.courseOfAction}\n\n### Files Updated This Cycle:\n${parsed.filesUpdated.map(f => `* \`${f}\``).join('\n')}`;
+                    cyclesContent += `<Previous Cycle ${previousCycle.cycleId} Summary of Actions>\n${summary}\n</Previous Cycle ${previousCycle.cycleId} Summary of Actions>\n`;
+                }
+            }
+            cyclesContent += `</Cycle ${cycle.cycleId}>\n`;
+        }
+        cyclesContent += '\n</M6. Cycles>';
+        return cyclesContent;
+    }
+
+    public async generateStateLog(currentState: PcppCycle) {
+        Services.loggerService.log("--- GENERATING STATE LOG ---");
+        try {
+            const fullHistory = await Services.historyService.getFullHistory();
+            const cyclesContent = await this._generateCyclesContent(currentState, fullHistory);
+            
+            const stateDump = {
+                "CURRENT_FRONTEND_STATE": currentState,
+                "FULL_HISTORY_FROM_BACKEND": fullHistory
+            };
+
+            const logMessage = `
+========================= CURRENT STATE DUMP =========================
+${JSON.stringify(stateDump, null, 2)}
+======================================================================
+
+==================== GENERATED <M6. Cycles> BLOCK ====================
+${cyclesContent}
+======================================================================
+`;
+            Services.loggerService.log(logMessage);
+            Services.loggerService.show();
+            vscode.window.showInformationMessage("State logged to 'Data Curation Environment' output channel.");
+        } catch (error: any) {
+            Services.loggerService.error(`Failed to generate state log: ${error.message}`);
+        }
+    }
+
     public async generatePromptFile(cycleTitle: string, currentCycle: number) {
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (!workspaceFolders?.[0]) {
@@ -68,6 +121,14 @@ Phase 3. Diff Tool - Basically, winmerge but intergrated into a window within VS
 
             const flattenedContent = await fs.readFile(flattenedRepoPath, 'utf-8');
             const fullHistory: PcppCycle[] = await Services.historyService.getFullHistory();
+            
+            const currentCycleDataFromHistory = fullHistory.find(c => c.cycleId === currentCycle);
+            if (!currentCycleDataFromHistory) {
+                throw new Error(`Could not find data for current cycle (${currentCycle}) in history.`);
+            }
+            // Ensure the title from the UI is used for the current cycle
+            const currentCycleData = { ...currentCycleDataFromHistory, title: cycleTitle };
+
             const sortedHistory = [...fullHistory].sort((a, b) => b.cycleId - a.cycleId);
 
             let cycleOverview = '<M2. cycle overview>\n';
@@ -79,39 +140,7 @@ Phase 3. Diff Tool - Basically, winmerge but intergrated into a window within VS
             }
             cycleOverview += '</M2. cycle overview>';
             
-            let cyclesContent = '<M6. Cycles>\n\n';
-            cyclesContent += `<Cycle ${currentCycle}>\n${cycleTitle}\n`;
-            
-            const previousCycle = sortedHistory.find(c => c.cycleId === currentCycle - 1);
-            if (previousCycle) {
-                const selectedResponseId = previousCycle.selectedResponseId || '1';
-                const previousResponseContent = previousCycle.responses[selectedResponseId]?.content || '';
-                if (previousResponseContent) {
-                    const parsed = parseResponse(previousResponseContent);
-                    const summary = `${parsed.summary}\n\n${parsed.courseOfAction}\n\n### Files Updated This Cycle:\n${parsed.filesUpdated.map(f => `* \`${f}\``).join('\n')}`;
-                    cyclesContent += `<Previous Cycle ${previousCycle.cycleId} Summary of Actions>\n${summary}\n</Previous Cycle ${previousCycle.cycleId} Summary of Actions>\n`;
-                }
-            }
-            cyclesContent += `</Cycle ${currentCycle}>\n\n`;
-
-
-            for (const cycle of sortedHistory) {
-                if (cycle.cycleId === currentCycle) continue; 
-                cyclesContent += `<Cycle ${cycle.cycleId}>\n`;
-                const prevCycleForSummary = sortedHistory.find(c => c.cycleId === cycle.cycleId - 1);
-                 if (prevCycleForSummary) {
-                    const selectedResponseId = prevCycleForSummary.selectedResponseId || '1';
-                    const previousResponseContent = prevCycleForSummary.responses[selectedResponseId]?.content || '';
-                     if (previousResponseContent) {
-                        const parsed = parseResponse(previousResponseContent);
-                        const summary = `${parsed.summary}\n\n${parsed.courseOfAction}\n\n### Files Updated This Cycle:\n${parsed.filesUpdated.map(f => `* \`${f}\``).join('\n')}`;
-                        cyclesContent += `<Previous Cycle ${prevCycleForSummary.cycleId} Summary of Actions>\n${summary}\n</Previous Cycle ${prevCycleForSummary.cycleId} Summary of Actions>\n`;
-                     }
-                 }
-                cyclesContent += `</Cycle ${cycle.cycleId}>\n\n`;
-            }
-            cyclesContent += '</M6. Cycles>';
-
+            const cyclesContent = await this._generateCyclesContent(currentCycleData, fullHistory);
 
             let masterArtifactListContent = '<!-- Master Artifact List (A0) not found -->';
             try {

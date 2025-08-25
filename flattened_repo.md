@@ -1,247 +1,249 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-25T15:56:21.274Z
+  Date Generated: 2025-08-25T16:54:19.483Z
   ---
-  Total Files: 220
-  Total Lines: 20292
-  Total Characters: 980649
-  Approx. Tokens: 245243
+  Total Files: 222
+  Total Lines: 20420
+  Total Characters: 1238322
+  Approx. Tokens: 309662
 -->
 
 <!-- Top 10 Files by Token Count -->
-1. src\Artifacts\A54. starry-night-readme.md (25577 tokens)
-2. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
-3. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
-4. src\client\views\parallel-copilot.view\view.tsx (6063 tokens)
-5. src\client\views\context-chooser.view\view.tsx (5562 tokens)
-6. src\Artifacts\A0. DCE Master Artifact List.md (5057 tokens)
-7. src\client\components\tree-view\TreeView.tsx (4508 tokens)
-8. src\Artifacts\A11. DCE - Regression Case Studies.md (4259 tokens)
-9. src\backend\services\prompt.service.ts (4134 tokens)
-10. src\client\views\context-chooser.view\view.scss (3638 tokens)
+1. log-state-logs.md (61900 tokens)
+2. src\Artifacts\A54. starry-night-readme.md (25577 tokens)
+3. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
+4. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
+5. src\client\views\parallel-copilot.view\view.tsx (5767 tokens)
+6. src\Artifacts\A11. DCE - Regression Case Studies.md (5649 tokens)
+7. src\client\views\context-chooser.view\view.tsx (5562 tokens)
+8. src\Artifacts\A0. DCE Master Artifact List.md (5134 tokens)
+9. src\client\components\tree-view\TreeView.tsx (4508 tokens)
+10. src\backend\services\prompt.service.ts (4425 tokens)
 
 <!-- Full File List -->
 1. .gitignore - Lines: 10 - Chars: 128 - Tokens: 32
 2. .vscodeignore - Lines: 11 - Chars: 356 - Tokens: 89
 3. bootstrap-flattener.js - Lines: 185 - Chars: 5834 - Tokens: 1459
 4. LICENSE - Lines: 21 - Chars: 1090 - Tokens: 273
-5. package.json - Lines: 139 - Chars: 4583 - Tokens: 1146
-6. public\copilot.svg - Lines: 5 - Chars: 445 - Tokens: 112
-7. public\spiral.svg - Lines: 8 - Chars: 459 - Tokens: 115
-8. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 274 - Chars: 20225 - Tokens: 5057
-9. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
-10. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
-11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 182 - Chars: 17035 - Tokens: 4259
-12. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5710 - Tokens: 1428
-13. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
-14. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
-15. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
-16. src\Artifacts\A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md - Lines: 43 - Chars: 7263 - Tokens: 1816
-17. src\Artifacts\A16. DCE - Phase 1 - UI & UX Refinements Plan.md - Lines: 50 - Chars: 6421 - Tokens: 1606
-18. src\Artifacts\A17. DCE - Phase 1 - Advanced Tree View Features.md - Lines: 47 - Chars: 3888 - Tokens: 972
-19. src\Artifacts\A18. DCE - Phase 1 - Active File Sync Feature Plan.md - Lines: 46 - Chars: 4548 - Tokens: 1137
-20. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
-21. src\Artifacts\A19. DCE - Phase 1 - Double-Click & Quick-Remove Feature Plan.md - Lines: 42 - Chars: 4603 - Tokens: 1151
-22. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
-23. src\Artifacts\A20. DCE - Phase 1 - Advanced UX & Automation Plan.md - Lines: 47 - Chars: 7268 - Tokens: 1817
-24. src\Artifacts\A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer.md - Lines: 48 - Chars: 7385 - Tokens: 1847
-25. src\Artifacts\A22. DCE - Phase 1 - Search & Filter Feature Plan.md - Lines: 58 - Chars: 3663 - Tokens: 916
-26. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 37 - Chars: 5504 - Tokens: 1376
-27. src\Artifacts\A24. DCE - Selection Paradigm Terminology.md - Lines: 57 - Chars: 3330 - Tokens: 833
-28. src\Artifacts\A25. DCE - Phase 1 - Git & Problems Integration Plan.md - Lines: 61 - Chars: 5871 - Tokens: 1468
-29. src\Artifacts\A26. DCE - Phase 1 - File System Traversal & Caching Strategy.md - Lines: 46 - Chars: 4009 - Tokens: 1003
-30. src\Artifacts\A27. DCE - Phase 1 - Undo-Redo Feature Plan.md - Lines: 50 - Chars: 4903 - Tokens: 1226
-31. src\Artifacts\A28. DCE - Packaging and Distribution Guide.md - Lines: 96 - Chars: 4075 - Tokens: 1019
-32. src\Artifacts\A29. DCE - Phase 1 - Binary and Image File Handling Strategy.md - Lines: 81 - Chars: 4217 - Tokens: 1055
-33. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
-34. src\Artifacts\A30. DCE - Phase 1 - PDF Handling and Virtualization Strategy.md - Lines: 44 - Chars: 4431 - Tokens: 1108
-35. src\Artifacts\A31. DCE - Phase 2 - Multimodal Content Extraction (PDF Images).md - Lines: 44 - Chars: 4035 - Tokens: 1009
-36. src\Artifacts\A32. DCE - Phase 1 - Excel and CSV Handling Strategy.md - Lines: 44 - Chars: 4295 - Tokens: 1074
-37. src\Artifacts\A33. DCE - Phase 1 - Copy-Paste Feature Plan.md - Lines: 42 - Chars: 4456 - Tokens: 1114
-38. src\Artifacts\A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements.md - Lines: 44 - Chars: 6403 - Tokens: 1601
-39. src\Artifacts\A35. DCE - Phase 2 - UI Mockups and Flow.md - Lines: 81 - Chars: 5989 - Tokens: 1498
-40. src\Artifacts\A36. DCE - Phase 2 - Technical Implementation Plan.md - Lines: 77 - Chars: 4173 - Tokens: 1044
-41. src\Artifacts\A37. DCE - Phase 2 - Cycle Navigator & Knowledge Graph - Vision.md - Lines: 28 - Chars: 3242 - Tokens: 811
-42. src\Artifacts\A38. DCE - Phase 2 - Cycle Navigator - UI Mockup.md - Lines: 69 - Chars: 4621 - Tokens: 1156
-43. src\Artifacts\A39. DCE - Phase 2 - Cycle Navigator - Technical Plan.md - Lines: 84 - Chars: 4595 - Tokens: 1149
-44. src\Artifacts\A4. DCE - Analysis of The-Creator-AI Repo.md - Lines: 56 - Chars: 5722 - Tokens: 1431
-45. src\Artifacts\A40. DCE - Phase 2 - Parallel Co-Pilot - Target File Structure.md - Lines: 66 - Chars: 3659 - Tokens: 915
-46. src\Artifacts\A40.1. DCE - Phase 2 - Competitive Analysis & Feature Ideas.md - Lines: 43 - Chars: 4784 - Tokens: 1196
-47. src\Artifacts\A41. DCE - Phase 2 - API Key Management - Feature Plan.md - Lines: 47 - Chars: 4542 - Tokens: 1136
-48. src\Artifacts\A41.1. DCE - Phase 2 - Advanced Features & Integrations Plan.md - Lines: 44 - Chars: 3946 - Tokens: 987
-49. src\Artifacts\A41.2. DCE - Phase 2 - Feature Ideation & Competitive Analysis.md - Lines: 40 - Chars: 4566 - Tokens: 1142
-50. src\Artifacts\A42. DCE - Phase 2 - Initial Scaffolding Deployment Script.md - Lines: 246 - Chars: 8264 - Tokens: 2066
-51. src\Artifacts\A43. DCE - Phase 2 - Implementation Roadmap.md - Lines: 69 - Chars: 4694 - Tokens: 1174
-52. src\Artifacts\A44. DCE - Phase 1 - Word Document Handling Strategy.md - Lines: 45 - Chars: 4626 - Tokens: 1157
-53. src\Artifacts\A45. DCE - Phase 2 - Pop-out Co-Pilot Window - Feature Plan.md - Lines: 49 - Chars: 4156 - Tokens: 1039
-54. src\Artifacts\A46. DCE - Phase 2 - Paste and Parse Response - Feature Plan.md - Lines: 38 - Chars: 3587 - Tokens: 897
-55. src\Artifacts\A47. DCE - Phase 2 - Prompt Amalgamation Feature Plan.md - Lines: 42 - Chars: 3499 - Tokens: 875
-56. src\Artifacts\A48. DCE - Phase 2 - Advanced Syntax Highlighting Plan.md - Lines: 49 - Chars: 4044 - Tokens: 1011
-57. src\Artifacts\A49. DCE - Phase 2 - File Association & Diffing Plan.md - Lines: 44 - Chars: 4452 - Tokens: 1113
-58. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
-59. src\Artifacts\A50. DCE - Phase 2 - UI Component Plan (Resizable Panes & Inner Editors).md - Lines: 51 - Chars: 5128 - Tokens: 1282
-60. src\Artifacts\A51. DCE - A-B-C Testing Strategy for UI Bugs.md - Lines: 81 - Chars: 5490 - Tokens: 1373
-61. src\Artifacts\A52. DCE - Interaction Schema Refinement.md - Lines: 61 - Chars: 3735 - Tokens: 934
-62. src\Artifacts\A53. DCE - Phase 2 - Token Count and Similarity Analysis.md - Lines: 50 - Chars: 3971 - Tokens: 993
-63. src\Artifacts\A54. starry-night-readme.md - Lines: 1824 - Chars: 102305 - Tokens: 25577
-64. src\Artifacts\A55. DCE - FSService Refactoring Plan.md - Lines: 77 - Chars: 4022 - Tokens: 1006
-65. src\Artifacts\A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md - Lines: 47 - Chars: 5687 - Tokens: 1422
-66. src\Artifacts\A57. DCE - Phase 2 - Cycle Management Plan.md - Lines: 44 - Chars: 3625 - Tokens: 907
-67. src\Artifacts\A58. DCE - WinMerge Source Code Analysis.md - Lines: 56 - Chars: 5322 - Tokens: 1331
-68. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
-69. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
-70. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
-71. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
-72. src\backend\commands\commands.ts - Lines: 97 - Chars: 4211 - Tokens: 1053
-73. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
-74. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
-75. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
-76. src\backend\services\file-operation.service.ts - Lines: 256 - Chars: 12194 - Tokens: 3049
-77. src\backend\services\file-tree.service.ts - Lines: 212 - Chars: 11447 - Tokens: 2862
-78. src\backend\services\flattener.service.ts - Lines: 210 - Chars: 11271 - Tokens: 2818
-79. src\backend\services\highlighting.service.ts - Lines: 58 - Chars: 2920 - Tokens: 730
-80. src\backend\services\history.service.ts - Lines: 129 - Chars: 5675 - Tokens: 1419
-81. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-82. src\backend\services\prompt.service.ts - Lines: 151 - Chars: 16535 - Tokens: 4134
-83. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
-84. src\backend\services\services.ts - Lines: 35 - Chars: 1597 - Tokens: 400
-85. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
-86. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
-87. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
-88. src\client\components\DiffViewer.tsx - Lines: 224 - Chars: 11386 - Tokens: 2847
-89. src\client\components\file-tree\FileTree.tsx - Lines: 262 - Chars: 11897 - Tokens: 2975
-90. src\client\components\file-tree\FileTree.utils.ts - Lines: 189 - Chars: 7284 - Tokens: 1821
-91. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
-92. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13099 - Tokens: 3275
-93. src\client\components\tree-view\TreeView.tsx - Lines: 394 - Chars: 18029 - Tokens: 4508
-94. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
-95. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
-96. src\client\utils\response-parser.ts - Lines: 81 - Chars: 3048 - Tokens: 762
-97. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-98. src\client\views\context-chooser.view\on-message.ts - Lines: 53 - Chars: 4913 - Tokens: 1229
-99. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
-100. src\client\views\context-chooser.view\view.tsx - Lines: 435 - Chars: 22245 - Tokens: 5562
-101. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
-102. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-103. src\client\views\parallel-copilot.view\on-message.ts - Lines: 51 - Chars: 2375 - Tokens: 594
-104. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 43 - Chars: 1890 - Tokens: 473
-105. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
-106. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
-107. src\client\views\parallel-copilot.view\view.scss - Lines: 506 - Chars: 11806 - Tokens: 2952
-108. src\client\views\parallel-copilot.view\view.tsx - Lines: 487 - Chars: 24251 - Tokens: 6063
-109. src\common\ipc\channels.enum.ts - Lines: 67 - Chars: 3354 - Tokens: 839
-110. src\common\ipc\channels.type.ts - Lines: 61 - Chars: 4756 - Tokens: 1189
-111. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1590 - Tokens: 398
-112. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-113. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-114. src\common\types\file-node.ts - Lines: 16 - Chars: 567 - Tokens: 142
-115. src\common\types\pcpp.types.ts - Lines: 36 - Chars: 914 - Tokens: 229
-116. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 449 - Tokens: 113
-117. src\common\utils\formatting.ts - Lines: 95 - Chars: 3251 - Tokens: 813
-118. src\common\utils\view-html.ts - Lines: 29 - Chars: 1117 - Tokens: 280
-119. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
-120. src\extension.ts - Lines: 121 - Chars: 5044 - Tokens: 1261
-121. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
-122. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
-123. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
-124. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
-125. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
-126. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
-127. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
-128. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
-129. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
-130. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
-131. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
-132. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
-133. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
-134. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
-135. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
-136. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
-137. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
-138. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
-139. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
-140. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
-141. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
-142. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
-143. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
-144. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
-145. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
-146. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
-147. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
-148. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
-149. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
-150. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
-151. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
-152. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
-153. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
-154. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
-155. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
-156. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
-157. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
-158. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
-159. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
-160. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
-161. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
-162. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
-163. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
-164. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
-165. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
-166. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
-167. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
-168. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
-169. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
-170. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
-171. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
-172. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
-173. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
-174. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
-175. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
-176. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
-177. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
-178. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
-179. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
-180. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
-181. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
-182. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
-183. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
-184. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
-185. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
-186. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
-187. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
-188. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-189. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
-190. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
-191. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
-192. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-193. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
-194. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
-195. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
-196. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-197. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
-198. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
-199. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
-200. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
-201. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
-202. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
-203. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
-204. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-205. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
-206. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
-207. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
-208. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
-209. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
-210. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
-211. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
-212. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
-213. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
-214. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
-215. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
-216. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
-217. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
-218. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
-219. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
-220. webpack.config.js - Lines: 103 - Chars: 2830 - Tokens: 708
+5. log-state-logs.md - Lines: 166 - Chars: 247600 - Tokens: 61900
+6. package.json - Lines: 139 - Chars: 4583 - Tokens: 1146
+7. public\copilot.svg - Lines: 5 - Chars: 445 - Tokens: 112
+8. public\spiral.svg - Lines: 8 - Chars: 459 - Tokens: 115
+9. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 278 - Chars: 20534 - Tokens: 5134
+10. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
+11. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
+12. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 224 - Chars: 22595 - Tokens: 5649
+13. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5710 - Tokens: 1428
+14. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
+15. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
+16. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
+17. src\Artifacts\A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md - Lines: 43 - Chars: 7263 - Tokens: 1816
+18. src\Artifacts\A16. DCE - Phase 1 - UI & UX Refinements Plan.md - Lines: 50 - Chars: 6421 - Tokens: 1606
+19. src\Artifacts\A17. DCE - Phase 1 - Advanced Tree View Features.md - Lines: 47 - Chars: 3888 - Tokens: 972
+20. src\Artifacts\A18. DCE - Phase 1 - Active File Sync Feature Plan.md - Lines: 46 - Chars: 4548 - Tokens: 1137
+21. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
+22. src\Artifacts\A19. DCE - Phase 1 - Double-Click & Quick-Remove Feature Plan.md - Lines: 42 - Chars: 4603 - Tokens: 1151
+23. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
+24. src\Artifacts\A20. DCE - Phase 1 - Advanced UX & Automation Plan.md - Lines: 47 - Chars: 7268 - Tokens: 1817
+25. src\Artifacts\A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer.md - Lines: 48 - Chars: 7385 - Tokens: 1847
+26. src\Artifacts\A22. DCE - Phase 1 - Search & Filter Feature Plan.md - Lines: 58 - Chars: 3663 - Tokens: 916
+27. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 37 - Chars: 5504 - Tokens: 1376
+28. src\Artifacts\A24. DCE - Selection Paradigm Terminology.md - Lines: 57 - Chars: 3330 - Tokens: 833
+29. src\Artifacts\A25. DCE - Phase 1 - Git & Problems Integration Plan.md - Lines: 61 - Chars: 5871 - Tokens: 1468
+30. src\Artifacts\A26. DCE - Phase 1 - File System Traversal & Caching Strategy.md - Lines: 46 - Chars: 4009 - Tokens: 1003
+31. src\Artifacts\A27. DCE - Phase 1 - Undo-Redo Feature Plan.md - Lines: 50 - Chars: 4903 - Tokens: 1226
+32. src\Artifacts\A28. DCE - Packaging and Distribution Guide.md - Lines: 96 - Chars: 4075 - Tokens: 1019
+33. src\Artifacts\A29. DCE - Phase 1 - Binary and Image File Handling Strategy.md - Lines: 81 - Chars: 4217 - Tokens: 1055
+34. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
+35. src\Artifacts\A30. DCE - Phase 1 - PDF Handling and Virtualization Strategy.md - Lines: 44 - Chars: 4431 - Tokens: 1108
+36. src\Artifacts\A31. DCE - Phase 2 - Multimodal Content Extraction (PDF Images).md - Lines: 44 - Chars: 4035 - Tokens: 1009
+37. src\Artifacts\A32. DCE - Phase 1 - Excel and CSV Handling Strategy.md - Lines: 44 - Chars: 4295 - Tokens: 1074
+38. src\Artifacts\A33. DCE - Phase 1 - Copy-Paste Feature Plan.md - Lines: 42 - Chars: 4456 - Tokens: 1114
+39. src\Artifacts\A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements.md - Lines: 45 - Chars: 6849 - Tokens: 1713
+40. src\Artifacts\A35. DCE - Phase 2 - UI Mockups and Flow.md - Lines: 61 - Chars: 4415 - Tokens: 1104
+41. src\Artifacts\A36. DCE - Phase 2 - Technical Implementation Plan.md - Lines: 63 - Chars: 3741 - Tokens: 936
+42. src\Artifacts\A37. DCE - Phase 2 - Cycle Navigator & Knowledge Graph - Vision.md - Lines: 28 - Chars: 3242 - Tokens: 811
+43. src\Artifacts\A38. DCE - Phase 2 - Cycle Navigator - UI Mockup.md - Lines: 69 - Chars: 4621 - Tokens: 1156
+44. src\Artifacts\A39. DCE - Phase 2 - Cycle Navigator - Technical Plan.md - Lines: 84 - Chars: 4595 - Tokens: 1149
+45. src\Artifacts\A4. DCE - Analysis of The-Creator-AI Repo.md - Lines: 56 - Chars: 5722 - Tokens: 1431
+46. src\Artifacts\A40. DCE - Phase 2 - Parallel Co-Pilot - Target File Structure.md - Lines: 66 - Chars: 3659 - Tokens: 915
+47. src\Artifacts\A40.1. DCE - Phase 2 - Competitive Analysis & Feature Ideas.md - Lines: 43 - Chars: 4784 - Tokens: 1196
+48. src\Artifacts\A41. DCE - Phase 2 - API Key Management - Feature Plan.md - Lines: 47 - Chars: 4542 - Tokens: 1136
+49. src\Artifacts\A41.1. DCE - Phase 2 - Advanced Features & Integrations Plan.md - Lines: 44 - Chars: 3946 - Tokens: 987
+50. src\Artifacts\A41.2. DCE - Phase 2 - Feature Ideation & Competitive Analysis.md - Lines: 40 - Chars: 4566 - Tokens: 1142
+51. src\Artifacts\A42. DCE - Phase 2 - Initial Scaffolding Deployment Script.md - Lines: 246 - Chars: 8264 - Tokens: 2066
+52. src\Artifacts\A43. DCE - Phase 2 - Implementation Roadmap.md - Lines: 69 - Chars: 4694 - Tokens: 1174
+53. src\Artifacts\A44. DCE - Phase 1 - Word Document Handling Strategy.md - Lines: 45 - Chars: 4626 - Tokens: 1157
+54. src\Artifacts\A45. DCE - Phase 2 - Pop-out Co-Pilot Window - Feature Plan.md - Lines: 49 - Chars: 4156 - Tokens: 1039
+55. src\Artifacts\A46. DCE - Phase 2 - Paste and Parse Response - Feature Plan.md - Lines: 38 - Chars: 3587 - Tokens: 897
+56. src\Artifacts\A47. DCE - Phase 2 - Prompt Amalgamation Feature Plan.md - Lines: 42 - Chars: 3499 - Tokens: 875
+57. src\Artifacts\A48. DCE - Phase 2 - Advanced Syntax Highlighting Plan.md - Lines: 49 - Chars: 4044 - Tokens: 1011
+58. src\Artifacts\A49. DCE - Phase 2 - File Association & Diffing Plan.md - Lines: 44 - Chars: 4452 - Tokens: 1113
+59. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
+60. src\Artifacts\A50. DCE - Phase 2 - UI Component Plan (Resizable Panes & Inner Editors).md - Lines: 51 - Chars: 5128 - Tokens: 1282
+61. src\Artifacts\A51. DCE - A-B-C Testing Strategy for UI Bugs.md - Lines: 81 - Chars: 5490 - Tokens: 1373
+62. src\Artifacts\A52. DCE - Interaction Schema Refinement.md - Lines: 62 - Chars: 4018 - Tokens: 1005
+63. src\Artifacts\A53. DCE - Phase 2 - Token Count and Similarity Analysis.md - Lines: 50 - Chars: 3971 - Tokens: 993
+64. src\Artifacts\A54. starry-night-readme.md - Lines: 1824 - Chars: 102305 - Tokens: 25577
+65. src\Artifacts\A55. DCE - FSService Refactoring Plan.md - Lines: 77 - Chars: 4022 - Tokens: 1006
+66. src\Artifacts\A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md - Lines: 47 - Chars: 5687 - Tokens: 1422
+67. src\Artifacts\A57. DCE - Phase 2 - Cycle Management Plan.md - Lines: 44 - Chars: 3625 - Tokens: 907
+68. src\Artifacts\A58. DCE - WinMerge Source Code Analysis.md - Lines: 56 - Chars: 5322 - Tokens: 1331
+69. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 46 - Chars: 3984 - Tokens: 996
+70. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
+71. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
+72. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
+73. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
+74. src\backend\commands\commands.ts - Lines: 97 - Chars: 4211 - Tokens: 1053
+75. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
+76. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
+77. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
+78. src\backend\services\file-operation.service.ts - Lines: 256 - Chars: 12194 - Tokens: 3049
+79. src\backend\services\file-tree.service.ts - Lines: 212 - Chars: 11447 - Tokens: 2862
+80. src\backend\services\flattener.service.ts - Lines: 210 - Chars: 11271 - Tokens: 2818
+81. src\backend\services\highlighting.service.ts - Lines: 58 - Chars: 2920 - Tokens: 730
+82. src\backend\services\history.service.ts - Lines: 131 - Chars: 5841 - Tokens: 1461
+83. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
+84. src\backend\services\prompt.service.ts - Lines: 180 - Chars: 17700 - Tokens: 4425
+85. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
+86. src\backend\services\services.ts - Lines: 35 - Chars: 1597 - Tokens: 400
+87. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
+88. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
+89. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
+90. src\client\components\DiffViewer.tsx - Lines: 224 - Chars: 11386 - Tokens: 2847
+91. src\client\components\file-tree\FileTree.tsx - Lines: 262 - Chars: 11897 - Tokens: 2975
+92. src\client\components\file-tree\FileTree.utils.ts - Lines: 189 - Chars: 7284 - Tokens: 1821
+93. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
+94. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13099 - Tokens: 3275
+95. src\client\components\tree-view\TreeView.tsx - Lines: 394 - Chars: 18029 - Tokens: 4508
+96. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
+97. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
+98. src\client\utils\response-parser.ts - Lines: 75 - Chars: 3088 - Tokens: 772
+99. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
+100. src\client\views\context-chooser.view\on-message.ts - Lines: 53 - Chars: 4913 - Tokens: 1229
+101. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
+102. src\client\views\context-chooser.view\view.tsx - Lines: 435 - Chars: 22245 - Tokens: 5562
+103. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
+104. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
+105. src\client\views\parallel-copilot.view\on-message.ts - Lines: 55 - Chars: 2526 - Tokens: 632
+106. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 43 - Chars: 1890 - Tokens: 473
+107. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
+108. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
+109. src\client\views\parallel-copilot.view\view.scss - Lines: 532 - Chars: 12683 - Tokens: 3171
+110. src\client\views\parallel-copilot.view\view.tsx - Lines: 328 - Chars: 23068 - Tokens: 5767
+111. src\common\ipc\channels.enum.ts - Lines: 68 - Chars: 3390 - Tokens: 848
+112. src\common\ipc\channels.type.ts - Lines: 62 - Chars: 4841 - Tokens: 1211
+113. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1590 - Tokens: 398
+114. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+115. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
+116. src\common\types\file-node.ts - Lines: 16 - Chars: 567 - Tokens: 142
+117. src\common\types\pcpp.types.ts - Lines: 40 - Chars: 1074 - Tokens: 269
+118. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 449 - Tokens: 113
+119. src\common\utils\formatting.ts - Lines: 95 - Chars: 3251 - Tokens: 813
+120. src\common\utils\view-html.ts - Lines: 29 - Chars: 1117 - Tokens: 280
+121. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
+122. src\extension.ts - Lines: 121 - Chars: 5044 - Tokens: 1261
+123. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
+124. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
+125. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
+126. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
+127. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
+128. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
+129. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
+130. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
+131. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
+132. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
+133. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
+134. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
+135. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
+136. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
+137. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
+138. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
+139. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
+140. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
+141. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
+142. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
+143. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
+144. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
+145. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
+146. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
+147. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
+148. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
+149. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
+150. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
+151. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
+152. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
+153. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
+154. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
+155. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
+156. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
+157. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
+158. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
+159. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
+160. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
+161. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
+162. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
+163. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
+164. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
+165. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
+166. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
+167. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
+168. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
+169. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
+170. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
+171. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
+172. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
+173. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
+174. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
+175. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
+176. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
+177. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
+178. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
+179. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
+180. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
+181. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
+182. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
+183. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
+184. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
+185. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
+186. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
+187. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
+188. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
+189. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
+190. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+191. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
+192. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
+193. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
+194. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+195. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
+196. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
+197. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
+198. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+199. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
+200. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
+201. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
+202. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
+203. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
+204. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
+205. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
+206. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+207. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
+208. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
+209. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
+210. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
+211. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
+212. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
+213. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
+214. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
+215. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
+216. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
+217. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
+218. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
+219. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
+220. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
+221. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
+222. webpack.config.js - Lines: 103 - Chars: 2830 - Tokens: 708
 
 <file path=".gitignore">
 node_modules
@@ -482,6 +484,174 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 </file>
 
+<file path="log-state-logs.md">
+[INFO] [11:53:52 AM] HistoryService: getLatestCycle called.
+[INFO] [11:53:52 AM] Latest cycle found: 3
+[INFO] [11:53:54 AM] HistoryService: saving data for cycle 3. Selected Response ID: null
+[INFO] [11:53:55 AM] --- GENERATING STATE LOG ---
+[INFO] [11:53:55 AM] 
+========================= CURRENT STATE DUMP =========================
+{
+  "CURRENT_FRONTEND_STATE": {
+    "cycleId": 3,
+    "timestamp": "2025-08-25T16:53:55.702Z",
+    "title": "New Cycle",
+    "cycleContext": "test",
+    "ephemeralContext": "weee test ephemeral in cycle 3",
+    "responses": {
+      "1": {
+        "content": ""
+      },
+      "2": {
+        "content": ""
+      },
+      "3": {
+        "content": ""
+      },
+      "4": {
+        "content": ""
+      }
+    },
+    "isParsedMode": false,
+    "leftPaneWidth": 26.794554455445546,
+    "selectedResponseId": null
+  },
+  "FULL_HISTORY_FROM_BACKEND": [
+    {
+      "cycleId": 1,
+      "timestamp": "2025-08-25T16:52:42.371Z",
+      "title": "New Cycle",
+      "cycleContext": "do the thing cycle 1 context",
+      "ephemeralContext": "cycle 1 ephemeral context",
+      "responses": {
+        "1": {
+          "content": "I have analyzed your feedback from Cycle 125. After the `git restore`, the diff viewer is in a much better state, but key functionality is missing. My course of action is to address the most critical usability gaps: providing an exit from the diff view, implementing cycle management features (delete, save), and adding the WinMerge-style navigation panes and controls to the diff viewer.\n\n### Course of Action\n\n1.  **Documentation First (Planning New Features):**\n    *   I will update `A38 (UI Mockup)` and `A39 (Technical Plan)` to formalize the new cycle management features, including a \"Delete Cycle\" button in the navigator and a \"Save Cycle\" button. The technical plan will detail the new backend logic required in the `HistoryService`.\n    *   I will update `A56 (Advanced Diff Viewer Plan)` to include the detailed requirements for the bottom diff panes and the \"Next/Previous Difference\" navigation controls.\n\n2.  **Implement an Exit from Diff View:**\n    *   In `view.tsx`, I will add a \"Back to Summary\" button in the diff view's header. This button's `onClick` handler will simply set `isDiffMode` to `false`, returning the user to the main parsed view.\n\n3.  **Implement Cycle Management:**\n    *   **Delete Cycle:**\n        *   **UI (`view.tsx`):** I will add a \"Delete\" button to the `CycleNavigator`. It will be disabled if there's only one cycle.\n        *   **IPC:** I will create a new `RequestDeleteCycle` channel.\n        *   **Backend (`history.service.ts`):** I will implement a `deleteCycle` method that removes the specified cycle from the history file and saves the changes. It will then instruct the frontend to load the new latest cycle.\n    *   **Explicit Save:**\n        *   **UI (`view.tsx`):** I will add a \"Save Cycle\" button that, when clicked, immediately calls the `saveCurrentCycleState` function, bypassing the debounce timer for explicit saves.\n\n4.  **Enhance the Diff Viewer:**\n    *   **State Management (`DiffViewer.tsx`):** I will add new state to track the index of the currently selected difference (`selectedDiffIndex`).\n    *   **Navigation Controls (`DiffViewer.tsx`):** I will add \"Previous Difference\" and \"Next Difference\" buttons. These will find all the changed blocks in the diff data and update the `selectedDiffIndex`. I will use a `useEffect` hook to scroll the newly selected difference into view.\n    *   **Bottom Diff Panes (`DiffViewer.tsx`):** I will add two new panes at the bottom of the component. Their content will be bound to the `selectedDiffIndex` state, displaying the original and modified lines for the currently selected block of changes.\n    *   **Styling (`view.scss`):** I will add new CSS to style the navigation controls, the bottom panes, and add a distinct highlight for the currently selected difference in the main view.\n\n### Files Updated This Cycle:\n*   `A38. DCE - Phase 2 - Cycle Navigator - UI Mockup.md` (Updated)\n*   `A39. DCE - Phase 2 - Cycle Navigator - Technical Plan.md` (Updated)\n*   `A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md` (Updated)\n*   `src/common/ipc/channels.enum.ts` (Updated)\n*   `src/common/ipc/channels.type.ts` (Updated)\n*   `src/backend/services/history.service.ts` (Updated)\n*   `src/client/views/parallel-copilot.view/on-message.ts` (Updated)\n*   `src/client/views/parallel-copilot.view/view.tsx` (Updated)\n*   `src/client/components/DiffViewer.tsx` (Updated)\n*   `src/client/views/parallel-copilot.view/view.scss` (Updated)\n\n***\n\n<file path=\"src/Artifacts/A38. DCE - Phase 2 - Cycle Navigator - UI Mockup.md\">\n# Artifact A38: DCE - Phase 2 - Cycle Navigator - UI Mockup\n# Date Created: C70\n# Author: AI Model\n# Updated on: C125 (Add Delete and Save Cycle buttons)\n\n- **Key/Value for A0:**\n- **Description:** Provides a textual mockup and interaction flow for the Cycle Navigator UI, including the cycle counter and navigation controls within the Parallel Co-Pilot Panel.\n- **Tags:** feature plan, phase 2, ui, ux, mockup, workflow, cycle navigator\n\n## 1. Overview\n\nThis document describes the proposed user interface (UI) for the Cycle Navigator. The design prioritizes simplicity and integration, placing the navigation controls directly within the Parallel Co-Pilot Panel, reinforcing the connection between the cycle history and the AI responses.\n\n## 2. UI Mockup (Textual Description)\n\nThe Cycle Navigator will be a UI element within the collapsible \"Cycle & Context\" section.\n\n### 2.1. Expanded State\n\n```\n| [v] Cycle & Context                                                                             |\n| |-----------------------------------------------------------------------------------------------|\n| | Cycle: [ < ] [ C98 ] [ > ] [ + ] [ Save ] [ Delete ] [ Cycle Title Input: ... ]                 |\n| |-----------------------------------------------------------------------------------------------|\n| | [Cycle Context (Permanent notes)]          [Ephemeral Context (Temp logs)]                    |\n| | +----------------------------------------+ +------------------------------------------------+ |\n| | | Multi-line text area...                | | Multi-line text area...                        | |\n| | +----------------------------------------+ +------------------------------------------------+ |\n```\n*   **Previous/Next (`<`, `>`):** Navigates between cycles.\n*   **New Cycle (`+`):** Creates a new, empty cycle.\n*   **Save (`[ Save ]`):** New button to immediately persist the current cycle's state.\n*   **Delete (`[ Delete ]`):** New button to delete the current cycle. Prompts for confirmation and is disabled if only one cycle exists.\n\n### 2.2. Collapsed State\n\n```\n| [>] Cycle & Context         [ < ] [ C98 ] [ > ]                                                 |\n```\nThe core navigation controls remain visible when the section is collapsed for quick access.\n\n## 3. User Interaction Flow\n\n1.  **Initial State:** The user is working on Cycle 98. The Cycle Display shows `C98`. The `>` button is disabled. The Parallel Co-Pilot tabs show the AI responses generated for Cycle 98.\n2.  **Navigate Back:**\n    *   The user clicks the **`<`** button.\n    *   **Action:** The extension's state updates to the previous cycle, `C97`.\n    *   **UI Update:** The Cycle Display changes to `C97`.\n    *   **Data Load:** The Parallel Co-Pilot panel fetches the historical data for Cycle 97. The tabs are cleared and re-populated with the AI responses that were generated during that cycle.\n3.  **Delete Cycle:**\n    *   The user is viewing Cycle 98 and clicks the **`[ Delete ]`** button.\n    *   **Action:** A confirmation dialog appears. If confirmed, the backend deletes the data for Cycle 98.\n    *   **UI Update:** The panel automatically loads the new latest cycle (which would be C97).\n</file>\n```\n\n***\n\n<file path=\"src/Artifacts/A39. DCE - Phase 2 - Cycle Navigator - Technical Plan.md\">\n```markdown\n# Artifact A39: DCE - Phase 2 - Cycle Navigator - Technical Plan\n# Date Created: C70\n# Author: AI Model\n# Updated on: C125 (Add technical plan for Delete and Save Cycle)\n\n- **Key/Value for A0:**\n- **Description:** Details the technical approach for implementing the Cycle Navigator, including data structures for storing cycle-specific responses and the state management for historical navigation.\n- **Tags:** feature plan, phase 2, technical plan, architecture, state management, data model\n\n## 1. Overview\n\nThis document outlines the technical strategy for implementing the Cycle Navigator and PCPP persistence. The implementation will require a structured data format for storing historical data, enhancements to the frontend state management, new IPC channels, and robust backend logic for data persistence.\n\n## 2. Data Structure and Persistence\n\nA structured approach to storing the historical data is critical. A simple JSON file stored within the workspace's `.vscode` directory is a suitable starting point.\n\n### 2.1. `dce_history.json` (Example)\n\n(No change from C92)\n\n### 2.2. Backend Logic (`history.service.ts`)\n*   This service will continue to manage reading from and writing to `dce_history.json`.\n*   **New `deleteCycle(cycleId: number)` method:**\n    *   Reads the history file.\n    *   Filters the `cycles` array to remove the cycle with the matching `cycleId`.\n    *   Handles the edge case where deleting the last cycle is not allowed.\n    *   Writes the updated history file back to disk.\n    *   Returns the new latest cycle data.\n*   **Explicit Save:** The existing `saveCycleData` method already provides the necessary functionality for an explicit save. No new backend logic is needed, only a new UI trigger.\n\n## 3. Frontend State Management & Initialization Flow\n\n(No change from C92)\n\n## 4. IPC Communication\n\n*   **NEW:** `ClientToServerChannel.RequestDeleteCycle`:\n    *   **Payload:** `{ cycleId: number }`\n    *   **Action:** Frontend requests the backend to delete the specified cycle.\n*   `ClientToServerChannel.SaveCycleData`:\n    *   This existing channel will be reused for the explicit \"Save\" button. The frontend will call its `saveCurrentCycleState` function, which already sends this message.\n*   Other channels remain as defined in C92.\n```</file>\n```\n\n***\n\n<file path=\"src/Artifacts/A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md\">\n```markdown\n# Artifact A56: DCE - Phase 2 - Advanced Diff Viewer Plan\n# Date Created: C120\n# Author: AI Model & Curator\n# Updated on: C125 (Add bottom diff panes and navigation controls)\n\n- **Key/Value for A0:**\n- **Description:** Details the plan to enhance the integrated diff viewer with a side-by-side layout, line alignment, WinMerge-like navigation controls, and a detailed diff pane.\n- **Tags:** feature plan, phase 2, ui, ux, diff, navigation, side-by-side\n\n## 1. Overview & Goal\n\nThe current diff view is functional but lacks key usability features found in mature diff tools like WinMerge. The goal of this plan is to enhance the diff viewer to provide a much clearer and more efficient user experience. This involves four primary enhancements:\n1.  **Side-by-Side Layout:** Displaying the original and modified files in two parallel panes.\n2.  **Line Alignment:** Inserting placeholder lines to ensure that common (unchanged) code blocks remain horizontally aligned.\n3.  **Navigation Controls:** Adding buttons to allow the user to quickly jump between blocks of differences.\n4.  **Detailed Diff Panes:** Adding two panes at the bottom of the view to show a close-up of the currently selected difference.\n\n## 2. User Stories\n\n| ID | User Story | Acceptance Criteria |\n|---|---|---|\n| P2-DIFF-01 | **Colored Side-by-Side Diffs** | As a developer, I want to see a side-by-side view of the original and modified code with a colored background for changed lines, so I can immediately identify changes at a glance. | - The diff view is split into two vertical panes: \"Original\" on the left, \"Modified\" on the right. <br> - Lines that exist in the new version but not the old have a distinct background color (e.g., light green) in the right pane. <br> - Lines that exist in the old version but not the new have a different background color (e.g., light red) in the left pane. <br> - Unchanged lines have the standard editor background color in both panes. |\n| P2-DIFF-02 | **Aligned Content** | As a developer, when a block of lines is added or removed, I want the other pane to show empty space, so that the lines of code below the change remain horizontally aligned. | - When lines are added in the right pane, an equal number of empty placeholder rows are rendered in the left pane. <br> - When lines are removed from the left pane, an equal number of empty placeholder rows are rendered in the right pane. <br> - This ensures that a common line `X` appears at the same vertical position in both panes, regardless of changes above it. |\n| P2-DIFF-03 | **Navigate Between Diffs** | As a developer reviewing a large file, I want \"Next Difference\" and \"Previous Difference\" buttons, so I can quickly jump between changed blocks without manually scrolling. | - \"Next Difference\" (`↓`) and \"Previous Difference\" (`↑`) buttons are added to the diff viewer's header. <br> - Clicking \"Next Difference\" scrolls the view to the start of the next block of added or removed lines. <br> - The currently selected difference block is highlighted. <br> - The buttons are disabled when at the start or end of the diff list. |\n| P2-DIFF-04 | **Detailed Diff Pane** | As a developer, when a difference is selected, I want to see the specific changed lines in a separate, dedicated pane at the bottom, so I can analyze the change without the surrounding code. | - Two new panes are added at the bottom of the diff view. <br> - The left pane shows the original lines from the selected difference block. <br> - The right pane shows the modified lines from the selected difference block. <br> - These panes update automatically when I use the \"Next/Previous Difference\" buttons. |\n\n## 3. Technical Implementation Plan\n\n### 3.1. Diff Logic (`DiffViewer.tsx`)\n\n-   **Algorithm:** The logic will switch from `diffLines` to `diffArrays` to compare the files as arrays of lines. This produces a more granular and accurate diff, correctly identifying identical lines.\n-   **Data Structure:** The component will process the `diffArrays` output into a single, unified data structure that represents every row in the side-by-side view. This structure will interleave `added`, `removed`, and `common` lines with `placeholder` lines to ensure perfect horizontal alignment.\n-   **State Management:**\n    *   `useState` will be used to track the index of the currently selected block of differences (`selectedDiffIndex`).\n    *   The list of all changed blocks will be memoized for performance.\n-   **Navigation:** The \"Next/Previous\" buttons will simply increment or decrement `selectedDiffIndex`. A `useEffect` hook will listen for changes to this index and programmatically scroll the corresponding element into view.\n\n### 3.2. Styling (`view.scss`)\n\n-   **Word Wrap:** `white-space: pre;` will be added to line content styles to disable word wrapping.\n-   **Line Number Alignment:** `line-height` and flexbox properties will be adjusted to ensure line numbers align perfectly with their text.\n-   **New Styles:** New CSS classes will be added for:\n    *   The navigation controls.\n    *   A highlight color for the currently selected difference block.\n    *   The layout and styling of the two new bottom diff panes.\n```\n</file>\n```\n\n***\n\n<file path=\"src/common/ipc/channels.enum.ts\">\n```typescript\nexport enum ClientToServerChannel {\n    RequestInitialData = \"clientToServer.requestInitialData\",\n    RequestFlattenContext = \"clientToServer.requestFlattenContext\",\n    RequestWorkspaceFiles = \"clientToServer.requestWorkspaceFiles\",\n    LogMessage = \"clientToServer.logMessage\",\n\n    // File Operations\n    RequestNewFile = \"clientToServer.requestNewFile\",\n    RequestNewFolder = \"clientToServer.requestNewFolder\",\n    RequestFileRename = \"clientToServer.requestFileRename\",\n    RequestFileDelete = \"clientToServer.requestFileDelete\",\n    RequestBatchFileDelete = \"clientToServer.requestBatchFileDelete\",\n    RequestRevealInExplorer = \"clientToServer.requestRevealInExplorer\",\n    RequestCopyPath = \"clientToServer.requestCopyPath\",\n    RequestOpenFile = \"clientToServer.requestOpenFile\",\n    RequestFileContent = \"clientToServer.requestFileContent\",\n    RequestMoveFile = \"clientToServer.requestMoveFile\",\n    RequestCopyFile = \"clientToServer.requestCopyFile\",\n    RequestUndo = \"clientToServer.requestUndo\",\n    RequestRedo = \"clientToServer.requestRedo\",\n    RequestAddFileFromBuffer = \"clientToServer.requestAddFileFromBuffer\",\n    RequestCopyFileFromUri = \"clientToServer.requestCopyFileFromUri\",\n\n    // Special File Handling\n    RequestPdfToText = \"clientToServer.requestPdfToText\",\n    RequestExcelToText = \"clientToServer.requestExcelToText\",\n    RequestWordToText = \"clientToServer.requestWordToText\",\n\n    // Selection Persistence\n    SaveCurrentSelection = \"clientToServer.saveCurrentSelection\",\n    RequestLastSelection = \"clientToServer.requestLastSelection\",\n    SaveAutoAddState = \"clientToServer.saveAutoAddState\",\n\n    // VS Code Command Proxy\n    VSCodeCommand = \"clientToServer.vscodeCommand\",\n\n    // Phase 2: PCPP\n    RequestCreatePromptFile = \"clientToServer.requestCreatePromptFile\",\n    RequestFileExistence = \"clientToServer.requestFileExistence\",\n    RequestSyntaxHighlight = \"clientToServer.requestSyntaxHighlight\",\n    RequestLatestCycleData = \"clientToServer.requestLatestCycleData\",\n    RequestCycleData = \"clientToServer.requestCycleData\",\n    SaveCycleData = \"clientToServer.saveCycleData\",\n    RequestDeleteCycle = \"clientToServer.requestDeleteCycle\", // New\n}\n\nexport enum ServerToClientChannel {\n    SendWorkspaceFiles = \"serverToClient.sendWorkspaceFiles\",\n    SendWorkspaceTrustState = \"serverToClient.sendWorkspaceTrustState\",\n    ApplySelectionSet = \"serverToClient.applySelectionSet\",\n    SendSelectionSets = \"serverToClient.sendSelectionSets\",\n    ForceRefresh = \"serverToClient.forceRefresh\",\n    SetActiveFile = \"serverToClient.setActiveFile\",\n    FocusFile = \"serverToClient.focusFile\",\n    SendAutoAddState = \"serverToClient.sendAutoAddState\",\n    UpdateProblemCounts = \"serverToClient.updateProblemCounts\",\n    UpdateNodeStats = \"serverToClient.updateNodeStats\",\n    SendFileContent = \"serverToClient.sendFileContent\",\n    \n    // Phase 2: PCPP\n    SendFileExistence = \"serverToClient.sendFileExistence\",\n    SendSyntaxHighlight = \"serverToClient.sendSyntaxHighlight\",\n    SendLatestCycleData = \"serverToClient.sendLatestCycleData\",\n    SendCycleData = \"serverToClient.sendCycleData\",\n}```\n</file>\n\n***\n\n<file path=\"src/common/ipc/channels.type.ts\">\n```typescript\nimport { FileNode } from \"@/common/types/file-node\";\nimport { ClientToServerChannel, ServerToClientChannel } from \"./channels.enum\";\nimport { PcppCycle } from \"@/common/types/pcpp.types\";\n\nexport type SelectionSet = { [name: string]: string[] };\nexport type ProblemCountsMap = { [path: string]: { error: number; warning: number; } };\n\nexport type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel> =\n    T extends ClientToServerChannel.RequestInitialData ? {} :\n    T extends ClientToServerChannel.RequestFlattenContext ? { selectedPaths: string[] } :\n    T extends ClientToServerChannel.RequestWorkspaceFiles ? { force?: boolean } :\n    T extends ClientToServerChannel.LogMessage ? { level: 'info' | 'warn' | 'error', message: string } :\n    T extends ClientToServerChannel.RequestNewFile ? { parentDirectory: string } :\n    T extends ClientToServerChannel.RequestNewFolder ? { parentDirectory: string } :\n    T extends ClientToServerChannel.RequestFileRename ? { oldPath: string, newName: string } :\n    T extends ClientToServerChannel.RequestFileDelete ? { path: string } :\n    T extends ClientToServerChannel.RequestBatchFileDelete ? { paths: string[] } :\n    T extends ClientToServerChannel.RequestRevealInExplorer ? { path: string } :\n    T extends ClientToServerChannel.RequestCopyPath ? { path: string, relative: boolean } :\n    T extends ClientToServerChannel.RequestOpenFile ? { path: string } :\n    T extends ClientToServerChannel.RequestFileContent ? { path: string } :\n    T extends ClientToServerChannel.RequestMoveFile ? { oldPath: string, newPath: string } :\n    T extends ClientToServerChannel.RequestCopyFile ? { sourcePath: string, destinationDir: string } :\n    T extends ClientToServerChannel.RequestUndo ? {} :\n    T extends ClientToServerChannel.RequestRedo ? {} :\n    T extends ClientToServerChannel.RequestAddFileFromBuffer ? { targetPath: string, data: Uint8Array } :\n    T extends ClientToServerChannel.RequestCopyFileFromUri ? { sourceUri: string, targetDir: string } :\n    T extends ClientToServerChannel.RequestPdfToText ? { path: string } :\n    T extends ClientToServerChannel.RequestExcelToText ? { path: string } :\n    T extends ClientToServerChannel.RequestWordToText ? { path: string } :\n    T extends ClientToServerChannel.SaveCurrentSelection ? { paths: string[] } :\n    T extends ClientToServerChannel.RequestLastSelection ? {} :\n    T extends ClientToServerChannel.SaveAutoAddState ? { enabled: boolean } :\n    T extends ClientToServerChannel.VSCodeCommand ? { command: string, args?: any[] } :\n    T extends ClientToServerChannel.RequestCreatePromptFile ? { cycleTitle: string; currentCycle: number } :\n    T extends ClientToServerChannel.RequestFileExistence ? { paths: string[] } :\n    T extends ClientToServerChannel.RequestSyntaxHighlight ? { code: string; lang: string, id: string } :\n    T extends ClientToServerChannel.RequestLatestCycleData ? {} :\n    T extends ClientToServerChannel.RequestCycleData ? { cycleId: number } :\n    T extends ClientToServerChannel.SaveCycleData ? { cycleData: PcppCycle } :\n    T extends ClientToServerChannel.RequestDeleteCycle ? { cycleId: number } : // New\n    \n    T extends ServerToClientChannel.SendWorkspaceFiles ? { files: FileNode[] } :\n    T extends ServerToClientChannel.SendWorkspaceTrustState ? { isTrusted: boolean } :\n    T extends ServerToClientChannel.ApplySelectionSet ? { paths: string[] } :\n    T extends ServerToClientChannel.SendSelectionSets ? { sets: SelectionSet } :\n    T extends ServerToClientChannel.ForceRefresh ? { reason?: 'fileOp' | 'manual' } :\n    T extends ServerToClientChannel.SetActiveFile ? { path: string } :\n    T extends ServerToClientChannel.FocusFile ? { path: string } :\n    T extends ServerToClientChannel.SendAutoAddState ? { enabled: boolean } :\n    T extends ServerToClientChannel.UpdateProblemCounts ? { problemMap: ProblemCountsMap } :\n    T extends ServerToClientChannel.UpdateNodeStats ? { path: string, tokenCount: number, error?: string } :\n    T extends ServerToClientChannel.SendFileContent ? { path: string, content: string | null } :\n    T extends ServerToClientChannel.SendFileExistence ? { existenceMap: { [path: string]: boolean } } :\n    T extends ServerToClientChannel.SendSyntaxHighlight ? { highlightedHtml: string, id: string } :\n    T extends ServerToClientChannel.SendLatestCycleData ? { cycleData: PcppCycle } :\n    T extends ServerToClientChannel.SendCycleData ? { cycleData: PcppCycle | null } :\n    never;\n```\n</file>\n\n***\n\n<file path=\"src/backend/services/history.service.ts\">\n```typescript\n// src/backend/services/history.service.ts\nimport * as vscode from 'vscode';\nimport * as path from 'path';\nimport { Services } from './services';\nimport { PcppCycle, PcppHistoryFile } from '@/common/types/pcpp.types';\n\nexport class HistoryService {\n    private historyFilePath: string | undefined;\n\n    constructor() {\n        const workspaceFolders = vscode.workspace.workspaceFolders;\n        if (workspaceFolders && workspaceFolders.length > 0) {\n            this.historyFilePath = path.join(workspaceFolders[0].uri.fsPath, '.vscode', 'dce_history.json');\n        }\n    }\n\n    private async _readHistoryFile(): Promise<PcppHistoryFile> {\n        if (!this.historyFilePath) return { version: 1, cycles: [] };\n        try {\n            const content = await vscode.workspace.fs.readFile(vscode.Uri.file(this.historyFilePath));\n            return JSON.parse(Buffer.from(content).toString('utf-8'));\n        } catch (error) {\n            Services.loggerService.warn(\"dce_history.json not found or is invalid. A new one will be created.\");\n            return { version: 1, cycles: [] };\n        }\n    }\n\n    private async _writeHistoryFile(data: PcppHistoryFile): Promise<void> {\n        if (!this.historyFilePath) return;\n        const dir = path.dirname(this.historyFilePath);\n        try {\n            await vscode.workspace.fs.createDirectory(vscode.Uri.file(dir));\n            const content = Buffer.from(JSON.stringify(data, null, 2), 'utf-8');\n            await vscode.workspace.fs.writeFile(vscode.Uri.file(this.historyFilePath), content);\n        } catch (error) {\n            Services.loggerService.error(`Failed to write to dce_history.json: ${error}`);\n        }\n    }\n\n    public async getFullHistory(): Promise<PcppCycle[]> {\n        const history = await this._readHistoryFile();\n        return history.cycles;\n    }\n\n    public async getLatestCycle(): Promise<PcppCycle> {\n        Services.loggerService.log(\"HistoryService: getLatestCycle called.\");\n        const history = await this._readHistoryFile();\n        if (history.cycles.length === 0) {\n            Services.loggerService.log(\"No history found, creating default cycle 1.\");\n            const defaultCycle: PcppCycle = {\n                cycleId: 1,\n                timestamp: new Date().toISOString(),\n                title: 'New Cycle',\n                cycleContext: '',\n                ephemeralContext: '',\n                responses: { \"1\": { content: \"\" } },\n                isParsedMode: false,\n                leftPaneWidth: 33,\n            };\n            await this.saveCycleData(defaultCycle);\n            return defaultCycle;\n        }\n        \n        const latestCycle = history.cycles.reduce((latest, current) => current.cycleId > latest.cycleId ? current : latest);\n        Services.loggerService.log(`Latest cycle found: ${latestCycle.cycleId}`);\n        return latestCycle;\n    }\n\n    public async getCycleData(cycleId: number): Promise<PcppCycle | null> {\n        Services.loggerService.log(`HistoryService: getting data for cycle ${cycleId}.`);\n        const history = await this._readHistoryFile();\n        return history.cycles.find(c => c.cycleId === cycleId) || null;\n    }\n\n    public async saveCycleData(cycleData: PcppCycle): Promise<void> {\n        Services.loggerService.log(`HistoryService: saving data for cycle ${cycleData.cycleId}.`);\n        const history = await this._readHistoryFile();\n        const cycleIndex = history.cycles.findIndex(c => c.cycleId === cycleData.cycleId);\n\n        if (cycleIndex > -1) {\n            history.cycles[cycleIndex] = cycleData;\n        } else {\n            history.cycles.push(cycleData);\n        }\n        \n        history.cycles.sort((a, b) => a.cycleId - b.cycleId);\n\n        await this._writeHistoryFile(history);\n    }\n\n    public async deleteCycle(cycleId: number): Promise<void> {\n        Services.loggerService.log(`HistoryService: deleting cycle ${cycleId}.`);\n        const history = await this._readHistoryFile();\n\n        if (history.cycles.length <= 1) {\n            Services.loggerService.warn(\"Cannot delete the last remaining cycle.\");\n            vscode.window.showWarningMessage(\"Cannot delete the last remaining cycle.\");\n            return;\n        }\n\n        const updatedCycles = history.cycles.filter(c => c.cycleId !== cycleId);\n        \n        if (updatedCycles.length === history.cycles.length) {\n            Services.loggerService.warn(`Cycle ${cycleId} not found for deletion.`);\n            return;\n        }\n\n        history.cycles = updatedCycles;\n        await this._writeHistoryFile(history);\n        Services.loggerService.log(`Cycle ${cycleId} deleted successfully.`);\n    }\n}\n```\n</file>\n\n***\n\n<file path=\"src/client/views/parallel-copilot.view/on-message.ts\">\n```typescript\n// Updated on: C125 (Add delete cycle handler)\nimport { ServerPostMessageManager } from \"@/common/ipc/server-ipc\";\nimport { Services } from \"@/backend/services/services\";\nimport { ClientToServerChannel, ServerToClientChannel } from \"@/common/ipc/channels.enum\";\nimport * as vscode from 'vscode';\n\nexport function onMessage(serverIpc: ServerPostMessageManager) {\n    const { loggerService, promptService, fileOperationService, highlightingService, historyService } = Services;\n    loggerService.log(\"Parallel Co-Pilot view message handler initialized.\");\n\n    serverIpc.onClientMessage(ClientToServerChannel.RequestCreatePromptFile, (data) => {\n        promptService.generatePromptFile(data.cycleTitle, data.currentCycle);\n    });\n\n    serverIpc.onClientMessage(ClientToServerChannel.RequestFileExistence, (data) => {\n        fileOperationService.handleFileExistenceRequest(data.paths, serverIpc);\n    });\n\n    serverIpc.onClientMessage(ClientToServerChannel.RequestSyntaxHighlight, (data) => {\n        highlightingService.handleSyntaxHighlightRequest(data.code, data.lang, data.id, serverIpc);\n    });\n\n    serverIpc.onClientMessage(ClientToServerChannel.RequestLatestCycleData, async () => {\n        const cycleData = await historyService.getLatestCycle();\n        serverIpc.sendToClient(ServerToClientChannel.SendLatestCycleData, { cycleData });\n    });\n\n    serverIpc.onClientMessage(ClientToServerChannel.RequestCycleData, async (data) => {\n        const cycleData = await historyService.getCycleData(data.cycleId);\n        serverIpc.sendToClient(ServerToClientChannel.SendCycleData, { cycleData });\n    });\n\n    serverIpc.onClientMessage(ClientToServerChannel.SaveCycleData, (data) => {\n        historyService.saveCycleData(data.cycleData);\n    });\n    \n    serverIpc.onClientMessage(ClientToServerChannel.RequestFileContent, (data) => {\n        fileOperationService.handleFileContentRequest(data.path, serverIpc);\n    });\n\n    serverIpc.onClientMessage(ClientToServerChannel.RequestDeleteCycle, async (data) => {\n        const confirmation = await vscode.window.showWarningMessage(\n            `Are you sure you want to permanently delete Cycle ${data.cycleId}? This cannot be undone.`,\n            { modal: true },\n            'Delete'\n        );\n        if (confirmation === 'Delete') {\n            await historyService.deleteCycle(data.cycleId);\n            const latestCycle = await historyService.getLatestCycle();\n            serverIpc.sendToClient(ServerToClientChannel.SendLatestCycleData, { cycleData: latestCycle });\n        }\n    });\n}\n```\n</file>\n\n***\n\n<file path=\"src/client/components/DiffViewer.tsx\">\n```typescript\n// src/client/components/DiffViewer.tsx\nimport * as React from 'react';\nimport { diffArrays, Change } from 'diff';\nimport { VscArrowUp, VscArrowDown } from 'react-icons/vsc';\n\ninterface DiffLine {\n    type: 'added' | 'removed' | 'common' | 'placeholder';\n    content?: string;\n}\n\ninterface PairedLine {\n    left: DiffLine & { lineNum?: number };\n    right: DiffLine & { lineNum?: number };\n    isChange: boolean;\n}\n\nconst DiffViewer: React.FC<{ original: string; modified: string; }> = ({ original, modified }) => {\n    const [selectedDiffIndex, setSelectedDiffIndex] = React.useState(0);\n    const diffContainerRef = React.useRef<HTMLDivElement>(null);\n\n    const { pairedLines, changeIndices } = React.useMemo(() => {\n        const originalLines = original.split('\\n');\n        const modifiedLines = modified.split('\\n');\n        const changes = diffArrays(originalLines, modifiedLines);\n        \n        const result: PairedLine[] = [];\n        const changeIndices: number[] = [];\n        let leftLineNum = 1;\n        let rightLineNum = 1;\n\n        for (const change of changes) {\n            if (change.added) {\n                changeIndices.push(result.length);\n                change.value.forEach(line => {\n                    result.push({ left: { type: 'placeholder' }, right: { type: 'added', content: line, lineNum: rightLineNum++ }, isChange: true });\n                });\n            } else if (change.removed) {\n                changeIndices.push(result.length);\n                change.value.forEach(line => {\n                    result.push({ left: { type: 'removed', content: line, lineNum: leftLineNum++ }, right: { type: 'placeholder' }, isChange: true });\n                });\n            } else {\n                change.value.forEach(line => {\n                    result.push({ left: { type: 'common', content: line, lineNum: leftLineNum++ }, right: { type: 'common', content: line, lineNum: rightLineNum++ }, isChange: false });\n                });\n            }\n        }\n        return { pairedLines: result, changeIndices };\n    }, [original, modified]);\n\n    React.useEffect(() => {\n        if (changeIndices.length > 0 && diffContainerRef.current) {\n            const targetIndex = changeIndices[selectedDiffIndex];\n            const element = diffContainerRef.current.querySelector(`.line-pair:nth-child(${targetIndex + 1})`);\n            element?.scrollIntoView({ behavior: 'smooth', block: 'center' });\n        }\n    }, [selectedDiffIndex, changeIndices]);\n\n    const handleNav = (direction: 'prev' | 'next') => {\n        if (direction === 'next') {\n            setSelectedDiffIndex(i => Math.min(i + 1, changeIndices.length - 1));\n        } else {\n            setSelectedDiffIndex(i => Math.max(i - 1, 0));\n        }\n    };\n\n    const selectedDiffBlock = React.useMemo(() => {\n        if (changeIndices.length === 0) return null;\n        const startIndex = changeIndices[selectedDiffIndex];\n        let endIndex = startIndex;\n        while (endIndex + 1 < pairedLines.length && pairedLines[endIndex + 1].isChange) {\n            endIndex++;\n        }\n        return pairedLines.slice(startIndex, endIndex + 1);\n    }, [selectedDiffIndex, pairedLines, changeIndices]);\n\n    return (\n        <div className=\"diff-viewer-wrapper\">\n            <div className=\"diff-viewer-header\">\n                <button onClick={() => handleNav('prev')} disabled={selectedDiffIndex === 0}><VscArrowUp/> Prev Diff</button>\n                <span>{selectedDiffIndex + 1} of {changeIndices.length}</span>\n                <button onClick={() => handleNav('next')} disabled={selectedDiffIndex >= changeIndices.length - 1}><VscArrowDown/> Next Diff</button>\n            </div>\n            <div className=\"diff-viewer-container\" ref={diffContainerRef}>\n                {pairedLines.map((line, i) => {\n                    const isSelected = changeIndices[selectedDiffIndex] <= i && i < (changeIndices[selectedDiffIndex + 1] || pairedLines.length) && line.isChange;\n                    return (\n                        <div className={`line-pair ${isSelected ? 'selected-diff' : ''}`} key={i}>\n                            <div className=\"line-number left\">{line.left.lineNum || ''}</div>\n                            <div className={`line-content left ${line.left.type}`}><pre>{line.left.content}</pre></div>\n                            <div className=\"line-number right\">{line.right.lineNum || ''}</div>\n                            <div className={`line-content right ${line.right.type}`}><pre>{line.right.content}</pre></div>\n                        </div>\n                    );\n                })}\n            </div>\n            <div className=\"bottom-diff-pane-container\">\n                <div className=\"bottom-diff-pane\">\n                    {selectedDiffBlock?.map((l, i) => <pre key={`bottom-L${i}`} className={l.left.type}>{l.left.content}</pre>)}\n                </div>\n                <div className=\"bottom-diff-pane\">\n                    {selectedDiffBlock?.map((l, i) => <pre key={`bottom-R${i}`} className={l.right.type}>{l.right.content}</pre>)}\n                </div>\n            </div>\n        </div>\n    );\n};\n\nexport default DiffViewer;\n```\n</file>\n\n***\n\n<file path=\"src/client/views/parallel-copilot.view/view.scss\">\n```scss\n/* Updated on: C125 (Add styles for diff viewer wrapper, header, and bottom panes) */\nbody {\n    padding: 0;\n    font-family: var(--vscode-font-family);\n    font-size: var(--vscode-font-size);\n    color: var(--vscode-editor-foreground);\n    background-color: var(--vscode-editor-background);\n}\n\n.pc-view-container {\n    padding: 8px;\n    display: flex;\n    flex-direction: column;\n    height: 100vh;\n    gap: 8px;\n    box-sizing: border-box;\n}\n\n.collapsible-section {\n    border: 1px solid var(--vscode-panel-border);\n    border-radius: 4px;\n    flex-shrink: 0;\n}\n\n.collapsible-header {\n    background-color: var(--vscode-sideBar-sectionHeaderBackground);\n    padding: 4px 8px;\n    font-size: 11px;\n    text-transform: uppercase;\n    font-weight: bold;\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n    gap: 4px;\n    justify-content: space-between;\n\n    .chevron {\n        transition: transform 0.2s ease-in-out;\n    }\n    .chevron.collapsed {\n        transform: rotate(-90deg);\n    }\n}\n\n.collapsible-content {\n    padding: 8px;\n    display: flex;\n    flex-direction: column;\n    gap: 8px;\n}\n\n.pc-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    flex-shrink: 0;\n    gap: 16px;\n}\n\n.cycle-navigator {\n    display: flex;\n    align-items: center;\n    gap: 8px;\n    width: 100%;\n}\n\n.pc-toolbar {\n    display: flex;\n    align-items: center;\n    gap: 8px;\n}\n\n.cycle-navigator button, .pc-toolbar button {\n    background: none;\n    border: 1px solid var(--vscode-button-border, transparent);\n    color: var(--vscode-icon-foreground);\n    cursor: pointer;\n    padding: 4px;\n    border-radius: 3px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    gap: 6px;\n\n    &:hover {\n        background-color: var(--vscode-toolbar-hoverBackground);\n    }\n\n    &:disabled {\n        opacity: 0.5;\n        cursor: not-allowed;\n    }\n}\n\n.cycle-input {\n    width: 50px;\n    background-color: var(--vscode-input-background);\n    color: var(--vscode-input-foreground);\n    border: 1px solid var(--vscode-input-border);\n    text-align: center;\n    border-radius: 2px;\n}\n\n.cycle-title-input {\n    flex-grow: 1;\n    background-color: var(--vscode-input-background);\n    color: var(--vscode-input-foreground);\n    border: 1px solid var(--vscode-input-border);\n    padding: 2px 4px;\n    border-radius: 2px;\n}\n\n.context-inputs {\n    display: flex;\n    flex-direction: column;\n    gap: 8px;\n    flex-shrink: 0;\n}\n\n.tab-count-input {\n    display: flex;\n    align-items: center;\n    gap: 8px;\n    font-size: 12px;\n    \n    input {\n        width: 50px;\n        background-color: var(--vscode-input-background);\n        color: var(--vscode-input-foreground);\n        border: 1px solid var(--vscode-input-border);\n        text-align: center;\n        border-radius: 2px;\n    }\n}\n\n.context-textarea {\n    width: 100%;\n    height: 60px;\n    background-color: var(--vscode-input-background);\n    color: var(--vscode-input-foreground);\n    border: 1px solid var(--vscode-input-border);\n    border-radius: 2px;\n    padding: 4px;\n    font-family: var(--vscode-editor-font-family);\n    font-size: var(--vscode-editor-font-size);\n    resize: vertical;\n}\n\n.tab-bar {\n    display: flex;\n    border-bottom: 1px solid var(--vscode-panel-border);\n    flex-shrink: 0;\n}\n\n.tab {\n    padding: 6px 12px;\n    cursor: pointer;\n    border-bottom: 2px solid transparent;\n    color: var(--vscode-tab-inactiveForeground);\n}\n\n.tab.active {\n    color: var(--vscode-tab-activeForeground);\n    border-bottom-color: var(--vscode-tab-activeBorder);\n}\n\n.tab-content {\n    flex-grow: 1;\n    display: flex;\n    flex-direction: column;\n    min-height: 0;\n    padding-top: 8px;\n}\n\n.tab-pane {\n    display: flex;\n    flex-direction: column;\n    flex-grow: 1;\n    gap: 8px;\n    height: 100%;\n}\n\n.response-textarea {\n    width: 100%;\n    height: 100%;\n    background-color: var(--vscode-input-background);\n    color: var(--vscode-input-foreground);\n    border: 1px solid var(--vscode-input-border);\n    border-radius: 2px;\n    padding: 4px;\n    font-family: var(--vscode-editor-font-family);\n    font-size: var(--vscode-editor-font-size);\n    resize: none;\n     &:focus {\n        outline: 1px solid var(--vscode-focusBorder);\n    }\n}\n\n.parsed-view-grid {\n    display: flex;\n    gap: 0;\n    flex-grow: 1;\n    min-height: 0;\n}\n\n.parsed-view-left {\n    overflow-y: auto;\n    display: flex;\n    flex-direction: column;\n    gap: 8px;\n    min-width: 150px;\n    padding-right: 8px;\n    transition: flex-basis 0.3s ease, padding-right 0.3s ease, min-width 0.3s ease;\n}\n\n.parsed-view-left.collapsed {\n    flex-basis: 0 !important;\n    min-width: 0;\n    padding-right: 0;\n    overflow: hidden;\n}\n\n.resizer {\n    width: 5px;\n    cursor: col-resize;\n    background-color: var(--vscode-panel-border);\n    flex-shrink: 0;\n    &:hover {\n        background-color: var(--vscode-focusBorder);\n    }\n}\n\n.parsed-view-right {\n    flex-grow: 1;\n    display: flex;\n    flex-direction: column;\n    min-width: 0;\n    padding-left: 8px;\n}\n\n.file-content-viewer-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    padding: 4px 8px;\n    background-color: var(--vscode-editorGroupHeader-tabsBackground);\n    border: 1px solid var(--vscode-panel-border);\n    border-bottom: none;\n    border-top-left-radius: 4px;\n    border-top-right-radius: 4px;\n    font-size: 12px;\n    flex-shrink: 0;\n\n    .file-path {\n        font-weight: bold;\n        white-space: nowrap;\n        overflow: hidden;\n        text-overflow: ellipsis;\n    }\n    .file-actions {\n        display: flex;\n        align-items: center;\n        gap: 8px;\n    }\n}\n\n.code-viewer-wrapper {\n    display: flex;\n    flex-direction: column; /* To stack viewer and panes */\n    flex-grow: 1;\n    min-height: 0;\n    border: 1px solid var(--vscode-panel-border);\n    border-top: none;\n    border-radius: 0 0 4px 4px;\n    background-color: var(--vscode-editor-background);\n    overflow: hidden;\n}\n\n.file-content-viewer {\n    flex: 1;\n    overflow: auto;\n    font-family: var(--vscode-editor-font-family);\n    font-size: var(--vscode-editor-font-size);\n    display: flex;\n    min-width: 0;\n}\n\n.line-numbers {\n    padding: 8px 10px 8px 8px;\n    text-align: right;\n    color: var(--vscode-editorLineNumber-foreground);\n    background-color: var(--vscode-editor-background);\n    user-select: none;\n    border-right: 1px solid var(--vscode-panel-border);\n    line-height: 1.5;\n}\n\n.code-content {\n    padding: 8px;\n    flex-grow: 1;\n    white-space: pre;\n    line-height: 1.5;\n}\n\n.associated-files-list {\n    list-style: none;\n    padding: 0;\n    margin: 0;\n\n    li {\n        display: flex;\n        align-items: center;\n        gap: 8px;\n        padding: 2px 4px;\n        font-size: 12px;\n        border-radius: 3px;\n        cursor: pointer;\n        white-space: nowrap;\n        overflow: hidden;\n        text-overflow: ellipsis;\n\n        &:hover {\n            background-color: var(--vscode-list-hoverBackground);\n        }\n\n        &.selected {\n            background-color: var(--vscode-list-activeSelectionBackground) !important;\n            color: var(--vscode-list-activeSelectionForeground) !important;\n        }\n    }\n\n    .status-icon {\n        flex-shrink: 0;\n    }\n    .status-icon.exists {\n        color: var(--vscode-testing-iconPassed);\n    }\n    .status-icon.not-exists {\n        color: var(--vscode-testing-iconFailed);\n    }\n}\n\n.collapsed-navigator {\n    display: flex;\n    align-items: center;\n    gap: 4px;\n    font-weight: normal;\n    \n    button {\n        padding: 0 4px;\n    }\n    \n    .cycle-display {\n        font-size: 11px;\n        color: var(--vscode-descriptionForeground);\n    }\n}\n\n/* Diff Viewer Styles */\n.diff-viewer-wrapper {\n    display: flex;\n    flex-direction: column;\n    height: 100%;\n}\n\n.diff-viewer-header {\n    display: flex;\n    gap: 8px;\n    padding: 4px;\n    background-color: var(--vscode-editorGroupHeader-tabsBackground);\n    border-bottom: 1px solid var(--vscode-panel-border);\n    align-items: center;\n    flex-shrink: 0;\n}\n\n.diff-viewer-container {\n    flex-grow: 1;\n    overflow: auto;\n    font-family: var(--vscode-editor-font-family);\n    font-size: 12px;\n\n    .line-pair {\n        display: flex;\n        line-height: 1.5;\n        border: 1px solid transparent;\n        &.selected-diff {\n            background-color: var(--vscode-editor-selectionHighlightBackground);\n            border-color: var(--vscode-focusBorder);\n        }\n    }\n\n    .line-number {\n        flex-shrink: 0;\n        width: 40px;\n        padding-right: 10px;\n        text-align: right;\n        color: var(--vscode-editorLineNumber-foreground);\n        user-select: none;\n    }\n\n    .line-content {\n        flex-grow: 1;\n        white-space: pre;\n        padding-left: 8px;\n        &.left {\n            border-right: 1px solid var(--vscode-panel-border);\n        }\n    }\n\n    .added { background-color: var(--vscode-diffEditor-insertedTextBackground); }\n    .removed { background-color: var(--vscode-diffEditor-removedTextBackground); }\n    .placeholder { background-color: var(--vscode-editor-inactiveSelectionBackground); }\n}\n\n.bottom-diff-pane-container {\n    display: flex;\n    height: 150px;\n    flex-shrink: 0;\n    border-top: 1px solid var(--vscode-panel-border);\n}\n\n.bottom-diff-pane {\n    flex: 1;\n    overflow: auto;\n    padding: 8px;\n    background-color: var(--vscode-editorWidget-background);\n    &:first-child {\n        border-right: 1px solid var(--vscode-panel-border);\n    }\n    pre {\n        margin: 0;\n        white-space: pre;\n        font-size: 12px;\n        &.added { background-color: var(--vscode-diffEditor-insertedTextBackground); }\n        &.removed { background-color: var(--vscode-diffEditor-removedTextBackground); }\n    }\n}\n```\n</file>\n```\n\n***\n\n<file path=\"src/client/views/parallel-copilot.view/view.tsx\">\n```typescript\n// Updated on: C125 (Add Exit Diff View button and Cycle Management)\nimport * as React from 'react';\nimport * as ReactDOM from 'react-dom/client';\nimport './view.scss';\nimport { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap, VscSave, VscTrash, VscReply } from 'react-icons/vsc';\nimport { logger } from '@/client/utils/logger';\nimport { ClientPostMessageManager } from '@/common/ipc/client-ipc';\nimport { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';\nimport { ParsedResponse } from '@/common/types/pcpp.types';\nimport { parseResponse } from '@/client/utils/response-parser';\nimport ReactMarkdown from 'react-markdown';\nimport DiffViewer from '@/client/components/DiffViewer';\nimport { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';\nimport * as path from 'path-browserify';\n\nconst useDebounce = (callback: (...args: any[]) => void, delay: number) => {\n    const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);\n\n    const debouncedFunction = React.useCallback((...args: any[]) => {\n        if (timeoutRef.current) {\n            clearTimeout(timeoutRef.current);\n        }\n        timeoutRef.current = setTimeout(() => {\n            callback(...args);\n        }, delay);\n    }, [callback, delay]);\n\n    return debouncedFunction;\n};\n\nconst CodeViewer: React.FC<{ htmlContent: string | undefined | null }> = ({ htmlContent }) => {\n    if (htmlContent === undefined || htmlContent === null) {\n        return <div style={{ padding: '8px' }}>Select a file to view its content.</div>;\n    }\n    if (htmlContent.startsWith('// Error:')) {\n         return <div style={{ padding: '8px', color: 'var(--vscode-errorForeground)' }}>{htmlContent}</div>;\n    }\n\n    const codeContentMatch = /<pre><code>([\\s\\S]*)<\\/code><\\/pre>/s.exec(htmlContent);\n    const code = codeContentMatch ? codeContentMatch : `<code>${htmlContent}</code>`; \n\n    const lines = code.split('\\n');\n    if (lines.length > 0 && lines[lines.length - 1] === '') {\n        lines.pop();\n    }\n\n    return (\n        <div className=\"file-content-viewer\">\n            <div className=\"line-numbers\">\n                {lines.map((_, i) => <span key={i}>{i + 1}</span>)}\n            </div>\n            <div className=\"code-content\" dangerouslySetInnerHTML={{ __html: code }} />\n        </div>\n    );\n};\n\ninterface TabState {\n    rawContent: string;\n    parsedContent: ParsedResponse | null;\n}\n\nconst CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; collapsedContent?: React.ReactNode; }> = ({ title, children, isCollapsed, onToggle, collapsedContent }) => (\n    <div className=\"collapsible-section\">\n        <div className=\"collapsible-header\" onClick={onToggle}>\n            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>\n                <VscChevronDown className={`chevron ${isCollapsed ? 'collapsed' : ''}`} />\n                <span>{title}</span>\n            </div>\n            {isCollapsed && collapsedContent}\n        </div>\n        {!isCollapsed && <div className=\"collapsible-content\">{children}</div>}\n    </div>\n);\n\nconst App = () => {\n    const [activeTab, setActiveTab] = React.useState(1);\n    const [tabCount, setTabCount] = React.useState(4);\n    const [currentCycle, setCurrentCycle] = React.useState(1);\n    const [maxCycle, setMaxCycle] = React.useState(1);\n    const [cycleTitle, setCycleTitle] = React.useState('');\n    const [cycleContext, setCycleContext] = React.useState('');\n    const [ephemeralContext, setEphemeralContext] = React.useState('');\n    const [tabs, setTabs] = React.useState<{ [key: string]: TabState }>({});\n    const [highlightedCodeBlocks, setHighlightedCodeBlocks] = React.useState<Map<string, string>>(new Map());\n    const [fileExistenceMap, setFileExistenceMap] = React.useState<Map<string, boolean>>(new Map());\n    const [isParsedMode, setIsParsedMode] = React.useState(false);\n    const [selectedFilePath, setSelectedFilePath] = React.useState<string | null>(null);\n    const [isCycleCollapsed, setIsCycleCollapsed] = React.useState(false);\n    const [leftPaneWidth, setLeftPaneWidth] = React.useState(33);\n    const [isDiffMode, setIsDiffMode] = React.useState(false);\n    const [originalFileContent, setOriginalFileContent] = React.useState<string | null>(null);\n    const isResizing = React.useRef(false);\n\n    const clientIpc = ClientPostMessageManager.getInstance();\n\n    const saveCurrentCycleState = React.useCallback((force = false) => {\n        const responses: { [key: string]: PcppResponse } = {};\n        for (let i = 1; i <= tabCount; i++) {\n            responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' };\n        }\n        const cycleData: PcppCycle = {\n            cycleId: currentCycle,\n            timestamp: new Date().toISOString(),\n            title: cycleTitle,\n            cycleContext,\n            ephemeralContext,\n            responses,\n            isParsedMode,\n            leftPaneWidth,\n        };\n        clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });\n    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, clientIpc]);\n\n    const debouncedSave = useDebounce(saveCurrentCycleState, 1000);\n\n    React.useEffect(() => {\n        debouncedSave();\n    }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, debouncedSave]);\n    \n    const parseAllTabs = React.useCallback(() => {\n        const allFilePaths = new Set<string>();\n        const updatedTabs = { ...tabs };\n        Object.values(updatedTabs).forEach(tabState => {\n            if (tabState.rawContent && !tabState.parsedContent) {\n                const parsed = parseResponse(tabState.rawContent);\n                tabState.parsedContent = parsed;\n                parsed.filesUpdated.forEach(file => allFilePaths.add(file));\n                parsed.files.forEach(file => {\n                    const lang = path.extname(file.path).substring(1) || 'plaintext';\n                    const id = `${file.path}::${file.content}`;\n                     clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });\n                });\n            }\n        });\n        setTabs(updatedTabs);\n        if (allFilePaths.size > 0) {\n            clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) });\n        }\n    }, [clientIpc, tabs]);\n\n    React.useEffect(() => {\n        const loadCycleData = (cycleData: PcppCycle) => {\n            setCurrentCycle(cycleData.cycleId);\n            setCycleTitle(cycleData.title);\n            setCycleContext(cycleData.cycleContext);\n            setEphemeralContext(cycleData.ephemeralContext);\n            const newTabs: { [key: string]: TabState } = {};\n            Object.entries(cycleData.responses).forEach(([tabId, response]) => {\n                newTabs[tabId] = { rawContent: response.content, parsedContent: null };\n            });\n            setTabs(newTabs);\n            setIsParsedMode(cycleData.isParsedMode || false);\n            setLeftPaneWidth(cycleData.leftPaneWidth || 33);\n        };\n\n        clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData }) => {\n            loadCycleData(cycleData);\n            setMaxCycle(cycleData.cycleId);\n        });\n        clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData }) => {\n            if (cycleData) {\n                loadCycleData(cycleData);\n            }\n        });\n        clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => {\n            setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml));\n        });\n        clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => {\n            setFileExistenceMap(new Map(Object.entries(existenceMap)));\n        });\n        clientIpc.onServerMessage(ServerToClientChannel.SendFileContent, ({ path: filePath, content }) => {\n            if (filePath === selectedFilePath) {\n                setOriginalFileContent(content);\n            }\n        });\n        \n        clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});\n    }, [clientIpc, selectedFilePath]);\n\n    React.useEffect(() => {\n        if (isParsedMode) {\n            parseAllTabs();\n        }\n    }, [isParsedMode, tabs, parseAllTabs]);\n    \n    const activeTabData = tabs[activeTab.toString()];\n\n    const viewableContent = React.useMemo(() => {\n        if (!selectedFilePath || !activeTabData?.parsedContent) return undefined;\n        const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath);\n        if (!file) return '<div>Error: File data not found in parsed response.</div>';\n        const id = `${file.path}::${file.content}`;\n        return highlightedCodeBlocks.get(id);\n    }, [selectedFilePath, activeTabData?.parsedContent, highlightedCodeBlocks]);\n\n\n    const handleRawContentChange = (newContent: string, tabIndex: number) => {\n        setTabs(prev => ({ ...prev, [tabIndex.toString()]: { rawContent: newContent, parsedContent: null }}));\n    };\n\n    const handleGlobalParseToggle = () => {\n        const newParseMode = !isParsedMode;\n        setIsParsedMode(newParseMode);\n        setSelectedFilePath(null);\n        setIsDiffMode(false);\n        if (!newParseMode) {\n            setTabs(prev => {\n                const newTabs = {...prev};\n                Object.keys(newTabs).forEach(key => {\n                    newTabs[key].parsedContent = null;\n                });\n                return newTabs;\n            });\n        }\n    };\n\n    const handleCycleChange = (e: React.MouseEvent, newCycle: number) => {\n        e.stopPropagation();\n        if (newCycle > 0 && newCycle <= maxCycle) {\n            saveCurrentCycleState(true);\n            setCurrentCycle(newCycle);\n            clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle });\n        }\n    };\n\n    const handleNewCycle = (e: React.MouseEvent) => {\n        e.stopPropagation();\n        const newCycleId = maxCycle + 1;\n        setMaxCycle(newCycleId);\n        setCurrentCycle(newCycleId);\n        setCycleTitle('New Cycle');\n        setCycleContext('');\n        setEphemeralContext('');\n        setTabs({});\n        setIsParsedMode(false);\n    };\n\n    const handleDeleteCycle = (e: React.MouseEvent) => {\n        e.stopPropagation();\n        clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle });\n    };\n    \n    const handleGeneratePrompt = () => {\n        clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle });\n    };\n\n    const handleMouseDown = React.useCallback((e: React.MouseEvent) => {\n        e.preventDefault();\n        isResizing.current = true;\n    }, []);\n\n    const handleMouseMove = React.useCallback((e: MouseEvent) => {\n        if (!isResizing.current) return;\n        const newWidth = (e.clientX / window.innerWidth) * 100;\n        if (newWidth > 10 && newWidth < 90) {\n            setLeftPaneWidth(newWidth);\n        }\n    }, []);\n\n    const handleMouseUp = React.useCallback(() => {\n        isResizing.current = false;\n    }, []);\n\n    React.useEffect(() => {\n        const mm = (e: MouseEvent) => handleMouseMove(e);\n        const mu = () => handleMouseUp();\n        window.addEventListener('mousemove', mm);\n        window.addEventListener('mouseup', mu);\n        \n        return () => {\n            window.removeEventListener('mousemove', mm);\n            window.removeEventListener('mouseup', mu);\n        };\n    }, [handleMouseMove, handleMouseUp]);\n    \n    const handleDiffClick = () => {\n        const newDiffMode = !isDiffMode;\n        setIsDiffMode(newDiffMode);\n        if (newDiffMode && selectedFilePath) {\n            clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: selectedFilePath });\n        } else {\n            setOriginalFileContent(null);\n        }\n    };\n\n    const isNewCycleButtonDisabled = React.useMemo(() => {\n        const hasTitle = cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== '';\n        const hasContext = cycleContext.trim() || ephemeralContext.trim();\n        const hasResponseContent = Object.values(tabs).some(t => t.rawContent.trim());\n        return !hasTitle && !hasContext && !hasResponseContent;\n    }, [cycleTitle, cycleContext, ephemeralContext, tabs]);\n\n    const collapsedNavigator = (\n        <div className=\"collapsed-navigator\">\n            <button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button>\n            <span className=\"cycle-display\">C{currentCycle}</span>\n            <button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button>\n        </div>\n    );\n\n    return (\n        <div className=\"pc-view-container\">\n            <div className=\"pc-header\">\n                <div className=\"pc-toolbar\">\n                    <button onClick={handleGeneratePrompt} title=\"Generate prompt.md\"><VscFileCode /> Generate prompt.md</button>\n                    <button onClick={handleGlobalParseToggle}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button>\n                </div>\n                <div className=\"tab-count-input\">\n                    <label htmlFor=\"tab-count\">Responses:</label>\n                    <input type=\"number\" id=\"tab-count\" min=\"1\" max=\"20\" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} />\n                </div>\n            </div>\n\n            <CollapsibleSection title=\"Cycle & Context\" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator}>\n                <div className=\"cycle-navigator\">\n                    <span>Cycle:</span>\n                    <button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button>\n                    <input type=\"number\" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 1)} className=\"cycle-input\" />\n                    <button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button>\n                    <button onClick={handleNewCycle} title=\"New Cycle\" disabled={isNewCycleButtonDisabled}><VscAdd /></button>\n                    <button onClick={() => saveCurrentCycleState(true)} title=\"Save Cycle\"><VscSave /></button>\n                    <button onClick={handleDeleteCycle} title=\"Delete Current Cycle\" disabled={maxCycle <= 1}><VscTrash /></button>\n                    <input type=\"text\" className=\"cycle-title-input\" placeholder=\"Cycle Title...\" value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} />\n                </div>\n                <div className=\"context-inputs\">\n                    <textarea className=\"context-textarea\" placeholder=\"Cycle Context (notes for this cycle)...\" value={cycleContext} onChange={e => setCycleContext(e.target.value)} />\n                    <textarea className=\"context-textarea\" placeholder=\"Ephemeral Context (for this cycle's prompt only)...\" value={ephemeralContext} onChange={e => setEphemeralContext(e.target.value)} />\n                </div>\n            </CollapsibleSection>\n\n            <div className=\"tab-bar\">\n                {[...Array(tabCount)].map((_, i) => <div key={i} className={`tab ${activeTab === i + 1 ? 'active' : ''}`} onClick={() => setActiveTab(i + 1)}>Resp {i + 1}</div>)}\n            </div>\n\n            <div className=\"tab-content\">\n                {activeTab !== null && (\n                    <div className=\"tab-pane\">\n                        {!isParsedMode || !activeTabData?.parsedContent ? (\n                            <textarea className=\"response-textarea\" placeholder={`Paste AI response for tab ${activeTab} here...`} value={activeTabData?.rawContent || ''} onChange={(e) => handleRawContentChange(e.target.value, activeTab)} />\n                        ) : (\n                            <div className=\"parsed-view-grid\">\n                                <div className={`parsed-view-left ${isDiffMode ? 'collapsed' : ''}`} style={!isDiffMode ? { flexBasis: `${leftPaneWidth}%` } : {}}>\n                                     <CollapsibleSection title=\"Associated Files\" isCollapsed={false} onToggle={() => {}}>\n                                        <ul className=\"associated-files-list\">\n                                            {activeTabData.parsedContent.filesUpdated.map(file => (\n                                                <li \n                                                    key={file} \n                                                    className={selectedFilePath === file ? 'selected' : ''}\n                                                    onClick={() => {setSelectedFilePath(prev => prev === file ? null : file); setIsDiffMode(false);}}\n                                                    title={file}\n                                                >\n                                                    {fileExistenceMap.get(file) ? <VscCheck className=\"status-icon exists\" /> : <VscError className=\"status-icon not-exists\" />}\n                                                    <span>{file}</span>\n                                                </li>\n                                            ))}\n                                        </ul>\n                                    </CollapsibleSection>\n                                    <CollapsibleSection title=\"Thoughts / Response\" isCollapsed={false} onToggle={() => {}}>\n                                        <ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown>\n                                    </CollapsibleSection>\n                                    <CollapsibleSection title=\"Course of Action\" isCollapsed={false} onToggle={() => {}}>\n                                        <ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown>\n                                    </CollapsibleSection>\n                                </div>\n                                {!isDiffMode && <div className=\"resizer\" onMouseDown={handleMouseDown} />}\n                                <div className=\"parsed-view-right\">\n                                    <div className=\"file-content-viewer-header\">\n                                        <span className=\"file-path\" title={selectedFilePath || ''}>{selectedFilePath ? `${isDiffMode ? \"Diff View\" : `Response ${activeTab}`}: ${selectedFilePath}` : 'No file selected'}</span>\n                                        <div className=\"file-actions\">\n                                            {isDiffMode && <button onClick={() => setIsDiffMode(false)} title=\"Back to Summary\"><VscReply /> Back</button>}\n                                            <button onClick={handleDiffClick} disabled={!selectedFilePath} title=\"Toggle Diff View\"><VscDiff /></button>\n                                            <button disabled={!selectedFilePath} title=\"Swap with Workspace File\"><VscArrowSwap /></button>\n                                        </div>\n                                    </div>\n                                    <div className=\"code-viewer-wrapper\">\n                                        {isDiffMode && activeTabData.parsedContent && selectedFilePath && originalFileContent ? (\n                                            <DiffViewer \n                                                original={originalFileContent}\n                                                modified={activeTabData.parsedContent.files.find(f => f.path === selectedFilePath)?.content || ''}\n                                            />\n                                        ) : (\n                                            <CodeViewer htmlContent={viewableContent} />\n                                        )}\n                                    </div>\n                                </div>\n                            </div>\n                        )}\n                    </div>\n                )}\n            </div>\n        </div>\n    );\n};\n\nconst root = ReactDOM.createRoot(document.getElementById('root')!);\nroot.render(<App />);\n```\n</file>\n```"
+        },
+        "2": {
+          "content": "I have analyzed the comprehensive feedback from Cycle 132. There are several regressions, usability issues with the diff viewer, and a significant change in the desired workflow from \"swapping\" files to a one-way \"replace\" or \"accept\" model. My course of action is to address these issues systematically, prioritizing critical bug fixes, then implementing the keyboard navigation for the diff viewer, and finally updating the UI and documentation to reflect the new \"replace\" workflow.\n\n### Course of action\n\n1.  **Documentation First (Aligning with New Requirements):**\n    *   I will update `A56 (Advanced Diff Viewer Plan)` to include the new requirements for full keyboard navigation (`Up`/`Down` to select a difference, `Right Arrow` to accept the change). It will also be updated to specify that all four panes should be scrollable but scroll-locked in pairs. The request for line numbers in the bottom detail pane will also be added.\n    *   I will update `A49 (File Association & Diffing Plan)` and `A34 (Vision & Requirements)` to change the workflow terminology from \"swap\" to \"replace\" or \"accept.\" This codifies the new, one-way workflow of copying selected response files into the workspace.\n    *   I will update `A35 (UI Mockups and Flow)` to reflect several UI changes:\n        *   A placeholder for a new \"Location Pane\" will be added to the diff view layout.\n        *   In the standard response view, a global \"Select this Response\" checkbox and a \"Replace selected files...\" button will be added to the header of the code viewer.\n        *   The \"View Diff\" button will be marked as \"(Under Construction)\" to signal a pause in its development.\n\n2.  **Fix Critical Regressions and Bugs (`view.tsx`, `DiffViewer.tsx`):**\n    *   **\"Stuck in Diff View\":** The inability to exit the diff view is a critical regression. I will add a prominent \"Back to Response\" button that reliably sets the `isDiffMode` state to `false`, returning the user to the parsed summary view.\n    *   **Scrollbars & Scroll-Locking:** I will refactor the CSS in `view.scss` and the `onScroll` handlers in `DiffViewer.tsx` to ensure all four panes are independently scrollable (`overflow: auto`) while maintaining their synchronized scroll-locked behavior.\n\n3.  **Implement Diff Viewer Keyboard Navigation (`view.tsx`, `DiffViewer.tsx`):**\n    *   **State Management:** I will introduce new state in `view.tsx` to manage the in-memory content of the \"original\" file pane. This is necessary so that \"accepting\" a change can modify the content for the current session without writing to disk.\n    *   **Event Handling (`view.tsx`):** I will add a `useEffect` hook that attaches a `keydown` event listener to the window when the diff viewer is active.\n        *   **Up/Down Arrows:** These keys will change the `selectedDiffIndex` state, which is passed as a prop to `DiffViewer.tsx` to control highlighting.\n        *   **Right Arrow:** This key will trigger a new `handleAcceptChange` function. This function will calculate the result of applying the selected diff from the response pane to the in-memory original content, update the state, and cause the `DiffViewer` to re-render, showing the accepted change as \"common\" (no color).\n\n4.  **Implement New \"Replace\" Workflow (`view.tsx`, `file-operation.service.ts`):**\n    *   **UI Changes:** In the standard (non-diff) parsed view, I will add the new \"Select Response\" checkbox and \"Replace selected files in workspace\" button.\n    *   **IPC:** I will create a new `RequestReplaceFiles` channel to handle the batch file update.\n    *   **Backend (`file-operation.service.ts`):** I will implement a `handleReplaceFilesRequest` method that receives a map of file paths to their new content and uses `vscode.workspace.fs.writeFile` to overwrite them.\n\n### Files Updated This Cycle:\n*   `A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements.md` (Updated)\n*   `A35. DCE - Phase 2 - UI Mockups and Flow.md` (Updated)\n*   `A49. DCE - Phase 2 - File Association & Diffing Plan.md` (Updated)\n*   `A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md` (Updated)\n*   `src/common/ipc/channels.enum.ts` (Updated)\n*   `src/common/ipc/channels.type.ts` (Updated)\n*   `src/backend/services/file-operation.service.ts` (Updated)\n*   `src/client/views/parallel-copilot.view/on-message.ts` (Updated)\n*   `src/client/components/DiffViewer.tsx` (Updated)\n*   `src/client/views/parallel-copilot.view/view.scss` (Updated)\n*   `src/client/views/parallel-copilot.view/view.tsx` (Updated)\n\n<file path=\"src/Artifacts/A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements.md\">\n```markdown\n# Artifact A34: DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements\n# Date Created: C69\n# Author: AI Model\n# Updated on: C132 (Change \"Swap\" to \"Replace/Accept\" workflow)\n\n- **Key/Value for A0:**\n- **Description:** Outlines the high-level vision and user stories for the Phase 2 multi-tabbed editor panel, designed for comparing and managing multiple AI-generated responses.\n- **Tags:** feature plan, phase 2, co-pilot, multi-tab, ui, ux, requirements, annotation, persistence, diff, parsing, replace\n\n## 1. Vision & Goal\n\nPhase 2 of the Data Curation Environment aims to solve the \"single-threaded\" nature of interacting with AI assistants. The current workflow for developers often involves sending the same prompt to multiple models or conversations, copying the results to separate text files, and then manually integrating them into their project to test. This is inefficient and cumbersome.\n\nThe goal of the **Parallel Co-Pilot Panel** is to create an integrated, **persistent** environment within VS Code specifically for managing, comparing, diffing, and testing multiple AI-generated code responses.\n\n## 2. Core Concepts\n\n1.  **Dedicated View Container:** The panel has its own icon in the Activity Bar, providing a distinct, full-height space for its UI.\n2.  **Stateful & Persistent:** The content of all tabs, context fields, and the current cycle number are automatically saved. The state persists across sessions and when moving the panel to a new window.\n3.  **Global Parse-on-Demand:** A single \"Parse All Responses\" button in the main header controls the view mode for all tabs.\n4.  **Structured, Readable View:** After parsing, each tab's `textarea` is replaced by a static, read-only view that:\n    *   Renders the AI's summary and plan as **formatted Markdown**.\n    *   Uses **collapsible sections** for the main UI areas (Cycle Info, Summary, etc.) to manage screen real estate.\n    *   Displays an **\"Associated Files\" list** with indicators (`✓`/`✗`) showing if the files exist in the workspace.\n    *   Displays individual, **syntax-highlighted** code blocks for each file.\n5.  **Live Testing via \"Replace\":** The core innovation is a \"replace\" feature. The user can, with a single click, overwrite the content of workspace files with the AI-generated versions from a response. This provides an immediate, low-friction way to test a given AI response.\n6.  **Integrated Diffing:** Users can click on a file in the \"Associated Files\" list to see an immediate diff view comparing the AI's suggestion against the current workspace file.\n7.  **Cycle Navigator:** A UI to navigate back and forth through the history of development cycles, loading the corresponding AI responses for each cycle.\n8.  **Metadata Display:** Each response tab will display key metadata, such as token counts and similarity scores, to help the user quickly evaluate the AI's output.\n\n## 3. User Stories\n\n| ID | User Story | Acceptance Criteria |\n|---|---|---|\n| P2-US-01 | **Manage Multiple Responses** | As a developer, I want a dedicated panel with multiple tabs where I can place different AI-generated code responses, so I can keep them organized. | - A new icon in the Activity Bar opens the Parallel Co-Pilot panel. <br> - The panel contains a slider or input to select the number of visible tabs. <br> - Each tab initially contains a large text input area. |\n| P2-US-02 | **Parse All Responses** | As a developer, after pasting responses into multiple tabs, I want to click a single button to parse all of them into a structured view, so I can easily review them without repetitive clicking. | - A global \"Parse All Responses\" button exists in the panel's header. <br> - Clicking it processes the raw text in every tab. <br> - Each tab's UI transforms to show distinct sections for summary, action plan, and file blocks. <br> - A corresponding \"Un-Parse All\" button reverts all tabs to their raw text view. |\n| P2-US-03 | **View Formatted Text** | As a developer, I want the AI's summary and plan to be rendered as formatted Markdown, so I can easily read lists, bolded text, and other formatting. | - The summary and course of action sections correctly render Markdown syntax. |\n| P2-US-04 | **Manage UI Space** | As a developer, I want to be able to collapse the main sections of the UI, so I can focus on the code blocks without excessive scrolling. | - The Cycle Info, Summary, Course of Action, and Associated Files sections have collapsible headers. |\n| P2-US-05 | **Verify Response Validity** | As a developer, I want to see a list of all files an AI response intends to modify, with a clear indicator of whether those files exist in my project, so I can immediately spot hallucinations or new file suggestions. | - After parsing, a list of \"Associated Files\" is displayed. <br> - A checkmark (`✓`) appears next to files that exist in the workspace. <br> - An 'x' (`✗`) appears next to files that do not exist. |\n| P2-US-06 | **Persistent State** | As a developer, I want all the text I've entered into the panel to be saved automatically, so I don't lose my work if I close the panel, move it, or restart VS Code. | - All raw text content is saved to a history file (`.vscode/dce_history.json`). <br> - When the panel is reopened, it loads the state from the most recent cycle. |\n| P2-US-07 | **Review Changes with Diff** | As a developer, I want to click on any file in the \"Associated Files\" list to see a diff, so I can review the exact changes before testing. | - Clicking a file path in the list opens a diff view comparing the workspace version with the AI's version. |\n| P2-US-08 | **Navigate Cycle History** | As a developer, I want to navigate backward and forward through my project's development cycles, so I can review past AI suggestions. | - UI controls exist to move between cycles. <br> - Navigating to a past cycle loads its saved raw responses into the panel. |\n| P2-US-09 | **Replace Workspace Files** | As a developer, I want to select a response and then click a button to replace all its associated files in my workspace with the AI-generated versions, so I can quickly test a complete solution. | - A mechanism exists to select an entire response for replacement (e.g., a checkbox in the header). <br> - A \"Replace selected files in workspace\" button triggers the operation. <br> - The extension overwrites the content of the target files with the content from the AI response. |\n```\n</file>\n<file path=\"src/Artifacts/A35. DCE - Phase 2 - UI Mockups and Flow.md\">\n```markdown\n# Artifact A35: DCE - Phase 2 - UI Mockups and Flow\n# Date Created: C69\n# Author: AI Model\n# Updated on: C132 (Add \"Replace\" workflow, Location Pane placeholder)\n\n## 1. Overview\n\nThis document describes the user interface (UI) and interaction flow for the Parallel Co-Pilot Panel. The design is centered around a two-stage workflow: **Input**, followed by a global **Parse** that transforms the entire panel into a **Review & Act** mode.\n\n## 2. UI Mockup (Textual Description)\n\n### 2.1. Main Header & Cycle Section\n(No change from C131)\n\n### 2.2. Response Tabs\n(No change from C131)\n\n### 2.3. Parsed View (Non-Diff)\n\nThe parsed view uses a **resizable two-pane layout**. The left pane provides summary information and navigation, with each section being collapsible.\n\n```\n|-------------------------------------------------------------------------------------------------|\n| [ Resp 1 (active) | 10 Files | 8.2K Tokens ] [ Resp 2 ] [ ... ]                                |\n|-------------------------------------------------------------------------------------------------|\n| [ Left Pane ]<--->[ Right Pane (Code Viewer) ]                                                 |\n| |-------------||------------------------------------------------------------------------------| |\n| | [v] ASSOCIATED FILES (Clickable)  | | [ ] Select this Response  [ Replace selected files... ]            | |\n| | |-------------------------------| | [ File: src/.../view.tsx ] [ View Diff (Under Construction) ]    | |\n| | | [✓] src/.../view.tsx (selected)| | +------------------------------------------------------------------+ | |\n| | | [✗] src/.../new-file.ts [Create]| | | [ Read-only editor with line numbers and syntax highlighting ] | | |\n| |                                   | | +------------------------------------------------------------------+ | |\n| | [v] THOUGHTS / RESPONSE           | |                                                                    | |\n| | | Rendered Markdown...            | |                                                                    | |\n| | [v] COURSE OF ACTION              | |                                                                    | |\n| | | Rendered Markdown...            | |                                                                    | |\n+-------------------------------------------------------------------------------------------------+\n```\n*   **Replace Workflow (C132):** A new header bar appears above the file content. It contains a checkbox to select all files in the response and a button to trigger the replacement of those files in the workspace.\n*   **Diff Button (C132):** The \"View Diff\" button is now marked as \"Under Construction\" to signal a pause in its development.\n\n### 2.4. Diff View\n\nWhen the user enters diff mode.\n\n```\n|-------------------------------------------------------------------------------------------------|\n| [ Left Pane ]<--->[ Right Pane (Diff Viewer) ]                                                 |\n| |-------------||------------------------------------------------------------------------------| |\n| | ...         | | [ Location Pane (Under Construction) ]                                       | |\n| |             | | +--------------------------------------------------------------------------+ | |\n| | [v] ASSOCIATED FILES | | | [ Side-by-Side Diff Panes ]                                        | | |\n| | ...         | | | [ Character-level Detail Panes Below ]                                   | | |\n| | [ Back to Response ] | | +--------------------------------------------------------------------------+ | |\n+-------------------------------------------------------------------------------------------------+\n```\n*   **Location Pane (C132):** A placeholder for the new \"Location Pane\" is added above the main diff viewer.\n*   **Back Button (C132):** A button is available to exit the diff view and return to the standard parsed view.\n\n## 3. User Interaction Flow\n\n1.  **Paste & Parse:** User pastes responses into tabs and clicks \"Parse All\".\n2.  **Select Files for Replacement:**\n    *   The user reviews a response.\n    *   To accept all changes, they check the \"Select this Response\" box.\n    *   To fine-tune, they can un-check individual files in the \"Associated Files\" list.\n3.  **Execute Replacement:** The user clicks \"Replace selected files...\". The extension overwrites the content of the selected workspace files with the content from the AI response.\n4.  **View Diff (Future):** User clicks \"View Diff\". The view transitions to the diff layout to compare the response file with the workspace file.\n```\n</file>\n<file path=\"src/Artifacts/A49. DCE - Phase 2 - File Association & Diffing Plan.md\">\n```markdown\n# Artifact A49: DCE - Phase 2 - File Association & Diffing Plan\n# Date Created: C82\n# Author: AI Model\n# Updated on: C132 (Update terminology from \"Swap\" to \"Replace/Accept\")\n\n- **Key/Value for A0:**\n- **Description:** Plans the UI and backend logic to visually link file blocks in an AI response to workspace files and sets the stage for an integrated diff tool.\n- **Tags:** feature plan, phase 2, ui, ux, diff, file association, replace, accept\n\n## 1. Overview & Goal\n\nTo make the \"Replace\" feature trustworthy and intuitive, users need a clear visual confirmation of which local file an AI-generated code block is intended to replace. This feature introduces a \"file association\" mechanism that parses AI responses, verifies the existence of the mentioned files, and displays this status to the user.\n\n**Update (C102):** Development on this feature is temporarily paused. The core `onClick` event handler for the \"Associated Files\" list is non-functional due to a persistent, unidentified bug. All efforts are now redirected to the **A/B/C Testing Strategy** (see A51) to resolve this foundational issue before re-introducing the complexity of diffing or single-file viewing.\n\n## 2. User Stories\n\n| ID | User Story | Acceptance Criteria |\n|---|---|---|\n| P2-ASSOC-01 | **See Affected Files** | As a developer, when I parse an AI response, I want the extension to automatically show me a list of all the file paths it intends to modify, so I can understand the scope of the proposed changes. | - After parsing, a collapsible \"Associated Files\" section appears in the tab's UI. <br> - This section displays a list of all file paths found in the response. |\n| P2-ASSOC-02 | **Verify File Existence** | As a developer, for each file listed, I want to see a visual indicator of whether that file already exists in my workspace, so I can spot potential errors or new files proposed by the AI. | - Next to each listed file path, an icon is displayed. <br> - A green checkmark (`✓`) indicates the file exists at that path. <br> - A red cross (`✗`) indicates the file does not exist. |\n| P2-ASSOC-03 | **Preview AI Code (Stage 1)** | As a developer, I want to click on an existing file in the \"Associated Files\" list to immediately see a syntax-highlighted view of the AI's proposed code, so I can review the changes. | - Clicking a file with a `✓` in the list opens a single-pane view in the right-hand panel. <br> - This view displays only the AI's proposed code, with full syntax highlighting. <br> - The view automatically loads with the *first valid file* upon parsing. |\n| P2-ASSOC-04 | **Preview Changes with Diff (Stage 2)** | As a developer, after Stage 1 is complete, I want the view to be enhanced to show a side-by-side comparison of the original file and the AI's proposed changes, so I can review the exact changes before replacing. | - The single-pane view is replaced with a two-pane diff component. <br> - The diff view clearly shows added, removed, and common lines. |\n\n## 3. Technical Implementation Plan (Paused)\n\n1.  **Frontend - Parsing (`response-parser.ts`):**\n    *   **Status:** **Complete.**\n\n2.  **Backend - Verification & Highlighting (`fs.service.ts`):**\n    *   **Status:** **Complete.** The `handleFileExistenceRequest` and `handleSyntaxHighlightRequest` handlers are working.\n\n3.  **Frontend - UI & State (`view.tsx`):**\n    *   **Status:** **Blocked.**\n    *   **Root Cause:** The `onClick` handler on the `<li>` elements in the \"Associated Files\" list is not firing. The root cause is unknown and has resisted multiple debugging attempts.\n    *   **Next Steps:** Implement the A/B/C Testing Strategy from `A51`. Create multiple, simplified test components to isolate the bug. Once a working click handler is achieved in one of the test panes, its implementation pattern will be used to rebuild this feature.\n```\n</file>\n<file path=\"src/Artifacts/A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md\">\n```markdown\n# Artifact A56: DCE - Phase 2 - Advanced Diff Viewer Plan\n# Date Created: C120\n# Author: AI Model & Curator\n# Updated on: C132 (Add keyboard navigation, four scrollbars, and line numbers for detail pane)\n\n- **Key/Value for A0:**\n- **Description:** Details the plan to enhance the integrated diff viewer with a side-by-side layout, scroll-locking, and WinMerge-like keyboard navigation.\n- **Tags:** feature plan, phase 2, ui, ux, diff, navigation, side-by-side, scroll-lock, keyboard\n\n## 1. Overview & Goal\n\nThe current diff view is functional but lacks key usability features found in mature diff tools like WinMerge. The goal of this plan is to enhance the diff viewer to provide a much clearer and more efficient user experience. This involves several key enhancements:\n1.  **Side-by-Side Main Layout:** Displaying the original and modified files in two parallel, vertical panes.\n2.  **Top-and-Bottom Detail Layout:** Displaying the character-level diff in two panes stacked vertically at the bottom.\n3.  **Scroll-Locking:** Synchronizing the scroll position of the two main panes and the two detail panes, with each pane having its own scrollbar.\n4.  **Keyboard Navigation:** Allowing the user to navigate between differences and accept changes using the keyboard.\n5.  **Line Numbers in Detail Pane:** Providing line context in the character-level diff view.\n\n## 2. User Stories\n\n| ID | User Story | Acceptance Criteria |\n|---|---|---|\n| P2-DIFF-01 | **Side-by-Side Diffs** | As a developer, I want to see a side-by-side view of the original and modified code with a colored background for changed lines, so I can immediately identify changes at a glance. | - The main diff view is split into two vertical panes: \"Original\" on the right, \"AI Response\" on the left. <br> - Lines are colored appropriately for additions and removals. |\n| P2-DIFF-02 | **Navigate Between Diffs with Keyboard** | As a developer reviewing a large file, I want to use the Up and Down arrow keys to quickly jump between changed blocks without using the mouse. | - Pressing `Down Arrow` scrolls the view to the start of the next block of changes and highlights it. <br> - Pressing `Up Arrow` scrolls to the previous block. |\n| P2-DIFF-03 | **Accept Diffs with Keyboard** | As a developer, when a difference is selected, I want to press the `Right Arrow` key to accept the change from the AI response, so I can quickly build my desired file. | - Pressing `Right Arrow` copies the content of the currently selected diff block from the left (response) pane to the right (original) pane in memory. <br> - The diff view updates, and the accepted block is no longer colored as a difference. |\n| P2-DIFF-04 | **Scroll-Locking with Four Scrollbars** | As a developer, when I scroll one of the main diff panes vertically, I want the other main pane to scroll with it, so I can keep the corresponding code aligned, while still having scrollbars on both for clarity. | - All four panes (two main, two detail) are independently scrollable (`overflow: auto`). <br> - The two main diff panes are scroll-locked vertically. <br> - The two bottom detail panes are scroll-locked horizontally. |\n| P2-DIFF-05 | **Line Numbers in Detail Pane** | As a developer, I want to see the relevant line numbers in the character-level detail pane, so I have context for the changes I'm reviewing. | - The bottom detail panes display the line number(s) corresponding to the selected difference block. |\n\n## 3. Technical Implementation Plan\n\n### 3.1. Layout (`DiffViewer.tsx`, `view.scss`)\n-   **Four Scrollbars:** All four pane containers will have `overflow: auto` applied in the CSS to ensure they are all independently scrollable.\n-   **Scroll-Locking:** The existing `onScroll` event handlers will be maintained to programmatically link the `scrollTop` (for main panes) and `scrollLeft` (for detail panes) properties.\n\n### 3.2. Keyboard Navigation (`view.tsx`)\n-   A `useEffect` hook will be added to the main `view.tsx` component that attaches a `keydown` event listener to the `window` whenever `isDiffMode` is true.\n-   **State:** The parent `view.tsx` will manage the `selectedDiffIndex` state and pass it down to `DiffViewer.tsx` as a prop. It will also manage an `inMemoryOriginalContent` state.\n-   **Up/Down Arrow Logic:** The event handler will increment or decrement `selectedDiffIndex`.\n-   **Right Arrow Logic:** The handler will call a new function, `handleAcceptChange`. This function will:\n    1.  Identify the lines to be changed in the `inMemoryOriginalContent` based on the current diff.\n    2.  Replace those lines with the corresponding lines from the `modified.content`.\n    3.  Update the `inMemoryOriginalContent` state.\n    4.  The `DiffViewer` will receive the new content via props and re-render, showing the change as accepted.\n\n### 3.3. Line Numbers in Detail Pane (`DiffViewer.tsx`)\n-   The `pairedLines` data structure contains the line numbers for each side.\n-   When a diff block is selected, the component will find the starting line number for the original and modified sides within that block.\n-   These line numbers will be rendered in the header or alongside the content of the bottom detail panes.\n```\n</file>\n<file path=\"src/common/ipc/channels.enum.ts\">\n```typescript\nexport enum ClientToServerChannel {\n    RequestInitialData = \"clientToServer.requestInitialData\",\n    RequestFlattenContext = \"clientToServer.requestFlattenContext\",\n    RequestWorkspaceFiles = \"clientToServer.requestWorkspaceFiles\",\n    LogMessage = \"clientToServer.logMessage\",\n\n    // File Operations\n    RequestNewFile = \"clientToServer.requestNewFile\",\n    RequestNewFolder = \"clientToServer.requestNewFolder\",\n    RequestFileRename = \"clientToServer.requestFileRename\",\n    RequestFileDelete = \"clientToServer.requestFileDelete\",\n    RequestBatchFileDelete = \"clientToServer.requestBatchFileDelete\",\n    RequestRevealInExplorer = \"clientToServer.requestRevealInExplorer\",\n    RequestCopyPath = \"clientToServer.requestCopyPath\",\n    RequestOpenFile = \"clientToServer.requestOpenFile\",\n    RequestMoveFile = \"clientToServer.requestMoveFile\",\n    RequestCopyFile = \"clientToServer.requestCopyFile\",\n    RequestUndo = \"clientToServer.requestUndo\",\n    RequestRedo = \"clientToServer.requestRedo\",\n    RequestAddFileFromBuffer = \"clientToServer.requestAddFileFromBuffer\",\n    RequestCopyFileFromUri = \"clientToServer.requestCopyFileFromUri\",\n    RequestFileContent = \"clientToServer.requestFileContent\",\n    RequestCreateFile = \"clientToServer.requestCreateFile\",\n    RequestReplaceFiles = \"clientToServer.requestReplaceFiles\", // New\n\n    // Special File Handling\n    RequestPdfToText = \"clientToServer.requestPdfToText\",\n    RequestExcelToText = \"clientToServer.requestExcelToText\",\n    RequestWordToText = \"clientToServer.requestWordToText\",\n\n    // Selection Persistence\n    SaveCurrentSelection = \"clientToServer.saveCurrentSelection\",\n    RequestLastSelection = \"clientToServer.requestLastSelection\",\n    SaveAutoAddState = \"clientToServer.saveAutoAddState\",\n\n    // VS Code Command Proxy\n    VSCodeCommand = \"clientToServer.vscodeCommand\",\n\n    // Phase 2: PCPP\n    RequestCreatePromptFile = \"clientToServer.requestCreatePromptFile\",\n    RequestFileExistence = \"clientToServer.requestFileExistence\",\n    RequestSyntaxHighlight = \"clientToServer.requestSyntaxHighlight\",\n    RequestLatestCycleData = \"clientToServer.requestLatestCycleData\",\n    RequestCycleData = \"clientToServer.requestCycleData\",\n    SaveCycleData = \"clientToServer.saveCycleData\",\n    RequestDeleteCycle = \"clientToServer.requestDeleteCycle\",\n    RequestResetHistory = \"clientToServer.requestResetHistory\",\n}\n\nexport enum ServerToClientChannel {\n    SendWorkspaceFiles = \"serverToClient.sendWorkspaceFiles\",\n    SendWorkspaceTrustState = \"serverToClient.sendWorkspaceTrustState\",\n    ApplySelectionSet = \"serverToClient.applySelectionSet\",\n    SendSelectionSets = \"serverToClient.sendSelectionSets\",\n    ForceRefresh = \"serverToClient.forceRefresh\",\n    SetActiveFile = \"serverToClient.setActiveFile\",\n    FocusFile = \"serverToClient.focusFile\",\n    SendAutoAddState = \"serverToClient.sendAutoAddState\",\n    UpdateProblemCounts = \"serverToClient.updateProblemCounts\",\n    UpdateNodeStats = \"serverToClient.updateNodeStats\",\n    SendFileContent = \"serverToClient.sendFileContent\",\n    \n    // Phase 2: PCPP\n    SendFileExistence = \"serverToClient.sendFileExistence\",\n    SendSyntaxHighlight = \"serverToClient.sendSyntaxHighlight\",\n    SendLatestCycleData = \"serverToClient.sendLatestCycleData\",\n    SendCycleData = \"serverToClient.sendCycleData\",\n}\n```\n</file>\n<file path=\"src/common/ipc/channels.type.ts\">\n```typescript\nimport { FileNode } from \"@/common/types/file-node\";\nimport { ClientToServerChannel, ServerToClientChannel } from \"./channels.enum\";\nimport { PcppCycle } from \"@/common/types/pcpp.types\";\n\nexport type SelectionSet = { [name: string]: string[] };\nexport type ProblemCountsMap = { [path: string]: { error: number; warning: number; } };\n\nexport type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel> =\n    T extends ClientToServerChannel.RequestInitialData ? {} :\n    T extends ClientToServerChannel.RequestFlattenContext ? { selectedPaths: string[] } :\n    T extends ClientToServerChannel.RequestWorkspaceFiles ? { force?: boolean } :\n    T extends ClientToServerChannel.LogMessage ? { level: 'info' | 'warn' | 'error', message: string } :\n    T extends ClientToServerChannel.RequestNewFile ? { parentDirectory: string } :\n    T extends ClientToServerChannel.RequestNewFolder ? { parentDirectory: string } :\n    T extends ClientToServerChannel.RequestFileRename ? { oldPath: string, newName: string } :\n    T extends ClientToServerChannel.RequestFileDelete ? { path: string } :\n    T extends ClientToServerChannel.RequestBatchFileDelete ? { paths: string[] } :\n    T extends ClientToServerChannel.RequestRevealInExplorer ? { path: string } :\n    T extends ClientToServerChannel.RequestCopyPath ? { path: string, relative: boolean } :\n    T extends ClientToServerChannel.RequestOpenFile ? { path: string } :\n    T extends ClientToServerChannel.RequestFileContent ? { path: string } :\n    T extends ClientToServerChannel.RequestMoveFile ? { oldPath: string, newPath: string } :\n    T extends ClientToServerChannel.RequestCopyFile ? { sourcePath: string, destinationDir: string } :\n    T extends ClientToServerChannel.RequestUndo ? {} :\n    T extends ClientToServerChannel.RequestRedo ? {} :\n    T extends ClientToServerChannel.RequestAddFileFromBuffer ? { targetPath: string, data: Uint8Array } :\n    T extends ClientToServerChannel.RequestCopyFileFromUri ? { sourceUri: string, targetDir: string } :\n    T extends ClientToServerChannel.RequestCreateFile ? { filePath: string } :\n    T extends ClientToServerChannel.RequestReplaceFiles ? { filesToReplace: { [filePath: string]: string } } :\n    T extends ClientToServerChannel.RequestPdfToText ? { path: string } :\n    T extends ClientToServerChannel.RequestExcelToText ? { path: string } :\n    T extends ClientToServerChannel.RequestWordToText ? { path: string } :\n    T extends ClientToServerChannel.SaveCurrentSelection ? { paths: string[] } :\n    T extends ClientToServerChannel.RequestLastSelection ? {} :\n    T extends ClientToServerChannel.SaveAutoAddState ? { enabled: boolean } :\n    T extends ClientToServerChannel.VSCodeCommand ? { command: string, args?: any[] } :\n    T extends ClientToServerChannel.RequestCreatePromptFile ? { cycleTitle: string; currentCycle: number } :\n    T extends ClientToServerChannel.RequestFileExistence ? { paths: string[] } :\n    T extends ClientToServerChannel.RequestSyntaxHighlight ? { code: string; lang: string, id: string } :\n    T extends ClientToServerChannel.RequestLatestCycleData ? {} :\n    T extends ClientToServerChannel.RequestCycleData ? { cycleId: number } :\n    T extends ClientToServerChannel.SaveCycleData ? { cycleData: PcppCycle } :\n    T extends ClientToServerChannel.RequestDeleteCycle ? { cycleId: number } :\n    T extends ClientToServerChannel.RequestResetHistory ? {} :\n    \n    T extends ServerToClientChannel.SendWorkspaceFiles ? { files: FileNode[] } :\n    T extends ServerToClientChannel.SendWorkspaceTrustState ? { isTrusted: boolean } :\n    T extends ServerToClientChannel.ApplySelectionSet ? { paths: string[] } :\n    T extends ServerToClientChannel.SendSelectionSets ? { sets: SelectionSet } :\n    T extends ServerToClientChannel.ForceRefresh ? { reason?: 'fileOp' | 'manual' | 'history' } :\n    T extends ServerToClientChannel.SetActiveFile ? { path: string } :\n    T extends ServerToClientChannel.FocusFile ? { path: string } :\n    T extends ServerToClientChannel.SendAutoAddState ? { enabled: boolean } :\n    T extends ServerToClientChannel.UpdateProblemCounts ? { problemMap: ProblemCountsMap } :\n    T extends ServerToClientChannel.UpdateNodeStats ? { path: string, tokenCount: number, error?: string } :\n    T extends ServerToClientChannel.SendFileContent ? { path: string, content: string | null } :\n    T extends ServerToClientChannel.SendFileExistence ? { existenceMap: { [path: string]: boolean } } :\n    T extends ServerToClientChannel.SendSyntaxHighlight ? { highlightedHtml: string, id: string } :\n    T extends ServerToClientChannel.SendLatestCycleData ? { cycleData: PcppCycle } :\n    T extends ServerToClientChannel.SendCycleData ? { cycleData: PcppCycle | null } :\n    never;\n```\n</file>\n<file path=\"src/backend/services/file-operation.service.ts\">\n```typescript\n// src/backend/services/file-operation.service.ts\nimport * as vscode from \"vscode\";\nimport * as path from \"path\";\nimport { ServerPostMessageManager } from \"@/common/ipc/server-ipc\";\nimport { ServerToClientChannel } from \"@/common/ipc/channels.enum\";\nimport { Services } from \"./services\";\nimport { Action, MoveActionPayload } from \"./action.service\";\n\nconst normalizePath = (p: string) => p.replace(/\\\\/g, '/');\n\nexport class FileOperationService {\n    private filesToIgnoreForAutoAdd: Set<string> = new Set();\n\n    public async handleFileContentRequest(filePath: string, serverIpc: ServerPostMessageManager) {\n        Services.loggerService.log(`handleFileContentRequest initiated for: ${filePath}`);\n        try {\n            const workspaceFolders = vscode.workspace.workspaceFolders;\n            if (!workspaceFolders?.[0]) {\n                throw new Error(\"No workspace folder open.\");\n            }\n            const absolutePath = path.resolve(workspaceFolders[0].uri.fsPath, filePath);\n            const uri = vscode.Uri.file(absolutePath);\n            const contentBuffer = await vscode.workspace.fs.readFile(uri);\n            const content = Buffer.from(contentBuffer).toString('utf-8');\n            Services.loggerService.log(`Successfully read content for: ${filePath}. Sending to client.`);\n            serverIpc.sendToClient(ServerToClientChannel.SendFileContent, { path: filePath, content });\n        } catch (error) {\n            Services.loggerService.error(`Failed to read file content for ${filePath}: ${error}`);\n            serverIpc.sendToClient(ServerToClientChannel.SendFileContent, { path: filePath, content: `// Error: Could not read file content for ${filePath}. It may not exist in the workspace.` });\n        }\n    }\n\n    public async handleFileExistenceRequest(paths: string[], serverIpc: ServerPostMessageManager) {\n        Services.loggerService.log(`[File Existence] Received request to check paths: ${JSON.stringify(paths)}`);\n        const workspaceFolders = vscode.workspace.workspaceFolders;\n        if (!workspaceFolders || workspaceFolders.length === 0) {\n            Services.loggerService.error(\"[File Existence] Cannot check for files, no workspace folder is open.\");\n            serverIpc.sendToClient(ServerToClientChannel.SendFileExistence, { existenceMap: {} });\n            return;\n        }\n        const rootPath = workspaceFolders[0].uri.fsPath;\n    \n        const existenceMap: { [path: string]: boolean } = {};\n        const checks = paths.map(async (p_raw) => {\n            const p = p_raw.trim().replace(/^[`\"']|[`\"']$/g, '');\n            if (!p) return;\n    \n            let absolutePath = path.resolve(rootPath, p);\n            let normalizedPath = normalizePath(absolutePath);\n    \n            try {\n                await vscode.workspace.fs.stat(vscode.Uri.file(normalizedPath));\n                existenceMap[p_raw] = true;\n            } catch {\n                if (/^A\\d+/.test(p)) {\n                    const artifactPath = path.resolve(rootPath, 'src/Artifacts', p);\n                    const normalizedArtifactPath = normalizePath(artifactPath);\n                    try {\n                        await vscode.workspace.fs.stat(vscode.Uri.file(normalizedArtifactPath));\n                        existenceMap[p_raw] = true;\n                        return;\n                    } catch {}\n                }\n                existenceMap[p_raw] = false;\n            }\n        });\n        await Promise.all(checks);\n        serverIpc.sendToClient(ServerToClientChannel.SendFileExistence, { existenceMap });\n    }\n\n    private async _findAvailableCopyName(destinationPath: string): Promise<string> {\n        try {\n            await vscode.workspace.fs.stat(vscode.Uri.file(destinationPath));\n        } catch (error) {\n            return destinationPath;\n        }\n    \n        const dir = path.dirname(destinationPath);\n        const ext = path.extname(destinationPath);\n        const baseName = path.basename(destinationPath, ext);\n    \n        let copyNum = 1;\n        let nextPath = path.join(dir, `${baseName}-copy${ext}`);\n        \n        while (true) {\n            try {\n                await vscode.workspace.fs.stat(vscode.Uri.file(nextPath));\n                copyNum++;\n                nextPath = path.join(dir, `${baseName}-copy-${copyNum}${ext}`);\n            } catch (error) {\n                return nextPath;\n            }\n        }\n    }\n\n    public async handleCopyFileRequest(sourcePath: string, destinationDir: string) {\n        try {\n            const sourceName = path.basename(sourcePath);\n            const initialDestinationPath = path.join(destinationDir, sourceName);\n            const finalDestinationPath = await this._findAvailableCopyName(initialDestinationPath);\n            const sourceUri = vscode.Uri.file(sourcePath);\n            const destinationUri = vscode.Uri.file(finalDestinationPath);\n\n            await vscode.workspace.fs.copy(sourceUri, destinationUri, { overwrite: false });\n        } catch (error: any) {\n            vscode.window.showErrorMessage(`Failed to copy file: ${error.message}`);\n        }\n    }\n\n    public async handleCopyFileFromUri(sourceUriString: string, targetDir: string) {\n        try {\n            const sourceUri = vscode.Uri.parse(sourceUriString);\n            const fileName = path.basename(sourceUri.fsPath);\n            const targetUri = vscode.Uri.file(path.join(targetDir, fileName));\n            await vscode.workspace.fs.copy(sourceUri, targetUri);\n        } catch (error: any) {\n            vscode.window.showErrorMessage(`Failed to copy file from URI: ${error.message}`);\n        }\n    }\n\n    public async handleAddFileFromBuffer(targetPath: string, data: Uint8Array) {\n        try {\n            await vscode.workspace.fs.writeFile(vscode.Uri.file(targetPath), data);\n        } catch (error: any) {\n            vscode.window.showErrorMessage(`Failed to add file from buffer: ${error.message}`);\n        }\n    }\n\n    public async handleOpenFileRequest(filePath: string) {\n        try {\n            await vscode.commands.executeCommand('vscode.open', vscode.Uri.file(filePath));\n        } catch (error: any) {\n            vscode.window.showErrorMessage(`Failed to open file ${filePath}: ${error.message}`);\n        }\n    }\n\n    public async handleNewFileRequest(parentDirectory: string) {\n        const newFileName = await vscode.window.showInputBox({ prompt: \"Enter the name of the new file\", value: \"new-file.ts\" });\n        if (newFileName) {\n            try {\n                await vscode.workspace.fs.writeFile(vscode.Uri.file(path.join(parentDirectory, newFileName)), new Uint8Array());\n            } catch (error: any) {\n                vscode.window.showErrorMessage(`Failed to create file: ${error.message}`);\n            }\n        }\n    }\n    \n    public async handleCreateFileRequest(filePath: string) {\n        Services.loggerService.log(`Received request to create file: ${filePath}`);\n        try {\n            const workspaceFolders = vscode.workspace.workspaceFolders;\n            if (!workspaceFolders?.[0]) throw new Error(\"No workspace folder open.\");\n            const absolutePath = path.resolve(workspaceFolders[0].uri.fsPath, filePath);\n            await vscode.workspace.fs.writeFile(vscode.Uri.file(absolutePath), new Uint8Array());\n            Services.loggerService.log(`Successfully created file: ${filePath}`);\n        } catch (error: any) {\n            vscode.window.showErrorMessage(`Failed to create file: ${error.message}`);\n            Services.loggerService.error(`Failed to create file ${filePath}: ${error.message}`);\n        }\n    }\n\n    public async handleNewFolderRequest(parentDirectory: string) {\n        const newFolderName = await vscode.window.showInputBox({ prompt: \"Enter the name of the new folder\", value: \"new-folder\" });\n        if (newFolderName) {\n            try {\n                await vscode.workspace.fs.createDirectory(vscode.Uri.file(path.join(parentDirectory, newFolderName)));\n            } catch (error: any) {\n                vscode.window.showErrorMessage(`Failed to create folder: ${error.message}`);\n            }\n        }\n    }\n\n    public async handleFileRenameRequest(oldPath: string, newName: string) {\n        try {\n            await vscode.workspace.fs.rename(vscode.Uri.file(oldPath), vscode.Uri.file(path.join(path.dirname(oldPath), newName)));\n        } catch (error: any) {\n            vscode.window.showErrorMessage(`Failed to rename: ${error.message}`);\n        }\n    }\n\n    public async handleMoveFileRequest(oldPath: string, newPath: string) {\n        try {\n            const lastSelection = await Services.selectionService.getLastSelection();\n            if (!lastSelection.some(p => p.startsWith(oldPath))) {\n                this.filesToIgnoreForAutoAdd.add(newPath);\n                setTimeout(() => this.filesToIgnoreForAutoAdd.delete(newPath), 2000);\n            }\n\n            await vscode.workspace.fs.rename(vscode.Uri.file(oldPath), vscode.Uri.file(newPath));\n            await Services.selectionService.updatePathInSelections(oldPath, newPath);\n            Services.actionService.push({ type: 'move', payload: { fromPath: oldPath, toPath: newPath } as MoveActionPayload });\n        } catch (error: any) {\n            vscode.window.showErrorMessage(`Failed to move file: ${error.message}`);\n        }\n    }\n\n    public async handleFileDeleteRequest(filePath: string) {\n        const confirmation = await vscode.window.showWarningMessage(`Are you sure you want to delete ${path.basename(filePath)}?`, { modal: true }, 'Delete');\n        if (confirmation === 'Delete') {\n            try {\n                await vscode.workspace.fs.delete(vscode.Uri.file(filePath), { recursive: true, useTrash: true });\n            } catch (error: any) {\n                vscode.window.showErrorMessage(`Failed to delete: ${error.message}`);\n            }\n        }\n    }\n\n    public async handleBatchFileDeleteRequest(paths: string[]) {\n        if (paths.length === 0) return;\n        const confirmation = await vscode.window.showWarningMessage(`Are you sure you want to delete ${paths.length} item(s)?`, { modal: true }, 'Delete');\n        if (confirmation === 'Delete') {\n            try {\n                await Promise.all(paths.map(p => vscode.workspace.fs.delete(vscode.Uri.file(p), { recursive: true, useTrash: true })));\n            } catch (error: any) {\n                vscode.window.showErrorMessage(`Failed to delete items: ${error.message}`);\n            }\n        }\n    }\n\n    public handleRevealInExplorerRequest(filePath: string) {\n        vscode.commands.executeCommand('revealInExplorer', vscode.Uri.file(filePath));\n    }\n\n    public handleCopyPathRequest(filePath: string, relative: boolean) {\n        const workspaceFolders = vscode.workspace.workspaceFolders;\n        let pathToCopy = filePath;\n        if (relative && workspaceFolders?.[0]) {\n            pathToCopy = path.relative(workspaceFolders[0].uri.fsPath, filePath);\n        }\n        vscode.env.clipboard.writeText(pathToCopy);\n        vscode.window.showInformationMessage(`Copied to clipboard: ${pathToCopy}`);\n    }\n\n    public async handleReplaceFilesRequest(filesToReplace: { [filePath: string]: string }) {\n        Services.loggerService.log(`Received request to replace ${Object.keys(filesToReplace).length} files.`);\n        const workspaceFolders = vscode.workspace.workspaceFolders;\n        if (!workspaceFolders?.[0]) {\n            vscode.window.showErrorMessage(\"Cannot replace files: No workspace folder open.\");\n            return;\n        }\n        const rootPath = workspaceFolders[0].uri.fsPath;\n\n        try {\n            for (const [relativePath, newContent] of Object.entries(filesToReplace)) {\n                const absolutePath = path.resolve(rootPath, relativePath);\n                const fileUri = vscode.Uri.file(absolutePath);\n                const contentBuffer = Buffer.from(newContent, 'utf-8');\n                await vscode.workspace.fs.writeFile(fileUri, contentBuffer);\n                Services.loggerService.log(`Replaced content of: ${relativePath}`);\n            }\n            vscode.window.showInformationMessage(`Successfully updated ${Object.keys(filesToReplace).length} files.`);\n        } catch (error: any) {\n            vscode.window.showErrorMessage(`Failed to replace files: ${error.message}`);\n            Services.loggerService.error(`Failed during file replacement: ${error.message}`);\n        }\n    }\n\n    public addFileToIgnoreForAutoAdd(filePath: string) {\n        this.filesToIgnoreForAutoAdd.add(filePath);\n    }\n\n    public hasFileToIgnoreForAutoAdd(filePath: string): boolean {\n        return this.filesToIgnoreForAutoAdd.has(filePath);\n    }\n\n    public removeFileToIgnoreForAutoAdd(filePath: string) {\n        this.filesToIgnoreForAutoAdd.delete(filePath);\n    }\n}```\n</file>\n<file path=\"src/client/views/parallel-copilot.view/on-message.ts\">\n```typescript\n// Updated on: C132 (Add replace files handler)\nimport { ServerPostMessageManager } from \"@/common/ipc/server-ipc\";\nimport { Services } from \"@/backend/services/services\";\nimport { ClientToServerChannel, ServerToClientChannel } from \"@/common/ipc/channels.enum\";\n\nexport function onMessage(serverIpc: ServerPostMessageManager) {\n    const { loggerService, promptService, fileOperationService, highlightingService, historyService } = Services;\n    loggerService.log(\"Parallel Co-Pilot view message handler initialized.\");\n\n    serverIpc.onClientMessage(ClientToServerChannel.RequestCreatePromptFile, (data) => {\n        promptService.generatePromptFile(data.cycleTitle, data.currentCycle);\n    });\n\n    serverIpc.onClientMessage(ClientToServerChannel.RequestFileExistence, (data) => {\n        fileOperationService.handleFileExistenceRequest(data.paths, serverIpc);\n    });\n\n    serverIpc.onClientMessage(ClientToServerChannel.RequestSyntaxHighlight, (data) => {\n        highlightingService.handleSyntaxHighlightRequest(data.code, data.lang, data.id, serverIpc);\n    });\n\n    serverIpc.onClientMessage(ClientToServerChannel.RequestLatestCycleData, async () => {\n        const cycleData = await historyService.getLatestCycle();\n        serverIpc.sendToClient(ServerToClientChannel.SendLatestCycleData, { cycleData });\n    });\n\n    serverIpc.onClientMessage(ClientToServerChannel.RequestCycleData, async (data) => {\n        const cycleData = await historyService.getCycleData(data.cycleId);\n        serverIpc.sendToClient(ServerToClientChannel.SendCycleData, { cycleData });\n    });\n\n    serverIpc.onClientMessage(ClientToServerChannel.SaveCycleData, (data) => {\n        historyService.saveCycleData(data.cycleData);\n    });\n    \n    serverIpc.onClientMessage(ClientToServerChannel.RequestFileContent, (data) => {\n        fileOperationService.handleFileContentRequest(data.path, serverIpc);\n    });\n\n    serverIpc.onClientMessage(ClientToServerChannel.RequestDeleteCycle, (data) => {\n        historyService.deleteCycle(data.cycleId);\n    });\n\n    serverIpc.onClientMessage(ClientToServerChannel.RequestResetHistory, () => {\n        historyService.resetHistory();\n    });\n\n    serverIpc.onClientMessage(ClientToServerChannel.RequestCreateFile, (data) => {\n        fileOperationService.handleCreateFileRequest(data.filePath);\n    });\n\n    serverIpc.onClientMessage(ClientToServerChannel.RequestReplaceFiles, (data) => {\n        fileOperationService.handleReplaceFilesRequest(data.filesToReplace);\n    });\n}\n```\n</file>\n<file path=\"src/client/components/DiffViewer.tsx\">\n```typescript\n// Updated on: C132 (Four scrollbars, scroll-lock, line numbers in detail pane)\nimport * as React from 'react';\nimport { diffArrays, diffChars, Change } from 'diff';\nimport { VscArrowUp, VscArrowDown } from 'react-icons/vsc';\n\ninterface DiffLine {\n    type: 'added' | 'removed' | 'common' | 'placeholder';\n    content?: string;\n}\n\ninterface PairedLine {\n    left: DiffLine & { lineNum?: number };\n    right: DiffLine & { lineNum?: number };\n    isDiff: boolean;\n}\n\ninterface DiffBlock {\n    start: number;\n    end: number;\n    leftStartLine: number;\n    rightStartLine: number;\n}\n\nconst DiffViewer: React.FC<{ \n    original: { content: string, path: string }, \n    modified: { content: string, path: string },\n    selectedDiffIndex: number,\n}> = ({ original, modified, selectedDiffIndex }) => {\n    const diffLineRefs = React.useRef<Map<number, HTMLDivElement>>(new Map());\n    const leftPaneRef = React.useRef<HTMLDivElement>(null);\n    const rightPaneRef = React.useRef<HTMLDivElement>(null);\n    const leftDetailRef = React.useRef<HTMLDivElement>(null);\n    const rightDetailRef = React.useRef<HTMLDivElement>(null);\n    const isScrolling = React.useRef<'left' | 'right' | 'none'>('none');\n    const detailIsScrolling = React.useRef<'left' | 'right' | 'none'>('none');\n\n    const { pairedLines, diffBlocks } = React.useMemo(() => {\n        const originalLines = original.content.split('\\n');\n        const modifiedLines = modified.content.split('\\n');\n        const changes = diffArrays(originalLines, modifiedLines);\n        \n        const result: PairedLine[] = [];\n        const diffBlockIndices: DiffBlock[] = [];\n        let leftLineNum = 1;\n        let rightLineNum = 1;\n\n        changes.forEach(change => {\n            if (change.added || change.removed) {\n                const blockStart = result.length;\n                if (change.added) {\n                    change.value.forEach(line => {\n                        result.push({ left: { type: 'placeholder' }, right: { type: 'added', content: line, lineNum: rightLineNum++ }, isDiff: true });\n                    });\n                } else if (change.removed) {\n                    change.value.forEach(line => {\n                        result.push({ left: { type: 'removed', content: line, lineNum: leftLineNum++ }, right: { type: 'placeholder' }, isDiff: true });\n                    });\n                }\n                diffBlockIndices.push({ start: blockStart, end: result.length - 1, leftStartLine: leftLineNum, rightStartLine: rightLineNum });\n            } else {\n                change.value.forEach(line => {\n                    result.push({ left: { type: 'common', content: line, lineNum: leftLineNum++ }, right: { type: 'common', content: line, lineNum: rightLineNum++ }, isDiff: false });\n                });\n            }\n        });\n        return { pairedLines: result, diffBlocks: diffBlockIndices };\n    }, [original.content, modified.content]);\n\n    React.useEffect(() => {\n        if (selectedDiffIndex >= 0 && selectedDiffIndex < diffBlocks.length) {\n            const lineIndex = diffBlocks[selectedDiffIndex].start;\n            diffLineRefs.current.get(lineIndex)?.scrollIntoView({ behavior: 'smooth', block: 'center' });\n        }\n    }, [selectedDiffIndex, diffBlocks]);\n\n    const handleScroll = (scroller: 'left' | 'right') => {\n        if (isScrolling.current !== 'none' && isScrolling.current !== scroller) return;\n        if (!leftPaneRef.current || !rightPaneRef.current) return;\n        \n        isScrolling.current = scroller;\n        if (scroller === 'left') {\n            rightPaneRef.current.scrollTop = leftPaneRef.current.scrollTop;\n        } else {\n            leftPaneRef.current.scrollTop = rightPaneRef.current.scrollTop;\n        }\n        setTimeout(() => { isScrolling.current = 'none'; }, 100);\n    };\n\n    const handleDetailScroll = (scroller: 'left' | 'right') => {\n        if (detailIsScrolling.current !== 'none' && detailIsScrolling.current !== scroller) return;\n        if (!leftDetailRef.current || !rightDetailRef.current) return;\n\n        detailIsScrolling.current = scroller;\n        if (scroller === 'left') {\n            rightDetailRef.current.scrollLeft = leftDetailRef.current.scrollLeft;\n        } else {\n            leftDetailRef.current.scrollLeft = rightDetailRef.current.scrollLeft;\n        }\n         setTimeout(() => { detailIsScrolling.current = 'none'; }, 100);\n    };\n\n    const renderCharDiff = (originalText: string, modifiedText: string) => {\n        const charChanges = diffChars(originalText, modifiedText);\n        const leftSpans: React.ReactNode[] = [];\n        const rightSpans: React.ReactNode[] = [];\n\n        charChanges.forEach((part, index) => {\n            const key = `char-${index}`;\n            const className = part.added ? 'char-added' : part.removed ? 'char-removed' : '';\n            if (part.added) {\n                rightSpans.push(<span key={key} className={className}>{part.value}</span>);\n            } else if (part.removed) {\n                leftSpans.push(<span key={key} className={className}>{part.value}</span>);\n            } else {\n                leftSpans.push(<span key={key}>{part.value}</span>);\n                rightSpans.push(<span key={key}>{part.value}</span>);\n            }\n        });\n        return { left: <>{leftSpans}</>, right: <>{rightSpans}</> };\n    };\n\n    const selectedDiffContent = React.useMemo(() => {\n        if (diffBlocks.length === 0 || selectedDiffIndex < 0 || selectedDiffIndex >= diffBlocks.length) {\n            return { left: [], right: [], leftLine: '', rightLine: '' };\n        }\n        const block = diffBlocks[selectedDiffIndex];\n        const blockLines = pairedLines.slice(block.start, block.end + 1);\n        \n        const originalLines = blockLines.map(l => l.left.content).filter(Boolean) as string[];\n        const modifiedLines = blockLines.map(l => l.right.content).filter(Boolean) as string[];\n\n        return {\n            ...renderCharDiff(originalLines.join('\\n'), modifiedLines.join('\\n')),\n            leftLine: `L: ${block.leftStartLine - originalLines.length}`,\n            rightLine: `L: ${block.rightStartLine - modifiedLines.length}`\n        };\n    }, [selectedDiffIndex, pairedLines, diffBlocks]);\n\n    return (\n        <div className=\"diff-viewer-wrapper\">\n            <div className=\"diff-viewer-main-container\">\n                <div className=\"diff-pane\" onScroll={() => handleScroll('left')} ref={leftPaneRef}>\n                    <div className=\"diff-pane-header\">Response: {modified.path}</div>\n                    <div className=\"diff-pane-content\">\n                        <div className=\"line-numbers\">{pairedLines.map((line, i) => <span key={`L${i}`}>{line.left.lineNum || ' '}</span>)}</div>\n                        <div className=\"diff-lines\">\n                            {pairedLines.map((line, i) => (\n                                <div key={`L${i}`} className={`line ${line.left.type} ${diffBlocks[selectedDiffIndex]?.start <= i && diffBlocks[selectedDiffIndex]?.end >= i ? 'selected-diff' : ''}`} ref={ref => { if (ref) diffLineRefs.current.set(i, ref); }}>\n                                    <pre><code>{line.left.content || ''}</code></pre>\n                                </div>\n                            ))}\n                        </div>\n                    </div>\n                </div>\n                <div className=\"diff-pane\" onScroll={() => handleScroll('right')} ref={rightPaneRef}>\n                     <div className=\"diff-pane-header\">Original: {original.path}</div>\n                     <div className=\"diff-pane-content\">\n                        <div className=\"line-numbers\">{pairedLines.map((line, i) => <span key={`R${i}`}>{line.right.lineNum || ' '}</span>)}</div>\n                        <div className=\"diff-lines\">\n                            {pairedLines.map((line, i) => (\n                                <div key={`R${i}`} className={`line ${line.right.type} ${diffBlocks[selectedDiffIndex]?.start <= i && diffBlocks[selectedDiffIndex]?.end >= i ? 'selected-diff' : ''}`}>\n                                    <pre><code>{line.right.content || ''}</code></pre>\n                                </div>\n                            ))}\n                        </div>\n                    </div>\n                </div>\n            </div>\n            <div className=\"diff-detail-container\">\n                <div className=\"diff-detail-header\">\n                    <span>Difference {diffBlocks.length > 0 ? selectedDiffIndex + 1 : 0} of {diffBlocks.length}</span>\n                </div>\n                <div className=\"diff-detail-panes\">\n                    <div className=\"diff-detail-pane removed\">\n                        <div className=\"line-number-detail\">{selectedDiffContent.leftLine}</div>\n                        <pre ref={leftDetailRef} onScroll={() => handleDetailScroll('left')}><code>{selectedDiffContent.left}</code></pre>\n                    </div>\n                    <div className=\"diff-detail-pane added\">\n                        <div className=\"line-number-detail\">{selectedDiffContent.rightLine}</div>\n                        <pre ref={rightDetailRef} onScroll={() => handleDetailScroll('right')}><code>{selectedDiffContent.right}</code></pre>\n                    </div>\n                </div>\n            </div>\n        </div>\n    );\n};\n\nexport default DiffViewer;\n```</file>\n<file path=\"src/client/views/parallel-copilot.view/view.scss\">\n```scss\n/* Updated on: C132 (Styles for four scrollbars and detail line numbers) */\nbody {\n    padding: 0;\n    font-family: var(--vscode-font-family);\n    font-size: var(--vscode-font-size);\n    color: var(--vscode-editor-foreground);\n    background-color: var(--vscode-editor-background);\n}\n\n.pc-view-container {\n    padding: 8px;\n    display: flex;\n    flex-direction: column;\n    height: 100vh;\n    gap: 8px;\n    box-sizing: border-box;\n}\n\n.collapsible-section {\n    border: 1px solid var(--vscode-panel-border);\n    border-radius: 4px;\n    flex-shrink: 0;\n}\n\n.collapsible-header {\n    background-color: var(--vscode-sideBar-sectionHeaderBackground);\n    padding: 4px 8px;\n    font-size: 11px;\n    text-transform: uppercase;\n    font-weight: bold;\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n    gap: 4px;\n    justify-content: space-between;\n\n    .chevron {\n        transition: transform 0.2s ease-in-out;\n    }\n    .chevron.collapsed {\n        transform: rotate(-90deg);\n    }\n}\n\n.collapsible-content {\n    padding: 8px;\n    display: flex;\n    flex-direction: column;\n    gap: 8px;\n}\n\n.pc-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    flex-shrink: 0;\n    gap: 16px;\n}\n\n.cycle-navigator {\n    display: flex;\n    align-items: center;\n    gap: 8px;\n    width: 100%;\n}\n\n.pc-toolbar {\n    display: flex;\n    align-items: center;\n    gap: 8px;\n}\n\n.cycle-navigator button, .pc-toolbar button, .file-actions button, .exit-diff-button {\n    background: none;\n    border: 1px solid var(--vscode-button-border, transparent);\n    color: var(--vscode-icon-foreground);\n    cursor: pointer;\n    padding: 4px;\n    border-radius: 3px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    gap: 6px;\n\n    &:hover {\n        background-color: var(--vscode-toolbar-hoverBackground);\n    }\n\n    &:disabled {\n        opacity: 0.5;\n        cursor: not-allowed;\n    }\n}\n\n.exit-diff-button {\n    margin-top: 8px;\n    justify-content: center;\n    width: 100%;\n    background-color: var(--vscode-button-secondaryBackground);\n    &:hover {\n        background-color: var(--vscode-button-secondaryHoverBackground);\n    }\n}\n\n\n.cycle-input {\n    width: 50px;\n    background-color: var(--vscode-input-background);\n    color: var(--vscode-input-foreground);\n    border: 1px solid var(--vscode-input-border);\n    text-align: center;\n    border-radius: 2px;\n}\n\n.cycle-title-input {\n    flex-grow: 1;\n    background-color: var(--vscode-input-background);\n    color: var(--vscode-input-foreground);\n    border: 1px solid var(--vscode-input-border);\n    padding: 2px 4px;\n    border-radius: 2px;\n}\n\n.context-inputs {\n    display: flex;\n    flex-direction: column;\n    gap: 8px;\n    flex-shrink: 0;\n}\n\n.tab-count-input {\n    display: flex;\n    align-items: center;\n    gap: 8px;\n    font-size: 12px;\n    \n    input {\n        width: 50px;\n        background-color: var(--vscode-input-background);\n        color: var(--vscode-input-foreground);\n        border: 1px solid var(--vscode-input-border);\n        text-align: center;\n        border-radius: 2px;\n    }\n}\n\n.context-textarea {\n    width: 100%;\n    height: 60px;\n    background-color: var(--vscode-input-background);\n    color: var(--vscode-input-foreground);\n    border: 1px solid var(--vscode-input-border);\n    border-radius: 2px;\n    padding: 4px;\n    font-family: var(--vscode-editor-font-family);\n    font-size: var(--vscode-editor-font-size);\n    resize: vertical;\n}\n\n.tab-bar {\n    display: flex;\n    border-bottom: 1px solid var(--vscode-panel-border);\n    flex-shrink: 0;\n}\n\n.tab {\n    padding: 6px 12px;\n    cursor: pointer;\n    border-bottom: 2px solid transparent;\n    color: var(--vscode-tab-inactiveForeground);\n}\n\n.tab.active {\n    color: var(--vscode-tab-activeForeground);\n    border-bottom-color: var(--vscode-tab-activeBorder);\n}\n\n.tab-content {\n    flex-grow: 1;\n    display: flex;\n    flex-direction: column;\n    min-height: 0;\n    padding-top: 8px;\n}\n\n.tab-pane {\n    display: flex;\n    flex-direction: column;\n    flex-grow: 1;\n    gap: 8px;\n    height: 100%;\n}\n\n.response-textarea {\n    width: 100%;\n    height: 100%;\n    background-color: var(--vscode-input-background);\n    color: var(--vscode-input-foreground);\n    border: 1px solid var(--vscode-input-border);\n    border-radius: 2px;\n    padding: 4px;\n    font-family: var(--vscode-editor-font-family);\n    font-size: var(--vscode-editor-font-size);\n    resize: none;\n     &:focus {\n        outline: 1px solid var(--vscode-focusBorder);\n    }\n}\n\n.parsed-view-grid {\n    display: flex;\n    gap: 0;\n    flex-grow: 1;\n    min-height: 0;\n}\n\n.parsed-view-left {\n    overflow-y: auto;\n    display: flex;\n    flex-direction: column;\n    gap: 8px;\n    min-width: 150px;\n    padding-right: 8px;\n}\n\n.resizer {\n    width: 5px;\n    cursor: col-resize;\n    background-color: var(--vscode-panel-border);\n    flex-shrink: 0;\n    &:hover {\n        background-color: var(--vscode-focusBorder);\n    }\n}\n\n.parsed-view-right {\n    flex-grow: 1;\n    display: flex;\n    flex-direction: column;\n    min-width: 0;\n    padding-left: 8px;\n}\n\n.file-content-viewer-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    padding: 4px 8px;\n    background-color: var(--vscode-editorGroupHeader-tabsBackground);\n    border: 1px solid var(--vscode-panel-border);\n    border-bottom: none;\n    border-top-left-radius: 4px;\n    border-top-right-radius: 4px;\n    font-size: 12px;\n    flex-shrink: 0;\n\n    .file-path {\n        font-weight: bold;\n        white-space: nowrap;\n        overflow: hidden;\n        text-overflow: ellipsis;\n    }\n    .file-actions {\n        display: flex;\n        align-items: center;\n        gap: 8px;\n    }\n}\n\n.response-actions-header {\n    display: flex;\n    align-items: center;\n    gap: 8px;\n    padding: 4px 8px;\n    background-color: var(--vscode-editorGroupHeader-tabsBackground);\n    border: 1px solid var(--vscode-panel-border);\n    border-bottom: none;\n    font-size: 12px;\n    flex-shrink: 0;\n\n    label {\n        display: flex;\n        align-items: center;\n        gap: 4px;\n        cursor: pointer;\n    }\n}\n\n.code-viewer-wrapper {\n    display: flex;\n    flex-grow: 1;\n    min-height: 0;\n    border: 1px solid var(--vscode-panel-border);\n    border-top: none;\n    border-radius: 0 0 4px 4px;\n    background-color: var(--vscode-editor-background);\n    overflow: hidden;\n}\n\n.file-content-viewer {\n    flex: 1;\n    overflow: auto;\n    font-family: var(--vscode-editor-font-family);\n    font-size: var(--vscode-editor-font-size);\n    display: flex;\n    min-width: 0;\n}\n\n.line-numbers {\n    padding: 8px 10px 8px 8px;\n    text-align: right;\n    color: var(--vscode-editorLineNumber-foreground);\n    background-color: var(--vscode-editor-background);\n    user-select: none;\n    border-right: 1px solid var(--vscode-panel-border);\n    \n    span {\n        display: block;\n        line-height: 1.5;\n    }\n}\n\n.code-content {\n    padding: 8px;\n    flex-grow: 1;\n    white-space: pre;\n    \n    code > span {\n        line-height: 1.5;\n    }\n}\n\n.associated-files-list {\n    list-style: none;\n    padding: 0;\n    margin: 0;\n\n    li {\n        display: flex;\n        align-items: center;\n        gap: 8px;\n        padding: 2px 4px;\n        font-size: 12px;\n        border-radius: 3px;\n        cursor: pointer;\n        white-space: nowrap;\n        overflow: hidden;\n        text-overflow: ellipsis;\n\n        &:hover {\n            background-color: var(--vscode-list-hoverBackground);\n        }\n\n        &.selected {\n            background-color: var(--vscode-list-activeSelectionBackground) !important;\n            color: var(--vscode-list-activeSelectionForeground) !important;\n        }\n    }\n\n    .status-icon {\n        flex-shrink: 0;\n    }\n    .status-icon.exists {\n        color: var(--vscode-testing-iconPassed);\n    }\n    .status-icon.not-exists {\n        color: var(--vscode-testing-iconFailed);\n    }\n}\n\n.collapsed-navigator {\n    display: flex;\n    align-items: center;\n    gap: 4px;\n    font-weight: normal;\n    \n    button {\n        padding: 0 4px;\n    }\n    \n    .cycle-display {\n        font-size: 11px;\n        color: var(--vscode-descriptionForeground);\n    }\n}\n\n/* Diff Viewer Styles */\n.diff-viewer-wrapper {\n    display: flex;\n    flex-direction: column;\n    height: 100%;\n    min-height: 0;\n}\n.diff-viewer-main-container {\n    flex-grow: 1;\n    min-height: 0;\n    display: flex;\n    flex-direction: row;\n    border: 1px solid var(--vscode-panel-border);\n    border-radius: 4px;\n}\n\n.diff-pane {\n    flex: 1 1 50%;\n    display: flex;\n    flex-direction: column;\n    min-width: 0;\n    overflow: hidden;\n    &:first-of-type { border-right: 1px solid var(--vscode-panel-border); }\n}\n\n.diff-pane-header {\n    padding: 4px 8px;\n    font-size: 11px;\n    font-weight: bold;\n    background-color: var(--vscode-editorGroupHeader-tabsBackground);\n    border-bottom: 1px solid var(--vscode-panel-border);\n    flex-shrink: 0;\n}\n\n.diff-pane-content {\n    flex-grow: 1;\n    min-height: 0;\n    overflow: auto; /* All panes scroll */\n    display: flex;\n}\n\n.diff-pane .line-numbers {\n    flex-shrink: 0;\n    padding: 8px 4px;\n    line-height: 1.5;\n    background-color: var(--vscode-editorGutter-background);\n    color: var(--vscode-editorLineNumber-foreground);\n    text-align: right;\n    user-select: none;\n    span { display: block; min-height: 1.5em; padding-right: 6px; }\n}\n\n.diff-pane .diff-lines {\n    flex-grow: 1;\n    min-width: 0;\n}\n\n.diff-pane .diff-lines .line {\n    line-height: 1.5;\n    padding-left: 8px;\n    min-height: 1.5em;\n    white-space: pre;\n    &.added { background-color: var(--vscode-diffEditor-insertedTextBackground); }\n    &.removed { background-color: var(--vscode-diffEditor-removedTextBackground); }\n    &.placeholder { background-color: var(--vscode-editor-inactiveSelectionBackground); opacity: 0.5; }\n    \n    &.selected-diff {\n        outline: 1px solid var(--vscode-focusBorder);\n        outline-offset: -1px;\n    }\n\n    pre { margin: 0; padding: 0; }\n}\n\n.diff-detail-container {\n    flex-shrink: 0;\n    border-top: 1px solid var(--vscode-panel-border);\n    display: flex;\n    flex-direction: column;\n}\n\n.diff-detail-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    padding: 2px 8px;\n    background-color: var(--vscode-sideBar-sectionHeaderBackground);\n    font-size: 11px;\n}\n\n.diff-detail-panes {\n    display: flex;\n    flex-direction: column;\n    max-height: 200px;\n    overflow: hidden;\n}\n\n.diff-detail-pane {\n    flex: 1 1 50%;\n    display: flex;\n    align-items: center;\n    white-space: pre;\n    font-family: var(--vscode-editor-font-family);\n    font-size: var(--vscode-editor-font-size);\n    &.removed { background-color: var(--vscode-diffEditor-removedTextBackground); }\n    &.added { background-color: var(--vscode-diffEditor-insertedTextBackground); }\n    &:first-child { border-bottom: 1px solid var(--vscode-panel-border); }\n\n    .line-number-detail {\n        padding: 8px;\n        color: var(--vscode-editorLineNumber-foreground);\n        background-color: var(--vscode-editorGutter-background);\n        flex-shrink: 0;\n    }\n    \n    pre {\n        overflow-x: auto;\n        padding: 8px;\n        flex-grow: 1;\n    }\n\n    .char-added { background-color: var(--vscode-diffEditor-insertedLineBackground); }\n    .char-removed { background-color: var(--vscode-diffEditor-removedLineBackground); }\n}\n```\n</file>\n<file path=\"src/client/views/parallel-copilot.view/view.tsx\">\n```typescript\n\n```\n</file>\n</Previous Cycle 131 Summary of Actions>\n</Cycle 132>\n</M6. Cycles>\n</M7. Flattened Repo>\n</prompt.md>\n"
+        },
+        "3": {
+          "content": ""
+        },
+        "4": {
+          "content": ""
+        }
+      },
+      "isParsedMode": true,
+      "leftPaneWidth": 18.007425742574256,
+      "selectedResponseId": "2"
+    },
+    {
+      "cycleId": 2,
+      "timestamp": "2025-08-25T16:52:48.658Z",
+      "title": "New Cycle",
+      "cycleContext": "test cycle 2 context",
+      "ephemeralContext": "test ephemeral cycle 2",
+      "responses": {
+        "1": {
+          "content": "I have analyzed the detailed feedback from Cycle 133. The key takeaways are a major pivot away from the integrated diff viewer for now, a critical need to fix a state persistence bug that causes user selections to be lost, several UI/UX regressions to address (like missing metadata), and a list of new UI improvements to implement.\n\nMy course of action is to systematically address these points, prioritizing the critical bug fixes and the removal of the now-unwanted diff viewer functionality.\n\n### Course of Action\n\n1.  **Documentation First (Reflecting the Pivot):**\n    *   I will update `A56 (Advanced Diff Viewer Plan)` to mark the feature as \"On Hold,\" codifying the decision to pause its development.\n    *   I will update `A49 (File Association & Diffing Plan)` to remove references to the diff viewer, focusing solely on the \"accept/replace\" workflow.\n    *   I will update `A35 (UI Mockups and Flow)` to remove the diff view mockup and incorporate the new UI requests: a stylized toggle for selecting a response, better-styled \"Accept\" buttons, and visual feedback (green tabs) for a \"ready\" cycle.\n    *   I will create a new entry in `A11 (Regression Case Studies)` to document the root cause and solution for the \"Selected Response State Loss\" bug.\n\n2.  **Remove Diff Viewer Functionality (Items 1-7):**\n    *   **`view.tsx`:** I will remove the \"View Diff\" button from the file actions header. I will also remove the `isDiffMode` state and all related conditional rendering logic. This will simplify the component and resolve all bugs related to the diff viewer's layout and behavior.\n    *   **`DiffViewer.tsx`:** The component will be left in the codebase but will no longer be imported or used by `view.tsx`.\n\n3.  **Fix Critical State Persistence Bug (Item 11):**\n    *   **`pcpp.types.ts` & `history.service.ts`:** The root cause of the lost selection is that this state is not being persisted. I will add a new property, `selectedResponseId: string | null`, to the `PcppCycle` interface.\n    *   **`view.tsx`:** I will add a new state, `selectedResponseForPrompt`, to track which response tab is chosen. The `saveCurrentCycleState` function will be updated to include this new property in the data saved to `dce_history.json`. The UI for selecting a response will now update this state.\n    *   **`prompt.service.ts`:** The prompt generation logic will be updated. It will now read the history, find the data for the previous cycle, identify the `selectedResponseId`, and parse the content from that *specific response* to correctly generate the `<Previous Cycle ...>` block.\n\n4.  **Implement and Fix \"Accept\" Workflow (Items 8 & 9):**\n    *   **IPC:** I will add a `RequestWriteFile` channel for single-file acceptance.\n    *   **`file-operation.service.ts`:** I will implement the backend handler for `RequestWriteFile`, which will take a file path and new content and overwrite the workspace file.\n    *   **`view.tsx`:** I will fix the `onClick` handler for the \"Accept this file\" button to use this new IPC channel. I will also restyle this button and the \"Accept Selected Files\" button to be more thematic and visually consistent with VS Code's UI, removing the plain white appearance.\n\n5.  **Restore Missing Metadata (Item 12):**\n    *   **`view.tsx`:** I will fix the regression where response-level metadata was not being displayed. The logic to calculate the total token count and the number of associated files from `parsedContent` will be re-implemented and displayed prominently near each response tab.\n\n6.  **Implement New UI Feedback (Item 10):**\n    *   **`view.tsx` & `view.scss`:** I will implement the logic to turn the cycle and response tabs green when the cycle is \"ready\" for prompt generation. A memoized boolean will check if the cycle title has been changed, if context has been added, if a response has content, and if a response has been selected. This state will conditionally apply a `.ready` CSS class to the relevant tab elements.\n\n### Files Updated This Cycle:\n*   `A11. DCE - Regression Case Studies.md` (Updated)\n*   `A35. DCE - Phase 2 - UI Mockups and Flow.md` (Updated)\n*   `A49. DCE - Phase 2 - File Association & Diffing Plan.md` (Updated)\n*   `A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md` (Updated)\n*   `src/common/types/pcpp.types.ts` (Updated)\n*   `src/common/ipc/channels.enum.ts` (Updated)\n*   `src/common/ipc/channels.type.ts` (Updated)\n*   `src/backend/services/history.service.ts` (Updated)\n*   `src/backend/services/file-operation.service.ts` (Updated)\n*   `src/backend/services/prompt.service.ts` (Updated)\n*   `src/client/views/parallel-copilot.view/on-message.ts` (Updated)\n*   `src/client/views/parallel-copilot.view/view.tsx` (Updated)\n*   `src/client/views/parallel-copilot.view/view.scss` (Updated)\n\n***\n\n<file path=\"src/Artifacts/A11. DCE - Regression Case Studies.md\">\n```markdown\n# Artifact A11: DCE - Regression Case Studies\n# Date Created: C16\n# Author: AI Model & Curator\n# Updated on: C133 (Add case for lost selected response state)\n\n- **Key/Value for A0:**\n- **Description:** Documents recurring bugs, their root causes, and codified solutions to prevent future regressions during development.\n- **Tags:** bugs, regression, troubleshooting, development, best practices\n\n## 1. Purpose\n\nThis document serves as a living record of persistent or complex bugs that have recurred across multiple development cycles. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a \"source of truth\" that can be referenced to prevent the same mistakes from being reintroduced into the codebase.\n\n## 2. Case Studies\n\n---\n\n### Case Study 010: Selected Response State Loss on Prompt Generation\n\n-   **Artifacts Affected:** `view.tsx`, `history.service.ts`, `prompt.service.ts`, `pcpp.types.ts`\n-   **Cycles Observed:** 133\n-   **Symptom:** The user selects a response in the PCPP, which is intended to be used as context for the next cycle's prompt. After generating `prompt.md` and navigating away and back, the selection is lost. The generated prompt also fails to include the selected response's summary.\n-   **Root Cause Analysis (RCA):** The state indicating which response tab was selected for the next prompt was purely transient frontend UI state. It was not being saved as part of the `PcppCycle` data object in `dce_history.json`. When the `prompt.service.ts` ran, it had no way of knowing which of the multiple responses for the previous cycle was the \"chosen\" one. When the UI reloaded, the transient state was lost.\n-   **Codified Solution & Best Practice:**\n    1.  **Extend Data Model:** Add a `selectedResponseId: string | null` property to the `PcppCycle` interface in `pcpp.types.ts` and `history.service.ts`.\n    2.  **Persist State:** In `view.tsx`, create a new state variable to track the selected response ID. Update the `saveCurrentCycleState` function to include this new property in the data payload sent to the backend for persistence.\n    3.  **Use Persisted State:** The `prompt.service.ts` must be refactored. When generating a prompt, it must now load the full history, find the previous cycle, read the `selectedResponseId`, and then parse the content of that specific response to generate the `<Previous Cycle ...>` block.\n    4.  **Best Practice:** Any user decision that needs to persist across sessions or influence backend processes (like prompt generation) must be explicitly saved to the persistent state store, not left as transient UI state.\n\n---\n\n### Case Study 009: TypeScript Type Inference with RegExp Results\n(No change from C130)\n\n---\n\n### Case Study 008: PCPP Parse/Un-Parse State Instability\n(No change from C126)\n\n---\n\n### Case Study 007: Corrupted or Unsupported Document Files\n(No change from C81)\n\n---\n\n### Case Study 006: Special File Type Caching Fails on Initialization\n(No change from C81)\n\n---\n\n### Case Study 005: Spacebar De-selects Wrong Parent Folder\n(No change from C68)\n\n---\n\n### Case Study 004: Spacebar De-selects Parent Folder Instead of File\n(No change from C61)\n\n---\n\n### Case Study 003: Incorrect File Count in Flatten Success Message\n(No change from C61)\n\n---\n\n### Case Study 002: Checkbox State Management in File Tree\n(No change from C16)\n\n---\n\n### Case Study 001: `path.sep` Usage in Frontend Components\n(No change from C16)\n```\n</file>\n<file path=\"src/Artifacts/A35. DCE - Phase 2 - UI Mockups and Flow.md\">\n```markdown\n# Artifact A35: DCE - Phase 2 - UI Mockups and Flow\n# Date Created: C69\n# Author: AI Model\n# Updated on: C133 (Remove diff view, add response selection toggle)\n\n## 1. Overview\n\nThis document describes the user interface (UI) and interaction flow for the Parallel Co-Pilot Panel. The design is centered around a two-stage workflow: **Input**, followed by a global **Parse** that transforms the entire panel into a **Review & Act** mode. The integrated diff viewer has been temporarily removed to focus on the core \"accept\" workflow.\n\n## 2. UI Mockup (Textual Description)\n\n### 2.1. Main Header & Cycle Section\n(No changes from C132)\n\n### 2.2. Response Tabs\n(No changes from C132)\n\n### 2.3. Parsed View\n\nThe parsed view uses a **resizable two-pane layout**. The left pane provides summary information and navigation. The right pane displays the code, with headers for both response-level and file-level actions.\n\n```\n|-------------------------------------------------------------------------------------------------|\n| [ Left Pane ]<--->[ Right Pane (Code Viewer) ]                                                 |\n| |-------------||------------------------------------------------------------------------------| |\n| | [v] ASSOCIATED FILES            | | [ (✓) This response is selected ] [ Accept Selected Files ]     | |\n| | |-------------------------------| |------------------------------------------------------------------| |\n| | | [x] [✓] src/.../view.tsx      | | [ File: src/.../view.tsx ] [ Accept this file ]                  | |\n| | | [ ] [✗] src/.../new-file.ts   | | +------------------------------------------------------------------+ | |\n| |                                   | | | [ Read-only editor with line numbers and syntax highlighting ] | | |\n| | [v] THOUGHTS / RESPONSE           | | +------------------------------------------------------------------+ | |\n| | | Rendered Markdown...            | |                                                                    | |\n| |                                   | |                                                                    | |\n| | [v] COURSE OF ACTION              | |                                                                    | |\n| | | Rendered Markdown...            | |                                                                    | |\n+-------------------------------------------------------------------------------------------------+\n```\n*   **File Checkboxes (`[x]`):** A checkbox next to each file stages it for a bulk \"accept\" operation.\n*   **Response Header:** A new header bar appears above the code viewer.\n    *   **`[ (✓) This response is selected ]`:** A stylized, theme-aware toggle button. When active, it indicates this response will be used for the next `prompt.md` generation. Clicking it toggles this state.\n    *   **`[ Accept Selected Files ]`:** A stylized button that replaces all checked workspace files with the versions from this AI response.\n*   **Individual File Actions:** The \"View Diff\" button has been removed. The **\"Accept this file\"** button remains for single-file replacement.\n\n### 2.4. Tab Coloring\n\n*   **Green Tabs:** When a cycle is \"ready\" for prompt generation (title is set, context is present, a response exists, and a response is selected), the main \"Cycle & Context\" header and the selected response tab's background will turn a subtle green color to provide clear visual feedback that the user can proceed.\n\n## 3. User Interaction Flow\n\n1.  **Paste & Parse:** User pastes responses and clicks \"Parse All\".\n2.  **Select for Prompt:** The user reviews \"Resp 1\". They decide it's the best one. They click the **\"Select this response\"** toggle button. It becomes active, and the \"Resp 1\" tab turns green.\n3.  **Generate Prompt:** The user clicks \"Generate `prompt.md`\". The extension now knows to use the summary from \"Resp 1\" for the `<Previous Cycle ...>` block.\n4.  **Accept Changes:**\n    *   The user checks the boxes next to three files in the \"Associated Files\" list.\n    *   They click the **\"Accept Selected Files\"** button to perform a bulk replacement.\n    *   For a fourth file, they simply click its individual **\"Accept this file\"** button.\n```\n</file>\n<file path=\"src/Artifacts/A49. DCE - Phase 2 - File Association & Diffing Plan.md\">```markdown\n# Artifact A49: DCE - Phase 2 - File Association & Diffing Plan\n# Date Created: C82\n# Author: AI Model\n# Updated on: C133 (Remove diffing, focus on accept/replace workflow)\n\n- **Key/Value for A0:**\n- **Description:** Plans the UI and backend logic to visually link file blocks in an AI response to workspace files and manage the \"accept/replace\" workflow.\n- **Tags:** feature plan, phase 2, ui, ux, file association, accept, replace\n\n## 1. Overview & Goal\n\nTo make the Parallel Co-Pilot Panel's workflow trustworthy and intuitive, users need a clear visual confirmation of which local file an AI-generated code block is intended to modify. This feature introduces a \"file association\" mechanism that parses AI responses, verifies the existence of the mentioned files, and displays this status to the user.\n\nThe core workflow is now defined as **\"accept/replace\"**: a one-way copy of content from the AI response into the user's workspace files. The integrated diff viewer is temporarily shelved to focus on this core functionality.\n\n## 2. User Stories\n\n| ID | User Story | Acceptance Criteria |\n|---|---|---|\n| P2-ASSOC-01 | **See Affected Files** | As a developer, when I parse an AI response, I want the extension to automatically show me a list of all the file paths it intends to modify, so I can understand the scope of the proposed changes. | - After parsing, a collapsible \"Associated Files\" section appears in the tab's UI. <br> - This section displays a list of all file paths found in the response. |\n| P2-ASSOC-02 | **Verify File Existence** | As a developer, for each file listed, I want to see a visual indicator of whether that file already exists in my workspace, so I can spot potential errors or new files proposed by the AI. | - Next to each listed file path, an icon is displayed. <br> - A green checkmark (`✓`) indicates the file exists at that path. <br> - A red cross (`✗`) indicates the file does not exist. |\n| P2-ASSOC-03 | **Preview AI Code** | As a developer, I want to click on a file in the \"Associated Files\" list to immediately see a syntax-highlighted view of the AI's proposed code, so I can review it. | - Clicking a file in the list opens a single-pane view in the right-hand panel. <br> - This view displays only the AI's proposed code, with full syntax highlighting. |\n| P2-ASSOC-04 | **Accept Changes** | As a developer, I want to be able to accept changes from the AI response into my workspace, either for a single file or for a batch of selected files. | - An \"Accept this file\" button replaces the content of the workspace file with the AI's version. <br> - A separate \"Accept Selected Files\" button performs a bulk replacement for all files checked in the \"Associated Files\" list. <br> - This is a one-way copy from the AI response to the workspace. |\n\n## 3. Technical Implementation Plan\n\n1.  **Frontend - Parsing (`response-parser.ts`):**\n    *   **Status:** **Complete.**\n\n2.  **Backend - Verification & Highlighting (`file-tree.service.ts`, `highlighting.service.ts`):**\n    *   **Status:** **Complete.** The `handleFileExistenceRequest` and `handleSyntaxHighlightRequest` handlers are working.\n\n3.  **Frontend - UI & State (`view.tsx`):**\n    *   **Status:** **In Progress.**\n    *   **File List:** Implement the \"Associated Files\" list. Clicking a file displays its content in the `CodeViewer`.\n    *   **Selection State:** Manage a `Set<string>` of `selectedFilesForReplacement` to track which files are checked.\n    *   **Accept/Replace Logic:**\n        *   The \"Accept this file\" button will trigger a new `RequestWriteFile` IPC message.\n        *   The \"Accept Selected Files\" button will trigger a `RequestBatchFileWrite` IPC message.\n\n4.  **Backend - File Writing (`file-operation.service.ts`):**\n    *   **Status:** **To be implemented.**\n    *   Implement `handleWriteFileRequest` and `handleBatchFileWrite` to receive new content and overwrite the corresponding files in the workspace using `vscode.workspace.fs.writeFile`.\n```\n</file>\n<file path=\"src/Artifacts/A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md\">\n```markdown\n# Artifact A56: DCE - Phase 2 - Advanced Diff Viewer Plan\n# Date Created: C120\n# Author: AI Model & Curator\n# Updated on: C133 (Feature placed on hold)\n\n- **Key/Value for A0:**\n- **Description:** Details the plan to enhance the integrated diff viewer with a side-by-side layout, scroll-locking, keyboard navigation, and a location pane.\n- **Tags:** feature plan, phase 2, ui, ux, diff, navigation, side-by-side, scroll-lock, keyboard\n\n## 1. Overview & Goal\n\n**Status (C133): This feature is currently ON HOLD.** Development has been paused to prioritize and stabilize the core \"accept/replace\" workflow in the Parallel Co-Pilot Panel.\n\nThe original goal of this plan was to enhance the diff viewer to provide a much clearer and more efficient user experience, similar to mature diff tools like WinMerge.\n\n## 2. User Stories (On Hold)\n\n| ID | User Story | Acceptance Criteria |\n|---|---|---|\n| P2-DIFF-01 | **Side-by-Side Diffs** | As a developer, I want to see a side-by-side view of the original and modified code with a colored background for changed lines, so I can immediately identify changes at a glance. | - The main diff view is split into two vertical panes: \"Original Workspace File\" on the right, \"AI Response\" on the left. <br> - Lines are colored appropriately for additions and removals. |\n| P2-DIFF-02 | **Scroll-Locking** | As a developer, when I scroll one of the main diff panes vertically, I want the other main pane to scroll with it, so I can keep the corresponding code aligned. | - All four diff panes have their own scrollbars. <br> - The two main diff panes are scroll-locked vertically. <br> - The two bottom detail panes are scroll-locked horizontally. |\n| P2-DIFF-03 | **Navigate Between Diffs** | As a developer reviewing a large file, I want \"Next Difference\" and \"Previous Difference\" buttons, so I can quickly jump between changed blocks. | - \"Next Difference\" (`↓`) and \"Previous Difference\" (`↑`) buttons are located in a stable toolbar. <br> - Clicking scrolls the view to the start of the next/previous block of changes and highlights it. |\n| P2-DIFF-04 | **Keyboard Navigation & Acceptance** | As a developer, I want to use the up/down arrow keys to navigate between differences and the right arrow key to accept the change from the response, so I can review and merge code without using the mouse. | - Pressing `ArrowDown` selects the next difference block. <br> - Pressing `ArrowUp` selects the previous difference block. <br> - Pressing `ArrowRight` accepts the change from the left (AI) pane, visually updating the right (original) pane's content *in memory*. |\n| P2-DIFF-05 | **Location Pane (Future)** | As a developer, I want to see a miniature, vertical map of all the changes in the file, so I can understand the overall scope of the diff and quickly jump to any section. | - A new \"Location Pane\" is displayed above the main diff view. <br> - It shows a compressed visual representation of the entire file, with colored blocks indicating added, removed, and changed lines. <br> - Clicking on a block in this pane scrolls the main diff view to that location. |\n| P2-DIFF-06 | **Line Numbers in Detail Pane (Future)** | As a developer, I want to see line numbers in the bottom character-level diff panes, so I have context for where the detailed change is occurring. | - The bottom panes display the relevant line numbers next to the content. |\n\n## 3. Technical Implementation Plan (On Hold)\n\nImplementation is paused. The previous plan involved significant refactoring of `DiffViewer.tsx` to handle a new layout, scroll-locking via `useRef` and `onScroll` handlers, and a `keydown` event listener for keyboard navigation and in-memory acceptance of changes.\n```\n</file>\n<file path=\"src/common/types/pcpp.types.ts\">\n```typescript\n// src/common/types/pcpp.types.ts\n\n// Data structure for the backend history file\nexport interface PcppResponse {\n    content: string;\n}\n\nexport interface PcppCycle {\n    cycleId: number;\n    timestamp: string;\n    title: string;\n    cycleContext: string;\n    ephemeralContext: string;\n    responses: { [tabId: string]: PcppResponse };\n    isParsedMode?: boolean;\n    leftPaneWidth?: number;\n    selectedResponseId?: string | null; // New: To track which response is selected for prompt generation\n}\n\nexport interface PcppHistoryFile {\n    version: number;\n    cycles: PcppCycle[];\n}\n\n\n// Data structure for the frontend parsed response\nexport interface ParsedFile {\n    path: string;\n    content: string;\n}\n\nexport interface ParsedResponse {\n    summary: string;\n    courseOfAction: string;\n    filesUpdated: string[]; // List of file paths from the \"Files Updated This Cycle\" section\n    files: ParsedFile[]; // Parsed file blocks with content\n    totalTokens?: number; // New: To store calculated total tokens\n}\n```\n</file>\n<file path=\"src/common/ipc/channels.enum.ts\">\n```typescript\nexport enum ClientToServerChannel {\n    RequestInitialData = \"clientToServer.requestInitialData\",\n    RequestFlattenContext = \"clientToServer.requestFlattenContext\",\n    RequestWorkspaceFiles = \"clientToServer.requestWorkspaceFiles\",\n    LogMessage = \"clientToServer.logMessage\",\n\n    // File Operations\n    RequestNewFile = \"clientToServer.requestNewFile\",\n    RequestNewFolder = \"clientToServer.requestNewFolder\",\n    RequestFileRename = \"clientToServer.requestFileRename\",\n    RequestFileDelete = \"clientToServer.requestFileDelete\",\n    RequestBatchFileDelete = \"clientToServer.requestBatchFileDelete\",\n    RequestRevealInExplorer = \"clientToServer.requestRevealInExplorer\",\n    RequestCopyPath = \"clientToServer.requestCopyPath\",\n    RequestOpenFile = \"clientToServer.requestOpenFile\",\n    RequestFileContent = \"clientToServer.requestFileContent\",\n    RequestMoveFile = \"clientToServer.requestMoveFile\",\n    RequestCopyFile = \"clientToServer.requestCopyFile\",\n    RequestUndo = \"clientToServer.requestUndo\",\n    RequestRedo = \"clientToServer.requestRedo\",\n    RequestAddFileFromBuffer = \"clientToServer.requestAddFileFromBuffer\",\n    RequestCopyFileFromUri = \"clientToServer.requestCopyFileFromUri\",\n    RequestWriteFile = \"clientToServer.requestWriteFile\", // New for single file acceptance\n    RequestBatchFileWrite = \"clientToServer.requestBatchFileWrite\",\n\n    // Special File Handling\n    RequestPdfToText = \"clientToServer.requestPdfToText\",\n    RequestExcelToText = \"clientToServer.requestExcelToText\",\n    RequestWordToText = \"clientToServer.requestWordToText\",\n\n    // Selection Persistence\n    SaveCurrentSelection = \"clientToServer.saveCurrentSelection\",\n    RequestLastSelection = \"clientToServer.requestLastSelection\",\n    SaveAutoAddState = \"clientToServer.saveAutoAddState\",\n\n    // VS Code Command Proxy\n    VSCodeCommand = \"clientToServer.vscodeCommand\",\n\n    // Phase 2: PCPP\n    RequestCreatePromptFile = \"clientToServer.requestCreatePromptFile\",\n    RequestFileExistence = \"clientToServer.requestFileExistence\",\n    RequestSyntaxHighlight = \"clientToServer.requestSyntaxHighlight\",\n    RequestLatestCycleData = \"clientToServer.requestLatestCycleData\",\n    RequestCycleData = \"clientToServer.requestCycleData\",\n    SaveCycleData = \"clientToServer.saveCycleData\",\n    RequestDeleteCycle = \"clientToServer.requestDeleteCycle\",\n    RequestResetHistory = \"clientToServer.requestResetHistory\",\n}\n\nexport enum ServerToClientChannel {\n    SendWorkspaceFiles = \"serverToClient.sendWorkspaceFiles\",\n    SendWorkspaceTrustState = \"serverToClient.sendWorkspaceTrustState\",\n    ApplySelectionSet = \"serverToClient.applySelectionSet\",\n    SendSelectionSets = \"serverToClient.sendSelectionSets\",\n    ForceRefresh = \"serverToClient.forceRefresh\",\n    SetActiveFile = \"serverToClient.setActiveFile\",\n    FocusFile = \"serverToClient.focusFile\",\n    SendAutoAddState = \"serverToClient.sendAutoAddState\",\n    UpdateProblemCounts = \"serverToClient.updateProblemCounts\",\n    UpdateNodeStats = \"serverToClient.updateNodeStats\",\n    SendFileContent = \"serverToClient.sendFileContent\",\n    \n    // Phase 2: PCPP\n    SendFileExistence = \"serverToClient.sendFileExistence\",\n    SendSyntaxHighlight = \"serverToClient.sendSyntaxHighlight\",\n    SendLatestCycleData = \"serverToClient.sendLatestCycleData\",\n    SendCycleData = \"serverToClient.sendCycleData\",\n}\n```\n</file>\n<file path=\"src/common/ipc/channels.type.ts\">\n```typescript\nimport { FileNode } from \"@/common/types/file-node\";\nimport { ClientToServerChannel, ServerToClientChannel } from \"./channels.enum\";\nimport { PcppCycle } from \"@/common/types/pcpp.types\";\n\nexport type SelectionSet = { [name: string]: string[] };\nexport type ProblemCountsMap = { [path: string]: { error: number; warning: number; } };\nexport type BatchWriteFile = { path: string; content: string };\n\nexport type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel> =\n    T extends ClientToServerChannel.RequestInitialData ? {} :\n    T extends ClientToServerChannel.RequestFlattenContext ? { selectedPaths: string[] } :\n    T extends ClientToServerChannel.RequestWorkspaceFiles ? { force?: boolean } :\n    T extends ClientToServerChannel.LogMessage ? { level: 'info' | 'warn' | 'error', message: string } :\n    T extends ClientToServerChannel.RequestNewFile ? { parentDirectory: string } :\n    T extends ClientToServerChannel.RequestNewFolder ? { parentDirectory: string } :\n    T extends ClientToServerChannel.RequestFileRename ? { oldPath: string, newName: string } :\n    T extends ClientToServerChannel.RequestFileDelete ? { path: string } :\n    T extends ClientToServerChannel.RequestBatchFileDelete ? { paths: string[] } :\n    T extends ClientToServerChannel.RequestRevealInExplorer ? { path: string } :\n    T extends ClientToServerChannel.RequestCopyPath ? { path: string, relative: boolean } :\n    T extends ClientToServerChannel.RequestOpenFile ? { path: string } :\n    T extends ClientToServerChannel.RequestFileContent ? { path: string } :\n    T extends ClientToServerChannel.RequestMoveFile ? { oldPath: string, newPath: string } :\n    T extends ClientToServerChannel.RequestCopyFile ? { sourcePath: string, destinationDir: string } :\n    T extends ClientToServerChannel.RequestUndo ? {} :\n    T extends ClientToServerChannel.RequestRedo ? {} :\n    T extends ClientToServerChannel.RequestAddFileFromBuffer ? { targetPath: string, data: Uint8Array } :\n    T extends ClientToServerChannel.RequestCopyFileFromUri ? { sourceUri: string, targetDir: string } :\n    T extends ClientToServerChannel.RequestWriteFile ? { path: string, content: string } :\n    T extends ClientToServerChannel.RequestBatchFileWrite ? { files: BatchWriteFile[] } :\n    T extends ClientToServerChannel.RequestPdfToText ? { path: string } :\n    T extends ClientToServerChannel.RequestExcelToText ? { path: string } :\n    T extends ClientToServerChannel.RequestWordToText ? { path: string } :\n    T extends ClientToServerChannel.SaveCurrentSelection ? { paths: string[] } :\n    T extends ClientToServerChannel.RequestLastSelection ? {} :\n    T extends ClientToServerChannel.SaveAutoAddState ? { enabled: boolean } :\n    T extends ClientToServerChannel.VSCodeCommand ? { command: string, args?: any[] } :\n    T extends ClientToServerChannel.RequestCreatePromptFile ? { cycleTitle: string; currentCycle: number } :\n    T extends ClientToServerChannel.RequestFileExistence ? { paths: string[] } :\n    T extends ClientToServerChannel.RequestSyntaxHighlight ? { code: string; lang: string, id: string } :\n    T extends ClientToServerChannel.RequestLatestCycleData ? {} :\n    T extends ClientToServerChannel.RequestCycleData ? { cycleId: number } :\n    T extends ClientToServerChannel.SaveCycleData ? { cycleData: PcppCycle } :\n    T extends ClientToServerChannel.RequestDeleteCycle ? { cycleId: number } :\n    T extends ClientToServerChannel.RequestResetHistory ? {} :\n    \n    T extends ServerToClientChannel.SendWorkspaceFiles ? { files: FileNode[] } :\n    T extends ServerToClientChannel.SendWorkspaceTrustState ? { isTrusted: boolean } :\n    T extends ServerToClientChannel.ApplySelectionSet ? { paths: string[] } :\n    T extends ServerToClientChannel.SendSelectionSets ? { sets: SelectionSet } :\n    T extends ServerToClientChannel.ForceRefresh ? { reason?: 'fileOp' | 'manual' | 'history' } :\n    T extends ServerToClientChannel.SetActiveFile ? { path: string } :\n    T extends ServerToClientChannel.FocusFile ? { path: string } :\n    T extends ServerToClientChannel.SendAutoAddState ? { enabled: boolean } :\n    T extends ServerToClientChannel.UpdateProblemCounts ? { problemMap: ProblemCountsMap } :\n    T extends ServerToClientChannel.UpdateNodeStats ? { path: string, tokenCount: number, error?: string } :\n    T extends ServerToClientChannel.SendFileContent ? { path: string, content: string | null } :\n    T extends ServerToClientChannel.SendFileExistence ? { existenceMap: { [path: string]: boolean } } :\n    T extends ServerToClientChannel.SendSyntaxHighlight ? { highlightedHtml: string, id: string } :\n    T extends ServerToClientChannel.SendLatestCycleData ? { cycleData: PcppCycle } :\n    T extends ServerToClientChannel.SendCycleData ? { cycleData: PcppCycle | null } :\n    never;```\n</file>\n<file path=\"src/backend/services/history.service.ts\">\n```typescript\n// src/backend/services/history.service.ts\nimport * as vscode from 'vscode';\nimport * as path from 'path';\nimport { Services } from './services';\nimport { PcppCycle, PcppHistoryFile } from '@/common/types/pcpp.types';\nimport { serverIPCs } from '@/client/views';\nimport { VIEW_TYPES } from '@/common/view-types';\nimport { ServerToClientChannel } from '@/common/ipc/channels.enum';\n\nexport class HistoryService {\n    private historyFilePath: string | undefined;\n\n    constructor() {\n        const workspaceFolders = vscode.workspace.workspaceFolders;\n        if (workspaceFolders && workspaceFolders.length > 0) {\n            this.historyFilePath = path.join(workspaceFolders[0].uri.fsPath, '.vscode', 'dce_history.json');\n        }\n    }\n\n    private async _readHistoryFile(): Promise<PcppHistoryFile> {\n        if (!this.historyFilePath) return { version: 1, cycles: [] };\n        try {\n            const content = await vscode.workspace.fs.readFile(vscode.Uri.file(this.historyFilePath));\n            return JSON.parse(Buffer.from(content).toString('utf-8'));\n        } catch (error) {\n            Services.loggerService.warn(\"dce_history.json not found or is invalid. A new one will be created.\");\n            return { version: 1, cycles: [] };\n        }\n    }\n\n    private async _writeHistoryFile(data: PcppHistoryFile): Promise<void> {\n        if (!this.historyFilePath) return;\n        const dir = path.dirname(this.historyFilePath);\n        try {\n            await vscode.workspace.fs.createDirectory(vscode.Uri.file(dir));\n            const content = Buffer.from(JSON.stringify(data, null, 2), 'utf-8');\n            await vscode.workspace.fs.writeFile(vscode.Uri.file(this.historyFilePath), content);\n        } catch (error) {\n            Services.loggerService.error(`Failed to write to dce_history.json: ${error}`);\n        }\n    }\n\n    public async getFullHistory(): Promise<PcppCycle[]> {\n        const history = await this._readHistoryFile();\n        return history.cycles;\n    }\n\n    public async getLatestCycle(): Promise<PcppCycle> {\n        Services.loggerService.log(\"HistoryService: getLatestCycle called.\");\n        const history = await this._readHistoryFile();\n        if (history.cycles.length === 0) {\n            Services.loggerService.log(\"No history found, creating default cycle 1.\");\n            const defaultCycle: PcppCycle = {\n                cycleId: 1,\n                timestamp: new Date().toISOString(),\n                title: 'New Cycle',\n                cycleContext: '',\n                ephemeralContext: '',\n                responses: { \"1\": { content: \"\" } },\n                isParsedMode: false,\n                leftPaneWidth: 33,\n                selectedResponseId: null,\n            };\n            await this.saveCycleData(defaultCycle);\n            return defaultCycle;\n        }\n        \n        const latestCycle = history.cycles.reduce((latest, current) => current.cycleId > latest.cycleId ? current : latest);\n        Services.loggerService.log(`Latest cycle found: ${latestCycle.cycleId}`);\n        return latestCycle;\n    }\n\n    public async getCycleData(cycleId: number): Promise<PcppCycle | null> {\n        Services.loggerService.log(`HistoryService: getting data for cycle ${cycleId}.`);\n        const history = await this._readHistoryFile();\n        return history.cycles.find(c => c.cycleId === cycleId) || null;\n    }\n\n    public async saveCycleData(cycleData: PcppCycle): Promise<void> {\n        Services.loggerService.log(`HistoryService: saving data for cycle ${cycleData.cycleId}.`);\n        const history = await this._readHistoryFile();\n        const cycleIndex = history.cycles.findIndex(c => c.cycleId === cycleData.cycleId);\n\n        if (cycleIndex > -1) {\n            history.cycles[cycleIndex] = cycleData;\n        } else {\n            history.cycles.push(cycleData);\n        }\n        \n        history.cycles.sort((a, b) => a.cycleId - b.cycleId);\n\n        await this._writeHistoryFile(history);\n    }\n\n    public async deleteCycle(cycleId: number): Promise<void> {\n        Services.loggerService.log(`HistoryService: Deleting cycle ${cycleId}.`);\n        const history = await this._readHistoryFile();\n        \n        if (history.cycles.length <= 1) {\n            Services.loggerService.warn(\"Cannot delete the last remaining cycle.\");\n            vscode.window.showWarningMessage(\"Cannot delete the last cycle.\");\n            return;\n        }\n\n        history.cycles = history.cycles.filter(c => c.cycleId !== cycleId);\n        await this._writeHistoryFile(history);\n        Services.loggerService.log(`Cycle ${cycleId} deleted successfully.`);\n        \n        const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];\n        if (serverIpc) {\n            serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, { reason: 'history' });\n        }\n    }\n\n    public async resetHistory(): Promise<void> {\n        Services.loggerService.log(`HistoryService: Resetting all cycle history.`);\n        if (this.historyFilePath) {\n            try {\n                await vscode.workspace.fs.delete(vscode.Uri.file(this.historyFilePath));\n                Services.loggerService.log(\"dce_history.json deleted successfully.\");\n                 const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];\n                if (serverIpc) {\n                    serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, { reason: 'history' });\n                }\n            } catch (error) {\n                Services.loggerService.error(`Failed to delete dce_history.json: ${error}`);\n            }\n        }\n    }\n}\n```\n</file>\n<file path=\"src/backend/services/file-operation.service.ts\">\n```typescript\n// src/backend/services/file-operation.service.ts\nimport * as vscode from \"vscode\";\nimport * as path from \"path\";\nimport { ServerPostMessageManager } from \"@/common/ipc/server-ipc\";\nimport { ServerToClientChannel } from \"@/common/ipc/channels.enum\";\nimport { Services } from \"./services\";\nimport { Action, MoveActionPayload } from \"./action.service\";\nimport { BatchWriteFile } from \"@/common/ipc/channels.type\";\n\nconst normalizePath = (p: string) => p.replace(/\\\\/g, '/');\n\nexport class FileOperationService {\n    private filesToIgnoreForAutoAdd: Set<string> = new Set();\n\n    public async handleWriteFile(filePath: string, content: string) {\n        Services.loggerService.log(`[File Operation] Received request to write file: ${filePath}`);\n        const workspaceFolders = vscode.workspace.workspaceFolders;\n        if (!workspaceFolders?.[0]) {\n            vscode.window.showErrorMessage(\"Cannot write file: No workspace folder is open.\");\n            return;\n        }\n        const rootPath = workspaceFolders[0].uri.fsPath;\n        const absolutePath = path.resolve(rootPath, filePath);\n        const uri = vscode.Uri.file(absolutePath);\n        const contentBuffer = Buffer.from(content, 'utf-8');\n        try {\n            await vscode.workspace.fs.writeFile(uri, contentBuffer);\n            vscode.window.showInformationMessage(`Successfully updated: ${path.basename(filePath)}`);\n        } catch (error) {\n             Services.loggerService.error(`Failed to write file ${filePath}: ${error}`);\n            vscode.window.showErrorMessage(`Failed to write file: ${error}`);\n        }\n    }\n\n    public async handleBatchFileWrite(files: BatchWriteFile[]) {\n        Services.loggerService.log(`[File Operation] Received request to write ${files.length} files.`);\n        const workspaceFolders = vscode.workspace.workspaceFolders;\n        if (!workspaceFolders?.[0]) {\n            vscode.window.showErrorMessage(\"Cannot write files: No workspace folder is open.\");\n            return;\n        }\n        const rootPath = workspaceFolders[0].uri.fsPath;\n\n        try {\n            for (const file of files) {\n                const absolutePath = path.resolve(rootPath, file.path);\n                const uri = vscode.Uri.file(absolutePath);\n                const contentBuffer = Buffer.from(file.content, 'utf-8');\n                await vscode.workspace.fs.writeFile(uri, contentBuffer);\n                Services.loggerService.log(`Successfully wrote content to: ${file.path}`);\n            }\n            vscode.window.showInformationMessage(`Successfully accepted and wrote ${files.length} files to the workspace.`);\n        } catch (error) {\n            Services.loggerService.error(`Failed during batch file write: ${error}`);\n            vscode.window.showErrorMessage(`Failed to write files: ${error}`);\n        }\n    }\n\n    public async handleFileContentRequest(filePath: string, serverIpc: ServerPostMessageManager) {\n        Services.loggerService.log(`handleFileContentRequest initiated for: ${filePath}`);\n        try {\n            const workspaceFolders = vscode.workspace.workspaceFolders;\n            if (!workspaceFolders?.[0]) {\n                throw new Error(\"No workspace folder open.\");\n            }\n            const absolutePath = path.resolve(workspaceFolders[0].uri.fsPath, filePath);\n            const uri = vscode.Uri.file(absolutePath);\n            const contentBuffer = await vscode.workspace.fs.readFile(uri);\n            const content = Buffer.from(contentBuffer).toString('utf-8');\n            Services.loggerService.log(`Successfully read content for: ${filePath}. Sending to client.`);\n            serverIpc.sendToClient(ServerToClientChannel.SendFileContent, { path: filePath, content });\n        } catch (error) {\n            Services.loggerService.error(`Failed to read file content for ${filePath}: ${error}`);\n            serverIpc.sendToClient(ServerToClientChannel.SendFileContent, { path: filePath, content: `// Error: Could not read file content for ${filePath}. It may not exist in the workspace.` });\n        }\n    }\n\n    public async handleFileExistenceRequest(paths: string[], serverIpc: ServerPostMessageManager) {\n        // No change from C132\n        Services.loggerService.log(`[File Existence] Received request to check paths: ${JSON.stringify(paths)}`);\n        const workspaceFolders = vscode.workspace.workspaceFolders;\n        if (!workspaceFolders || workspaceFolders.length === 0) {\n            Services.loggerService.error(\"[File Existence] Cannot check for files, no workspace folder is open.\");\n            serverIpc.sendToClient(ServerToClientChannel.SendFileExistence, { existenceMap: {} });\n            return;\n        }\n        const rootPath = workspaceFolders[0].uri.fsPath;\n    \n        const existenceMap: { [path: string]: boolean } = {};\n        const checks = paths.map(async (p_raw) => {\n            const p = p_raw.trim().replace(/^[`\"']|[`\"']$/g, '');\n            if (!p) return;\n    \n            let absolutePath = path.resolve(rootPath, p);\n            let normalizedPath = normalizePath(absolutePath);\n    \n            try {\n                await vscode.workspace.fs.stat(vscode.Uri.file(normalizedPath));\n                existenceMap[p_raw] = true;\n            } catch {\n                if (/^A\\d+/.test(p)) {\n                    const artifactPath = path.resolve(rootPath, 'src/Artifacts', p);\n                    const normalizedArtifactPath = normalizePath(artifactPath);\n                    try {\n                        await vscode.workspace.fs.stat(vscode.Uri.file(normalizedArtifactPath));\n                        existenceMap[p_raw] = true;\n                        return;\n                    } catch {}\n                }\n                existenceMap[p_raw] = false;\n            }\n        });\n        await Promise.all(checks);\n        serverIpc.sendToClient(ServerToClientChannel.SendFileExistence, { existenceMap });\n    }\n\n    private async _findAvailableCopyName(destinationPath: string): Promise<string> {\n        // No change from C132\n        try {\n            await vscode.workspace.fs.stat(vscode.Uri.file(destinationPath));\n        } catch (error) {\n            return destinationPath;\n        }\n    \n        const dir = path.dirname(destinationPath);\n        const ext = path.extname(destinationPath);\n        const baseName = path.basename(destinationPath, ext);\n    \n        let copyNum = 1;\n        let nextPath = path.join(dir, `${baseName}-copy${ext}`);\n        \n        while (true) {\n            try {\n                await vscode.workspace.fs.stat(vscode.Uri.file(nextPath));\n                copyNum++;\n                nextPath = path.join(dir, `${baseName}-copy-${copyNum}${ext}`);\n            } catch (error) {\n                return nextPath;\n            }\n        }\n    }\n\n    public async handleCopyFileRequest(sourcePath: string, destinationDir: string) {\n        // No change from C132\n        try {\n            const sourceName = path.basename(sourcePath);\n            const initialDestinationPath = path.join(destinationDir, sourceName);\n            const finalDestinationPath = await this._findAvailableCopyName(initialDestinationPath);\n            const sourceUri = vscode.Uri.file(sourcePath);\n            const destinationUri = vscode.Uri.file(finalDestinationPath);\n\n            await vscode.workspace.fs.copy(sourceUri, destinationUri, { overwrite: false });\n        } catch (error: any) {\n            vscode.window.showErrorMessage(`Failed to copy file: ${error.message}`);\n        }\n    }\n\n    public async handleCopyFileFromUri(sourceUriString: string, targetDir: string) {\n        // No change from C132\n        try {\n            const sourceUri = vscode.Uri.parse(sourceUriString);\n            const fileName = path.basename(sourceUri.fsPath);\n            const targetUri = vscode.Uri.file(path.join(targetDir, fileName));\n            await vscode.workspace.fs.copy(sourceUri, targetUri);\n        } catch (error: any) {\n            vscode.window.showErrorMessage(`Failed to copy file from URI: ${error.message}`);\n        }\n    }\n\n    public async handleAddFileFromBuffer(targetPath: string, data: Uint8Array) {\n        // No change from C132\n        try {\n            await vscode.workspace.fs.writeFile(vscode.Uri.file(targetPath), data);\n        } catch (error: any) {\n            vscode.window.showErrorMessage(`Failed to add file from buffer: ${error.message}`);\n        }\n    }\n\n    public async handleOpenFileRequest(filePath: string) {\n        // No change from C132\n        try {\n            await vscode.commands.executeCommand('vscode.open', vscode.Uri.file(filePath));\n        } catch (error: any) {\n            vscode.window.showErrorMessage(`Failed to open file ${filePath}: ${error.message}`);\n        }\n    }\n\n    public async handleNewFileRequest(parentDirectory: string) {\n        // No change from C132\n        const newFileName = await vscode.window.showInputBox({ prompt: \"Enter the name of the new file\", value: \"new-file.ts\" });\n        if (newFileName) {\n            try {\n                await vscode.workspace.fs.writeFile(vscode.Uri.file(path.join(parentDirectory, newFileName)), new Uint8Array());\n            } catch (error: any) {\n                vscode.window.showErrorMessage(`Failed to create file: ${error.message}`);\n            }\n        }\n    }\n\n    public async handleNewFolderRequest(parentDirectory: string) {\n        // No change from C132\n        const newFolderName = await vscode.window.showInputBox({ prompt: \"Enter the name of the new folder\", value: \"new-folder\" });\n        if (newFolderName) {\n            try {\n                await vscode.workspace.fs.createDirectory(vscode.Uri.file(path.join(parentDirectory, newFolderName)));\n            } catch (error: any) {\n                vscode.window.showErrorMessage(`Failed to create folder: ${error.message}`);\n            }\n        }\n    }\n\n    public async handleFileRenameRequest(oldPath: string, newName: string) {\n        // No change from C132\n        try {\n            await vscode.workspace.fs.rename(vscode.Uri.file(oldPath), vscode.Uri.file(path.join(path.dirname(oldPath), newName)));\n        } catch (error: any) {\n            vscode.window.showErrorMessage(`Failed to rename: ${error.message}`);\n        }\n    }\n\n    public async handleMoveFileRequest(oldPath: string, newPath: string) {\n        // No change from C132\n        try {\n            const lastSelection = await Services.selectionService.getLastSelection();\n            if (!lastSelection.some(p => p.startsWith(oldPath))) {\n                this.filesToIgnoreForAutoAdd.add(newPath);\n                setTimeout(() => this.filesToIgnoreForAutoAdd.delete(newPath), 2000);\n            }\n\n            await vscode.workspace.fs.rename(vscode.Uri.file(oldPath), vscode.Uri.file(newPath));\n            await Services.selectionService.updatePathInSelections(oldPath, newPath);\n            Services.actionService.push({ type: 'move', payload: { fromPath: oldPath, toPath: newPath } as MoveActionPayload });\n        } catch (error: any) {\n            vscode.window.showErrorMessage(`Failed to move file: ${error.message}`);\n        }\n    }\n\n    public async handleFileDeleteRequest(filePath: string) {\n        // No change from C132\n        const confirmation = await vscode.window.showWarningMessage(`Are you sure you want to delete ${path.basename(filePath)}?`, { modal: true }, 'Delete');\n        if (confirmation === 'Delete') {\n            try {\n                await vscode.workspace.fs.delete(vscode.Uri.file(filePath), { recursive: true, useTrash: true });\n            } catch (error: any) {\n                vscode.window.showErrorMessage(`Failed to delete: ${error.message}`);\n            }\n        }\n    }\n\n    public async handleBatchFileDeleteRequest(paths: string[]) {\n        // No change from C132\n        if (paths.length === 0) return;\n        const confirmation = await vscode.window.showWarningMessage(`Are you sure you want to delete ${paths.length} item(s)?`, { modal: true }, 'Delete');\n        if (confirmation === 'Delete') {\n            try {\n                await Promise.all(paths.map(p => vscode.workspace.fs.delete(vscode.Uri.file(p), { recursive: true, useTrash: true })));\n            } catch (error: any) {\n                vscode.window.showErrorMessage(`Failed to delete items: ${error.message}`);\n            }\n        }\n    }\n\n    public handleRevealInExplorerRequest(filePath: string) {\n        // No change from C132\n        vscode.commands.executeCommand('revealInExplorer', vscode.Uri.file(filePath));\n    }\n\n    public handleCopyPathRequest(filePath: string, relative: boolean) {\n        // No change from C132\n        const workspaceFolders = vscode.workspace.workspaceFolders;\n        let pathToCopy = filePath;\n        if (relative && workspaceFolders?.[0]) {\n            pathToCopy = path.relative(workspaceFolders[0].uri.fsPath, filePath);\n        }\n        vscode.env.clipboard.writeText(pathToCopy);\n        vscode.window.showInformationMessage(`Copied to clipboard: ${pathToCopy}`);\n    }\n\n    public addFileToIgnoreForAutoAdd(filePath: string) {\n        // No change from C132\n        this.filesToIgnoreForAutoAdd.add(filePath);\n    }\n\n    public hasFileToIgnoreForAutoAdd(filePath: string): boolean {\n        // No change from C132\n        return this.filesToIgnoreForAutoAdd.has(filePath);\n    }\n\n    public removeFileToIgnoreForAutoAdd(filePath: string) {\n        // No change from C132\n        this.filesToIgnoreForAutoAdd.delete(filePath);\n    }\n}\n```\n</file>\n<file path=\"src/backend/services/prompt.service.ts\">\n```typescript\n// Updated on: C133 (Use selectedResponseId for prompt generation)\nimport * as vscode from 'vscode';\nimport * as path from 'path';\nimport * as fs from 'fs/promises';\nimport { Services } from './services';\nimport { parseResponse } from '@/client/utils/response-parser';\nimport { PcppCycle } from '@/common/types/pcpp.types';\n\nexport class PromptService {\n    private artifactSchemaTemplate = `<M1. artifact schema>\nM1. artifact schema\nM2. cycle overview\nM3. interaction schema\nM4. current project scope\nM5. organized artifacts list\nM6. cycles\nM7. Flattened Repo\n</M1. artifact schema>`;\n\n    private interactionSchemaTemplate = `<M3. Interaction Schema>\n1.  Artifacts are complete, individual texts enclosed in \\`<xmltags>\\`. To ensure consistent parsing by the DCE extension, all file artifacts **must** be enclosed in \\`<file path=\"path/to/file.ts\">...</file>\\` tags. The path must be relative to the workspace root. The closing tag must be a simple \\`</file>\\`. Do not use the file path in the closing tag.\n2.  Our Document Artifacts serve as our \\`Source of Truth\\` throughout multiple cycles. As such, over time, as issues occur, or code repeatedly regresses in the same way, seek to align our \\`Source of Truth\\` such that the Root Cause of such occurances is codified so it can be avoided on subsequent cycles visits to those Code artifacts.\n3.  Please output entire Document or Code artifacts. Do not worry about Token length. If your length continues for too long, and you reach the 600 second timeout, I will simply incorporate the work you did complete, and we can simply continue from where you left off. Better to have half of a solution to get started with, than not to have it. **Preference is for larger, more complete updates over smaller, incremental ones to align with the human curator's parallel processing workflow.** The human curator often sends the same prompt to multiple AI instances simultaneously and selects the most comprehensive response as the primary base for the next cycle, using other responses as supplementary information. Providing more complete updates increases the likelihood of a response being selected as the primary base.\n4.  Do not output artifacts that do not require updates in this cycle. (Eg. Do not do this: // Updated on: Cycle 1040 (No functional changes, only cycle header))\n5.  **Critical: \\`flattened_repo_v2.txt\\` contains all project files. Output updated *individual* files that are part of it (like \\`<src/state/coreStore.ts>...\\`). However, do **NOT** output the surrounding Artifact container tags (\\`<flattened_repo_v2.txt>...</flattened_repo_v2.txt>\\`) or any auto-generated metadata sections within it (like the Total Files summary, Top 10 list, or the \\`<files list>\\` section) which are created by the \\`flatten.js\\` script.**\n5.1. \\`flattened_repo_v2.txt\\` is a copy of the codebase, generated by a script; assume its an accurate representation of the existing codebase, but not necessarily a 'source of truth' like we treat our documents as, our codebase is a living artifact, documents, while we can update them, should be considered less transient.\n5.2. **\\`.local\\` File Convention:** To manage token count, some large data files (e.g., \\`researchNodes.ts\\`) may be represented by a truncated \\`.local.ts\\` version in the context. This version contains the essential structure and a few examples. If the full content of a file is required for a task (e.g., a comprehensive data refactor or fixing a bug related to a specific entry), explicitly state this need in your summary of actions and request that the curator swap the \\`.local.ts\\` file with the full \\`.ts\\` version in the \\`files_list.txt\\` for the subsequent cycle.\n6.  remember to output complete artifacts without placeholders, im taking your output, putting it in winmerge, and confirming we arent losing data in the update. when you provide placeholders, my cursory review turns into a meticulous file parsing, taking me from what is 5 seconds per artifact to upwards of 5 minutes, only to realize that the output is actually un-parseable, due to the nature of relativity, as the theory of relativity also applies to code. if you give me a code snippet, and do not give me the code surrounding that snippet, i do not know where that code should go. by providing the complete file, on the other hand, i can put it in a diff, see easily what was altered, and if anything was accidentally omitted or lost, i can be sure that it's retained.\n7.  **Update documentation before writing code.** document artifacts are like our project readme files, our source of truth. they are our blueprints. they guide the code we write. when we realize we need to alter our approach or invent new game mechanics, we update the source of truth first, cause english is easy and flexible, then we codify that.\n8.  this query is part of a larger software engineering project\n9.  After you complete delivery on a code artifact, review it to make sure you did not miss any intermediary files. for instance, if we have a DevelopmentSystem.ts, using the componentData.ts, which is displaying on the ComponentProductionTab.tsx. But then theres also still a DevPanel.tsx file that is in-between that *could*, but shouldnt, get overlooked.\n10. If you are deciding where to put a particular piece of code or function, and due to its nature, there are one or more candidate files that it could be placed in, choose the smaller file (in tokens).\n11. Begin your response with a course of action and end with a review of your work, surface any self corrections in the summary of changes for the subsequent cycle.\n12. do not underestimate how much you can accomplish in a given cycle; you'd only accomplish handicapping yourself. (Eg. you've authored this whole thing with just my guidance. good job, keep it up.)\n13. Not as relevant for this project: **Log State Button:** The 'Log State' button in the \\`DevInfoOverlay\\` is a dynamic debugging tool. Modify the \\`triggerDebugLogs\\` action in \\`uiStore.ts\\` to output specific state information relevant to the current bug being investigated. **See A85 (Logging Guide) for usage details.**\n14. Not as relevant for this project: **Regression Case Studies:** Use Artifact A106 to document persistent or complex bugs and their resolutions. Add entries *after* a fix is confirmed to codify the RCA and solution, preventing future regressions.\n15. Include in your cycle summary, a short list of files you've updated. This makes it easy for my reviews.\n16. if you seem to have spare time in a cycle, see if you can spot any particular file with excessive levels of comments or logging that seems extensive and for troubleshooting an error that has since been resolved, see to it to clean those files but preserve their functionalities. im just looking to shave off excess tokens wherever possible in the master_content.txt file.\n17. if you see \\`(No change from C850)\\` such language, it's data loss. there was supposed to be actual language behind that placeholder, but in one iteration (C850, in this case) you had provided a placeholder, and i 'missed it' and did not capture the initial information. you either need to deliver the placeholder in such a way as i can easily press the left arrow instead of the rigth arrow in winmerge to not accept that part, but to also not have winmerge confuse it with the rest, otherwise i must manually parse the information. when the process is a single keystroke, i can manage it quickly enough. when we remove that ability because you provided me data in a format that has placeholders AND the placeholders do not parse within winmerge such that it removes the benefit winmerge is adding, then we have our problem. when you see this, try to correct it using whatever current relevant context you have.\n18. basically, you should not worry about brevity, because when you go too long, your response gets interrupted by the system anyway. its better that the products you do deliver are all complete except for the last one, rather than you delivering all incomplete products, including the last one. does that make sense?\n19. remember, do not stop outputting for the reason of preventing a potential artifact interruption mid-output. you actually end up stopping yourself from producting two or three additional files before you actually get interrupted. what i mean is, in the outputs where you do not do this, you produce for 500 seconds, producing 7-9 files, and only the last one is interrupted and unusable. compared to when you stop yourself prematurely, for the reason stated, and you produce for 180 seconds and provide maybe 3-4 files. even with the -1, producing as much as you can still outperforms the alternative.\n20. This is a misaligned statement: \\`// (For full history, see master_content.txt)\\` because your changes get rolled into master_content.txt. therefore, if you remove the history, then when your updates are rolled in, they will remove the full history. understand? after a while, the history is not relevant and can be rolled out, for a while, it ought to stay. you can see what we're working on + the current cycle and make this determination.\n21. Each time we create a new documentation artifact, lets also create the key/value pairs needed for me to add it into our Master Artifact List. they can simply be added into the new artifact itself and ill make the new entry in A0. this will solve for me manually generating a description and tag for each new documentation artifact. also, dont place \\`/\\` in the title/name of a documentation artifact. VSCode treats it as a folder separator.\n21.1. when creating a new documentation artifact, also just update the master artifacts list itself.\n</M3. Interaction Schema>`;\n\n    private projectScopeTemplate = `<M4. current project scope>\nThe plan is to create a Data Curation Environment. We will do this by creating a VS Code extension. The three main components will be:\n\nPhase 1. Context chooser - Choose files/folders (checkmark option in the file explorer) that will be packaged as artifacts into a \\`flattened_repo.md\\` file.\nPhase 2. parallel 'co-pilot' panel. Basically, we need our own AI Studio interface that is parallelizable. so thats what is wrong with the curernt co-pilot panel, that you are 'locked in' to a single conversation flow. my process involves sending the same prompt to up to 8 different conversation windows and then scrutinizing the responses in winmerge.\nPhase 3. Diff Tool - Basically, winmerge but intergrated into a window within VS Code. My workflow is often comparing two identical responses, or comparing a new artifact with the current version. Currently, I'm first copying and pasting responses into separate notepad files, and then for which ever i need to compare given my task, i then manually move that one into winmerge to compare against another that i manually move. instead, the ability to just select between two to compare would be a massive decrease in the manual workload.\n</M4. current project scope>`;\n\n    private getPreviousCycleSummary(cycle: PcppCycle | undefined): string {\n        if (!cycle) return '';\n        \n        const selectedResponseId = cycle.selectedResponseId;\n        if (!selectedResponseId || !cycle.responses[selectedResponseId]) {\n            Services.loggerService.warn(`Could not find selected response content for cycle ${cycle.cycleId}`);\n            return `<!-- No response was selected for cycle ${cycle.cycleId} -->`;\n        }\n\n        const previousResponseContent = cycle.responses[selectedResponseId].content;\n        const parsed = parseResponse(previousResponseContent);\n        \n        // C133: Ensure all parts of the summary are included\n        let summary = `### Thoughts / Summary\\n${parsed.summary}\\n\\n`;\n        summary += `### Course of Action\\n${parsed.courseOfAction}\\n\\n`;\n        if (parsed.filesUpdated.length > 0) {\n            summary += `### Files Updated This Cycle:\\n* ${parsed.filesUpdated.join('\\n* ')}\\n`;\n        }\n\n        return summary;\n    }\n\n    public async generatePromptFile(cycleTitle: string, currentCycle: number) {\n        const workspaceFolders = vscode.workspace.workspaceFolders;\n        if (!workspaceFolders?.[0]) {\n            vscode.window.showErrorMessage(\"Cannot generate prompt: No workspace folder is open.\");\n            return;\n        }\n        const rootPath = workspaceFolders[0].uri.fsPath;\n        const flattenedRepoPath = path.join(rootPath, 'flattened_repo.md');\n        const promptMdPath = path.join(rootPath, 'prompt.md');\n\n        try {\n            Services.loggerService.log(\"Generating prompt.md file...\");\n\n            const flattenedContent = await fs.readFile(flattenedRepoPath, 'utf-8');\n            const fullHistory: PcppCycle[] = await Services.historyService.getFullHistory();\n            const sortedHistory = [...fullHistory].sort((a, b) => b.cycleId - a.cycleId);\n\n            let cycleOverview = '<M2. cycle overview>\\n';\n            cycleOverview += `Current Cycle ${currentCycle} - ${cycleTitle}\\n`;\n            for (const cycle of sortedHistory) {\n                if (cycle.cycleId !== currentCycle) {\n                     cycleOverview += `Cycle ${cycle.cycleId} - ${cycle.title}\\n`;\n                }\n            }\n            cycleOverview += '</M2. cycle overview>';\n            \n            let cyclesContent = '<M6. Cycles>\\n\\n';\n            const previousCycle = sortedHistory.find(c => c.cycleId === currentCycle - 1);\n            \n            cyclesContent += `<Cycle ${currentCycle}>\\n${cycleTitle}\\n`;\n            if (previousCycle) {\n                const summary = this.getPreviousCycleSummary(previousCycle);\n                cyclesContent += `<Previous Cycle ${previousCycle.cycleId} Summary of Actions>\\n${summary}\\n</Previous Cycle ${previousCycle.cycleId} Summary of Actions>\\n`;\n            }\n            cyclesContent += `</Cycle ${currentCycle}>\\n\\n`;\n\n\n            for (const cycle of sortedHistory) {\n                if (cycle.cycleId === currentCycle) continue; \n                cyclesContent += `<Cycle ${cycle.cycleId}>\\n`;\n                const prevCycleForSummary = sortedHistory.find(c => c.cycleId === cycle.cycleId - 1);\n                 if (prevCycleForSummary) {\n                    const summary = this.getPreviousCycleSummary(prevCycleForSummary);\n                    cyclesContent += `<Previous Cycle ${prevCycleForSummary.cycleId} Summary of Actions>\\n${summary}\\n</Previous Cycle ${prevCycleForSummary.cycleId} Summary of Actions>\\n`;\n                 }\n                cyclesContent += `</Cycle ${cycle.cycleId}>\\n\\n`;\n            }\n            cyclesContent += '</M6. Cycles>';\n\n\n            let masterArtifactListContent = '<!-- Master Artifact List (A0) not found -->';\n            try {\n                const a0Path = path.join(rootPath, 'src', 'Artifacts', 'A0. DCE Master Artifact List.md');\n                masterArtifactListContent = await fs.readFile(a0Path, 'utf-8');\n            } catch (e) {\n                Services.loggerService.warn(\"Could not read A0. DCE Master Artifact List.md\");\n            }\n\n            const promptParts = [\n                `<prompt.md>`,\n                this.artifactSchemaTemplate,\n                cycleOverview,\n                this.interactionSchemaTemplate,\n                this.projectScopeTemplate,\n                `<M5. organized artifacts list>\\n${masterArtifactListContent}\\n</M5. organized artifacts list>`,\n                cyclesContent,\n                `<M7. Flattened Repo>\\n${flattenedContent}\\n</M7. Flattened Repo>`,\n                `</prompt.md>`\n            ];\n\n            const finalPrompt = promptParts.join('\\n\\n');\n\n            await fs.writeFile(promptMdPath, finalPrompt, 'utf-8');\n            vscode.window.showInformationMessage(`Successfully generated prompt.md.`);\n            Services.loggerService.log(\"Successfully generated prompt.md file.\");\n\n        } catch (error: any) {\n            let errorMessage = `Failed to generate prompt.md: ${error.message}`;\n            if (error.code === 'ENOENT' && error.path?.includes('flattened_repo.md')) {\n                errorMessage = \"Failed to generate prompt.md: 'flattened_repo.md' not found. Please flatten context first.\";\n            }\n            vscode.window.showErrorMessage(errorMessage);\n            Services.loggerService.error(errorMessage);\n        }\n    }\n}\n```\n</file>\n<file path=\"src/client/views/parallel-copilot.view/on-message.ts\">\n```typescript\n// Updated on: C133 (Add write file handler)\nimport { ServerPostMessageManager } from \"@/common/ipc/server-ipc\";\nimport { Services } from \"@/backend/services/services\";\nimport { ClientToServerChannel, ServerToClientChannel } from \"@/common/ipc/channels.enum\";\n\nexport function onMessage(serverIpc: ServerPostMessageManager) {\n    const { loggerService, promptService, fileOperationService, highlightingService, historyService } = Services;\n    loggerService.log(\"Parallel Co-Pilot view message handler initialized.\");\n\n    serverIpc.onClientMessage(ClientToServerChannel.RequestCreatePromptFile, (data) => {\n        promptService.generatePromptFile(data.cycleTitle, data.currentCycle);\n    });\n\n    serverIpc.onClientMessage(ClientToServerChannel.RequestFileExistence, (data) => {\n        fileOperationService.handleFileExistenceRequest(data.paths, serverIpc);\n    });\n\n    serverIpc.onClientMessage(ClientToServerChannel.RequestSyntaxHighlight, (data) => {\n        highlightingService.handleSyntaxHighlightRequest(data.code, data.lang, data.id, serverIpc);\n    });\n\n    serverIpc.onClientMessage(ClientToServerChannel.RequestLatestCycleData, async () => {\n        const cycleData = await historyService.getLatestCycle();\n        serverIpc.sendToClient(ServerToClientChannel.SendLatestCycleData, { cycleData });\n    });\n\n    serverIpc.onClientMessage(ClientToServerChannel.RequestCycleData, async (data) => {\n        const cycleData = await historyService.getCycleData(data.cycleId);\n        serverIpc.sendToClient(ServerToClientChannel.SendCycleData, { cycleData });\n    });\n\n    serverIpc.onClientMessage(ClientToServerChannel.SaveCycleData, (data) => {\n        historyService.saveCycleData(data.cycleData);\n    });\n    \n    serverIpc.onClientMessage(ClientToServerChannel.RequestFileContent, (data) => {\n        fileOperationService.handleFileContentRequest(data.path, serverIpc);\n    });\n\n    serverIpc.onClientMessage(ClientToServerChannel.RequestDeleteCycle, (data) => {\n        historyService.deleteCycle(data.cycleId);\n    });\n\n    serverIpc.onClientMessage(ClientToServerChannel.RequestResetHistory, () => {\n        historyService.resetHistory();\n    });\n\n    serverIpc.onClientMessage(ClientToServerChannel.RequestBatchFileWrite, (data) => {\n        fileOperationService.handleBatchFileWrite(data.files);\n    });\n\n    serverIpc.onClientMessage(ClientToServerChannel.RequestWriteFile, (data) => {\n        fileOperationService.handleWriteFile(data.path, data.content);\n    });\n}\n```\n</file>\n<file path=\"src/client/views/parallel-copilot.view/view.scss\">```scss\n/* Updated on: C133 (Remove diff viewer styles, add styles for new buttons and tab states) */\nbody {\n    padding: 0;\n    font-family: var(--vscode-font-family);\n    font-size: var(--vscode-font-size);\n    color: var(--vscode-editor-foreground);\n    background-color: var(--vscode-editor-background);\n}\n\n.pc-view-container {\n    padding: 8px;\n    display: flex;\n    flex-direction: column;\n    height: 100vh;\n    gap: 8px;\n    box-sizing: border-box;\n}\n\n.collapsible-section {\n    border: 1px solid var(--vscode-panel-border);\n    border-radius: 4px;\n    flex-shrink: 0;\n}\n\n.collapsible-header {\n    background-color: var(--vscode-sideBar-sectionHeaderBackground);\n    padding: 4px 8px;\n    font-size: 11px;\n    text-transform: uppercase;\n    font-weight: bold;\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n    gap: 4px;\n    justify-content: space-between;\n    transition: background-color 0.3s ease;\n\n    .chevron {\n        transition: transform 0.2s ease-in-out;\n    }\n    .chevron.collapsed {\n        transform: rotate(-90deg);\n    }\n}\n\n.collapsible-header.ready {\n    background-color: hsla(120, 60%, 25%, 0.3);\n}\n\n\n.collapsible-content {\n    padding: 8px;\n    display: flex;\n    flex-direction: column;\n    gap: 8px;\n}\n\n.pc-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    flex-shrink: 0;\n    gap: 16px;\n}\n\n.cycle-navigator {\n    display: flex;\n    align-items: center;\n    gap: 8px;\n    width: 100%;\n}\n\n.pc-toolbar {\n    display: flex;\n    align-items: center;\n    gap: 8px;\n}\n\n.cycle-navigator button, .pc-toolbar button, .file-actions button, .styled-button {\n    background-color: var(--vscode-button-secondaryBackground);\n    border: 1px solid var(--vscode-button-border, transparent);\n    color: var(--vscode-button-secondaryForeground);\n    cursor: pointer;\n    padding: 4px 8px;\n    border-radius: 3px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    gap: 6px;\n    font-size: 12px;\n\n    &:hover {\n        background-color: var(--vscode-button-secondaryHoverBackground);\n    }\n\n    &:disabled {\n        opacity: 0.5;\n        cursor: not-allowed;\n    }\n}\n\n.select-response-toggle {\n    background: none;\n    border: 1px solid var(--vscode-input-border);\n    color: var(--vscode-foreground);\n    &.selected {\n        background-color: var(--vscode-button-background);\n        color: var(--vscode-button-foreground);\n        border-color: var(--vscode-focusBorder);\n    }\n}\n\n.cycle-input {\n    width: 50px;\n    background-color: var(--vscode-input-background);\n    color: var(--vscode-input-foreground);\n    border: 1px solid var(--vscode-input-border);\n    text-align: center;\n    border-radius: 2px;\n}\n\n.cycle-title-input {\n    flex-grow: 1;\n    background-color: var(--vscode-input-background);\n    color: var(--vscode-input-foreground);\n    border: 1px solid var(--vscode-input-border);\n    padding: 2px 4px;\n    border-radius: 2px;\n}\n\n.context-inputs {\n    display: flex;\n    flex-direction: column;\n    gap: 8px;\n    flex-shrink: 0;\n}\n\n.tab-count-input {\n    display: flex;\n    align-items: center;\n    gap: 8px;\n    font-size: 12px;\n    \n    input {\n        width: 50px;\n        background-color: var(--vscode-input-background);\n        color: var(--vscode-input-foreground);\n        border: 1px solid var(--vscode-input-border);\n        text-align: center;\n        border-radius: 2px;\n    }\n}\n\n.context-textarea {\n    width: 100%;\n    height: 60px;\n    background-color: var(--vscode-input-background);\n    color: var(--vscode-input-foreground);\n    border: 1px solid var(--vscode-input-border);\n    border-radius: 2px;\n    padding: 4px;\n    font-family: var(--vscode-editor-font-family);\n    font-size: var(--vscode-editor-font-size);\n    resize: vertical;\n}\n\n.tab-bar {\n    display: flex;\n    border-bottom: 1px solid var(--vscode-panel-border);\n    flex-shrink: 0;\n}\n\n.tab {\n    padding: 6px 12px;\n    cursor: pointer;\n    border-bottom: 2px solid transparent;\n    color: var(--vscode-tab-inactiveForeground);\n    transition: background-color 0.3s ease, color 0.3s ease;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n}\n\n.tab.active {\n    color: var(--vscode-tab-activeForeground);\n    border-bottom-color: var(--vscode-tab-activeBorder);\n}\n\n.tab.ready {\n    background-color: hsla(120, 60%, 25%, 0.3);\n    color: var(--vscode-testing-iconPassed);\n}\n\n.tab-content {\n    flex-grow: 1;\n    display: flex;\n    flex-direction: column;\n    min-height: 0;\n    padding-top: 8px;\n}\n\n.tab-pane {\n    display: flex;\n    flex-direction: column;\n    flex-grow: 1;\n    gap: 8px;\n    height: 100%;\n}\n\n.response-textarea {\n    width: 100%;\n    height: 100%;\n    background-color: var(--vscode-input-background);\n    color: var(--vscode-input-foreground);\n    border: 1px solid var(--vscode-input-border);\n    border-radius: 2px;\n    padding: 4px;\n    font-family: var(--vscode-editor-font-family);\n    font-size: var(--vscode-editor-font-size);\n    resize: none;\n     &:focus {\n        outline: 1px solid var(--vscode-focusBorder);\n    }\n}\n\n.parsed-view-grid {\n    display: flex;\n    gap: 0;\n    flex-grow: 1;\n    min-height: 0;\n}\n\n.parsed-view-left {\n    overflow-y: auto;\n    display: flex;\n    flex-direction: column;\n    gap: 8px;\n    min-width: 150px;\n    padding-right: 8px;\n}\n\n.resizer {\n    width: 5px;\n    cursor: col-resize;\n    background-color: var(--vscode-panel-border);\n    flex-shrink: 0;\n    &:hover {\n        background-color: var(--vscode-focusBorder);\n    }\n}\n\n.parsed-view-right {\n    flex-grow: 1;\n    display: flex;\n    flex-direction: column;\n    min-width: 0;\n    padding-left: 8px;\n}\n\n.file-content-viewer-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    padding: 4px 8px;\n    background-color: var(--vscode-editorGroupHeader-tabsBackground);\n    border: 1px solid var(--vscode-panel-border);\n    border-bottom: none;\n    border-top-left-radius: 4px;\n    border-top-right-radius: 4px;\n    font-size: 12px;\n    flex-shrink: 0;\n\n    .file-path {\n        font-weight: bold;\n        white-space: nowrap;\n        overflow: hidden;\n        text-overflow: ellipsis;\n    }\n    .file-actions {\n        display: flex;\n        align-items: center;\n        gap: 8px;\n    }\n}\n\n.response-acceptance-header {\n    display: flex;\n    align-items: center;\n    gap: 8px;\n    padding: 4px 8px;\n    font-size: 12px;\n    background-color: var(--vscode-sideBar-sectionHeaderBackground);\n\n    input[type=\"checkbox\"] {\n        margin-right: 4px;\n    }\n}\n\n.code-viewer-wrapper {\n    display: flex;\n    flex-grow: 1;\n    min-height: 0;\n    border: 1px solid var(--vscode-panel-border);\n    border-top: none;\n    border-radius: 0 0 4px 4px;\n    background-color: var(--vscode-editor-background);\n    overflow: hidden;\n}\n\n.file-content-viewer {\n    flex: 1;\n    overflow: auto;\n    font-family: var(--vscode-editor-font-family);\n    font-size: var(--vscode-editor-font-size);\n    display: flex;\n    min-width: 0;\n}\n\n.line-numbers {\n    padding: 8px 10px 8px 8px;\n    text-align: right;\n    color: var(--vscode-editorLineNumber-foreground);\n    background-color: var(--vscode-editor-background);\n    user-select: none;\n    border-right: 1px solid var(--vscode-panel-border);\n    \n    span {\n        display: block;\n        line-height: 1.5;\n    }\n}\n\n.code-content {\n    padding: 8px;\n    flex-grow: 1;\n    white-space: pre;\n    \n    code > span {\n        line-height: 1.5;\n    }\n}\n\n.associated-files-list {\n    list-style: none;\n    padding: 0;\n    margin: 0;\n\n    li {\n        display: flex;\n        align-items: center;\n        gap: 8px;\n        padding: 2px 4px;\n        font-size: 12px;\n        border-radius: 3px;\n        cursor: pointer;\n        white-space: nowrap;\n        overflow: hidden;\n        text-overflow: ellipsis;\n\n        input[type=\"checkbox\"] {\n            margin-right: 4px;\n        }\n\n        &:hover {\n            background-color: var(--vscode-list-hoverBackground);\n        }\n\n        &.selected {\n            background-color: var(--vscode-list-activeSelectionBackground) !important;\n            color: var(--vscode-list-activeSelectionForeground) !important;\n        }\n    }\n\n    .status-icon {\n        flex-shrink: 0;\n    }\n    .status-icon.exists {\n        color: var(--vscode-testing-iconPassed);\n    }\n    .status-icon.not-exists {\n        color: var(--vscode-testing-iconFailed);\n    }\n}\n\n.collapsed-navigator {\n    display: flex;\n    align-items: center;\n    gap: 4px;\n    font-weight: normal;\n    \n    button {\n        padding: 0 4px;\n    }\n    \n    .cycle-display {\n        font-size: 11px;\n        color: var(--vscode-descriptionForeground);\n    }\n}\n\n.response-metadata {\n    font-size: 10px;\n    color: var(--vscode-descriptionForeground);\n}\n```\n</file>\n<file path=\"src/client/views/parallel-copilot.view/view.tsx\">\n```typescript\n// Updated on: C133 (Remove diff view, add selection persistence, fix accept buttons, restore metadata)\nimport * as React from 'react';\nimport * as ReactDOM from 'react-dom/client';\nimport './view.scss';\nimport { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscArrowSwap, VscTrash, VscSync, VscSave, VscSymbolFile, VscSymbolNumeric } from 'react-icons/vsc';\nimport { logger } from '@/client/utils/logger';\nimport { ClientPostMessageManager } from '@/common/ipc/client-ipc';\nimport { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';\nimport { ParsedResponse } from '@/common/types/pcpp.types';\nimport { parseResponse } from '@/client/utils/response-parser';\nimport ReactMarkdown from 'react-markdown';\nimport { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';\nimport * as path from 'path-browserify';\nimport { BatchWriteFile } from '@/common/ipc/channels.type';\n\nconst useDebounce = (callback: (...args: any[]) => void, delay: number) => {\n    const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);\n\n    const debouncedFunction = React.useCallback((...args: any[]) => {\n        if (timeoutRef.current) {\n            clearTimeout(timeoutRef.current);\n        }\n        timeoutRef.current = setTimeout(() => {\n            callback(...args);\n        }, delay);\n    }, [callback, delay]);\n\n    return debouncedFunction;\n};\n\nconst CodeViewer: React.FC<{ htmlContent: string | undefined | null }> = ({ htmlContent }) => {\n    if (htmlContent === undefined || htmlContent === null) {\n        return <div style={{ padding: '8px' }}>Select a file to view its content.</div>;\n    }\n    if (htmlContent.startsWith('// Error:')) {\n         return <div style={{ padding: '8px', color: 'var(--vscode-errorForeground)' }}>{htmlContent}</div>;\n    }\n\n    const codeContentMatch = /<pre><code>([\\s\\S]*)<\\/code><\\/pre>/s.exec(htmlContent);\n    const code = codeContentMatch ? codeContentMatch[1] : `<code>${htmlContent}</code>`; \n\n    const lines = code.split('\\n');\n    if (lines.length > 0 && lines[lines.length - 1] === '') {\n        lines.pop();\n    }\n\n    return (\n        <div className=\"file-content-viewer\">\n            <div className=\"line-numbers\">\n                {lines.map((_, i) => <span key={i}>{i + 1}</span>)}\n            </div>\n            <div className=\"code-content\" dangerouslySetInnerHTML={{ __html: code }} />\n        </div>\n    );\n};\n\ninterface TabState {\n    rawContent: string;\n    parsedContent: ParsedResponse | null;\n}\n\nconst CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; collapsedContent?: React.ReactNode; className?: string; }> = ({ title, children, isCollapsed, onToggle, collapsedContent, className }) => (\n    <div className=\"collapsible-section\">\n        <div className={`collapsible-header ${className || ''}`} onClick={onToggle}>\n            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>\n                <VscChevronDown className={`chevron ${isCollapsed ? 'collapsed' : ''}`} />\n                <span>{title}</span>\n            </div>\n            {isCollapsed && collapsedContent}\n        </div>\n        {!isCollapsed && <div className=\"collapsible-content\">{children}</div>}\n    </div>\n);\n\nconst App = () => {\n    const [activeTab, setActiveTab] = React.useState('1');\n    const [tabCount, setTabCount] = React.useState(4);\n    const [currentCycle, setCurrentCycle] = React.useState(1);\n    const [maxCycle, setMaxCycle] = React.useState(1);\n    const [cycleTitle, setCycleTitle] = React.useState('');\n    const [cycleContext, setCycleContext] = React.useState('');\n    const [ephemeralContext, setEphemeralContext] = React.useState('');\n    const [tabs, setTabs] = React.useState<{ [key: string]: TabState }>({});\n    const [highlightedCodeBlocks, setHighlightedCodeBlocks] = React.useState<Map<string, string>>(new Map());\n    const [fileExistenceMap, setFileExistenceMap] = React.useState<Map<string, boolean>>(new Map());\n    const [isParsedMode, setIsParsedMode] = React.useState(false);\n    const [selectedFilePath, setSelectedFilePath] = React.useState<string | null>(null);\n    const [isCycleCollapsed, setIsCycleCollapsed] = React.useState(false);\n    const [leftPaneWidth, setLeftPaneWidth] = React.useState(33);\n    const isResizing = React.useRef(false);\n    const [selectedFilesForReplacement, setSelectedFilesForReplacement] = React.useState<Set<string>>(new Set());\n    const [selectedResponseForPrompt, setSelectedResponseForPrompt] = React.useState<string | null>(null);\n\n    const [isAssociatedFilesCollapsed, setAssociatedFilesCollapsed] = React.useState(false);\n    const [isThoughtsCollapsed, setThoughtsCollapsed] = React.useState(false);\n    const [isActionCollapsed, setActionCollapsed] = React.useState(false);\n\n    const clientIpc = ClientPostMessageManager.getInstance();\n\n    const saveCurrentCycleState = React.useCallback((force = false) => {\n        const responses: { [key: string]: PcppResponse } = {};\n        for (let i = 1; i <= tabCount; i++) {\n            responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' };\n        }\n        const cycleData: PcppCycle = {\n            cycleId: currentCycle,\n            timestamp: new Date().toISOString(),\n            title: cycleTitle,\n            cycleContext,\n            ephemeralContext,\n            responses,\n            isParsedMode,\n            leftPaneWidth,\n            selectedResponseId: selectedResponseForPrompt,\n        };\n        clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });\n    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseForPrompt, clientIpc]);\n\n    const debouncedSave = useDebounce(saveCurrentCycleState, 1000);\n\n    React.useEffect(() => {\n        debouncedSave();\n    }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, selectedResponseForPrompt, debouncedSave]);\n    \n    const parseAllTabs = React.useCallback(() => {\n        setTabs(prevTabs => {\n            const allFilePaths = new Set<string>();\n            const updatedTabs = { ...prevTabs };\n            let needsUpdate = false;\n    \n            Object.values(updatedTabs).forEach(tabState => {\n                if (tabState.rawContent && !tabState.parsedContent) {\n                    needsUpdate = true;\n                    const parsed = parseResponse(tabState.rawContent);\n                    parsed.totalTokens = parsed.files.reduce((acc, file) => acc + Math.ceil(file.content.length / 4), 0);\n                    tabState.parsedContent = parsed;\n                    parsed.filesUpdated.forEach(file => allFilePaths.add(file));\n                    parsed.files.forEach(file => {\n                        const lang = path.extname(file.path).substring(1) || 'plaintext';\n                        const id = `${file.path}::${file.content}`;\n                        clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });\n                    });\n                }\n            });\n    \n            if (allFilePaths.size > 0) {\n                clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) });\n            }\n    \n            return needsUpdate ? updatedTabs : prevTabs;\n        });\n    }, [clientIpc]);\n    \n    React.useEffect(() => {\n        const loadCycleData = (cycleData: PcppCycle) => {\n            setCurrentCycle(cycleData.cycleId);\n            setCycleTitle(cycleData.title);\n            setCycleContext(cycleData.cycleContext);\n            setEphemeralContext(cycleData.ephemeralContext);\n            const newTabs: { [key: string]: TabState } = {};\n            Object.entries(cycleData.responses).forEach(([tabId, response]) => {\n                newTabs[tabId] = { rawContent: response.content, parsedContent: null };\n            });\n            setTabs(newTabs);\n            setIsParsedMode(cycleData.isParsedMode || false);\n            setLeftPaneWidth(cycleData.leftPaneWidth || 33);\n            setSelectedResponseForPrompt(cycleData.selectedResponseId || null);\n        };\n\n        clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData }) => {\n            loadCycleData(cycleData);\n            setMaxCycle(cycleData.cycleId);\n        });\n        clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData }) => {\n            if (cycleData) {\n                loadCycleData(cycleData);\n            }\n        });\n        clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => {\n            setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml));\n        });\n        clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => {\n            setFileExistenceMap(new Map(Object.entries(existenceMap)));\n        });\n        clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => {\n            if (reason === 'history') {\n                clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});\n            }\n        });\n        \n        clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});\n    }, [clientIpc]);\n\n    React.useEffect(() => {\n        if (isParsedMode) {\n            parseAllTabs();\n        }\n    }, [isParsedMode, tabs, parseAllTabs]);\n    \n    const activeTabData = tabs[activeTab.toString()];\n\n    const viewableContent = React.useMemo(() => {\n        if (!selectedFilePath || !activeTabData?.parsedContent) return undefined;\n        const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath);\n        if (!file) return '<div>Error: File data not found in parsed response.</div>';\n        const id = `${file.path}::${file.content}`;\n        return highlightedCodeBlocks.get(id);\n    }, [selectedFilePath, activeTabData?.parsedContent, highlightedCodeBlocks]);\n\n\n    const handleRawContentChange = (newContent: string, tabId: string) => {\n        setTabs(prev => ({ ...prev, [tabId]: { rawContent: newContent, parsedContent: null }}));\n    };\n\n    const handleGlobalParseToggle = () => {\n        const newParseMode = !isParsedMode;\n        setIsParsedMode(newParseMode);\n        setSelectedFilePath(null);\n        if (!newParseMode) {\n            setTabs(prev => {\n                const newTabs = {...prev};\n                Object.keys(newTabs).forEach(key => {\n                    newTabs[key].parsedContent = null;\n                });\n                return newTabs;\n            });\n        }\n    };\n\n    const handleCycleChange = (e: React.MouseEvent, newCycle: number) => {\n        e.stopPropagation();\n        if (newCycle > 0 && newCycle <= maxCycle) {\n            saveCurrentCycleState(true);\n            setCurrentCycle(newCycle);\n            clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle });\n        }\n    };\n\n    const handleNewCycle = (e: React.MouseEvent) => {\n        e.stopPropagation();\n        const newCycleId = maxCycle + 1;\n        setMaxCycle(newCycleId);\n        setCurrentCycle(newCycleId);\n        setCycleTitle('New Cycle');\n        setCycleContext('');\n        setEphemeralContext('');\n        setTabs({});\n        setIsParsedMode(false);\n        setSelectedResponseForPrompt(null);\n    };\n    \n    const handleGeneratePrompt = () => {\n        clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle });\n    };\n\n    const handleMouseDown = React.useCallback((e: React.MouseEvent) => {\n        e.preventDefault();\n        isResizing.current = true;\n    }, []);\n\n    const handleMouseMove = React.useCallback((e: MouseEvent) => {\n        if (!isResizing.current) return;\n        const newWidth = (e.clientX / window.innerWidth) * 100;\n        if (newWidth > 10 && newWidth < 90) {\n            setLeftPaneWidth(newWidth);\n        }\n    }, []);\n\n    const handleMouseUp = React.useCallback(() => {\n        isResizing.current = false;\n    }, []);\n\n    React.useEffect(() => {\n        const mm = (e: MouseEvent) => handleMouseMove(e);\n        const mu = () => handleMouseUp();\n        window.addEventListener('mousemove', mm);\n        window.addEventListener('mouseup', mu);\n        return () => {\n            window.removeEventListener('mousemove', mm);\n            window.removeEventListener('mouseup', mu);\n        };\n    }, [handleMouseMove, handleMouseUp]);\n    \n    const handleSelectForViewing = (filePath: string) => {\n        setSelectedFilePath(prev => prev === filePath ? null : filePath);\n    };\n\n    const handleDeleteCycle = () => clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle });\n    const handleResetHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {});\n\n    const handleFileSelectionToggle = (filePath: string) => {\n        setSelectedFilesForReplacement(prev => {\n            const newSet = new Set(prev);\n            if (newSet.has(filePath)) newSet.delete(filePath);\n            else newSet.add(filePath);\n            return newSet;\n        });\n    };\n\n    const handleSelectAllFilesToggle = (e: React.ChangeEvent<HTMLInputElement>) => {\n        if (e.target.checked) {\n            const allFilePaths = activeTabData?.parsedContent?.filesUpdated || [];\n            setSelectedFilesForReplacement(new Set(allFilePaths));\n        } else {\n            setSelectedFilesForReplacement(new Set());\n        }\n    };\n\n    const handleAcceptSelectedFiles = () => {\n        if (selectedFilesForReplacement.size === 0 || !activeTabData?.parsedContent) return;\n        const filesToWrite: BatchWriteFile[] = [];\n        selectedFilesForReplacement.forEach(filePath => {\n            const file = activeTabData.parsedContent.files.find(f => f.path === filePath);\n            if (file) filesToWrite.push({ path: file.path, content: file.content });\n        });\n        if (filesToWrite.length > 0) clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite });\n    };\n\n    const handleAcceptSingleFile = (filePath: string | null) => {\n        if (!filePath || !activeTabData?.parsedContent) return;\n        const file = activeTabData.parsedContent.files.find(f => f.path === filePath);\n        if (file) clientIpc.sendToServer(ClientToServerChannel.RequestWriteFile, { path: file.path, content: file.content });\n    };\n\n    const isAllFilesSelected = React.useMemo(() => {\n        if (!activeTabData?.parsedContent) return false;\n        const allFiles = activeTabData.parsedContent.filesUpdated;\n        return allFiles.length > 0 && allFiles.every(file => selectedFilesForReplacement.has(file));\n    }, [selectedFilesForReplacement, activeTabData]);\n\n    const isNewCycleButtonDisabled = React.useMemo(() => {\n        const hasTitle = cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== '';\n        const hasContext = cycleContext.trim() || ephemeralContext.trim();\n        const hasResponseContent = Object.values(tabs).some(t => t.rawContent.trim());\n        return !hasTitle && !hasContext && !hasResponseContent;\n    }, [cycleTitle, cycleContext, ephemeralContext, tabs]);\n\n    const isCycleReady = React.useMemo(() => {\n        const hasTitle = cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== '';\n        const hasContext = !!cycleContext.trim();\n        const hasResponseContent = !!tabs[selectedResponseForPrompt || '']?.rawContent.trim();\n        return hasTitle && hasContext && hasResponseContent && !!selectedResponseForPrompt;\n    }, [cycleTitle, cycleContext, tabs, selectedResponseForPrompt]);\n\n    const collapsedNavigator = (\n        <div className=\"collapsed-navigator\">\n            <button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button>\n            <span className=\"cycle-display\">C{currentCycle}</span>\n            <button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button>\n        </div>\n    );\n\n    const renderContent = () => {\n        if (!isParsedMode || !activeTabData?.parsedContent) {\n            return <textarea className=\"response-textarea\" placeholder={`Paste AI response for tab ${activeTab} here...`} value={activeTabData?.rawContent || ''} onChange={(e) => handleRawContentChange(e.target.value, activeTab)} />;\n        }\n\n        return (\n            <div className=\"parsed-view-grid\">\n                <div className=\"parsed-view-left\" style={{ flexBasis: `${leftPaneWidth}%` }}>\n                    <CollapsibleSection title=\"Associated Files\" isCollapsed={isAssociatedFilesCollapsed} onToggle={() => setAssociatedFilesCollapsed(p => !p)}>\n                        <ul className=\"associated-files-list\">\n                            {activeTabData.parsedContent.filesUpdated.map(file => (\n                                <li key={file} className={selectedFilePath === file ? 'selected' : ''} onClick={() => handleSelectForViewing(file)} title={file}>\n                                    <input type=\"checkbox\" checked={selectedFilesForReplacement.has(file)} onChange={() => handleFileSelectionToggle(file)} onClick={e => e.stopPropagation()} />\n                                    {fileExistenceMap.get(file) ? <VscCheck className=\"status-icon exists\" /> : <VscError className=\"status-icon not-exists\" />}\n                                    <span>{file}</span>\n                                </li>\n                            ))}\n                        </ul>\n                    </CollapsibleSection>\n                    <CollapsibleSection title=\"Thoughts / Response\" isCollapsed={isThoughtsCollapsed} onToggle={() => setThoughtsCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown></CollapsibleSection>\n                    <CollapsibleSection title=\"Course of Action\" isCollapsed={isActionCollapsed} onToggle={() => setActionCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown></CollapsibleSection>\n                </div>\n                <div className=\"resizer\" onMouseDown={handleMouseDown} />\n                <div className=\"parsed-view-right\">\n                    <div className=\"response-acceptance-header\">\n                        <button className={`styled-button select-response-toggle ${selectedResponseForPrompt === activeTab ? 'selected' : ''}`} onClick={() => setSelectedResponseForPrompt(prev => prev === activeTab ? null : activeTab)}>\n                           {selectedResponseForPrompt === activeTab ? <VscCheck /> : null} Select this response\n                        </button>\n                        <input type=\"checkbox\" checked={isAllFilesSelected} onChange={handleSelectAllFilesToggle} style={{marginLeft: 'auto'}} title=\"Select/Deselect all files\"/>\n                        <button className=\"styled-button\" onClick={handleAcceptSelectedFiles} disabled={selectedFilesForReplacement.size === 0}><VscSave/> Accept Selected Files</button>\n                    </div>\n                    <div className=\"file-content-viewer-header\">\n                        <span className=\"file-path\" title={selectedFilePath || ''}>{selectedFilePath ? path.basename(selectedFilePath) : 'No file selected'}</span>\n                        <div className=\"file-actions\">\n                            <button className=\"styled-button\" onClick={() => handleAcceptSingleFile(selectedFilePath)} disabled={!selectedFilePath} title=\"Accept this file into workspace\"><VscArrowSwap /> Accept this file</button>\n                        </div>\n                    </div>\n                    <div className=\"code-viewer-wrapper\">\n                        <CodeViewer htmlContent={viewableContent} />\n                    </div>\n                </div>\n            </div>\n        );\n    };\n\n    return (\n        <div className=\"pc-view-container\">\n            <div className=\"pc-header\">\n                <div className=\"pc-toolbar\">\n                    <button className=\"styled-button\" onClick={handleGeneratePrompt} title=\"Generate prompt.md\"><VscFileCode /> Generate prompt.md</button>\n                    <button className=\"styled-button\" onClick={handleGlobalParseToggle}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button>\n                </div>\n                <div className=\"tab-count-input\">\n                    <label htmlFor=\"tab-count\">Responses:</label>\n                    <input type=\"number\" id=\"tab-count\" min=\"1\" max=\"20\" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} />\n                </div>\n            </div>\n\n            <CollapsibleSection title=\"Cycle & Context\" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isCycleReady ? 'ready' : ''}>\n                <div className=\"cycle-navigator\">\n                    <span>Cycle:</span>\n                    <button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button>\n                    <input type=\"number\" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 1)} className=\"cycle-input\" />\n                    <button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button>\n                    <button onClick={handleNewCycle} title=\"New Cycle\" disabled={isNewCycleButtonDisabled}><VscAdd /></button>\n                    <input type=\"text\" className=\"cycle-title-input\" placeholder=\"Cycle Title...\" value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} />\n                    <button onClick={handleDeleteCycle} title=\"Delete Current Cycle\"><VscTrash /></button>\n                    <button onClick={handleResetHistory} title=\"Reset All History\"><VscSync /></button>\n                </div>\n                <div className=\"context-inputs\">\n                    <textarea className=\"context-textarea\" placeholder=\"Cycle Context (notes for this cycle)...\" value={cycleContext} onChange={e => setCycleContext(e.target.value)} />\n                    <textarea className=\"context-textarea\" placeholder=\"Ephemeral Context (for this cycle's prompt only)...\" value={ephemeralContext} onChange={e => setEphemeralContext(e.target.value)} />\n                </div>\n            </CollapsibleSection>\n\n            <div className=\"tab-bar\">\n                {[...Array(tabCount)].map((_, i) => {\n                    const tabId = (i + 1).toString();\n                    const tabData = tabs[tabId];\n                    const isReady = isCycleReady && selectedResponseForPrompt === tabId;\n                    return (\n                        <div key={i} className={`tab ${activeTab === tabId ? 'active' : ''} ${isReady ? 'ready' : ''}`} onClick={() => setActiveTab(tabId)}>\n                            <span>Resp {tabId}</span>\n                            {isParsedMode && tabData?.parsedContent && (\n                                <span className=\"response-metadata\" title=\"Associated Files / Total Tokens\">\n                                    <VscSymbolFile/> {tabData.parsedContent.filesUpdated.length} / <VscSymbolNumeric/> {tabData.parsedContent.totalTokens}\n                                </span>\n                            )}\n                        </div>\n                    );\n                })}\n            </div>\n\n            <div className=\"tab-content\">\n                {activeTab !== null && (\n                    <div className=\"tab-pane\">\n                        {renderContent()}\n                    </div>\n                )}\n            </div>\n        </div>\n    );\n};\n\nconst root = ReactDOM.createRoot(document.getElementById('root')!);\nroot.render(<App />);\n```\n</file>\n```"
+        },
+        "2": {
+          "content": ""
+        },
+        "3": {
+          "content": ""
+        },
+        "4": {
+          "content": ""
+        }
+      },
+      "isParsedMode": true,
+      "leftPaneWidth": 26.794554455445546,
+      "selectedResponseId": "1"
+    },
+    {
+      "cycleId": 3,
+      "timestamp": "2025-08-25T16:53:54.935Z",
+      "title": "New Cycle",
+      "cycleContext": "test",
+      "ephemeralContext": "weee test ephemeral in cycle 3",
+      "responses": {
+        "1": {
+          "content": ""
+        },
+        "2": {
+          "content": ""
+        },
+        "3": {
+          "content": ""
+        },
+        "4": {
+          "content": ""
+        }
+      },
+      "isParsedMode": false,
+      "leftPaneWidth": 26.794554455445546,
+      "selectedResponseId": null
+    }
+  ]
+}
+======================================================================
+
+==================== GENERATED <M6. Cycles> BLOCK ====================
+<M6. Cycles>
+
+<Cycle 3>
+New Cycle
+<Previous Cycle 2 Summary of Actions>
+I have analyzed the detailed feedback from Cycle 133. The key takeaways are a major pivot away from the integrated diff viewer for now, a critical need to fix a state persistence bug that causes user selections to be lost, several UI/UX regressions to address (like missing metadata), and a list of new UI improvements to implement.
+
+My course of action is to systematically address these points, prioritizing the critical bug fixes and the removal of the now-unwanted diff viewer functionality.
+
+\n${parsed.courseOfAction}\n\n`;
+
+### Files Updated This Cycle:
+* `src/Artifacts/A11. DCE - Regression Case Studies.md`
+* `src/Artifacts/A35. DCE - Phase 2 - UI Mockups and Flow.md`
+* `src/Artifacts/A49. DCE - Phase 2 - File Association & Diffing Plan.md`
+* `src/Artifacts/A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md`
+* `src/common/types/pcpp.types.ts`
+* `src/common/ipc/channels.enum.ts`
+* `src/common/ipc/channels.type.ts`
+* `src/backend/services/history.service.ts`
+* `src/backend/services/file-operation.service.ts`
+* `src/backend/services/prompt.service.ts`
+* `src/client/views/parallel-copilot.view/on-message.ts`
+* `src/client/views/parallel-copilot.view/view.scss`
+* `src/client/views/parallel-copilot.view/view.tsx`
+</Previous Cycle 2 Summary of Actions>
+</Cycle 3>
+
+<Cycle 2>
+New Cycle
+<Previous Cycle 1 Summary of Actions>
+I have analyzed the comprehensive feedback from Cycle 132. There are several regressions, usability issues with the diff viewer, and a significant change in the desired workflow from "swapping" files to a one-way "replace" or "accept" model. My course of action is to address these issues systematically, prioritizing critical bug fixes, then implementing the keyboard navigation for the diff viewer, and finally updating the UI and documentation to reflect the new "replace" workflow.
+
+1.  **Documentation First (Aligning with New Requirements):**
+
+### Files Updated This Cycle:
+* `src/Artifacts/A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements.md`
+* `src/Artifacts/A35. DCE - Phase 2 - UI Mockups and Flow.md`
+* `src/Artifacts/A49. DCE - Phase 2 - File Association & Diffing Plan.md`
+* `src/Artifacts/A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md`
+* `src/common/ipc/channels.enum.ts`
+* `src/common/ipc/channels.type.ts`
+* `src/backend/services/file-operation.service.ts`
+* `src/client/views/parallel-copilot.view/on-message.ts`
+* `src/client/components/DiffViewer.tsx`
+* `src/client/views/parallel-copilot.view/view.scss`
+* `src/client/views/parallel-copilot.view/view.tsx`
+</Previous Cycle 1 Summary of Actions>
+</Cycle 2>
+
+<Cycle 1>
+New Cycle
+</Cycle 1>
+
+</M6. Cycles>
+======================================================================
+</file>
+
 <file path="package.json">
 {
     "name": "data-curation-environment",
@@ -647,7 +817,7 @@ SOFTWARE.
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C129 (Add A58 for WinMerge Source Code Analysis)
+# Updated on: C134 (Add A59 for State Logging)
 
 ## 1. Purpose
 
@@ -909,6 +1079,10 @@ SOFTWARE.
 - **Description:** Documents the key files and concepts from the WinMerge source code that are relevant to building a high-quality diff viewer.
 - **Tags:** research, analysis, diff, winmerge, source code
 
+### A59. DCE - Phase 2 - Debugging and State Logging
+- **Description:** Documents the plan for a "Log State" button that outputs critical state information (cycle history, current inputs) to the debug channel to accelerate troubleshooting.
+- **Tags:** feature plan, phase 2, ui, ux, debugging, logging, state management
+
 ## II. Standalone Utilities & Guides
 
 ### A149. Local LLM Integration Plan
@@ -1024,7 +1198,7 @@ To enhance the data curation process, it is critical for the user to have immedi
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C130 (Add case for RegExp type inference errors)
+# Updated on: C134 (Add case for cross-cycle state bleeding)
 
 - **Key/Value for A0:**
 - **Description:** Documents recurring bugs, their root causes, and codified solutions to prevent future regressions during development.
@@ -1035,6 +1209,48 @@ To enhance the data curation process, it is critical for the user to have immedi
 This document serves as a living record of persistent or complex bugs that have recurred across multiple development cycles. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 012: Cross-Cycle State Bleeding
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`
+-   **Cycles Observed:** 134
+-   **Symptom:** When a user checks files for replacement in a response (e.g., in Cycle 1), and then navigates to a new or different cycle (e.g., Cycle 2), the same files are already checked in the new cycle's responses if they happen to share the same file path. This is incorrect behavior, as each cycle should be a clean slate for review.
+-   **Root Cause Analysis (RCA):** The React state variable responsible for tracking the set of checked files for replacement (`selectedFilesForReplacement`) was not being reset when the cycle changed. The component would load the new cycle's data, but the old selection state from the previous cycle would persist, leading to the UI incorrectly showing checkmarks for files that the user had not yet reviewed in the new context.
+-   **Codified Solution & Best Practice:**
+    1.  **Explicit State Reset:** The event handlers responsible for changing the cycle (`handleCycleChange` and `handleNewCycle`) must be updated to explicitly reset the selection state.
+    2.  **Implementation:** Inside these functions, a call to `setSelectedFilesForReplacement(new Set())` must be added. This ensures that any time the user navigates away from the current cycle, the set of files checked for replacement is cleared.
+    3.  **Best Practice:** When designing components with complex, multi-layered state (like a view that manages both a "current item" and "selections within that item"), always identify which pieces of state are local to the "current item." Ensure that these local states are explicitly reset whenever the "current item" (in this case, the cycle) changes.
+
+---
+
+### Case Study 011: PCPP Metadata Regression
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/client/utils/response-parser.ts`
+-   **Cycles Observed:** 133
+-   **Symptom:** The Parallel Co-Pilot Panel UI stopped displaying response-level metadata (total token count) and file-level metadata (token count, similarity score) that was previously functional.
+-   **Root Cause Analysis (RCA):** During a series of rapid refactors focused on other features (like the diff viewer and state management), the logic responsible for calculating and rendering this metadata was inadvertently removed or commented out. The `ParsedResponse` type may have lost fields, or the UI components were simplified and the props for displaying the data were removed. This is a classic regression where functionality is lost during unrelated code changes.
+-   **Codified Solution & Best Practice:**
+    1.  **Re-implement Calculation:** The logic to calculate token counts for the entire response and for each individual file must be re-added to `response-parser.ts`.
+    2.  **Restore UI Components:** The JSX in `view.tsx` responsible for displaying this metadata in the response header and file viewer header must be restored.
+    3.  **Verify Data Flow:** Ensure that the `ParsedResponse` object correctly holds the metadata and that it is passed as props to the relevant UI components.
+    4.  **Best Practice:** Before committing significant refactors, a quick check against the documented UI mockups (`A35`) and feature plans (`A53`) should be performed to ensure that no existing, documented features have been accidentally removed.
+
+---
+
+### Case Study 010: PCPP Selection State Persistence Failure
+
+-   **Artifacts Affected:** `src/common/types/pcpp.types.ts`, `src/backend/services/history.service.ts`, `src/backend/services/prompt.service.ts`, `src/client/views/parallel-copilot.view/view.tsx`
+-   **Cycles Observed:** 133
+-   **Symptom:** A user selects a response in the PCPP. When they perform an action that causes the view to re-read its state (like generating a `prompt.md` file or reloading the window), the selected response becomes un-selected. This constitutes a critical data loss and workflow interruption.
+-   **Root Cause Analysis (RCA):** The state variable tracking the user's selected response was a transient, frontend-only state (`useState`). It was not being included in the `PcppCycle` data object that was periodically saved to the `dce_history.json` file on the backend. When the view reloaded or another service read the history, there was no record of which response had been selected, so the UI defaulted back to no selection.
+-   **Codified Solution & Best Practice:**
+    1.  **Extend Data Model:** The `PcppCycle` interface in `src/common/types/pcpp.types.ts` must be extended to include a persistent field, such as `selectedResponseId: string | null`.
+    2.  **Save the State:** The `saveCurrentCycleState` function in `view.tsx` must be updated to include this new `selectedResponseId` in the payload it sends to the backend.
+    3.  **Load the State:** The logic in `view.tsx` that loads cycle data from the backend must use the incoming `selectedResponseId` to correctly initialize its selection state.
+    4.  **Update Dependent Services:** Services that rely on this selection, like `prompt.service.ts`, must be updated to read the `selectedResponseId` from the history file to access the correct response data, rather than relying on a transient state.
+    5.  **Best Practice:** Any piece of UI state that represents a significant user decision and needs to survive a reload or be accessed by other parts of the extension **must** be included in the backend persistence model.
 
 ---
 
@@ -1050,12 +1266,12 @@ This document serves as a living record of persistent or complex bugs that have 
 -   **Example of Flawed Logic (Conceptual):**
     ```typescript
     const match = myString.match(/.../);
-    const value = match ? match.trim() : ''; // This can fail if TS inference is poor
+    const value = match ? match[1].trim() : ''; // This can fail if TS inference is poor
     ```
 -   **Example of Correct Logic (Conceptual):**
     ```typescript
     const match = myString.match(/.../);
-    const value = (match?. ?? '').trim(); // This is type-safe and robust
+    const value = (match?.[1] ?? '').trim(); // This is type-safe and robust
     ```
 
 ---
@@ -2751,7 +2967,7 @@ To achieve greater feature parity with the native VS Code Explorer and improve w
 # Artifact A34: DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements
 # Date Created: C69
 # Author: AI Model
-# Updated on: C91 (Add global parse toggle and Associated Files list)
+# Updated on: C133 (Add requirement for visual feedback on selection)
 
 - **Key/Value for A0:**
 - **Description:** Outlines the high-level vision and user stories for the Phase 2 multi-tabbed editor panel, designed for comparing and managing multiple AI-generated responses. Includes plans for response annotation and a "Cycles Context" field.
@@ -2768,14 +2984,14 @@ The goal of the **Parallel Co-Pilot Panel** is to create an integrated, **persis
 ## 2. Core Concepts
 
 1.  **Dedicated View Container:** The panel has its own icon in the Activity Bar, providing a distinct, full-height space for its UI.
-2.  **Stateful & Persistent:** The content of all tabs, context fields, and the current cycle number are automatically saved. The state persists across sessions and when moving the panel to a new window.
+2.  **Stateful & Persistent:** The content of all tabs, context fields, the current cycle number, and the **selected response** are automatically saved. The state persists across sessions and when moving the panel to a new window.
 3.  **Global Parse-on-Demand:** A single "Parse All Responses" button in the main header controls the view mode for all tabs.
 4.  **Structured, Readable View:** After parsing, each tab's `textarea` is replaced by a static, read-only view that:
     *   Renders the AI's summary and plan as **formatted Markdown**.
     *   Uses **collapsible sections** for the main UI areas (Cycle Info, Summary, etc.) to manage screen real estate.
     *   Displays an **"Associated Files" list** with indicators (`✓`/`✗`) showing if the files exist in the workspace.
     *   Displays individual, **syntax-highlighted** code blocks for each file.
-5.  **Live Testing via "Swap":** The core innovation is a "swap" feature. The user can, with a single click, exchange the content of a parsed file block with its corresponding source file in the workspace.
+5.  **Live Testing via "Accept":** The core innovation is an "accept" feature. The user can, with a single click, overwrite the content of a workspace file with the AI-generated version.
 6.  **Integrated Diffing:** Users can click on a file in the "Associated Files" list to see an immediate diff view comparing the AI's suggestion against the current workspace file.
 7.  **Cycle Navigator:** A UI to navigate back and forth through the history of development cycles, loading the corresponding AI responses for each cycle.
 8.  **Metadata Display:** Each response tab will display key metadata, such as token counts and similarity scores, to help the user quickly evaluate the AI's output.
@@ -2789,16 +3005,17 @@ The goal of the **Parallel Co-Pilot Panel** is to create an integrated, **persis
 | P2-US-03 | **View Formatted Text** | As a developer, I want the AI's summary and plan to be rendered as formatted Markdown, so I can easily read lists, bolded text, and other formatting. | - The summary and course of action sections correctly render Markdown syntax. |
 | P2-US-04 | **Manage UI Space** | As a developer, I want to be able to collapse the main sections of the UI, so I can focus on the code blocks without excessive scrolling. | - The Cycle Info, Summary, Course of Action, and Associated Files sections have collapsible headers. |
 | P2-US-05 | **Verify Response Validity** | As a developer, I want to see a list of all files an AI response intends to modify, with a clear indicator of whether those files exist in my project, so I can immediately spot hallucinations or new file suggestions. | - After parsing, a list of "Associated Files" is displayed. <br> - A checkmark (`✓`) appears next to files that exist in the workspace. <br> - An 'x' (`✗`) appears next to files that do not exist. |
-| P2-US-06 | **Persistent State** | As a developer, I want all the text I've entered into the panel to be saved automatically, so I don't lose my work if I close the panel, move it, or restart VS Code. | - All raw text content is saved to a history file (`.vscode/dce_history.json`). <br> - When the panel is reopened, it loads the state from the most recent cycle. |
+| P2-US-06 | **Persistent State** | As a developer, I want all the text I've entered and the response I've selected to be saved automatically, so I don't lose my work if I close the panel, move it, or restart VS Code. | - All raw text content and the ID of the selected response is saved to a history file (`.vscode/dce_history.json`). <br> - When the panel is reopened, it loads the state from the most recent cycle. |
 | P2-US-07 | **Review Changes with Diff** | As a developer, I want to click on any file in the "Associated Files" list to see a diff, so I can review the exact changes before testing. | - Clicking a file path in the list opens a diff view comparing the workspace version with the AI's version. |
 | P2-US-08 | **Navigate Cycle History** | As a developer, I want to navigate backward and forward through my project's development cycles, so I can review past AI suggestions. | - UI controls exist to move between cycles. <br> - Navigating to a past cycle loads its saved raw responses into the panel. |
+| P2-US-09 | **Visual Feedback on Selection** | As a user, when I select a response that is ready to be used for the next cycle, I want clear visual feedback, so I know I can proceed with confidence. | - When a response is selected (and other conditions like having a cycle title are met), the current cycle's tab and the selected response's tab turn a distinct color (e.g., green). |
 </file>
 
 <file path="src/Artifacts/A35. DCE - Phase 2 - UI Mockups and Flow.md">
 # Artifact A35: DCE - Phase 2 - UI Mockups and Flow
 # Date Created: C69
 # Author: AI Model
-# Updated on: C132 (Add response-level controls and refine diff view)
+# Updated on: C134 (Add "Select All" and "Log State" buttons)
 
 ## 1. Overview
 
@@ -2807,10 +3024,23 @@ This document describes the user interface (UI) and interaction flow for the Par
 ## 2. UI Mockup (Textual Description)
 
 ### 2.1. Main Header & Cycle Section
-(No changes from C131)
+The main header contains global actions.
+
+```
+|-------------------------------------------------------------------------------------------------|
+| [ Generate prompt.md ] [ Log State ] [ Parse All Responses ]      [ Number of Responses: [ 4 ] ] |
+|-------------------------------------------------------------------------------------------------|
+| [v] CYCLE & CONTEXT (C134: Review and Implement Feedback)                                       |
+| |---------------------------------------------------------------------------------------------| |
+| | Cycle: [ < ] [ C134 ] [ > ] [ + ] [ Title Input... ] [Delete] [Reset]                       | |
+| | [ Cycle Context Text Area... ]                                                              | |
+| | [ Ephemeral Context Text Area... ]                                                          | |
+|-------------------------------------------------------------------------------------------------|
+```
+*   **`[ Log State ]` (New):** A new button next to "Generate prompt.md" to trigger the state logging feature.
 
 ### 2.2. Response Tabs
-(No changes from C131)
+(No changes from C133)
 
 ### 2.3. Parsed View (Non-Diff Mode)
 
@@ -2820,69 +3050,36 @@ The parsed view uses a **resizable two-pane layout**. The left pane provides sum
 |-------------------------------------------------------------------------------------------------|
 | [ Left Pane ]<--->[ Right Pane (Code Viewer) ]                                                 |
 | |-------------||------------------------------------------------------------------------------| |
-| | [v] ASSOCIATED FILES            | | [ ] Select this response [ Accept Selected Files ]               | |
+| | [v] ASSOCIATED FILES            | | [ Select This Response ] [ Select All Files ] [ Accept Selected ] | |
 | | |-------------------------------| |------------------------------------------------------------------| |
-| | | [x] [✓] src/.../view.tsx      | | [ File: src/.../view.tsx ] [ View Diff ] [ Accept this file ]    | |
+| | | [ ] [✓] src/.../view.tsx      | | [ File: src/.../view.tsx ] [ Accept this file ]                  | |
 | | | [ ] [✗] src/.../new-file.ts   | | +------------------------------------------------------------------+ | |
 | |                                   | | | [ Read-only editor with line numbers and syntax highlighting ] | | |
-| | [v] THOUGHTS / RESPONSE           | | +------------------------------------------------------------------+ | |
-| | | Rendered Markdown...            | |                                                                    | |
+| | [v] THOUGHTS / RESPONSE           | | | + Metadata: 1.2K tokens (Original: 1.1K, Sim: 95%)           | | |
+| | | Rendered Markdown...            | | +------------------------------------------------------------------+ | |
 | |                                   | |                                                                    | |
 | | [v] COURSE OF ACTION              | |                                                                    | |
 | | | Rendered Markdown...            | |                                                                    | |
 +-------------------------------------------------------------------------------------------------+
 ```
-*   **File Checkboxes (`[x]`):** A checkbox now appears next to each file in the "Associated Files" list. This allows the user to stage individual files for a bulk "accept" operation.
-*   **Response Header:** A new header bar appears above the code viewer.
-    *   **`[ ] Select this response`:** A checkbox that checks or un-checks all files in the "Associated Files" list.
-    *   **`[ Accept Selected Files ]`:** A button that replaces all checked workspace files with the versions from this AI response.
-*   **Individual File Actions:** The "Swap" button is renamed to **"Accept this file"** for clarity.
+*   **`[ Select All Files ]` (New):** A new button added to the header of the right pane. It will select (check) all files in the "Associated Files" list. It should toggle to "Deselect All" if all files are already selected.
 
 ### 2.4. Diff View
-
-When the user clicks the "[ View Diff ]" button.
-
-```
-|-------------------------------------------------------------------------------------------------|
-| [ Left Pane ]<--->[ Right Pane (Diff Viewer) ]                                                 |
-| |-------------||------------------------------------------------------------------------------| |
-| | [v] ASSOCIATED FILES            | | [ Back to Code View ]                                            | |
-| | | ... (files list) ...          | |------------------------------------------------------------------| |
-| |                                   | | [ Location Pane (visual file overview) ]                         | |
-| | [v] THOUGHTS / RESPONSE           | |------------------------------------------------------------------| |
-| | | ...                           | | [ Left Diff Pane ]<--->[ Right Diff Pane ]                       | |
-| |                                   | | | (Scroll-locked)    | | (Scroll-locked)                     | | |
-| | [v] COURSE OF ACTION              | | +--------------------||---------------------------------------+ | |
-| | | ...                           | | [ Bottom Detail Pane (Original) ]                                | |
-| |                                   | | [ Bottom Detail Pane (Response) ]                                | |
-+-------------------------------------------------------------------------------------------------+
-```
-*   **`[ Back to Code View ]`:** A button to exit the diff mode and return to the single-file code viewer.
-*   **Location Pane:** A new (future) component that provides a high-level, vertical map of the differences in the entire file, similar to WinMerge.
+(No changes from C133)
 
 ## 3. User Interaction Flow
 
 1.  **Paste & Parse:** User pastes responses and clicks "Parse All".
-2.  **Select for Replacement:**
-    *   The user reviews "Resp 1". They decide they want most of it.
-    *   They click the **"Select this response"** checkbox. All files in the "Associated Files" list become checked.
-    *   They see one file, `config.ts`, that they don't want to change. They uncheck the box next to `config.ts`.
-3.  **Accept Bulk Changes:** The user clicks the **"Accept Selected Files"** button. The extension overwrites the content of all checked workspace files with the content from "Resp 1".
-4.  **View Individual Diff:**
-    *   The user switches to "Resp 2" and selects `view.tsx` in the "Associated Files" list.
-    *   They click **"View Diff"**. The right pane changes to the diff view.
-5.  **Keyboard Navigation in Diff:**
-    *   The user presses the **Down Arrow** key to jump to the first difference.
-    *   They like the change, so they press the **Right Arrow** key. The change is visually applied in the right-hand (original) pane.
-    *   They navigate to the next difference and repeat the process.
-6.  **Exit Diff:** The user clicks **"Back to Code View"** to return to the normal code viewer.
+2.  **Select All:** The user is reviewing "Resp 1" and wants to accept all suggested files. They click the new **"Select All Files"** button. All checkboxes in the "Associated Files" list become checked.
+3.  **Accept:** The user clicks **"Accept Selected Files"**. The extension writes all the files to the workspace.
+4.  **Debug State:** The user notices something is wrong with the prompt generation. They click the **"Log State"** button. The extension's output channel displays a detailed log of the current cycle states and the generated `<M6. Cycles>` content, which they can then provide in their feedback.
 </file>
 
 <file path="src/Artifacts/A36. DCE - Phase 2 - Technical Implementation Plan.md">
 # Artifact A36: DCE - Phase 2 - Technical Implementation Plan
 # Date Created: C69
 # Author: AI Model
-# Updated on: C96 (Add persistent parse mode and robust new cycle logic)
+# Updated on: C134 (Add logic for clearing selection state and stricter new cycle button)
 
 - **Key/Value for A0:**
 - **Description:** Details the technical approach for building the Parallel Co-Pilot Panel, including the new webview provider, state management, IPC channels, and backend logic for file content swapping.
@@ -2890,7 +3087,7 @@ When the user clicks the "[ View Diff ]" button.
 
 ## 1. Overview
 
-This document outlines the technical implementation strategy for the Parallel Co-Pilot Panel. The plan is updated to reflect a two-pane UI for diffing, a smarter parser, more resilient backend path resolution, and several UI/UX fixes from Cycle 96.
+This document outlines the technical implementation strategy for the Parallel Co-Pilot Panel. The plan is updated to reflect several UI/UX fixes and new features from Cycle 134.
 
 ## 2. Core Components
 
@@ -2902,43 +3099,26 @@ The component state will be expanded to manage the new UI features.
 // State within the view.tsx component
 interface PcppState {
   // ... existing state
-  tabCount: number; // New: To control the number of response tabs
-  isParsedMode: boolean;
-  fileExistenceMap: Map<string, boolean>;
-  diffTarget: ParsedFile | null;
-  originalFileContent: string | null;
-  // New: Separate state for each collapsible section
-  isCycleCollapsed: boolean;
-  isSummaryCollapsed: boolean;
-  isCourseOfActionCollapsed: boolean;
-  isAssociatedFilesCollapsed: boolean;
-}
-```
-*   **`tabCount`**: A new state to control the number of tabs rendered.
-*   **Collapsible States**: New booleans to manage the UI state for each collapsible section independently.
+  selectedFilesForReplacement: Set<string>;
+}```
+*   **`selectedFilesForReplacement`**: This state must be explicitly cleared when the user navigates to a new or different cycle to prevent "state bleeding."
 
-### 2.2. Persistent "Parsed Mode"
+### 2.2. Robust "New Cycle" Button Logic
 
-*   **Goal:** The `isParsedMode` state should be "sticky." If the user is in parsed mode and navigates to another cycle, the new cycle's content should be automatically parsed and displayed.
-*   **Implementation:**
-    1.  **Backend (`history.service.ts`):** The `PcppCycle` interface will be updated to include `isParsedMode: boolean`.
-    2.  **Frontend (`view.tsx`):**
-        *   The `saveCurrentCycleState` function will be updated to include the current `isParsedMode` in the data sent to the backend.
-        *   When loading a cycle (either the latest or via navigation), the `isParsedMode` state will be restored from the loaded `cycleData`.
-        *   A `useEffect` hook will listen for changes to the loaded cycle data. If `isParsedMode` is true after the data loads, it will automatically trigger the parsing logic for all tabs.
+*   **Goal:** The `[ + ]` (New Cycle) button must be disabled until all required precursor data from the *previous* cycle is present.
+*   **Implementation (`view.tsx`):** The `isNewCycleButtonDisabled` memoized boolean will be updated. It must now check:
+    1.  That the `cycleTitle` of the *current* cycle is non-default and not empty.
+    2.  That the `cycleContext` of the *current* cycle is not empty.
+    3.  That a `selectedResponseId` has been set for the *current* cycle.
+    *   This ensures that a user cannot create an orphaned "Cycle 2" before they have finished providing all the necessary inputs for "Cycle 1".
 
-### 2.3. Robust "New Cycle" Button Logic
+### 2.3. Clearing Selection State on Navigation
 
-*   **Goal:** The `[ + ]` (New Cycle) button must be disabled if no meaningful content has been added to the current cycle.
-*   **Implementation (`view.tsx`):** The `disabled` property of the button will be controlled by a memoized boolean:
-    ```typescript
-    const isNewCycleButtonDisabled = useMemo(() => {
-        const hasTitle = cycleTitle && cycleTitle !== 'New Cycle';
-        const hasContext = cycleContext || ephemeralContext;
-        const hasResponseContent = Object.values(tabs).some(tab => tab.rawContent.trim());
-        return !hasTitle && !hasContext && !hasResponseContent;
-    }, [cycleTitle, cycleContext, ephemeralContext, tabs]);
-    ```
+*   **Goal:** Fix the bug where checked files from one cycle remain checked when viewing another cycle.
+*   **Implementation (`view.tsx`):**
+    1.  In the `handleCycleChange` function, after saving the current state and before requesting the new cycle's data, add a line to reset the selection: `setSelectedFilesForReplacement(new Set());`.
+    2.  In the `handleNewCycle` function, also add `setSelectedFilesForReplacement(new Set());`.
+    3.  This ensures that every time the cycle context changes, the local UI state for file selections is reset to a clean slate.
 
 ### 2.4. Backend File Existence & Content (`fs.service.ts`)
 
@@ -2946,16 +3126,19 @@ interface PcppState {
 
 ### 2.5. IPC Channel Updates
 
-*   **Status:** No new channels required for this cycle.
+*   **New Channel (`RequestLogState`):** A new channel will be added to facilitate the "Log State" feature.
+    *   **Payload:** `{ currentState: PcppCycle }` - The frontend will send its entire current state object.
 
-### 2.6. Frontend UI Flow for Diffing (`view.tsx`)
+### 2.6. Backend State Logging (`prompt.service.ts`)
 
-*   **Goal:** Fix the non-functional diff view.
+*   **Goal:** Implement the logic for the "Log State" button.
 *   **Implementation:**
-    1.  Add detailed `logger.log()` statements to the `handleSelectForDiff` function to confirm it is being called on click.
-    2.  Log the `file.path` being sent over `RequestFileContent`.
-    3.  Add logging to the `onmessage` handler for `SendFileContent` to confirm a response is received from the backend.
-    4.  Log the state variables (`diffTarget`, `originalFileContent`) just before the component's `return` statement to verify they are being set correctly. This will isolate the point of failure.
+    1.  A new method, `generateStateLog(currentState: PcppCycle)`, will be added to the `PromptService`.
+    2.  It will receive the full frontend state as an argument.
+    3.  It will call `Services.historyService.getFullHistory()` to get the historical data.
+    4.  It will reuse the existing prompt-generation logic to build the `<M6. Cycles>` string based on the provided `currentState` and the history.
+    5.  It will create a second string containing a formatted JSON dump of the `currentState` and the full history.
+    6.  It will combine these two strings into a single log message and send it to `Services.loggerService.log()`.
 </file>
 
 <file path="src/Artifacts/A37. DCE - Phase 2 - Cycle Navigator & Knowledge Graph - Vision.md">
@@ -4280,7 +4463,7 @@ export default TestComponent;
 # Artifact A52: DCE - Interaction Schema Refinement
 # Date Created: C110
 # Author: AI Model & Curator
-# Updated on: C126 (Specify case-insensitive header parsing)
+# Updated on: C133 (Add rule for handling duplicate sections)
 
 - **Key/Value for A0:**
 - **Description:** Proposes a set of refined rules for the AI's output format to improve the reliability and consistency of automated parsing within the Parallel Co-Pilot Panel.
@@ -4302,6 +4485,7 @@ To ensure predictable parsing, all responses must adhere to the following struct
 2.  **Course of Action Header:** This section must begin with a markdown header like `### Course of Action`. **(C126 Update)** The parser will treat this header case-insensitively (e.g., `### Course of action` is also valid).
 3.  **Files Updated Header:** This section must begin with the exact markdown header: `### Files Updated This Cycle:`.
 4.  **File Blocks:** The response must conclude with the code/document artifact blocks.
+5.  **(C133) Duplicate Sections:** If a response contains duplicate standardized sections (e.g., two `### Course of Action` blocks), the parser will **only use the content of the last one**. This assumes the AI is correcting or amending its previous output.
 
 ### 2.2. Canonical File Block Format
 
@@ -4335,7 +4519,7 @@ The list of files under the `### Files Updated This Cycle:` header must follow t
 ## 3. Rationale
 
 By enforcing this stricter contract on the AI's output, we significantly reduce the complexity of the `response-parser.ts`. The parser no longer needs multiple, complex regular expressions to account for numerous format variations. This leads to:
-*   **Increased Reliability:** Parsing is less likely to fail on subtle format changes.
+*   **Increased Reliability:** Parsing is less likely to fail on subtle format changes or AI self-corrections.
 *   **Improved Maintainability:** The parser code becomes simpler and easier to understand.
 *   **Predictable Behavior:** The PCPP's features will behave more consistently across all responses.
 </file>
@@ -6454,6 +6638,55 @@ Beyond specific algorithms, the WinMerge source code reveals important architect
 ## 4. Path Forward
 
 By studying the algorithms and architectural patterns in these key files, we can create a clear development plan to implement these advanced features in our TypeScript and React-based extension. The immediate priority is to refactor our UI to a vertical, fixed-pane layout, and then we can begin to incrementally incorporate the more advanced logic inspired by these files.
+</file>
+
+<file path="src/Artifacts/A59. DCE - Phase 2 - Debugging and State Logging.md">
+# Artifact A59: DCE - Phase 2 - Debugging and State Logging
+# Date Created: C134
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** Documents the plan for a "Log State" button that outputs critical state information (cycle history, current inputs) to the debug channel to accelerate troubleshooting.
+- **Tags:** feature plan, phase 2, ui, ux, debugging, logging, state management
+
+## 1. Overview & Goal
+
+Debugging complex state interactions in the Parallel Co-Pilot Panel can be challenging, as it often requires the curator to manually describe the state of multiple text fields and selections. To accelerate this process, a dedicated debugging feature is required.
+
+The goal of this feature is to add a **"Log State"** button to the PCPP's main header. When clicked, this button will generate a comprehensive, formatted log of the panel's current state and send it to the "Data Curation Environment" output channel. This allows the curator to easily copy and paste the exact state of the application into their feedback, eliminating ambiguity and speeding up bug resolution.
+
+## 2. User Story
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| P2-LOG-01 | **Log Current State for Debugging** | As a curator encountering a bug, I want to click a "Log State" button that outputs the current state of the entire PCPP to the debug logs, so I can easily copy and paste this information for you to reproduce the issue. | - A "Log State" button is present in the main header of the PCPP. <br> - Clicking the button generates a formatted message in the "Data Curation Environment" output channel. <br> - The log contains two key pieces of information: <br> &nbsp;&nbsp;&nbsp; 1. A formatted JSON dump of the current state of all cycle data (titles, contexts, raw responses). <br> &nbsp;&nbsp;&nbsp; 2. The exact `<M6. Cycles>` block that *would be* generated for `prompt.md` based on the current state. |
+
+## 3. Technical Implementation Plan
+
+1.  **UI (`view.tsx`):**
+    *   A new "Log State" button with an appropriate icon (e.g., `VscBug`) will be added to the main `.pc-header` toolbar.
+    *   Its `onClick` handler will gather the complete current state of the panel into a single `PcppCycle` object. This includes `currentCycle`, `cycleTitle`, `cycleContext`, `ephemeralContext`, and the `rawContent` from all `tabs`.
+    *   This state object will be sent to the backend via a new IPC message.
+
+2.  **IPC Channels (`channels.enum.ts`, `channels.type.ts`):**
+    *   Create a new `ClientToServerChannel.RequestLogState`.
+    *   The payload will be `{ currentState: PcppCycle }`.
+
+3.  **Backend Logic (`prompt.service.ts`):**
+    *   The `PromptService` is the best location for this logic as it already has access to the history service and the logic for generating prompt sections.
+    *   A new public method, `public async generateStateLog(currentState: PcppCycle)`, will be created.
+    *   **Step 1: Generate Formatted State Dump:**
+        *   It will call `Services.historyService.getFullHistory()` to get all historical cycle data.
+        *   It will create a new object containing both the `currentState` from the frontend and the `fullHistory`.
+        *   It will `JSON.stringify` this object with an indent of 2 for readability.
+    *   **Step 2: Generate `<M6. Cycles>` Content:**
+        *   It will re-use the existing logic from `generatePromptFile` to construct the complete `<M6. Cycles>` string based on the `currentState` and `fullHistory`.
+    *   **Step 3: Log to Output Channel:**
+        *   It will combine these two strings into a single, clearly labeled log message.
+        *   It will call `Services.loggerService.log()` to write the final string to the "Data Curation Environment" output channel.
+
+4.  **Message Handling (`on-message.ts`):**
+    *   A new handler will be added for `RequestLogState` which simply calls the new `generateStateLog` method on the `PromptService`.
 </file>
 
 <file path="src/Artifacts/A6. DCE - Initial Scaffolding Deployment Script.md">
@@ -9011,6 +9244,7 @@ export class HighlightingService {
 
 <file path="src/backend/services/history.service.ts">
 // src/backend/services/history.service.ts
+// Updated on: C133 (Ensure selectedResponseId is saved and loaded)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -9071,6 +9305,7 @@ export class HistoryService {
                 responses: { "1": { content: "" } },
                 isParsedMode: false,
                 leftPaneWidth: 33,
+                selectedResponseId: null,
             };
             await this.saveCycleData(defaultCycle);
             return defaultCycle;
@@ -9088,7 +9323,7 @@ export class HistoryService {
     }
 
     public async saveCycleData(cycleData: PcppCycle): Promise<void> {
-        Services.loggerService.log(`HistoryService: saving data for cycle ${cycleData.cycleId}.`);
+        Services.loggerService.log(`HistoryService: saving data for cycle ${cycleData.cycleId}. Selected Response ID: ${cycleData.selectedResponseId}`);
         const history = await this._readHistoryFile();
         const cycleIndex = history.cycles.findIndex(c => c.cycleId === cycleData.cycleId);
 
@@ -9183,7 +9418,7 @@ export class LoggerService {
 </file>
 
 <file path="src/backend/services/prompt.service.ts">
-// Updated on: C120 (Fix cycle order in prompt.md)
+// Updated on: C134 (Add generateStateLog method)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -9238,6 +9473,59 @@ Phase 2. parallel 'co-pilot' panel. Basically, we need our own AI Studio interfa
 Phase 3. Diff Tool - Basically, winmerge but intergrated into a window within VS Code. My workflow is often comparing two identical responses, or comparing a new artifact with the current version. Currently, I'm first copying and pasting responses into separate notepad files, and then for which ever i need to compare given my task, i then manually move that one into winmerge to compare against another that i manually move. instead, the ability to just select between two to compare would be a massive decrease in the manual workload.
 </M4. current project scope>`;
 
+    private async _generateCyclesContent(currentCycleData: PcppCycle, fullHistory: PcppCycle[]): Promise<string> {
+        const allCycles = [...fullHistory.filter(c => c.cycleId !== currentCycleData.cycleId), currentCycleData];
+        const sortedHistory = allCycles.sort((a, b) => b.cycleId - a.cycleId);
+
+        let cyclesContent = '<M6. Cycles>\n';
+
+        for (const cycle of sortedHistory) {
+            cyclesContent += `\n<Cycle ${cycle.cycleId}>\n${cycle.title}\n`;
+            
+            const previousCycle = sortedHistory.find(c => c.cycleId === cycle.cycleId - 1);
+            if (previousCycle) {
+                const selectedResponseId = previousCycle.selectedResponseId || '1';
+                const previousResponseContent = previousCycle.responses[selectedResponseId]?.content || '';
+                if (previousResponseContent) {
+                    const parsed = parseResponse(previousResponseContent);
+                    const summary = `${parsed.summary}\n\n${parsed.courseOfAction}\n\n### Files Updated This Cycle:\n${parsed.filesUpdated.map(f => `* \`${f}\``).join('\n')}`;
+                    cyclesContent += `<Previous Cycle ${previousCycle.cycleId} Summary of Actions>\n${summary}\n</Previous Cycle ${previousCycle.cycleId} Summary of Actions>\n`;
+                }
+            }
+            cyclesContent += `</Cycle ${cycle.cycleId}>\n`;
+        }
+        cyclesContent += '\n</M6. Cycles>';
+        return cyclesContent;
+    }
+
+    public async generateStateLog(currentState: PcppCycle) {
+        Services.loggerService.log("--- GENERATING STATE LOG ---");
+        try {
+            const fullHistory = await Services.historyService.getFullHistory();
+            const cyclesContent = await this._generateCyclesContent(currentState, fullHistory);
+            
+            const stateDump = {
+                "CURRENT_FRONTEND_STATE": currentState,
+                "FULL_HISTORY_FROM_BACKEND": fullHistory
+            };
+
+            const logMessage = `
+========================= CURRENT STATE DUMP =========================
+${JSON.stringify(stateDump, null, 2)}
+======================================================================
+
+==================== GENERATED <M6. Cycles> BLOCK ====================
+${cyclesContent}
+======================================================================
+`;
+            Services.loggerService.log(logMessage);
+            Services.loggerService.show();
+            vscode.window.showInformationMessage("State logged to 'Data Curation Environment' output channel.");
+        } catch (error: any) {
+            Services.loggerService.error(`Failed to generate state log: ${error.message}`);
+        }
+    }
+
     public async generatePromptFile(cycleTitle: string, currentCycle: number) {
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (!workspaceFolders?.[0]) {
@@ -9253,50 +9541,26 @@ Phase 3. Diff Tool - Basically, winmerge but intergrated into a window within VS
 
             const flattenedContent = await fs.readFile(flattenedRepoPath, 'utf-8');
             const fullHistory: PcppCycle[] = await Services.historyService.getFullHistory();
+            
+            const currentCycleDataFromHistory = fullHistory.find(c => c.cycleId === currentCycle);
+            if (!currentCycleDataFromHistory) {
+                throw new Error(`Could not find data for current cycle (${currentCycle}) in history.`);
+            }
+            // Ensure the title from the UI is used for the current cycle
+            const currentCycleData = { ...currentCycleDataFromHistory, title: cycleTitle };
 
-            // C120 FIX: Sort history in descending order for M2
-            const sortedHistoryForM2 = [...fullHistory].sort((a, b) => b.cycleId - a.cycleId);
+            const sortedHistory = [...fullHistory].sort((a, b) => b.cycleId - a.cycleId);
 
             let cycleOverview = '<M2. cycle overview>\n';
             cycleOverview += `Current Cycle ${currentCycle} - ${cycleTitle}\n`;
-            for (const cycle of sortedHistoryForM2) {
-                // Ensure we don't duplicate the current cycle entry if it's already in history
+            for (const cycle of sortedHistory) {
                 if (cycle.cycleId !== currentCycle) {
                      cycleOverview += `Cycle ${cycle.cycleId} - ${cycle.title}\n`;
                 }
             }
             cycleOverview += '</M2. cycle overview>';
             
-            // C120 Fix: Also sort the history for M6 in descending order
-            const sortedHistoryForM6 = [...fullHistory].sort((a, b) => b.cycleId - a.cycleId);
-
-            let cyclesContent = '<M6. Cycles>\n\n';
-            cyclesContent += `<Cycle ${currentCycle}>\n${cycleTitle}\n`;
-            // Find the previous cycle's data to generate the summary
-            const previousCycle = sortedHistoryForM6.find(c => c.cycleId === currentCycle - 1);
-            if (previousCycle) {
-                const previousResponseContent = previousCycle.responses['1']?.content || '';
-                const parsed = parseResponse(previousResponseContent);
-                const summary = `${parsed.summary}\n\n${parsed.courseOfAction}`;
-                cyclesContent += `<Previous Cycle ${previousCycle.cycleId} Summary of Actions>\n${summary}\n</Previous Cycle ${previousCycle.cycleId} Summary of Actions>\n`;
-            }
-            cyclesContent += `</Cycle ${currentCycle}>\n\n`;
-
-
-            for (const cycle of sortedHistoryForM6) {
-                if (cycle.cycleId === currentCycle) continue; 
-                cyclesContent += `<Cycle ${cycle.cycleId}>\n`;
-                const prevCycleForSummary = sortedHistoryForM6.find(c => c.cycleId === cycle.cycleId - 1);
-                 if (prevCycleForSummary) {
-                    const previousResponseContent = prevCycleForSummary.responses['1']?.content || '';
-                    const parsed = parseResponse(previousResponseContent);
-                    const summary = `${parsed.summary}\n\n${parsed.courseOfAction}`;
-                    cyclesContent += `<Previous Cycle ${prevCycleForSummary.cycleId} Summary of Actions>\n${summary}\n</Previous Cycle ${prevCycleForSummary.cycleId} Summary of Actions>\n`;
-                 }
-                cyclesContent += `</Cycle ${cycle.cycleId}>\n\n`;
-            }
-            cyclesContent += '</M6. Cycles>';
-
+            const cyclesContent = await this._generateCyclesContent(currentCycleData, fullHistory);
 
             let masterArtifactListContent = '<!-- Master Artifact List (A0) not found -->';
             try {
@@ -11120,37 +11384,29 @@ export const logger = {
 </file>
 
 <file path="src/client/utils/response-parser.ts">
-// Updated on: C131 (Add more aggressive final cleanup)
-import { ParsedResponse } from '@/common/types/pcpp.types';
+// Updated on: C133 (Handle duplicate sections and restore metadata calculation)
+import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /^([\s\S]*?)(?=### Course of [Aa]ction|### Files Updated This Cycle|<file path=")/;
-const COURSE_OF_ACTION_REGEX = /### Course of [Aa]ction\s*([\s\S]*?)(?=### Files Updated This Cycle|<file path=")/im;
-const FILES_UPDATED_LIST_REGEX = /### Files Updated This Cycle\s*([\s\S]*?)(?=<file path="|`{3,})/m;
+const COURSE_OF_ACTION_REGEX = /### Course of [Aa]ction\s*([\s\S]*?)(?=### Files Updated This Cycle|<file path="|`{3,}|$)/gim;
+const FILES_UPDATED_LIST_REGEX = /### Files Updated This Cycle\s*([\s\S]*?)(?=<file path="|`{3,}|$)/m;
 const FILE_TAG_REGEX = /<file path="([^"]+)">([\s\S]*?)<\/file>/g;
 const CODE_FENCE_START_REGEX = /^\s*```[a-zA-Z]*\n/;
 
-
 export function parseResponse(rawText: string): ParsedResponse {
-    const files = [];
+    const files: ParsedFile[] = [];
     let filesUpdatedList: string[] = [];
+    let totalTokens = 0;
 
     const tagMatches = [...rawText.matchAll(FILE_TAG_REGEX)];
 
     for (const match of tagMatches) {
         const path = (match?.[1] ?? '').trim();
-        let content = (match?.[2] ?? ''); // Start with raw content
+        let content = (match?.[2] ?? '');
 
         if (path) {
-            // C129: Aggressive multi-pass cleanup
             content = content.replace(CODE_FENCE_START_REGEX, '');
-
-            const patternsToRemove = [
-                `</file>`,
-                `</${path}>`,
-                '```',
-                '***'
-            ];
-    
+            const patternsToRemove = [`</file>`, `</${path}>`, '```', '***'];
             let changed = true;
             while(changed) {
                 const originalContent = content;
@@ -11163,20 +11419,21 @@ export function parseResponse(rawText: string): ParsedResponse {
                     changed = false;
                 }
             }
-            
-            // C131: Final aggressive trim to remove any leading/trailing whitespace or newlines
-            // that could interfere with diffing.
             content = content.trim();
-
-            files.push({ path, content });
+            const tokenCount = Math.ceil(content.length / 4);
+            totalTokens += tokenCount;
+            files.push({ path, content, tokenCount });
         }
     }
 
     const summaryMatch = rawText.match(SUMMARY_REGEX);
-    const courseOfActionMatch = rawText.match(COURSE_OF_ACTION_REGEX);
     
+    // C133: Handle duplicate sections by taking the last match
+    const coaMatches = [...rawText.matchAll(COURSE_OF_ACTION_REGEX)];
+    const lastCoaMatch = coaMatches.length > 0 ? coaMatches[coaMatches.length - 1] : null;
+
     const summary = (summaryMatch?.[1] ?? 'Could not parse summary.').trim();
-    const courseOfAction = (courseOfActionMatch?.[1] ?? 'Could not parse course of action.').trim();
+    const courseOfAction = (lastCoaMatch?.[1] ?? 'Could not parse course of action.').trim();
 
     if (files.length > 0) {
         filesUpdatedList = files.map(f => f.path);
@@ -11199,6 +11456,7 @@ export function parseResponse(rawText: string): ParsedResponse {
         courseOfAction,
         filesUpdated: [...new Set(filesUpdatedList)],
         files,
+        totalTokens,
     };
 }
 </file>
@@ -12355,7 +12613,7 @@ export const viewConfig = {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/on-message.ts">
-// Updated on: C132 (Add batch write handler)
+// Updated on: C134 (Add log state handler)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -12404,6 +12662,10 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestBatchFileWrite, (data) => {
         fileOperationService.handleBatchFileWrite(data.files);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestLogState, (data) => {
+        promptService.generateStateLog(data.currentState);
     });
 }
 </file>
@@ -12613,7 +12875,7 @@ export default TestPane3;
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
-/* Updated on: C132 (Re-enable all scrollbars) */
+/* Updated on: C133 (Add styling for selected tabs and new buttons) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -12648,6 +12910,11 @@ body {
     align-items: center;
     gap: 4px;
     justify-content: space-between;
+
+    &.selected {
+        background-color: var(--vscode-testing-iconPassed);
+        color: var(--vscode-button-foreground);
+    }
 
     .chevron {
         transition: transform 0.2s ease-in-out;
@@ -12685,7 +12952,7 @@ body {
     gap: 8px;
 }
 
-.cycle-navigator button, .pc-toolbar button, .file-actions button, .exit-diff-button {
+.cycle-navigator button, .pc-toolbar button, .file-actions button, .exit-diff-button, .styled-button {
     background: none;
     border: 1px solid var(--vscode-button-border, transparent);
     color: var(--vscode-icon-foreground);
@@ -12704,6 +12971,22 @@ body {
     &:disabled {
         opacity: 0.5;
         cursor: not-allowed;
+    }
+}
+
+.styled-button {
+    background-color: var(--vscode-button-secondaryBackground);
+    color: var(--vscode-button-secondaryForeground);
+    padding: 2px 8px;
+    font-size: 12px;
+
+    &:hover {
+        background-color: var(--vscode-button-secondaryHoverBackground);
+    }
+
+    &.toggled {
+        background-color: var(--vscode-button-background);
+        color: var(--vscode-button-foreground);
     }
 }
 
@@ -12783,6 +13066,11 @@ body {
     cursor: pointer;
     border-bottom: 2px solid transparent;
     color: var(--vscode-tab-inactiveForeground);
+
+    &.selected {
+        background-color: var(--vscode-testing-iconPassed);
+        color: var(--vscode-button-foreground);
+    }
 }
 
 .tab.active {
@@ -12889,10 +13177,6 @@ body {
     padding: 4px 8px;
     font-size: 12px;
     background-color: var(--vscode-sideBar-sectionHeaderBackground);
-
-    input[type="checkbox"] {
-        margin-right: 4px;
-    }
 }
 
 .code-viewer-wrapper {
@@ -12904,6 +13188,15 @@ body {
     border-radius: 0 0 4px 4px;
     background-color: var(--vscode-editor-background);
     overflow: hidden;
+    flex-direction: column;
+}
+
+.code-viewer-metadata {
+    font-size: 11px;
+    padding: 2px 8px;
+    color: var(--vscode-descriptionForeground);
+    background-color: var(--vscode-editorGroupHeader-tabsBackground);
+    border-bottom: 1px solid var(--vscode-panel-border);
 }
 
 .file-content-viewer {
@@ -13052,11 +13345,6 @@ body {
     span { display: block; min-height: 1.5em; padding-right: 6px; }
 }
 
-.diff-pane .diff-lines {
-    flex-grow: 1;
-    min-width: 0;
-}
-
 .diff-pane .diff-lines .line {
     line-height: 1.5;
     padding-left: 8px;
@@ -13122,11 +13410,11 @@ body {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
-// Updated on: C132 (Add back button, selection checkboxes, and batch accept)
+// Updated on: C134 (Implement all feedback points)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap, VscTrash, VscSync, VscClose, VscSave } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap, VscTrash, VscSync, VscClose, VscSave, VscBug, VscCheckAll } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -13161,20 +13449,23 @@ const CodeViewer: React.FC<{ htmlContent: string | undefined | null }> = ({ html
          return <div style={{ padding: '8px', color: 'var(--vscode-errorForeground)' }}>{htmlContent}</div>;
     }
 
-    const codeContentMatch = /<pre><code>([\s\S]*)<\/code><\/pre>/s.exec(htmlContent);
-    const code = codeContentMatch ? codeContentMatch[1] : `<code>${htmlContent}</code>`; 
+    const codeContentMatch = /<pre><code>([\s\S]*)<\/code><\/pre>/s.exec(htmlContent)?.[1];
+    const code = codeContentMatch ? codeContentMatch : `<code>${htmlContent}</code>`; 
 
     const lines = code.split('\n');
-    if (lines.length > 0 && lines[lines.length - 1] === '') {
+    // C134 Fix: Don't pop the last element if it's the only line or if it's not empty.
+    if (lines.length > 1 && lines[lines.length - 1] === '') {
         lines.pop();
     }
 
     return (
-        <div className="file-content-viewer">
-            <div className="line-numbers">
-                {lines.map((_, i) => <span key={i}>{i + 1}</span>)}
+        <div className="code-viewer-wrapper">
+            <div className="file-content-viewer">
+                <div className="line-numbers">
+                    {lines.map((_, i) => <span key={i}>{i + 1}</span>)}
+                </div>
+                <div className="code-content" dangerouslySetInnerHTML={{ __html: code }} />
             </div>
-            <div className="code-content" dangerouslySetInnerHTML={{ __html: code }} />
         </div>
     );
 };
@@ -13182,12 +13473,11 @@ const CodeViewer: React.FC<{ htmlContent: string | undefined | null }> = ({ html
 interface TabState {
     rawContent: string;
     parsedContent: ParsedResponse | null;
-    totalTokens?: number;
 }
 
-const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; collapsedContent?: React.ReactNode; }> = ({ title, children, isCollapsed, onToggle, collapsedContent }) => (
+const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; collapsedContent?: React.ReactNode; className?: string; }> = ({ title, children, isCollapsed, onToggle, collapsedContent, className }) => (
     <div className="collapsible-section">
-        <div className="collapsible-header" onClick={onToggle}>
+        <div className={`collapsible-header ${className || ''}`} onClick={onToggle}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                 <VscChevronDown className={`chevron ${isCollapsed ? 'collapsed' : ''}`} />
                 <span>{title}</span>
@@ -13217,6 +13507,7 @@ const App = () => {
     const [originalFileContent, setOriginalFileContent] = React.useState<string | null>(null);
     const isResizing = React.useRef(false);
     const [selectedFilesForReplacement, setSelectedFilesForReplacement] = React.useState<Set<string>>(new Set());
+    const [selectedResponseId, setSelectedResponseId] = React.useState<string | null>(null);
 
     const [isAssociatedFilesCollapsed, setAssociatedFilesCollapsed] = React.useState(false);
     const [isThoughtsCollapsed, setThoughtsCollapsed] = React.useState(false);
@@ -13224,7 +13515,7 @@ const App = () => {
 
     const clientIpc = ClientPostMessageManager.getInstance();
 
-    const saveCurrentCycleState = React.useCallback((force = false) => {
+    const saveCurrentCycleState = React.useCallback(() => {
         const responses: { [key: string]: PcppResponse } = {};
         for (let i = 1; i <= tabCount; i++) {
             responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' };
@@ -13238,15 +13529,16 @@ const App = () => {
             responses,
             isParsedMode,
             leftPaneWidth,
+            selectedResponseId,
         };
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
-    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, clientIpc]);
+    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, clientIpc]);
 
     const debouncedSave = useDebounce(saveCurrentCycleState, 1000);
 
     React.useEffect(() => {
         debouncedSave();
-    }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, debouncedSave]);
+    }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, selectedResponseId, debouncedSave]);
     
     const parseAllTabs = React.useCallback(() => {
         setTabs(prevTabs => {
@@ -13259,7 +13551,6 @@ const App = () => {
                     needsUpdate = true;
                     const parsed = parseResponse(tabState.rawContent);
                     tabState.parsedContent = parsed;
-                    tabState.totalTokens = parsed.files.reduce((acc, file) => acc + Math.ceil(file.content.length / 4), 0);
                     parsed.filesUpdated.forEach(file => allFilePaths.add(file));
                     parsed.files.forEach(file => {
                         const lang = path.extname(file.path).substring(1) || 'plaintext';
@@ -13290,40 +13581,23 @@ const App = () => {
             setTabs(newTabs);
             setIsParsedMode(cycleData.isParsedMode || false);
             setLeftPaneWidth(cycleData.leftPaneWidth || 33);
+            setSelectedResponseId(cycleData.selectedResponseId || null);
         };
 
         clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData }) => {
             loadCycleData(cycleData);
             setMaxCycle(cycleData.cycleId);
         });
-        clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData }) => {
-            if (cycleData) {
-                loadCycleData(cycleData);
-            }
-        });
-        clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => {
-            setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml));
-        });
-        clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => {
-            setFileExistenceMap(new Map(Object.entries(existenceMap)));
-        });
-        clientIpc.onServerMessage(ServerToClientChannel.SendFileContent, ({ path: filePath, content }) => {
-            setOriginalFileContent(content);
-        });
-        clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => {
-            if (reason === 'history') {
-                clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});
-            }
-        });
+        clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData }) => { if (cycleData) loadCycleData(cycleData); });
+        clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml)));
+        clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap))));
+        clientIpc.onServerMessage(ServerToClientChannel.SendFileContent, ({ path: filePath, content }) => setOriginalFileContent(content));
+        clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); });
         
         clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});
     }, [clientIpc]);
 
-    React.useEffect(() => {
-        if (isParsedMode) {
-            parseAllTabs();
-        }
-    }, [isParsedMode, tabs, parseAllTabs]);
+    React.useEffect(() => { if (isParsedMode) parseAllTabs(); }, [isParsedMode, tabs, parseAllTabs]);
     
     const activeTabData = tabs[activeTab.toString()];
 
@@ -13335,138 +13609,58 @@ const App = () => {
         return highlightedCodeBlocks.get(id);
     }, [selectedFilePath, activeTabData?.parsedContent, highlightedCodeBlocks]);
 
-
-    const handleRawContentChange = (newContent: string, tabIndex: number) => {
-        setTabs(prev => ({ ...prev, [tabIndex.toString()]: { rawContent: newContent, parsedContent: null }}));
-    };
-
+    const handleRawContentChange = (newContent: string, tabIndex: number) => setTabs(prev => ({ ...prev, [tabIndex.toString()]: { rawContent: newContent, parsedContent: null }}));
     const handleGlobalParseToggle = () => {
         const newParseMode = !isParsedMode;
         setIsParsedMode(newParseMode);
         setSelectedFilePath(null);
         setIsDiffMode(false);
-        if (!newParseMode) {
-            setTabs(prev => {
-                const newTabs = {...prev};
-                Object.keys(newTabs).forEach(key => {
-                    newTabs[key].parsedContent = null;
-                });
-                return newTabs;
-            });
-        }
+        if (!newParseMode) setTabs(prev => { const newTabs = {...prev}; Object.keys(newTabs).forEach(key => { newTabs[key].parsedContent = null; }); return newTabs; });
     };
-
-    const handleCycleChange = (e: React.MouseEvent, newCycle: number) => {
-        e.stopPropagation();
-        if (newCycle > 0 && newCycle <= maxCycle) {
-            saveCurrentCycleState(true);
-            setCurrentCycle(newCycle);
-            clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle });
-        }
-    };
-
-    const handleNewCycle = (e: React.MouseEvent) => {
-        e.stopPropagation();
-        const newCycleId = maxCycle + 1;
-        setMaxCycle(newCycleId);
-        setCurrentCycle(newCycleId);
-        setCycleTitle('New Cycle');
-        setCycleContext('');
-        setEphemeralContext('');
-        setTabs({});
-        setIsParsedMode(false);
-    };
-    
-    const handleGeneratePrompt = () => {
-        clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle });
-    };
-
-    const handleMouseDown = React.useCallback((e: React.MouseEvent) => {
-        e.preventDefault();
-        isResizing.current = true;
-    }, []);
-
-    const handleMouseMove = React.useCallback((e: MouseEvent) => {
-        if (!isResizing.current) return;
-        const newWidth = (e.clientX / window.innerWidth) * 100;
-        if (newWidth > 10 && newWidth < 90) {
-            setLeftPaneWidth(newWidth);
-        }
-    }, []);
-
-    const handleMouseUp = React.useCallback(() => {
-        isResizing.current = false;
-    }, []);
+    const handleCycleChange = (e: React.MouseEvent, newCycle: number) => { e.stopPropagation(); if (newCycle > 0 && newCycle <= maxCycle) { saveCurrentCycleState(); setSelectedFilesForReplacement(new Set()); setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); } };
+    const handleNewCycle = (e: React.MouseEvent) => { e.stopPropagation(); const newCycleId = maxCycle + 1; setMaxCycle(newCycleId); setCurrentCycle(newCycleId); setCycleTitle('New Cycle'); setCycleContext(''); setEphemeralContext(''); setTabs({}); setIsParsedMode(false); setSelectedResponseId(null); setSelectedFilesForReplacement(new Set()); };
+    const handleGeneratePrompt = () => clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle });
+    const handleMouseDown = React.useCallback((e: React.MouseEvent) => { e.preventDefault(); isResizing.current = true; }, []);
+    const handleMouseMove = React.useCallback((e: MouseEvent) => { if (!isResizing.current) return; const newWidth = (e.clientX / window.innerWidth) * 100; if (newWidth > 10 && newWidth < 90) setLeftPaneWidth(newWidth); }, []);
+    const handleMouseUp = React.useCallback(() => { isResizing.current = false; }, []);
 
     React.useEffect(() => {
         const mm = (e: MouseEvent) => handleMouseMove(e);
         const mu = () => handleMouseUp();
-        window.addEventListener('mousemove', mm);
-        window.addEventListener('mouseup', mu);
-        
-        return () => {
-            window.removeEventListener('mousemove', mm);
-            window.removeEventListener('mouseup', mu);
-        };
-    }, [handleMouseMove, handleMouseUp]);
+        if (isParsedMode) { window.addEventListener('mousemove', mm); window.addEventListener('mouseup', mu); }
+        return () => { window.removeEventListener('mousemove', mm); window.removeEventListener('mouseup', mu); };
+    }, [isParsedMode, handleMouseMove, handleMouseUp]);
     
     const handleSelectForViewing = (filePath: string) => {
         const newPath = selectedFilePath === filePath ? null : filePath;
-        
-        if (newPath !== selectedFilePath) {
-            setOriginalFileContent(null);
-        }
-
+        if (newPath !== selectedFilePath) setOriginalFileContent(null);
         setSelectedFilePath(newPath);
-
-        if (isDiffMode && newPath) {
-            clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: newPath });
-        }
+        if (isDiffMode && newPath) clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: newPath });
     };
-
-    const handleDeleteCycle = () => {
-        clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle });
-    };
-
-    const handleResetHistory = () => {
-        clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {});
-    };
-
-    const handleFileSelectionToggle = (filePath: string) => {
-        setSelectedFilesForReplacement(prev => {
-            const newSet = new Set(prev);
-            if (newSet.has(filePath)) {
-                newSet.delete(filePath);
-            } else {
-                newSet.add(filePath);
-            }
-            return newSet;
-        });
-    };
-
-    const handleSelectAllFilesToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.checked) {
-            const allFilePaths = activeTabData?.parsedContent?.filesUpdated || [];
-            setSelectedFilesForReplacement(new Set(allFilePaths));
-        } else {
+    const handleDeleteCycle = () => clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle });
+    const handleResetHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {});
+    const handleFileSelectionToggle = (filePath: string) => setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); if (newSet.has(filePath)) newSet.delete(filePath); else newSet.add(filePath); return newSet; });
+    
+    const handleSelectAllFilesToggle = () => {
+        if (isAllFilesSelected) {
             setSelectedFilesForReplacement(new Set());
+        } else {
+            setSelectedFilesForReplacement(new Set(activeTabData?.parsedContent?.filesUpdated || []));
         }
     };
 
     const handleAcceptSelectedFiles = () => {
         if (selectedFilesForReplacement.size === 0 || !activeTabData?.parsedContent) return;
-
         const filesToWrite: BatchWriteFile[] = [];
         selectedFilesForReplacement.forEach(filePath => {
             const file = activeTabData.parsedContent.files.find(f => f.path === filePath);
-            if (file) {
-                filesToWrite.push({ path: file.path, content: file.content });
-            }
+            if (file) filesToWrite.push({ path: file.path, content: file.content });
         });
-
-        if (filesToWrite.length > 0) {
-            clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite });
-        }
+        if (filesToWrite.length > 0) clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite });
+    };
+    const handleAcceptSingleFile = (filePath: string) => {
+        const file = activeTabData?.parsedContent?.files.find(f => f.path === filePath);
+        if (file) clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: [{ path: file.path, content: file.content }] });
     };
 
     const isAllFilesSelected = React.useMemo(() => {
@@ -13477,134 +13671,69 @@ const App = () => {
 
     const isNewCycleButtonDisabled = React.useMemo(() => {
         const hasTitle = cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== '';
-        const hasContext = cycleContext.trim() || ephemeralContext.trim();
-        const hasResponseContent = Object.values(tabs).some(t => t.rawContent.trim());
-        return !hasTitle && !hasContext && !hasResponseContent;
-    }, [cycleTitle, cycleContext, ephemeralContext, tabs]);
+        const hasContext = cycleContext.trim() !== '';
+        const hasSelectedResponse = selectedResponseId !== null;
+        return !hasTitle || !hasContext || !hasSelectedResponse;
+    }, [cycleTitle, cycleContext, selectedResponseId]);
+    
+    const handleLogState = () => {
+        const responses: { [key: string]: PcppResponse } = {};
+        for (let i = 1; i <= tabCount; i++) {
+            responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' };
+        }
+        const currentState: PcppCycle = {
+            cycleId: currentCycle,
+            timestamp: new Date().toISOString(),
+            title: cycleTitle,
+            cycleContext,
+            ephemeralContext,
+            responses,
+            isParsedMode,
+            leftPaneWidth,
+            selectedResponseId,
+        };
+        clientIpc.sendToServer(ClientToServerChannel.RequestLogState, { currentState });
+    };
 
-    const collapsedNavigator = (
-        <div className="collapsed-navigator">
-            <button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button>
-            <span className="cycle-display">C{currentCycle}</span>
-            <button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button>
-        </div>
-    );
+    const isReadyForNextCycle = !isNewCycleButtonDisabled;
 
+    const collapsedNavigator = <div className="collapsed-navigator"><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button><span className="cycle-display">C{currentCycle}</span><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button></div>;
+    
     const renderContent = () => {
         if (!isParsedMode || !activeTabData?.parsedContent) {
             return <textarea className="response-textarea" placeholder={`Paste AI response for tab ${activeTab} here...`} value={activeTabData?.rawContent || ''} onChange={(e) => handleRawContentChange(e.target.value, activeTab)} />;
         }
-
-        const commonLeftPane = (
-            <>
-                 <CollapsibleSection title="Associated Files" isCollapsed={isAssociatedFilesCollapsed} onToggle={() => setAssociatedFilesCollapsed(p => !p)}>
-                    <ul className="associated-files-list">
-                        {activeTabData.parsedContent.filesUpdated.map(file => (
-                            <li key={file} className={selectedFilePath === file ? 'selected' : ''} onClick={() => handleSelectForViewing(file)} title={file}>
-                                <input type="checkbox" checked={selectedFilesForReplacement.has(file)} onChange={() => handleFileSelectionToggle(file)} onClick={e => e.stopPropagation()} />
-                                {fileExistenceMap.get(file) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
-                                <span>{file}</span>
-                            </li>
-                        ))}
-                    </ul>
-                </CollapsibleSection>
-                <CollapsibleSection title="Thoughts / Response" isCollapsed={isThoughtsCollapsed} onToggle={() => setThoughtsCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown></CollapsibleSection>
-                <CollapsibleSection title="Course of Action" isCollapsed={isActionCollapsed} onToggle={() => setActionCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown></CollapsibleSection>
-            </>
-        );
+        const commonLeftPane = <>
+            <CollapsibleSection title="Associated Files" isCollapsed={isAssociatedFilesCollapsed} onToggle={() => setAssociatedFilesCollapsed(p => !p)}><ul className="associated-files-list">{activeTabData.parsedContent.filesUpdated.map(file => <li key={file} className={selectedFilePath === file ? 'selected' : ''} onClick={() => handleSelectForViewing(file)} title={file}><input type="checkbox" checked={selectedFilesForReplacement.has(file)} onChange={() => handleFileSelectionToggle(file)} onClick={e => e.stopPropagation()} />{fileExistenceMap.get(file) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}<span>{file}</span></li>)}</ul></CollapsibleSection>
+            <CollapsibleSection title="Thoughts / Response" isCollapsed={isThoughtsCollapsed} onToggle={() => setThoughtsCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown></CollapsibleSection>
+            <CollapsibleSection title="Course of Action" isCollapsed={isActionCollapsed} onToggle={() => setActionCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown></CollapsibleSection>
+        </>;
 
         if (isDiffMode) {
-            return (
-                <div className="parsed-view-grid">
-                    <div className="parsed-view-left" style={{ flexBasis: `${leftPaneWidth}%` }}>
-                        {commonLeftPane}
-                        <button className="exit-diff-button" onClick={() => setIsDiffMode(false)}><VscClose/> Back to Code View</button>
-                    </div>
-                    <div className="resizer" onMouseDown={handleMouseDown} />
-                    <div className="parsed-view-right">
-                         {activeTabData.parsedContent && selectedFilePath && originalFileContent !== null ? (
-                            <DiffViewer 
-                                original={{ content: originalFileContent, path: selectedFilePath }}
-                                modified={{ content: activeTabData.parsedContent.files.find(f => f.path === selectedFilePath)?.content || '', path: selectedFilePath }}
-                            />
-                        ) : (
-                            <div style={{ padding: '8px' }}>{selectedFilePath ? 'Loading original file...' : 'Select a file to view diff.'}</div>
-                        )}
-                    </div>
-                </div>
-            );
+            return <div className="parsed-view-grid">
+                <div className="parsed-view-left" style={{ flexBasis: `${leftPaneWidth}%` }}>{commonLeftPane}<button className="exit-diff-button" onClick={() => setIsDiffMode(false)}><VscClose/> Back to Response View</button></div>
+                <div className="resizer" onMouseDown={handleMouseDown} />
+                <div className="parsed-view-right">{activeTabData.parsedContent && selectedFilePath && originalFileContent !== null ? <DiffViewer original={{ content: originalFileContent, path: selectedFilePath }} modified={{ content: activeTabData.parsedContent.files.find(f => f.path === selectedFilePath)?.content || '', path: selectedFilePath }}/> : <div style={{ padding: '8px' }}>{selectedFilePath ? 'Loading original file...' : 'Select a file to view diff.'}</div>}</div>
+            </div>;
         }
 
-        return (
-            <div className="parsed-view-grid">
-                <div className="parsed-view-left" style={{ flexBasis: `${leftPaneWidth}%` }}>
-                    {commonLeftPane}
-                </div>
-                <div className="resizer" onMouseDown={handleMouseDown} />
-                <div className="parsed-view-right">
-                    <div className="response-acceptance-header">
-                        <input type="checkbox" checked={isAllFilesSelected} onChange={handleSelectAllFilesToggle} />
-                        <label>Select this response</label>
-                        <button onClick={handleAcceptSelectedFiles} disabled={selectedFilesForReplacement.size === 0}><VscSave/> Accept Selected Files</button>
-                    </div>
-                    <div className="file-content-viewer-header">
-                        <span className="file-path" title={selectedFilePath || ''}>{selectedFilePath ? path.basename(selectedFilePath) : 'No file selected'}</span>
-                        <div className="file-actions">
-                            <button onClick={() => { if (selectedFilePath) { setIsDiffMode(true); clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: selectedFilePath }); } }} disabled={!selectedFilePath} title="View Diff"><VscDiff /></button>
-                            <button disabled={!selectedFilePath} title="Accept this file into workspace"><VscArrowSwap /></button>
-                        </div>
-                    </div>
-                    <div className="code-viewer-wrapper">
-                        <CodeViewer htmlContent={viewableContent} />
-                    </div>
-                </div>
+        return <div className="parsed-view-grid">
+            <div className="parsed-view-left" style={{ flexBasis: `${leftPaneWidth}%` }}>{commonLeftPane}</div>
+            <div className="resizer" onMouseDown={handleMouseDown} />
+            <div className="parsed-view-right">
+                <div className="response-acceptance-header"><button className={`styled-button ${selectedResponseId === activeTab.toString() ? 'toggled' : ''}`} onClick={() => setSelectedResponseId(prev => prev === activeTab.toString() ? null : activeTab.toString())}>{selectedResponseId === activeTab.toString() ? 'Response Selected' : 'Select This Response'}</button><button className="styled-button" onClick={handleSelectAllFilesToggle}><VscCheckAll/> {isAllFilesSelected ? 'Deselect All' : 'Select All'}</button><button className="styled-button" onClick={handleAcceptSelectedFiles} disabled={selectedFilesForReplacement.size === 0}><VscSave/> Accept Selected Files</button></div>
+                <div className="file-content-viewer-header"><span className="file-path" title={selectedFilePath || ''}>{selectedFilePath ? path.basename(selectedFilePath) : 'No file selected'}</span><div className="file-actions"><button onClick={() => handleAcceptSingleFile(selectedFilePath!)} disabled={!selectedFilePath} title="Accept this file into workspace"><VscArrowSwap /></button></div></div>
+                <CodeViewer htmlContent={viewableContent} />
             </div>
-        );
+        </div>;
     };
 
-    return (
-        <div className="pc-view-container">
-            <div className="pc-header">
-                <div className="pc-toolbar">
-                    <button onClick={handleGeneratePrompt} title="Generate prompt.md"><VscFileCode /> Generate prompt.md</button>
-                    <button onClick={handleGlobalParseToggle}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button>
-                </div>
-                <div className="tab-count-input">
-                    <label htmlFor="tab-count">Responses:</label>
-                    <input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} />
-                </div>
-            </div>
-
-            <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator}>
-                <div className="cycle-navigator">
-                    <span>Cycle:</span>
-                    <button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button>
-                    <input type="number" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 1)} className="cycle-input" />
-                    <button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button>
-                    <button onClick={handleNewCycle} title="New Cycle" disabled={isNewCycleButtonDisabled}><VscAdd /></button>
-                    <input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} />
-                    <button onClick={handleDeleteCycle} title="Delete Current Cycle"><VscTrash /></button>
-                    <button onClick={handleResetHistory} title="Reset All History"><VscSync /></button>
-                </div>
-                <div className="context-inputs">
-                    <textarea className="context-textarea" placeholder="Cycle Context (notes for this cycle)..." value={cycleContext} onChange={e => setCycleContext(e.target.value)} />
-                    <textarea className="context-textarea" placeholder="Ephemeral Context (for this cycle's prompt only)..." value={ephemeralContext} onChange={e => setEphemeralContext(e.target.value)} />
-                </div>
-            </CollapsibleSection>
-
-            <div className="tab-bar">
-                {[...Array(tabCount)].map((_, i) => <div key={i} className={`tab ${activeTab === i + 1 ? 'active' : ''}`} onClick={() => setActiveTab(i + 1)}>Resp {i + 1}</div>)}
-            </div>
-
-            <div className="tab-content">
-                {activeTab !== null && (
-                    <div className="tab-pane">
-                        {renderContent()}
-                    </div>
-                )}
-            </div>
-        </div>
-    );
+    return <div className="pc-view-container">
+        <div className="pc-header"><div className="pc-toolbar"><button onClick={handleGeneratePrompt} title="Generate prompt.md"><VscFileCode /> Generate prompt.md</button><button onClick={handleLogState} title="Log Current State"><VscBug/></button><button onClick={handleGlobalParseToggle}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} /></div></div>
+        <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''}><div className="cycle-navigator"><span>Cycle:</span><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button><input type="number" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 1)} className="cycle-input" /><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button><button onClick={handleNewCycle} title="New Cycle" disabled={isNewCycleButtonDisabled}><VscAdd /></button><input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} /><button onClick={handleDeleteCycle} title="Delete Current Cycle"><VscTrash /></button><button onClick={handleResetHistory} title="Reset All History"><VscSync /></button></div><div className="context-inputs"><textarea className="context-textarea" placeholder="Cycle Context (notes for this cycle)..." value={cycleContext} onChange={e => setCycleContext(e.target.value)} /><textarea className="context-textarea" placeholder="Ephemeral Context (for this cycle's prompt only)..." value={ephemeralContext} onChange={e => setEphemeralContext(e.target.value)} /></div></CollapsibleSection>
+        <div className="tab-bar">{[...Array(tabCount)].map((_, i) => <div key={i} className={`tab ${activeTab === i + 1 ? 'active' : ''} ${selectedResponseId === (i + 1).toString() ? 'selected' : ''}`} onClick={() => setActiveTab(i + 1)}>Resp {i + 1}</div>)}</div>
+        <div className="tab-content">{activeTab !== null && <div className="tab-pane">{renderContent()}</div>}</div>
+    </div>;
 };
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
@@ -13627,14 +13756,14 @@ export enum ClientToServerChannel {
     RequestRevealInExplorer = "clientToServer.requestRevealInExplorer",
     RequestCopyPath = "clientToServer.requestCopyPath",
     RequestOpenFile = "clientToServer.requestOpenFile",
+    RequestFileContent = "clientToServer.requestFileContent",
     RequestMoveFile = "clientToServer.requestMoveFile",
     RequestCopyFile = "clientToServer.requestCopyFile",
     RequestUndo = "clientToServer.requestUndo",
     RequestRedo = "clientToServer.requestRedo",
     RequestAddFileFromBuffer = "clientToServer.requestAddFileFromBuffer",
     RequestCopyFileFromUri = "clientToServer.requestCopyFileFromUri",
-    RequestFileContent = "clientToServer.requestFileContent",
-    RequestBatchFileWrite = "clientToServer.requestBatchFileWrite", // New for batch acceptance
+    RequestBatchFileWrite = "clientToServer.requestBatchFileWrite",
 
     // Special File Handling
     RequestPdfToText = "clientToServer.requestPdfToText",
@@ -13658,6 +13787,7 @@ export enum ClientToServerChannel {
     SaveCycleData = "clientToServer.saveCycleData",
     RequestDeleteCycle = "clientToServer.requestDeleteCycle",
     RequestResetHistory = "clientToServer.requestResetHistory",
+    RequestLogState = "clientToServer.requestLogState", // New
 }
 
 export enum ServerToClientChannel {
@@ -13726,6 +13856,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestDeleteCycle ? { cycleId: number } :
     T extends ClientToServerChannel.RequestResetHistory ? {} :
     T extends ClientToServerChannel.RequestBatchFileWrite ? { files: BatchWriteFile[] } :
+    T extends ClientToServerChannel.RequestLogState ? { currentState: PcppCycle } :
     
     T extends ServerToClientChannel.SendWorkspaceFiles ? { files: FileNode[] } :
     T extends ServerToClientChannel.SendWorkspaceTrustState ? { isTrusted: boolean } :
@@ -13873,6 +14004,7 @@ export interface FileNode {
 
 <file path="src/common/types/pcpp.types.ts">
 // src/common/types/pcpp.types.ts
+// Updated on: C133 (Add selectedResponseId to PcppCycle)
 
 // Data structure for the backend history file
 export interface PcppResponse {
@@ -13886,8 +14018,9 @@ export interface PcppCycle {
     cycleContext: string;
     ephemeralContext: string;
     responses: { [tabId: string]: PcppResponse };
-    isParsedMode?: boolean; // This will now be managed per-cycle
+    isParsedMode?: boolean;
     leftPaneWidth?: number;
+    selectedResponseId?: string | null; // ID of the response tab selected by the user
 }
 
 export interface PcppHistoryFile {
@@ -13900,6 +14033,7 @@ export interface PcppHistoryFile {
 export interface ParsedFile {
     path: string;
     content: string;
+    tokenCount: number;
 }
 
 export interface ParsedResponse {
@@ -13907,6 +14041,7 @@ export interface ParsedResponse {
     courseOfAction: string;
     filesUpdated: string[]; // List of file paths from the "Files Updated This Cycle" section
     files: ParsedFile[]; // Parsed file blocks with content
+    totalTokens: number;
 }
 </file>
 

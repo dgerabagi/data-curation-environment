@@ -13,14 +13,14 @@ export enum ClientToServerChannel {
     RequestRevealInExplorer = "clientToServer.requestRevealInExplorer",
     RequestCopyPath = "clientToServer.requestCopyPath",
     RequestOpenFile = "clientToServer.requestOpenFile",
+    RequestFileContent = "clientToServer.requestFileContent",
     RequestMoveFile = "clientToServer.requestMoveFile",
     RequestCopyFile = "clientToServer.requestCopyFile",
     RequestUndo = "clientToServer.requestUndo",
     RequestRedo = "clientToServer.requestRedo",
     RequestAddFileFromBuffer = "clientToServer.requestAddFileFromBuffer",
     RequestCopyFileFromUri = "clientToServer.requestCopyFileFromUri",
-    RequestFileContent = "clientToServer.requestFileContent",
-    RequestBatchFileWrite = "clientToServer.requestBatchFileWrite", // New for batch acceptance
+    RequestBatchFileWrite = "clientToServer.requestBatchFileWrite",
 
     // Special File Handling
     RequestPdfToText = "clientToServer.requestPdfToText",
@@ -44,6 +44,7 @@ export enum ClientToServerChannel {
     SaveCycleData = "clientToServer.saveCycleData",
     RequestDeleteCycle = "clientToServer.requestDeleteCycle",
     RequestResetHistory = "clientToServer.requestResetHistory",
+    RequestLogState = "clientToServer.requestLogState", // New
 }
 
 export enum ServerToClientChannel {

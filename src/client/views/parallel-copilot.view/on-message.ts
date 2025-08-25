@@ -1,4 +1,4 @@
-// Updated on: C132 (Add batch write handler)
+// Updated on: C134 (Add log state handler)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -47,5 +47,9 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestBatchFileWrite, (data) => {
         fileOperationService.handleBatchFileWrite(data.files);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestLogState, (data) => {
+        promptService.generateStateLog(data.currentState);
     });
 }

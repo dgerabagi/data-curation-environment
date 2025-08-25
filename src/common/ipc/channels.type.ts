@@ -42,6 +42,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestDeleteCycle ? { cycleId: number } :
     T extends ClientToServerChannel.RequestResetHistory ? {} :
     T extends ClientToServerChannel.RequestBatchFileWrite ? { files: BatchWriteFile[] } :
+    T extends ClientToServerChannel.RequestLogState ? { currentState: PcppCycle } :
     
     T extends ServerToClientChannel.SendWorkspaceFiles ? { files: FileNode[] } :
     T extends ServerToClientChannel.SendWorkspaceTrustState ? { isTrusted: boolean } :
