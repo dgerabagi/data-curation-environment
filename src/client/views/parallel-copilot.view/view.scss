@@ -1,4 +1,4 @@
-/* Updated on: C132 (Re-enable all scrollbars) */
+/* Updated on: C133 (Add styling for selected tabs and new buttons) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -33,6 +33,11 @@ body {
     align-items: center;
     gap: 4px;
     justify-content: space-between;
+
+    &.selected {
+        background-color: var(--vscode-testing-iconPassed);
+        color: var(--vscode-button-foreground);
+    }
 
     .chevron {
         transition: transform 0.2s ease-in-out;
@@ -70,7 +75,7 @@ body {
     gap: 8px;
 }
 
-.cycle-navigator button, .pc-toolbar button, .file-actions button, .exit-diff-button {
+.cycle-navigator button, .pc-toolbar button, .file-actions button, .exit-diff-button, .styled-button {
     background: none;
     border: 1px solid var(--vscode-button-border, transparent);
     color: var(--vscode-icon-foreground);
@@ -89,6 +94,22 @@ body {
     &:disabled {
         opacity: 0.5;
         cursor: not-allowed;
+    }
+}
+
+.styled-button {
+    background-color: var(--vscode-button-secondaryBackground);
+    color: var(--vscode-button-secondaryForeground);
+    padding: 2px 8px;
+    font-size: 12px;
+
+    &:hover {
+        background-color: var(--vscode-button-secondaryHoverBackground);
+    }
+
+    &.toggled {
+        background-color: var(--vscode-button-background);
+        color: var(--vscode-button-foreground);
     }
 }
 
@@ -168,6 +189,11 @@ body {
     cursor: pointer;
     border-bottom: 2px solid transparent;
     color: var(--vscode-tab-inactiveForeground);
+
+    &.selected {
+        background-color: var(--vscode-testing-iconPassed);
+        color: var(--vscode-button-foreground);
+    }
 }
 
 .tab.active {
@@ -274,10 +300,6 @@ body {
     padding: 4px 8px;
     font-size: 12px;
     background-color: var(--vscode-sideBar-sectionHeaderBackground);
-
-    input[type="checkbox"] {
-        margin-right: 4px;
-    }
 }
 
 .code-viewer-wrapper {
@@ -289,6 +311,15 @@ body {
     border-radius: 0 0 4px 4px;
     background-color: var(--vscode-editor-background);
     overflow: hidden;
+    flex-direction: column;
+}
+
+.code-viewer-metadata {
+    font-size: 11px;
+    padding: 2px 8px;
+    color: var(--vscode-descriptionForeground);
+    background-color: var(--vscode-editorGroupHeader-tabsBackground);
+    border-bottom: 1px solid var(--vscode-panel-border);
 }
 
 .file-content-viewer {
@@ -435,11 +466,6 @@ body {
     text-align: right;
     user-select: none;
     span { display: block; min-height: 1.5em; padding-right: 6px; }
-}
-
-.diff-pane .diff-lines {
-    flex-grow: 1;
-    min-width: 0;
 }
 
 .diff-pane .diff-lines .line {

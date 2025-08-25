@@ -1,4 +1,4 @@
-// Updated on: C132 (Add back button, selection checkboxes, and batch accept)
+// Updated on: C133 (Fix persistence, restore metadata, improve UI)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -29,7 +29,7 @@ const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     return debouncedFunction;
 };
 
-const CodeViewer: React.FC<{ htmlContent: string | undefined | null }> = ({ htmlContent }) => {
+const CodeViewer: React.FC<{ htmlContent: string | undefined | null, metadata?: { originalTokens: number, newTokens: number, similarity: number } }> = ({ htmlContent, metadata }) => {
     if (htmlContent === undefined || htmlContent === null) {
         return <div style={{ padding: '8px' }}>Select a file to view its content.</div>;
     }
@@ -46,11 +46,18 @@ const CodeViewer: React.FC<{ htmlContent: string | undefined | null }> = ({ html
     }
 
     return (
-        <div className="file-content-viewer">
-            <div className="line-numbers">
-                {lines.map((_, i) => <span key={i}>{i + 1}</span>)}
+        <div className="code-viewer-wrapper">
+            {metadata && (
+                <div className="code-viewer-metadata">
+                    Original Tokens: {metadata.originalTokens} | New Tokens: {metadata.newTokens} | Similarity: {metadata.similarity.toFixed(2)}%
+                </div>
+            )}
+            <div className="file-content-viewer">
+                <div className="line-numbers">
+                    {lines.map((_, i) => <span key={i}>{i + 1}</span>)}
+                </div>
+                <div className="code-content" dangerouslySetInnerHTML={{ __html: code }} />
             </div>
-            <div className="code-content" dangerouslySetInnerHTML={{ __html: code }} />
         </div>
     );
 };
@@ -58,12 +65,11 @@ const CodeViewer: React.FC<{ htmlContent: string | undefined | null }> = ({ html
 interface TabState {
     rawContent: string;
     parsedContent: ParsedResponse | null;
-    totalTokens?: number;
 }
 
-const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; collapsedContent?: React.ReactNode; }> = ({ title, children, isCollapsed, onToggle, collapsedContent }) => (
+const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; collapsedContent?: React.ReactNode; className?: string; }> = ({ title, children, isCollapsed, onToggle, collapsedContent, className }) => (
     <div className="collapsible-section">
-        <div className="collapsible-header" onClick={onToggle}>
+        <div className={`collapsible-header ${className || ''}`} onClick={onToggle}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                 <VscChevronDown className={`chevron ${isCollapsed ? 'collapsed' : ''}`} />
                 <span>{title}</span>
@@ -93,6 +99,7 @@ const App = () => {
     const [originalFileContent, setOriginalFileContent] = React.useState<string | null>(null);
     const isResizing = React.useRef(false);
     const [selectedFilesForReplacement, setSelectedFilesForReplacement] = React.useState<Set<string>>(new Set());
+    const [selectedResponseId, setSelectedResponseId] = React.useState<string | null>(null);
 
     const [isAssociatedFilesCollapsed, setAssociatedFilesCollapsed] = React.useState(false);
     const [isThoughtsCollapsed, setThoughtsCollapsed] = React.useState(false);
@@ -100,7 +107,7 @@ const App = () => {
 
     const clientIpc = ClientPostMessageManager.getInstance();
 
-    const saveCurrentCycleState = React.useCallback((force = false) => {
+    const saveCurrentCycleState = React.useCallback(() => {
         const responses: { [key: string]: PcppResponse } = {};
         for (let i = 1; i <= tabCount; i++) {
             responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' };
@@ -114,15 +121,16 @@ const App = () => {
             responses,
             isParsedMode,
             leftPaneWidth,
+            selectedResponseId,
         };
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
-    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, clientIpc]);
+    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, clientIpc]);
 
     const debouncedSave = useDebounce(saveCurrentCycleState, 1000);
 
     React.useEffect(() => {
         debouncedSave();
-    }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, debouncedSave]);
+    }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, selectedResponseId, debouncedSave]);
     
     const parseAllTabs = React.useCallback(() => {
         setTabs(prevTabs => {
@@ -135,7 +143,6 @@ const App = () => {
                     needsUpdate = true;
                     const parsed = parseResponse(tabState.rawContent);
                     tabState.parsedContent = parsed;
-                    tabState.totalTokens = parsed.files.reduce((acc, file) => acc + Math.ceil(file.content.length / 4), 0);
                     parsed.filesUpdated.forEach(file => allFilePaths.add(file));
                     parsed.files.forEach(file => {
                         const lang = path.extname(file.path).substring(1) || 'plaintext';
@@ -166,40 +173,23 @@ const App = () => {
             setTabs(newTabs);
             setIsParsedMode(cycleData.isParsedMode || false);
             setLeftPaneWidth(cycleData.leftPaneWidth || 33);
+            setSelectedResponseId(cycleData.selectedResponseId || null);
         };
 
         clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData }) => {
             loadCycleData(cycleData);
             setMaxCycle(cycleData.cycleId);
         });
-        clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData }) => {
-            if (cycleData) {
-                loadCycleData(cycleData);
-            }
-        });
-        clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => {
-            setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml));
-        });
-        clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => {
-            setFileExistenceMap(new Map(Object.entries(existenceMap)));
-        });
-        clientIpc.onServerMessage(ServerToClientChannel.SendFileContent, ({ path: filePath, content }) => {
-            setOriginalFileContent(content);
-        });
-        clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => {
-            if (reason === 'history') {
-                clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});
-            }
-        });
+        clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData }) => { if (cycleData) loadCycleData(cycleData); });
+        clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml)));
+        clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap))));
+        clientIpc.onServerMessage(ServerToClientChannel.SendFileContent, ({ path: filePath, content }) => setOriginalFileContent(content));
+        clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); });
         
         clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});
     }, [clientIpc]);
 
-    React.useEffect(() => {
-        if (isParsedMode) {
-            parseAllTabs();
-        }
-    }, [isParsedMode, tabs, parseAllTabs]);
+    React.useEffect(() => { if (isParsedMode) parseAllTabs(); }, [isParsedMode, tabs, parseAllTabs]);
     
     const activeTabData = tabs[activeTab.toString()];
 
@@ -211,138 +201,50 @@ const App = () => {
         return highlightedCodeBlocks.get(id);
     }, [selectedFilePath, activeTabData?.parsedContent, highlightedCodeBlocks]);
 
-
-    const handleRawContentChange = (newContent: string, tabIndex: number) => {
-        setTabs(prev => ({ ...prev, [tabIndex.toString()]: { rawContent: newContent, parsedContent: null }}));
-    };
-
+    const handleRawContentChange = (newContent: string, tabIndex: number) => setTabs(prev => ({ ...prev, [tabIndex.toString()]: { rawContent: newContent, parsedContent: null }}));
     const handleGlobalParseToggle = () => {
         const newParseMode = !isParsedMode;
         setIsParsedMode(newParseMode);
         setSelectedFilePath(null);
         setIsDiffMode(false);
-        if (!newParseMode) {
-            setTabs(prev => {
-                const newTabs = {...prev};
-                Object.keys(newTabs).forEach(key => {
-                    newTabs[key].parsedContent = null;
-                });
-                return newTabs;
-            });
-        }
+        if (!newParseMode) setTabs(prev => { const newTabs = {...prev}; Object.keys(newTabs).forEach(key => { newTabs[key].parsedContent = null; }); return newTabs; });
     };
-
-    const handleCycleChange = (e: React.MouseEvent, newCycle: number) => {
-        e.stopPropagation();
-        if (newCycle > 0 && newCycle <= maxCycle) {
-            saveCurrentCycleState(true);
-            setCurrentCycle(newCycle);
-            clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle });
-        }
-    };
-
-    const handleNewCycle = (e: React.MouseEvent) => {
-        e.stopPropagation();
-        const newCycleId = maxCycle + 1;
-        setMaxCycle(newCycleId);
-        setCurrentCycle(newCycleId);
-        setCycleTitle('New Cycle');
-        setCycleContext('');
-        setEphemeralContext('');
-        setTabs({});
-        setIsParsedMode(false);
-    };
-    
-    const handleGeneratePrompt = () => {
-        clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle });
-    };
-
-    const handleMouseDown = React.useCallback((e: React.MouseEvent) => {
-        e.preventDefault();
-        isResizing.current = true;
-    }, []);
-
-    const handleMouseMove = React.useCallback((e: MouseEvent) => {
-        if (!isResizing.current) return;
-        const newWidth = (e.clientX / window.innerWidth) * 100;
-        if (newWidth > 10 && newWidth < 90) {
-            setLeftPaneWidth(newWidth);
-        }
-    }, []);
-
-    const handleMouseUp = React.useCallback(() => {
-        isResizing.current = false;
-    }, []);
+    const handleCycleChange = (e: React.MouseEvent, newCycle: number) => { e.stopPropagation(); if (newCycle > 0 && newCycle <= maxCycle) { saveCurrentCycleState(); setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); } };
+    const handleNewCycle = (e: React.MouseEvent) => { e.stopPropagation(); const newCycleId = maxCycle + 1; setMaxCycle(newCycleId); setCurrentCycle(newCycleId); setCycleTitle('New Cycle'); setCycleContext(''); setEphemeralContext(''); setTabs({}); setIsParsedMode(false); setSelectedResponseId(null); };
+    const handleGeneratePrompt = () => clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle });
+    const handleMouseDown = React.useCallback((e: React.MouseEvent) => { e.preventDefault(); isResizing.current = true; }, []);
+    const handleMouseMove = React.useCallback((e: MouseEvent) => { if (!isResizing.current) return; const newWidth = (e.clientX / window.innerWidth) * 100; if (newWidth > 10 && newWidth < 90) setLeftPaneWidth(newWidth); }, []);
+    const handleMouseUp = React.useCallback(() => { isResizing.current = false; }, []);
 
     React.useEffect(() => {
         const mm = (e: MouseEvent) => handleMouseMove(e);
         const mu = () => handleMouseUp();
-        window.addEventListener('mousemove', mm);
-        window.addEventListener('mouseup', mu);
-        
-        return () => {
-            window.removeEventListener('mousemove', mm);
-            window.removeEventListener('mouseup', mu);
-        };
-    }, [handleMouseMove, handleMouseUp]);
+        if (isParsedMode) { window.addEventListener('mousemove', mm); window.addEventListener('mouseup', mu); }
+        return () => { window.removeEventListener('mousemove', mm); window.removeEventListener('mouseup', mu); };
+    }, [isParsedMode, handleMouseMove, handleMouseUp]);
     
     const handleSelectForViewing = (filePath: string) => {
         const newPath = selectedFilePath === filePath ? null : filePath;
-        
-        if (newPath !== selectedFilePath) {
-            setOriginalFileContent(null);
-        }
-
+        if (newPath !== selectedFilePath) setOriginalFileContent(null);
         setSelectedFilePath(newPath);
-
-        if (isDiffMode && newPath) {
-            clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: newPath });
-        }
+        if (isDiffMode && newPath) clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: newPath });
     };
-
-    const handleDeleteCycle = () => {
-        clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle });
-    };
-
-    const handleResetHistory = () => {
-        clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {});
-    };
-
-    const handleFileSelectionToggle = (filePath: string) => {
-        setSelectedFilesForReplacement(prev => {
-            const newSet = new Set(prev);
-            if (newSet.has(filePath)) {
-                newSet.delete(filePath);
-            } else {
-                newSet.add(filePath);
-            }
-            return newSet;
-        });
-    };
-
-    const handleSelectAllFilesToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.checked) {
-            const allFilePaths = activeTabData?.parsedContent?.filesUpdated || [];
-            setSelectedFilesForReplacement(new Set(allFilePaths));
-        } else {
-            setSelectedFilesForReplacement(new Set());
-        }
-    };
-
+    const handleDeleteCycle = () => clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle });
+    const handleResetHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {});
+    const handleFileSelectionToggle = (filePath: string) => setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); if (newSet.has(filePath)) newSet.delete(filePath); else newSet.add(filePath); return newSet; });
+    const handleSelectAllFilesToggle = (e: React.ChangeEvent<HTMLInputElement>) => { if (e.target.checked) setSelectedFilesForReplacement(new Set(activeTabData?.parsedContent?.filesUpdated || [])); else setSelectedFilesForReplacement(new Set()); };
     const handleAcceptSelectedFiles = () => {
         if (selectedFilesForReplacement.size === 0 || !activeTabData?.parsedContent) return;
-
         const filesToWrite: BatchWriteFile[] = [];
         selectedFilesForReplacement.forEach(filePath => {
             const file = activeTabData.parsedContent.files.find(f => f.path === filePath);
-            if (file) {
-                filesToWrite.push({ path: file.path, content: file.content });
-            }
+            if (file) filesToWrite.push({ path: file.path, content: file.content });
         });
-
-        if (filesToWrite.length > 0) {
-            clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite });
-        }
+        if (filesToWrite.length > 0) clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite });
+    };
+    const handleAcceptSingleFile = (filePath: string) => {
+        const file = activeTabData?.parsedContent?.files.find(f => f.path === filePath);
+        if (file) clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: [{ path: file.path, content: file.content }] });
     };
 
     const isAllFilesSelected = React.useMemo(() => {
@@ -358,129 +260,45 @@ const App = () => {
         return !hasTitle && !hasContext && !hasResponseContent;
     }, [cycleTitle, cycleContext, ephemeralContext, tabs]);
 
-    const collapsedNavigator = (
-        <div className="collapsed-navigator">
-            <button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button>
-            <span className="cycle-display">C{currentCycle}</span>
-            <button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button>
-        </div>
-    );
+    const isReadyForNextCycle = cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== '' && cycleContext.trim() !== '' && selectedResponseId !== null;
 
+    const collapsedNavigator = <div className="collapsed-navigator"><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button><span className="cycle-display">C{currentCycle}</span><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button></div>;
+    
     const renderContent = () => {
         if (!isParsedMode || !activeTabData?.parsedContent) {
             return <textarea className="response-textarea" placeholder={`Paste AI response for tab ${activeTab} here...`} value={activeTabData?.rawContent || ''} onChange={(e) => handleRawContentChange(e.target.value, activeTab)} />;
         }
-
-        const commonLeftPane = (
-            <>
-                 <CollapsibleSection title="Associated Files" isCollapsed={isAssociatedFilesCollapsed} onToggle={() => setAssociatedFilesCollapsed(p => !p)}>
-                    <ul className="associated-files-list">
-                        {activeTabData.parsedContent.filesUpdated.map(file => (
-                            <li key={file} className={selectedFilePath === file ? 'selected' : ''} onClick={() => handleSelectForViewing(file)} title={file}>
-                                <input type="checkbox" checked={selectedFilesForReplacement.has(file)} onChange={() => handleFileSelectionToggle(file)} onClick={e => e.stopPropagation()} />
-                                {fileExistenceMap.get(file) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
-                                <span>{file}</span>
-                            </li>
-                        ))}
-                    </ul>
-                </CollapsibleSection>
-                <CollapsibleSection title="Thoughts / Response" isCollapsed={isThoughtsCollapsed} onToggle={() => setThoughtsCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown></CollapsibleSection>
-                <CollapsibleSection title="Course of Action" isCollapsed={isActionCollapsed} onToggle={() => setActionCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown></CollapsibleSection>
-            </>
-        );
+        const commonLeftPane = <>
+            <CollapsibleSection title="Associated Files" isCollapsed={isAssociatedFilesCollapsed} onToggle={() => setAssociatedFilesCollapsed(p => !p)}><ul className="associated-files-list">{activeTabData.parsedContent.filesUpdated.map(file => <li key={file} className={selectedFilePath === file ? 'selected' : ''} onClick={() => handleSelectForViewing(file)} title={file}><input type="checkbox" checked={selectedFilesForReplacement.has(file)} onChange={() => handleFileSelectionToggle(file)} onClick={e => e.stopPropagation()} />{fileExistenceMap.get(file) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}<span>{file}</span></li>)}</ul></CollapsibleSection>
+            <CollapsibleSection title="Thoughts / Response" isCollapsed={isThoughtsCollapsed} onToggle={() => setThoughtsCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown></CollapsibleSection>
+            <CollapsibleSection title="Course of Action" isCollapsed={isActionCollapsed} onToggle={() => setActionCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown></CollapsibleSection>
+        </>;
 
         if (isDiffMode) {
-            return (
-                <div className="parsed-view-grid">
-                    <div className="parsed-view-left" style={{ flexBasis: `${leftPaneWidth}%` }}>
-                        {commonLeftPane}
-                        <button className="exit-diff-button" onClick={() => setIsDiffMode(false)}><VscClose/> Back to Code View</button>
-                    </div>
-                    <div className="resizer" onMouseDown={handleMouseDown} />
-                    <div className="parsed-view-right">
-                         {activeTabData.parsedContent && selectedFilePath && originalFileContent !== null ? (
-                            <DiffViewer 
-                                original={{ content: originalFileContent, path: selectedFilePath }}
-                                modified={{ content: activeTabData.parsedContent.files.find(f => f.path === selectedFilePath)?.content || '', path: selectedFilePath }}
-                            />
-                        ) : (
-                            <div style={{ padding: '8px' }}>{selectedFilePath ? 'Loading original file...' : 'Select a file to view diff.'}</div>
-                        )}
-                    </div>
-                </div>
-            );
+            return <div className="parsed-view-grid">
+                <div className="parsed-view-left" style={{ flexBasis: `${leftPaneWidth}%` }}>{commonLeftPane}<button className="exit-diff-button" onClick={() => setIsDiffMode(false)}><VscClose/> Back to Response View</button></div>
+                <div className="resizer" onMouseDown={handleMouseDown} />
+                <div className="parsed-view-right">{activeTabData.parsedContent && selectedFilePath && originalFileContent !== null ? <DiffViewer original={{ content: originalFileContent, path: selectedFilePath }} modified={{ content: activeTabData.parsedContent.files.find(f => f.path === selectedFilePath)?.content || '', path: selectedFilePath }}/> : <div style={{ padding: '8px' }}>{selectedFilePath ? 'Loading original file...' : 'Select a file to view diff.'}</div>}</div>
+            </div>;
         }
 
-        return (
-            <div className="parsed-view-grid">
-                <div className="parsed-view-left" style={{ flexBasis: `${leftPaneWidth}%` }}>
-                    {commonLeftPane}
-                </div>
-                <div className="resizer" onMouseDown={handleMouseDown} />
-                <div className="parsed-view-right">
-                    <div className="response-acceptance-header">
-                        <input type="checkbox" checked={isAllFilesSelected} onChange={handleSelectAllFilesToggle} />
-                        <label>Select this response</label>
-                        <button onClick={handleAcceptSelectedFiles} disabled={selectedFilesForReplacement.size === 0}><VscSave/> Accept Selected Files</button>
-                    </div>
-                    <div className="file-content-viewer-header">
-                        <span className="file-path" title={selectedFilePath || ''}>{selectedFilePath ? path.basename(selectedFilePath) : 'No file selected'}</span>
-                        <div className="file-actions">
-                            <button onClick={() => { if (selectedFilePath) { setIsDiffMode(true); clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: selectedFilePath }); } }} disabled={!selectedFilePath} title="View Diff"><VscDiff /></button>
-                            <button disabled={!selectedFilePath} title="Accept this file into workspace"><VscArrowSwap /></button>
-                        </div>
-                    </div>
-                    <div className="code-viewer-wrapper">
-                        <CodeViewer htmlContent={viewableContent} />
-                    </div>
-                </div>
+        return <div className="parsed-view-grid">
+            <div className="parsed-view-left" style={{ flexBasis: `${leftPaneWidth}%` }}>{commonLeftPane}</div>
+            <div className="resizer" onMouseDown={handleMouseDown} />
+            <div className="parsed-view-right">
+                <div className="response-acceptance-header"><button className={`styled-button ${selectedResponseId === activeTab.toString() ? 'toggled' : ''}`} onClick={() => setSelectedResponseId(prev => prev === activeTab.toString() ? null : activeTab.toString())}>{selectedResponseId === activeTab.toString() ? 'Response Selected' : 'Select This Response'}</button><button className="styled-button" onClick={handleAcceptSelectedFiles} disabled={selectedFilesForReplacement.size === 0}><VscSave/> Accept Selected Files</button></div>
+                <div className="file-content-viewer-header"><span className="file-path" title={selectedFilePath || ''}>{selectedFilePath ? path.basename(selectedFilePath) : 'No file selected'}</span><div className="file-actions"><button onClick={() => handleAcceptSingleFile(selectedFilePath!)} disabled={!selectedFilePath} title="Accept this file into workspace"><VscArrowSwap /></button></div></div>
+                <CodeViewer htmlContent={viewableContent} />
             </div>
-        );
+        </div>;
     };
 
-    return (
-        <div className="pc-view-container">
-            <div className="pc-header">
-                <div className="pc-toolbar">
-                    <button onClick={handleGeneratePrompt} title="Generate prompt.md"><VscFileCode /> Generate prompt.md</button>
-                    <button onClick={handleGlobalParseToggle}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button>
-                </div>
-                <div className="tab-count-input">
-                    <label htmlFor="tab-count">Responses:</label>
-                    <input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} />
-                </div>
-            </div>
-
-            <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator}>
-                <div className="cycle-navigator">
-                    <span>Cycle:</span>
-                    <button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button>
-                    <input type="number" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 1)} className="cycle-input" />
-                    <button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button>
-                    <button onClick={handleNewCycle} title="New Cycle" disabled={isNewCycleButtonDisabled}><VscAdd /></button>
-                    <input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} />
-                    <button onClick={handleDeleteCycle} title="Delete Current Cycle"><VscTrash /></button>
-                    <button onClick={handleResetHistory} title="Reset All History"><VscSync /></button>
-                </div>
-                <div className="context-inputs">
-                    <textarea className="context-textarea" placeholder="Cycle Context (notes for this cycle)..." value={cycleContext} onChange={e => setCycleContext(e.target.value)} />
-                    <textarea className="context-textarea" placeholder="Ephemeral Context (for this cycle's prompt only)..." value={ephemeralContext} onChange={e => setEphemeralContext(e.target.value)} />
-                </div>
-            </CollapsibleSection>
-
-            <div className="tab-bar">
-                {[...Array(tabCount)].map((_, i) => <div key={i} className={`tab ${activeTab === i + 1 ? 'active' : ''}`} onClick={() => setActiveTab(i + 1)}>Resp {i + 1}</div>)}
-            </div>
-
-            <div className="tab-content">
-                {activeTab !== null && (
-                    <div className="tab-pane">
-                        {renderContent()}
-                    </div>
-                )}
-            </div>
-        </div>
-    );
+    return <div className="pc-view-container">
+        <div className="pc-header"><div className="pc-toolbar"><button onClick={handleGeneratePrompt} title="Generate prompt.md"><VscFileCode /> Generate prompt.md</button><button onClick={handleGlobalParseToggle}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} /></div></div>
+        <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''}><div className="cycle-navigator"><span>Cycle:</span><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button><input type="number" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 1)} className="cycle-input" /><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button><button onClick={handleNewCycle} title="New Cycle" disabled={isNewCycleButtonDisabled}><VscAdd /></button><input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} /><button onClick={handleDeleteCycle} title="Delete Current Cycle"><VscTrash /></button><button onClick={handleResetHistory} title="Reset All History"><VscSync /></button></div><div className="context-inputs"><textarea className="context-textarea" placeholder="Cycle Context (notes for this cycle)..." value={cycleContext} onChange={e => setCycleContext(e.target.value)} /><textarea className="context-textarea" placeholder="Ephemeral Context (for this cycle's prompt only)..." value={ephemeralContext} onChange={e => setEphemeralContext(e.target.value)} /></div></CollapsibleSection>
+        <div className="tab-bar">{[...Array(tabCount)].map((_, i) => <div key={i} className={`tab ${activeTab === i + 1 ? 'active' : ''} ${selectedResponseId === (i + 1).toString() ? 'selected' : ''}`} onClick={() => setActiveTab(i + 1)}>Resp {i + 1}</div>)}</div>
+        <div className="tab-content">{activeTab !== null && <div className="tab-pane">{renderContent()}</div>}</div>
+    </div>;
 };
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);

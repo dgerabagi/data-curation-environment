@@ -1,4 +1,5 @@
 // src/common/types/pcpp.types.ts
+// Updated on: C133 (Add selectedResponseId to PcppCycle)
 
 // Data structure for the backend history file
 export interface PcppResponse {
@@ -12,8 +13,9 @@ export interface PcppCycle {
     cycleContext: string;
     ephemeralContext: string;
     responses: { [tabId: string]: PcppResponse };
-    isParsedMode?: boolean; // This will now be managed per-cycle
+    isParsedMode?: boolean;
     leftPaneWidth?: number;
+    selectedResponseId?: string | null; // ID of the response tab selected by the user
 }
 
 export interface PcppHistoryFile {
@@ -26,6 +28,7 @@ export interface PcppHistoryFile {
 export interface ParsedFile {
     path: string;
     content: string;
+    tokenCount: number;
 }
 
 export interface ParsedResponse {
@@ -33,4 +36,5 @@ export interface ParsedResponse {
     courseOfAction: string;
     filesUpdated: string[]; // List of file paths from the "Files Updated This Cycle" section
     files: ParsedFile[]; // Parsed file blocks with content
+    totalTokens: number;
 }

@@ -1,4 +1,5 @@
 // src/backend/services/history.service.ts
+// Updated on: C133 (Ensure selectedResponseId is saved and loaded)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -59,6 +60,7 @@ export class HistoryService {
                 responses: { "1": { content: "" } },
                 isParsedMode: false,
                 leftPaneWidth: 33,
+                selectedResponseId: null,
             };
             await this.saveCycleData(defaultCycle);
             return defaultCycle;
@@ -76,7 +78,7 @@ export class HistoryService {
     }
 
     public async saveCycleData(cycleData: PcppCycle): Promise<void> {
-        Services.loggerService.log(`HistoryService: saving data for cycle ${cycleData.cycleId}.`);
+        Services.loggerService.log(`HistoryService: saving data for cycle ${cycleData.cycleId}. Selected Response ID: ${cycleData.selectedResponseId}`);
         const history = await this._readHistoryFile();
         const cycleIndex = history.cycles.findIndex(c => c.cycleId === cycleData.cycleId);
 

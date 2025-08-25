@@ -1,34 +1,26 @@
-// Updated on: C131 (Add more aggressive final cleanup)
-import { ParsedResponse } from '@/common/types/pcpp.types';
+// Updated on: C133 (Handle duplicate sections and restore metadata calculation)
+import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /^([\s\S]*?)(?=### Course of [Aa]ction|### Files Updated This Cycle|<file path=")/;
-const COURSE_OF_ACTION_REGEX = /### Course of [Aa]ction\s*([\s\S]*?)(?=### Files Updated This Cycle|<file path=")/im;
-const FILES_UPDATED_LIST_REGEX = /### Files Updated This Cycle\s*([\s\S]*?)(?=<file path="|`{3,})/m;
+const COURSE_OF_ACTION_REGEX = /### Course of [Aa]ction\s*([\s\S]*?)(?=### Files Updated This Cycle|<file path="|`{3,}|$)/gim;
+const FILES_UPDATED_LIST_REGEX = /### Files Updated This Cycle\s*([\s\S]*?)(?=<file path="|`{3,}|$)/m;
 const FILE_TAG_REGEX = /<file path="([^"]+)">([\s\S]*?)<\/file>/g;
 const CODE_FENCE_START_REGEX = /^\s*```[a-zA-Z]*\n/;
 
-
 export function parseResponse(rawText: string): ParsedResponse {
-    const files = [];
+    const files: ParsedFile[] = [];
     let filesUpdatedList: string[] = [];
+    let totalTokens = 0;
 
     const tagMatches = [...rawText.matchAll(FILE_TAG_REGEX)];
 
     for (const match of tagMatches) {
         const path = (match?.[1] ?? '').trim();
-        let content = (match?.[2] ?? ''); // Start with raw content
+        let content = (match?.[2] ?? '');
 
         if (path) {
-            // C129: Aggressive multi-pass cleanup
             content = content.replace(CODE_FENCE_START_REGEX, '');
-
-            const patternsToRemove = [
-                `</file>`,
-                `</${path}>`,
-                '```',
-                '***'
-            ];
-    
+            const patternsToRemove = [`</file>`, `</${path}>`, '```', '***'];
             let changed = true;
             while(changed) {
                 const originalContent = content;
@@ -41,20 +33,21 @@ export function parseResponse(rawText: string): ParsedResponse {
                     changed = false;
                 }
             }
-            
-            // C131: Final aggressive trim to remove any leading/trailing whitespace or newlines
-            // that could interfere with diffing.
             content = content.trim();
-
-            files.push({ path, content });
+            const tokenCount = Math.ceil(content.length / 4);
+            totalTokens += tokenCount;
+            files.push({ path, content, tokenCount });
         }
     }
 
     const summaryMatch = rawText.match(SUMMARY_REGEX);
-    const courseOfActionMatch = rawText.match(COURSE_OF_ACTION_REGEX);
     
+    // C133: Handle duplicate sections by taking the last match
+    const coaMatches = [...rawText.matchAll(COURSE_OF_ACTION_REGEX)];
+    const lastCoaMatch = coaMatches.length > 0 ? coaMatches[coaMatches.length - 1] : null;
+
     const summary = (summaryMatch?.[1] ?? 'Could not parse summary.').trim();
-    const courseOfAction = (courseOfActionMatch?.[1] ?? 'Could not parse course of action.').trim();
+    const courseOfAction = (lastCoaMatch?.[1] ?? 'Could not parse course of action.').trim();
 
     if (files.length > 0) {
         filesUpdatedList = files.map(f => f.path);
@@ -77,5 +70,6 @@ export function parseResponse(rawText: string): ParsedResponse {
         courseOfAction,
         filesUpdated: [...new Set(filesUpdatedList)],
         files,
+        totalTokens,
     };
 }
