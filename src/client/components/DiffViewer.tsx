@@ -1,6 +1,6 @@
-// Updated on: C128 (Implement multi-line highlight and character-level diff with phantom spaces)
+// Updated on: C129 (Vertical layout, fixed panes, block highlight, buttons below)
 import * as React from 'react';
-import { diffArrays, diffChars, Change } from 'diff';
+import { diffArrays, diffChars } from 'diff';
 import { VscArrowUp, VscArrowDown } from 'react-icons/vsc';
 
 interface DiffLine {
@@ -14,76 +14,59 @@ interface PairedLine {
     isDiff: boolean;
 }
 
-const DiffViewer: React.FC<{ original: string; modified: string; }> = ({ original, modified }) => {
+interface DiffBlock {
+    start: number;
+    end: number;
+}
+
+const DiffViewer: React.FC<{ original: { content: string, path: string }, modified: { content: string, path: string } }> = ({ original, modified }) => {
     const [selectedDiffIndex, setSelectedDiffIndex] = React.useState<number>(0);
-    const diffContainerRef = React.useRef<HTMLDivElement>(null);
     const diffLineRefs = React.useRef<Map<number, HTMLDivElement>>(new Map());
 
     const { pairedLines, diffBlocks } = React.useMemo(() => {
-        const originalLines = original.split('\n');
-        const modifiedLines = modified.split('\n');
+        const originalLines = original.content.split('\n');
+        const modifiedLines = modified.content.split('\n');
         const changes = diffArrays(originalLines, modifiedLines);
         
         const result: PairedLine[] = [];
-        const diffBlockIndices: number[] = [];
+        const diffBlockIndices: DiffBlock[] = [];
         let leftLineNum = 1;
         let rightLineNum = 1;
 
         changes.forEach(change => {
-            const isDiffBlock = change.added || change.removed;
-            if (isDiffBlock) {
-                if(!diffBlockIndices.includes(result.length)) diffBlockIndices.push(result.length);
-            }
-            
-            if (change.added) {
-                change.value.forEach(line => {
-                    result.push({
-                        left: { type: 'placeholder' },
-                        right: { type: 'added', content: line, lineNum: rightLineNum++ },
-                        isDiff: true,
+            if (change.added || change.removed) {
+                const blockStart = result.length;
+                if (change.added) {
+                    change.value.forEach(line => {
+                        result.push({ left: { type: 'placeholder' }, right: { type: 'added', content: line, lineNum: rightLineNum++ }, isDiff: true });
                     });
-                });
-            } else if (change.removed) {
-                change.value.forEach(line => {
-                    result.push({
-                        left: { type: 'removed', content: line, lineNum: leftLineNum++ },
-                        right: { type: 'placeholder' },
-                        isDiff: true,
+                } else if (change.removed) {
+                    change.value.forEach(line => {
+                        result.push({ left: { type: 'removed', content: line, lineNum: leftLineNum++ }, right: { type: 'placeholder' }, isDiff: true });
                     });
-                });
+                }
+                diffBlockIndices.push({ start: blockStart, end: result.length - 1 });
             } else {
                 change.value.forEach(line => {
-                    result.push({
-                        left: { type: 'common', content: line, lineNum: leftLineNum++ },
-                        right: { type: 'common', content: line, lineNum: rightLineNum++ },
-                        isDiff: false,
-                    });
+                    result.push({ left: { type: 'common', content: line, lineNum: leftLineNum++ }, right: { type: 'common', content: line, lineNum: rightLineNum++ }, isDiff: false });
                 });
             }
         });
         return { pairedLines: result, diffBlocks: diffBlockIndices };
-    }, [original, modified]);
+    }, [original.content, modified.content]);
 
     const goToDiff = (index: number) => {
         if (index >= 0 && index < diffBlocks.length) {
             setSelectedDiffIndex(index);
-            const lineIndex = diffBlocks[index];
+            const lineIndex = diffBlocks[index].start;
             diffLineRefs.current.get(lineIndex)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     };
 
     const isLineInSelectedBlock = (lineIndex: number): boolean => {
-        const currentDiffStart = diffBlocks[selectedDiffIndex];
-        if (currentDiffStart === undefined) return false;
-        
-        const nextDiffStart = diffBlocks[selectedDiffIndex + 1] || pairedLines.length;
-
-        let currentDiffEnd = currentDiffStart;
-        while(currentDiffEnd + 1 < nextDiffStart && pairedLines[currentDiffEnd + 1].isDiff) {
-            currentDiffEnd++;
-        }
-
-        return lineIndex >= currentDiffStart && lineIndex <= currentDiffEnd;
+        if (diffBlocks.length === 0) return false;
+        const currentDiff = diffBlocks[selectedDiffIndex];
+        return lineIndex >= currentDiff.start && lineIndex <= currentDiff.end;
     };
 
     const renderCharDiff = (originalText: string, modifiedText: string) => {
@@ -93,12 +76,11 @@ const DiffViewer: React.FC<{ original: string; modified: string; }> = ({ origina
 
         charChanges.forEach((part, index) => {
             const key = `char-${index}`;
+            const className = part.added ? 'char-added' : part.removed ? 'char-removed' : '';
             if (part.added) {
-                rightSpans.push(<span key={key} className="char-added">{part.value}</span>);
-                leftSpans.push(<span key={key} className="phantom-space">{'\u00A0'.repeat(part.value.length)}</span>);
+                rightSpans.push(<span key={key} className={className}>{part.value}</span>);
             } else if (part.removed) {
-                leftSpans.push(<span key={key} className="char-removed">{part.value}</span>);
-                rightSpans.push(<span key={key} className="phantom-space">{'\u00A0'.repeat(part.value.length)}</span>);
+                leftSpans.push(<span key={key} className={className}>{part.value}</span>);
             } else {
                 leftSpans.push(<span key={key}>{part.value}</span>);
                 rightSpans.push(<span key={key}>{part.value}</span>);
@@ -108,57 +90,41 @@ const DiffViewer: React.FC<{ original: string; modified: string; }> = ({ origina
     };
 
     const selectedDiffContent = React.useMemo(() => {
-        if (selectedDiffIndex === null || diffBlocks[selectedDiffIndex] === undefined) {
-            return { left: [], right: [] };
-        }
-        const startIndex = diffBlocks[selectedDiffIndex];
-        let endIndex = startIndex;
-        while (endIndex + 1 < pairedLines.length && pairedLines[endIndex + 1].isDiff) {
-            endIndex++;
-        }
-        const block = pairedLines.slice(startIndex, endIndex + 1);
+        if (diffBlocks.length === 0) return { left: [], right: [] };
+        const block = diffBlocks[selectedDiffIndex];
+        const blockLines = pairedLines.slice(block.start, block.end + 1);
         
-        const originalLines = block.map(l => l.left.content).filter(Boolean) as string[];
-        const modifiedLines = block.map(l => l.right.content).filter(Boolean) as string[];
+        const originalLines = blockLines.map(l => l.left.content).filter(Boolean) as string[];
+        const modifiedLines = blockLines.map(l => l.right.content).filter(Boolean) as string[];
 
-        // For simplicity in this pane, we just diff the first lines if they exist.
-        // A more complex implementation could handle multi-line changes.
-        const { left, right } = renderCharDiff(originalLines.join('\n'), modifiedLines.join('\n'));
-        
-        return { left: [left], right: [right] };
+        return renderCharDiff(originalLines.join('\n'), modifiedLines.join('\n'));
     }, [selectedDiffIndex, pairedLines, diffBlocks]);
 
     return (
         <div className="diff-viewer-wrapper">
-            <div className="diff-viewer-main-container" ref={diffContainerRef}>
-                <div className="diff-viewer-container">
-                    <div className="diff-pane">
-                        <div className="line-numbers">
-                            {pairedLines.map((line, i) => <span key={`L${i}`}>{line.left.lineNum || ' '}</span>)}
-                        </div>
-                        <div className="diff-lines">
-                            {pairedLines.map((line, i) => (
-                                <div 
-                                    key={`L${i}`} 
-                                    className={`line ${line.left.type} ${isLineInSelectedBlock(i) ? 'selected-diff' : ''}`}
-                                    ref={ref => { if (ref) diffLineRefs.current.set(i, ref); }}
-                                >
-                                    <pre><code>{line.left.content || ''}</code></pre>
-                                </div>
-                            ))}
-                        </div>
+            <div className="diff-viewer-main-container">
+                {/* Original Pane (Top) */}
+                <div className="diff-pane-header">Original: {original.path}</div>
+                <div className="diff-pane">
+                    <div className="line-numbers">{pairedLines.map((line, i) => <span key={`L${i}`}>{line.left.lineNum || ' '}</span>)}</div>
+                    <div className="diff-lines">
+                        {pairedLines.map((line, i) => (
+                             <div key={`L${i}`} className={`line ${line.left.type}`} ref={ref => { if (ref) diffLineRefs.current.set(i, ref); }}>
+                                <pre><code>{line.left.content || ''}</code></pre>
+                             </div>
+                        ))}
                     </div>
-                    <div className="diff-pane">
-                        <div className="line-numbers">
-                            {pairedLines.map((line, i) => <span key={`R${i}`}>{line.right.lineNum || ' '}</span>)}
-                        </div>
-                        <div className="diff-lines">
-                            {pairedLines.map((line, i) => (
-                                <div key={`R${i}`} className={`line ${line.right.type} ${isLineInSelectedBlock(i) ? 'selected-diff' : ''}`}>
-                                    <pre><code>{line.right.content || ''}</code></pre>
-                                </div>
-                            ))}
-                        </div>
+                </div>
+                {/* Modified Pane (Bottom) */}
+                <div className="diff-pane-header">Response: {modified.path}</div>
+                <div className="diff-pane">
+                    <div className="line-numbers">{pairedLines.map((line, i) => <span key={`R${i}`}>{line.right.lineNum || ' '}</span>)}</div>
+                    <div className="diff-lines">
+                         {pairedLines.map((line, i) => (
+                             <div key={`R${i}`} className={`line ${line.right.type}`}>
+                                 <pre><code>{line.right.content || ''}</code></pre>
+                             </div>
+                         ))}
                     </div>
                 </div>
             </div>
@@ -171,12 +137,8 @@ const DiffViewer: React.FC<{ original: string; modified: string; }> = ({ origina
                     </div>
                 </div>
                 <div className="diff-detail-panes">
-                    <div className="diff-detail-pane removed">
-                        <pre><code>{selectedDiffContent.left}</code></pre>
-                    </div>
-                    <div className="diff-detail-pane added">
-                        <pre><code>{selectedDiffContent.right}</code></pre>
-                    </div>
+                    <div className="diff-detail-pane removed"><pre><code>{selectedDiffContent.left}</code></pre></div>
+                    <div className="diff-detail-pane added"><pre><code>{selectedDiffContent.right}</code></pre></div>
                 </div>
             </div>
         </div>

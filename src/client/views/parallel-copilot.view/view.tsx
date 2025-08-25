@@ -1,4 +1,4 @@
-// Updated on: C128 (Keep left summary pane visible in diff mode)
+// Updated on: C129 (Fix left pane not updating in diff, restore titles)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -176,12 +176,7 @@ const App = () => {
             setFileExistenceMap(new Map(Object.entries(existenceMap)));
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendFileContent, ({ path: filePath, content }) => {
-            setSelectedFilePath(currentSelectedPath => {
-                if (filePath === currentSelectedPath) {
-                    setOriginalFileContent(content);
-                }
-                return currentSelectedPath;
-            });
+            setOriginalFileContent(content);
         });
         clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => {
             if (reason === 'history') {
@@ -284,10 +279,11 @@ const App = () => {
         };
     }, [handleMouseMove, handleMouseUp]);
     
-    const handleDiffClick = () => {
-        setIsDiffMode(true);
-        if (selectedFilePath) {
-            clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: selectedFilePath });
+    const handleSelectForViewing = (filePath: string) => {
+        const newPath = selectedFilePath === filePath ? null : filePath;
+        setSelectedFilePath(newPath);
+        if (isDiffMode && newPath) {
+            clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: newPath });
         }
     };
 
@@ -313,6 +309,77 @@ const App = () => {
             <button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button>
         </div>
     );
+
+    const renderContent = () => {
+        if (!isParsedMode || !activeTabData?.parsedContent) {
+            return <textarea className="response-textarea" placeholder={`Paste AI response for tab ${activeTab} here...`} value={activeTabData?.rawContent || ''} onChange={(e) => handleRawContentChange(e.target.value, activeTab)} />;
+        }
+
+        if (isDiffMode) {
+            return (
+                <div className="parsed-view-grid">
+                    <div className="parsed-view-left" style={{ flexBasis: `${leftPaneWidth}%` }}>
+                        <CollapsibleSection title="Associated Files" isCollapsed={false} onToggle={() => {}}>
+                            <ul className="associated-files-list">
+                                {activeTabData.parsedContent.filesUpdated.map(file => (
+                                    <li key={file} className={selectedFilePath === file ? 'selected' : ''} onClick={() => handleSelectForViewing(file)} title={file}>
+                                        {fileExistenceMap.get(file) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
+                                        <span>{file}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </CollapsibleSection>
+                        <CollapsibleSection title="Thoughts / Response" isCollapsed={false} onToggle={() => {}}><ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown></CollapsibleSection>
+                        <CollapsibleSection title="Course of Action" isCollapsed={false} onToggle={() => {}}><ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown></CollapsibleSection>
+                        <button className="exit-diff-button" onClick={() => setIsDiffMode(false)}><VscClose/> Back to Code</button>
+                    </div>
+                    <div className="resizer" onMouseDown={handleMouseDown} />
+                    <div className="parsed-view-right">
+                         {activeTabData.parsedContent && selectedFilePath && originalFileContent !== null ? (
+                            <DiffViewer 
+                                original={{ content: originalFileContent, path: selectedFilePath }}
+                                modified={{ content: activeTabData.parsedContent.files.find(f => f.path === selectedFilePath)?.content || '', path: `Response ${activeTab}: ${selectedFilePath}` }}
+                            />
+                        ) : (
+                            <div style={{ padding: '8px' }}>Select a file to view diff.</div>
+                        )}
+                    </div>
+                </div>
+            );
+        }
+
+        return (
+            <div className="parsed-view-grid">
+                <div className="parsed-view-left" style={{ flexBasis: `${leftPaneWidth}%` }}>
+                    <CollapsibleSection title="Associated Files" isCollapsed={false} onToggle={() => {}}>
+                        <ul className="associated-files-list">
+                            {activeTabData.parsedContent.filesUpdated.map(file => (
+                                <li key={file} className={selectedFilePath === file ? 'selected' : ''} onClick={() => handleSelectForViewing(file)} title={file}>
+                                    {fileExistenceMap.get(file) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
+                                    <span>{file}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </CollapsibleSection>
+                    <CollapsibleSection title="Thoughts / Response" isCollapsed={false} onToggle={() => {}}><ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown></CollapsibleSection>
+                    <CollapsibleSection title="Course of Action" isCollapsed={false} onToggle={() => {}}><ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown></CollapsibleSection>
+                </div>
+                <div className="resizer" onMouseDown={handleMouseDown} />
+                <div className="parsed-view-right">
+                    <div className="file-content-viewer-header">
+                        <span className="file-path" title={selectedFilePath || ''}>{selectedFilePath ? `Response ${activeTab}: ${path.basename(selectedFilePath)}` : 'No file selected'}</span>
+                        <div className="file-actions">
+                            <button onClick={() => { if (selectedFilePath) { setIsDiffMode(true); clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: selectedFilePath }); } }} disabled={!selectedFilePath} title="View Diff"><VscDiff /></button>
+                            <button disabled={!selectedFilePath} title="Swap with Workspace File"><VscArrowSwap /></button>
+                        </div>
+                    </div>
+                    <div className="code-viewer-wrapper">
+                        <CodeViewer htmlContent={viewableContent} />
+                    </div>
+                </div>
+            </div>
+        );
+    };
 
     return (
         <div className="pc-view-container">
@@ -351,56 +418,7 @@ const App = () => {
             <div className="tab-content">
                 {activeTab !== null && (
                     <div className="tab-pane">
-                        {!isParsedMode || !activeTabData?.parsedContent ? (
-                            <textarea className="response-textarea" placeholder={`Paste AI response for tab ${activeTab} here...`} value={activeTabData?.rawContent || ''} onChange={(e) => handleRawContentChange(e.target.value, activeTab)} />
-                        ) : (
-                            <div className="parsed-view-grid">
-                                <div className="parsed-view-left" style={{ flexBasis: `${leftPaneWidth}%` }}>
-                                     <CollapsibleSection title="Associated Files" isCollapsed={false} onToggle={() => {}}>
-                                        <ul className="associated-files-list">
-                                            {activeTabData.parsedContent.filesUpdated.map(file => (
-                                                <li 
-                                                    key={file} 
-                                                    className={selectedFilePath === file ? 'selected' : ''}
-                                                    onClick={() => {setSelectedFilePath(prev => prev === file ? null : file);}}
-                                                    title={file}
-                                                >
-                                                    {fileExistenceMap.get(file) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
-                                                    <span>{file}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </CollapsibleSection>
-                                    <CollapsibleSection title="Thoughts / Response" isCollapsed={false} onToggle={() => {}}>
-                                        <ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown>
-                                    </CollapsibleSection>
-                                    <CollapsibleSection title="Course of Action" isCollapsed={false} onToggle={() => {}}>
-                                        <ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown>
-                                    </CollapsibleSection>
-                                </div>
-                                <div className="resizer" onMouseDown={handleMouseDown} />
-                                <div className="parsed-view-right">
-                                    <div className="file-content-viewer-header">
-                                        <span className="file-path" title={selectedFilePath || ''}>{selectedFilePath ? `Response ${activeTab}: ${selectedFilePath}` : 'No file selected'}</span>
-                                        <div className="file-actions">
-                                            <button onClick={handleDiffClick} disabled={!selectedFilePath} title="View Diff"><VscDiff /></button>
-                                            <button disabled={!selectedFilePath} title="Swap with Workspace File"><VscArrowSwap /></button>
-                                        </div>
-                                    </div>
-                                    <div className="code-viewer-wrapper">
-                                        {isDiffMode && activeTabData.parsedContent && selectedFilePath && originalFileContent !== null ? (
-                                            <DiffViewer 
-                                                original={originalFileContent}
-                                                modified={activeTabData.parsedContent.files.find(f => f.path === selectedFilePath)?.content || ''}
-                                            />
-                                        ) : (
-                                            <CodeViewer htmlContent={viewableContent} />
-                                        )}
-                                    </div>
-                                    {isDiffMode && <button className="exit-diff-button" onClick={() => setIsDiffMode(false)}><VscClose/> Back to Code</button>}
-                                </div>
-                            </div>
-                        )}
+                        {renderContent()}
                     </div>
                 )}
             </div>

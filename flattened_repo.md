@@ -1,12 +1,12 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-24T23:45:12.408Z
+  Date Generated: 2025-08-25T13:15:47.713Z
   ---
-  Total Files: 219
-  Total Lines: 53169
-  Total Characters: 1949679
-  Approx. Tokens: 487502
+  Total Files: 220
+  Total Lines: 53223
+  Total Characters: 1955836
+  Approx. Tokens: 489042
 -->
 
 <!-- Top 10 Files by Token Count -->
@@ -14,12 +14,12 @@
 2. src\Artifacts\A54. starry-night-readme.md (25577 tokens)
 3. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
 4. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
-5. src\client\views\context-chooser.view\view.tsx (5562 tokens)
-6. src\client\views\parallel-copilot.view\view.tsx (5340 tokens)
-7. src\Artifacts\A0. DCE Master Artifact List.md (4979 tokens)
+5. src\client\views\parallel-copilot.view\view.tsx (5566 tokens)
+6. src\client\views\context-chooser.view\view.tsx (5562 tokens)
+7. src\Artifacts\A0. DCE Master Artifact List.md (5057 tokens)
 8. src\client\components\tree-view\TreeView.tsx (4508 tokens)
-9. src\backend\services\prompt.service.ts (4134 tokens)
-10. src\Artifacts\A11. DCE - Regression Case Studies.md (3772 tokens)
+9. src\Artifacts\A11. DCE - Regression Case Studies.md (4259 tokens)
+10. src\backend\services\prompt.service.ts (4134 tokens)
 
 <!-- Full File List -->
 1. .gitignore - Lines: 10 - Chars: 128 - Tokens: 32
@@ -29,10 +29,10 @@
 5. package.json - Lines: 139 - Chars: 4583 - Tokens: 1146
 6. public\copilot.svg - Lines: 5 - Chars: 445 - Tokens: 112
 7. public\spiral.svg - Lines: 8 - Chars: 459 - Tokens: 115
-8. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 270 - Chars: 19913 - Tokens: 4979
+8. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 274 - Chars: 20225 - Tokens: 5057
 9. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 10. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
-11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 160 - Chars: 15088 - Tokens: 3772
+11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 182 - Chars: 17035 - Tokens: 4259
 12. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5710 - Tokens: 1428
 13. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 43 - Chars: 5476 - Tokens: 1369
 14. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
@@ -86,161 +86,162 @@
 62. src\Artifacts\A53. DCE - Phase 2 - Token Count and Similarity Analysis.md - Lines: 50 - Chars: 3971 - Tokens: 993
 63. src\Artifacts\A54. starry-night-readme.md - Lines: 1824 - Chars: 102305 - Tokens: 25577
 64. src\Artifacts\A55. DCE - FSService Refactoring Plan.md - Lines: 77 - Chars: 4022 - Tokens: 1006
-65. src\Artifacts\A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md - Lines: 60 - Chars: 6609 - Tokens: 1653
+65. src\Artifacts\A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md - Lines: 54 - Chars: 6122 - Tokens: 1531
 66. src\Artifacts\A57. DCE - Phase 2 - Cycle Management Plan.md - Lines: 44 - Chars: 3625 - Tokens: 907
-67. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
-68. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
-69. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
-70. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
-71. src\backend\commands\commands.ts - Lines: 97 - Chars: 4211 - Tokens: 1053
-72. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
-73. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
-74. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
-75. src\backend\services\file-operation.service.ts - Lines: 231 - Chars: 10878 - Tokens: 2720
-76. src\backend\services\file-tree.service.ts - Lines: 212 - Chars: 11447 - Tokens: 2862
-77. src\backend\services\flattener.service.ts - Lines: 210 - Chars: 11271 - Tokens: 2818
-78. src\backend\services\highlighting.service.ts - Lines: 58 - Chars: 2920 - Tokens: 730
-79. src\backend\services\history.service.ts - Lines: 129 - Chars: 5675 - Tokens: 1419
-80. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-81. src\backend\services\prompt.service.ts - Lines: 151 - Chars: 16535 - Tokens: 4134
-82. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
-83. src\backend\services\services.ts - Lines: 35 - Chars: 1597 - Tokens: 400
-84. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
-85. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
-86. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
-87. src\client\components\DiffViewer.tsx - Lines: 186 - Chars: 8806 - Tokens: 2202
-88. src\client\components\file-tree\FileTree.tsx - Lines: 262 - Chars: 11897 - Tokens: 2975
-89. src\client\components\file-tree\FileTree.utils.ts - Lines: 189 - Chars: 7284 - Tokens: 1821
-90. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13099 - Tokens: 3275
-91. src\client\components\tree-view\TreeView.tsx - Lines: 394 - Chars: 18029 - Tokens: 4508
-92. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
-93. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
-94. src\client\utils\response-parser.ts - Lines: 85 - Chars: 3318 - Tokens: 830
-95. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-96. src\client\views\context-chooser.view\on-message.ts - Lines: 53 - Chars: 4913 - Tokens: 1229
-97. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
-98. src\client\views\context-chooser.view\view.tsx - Lines: 435 - Chars: 22245 - Tokens: 5562
-99. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
-100. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-101. src\client\views\parallel-copilot.view\on-message.ts - Lines: 47 - Chars: 2218 - Tokens: 555
-102. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 43 - Chars: 1890 - Tokens: 473
-103. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
-104. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
-105. src\client\views\parallel-copilot.view\view.scss - Lines: 471 - Chars: 11024 - Tokens: 2756
-106. src\client\views\parallel-copilot.view\view.tsx - Lines: 412 - Chars: 21360 - Tokens: 5340
-107. src\common\ipc\channels.enum.ts - Lines: 66 - Chars: 3257 - Tokens: 815
-108. src\common\ipc\channels.type.ts - Lines: 59 - Chars: 4600 - Tokens: 1150
-109. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1590 - Tokens: 398
-110. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-111. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-112. src\common\types\file-node.ts - Lines: 16 - Chars: 567 - Tokens: 142
-113. src\common\types\pcpp.types.ts - Lines: 36 - Chars: 914 - Tokens: 229
-114. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 449 - Tokens: 113
-115. src\common\utils\formatting.ts - Lines: 95 - Chars: 3251 - Tokens: 813
-116. src\common\utils\view-html.ts - Lines: 29 - Chars: 1117 - Tokens: 280
-117. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
-118. src\extension.ts - Lines: 121 - Chars: 5044 - Tokens: 1261
-119. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
-120. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
-121. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
-122. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
-123. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
-124. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
-125. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
-126. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
-127. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
-128. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
-129. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
-130. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
-131. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
-132. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
-133. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
-134. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
-135. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
-136. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
-137. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
-138. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
-139. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
-140. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
-141. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
-142. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
-143. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
-144. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
-145. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
-146. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
-147. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
-148. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
-149. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
-150. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
-151. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
-152. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
-153. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
-154. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
-155. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
-156. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
-157. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
-158. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
-159. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
-160. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
-161. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
-162. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
-163. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
-164. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
-165. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
-166. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
-167. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
-168. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
-169. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
-170. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
-171. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
-172. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
-173. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
-174. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
-175. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
-176. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
-177. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
-178. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
-179. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
-180. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
-181. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
-182. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
-183. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
-184. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
-185. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
-186. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-187. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
-188. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
-189. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
-190. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-191. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
-192. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
-193. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
-194. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-195. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
-196. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
-197. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
-198. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
-199. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
-200. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
-201. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
-202. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-203. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
-204. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
-205. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
-206. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
-207. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
-208. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
-209. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
-210. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
-211. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
-212. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
-213. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
-214. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
-215. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
-216. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
-217. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
-218. webpack.config.js - Lines: 103 - Chars: 2830 - Tokens: 708
-219. winmerge_flattened_repo.md - Lines: 33169 - Chars: 986685 - Tokens: 246672
+67. src\Artifacts\A58. DCE - WinMerge Source Code Analysis.md - Lines: 56 - Chars: 5322 - Tokens: 1331
+68. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
+69. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
+70. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
+71. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
+72. src\backend\commands\commands.ts - Lines: 97 - Chars: 4211 - Tokens: 1053
+73. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
+74. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
+75. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
+76. src\backend\services\file-operation.service.ts - Lines: 231 - Chars: 10878 - Tokens: 2720
+77. src\backend\services\file-tree.service.ts - Lines: 212 - Chars: 11447 - Tokens: 2862
+78. src\backend\services\flattener.service.ts - Lines: 210 - Chars: 11271 - Tokens: 2818
+79. src\backend\services\highlighting.service.ts - Lines: 58 - Chars: 2920 - Tokens: 730
+80. src\backend\services\history.service.ts - Lines: 129 - Chars: 5675 - Tokens: 1419
+81. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
+82. src\backend\services\prompt.service.ts - Lines: 151 - Chars: 16535 - Tokens: 4134
+83. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
+84. src\backend\services\services.ts - Lines: 35 - Chars: 1597 - Tokens: 400
+85. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
+86. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
+87. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
+88. src\client\components\DiffViewer.tsx - Lines: 148 - Chars: 7315 - Tokens: 1829
+89. src\client\components\file-tree\FileTree.tsx - Lines: 262 - Chars: 11897 - Tokens: 2975
+90. src\client\components\file-tree\FileTree.utils.ts - Lines: 189 - Chars: 7284 - Tokens: 1821
+91. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13099 - Tokens: 3275
+92. src\client\components\tree-view\TreeView.tsx - Lines: 394 - Chars: 18029 - Tokens: 4508
+93. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
+94. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
+95. src\client\utils\response-parser.ts - Lines: 77 - Chars: 2854 - Tokens: 714
+96. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
+97. src\client\views\context-chooser.view\on-message.ts - Lines: 53 - Chars: 4913 - Tokens: 1229
+98. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
+99. src\client\views\context-chooser.view\view.tsx - Lines: 435 - Chars: 22245 - Tokens: 5562
+100. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
+101. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
+102. src\client\views\parallel-copilot.view\on-message.ts - Lines: 47 - Chars: 2218 - Tokens: 555
+103. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 43 - Chars: 1890 - Tokens: 473
+104. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
+105. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
+106. src\client\views\parallel-copilot.view\view.scss - Lines: 477 - Chars: 11138 - Tokens: 2785
+107. src\client\views\parallel-copilot.view\view.tsx - Lines: 430 - Chars: 22264 - Tokens: 5566
+108. src\common\ipc\channels.enum.ts - Lines: 66 - Chars: 3257 - Tokens: 815
+109. src\common\ipc\channels.type.ts - Lines: 59 - Chars: 4600 - Tokens: 1150
+110. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1590 - Tokens: 398
+111. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+112. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
+113. src\common\types\file-node.ts - Lines: 16 - Chars: 567 - Tokens: 142
+114. src\common\types\pcpp.types.ts - Lines: 36 - Chars: 914 - Tokens: 229
+115. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 449 - Tokens: 113
+116. src\common\utils\formatting.ts - Lines: 95 - Chars: 3251 - Tokens: 813
+117. src\common\utils\view-html.ts - Lines: 29 - Chars: 1117 - Tokens: 280
+118. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
+119. src\extension.ts - Lines: 121 - Chars: 5044 - Tokens: 1261
+120. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
+121. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
+122. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
+123. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
+124. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
+125. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
+126. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
+127. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
+128. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
+129. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
+130. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
+131. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
+132. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
+133. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
+134. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
+135. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
+136. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
+137. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
+138. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
+139. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
+140. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
+141. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
+142. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
+143. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
+144. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
+145. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
+146. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
+147. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
+148. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
+149. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
+150. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
+151. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
+152. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
+153. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
+154. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
+155. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
+156. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
+157. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
+158. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
+159. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
+160. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
+161. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
+162. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
+163. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
+164. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
+165. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
+166. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
+167. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
+168. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
+169. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
+170. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
+171. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
+172. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
+173. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
+174. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
+175. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
+176. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
+177. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
+178. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
+179. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
+180. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
+181. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
+182. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
+183. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
+184. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
+185. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
+186. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
+187. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+188. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
+189. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
+190. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
+191. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+192. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
+193. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
+194. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
+195. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+196. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
+197. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
+198. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
+199. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
+200. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
+201. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
+202. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
+203. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+204. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
+205. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
+206. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
+207. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
+208. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
+209. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
+210. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
+211. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
+212. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
+213. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
+214. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
+215. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
+216. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
+217. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
+218. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
+219. webpack.config.js - Lines: 103 - Chars: 2830 - Tokens: 708
+220. winmerge_flattened_repo.md - Lines: 33169 - Chars: 986685 - Tokens: 246672
 
 <file path=".gitignore">
 node_modules
@@ -646,7 +647,7 @@ SOFTWARE.
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C126 (Update A11, A12, A52 for bug fixes and logging)
+# Updated on: C129 (Add A58 for WinMerge Source Code Analysis)
 
 ## 1. Purpose
 
@@ -900,9 +901,13 @@ SOFTWARE.
 - **Description:** Details the plan to enhance the integrated diff viewer with background coloring for changes and WinMerge-like navigation controls to jump between differences.
 - **Tags:** feature plan, phase 2, ui, ux, diff, navigation, side-by-side
 
-### A57. DCE - Phase 2 - Cycle Management Plan
-- **Description:** Outlines the user stories and technical implementation for deleting cycles and resetting the PCPP history.
+### A57. DCE - Phase 2 - Cycle Management Features
+- **Description:** Details the plan for adding critical cycle management features to the Parallel Co-Pilot panel, including deleting the current cycle and resetting the entire history.
 - **Tags:** feature plan, phase 2, ui, ux, history, cycle management
+
+### A58. DCE - WinMerge Source Code Analysis
+- **Description:** Documents the key files and concepts from the WinMerge source code that are relevant to building a high-quality diff viewer.
+- **Tags:** research, analysis, diff, winmerge, source code
 
 ## II. Standalone Utilities & Guides
 
@@ -1017,9 +1022,9 @@ To enhance the data curation process, it is critical for the user to have immedi
 
 <file path="src/Artifacts/A11. DCE - Regression Case Studies.md">
 # Artifact A11: DCE - Regression Case Studies
-# Date Created: Cycle 16
+# Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C126 (Add case for PCPP Parse/Un-Parse bug)
+# Updated on: C130 (Add case for RegExp type inference errors)
 
 - **Key/Value for A0:**
 - **Description:** Documents recurring bugs, their root causes, and codified solutions to prevent future regressions during development.
@@ -1030,6 +1035,28 @@ To enhance the data curation process, it is critical for the user to have immedi
 This document serves as a living record of persistent or complex bugs that have recurred across multiple development cycles. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 009: TypeScript Type Inference with RegExp Results
+
+-   **Artifacts Affected:** `src/client/utils/response-parser.ts`
+-   **Cycles Observed:** 130
+-   **Symptom:** TypeScript build fails with errors like `TS2339: Property 'trim' does not exist on type 'RegExpMatchArray'`. This occurs when trying to access a capture group from the result of `String.prototype.match()` or `RegExp.prototype.exec()`.
+-   **Root Cause Analysis (RCA):** The TypeScript compiler, in some complex scenarios, can have difficulty inferring the precise type of a capture group within a `RegExpMatchArray` or `RegExpExecArray`. While the developer knows that `match[1]` should be a `string`, the compiler may infer a wider, incorrect type for the array element itself, leading to the erroneous belief that methods like `.trim()` or `.split()` do not exist.
+-   **Codified Solution & Best Practice:**
+    1.  **Use `matchAll` for Multiple Matches:** For global regular expressions, `String.prototype.matchAll()` is superior to a `while(regex.exec())` loop. It returns an iterator of `RegExpMatchArray` objects, and its type definitions are generally more robust and modern, making it easier for TypeScript to infer the correct types for capture groups.
+    2.  **Use Optional Chaining and Nullish Coalescing:** For single matches (`String.prototype.match()`), the safest way to access a capture group is with optional chaining (`?.[]`) and the nullish coalescing operator (`??`). This pattern is both safe and clear to the TypeScript compiler.
+-   **Example of Flawed Logic (Conceptual):**
+    ```typescript
+    const match = myString.match(/.../);
+    const value = match ? match.trim() : ''; // This can fail if TS inference is poor
+    ```
+-   **Example of Correct Logic (Conceptual):**
+    ```typescript
+    const match = myString.match(/.../);
+    const value = (match?. ?? '').trim(); // This is type-safe and robust
+    ```
 
 ---
 
@@ -6258,63 +6285,57 @@ Removed after completing refactor.
 # Artifact A56: DCE - Phase 2 - Advanced Diff Viewer Plan
 # Date Created: C120
 # Author: AI Model & Curator
-# Updated on: C125 (Add Exit button, navigation, and detail panes)
+# Updated on: C129 (Switch to vertical layout, fixed panes, and bottom controls)
 
 - **Key/Value for A0:**
-- **Description:** Details the plan to enhance the integrated diff viewer with a side-by-side layout, line alignment, and WinMerge-like navigation controls to jump between differences.
-- **Tags:** feature plan, phase 2, ui, ux, diff, navigation, side-by-side
+- **Description:** Details the plan to enhance the integrated diff viewer with a vertical layout, fixed-size panes, and WinMerge-like navigation controls to jump between differences.
+- **Tags:** feature plan, phase 2, ui, ux, diff, navigation, vertical-layout
 
 ## 1. Overview & Goal
 
 The current diff view is functional but lacks key usability features found in mature diff tools like WinMerge. The goal of this plan is to enhance the diff viewer to provide a much clearer and more efficient user experience. This involves several key enhancements:
-1.  **Side-by-Side Layout:** Displaying the original and modified files in two parallel panes.
-2.  **Line Alignment:** Inserting placeholder lines to ensure that common (unchanged) code blocks remain horizontally aligned.
-3.  **Navigation Controls:** Adding buttons to allow the user to quickly jump between blocks of differences.
-4.  **Difference Detail Panes:** Adding two panes at the bottom of the view to show the specific lines of the currently selected difference.
+1.  **Vertical Layout:** Displaying the original and modified files in two panes, one on top of the other, to better facilitate line-by-line comparison.
+2.  **Fixed-Size Panes:** The two panes will have a fixed height and will be internally scrollable, preventing the overall UI from shifting when navigating between diffs of different lengths.
+3.  **Relocated Navigation Controls:** The "Next/Previous Difference" buttons will be moved to a stable location below the diff panes.
+4.  **Difference Detail Panes:** Adding two panes at the bottom of the view to show the specific lines of the currently selected difference, with character-level highlighting.
 5.  **Exit Mechanism:** Providing a clear button to exit the diff view and return to the summary view.
 
 ## 2. User Stories
 
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
-| P2-DIFF-01 | **Colored Side-by-Side Diffs** | As a developer, I want to see a side-by-side view of the original and modified code with a colored background for changed lines, so I can immediately identify changes at a glance. | - The diff view is split into two vertical panes: "Original" on the left, "Modified" on the right. <br> - Lines that exist in the new version but not the old have a distinct background color (e.g., light green) in the right pane. <br> - Lines that exist in the old version but not the new have a different background color (e.g., light red) in the left pane. <br> - Unchanged lines have the standard editor background color in both panes. |
-| P2-DIFF-02 | **Aligned Content** | As a developer, when a block of lines is added or removed, I want the other pane to show empty space, so that the lines of code below the change remain horizontally aligned. | - When lines are added in the right pane, an equal number of empty placeholder rows are rendered in the left pane. <br> - When lines are removed from the left pane, an equal number of empty placeholder rows are rendered in the right pane. <br> - This ensures that a common line `X` appears at the same vertical position in both panes, regardless of changes above it. |
-| P2-DIFF-03 | **Navigate Between Diffs** | As a developer reviewing a large file, I want "Next Difference" and "Previous Difference" buttons, so I can quickly jump between changed blocks without manually scrolling. | - "Next Difference" (`↓`) and "Previous Difference" (`↑`) buttons are added to the diff viewer's header. <br> - Clicking "Next Difference" scrolls the view to the start of the next block of added or removed lines and highlights it. <br> - Clicking "Previous Difference" scrolls to the previous block. <br> - The buttons are disabled when at the start or end of the diff list. |
-| P2-DIFF-04 | **Exit Diff View** | As a developer in the diff view, I want a clear way to return to the summary and file list view, so I can select a different file or review the AI's plan. | - A "Back to Summary" or similar button is present in the header when in diff mode. <br> - Clicking it returns the UI to the two-pane summary/code viewer layout. |
-| P2-DIFF-05 | **View Diff Details** | As a developer navigating between differences, I want to see the specific lines of the currently selected difference in a separate, focused view, so I can analyze the change without the surrounding code. | - Two new panes are added at the bottom of the diff viewer. <br> - When a difference is selected (via navigation buttons or clicking), the left pane shows the original lines and the right pane shows the modified lines from that specific change block. |
+| P2-DIFF-01 | **Vertical Colored Diffs** | As a developer, I want to see a top-and-bottom view of the original and modified code with a colored background for changed lines, so I can immediately identify changes at a glance. | - The diff view is split into two horizontal panes: "Original" on top, "Modified" on the bottom. <br> - Lines that exist in the new version but not the old have a distinct background color (e.g., light green) in the bottom pane. <br> - Lines that exist in the old version but not the new have a different background color (e.g., light red) in the top pane. <br> - Unchanged lines have the standard editor background color in both panes. |
+| P2-DIFF-02 | **Fixed-Size Panes** | As a developer, I want the diff panes to remain a constant size when I navigate between differences, so the UI controls do not move around. | - Each diff pane has a fixed height (e.g., `flex-basis: 50%` or a pixel value). <br> - If the code content exceeds the pane's height, a vertical scrollbar appears within that pane. |
+| P2-DIFF-03 | **Navigate Between Diffs** | As a developer reviewing a large file, I want "Next Difference" and "Previous Difference" buttons located below the diff panes, so I can quickly jump between changed blocks without the buttons moving. | - "Next Difference" (`↓`) and "Previous Difference" (`↑`) buttons are located in a stable toolbar below the main diff panes. <br> - Clicking "Next Difference" scrolls the view to the start of the next block of added or removed lines and highlights it as a single block. |
+| P2-DIFF-04 | **Exit Diff View** | As a developer in the diff view, I want a clear way to return to the summary and file list view, so I can select a different file or review the AI's plan. | - A "Back to Code" or similar button is present in the UI. <br> - Clicking it returns the UI to the two-pane summary/code viewer layout. |
+| P2-DIFF-05 | **View Diff Details with Phantom Spaces**| As a developer, I want the detail pane to show a character-level diff of the selected change, using phantom spaces to align the unchanged parts of the text. | - The detail panes at the bottom show the character-level differences for the selected line(s). <br> - Unchanged text is aligned vertically between the two panes through the insertion of non-breaking spaces. |
 
 ## 3. Technical Implementation Plan
 
-### 3.1. Side-by-Side Diff Logic (`DiffViewer.tsx`)
+### 3.1. Vertical Diff Logic (`DiffViewer.tsx`)
 
--   **Processing:** The component will receive the `original` and `modified` strings. It will use the `diffArrays` function from the `diff` library on the line-split strings for a more granular, line-by-line comparison.
--   **Data Structure:** It will process the resulting `Change[]` array into a unified data structure that represents every row in the side-by-side view, correctly interleaving `added`, `removed`, and `common` lines with `placeholder` lines to ensure perfect horizontal alignment.
--   **State Management:**
-    *   `const [diffBlocks, setDiffBlocks] = useState<number[]>([]);` // Stores the starting line index of each change.
-    *   `const [selectedDiffIndex, setSelectedDiffIndex] = useState<number | null>(null);` // Tracks the currently selected difference.
--   **Navigation Logic:**
-    *   The component will identify all changed blocks and store their indices in `diffBlocks`.
-    *   `goToNextDiff` and `goToPrevDiff` functions will update `selectedDiffIndex`.
-    *   A `useEffect` will trigger on `selectedDiffIndex` change, find the corresponding DOM element, and use `scrollIntoView()`.
--   **Rendering:** The component will render two main `div`s (`.diff-pane`). It will map over the unified data structure, rendering the appropriate content for each side.
+-   **Layout:** The main container for the two panes will have `flex-direction: column`.
+-   **Data Structure:** The existing `PairedLine` data structure is still valid for generating the content of each pane.
+-   **Block Highlighting:**
+    *   A new function will identify the start and end indices of a contiguous diff block.
+    *   The render logic will be refactored. Instead of applying a class to each `.line`, it will map over the `pairedLines` array and group consecutive `isDiff: true` lines. Each group will be wrapped in a single `<div class="diff-block selected-diff">` to create the block highlight effect.
 
 ### 3.2. Detail Panes & UI Controls (`DiffViewer.tsx`, `view.tsx`)
 
--   **Detail Panes (`DiffViewer.tsx`):**
-    *   Two new `div`s will be added at the bottom, inside a `.diff-detail-container`.
-    *   Their content will be derived from the main data structure, filtered to show only the lines corresponding to the `selectedDiffIndex`.
--   **UI Controls (`view.tsx`):**
-    *   The PCPP header will conditionally render the navigation and exit buttons when `isDiffMode` is true.
-    *   The `onClick` handlers for these buttons will call the appropriate functions passed down from `DiffViewer` or modify the `isDiffMode` state.
+-   **Relocated Controls (`DiffViewer.tsx`):** The navigation buttons will be moved out of the main PCPP header and into a new `.diff-detail-header` div within the `DiffViewer` component itself, positioning them between the main diff view and the bottom detail panes.
+-   **Character-Level Diff with Phantom Spaces (`DiffViewer.tsx`):**
+    *   A new `renderCharDiff` function will be implemented.
+    *   It will take the original and modified text of a diff block.
+    *   It will use `diffChars` from the `diff` library.
+    *   It will iterate through the changes. For `added` parts, it will render the text in the "modified" pane and an equivalent number of non-breaking spaces (`&nbsp;`) in the "original" pane. For `removed` parts, it will do the opposite. `common` parts are rendered in both. This will achieve the desired alignment.
 
 ### 3.3. Styling (`view.scss`)
 
--   New CSS classes will be added for:
-    *   The bottom detail panes (`.diff-detail-container`, `.diff-detail-pane`).
-    *   A highlight for the selected difference in the main view (`.line.selected-diff`).
-    *   Styling for the navigation buttons in the header.
-    *   Ensuring `white-space: pre;` is applied to prevent word wrapping.
-    *   Fixing vertical alignment of line numbers and text.
+-   Update the `.diff-viewer-container` to use `flex-direction: column`.
+-   Add `flex-basis`, `min-height: 0`, and `overflow-y: auto` to the `.diff-pane` class to enforce fixed, scrollable panes.
+-   Add styling for the new `.diff-block` and `.selected-diff` classes to create the block highlight effect.
+-   Add styling for the new `.diff-detail-header` and the navigation controls within it.
+-   Add styles for `.phantom-space` to render the alignment characters correctly (e.g., with a subtle background).
 </file>
 
 <file path="src/Artifacts/A57. DCE - Phase 2 - Cycle Management Plan.md">
@@ -6362,6 +6383,65 @@ As the number of development cycles increases, users need tools to manage their 
 4.  **Message Handling (`on-message.ts`):**
     *   Add handlers for the new IPC channels that call the corresponding methods in `HistoryService`.
     *   After a successful deletion or reset, the backend should send a message back to the client (e.g., a `ForceRefresh` or a new dedicated message) to trigger a full state reload.
+</file>
+
+<file path="src/Artifacts/A58. DCE - WinMerge Source Code Analysis.md">
+# Artifact A58: DCE - WinMerge Source Code Analysis
+# Date Created: C129
+# Author: AI Model & Curator
+# Updated on: C130 (Add Architectural and UX Insights)
+
+- **Key/Value for A0:**
+- **Description:** Documents the key files and concepts from the WinMerge source code that are relevant to building a high-quality diff viewer.
+- **Tags:** research, analysis, diff, winmerge, source code
+
+## 1. Overview
+
+To significantly improve the quality of our integrated diff viewer, an analysis of the open-source WinMerge utility was conducted. This document codifies the key findings from that analysis, listing the most valuable files from the WinMerge source code. These files serve as a reference for implementing advanced diffing features such as a more accurate core algorithm, inline (intra-line) difference highlighting, and moved block detection, as well as architectural patterns for creating a robust and flexible tool.
+
+## 2. Key Reference Files from WinMerge Source
+
+The following files from the WinMerge repository contain the core concepts needed to elevate our diff viewer's quality.
+
+### 2.1. Core Algorithm & Heuristics
+
+These files detail the logic behind WinMerge's highly optimized and accurate line-level diffing, which is based on the GNU `diffutils` engine.
+
+*   **`Winmerge-Src\Src\diffutils\src\analyze.c`**: The heart of the GNU diff algorithm. The `diag` function implements the core logic for finding the "shortest edit script." Studying this reveals the heuristics used to achieve high-quality and performant diffs.
+*   **`Winmerge-Src\Src\DiffWrapper.cpp`**: This is a C++ wrapper around the `diffutils` engine. It demonstrates how the raw output from the C functions is processed into a more usable format for the application, serving as a model for processing diff results.
+
+### 2.2. Inline (Intra-Line) Difference Highlighting
+
+This file contains the logic for highlighting the specific characters that have changed *within* a line.
+
+*   **`Winmerge-Src\Src\stringdiffs.cpp`**: Contains WinMerge's dedicated algorithm for performing intra-line diffs. Analyzing its approach can help improve our own character-level diff rendering.
+
+### 2.3. Moved Block Detection
+
+This is one of WinMerge's most powerful features, providing essential context for refactoring.
+
+*   **`Winmerge-Src\Src\MovedBlocks.cpp`**: This file contains the complete algorithm WinMerge uses to analyze the diff list, find matching blocks of text that have been moved, and link them together. This is the primary reference for implementing this feature.
+
+### 2.4. Data Structures & UI Rendering
+
+These files show how the data is structured and rendered to the user in the side-by-side view.
+
+*   **`Winmerge-Src\Src\MergeDoc.cpp`**: Acts as the data model for the application. It shows how the diff list is structured to accommodate advanced concepts like moved lines. Our `PairedLine` interface can be modeled on the data structures found here.
+*   **`Winmerge-Src\Src\MergeEditView.cpp`**: This is the main rendering component. It contains the logic for taking the results of the line and intra-line diffs and drawing the text with the correct highlighting and layout.
+*   **`Winmerge-Src\Src\DiffList.h`**: This header defines the core data structures for the list of differences and is an excellent reference for designing a more robust data model.
+*   **`Winmerge-Src\Src\MainFrm.cpp`**: The main application window frame. This file is valuable for understanding how the different components (the document/model, the view, user options, etc.) are all integrated and managed at the application level.
+
+## 3. Architectural and UX Insights (C130)
+
+Beyond specific algorithms, the WinMerge source code reveals important architectural patterns for building a high-quality diffing tool.
+
+*   **Configurability (`CompareOptions.h`, `OptionsMgr.h`):** WinMerge is extremely configurable. The code shows a clear separation between the core diffing logic and the user-configurable options (e.g., whitespace handling, case sensitivity, filtering). This is a strong pattern to emulate, ensuring our tool can be adapted to various user needs.
+*   **Text Encoding (`unicoder.h`, `codepage_detect.cpp`):** The project has dedicated, robust code for detecting and handling different text encodings. This is a critical, non-trivial feature for a diff tool that must work with files from various sources. It highlights the importance of pre-processing file content into a consistent format *before* passing it to the diff algorithm.
+*   **Pluggable Compare Engines (`CompareEngines` directory):** WinMerge uses a strategy pattern, allowing different comparison engines (e.g., `BinaryCompare`, `ImageCompare`, `TimeSizeCompare`) to be used. This is a powerful architectural concept that could allow our tool to be extended with new comparison methods in the future (e.g., semantic code diffing).
+
+## 4. Path Forward
+
+By studying the algorithms and architectural patterns in these key files, we can create a clear development plan to implement these advanced features in our TypeScript and React-based extension. The immediate priority is to refactor our UI to a vertical, fixed-pane layout, and then we can begin to incrementally incorporate the more advanced logic inspired by these files.
 </file>
 
 <file path="src/Artifacts/A6. DCE - Initial Scaffolding Deployment Script.md">
@@ -9574,9 +9654,9 @@ export default ContextMenu;
 </file>
 
 <file path="src/client/components/DiffViewer.tsx">
-// Updated on: C128 (Implement multi-line highlight and character-level diff with phantom spaces)
+// Updated on: C129 (Vertical layout, fixed panes, block highlight, buttons below)
 import * as React from 'react';
-import { diffArrays, diffChars, Change } from 'diff';
+import { diffArrays, diffChars } from 'diff';
 import { VscArrowUp, VscArrowDown } from 'react-icons/vsc';
 
 interface DiffLine {
@@ -9590,76 +9670,59 @@ interface PairedLine {
     isDiff: boolean;
 }
 
-const DiffViewer: React.FC<{ original: string; modified: string; }> = ({ original, modified }) => {
+interface DiffBlock {
+    start: number;
+    end: number;
+}
+
+const DiffViewer: React.FC<{ original: { content: string, path: string }, modified: { content: string, path: string } }> = ({ original, modified }) => {
     const [selectedDiffIndex, setSelectedDiffIndex] = React.useState<number>(0);
-    const diffContainerRef = React.useRef<HTMLDivElement>(null);
     const diffLineRefs = React.useRef<Map<number, HTMLDivElement>>(new Map());
 
     const { pairedLines, diffBlocks } = React.useMemo(() => {
-        const originalLines = original.split('\n');
-        const modifiedLines = modified.split('\n');
+        const originalLines = original.content.split('\n');
+        const modifiedLines = modified.content.split('\n');
         const changes = diffArrays(originalLines, modifiedLines);
         
         const result: PairedLine[] = [];
-        const diffBlockIndices: number[] = [];
+        const diffBlockIndices: DiffBlock[] = [];
         let leftLineNum = 1;
         let rightLineNum = 1;
 
         changes.forEach(change => {
-            const isDiffBlock = change.added || change.removed;
-            if (isDiffBlock) {
-                if(!diffBlockIndices.includes(result.length)) diffBlockIndices.push(result.length);
-            }
-            
-            if (change.added) {
-                change.value.forEach(line => {
-                    result.push({
-                        left: { type: 'placeholder' },
-                        right: { type: 'added', content: line, lineNum: rightLineNum++ },
-                        isDiff: true,
+            if (change.added || change.removed) {
+                const blockStart = result.length;
+                if (change.added) {
+                    change.value.forEach(line => {
+                        result.push({ left: { type: 'placeholder' }, right: { type: 'added', content: line, lineNum: rightLineNum++ }, isDiff: true });
                     });
-                });
-            } else if (change.removed) {
-                change.value.forEach(line => {
-                    result.push({
-                        left: { type: 'removed', content: line, lineNum: leftLineNum++ },
-                        right: { type: 'placeholder' },
-                        isDiff: true,
+                } else if (change.removed) {
+                    change.value.forEach(line => {
+                        result.push({ left: { type: 'removed', content: line, lineNum: leftLineNum++ }, right: { type: 'placeholder' }, isDiff: true });
                     });
-                });
+                }
+                diffBlockIndices.push({ start: blockStart, end: result.length - 1 });
             } else {
                 change.value.forEach(line => {
-                    result.push({
-                        left: { type: 'common', content: line, lineNum: leftLineNum++ },
-                        right: { type: 'common', content: line, lineNum: rightLineNum++ },
-                        isDiff: false,
-                    });
+                    result.push({ left: { type: 'common', content: line, lineNum: leftLineNum++ }, right: { type: 'common', content: line, lineNum: rightLineNum++ }, isDiff: false });
                 });
             }
         });
         return { pairedLines: result, diffBlocks: diffBlockIndices };
-    }, [original, modified]);
+    }, [original.content, modified.content]);
 
     const goToDiff = (index: number) => {
         if (index >= 0 && index < diffBlocks.length) {
             setSelectedDiffIndex(index);
-            const lineIndex = diffBlocks[index];
+            const lineIndex = diffBlocks[index].start;
             diffLineRefs.current.get(lineIndex)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     };
 
     const isLineInSelectedBlock = (lineIndex: number): boolean => {
-        const currentDiffStart = diffBlocks[selectedDiffIndex];
-        if (currentDiffStart === undefined) return false;
-        
-        const nextDiffStart = diffBlocks[selectedDiffIndex + 1] || pairedLines.length;
-
-        let currentDiffEnd = currentDiffStart;
-        while(currentDiffEnd + 1 < nextDiffStart && pairedLines[currentDiffEnd + 1].isDiff) {
-            currentDiffEnd++;
-        }
-
-        return lineIndex >= currentDiffStart && lineIndex <= currentDiffEnd;
+        if (diffBlocks.length === 0) return false;
+        const currentDiff = diffBlocks[selectedDiffIndex];
+        return lineIndex >= currentDiff.start && lineIndex <= currentDiff.end;
     };
 
     const renderCharDiff = (originalText: string, modifiedText: string) => {
@@ -9669,12 +9732,11 @@ const DiffViewer: React.FC<{ original: string; modified: string; }> = ({ origina
 
         charChanges.forEach((part, index) => {
             const key = `char-${index}`;
+            const className = part.added ? 'char-added' : part.removed ? 'char-removed' : '';
             if (part.added) {
-                rightSpans.push(<span key={key} className="char-added">{part.value}</span>);
-                leftSpans.push(<span key={key} className="phantom-space">{'\u00A0'.repeat(part.value.length)}</span>);
+                rightSpans.push(<span key={key} className={className}>{part.value}</span>);
             } else if (part.removed) {
-                leftSpans.push(<span key={key} className="char-removed">{part.value}</span>);
-                rightSpans.push(<span key={key} className="phantom-space">{'\u00A0'.repeat(part.value.length)}</span>);
+                leftSpans.push(<span key={key} className={className}>{part.value}</span>);
             } else {
                 leftSpans.push(<span key={key}>{part.value}</span>);
                 rightSpans.push(<span key={key}>{part.value}</span>);
@@ -9684,57 +9746,41 @@ const DiffViewer: React.FC<{ original: string; modified: string; }> = ({ origina
     };
 
     const selectedDiffContent = React.useMemo(() => {
-        if (selectedDiffIndex === null || diffBlocks[selectedDiffIndex] === undefined) {
-            return { left: [], right: [] };
-        }
-        const startIndex = diffBlocks[selectedDiffIndex];
-        let endIndex = startIndex;
-        while (endIndex + 1 < pairedLines.length && pairedLines[endIndex + 1].isDiff) {
-            endIndex++;
-        }
-        const block = pairedLines.slice(startIndex, endIndex + 1);
+        if (diffBlocks.length === 0) return { left: [], right: [] };
+        const block = diffBlocks[selectedDiffIndex];
+        const blockLines = pairedLines.slice(block.start, block.end + 1);
         
-        const originalLines = block.map(l => l.left.content).filter(Boolean) as string[];
-        const modifiedLines = block.map(l => l.right.content).filter(Boolean) as string[];
+        const originalLines = blockLines.map(l => l.left.content).filter(Boolean) as string[];
+        const modifiedLines = blockLines.map(l => l.right.content).filter(Boolean) as string[];
 
-        // For simplicity in this pane, we just diff the first lines if they exist.
-        // A more complex implementation could handle multi-line changes.
-        const { left, right } = renderCharDiff(originalLines.join('\n'), modifiedLines.join('\n'));
-        
-        return { left: [left], right: [right] };
+        return renderCharDiff(originalLines.join('\n'), modifiedLines.join('\n'));
     }, [selectedDiffIndex, pairedLines, diffBlocks]);
 
     return (
         <div className="diff-viewer-wrapper">
-            <div className="diff-viewer-main-container" ref={diffContainerRef}>
-                <div className="diff-viewer-container">
-                    <div className="diff-pane">
-                        <div className="line-numbers">
-                            {pairedLines.map((line, i) => <span key={`L${i}`}>{line.left.lineNum || ' '}</span>)}
-                        </div>
-                        <div className="diff-lines">
-                            {pairedLines.map((line, i) => (
-                                <div 
-                                    key={`L${i}`} 
-                                    className={`line ${line.left.type} ${isLineInSelectedBlock(i) ? 'selected-diff' : ''}`}
-                                    ref={ref => { if (ref) diffLineRefs.current.set(i, ref); }}
-                                >
-                                    <pre><code>{line.left.content || ''}</code></pre>
-                                </div>
-                            ))}
-                        </div>
+            <div className="diff-viewer-main-container">
+                {/* Original Pane (Top) */}
+                <div className="diff-pane-header">Original: {original.path}</div>
+                <div className="diff-pane">
+                    <div className="line-numbers">{pairedLines.map((line, i) => <span key={`L${i}`}>{line.left.lineNum || ' '}</span>)}</div>
+                    <div className="diff-lines">
+                        {pairedLines.map((line, i) => (
+                             <div key={`L${i}`} className={`line ${line.left.type}`} ref={ref => { if (ref) diffLineRefs.current.set(i, ref); }}>
+                                <pre><code>{line.left.content || ''}</code></pre>
+                             </div>
+                        ))}
                     </div>
-                    <div className="diff-pane">
-                        <div className="line-numbers">
-                            {pairedLines.map((line, i) => <span key={`R${i}`}>{line.right.lineNum || ' '}</span>)}
-                        </div>
-                        <div className="diff-lines">
-                            {pairedLines.map((line, i) => (
-                                <div key={`R${i}`} className={`line ${line.right.type} ${isLineInSelectedBlock(i) ? 'selected-diff' : ''}`}>
-                                    <pre><code>{line.right.content || ''}</code></pre>
-                                </div>
-                            ))}
-                        </div>
+                </div>
+                {/* Modified Pane (Bottom) */}
+                <div className="diff-pane-header">Response: {modified.path}</div>
+                <div className="diff-pane">
+                    <div className="line-numbers">{pairedLines.map((line, i) => <span key={`R${i}`}>{line.right.lineNum || ' '}</span>)}</div>
+                    <div className="diff-lines">
+                         {pairedLines.map((line, i) => (
+                             <div key={`R${i}`} className={`line ${line.right.type}`}>
+                                 <pre><code>{line.right.content || ''}</code></pre>
+                             </div>
+                         ))}
                     </div>
                 </div>
             </div>
@@ -9747,12 +9793,8 @@ const DiffViewer: React.FC<{ original: string; modified: string; }> = ({ origina
                     </div>
                 </div>
                 <div className="diff-detail-panes">
-                    <div className="diff-detail-pane removed">
-                        <pre><code>{selectedDiffContent.left}</code></pre>
-                    </div>
-                    <div className="diff-detail-pane added">
-                        <pre><code>{selectedDiffContent.right}</code></pre>
-                    </div>
+                    <div className="diff-detail-pane removed"><pre><code>{selectedDiffContent.left}</code></pre></div>
+                    <div className="diff-detail-pane added"><pre><code>{selectedDiffContent.right}</code></pre></div>
                 </div>
             </div>
         </div>
@@ -10934,74 +10976,66 @@ export const logger = {
 </file>
 
 <file path="src/client/utils/response-parser.ts">
-// Updated on: C128 (Add more aggressive cleanup for parser artifacts)
-import { ParsedResponse, ParsedFile } from "@/common/types/pcpp.types";
+// Updated on: C130 (Fix TypeScript errors with RegExp results)
+import { ParsedResponse } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /^([\s\S]*?)(?=### Course of [Aa]ction|### Files Updated This Cycle|<file path=")/;
 const COURSE_OF_ACTION_REGEX = /### Course of [Aa]ction\s*([\s\S]*?)(?=### Files Updated This Cycle|<file path=")/im;
 const FILES_UPDATED_LIST_REGEX = /### Files Updated This Cycle\s*([\s\S]*?)(?=<file path="|`{3,})/m;
-const FILE_TAG_REGEX = /<file path="([^"]+)">/g;
+const FILE_TAG_REGEX = /<file path="([^"]+)">([\s\S]*?)<\/file>/g;
 const CODE_FENCE_START_REGEX = /^\s*```[a-zA-Z]*\n/;
 
 
 export function parseResponse(rawText: string): ParsedResponse {
-    const files: ParsedFile[] = [];
+    const files = [];
     let filesUpdatedList: string[] = [];
 
     const tagMatches = [...rawText.matchAll(FILE_TAG_REGEX)];
 
-    tagMatches.forEach((match, index) => {
-        const path = (match[1] ?? '').trim();
-        const contentStart = match.index! + match[0].length;
-        
-        const nextMatch = tagMatches[index + 1];
-        const contentEnd = nextMatch ? nextMatch.index! : rawText.length;
-        
-        let content = rawText.substring(contentStart, contentEnd);
+    for (const match of tagMatches) {
+        const path = (match?.[1] ?? '').trim();
+        let content = (match?.[2] ?? '').trim();
 
-        // C128: Aggressive multi-pass cleanup
-        content = content.trim();
+        if (path) {
+            // C129: Aggressive multi-pass cleanup
+            content = content.replace(CODE_FENCE_START_REGEX, '');
 
-        // 1. Remove starting code fence (e.g., ```typescript)
-        content = content.replace(CODE_FENCE_START_REGEX, '');
-
-        // 2. Repeatedly remove known trailing artifacts until no more changes occur.
-        const patternsToRemove = [
-            `</file>`,
-            `</${path}>`,
-            '```',
-            '***'
-        ];
-
-        let changed = true;
-        while(changed) {
-            const originalContent = content;
-            for (const pattern of patternsToRemove) {
-                if (content.trim().endsWith(pattern)) {
-                    content = content.trim().slice(0, -pattern.length).trim();
+            const patternsToRemove = [
+                `</file>`,
+                `</${path}>`,
+                '```',
+                '***'
+            ];
+    
+            let changed = true;
+            while(changed) {
+                const originalContent = content;
+                for (const pattern of patternsToRemove) {
+                    if (content.trim().endsWith(pattern)) {
+                        content = content.trim().slice(0, -pattern.length).trim();
+                    }
+                }
+                if (content === originalContent) {
+                    changed = false;
                 }
             }
-            // If no pattern was removed in a full pass, exit the loop
-            if (content === originalContent) {
-                changed = false;
-            }
+            
+            files.push({ path, content });
         }
-        
-        files.push({ path, content });
-    });
+    }
 
     const summaryMatch = rawText.match(SUMMARY_REGEX);
     const courseOfActionMatch = rawText.match(COURSE_OF_ACTION_REGEX);
     
-    const summary = summaryMatch && summaryMatch[1] ? summaryMatch[1].trim() : 'Could not parse summary.';
-    const courseOfAction = courseOfActionMatch && courseOfActionMatch[1] ? courseOfActionMatch[1].trim() : 'Could not parse course of action.';
+    const summary = (summaryMatch?.[1] ?? 'Could not parse summary.').trim();
+    const courseOfAction = (courseOfActionMatch?.[1] ?? 'Could not parse course of action.').trim();
 
     if (files.length > 0) {
         filesUpdatedList = files.map(f => f.path);
     } else {
         const filesUpdatedMatch = rawText.match(FILES_UPDATED_LIST_REGEX);
-        if (filesUpdatedMatch && filesUpdatedMatch[1]) {
-            filesUpdatedList.push(...filesUpdatedMatch[1]
+        if (filesUpdatedMatch?.[1]) {
+            filesUpdatedList.push(...(filesUpdatedMatch[1] ?? '')
                 .split('\n')
                 .map(line => {
                     const backtickMatch = /`([^`]+)`/.exec(line);
@@ -12427,7 +12461,7 @@ export default TestPane3;
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
-/* Updated on: C128 (Adjust layout for always-visible summary pane) */
+/* Updated on: C129 (Styles for vertical diff layout and fixed panes) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -12799,25 +12833,32 @@ body {
     display: flex;
     flex-direction: column;
     height: 100%;
-    min-width: 0;
+    min-height: 0;
 }
 .diff-viewer-main-container {
     flex-grow: 1;
-    overflow: auto;
-    min-width: 0;
-}
-.diff-viewer-container {
+    min-height: 0;
     display: flex;
-    width: 100%;
-    font-family: var(--vscode-editor-font-family);
-    font-size: var(--vscode-editor-font-size);
+    flex-direction: column;
+    border: 1px solid var(--vscode-panel-border);
+    border-radius: 4px;
+}
+
+.diff-pane-header {
+    padding: 4px 8px;
+    font-size: 11px;
+    font-weight: bold;
+    background-color: var(--vscode-editorGroupHeader-tabsBackground);
+    border-bottom: 1px solid var(--vscode-panel-border);
+    flex-shrink: 0;
 }
 
 .diff-pane {
     flex: 1 1 50%;
     display: flex;
-    min-width: 0;
-    &:first-child { border-right: 1px solid var(--vscode-panel-border); }
+    min-height: 0;
+    overflow-y: auto;
+    &:first-of-type { border-bottom: 1px solid var(--vscode-panel-border); }
 }
 
 .diff-pane .line-numbers {
@@ -12886,8 +12927,8 @@ body {
 .diff-detail-pane {
     flex: 1 1 50%;
     padding: 8px;
-    white-space: pre;
-    overflow: auto;
+    white-space: pre-wrap;
+    overflow-x: auto;
     font-family: var(--vscode-editor-font-family);
     font-size: var(--vscode-editor-font-size);
     &.removed { background-color: var(--vscode-diffEditor-removedTextBackground); }
@@ -12896,12 +12937,11 @@ body {
 
     .char-added { background-color: var(--vscode-diffEditor-insertedLineBackground); }
     .char-removed { background-color: var(--vscode-diffEditor-removedLineBackground); }
-    .phantom-space { opacity: 0.5; background-color: var(--vscode-editor-inactiveSelectionBackground); }
 }
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
-// Updated on: C128 (Keep left summary pane visible in diff mode)
+// Updated on: C129 (Fix left pane not updating in diff, restore titles)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -13079,12 +13119,7 @@ const App = () => {
             setFileExistenceMap(new Map(Object.entries(existenceMap)));
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendFileContent, ({ path: filePath, content }) => {
-            setSelectedFilePath(currentSelectedPath => {
-                if (filePath === currentSelectedPath) {
-                    setOriginalFileContent(content);
-                }
-                return currentSelectedPath;
-            });
+            setOriginalFileContent(content);
         });
         clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => {
             if (reason === 'history') {
@@ -13187,10 +13222,11 @@ const App = () => {
         };
     }, [handleMouseMove, handleMouseUp]);
     
-    const handleDiffClick = () => {
-        setIsDiffMode(true);
-        if (selectedFilePath) {
-            clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: selectedFilePath });
+    const handleSelectForViewing = (filePath: string) => {
+        const newPath = selectedFilePath === filePath ? null : filePath;
+        setSelectedFilePath(newPath);
+        if (isDiffMode && newPath) {
+            clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: newPath });
         }
     };
 
@@ -13216,6 +13252,77 @@ const App = () => {
             <button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button>
         </div>
     );
+
+    const renderContent = () => {
+        if (!isParsedMode || !activeTabData?.parsedContent) {
+            return <textarea className="response-textarea" placeholder={`Paste AI response for tab ${activeTab} here...`} value={activeTabData?.rawContent || ''} onChange={(e) => handleRawContentChange(e.target.value, activeTab)} />;
+        }
+
+        if (isDiffMode) {
+            return (
+                <div className="parsed-view-grid">
+                    <div className="parsed-view-left" style={{ flexBasis: `${leftPaneWidth}%` }}>
+                        <CollapsibleSection title="Associated Files" isCollapsed={false} onToggle={() => {}}>
+                            <ul className="associated-files-list">
+                                {activeTabData.parsedContent.filesUpdated.map(file => (
+                                    <li key={file} className={selectedFilePath === file ? 'selected' : ''} onClick={() => handleSelectForViewing(file)} title={file}>
+                                        {fileExistenceMap.get(file) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
+                                        <span>{file}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </CollapsibleSection>
+                        <CollapsibleSection title="Thoughts / Response" isCollapsed={false} onToggle={() => {}}><ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown></CollapsibleSection>
+                        <CollapsibleSection title="Course of Action" isCollapsed={false} onToggle={() => {}}><ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown></CollapsibleSection>
+                        <button className="exit-diff-button" onClick={() => setIsDiffMode(false)}><VscClose/> Back to Code</button>
+                    </div>
+                    <div className="resizer" onMouseDown={handleMouseDown} />
+                    <div className="parsed-view-right">
+                         {activeTabData.parsedContent && selectedFilePath && originalFileContent !== null ? (
+                            <DiffViewer 
+                                original={{ content: originalFileContent, path: selectedFilePath }}
+                                modified={{ content: activeTabData.parsedContent.files.find(f => f.path === selectedFilePath)?.content || '', path: `Response ${activeTab}: ${selectedFilePath}` }}
+                            />
+                        ) : (
+                            <div style={{ padding: '8px' }}>Select a file to view diff.</div>
+                        )}
+                    </div>
+                </div>
+            );
+        }
+
+        return (
+            <div className="parsed-view-grid">
+                <div className="parsed-view-left" style={{ flexBasis: `${leftPaneWidth}%` }}>
+                    <CollapsibleSection title="Associated Files" isCollapsed={false} onToggle={() => {}}>
+                        <ul className="associated-files-list">
+                            {activeTabData.parsedContent.filesUpdated.map(file => (
+                                <li key={file} className={selectedFilePath === file ? 'selected' : ''} onClick={() => handleSelectForViewing(file)} title={file}>
+                                    {fileExistenceMap.get(file) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
+                                    <span>{file}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </CollapsibleSection>
+                    <CollapsibleSection title="Thoughts / Response" isCollapsed={false} onToggle={() => {}}><ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown></CollapsibleSection>
+                    <CollapsibleSection title="Course of Action" isCollapsed={false} onToggle={() => {}}><ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown></CollapsibleSection>
+                </div>
+                <div className="resizer" onMouseDown={handleMouseDown} />
+                <div className="parsed-view-right">
+                    <div className="file-content-viewer-header">
+                        <span className="file-path" title={selectedFilePath || ''}>{selectedFilePath ? `Response ${activeTab}: ${path.basename(selectedFilePath)}` : 'No file selected'}</span>
+                        <div className="file-actions">
+                            <button onClick={() => { if (selectedFilePath) { setIsDiffMode(true); clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: selectedFilePath }); } }} disabled={!selectedFilePath} title="View Diff"><VscDiff /></button>
+                            <button disabled={!selectedFilePath} title="Swap with Workspace File"><VscArrowSwap /></button>
+                        </div>
+                    </div>
+                    <div className="code-viewer-wrapper">
+                        <CodeViewer htmlContent={viewableContent} />
+                    </div>
+                </div>
+            </div>
+        );
+    };
 
     return (
         <div className="pc-view-container">
@@ -13254,56 +13361,7 @@ const App = () => {
             <div className="tab-content">
                 {activeTab !== null && (
                     <div className="tab-pane">
-                        {!isParsedMode || !activeTabData?.parsedContent ? (
-                            <textarea className="response-textarea" placeholder={`Paste AI response for tab ${activeTab} here...`} value={activeTabData?.rawContent || ''} onChange={(e) => handleRawContentChange(e.target.value, activeTab)} />
-                        ) : (
-                            <div className="parsed-view-grid">
-                                <div className="parsed-view-left" style={{ flexBasis: `${leftPaneWidth}%` }}>
-                                     <CollapsibleSection title="Associated Files" isCollapsed={false} onToggle={() => {}}>
-                                        <ul className="associated-files-list">
-                                            {activeTabData.parsedContent.filesUpdated.map(file => (
-                                                <li 
-                                                    key={file} 
-                                                    className={selectedFilePath === file ? 'selected' : ''}
-                                                    onClick={() => {setSelectedFilePath(prev => prev === file ? null : file);}}
-                                                    title={file}
-                                                >
-                                                    {fileExistenceMap.get(file) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
-                                                    <span>{file}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </CollapsibleSection>
-                                    <CollapsibleSection title="Thoughts / Response" isCollapsed={false} onToggle={() => {}}>
-                                        <ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown>
-                                    </CollapsibleSection>
-                                    <CollapsibleSection title="Course of Action" isCollapsed={false} onToggle={() => {}}>
-                                        <ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown>
-                                    </CollapsibleSection>
-                                </div>
-                                <div className="resizer" onMouseDown={handleMouseDown} />
-                                <div className="parsed-view-right">
-                                    <div className="file-content-viewer-header">
-                                        <span className="file-path" title={selectedFilePath || ''}>{selectedFilePath ? `Response ${activeTab}: ${selectedFilePath}` : 'No file selected'}</span>
-                                        <div className="file-actions">
-                                            <button onClick={handleDiffClick} disabled={!selectedFilePath} title="View Diff"><VscDiff /></button>
-                                            <button disabled={!selectedFilePath} title="Swap with Workspace File"><VscArrowSwap /></button>
-                                        </div>
-                                    </div>
-                                    <div className="code-viewer-wrapper">
-                                        {isDiffMode && activeTabData.parsedContent && selectedFilePath && originalFileContent !== null ? (
-                                            <DiffViewer 
-                                                original={originalFileContent}
-                                                modified={activeTabData.parsedContent.files.find(f => f.path === selectedFilePath)?.content || ''}
-                                            />
-                                        ) : (
-                                            <CodeViewer htmlContent={viewableContent} />
-                                        )}
-                                    </div>
-                                    {isDiffMode && <button className="exit-diff-button" onClick={() => setIsDiffMode(false)}><VscClose/> Back to Code</button>}
-                                </div>
-                            </div>
-                        )}
+                        {renderContent()}
                     </div>
                 )}
             </div>
