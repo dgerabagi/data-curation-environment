@@ -1,4 +1,4 @@
-// Updated on: C134 (Implement all feedback points)
+// Updated on: C138 (Fix regex handling in CodeViewer)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -9,7 +9,6 @@ import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/chann
 import { ParsedResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
 import ReactMarkdown from 'react-markdown';
-import DiffViewer from '@/client/components/DiffViewer';
 import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
 import * as path from 'path-browserify';
 import { BatchWriteFile } from '@/common/ipc/channels.type';
@@ -37,11 +36,10 @@ const CodeViewer: React.FC<{ htmlContent: string | undefined | null }> = ({ html
          return <div style={{ padding: '8px', color: 'var(--vscode-errorForeground)' }}>{htmlContent}</div>;
     }
 
-    const codeContentMatch = /<pre><code>([\s\S]*)<\/code><\/pre>/s.exec(htmlContent)?.[1];
-    const code = codeContentMatch ? codeContentMatch : `<code>${htmlContent}</code>`; 
+    const codeContentMatch = /<pre><code>([\s\S]*)<\/code><\/pre>/s.exec(htmlContent);
+    const code = codeContentMatch ? codeContentMatch[1] : `<code>${htmlContent}</code>`; 
 
     const lines = code.split('\n');
-    // C134 Fix: Don't pop the last element if it's the only line or if it's not empty.
     if (lines.length > 1 && lines[lines.length - 1] === '') {
         lines.pop();
     }
@@ -91,8 +89,6 @@ const App = () => {
     const [selectedFilePath, setSelectedFilePath] = React.useState<string | null>(null);
     const [isCycleCollapsed, setIsCycleCollapsed] = React.useState(false);
     const [leftPaneWidth, setLeftPaneWidth] = React.useState(33);
-    const [isDiffMode, setIsDiffMode] = React.useState(false);
-    const [originalFileContent, setOriginalFileContent] = React.useState<string | null>(null);
     const isResizing = React.useRef(false);
     const [selectedFilesForReplacement, setSelectedFilesForReplacement] = React.useState<Set<string>>(new Set());
     const [selectedResponseId, setSelectedResponseId] = React.useState<string | null>(null);
@@ -118,15 +114,16 @@ const App = () => {
             isParsedMode,
             leftPaneWidth,
             selectedResponseId,
+            selectedFilesForReplacement: Array.from(selectedFilesForReplacement),
         };
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
-    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, clientIpc]);
+    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, clientIpc]);
 
     const debouncedSave = useDebounce(saveCurrentCycleState, 1000);
 
     React.useEffect(() => {
         debouncedSave();
-    }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, selectedResponseId, debouncedSave]);
+    }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, debouncedSave]);
     
     const parseAllTabs = React.useCallback(() => {
         setTabs(prevTabs => {
@@ -170,17 +167,15 @@ const App = () => {
             setIsParsedMode(cycleData.isParsedMode || false);
             setLeftPaneWidth(cycleData.leftPaneWidth || 33);
             setSelectedResponseId(cycleData.selectedResponseId || null);
+            setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || []));
         };
 
-        clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData }) => {
-            loadCycleData(cycleData);
-            setMaxCycle(cycleData.cycleId);
-        });
+        clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData }) => { loadCycleData(cycleData); setMaxCycle(cycleData.cycleId); });
         clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData }) => { if (cycleData) loadCycleData(cycleData); });
         clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml)));
         clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap))));
-        clientIpc.onServerMessage(ServerToClientChannel.SendFileContent, ({ path: filePath, content }) => setOriginalFileContent(content));
         clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); });
+        clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { logger.log(`Received FilesWritten event for: ${paths.join(', ')}`); setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); });
         
         clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});
     }, [clientIpc]);
@@ -202,7 +197,6 @@ const App = () => {
         const newParseMode = !isParsedMode;
         setIsParsedMode(newParseMode);
         setSelectedFilePath(null);
-        setIsDiffMode(false);
         if (!newParseMode) setTabs(prev => { const newTabs = {...prev}; Object.keys(newTabs).forEach(key => { newTabs[key].parsedContent = null; }); return newTabs; });
     };
     const handleCycleChange = (e: React.MouseEvent, newCycle: number) => { e.stopPropagation(); if (newCycle > 0 && newCycle <= maxCycle) { saveCurrentCycleState(); setSelectedFilesForReplacement(new Set()); setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); } };
@@ -219,12 +213,7 @@ const App = () => {
         return () => { window.removeEventListener('mousemove', mm); window.removeEventListener('mouseup', mu); };
     }, [isParsedMode, handleMouseMove, handleMouseUp]);
     
-    const handleSelectForViewing = (filePath: string) => {
-        const newPath = selectedFilePath === filePath ? null : filePath;
-        if (newPath !== selectedFilePath) setOriginalFileContent(null);
-        setSelectedFilePath(newPath);
-        if (isDiffMode && newPath) clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: newPath });
-    };
+    const handleSelectForViewing = (filePath: string) => { const newPath = selectedFilePath === filePath ? null : filePath; setSelectedFilePath(newPath); };
     const handleDeleteCycle = () => clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle });
     const handleResetHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {});
     const handleFileSelectionToggle = (filePath: string) => setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); if (newSet.has(filePath)) newSet.delete(filePath); else newSet.add(filePath); return newSet; });
@@ -246,10 +235,6 @@ const App = () => {
         });
         if (filesToWrite.length > 0) clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite });
     };
-    const handleAcceptSingleFile = (filePath: string) => {
-        const file = activeTabData?.parsedContent?.files.find(f => f.path === filePath);
-        if (file) clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: [{ path: file.path, content: file.content }] });
-    };
 
     const isAllFilesSelected = React.useMemo(() => {
         if (!activeTabData?.parsedContent) return false;
@@ -269,17 +254,7 @@ const App = () => {
         for (let i = 1; i <= tabCount; i++) {
             responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' };
         }
-        const currentState: PcppCycle = {
-            cycleId: currentCycle,
-            timestamp: new Date().toISOString(),
-            title: cycleTitle,
-            cycleContext,
-            ephemeralContext,
-            responses,
-            isParsedMode,
-            leftPaneWidth,
-            selectedResponseId,
-        };
+        const currentState: PcppCycle = { cycleId: currentCycle, timestamp: new Date().toISOString(), title: cycleTitle, cycleContext, ephemeralContext, responses, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement: Array.from(selectedFilesForReplacement) };
         clientIpc.sendToServer(ClientToServerChannel.RequestLogState, { currentState });
     };
 
@@ -291,26 +266,12 @@ const App = () => {
         if (!isParsedMode || !activeTabData?.parsedContent) {
             return <textarea className="response-textarea" placeholder={`Paste AI response for tab ${activeTab} here...`} value={activeTabData?.rawContent || ''} onChange={(e) => handleRawContentChange(e.target.value, activeTab)} />;
         }
-        const commonLeftPane = <>
-            <CollapsibleSection title="Associated Files" isCollapsed={isAssociatedFilesCollapsed} onToggle={() => setAssociatedFilesCollapsed(p => !p)}><ul className="associated-files-list">{activeTabData.parsedContent.filesUpdated.map(file => <li key={file} className={selectedFilePath === file ? 'selected' : ''} onClick={() => handleSelectForViewing(file)} title={file}><input type="checkbox" checked={selectedFilesForReplacement.has(file)} onChange={() => handleFileSelectionToggle(file)} onClick={e => e.stopPropagation()} />{fileExistenceMap.get(file) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}<span>{file}</span></li>)}</ul></CollapsibleSection>
-            <CollapsibleSection title="Thoughts / Response" isCollapsed={isThoughtsCollapsed} onToggle={() => setThoughtsCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown></CollapsibleSection>
-            <CollapsibleSection title="Course of Action" isCollapsed={isActionCollapsed} onToggle={() => setActionCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown></CollapsibleSection>
-        </>;
-
-        if (isDiffMode) {
-            return <div className="parsed-view-grid">
-                <div className="parsed-view-left" style={{ flexBasis: `${leftPaneWidth}%` }}>{commonLeftPane}<button className="exit-diff-button" onClick={() => setIsDiffMode(false)}><VscClose/> Back to Response View</button></div>
-                <div className="resizer" onMouseDown={handleMouseDown} />
-                <div className="parsed-view-right">{activeTabData.parsedContent && selectedFilePath && originalFileContent !== null ? <DiffViewer original={{ content: originalFileContent, path: selectedFilePath }} modified={{ content: activeTabData.parsedContent.files.find(f => f.path === selectedFilePath)?.content || '', path: selectedFilePath }}/> : <div style={{ padding: '8px' }}>{selectedFilePath ? 'Loading original file...' : 'Select a file to view diff.'}</div>}</div>
-            </div>;
-        }
-
         return <div className="parsed-view-grid">
-            <div className="parsed-view-left" style={{ flexBasis: `${leftPaneWidth}%` }}>{commonLeftPane}</div>
+            <div className="parsed-view-left" style={{ flexBasis: `${leftPaneWidth}%` }}><CollapsibleSection title="Associated Files" isCollapsed={isAssociatedFilesCollapsed} onToggle={() => setAssociatedFilesCollapsed(p => !p)}><ul className="associated-files-list">{activeTabData.parsedContent.filesUpdated.map(file => <li key={file} className={selectedFilePath === file ? 'selected' : ''} onClick={() => handleSelectForViewing(file)} title={file}><input type="checkbox" checked={selectedFilesForReplacement.has(file)} onChange={() => handleFileSelectionToggle(file)} onClick={e => e.stopPropagation()} />{fileExistenceMap.get(file) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}<span>{file}</span></li>)}</ul></CollapsibleSection><CollapsibleSection title="Thoughts / Response" isCollapsed={isThoughtsCollapsed} onToggle={() => setThoughtsCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown></CollapsibleSection><CollapsibleSection title="Course of Action" isCollapsed={isActionCollapsed} onToggle={() => setActionCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown></CollapsibleSection></div>
             <div className="resizer" onMouseDown={handleMouseDown} />
             <div className="parsed-view-right">
-                <div className="response-acceptance-header"><button className={`styled-button ${selectedResponseId === activeTab.toString() ? 'toggled' : ''}`} onClick={() => setSelectedResponseId(prev => prev === activeTab.toString() ? null : activeTab.toString())}>{selectedResponseId === activeTab.toString() ? 'Response Selected' : 'Select This Response'}</button><button className="styled-button" onClick={handleSelectAllFilesToggle}><VscCheckAll/> {isAllFilesSelected ? 'Deselect All' : 'Select All'}</button><button className="styled-button" onClick={handleAcceptSelectedFiles} disabled={selectedFilesForReplacement.size === 0}><VscSave/> Accept Selected Files</button></div>
-                <div className="file-content-viewer-header"><span className="file-path" title={selectedFilePath || ''}>{selectedFilePath ? path.basename(selectedFilePath) : 'No file selected'}</span><div className="file-actions"><button onClick={() => handleAcceptSingleFile(selectedFilePath!)} disabled={!selectedFilePath} title="Accept this file into workspace"><VscArrowSwap /></button></div></div>
+                <div className="response-acceptance-header"><button className={`styled-button ${selectedResponseId === activeTab.toString() ? 'toggled' : ''}`} onClick={() => setSelectedResponseId(prev => prev === activeTab.toString() ? null : activeTab.toString())}>{selectedResponseId === activeTab.toString() ? 'Response Selected' : 'Select This Response'}</button><button className="styled-button" onClick={handleSelectAllFilesToggle}><VscCheckAll/> {isAllFilesSelected ? 'Deselect All' : 'Select All'}</button><button className="styled-button" onClick={handleAcceptSelectedFiles} disabled={selectedFilesForReplacement.size === 0}><VscSave/> Accept Selected</button></div>
+                <div className="file-content-viewer-header"><span className="file-path" title={selectedFilePath || ''}>{selectedFilePath ? path.basename(selectedFilePath) : 'No file selected'}</span></div>
                 <CodeViewer htmlContent={viewableContent} />
             </div>
         </div>;

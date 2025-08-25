@@ -1,5 +1,5 @@
 // src/common/types/pcpp.types.ts
-// Updated on: C133 (Add selectedResponseId to PcppCycle)
+// Updated on: C137 (Add selectedFilesForReplacement to PcppCycle)
 
 // Data structure for the backend history file
 export interface PcppResponse {
@@ -15,7 +15,8 @@ export interface PcppCycle {
     responses: { [tabId: string]: PcppResponse };
     isParsedMode?: boolean;
     leftPaneWidth?: number;
-    selectedResponseId?: string | null; // ID of the response tab selected by the user
+    selectedResponseId?: string | null;
+    selectedFilesForReplacement?: string[]; // New: To track which files are checked for replacement
 }
 
 export interface PcppHistoryFile {

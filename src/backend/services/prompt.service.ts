@@ -1,10 +1,11 @@
-// Updated on: C134 (Add generateStateLog method)
+// Updated on: C138 (Fix workspace folder access)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
 import { Services } from './services';
 import { parseResponse } from '@/client/utils/response-parser';
 import { PcppCycle } from '@/common/types/pcpp.types';
+import { truncateCodeForLogging } from '@/common/utils/formatting';
 
 export class PromptService {
     private artifactSchemaTemplate = `<M1. artifact schema>
@@ -18,8 +19,7 @@ M7. Flattened Repo
 </M1. artifact schema>`;
 
     private interactionSchemaTemplate = `<M3. Interaction Schema>
-1.  Artifacts are complete, individual texts enclosed in \`<xmltags>\` and separated by three backticks. Different content sections can be separated with three asterisks. Please always output a summary of your thoughts/plan/course of action befoare providing your artifact outputs, whether they be Document artifacts, Code artifacts, or both.
-1.1. **New (C108):** To ensure consistent parsing by the DCE extension, all file artifacts **must** be enclosed in \`<file path="path/to/file.ts">...</file>\` tags. The path must be relative to the workspace root. The closing tag must be a simple \`</file>\`. Do not use the file path in the closing tag.
+1.  Artifacts are complete, individual texts enclosed in \`<xmltags>\`. To ensure consistent parsing by the DCE extension, all file artifacts **must** be enclosed in \`<file path="path/to/file.ts">...</file>\` tags. The path must be relative to the workspace root. The closing tag must be a simple \`</file>\`. Do not use the file path in the closing tag.
 2.  Our Document Artifacts serve as our \`Source of Truth\` throughout multiple cycles. As such, over time, as issues occur, or code repeatedly regresses in the same way, seek to align our \`Source of Truth\` such that the Root Cause of such occurances is codified so it can be avoided on subsequent cycles visits to those Code artifacts.
 3.  Please output entire Document or Code artifacts. Do not worry about Token length. If your length continues for too long, and you reach the 600 second timeout, I will simply incorporate the work you did complete, and we can simply continue from where you left off. Better to have half of a solution to get started with, than not to have it. **Preference is for larger, more complete updates over smaller, incremental ones to align with the human curator's parallel processing workflow.** The human curator often sends the same prompt to multiple AI instances simultaneously and selects the most comprehensive response as the primary base for the next cycle, using other responses as supplementary information. Providing more complete updates increases the likelihood of a response being selected as the primary base.
 4.  Do not output artifacts that do not require updates in this cycle. (Eg. Do not do this: // Updated on: Cycle 1040 (No functional changes, only cycle header))
@@ -53,24 +53,53 @@ Phase 2. parallel 'co-pilot' panel. Basically, we need our own AI Studio interfa
 Phase 3. Diff Tool - Basically, winmerge but intergrated into a window within VS Code. My workflow is often comparing two identical responses, or comparing a new artifact with the current version. Currently, I'm first copying and pasting responses into separate notepad files, and then for which ever i need to compare given my task, i then manually move that one into winmerge to compare against another that i manually move. instead, the ability to just select between two to compare would be a massive decrease in the manual workload.
 </M4. current project scope>`;
 
+    private getPreviousCycleSummary(cycle: PcppCycle | undefined): string {
+        if (!cycle) return '';
+        
+        const selectedResponseId = cycle.selectedResponseId;
+        if (!selectedResponseId || !cycle.responses[selectedResponseId]) {
+            Services.loggerService.warn(`Could not find selected response content for cycle ${cycle.cycleId}`);
+            return `<!-- No response was selected for cycle ${cycle.cycleId} -->`;
+        }
+
+        const previousResponseContent = cycle.responses[selectedResponseId].content;
+        if (!previousResponseContent.trim()) {
+            return `<!-- Selected response for cycle ${cycle.cycleId} was empty -->`;
+        }
+
+        const parsed = parseResponse(previousResponseContent);
+        
+        let summary = `${parsed.summary}\n\n${parsed.courseOfAction}`;
+
+        if (parsed.filesUpdated.length > 0) {
+            summary += `\n\n### Files Updated This Cycle:\n* ${parsed.filesUpdated.join('\n* ')}`;
+        }
+
+        return summary;
+    }
+
     private async _generateCyclesContent(currentCycleData: PcppCycle, fullHistory: PcppCycle[]): Promise<string> {
         const allCycles = [...fullHistory.filter(c => c.cycleId !== currentCycleData.cycleId), currentCycleData];
         const sortedHistory = allCycles.sort((a, b) => b.cycleId - a.cycleId);
-
+    
         let cyclesContent = '<M6. Cycles>\n';
-
+    
         for (const cycle of sortedHistory) {
-            cyclesContent += `\n<Cycle ${cycle.cycleId}>\n${cycle.title}\n`;
-            
+            cyclesContent += `\n<Cycle ${cycle.cycleId}>\n`;
+    
+            if (cycle.cycleId === currentCycleData.cycleId) {
+                if (cycle.cycleContext) {
+                    cyclesContent += `<Cycle Context>\n${cycle.cycleContext}\n</Cycle Context>\n`;
+                }
+                if (cycle.ephemeralContext) {
+                    cyclesContent += `<Ephemeral Context>\n${cycle.ephemeralContext}\n</Ephemeral Context>\n`;
+                }
+            }
+    
             const previousCycle = sortedHistory.find(c => c.cycleId === cycle.cycleId - 1);
             if (previousCycle) {
-                const selectedResponseId = previousCycle.selectedResponseId || '1';
-                const previousResponseContent = previousCycle.responses[selectedResponseId]?.content || '';
-                if (previousResponseContent) {
-                    const parsed = parseResponse(previousResponseContent);
-                    const summary = `${parsed.summary}\n\n${parsed.courseOfAction}\n\n### Files Updated This Cycle:\n${parsed.filesUpdated.map(f => `* \`${f}\``).join('\n')}`;
-                    cyclesContent += `<Previous Cycle ${previousCycle.cycleId} Summary of Actions>\n${summary}\n</Previous Cycle ${previousCycle.cycleId} Summary of Actions>\n`;
-                }
+                const summary = this.getPreviousCycleSummary(previousCycle);
+                cyclesContent += `<Previous Cycle ${previousCycle.cycleId} Summary of Actions>\n${summary}\n</Previous Cycle ${previousCycle.cycleId} Summary of Actions>\n`;
             }
             cyclesContent += `</Cycle ${cycle.cycleId}>\n`;
         }
@@ -82,11 +111,24 @@ Phase 3. Diff Tool - Basically, winmerge but intergrated into a window within VS
         Services.loggerService.log("--- GENERATING STATE LOG ---");
         try {
             const fullHistory = await Services.historyService.getFullHistory();
+            
+            const truncatedHistory = JSON.parse(JSON.stringify(fullHistory));
+            const truncatedCurrentState = JSON.parse(JSON.stringify(currentState));
+
+            const truncateCycleResponses = (cycle: PcppCycle) => {
+                Object.values(cycle.responses).forEach(response => {
+                    response.content = truncateCodeForLogging(response.content, 50, 10, 10);
+                });
+            };
+
+            truncatedHistory.forEach(truncateCycleResponses);
+            truncateCycleResponses(truncatedCurrentState);
+            
             const cyclesContent = await this._generateCyclesContent(currentState, fullHistory);
             
             const stateDump = {
-                "CURRENT_FRONTEND_STATE": currentState,
-                "FULL_HISTORY_FROM_BACKEND": fullHistory
+                "CURRENT_FRONTEND_STATE": truncatedCurrentState,
+                "FULL_HISTORY_FROM_BACKEND": truncatedHistory
             };
 
             const logMessage = `
@@ -108,7 +150,7 @@ ${cyclesContent}
 
     public async generatePromptFile(cycleTitle: string, currentCycle: number) {
         const workspaceFolders = vscode.workspace.workspaceFolders;
-        if (!workspaceFolders?.[0]) {
+        if (!workspaceFolders || workspaceFolders.length === 0) {
             vscode.window.showErrorMessage("Cannot generate prompt: No workspace folder is open.");
             return;
         }
@@ -126,7 +168,6 @@ ${cyclesContent}
             if (!currentCycleDataFromHistory) {
                 throw new Error(`Could not find data for current cycle (${currentCycle}) in history.`);
             }
-            // Ensure the title from the UI is used for the current cycle
             const currentCycleData = { ...currentCycleDataFromHistory, title: cycleTitle };
 
             const sortedHistory = [...fullHistory].sort((a, b) => b.cycleId - a.cycleId);

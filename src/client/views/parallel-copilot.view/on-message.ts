@@ -1,4 +1,4 @@
-// Updated on: C134 (Add log state handler)
+// Updated on: C135 (Send FilesWritten message after successful write)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -45,8 +45,11 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         historyService.resetHistory();
     });
 
-    serverIpc.onClientMessage(ClientToServerChannel.RequestBatchFileWrite, (data) => {
-        fileOperationService.handleBatchFileWrite(data.files);
+    serverIpc.onClientMessage(ClientToServerChannel.RequestBatchFileWrite, async (data) => {
+        const writtenPaths = await fileOperationService.handleBatchFileWrite(data.files);
+        if (writtenPaths.length > 0) {
+            serverIpc.sendToClient(ServerToClientChannel.FilesWritten, { paths: writtenPaths });
+        }
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestLogState, (data) => {

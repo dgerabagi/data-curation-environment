@@ -44,7 +44,7 @@ export enum ClientToServerChannel {
     SaveCycleData = "clientToServer.saveCycleData",
     RequestDeleteCycle = "clientToServer.requestDeleteCycle",
     RequestResetHistory = "clientToServer.requestResetHistory",
-    RequestLogState = "clientToServer.requestLogState", // New
+    RequestLogState = "clientToServer.requestLogState",
 }
 
 export enum ServerToClientChannel {
@@ -65,4 +65,5 @@ export enum ServerToClientChannel {
     SendSyntaxHighlight = "serverToClient.sendSyntaxHighlight",
     SendLatestCycleData = "serverToClient.sendLatestCycleData",
     SendCycleData = "serverToClient.sendCycleData",
+    FilesWritten = "serverToClient.filesWritten", // New
 }

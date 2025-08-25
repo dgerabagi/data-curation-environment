@@ -12,14 +12,15 @@ const normalizePath = (p: string) => p.replace(/\\/g, '/');
 export class FileOperationService {
     private filesToIgnoreForAutoAdd: Set<string> = new Set();
 
-    public async handleBatchFileWrite(files: BatchWriteFile[]) {
+    public async handleBatchFileWrite(files: BatchWriteFile[]): Promise<string[]> {
         Services.loggerService.log(`[File Operation] Received request to write ${files.length} files.`);
         const workspaceFolders = vscode.workspace.workspaceFolders;
-        if (!workspaceFolders?.[0]) {
+        if (!workspaceFolders || workspaceFolders.length === 0) {
             vscode.window.showErrorMessage("Cannot write files: No workspace folder is open.");
-            return;
+            return [];
         }
         const rootPath = workspaceFolders[0].uri.fsPath;
+        const successfulPaths: string[] = [];
 
         try {
             for (const file of files) {
@@ -28,19 +29,21 @@ export class FileOperationService {
                 const contentBuffer = Buffer.from(file.content, 'utf-8');
                 await vscode.workspace.fs.writeFile(uri, contentBuffer);
                 Services.loggerService.log(`Successfully wrote content to: ${file.path}`);
+                successfulPaths.push(file.path);
             }
             vscode.window.showInformationMessage(`Successfully accepted and wrote ${files.length} files to the workspace.`);
-        } catch (error) {
-            Services.loggerService.error(`Failed during batch file write: ${error}`);
-            vscode.window.showErrorMessage(`Failed to write files: ${error}`);
+        } catch (error: any) {
+            Services.loggerService.error(`Failed during batch file write: ${error.message}`);
+            vscode.window.showErrorMessage(`Failed to write files: ${error.message}`);
         }
+        return successfulPaths;
     }
 
     public async handleFileContentRequest(filePath: string, serverIpc: ServerPostMessageManager) {
         Services.loggerService.log(`handleFileContentRequest initiated for: ${filePath}`);
         try {
             const workspaceFolders = vscode.workspace.workspaceFolders;
-            if (!workspaceFolders?.[0]) {
+            if (!workspaceFolders || workspaceFolders.length === 0) {
                 throw new Error("No workspace folder open.");
             }
             const absolutePath = path.resolve(workspaceFolders[0].uri.fsPath, filePath);
@@ -49,8 +52,8 @@ export class FileOperationService {
             const content = Buffer.from(contentBuffer).toString('utf-8');
             Services.loggerService.log(`Successfully read content for: ${filePath}. Sending to client.`);
             serverIpc.sendToClient(ServerToClientChannel.SendFileContent, { path: filePath, content });
-        } catch (error) {
-            Services.loggerService.error(`Failed to read file content for ${filePath}: ${error}`);
+        } catch (error: any) {
+            Services.loggerService.error(`Failed to read file content for ${filePath}: ${error.message}`);
             serverIpc.sendToClient(ServerToClientChannel.SendFileContent, { path: filePath, content: `// Error: Could not read file content for ${filePath}. It may not exist in the workspace.` });
         }
     }
@@ -167,6 +170,20 @@ export class FileOperationService {
             } catch (error: any) {
                 vscode.window.showErrorMessage(`Failed to create file: ${error.message}`);
             }
+        }
+    }
+    
+    public async handleCreateFileRequest(filePath: string) {
+        Services.loggerService.log(`Received request to create file: ${filePath}`);
+        try {
+            const workspaceFolders = vscode.workspace.workspaceFolders;
+            if (!workspaceFolders || workspaceFolders.length === 0) throw new Error("No workspace folder open.");
+            const absolutePath = path.resolve(workspaceFolders[0].uri.fsPath, filePath);
+            await vscode.workspace.fs.writeFile(vscode.Uri.file(absolutePath), new Uint8Array());
+            Services.loggerService.log(`Successfully created file: ${filePath}`);
+        } catch (error: any) {
+            vscode.window.showErrorMessage(`Failed to create file: ${error.message}`);
+            Services.loggerService.error(`Failed to create file ${filePath}: ${error.message}`);
         }
     }
 
