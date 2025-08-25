@@ -1,8 +1,8 @@
-// Updated on: C146 (Add tabCount to persisted state)
+// Updated on: C148 (Add response metadata and sorting)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap, VscTrash, VscSync, VscClose, VscSave, VscBug, VscCheckAll } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap, VscTrash, VscSync, VscClose, VscSave, VscBug, VscCheckAll, VscListOrdered, VscListUnordered, VscSymbolNumeric } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -101,6 +101,7 @@ const App = () => {
     const [selectedFilesForReplacement, setSelectedFilesForReplacement] = React.useState<Set<string>>(new Set());
     const [selectedResponseId, setSelectedResponseId] = React.useState<string | null>(null);
     const [comparisonMetrics, setComparisonMetrics] = React.useState<Map<string, ComparisonMetrics>>(new Map());
+    const [isSortedByLength, setIsSortedByLength] = React.useState(false); // New state for sorting
 
     const [isAssociatedFilesCollapsed, setAssociatedFilesCollapsed] = React.useState(false);
     const [isThoughtsCollapsed, setThoughtsCollapsed] = React.useState(false);
@@ -125,7 +126,7 @@ const App = () => {
             leftPaneWidth,
             selectedResponseId,
             selectedFilesForReplacement: Array.from(selectedFilesForReplacement),
-            tabCount, // C146 Fix: Persist tabCount
+            tabCount,
         };
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
     }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, clientIpc]);
@@ -177,7 +178,7 @@ const App = () => {
                 newTabs[tabId] = { rawContent: response.content, parsedContent: null };
             });
             setTabs(newTabs);
-            setTabCount(cycleData.tabCount || 4); // C146 Fix: Restore tab count
+            setTabCount(cycleData.tabCount || 4);
             setIsParsedMode(cycleData.isParsedMode || false);
             setLeftPaneWidth(cycleData.leftPaneWidth || 33);
             setSelectedResponseId(cycleData.selectedResponseId || null);
@@ -200,6 +201,18 @@ const App = () => {
     React.useEffect(() => { if (isParsedMode) parseAllTabs(); }, [isParsedMode, tabs, parseAllTabs]);
     
     const activeTabData = tabs[activeTab.toString()];
+
+    const sortedTabIds = React.useMemo(() => {
+        const tabIds = [...Array(tabCount)].map((_, i) => i + 1);
+        if (isParsedMode && isSortedByLength) {
+            tabIds.sort((a, b) => {
+                const tokensA = tabs[a.toString()]?.parsedContent?.totalTokens ?? -1;
+                const tokensB = tabs[b.toString()]?.parsedContent?.totalTokens ?? -1;
+                return tokensB - tokensA;
+            });
+        }
+        return tabIds;
+    }, [tabs, isParsedMode, isSortedByLength, tabCount]);
 
     const viewableContent = React.useMemo(() => {
         if (!selectedFilePath || !activeTabData?.parsedContent) return undefined;
@@ -357,9 +370,13 @@ const App = () => {
     };
 
     return <div className="pc-view-container">
-        <div className="pc-header"><div className="pc-toolbar"><button onClick={handleGeneratePrompt} title="Generate prompt.md"><VscFileCode /> Generate prompt.md</button><button onClick={handleLogState} title="Log Current State"><VscBug/></button><button onClick={handleGlobalParseToggle}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} /></div></div>
+        <div className="pc-header"><div className="pc-toolbar"><button onClick={handleGeneratePrompt} title="Generate prompt.md"><VscFileCode /> Generate prompt.md</button><button onClick={handleLogState} title="Log Current State"><VscBug/></button><button onClick={handleGlobalParseToggle}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button>{isParsedMode && <button onClick={() => setIsSortedByLength(p => !p)} title="Sort responses by token count">{isSortedByLength ? <VscListOrdered/> : <VscListUnordered/>} Sort</button>}</div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} /></div></div>
         <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''}><div className="cycle-navigator"><span>Cycle:</span><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0}><VscChevronLeft /></button><input type="number" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 0)} className="cycle-input" /><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button><button onClick={handleNewCycle} title="New Cycle" disabled={isNewCycleButtonDisabled}><VscAdd /></button><input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} /><button onClick={handleDeleteCycle} title="Delete Current Cycle"><VscTrash /></button><button onClick={handleResetHistory} title="Reset All History"><VscSync /></button></div><div className="context-inputs"><textarea className="context-textarea" placeholder="Cycle Context (notes for this cycle)..." value={cycleContext} onChange={e => setCycleContext(e.target.value)} /><textarea className="context-textarea" placeholder="Ephemeral Context (for this cycle's prompt only)..." value={ephemeralContext} onChange={e => setEphemeralContext(e.target.value)} /></div></CollapsibleSection>
-        <div className="tab-bar">{[...Array(tabCount)].map((_, i) => <div key={i} className={`tab ${activeTab === i + 1 ? 'active' : ''} ${selectedResponseId === (i + 1).toString() ? 'selected' : ''}`} onClick={() => setActiveTab(i + 1)}>Resp {i + 1}</div>)}</div>
+        <div className="tab-bar">{sortedTabIds.map((tabIndex) => {
+            const tabData = tabs[tabIndex.toString()];
+            const parsedData = tabData?.parsedContent;
+            return <div key={tabIndex} className={`tab ${activeTab === tabIndex ? 'active' : ''} ${selectedResponseId === tabIndex.toString() ? 'selected' : ''}`} onClick={() => setActiveTab(tabIndex)}><div className="tab-title">Resp {tabIndex}</div>{isParsedMode && parsedData && (<div className="tab-metadata"><span><VscFileCode /> {parsedData.files.length}</span><span><VscSymbolNumeric /> {formatLargeNumber(parsedData.totalTokens, 1)}</span></div>)}</div>;
+        })}</div>
         <div className="tab-content">{activeTab !== null && <div className="tab-pane">{renderContent()}</div>}</div>
     </div>;
 };

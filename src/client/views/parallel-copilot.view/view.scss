@@ -1,4 +1,4 @@
-/* Updated on: C144 (Add styles for file metadata) */
+/* Updated on: C148 (Add styles for tab metadata and sorting) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -223,10 +223,32 @@ body {
     cursor: pointer;
     border-bottom: 2px solid transparent;
     color: var(--vscode-tab-inactiveForeground);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding-bottom: 4px;
 
     &.selected {
         background-color: var(--vscode-testing-iconPassed);
         color: var(--vscode-button-foreground);
+    }
+}
+
+.tab-title {
+    font-weight: bold;
+}
+
+.tab-metadata {
+    display: flex;
+    gap: 12px;
+    font-size: 11px;
+    color: var(--vscode-descriptionForeground);
+
+    span {
+        display: flex;
+        align-items: center;
+        gap: 3px;
     }
 }
 

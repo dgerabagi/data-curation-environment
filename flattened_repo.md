@@ -1,21 +1,21 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-25T22:45:44.509Z
+  Date Generated: 2025-08-25T23:32:29.265Z
   ---
   Total Files: 235
-  Total Lines: 19694
-  Total Characters: 959917
-  Approx. Tokens: 240065
+  Total Lines: 19685
+  Total Characters: 960517
+  Approx. Tokens: 240215
 -->
 
 <!-- Top 10 Files by Token Count -->
-1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
+1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10834 tokens)
 2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
 3. src\Artifacts\A11. DCE - Regression Case Studies.md (7032 tokens)
 4. src\client\views\parallel-copilot.view\view.tsx (6046 tokens)
-5. src\backend\services\prompt.service.ts (6006 tokens)
-6. src\Artifacts\A0. DCE Master Artifact List.md (5688 tokens)
+5. src\backend\services\prompt.service.ts (6024 tokens)
+6. src\Artifacts\A0. DCE Master Artifact List.md (5703 tokens)
 7. src\client\views\context-chooser.view\view.tsx (5562 tokens)
 8. src\client\components\tree-view\TreeView.tsx (4508 tokens)
 9. src\backend\services\file-operation.service.ts (3851 tokens)
@@ -30,7 +30,7 @@
 6. package.json - Lines: 139 - Chars: 4583 - Tokens: 1146
 7. public\copilot.svg - Lines: 5 - Chars: 445 - Tokens: 112
 8. public\spiral.svg - Lines: 8 - Chars: 459 - Tokens: 115
-9. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 324 - Chars: 22751 - Tokens: 5688
+9. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 324 - Chars: 22810 - Tokens: 5703
 10. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 11. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
 12. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 266 - Chars: 28128 - Tokens: 7032
@@ -83,15 +83,15 @@
 59. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
 60. src\Artifacts\A50. DCE - Phase 2 - UI Component Plan (Resizable Panes & Inner Editors).md - Lines: 51 - Chars: 5128 - Tokens: 1282
 61. src\Artifacts\A51. DCE - A-B-C Testing Strategy for UI Bugs.md - Lines: 81 - Chars: 5490 - Tokens: 1373
-62. src\Artifacts\A52. DCE - Interaction Schema Refinement.md - Lines: 85 - Chars: 3795 - Tokens: 949
+62. src\Artifacts\A52. DCE - Interaction Schema Refinement.md - Lines: 77 - Chars: 4213 - Tokens: 1054
 63. src\Artifacts\A53. DCE - Phase 2 - Token Count and Similarity Analysis.md - Lines: 43 - Chars: 3500 - Tokens: 875
 64. src\Artifacts\A55. DCE - FSService Refactoring Plan.md - Lines: 77 - Chars: 4022 - Tokens: 1006
 65. src\Artifacts\A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md - Lines: 47 - Chars: 5687 - Tokens: 1422
 66. src\Artifacts\A57. DCE - Phase 2 - Cycle Management Plan.md - Lines: 44 - Chars: 3625 - Tokens: 907
 67. src\Artifacts\A58. DCE - WinMerge Source Code Analysis.md - Lines: 56 - Chars: 5322 - Tokens: 1331
 68. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 44 - Chars: 3786 - Tokens: 947
-69. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
-70. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 44 - Chars: 4432 - Tokens: 1108
+69. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1278 - Chars: 43334 - Tokens: 10834
+70. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 44 - Chars: 4615 - Tokens: 1154
 71. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
 72. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
 73. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
@@ -101,8 +101,8 @@
 77. src\Artifacts\T2. Template - Project Vision and Goals.md - Lines: 38 - Chars: 1913 - Tokens: 479
 78. src\Artifacts\T3. Template - Phase 1 Requirements & Design.md - Lines: 37 - Chars: 1826 - Tokens: 457
 79. src\Artifacts\T4. Template - Technical Scaffolding Plan.md - Lines: 54 - Chars: 2123 - Tokens: 531
-80. src\Artifacts\T5. Template - Target File Structure.md - Lines: 35 - Chars: 1002 - Tokens: 251
-81. src\Artifacts\T6. Template - Initial Scaffolding Deployment Script.md - Lines: 61 - Chars: 2339 - Tokens: 585
+80. src\Artifacts\T5. Template - Target File Structure.md - Lines: 36 - Chars: 1015 - Tokens: 254
+81. src\Artifacts\T6. Template - Initial Scaffolding Deployment Script.md - Lines: 63 - Chars: 2544 - Tokens: 636
 82. src\Artifacts\T7. Template - Development and Testing Guide.md - Lines: 48 - Chars: 1686 - Tokens: 422
 83. src\Artifacts\T8. Template - Regression Case Studies.md - Lines: 31 - Chars: 1917 - Tokens: 480
 84. src\Artifacts\T9. Template - Logging and Debugging Guide.md - Lines: 49 - Chars: 2538 - Tokens: 635
@@ -116,7 +116,7 @@
 92. src\backend\services\highlighting.service.ts - Lines: 58 - Chars: 2920 - Tokens: 730
 93. src\backend\services\history.service.ts - Lines: 168 - Chars: 7027 - Tokens: 1757
 94. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-95. src\backend\services\prompt.service.ts - Lines: 316 - Chars: 24022 - Tokens: 6006
+95. src\backend\services\prompt.service.ts - Lines: 316 - Chars: 24096 - Tokens: 6024
 96. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
 97. src\backend\services\services.ts - Lines: 38 - Chars: 1778 - Tokens: 445
 98. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
@@ -864,7 +864,7 @@ I have analyzed the comprehensive feedback from Cycle 132. There are several reg
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C143 (Renumber Cycle 0 Templates and add Sample Prompt)
+# Updated on: C147 (Deprecate A6 and T6)
 
 ## 1. Purpose
 
@@ -902,9 +902,9 @@ I have analyzed the comprehensive feedback from Cycle 132. There are several reg
 - **Description:** A text-based representation of the target file structure for the DCE extension, outlining the layout of directories and key files.
 - **Tags:** file structure, architecture, project layout, scaffolding
 
-### A6. DCE - Initial Scaffolding Deployment Script
-- **Description:** Contains a Node.js script that, when executed, creates the entire initial directory structure and files for the DCE extension project.
-- **Tags:** deployment, script, scaffolding, bootstrap, nodejs, automation
+### A6. DCE - Initial Scaffolding Deployment Script (DEPRECATED)
+- **Description:** (Deprecated) Contains a Node.js script that creates the initial directory structure. This is obsolete as the AI now generates files directly.
+- **Tags:** deployment, script, scaffolding, bootstrap, nodejs, automation, deprecated
 
 ### A7. DCE - Development and Testing Guide
 - **Description:** A step-by-step guide explaining how to run, debug, and test the DCE extension within VS Code using the Extension Development Host.
@@ -1166,9 +1166,9 @@ I have analyzed the comprehensive feedback from Cycle 132. There are several reg
 - **Description:** A generic template for a target file structure document.
 - **Tags:** template, cycle 0, documentation, project setup
 
-### T6. Template - Initial Scaffolding Deployment Script
-- **Description:** A generic template for a scaffolding deployment script.
-- **Tags:** template, cycle 0, documentation, project setup
+### T6. Template - Initial Scaffolding Deployment Script (DEPRECATED)
+- **Description:** (Deprecated) A generic template for a scaffolding deployment script. This is obsolete.
+- **Tags:** template, cycle 0, documentation, project setup, deprecated
 
 ### T7. Template - Development and Testing Guide
 - **Description:** A generic template for a development and testing guide.
@@ -4591,88 +4591,80 @@ export default TestComponent;
 # Artifact A52: DCE - Interaction Schema Refinement
 # Date Created: C110
 # Author: AI Model & Curator
-# Updated on: C138 (Clarify prompt.md cycle structure with detailed example)
+# Updated on: C147 (Add detailed parsing logic for "metainterpretability")
 
 - **Key/Value for A0:**
-- **Description:** Proposes a set of refined rules for the AI's output format to improve the reliability and consistency of automated parsing within the Parallel Co-Pilot Panel.
-- **Tags:** documentation, process, parsing, interaction schema, roadmap
+- **Description:** A set of refined rules and an explanation of the parsing logic for the AI's output format to improve the reliability and consistency of automated parsing within the Parallel Co-Pilot Panel.
+- **Tags:** documentation, process, parsing, interaction schema, metainterpretability
 
 ## 1. Overview & Goal
 
-The Parallel Co-Pilot Panel (PCPP) relies on parsing the AI's output to provide features like file association, diffing, and syntax highlighting. Analysis of historical cycle data reveals that the AI's output format has drifted over time, using multiple conventions for headers and file blocks. This inconsistency makes the parser complex and brittle.
+The Parallel Co-Pilot Panel (PCPP) relies on parsing your output to provide features like file association, diffing, and syntax highlighting. To ensure this process is reliable, your responses must adhere to a strict and consistent format.
 
-The goal of this artifact is to define a refined, stricter set of rules for the AI's output. By codifying a canonical format, we make the parser's job simpler and more reliable, improving the overall robustness of the PCPP. This document contains the proposed changes to be integrated into the main `M3. Interaction Schema`.
+The goal of this document is to serve as a definitive guide for you, the AI, on how to structure your responses. It explains the "documentation first" principle we follow and details the exact logic the PCPP parser uses. By understanding how you are being interpreted, you can generate perfectly parsable output every time.
 
-## 2. Proposed Changes to `M3. Interaction Schema`
+## 2. The "Documentation First" Principle
 
-### 2.1. Standardized Response Structure
+A core principle of this project is to **plan before coding**.
+-   **Cycle 0 (Project Initialization):** Your first task for a new project is **always** to generate planning and documentation artifacts (e.g., A1 Project Vision, A2 Requirements), not code files. You should use the provided templates as a guide.
+-   **Subsequent Cycles:** When a new feature is requested, your first step should be to update existing documentation or create new artifacts that describe the plan for that feature. You should only generate code *after* the plan has been documented.
 
-To ensure predictable parsing, all responses must adhere to the following structure and order:
+## 3. How the PCPP Parser Works
 
-1.  **Summary/Plan:** The response must begin with a high-level summary, thoughts, or plan. This section ends at the first occurrence of a standardized header.
-2.  **Course of Action Header:** This section must begin with a markdown header like `### Course of Action`.
-3.  **Files Updated Header:** This section must begin with the exact markdown header: `### Files Updated This Cycle:`.
-4.  **File Blocks:** The response must conclude with the code/document artifact blocks.
-5.  **Duplicate Sections:** If a response contains duplicate standardized sections (e.g., two `### Course of Action` blocks), the parser will **only use the content of the last one**.
+The parser is designed to be simple and robust. It looks for specific headers and tags to break your response into structured data. Here is the step-by-step logic:
 
-### 2.2. Canonical File Block Format
+### Step 1: Extract File Blocks
 
-To eliminate ambiguity, all file and document artifacts must be enclosed in the following canonical format:
+The parser's most important job is to find and extract all file blocks. It does this using a single, precise regular expression.
 
-```xml
-<file path="path/to/your/file.ext">
-[... file content ...]
+-   **Rule:** Every file you generate **must** be enclosed in `<file path="..."></file>` tags.
+-   **Example:**
+    ```xml
+    <file path="src/main.ts">
+    // ... content of main.ts
+    </file>
+    ```
+-   **Parser Logic:** The parser looks for the literal string `<file path="` followed by a quoted path, then captures everything until it finds the literal closing string `</file>`. **Any other format will be ignored.**
+
+### Step 2: Extract Summary / Plan
+
+The parser assumes everything from the beginning of your response until the first major header is the summary.
+
+-   **Rule:** Your high-level summary, thoughts, or plan must come first.
+-   **Parser Logic:** The parser captures all text from the start of the response up to the first occurrence of `### Course of Action` or `### Files Updated This Cycle:`.
+
+### Step 3: Extract Course of Action
+
+-   **Rule:** The "Course of Action" section must begin with the exact markdown header `### Course of Action`.
+-   **Parser Logic:** The parser looks for the last occurrence of this header and captures all text following it until it hits the next major header or a file block.
+
+### Step 4: Extract List of Updated Files
+
+-   **Rule:** The list of updated files must begin with the exact markdown header `### Files Updated This Cycle:`.
+-   **Parser Logic:** The parser looks for this header and captures the bulleted list that follows. It then extracts file paths primarily from this list if no `<file>` tags were found, but this is a fallback. **The `<file>` tags are the source of truth.**
+
+## 4. Canonical Response Structure
+
+To guarantee successful parsing, every response should follow this structure:
+
+```
+[High-level summary and analysis of the request.]
+
+### Course of Action
+
+[A detailed, point-by-point plan of the changes you are about to make.]
+
+### Files Updated This Cycle:
+*   `path/to/first/file.ts` (Updated)
+*   `path/to/second/file.md` (New)
+
+<file path="path/to/first/file.ts">
+// Full content of the first file...
 </file>
-```
-*   The opening tag **must** be `<file path="...">`.
-*   The closing tag **must** be `</file>`.
 
-### 2.3. Standardized `prompt.md` Cycle Structure (C138 Update)
-
-The `prompt.service.ts` will generate the `<M6. Cycles>` block with the following precise structure. This is the definitive format.
-
-#### Rules:
-1.  The `<M2. cycle overview>` section contains the titles of all cycles, sorted newest to oldest.
-2.  The `<M6. Cycles>` section contains the detailed content of each cycle, also sorted newest to oldest.
-3.  The **current cycle** is unique: it is the only one that can contain `<Ephemeral Context>`.
-4.  For any given `<Cycle N>`, it must contain its own `<Cycle Context>` (if provided) and the `<Previous Cycle N-1 Summary of Actions>`.
-
-#### Example Correct Structure:
-
-```xml
-<M6. Cycles>
-
-<Cycle 3>
-<Cycle Context>
-This is the context I wrote for Cycle 3.
-</Cycle Context>
-<Ephemeral Context>
-This is temporary context for Cycle 3 only.
-</Ephemeral Context>
-<Previous Cycle 2 Summary of Actions>
-This is the summary of the AI response I selected in Cycle 2.
-...
-</Previous Cycle 2 Summary of Actions>
-</Cycle 3>
-
-<Cycle 2>
-<Cycle Context>
-This is the context I wrote for Cycle 2.
-</Cycle Context>
-<Previous Cycle 1 Summary of Actions>
-This is the summary of the AI response I selected in Cycle 1.
-...
-</Previous Cycle 1 Summary of Actions>
-</Cycle 2>
-
-<Cycle 1>
-<Cycle Context>
-This is the context I wrote for Cycle 1.
-</Cycle Context>
-</Cycle 1>
-
-</M6. Cycles>
-```
+<file path="path/to/second/file.md">
+# Full content of the second file...
+</file>
 </file>
 
 <file path="src/Artifacts/A53. DCE - Phase 2 - Token Count and Similarity Analysis.md">
@@ -5008,23 +5000,18 @@ The goal of this feature is to add a **"Log State"** button to the PCPP's main h
 # Artifact A6: DCE - Initial Scaffolding Deployment Script
 # Date Created: Cycle 3
 # Author: AI Model
-# Updated on: Cycle 10 (Fix problemMatcher in tasks.json to resolve F5 launch error)
+# Updated on: C147 (Mark as Deprecated)
 
-- **Description:** Contains a Node.js script that, when executed, creates the entire initial directory structure and files for the DCE extension project.
-- **Tags:** deployment, script, scaffolding, bootstrap, nodejs, automation
+- **Description:** (Deprecated) Contains a Node.js script that creates the initial directory structure. This is obsolete as the AI now generates files directly.
+- **Tags:** deployment, script, scaffolding, bootstrap, nodejs, automation, deprecated
 
 ## 1. Overview
 
-This artifact contains the `deploy_scaffold.js` script. Its purpose is to automate the creation of the initial project structure for the Data Curation Environment (DCE) VS Code extension. This eliminates the need for manual file creation and ensures a consistent setup based on our agreed-upon architecture, including the necessary configurations for debugging.
+This artifact contains the `deploy_scaffold.js` script. Its purpose was to automate the creation of the initial project structure for the Data Curation Environment (DCE) VS Code extension.
 
-## 2. How to Use
+**This artifact is now DEPRECATED.** The workflow has evolved. The AI now generates initial project files directly within the Parallel Co-Pilot Panel, making a separate, standalone scaffolding script redundant. This file is kept for historical reference.
 
-1.  Save the code below as `deploy_scaffold.js` in your project's root directory (e.g., `C:\Projects\DCE\`).
-2.  Open a terminal in that directory.
-3.  Run the script using Node.js: `node deploy_scaffold.js`
-4.  The script will create all the necessary directories and files, including the `.vscode` folder with `launch.json` and a corrected `tasks.json`, logging its progress to the console.
-
-## 3. Script: `deploy_scaffold.js`
+## 2. Original Script (For Reference Only)
 
 ```javascript
 const fs = require('fs').promises;
@@ -5767,7 +5754,7 @@ export class FSService {
         }
         
         // For simplicity, we'll just use the first workspace folder.
-        const rootUri = workspaceFolders[0].uri;
+        const rootUri = workspaceFolders.uri;
         if (!rootUri) {
             // This case is unlikely if the above check passes, but good for safety.
             serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: [] });
@@ -5863,7 +5850,7 @@ const FileTree: React.FC<FileTreeProps> = ({
   updateSelectedFiles,
 }) => {
 
-  const rootNode = data.length > 0 ? data[0] : null;
+  const rootNode = data.length > 0 ? data : null;
 
   const [expandedNodes, setExpandedNodes] = useState<string[]>(rootNode ? [rootNode.absolutePath] : []);
 
@@ -6127,7 +6114,7 @@ export class FlattenerService {
             return;
         }
 
-        const rootPath = workspaceFolders[0].uri.fsPath;
+        const rootPath = workspaceFolders.uri.fsPath;
         const outputFilePath = path.join(rootPath, 'flattened_repo.md');
 
         try {
@@ -6288,12 +6275,13 @@ async function deployScaffold() {
 deployScaffold();
 ```
 </file>
+</file>
 
 <file path="src/Artifacts/A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md">
 # Artifact A60: DCE - Phase 2 - Cycle 0 Onboarding Experience
 # Date Created: C139
 # Author: AI Model & Curator
-# Updated on: C146 (Clarify goal is to produce code file artifacts)
+# Updated on: C147 (Clarify goal is to produce planning artifacts, not code)
 
 - **Key/Value for A0:**
 - **Description:** Documents the plan for a special "Cycle 0" mode to guide new users in setting up their project by generating an initial set of planning documents.
@@ -6303,7 +6291,7 @@ deployScaffold();
 
 The Parallel Co-Pilot Panel (PCPP) is a powerful tool for iterative, AI-assisted development, but its effectiveness relies on a structured set of planning and documentation artifacts. For a new user starting a project from scratch, the initial setup can be a significant hurdle.
 
-The goal of the "Cycle 0" onboarding experience is to guide the user through this initial setup. By capturing their high-level project scope, the extension will leverage a set of best-practice document templates to generate a prompt that instructs an AI to create a starter pack of **initial code file artifacts** for the user's new project. This automates the project bootstrapping process and introduces the user to the artifact-driven workflow, ensuring the output is immediately parsable by the PCPP.
+The goal of the "Cycle 0" onboarding experience is to guide the user through this initial setup. By capturing their high-level project scope, the extension will leverage a set of best-practice document templates to generate a prompt. This prompt will instruct an AI to create a starter pack of essential **planning and documentation artifacts** (e.g., A0 Master Artifact List, A1 Project Vision, A2 Requirements) for the user's new project. This automates the project bootstrapping process and introduces the user to the artifact-driven workflow, ensuring the output is immediately parsable by the PCPP.
 
 ## 2. User Flow
 
@@ -6312,12 +6300,12 @@ The goal of the "Cycle 0" onboarding experience is to guide the user through thi
 3.  **User Input:** The user is prompted to describe their project's vision and goals in the "Project Scope" text area.
 4.  **Generate Prompt & Artifacts:** The user clicks a button, e.g., "Generate Initial Artifacts Prompt".
 5.  **Backend Process:**
-    *   The backend `PromptService` constructs a unique `prompt.md` file using the user's scope and a set of bundled template artifacts. The prompt will explicitly instruct the AI to generate code files wrapped in `<file path="..."></file>` tags.
+    *   The backend `PromptService` constructs a unique `prompt.md` file using the user's scope and a set of bundled template artifacts. The prompt will explicitly instruct the AI to generate **documentation artifacts** wrapped in `<file path="..."></file>` tags, adhering to the "documentation first" principle.
     *   Crucially, it also creates the `src/Artifacts` directory if it doesn't exist, and then creates an empty `src/Artifacts/A0. DCE Master Artifact List.md`.
     *   It then notifies the frontend that the process is complete.
 6.  **Transition to Cycle 1:** Upon notification, the frontend automatically reloads its state. Since `A0` now exists, the `HistoryService` returns Cycle 1, and the UI transitions to the main PCPP interface, ready for the user's first real cycle.
 7.  **User Action:** The user takes the generated `prompt.md` and uses it with their preferred LLM.
-8.  **First Iteration:** The user pastes the AI's response (which should contain the new, correctly formatted file artifacts) back into the PCPP's "Cycle 1" tab, and the standard iterative workflow begins.
+8.  **First Iteration:** The user pastes the AI's response (which should contain the new, correctly formatted documentation artifacts) back into the PCPP's "Cycle 1" tab, and the standard iterative workflow begins.
 9.  **(C142) Return to Cycle 0:** If the user is on Cycle 1, they can click the "previous cycle" (`<`) button. This will navigate them back to the Cycle 0 onboarding view, allowing them to modify their initial project scope and regenerate the prompt.
 
 ## 3. Technical Implementation
@@ -6824,6 +6812,7 @@ The project will adhere to a standard, feature-driven directory structure:
 </file>
 
 <file path="src/Artifacts/T5. Template - Target File Structure.md">
+```markdown
 <!-- 
   IMPORTANT AI INSTRUCTION:
   When generating a file based on this template, you MUST wrap the entire file's content 
@@ -6867,17 +6856,19 @@ This document provides a visual representation of the file structure that the `T
   When generating a file based on this template, you MUST wrap the entire file's content 
   in <file path="..."></file> tags.
 -->
-# Artifact T6: Template - Initial Scaffolding Deployment Script
+# Artifact T6: Template - Initial Scaffolding Deployment Script (DEPRECATED)
 # Date Created: C139
 # Author: AI Model & Curator
 
 - **Key/Value for A0:**
-- **Description:** A generic template for a scaffolding deployment script.
-- **Tags:** template, cycle 0, documentation, project setup
+- **Description:** (Deprecated) A generic template for a scaffolding deployment script. This is obsolete.
+- **Tags:** template, cycle 0, documentation, project setup, deprecated
 
 ## 1. Overview
 
 This artifact contains a simple Node.js script (`deploy_scaffold.js`). Its purpose is to automate the creation of the initial project structure for **[Your Project Name]**, as outlined in `T5. Template - Target File Structure`.
+
+**Note:** This approach is now considered obsolete. The preferred method is to have the AI generate the necessary files directly in its response.
 
 ## 2. How to Use
 
@@ -8654,12 +8645,13 @@ ${cyclesContent}
         try {
             Services.loggerService.log("Generating Cycle 0 prompt.md file...");
 
+            const templateIds = ['T1', 'T2', 'T3', 'T4', 'T5', 'T7', 'T8', 'T9', 'T10', 'A52'];
             const artifactFilenameMap: { [key: string]: string } = {
-                'T1': 'T1. Template - Master Artifact List.md', 'T2': 'T2. Template - Project Vision and Goals.md', 'T3': 'T3. Template - Phase 1 Requirements & Design.md', 'T4': 'T4. Template - Technical Scaffolding Plan.md', 'T5': 'T5. Template - Target File Structure.md', 'T6': 'T6. Template - Initial Scaffolding Deployment Script.md', 'T7': 'T7. Template - Development and Testing Guide.md', 'T8': 'T8. Template - Regression Case Studies.md', 'T9': 'T9. Template - Logging and Debugging Guide.md', 'T10': 'T10. Template - Feature Plan Example.md'
+                'T1': 'T1. Template - Master Artifact List.md', 'T2': 'T2. Template - Project Vision and Goals.md', 'T3': 'T3. Template - Phase 1 Requirements & Design.md', 'T4': 'T4. Template - Technical Scaffolding Plan.md', 'T5': 'T5. Template - Target File Structure.md', 'T7': 'T7. Template - Development and Testing Guide.md', 'T8': 'T8. Template - Regression Case Studies.md', 'T9': 'T9. Template - Logging and Debugging Guide.md', 'T10': 'T10. Template - Feature Plan Example.md', 'A52': 'A52. DCE - Interaction Schema Refinement.md'
             };
 
             let staticContext = '';
-            for (const artifactId in artifactFilenameMap) {
+            for (const artifactId of templateIds) {
                 const filename = artifactFilenameMap[artifactId];
                 const artifactUri = vscode.Uri.joinPath(artifactsDirInExtension, filename);
                 try {
@@ -8671,15 +8663,14 @@ ${cyclesContent}
                 }
             }
 
-            // C146 Fix: Add explicit instructions for the AI
             const cycle0Context = `<Cycle 0>
 <Cycle Context>
-You are a senior software developer tasked with scaffolding a new project. Review the user's project scope in M4. Your goal is to generate the initial set of files needed to start the project, based on the provided templates.
+You are a senior project architect. Your task is to establish the necessary documentation to achieve the user's goals, which are outlined in M4.
 
 **CRITICAL INSTRUCTIONS:**
-1.  Your output MUST be a series of code/configuration files.
-2.  You MUST NOT output documentation artifacts (e.g., <A1_project_vision.md>). Instead, create the actual files (e.g., package.json, src/main.ts).
-3.  Every file you generate MUST be enclosed in the strict XML format: \`<file path="path/to/file.ext">...</file>\`.
+1.  Your primary goal is to generate **planning and documentation artifacts** (e.g., Project Vision, Requirements).
+2.  You **MUST NOT** generate code files (e.g., \`package.json\`, \`src/main.ts\`) in this initial cycle. The "documentation first" principle is paramount.
+3.  Every artifact you generate **MUST** be enclosed in the strict XML format explained in the provided "Interaction Schema Refinement" document: \`<file path="path/to/artifact.md">...</file>\`.
 </Cycle Context>
 <Static Context>
 ${staticContext.trim()}
