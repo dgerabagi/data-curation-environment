@@ -1,4 +1,4 @@
-// Updated on: C142 (Enable navigation back to cycle 0)
+// Updated on: C143 (Remove Cycle0PromptGenerated listener)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -180,11 +180,6 @@ const App = () => {
         clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); });
         clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { logger.log(`Received FilesWritten event for: ${paths.join(', ')}`); setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); });
         
-        clientIpc.onServerMessage(ServerToClientChannel.Cycle0PromptGenerated, () => {
-            logger.log("Cycle 0 prompt generated. Requesting latest cycle data to transition view.");
-            clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});
-        });
-
         clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});
     }, [clientIpc]);
 

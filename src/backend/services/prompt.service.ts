@@ -241,7 +241,7 @@ ${cyclesContent}
             Services.loggerService.log("Generating Cycle 0 prompt.md file...");
 
             const artifactFilenameMap: { [key: string]: string } = {
-                'A61': 'A61. Template - Master Artifact List.md', 'A62': 'A62. Template - Project Vision and Goals.md', 'A63': 'A63. Template - Phase 1 Requirements & Design.md', 'A64': 'A64. Template - Technical Scaffolding Plan.md', 'A65': 'A65. Template - Target File Structure.md', 'A66': 'A66. Template - Initial Scaffolding Deployment Script.md', 'A67': 'A67. Template - Development and Testing Guide.md', 'A68': 'A68. Template - Regression Case Studies.md', 'A69': 'A69. Template - Logging and Debugging Guide.md', 'A70': 'A70. Template - Feature Plan Example.md'
+                'T1': 'T1. Template - Master Artifact List.md', 'T2': 'T2. Template - Project Vision and Goals.md', 'T3': 'T3. Template - Phase 1 Requirements & Design.md', 'T4': 'T4. Template - Technical Scaffolding Plan.md', 'T5': 'T5. Template - Target File Structure.md', 'T6': 'T6. Template - Initial Scaffolding Deployment Script.md', 'T7': 'T7. Template - Development and Testing Guide.md', 'T8': 'T8. Template - Regression Case Studies.md', 'T9': 'T9. Template - Logging and Debugging Guide.md', 'T10': 'T10. Template - Feature Plan Example.md'
             };
 
             let staticContext = '';
@@ -285,7 +285,9 @@ ${staticContext.trim()}
             
             vscode.window.showInformationMessage(`Successfully generated initial prompt.md and created src/Artifacts/A0...`);
 
-            serverIpc.sendToClient(ServerToClientChannel.Cycle0PromptGenerated, {});
+            // Get the new cycle data (should be Cycle 1 now) and send it to the client
+            const newCycleData = await Services.historyService.getLatestCycle();
+            serverIpc.sendToClient(ServerToClientChannel.SendLatestCycleData, { cycleData: newCycleData });
 
         } catch (error: any) {
             vscode.window.showErrorMessage(`Failed to generate Cycle 0 prompt: ${error.message}`);

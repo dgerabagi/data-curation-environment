@@ -1,22 +1,22 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-25T21:04:20.550Z
+  Date Generated: 2025-08-25T21:44:14.324Z
   ---
-  Total Files: 233
-  Total Lines: 19414
-  Total Characters: 939548
-  Approx. Tokens: 234973
+  Total Files: 234
+  Total Lines: 19488
+  Total Characters: 950303
+  Approx. Tokens: 237662
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
 2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
 3. src\Artifacts\A11. DCE - Regression Case Studies.md (6591 tokens)
-4. src\backend\services\prompt.service.ts (5854 tokens)
-5. src\Artifacts\A0. DCE Master Artifact List.md (5639 tokens)
-6. src\client\views\parallel-copilot.view\view.tsx (5576 tokens)
-7. src\client\views\context-chooser.view\view.tsx (5562 tokens)
+4. src\backend\services\prompt.service.ts (5898 tokens)
+5. src\Artifacts\A0. DCE Master Artifact List.md (5688 tokens)
+6. src\client\views\context-chooser.view\view.tsx (5562 tokens)
+7. src\client\views\parallel-copilot.view\view.tsx (5504 tokens)
 8. src\client\components\tree-view\TreeView.tsx (4508 tokens)
 9. src\client\views\context-chooser.view\view.scss (3638 tokens)
 10. src\backend\services\file-operation.service.ts (3431 tokens)
@@ -30,7 +30,7 @@
 6. package.json - Lines: 139 - Chars: 4583 - Tokens: 1146
 7. public\copilot.svg - Lines: 5 - Chars: 445 - Tokens: 112
 8. public\spiral.svg - Lines: 8 - Chars: 459 - Tokens: 115
-9. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 320 - Chars: 22556 - Tokens: 5639
+9. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 324 - Chars: 22751 - Tokens: 5688
 10. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 11. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
 12. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 252 - Chars: 26361 - Tokens: 6591
@@ -92,169 +92,170 @@
 68. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 44 - Chars: 3786 - Tokens: 947
 69. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
 70. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 44 - Chars: 4231 - Tokens: 1058
-71. src\Artifacts\A61. Template - Master Artifact List.md - Lines: 31 - Chars: 1497 - Tokens: 375
-72. src\Artifacts\A62. Template - Project Vision and Goals.md - Lines: 33 - Chars: 1745 - Tokens: 437
-73. src\Artifacts\A63. Template - Phase 1 Requirements & Design.md - Lines: 32 - Chars: 1658 - Tokens: 415
-74. src\Artifacts\A64. Template - Technical Scaffolding Plan.md - Lines: 49 - Chars: 1955 - Tokens: 489
-75. src\Artifacts\A65. Template - Target File Structure.md - Lines: 30 - Chars: 836 - Tokens: 209
-76. src\Artifacts\A66. Template - Initial Scaffolding Deployment Script.md - Lines: 56 - Chars: 2172 - Tokens: 543
-77. src\Artifacts\A67. Template - Development and Testing Guide.md - Lines: 44 - Chars: 1520 - Tokens: 380
-78. src\Artifacts\A68. Template - Regression Case Studies.md - Lines: 26 - Chars: 1749 - Tokens: 438
-79. src\Artifacts\A69. Template - Logging and Debugging Guide.md - Lines: 44 - Chars: 2370 - Tokens: 593
-80. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
-81. src\Artifacts\A70. Template - Feature Plan Example.md - Lines: 27 - Chars: 2471 - Tokens: 618
-82. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
-83. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
-84. src\backend\commands\commands.ts - Lines: 97 - Chars: 4211 - Tokens: 1053
-85. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
-86. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
-87. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
-88. src\backend\services\file-operation.service.ts - Lines: 284 - Chars: 13721 - Tokens: 3431
-89. src\backend\services\file-tree.service.ts - Lines: 212 - Chars: 11447 - Tokens: 2862
-90. src\backend\services\flattener.service.ts - Lines: 210 - Chars: 11271 - Tokens: 2818
-91. src\backend\services\highlighting.service.ts - Lines: 58 - Chars: 2920 - Tokens: 730
-92. src\backend\services\history.service.ts - Lines: 166 - Chars: 6935 - Tokens: 1734
-93. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-94. src\backend\services\prompt.service.ts - Lines: 295 - Chars: 23414 - Tokens: 5854
-95. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
-96. src\backend\services\services.ts - Lines: 38 - Chars: 1778 - Tokens: 445
-97. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
-98. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
-99. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
-100. src\client\components\DiffViewer.tsx - Lines: 224 - Chars: 11386 - Tokens: 2847
-101. src\client\components\file-tree\FileTree.tsx - Lines: 262 - Chars: 11897 - Tokens: 2975
-102. src\client\components\file-tree\FileTree.utils.ts - Lines: 189 - Chars: 7284 - Tokens: 1821
-103. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
-104. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13099 - Tokens: 3275
-105. src\client\components\tree-view\TreeView.tsx - Lines: 394 - Chars: 18029 - Tokens: 4508
-106. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
-107. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
-108. src\client\utils\response-parser.ts - Lines: 75 - Chars: 3088 - Tokens: 772
-109. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-110. src\client\views\context-chooser.view\on-message.ts - Lines: 53 - Chars: 4913 - Tokens: 1229
-111. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
-112. src\client\views\context-chooser.view\view.tsx - Lines: 435 - Chars: 22245 - Tokens: 5562
-113. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
-114. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-115. src\client\views\parallel-copilot.view\on-message.ts - Lines: 62 - Chars: 2895 - Tokens: 724
-116. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 43 - Chars: 2068 - Tokens: 517
-117. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 43 - Chars: 1890 - Tokens: 473
-118. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
-119. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
-120. src\client\views\parallel-copilot.view\view.scss - Lines: 566 - Chars: 13436 - Tokens: 3359
-121. src\client\views\parallel-copilot.view\view.tsx - Lines: 334 - Chars: 22302 - Tokens: 5576
-122. src\common\ipc\channels.enum.ts - Lines: 72 - Chars: 3641 - Tokens: 911
-123. src\common\ipc\channels.type.ts - Lines: 66 - Chars: 5153 - Tokens: 1289
-124. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1590 - Tokens: 398
-125. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-126. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-127. src\common\types\file-node.ts - Lines: 16 - Chars: 567 - Tokens: 142
-128. src\common\types\pcpp.types.ts - Lines: 41 - Chars: 1138 - Tokens: 285
-129. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 449 - Tokens: 113
-130. src\common\utils\formatting.ts - Lines: 99 - Chars: 3475 - Tokens: 869
-131. src\common\utils\view-html.ts - Lines: 29 - Chars: 1117 - Tokens: 280
-132. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
-133. src\extension.ts - Lines: 121 - Chars: 5078 - Tokens: 1270
-134. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
-135. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
-136. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
-137. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
-138. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
-139. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
-140. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
-141. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
-142. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
-143. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
-144. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
-145. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
-146. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
-147. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
-148. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
-149. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
-150. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
-151. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
-152. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
-153. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
-154. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
-155. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
-156. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
-157. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
-158. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
-159. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
-160. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
-161. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
-162. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
-163. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
-164. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
-165. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
-166. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
-167. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
-168. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
-169. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
-170. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
-171. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
-172. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
-173. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
-174. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
-175. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
-176. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
-177. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
-178. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
-179. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
-180. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
-181. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
-182. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
-183. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
-184. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
-185. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
-186. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
-187. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
-188. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
-189. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
-190. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
-191. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
-192. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
-193. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
-194. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
-195. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
-196. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
-197. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
-198. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
-199. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
-200. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
-201. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-202. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
-203. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
-204. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
-205. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-206. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
-207. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
-208. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
-209. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-210. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
-211. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
-212. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
-213. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
-214. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
-215. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
-216. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
-217. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-218. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
-219. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
-220. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
-221. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
-222. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
-223. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
-224. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
-225. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
-226. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
-227. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
-228. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
-229. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
-230. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
-231. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
-232. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
-233. webpack.config.js - Lines: 103 - Chars: 2830 - Tokens: 708
+71. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
+72. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
+73. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
+74. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
+75. src\Artifacts\T1. Template - Master Artifact List.md - Lines: 31 - Chars: 1496 - Tokens: 374
+76. src\Artifacts\T10. Template - Feature Plan Example.md - Lines: 27 - Chars: 2471 - Tokens: 618
+77. src\Artifacts\T2. Template - Project Vision and Goals.md - Lines: 33 - Chars: 1744 - Tokens: 436
+78. src\Artifacts\T3. Template - Phase 1 Requirements & Design.md - Lines: 32 - Chars: 1657 - Tokens: 415
+79. src\Artifacts\T4. Template - Technical Scaffolding Plan.md - Lines: 49 - Chars: 1954 - Tokens: 489
+80. src\Artifacts\T5. Template - Target File Structure.md - Lines: 30 - Chars: 833 - Tokens: 209
+81. src\Artifacts\T6. Template - Initial Scaffolding Deployment Script.md - Lines: 56 - Chars: 2170 - Tokens: 543
+82. src\Artifacts\T7. Template - Development and Testing Guide.md - Lines: 43 - Chars: 1517 - Tokens: 380
+83. src\Artifacts\T8. Template - Regression Case Studies.md - Lines: 26 - Chars: 1748 - Tokens: 437
+84. src\Artifacts\T9. Template - Logging and Debugging Guide.md - Lines: 44 - Chars: 2369 - Tokens: 593
+85. src\backend\commands\commands.ts - Lines: 97 - Chars: 4211 - Tokens: 1053
+86. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
+87. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
+88. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
+89. src\backend\services\file-operation.service.ts - Lines: 284 - Chars: 13721 - Tokens: 3431
+90. src\backend\services\file-tree.service.ts - Lines: 212 - Chars: 11447 - Tokens: 2862
+91. src\backend\services\flattener.service.ts - Lines: 210 - Chars: 11271 - Tokens: 2818
+92. src\backend\services\highlighting.service.ts - Lines: 58 - Chars: 2920 - Tokens: 730
+93. src\backend\services\history.service.ts - Lines: 166 - Chars: 6935 - Tokens: 1734
+94. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
+95. src\backend\services\prompt.service.ts - Lines: 297 - Chars: 23590 - Tokens: 5898
+96. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
+97. src\backend\services\services.ts - Lines: 38 - Chars: 1778 - Tokens: 445
+98. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
+99. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
+100. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
+101. src\client\components\DiffViewer.tsx - Lines: 224 - Chars: 11386 - Tokens: 2847
+102. src\client\components\file-tree\FileTree.tsx - Lines: 262 - Chars: 11897 - Tokens: 2975
+103. src\client\components\file-tree\FileTree.utils.ts - Lines: 189 - Chars: 7284 - Tokens: 1821
+104. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
+105. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13099 - Tokens: 3275
+106. src\client\components\tree-view\TreeView.tsx - Lines: 394 - Chars: 18029 - Tokens: 4508
+107. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
+108. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
+109. src\client\utils\response-parser.ts - Lines: 75 - Chars: 3088 - Tokens: 772
+110. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
+111. src\client\views\context-chooser.view\on-message.ts - Lines: 53 - Chars: 4913 - Tokens: 1229
+112. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
+113. src\client\views\context-chooser.view\view.tsx - Lines: 435 - Chars: 22245 - Tokens: 5562
+114. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
+115. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
+116. src\client\views\parallel-copilot.view\on-message.ts - Lines: 62 - Chars: 2895 - Tokens: 724
+117. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 43 - Chars: 2068 - Tokens: 517
+118. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 43 - Chars: 1890 - Tokens: 473
+119. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
+120. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
+121. src\client\views\parallel-copilot.view\view.scss - Lines: 566 - Chars: 13436 - Tokens: 3359
+122. src\client\views\parallel-copilot.view\view.tsx - Lines: 329 - Chars: 22013 - Tokens: 5504
+123. src\common\ipc\channels.enum.ts - Lines: 71 - Chars: 3572 - Tokens: 893
+124. src\common\ipc\channels.type.ts - Lines: 65 - Chars: 5087 - Tokens: 1272
+125. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1590 - Tokens: 398
+126. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+127. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
+128. src\common\types\file-node.ts - Lines: 16 - Chars: 567 - Tokens: 142
+129. src\common\types\pcpp.types.ts - Lines: 41 - Chars: 1138 - Tokens: 285
+130. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 449 - Tokens: 113
+131. src\common\utils\formatting.ts - Lines: 99 - Chars: 3475 - Tokens: 869
+132. src\common\utils\view-html.ts - Lines: 29 - Chars: 1117 - Tokens: 280
+133. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
+134. src\extension.ts - Lines: 121 - Chars: 5078 - Tokens: 1270
+135. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
+136. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
+137. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
+138. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
+139. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
+140. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
+141. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
+142. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
+143. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
+144. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
+145. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
+146. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
+147. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
+148. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
+149. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
+150. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
+151. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
+152. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
+153. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
+154. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
+155. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
+156. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
+157. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
+158. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
+159. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
+160. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
+161. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
+162. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
+163. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
+164. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
+165. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
+166. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
+167. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
+168. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
+169. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
+170. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
+171. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
+172. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
+173. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
+174. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
+175. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
+176. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
+177. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
+178. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
+179. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
+180. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
+181. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
+182. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
+183. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
+184. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
+185. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
+186. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
+187. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
+188. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
+189. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
+190. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
+191. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
+192. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
+193. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
+194. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
+195. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
+196. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
+197. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
+198. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
+199. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
+200. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
+201. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
+202. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+203. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
+204. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
+205. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
+206. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+207. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
+208. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
+209. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
+210. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+211. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
+212. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
+213. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
+214. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
+215. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
+216. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
+217. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
+218. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+219. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
+220. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
+221. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
+222. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
+223. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
+224. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
+225. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
+226. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
+227. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
+228. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
+229. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
+230. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
+231. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
+232. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
+233. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
+234. webpack.config.js - Lines: 103 - Chars: 2830 - Tokens: 708
 
 <file path=".gitignore">
 node_modules
@@ -862,7 +863,7 @@ I have analyzed the comprehensive feedback from Cycle 132. There are several reg
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C141 (Add Cycle 0 Onboarding Process Artifacts)
+# Updated on: C143 (Renumber Cycle 0 Templates and add Sample Prompt)
 
 ## 1. Purpose
 
@@ -1128,6 +1129,10 @@ I have analyzed the comprehensive feedback from Cycle 132. There are several reg
 - **Description:** Documents the plan for a special "Cycle 0" mode to guide new users in setting up their project by generating an initial set of planning documents.
 - **Tags:** feature plan, phase 2, onboarding, first-run, project setup
 
+### A71. Sample M0 Prompt.md
+- **Description:** An example of a fully-formed `prompt.md` file generated by the Cycle 0 onboarding experience.
+- **Tags:** example, cycle 0, onboarding, prompt
+
 ## II. Standalone Utilities & Guides
 
 ### A149. Local LLM Integration Plan
@@ -1140,43 +1145,43 @@ I have analyzed the comprehensive feedback from Cycle 132. There are several reg
 
 ## III. Cycle 0 Static Content Templates
 
-### A61. Template - Master Artifact List
+### T1. Template - Master Artifact List
 - **Description:** A generic template for a Master Artifact List, to be used as static context in the Cycle 0 prompt.
 - **Tags:** template, cycle 0, documentation, project setup
 
-### A62. Template - Project Vision and Goals
+### T2. Template - Project Vision and Goals
 - **Description:** A generic template for a Project Vision and Goals document.
 - **Tags:** template, cycle 0, documentation, project setup
 
-### A63. Template - Phase 1 Requirements & Design
+### T3. Template - Phase 1 Requirements & Design
 - **Description:** A generic template for a requirements and design document.
 - **Tags:** template, cycle 0, documentation, project setup
 
-### A64. Template - Technical Scaffolding Plan
+### T4. Template - Technical Scaffolding Plan
 - **Description:** A generic template for a technical scaffolding plan.
 - **Tags:** template, cycle 0, documentation, project setup
 
-### A65. Template - Target File Structure
+### T5. Template - Target File Structure
 - **Description:** A generic template for a target file structure document.
 - **Tags:** template, cycle 0, documentation, project setup
 
-### A66. Template - Initial Scaffolding Deployment Script
+### T6. Template - Initial Scaffolding Deployment Script
 - **Description:** A generic template for a scaffolding deployment script.
 - **Tags:** template, cycle 0, documentation, project setup
 
-### A67. Template - Development and Testing Guide
+### T7. Template - Development and Testing Guide
 - **Description:** A generic template for a development and testing guide.
 - **Tags:** template, cycle 0, documentation, project setup
 
-### A68. Template - Regression Case Studies
+### T8. Template - Regression Case Studies
 - **Description:** A generic template for a regression case studies document, promoting development best practices.
 - **Tags:** template, cycle 0, documentation, project setup
 
-### A69. Template - Logging and Debugging Guide
+### T9. Template - Logging and Debugging Guide
 - **Description:** A generic template for a logging and debugging guide.
 - **Tags:** template, cycle 0, documentation, project setup
 
-### A70. Template - Feature Plan Example
+### T10. Template - Feature Plan Example
 - **Description:** A generic template for a feature plan, using a right-click context menu as an example.
 - **Tags:** template, cycle 0, documentation, project setup
 </file>
@@ -6323,378 +6328,6 @@ The goal of the "Cycle 0" onboarding experience is to guide the user through thi
     *   A `ServerToClientChannel.Cycle0PromptGenerated` channel will signal the frontend to trigger a state reload.
 </file>
 
-<file path="src/Artifacts/A61. Template - Master Artifact List.md">
-# Artifact A61: Template - Master Artifact List
-# Date Created: C139
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A generic template for a Master Artifact List, to be used as static context in the Cycle 0 prompt.
-- **Tags:** template, cycle 0, documentation, project setup
-
-## 1. Purpose
-
-This file serves as the definitive, parseable list of all documentation artifacts for your project. Maintaining this list is crucial for organizing project knowledge and ensuring that both human developers and AI assistants have a clear map of the "Source of Truth" documents.
-
-## 2. Formatting Rules for Parsing
-
-*   Lines beginning with `#` are comments and are ignored.
-*   `##` denotes a major category header and is ignored.
-*   `###` denotes an artifact entry. The text following it is the artifact's full name and ID.
-*   Lines beginning with `- **Description:**` provide context for the project.
-*   Lines beginning with `- **Tags:**` provide keywords for Inference.
-
-## 3. Example Structure
-
-## I. Project Planning & Design
-
-### A1. [Your Project Name] - Project Vision and Goals
-- **Description:** High-level overview of the project, its purpose, and the development plan.
-- **Tags:** project vision, goals, scope, planning
-
-### A2. [Your Project Name] - Phase 1 - Requirements & Design
-- **Description:** Detailed functional and technical requirements for the first phase of the project.
-- **Tags:** requirements, design, phase 1, features
-</file>
-
-<file path="src/Artifacts/A62. Template - Project Vision and Goals.md">
-# Artifact A62: Template - Project Vision and Goals
-# Date Created: C139
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A generic template for a Project Vision and Goals document.
-- **Tags:** template, cycle 0, documentation, project setup
-
-## 1. Project Vision
-
-The vision of **[Your Project Name]** is to **[State the core problem you are solving and the ultimate goal of the project]**. It aims to provide a **[brief description of the product or system]** that will **[describe the key benefit or value proposition]**.
-
-## 2. High-Level Goals & Phases
-
-The project will be developed in distinct phases to ensure an iterative and manageable workflow.
-
-### Phase 1: [Name of Phase 1, e.g., Core Functionality]
-
-The goal of this phase is to establish the foundational elements of the project.
--   **Core Functionality:** [Describe the most critical feature to be built first].
--   **Outcome:** [Describe the state of the project at the end of this phase, e.g., "A user can perform the core action of X"].
-
-### Phase 2: [Name of Phase 2, e.g., Feature Expansion]
-
-This phase will build upon the foundation of Phase 1 by adding key features that enhance the user experience.
--   **Core Functionality:** [Describe the next set of important features].
--   **Outcome:** [Describe the state of the project at the end of this phase].
-
-### Phase 3: [Name of Phase 3, e.g., Scalability and Polish]
-
-This phase focuses on refining the product, improving performance, and ensuring it is ready for a wider audience.
--   **Core Functionality:** [Describe features related to performance, security, or advanced user interactions].
--   **Outcome:** [Describe the final, polished state of the project].
-</file>
-
-<file path="src/Artifacts/A63. Template - Phase 1 Requirements & Design.md">
-# Artifact A63: Template - Phase 1 Requirements & Design
-# Date Created: C139
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A generic template for a requirements and design document.
-- **Tags:** template, cycle 0, documentation, project setup
-
-## 1. Overview
-
-This document outlines the detailed requirements for Phase 1 of **[Your Project Name]**. The primary goal of this phase is to implement the core functionality as defined in the Project Vision.
-
-## 2. Functional Requirements
-
-| ID | Requirement | User Story | Acceptance Criteria |
-|---|---|---|---|
-| FR-01 | **[Feature Name]** | As a [user type], I want to [perform an action], so that [I can achieve a goal]. | - [Criterion 1: A specific, testable outcome] <br> - [Criterion 2: Another specific, testable outcome] |
-| FR-02 | **[Another Feature Name]** | As a [user type], I want to [perform an action], so that [I can achieve a goal]. | - [Criterion 1] <br> - [Criterion 2] |
-
-## 3. Non-Functional Requirements
-
-| ID | Requirement | Description |
-|---|---|---|
-| NFR-01 | **Performance** | The core action of [describe action] should complete in under [time, e.g., 500ms]. |
-| NFR-02 | **Usability** | The user interface should be intuitive and follow standard design conventions for [platform, e.g., web applications]. |
-
-## 4. High-Level Design
-
-The implementation of Phase 1 will involve the following components:
--   **[Component A]:** Responsible for [its primary function].
--   **[Component B]:** Responsible for [its primary function].
--   **[Data Model]:** The core data will be structured as [describe the basic data structure].
-</file>
-
-<file path="src/Artifacts/A64. Template - Technical Scaffolding Plan.md">
-# Artifact A64: Template - Technical Scaffolding Plan
-# Date Created: C139
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A generic template for a technical scaffolding plan.
-- **Tags:** template, cycle 0, documentation, project setup
-
-## 1. Overview
-
-This document outlines the proposed technical scaffolding and file structure for **[Your Project Name]**. This plan serves as a blueprint for the initial project setup, ensuring a clean, scalable, and maintainable architecture from the start.
-
-## 2. Technology Stack
-
--   **Language:** [e.g., TypeScript]
--   **Framework/Library:** [e.g., React, Node.js with Express]
--   **Styling:** [e.g., SCSS, TailwindCSS]
--   **Bundler:** [e.g., Webpack, Vite]
-
-## 3. Proposed File Structure
-
-The project will adhere to a standard, feature-driven directory structure:
-
-```
-.
-├── src/
-│   ├── components/       # Reusable UI components (e.g., Button, Modal)
-│   │
-│   ├── features/         # Feature-specific modules
-│   │   └── [feature-one]/
-│   │       ├── index.ts
-│   │       └── components/
-│   │
-│   ├── services/         # Core backend or client-side services (e.g., api.service.ts)
-│   │
-│   ├── types/            # Shared TypeScript type definitions
-│   │
-│   └── main.ts           # Main application entry point
-│
-├── package.json          # Project manifest and dependencies
-└── tsconfig.json         # TypeScript configuration
-```
-
-## 4. Key Architectural Concepts
-
--   **Separation of Concerns:** The structure separates UI components, feature logic, and core services.
--   **Component-Based UI:** The UI will be built by composing small, reusable components.
--   **Service Layer:** Business logic and external communication (e.g., API calls) will be encapsulated in services to keep components clean.
--   **Strong Typing:** TypeScript will be used throughout the project to ensure type safety and improve developer experience.
-</file>
-
-<file path="src/Artifacts/A65. Template - Target File Structure.md">
-# Artifact A65: Template - Target File Structure
-# Date Created: C139
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A generic template for a target file structure document.
-- **Tags:** template, cycle 0, documentation, project setup
-
-## 1. Overview
-
-This document provides a visual representation of the file structure that the `A66. Template - Initial Scaffolding Deployment Script` will create. It is based on the architecture defined in `A64. Template - Technical Scaffolding Plan`.
-
-## 2. File Tree
-
-```
-[Your Project Name]/
-├── .gitignore
-├── package.json
-├── tsconfig.json
-└── src/
-    ├── components/
-    │   └── placeholder.ts
-    ├── features/
-    │   └── placeholder.ts
-    ├── services/
-    │   └── placeholder.ts
-    ├── types/
-    │   └── index.ts
-    └── main.ts
-```
-</file>
-
-<file path="src/Artifacts/A66. Template - Initial Scaffolding Deployment Script.md">
-# Artifact A66: Template - Initial Scaffolding Deployment Script
-# Date Created: C139
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A generic template for a scaffolding deployment script.
-- **Tags:** template, cycle 0, documentation, project setup
-
-## 1. Overview
-
-This artifact contains a simple Node.js script (`deploy_scaffold.js`). Its purpose is to automate the creation of the initial project structure for **[Your Project Name]**, as outlined in `A65. Template - Target File Structure`.
-
-## 2. How to Use
-
-1.  Save the code below as `deploy_scaffold.js` in your project's root directory.
-2.  Open a terminal in that directory.
-3.  Run the script using Node.js: `node deploy_scaffold.js`
-
-## 3. Script: `deploy_scaffold.js`
-
-```javascript
-const fs = require('fs').promises;
-const path = require('path');
-
-const filesToCreate = [
-    { path: 'package.json', content: '{ "name": "my-new-project", "version": "0.0.1" }' },
-    { path: 'tsconfig.json', content: '{ "compilerOptions": { "strict": true } }' },
-    { path: '.gitignore', content: 'node_modules\ndist' },
-    { path: 'src/main.ts', content: '// Main application entry point' },
-    { path: 'src/components/placeholder.ts', content: '// Reusable components' },
-    { path: 'src/features/placeholder.ts', content: '// Feature modules' },
-    { path: 'src/services/placeholder.ts', content: '// Core services' },
-    { path: 'src/types/index.ts', content: '// Shared types' },
-];
-
-async function deployScaffold() {
-    console.log('Deploying project scaffold...');
-    const rootDir = process.cwd();
-
-    for (const file of filesToCreate) {
-        const fullPath = path.join(rootDir, file.path);
-        const dir = path.dirname(fullPath);
-
-        try {
-            await fs.mkdir(dir, { recursive: true });
-            await fs.writeFile(fullPath, file.content, 'utf-8');
-            console.log(`✅ Created: ${file.path}`);
-        } catch (error) {
-            console.error(`❌ Failed to create ${file.path}: ${error.message}`);
-        }
-    }
-    console.log('\n🚀 Scaffold deployment complete!');
-}
-
-deployScaffold();
-```
-</file>
-
-<file path="src/Artifacts/A67. Template - Development and Testing Guide.md">
-# Artifact A67: Template - Development and Testing Guide
-# Date Created: C139
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A generic template for a development and testing guide.
-- **Tags:** template, cycle 0, documentation, project setup
-
-## 1. Purpose
-
-This guide provides the standard procedure for running, debugging, and testing the **[Your Project Name]** application locally.
-
-## 2. Development Workflow
-
-### Step 1: Install Dependencies
-
-Ensure all project dependencies are installed using npm.
-```bash
-npm install
-```
-
-### Step 2: Start the Development Server
-
-To compile the code and watch for changes, run the following command:
-```bash
-npm run watch
-```
-This will start the development server and automatically recompile your code when you save a file.
-
-### Step 3: Running the Application
-
-[Describe the specific steps to launch the application. For a VS Code extension, this would involve pressing F5 to launch the Extension Development Host. For a web app, it would be opening a browser to `http://localhost:3000`.]
-
-### Step 4: Debugging
-
-You can set breakpoints directly in your source code. [Describe how to attach a debugger. For a VS Code extension, this is automatic when launched with F5.]
-
-## 3. Testing
-
-The project is configured with a testing framework. To run the test suite, use the following command:
-```bash
-npm run test
-```
-This will execute all test files located in the project and report the results to the console.
-</file>
-
-<file path="src/Artifacts/A68. Template - Regression Case Studies.md">
-# Artifact A68: Template - Regression Case Studies
-# Date Created: C141
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A generic template for a regression case studies document, promoting development best practices.
-- **Tags:** template, cycle 0, documentation, project setup
-
-## 1. Purpose
-
-This document serves as a living record of persistent or complex bugs that have recurred during development. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase.
-
-## 2. Case Studies
-
----
-
-### Case Study 001: [Name of the Bug]
-
--   **Artifacts Affected:** [List of files, e.g., `src/components/MyComponent.tsx`, `src/services/api.service.ts`]
--   **Cycles Observed:** [e.g., C10, C15]
--   **Symptom:** [Describe what the user sees. e.g., "When a user clicks the 'Save' button, the application crashes silently."]
--   **Root Cause Analysis (RCA):** [Describe the underlying technical reason for the bug. e.g., "The API service was not correctly handling a null response from the server. A race condition occurred where the UI component would unmount before the API promise resolved, leading to a state update on an unmounted component."]
--   **Codified Solution & Best Practice:**
-    1.  [Describe the specific code change, e.g., "The API service was updated to always return a default object instead of null."]
-    2.  [Describe the pattern or best practice to follow, e.g., "All API calls made within a React component's `useEffect` hook must include a cleanup function to cancel the request or ignore the result if the component unmounts."]
----
-</file>
-
-<file path="src/Artifacts/A69. Template - Logging and Debugging Guide.md">
-# Artifact A69: Template - Logging and Debugging Guide
-# Date Created: C141
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A generic template for a logging and debugging guide.
-- **Tags:** template, cycle 0, documentation, project setup
-
-## 1. Purpose
-
-This document provides instructions on how to access and use the logging features built into the project. Effective logging is crucial for diagnosing performance issues, tracking down bugs, and understanding the application's behavior during development.
-
-## 2. Log Locations
-
-### Location 1: The Browser Developer Console
-
-This is where you find logs from the **frontend**.
-
--   **What you'll see here:** `console.log()` statements from React components and client-side scripts.
--   **Where to find it:** Open your browser, right-click anywhere on the page, select "Inspect", and navigate to the "Console" tab.
-
-### Location 2: The Server Terminal
-
-This is where you find logs from the **backend** (the Node.js process).
-
--   **What you'll see here:** `console.log()` statements from your server-side code, API handlers, and services.
--   **Where to find it:** The terminal window where you started the server (e.g., via `npm start`).
-
-## 3. Tactical Debugging with Logs
-
-When a feature is not working as expected, the most effective debugging technique is to add **tactical logs** at every step of the data's journey to pinpoint where the process is failing.
-
-### Example Data Flow for Debugging:
-
-1.  **Frontend Component (`MyComponent.tsx`):** Log the user's input right before sending it.
-    `console.log('[Component] User clicked save. Sending data:', dataToSend);`
-2.  **Frontend Service (`api.service.ts`):** Log the data just before it's sent over the network.
-    `console.log('[API Service] Making POST request to /api/data with body:', body);`
-3.  **Backend Route (`server.ts`):** Log the data as soon as it's received by the server.
-    `console.log('[API Route] Received POST request on /api/data with body:', req.body);`
-4.  **Backend Service (`database.service.ts`):** Log the data just before it's written to the database.
-    `console.log('[DB Service] Attempting to write to database:', data);`
-
-By following the logs through this chain, you can identify exactly where the data becomes corrupted, is dropped, or causes an error.
-</file>
-
 <file path="src/Artifacts/A7. DCE - Development and Testing Guide.md">
 # Artifact A7: DCE - Development and Testing Guide
 # Date Created: Cycle 7
@@ -6745,34 +6378,83 @@ In the newly opened **Extension Development Host** window, look at the activity 
 You only need to stop the debugger (Shift+F5) and restart it (F5) if you make changes to configuration files like `package.json`. For all other code changes, simply reloading the host window is sufficient and much faster.
 </file>
 
-<file path="src/Artifacts/A70. Template - Feature Plan Example.md">
-# Artifact A70: Template - Feature Plan Example
-# Date Created: C141
-# Author: AI Model & Curator
+<file path="src/Artifacts/A71. Sample M0 Prompt.md">
+<prompt.md>
 
-- **Key/Value for A0:**
-- **Description:** A generic template for a feature plan, using a right-click context menu as an example.
-- **Tags:** template, cycle 0, documentation, project setup
+<M1. artifact schema>
+M1. artifact schema
+M2. cycle overview
+M3. interaction schema
+M4. current project scope
+M5. organized artifacts list
+M6. cycles
+M7. Flattened Repo
+</M1. artifact schema>
 
-## 1. Overview & Goal
+<M2. cycle overview>
+Current Cycle 0 - Project Initialization
+</M2. cycle overview>
 
-This document outlines the plan for implementing a standard right-click context menu. The goal is to provide essential management operations directly within the application, reducing the need for users to switch contexts for common tasks.
+<M3. Interaction Schema>
+1.  Artifacts are complete, individual texts enclosed in `<xmltags>`. To ensure consistent parsing by the DCE extension, all file artifacts **must** be enclosed in `<file path="path/to/file.ts">...</file>` tags. The path must be relative to the workspace root. The closing tag must be a simple `</file>`. Do not use the file path in the closing tag.
+2.  Our Document Artifacts serve as our `Source of Truth` throughout multiple cycles. As such, over time, as issues occur, or code repeatedly regresses in the same way, seek to align our `Source of Truth` such that the Root Cause of such occurances is codified so that it can be avoided on subsequent cycles visits to those Code artifacts.
+3.  Please output entire Document or Code artifacts. Do not worry about Token length. If your length continues for too long, and you reach the 600 second timeout, I will simply incorporate the work you did complete, and we can simply continue from where you left off. Better to have half of a solution to get started with, than not to have it. **Preference is for larger, more complete updates over smaller, incremental ones to align with the human curator's parallel processing workflow.** The human curator often sends the same prompt to multiple AI instances simultaneously and selects the most comprehensive response as the primary base for the next cycle, using other responses as supplementary information. Providing more complete updates increases the likelihood of a response being selected as the primary base.
+4.  Do not output artifacts that do not require updates in this cycle. (Eg. Do not do this: // Updated on: Cycle 1040 (No functional changes, only cycle header))
+5.  **Critical: `flattened_repo_v2.txt` contains all project files. Output updated *individual* files that are part of it (like `<src/state/coreStore.ts>...`). However, do **NOT** output the surrounding Artifact container tags (`<flattened_repo_v2.txt>...</flattened_repo_v2.txt>`) or any auto-generated metadata sections within it (like the Total Files summary, Top 10 list, or the `<files list>` section) which are created by the `flatten.js` script.**
+5.1. `flattened_repo_v2.txt` is a copy of the codebase, generated by a script; assume its an accurate representation of the existing codebase, but not necessarily a 'source of truth' like we treat our documents as, our codebase is a living artifact, documents, while we can update them, should be considered less transient.
+5.2. **`.local` File Convention:** To manage token count, some large data files (e.g., `researchNodes.ts`) may be represented by a truncated `.local.ts` version in the context. This version contains the essential structure and a few examples. If the full content of a file is required for a task (e.g., a comprehensive data refactor or fixing a bug related to a specific entry), explicitly state this need in your summary of actions and request that the curator swap the `.local.ts` file with the full `.ts` version in the `files_list.txt` for the subsequent cycle.
+6.  remember to output complete artifacts without placeholders, im taking your output, putting it in winmerge, and confirming we arent losing data in the update. when you provide placeholders, my cursory review turns into a meticulous file parsing, taking me from what is 5 seconds per artifact to upwards of 5 minutes, only to realize that the output is actually un-parseable, due to the nature of relativity, as the theory of relativity also applies to code. if you give me a code snippet, and do not give me the code surrounding that snippet, i do not know where that code should go. by providing the complete file, on the other hand, i can put it in a diff, see easily what was altered, and if anything was accidentally omitted or lost, i can be sure that it's retained.
+7.  **Update documentation before writing code.** document artifacts are like our project readme files, our source of truth. they are our blueprints. they guide the code we write. when we realize we need to alter our approach or invent new game mechanics, we update the source of truth first, cause english is easy and flexible, then we codify that.
+8.  this query is part of a larger software engineering project
+9.  After you complete delivery on a code artifact, review it to make sure you did not miss any intermediary files. for instance, if we have a DevelopmentSystem.ts, using the componentData.ts, which is displaying on the ComponentProductionTab.tsx. But then theres also still a DevPanel.tsx file that is in-between that *could*, but shouldnt, get overlooked.
+10. If you are deciding where to put a particular piece of code or function, and due to its nature, there are one or more candidate files that it could be placed in, choose the smaller file (in tokens).
+11. Begin your response with a course of action and end with a review of your work, surface any self corrections in the summary of changes for the subsequent cycle.
+12. do not underestimate how much you can accomplish in a given cycle; you'd only accomplish handicapping yourself. (Eg. you've authored this whole thing with just my guidance. good job, keep it up.)
+13. Not as relevant for this project: **Log State Button:** The 'Log State' button in the `DevInfoOverlay` is a dynamic debugging tool. Modify the `triggerDebugLogs` action in `uiStore.ts` to output specific state information relevant to the current bug being investigated. **See A85 (Logging Guide) for usage details.**
+14. Not as relevant for this project: **Regression Case Studies:** Use Artifact A106 to document persistent or complex bugs and their resolutions. Add entries *after* a fix is confirmed to codify the RCA and solution, preventing future regressions.
+15. Include in your cycle summary, a short list of files you've updated. This makes it easy for my reviews.
+16. if you seem to have spare time in a cycle, see if you can spot any particular file with excessive levels of comments or logging that seems extensive and for troubleshooting an error that has since been resolved, see to it to clean those files but preserve their functionalities. im just looking to shave off excess tokens wherever possible in the master_content.txt file.
+17. if you see `(No change from C850)` such language, it's data loss. there was supposed to be actual language behind that placeholder, but in one iteration (C850, in this case) you had provided a placeholder, and i 'missed it' and did not capture the initial information. you either need to deliver the placeholder in such a way as i can easily press the left arrow instead of the rigth arrow in winmerge to not accept that part, but to also not have winmerge confuse it with the rest, otherwise i must manually parse the information. when the process is a single keystroke, i can manage it quickly enough. when we remove that ability because you provided me data in a format that has placeholders AND the placeholders do not parse within winmerge such that it removes the benefit winmerge is adding, then we have our problem. when you see this, try to correct it using whatever current relevant context you have.
+18. basically, you should not worry about brevity, because when you go too long, your response gets interrupted by the system anyway. its better that the products you do deliver are all complete except for the last one, rather than you delivering all incomplete products, including the last one. does that make sense?
+19. remember, do not stop outputting for the reason of preventing a potential artifact interruption mid-output. you actually end up stopping yourself from producting two or three additional files before you actually get interrupted. what i mean is, in the outputs where you do not do this, you produce for 500 seconds, producing 7-9 files, and only the last one is interrupted and unusable. compared to when you stop yourself prematurely, for the reason stated, and you produce for 180 seconds and provide maybe 3-4 files. even with the -1, producing as much as you can still outperforms the alternative.
+20. This is a misaligned statement: `// (For full history, see master_content.txt)` because your changes get rolled into master_content.txt. therefore, if you remove the history, then when your updates are rolled in, they will remove the full history. understand? after a while, the history is not relevant and can be rolled out, for a while, it ought to stay. you can see what we're working on + the current cycle and make this determination.
+21. Each time we create a new documentation artifact, lets also create the key/value pairs needed for me to add it into our Master Artifact List. they can simply be added into the new artifact itself and ill make the new entry in A0. this will solve for me manually generating a description and tag for each new documentation artifact. also, dont place `/` in the title/name of a documentation artifact. VSCode treats it as a folder separator.
+21.1. when creating a new documentation artifact, also just update the master artifacts list itself.
+</M3. Interaction Schema>
 
-## 2. User Stories
+<M4. current project scope>
+I want to build a turn-based tactical RPG game using the Phaser game engine and TypeScript. The game should feature a grid-based combat system similar to Final Fantasy Tactics or XCOM.
+</M4. current project scope>
 
-| ID | User Story | Acceptance Criteria |
-|---|---|---|
-| US-01 | **Copy Item Name** | As a user, I want to right-click an item and copy its name to my clipboard, so I can easily reference it elsewhere. | - Right-clicking an item opens a context menu. <br> - The menu contains a "Copy Name" option. <br> - Selecting the option copies the item's name string to the system clipboard. |
-| US-02 | **Rename Item** | As a user, I want to right-click an item and rename it, so I can correct mistakes or update its label. | - The context menu contains a "Rename" option. <br> - Selecting it turns the item's name into an editable input field. <br> - Pressing Enter or clicking away saves the new name. |
-| US-03 | **Delete Item** | As a user, I want to right-click an item and delete it, so I can remove unnecessary items. | - The context menu contains a "Delete" option. <br> - Selecting it shows a confirmation dialog to prevent accidental deletion. <br> - Upon confirmation, the item is removed. |
+<M5. organized artifacts list>
+# No artifacts exist yet.
+</M5. organized artifacts list>
 
-## 3. Technical Implementation Plan
+<M6. Cycles>
+<Cycle 0>
+<Cycle Context>
+Review the user's project scope in M4. Your task is to act as a senior project architect and begin establishing the necessary documentation to achieve the user's goals. You have been provided with a set of best-practice templates for software engineering documentation as static context. Use these examples to guide your output. Your first response should be to generate a starter set of artifacts for this new project. Begin by creating a Master Artifact List (A0), similar to the provided template, and then create the first few essential planning documents (e.g., Project Vision, High-Level Requirements).
+</Cycle Context>
+<Static Context>
+<T1. Template - Master Artifact List.md>
+...
+</T1. Template - Master Artifact List.md>
 
--   **State Management:** Introduce new state to manage the context menu's visibility and position: `const [contextMenu, setContextMenu] = useState<{ x: number; y: number; item: any } | null>(null);`.
--   **Event Handling:** Add an `onContextMenu` handler to the item element. This will prevent the default browser menu and set the state to show our custom menu at the event's coordinates.
--   **New Menu Component:** Render a custom context menu component conditionally based on the `contextMenu` state. It will contain the options defined in the user stories.
--   **Action Handlers:** Implement the functions for `handleRename`, `handleDelete`, etc. These will be called by the menu items' `onClick` handlers.
--   **Overlay:** An overlay will be added to the entire screen when the menu is open. Clicking this overlay will close the menu.
+<T2. Template - Project Vision and Goals.md>
+...
+</T2. Template - Project Vision and Goals.md>
+
+... (and so on for all templates T1-T10) ...
+
+</Static Context>
+</Cycle 0>
+</M6. Cycles>
+
+<M7. Flattened Repo>
+<!-- No files selected for initial prompt -->
+</M7. Flattened Repo>
+
+</prompt.md>
 </file>
 
 <file path="src/Artifacts/A8. DCE - Phase 1 - Selection Sets Feature Plan.md">
@@ -6915,6 +6597,407 @@ Now, you will link your local repository to the empty one you created on GitHub.
 
 After these commands complete, refresh your GitHub repository page. You should see all of your project files. You have successfully created and linked your repository!
 ```
+</file>
+
+<file path="src/Artifacts/T1. Template - Master Artifact List.md">
+# Artifact T1: Template - Master Artifact List
+# Date Created: C139
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a Master Artifact List, to be used as static context in the Cycle 0 prompt.
+- **Tags:** template, cycle 0, documentation, project setup
+
+## 1. Purpose
+
+This file serves as the definitive, parseable list of all documentation artifacts for your project. Maintaining this list is crucial for organizing project knowledge and ensuring that both human developers and AI assistants have a clear map of the "Source of Truth" documents.
+
+## 2. Formatting Rules for Parsing
+
+*   Lines beginning with `#` are comments and are ignored.
+*   `##` denotes a major category header and is ignored.
+*   `###` denotes an artifact entry. The text following it is the artifact's full name and ID.
+*   Lines beginning with `- **Description:**` provide context for the project.
+*   Lines beginning with `- **Tags:**` provide keywords for Inference.
+
+## 3. Example Structure
+
+## I. Project Planning & Design
+
+### A1. [Your Project Name] - Project Vision and Goals
+- **Description:** High-level overview of the project, its purpose, and the development plan.
+- **Tags:** project vision, goals, scope, planning
+
+### A2. [Your Project Name] - Phase 1 - Requirements & Design
+- **Description:** Detailed functional and technical requirements for the first phase of the project.
+- **Tags:** requirements, design, phase 1, features
+</file>
+
+<file path="src/Artifacts/T10. Template - Feature Plan Example.md">
+# Artifact T10: Template - Feature Plan Example
+# Date Created: C141
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a feature plan, using a right-click context menu as an example.
+- **Tags:** template, cycle 0, documentation, project setup
+
+## 1. Overview & Goal
+
+This document outlines the plan for implementing a standard right-click context menu. The goal is to provide essential management operations directly within the application, reducing the need for users to switch contexts for common tasks.
+
+## 2. User Stories
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| US-01 | **Copy Item Name** | As a user, I want to right-click an item and copy its name to my clipboard, so I can easily reference it elsewhere. | - Right-clicking an item opens a context menu. <br> - The menu contains a "Copy Name" option. <br> - Selecting the option copies the item's name string to the system clipboard. |
+| US-02 | **Rename Item** | As a user, I want to right-click an item and rename it, so I can correct mistakes or update its label. | - The context menu contains a "Rename" option. <br> - Selecting it turns the item's name into an editable input field. <br> - Pressing Enter or clicking away saves the new name. |
+| US-03 | **Delete Item** | As a user, I want to right-click an item and delete it, so I can remove unnecessary items. | - The context menu contains a "Delete" option. <br> - Selecting it shows a confirmation dialog to prevent accidental deletion. <br> - Upon confirmation, the item is removed. |
+
+## 3. Technical Implementation Plan
+
+-   **State Management:** Introduce new state to manage the context menu's visibility and position: `const [contextMenu, setContextMenu] = useState<{ x: number; y: number; item: any } | null>(null);`.
+-   **Event Handling:** Add an `onContextMenu` handler to the item element. This will prevent the default browser menu and set the state to show our custom menu at the event's coordinates.
+-   **New Menu Component:** Render a custom context menu component conditionally based on the `contextMenu` state. It will contain the options defined in the user stories.
+-   **Action Handlers:** Implement the functions for `handleRename`, `handleDelete`, etc. These will be called by the menu items' `onClick` handlers.
+-   **Overlay:** An overlay will be added to the entire screen when the menu is open. Clicking this overlay will close the menu.
+</file>
+
+<file path="src/Artifacts/T2. Template - Project Vision and Goals.md">
+# Artifact T2: Template - Project Vision and Goals
+# Date Created: C139
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a Project Vision and Goals document.
+- **Tags:** template, cycle 0, documentation, project setup
+
+## 1. Project Vision
+
+The vision of **[Your Project Name]** is to **[State the core problem you are solving and the ultimate goal of the project]**. It aims to provide a **[brief description of the product or system]** that will **[describe the key benefit or value proposition]**.
+
+## 2. High-Level Goals & Phases
+
+The project will be developed in distinct phases to ensure an iterative and manageable workflow.
+
+### Phase 1: [Name of Phase 1, e.g., Core Functionality]
+
+The goal of this phase is to establish the foundational elements of the project.
+-   **Core Functionality:** [Describe the most critical feature to be built first].
+-   **Outcome:** [Describe the state of the project at the end of this phase, e.g., "A user can perform the core action of X"].
+
+### Phase 2: [Name of Phase 2, e.g., Feature Expansion]
+
+This phase will build upon the foundation of Phase 1 by adding key features that enhance the user experience.
+-   **Core Functionality:** [Describe the next set of important features].
+-   **Outcome:** [Describe the state of the project at the end of this phase].
+
+### Phase 3: [Name of Phase 3, e.g., Scalability and Polish]
+
+This phase focuses on refining the product, improving performance, and ensuring it is ready for a wider audience.
+-   **Core Functionality:** [Describe features related to performance, security, or advanced user interactions].
+-   **Outcome:** [Describe the final, polished state of the project].
+</file>
+
+<file path="src/Artifacts/T3. Template - Phase 1 Requirements & Design.md">
+# Artifact T3: Template - Phase 1 Requirements & Design
+# Date Created: C139
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a requirements and design document.
+- **Tags:** template, cycle 0, documentation, project setup
+
+## 1. Overview
+
+This document outlines the detailed requirements for Phase 1 of **[Your Project Name]**. The primary goal of this phase is to implement the core functionality as defined in the Project Vision.
+
+## 2. Functional Requirements
+
+| ID | Requirement | User Story | Acceptance Criteria |
+|---|---|---|---|
+| FR-01 | **[Feature Name]** | As a [user type], I want to [perform an action], so that [I can achieve a goal]. | - [Criterion 1: A specific, testable outcome] <br> - [Criterion 2: Another specific, testable outcome] |
+| FR-02 | **[Another Feature Name]** | As a [user type], I want to [perform an action], so that [I can achieve a goal]. | - [Criterion 1] <br> - [Criterion 2] |
+
+## 3. Non-Functional Requirements
+
+| ID | Requirement | Description |
+|---|---|---|
+| NFR-01 | **Performance** | The core action of [describe action] should complete in under [time, e.g., 500ms]. |
+| NFR-02 | **Usability** | The user interface should be intuitive and follow standard design conventions for [platform, e.g., web applications]. |
+
+## 4. High-Level Design
+
+The implementation of Phase 1 will involve the following components:
+-   **[Component A]:** Responsible for [its primary function].
+-   **[Component B]:** Responsible for [its primary function].
+-   **[Data Model]:** The core data will be structured as [describe the basic data structure].
+</file>
+
+<file path="src/Artifacts/T4. Template - Technical Scaffolding Plan.md">
+# Artifact T4: Template - Technical Scaffolding Plan
+# Date Created: C139
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a technical scaffolding plan.
+- **Tags:** template, cycle 0, documentation, project setup
+
+## 1. Overview
+
+This document outlines the proposed technical scaffolding and file structure for **[Your Project Name]**. This plan serves as a blueprint for the initial project setup, ensuring a clean, scalable, and maintainable architecture from the start.
+
+## 2. Technology Stack
+
+-   **Language:** [e.g., TypeScript]
+-   **Framework/Library:** [e.g., React, Node.js with Express]
+-   **Styling:** [e.g., SCSS, TailwindCSS]
+-   **Bundler:** [e.g., Webpack, Vite]
+
+## 3. Proposed File Structure
+
+The project will adhere to a standard, feature-driven directory structure:
+
+```
+.
+├── src/
+│   ├── components/       # Reusable UI components (e.g., Button, Modal)
+│   │
+│   ├── features/         # Feature-specific modules
+│   │   └── [feature-one]/
+│   │       ├── index.ts
+│   │       └── components/
+│   │
+│   ├── services/         # Core backend or client-side services (e.g., api.service.ts)
+│   │
+│   ├── types/            # Shared TypeScript type definitions
+│   │
+│   └── main.ts           # Main application entry point
+│
+├── package.json          # Project manifest and dependencies
+└── tsconfig.json         # TypeScript configuration
+```
+
+## 4. Key Architectural Concepts
+
+-   **Separation of Concerns:** The structure separates UI components, feature logic, and core services.
+-   **Component-Based UI:** The UI will be built by composing small, reusable components.
+-   **Service Layer:** Business logic and external communication (e.g., API calls) will be encapsulated in services to keep components clean.
+-   **Strong Typing:** TypeScript will be used throughout the project to ensure type safety and improve developer experience.
+</file>
+
+<file path="src/Artifacts/T5. Template - Target File Structure.md">
+# Artifact T5: Template - Target File Structure
+# Date Created: C139
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a target file structure document.
+- **Tags:** template, cycle 0, documentation, project setup
+
+## 1. Overview
+
+This document provides a visual representation of the file structure that the `T6. Template - Initial Scaffolding Deployment Script` will create. It is based on the architecture defined in `T4. Template - Technical Scaffolding Plan`.
+
+## 2. File Tree
+
+```
+[Your Project Name]/
+├── .gitignore
+├── package.json
+├── tsconfig.json
+└── src/
+    ├── components/
+    │   └── placeholder.ts
+    ├── features/
+    │   └── placeholder.ts
+    ├── services/
+    │   └── placeholder.ts
+    ├── types/
+    │   └── index.ts
+    └── main.ts
+```
+</file>
+
+<file path="src/Artifacts/T6. Template - Initial Scaffolding Deployment Script.md">
+# Artifact T6: Template - Initial Scaffolding Deployment Script
+# Date Created: C139
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a scaffolding deployment script.
+- **Tags:** template, cycle 0, documentation, project setup
+
+## 1. Overview
+
+This artifact contains a simple Node.js script (`deploy_scaffold.js`). Its purpose is to automate the creation of the initial project structure for **[Your Project Name]**, as outlined in `T5. Template - Target File Structure`.
+
+## 2. How to Use
+
+1.  Save the code below as `deploy_scaffold.js` in your project's root directory.
+2.  Open a terminal in that directory.
+3.  Run the script using Node.js: `node deploy_scaffold.js`
+
+## 3. Script: `deploy_scaffold.js`
+
+```javascript
+const fs = require('fs').promises;
+const path = require('path');
+
+const filesToCreate = [
+    { path: 'package.json', content: '{ "name": "my-new-project", "version": "0.0.1" }' },
+    { path: 'tsconfig.json', content: '{ "compilerOptions": { "strict": true } }' },
+    { path: '.gitignore', content: 'node_modules\ndist' },
+    { path: 'src/main.ts', content: '// Main application entry point' },
+    { path: 'src/components/placeholder.ts', content: '// Reusable components' },
+    { path: 'src/features/placeholder.ts', content: '// Feature modules' },
+    { path: 'src/services/placeholder.ts', content: '// Core services' },
+    { path: 'src/types/index.ts', content: '// Shared types' },
+];
+
+async function deployScaffold() {
+    console.log('Deploying project scaffold...');
+    const rootDir = process.cwd();
+
+    for (const file of filesToCreate) {
+        const fullPath = path.join(rootDir, file.path);
+        const dir = path.dirname(fullPath);
+
+        try {
+            await fs.mkdir(dir, { recursive: true });
+            await fs.writeFile(fullPath, file.content, 'utf-8');
+            console.log(`✅ Created: ${file.path}`);
+        } catch (error) {
+            console.error(`❌ Failed to create ${file.path}: ${error.message}`);
+        }
+    }
+    console.log('\n🚀 Scaffold deployment complete!');
+}
+
+deployScaffold();
+```
+</file>
+
+<file path="src/Artifacts/T7. Template - Development and Testing Guide.md">
+# Artifact T7: Template - Development and Testing Guide
+# Date Created: C139
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a development and testing guide.
+- **Tags:** template, cycle 0, documentation, project setup
+
+## 1. Purpose
+
+This guide provides the standard procedure for running, debugging, and testing the **[Your Project Name]** application locally.
+
+## 2. Development Workflow
+
+### Step 1: Install Dependencies
+
+Ensure all project dependencies are installed using npm.
+```bash
+npm install
+```
+
+### Step 2: Start the Development Server
+
+To compile the code and watch for changes, run the following command:```bash
+npm run watch
+```
+This will start the development server and automatically recompile your code when you save a file.
+
+### Step 3: Running the Application
+
+[Describe the specific steps to launch the application. For a VS Code extension, this would involve pressing F5 to launch the Extension Development Host. For a web app, it would be opening a browser to `http://localhost:3000`.]
+
+### Step 4: Debugging
+
+You can set breakpoints directly in your source code. [Describe how to attach a debugger. For a VS Code extension, this is automatic when launched with F5.]
+
+## 3. Testing
+
+The project is configured with a testing framework. To run the test suite, use the following command:
+```bash
+npm run test
+```
+This will execute all test files located in the project and report the results to the console.
+</file>
+
+<file path="src/Artifacts/T8. Template - Regression Case Studies.md">
+# Artifact T8: Template - Regression Case Studies
+# Date Created: C141
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a regression case studies document, promoting development best practices.
+- **Tags:** template, cycle 0, documentation, project setup
+
+## 1. Purpose
+
+This document serves as a living record of persistent or complex bugs that have recurred during development. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase.
+
+## 2. Case Studies
+
+---
+
+### Case Study 001: [Name of the Bug]
+
+-   **Artifacts Affected:** [List of files, e.g., `src/components/MyComponent.tsx`, `src/services/api.service.ts`]
+-   **Cycles Observed:** [e.g., C10, C15]
+-   **Symptom:** [Describe what the user sees. e.g., "When a user clicks the 'Save' button, the application crashes silently."]
+-   **Root Cause Analysis (RCA):** [Describe the underlying technical reason for the bug. e.g., "The API service was not correctly handling a null response from the server. A race condition occurred where the UI component would unmount before the API promise resolved, leading to a state update on an unmounted component."]
+-   **Codified Solution & Best Practice:**
+    1.  [Describe the specific code change, e.g., "The API service was updated to always return a default object instead of null."]
+    2.  [Describe the pattern or best practice to follow, e.g., "All API calls made within a React component's `useEffect` hook must include a cleanup function to cancel the request or ignore the result if the component unmounts."]
+---
+</file>
+
+<file path="src/Artifacts/T9. Template - Logging and Debugging Guide.md">
+# Artifact T9: Template - Logging and Debugging Guide
+# Date Created: C141
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a logging and debugging guide.
+- **Tags:** template, cycle 0, documentation, project setup
+
+## 1. Purpose
+
+This document provides instructions on how to access and use the logging features built into the project. Effective logging is crucial for diagnosing performance issues, tracking down bugs, and understanding the application's behavior during development.
+
+## 2. Log Locations
+
+### Location 1: The Browser Developer Console
+
+This is where you find logs from the **frontend**.
+
+-   **What you'll see here:** `console.log()` statements from React components and client-side scripts.
+-   **Where to find it:** Open your browser, right-click anywhere on the page, select "Inspect", and navigate to the "Console" tab.
+
+### Location 2: The Server Terminal
+
+This is where you find logs from the **backend** (the Node.js process).
+
+-   **What you'll see here:** `console.log()` statements from your server-side code, API handlers, and services.
+-   **Where to find it:** The terminal window where you started the server (e.g., via `npm start`).
+
+## 3. Tactical Debugging with Logs
+
+When a feature is not working as expected, the most effective debugging technique is to add **tactical logs** at every step of the data's journey to pinpoint where the process is failing.
+
+### Example Data Flow for Debugging:
+
+1.  **Frontend Component (`MyComponent.tsx`):** Log the user's input right before sending it.
+    `console.log('[Component] User clicked save. Sending data:', dataToSend);`
+2.  **Frontend Service (`api.service.ts`):** Log the data just before it's sent over the network.
+    `console.log('[API Service] Making POST request to /api/data with body:', body);`
+3.  **Backend Route (`server.ts`):** Log the data as soon as it's received by the server.
+    `console.log('[API Route] Received POST request on /api/data with body:', req.body);`
+4.  **Backend Service (`database.service.ts`):** Log the data just before it's written to the database.
+    `console.log('[DB Service] Attempting to write to database:', data);`
+
+By following the logs through this chain, you can identify exactly where the data becomes corrupted, is dropped, or causes an error.
 </file>
 
 <file path="src/backend/commands/commands.ts">
@@ -8475,7 +8558,7 @@ ${cyclesContent}
             Services.loggerService.log("Generating Cycle 0 prompt.md file...");
 
             const artifactFilenameMap: { [key: string]: string } = {
-                'A61': 'A61. Template - Master Artifact List.md', 'A62': 'A62. Template - Project Vision and Goals.md', 'A63': 'A63. Template - Phase 1 Requirements & Design.md', 'A64': 'A64. Template - Technical Scaffolding Plan.md', 'A65': 'A65. Template - Target File Structure.md', 'A66': 'A66. Template - Initial Scaffolding Deployment Script.md', 'A67': 'A67. Template - Development and Testing Guide.md', 'A68': 'A68. Template - Regression Case Studies.md', 'A69': 'A69. Template - Logging and Debugging Guide.md', 'A70': 'A70. Template - Feature Plan Example.md'
+                'T1': 'T1. Template - Master Artifact List.md', 'T2': 'T2. Template - Project Vision and Goals.md', 'T3': 'T3. Template - Phase 1 Requirements & Design.md', 'T4': 'T4. Template - Technical Scaffolding Plan.md', 'T5': 'T5. Template - Target File Structure.md', 'T6': 'T6. Template - Initial Scaffolding Deployment Script.md', 'T7': 'T7. Template - Development and Testing Guide.md', 'T8': 'T8. Template - Regression Case Studies.md', 'T9': 'T9. Template - Logging and Debugging Guide.md', 'T10': 'T10. Template - Feature Plan Example.md'
             };
 
             let staticContext = '';
@@ -8519,7 +8602,9 @@ ${staticContext.trim()}
             
             vscode.window.showInformationMessage(`Successfully generated initial prompt.md and created src/Artifacts/A0...`);
 
-            serverIpc.sendToClient(ServerToClientChannel.Cycle0PromptGenerated, {});
+            // Get the new cycle data (should be Cycle 1 now) and send it to the client
+            const newCycleData = await Services.historyService.getLatestCycle();
+            serverIpc.sendToClient(ServerToClientChannel.SendLatestCycleData, { cycleData: newCycleData });
 
         } catch (error: any) {
             vscode.window.showErrorMessage(`Failed to generate Cycle 0 prompt: ${error.message}`);
@@ -12429,7 +12514,7 @@ body {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
-// Updated on: C142 (Enable navigation back to cycle 0)
+// Updated on: C143 (Remove Cycle0PromptGenerated listener)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -12611,11 +12696,6 @@ const App = () => {
         clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); });
         clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { logger.log(`Received FilesWritten event for: ${paths.join(', ')}`); setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); });
         
-        clientIpc.onServerMessage(ServerToClientChannel.Cycle0PromptGenerated, () => {
-            logger.log("Cycle 0 prompt generated. Requesting latest cycle data to transition view.");
-            clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});
-        });
-
         clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});
     }, [clientIpc]);
 
@@ -12836,7 +12916,6 @@ export enum ServerToClientChannel {
     SendLatestCycleData = "serverToClient.sendLatestCycleData",
     SendCycleData = "serverToClient.sendCycleData",
     FilesWritten = "serverToClient.filesWritten",
-    Cycle0PromptGenerated = "serverToClient.cycle0PromptGenerated",
 }
 </file>
 
@@ -12905,7 +12984,6 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SendLatestCycleData ? { cycleData: PcppCycle } :
     T extends ServerToClientChannel.SendCycleData ? { cycleData: PcppCycle | null } :
     T extends ServerToClientChannel.FilesWritten ? { paths: string[] } :
-    T extends ServerToClientChannel.Cycle0PromptGenerated ? {} :
     never;
 </file>
 

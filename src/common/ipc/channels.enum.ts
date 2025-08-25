@@ -68,5 +68,4 @@ export enum ServerToClientChannel {
     SendLatestCycleData = "serverToClient.sendLatestCycleData",
     SendCycleData = "serverToClient.sendCycleData",
     FilesWritten = "serverToClient.filesWritten",
-    Cycle0PromptGenerated = "serverToClient.cycle0PromptGenerated",
 }
