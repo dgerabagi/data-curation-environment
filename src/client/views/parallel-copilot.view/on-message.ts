@@ -1,4 +1,4 @@
-// Updated on: C139 (Add handler for Cycle 0 prompt)
+// Updated on: C141 (Add handler for Cycle 0 prompt)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -12,7 +12,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestCreateCycle0Prompt, (data) => {
-        promptService.generateCycle0Prompt(data.projectScope);
+        promptService.generateCycle0Prompt(data.projectScope, serverIpc);
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestFileExistence, (data) => {

@@ -1,4 +1,4 @@
-// Updated on: C139 (Add conditional rendering for OnboardingView)
+// Updated on: C141 (Add listener for Cycle0PromptGenerated to trigger reload)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -103,7 +103,7 @@ const App = () => {
     const clientIpc = ClientPostMessageManager.getInstance();
 
     const saveCurrentCycleState = React.useCallback(() => {
-        if (currentCycle === null || currentCycle === 0) return; // Do not save for Cycle 0
+        if (currentCycle === null || currentCycle === 0) return;
         const responses: { [key: string]: PcppResponse } = {};
         for (let i = 1; i <= tabCount; i++) {
             responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' };
@@ -181,6 +181,11 @@ const App = () => {
         clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); });
         clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { logger.log(`Received FilesWritten event for: ${paths.join(', ')}`); setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); });
         
+        clientIpc.onServerMessage(ServerToClientChannel.Cycle0PromptGenerated, () => {
+            logger.log("Cycle 0 prompt generated. Requesting latest cycle data to transition view.");
+            clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});
+        });
+
         clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});
     }, [clientIpc]);
 

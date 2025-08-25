@@ -1,4 +1,4 @@
-// Updated on: C139 (Add Cycle 0 prompt generation)
+// Updated on: C141 (Fix static context generation, add A0 creation)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -6,6 +6,8 @@ import { Services } from './services';
 import { parseResponse } from '@/client/utils/response-parser';
 import { PcppCycle } from '@/common/types/pcpp.types';
 import { truncateCodeForLogging } from '@/common/utils/formatting';
+import { ServerPostMessageManager } from '@/common/ipc/server-ipc';
+import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 
 export class PromptService {
     private artifactSchemaTemplate = `<M1. artifact schema>
@@ -219,7 +221,7 @@ ${cyclesContent}
         }
     }
 
-    public async generateCycle0Prompt(projectScope: string) {
+    public async generateCycle0Prompt(projectScope: string, serverIpc: ServerPostMessageManager) {
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (!workspaceFolders || workspaceFolders.length === 0) {
             vscode.window.showErrorMessage("Cannot generate prompt: No workspace folder is open.");
@@ -232,26 +234,28 @@ ${cyclesContent}
         try {
             Services.loggerService.log("Generating Cycle 0 prompt.md file...");
 
-            const templateArtifacts = ['A61', 'A62', 'A63', 'A64', 'A65', 'A66', 'A67'];
+            const artifactFilenameMap: { [key: string]: string } = {
+                'A61': 'A61. Template - Master Artifact List.md',
+                'A62': 'A62. Template - Project Vision and Goals.md',
+                'A63': 'A63. Template - Phase 1 Requirements & Design.md',
+                'A64': 'A64. Template - Technical Scaffolding Plan.md',
+                'A65': 'A65. Template - Target File Structure.md',
+                'A66': 'A66. Template - Initial Scaffolding Deployment Script.md',
+                'A67': 'A67. Template - Development and Testing Guide.md',
+                'A68': 'A68. Template - Regression Case Studies.md',
+                'A69': 'A69. Template - Logging and Debugging Guide.md',
+                'A70': 'A70. Template - Feature Plan Example.md'
+            };
+
             let staticContext = '';
-            for (const artifactId of templateArtifacts) {
-                const artifactPath = path.join(artifactsPath, `${artifactId}. Template - Master Artifact List.md`); // This is wrong, need to fix filenames.
-                // Correcting filenames based on my own plan.
-                const artifactFilenameMap: { [key: string]: string } = {
-                    'A61': 'A61. Template - Master Artifact List.md',
-                    'A62': 'A62. Template - Project Vision and Goals.md',
-                    'A63': 'A63. Template - Phase 1 Requirements & Design.md',
-                    'A64': 'A64. Template - Technical Scaffolding Plan.md',
-                    'A65': 'A65. Template - Target File Structure.md',
-                    'A66': 'A66. Template - Initial Scaffolding Deployment Script.md',
-                    'A67': 'A67. Template - Development and Testing Guide.md'
-                };
-                const correctArtifactPath = path.join(artifactsPath, artifactFilenameMap[artifactId]);
+            for (const artifactId in artifactFilenameMap) {
+                const filename = artifactFilenameMap[artifactId];
+                const artifactPath = path.join(artifactsPath, filename);
                 try {
-                    const content = await fs.readFile(correctArtifactPath, 'utf-8');
-                    staticContext += `<${artifactFilenameMap[artifactId]}>\n${content}\n</${artifactFilenameMap[artifactId]}>\n\n`;
+                    const content = await fs.readFile(artifactPath, 'utf-8');
+                    staticContext += `<${filename}>\n${content}\n</${filename}>\n\n`;
                 } catch (e) {
-                    Services.loggerService.warn(`Could not read template artifact: ${correctArtifactPath}`);
+                    Services.loggerService.warn(`Could not read template artifact: ${artifactPath}`);
                 }
             }
 
@@ -265,16 +269,18 @@ Your first response should be to generate a starter set of artifacts for this ne
 </Cycle Context>
 
 <Static Context>
-${staticContext}
+${staticContext.trim()}
 </Static Context>
 </Cycle 0>`;
+
+            const projectScopeContent = `<M4. current project scope>\n${projectScope}\n</M4. current project scope>`;
 
             const promptParts = [
                 `<prompt.md>`,
                 this.artifactSchemaTemplate,
                 `<M2. cycle overview>\nCurrent Cycle 0 - Project Initialization\n</M2. cycle overview>`,
                 this.interactionSchemaTemplate,
-                `<M4. current project scope>\n${projectScope}\n</M4. current project scope>`,
+                projectScopeContent,
                 `<M5. organized artifacts list>\n# No artifacts exist yet.\n</M5. organized artifacts list>`,
                 `<M6. Cycles>\n${cycle0Content}\n</M6. Cycles>`,
                 `<M7. Flattened Repo>\n<!-- No files selected for initial prompt -->\n</M7. Flattened Repo>`,
@@ -285,6 +291,16 @@ ${staticContext}
             await fs.writeFile(promptMdPath, finalPrompt, 'utf-8');
             vscode.window.showInformationMessage(`Successfully generated initial prompt.md for Cycle 0.`);
             Services.loggerService.log("Successfully generated Cycle 0 prompt.md file.");
+
+            // Create empty A0 artifact
+            const a0Path = path.join(artifactsPath, 'A0. DCE Master Artifact List.md');
+            const a0InitialContent = `# Artifact A0: [Your Project Name] Master Artifact List\n# Date Created: C0\n\n## 1. Purpose\n\n# This file serves as the definitive, parseable list of all documentation artifacts for your project.`;
+            await fs.writeFile(a0Path, a0InitialContent, 'utf-8');
+            Services.loggerService.log("Created empty A0 Master Artifact List.");
+
+            // Notify frontend
+            serverIpc.sendToClient(ServerToClientChannel.Cycle0PromptGenerated, {});
+
         } catch (error: any) {
             vscode.window.showErrorMessage(`Failed to generate Cycle 0 prompt: ${error.message}`);
             Services.loggerService.error(`Failed to generate Cycle 0 prompt: ${error.message}`);

@@ -38,7 +38,7 @@ export enum ClientToServerChannel {
 
     // Phase 2: PCPP
     RequestCreatePromptFile = "clientToServer.requestCreatePromptFile",
-    RequestCreateCycle0Prompt = "clientToServer.requestCreateCycle0Prompt", // New
+    RequestCreateCycle0Prompt = "clientToServer.requestCreateCycle0Prompt",
     RequestFileExistence = "clientToServer.requestFileExistence",
     RequestSyntaxHighlight = "clientToServer.requestSyntaxHighlight",
     RequestLatestCycleData = "clientToServer.requestLatestCycleData",
@@ -68,4 +68,5 @@ export enum ServerToClientChannel {
     SendLatestCycleData = "serverToClient.sendLatestCycleData",
     SendCycleData = "serverToClient.sendCycleData",
     FilesWritten = "serverToClient.filesWritten",
+    Cycle0PromptGenerated = "serverToClient.cycle0PromptGenerated", // New
 }

@@ -2,17 +2,25 @@
 import * as React from 'react';
 import { VscRocket } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
-import { ClientToServerChannel } from '@/common/ipc/channels.enum';
+import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
+import { logger } from '@/client/utils/logger';
 
 const OnboardingView = () => {
     const [projectScope, setProjectScope] = React.useState('');
+    const [isGenerating, setIsGenerating] = React.useState(false);
     const clientIpc = ClientPostMessageManager.getInstance();
 
     const handleGenerate = () => {
         if (projectScope.trim()) {
+            setIsGenerating(true);
+            logger.log("Sending request to generate Cycle 0 prompt.");
             clientIpc.sendToServer(ClientToServerChannel.RequestCreateCycle0Prompt, { projectScope });
         }
     };
+
+    React.useEffect(() => {
+        // The listener is now in the main view.tsx, no need for it here.
+    }, []);
 
     return (
         <div className="onboarding-container">
@@ -27,9 +35,10 @@ const OnboardingView = () => {
                 placeholder="e.g., I want to build a web application that allows users to track their daily habits. It should have a simple UI, user authentication, and a dashboard to visualize progress..."
                 value={projectScope}
                 onChange={(e) => setProjectScope(e.target.value)}
+                disabled={isGenerating}
             />
-            <button className="styled-button" onClick={handleGenerate} disabled={!projectScope.trim()}>
-                <VscRocket /> Generate Initial Artifacts Prompt
+            <button className="styled-button" onClick={handleGenerate} disabled={!projectScope.trim() || isGenerating}>
+                <VscRocket /> {isGenerating ? 'Generating...' : 'Generate Initial Artifacts Prompt'}
             </button>
         </div>
     );
