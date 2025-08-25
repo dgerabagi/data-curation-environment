@@ -71,7 +71,7 @@ export async function activate(context: vscode.ExtensionContext) {
     }
 
     try {
-        Services.initialize(gitApi);
+        Services.initialize(context, gitApi); // Pass the full context
         registerCommands(context);
         context.subscriptions.push(vscode.commands.registerCommand('dce.showParallelCopilot', () => {
             createOrShowParallelCopilotPanel(context);

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { VscRocket } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
-import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
+import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 import { logger } from '@/client/utils/logger';
 
 const OnboardingView = () => {
@@ -17,10 +17,6 @@ const OnboardingView = () => {
             clientIpc.sendToServer(ClientToServerChannel.RequestCreateCycle0Prompt, { projectScope });
         }
     };
-
-    React.useEffect(() => {
-        // The listener is now in the main view.tsx, no need for it here.
-    }, []);
 
     return (
         <div className="onboarding-container">

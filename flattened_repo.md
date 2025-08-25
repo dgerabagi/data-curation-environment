@@ -1,21 +1,21 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-25T20:43:12.204Z
+  Date Generated: 2025-08-25T21:04:20.550Z
   ---
   Total Files: 233
-  Total Lines: 19407
-  Total Characters: 938703
-  Approx. Tokens: 234761
+  Total Lines: 19414
+  Total Characters: 939548
+  Approx. Tokens: 234973
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
 2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
 3. src\Artifacts\A11. DCE - Regression Case Studies.md (6591 tokens)
-4. src\backend\services\prompt.service.ts (5798 tokens)
+4. src\backend\services\prompt.service.ts (5854 tokens)
 5. src\Artifacts\A0. DCE Master Artifact List.md (5639 tokens)
-6. src\client\views\parallel-copilot.view\view.tsx (5597 tokens)
+6. src\client\views\parallel-copilot.view\view.tsx (5576 tokens)
 7. src\client\views\context-chooser.view\view.tsx (5562 tokens)
 8. src\client\components\tree-view\TreeView.tsx (4508 tokens)
 9. src\client\views\context-chooser.view\view.scss (3638 tokens)
@@ -91,7 +91,7 @@
 67. src\Artifacts\A58. DCE - WinMerge Source Code Analysis.md - Lines: 56 - Chars: 5322 - Tokens: 1331
 68. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 44 - Chars: 3786 - Tokens: 947
 69. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
-70. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 41 - Chars: 3979 - Tokens: 995
+70. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 44 - Chars: 4231 - Tokens: 1058
 71. src\Artifacts\A61. Template - Master Artifact List.md - Lines: 31 - Chars: 1497 - Tokens: 375
 72. src\Artifacts\A62. Template - Project Vision and Goals.md - Lines: 33 - Chars: 1745 - Tokens: 437
 73. src\Artifacts\A63. Template - Phase 1 Requirements & Design.md - Lines: 32 - Chars: 1658 - Tokens: 415
@@ -113,11 +113,11 @@
 89. src\backend\services\file-tree.service.ts - Lines: 212 - Chars: 11447 - Tokens: 2862
 90. src\backend\services\flattener.service.ts - Lines: 210 - Chars: 11271 - Tokens: 2818
 91. src\backend\services\highlighting.service.ts - Lines: 58 - Chars: 2920 - Tokens: 730
-92. src\backend\services\history.service.ts - Lines: 153 - Chars: 6541 - Tokens: 1636
+92. src\backend\services\history.service.ts - Lines: 166 - Chars: 6935 - Tokens: 1734
 93. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-94. src\backend\services\prompt.service.ts - Lines: 309 - Chars: 23189 - Tokens: 5798
+94. src\backend\services\prompt.service.ts - Lines: 295 - Chars: 23414 - Tokens: 5854
 95. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
-96. src\backend\services\services.ts - Lines: 35 - Chars: 1597 - Tokens: 400
+96. src\backend\services\services.ts - Lines: 38 - Chars: 1778 - Tokens: 445
 97. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
 98. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
 99. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
@@ -137,14 +137,14 @@
 113. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
 114. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 115. src\client\views\parallel-copilot.view\on-message.ts - Lines: 62 - Chars: 2895 - Tokens: 724
-116. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 47 - Chars: 2210 - Tokens: 553
+116. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 43 - Chars: 2068 - Tokens: 517
 117. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 43 - Chars: 1890 - Tokens: 473
 118. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
 119. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
 120. src\client\views\parallel-copilot.view\view.scss - Lines: 566 - Chars: 13436 - Tokens: 3359
-121. src\client\views\parallel-copilot.view\view.tsx - Lines: 328 - Chars: 22387 - Tokens: 5597
-122. src\common\ipc\channels.enum.ts - Lines: 72 - Chars: 3648 - Tokens: 912
-123. src\common\ipc\channels.type.ts - Lines: 66 - Chars: 5160 - Tokens: 1290
+121. src\client\views\parallel-copilot.view\view.tsx - Lines: 334 - Chars: 22302 - Tokens: 5576
+122. src\common\ipc\channels.enum.ts - Lines: 72 - Chars: 3641 - Tokens: 911
+123. src\common\ipc\channels.type.ts - Lines: 66 - Chars: 5153 - Tokens: 1289
 124. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1590 - Tokens: 398
 125. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 126. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
@@ -154,7 +154,7 @@
 130. src\common\utils\formatting.ts - Lines: 99 - Chars: 3475 - Tokens: 869
 131. src\common\utils\view-html.ts - Lines: 29 - Chars: 1117 - Tokens: 280
 132. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
-133. src\extension.ts - Lines: 121 - Chars: 5044 - Tokens: 1261
+133. src\extension.ts - Lines: 121 - Chars: 5078 - Tokens: 1270
 134. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
 135. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
 136. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
@@ -6280,6 +6280,7 @@ deployScaffold();
 # Artifact A60: DCE - Phase 2 - Cycle 0 Onboarding Experience
 # Date Created: C139
 # Author: AI Model & Curator
+# Updated on: C142 (Add "Return to Cycle 0" navigation feature)
 
 - **Key/Value for A0:**
 - **Description:** Documents the plan for a special "Cycle 0" mode to guide new users in setting up their project by generating an initial set of planning documents.
@@ -6293,31 +6294,33 @@ The goal of the "Cycle 0" onboarding experience is to guide the user through thi
 
 ## 2. User Flow
 
-1.  **Detection:** The extension detects a "fresh workspace" by confirming the absence of both `dce_history.json` and `src/Artifacts/A0. DCE Master Artifact List.md`.
+1.  **Detection:** The extension detects a "fresh workspace" by confirming the absence of `src/Artifacts/A0. DCE Master Artifact List.md`.
 2.  **Cycle 0 UI:** The PCPP loads into a special "Cycle 0" view. This view is simplified, removing the cycle navigator and response tabs. It presents the user with an introduction and a single large text area.
 3.  **User Input:** The user is prompted to describe their project's vision and goals in the "Project Scope" text area.
-4.  **Generate Prompt:** The user clicks a button, e.g., "Generate Initial Artifacts Prompt".
-5.  **Prompt Amalgamation:** The backend `PromptService` constructs a unique `prompt.md` file:
-    *   The user's input is placed into the `<M4. current project scope>` section.
-    *   The `<M6. Cycles>` section contains a single `<Cycle 0>` block.
-    *   This block is pre-filled with **Static Context**: the content of several generic "template" artifacts (`A61`-`A67`).
-    *   The instructions within the `<Cycle 0>` block direct the AI to act as a project planner: review the user's scope, study the provided examples, and generate a set of initial planning artifacts for the user's project, starting with a Master Artifact List (`A0`).
-6.  **User Action:** The user takes the generated `prompt.md` and uses it with their preferred LLM.
-7.  **First Iteration:** The user pastes the AI's response (which should contain the new planning artifacts) back into the PCPP, which will now have progressed to "Cycle 1", and the standard iterative workflow begins.
+4.  **Generate Prompt & Artifacts:** The user clicks a button, e.g., "Generate Initial Artifacts Prompt".
+5.  **Backend Process:**
+    *   The backend `PromptService` constructs a unique `prompt.md` file using the user's scope and a set of bundled template artifacts.
+    *   Crucially, it also creates the `src/Artifacts` directory if it doesn't exist, and then creates an empty `src/Artifacts/A0. DCE Master Artifact List.md`.
+    *   It then notifies the frontend that the process is complete.
+6.  **Transition to Cycle 1:** Upon notification, the frontend automatically reloads its state. Since `A0` now exists, the `HistoryService` returns Cycle 1, and the UI transitions to the main PCPP interface, ready for the user's first real cycle.
+7.  **User Action:** The user takes the generated `prompt.md` and uses it with their preferred LLM.
+8.  **First Iteration:** The user pastes the AI's response (which should contain the new planning artifacts) back into the PCPP's "Cycle 1" tab, and the standard iterative workflow begins.
+9.  **(C142) Return to Cycle 0:** If the user is on Cycle 1, they can click the "previous cycle" (`<`) button. This will navigate them back to the Cycle 0 onboarding view, allowing them to modify their initial project scope and regenerate the prompt.
 
 ## 3. Technical Implementation
 
--   **Detection (`history.service.ts`):** The `getLatestCycle` method will be enhanced. It will use a new `fileExists` method (to be added in `file-operation.service.ts`) to check for `A0`. If both history and A0 are missing, it will return a special `PcppCycle` object with `cycleId: 0`.
+-   **Detection (`history.service.ts`):** The `getLatestCycle` method will check for the existence of `src/Artifacts/A0. DCE Master Artifact List.md`. If it is missing, it will return a special `PcppCycle` object with `cycleId: 0`.
 -   **Frontend (`view.tsx`, `OnboardingView.tsx`):**
     *   The main `view.tsx` will conditionally render a new `<OnboardingView />` component if the loaded cycle data has `cycleId === 0`.
-    *   `OnboardingView.tsx` will be a new component containing the introductory text and the project scope `<textarea>`.
-    *   The "Generate" button in this view will send a new IPC message, `RequestCreateCycle0Prompt`, with the project scope content.
+    *   `OnboardingView.tsx` will contain the introductory text and the project scope `<textarea>`.
+    *   The "Generate" button in this view will send `RequestCreateCycle0Prompt` with the project scope.
+    *   The `handleCycleChange` function will be updated to allow navigation from Cycle 1 back to Cycle 0.
 -   **Backend (`prompt.service.ts`):**
-    *   A new method, `generateCycle0Prompt`, will be created.
-    *   It will read the content of artifacts `A61` through `A67` from the `src/Artifacts/` directory to use as the static context.
-    *   It will assemble the final `prompt.md` string as described in the user flow.
--   **IPC (`channels.enum.ts`, `channels.type.ts`):**
-    *   A new `ClientToServerChannel.RequestCreateCycle0Prompt` will be added. Payload: `{ projectScope: string }`.
+    *   A method `generateCycle0Prompt` will be created.
+    *   It will construct paths to its own bundled template artifacts using the `extensionUri` provided at initialization.
+    *   It will create the `src/Artifacts` directory before writing the new `A0` file to prevent errors.
+-   **IPC (`channels.enum.ts`):**
+    *   A `ServerToClientChannel.Cycle0PromptGenerated` channel will signal the frontend to trigger a state reload.
 </file>
 
 <file path="src/Artifacts/A61. Template - Master Artifact List.md">
@@ -8019,7 +8022,6 @@ export class HighlightingService {
 </file>
 
 <file path="src/backend/services/history.service.ts">
-// src/backend/services/history.service.ts
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -8113,6 +8115,20 @@ export class HistoryService {
 
     public async getCycleData(cycleId: number): Promise<PcppCycle | null> {
         Services.loggerService.log(`HistoryService: getting data for cycle ${cycleId}.`);
+        
+        if (cycleId === 0) {
+            Services.loggerService.log("Returning special case for Cycle 0.");
+            return {
+                cycleId: 0,
+                timestamp: new Date().toISOString(),
+                title: 'Project Setup',
+                cycleContext: '',
+                ephemeralContext: '',
+                responses: {},
+                isParsedMode: false
+            };
+        }
+
         const history = await this._readHistoryFile();
         return history.cycles.find(c => c.cycleId === cycleId) || null;
     }
@@ -8216,7 +8232,6 @@ export class LoggerService {
 </file>
 
 <file path="src/backend/services/prompt.service.ts">
-// Updated on: C141 (Fix static context generation, add A0 creation)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -8228,6 +8243,12 @@ import { ServerPostMessageManager } from '@/common/ipc/server-ipc';
 import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 
 export class PromptService {
+    private extensionUri: vscode.Uri;
+
+    constructor(extensionUri: vscode.Uri) {
+        this.extensionUri = extensionUri;
+    }
+
     private artifactSchemaTemplate = `<M1. artifact schema>
 M1. artifact schema
 M2. cycle overview
@@ -8447,45 +8468,33 @@ ${cyclesContent}
         }
         const rootPath = workspaceFolders[0].uri.fsPath;
         const promptMdPath = path.join(rootPath, 'prompt.md');
-        const artifactsPath = path.join(rootPath, 'src', 'Artifacts');
+        const artifactsDirInWorkspace = path.join(rootPath, 'src', 'Artifacts');
+        const artifactsDirInExtension = vscode.Uri.joinPath(this.extensionUri, 'src', 'Artifacts');
 
         try {
             Services.loggerService.log("Generating Cycle 0 prompt.md file...");
 
             const artifactFilenameMap: { [key: string]: string } = {
-                'A61': 'A61. Template - Master Artifact List.md',
-                'A62': 'A62. Template - Project Vision and Goals.md',
-                'A63': 'A63. Template - Phase 1 Requirements & Design.md',
-                'A64': 'A64. Template - Technical Scaffolding Plan.md',
-                'A65': 'A65. Template - Target File Structure.md',
-                'A66': 'A66. Template - Initial Scaffolding Deployment Script.md',
-                'A67': 'A67. Template - Development and Testing Guide.md',
-                'A68': 'A68. Template - Regression Case Studies.md',
-                'A69': 'A69. Template - Logging and Debugging Guide.md',
-                'A70': 'A70. Template - Feature Plan Example.md'
+                'A61': 'A61. Template - Master Artifact List.md', 'A62': 'A62. Template - Project Vision and Goals.md', 'A63': 'A63. Template - Phase 1 Requirements & Design.md', 'A64': 'A64. Template - Technical Scaffolding Plan.md', 'A65': 'A65. Template - Target File Structure.md', 'A66': 'A66. Template - Initial Scaffolding Deployment Script.md', 'A67': 'A67. Template - Development and Testing Guide.md', 'A68': 'A68. Template - Regression Case Studies.md', 'A69': 'A69. Template - Logging and Debugging Guide.md', 'A70': 'A70. Template - Feature Plan Example.md'
             };
 
             let staticContext = '';
             for (const artifactId in artifactFilenameMap) {
                 const filename = artifactFilenameMap[artifactId];
-                const artifactPath = path.join(artifactsPath, filename);
+                const artifactUri = vscode.Uri.joinPath(artifactsDirInExtension, filename);
                 try {
-                    const content = await fs.readFile(artifactPath, 'utf-8');
+                    const contentBuffer = await vscode.workspace.fs.readFile(artifactUri);
+                    const content = Buffer.from(contentBuffer).toString('utf-8');
                     staticContext += `<${filename}>\n${content}\n</${filename}>\n\n`;
                 } catch (e) {
-                    Services.loggerService.warn(`Could not read template artifact: ${artifactPath}`);
+                    Services.loggerService.warn(`Could not read template artifact from extension files: ${artifactUri.fsPath}`);
                 }
             }
 
             const cycle0Content = `<Cycle 0>
 <Cycle Context>
-Review the user's project scope in M4. Your task is to act as a senior project architect and begin establishing the necessary documentation to achieve the user's goals.
-
-You have been provided with a set of best-practice templates for software engineering documentation as static context. Use these examples to guide your output.
-
-Your first response should be to generate a starter set of artifacts for this new project. Begin by creating a Master Artifact List (A0), similar to the provided template, and then create the first few essential planning documents (e.g., Project Vision, High-Level Requirements).
+Review the user's project scope in M4. Your task is to act as a senior project architect and begin establishing the necessary documentation to achieve the user's goals. You have been provided with a set of best-practice templates for software engineering documentation as static context. Use these examples to guide your output. Your first response should be to generate a starter set of artifacts for this new project. Begin by creating a Master Artifact List (A0), similar to the provided template, and then create the first few essential planning documents (e.g., Project Vision, High-Level Requirements).
 </Cycle Context>
-
 <Static Context>
 ${staticContext.trim()}
 </Static Context>
@@ -8494,29 +8503,22 @@ ${staticContext.trim()}
             const projectScopeContent = `<M4. current project scope>\n${projectScope}\n</M4. current project scope>`;
 
             const promptParts = [
-                `<prompt.md>`,
-                this.artifactSchemaTemplate,
-                `<M2. cycle overview>\nCurrent Cycle 0 - Project Initialization\n</M2. cycle overview>`,
-                this.interactionSchemaTemplate,
-                projectScopeContent,
-                `<M5. organized artifacts list>\n# No artifacts exist yet.\n</M5. organized artifacts list>`,
-                `<M6. Cycles>\n${cycle0Content}\n</M6. Cycles>`,
-                `<M7. Flattened Repo>\n<!-- No files selected for initial prompt -->\n</M7. Flattened Repo>`,
-                `</prompt.md>`
+                `<prompt.md>`, this.artifactSchemaTemplate, `<M2. cycle overview>\nCurrent Cycle 0 - Project Initialization\n</M2. cycle overview>`, this.interactionSchemaTemplate, projectScopeContent, `<M5. organized artifacts list>\n# No artifacts exist yet.\n</M5. organized artifacts list>`, `<M6. Cycles>\n${cycle0Content}\n</M6. Cycles>`, `<M7. Flattened Repo>\n<!-- No files selected for initial prompt -->\n</M7. Flattened Repo>`, `</prompt.md>`
             ];
 
             const finalPrompt = promptParts.join('\n\n');
-            await fs.writeFile(promptMdPath, finalPrompt, 'utf-8');
-            vscode.window.showInformationMessage(`Successfully generated initial prompt.md for Cycle 0.`);
+            await vscode.workspace.fs.writeFile(vscode.Uri.file(promptMdPath), Buffer.from(finalPrompt, 'utf-8'));
             Services.loggerService.log("Successfully generated Cycle 0 prompt.md file.");
 
             // Create empty A0 artifact
-            const a0Path = path.join(artifactsPath, 'A0. DCE Master Artifact List.md');
+            await vscode.workspace.fs.createDirectory(vscode.Uri.file(artifactsDirInWorkspace));
+            const a0Uri = vscode.Uri.file(path.join(artifactsDirInWorkspace, 'A0. DCE Master Artifact List.md'));
             const a0InitialContent = `# Artifact A0: [Your Project Name] Master Artifact List\n# Date Created: C0\n\n## 1. Purpose\n\n# This file serves as the definitive, parseable list of all documentation artifacts for your project.`;
-            await fs.writeFile(a0Path, a0InitialContent, 'utf-8');
+            await vscode.workspace.fs.writeFile(a0Uri, Buffer.from(a0InitialContent, 'utf-8'));
             Services.loggerService.log("Created empty A0 Master Artifact List.");
+            
+            vscode.window.showInformationMessage(`Successfully generated initial prompt.md and created src/Artifacts/A0...`);
 
-            // Notify frontend
             serverIpc.sendToClient(ServerToClientChannel.Cycle0PromptGenerated, {});
 
         } catch (error: any) {
@@ -8676,6 +8678,7 @@ import { FileTreeService } from "./file-tree.service";
 import { FileOperationService } from "./file-operation.service";
 import { ContentExtractionService } from "./content-extraction.service";
 import { HighlightingService } from "./highlighting.service";
+import * as vscode from 'vscode';
 
 class ServiceContainer {
     public fileTreeService!: FileTreeService;
@@ -8687,11 +8690,13 @@ class ServiceContainer {
     public selectionService = new SelectionService();
     public loggerService = LoggerService.getInstance();
     public actionService = new ActionService();
-    public historyService = new HistoryService();
-    public promptService = new PromptService();
+    public historyService!: HistoryService;
+    public promptService!: PromptService;
     
-    public initialize(gitApi?: GitAPI) {
+    public initialize(context: vscode.ExtensionContext, gitApi?: GitAPI) {
         this.loggerService.log("Services initializing...");
+        this.promptService = new PromptService(context.extensionUri);
+        this.historyService = new HistoryService();
         this.fileTreeService = new FileTreeService(gitApi);
         this.fileTreeService.initializeWatcher();
         this.loggerService.log("Services initialized successfully.");
@@ -11609,7 +11614,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 import * as React from 'react';
 import { VscRocket } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
-import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
+import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 import { logger } from '@/client/utils/logger';
 
 const OnboardingView = () => {
@@ -11624,10 +11629,6 @@ const OnboardingView = () => {
             clientIpc.sendToServer(ClientToServerChannel.RequestCreateCycle0Prompt, { projectScope });
         }
     };
-
-    React.useEffect(() => {
-        // The listener is now in the main view.tsx, no need for it here.
-    }, []);
 
     return (
         <div className="onboarding-container">
@@ -12428,7 +12429,7 @@ body {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
-// Updated on: C141 (Add listener for Cycle0PromptGenerated to trigger reload)
+// Updated on: C142 (Enable navigation back to cycle 0)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -12444,7 +12445,6 @@ import * as path from 'path-browserify';
 import { BatchWriteFile } from '@/common/ipc/channels.type';
 import OnboardingView from './OnboardingView';
 
-// ... (rest of the components like useDebounce, CodeViewer, CollapsibleSection remain the same)
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
@@ -12621,7 +12621,6 @@ const App = () => {
 
     React.useEffect(() => { if (isParsedMode) parseAllTabs(); }, [isParsedMode, tabs, parseAllTabs]);
     
-    // ... (rest of the handlers and memoized values)
     const activeTabData = tabs[activeTab.toString()];
 
     const viewableContent = React.useMemo(() => {
@@ -12639,7 +12638,15 @@ const App = () => {
         setSelectedFilePath(null);
         if (!newParseMode) setTabs(prev => { const newTabs = {...prev}; Object.keys(newTabs).forEach(key => { newTabs[key].parsedContent = null; }); return newTabs; });
     };
-    const handleCycleChange = (e: React.MouseEvent, newCycle: number) => { e.stopPropagation(); if (newCycle > 0 && newCycle <= maxCycle) { saveCurrentCycleState(); setSelectedFilesForReplacement(new Set()); setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); } };
+    const handleCycleChange = (e: React.MouseEvent, newCycle: number) => { 
+        e.stopPropagation(); 
+        if (newCycle >= 0 && newCycle <= maxCycle) { 
+            if (currentCycle !== 0) saveCurrentCycleState(); 
+            setSelectedFilesForReplacement(new Set()); 
+            setCurrentCycle(newCycle); 
+            clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); 
+        } 
+    };
     
     const handleNewCycle = (e: React.MouseEvent) => {
         e.stopPropagation();
@@ -12722,14 +12729,14 @@ const App = () => {
     const isReadyForNextCycle = !isNewCycleButtonDisabled;
 
     if (currentCycle === null) {
-        return <div>Loading...</div>; // Or a spinner component
+        return <div>Loading...</div>;
     }
 
     if (currentCycle === 0) {
         return <OnboardingView />;
     }
 
-    const collapsedNavigator = <div className="collapsed-navigator"><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button><span className="cycle-display">C{currentCycle}</span><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button></div>;
+    const collapsedNavigator = <div className="collapsed-navigator"><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0}><VscChevronLeft /></button><span className="cycle-display">C{currentCycle}</span><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button></div>;
     
     const renderContent = () => {
         if (!isParsedMode || !activeTabData?.parsedContent) {
@@ -12748,7 +12755,7 @@ const App = () => {
 
     return <div className="pc-view-container">
         <div className="pc-header"><div className="pc-toolbar"><button onClick={handleGeneratePrompt} title="Generate prompt.md"><VscFileCode /> Generate prompt.md</button><button onClick={handleLogState} title="Log Current State"><VscBug/></button><button onClick={handleGlobalParseToggle}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} /></div></div>
-        <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''}><div className="cycle-navigator"><span>Cycle:</span><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button><input type="number" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 1)} className="cycle-input" /><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button><button onClick={handleNewCycle} title="New Cycle" disabled={isNewCycleButtonDisabled}><VscAdd /></button><input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} /><button onClick={handleDeleteCycle} title="Delete Current Cycle"><VscTrash /></button><button onClick={handleResetHistory} title="Reset All History"><VscSync /></button></div><div className="context-inputs"><textarea className="context-textarea" placeholder="Cycle Context (notes for this cycle)..." value={cycleContext} onChange={e => setCycleContext(e.target.value)} /><textarea className="context-textarea" placeholder="Ephemeral Context (for this cycle's prompt only)..." value={ephemeralContext} onChange={e => setEphemeralContext(e.target.value)} /></div></CollapsibleSection>
+        <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''}><div className="cycle-navigator"><span>Cycle:</span><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0}><VscChevronLeft /></button><input type="number" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 0)} className="cycle-input" /><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button><button onClick={handleNewCycle} title="New Cycle" disabled={isNewCycleButtonDisabled}><VscAdd /></button><input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} /><button onClick={handleDeleteCycle} title="Delete Current Cycle"><VscTrash /></button><button onClick={handleResetHistory} title="Reset All History"><VscSync /></button></div><div className="context-inputs"><textarea className="context-textarea" placeholder="Cycle Context (notes for this cycle)..." value={cycleContext} onChange={e => setCycleContext(e.target.value)} /><textarea className="context-textarea" placeholder="Ephemeral Context (for this cycle's prompt only)..." value={ephemeralContext} onChange={e => setEphemeralContext(e.target.value)} /></div></CollapsibleSection>
         <div className="tab-bar">{[...Array(tabCount)].map((_, i) => <div key={i} className={`tab ${activeTab === i + 1 ? 'active' : ''} ${selectedResponseId === (i + 1).toString() ? 'selected' : ''}`} onClick={() => setActiveTab(i + 1)}>Resp {i + 1}</div>)}</div>
         <div className="tab-content">{activeTab !== null && <div className="tab-pane">{renderContent()}</div>}</div>
     </div>;
@@ -12829,7 +12836,7 @@ export enum ServerToClientChannel {
     SendLatestCycleData = "serverToClient.sendLatestCycleData",
     SendCycleData = "serverToClient.sendCycleData",
     FilesWritten = "serverToClient.filesWritten",
-    Cycle0PromptGenerated = "serverToClient.cycle0PromptGenerated", // New
+    Cycle0PromptGenerated = "serverToClient.cycle0PromptGenerated",
 }
 </file>
 
@@ -12898,7 +12905,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SendLatestCycleData ? { cycleData: PcppCycle } :
     T extends ServerToClientChannel.SendCycleData ? { cycleData: PcppCycle | null } :
     T extends ServerToClientChannel.FilesWritten ? { paths: string[] } :
-    T extends ServerToClientChannel.Cycle0PromptGenerated ? {} : // New
+    T extends ServerToClientChannel.Cycle0PromptGenerated ? {} :
     never;
 </file>
 
@@ -13309,7 +13316,7 @@ export async function activate(context: vscode.ExtensionContext) {
     }
 
     try {
-        Services.initialize(gitApi);
+        Services.initialize(context, gitApi); // Pass the full context
         registerCommands(context);
         context.subscriptions.push(vscode.commands.registerCommand('dce.showParallelCopilot', () => {
             createOrShowParallelCopilotPanel(context);

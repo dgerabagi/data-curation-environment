@@ -1,4 +1,3 @@
-// Updated on: C141 (Fix static context generation, add A0 creation)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -10,6 +9,12 @@ import { ServerPostMessageManager } from '@/common/ipc/server-ipc';
 import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 
 export class PromptService {
+    private extensionUri: vscode.Uri;
+
+    constructor(extensionUri: vscode.Uri) {
+        this.extensionUri = extensionUri;
+    }
+
     private artifactSchemaTemplate = `<M1. artifact schema>
 M1. artifact schema
 M2. cycle overview
@@ -229,45 +234,33 @@ ${cyclesContent}
         }
         const rootPath = workspaceFolders[0].uri.fsPath;
         const promptMdPath = path.join(rootPath, 'prompt.md');
-        const artifactsPath = path.join(rootPath, 'src', 'Artifacts');
+        const artifactsDirInWorkspace = path.join(rootPath, 'src', 'Artifacts');
+        const artifactsDirInExtension = vscode.Uri.joinPath(this.extensionUri, 'src', 'Artifacts');
 
         try {
             Services.loggerService.log("Generating Cycle 0 prompt.md file...");
 
             const artifactFilenameMap: { [key: string]: string } = {
-                'A61': 'A61. Template - Master Artifact List.md',
-                'A62': 'A62. Template - Project Vision and Goals.md',
-                'A63': 'A63. Template - Phase 1 Requirements & Design.md',
-                'A64': 'A64. Template - Technical Scaffolding Plan.md',
-                'A65': 'A65. Template - Target File Structure.md',
-                'A66': 'A66. Template - Initial Scaffolding Deployment Script.md',
-                'A67': 'A67. Template - Development and Testing Guide.md',
-                'A68': 'A68. Template - Regression Case Studies.md',
-                'A69': 'A69. Template - Logging and Debugging Guide.md',
-                'A70': 'A70. Template - Feature Plan Example.md'
+                'A61': 'A61. Template - Master Artifact List.md', 'A62': 'A62. Template - Project Vision and Goals.md', 'A63': 'A63. Template - Phase 1 Requirements & Design.md', 'A64': 'A64. Template - Technical Scaffolding Plan.md', 'A65': 'A65. Template - Target File Structure.md', 'A66': 'A66. Template - Initial Scaffolding Deployment Script.md', 'A67': 'A67. Template - Development and Testing Guide.md', 'A68': 'A68. Template - Regression Case Studies.md', 'A69': 'A69. Template - Logging and Debugging Guide.md', 'A70': 'A70. Template - Feature Plan Example.md'
             };
 
             let staticContext = '';
             for (const artifactId in artifactFilenameMap) {
                 const filename = artifactFilenameMap[artifactId];
-                const artifactPath = path.join(artifactsPath, filename);
+                const artifactUri = vscode.Uri.joinPath(artifactsDirInExtension, filename);
                 try {
-                    const content = await fs.readFile(artifactPath, 'utf-8');
+                    const contentBuffer = await vscode.workspace.fs.readFile(artifactUri);
+                    const content = Buffer.from(contentBuffer).toString('utf-8');
                     staticContext += `<${filename}>\n${content}\n</${filename}>\n\n`;
                 } catch (e) {
-                    Services.loggerService.warn(`Could not read template artifact: ${artifactPath}`);
+                    Services.loggerService.warn(`Could not read template artifact from extension files: ${artifactUri.fsPath}`);
                 }
             }
 
             const cycle0Content = `<Cycle 0>
 <Cycle Context>
-Review the user's project scope in M4. Your task is to act as a senior project architect and begin establishing the necessary documentation to achieve the user's goals.
-
-You have been provided with a set of best-practice templates for software engineering documentation as static context. Use these examples to guide your output.
-
-Your first response should be to generate a starter set of artifacts for this new project. Begin by creating a Master Artifact List (A0), similar to the provided template, and then create the first few essential planning documents (e.g., Project Vision, High-Level Requirements).
+Review the user's project scope in M4. Your task is to act as a senior project architect and begin establishing the necessary documentation to achieve the user's goals. You have been provided with a set of best-practice templates for software engineering documentation as static context. Use these examples to guide your output. Your first response should be to generate a starter set of artifacts for this new project. Begin by creating a Master Artifact List (A0), similar to the provided template, and then create the first few essential planning documents (e.g., Project Vision, High-Level Requirements).
 </Cycle Context>
-
 <Static Context>
 ${staticContext.trim()}
 </Static Context>
@@ -276,29 +269,22 @@ ${staticContext.trim()}
             const projectScopeContent = `<M4. current project scope>\n${projectScope}\n</M4. current project scope>`;
 
             const promptParts = [
-                `<prompt.md>`,
-                this.artifactSchemaTemplate,
-                `<M2. cycle overview>\nCurrent Cycle 0 - Project Initialization\n</M2. cycle overview>`,
-                this.interactionSchemaTemplate,
-                projectScopeContent,
-                `<M5. organized artifacts list>\n# No artifacts exist yet.\n</M5. organized artifacts list>`,
-                `<M6. Cycles>\n${cycle0Content}\n</M6. Cycles>`,
-                `<M7. Flattened Repo>\n<!-- No files selected for initial prompt -->\n</M7. Flattened Repo>`,
-                `</prompt.md>`
+                `<prompt.md>`, this.artifactSchemaTemplate, `<M2. cycle overview>\nCurrent Cycle 0 - Project Initialization\n</M2. cycle overview>`, this.interactionSchemaTemplate, projectScopeContent, `<M5. organized artifacts list>\n# No artifacts exist yet.\n</M5. organized artifacts list>`, `<M6. Cycles>\n${cycle0Content}\n</M6. Cycles>`, `<M7. Flattened Repo>\n<!-- No files selected for initial prompt -->\n</M7. Flattened Repo>`, `</prompt.md>`
             ];
 
             const finalPrompt = promptParts.join('\n\n');
-            await fs.writeFile(promptMdPath, finalPrompt, 'utf-8');
-            vscode.window.showInformationMessage(`Successfully generated initial prompt.md for Cycle 0.`);
+            await vscode.workspace.fs.writeFile(vscode.Uri.file(promptMdPath), Buffer.from(finalPrompt, 'utf-8'));
             Services.loggerService.log("Successfully generated Cycle 0 prompt.md file.");
 
             // Create empty A0 artifact
-            const a0Path = path.join(artifactsPath, 'A0. DCE Master Artifact List.md');
+            await vscode.workspace.fs.createDirectory(vscode.Uri.file(artifactsDirInWorkspace));
+            const a0Uri = vscode.Uri.file(path.join(artifactsDirInWorkspace, 'A0. DCE Master Artifact List.md'));
             const a0InitialContent = `# Artifact A0: [Your Project Name] Master Artifact List\n# Date Created: C0\n\n## 1. Purpose\n\n# This file serves as the definitive, parseable list of all documentation artifacts for your project.`;
-            await fs.writeFile(a0Path, a0InitialContent, 'utf-8');
+            await vscode.workspace.fs.writeFile(a0Uri, Buffer.from(a0InitialContent, 'utf-8'));
             Services.loggerService.log("Created empty A0 Master Artifact List.");
+            
+            vscode.window.showInformationMessage(`Successfully generated initial prompt.md and created src/Artifacts/A0...`);
 
-            // Notify frontend
             serverIpc.sendToClient(ServerToClientChannel.Cycle0PromptGenerated, {});
 
         } catch (error: any) {

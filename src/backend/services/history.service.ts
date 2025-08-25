@@ -1,4 +1,3 @@
-// src/backend/services/history.service.ts
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -92,6 +91,20 @@ export class HistoryService {
 
     public async getCycleData(cycleId: number): Promise<PcppCycle | null> {
         Services.loggerService.log(`HistoryService: getting data for cycle ${cycleId}.`);
+        
+        if (cycleId === 0) {
+            Services.loggerService.log("Returning special case for Cycle 0.");
+            return {
+                cycleId: 0,
+                timestamp: new Date().toISOString(),
+                title: 'Project Setup',
+                cycleContext: '',
+                ephemeralContext: '',
+                responses: {},
+                isParsedMode: false
+            };
+        }
+
         const history = await this._readHistoryFile();
         return history.cycles.find(c => c.cycleId === cycleId) || null;
     }

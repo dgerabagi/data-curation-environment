@@ -10,6 +10,7 @@ import { FileTreeService } from "./file-tree.service";
 import { FileOperationService } from "./file-operation.service";
 import { ContentExtractionService } from "./content-extraction.service";
 import { HighlightingService } from "./highlighting.service";
+import * as vscode from 'vscode';
 
 class ServiceContainer {
     public fileTreeService!: FileTreeService;
@@ -21,11 +22,13 @@ class ServiceContainer {
     public selectionService = new SelectionService();
     public loggerService = LoggerService.getInstance();
     public actionService = new ActionService();
-    public historyService = new HistoryService();
-    public promptService = new PromptService();
+    public historyService!: HistoryService;
+    public promptService!: PromptService;
     
-    public initialize(gitApi?: GitAPI) {
+    public initialize(context: vscode.ExtensionContext, gitApi?: GitAPI) {
         this.loggerService.log("Services initializing...");
+        this.promptService = new PromptService(context.extensionUri);
+        this.historyService = new HistoryService();
         this.fileTreeService = new FileTreeService(gitApi);
         this.fileTreeService.initializeWatcher();
         this.loggerService.log("Services initialized successfully.");
