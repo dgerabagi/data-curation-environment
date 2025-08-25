@@ -1,4 +1,4 @@
-// Updated on: C141 (Add handler for Cycle 0 prompt)
+// Updated on: C144 (Add handler for file comparison)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -58,5 +58,9 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestLogState, (data) => {
         promptService.generateStateLog(data.currentState);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestFileComparison, (data) => {
+        fileOperationService.handleFileComparisonRequest(data.filePath, data.modifiedContent, serverIpc);
     });
 }

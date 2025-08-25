@@ -6,6 +6,7 @@ import { ServerToClientChannel } from "@/common/ipc/channels.enum";
 import { Services } from "./services";
 import { Action, MoveActionPayload } from "./action.service";
 import { BatchWriteFile } from "@/common/ipc/channels.type";
+import { diceCoefficient } from "@/common/utils/similarity";
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
@@ -18,6 +19,38 @@ export class FileOperationService {
             return true;
         } catch {
             return false;
+        }
+    }
+
+    public async handleFileComparisonRequest(filePath: string, modifiedContent: string, serverIpc: ServerPostMessageManager) {
+        Services.loggerService.log(`[Comparison] Received request for: ${filePath}`);
+        try {
+            const workspaceFolders = vscode.workspace.workspaceFolders;
+            if (!workspaceFolders || workspaceFolders.length === 0) throw new Error("No workspace folder open.");
+
+            const absolutePath = path.resolve(workspaceFolders[0].uri.fsPath, filePath);
+            const originalContentBuffer = await vscode.workspace.fs.readFile(vscode.Uri.file(absolutePath));
+            const originalContent = Buffer.from(originalContentBuffer).toString('utf-8');
+
+            const originalTokens = Math.ceil(originalContent.length / 4);
+            const modifiedTokens = Math.ceil(modifiedContent.length / 4);
+            const similarity = diceCoefficient(originalContent, modifiedContent);
+
+            serverIpc.sendToClient(ServerToClientChannel.SendFileComparison, {
+                filePath,
+                originalTokens,
+                modifiedTokens,
+                similarity
+            });
+        } catch (error: any) {
+            Services.loggerService.error(`[Comparison] Failed for ${filePath}: ${error.message}`);
+            // Send back error state
+            serverIpc.sendToClient(ServerToClientChannel.SendFileComparison, {
+                filePath,
+                originalTokens: -1,
+                modifiedTokens: Math.ceil(modifiedContent.length / 4),
+                similarity: 0
+            });
         }
     }
 

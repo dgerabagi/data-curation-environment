@@ -47,6 +47,7 @@ export enum ClientToServerChannel {
     RequestDeleteCycle = "clientToServer.requestDeleteCycle",
     RequestResetHistory = "clientToServer.requestResetHistory",
     RequestLogState = "clientToServer.requestLogState",
+    RequestFileComparison = "clientToServer.requestFileComparison", // New in C144
 }
 
 export enum ServerToClientChannel {
@@ -68,4 +69,5 @@ export enum ServerToClientChannel {
     SendLatestCycleData = "serverToClient.sendLatestCycleData",
     SendCycleData = "serverToClient.sendCycleData",
     FilesWritten = "serverToClient.filesWritten",
+    SendFileComparison = "serverToClient.sendFileComparison", // New in C144
 }

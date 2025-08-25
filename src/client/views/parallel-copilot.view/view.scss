@@ -1,4 +1,4 @@
-/* Updated on: C139 (Add styles for OnboardingView) */
+/* Updated on: C144 (Add styles for file metadata) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -325,6 +325,13 @@ body {
         align-items: center;
         gap: 8px;
     }
+}
+
+.file-metadata {
+    display: flex;
+    gap: 12px;
+    color: var(--vscode-descriptionForeground);
+    font-size: 11px;
 }
 
 .response-acceptance-header {

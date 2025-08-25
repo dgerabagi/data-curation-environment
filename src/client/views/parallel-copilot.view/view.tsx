@@ -1,4 +1,4 @@
-// Updated on: C143 (Remove Cycle0PromptGenerated listener)
+// Updated on: C145 (Fix syntax error in CodeViewer)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -6,13 +6,19 @@ import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, Vsc
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
-import { ParsedResponse } from '@/common/types/pcpp.types';
+import { ParsedResponse, PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
 import ReactMarkdown from 'react-markdown';
-import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
 import * as path from 'path-browserify';
 import { BatchWriteFile } from '@/common/ipc/channels.type';
 import OnboardingView from './OnboardingView';
+import { formatLargeNumber } from '@/common/utils/formatting';
+
+interface ComparisonMetrics {
+    originalTokens: number;
+    modifiedTokens: number;
+    similarity: number;
+}
 
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -79,7 +85,7 @@ const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; i
 const App = () => {
     const [activeTab, setActiveTab] = React.useState(1);
     const [tabCount, setTabCount] = React.useState(4);
-    const [currentCycle, setCurrentCycle] = React.useState<number | null>(null); // Can be null initially
+    const [currentCycle, setCurrentCycle] = React.useState<number | null>(null);
     const [maxCycle, setMaxCycle] = React.useState(1);
     const [cycleTitle, setCycleTitle] = React.useState('');
     const [cycleContext, setCycleContext] = React.useState('');
@@ -94,6 +100,7 @@ const App = () => {
     const isResizing = React.useRef(false);
     const [selectedFilesForReplacement, setSelectedFilesForReplacement] = React.useState<Set<string>>(new Set());
     const [selectedResponseId, setSelectedResponseId] = React.useState<string | null>(null);
+    const [comparisonMetrics, setComparisonMetrics] = React.useState<Map<string, ComparisonMetrics>>(new Map());
 
     const [isAssociatedFilesCollapsed, setAssociatedFilesCollapsed] = React.useState(false);
     const [isThoughtsCollapsed, setThoughtsCollapsed] = React.useState(false);
@@ -145,6 +152,8 @@ const App = () => {
                         const id = `${file.path}::${file.content}`;
                         clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
                     });
+                } else if (tabState.parsedContent) {
+                    tabState.parsedContent.filesUpdated.forEach(file => allFilePaths.add(file));
                 }
             });
     
@@ -179,6 +188,9 @@ const App = () => {
         clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap))));
         clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); });
         clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { logger.log(`Received FilesWritten event for: ${paths.join(', ')}`); setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); });
+        clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, ({ filePath, originalTokens, modifiedTokens, similarity }) => {
+            setComparisonMetrics(prev => new Map(prev).set(filePath, { originalTokens, modifiedTokens, similarity }));
+        });
         
         clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});
     }, [clientIpc]);
@@ -244,7 +256,17 @@ const App = () => {
         return () => { window.removeEventListener('mousemove', mm); window.removeEventListener('mouseup', mu); };
     }, [isParsedMode, handleMouseMove, handleMouseUp]);
     
-    const handleSelectForViewing = (filePath: string) => { const newPath = selectedFilePath === filePath ? null : filePath; setSelectedFilePath(newPath); };
+    const handleSelectForViewing = (filePath: string) => {
+        const newPath = selectedFilePath === filePath ? null : filePath;
+        setSelectedFilePath(newPath);
+        if (newPath) {
+            const file = activeTabData?.parsedContent?.files.find(f => f.path === newPath);
+            if (file) {
+                clientIpc.sendToServer(ClientToServerChannel.RequestFileComparison, { filePath: newPath, modifiedContent: file.content });
+            }
+        }
+    };
+
     const handleDeleteCycle = () => { if(currentCycle !== null) clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle }); };
     const handleResetHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {});
     const handleFileSelectionToggle = (filePath: string) => setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); if (newSet.has(filePath)) newSet.delete(filePath); else newSet.add(filePath); return newSet; });
@@ -301,6 +323,7 @@ const App = () => {
     }
 
     const collapsedNavigator = <div className="collapsed-navigator"><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0}><VscChevronLeft /></button><span className="cycle-display">C{currentCycle}</span><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button></div>;
+    const currentComparisonMetrics = selectedFilePath ? comparisonMetrics.get(selectedFilePath) : null;
     
     const renderContent = () => {
         if (!isParsedMode || !activeTabData?.parsedContent) {
@@ -311,7 +334,21 @@ const App = () => {
             <div className="resizer" onMouseDown={handleMouseDown} />
             <div className="parsed-view-right">
                 <div className="response-acceptance-header"><button className={`styled-button ${selectedResponseId === activeTab.toString() ? 'toggled' : ''}`} onClick={() => setSelectedResponseId(prev => prev === activeTab.toString() ? null : activeTab.toString())}>{selectedResponseId === activeTab.toString() ? 'Response Selected' : 'Select This Response'}</button><button className="styled-button" onClick={handleSelectAllFilesToggle}><VscCheckAll/> {isAllFilesSelected ? 'Deselect All' : 'Select All'}</button><button className="styled-button" onClick={handleAcceptSelectedFiles} disabled={selectedFilesForReplacement.size === 0}><VscSave/> Accept Selected</button></div>
-                <div className="file-content-viewer-header"><span className="file-path" title={selectedFilePath || ''}>{selectedFilePath ? path.basename(selectedFilePath) : 'No file selected'}</span></div>
+                <div className="file-content-viewer-header">
+                    <span className="file-path" title={selectedFilePath || ''}>{selectedFilePath ? path.basename(selectedFilePath) : 'No file selected'}</span>
+                    <div className="file-metadata">
+                        {currentComparisonMetrics && currentComparisonMetrics.originalTokens !== -1 && (
+                            <>
+                                <span>Original: {formatLargeNumber(currentComparisonMetrics.originalTokens, 1)} tk</span>
+                                <span>New: {formatLargeNumber(currentComparisonMetrics.modifiedTokens, 1)} tk</span>
+                                <span>Similarity: {(currentComparisonMetrics.similarity * 100).toFixed(0)}%</span>
+                            </>
+                        )}
+                         {currentComparisonMetrics && currentComparisonMetrics.originalTokens === -1 && (
+                            <span style={{color: 'var(--vscode-errorForeground)'}}>Original file not found</span>
+                         )}
+                    </div>
+                </div>
                 <CodeViewer htmlContent={viewableContent} />
             </div>
         </div>;

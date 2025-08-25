@@ -45,6 +45,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestResetHistory ? {} :
     T extends ClientToServerChannel.RequestBatchFileWrite ? { files: BatchWriteFile[] } :
     T extends ClientToServerChannel.RequestLogState ? { currentState: PcppCycle } :
+    T extends ClientToServerChannel.RequestFileComparison ? { filePath: string; modifiedContent: string; } :
     
     T extends ServerToClientChannel.SendWorkspaceFiles ? { files: FileNode[] } :
     T extends ServerToClientChannel.SendWorkspaceTrustState ? { isTrusted: boolean } :
@@ -62,4 +63,5 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SendLatestCycleData ? { cycleData: PcppCycle } :
     T extends ServerToClientChannel.SendCycleData ? { cycleData: PcppCycle | null } :
     T extends ServerToClientChannel.FilesWritten ? { paths: string[] } :
+    T extends ServerToClientChannel.SendFileComparison ? { filePath: string; originalTokens: number; modifiedTokens: number; similarity: number; } :
     never;

@@ -121,7 +121,7 @@ M7. Flattened Repo
 
             const truncateCycleResponses = (cycle: PcppCycle) => {
                 Object.values(cycle.responses).forEach(response => {
-                    response.content = truncateCodeForLogging(response.content, 50, 10, 10);
+                    response.content = truncateCodeForLogging(response.content);
                 });
             };
 
@@ -285,9 +285,22 @@ ${staticContext.trim()}
             
             vscode.window.showInformationMessage(`Successfully generated initial prompt.md and created src/Artifacts/A0...`);
 
-            // Get the new cycle data (should be Cycle 1 now) and send it to the client
-            const newCycleData = await Services.historyService.getLatestCycle();
-            serverIpc.sendToClient(ServerToClientChannel.SendLatestCycleData, { cycleData: newCycleData });
+            // C144 FIX: Construct and send Cycle 1 data directly to avoid race condition.
+            const cycle1Data: PcppCycle = {
+                cycleId: 1,
+                timestamp: new Date().toISOString(),
+                title: 'New Cycle',
+                cycleContext: '',
+                ephemeralContext: '',
+                responses: { "1": { content: "" } },
+                isParsedMode: false,
+                leftPaneWidth: 33,
+                selectedResponseId: null,
+                selectedFilesForReplacement: [],
+            };
+
+            await Services.historyService.saveCycleData(cycle1Data); // Initialize the history file
+            serverIpc.sendToClient(ServerToClientChannel.SendLatestCycleData, { cycleData: cycle1Data });
 
         } catch (error: any) {
             vscode.window.showErrorMessage(`Failed to generate Cycle 0 prompt: ${error.message}`);
