@@ -1,8 +1,8 @@
-// Updated on: C126 (Fix state management bug causing parse mode to revert)
+// Updated on: C128 (Keep left summary pane visible in diff mode)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap, VscTrash, VscSync } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap, VscTrash, VscSync, VscClose } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -118,27 +118,33 @@ const App = () => {
     }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, debouncedSave]);
     
     const parseAllTabs = React.useCallback(() => {
-        const allFilePaths = new Set<string>();
-        const updatedTabs = { ...tabs };
-        Object.values(updatedTabs).forEach(tabState => {
-            if (tabState.rawContent && !tabState.parsedContent) {
-                const parsed = parseResponse(tabState.rawContent);
-                tabState.parsedContent = parsed;
-                parsed.filesUpdated.forEach(file => allFilePaths.add(file));
-                parsed.files.forEach(file => {
-                    const lang = path.extname(file.path).substring(1) || 'plaintext';
-                    const id = `${file.path}::${file.content}`;
-                     clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
-                });
-            }
-        });
-        setTabs(updatedTabs);
-        if (allFilePaths.size > 0) {
-            clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) });
-        }
-    }, [clientIpc, tabs]);
+        setTabs(prevTabs => {
+            const allFilePaths = new Set<string>();
+            const updatedTabs = { ...prevTabs };
+            let needsUpdate = false;
     
-    // C126 Fix: Setup listeners only once to prevent re-renders from causing state resets.
+            Object.values(updatedTabs).forEach(tabState => {
+                if (tabState.rawContent && !tabState.parsedContent) {
+                    needsUpdate = true;
+                    const parsed = parseResponse(tabState.rawContent);
+                    tabState.parsedContent = parsed;
+                    parsed.filesUpdated.forEach(file => allFilePaths.add(file));
+                    parsed.files.forEach(file => {
+                        const lang = path.extname(file.path).substring(1) || 'plaintext';
+                        const id = `${file.path}::${file.content}`;
+                        clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
+                    });
+                }
+            });
+    
+            if (allFilePaths.size > 0) {
+                clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) });
+            }
+    
+            return needsUpdate ? updatedTabs : prevTabs;
+        });
+    }, [clientIpc]);
+    
     React.useEffect(() => {
         const loadCycleData = (cycleData: PcppCycle) => {
             setCurrentCycle(cycleData.cycleId);
@@ -170,7 +176,6 @@ const App = () => {
             setFileExistenceMap(new Map(Object.entries(existenceMap)));
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendFileContent, ({ path: filePath, content }) => {
-            // Only update if the content is for the currently selected file for diffing
             setSelectedFilePath(currentSelectedPath => {
                 if (filePath === currentSelectedPath) {
                     setOriginalFileContent(content);
@@ -280,12 +285,9 @@ const App = () => {
     }, [handleMouseMove, handleMouseUp]);
     
     const handleDiffClick = () => {
-        const newDiffMode = !isDiffMode;
-        setIsDiffMode(newDiffMode);
-        if (newDiffMode && selectedFilePath) {
+        setIsDiffMode(true);
+        if (selectedFilePath) {
             clientIpc.sendToServer(ClientToServerChannel.RequestFileContent, { path: selectedFilePath });
-        } else {
-            setOriginalFileContent(null);
         }
     };
 
@@ -311,19 +313,6 @@ const App = () => {
             <button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button>
         </div>
     );
-
-    const renderDiffHeader = () => {
-        if (!isDiffMode || !selectedFilePath) return null;
-        return (
-             <div className="file-content-viewer-header diff-header">
-                <span className="file-path left" title={selectedFilePath}>Original: {selectedFilePath}</span>
-                <div className="file-actions">
-                    <button onClick={() => setIsDiffMode(false)}>Back to Summary</button>
-                </div>
-                <span className="file-path right" title={selectedFilePath}>Response {activeTab}: {path.basename(selectedFilePath)}</span>
-            </div>
-        );
-    };
 
     return (
         <div className="pc-view-container">
@@ -366,14 +355,14 @@ const App = () => {
                             <textarea className="response-textarea" placeholder={`Paste AI response for tab ${activeTab} here...`} value={activeTabData?.rawContent || ''} onChange={(e) => handleRawContentChange(e.target.value, activeTab)} />
                         ) : (
                             <div className="parsed-view-grid">
-                                <div className={`parsed-view-left ${isDiffMode ? 'collapsed' : ''}`} style={!isDiffMode ? { flexBasis: `${leftPaneWidth}%` } : {}}>
+                                <div className="parsed-view-left" style={{ flexBasis: `${leftPaneWidth}%` }}>
                                      <CollapsibleSection title="Associated Files" isCollapsed={false} onToggle={() => {}}>
                                         <ul className="associated-files-list">
                                             {activeTabData.parsedContent.filesUpdated.map(file => (
                                                 <li 
                                                     key={file} 
                                                     className={selectedFilePath === file ? 'selected' : ''}
-                                                    onClick={() => {setSelectedFilePath(prev => prev === file ? null : file); setIsDiffMode(false);}}
+                                                    onClick={() => {setSelectedFilePath(prev => prev === file ? null : file);}}
                                                     title={file}
                                                 >
                                                     {fileExistenceMap.get(file) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
@@ -389,19 +378,17 @@ const App = () => {
                                         <ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown>
                                     </CollapsibleSection>
                                 </div>
-                                {!isDiffMode && <div className="resizer" onMouseDown={handleMouseDown} />}
+                                <div className="resizer" onMouseDown={handleMouseDown} />
                                 <div className="parsed-view-right">
-                                    {isDiffMode ? renderDiffHeader() : (
-                                        <div className="file-content-viewer-header">
-                                            <span className="file-path" title={selectedFilePath || ''}>{selectedFilePath ? `Response ${activeTab}: ${selectedFilePath}` : 'No file selected'}</span>
-                                            <div className="file-actions">
-                                                <button onClick={handleDiffClick} disabled={!selectedFilePath} title="Toggle Diff View"><VscDiff /></button>
-                                                <button disabled={!selectedFilePath} title="Swap with Workspace File"><VscArrowSwap /></button>
-                                            </div>
+                                    <div className="file-content-viewer-header">
+                                        <span className="file-path" title={selectedFilePath || ''}>{selectedFilePath ? `Response ${activeTab}: ${selectedFilePath}` : 'No file selected'}</span>
+                                        <div className="file-actions">
+                                            <button onClick={handleDiffClick} disabled={!selectedFilePath} title="View Diff"><VscDiff /></button>
+                                            <button disabled={!selectedFilePath} title="Swap with Workspace File"><VscArrowSwap /></button>
                                         </div>
-                                    )}
+                                    </div>
                                     <div className="code-viewer-wrapper">
-                                        {isDiffMode && activeTabData.parsedContent && selectedFilePath && originalFileContent ? (
+                                        {isDiffMode && activeTabData.parsedContent && selectedFilePath && originalFileContent !== null ? (
                                             <DiffViewer 
                                                 original={originalFileContent}
                                                 modified={activeTabData.parsedContent.files.find(f => f.path === selectedFilePath)?.content || ''}
@@ -410,6 +397,7 @@ const App = () => {
                                             <CodeViewer htmlContent={viewableContent} />
                                         )}
                                     </div>
+                                    {isDiffMode && <button className="exit-diff-button" onClick={() => setIsDiffMode(false)}><VscClose/> Back to Code</button>}
                                 </div>
                             </div>
                         )}

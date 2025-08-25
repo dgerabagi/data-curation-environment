@@ -1,4 +1,4 @@
-/* Updated on: C125 (Add styles for diff detail panes and nav) */
+/* Updated on: C128 (Adjust layout for always-visible summary pane) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -70,7 +70,7 @@ body {
     gap: 8px;
 }
 
-.cycle-navigator button, .pc-toolbar button, .file-actions button {
+.cycle-navigator button, .pc-toolbar button, .file-actions button, .exit-diff-button {
     background: none;
     border: 1px solid var(--vscode-button-border, transparent);
     color: var(--vscode-icon-foreground);
@@ -91,6 +91,17 @@ body {
         cursor: not-allowed;
     }
 }
+
+.exit-diff-button {
+    margin-top: 8px;
+    justify-content: center;
+    width: 100%;
+    background-color: var(--vscode-button-secondaryBackground);
+    &:hover {
+        background-color: var(--vscode-button-secondaryHoverBackground);
+    }
+}
+
 
 .cycle-input {
     width: 50px;
@@ -210,14 +221,6 @@ body {
     gap: 8px;
     min-width: 150px;
     padding-right: 8px;
-    transition: flex-basis 0.3s ease, padding-right 0.3s ease, min-width 0.3s ease;
-}
-
-.parsed-view-left.collapsed {
-    flex-basis: 0 !important;
-    min-width: 0;
-    padding-right: 0;
-    overflow: hidden;
 }
 
 .resizer {
@@ -250,12 +253,6 @@ body {
     border-top-right-radius: 4px;
     font-size: 12px;
     flex-shrink: 0;
-
-    &.diff-header {
-        .file-path { flex: 1; text-align: center; }
-        .file-path.left { text-align: left; }
-        .file-path.right { text-align: right; }
-    }
 
     .file-path {
         font-weight: bold;
@@ -373,10 +370,12 @@ body {
     display: flex;
     flex-direction: column;
     height: 100%;
+    min-width: 0;
 }
 .diff-viewer-main-container {
     flex-grow: 1;
     overflow: auto;
+    min-width: 0;
 }
 .diff-viewer-container {
     display: flex;
@@ -403,6 +402,11 @@ body {
     span { display: block; min-height: 1.5em; padding-right: 6px; }
 }
 
+.diff-pane .diff-lines {
+    flex-grow: 1;
+    min-width: 0;
+}
+
 .diff-pane .diff-lines .line {
     line-height: 1.5;
     padding-left: 8px;
@@ -411,7 +415,12 @@ body {
     &.added { background-color: var(--vscode-diffEditor-insertedTextBackground); }
     &.removed { background-color: var(--vscode-diffEditor-removedTextBackground); }
     &.placeholder { background-color: var(--vscode-editor-inactiveSelectionBackground); opacity: 0.5; }
-    &.selected-diff { background-color: var(--vscode-editor-selectionHighlightBackground); }
+    
+    &.selected-diff {
+        outline: 1px solid var(--vscode-focusBorder);
+        outline-offset: -1px;
+    }
+
     pre { margin: 0; padding: 0; }
 }
 
@@ -455,4 +464,8 @@ body {
     &.removed { background-color: var(--vscode-diffEditor-removedTextBackground); }
     &.added { background-color: var(--vscode-diffEditor-insertedTextBackground); }
     &:first-child { border-right: 1px solid var(--vscode-panel-border); }
+
+    .char-added { background-color: var(--vscode-diffEditor-insertedLineBackground); }
+    .char-removed { background-color: var(--vscode-diffEditor-removedLineBackground); }
+    .phantom-space { opacity: 0.5; background-color: var(--vscode-editor-inactiveSelectionBackground); }
 }
