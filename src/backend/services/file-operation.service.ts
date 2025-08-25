@@ -12,6 +12,15 @@ const normalizePath = (p: string) => p.replace(/\\/g, '/');
 export class FileOperationService {
     private filesToIgnoreForAutoAdd: Set<string> = new Set();
 
+    public async fileExists(filePath: string): Promise<boolean> {
+        try {
+            await vscode.workspace.fs.stat(vscode.Uri.file(filePath));
+            return true;
+        } catch {
+            return false;
+        }
+    }
+
     public async handleBatchFileWrite(files: BatchWriteFile[]): Promise<string[]> {
         Services.loggerService.log(`[File Operation] Received request to write ${files.length} files.`);
         const workspaceFolders = vscode.workspace.workspaceFolders;
@@ -26,6 +35,8 @@ export class FileOperationService {
             for (const file of files) {
                 const absolutePath = path.resolve(rootPath, file.path);
                 const uri = vscode.Uri.file(absolutePath);
+                // Ensure directory exists
+                await vscode.workspace.fs.createDirectory(vscode.Uri.file(path.dirname(absolutePath)));
                 const contentBuffer = Buffer.from(file.content, 'utf-8');
                 await vscode.workspace.fs.writeFile(uri, contentBuffer);
                 Services.loggerService.log(`Successfully wrote content to: ${file.path}`);
@@ -252,7 +263,7 @@ export class FileOperationService {
     public handleCopyPathRequest(filePath: string, relative: boolean) {
         const workspaceFolders = vscode.workspace.workspaceFolders;
         let pathToCopy = filePath;
-        if (relative && workspaceFolders?.[0]) {
+        if (relative && workspaceFolders && workspaceFolders.length > 0) {
             pathToCopy = path.relative(workspaceFolders[0].uri.fsPath, filePath);
         }
         vscode.env.clipboard.writeText(pathToCopy);

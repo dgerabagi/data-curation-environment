@@ -1,4 +1,4 @@
-// Updated on: C138 (Fix new cycle state creation)
+// Updated on: C139 (Add conditional rendering for OnboardingView)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -12,7 +12,9 @@ import ReactMarkdown from 'react-markdown';
 import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
 import * as path from 'path-browserify';
 import { BatchWriteFile } from '@/common/ipc/channels.type';
+import OnboardingView from './OnboardingView';
 
+// ... (rest of the components like useDebounce, CodeViewer, CollapsibleSection remain the same)
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
@@ -36,8 +38,8 @@ const CodeViewer: React.FC<{ htmlContent: string | undefined | null }> = ({ html
          return <div style={{ padding: '8px', color: 'var(--vscode-errorForeground)' }}>{htmlContent}</div>;
     }
 
-    const codeContentMatch = /<pre><code>([\s\S]*)<\/code><\/pre>/s.exec(htmlContent);
-    const code = codeContentMatch ? codeContentMatch[1] : htmlContent;
+    const codeContentMatch = /<pre><code>([\s\S]*)<\/code><\/pre>/s.exec(htmlContent || '');
+    const code = codeContentMatch?.[1] ?? (htmlContent || '');
 
     const lines = code.split('\n');
     if (lines.length > 1 && lines[lines.length - 1] === '') {
@@ -74,10 +76,11 @@ const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; i
     </div>
 );
 
+
 const App = () => {
     const [activeTab, setActiveTab] = React.useState(1);
     const [tabCount, setTabCount] = React.useState(4);
-    const [currentCycle, setCurrentCycle] = React.useState(1);
+    const [currentCycle, setCurrentCycle] = React.useState<number | null>(null); // Can be null initially
     const [maxCycle, setMaxCycle] = React.useState(1);
     const [cycleTitle, setCycleTitle] = React.useState('');
     const [cycleContext, setCycleContext] = React.useState('');
@@ -100,6 +103,7 @@ const App = () => {
     const clientIpc = ClientPostMessageManager.getInstance();
 
     const saveCurrentCycleState = React.useCallback(() => {
+        if (currentCycle === null || currentCycle === 0) return; // Do not save for Cycle 0
         const responses: { [key: string]: PcppResponse } = {};
         for (let i = 1; i <= tabCount; i++) {
             responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' };
@@ -182,6 +186,7 @@ const App = () => {
 
     React.useEffect(() => { if (isParsedMode) parseAllTabs(); }, [isParsedMode, tabs, parseAllTabs]);
     
+    // ... (rest of the handlers and memoized values)
     const activeTabData = tabs[activeTab.toString()];
 
     const viewableContent = React.useMemo(() => {
@@ -203,23 +208,25 @@ const App = () => {
     
     const handleNewCycle = (e: React.MouseEvent) => {
         e.stopPropagation();
-        saveCurrentCycleState(); // Save the state of the cycle we are leaving
+        saveCurrentCycleState();
     
         const newCycleId = maxCycle + 1;
         setMaxCycle(newCycleId);
         setCurrentCycle(newCycleId);
         
-        // Reset all user-input fields for the new cycle to prevent data bleeding
         setCycleTitle('New Cycle');
         setCycleContext('');
         setEphemeralContext('');
-        setTabs({}); // Reset all response tabs
+        setTabs({});
         setIsParsedMode(false);
         setSelectedResponseId(null);
         setSelectedFilesForReplacement(new Set());
     };
 
-    const handleGeneratePrompt = () => clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle });
+    const handleGeneratePrompt = () => {
+        if (currentCycle === null) return;
+        clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle });
+    }
     const handleMouseDown = React.useCallback((e: React.MouseEvent) => { e.preventDefault(); isResizing.current = true; }, []);
     const handleMouseMove = React.useCallback((e: MouseEvent) => { if (!isResizing.current) return; const newWidth = (e.clientX / window.innerWidth) * 100; if (newWidth > 10 && newWidth < 90) setLeftPaneWidth(newWidth); }, []);
     const handleMouseUp = React.useCallback(() => { isResizing.current = false; }, []);
@@ -232,7 +239,7 @@ const App = () => {
     }, [isParsedMode, handleMouseMove, handleMouseUp]);
     
     const handleSelectForViewing = (filePath: string) => { const newPath = selectedFilePath === filePath ? null : filePath; setSelectedFilePath(newPath); };
-    const handleDeleteCycle = () => clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle });
+    const handleDeleteCycle = () => { if(currentCycle !== null) clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle }); };
     const handleResetHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {});
     const handleFileSelectionToggle = (filePath: string) => setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); if (newSet.has(filePath)) newSet.delete(filePath); else newSet.add(filePath); return newSet; });
     
@@ -268,6 +275,7 @@ const App = () => {
     }, [cycleTitle, cycleContext, selectedResponseId]);
     
     const handleLogState = () => {
+        if (currentCycle === null) return;
         const responses: { [key: string]: PcppResponse } = {};
         for (let i = 1; i <= tabCount; i++) {
             responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' };
@@ -277,6 +285,14 @@ const App = () => {
     };
 
     const isReadyForNextCycle = !isNewCycleButtonDisabled;
+
+    if (currentCycle === null) {
+        return <div>Loading...</div>; // Or a spinner component
+    }
+
+    if (currentCycle === 0) {
+        return <OnboardingView />;
+    }
 
     const collapsedNavigator = <div className="collapsed-navigator"><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button><span className="cycle-display">C{currentCycle}</span><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button></div>;
     

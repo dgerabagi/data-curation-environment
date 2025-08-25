@@ -1,10 +1,44 @@
-/* Updated on: C133 (Add styling for selected tabs and new buttons) */
+/* Updated on: C139 (Add styles for OnboardingView) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
     font-size: var(--vscode-font-size);
     color: var(--vscode-editor-foreground);
     background-color: var(--vscode-editor-background);
+}
+
+.onboarding-container {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    gap: 16px;
+    box-sizing: border-box;
+    
+    h1 {
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+
+    p {
+        color: var(--vscode-descriptionForeground);
+    }
+}
+
+.onboarding-textarea {
+    width: 100%;
+    flex-grow: 1;
+    background-color: var(--vscode-input-background);
+    color: var(--vscode-input-foreground);
+    border: 1px solid var(--vscode-input-border);
+    border-radius: 2px;
+    padding: 8px;
+    font-family: var(--vscode-editor-font-family);
+    font-size: var(--vscode-editor-font-size);
+    resize: none;
+    &:focus {
+        outline: 1px solid var(--vscode-focusBorder);
+    }
 }
 
 .pc-view-container {

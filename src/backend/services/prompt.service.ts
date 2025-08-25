@@ -1,4 +1,4 @@
-// Updated on: C138 (Fix prompt generation logic for cycles and course of action)
+// Updated on: C139 (Add Cycle 0 prompt generation)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -45,14 +45,6 @@ M7. Flattened Repo
 21.1. when creating a new documentation artifact, also just update the master artifacts list itself.
 </M3. Interaction Schema>`;
 
-    private projectScopeTemplate = `<M4. current project scope>
-The plan is to create a Data Curation Environment. We will do this by creating a VS Code extension. The three main components will be:
-
-Phase 1. Context chooser - Choose files/folders (checkmark option in the file explorer) that will be packaged as artifacts into a \`flattened_repo.md\` file.
-Phase 2. parallel 'co-pilot' panel. Basically, we need our own AI Studio interface that is parallelizable. so thats what is wrong with the curernt co-pilot panel, that you are 'locked in' to a single conversation flow. my process involves sending the same prompt to up to 8 different conversation windows and then scrutinizing the responses in winmerge.
-Phase 3. Diff Tool - Basically, winmerge but intergrated into a window within VS Code. My workflow is often comparing two identical responses, or comparing a new artifact with the current version. Currently, I'm first copying and pasting responses into separate notepad files, and then for which ever i need to compare given my task, i then manually move that one into winmerge to compare against another that i manually move. instead, the ability to just select between two to compare would be a massive decrease in the manual workload.
-</M4. current project scope>`;
-
     private getPreviousCycleSummary(cycle: PcppCycle | undefined): string {
         if (!cycle) return '';
         
@@ -69,7 +61,6 @@ Phase 3. Diff Tool - Basically, winmerge but intergrated into a window within VS
 
         const parsed = parseResponse(previousResponseContent);
         
-        // C138 Fix: Use backticks for template literal to correctly interpolate variables
         let summary = `${parsed.summary}\n\n${parsed.courseOfAction}`;
 
         if (parsed.filesUpdated.length > 0) {
@@ -82,7 +73,6 @@ Phase 3. Diff Tool - Basically, winmerge but intergrated into a window within VS
     private async _generateCyclesContent(currentCycleData: PcppCycle, fullHistory: PcppCycle[]): Promise<string> {
         const allCycles = [...fullHistory];
         const cycleMap = new Map(allCycles.map(c => [c.cycleId, c]));
-        // Ensure current cycle data is the most up-to-date in the map
         cycleMap.set(currentCycleData.cycleId, currentCycleData);
 
         const sortedHistory = [...cycleMap.values()].sort((a, b) => b.cycleId - a.cycleId);
@@ -92,17 +82,14 @@ Phase 3. Diff Tool - Basically, winmerge but intergrated into a window within VS
         for (const cycle of sortedHistory) {
             cyclesContent += `\n\n<Cycle ${cycle.cycleId}>\n`;
     
-            // Add Context for the current cycle in the loop
             if (cycle.cycleContext && cycle.cycleContext.trim()) {
                 cyclesContent += `<Cycle Context>\n${cycle.cycleContext}\n</Cycle Context>\n`;
             }
     
-            // Only add Ephemeral Context for the *absolute current* cycle being generated
             if (cycle.cycleId === currentCycleData.cycleId && cycle.ephemeralContext && cycle.ephemeralContext.trim()) {
                 cyclesContent += `<Ephemeral Context>\n${cycle.ephemeralContext}\n</Ephemeral Context>\n`;
             }
     
-            // Add the summary from the cycle *before* the one in the loop
             const previousCycleId = cycle.cycleId - 1;
             const previousCycle = cycleMap.get(previousCycleId);
             if (previousCycle) {
@@ -160,7 +147,7 @@ ${cyclesContent}
 
     public async generatePromptFile(cycleTitle: string, currentCycle: number) {
         const workspaceFolders = vscode.workspace.workspaceFolders;
-        if (!workspaceFolders || !workspaceFolders[0]) {
+        if (!workspaceFolders || workspaceFolders.length === 0) {
             vscode.window.showErrorMessage("Cannot generate prompt: No workspace folder is open.");
             return;
         }
@@ -202,12 +189,14 @@ ${cyclesContent}
                 Services.loggerService.warn("Could not read A0. DCE Master Artifact List.md");
             }
 
+            const projectScope = `<M4. current project scope>\n${currentCycleData.cycleContext || 'No project scope defined for this cycle.'}\n</M4. current project scope>`;
+
             const promptParts = [
                 `<prompt.md>`,
                 this.artifactSchemaTemplate,
                 cycleOverview,
                 this.interactionSchemaTemplate,
-                this.projectScopeTemplate,
+                projectScope,
                 `<M5. organized artifacts list>\n${masterArtifactListContent}\n</M5. organized artifacts list>`,
                 cyclesContent,
                 `<M7. Flattened Repo>\n${flattenedContent}\n</M7. Flattened Repo>`,
@@ -227,6 +216,78 @@ ${cyclesContent}
             }
             vscode.window.showErrorMessage(errorMessage);
             Services.loggerService.error(errorMessage);
+        }
+    }
+
+    public async generateCycle0Prompt(projectScope: string) {
+        const workspaceFolders = vscode.workspace.workspaceFolders;
+        if (!workspaceFolders || workspaceFolders.length === 0) {
+            vscode.window.showErrorMessage("Cannot generate prompt: No workspace folder is open.");
+            return;
+        }
+        const rootPath = workspaceFolders[0].uri.fsPath;
+        const promptMdPath = path.join(rootPath, 'prompt.md');
+        const artifactsPath = path.join(rootPath, 'src', 'Artifacts');
+
+        try {
+            Services.loggerService.log("Generating Cycle 0 prompt.md file...");
+
+            const templateArtifacts = ['A61', 'A62', 'A63', 'A64', 'A65', 'A66', 'A67'];
+            let staticContext = '';
+            for (const artifactId of templateArtifacts) {
+                const artifactPath = path.join(artifactsPath, `${artifactId}. Template - Master Artifact List.md`); // This is wrong, need to fix filenames.
+                // Correcting filenames based on my own plan.
+                const artifactFilenameMap: { [key: string]: string } = {
+                    'A61': 'A61. Template - Master Artifact List.md',
+                    'A62': 'A62. Template - Project Vision and Goals.md',
+                    'A63': 'A63. Template - Phase 1 Requirements & Design.md',
+                    'A64': 'A64. Template - Technical Scaffolding Plan.md',
+                    'A65': 'A65. Template - Target File Structure.md',
+                    'A66': 'A66. Template - Initial Scaffolding Deployment Script.md',
+                    'A67': 'A67. Template - Development and Testing Guide.md'
+                };
+                const correctArtifactPath = path.join(artifactsPath, artifactFilenameMap[artifactId]);
+                try {
+                    const content = await fs.readFile(correctArtifactPath, 'utf-8');
+                    staticContext += `<${artifactFilenameMap[artifactId]}>\n${content}\n</${artifactFilenameMap[artifactId]}>\n\n`;
+                } catch (e) {
+                    Services.loggerService.warn(`Could not read template artifact: ${correctArtifactPath}`);
+                }
+            }
+
+            const cycle0Content = `<Cycle 0>
+<Cycle Context>
+Review the user's project scope in M4. Your task is to act as a senior project architect and begin establishing the necessary documentation to achieve the user's goals.
+
+You have been provided with a set of best-practice templates for software engineering documentation as static context. Use these examples to guide your output.
+
+Your first response should be to generate a starter set of artifacts for this new project. Begin by creating a Master Artifact List (A0), similar to the provided template, and then create the first few essential planning documents (e.g., Project Vision, High-Level Requirements).
+</Cycle Context>
+
+<Static Context>
+${staticContext}
+</Static Context>
+</Cycle 0>`;
+
+            const promptParts = [
+                `<prompt.md>`,
+                this.artifactSchemaTemplate,
+                `<M2. cycle overview>\nCurrent Cycle 0 - Project Initialization\n</M2. cycle overview>`,
+                this.interactionSchemaTemplate,
+                `<M4. current project scope>\n${projectScope}\n</M4. current project scope>`,
+                `<M5. organized artifacts list>\n# No artifacts exist yet.\n</M5. organized artifacts list>`,
+                `<M6. Cycles>\n${cycle0Content}\n</M6. Cycles>`,
+                `<M7. Flattened Repo>\n<!-- No files selected for initial prompt -->\n</M7. Flattened Repo>`,
+                `</prompt.md>`
+            ];
+
+            const finalPrompt = promptParts.join('\n\n');
+            await fs.writeFile(promptMdPath, finalPrompt, 'utf-8');
+            vscode.window.showInformationMessage(`Successfully generated initial prompt.md for Cycle 0.`);
+            Services.loggerService.log("Successfully generated Cycle 0 prompt.md file.");
+        } catch (error: any) {
+            vscode.window.showErrorMessage(`Failed to generate Cycle 0 prompt: ${error.message}`);
+            Services.loggerService.error(`Failed to generate Cycle 0 prompt: ${error.message}`);
         }
     }
 }

@@ -1,4 +1,4 @@
-// Updated on: C135 (Send FilesWritten message after successful write)
+// Updated on: C139 (Add handler for Cycle 0 prompt)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -9,6 +9,10 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestCreatePromptFile, (data) => {
         promptService.generatePromptFile(data.cycleTitle, data.currentCycle);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestCreateCycle0Prompt, (data) => {
+        promptService.generateCycle0Prompt(data.projectScope);
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestFileExistence, (data) => {

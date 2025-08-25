@@ -26,6 +26,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestRedo ? {} :
     T extends ClientToServerChannel.RequestAddFileFromBuffer ? { targetPath: string, data: Uint8Array } :
     T extends ClientToServerChannel.RequestCopyFileFromUri ? { sourceUri: string, targetDir: string } :
+    T extends ClientToServerChannel.RequestCreateFile ? { filePath: string } :
     T extends ClientToServerChannel.RequestPdfToText ? { path: string } :
     T extends ClientToServerChannel.RequestExcelToText ? { path: string } :
     T extends ClientToServerChannel.RequestWordToText ? { path: string } :
@@ -34,6 +35,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.SaveAutoAddState ? { enabled: boolean } :
     T extends ClientToServerChannel.VSCodeCommand ? { command: string, args?: any[] } :
     T extends ClientToServerChannel.RequestCreatePromptFile ? { cycleTitle: string; currentCycle: number } :
+    T extends ClientToServerChannel.RequestCreateCycle0Prompt ? { projectScope: string } : // New
     T extends ClientToServerChannel.RequestFileExistence ? { paths: string[] } :
     T extends ClientToServerChannel.RequestSyntaxHighlight ? { code: string; lang: string, id: string } :
     T extends ClientToServerChannel.RequestLatestCycleData ? {} :
@@ -59,5 +61,5 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SendSyntaxHighlight ? { highlightedHtml: string, id: string } :
     T extends ServerToClientChannel.SendLatestCycleData ? { cycleData: PcppCycle } :
     T extends ServerToClientChannel.SendCycleData ? { cycleData: PcppCycle | null } :
-    T extends ServerToClientChannel.FilesWritten ? { paths: string[] } : // New
+    T extends ServerToClientChannel.FilesWritten ? { paths: string[] } :
     never;

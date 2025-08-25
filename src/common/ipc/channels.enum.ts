@@ -21,6 +21,7 @@ export enum ClientToServerChannel {
     RequestAddFileFromBuffer = "clientToServer.requestAddFileFromBuffer",
     RequestCopyFileFromUri = "clientToServer.requestCopyFileFromUri",
     RequestBatchFileWrite = "clientToServer.requestBatchFileWrite",
+    RequestCreateFile = "clientToServer.requestCreateFile",
 
     // Special File Handling
     RequestPdfToText = "clientToServer.requestPdfToText",
@@ -37,6 +38,7 @@ export enum ClientToServerChannel {
 
     // Phase 2: PCPP
     RequestCreatePromptFile = "clientToServer.requestCreatePromptFile",
+    RequestCreateCycle0Prompt = "clientToServer.requestCreateCycle0Prompt", // New
     RequestFileExistence = "clientToServer.requestFileExistence",
     RequestSyntaxHighlight = "clientToServer.requestSyntaxHighlight",
     RequestLatestCycleData = "clientToServer.requestLatestCycleData",
@@ -65,5 +67,5 @@ export enum ServerToClientChannel {
     SendSyntaxHighlight = "serverToClient.sendSyntaxHighlight",
     SendLatestCycleData = "serverToClient.sendLatestCycleData",
     SendCycleData = "serverToClient.sendCycleData",
-    FilesWritten = "serverToClient.filesWritten", // New
+    FilesWritten = "serverToClient.filesWritten",
 }

@@ -1,5 +1,4 @@
 // src/backend/services/history.service.ts
-// Updated on: C138 (Fix workspace folder access)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -10,11 +9,13 @@ import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 
 export class HistoryService {
     private historyFilePath: string | undefined;
+    private workspaceRoot: string | undefined;
 
     constructor() {
         const workspaceFolders = vscode.workspace.workspaceFolders;
-        if (workspaceFolders && workspaceFolders[0]) {
-            this.historyFilePath = path.join(workspaceFolders[0].uri.fsPath, '.vscode', 'dce_history.json');
+        if (workspaceFolders && workspaceFolders.length > 0) {
+            this.workspaceRoot = workspaceFolders[0].uri.fsPath;
+            this.historyFilePath = path.join(this.workspaceRoot, '.vscode', 'dce_history.json');
         } else {
             Services.loggerService.warn("HistoryService: No workspace folder found. History will not be saved.");
         }
@@ -26,7 +27,6 @@ export class HistoryService {
             const content = await vscode.workspace.fs.readFile(vscode.Uri.file(this.historyFilePath));
             return JSON.parse(Buffer.from(content).toString('utf-8'));
         } catch (error) {
-            Services.loggerService.warn("dce_history.json not found or is invalid. A new one will be created.");
             return { version: 1, cycles: [] };
         }
     }
@@ -51,20 +51,36 @@ export class HistoryService {
     public async getLatestCycle(): Promise<PcppCycle> {
         Services.loggerService.log("HistoryService: getLatestCycle called.");
         const history = await this._readHistoryFile();
+        let isFreshEnvironment = history.cycles.length === 0;
+
+        if (this.workspaceRoot) {
+            const a0Path = path.join(this.workspaceRoot, 'src/Artifacts', 'A0. DCE Master Artifact List.md');
+            const a0Exists = await Services.fileOperationService.fileExists(a0Path);
+            if (!a0Exists) {
+                isFreshEnvironment = true;
+            }
+        }
+        
+        const defaultCycle: PcppCycle = {
+            cycleId: isFreshEnvironment ? 0 : 1,
+            timestamp: new Date().toISOString(),
+            title: 'New Cycle',
+            cycleContext: '',
+            ephemeralContext: '',
+            responses: { "1": { content: "" } },
+            isParsedMode: false,
+            leftPaneWidth: 33,
+            selectedResponseId: null,
+            selectedFilesForReplacement: [],
+        };
+
+        if (isFreshEnvironment) {
+             Services.loggerService.log("Fresh environment detected. Returning Cycle 0.");
+             return defaultCycle;
+        }
+
         if (history.cycles.length === 0) {
             Services.loggerService.log("No history found, creating default cycle 1.");
-            const defaultCycle: PcppCycle = {
-                cycleId: 1,
-                timestamp: new Date().toISOString(),
-                title: 'New Cycle',
-                cycleContext: '',
-                ephemeralContext: '',
-                responses: { "1": { content: "" } },
-                isParsedMode: false,
-                leftPaneWidth: 33,
-                selectedResponseId: null,
-                selectedFilesForReplacement: [],
-            };
             await this.saveCycleData(defaultCycle);
             return defaultCycle;
         }
@@ -81,6 +97,9 @@ export class HistoryService {
     }
 
     public async saveCycleData(cycleData: PcppCycle): Promise<void> {
+        // Do not save cycle 0 to history
+        if (cycleData.cycleId === 0) return;
+
         Services.loggerService.log(`HistoryService: saving data for cycle ${cycleData.cycleId}.`);
         const history = await this._readHistoryFile();
         const cycleIndex = history.cycles.findIndex(c => c.cycleId === cycleData.cycleId);
