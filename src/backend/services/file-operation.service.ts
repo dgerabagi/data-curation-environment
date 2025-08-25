@@ -5,11 +5,36 @@ import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { ServerToClientChannel } from "@/common/ipc/channels.enum";
 import { Services } from "./services";
 import { Action, MoveActionPayload } from "./action.service";
+import { BatchWriteFile } from "@/common/ipc/channels.type";
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
 export class FileOperationService {
     private filesToIgnoreForAutoAdd: Set<string> = new Set();
+
+    public async handleBatchFileWrite(files: BatchWriteFile[]) {
+        Services.loggerService.log(`[File Operation] Received request to write ${files.length} files.`);
+        const workspaceFolders = vscode.workspace.workspaceFolders;
+        if (!workspaceFolders?.[0]) {
+            vscode.window.showErrorMessage("Cannot write files: No workspace folder is open.");
+            return;
+        }
+        const rootPath = workspaceFolders[0].uri.fsPath;
+
+        try {
+            for (const file of files) {
+                const absolutePath = path.resolve(rootPath, file.path);
+                const uri = vscode.Uri.file(absolutePath);
+                const contentBuffer = Buffer.from(file.content, 'utf-8');
+                await vscode.workspace.fs.writeFile(uri, contentBuffer);
+                Services.loggerService.log(`Successfully wrote content to: ${file.path}`);
+            }
+            vscode.window.showInformationMessage(`Successfully accepted and wrote ${files.length} files to the workspace.`);
+        } catch (error) {
+            Services.loggerService.error(`Failed during batch file write: ${error}`);
+            vscode.window.showErrorMessage(`Failed to write files: ${error}`);
+        }
+    }
 
     public async handleFileContentRequest(filePath: string, serverIpc: ServerPostMessageManager) {
         Services.loggerService.log(`handleFileContentRequest initiated for: ${filePath}`);

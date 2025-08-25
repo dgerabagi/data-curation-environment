@@ -20,6 +20,7 @@ export enum ClientToServerChannel {
     RequestAddFileFromBuffer = "clientToServer.requestAddFileFromBuffer",
     RequestCopyFileFromUri = "clientToServer.requestCopyFileFromUri",
     RequestFileContent = "clientToServer.requestFileContent",
+    RequestBatchFileWrite = "clientToServer.requestBatchFileWrite", // New for batch acceptance
 
     // Special File Handling
     RequestPdfToText = "clientToServer.requestPdfToText",

@@ -1,4 +1,4 @@
-/* Updated on: C131 (Styles for side-by-side diff layout and scroll-locking) */
+/* Updated on: C132 (Re-enable all scrollbars) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -267,6 +267,19 @@ body {
     }
 }
 
+.response-acceptance-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 8px;
+    font-size: 12px;
+    background-color: var(--vscode-sideBar-sectionHeaderBackground);
+
+    input[type="checkbox"] {
+        margin-right: 4px;
+    }
+}
+
 .code-viewer-wrapper {
     display: flex;
     flex-grow: 1;
@@ -328,6 +341,10 @@ body {
         overflow: hidden;
         text-overflow: ellipsis;
 
+        input[type="checkbox"] {
+            margin-right: 4px;
+        }
+
         &:hover {
             background-color: var(--vscode-list-hoverBackground);
         }
@@ -371,6 +388,9 @@ body {
     flex-direction: column;
     height: 100%;
     min-height: 0;
+    &:focus {
+        outline: 1px solid var(--vscode-focusBorder);
+    }
 }
 .diff-viewer-main-container {
     flex-grow: 1;
@@ -386,12 +406,7 @@ body {
     display: flex;
     flex-direction: column; /* Stack header and content */
     min-width: 0;
-    overflow: hidden; /* Hide outer scrollbars */
-    &.right-pane {
-        .diff-pane-content {
-            overflow-y: hidden; /* Hide scrollbar on follower */
-        }
-    }
+    overflow: hidden;
     &:first-of-type { border-right: 1px solid var(--vscode-panel-border); }
 }
 

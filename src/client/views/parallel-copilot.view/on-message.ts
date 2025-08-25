@@ -1,4 +1,4 @@
-// Updated on: C125 (Add cycle management handlers)
+// Updated on: C132 (Add batch write handler)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -43,5 +43,9 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestResetHistory, () => {
         historyService.resetHistory();
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestBatchFileWrite, (data) => {
+        fileOperationService.handleBatchFileWrite(data.files);
     });
 }

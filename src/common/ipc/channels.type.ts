@@ -4,6 +4,7 @@ import { PcppCycle } from "@/common/types/pcpp.types";
 
 export type SelectionSet = { [name: string]: string[] };
 export type ProblemCountsMap = { [path: string]: { error: number; warning: number; } };
+export type BatchWriteFile = { path: string; content: string };
 
 export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel> =
     T extends ClientToServerChannel.RequestInitialData ? {} :
@@ -40,6 +41,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.SaveCycleData ? { cycleData: PcppCycle } :
     T extends ClientToServerChannel.RequestDeleteCycle ? { cycleId: number } :
     T extends ClientToServerChannel.RequestResetHistory ? {} :
+    T extends ClientToServerChannel.RequestBatchFileWrite ? { files: BatchWriteFile[] } :
     
     T extends ServerToClientChannel.SendWorkspaceFiles ? { files: FileNode[] } :
     T extends ServerToClientChannel.SendWorkspaceTrustState ? { isTrusted: boolean } :

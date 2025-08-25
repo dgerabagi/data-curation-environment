@@ -1,6 +1,6 @@
-// Updated on: C131 (Side-by-side main view, top/bottom detail, scroll-lock)
+// Updated on: C132 (Add keyboard nav, accept logic, and four scrollbars)
 import * as React from 'react';
-import { diffArrays, diffChars } from 'diff';
+import { diffArrays, diffChars, Change } from 'diff';
 import { VscArrowUp, VscArrowDown } from 'react-icons/vsc';
 
 interface DiffLine {
@@ -21,15 +21,19 @@ interface DiffBlock {
 
 const DiffViewer: React.FC<{ original: { content: string, path: string }, modified: { content: string, path: string } }> = ({ original, modified }) => {
     const [selectedDiffIndex, setSelectedDiffIndex] = React.useState<number>(0);
+    const [originalLines, setOriginalLines] = React.useState<string[]>(() => original.content.split('\n'));
     const diffLineRefs = React.useRef<Map<number, HTMLDivElement>>(new Map());
     const leftPaneRef = React.useRef<HTMLDivElement>(null);
     const rightPaneRef = React.useRef<HTMLDivElement>(null);
     const leftDetailRef = React.useRef<HTMLDivElement>(null);
     const rightDetailRef = React.useRef<HTMLDivElement>(null);
+    const wrapperRef = React.useRef<HTMLDivElement>(null);
 
+    React.useEffect(() => {
+        setOriginalLines(original.content.split('\n'));
+    }, [original.content]);
 
     const { pairedLines, diffBlocks } = React.useMemo(() => {
-        const originalLines = original.content.split('\n');
         const modifiedLines = modified.content.split('\n');
         const changes = diffArrays(originalLines, modifiedLines);
         
@@ -38,50 +42,100 @@ const DiffViewer: React.FC<{ original: { content: string, path: string }, modifi
         let leftLineNum = 1;
         let rightLineNum = 1;
 
-        changes.forEach(change => {
-            if (change.added || change.removed) {
-                const blockStart = result.length;
-                if (change.added) {
-                    change.value.forEach(line => {
-                        result.push({ left: { type: 'placeholder' }, right: { type: 'added', content: line, lineNum: rightLineNum++ }, isDiff: true });
-                    });
-                } else if (change.removed) {
-                    change.value.forEach(line => {
-                        result.push({ left: { type: 'removed', content: line, lineNum: leftLineNum++ }, right: { type: 'placeholder' }, isDiff: true });
-                    });
+        for (const change of changes) {
+            const blockStart = result.length;
+            let isDiffBlock = false;
+            if (change.added) {
+                isDiffBlock = true;
+                for (const line of change.value) {
+                    result.push({ left: { type: 'placeholder' }, right: { type: 'added', content: line, lineNum: rightLineNum++ }, isDiff: true });
                 }
-                diffBlockIndices.push({ start: blockStart, end: result.length - 1 });
+            } else if (change.removed) {
+                isDiffBlock = true;
+                for (const line of change.value) {
+                    result.push({ left: { type: 'removed', content: line, lineNum: leftLineNum++ }, right: { type: 'placeholder' }, isDiff: true });
+                }
             } else {
-                change.value.forEach(line => {
+                for (const line of change.value) {
                     result.push({ left: { type: 'common', content: line, lineNum: leftLineNum++ }, right: { type: 'common', content: line, lineNum: rightLineNum++ }, isDiff: false });
-                });
+                }
             }
-        });
+            if (isDiffBlock) {
+                diffBlockIndices.push({ start: blockStart, end: result.length - 1 });
+            }
+        }
         return { pairedLines: result, diffBlocks: diffBlockIndices };
-    }, [original.content, modified.content]);
+    }, [originalLines, modified.content]);
 
-    const goToDiff = (index: number) => {
+    const goToDiff = React.useCallback((index: number) => {
         if (index >= 0 && index < diffBlocks.length) {
             setSelectedDiffIndex(index);
             const lineIndex = diffBlocks[index].start;
             diffLineRefs.current.get(lineIndex)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
+    }, [diffBlocks]);
+
+    React.useEffect(() => {
+        goToDiff(selectedDiffIndex);
+    }, [selectedDiffIndex, goToDiff]);
+
+    const handleAcceptChange = () => {
+        if (selectedDiffIndex < 0 || selectedDiffIndex >= diffBlocks.length) return;
+    
+        const block = diffBlocks[selectedDiffIndex];
+        const blockLines = pairedLines.slice(block.start, block.end + 1);
+    
+        const originalBlockLines = blockLines.filter(l => l.left.type === 'removed').map(l => l.left.content);
+        const modifiedBlockLines = blockLines.filter(l => l.right.type === 'added').map(l => l.right.content);
+    
+        const firstOriginalLineNum = blockLines.find(l => l.left.lineNum)?.left.lineNum;
+    
+        if (firstOriginalLineNum === undefined) return;
+    
+        const startIndex = firstOriginalLineNum - 1;
+        const deleteCount = originalBlockLines.length;
+    
+        setOriginalLines(prev => {
+            const newLines = [...prev];
+            newLines.splice(startIndex, deleteCount, ...modifiedBlockLines as string[]);
+            return newLines;
+        });
     };
+
+    React.useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                setSelectedDiffIndex(prev => Math.min(prev + 1, diffBlocks.length - 1));
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                setSelectedDiffIndex(prev => Math.max(prev - 1, 0));
+            } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                handleAcceptChange();
+            }
+        };
+
+        const wrapper = wrapperRef.current;
+        wrapper?.addEventListener('keydown', handleKeyDown);
+        return () => wrapper?.removeEventListener('keydown', handleKeyDown);
+    }, [diffBlocks.length, handleAcceptChange]);
+
 
     const handleScroll = (scroller: 'left' | 'right') => {
         if (!leftPaneRef.current || !rightPaneRef.current) return;
-        if (scroller === 'left') {
+        if (scroller === 'left' && rightPaneRef.current.scrollTop !== leftPaneRef.current.scrollTop) {
             rightPaneRef.current.scrollTop = leftPaneRef.current.scrollTop;
-        } else {
+        } else if (scroller === 'right' && leftPaneRef.current.scrollTop !== rightPaneRef.current.scrollTop) {
             leftPaneRef.current.scrollTop = rightPaneRef.current.scrollTop;
         }
     };
 
     const handleDetailScroll = (scroller: 'left' | 'right') => {
         if (!leftDetailRef.current || !rightDetailRef.current) return;
-        if (scroller === 'left') {
+        if (scroller === 'left' && rightDetailRef.current.scrollLeft !== leftDetailRef.current.scrollLeft) {
             rightDetailRef.current.scrollLeft = leftDetailRef.current.scrollLeft;
-        } else {
+        } else if (scroller === 'right' && leftDetailRef.current.scrollLeft !== rightDetailRef.current.scrollLeft) {
             leftDetailRef.current.scrollLeft = rightDetailRef.current.scrollLeft;
         }
     };
@@ -108,7 +162,7 @@ const DiffViewer: React.FC<{ original: { content: string, path: string }, modifi
     };
 
     const selectedDiffContent = React.useMemo(() => {
-        if (diffBlocks.length === 0) return { left: [], right: [] };
+        if (diffBlocks.length === 0 || selectedDiffIndex < 0 || selectedDiffIndex >= diffBlocks.length) return { left: [], right: [] };
         const block = diffBlocks[selectedDiffIndex];
         const blockLines = pairedLines.slice(block.start, block.end + 1);
         
@@ -119,31 +173,31 @@ const DiffViewer: React.FC<{ original: { content: string, path: string }, modifi
     }, [selectedDiffIndex, pairedLines, diffBlocks]);
 
     return (
-        <div className="diff-viewer-wrapper">
+        <div className="diff-viewer-wrapper" ref={wrapperRef} tabIndex={-1}>
             <div className="diff-viewer-main-container">
-                {/* Original Pane (Left) */}
+                {/* Modified Pane (Left) */}
                 <div className="diff-pane" onScroll={() => handleScroll('left')} ref={leftPaneRef}>
-                    <div className="diff-pane-header">Original: {original.path}</div>
+                    <div className="diff-pane-header">Response: {modified.path}</div>
                     <div className="diff-pane-content">
-                        <div className="line-numbers">{pairedLines.map((line, i) => <span key={`L${i}`}>{line.left.lineNum || ' '}</span>)}</div>
+                        <div className="line-numbers">{pairedLines.map((line, i) => <span key={`L${i}`}>{line.right.lineNum || ' '}</span>)}</div>
                         <div className="diff-lines">
                             {pairedLines.map((line, i) => (
-                                <div key={`L${i}`} className={`line ${line.left.type}`} ref={ref => { if (ref) diffLineRefs.current.set(i, ref); }}>
-                                    <pre><code>{line.left.content || ''}</code></pre>
+                                <div key={`L${i}`} className={`line ${line.right.type} ${diffBlocks[selectedDiffIndex]?.start <= i && i <= diffBlocks[selectedDiffIndex]?.end ? 'selected-diff' : ''}`} ref={ref => { if (ref) diffLineRefs.current.set(i, ref); }}>
+                                    <pre><code>{line.right.content || ''}</code></pre>
                                 </div>
                             ))}
                         </div>
                     </div>
                 </div>
-                {/* Modified Pane (Right) */}
-                <div className="diff-pane right-pane" onScroll={() => handleScroll('right')} ref={rightPaneRef}>
-                     <div className="diff-pane-header">Response: {modified.path}</div>
+                {/* Original Pane (Right) */}
+                <div className="diff-pane" onScroll={() => handleScroll('right')} ref={rightPaneRef}>
+                     <div className="diff-pane-header">Original: {original.path}</div>
                      <div className="diff-pane-content">
-                        <div className="line-numbers">{pairedLines.map((line, i) => <span key={`R${i}`}>{line.right.lineNum || ' '}</span>)}</div>
+                        <div className="line-numbers">{pairedLines.map((line, i) => <span key={`R${i}`}>{line.left.lineNum || ' '}</span>)}</div>
                         <div className="diff-lines">
                             {pairedLines.map((line, i) => (
-                                <div key={`R${i}`} className={`line ${line.right.type}`}>
-                                    <pre><code>{line.right.content || ''}</code></pre>
+                                <div key={`R${i}`} className={`line ${line.left.type} ${diffBlocks[selectedDiffIndex]?.start <= i && i <= diffBlocks[selectedDiffIndex]?.end ? 'selected-diff' : ''}`}>
+                                    <pre><code>{line.left.content || ''}</code></pre>
                                 </div>
                             ))}
                         </div>
@@ -159,8 +213,8 @@ const DiffViewer: React.FC<{ original: { content: string, path: string }, modifi
                     </div>
                 </div>
                 <div className="diff-detail-panes">
-                    <div className="diff-detail-pane removed" ref={leftDetailRef} onScroll={() => handleDetailScroll('left')}><pre><code>{selectedDiffContent.left}</code></pre></div>
                     <div className="diff-detail-pane added" ref={rightDetailRef} onScroll={() => handleDetailScroll('right')}><pre><code>{selectedDiffContent.right}</code></pre></div>
+                    <div className="diff-detail-pane removed" ref={leftDetailRef} onScroll={() => handleDetailScroll('left')}><pre><code>{selectedDiffContent.left}</code></pre></div>
                 </div>
             </div>
         </div>
