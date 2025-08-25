@@ -1,20 +1,20 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-25T22:20:07.004Z
+  Date Generated: 2025-08-25T22:45:44.509Z
   ---
   Total Files: 235
-  Total Lines: 19615
-  Total Characters: 955958
-  Approx. Tokens: 239076
+  Total Lines: 19694
+  Total Characters: 959917
+  Approx. Tokens: 240065
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10922 tokens)
 2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
-3. src\Artifacts\A11. DCE - Regression Case Studies.md (6591 tokens)
-4. src\backend\services\prompt.service.ts (6019 tokens)
-5. src\client\views\parallel-copilot.view\view.tsx (6007 tokens)
+3. src\Artifacts\A11. DCE - Regression Case Studies.md (7032 tokens)
+4. src\client\views\parallel-copilot.view\view.tsx (6046 tokens)
+5. src\backend\services\prompt.service.ts (6006 tokens)
 6. src\Artifacts\A0. DCE Master Artifact List.md (5688 tokens)
 7. src\client\views\context-chooser.view\view.tsx (5562 tokens)
 8. src\client\components\tree-view\TreeView.tsx (4508 tokens)
@@ -33,7 +33,7 @@
 9. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 324 - Chars: 22751 - Tokens: 5688
 10. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 11. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
-12. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 252 - Chars: 26361 - Tokens: 6591
+12. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 266 - Chars: 28128 - Tokens: 7032
 13. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5710 - Tokens: 1428
 14. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
 15. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
@@ -91,21 +91,21 @@
 67. src\Artifacts\A58. DCE - WinMerge Source Code Analysis.md - Lines: 56 - Chars: 5322 - Tokens: 1331
 68. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 44 - Chars: 3786 - Tokens: 947
 69. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1282 - Chars: 43686 - Tokens: 10922
-70. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 44 - Chars: 4231 - Tokens: 1058
+70. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 44 - Chars: 4432 - Tokens: 1108
 71. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
 72. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
 73. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
 74. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
-75. src\Artifacts\T1. Template - Master Artifact List.md - Lines: 31 - Chars: 1496 - Tokens: 374
-76. src\Artifacts\T10. Template - Feature Plan Example.md - Lines: 27 - Chars: 2471 - Tokens: 618
-77. src\Artifacts\T2. Template - Project Vision and Goals.md - Lines: 33 - Chars: 1744 - Tokens: 436
-78. src\Artifacts\T3. Template - Phase 1 Requirements & Design.md - Lines: 32 - Chars: 1657 - Tokens: 415
-79. src\Artifacts\T4. Template - Technical Scaffolding Plan.md - Lines: 49 - Chars: 1954 - Tokens: 489
-80. src\Artifacts\T5. Template - Target File Structure.md - Lines: 30 - Chars: 833 - Tokens: 209
-81. src\Artifacts\T6. Template - Initial Scaffolding Deployment Script.md - Lines: 56 - Chars: 2170 - Tokens: 543
-82. src\Artifacts\T7. Template - Development and Testing Guide.md - Lines: 43 - Chars: 1517 - Tokens: 380
-83. src\Artifacts\T8. Template - Regression Case Studies.md - Lines: 26 - Chars: 1748 - Tokens: 437
-84. src\Artifacts\T9. Template - Logging and Debugging Guide.md - Lines: 44 - Chars: 2369 - Tokens: 593
+75. src\Artifacts\T1. Template - Master Artifact List.md - Lines: 40 - Chars: 1779 - Tokens: 445
+76. src\Artifacts\T10. Template - Feature Plan Example.md - Lines: 32 - Chars: 2640 - Tokens: 660
+77. src\Artifacts\T2. Template - Project Vision and Goals.md - Lines: 38 - Chars: 1913 - Tokens: 479
+78. src\Artifacts\T3. Template - Phase 1 Requirements & Design.md - Lines: 37 - Chars: 1826 - Tokens: 457
+79. src\Artifacts\T4. Template - Technical Scaffolding Plan.md - Lines: 54 - Chars: 2123 - Tokens: 531
+80. src\Artifacts\T5. Template - Target File Structure.md - Lines: 35 - Chars: 1002 - Tokens: 251
+81. src\Artifacts\T6. Template - Initial Scaffolding Deployment Script.md - Lines: 61 - Chars: 2339 - Tokens: 585
+82. src\Artifacts\T7. Template - Development and Testing Guide.md - Lines: 48 - Chars: 1686 - Tokens: 422
+83. src\Artifacts\T8. Template - Regression Case Studies.md - Lines: 31 - Chars: 1917 - Tokens: 480
+84. src\Artifacts\T9. Template - Logging and Debugging Guide.md - Lines: 49 - Chars: 2538 - Tokens: 635
 85. src\backend\commands\commands.ts - Lines: 97 - Chars: 4211 - Tokens: 1053
 86. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
 87. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
@@ -114,9 +114,9 @@
 90. src\backend\services\file-tree.service.ts - Lines: 212 - Chars: 11447 - Tokens: 2862
 91. src\backend\services\flattener.service.ts - Lines: 210 - Chars: 11271 - Tokens: 2818
 92. src\backend\services\highlighting.service.ts - Lines: 58 - Chars: 2920 - Tokens: 730
-93. src\backend\services\history.service.ts - Lines: 166 - Chars: 6935 - Tokens: 1734
+93. src\backend\services\history.service.ts - Lines: 168 - Chars: 7027 - Tokens: 1757
 94. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-95. src\backend\services\prompt.service.ts - Lines: 310 - Chars: 24076 - Tokens: 6019
+95. src\backend\services\prompt.service.ts - Lines: 316 - Chars: 24022 - Tokens: 6006
 96. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
 97. src\backend\services\services.ts - Lines: 38 - Chars: 1778 - Tokens: 445
 98. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
@@ -143,14 +143,14 @@
 119. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
 120. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
 121. src\client\views\parallel-copilot.view\view.scss - Lines: 573 - Chars: 13565 - Tokens: 3392
-122. src\client\views\parallel-copilot.view\view.tsx - Lines: 366 - Chars: 24025 - Tokens: 6007
+122. src\client\views\parallel-copilot.view\view.tsx - Lines: 368 - Chars: 24181 - Tokens: 6046
 123. src\common\ipc\channels.enum.ts - Lines: 73 - Chars: 3734 - Tokens: 934
 124. src\common\ipc\channels.type.ts - Lines: 67 - Chars: 5347 - Tokens: 1337
 125. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1590 - Tokens: 398
 126. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 127. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
 128. src\common\types\file-node.ts - Lines: 16 - Chars: 567 - Tokens: 142
-129. src\common\types\pcpp.types.ts - Lines: 41 - Chars: 1138 - Tokens: 285
+129. src\common\types\pcpp.types.ts - Lines: 42 - Chars: 1131 - Tokens: 283
 130. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 449 - Tokens: 113
 131. src\common\utils\formatting.ts - Lines: 99 - Chars: 3475 - Tokens: 869
 132. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
@@ -1291,7 +1291,7 @@ To enhance the data curation process, it is critical for the user to have immedi
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C137 (Add case for non-persistent file selections)
+# Updated on: C146 (Add case for state loss on window move)
 
 - **Key/Value for A0:**
 - **Description:** Documents recurring bugs, their root causes, and codified solutions to prevent future regressions during development.
@@ -1302,6 +1302,20 @@ To enhance the data curation process, it is critical for the user to have immedi
 This document serves as a living record of persistent or complex bugs that have recurred across multiple development cycles. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 015: PCPP State Loss on Window Move
+
+-   **Artifacts Affected:** `pcpp.types.ts`, `history.service.ts`, `view.tsx`
+-   **Cycles Observed:** 146
+-   **Symptom:** In the Parallel Co-Pilot Panel, the user changes a piece of UI state that is not directly part of the response content (e.g., increases the number of response tabs from 4 to 8). When the user moves the PCPP panel (e.g., from a separate window back into the main VS Code window), the webview re-initializes, and the UI state reverts to its default (e.g., 4 tabs).
+-   **Root Cause Analysis (RCA):** The state in question (`tabCount`) was a transient, local UI state within the `view.tsx` component. It was not being saved as part of the `PcppCycle` data object. When the panel was moved, the webview was destroyed and recreated, causing it to load the latest cycle data from the backend. Since `tabCount` was not part of that persisted data, it was re-initialized to its default value, losing the user's change.
+-   **Codified Solution & Best Practice:**
+    1.  **Extend Data Model:** Add a new optional property, `tabCount?: number`, to the `PcppCycle` interface in `pcpp.types.ts`.
+    2.  **Persist State:** In `view.tsx`, the `saveCurrentCycleState` function must be updated to include the `tabCount` in the data payload sent to the backend for persistence.
+    3.  **Restore State:** The logic in `view.tsx` that loads cycle data must be updated to read the `tabCount` property from the incoming cycle data and use it to initialize the `tabCount` state.
+    4.  **Best Practice:** Any UI configuration that a user can change and would reasonably expect to persist (like the number of visible tabs, pane widths, etc.) must be included in the persisted data model for that view.
 
 ---
 
@@ -1387,12 +1401,12 @@ This document serves as a living record of persistent or complex bugs that have 
 -   **Example of Flawed Logic (Conceptual):**
     ```typescript
     const match = myString.match(/.../);
-    const value = match ? match[1].trim() : ''; // This can fail if TS inference is poor
+    const value = match ? match.trim() : ''; // This can fail if TS inference is poor
     ```
 -   **Example of Correct Logic (Conceptual):**
     ```typescript
     const match = myString.match(/.../);
-    const value = (match?.[1] ?? '').trim(); // This is type-safe and robust
+    const value = (match?. ?? '').trim(); // This is type-safe and robust
     ```
 
 ---
@@ -6279,7 +6293,7 @@ deployScaffold();
 # Artifact A60: DCE - Phase 2 - Cycle 0 Onboarding Experience
 # Date Created: C139
 # Author: AI Model & Curator
-# Updated on: C142 (Add "Return to Cycle 0" navigation feature)
+# Updated on: C146 (Clarify goal is to produce code file artifacts)
 
 - **Key/Value for A0:**
 - **Description:** Documents the plan for a special "Cycle 0" mode to guide new users in setting up their project by generating an initial set of planning documents.
@@ -6289,7 +6303,7 @@ deployScaffold();
 
 The Parallel Co-Pilot Panel (PCPP) is a powerful tool for iterative, AI-assisted development, but its effectiveness relies on a structured set of planning and documentation artifacts. For a new user starting a project from scratch, the initial setup can be a significant hurdle.
 
-The goal of the "Cycle 0" onboarding experience is to guide the user through this initial setup. By capturing their high-level project scope, the extension will leverage a set of best-practice document templates to generate a prompt that instructs an AI to create a starter pack of planning artifacts for the user's new project. This automates the project bootstrapping process and introduces the user to the artifact-driven workflow.
+The goal of the "Cycle 0" onboarding experience is to guide the user through this initial setup. By capturing their high-level project scope, the extension will leverage a set of best-practice document templates to generate a prompt that instructs an AI to create a starter pack of **initial code file artifacts** for the user's new project. This automates the project bootstrapping process and introduces the user to the artifact-driven workflow, ensuring the output is immediately parsable by the PCPP.
 
 ## 2. User Flow
 
@@ -6298,12 +6312,12 @@ The goal of the "Cycle 0" onboarding experience is to guide the user through thi
 3.  **User Input:** The user is prompted to describe their project's vision and goals in the "Project Scope" text area.
 4.  **Generate Prompt & Artifacts:** The user clicks a button, e.g., "Generate Initial Artifacts Prompt".
 5.  **Backend Process:**
-    *   The backend `PromptService` constructs a unique `prompt.md` file using the user's scope and a set of bundled template artifacts.
+    *   The backend `PromptService` constructs a unique `prompt.md` file using the user's scope and a set of bundled template artifacts. The prompt will explicitly instruct the AI to generate code files wrapped in `<file path="..."></file>` tags.
     *   Crucially, it also creates the `src/Artifacts` directory if it doesn't exist, and then creates an empty `src/Artifacts/A0. DCE Master Artifact List.md`.
     *   It then notifies the frontend that the process is complete.
 6.  **Transition to Cycle 1:** Upon notification, the frontend automatically reloads its state. Since `A0` now exists, the `HistoryService` returns Cycle 1, and the UI transitions to the main PCPP interface, ready for the user's first real cycle.
 7.  **User Action:** The user takes the generated `prompt.md` and uses it with their preferred LLM.
-8.  **First Iteration:** The user pastes the AI's response (which should contain the new planning artifacts) back into the PCPP's "Cycle 1" tab, and the standard iterative workflow begins.
+8.  **First Iteration:** The user pastes the AI's response (which should contain the new, correctly formatted file artifacts) back into the PCPP's "Cycle 1" tab, and the standard iterative workflow begins.
 9.  **(C142) Return to Cycle 0:** If the user is on Cycle 1, they can click the "previous cycle" (`<`) button. This will navigate them back to the Cycle 0 onboarding view, allowing them to modify their initial project scope and regenerate the prompt.
 
 ## 3. Technical Implementation
@@ -6594,6 +6608,15 @@ After these commands complete, refresh your GitHub repository page. You should s
 </file>
 
 <file path="src/Artifacts/T1. Template - Master Artifact List.md">
+<!-- 
+  IMPORTANT AI INSTRUCTION:
+  When generating a file based on this template, you MUST wrap the entire file's content 
+  in <file path="..."></file> tags. For example:
+  <file path="A0_master_artifact_list.md">
+  # Artifact A0: Master Artifact List
+  ...
+  </file>
+-->
 # Artifact T1: Template - Master Artifact List
 # Date Created: C139
 # Author: AI Model & Curator
@@ -6628,6 +6651,11 @@ This file serves as the definitive, parseable list of all documentation artifact
 </file>
 
 <file path="src/Artifacts/T10. Template - Feature Plan Example.md">
+<!-- 
+  IMPORTANT AI INSTRUCTION:
+  When generating a file based on this template, you MUST wrap the entire file's content 
+  in <file path="..."></file> tags.
+-->
 # Artifact T10: Template - Feature Plan Example
 # Date Created: C141
 # Author: AI Model & Curator
@@ -6658,6 +6686,11 @@ This document outlines the plan for implementing a standard right-click context 
 </file>
 
 <file path="src/Artifacts/T2. Template - Project Vision and Goals.md">
+<!-- 
+  IMPORTANT AI INSTRUCTION:
+  When generating a file based on this template, you MUST wrap the entire file's content 
+  in <file path="..."></file> tags.
+-->
 # Artifact T2: Template - Project Vision and Goals
 # Date Created: C139
 # Author: AI Model & Curator
@@ -6694,6 +6727,11 @@ This phase focuses on refining the product, improving performance, and ensuring 
 </file>
 
 <file path="src/Artifacts/T3. Template - Phase 1 Requirements & Design.md">
+<!-- 
+  IMPORTANT AI INSTRUCTION:
+  When generating a file based on this template, you MUST wrap the entire file's content 
+  in <file path="..."></file> tags.
+-->
 # Artifact T3: Template - Phase 1 Requirements & Design
 # Date Created: C139
 # Author: AI Model & Curator
@@ -6729,6 +6767,11 @@ The implementation of Phase 1 will involve the following components:
 </file>
 
 <file path="src/Artifacts/T4. Template - Technical Scaffolding Plan.md">
+<!-- 
+  IMPORTANT AI INSTRUCTION:
+  When generating a file based on this template, you MUST wrap the entire file's content 
+  in <file path="..."></file> tags.
+-->
 # Artifact T4: Template - Technical Scaffolding Plan
 # Date Created: C139
 # Author: AI Model & Curator
@@ -6781,6 +6824,11 @@ The project will adhere to a standard, feature-driven directory structure:
 </file>
 
 <file path="src/Artifacts/T5. Template - Target File Structure.md">
+<!-- 
+  IMPORTANT AI INSTRUCTION:
+  When generating a file based on this template, you MUST wrap the entire file's content 
+  in <file path="..."></file> tags.
+-->
 # Artifact T5: Template - Target File Structure
 # Date Created: C139
 # Author: AI Model & Curator
@@ -6814,6 +6862,11 @@ This document provides a visual representation of the file structure that the `T
 </file>
 
 <file path="src/Artifacts/T6. Template - Initial Scaffolding Deployment Script.md">
+<!-- 
+  IMPORTANT AI INSTRUCTION:
+  When generating a file based on this template, you MUST wrap the entire file's content 
+  in <file path="..."></file> tags.
+-->
 # Artifact T6: Template - Initial Scaffolding Deployment Script
 # Date Created: C139
 # Author: AI Model & Curator
@@ -6873,6 +6926,11 @@ deployScaffold();
 </file>
 
 <file path="src/Artifacts/T7. Template - Development and Testing Guide.md">
+<!-- 
+  IMPORTANT AI INSTRUCTION:
+  When generating a file based on this template, you MUST wrap the entire file's content 
+  in <file path="..."></file> tags.
+-->
 # Artifact T7: Template - Development and Testing Guide
 # Date Created: C139
 # Author: AI Model & Curator
@@ -6919,6 +6977,11 @@ This will execute all test files located in the project and report the results t
 </file>
 
 <file path="src/Artifacts/T8. Template - Regression Case Studies.md">
+<!-- 
+  IMPORTANT AI INSTRUCTION:
+  When generating a file based on this template, you MUST wrap the entire file's content 
+  in <file path="..."></file> tags.
+-->
 # Artifact T8: Template - Regression Case Studies
 # Date Created: C141
 # Author: AI Model & Curator
@@ -6948,6 +7011,11 @@ This document serves as a living record of persistent or complex bugs that have 
 </file>
 
 <file path="src/Artifacts/T9. Template - Logging and Debugging Guide.md">
+<!-- 
+  IMPORTANT AI INSTRUCTION:
+  When generating a file based on this template, you MUST wrap the entire file's content 
+  in <file path="..."></file> tags.
+-->
 # Artifact T9: Template - Logging and Debugging Guide
 # Date Created: C141
 # Author: AI Model & Curator
@@ -8205,6 +8273,7 @@ export class HistoryService {
             leftPaneWidth: 33,
             selectedResponseId: null,
             selectedFilesForReplacement: [],
+            tabCount: 4, // C146 Fix: Add default tab count
         };
 
         if (isFreshEnvironment) {
@@ -8235,7 +8304,8 @@ export class HistoryService {
                 cycleContext: '',
                 ephemeralContext: '',
                 responses: {},
-                isParsedMode: false
+                isParsedMode: false,
+                tabCount: 4,
             };
         }
 
@@ -8601,9 +8671,15 @@ ${cyclesContent}
                 }
             }
 
-            const cycle0Content = `<Cycle 0>
+            // C146 Fix: Add explicit instructions for the AI
+            const cycle0Context = `<Cycle 0>
 <Cycle Context>
-Review the user's project scope in M4. Your task is to act as a senior project architect and begin establishing the necessary documentation to achieve the user's goals. You have been provided with a set of best-practice templates for software engineering documentation as static context. Use these examples to guide your output. Your first response should be to generate a starter set of artifacts for this new project. Begin by creating a Master Artifact List (A0), similar to the provided template, and then create the first few essential planning documents (e.g., Project Vision, High-Level Requirements).
+You are a senior software developer tasked with scaffolding a new project. Review the user's project scope in M4. Your goal is to generate the initial set of files needed to start the project, based on the provided templates.
+
+**CRITICAL INSTRUCTIONS:**
+1.  Your output MUST be a series of code/configuration files.
+2.  You MUST NOT output documentation artifacts (e.g., <A1_project_vision.md>). Instead, create the actual files (e.g., package.json, src/main.ts).
+3.  Every file you generate MUST be enclosed in the strict XML format: \`<file path="path/to/file.ext">...</file>\`.
 </Cycle Context>
 <Static Context>
 ${staticContext.trim()}
@@ -8613,7 +8689,7 @@ ${staticContext.trim()}
             const projectScopeContent = `<M4. current project scope>\n${projectScope}\n</M4. current project scope>`;
 
             const promptParts = [
-                `<prompt.md>`, this.artifactSchemaTemplate, `<M2. cycle overview>\nCurrent Cycle 0 - Project Initialization\n</M2. cycle overview>`, this.interactionSchemaTemplate, projectScopeContent, `<M5. organized artifacts list>\n# No artifacts exist yet.\n</M5. organized artifacts list>`, `<M6. Cycles>\n${cycle0Content}\n</M6. Cycles>`, `<M7. Flattened Repo>\n<!-- No files selected for initial prompt -->\n</M7. Flattened Repo>`, `</prompt.md>`
+                `<prompt.md>`, this.artifactSchemaTemplate, `<M2. cycle overview>\nCurrent Cycle 0 - Project Initialization\n</M2. cycle overview>`, this.interactionSchemaTemplate, projectScopeContent, `<M5. organized artifacts list>\n# No artifacts exist yet.\n</M5. organized artifacts list>`, `<M6. Cycles>\n${cycle0Context}\n</M6. Cycles>`, `<M7. Flattened Repo>\n<!-- No files selected for initial prompt -->\n</M7. Flattened Repo>`, `</prompt.md>`
             ];
 
             const finalPrompt = promptParts.join('\n\n');
@@ -8629,7 +8705,6 @@ ${staticContext.trim()}
             
             vscode.window.showInformationMessage(`Successfully generated initial prompt.md and created src/Artifacts/A0...`);
 
-            // C144 FIX: Construct and send Cycle 1 data directly to avoid race condition.
             const cycle1Data: PcppCycle = {
                 cycleId: 1,
                 timestamp: new Date().toISOString(),
@@ -8641,9 +8716,10 @@ ${staticContext.trim()}
                 leftPaneWidth: 33,
                 selectedResponseId: null,
                 selectedFilesForReplacement: [],
+                tabCount: 4
             };
 
-            await Services.historyService.saveCycleData(cycle1Data); // Initialize the history file
+            await Services.historyService.saveCycleData(cycle1Data);
             serverIpc.sendToClient(ServerToClientChannel.SendLatestCycleData, { cycleData: cycle1Data });
 
         } catch (error: any) {
@@ -12565,7 +12641,7 @@ body {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
-// Updated on: C145 (Fix syntax error in CodeViewer)
+// Updated on: C146 (Add tabCount to persisted state)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -12692,6 +12768,7 @@ const App = () => {
             leftPaneWidth,
             selectedResponseId,
             selectedFilesForReplacement: Array.from(selectedFilesForReplacement),
+            tabCount, // C146 Fix: Persist tabCount
         };
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
     }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, clientIpc]);
@@ -12700,7 +12777,7 @@ const App = () => {
 
     React.useEffect(() => {
         debouncedSave();
-    }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, debouncedSave]);
+    }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, tabCount, debouncedSave]);
     
     const parseAllTabs = React.useCallback(() => {
         setTabs(prevTabs => {
@@ -12743,6 +12820,7 @@ const App = () => {
                 newTabs[tabId] = { rawContent: response.content, parsedContent: null };
             });
             setTabs(newTabs);
+            setTabCount(cycleData.tabCount || 4); // C146 Fix: Restore tab count
             setIsParsedMode(cycleData.isParsedMode || false);
             setLeftPaneWidth(cycleData.leftPaneWidth || 33);
             setSelectedResponseId(cycleData.selectedResponseId || null);
@@ -12875,7 +12953,7 @@ const App = () => {
         for (let i = 1; i <= tabCount; i++) {
             responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' };
         }
-        const currentState: PcppCycle = { cycleId: currentCycle, timestamp: new Date().toISOString(), title: cycleTitle, cycleContext, ephemeralContext, responses, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement: Array.from(selectedFilesForReplacement) };
+        const currentState: PcppCycle = { cycleId: currentCycle, timestamp: new Date().toISOString(), title: cycleTitle, cycleContext, ephemeralContext, responses, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement: Array.from(selectedFilesForReplacement), tabCount };
         clientIpc.sendToServer(ClientToServerChannel.RequestLogState, { currentState });
     };
 
@@ -13207,7 +13285,7 @@ export interface FileNode {
 
 <file path="src/common/types/pcpp.types.ts">
 // src/common/types/pcpp.types.ts
-// Updated on: C137 (Add selectedFilesForReplacement to PcppCycle)
+// Updated on: C146 (Add tabCount to PcppCycle)
 
 // Data structure for the backend history file
 export interface PcppResponse {
@@ -13224,7 +13302,8 @@ export interface PcppCycle {
     isParsedMode?: boolean;
     leftPaneWidth?: number;
     selectedResponseId?: string | null;
-    selectedFilesForReplacement?: string[]; // New: To track which files are checked for replacement
+    selectedFilesForReplacement?: string[];
+    tabCount?: number; // New: To track the number of response tabs
 }
 
 export interface PcppHistoryFile {

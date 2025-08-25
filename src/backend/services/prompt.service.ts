@@ -240,13 +240,10 @@ ${cyclesContent}
         try {
             Services.loggerService.log("Generating Cycle 0 prompt.md file...");
 
-            const artifactFilenameMap: { [key: string]: string } = {
-                'T1': 'T1. Template - Master Artifact List.md', 'T2': 'T2. Template - Project Vision and Goals.md', 'T3': 'T3. Template - Phase 1 Requirements & Design.md', 'T4': 'T4. Template - Technical Scaffolding Plan.md', 'T5': 'T5. Template - Target File Structure.md', 'T6': 'T6. Template - Initial Scaffolding Deployment Script.md', 'T7': 'T7. Template - Development and Testing Guide.md', 'T8': 'T8. Template - Regression Case Studies.md', 'T9': 'T9. Template - Logging and Debugging Guide.md', 'T10': 'T10. Template - Feature Plan Example.md'
-            };
-
+            const templateIds = ['T1', 'T2', 'T3', 'T4', 'T5', 'T7', 'T8', 'T9', 'T10'];
             let staticContext = '';
-            for (const artifactId in artifactFilenameMap) {
-                const filename = artifactFilenameMap[artifactId];
+            for (const id of templateIds) {
+                const filename = `${id}. Template - ${id.replace('T', '')}.md`.replace(/\s-\s\d+/, '').replace('1.md', 'Master Artifact List.md').replace('2.md', 'Project Vision and Goals.md').replace('3.md', 'Phase 1 Requirements & Design.md').replace('4.md', 'Technical Scaffolding Plan.md').replace('5.md', 'Target File Structure.md').replace('7.md', 'Development and Testing Guide.md').replace('8.md', 'Regression Case Studies.md').replace('9.md', 'Logging and Debugging Guide.md').replace('10.md', 'Feature Plan Example.md');
                 const artifactUri = vscode.Uri.joinPath(artifactsDirInExtension, filename);
                 try {
                     const contentBuffer = await vscode.workspace.fs.readFile(artifactUri);
@@ -257,15 +254,15 @@ ${cyclesContent}
                 }
             }
 
-            // C146 Fix: Add explicit instructions for the AI
             const cycle0Context = `<Cycle 0>
 <Cycle Context>
-You are a senior software developer tasked with scaffolding a new project. Review the user's project scope in M4. Your goal is to generate the initial set of files needed to start the project, based on the provided templates.
+You are a senior software engineer responsible for scaffolding a new project. Review the user's project scope in M4. Your task is to generate the complete, initial set of files needed to create a runnable 'Hello World' version of their application based on an appropriate technology stack (e.g., TypeScript, React, Vite).
 
 **CRITICAL INSTRUCTIONS:**
-1.  Your output MUST be a series of code/configuration files.
-2.  You MUST NOT output documentation artifacts (e.g., <A1_project_vision.md>). Instead, create the actual files (e.g., package.json, src/main.ts).
+1.  Your output MUST be a series of code and configuration files.
+2.  You MUST NOT output documentation artifacts (e.g., <A1_vision.md>). Generate the actual files (e.g., package.json, src/main.ts).
 3.  Every file you generate MUST be enclosed in the strict XML format: \`<file path="path/to/file.ext">...</file>\`.
+4.  The provided templates in the Static Context are examples of good documentation. Use them to understand project planning principles, but DO NOT generate them in your response.
 </Cycle Context>
 <Static Context>
 ${staticContext.trim()}
@@ -282,7 +279,6 @@ ${staticContext.trim()}
             await vscode.workspace.fs.writeFile(vscode.Uri.file(promptMdPath), Buffer.from(finalPrompt, 'utf-8'));
             Services.loggerService.log("Successfully generated Cycle 0 prompt.md file.");
 
-            // Create empty A0 artifact
             await vscode.workspace.fs.createDirectory(vscode.Uri.file(artifactsDirInWorkspace));
             const a0Uri = vscode.Uri.file(path.join(artifactsDirInWorkspace, 'A0. DCE Master Artifact List.md'));
             const a0InitialContent = `# Artifact A0: [Your Project Name] Master Artifact List\n# Date Created: C0\n\n## 1. Purpose\n\n# This file serves as the definitive, parseable list of all documentation artifacts for your project.`;
