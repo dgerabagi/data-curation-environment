@@ -71,7 +71,8 @@ export class HistoryService {
             leftPaneWidth: 33,
             selectedResponseId: null,
             selectedFilesForReplacement: [],
-            tabCount: 4, // C146 Fix: Add default tab count
+            tabCount: 4,
+            isSortedByLength: false, // C149 Fix: Add default sort state
         };
 
         if (isFreshEnvironment) {
@@ -104,6 +105,7 @@ export class HistoryService {
                 responses: {},
                 isParsedMode: false,
                 tabCount: 4,
+                isSortedByLength: false,
             };
         }
 

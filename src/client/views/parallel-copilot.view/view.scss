@@ -1,4 +1,4 @@
-/* Updated on: C148 (Add styles for tab metadata and sorting) */
+/* Updated on: C149 (Add styles for selected tab metadata and sort button) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -109,7 +109,7 @@ body {
     gap: 8px;
 }
 
-.cycle-navigator button, .pc-toolbar button, .file-actions button, .exit-diff-button, .styled-button {
+.cycle-navigator button, .pc-toolbar button, .file-actions button, .exit-diff-button, .styled-button, .sort-button {
     background: none;
     border: 1px solid var(--vscode-button-border, transparent);
     color: var(--vscode-icon-foreground);
@@ -212,9 +212,15 @@ body {
     resize: vertical;
 }
 
+.tab-bar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--vscode-panel-border);
+}
+
 .tab-bar {
     display: flex;
-    border-bottom: 1px solid var(--vscode-panel-border);
     flex-shrink: 0;
 }
 
@@ -232,6 +238,10 @@ body {
     &.selected {
         background-color: var(--vscode-testing-iconPassed);
         color: var(--vscode-button-foreground);
+
+        .tab-metadata {
+            color: var(--vscode-button-foreground); // C149: Fix text color on selected tab
+        }
     }
 }
 

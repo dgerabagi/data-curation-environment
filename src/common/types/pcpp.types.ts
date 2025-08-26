@@ -1,5 +1,5 @@
 // src/common/types/pcpp.types.ts
-// Updated on: C146 (Add tabCount to PcppCycle)
+// Updated on: C149 (Add isSortedByLength to PcppCycle)
 
 // Data structure for the backend history file
 export interface PcppResponse {
@@ -17,7 +17,8 @@ export interface PcppCycle {
     leftPaneWidth?: number;
     selectedResponseId?: string | null;
     selectedFilesForReplacement?: string[];
-    tabCount?: number; // New: To track the number of response tabs
+    tabCount?: number;
+    isSortedByLength?: boolean; // New: To track sorting preference
 }
 
 export interface PcppHistoryFile {

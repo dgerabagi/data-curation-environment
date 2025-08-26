@@ -1,19 +1,19 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-26T00:02:23.748Z
+  Date Generated: 2025-08-26T00:07:54.269Z
   ---
   Total Files: 235
-  Total Lines: 19712
-  Total Characters: 960698
-  Approx. Tokens: 240261
+  Total Lines: 19730
+  Total Characters: 961334
+  Approx. Tokens: 240419
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10834 tokens)
 2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
 3. src\Artifacts\A11. DCE - Regression Case Studies.md (7032 tokens)
-4. src\client\views\parallel-copilot.view\view.tsx (6347 tokens)
+4. src\client\views\parallel-copilot.view\view.tsx (6410 tokens)
 5. src\backend\services\prompt.service.ts (6024 tokens)
 6. src\Artifacts\A0. DCE Master Artifact List.md (5703 tokens)
 7. src\client\views\context-chooser.view\view.tsx (5562 tokens)
@@ -114,7 +114,7 @@
 90. src\backend\services\file-tree.service.ts - Lines: 212 - Chars: 11447 - Tokens: 2862
 91. src\backend\services\flattener.service.ts - Lines: 210 - Chars: 11271 - Tokens: 2818
 92. src\backend\services\highlighting.service.ts - Lines: 58 - Chars: 2920 - Tokens: 730
-93. src\backend\services\history.service.ts - Lines: 168 - Chars: 7027 - Tokens: 1757
+93. src\backend\services\history.service.ts - Lines: 170 - Chars: 7108 - Tokens: 1777
 94. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
 95. src\backend\services\prompt.service.ts - Lines: 316 - Chars: 24096 - Tokens: 6024
 96. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
@@ -142,15 +142,15 @@
 118. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 43 - Chars: 1890 - Tokens: 473
 119. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
 120. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
-121. src\client\views\parallel-copilot.view\view.scss - Lines: 595 - Chars: 13958 - Tokens: 3490
-122. src\client\views\parallel-copilot.view\view.tsx - Lines: 385 - Chars: 25385 - Tokens: 6347
+121. src\client\views\parallel-copilot.view\view.scss - Lines: 605 - Chars: 14226 - Tokens: 3557
+122. src\client\views\parallel-copilot.view\view.tsx - Lines: 390 - Chars: 25640 - Tokens: 6410
 123. src\common\ipc\channels.enum.ts - Lines: 73 - Chars: 3734 - Tokens: 934
 124. src\common\ipc\channels.type.ts - Lines: 67 - Chars: 5347 - Tokens: 1337
 125. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1590 - Tokens: 398
 126. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 127. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
 128. src\common\types\file-node.ts - Lines: 16 - Chars: 567 - Tokens: 142
-129. src\common\types\pcpp.types.ts - Lines: 42 - Chars: 1131 - Tokens: 283
+129. src\common\types\pcpp.types.ts - Lines: 43 - Chars: 1163 - Tokens: 291
 130. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 449 - Tokens: 113
 131. src\common\utils\formatting.ts - Lines: 99 - Chars: 3475 - Tokens: 869
 132. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
@@ -8251,7 +8251,8 @@ export class HistoryService {
             leftPaneWidth: 33,
             selectedResponseId: null,
             selectedFilesForReplacement: [],
-            tabCount: 4, // C146 Fix: Add default tab count
+            tabCount: 4,
+            isSortedByLength: false, // C149 Fix: Add default sort state
         };
 
         if (isFreshEnvironment) {
@@ -8284,6 +8285,7 @@ export class HistoryService {
                 responses: {},
                 isParsedMode: false,
                 tabCount: 4,
+                isSortedByLength: false,
             };
         }
 
@@ -12044,7 +12046,7 @@ export default TestPane3;
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
-/* Updated on: C148 (Add styles for tab metadata and sorting) */
+/* Updated on: C149 (Add styles for selected tab metadata and sort button) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -12155,7 +12157,7 @@ body {
     gap: 8px;
 }
 
-.cycle-navigator button, .pc-toolbar button, .file-actions button, .exit-diff-button, .styled-button {
+.cycle-navigator button, .pc-toolbar button, .file-actions button, .exit-diff-button, .styled-button, .sort-button {
     background: none;
     border: 1px solid var(--vscode-button-border, transparent);
     color: var(--vscode-icon-foreground);
@@ -12258,9 +12260,15 @@ body {
     resize: vertical;
 }
 
+.tab-bar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--vscode-panel-border);
+}
+
 .tab-bar {
     display: flex;
-    border-bottom: 1px solid var(--vscode-panel-border);
     flex-shrink: 0;
 }
 
@@ -12278,6 +12286,10 @@ body {
     &.selected {
         background-color: var(--vscode-testing-iconPassed);
         color: var(--vscode-button-foreground);
+
+        .tab-metadata {
+            color: var(--vscode-button-foreground); // C149: Fix text color on selected tab
+        }
     }
 }
 
@@ -12642,7 +12654,7 @@ body {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
-// Updated on: C148 (Add response metadata and sorting)
+// Updated on: C149 (Relocate sort button and persist state)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -12745,7 +12757,7 @@ const App = () => {
     const [selectedFilesForReplacement, setSelectedFilesForReplacement] = React.useState<Set<string>>(new Set());
     const [selectedResponseId, setSelectedResponseId] = React.useState<string | null>(null);
     const [comparisonMetrics, setComparisonMetrics] = React.useState<Map<string, ComparisonMetrics>>(new Map());
-    const [isSortedByLength, setIsSortedByLength] = React.useState(false); // New state for sorting
+    const [isSortedByLength, setIsSortedByLength] = React.useState(false);
 
     const [isAssociatedFilesCollapsed, setAssociatedFilesCollapsed] = React.useState(false);
     const [isThoughtsCollapsed, setThoughtsCollapsed] = React.useState(false);
@@ -12771,15 +12783,16 @@ const App = () => {
             selectedResponseId,
             selectedFilesForReplacement: Array.from(selectedFilesForReplacement),
             tabCount,
+            isSortedByLength,
         };
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
-    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, clientIpc]);
+    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByLength, clientIpc]);
 
     const debouncedSave = useDebounce(saveCurrentCycleState, 1000);
 
     React.useEffect(() => {
         debouncedSave();
-    }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, tabCount, debouncedSave]);
+    }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, tabCount, isSortedByLength, debouncedSave]);
     
     const parseAllTabs = React.useCallback(() => {
         setTabs(prevTabs => {
@@ -12827,6 +12840,7 @@ const App = () => {
             setLeftPaneWidth(cycleData.leftPaneWidth || 33);
             setSelectedResponseId(cycleData.selectedResponseId || null);
             setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || []));
+            setIsSortedByLength(cycleData.isSortedByLength || false);
         };
 
         clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData }) => { loadCycleData(cycleData); setMaxCycle(cycleData.cycleId); });
@@ -12967,7 +12981,7 @@ const App = () => {
         for (let i = 1; i <= tabCount; i++) {
             responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' };
         }
-        const currentState: PcppCycle = { cycleId: currentCycle, timestamp: new Date().toISOString(), title: cycleTitle, cycleContext, ephemeralContext, responses, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement: Array.from(selectedFilesForReplacement), tabCount };
+        const currentState: PcppCycle = { cycleId: currentCycle, timestamp: new Date().toISOString(), title: cycleTitle, cycleContext, ephemeralContext, responses, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement: Array.from(selectedFilesForReplacement), tabCount, isSortedByLength };
         clientIpc.sendToServer(ClientToServerChannel.RequestLogState, { currentState });
     };
 
@@ -13014,13 +13028,16 @@ const App = () => {
     };
 
     return <div className="pc-view-container">
-        <div className="pc-header"><div className="pc-toolbar"><button onClick={handleGeneratePrompt} title="Generate prompt.md"><VscFileCode /> Generate prompt.md</button><button onClick={handleLogState} title="Log Current State"><VscBug/></button><button onClick={handleGlobalParseToggle}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button>{isParsedMode && <button onClick={() => setIsSortedByLength(p => !p)} title="Sort responses by token count">{isSortedByLength ? <VscListOrdered/> : <VscListUnordered/>} Sort</button>}</div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} /></div></div>
+        <div className="pc-header"><div className="pc-toolbar"><button onClick={handleGeneratePrompt} title="Generate prompt.md"><VscFileCode /> Generate prompt.md</button><button onClick={handleLogState} title="Log Current State"><VscBug/></button><button onClick={handleGlobalParseToggle}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} /></div></div>
         <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''}><div className="cycle-navigator"><span>Cycle:</span><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0}><VscChevronLeft /></button><input type="number" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 0)} className="cycle-input" /><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button><button onClick={handleNewCycle} title="New Cycle" disabled={isNewCycleButtonDisabled}><VscAdd /></button><input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} /><button onClick={handleDeleteCycle} title="Delete Current Cycle"><VscTrash /></button><button onClick={handleResetHistory} title="Reset All History"><VscSync /></button></div><div className="context-inputs"><textarea className="context-textarea" placeholder="Cycle Context (notes for this cycle)..." value={cycleContext} onChange={e => setCycleContext(e.target.value)} /><textarea className="context-textarea" placeholder="Ephemeral Context (for this cycle's prompt only)..." value={ephemeralContext} onChange={e => setEphemeralContext(e.target.value)} /></div></CollapsibleSection>
-        <div className="tab-bar">{sortedTabIds.map((tabIndex) => {
-            const tabData = tabs[tabIndex.toString()];
-            const parsedData = tabData?.parsedContent;
-            return <div key={tabIndex} className={`tab ${activeTab === tabIndex ? 'active' : ''} ${selectedResponseId === tabIndex.toString() ? 'selected' : ''}`} onClick={() => setActiveTab(tabIndex)}><div className="tab-title">Resp {tabIndex}</div>{isParsedMode && parsedData && (<div className="tab-metadata"><span><VscFileCode /> {parsedData.files.length}</span><span><VscSymbolNumeric /> {formatLargeNumber(parsedData.totalTokens, 1)}</span></div>)}</div>;
-        })}</div>
+        <div className="tab-bar-container">
+            <div className="tab-bar">{sortedTabIds.map((tabIndex) => {
+                const tabData = tabs[tabIndex.toString()];
+                const parsedData = tabData?.parsedContent;
+                return <div key={tabIndex} className={`tab ${activeTab === tabIndex ? 'active' : ''} ${selectedResponseId === tabIndex.toString() ? 'selected' : ''}`} onClick={() => setActiveTab(tabIndex)}><div className="tab-title">Resp {tabIndex}</div>{isParsedMode && parsedData && (<div className="tab-metadata"><span><VscFileCode /> {parsedData.files.length}</span><span><VscSymbolNumeric /> {formatLargeNumber(parsedData.totalTokens, 1)}</span></div>)}</div>;
+            })}</div>
+            {isParsedMode && <button onClick={() => setIsSortedByLength(p => !p)} className="sort-button" title="Sort responses by token count">{isSortedByLength ? <VscListOrdered/> : <VscListUnordered/>} Sort</button>}
+        </div>
         <div className="tab-content">{activeTab !== null && <div className="tab-pane">{renderContent()}</div>}</div>
     </div>;
 };
@@ -13303,7 +13320,7 @@ export interface FileNode {
 
 <file path="src/common/types/pcpp.types.ts">
 // src/common/types/pcpp.types.ts
-// Updated on: C146 (Add tabCount to PcppCycle)
+// Updated on: C149 (Add isSortedByLength to PcppCycle)
 
 // Data structure for the backend history file
 export interface PcppResponse {
@@ -13321,7 +13338,8 @@ export interface PcppCycle {
     leftPaneWidth?: number;
     selectedResponseId?: string | null;
     selectedFilesForReplacement?: string[];
-    tabCount?: number; // New: To track the number of response tabs
+    tabCount?: number;
+    isSortedByLength?: boolean; // New: To track sorting preference
 }
 
 export interface PcppHistoryFile {
