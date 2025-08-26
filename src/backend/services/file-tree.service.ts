@@ -1,4 +1,4 @@
-// Updated on: C152 (Make node_modules visible but not counted)
+// Updated on: C153 (Make node_modules visible but not counted)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -14,7 +14,7 @@ import { ProblemCountsMap } from "@/common/ipc/channels.type";
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
-const EXCLUSION_PATTERNS = ['.git', 'dce_cache', '.vscode']; // C152: Removed node_modules and dist
+const EXCLUSION_PATTERNS = ['.git', 'dce_cache', '.vscode', 'out']; 
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
@@ -177,7 +177,8 @@ export class FileTreeService {
                 const childPath = normalizePath(childUri.fsPath);
 
                 if (type === vscode.FileType.Directory) {
-                    const dirNode: FileNode = { name, absolutePath: childPath, children: await this._traverseDirectory(childUri, gitStatusMap, problemCountsMap), tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false, gitStatus: gitStatusMap.get(childPath), problemCounts: problemCountsMap[childPath] };
+                    const isNodeModules = name.toLowerCase() === 'node_modules';
+                    const dirNode: FileNode = { name, absolutePath: childPath, children: isNodeModules ? [] : await this._traverseDirectory(childUri, gitStatusMap, problemCountsMap), tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false, gitStatus: gitStatusMap.get(childPath), problemCounts: problemCountsMap[childPath] };
                     this._aggregateStats(dirNode);
                     children.push(dirNode);
                 } else if (type === vscode.FileType.File) {
@@ -194,12 +195,11 @@ export class FileTreeService {
     private _aggregateStats(node: FileNode): void {
         if (!node.children) return;
         
-        // C152: Special handling for node_modules
         if (node.name.toLowerCase() === 'node_modules') {
             node.tokenCount = 0;
             node.fileCount = 0;
             node.sizeInBytes = 0;
-            return; // Do not aggregate stats for node_modules content
+            return; 
         }
 
         let totalTokens = 0, totalFiles = 0, totalBytes = 0, totalErrors = node.problemCounts?.error || 0, totalWarnings = node.problemCounts?.warning || 0;

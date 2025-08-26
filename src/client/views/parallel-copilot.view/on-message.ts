@@ -1,4 +1,4 @@
-// Updated on: C150 (Add handler for copy text)
+// Updated on: C153 (Send projectScope with latest cycle data)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -24,13 +24,15 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestLatestCycleData, async () => {
-        const cycleData = await historyService.getLatestCycle();
-        serverIpc.sendToClient(ServerToClientChannel.SendLatestCycleData, { cycleData });
+        const historyFile = await historyService.getFullHistory();
+        const latestCycle = await historyService.getLatestCycle();
+        serverIpc.sendToClient(ServerToClientChannel.SendLatestCycleData, { cycleData: latestCycle, projectScope: historyFile.projectScope });
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestCycleData, async (data) => {
+        const historyFile = await historyService.getFullHistory();
         const cycleData = await historyService.getCycleData(data.cycleId);
-        serverIpc.sendToClient(ServerToClientChannel.SendCycleData, { cycleData });
+        serverIpc.sendToClient(ServerToClientChannel.SendCycleData, { cycleData, projectScope: historyFile.projectScope });
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.SaveCycleData, (data) => {

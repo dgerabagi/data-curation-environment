@@ -1,4 +1,4 @@
-// Updated on: C152 (Remove Files Updated rendering)
+// Updated on: C153 (Fix projectScope error, remove Files Updated UI)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';

@@ -165,7 +165,6 @@ ${cyclesContent}
         try {
             Services.loggerService.log("Generating prompt.md file...");
             
-            // Step 1: Automatically run the flattener
             const lastSelection = await Services.selectionService.getLastSelection();
             if (lastSelection.length > 0) {
                 await Services.flattenerService.flatten(lastSelection);
@@ -250,11 +249,10 @@ ${cyclesContent}
             Services.loggerService.log("Generating Cycle 0 prompt.md file...");
             await Services.historyService.saveProjectScope(projectScope);
 
-            // Read all files from the extension's artifacts directory as the example
             const exampleArtifactEntries = await vscode.workspace.fs.readDirectory(artifactsDirInExtension);
             let staticContext = '<!-- START: Complete Project Example -->\n';
             for (const [filename] of exampleArtifactEntries) {
-                if (filename.startsWith('A') && filename.endsWith('.md')) {
+                if ((filename.startsWith('A') || filename.startsWith('T')) && filename.endsWith('.md')) {
                     const artifactUri = vscode.Uri.joinPath(artifactsDirInExtension, filename);
                     const contentBuffer = await vscode.workspace.fs.readFile(artifactUri);
                     const content = Buffer.from(contentBuffer).toString('utf-8');
@@ -262,16 +260,6 @@ ${cyclesContent}
                 }
             }
             staticContext += '<!-- END: Complete Project Example -->\n\n';
-            
-            // Add curated templates
-            const templateFilenames = ['T11. Template - Implementation Roadmap.md', 'T12. Template - Competitive Analysis.md'];
-            for (const filename of templateFilenames) {
-                 const artifactUri = vscode.Uri.joinPath(artifactsDirInExtension, filename);
-                 const contentBuffer = await vscode.workspace.fs.readFile(artifactUri);
-                 const content = Buffer.from(contentBuffer).toString('utf-8');
-                 staticContext += `<${filename}>\n${content}\n</${filename}>\n\n`;
-            }
-
 
             const cycle0Context = `<Cycle 0>
 <Cycle Context>
@@ -279,10 +267,9 @@ You are a senior project architect. Your task is to establish the necessary docu
 
 **CRITICAL INSTRUCTIONS:**
 1.  Review the complete project documentation provided in the static context as a **best-practice example**.
-2.  Use the provided **templates** (T11, T12) for structure where appropriate.
-3.  Your primary goal is to generate **planning and documentation artifacts** (e.g., Project Vision, Requirements) for the user's project, emulating the quality of the example.
-4.  You **MUST NOT** generate code files (e.g., \`package.json\`, \`src/main.ts\`) in this initial cycle.
-5.  Every artifact you generate **MUST** be enclosed in the strict XML format: \`<file path="path/to/artifact.md">...</file>\`.
+2.  Your primary goal is to generate **planning and documentation artifacts** (e.g., Project Vision, Requirements) for the user's project, emulating the quality of the example.
+3.  You **MUST NOT** generate code files (e.g., \`package.json\`, \`src/main.ts\`) in this initial cycle.
+4.  Every artifact you generate **MUST** be enclosed in the strict XML format: \`<file path="path/to/artifact.md">...</file>\`.
 </Cycle Context>
 <Static Context>
 ${staticContext.trim()}
@@ -322,7 +309,7 @@ ${staticContext.trim()}
             };
 
             await Services.historyService.saveCycleData(cycle1Data);
-            serverIpc.sendToClient(ServerToClientChannel.SendLatestCycleData, { cycleData: cycle1Data });
+            serverIpc.sendToClient(ServerToClientChannel.SendLatestCycleData, { cycleData: cycle1Data, projectScope });
 
         } catch (error: any) {
             vscode.window.showErrorMessage(`Failed to generate Cycle 0 prompt: ${error.message}`);

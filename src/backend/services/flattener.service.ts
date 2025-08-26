@@ -1,4 +1,4 @@
-// Updated on: C152 (Always exclude node_modules)
+// Updated on: C153 (Always exclude node_modules)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -98,7 +98,6 @@ export class FlattenerService {
             for (const entry of entries) {
                 const fullPath = path.join(dirPath, entry.name);
                 if (entry.isDirectory()) {
-                    // C152: Hardcoded exclusion for node_modules at the flattening stage.
                     if (entry.name.toLowerCase() === 'node_modules') continue;
                     files = files.concat(await this.getAllFilesRecursive(fullPath));
                 } else {

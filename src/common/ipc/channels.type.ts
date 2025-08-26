@@ -61,8 +61,8 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SendFileContent ? { path: string, content: string | null } :
     T extends ServerToClientChannel.SendFileExistence ? { existenceMap: { [path: string]: boolean } } :
     T extends ServerToClientChannel.SendSyntaxHighlight ? { highlightedHtml: string, id: string } :
-    T extends ServerToClientChannel.SendLatestCycleData ? { cycleData: PcppCycle } :
-    T extends ServerToClientChannel.SendCycleData ? { cycleData: PcppCycle | null } :
+    T extends ServerToClientChannel.SendLatestCycleData ? { cycleData: PcppCycle; projectScope?: string; } :
+    T extends ServerToClientChannel.SendCycleData ? { cycleData: PcppCycle | null, projectScope?: string; } :
     T extends ServerToClientChannel.FilesWritten ? { paths: string[] } :
     T extends ServerToClientChannel.SendFileComparison ? { filePath: string; originalTokens: number; modifiedTokens: number; similarity: number; } :
     never;

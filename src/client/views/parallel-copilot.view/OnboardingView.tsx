@@ -21,7 +21,7 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope }) 
     const handleGenerate = () => {
         if (projectScope.trim()) {
             setIsGenerating(true);
-            logger.log("Sending request to generate Cycle 0 prompt.");
+            logger.log("Sending request to generate Cycle 0 prompt and save project scope.");
             clientIpc.sendToServer(ClientToServerChannel.RequestCreateCycle0Prompt, { projectScope });
         }
     };

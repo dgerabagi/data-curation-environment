@@ -1,22 +1,22 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-26T21:50:14.196Z
+  Date Generated: 2025-08-26T22:39:09.277Z
   ---
   Total Files: 241
-  Total Lines: 31163
-  Total Characters: 1755129
-  Approx. Tokens: 438872
+  Total Lines: 31157
+  Total Characters: 1754809
+  Approx. Tokens: 438792
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (193494 tokens)
 2. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10834 tokens)
 3. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
-4. src\client\views\parallel-copilot.view\view.tsx (7141 tokens)
+4. src\client\views\parallel-copilot.view\view.tsx (7145 tokens)
 5. src\Artifacts\A11. DCE - Regression Case Studies.md (7032 tokens)
-6. src\backend\services\prompt.service.ts (6195 tokens)
-7. src\Artifacts\A0. DCE Master Artifact List.md (6050 tokens)
+6. src\Artifacts\A0. DCE Master Artifact List.md (6050 tokens)
+7. src\backend\services\prompt.service.ts (5999 tokens)
 8. src\client\views\context-chooser.view\view.tsx (5562 tokens)
 9. src\client\components\tree-view\TreeView.tsx (4508 tokens)
 10. src\backend\services\file-operation.service.ts (3987 tokens)
@@ -117,12 +117,12 @@
 93. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
 94. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
 95. src\backend\services\file-operation.service.ts - Lines: 328 - Chars: 15946 - Tokens: 3987
-96. src\backend\services\file-tree.service.ts - Lines: 220 - Chars: 11708 - Tokens: 2927
-97. src\backend\services\flattener.service.ts - Lines: 215 - Chars: 11555 - Tokens: 2889
+96. src\backend\services\file-tree.service.ts - Lines: 220 - Chars: 11678 - Tokens: 2920
+97. src\backend\services\flattener.service.ts - Lines: 214 - Chars: 11463 - Tokens: 2866
 98. src\backend\services\highlighting.service.ts - Lines: 58 - Chars: 2920 - Tokens: 730
 99. src\backend\services\history.service.ts - Lines: 175 - Chars: 7272 - Tokens: 1818
 100. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-101. src\backend\services\prompt.service.ts - Lines: 332 - Chars: 24777 - Tokens: 6195
+101. src\backend\services\prompt.service.ts - Lines: 319 - Chars: 23996 - Tokens: 5999
 102. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
 103. src\backend\services\services.ts - Lines: 38 - Chars: 1778 - Tokens: 445
 104. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
@@ -136,22 +136,22 @@
 112. src\client\components\tree-view\TreeView.tsx - Lines: 394 - Chars: 18029 - Tokens: 4508
 113. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 114. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
-115. src\client\utils\response-parser.ts - Lines: 86 - Chars: 3489 - Tokens: 873
+115. src\client\utils\response-parser.ts - Lines: 92 - Chars: 3738 - Tokens: 935
 116. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 117. src\client\views\context-chooser.view\on-message.ts - Lines: 53 - Chars: 4913 - Tokens: 1229
 118. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
 119. src\client\views\context-chooser.view\view.tsx - Lines: 435 - Chars: 22245 - Tokens: 5562
 120. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
 121. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-122. src\client\views\parallel-copilot.view\on-message.ts - Lines: 70 - Chars: 3275 - Tokens: 819
-123. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 51 - Chars: 2334 - Tokens: 584
+122. src\client\views\parallel-copilot.view\on-message.ts - Lines: 72 - Chars: 3521 - Tokens: 881
+123. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 51 - Chars: 2357 - Tokens: 590
 124. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 43 - Chars: 1890 - Tokens: 473
 125. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
 126. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
 127. src\client\views\parallel-copilot.view\view.scss - Lines: 605 - Chars: 14226 - Tokens: 3557
-128. src\client\views\parallel-copilot.view\view.tsx - Lines: 463 - Chars: 28563 - Tokens: 7141
+128. src\client\views\parallel-copilot.view\view.tsx - Lines: 463 - Chars: 28580 - Tokens: 7145
 129. src\common\ipc\channels.enum.ts - Lines: 74 - Chars: 3792 - Tokens: 948
-130. src\common\ipc\channels.type.ts - Lines: 68 - Chars: 5432 - Tokens: 1358
+130. src\common\ipc\channels.type.ts - Lines: 68 - Chars: 5480 - Tokens: 1370
 131. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1590 - Tokens: 398
 132. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 133. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
@@ -19013,7 +19013,7 @@ export class FileOperationService {
 </file>
 
 <file path="src/backend/services/file-tree.service.ts">
-// Updated on: C152 (Make node_modules visible but not counted)
+// Updated on: C153 (Make node_modules visible but not counted)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -19029,7 +19029,7 @@ import { ProblemCountsMap } from "@/common/ipc/channels.type";
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
-const EXCLUSION_PATTERNS = ['.git', 'dce_cache', '.vscode']; // C152: Removed node_modules and dist
+const EXCLUSION_PATTERNS = ['.git', 'dce_cache', '.vscode', 'out']; 
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
@@ -19192,7 +19192,8 @@ export class FileTreeService {
                 const childPath = normalizePath(childUri.fsPath);
 
                 if (type === vscode.FileType.Directory) {
-                    const dirNode: FileNode = { name, absolutePath: childPath, children: await this._traverseDirectory(childUri, gitStatusMap, problemCountsMap), tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false, gitStatus: gitStatusMap.get(childPath), problemCounts: problemCountsMap[childPath] };
+                    const isNodeModules = name.toLowerCase() === 'node_modules';
+                    const dirNode: FileNode = { name, absolutePath: childPath, children: isNodeModules ? [] : await this._traverseDirectory(childUri, gitStatusMap, problemCountsMap), tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false, gitStatus: gitStatusMap.get(childPath), problemCounts: problemCountsMap[childPath] };
                     this._aggregateStats(dirNode);
                     children.push(dirNode);
                 } else if (type === vscode.FileType.File) {
@@ -19209,12 +19210,11 @@ export class FileTreeService {
     private _aggregateStats(node: FileNode): void {
         if (!node.children) return;
         
-        // C152: Special handling for node_modules
         if (node.name.toLowerCase() === 'node_modules') {
             node.tokenCount = 0;
             node.fileCount = 0;
             node.sizeInBytes = 0;
-            return; // Do not aggregate stats for node_modules content
+            return; 
         }
 
         let totalTokens = 0, totalFiles = 0, totalBytes = 0, totalErrors = node.problemCounts?.error || 0, totalWarnings = node.problemCounts?.warning || 0;
@@ -19236,7 +19236,7 @@ export class FileTreeService {
 </file>
 
 <file path="src/backend/services/flattener.service.ts">
-// Updated on: C152 (Always exclude node_modules)
+// Updated on: C153 (Always exclude node_modules)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -19336,7 +19336,6 @@ export class FlattenerService {
             for (const entry of entries) {
                 const fullPath = path.join(dirPath, entry.name);
                 if (entry.isDirectory()) {
-                    // C152: Hardcoded exclusion for node_modules at the flattening stage.
                     if (entry.name.toLowerCase() === 'node_modules') continue;
                     files = files.concat(await this.getAllFilesRecursive(fullPath));
                 } else {
@@ -19901,7 +19900,6 @@ ${cyclesContent}
         try {
             Services.loggerService.log("Generating prompt.md file...");
             
-            // Step 1: Automatically run the flattener
             const lastSelection = await Services.selectionService.getLastSelection();
             if (lastSelection.length > 0) {
                 await Services.flattenerService.flatten(lastSelection);
@@ -19986,11 +19984,10 @@ ${cyclesContent}
             Services.loggerService.log("Generating Cycle 0 prompt.md file...");
             await Services.historyService.saveProjectScope(projectScope);
 
-            // Read all files from the extension's artifacts directory as the example
             const exampleArtifactEntries = await vscode.workspace.fs.readDirectory(artifactsDirInExtension);
             let staticContext = '<!-- START: Complete Project Example -->\n';
             for (const [filename] of exampleArtifactEntries) {
-                if (filename.startsWith('A') && filename.endsWith('.md')) {
+                if ((filename.startsWith('A') || filename.startsWith('T')) && filename.endsWith('.md')) {
                     const artifactUri = vscode.Uri.joinPath(artifactsDirInExtension, filename);
                     const contentBuffer = await vscode.workspace.fs.readFile(artifactUri);
                     const content = Buffer.from(contentBuffer).toString('utf-8');
@@ -19998,16 +19995,6 @@ ${cyclesContent}
                 }
             }
             staticContext += '<!-- END: Complete Project Example -->\n\n';
-            
-            // Add curated templates
-            const templateFilenames = ['T11. Template - Implementation Roadmap.md', 'T12. Template - Competitive Analysis.md'];
-            for (const filename of templateFilenames) {
-                 const artifactUri = vscode.Uri.joinPath(artifactsDirInExtension, filename);
-                 const contentBuffer = await vscode.workspace.fs.readFile(artifactUri);
-                 const content = Buffer.from(contentBuffer).toString('utf-8');
-                 staticContext += `<${filename}>\n${content}\n</${filename}>\n\n`;
-            }
-
 
             const cycle0Context = `<Cycle 0>
 <Cycle Context>
@@ -20015,10 +20002,9 @@ You are a senior project architect. Your task is to establish the necessary docu
 
 **CRITICAL INSTRUCTIONS:**
 1.  Review the complete project documentation provided in the static context as a **best-practice example**.
-2.  Use the provided **templates** (T11, T12) for structure where appropriate.
-3.  Your primary goal is to generate **planning and documentation artifacts** (e.g., Project Vision, Requirements) for the user's project, emulating the quality of the example.
-4.  You **MUST NOT** generate code files (e.g., \`package.json\`, \`src/main.ts\`) in this initial cycle.
-5.  Every artifact you generate **MUST** be enclosed in the strict XML format: \`<file path="path/to/artifact.md">...</file>\`.
+2.  Your primary goal is to generate **planning and documentation artifacts** (e.g., Project Vision, Requirements) for the user's project, emulating the quality of the example.
+3.  You **MUST NOT** generate code files (e.g., \`package.json\`, \`src/main.ts\`) in this initial cycle.
+4.  Every artifact you generate **MUST** be enclosed in the strict XML format: \`<file path="path/to/artifact.md">...</file>\`.
 </Cycle Context>
 <Static Context>
 ${staticContext.trim()}
@@ -20058,7 +20044,7 @@ ${staticContext.trim()}
             };
 
             await Services.historyService.saveCycleData(cycle1Data);
-            serverIpc.sendToClient(ServerToClientChannel.SendLatestCycleData, { cycleData: cycle1Data });
+            serverIpc.sendToClient(ServerToClientChannel.SendLatestCycleData, { cycleData: cycle1Data, projectScope });
 
         } catch (error: any) {
             vscode.window.showErrorMessage(`Failed to generate Cycle 0 prompt: ${error.message}`);
@@ -21855,13 +21841,14 @@ export const logger = {
 </file>
 
 <file path="src/client/utils/response-parser.ts">
-// Updated on: C152 (Implement fallback for unparsable responses)
+// Updated on: C153 (Fix syntax error and add fallback for alternative tags)
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /^([\s\S]*?)(?=### Course of [Aa]ction|### Files Updated This Cycle|<file path=")/;
 const COURSE_OF_ACTION_REGEX = /### Course of [Aa]ction\s*([\s\S]+?)(?=^\s*### Files Updated This Cycle|^\s*<file path=")/gim;
 const FILES_UPDATED_LIST_REGEX = /### Files Updated This Cycle\s*([\s\S]*?)(?=<file path="|`{3,}|$)/m;
 const FILE_TAG_REGEX = /<file path="([^"]+)">([\s\S]*?)<\/file>/g;
+const ALT_FILE_TAG_REGEX = /<(src\/[\w\d\s\/\.-_]+)>([\s\S]*?)<\/\1>/g;
 const CODE_FENCE_START_REGEX = /^\s*```[a-zA-Z]*\n/;
 
 export function parseResponse(rawText: string): ParsedResponse {
@@ -21869,10 +21856,15 @@ export function parseResponse(rawText: string): ParsedResponse {
     let filesUpdatedList: string[] = [];
     let totalTokens = 0;
 
-    const tagMatches = [...rawText.matchAll(FILE_TAG_REGEX)];
+    let tagMatches = [...rawText.matchAll(FILE_TAG_REGEX)];
+
+    // C153: Fallback for alternative tag format like <src/main.ts>
+    if (tagMatches.length === 0) {
+        tagMatches = [...rawText.matchAll(ALT_FILE_TAG_REGEX)];
+    }
 
     if (tagMatches.length === 0 && rawText.includes('<')) {
-        // Fallback for malformed tags or unparsable content
+        // Fallback for unparsable content
         const summary = `**PARSING FAILED:** Could not find valid \`<file path="...">\` tags. Displaying raw response below.\n\n---\n\n${rawText}`;
         return {
             summary: summary,
@@ -21884,8 +21876,8 @@ export function parseResponse(rawText: string): ParsedResponse {
     }
 
     for (const match of tagMatches) {
-        const path = (match?. ?? '').trim();
-        let content = (match?. ?? '');
+        const path = (match?.[1] ?? '').trim();
+        let content = (match?.[2] ?? '');
 
         if (path) {
             content = content.replace(CODE_FENCE_START_REGEX, '');
@@ -23095,7 +23087,7 @@ export const viewConfig = {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/on-message.ts">
-// Updated on: C150 (Add handler for copy text)
+// Updated on: C153 (Send projectScope with latest cycle data)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -23121,13 +23113,15 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestLatestCycleData, async () => {
-        const cycleData = await historyService.getLatestCycle();
-        serverIpc.sendToClient(ServerToClientChannel.SendLatestCycleData, { cycleData });
+        const historyFile = await historyService.getFullHistory();
+        const latestCycle = await historyService.getLatestCycle();
+        serverIpc.sendToClient(ServerToClientChannel.SendLatestCycleData, { cycleData: latestCycle, projectScope: historyFile.projectScope });
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestCycleData, async (data) => {
+        const historyFile = await historyService.getFullHistory();
         const cycleData = await historyService.getCycleData(data.cycleId);
-        serverIpc.sendToClient(ServerToClientChannel.SendCycleData, { cycleData });
+        serverIpc.sendToClient(ServerToClientChannel.SendCycleData, { cycleData, projectScope: historyFile.projectScope });
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.SaveCycleData, (data) => {
@@ -23191,7 +23185,7 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope }) 
     const handleGenerate = () => {
         if (projectScope.trim()) {
             setIsGenerating(true);
-            logger.log("Sending request to generate Cycle 0 prompt.");
+            logger.log("Sending request to generate Cycle 0 prompt and save project scope.");
             clientIpc.sendToServer(ClientToServerChannel.RequestCreateCycle0Prompt, { projectScope });
         }
     };
@@ -24034,7 +24028,7 @@ body {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
-// Updated on: C152 (Remove Files Updated rendering)
+// Updated on: C153 (Fix projectScope error, remove Files Updated UI)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -24640,8 +24634,8 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SendFileContent ? { path: string, content: string | null } :
     T extends ServerToClientChannel.SendFileExistence ? { existenceMap: { [path: string]: boolean } } :
     T extends ServerToClientChannel.SendSyntaxHighlight ? { highlightedHtml: string, id: string } :
-    T extends ServerToClientChannel.SendLatestCycleData ? { cycleData: PcppCycle } :
-    T extends ServerToClientChannel.SendCycleData ? { cycleData: PcppCycle | null } :
+    T extends ServerToClientChannel.SendLatestCycleData ? { cycleData: PcppCycle; projectScope?: string; } :
+    T extends ServerToClientChannel.SendCycleData ? { cycleData: PcppCycle | null, projectScope?: string; } :
     T extends ServerToClientChannel.FilesWritten ? { paths: string[] } :
     T extends ServerToClientChannel.SendFileComparison ? { filePath: string; originalTokens: number; modifiedTokens: number; similarity: number; } :
     never;
@@ -24775,7 +24769,7 @@ export interface FileNode {
 
 <file path="src/common/types/pcpp.types.ts">
 // src/common/types/pcpp.types.ts
-// Updated on: C152 (Add projectScope to history file)
+// Updated on: C153 (Add projectScope to history file)
 
 // Data structure for the backend history file
 export interface PcppResponse {
