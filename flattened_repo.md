@@ -1,19 +1,19 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-25T23:32:29.265Z
+  Date Generated: 2025-08-26T00:02:23.748Z
   ---
   Total Files: 235
-  Total Lines: 19685
-  Total Characters: 960517
-  Approx. Tokens: 240215
+  Total Lines: 19712
+  Total Characters: 960698
+  Approx. Tokens: 240261
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10834 tokens)
 2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
 3. src\Artifacts\A11. DCE - Regression Case Studies.md (7032 tokens)
-4. src\client\views\parallel-copilot.view\view.tsx (6046 tokens)
+4. src\client\views\parallel-copilot.view\view.tsx (6347 tokens)
 5. src\backend\services\prompt.service.ts (6024 tokens)
 6. src\Artifacts\A0. DCE Master Artifact List.md (5703 tokens)
 7. src\client\views\context-chooser.view\view.tsx (5562 tokens)
@@ -61,7 +61,7 @@
 37. src\Artifacts\A32. DCE - Phase 1 - Excel and CSV Handling Strategy.md - Lines: 44 - Chars: 4295 - Tokens: 1074
 38. src\Artifacts\A33. DCE - Phase 1 - Copy-Paste Feature Plan.md - Lines: 42 - Chars: 4456 - Tokens: 1114
 39. src\Artifacts\A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements.md - Lines: 45 - Chars: 6849 - Tokens: 1713
-40. src\Artifacts\A35. DCE - Phase 2 - UI Mockups and Flow.md - Lines: 61 - Chars: 4415 - Tokens: 1104
+40. src\Artifacts\A35. DCE - Phase 2 - UI Mockups and Flow.md - Lines: 48 - Chars: 2937 - Tokens: 735
 41. src\Artifacts\A36. DCE - Phase 2 - Technical Implementation Plan.md - Lines: 56 - Chars: 3621 - Tokens: 906
 42. src\Artifacts\A37. DCE - Phase 2 - Cycle Navigator & Knowledge Graph - Vision.md - Lines: 28 - Chars: 3242 - Tokens: 811
 43. src\Artifacts\A38. DCE - Phase 2 - Cycle Navigator - UI Mockup.md - Lines: 69 - Chars: 4621 - Tokens: 1156
@@ -130,7 +130,7 @@
 106. src\client\components\tree-view\TreeView.tsx - Lines: 394 - Chars: 18029 - Tokens: 4508
 107. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 108. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
-109. src\client\utils\response-parser.ts - Lines: 75 - Chars: 3088 - Tokens: 772
+109. src\client\utils\response-parser.ts - Lines: 76 - Chars: 3150 - Tokens: 788
 110. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 111. src\client\views\context-chooser.view\on-message.ts - Lines: 53 - Chars: 4913 - Tokens: 1229
 112. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
@@ -142,8 +142,8 @@
 118. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 43 - Chars: 1890 - Tokens: 473
 119. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
 120. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
-121. src\client\views\parallel-copilot.view\view.scss - Lines: 573 - Chars: 13565 - Tokens: 3392
-122. src\client\views\parallel-copilot.view\view.tsx - Lines: 368 - Chars: 24181 - Tokens: 6046
+121. src\client\views\parallel-copilot.view\view.scss - Lines: 595 - Chars: 13958 - Tokens: 3490
+122. src\client\views\parallel-copilot.view\view.tsx - Lines: 385 - Chars: 25385 - Tokens: 6347
 123. src\common\ipc\channels.enum.ts - Lines: 73 - Chars: 3734 - Tokens: 934
 124. src\common\ipc\channels.type.ts - Lines: 67 - Chars: 5347 - Tokens: 1337
 125. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1590 - Tokens: 398
@@ -3150,7 +3150,7 @@ The goal of the **Parallel Co-Pilot Panel** is to create an integrated, **persis
 # Artifact A35: DCE - Phase 2 - UI Mockups and Flow
 # Date Created: C69
 # Author: AI Model
-# Updated on: C134 (Add "Select All" and "Log State" buttons)
+# Updated on: C148 (Add response metadata and sort button)
 
 ## 1. Overview
 
@@ -3163,51 +3163,38 @@ The main header contains global actions.
 
 ```
 |-------------------------------------------------------------------------------------------------|
-| [ Generate prompt.md ] [ Log State ] [ Parse All Responses ]      [ Number of Responses: [ 4 ] ] |
+| [ Generate prompt.md ] [ Log State ] [ Parse All ] [ Sort by Tokens ] [ Resp: [ 4 ] ]            |
 |-------------------------------------------------------------------------------------------------|
-| [v] CYCLE & CONTEXT (C134: Review and Implement Feedback)                                       |
+| [v] CYCLE & CONTEXT (C148: Review and Implement Feedback)                                       |
 | |---------------------------------------------------------------------------------------------| |
-| | Cycle: [ < ] [ C134 ] [ > ] [ + ] [ Title Input... ] [Delete] [Reset]                       | |
+| | Cycle: [ < ] [ C148 ] [ > ] [ + ] [ Title Input... ] [Delete] [Reset]                       | |
 | | [ Cycle Context Text Area... ]                                                              | |
 | | [ Ephemeral Context Text Area... ]                                                          | |
 |-------------------------------------------------------------------------------------------------|
 ```
-*   **`[ Log State ]` (New):** A new button next to "Generate prompt.md" to trigger the state logging feature.
+*   **`[ Sort by Tokens ]` (New):** A new button in the main header that, when clicked in parsed mode, re-orders the response tabs from highest total token count to lowest.
 
 ### 2.2. Response Tabs
-(No changes from C133)
+The tabs now display metadata when in parsed mode.
+
+```
+|=================================================================================================|
+| [ Resp 1 (5 files, 2.1K tk) ] [ Resp 2 (4 files, 1.8K tk) ] [ Resp 3 ] [ Resp 4 ]                |
+|-------------------------------------------------------------------------------------------------|
+```
+*   **Tab Metadata (New):** When parsed, each tab will show the number of files detected in its response and the total token count of those files.
 
 ### 2.3. Parsed View (Non-Diff Mode)
-
-The parsed view uses a **resizable two-pane layout**. The left pane provides summary information and navigation. The right pane displays the code, now with its own header for accepting changes.
-
-```
-|-------------------------------------------------------------------------------------------------|
-| [ Left Pane ]<--->[ Right Pane (Code Viewer) ]                                                 |
-| |-------------||------------------------------------------------------------------------------| |
-| | [v] ASSOCIATED FILES            | | [ Select This Response ] [ Select All Files ] [ Accept Selected ] | |
-| | |-------------------------------| |------------------------------------------------------------------| |
-| | | [ ] [✓] src/.../view.tsx      | | [ File: src/.../view.tsx ] [ Accept this file ]                  | |
-| | | [ ] [✗] src/.../new-file.ts   | | +------------------------------------------------------------------+ | |
-| |                                   | | | [ Read-only editor with line numbers and syntax highlighting ] | | |
-| | [v] THOUGHTS / RESPONSE           | | | + Metadata: 1.2K tokens (Original: 1.1K, Sim: 95%)           | | |
-| | | Rendered Markdown...            | | +------------------------------------------------------------------+ | |
-| |                                   | |                                                                    | |
-| | [v] COURSE OF ACTION              | |                                                                    | |
-| | | Rendered Markdown...            | |                                                                    | |
-+-------------------------------------------------------------------------------------------------+
-```
-*   **`[ Select All Files ]` (New):** A new button added to the header of the right pane. It will select (check) all files in the "Associated Files" list. It should toggle to "Deselect All" if all files are already selected.
+(No changes from C134)
 
 ### 2.4. Diff View
 (No changes from C133)
 
 ## 3. User Interaction Flow
 
-1.  **Paste & Parse:** User pastes responses and clicks "Parse All".
-2.  **Select All:** The user is reviewing "Resp 1" and wants to accept all suggested files. They click the new **"Select All Files"** button. All checkboxes in the "Associated Files" list become checked.
-3.  **Accept:** The user clicks **"Accept Selected Files"**. The extension writes all the files to the workspace.
-4.  **Debug State:** The user notices something is wrong with the prompt generation. They click the **"Log State"** button. The extension's output channel displays a detailed log of the current cycle states and the generated `<M6. Cycles>` content, which they can then provide in their feedback.
+1.  **Paste & Parse:** User pastes responses and clicks "Parse All". The tabs update to show metadata (e.g., "Resp 1 (5 files, 2.1K tk)").
+2.  **Sort Responses:** The user notices "Resp 2" has a higher token count than "Resp 1". They click the **"Sort by Tokens"** button. The order of the tabs in the tab bar immediately changes to `[ Resp 2 ] [ Resp 1 ] [ Resp 4 ] [ Resp 3 ]` (based on their respective token counts). The user can now review the longest, likely most detailed, response first.
+3.  **Select & Accept:** The rest of the workflow for selecting and accepting files remains the same.
 </file>
 
 <file path="src/Artifacts/A36. DCE - Phase 2 - Technical Implementation Plan.md">
@@ -10508,11 +10495,12 @@ export const logger = {
 </file>
 
 <file path="src/client/utils/response-parser.ts">
-// Updated on: C133 (Handle duplicate sections and restore metadata calculation)
+// Updated on: C148 (Fix Course of Action regex)
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /^([\s\S]*?)(?=### Course of [Aa]ction|### Files Updated This Cycle|<file path=")/;
-const COURSE_OF_ACTION_REGEX = /### Course of [Aa]ction\s*([\s\S]*?)(?=### Files Updated This Cycle|<file path="|`{3,}|$)/gim;
+// C148: Updated regex to anchor terminators to the start of a line to prevent premature matching.
+const COURSE_OF_ACTION_REGEX = /### Course of [Aa]ction\s*([\s\S]+?)(?=^\s*### Files Updated This Cycle|^\s*<file path=")/gim;
 const FILES_UPDATED_LIST_REGEX = /### Files Updated This Cycle\s*([\s\S]*?)(?=<file path="|`{3,}|$)/m;
 const FILE_TAG_REGEX = /<file path="([^"]+)">([\s\S]*?)<\/file>/g;
 const CODE_FENCE_START_REGEX = /^\s*```[a-zA-Z]*\n/;
@@ -10552,7 +10540,7 @@ export function parseResponse(rawText: string): ParsedResponse {
 
     const summaryMatch = rawText.match(SUMMARY_REGEX);
     
-    // C133: Handle duplicate sections by taking the last match
+    // Handle duplicate sections by taking the last match
     const coaMatches = [...rawText.matchAll(COURSE_OF_ACTION_REGEX)];
     const lastCoaMatch = coaMatches.length > 0 ? coaMatches[coaMatches.length - 1] : null;
 
@@ -12056,7 +12044,7 @@ export default TestPane3;
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
-/* Updated on: C144 (Add styles for file metadata) */
+/* Updated on: C148 (Add styles for tab metadata and sorting) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -12281,10 +12269,32 @@ body {
     cursor: pointer;
     border-bottom: 2px solid transparent;
     color: var(--vscode-tab-inactiveForeground);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding-bottom: 4px;
 
     &.selected {
         background-color: var(--vscode-testing-iconPassed);
         color: var(--vscode-button-foreground);
+    }
+}
+
+.tab-title {
+    font-weight: bold;
+}
+
+.tab-metadata {
+    display: flex;
+    gap: 12px;
+    font-size: 11px;
+    color: var(--vscode-descriptionForeground);
+
+    span {
+        display: flex;
+        align-items: center;
+        gap: 3px;
     }
 }
 
@@ -12632,11 +12642,11 @@ body {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
-// Updated on: C146 (Add tabCount to persisted state)
+// Updated on: C148 (Add response metadata and sorting)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap, VscTrash, VscSync, VscClose, VscSave, VscBug, VscCheckAll } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap, VscTrash, VscSync, VscClose, VscSave, VscBug, VscCheckAll, VscListOrdered, VscListUnordered, VscSymbolNumeric } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -12735,6 +12745,7 @@ const App = () => {
     const [selectedFilesForReplacement, setSelectedFilesForReplacement] = React.useState<Set<string>>(new Set());
     const [selectedResponseId, setSelectedResponseId] = React.useState<string | null>(null);
     const [comparisonMetrics, setComparisonMetrics] = React.useState<Map<string, ComparisonMetrics>>(new Map());
+    const [isSortedByLength, setIsSortedByLength] = React.useState(false); // New state for sorting
 
     const [isAssociatedFilesCollapsed, setAssociatedFilesCollapsed] = React.useState(false);
     const [isThoughtsCollapsed, setThoughtsCollapsed] = React.useState(false);
@@ -12759,7 +12770,7 @@ const App = () => {
             leftPaneWidth,
             selectedResponseId,
             selectedFilesForReplacement: Array.from(selectedFilesForReplacement),
-            tabCount, // C146 Fix: Persist tabCount
+            tabCount,
         };
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
     }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, clientIpc]);
@@ -12811,7 +12822,7 @@ const App = () => {
                 newTabs[tabId] = { rawContent: response.content, parsedContent: null };
             });
             setTabs(newTabs);
-            setTabCount(cycleData.tabCount || 4); // C146 Fix: Restore tab count
+            setTabCount(cycleData.tabCount || 4);
             setIsParsedMode(cycleData.isParsedMode || false);
             setLeftPaneWidth(cycleData.leftPaneWidth || 33);
             setSelectedResponseId(cycleData.selectedResponseId || null);
@@ -12834,6 +12845,18 @@ const App = () => {
     React.useEffect(() => { if (isParsedMode) parseAllTabs(); }, [isParsedMode, tabs, parseAllTabs]);
     
     const activeTabData = tabs[activeTab.toString()];
+
+    const sortedTabIds = React.useMemo(() => {
+        const tabIds = [...Array(tabCount)].map((_, i) => i + 1);
+        if (isParsedMode && isSortedByLength) {
+            tabIds.sort((a, b) => {
+                const tokensA = tabs[a.toString()]?.parsedContent?.totalTokens ?? -1;
+                const tokensB = tabs[b.toString()]?.parsedContent?.totalTokens ?? -1;
+                return tokensB - tokensA;
+            });
+        }
+        return tabIds;
+    }, [tabs, isParsedMode, isSortedByLength, tabCount]);
 
     const viewableContent = React.useMemo(() => {
         if (!selectedFilePath || !activeTabData?.parsedContent) return undefined;
@@ -12991,9 +13014,13 @@ const App = () => {
     };
 
     return <div className="pc-view-container">
-        <div className="pc-header"><div className="pc-toolbar"><button onClick={handleGeneratePrompt} title="Generate prompt.md"><VscFileCode /> Generate prompt.md</button><button onClick={handleLogState} title="Log Current State"><VscBug/></button><button onClick={handleGlobalParseToggle}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} /></div></div>
+        <div className="pc-header"><div className="pc-toolbar"><button onClick={handleGeneratePrompt} title="Generate prompt.md"><VscFileCode /> Generate prompt.md</button><button onClick={handleLogState} title="Log Current State"><VscBug/></button><button onClick={handleGlobalParseToggle}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button>{isParsedMode && <button onClick={() => setIsSortedByLength(p => !p)} title="Sort responses by token count">{isSortedByLength ? <VscListOrdered/> : <VscListUnordered/>} Sort</button>}</div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} /></div></div>
         <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''}><div className="cycle-navigator"><span>Cycle:</span><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0}><VscChevronLeft /></button><input type="number" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 0)} className="cycle-input" /><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button><button onClick={handleNewCycle} title="New Cycle" disabled={isNewCycleButtonDisabled}><VscAdd /></button><input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} /><button onClick={handleDeleteCycle} title="Delete Current Cycle"><VscTrash /></button><button onClick={handleResetHistory} title="Reset All History"><VscSync /></button></div><div className="context-inputs"><textarea className="context-textarea" placeholder="Cycle Context (notes for this cycle)..." value={cycleContext} onChange={e => setCycleContext(e.target.value)} /><textarea className="context-textarea" placeholder="Ephemeral Context (for this cycle's prompt only)..." value={ephemeralContext} onChange={e => setEphemeralContext(e.target.value)} /></div></CollapsibleSection>
-        <div className="tab-bar">{[...Array(tabCount)].map((_, i) => <div key={i} className={`tab ${activeTab === i + 1 ? 'active' : ''} ${selectedResponseId === (i + 1).toString() ? 'selected' : ''}`} onClick={() => setActiveTab(i + 1)}>Resp {i + 1}</div>)}</div>
+        <div className="tab-bar">{sortedTabIds.map((tabIndex) => {
+            const tabData = tabs[tabIndex.toString()];
+            const parsedData = tabData?.parsedContent;
+            return <div key={tabIndex} className={`tab ${activeTab === tabIndex ? 'active' : ''} ${selectedResponseId === tabIndex.toString() ? 'selected' : ''}`} onClick={() => setActiveTab(tabIndex)}><div className="tab-title">Resp {tabIndex}</div>{isParsedMode && parsedData && (<div className="tab-metadata"><span><VscFileCode /> {parsedData.files.length}</span><span><VscSymbolNumeric /> {formatLargeNumber(parsedData.totalTokens, 1)}</span></div>)}</div>;
+        })}</div>
         <div className="tab-content">{activeTab !== null && <div className="tab-pane">{renderContent()}</div>}</div>
     </div>;
 };

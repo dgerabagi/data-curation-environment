@@ -1,9 +1,9 @@
-// Updated on: C148 (Improve Course of Action regex)
+// Updated on: C148 (Fix Course of Action regex)
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /^([\s\S]*?)(?=### Course of [Aa]ction|### Files Updated This Cycle|<file path=")/;
-// C148: Anchor lookaheads to the start of the line to prevent premature termination of the match on inline content.
-const COURSE_OF_ACTION_REGEX = /^### Course of [Aa]ction\s*([\s\S]*?)(?=^### Files Updated This Cycle|^<file path="|^`{3,}|$)/gim;
+// C148: Updated regex to anchor terminators to the start of a line to prevent premature matching.
+const COURSE_OF_ACTION_REGEX = /### Course of [Aa]ction\s*([\s\S]+?)(?=^\s*### Files Updated This Cycle|^\s*<file path=")/gim;
 const FILES_UPDATED_LIST_REGEX = /### Files Updated This Cycle\s*([\s\S]*?)(?=<file path="|`{3,}|$)/m;
 const FILE_TAG_REGEX = /<file path="([^"]+)">([\s\S]*?)<\/file>/g;
 const CODE_FENCE_START_REGEX = /^\s*```[a-zA-Z]*\n/;
@@ -43,6 +43,7 @@ export function parseResponse(rawText: string): ParsedResponse {
 
     const summaryMatch = rawText.match(SUMMARY_REGEX);
     
+    // Handle duplicate sections by taking the last match
     const coaMatches = [...rawText.matchAll(COURSE_OF_ACTION_REGEX)];
     const lastCoaMatch = coaMatches.length > 0 ? coaMatches[coaMatches.length - 1] : null;
 
