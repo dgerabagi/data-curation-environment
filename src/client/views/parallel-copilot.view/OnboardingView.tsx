@@ -5,10 +5,18 @@ import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 import { logger } from '@/client/utils/logger';
 
-const OnboardingView = () => {
-    const [projectScope, setProjectScope] = React.useState('');
+interface OnboardingViewProps {
+    initialProjectScope?: string;
+}
+
+const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope }) => {
+    const [projectScope, setProjectScope] = React.useState(initialProjectScope || '');
     const [isGenerating, setIsGenerating] = React.useState(false);
     const clientIpc = ClientPostMessageManager.getInstance();
+
+    React.useEffect(() => {
+        setProjectScope(initialProjectScope || '');
+    }, [initialProjectScope]);
 
     const handleGenerate = () => {
         if (projectScope.trim()) {

@@ -42,9 +42,8 @@ export class HistoryService {
         }
     }
 
-    public async getFullHistory(): Promise<PcppCycle[]> {
-        const history = await this._readHistoryFile();
-        return history.cycles;
+    public async getFullHistory(): Promise<PcppHistoryFile> {
+        return await this._readHistoryFile();
     }
 
     public async getLatestCycle(): Promise<PcppCycle> {
@@ -72,7 +71,7 @@ export class HistoryService {
             selectedResponseId: null,
             selectedFilesForReplacement: [],
             tabCount: 4,
-            isSortedByLength: false, // C149 Fix: Add default sort state
+            isSortedByLength: false,
         };
 
         if (isFreshEnvironment) {
@@ -113,8 +112,14 @@ export class HistoryService {
         return history.cycles.find(c => c.cycleId === cycleId) || null;
     }
 
+    public async saveProjectScope(scope: string): Promise<void> {
+        const history = await this._readHistoryFile();
+        history.projectScope = scope;
+        await this._writeHistoryFile(history);
+        Services.loggerService.log("Project scope saved.");
+    }
+
     public async saveCycleData(cycleData: PcppCycle): Promise<void> {
-        // Do not save cycle 0 to history
         if (cycleData.cycleId === 0) return;
 
         Services.loggerService.log(`HistoryService: saving data for cycle ${cycleData.cycleId}.`);

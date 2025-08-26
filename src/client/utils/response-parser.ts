@@ -1,8 +1,7 @@
-// Updated on: C148 (Fix Course of Action regex)
+// Updated on: C152 (Implement fallback for unparsable responses)
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /^([\s\S]*?)(?=### Course of [Aa]ction|### Files Updated This Cycle|<file path=")/;
-// C148: Updated regex to anchor terminators to the start of a line to prevent premature matching.
 const COURSE_OF_ACTION_REGEX = /### Course of [Aa]ction\s*([\s\S]+?)(?=^\s*### Files Updated This Cycle|^\s*<file path=")/gim;
 const FILES_UPDATED_LIST_REGEX = /### Files Updated This Cycle\s*([\s\S]*?)(?=<file path="|`{3,}|$)/m;
 const FILE_TAG_REGEX = /<file path="([^"]+)">([\s\S]*?)<\/file>/g;
@@ -15,9 +14,21 @@ export function parseResponse(rawText: string): ParsedResponse {
 
     const tagMatches = [...rawText.matchAll(FILE_TAG_REGEX)];
 
+    if (tagMatches.length === 0 && rawText.includes('<')) {
+        // Fallback for malformed tags or unparsable content
+        const summary = `**PARSING FAILED:** Could not find valid \`<file path="...">\` tags. Displaying raw response below.\n\n---\n\n${rawText}`;
+        return {
+            summary: summary,
+            courseOfAction: '',
+            filesUpdated: [],
+            files: [],
+            totalTokens: Math.ceil(rawText.length / 4),
+        };
+    }
+
     for (const match of tagMatches) {
-        const path = (match?.[1] ?? '').trim();
-        let content = (match?.[2] ?? '');
+        const path = (match?. ?? '').trim();
+        let content = (match?. ?? '');
 
         if (path) {
             content = content.replace(CODE_FENCE_START_REGEX, '');
@@ -43,7 +54,6 @@ export function parseResponse(rawText: string): ParsedResponse {
 
     const summaryMatch = rawText.match(SUMMARY_REGEX);
     
-    // Handle duplicate sections by taking the last match
     const coaMatches = [...rawText.matchAll(COURSE_OF_ACTION_REGEX)];
     const lastCoaMatch = coaMatches.length > 0 ? coaMatches[coaMatches.length - 1] : null;
 

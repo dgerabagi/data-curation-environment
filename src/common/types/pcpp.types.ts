@@ -1,5 +1,5 @@
 // src/common/types/pcpp.types.ts
-// Updated on: C149 (Add isSortedByLength to PcppCycle)
+// Updated on: C152 (Add projectScope to history file)
 
 // Data structure for the backend history file
 export interface PcppResponse {
@@ -18,11 +18,12 @@ export interface PcppCycle {
     selectedResponseId?: string | null;
     selectedFilesForReplacement?: string[];
     tabCount?: number;
-    isSortedByLength?: boolean; // New: To track sorting preference
+    isSortedByLength?: boolean;
 }
 
 export interface PcppHistoryFile {
     version: number;
+    projectScope?: string; // The user's master project scope from Cycle 0
     cycles: PcppCycle[];
 }
 

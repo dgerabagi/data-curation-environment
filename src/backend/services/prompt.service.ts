@@ -114,7 +114,7 @@ M7. Flattened Repo
     public async generateStateLog(currentState: PcppCycle) {
         Services.loggerService.log("--- GENERATING STATE LOG ---");
         try {
-            const fullHistory = await Services.historyService.getFullHistory();
+            const fullHistory = (await Services.historyService.getFullHistory()).cycles;
             
             const truncatedHistory = JSON.parse(JSON.stringify(fullHistory));
             const truncatedCurrentState = JSON.parse(JSON.stringify(currentState));
@@ -164,9 +164,18 @@ ${cyclesContent}
 
         try {
             Services.loggerService.log("Generating prompt.md file...");
+            
+            // Step 1: Automatically run the flattener
+            const lastSelection = await Services.selectionService.getLastSelection();
+            if (lastSelection.length > 0) {
+                await Services.flattenerService.flatten(lastSelection);
+            } else {
+                Services.loggerService.warn("No files selected for flattening. 'flattened_repo.md' may be stale.");
+            }
 
             const flattenedContent = await fs.readFile(flattenedRepoPath, 'utf-8');
-            const fullHistory: PcppCycle[] = await Services.historyService.getFullHistory();
+            const fullHistoryFile = await Services.historyService.getFullHistory();
+            const fullHistory: PcppCycle[] = fullHistoryFile.cycles;
             
             const currentCycleDataFromHistory = fullHistory.find(c => c.cycleId === currentCycle);
             if (!currentCycleDataFromHistory) {
@@ -196,7 +205,7 @@ ${cyclesContent}
                 Services.loggerService.warn("Could not read A0. DCE Master Artifact List.md");
             }
 
-            const projectScope = `<M4. current project scope>\n${currentCycleData.cycleContext || 'No project scope defined for this cycle.'}\n</M4. current project scope>`;
+            const projectScope = `<M4. current project scope>\n${fullHistoryFile.projectScope || 'No project scope defined.'}\n</M4. current project scope>`;
 
             const promptParts = [
                 `<prompt.md>`,
@@ -239,33 +248,41 @@ ${cyclesContent}
 
         try {
             Services.loggerService.log("Generating Cycle 0 prompt.md file...");
+            await Services.historyService.saveProjectScope(projectScope);
 
-            const templateIds = ['T1', 'T2', 'T3', 'T4', 'T5', 'T7', 'T8', 'T9', 'T10', 'A52'];
-            const artifactFilenameMap: { [key: string]: string } = {
-                'T1': 'T1. Template - Master Artifact List.md', 'T2': 'T2. Template - Project Vision and Goals.md', 'T3': 'T3. Template - Phase 1 Requirements & Design.md', 'T4': 'T4. Template - Technical Scaffolding Plan.md', 'T5': 'T5. Template - Target File Structure.md', 'T7': 'T7. Template - Development and Testing Guide.md', 'T8': 'T8. Template - Regression Case Studies.md', 'T9': 'T9. Template - Logging and Debugging Guide.md', 'T10': 'T10. Template - Feature Plan Example.md', 'A52': 'A52. DCE - Interaction Schema Refinement.md'
-            };
-
-            let staticContext = '';
-            for (const artifactId of templateIds) {
-                const filename = artifactFilenameMap[artifactId];
-                const artifactUri = vscode.Uri.joinPath(artifactsDirInExtension, filename);
-                try {
+            // Read all files from the extension's artifacts directory as the example
+            const exampleArtifactEntries = await vscode.workspace.fs.readDirectory(artifactsDirInExtension);
+            let staticContext = '<!-- START: Complete Project Example -->\n';
+            for (const [filename] of exampleArtifactEntries) {
+                if (filename.startsWith('A') && filename.endsWith('.md')) {
+                    const artifactUri = vscode.Uri.joinPath(artifactsDirInExtension, filename);
                     const contentBuffer = await vscode.workspace.fs.readFile(artifactUri);
                     const content = Buffer.from(contentBuffer).toString('utf-8');
                     staticContext += `<${filename}>\n${content}\n</${filename}>\n\n`;
-                } catch (e) {
-                    Services.loggerService.warn(`Could not read template artifact from extension files: ${artifactUri.fsPath}`);
                 }
             }
+            staticContext += '<!-- END: Complete Project Example -->\n\n';
+            
+            // Add curated templates
+            const templateFilenames = ['T11. Template - Implementation Roadmap.md', 'T12. Template - Competitive Analysis.md'];
+            for (const filename of templateFilenames) {
+                 const artifactUri = vscode.Uri.joinPath(artifactsDirInExtension, filename);
+                 const contentBuffer = await vscode.workspace.fs.readFile(artifactUri);
+                 const content = Buffer.from(contentBuffer).toString('utf-8');
+                 staticContext += `<${filename}>\n${content}\n</${filename}>\n\n`;
+            }
+
 
             const cycle0Context = `<Cycle 0>
 <Cycle Context>
 You are a senior project architect. Your task is to establish the necessary documentation to achieve the user's goals, which are outlined in M4.
 
 **CRITICAL INSTRUCTIONS:**
-1.  Your primary goal is to generate **planning and documentation artifacts** (e.g., Project Vision, Requirements).
-2.  You **MUST NOT** generate code files (e.g., \`package.json\`, \`src/main.ts\`) in this initial cycle. The "documentation first" principle is paramount.
-3.  Every artifact you generate **MUST** be enclosed in the strict XML format explained in the provided "Interaction Schema Refinement" document: \`<file path="path/to/artifact.md">...</file>\`.
+1.  Review the complete project documentation provided in the static context as a **best-practice example**.
+2.  Use the provided **templates** (T11, T12) for structure where appropriate.
+3.  Your primary goal is to generate **planning and documentation artifacts** (e.g., Project Vision, Requirements) for the user's project, emulating the quality of the example.
+4.  You **MUST NOT** generate code files (e.g., \`package.json\`, \`src/main.ts\`) in this initial cycle.
+5.  Every artifact you generate **MUST** be enclosed in the strict XML format: \`<file path="path/to/artifact.md">...</file>\`.
 </Cycle Context>
 <Static Context>
 ${staticContext.trim()}
@@ -282,7 +299,6 @@ ${staticContext.trim()}
             await vscode.workspace.fs.writeFile(vscode.Uri.file(promptMdPath), Buffer.from(finalPrompt, 'utf-8'));
             Services.loggerService.log("Successfully generated Cycle 0 prompt.md file.");
 
-            // Create empty A0 artifact
             await vscode.workspace.fs.createDirectory(vscode.Uri.file(artifactsDirInWorkspace));
             const a0Uri = vscode.Uri.file(path.join(artifactsDirInWorkspace, 'A0. DCE Master Artifact List.md'));
             const a0InitialContent = `# Artifact A0: [Your Project Name] Master Artifact List\n# Date Created: C0\n\n## 1. Purpose\n\n# This file serves as the definitive, parseable list of all documentation artifacts for your project.`;

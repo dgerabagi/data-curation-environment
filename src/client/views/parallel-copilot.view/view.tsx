@@ -1,4 +1,4 @@
-// Updated on: C151 (Fix atomic selection and tab switching bug)
+// Updated on: C152 (Remove Files Updated rendering)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -86,6 +86,7 @@ const App = () => {
     const [activeTab, setActiveTab] = React.useState(1);
     const [tabCount, setTabCount] = React.useState(4);
     const [currentCycle, setCurrentCycle] = React.useState<number | null>(null);
+    const [projectScope, setProjectScope] = React.useState<string | undefined>('');
     const [maxCycle, setMaxCycle] = React.useState(1);
     const [cycleTitle, setCycleTitle] = React.useState('');
     const [cycleContext, setCycleContext] = React.useState('');
@@ -169,8 +170,9 @@ const App = () => {
     }, [clientIpc]);
     
     React.useEffect(() => {
-        const loadCycleData = (cycleData: PcppCycle) => {
+        const loadCycleData = (cycleData: PcppCycle, scope?: string) => {
             setCurrentCycle(cycleData.cycleId);
+            setProjectScope(scope);
             setCycleTitle(cycleData.title);
             setCycleContext(cycleData.cycleContext);
             setEphemeralContext(cycleData.ephemeralContext);
@@ -187,8 +189,8 @@ const App = () => {
             setIsSortedByLength(cycleData.isSortedByLength || false);
         };
 
-        clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData }) => { loadCycleData(cycleData); setMaxCycle(cycleData.cycleId); });
-        clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData }) => { if (cycleData) loadCycleData(cycleData); });
+        clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); });
+        clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); });
         clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml)));
         clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap))));
         clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); });
@@ -202,7 +204,6 @@ const App = () => {
 
     React.useEffect(() => { if (isParsedMode) parseAllTabs(); }, [isParsedMode, tabs, parseAllTabs]);
     
-    // C151 Fix: Clear selected file path if it doesn't exist in the new active tab
     React.useEffect(() => {
         if (!selectedFilePath) return;
     
@@ -405,7 +406,7 @@ const App = () => {
     }
 
     if (currentCycle === 0) {
-        return <OnboardingView />;
+        return <OnboardingView initialProjectScope={projectScope} />;
     }
 
     const collapsedNavigator = <div className="collapsed-navigator"><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0}><VscChevronLeft /></button><span className="cycle-display">C{currentCycle}</span><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button></div>;

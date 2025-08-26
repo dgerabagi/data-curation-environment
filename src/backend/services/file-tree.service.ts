@@ -1,4 +1,4 @@
-// Updated on: C115 (Fix type error in getGitStatusMap)
+// Updated on: C152 (Make node_modules visible but not counted)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -14,7 +14,7 @@ import { ProblemCountsMap } from "@/common/ipc/channels.type";
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
-const EXCLUSION_PATTERNS = ['node_modules', 'dist', 'out', '.git', 'dce_cache', '.vscode'];
+const EXCLUSION_PATTERNS = ['.git', 'dce_cache', '.vscode']; // C152: Removed node_modules and dist
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
@@ -128,7 +128,6 @@ export class FileTreeService {
         
         const changes = [...repo.state.workingTreeChanges, ...repo.state.indexChanges, ...repo.state.mergeChanges];
         
-        // C115: Use reduce for a more type-safe map creation
         return changes.reduce((acc, change) => {
             const statusChar = getStatusChar(change.status);
             if (statusChar) {
@@ -194,6 +193,15 @@ export class FileTreeService {
 
     private _aggregateStats(node: FileNode): void {
         if (!node.children) return;
+        
+        // C152: Special handling for node_modules
+        if (node.name.toLowerCase() === 'node_modules') {
+            node.tokenCount = 0;
+            node.fileCount = 0;
+            node.sizeInBytes = 0;
+            return; // Do not aggregate stats for node_modules content
+        }
+
         let totalTokens = 0, totalFiles = 0, totalBytes = 0, totalErrors = node.problemCounts?.error || 0, totalWarnings = node.problemCounts?.warning || 0;
         for (const child of node.children) {
             totalTokens += child.tokenCount;
