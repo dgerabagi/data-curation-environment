@@ -1,8 +1,8 @@
-// Updated on: C149 (Relocate sort button and persist state)
+// Updated on: C150 (Fix atomic selection and add copy button)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap, VscTrash, VscSync, VscClose, VscSave, VscBug, VscCheckAll, VscListOrdered, VscListUnordered, VscSymbolNumeric } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap, VscTrash, VscSync, VscClose, VscSave, VscBug, VscCheckAll, VscListOrdered, VscListUnordered, VscSymbolNumeric, VscClippy } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -286,31 +286,61 @@ const App = () => {
 
     const handleDeleteCycle = () => { if(currentCycle !== null) clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle }); };
     const handleResetHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {});
-    const handleFileSelectionToggle = (filePath: string) => setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); if (newSet.has(filePath)) newSet.delete(filePath); else newSet.add(filePath); return newSet; });
+    
+    const handleFileSelectionToggle = (filePath: string) => {
+        const compositeKey = `${activeTab}:::${filePath}`;
+        setSelectedFilesForReplacement(prev => {
+            const newSet = new Set(prev);
+            if (newSet.has(compositeKey)) {
+                newSet.delete(compositeKey);
+            } else {
+                newSet.add(compositeKey);
+            }
+            return newSet;
+        });
+    };
     
     const handleSelectAllFilesToggle = () => {
-        if (isAllFilesSelected) {
-            setSelectedFilesForReplacement(new Set());
-        } else {
-            setSelectedFilesForReplacement(new Set(activeTabData?.parsedContent?.filesUpdated || []));
-        }
+        if (!activeTabData?.parsedContent) return;
+        
+        const allFilesForTab = activeTabData.parsedContent.filesUpdated.map(fp => `${activeTab}:::${fp}`);
+        const isAllSelected = allFilesForTab.every(key => selectedFilesForReplacement.has(key));
+
+        setSelectedFilesForReplacement(prev => {
+            const newSet = new Set(prev);
+            if (isAllSelected) {
+                allFilesForTab.forEach(key => newSet.delete(key));
+            } else {
+                allFilesForTab.forEach(key => newSet.add(key));
+            }
+            return newSet;
+        });
     };
 
     const handleAcceptSelectedFiles = () => {
-        if (selectedFilesForReplacement.size === 0 || !activeTabData?.parsedContent) return;
+        if (selectedFilesForReplacement.size === 0) return;
         const filesToWrite: BatchWriteFile[] = [];
-        selectedFilesForReplacement.forEach(filePath => {
-            const file = activeTabData.parsedContent.files.find(f => f.path === filePath);
-            if (file) filesToWrite.push({ path: file.path, content: file.content });
+        selectedFilesForReplacement.forEach(compositeKey => {
+            const [responseId, filePath] = compositeKey.split(':::');
+            const responseData = tabs[responseId];
+            if (responseData?.parsedContent) {
+                const file = responseData.parsedContent.files.find(f => f.path === filePath);
+                if (file) {
+                    filesToWrite.push({ path: file.path, content: file.content });
+                }
+            }
         });
-        if (filesToWrite.length > 0) clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite });
+        if (filesToWrite.length > 0) {
+            clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite });
+        }
     };
 
     const isAllFilesSelected = React.useMemo(() => {
         if (!activeTabData?.parsedContent) return false;
         const allFiles = activeTabData.parsedContent.filesUpdated;
-        return allFiles.length > 0 && allFiles.every(file => selectedFilesForReplacement.has(file));
-    }, [selectedFilesForReplacement, activeTabData]);
+        if (allFiles.length === 0) return false;
+        return allFiles.every(file => selectedFilesForReplacement.has(`${activeTab}:::${file}`));
+    }, [selectedFilesForReplacement, activeTabData, activeTab]);
 
     const isNewCycleButtonDisabled = React.useMemo(() => {
         const hasTitle = cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== '';
@@ -327,6 +357,14 @@ const App = () => {
         }
         const currentState: PcppCycle = { cycleId: currentCycle, timestamp: new Date().toISOString(), title: cycleTitle, cycleContext, ephemeralContext, responses, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement: Array.from(selectedFilesForReplacement), tabCount, isSortedByLength };
         clientIpc.sendToServer(ClientToServerChannel.RequestLogState, { currentState });
+    };
+
+    const handleCopyContent = () => {
+        if (!selectedFilePath || !activeTabData?.parsedContent) return;
+        const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath);
+        if (file) {
+            clientIpc.sendToServer(ClientToServerChannel.RequestCopyTextToClipboard, { text: file.content });
+        }
     };
 
     const isReadyForNextCycle = !isNewCycleButtonDisabled;
@@ -347,23 +385,26 @@ const App = () => {
             return <textarea className="response-textarea" placeholder={`Paste AI response for tab ${activeTab} here...`} value={activeTabData?.rawContent || ''} onChange={(e) => handleRawContentChange(e.target.value, activeTab)} />;
         }
         return <div className="parsed-view-grid">
-            <div className="parsed-view-left" style={{ flexBasis: `${leftPaneWidth}%` }}><CollapsibleSection title="Associated Files" isCollapsed={isAssociatedFilesCollapsed} onToggle={() => setAssociatedFilesCollapsed(p => !p)}><ul className="associated-files-list">{activeTabData.parsedContent.filesUpdated.map(file => <li key={file} className={selectedFilePath === file ? 'selected' : ''} onClick={() => handleSelectForViewing(file)} title={file}><input type="checkbox" checked={selectedFilesForReplacement.has(file)} onChange={() => handleFileSelectionToggle(file)} onClick={e => e.stopPropagation()} />{fileExistenceMap.get(file) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}<span>{file}</span></li>)}</ul></CollapsibleSection><CollapsibleSection title="Thoughts / Response" isCollapsed={isThoughtsCollapsed} onToggle={() => setThoughtsCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown></CollapsibleSection><CollapsibleSection title="Course of Action" isCollapsed={isActionCollapsed} onToggle={() => setActionCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown></CollapsibleSection></div>
+            <div className="parsed-view-left" style={{ flexBasis: `${leftPaneWidth}%` }}><CollapsibleSection title="Associated Files" isCollapsed={isAssociatedFilesCollapsed} onToggle={() => setAssociatedFilesCollapsed(p => !p)}><ul className="associated-files-list">{activeTabData.parsedContent.filesUpdated.map(file => <li key={file} className={selectedFilePath === file ? 'selected' : ''} onClick={() => handleSelectForViewing(file)} title={file}><input type="checkbox" checked={selectedFilesForReplacement.has(`${activeTab}:::${file}`)} onChange={() => handleFileSelectionToggle(file)} onClick={e => e.stopPropagation()} />{fileExistenceMap.get(file) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}<span>{file}</span></li>)}</ul></CollapsibleSection><CollapsibleSection title="Thoughts / Response" isCollapsed={isThoughtsCollapsed} onToggle={() => setThoughtsCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown></CollapsibleSection><CollapsibleSection title="Course of Action" isCollapsed={isActionCollapsed} onToggle={() => setActionCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown></CollapsibleSection></div>
             <div className="resizer" onMouseDown={handleMouseDown} />
             <div className="parsed-view-right">
                 <div className="response-acceptance-header"><button className={`styled-button ${selectedResponseId === activeTab.toString() ? 'toggled' : ''}`} onClick={() => setSelectedResponseId(prev => prev === activeTab.toString() ? null : activeTab.toString())}>{selectedResponseId === activeTab.toString() ? 'Response Selected' : 'Select This Response'}</button><button className="styled-button" onClick={handleSelectAllFilesToggle}><VscCheckAll/> {isAllFilesSelected ? 'Deselect All' : 'Select All'}</button><button className="styled-button" onClick={handleAcceptSelectedFiles} disabled={selectedFilesForReplacement.size === 0}><VscSave/> Accept Selected</button></div>
                 <div className="file-content-viewer-header">
                     <span className="file-path" title={selectedFilePath || ''}>{selectedFilePath ? path.basename(selectedFilePath) : 'No file selected'}</span>
-                    <div className="file-metadata">
-                        {currentComparisonMetrics && currentComparisonMetrics.originalTokens !== -1 && (
-                            <>
-                                <span>Original: {formatLargeNumber(currentComparisonMetrics.originalTokens, 1)} tk</span>
-                                <span>New: {formatLargeNumber(currentComparisonMetrics.modifiedTokens, 1)} tk</span>
-                                <span>Similarity: {(currentComparisonMetrics.similarity * 100).toFixed(0)}%</span>
-                            </>
-                        )}
-                         {currentComparisonMetrics && currentComparisonMetrics.originalTokens === -1 && (
-                            <span style={{color: 'var(--vscode-errorForeground)'}}>Original file not found</span>
-                         )}
+                    <div className="file-actions">
+                        <div className="file-metadata">
+                            {currentComparisonMetrics && currentComparisonMetrics.originalTokens !== -1 && (
+                                <>
+                                    <span>Original: {formatLargeNumber(currentComparisonMetrics.originalTokens, 1)} tk</span>
+                                    <span>New: {formatLargeNumber(currentComparisonMetrics.modifiedTokens, 1)} tk</span>
+                                    <span>Similarity: {(currentComparisonMetrics.similarity * 100).toFixed(0)}%</span>
+                                </>
+                            )}
+                             {currentComparisonMetrics && currentComparisonMetrics.originalTokens === -1 && (
+                                <span style={{color: 'var(--vscode-errorForeground)'}}>Original file not found</span>
+                             )}
+                        </div>
+                        <button onClick={handleCopyContent} title="Copy file content" disabled={!selectedFilePath}><VscClippy /></button>
                     </div>
                 </div>
                 <CodeViewer htmlContent={viewableContent} />

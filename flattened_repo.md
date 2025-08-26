@@ -1,24 +1,24 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-26T00:07:54.269Z
+  Date Generated: 2025-08-26T00:18:30.701Z
   ---
   Total Files: 235
-  Total Lines: 19730
-  Total Characters: 961334
-  Approx. Tokens: 240419
+  Total Lines: 19788
+  Total Characters: 963741
+  Approx. Tokens: 241020
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10834 tokens)
 2. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
 3. src\Artifacts\A11. DCE - Regression Case Studies.md (7032 tokens)
-4. src\client\views\parallel-copilot.view\view.tsx (6410 tokens)
+4. src\client\views\parallel-copilot.view\view.tsx (6797 tokens)
 5. src\backend\services\prompt.service.ts (6024 tokens)
 6. src\Artifacts\A0. DCE Master Artifact List.md (5703 tokens)
 7. src\client\views\context-chooser.view\view.tsx (5562 tokens)
 8. src\client\components\tree-view\TreeView.tsx (4508 tokens)
-9. src\backend\services\file-operation.service.ts (3851 tokens)
+9. src\backend\services\file-operation.service.ts (3987 tokens)
 10. src\client\views\context-chooser.view\view.scss (3638 tokens)
 
 <!-- Full File List -->
@@ -110,7 +110,7 @@
 86. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
 87. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
 88. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
-89. src\backend\services\file-operation.service.ts - Lines: 317 - Chars: 15403 - Tokens: 3851
+89. src\backend\services\file-operation.service.ts - Lines: 328 - Chars: 15946 - Tokens: 3987
 90. src\backend\services\file-tree.service.ts - Lines: 212 - Chars: 11447 - Tokens: 2862
 91. src\backend\services\flattener.service.ts - Lines: 210 - Chars: 11271 - Tokens: 2818
 92. src\backend\services\highlighting.service.ts - Lines: 58 - Chars: 2920 - Tokens: 730
@@ -137,15 +137,15 @@
 113. src\client\views\context-chooser.view\view.tsx - Lines: 435 - Chars: 22245 - Tokens: 5562
 114. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
 115. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-116. src\client\views\parallel-copilot.view\on-message.ts - Lines: 66 - Chars: 3102 - Tokens: 776
+116. src\client\views\parallel-copilot.view\on-message.ts - Lines: 70 - Chars: 3275 - Tokens: 819
 117. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 43 - Chars: 2068 - Tokens: 517
 118. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 43 - Chars: 1890 - Tokens: 473
 119. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
 120. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
 121. src\client\views\parallel-copilot.view\view.scss - Lines: 605 - Chars: 14226 - Tokens: 3557
-122. src\client\views\parallel-copilot.view\view.tsx - Lines: 390 - Chars: 25640 - Tokens: 6410
-123. src\common\ipc\channels.enum.ts - Lines: 73 - Chars: 3734 - Tokens: 934
-124. src\common\ipc\channels.type.ts - Lines: 67 - Chars: 5347 - Tokens: 1337
+122. src\client\views\parallel-copilot.view\view.tsx - Lines: 431 - Chars: 27188 - Tokens: 6797
+123. src\common\ipc\channels.enum.ts - Lines: 74 - Chars: 3792 - Tokens: 948
+124. src\common\ipc\channels.type.ts - Lines: 68 - Chars: 5432 - Tokens: 1358
 125. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1590 - Tokens: 398
 126. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 127. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
@@ -7393,6 +7393,17 @@ export class FileOperationService {
         }
     }
 
+    public async handleCopyTextToClipboardRequest(text: string) {
+        Services.loggerService.log(`[Clipboard] Received request to copy text.`);
+        try {
+            await vscode.env.clipboard.writeText(text);
+            vscode.window.showInformationMessage('File content copied to clipboard.');
+        } catch (error: any) {
+            Services.loggerService.error(`[Clipboard] Failed to copy: ${error.message}`);
+            vscode.window.showErrorMessage('Failed to copy file content to clipboard.');
+        }
+    }
+
     public async handleFileComparisonRequest(filePath: string, modifiedContent: string, serverIpc: ServerPostMessageManager) {
         Services.loggerService.log(`[Comparison] Received request for: ${filePath}`);
         try {
@@ -11727,7 +11738,7 @@ export const viewConfig = {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/on-message.ts">
-// Updated on: C144 (Add handler for file comparison)
+// Updated on: C150 (Add handler for copy text)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -11791,6 +11802,10 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestFileComparison, (data) => {
         fileOperationService.handleFileComparisonRequest(data.filePath, data.modifiedContent, serverIpc);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestCopyTextToClipboard, (data) => {
+        fileOperationService.handleCopyTextToClipboardRequest(data.text);
     });
 }
 </file>
@@ -12654,11 +12669,11 @@ body {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
-// Updated on: C149 (Relocate sort button and persist state)
+// Updated on: C150 (Fix atomic selection and add copy button)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap, VscTrash, VscSync, VscClose, VscSave, VscBug, VscCheckAll, VscListOrdered, VscListUnordered, VscSymbolNumeric } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap, VscTrash, VscSync, VscClose, VscSave, VscBug, VscCheckAll, VscListOrdered, VscListUnordered, VscSymbolNumeric, VscClippy } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -12942,31 +12957,61 @@ const App = () => {
 
     const handleDeleteCycle = () => { if(currentCycle !== null) clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle }); };
     const handleResetHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {});
-    const handleFileSelectionToggle = (filePath: string) => setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); if (newSet.has(filePath)) newSet.delete(filePath); else newSet.add(filePath); return newSet; });
+    
+    const handleFileSelectionToggle = (filePath: string) => {
+        const compositeKey = `${activeTab}:::${filePath}`;
+        setSelectedFilesForReplacement(prev => {
+            const newSet = new Set(prev);
+            if (newSet.has(compositeKey)) {
+                newSet.delete(compositeKey);
+            } else {
+                newSet.add(compositeKey);
+            }
+            return newSet;
+        });
+    };
     
     const handleSelectAllFilesToggle = () => {
-        if (isAllFilesSelected) {
-            setSelectedFilesForReplacement(new Set());
-        } else {
-            setSelectedFilesForReplacement(new Set(activeTabData?.parsedContent?.filesUpdated || []));
-        }
+        if (!activeTabData?.parsedContent) return;
+        
+        const allFilesForTab = activeTabData.parsedContent.filesUpdated.map(fp => `${activeTab}:::${fp}`);
+        const isAllSelected = allFilesForTab.every(key => selectedFilesForReplacement.has(key));
+
+        setSelectedFilesForReplacement(prev => {
+            const newSet = new Set(prev);
+            if (isAllSelected) {
+                allFilesForTab.forEach(key => newSet.delete(key));
+            } else {
+                allFilesForTab.forEach(key => newSet.add(key));
+            }
+            return newSet;
+        });
     };
 
     const handleAcceptSelectedFiles = () => {
-        if (selectedFilesForReplacement.size === 0 || !activeTabData?.parsedContent) return;
+        if (selectedFilesForReplacement.size === 0) return;
         const filesToWrite: BatchWriteFile[] = [];
-        selectedFilesForReplacement.forEach(filePath => {
-            const file = activeTabData.parsedContent.files.find(f => f.path === filePath);
-            if (file) filesToWrite.push({ path: file.path, content: file.content });
+        selectedFilesForReplacement.forEach(compositeKey => {
+            const [responseId, filePath] = compositeKey.split(':::');
+            const responseData = tabs[responseId];
+            if (responseData?.parsedContent) {
+                const file = responseData.parsedContent.files.find(f => f.path === filePath);
+                if (file) {
+                    filesToWrite.push({ path: file.path, content: file.content });
+                }
+            }
         });
-        if (filesToWrite.length > 0) clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite });
+        if (filesToWrite.length > 0) {
+            clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite });
+        }
     };
 
     const isAllFilesSelected = React.useMemo(() => {
         if (!activeTabData?.parsedContent) return false;
         const allFiles = activeTabData.parsedContent.filesUpdated;
-        return allFiles.length > 0 && allFiles.every(file => selectedFilesForReplacement.has(file));
-    }, [selectedFilesForReplacement, activeTabData]);
+        if (allFiles.length === 0) return false;
+        return allFiles.every(file => selectedFilesForReplacement.has(`${activeTab}:::${file}`));
+    }, [selectedFilesForReplacement, activeTabData, activeTab]);
 
     const isNewCycleButtonDisabled = React.useMemo(() => {
         const hasTitle = cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== '';
@@ -12983,6 +13028,14 @@ const App = () => {
         }
         const currentState: PcppCycle = { cycleId: currentCycle, timestamp: new Date().toISOString(), title: cycleTitle, cycleContext, ephemeralContext, responses, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement: Array.from(selectedFilesForReplacement), tabCount, isSortedByLength };
         clientIpc.sendToServer(ClientToServerChannel.RequestLogState, { currentState });
+    };
+
+    const handleCopyContent = () => {
+        if (!selectedFilePath || !activeTabData?.parsedContent) return;
+        const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath);
+        if (file) {
+            clientIpc.sendToServer(ClientToServerChannel.RequestCopyTextToClipboard, { text: file.content });
+        }
     };
 
     const isReadyForNextCycle = !isNewCycleButtonDisabled;
@@ -13003,23 +13056,26 @@ const App = () => {
             return <textarea className="response-textarea" placeholder={`Paste AI response for tab ${activeTab} here...`} value={activeTabData?.rawContent || ''} onChange={(e) => handleRawContentChange(e.target.value, activeTab)} />;
         }
         return <div className="parsed-view-grid">
-            <div className="parsed-view-left" style={{ flexBasis: `${leftPaneWidth}%` }}><CollapsibleSection title="Associated Files" isCollapsed={isAssociatedFilesCollapsed} onToggle={() => setAssociatedFilesCollapsed(p => !p)}><ul className="associated-files-list">{activeTabData.parsedContent.filesUpdated.map(file => <li key={file} className={selectedFilePath === file ? 'selected' : ''} onClick={() => handleSelectForViewing(file)} title={file}><input type="checkbox" checked={selectedFilesForReplacement.has(file)} onChange={() => handleFileSelectionToggle(file)} onClick={e => e.stopPropagation()} />{fileExistenceMap.get(file) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}<span>{file}</span></li>)}</ul></CollapsibleSection><CollapsibleSection title="Thoughts / Response" isCollapsed={isThoughtsCollapsed} onToggle={() => setThoughtsCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown></CollapsibleSection><CollapsibleSection title="Course of Action" isCollapsed={isActionCollapsed} onToggle={() => setActionCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown></CollapsibleSection></div>
+            <div className="parsed-view-left" style={{ flexBasis: `${leftPaneWidth}%` }}><CollapsibleSection title="Associated Files" isCollapsed={isAssociatedFilesCollapsed} onToggle={() => setAssociatedFilesCollapsed(p => !p)}><ul className="associated-files-list">{activeTabData.parsedContent.filesUpdated.map(file => <li key={file} className={selectedFilePath === file ? 'selected' : ''} onClick={() => handleSelectForViewing(file)} title={file}><input type="checkbox" checked={selectedFilesForReplacement.has(`${activeTab}:::${file}`)} onChange={() => handleFileSelectionToggle(file)} onClick={e => e.stopPropagation()} />{fileExistenceMap.get(file) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}<span>{file}</span></li>)}</ul></CollapsibleSection><CollapsibleSection title="Thoughts / Response" isCollapsed={isThoughtsCollapsed} onToggle={() => setThoughtsCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown></CollapsibleSection><CollapsibleSection title="Course of Action" isCollapsed={isActionCollapsed} onToggle={() => setActionCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown></CollapsibleSection></div>
             <div className="resizer" onMouseDown={handleMouseDown} />
             <div className="parsed-view-right">
                 <div className="response-acceptance-header"><button className={`styled-button ${selectedResponseId === activeTab.toString() ? 'toggled' : ''}`} onClick={() => setSelectedResponseId(prev => prev === activeTab.toString() ? null : activeTab.toString())}>{selectedResponseId === activeTab.toString() ? 'Response Selected' : 'Select This Response'}</button><button className="styled-button" onClick={handleSelectAllFilesToggle}><VscCheckAll/> {isAllFilesSelected ? 'Deselect All' : 'Select All'}</button><button className="styled-button" onClick={handleAcceptSelectedFiles} disabled={selectedFilesForReplacement.size === 0}><VscSave/> Accept Selected</button></div>
                 <div className="file-content-viewer-header">
                     <span className="file-path" title={selectedFilePath || ''}>{selectedFilePath ? path.basename(selectedFilePath) : 'No file selected'}</span>
-                    <div className="file-metadata">
-                        {currentComparisonMetrics && currentComparisonMetrics.originalTokens !== -1 && (
-                            <>
-                                <span>Original: {formatLargeNumber(currentComparisonMetrics.originalTokens, 1)} tk</span>
-                                <span>New: {formatLargeNumber(currentComparisonMetrics.modifiedTokens, 1)} tk</span>
-                                <span>Similarity: {(currentComparisonMetrics.similarity * 100).toFixed(0)}%</span>
-                            </>
-                        )}
-                         {currentComparisonMetrics && currentComparisonMetrics.originalTokens === -1 && (
-                            <span style={{color: 'var(--vscode-errorForeground)'}}>Original file not found</span>
-                         )}
+                    <div className="file-actions">
+                        <div className="file-metadata">
+                            {currentComparisonMetrics && currentComparisonMetrics.originalTokens !== -1 && (
+                                <>
+                                    <span>Original: {formatLargeNumber(currentComparisonMetrics.originalTokens, 1)} tk</span>
+                                    <span>New: {formatLargeNumber(currentComparisonMetrics.modifiedTokens, 1)} tk</span>
+                                    <span>Similarity: {(currentComparisonMetrics.similarity * 100).toFixed(0)}%</span>
+                                </>
+                            )}
+                             {currentComparisonMetrics && currentComparisonMetrics.originalTokens === -1 && (
+                                <span style={{color: 'var(--vscode-errorForeground)'}}>Original file not found</span>
+                             )}
+                        </div>
+                        <button onClick={handleCopyContent} title="Copy file content" disabled={!selectedFilePath}><VscClippy /></button>
                     </div>
                 </div>
                 <CodeViewer htmlContent={viewableContent} />
@@ -13071,6 +13127,7 @@ export enum ClientToServerChannel {
     RequestCopyFileFromUri = "clientToServer.requestCopyFileFromUri",
     RequestBatchFileWrite = "clientToServer.requestBatchFileWrite",
     RequestCreateFile = "clientToServer.requestCreateFile",
+    RequestCopyTextToClipboard = "clientToServer.requestCopyTextToClipboard", // New
 
     // Special File Handling
     RequestPdfToText = "clientToServer.requestPdfToText",
@@ -13096,7 +13153,7 @@ export enum ClientToServerChannel {
     RequestDeleteCycle = "clientToServer.requestDeleteCycle",
     RequestResetHistory = "clientToServer.requestResetHistory",
     RequestLogState = "clientToServer.requestLogState",
-    RequestFileComparison = "clientToServer.requestFileComparison", // New in C144
+    RequestFileComparison = "clientToServer.requestFileComparison", 
 }
 
 export enum ServerToClientChannel {
@@ -13118,7 +13175,7 @@ export enum ServerToClientChannel {
     SendLatestCycleData = "serverToClient.sendLatestCycleData",
     SendCycleData = "serverToClient.sendCycleData",
     FilesWritten = "serverToClient.filesWritten",
-    SendFileComparison = "serverToClient.sendFileComparison", // New in C144
+    SendFileComparison = "serverToClient.sendFileComparison", 
 }
 </file>
 
@@ -13152,6 +13209,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestAddFileFromBuffer ? { targetPath: string, data: Uint8Array } :
     T extends ClientToServerChannel.RequestCopyFileFromUri ? { sourceUri: string, targetDir: string } :
     T extends ClientToServerChannel.RequestCreateFile ? { filePath: string } :
+    T extends ClientToServerChannel.RequestCopyTextToClipboard ? { text: string } :
     T extends ClientToServerChannel.RequestPdfToText ? { path: string } :
     T extends ClientToServerChannel.RequestExcelToText ? { path: string } :
     T extends ClientToServerChannel.RequestWordToText ? { path: string } :

@@ -22,6 +22,17 @@ export class FileOperationService {
         }
     }
 
+    public async handleCopyTextToClipboardRequest(text: string) {
+        Services.loggerService.log(`[Clipboard] Received request to copy text.`);
+        try {
+            await vscode.env.clipboard.writeText(text);
+            vscode.window.showInformationMessage('File content copied to clipboard.');
+        } catch (error: any) {
+            Services.loggerService.error(`[Clipboard] Failed to copy: ${error.message}`);
+            vscode.window.showErrorMessage('Failed to copy file content to clipboard.');
+        }
+    }
+
     public async handleFileComparisonRequest(filePath: string, modifiedContent: string, serverIpc: ServerPostMessageManager) {
         Services.loggerService.log(`[Comparison] Received request for: ${filePath}`);
         try {

@@ -22,6 +22,7 @@ export enum ClientToServerChannel {
     RequestCopyFileFromUri = "clientToServer.requestCopyFileFromUri",
     RequestBatchFileWrite = "clientToServer.requestBatchFileWrite",
     RequestCreateFile = "clientToServer.requestCreateFile",
+    RequestCopyTextToClipboard = "clientToServer.requestCopyTextToClipboard", // New
 
     // Special File Handling
     RequestPdfToText = "clientToServer.requestPdfToText",
@@ -47,7 +48,7 @@ export enum ClientToServerChannel {
     RequestDeleteCycle = "clientToServer.requestDeleteCycle",
     RequestResetHistory = "clientToServer.requestResetHistory",
     RequestLogState = "clientToServer.requestLogState",
-    RequestFileComparison = "clientToServer.requestFileComparison", // New in C144
+    RequestFileComparison = "clientToServer.requestFileComparison", 
 }
 
 export enum ServerToClientChannel {
@@ -69,5 +70,5 @@ export enum ServerToClientChannel {
     SendLatestCycleData = "serverToClient.sendLatestCycleData",
     SendCycleData = "serverToClient.sendCycleData",
     FilesWritten = "serverToClient.filesWritten",
-    SendFileComparison = "serverToClient.sendFileComparison", // New in C144
+    SendFileComparison = "serverToClient.sendFileComparison", 
 }

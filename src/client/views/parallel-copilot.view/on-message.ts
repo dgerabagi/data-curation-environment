@@ -1,4 +1,4 @@
-// Updated on: C144 (Add handler for file comparison)
+// Updated on: C150 (Add handler for copy text)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -62,5 +62,9 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestFileComparison, (data) => {
         fileOperationService.handleFileComparisonRequest(data.filePath, data.modifiedContent, serverIpc);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestCopyTextToClipboard, (data) => {
+        fileOperationService.handleCopyTextToClipboardRequest(data.text);
     });
 }
