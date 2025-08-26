@@ -1,4 +1,4 @@
-// Updated on: C150 (Fix atomic selection and add copy button)
+// Updated on: C151 (Fix atomic selection and tab switching bug)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -202,6 +202,20 @@ const App = () => {
 
     React.useEffect(() => { if (isParsedMode) parseAllTabs(); }, [isParsedMode, tabs, parseAllTabs]);
     
+    // C151 Fix: Clear selected file path if it doesn't exist in the new active tab
+    React.useEffect(() => {
+        if (!selectedFilePath) return;
+    
+        const currentTabData = tabs[activeTab.toString()];
+        if (currentTabData?.parsedContent) {
+            const fileExistsInTab = currentTabData.parsedContent.files.some(f => f.path === selectedFilePath);
+            if (!fileExistsInTab) {
+                logger.log(`[State Cleanup] Selected file '${selectedFilePath}' not found in new tab '${activeTab}'. Clearing selection.`);
+                setSelectedFilePath(null);
+            }
+        }
+    }, [activeTab, tabs, selectedFilePath]);
+
     const activeTabData = tabs[activeTab.toString()];
 
     const sortedTabIds = React.useMemo(() => {
@@ -288,14 +302,31 @@ const App = () => {
     const handleResetHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {});
     
     const handleFileSelectionToggle = (filePath: string) => {
-        const compositeKey = `${activeTab}:::${filePath}`;
+        const currentTabId = activeTab.toString();
+        const compositeKeyForCurrent = `${currentTabId}:::${filePath}`;
+    
         setSelectedFilesForReplacement(prev => {
             const newSet = new Set(prev);
-            if (newSet.has(compositeKey)) {
-                newSet.delete(compositeKey);
-            } else {
-                newSet.add(compositeKey);
+            
+            let existingKey: string | undefined;
+            for (const key of newSet) {
+                if (key.endsWith(`:::${filePath}`)) {
+                    existingKey = key;
+                    break;
+                }
             }
+    
+            if (existingKey) {
+                if (existingKey === compositeKeyForCurrent) {
+                    newSet.delete(existingKey);
+                } else {
+                    newSet.delete(existingKey);
+                    newSet.add(compositeKeyForCurrent);
+                }
+            } else {
+                newSet.add(compositeKeyForCurrent);
+            }
+            
             return newSet;
         });
     };
