@@ -1,4 +1,4 @@
-/* Updated on: C149 (Add styles for selected tab metadata and sort button) */
+/* Updated on: C154 (Add styles for onboarding success and path override input) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -23,6 +23,17 @@ body {
     p {
         color: var(--vscode-descriptionForeground);
     }
+}
+
+.onboarding-success {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    padding: 16px;
+    border: 1px solid var(--vscode-testing-iconPassed);
+    background-color: hsla(120, 60%, 50%, 0.1);
+    border-radius: 4px;
 }
 
 .onboarding-textarea {
@@ -467,6 +478,28 @@ body {
     }
     .status-icon.not-exists {
         color: var(--vscode-testing-iconFailed);
+    }
+}
+
+.path-override-container {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    margin-top: 2px;
+    
+    input {
+        flex-grow: 1;
+        font-size: 11px;
+        padding: 1px 4px;
+        background-color: var(--vscode-input-background);
+        color: var(--vscode-input-foreground);
+        border: 1px solid var(--vscode-input-border);
+        border-radius: 2px;
+    }
+
+    button {
+        padding: 1px 6px;
+        font-size: 11px;
     }
 }
 

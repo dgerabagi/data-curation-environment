@@ -1,5 +1,5 @@
 // src/common/types/pcpp.types.ts
-// Updated on: C153 (Add projectScope to history file)
+// Updated on: C154 (Add pathOverrides to PcppCycle)
 
 // Data structure for the backend history file
 export interface PcppResponse {
@@ -19,6 +19,7 @@ export interface PcppCycle {
     selectedFilesForReplacement?: string[];
     tabCount?: number;
     isSortedByLength?: boolean;
+    pathOverrides?: { [originalPath: string]: string }; // New: To store user-corrected file paths
 }
 
 export interface PcppHistoryFile {
@@ -38,7 +39,7 @@ export interface ParsedFile {
 export interface ParsedResponse {
     summary: string;
     courseOfAction: string;
-    filesUpdated: string[]; // List of file paths from the "Files Updated This Cycle" section
+    filesUpdated: string[]; // This is now derived from parsed files, not a separate section
     files: ParsedFile[]; // Parsed file blocks with content
     totalTokens: number;
 }

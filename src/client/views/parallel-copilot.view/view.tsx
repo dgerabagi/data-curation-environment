@@ -1,8 +1,9 @@
-// Updated on: C153 (Fix projectScope error, remove Files Updated UI)
+// src/client/views/parallel-copilot.view/view.tsx
+// Updated on: C154 (Fix resizer bug, add path override UI, fix nav bug)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap, VscTrash, VscSync, VscClose, VscSave, VscBug, VscCheckAll, VscListOrdered, VscListUnordered, VscSymbolNumeric, VscClippy } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap, VscTrash, VscSync, VscClose, VscSave, VscBug, VscCheckAll, VscListOrdered, VscListUnordered, VscSymbolNumeric, VscClippy, VscLink } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -14,6 +15,7 @@ import { BatchWriteFile } from '@/common/ipc/channels.type';
 import OnboardingView from './OnboardingView';
 import { formatLargeNumber } from '@/common/utils/formatting';
 
+// ... (imports and interfaces remain the same) ...
 interface ComparisonMetrics {
     originalTokens: number;
     modifiedTokens: number;
@@ -83,6 +85,7 @@ const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; i
 
 
 const App = () => {
+    // ... (most state declarations are the same)
     const [activeTab, setActiveTab] = React.useState(1);
     const [tabCount, setTabCount] = React.useState(4);
     const [currentCycle, setCurrentCycle] = React.useState<number | null>(null);
@@ -103,6 +106,8 @@ const App = () => {
     const [selectedResponseId, setSelectedResponseId] = React.useState<string | null>(null);
     const [comparisonMetrics, setComparisonMetrics] = React.useState<Map<string, ComparisonMetrics>>(new Map());
     const [isSortedByLength, setIsSortedByLength] = React.useState(false);
+    const [pathOverrides, setPathOverrides] = React.useState<Map<string, string>>(new Map());
+    const [tempOverridePath, setTempOverridePath] = React.useState('');
 
     const [isAssociatedFilesCollapsed, setAssociatedFilesCollapsed] = React.useState(false);
     const [isThoughtsCollapsed, setThoughtsCollapsed] = React.useState(false);
@@ -129,16 +134,19 @@ const App = () => {
             selectedFilesForReplacement: Array.from(selectedFilesForReplacement),
             tabCount,
             isSortedByLength,
+            pathOverrides: Object.fromEntries(pathOverrides),
         };
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
-    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByLength, clientIpc]);
+    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByLength, pathOverrides, clientIpc]);
 
+    // ... (useDebounce hook is the same) ...
     const debouncedSave = useDebounce(saveCurrentCycleState, 1000);
 
     React.useEffect(() => {
         debouncedSave();
-    }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, tabCount, isSortedByLength, debouncedSave]);
+    }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, tabCount, isSortedByLength, pathOverrides, debouncedSave]);
     
+    // ... (parseAllTabs is the same) ...
     const parseAllTabs = React.useCallback(() => {
         setTabs(prevTabs => {
             const allFilePaths = new Set<string>();
@@ -187,6 +195,7 @@ const App = () => {
             setSelectedResponseId(cycleData.selectedResponseId || null);
             setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || []));
             setIsSortedByLength(cycleData.isSortedByLength || false);
+            setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {})));
         };
 
         clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); });
@@ -204,6 +213,7 @@ const App = () => {
 
     React.useEffect(() => { if (isParsedMode) parseAllTabs(); }, [isParsedMode, tabs, parseAllTabs]);
     
+    // ... (useEffect for cleaning selectedFilePath is the same) ...
     React.useEffect(() => {
         if (!selectedFilePath) return;
     
@@ -217,6 +227,69 @@ const App = () => {
         }
     }, [activeTab, tabs, selectedFilePath]);
 
+    const handleCycleChange = (e: React.MouseEvent | null, newCycle: number) => { 
+        e?.stopPropagation(); 
+        if (newCycle >= 0 && newCycle <= maxCycle) { 
+            if (currentCycle !== 0) saveCurrentCycleState(); 
+            setSelectedFilesForReplacement(new Set()); 
+            setCurrentCycle(newCycle); 
+            clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); 
+        } 
+    };
+
+    const handleMouseDown = React.useCallback((e: React.MouseEvent) => { e.preventDefault(); isResizing.current = true; }, []);
+    const handleMouseMove = React.useCallback((e: MouseEvent) => { if (!isResizing.current) return; const newWidth = (e.clientX / window.innerWidth) * 100; if (newWidth > 10 && newWidth < 90) setLeftPaneWidth(newWidth); }, []);
+    const handleMouseUp = React.useCallback(() => { if (isResizing.current) { isResizing.current = false; saveCurrentCycleState(); } }, [saveCurrentCycleState]);
+
+    React.useEffect(() => {
+        const mm = (e: MouseEvent) => handleMouseMove(e);
+        const mu = () => handleMouseUp();
+        if (isParsedMode) { window.addEventListener('mousemove', mm); window.addEventListener('mouseup', mu); }
+        return () => { window.removeEventListener('mousemove', mm); window.removeEventListener('mouseup', mu); };
+    }, [isParsedMode, handleMouseMove, handleMouseUp]);
+    
+    const handleSelectForViewing = (filePath: string) => {
+        const newPath = selectedFilePath === filePath ? null : filePath;
+        setSelectedFilePath(newPath);
+        if (newPath) {
+            const file = activeTabData?.parsedContent?.files.find(f => f.path === newPath);
+            const pathForComparison = pathOverrides.get(newPath) || newPath;
+            if (file) {
+                clientIpc.sendToServer(ClientToServerChannel.RequestFileComparison, { filePath: pathForComparison, modifiedContent: file.content });
+            }
+        }
+    };
+
+    const handleAcceptSelectedFiles = () => {
+        if (selectedFilesForReplacement.size === 0) return;
+        const filesToWrite: BatchWriteFile[] = [];
+        selectedFilesForReplacement.forEach(compositeKey => {
+            const [responseId, filePath] = compositeKey.split(':::');
+            const responseData = tabs[responseId];
+            if (responseData?.parsedContent) {
+                const file = responseData.parsedContent.files.find(f => f.path === filePath);
+                if (file) {
+                    const finalPath = pathOverrides.get(file.path) || file.path;
+                    filesToWrite.push({ path: finalPath, content: file.content });
+                }
+            }
+        });
+        if (filesToWrite.length > 0) {
+            clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite });
+        }
+    };
+    
+    const handleLinkFile = (originalPath: string) => {
+        if (tempOverridePath.trim()) {
+            setPathOverrides(prev => new Map(prev).set(originalPath, tempOverridePath.trim()));
+            setFileExistenceMap(prev => new Map(prev).set(originalPath, true)); // Assume user is correct for now
+            setTempOverridePath('');
+            // Trigger a new comparison with the correct file
+            handleSelectForViewing(originalPath);
+        }
+    };
+
+    // ... (other handlers and memos are mostly the same)
     const activeTabData = tabs[activeTab.toString()];
 
     const sortedTabIds = React.useMemo(() => {
@@ -246,16 +319,7 @@ const App = () => {
         setSelectedFilePath(null);
         if (!newParseMode) setTabs(prev => { const newTabs = {...prev}; Object.keys(newTabs).forEach(key => { newTabs[key].parsedContent = null; }); return newTabs; });
     };
-    const handleCycleChange = (e: React.MouseEvent, newCycle: number) => { 
-        e.stopPropagation(); 
-        if (newCycle >= 0 && newCycle <= maxCycle) { 
-            if (currentCycle !== 0) saveCurrentCycleState(); 
-            setSelectedFilesForReplacement(new Set()); 
-            setCurrentCycle(newCycle); 
-            clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); 
-        } 
-    };
-    
+
     const handleNewCycle = (e: React.MouseEvent) => {
         e.stopPropagation();
         saveCurrentCycleState();
@@ -277,28 +341,7 @@ const App = () => {
         if (currentCycle === null) return;
         clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle });
     }
-    const handleMouseDown = React.useCallback((e: React.MouseEvent) => { e.preventDefault(); isResizing.current = true; }, []);
-    const handleMouseMove = React.useCallback((e: MouseEvent) => { if (!isResizing.current) return; const newWidth = (e.clientX / window.innerWidth) * 100; if (newWidth > 10 && newWidth < 90) setLeftPaneWidth(newWidth); }, []);
-    const handleMouseUp = React.useCallback(() => { isResizing.current = false; }, []);
-
-    React.useEffect(() => {
-        const mm = (e: MouseEvent) => handleMouseMove(e);
-        const mu = () => handleMouseUp();
-        if (isParsedMode) { window.addEventListener('mousemove', mm); window.addEventListener('mouseup', mu); }
-        return () => { window.removeEventListener('mousemove', mm); window.removeEventListener('mouseup', mu); };
-    }, [isParsedMode, handleMouseMove, handleMouseUp]);
     
-    const handleSelectForViewing = (filePath: string) => {
-        const newPath = selectedFilePath === filePath ? null : filePath;
-        setSelectedFilePath(newPath);
-        if (newPath) {
-            const file = activeTabData?.parsedContent?.files.find(f => f.path === newPath);
-            if (file) {
-                clientIpc.sendToServer(ClientToServerChannel.RequestFileComparison, { filePath: newPath, modifiedContent: file.content });
-            }
-        }
-    };
-
     const handleDeleteCycle = () => { if(currentCycle !== null) clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle }); };
     const handleResetHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {});
     
@@ -349,24 +392,6 @@ const App = () => {
         });
     };
 
-    const handleAcceptSelectedFiles = () => {
-        if (selectedFilesForReplacement.size === 0) return;
-        const filesToWrite: BatchWriteFile[] = [];
-        selectedFilesForReplacement.forEach(compositeKey => {
-            const [responseId, filePath] = compositeKey.split(':::');
-            const responseData = tabs[responseId];
-            if (responseData?.parsedContent) {
-                const file = responseData.parsedContent.files.find(f => f.path === filePath);
-                if (file) {
-                    filesToWrite.push({ path: file.path, content: file.content });
-                }
-            }
-        });
-        if (filesToWrite.length > 0) {
-            clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite });
-        }
-    };
-
     const isAllFilesSelected = React.useMemo(() => {
         if (!activeTabData?.parsedContent) return false;
         const allFiles = activeTabData.parsedContent.filesUpdated;
@@ -406,18 +431,37 @@ const App = () => {
     }
 
     if (currentCycle === 0) {
-        return <OnboardingView initialProjectScope={projectScope} />;
+        return <OnboardingView initialProjectScope={projectScope} onNavigateToCycle={(id) => handleCycleChange(null, id)} />;
     }
 
-    const collapsedNavigator = <div className="collapsed-navigator"><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0}><VscChevronLeft /></button><span className="cycle-display">C{currentCycle}</span><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button></div>;
-    const currentComparisonMetrics = selectedFilePath ? comparisonMetrics.get(selectedFilePath) : null;
+    const collapsedNavigator = <div className="collapsed-navigator"><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button><span className="cycle-display">C{currentCycle}</span><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button></div>;
+    const currentComparisonMetrics = selectedFilePath ? comparisonMetrics.get(pathOverrides.get(selectedFilePath) || selectedFilePath) : null;
     
     const renderContent = () => {
         if (!isParsedMode || !activeTabData?.parsedContent) {
             return <textarea className="response-textarea" placeholder={`Paste AI response for tab ${activeTab} here...`} value={activeTabData?.rawContent || ''} onChange={(e) => handleRawContentChange(e.target.value, activeTab)} />;
         }
         return <div className="parsed-view-grid">
-            <div className="parsed-view-left" style={{ flexBasis: `${leftPaneWidth}%` }}><CollapsibleSection title="Associated Files" isCollapsed={isAssociatedFilesCollapsed} onToggle={() => setAssociatedFilesCollapsed(p => !p)}><ul className="associated-files-list">{activeTabData.parsedContent.filesUpdated.map(file => <li key={file} className={selectedFilePath === file ? 'selected' : ''} onClick={() => handleSelectForViewing(file)} title={file}><input type="checkbox" checked={selectedFilesForReplacement.has(`${activeTab}:::${file}`)} onChange={() => handleFileSelectionToggle(file)} onClick={e => e.stopPropagation()} />{fileExistenceMap.get(file) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}<span>{file}</span></li>)}</ul></CollapsibleSection><CollapsibleSection title="Thoughts / Response" isCollapsed={isThoughtsCollapsed} onToggle={() => setThoughtsCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown></CollapsibleSection><CollapsibleSection title="Course of Action" isCollapsed={isActionCollapsed} onToggle={() => setActionCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown></CollapsibleSection></div>
+            <div className="parsed-view-left" style={{ flexBasis: `${leftPaneWidth}%` }}>
+                <CollapsibleSection title="Associated Files" isCollapsed={isAssociatedFilesCollapsed} onToggle={() => setAssociatedFilesCollapsed(p => !p)}>
+                    <ul className="associated-files-list">{activeTabData.parsedContent.filesUpdated.map(file => {
+                        const fileExists = fileExistenceMap.get(file);
+                        return <li key={file} className={selectedFilePath === file ? 'selected' : ''} onClick={() => handleSelectForViewing(file)} title={file}>
+                            <input type="checkbox" checked={selectedFilesForReplacement.has(`${activeTab}:::${file}`)} onChange={() => handleFileSelectionToggle(file)} onClick={e => e.stopPropagation()} />
+                            {fileExists ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
+                            <span>{file}</span>
+                            {!fileExists && selectedFilePath === file && (
+                                <div className="path-override-container">
+                                    <input type="text" placeholder="Enter correct relative path..." value={tempOverridePath} onChange={e => setTempOverridePath(e.target.value)} onKeyDown={e => {if(e.key === 'Enter') handleLinkFile(file)}} />
+                                    <button className="styled-button" onClick={() => handleLinkFile(file)}><VscLink /></button>
+                                </div>
+                            )}
+                        </li>
+                    })}</ul>
+                </CollapsibleSection>
+                <CollapsibleSection title="Summary" isCollapsed={isThoughtsCollapsed} onToggle={() => setThoughtsCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown></CollapsibleSection>
+                <CollapsibleSection title="Course of Action" isCollapsed={isActionCollapsed} onToggle={() => setActionCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown></CollapsibleSection>
+            </div>
             <div className="resizer" onMouseDown={handleMouseDown} />
             <div className="parsed-view-right">
                 <div className="response-acceptance-header"><button className={`styled-button ${selectedResponseId === activeTab.toString() ? 'toggled' : ''}`} onClick={() => setSelectedResponseId(prev => prev === activeTab.toString() ? null : activeTab.toString())}>{selectedResponseId === activeTab.toString() ? 'Response Selected' : 'Select This Response'}</button><button className="styled-button" onClick={handleSelectAllFilesToggle}><VscCheckAll/> {isAllFilesSelected ? 'Deselect All' : 'Select All'}</button><button className="styled-button" onClick={handleAcceptSelectedFiles} disabled={selectedFilesForReplacement.size === 0}><VscSave/> Accept Selected</button></div>
@@ -446,7 +490,7 @@ const App = () => {
 
     return <div className="pc-view-container">
         <div className="pc-header"><div className="pc-toolbar"><button onClick={handleGeneratePrompt} title="Generate prompt.md"><VscFileCode /> Generate prompt.md</button><button onClick={handleLogState} title="Log Current State"><VscBug/></button><button onClick={handleGlobalParseToggle}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} /></div></div>
-        <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''}><div className="cycle-navigator"><span>Cycle:</span><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0}><VscChevronLeft /></button><input type="number" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 0)} className="cycle-input" /><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button><button onClick={handleNewCycle} title="New Cycle" disabled={isNewCycleButtonDisabled}><VscAdd /></button><input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} /><button onClick={handleDeleteCycle} title="Delete Current Cycle"><VscTrash /></button><button onClick={handleResetHistory} title="Reset All History"><VscSync /></button></div><div className="context-inputs"><textarea className="context-textarea" placeholder="Cycle Context (notes for this cycle)..." value={cycleContext} onChange={e => setCycleContext(e.target.value)} /><textarea className="context-textarea" placeholder="Ephemeral Context (for this cycle's prompt only)..." value={ephemeralContext} onChange={e => setEphemeralContext(e.target.value)} /></div></CollapsibleSection>
+        <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''}><div className="cycle-navigator"><span>Cycle:</span><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button><input type="number" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 0)} className="cycle-input" /><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button><button onClick={handleNewCycle} title="New Cycle" disabled={isNewCycleButtonDisabled}><VscAdd /></button><input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} /><button onClick={handleDeleteCycle} title="Delete Current Cycle"><VscTrash /></button><button onClick={handleResetHistory} title="Reset All History"><VscSync /></button></div><div className="context-inputs"><textarea className="context-textarea" placeholder="Cycle Context (notes for this cycle)..." value={cycleContext} onChange={e => setCycleContext(e.target.value)} /><textarea className="context-textarea" placeholder="Ephemeral Context (for this cycle's prompt only)..." value={ephemeralContext} onChange={e => setEphemeralContext(e.target.value)} /></div></CollapsibleSection>
         <div className="tab-bar-container">
             <div className="tab-bar">{sortedTabIds.map((tabIndex) => {
                 const tabData = tabs[tabIndex.toString()];

@@ -68,13 +68,7 @@ M7. Flattened Repo
 
         const parsed = parseResponse(previousResponseContent);
         
-        let summary = `${parsed.summary}\n\n${parsed.courseOfAction}`;
-
-        if (parsed.filesUpdated.length > 0) {
-            summary += `\n\n### Files Updated This Cycle:\n* ${parsed.filesUpdated.join('\n* ')}`;
-        }
-
-        return summary;
+        return `${parsed.summary}\n\n${parsed.courseOfAction}`;
     }
 
     private async _generateCyclesContent(currentCycleData: PcppCycle, fullHistory: PcppCycle[]): Promise<string> {
@@ -154,7 +148,7 @@ ${cyclesContent}
 
     public async generatePromptFile(cycleTitle: string, currentCycle: number) {
         const workspaceFolders = vscode.workspace.workspaceFolders;
-        if (!workspaceFolders || workspaceFolders.length === 0) {
+        if (!workspaceFolders?.[0]) {
             vscode.window.showErrorMessage("Cannot generate prompt: No workspace folder is open.");
             return;
         }
@@ -236,7 +230,7 @@ ${cyclesContent}
 
     public async generateCycle0Prompt(projectScope: string, serverIpc: ServerPostMessageManager) {
         const workspaceFolders = vscode.workspace.workspaceFolders;
-        if (!workspaceFolders || workspaceFolders.length === 0) {
+        if (!workspaceFolders?.[0]) {
             vscode.window.showErrorMessage("Cannot generate prompt: No workspace folder is open.");
             return;
         }
@@ -249,25 +243,25 @@ ${cyclesContent}
             Services.loggerService.log("Generating Cycle 0 prompt.md file...");
             await Services.historyService.saveProjectScope(projectScope);
 
-            const exampleArtifactEntries = await vscode.workspace.fs.readDirectory(artifactsDirInExtension);
-            let staticContext = '<!-- START: Complete Project Example -->\n';
-            for (const [filename] of exampleArtifactEntries) {
-                if ((filename.startsWith('A') || filename.startsWith('T')) && filename.endsWith('.md')) {
+            const allArtifactEntries = await vscode.workspace.fs.readDirectory(artifactsDirInExtension);
+            let staticContext = '<!-- START: Project Templates -->\n';
+            for (const [filename] of allArtifactEntries) {
+                if (filename.startsWith('T') && filename.endsWith('.md')) { // Only read Template files
                     const artifactUri = vscode.Uri.joinPath(artifactsDirInExtension, filename);
                     const contentBuffer = await vscode.workspace.fs.readFile(artifactUri);
                     const content = Buffer.from(contentBuffer).toString('utf-8');
                     staticContext += `<${filename}>\n${content}\n</${filename}>\n\n`;
                 }
             }
-            staticContext += '<!-- END: Complete Project Example -->\n\n';
+            staticContext += '<!-- END: Project Templates -->\n\n';
 
             const cycle0Context = `<Cycle 0>
 <Cycle Context>
 You are a senior project architect. Your task is to establish the necessary documentation to achieve the user's goals, which are outlined in M4.
 
 **CRITICAL INSTRUCTIONS:**
-1.  Review the complete project documentation provided in the static context as a **best-practice example**.
-2.  Your primary goal is to generate **planning and documentation artifacts** (e.g., Project Vision, Requirements) for the user's project, emulating the quality of the example.
+1.  Review the documentation templates provided in the static context as **best-practice examples**.
+2.  Your primary goal is to generate **planning and documentation artifacts** (e.g., Project Vision, Requirements) for the user's project, using the templates as a guide.
 3.  You **MUST NOT** generate code files (e.g., \`package.json\`, \`src/main.ts\`) in this initial cycle.
 4.  Every artifact you generate **MUST** be enclosed in the strict XML format: \`<file path="path/to/artifact.md">...</file>\`.
 </Cycle Context>
