@@ -52,7 +52,8 @@ export class HistoryService {
         let isFreshEnvironment = history.cycles.length === 0;
 
         if (this.workspaceRoot) {
-            const a0Path = path.join(this.workspaceRoot, 'src/Artifacts', 'A0. DCE Master Artifact List.md');
+            // C155 Fix: Check for a generic A0 file, not one with "DCE" in the name.
+            const a0Path = path.join(this.workspaceRoot, 'src/Artifacts', 'A0. Master Artifact List.md');
             const a0Exists = await Services.fileOperationService.fileExists(a0Path);
             if (!a0Exists) {
                 isFreshEnvironment = true;

@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C154 (Fix resizer bug, add path override UI, fix nav bug)
+// Updated on: C155 (Fix de-selection bug on path override click)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -450,8 +450,9 @@ const App = () => {
                             <input type="checkbox" checked={selectedFilesForReplacement.has(`${activeTab}:::${file}`)} onChange={() => handleFileSelectionToggle(file)} onClick={e => e.stopPropagation()} />
                             {fileExists ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
                             <span>{file}</span>
+                            {/* C155 Fix: Add stopPropagation to the container of the input to prevent de-selection */}
                             {!fileExists && selectedFilePath === file && (
-                                <div className="path-override-container">
+                                <div className="path-override-container" onClick={e => e.stopPropagation()}>
                                     <input type="text" placeholder="Enter correct relative path..." value={tempOverridePath} onChange={e => setTempOverridePath(e.target.value)} onKeyDown={e => {if(e.key === 'Enter') handleLinkFile(file)}} />
                                     <button className="styled-button" onClick={() => handleLinkFile(file)}><VscLink /></button>
                                 </div>
