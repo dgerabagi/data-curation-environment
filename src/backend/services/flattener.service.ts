@@ -1,4 +1,4 @@
-// Updated on: C160 (Add de-duplication to expandDirectories)
+// Updated on: C162 (Exclude non-selectable files from flattening)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -22,7 +22,9 @@ interface FileStats {
 const BINARY_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico', '.exe', '.dll', '.bin', '.zip', '.gz', '.7z', '.mp3', '.wav', '.mov', '.mp4']);
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
+const NON_SELECTABLE_PATTERNS = ['/node_modules', '/.vscode', 'flattened_repo.md', 'prompt.md'];
 
+const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
 export class FlattenerService {
 
@@ -75,7 +77,7 @@ export class FlattenerService {
     }
 
     private async expandDirectories(paths: string[]): Promise<string[]> {
-        const uniquePaths = [...new Set(paths)]; // C160 Fix: De-duplicate initial paths
+        const uniquePaths = [...new Set(paths)]; 
         const allFiles: string[] = [];
         for (const p of uniquePaths) {
             try {
@@ -98,8 +100,14 @@ export class FlattenerService {
             const entries = await fs.readdir(dirPath, { withFileTypes: true });
             for (const entry of entries) {
                 const fullPath = path.join(dirPath, entry.name);
+                const normalizedFullPath = normalizePath(fullPath);
+
+                // C162 Fix: Exclude non-selectable files/folders from the flattened output.
+                if (NON_SELECTABLE_PATTERNS.some(p => normalizedFullPath.includes(p))) {
+                    continue;
+                }
+
                 if (entry.isDirectory()) {
-                    if (entry.name.toLowerCase() === 'node_modules' || entry.name.toLowerCase() === '.vscode') continue;
                     files = files.concat(await this.getAllFilesRecursive(fullPath));
                 } else {
                     files.push(fullPath);

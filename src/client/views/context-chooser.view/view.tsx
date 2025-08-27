@@ -1,4 +1,4 @@
-// Updated on: C161 (Add logging for initialization troubleshooting)
+// Updated on: C162 (Exclude non-selectable nodes from UI counts)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -41,7 +41,6 @@ const App = () => {
 
     const requestFiles = (force = false) => {
         setIsLoading(true);
-        logger.log(`[C161 DEBUG] Requesting workspace files (force=${force}).`);
         clientIpc.sendToServer(ClientToServerChannel.RequestWorkspaceFiles, { force });
     };
 
@@ -69,6 +68,7 @@ const App = () => {
         files.forEach(buildFileMap);
 
         const addDescendantFiles = (node: FileNode) => {
+            if (!node.isSelectable) return; // C162 Fix
             if (!node.children) {
                 effectivelySelectedFiles.add(node.absolutePath);
             } else {
@@ -82,7 +82,9 @@ const App = () => {
                 if (node.children) {
                     addDescendantFiles(node);
                 } else {
-                    effectivelySelectedFiles.add(path);
+                    if (node.isSelectable) { // C162 Fix
+                        effectivelySelectedFiles.add(path);
+                    }
                 }
             }
         });
@@ -115,14 +117,11 @@ const App = () => {
 
 
     useEffect(() => {
-        logger.log("[C161 DEBUG] Initializing view and setting up message listeners.");
-        
         clientIpc.onServerMessage(ServerToClientChannel.SendWorkspaceTrustState, ({ isTrusted }) => {
             setIsWorkspaceTrusted(isTrusted);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendWorkspaceFiles, ({ files: receivedFiles }) => {
-            logger.log(`[C161 DEBUG] Received file tree from backend. Root node count: ${receivedFiles.length}`);
             setFiles(receivedFiles);
             setIsLoading(false);
         });
@@ -314,12 +313,16 @@ const App = () => {
         const selectedFileSet = new Set<string>();
         const selectedNodes: FileNode[] = [];
         const fileMap: Map<string, FileNode> = new Map();
+        
         const buildFileMap = (node: FileNode) => {
             fileMap.set(node.absolutePath, node);
             node.children?.forEach(buildFileMap);
         };
         files.forEach(buildFileMap);
+
         const addNodeAndDescendants = (node: FileNode) => {
+            if (!node.isSelectable) return; // C162 Fix: Exclude non-selectable nodes
+
             if (!node.children) { 
                 if (!selectedFileSet.has(node.absolutePath)) {
                     selectedFileSet.add(node.absolutePath);
@@ -330,10 +333,12 @@ const App = () => {
                 node.children.forEach(addNodeAndDescendants);
             }
         };
+
         checkedFiles.forEach(path => {
             const node = fileMap.get(path);
             if (node) addNodeAndDescendants(node);
         });
+
         return { totalFiles: selectedNodes.length, totalTokens, selectedFileNodes: selectedNodes };
     }, [checkedFiles, files]);
 

@@ -1,4 +1,4 @@
-// Updated on: C161 (Add extensive logging for initialization troubleshooting)
+// Updated on: C162 (Prevent auto-add for non-selectable files)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -71,18 +71,12 @@ export class FileTreeService {
 
         this.watcher.onDidCreate(async (uri: vscode.Uri) => {
             const normalizedPath = normalizePath(uri.fsPath);
-            const fileName = path.basename(normalizedPath);
             
-            const isExcluded = AUTO_ADD_EXCLUSIONS.some(exclusion => {
-                if (exclusion.startsWith('.')) {
-                    return normalizedPath.includes(`/${exclusion}/`);
-                }
-                return fileName === exclusion;
-            });
-
-            if (isExcluded) {
-                 onFileChange(uri);
-                 return;
+            // C162 Fix: Check if the new file is non-selectable before auto-adding.
+            const isNonSelectable = NON_SELECTABLE_PATTERNS.some(p => normalizedPath.includes(p));
+            if (isNonSelectable) {
+                onFileChange(uri);
+                return;
             }
 
             if (Services.fileOperationService.hasFileToIgnoreForAutoAdd(normalizedPath)) {
@@ -147,26 +141,20 @@ export class FileTreeService {
     }
 
     public async handleWorkspaceFilesRequest(serverIpc: ServerPostMessageManager, forceRefresh: boolean = false) {
-        Services.loggerService.log(`[C161 DEBUG] handleWorkspaceFilesRequest started. forceRefresh=${forceRefresh}`);
         if (!forceRefresh && this.fileTreeCache) {
-            Services.loggerService.log(`[C161 DEBUG] Serving file tree from cache.`);
             serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: this.fileTreeCache });
             return;
         }
 
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (!workspaceFolders?.[0]) {
-            Services.loggerService.warn(`[C161 DEBUG] No workspace folder found.`);
             serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: [] });
             return;
         }
         
-        Services.loggerService.log(`[C161 DEBUG] Building file tree from scratch.`);
         const fileTree = await this.buildTreeFromTraversal(workspaceFolders[0].uri);
         this.fileTreeCache = [fileTree];
-        Services.loggerService.log(`[C161 DEBUG] File tree built. Sending to client.`);
         serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: this.fileTreeCache });
-        Services.loggerService.log(`[C161 DEBUG] handleWorkspaceFilesRequest finished.`);
     }
 
     private getGitStatusMap(): Map<string, string> {
@@ -200,7 +188,6 @@ export class FileTreeService {
     }
 
     private async buildTreeFromTraversal(rootUri: vscode.Uri): Promise<FileNode> {
-        Services.loggerService.log(`[C161 DEBUG] buildTreeFromTraversal starting for root: ${rootUri.fsPath}`);
         const rootPath = rootUri.fsPath;
         const gitStatusMap = this.getGitStatusMap();
         const problemCountsMap = this.getProblemCountsMap();
@@ -215,19 +202,16 @@ export class FileTreeService {
             isSelectable: true,
         };
         this._aggregateStats(rootNode);
-        Services.loggerService.log(`[C161 DEBUG] buildTreeFromTraversal finished. Root node has ${rootNode.children?.length} children.`);
         return rootNode;
     }
     
     private async _traverseDirectory(dirUri: vscode.Uri, gitStatusMap: Map<string, string>, problemCountsMap: ProblemCountsMap): Promise<FileNode[]> {
         const children: FileNode[] = [];
-        Services.loggerService.log(`[C161 DEBUG] > Traversing directory: ${dirUri.fsPath}`);
         try {
             const entries = await vscode.workspace.fs.readDirectory(dirUri);
-            Services.loggerService.log(`[C161 DEBUG] > Found ${entries.length} entries in ${path.basename(dirUri.fsPath)}`);
 
             for (const [name, type] of entries) {
-                if (name === '.git' || name === 'dce_cache' || name === 'out') continue;
+                if (EXCLUSION_PATTERNS.includes(name.toLowerCase())) continue;
 
                 const childUri = vscode.Uri.joinPath(dirUri, name);
                 const childPath = normalizePath(childUri.fsPath);
@@ -244,7 +228,7 @@ export class FileTreeService {
                 }
             }
         } catch (error: any) {
-            Services.loggerService.error(`[C161 DEBUG] Error traversing directory ${dirUri.fsPath}: ${error.message}`);
+            Services.loggerService.error(`Error traversing directory ${dirUri.fsPath}: ${error.message}`);
         }
         return children.sort((a, b) => (!!a.children === !!b.children) ? a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' }) : (!!a.children ? -1 : 1));
     }
