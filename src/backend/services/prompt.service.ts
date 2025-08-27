@@ -172,18 +172,18 @@ ${cyclesContent}
                 Services.loggerService.warn("Could not read A0. DCE Master Artifact List.md");
             }
 
-            // C156: Read Interaction Schema from file
+            // C157 Fix: Read Interaction Schema from file using correct path
             let interactionSchemaContent = '<!-- A52.2 Interaction Schema Source.md not found -->';
             try {
-                const a522Path = path.join(this.workspaceRoot, 'src', 'Artifacts', 'A52.2 DCE - Interaction Schema Source.md');
-                const schemaFileContent = await fs.readFile(a522Path, 'utf-8');
-                // Extract the content from the markdown file, assuming it's after a specific header
+                const schemaUri = vscode.Uri.joinPath(this.extensionUri, 'src', 'Artifacts', 'A52.2 DCE - Interaction Schema Source.md');
+                const schemaFileContentBuffer = await vscode.workspace.fs.readFile(schemaUri);
+                const schemaFileContent = Buffer.from(schemaFileContentBuffer).toString('utf-8');
                 const schemaText = schemaFileContent.split('## Interaction Schema Text')[1];
                 if (schemaText) {
                     interactionSchemaContent = `<M3. Interaction Schema>\n${schemaText.trim()}\n</M3. Interaction Schema>`;
                 }
-            } catch (e) {
-                Services.loggerService.error("Could not read A52.2 for prompt context. Using fallback.");
+            } catch (e: any) {
+                Services.loggerService.error(`Could not read A52.2 for prompt context: ${e.message}`);
             }
 
             const projectScope = `<M4. current project scope>\n${fullHistoryFile.projectScope || 'No project scope defined.'}\n</M4. current project scope>`;
@@ -235,7 +235,6 @@ ${cyclesContent}
                 .map(([filename]) => filename)
                 .filter(filename => filename.startsWith('T') && filename.endsWith('.md'));
 
-            // C156: Fix sorting of template artifacts
             templateFilenames.sort((a, b) => {
                 const numA = parseInt(a.match(/T(\d+)/)?.[1] || '0', 10);
                 const numB = parseInt(b.match(/T(\d+)/)?.[1] || '0', 10);
@@ -253,14 +252,15 @@ ${cyclesContent}
             
             let interactionSchemaContent = '<!-- A52.2 Interaction Schema Source.md not found -->';
             try {
-                const a522Path = path.join(this.workspaceRoot, 'src', 'Artifacts', 'A52.2 DCE - Interaction Schema Source.md');
-                const schemaFileContent = await fs.readFile(a522Path, 'utf-8');
+                const schemaUri = vscode.Uri.joinPath(this.extensionUri, 'src', 'Artifacts', 'A52.2 DCE - Interaction Schema Source.md');
+                const schemaFileContentBuffer = await vscode.workspace.fs.readFile(schemaUri);
+                const schemaFileContent = Buffer.from(schemaFileContentBuffer).toString('utf-8');
                 const schemaText = schemaFileContent.split('## Interaction Schema Text')[1];
                 if (schemaText) {
                     interactionSchemaContent = `<M3. Interaction Schema>\n${schemaText.trim()}\n</M3. Interaction Schema>`;
                 }
-            } catch (e) {
-                 Services.loggerService.error("Could not read A52.2 for Cycle 0 prompt context. Using fallback.");
+            } catch (e: any) {
+                 Services.loggerService.error(`Could not read A52.2 for Cycle 0 prompt context: ${e.message}`);
             }
 
             const cycle0Context = `<Cycle 0>
@@ -268,10 +268,10 @@ ${cyclesContent}
 You are a senior project architect. Your task is to establish the necessary documentation to achieve the user's goals, which are outlined in M4.
 
 **CRITICAL INSTRUCTIONS:**
-1.  Review the documentation templates provided in the static context as **best-practice examples**.
-2.  Your primary goal is to generate **planning and documentation artifacts** (e.g., Project Vision, Requirements) for the user's project, using the templates as a guide.
+1.  Review the user's project scope. From the provided templates in the static context, select all that are relevant and generate initial planning artifacts based on them.
+2.  Your primary goal is to generate **planning and documentation artifacts** (e.g., Project Vision, Requirements).
 3.  You **MUST NOT** generate code files (e.g., \`package.json\`, \`src/main.ts\`) in this initial cycle.
-4.  Every artifact you generate **MUST** be enclosed in the strict XML format: \`<file path="path/to/artifact.md">...</file>\`.
+4.  Every artifact you generate **MUST** be enclosed in the strict XML format: \`<file path="src/Artifacts/[ProjectName]-A1-Project-Vision.md">...</file>\`. Note the required output directory.
 </Cycle Context>
 <Static Context>
 ${staticContext.trim()}

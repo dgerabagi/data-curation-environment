@@ -1,4 +1,4 @@
-/* Updated on: C154 (Add styles for onboarding success and path override input) */
+/* Updated on: C157 (Add border to active tab) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -239,6 +239,9 @@ body {
     padding: 6px 12px;
     cursor: pointer;
     border-bottom: 2px solid transparent;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-top: 1px solid transparent;
     color: var(--vscode-tab-inactiveForeground);
     display: flex;
     flex-direction: column;
@@ -260,6 +263,16 @@ body {
     font-weight: bold;
 }
 
+.tab.active {
+    color: var(--vscode-tab-activeForeground);
+    border-bottom-color: var(--vscode-tab-activeBorder);
+    border-left-color: var(--vscode-panel-border);
+    border-right-color: var(--vscode-panel-border);
+    border-top-color: var(--vscode-panel-border);
+    border-bottom-color: transparent; // Hide bottom border for active tab to blend with content area
+}
+
+
 .tab-metadata {
     display: flex;
     gap: 12px;
@@ -271,11 +284,6 @@ body {
         align-items: center;
         gap: 3px;
     }
-}
-
-.tab.active {
-    color: var(--vscode-tab-activeForeground);
-    border-bottom-color: var(--vscode-tab-activeBorder);
 }
 
 .tab-content {

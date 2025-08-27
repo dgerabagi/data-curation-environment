@@ -1,4 +1,4 @@
-// Updated on: C153 (Make node_modules visible but not counted)
+// Updated on: C157 (Exclude flattened_repo.md and .vscode from auto-add)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -15,6 +15,7 @@ const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
 const EXCLUSION_PATTERNS = ['.git', 'dce_cache', '.vscode', 'out']; 
+const AUTO_ADD_EXCLUSIONS = ['flattened_repo.md', '.vscode'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
@@ -67,6 +68,21 @@ export class FileTreeService {
 
         this.watcher.onDidCreate(async (uri: vscode.Uri) => {
             const normalizedPath = normalizePath(uri.fsPath);
+            const fileName = path.basename(normalizedPath);
+            
+            // C157: Exclude specific files and folders from auto-add
+            const isExcluded = AUTO_ADD_EXCLUSIONS.some(exclusion => {
+                if (exclusion.startsWith('.')) { // It's a folder
+                    return normalizedPath.includes(`/${exclusion}/`);
+                }
+                return fileName === exclusion; // It's a file
+            });
+
+            if (isExcluded) {
+                 onFileChange(uri);
+                 return;
+            }
+
             if (Services.fileOperationService.hasFileToIgnoreForAutoAdd(normalizedPath)) {
                 Services.fileOperationService.removeFileToIgnoreForAutoAdd(normalizedPath);
             } else if (Services.selectionService.getAutoAddState()) {
@@ -171,14 +187,14 @@ export class FileTreeService {
         const children: FileNode[] = [];
         try {
             for (const [name, type] of await vscode.workspace.fs.readDirectory(dirUri)) {
-                if (EXCLUSION_PATTERNS.includes(name)) continue;
+                if (name === '.git' || name === 'dce_cache' || name === 'out') continue;
 
                 const childUri = vscode.Uri.joinPath(dirUri, name);
                 const childPath = normalizePath(childUri.fsPath);
 
                 if (type === vscode.FileType.Directory) {
-                    const isNodeModules = name.toLowerCase() === 'node_modules';
-                    const dirNode: FileNode = { name, absolutePath: childPath, children: isNodeModules ? [] : await this._traverseDirectory(childUri, gitStatusMap, problemCountsMap), tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false, gitStatus: gitStatusMap.get(childPath), problemCounts: problemCountsMap[childPath] };
+                    const isSpecialDir = name.toLowerCase() === 'node_modules' || name.toLowerCase() === '.vscode';
+                    const dirNode: FileNode = { name, absolutePath: childPath, children: isSpecialDir ? [] : await this._traverseDirectory(childUri, gitStatusMap, problemCountsMap), tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false, gitStatus: gitStatusMap.get(childPath), problemCounts: problemCountsMap[childPath] };
                     this._aggregateStats(dirNode);
                     children.push(dirNode);
                 } else if (type === vscode.FileType.File) {
@@ -195,7 +211,7 @@ export class FileTreeService {
     private _aggregateStats(node: FileNode): void {
         if (!node.children) return;
         
-        if (node.name.toLowerCase() === 'node_modules') {
+        if (node.name.toLowerCase() === 'node_modules' || node.name.toLowerCase() === '.vscode') {
             node.tokenCount = 0;
             node.fileCount = 0;
             node.sizeInBytes = 0;

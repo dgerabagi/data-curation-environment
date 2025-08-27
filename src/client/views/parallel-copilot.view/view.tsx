@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C155 (Fix de-selection bug on path override click)
+// Updated on: C157 (Fix sort toggle, select all, focused tab border, and ctrl+z)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -194,7 +194,7 @@ const App = () => {
             setLeftPaneWidth(cycleData.leftPaneWidth || 33);
             setSelectedResponseId(cycleData.selectedResponseId || null);
             setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || []));
-            setIsSortedByLength(cycleData.isSortedByLength || false);
+            setIsSortedByLength(cycleData.isSortedByLength || false); // C157 Fix: Restore sort state
             setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {})));
         };
 
@@ -378,15 +378,24 @@ const App = () => {
     const handleSelectAllFilesToggle = () => {
         if (!activeTabData?.parsedContent) return;
         
-        const allFilesForTab = activeTabData.parsedContent.filesUpdated.map(fp => `${activeTab}:::${fp}`);
-        const isAllSelected = allFilesForTab.every(key => selectedFilesForReplacement.has(key));
+        const filesForTab = activeTabData.parsedContent.filesUpdated;
+        const isAllSelected = filesForTab.every(fp => selectedFilesForReplacement.has(`${activeTab}:::${fp}`));
 
         setSelectedFilesForReplacement(prev => {
             const newSet = new Set(prev);
-            if (isAllSelected) {
-                allFilesForTab.forEach(key => newSet.delete(key));
-            } else {
-                allFilesForTab.forEach(key => newSet.add(key));
+
+            // C157 Fix: Enforce atomicity. First, remove all existing selections for these files.
+            filesForTab.forEach(filePath => {
+                for (const key of newSet) {
+                    if (key.endsWith(`:::${filePath}`)) {
+                        newSet.delete(key);
+                    }
+                }
+            });
+
+            // Then, if we are selecting all, add them back for the current tab.
+            if (!isAllSelected) {
+                filesForTab.forEach(filePath => newSet.add(`${activeTab}:::${filePath}`));
             }
             return newSet;
         });
@@ -450,7 +459,6 @@ const App = () => {
                             <input type="checkbox" checked={selectedFilesForReplacement.has(`${activeTab}:::${file}`)} onChange={() => handleFileSelectionToggle(file)} onClick={e => e.stopPropagation()} />
                             {fileExists ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
                             <span>{file}</span>
-                            {/* C155 Fix: Add stopPropagation to the container of the input to prevent de-selection */}
                             {!fileExists && selectedFilePath === file && (
                                 <div className="path-override-container" onClick={e => e.stopPropagation()}>
                                     <input type="text" placeholder="Enter correct relative path..." value={tempOverridePath} onChange={e => setTempOverridePath(e.target.value)} onKeyDown={e => {if(e.key === 'Enter') handleLinkFile(file)}} />
@@ -498,7 +506,7 @@ const App = () => {
                 const parsedData = tabData?.parsedContent;
                 return <div key={tabIndex} className={`tab ${activeTab === tabIndex ? 'active' : ''} ${selectedResponseId === tabIndex.toString() ? 'selected' : ''}`} onClick={() => setActiveTab(tabIndex)}><div className="tab-title">Resp {tabIndex}</div>{isParsedMode && parsedData && (<div className="tab-metadata"><span><VscFileCode /> {parsedData.files.length}</span><span><VscSymbolNumeric /> {formatLargeNumber(parsedData.totalTokens, 1)}</span></div>)}</div>;
             })}</div>
-            {isParsedMode && <button onClick={() => setIsSortedByLength(p => !p)} className="sort-button" title="Sort responses by token count">{isSortedByLength ? <VscListOrdered/> : <VscListUnordered/>} Sort</button>}
+            {isParsedMode && <button onClick={() => setIsSortedByLength(p => !p)} className={`sort-button styled-button ${isSortedByLength ? 'toggled' : ''}`} title="Sort responses by token count">{isSortedByLength ? <VscListOrdered/> : <VscListUnordered/>} Sort</button>}
         </div>
         <div className="tab-content">{activeTab !== null && <div className="tab-pane">{renderContent()}</div>}</div>
     </div>;
