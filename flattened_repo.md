@@ -1,25 +1,25 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-27T13:45:46.110Z
+  Date Generated: 2025-08-27T14:47:27.580Z
   ---
-  Total Files: 245
-  Total Lines: 31521
-  Total Characters: 1773971
-  Approx. Tokens: 443582
+  Total Files: 248
+  Total Lines: 31739
+  Total Characters: 1785796
+  Approx. Tokens: 446538
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (193494 tokens)
 2. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10834 tokens)
 3. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
-4. src\client\views\parallel-copilot.view\view.tsx (8121 tokens)
+4. src\client\views\parallel-copilot.view\view.tsx (8340 tokens)
 5. src\Artifacts\A11. DCE - Regression Case Studies.md (7032 tokens)
-6. src\Artifacts\A0. DCE Master Artifact List.md (6305 tokens)
+6. src\Artifacts\A0. DCE Master Artifact List.md (6519 tokens)
 7. src\client\views\context-chooser.view\view.tsx (5562 tokens)
 8. src\client\components\tree-view\TreeView.tsx (4508 tokens)
-9. src\backend\services\file-operation.service.ts (3987 tokens)
-10. src\backend\services\prompt.service.ts (3954 tokens)
+9. src\backend\services\prompt.service.ts (3994 tokens)
+10. src\backend\services\file-operation.service.ts (3987 tokens)
 
 <!-- Full File List -->
 1. .gitignore - Lines: 10 - Chars: 128 - Tokens: 32
@@ -30,7 +30,7 @@
 6. package.json - Lines: 139 - Chars: 4583 - Tokens: 1146
 7. public\copilot.svg - Lines: 5 - Chars: 445 - Tokens: 112
 8. public\spiral.svg - Lines: 8 - Chars: 459 - Tokens: 115
-9. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 364 - Chars: 25219 - Tokens: 6305
+9. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 376 - Chars: 26075 - Tokens: 6519
 10. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 11. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
 12. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 266 - Chars: 28128 - Tokens: 7032
@@ -62,7 +62,7 @@
 38. src\Artifacts\A32. DCE - Phase 1 - Excel and CSV Handling Strategy.md - Lines: 44 - Chars: 4295 - Tokens: 1074
 39. src\Artifacts\A33. DCE - Phase 1 - Copy-Paste Feature Plan.md - Lines: 42 - Chars: 4456 - Tokens: 1114
 40. src\Artifacts\A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements.md - Lines: 45 - Chars: 6849 - Tokens: 1713
-41. src\Artifacts\A35. DCE - Phase 2 - UI Mockups and Flow.md - Lines: 48 - Chars: 2937 - Tokens: 735
+41. src\Artifacts\A35. DCE - Phase 2 - UI Mockups and Flow.md - Lines: 54 - Chars: 3584 - Tokens: 896
 42. src\Artifacts\A36. DCE - Phase 2 - Technical Implementation Plan.md - Lines: 56 - Chars: 3621 - Tokens: 906
 43. src\Artifacts\A37. DCE - Phase 2 - Cycle Navigator & Knowledge Graph - Vision.md - Lines: 28 - Chars: 3242 - Tokens: 811
 44. src\Artifacts\A38. DCE - Phase 2 - Cycle Navigator - UI Mockup.md - Lines: 69 - Chars: 4621 - Tokens: 1156
@@ -94,179 +94,182 @@
 70. src\Artifacts\A58. DCE - WinMerge Source Code Analysis.md - Lines: 56 - Chars: 5322 - Tokens: 1331
 71. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 44 - Chars: 3786 - Tokens: 947
 72. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1278 - Chars: 43334 - Tokens: 10834
-73. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 41 - Chars: 4069 - Tokens: 1018
+73. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 39 - Chars: 4202 - Tokens: 1051
 74. src\Artifacts\A61. DCE - Phase 2 - Cycle History Management Plan.md - Lines: 40 - Chars: 2939 - Tokens: 735
 75. src\Artifacts\A62. DCE - Cycle 157 - Task Tracker.md - Lines: 31 - Chars: 2710 - Tokens: 678
-76. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
-77. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
-78. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
-79. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
-80. src\Artifacts\T1. Template - Master Artifact List.md - Lines: 36 - Chars: 1716 - Tokens: 429
-81. src\Artifacts\T10. Template - Feature Plan Example.md - Lines: 32 - Chars: 2692 - Tokens: 673
-82. src\Artifacts\T11. Template - Implementation Roadmap.md - Lines: 55 - Chars: 2887 - Tokens: 722
-83. src\Artifacts\T12. Template - Competitive Analysis.md - Lines: 40 - Chars: 2855 - Tokens: 714
-84. src\Artifacts\T13. Template - Refactoring Plan.md - Lines: 55 - Chars: 2617 - Tokens: 655
-85. src\Artifacts\T14. Template - GitHub Repository Setup Guide.md - Lines: 73 - Chars: 2553 - Tokens: 639
-86. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 41 - Chars: 3000 - Tokens: 750
-87. src\Artifacts\T2. Template - Project Vision and Goals.md - Lines: 38 - Chars: 1968 - Tokens: 492
-88. src\Artifacts\T3. Template - Phase 1 Requirements & Design.md - Lines: 37 - Chars: 1876 - Tokens: 469
-89. src\Artifacts\T4. Template - Technical Scaffolding Plan.md - Lines: 54 - Chars: 2180 - Tokens: 545
-90. src\Artifacts\T5. Template - Target File Structure.md - Lines: 35 - Chars: 1054 - Tokens: 264
-91. src\Artifacts\T6. Template - Initial Scaffolding Deployment Script.md - Lines: 63 - Chars: 2593 - Tokens: 649
-92. src\Artifacts\T7. Template - Development and Testing Guide.md - Lines: 48 - Chars: 1738 - Tokens: 435
-93. src\Artifacts\T8. Template - Regression Case Studies.md - Lines: 31 - Chars: 1971 - Tokens: 493
-94. src\Artifacts\T9. Template - Logging and Debugging Guide.md - Lines: 49 - Chars: 2590 - Tokens: 648
-95. src\backend\commands\commands.ts - Lines: 97 - Chars: 4211 - Tokens: 1053
-96. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
-97. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
-98. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
-99. src\backend\services\file-operation.service.ts - Lines: 328 - Chars: 15946 - Tokens: 3987
-100. src\backend\services\file-tree.service.ts - Lines: 236 - Chars: 12418 - Tokens: 3105
-101. src\backend\services\flattener.service.ts - Lines: 214 - Chars: 11463 - Tokens: 2866
-102. src\backend\services\highlighting.service.ts - Lines: 58 - Chars: 2920 - Tokens: 730
-103. src\backend\services\history.service.ts - Lines: 175 - Chars: 7290 - Tokens: 1823
-104. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-105. src\backend\services\prompt.service.ts - Lines: 304 - Chars: 15814 - Tokens: 3954
-106. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
-107. src\backend\services\services.ts - Lines: 38 - Chars: 1778 - Tokens: 445
-108. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
-109. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
-110. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
-111. src\client\components\DiffViewer.tsx - Lines: 224 - Chars: 11386 - Tokens: 2847
-112. src\client\components\file-tree\FileTree.tsx - Lines: 262 - Chars: 11897 - Tokens: 2975
-113. src\client\components\file-tree\FileTree.utils.ts - Lines: 189 - Chars: 7284 - Tokens: 1821
-114. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
-115. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13099 - Tokens: 3275
-116. src\client\components\tree-view\TreeView.tsx - Lines: 394 - Chars: 18029 - Tokens: 4508
-117. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
-118. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
-119. src\client\utils\response-parser.ts - Lines: 79 - Chars: 2994 - Tokens: 749
-120. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-121. src\client\views\context-chooser.view\on-message.ts - Lines: 53 - Chars: 4913 - Tokens: 1229
-122. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
-123. src\client\views\context-chooser.view\view.tsx - Lines: 435 - Chars: 22245 - Tokens: 5562
-124. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
-125. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-126. src\client\views\parallel-copilot.view\on-message.ts - Lines: 72 - Chars: 3521 - Tokens: 881
-127. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 68 - Chars: 3344 - Tokens: 836
-128. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 43 - Chars: 1890 - Tokens: 473
-129. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
-130. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
-131. src\client\views\parallel-copilot.view\view.scss - Lines: 652 - Chars: 15267 - Tokens: 3817
-132. src\client\views\parallel-copilot.view\view.tsx - Lines: 535 - Chars: 32483 - Tokens: 8121
-133. src\common\ipc\channels.enum.ts - Lines: 74 - Chars: 3792 - Tokens: 948
-134. src\common\ipc\channels.type.ts - Lines: 68 - Chars: 5480 - Tokens: 1370
-135. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1590 - Tokens: 398
-136. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-137. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-138. src\common\types\file-node.ts - Lines: 16 - Chars: 567 - Tokens: 142
-139. src\common\types\pcpp.types.ts - Lines: 46 - Chars: 1373 - Tokens: 344
-140. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 449 - Tokens: 113
-141. src\common\utils\formatting.ts - Lines: 99 - Chars: 3475 - Tokens: 869
-142. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
-143. src\common\utils\view-html.ts - Lines: 29 - Chars: 1117 - Tokens: 280
-144. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
-145. src\extension.ts - Lines: 121 - Chars: 5078 - Tokens: 1270
-146. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
-147. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
-148. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
-149. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
-150. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
-151. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
-152. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
-153. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
-154. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
-155. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
-156. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
-157. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
-158. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
-159. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
-160. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
-161. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
-162. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
-163. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
-164. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
-165. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
-166. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
-167. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
-168. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
-169. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
-170. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
-171. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
-172. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
-173. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
-174. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
-175. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
-176. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
-177. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
-178. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
-179. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
-180. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
-181. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
-182. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
-183. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
-184. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
-185. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
-186. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
-187. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
-188. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
-189. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
-190. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
-191. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
-192. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
-193. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
-194. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
-195. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
-196. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
-197. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
-198. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
-199. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
-200. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
-201. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
-202. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
-203. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
-204. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
-205. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
-206. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
-207. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
-208. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
-209. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
-210. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
-211. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
-212. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
-213. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-214. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
-215. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
-216. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
-217. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-218. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
-219. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
-220. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
-221. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-222. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
-223. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
-224. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
-225. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
-226. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
-227. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
-228. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
-229. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-230. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
-231. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
-232. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
-233. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
-234. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
-235. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
-236. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
-237. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
-238. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
-239. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
-240. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
-241. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
-242. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
-243. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
-244. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
-245. webpack.config.js - Lines: 103 - Chars: 2830 - Tokens: 708
+76. src\Artifacts\A63. DCE - Cycle 158 - Task Tracker.md - Lines: 23 - Chars: 1760 - Tokens: 440
+77. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
+78. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
+79. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 33 - Chars: 2764 - Tokens: 691
+80. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
+81. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
+82. src\Artifacts\T1. Template - Master Artifact List.md - Lines: 36 - Chars: 1716 - Tokens: 429
+83. src\Artifacts\T10. Template - Feature Plan Example.md - Lines: 32 - Chars: 2692 - Tokens: 673
+84. src\Artifacts\T11. Template - Implementation Roadmap.md - Lines: 55 - Chars: 2887 - Tokens: 722
+85. src\Artifacts\T12. Template - Competitive Analysis.md - Lines: 42 - Chars: 3227 - Tokens: 807
+86. src\Artifacts\T13. Template - Refactoring Plan.md - Lines: 55 - Chars: 2617 - Tokens: 655
+87. src\Artifacts\T14. Template - GitHub Repository Setup Guide.md - Lines: 73 - Chars: 2553 - Tokens: 639
+88. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 41 - Chars: 3000 - Tokens: 750
+89. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 85 - Chars: 3063 - Tokens: 766
+90. src\Artifacts\T2. Template - Project Vision and Goals.md - Lines: 38 - Chars: 1968 - Tokens: 492
+91. src\Artifacts\T3. Template - Phase 1 Requirements & Design.md - Lines: 37 - Chars: 1876 - Tokens: 469
+92. src\Artifacts\T4. Template - Technical Scaffolding Plan.md - Lines: 54 - Chars: 2180 - Tokens: 545
+93. src\Artifacts\T5. Template - Target File Structure.md - Lines: 35 - Chars: 1054 - Tokens: 264
+94. src\Artifacts\T6. Template - Initial Scaffolding Deployment Script.md - Lines: 63 - Chars: 2593 - Tokens: 649
+95. src\Artifacts\T7. Template - Development and Testing Guide.md - Lines: 48 - Chars: 1738 - Tokens: 435
+96. src\Artifacts\T8. Template - Regression Case Studies.md - Lines: 31 - Chars: 1971 - Tokens: 493
+97. src\Artifacts\T9. Template - Logging and Debugging Guide.md - Lines: 49 - Chars: 2590 - Tokens: 648
+98. src\backend\commands\commands.ts - Lines: 97 - Chars: 4211 - Tokens: 1053
+99. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
+100. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
+101. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
+102. src\backend\services\file-operation.service.ts - Lines: 328 - Chars: 15946 - Tokens: 3987
+103. src\backend\services\file-tree.service.ts - Lines: 236 - Chars: 12418 - Tokens: 3105
+104. src\backend\services\flattener.service.ts - Lines: 214 - Chars: 11463 - Tokens: 2866
+105. src\backend\services\highlighting.service.ts - Lines: 58 - Chars: 2920 - Tokens: 730
+106. src\backend\services\history.service.ts - Lines: 180 - Chars: 7547 - Tokens: 1887
+107. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
+108. src\backend\services\prompt.service.ts - Lines: 309 - Chars: 15975 - Tokens: 3994
+109. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5411 - Tokens: 1353
+110. src\backend\services\services.ts - Lines: 38 - Chars: 1778 - Tokens: 445
+111. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
+112. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
+113. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
+114. src\client\components\DiffViewer.tsx - Lines: 224 - Chars: 11386 - Tokens: 2847
+115. src\client\components\file-tree\FileTree.tsx - Lines: 262 - Chars: 11897 - Tokens: 2975
+116. src\client\components\file-tree\FileTree.utils.ts - Lines: 189 - Chars: 7284 - Tokens: 1821
+117. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
+118. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13099 - Tokens: 3275
+119. src\client\components\tree-view\TreeView.tsx - Lines: 394 - Chars: 18029 - Tokens: 4508
+120. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
+121. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
+122. src\client\utils\response-parser.ts - Lines: 79 - Chars: 2994 - Tokens: 749
+123. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
+124. src\client\views\context-chooser.view\on-message.ts - Lines: 53 - Chars: 4913 - Tokens: 1229
+125. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
+126. src\client\views\context-chooser.view\view.tsx - Lines: 435 - Chars: 22245 - Tokens: 5562
+127. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
+128. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
+129. src\client\views\parallel-copilot.view\on-message.ts - Lines: 72 - Chars: 3521 - Tokens: 881
+130. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 85 - Chars: 4229 - Tokens: 1058
+131. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 43 - Chars: 1890 - Tokens: 473
+132. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
+133. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
+134. src\client\views\parallel-copilot.view\view.scss - Lines: 650 - Chars: 15318 - Tokens: 3830
+135. src\client\views\parallel-copilot.view\view.tsx - Lines: 569 - Chars: 33359 - Tokens: 8340
+136. src\common\ipc\channels.enum.ts - Lines: 74 - Chars: 3792 - Tokens: 948
+137. src\common\ipc\channels.type.ts - Lines: 68 - Chars: 5480 - Tokens: 1370
+138. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1590 - Tokens: 398
+139. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+140. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
+141. src\common\types\file-node.ts - Lines: 16 - Chars: 567 - Tokens: 142
+142. src\common\types\pcpp.types.ts - Lines: 46 - Chars: 1373 - Tokens: 344
+143. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 449 - Tokens: 113
+144. src\common\utils\formatting.ts - Lines: 99 - Chars: 3475 - Tokens: 869
+145. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
+146. src\common\utils\view-html.ts - Lines: 29 - Chars: 1117 - Tokens: 280
+147. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
+148. src\extension.ts - Lines: 121 - Chars: 5078 - Tokens: 1270
+149. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
+150. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
+151. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
+152. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
+153. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
+154. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
+155. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
+156. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
+157. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
+158. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
+159. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
+160. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
+161. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
+162. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
+163. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
+164. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
+165. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
+166. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
+167. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
+168. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
+169. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
+170. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
+171. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
+172. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
+173. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
+174. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
+175. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
+176. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
+177. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
+178. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
+179. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
+180. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
+181. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
+182. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
+183. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
+184. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
+185. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
+186. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
+187. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
+188. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
+189. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
+190. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
+191. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
+192. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
+193. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
+194. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
+195. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
+196. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
+197. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
+198. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
+199. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
+200. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
+201. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
+202. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
+203. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
+204. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
+205. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
+206. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
+207. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
+208. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
+209. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
+210. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
+211. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
+212. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
+213. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
+214. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
+215. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
+216. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+217. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
+218. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
+219. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
+220. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+221. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
+222. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
+223. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
+224. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+225. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
+226. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
+227. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
+228. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
+229. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
+230. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
+231. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
+232. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+233. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
+234. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
+235. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
+236. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
+237. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
+238. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
+239. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
+240. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
+241. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
+242. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
+243. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
+244. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
+245. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
+246. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
+247. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
+248. webpack.config.js - Lines: 103 - Chars: 2830 - Tokens: 708
 
 <file path=".gitignore">
 node_modules
@@ -874,7 +877,7 @@ I have analyzed the comprehensive feedback from Cycle 132. There are several reg
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C157 (Add A62)
+# Updated on: C158 (Add A63, A72, T16)
 
 ## 1. Purpose
 
@@ -1156,9 +1159,17 @@ I have analyzed the comprehensive feedback from Cycle 132. There are several reg
 - **Description:** A tracking document for the large number of feedback items and tasks from Cycle 157, used to manage the backlog for subsequent cycles.
 - **Tags:** bugs, tracking, issues, backlog, cycle 157
 
+### A63. DCE - Cycle 158 - Task Tracker
+- **Description:** A tracking document for the large number of feedback items and tasks from Cycle 158, used to manage the backlog for subsequent cycles.
+- **Tags:** bugs, tracking, issues, backlog, cycle 158
+
 ### A71. Sample M0 Prompt.md
 - **Description:** An example of a fully-formed `prompt.md` file generated by the Cycle 0 onboarding experience.
 - **Tags:** example, cycle 0, onboarding, prompt
+
+### A72. DCE - README for Artifacts
+- **Description:** The content for the `README.md` file that is automatically created in a new project's `src/Artifacts` directory, explaining the purpose of the extension and the artifact-driven workflow.
+- **Tags:** documentation, onboarding, readme, source of truth
 
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
@@ -1235,6 +1246,10 @@ I have analyzed the comprehensive feedback from Cycle 132. There are several reg
 ### T15. Template - A-B-C Testing Strategy for UI Bugs
 - **Description:** A generic template for a guide on using the A-B-C testing pattern to diagnose UI bugs.
 - **Tags:** template, cycle 0, process, debugging, troubleshooting
+
+### T16. Template - Developer Environment Setup Guide
+- **Description:** A generic template for a guide on setting up a new project's development environment, including OS, tools, and installation steps.
+- **Tags:** template, cycle 0, documentation, project setup, environment
 </file>
 
 <file path="src/Artifacts/A1. DCE - Project Vision and Goals.md">
@@ -14212,7 +14227,7 @@ The goal of the **Parallel Co-Pilot Panel** is to create an integrated, **persis
 # Artifact A35: DCE - Phase 2 - UI Mockups and Flow
 # Date Created: C69
 # Author: AI Model
-# Updated on: C148 (Add response metadata and sort button)
+# Updated on: C158 (Add "Project Plan" button for navigation to Cycle 0)
 
 ## 1. Overview
 
@@ -14225,16 +14240,16 @@ The main header contains global actions.
 
 ```
 |-------------------------------------------------------------------------------------------------|
-| [ Generate prompt.md ] [ Log State ] [ Parse All ] [ Sort by Tokens ] [ Resp: [ 4 ] ]            |
+| [ Project Plan ] [ Generate prompt.md ] [ Log State ] [ Parse All ] [ Sort by Tokens ] [ Resp: [ 4 ] ] |
 |-------------------------------------------------------------------------------------------------|
-| [v] CYCLE & CONTEXT (C148: Review and Implement Feedback)                                       |
+| [v] CYCLE & CONTEXT (C158: Review and Implement Feedback)                                       |
 | |---------------------------------------------------------------------------------------------| |
-| | Cycle: [ < ] [ C148 ] [ > ] [ + ] [ Title Input... ] [Delete] [Reset]                       | |
+| | Cycle: [ < ] [ C158 ] [ > ] [ + ] [ Title Input... ] [Delete] [Reset]                       | |
 | | [ Cycle Context Text Area... ]                                                              | |
 | | [ Ephemeral Context Text Area... ]                                                          | |
 |-------------------------------------------------------------------------------------------------|
 ```
-*   **`[ Sort by Tokens ]` (New):** A new button in the main header that, when clicked in parsed mode, re-orders the response tabs from highest total token count to lowest.
+*   **`[ Project Plan ]` (New):** A new button in the main header. Clicking it navigates the user back to the Cycle 0 "Onboarding View," allowing them to view and edit their master project scope.
 
 ### 2.2. Response Tabs
 The tabs now display metadata when in parsed mode.
@@ -14244,7 +14259,7 @@ The tabs now display metadata when in parsed mode.
 | [ Resp 1 (5 files, 2.1K tk) ] [ Resp 2 (4 files, 1.8K tk) ] [ Resp 3 ] [ Resp 4 ]                |
 |-------------------------------------------------------------------------------------------------|
 ```
-*   **Tab Metadata (New):** When parsed, each tab will show the number of files detected in its response and the total token count of those files.
+*   **Tab Metadata:** When parsed, each tab will show the number of files detected in its response and the total token count of those files.
 
 ### 2.3. Parsed View (Non-Diff Mode)
 (No changes from C134)
@@ -14254,9 +14269,15 @@ The tabs now display metadata when in parsed mode.
 
 ## 3. User Interaction Flow
 
-1.  **Paste & Parse:** User pastes responses and clicks "Parse All". The tabs update to show metadata (e.g., "Resp 1 (5 files, 2.1K tk)").
-2.  **Sort Responses:** The user notices "Resp 2" has a higher token count than "Resp 1". They click the **"Sort by Tokens"** button. The order of the tabs in the tab bar immediately changes to `[ Resp 2 ] [ Resp 1 ] [ Resp 4 ] [ Resp 3 ]` (based on their respective token counts). The user can now review the longest, likely most detailed, response first.
-3.  **Select & Accept:** The rest of the workflow for selecting and accepting files remains the same.
+1.  **Edit Project Scope:** The user is on Cycle 158 and realizes they need to update their high-level project plan.
+    *   They click the new **`[ Project Plan ]`** button.
+    *   The PCPP view changes to the "Onboarding View" (Cycle 0), displaying the large text area with their current project scope.
+    *   A "Return to Cycles" button is now visible.
+    *   The user edits their project scope and the changes are auto-saved.
+    *   They click "Return to Cycles" and are taken back to their latest cycle (Cycle 158). The next time they click "Generate prompt.md," the updated scope will be used.
+2.  **Paste & Parse:** User pastes responses and clicks "Parse All". The tabs update to show metadata (e.g., "Resp 1 (5 files, 2.1K tk)").
+3.  **Sort Responses:** The user notices "Resp 2" has a higher token count than "Resp 1". They click the **"Sort by Tokens"** button. The order of the tabs in the tab bar immediately changes to `[ Resp 2 ] [ Resp 1 ] [ Resp 4 ] [ Resp 3 ]` (based on their respective token counts). The user can now review the longest, likely most detailed, response first.
+4.  **Select & Accept:** The rest of the workflow for selecting and accepting files remains the same.
 </file>
 
 <file path="src/Artifacts/A36. DCE - Phase 2 - Technical Implementation Plan.md">
@@ -17487,7 +17508,7 @@ deployScaffold();
 # Artifact A60: DCE - Phase 2 - Cycle 0 Onboarding Experience
 # Date Created: C139
 # Author: AI Model & Curator
-# Updated on: C156 (Clarify meta-context injection process)
+# Updated on: C158 (Overhaul to create README.md instead of generic A0)
 
 - **Key/Value for A0:**
 - **Description:** Documents the plan for a special "Cycle 0" mode to guide new users in setting up their project by generating an initial set of planning documents.
@@ -17497,34 +17518,32 @@ deployScaffold();
 
 The Parallel Co-Pilot Panel (PCPP) is a powerful tool, but its effectiveness relies on a structured set of planning and documentation artifacts. For a new user, bootstrapping this structure is a major hurdle.
 
-The goal of the "Cycle 0" onboarding experience is to automate this bootstrapping process. By capturing the user's high-level project scope and providing a curated set of best-practice **template artifacts** as a model, the extension will generate a prompt that instructs an AI to create a starter pack of essential **planning and documentation artifacts** for the user's new project. This introduces the user to the artifact-driven workflow and ensures the output is immediately parsable by the PCPP.
+The goal of the "Cycle 0" onboarding experience is to automate this bootstrapping process. The extension will capture the user's high-level project scope and generate a prompt that instructs an AI to create a starter pack of essential **planning and documentation artifacts**. As part of this process, it will also create a `README.md` file within the `src/Artifacts` directory that explains the artifact-driven workflow itself, providing meta-context to both the user and the AI.
 
 ## 2. User Flow
 
-1.  **Detection:** The extension detects a "fresh workspace" by confirming the absence of `src/Artifacts/A0. Master Artifact List.md`.
+1.  **Detection:** The extension detects a "fresh workspace" by confirming the absence of any `A0.*Master Artifact List.md` file in the `src/Artifacts/` directory.
 2.  **Cycle 0 UI:** The PCPP loads into a special "Cycle 0" view. It presents the user with an introduction and a single large text area for their "Project Scope".
 3.  **User Input:** The user describes their project's vision and goals.
 4.  **Generate Prompt & Artifacts:** The user clicks "Generate Initial Artifacts Prompt".
 5.  **Backend Process:**
-    *   The backend `PromptService` constructs a unique `prompt.md` file. The prompt's static context will contain the content of all template artifacts (files prefixed with `T` in `src/Artifacts`).
-    *   The prompt instructs the AI to use the provided templates as a guide to create initial planning documents based on the user's scope.
-    *   It creates the `src/Artifacts` directory and a new, generically named **`A0. Master Artifact List.md`**.
+    *   The backend `PromptService` constructs a unique `prompt.md` file. The prompt's static context will contain the content of all template artifacts (files prefixed with `T` in the extension's own artifacts).
+    *   The prompt instructs the AI to use the provided templates as a guide to create initial planning documents based on the user's scope, placing all generated artifacts within the `src/Artifacts/` directory.
+    *   **Crucially, it now creates `src/Artifacts/README.md`**, populated with the content from the extension's internal `A72. DCE - README for Artifacts.md`.
     *   It saves the user's "Project Scope" to a persistent field in `dce_history.json`.
-6.  **Transition to Cycle 1:** The frontend reloads its state. Since `A0` now exists, the `HistoryService` returns Cycle 1, and the UI transitions to the main PCPP interface.
+6.  **Transition to Cycle 1:** The frontend reloads its state. Since an `A0` file does not yet exist, the user is presented with a "Continue to Cycle 1" button. Clicking this transitions them to the main PCPP interface.
 7.  **User Action:** The user takes the generated `prompt.md` and uses it with their preferred LLM.
-8.  **First Iteration:** The user pastes the AI's response (which should contain the new, correctly formatted documentation artifacts) back into the PCPP's "Cycle 1" tab, and the standard iterative workflow begins.
-9.  **Return to Cycle 0:** The user can navigate back to Cycle 0 to view and edit their master project scope, which will then be used in subsequent `prompt.md` generations.
+8.  **First Iteration:** The user pastes the AI's response (which should contain the new, correctly formatted documentation artifacts, including a project-specific `A0` file) back into the PCPP's "Cycle 1" tab. The standard iterative workflow begins.
+9.  **Return to Cycle 0:** The user can click the "Project Plan" button to navigate back to Cycle 0 to view and edit their master project scope. A "Return to Cycles" button will take them back to their latest cycle.
 
-## 3. Meta-Context Injection Process (C156)
+## 3. Meta-Context Injection Process
 
 To ensure the AI can always generate perfectly parsable responses, the DCE injects "meta-context" into the prompts for all cycles *after* Cycle 0. This process is automatic and transparent to the user.
 
 -   **Cycle 0 (Bootstrapping):** Uses the curated `T` (template) artifacts as static context to guide the AI in creating initial *planning* documents for the user's project. The goal is to establish the project's structure.
--   **Cycle 1+ (Iterative Development):** The `prompt.service.ts` automatically reads and injects the following critical artifacts into the `<Cycle Context>` section of every generated `prompt.md`:
+-   **Cycle 1+ (Iterative Development):** The `prompt.service.ts` automatically reads and injects the following critical artifacts into the `<M3. Interaction Schema>` section of every generated `prompt.md`:
     -   **`A52.1 DCE - Parser Logic and AI Guidance.md`**: Contains the literal source code of the response parser, showing the AI exactly how its output will be interpreted.
     -   **`A52.2 DCE - Interaction Schema Source.md`**: Contains the canonical rules of interaction, ensuring the AI always has the latest formatting guidelines.
-
-This "metainterpretability" approach is key to the reliability of the DCE, as it makes the AI an informed partner in the development process.
 </file>
 
 <file path="src/Artifacts/A61. DCE - Phase 2 - Cycle History Management Plan.md">
@@ -17602,6 +17621,32 @@ This document lists the feedback and tasks from Cycle 157. It serves as a checkl
 | 13 | Prevent `.vscode` folder from being auto-added to selection. | **In Progress** | Add to exclusion list in `file-tree.service.ts` watcher. |
 | 14 | Ensure `Artifacts` directory files are always flattened first. | **To Do** | Logic change in `flattener.service.ts`. |
 | 15 | Create this tracking artifact. | **Complete** | This artifact serves as the tracker. |
+</file>
+
+<file path="src/Artifacts/A63. DCE - Cycle 158 - Task Tracker.md">
+# Artifact A63: DCE - Cycle 158 - Task Tracker
+# Date Created: C158
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A tracking document for the large number of feedback items and tasks from Cycle 158, used to manage the backlog for subsequent cycles.
+- **Tags:** bugs, tracking, issues, backlog, cycle 158
+
+## 1. Overview
+
+This document lists the feedback and tasks from Cycle 158. It serves as a checklist to ensure all items are addressed and provides a backlog for future development cycles.
+
+## 2. Task List
+
+| ID | Task | Status (C158) | Notes |
+|---|---|---|---|
+| 1 | Fix adjustable vertical bar in PCPP getting stuck. | **In Progress** | Critical UI bug. Likely a stale state closure in `view.tsx` event handlers. |
+| 2 | Add navigation to/from the Cycle 0 "Project Plan" view. | **In Progress** | High-impact UX. Requires UI buttons and logic changes in `view.tsx` and `OnboardingView.tsx`. |
+| 3 | Guide AI to research AI-generated content in competitive analysis. | **In Progress** | Simple documentation update to `T12. Template - Competitive Analysis.md`. |
+| 4 | Create a "Setup Developer Environment" template artifact. | **In Progress** | New artifact `T16` to be created and added to `A0`. |
+| 5 | Fix focused tab border to highlight any active tab. | **In Progress** | CSS fix in `view.scss`. The selector is likely too specific. |
+| 6 | Open `prompt.md` instead of `flattened_repo.md` after generation. | **In Progress** | Backend change in `prompt.service.ts` to call the open file service. |
+| 7 | Repurpose the initial `A0` file into a valuable `README.md`. | **In Progress** | Core workflow change. Requires new `A72` artifact, and changes to `prompt.service.ts` and `history.service.ts`. |
 </file>
 
 <file path="src/Artifacts/A7. DCE - Development and Testing Guide.md">
@@ -17731,6 +17776,42 @@ Review the user's project scope in M4. Your task is to act as a senior project a
 </M7. Flattened Repo>
 
 </prompt.md>
+</file>
+
+<file path="src/Artifacts/A72. DCE - README for Artifacts.md">
+# Artifact A72: DCE - README for Artifacts
+# Date Created: C158
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** The content for the `README.md` file that is automatically created in a new project's `src/Artifacts` directory, explaining the purpose of the extension and the artifact-driven workflow.
+- **Tags:** documentation, onboarding, readme, source of truth
+
+## 1. Welcome to the Data Curation Environment (DCE)
+
+This directory (`src/Artifacts/`) is the heart of your project's planning and documentation. It's managed by the **Data Curation Environment (DCE)**, a VS Code extension designed to streamline AI-assisted development.
+
+This `README.md` file was automatically generated to provide context for you (the developer) and for the AI assistants you will be working with.
+
+## 2. What is an "Artifact"?
+
+In the context of this workflow, an **Artifact** is a formal, written document that serves as a "source of truth" for a specific part of your project. Think of these files as the official blueprints, plans, and records.
+
+The core principle of the DCE workflow is **"Documentation First."** Before writing code, you and your AI partner should first create or update an artifact that describes the plan.
+
+-   **Why?** This ensures clarity, reduces misunderstandings, and creates a persistent record of design decisions. It's much easier to iterate on a plan in plain English than it is to refactor code.
+
+## 3. The Iterative Cycle Workflow
+
+Development in the DCE is organized into **Cycles**. You are currently in the early stages of your project.
+
+1.  **Curate Context:** Using the "Data Curation" panel in the VS Code Activity Bar, you select (by checking the boxes) which artifacts and code files are relevant for your current task.
+2.  **Generate a Prompt:** Using the "Parallel Co-Pilot" panel, you will write instructions for your AI assistant for the current cycle. The panel will help you generate a `prompt.md` file that includes your instructions, the project's history, and the content of the files you curated.
+3.  **Get AI Responses:** You use this `prompt.md` with your preferred AI model (e.g., Gemini, Claude) to get one or more proposed solutions.
+4.  **Review and Accept:** You paste the AI's responses back into the Parallel Co-Pilot panel. The panel allows you to compare the responses, see the proposed changes (diffs), and accept the best solution into your workspace with a single click.
+5.  **Repeat:** This completes a cycle. You then start the next cycle, building upon the newly accepted code and documentation.
+
+This structured, iterative process helps maintain project quality and ensures that both human and AI developers are always aligned with the project's goals.
 </file>
 
 <file path="src/Artifacts/A8. DCE - Phase 1 - Selection Sets Feature Plan.md">
@@ -18011,11 +18092,12 @@ This document provides a clear, step-by-step roadmap for the implementation of *
 <!-- 
   IMPORTANT AI INSTRUCTION:
   When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A12-Competitive-Analysis.md"></file> tags.
+  in <file path="src/Artifacts/A12. [Project Name] - Competitive Analysis.md">...</file> tags.
 -->
-# Artifact T12: Template - Competitive Analysis
+# Artifact T12: [Project Name] - Competitive Analysis Template
 # Date Created: C152
 # Author: AI Model & Curator
+# Updated on: C158 (Add guidance for researching AI-generated content)
 
 - **Key/Value for A0:**
 - **Description:** A generic template for a competitive analysis document, used for feature ideation.
@@ -18023,7 +18105,7 @@ This document provides a clear, step-by-step roadmap for the implementation of *
 
 ## 1. Overview
 
-This document provides an analysis of existing tools and products that solve a similar problem to **[Your Project Name]**. The goal is to identify common features, discover innovative ideas, and understand the competitive landscape to ensure our project has a unique value proposition.
+This document provides an analysis of existing tools and products that solve a similar problem to **[Project Name]**. The goal is to identify common features, discover innovative ideas, and understand the competitive landscape to ensure our project has a unique value proposition.
 
 ## 2. Research Summary
 
@@ -18038,10 +18120,11 @@ The key pain point these tools address is [describe the common problem they solv
 | **[Competitor A]** | - [Feature 1 of Competitor A] <br> - [Feature 2 of Competitor A] | This tool validates the need for [core concept]. Its approach to [Feature 1] is a good model, but we can differentiate by [your unique approach]. |
 | **[Competitor B]** | - [Feature 1 of Competitor B] <br> - [Feature 2 of Competitor B] | The user interface of this tool is very polished. We should aim for a similar level of usability. Its weakness is [describe a weakness you can exploit]. |
 | **[Tool C]** | - [Feature 1 of Tool C] | This tool has an innovative feature, [Feature 1], that we had not considered. We should evaluate if a similar feature would fit into our project's scope. |
+| **AI-Generated Projects** | - [Novel feature from an AI-generated example] | Researching other seemingly AI-generated solutions for similar problems can reveal novel approaches or features that are not yet common in human-developed tools. This can be a source of cutting-edge ideas. |
 
 ## 4. Feature Ideas & Opportunities
 
-Based on the analysis, here are potential features and strategic opportunities for **[Your Project Name]**:
+Based on the analysis, here are potential features and strategic opportunities for **[Project Name]**:
 
 | Feature Idea | Description |
 | :--- | :--- |
@@ -18226,6 +18309,94 @@ Once a working pattern is identified in a test component:
 1.  **Codify Findings:** Document the successful pattern and the root cause of the failure.
 2.  **Integrate Solution:** Refactor the original component to use the successful pattern.
 3.  **Remove Test Artifacts:** Delete the test harness UI and the temporary test component files.
+</file>
+
+<file path="src/Artifacts/T16. Template - Developer Environment Setup Guide.md">
+<!-- 
+  IMPORTANT AI INSTRUCTION:
+  When generating a file based on this template, you MUST wrap the entire file's content 
+  in <file path="src/Artifacts/A16. [Project Name] - Developer Environment Setup Guide.md">...</file> tags.
+-->
+# Artifact T16: [Project Name] - Developer Environment Setup Guide Template
+# Date Created: C158
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a guide on setting up a new project's development environment, including OS, tools, and installation steps.
+- **Tags:** template, cycle 0, documentation, project setup, environment
+
+## 1. Overview
+
+This document provides a step-by-step guide for setting up the local development environment required to build and run **[Project Name]**. Following these instructions will ensure that all developers have a consistent and correct setup.
+
+## 2. System Requirements
+
+Before you begin, please ensure your system meets the following requirements. This information is critical for providing the correct commands and troubleshooting steps in subsequent development cycles.
+
+-   **Operating System:** [e.g., Windows 11, macOS Sonoma, Ubuntu 22.04]
+-   **Package Manager:** [e.g., npm, yarn, pnpm]
+-   **Node.js Version:** [e.g., v20.11.0 or later]
+-   **Code Editor:** Visual Studio Code (Recommended)
+
+## 3. Required Tools & Software
+
+Please install the following tools if you do not already have them:
+
+1.  **Node.js:** [Provide a link to the official Node.js download page: https://nodejs.org/]
+2.  **Git:** [Provide a link to the official Git download page: https://git-scm.com/downloads]
+3.  **[Any other required tool, e.g., Docker, Python]:** [Link to installation guide]
+
+## 4. Step-by-Step Setup Instructions
+
+### Step 1: Clone the Repository
+
+First, clone the project repository from GitHub to your local machine.
+
+```bash
+# Replace with your repository URL
+git clone https://github.com/your-username/your-project.git
+cd your-project
+```
+
+### Step 2: Install Project Dependencies
+
+Next, install all the necessary project dependencies using your package manager.
+
+```bash
+# For npm
+npm install
+
+# For yarn
+# yarn install
+```
+
+### Step 3: Configure Environment Variables
+
+Create a `.env` file in the root of the project by copying the example file.
+
+```bash
+cp .env.example .env
+```
+
+Now, open the `.env` file and fill in the required environment variables:
+-   `API_KEY`: [Description of what this key is for]
+-   `DATABASE_URL`: [Description of the database connection string]
+
+### Step 4: Run the Development Server
+
+To start the local development server, run the following command. This will typically compile the code and watch for any changes you make.
+
+```bash
+# For npm
+npm run dev
+
+# For yarn
+# yarn dev
+```
+
+### Step 5: Verify the Setup
+
+Once the development server is running, you should be able to access the application at [e.g., `http://localhost:3000`]. [Describe what the developer should see to confirm that the setup was successful].
 </file>
 
 <file path="src/Artifacts/T2. Template - Project Vision and Goals.md">
@@ -19835,13 +20006,13 @@ export class HistoryService {
     public async getLatestCycle(): Promise<PcppCycle> {
         Services.loggerService.log("HistoryService: getLatestCycle called.");
         const history = await this._readHistoryFile();
-        let isFreshEnvironment = history.cycles.length === 0;
+        let isFreshEnvironment = true;
 
         if (this.workspaceRoot) {
-            const a0Path = path.join(this.workspaceRoot, 'src/Artifacts', 'A0. Master Artifact List.md');
-            const a0Exists = await Services.fileOperationService.fileExists(a0Path);
-            if (!a0Exists) {
-                isFreshEnvironment = true;
+            // C158: Check for a project-specific A0 file, not the generic one.
+            const a0Files = await vscode.workspace.findFiles('src/Artifacts/A0*Master Artifact List.md', null, 1);
+            if (a0Files.length > 0) {
+                isFreshEnvironment = false;
             }
         }
         
@@ -19857,7 +20028,7 @@ export class HistoryService {
             selectedResponseId: null,
             selectedFilesForReplacement: [],
             tabCount: 4,
-            isSortedByTokens: false, // C157: New property
+            isSortedByTokens: false,
         };
 
         if (isFreshEnvironment) {
@@ -19881,11 +20052,12 @@ export class HistoryService {
         
         if (cycleId === 0) {
             Services.loggerService.log("Returning special case for Cycle 0.");
+            const history = await this._readHistoryFile();
             return {
                 cycleId: 0,
                 timestamp: new Date().toISOString(),
                 title: 'Project Setup',
-                cycleContext: '',
+                cycleContext: history.projectScope || '', // Return the saved scope
                 ephemeralContext: '',
                 responses: {},
                 isParsedMode: false,
@@ -19906,7 +20078,11 @@ export class HistoryService {
     }
 
     public async saveCycleData(cycleData: PcppCycle): Promise<void> {
-        if (cycleData.cycleId === 0) return;
+        if (cycleData.cycleId === 0) {
+             // If we're "saving" cycle 0, it's just the project scope that changes.
+            await this.saveProjectScope(cycleData.cycleContext);
+            return;
+        }
 
         Services.loggerService.log(`HistoryService: saving data for cycle ${cycleData.cycleId}.`);
         const history = await this._readHistoryFile();
@@ -20206,6 +20382,9 @@ ${cyclesContent}
             vscode.window.showInformationMessage(`Successfully generated prompt.md.`);
             Services.loggerService.log("Successfully generated prompt.md file.");
 
+            // C158: Open the prompt.md file for the user
+            await Services.fileOperationService.handleOpenFileRequest(promptMdPath);
+
         } catch (error: any) {
             let errorMessage = `Failed to generate prompt.md: ${error.message}`;
             if (error.code === 'ENOENT' && error.path?.includes('flattened_repo.md')) {
@@ -20277,12 +20456,14 @@ ${staticContext.trim()}
             Services.loggerService.log("Successfully generated Cycle 0 prompt.md file.");
 
             await vscode.workspace.fs.createDirectory(vscode.Uri.file(artifactsDirInWorkspace));
-            const a0Uri = vscode.Uri.file(path.join(artifactsDirInWorkspace, 'A0. Master Artifact List.md'));
-            const a0InitialContent = `# Artifact A0: [Your Project Name] Master Artifact List\n# Date Created: C0\n\n## 1. Purpose\n\n# This file serves as the definitive, parseable list of all documentation artifacts for your project.`;
-            await vscode.workspace.fs.writeFile(a0Uri, Buffer.from(a0InitialContent, 'utf-8'));
-            Services.loggerService.log("Created empty A0 Master Artifact List.");
             
-            vscode.window.showInformationMessage(`Successfully generated initial prompt.md and created src/Artifacts/A0...`);
+            // C158: Create README.md instead of a generic A0 file.
+            const readmeContent = await this.getArtifactContent('src/Artifacts/A72. DCE - README for Artifacts.md', '# Welcome to the Data Curation Environment!');
+            const readmeUri = vscode.Uri.file(path.join(artifactsDirInWorkspace, 'README.md'));
+            await vscode.workspace.fs.writeFile(readmeUri, Buffer.from(readmeContent, 'utf-8'));
+            Services.loggerService.log("Created src/Artifacts/README.md for the new project.");
+            
+            vscode.window.showInformationMessage(`Successfully generated initial prompt.md and created src/Artifacts/README.md`);
 
             const cycle1Data: PcppCycle = {
                 cycleId: 1,
@@ -23414,13 +23595,16 @@ import { logger } from '@/client/utils/logger';
 interface OnboardingViewProps {
     initialProjectScope?: string;
     onNavigateToCycle: (cycleId: number) => void;
+    latestCycleId: number;
 }
 
-const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope, onNavigateToCycle }) => {
+const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope, onNavigateToCycle, latestCycleId }) => {
     const [projectScope, setProjectScope] = React.useState(initialProjectScope || '');
     const [isGenerating, setIsGenerating] = React.useState(false);
     const [promptGenerated, setPromptGenerated] = React.useState(false);
     const clientIpc = ClientPostMessageManager.getInstance();
+
+    const isNavigatingBack = latestCycleId > 0;
 
     React.useEffect(() => {
         setProjectScope(initialProjectScope || '');
@@ -23440,28 +23624,42 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope, on
         }
     };
 
+    const handleSaveScope = () => {
+        if (projectScope.trim()) {
+            logger.log("Saving updated project scope.");
+            // This will be handled by the debounced save in the main view,
+            // which is triggered by the onNavigateToCycle call.
+            onNavigateToCycle(latestCycleId);
+        }
+    };
+
     return (
         <div className="onboarding-container">
-            <h1>Welcome to the Data Curation Environment!</h1>
+            <h1>{isNavigatingBack ? 'Edit Project Plan' : 'Welcome to the Data Curation Environment!'}</h1>
             <p>
-                To get started, describe the goals and scope of your new project in the text area below.
-                When you're ready, we'll generate an initial prompt that will instruct an AI to create a set of
-                planning documents to bootstrap your development process.
+                {isNavigatingBack 
+                    ? 'You can view and edit your high-level project scope here. This will be included in all future generated prompts.'
+                    : 'To get started, describe the goals and scope of your new project in the text area below. When you\'re ready, we\'ll generate an initial prompt that will instruct an AI to create a set of planning documents to bootstrap your development process.'
+                }
             </p>
             <textarea
                 className="onboarding-textarea"
                 placeholder="e.g., I want to build a web application that allows users to track their daily habits. It should have a simple UI, user authentication, and a dashboard to visualize progress..."
                 value={projectScope}
                 onChange={(e) => setProjectScope(e.target.value)}
-                disabled={isGenerating || promptGenerated}
+                disabled={isGenerating || (promptGenerated && !isNavigatingBack)}
             />
-            {!promptGenerated ? (
+            {isNavigatingBack ? (
+                <button className="styled-button" onClick={handleSaveScope}>
+                    <VscArrowRight /> Return to Cycle {latestCycleId}
+                </button>
+            ) : !promptGenerated ? (
                 <button className="styled-button" onClick={handleGenerate} disabled={!projectScope.trim() || isGenerating}>
                     <VscRocket /> {isGenerating ? 'Generating...' : 'Generate Initial Artifacts Prompt'}
                 </button>
             ) : (
                 <div className="onboarding-success">
-                    <p>✅ Initial `prompt.md` and `A0. ... .md` have been generated in your workspace!</p>
+                    <p>✅ Initial `prompt.md` and `README.md` have been generated in your workspace!</p>
                     <button className="styled-button" onClick={() => onNavigateToCycle(1)}>
                         Continue to Cycle 1 <VscArrowRight />
                     </button>
@@ -23679,7 +23877,7 @@ export default TestPane3;
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
-/* Updated on: C157 (Add focused tab border) */
+/* Updated on: C158 (Fix focused tab border) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -23935,11 +24133,14 @@ body {
         .tab-metadata {
             color: var(--vscode-button-foreground);
         }
+    }
 
-        &.active {
-            outline: 1px solid var(--vscode-focusBorder);
-            outline-offset: -2px;
-        }
+    // C158 Fix: Highlight any active tab, regardless of selection state.
+    &.active {
+        color: var(--vscode-tab-activeForeground);
+        border-bottom-color: var(--vscode-tab-activeBorder);
+        outline: 1px solid var(--vscode-focusBorder);
+        outline-offset: -2px;
     }
 }
 
@@ -23958,11 +24159,6 @@ body {
         align-items: center;
         gap: 3px;
     }
-}
-
-.tab.active {
-    color: var(--vscode-tab-activeForeground);
-    border-bottom-color: var(--vscode-tab-activeBorder);
 }
 
 .tab-content {
@@ -24016,7 +24212,7 @@ body {
 .resizer {
     width: 5px;
     cursor: col-resize;
-    background-color: var(--vscode-panel-border);
+    background-color: var(--vscode-sash-hoverBorder);
     flex-shrink: 0;
     &:hover {
         background-color: var(--vscode-focusBorder);
@@ -24335,11 +24531,11 @@ body {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C157 (Implement persistent sort, focused tab border, link/unlink, and fix undo)
+// Updated on: C158 (Fix resizable bar bug, add navigation to Cycle 0)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap, VscTrash, VscSync, VscClose, VscSave, VscBug, VscCheckAll, VscListOrdered, VscListUnordered, VscSymbolNumeric, VscClippy, VscLink, VscDebugDisconnect } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap, VscTrash, VscSync, VscClose, VscSave, VscBug, VscCheckAll, VscListOrdered, VscListUnordered, VscSymbolNumeric, VscClippy, VscLink, VscDebugDisconnect, VscBook } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -24452,26 +24648,32 @@ const App = () => {
     const clientIpc = ClientPostMessageManager.getInstance();
 
     const saveCurrentCycleState = React.useCallback(() => {
-        if (currentCycle === null || currentCycle === 0) return;
+        if (currentCycle === null) return;
         const responses: { [key: string]: PcppResponse } = {};
         for (let i = 1; i <= tabCount; i++) {
             responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' };
         }
-        const cycleData: PcppCycle = {
-            cycleId: currentCycle,
-            timestamp: new Date().toISOString(),
-            title: cycleTitle,
-            cycleContext,
-            ephemeralContext,
-            responses,
-            isParsedMode,
-            leftPaneWidth,
-            selectedResponseId,
-            selectedFilesForReplacement: Array.from(selectedFilesForReplacement),
-            tabCount,
-            isSortedByTokens,
-            pathOverrides: Object.fromEntries(pathOverrides),
-        };
+        
+        let cycleData: PcppCycle;
+        if (currentCycle === 0) {
+            cycleData = { cycleId: 0, cycleContext, ephemeralContext: '', responses: {}, timestamp: new Date().toISOString(), title: 'Project Setup' };
+        } else {
+            cycleData = {
+                cycleId: currentCycle,
+                timestamp: new Date().toISOString(),
+                title: cycleTitle,
+                cycleContext,
+                ephemeralContext,
+                responses,
+                isParsedMode,
+                leftPaneWidth,
+                selectedResponseId,
+                selectedFilesForReplacement: Array.from(selectedFilesForReplacement),
+                tabCount,
+                isSortedByTokens,
+                pathOverrides: Object.fromEntries(pathOverrides),
+            };
+        }
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
     }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, clientIpc]);
 
@@ -24570,15 +24772,38 @@ const App = () => {
         } 
     };
 
-    const handleMouseDown = React.useCallback((e: React.MouseEvent) => { e.preventDefault(); isResizing.current = true; }, []);
-    const handleMouseMove = React.useCallback((e: MouseEvent) => { if (!isResizing.current) return; const newWidth = (e.clientX / window.innerWidth) * 100; if (newWidth > 10 && newWidth < 90) setLeftPaneWidth(newWidth); }, []);
-    const handleMouseUp = React.useCallback(() => { if (isResizing.current) { isResizing.current = false; saveCurrentCycleState(); } }, [saveCurrentCycleState]);
+    const handleMouseDown = React.useCallback((e: React.MouseEvent) => {
+        e.preventDefault();
+        isResizing.current = true;
+    }, []);
+
+    const handleMouseUp = React.useCallback(() => {
+        isResizing.current = false;
+        // C158: The save call is now debounced, so we don't need an explicit one here.
+        // The state change on mouseMove will trigger the debounced save.
+    }, []);
+
+    const handleMouseMove = React.useCallback((e: MouseEvent) => {
+        if (!isResizing.current) return;
+        const newWidth = (e.clientX / window.innerWidth) * 100;
+        if (newWidth > 10 && newWidth < 90) {
+            setLeftPaneWidth(newWidth);
+        }
+    }, []);
 
     React.useEffect(() => {
-        const mm = (e: MouseEvent) => handleMouseMove(e);
-        const mu = () => handleMouseUp();
-        if (isParsedMode) { window.addEventListener('mousemove', mm); window.addEventListener('mouseup', mu); }
-        return () => { window.removeEventListener('mousemove', mm); window.removeEventListener('mouseup', mu); };
+        // C158 Fix for resizer bug:
+        // The problem is that the mouse move/up handlers don't have the latest state
+        // when they are re-created. By adding/removing them only when the mode changes,
+        // and using useCallback without dependencies that change often, we get a stable handler.
+        if (isParsedMode) {
+            window.addEventListener('mousemove', handleMouseMove);
+            window.addEventListener('mouseup', handleMouseUp);
+        }
+        return () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('mouseup', handleMouseUp);
+        };
     }, [isParsedMode, handleMouseMove, handleMouseUp]);
     
     const handleSelectForViewing = (filePath: string) => {
@@ -24632,14 +24857,11 @@ const App = () => {
 
     const handleContextKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if ((e.ctrlKey || e.metaKey) && e.key === 'z') {
-            // Allow default undo behavior
             return;
         }
         if ((e.ctrlKey || e.metaKey) && (e.key === 'y' || (e.shiftKey && e.key === 'Z'))) {
-            // Allow default redo behavior
             return;
         }
-        // Stop propagation for other keys if needed, or just let them be
     };
 
     const activeTabData = tabs[activeTab.toString()];
@@ -24783,7 +25005,7 @@ const App = () => {
     }
 
     if (currentCycle === 0) {
-        return <OnboardingView initialProjectScope={projectScope} onNavigateToCycle={(id) => handleCycleChange(null, id)} />;
+        return <OnboardingView initialProjectScope={projectScope} onNavigateToCycle={(id) => handleCycleChange(null, id)} latestCycleId={maxCycle} />;
     }
 
     const collapsedNavigator = <div className="collapsed-navigator"><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button><span className="cycle-display">C{currentCycle}</span><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button></div>;
@@ -24853,7 +25075,15 @@ const App = () => {
     };
 
     return <div className="pc-view-container">
-        <div className="pc-header"><div className="pc-toolbar"><button onClick={handleGeneratePrompt} title="Generate prompt.md"><VscFileCode /> Generate prompt.md</button><button onClick={handleLogState} title="Log Current State"><VscBug/></button><button onClick={handleGlobalParseToggle}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} /></div></div>
+        <div className="pc-header">
+            <div className="pc-toolbar">
+                <button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button>
+                <button onClick={handleGeneratePrompt} title="Generate prompt.md"><VscFileCode /> Generate prompt.md</button>
+                <button onClick={handleLogState} title="Log Current State"><VscBug/></button>
+                <button onClick={handleGlobalParseToggle}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button>
+            </div>
+            <div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} /></div>
+        </div>
         <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''}><div className="cycle-navigator"><span>Cycle:</span><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button><input type="number" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 0)} className="cycle-input" /><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button><button onClick={handleNewCycle} title="New Cycle" disabled={isNewCycleButtonDisabled}><VscAdd /></button><input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} /><button onClick={handleDeleteCycle} title="Delete Current Cycle"><VscTrash /></button><button onClick={handleResetHistory} title="Reset All History"><VscSync /></button></div><div className="context-inputs"><textarea className="context-textarea" placeholder="Cycle Context (notes for this cycle)..." value={cycleContext} onChange={e => setCycleContext(e.target.value)} onKeyDown={handleContextKeyDown} /><textarea className="context-textarea" placeholder="Ephemeral Context (for this cycle's prompt only)..." value={ephemeralContext} onChange={e => setEphemeralContext(e.target.value)} onKeyDown={handleContextKeyDown} /></div></CollapsibleSection>
         <div className="tab-bar-container">
             <div className="tab-bar">{sortedTabIds.map((tabIndex) => {

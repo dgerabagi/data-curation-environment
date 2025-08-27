@@ -201,6 +201,9 @@ ${cyclesContent}
             vscode.window.showInformationMessage(`Successfully generated prompt.md.`);
             Services.loggerService.log("Successfully generated prompt.md file.");
 
+            // C158: Open the prompt.md file for the user
+            await Services.fileOperationService.handleOpenFileRequest(promptMdPath);
+
         } catch (error: any) {
             let errorMessage = `Failed to generate prompt.md: ${error.message}`;
             if (error.code === 'ENOENT' && error.path?.includes('flattened_repo.md')) {
@@ -272,12 +275,14 @@ ${staticContext.trim()}
             Services.loggerService.log("Successfully generated Cycle 0 prompt.md file.");
 
             await vscode.workspace.fs.createDirectory(vscode.Uri.file(artifactsDirInWorkspace));
-            const a0Uri = vscode.Uri.file(path.join(artifactsDirInWorkspace, 'A0. Master Artifact List.md'));
-            const a0InitialContent = `# Artifact A0: [Your Project Name] Master Artifact List\n# Date Created: C0\n\n## 1. Purpose\n\n# This file serves as the definitive, parseable list of all documentation artifacts for your project.`;
-            await vscode.workspace.fs.writeFile(a0Uri, Buffer.from(a0InitialContent, 'utf-8'));
-            Services.loggerService.log("Created empty A0 Master Artifact List.");
             
-            vscode.window.showInformationMessage(`Successfully generated initial prompt.md and created src/Artifacts/A0...`);
+            // C158: Create README.md instead of a generic A0 file.
+            const readmeContent = await this.getArtifactContent('src/Artifacts/A72. DCE - README for Artifacts.md', '# Welcome to the Data Curation Environment!');
+            const readmeUri = vscode.Uri.file(path.join(artifactsDirInWorkspace, 'README.md'));
+            await vscode.workspace.fs.writeFile(readmeUri, Buffer.from(readmeContent, 'utf-8'));
+            Services.loggerService.log("Created src/Artifacts/README.md for the new project.");
+            
+            vscode.window.showInformationMessage(`Successfully generated initial prompt.md and created src/Artifacts/README.md`);
 
             const cycle1Data: PcppCycle = {
                 cycleId: 1,

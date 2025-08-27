@@ -8,13 +8,16 @@ import { logger } from '@/client/utils/logger';
 interface OnboardingViewProps {
     initialProjectScope?: string;
     onNavigateToCycle: (cycleId: number) => void;
+    latestCycleId: number;
 }
 
-const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope, onNavigateToCycle }) => {
+const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope, onNavigateToCycle, latestCycleId }) => {
     const [projectScope, setProjectScope] = React.useState(initialProjectScope || '');
     const [isGenerating, setIsGenerating] = React.useState(false);
     const [promptGenerated, setPromptGenerated] = React.useState(false);
     const clientIpc = ClientPostMessageManager.getInstance();
+
+    const isNavigatingBack = latestCycleId > 0;
 
     React.useEffect(() => {
         setProjectScope(initialProjectScope || '');
@@ -34,28 +37,42 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope, on
         }
     };
 
+    const handleSaveScope = () => {
+        if (projectScope.trim()) {
+            logger.log("Saving updated project scope.");
+            // This will be handled by the debounced save in the main view,
+            // which is triggered by the onNavigateToCycle call.
+            onNavigateToCycle(latestCycleId);
+        }
+    };
+
     return (
         <div className="onboarding-container">
-            <h1>Welcome to the Data Curation Environment!</h1>
+            <h1>{isNavigatingBack ? 'Edit Project Plan' : 'Welcome to the Data Curation Environment!'}</h1>
             <p>
-                To get started, describe the goals and scope of your new project in the text area below.
-                When you're ready, we'll generate an initial prompt that will instruct an AI to create a set of
-                planning documents to bootstrap your development process.
+                {isNavigatingBack 
+                    ? 'You can view and edit your high-level project scope here. This will be included in all future generated prompts.'
+                    : 'To get started, describe the goals and scope of your new project in the text area below. When you\'re ready, we\'ll generate an initial prompt that will instruct an AI to create a set of planning documents to bootstrap your development process.'
+                }
             </p>
             <textarea
                 className="onboarding-textarea"
                 placeholder="e.g., I want to build a web application that allows users to track their daily habits. It should have a simple UI, user authentication, and a dashboard to visualize progress..."
                 value={projectScope}
                 onChange={(e) => setProjectScope(e.target.value)}
-                disabled={isGenerating || promptGenerated}
+                disabled={isGenerating || (promptGenerated && !isNavigatingBack)}
             />
-            {!promptGenerated ? (
+            {isNavigatingBack ? (
+                <button className="styled-button" onClick={handleSaveScope}>
+                    <VscArrowRight /> Return to Cycle {latestCycleId}
+                </button>
+            ) : !promptGenerated ? (
                 <button className="styled-button" onClick={handleGenerate} disabled={!projectScope.trim() || isGenerating}>
                     <VscRocket /> {isGenerating ? 'Generating...' : 'Generate Initial Artifacts Prompt'}
                 </button>
             ) : (
                 <div className="onboarding-success">
-                    <p>✅ Initial `prompt.md` and `A0. ... .md` have been generated in your workspace!</p>
+                    <p>✅ Initial `prompt.md` and `README.md` have been generated in your workspace!</p>
                     <button className="styled-button" onClick={() => onNavigateToCycle(1)}>
                         Continue to Cycle 1 <VscArrowRight />
                     </button>

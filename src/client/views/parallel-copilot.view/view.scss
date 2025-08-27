@@ -1,4 +1,4 @@
-/* Updated on: C157 (Add focused tab border) */
+/* Updated on: C158 (Fix focused tab border) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -254,11 +254,14 @@ body {
         .tab-metadata {
             color: var(--vscode-button-foreground);
         }
+    }
 
-        &.active {
-            outline: 1px solid var(--vscode-focusBorder);
-            outline-offset: -2px;
-        }
+    // C158 Fix: Highlight any active tab, regardless of selection state.
+    &.active {
+        color: var(--vscode-tab-activeForeground);
+        border-bottom-color: var(--vscode-tab-activeBorder);
+        outline: 1px solid var(--vscode-focusBorder);
+        outline-offset: -2px;
     }
 }
 
@@ -277,11 +280,6 @@ body {
         align-items: center;
         gap: 3px;
     }
-}
-
-.tab.active {
-    color: var(--vscode-tab-activeForeground);
-    border-bottom-color: var(--vscode-tab-activeBorder);
 }
 
 .tab-content {
@@ -335,7 +333,7 @@ body {
 .resizer {
     width: 5px;
     cursor: col-resize;
-    background-color: var(--vscode-panel-border);
+    background-color: var(--vscode-sash-hoverBorder);
     flex-shrink: 0;
     &:hover {
         background-color: var(--vscode-focusBorder);

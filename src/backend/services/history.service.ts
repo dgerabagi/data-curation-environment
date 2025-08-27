@@ -49,13 +49,13 @@ export class HistoryService {
     public async getLatestCycle(): Promise<PcppCycle> {
         Services.loggerService.log("HistoryService: getLatestCycle called.");
         const history = await this._readHistoryFile();
-        let isFreshEnvironment = history.cycles.length === 0;
+        let isFreshEnvironment = true;
 
         if (this.workspaceRoot) {
-            const a0Path = path.join(this.workspaceRoot, 'src/Artifacts', 'A0. Master Artifact List.md');
-            const a0Exists = await Services.fileOperationService.fileExists(a0Path);
-            if (!a0Exists) {
-                isFreshEnvironment = true;
+            // C158: Check for a project-specific A0 file, not the generic one.
+            const a0Files = await vscode.workspace.findFiles('src/Artifacts/A0*Master Artifact List.md', null, 1);
+            if (a0Files.length > 0) {
+                isFreshEnvironment = false;
             }
         }
         
@@ -71,7 +71,7 @@ export class HistoryService {
             selectedResponseId: null,
             selectedFilesForReplacement: [],
             tabCount: 4,
-            isSortedByTokens: false, // C157: New property
+            isSortedByTokens: false,
         };
 
         if (isFreshEnvironment) {
@@ -95,11 +95,12 @@ export class HistoryService {
         
         if (cycleId === 0) {
             Services.loggerService.log("Returning special case for Cycle 0.");
+            const history = await this._readHistoryFile();
             return {
                 cycleId: 0,
                 timestamp: new Date().toISOString(),
                 title: 'Project Setup',
-                cycleContext: '',
+                cycleContext: history.projectScope || '', // Return the saved scope
                 ephemeralContext: '',
                 responses: {},
                 isParsedMode: false,
@@ -120,7 +121,11 @@ export class HistoryService {
     }
 
     public async saveCycleData(cycleData: PcppCycle): Promise<void> {
-        if (cycleData.cycleId === 0) return;
+        if (cycleData.cycleId === 0) {
+             // If we're "saving" cycle 0, it's just the project scope that changes.
+            await this.saveProjectScope(cycleData.cycleContext);
+            return;
+        }
 
         Services.loggerService.log(`HistoryService: saving data for cycle ${cycleData.cycleId}.`);
         const history = await this._readHistoryFile();

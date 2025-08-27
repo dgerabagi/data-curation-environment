@@ -1,9 +1,9 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C157 (Implement persistent sort, focused tab border, link/unlink, and fix undo)
+// Updated on: C158 (Fix resizable bar bug, add navigation to Cycle 0)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap, VscTrash, VscSync, VscClose, VscSave, VscBug, VscCheckAll, VscListOrdered, VscListUnordered, VscSymbolNumeric, VscClippy, VscLink, VscDebugDisconnect } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap, VscTrash, VscSync, VscClose, VscSave, VscBug, VscCheckAll, VscListOrdered, VscListUnordered, VscSymbolNumeric, VscClippy, VscLink, VscDebugDisconnect, VscBook } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -116,26 +116,32 @@ const App = () => {
     const clientIpc = ClientPostMessageManager.getInstance();
 
     const saveCurrentCycleState = React.useCallback(() => {
-        if (currentCycle === null || currentCycle === 0) return;
+        if (currentCycle === null) return;
         const responses: { [key: string]: PcppResponse } = {};
         for (let i = 1; i <= tabCount; i++) {
             responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' };
         }
-        const cycleData: PcppCycle = {
-            cycleId: currentCycle,
-            timestamp: new Date().toISOString(),
-            title: cycleTitle,
-            cycleContext,
-            ephemeralContext,
-            responses,
-            isParsedMode,
-            leftPaneWidth,
-            selectedResponseId,
-            selectedFilesForReplacement: Array.from(selectedFilesForReplacement),
-            tabCount,
-            isSortedByTokens,
-            pathOverrides: Object.fromEntries(pathOverrides),
-        };
+        
+        let cycleData: PcppCycle;
+        if (currentCycle === 0) {
+            cycleData = { cycleId: 0, cycleContext, ephemeralContext: '', responses: {}, timestamp: new Date().toISOString(), title: 'Project Setup' };
+        } else {
+            cycleData = {
+                cycleId: currentCycle,
+                timestamp: new Date().toISOString(),
+                title: cycleTitle,
+                cycleContext,
+                ephemeralContext,
+                responses,
+                isParsedMode,
+                leftPaneWidth,
+                selectedResponseId,
+                selectedFilesForReplacement: Array.from(selectedFilesForReplacement),
+                tabCount,
+                isSortedByTokens,
+                pathOverrides: Object.fromEntries(pathOverrides),
+            };
+        }
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
     }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, clientIpc]);
 
@@ -234,15 +240,38 @@ const App = () => {
         } 
     };
 
-    const handleMouseDown = React.useCallback((e: React.MouseEvent) => { e.preventDefault(); isResizing.current = true; }, []);
-    const handleMouseMove = React.useCallback((e: MouseEvent) => { if (!isResizing.current) return; const newWidth = (e.clientX / window.innerWidth) * 100; if (newWidth > 10 && newWidth < 90) setLeftPaneWidth(newWidth); }, []);
-    const handleMouseUp = React.useCallback(() => { if (isResizing.current) { isResizing.current = false; saveCurrentCycleState(); } }, [saveCurrentCycleState]);
+    const handleMouseDown = React.useCallback((e: React.MouseEvent) => {
+        e.preventDefault();
+        isResizing.current = true;
+    }, []);
+
+    const handleMouseUp = React.useCallback(() => {
+        isResizing.current = false;
+        // C158: The save call is now debounced, so we don't need an explicit one here.
+        // The state change on mouseMove will trigger the debounced save.
+    }, []);
+
+    const handleMouseMove = React.useCallback((e: MouseEvent) => {
+        if (!isResizing.current) return;
+        const newWidth = (e.clientX / window.innerWidth) * 100;
+        if (newWidth > 10 && newWidth < 90) {
+            setLeftPaneWidth(newWidth);
+        }
+    }, []);
 
     React.useEffect(() => {
-        const mm = (e: MouseEvent) => handleMouseMove(e);
-        const mu = () => handleMouseUp();
-        if (isParsedMode) { window.addEventListener('mousemove', mm); window.addEventListener('mouseup', mu); }
-        return () => { window.removeEventListener('mousemove', mm); window.removeEventListener('mouseup', mu); };
+        // C158 Fix for resizer bug:
+        // The problem is that the mouse move/up handlers don't have the latest state
+        // when they are re-created. By adding/removing them only when the mode changes,
+        // and using useCallback without dependencies that change often, we get a stable handler.
+        if (isParsedMode) {
+            window.addEventListener('mousemove', handleMouseMove);
+            window.addEventListener('mouseup', handleMouseUp);
+        }
+        return () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('mouseup', handleMouseUp);
+        };
     }, [isParsedMode, handleMouseMove, handleMouseUp]);
     
     const handleSelectForViewing = (filePath: string) => {
@@ -296,14 +325,11 @@ const App = () => {
 
     const handleContextKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if ((e.ctrlKey || e.metaKey) && e.key === 'z') {
-            // Allow default undo behavior
             return;
         }
         if ((e.ctrlKey || e.metaKey) && (e.key === 'y' || (e.shiftKey && e.key === 'Z'))) {
-            // Allow default redo behavior
             return;
         }
-        // Stop propagation for other keys if needed, or just let them be
     };
 
     const activeTabData = tabs[activeTab.toString()];
@@ -447,7 +473,7 @@ const App = () => {
     }
 
     if (currentCycle === 0) {
-        return <OnboardingView initialProjectScope={projectScope} onNavigateToCycle={(id) => handleCycleChange(null, id)} />;
+        return <OnboardingView initialProjectScope={projectScope} onNavigateToCycle={(id) => handleCycleChange(null, id)} latestCycleId={maxCycle} />;
     }
 
     const collapsedNavigator = <div className="collapsed-navigator"><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button><span className="cycle-display">C{currentCycle}</span><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button></div>;
@@ -517,7 +543,15 @@ const App = () => {
     };
 
     return <div className="pc-view-container">
-        <div className="pc-header"><div className="pc-toolbar"><button onClick={handleGeneratePrompt} title="Generate prompt.md"><VscFileCode /> Generate prompt.md</button><button onClick={handleLogState} title="Log Current State"><VscBug/></button><button onClick={handleGlobalParseToggle}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} /></div></div>
+        <div className="pc-header">
+            <div className="pc-toolbar">
+                <button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button>
+                <button onClick={handleGeneratePrompt} title="Generate prompt.md"><VscFileCode /> Generate prompt.md</button>
+                <button onClick={handleLogState} title="Log Current State"><VscBug/></button>
+                <button onClick={handleGlobalParseToggle}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button>
+            </div>
+            <div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} /></div>
+        </div>
         <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''}><div className="cycle-navigator"><span>Cycle:</span><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button><input type="number" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 0)} className="cycle-input" /><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button><button onClick={handleNewCycle} title="New Cycle" disabled={isNewCycleButtonDisabled}><VscAdd /></button><input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} /><button onClick={handleDeleteCycle} title="Delete Current Cycle"><VscTrash /></button><button onClick={handleResetHistory} title="Reset All History"><VscSync /></button></div><div className="context-inputs"><textarea className="context-textarea" placeholder="Cycle Context (notes for this cycle)..." value={cycleContext} onChange={e => setCycleContext(e.target.value)} onKeyDown={handleContextKeyDown} /><textarea className="context-textarea" placeholder="Ephemeral Context (for this cycle's prompt only)..." value={ephemeralContext} onChange={e => setEphemeralContext(e.target.value)} onKeyDown={handleContextKeyDown} /></div></CollapsibleSection>
         <div className="tab-bar-container">
             <div className="tab-bar">{sortedTabIds.map((tabIndex) => {
