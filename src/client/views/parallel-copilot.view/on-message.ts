@@ -1,4 +1,3 @@
-// Updated on: C153 (Send projectScope with latest cycle data)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -68,5 +67,13 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestCopyTextToClipboard, (data) => {
         fileOperationService.handleCopyTextToClipboardRequest(data.text);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestExportHistory, () => {
+        historyService.handleExportHistory();
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestImportHistory, () => {
+        historyService.handleImportHistory();
     });
 }

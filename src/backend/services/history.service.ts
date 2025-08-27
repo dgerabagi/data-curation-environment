@@ -181,14 +181,14 @@ export class HistoryService {
 
     public async handleExportHistory() {
         Services.loggerService.log("Exporting cycle history.");
-        if (!this.historyFilePath) {
+        if (!this.historyFilePath || !this.workspaceRoot) {
             vscode.window.showErrorMessage("History file path not found.");
             return;
         }
         try {
             const historyContent = await this._readHistoryFile();
             const saveUri = await vscode.window.showSaveDialog({
-                defaultUri: vscode.Uri.file(path.join(this.workspaceRoot || '', 'dce_history_export.json')),
+                defaultUri: vscode.Uri.file(path.join(this.workspaceRoot, 'dce_history_export.json')),
                 filters: { 'JSON': ['json'] }
             });
             if (saveUri) {

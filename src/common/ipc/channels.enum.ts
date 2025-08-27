@@ -49,8 +49,8 @@ export enum ClientToServerChannel {
     RequestResetHistory = "clientToServer.requestResetHistory",
     RequestLogState = "clientToServer.requestLogState",
     RequestFileComparison = "clientToServer.requestFileComparison",
-    RequestExportHistory = "clientToServer.requestExportHistory", // New
-    RequestImportHistory = "clientToServer.requestImportHistory", // New
+    RequestExportHistory = "clientToServer.requestExportHistory",
+    RequestImportHistory = "clientToServer.requestImportHistory",
 }
 
 export enum ServerToClientChannel {
