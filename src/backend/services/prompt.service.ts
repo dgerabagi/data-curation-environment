@@ -201,7 +201,6 @@ ${cyclesContent}
             vscode.window.showInformationMessage(`Successfully generated prompt.md.`);
             Services.loggerService.log("Successfully generated prompt.md file.");
 
-            // C158: Open the prompt.md file for the user
             await Services.fileOperationService.handleOpenFileRequest(promptMdPath);
 
         } catch (error: any) {
@@ -266,21 +265,22 @@ ${staticContext.trim()}
 
             const projectScopeContent = `<M4. current project scope>\n${projectScope}\n</M4. current project scope>`;
 
+            await vscode.workspace.fs.createDirectory(vscode.Uri.file(artifactsDirInWorkspace));
+            const readmeContent = await this.getArtifactContent('src/Artifacts/A72. DCE - README for Artifacts.md', '# Welcome to the Data Curation Environment!');
+            const readmeUri = vscode.Uri.file(path.join(artifactsDirInWorkspace, 'README.md'));
+            await vscode.workspace.fs.writeFile(readmeUri, Buffer.from(readmeContent, 'utf-8'));
+            Services.loggerService.log("Created src/Artifacts/README.md for the new project.");
+            
+            const readmeFileContent = `<file path="src/Artifacts/README.md">\n${readmeContent}\n</file>`;
+            const flattenedRepoContent = `<M7. Flattened Repo>\n${readmeFileContent}\n</M7. Flattened Repo>`;
+
             const promptParts = [
-                `<prompt.md>`, this.artifactSchemaTemplate, `<M2. cycle overview>\nCurrent Cycle 0 - Project Initialization\n</M2. cycle overview>`, interactionSchemaContent, projectScopeContent, `<M5. organized artifacts list>\n# No artifacts exist yet.\n</M5. organized artifacts list>`, `<M6. Cycles>\n${cycle0Context}\n</M6. Cycles>`, `<M7. Flattened Repo>\n<!-- No files selected for initial prompt -->\n</M7. Flattened Repo>`, `</prompt.md>`
+                `<prompt.md>`, this.artifactSchemaTemplate, `<M2. cycle overview>\nCurrent Cycle 0 - Project Initialization\n</M2. cycle overview>`, interactionSchemaContent, projectScopeContent, `<M5. organized artifacts list>\n# No artifacts exist yet.\n</M5. organized artifacts list>`, `<M6. Cycles>\n${cycle0Context}\n</M6. Cycles>`, flattenedRepoContent, `</prompt.md>`
             ];
 
             const finalPrompt = promptParts.join('\n\n');
             await vscode.workspace.fs.writeFile(vscode.Uri.file(promptMdPath), Buffer.from(finalPrompt, 'utf-8'));
             Services.loggerService.log("Successfully generated Cycle 0 prompt.md file.");
-
-            await vscode.workspace.fs.createDirectory(vscode.Uri.file(artifactsDirInWorkspace));
-            
-            // C158: Create README.md instead of a generic A0 file.
-            const readmeContent = await this.getArtifactContent('src/Artifacts/A72. DCE - README for Artifacts.md', '# Welcome to the Data Curation Environment!');
-            const readmeUri = vscode.Uri.file(path.join(artifactsDirInWorkspace, 'README.md'));
-            await vscode.workspace.fs.writeFile(readmeUri, Buffer.from(readmeContent, 'utf-8'));
-            Services.loggerService.log("Created src/Artifacts/README.md for the new project.");
             
             vscode.window.showInformationMessage(`Successfully generated initial prompt.md and created src/Artifacts/README.md`);
 

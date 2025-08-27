@@ -1,11 +1,11 @@
-// Updated on: C157 (Exclude flattened_repo.md and .vscode from auto-add)
+// Updated on: C159 (Implement queue for auto-add to fix race condition)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { ServerToClientChannel } from "@/common/ipc/channels.enum";
 import { FileNode } from "@/common/types/file-node";
-import { Services } from "./services";
+import { Services } from "@/backend/services/services";
 import { serverIPCs } from "@/client/views";
 import { VIEW_TYPES } from "@/common/view-types";
 import { API as GitAPI, Status } from "../types/git";
@@ -25,6 +25,8 @@ export class FileTreeService {
     private refreshDebounceTimer: NodeJS.Timeout | null = null;
     private diagnosticsDebounceTimer: NodeJS.Timeout | null = null;
     private gitApi?: GitAPI;
+    private autoAddQueue: string[] = [];
+    private isProcessingAutoAdd = false;
 
     constructor(gitApi?: GitAPI) {
         this.gitApi = gitApi;
@@ -70,12 +72,11 @@ export class FileTreeService {
             const normalizedPath = normalizePath(uri.fsPath);
             const fileName = path.basename(normalizedPath);
             
-            // C157: Exclude specific files and folders from auto-add
             const isExcluded = AUTO_ADD_EXCLUSIONS.some(exclusion => {
-                if (exclusion.startsWith('.')) { // It's a folder
+                if (exclusion.startsWith('.')) {
                     return normalizedPath.includes(`/${exclusion}/`);
                 }
-                return fileName === exclusion; // It's a file
+                return fileName === exclusion;
             });
 
             if (isExcluded) {
@@ -86,14 +87,34 @@ export class FileTreeService {
             if (Services.fileOperationService.hasFileToIgnoreForAutoAdd(normalizedPath)) {
                 Services.fileOperationService.removeFileToIgnoreForAutoAdd(normalizedPath);
             } else if (Services.selectionService.getAutoAddState()) {
-                const currentSelection = await Services.selectionService.getLastSelection();
-                await Services.selectionService.saveCurrentSelection([...new Set([...currentSelection, normalizedPath])]);
+                this.autoAddQueue.push(normalizedPath);
+                this.processAutoAddQueue();
             }
             onFileChange(uri);
         });
         this.watcher.onDidChange(onFileChange);
         this.watcher.onDidDelete(onFileChange);
         vscode.languages.onDidChangeDiagnostics(() => this.triggerDiagnosticsUpdate());
+    }
+
+    private async processAutoAddQueue() {
+        if (this.isProcessingAutoAdd || this.autoAddQueue.length === 0) {
+            return;
+        }
+        this.isProcessingAutoAdd = true;
+    
+        const pathsToAdd = [...this.autoAddQueue];
+        this.autoAddQueue = [];
+    
+        const currentSelection = await Services.selectionService.getLastSelection();
+        const newSelection = [...new Set([...currentSelection, ...pathsToAdd])];
+        await Services.selectionService.saveCurrentSelection(newSelection);
+        
+        this.isProcessingAutoAdd = false;
+    
+        if (this.autoAddQueue.length > 0) {
+            this.processAutoAddQueue();
+        }
     }
 
     private async getFileStats(filePath: string): Promise<Omit<FileNode, 'name' | 'absolutePath' | 'children'>> {

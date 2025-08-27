@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C158 (Fix resizable bar bug, add navigation to Cycle 0)
+// Updated on: C159 (Remove resizable bar functionality)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -15,7 +15,6 @@ import { BatchWriteFile } from '@/common/ipc/channels.type';
 import OnboardingView from './OnboardingView';
 import { formatLargeNumber } from '@/common/utils/formatting';
 
-// ... (interfaces and useDebounce hook remain the same) ...
 interface ComparisonMetrics {
     originalTokens: number;
     modifiedTokens: number;
@@ -85,7 +84,6 @@ const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; i
 
 
 const App = () => {
-    // ... (most state declarations are the same)
     const [activeTab, setActiveTab] = React.useState(1);
     const [tabCount, setTabCount] = React.useState(4);
     const [currentCycle, setCurrentCycle] = React.useState<number | null>(null);
@@ -101,7 +99,6 @@ const App = () => {
     const [selectedFilePath, setSelectedFilePath] = React.useState<string | null>(null);
     const [isCycleCollapsed, setIsCycleCollapsed] = React.useState(false);
     const [leftPaneWidth, setLeftPaneWidth] = React.useState(33);
-    const isResizing = React.useRef(false);
     const [selectedFilesForReplacement, setSelectedFilesForReplacement] = React.useState<Set<string>>(new Set());
     const [selectedResponseId, setSelectedResponseId] = React.useState<string | null>(null);
     const [comparisonMetrics, setComparisonMetrics] = React.useState<Map<string, ComparisonMetrics>>(new Map());
@@ -240,40 +237,6 @@ const App = () => {
         } 
     };
 
-    const handleMouseDown = React.useCallback((e: React.MouseEvent) => {
-        e.preventDefault();
-        isResizing.current = true;
-    }, []);
-
-    const handleMouseUp = React.useCallback(() => {
-        isResizing.current = false;
-        // C158: The save call is now debounced, so we don't need an explicit one here.
-        // The state change on mouseMove will trigger the debounced save.
-    }, []);
-
-    const handleMouseMove = React.useCallback((e: MouseEvent) => {
-        if (!isResizing.current) return;
-        const newWidth = (e.clientX / window.innerWidth) * 100;
-        if (newWidth > 10 && newWidth < 90) {
-            setLeftPaneWidth(newWidth);
-        }
-    }, []);
-
-    React.useEffect(() => {
-        // C158 Fix for resizer bug:
-        // The problem is that the mouse move/up handlers don't have the latest state
-        // when they are re-created. By adding/removing them only when the mode changes,
-        // and using useCallback without dependencies that change often, we get a stable handler.
-        if (isParsedMode) {
-            window.addEventListener('mousemove', handleMouseMove);
-            window.addEventListener('mouseup', handleMouseUp);
-        }
-        return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-            window.removeEventListener('mouseup', handleMouseUp);
-        };
-    }, [isParsedMode, handleMouseMove, handleMouseUp]);
-    
     const handleSelectForViewing = (filePath: string) => {
         const newPath = selectedFilePath === filePath ? null : filePath;
         setSelectedFilePath(newPath);
@@ -516,7 +479,7 @@ const App = () => {
                 <CollapsibleSection title="Summary" isCollapsed={isThoughtsCollapsed} onToggle={() => setThoughtsCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown></CollapsibleSection>
                 <CollapsibleSection title="Course of Action" isCollapsed={isActionCollapsed} onToggle={() => setActionCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown></CollapsibleSection>
             </div>
-            <div className="resizer" onMouseDown={handleMouseDown} />
+            <div className="resizer" />
             <div className="parsed-view-right">
                 <div className="response-acceptance-header"><button className={`styled-button ${selectedResponseId === activeTab.toString() ? 'toggled' : ''}`} onClick={() => setSelectedResponseId(prev => prev === activeTab.toString() ? null : activeTab.toString())}>{selectedResponseId === activeTab.toString() ? 'Response Selected' : 'Select This Response'}</button><button className="styled-button" onClick={handleSelectAllFilesToggle}><VscCheckAll/> {isAllFilesSelected ? 'Deselect All' : 'Select All'}</button><button className="styled-button" onClick={handleAcceptSelectedFiles} disabled={selectedFilesForReplacement.size === 0}><VscSave/> Accept Selected</button></div>
                 <div className="file-content-viewer-header">
@@ -559,7 +522,7 @@ const App = () => {
                 const parsedData = tabData?.parsedContent;
                 return <div key={tabIndex} className={`tab ${activeTab === tabIndex ? 'active' : ''} ${selectedResponseId === tabIndex.toString() ? 'selected' : ''}`} onClick={() => setActiveTab(tabIndex)}><div className="tab-title">Resp {tabIndex}</div>{isParsedMode && parsedData && (<div className="tab-metadata"><span><VscFileCode /> {parsedData.files.length}</span><span><VscSymbolNumeric /> {formatLargeNumber(parsedData.totalTokens, 1)}</span></div>)}</div>;
             })}</div>
-            {isParsedMode && <button onClick={() => setIsSortedByTokens(p => !p)} className="sort-button" title="Sort responses by token count">{isSortedByTokens ? <VscListOrdered/> : <VscListUnordered/>} Sort</button>}
+            {isParsedMode && <button onClick={() => setIsSortedByTokens(p => !p)} className={`sort-button ${isSortedByTokens ? 'active' : ''}`} title="Sort responses by token count">{isSortedByTokens ? <VscListOrdered/> : <VscListUnordered/>} Sort</button>}
         </div>
         <div className="tab-content">{activeTab !== null && <div className="tab-pane">{renderContent()}</div>}</div>
     </div>;

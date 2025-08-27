@@ -123,7 +123,7 @@ export class SelectionService {
     // --- Auto-Add New Files State ---
 
     public getAutoAddState(): boolean {
-        return this.context.workspaceState.get<boolean>(AUTO_ADD_STATE_KEY, false);
+        return this.context.workspaceState.get<boolean>(AUTO_ADD_STATE_KEY, true);
     }
 
     public async saveAutoAddState(enabled: boolean): Promise<void> {

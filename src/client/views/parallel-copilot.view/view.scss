@@ -1,4 +1,4 @@
-/* Updated on: C158 (Fix focused tab border) */
+/* Updated on: C159 (Add active state for sort button, make resizer static) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -142,6 +142,12 @@ body {
     }
 }
 
+.sort-button.active {
+    background-color: var(--vscode-toolbar-hoverBackground);
+    outline: 1px solid var(--vscode-focusBorder);
+}
+
+
 .styled-button {
     background-color: var(--vscode-button-secondaryBackground);
     color: var(--vscode-button-secondaryForeground);
@@ -245,7 +251,7 @@ body {
     align-items: center;
     gap: 4px;
     padding-bottom: 4px;
-    position: relative; // For outline offset
+    position: relative; 
 
     &.selected {
         background-color: var(--vscode-testing-iconPassed);
@@ -256,7 +262,6 @@ body {
         }
     }
 
-    // C158 Fix: Highlight any active tab, regardless of selection state.
     &.active {
         color: var(--vscode-tab-activeForeground);
         border-bottom-color: var(--vscode-tab-activeBorder);
@@ -328,16 +333,14 @@ body {
     gap: 8px;
     min-width: 150px;
     padding-right: 8px;
+    flex-basis: 33%; /* Static width */
+    flex-shrink: 0;
 }
 
 .resizer {
-    width: 5px;
-    cursor: col-resize;
+    width: 1px;
     background-color: var(--vscode-sash-hoverBorder);
     flex-shrink: 0;
-    &:hover {
-        background-color: var(--vscode-focusBorder);
-    }
 }
 
 .parsed-view-right {
@@ -450,7 +453,7 @@ body {
 
     li {
         display: flex;
-        flex-direction: column; // To stack file name and override input
+        flex-direction: column; 
         align-items: flex-start;
         gap: 4px;
         padding: 2px 4px;
@@ -531,7 +534,6 @@ body {
     }
 }
 
-/* Diff Viewer Styles */
 .diff-viewer-wrapper {
     display: flex;
     flex-direction: column;
@@ -545,7 +547,7 @@ body {
     flex-grow: 1;
     min-height: 0;
     display: flex;
-    flex-direction: row; /* Side-by-side */
+    flex-direction: row; 
     border: 1px solid var(--vscode-panel-border);
     border-radius: 4px;
 }
@@ -553,7 +555,7 @@ body {
 .diff-pane {
     flex: 1 1 50%;
     display: flex;
-    flex-direction: column; /* Stack header and content */
+    flex-direction: column;
     min-width: 0;
     overflow: hidden;
     &:first-of-type { border-right: 1px solid var(--vscode-panel-border); }
@@ -571,7 +573,7 @@ body {
 .diff-pane-content {
     flex-grow: 1;
     min-height: 0;
-    overflow-y: auto; /* Internal scrolling */
+    overflow-y: auto; 
     display: flex;
 }
 
@@ -629,7 +631,7 @@ body {
 
 .diff-detail-panes {
     display: flex;
-    flex-direction: column; /* Top and bottom */
+    flex-direction: column; 
     max-height: 200px;
     overflow: hidden;
 }

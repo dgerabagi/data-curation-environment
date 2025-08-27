@@ -52,10 +52,12 @@ export class HistoryService {
         let isFreshEnvironment = true;
 
         if (this.workspaceRoot) {
-            // C158: Check for a project-specific A0 file, not the generic one.
-            const a0Files = await vscode.workspace.findFiles('src/Artifacts/A0*Master Artifact List.md', null, 1);
-            if (a0Files.length > 0) {
+            // C159: Check for the existence of the artifacts README, which signals an initialized project.
+            try {
+                await vscode.workspace.fs.stat(vscode.Uri.file(path.join(this.workspaceRoot, 'src/Artifacts/README.md')));
                 isFreshEnvironment = false;
+            } catch (e) {
+                isFreshEnvironment = true;
             }
         }
         
