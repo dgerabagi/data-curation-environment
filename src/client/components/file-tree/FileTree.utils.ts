@@ -1,31 +1,25 @@
+// Updated on: C162 (Overhaul selection logic to be explicit and file-based)
 import { FileNode } from "@/common/types/file-node";
 import { logger } from "@/client/utils/logger";
 
-function getAllDescendantPaths(node: FileNode, includeFilesOnly: boolean = false): string[] {
-    let paths: string[] = [];
-    if (node.children) {
-        for (const child of node.children) {
-            if (!includeFilesOnly || !child.children) {
-                paths.push(child.absolutePath);
-            }
-            paths = paths.concat(getAllDescendantPaths(child, includeFilesOnly));
-        }
+/**
+ * Recursively finds all selectable files at or below a given node.
+ * @param node The node to start from.
+ * @returns A flat array of absolute paths for all selectable files.
+ */
+export function getAllSelectableFiles(node: FileNode): string[] {
+    if (!node.isSelectable) {
+        return [];
     }
-    return paths;
-}
-
-function findNode(node: FileNode, filePath: string): FileNode | null {
-    if (node.absolutePath === filePath) {
-        return node;
+    if (!node.children) { // It's a file
+        return [node.absolutePath];
     }
-
-    if (node.children && filePath.startsWith(node.absolutePath + '/')) {
-        for (const child of node.children) {
-            const found = findNode(child, filePath);
-            if(found) return found;
-        }
+    // It's a directory
+    let files: string[] = [];
+    for (const child of node.children) {
+        files = files.concat(getAllSelectableFiles(child));
     }
-    return null;
+    return files;
 }
 
 export const getFileNodeByPath = (
@@ -39,72 +33,46 @@ export const getFileNodeByPath = (
     return null;
 };
 
+function findNode(node: FileNode, filePath: string): FileNode | null {
+    if (node.absolutePath === filePath) {
+        return node;
+    }
+    if (node.children && filePath.startsWith(node.absolutePath + '/')) {
+        for (const child of node.children) {
+            const found = findNode(child, filePath);
+            if(found) return found;
+        }
+    }
+    return null;
+}
+
 export const addRemovePathInSelectedFiles = (
   fileTree: FileNode[],
-  path: string,
-  selectedFiles: string[]
+  path: string, // The path of the node that was clicked
+  selectedFiles: string[] // The current set of selected FILE paths
 ): string[] => {
-    logger.log(`[Selection] Toggling path: ${path}`);
     const node = getFileNodeByPath(fileTree, path);
-    if (!node) {
-        logger.error(`[Selection] Node not found for path: ${path}`);
-        return selectedFiles;
-    }
+    if (!node || !node.isSelectable) return selectedFiles;
 
     const currentSelection = new Set(selectedFiles);
-    const isDirectlySelected = currentSelection.has(path);
-    const selectedAncestor = selectedFiles.find(ancestor => path.startsWith(ancestor + '/') && path !== ancestor);
+    const filesToToggle = getAllSelectableFiles(node);
+    
+    // A node is considered "checked" if all its selectable descendant files are in the selection.
+    const isCurrentlyChecked = filesToToggle.length > 0 && filesToToggle.every(file => currentSelection.has(file));
 
-    const isEffectivelySelected = isDirectlySelected || !!selectedAncestor;
-    logger.log(`[Selection] isDirectlySelected: ${isDirectlySelected}, hasSelectedAncestor: ${!!selectedAncestor}`);
-
-    if (isEffectivelySelected) {
-        // --- UNCHECKING ---
-        logger.log(`[Selection] Unchecking logic initiated.`);
-        if (selectedAncestor) {
-            logger.log(`[Selection] Performing 'subtractive uncheck'. Ancestor: ${selectedAncestor}`);
-            // A child of a selected folder is being unchecked. This is the BUGGY part.
-            const ancestorNode = getFileNodeByPath(fileTree, selectedAncestor);
-            if (!ancestorNode) return selectedFiles;
-
-            // 1. Remove the ancestor from the selection.
-            currentSelection.delete(selectedAncestor);
-            
-            // 2. Get ALL descendant files of the ancestor.
-            const allDescendantFiles = getAllDescendantPaths(ancestorNode, true);
-
-            // 3. Add all descendants back, EXCEPT for the one that was unchecked.
-            for (const file of allDescendantFiles) {
-                if (file !== path) {
-                    currentSelection.add(file);
-                }
-            }
-
-        } else {
-            // A directly selected item is being unchecked. Remove it.
-            logger.log(`[Selection] Unchecking directly selected item: ${path}`);
-            currentSelection.delete(path);
-        }
+    if (isCurrentlyChecked) {
+        // UNCHECK: Remove all selectable files under this node from the selection.
+        logger.log(`[Selection] Unchecking ${filesToToggle.length} files under ${node.name}`);
+        filesToToggle.forEach(file => currentSelection.delete(file));
     } else {
-        // --- CHECKING ---
-        logger.log(`[Selection] Checking logic initiated.`);
-        // Remove any descendants that are already selected, as the new parent selection covers them.
-        const newSelection = new Set<string>();
-        for (const p of currentSelection) {
-            if (!p.startsWith(path + '/')) {
-                newSelection.add(p);
-            } else {
-                logger.log(`[Selection] Removing descendant '${p}' because parent '${path}' is being checked.`);
-            }
-        }
-        newSelection.add(path);
-        return Array.from(newSelection);
+        // CHECK: Add all selectable files under this node to the selection.
+        logger.log(`[Selection] Checking ${filesToToggle.length} files under ${node.name}`);
+        filesToToggle.forEach(file => currentSelection.add(file));
     }
   
-  const finalSelection = Array.from(currentSelection);
-  logger.log(`[Selection] Final selection count: ${finalSelection.length}`);
-  return finalSelection;
+    return Array.from(currentSelection);
 };
+
 
 export const removePathsFromSelected = (
     pathsToRemove: string[],
@@ -121,69 +89,29 @@ export const removePathsFromSelected = (
     };
     fileTree.forEach(buildMap);
 
-    // 1. Get the full set of all individual files that are currently selected.
     const effectiveFileSelection = new Set<string>();
     for (const selectedPath of currentSelectedFiles) {
         const node = fileMap.get(selectedPath);
         if (node) {
-            if (node.children) { // It's a directory
-                getAllDescendantPaths(node, true).forEach(file => effectiveFileSelection.add(file));
-            } else { // It's a file
+            if (node.children) {
+                getAllSelectableFiles(node).forEach(file => effectiveFileSelection.add(file));
+            } else if (node.isSelectable) {
                 effectiveFileSelection.add(selectedPath);
             }
         }
     }
-    logger.log(`[Batch Remove] Expanded initial selection to ${effectiveFileSelection.size} effective files.`);
 
-    // 2. Remove the unwanted files from this effective set.
     for (const pathToRemove of pathsToRemove) {
         const nodeToRemove = fileMap.get(pathToRemove);
         if (nodeToRemove) {
-            if (nodeToRemove.children) { // It's a directory
-                getAllDescendantPaths(nodeToRemove, true).forEach(file => effectiveFileSelection.delete(file));
-            } else { // It's a file
+            if (nodeToRemove.children) {
+                getAllSelectableFiles(nodeToRemove).forEach(file => effectiveFileSelection.delete(file));
+            } else {
                 effectiveFileSelection.delete(pathToRemove);
             }
         }
     }
-    logger.log(`[Batch Remove] After removal, ${effectiveFileSelection.size} files remain.`);
-
-
-    // 3. Compress the remaining set of files into the most efficient list of paths (folders + files).
-    const finalPaths = new Set<string>();
-    const checkedForCompression = new Set<string>();
-
-    const compress = (node: FileNode) => {
-        if (!node.children || checkedForCompression.has(node.absolutePath)) {
-            return;
-        }
-
-        const descendantFiles = getAllDescendantPaths(node, true);
-        if (descendantFiles.length === 0) {
-            return; // Don't add empty folders
-        }
-
-        const allDescendantsSelected = descendantFiles.every(file => effectiveFileSelection.has(file));
-
-        if (allDescendantsSelected) {
-            finalPaths.add(node.absolutePath);
-            // Mark all descendants as handled by this compression
-            descendantFiles.forEach(file => checkedForCompression.add(file));
-        } else {
-            // Recurse to children if not all are selected
-            node.children.forEach(compress);
-        }
-    };
-
-    fileTree.forEach(compress);
-
-    // Add any remaining files that were not part of a compressed folder
-    for (const file of effectiveFileSelection) {
-        if (!checkedForCompression.has(file)) {
-            finalPaths.add(file);
-        }
-    }
     
-    logger.log(`[Batch Remove] Compressed final selection to ${finalPaths.size} paths.`);
-    return Array.from(finalPaths);
+    logger.log(`[Batch Remove] After removal, ${effectiveFileSelection.size} files remain.`);
+    return Array.from(effectiveFileSelection);
 };

@@ -1,3 +1,4 @@
+// Updated on: C162 (Refactor checkbox state calculation for new explicit selection model)
 import React, { useState, useMemo } from 'react';
 import TreeView, { TreeNode } from '../tree-view/TreeView';
 import { FileNode } from '@/common/types/file-node';
@@ -12,7 +13,7 @@ import ContextMenu from '../ContextMenu';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 import { ProblemCountsMap } from '@/common/ipc/channels.type';
-import { logger } from '@/client/utils/logger';
+import { getAllSelectableFiles, getFileNodeByPath } from './FileTree.utils';
 
 interface FileTreeProps {
   data: FileNode[];
@@ -111,33 +112,53 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
         setRenamingPath(null);
     };
     
+    const checkboxStates = useMemo(() => {
+        const states = new Map<string, { checked: boolean, indeterminate: boolean }>();
+        const checkedSet = new Set(checkedFiles);
+    
+        const calculateState = (node: FileNode): { selectedCount: number, selectableCount: number } => {
+            if (!node.isSelectable) {
+                states.set(node.absolutePath, { checked: false, indeterminate: false });
+                return { selectedCount: 0, selectableCount: 0 };
+            }
+    
+            if (!node.children) { // It's a file
+                const isChecked = checkedSet.has(node.absolutePath);
+                states.set(node.absolutePath, { checked: isChecked, indeterminate: false });
+                return { selectedCount: isChecked ? 1 : 0, selectableCount: 1 };
+            }
+    
+            // It's a directory
+            let totalSelected = 0;
+            let totalSelectable = 0;
+            for (const child of node.children) {
+                const childState = calculateState(child);
+                totalSelected += childState.selectedCount;
+                totalSelectable += childState.selectableCount;
+            }
+    
+            const isChecked = totalSelectable > 0 && totalSelected === totalSelectable;
+            const isIndeterminate = totalSelected > 0 && totalSelected < totalSelectable;
+            states.set(node.absolutePath, { checked: isChecked, indeterminate: isIndeterminate });
+            
+            return { selectedCount: totalSelected, selectableCount: totalSelectable };
+        };
+    
+        data.forEach(calculateState);
+        return states;
+    }, [data, checkedFiles]);
+
     const calculateCheckedTokens = useMemo(() => {
         const checkedSet = new Set(checkedFiles);
         const memo = new Map<string, number>();
 
         const calculate = (node: FileNode): number => {
-            if (memo.has(node.absolutePath)) {
-                return memo.get(node.absolutePath)!;
-            }
-
-            if (checkedSet.has(node.absolutePath)) {
-                memo.set(node.absolutePath, node.tokenCount);
-                return node.tokenCount;
-            }
-            
-            for (const checkedPath of checkedSet) {
-                if (node.absolutePath.startsWith(checkedPath + '/')) {
-                    memo.set(node.absolutePath, node.tokenCount);
-                    return node.tokenCount;
-                }
-            }
-
+            if (memo.has(node.absolutePath)) return memo.get(node.absolutePath)!;
             if (!node.children) {
                 const result = checkedSet.has(node.absolutePath) ? node.tokenCount : 0;
                 memo.set(node.absolutePath, result);
                 return result;
             }
-    
             const result = node.children.reduce((acc, child) => acc + calculate(child), 0);
             memo.set(node.absolutePath, result);
             return result;
@@ -149,53 +170,31 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
         const fileNode = node as FileNode;
         const isDirectory = Array.isArray(fileNode.children);
         
-        const hasCheckedAncestor = checkedFiles.some(ancestor => fileNode.absolutePath.startsWith(ancestor + '/') && fileNode.absolutePath !== ancestor);
-        const isDirectlyChecked = checkedFiles.includes(fileNode.absolutePath);
-        const isChecked = isDirectlyChecked || hasCheckedAncestor;
-
         if (renamingPath === fileNode.absolutePath) {
-            return (
-                <input
-                    type="text"
-                    value={renameValue}
-                    onChange={(e) => setRenameValue(e.target.value)}
-                    onBlur={handleRenameSubmit}
-                    onKeyDown={(e) => {
-                        if (e.key === 'Enter') handleRenameSubmit();
-                        if ((e.ctrlKey || e.metaKey) && ['c', 'v', 'x'].includes(e.key.toLowerCase())) {
-                            e.stopPropagation();
-                        }
-                    }}
-                    autoFocus
-                    className="rename-input"
-                />
-            );
+            return ( <input type="text" value={renameValue} onChange={(e) => setRenameValue(e.target.value)} onBlur={handleRenameSubmit} onKeyDown={(e) => { if (e.key === 'Enter') handleRenameSubmit(); if ((e.ctrlKey || e.metaKey) && ['c', 'v', 'x'].includes(e.key.toLowerCase())) { e.stopPropagation(); } }} autoFocus className="rename-input" /> );
         }
 
         const checkedTokensInDir = isDirectory ? calculateCheckedTokens(fileNode) : 0;
+        const { checked, indeterminate } = checkboxStates.get(fileNode.absolutePath) || { checked: false, indeterminate: false };
         const isFullyChecked = isDirectory && checkedTokensInDir > 0 && checkedTokensInDir === fileNode.tokenCount;
         
         const liveProblems = problemMap[fileNode.absolutePath];
         const problemData = liveProblems || fileNode.problemCounts;
-
         const problemErrorCount = problemData?.error || 0;
         const problemWarningCount = problemData?.warning || 0;
         const hasProblems = problemErrorCount > 0 || problemWarningCount > 0;
         const problemColorClass = problemErrorCount > 0 ? 'problem-error' : 'problem-warning';
         const problemTooltip = `${problemErrorCount} Errors, ${problemWarningCount} Warnings`;
         const hasError = !!fileNode.error;
+        const gitStatusClass = fileNode.gitStatus ? `git-status-${fileNode.gitStatus}` : '';
 
         const renderTokenCount = () => {
-            if (hasError) {
-                return <span>---</span>;
-            }
-            if (fileNode.isImage) {
-                return <span>{formatBytes(fileNode.sizeInBytes)}</span>;
-            }
+            if (hasError) return <span>---</span>;
+            if (fileNode.isImage) return <span>{formatBytes(fileNode.sizeInBytes)}</span>;
             if (fileNode.tokenCount > 0) {
                 let content;
                 if (isDirectory) {
-                    if (isFullyChecked) {
+                    if (isFullyChecked || checked) {
                         content = `(${formatLargeNumber(fileNode.tokenCount, 1)})`;
                     } else if (checkedTokensInDir > 0) {
                         content = <>{formatLargeNumber(fileNode.tokenCount, 1)} <span className="selected-token-count">({formatLargeNumber(checkedTokensInDir, 1)})</span></>;
@@ -203,21 +202,19 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
                         content = formatLargeNumber(fileNode.tokenCount, 1);
                     }
                 } else { // It's a file
-                    content = isChecked ? `(${formatLargeNumber(fileNode.tokenCount, 1)})` : formatLargeNumber(fileNode.tokenCount, 1);
+                    content = checked ? `(${formatLargeNumber(fileNode.tokenCount, 1)})` : formatLargeNumber(fileNode.tokenCount, 1);
                 }
                 return <><VscSymbolNumeric /> <span>{content}</span></>;
             }
             return null;
         };
 
-        const gitStatusClass = fileNode.gitStatus ? `git-status-${fileNode.gitStatus}` : '';
-
         return (
             <div className={`file-item ${gitStatusClass} ${hasProblems ? problemColorClass : ''} ${hasError ? 'has-error' : ''}`} title={fileNode.error}>
                 <Checkbox
                     className="file-checkbox"
-                    checked={isChecked}
-                    indeterminate={!isDirectlyChecked && !hasCheckedAncestor && checkedFiles.some(p => p.startsWith(fileNode.absolutePath))}
+                    checked={checked}
+                    indeterminate={indeterminate}
                     onChange={(_, e) => handleFileCheckboxChange(e, fileNode.absolutePath)}
                     disabled={hasError || !fileNode.isSelectable}
                 />

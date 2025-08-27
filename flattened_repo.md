@@ -1,12 +1,12 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-27T17:32:16.966Z
+  Date Generated: 2025-08-27T17:52:06.415Z
   ---
   Total Files: 249
-  Total Lines: 31897
-  Total Characters: 1793792
-  Approx. Tokens: 448538
+  Total Lines: 31827
+  Total Characters: 1791139
+  Approx. Tokens: 447875
 -->
 
 <!-- Top 10 Files by Token Count -->
@@ -16,7 +16,7 @@
 4. src\client\views\parallel-copilot.view\view.tsx (7987 tokens)
 5. src\Artifacts\A11. DCE - Regression Case Studies.md (7032 tokens)
 6. src\Artifacts\A0. DCE Master Artifact List.md (6580 tokens)
-7. src\client\views\context-chooser.view\view.tsx (4932 tokens)
+7. src\client\views\context-chooser.view\view.tsx (4919 tokens)
 8. src\client\components\tree-view\TreeView.tsx (4508 tokens)
 9. src\backend\services\prompt.service.ts (3999 tokens)
 10. src\backend\services\file-operation.service.ts (3987 tokens)
@@ -125,8 +125,8 @@
 101. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
 102. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
 103. src\backend\services\file-operation.service.ts - Lines: 328 - Chars: 15946 - Tokens: 3987
-104. src\backend\services\file-tree.service.ts - Lines: 277 - Chars: 14176 - Tokens: 3544
-105. src\backend\services\flattener.service.ts - Lines: 215 - Chars: 11613 - Tokens: 2904
+104. src\backend\services\file-tree.service.ts - Lines: 269 - Chars: 13658 - Tokens: 3415
+105. src\backend\services\flattener.service.ts - Lines: 223 - Chars: 11923 - Tokens: 2981
 106. src\backend\services\highlighting.service.ts - Lines: 58 - Chars: 2920 - Tokens: 730
 107. src\backend\services\history.service.ts - Lines: 235 - Chars: 10055 - Tokens: 2514
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
@@ -137,8 +137,8 @@
 113. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
 114. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
 115. src\client\components\DiffViewer.tsx - Lines: 224 - Chars: 11386 - Tokens: 2847
-116. src\client\components\file-tree\FileTree.tsx - Lines: 261 - Chars: 11851 - Tokens: 2963
-117. src\client\components\file-tree\FileTree.utils.ts - Lines: 189 - Chars: 7284 - Tokens: 1821
+116. src\client\components\file-tree\FileTree.tsx - Lines: 258 - Chars: 12506 - Tokens: 3127
+117. src\client\components\file-tree\FileTree.utils.ts - Lines: 117 - Chars: 4236 - Tokens: 1059
 118. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
 119. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13099 - Tokens: 3275
 120. src\client\components\tree-view\TreeView.tsx - Lines: 394 - Chars: 18029 - Tokens: 4508
@@ -148,7 +148,7 @@
 124. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 125. src\client\views\context-chooser.view\on-message.ts - Lines: 77 - Chars: 5057 - Tokens: 1265
 126. src\client\views\context-chooser.view\view.scss - Lines: 596 - Chars: 14629 - Tokens: 3658
-127. src\client\views\context-chooser.view\view.tsx - Lines: 403 - Chars: 19728 - Tokens: 4932
+127. src\client\views\context-chooser.view\view.tsx - Lines: 408 - Chars: 19676 - Tokens: 4919
 128. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
 129. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 130. src\client\views\parallel-copilot.view\on-message.ts - Lines: 72 - Chars: 3521 - Tokens: 881
@@ -19536,7 +19536,7 @@ export class FileOperationService {
 </file>
 
 <file path="src/backend/services/file-tree.service.ts">
-// Updated on: C161 (Add extensive logging for initialization troubleshooting)
+// Updated on: C162 (Prevent auto-adding non-selectable files)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -19553,7 +19553,6 @@ const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
 const EXCLUSION_PATTERNS = ['.git', 'dce_cache', 'out']; 
-const AUTO_ADD_EXCLUSIONS = ['flattened_repo.md', '.vscode'];
 const NON_SELECTABLE_PATTERNS = ['/node_modules', '/.vscode', 'flattened_repo.md', 'prompt.md'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
@@ -19609,18 +19608,13 @@ export class FileTreeService {
 
         this.watcher.onDidCreate(async (uri: vscode.Uri) => {
             const normalizedPath = normalizePath(uri.fsPath);
-            const fileName = path.basename(normalizedPath);
             
-            const isExcluded = AUTO_ADD_EXCLUSIONS.some(exclusion => {
-                if (exclusion.startsWith('.')) {
-                    return normalizedPath.includes(`/${exclusion}/`);
-                }
-                return fileName === exclusion;
-            });
+            const isNonSelectable = NON_SELECTABLE_PATTERNS.some(pattern => normalizedPath.includes(pattern));
 
-            if (isExcluded) {
-                 onFileChange(uri);
-                 return;
+            if (isNonSelectable) {
+                Services.loggerService.log(`[Auto-Add] Ignoring newly created non-selectable file: ${normalizedPath}`);
+                onFileChange(uri);
+                return;
             }
 
             if (Services.fileOperationService.hasFileToIgnoreForAutoAdd(normalizedPath)) {
@@ -19685,26 +19679,26 @@ export class FileTreeService {
     }
 
     public async handleWorkspaceFilesRequest(serverIpc: ServerPostMessageManager, forceRefresh: boolean = false) {
-        Services.loggerService.log(`[C161 DEBUG] handleWorkspaceFilesRequest started. forceRefresh=${forceRefresh}`);
+        Services.loggerService.log(`handleWorkspaceFilesRequest started. forceRefresh=${forceRefresh}`);
         if (!forceRefresh && this.fileTreeCache) {
-            Services.loggerService.log(`[C161 DEBUG] Serving file tree from cache.`);
+            Services.loggerService.log(`Serving file tree from cache.`);
             serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: this.fileTreeCache });
             return;
         }
 
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (!workspaceFolders?.[0]) {
-            Services.loggerService.warn(`[C161 DEBUG] No workspace folder found.`);
+            Services.loggerService.warn(`No workspace folder found.`);
             serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: [] });
             return;
         }
         
-        Services.loggerService.log(`[C161 DEBUG] Building file tree from scratch.`);
+        Services.loggerService.log(`Building file tree from scratch.`);
         const fileTree = await this.buildTreeFromTraversal(workspaceFolders[0].uri);
         this.fileTreeCache = [fileTree];
-        Services.loggerService.log(`[C161 DEBUG] File tree built. Sending to client.`);
+        Services.loggerService.log(`File tree built. Sending to client.`);
         serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: this.fileTreeCache });
-        Services.loggerService.log(`[C161 DEBUG] handleWorkspaceFilesRequest finished.`);
+        Services.loggerService.log(`handleWorkspaceFilesRequest finished.`);
     }
 
     private getGitStatusMap(): Map<string, string> {
@@ -19738,7 +19732,7 @@ export class FileTreeService {
     }
 
     private async buildTreeFromTraversal(rootUri: vscode.Uri): Promise<FileNode> {
-        Services.loggerService.log(`[C161 DEBUG] buildTreeFromTraversal starting for root: ${rootUri.fsPath}`);
+        Services.loggerService.log(`buildTreeFromTraversal starting for root: ${rootUri.fsPath}`);
         const rootPath = rootUri.fsPath;
         const gitStatusMap = this.getGitStatusMap();
         const problemCountsMap = this.getProblemCountsMap();
@@ -19753,16 +19747,14 @@ export class FileTreeService {
             isSelectable: true,
         };
         this._aggregateStats(rootNode);
-        Services.loggerService.log(`[C161 DEBUG] buildTreeFromTraversal finished. Root node has ${rootNode.children?.length} children.`);
+        Services.loggerService.log(`buildTreeFromTraversal finished. Root node has ${rootNode.children?.length} children.`);
         return rootNode;
     }
     
     private async _traverseDirectory(dirUri: vscode.Uri, gitStatusMap: Map<string, string>, problemCountsMap: ProblemCountsMap): Promise<FileNode[]> {
         const children: FileNode[] = [];
-        Services.loggerService.log(`[C161 DEBUG] > Traversing directory: ${dirUri.fsPath}`);
         try {
             const entries = await vscode.workspace.fs.readDirectory(dirUri);
-            Services.loggerService.log(`[C161 DEBUG] > Found ${entries.length} entries in ${path.basename(dirUri.fsPath)}`);
 
             for (const [name, type] of entries) {
                 if (name === '.git' || name === 'dce_cache' || name === 'out') continue;
@@ -19782,7 +19774,7 @@ export class FileTreeService {
                 }
             }
         } catch (error: any) {
-            Services.loggerService.error(`[C161 DEBUG] Error traversing directory ${dirUri.fsPath}: ${error.message}`);
+            Services.loggerService.error(`Error traversing directory ${dirUri.fsPath}: ${error.message}`);
         }
         return children.sort((a, b) => (!!a.children === !!b.children) ? a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' }) : (!!a.children ? -1 : 1));
     }
@@ -19816,7 +19808,7 @@ export class FileTreeService {
 </file>
 
 <file path="src/backend/services/flattener.service.ts">
-// Updated on: C160 (Add de-duplication to expandDirectories)
+// Updated on: C162 (Exclude non-selectable files from flattening)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -19840,7 +19832,9 @@ interface FileStats {
 const BINARY_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico', '.exe', '.dll', '.bin', '.zip', '.gz', '.7z', '.mp3', '.wav', '.mov', '.mp4']);
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
+const NON_SELECTABLE_PATTERNS = ['/node_modules', '/.vscode', 'flattened_repo.md', 'prompt.md'];
 
+const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
 export class FlattenerService {
 
@@ -19893,7 +19887,7 @@ export class FlattenerService {
     }
 
     private async expandDirectories(paths: string[]): Promise<string[]> {
-        const uniquePaths = [...new Set(paths)]; // C160 Fix: De-duplicate initial paths
+        const uniquePaths = [...new Set(paths)]; 
         const allFiles: string[] = [];
         for (const p of uniquePaths) {
             try {
@@ -19916,8 +19910,14 @@ export class FlattenerService {
             const entries = await fs.readdir(dirPath, { withFileTypes: true });
             for (const entry of entries) {
                 const fullPath = path.join(dirPath, entry.name);
+                const normalizedFullPath = normalizePath(fullPath);
+
+                // C162 Fix: Exclude non-selectable files/folders from the flattened output.
+                if (NON_SELECTABLE_PATTERNS.some(p => normalizedFullPath.includes(p))) {
+                    continue;
+                }
+
                 if (entry.isDirectory()) {
-                    if (entry.name.toLowerCase() === 'node_modules' || entry.name.toLowerCase() === '.vscode') continue;
                     files = files.concat(await this.getAllFilesRecursive(fullPath));
                 } else {
                     files.push(fullPath);
@@ -21270,6 +21270,7 @@ export default DiffViewer;
 </file>
 
 <file path="src/client/components/file-tree/FileTree.tsx">
+// Updated on: C162 (Refactor checkbox state calculation for new explicit selection model)
 import React, { useState, useMemo } from 'react';
 import TreeView, { TreeNode } from '../tree-view/TreeView';
 import { FileNode } from '@/common/types/file-node';
@@ -21284,7 +21285,7 @@ import ContextMenu from '../ContextMenu';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 import { ProblemCountsMap } from '@/common/ipc/channels.type';
-import { logger } from '@/client/utils/logger';
+import { getAllSelectableFiles, getFileNodeByPath } from './FileTree.utils';
 
 interface FileTreeProps {
   data: FileNode[];
@@ -21383,33 +21384,53 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
         setRenamingPath(null);
     };
     
+    const checkboxStates = useMemo(() => {
+        const states = new Map<string, { checked: boolean, indeterminate: boolean }>();
+        const checkedSet = new Set(checkedFiles);
+    
+        const calculateState = (node: FileNode): { selectedCount: number, selectableCount: number } => {
+            if (!node.isSelectable) {
+                states.set(node.absolutePath, { checked: false, indeterminate: false });
+                return { selectedCount: 0, selectableCount: 0 };
+            }
+    
+            if (!node.children) { // It's a file
+                const isChecked = checkedSet.has(node.absolutePath);
+                states.set(node.absolutePath, { checked: isChecked, indeterminate: false });
+                return { selectedCount: isChecked ? 1 : 0, selectableCount: 1 };
+            }
+    
+            // It's a directory
+            let totalSelected = 0;
+            let totalSelectable = 0;
+            for (const child of node.children) {
+                const childState = calculateState(child);
+                totalSelected += childState.selectedCount;
+                totalSelectable += childState.selectableCount;
+            }
+    
+            const isChecked = totalSelectable > 0 && totalSelected === totalSelectable;
+            const isIndeterminate = totalSelected > 0 && totalSelected < totalSelectable;
+            states.set(node.absolutePath, { checked: isChecked, indeterminate: isIndeterminate });
+            
+            return { selectedCount: totalSelected, selectableCount: totalSelectable };
+        };
+    
+        data.forEach(calculateState);
+        return states;
+    }, [data, checkedFiles]);
+
     const calculateCheckedTokens = useMemo(() => {
         const checkedSet = new Set(checkedFiles);
         const memo = new Map<string, number>();
 
         const calculate = (node: FileNode): number => {
-            if (memo.has(node.absolutePath)) {
-                return memo.get(node.absolutePath)!;
-            }
-
-            if (checkedSet.has(node.absolutePath)) {
-                memo.set(node.absolutePath, node.tokenCount);
-                return node.tokenCount;
-            }
-            
-            for (const checkedPath of checkedSet) {
-                if (node.absolutePath.startsWith(checkedPath + '/')) {
-                    memo.set(node.absolutePath, node.tokenCount);
-                    return node.tokenCount;
-                }
-            }
-
+            if (memo.has(node.absolutePath)) return memo.get(node.absolutePath)!;
             if (!node.children) {
                 const result = checkedSet.has(node.absolutePath) ? node.tokenCount : 0;
                 memo.set(node.absolutePath, result);
                 return result;
             }
-    
             const result = node.children.reduce((acc, child) => acc + calculate(child), 0);
             memo.set(node.absolutePath, result);
             return result;
@@ -21421,53 +21442,31 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
         const fileNode = node as FileNode;
         const isDirectory = Array.isArray(fileNode.children);
         
-        const hasCheckedAncestor = checkedFiles.some(ancestor => fileNode.absolutePath.startsWith(ancestor + '/') && fileNode.absolutePath !== ancestor);
-        const isDirectlyChecked = checkedFiles.includes(fileNode.absolutePath);
-        const isChecked = isDirectlyChecked || hasCheckedAncestor;
-
         if (renamingPath === fileNode.absolutePath) {
-            return (
-                <input
-                    type="text"
-                    value={renameValue}
-                    onChange={(e) => setRenameValue(e.target.value)}
-                    onBlur={handleRenameSubmit}
-                    onKeyDown={(e) => {
-                        if (e.key === 'Enter') handleRenameSubmit();
-                        if ((e.ctrlKey || e.metaKey) && ['c', 'v', 'x'].includes(e.key.toLowerCase())) {
-                            e.stopPropagation();
-                        }
-                    }}
-                    autoFocus
-                    className="rename-input"
-                />
-            );
+            return ( <input type="text" value={renameValue} onChange={(e) => setRenameValue(e.target.value)} onBlur={handleRenameSubmit} onKeyDown={(e) => { if (e.key === 'Enter') handleRenameSubmit(); if ((e.ctrlKey || e.metaKey) && ['c', 'v', 'x'].includes(e.key.toLowerCase())) { e.stopPropagation(); } }} autoFocus className="rename-input" /> );
         }
 
         const checkedTokensInDir = isDirectory ? calculateCheckedTokens(fileNode) : 0;
+        const { checked, indeterminate } = checkboxStates.get(fileNode.absolutePath) || { checked: false, indeterminate: false };
         const isFullyChecked = isDirectory && checkedTokensInDir > 0 && checkedTokensInDir === fileNode.tokenCount;
         
         const liveProblems = problemMap[fileNode.absolutePath];
         const problemData = liveProblems || fileNode.problemCounts;
-
         const problemErrorCount = problemData?.error || 0;
         const problemWarningCount = problemData?.warning || 0;
         const hasProblems = problemErrorCount > 0 || problemWarningCount > 0;
         const problemColorClass = problemErrorCount > 0 ? 'problem-error' : 'problem-warning';
         const problemTooltip = `${problemErrorCount} Errors, ${problemWarningCount} Warnings`;
         const hasError = !!fileNode.error;
+        const gitStatusClass = fileNode.gitStatus ? `git-status-${fileNode.gitStatus}` : '';
 
         const renderTokenCount = () => {
-            if (hasError) {
-                return <span>---</span>;
-            }
-            if (fileNode.isImage) {
-                return <span>{formatBytes(fileNode.sizeInBytes)}</span>;
-            }
+            if (hasError) return <span>---</span>;
+            if (fileNode.isImage) return <span>{formatBytes(fileNode.sizeInBytes)}</span>;
             if (fileNode.tokenCount > 0) {
                 let content;
                 if (isDirectory) {
-                    if (isFullyChecked) {
+                    if (isFullyChecked || checked) {
                         content = `(${formatLargeNumber(fileNode.tokenCount, 1)})`;
                     } else if (checkedTokensInDir > 0) {
                         content = <>{formatLargeNumber(fileNode.tokenCount, 1)} <span className="selected-token-count">({formatLargeNumber(checkedTokensInDir, 1)})</span></>;
@@ -21475,21 +21474,19 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
                         content = formatLargeNumber(fileNode.tokenCount, 1);
                     }
                 } else { // It's a file
-                    content = isChecked ? `(${formatLargeNumber(fileNode.tokenCount, 1)})` : formatLargeNumber(fileNode.tokenCount, 1);
+                    content = checked ? `(${formatLargeNumber(fileNode.tokenCount, 1)})` : formatLargeNumber(fileNode.tokenCount, 1);
                 }
                 return <><VscSymbolNumeric /> <span>{content}</span></>;
             }
             return null;
         };
 
-        const gitStatusClass = fileNode.gitStatus ? `git-status-${fileNode.gitStatus}` : '';
-
         return (
             <div className={`file-item ${gitStatusClass} ${hasProblems ? problemColorClass : ''} ${hasError ? 'has-error' : ''}`} title={fileNode.error}>
                 <Checkbox
                     className="file-checkbox"
-                    checked={isChecked}
-                    indeterminate={!isDirectlyChecked && !hasCheckedAncestor && checkedFiles.some(p => p.startsWith(fileNode.absolutePath))}
+                    checked={checked}
+                    indeterminate={indeterminate}
                     onChange={(_, e) => handleFileCheckboxChange(e, fileNode.absolutePath)}
                     disabled={hasError || !fileNode.isSelectable}
                 />
@@ -21534,34 +21531,28 @@ export default FileTree;
 </file>
 
 <file path="src/client/components/file-tree/FileTree.utils.ts">
+// Updated on: C162 (Overhaul selection logic to be explicit and file-based)
 import { FileNode } from "@/common/types/file-node";
 import { logger } from "@/client/utils/logger";
 
-function getAllDescendantPaths(node: FileNode, includeFilesOnly: boolean = false): string[] {
-    let paths: string[] = [];
-    if (node.children) {
-        for (const child of node.children) {
-            if (!includeFilesOnly || !child.children) {
-                paths.push(child.absolutePath);
-            }
-            paths = paths.concat(getAllDescendantPaths(child, includeFilesOnly));
-        }
+/**
+ * Recursively finds all selectable files at or below a given node.
+ * @param node The node to start from.
+ * @returns A flat array of absolute paths for all selectable files.
+ */
+export function getAllSelectableFiles(node: FileNode): string[] {
+    if (!node.isSelectable) {
+        return [];
     }
-    return paths;
-}
-
-function findNode(node: FileNode, filePath: string): FileNode | null {
-    if (node.absolutePath === filePath) {
-        return node;
+    if (!node.children) { // It's a file
+        return [node.absolutePath];
     }
-
-    if (node.children && filePath.startsWith(node.absolutePath + '/')) {
-        for (const child of node.children) {
-            const found = findNode(child, filePath);
-            if(found) return found;
-        }
+    // It's a directory
+    let files: string[] = [];
+    for (const child of node.children) {
+        files = files.concat(getAllSelectableFiles(child));
     }
-    return null;
+    return files;
 }
 
 export const getFileNodeByPath = (
@@ -21575,72 +21566,46 @@ export const getFileNodeByPath = (
     return null;
 };
 
+function findNode(node: FileNode, filePath: string): FileNode | null {
+    if (node.absolutePath === filePath) {
+        return node;
+    }
+    if (node.children && filePath.startsWith(node.absolutePath + '/')) {
+        for (const child of node.children) {
+            const found = findNode(child, filePath);
+            if(found) return found;
+        }
+    }
+    return null;
+}
+
 export const addRemovePathInSelectedFiles = (
   fileTree: FileNode[],
-  path: string,
-  selectedFiles: string[]
+  path: string, // The path of the node that was clicked
+  selectedFiles: string[] // The current set of selected FILE paths
 ): string[] => {
-    logger.log(`[Selection] Toggling path: ${path}`);
     const node = getFileNodeByPath(fileTree, path);
-    if (!node) {
-        logger.error(`[Selection] Node not found for path: ${path}`);
-        return selectedFiles;
-    }
+    if (!node || !node.isSelectable) return selectedFiles;
 
     const currentSelection = new Set(selectedFiles);
-    const isDirectlySelected = currentSelection.has(path);
-    const selectedAncestor = selectedFiles.find(ancestor => path.startsWith(ancestor + '/') && path !== ancestor);
+    const filesToToggle = getAllSelectableFiles(node);
+    
+    // A node is considered "checked" if all its selectable descendant files are in the selection.
+    const isCurrentlyChecked = filesToToggle.length > 0 && filesToToggle.every(file => currentSelection.has(file));
 
-    const isEffectivelySelected = isDirectlySelected || !!selectedAncestor;
-    logger.log(`[Selection] isDirectlySelected: ${isDirectlySelected}, hasSelectedAncestor: ${!!selectedAncestor}`);
-
-    if (isEffectivelySelected) {
-        // --- UNCHECKING ---
-        logger.log(`[Selection] Unchecking logic initiated.`);
-        if (selectedAncestor) {
-            logger.log(`[Selection] Performing 'subtractive uncheck'. Ancestor: ${selectedAncestor}`);
-            // A child of a selected folder is being unchecked. This is the BUGGY part.
-            const ancestorNode = getFileNodeByPath(fileTree, selectedAncestor);
-            if (!ancestorNode) return selectedFiles;
-
-            // 1. Remove the ancestor from the selection.
-            currentSelection.delete(selectedAncestor);
-            
-            // 2. Get ALL descendant files of the ancestor.
-            const allDescendantFiles = getAllDescendantPaths(ancestorNode, true);
-
-            // 3. Add all descendants back, EXCEPT for the one that was unchecked.
-            for (const file of allDescendantFiles) {
-                if (file !== path) {
-                    currentSelection.add(file);
-                }
-            }
-
-        } else {
-            // A directly selected item is being unchecked. Remove it.
-            logger.log(`[Selection] Unchecking directly selected item: ${path}`);
-            currentSelection.delete(path);
-        }
+    if (isCurrentlyChecked) {
+        // UNCHECK: Remove all selectable files under this node from the selection.
+        logger.log(`[Selection] Unchecking ${filesToToggle.length} files under ${node.name}`);
+        filesToToggle.forEach(file => currentSelection.delete(file));
     } else {
-        // --- CHECKING ---
-        logger.log(`[Selection] Checking logic initiated.`);
-        // Remove any descendants that are already selected, as the new parent selection covers them.
-        const newSelection = new Set<string>();
-        for (const p of currentSelection) {
-            if (!p.startsWith(path + '/')) {
-                newSelection.add(p);
-            } else {
-                logger.log(`[Selection] Removing descendant '${p}' because parent '${path}' is being checked.`);
-            }
-        }
-        newSelection.add(path);
-        return Array.from(newSelection);
+        // CHECK: Add all selectable files under this node to the selection.
+        logger.log(`[Selection] Checking ${filesToToggle.length} files under ${node.name}`);
+        filesToToggle.forEach(file => currentSelection.add(file));
     }
   
-  const finalSelection = Array.from(currentSelection);
-  logger.log(`[Selection] Final selection count: ${finalSelection.length}`);
-  return finalSelection;
+    return Array.from(currentSelection);
 };
+
 
 export const removePathsFromSelected = (
     pathsToRemove: string[],
@@ -21657,71 +21622,31 @@ export const removePathsFromSelected = (
     };
     fileTree.forEach(buildMap);
 
-    // 1. Get the full set of all individual files that are currently selected.
     const effectiveFileSelection = new Set<string>();
     for (const selectedPath of currentSelectedFiles) {
         const node = fileMap.get(selectedPath);
         if (node) {
-            if (node.children) { // It's a directory
-                getAllDescendantPaths(node, true).forEach(file => effectiveFileSelection.add(file));
-            } else { // It's a file
+            if (node.children) {
+                getAllSelectableFiles(node).forEach(file => effectiveFileSelection.add(file));
+            } else if (node.isSelectable) {
                 effectiveFileSelection.add(selectedPath);
             }
         }
     }
-    logger.log(`[Batch Remove] Expanded initial selection to ${effectiveFileSelection.size} effective files.`);
 
-    // 2. Remove the unwanted files from this effective set.
     for (const pathToRemove of pathsToRemove) {
         const nodeToRemove = fileMap.get(pathToRemove);
         if (nodeToRemove) {
-            if (nodeToRemove.children) { // It's a directory
-                getAllDescendantPaths(nodeToRemove, true).forEach(file => effectiveFileSelection.delete(file));
-            } else { // It's a file
+            if (nodeToRemove.children) {
+                getAllSelectableFiles(nodeToRemove).forEach(file => effectiveFileSelection.delete(file));
+            } else {
                 effectiveFileSelection.delete(pathToRemove);
             }
         }
     }
-    logger.log(`[Batch Remove] After removal, ${effectiveFileSelection.size} files remain.`);
-
-
-    // 3. Compress the remaining set of files into the most efficient list of paths (folders + files).
-    const finalPaths = new Set<string>();
-    const checkedForCompression = new Set<string>();
-
-    const compress = (node: FileNode) => {
-        if (!node.children || checkedForCompression.has(node.absolutePath)) {
-            return;
-        }
-
-        const descendantFiles = getAllDescendantPaths(node, true);
-        if (descendantFiles.length === 0) {
-            return; // Don't add empty folders
-        }
-
-        const allDescendantsSelected = descendantFiles.every(file => effectiveFileSelection.has(file));
-
-        if (allDescendantsSelected) {
-            finalPaths.add(node.absolutePath);
-            // Mark all descendants as handled by this compression
-            descendantFiles.forEach(file => checkedForCompression.add(file));
-        } else {
-            // Recurse to children if not all are selected
-            node.children.forEach(compress);
-        }
-    };
-
-    fileTree.forEach(compress);
-
-    // Add any remaining files that were not part of a compressed folder
-    for (const file of effectiveFileSelection) {
-        if (!checkedForCompression.has(file)) {
-            finalPaths.add(file);
-        }
-    }
     
-    logger.log(`[Batch Remove] Compressed final selection to ${finalPaths.size} paths.`);
-    return Array.from(finalPaths);
+    logger.log(`[Batch Remove] After removal, ${effectiveFileSelection.size} files remain.`);
+    return Array.from(effectiveFileSelection);
 };
 </file>
 
@@ -23242,7 +23167,7 @@ body {
 </file>
 
 <file path="src/client/views/context-chooser.view/view.tsx">
-// Updated on: C161 (Add logging for initialization troubleshooting)
+// Updated on: C162 (Exclude non-selectable nodes from UI counts)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -23285,7 +23210,6 @@ const App = () => {
 
     const requestFiles = (force = false) => {
         setIsLoading(true);
-        logger.log(`[C161 DEBUG] Requesting workspace files (force=${force}).`);
         clientIpc.sendToServer(ClientToServerChannel.RequestWorkspaceFiles, { force });
     };
 
@@ -23313,6 +23237,7 @@ const App = () => {
         files.forEach(buildFileMap);
 
         const addDescendantFiles = (node: FileNode) => {
+            if (!node.isSelectable) return; // C162 Fix
             if (!node.children) {
                 effectivelySelectedFiles.add(node.absolutePath);
             } else {
@@ -23326,7 +23251,9 @@ const App = () => {
                 if (node.children) {
                     addDescendantFiles(node);
                 } else {
-                    effectivelySelectedFiles.add(path);
+                    if (node.isSelectable) { // C162 Fix
+                        effectivelySelectedFiles.add(path);
+                    }
                 }
             }
         });
@@ -23359,14 +23286,11 @@ const App = () => {
 
 
     useEffect(() => {
-        logger.log("[C161 DEBUG] Initializing view and setting up message listeners.");
-        
         clientIpc.onServerMessage(ServerToClientChannel.SendWorkspaceTrustState, ({ isTrusted }) => {
             setIsWorkspaceTrusted(isTrusted);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendWorkspaceFiles, ({ files: receivedFiles }) => {
-            logger.log(`[C161 DEBUG] Received file tree from backend. Root node count: ${receivedFiles.length}`);
             setFiles(receivedFiles);
             setIsLoading(false);
         });
@@ -23558,12 +23482,16 @@ const App = () => {
         const selectedFileSet = new Set<string>();
         const selectedNodes: FileNode[] = [];
         const fileMap: Map<string, FileNode> = new Map();
+        
         const buildFileMap = (node: FileNode) => {
             fileMap.set(node.absolutePath, node);
             node.children?.forEach(buildFileMap);
         };
         files.forEach(buildFileMap);
+
         const addNodeAndDescendants = (node: FileNode) => {
+            if (!node.isSelectable) return; // C162 Fix: Exclude non-selectable nodes
+
             if (!node.children) { 
                 if (!selectedFileSet.has(node.absolutePath)) {
                     selectedFileSet.add(node.absolutePath);
@@ -23574,10 +23502,12 @@ const App = () => {
                 node.children.forEach(addNodeAndDescendants);
             }
         };
+
         checkedFiles.forEach(path => {
             const node = fileMap.get(path);
             if (node) addNodeAndDescendants(node);
         });
+
         return { totalFiles: selectedNodes.length, totalTokens, selectedFileNodes: selectedNodes };
     }, [checkedFiles, files]);
 

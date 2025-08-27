@@ -1,4 +1,4 @@
-// Updated on: C162 (Prevent auto-add for non-selectable files)
+// Updated on: C162 (Prevent auto-adding non-selectable files)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -15,7 +15,6 @@ const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
 const EXCLUSION_PATTERNS = ['.git', 'dce_cache', 'out']; 
-const AUTO_ADD_EXCLUSIONS = ['flattened_repo.md', '.vscode'];
 const NON_SELECTABLE_PATTERNS = ['/node_modules', '/.vscode', 'flattened_repo.md', 'prompt.md'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
@@ -72,9 +71,10 @@ export class FileTreeService {
         this.watcher.onDidCreate(async (uri: vscode.Uri) => {
             const normalizedPath = normalizePath(uri.fsPath);
             
-            // C162 Fix: Check if the new file is non-selectable before auto-adding.
-            const isNonSelectable = NON_SELECTABLE_PATTERNS.some(p => normalizedPath.includes(p));
+            const isNonSelectable = NON_SELECTABLE_PATTERNS.some(pattern => normalizedPath.includes(pattern));
+
             if (isNonSelectable) {
+                Services.loggerService.log(`[Auto-Add] Ignoring newly created non-selectable file: ${normalizedPath}`);
                 onFileChange(uri);
                 return;
             }
@@ -141,20 +141,26 @@ export class FileTreeService {
     }
 
     public async handleWorkspaceFilesRequest(serverIpc: ServerPostMessageManager, forceRefresh: boolean = false) {
+        Services.loggerService.log(`handleWorkspaceFilesRequest started. forceRefresh=${forceRefresh}`);
         if (!forceRefresh && this.fileTreeCache) {
+            Services.loggerService.log(`Serving file tree from cache.`);
             serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: this.fileTreeCache });
             return;
         }
 
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (!workspaceFolders?.[0]) {
+            Services.loggerService.warn(`No workspace folder found.`);
             serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: [] });
             return;
         }
         
+        Services.loggerService.log(`Building file tree from scratch.`);
         const fileTree = await this.buildTreeFromTraversal(workspaceFolders[0].uri);
         this.fileTreeCache = [fileTree];
+        Services.loggerService.log(`File tree built. Sending to client.`);
         serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: this.fileTreeCache });
+        Services.loggerService.log(`handleWorkspaceFilesRequest finished.`);
     }
 
     private getGitStatusMap(): Map<string, string> {
@@ -188,6 +194,7 @@ export class FileTreeService {
     }
 
     private async buildTreeFromTraversal(rootUri: vscode.Uri): Promise<FileNode> {
+        Services.loggerService.log(`buildTreeFromTraversal starting for root: ${rootUri.fsPath}`);
         const rootPath = rootUri.fsPath;
         const gitStatusMap = this.getGitStatusMap();
         const problemCountsMap = this.getProblemCountsMap();
@@ -202,6 +209,7 @@ export class FileTreeService {
             isSelectable: true,
         };
         this._aggregateStats(rootNode);
+        Services.loggerService.log(`buildTreeFromTraversal finished. Root node has ${rootNode.children?.length} children.`);
         return rootNode;
     }
     
@@ -211,7 +219,7 @@ export class FileTreeService {
             const entries = await vscode.workspace.fs.readDirectory(dirUri);
 
             for (const [name, type] of entries) {
-                if (EXCLUSION_PATTERNS.includes(name.toLowerCase())) continue;
+                if (name === '.git' || name === 'dce_cache' || name === 'out') continue;
 
                 const childUri = vscode.Uri.joinPath(dirUri, name);
                 const childPath = normalizePath(childUri.fsPath);
