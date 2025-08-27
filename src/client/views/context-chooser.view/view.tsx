@@ -1,4 +1,4 @@
-// Updated on: C83 (Fix onNodeDrop type)
+// Updated on: C161 (Add logging for initialization troubleshooting)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -41,7 +41,7 @@ const App = () => {
 
     const requestFiles = (force = false) => {
         setIsLoading(true);
-        logger.log(`Requesting workspace files (force=${force}).`);
+        logger.log(`[C161 DEBUG] Requesting workspace files (force=${force}).`);
         clientIpc.sendToServer(ClientToServerChannel.RequestWorkspaceFiles, { force });
     };
 
@@ -87,8 +87,6 @@ const App = () => {
             }
         });
 
-        logger.log(`[Cache Pre-warm] Found ${effectivelySelectedFiles.size} effectively selected files.`);
-
         effectivelySelectedFiles.forEach(path => {
             if (processedFilesCache.current.has(path)) {
                 return; // Already processed
@@ -98,15 +96,12 @@ const App = () => {
             
             let requested = false;
             if (extension === '.pdf') {
-                logger.log(`[Cache Pre-warm] Requesting PDF processing for: ${path}`);
                 clientIpc.sendToServer(ClientToServerChannel.RequestPdfToText, { path });
                 requested = true;
             } else if (EXCEL_EXTENSIONS.has(extension)) {
-                logger.log(`[Cache Pre-warm] Requesting Excel processing for: ${path}`);
                 clientIpc.sendToServer(ClientToServerChannel.RequestExcelToText, { path });
                 requested = true;
             } else if (WORD_EXTENSIONS.has(extension)) {
-                logger.log(`[Cache Pre-warm] Requesting Word processing for: ${path}`);
                 clientIpc.sendToServer(ClientToServerChannel.RequestWordToText, { path });
                 requested = true;
             }
@@ -120,52 +115,44 @@ const App = () => {
 
 
     useEffect(() => {
-        logger.log("Initializing view and requesting initial data.");
+        logger.log("[C161 DEBUG] Initializing view and setting up message listeners.");
         
         clientIpc.onServerMessage(ServerToClientChannel.SendWorkspaceTrustState, ({ isTrusted }) => {
-            logger.log(`Received workspace trust state: ${isTrusted}`);
             setIsWorkspaceTrusted(isTrusted);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendWorkspaceFiles, ({ files: receivedFiles }) => {
-            logger.log(`Received file tree from backend. Root node: ${receivedFiles[0]?.name}`);
+            logger.log(`[C161 DEBUG] Received file tree from backend. Root node count: ${receivedFiles.length}`);
             setFiles(receivedFiles);
             setIsLoading(false);
         });
         
         clientIpc.onServerMessage(ServerToClientChannel.ApplySelectionSet, ({ paths }) => {
-            logger.log(`[C80 CACHE FIX] Applying selection set with ${paths.length} paths.`);
             setCheckedFiles(paths);
             clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths });
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendSelectionSets, ({ sets }) => {
-            logger.log(`[WebView] Received ${Object.keys(sets).length} selection sets.`);
             setSelectionSets(sets);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SetActiveFile, ({ path }) => {
             if (suppressActiveFileReveal.current) {
-                logger.log(`[WebView] Suppressing set active file event for: ${path}`);
                 suppressActiveFileReveal.current = false;
                 return;
             }
-            logger.log(`[WebView] [WebView] Received set active file event for: ${path}`);
             setActiveFile(path);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.FocusFile, ({ path }) => {
-            logger.log(`[WebView] Received focus file event for: ${path}`);
             setActiveFile(path);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendAutoAddState, ({ enabled }) => {
-            logger.log(`[WebView] Received auto-add state: ${enabled}`);
             setIsAutoAddEnabled(enabled);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => {
-            logger.log(`[WebView] Force refresh triggered from backend. Reason: ${reason || 'unknown'}`);
             if (reason === 'fileOp') {
                 suppressActiveFileReveal.current = true;
                 setTimeout(() => { suppressActiveFileReveal.current = false; }, 2000);
@@ -175,13 +162,11 @@ const App = () => {
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.UpdateProblemCounts, ({ problemMap: newProblemMap }) => {
-            logger.log(`[WebView] Received dynamic problem counts update with ${Object.keys(newProblemMap).length} entries.`);
             setProblemMap(newProblemMap);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.UpdateNodeStats, ({ path, tokenCount, error }) => {
-            logger.log(`Received stats update for ${path}. New token count: ${tokenCount}, Error: ${error}`);
-            processedFilesCache.current.add(path); // Mark as processed so we don't request it again
+            processedFilesCache.current.add(path); 
             setFiles(currentFiles => {
                 const newFiles = JSON.parse(JSON.stringify(currentFiles));
                 let nodeUpdated = false;
@@ -208,23 +193,19 @@ const App = () => {
     }, [clientIpc]);
 
     const handleFlattenClick = () => {
-        logger.log(`Flatten Context button clicked with ${checkedFiles.length} paths.`);
         clientIpc.sendToServer(ClientToServerChannel.RequestFlattenContext, { selectedPaths: checkedFiles });
     };
 
     const handleRefresh = () => {
-        logger.log("Refresh button clicked.");
-        processedFilesCache.current.clear(); // Clear cache on manual refresh
+        processedFilesCache.current.clear();
         requestFiles(true);
     };
     
     const handleExpandAll = () => {
-        logger.log("Expand All button clicked.");
         setExpandAllTrigger(c => c + 1);
     };
 
     const handleCollapseAll = () => {
-        logger.log("Collapse All button clicked.");
         setCollapseTrigger(c => c + 1);
     };
 
@@ -263,12 +244,8 @@ const App = () => {
 
     const processDrop = (event: React.DragEvent, node: FileNode) => {
         const targetDir = node.children ? node.absolutePath : path.dirname(node.absolutePath);
-        logger.log(`[Drop] Drop detected on target: ${targetDir}`);
-        logger.log(`[Drop] Available types: ${Array.from(event.dataTransfer.types).join(', ')}`);
-
-        // Case 1: Drop from OS File Explorer
+        
         if (event.dataTransfer.files && event.dataTransfer.files.length > 0) {
-            logger.log(`[Drop] Handling as OS file drop (${event.dataTransfer.files.length} files).`);
             const filesArray = Array.from(event.dataTransfer.files);
             filesArray.forEach((file: File) => {
                 const reader = new FileReader();
@@ -276,28 +253,22 @@ const App = () => {
                     if (readEvent.target?.result instanceof ArrayBuffer) {
                         const data = new Uint8Array(readEvent.target.result);
                         const finalTargetPath = `${targetDir}/${file.name}`.replace(/\\/g, '/');
-                        logger.log(`[Drop] Sending file buffer ${file.name} to backend for creation at ${finalTargetPath}`);
                         clientIpc.sendToServer(ClientToServerChannel.RequestAddFileFromBuffer, { targetPath: finalTargetPath, data });
                     }
                 };
-                reader.onerror = () => logger.error(`[Drop] FileReader error for file: ${file.name}`);
                 reader.readAsArrayBuffer(file);
             });
             return;
         }
 
-        // Case 2: Drop from VS Code Explorer
         const uriList = event.dataTransfer.getData('text/uri-list');
         if (uriList) {
-            logger.log(`[Drop] Handling as VS Code URI drop. URI List: ${uriList}`);
-            const sourceUri = uriList.split('\n')[0].trim(); // Handle multiple URIs if needed, for now just take the first
+            const sourceUri = uriList.split('\n')[0].trim();
             if (sourceUri) {
                  clientIpc.sendToServer(ClientToServerChannel.RequestCopyFileFromUri, { sourceUri, targetDir });
             }
             return;
         }
-        
-        logger.warn('[Drop] Drop event occurred but no compatible data type was found.');
     };
 
     const handleContainerDrop = (event: React.DragEvent<HTMLDivElement>) => {
@@ -307,10 +278,7 @@ const App = () => {
         if (!isWorkspaceTrusted) return;
         
         const rootDir = files.length > 0 ? files[0].absolutePath : '';
-        if (!rootDir) {
-            logger.error("Cannot drop file, no workspace root identified.");
-            return;
-        }
+        if (!rootDir) return;
         const dummyRootNode: FileNode = { absolutePath: rootDir, name: path.basename(rootDir), children: [], tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false, isSelectable: true };
         processDrop(event, dummyRootNode);
     };
@@ -352,13 +320,13 @@ const App = () => {
         };
         files.forEach(buildFileMap);
         const addNodeAndDescendants = (node: FileNode) => {
-            if (!node.children) { // It's a file
+            if (!node.children) { 
                 if (!selectedFileSet.has(node.absolutePath)) {
                     selectedFileSet.add(node.absolutePath);
                     selectedNodes.push(node);
                     totalTokens += node.tokenCount;
                 }
-            } else { // It's a directory
+            } else { 
                 node.children.forEach(addNodeAndDescendants);
             }
         };

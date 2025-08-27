@@ -1,12 +1,12 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-27T16:41:18.795Z
+  Date Generated: 2025-08-27T17:32:16.966Z
   ---
   Total Files: 249
-  Total Lines: 31919
-  Total Characters: 1793887
-  Approx. Tokens: 448563
+  Total Lines: 31897
+  Total Characters: 1793792
+  Approx. Tokens: 448538
 -->
 
 <!-- Top 10 Files by Token Count -->
@@ -16,7 +16,7 @@
 4. src\client\views\parallel-copilot.view\view.tsx (7987 tokens)
 5. src\Artifacts\A11. DCE - Regression Case Studies.md (7032 tokens)
 6. src\Artifacts\A0. DCE Master Artifact List.md (6580 tokens)
-7. src\client\views\context-chooser.view\view.tsx (5567 tokens)
+7. src\client\views\context-chooser.view\view.tsx (4932 tokens)
 8. src\client\components\tree-view\TreeView.tsx (4508 tokens)
 9. src\backend\services\prompt.service.ts (3999 tokens)
 10. src\backend\services\file-operation.service.ts (3987 tokens)
@@ -125,7 +125,7 @@
 101. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
 102. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
 103. src\backend\services\file-operation.service.ts - Lines: 328 - Chars: 15946 - Tokens: 3987
-104. src\backend\services\file-tree.service.ts - Lines: 264 - Chars: 12994 - Tokens: 3249
+104. src\backend\services\file-tree.service.ts - Lines: 277 - Chars: 14176 - Tokens: 3544
 105. src\backend\services\flattener.service.ts - Lines: 215 - Chars: 11613 - Tokens: 2904
 106. src\backend\services\highlighting.service.ts - Lines: 58 - Chars: 2920 - Tokens: 730
 107. src\backend\services\history.service.ts - Lines: 235 - Chars: 10055 - Tokens: 2514
@@ -146,9 +146,9 @@
 122. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
 123. src\client\utils\response-parser.ts - Lines: 79 - Chars: 2994 - Tokens: 749
 124. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-125. src\client\views\context-chooser.view\on-message.ts - Lines: 80 - Chars: 3797 - Tokens: 950
+125. src\client\views\context-chooser.view\on-message.ts - Lines: 77 - Chars: 5057 - Tokens: 1265
 126. src\client\views\context-chooser.view\view.scss - Lines: 596 - Chars: 14629 - Tokens: 3658
-127. src\client\views\context-chooser.view\view.tsx - Lines: 435 - Chars: 22265 - Tokens: 5567
+127. src\client\views\context-chooser.view\view.tsx - Lines: 403 - Chars: 19728 - Tokens: 4932
 128. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
 129. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 130. src\client\views\parallel-copilot.view\on-message.ts - Lines: 72 - Chars: 3521 - Tokens: 881
@@ -19536,7 +19536,7 @@ export class FileOperationService {
 </file>
 
 <file path="src/backend/services/file-tree.service.ts">
-// Updated on: C160 (Add non-selectable patterns)
+// Updated on: C161 (Add extensive logging for initialization troubleshooting)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -19657,8 +19657,9 @@ export class FileTreeService {
     }
 
     private async getFileStats(filePath: string): Promise<Omit<FileNode, 'name' | 'absolutePath' | 'children'>> {
+        const normalizedFilePath = normalizePath(filePath);
+        const isSelectable = !NON_SELECTABLE_PATTERNS.some(p => normalizedFilePath.includes(p));
         const extension = path.extname(filePath).toLowerCase();
-        const isSelectable = !NON_SELECTABLE_PATTERNS.some(p => filePath.includes(p));
 
         try {
             const stats = await fs.stat(filePath);
@@ -19684,20 +19685,26 @@ export class FileTreeService {
     }
 
     public async handleWorkspaceFilesRequest(serverIpc: ServerPostMessageManager, forceRefresh: boolean = false) {
+        Services.loggerService.log(`[C161 DEBUG] handleWorkspaceFilesRequest started. forceRefresh=${forceRefresh}`);
         if (!forceRefresh && this.fileTreeCache) {
+            Services.loggerService.log(`[C161 DEBUG] Serving file tree from cache.`);
             serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: this.fileTreeCache });
             return;
         }
 
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (!workspaceFolders?.[0]) {
+            Services.loggerService.warn(`[C161 DEBUG] No workspace folder found.`);
             serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: [] });
             return;
         }
         
+        Services.loggerService.log(`[C161 DEBUG] Building file tree from scratch.`);
         const fileTree = await this.buildTreeFromTraversal(workspaceFolders[0].uri);
         this.fileTreeCache = [fileTree];
+        Services.loggerService.log(`[C161 DEBUG] File tree built. Sending to client.`);
         serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: this.fileTreeCache });
+        Services.loggerService.log(`[C161 DEBUG] handleWorkspaceFilesRequest finished.`);
     }
 
     private getGitStatusMap(): Map<string, string> {
@@ -19731,6 +19738,7 @@ export class FileTreeService {
     }
 
     private async buildTreeFromTraversal(rootUri: vscode.Uri): Promise<FileNode> {
+        Services.loggerService.log(`[C161 DEBUG] buildTreeFromTraversal starting for root: ${rootUri.fsPath}`);
         const rootPath = rootUri.fsPath;
         const gitStatusMap = this.getGitStatusMap();
         const problemCountsMap = this.getProblemCountsMap();
@@ -19745,18 +19753,23 @@ export class FileTreeService {
             isSelectable: true,
         };
         this._aggregateStats(rootNode);
+        Services.loggerService.log(`[C161 DEBUG] buildTreeFromTraversal finished. Root node has ${rootNode.children?.length} children.`);
         return rootNode;
     }
     
     private async _traverseDirectory(dirUri: vscode.Uri, gitStatusMap: Map<string, string>, problemCountsMap: ProblemCountsMap): Promise<FileNode[]> {
         const children: FileNode[] = [];
+        Services.loggerService.log(`[C161 DEBUG] > Traversing directory: ${dirUri.fsPath}`);
         try {
-            for (const [name, type] of await vscode.workspace.fs.readDirectory(dirUri)) {
+            const entries = await vscode.workspace.fs.readDirectory(dirUri);
+            Services.loggerService.log(`[C161 DEBUG] > Found ${entries.length} entries in ${path.basename(dirUri.fsPath)}`);
+
+            for (const [name, type] of entries) {
                 if (name === '.git' || name === 'dce_cache' || name === 'out') continue;
 
                 const childUri = vscode.Uri.joinPath(dirUri, name);
                 const childPath = normalizePath(childUri.fsPath);
-                const isSelectable = !NON_SELECTABLE_PATTERNS.some(p => childPath.endsWith(p));
+                const isSelectable = !NON_SELECTABLE_PATTERNS.some(p => childPath.includes(p));
 
                 if (type === vscode.FileType.Directory) {
                     const isSpecialDir = name.toLowerCase() === 'node_modules';
@@ -19769,7 +19782,7 @@ export class FileTreeService {
                 }
             }
         } catch (error: any) {
-            Services.loggerService.error(`Error traversing directory ${dirUri.fsPath}: ${error.message}`);
+            Services.loggerService.error(`[C161 DEBUG] Error traversing directory ${dirUri.fsPath}: ${error.message}`);
         }
         return children.sort((a, b) => (!!a.children === !!b.children) ? a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' }) : (!!a.children ? -1 : 1));
     }
@@ -22550,85 +22563,82 @@ export const viewConfig = {
 </file>
 
 <file path="src/client/views/context-chooser.view/on-message.ts">
-// Updated on: C160 (Add import/export history handlers)
+// Updated on: C161 (Add logging for initialization troubleshooting)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
+import * as vscode from 'vscode';
 
 export function onMessage(serverIpc: ServerPostMessageManager) {
-    const { loggerService, promptService, fileOperationService, highlightingService, historyService } = Services;
-    loggerService.log("Parallel Co-Pilot view message handler initialized.");
+    const { 
+        fileTreeService, 
+        flattenerService, 
+        selectionService, 
+        loggerService, 
+        actionService,
+        contentExtractionService,
+        fileOperationService
+    } = Services;
 
-    serverIpc.onClientMessage(ClientToServerChannel.RequestCreatePromptFile, (data) => {
-        promptService.generatePromptFile(data.cycleTitle, data.currentCycle);
+    loggerService.log("Context Chooser view message handler initialized.");
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestInitialData, () => {
+        loggerService.log("[on-message] Received RequestInitialData. Forwarding to services.");
+        fileTreeService.handleWorkspaceFilesRequest(serverIpc);
+        serverIpc.sendToClient(ServerToClientChannel.SendSelectionSets, { sets: selectionService.getSelectionSets() });
+        serverIpc.sendToClient(ServerToClientChannel.SendAutoAddState, { enabled: selectionService.getAutoAddState() });
     });
 
-    serverIpc.onClientMessage(ClientToServerChannel.RequestCreateCycle0Prompt, (data) => {
-        promptService.generateCycle0Prompt(data.projectScope, serverIpc);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestFileExistence, (data) => {
-        fileOperationService.handleFileExistenceRequest(data.paths, serverIpc);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestSyntaxHighlight, (data) => {
-        highlightingService.handleSyntaxHighlightRequest(data.code, data.lang, data.id, serverIpc);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestLatestCycleData, async () => {
-        const historyFile = await historyService.getFullHistory();
-        const latestCycle = await historyService.getLatestCycle();
-        serverIpc.sendToClient(ServerToClientChannel.SendLatestCycleData, { cycleData: latestCycle, projectScope: historyFile.projectScope });
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestCycleData, async (data) => {
-        const historyFile = await historyService.getFullHistory();
-        const cycleData = await historyService.getCycleData(data.cycleId);
-        serverIpc.sendToClient(ServerToClientChannel.SendCycleData, { cycleData, projectScope: historyFile.projectScope });
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.SaveCycleData, (data) => {
-        historyService.saveCycleData(data.cycleData);
+    serverIpc.onClientMessage(ClientToServerChannel.RequestWorkspaceFiles, (data) => {
+        loggerService.log(`[C161 DEBUG] IPC received RequestWorkspaceFiles. force=${data.force}`);
+        fileTreeService.handleWorkspaceFilesRequest(serverIpc, data.force);
     });
     
-    serverIpc.onClientMessage(ClientToServerChannel.RequestFileContent, (data) => {
-        fileOperationService.handleFileContentRequest(data.path, serverIpc);
+    serverIpc.onClientMessage(ClientToServerChannel.RequestFlattenContext, (data) => {
+        flattenerService.flatten(data.selectedPaths);
     });
 
-    serverIpc.onClientMessage(ClientToServerChannel.RequestDeleteCycle, (data) => {
-        historyService.deleteCycle(data.cycleId);
+    serverIpc.onClientMessage(ClientToServerChannel.LogMessage, (data) => {
+        loggerService[data.level](`[WebView] ${data.message}`);
+    });
+    
+    serverIpc.onClientMessage(ClientToServerChannel.SaveCurrentSelection, (data) => {
+        selectionService.saveCurrentSelection(data.paths);
     });
 
-    serverIpc.onClientMessage(ClientToServerChannel.RequestResetHistory, () => {
-        historyService.resetHistory();
+    serverIpc.onClientMessage(ClientToServerChannel.RequestLastSelection, async () => {
+        const paths = await selectionService.getLastSelection();
+        serverIpc.sendToClient(ServerToClientChannel.ApplySelectionSet, { paths });
     });
 
-    serverIpc.onClientMessage(ClientToServerChannel.RequestBatchFileWrite, async (data) => {
-        const writtenPaths = await fileOperationService.handleBatchFileWrite(data.files);
-        if (writtenPaths.length > 0) {
-            serverIpc.sendToClient(ServerToClientChannel.FilesWritten, { paths: writtenPaths });
-        }
+    serverIpc.onClientMessage(ClientToServerChannel.VSCodeCommand, (data) => {
+        vscode.commands.executeCommand(data.command, ...(data.args || []));
     });
 
-    serverIpc.onClientMessage(ClientToServerChannel.RequestLogState, (data) => {
-        promptService.generateStateLog(data.currentState);
+    serverIpc.onClientMessage(ClientToServerChannel.SaveAutoAddState, (data) => {
+        selectionService.saveAutoAddState(data.enabled);
     });
 
-    serverIpc.onClientMessage(ClientToServerChannel.RequestFileComparison, (data) => {
-        fileOperationService.handleFileComparisonRequest(data.filePath, data.modifiedContent, serverIpc);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestCopyTextToClipboard, (data) => {
-        fileOperationService.handleCopyTextToClipboardRequest(data.text);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestExportHistory, () => {
-        historyService.handleExportHistory();
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestImportHistory, () => {
-        historyService.handleImportHistory();
-    });
+    // File Operations
+    serverIpc.onClientMessage(ClientToServerChannel.RequestNewFile, (data) => fileOperationService.handleNewFileRequest(data.parentDirectory));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestNewFolder, (data) => fileOperationService.handleNewFolderRequest(data.parentDirectory));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestFileRename, (data) => fileOperationService.handleFileRenameRequest(data.oldPath, data.newName));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestFileDelete, (data) => fileOperationService.handleFileDeleteRequest(data.path));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestBatchFileDelete, (data) => fileOperationService.handleBatchFileDeleteRequest(data.paths));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestRevealInExplorer, (data) => fileOperationService.handleRevealInExplorerRequest(data.path));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestCopyPath, (data) => fileOperationService.handleCopyPathRequest(data.path, data.relative));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestOpenFile, (data) => fileOperationService.handleOpenFileRequest(data.path));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestMoveFile, (data) => fileOperationService.handleMoveFileRequest(data.oldPath, data.newPath));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestUndo, () => actionService.undo());
+    serverIpc.onClientMessage(ClientToServerChannel.RequestRedo, () => actionService.redo());
+    serverIpc.onClientMessage(ClientToServerChannel.RequestAddFileFromBuffer, (data) => fileOperationService.handleAddFileFromBuffer(data.targetPath, data.data));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestCopyFile, (data) => fileOperationService.handleCopyFileRequest(data.sourcePath, data.destinationDir));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestCopyFileFromUri, (data) => fileOperationService.handleCopyFileFromUri(data.sourceUri, data.targetDir));
+    
+    // Content Extraction
+    serverIpc.onClientMessage(ClientToServerChannel.RequestPdfToText, (data) => contentExtractionService.handlePdfToTextRequest(data.path, serverIpc));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestExcelToText, (data) => contentExtractionService.handleExcelToTextRequest(data.path, serverIpc));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestWordToText, (data) => contentExtractionService.handleWordToTextRequest(data.path, serverIpc));
 }
 </file>
 
@@ -23232,7 +23242,7 @@ body {
 </file>
 
 <file path="src/client/views/context-chooser.view/view.tsx">
-// Updated on: C83 (Fix onNodeDrop type)
+// Updated on: C161 (Add logging for initialization troubleshooting)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -23275,7 +23285,7 @@ const App = () => {
 
     const requestFiles = (force = false) => {
         setIsLoading(true);
-        logger.log(`Requesting workspace files (force=${force}).`);
+        logger.log(`[C161 DEBUG] Requesting workspace files (force=${force}).`);
         clientIpc.sendToServer(ClientToServerChannel.RequestWorkspaceFiles, { force });
     };
 
@@ -23321,8 +23331,6 @@ const App = () => {
             }
         });
 
-        logger.log(`[Cache Pre-warm] Found ${effectivelySelectedFiles.size} effectively selected files.`);
-
         effectivelySelectedFiles.forEach(path => {
             if (processedFilesCache.current.has(path)) {
                 return; // Already processed
@@ -23332,15 +23340,12 @@ const App = () => {
             
             let requested = false;
             if (extension === '.pdf') {
-                logger.log(`[Cache Pre-warm] Requesting PDF processing for: ${path}`);
                 clientIpc.sendToServer(ClientToServerChannel.RequestPdfToText, { path });
                 requested = true;
             } else if (EXCEL_EXTENSIONS.has(extension)) {
-                logger.log(`[Cache Pre-warm] Requesting Excel processing for: ${path}`);
                 clientIpc.sendToServer(ClientToServerChannel.RequestExcelToText, { path });
                 requested = true;
             } else if (WORD_EXTENSIONS.has(extension)) {
-                logger.log(`[Cache Pre-warm] Requesting Word processing for: ${path}`);
                 clientIpc.sendToServer(ClientToServerChannel.RequestWordToText, { path });
                 requested = true;
             }
@@ -23354,52 +23359,44 @@ const App = () => {
 
 
     useEffect(() => {
-        logger.log("Initializing view and requesting initial data.");
+        logger.log("[C161 DEBUG] Initializing view and setting up message listeners.");
         
         clientIpc.onServerMessage(ServerToClientChannel.SendWorkspaceTrustState, ({ isTrusted }) => {
-            logger.log(`Received workspace trust state: ${isTrusted}`);
             setIsWorkspaceTrusted(isTrusted);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendWorkspaceFiles, ({ files: receivedFiles }) => {
-            logger.log(`Received file tree from backend. Root node: ${receivedFiles[0]?.name}`);
+            logger.log(`[C161 DEBUG] Received file tree from backend. Root node count: ${receivedFiles.length}`);
             setFiles(receivedFiles);
             setIsLoading(false);
         });
         
         clientIpc.onServerMessage(ServerToClientChannel.ApplySelectionSet, ({ paths }) => {
-            logger.log(`[C80 CACHE FIX] Applying selection set with ${paths.length} paths.`);
             setCheckedFiles(paths);
             clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths });
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendSelectionSets, ({ sets }) => {
-            logger.log(`[WebView] Received ${Object.keys(sets).length} selection sets.`);
             setSelectionSets(sets);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SetActiveFile, ({ path }) => {
             if (suppressActiveFileReveal.current) {
-                logger.log(`[WebView] Suppressing set active file event for: ${path}`);
                 suppressActiveFileReveal.current = false;
                 return;
             }
-            logger.log(`[WebView] [WebView] Received set active file event for: ${path}`);
             setActiveFile(path);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.FocusFile, ({ path }) => {
-            logger.log(`[WebView] Received focus file event for: ${path}`);
             setActiveFile(path);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendAutoAddState, ({ enabled }) => {
-            logger.log(`[WebView] Received auto-add state: ${enabled}`);
             setIsAutoAddEnabled(enabled);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => {
-            logger.log(`[WebView] Force refresh triggered from backend. Reason: ${reason || 'unknown'}`);
             if (reason === 'fileOp') {
                 suppressActiveFileReveal.current = true;
                 setTimeout(() => { suppressActiveFileReveal.current = false; }, 2000);
@@ -23409,13 +23406,11 @@ const App = () => {
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.UpdateProblemCounts, ({ problemMap: newProblemMap }) => {
-            logger.log(`[WebView] Received dynamic problem counts update with ${Object.keys(newProblemMap).length} entries.`);
             setProblemMap(newProblemMap);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.UpdateNodeStats, ({ path, tokenCount, error }) => {
-            logger.log(`Received stats update for ${path}. New token count: ${tokenCount}, Error: ${error}`);
-            processedFilesCache.current.add(path); // Mark as processed so we don't request it again
+            processedFilesCache.current.add(path); 
             setFiles(currentFiles => {
                 const newFiles = JSON.parse(JSON.stringify(currentFiles));
                 let nodeUpdated = false;
@@ -23442,23 +23437,19 @@ const App = () => {
     }, [clientIpc]);
 
     const handleFlattenClick = () => {
-        logger.log(`Flatten Context button clicked with ${checkedFiles.length} paths.`);
         clientIpc.sendToServer(ClientToServerChannel.RequestFlattenContext, { selectedPaths: checkedFiles });
     };
 
     const handleRefresh = () => {
-        logger.log("Refresh button clicked.");
-        processedFilesCache.current.clear(); // Clear cache on manual refresh
+        processedFilesCache.current.clear();
         requestFiles(true);
     };
     
     const handleExpandAll = () => {
-        logger.log("Expand All button clicked.");
         setExpandAllTrigger(c => c + 1);
     };
 
     const handleCollapseAll = () => {
-        logger.log("Collapse All button clicked.");
         setCollapseTrigger(c => c + 1);
     };
 
@@ -23497,12 +23488,8 @@ const App = () => {
 
     const processDrop = (event: React.DragEvent, node: FileNode) => {
         const targetDir = node.children ? node.absolutePath : path.dirname(node.absolutePath);
-        logger.log(`[Drop] Drop detected on target: ${targetDir}`);
-        logger.log(`[Drop] Available types: ${Array.from(event.dataTransfer.types).join(', ')}`);
-
-        // Case 1: Drop from OS File Explorer
+        
         if (event.dataTransfer.files && event.dataTransfer.files.length > 0) {
-            logger.log(`[Drop] Handling as OS file drop (${event.dataTransfer.files.length} files).`);
             const filesArray = Array.from(event.dataTransfer.files);
             filesArray.forEach((file: File) => {
                 const reader = new FileReader();
@@ -23510,28 +23497,22 @@ const App = () => {
                     if (readEvent.target?.result instanceof ArrayBuffer) {
                         const data = new Uint8Array(readEvent.target.result);
                         const finalTargetPath = `${targetDir}/${file.name}`.replace(/\\/g, '/');
-                        logger.log(`[Drop] Sending file buffer ${file.name} to backend for creation at ${finalTargetPath}`);
                         clientIpc.sendToServer(ClientToServerChannel.RequestAddFileFromBuffer, { targetPath: finalTargetPath, data });
                     }
                 };
-                reader.onerror = () => logger.error(`[Drop] FileReader error for file: ${file.name}`);
                 reader.readAsArrayBuffer(file);
             });
             return;
         }
 
-        // Case 2: Drop from VS Code Explorer
         const uriList = event.dataTransfer.getData('text/uri-list');
         if (uriList) {
-            logger.log(`[Drop] Handling as VS Code URI drop. URI List: ${uriList}`);
-            const sourceUri = uriList.split('\n')[0].trim(); // Handle multiple URIs if needed, for now just take the first
+            const sourceUri = uriList.split('\n')[0].trim();
             if (sourceUri) {
                  clientIpc.sendToServer(ClientToServerChannel.RequestCopyFileFromUri, { sourceUri, targetDir });
             }
             return;
         }
-        
-        logger.warn('[Drop] Drop event occurred but no compatible data type was found.');
     };
 
     const handleContainerDrop = (event: React.DragEvent<HTMLDivElement>) => {
@@ -23541,10 +23522,7 @@ const App = () => {
         if (!isWorkspaceTrusted) return;
         
         const rootDir = files.length > 0 ? files[0].absolutePath : '';
-        if (!rootDir) {
-            logger.error("Cannot drop file, no workspace root identified.");
-            return;
-        }
+        if (!rootDir) return;
         const dummyRootNode: FileNode = { absolutePath: rootDir, name: path.basename(rootDir), children: [], tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false, isSelectable: true };
         processDrop(event, dummyRootNode);
     };
@@ -23586,13 +23564,13 @@ const App = () => {
         };
         files.forEach(buildFileMap);
         const addNodeAndDescendants = (node: FileNode) => {
-            if (!node.children) { // It's a file
+            if (!node.children) { 
                 if (!selectedFileSet.has(node.absolutePath)) {
                     selectedFileSet.add(node.absolutePath);
                     selectedNodes.push(node);
                     totalTokens += node.tokenCount;
                 }
-            } else { // It's a directory
+            } else { 
                 node.children.forEach(addNodeAndDescendants);
             }
         };
