@@ -1,4 +1,4 @@
-// Updated on: C153 (Always exclude node_modules)
+// Updated on: C160 (Add de-duplication to expandDirectories)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -75,8 +75,9 @@ export class FlattenerService {
     }
 
     private async expandDirectories(paths: string[]): Promise<string[]> {
+        const uniquePaths = [...new Set(paths)]; // C160 Fix: De-duplicate initial paths
         const allFiles: string[] = [];
-        for (const p of paths) {
+        for (const p of uniquePaths) {
             try {
                 const stats = await fs.stat(p);
                 if (stats.isDirectory()) {
@@ -98,7 +99,7 @@ export class FlattenerService {
             for (const entry of entries) {
                 const fullPath = path.join(dirPath, entry.name);
                 if (entry.isDirectory()) {
-                    if (entry.name.toLowerCase() === 'node_modules') continue;
+                    if (entry.name.toLowerCase() === 'node_modules' || entry.name.toLowerCase() === '.vscode') continue;
                     files = files.concat(await this.getAllFilesRecursive(fullPath));
                 } else {
                     files.push(fullPath);

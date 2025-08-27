@@ -162,7 +162,6 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
                     onBlur={handleRenameSubmit}
                     onKeyDown={(e) => {
                         if (e.key === 'Enter') handleRenameSubmit();
-                        // Stop propagation for text editing shortcuts
                         if ((e.ctrlKey || e.metaKey) && ['c', 'v', 'x'].includes(e.key.toLowerCase())) {
                             e.stopPropagation();
                         }
@@ -220,7 +219,7 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
                     checked={isChecked}
                     indeterminate={!isDirectlyChecked && !hasCheckedAncestor && checkedFiles.some(p => p.startsWith(fileNode.absolutePath))}
                     onChange={(_, e) => handleFileCheckboxChange(e, fileNode.absolutePath)}
-                    disabled={hasError}
+                    disabled={hasError || !fileNode.isSelectable}
                 />
                 <span className="file-icon">{isDirectory ? (isExpanded ? <VscFolderOpened /> : <VscFolder />) : getFileIcon(fileNode.name)}</span>
                 <span className="file-name">{fileNode.name}</span>

@@ -1,4 +1,4 @@
-// Updated on: C159 (Implement queue for auto-add to fix race condition)
+// Updated on: C160 (Add non-selectable patterns)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -14,8 +14,9 @@ import { ProblemCountsMap } from "@/common/ipc/channels.type";
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
-const EXCLUSION_PATTERNS = ['.git', 'dce_cache', '.vscode', 'out']; 
+const EXCLUSION_PATTERNS = ['.git', 'dce_cache', 'out']; 
 const AUTO_ADD_EXCLUSIONS = ['flattened_repo.md', '.vscode'];
+const NON_SELECTABLE_PATTERNS = ['/node_modules', '/.vscode', 'flattened_repo.md', 'prompt.md'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
@@ -119,6 +120,8 @@ export class FileTreeService {
 
     private async getFileStats(filePath: string): Promise<Omit<FileNode, 'name' | 'absolutePath' | 'children'>> {
         const extension = path.extname(filePath).toLowerCase();
+        const isSelectable = !NON_SELECTABLE_PATTERNS.some(p => filePath.includes(p));
+
         try {
             const stats = await fs.stat(filePath);
             const isImage = IMAGE_EXTENSIONS.has(extension);
@@ -126,17 +129,19 @@ export class FileTreeService {
             const isExcel = EXCEL_EXTENSIONS.has(extension);
             const isWordDoc = WORD_EXTENSIONS.has(extension);
             
-            if (isImage) return { tokenCount: 0, sizeInBytes: stats.size, isImage, extension, isPdf, isExcel, isWordDoc, fileCount: 1 };
-            if (isPdf) return { tokenCount: Services.contentExtractionService.getVirtualPdfContent(filePath)?.tokenCount || 0, sizeInBytes: stats.size, isImage, extension, isPdf, isExcel, isWordDoc, fileCount: 1 };
-            if (isExcel) return { tokenCount: Services.contentExtractionService.getVirtualExcelContent(filePath)?.tokenCount || 0, sizeInBytes: stats.size, isImage, extension, isPdf, isExcel, isWordDoc, fileCount: 1 };
-            if (isWordDoc) return { tokenCount: Services.contentExtractionService.getVirtualWordContent(filePath)?.tokenCount || 0, sizeInBytes: stats.size, isImage, extension, isPdf, isExcel, isWordDoc, fileCount: 1 };
+            const baseStats = { sizeInBytes: stats.size, isImage, extension, isPdf, isExcel, isWordDoc, fileCount: 1, isSelectable };
 
-            if (stats.size > 5_000_000) return { tokenCount: 0, sizeInBytes: stats.size, isImage, extension, isPdf, isExcel, isWordDoc, fileCount: 1 };
+            if (isImage) return { ...baseStats, tokenCount: 0 };
+            if (isPdf) return { ...baseStats, tokenCount: Services.contentExtractionService.getVirtualPdfContent(filePath)?.tokenCount || 0 };
+            if (isExcel) return { ...baseStats, tokenCount: Services.contentExtractionService.getVirtualExcelContent(filePath)?.tokenCount || 0 };
+            if (isWordDoc) return { ...baseStats, tokenCount: Services.contentExtractionService.getVirtualWordContent(filePath)?.tokenCount || 0 };
+
+            if (stats.size > 5_000_000) return { ...baseStats, tokenCount: 0 };
             
             const content = await fs.readFile(filePath, 'utf-8');
-            return { tokenCount: Math.ceil(content.length / 4), sizeInBytes: stats.size, isImage, extension, isPdf, isExcel, isWordDoc, fileCount: 1 };
+            return { ...baseStats, tokenCount: Math.ceil(content.length / 4) };
         } catch (error: any) {
-            return { tokenCount: 0, sizeInBytes: 0, isImage: false, extension, isPdf: false, isExcel: false, isWordDoc: false, fileCount: 1, error: error.message };
+            return { tokenCount: 0, sizeInBytes: 0, isImage: false, extension, isPdf: false, isExcel: false, isWordDoc: false, fileCount: 1, error: error.message, isSelectable };
         }
     }
 
@@ -198,7 +203,8 @@ export class FileTreeService {
             children: await this._traverseDirectory(rootUri, gitStatusMap, problemCountsMap),
             tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false,
             gitStatus: gitStatusMap.get(normalizePath(rootPath)),
-            problemCounts: problemCountsMap[normalizePath(rootPath)]
+            problemCounts: problemCountsMap[normalizePath(rootPath)],
+            isSelectable: true,
         };
         this._aggregateStats(rootNode);
         return rootNode;
@@ -212,15 +218,16 @@ export class FileTreeService {
 
                 const childUri = vscode.Uri.joinPath(dirUri, name);
                 const childPath = normalizePath(childUri.fsPath);
+                const isSelectable = !NON_SELECTABLE_PATTERNS.some(p => childPath.endsWith(p));
 
                 if (type === vscode.FileType.Directory) {
-                    const isSpecialDir = name.toLowerCase() === 'node_modules' || name.toLowerCase() === '.vscode';
-                    const dirNode: FileNode = { name, absolutePath: childPath, children: isSpecialDir ? [] : await this._traverseDirectory(childUri, gitStatusMap, problemCountsMap), tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false, gitStatus: gitStatusMap.get(childPath), problemCounts: problemCountsMap[childPath] };
+                    const isSpecialDir = name.toLowerCase() === 'node_modules';
+                    const dirNode: FileNode = { name, absolutePath: childPath, children: isSpecialDir ? [] : await this._traverseDirectory(childUri, gitStatusMap, problemCountsMap), tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false, gitStatus: gitStatusMap.get(childPath), problemCounts: problemCountsMap[childPath], isSelectable };
                     this._aggregateStats(dirNode);
                     children.push(dirNode);
                 } else if (type === vscode.FileType.File) {
                     const stats = await this.getFileStats(childPath);
-                    children.push({ name, absolutePath: childPath, ...stats, gitStatus: gitStatusMap.get(childPath), problemCounts: problemCountsMap[childPath] });
+                    children.push({ name, absolutePath: childPath, ...stats, gitStatus: gitStatusMap.get(childPath), problemCounts: problemCountsMap[childPath], isSelectable });
                 }
             }
         } catch (error: any) {

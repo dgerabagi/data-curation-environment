@@ -5,6 +5,7 @@ import { PcppCycle, PcppHistoryFile } from '@/common/types/pcpp.types';
 import { serverIPCs } from '@/client/views';
 import { VIEW_TYPES } from '@/common/view-types';
 import { ServerToClientChannel } from '@/common/ipc/channels.enum';
+import { promises as fs } from 'fs';
 
 export class HistoryService {
     private historyFilePath: string | undefined;
@@ -52,7 +53,6 @@ export class HistoryService {
         let isFreshEnvironment = true;
 
         if (this.workspaceRoot) {
-            // C159: Check for the existence of the artifacts README, which signals an initialized project.
             try {
                 await vscode.workspace.fs.stat(vscode.Uri.file(path.join(this.workspaceRoot, 'src/Artifacts/README.md')));
                 isFreshEnvironment = false;
@@ -124,7 +124,6 @@ export class HistoryService {
 
     public async saveCycleData(cycleData: PcppCycle): Promise<void> {
         if (cycleData.cycleId === 0) {
-             // If we're "saving" cycle 0, it's just the project scope that changes.
             await this.saveProjectScope(cycleData.cycleContext);
             return;
         }
@@ -177,6 +176,60 @@ export class HistoryService {
             } catch (error) {
                 Services.loggerService.error(`Failed to delete dce_history.json: ${error}`);
             }
+        }
+    }
+
+    public async handleExportHistory() {
+        Services.loggerService.log("Exporting cycle history.");
+        if (!this.historyFilePath) {
+            vscode.window.showErrorMessage("History file path not found.");
+            return;
+        }
+        try {
+            const historyContent = await this._readHistoryFile();
+            const saveUri = await vscode.window.showSaveDialog({
+                defaultUri: vscode.Uri.file(path.join(this.workspaceRoot || '', 'dce_history_export.json')),
+                filters: { 'JSON': ['json'] }
+            });
+            if (saveUri) {
+                await fs.writeFile(saveUri.fsPath, JSON.stringify(historyContent, null, 2), 'utf-8');
+                vscode.window.showInformationMessage("Cycle history exported successfully.");
+            }
+        } catch (error: any) {
+            vscode.window.showErrorMessage(`Failed to export history: ${error.message}`);
+            Services.loggerService.error(`Failed to export history: ${error.message}`);
+        }
+    }
+
+    public async handleImportHistory() {
+        Services.loggerService.log("Importing cycle history.");
+        if (!this.historyFilePath) {
+            vscode.window.showErrorMessage("History file path not found.");
+            return;
+        }
+        try {
+            const openUri = await vscode.window.showOpenDialog({
+                canSelectMany: false,
+                filters: { 'JSON': ['json'] }
+            });
+            if (openUri && openUri[0]) {
+                const content = await fs.readFile(openUri[0].fsPath, 'utf-8');
+                const historyData = JSON.parse(content);
+                // Basic validation
+                if (historyData.version && Array.isArray(historyData.cycles)) {
+                    await this._writeHistoryFile(historyData);
+                    vscode.window.showInformationMessage("Cycle history imported successfully. Reloading...");
+                    const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
+                    if (serverIpc) {
+                        serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, { reason: 'history' });
+                    }
+                } else {
+                    throw new Error("Invalid history file format.");
+                }
+            }
+        } catch (error: any) {
+            vscode.window.showErrorMessage(`Failed to import history: ${error.message}`);
+            Services.loggerService.error(`Failed to import history: ${error.message}`);
         }
     }
 }

@@ -1,4 +1,4 @@
-/* Updated on: C159 (Add active state for sort button, make resizer static) */
+/* Updated on: C160 (Remove starry-night line highlight) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -443,6 +443,7 @@ body {
     
     code > span {
         line-height: 1.5;
+        background-color: transparent !important; // C160 Fix: Remove line highlight
     }
 }
 

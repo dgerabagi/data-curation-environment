@@ -1,22 +1,22 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-27T16:06:02.026Z
+  Date Generated: 2025-08-27T16:41:18.795Z
   ---
   Total Files: 249
-  Total Lines: 31749
-  Total Characters: 1786282
-  Approx. Tokens: 446661
+  Total Lines: 31919
+  Total Characters: 1793887
+  Approx. Tokens: 448563
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (193494 tokens)
 2. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10834 tokens)
 3. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
-4. src\client\views\parallel-copilot.view\view.tsx (7933 tokens)
+4. src\client\views\parallel-copilot.view\view.tsx (7987 tokens)
 5. src\Artifacts\A11. DCE - Regression Case Studies.md (7032 tokens)
-6. src\Artifacts\A0. DCE Master Artifact List.md (6519 tokens)
-7. src\client\views\context-chooser.view\view.tsx (5562 tokens)
+6. src\Artifacts\A0. DCE Master Artifact List.md (6580 tokens)
+7. src\client\views\context-chooser.view\view.tsx (5567 tokens)
 8. src\client\components\tree-view\TreeView.tsx (4508 tokens)
 9. src\backend\services\prompt.service.ts (3999 tokens)
 10. src\backend\services\file-operation.service.ts (3987 tokens)
@@ -30,7 +30,7 @@
 6. package.json - Lines: 139 - Chars: 4583 - Tokens: 1146
 7. public\copilot.svg - Lines: 5 - Chars: 445 - Tokens: 112
 8. public\spiral.svg - Lines: 8 - Chars: 459 - Tokens: 115
-9. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 376 - Chars: 26075 - Tokens: 6519
+9. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 380 - Chars: 26319 - Tokens: 6580
 10. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 11. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
 12. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 266 - Chars: 28128 - Tokens: 7032
@@ -95,7 +95,7 @@
 71. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 44 - Chars: 3786 - Tokens: 947
 72. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md - Lines: 1278 - Chars: 43334 - Tokens: 10834
 73. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 39 - Chars: 4202 - Tokens: 1051
-74. src\Artifacts\A61. DCE - Phase 2 - Cycle History Management Plan.md - Lines: 40 - Chars: 2939 - Tokens: 735
+74. src\Artifacts\A61. DCE - Phase 2 - Cycle History Management Plan.md - Lines: 42 - Chars: 3137 - Tokens: 785
 75. src\Artifacts\A62. DCE - Cycle 157 - Task Tracker.md - Lines: 31 - Chars: 2710 - Tokens: 678
 76. src\Artifacts\A63. DCE - Cycle 158 - Task Tracker.md - Lines: 23 - Chars: 1760 - Tokens: 440
 77. src\Artifacts\A64. DCE - Cycle 159 - Task Tracker.md - Lines: 22 - Chars: 1550 - Tokens: 388
@@ -103,15 +103,15 @@
 79. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
 80. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 33 - Chars: 2764 - Tokens: 691
 81. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
-82. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 71 - Chars: 3094 - Tokens: 774
+82. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
 83. src\Artifacts\T1. Template - Master Artifact List.md - Lines: 36 - Chars: 1716 - Tokens: 429
 84. src\Artifacts\T10. Template - Feature Plan Example.md - Lines: 32 - Chars: 2692 - Tokens: 673
 85. src\Artifacts\T11. Template - Implementation Roadmap.md - Lines: 55 - Chars: 2887 - Tokens: 722
 86. src\Artifacts\T12. Template - Competitive Analysis.md - Lines: 42 - Chars: 3227 - Tokens: 807
 87. src\Artifacts\T13. Template - Refactoring Plan.md - Lines: 55 - Chars: 2617 - Tokens: 655
-88. src\Artifacts\T14. Template - GitHub Repository Setup Guide.md - Lines: 73 - Chars: 2553 - Tokens: 639
+88. src\Artifacts\T14. Template - GitHub Repository Setup Guide.md - Lines: 110 - Chars: 4902 - Tokens: 1226
 89. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 41 - Chars: 3000 - Tokens: 750
-90. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 85 - Chars: 3063 - Tokens: 766
+90. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 97 - Chars: 4047 - Tokens: 1012
 91. src\Artifacts\T2. Template - Project Vision and Goals.md - Lines: 38 - Chars: 1968 - Tokens: 492
 92. src\Artifacts\T3. Template - Phase 1 Requirements & Design.md - Lines: 37 - Chars: 1876 - Tokens: 469
 93. src\Artifacts\T4. Template - Technical Scaffolding Plan.md - Lines: 54 - Chars: 2180 - Tokens: 545
@@ -125,10 +125,10 @@
 101. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
 102. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
 103. src\backend\services\file-operation.service.ts - Lines: 328 - Chars: 15946 - Tokens: 3987
-104. src\backend\services\file-tree.service.ts - Lines: 257 - Chars: 12998 - Tokens: 3250
-105. src\backend\services\flattener.service.ts - Lines: 214 - Chars: 11463 - Tokens: 2866
+104. src\backend\services\file-tree.service.ts - Lines: 264 - Chars: 12994 - Tokens: 3249
+105. src\backend\services\flattener.service.ts - Lines: 215 - Chars: 11613 - Tokens: 2904
 106. src\backend\services\highlighting.service.ts - Lines: 58 - Chars: 2920 - Tokens: 730
-107. src\backend\services\history.service.ts - Lines: 182 - Chars: 7634 - Tokens: 1909
+107. src\backend\services\history.service.ts - Lines: 235 - Chars: 10055 - Tokens: 2514
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
 109. src\backend\services\prompt.service.ts - Lines: 309 - Chars: 15993 - Tokens: 3999
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
@@ -137,7 +137,7 @@
 113. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
 114. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
 115. src\client\components\DiffViewer.tsx - Lines: 224 - Chars: 11386 - Tokens: 2847
-116. src\client\components\file-tree\FileTree.tsx - Lines: 262 - Chars: 11897 - Tokens: 2975
+116. src\client\components\file-tree\FileTree.tsx - Lines: 261 - Chars: 11851 - Tokens: 2963
 117. src\client\components\file-tree\FileTree.utils.ts - Lines: 189 - Chars: 7284 - Tokens: 1821
 118. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
 119. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13099 - Tokens: 3275
@@ -146,9 +146,9 @@
 122. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
 123. src\client\utils\response-parser.ts - Lines: 79 - Chars: 2994 - Tokens: 749
 124. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-125. src\client\views\context-chooser.view\on-message.ts - Lines: 53 - Chars: 4913 - Tokens: 1229
-126. src\client\views\context-chooser.view\view.scss - Lines: 591 - Chars: 14549 - Tokens: 3638
-127. src\client\views\context-chooser.view\view.tsx - Lines: 435 - Chars: 22245 - Tokens: 5562
+125. src\client\views\context-chooser.view\on-message.ts - Lines: 80 - Chars: 3797 - Tokens: 950
+126. src\client\views\context-chooser.view\view.scss - Lines: 596 - Chars: 14629 - Tokens: 3658
+127. src\client\views\context-chooser.view\view.tsx - Lines: 435 - Chars: 22265 - Tokens: 5567
 128. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
 129. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 130. src\client\views\parallel-copilot.view\on-message.ts - Lines: 72 - Chars: 3521 - Tokens: 881
@@ -156,14 +156,14 @@
 132. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 43 - Chars: 1890 - Tokens: 473
 133. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
 134. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
-135. src\client\views\parallel-copilot.view\view.scss - Lines: 652 - Chars: 15198 - Tokens: 3800
-136. src\client\views\parallel-copilot.view\view.tsx - Lines: 532 - Chars: 31731 - Tokens: 7933
-137. src\common\ipc\channels.enum.ts - Lines: 74 - Chars: 3792 - Tokens: 948
-138. src\common\ipc\channels.type.ts - Lines: 68 - Chars: 5480 - Tokens: 1370
+135. src\client\views\parallel-copilot.view\view.scss - Lines: 653 - Chars: 15265 - Tokens: 3817
+136. src\client\views\parallel-copilot.view\view.tsx - Lines: 532 - Chars: 31947 - Tokens: 7987
+137. src\common\ipc\channels.enum.ts - Lines: 76 - Chars: 3932 - Tokens: 983
+138. src\common\ipc\channels.type.ts - Lines: 70 - Chars: 5610 - Tokens: 1403
 139. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1590 - Tokens: 398
 140. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 141. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-142. src\common\types\file-node.ts - Lines: 16 - Chars: 567 - Tokens: 142
+142. src\common\types\file-node.ts - Lines: 17 - Chars: 517 - Tokens: 130
 143. src\common\types\pcpp.types.ts - Lines: 46 - Chars: 1373 - Tokens: 344
 144. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 449 - Tokens: 113
 145. src\common\utils\formatting.ts - Lines: 99 - Chars: 3475 - Tokens: 869
@@ -878,7 +878,7 @@ I have analyzed the comprehensive feedback from Cycle 132. There are several reg
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C158 (Add A63, A72, T16)
+# Updated on: C160 (Add A65)
 
 ## 1. Purpose
 
@@ -1163,6 +1163,10 @@ I have analyzed the comprehensive feedback from Cycle 132. There are several reg
 ### A63. DCE - Cycle 158 - Task Tracker
 - **Description:** A tracking document for the large number of feedback items and tasks from Cycle 158, used to manage the backlog for subsequent cycles.
 - **Tags:** bugs, tracking, issues, backlog, cycle 158
+
+### A64. DCE - Cycle 159 - Task Tracker
+- **Description:** A tracking document for the large number of feedback items and tasks from Cycle 159, used to manage the backlog for subsequent cycles.
+- **Tags:** bugs, tracking, issues, backlog, cycle 159
 
 ### A71. Sample M0 Prompt.md
 - **Description:** An example of a fully-formed `prompt.md` file generated by the Cycle 0 onboarding experience.
@@ -17551,6 +17555,7 @@ To ensure the AI can always generate perfectly parsable responses, the DCE injec
 # Artifact A61: DCE - Phase 2 - Cycle History Management Plan
 # Date Created: C152
 # Author: AI Model & Curator
+# Updated on: C160 (Add UI placeholders for buttons)
 
 - **Key/Value for A0:**
 - **Description:** Outlines the plan to allow users to save and load their entire cycle history (`dce_history.json`), enabling them to manage multiple development threads or back up their work.
@@ -17558,14 +17563,14 @@ To ensure the AI can always generate perfectly parsable responses, the DCE injec
 
 ## 1. Overview & Goal
 
-The `dce_history.json` file is a valuable asset that captures the entire iterative development process for a project. Users may want to work on different feature branches or experiments, each with its own cycle history. The goal of this feature is to provide commands to export the current cycle history to a file and import a history file, effectively allowing users to save and load different "cycle chains."
+The `dce_history.json` file is a valuable asset that captures the entire iterative development process for a project. Users may want to work on different feature branches or experiments, each with its own cycle history. The goal of this feature is to provide commands and UI controls to export the current cycle history to a file and import a history file, effectively allowing users to save and load different "cycle chains."
 
 ## 2. User Stories
 
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
-| P2-CHM-01 | **Export Cycle History** | As a developer, I want to export the entire cycle history to a named JSON file, so I can create a backup or save the history for a specific feature branch before starting a new one. | - A command or button "Export Cycle History..." is available. <br> - Executing it opens a "Save As..." dialog. <br> - The current content of `dce_history.json` is written to the user-specified file. |
-| P2-CHM-02 | **Import Cycle History** | As a developer, I want to import a cycle history from a JSON file, so I can switch between different development threads or restore a backup. | - A command or button "Import Cycle History..." is available. <br> - Executing it opens an "Open..." dialog to select a JSON file. <br> - The content of the selected file overwrites the current `dce_history.json`. <br> - The PCPP UI automatically refreshes to show the new, imported history. |
+| P2-CHM-01 | **Export Cycle History** | As a developer, I want to export the entire cycle history to a named JSON file, so I can create a backup or save the history for a specific feature branch before starting a new one. | - A "Save History..." button is available in the cycle navigator toolbar. <br> - Executing it opens a "Save As..." dialog. <br> - The current content of `dce_history.json` is written to the user-specified file. |
+| P2-CHM-02 | **Import Cycle History** | As a developer, I want to import a cycle history from a JSON file, so I can switch between different development threads or restore a backup. | - A "Load History..." button is available in the cycle navigator toolbar. <br> - Executing it opens an "Open..." dialog to select a JSON file. <br> - The content of the selected file overwrites the current `dce_history.json`. <br> - The PCPP UI automatically refreshes to show the new, imported history. |
 
 ## 3. Technical Implementation Plan
 
@@ -17586,7 +17591,8 @@ The `dce_history.json` file is a valuable asset that captures the entire iterati
         *   Trigger a `ForceRefresh` message to the PCPP frontend.
 
 3.  **Frontend (`view.tsx`):**
-    *   Add "Import History" and "Export History" buttons/icons to the header or a settings menu.
+    *   Add "Save History" and "Load History" buttons/icons to the cycle navigator toolbar.
+    *   Initially, these buttons can be present but disabled, to be fully implemented in a subsequent cycle.
     *   The `onClick` handlers will trigger the corresponding IPC messages.
 </file>
 
@@ -17912,21 +17918,21 @@ The functionality will be consolidated into the `view-header` of our Context Cho
 # Artifact A9: DCE - GitHub Repository Setup Guide
 # Date Created: Cycle 12
 # Author: AI Model
+# Updated on: C160 (Add sample workflow with `git restore`)
 
-- **Description:** A step-by-step guide with the necessary git commands to initialize the project as a local repository and push it to a new remote repository on GitHub.
-- **Tags:** git, github, version control, setup, repository
+- **Description:** A step-by-step guide with the necessary git commands to initialize the project as a local repository and push it to a new remote repository on GitHub, including a sample workflow for testing AI responses.
+- **Tags:** git, github, version control, setup, repository, workflow
 
 ## 1. Overview
 
-This guide provides the necessary commands to turn your local project folder into a Git repository and link it to a new, empty repository on GitHub.
+This guide provides the necessary commands to turn your local project folder into a Git repository and link it to a new, empty repository on GitHub. It also describes a sample workflow for using Git to efficiently test multiple AI-generated responses.
 
 ## 2. Prerequisites
 
 *   You have `git` installed on your machine.
 *   You have a GitHub account.
-*   Your GitHub username is `dgerabagi`.
 
-## 3. Step-by-Step Instructions
+## 3. Step-by-Step Setup
 
 ### Step 1: Create a New Repository on GitHub
 
@@ -17978,8 +17984,25 @@ Now, you will link your local repository to the empty one you created on GitHub.
     git push -u origin main
     ```
 
-After these commands complete, refresh your GitHub repository page. You should see all of your project files. You have successfully created and linked your repository!
-```
+After these commands complete, refresh your GitHub repository page. You should see all of your project files. You have successfully created and linked your repository.
+
+## 4. Sample Workflow for Testing AI Responses
+
+Once your project is set up with Git, you can leverage it to create a powerful and non-destructive testing workflow with the DCE.
+
+1.  **Start with a Clean State:** Make sure your working directory is clean. You can check this with `git status`. If you have any uncommitted changes, either commit them or stash them.
+2.  **Generate Responses:** Use the DCE to generate a `prompt.md` file and get several responses from your AI. Paste these into the Parallel Co-Pilot Panel and parse them.
+3.  **Accept a Response:** Choose the response you want to test (e.g., "Resp 1"). Select its files in the "Associated Files" list and click "Accept Selected Files". This will overwrite the files in your workspace.
+4.  **Test the Changes:** Run your project's build process (`npm run watch`), check for errors, and test the functionality in the VS Code Extension Development Host.
+5.  **Revert and Test the Next One:**
+    *   If you're not satisfied with the changes from "Resp 1," you can instantly and safely revert all the changes by running a single command in your terminal:
+        ```bash
+        git restore .
+        ```
+    *   This command discards all uncommitted changes in your working directory, restoring your files to the state of your last commit.
+6.  **Repeat:** Your workspace is now clean again. You can go back to the Parallel Co-Pilot Panel, accept the files from "Resp 2," and repeat the testing process.
+
+This workflow allows you to rapidly test multiple complex, multi-file changes from different AI responses without the risk of permanently breaking your codebase.
 </file>
 
 <file path="src/Artifacts/T1. Template - Master Artifact List.md">
@@ -18221,26 +18244,27 @@ The monolithic file/class will be broken down into the following smaller, more f
 <!-- 
   IMPORTANT AI INSTRUCTION:
   When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A14-GitHub-Repo-Setup.md"></file> tags.
+  in <file path="src/Artifacts/A14. [Project Name] - GitHub Repository Setup Guide.md">...</file> tags.
 -->
-# Artifact T14: Template - GitHub Repository Setup Guide
+# Artifact T14: [Project Name] - GitHub Repository Setup Guide Template
 # Date Created: C152
 # Author: AI Model & Curator
+# Updated on: C160 (Add Sample Development Workflow section)
 
 - **Key/Value for A0:**
-- **Description:** A generic template for a guide on setting up a new project with Git and GitHub.
-- **Tags:** template, cycle 0, git, github, version control
+- **Description:** A generic template for a guide on setting up a new project with Git and GitHub, including a sample workflow.
+- **Tags:** template, cycle 0, git, github, version control, workflow
 
 ## 1. Overview
 
-This guide provides the necessary commands to turn your local project folder into a Git repository and link it to a new, empty repository on GitHub.
+This guide provides the necessary commands to turn your local project folder into a Git repository, link it to a new repository on GitHub, and outlines a sample workflow for using Git alongside the Data Curation Environment (DCE).
 
 ## 2. Prerequisites
 
 *   You have `git` installed on your machine.
 *   You have a GitHub account.
 
-## 3. Step-by-Step Instructions
+## 3. Step-by-Step Setup
 
 ### Step 1: Create a New Repository on GitHub
 
@@ -18291,6 +18315,42 @@ Open a terminal and navigate to your project's root directory. Then, run the fol
     ```
 
 After these commands complete, refresh your GitHub repository page. You should see all of your project files.
+
+## 4. Sample Development Workflow with DCE and Git
+
+Git is a powerful tool for managing the iterative changes produced by the DCE. It allows you to quickly test an AI's proposed solution and revert it cleanly if it doesn't work, without losing your place.
+
+### Step 1: Start with a Clean State
+Before starting a new cycle, ensure your working directory is clean. You can check this with `git status`. All your previous changes should be committed.
+
+### Step 2: Generate a Prompt and Get Responses
+Use the DCE to generate a `prompt.md` file. Use this prompt to get multiple responses (e.g., 4 to 8) from your preferred AI model.
+
+### Step 3: Paste and Parse
+Paste the responses into the Parallel Co-Pilot Panel and click "Parse All".
+
+### Step 4: Accept and Test
+1.  Review the responses and find one that looks promising.
+2.  Select that response and use the **"Accept Selected Files"** button to write the AI's proposed changes to your workspace.
+3.  Now, compile and test the application. Does it work? Does it have errors?
+
+### Step 5: The "Restore" Loop
+This is where Git becomes a powerful part of the workflow.
+
+*   **If the changes are bad (e.g., introduce bugs, don't work as expected):**
+    1.  Open the terminal in VS Code.
+    2.  Run the command: `git restore .`
+    3.  This command instantly discards all uncommitted changes in your workspace, reverting your files to the state of your last commit.
+    4.  You are now back to a clean state and can go back to the Parallel Co-Pilot Panel, select a *different* AI response, and click "Accept Selected Files" again to test the next proposed solution.
+
+*   **If the changes are good:**
+    1.  Open the Source Control panel in VS Code.
+    2.  Stage the changes (`git add .`).
+    3.  Write a commit message (e.g., "Feat: Implement user login via AI suggestion C15").
+    4.  Commit the changes.
+    5.  You are now ready to start the next development cycle from a new, clean state.
+
+This iterative loop of `accept -> test -> restore` allows you to rapidly audition multiple AI-generated solutions without fear of corrupting your codebase.
 </file>
 
 <file path="src/Artifacts/T15. Template - A-B-C Testing Strategy for UI Bugs.md">
@@ -18346,6 +18406,7 @@ Once a working pattern is identified in a test component:
 # Artifact T16: [Project Name] - Developer Environment Setup Guide Template
 # Date Created: C158
 # Author: AI Model & Curator
+# Updated on: C160 (Add section for managing environment variables)
 
 - **Key/Value for A0:**
 - **Description:** A generic template for a guide on setting up a new project's development environment, including OS, tools, and installation steps.
@@ -18423,6 +18484,17 @@ npm run dev
 ### Step 5: Verify the Setup
 
 Once the development server is running, you should be able to access the application at [e.g., `http://localhost:3000`]. [Describe what the developer should see to confirm that the setup was successful].
+
+## 5. Managing Environment Variables and Secrets
+
+To provide an AI assistant with the necessary context about which environment variables are available without exposing sensitive secrets, follow this best practice:
+
+1.  **Create a `.env.local` file:** Make a copy of your `.env` file and name it `.env.local`.
+2.  **Redact Secret Values:** In the `.env.local` file, replace all sensitive values (like API keys, passwords, or tokens) with the placeholder `[REDACTED]`.
+3.  **Include in Context:** When curating your context for the AI, check the box for the `.env.local` file.
+4.  **Exclude `.env`:** Ensure your `.gitignore` file includes `.env` to prevent your actual secrets from ever being committed to version control.
+
+This allows the AI to see the names of all available constants (e.g., `OPENAI_API_KEY`) so it can write code that uses them correctly, but it never sees the actual secret values.
 </file>
 
 <file path="src/Artifacts/T2. Template - Project Vision and Goals.md">
@@ -19464,7 +19536,7 @@ export class FileOperationService {
 </file>
 
 <file path="src/backend/services/file-tree.service.ts">
-// Updated on: C159 (Implement queue for auto-add to fix race condition)
+// Updated on: C160 (Add non-selectable patterns)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -19480,8 +19552,9 @@ import { ProblemCountsMap } from "@/common/ipc/channels.type";
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
-const EXCLUSION_PATTERNS = ['.git', 'dce_cache', '.vscode', 'out']; 
+const EXCLUSION_PATTERNS = ['.git', 'dce_cache', 'out']; 
 const AUTO_ADD_EXCLUSIONS = ['flattened_repo.md', '.vscode'];
+const NON_SELECTABLE_PATTERNS = ['/node_modules', '/.vscode', 'flattened_repo.md', 'prompt.md'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
@@ -19585,6 +19658,8 @@ export class FileTreeService {
 
     private async getFileStats(filePath: string): Promise<Omit<FileNode, 'name' | 'absolutePath' | 'children'>> {
         const extension = path.extname(filePath).toLowerCase();
+        const isSelectable = !NON_SELECTABLE_PATTERNS.some(p => filePath.includes(p));
+
         try {
             const stats = await fs.stat(filePath);
             const isImage = IMAGE_EXTENSIONS.has(extension);
@@ -19592,17 +19667,19 @@ export class FileTreeService {
             const isExcel = EXCEL_EXTENSIONS.has(extension);
             const isWordDoc = WORD_EXTENSIONS.has(extension);
             
-            if (isImage) return { tokenCount: 0, sizeInBytes: stats.size, isImage, extension, isPdf, isExcel, isWordDoc, fileCount: 1 };
-            if (isPdf) return { tokenCount: Services.contentExtractionService.getVirtualPdfContent(filePath)?.tokenCount || 0, sizeInBytes: stats.size, isImage, extension, isPdf, isExcel, isWordDoc, fileCount: 1 };
-            if (isExcel) return { tokenCount: Services.contentExtractionService.getVirtualExcelContent(filePath)?.tokenCount || 0, sizeInBytes: stats.size, isImage, extension, isPdf, isExcel, isWordDoc, fileCount: 1 };
-            if (isWordDoc) return { tokenCount: Services.contentExtractionService.getVirtualWordContent(filePath)?.tokenCount || 0, sizeInBytes: stats.size, isImage, extension, isPdf, isExcel, isWordDoc, fileCount: 1 };
+            const baseStats = { sizeInBytes: stats.size, isImage, extension, isPdf, isExcel, isWordDoc, fileCount: 1, isSelectable };
 
-            if (stats.size > 5_000_000) return { tokenCount: 0, sizeInBytes: stats.size, isImage, extension, isPdf, isExcel, isWordDoc, fileCount: 1 };
+            if (isImage) return { ...baseStats, tokenCount: 0 };
+            if (isPdf) return { ...baseStats, tokenCount: Services.contentExtractionService.getVirtualPdfContent(filePath)?.tokenCount || 0 };
+            if (isExcel) return { ...baseStats, tokenCount: Services.contentExtractionService.getVirtualExcelContent(filePath)?.tokenCount || 0 };
+            if (isWordDoc) return { ...baseStats, tokenCount: Services.contentExtractionService.getVirtualWordContent(filePath)?.tokenCount || 0 };
+
+            if (stats.size > 5_000_000) return { ...baseStats, tokenCount: 0 };
             
             const content = await fs.readFile(filePath, 'utf-8');
-            return { tokenCount: Math.ceil(content.length / 4), sizeInBytes: stats.size, isImage, extension, isPdf, isExcel, isWordDoc, fileCount: 1 };
+            return { ...baseStats, tokenCount: Math.ceil(content.length / 4) };
         } catch (error: any) {
-            return { tokenCount: 0, sizeInBytes: 0, isImage: false, extension, isPdf: false, isExcel: false, isWordDoc: false, fileCount: 1, error: error.message };
+            return { tokenCount: 0, sizeInBytes: 0, isImage: false, extension, isPdf: false, isExcel: false, isWordDoc: false, fileCount: 1, error: error.message, isSelectable };
         }
     }
 
@@ -19664,7 +19741,8 @@ export class FileTreeService {
             children: await this._traverseDirectory(rootUri, gitStatusMap, problemCountsMap),
             tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false,
             gitStatus: gitStatusMap.get(normalizePath(rootPath)),
-            problemCounts: problemCountsMap[normalizePath(rootPath)]
+            problemCounts: problemCountsMap[normalizePath(rootPath)],
+            isSelectable: true,
         };
         this._aggregateStats(rootNode);
         return rootNode;
@@ -19678,15 +19756,16 @@ export class FileTreeService {
 
                 const childUri = vscode.Uri.joinPath(dirUri, name);
                 const childPath = normalizePath(childUri.fsPath);
+                const isSelectable = !NON_SELECTABLE_PATTERNS.some(p => childPath.endsWith(p));
 
                 if (type === vscode.FileType.Directory) {
-                    const isSpecialDir = name.toLowerCase() === 'node_modules' || name.toLowerCase() === '.vscode';
-                    const dirNode: FileNode = { name, absolutePath: childPath, children: isSpecialDir ? [] : await this._traverseDirectory(childUri, gitStatusMap, problemCountsMap), tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false, gitStatus: gitStatusMap.get(childPath), problemCounts: problemCountsMap[childPath] };
+                    const isSpecialDir = name.toLowerCase() === 'node_modules';
+                    const dirNode: FileNode = { name, absolutePath: childPath, children: isSpecialDir ? [] : await this._traverseDirectory(childUri, gitStatusMap, problemCountsMap), tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false, gitStatus: gitStatusMap.get(childPath), problemCounts: problemCountsMap[childPath], isSelectable };
                     this._aggregateStats(dirNode);
                     children.push(dirNode);
                 } else if (type === vscode.FileType.File) {
                     const stats = await this.getFileStats(childPath);
-                    children.push({ name, absolutePath: childPath, ...stats, gitStatus: gitStatusMap.get(childPath), problemCounts: problemCountsMap[childPath] });
+                    children.push({ name, absolutePath: childPath, ...stats, gitStatus: gitStatusMap.get(childPath), problemCounts: problemCountsMap[childPath], isSelectable });
                 }
             }
         } catch (error: any) {
@@ -19724,7 +19803,7 @@ export class FileTreeService {
 </file>
 
 <file path="src/backend/services/flattener.service.ts">
-// Updated on: C153 (Always exclude node_modules)
+// Updated on: C160 (Add de-duplication to expandDirectories)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -19801,8 +19880,9 @@ export class FlattenerService {
     }
 
     private async expandDirectories(paths: string[]): Promise<string[]> {
+        const uniquePaths = [...new Set(paths)]; // C160 Fix: De-duplicate initial paths
         const allFiles: string[] = [];
-        for (const p of paths) {
+        for (const p of uniquePaths) {
             try {
                 const stats = await fs.stat(p);
                 if (stats.isDirectory()) {
@@ -19824,7 +19904,7 @@ export class FlattenerService {
             for (const entry of entries) {
                 const fullPath = path.join(dirPath, entry.name);
                 if (entry.isDirectory()) {
-                    if (entry.name.toLowerCase() === 'node_modules') continue;
+                    if (entry.name.toLowerCase() === 'node_modules' || entry.name.toLowerCase() === '.vscode') continue;
                     files = files.concat(await this.getAllFilesRecursive(fullPath));
                 } else {
                     files.push(fullPath);
@@ -20009,6 +20089,7 @@ import { PcppCycle, PcppHistoryFile } from '@/common/types/pcpp.types';
 import { serverIPCs } from '@/client/views';
 import { VIEW_TYPES } from '@/common/view-types';
 import { ServerToClientChannel } from '@/common/ipc/channels.enum';
+import { promises as fs } from 'fs';
 
 export class HistoryService {
     private historyFilePath: string | undefined;
@@ -20056,7 +20137,6 @@ export class HistoryService {
         let isFreshEnvironment = true;
 
         if (this.workspaceRoot) {
-            // C159: Check for the existence of the artifacts README, which signals an initialized project.
             try {
                 await vscode.workspace.fs.stat(vscode.Uri.file(path.join(this.workspaceRoot, 'src/Artifacts/README.md')));
                 isFreshEnvironment = false;
@@ -20128,7 +20208,6 @@ export class HistoryService {
 
     public async saveCycleData(cycleData: PcppCycle): Promise<void> {
         if (cycleData.cycleId === 0) {
-             // If we're "saving" cycle 0, it's just the project scope that changes.
             await this.saveProjectScope(cycleData.cycleContext);
             return;
         }
@@ -20181,6 +20260,60 @@ export class HistoryService {
             } catch (error) {
                 Services.loggerService.error(`Failed to delete dce_history.json: ${error}`);
             }
+        }
+    }
+
+    public async handleExportHistory() {
+        Services.loggerService.log("Exporting cycle history.");
+        if (!this.historyFilePath) {
+            vscode.window.showErrorMessage("History file path not found.");
+            return;
+        }
+        try {
+            const historyContent = await this._readHistoryFile();
+            const saveUri = await vscode.window.showSaveDialog({
+                defaultUri: vscode.Uri.file(path.join(this.workspaceRoot || '', 'dce_history_export.json')),
+                filters: { 'JSON': ['json'] }
+            });
+            if (saveUri) {
+                await fs.writeFile(saveUri.fsPath, JSON.stringify(historyContent, null, 2), 'utf-8');
+                vscode.window.showInformationMessage("Cycle history exported successfully.");
+            }
+        } catch (error: any) {
+            vscode.window.showErrorMessage(`Failed to export history: ${error.message}`);
+            Services.loggerService.error(`Failed to export history: ${error.message}`);
+        }
+    }
+
+    public async handleImportHistory() {
+        Services.loggerService.log("Importing cycle history.");
+        if (!this.historyFilePath) {
+            vscode.window.showErrorMessage("History file path not found.");
+            return;
+        }
+        try {
+            const openUri = await vscode.window.showOpenDialog({
+                canSelectMany: false,
+                filters: { 'JSON': ['json'] }
+            });
+            if (openUri && openUri[0]) {
+                const content = await fs.readFile(openUri[0].fsPath, 'utf-8');
+                const historyData = JSON.parse(content);
+                // Basic validation
+                if (historyData.version && Array.isArray(historyData.cycles)) {
+                    await this._writeHistoryFile(historyData);
+                    vscode.window.showInformationMessage("Cycle history imported successfully. Reloading...");
+                    const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
+                    if (serverIpc) {
+                        serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, { reason: 'history' });
+                    }
+                } else {
+                    throw new Error("Invalid history file format.");
+                }
+            }
+        } catch (error: any) {
+            vscode.window.showErrorMessage(`Failed to import history: ${error.message}`);
+            Services.loggerService.error(`Failed to import history: ${error.message}`);
         }
     }
 }
@@ -21288,7 +21421,6 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
                     onBlur={handleRenameSubmit}
                     onKeyDown={(e) => {
                         if (e.key === 'Enter') handleRenameSubmit();
-                        // Stop propagation for text editing shortcuts
                         if ((e.ctrlKey || e.metaKey) && ['c', 'v', 'x'].includes(e.key.toLowerCase())) {
                             e.stopPropagation();
                         }
@@ -21346,7 +21478,7 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
                     checked={isChecked}
                     indeterminate={!isDirectlyChecked && !hasCheckedAncestor && checkedFiles.some(p => p.startsWith(fileNode.absolutePath))}
                     onChange={(_, e) => handleFileCheckboxChange(e, fileNode.absolutePath)}
-                    disabled={hasError}
+                    disabled={hasError || !fileNode.isSelectable}
                 />
                 <span className="file-icon">{isDirectory ? (isExpanded ? <VscFolderOpened /> : <VscFolder />) : getFileIcon(fileNode.name)}</span>
                 <span className="file-name">{fileNode.name}</span>
@@ -22418,63 +22550,90 @@ export const viewConfig = {
 </file>
 
 <file path="src/client/views/context-chooser.view/on-message.ts">
-// Updated on: C115 (Ensure file reflects correct service calls)
+// Updated on: C160 (Add import/export history handlers)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
-import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
 import { Services } from "@/backend/services/services";
-import * as vscode from "vscode";
+import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
 
 export function onMessage(serverIpc: ServerPostMessageManager) {
-    const { fileTreeService, fileOperationService, contentExtractionService, flattenerService, selectionService, actionService, loggerService } = Services;
+    const { loggerService, promptService, fileOperationService, highlightingService, historyService } = Services;
+    loggerService.log("Parallel Co-Pilot view message handler initialized.");
 
-    serverIpc.onClientMessage(ClientToServerChannel.RequestInitialData, () => {
-        serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceTrustState, { isTrusted: vscode.workspace.isTrusted });
-        fileTreeService.handleWorkspaceFilesRequest(serverIpc, false);
+    serverIpc.onClientMessage(ClientToServerChannel.RequestCreatePromptFile, (data) => {
+        promptService.generatePromptFile(data.cycleTitle, data.currentCycle);
     });
 
-    serverIpc.onClientMessage(ClientToServerChannel.RequestWorkspaceFiles, (data) => fileTreeService.handleWorkspaceFilesRequest(serverIpc, data.force));
-    serverIpc.onClientMessage(ClientToServerChannel.RequestFlattenContext, (data) => flattenerService.flatten(data.selectedPaths));
-    serverIpc.onClientMessage(ClientToServerChannel.RequestNewFile, (data) => fileOperationService.handleNewFileRequest(data.parentDirectory));
-    serverIpc.onClientMessage(ClientToServerChannel.RequestNewFolder, (data) => fileOperationService.handleNewFolderRequest(data.parentDirectory));
-    serverIpc.onClientMessage(ClientToServerChannel.RequestFileRename, (data) => fileOperationService.handleFileRenameRequest(data.oldPath, data.newName));
-    serverIpc.onClientMessage(ClientToServerChannel.RequestFileDelete, (data) => fileOperationService.handleFileDeleteRequest(data.path));
-    serverIpc.onClientMessage(ClientToServerChannel.RequestBatchFileDelete, (data) => fileOperationService.handleBatchFileDeleteRequest(data.paths));
-    serverIpc.onClientMessage(ClientToServerChannel.RequestRevealInExplorer, (data) => fileOperationService.handleRevealInExplorerRequest(data.path));
-    serverIpc.onClientMessage(ClientToServerChannel.RequestCopyPath, (data) => fileOperationService.handleCopyPathRequest(data.path, data.relative));
-    serverIpc.onClientMessage(ClientToServerChannel.RequestOpenFile, (data) => fileOperationService.handleOpenFileRequest(data.path));
-    serverIpc.onClientMessage(ClientToServerChannel.RequestMoveFile, (data) => fileOperationService.handleMoveFileRequest(data.oldPath, data.newPath));
-    serverIpc.onClientMessage(ClientToServerChannel.RequestCopyFile, (data) => fileOperationService.handleCopyFileRequest(data.sourcePath, data.destinationDir));
-    serverIpc.onClientMessage(ClientToServerChannel.RequestAddFileFromBuffer, (data) => fileOperationService.handleAddFileFromBuffer(data.targetPath, data.data));
-    serverIpc.onClientMessage(ClientToServerChannel.RequestCopyFileFromUri, (data) => fileOperationService.handleCopyFileFromUri(data.sourceUri, data.targetDir));
-    serverIpc.onClientMessage(ClientToServerChannel.RequestPdfToText, (data) => contentExtractionService.handlePdfToTextRequest(data.path, serverIpc));
-    serverIpc.onClientMessage(ClientToServerChannel.RequestExcelToText, (data) => contentExtractionService.handleExcelToTextRequest(data.path, serverIpc));
-    serverIpc.onClientMessage(ClientToServerChannel.RequestWordToText, (data) => contentExtractionService.handleWordToTextRequest(data.path, serverIpc));
-    serverIpc.onClientMessage(ClientToServerChannel.RequestUndo, () => actionService.undo());
-    serverIpc.onClientMessage(ClientToServerChannel.RequestRedo, () => actionService.redo());
-    serverIpc.onClientMessage(ClientToServerChannel.SaveCurrentSelection, (data) => selectionService.saveCurrentSelection(data.paths));
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestLastSelection, async () => {
-        const lastSelection = await selectionService.getLastSelection();
-        const autoAddState = selectionService.getAutoAddState();
-        serverIpc.sendToClient(ServerToClientChannel.ApplySelectionSet, { paths: lastSelection });
-        serverIpc.sendToClient(ServerToClientChannel.SendSelectionSets, { sets: selectionService.getSelectionSets() });
-        serverIpc.sendToClient(ServerToClientChannel.SendAutoAddState, { enabled: autoAddState });
+    serverIpc.onClientMessage(ClientToServerChannel.RequestCreateCycle0Prompt, (data) => {
+        promptService.generateCycle0Prompt(data.projectScope, serverIpc);
     });
 
-    serverIpc.onClientMessage(ClientToServerChannel.SaveAutoAddState, (data) => selectionService.saveAutoAddState(data.enabled));
-    serverIpc.onClientMessage(ClientToServerChannel.VSCodeCommand, (data) => vscode.commands.executeCommand(data.command, ...(data.args || [])));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestFileExistence, (data) => {
+        fileOperationService.handleFileExistenceRequest(data.paths, serverIpc);
+    });
 
-    serverIpc.onClientMessage(ClientToServerChannel.LogMessage, (data) => {
-        const logMessage = `[WebView] ${data.message}`;
-        if (data.level === 'warn') loggerService.warn(logMessage);
-        else if (data.level === 'error') loggerService.error(logMessage);
-        else loggerService.log(logMessage);
+    serverIpc.onClientMessage(ClientToServerChannel.RequestSyntaxHighlight, (data) => {
+        highlightingService.handleSyntaxHighlightRequest(data.code, data.lang, data.id, serverIpc);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestLatestCycleData, async () => {
+        const historyFile = await historyService.getFullHistory();
+        const latestCycle = await historyService.getLatestCycle();
+        serverIpc.sendToClient(ServerToClientChannel.SendLatestCycleData, { cycleData: latestCycle, projectScope: historyFile.projectScope });
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestCycleData, async (data) => {
+        const historyFile = await historyService.getFullHistory();
+        const cycleData = await historyService.getCycleData(data.cycleId);
+        serverIpc.sendToClient(ServerToClientChannel.SendCycleData, { cycleData, projectScope: historyFile.projectScope });
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.SaveCycleData, (data) => {
+        historyService.saveCycleData(data.cycleData);
+    });
+    
+    serverIpc.onClientMessage(ClientToServerChannel.RequestFileContent, (data) => {
+        fileOperationService.handleFileContentRequest(data.path, serverIpc);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestDeleteCycle, (data) => {
+        historyService.deleteCycle(data.cycleId);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestResetHistory, () => {
+        historyService.resetHistory();
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestBatchFileWrite, async (data) => {
+        const writtenPaths = await fileOperationService.handleBatchFileWrite(data.files);
+        if (writtenPaths.length > 0) {
+            serverIpc.sendToClient(ServerToClientChannel.FilesWritten, { paths: writtenPaths });
+        }
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestLogState, (data) => {
+        promptService.generateStateLog(data.currentState);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestFileComparison, (data) => {
+        fileOperationService.handleFileComparisonRequest(data.filePath, data.modifiedContent, serverIpc);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestCopyTextToClipboard, (data) => {
+        fileOperationService.handleCopyTextToClipboardRequest(data.text);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestExportHistory, () => {
+        historyService.handleExportHistory();
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestImportHistory, () => {
+        historyService.handleImportHistory();
     });
 }
 </file>
 
 <file path="src/client/views/context-chooser.view/view.scss">
-/* Updated on: C59 (Add Workspace Trust banner styling) */
+/* Updated on: C160 (Add styling for disabled checkbox) */
 body {
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -22922,6 +23081,11 @@ body {
 .file-checkbox {
     cursor: pointer;
     flex-shrink: 0;
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
 }
 
 .file-icon {
@@ -23381,7 +23545,7 @@ const App = () => {
             logger.error("Cannot drop file, no workspace root identified.");
             return;
         }
-        const dummyRootNode: FileNode = { absolutePath: rootDir, name: path.basename(rootDir), children: [], tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false };
+        const dummyRootNode: FileNode = { absolutePath: rootDir, name: path.basename(rootDir), children: [], tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false, isSelectable: true };
         processDrop(event, dummyRootNode);
     };
     
@@ -23926,7 +24090,7 @@ export default TestPane3;
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
-/* Updated on: C159 (Add active state for sort button, make resizer static) */
+/* Updated on: C160 (Remove starry-night line highlight) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -24371,6 +24535,7 @@ body {
     
     code > span {
         line-height: 1.5;
+        background-color: transparent !important; // C160 Fix: Remove line highlight
     }
 }
 
@@ -24582,11 +24747,11 @@ body {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C159 (Remove resizable bar functionality)
+// Updated on: C160 (Add disabled history buttons)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap, VscTrash, VscSync, VscClose, VscSave, VscBug, VscCheckAll, VscListOrdered, VscListUnordered, VscSymbolNumeric, VscClippy, VscLink, VscDebugDisconnect, VscBook } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap, VscTrash, VscSync, VscClose, VscSave, VscBug, VscCheckAll, VscListOrdered, VscListUnordered, VscSymbolNumeric, VscClippy, VscLink, VscDebugDisconnect, VscBook, VscCloudUpload, VscCloudDownload } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -25022,7 +25187,7 @@ const App = () => {
         return <OnboardingView initialProjectScope={projectScope} onNavigateToCycle={(id) => handleCycleChange(null, id)} latestCycleId={maxCycle} />;
     }
 
-    const collapsedNavigator = <div className="collapsed-navigator"><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button><span className="cycle-display">C{currentCycle}</span><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button></div>;
+    const collapsedNavigator = <div className="collapsed-navigator"><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0}><VscChevronLeft /></button><span className="cycle-display">C{currentCycle}</span><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button></div>;
     const currentComparisonMetrics = selectedFilePath ? comparisonMetrics.get(pathOverrides.get(selectedFilePath) || selectedFilePath) : null;
     
     const renderContent = () => {
@@ -25098,7 +25263,7 @@ const App = () => {
             </div>
             <div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} /></div>
         </div>
-        <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''}><div className="cycle-navigator"><span>Cycle:</span><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button><input type="number" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 0)} className="cycle-input" /><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button><button onClick={handleNewCycle} title="New Cycle" disabled={isNewCycleButtonDisabled}><VscAdd /></button><input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} /><button onClick={handleDeleteCycle} title="Delete Current Cycle"><VscTrash /></button><button onClick={handleResetHistory} title="Reset All History"><VscSync /></button></div><div className="context-inputs"><textarea className="context-textarea" placeholder="Cycle Context (notes for this cycle)..." value={cycleContext} onChange={e => setCycleContext(e.target.value)} onKeyDown={handleContextKeyDown} /><textarea className="context-textarea" placeholder="Ephemeral Context (for this cycle's prompt only)..." value={ephemeralContext} onChange={e => setEphemeralContext(e.target.value)} onKeyDown={handleContextKeyDown} /></div></CollapsibleSection>
+        <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''}><div className="cycle-navigator"><span>Cycle:</span><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0}><VscChevronLeft /></button><input type="number" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 0)} className="cycle-input" /><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button><button onClick={handleNewCycle} title="New Cycle" disabled={isNewCycleButtonDisabled}><VscAdd /></button><input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} /><button onClick={handleDeleteCycle} title="Delete Current Cycle"><VscTrash /></button><button onClick={handleResetHistory} title="Reset All History"><VscSync /></button><button onClick={() => {}} title="Save Cycle History..." disabled><VscCloudUpload /></button><button onClick={() => {}} title="Load Cycle History..." disabled><VscCloudDownload /></button></div><div className="context-inputs"><textarea className="context-textarea" placeholder="Cycle Context (notes for this cycle)..." value={cycleContext} onChange={e => setCycleContext(e.target.value)} onKeyDown={handleContextKeyDown} /><textarea className="context-textarea" placeholder="Ephemeral Context (for this cycle's prompt only)..." value={ephemeralContext} onChange={e => setEphemeralContext(e.target.value)} onKeyDown={handleContextKeyDown} /></div></CollapsibleSection>
         <div className="tab-bar-container">
             <div className="tab-bar">{sortedTabIds.map((tabIndex) => {
                 const tabData = tabs[tabIndex.toString()];
@@ -25140,7 +25305,7 @@ export enum ClientToServerChannel {
     RequestCopyFileFromUri = "clientToServer.requestCopyFileFromUri",
     RequestBatchFileWrite = "clientToServer.requestBatchFileWrite",
     RequestCreateFile = "clientToServer.requestCreateFile",
-    RequestCopyTextToClipboard = "clientToServer.requestCopyTextToClipboard", // New
+    RequestCopyTextToClipboard = "clientToServer.requestCopyTextToClipboard",
 
     // Special File Handling
     RequestPdfToText = "clientToServer.requestPdfToText",
@@ -25166,7 +25331,9 @@ export enum ClientToServerChannel {
     RequestDeleteCycle = "clientToServer.requestDeleteCycle",
     RequestResetHistory = "clientToServer.requestResetHistory",
     RequestLogState = "clientToServer.requestLogState",
-    RequestFileComparison = "clientToServer.requestFileComparison", 
+    RequestFileComparison = "clientToServer.requestFileComparison",
+    RequestExportHistory = "clientToServer.requestExportHistory", // New
+    RequestImportHistory = "clientToServer.requestImportHistory", // New
 }
 
 export enum ServerToClientChannel {
@@ -25242,6 +25409,8 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestBatchFileWrite ? { files: BatchWriteFile[] } :
     T extends ClientToServerChannel.RequestLogState ? { currentState: PcppCycle } :
     T extends ClientToServerChannel.RequestFileComparison ? { filePath: string; modifiedContent: string; } :
+    T extends ClientToServerChannel.RequestExportHistory ? {} :
+    T extends ClientToServerChannel.RequestImportHistory ? {} :
     
     T extends ServerToClientChannel.SendWorkspaceFiles ? { files: FileNode[] } :
     T extends ServerToClientChannel.SendWorkspaceTrustState ? { isTrusted: boolean } :
@@ -25382,10 +25551,11 @@ export interface FileNode {
     extension: string;
     isPdf: boolean;
     isExcel: boolean;
-    isWordDoc: boolean; // New
-    gitStatus?: string; // e.g., 'M', 'U', 'A', 'D', 'C'
+    isWordDoc: boolean;
+    isSelectable: boolean; // New in C160
+    gitStatus?: string; 
     problemCounts?: { error: number; warning: number; };
-    error?: string; // To store processing errors, e.g., "File not found"
+    error?: string;
 }
 </file>
 

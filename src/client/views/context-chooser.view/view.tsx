@@ -311,7 +311,7 @@ const App = () => {
             logger.error("Cannot drop file, no workspace root identified.");
             return;
         }
-        const dummyRootNode: FileNode = { absolutePath: rootDir, name: path.basename(rootDir), children: [], tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false };
+        const dummyRootNode: FileNode = { absolutePath: rootDir, name: path.basename(rootDir), children: [], tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false, isSelectable: true };
         processDrop(event, dummyRootNode);
     };
     
