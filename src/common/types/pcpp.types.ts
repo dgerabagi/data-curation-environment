@@ -1,5 +1,5 @@
 // src/common/types/pcpp.types.ts
-// Updated on: C154 (Add pathOverrides to PcppCycle)
+// Updated on: C157 (Add isSortedByTokens)
 
 // Data structure for the backend history file
 export interface PcppResponse {
@@ -18,8 +18,9 @@ export interface PcppCycle {
     selectedResponseId?: string | null;
     selectedFilesForReplacement?: string[];
     tabCount?: number;
-    isSortedByLength?: boolean;
-    pathOverrides?: { [originalPath: string]: string }; // New: To store user-corrected file paths
+    isSortedByLength?: boolean; // C149: Deprecated in favor of isSortedByTokens
+    isSortedByTokens?: boolean; // C157: New property for persistent sorting
+    pathOverrides?: { [originalPath: string]: string };
 }
 
 export interface PcppHistoryFile {

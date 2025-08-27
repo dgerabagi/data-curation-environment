@@ -1,4 +1,4 @@
-/* Updated on: C157 (Add border to active tab) */
+/* Updated on: C157 (Add focused tab border) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -239,22 +239,25 @@ body {
     padding: 6px 12px;
     cursor: pointer;
     border-bottom: 2px solid transparent;
-    border-left: 1px solid transparent;
-    border-right: 1px solid transparent;
-    border-top: 1px solid transparent;
     color: var(--vscode-tab-inactiveForeground);
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 4px;
     padding-bottom: 4px;
+    position: relative; // For outline offset
 
     &.selected {
         background-color: var(--vscode-testing-iconPassed);
         color: var(--vscode-button-foreground);
 
         .tab-metadata {
-            color: var(--vscode-button-foreground); // C149: Fix text color on selected tab
+            color: var(--vscode-button-foreground);
+        }
+
+        &.active {
+            outline: 1px solid var(--vscode-focusBorder);
+            outline-offset: -2px;
         }
     }
 }
@@ -262,16 +265,6 @@ body {
 .tab-title {
     font-weight: bold;
 }
-
-.tab.active {
-    color: var(--vscode-tab-activeForeground);
-    border-bottom-color: var(--vscode-tab-activeBorder);
-    border-left-color: var(--vscode-panel-border);
-    border-right-color: var(--vscode-panel-border);
-    border-top-color: var(--vscode-panel-border);
-    border-bottom-color: transparent; // Hide bottom border for active tab to blend with content area
-}
-
 
 .tab-metadata {
     display: flex;
@@ -284,6 +277,11 @@ body {
         align-items: center;
         gap: 3px;
     }
+}
+
+.tab.active {
+    color: var(--vscode-tab-activeForeground);
+    border-bottom-color: var(--vscode-tab-activeBorder);
 }
 
 .tab-content {
@@ -454,19 +452,12 @@ body {
 
     li {
         display: flex;
-        align-items: center;
-        gap: 8px;
+        flex-direction: column; // To stack file name and override input
+        align-items: flex-start;
+        gap: 4px;
         padding: 2px 4px;
-        font-size: 12px;
         border-radius: 3px;
         cursor: pointer;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-
-        input[type="checkbox"] {
-            margin-right: 4px;
-        }
 
         &:hover {
             background-color: var(--vscode-list-hoverBackground);
@@ -476,6 +467,21 @@ body {
             background-color: var(--vscode-list-activeSelectionBackground) !important;
             color: var(--vscode-list-activeSelectionForeground) !important;
         }
+    }
+
+    .file-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    input[type="checkbox"] {
+        margin-right: 4px;
     }
 
     .status-icon {
@@ -493,7 +499,7 @@ body {
     display: flex;
     gap: 4px;
     align-items: center;
-    margin-top: 2px;
+    width: 100%;
     
     input {
         flex-grow: 1;

@@ -121,6 +121,17 @@ ${cyclesContent}
         }
     }
 
+    private async getArtifactContent(artifactPath: string, errorMessage: string): Promise<string> {
+        try {
+            const uri = vscode.Uri.joinPath(this.extensionUri, artifactPath);
+            const contentBuffer = await vscode.workspace.fs.readFile(uri);
+            return Buffer.from(contentBuffer).toString('utf-8');
+        } catch (e) {
+            Services.loggerService.error(`Could not read ${artifactPath}. Error: ${e}`);
+            return errorMessage;
+        }
+    }
+
     public async generatePromptFile(cycleTitle: string, currentCycle: number) {
         if (!this.workspaceRoot) {
             vscode.window.showErrorMessage("Cannot generate prompt: No workspace folder is open.");
@@ -164,27 +175,11 @@ ${cyclesContent}
             
             const cyclesContent = await this._generateCyclesContent(currentCycleData, fullHistory);
 
-            let masterArtifactListContent = '<!-- Master Artifact List (A0) not found -->';
-            try {
-                const a0Path = path.join(rootPath, 'src', 'Artifacts', 'A0. DCE Master Artifact List.md');
-                masterArtifactListContent = await fs.readFile(a0Path, 'utf-8');
-            } catch (e) {
-                Services.loggerService.warn("Could not read A0. DCE Master Artifact List.md");
-            }
+            const a0Content = await this.getArtifactContent('src/Artifacts/A0. DCE Master Artifact List.md', '<!-- Master Artifact List (A0) not found -->');
+            const a52_1_Content = await this.getArtifactContent('src/Artifacts/A52.1 DCE - Parser Logic and AI Guidance.md', '<!-- A52.1 Parser Logic not found -->');
+            const a52_2_Content = await this.getArtifactContent('src/Artifacts/A52.2 DCE - Interaction Schema Source.md', '<!-- A52.2 Interaction Schema Source not found -->');
 
-            // C157 Fix: Read Interaction Schema from file using correct path
-            let interactionSchemaContent = '<!-- A52.2 Interaction Schema Source.md not found -->';
-            try {
-                const schemaUri = vscode.Uri.joinPath(this.extensionUri, 'src', 'Artifacts', 'A52.2 DCE - Interaction Schema Source.md');
-                const schemaFileContentBuffer = await vscode.workspace.fs.readFile(schemaUri);
-                const schemaFileContent = Buffer.from(schemaFileContentBuffer).toString('utf-8');
-                const schemaText = schemaFileContent.split('## Interaction Schema Text')[1];
-                if (schemaText) {
-                    interactionSchemaContent = `<M3. Interaction Schema>\n${schemaText.trim()}\n</M3. Interaction Schema>`;
-                }
-            } catch (e: any) {
-                Services.loggerService.error(`Could not read A52.2 for prompt context: ${e.message}`);
-            }
+            const interactionSchemaContent = `<M3. Interaction Schema>\n${a52_2_Content}\n\n${a52_1_Content}\n</M3. Interaction Schema>`;
 
             const projectScope = `<M4. current project scope>\n${fullHistoryFile.projectScope || 'No project scope defined.'}\n</M4. current project scope>`;
 
@@ -194,7 +189,7 @@ ${cyclesContent}
                 cycleOverview,
                 interactionSchemaContent,
                 projectScope,
-                `<M5. organized artifacts list>\n${masterArtifactListContent}\n</M5. organized artifacts list>`,
+                `<M5. organized artifacts list>\n${a0Content}\n</M5. organized artifacts list>`,
                 cyclesContent,
                 `<M7. Flattened Repo>\n${flattenedContent}\n</M7. Flattened Repo>`,
                 `</prompt.md>`
@@ -224,13 +219,12 @@ ${cyclesContent}
         const rootPath = this.workspaceRoot;
         const promptMdPath = path.join(rootPath, 'prompt.md');
         const artifactsDirInWorkspace = path.join(rootPath, 'src', 'Artifacts');
-        const artifactsDirInExtension = vscode.Uri.joinPath(this.extensionUri, 'src', 'Artifacts');
-
+        
         try {
             Services.loggerService.log("Generating Cycle 0 prompt.md file...");
             await Services.historyService.saveProjectScope(projectScope);
 
-            const allArtifactEntries = await vscode.workspace.fs.readDirectory(artifactsDirInExtension);
+            const allArtifactEntries = await vscode.workspace.fs.readDirectory(vscode.Uri.joinPath(this.extensionUri, 'src/Artifacts'));
             const templateFilenames = allArtifactEntries
                 .map(([filename]) => filename)
                 .filter(filename => filename.startsWith('T') && filename.endsWith('.md'));
@@ -243,35 +237,24 @@ ${cyclesContent}
 
             let staticContext = '<!-- START: Project Templates -->\n';
             for (const filename of templateFilenames) {
-                const artifactUri = vscode.Uri.joinPath(artifactsDirInExtension, filename);
-                const contentBuffer = await vscode.workspace.fs.readFile(artifactUri);
-                const content = Buffer.from(contentBuffer).toString('utf-8');
+                const content = await this.getArtifactContent(`src/Artifacts/${filename}`, `<!-- ${filename} not found -->`);
                 staticContext += `<${filename}>\n${content}\n</${filename}>\n\n`;
             }
             staticContext += '<!-- END: Project Templates -->\n\n';
             
-            let interactionSchemaContent = '<!-- A52.2 Interaction Schema Source.md not found -->';
-            try {
-                const schemaUri = vscode.Uri.joinPath(this.extensionUri, 'src', 'Artifacts', 'A52.2 DCE - Interaction Schema Source.md');
-                const schemaFileContentBuffer = await vscode.workspace.fs.readFile(schemaUri);
-                const schemaFileContent = Buffer.from(schemaFileContentBuffer).toString('utf-8');
-                const schemaText = schemaFileContent.split('## Interaction Schema Text')[1];
-                if (schemaText) {
-                    interactionSchemaContent = `<M3. Interaction Schema>\n${schemaText.trim()}\n</M3. Interaction Schema>`;
-                }
-            } catch (e: any) {
-                 Services.loggerService.error(`Could not read A52.2 for Cycle 0 prompt context: ${e.message}`);
-            }
+            const a52_1_Content = await this.getArtifactContent('src/Artifacts/A52.1 DCE - Parser Logic and AI Guidance.md', '<!-- A52.1 Parser Logic not found -->');
+            const a52_2_Content = await this.getArtifactContent('src/Artifacts/A52.2 DCE - Interaction Schema Source.md', '<!-- A52.2 Interaction Schema Source not found -->');
+            const interactionSchemaContent = `<M3. Interaction Schema>\n${a52_2_Content}\n\n${a52_1_Content}\n</M3. Interaction Schema>`;
 
             const cycle0Context = `<Cycle 0>
 <Cycle Context>
 You are a senior project architect. Your task is to establish the necessary documentation to achieve the user's goals, which are outlined in M4.
 
 **CRITICAL INSTRUCTIONS:**
-1.  Review the user's project scope. From the provided templates in the static context, select all that are relevant and generate initial planning artifacts based on them.
-2.  Your primary goal is to generate **planning and documentation artifacts** (e.g., Project Vision, Requirements).
+1.  Review the documentation templates provided in the static context as **best-practice examples**.
+2.  Your primary goal is to generate **planning and documentation artifacts** (e.g., Project Vision, Requirements) for the user's project, using the templates as a guide.
 3.  You **MUST NOT** generate code files (e.g., \`package.json\`, \`src/main.ts\`) in this initial cycle.
-4.  Every artifact you generate **MUST** be enclosed in the strict XML format: \`<file path="src/Artifacts/[ProjectName]-A1-Project-Vision.md">...</file>\`. Note the required output directory.
+4.  Every artifact you generate **MUST** be enclosed in the strict XML format: \`<file path="src/Artifacts/[Project Name] - A1. File Name.md">...</file>\`.
 </Cycle Context>
 <Static Context>
 ${staticContext.trim()}

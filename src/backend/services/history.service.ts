@@ -52,7 +52,6 @@ export class HistoryService {
         let isFreshEnvironment = history.cycles.length === 0;
 
         if (this.workspaceRoot) {
-            // C155 Fix: Check for a generic A0 file, not one with "DCE" in the name.
             const a0Path = path.join(this.workspaceRoot, 'src/Artifacts', 'A0. Master Artifact List.md');
             const a0Exists = await Services.fileOperationService.fileExists(a0Path);
             if (!a0Exists) {
@@ -72,7 +71,7 @@ export class HistoryService {
             selectedResponseId: null,
             selectedFilesForReplacement: [],
             tabCount: 4,
-            isSortedByLength: false,
+            isSortedByTokens: false, // C157: New property
         };
 
         if (isFreshEnvironment) {
@@ -105,7 +104,7 @@ export class HistoryService {
                 responses: {},
                 isParsedMode: false,
                 tabCount: 4,
-                isSortedByLength: false,
+                isSortedByTokens: false,
             };
         }
 

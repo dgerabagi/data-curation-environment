@@ -1,9 +1,9 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C157 (Fix sort toggle, select all, focused tab border, and ctrl+z)
+// Updated on: C157 (Implement persistent sort, focused tab border, link/unlink, and fix undo)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap, VscTrash, VscSync, VscClose, VscSave, VscBug, VscCheckAll, VscListOrdered, VscListUnordered, VscSymbolNumeric, VscClippy, VscLink } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap, VscTrash, VscSync, VscClose, VscSave, VscBug, VscCheckAll, VscListOrdered, VscListUnordered, VscSymbolNumeric, VscClippy, VscLink, VscDebugDisconnect } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -15,7 +15,7 @@ import { BatchWriteFile } from '@/common/ipc/channels.type';
 import OnboardingView from './OnboardingView';
 import { formatLargeNumber } from '@/common/utils/formatting';
 
-// ... (imports and interfaces remain the same) ...
+// ... (interfaces and useDebounce hook remain the same) ...
 interface ComparisonMetrics {
     originalTokens: number;
     modifiedTokens: number;
@@ -105,7 +105,7 @@ const App = () => {
     const [selectedFilesForReplacement, setSelectedFilesForReplacement] = React.useState<Set<string>>(new Set());
     const [selectedResponseId, setSelectedResponseId] = React.useState<string | null>(null);
     const [comparisonMetrics, setComparisonMetrics] = React.useState<Map<string, ComparisonMetrics>>(new Map());
-    const [isSortedByLength, setIsSortedByLength] = React.useState(false);
+    const [isSortedByTokens, setIsSortedByTokens] = React.useState(false);
     const [pathOverrides, setPathOverrides] = React.useState<Map<string, string>>(new Map());
     const [tempOverridePath, setTempOverridePath] = React.useState('');
 
@@ -133,20 +133,18 @@ const App = () => {
             selectedResponseId,
             selectedFilesForReplacement: Array.from(selectedFilesForReplacement),
             tabCount,
-            isSortedByLength,
+            isSortedByTokens,
             pathOverrides: Object.fromEntries(pathOverrides),
         };
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
-    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByLength, pathOverrides, clientIpc]);
+    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, clientIpc]);
 
-    // ... (useDebounce hook is the same) ...
     const debouncedSave = useDebounce(saveCurrentCycleState, 1000);
 
     React.useEffect(() => {
         debouncedSave();
-    }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, tabCount, isSortedByLength, pathOverrides, debouncedSave]);
+    }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, tabCount, isSortedByTokens, pathOverrides, debouncedSave]);
     
-    // ... (parseAllTabs is the same) ...
     const parseAllTabs = React.useCallback(() => {
         setTabs(prevTabs => {
             const allFilePaths = new Set<string>();
@@ -194,7 +192,7 @@ const App = () => {
             setLeftPaneWidth(cycleData.leftPaneWidth || 33);
             setSelectedResponseId(cycleData.selectedResponseId || null);
             setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || []));
-            setIsSortedByLength(cycleData.isSortedByLength || false); // C157 Fix: Restore sort state
+            setIsSortedByTokens(cycleData.isSortedByTokens || false);
             setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {})));
         };
 
@@ -213,7 +211,6 @@ const App = () => {
 
     React.useEffect(() => { if (isParsedMode) parseAllTabs(); }, [isParsedMode, tabs, parseAllTabs]);
     
-    // ... (useEffect for cleaning selectedFilePath is the same) ...
     React.useEffect(() => {
         if (!selectedFilePath) return;
     
@@ -282,19 +279,38 @@ const App = () => {
     const handleLinkFile = (originalPath: string) => {
         if (tempOverridePath.trim()) {
             setPathOverrides(prev => new Map(prev).set(originalPath, tempOverridePath.trim()));
-            setFileExistenceMap(prev => new Map(prev).set(originalPath, true)); // Assume user is correct for now
+            setFileExistenceMap(prev => new Map(prev).set(originalPath, true));
             setTempOverridePath('');
-            // Trigger a new comparison with the correct file
             handleSelectForViewing(originalPath);
         }
     };
 
-    // ... (other handlers and memos are mostly the same)
+    const handleUnlinkFile = (originalPath: string) => {
+        setPathOverrides(prev => {
+            const newMap = new Map(prev);
+            newMap.delete(originalPath);
+            return newMap;
+        });
+        setFileExistenceMap(prev => new Map(prev).set(originalPath, false));
+    };
+
+    const handleContextKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'z') {
+            // Allow default undo behavior
+            return;
+        }
+        if ((e.ctrlKey || e.metaKey) && (e.key === 'y' || (e.shiftKey && e.key === 'Z'))) {
+            // Allow default redo behavior
+            return;
+        }
+        // Stop propagation for other keys if needed, or just let them be
+    };
+
     const activeTabData = tabs[activeTab.toString()];
 
     const sortedTabIds = React.useMemo(() => {
         const tabIds = [...Array(tabCount)].map((_, i) => i + 1);
-        if (isParsedMode && isSortedByLength) {
+        if (isParsedMode && isSortedByTokens) {
             tabIds.sort((a, b) => {
                 const tokensA = tabs[a.toString()]?.parsedContent?.totalTokens ?? -1;
                 const tokensB = tabs[b.toString()]?.parsedContent?.totalTokens ?? -1;
@@ -302,7 +318,7 @@ const App = () => {
             });
         }
         return tabIds;
-    }, [tabs, isParsedMode, isSortedByLength, tabCount]);
+    }, [tabs, isParsedMode, isSortedByTokens, tabCount]);
 
     const viewableContent = React.useMemo(() => {
         if (!selectedFilePath || !activeTabData?.parsedContent) return undefined;
@@ -378,24 +394,15 @@ const App = () => {
     const handleSelectAllFilesToggle = () => {
         if (!activeTabData?.parsedContent) return;
         
-        const filesForTab = activeTabData.parsedContent.filesUpdated;
-        const isAllSelected = filesForTab.every(fp => selectedFilesForReplacement.has(`${activeTab}:::${fp}`));
+        const allFilesForTab = activeTabData.parsedContent.filesUpdated.map(fp => `${activeTab}:::${fp}`);
+        const isAllSelected = allFilesForTab.every(key => selectedFilesForReplacement.has(key));
 
         setSelectedFilesForReplacement(prev => {
             const newSet = new Set(prev);
-
-            // C157 Fix: Enforce atomicity. First, remove all existing selections for these files.
-            filesForTab.forEach(filePath => {
-                for (const key of newSet) {
-                    if (key.endsWith(`:::${filePath}`)) {
-                        newSet.delete(key);
-                    }
-                }
-            });
-
-            // Then, if we are selecting all, add them back for the current tab.
-            if (!isAllSelected) {
-                filesForTab.forEach(filePath => newSet.add(`${activeTab}:::${filePath}`));
+            if (isAllSelected) {
+                allFilesForTab.forEach(key => newSet.delete(key));
+            } else {
+                allFilesForTab.forEach(key => newSet.add(key));
             }
             return newSet;
         });
@@ -421,7 +428,7 @@ const App = () => {
         for (let i = 1; i <= tabCount; i++) {
             responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' };
         }
-        const currentState: PcppCycle = { cycleId: currentCycle, timestamp: new Date().toISOString(), title: cycleTitle, cycleContext, ephemeralContext, responses, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement: Array.from(selectedFilesForReplacement), tabCount, isSortedByLength };
+        const currentState: PcppCycle = { cycleId: currentCycle, timestamp: new Date().toISOString(), title: cycleTitle, cycleContext, ephemeralContext, responses, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement: Array.from(selectedFilesForReplacement), tabCount, isSortedByTokens };
         clientIpc.sendToServer(ClientToServerChannel.RequestLogState, { currentState });
     };
 
@@ -448,21 +455,33 @@ const App = () => {
     
     const renderContent = () => {
         if (!isParsedMode || !activeTabData?.parsedContent) {
-            return <textarea className="response-textarea" placeholder={`Paste AI response for tab ${activeTab} here...`} value={activeTabData?.rawContent || ''} onChange={(e) => handleRawContentChange(e.target.value, activeTab)} />;
+            return <textarea className="response-textarea" placeholder={`Paste AI response for tab ${activeTab} here...`} value={activeTabData?.rawContent || ''} onChange={(e) => handleRawContentChange(e.target.value, activeTab)} onKeyDown={handleContextKeyDown} />;
         }
         return <div className="parsed-view-grid">
             <div className="parsed-view-left" style={{ flexBasis: `${leftPaneWidth}%` }}>
                 <CollapsibleSection title="Associated Files" isCollapsed={isAssociatedFilesCollapsed} onToggle={() => setAssociatedFilesCollapsed(p => !p)}>
                     <ul className="associated-files-list">{activeTabData.parsedContent.filesUpdated.map(file => {
                         const fileExists = fileExistenceMap.get(file);
+                        const hasOverride = pathOverrides.has(file);
                         return <li key={file} className={selectedFilePath === file ? 'selected' : ''} onClick={() => handleSelectForViewing(file)} title={file}>
-                            <input type="checkbox" checked={selectedFilesForReplacement.has(`${activeTab}:::${file}`)} onChange={() => handleFileSelectionToggle(file)} onClick={e => e.stopPropagation()} />
-                            {fileExists ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
-                            <span>{file}</span>
+                            <div className="file-row">
+                                <input type="checkbox" checked={selectedFilesForReplacement.has(`${activeTab}:::${file}`)} onChange={() => handleFileSelectionToggle(file)} onClick={e => e.stopPropagation()} />
+                                {fileExists ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
+                                <span>{file}</span>
+                            </div>
                             {!fileExists && selectedFilePath === file && (
                                 <div className="path-override-container" onClick={e => e.stopPropagation()}>
-                                    <input type="text" placeholder="Enter correct relative path..." value={tempOverridePath} onChange={e => setTempOverridePath(e.target.value)} onKeyDown={e => {if(e.key === 'Enter') handleLinkFile(file)}} />
-                                    <button className="styled-button" onClick={() => handleLinkFile(file)}><VscLink /></button>
+                                    {hasOverride ? (
+                                        <>
+                                            <span>Linked to: {pathOverrides.get(file)}</span>
+                                            <button className="styled-button" onClick={() => handleUnlinkFile(file)}><VscDebugDisconnect /> Unlink</button>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <input type="text" placeholder="Enter correct relative path..." value={tempOverridePath} onChange={e => setTempOverridePath(e.target.value)} onKeyDown={e => {if(e.key === 'Enter') handleLinkFile(file)}} />
+                                            <button className="styled-button" onClick={() => handleLinkFile(file)}><VscLink /> Link</button>
+                                        </>
+                                    )}
                                 </div>
                             )}
                         </li>
@@ -499,14 +518,14 @@ const App = () => {
 
     return <div className="pc-view-container">
         <div className="pc-header"><div className="pc-toolbar"><button onClick={handleGeneratePrompt} title="Generate prompt.md"><VscFileCode /> Generate prompt.md</button><button onClick={handleLogState} title="Log Current State"><VscBug/></button><button onClick={handleGlobalParseToggle}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} /></div></div>
-        <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''}><div className="cycle-navigator"><span>Cycle:</span><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button><input type="number" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 0)} className="cycle-input" /><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button><button onClick={handleNewCycle} title="New Cycle" disabled={isNewCycleButtonDisabled}><VscAdd /></button><input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} /><button onClick={handleDeleteCycle} title="Delete Current Cycle"><VscTrash /></button><button onClick={handleResetHistory} title="Reset All History"><VscSync /></button></div><div className="context-inputs"><textarea className="context-textarea" placeholder="Cycle Context (notes for this cycle)..." value={cycleContext} onChange={e => setCycleContext(e.target.value)} /><textarea className="context-textarea" placeholder="Ephemeral Context (for this cycle's prompt only)..." value={ephemeralContext} onChange={e => setEphemeralContext(e.target.value)} /></div></CollapsibleSection>
+        <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''}><div className="cycle-navigator"><span>Cycle:</span><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 1}><VscChevronLeft /></button><input type="number" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 0)} className="cycle-input" /><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button><button onClick={handleNewCycle} title="New Cycle" disabled={isNewCycleButtonDisabled}><VscAdd /></button><input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} /><button onClick={handleDeleteCycle} title="Delete Current Cycle"><VscTrash /></button><button onClick={handleResetHistory} title="Reset All History"><VscSync /></button></div><div className="context-inputs"><textarea className="context-textarea" placeholder="Cycle Context (notes for this cycle)..." value={cycleContext} onChange={e => setCycleContext(e.target.value)} onKeyDown={handleContextKeyDown} /><textarea className="context-textarea" placeholder="Ephemeral Context (for this cycle's prompt only)..." value={ephemeralContext} onChange={e => setEphemeralContext(e.target.value)} onKeyDown={handleContextKeyDown} /></div></CollapsibleSection>
         <div className="tab-bar-container">
             <div className="tab-bar">{sortedTabIds.map((tabIndex) => {
                 const tabData = tabs[tabIndex.toString()];
                 const parsedData = tabData?.parsedContent;
                 return <div key={tabIndex} className={`tab ${activeTab === tabIndex ? 'active' : ''} ${selectedResponseId === tabIndex.toString() ? 'selected' : ''}`} onClick={() => setActiveTab(tabIndex)}><div className="tab-title">Resp {tabIndex}</div>{isParsedMode && parsedData && (<div className="tab-metadata"><span><VscFileCode /> {parsedData.files.length}</span><span><VscSymbolNumeric /> {formatLargeNumber(parsedData.totalTokens, 1)}</span></div>)}</div>;
             })}</div>
-            {isParsedMode && <button onClick={() => setIsSortedByLength(p => !p)} className={`sort-button styled-button ${isSortedByLength ? 'toggled' : ''}`} title="Sort responses by token count">{isSortedByLength ? <VscListOrdered/> : <VscListUnordered/>} Sort</button>}
+            {isParsedMode && <button onClick={() => setIsSortedByTokens(p => !p)} className="sort-button" title="Sort responses by token count">{isSortedByTokens ? <VscListOrdered/> : <VscListUnordered/>} Sort</button>}
         </div>
         <div className="tab-content">{activeTab !== null && <div className="tab-pane">{renderContent()}</div>}</div>
     </div>;
