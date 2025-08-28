@@ -1,3 +1,4 @@
+// Updated on: C166 (Add RequestOpenFolder handler)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -75,5 +76,9 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestImportHistory, () => {
         historyService.handleImportHistory();
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestOpenFolder, () => {
+        fileOperationService.handleOpenFolderRequest();
     });
 }

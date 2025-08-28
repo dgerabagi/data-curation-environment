@@ -1,4 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
+// Updated on: C166 (Add Open Folder functionality and primary button style)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -442,8 +443,8 @@ const App = () => {
                 <h1>No Folder Opened</h1>
                 <p>You have not yet opened a folder for the Data Curation Environment to manage.</p>
                 <button 
-                    className="styled-button" 
-                    onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'workbench.action.files.openFolder' })}
+                    className="dce-button-primary" 
+                    onClick={() => clientIpc.sendToServer(ClientToServerChannel.RequestOpenFolder, {})}
                 >
                     <VscFolder /> Open Folder
                 </button>

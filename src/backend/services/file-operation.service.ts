@@ -22,6 +22,16 @@ export class FileOperationService {
         }
     }
 
+    public async handleOpenFolderRequest() {
+        Services.loggerService.log(`[File Operation] Received request to open folder.`);
+        try {
+            await vscode.commands.executeCommand('vscode.openFolder');
+        } catch (error: any) {
+            Services.loggerService.error(`[File Operation] Failed to execute open folder command: ${error.message}`);
+            vscode.window.showErrorMessage(`Failed to open folder: ${error.message}`);
+        }
+    }
+
     public async handleCopyTextToClipboardRequest(text: string) {
         Services.loggerService.log(`[Clipboard] Received request to copy text.`);
         try {
@@ -232,7 +242,7 @@ export class FileOperationService {
         Services.loggerService.log(`Received request to create file: ${filePath}`);
         try {
             const workspaceFolders = vscode.workspace.workspaceFolders;
-            if (!workspaceFolders || workspaceFolders.length === 0) throw new Error("No workspace folder open.");
+            if (!workspaceFolders || !workspaceFolders[0]) throw new Error("No workspace folder open.");
             const absolutePath = path.resolve(workspaceFolders[0].uri.fsPath, filePath);
             await vscode.workspace.fs.writeFile(vscode.Uri.file(absolutePath), new Uint8Array());
             Services.loggerService.log(`Successfully created file: ${filePath}`);

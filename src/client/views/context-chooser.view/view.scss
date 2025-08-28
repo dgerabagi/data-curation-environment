@@ -1,4 +1,4 @@
-/* Updated on: C160 (Add styling for disabled checkbox) */
+/* Updated on: C166 (Add primary button style) */
 body {
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -328,7 +328,7 @@ body {
     flex-shrink: 0;
 }
 
-.flatten-button {
+.dce-button-primary {
     width: 100%;
     padding: 6px;
     border: 1px solid var(--vscode-button-border, var(--vscode-focusBorder));
@@ -336,16 +336,24 @@ body {
     color: var(--vscode-button-foreground);
     cursor: pointer;
     border-radius: 2px;
+
+    &:hover {
+        background-color: var(--vscode-button-hoverBackground);
+    }
 }
 
-.flatten-button:hover {
-    background-color: var(--vscode-button-hoverBackground);
-}
-
-.loading-message {
-    padding: 8px;
+.loading-message, .no-folder-message {
+    padding: 16px;
+    text-align: center;
     color: var(--vscode-descriptionForeground);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }
+
 
 .summary-panel {
     font-size: 12px;

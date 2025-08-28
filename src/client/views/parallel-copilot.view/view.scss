@@ -1,4 +1,4 @@
-/* Updated on: C160 (Remove starry-night line highlight) */
+/* Updated on: C166 (Add primary button style) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -118,6 +118,24 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
+}
+
+.dce-button-primary {
+    width: 100%;
+    padding: 6px;
+    border: 1px solid var(--vscode-button-border, var(--vscode-focusBorder));
+    background-color: var(--vscode-button-background);
+    color: var(--vscode-button-foreground);
+    cursor: pointer;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    &:hover {
+        background-color: var(--vscode-button-hoverBackground);
+    }
 }
 
 .cycle-navigator button, .pc-toolbar button, .file-actions button, .exit-diff-button, .styled-button, .sort-button {

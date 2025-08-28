@@ -13,6 +13,7 @@ export enum ClientToServerChannel {
     RequestRevealInExplorer = "clientToServer.requestRevealInExplorer",
     RequestCopyPath = "clientToServer.requestCopyPath",
     RequestOpenFile = "clientToServer.requestOpenFile",
+    RequestOpenFolder = "clientToServer.requestOpenFolder", // New in C166
     RequestFileContent = "clientToServer.requestFileContent",
     RequestMoveFile = "clientToServer.requestMoveFile",
     RequestCopyFile = "clientToServer.requestCopyFile",

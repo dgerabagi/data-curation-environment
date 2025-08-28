@@ -19,6 +19,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestRevealInExplorer ? { path: string } :
     T extends ClientToServerChannel.RequestCopyPath ? { path: string, relative: boolean } :
     T extends ClientToServerChannel.RequestOpenFile ? { path: string } :
+    T extends ClientToServerChannel.RequestOpenFolder ? {} : // New in C166
     T extends ClientToServerChannel.RequestFileContent ? { path: string } :
     T extends ClientToServerChannel.RequestMoveFile ? { oldPath: string, newPath: string } :
     T extends ClientToServerChannel.RequestCopyFile ? { sourcePath: string, destinationDir: string } :

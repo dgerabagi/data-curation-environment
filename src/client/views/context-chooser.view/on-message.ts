@@ -1,4 +1,4 @@
-// Updated on: C161 (Add logging for initialization troubleshooting)
+// Updated on: C166 (Add RequestOpenFolder handler)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -63,6 +63,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     serverIpc.onClientMessage(ClientToServerChannel.RequestRevealInExplorer, (data) => fileOperationService.handleRevealInExplorerRequest(data.path));
     serverIpc.onClientMessage(ClientToServerChannel.RequestCopyPath, (data) => fileOperationService.handleCopyPathRequest(data.path, data.relative));
     serverIpc.onClientMessage(ClientToServerChannel.RequestOpenFile, (data) => fileOperationService.handleOpenFileRequest(data.path));
+    serverIpc.onClientMessage(ClientToServerChannel.RequestOpenFolder, () => fileOperationService.handleOpenFolderRequest());
     serverIpc.onClientMessage(ClientToServerChannel.RequestMoveFile, (data) => fileOperationService.handleMoveFileRequest(data.oldPath, data.newPath));
     serverIpc.onClientMessage(ClientToServerChannel.RequestUndo, () => actionService.undo());
     serverIpc.onClientMessage(ClientToServerChannel.RequestRedo, () => actionService.redo());
