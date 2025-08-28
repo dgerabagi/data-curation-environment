@@ -1,12 +1,12 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-27T21:51:50.916Z
+  Date Generated: 2025-08-28T21:01:44.847Z
   ---
   Total Files: 249
-  Total Lines: 31838
-  Total Characters: 1791987
-  Approx. Tokens: 448087
+  Total Lines: 31839
+  Total Characters: 1792372
+  Approx. Tokens: 448183
 -->
 
 <!-- Top 10 Files by Token Count -->
@@ -18,7 +18,7 @@
 6. src\Artifacts\A0. DCE Master Artifact List.md (6588 tokens)
 7. src\client\views\context-chooser.view\view.tsx (4919 tokens)
 8. src\client\components\tree-view\TreeView.tsx (4508 tokens)
-9. src\backend\services\prompt.service.ts (3999 tokens)
+9. src\backend\services\prompt.service.ts (4011 tokens)
 10. src\backend\services\file-operation.service.ts (3987 tokens)
 
 <!-- Full File List -->
@@ -54,7 +54,7 @@
 30. src\Artifacts\A25. DCE - Phase 1 - Git & Problems Integration Plan.md - Lines: 61 - Chars: 5871 - Tokens: 1468
 31. src\Artifacts\A26. DCE - Phase 1 - File System Traversal & Caching Strategy.md - Lines: 42 - Chars: 3593 - Tokens: 899
 32. src\Artifacts\A27. DCE - Phase 1 - Undo-Redo Feature Plan.md - Lines: 50 - Chars: 4903 - Tokens: 1226
-33. src\Artifacts\A28. DCE - Packaging and Distribution Guide.md - Lines: 96 - Chars: 4075 - Tokens: 1019
+33. src\Artifacts\A28. DCE - Packaging and Distribution Guide.md - Lines: 95 - Chars: 4366 - Tokens: 1092
 34. src\Artifacts\A29. DCE - Phase 1 - Binary and Image File Handling Strategy.md - Lines: 81 - Chars: 4217 - Tokens: 1055
 35. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
 36. src\Artifacts\A30. DCE - Phase 1 - PDF Handling and Virtualization Strategy.md - Lines: 44 - Chars: 4431 - Tokens: 1108
@@ -130,7 +130,7 @@
 106. src\backend\services\highlighting.service.ts - Lines: 58 - Chars: 2920 - Tokens: 730
 107. src\backend\services\history.service.ts - Lines: 235 - Chars: 10072 - Tokens: 2518
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-109. src\backend\services\prompt.service.ts - Lines: 309 - Chars: 15993 - Tokens: 3999
+109. src\backend\services\prompt.service.ts - Lines: 310 - Chars: 16044 - Tokens: 4011
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 111. src\backend\services\services.ts - Lines: 38 - Chars: 1778 - Tokens: 445
 112. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
@@ -270,7 +270,7 @@
 246. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
 247. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
 248. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
-249. webpack.config.js - Lines: 103 - Chars: 2830 - Tokens: 708
+249. webpack.config.js - Lines: 104 - Chars: 2873 - Tokens: 719
 
 <file path=".gitignore">
 node_modules
@@ -13757,7 +13757,7 @@ This feature will be implemented primarily on the backend to manage the file sys
 # Artifact A28: DCE - Packaging and Distribution Guide
 # Date Created: C43
 # Author: AI Model
-# Updated on: C45 (Add step to update package.json before packaging)
+# Updated on: C164 (Add critical step for including static assets)
 
 - **Key/Value for A0:**
 - **Description:** Provides a step-by-step guide on how to package the extension into a `.vsix` file for beta testing and distribution.
@@ -13791,15 +13791,18 @@ Before packaging, ensure your `package.json` file is complete. The `vsce` tool w
 -   `bugs`: A link to your project's issue tracker.
 -   `version`: Increment the version number for each new release.
 
-**Example `repository` field:**
-```json
-"repository": {
-  "type": "git",
-  "url": "https://github.com/dgerabagi/data-curation-environment.git"
-}
-```
+### Step 1: Verify Static Asset Handling (CRITICAL)
 
-### Step 1: Ensure Dependencies are Installed
+The extension's backend code runs from the compiled `dist` directory. Any static files that the backend needs to read at runtime (like our `T*` template artifacts in `src/Artifacts`) **must be copied into the `dist` directory** during the build process.
+
+-   **Check `webpack.config.js`:** Ensure the `CopyPlugin` includes a rule to copy `src/Artifacts` to the `dist` folder.
+    ```javascript
+    // Example rule in CopyPlugin patterns:
+    { from: "src/Artifacts", to: "Artifacts" }
+    ```
+-   **Check Backend Code:** Ensure any code that reads these files (e.g., `prompt.service.ts`) constructs the path relative to the final `dist` directory (e.g., `path.join(context.extensionPath, 'dist', 'Artifacts', ...)`).
+
+### Step 2: Ensure Dependencies are Installed
 
 Make sure your project's dependencies are up to date.
 
@@ -13807,7 +13810,7 @@ Make sure your project's dependencies are up to date.
 npm install
 ```
 
-### Step 2: Create a Production Build
+### Step 3: Create a Production Build
 
 Before packaging, it's essential to create an optimized production build of the extension. Our `package.json` already has a script for this.
 
@@ -13817,7 +13820,7 @@ npm run package
 
 This command runs webpack in `production` mode, which minifies the code and removes source maps, resulting in a smaller and faster extension. It will update the files in the `/dist` directory.
 
-### Step 3: Run the Packaging Command
+### Step 4: Run the Packaging Command
 
 Once the production build is complete, you can run the `vsce` packaging command.
 
@@ -13845,11 +13848,6 @@ You will see the `.vsix` file in the root of your project directory.
     *   Select **"Install from VSIX..."**.
     *   In the file dialog that opens, navigate to and select the `.vsix` file you provided.
     *   VS Code will install the extension and prompt for a reload.
-
-## 5. Next Steps (Future)
-
-*   **Versioning:** Before creating a new package for distribution, remember to increment the `version` number in `package.json`.
-*   **Marketplace Publishing:** Publishing to the official VS Code Marketplace involves creating a publisher identity and using `vsce publish` instead of `vsce package`.
 </file>
 
 <file path="src/Artifacts/A29. DCE - Phase 1 - Binary and Image File Handling Strategy.md">
@@ -20500,13 +20498,14 @@ ${cyclesContent}
         }
     }
 
-    private async getArtifactContent(artifactPath: string, errorMessage: string): Promise<string> {
+    private async getArtifactContent(artifactFilename: string, errorMessage: string): Promise<string> {
         try {
-            const uri = vscode.Uri.joinPath(this.extensionUri, artifactPath);
+            // C164 Fix: Read from the 'dist/Artifacts' directory which is present in the installed extension.
+            const uri = vscode.Uri.joinPath(this.extensionUri, 'dist', 'Artifacts', artifactFilename);
             const contentBuffer = await vscode.workspace.fs.readFile(uri);
             return Buffer.from(contentBuffer).toString('utf-8');
         } catch (e) {
-            Services.loggerService.error(`Could not read ${artifactPath}. Error: ${e}`);
+            Services.loggerService.error(`Could not read ${artifactFilename}. Error: ${e}`);
             return errorMessage;
         }
     }
@@ -20554,9 +20553,9 @@ ${cyclesContent}
             
             const cyclesContent = await this._generateCyclesContent(currentCycleData, fullHistory);
 
-            const a0Content = await this.getArtifactContent('src/Artifacts/A0. DCE Master Artifact List.md', '<!-- Master Artifact List (A0) not found -->');
-            const a52_1_Content = await this.getArtifactContent('src/Artifacts/A52.1 DCE - Parser Logic and AI Guidance.md', '<!-- A52.1 Parser Logic not found -->');
-            const a52_2_Content = await this.getArtifactContent('src/Artifacts/A52.2 DCE - Interaction Schema Source.md', '<!-- A52.2 Interaction Schema Source not found -->');
+            const a0Content = await this.getArtifactContent('A0. DCE Master Artifact List.md', '<!-- Master Artifact List (A0) not found -->');
+            const a52_1_Content = await this.getArtifactContent('A52.1 DCE - Parser Logic and AI Guidance.md', '<!-- A52.1 Parser Logic not found -->');
+            const a52_2_Content = await this.getArtifactContent('A52.2 DCE - Interaction Schema Source.md', '<!-- A52.2 Interaction Schema Source not found -->');
 
             const interactionSchemaContent = `<M3. Interaction Schema>\n${a52_2_Content}\n\n${a52_1_Content}\n</M3. Interaction Schema>`;
 
@@ -20605,7 +20604,7 @@ ${cyclesContent}
             Services.loggerService.log("Generating Cycle 0 prompt.md file...");
             await Services.historyService.saveProjectScope(projectScope);
 
-            const allArtifactEntries = await vscode.workspace.fs.readDirectory(vscode.Uri.joinPath(this.extensionUri, 'src/Artifacts'));
+            const allArtifactEntries = await vscode.workspace.fs.readDirectory(vscode.Uri.joinPath(this.extensionUri, 'dist', 'Artifacts'));
             const templateFilenames = allArtifactEntries
                 .map(([filename]) => filename)
                 .filter(filename => filename.startsWith('T') && filename.endsWith('.md'));
@@ -20618,13 +20617,13 @@ ${cyclesContent}
 
             let staticContext = '<!-- START: Project Templates -->\n';
             for (const filename of templateFilenames) {
-                const content = await this.getArtifactContent(`src/Artifacts/${filename}`, `<!-- ${filename} not found -->`);
+                const content = await this.getArtifactContent(`${filename}`, `<!-- ${filename} not found -->`);
                 staticContext += `<${filename}>\n${content}\n</${filename}>\n\n`;
             }
             staticContext += '<!-- END: Project Templates -->\n\n';
             
-            const a52_1_Content = await this.getArtifactContent('src/Artifacts/A52.1 DCE - Parser Logic and AI Guidance.md', '<!-- A52.1 Parser Logic not found -->');
-            const a52_2_Content = await this.getArtifactContent('src/Artifacts/A52.2 DCE - Interaction Schema Source.md', '<!-- A52.2 Interaction Schema Source not found -->');
+            const a52_1_Content = await this.getArtifactContent('A52.1 DCE - Parser Logic and AI Guidance.md', '<!-- A52.1 Parser Logic not found -->');
+            const a52_2_Content = await this.getArtifactContent('A52.2 DCE - Interaction Schema Source.md', '<!-- A52.2 Interaction Schema Source not found -->');
             const interactionSchemaContent = `<M3. Interaction Schema>\n${a52_2_Content}\n\n${a52_1_Content}\n</M3. Interaction Schema>`;
 
             const cycle0Context = `<Cycle 0>
@@ -20645,7 +20644,7 @@ ${staticContext.trim()}
             const projectScopeContent = `<M4. current project scope>\n${projectScope}\n</M4. current project scope>`;
 
             await vscode.workspace.fs.createDirectory(vscode.Uri.file(artifactsDirInWorkspace));
-            const readmeContent = await this.getArtifactContent('src/Artifacts/A72. DCE - README for Artifacts.md', '# Welcome to the Data Curation Environment!');
+            const readmeContent = await this.getArtifactContent('A72. DCE - README for Artifacts.md', '# Welcome to the Data Curation Environment!');
             const readmeUri = vscode.Uri.file(path.join(artifactsDirInWorkspace, 'README.md'));
             await vscode.workspace.fs.writeFile(readmeUri, Buffer.from(readmeContent, 'utf-8'));
             Services.loggerService.log("Created src/Artifacts/README.md for the new project.");
@@ -32774,8 +32773,9 @@ const webviewConfig = {
         new CopyPlugin({
             patterns: [
                 { from: "public", to: "public" },
-                // C118: Copy the starry-night CSS theme to the dist folder so it can be loaded in the webview.
-                { from: "node_modules/@wooorm/starry-night/style/both.css", to: "starry-night.css" }
+                { from: "node_modules/@wooorm/starry-night/style/both.css", to: "starry-night.css" },
+                // C164 Fix: Copy static artifacts needed by the backend into the dist folder.
+                { from: "src/Artifacts", to: "Artifacts" }
             ],
         }),
         new webpack.ProvidePlugin({
