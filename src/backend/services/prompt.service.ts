@@ -1,4 +1,3 @@
-// Updated on: C165 (Fix multiple prompt generation bugs)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -47,23 +46,50 @@ M7. Flattened Repo
         return `${parsed.summary}\n\n${parsed.courseOfAction}`;
     }
 
+    private async _generateCycle0Content(): Promise<string> {
+        const allArtifactEntries = await vscode.workspace.fs.readDirectory(vscode.Uri.joinPath(this.extensionUri, 'dist', 'Artifacts'));
+        const templateFilenames = allArtifactEntries
+            .map(([filename]) => filename)
+            .filter(filename => filename.startsWith('T') && filename.endsWith('.md'));
+
+        templateFilenames.sort((a, b) => {
+            const numA = parseInt(a.match(/T(\d+)/)?.[1] || '0', 10);
+            const numB = parseInt(b.match(/T(\d+)/)?.[1] || '0', 10);
+            return numA - numB;
+        });
+
+        let staticContext = '<!-- START: Project Templates -->\n';
+        for (const filename of templateFilenames) {
+            const content = await this.getArtifactContent(`${filename}`, `<!-- ${filename} not found -->`);
+            staticContext += `<${filename}>\n${content}\n</${filename}>\n\n`;
+        }
+        staticContext += '<!-- END: Project Templates -->';
+
+        return `<Cycle 0>
+<Cycle Context>
+This section contains a persistent archive of documentation templates. You can use these as a guide for creating new project artifacts.
+</Cycle Context>
+<Static Context>
+${staticContext.trim()}
+</Static Context>
+</Cycle 0>`;
+    }
+
     private async _generateCyclesContent(currentCycleData: PcppCycle, fullHistory: PcppCycle[]): Promise<string> {
-        const allCycles = [...fullHistory];
-        const cycleMap = new Map(allCycles.map(c => [c.cycleId, c]));
+        const relevantHistory = fullHistory.filter(c => c.cycleId <= currentCycleData.cycleId);
+        const cycleMap = new Map(relevantHistory.map(c => [c.cycleId, c]));
         cycleMap.set(currentCycleData.cycleId, currentCycleData);
 
-        // C165 Fix: Filter out future cycles when generating from a past cycle
-        const sortedHistory = [...cycleMap.values()]
-            .filter(c => c.cycleId <= currentCycleData.cycleId && c.cycleId > 0)
-            .sort((a, b) => b.cycleId - a.cycleId);
+        const sortedHistory = [...cycleMap.values()].sort((a, b) => b.cycleId - a.cycleId);
     
         let cyclesContent = '<M6. Cycles>';
 
-        // C165 Fix: Always include Cycle 0 / Template Archive content
-        const templateArchiveContent = await this.getTemplateArchiveContent();
-        cyclesContent += `\n\n<Cycle 0 - Project Initialization/Template Archive>\n${templateArchiveContent}\n</Cycle 0 - Project Initialization/Template Archive>`;
+        // Always add Cycle 0
+        const cycle0Content = await this._generateCycle0Content();
+        cyclesContent += `\n\n${cycle0Content}`;
     
         for (const cycle of sortedHistory) {
+            if (cycle.cycleId === 0) continue; // Skip cycle 0 as it's manually added
             cyclesContent += `\n\n<Cycle ${cycle.cycleId}>\n`;
     
             if (cycle.cycleContext && cycle.cycleContext.trim()) {
@@ -75,7 +101,7 @@ M7. Flattened Repo
             }
     
             const previousCycleId = cycle.cycleId - 1;
-            if (previousCycleId > 0) { // Don't look for summary for cycle 0
+            if (previousCycleId > 0) { // Don't generate summary for Cycle 0
                 const previousCycle = cycleMap.get(previousCycleId);
                 if (previousCycle) {
                     const summary = this.getPreviousCycleSummary(previousCycle);
@@ -143,7 +169,6 @@ ${cyclesContent}
     }
 
     public async generatePromptFile(cycleTitle: string, currentCycle: number) {
-        this.workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
         if (!this.workspaceRoot) {
             vscode.window.showErrorMessage("Cannot generate prompt: No workspace folder is open.");
             return;
@@ -178,21 +203,22 @@ ${cyclesContent}
             let cycleOverview = '<M2. cycle overview>\n';
             cycleOverview += `Current Cycle ${currentCycle} - ${cycleTitle}\n`;
             for (const cycle of sortedHistory) {
-                if (cycle.cycleId !== currentCycle && cycle.cycleId > 0) { // C165 Fix: Don't show cycle 0 here
+                if (cycle.cycleId !== currentCycle) {
                      cycleOverview += `Cycle ${cycle.cycleId} - ${cycle.title}\n`;
                 }
             }
-            // C165 Fix: Always add cycle 0 to overview
-            cycleOverview += 'Cycle 0 - Project Initialization/Template Archive\n';
+            // Always include Cycle 0 in the overview
+            if (!cycleOverview.includes('Cycle 0')) {
+                cycleOverview += 'Cycle 0 - Project Initialization/Template Archive\n';
+            }
             cycleOverview += '</M2. cycle overview>';
             
             const cyclesContent = await this._generateCyclesContent(currentCycleData, fullHistory);
 
-            // C165 Fix: Find and use the user's A0 file, not the extension's.
-            const a0Files = await vscode.workspace.findFiles('**/src/Artifacts/A0.*Master Artifact List.md', '**/node_modules/**', 1);
-            let a0Content = '<!-- User Master Artifact List (A0) not found in src/Artifacts/ -->';
-            if (a0Files.length > 0) {
-                const contentBuffer = await vscode.workspace.fs.readFile(a0Files[0]);
+            const userA0Files = await vscode.workspace.findFiles('**/A0*.md', '**/node_modules/**', 1);
+            let a0Content = '<!-- Master Artifact List (A0) not found in workspace -->';
+            if (userA0Files.length > 0) {
+                const contentBuffer = await vscode.workspace.fs.readFile(userA0Files[0]);
                 a0Content = Buffer.from(contentBuffer).toString('utf-8');
             }
             
@@ -233,34 +259,7 @@ ${cyclesContent}
         }
     }
 
-    private async getTemplateArchiveContent(): Promise<string> {
-        let staticContext = '<!-- START: Project Templates -->\n';
-        try {
-            const allArtifactEntries = await vscode.workspace.fs.readDirectory(vscode.Uri.joinPath(this.extensionUri, 'dist', 'Artifacts'));
-            const templateFilenames = allArtifactEntries
-                .map(([filename]) => filename)
-                .filter(filename => filename.startsWith('T') && filename.endsWith('.md'));
-
-            templateFilenames.sort((a, b) => {
-                const numA = parseInt(a.match(/T(\d+)/)?.[1] || '0', 10);
-                const numB = parseInt(b.match(/T(\d+)/)?.[1] || '0', 10);
-                return numA - numB;
-            });
-
-            for (const filename of templateFilenames) {
-                const content = await this.getArtifactContent(filename, `<!-- ${filename} not found -->`);
-                staticContext += `<${filename}>\n${content}\n</${filename}>\n\n`;
-            }
-        } catch (e) {
-            Services.loggerService.error(`Failed to build template archive: ${e}`);
-            staticContext += '<!-- Error loading templates -->';
-        }
-        staticContext += '<!-- END: Project Templates -->';
-        return staticContext;
-    }
-
     public async generateCycle0Prompt(projectScope: string, serverIpc: ServerPostMessageManager) {
-        this.workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
         if (!this.workspaceRoot) {
             vscode.window.showErrorMessage("Cannot generate prompt: No workspace folder is open.");
             return;
@@ -273,26 +272,11 @@ ${cyclesContent}
             Services.loggerService.log("Generating Cycle 0 prompt.md file...");
             await Services.historyService.saveProjectScope(projectScope);
 
-            const staticContext = await this.getTemplateArchiveContent();
+            const cycle0Content = await this._generateCycle0Content();
             
             const a52_1_Content = await this.getArtifactContent('A52.1 DCE - Parser Logic and AI Guidance.md', '<!-- A52.1 Parser Logic not found -->');
             const a52_2_Content = await this.getArtifactContent('A52.2 DCE - Interaction Schema Source.md', '<!-- A52.2 Interaction Schema Source not found -->');
             const interactionSchemaContent = `<M3. Interaction Schema>\n${a52_2_Content}\n\n${a52_1_Content}\n</M3. Interaction Schema>`;
-
-            const cycle0Context = `<Cycle 0>
-<Cycle Context>
-You are a senior project architect. Your task is to establish the necessary documentation to achieve the user's goals, which are outlined in M4.
-
-**CRITICAL INSTRUCTIONS:**
-1.  Review the documentation templates provided in the static context as **best-practice examples**.
-2.  Your primary goal is to generate **planning and documentation artifacts** (e.g., Project Vision, Requirements) for the user's project, using the templates as a guide.
-3.  You **MUST NOT** generate code files (e.g., \`package.json\`, \`src/main.ts\`) in this initial cycle.
-4.  Every artifact you generate **MUST** be enclosed in the strict XML format: \`<file path="src/Artifacts/[Project Name] - A1. File Name.md">...</file>\`.
-</Cycle Context>
-<Static Context>
-${staticContext.trim()}
-</Static Context>
-</Cycle 0>`;
 
             const projectScopeContent = `<M4. current project scope>\n${projectScope}\n</M4. current project scope>`;
 
@@ -306,7 +290,7 @@ ${staticContext.trim()}
             const flattenedRepoContent = `<M7. Flattened Repo>\n${readmeFileContent}\n</M7. Flattened Repo>`;
 
             const promptParts = [
-                `<prompt.md>`, this.artifactSchemaTemplate, `<M2. cycle overview>\nCurrent Cycle 0 - Project Initialization/Template Archive\n</M2. cycle overview>`, interactionSchemaContent, projectScopeContent, `<M5. organized artifacts list>\n# No artifacts exist yet.\n</M5. organized artifacts list>`, `<M6. Cycles>\n${cycle0Context}\n</M6. Cycles>`, flattenedRepoContent, `</prompt.md>`
+                `<prompt.md>`, this.artifactSchemaTemplate, `<M2. cycle overview>\nCurrent Cycle 0 - Project Initialization\n</M2. cycle overview>`, interactionSchemaContent, projectScopeContent, `<M5. organized artifacts list>\n# No artifacts exist yet.\n</M5. organized artifacts list>`, `<M6. Cycles>\n${cycle0Content}\n</M6. Cycles>`, flattenedRepoContent, `</prompt.md>`
             ];
 
             const finalPrompt = promptParts.join('\n\n');

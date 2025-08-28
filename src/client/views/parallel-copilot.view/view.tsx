@@ -1,8 +1,8 @@
-// Updated on: C165 (Handle "No Folder Opened" state)
+// src/client/views/parallel-copilot.view/view.tsx
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap, VscTrash, VscSync, VscClose, VscSave, VscBug, VscCheckAll, VscListOrdered, VscListUnordered, VscSymbolNumeric, VscClippy, VscLink, VscDebugDisconnect, VscBook, VscCloudUpload, VscCloudDownload, VscFolder } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap, VscTrash, VscSync, VscClose, VscSave, VscBug, VscCheckAll, VscListOrdered, VscListUnordered, VscSymbolNumeric, VscClippy, VscLink, VscDebugDisconnect, VscBook, VscCloudUpload, VscCloudDownload, VscFolder, VscVm, VscOpenPreview } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -112,7 +112,7 @@ const App = () => {
     const clientIpc = ClientPostMessageManager.getInstance();
 
     const saveCurrentCycleState = React.useCallback(() => {
-        if (currentCycle === null || currentCycle < 0) return; // Don't save for special states
+        if (currentCycle === null) return;
         const responses: { [key: string]: PcppResponse } = {};
         for (let i = 1; i <= tabCount; i++) {
             responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' };
@@ -198,7 +198,7 @@ const App = () => {
             setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {})));
         };
 
-        clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId > 0 ? cycleData.cycleId : 1); });
+        clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); });
         clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); });
         clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml)));
         clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap))));
@@ -342,11 +342,11 @@ const App = () => {
     };
 
     const handleGeneratePrompt = () => {
-        if (currentCycle === null || currentCycle <= 0) return;
+        if (currentCycle === null) return;
         clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle });
     }
     
-    const handleDeleteCycle = () => { if(currentCycle !== null && currentCycle > 0) clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle }); };
+    const handleDeleteCycle = () => { if(currentCycle !== null) clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle }); };
     const handleResetHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {});
     const handleExportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestExportHistory, {});
     const handleImportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestImportHistory, {});
@@ -413,7 +413,7 @@ const App = () => {
     }, [cycleTitle, cycleContext, selectedResponseId]);
     
     const handleLogState = () => {
-        if (currentCycle === null || currentCycle < 0) return;
+        if (currentCycle === null) return;
         const responses: { [key: string]: PcppResponse } = {};
         for (let i = 1; i <= tabCount; i++) {
             responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' };
@@ -439,10 +439,13 @@ const App = () => {
     if (currentCycle === -1) {
         return (
             <div className="onboarding-container">
-                <h1><VscFolder/> No Folder Opened</h1>
-                <p>You have not yet opened a folder. Please open a folder to use the Data Curation Environment.</p>
-                <button className="styled-button" onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'vscode.openFolder' })}>
-                    Open Folder
+                <h1>No Folder Opened</h1>
+                <p>You have not yet opened a folder for the Data Curation Environment to manage.</p>
+                <button 
+                    className="styled-button" 
+                    onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'workbench.action.files.openFolder' })}
+                >
+                    <VscFolder /> Open Folder
                 </button>
             </div>
         );

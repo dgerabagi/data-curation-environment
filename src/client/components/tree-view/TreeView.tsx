@@ -1,4 +1,4 @@
-// Updated on: C165 (Prioritize multi-select for delete operation)
+// Updated on: C165 (Fix multi-delete logic)
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { VscChevronRight } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -181,6 +181,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     };
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
+        // C72 Fix: If the event is coming from an input field, ignore it.
         if ((e.target as HTMLElement).tagName === 'INPUT') {
             return;
         }
@@ -261,6 +262,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         }
     };
 
+    // --- Drag/Drop ---
     const handleInternalDragStart = (e: React.DragEvent, node: TreeNode) => {
         e.stopPropagation();
         setDraggedPath(node.absolutePath);
