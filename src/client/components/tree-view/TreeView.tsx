@@ -1,4 +1,4 @@
-// Updated on: C83 (Fix ref assignment type error)
+// Updated on: C165 (Prioritize multi-select for delete operation)
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { VscChevronRight } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -181,7 +181,6 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     };
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
-        // C72 Fix: If the event is coming from an input field, ignore it.
         if ((e.target as HTMLElement).tagName === 'INPUT') {
             return;
         }
@@ -226,6 +225,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
             e.preventDefault();
             e.stopPropagation();
             let pathsToDelete: string[] = [];
+            // C165 Fix: Prioritize the multi-selection set over the single focused node.
             if (selectedPaths.size > 0) {
                 pathsToDelete = Array.from(selectedPaths);
             } else if (focusedNodePath) {
@@ -261,7 +261,6 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         }
     };
 
-    // --- Drag/Drop ---
     const handleInternalDragStart = (e: React.DragEvent, node: TreeNode) => {
         e.stopPropagation();
         setDraggedPath(node.absolutePath);

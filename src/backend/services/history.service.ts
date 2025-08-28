@@ -1,3 +1,4 @@
+// Updated on: C165 (Handle "No Folder Opened" state)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -12,12 +13,17 @@ export class HistoryService {
     private workspaceRoot: string | undefined;
 
     constructor() {
+        this.updateWorkspace();
+    }
+
+    private updateWorkspace() {
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (workspaceFolders && workspaceFolders.length > 0) {
             this.workspaceRoot = workspaceFolders[0].uri.fsPath;
             this.historyFilePath = path.join(this.workspaceRoot, '.vscode', 'dce_history.json');
         } else {
-            Services.loggerService.warn("HistoryService: No workspace folder found. History will not be saved.");
+            this.workspaceRoot = undefined;
+            this.historyFilePath = undefined;
         }
     }
 
@@ -44,25 +50,16 @@ export class HistoryService {
     }
 
     public async getFullHistory(): Promise<PcppHistoryFile> {
+        this.updateWorkspace();
         return await this._readHistoryFile();
     }
 
     public async getLatestCycle(): Promise<PcppCycle> {
         Services.loggerService.log("HistoryService: getLatestCycle called.");
-        const history = await this._readHistoryFile();
-        let isFreshEnvironment = true;
+        this.updateWorkspace();
 
-        if (this.workspaceRoot) {
-            try {
-                await vscode.workspace.fs.stat(vscode.Uri.file(path.join(this.workspaceRoot, 'src/Artifacts/README.md')));
-                isFreshEnvironment = false;
-            } catch (e) {
-                isFreshEnvironment = true;
-            }
-        }
-        
         const defaultCycle: PcppCycle = {
-            cycleId: isFreshEnvironment ? 0 : 1,
+            cycleId: 1, // Default to 1, will be overridden
             timestamp: new Date().toISOString(),
             title: 'New Cycle',
             cycleContext: '',
@@ -75,16 +72,30 @@ export class HistoryService {
             tabCount: 4,
             isSortedByTokens: false,
         };
-
-        if (isFreshEnvironment) {
-             Services.loggerService.log("Fresh environment detected. Returning Cycle 0.");
-             return defaultCycle;
+        
+        if (!this.workspaceRoot) {
+            Services.loggerService.warn("No workspace folder open. Returning special Cycle -1 state.");
+            return { ...defaultCycle, cycleId: -1, title: "No Folder Opened" };
         }
 
+        let isFreshEnvironment = true;
+        try {
+            await vscode.workspace.fs.stat(vscode.Uri.file(path.join(this.workspaceRoot, 'src/Artifacts/README.md')));
+            isFreshEnvironment = false;
+        } catch (e) {
+            isFreshEnvironment = true;
+        }
+        
+        if (isFreshEnvironment) {
+             Services.loggerService.log("Fresh environment detected. Returning Cycle 0.");
+             return { ...defaultCycle, cycleId: 0, title: "Project Setup" };
+        }
+
+        const history = await this._readHistoryFile();
         if (history.cycles.length === 0) {
             Services.loggerService.log("No history found, creating default cycle 1.");
-            await this.saveCycleData(defaultCycle);
-            return defaultCycle;
+            await this.saveCycleData({ ...defaultCycle, cycleId: 1 });
+            return { ...defaultCycle, cycleId: 1 };
         }
         
         const latestCycle = history.cycles.reduce((latest, current) => current.cycleId > latest.cycleId ? current : latest);
@@ -94,6 +105,7 @@ export class HistoryService {
 
     public async getCycleData(cycleId: number): Promise<PcppCycle | null> {
         Services.loggerService.log(`HistoryService: getting data for cycle ${cycleId}.`);
+        this.updateWorkspace();
         
         if (cycleId === 0) {
             Services.loggerService.log("Returning special case for Cycle 0.");
@@ -116,6 +128,7 @@ export class HistoryService {
     }
 
     public async saveProjectScope(scope: string): Promise<void> {
+        this.updateWorkspace();
         const history = await this._readHistoryFile();
         history.projectScope = scope;
         await this._writeHistoryFile(history);
@@ -123,6 +136,7 @@ export class HistoryService {
     }
 
     public async saveCycleData(cycleData: PcppCycle): Promise<void> {
+        this.updateWorkspace();
         if (cycleData.cycleId === 0) {
             await this.saveProjectScope(cycleData.cycleContext);
             return;
@@ -145,6 +159,7 @@ export class HistoryService {
 
     public async deleteCycle(cycleId: number): Promise<void> {
         Services.loggerService.log(`HistoryService: Deleting cycle ${cycleId}.`);
+        this.updateWorkspace();
         const history = await this._readHistoryFile();
         
         if (history.cycles.length <= 1) {
@@ -165,6 +180,7 @@ export class HistoryService {
 
     public async resetHistory(): Promise<void> {
         Services.loggerService.log(`HistoryService: Resetting all cycle history.`);
+        this.updateWorkspace();
         if (this.historyFilePath) {
             try {
                 await vscode.workspace.fs.delete(vscode.Uri.file(this.historyFilePath));
@@ -181,6 +197,7 @@ export class HistoryService {
 
     public async handleExportHistory() {
         Services.loggerService.log("Exporting cycle history.");
+        this.updateWorkspace();
         if (!this.historyFilePath || !this.workspaceRoot) {
             vscode.window.showErrorMessage("History file path not found.");
             return;
@@ -203,6 +220,7 @@ export class HistoryService {
 
     public async handleImportHistory() {
         Services.loggerService.log("Importing cycle history.");
+        this.updateWorkspace();
         if (!this.historyFilePath) {
             vscode.window.showErrorMessage("History file path not found.");
             return;

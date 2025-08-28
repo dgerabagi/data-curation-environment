@@ -1,3 +1,4 @@
+// Updated on: C165 (Fix multiple prompt generation bugs)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -51,9 +52,16 @@ M7. Flattened Repo
         const cycleMap = new Map(allCycles.map(c => [c.cycleId, c]));
         cycleMap.set(currentCycleData.cycleId, currentCycleData);
 
-        const sortedHistory = [...cycleMap.values()].sort((a, b) => b.cycleId - a.cycleId);
+        // C165 Fix: Filter out future cycles when generating from a past cycle
+        const sortedHistory = [...cycleMap.values()]
+            .filter(c => c.cycleId <= currentCycleData.cycleId && c.cycleId > 0)
+            .sort((a, b) => b.cycleId - a.cycleId);
     
         let cyclesContent = '<M6. Cycles>';
+
+        // C165 Fix: Always include Cycle 0 / Template Archive content
+        const templateArchiveContent = await this.getTemplateArchiveContent();
+        cyclesContent += `\n\n<Cycle 0 - Project Initialization/Template Archive>\n${templateArchiveContent}\n</Cycle 0 - Project Initialization/Template Archive>`;
     
         for (const cycle of sortedHistory) {
             cyclesContent += `\n\n<Cycle ${cycle.cycleId}>\n`;
@@ -67,11 +75,13 @@ M7. Flattened Repo
             }
     
             const previousCycleId = cycle.cycleId - 1;
-            const previousCycle = cycleMap.get(previousCycleId);
-            if (previousCycle) {
-                const summary = this.getPreviousCycleSummary(previousCycle);
-                if (summary.trim()) {
-                    cyclesContent += `<Previous Cycle ${previousCycleId} Summary of Actions>\n${summary}\n</Previous Cycle ${previousCycleId} Summary of Actions>\n`;
+            if (previousCycleId > 0) { // Don't look for summary for cycle 0
+                const previousCycle = cycleMap.get(previousCycleId);
+                if (previousCycle) {
+                    const summary = this.getPreviousCycleSummary(previousCycle);
+                    if (summary.trim()) {
+                        cyclesContent += `<Previous Cycle ${previousCycleId} Summary of Actions>\n${summary}\n</Previous Cycle ${previousCycleId} Summary of Actions>\n`;
+                    }
                 }
             }
             cyclesContent += `</Cycle ${cycle.cycleId}>`;
@@ -123,7 +133,6 @@ ${cyclesContent}
 
     private async getArtifactContent(artifactFilename: string, errorMessage: string): Promise<string> {
         try {
-            // C164 Fix: Read from the 'dist/Artifacts' directory which is present in the installed extension.
             const uri = vscode.Uri.joinPath(this.extensionUri, 'dist', 'Artifacts', artifactFilename);
             const contentBuffer = await vscode.workspace.fs.readFile(uri);
             return Buffer.from(contentBuffer).toString('utf-8');
@@ -134,6 +143,7 @@ ${cyclesContent}
     }
 
     public async generatePromptFile(cycleTitle: string, currentCycle: number) {
+        this.workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
         if (!this.workspaceRoot) {
             vscode.window.showErrorMessage("Cannot generate prompt: No workspace folder is open.");
             return;
@@ -168,15 +178,24 @@ ${cyclesContent}
             let cycleOverview = '<M2. cycle overview>\n';
             cycleOverview += `Current Cycle ${currentCycle} - ${cycleTitle}\n`;
             for (const cycle of sortedHistory) {
-                if (cycle.cycleId !== currentCycle) {
+                if (cycle.cycleId !== currentCycle && cycle.cycleId > 0) { // C165 Fix: Don't show cycle 0 here
                      cycleOverview += `Cycle ${cycle.cycleId} - ${cycle.title}\n`;
                 }
             }
+            // C165 Fix: Always add cycle 0 to overview
+            cycleOverview += 'Cycle 0 - Project Initialization/Template Archive\n';
             cycleOverview += '</M2. cycle overview>';
             
             const cyclesContent = await this._generateCyclesContent(currentCycleData, fullHistory);
 
-            const a0Content = await this.getArtifactContent('A0. DCE Master Artifact List.md', '<!-- Master Artifact List (A0) not found -->');
+            // C165 Fix: Find and use the user's A0 file, not the extension's.
+            const a0Files = await vscode.workspace.findFiles('**/src/Artifacts/A0.*Master Artifact List.md', '**/node_modules/**', 1);
+            let a0Content = '<!-- User Master Artifact List (A0) not found in src/Artifacts/ -->';
+            if (a0Files.length > 0) {
+                const contentBuffer = await vscode.workspace.fs.readFile(a0Files[0]);
+                a0Content = Buffer.from(contentBuffer).toString('utf-8');
+            }
+            
             const a52_1_Content = await this.getArtifactContent('A52.1 DCE - Parser Logic and AI Guidance.md', '<!-- A52.1 Parser Logic not found -->');
             const a52_2_Content = await this.getArtifactContent('A52.2 DCE - Interaction Schema Source.md', '<!-- A52.2 Interaction Schema Source not found -->');
 
@@ -214,7 +233,34 @@ ${cyclesContent}
         }
     }
 
+    private async getTemplateArchiveContent(): Promise<string> {
+        let staticContext = '<!-- START: Project Templates -->\n';
+        try {
+            const allArtifactEntries = await vscode.workspace.fs.readDirectory(vscode.Uri.joinPath(this.extensionUri, 'dist', 'Artifacts'));
+            const templateFilenames = allArtifactEntries
+                .map(([filename]) => filename)
+                .filter(filename => filename.startsWith('T') && filename.endsWith('.md'));
+
+            templateFilenames.sort((a, b) => {
+                const numA = parseInt(a.match(/T(\d+)/)?.[1] || '0', 10);
+                const numB = parseInt(b.match(/T(\d+)/)?.[1] || '0', 10);
+                return numA - numB;
+            });
+
+            for (const filename of templateFilenames) {
+                const content = await this.getArtifactContent(filename, `<!-- ${filename} not found -->`);
+                staticContext += `<${filename}>\n${content}\n</${filename}>\n\n`;
+            }
+        } catch (e) {
+            Services.loggerService.error(`Failed to build template archive: ${e}`);
+            staticContext += '<!-- Error loading templates -->';
+        }
+        staticContext += '<!-- END: Project Templates -->';
+        return staticContext;
+    }
+
     public async generateCycle0Prompt(projectScope: string, serverIpc: ServerPostMessageManager) {
+        this.workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
         if (!this.workspaceRoot) {
             vscode.window.showErrorMessage("Cannot generate prompt: No workspace folder is open.");
             return;
@@ -227,23 +273,7 @@ ${cyclesContent}
             Services.loggerService.log("Generating Cycle 0 prompt.md file...");
             await Services.historyService.saveProjectScope(projectScope);
 
-            const allArtifactEntries = await vscode.workspace.fs.readDirectory(vscode.Uri.joinPath(this.extensionUri, 'dist', 'Artifacts'));
-            const templateFilenames = allArtifactEntries
-                .map(([filename]) => filename)
-                .filter(filename => filename.startsWith('T') && filename.endsWith('.md'));
-
-            templateFilenames.sort((a, b) => {
-                const numA = parseInt(a.match(/T(\d+)/)?.[1] || '0', 10);
-                const numB = parseInt(b.match(/T(\d+)/)?.[1] || '0', 10);
-                return numA - numB;
-            });
-
-            let staticContext = '<!-- START: Project Templates -->\n';
-            for (const filename of templateFilenames) {
-                const content = await this.getArtifactContent(`${filename}`, `<!-- ${filename} not found -->`);
-                staticContext += `<${filename}>\n${content}\n</${filename}>\n\n`;
-            }
-            staticContext += '<!-- END: Project Templates -->\n\n';
+            const staticContext = await this.getTemplateArchiveContent();
             
             const a52_1_Content = await this.getArtifactContent('A52.1 DCE - Parser Logic and AI Guidance.md', '<!-- A52.1 Parser Logic not found -->');
             const a52_2_Content = await this.getArtifactContent('A52.2 DCE - Interaction Schema Source.md', '<!-- A52.2 Interaction Schema Source not found -->');
@@ -276,7 +306,7 @@ ${staticContext.trim()}
             const flattenedRepoContent = `<M7. Flattened Repo>\n${readmeFileContent}\n</M7. Flattened Repo>`;
 
             const promptParts = [
-                `<prompt.md>`, this.artifactSchemaTemplate, `<M2. cycle overview>\nCurrent Cycle 0 - Project Initialization\n</M2. cycle overview>`, interactionSchemaContent, projectScopeContent, `<M5. organized artifacts list>\n# No artifacts exist yet.\n</M5. organized artifacts list>`, `<M6. Cycles>\n${cycle0Context}\n</M6. Cycles>`, flattenedRepoContent, `</prompt.md>`
+                `<prompt.md>`, this.artifactSchemaTemplate, `<M2. cycle overview>\nCurrent Cycle 0 - Project Initialization/Template Archive\n</M2. cycle overview>`, interactionSchemaContent, projectScopeContent, `<M5. organized artifacts list>\n# No artifacts exist yet.\n</M5. organized artifacts list>`, `<M6. Cycles>\n${cycle0Context}\n</M6. Cycles>`, flattenedRepoContent, `</prompt.md>`
             ];
 
             const finalPrompt = promptParts.join('\n\n');
