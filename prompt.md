@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 1 - transitioning to pcp tool
+Current Cycle 2 - ts errors
+Cycle 1 - transitioning to pcp tool
 </M2. cycle overview>
 
 <M3. Interaction Schema>
@@ -569,6 +570,346 @@ a
 
 <M6. Cycles>
 
+<Cycle 2>
+<Cycle Context>
+okay, i rolled in these changes and have the following ts errors. in addition, can we make the following updates:
+
+1. can we make the same blue highlight thats around sort or the response tab when they're 'toggled' for our parse/un-parse all button?
+
+2. like we have a `Select All` button, we should have a `De-Select All` button. this is in the file view pane, the new button can go to the left of the `Accept Selected` button.
+</Cycle Context>
+<Ephemeral Context>
+PS C:\Projects\DCE> npm run watch
+
+> data-curation-environment@0.0.6 watch
+> webpack --watch
+
+    [webpack-cli] Compiler starting... 
+    [webpack-cli] Compiler is using config: 'C:\Projects\DCE\webpack.config.js'
+    [webpack-cli] Compiler starting... 
+    [webpack-cli] Compiler is using config: 'C:\Projects\DCE\webpack.config.js'
+    [webpack-cli] Compiler finished
+    [webpack-cli] Compiler is watching files for updates...
+    [webpack-cli] Compiler finished
+asset extension.js 6.75 MiB [compared for emit] (name: extension) 1 related asset
+asset 1.extension.js 1.47 MiB [compared for emit] (id hint: vendors) 1 related asset
+asset 2.extension.js 1.47 MiB [compared for emit] (id hint: vendors) 1 related asset
+asset 4.extension.js 1.45 MiB [compared for emit] (id hint: vendors) 1 related asset
+asset 3.extension.js 1.36 MiB [compared for emit] (id hint: vendors) 1 related asset
+orphan modules 8.99 MiB [orphan] 620 modules
+runtime modules 2.39 KiB 7 modules
+built modules 12.3 MiB [built]
+  modules by path ./node_modules/ 12.2 MiB 458 modules
+  modules by path ./src/ 115 KiB
+    modules by path ./src/backend/ 85.5 KiB
+      modules by path ./src/backend/services/*.ts 81.1 KiB 11 modules
+      modules by path ./src/backend/commands/*.ts 4.44 KiB 2 modules
+    modules by path ./src/common/ 11.9 KiB 6 modules
+    modules by path ./src/client/ 12.7 KiB
+      modules by path ./src/client/views/context-chooser.view/*.ts 4.92 KiB 2 modules
+      + 3 modules
+    ./src/extension.ts 4.48 KiB [built] [code generated]
+  + 22 modules
+
+ERROR in ./src/backend/services/file-tree.service.ts 132:31
+Module parse failed: Unexpected token (132:31)
+File was processed with these loaders:
+ * ./node_modules/ts-loader/index.js
+You may need an additional loader to handle the result of these loaders.
+|         }
+|         const workspaceFolders = vscode.workspace.workspaceFolders;
+>         if (!workspaceFolders?.) {
+|             Services.loggerService.warn(`No workspace folder found.`);
+|             serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: [] });
+ @ ./src/backend/services/services.ts 8:0-54 27:35-50
+ @ ./src/extension.ts 4:0-55 40:4-30 51:8-36 54:8-27 62:8-36
+
+ERROR in C:\Projects\DCE\src\backend\services\file-tree.service.ts
+./src/backend/services/file-tree.service.ts 150:31-32
+[tsl] ERROR in C:\Projects\DCE\src\backend\services\file-tree.service.ts(150,32)
+      TS1003: Identifier expected.
+ @ ./src/backend/services/services.ts 8:0-54 27:35-50
+ @ ./src/extension.ts 4:0-55 40:4-30 51:8-36 54:8-27 62:8-36
+
+ERROR in C:\Projects\DCE\src\backend\services\file-tree.service.ts
+./src/backend/services/file-tree.service.ts 157:76-79
+[tsl] ERROR in C:\Projects\DCE\src\backend\services\file-tree.service.ts(157,77)
+      TS2339: Property 'uri' does not exist on type 'readonly WorkspaceFolder[]'.
+ @ ./src/backend/services/services.ts 8:0-54 27:35-50
+ @ ./src/extension.ts 4:0-55 40:4-30 51:8-36 54:8-27 62:8-36
+
+ERROR in C:\Projects\DCE\src\backend\services\file-tree.service.ts
+./src/backend/services/file-tree.service.ts 170:33-38
+[tsl] ERROR in C:\Projects\DCE\src\backend\services\file-tree.service.ts(170,34)
+      TS2339: Property 'state' does not exist on type 'Repository[]'.
+ @ ./src/backend/services/services.ts 8:0-54 27:35-50
+ @ ./src/extension.ts 4:0-55 40:4-30 51:8-36 54:8-27 62:8-36
+
+ERROR in C:\Projects\DCE\src\backend\services\file-tree.service.ts
+./src/backend/services/file-tree.service.ts 170:67-72
+[tsl] ERROR in C:\Projects\DCE\src\backend\services\file-tree.service.ts(170,68)
+      TS2339: Property 'state' does not exist on type 'Repository[]'.
+ @ ./src/backend/services/services.ts 8:0-54 27:35-50
+ @ ./src/extension.ts 4:0-55 40:4-30 51:8-36 54:8-27 62:8-36
+
+ERROR in C:\Projects\DCE\src\backend\services\file-tree.service.ts
+./src/backend/services/file-tree.service.ts 170:95-100
+[tsl] ERROR in C:\Projects\DCE\src\backend\services\file-tree.service.ts(170,96)
+      TS2339: Property 'state' does not exist on type 'Repository[]'.
+ @ ./src/backend/services/services.ts 8:0-54 27:35-50
+ @ ./src/extension.ts 4:0-55 40:4-30 51:8-36 54:8-27 62:8-36
+
+ERROR in C:\Projects\DCE\src\backend\services\history.service.ts
+./src/backend/services/history.service.ts 17:50-53
+[tsl] ERROR in C:\Projects\DCE\src\backend\services\history.service.ts(17,51)
+      TS2339: Property 'uri' does not exist on type 'readonly WorkspaceFolder[]'.
+ @ ./src/backend/services/services.ts 6:0-51 26:34-48
+ @ ./src/extension.ts 4:0-55 40:4-30 51:8-36 54:8-27 62:8-36
+
+ERROR in C:\Projects\DCE\src\backend\services\history.service.ts
+./src/backend/services/history.service.ts 222:58-64
+[tsl] ERROR in C:\Projects\DCE\src\backend\services\history.service.ts(222,59)
+      TS2339: Property 'fsPath' does not exist on type 'Uri[]'.
+ @ ./src/backend/services/services.ts 6:0-51 26:34-48
+ @ ./src/extension.ts 4:0-55 40:4-30 51:8-36 54:8-27 62:8-36
+
+ERROR in C:\Projects\DCE\src\client\components\file-tree\FileTree.tsx
+244:94-103
+[tsl] ERROR in C:\Projects\DCE\src\client\components\file-tree\FileTree.tsx(244,95)
+      TS2345: Argument of type 'string[]' is not assignable to parameter of type 'Set<string>'.
+  Type 'string[]' is missing the following properties from type 'Set<string>': add, clear, delete, has, and 2 more.
+
+ERROR in C:\Projects\DCE\src\client\components\file-tree\FileTree.tsx
+253:41-45
+[tsl] ERROR in C:\Projects\DCE\src\client\components\file-tree\FileTree.tsx(253,42)
+      TS2741: Property 'paths' is missing in type '{ x: number; y: number; node: FileNode; selection: Set<string>; }' but required in type '{ x: number; y: number; node: FileNode; paths: string[]; }'.
+
+ERROR in C:\Projects\DCE\src\client\components\tree-view\TreeView.tsx
+58:52-64
+[tsl] ERROR in C:\Projects\DCE\src\client\components\tree-view\TreeView.tsx(58,53)
+      TS2339: Property 'absolutePath' does not exist on type 'TreeNode[]'.
+
+ERROR in C:\Projects\DCE\src\client\components\tree-view\TreeView.tsx
+70:36-48
+[tsl] ERROR in C:\Projects\DCE\src\client\components\tree-view\TreeView.tsx(70,37)
+      TS2339: Property 'absolutePath' does not exist on type 'TreeNode[]'.
+
+ERROR in C:\Projects\DCE\src\client\components\tree-view\TreeView.tsx
+79:43-55
+[tsl] ERROR in C:\Projects\DCE\src\client\components\tree-view\TreeView.tsx(79,44)
+      TS2339: Property 'absolutePath' does not exist on type 'TreeNode[]'.
+
+ERROR in C:\Projects\DCE\src\client\components\tree-view\TreeView.tsx
+115:35-47
+[tsl] ERROR in C:\Projects\DCE\src\client\components\tree-view\TreeView.tsx(115,36)
+      TS2339: Property 'absolutePath' does not exist on type 'TreeNode[]'.
+
+ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\view.tsx
+49:36-38
+[tsl] ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\view.tsx(49,37)
+      TS1003: Identifier expected.
+
+ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\view.tsx
+206:71-79
+[tsl] ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\view.tsx(206,72)
+      TS2353: Object literal may only specify known properties, and 'filePath' does not exist in type 'ComparisonMetrics'.
+
+15 errors have detailed information that is not shown.
+Use 'stats.errorDetails: true' resp. '--stats-error-details' to show it.
+
+webpack 5.101.1 compiled with 16 errors in 8959 ms
+
+assets by path Artifacts/*.md 1.32 MiB
+  asset Artifacts/A200. Cycle Log.md 871 KiB [compared for emit] [from: src/Artifacts/A200. Cycle Log.md] [copied]
+  asset Artifacts/A6. DCE - Initial Scaffolding Deployment Script.md 42.3 KiB [compared for emit] [from: src/Artifacts/A6. DCE - Initial Scaffolding Deployment Script.md] [copied]
+  asset Artifacts/A11. DCE - Regression Case Studies.md 27.5 KiB [compared for emit] [from: src/Artifacts/A11. DCE - Regression Case Studies.md] [copied]
+  asset Artifacts/A0. DCE Master Artifact List.md 26.3 KiB [compared for emit] [from: src/Artifacts/A0. DCE Master Artifact List.md] [copied]
+  + 92 assets
+assets by path *.js 8.42 MiB
+  asset contextChooserView.js 8.41 MiB [compared for emit] (name: contextChooserView) 1 related asset
+  asset parallelCopilotView.js 7.75 KiB [compared for emit] (name: parallelCopilotView) 1 related asset
+assets by path *.css 18.9 KiB
+  asset contextChooserView.css 12.9 KiB [compared for emit] (name: contextChooserView) 1 related asset
+  asset starry-night.css 6.02 KiB [compared for emit] [from: node_modules/@wooorm/starry-night/style/both.css] [copied]
+assets by path public/*.svg 904 bytes
+  asset public/spiral.svg 459 bytes [compared for emit] [from: public/spiral.svg] [copied]
+  asset public/copilot.svg 445 bytes [compared for emit] [from: public/copilot.svg] [copied]
+Entrypoint contextChooserView 8.43 MiB (682 KiB) = contextChooserView.css 12.9 KiB contextChooserView.js 8.41 MiB 2 auxiliary assets
+Entrypoint parallelCopilotView 7.75 KiB (310 bytes) = parallelCopilotView.js 1 auxiliary asset
+runtime modules 1.95 KiB 9 modules
+orphan modules 20.9 KiB [orphan] 3 modules
+javascript modules 7.82 MiB
+  modules by path ./node_modules/ 7.75 MiB 19 modules
+  modules by path ./src/ 73.4 KiB
+    modules by path ./src/client/ 63.7 KiB 10 modules
+    modules by path ./src/common/ 9.74 KiB
+      ./src/common/ipc/client-ipc.ts 1010 bytes [built] [code generated]
+      ./src/common/ipc/channels.enum.ts 5.44 KiB [built] [code generated]
+      + 2 modules
+css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/client/views/context-chooser.view/view.scss 12.8 KiB [built] [code generated]        
+
+ERROR in ./src/client/views/parallel-copilot.view/view.tsx
+Module build failed (from ./node_modules/babel-loader/lib/index.js):
+SyntaxError: C:\Projects\DCE\src\client\views\parallel-copilot.view\view.tsx: Unexpected token (49:36)
+
+  47 |
+  48 |     const codeContentMatch = /<pre><code>([\s\S]*)<\/code><\/pre>/s.exec(htmlContent || '');
+> 49 |     const code = codeContentMatch?. ?? (htmlContent || '');
+     |                                     ^
+  50 |
+  51 |     const lines = code.split('\n');
+  52 |     if (lines.length > 1 && lines[lines.length - 1] === '') {
+    at constructor (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:367:19)
+    at TypeScriptParserMixin.raise (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:6627:19)
+    at TypeScriptParserMixin.unexpected (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:6647:16)
+    at TypeScriptParserMixin.parseIdentifierName (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:12204:12)
+    at TypeScriptParserMixin.parseIdentifier (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:12182:23)
+    at TypeScriptParserMixin.parseMember (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:11143:28)
+    at TypeScriptParserMixin.parseSubscript (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:11119:21)
+    at TypeScriptParserMixin.parseSubscript (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:9353:18)
+    at TypeScriptParserMixin.parseSubscripts (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:11089:19)
+    at TypeScriptParserMixin.parseExprSubscripts (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:11080:17)
+    at TypeScriptParserMixin.parseUpdate (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:11061:21)
+    at TypeScriptParserMixin.parseMaybeUnary (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:11041:23)
+    at TypeScriptParserMixin.parseMaybeUnary (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:9852:18)
+    at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:10894:61)
+    at TypeScriptParserMixin.parseExprOps (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:10899:23)
+    at TypeScriptParserMixin.parseMaybeConditional (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:10876:23)
+    at TypeScriptParserMixin.parseMaybeAssign (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:10826:21)
+    at TypeScriptParserMixin.parseMaybeAssign (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:9801:20)
+    at C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:10795:39
+    at TypeScriptParserMixin.allowInAnd (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:12422:16)
+    at TypeScriptParserMixin.parseMaybeAssignAllowIn (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:10795:17)
+    at TypeScriptParserMixin.parseVar (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:13384:91)
+    at TypeScriptParserMixin.parseVarStatement (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:13230:10)
+    at TypeScriptParserMixin.parseVarStatement (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:9493:31)
+    at TypeScriptParserMixin.parseStatementContent (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:12851:23)
+    at TypeScriptParserMixin.parseStatementContent (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:9527:18)
+    at TypeScriptParserMixin.parseStatementLike (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:12767:17)
+    at TypeScriptParserMixin.parseStatementListItem (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:12747:17)
+    at TypeScriptParserMixin.parseBlockOrModuleBlockBody (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:13316:61)
+    at TypeScriptParserMixin.parseBlockBody (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:13309:10)
+    at TypeScriptParserMixin.parseBlock (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:13297:10)
+    at TypeScriptParserMixin.parseFunctionBody (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:12101:24)
+    at TypeScriptParserMixin.parseArrowExpression (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:12076:10)
+    at TypeScriptParserMixin.parseParenAndDistinguishExpression (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:11686:12)
+    at TypeScriptParserMixin.parseExprAtom (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:11326:23)
+    at TypeScriptParserMixin.parseExprAtom (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:4794:20)
+    at TypeScriptParserMixin.parseExprSubscripts (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:11076:23)
+    at TypeScriptParserMixin.parseUpdate (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:11061:21)
+    at TypeScriptParserMixin.parseMaybeUnary (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:11041:23)
+    at TypeScriptParserMixin.parseMaybeUnary (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:9852:18)
+    at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:10894:61)
+    at TypeScriptParserMixin.parseExprOps (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:10899:23)
+    at TypeScriptParserMixin.parseMaybeConditional (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:10876:23)
+    at TypeScriptParserMixin.parseMaybeAssign (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:10826:21)
+    at TypeScriptParserMixin.parseMaybeAssign (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:9801:20)
+    at C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:10795:39
+    at TypeScriptParserMixin.allowInAnd (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:12422:16)
+    at TypeScriptParserMixin.parseMaybeAssignAllowIn (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:10795:17)
+    at TypeScriptParserMixin.parseVar (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:13384:91)
+    at TypeScriptParserMixin.parseVarStatement (C:\Projects\DCE\node_modules\@babel\parser\lib\index.js:13230:10)
+
+ERROR in C:\Projects\DCE\src\backend\services\file-tree.service.ts
+150:31-32
+[tsl] ERROR in C:\Projects\DCE\src\backend\services\file-tree.service.ts(150,32)
+      TS1003: Identifier expected.
+
+ERROR in C:\Projects\DCE\src\backend\services\file-tree.service.ts
+157:76-79
+[tsl] ERROR in C:\Projects\DCE\src\backend\services\file-tree.service.ts(157,77)
+      TS2339: Property 'uri' does not exist on type 'readonly WorkspaceFolder[]'.
+
+ERROR in C:\Projects\DCE\src\backend\services\file-tree.service.ts
+170:33-38
+[tsl] ERROR in C:\Projects\DCE\src\backend\services\file-tree.service.ts(170,34)
+      TS2339: Property 'state' does not exist on type 'Repository[]'.
+
+ERROR in C:\Projects\DCE\src\backend\services\file-tree.service.ts
+170:67-72
+[tsl] ERROR in C:\Projects\DCE\src\backend\services\file-tree.service.ts(170,68)
+      TS2339: Property 'state' does not exist on type 'Repository[]'.
+
+ERROR in C:\Projects\DCE\src\backend\services\file-tree.service.ts
+170:95-100
+[tsl] ERROR in C:\Projects\DCE\src\backend\services\file-tree.service.ts(170,96)
+      TS2339: Property 'state' does not exist on type 'Repository[]'.
+
+ERROR in C:\Projects\DCE\src\backend\services\history.service.ts
+17:50-53
+[tsl] ERROR in C:\Projects\DCE\src\backend\services\history.service.ts(17,51)
+      TS2339: Property 'uri' does not exist on type 'readonly WorkspaceFolder[]'.
+
+ERROR in C:\Projects\DCE\src\backend\services\history.service.ts
+222:58-64
+[tsl] ERROR in C:\Projects\DCE\src\backend\services\history.service.ts(222,59)
+      TS2339: Property 'fsPath' does not exist on type 'Uri[]'.
+
+ERROR in C:\Projects\DCE\src\client\components\file-tree\FileTree.tsx
+./src/client/components/file-tree/FileTree.tsx 244:94-103
+[tsl] ERROR in C:\Projects\DCE\src\client\components\file-tree\FileTree.tsx(244,95)
+      TS2345: Argument of type 'string[]' is not assignable to parameter of type 'Set<string>'.
+  Type 'string[]' is missing the following properties from type 'Set<string>': add, clear, delete, has, and 2 more.
+ @ ./src/client/views/context-chooser.view/view.tsx 7:0-59 405:38-46
+
+ERROR in C:\Projects\DCE\src\client\components\file-tree\FileTree.tsx
+./src/client/components/file-tree/FileTree.tsx 253:41-45
+[tsl] ERROR in C:\Projects\DCE\src\client\components\file-tree\FileTree.tsx(253,42)
+      TS2741: Property 'paths' is missing in type '{ x: number; y: number; node: FileNode; selection: Set<string>; }' but required in type '{ x: number; y: number; node: FileNode; paths: string[]; }'.
+ @ ./src/client/views/context-chooser.view/view.tsx 7:0-59 405:38-46
+
+ERROR in C:\Projects\DCE\src\client\components\tree-view\TreeView.tsx
+./src/client/components/tree-view/TreeView.tsx 58:52-64
+[tsl] ERROR in C:\Projects\DCE\src\client\components\tree-view\TreeView.tsx(58,53)
+      TS2339: Property 'absolutePath' does not exist on type 'TreeNode[]'.
+ @ ./src/client/components/file-tree/FileTree.tsx 3:0-45 302:38-46
+ @ ./src/client/views/context-chooser.view/view.tsx 7:0-59 405:38-46
+
+ERROR in C:\Projects\DCE\src\client\components\tree-view\TreeView.tsx
+./src/client/components/tree-view/TreeView.tsx 70:36-48
+[tsl] ERROR in C:\Projects\DCE\src\client\components\tree-view\TreeView.tsx(70,37)
+      TS2339: Property 'absolutePath' does not exist on type 'TreeNode[]'.
+ @ ./src/client/components/file-tree/FileTree.tsx 3:0-45 302:38-46
+ @ ./src/client/views/context-chooser.view/view.tsx 7:0-59 405:38-46
+
+ERROR in C:\Projects\DCE\src\client\components\tree-view\TreeView.tsx
+./src/client/components/tree-view/TreeView.tsx 79:43-55
+[tsl] ERROR in C:\Projects\DCE\src\client\components\tree-view\TreeView.tsx(79,44)
+      TS2339: Property 'absolutePath' does not exist on type 'TreeNode[]'.
+ @ ./src/client/components/file-tree/FileTree.tsx 3:0-45 302:38-46
+ @ ./src/client/views/context-chooser.view/view.tsx 7:0-59 405:38-46
+
+ERROR in C:\Projects\DCE\src\client\components\tree-view\TreeView.tsx
+./src/client/components/tree-view/TreeView.tsx 115:35-47
+[tsl] ERROR in C:\Projects\DCE\src\client\components\tree-view\TreeView.tsx(115,36)
+      TS2339: Property 'absolutePath' does not exist on type 'TreeNode[]'.
+ @ ./src/client/components/file-tree/FileTree.tsx 3:0-45 302:38-46
+ @ ./src/client/views/context-chooser.view/view.tsx 7:0-59 405:38-46
+
+ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\view.tsx
+./src/client/views/parallel-copilot.view/view.tsx 49:36-38
+[tsl] ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\view.tsx(49,37)
+      TS1003: Identifier expected.
+
+ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\view.tsx
+./src/client/views/parallel-copilot.view/view.tsx 206:71-79
+[tsl] ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\view.tsx(206,72)
+      TS2353: Object literal may only specify known properties, and 'filePath' does not exist in type 'ComparisonMetrics'.
+
+15 errors have detailed information that is not shown.
+Use 'stats.errorDetails: true' resp. '--stats-error-details' to show it.
+
+webpack 5.101.1 compiled with 16 errors in 7476 ms
+    [webpack-cli] Compiler is watching files for updates...
+
+</Ephemeral Context>
+<Previous Cycle 1 Summary of Actions>
+Could not parse summary.
+
+Could not parse course of action.
+</Previous Cycle 1 Summary of Actions>
+</Cycle 2>
+
 <Cycle 1>
 <Cycle Context>
 1. deleting multiple files works with the 'delete' key, but not when i right-click and select 'delete'. can you correct that?
@@ -594,28 +935,28 @@ For all previous cycles, please see: `A200. Cycle Log.md`
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-08-29T03:03:52.449Z
+  Date Generated: 2025-08-29T12:38:37.308Z
   ---
-  Total Files: 150
-  Approx. Tokens: 421341
+  Total Files: 158
+  Approx. Tokens: 427477
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (222969 tokens)
 2. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10834 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (8064 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (8412 tokens)
 4. src\Artifacts\A11. DCE - Regression Case Studies.md (7032 tokens)
-5. src\Artifacts\A0. DCE Master Artifact List.md (6624 tokens)
-6. src\client\components\tree-view\TreeView.tsx (4529 tokens)
+5. src\Artifacts\A0. DCE Master Artifact List.md (6743 tokens)
+6. src\client\components\tree-view\TreeView.tsx (4436 tokens)
 7. src\backend\services\prompt.service.ts (4062 tokens)
-8. src\client\views\context-chooser.view\view.tsx (4038 tokens)
-9. src\backend\services\file-operation.service.ts (4021 tokens)
-10. src\client\views\parallel-copilot.view\view.scss (3765 tokens)
+8. src\client\views\parallel-copilot.view\view.scss (4044 tokens)
+9. src\client\views\context-chooser.view\view.tsx (4038 tokens)
+10. src\backend\services\file-operation.service.ts (4021 tokens)
 
 <!-- Full File List -->
 1. src\Artifacts\README.md - Lines: 33 - Chars: 2764 - Tokens: 691
 2. dist\Artifacts\README.md - Lines: 33 - Chars: 2764 - Tokens: 691
-3. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 388 - Chars: 26496 - Tokens: 6624
+3. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 396 - Chars: 26970 - Tokens: 6743
 4. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 5. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
 6. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
@@ -711,21 +1052,21 @@ For all previous cycles, please see: `A200. Cycle Log.md`
 96. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
 97. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
 98. src\backend\services\file-operation.service.ts - Lines: 338 - Chars: 16082 - Tokens: 4021
-99. src\backend\services\file-tree.service.ts - Lines: 269 - Chars: 13410 - Tokens: 3353
+99. src\backend\services\file-tree.service.ts - Lines: 272 - Chars: 13568 - Tokens: 3392
 100. src\backend\services\flattener.service.ts - Lines: 222 - Chars: 11624 - Tokens: 2906
 101. src\backend\services\highlighting.service.ts - Lines: 58 - Chars: 2920 - Tokens: 730
-102. src\backend\services\history.service.ts - Lines: 239 - Chars: 10275 - Tokens: 2569
+102. src\backend\services\history.service.ts - Lines: 240 - Chars: 10070 - Tokens: 2518
 103. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
 104. src\backend\services\prompt.service.ts - Lines: 327 - Chars: 16245 - Tokens: 4062
 105. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 106. src\backend\services\services.ts - Lines: 38 - Chars: 1778 - Tokens: 445
 107. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
-108. src\client\components\file-tree\FileTree.tsx - Lines: 258 - Chars: 12506 - Tokens: 3127
+108. src\client\components\file-tree\FileTree.tsx - Lines: 258 - Chars: 12330 - Tokens: 3083
 109. src\client\components\file-tree\FileTree.utils.ts - Lines: 117 - Chars: 4236 - Tokens: 1059
-110. src\client\components\tree-view\TreeView.tsx - Lines: 395 - Chars: 18114 - Tokens: 4529
+110. src\client\components\tree-view\TreeView.tsx - Lines: 399 - Chars: 17742 - Tokens: 4436
 111. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 112. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
-113. src\client\components\ContextMenu.tsx - Lines: 67 - Chars: 3083 - Tokens: 771
+113. src\client\components\ContextMenu.tsx - Lines: 75 - Chars: 3473 - Tokens: 869
 114. src\client\components\DiffViewer.tsx - Lines: 224 - Chars: 11386 - Tokens: 2847
 115. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
 116. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13123 - Tokens: 3281
@@ -737,21 +1078,21 @@ For all previous cycles, please see: `A200. Cycle Log.md`
 122. src\client\views\context-chooser.view\view.tsx - Lines: 179 - Chars: 16150 - Tokens: 4038
 123. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 124. src\client\views\parallel-copilot.view\on-message.ts - Lines: 84 - Chars: 3857 - Tokens: 965
-125. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 85 - Chars: 4229 - Tokens: 1058
+125. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 85 - Chars: 3973 - Tokens: 994
 126. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 43 - Chars: 1890 - Tokens: 473
 127. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
 128. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
-129. src\client\views\parallel-copilot.view\view.scss - Lines: 671 - Chars: 15057 - Tokens: 3765
-130. src\client\views\parallel-copilot.view\view.tsx - Lines: 549 - Chars: 32254 - Tokens: 8064
+129. src\client\views\parallel-copilot.view\view.scss - Lines: 719 - Chars: 16173 - Tokens: 4044
+130. src\client\views\parallel-copilot.view\view.tsx - Lines: 557 - Chars: 33648 - Tokens: 8412
 131. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
 132. src\common\ipc\channels.enum.ts - Lines: 77 - Chars: 3918 - Tokens: 980
 133. src\common\ipc\channels.type.ts - Lines: 71 - Chars: 5617 - Tokens: 1405
-134. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1590 - Tokens: 398
+134. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 135. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 136. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
 137. src\common\types\file-node.ts - Lines: 17 - Chars: 517 - Tokens: 130
-138. src\common\types\pcpp.types.ts - Lines: 46 - Chars: 1373 - Tokens: 344
-139. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 449 - Tokens: 113
+138. src\common\types\pcpp.types.ts - Lines: 43 - Chars: 1000 - Tokens: 250
+139. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
 140. src\common\utils\formatting.ts - Lines: 99 - Chars: 3475 - Tokens: 869
 141. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
 142. src\common\utils\view-html.ts - Lines: 29 - Chars: 1117 - Tokens: 280
@@ -763,6 +1104,14 @@ For all previous cycles, please see: `A200. Cycle Log.md`
 148. webpack.config.js - Lines: 104 - Chars: 2873 - Tokens: 719
 149. log-state-logs.md - Lines: 200 - Chars: 11855 - Tokens: 2964
 150. .gitignore - Lines: 10 - Chars: 128 - Tokens: 32
+151. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 22 - Chars: 1461 - Tokens: 366
+152. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 46 - Chars: 3450 - Tokens: 863
+153. src\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3747 - Tokens: 937
+154. src\client\views\parallel-copilot.view\components\NumberedTextarea.tsx - Lines: 73 - Chars: 2544 - Tokens: 636
+155. src\client\views\parallel-copilot.view\components\NumberedTextarea.tsx - Lines: 73 - Chars: 2544 - Tokens: 636
+156. dist\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 22 - Chars: 1461 - Tokens: 366
+157. dist\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 46 - Chars: 3450 - Tokens: 863
+158. dist\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3747 - Tokens: 937
 
 <file path="src/Artifacts/README.md">
 # Artifact A72: DCE - README for Artifacts
@@ -840,7 +1189,7 @@ This structured, iterative process helps maintain project quality and ensures th
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C166 (Deprecate cycle trackers A62-A64)
+# Updated on: C167 (Add new planning artifacts for Cycle 1)
 
 ## 1. Purpose
 
@@ -1134,6 +1483,18 @@ This structured, iterative process helps maintain project quality and ensures th
 - **Description:** A universal checklist for organizing development tasks by file, focusing on complexity in terms of token count and estimated cycles for completion.
 - **Tags:** process, checklist, task management, planning, workflow
 
+### A66. DCE - Cycle 1 - Task Tracker
+- **Description:** A tracking document for the feedback items and tasks from the first cycle of using the DCE to build itself.
+- **Tags:** bugs, tracking, issues, backlog, cycle 1
+
+### A67. DCE - PCPP View Refactoring Plan
+- **Description:** A plan to refactor the large `parallel-copilot.view.tsx` into smaller, more manageable components to improve maintainability.
+- **Tags:** refactor, architecture, technical debt, pcpp
+
+### A68. DCE - PCPP Context Pane UX Plan
+- **Description:** A plan to enhance the UX of the cycle context and ephemeral context text areas with features like token counts and line numbers.
+- **Tags:** feature plan, ui, ux, pcpp, context
+
 ### A71. Sample M0 Prompt.md
 - **Description:** An example of a fully-formed `prompt.md` file generated by the Cycle 0 onboarding experience.
 - **Tags:** example, cycle 0, onboarding, prompt
@@ -1221,10 +1582,6 @@ This structured, iterative process helps maintain project quality and ensures th
 ### T16. Template - Developer Environment Setup Guide
 - **Description:** A generic template for a guide on setting up a new project's development environment, including OS, tools, and installation steps.
 - **Tags:** template, cycle 0, documentation, project setup, environment
-
-### T17. Template - Universal Task Checklist
-- **Description:** A generic template for a universal task checklist, designed to organize work by file and complexity.
-- **Tags:** template, process, checklist, task management, planning
 </file>
 
 <file path="src/Artifacts/A1. DCE - Project Vision and Goals.md">
@@ -8639,7 +8996,7 @@ export class FileOperationService {
 </file>
 
 <file path="src/backend/services/file-tree.service.ts">
-// Updated on: C167 (Add package-lock.json to non-selectable)
+// Updated on: C1
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -8656,7 +9013,7 @@ const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
 const EXCLUSION_PATTERNS = ['.git', 'dce_cache', 'out']; 
-const NON_SELECTABLE_PATTERNS = ['/node_modules', '/.vscode', 'flattened_repo.md', 'prompt.md', 'package-lock.json'];
+const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/flattened_repo.md', '/prompt.md', '/package-lock.json'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
@@ -8712,7 +9069,7 @@ export class FileTreeService {
         this.watcher.onDidCreate(async (uri: vscode.Uri) => {
             const normalizedPath = normalizePath(uri.fsPath);
             
-            const isNonSelectable = NON_SELECTABLE_PATTERNS.some(pattern => normalizedPath.includes(pattern));
+            const isNonSelectable = !this._isSelectable(uri.fsPath, vscode.FileType.File);
 
             if (isNonSelectable) {
                 Services.loggerService.log(`[Auto-Add] Ignoring newly created non-selectable file: ${normalizedPath}`);
@@ -8754,8 +9111,6 @@ export class FileTreeService {
     }
 
     private async getFileStats(filePath: string): Promise<Omit<FileNode, 'name' | 'absolutePath' | 'children'>> {
-        const normalizedFilePath = normalizePath(filePath);
-        const isSelectable = !NON_SELECTABLE_PATTERNS.some(p => normalizedFilePath.includes(p));
         const extension = path.extname(filePath).toLowerCase();
 
         try {
@@ -8765,19 +9120,19 @@ export class FileTreeService {
             const isExcel = EXCEL_EXTENSIONS.has(extension);
             const isWordDoc = WORD_EXTENSIONS.has(extension);
             
-            const baseStats = { sizeInBytes: stats.size, isImage, extension, isPdf, isExcel, isWordDoc, fileCount: 1, isSelectable };
+            const baseStats = { sizeInBytes: stats.size, isImage, extension, isPdf, isExcel, isWordDoc, fileCount: 1 };
 
-            if (isImage) return { ...baseStats, tokenCount: 0 };
-            if (isPdf) return { ...baseStats, tokenCount: Services.contentExtractionService.getVirtualPdfContent(filePath)?.tokenCount || 0 };
-            if (isExcel) return { ...baseStats, tokenCount: Services.contentExtractionService.getVirtualExcelContent(filePath)?.tokenCount || 0 };
-            if (isWordDoc) return { ...baseStats, tokenCount: Services.contentExtractionService.getVirtualWordContent(filePath)?.tokenCount || 0 };
+            if (isImage) return { ...baseStats, tokenCount: 0, isSelectable: true };
+            if (isPdf) return { ...baseStats, tokenCount: Services.contentExtractionService.getVirtualPdfContent(filePath)?.tokenCount || 0, isSelectable: true };
+            if (isExcel) return { ...baseStats, tokenCount: Services.contentExtractionService.getVirtualExcelContent(filePath)?.tokenCount || 0, isSelectable: true };
+            if (isWordDoc) return { ...baseStats, tokenCount: Services.contentExtractionService.getVirtualWordContent(filePath)?.tokenCount || 0, isSelectable: true };
 
-            if (stats.size > 5_000_000) return { ...baseStats, tokenCount: 0 };
+            if (stats.size > 5_000_000) return { ...baseStats, tokenCount: 0, isSelectable: true };
             
             const content = await fs.readFile(filePath, 'utf-8');
-            return { ...baseStats, tokenCount: Math.ceil(content.length / 4) };
+            return { ...baseStats, tokenCount: Math.ceil(content.length / 4), isSelectable: true };
         } catch (error: any) {
-            return { tokenCount: 0, sizeInBytes: 0, isImage: false, extension, isPdf: false, isExcel: false, isWordDoc: false, fileCount: 1, error: error.message, isSelectable };
+            return { tokenCount: 0, sizeInBytes: 0, isImage: false, extension, isPdf: false, isExcel: false, isWordDoc: false, fileCount: 1, error: error.message, isSelectable: true };
         }
     }
 
@@ -8790,14 +9145,14 @@ export class FileTreeService {
         }
 
         const workspaceFolders = vscode.workspace.workspaceFolders;
-        if (!workspaceFolders?.[0]) {
+        if (!workspaceFolders?.) {
             Services.loggerService.warn(`No workspace folder found.`);
             serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: [] });
             return;
         }
         
         Services.loggerService.log(`Building file tree from scratch.`);
-        const fileTree = await this.buildTreeFromTraversal(workspaceFolders[0].uri);
+        const fileTree = await this.buildTreeFromTraversal(workspaceFolders.uri);
         this.fileTreeCache = [fileTree];
         Services.loggerService.log(`File tree built. Sending to client.`);
         serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: this.fileTreeCache });
@@ -8805,9 +9160,9 @@ export class FileTreeService {
     }
 
     private getGitStatusMap(): Map<string, string> {
-        if (!this.gitApi?.repositories[0]) return new Map();
+        if (!this.gitApi?.repositories) return new Map();
         
-        const repo = this.gitApi.repositories[0];
+        const repo = this.gitApi.repositories;
         const getStatusChar = (s: Status) => ({ [Status.INDEX_ADDED]: 'A', [Status.MODIFIED]: 'M', [Status.DELETED]: 'D', [Status.UNTRACKED]: 'U', [Status.IGNORED]: 'I', [Status.CONFLICT]: 'C' }[s] || '');
         
         const changes = [...repo.state.workingTreeChanges, ...repo.state.indexChanges, ...repo.state.mergeChanges];
@@ -8854,6 +9209,11 @@ export class FileTreeService {
         return rootNode;
     }
     
+    private _isSelectable(filePath: string, fileType: vscode.FileType): boolean {
+        const normalizedPathWithSlash = normalizePath(filePath) + (fileType === vscode.FileType.Directory ? '/' : '');
+        return !NON_SELECTABLE_PATTERNS.some(p => normalizedPathWithSlash.includes(p));
+    }
+
     private async _traverseDirectory(dirUri: vscode.Uri, gitStatusMap: Map<string, string>, problemCountsMap: ProblemCountsMap): Promise<FileNode[]> {
         const children: FileNode[] = [];
         try {
@@ -8864,7 +9224,7 @@ export class FileTreeService {
 
                 const childUri = vscode.Uri.joinPath(dirUri, name);
                 const childPath = normalizePath(childUri.fsPath);
-                const isSelectable = !NON_SELECTABLE_PATTERNS.some(p => childPath.includes(p));
+                const isSelectable = this._isSelectable(childPath, type);
 
                 if (type === vscode.FileType.Directory) {
                     const isSpecialDir = name.toLowerCase() === 'node_modules';
@@ -9213,7 +9573,7 @@ export class HistoryService {
     constructor() {
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (workspaceFolders && workspaceFolders.length > 0) {
-            this.workspaceRoot = workspaceFolders[0].uri.fsPath;
+            this.workspaceRoot = workspaceFolders.uri.fsPath;
             this.historyFilePath = path.join(this.workspaceRoot, '.vscode', 'dce_history.json');
         } else {
             Services.loggerService.warn("HistoryService: No workspace folder found. History will not be saved.");
@@ -9277,6 +9637,8 @@ export class HistoryService {
             selectedFilesForReplacement: [],
             tabCount: 4,
             isSortedByTokens: false,
+            cycleContextHeight: 100,
+            ephemeralContextHeight: 100,
         };
 
         if (isFreshEnvironment) {
@@ -9415,10 +9777,9 @@ export class HistoryService {
                 canSelectMany: false,
                 filters: { 'JSON': ['json'] }
             });
-            if (openUri && openUri[0]) {
-                const content = await fs.readFile(openUri[0].fsPath, 'utf-8');
+            if (openUri && openUri) {
+                const content = await fs.readFile(openUri.fsPath, 'utf-8');
                 const historyData = JSON.parse(content);
-                // Basic validation
                 if (historyData.version && Array.isArray(historyData.cycles)) {
                     await this._writeHistoryFile(historyData);
                     vscode.window.showInformationMessage("Cycle history imported successfully. Reloading...");
@@ -10150,7 +10511,7 @@ const filterTree = (nodes: FileNode[], term: string): FileNode[] => {
 
 
 const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, updateCheckedFiles, collapseTrigger, expandAllTrigger, searchTerm, problemMap, onNodeDrop, onCopy, clipboard }) => {
-    const [contextMenu, setContextMenu] = useState<{ x: number, y: number, node: FileNode } | null>(null);
+    const [contextMenu, setContextMenu] = useState<{ x: number, y: number, node: FileNode, selection: Set<string> } | null>(null);
     const [renamingPath, setRenamingPath] = useState<string | null>(null);
     const [renameValue, setRenameValue] = useState('');
     const clientIpc = ClientPostMessageManager.getInstance();
@@ -10162,10 +10523,10 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
         updateCheckedFiles(filePath);
     };
 
-    const handleContextMenu = (event: React.MouseEvent, node: FileNode) => {
+    const handleContextMenu = (event: React.MouseEvent, node: FileNode, selection: Set<string>) => {
         event.preventDefault();
         event.stopPropagation();
-        setContextMenu({ x: event.clientX, y: event.clientY, node });
+        setContextMenu({ x: event.clientX, y: event.clientY, node, selection });
     };
 
     const handleRename = () => {
@@ -10312,7 +10673,7 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
             <TreeView 
                 data={filteredData as TreeNode[]} 
                 renderNodeContent={(node, isExpanded) => renderFileNodeContent(node, isExpanded as boolean)} 
-                onContextMenu={(e, node) => handleContextMenu(e, node as FileNode)} 
+                onContextMenu={(e, node, selection) => handleContextMenu(e, node as FileNode, selection)} 
                 collapseTrigger={collapseTrigger}
                 expandAllTrigger={expandAllTrigger}
                 activeFile={activeFile} 
@@ -10450,7 +10811,7 @@ export const removePathsFromSelected = (
 </file>
 
 <file path="src/client/components/tree-view/TreeView.tsx">
-// Updated on: C165 (Fix multi-delete logic)
+// Updated on: C1
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { VscChevronRight } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -10471,7 +10832,7 @@ interface TreeViewProps {
     renderNodeContent?: (node: TreeNode, isExpanded: boolean) => React.ReactNode;
     collapseTrigger?: number;
     expandAllTrigger?: number;
-    onContextMenu?: (event: React.MouseEvent, node: TreeNode) => void;
+    onContextMenu?: (event: React.MouseEvent, node: TreeNode, paths: string[]) => void;
     activeFile?: string;
     updateCheckedFiles: (path: string) => void;
     onNodeDrop?: (event: React.DragEvent, node: FileNode) => void;
@@ -10507,7 +10868,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     useEffect(() => {
         flatNodeList.current = buildFlatNodeList(data, expandedNodes);
         if (!focusedNodePath && flatNodeList.current.length > 0) {
-            setFocusedNodePath(flatNodeList.current[0].absolutePath);
+            setFocusedNodePath(flatNodeList.current.absolutePath);
         }
     }, [data, expandedNodes, buildFlatNodeList, focusedNodePath]);
 
@@ -10517,7 +10878,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
 
     useEffect(() => {
         if (data.length > 0) {
-            const rootNode = data[0];
+            const rootNode = data;
             if (rootNode) {
                 expandNode(rootNode.absolutePath);
             }
@@ -10526,7 +10887,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
 
     useEffect(() => {
         if (collapseTrigger > 0 && data.length > 0) {
-            const rootNode = data[0];
+            const rootNode = data;
             if (rootNode) {
                 setExpandedNodes([rootNode.absolutePath]);
             }
@@ -10564,7 +10925,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
                 }
                 return paths;
             };
-            const rootPath = data[0]?.absolutePath;
+            const rootPath = data?.absolutePath;
             if (rootPath) {
                 const parents = getParentPaths(activeFile, rootPath);
                 logger.log(`[TreeView] Parents to expand: ${JSON.stringify(parents)}`);
@@ -10633,7 +10994,6 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     };
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
-        // C72 Fix: If the event is coming from an input field, ignore it.
         if ((e.target as HTMLElement).tagName === 'INPUT') {
             return;
         }
@@ -10678,7 +11038,6 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
             e.preventDefault();
             e.stopPropagation();
             let pathsToDelete: string[] = [];
-            // C165 Fix: Prioritize the multi-selection set over the single focused node.
             if (selectedPaths.size > 0) {
                 pathsToDelete = Array.from(selectedPaths);
             } else if (focusedNodePath) {
@@ -10714,7 +11073,6 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         }
     };
 
-    // --- Drag/Drop ---
     const handleInternalDragStart = (e: React.DragEvent, node: TreeNode) => {
         e.stopPropagation();
         setDraggedPath(node.absolutePath);
@@ -10760,7 +11118,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
             expansionTimer.current = null;
         }
 
-        if (draggedPath) { // Internal move
+        if (draggedPath) { 
             if (node.children && node.absolutePath !== draggedPath && !node.absolutePath.startsWith(draggedPath + '/')) {
                 const draggedName = draggedPath.split('/').pop();
                 if (draggedName) {
@@ -10770,7 +11128,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
                 }
             }
             setDraggedPath(null);
-        } else if (onNodeDrop) { // External drop
+        } else if (onNodeDrop) { 
             onNodeDrop(e, node as FileNode);
         }
     };
@@ -10779,9 +11137,16 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         e.preventDefault();
         e.stopPropagation();
         if (draggedPath && node.absolutePath.startsWith(draggedPath + '/')) {
-            e.dataTransfer.dropEffect = 'none'; // Prevent dropping a folder into itself
+            e.dataTransfer.dropEffect = 'none';
         } else {
             e.dataTransfer.dropEffect = 'move';
+        }
+    };
+
+    const handleContextMenuWrapper = (e: React.MouseEvent, node: TreeNode) => {
+        if (onContextMenu) {
+            const pathsToActOn = selectedPaths.has(node.absolutePath) ? Array.from(selectedPaths) : [node.absolutePath];
+            onContextMenu(e, node, pathsToActOn);
         }
     };
 
@@ -10814,7 +11179,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
                     <div
                         className={`treenode-item-wrapper ${isSelected ? 'selected' : ''} ${isFocused ? 'focused' : ''}`}
                         onClick={(e) => handleNodeClick(e, node)}
-                        onContextMenu={(e) => onContextMenu?.(e, node)}
+                        onContextMenu={(e) => handleContextMenuWrapper(e, node)}
                     >
                         <span className={`treenode-chevron ${isExpanded ? 'expanded' : ''}`}>
                             {isDirectory && <VscChevronRight />}
@@ -10898,7 +11263,7 @@ import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 
 interface ContextMenuProps {
-    menu: { x: number; y: number; node: FileNode };
+    menu: { x: number; y: number; node: FileNode, paths: string[] };
     onClose: () => void;
     onRename: () => void;
 }
@@ -10924,17 +11289,25 @@ const ContextMenu: React.FC<ContextMenuProps> = ({ menu, onClose, onRename }) =>
         onClose();
     };
     
-    const { node } = menu;
+    const { node, paths } = menu;
     const isDirectory = !!node.children;
+    const isMultiSelect = paths.length > 1;
 
     const getParentDirectory = () => {
         if (isDirectory) {
             return node.absolutePath;
         }
-        // For files, get the parent directory by splitting the path.
         const parts = node.absolutePath.split('/');
         parts.pop();
         return parts.join('/');
+    };
+
+    const handleDelete = () => {
+        if (isMultiSelect) {
+            clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileDelete, { paths });
+        } else {
+            clientIpc.sendToServer(ClientToServerChannel.RequestFileDelete, { path: node.absolutePath });
+        }
     };
 
     return (
@@ -10945,13 +11318,13 @@ const ContextMenu: React.FC<ContextMenuProps> = ({ menu, onClose, onRename }) =>
                     <li onClick={() => handleAction(() => clientIpc.sendToServer(ClientToServerChannel.RequestNewFile, { parentDirectory: getParentDirectory() }))}>New File...</li>
                     <li onClick={() => handleAction(() => clientIpc.sendToServer(ClientToServerChannel.RequestNewFolder, { parentDirectory: getParentDirectory() }))}>New Folder...</li>
                     <hr />
-                    <li onClick={() => handleAction(() => onRename())}>Rename</li>
-                    <li onClick={() => handleAction(() => clientIpc.sendToServer(ClientToServerChannel.RequestFileDelete, { path: node.absolutePath }))}>Delete</li>
+                    <li className={isMultiSelect ? 'disabled' : ''} onClick={() => !isMultiSelect && handleAction(() => onRename())}>Rename</li>
+                    <li onClick={() => handleAction(handleDelete)}>Delete</li>
                     <hr />
-                    <li onClick={() => handleAction(() => clientIpc.sendToServer(ClientToServerChannel.RequestCopyPath, { path: node.absolutePath, relative: false }))}>Copy Path</li>
-                    <li onClick={() => handleAction(() => clientIpc.sendToServer(ClientToServerChannel.RequestCopyPath, { path: node.absolutePath, relative: true }))}>Copy Relative Path</li>
+                    <li className={isMultiSelect ? 'disabled' : ''} onClick={() => !isMultiSelect && handleAction(() => clientIpc.sendToServer(ClientToServerChannel.RequestCopyPath, { path: node.absolutePath, relative: false }))}>Copy Path</li>
+                    <li className={isMultiSelect ? 'disabled' : ''} onClick={() => !isMultiSelect && handleAction(() => clientIpc.sendToServer(ClientToServerChannel.RequestCopyPath, { path: node.absolutePath, relative: true }))}>Copy Relative Path</li>
                     <hr />
-                    <li onClick={() => handleAction(() => clientIpc.sendToServer(ClientToServerChannel.RequestRevealInExplorer, { path: node.absolutePath }))}>Reveal in File Explorer</li>
+                    <li className={isMultiSelect ? 'disabled' : ''} onClick={() => !isMultiSelect && handleAction(() => clientIpc.sendToServer(ClientToServerChannel.RequestRevealInExplorer, { path: node.absolutePath }))}>Reveal in File Explorer</li>
                 </ul>
             </div>
         </>
@@ -12592,9 +12965,10 @@ interface OnboardingViewProps {
     initialProjectScope?: string;
     onNavigateToCycle: (cycleId: number) => void;
     latestCycleId: number;
+    onScopeChange: (scope: string) => void;
 }
 
-const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope, onNavigateToCycle, latestCycleId }) => {
+const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope, onNavigateToCycle, latestCycleId, onScopeChange }) => {
     const [projectScope, setProjectScope] = React.useState(initialProjectScope || '');
     const [isGenerating, setIsGenerating] = React.useState(false);
     const [promptGenerated, setPromptGenerated] = React.useState(false);
@@ -12611,22 +12985,21 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope, on
             setIsGenerating(true);
             logger.log("Sending request to generate Cycle 0 prompt and save project scope.");
             clientIpc.sendToServer(ClientToServerChannel.RequestCreateCycle0Prompt, { projectScope });
-            // The backend will now send a SendLatestCycleData message which triggers the view switch
-            // We can set a local flag to change the UI here after a delay.
             setTimeout(() => {
                 setIsGenerating(false);
                 setPromptGenerated(true);
-            }, 1500); // Assume generation takes a moment
+            }, 1500); 
         }
     };
 
-    const handleSaveScope = () => {
-        if (projectScope.trim()) {
-            logger.log("Saving updated project scope.");
-            // This will be handled by the debounced save in the main view,
-            // which is triggered by the onNavigateToCycle call.
-            onNavigateToCycle(latestCycleId);
-        }
+    const handleReturnToCycles = () => {
+        logger.log("Returning to latest cycle from Project Plan view.");
+        onNavigateToCycle(latestCycleId);
+    };
+
+    const handleScopeChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setProjectScope(e.target.value);
+        onScopeChange(e.target.value);
     };
 
     return (
@@ -12642,11 +13015,11 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope, on
                 className="onboarding-textarea"
                 placeholder="e.g., I want to build a web application that allows users to track their daily habits. It should have a simple UI, user authentication, and a dashboard to visualize progress..."
                 value={projectScope}
-                onChange={(e) => setProjectScope(e.target.value)}
+                onChange={handleScopeChange}
                 disabled={isGenerating || (promptGenerated && !isNavigatingBack)}
             />
             {isNavigatingBack ? (
-                <button className="styled-button" onClick={handleSaveScope}>
+                <button className="styled-button" onClick={handleReturnToCycles}>
                     <VscArrowRight /> Return to Cycle {latestCycleId}
                 </button>
             ) : !promptGenerated ? (
@@ -12873,13 +13246,70 @@ export default TestPane3;
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
-/* Updated on: C166 (Add primary button style) */
+/* Updated on: C1 */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
     font-size: var(--vscode-font-size);
     color: var(--vscode-editor-foreground);
     background-color: var(--vscode-editor-background);
+}
+
+.numbered-textarea-container {
+    position: relative;
+    display: flex;
+    border: 1px solid var(--vscode-input-border);
+    border-radius: 2px;
+    background-color: var(--vscode-input-background);
+    min-height: 50px;
+
+    .line-numbers-gutter {
+        padding: 4px;
+        color: var(--vscode-editorLineNumber-foreground);
+        background-color: var(--vscode-editorGutter-background);
+        text-align: right;
+        user-select: none;
+        overflow: hidden;
+        font-family: var(--vscode-editor-font-family);
+        font-size: var(--vscode-editor-font-size);
+        line-height: 1.5;
+    }
+
+    .context-textarea {
+        line-height: 1.5;
+        border: none;
+        flex-grow: 1;
+        background-color: transparent;
+    }
+
+    .textarea-resizer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        cursor: ns-resize;
+    }
+}
+
+.context-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-shrink: 0;
+
+    .context-input-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        .context-label {
+            font-size: 11px;
+            color: var(--vscode-descriptionForeground);
+            display: flex;
+            justify-content: space-between;
+        }
+    }
 }
 
 .onboarding-container {
@@ -13086,13 +13516,6 @@ body {
     border-radius: 2px;
 }
 
-.context-inputs {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    flex-shrink: 0;
-}
-
 .tab-count-input {
     display: flex;
     align-items: center;
@@ -13111,7 +13534,6 @@ body {
 
 .context-textarea {
     width: 100%;
-    height: 60px;
     background-color: var(--vscode-input-background);
     color: var(--vscode-input-foreground);
     border: 1px solid var(--vscode-input-border);
@@ -13119,7 +13541,6 @@ body {
     padding: 4px;
     font-family: var(--vscode-editor-font-family);
     font-size: var(--vscode-editor-font-size);
-    resize: vertical;
 }
 
 .tab-bar-container {
@@ -13336,7 +13757,7 @@ body {
     
     code > span {
         line-height: 1.5;
-        background-color: transparent !important; // C160 Fix: Remove line highlight
+        background-color: transparent !important;
     }
 }
 
@@ -13548,11 +13969,11 @@ body {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C166 (Add Open Folder functionality and primary button style)
+// Updated on: C1
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap, VscTrash, VscSync, VscClose, VscSave, VscBug, VscCheckAll, VscListOrdered, VscListUnordered, VscSymbolNumeric, VscClippy, VscLink, VscDebugDisconnect, VscBook, VscCloudUpload, VscCloudDownload, VscFolder, VscVm, VscOpenPreview } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap, VscTrash, VscSync, VscClose, VscSave, VscBug, VscCheckAll, VscListOrdered, VscListUnordered, VscSymbolNumeric, VscClippy, VscLink, VscDebugDisconnect, VscBook, VscCloudUpload, VscCloudDownload, VscFolder } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -13563,6 +13984,7 @@ import * as path from 'path-browserify';
 import { BatchWriteFile } from '@/common/ipc/channels.type';
 import OnboardingView from './OnboardingView';
 import { formatLargeNumber } from '@/common/utils/formatting';
+import NumberedTextarea from './components/NumberedTextarea';
 
 interface ComparisonMetrics {
     originalTokens: number;
@@ -13594,7 +14016,7 @@ const CodeViewer: React.FC<{ htmlContent: string | undefined | null }> = ({ html
     }
 
     const codeContentMatch = /<pre><code>([\s\S]*)<\/code><\/pre>/s.exec(htmlContent || '');
-    const code = codeContentMatch?.[1] ?? (htmlContent || '');
+    const code = codeContentMatch?. ?? (htmlContent || '');
 
     const lines = code.split('\n');
     if (lines.length > 1 && lines[lines.length - 1] === '') {
@@ -13654,6 +14076,10 @@ const App = () => {
     const [isSortedByTokens, setIsSortedByTokens] = React.useState(false);
     const [pathOverrides, setPathOverrides] = React.useState<Map<string, string>>(new Map());
     const [tempOverridePath, setTempOverridePath] = React.useState('');
+    const [cycleContextHeight, setCycleContextHeight] = React.useState(100);
+    const [ephemeralContextHeight, setEphemeralContextHeight] = React.useState(100);
+    const [cycleContextTokens, setCycleContextTokens] = React.useState(0);
+    const [ephemeralContextTokens, setEphemeralContextTokens] = React.useState(0);
 
     const [isAssociatedFilesCollapsed, setAssociatedFilesCollapsed] = React.useState(false);
     const [isThoughtsCollapsed, setThoughtsCollapsed] = React.useState(false);
@@ -13673,29 +14099,17 @@ const App = () => {
             cycleData = { cycleId: 0, cycleContext, ephemeralContext: '', responses: {}, timestamp: new Date().toISOString(), title: 'Project Setup' };
         } else {
             cycleData = {
-                cycleId: currentCycle,
-                timestamp: new Date().toISOString(),
-                title: cycleTitle,
-                cycleContext,
-                ephemeralContext,
-                responses,
-                isParsedMode,
-                leftPaneWidth,
-                selectedResponseId,
-                selectedFilesForReplacement: Array.from(selectedFilesForReplacement),
-                tabCount,
-                isSortedByTokens,
-                pathOverrides: Object.fromEntries(pathOverrides),
+                cycleId: currentCycle, timestamp: new Date().toISOString(), title: cycleTitle, cycleContext, ephemeralContext, responses, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement: Array.from(selectedFilesForReplacement), tabCount, isSortedByTokens, pathOverrides: Object.fromEntries(pathOverrides), cycleContextHeight, ephemeralContextHeight,
             };
         }
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
-    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, clientIpc]);
+    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, clientIpc, cycleContextHeight, ephemeralContextHeight]);
 
     const debouncedSave = useDebounce(saveCurrentCycleState, 1000);
 
     React.useEffect(() => {
         debouncedSave();
-    }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, tabCount, isSortedByTokens, pathOverrides, debouncedSave]);
+    }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, tabCount, isSortedByTokens, pathOverrides, debouncedSave, cycleContextHeight, ephemeralContextHeight]);
     
     const parseAllTabs = React.useCallback(() => {
         setTabs(prevTabs => {
@@ -13734,6 +14148,8 @@ const App = () => {
             setCycleTitle(cycleData.title);
             setCycleContext(cycleData.cycleContext);
             setEphemeralContext(cycleData.ephemeralContext);
+            setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4));
+            setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4));
             const newTabs: { [key: string]: TabState } = {};
             Object.entries(cycleData.responses).forEach(([tabId, response]) => {
                 newTabs[tabId] = { rawContent: response.content, parsedContent: null };
@@ -13746,6 +14162,8 @@ const App = () => {
             setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || []));
             setIsSortedByTokens(cycleData.isSortedByTokens || false);
             setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {})));
+            setCycleContextHeight(cycleData.cycleContextHeight || 100);
+            setEphemeralContextHeight(cycleData.ephemeralContextHeight || 100);
         };
 
         clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); });
@@ -13755,7 +14173,7 @@ const App = () => {
         clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); });
         clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { logger.log(`Received FilesWritten event for: ${paths.join(', ')}`); setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); });
         clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, ({ filePath, originalTokens, modifiedTokens, similarity }) => {
-            setComparisonMetrics(prev => new Map(prev).set(filePath, { originalTokens, modifiedTokens, similarity }));
+            setComparisonMetrics(prev => new Map(prev).set(filePath, { filePath, originalTokens, modifiedTokens, similarity }));
         });
         
         clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});
@@ -13968,7 +14386,7 @@ const App = () => {
         for (let i = 1; i <= tabCount; i++) {
             responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' };
         }
-        const currentState: PcppCycle = { cycleId: currentCycle, timestamp: new Date().toISOString(), title: cycleTitle, cycleContext, ephemeralContext, responses, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement: Array.from(selectedFilesForReplacement), tabCount, isSortedByTokens };
+        const currentState: PcppCycle = { cycleId: currentCycle, timestamp: new Date().toISOString(), title: cycleTitle, cycleContext, ephemeralContext, responses, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement: Array.from(selectedFilesForReplacement), tabCount, isSortedByTokens, cycleContextHeight, ephemeralContextHeight };
         clientIpc.sendToServer(ClientToServerChannel.RequestLogState, { currentState });
     };
 
@@ -14002,7 +14420,7 @@ const App = () => {
     }
 
     if (currentCycle === 0) {
-        return <OnboardingView initialProjectScope={projectScope} onNavigateToCycle={(id) => handleCycleChange(null, id)} latestCycleId={maxCycle} />;
+        return <OnboardingView initialProjectScope={projectScope} onNavigateToCycle={(id) => handleCycleChange(null, id)} latestCycleId={maxCycle} onScopeChange={setCycleContext} />;
     }
 
     const collapsedNavigator = <div className="collapsed-navigator"><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0}><VscChevronLeft /></button><span className="cycle-display">C{currentCycle}</span><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button></div>;
@@ -14081,7 +14499,18 @@ const App = () => {
             </div>
             <div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} /></div>
         </div>
-        <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''}><div className="cycle-navigator"><span>Cycle:</span><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0}><VscChevronLeft /></button><input type="number" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 0)} className="cycle-input" /><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button><button onClick={handleNewCycle} title="New Cycle" disabled={isNewCycleButtonDisabled}><VscAdd /></button><input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} /><button onClick={handleDeleteCycle} title="Delete Current Cycle"><VscTrash /></button><button onClick={handleResetHistory} title="Reset All History"><VscSync /></button><button onClick={handleExportHistory} title="Save Cycle History..."><VscCloudUpload /></button><button onClick={handleImportHistory} title="Load Cycle History..."><VscCloudDownload /></button></div><div className="context-inputs"><textarea className="context-textarea" placeholder="Cycle Context (notes for this cycle)..." value={cycleContext} onChange={e => setCycleContext(e.target.value)} onKeyDown={handleContextKeyDown} /><textarea className="context-textarea" placeholder="Ephemeral Context (for this cycle's prompt only)..." value={ephemeralContext} onChange={e => setEphemeralContext(e.target.value)} onKeyDown={handleContextKeyDown} /></div></CollapsibleSection>
+        <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''}><div className="cycle-navigator"><span>Cycle:</span><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0}><VscChevronLeft /></button><input type="number" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 0)} className="cycle-input" /><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button><button onClick={handleNewCycle} title="New Cycle" disabled={isNewCycleButtonDisabled}><VscAdd /></button><input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} /><button onClick={handleDeleteCycle} title="Delete Current Cycle"><VscTrash /></button><button onClick={handleResetHistory} title="Reset All History"><VscSync /></button><button onClick={handleExportHistory} title="Save Cycle History..."><VscCloudUpload /></button><button onClick={handleImportHistory} title="Load Cycle History..."><VscCloudDownload /></button></div>
+            <div className="context-inputs">
+                <div className="context-input-wrapper">
+                    <div className="context-label"><span>Cycle Context</span><span>Tokens: {cycleContextTokens}</span></div>
+                    <NumberedTextarea value={cycleContext} onChange={(e) => { setCycleContext(e.target.value); setCycleContextTokens(Math.ceil(e.target.value.length / 4)); }} placeholder="Cycle Context (notes for this cycle)..." onKeyDown={handleContextKeyDown} height={cycleContextHeight} onHeightChange={setCycleContextHeight} />
+                </div>
+                <div className="context-input-wrapper">
+                    <div className="context-label"><span>Ephemeral Context</span><span>Tokens: {ephemeralContextTokens}</span></div>
+                    <NumberedTextarea value={ephemeralContext} onChange={(e) => { setEphemeralContext(e.target.value); setEphemeralContextTokens(Math.ceil(e.target.value.length / 4)); }} placeholder="Ephemeral Context (for this cycle's prompt only)..." onKeyDown={handleContextKeyDown} height={ephemeralContextHeight} onHeightChange={setEphemeralContextHeight} />
+                </div>
+            </div>
+        </CollapsibleSection>
         <div className="tab-bar-container">
             <div className="tab-bar">{sortedTabIds.map((tabIndex) => {
                 const tabData = tabs[tabIndex.toString()];
@@ -14295,7 +14724,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
 </file>
 
 <file path="src/common/ipc/client-ipc.ts">
-// Updated on: C118 (Add getVscodeApi method)
+// Updated on: C1 (Add getVscodeApi method)
 import getVscode from "./get-vscode-api";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { ChannelBody } from "./channels.type";
@@ -14423,9 +14852,7 @@ export interface FileNode {
 
 <file path="src/common/types/pcpp.types.ts">
 // src/common/types/pcpp.types.ts
-// Updated on: C157 (Add isSortedByTokens)
-
-// Data structure for the backend history file
+// Updated on: C1
 export interface PcppResponse {
     content: string;
 }
@@ -14442,19 +14869,18 @@ export interface PcppCycle {
     selectedResponseId?: string | null;
     selectedFilesForReplacement?: string[];
     tabCount?: number;
-    isSortedByLength?: boolean; // C149: Deprecated in favor of isSortedByTokens
-    isSortedByTokens?: boolean; // C157: New property for persistent sorting
+    isSortedByTokens?: boolean;
     pathOverrides?: { [originalPath: string]: string };
+    cycleContextHeight?: number;
+    ephemeralContextHeight?: number;
 }
 
 export interface PcppHistoryFile {
     version: number;
-    projectScope?: string; // The user's master project scope from Cycle 0
+    projectScope?: string; 
     cycles: PcppCycle[];
 }
 
-
-// Data structure for the frontend parsed response
 export interface ParsedFile {
     path: string;
     content: string;
@@ -14464,14 +14890,14 @@ export interface ParsedFile {
 export interface ParsedResponse {
     summary: string;
     courseOfAction: string;
-    filesUpdated: string[]; // This is now derived from parsed files, not a separate section
-    files: ParsedFile[]; // Parsed file blocks with content
+    filesUpdated: string[];
+    files: ParsedFile[];
     totalTokens: number;
 }
 </file>
 
 <file path="src/common/types/vscode-webview.d.ts">
-// Updated on: C118 (Add pcppLeftPaneWidth to ViewState)
+// Updated on: C1 (Add pcppLeftPaneWidth to ViewState)
 export interface WebviewApi<StateType> {
     postMessage(message: unknown): void;
     getState(): StateType | undefined;
@@ -28175,6 +28601,386 @@ out
 The-Creator-AI-main/
 prompt.md
 .vscode/dce_cache/
+</file>
+
+<file path="src/Artifacts/A66. DCE - Cycle 1 - Task Tracker.md">
+# Artifact A66: DCE - Cycle 1 - Task Tracker
+# Date Created: C167
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A tracking document for the feedback items and tasks from the first cycle of using the DCE to build itself.
+- **Tags:** bugs, tracking, issues, backlog, cycle 1
+
+## 1. Overview
+
+This document lists the feedback and tasks from the first official development cycle using the DCE tool. It serves as a checklist to ensure all initial bugs and feature requests are addressed.
+
+## 2. Task List
+
+| ID | Task | Status (C167) | Notes |
+|---|---|---|---|
+| 1 | Fix right-click delete to work on multi-file selections. | **In Progress** | Critical bug. Requires updating context menu logic to handle batch operations. |
+| 2 | Fix project plan persistence bug in Cycle 0 view. | **In Progress** | Critical bug. State is not being lifted correctly from the onboarding view. |
+| 3 | Make `package-lock.json` non-selectable in the file tree. | **In Progress** | Simple configuration change in `file-tree.service.ts`. |
+| 4 | Make `.vscodeignore` selectable in the file tree. | **In Progress** | Simple configuration change in `file-tree.service.ts`. |
+| 5 | Plan for UX improvements to context panes (token count, line numbers). | **In Progress** | New artifact `A68` created to plan this feature. |
+| 6 | Plan for refactoring the large `parallel-copilot.view.tsx`. | **In Progress** | New artifact `A67` created to plan this refactor. |
+</file>
+
+<file path="src/Artifacts/A67. DCE - PCPP View Refactoring Plan.md">
+# Artifact A67: DCE - PCPP View Refactoring Plan
+# Date Created: C1
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A plan to refactor the monolithic `parallel-copilot.view/view.tsx` into smaller, more focused components to improve maintainability and readability.
+- **Tags:** refactor, architecture, technical debt, ui, ux
+
+## 1. Problem Statement
+
+The `parallel-copilot.view/view.tsx` component has become a "god component," currently exceeding 8,000 tokens. It manages the state and rendering for the entire Parallel Co-Pilot Panel, including:
+-   The main view and the onboarding view.
+-   The cycle navigator.
+-   The context input text areas.
+-   The response tab bar.
+-   The raw text view for each tab.
+-   The complex, multi-pane parsed view.
+-   The diff viewer.
+-   All associated state management (`useState`, `useMemo`, `useEffect`).
+-   All IPC message handling.
+
+This monolithic structure makes the component difficult to read, debug, and maintain. A single change can have unintended consequences, and the high token count makes it a challenging file to work with.
+
+## 2. Refactoring Plan
+
+The goal is to break down `view.tsx` into a series of smaller, single-responsibility components. The main `view.tsx` file will be refactored into a "container" component that manages the core state and orchestrates the new, smaller "presentational" components.
+
+### 2.1. Proposed Component Structure
+
+-   **`view.tsx` (Container):**
+    -   **Responsibility:** Manages all primary state (`currentCycle`, `tabs`, `isParsedMode`, etc.) and all IPC message handlers. It will render the appropriate child components and pass down state and callbacks as props.
+
+-   **`src/client/views/parallel-copilot.view/components/` (New Directory):**
+    -   **`CycleNavigator.tsx`:** Renders the cycle navigation bar, including the cycle number, title input, and navigation buttons. Receives the current cycle state and `onCycleChange` callbacks as props.
+    -   **`ContextInputs.tsx`:** Renders the "Cycle Context" and "Ephemeral Context" text areas, including their new line number and token count displays. Receives content and `onChange` handlers as props.
+    -   **`ResponseTabs.tsx`:** Renders the main tab bar. Receives the list of tabs, the active tab, and the `onTabSelect` handler as props.
+    -   **`ResponsePane.tsx`:** A larger component responsible for rendering the content of a single, active tab. It will contain the logic to display either the raw `textarea` or the parsed view.
+    -   **`ParsedView.tsx`:** Renders the multi-pane parsed view, including the "Associated Files" list, summary, and course of action. It will contain the logic for selecting a file to view.
+    -   **`CodeViewer.tsx`:** Renders the syntax-highlighted code or the `DiffViewer`. Receives the file content and diff data as props.
+
+## 3. Benefits of Refactoring
+
+-   **Improved Readability:** Each component will be smaller and focused on a single part of the UI, making the code easier to understand.
+-   **Improved Maintainability:** Bugs and feature requests can be addressed in isolated components, reducing the risk of unintended side effects.
+-   **Reduced Token Count:** Splitting the large file into many smaller ones makes each file more manageable for both human and AI developers.
+-   **Better Performance:** Memoization (`React.memo`) can be applied more effectively to smaller components, preventing unnecessary re-renders.
+</file>
+
+<file path="src/Artifacts/A68. DCE - PCPP Context Pane UX Plan.md">
+# Artifact A68: DCE - PCPP Context Pane UX Plan
+# Date Created: C167
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A plan to enhance the UX of the cycle context and ephemeral context text areas with features like token counts and line numbers.
+- **Tags:** feature plan, ui, ux, pcpp, context
+
+## 1. Overview & Goal
+
+The "Cycle Context" and "Ephemeral Context" text areas in the Parallel Co-Pilot Panel are crucial for prompt engineering, but their current implementation as basic `<textarea>` elements lacks key features. The goal of this plan is to significantly enhance their usability by adding token counts, line numbers, and persistent resizing.
+
+## 2. User Stories
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| P2-CTX-01 | **See Context Token Count** | As a developer, I want to see a live token count for the Cycle Context and Ephemeral Context fields, so I can manage the size of my prompt effectively. | - Below each text area, a label displays the approximate token count of its content. <br> - The count updates in real-time as the user types. |
+| P2-CTX-02 | **See Line Numbers** | As a developer, I want to see line numbers in the context text areas, so I can easily reference specific parts of a long context or error log. | - A line number gutter is displayed to the left of the text input area. <br> - The line numbers scroll in sync with the text content. |
+| P2-CTX-03 | **Persistent Resizing** | As a developer, when I resize the height of a context text area, I want it to remain that size when I switch to another response tab and back, so I don't lose my layout preferences. | - The `height` of each text area is stored as part of the panel's state. <br> - When the user resizes a text area, its new height is saved. <br> - When the panel re-renders, the text areas are restored to their saved heights. |
+
+## 3. Technical Implementation Plan
+
+### 3.1. Token Counts
+-   **State:** Add new state variables to `view.tsx`: `cycleContextTokens` and `ephemeralContextTokens`.
+-   **UI:** Add `<span>` elements below each text area to display these state values.
+-   **Logic:** The `onChange` handlers for the text areas will be updated to calculate the token count (`e.target.value.length / 4`) and update the corresponding token count state.
+
+### 3.2. Line Numbers & Resizing (Combined Solution)
+-   **Problem:** A standard HTML `<textarea>` does not support a line number gutter. Persisting its height after a manual resize (dragging the corner) is also not straightforward.
+-   **Solution:** Replace the `<textarea>` elements with a custom "editor" component built from `<div>` elements. This is a common pattern for creating simple code editors.
+-   **Implementation:**
+    1.  **New Component (`SimpleEditor.tsx`):** Create a new reusable component that takes `value` and `onChange` as props.
+    2.  **Structure:** The component will consist of a wrapper `div` containing two child `div`s: one for the line numbers and one for the text content.
+    3.  **Line Numbers:** The line number `div` will render a list of numbers based on the number of newlines in the `value` prop.
+    4.  **Text Input:** The content `div` will have the `contentEditable="true"` attribute, making it a live text editor. Its `onInput` event will be used to call the `onChange` prop.
+    5.  **Synchronization:** Both `div`s will be styled to ensure their line heights and fonts match, and they will scroll together.
+    6.  **Resizable Handle:** A draggable handle will be added to the bottom of the main wrapper. `onMouseDown`, `onMouseMove`, and `onMouseUp` handlers will be used to track the drag gesture and update a `height` prop, which will be stored in the main `view.tsx` state to ensure persistence.
+</file>
+
+<file path="src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx">
+import * as React from 'react';
+
+interface NumberedTextareaProps {
+    value: string;
+    onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+    placeholder: string;
+    onKeyDown: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
+    height: number;
+    onHeightChange: (height: number) => void;
+}
+
+const NumberedTextarea: React.FC<NumberedTextareaProps> = ({ value, onChange, placeholder, onKeyDown, height, onHeightChange }) => {
+    const [lineCount, setLineCount] = React.useState(1);
+    const textareaRef = React.useRef<HTMLTextAreaElement>(null);
+    const lineNumbersRef = React.useRef<HTMLDivElement>(null);
+    const resizerRef = React.useRef<HTMLDivElement>(null);
+
+    React.useEffect(() => {
+        const lines = value.split('\n').length;
+        setLineCount(lines);
+    }, [value]);
+
+    const handleScroll = () => {
+        if (lineNumbersRef.current && textareaRef.current) {
+            lineNumbersRef.current.scrollTop = textareaRef.current.scrollTop;
+        }
+    };
+
+    const handleMouseDown = (e: React.MouseEvent) => {
+        e.preventDefault();
+        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('mouseup', handleMouseUp);
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+        if (textareaRef.current) {
+            const newHeight = e.clientY - textareaRef.current.getBoundingClientRect().top;
+            onHeightChange(Math.max(50, newHeight)); // min height 50px
+        }
+    };
+
+    const handleMouseUp = () => {
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', handleMouseUp);
+    };
+
+    return (
+        <div className="numbered-textarea-container" style={{ height: `${height}px` }}>
+            <div className="line-numbers-gutter" ref={lineNumbersRef}>
+                {Array.from({ length: lineCount }, (_, i) => (
+                    <div key={i}>{i + 1}</div>
+                ))}
+            </div>
+            <textarea
+                ref={textareaRef}
+                className="context-textarea"
+                placeholder={placeholder}
+                value={value}
+                onChange={onChange}
+                onKeyDown={onKeyDown}
+                onScroll={handleScroll}
+                style={{ resize: 'none' }}
+            />
+            <div
+                ref={resizerRef}
+                className="textarea-resizer"
+                onMouseDown={handleMouseDown}
+            />
+        </div>
+    );
+};
+
+export default NumberedTextarea;
+</file>
+
+<file path="src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx">
+import * as React from 'react';
+
+interface NumberedTextareaProps {
+    value: string;
+    onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+    placeholder: string;
+    onKeyDown: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
+    height: number;
+    onHeightChange: (height: number) => void;
+}
+
+const NumberedTextarea: React.FC<NumberedTextareaProps> = ({ value, onChange, placeholder, onKeyDown, height, onHeightChange }) => {
+    const [lineCount, setLineCount] = React.useState(1);
+    const textareaRef = React.useRef<HTMLTextAreaElement>(null);
+    const lineNumbersRef = React.useRef<HTMLDivElement>(null);
+    const resizerRef = React.useRef<HTMLDivElement>(null);
+
+    React.useEffect(() => {
+        const lines = value.split('\n').length;
+        setLineCount(lines);
+    }, [value]);
+
+    const handleScroll = () => {
+        if (lineNumbersRef.current && textareaRef.current) {
+            lineNumbersRef.current.scrollTop = textareaRef.current.scrollTop;
+        }
+    };
+
+    const handleMouseDown = (e: React.MouseEvent) => {
+        e.preventDefault();
+        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('mouseup', handleMouseUp);
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+        if (textareaRef.current) {
+            const newHeight = e.clientY - textareaRef.current.getBoundingClientRect().top;
+            onHeightChange(Math.max(50, newHeight)); // min height 50px
+        }
+    };
+
+    const handleMouseUp = () => {
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', handleMouseUp);
+    };
+
+    return (
+        <div className="numbered-textarea-container" style={{ height: `${height}px` }}>
+            <div className="line-numbers-gutter" ref={lineNumbersRef}>
+                {Array.from({ length: lineCount }, (_, i) => (
+                    <div key={i}>{i + 1}</div>
+                ))}
+            </div>
+            <textarea
+                ref={textareaRef}
+                className="context-textarea"
+                placeholder={placeholder}
+                value={value}
+                onChange={onChange}
+                onKeyDown={onKeyDown}
+                onScroll={handleScroll}
+                style={{ resize: 'none' }}
+            />
+            <div
+                ref={resizerRef}
+                className="textarea-resizer"
+                onMouseDown={handleMouseDown}
+            />
+        </div>
+    );
+};
+
+export default NumberedTextarea;
+</file>
+
+<file path="dist/Artifacts/A66. DCE - Cycle 1 - Task Tracker.md">
+# Artifact A66: DCE - Cycle 1 - Task Tracker
+# Date Created: C167
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A tracking document for the feedback items and tasks from the first cycle of using the DCE to build itself.
+- **Tags:** bugs, tracking, issues, backlog, cycle 1
+
+## 1. Overview
+
+This document lists the feedback and tasks from the first official development cycle using the DCE tool. It serves as a checklist to ensure all initial bugs and feature requests are addressed.
+
+## 2. Task List
+
+| ID | Task | Status (C167) | Notes |
+|---|---|---|---|
+| 1 | Fix right-click delete to work on multi-file selections. | **In Progress** | Critical bug. Requires updating context menu logic to handle batch operations. |
+| 2 | Fix project plan persistence bug in Cycle 0 view. | **In Progress** | Critical bug. State is not being lifted correctly from the onboarding view. |
+| 3 | Make `package-lock.json` non-selectable in the file tree. | **In Progress** | Simple configuration change in `file-tree.service.ts`. |
+| 4 | Make `.vscodeignore` selectable in the file tree. | **In Progress** | Simple configuration change in `file-tree.service.ts`. |
+| 5 | Plan for UX improvements to context panes (token count, line numbers). | **In Progress** | New artifact `A68` created to plan this feature. |
+| 6 | Plan for refactoring the large `parallel-copilot.view.tsx`. | **In Progress** | New artifact `A67` created to plan this refactor. |
+</file>
+
+<file path="dist/Artifacts/A67. DCE - PCPP View Refactoring Plan.md">
+# Artifact A67: DCE - PCPP View Refactoring Plan
+# Date Created: C1
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A plan to refactor the monolithic `parallel-copilot.view/view.tsx` into smaller, more focused components to improve maintainability and readability.
+- **Tags:** refactor, architecture, technical debt, ui, ux
+
+## 1. Problem Statement
+
+The `parallel-copilot.view/view.tsx` component has become a "god component," currently exceeding 8,000 tokens. It manages the state and rendering for the entire Parallel Co-Pilot Panel, including:
+-   The main view and the onboarding view.
+-   The cycle navigator.
+-   The context input text areas.
+-   The response tab bar.
+-   The raw text view for each tab.
+-   The complex, multi-pane parsed view.
+-   The diff viewer.
+-   All associated state management (`useState`, `useMemo`, `useEffect`).
+-   All IPC message handling.
+
+This monolithic structure makes the component difficult to read, debug, and maintain. A single change can have unintended consequences, and the high token count makes it a challenging file to work with.
+
+## 2. Refactoring Plan
+
+The goal is to break down `view.tsx` into a series of smaller, single-responsibility components. The main `view.tsx` file will be refactored into a "container" component that manages the core state and orchestrates the new, smaller "presentational" components.
+
+### 2.1. Proposed Component Structure
+
+-   **`view.tsx` (Container):**
+    -   **Responsibility:** Manages all primary state (`currentCycle`, `tabs`, `isParsedMode`, etc.) and all IPC message handlers. It will render the appropriate child components and pass down state and callbacks as props.
+
+-   **`src/client/views/parallel-copilot.view/components/` (New Directory):**
+    -   **`CycleNavigator.tsx`:** Renders the cycle navigation bar, including the cycle number, title input, and navigation buttons. Receives the current cycle state and `onCycleChange` callbacks as props.
+    -   **`ContextInputs.tsx`:** Renders the "Cycle Context" and "Ephemeral Context" text areas, including their new line number and token count displays. Receives content and `onChange` handlers as props.
+    -   **`ResponseTabs.tsx`:** Renders the main tab bar. Receives the list of tabs, the active tab, and the `onTabSelect` handler as props.
+    -   **`ResponsePane.tsx`:** A larger component responsible for rendering the content of a single, active tab. It will contain the logic to display either the raw `textarea` or the parsed view.
+    -   **`ParsedView.tsx`:** Renders the multi-pane parsed view, including the "Associated Files" list, summary, and course of action. It will contain the logic for selecting a file to view.
+    -   **`CodeViewer.tsx`:** Renders the syntax-highlighted code or the `DiffViewer`. Receives the file content and diff data as props.
+
+## 3. Benefits of Refactoring
+
+-   **Improved Readability:** Each component will be smaller and focused on a single part of the UI, making the code easier to understand.
+-   **Improved Maintainability:** Bugs and feature requests can be addressed in isolated components, reducing the risk of unintended side effects.
+-   **Reduced Token Count:** Splitting the large file into many smaller ones makes each file more manageable for both human and AI developers.
+-   **Better Performance:** Memoization (`React.memo`) can be applied more effectively to smaller components, preventing unnecessary re-renders.
+</file>
+
+<file path="dist/Artifacts/A68. DCE - PCPP Context Pane UX Plan.md">
+# Artifact A68: DCE - PCPP Context Pane UX Plan
+# Date Created: C167
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A plan to enhance the UX of the cycle context and ephemeral context text areas with features like token counts and line numbers.
+- **Tags:** feature plan, ui, ux, pcpp, context
+
+## 1. Overview & Goal
+
+The "Cycle Context" and "Ephemeral Context" text areas in the Parallel Co-Pilot Panel are crucial for prompt engineering, but their current implementation as basic `<textarea>` elements lacks key features. The goal of this plan is to significantly enhance their usability by adding token counts, line numbers, and persistent resizing.
+
+## 2. User Stories
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| P2-CTX-01 | **See Context Token Count** | As a developer, I want to see a live token count for the Cycle Context and Ephemeral Context fields, so I can manage the size of my prompt effectively. | - Below each text area, a label displays the approximate token count of its content. <br> - The count updates in real-time as the user types. |
+| P2-CTX-02 | **See Line Numbers** | As a developer, I want to see line numbers in the context text areas, so I can easily reference specific parts of a long context or error log. | - A line number gutter is displayed to the left of the text input area. <br> - The line numbers scroll in sync with the text content. |
+| P2-CTX-03 | **Persistent Resizing** | As a developer, when I resize the height of a context text area, I want it to remain that size when I switch to another response tab and back, so I don't lose my layout preferences. | - The `height` of each text area is stored as part of the panel's state. <br> - When the user resizes a text area, its new height is saved. <br> - When the panel re-renders, the text areas are restored to their saved heights. |
+
+## 3. Technical Implementation Plan
+
+### 3.1. Token Counts
+-   **State:** Add new state variables to `view.tsx`: `cycleContextTokens` and `ephemeralContextTokens`.
+-   **UI:** Add `<span>` elements below each text area to display these state values.
+-   **Logic:** The `onChange` handlers for the text areas will be updated to calculate the token count (`e.target.value.length / 4`) and update the corresponding token count state.
+
+### 3.2. Line Numbers & Resizing (Combined Solution)
+-   **Problem:** A standard HTML `<textarea>` does not support a line number gutter. Persisting its height after a manual resize (dragging the corner) is also not straightforward.
+-   **Solution:** Replace the `<textarea>` elements with a custom "editor" component built from `<div>` elements. This is a common pattern for creating simple code editors.
+-   **Implementation:**
+    1.  **New Component (`SimpleEditor.tsx`):** Create a new reusable component that takes `value` and `onChange` as props.
+    2.  **Structure:** The component will consist of a wrapper `div` containing two child `div`s: one for the line numbers and one for the text content.
+    3.  **Line Numbers:** The line number `div` will render a list of numbers based on the number of newlines in the `value` prop.
+    4.  **Text Input:** The content `div` will have the `contentEditable="true"` attribute, making it a live text editor. Its `onInput` event will be used to call the `onChange` prop.
+    5.  **Synchronization:** Both `div`s will be styled to ensure their line heights and fonts match, and they will scroll together.
+    6.  **Resizable Handle:** A draggable handle will be added to the bottom of the main wrapper. `onMouseDown`, `onMouseMove`, and `onMouseUp` handlers will be used to track the drag gesture and update a `height` prop, which will be stored in the main `view.tsx` state to ensure persistence.
 </file>
 
 

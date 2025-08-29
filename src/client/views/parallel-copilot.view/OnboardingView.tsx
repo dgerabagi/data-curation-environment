@@ -9,9 +9,10 @@ interface OnboardingViewProps {
     initialProjectScope?: string;
     onNavigateToCycle: (cycleId: number) => void;
     latestCycleId: number;
+    onScopeChange: (scope: string) => void;
 }
 
-const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope, onNavigateToCycle, latestCycleId }) => {
+const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope, onNavigateToCycle, latestCycleId, onScopeChange }) => {
     const [projectScope, setProjectScope] = React.useState(initialProjectScope || '');
     const [isGenerating, setIsGenerating] = React.useState(false);
     const [promptGenerated, setPromptGenerated] = React.useState(false);
@@ -28,22 +29,21 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope, on
             setIsGenerating(true);
             logger.log("Sending request to generate Cycle 0 prompt and save project scope.");
             clientIpc.sendToServer(ClientToServerChannel.RequestCreateCycle0Prompt, { projectScope });
-            // The backend will now send a SendLatestCycleData message which triggers the view switch
-            // We can set a local flag to change the UI here after a delay.
             setTimeout(() => {
                 setIsGenerating(false);
                 setPromptGenerated(true);
-            }, 1500); // Assume generation takes a moment
+            }, 1500); 
         }
     };
 
-    const handleSaveScope = () => {
-        if (projectScope.trim()) {
-            logger.log("Saving updated project scope.");
-            // This will be handled by the debounced save in the main view,
-            // which is triggered by the onNavigateToCycle call.
-            onNavigateToCycle(latestCycleId);
-        }
+    const handleReturnToCycles = () => {
+        logger.log("Returning to latest cycle from Project Plan view.");
+        onNavigateToCycle(latestCycleId);
+    };
+
+    const handleScopeChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setProjectScope(e.target.value);
+        onScopeChange(e.target.value);
     };
 
     return (
@@ -59,11 +59,11 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope, on
                 className="onboarding-textarea"
                 placeholder="e.g., I want to build a web application that allows users to track their daily habits. It should have a simple UI, user authentication, and a dashboard to visualize progress..."
                 value={projectScope}
-                onChange={(e) => setProjectScope(e.target.value)}
+                onChange={handleScopeChange}
                 disabled={isGenerating || (promptGenerated && !isNavigatingBack)}
             />
             {isNavigatingBack ? (
-                <button className="styled-button" onClick={handleSaveScope}>
+                <button className="styled-button" onClick={handleReturnToCycles}>
                     <VscArrowRight /> Return to Cycle {latestCycleId}
                 </button>
             ) : !promptGenerated ? (

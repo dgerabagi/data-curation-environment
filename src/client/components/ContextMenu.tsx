@@ -4,7 +4,7 @@ import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 
 interface ContextMenuProps {
-    menu: { x: number; y: number; node: FileNode };
+    menu: { x: number; y: number; node: FileNode, paths: string[] };
     onClose: () => void;
     onRename: () => void;
 }
@@ -30,17 +30,25 @@ const ContextMenu: React.FC<ContextMenuProps> = ({ menu, onClose, onRename }) =>
         onClose();
     };
     
-    const { node } = menu;
+    const { node, paths } = menu;
     const isDirectory = !!node.children;
+    const isMultiSelect = paths.length > 1;
 
     const getParentDirectory = () => {
         if (isDirectory) {
             return node.absolutePath;
         }
-        // For files, get the parent directory by splitting the path.
         const parts = node.absolutePath.split('/');
         parts.pop();
         return parts.join('/');
+    };
+
+    const handleDelete = () => {
+        if (isMultiSelect) {
+            clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileDelete, { paths });
+        } else {
+            clientIpc.sendToServer(ClientToServerChannel.RequestFileDelete, { path: node.absolutePath });
+        }
     };
 
     return (
@@ -51,13 +59,13 @@ const ContextMenu: React.FC<ContextMenuProps> = ({ menu, onClose, onRename }) =>
                     <li onClick={() => handleAction(() => clientIpc.sendToServer(ClientToServerChannel.RequestNewFile, { parentDirectory: getParentDirectory() }))}>New File...</li>
                     <li onClick={() => handleAction(() => clientIpc.sendToServer(ClientToServerChannel.RequestNewFolder, { parentDirectory: getParentDirectory() }))}>New Folder...</li>
                     <hr />
-                    <li onClick={() => handleAction(() => onRename())}>Rename</li>
-                    <li onClick={() => handleAction(() => clientIpc.sendToServer(ClientToServerChannel.RequestFileDelete, { path: node.absolutePath }))}>Delete</li>
+                    <li className={isMultiSelect ? 'disabled' : ''} onClick={() => !isMultiSelect && handleAction(() => onRename())}>Rename</li>
+                    <li onClick={() => handleAction(handleDelete)}>Delete</li>
                     <hr />
-                    <li onClick={() => handleAction(() => clientIpc.sendToServer(ClientToServerChannel.RequestCopyPath, { path: node.absolutePath, relative: false }))}>Copy Path</li>
-                    <li onClick={() => handleAction(() => clientIpc.sendToServer(ClientToServerChannel.RequestCopyPath, { path: node.absolutePath, relative: true }))}>Copy Relative Path</li>
+                    <li className={isMultiSelect ? 'disabled' : ''} onClick={() => !isMultiSelect && handleAction(() => clientIpc.sendToServer(ClientToServerChannel.RequestCopyPath, { path: node.absolutePath, relative: false }))}>Copy Path</li>
+                    <li className={isMultiSelect ? 'disabled' : ''} onClick={() => !isMultiSelect && handleAction(() => clientIpc.sendToServer(ClientToServerChannel.RequestCopyPath, { path: node.absolutePath, relative: true }))}>Copy Relative Path</li>
                     <hr />
-                    <li onClick={() => handleAction(() => clientIpc.sendToServer(ClientToServerChannel.RequestRevealInExplorer, { path: node.absolutePath }))}>Reveal in File Explorer</li>
+                    <li className={isMultiSelect ? 'disabled' : ''} onClick={() => !isMultiSelect && handleAction(() => clientIpc.sendToServer(ClientToServerChannel.RequestRevealInExplorer, { path: node.absolutePath }))}>Reveal in File Explorer</li>
                 </ul>
             </div>
         </>

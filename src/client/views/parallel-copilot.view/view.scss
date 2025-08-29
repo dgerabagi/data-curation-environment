@@ -1,10 +1,67 @@
-/* Updated on: C166 (Add primary button style) */
+/* Updated on: C1 */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
     font-size: var(--vscode-font-size);
     color: var(--vscode-editor-foreground);
     background-color: var(--vscode-editor-background);
+}
+
+.numbered-textarea-container {
+    position: relative;
+    display: flex;
+    border: 1px solid var(--vscode-input-border);
+    border-radius: 2px;
+    background-color: var(--vscode-input-background);
+    min-height: 50px;
+
+    .line-numbers-gutter {
+        padding: 4px;
+        color: var(--vscode-editorLineNumber-foreground);
+        background-color: var(--vscode-editorGutter-background);
+        text-align: right;
+        user-select: none;
+        overflow: hidden;
+        font-family: var(--vscode-editor-font-family);
+        font-size: var(--vscode-editor-font-size);
+        line-height: 1.5;
+    }
+
+    .context-textarea {
+        line-height: 1.5;
+        border: none;
+        flex-grow: 1;
+        background-color: transparent;
+    }
+
+    .textarea-resizer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        cursor: ns-resize;
+    }
+}
+
+.context-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-shrink: 0;
+
+    .context-input-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        .context-label {
+            font-size: 11px;
+            color: var(--vscode-descriptionForeground);
+            display: flex;
+            justify-content: space-between;
+        }
+    }
 }
 
 .onboarding-container {
@@ -211,13 +268,6 @@ body {
     border-radius: 2px;
 }
 
-.context-inputs {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    flex-shrink: 0;
-}
-
 .tab-count-input {
     display: flex;
     align-items: center;
@@ -236,7 +286,6 @@ body {
 
 .context-textarea {
     width: 100%;
-    height: 60px;
     background-color: var(--vscode-input-background);
     color: var(--vscode-input-foreground);
     border: 1px solid var(--vscode-input-border);
@@ -244,7 +293,6 @@ body {
     padding: 4px;
     font-family: var(--vscode-editor-font-family);
     font-size: var(--vscode-editor-font-size);
-    resize: vertical;
 }
 
 .tab-bar-container {
@@ -461,7 +509,7 @@ body {
     
     code > span {
         line-height: 1.5;
-        background-color: transparent !important; // C160 Fix: Remove line highlight
+        background-color: transparent !important;
     }
 }
 

@@ -1,4 +1,4 @@
-// Updated on: C118 (Add getVscodeApi method)
+// Updated on: C1 (Add getVscodeApi method)
 import getVscode from "./get-vscode-api";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { ChannelBody } from "./channels.type";

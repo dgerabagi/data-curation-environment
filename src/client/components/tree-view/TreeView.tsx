@@ -1,4 +1,4 @@
-// Updated on: C165 (Fix multi-delete logic)
+// Updated on: C1
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { VscChevronRight } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -19,7 +19,7 @@ interface TreeViewProps {
     renderNodeContent?: (node: TreeNode, isExpanded: boolean) => React.ReactNode;
     collapseTrigger?: number;
     expandAllTrigger?: number;
-    onContextMenu?: (event: React.MouseEvent, node: TreeNode) => void;
+    onContextMenu?: (event: React.MouseEvent, node: TreeNode, paths: string[]) => void;
     activeFile?: string;
     updateCheckedFiles: (path: string) => void;
     onNodeDrop?: (event: React.DragEvent, node: FileNode) => void;
@@ -55,7 +55,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     useEffect(() => {
         flatNodeList.current = buildFlatNodeList(data, expandedNodes);
         if (!focusedNodePath && flatNodeList.current.length > 0) {
-            setFocusedNodePath(flatNodeList.current[0].absolutePath);
+            setFocusedNodePath(flatNodeList.current.absolutePath);
         }
     }, [data, expandedNodes, buildFlatNodeList, focusedNodePath]);
 
@@ -65,7 +65,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
 
     useEffect(() => {
         if (data.length > 0) {
-            const rootNode = data[0];
+            const rootNode = data;
             if (rootNode) {
                 expandNode(rootNode.absolutePath);
             }
@@ -74,7 +74,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
 
     useEffect(() => {
         if (collapseTrigger > 0 && data.length > 0) {
-            const rootNode = data[0];
+            const rootNode = data;
             if (rootNode) {
                 setExpandedNodes([rootNode.absolutePath]);
             }
@@ -112,7 +112,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
                 }
                 return paths;
             };
-            const rootPath = data[0]?.absolutePath;
+            const rootPath = data?.absolutePath;
             if (rootPath) {
                 const parents = getParentPaths(activeFile, rootPath);
                 logger.log(`[TreeView] Parents to expand: ${JSON.stringify(parents)}`);
@@ -181,7 +181,6 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     };
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
-        // C72 Fix: If the event is coming from an input field, ignore it.
         if ((e.target as HTMLElement).tagName === 'INPUT') {
             return;
         }
@@ -226,7 +225,6 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
             e.preventDefault();
             e.stopPropagation();
             let pathsToDelete: string[] = [];
-            // C165 Fix: Prioritize the multi-selection set over the single focused node.
             if (selectedPaths.size > 0) {
                 pathsToDelete = Array.from(selectedPaths);
             } else if (focusedNodePath) {
@@ -262,7 +260,6 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         }
     };
 
-    // --- Drag/Drop ---
     const handleInternalDragStart = (e: React.DragEvent, node: TreeNode) => {
         e.stopPropagation();
         setDraggedPath(node.absolutePath);
@@ -308,7 +305,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
             expansionTimer.current = null;
         }
 
-        if (draggedPath) { // Internal move
+        if (draggedPath) { 
             if (node.children && node.absolutePath !== draggedPath && !node.absolutePath.startsWith(draggedPath + '/')) {
                 const draggedName = draggedPath.split('/').pop();
                 if (draggedName) {
@@ -318,7 +315,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
                 }
             }
             setDraggedPath(null);
-        } else if (onNodeDrop) { // External drop
+        } else if (onNodeDrop) { 
             onNodeDrop(e, node as FileNode);
         }
     };
@@ -327,9 +324,16 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
         e.preventDefault();
         e.stopPropagation();
         if (draggedPath && node.absolutePath.startsWith(draggedPath + '/')) {
-            e.dataTransfer.dropEffect = 'none'; // Prevent dropping a folder into itself
+            e.dataTransfer.dropEffect = 'none';
         } else {
             e.dataTransfer.dropEffect = 'move';
+        }
+    };
+
+    const handleContextMenuWrapper = (e: React.MouseEvent, node: TreeNode) => {
+        if (onContextMenu) {
+            const pathsToActOn = selectedPaths.has(node.absolutePath) ? Array.from(selectedPaths) : [node.absolutePath];
+            onContextMenu(e, node, pathsToActOn);
         }
     };
 
@@ -362,7 +366,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
                     <div
                         className={`treenode-item-wrapper ${isSelected ? 'selected' : ''} ${isFocused ? 'focused' : ''}`}
                         onClick={(e) => handleNodeClick(e, node)}
-                        onContextMenu={(e) => onContextMenu?.(e, node)}
+                        onContextMenu={(e) => handleContextMenuWrapper(e, node)}
                     >
                         <span className={`treenode-chevron ${isExpanded ? 'expanded' : ''}`}>
                             {isDirectory && <VscChevronRight />}

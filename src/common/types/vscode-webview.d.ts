@@ -1,4 +1,4 @@
-// Updated on: C118 (Add pcppLeftPaneWidth to ViewState)
+// Updated on: C1 (Add pcppLeftPaneWidth to ViewState)
 export interface WebviewApi<StateType> {
     postMessage(message: unknown): void;
     getState(): StateType | undefined;

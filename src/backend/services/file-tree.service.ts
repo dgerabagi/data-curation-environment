@@ -1,4 +1,4 @@
-// Updated on: C167 (Add package-lock.json to non-selectable)
+// Updated on: C1
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -15,7 +15,7 @@ const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
 const EXCLUSION_PATTERNS = ['.git', 'dce_cache', 'out']; 
-const NON_SELECTABLE_PATTERNS = ['/node_modules', '/.vscode', 'flattened_repo.md', 'prompt.md', 'package-lock.json'];
+const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/flattened_repo.md', '/prompt.md', '/package-lock.json'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
@@ -71,7 +71,7 @@ export class FileTreeService {
         this.watcher.onDidCreate(async (uri: vscode.Uri) => {
             const normalizedPath = normalizePath(uri.fsPath);
             
-            const isNonSelectable = NON_SELECTABLE_PATTERNS.some(pattern => normalizedPath.includes(pattern));
+            const isNonSelectable = !this._isSelectable(uri.fsPath, vscode.FileType.File);
 
             if (isNonSelectable) {
                 Services.loggerService.log(`[Auto-Add] Ignoring newly created non-selectable file: ${normalizedPath}`);
@@ -113,8 +113,6 @@ export class FileTreeService {
     }
 
     private async getFileStats(filePath: string): Promise<Omit<FileNode, 'name' | 'absolutePath' | 'children'>> {
-        const normalizedFilePath = normalizePath(filePath);
-        const isSelectable = !NON_SELECTABLE_PATTERNS.some(p => normalizedFilePath.includes(p));
         const extension = path.extname(filePath).toLowerCase();
 
         try {
@@ -124,19 +122,19 @@ export class FileTreeService {
             const isExcel = EXCEL_EXTENSIONS.has(extension);
             const isWordDoc = WORD_EXTENSIONS.has(extension);
             
-            const baseStats = { sizeInBytes: stats.size, isImage, extension, isPdf, isExcel, isWordDoc, fileCount: 1, isSelectable };
+            const baseStats = { sizeInBytes: stats.size, isImage, extension, isPdf, isExcel, isWordDoc, fileCount: 1 };
 
-            if (isImage) return { ...baseStats, tokenCount: 0 };
-            if (isPdf) return { ...baseStats, tokenCount: Services.contentExtractionService.getVirtualPdfContent(filePath)?.tokenCount || 0 };
-            if (isExcel) return { ...baseStats, tokenCount: Services.contentExtractionService.getVirtualExcelContent(filePath)?.tokenCount || 0 };
-            if (isWordDoc) return { ...baseStats, tokenCount: Services.contentExtractionService.getVirtualWordContent(filePath)?.tokenCount || 0 };
+            if (isImage) return { ...baseStats, tokenCount: 0, isSelectable: true };
+            if (isPdf) return { ...baseStats, tokenCount: Services.contentExtractionService.getVirtualPdfContent(filePath)?.tokenCount || 0, isSelectable: true };
+            if (isExcel) return { ...baseStats, tokenCount: Services.contentExtractionService.getVirtualExcelContent(filePath)?.tokenCount || 0, isSelectable: true };
+            if (isWordDoc) return { ...baseStats, tokenCount: Services.contentExtractionService.getVirtualWordContent(filePath)?.tokenCount || 0, isSelectable: true };
 
-            if (stats.size > 5_000_000) return { ...baseStats, tokenCount: 0 };
+            if (stats.size > 5_000_000) return { ...baseStats, tokenCount: 0, isSelectable: true };
             
             const content = await fs.readFile(filePath, 'utf-8');
-            return { ...baseStats, tokenCount: Math.ceil(content.length / 4) };
+            return { ...baseStats, tokenCount: Math.ceil(content.length / 4), isSelectable: true };
         } catch (error: any) {
-            return { tokenCount: 0, sizeInBytes: 0, isImage: false, extension, isPdf: false, isExcel: false, isWordDoc: false, fileCount: 1, error: error.message, isSelectable };
+            return { tokenCount: 0, sizeInBytes: 0, isImage: false, extension, isPdf: false, isExcel: false, isWordDoc: false, fileCount: 1, error: error.message, isSelectable: true };
         }
     }
 
@@ -149,14 +147,14 @@ export class FileTreeService {
         }
 
         const workspaceFolders = vscode.workspace.workspaceFolders;
-        if (!workspaceFolders?.[0]) {
+        if (!workspaceFolders?.) {
             Services.loggerService.warn(`No workspace folder found.`);
             serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: [] });
             return;
         }
         
         Services.loggerService.log(`Building file tree from scratch.`);
-        const fileTree = await this.buildTreeFromTraversal(workspaceFolders[0].uri);
+        const fileTree = await this.buildTreeFromTraversal(workspaceFolders.uri);
         this.fileTreeCache = [fileTree];
         Services.loggerService.log(`File tree built. Sending to client.`);
         serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: this.fileTreeCache });
@@ -164,9 +162,9 @@ export class FileTreeService {
     }
 
     private getGitStatusMap(): Map<string, string> {
-        if (!this.gitApi?.repositories[0]) return new Map();
+        if (!this.gitApi?.repositories) return new Map();
         
-        const repo = this.gitApi.repositories[0];
+        const repo = this.gitApi.repositories;
         const getStatusChar = (s: Status) => ({ [Status.INDEX_ADDED]: 'A', [Status.MODIFIED]: 'M', [Status.DELETED]: 'D', [Status.UNTRACKED]: 'U', [Status.IGNORED]: 'I', [Status.CONFLICT]: 'C' }[s] || '');
         
         const changes = [...repo.state.workingTreeChanges, ...repo.state.indexChanges, ...repo.state.mergeChanges];
@@ -213,6 +211,11 @@ export class FileTreeService {
         return rootNode;
     }
     
+    private _isSelectable(filePath: string, fileType: vscode.FileType): boolean {
+        const normalizedPathWithSlash = normalizePath(filePath) + (fileType === vscode.FileType.Directory ? '/' : '');
+        return !NON_SELECTABLE_PATTERNS.some(p => normalizedPathWithSlash.includes(p));
+    }
+
     private async _traverseDirectory(dirUri: vscode.Uri, gitStatusMap: Map<string, string>, problemCountsMap: ProblemCountsMap): Promise<FileNode[]> {
         const children: FileNode[] = [];
         try {
@@ -223,7 +226,7 @@ export class FileTreeService {
 
                 const childUri = vscode.Uri.joinPath(dirUri, name);
                 const childPath = normalizePath(childUri.fsPath);
-                const isSelectable = !NON_SELECTABLE_PATTERNS.some(p => childPath.includes(p));
+                const isSelectable = this._isSelectable(childPath, type);
 
                 if (type === vscode.FileType.Directory) {
                     const isSpecialDir = name.toLowerCase() === 'node_modules';

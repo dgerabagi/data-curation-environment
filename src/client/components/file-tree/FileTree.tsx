@@ -79,7 +79,7 @@ const filterTree = (nodes: FileNode[], term: string): FileNode[] => {
 
 
 const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, updateCheckedFiles, collapseTrigger, expandAllTrigger, searchTerm, problemMap, onNodeDrop, onCopy, clipboard }) => {
-    const [contextMenu, setContextMenu] = useState<{ x: number, y: number, node: FileNode } | null>(null);
+    const [contextMenu, setContextMenu] = useState<{ x: number, y: number, node: FileNode, selection: Set<string> } | null>(null);
     const [renamingPath, setRenamingPath] = useState<string | null>(null);
     const [renameValue, setRenameValue] = useState('');
     const clientIpc = ClientPostMessageManager.getInstance();
@@ -91,10 +91,10 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
         updateCheckedFiles(filePath);
     };
 
-    const handleContextMenu = (event: React.MouseEvent, node: FileNode) => {
+    const handleContextMenu = (event: React.MouseEvent, node: FileNode, selection: Set<string>) => {
         event.preventDefault();
         event.stopPropagation();
-        setContextMenu({ x: event.clientX, y: event.clientY, node });
+        setContextMenu({ x: event.clientX, y: event.clientY, node, selection });
     };
 
     const handleRename = () => {
@@ -241,7 +241,7 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
             <TreeView 
                 data={filteredData as TreeNode[]} 
                 renderNodeContent={(node, isExpanded) => renderFileNodeContent(node, isExpanded as boolean)} 
-                onContextMenu={(e, node) => handleContextMenu(e, node as FileNode)} 
+                onContextMenu={(e, node, selection) => handleContextMenu(e, node as FileNode, selection)} 
                 collapseTrigger={collapseTrigger}
                 expandAllTrigger={expandAllTrigger}
                 activeFile={activeFile} 
