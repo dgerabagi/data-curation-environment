@@ -1,4 +1,4 @@
-// Updated on: C167 (Add Deselect All button)
+// Updated on: C169 (Remove Deselect All button)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -8,7 +8,7 @@ import { FileNode } from '@/common/types/file-node';
 import FileTree from '../../components/file-tree/FileTree';
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { formatLargeNumber, formatNumberWithCommas } from '@/common/utils/formatting';
-import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, VscNewFolder, VscLoading, VscSave, VscFolderLibrary, VscSettingsGear, VscCheckAll, VscSearch, VscExpandAll, VscShield, VscFolder, VscClose } from 'react-icons/vsc';
+import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, VscNewFolder, VscLoading, VscSave, VscFolderLibrary, VscSettingsGear, VscCheckAll, VscSearch, VscExpandAll, VscShield, VscFolder } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import SelectedFilesView from '../../components/SelectedFilesView';
 import { addRemovePathInSelectedFiles, removePathsFromSelected } from '@/client/components/file-tree/FileTree.utils';
@@ -63,7 +63,7 @@ const App = () => {
 
         const addDescendantFiles = (node: FileNode) => {
             if (!node.isSelectable) return;
-            if (!node.children) { effectivelySelectedFiles.add(node.absolutePath); } 
+            if (!node.children) { if (!effectivelySelectedFiles.has(node.absolutePath)) { effectivelySelectedFiles.add(node.absolutePath); } } 
             else { node.children.forEach(addDescendantFiles); }
         };
 
@@ -109,13 +109,13 @@ const App = () => {
     const handleRefresh = () => { processedFilesCache.current.clear(); requestFiles(true); };
     const handleExpandAll = () => setExpandAllTrigger(c => c + 1);
     const handleCollapseAll = () => setCollapseTrigger(c => c + 1);
-    const getParentDirForNewItem = (): string => { if (activeFile) { const nodeMap = new Map<string, FileNode>(); const buildMap = (node: FileNode) => { nodeMap.set(node.absolutePath, node); node.children?.forEach(buildMap); }; files.forEach(buildMap); const activeNode = nodeMap.get(activeFile); if (activeNode) { return activeNode.children ? activeNode.absolutePath : activeFile.substring(0, activeFile.lastIndexOf('/')); } } return files.length > 0 ? files[0].absolutePath : ''; };
+    const getParentDirForNewItem = (): string => { if (activeFile) { const nodeMap = new Map<string, FileNode>(); const buildMap = (node: FileNode) => { nodeMap.set(node.absolutePath, node); node.children?.forEach(buildMap); }; files.forEach(buildMap); const activeNode = nodeMap.get(activeFile); if (activeNode) { return activeNode.children ? activeNode.absolutePath : activeFile.substring(0, activeFile.lastIndexOf('/')); } } return files.length > 0 ? files.absolutePath : ''; };
     const handleNewFile = () => clientIpc.sendToServer(ClientToServerChannel.RequestNewFile, { parentDirectory: getParentDirForNewItem() });
     const handleNewFolder = () => clientIpc.sendToServer(ClientToServerChannel.RequestNewFolder, { parentDirectory: getParentDirForNewItem() });
     const handleToggleAutoAdd = () => { const newState = !isAutoAddEnabled; setIsAutoAddEnabled(newState); clientIpc.sendToServer(ClientToServerChannel.SaveAutoAddState, { enabled: newState }); };
     const handleRemoveFromSelection = (pathsToRemove: string[]) => { setCheckedFiles(currentChecked => { const newChecked = removePathsFromSelected(pathsToRemove, currentChecked, files); clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths: newChecked }); return newChecked; }); };
-    const processDrop = (event: React.DragEvent, node: FileNode) => { const targetDir = node.children ? node.absolutePath : path.dirname(node.absolutePath); if (event.dataTransfer.files?.length > 0) { Array.from(event.dataTransfer.files).forEach(file => { const reader = new FileReader(); reader.onload = (e) => { if (e.target?.result instanceof ArrayBuffer) { clientIpc.sendToServer(ClientToServerChannel.RequestAddFileFromBuffer, { targetPath: `${targetDir}/${file.name}`.replace(/\\/g, '/'), data: new Uint8Array(e.target.result) }); } }; reader.readAsArrayBuffer(file); }); return; } const uriList = event.dataTransfer.getData('text/uri-list'); if (uriList) { const sourceUri = uriList.split('\n')[0].trim(); if (sourceUri) clientIpc.sendToServer(ClientToServerChannel.RequestCopyFileFromUri, { sourceUri, targetDir }); } };
-    const handleContainerDrop = (event: React.DragEvent<HTMLDivElement>) => { event.preventDefault(); event.stopPropagation(); setIsDraggingOver(false); if (!isWorkspaceTrusted) return; const rootDir = files.length > 0 ? files[0].absolutePath : ''; if (rootDir) processDrop(event, { absolutePath: rootDir, name: path.basename(rootDir), children: [], tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false, isSelectable: true }); };
+    const processDrop = (event: React.DragEvent, node: FileNode) => { const targetDir = node.children ? node.absolutePath : path.dirname(node.absolutePath); if (event.dataTransfer.files?.length > 0) { Array.from(event.dataTransfer.files).forEach(file => { const reader = new FileReader(); reader.onload = (e) => { if (e.target?.result instanceof ArrayBuffer) { clientIpc.sendToServer(ClientToServerChannel.RequestAddFileFromBuffer, { targetPath: `${targetDir}/${file.name}`.replace(/\\/g, '/'), data: new Uint8Array(e.target.result) }); } }; reader.readAsArrayBuffer(file); }); return; } const uriList = event.dataTransfer.getData('text/uri-list'); if (uriList) { const sourceUri = uriList.split('\n').trim(); if (sourceUri) clientIpc.sendToServer(ClientToServerChannel.RequestCopyFileFromUri, { sourceUri, targetDir }); } };
+    const handleContainerDrop = (event: React.DragEvent<HTMLDivElement>) => { event.preventDefault(); event.stopPropagation(); setIsDraggingOver(false); if (!isWorkspaceTrusted) return; const rootDir = files.length > 0 ? files.absolutePath : ''; if (rootDir) processDrop(event, { absolutePath: rootDir, name: path.basename(rootDir), children: [], tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false, isSelectable: true }); };
     const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => { event.preventDefault(); event.stopPropagation(); event.dataTransfer.dropEffect = (isWorkspaceTrusted && (event.dataTransfer.types.includes('Files') || event.dataTransfer.types.includes('text/uri-list'))) ? 'copy' : 'none'; };
     const handleDragEnter = (event: React.DragEvent<HTMLDivElement>) => { event.preventDefault(); event.stopPropagation(); if (isWorkspaceTrusted && (event.dataTransfer.types.includes('Files') || event.dataTransfer.types.includes('text/uri-list'))) setIsDraggingOver(true); };
     const handleDragLeave = (event: React.DragEvent<HTMLDivElement>) => { event.preventDefault(); event.stopPropagation(); if (!event.currentTarget.contains(event.relatedTarget as Node)) setIsDraggingOver(false); };
@@ -132,11 +132,6 @@ const App = () => {
         checkedFiles.forEach(path => { const node = fileMap.get(path); if (node) addNodeAndDescendants(node); });
         return { totalFiles: selectedNodes.length, totalTokens, selectedFileNodes: selectedNodes };
     }, [checkedFiles, files]);
-
-    const handleDeselectAll = () => {
-        setCheckedFiles([]);
-        clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths: [] });
-    };
 
     if (isLoading) {
         return <div className="loading-message">Loading file tree...</div>;
@@ -169,7 +164,6 @@ const App = () => {
             <div className="view-footer">
                 <div className="summary-panel"><span className='summary-item' title="Total number of individual files selected for flattening. This does not include empty directories."><VscFiles /> Selected Files: {formatNumberWithCommas(totalFiles)}</span><span className='summary-item' title="Total tokens in selected text files"><VscSymbolNumeric /> {formatLargeNumber(totalTokens, 1)}</span></div>
                 <div className="footer-buttons">
-                    <button className="dce-button-secondary" onClick={handleDeselectAll}>Deselect All</button>
                     <button className="dce-button-primary" onClick={handleFlattenClick}>Flatten Context</button>
                 </div>
             </div>

@@ -1,6 +1,9 @@
 // src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx
-// New file in C167
+// Updated on: C169 (Refactor to include syntax highlighting)
 import * as React from 'react';
+import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
+import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
+import { logger } from '@/client/utils/logger';
 
 interface NumberedTextareaProps {
     value: string;
@@ -9,21 +12,35 @@ interface NumberedTextareaProps {
     onKeyDown: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
     height: number;
     onHeightChange: (height: number) => void;
+    id: string; // Unique ID for this textarea instance
 }
 
-const NumberedTextarea: React.FC<NumberedTextareaProps> = ({ value, onChange, placeholder, onKeyDown, height, onHeightChange }) => {
+const NumberedTextarea: React.FC<NumberedTextareaProps> = ({ value, onChange, placeholder, onKeyDown, height, onHeightChange, id }) => {
     const [lineCount, setLineCount] = React.useState(1);
+    const [highlightedHtml, setHighlightedHtml] = React.useState('');
     const textareaRef = React.useRef<HTMLTextAreaElement>(null);
-    const lineNumbersRef = React.useRef<HTMLDivElement>(null);
+    const highlightRef = React.useRef<HTMLDivElement>(null);
+    const clientIpc = ClientPostMessageManager.getInstance();
 
+    React.useEffect(() => {
+        const handleHighlightResponse = ({ highlightedHtml: html, id: responseId }: { highlightedHtml: string, id: string }) => {
+            if (responseId === id) {
+                setHighlightedHtml(html);
+            }
+        };
+        clientIpc.onServerMessage(ServerToClientChannel.SendHighlightContext, handleHighlightResponse);
+    }, [id, clientIpc]);
+    
     React.useEffect(() => {
         const lines = value.split('\n').length;
         setLineCount(lines);
-    }, [value]);
+        clientIpc.sendToServer(ClientToServerChannel.RequestHighlightContext, { context: value, id });
+    }, [value, id, clientIpc]);
 
     const handleScroll = () => {
-        if (lineNumbersRef.current && textareaRef.current) {
-            lineNumbersRef.current.scrollTop = textareaRef.current.scrollTop;
+        if (highlightRef.current && textareaRef.current) {
+            highlightRef.current.scrollTop = textareaRef.current.scrollTop;
+            highlightRef.current.scrollLeft = textareaRef.current.scrollLeft;
         }
     };
 
@@ -47,10 +64,17 @@ const NumberedTextarea: React.FC<NumberedTextareaProps> = ({ value, onChange, pl
 
     return (
         <div className="numbered-textarea-container" style={{ height: `${height}px` }}>
-            <div className="line-numbers-gutter" ref={lineNumbersRef}>
+            <div className="line-numbers-gutter">
                 {Array.from({ length: lineCount }, (_, i) => (
                     <div key={i}>{i + 1}</div>
                 ))}
+            </div>
+            <div className="highlight-container">
+                <div 
+                    ref={highlightRef} 
+                    className="highlight-content"
+                    dangerouslySetInnerHTML={{ __html: highlightedHtml }}
+                />
             </div>
             <textarea
                 ref={textareaRef}
@@ -60,7 +84,7 @@ const NumberedTextarea: React.FC<NumberedTextareaProps> = ({ value, onChange, pl
                 onChange={onChange}
                 onKeyDown={onKeyDown}
                 onScroll={handleScroll}
-                style={{ resize: 'none' }}
+                spellCheck={false}
             />
             <div
                 className="textarea-resizer"

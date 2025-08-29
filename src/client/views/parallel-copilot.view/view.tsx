@@ -1,9 +1,9 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C168 (Fix TS error for ComparisonMetrics import)
+// Updated on: C169 (Move Deselect All button)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap, VscTrash, VscSync, VscClose, VscSave, VscBug, VscCheckAll, VscListOrdered, VscListUnordered, VscSymbolNumeric, VscClippy, VscLink, VscDebugDisconnect, VscBook, VscCloudUpload, VscCloudDownload, VscFolder } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap, VscTrash, VscSync, VscClose, VscSave, VscBug, VscCheckAll, VscListOrdered, VscListUnordered, VscSymbolNumeric, VscClippy, VscLink, VscDebugDisconnect, VscBook, VscCloudUpload, VscCloudDownload, VscFolder, VscClearAll } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -40,7 +40,7 @@ const CodeViewer: React.FC<{ htmlContent: string | undefined | null }> = ({ html
     }
 
     const codeContentMatch = /<pre><code>([\s\S]*)<\/code><\/pre>/s.exec(htmlContent || '');
-    const code = codeContentMatch?.[1] ?? (htmlContent || '');
+    const code = codeContentMatch?. ?? (htmlContent || '');
 
     const lines = code.split('\n');
     if (lines.length > 1 && lines[lines.length - 1] === '') {
@@ -89,6 +89,7 @@ const App = () => {
     const [ephemeralContext, setEphemeralContext] = React.useState('');
     const [tabs, setTabs] = React.useState<{ [key: string]: TabState }>({});
     const [highlightedCodeBlocks, setHighlightedCodeBlocks] = React.useState<Map<string, string>>(new Map());
+    const [highlightedContexts, setHighlightedContexts] = React.useState<Map<string, string>>(new Map());
     const [fileExistenceMap, setFileExistenceMap] = React.useState<Map<string, boolean>>(new Map());
     const [isParsedMode, setIsParsedMode] = React.useState(false);
     const [selectedFilePath, setSelectedFilePath] = React.useState<string | null>(null);
@@ -193,6 +194,7 @@ const App = () => {
         clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); });
         clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); });
         clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml)));
+        clientIpc.onServerMessage(ServerToClientChannel.SendHighlightContext, ({ highlightedHtml, id }) => setHighlightedContexts(prev => new Map(prev).set(id, highlightedHtml)));
         clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap))));
         clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); });
         clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { logger.log(`Received FilesWritten event for: ${paths.join(', ')}`); setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); });
@@ -489,7 +491,7 @@ const App = () => {
             </div>
             <div className="resizer" />
             <div className="parsed-view-right">
-                <div className="response-acceptance-header"><button className={`styled-button ${selectedResponseId === activeTab.toString() ? 'toggled' : ''}`} onClick={() => setSelectedResponseId(prev => prev === activeTab.toString() ? null : activeTab.toString())}>{selectedResponseId === activeTab.toString() ? 'Response Selected' : 'Select This Response'}</button><button className="styled-button" onClick={handleSelectAllFilesToggle}><VscCheckAll/> {isAllFilesSelected ? 'Deselect All' : 'Select All'}</button><button className="styled-button" onClick={handleAcceptSelectedFiles} disabled={selectedFilesForReplacement.size === 0}><VscSave/> Accept Selected</button></div>
+                <div className="response-acceptance-header"><button className={`styled-button ${selectedResponseId === activeTab.toString() ? 'toggled' : ''}`} onClick={() => setSelectedResponseId(prev => prev === activeTab.toString() ? null : activeTab.toString())}>{selectedResponseId === activeTab.toString() ? 'Response Selected' : 'Select This Response'}</button><button className="styled-button" onClick={handleSelectAllFilesToggle}><VscCheckAll/> {isAllFilesSelected ? 'Deselect All' : 'Select All'}</button><button className="styled-button" onClick={() => setSelectedFilesForReplacement(new Set())} title="Deselect All Files Across All Responses"><VscClearAll /></button><button className="styled-button" onClick={handleAcceptSelectedFiles} disabled={selectedFilesForReplacement.size === 0}><VscSave/> Accept Selected</button></div>
                 <div className="file-content-viewer-header">
                     <span className="file-path" title={selectedFilePath || ''}>{selectedFilePath ? path.basename(selectedFilePath) : 'No file selected'}</span>
                     <div className="file-actions">
@@ -527,11 +529,11 @@ const App = () => {
             <div className="context-inputs">
                 <div className="context-input-wrapper">
                     <div className="context-label"><span>Cycle Context</span><span>Tokens: {cycleContextTokens}</span></div>
-                    <NumberedTextarea value={cycleContext} onChange={(e) => { setCycleContext(e.target.value); setCycleContextTokens(Math.ceil(e.target.value.length / 4)); }} placeholder="Cycle Context (notes for this cycle)..." onKeyDown={handleContextKeyDown} height={cycleContextHeight} onHeightChange={setCycleContextHeight} />
+                    <NumberedTextarea value={cycleContext} onChange={(e) => { setCycleContext(e.target.value); setCycleContextTokens(Math.ceil(e.target.value.length / 4)); }} placeholder="Cycle Context (notes for this cycle)..." onKeyDown={handleContextKeyDown} height={cycleContextHeight} onHeightChange={setCycleContextHeight} id={`cycle-context-${currentCycle}`} />
                 </div>
                 <div className="context-input-wrapper">
                     <div className="context-label"><span>Ephemeral Context</span><span>Tokens: {ephemeralContextTokens}</span></div>
-                    <NumberedTextarea value={ephemeralContext} onChange={(e) => { setEphemeralContext(e.target.value); setEphemeralContextTokens(Math.ceil(e.target.value.length / 4)); }} placeholder="Ephemeral Context (for this cycle's prompt only)..." onKeyDown={handleContextKeyDown} height={ephemeralContextHeight} onHeightChange={setEphemeralContextHeight} />
+                    <NumberedTextarea value={ephemeralContext} onChange={(e) => { setEphemeralContext(e.target.value); setEphemeralContextTokens(Math.ceil(e.target.value.length / 4)); }} placeholder="Ephemeral Context (for this cycle's prompt only)..." onKeyDown={handleContextKeyDown} height={ephemeralContextHeight} onHeightChange={setEphemeralContextHeight} id={`ephemeral-context-${currentCycle}`} />
                 </div>
             </div>
         </CollapsibleSection>

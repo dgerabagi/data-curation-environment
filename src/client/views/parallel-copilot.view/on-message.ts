@@ -1,7 +1,7 @@
-// Updated on: C166 (Add RequestOpenFolder handler)
+// Updated on: C169 (Add RequestHighlightContext handler)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
-import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
+import { ClientToServerChannel } from "@/common/ipc/channels.enum";
 
 export function onMessage(serverIpc: ServerPostMessageManager) {
     const { loggerService, promptService, fileOperationService, highlightingService, historyService } = Services;
@@ -21,6 +21,10 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestSyntaxHighlight, (data) => {
         highlightingService.handleSyntaxHighlightRequest(data.code, data.lang, data.id, serverIpc);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestHighlightContext, (data) => {
+        highlightingService.handleHighlightContextRequest(data.context, data.id, serverIpc);
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestLatestCycleData, async () => {

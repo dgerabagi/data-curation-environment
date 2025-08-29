@@ -1,4 +1,4 @@
-/* Updated on: C167 (Add active style for parse button) */
+/* Updated on: C169 (Styles for NumberedTextarea highlighting) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -12,8 +12,9 @@ body {
     display: flex;
     border: 1px solid var(--vscode-input-border);
     border-radius: 2px;
-    background-color: var(--vscode-input-background);
+    background-color: var(--vscode-editor-background);
     min-height: 50px;
+    overflow: hidden;
 
     .line-numbers-gutter {
         padding: 4px;
@@ -21,10 +22,34 @@ body {
         background-color: var(--vscode-editorGutter-background);
         text-align: right;
         user-select: none;
-        overflow: hidden;
         font-family: var(--vscode-editor-font-family);
         font-size: var(--vscode-editor-font-size);
         line-height: 1.5;
+        z-index: 2;
+    }
+
+    .highlight-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow: hidden;
+        pointer-events: none;
+        
+        .highlight-content {
+            padding: 4px;
+            padding-left: 48px; /* Adjust based on gutter width */
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: var(--vscode-editor-font-family);
+            font-size: var(--vscode-editor-font-size);
+            line-height: 1.5;
+            
+            span {
+                background-color: transparent !important;
+            }
+        }
     }
 
     .context-textarea {
@@ -32,6 +57,16 @@ body {
         border: none;
         flex-grow: 1;
         background-color: transparent;
+        color: transparent;
+        caret-color: var(--vscode-editor-foreground);
+        resize: none;
+        padding: 4px;
+        padding-left: 48px;
+        font-family: var(--vscode-editor-font-family);
+        font-size: var(--vscode-editor-font-size);
+        z-index: 1;
+        white-space: pre-wrap;
+        word-wrap: break-word;
     }
 
     .textarea-resizer {
@@ -41,6 +76,7 @@ body {
         right: 0;
         height: 5px;
         cursor: ns-resize;
+        z-index: 3;
     }
 }
 
@@ -282,17 +318,6 @@ body {
         text-align: center;
         border-radius: 2px;
     }
-}
-
-.context-textarea {
-    width: 100%;
-    background-color: var(--vscode-input-background);
-    color: var(--vscode-input-foreground);
-    border: 1px solid var(--vscode-input-border);
-    border-radius: 2px;
-    padding: 4px;
-    font-family: var(--vscode-editor-font-family);
-    font-size: var(--vscode-editor-font-size);
 }
 
 .tab-bar-container {

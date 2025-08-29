@@ -52,6 +52,7 @@ export enum ClientToServerChannel {
     RequestFileComparison = "clientToServer.requestFileComparison",
     RequestExportHistory = "clientToServer.requestExportHistory",
     RequestImportHistory = "clientToServer.requestImportHistory",
+    RequestHighlightContext = "clientToServer.requestHighlightContext", // New in C169
 }
 
 export enum ServerToClientChannel {
@@ -74,4 +75,5 @@ export enum ServerToClientChannel {
     SendCycleData = "serverToClient.sendCycleData",
     FilesWritten = "serverToClient.filesWritten",
     SendFileComparison = "serverToClient.sendFileComparison", 
+    SendHighlightContext = "serverToClient.sendHighlightContext", // New in C169
 }
