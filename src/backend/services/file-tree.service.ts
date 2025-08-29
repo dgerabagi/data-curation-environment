@@ -1,4 +1,4 @@
-// Updated on: C165 (Add package-lock.json to non-selectable)
+// Updated on: C167 (Add package-lock.json to non-selectable)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";

@@ -83,13 +83,9 @@ ${staticContext.trim()}
         const sortedHistory = [...cycleMap.values()].sort((a, b) => b.cycleId - a.cycleId);
     
         let cyclesContent = '<M6. Cycles>';
-
-        // Always add Cycle 0
-        const cycle0Content = await this._generateCycle0Content();
-        cyclesContent += `\n\n${cycle0Content}`;
     
         for (const cycle of sortedHistory) {
-            if (cycle.cycleId === 0) continue; // Skip cycle 0 as it's manually added
+            if (cycle.cycleId === 0) continue; // Skip cycle 0 as it will be added last
             cyclesContent += `\n\n<Cycle ${cycle.cycleId}>\n`;
     
             if (cycle.cycleContext && cycle.cycleContext.trim()) {
@@ -112,6 +108,11 @@ ${staticContext.trim()}
             }
             cyclesContent += `</Cycle ${cycle.cycleId}>`;
         }
+
+        // Always add Cycle 0 at the end
+        const cycle0Content = await this._generateCycle0Content();
+        cyclesContent += `\n\n${cycle0Content}`;
+
         cyclesContent += '\n\n</M6. Cycles>';
         return cyclesContent;
     }
@@ -198,16 +199,15 @@ ${cyclesContent}
             const currentCycleData = { ...currentCycleDataFromHistory, title: cycleTitle };
 
             const allCycles = [...fullHistory.filter(c => c.cycleId !== currentCycle), currentCycleData];
-            const sortedHistory = allCycles.sort((a, b) => b.cycleId - a.cycleId);
+            const sortedHistoryForOverview = allCycles.sort((a, b) => b.cycleId - a.cycleId);
 
             let cycleOverview = '<M2. cycle overview>\n';
             cycleOverview += `Current Cycle ${currentCycle} - ${cycleTitle}\n`;
-            for (const cycle of sortedHistory) {
+            for (const cycle of sortedHistoryForOverview) {
                 if (cycle.cycleId !== currentCycle) {
                      cycleOverview += `Cycle ${cycle.cycleId} - ${cycle.title}\n`;
                 }
             }
-            // Always include Cycle 0 in the overview
             if (!cycleOverview.includes('Cycle 0')) {
                 cycleOverview += 'Cycle 0 - Project Initialization/Template Archive\n';
             }
@@ -215,11 +215,14 @@ ${cyclesContent}
             
             const cyclesContent = await this._generateCyclesContent(currentCycleData, fullHistory);
 
-            const userA0Files = await vscode.workspace.findFiles('**/A0*.md', '**/node_modules/**', 1);
+            const userA0Files = await vscode.workspace.findFiles('**/*A0*Master*Artifact*List.md', '**/node_modules/**', 1);
             let a0Content = '<!-- Master Artifact List (A0) not found in workspace -->';
             if (userA0Files.length > 0) {
+                Services.loggerService.log(`Found Master Artifact List: ${userA0Files[0].fsPath}`);
                 const contentBuffer = await vscode.workspace.fs.readFile(userA0Files[0]);
                 a0Content = Buffer.from(contentBuffer).toString('utf-8');
+            } else {
+                Services.loggerService.warn(`Could not find a Master Artifact List file in the workspace.`);
             }
             
             const a52_1_Content = await this.getArtifactContent('A52.1 DCE - Parser Logic and AI Guidance.md', '<!-- A52.1 Parser Logic not found -->');

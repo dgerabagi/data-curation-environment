@@ -1,4 +1,4 @@
-// Updated on: C162 (Exclude non-selectable files from flattening)
+// Updated on: C167 (Add package-lock.json to non-selectable)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -22,7 +22,7 @@ interface FileStats {
 const BINARY_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico', '.exe', '.dll', '.bin', '.zip', '.gz', '.7z', '.mp3', '.wav', '.mov', '.mp4']);
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
-const NON_SELECTABLE_PATTERNS = ['/node_modules', '/.vscode', 'flattened_repo.md', 'prompt.md'];
+const NON_SELECTABLE_PATTERNS = ['/node_modules', '/.vscode', 'flattened_repo.md', 'prompt.md', 'package-lock.json'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
@@ -102,7 +102,6 @@ export class FlattenerService {
                 const fullPath = path.join(dirPath, entry.name);
                 const normalizedFullPath = normalizePath(fullPath);
 
-                // C162 Fix: Exclude non-selectable files/folders from the flattened output.
                 if (NON_SELECTABLE_PATTERNS.some(p => normalizedFullPath.includes(p))) {
                     continue;
                 }

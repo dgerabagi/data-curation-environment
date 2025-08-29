@@ -53,7 +53,7 @@ const getTokenRiskTooltip = (tokenCount: number): string => {
     if (tokenCount <= 8000) return 'Low token count, suitable for most workloads.';
     if (tokenCount <= 10000) return 'Slightly elevated token count, small chance of performance degradation.';
     if (tokenCount <= 12000) return 'Moderate token count, may impact performance on complex tasks.';
-    return 'High token count, increased chance of performance degradation or truncation.';
+    return 'High token count, increased chance of performance degradation or truncation if outputting this file.';
 };
 
 
