@@ -1,9 +1,8 @@
 // src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx
-// Updated on: C172 (No functional changes, header update only)
+// Updated on: C174 (Fix alignment issues between textarea and highlight div)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
-import { logger } from '@/client/utils/logger';
 
 interface NumberedTextareaProps {
     value: string;
@@ -69,23 +68,23 @@ const NumberedTextarea: React.FC<NumberedTextareaProps> = ({ value, onChange, pl
                     <div key={i}>{i + 1}</div>
                 ))}
             </div>
-            <div className="highlight-container">
+            <div className="content-wrapper">
                 <div 
                     ref={highlightRef} 
                     className="highlight-content"
                     dangerouslySetInnerHTML={{ __html: highlightedHtml }}
                 />
+                <textarea
+                    ref={textareaRef}
+                    className="context-textarea"
+                    placeholder={placeholder}
+                    value={value}
+                    onChange={onChange}
+                    onKeyDown={onKeyDown}
+                    onScroll={handleScroll}
+                    spellCheck={false}
+                />
             </div>
-            <textarea
-                ref={textareaRef}
-                className="context-textarea"
-                placeholder={placeholder}
-                value={value}
-                onChange={onChange}
-                onKeyDown={onKeyDown}
-                onScroll={handleScroll}
-                spellCheck={false}
-            />
             <div
                 className="textarea-resizer"
                 onMouseDown={handleMouseDown}

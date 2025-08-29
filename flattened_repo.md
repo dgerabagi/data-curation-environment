@@ -1,12 +1,12 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-29T21:52:47.674Z
+  Date Generated: 2025-08-29T22:22:28.577Z
   ---
   Total Files: 265
-  Total Lines: 34899
-  Total Characters: 1993076
-  Approx. Tokens: 498361
+  Total Lines: 34919
+  Total Characters: 1993821
+  Approx. Tokens: 498547
 -->
 
 <!-- Top 10 Files by Token Count -->
@@ -16,9 +16,9 @@
 4. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
 5. src\Artifacts\A11. DCE - Regression Case Studies.md (7032 tokens)
 6. src\Artifacts\A0. DCE Master Artifact List.md (6924 tokens)
-7. src\client\views\parallel-copilot.view\view.tsx (5934 tokens)
+7. src\client\views\parallel-copilot.view\view.tsx (5910 tokens)
 8. src\client\components\tree-view\TreeView.tsx (4429 tokens)
-9. src\backend\services\prompt.service.ts (4418 tokens)
+9. src\backend\services\prompt.service.ts (4424 tokens)
 10. src\client\views\parallel-copilot.view\view.scss (4411 tokens)
 
 <!-- Full File List -->
@@ -136,9 +136,9 @@
 112. src\backend\services\file-tree.service.ts - Lines: 276 - Chars: 13989 - Tokens: 3498
 113. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12580 - Tokens: 3145
 114. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4232 - Tokens: 1058
-115. src\backend\services\history.service.ts - Lines: 241 - Chars: 10133 - Tokens: 2534
+115. src\backend\services\history.service.ts - Lines: 252 - Chars: 10540 - Tokens: 2635
 116. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-117. src\backend\services\prompt.service.ts - Lines: 355 - Chars: 17670 - Tokens: 4418
+117. src\backend\services\prompt.service.ts - Lines: 355 - Chars: 17694 - Tokens: 4424
 118. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 119. src\backend\services\services.ts - Lines: 38 - Chars: 1778 - Tokens: 445
 120. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
@@ -162,20 +162,20 @@
 138. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 72 - Chars: 2806 - Tokens: 702
 139. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 66 - Chars: 2518 - Tokens: 630
 140. src\client\views\parallel-copilot.view\components\NumberedTextarea.tsx - Lines: 97 - Chars: 3820 - Tokens: 955
-141. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 88 - Chars: 6782 - Tokens: 1696
-142. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 76 - Chars: 3100 - Tokens: 775
+141. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 92 - Chars: 7014 - Tokens: 1754
+142. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 78 - Chars: 3175 - Tokens: 794
 143. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 65 - Chars: 2467 - Tokens: 617
 144. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-145. src\client\views\parallel-copilot.view\on-message.ts - Lines: 96 - Chars: 4422 - Tokens: 1106
+145. src\client\views\parallel-copilot.view\on-message.ts - Lines: 96 - Chars: 4423 - Tokens: 1106
 146. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 87 - Chars: 4132 - Tokens: 1033
 147. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 43 - Chars: 1890 - Tokens: 473
 148. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
 149. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
 150. src\client\views\parallel-copilot.view\view.scss - Lines: 774 - Chars: 17643 - Tokens: 4411
 151. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-152. src\client\views\parallel-copilot.view\view.tsx - Lines: 133 - Chars: 23735 - Tokens: 5934
+152. src\client\views\parallel-copilot.view\view.tsx - Lines: 135 - Chars: 23638 - Tokens: 5910
 153. src\common\ipc\channels.enum.ts - Lines: 83 - Chars: 4360 - Tokens: 1090
-154. src\common\ipc\channels.type.ts - Lines: 82 - Chars: 6176 - Tokens: 1544
+154. src\common\ipc\channels.type.ts - Lines: 83 - Chars: 6279 - Tokens: 1570
 155. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 156. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 157. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
@@ -23046,7 +23046,7 @@ export class HighlightingService {
 </file>
 
 <file path="src/backend/services/history.service.ts">
-// Updated on: C167 (Fix TS errors, array access)
+// Updated on: C173 (Add confirmation dialog for reset history)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -23219,6 +23219,17 @@ export class HistoryService {
     }
 
     public async resetHistory(): Promise<void> {
+        const confirmation = await vscode.window.showWarningMessage(
+            "Are you sure you want to delete ALL cycle history? This action cannot be undone.",
+            { modal: true },
+            "Delete All", "Cancel"
+        );
+
+        if (confirmation !== "Delete All") {
+            Services.loggerService.log("History reset cancelled by user.");
+            return;
+        }
+
         Services.loggerService.log(`HistoryService: Resetting all cycle history.`);
         if (this.historyFilePath) {
             try {
@@ -23331,7 +23342,7 @@ export class LoggerService {
 </file>
 
 <file path="src/backend/services/prompt.service.ts">
-// Updated on: C172 (Fix cost estimation logic)
+// Updated on: C173 (Rename handler to handlePromptCostBreakdownRequest)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -23501,7 +23512,7 @@ ${staticContext.trim()}
         };
     }
 
-    public async handlePromptCostEstimationRequest(cycleData: PcppCycle, serverIpc: ServerPostMessageManager) {
+    public async handlePromptCostBreakdownRequest(cycleData: PcppCycle, serverIpc: ServerPostMessageManager) {
         try {
             const selectedFiles = await Services.selectionService.getLastSelection();
             const flattenedContent = await Services.flattenerService.getFlattenedContent(selectedFiles);
@@ -26712,9 +26723,9 @@ export default NumberedTextarea;
 
 <file path="src/client/views/parallel-copilot.view/components/ParsedView.tsx">
 // src/client/views/parallel-copilot.view/components/ParsedView.tsx
-// Updated on: C172 (Implement component)
+// Updated on: C173 (Implement component)
 import * as React from 'react';
-import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscSave, VscCheckAll, VscClearAll, VscClippy } from 'react-icons/vsc';
+import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscSave, VscCheckAll, VscClearAll, VscClippy, VscChevronDown } from 'react-icons/vsc';
 import ReactMarkdown from 'react-markdown';
 import * as path from 'path-browserify';
 import { ParsedResponse } from '@/common/types/pcpp.types';
@@ -26723,9 +26734,12 @@ import { formatLargeNumber } from '@/common/utils/formatting';
 import CodeViewer from './CodeViewer';
 
 const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; }> = ({ title, children, isCollapsed, onToggle }) => (
-    <div className="collapsible-section">
-        <div className="collapsible-header" onClick={onToggle}>{title}</div>
-        {!isCollapsed && <div className="collapsible-content">{children}</div>}
+    <div className="collapsible-section-inner">
+        <div className="collapsible-header-inner" onClick={onToggle}>
+            <VscChevronDown className={`chevron ${isCollapsed ? 'collapsed' : ''}`} />
+            <span>{title}</span>
+        </div>
+        {!isCollapsed && <div className="collapsible-content-inner">{children}</div>}
     </div>
 );
 
@@ -26751,6 +26765,7 @@ interface ParsedViewProps {
     onDeselectAllFiles: () => void;
     isAllFilesSelected: boolean;
     onAcceptSelected: () => void;
+    leftPaneWidth: number;
 }
 
 const ParsedView: React.FC<ParsedViewProps> = (props) => {
@@ -26760,7 +26775,7 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
 
     return (
         <div className="parsed-view-grid">
-            <div className="parsed-view-left">
+            <div className="parsed-view-left" style={{ flexBasis: `${props.leftPaneWidth}%` }}>
                 <CollapsibleSection title="Associated Files" isCollapsed={isAssociatedFilesCollapsed} onToggle={() => setAssociatedFilesCollapsed(p => !p)}>
                     <ul className="associated-files-list">{props.parsedContent.filesUpdated.map(file => {
                         const fileExists = props.fileExistenceMap.get(file);
@@ -26803,7 +26818,7 @@ export default ParsedView;
 
 <file path="src/client/views/parallel-copilot.view/components/ResponsePane.tsx">
 // src/client/views/parallel-copilot.view/components/ResponsePane.tsx
-// Updated on: C172 (Implement component)
+// Updated on: C173 (Implement component)
 import * as React from 'react';
 import { TabState } from '../view';
 import ParsedView from './ParsedView';
@@ -26835,6 +26850,7 @@ interface ResponsePaneProps {
     onDeselectAllFiles: () => void;
     isAllFilesSelected: boolean;
     onAcceptSelected: () => void;
+    leftPaneWidth: number;
 }
 
 const ResponsePane: React.FC<ResponsePaneProps> = (props) => {
@@ -26873,6 +26889,7 @@ const ResponsePane: React.FC<ResponsePaneProps> = (props) => {
             onDeselectAllFiles={props.onDeselectAllFiles}
             isAllFilesSelected={props.isAllFilesSelected}
             onAcceptSelected={props.onAcceptSelected}
+            leftPaneWidth={props.leftPaneWidth}
         />
     );
 };
@@ -26960,7 +26977,7 @@ export const viewConfig = {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/on-message.ts">
-// Updated on: C172 (Add prompt cost breakdown handler)
+// Updated on: C173 (Fix channel name for cost breakdown)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -27049,7 +27066,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestPromptCostEstimation, (data) => {
-        promptService.handlePromptCostEstimationRequest(data.cycleData, serverIpc);
+        promptService.handlePromptCostBreakdownRequest(data.cycleData, serverIpc);
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestPromptCostBreakdown, (data) => {
@@ -28144,7 +28161,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C172 (Refactor to use child components)
+// Updated on: C173 (Continue refactor)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -28154,7 +28171,6 @@ import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
 import { ParsedResponse, PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
-import * as path from 'path-browserify';
 import { BatchWriteFile, ComparisonMetrics } from '@/common/ipc/channels.type';
 import OnboardingView from './OnboardingView';
 import { formatLargeNumber } from '@/common/utils/formatting';
@@ -28162,6 +28178,7 @@ import CycleNavigator from './components/CycleNavigator';
 import ContextInputs from './components/ContextInputs';
 import ResponseTabs from './components/ResponseTabs';
 import ResponsePane from './components/ResponsePane';
+import * as path from 'path-browserify';
 
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -28243,7 +28260,7 @@ const App = () => {
     const handleNewCycle = (e: React.MouseEvent) => { e.stopPropagation(); saveCurrentCycleState(); const newCycleId = maxCycle + 1; setMaxCycle(newCycleId); setCurrentCycle(newCycleId); setCycleTitle('New Cycle'); setCycleContext(''); setEphemeralContext(''); setTabs({}); setIsParsedMode(false); setSelectedResponseId(null); setSelectedFilesForReplacement(new Set()); };
     const handleGeneratePrompt = () => { if (currentCycle === null) return; clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle }); }
     const handleDeleteCycle = () => { if(currentCycle !== null) clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle }); };
-    const handleResetHistory = () => { if (window.confirm("Are you sure you want to delete ALL cycle history? This action cannot be undone.")) clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {}); };
+    const handleResetHistory = () => { clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {}); };
     const handleExportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestExportHistory, {});
     const handleImportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestImportHistory, {});
     const handleFileSelectionToggle = (filePath: string) => { const currentTabId = activeTab.toString(); const compositeKeyForCurrent = `${currentTabId}:::${filePath}`; setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); let existingKey: string | undefined; for (const key of newSet) if (key.endsWith(`:::${filePath}`)) { existingKey = key; break; } if (existingKey) { if (existingKey === compositeKeyForCurrent) newSet.delete(existingKey); else { newSet.delete(existingKey); newSet.add(compositeKeyForCurrent); } } else newSet.add(compositeKeyForCurrent); return newSet; }); };
@@ -28270,7 +28287,9 @@ const App = () => {
             <ContextInputs cycleContext={cycleContext} ephemeralContext={ephemeralContext} cycleContextTokens={cycleContextTokens} ephemeralContextTokens={ephemeralContextTokens} onCycleContextChange={(e) => { setCycleContext(e.target.value); setCycleContextTokens(Math.ceil(e.target.value.length / 4)); }} onEphemeralContextChange={(e) => { setEphemeralContext(e.target.value); setEphemeralContextTokens(Math.ceil(e.target.value.length / 4)); }} onContextKeyDown={handleContextKeyDown} cycleContextHeight={cycleContextHeight} onCycleContextHeightChange={setCycleContextHeight} ephemeralContextHeight={ephemeralContextHeight} onEphemeralContextHeightChange={setEphemeralContextHeight} currentCycle={currentCycle} />
         </CollapsibleSection>
         <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} onSortToggle={() => setIsSortedByTokens(p => !p)} />
-        <div className="tab-content"><ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={currentComparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => setSelectedResponseId(prev => prev === id ? null : id)} onSelectAllFiles={handleSelectAllFilesToggle} onDeselectAllFiles={() => setSelectedFilesForReplacement(new Set())} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} /></div>
+        <div className="tab-content">
+            <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={currentComparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => setSelectedResponseId(prev => prev === id ? null : id)} onSelectAllFiles={handleSelectAllFilesToggle} onDeselectAllFiles={() => setSelectedFilesForReplacement(new Set())} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} />
+        </div>
     </div>;
 };
 
@@ -28365,7 +28384,7 @@ export enum ServerToClientChannel {
 </file>
 
 <file path="src/common/ipc/channels.type.ts">
-// Updated on: C172 (Add breakdown to prompt cost estimation)
+// Updated on: C173 (Fix missing payload for RequestPromptCostBreakdown)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -28426,6 +28445,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestExportHistory ? {} :
     T extends ClientToServerChannel.RequestImportHistory ? {} :
     T extends ClientToServerChannel.RequestPromptCostEstimation ? { cycleData: PcppCycle } :
+    T extends ClientToServerChannel.RequestPromptCostBreakdown ? { cycleData: PcppCycle } :
     
     T extends ServerToClientChannel.SendWorkspaceFiles ? { files: FileNode[] } :
     T extends ServerToClientChannel.SendWorkspaceTrustState ? { isTrusted: boolean } :

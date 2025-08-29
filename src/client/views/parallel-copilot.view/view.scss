@@ -1,4 +1,5 @@
-/* Updated on: C172 (No functional changes, header update only) */
+/* src/client/views/parallel-copilot.view/view.scss */
+// Updated on: C174 (Fix alignment in NumberedTextarea)
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -17,7 +18,7 @@ body {
     overflow: hidden;
 
     .line-numbers-gutter {
-        padding: 4px;
+        padding: 4px 8px;
         color: var(--vscode-editorLineNumber-foreground);
         background-color: var(--vscode-editorGutter-background);
         text-align: right;
@@ -26,47 +27,54 @@ body {
         font-size: var(--vscode-editor-font-size);
         line-height: 1.5;
         z-index: 2;
+        flex-shrink: 0;
+    }
+    
+    .content-wrapper {
+        position: relative;
+        flex-grow: 1;
+        min-width: 0;
+        overflow: hidden;
     }
 
-    .highlight-container {
+    .highlight-content, .context-textarea {
         position: absolute;
         top: 0;
         left: 0;
-        right: 0;
-        bottom: 0;
-        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 4px;
+        box-sizing: border-box;
+        border: none;
+        font-family: var(--vscode-editor-font-family);
+        font-size: var(--vscode-editor-font-size);
+        line-height: 1.5;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        overflow: auto;
+    }
+    
+    .highlight-content {
         pointer-events: none;
-        
-        .highlight-content {
-            padding: 4px;
-            padding-left: 48px; /* Adjust based on gutter width */
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            font-family: var(--vscode-editor-font-family);
-            font-size: var(--vscode-editor-font-size);
-            line-height: 1.5;
-            
-            span {
-                background-color: transparent !important;
-            }
+        span {
+            background-color: transparent !important;
         }
     }
 
     .context-textarea {
-        line-height: 1.5;
-        border: none;
-        flex-grow: 1;
         background-color: transparent;
         color: transparent;
         caret-color: var(--vscode-editor-foreground);
         resize: none;
-        padding: 4px;
-        padding-left: 48px;
-        font-family: var(--vscode-editor-font-family);
-        font-size: var(--vscode-editor-font-size);
         z-index: 1;
-        white-space: pre-wrap;
-        word-wrap: break-word;
+        
+        // Hide scrollbars but keep it scrollable
+        &::-webkit-scrollbar {
+            display: none;
+        }
+        -ms-overflow-style: none;
+        scrollbar-width: none;
     }
 
     .textarea-resizer {
@@ -771,4 +779,33 @@ body {
 
     .char-added { background-color: var(--vscode-diffEditor-insertedLineBackground); }
     .char-removed { background-color: var(--vscode-diffEditor-removedLineBackground); }
+}
+
+.collapsible-section-inner {
+    border: 1px solid var(--vscode-panel-border);
+    border-radius: 4px;
+    width: 100%;
+}
+
+.collapsible-header-inner {
+    background-color: var(--vscode-sideBar-sectionHeaderBackground);
+    padding: 4px 8px;
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    .chevron {
+        transition: transform 0.2s ease-in-out;
+    }
+    .chevron.collapsed {
+        transform: rotate(-90deg);
+    }
+}
+
+.collapsible-content-inner {
+    padding: 8px;
 }

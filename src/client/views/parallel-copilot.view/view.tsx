@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C173 (Continue refactor)
+// Updated on: C174 (Enhance cost display)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -73,7 +73,7 @@ const App = () => {
 
     const getCurrentCycleData = React.useCallback((): PcppCycle | null => { if (currentCycle === null) return null; const responses: { [key: string]: PcppResponse } = {}; for (let i = 1; i <= tabCount; i++) responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' }; if (currentCycle === 0) return { cycleId: 0, cycleContext, ephemeralContext: '', responses: {}, timestamp: new Date().toISOString(), title: 'Project Setup' }; return { cycleId: currentCycle, timestamp: new Date().toISOString(), title: cycleTitle, cycleContext, ephemeralContext, responses, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement: Array.from(selectedFilesForReplacement), tabCount, isSortedByTokens, pathOverrides: Object.fromEntries(pathOverrides), cycleContextHeight, ephemeralContextHeight, }; }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, cycleContextHeight, ephemeralContextHeight]);
     const saveCurrentCycleState = React.useCallback(() => { const cycleData = getCurrentCycleData(); if (cycleData) clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData }); }, [clientIpc, getCurrentCycleData]);
-    const requestCostEstimation = React.useCallback(() => { const cycleData = getCurrentCycleData(); if (cycleData) clientIpc.sendToServer(ClientToServerChannel.RequestPromptCostEstimation, { cycleData }); }, [clientIpc, getCurrentCycleData]);
+    const requestCostEstimation = React.useCallback(() => { const cycleData = getCurrentCycleData(); if (cycleData) clientIpc.sendToServer(ClientToServerChannel.RequestPromptCostBreakdown, { cycleData }); }, [clientIpc, getCurrentCycleData]);
     const debouncedSave = useDebounce(saveCurrentCycleState, 1000);
     const debouncedCostRequest = useDebounce(requestCostEstimation, 500);
 
@@ -116,7 +116,12 @@ const App = () => {
 
     const collapsedNavigator = <div className="collapsed-navigator"><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0}><VscChevronLeft /></button><span className="cycle-display">C{currentCycle}</span><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button></div>;
     const currentComparisonMetrics = selectedFilePath ? comparisonMetrics.get(pathOverrides.get(selectedFilePath) || selectedFilePath) : null;
-    const totalPromptCostDisplay = <span className="total-prompt-cost" title={costBreakdownTooltip}>Total Est: ({formatLargeNumber(totalPromptTokens, 1)} tk) ~ ${estimatedPromptCost.toFixed(4)}</span>;
+    const totalPromptCostDisplay = (
+        <span className="total-prompt-cost" title={costBreakdownTooltip}>
+            Total Est: ({formatLargeNumber(totalPromptTokens, 1)} tk) ~ ${estimatedPromptCost.toFixed(4)}
+            {tabCount > 1 && ` x ${tabCount} = $${(estimatedPromptCost * tabCount).toFixed(4)}`}
+        </span>
+    );
 
     return <div className="pc-view-container">
         <div className="pc-header"><div className="pc-toolbar"><button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button><button onClick={handleGeneratePrompt} title="Generate prompt.md"><VscFileCode /> Generate prompt.md</button><button onClick={handleLogState} title="Log Current State"><VscBug/></button><button onClick={handleGlobalParseToggle} className={isParsedMode ? 'active' : ''}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} /></div></div>
@@ -126,7 +131,7 @@ const App = () => {
         </CollapsibleSection>
         <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} onSortToggle={() => setIsSortedByTokens(p => !p)} />
         <div className="tab-content">
-            <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={currentComparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => setSelectedResponseId(prev => prev === id ? null : id)} onSelectAllFiles={handleSelectAllFilesToggle} onDeselectAllFiles={() => setSelectedFilesForReplacement(new Set())} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} />
+            <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={currentComparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => setSelectedResponseId(prev => prev === id ? null : id)} onSelectAllFiles={handleSelectAllFilesToggle} onDeselectAllFiles={() => setSelectedFilesForReplacement(new Set())} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} />
         </div>
     </div>;
 };

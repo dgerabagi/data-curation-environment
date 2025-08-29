@@ -1,4 +1,5 @@
-// Updated on: C173 (Add confirmation dialog for reset history)
+// src/backend/services/history.service.ts
+// Updated on: C174 (Fix duplicate button in confirmation dialogs)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -152,8 +153,19 @@ export class HistoryService {
 
     public async deleteCycle(cycleId: number): Promise<void> {
         Services.loggerService.log(`HistoryService: Deleting cycle ${cycleId}.`);
-        const history = await this._readHistoryFile();
         
+        const confirmation = await vscode.window.showWarningMessage(
+            `Are you sure you want to delete Cycle ${cycleId}? This action cannot be undone.`,
+            { modal: true },
+            "Delete"
+        );
+
+        if (confirmation !== "Delete") {
+            Services.loggerService.log("Cycle deletion cancelled by user.");
+            return;
+        }
+        
+        const history = await this._readHistoryFile();
         if (history.cycles.length <= 1) {
             Services.loggerService.warn("Cannot delete the last remaining cycle.");
             vscode.window.showWarningMessage("Cannot delete the last cycle.");
@@ -174,7 +186,7 @@ export class HistoryService {
         const confirmation = await vscode.window.showWarningMessage(
             "Are you sure you want to delete ALL cycle history? This action cannot be undone.",
             { modal: true },
-            "Delete All", "Cancel"
+            "Delete All"
         );
 
         if (confirmation !== "Delete All") {
