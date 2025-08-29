@@ -1,25 +1,25 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-29T20:23:52.471Z
+  Date Generated: 2025-08-29T21:06:15.244Z
   ---
   Total Files: 264
-  Total Lines: 34332
-  Total Characters: 1948093
-  Approx. Tokens: 487117
+  Total Lines: 34432
+  Total Characters: 1950879
+  Approx. Tokens: 487813
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (222969 tokens)
 2. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10834 tokens)
 3. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
-4. src\client\views\parallel-copilot.view\view.tsx (8539 tokens)
+4. src\client\views\parallel-copilot.view\view.tsx (8398 tokens)
 5. src\Artifacts\A11. DCE - Regression Case Studies.md (7032 tokens)
 6. src\Artifacts\A0. DCE Master Artifact List.md (6924 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4429 tokens)
-8. src\client\views\parallel-copilot.view\view.scss (4236 tokens)
+8. src\client\views\parallel-copilot.view\view.scss (4253 tokens)
 9. src\backend\services\prompt.service.ts (4062 tokens)
-10. src\client\views\context-chooser.view\view.tsx (4026 tokens)
+10. src\client\views\context-chooser.view\view.tsx (4035 tokens)
 
 <!-- Full File List -->
 1. .gitignore - Lines: 10 - Chars: 128 - Tokens: 32
@@ -133,7 +133,7 @@
 109. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
 110. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
 111. src\backend\services\file-operation.service.ts - Lines: 338 - Chars: 16082 - Tokens: 4021
-112. src\backend\services\file-tree.service.ts - Lines: 272 - Chars: 13702 - Tokens: 3426
+112. src\backend\services\file-tree.service.ts - Lines: 276 - Chars: 13989 - Tokens: 3498
 113. src\backend\services\flattener.service.ts - Lines: 222 - Chars: 11624 - Tokens: 2906
 114. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4232 - Tokens: 1058
 115. src\backend\services\history.service.ts - Lines: 241 - Chars: 10133 - Tokens: 2534
@@ -156,32 +156,32 @@
 132. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 133. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5090 - Tokens: 1273
 134. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
-135. src\client\views\context-chooser.view\view.tsx - Lines: 175 - Chars: 16102 - Tokens: 4026
+135. src\client\views\context-chooser.view\view.tsx - Lines: 175 - Chars: 16140 - Tokens: 4035
 136. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
-137. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1237 - Tokens: 310
+137. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1255 - Tokens: 314
 138. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 14 - Chars: 312 - Tokens: 78
-139. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 14 - Chars: 316 - Tokens: 79
+139. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 66 - Chars: 2504 - Tokens: 626
 140. src\client\views\parallel-copilot.view\components\NumberedTextarea.tsx - Lines: 97 - Chars: 3818 - Tokens: 955
 141. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 14 - Chars: 300 - Tokens: 75
 142. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 14 - Chars: 308 - Tokens: 77
 143. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 14 - Chars: 308 - Tokens: 77
 144. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-145. src\client\views\parallel-copilot.view\on-message.ts - Lines: 88 - Chars: 4031 - Tokens: 1008
+145. src\client\views\parallel-copilot.view\on-message.ts - Lines: 88 - Chars: 4037 - Tokens: 1010
 146. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 87 - Chars: 4122 - Tokens: 1031
 147. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 43 - Chars: 1890 - Tokens: 473
 148. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
 149. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
-150. src\client\views\parallel-copilot.view\view.scss - Lines: 744 - Chars: 16944 - Tokens: 4236
-151. src\client\views\parallel-copilot.view\view.tsx - Lines: 553 - Chars: 34155 - Tokens: 8539
+150. src\client\views\parallel-copilot.view\view.scss - Lines: 748 - Chars: 17010 - Tokens: 4253
+151. src\client\views\parallel-copilot.view\view.tsx - Lines: 564 - Chars: 33589 - Tokens: 8398
 152. src\common\ipc\channels.enum.ts - Lines: 79 - Chars: 4086 - Tokens: 1022
-153. src\common\ipc\channels.type.ts - Lines: 79 - Chars: 5901 - Tokens: 1476
+153. src\common\ipc\channels.type.ts - Lines: 80 - Chars: 5927 - Tokens: 1482
 154. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 155. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 156. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
 157. src\common\types\file-node.ts - Lines: 17 - Chars: 517 - Tokens: 130
-158. src\common\types\pcpp.types.ts - Lines: 43 - Chars: 1029 - Tokens: 258
+158. src\common\types\pcpp.types.ts - Lines: 50 - Chars: 1240 - Tokens: 310
 159. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
-160. src\common\utils\formatting.ts - Lines: 99 - Chars: 3475 - Tokens: 869
+160. src\common\utils\formatting.ts - Lines: 120 - Chars: 3987 - Tokens: 997
 161. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
 162. src\common\utils\view-html.ts - Lines: 29 - Chars: 1117 - Tokens: 280
 163. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
@@ -21879,7 +21879,7 @@ export class FileOperationService {
 </file>
 
 <file path="src/backend/services/file-tree.service.ts">
-// Updated on: C167 (Fix TS errors, array access)
+// Updated on: C170 (Add .vscode to exclusion patterns to prevent PCPP history saves from refreshing FTV)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -21895,7 +21895,7 @@ import { ProblemCountsMap } from "@/common/ipc/channels.type";
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
-const EXCLUSION_PATTERNS = ['.git', 'dce_cache', 'out']; 
+const EXCLUSION_PATTERNS = ['.git', 'dce_cache', 'out', '.vscode']; 
 const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/flattened_repo.md', '/prompt.md', '/package-lock.json'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
@@ -21945,7 +21945,11 @@ export class FileTreeService {
         
         this.watcher = vscode.workspace.createFileSystemWatcher('**/*');
         const onFileChange = (uri: vscode.Uri) => {
-            if (EXCLUSION_PATTERNS.some(pattern => normalizePath(uri.fsPath).includes(`/${pattern}/`))) return;
+            const normalizedPath = normalizePath(uri.fsPath);
+            if (EXCLUSION_PATTERNS.some(pattern => normalizedPath.includes(`/${pattern}/`) || normalizedPath.includes(`/${pattern}`))) {
+                Services.loggerService.log(`[Watcher] Ignoring change in excluded pattern: ${normalizedPath}`);
+                return;
+            }
             this.triggerFullRefresh();
         };
 
@@ -22103,7 +22107,7 @@ export class FileTreeService {
             const entries = await vscode.workspace.fs.readDirectory(dirUri);
 
             for (const [name, type] of entries) {
-                if (name === '.git' || name === 'dce_cache' || name === 'out') continue;
+                if (EXCLUSION_PATTERNS.some(p => p === name)) continue;
 
                 const childUri = vscode.Uri.joinPath(dirUri, name);
                 const childPath = normalizePath(childUri.fsPath);
@@ -25603,7 +25607,7 @@ body {
 </file>
 
 <file path="src/client/views/context-chooser.view/view.tsx">
-// Updated on: C169 (Remove Deselect All button)
+// Updated on: C170 (Fix TS errors from array access)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -25714,13 +25718,13 @@ const App = () => {
     const handleRefresh = () => { processedFilesCache.current.clear(); requestFiles(true); };
     const handleExpandAll = () => setExpandAllTrigger(c => c + 1);
     const handleCollapseAll = () => setCollapseTrigger(c => c + 1);
-    const getParentDirForNewItem = (): string => { if (activeFile) { const nodeMap = new Map<string, FileNode>(); const buildMap = (node: FileNode) => { nodeMap.set(node.absolutePath, node); node.children?.forEach(buildMap); }; files.forEach(buildMap); const activeNode = nodeMap.get(activeFile); if (activeNode) { return activeNode.children ? activeNode.absolutePath : activeFile.substring(0, activeFile.lastIndexOf('/')); } } return files.length > 0 ? files.absolutePath : ''; };
+    const getParentDirForNewItem = (): string => { if (activeFile) { const nodeMap = new Map<string, FileNode>(); const buildMap = (node: FileNode) => { nodeMap.set(node.absolutePath, node); node.children?.forEach(buildMap); }; files.forEach(buildMap); const activeNode = nodeMap.get(activeFile); if (activeNode) { return activeNode.children ? activeNode.absolutePath : activeFile.substring(0, activeFile.lastIndexOf('/')); } } return files.length > 0 && files[0] ? files[0].absolutePath : ''; };
     const handleNewFile = () => clientIpc.sendToServer(ClientToServerChannel.RequestNewFile, { parentDirectory: getParentDirForNewItem() });
     const handleNewFolder = () => clientIpc.sendToServer(ClientToServerChannel.RequestNewFolder, { parentDirectory: getParentDirForNewItem() });
     const handleToggleAutoAdd = () => { const newState = !isAutoAddEnabled; setIsAutoAddEnabled(newState); clientIpc.sendToServer(ClientToServerChannel.SaveAutoAddState, { enabled: newState }); };
     const handleRemoveFromSelection = (pathsToRemove: string[]) => { setCheckedFiles(currentChecked => { const newChecked = removePathsFromSelected(pathsToRemove, currentChecked, files); clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths: newChecked }); return newChecked; }); };
-    const processDrop = (event: React.DragEvent, node: FileNode) => { const targetDir = node.children ? node.absolutePath : path.dirname(node.absolutePath); if (event.dataTransfer.files?.length > 0) { Array.from(event.dataTransfer.files).forEach(file => { const reader = new FileReader(); reader.onload = (e) => { if (e.target?.result instanceof ArrayBuffer) { clientIpc.sendToServer(ClientToServerChannel.RequestAddFileFromBuffer, { targetPath: `${targetDir}/${file.name}`.replace(/\\/g, '/'), data: new Uint8Array(e.target.result) }); } }; reader.readAsArrayBuffer(file); }); return; } const uriList = event.dataTransfer.getData('text/uri-list'); if (uriList) { const sourceUri = uriList.split('\n').trim(); if (sourceUri) clientIpc.sendToServer(ClientToServerChannel.RequestCopyFileFromUri, { sourceUri, targetDir }); } };
-    const handleContainerDrop = (event: React.DragEvent<HTMLDivElement>) => { event.preventDefault(); event.stopPropagation(); setIsDraggingOver(false); if (!isWorkspaceTrusted) return; const rootDir = files.length > 0 ? files.absolutePath : ''; if (rootDir) processDrop(event, { absolutePath: rootDir, name: path.basename(rootDir), children: [], tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false, isSelectable: true }); };
+    const processDrop = (event: React.DragEvent, node: FileNode) => { const targetDir = node.children ? node.absolutePath : path.dirname(node.absolutePath); if (event.dataTransfer.files?.length > 0) { Array.from(event.dataTransfer.files).forEach(file => { const reader = new FileReader(); reader.onload = (e) => { if (e.target?.result instanceof ArrayBuffer) { clientIpc.sendToServer(ClientToServerChannel.RequestAddFileFromBuffer, { targetPath: `${targetDir}/${file.name}`.replace(/\\/g, '/'), data: new Uint8Array(e.target.result) }); } }; reader.readAsArrayBuffer(file); }); return; } const uriList = event.dataTransfer.getData('text/uri-list'); if (uriList) { const sourceUri = uriList.split('\n')[0].trim(); if (sourceUri) clientIpc.sendToServer(ClientToServerChannel.RequestCopyFileFromUri, { sourceUri, targetDir }); } };
+    const handleContainerDrop = (event: React.DragEvent<HTMLDivElement>) => { event.preventDefault(); event.stopPropagation(); setIsDraggingOver(false); if (!isWorkspaceTrusted) return; const rootDir = files.length > 0 && files[0] ? files[0].absolutePath : ''; if (rootDir) processDrop(event, { absolutePath: rootDir, name: path.basename(rootDir), children: [], tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false, isSelectable: true }); };
     const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => { event.preventDefault(); event.stopPropagation(); event.dataTransfer.dropEffect = (isWorkspaceTrusted && (event.dataTransfer.types.includes('Files') || event.dataTransfer.types.includes('text/uri-list'))) ? 'copy' : 'none'; };
     const handleDragEnter = (event: React.DragEvent<HTMLDivElement>) => { event.preventDefault(); event.stopPropagation(); if (isWorkspaceTrusted && (event.dataTransfer.types.includes('Files') || event.dataTransfer.types.includes('text/uri-list'))) setIsDraggingOver(true); };
     const handleDragLeave = (event: React.DragEvent<HTMLDivElement>) => { event.preventDefault(); event.stopPropagation(); if (!event.currentTarget.contains(event.relatedTarget as Node)) setIsDraggingOver(false); };
@@ -25824,7 +25828,7 @@ export function registerViews(context: vscode.ExtensionContext) {
 
 <file path="src/client/views/parallel-copilot.view/components/CodeViewer.tsx">
 // src/client/views/parallel-copilot.view/components/CodeViewer.tsx
-// New file in C169
+// Updated on: C170 (Fix TS error)
 import * as React from 'react';
 
 const CodeViewer: React.FC<{ htmlContent: string | undefined | null }> = ({ htmlContent }) => {
@@ -25836,7 +25840,7 @@ const CodeViewer: React.FC<{ htmlContent: string | undefined | null }> = ({ html
     }
 
     const codeContentMatch = /<pre><code>([\s\S]*)<\/code><\/pre>/s.exec(htmlContent || '');
-    const code = codeContentMatch?. ?? (htmlContent || '');
+    const code = codeContentMatch?.[1] ?? (htmlContent || '');
 
     const lines = code.split('\n');
     if (lines.length > 1 && lines[lines.length - 1] === '') {
@@ -25877,14 +25881,66 @@ export default ContextInputs;
 
 <file path="src/client/views/parallel-copilot.view/components/CycleNavigator.tsx">
 // src/client/views/parallel-copilot.view/components/CycleNavigator.tsx
-// New file in C169
+// Updated on: C170 (Migrate logic from view.tsx)
 import * as React from 'react';
+import { VscChevronLeft, VscChevronRight, VscAdd, VscTrash, VscSync, VscCloudUpload, VscCloudDownload } from 'react-icons/vsc';
 
-const CycleNavigator = () => {
-    // Placeholder content
+interface CycleNavigatorProps {
+    currentCycle: number;
+    maxCycle: number;
+    cycleTitle: string;
+    isNewCycleButtonDisabled: boolean;
+    onCycleChange: (e: React.MouseEvent | null, newCycle: number) => void;
+    onNewCycle: (e: React.MouseEvent) => void;
+    onTitleChange: (newTitle: string) => void;
+    onDeleteCycle: () => void;
+    onResetHistory: () => void;
+    onExportHistory: () => void;
+    onImportHistory: () => void;
+}
+
+const CycleNavigator: React.FC<CycleNavigatorProps> = ({
+    currentCycle,
+    maxCycle,
+    cycleTitle,
+    isNewCycleButtonDisabled,
+    onCycleChange,
+    onNewCycle,
+    onTitleChange,
+    onDeleteCycle,
+    onResetHistory,
+    onExportHistory,
+    onImportHistory
+}) => {
     return (
-        <div>
-            Cycle Navigator Component Placeholder
+        <div className="cycle-navigator">
+            <span>Cycle:</span>
+            <button onClick={(e) => onCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0}>
+                <VscChevronLeft />
+            </button>
+            <input 
+                type="number" 
+                value={currentCycle} 
+                onChange={e => onCycleChange(null, parseInt(e.target.value, 10) || 0)} 
+                className="cycle-input" 
+            />
+            <button onClick={(e) => onCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}>
+                <VscChevronRight />
+            </button>
+            <button onClick={onNewCycle} title="New Cycle" disabled={isNewCycleButtonDisabled}>
+                <VscAdd />
+            </button>
+            <input 
+                type="text" 
+                className="cycle-title-input" 
+                placeholder="Cycle Title..." 
+                value={cycleTitle} 
+                onChange={e => onTitleChange(e.target.value)} 
+            />
+            <button onClick={onDeleteCycle} title="Delete Current Cycle"><VscTrash /></button>
+            <button onClick={onResetHistory} title="Reset All History"><VscSync /></button>
+            <button onClick={onExportHistory} title="Save Cycle History..."><VscCloudUpload /></button>
+            <button onClick={onImportHistory} title="Load Cycle History..."><VscCloudDownload /></button>
         </div>
     );
 };
@@ -26055,10 +26111,10 @@ export const viewConfig = {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/on-message.ts">
-// Updated on: C169 (Add RequestHighlightContext handler)
+// Updated on: C170 (Add missing import)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
-import { ClientToServerChannel } from "@/common/ipc/channels.enum";
+import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
 
 export function onMessage(serverIpc: ServerPostMessageManager) {
     const { loggerService, promptService, fileOperationService, highlightingService, historyService } = Services;
@@ -26440,7 +26496,7 @@ export default TestPane3;
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
-/* Updated on: C169 (Styles for NumberedTextarea highlighting) */
+/* Updated on: C170 (Add cost estimation styles) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -26538,6 +26594,10 @@ body {
             color: var(--vscode-descriptionForeground);
             display: flex;
             justify-content: space-between;
+
+            .cost-estimate {
+                font-style: italic;
+            }
         }
     }
 }
@@ -27188,11 +27248,11 @@ body {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C169 (Move Deselect All button)
+// Updated on: C170 (Fix bugs, add features, start refactor)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap, VscTrash, VscSync, VscClose, VscSave, VscBug, VscCheckAll, VscListOrdered, VscListUnordered, VscSymbolNumeric, VscClippy, VscLink, VscDebugDisconnect, VscBook, VscCloudUpload, VscCloudDownload, VscFolder, VscClearAll } from 'react-icons/vsc';
+import { VscWand, VscCheck, VscError, VscFileCode, VscDiff, VscSave, VscBug, VscCheckAll, VscListOrdered, VscListUnordered, VscSymbolNumeric, VscClippy, VscLink, VscDebugDisconnect, VscBook, VscFolder, VscClearAll, VscChevronDown, VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -27202,8 +27262,10 @@ import ReactMarkdown from 'react-markdown';
 import * as path from 'path-browserify';
 import { BatchWriteFile, ComparisonMetrics } from '@/common/ipc/channels.type';
 import OnboardingView from './OnboardingView';
-import { formatLargeNumber } from '@/common/utils/formatting';
+import { formatLargeNumber, calculatePromptCost } from '@/common/utils/formatting';
 import NumberedTextarea from './components/NumberedTextarea';
+import CycleNavigator from './components/CycleNavigator';
+import CodeViewer from './components/CodeViewer';
 
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -27218,34 +27280,6 @@ const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     }, [callback, delay]);
 
     return debouncedFunction;
-};
-
-const CodeViewer: React.FC<{ htmlContent: string | undefined | null }> = ({ htmlContent }) => {
-    if (htmlContent === undefined || htmlContent === null) {
-        return <div style={{ padding: '8px' }}>Select a file to view its content.</div>;
-    }
-    if (htmlContent.startsWith('// Error:')) {
-         return <div style={{ padding: '8px', color: 'var(--vscode-errorForeground)' }}>{htmlContent}</div>;
-    }
-
-    const codeContentMatch = /<pre><code>([\s\S]*)<\/code><\/pre>/s.exec(htmlContent || '');
-    const code = codeContentMatch?. ?? (htmlContent || '');
-
-    const lines = code.split('\n');
-    if (lines.length > 1 && lines[lines.length - 1] === '') {
-        lines.pop();
-    }
-
-    return (
-        <div className="code-viewer-wrapper">
-            <div className="file-content-viewer">
-                <div className="line-numbers">
-                    {lines.map((_, i) => <span key={i}>{i + 1}</span>)}
-                </div>
-                <div className="code-content" dangerouslySetInnerHTML={{ __html: htmlContent }} />
-            </div>
-        </div>
-    );
 };
 
 interface TabState {
@@ -27325,6 +27359,18 @@ const App = () => {
         debouncedSave();
     }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, tabCount, isSortedByTokens, pathOverrides, debouncedSave, cycleContextHeight, ephemeralContextHeight]);
     
+    React.useEffect(() => {
+        const handleVisibilityChange = () => {
+            if (document.visibilityState === 'hidden') {
+                saveCurrentCycleState();
+            }
+        };
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+        return () => {
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+        };
+    }, [saveCurrentCycleState]);
+
     const parseAllTabs = React.useCallback(() => {
         setTabs(prevTabs => {
             const allFilePaths = new Set<string>();
@@ -27530,7 +27576,13 @@ const App = () => {
     }
     
     const handleDeleteCycle = () => { if(currentCycle !== null) clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle }); };
-    const handleResetHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {});
+    
+    const handleResetHistory = () => {
+        if (window.confirm("Are you sure you want to delete ALL cycle history? This action cannot be undone.")) {
+            clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {});
+        }
+    };
+
     const handleExportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestExportHistory, {});
     const handleImportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestImportHistory, {});
     
@@ -27612,6 +27664,9 @@ const App = () => {
             clientIpc.sendToServer(ClientToServerChannel.RequestCopyTextToClipboard, { text: file.content });
         }
     };
+
+    const totalContextTokens = cycleContextTokens + ephemeralContextTokens;
+    const estimatedCost = calculatePromptCost(totalContextTokens);
 
     const isReadyForNextCycle = !isNewCycleButtonDisabled;
 
@@ -27714,10 +27769,26 @@ const App = () => {
             </div>
             <div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} /></div>
         </div>
-        <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''}><div className="cycle-navigator"><span>Cycle:</span><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0}><VscChevronLeft /></button><input type="number" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 0)} className="cycle-input" /><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button><button onClick={handleNewCycle} title="New Cycle" disabled={isNewCycleButtonDisabled}><VscAdd /></button><input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} /><button onClick={handleDeleteCycle} title="Delete Current Cycle"><VscTrash /></button><button onClick={handleResetHistory} title="Reset All History"><VscSync /></button><button onClick={handleExportHistory} title="Save Cycle History..."><VscCloudUpload /></button><button onClick={handleImportHistory} title="Load Cycle History..."><VscCloudDownload /></button></div>
+        <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''}>
+            <CycleNavigator
+                currentCycle={currentCycle}
+                maxCycle={maxCycle}
+                cycleTitle={cycleTitle}
+                isNewCycleButtonDisabled={isNewCycleButtonDisabled}
+                onCycleChange={handleCycleChange}
+                onNewCycle={handleNewCycle}
+                onTitleChange={setCycleTitle}
+                onDeleteCycle={handleDeleteCycle}
+                onResetHistory={handleResetHistory}
+                onExportHistory={handleExportHistory}
+                onImportHistory={handleImportHistory}
+            />
             <div className="context-inputs">
                 <div className="context-input-wrapper">
-                    <div className="context-label"><span>Cycle Context</span><span>Tokens: {cycleContextTokens}</span></div>
+                    <div className="context-label">
+                        <span>Cycle Context</span>
+                        <span className="cost-estimate" title="Estimated prompt input cost using Gemini 2.5 Pro pricing.">({formatLargeNumber(totalContextTokens, 1)} tk) ~ ${estimatedCost.toFixed(4)}</span>
+                    </div>
                     <NumberedTextarea value={cycleContext} onChange={(e) => { setCycleContext(e.target.value); setCycleContextTokens(Math.ceil(e.target.value.length / 4)); }} placeholder="Cycle Context (notes for this cycle)..." onKeyDown={handleContextKeyDown} height={cycleContextHeight} onHeightChange={setCycleContextHeight} id={`cycle-context-${currentCycle}`} />
                 </div>
                 <div className="context-input-wrapper">
@@ -27825,6 +27896,7 @@ export enum ServerToClientChannel {
 </file>
 
 <file path="src/common/ipc/channels.type.ts">
+// Updated on: C170 (Fix TS error on ComparisonMetrics)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -27873,7 +27945,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestCreateCycle0Prompt ? { projectScope: string } :
     T extends ClientToServerChannel.RequestFileExistence ? { paths: string[] } :
     T extends ClientToServerChannel.RequestSyntaxHighlight ? { code: string; lang: string, id: string } :
-    T extends ClientToServerChannel.RequestHighlightContext ? { context: string; id: string; } : // New in C169
+    T extends ClientToServerChannel.RequestHighlightContext ? { context: string; id: string; } :
     T extends ClientToServerChannel.RequestLatestCycleData ? {} :
     T extends ClientToServerChannel.RequestCycleData ? { cycleId: number } :
     T extends ClientToServerChannel.SaveCycleData ? { cycleData: PcppCycle } :
@@ -27898,7 +27970,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SendFileContent ? { path: string, content: string | null } :
     T extends ServerToClientChannel.SendFileExistence ? { existenceMap: { [path: string]: boolean } } :
     T extends ServerToClientChannel.SendSyntaxHighlight ? { highlightedHtml: string, id: string } :
-    T extends ServerToClientChannel.SendHighlightContext ? { highlightedHtml: string, id: string } : // New in C169
+    T extends ServerToClientChannel.SendHighlightContext ? { highlightedHtml: string, id: string } :
     T extends ServerToClientChannel.SendLatestCycleData ? { cycleData: PcppCycle; projectScope?: string; } :
     T extends ServerToClientChannel.SendCycleData ? { cycleData: PcppCycle | null, projectScope?: string; } :
     T extends ServerToClientChannel.FilesWritten ? { paths: string[] } :
@@ -28035,7 +28107,7 @@ export interface FileNode {
 
 <file path="src/common/types/pcpp.types.ts">
 // src/common/types/pcpp.types.ts
-// Updated on: C167 (Add context pane heights)
+// Updated on: C170 (Fix TS error on ComparisonMetrics)
 export interface PcppResponse {
     content: string;
 }
@@ -28077,6 +28149,13 @@ export interface ParsedResponse {
     files: ParsedFile[];
     totalTokens: number;
 }
+
+// This type was moved to channels.type.ts to resolve build errors
+// export interface ComparisonMetrics {
+//     originalTokens: number;
+//     modifiedTokens: number;
+//     similarity: number;
+// }
 </file>
 
 <file path="src/common/types/vscode-webview.d.ts">
@@ -28099,9 +28178,30 @@ declare global {
 
 <file path="src/common/utils/formatting.ts">
 // src/common/utils/formatting.ts
-// Updated on: C137 (Add truncateCodeForLogging)
+// Updated on: C170 (Add calculatePromptCost)
 
 const KMBT_SUFFIXES = ['', 'K', 'M', 'B', 'T', 'Q']; // Extend as needed
+
+/**
+ * Calculates the estimated cost for an LLM prompt based on tiered pricing.
+ * @param totalInputTokens The total number of tokens in the input.
+ * @returns The estimated cost in USD.
+ */
+export function calculatePromptCost(totalInputTokens: number): number {
+    if (totalInputTokens <= 0) {
+        return 0;
+    }
+
+    const rateTier1 = 1.25 / 1_000_000; // for prompts <= 200k tokens
+    const rateTier2 = 2.50 / 1_000_000; // for prompts > 200k tokens
+
+    if (totalInputTokens <= 200_000) {
+        return totalInputTokens * rateTier1;
+    } else {
+        return totalInputTokens * rateTier2;
+    }
+}
+
 
 /**
  * Formats a large number with appropriate K/M/B/T suffixes and dynamic decimal places.

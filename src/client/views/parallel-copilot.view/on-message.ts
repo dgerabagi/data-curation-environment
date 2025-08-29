@@ -1,4 +1,4 @@
-// Updated on: C170 (Add missing import)
+// Updated on: C171 (Add prompt cost estimation handler)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -84,5 +84,9 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestOpenFolder, () => {
         fileOperationService.handleOpenFolderRequest();
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestPromptCostEstimation, (data) => {
+        promptService.handlePromptCostEstimationRequest(data.cycleData, serverIpc);
     });
 }

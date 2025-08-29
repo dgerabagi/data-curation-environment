@@ -4,7 +4,7 @@ import { promises as fs } from 'fs';
 import { Services } from './services';
 import { parseResponse } from '@/client/utils/response-parser';
 import { PcppCycle } from '@/common/types/pcpp.types';
-import { truncateCodeForLogging } from '@/common/utils/formatting';
+import { truncateCodeForLogging, calculatePromptCost } from '@/common/utils/formatting';
 import { ServerPostMessageManager } from '@/common/ipc/server-ipc';
 import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 
@@ -109,12 +109,81 @@ ${staticContext.trim()}
             cyclesContent += `</Cycle ${cycle.cycleId}>`;
         }
 
-        // Always add Cycle 0 at the end
         const cycle0Content = await this._generateCycle0Content();
         cyclesContent += `\n\n${cycle0Content}`;
 
         cyclesContent += '\n\n</M6. Cycles>';
         return cyclesContent;
+    }
+
+    private async getPromptParts(cycleData: PcppCycle): Promise<string[]> {
+        const rootPath = this.workspaceRoot;
+        if (!rootPath) throw new Error("No workspace folder open.");
+
+        const flattenedRepoPath = path.join(rootPath, 'flattened_repo.md');
+        let flattenedContent = '';
+        try {
+            flattenedContent = await fs.readFile(flattenedRepoPath, 'utf-8');
+        } catch (e) {
+            Services.loggerService.warn("'flattened_repo.md' not found. Will be empty in prompt.");
+        }
+
+        const fullHistoryFile = await Services.historyService.getFullHistory();
+        const fullHistory: PcppCycle[] = fullHistoryFile.cycles;
+        
+        const allCycles = [...fullHistory.filter(c => c.cycleId !== cycleData.cycleId), cycleData];
+        const sortedHistoryForOverview = allCycles.sort((a, b) => b.cycleId - a.cycleId);
+
+        let cycleOverview = '<M2. cycle overview>\n';
+        cycleOverview += `Current Cycle ${cycleData.cycleId} - ${cycleData.title}\n`;
+        for (const cycle of sortedHistoryForOverview) {
+            if (cycle.cycleId !== cycleData.cycleId) {
+                 cycleOverview += `Cycle ${cycle.cycleId} - ${cycle.title}\n`;
+            }
+        }
+        if (!cycleOverview.includes('Cycle 0')) {
+            cycleOverview += 'Cycle 0 - Project Initialization/Template Archive\n';
+        }
+        cycleOverview += '</M2. cycle overview>';
+        
+        const cyclesContent = await this._generateCyclesContent(cycleData, fullHistory);
+
+        const userA0Files = await vscode.workspace.findFiles('**/*A0*Master*Artifact*List.md', '**/node_modules/**', 1);
+        let a0Content = '<!-- Master Artifact List (A0) not found in workspace -->';
+        if (userA0Files.length > 0) {
+            const contentBuffer = await vscode.workspace.fs.readFile(userA0Files[0]);
+            a0Content = Buffer.from(contentBuffer).toString('utf-8');
+        }
+        
+        const a52_1_Content = await this.getArtifactContent('A52.1 DCE - Parser Logic and AI Guidance.md', '<!-- A52.1 Parser Logic not found -->');
+        const a52_2_Content = await this.getArtifactContent('A52.2 DCE - Interaction Schema Source.md', '<!-- A52.2 Interaction Schema Source not found -->');
+        const interactionSchemaContent = `<M3. Interaction Schema>\n${a52_2_Content}\n\n${a52_1_Content}\n</M3. Interaction Schema>`;
+
+        const projectScope = `<M4. current project scope>\n${fullHistoryFile.projectScope || 'No project scope defined.'}\n</M4. current project scope>`;
+
+        return [
+            `<prompt.md>`,
+            this.artifactSchemaTemplate,
+            cycleOverview,
+            interactionSchemaContent,
+            projectScope,
+            `<M5. organized artifacts list>\n${a0Content}\n</M5. organized artifacts list>`,
+            cyclesContent,
+            `<M7. Flattened Repo>\n${flattenedContent}\n</M7. Flattened Repo>`,
+            `</prompt.md>`
+        ];
+    }
+
+    public async handlePromptCostEstimationRequest(cycleData: PcppCycle, serverIpc: ServerPostMessageManager) {
+        try {
+            const promptParts = await this.getPromptParts(cycleData);
+            const finalPrompt = promptParts.join('\n\n');
+            const totalTokens = Math.ceil(finalPrompt.length / 4);
+            const estimatedCost = calculatePromptCost(totalTokens);
+            serverIpc.sendToClient(ServerToClientChannel.SendPromptCostEstimation, { totalTokens, estimatedCost });
+        } catch (error: any) {
+            Services.loggerService.error(`Failed to estimate prompt cost: ${error.message}`);
+        }
     }
 
     public async generateStateLog(currentState: PcppCycle) {
@@ -175,7 +244,6 @@ ${cyclesContent}
             return;
         }
         const rootPath = this.workspaceRoot;
-        const flattenedRepoPath = path.join(rootPath, 'flattened_repo.md');
         const promptMdPath = path.join(rootPath, 'prompt.md');
 
         try {
@@ -187,63 +255,15 @@ ${cyclesContent}
             } else {
                 Services.loggerService.warn("No files selected for flattening. 'flattened_repo.md' may be stale.");
             }
-
-            const flattenedContent = await fs.readFile(flattenedRepoPath, 'utf-8');
-            const fullHistoryFile = await Services.historyService.getFullHistory();
-            const fullHistory: PcppCycle[] = fullHistoryFile.cycles;
             
+            const fullHistory = (await Services.historyService.getFullHistory()).cycles;
             const currentCycleDataFromHistory = fullHistory.find(c => c.cycleId === currentCycle);
             if (!currentCycleDataFromHistory) {
                 throw new Error(`Could not find data for current cycle (${currentCycle}) in history.`);
             }
             const currentCycleData = { ...currentCycleDataFromHistory, title: cycleTitle };
 
-            const allCycles = [...fullHistory.filter(c => c.cycleId !== currentCycle), currentCycleData];
-            const sortedHistoryForOverview = allCycles.sort((a, b) => b.cycleId - a.cycleId);
-
-            let cycleOverview = '<M2. cycle overview>\n';
-            cycleOverview += `Current Cycle ${currentCycle} - ${cycleTitle}\n`;
-            for (const cycle of sortedHistoryForOverview) {
-                if (cycle.cycleId !== currentCycle) {
-                     cycleOverview += `Cycle ${cycle.cycleId} - ${cycle.title}\n`;
-                }
-            }
-            if (!cycleOverview.includes('Cycle 0')) {
-                cycleOverview += 'Cycle 0 - Project Initialization/Template Archive\n';
-            }
-            cycleOverview += '</M2. cycle overview>';
-            
-            const cyclesContent = await this._generateCyclesContent(currentCycleData, fullHistory);
-
-            const userA0Files = await vscode.workspace.findFiles('**/*A0*Master*Artifact*List.md', '**/node_modules/**', 1);
-            let a0Content = '<!-- Master Artifact List (A0) not found in workspace -->';
-            if (userA0Files.length > 0) {
-                Services.loggerService.log(`Found Master Artifact List: ${userA0Files[0].fsPath}`);
-                const contentBuffer = await vscode.workspace.fs.readFile(userA0Files[0]);
-                a0Content = Buffer.from(contentBuffer).toString('utf-8');
-            } else {
-                Services.loggerService.warn(`Could not find a Master Artifact List file in the workspace.`);
-            }
-            
-            const a52_1_Content = await this.getArtifactContent('A52.1 DCE - Parser Logic and AI Guidance.md', '<!-- A52.1 Parser Logic not found -->');
-            const a52_2_Content = await this.getArtifactContent('A52.2 DCE - Interaction Schema Source.md', '<!-- A52.2 Interaction Schema Source not found -->');
-
-            const interactionSchemaContent = `<M3. Interaction Schema>\n${a52_2_Content}\n\n${a52_1_Content}\n</M3. Interaction Schema>`;
-
-            const projectScope = `<M4. current project scope>\n${fullHistoryFile.projectScope || 'No project scope defined.'}\n</M4. current project scope>`;
-
-            const promptParts = [
-                `<prompt.md>`,
-                this.artifactSchemaTemplate,
-                cycleOverview,
-                interactionSchemaContent,
-                projectScope,
-                `<M5. organized artifacts list>\n${a0Content}\n</M5. organized artifacts list>`,
-                cyclesContent,
-                `<M7. Flattened Repo>\n${flattenedContent}\n</M7. Flattened Repo>`,
-                `</prompt.md>`
-            ];
-
+            const promptParts = await this.getPromptParts(currentCycleData);
             const finalPrompt = promptParts.join('\n\n');
 
             await fs.writeFile(promptMdPath, finalPrompt, 'utf-8');
