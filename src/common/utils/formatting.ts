@@ -1,7 +1,28 @@
 // src/common/utils/formatting.ts
-// Updated on: C137 (Add truncateCodeForLogging)
+// Updated on: C170 (Add calculatePromptCost)
 
 const KMBT_SUFFIXES = ['', 'K', 'M', 'B', 'T', 'Q']; // Extend as needed
+
+/**
+ * Calculates the estimated cost for an LLM prompt based on tiered pricing.
+ * @param totalInputTokens The total number of tokens in the input.
+ * @returns The estimated cost in USD.
+ */
+export function calculatePromptCost(totalInputTokens: number): number {
+    if (totalInputTokens <= 0) {
+        return 0;
+    }
+
+    const rateTier1 = 1.25 / 1_000_000; // for prompts <= 200k tokens
+    const rateTier2 = 2.50 / 1_000_000; // for prompts > 200k tokens
+
+    if (totalInputTokens <= 200_000) {
+        return totalInputTokens * rateTier1;
+    } else {
+        return totalInputTokens * rateTier2;
+    }
+}
+
 
 /**
  * Formats a large number with appropriate K/M/B/T suffixes and dynamic decimal places.

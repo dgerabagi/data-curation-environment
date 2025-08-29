@@ -1,4 +1,4 @@
-// Updated on: C167 (Fix TS errors, array access)
+// Updated on: C170 (Add .vscode to exclusion patterns to prevent PCPP history saves from refreshing FTV)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -14,7 +14,7 @@ import { ProblemCountsMap } from "@/common/ipc/channels.type";
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
-const EXCLUSION_PATTERNS = ['.git', 'dce_cache', 'out']; 
+const EXCLUSION_PATTERNS = ['.git', 'dce_cache', 'out', '.vscode']; 
 const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/flattened_repo.md', '/prompt.md', '/package-lock.json'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
@@ -64,7 +64,11 @@ export class FileTreeService {
         
         this.watcher = vscode.workspace.createFileSystemWatcher('**/*');
         const onFileChange = (uri: vscode.Uri) => {
-            if (EXCLUSION_PATTERNS.some(pattern => normalizePath(uri.fsPath).includes(`/${pattern}/`))) return;
+            const normalizedPath = normalizePath(uri.fsPath);
+            if (EXCLUSION_PATTERNS.some(pattern => normalizedPath.includes(`/${pattern}/`) || normalizedPath.includes(`/${pattern}`))) {
+                Services.loggerService.log(`[Watcher] Ignoring change in excluded pattern: ${normalizedPath}`);
+                return;
+            }
             this.triggerFullRefresh();
         };
 
@@ -222,7 +226,7 @@ export class FileTreeService {
             const entries = await vscode.workspace.fs.readDirectory(dirUri);
 
             for (const [name, type] of entries) {
-                if (name === '.git' || name === 'dce_cache' || name === 'out') continue;
+                if (EXCLUSION_PATTERNS.some(p => p === name)) continue;
 
                 const childUri = vscode.Uri.joinPath(dirUri, name);
                 const childPath = normalizePath(childUri.fsPath);

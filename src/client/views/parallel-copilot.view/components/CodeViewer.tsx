@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/CodeViewer.tsx
-// New file in C169
+// Updated on: C170 (Fix TS error)
 import * as React from 'react';
 
 const CodeViewer: React.FC<{ htmlContent: string | undefined | null }> = ({ htmlContent }) => {
@@ -11,7 +11,7 @@ const CodeViewer: React.FC<{ htmlContent: string | undefined | null }> = ({ html
     }
 
     const codeContentMatch = /<pre><code>([\s\S]*)<\/code><\/pre>/s.exec(htmlContent || '');
-    const code = codeContentMatch?. ?? (htmlContent || '');
+    const code = codeContentMatch?.[1] ?? (htmlContent || '');
 
     const lines = code.split('\n');
     if (lines.length > 1 && lines[lines.length - 1] === '') {

@@ -1,4 +1,4 @@
-/* Updated on: C169 (Styles for NumberedTextarea highlighting) */
+/* Updated on: C170 (Add cost estimation styles) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -96,6 +96,10 @@ body {
             color: var(--vscode-descriptionForeground);
             display: flex;
             justify-content: space-between;
+
+            .cost-estimate {
+                font-style: italic;
+            }
         }
     }
 }

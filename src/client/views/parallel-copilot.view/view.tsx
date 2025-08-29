@@ -1,9 +1,9 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C169 (Move Deselect All button)
+// Updated on: C170 (Fix bugs, add features, start refactor)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap, VscTrash, VscSync, VscClose, VscSave, VscBug, VscCheckAll, VscListOrdered, VscListUnordered, VscSymbolNumeric, VscClippy, VscLink, VscDebugDisconnect, VscBook, VscCloudUpload, VscCloudDownload, VscFolder, VscClearAll } from 'react-icons/vsc';
+import { VscWand, VscCheck, VscError, VscFileCode, VscDiff, VscSave, VscBug, VscCheckAll, VscListOrdered, VscListUnordered, VscSymbolNumeric, VscClippy, VscLink, VscDebugDisconnect, VscBook, VscFolder, VscClearAll, VscChevronDown, VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -13,8 +13,10 @@ import ReactMarkdown from 'react-markdown';
 import * as path from 'path-browserify';
 import { BatchWriteFile, ComparisonMetrics } from '@/common/ipc/channels.type';
 import OnboardingView from './OnboardingView';
-import { formatLargeNumber } from '@/common/utils/formatting';
+import { formatLargeNumber, calculatePromptCost } from '@/common/utils/formatting';
 import NumberedTextarea from './components/NumberedTextarea';
+import CycleNavigator from './components/CycleNavigator';
+import CodeViewer from './components/CodeViewer';
 
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -29,34 +31,6 @@ const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     }, [callback, delay]);
 
     return debouncedFunction;
-};
-
-const CodeViewer: React.FC<{ htmlContent: string | undefined | null }> = ({ htmlContent }) => {
-    if (htmlContent === undefined || htmlContent === null) {
-        return <div style={{ padding: '8px' }}>Select a file to view its content.</div>;
-    }
-    if (htmlContent.startsWith('// Error:')) {
-         return <div style={{ padding: '8px', color: 'var(--vscode-errorForeground)' }}>{htmlContent}</div>;
-    }
-
-    const codeContentMatch = /<pre><code>([\s\S]*)<\/code><\/pre>/s.exec(htmlContent || '');
-    const code = codeContentMatch?. ?? (htmlContent || '');
-
-    const lines = code.split('\n');
-    if (lines.length > 1 && lines[lines.length - 1] === '') {
-        lines.pop();
-    }
-
-    return (
-        <div className="code-viewer-wrapper">
-            <div className="file-content-viewer">
-                <div className="line-numbers">
-                    {lines.map((_, i) => <span key={i}>{i + 1}</span>)}
-                </div>
-                <div className="code-content" dangerouslySetInnerHTML={{ __html: htmlContent }} />
-            </div>
-        </div>
-    );
 };
 
 interface TabState {
@@ -136,6 +110,18 @@ const App = () => {
         debouncedSave();
     }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, tabCount, isSortedByTokens, pathOverrides, debouncedSave, cycleContextHeight, ephemeralContextHeight]);
     
+    React.useEffect(() => {
+        const handleVisibilityChange = () => {
+            if (document.visibilityState === 'hidden') {
+                saveCurrentCycleState();
+            }
+        };
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+        return () => {
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+        };
+    }, [saveCurrentCycleState]);
+
     const parseAllTabs = React.useCallback(() => {
         setTabs(prevTabs => {
             const allFilePaths = new Set<string>();
@@ -341,7 +327,13 @@ const App = () => {
     }
     
     const handleDeleteCycle = () => { if(currentCycle !== null) clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle }); };
-    const handleResetHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {});
+    
+    const handleResetHistory = () => {
+        if (window.confirm("Are you sure you want to delete ALL cycle history? This action cannot be undone.")) {
+            clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {});
+        }
+    };
+
     const handleExportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestExportHistory, {});
     const handleImportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestImportHistory, {});
     
@@ -423,6 +415,9 @@ const App = () => {
             clientIpc.sendToServer(ClientToServerChannel.RequestCopyTextToClipboard, { text: file.content });
         }
     };
+
+    const totalContextTokens = cycleContextTokens + ephemeralContextTokens;
+    const estimatedCost = calculatePromptCost(totalContextTokens);
 
     const isReadyForNextCycle = !isNewCycleButtonDisabled;
 
@@ -525,10 +520,26 @@ const App = () => {
             </div>
             <div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} /></div>
         </div>
-        <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''}><div className="cycle-navigator"><span>Cycle:</span><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0}><VscChevronLeft /></button><input type="number" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 0)} className="cycle-input" /><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button><button onClick={handleNewCycle} title="New Cycle" disabled={isNewCycleButtonDisabled}><VscAdd /></button><input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} /><button onClick={handleDeleteCycle} title="Delete Current Cycle"><VscTrash /></button><button onClick={handleResetHistory} title="Reset All History"><VscSync /></button><button onClick={handleExportHistory} title="Save Cycle History..."><VscCloudUpload /></button><button onClick={handleImportHistory} title="Load Cycle History..."><VscCloudDownload /></button></div>
+        <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''}>
+            <CycleNavigator
+                currentCycle={currentCycle}
+                maxCycle={maxCycle}
+                cycleTitle={cycleTitle}
+                isNewCycleButtonDisabled={isNewCycleButtonDisabled}
+                onCycleChange={handleCycleChange}
+                onNewCycle={handleNewCycle}
+                onTitleChange={setCycleTitle}
+                onDeleteCycle={handleDeleteCycle}
+                onResetHistory={handleResetHistory}
+                onExportHistory={handleExportHistory}
+                onImportHistory={handleImportHistory}
+            />
             <div className="context-inputs">
                 <div className="context-input-wrapper">
-                    <div className="context-label"><span>Cycle Context</span><span>Tokens: {cycleContextTokens}</span></div>
+                    <div className="context-label">
+                        <span>Cycle Context</span>
+                        <span className="cost-estimate" title="Estimated prompt input cost using Gemini 2.5 Pro pricing.">({formatLargeNumber(totalContextTokens, 1)} tk) ~ ${estimatedCost.toFixed(4)}</span>
+                    </div>
                     <NumberedTextarea value={cycleContext} onChange={(e) => { setCycleContext(e.target.value); setCycleContextTokens(Math.ceil(e.target.value.length / 4)); }} placeholder="Cycle Context (notes for this cycle)..." onKeyDown={handleContextKeyDown} height={cycleContextHeight} onHeightChange={setCycleContextHeight} id={`cycle-context-${currentCycle}`} />
                 </div>
                 <div className="context-input-wrapper">
