@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx
-// Updated on: C169 (Refactor to include syntax highlighting)
+// Updated on: C172 (No functional changes, header update only)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';

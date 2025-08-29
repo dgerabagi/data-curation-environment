@@ -1,25 +1,25 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-29T21:06:15.244Z
+  Date Generated: 2025-08-29T21:52:47.674Z
   ---
-  Total Files: 264
-  Total Lines: 34432
-  Total Characters: 1950879
-  Approx. Tokens: 487813
+  Total Files: 265
+  Total Lines: 34899
+  Total Characters: 1993076
+  Approx. Tokens: 498361
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (222969 tokens)
 2. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10834 tokens)
-3. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
-4. src\client\views\parallel-copilot.view\view.tsx (8398 tokens)
+3. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md (9340 tokens)
+4. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
 5. src\Artifacts\A11. DCE - Regression Case Studies.md (7032 tokens)
 6. src\Artifacts\A0. DCE Master Artifact List.md (6924 tokens)
-7. src\client\components\tree-view\TreeView.tsx (4429 tokens)
-8. src\client\views\parallel-copilot.view\view.scss (4253 tokens)
-9. src\backend\services\prompt.service.ts (4062 tokens)
-10. src\client\views\context-chooser.view\view.tsx (4035 tokens)
+7. src\client\views\parallel-copilot.view\view.tsx (5934 tokens)
+8. src\client\components\tree-view\TreeView.tsx (4429 tokens)
+9. src\backend\services\prompt.service.ts (4418 tokens)
+10. src\client\views\parallel-copilot.view\view.scss (4411 tokens)
 
 <!-- Full File List -->
 1. .gitignore - Lines: 10 - Chars: 128 - Tokens: 32
@@ -101,7 +101,7 @@
 77. src\Artifacts\A64. DCE - Cycle 159 - Task Tracker.md - Lines: 22 - Chars: 1550 - Tokens: 388
 78. src\Artifacts\A65. DCE - Universal Task Checklist.md - Lines: 87 - Chars: 5422 - Tokens: 1356
 79. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 22 - Chars: 1455 - Tokens: 364
-80. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 47 - Chars: 3537 - Tokens: 885
+80. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 603 - Chars: 37357 - Tokens: 9340
 81. src\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3311 - Tokens: 828
 82. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 69 - Chars: 4277 - Tokens: 1070
 83. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
@@ -134,11 +134,11 @@
 110. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
 111. src\backend\services\file-operation.service.ts - Lines: 338 - Chars: 16082 - Tokens: 4021
 112. src\backend\services\file-tree.service.ts - Lines: 276 - Chars: 13989 - Tokens: 3498
-113. src\backend\services\flattener.service.ts - Lines: 222 - Chars: 11624 - Tokens: 2906
+113. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12580 - Tokens: 3145
 114. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4232 - Tokens: 1058
 115. src\backend\services\history.service.ts - Lines: 241 - Chars: 10133 - Tokens: 2534
 116. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-117. src\backend\services\prompt.service.ts - Lines: 327 - Chars: 16245 - Tokens: 4062
+117. src\backend\services\prompt.service.ts - Lines: 355 - Chars: 17670 - Tokens: 4418
 118. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 119. src\backend\services\services.ts - Lines: 38 - Chars: 1778 - Tokens: 445
 120. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
@@ -158,134 +158,135 @@
 134. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
 135. src\client\views\context-chooser.view\view.tsx - Lines: 175 - Chars: 16140 - Tokens: 4035
 136. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
-137. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1255 - Tokens: 314
-138. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 14 - Chars: 312 - Tokens: 78
-139. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 66 - Chars: 2504 - Tokens: 626
-140. src\client\views\parallel-copilot.view\components\NumberedTextarea.tsx - Lines: 97 - Chars: 3818 - Tokens: 955
-141. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 14 - Chars: 300 - Tokens: 75
-142. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 14 - Chars: 308 - Tokens: 77
-143. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 14 - Chars: 308 - Tokens: 77
+137. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
+138. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 72 - Chars: 2806 - Tokens: 702
+139. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 66 - Chars: 2518 - Tokens: 630
+140. src\client\views\parallel-copilot.view\components\NumberedTextarea.tsx - Lines: 97 - Chars: 3820 - Tokens: 955
+141. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 88 - Chars: 6782 - Tokens: 1696
+142. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 76 - Chars: 3100 - Tokens: 775
+143. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 65 - Chars: 2467 - Tokens: 617
 144. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-145. src\client\views\parallel-copilot.view\on-message.ts - Lines: 88 - Chars: 4037 - Tokens: 1010
-146. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 87 - Chars: 4122 - Tokens: 1031
+145. src\client\views\parallel-copilot.view\on-message.ts - Lines: 96 - Chars: 4422 - Tokens: 1106
+146. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 87 - Chars: 4132 - Tokens: 1033
 147. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 43 - Chars: 1890 - Tokens: 473
 148. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
 149. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
-150. src\client\views\parallel-copilot.view\view.scss - Lines: 748 - Chars: 17010 - Tokens: 4253
-151. src\client\views\parallel-copilot.view\view.tsx - Lines: 564 - Chars: 33589 - Tokens: 8398
-152. src\common\ipc\channels.enum.ts - Lines: 79 - Chars: 4086 - Tokens: 1022
-153. src\common\ipc\channels.type.ts - Lines: 80 - Chars: 5927 - Tokens: 1482
-154. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
-155. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-156. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-157. src\common\types\file-node.ts - Lines: 17 - Chars: 517 - Tokens: 130
-158. src\common\types\pcpp.types.ts - Lines: 50 - Chars: 1240 - Tokens: 310
-159. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
-160. src\common\utils\formatting.ts - Lines: 120 - Chars: 3987 - Tokens: 997
-161. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
-162. src\common\utils\view-html.ts - Lines: 29 - Chars: 1117 - Tokens: 280
-163. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
-164. src\extension.ts - Lines: 121 - Chars: 5078 - Tokens: 1270
-165. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
-166. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
-167. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
-168. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
-169. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
-170. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
-171. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
-172. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
-173. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
-174. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
-175. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
-176. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
-177. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
-178. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
-179. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
-180. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
-181. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
-182. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
-183. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
-184. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
-185. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
-186. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
-187. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
-188. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
-189. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
-190. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
-191. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
-192. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
-193. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
-194. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
-195. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
-196. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
-197. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
-198. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
-199. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
-200. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
-201. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
-202. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
-203. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
-204. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
-205. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
-206. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
-207. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
-208. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
-209. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
-210. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
-211. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
-212. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
-213. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
-214. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
-215. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
-216. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
-217. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
-218. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
-219. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
-220. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
-221. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
-222. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
-223. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
-224. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
-225. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
-226. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
-227. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
-228. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
-229. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
-230. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
-231. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
-232. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-233. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
-234. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
-235. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
-236. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-237. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
-238. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
-239. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
-240. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
-241. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
-242. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
-243. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
-244. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
-245. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
-246. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
-247. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
-248. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-249. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
-250. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
-251. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
-252. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
-253. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
-254. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
-255. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
-256. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
-257. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
-258. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
-259. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
-260. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
-261. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
-262. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
-263. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
-264. webpack.config.js - Lines: 104 - Chars: 2873 - Tokens: 719
+150. src\client\views\parallel-copilot.view\view.scss - Lines: 774 - Chars: 17643 - Tokens: 4411
+151. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
+152. src\client\views\parallel-copilot.view\view.tsx - Lines: 133 - Chars: 23735 - Tokens: 5934
+153. src\common\ipc\channels.enum.ts - Lines: 83 - Chars: 4360 - Tokens: 1090
+154. src\common\ipc\channels.type.ts - Lines: 82 - Chars: 6176 - Tokens: 1544
+155. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
+156. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+157. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
+158. src\common\types\file-node.ts - Lines: 17 - Chars: 517 - Tokens: 130
+159. src\common\types\pcpp.types.ts - Lines: 50 - Chars: 1240 - Tokens: 310
+160. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
+161. src\common\utils\formatting.ts - Lines: 120 - Chars: 3987 - Tokens: 997
+162. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
+163. src\common\utils\view-html.ts - Lines: 29 - Chars: 1117 - Tokens: 280
+164. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
+165. src\extension.ts - Lines: 121 - Chars: 5078 - Tokens: 1270
+166. The-Creator-AI-main\.eslintrc.json - Lines: 30 - Chars: 662 - Tokens: 166
+167. The-Creator-AI-main\.gitignore - Lines: 8 - Chars: 75 - Tokens: 19
+168. The-Creator-AI-main\.vscode-test.mjs - Lines: 6 - Chars: 117 - Tokens: 30
+169. The-Creator-AI-main\.vscodeignore - Lines: 15 - Chars: 192 - Tokens: 48
+170. The-Creator-AI-main\CHANGELOG.md - Lines: 9 - Chars: 241 - Tokens: 61
+171. The-Creator-AI-main\LICENSE - Lines: 22 - Chars: 1069 - Tokens: 268
+172. The-Creator-AI-main\Notes.md - Lines: 2 - Chars: 67 - Tokens: 17
+173. The-Creator-AI-main\package.json - Lines: 181 - Chars: 5082 - Tokens: 1271
+174. The-Creator-AI-main\postcss.config.js - Lines: 7 - Chars: 82 - Tokens: 21
+175. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
+176. The-Creator-AI-main\public\reset.css - Lines: 30 - Chars: 233 - Tokens: 59
+177. The-Creator-AI-main\public\spiral.svg - Lines: 17 - Chars: 579 - Tokens: 145
+178. The-Creator-AI-main\public\vscode.css - Lines: 91 - Chars: 1977 - Tokens: 495
+179. The-Creator-AI-main\README.md - Lines: 44 - Chars: 1614 - Tokens: 404
+180. The-Creator-AI-main\src\backend\commands\commands.ts - Lines: 138 - Chars: 4691 - Tokens: 1173
+181. The-Creator-AI-main\src\backend\commands\register-commands.ts - Lines: 11 - Chars: 382 - Tokens: 96
+182. The-Creator-AI-main\src\backend\repositories\chat.respository.ts - Lines: 142 - Chars: 3906 - Tokens: 977
+183. The-Creator-AI-main\src\backend\repositories\persistent-store.repository.ts - Lines: 28 - Chars: 897 - Tokens: 225
+184. The-Creator-AI-main\src\backend\repositories\settings.repository.ts - Lines: 62 - Chars: 1694 - Tokens: 424
+185. The-Creator-AI-main\src\backend\services\code.service.ts - Lines: 344 - Chars: 10472 - Tokens: 2618
+186. The-Creator-AI-main\src\backend\services\fs.service.ts - Lines: 323 - Chars: 9979 - Tokens: 2495
+187. The-Creator-AI-main\src\backend\services\git.service.ts - Lines: 41 - Chars: 1411 - Tokens: 353
+188. The-Creator-AI-main\src\backend\services\llm.service.ts - Lines: 264 - Chars: 8622 - Tokens: 2156
+189. The-Creator-AI-main\src\backend\services\logger.service.ts - Lines: 55 - Chars: 1371 - Tokens: 343
+190. The-Creator-AI-main\src\backend\services\message.service.ts - Lines: 58 - Chars: 1661 - Tokens: 416
+191. The-Creator-AI-main\src\backend\services\plan-exim.service.ts - Lines: 114 - Chars: 4560 - Tokens: 1140
+192. The-Creator-AI-main\src\backend\services\services.ts - Lines: 67 - Chars: 1964 - Tokens: 491
+193. The-Creator-AI-main\src\backend\services\task-queue.service.ts - Lines: 128 - Chars: 3921 - Tokens: 981
+194. The-Creator-AI-main\src\backend\types\llm-service.enum.ts - Lines: 6 - Chars: 94 - Tokens: 24
+195. The-Creator-AI-main\src\backend\types\storage-keys.enum.ts - Lines: 6 - Chars: 202 - Tokens: 51
+196. The-Creator-AI-main\src\backend\utils\handleActiveTabChange.ts - Lines: 26 - Chars: 775 - Tokens: 194
+197. The-Creator-AI-main\src\backend\utils\mergeOpenEditorsWithSelectedFiles.ts - Lines: 33 - Chars: 952 - Tokens: 238
+198. The-Creator-AI-main\src\backend\utils\remoteSetChangePlanViewState.ts - Lines: 26 - Chars: 989 - Tokens: 248
+199. The-Creator-AI-main\src\client\components\AutoResizingTextarea.tsx - Lines: 49 - Chars: 2000 - Tokens: 500
+200. The-Creator-AI-main\src\client\components\Checkbox.tsx - Lines: 26 - Chars: 815 - Tokens: 204
+201. The-Creator-AI-main\src\client\components\ErrorBoundary.tsx - Lines: 44 - Chars: 1220 - Tokens: 305
+202. The-Creator-AI-main\src\client\components\file-tree\FileTree.scss - Lines: 9 - Chars: 157 - Tokens: 40
+203. The-Creator-AI-main\src\client\components\file-tree\FileTree.tsx - Lines: 137 - Chars: 4398 - Tokens: 1100
+204. The-Creator-AI-main\src\client\components\file-tree\FileTree.utils.ts - Lines: 68 - Chars: 2214 - Tokens: 554
+205. The-Creator-AI-main\src\client\components\Modal.tsx - Lines: 91 - Chars: 2649 - Tokens: 663
+206. The-Creator-AI-main\src\client\components\ProgressSteps.tsx - Lines: 59 - Chars: 1648 - Tokens: 412
+207. The-Creator-AI-main\src\client\components\tree-view\TreeView.tsx - Lines: 84 - Chars: 2738 - Tokens: 685
+208. The-Creator-AI-main\src\client\components\tree-view\TreeView.utils.ts - Lines: 14 - Chars: 316 - Tokens: 79
+209. The-Creator-AI-main\src\client\modules\api-keys-management.module\ApiKeysManagement.tsx - Lines: 150 - Chars: 6318 - Tokens: 1580
+210. The-Creator-AI-main\src\client\modules\commit.module\Commit.tsx - Lines: 63 - Chars: 3218 - Tokens: 805
+211. The-Creator-AI-main\src\client\modules\context.module\Context.tsx - Lines: 87 - Chars: 4052 - Tokens: 1013
+212. The-Creator-AI-main\src\client\modules\plan.module\components\file-card.tsx - Lines: 93 - Chars: 4112 - Tokens: 1028
+213. The-Creator-AI-main\src\client\modules\plan.module\formatted-plan-preview.tsx - Lines: 172 - Chars: 6480 - Tokens: 1620
+214. The-Creator-AI-main\src\client\modules\plan.module\plan-input-box.tsx - Lines: 139 - Chars: 6410 - Tokens: 1603
+215. The-Creator-AI-main\src\client\modules\plan.module\Plan.tsx - Lines: 55 - Chars: 1749 - Tokens: 438
+216. The-Creator-AI-main\src\client\store\store.ts - Lines: 20 - Chars: 479 - Tokens: 120
+217. The-Creator-AI-main\src\client\store\useStore.ts - Lines: 26 - Chars: 627 - Tokens: 157
+218. The-Creator-AI-main\src\client\views\change-plan.view\index.ts - Lines: 9 - Chars: 221 - Tokens: 56
+219. The-Creator-AI-main\src\client\views\change-plan.view\logic\commitStagedChanges.ts - Lines: 11 - Chars: 385 - Tokens: 97
+220. The-Creator-AI-main\src\client\views\change-plan.view\logic\getSelectedFiles.ts - Lines: 37 - Chars: 1294 - Tokens: 324
+221. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleCommitMessageSuggestions.ts - Lines: 15 - Chars: 580 - Tokens: 145
+222. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleFileClick.ts - Lines: 24 - Chars: 665 - Tokens: 167
+223. The-Creator-AI-main\src\client\views\change-plan.view\logic\handleSubmitPlanRequest.ts - Lines: 79 - Chars: 2463 - Tokens: 616
+224. The-Creator-AI-main\src\client\views\change-plan.view\logic\requestCommitMessageSuggestions.ts - Lines: 15 - Chars: 511 - Tokens: 128
+225. The-Creator-AI-main\src\client\views\change-plan.view\logic\setupChannelHandlers.ts - Lines: 102 - Chars: 3069 - Tokens: 768
+226. The-Creator-AI-main\src\client\views\change-plan.view\logic\updateOrCreateChangePlan.ts - Lines: 51 - Chars: 1633 - Tokens: 409
+227. The-Creator-AI-main\src\client\views\change-plan.view\on-mesage.ts - Lines: 271 - Chars: 9696 - Tokens: 2424
+228. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.initial-state.ts - Lines: 17 - Chars: 453 - Tokens: 114
+229. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.logic.ts - Lines: 54 - Chars: 1617 - Tokens: 405
+230. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.state-type.ts - Lines: 34 - Chars: 843 - Tokens: 211
+231. The-Creator-AI-main\src\client\views\change-plan.view\store\change-plan-view.store.ts - Lines: 18 - Chars: 672 - Tokens: 168
+232. The-Creator-AI-main\src\client\views\change-plan.view\view.constants.ts - Lines: 6 - Chars: 134 - Tokens: 34
+233. The-Creator-AI-main\src\client\views\change-plan.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+234. The-Creator-AI-main\src\client\views\change-plan.view\view.tsx - Lines: 91 - Chars: 2823 - Tokens: 706
+235. The-Creator-AI-main\src\client\views\chat.view\index.ts - Lines: 9 - Chars: 208 - Tokens: 52
+236. The-Creator-AI-main\src\client\views\chat.view\on-mesage.ts - Lines: 50 - Chars: 1545 - Tokens: 387
+237. The-Creator-AI-main\src\client\views\chat.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+238. The-Creator-AI-main\src\client\views\chat.view\view.tsx - Lines: 71 - Chars: 2614 - Tokens: 654
+239. The-Creator-AI-main\src\client\views\file-explorer.view\index.ts - Lines: 9 - Chars: 225 - Tokens: 57
+240. The-Creator-AI-main\src\client\views\file-explorer.view\on-mesage.ts - Lines: 49 - Chars: 1773 - Tokens: 444
+241. The-Creator-AI-main\src\client\views\file-explorer.view\view.scss - Lines: 10 - Chars: 160 - Tokens: 40
+242. The-Creator-AI-main\src\client\views\file-explorer.view\view.tsx - Lines: 62 - Chars: 2265 - Tokens: 567
+243. The-Creator-AI-main\src\client\views\index.ts - Lines: 54 - Chars: 1714 - Tokens: 429
+244. The-Creator-AI-main\src\common\constants\agents.constants.ts - Lines: 837 - Chars: 36635 - Tokens: 9159
+245. The-Creator-AI-main\src\common\firebase.ts - Lines: 22 - Chars: 874 - Tokens: 219
+246. The-Creator-AI-main\src\common\ipc\channels.enum.ts - Lines: 37 - Chars: 1831 - Tokens: 458
+247. The-Creator-AI-main\src\common\ipc\channels.type.ts - Lines: 125 - Chars: 3933 - Tokens: 984
+248. The-Creator-AI-main\src\common\ipc\client-ipc.ts - Lines: 42 - Chars: 1338 - Tokens: 335
+249. The-Creator-AI-main\src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+250. The-Creator-AI-main\src\common\ipc\server-ipc.ts - Lines: 44 - Chars: 1522 - Tokens: 381
+251. The-Creator-AI-main\src\common\types\file-node.ts - Lines: 6 - Chars: 96 - Tokens: 24
+252. The-Creator-AI-main\src\common\types\vscode-webview.d.ts - Lines: 49 - Chars: 1607 - Tokens: 402
+253. The-Creator-AI-main\src\common\utils\firebaseLogger.ts - Lines: 43 - Chars: 1108 - Tokens: 277
+254. The-Creator-AI-main\src\common\utils\key-path.ts - Lines: 43 - Chars: 1036 - Tokens: 259
+255. The-Creator-AI-main\src\common\utils\parse-json.ts - Lines: 20 - Chars: 515 - Tokens: 129
+256. The-Creator-AI-main\src\common\utils\view-html.ts - Lines: 35 - Chars: 1271 - Tokens: 318
+257. The-Creator-AI-main\src\common\view-types.ts - Lines: 8 - Chars: 184 - Tokens: 46
+258. The-Creator-AI-main\src\extension.ts - Lines: 24 - Chars: 623 - Tokens: 156
+259. The-Creator-AI-main\src\test\extension.test.ts - Lines: 16 - Chars: 459 - Tokens: 115
+260. The-Creator-AI-main\tailwind.config.js - Lines: 102 - Chars: 6814 - Tokens: 1704
+261. The-Creator-AI-main\tsconfig.json - Lines: 31 - Chars: 814 - Tokens: 204
+262. The-Creator-AI-main\vsc-extension-quickstart.md - Lines: 49 - Chars: 2893 - Tokens: 724
+263. The-Creator-AI-main\webpack.config.js - Lines: 98 - Chars: 2795 - Tokens: 699
+264. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
+265. webpack.config.js - Lines: 104 - Chars: 2873 - Tokens: 719
 
 <file path=".gitignore">
 node_modules
@@ -19759,6 +19760,562 @@ The goal is to break down `view.tsx` into a series of smaller, single-responsibi
 -   **Improved Maintainability:** Bugs and feature requests can be addressed in isolated components, reducing the risk of unintended side effects.
 -   **Reduced Token Count:** Splitting the large file into many smaller ones makes each file more manageable for both human and AI developers.
 -   **Better Performance:** Memoization (`React.memo`) can be applied more effectively to smaller components, preventing unnecessary re-renders.
+
+<Original view.tsx prior to refactoring>
+<src/client/views/parallel-copilot.view/view.tsx>
+// src/client/views/parallel-copilot.view/view.tsx
+// Updated on: C168 (Fix TS error for ComparisonMetrics import)
+import * as React from 'react';
+import * as ReactDOM from 'react-dom/client';
+import './view.scss';
+import { VscChevronLeft, VscChevronRight, VscWand, VscChevronDown, VscCheck, VscError, VscAdd, VscFileCode, VscDiff, VscArrowSwap, VscTrash, VscSync, VscClose, VscSave, VscBug, VscCheckAll, VscListOrdered, VscListUnordered, VscSymbolNumeric, VscClippy, VscLink, VscDebugDisconnect, VscBook, VscCloudUpload, VscCloudDownload, VscFolder } from 'react-icons/vsc';
+import { logger } from '@/client/utils/logger';
+import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
+import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
+import { ParsedResponse, PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
+import { parseResponse } from '@/client/utils/response-parser';
+import ReactMarkdown from 'react-markdown';
+import * as path from 'path-browserify';
+import { BatchWriteFile, ComparisonMetrics } from '@/common/ipc/channels.type';
+import OnboardingView from './OnboardingView';
+import { formatLargeNumber } from '@/common/utils/formatting';
+import NumberedTextarea from './components/NumberedTextarea';
+
+const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
+    const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
+
+    const debouncedFunction = React.useCallback((...args: any[]) => {
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+        }
+        timeoutRef.current = setTimeout(() => {
+            callback(...args);
+        }, delay);
+    }, [callback, delay]);
+
+    return debouncedFunction;
+};
+
+const CodeViewer: React.FC<{ htmlContent: string | undefined | null }> = ({ htmlContent }) => {
+    if (htmlContent === undefined || htmlContent === null) {
+        return <div style={{ padding: '8px' }}>Select a file to view its content.</div>;
+    }
+    if (htmlContent.startsWith('// Error:')) {
+         return <div style={{ padding: '8px', color: 'var(--vscode-errorForeground)' }}>{htmlContent}</div>;
+    }
+
+    const codeContentMatch = /<pre><code>([\s\S]*)<\/code><\/pre>/s.exec(htmlContent || '');
+    const code = codeContentMatch?.[1] ?? (htmlContent || '');
+
+    const lines = code.split('\n');
+    if (lines.length > 1 && lines[lines.length - 1] === '') {
+        lines.pop();
+    }
+
+    return (
+        <div className="code-viewer-wrapper">
+            <div className="file-content-viewer">
+                <div className="line-numbers">
+                    {lines.map((_, i) => <span key={i}>{i + 1}</span>)}
+                </div>
+                <div className="code-content" dangerouslySetInnerHTML={{ __html: htmlContent }} />
+            </div>
+        </div>
+    );
+};
+
+interface TabState {
+    rawContent: string;
+    parsedContent: ParsedResponse | null;
+}
+
+const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; collapsedContent?: React.ReactNode; className?: string; }> = ({ title, children, isCollapsed, onToggle, collapsedContent, className }) => (
+    <div className="collapsible-section">
+        <div className={`collapsible-header ${className || ''}`} onClick={onToggle}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <VscChevronDown className={`chevron ${isCollapsed ? 'collapsed' : ''}`} />
+                <span>{title}</span>
+            </div>
+            {isCollapsed && collapsedContent}
+        </div>
+        {!isCollapsed && <div className="collapsible-content">{children}</div>}
+    </div>
+);
+
+
+const App = () => {
+    const [activeTab, setActiveTab] = React.useState(1);
+    const [tabCount, setTabCount] = React.useState(4);
+    const [currentCycle, setCurrentCycle] = React.useState<number | null>(null);
+    const [projectScope, setProjectScope] = React.useState<string | undefined>('');
+    const [maxCycle, setMaxCycle] = React.useState(1);
+    const [cycleTitle, setCycleTitle] = React.useState('');
+    const [cycleContext, setCycleContext] = React.useState('');
+    const [ephemeralContext, setEphemeralContext] = React.useState('');
+    const [tabs, setTabs] = React.useState<{ [key: string]: TabState }>({});
+    const [highlightedCodeBlocks, setHighlightedCodeBlocks] = React.useState<Map<string, string>>(new Map());
+    const [fileExistenceMap, setFileExistenceMap] = React.useState<Map<string, boolean>>(new Map());
+    const [isParsedMode, setIsParsedMode] = React.useState(false);
+    const [selectedFilePath, setSelectedFilePath] = React.useState<string | null>(null);
+    const [isCycleCollapsed, setIsCycleCollapsed] = React.useState(false);
+    const [leftPaneWidth, setLeftPaneWidth] = React.useState(33);
+    const [selectedFilesForReplacement, setSelectedFilesForReplacement] = React.useState<Set<string>>(new Set());
+    const [selectedResponseId, setSelectedResponseId] = React.useState<string | null>(null);
+    const [comparisonMetrics, setComparisonMetrics] = React.useState<Map<string, ComparisonMetrics>>(new Map());
+    const [isSortedByTokens, setIsSortedByTokens] = React.useState(false);
+    const [pathOverrides, setPathOverrides] = React.useState<Map<string, string>>(new Map());
+    const [tempOverridePath, setTempOverridePath] = React.useState('');
+    const [cycleContextHeight, setCycleContextHeight] = React.useState(100);
+    const [ephemeralContextHeight, setEphemeralContextHeight] = React.useState(100);
+    const [cycleContextTokens, setCycleContextTokens] = React.useState(0);
+    const [ephemeralContextTokens, setEphemeralContextTokens] = React.useState(0);
+
+    const [isAssociatedFilesCollapsed, setAssociatedFilesCollapsed] = React.useState(false);
+    const [isThoughtsCollapsed, setThoughtsCollapsed] = React.useState(false);
+    const [isActionCollapsed, setActionCollapsed] = React.useState(false);
+
+    const clientIpc = ClientPostMessageManager.getInstance();
+
+    const saveCurrentCycleState = React.useCallback(() => {
+        if (currentCycle === null) return;
+        const responses: { [key: string]: PcppResponse } = {};
+        for (let i = 1; i <= tabCount; i++) {
+            responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' };
+        }
+        
+        let cycleData: PcppCycle;
+        if (currentCycle === 0) {
+            cycleData = { cycleId: 0, cycleContext, ephemeralContext: '', responses: {}, timestamp: new Date().toISOString(), title: 'Project Setup' };
+        } else {
+            cycleData = {
+                cycleId: currentCycle, timestamp: new Date().toISOString(), title: cycleTitle, cycleContext, ephemeralContext, responses, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement: Array.from(selectedFilesForReplacement), tabCount, isSortedByTokens, pathOverrides: Object.fromEntries(pathOverrides), cycleContextHeight, ephemeralContextHeight,
+            };
+        }
+        clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
+    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, clientIpc, cycleContextHeight, ephemeralContextHeight]);
+
+    const debouncedSave = useDebounce(saveCurrentCycleState, 1000);
+
+    React.useEffect(() => {
+        debouncedSave();
+    }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, tabCount, isSortedByTokens, pathOverrides, debouncedSave, cycleContextHeight, ephemeralContextHeight]);
+    
+    const parseAllTabs = React.useCallback(() => {
+        setTabs(prevTabs => {
+            const allFilePaths = new Set<string>();
+            const updatedTabs = { ...prevTabs };
+            let needsUpdate = false;
+    
+            Object.values(updatedTabs).forEach(tabState => {
+                if (tabState.rawContent && !tabState.parsedContent) {
+                    needsUpdate = true;
+                    const parsed = parseResponse(tabState.rawContent);
+                    tabState.parsedContent = parsed;
+                    parsed.filesUpdated.forEach(file => allFilePaths.add(file));
+                    parsed.files.forEach(file => {
+                        const lang = path.extname(file.path).substring(1) || 'plaintext';
+                        const id = `${file.path}::${file.content}`;
+                        clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
+                    });
+                } else if (tabState.parsedContent) {
+                    tabState.parsedContent.filesUpdated.forEach(file => allFilePaths.add(file));
+                }
+            });
+    
+            if (allFilePaths.size > 0) {
+                clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) });
+            }
+    
+            return needsUpdate ? updatedTabs : prevTabs;
+        });
+    }, [clientIpc]);
+    
+    React.useEffect(() => {
+        const loadCycleData = (cycleData: PcppCycle, scope?: string) => {
+            setCurrentCycle(cycleData.cycleId);
+            setProjectScope(scope);
+            setCycleTitle(cycleData.title);
+            setCycleContext(cycleData.cycleContext);
+            setEphemeralContext(cycleData.ephemeralContext);
+            setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4));
+            setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4));
+            const newTabs: { [key: string]: TabState } = {};
+            Object.entries(cycleData.responses).forEach(([tabId, response]) => {
+                newTabs[tabId] = { rawContent: response.content, parsedContent: null };
+            });
+            setTabs(newTabs);
+            setTabCount(cycleData.tabCount || 4);
+            setIsParsedMode(cycleData.isParsedMode || false);
+            setLeftPaneWidth(cycleData.leftPaneWidth || 33);
+            setSelectedResponseId(cycleData.selectedResponseId || null);
+            setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || []));
+            setIsSortedByTokens(cycleData.isSortedByTokens || false);
+            setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {})));
+            setCycleContextHeight(cycleData.cycleContextHeight || 100);
+            setEphemeralContextHeight(cycleData.ephemeralContextHeight || 100);
+        };
+
+        clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); });
+        clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); });
+        clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml)));
+        clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap))));
+        clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); });
+        clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { logger.log(`Received FilesWritten event for: ${paths.join(', ')}`); setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); });
+        clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, ({ filePath, originalTokens, modifiedTokens, similarity }) => {
+            setComparisonMetrics(prev => new Map(prev).set(filePath, { originalTokens, modifiedTokens, similarity }));
+        });
+        
+        clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});
+    }, [clientIpc]);
+
+    React.useEffect(() => { if (isParsedMode) parseAllTabs(); }, [isParsedMode, tabs, parseAllTabs]);
+    
+    React.useEffect(() => {
+        if (!selectedFilePath) return;
+    
+        const currentTabData = tabs[activeTab.toString()];
+        if (currentTabData?.parsedContent) {
+            const fileExistsInTab = currentTabData.parsedContent.files.some(f => f.path === selectedFilePath);
+            if (!fileExistsInTab) {
+                logger.log(`[State Cleanup] Selected file '${selectedFilePath}' not found in new tab '${activeTab}'. Clearing selection.`);
+                setSelectedFilePath(null);
+            }
+        }
+    }, [activeTab, tabs, selectedFilePath]);
+
+    const handleCycleChange = (e: React.MouseEvent | null, newCycle: number) => { 
+        e?.stopPropagation(); 
+        if (newCycle >= 0 && newCycle <= maxCycle) { 
+            if (currentCycle !== 0) saveCurrentCycleState(); 
+            setSelectedFilesForReplacement(new Set()); 
+            setCurrentCycle(newCycle); 
+            clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); 
+        } 
+    };
+
+    const handleSelectForViewing = (filePath: string) => {
+        const newPath = selectedFilePath === filePath ? null : filePath;
+        setSelectedFilePath(newPath);
+        if (newPath) {
+            const file = activeTabData?.parsedContent?.files.find(f => f.path === newPath);
+            const pathForComparison = pathOverrides.get(newPath) || newPath;
+            if (file) {
+                clientIpc.sendToServer(ClientToServerChannel.RequestFileComparison, { filePath: pathForComparison, modifiedContent: file.content });
+            }
+        }
+    };
+
+    const handleAcceptSelectedFiles = () => {
+        if (selectedFilesForReplacement.size === 0) return;
+        const filesToWrite: BatchWriteFile[] = [];
+        selectedFilesForReplacement.forEach(compositeKey => {
+            const [responseId, filePath] = compositeKey.split(':::');
+            const responseData = tabs[responseId];
+            if (responseData?.parsedContent) {
+                const file = responseData.parsedContent.files.find(f => f.path === filePath);
+                if (file) {
+                    const finalPath = pathOverrides.get(file.path) || file.path;
+                    filesToWrite.push({ path: finalPath, content: file.content });
+                }
+            }
+        });
+        if (filesToWrite.length > 0) {
+            clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite });
+        }
+    };
+    
+    const handleLinkFile = (originalPath: string) => {
+        if (tempOverridePath.trim()) {
+            setPathOverrides(prev => new Map(prev).set(originalPath, tempOverridePath.trim()));
+            setFileExistenceMap(prev => new Map(prev).set(originalPath, true));
+            setTempOverridePath('');
+            handleSelectForViewing(originalPath);
+        }
+    };
+
+    const handleUnlinkFile = (originalPath: string) => {
+        setPathOverrides(prev => {
+            const newMap = new Map(prev);
+            newMap.delete(originalPath);
+            return newMap;
+        });
+        setFileExistenceMap(prev => new Map(prev).set(originalPath, false));
+    };
+
+    const handleContextKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'z') {
+            return;
+        }
+        if ((e.ctrlKey || e.metaKey) && (e.key === 'y' || (e.shiftKey && e.key === 'Z'))) {
+            return;
+        }
+    };
+
+    const activeTabData = tabs[activeTab.toString()];
+
+    const sortedTabIds = React.useMemo(() => {
+        const tabIds = [...Array(tabCount)].map((_, i) => i + 1);
+        if (isParsedMode && isSortedByTokens) {
+            tabIds.sort((a, b) => {
+                const tokensA = tabs[a.toString()]?.parsedContent?.totalTokens ?? -1;
+                const tokensB = tabs[b.toString()]?.parsedContent?.totalTokens ?? -1;
+                return tokensB - tokensA;
+            });
+        }
+        return tabIds;
+    }, [tabs, isParsedMode, isSortedByTokens, tabCount]);
+
+    const viewableContent = React.useMemo(() => {
+        if (!selectedFilePath || !activeTabData?.parsedContent) return undefined;
+        const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath);
+        if (!file) return '<div>Error: File data not found in parsed response.</div>';
+        const id = `${file.path}::${file.content}`;
+        return highlightedCodeBlocks.get(id);
+    }, [selectedFilePath, activeTabData?.parsedContent, highlightedCodeBlocks]);
+
+    const handleRawContentChange = (newContent: string, tabIndex: number) => setTabs(prev => ({ ...prev, [tabIndex.toString()]: { rawContent: newContent, parsedContent: null }}));
+    const handleGlobalParseToggle = () => {
+        const newParseMode = !isParsedMode;
+        setIsParsedMode(newParseMode);
+        setSelectedFilePath(null);
+        if (!newParseMode) setTabs(prev => { const newTabs = {...prev}; Object.keys(newTabs).forEach(key => { newTabs[key].parsedContent = null; }); return newTabs; });
+    };
+
+    const handleNewCycle = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        saveCurrentCycleState();
+    
+        const newCycleId = maxCycle + 1;
+        setMaxCycle(newCycleId);
+        setCurrentCycle(newCycleId);
+        
+        setCycleTitle('New Cycle');
+        setCycleContext('');
+        setEphemeralContext('');
+        setTabs({});
+        setIsParsedMode(false);
+        setSelectedResponseId(null);
+        setSelectedFilesForReplacement(new Set());
+    };
+
+    const handleGeneratePrompt = () => {
+        if (currentCycle === null) return;
+        clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle });
+    }
+    
+    const handleDeleteCycle = () => { if(currentCycle !== null) clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle }); };
+    const handleResetHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {});
+    const handleExportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestExportHistory, {});
+    const handleImportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestImportHistory, {});
+    
+    const handleFileSelectionToggle = (filePath: string) => {
+        const currentTabId = activeTab.toString();
+        const compositeKeyForCurrent = `${currentTabId}:::${filePath}`;
+    
+        setSelectedFilesForReplacement(prev => {
+            const newSet = new Set(prev);
+            
+            let existingKey: string | undefined;
+            for (const key of newSet) {
+                if (key.endsWith(`:::${filePath}`)) {
+                    existingKey = key;
+                    break;
+                }
+            }
+    
+            if (existingKey) {
+                if (existingKey === compositeKeyForCurrent) {
+                    newSet.delete(existingKey);
+                } else {
+                    newSet.delete(existingKey);
+                    newSet.add(compositeKeyForCurrent);
+                }
+            } else {
+                newSet.add(compositeKeyForCurrent);
+            }
+            
+            return newSet;
+        });
+    };
+    
+    const handleSelectAllFilesToggle = () => {
+        if (!activeTabData?.parsedContent) return;
+        
+        const allFilesForTab = activeTabData.parsedContent.filesUpdated.map(fp => `${activeTab}:::${fp}`);
+        const isAllSelected = allFilesForTab.every(key => selectedFilesForReplacement.has(key));
+
+        setSelectedFilesForReplacement(prev => {
+            const newSet = new Set(prev);
+            if (isAllSelected) {
+                allFilesForTab.forEach(key => newSet.delete(key));
+            } else {
+                allFilesForTab.forEach(key => newSet.add(key));
+            }
+            return newSet;
+        });
+    };
+
+    const isAllFilesSelected = React.useMemo(() => {
+        if (!activeTabData?.parsedContent) return false;
+        const allFiles = activeTabData.parsedContent.filesUpdated;
+        if (allFiles.length === 0) return false;
+        return allFiles.every(file => selectedFilesForReplacement.has(`${activeTab}:::${file}`));
+    }, [selectedFilesForReplacement, activeTabData, activeTab]);
+
+    const isNewCycleButtonDisabled = React.useMemo(() => {
+        const hasTitle = cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== '';
+        const hasContext = cycleContext.trim() !== '';
+        const hasSelectedResponse = selectedResponseId !== null;
+        return !hasTitle || !hasContext || !hasSelectedResponse;
+    }, [cycleTitle, cycleContext, selectedResponseId]);
+    
+    const handleLogState = () => {
+        if (currentCycle === null) return;
+        const responses: { [key: string]: PcppResponse } = {};
+        for (let i = 1; i <= tabCount; i++) {
+            responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' };
+        }
+        const currentState: PcppCycle = { cycleId: currentCycle, timestamp: new Date().toISOString(), title: cycleTitle, cycleContext, ephemeralContext, responses, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement: Array.from(selectedFilesForReplacement), tabCount, isSortedByTokens, cycleContextHeight, ephemeralContextHeight };
+        clientIpc.sendToServer(ClientToServerChannel.RequestLogState, { currentState });
+    };
+
+    const handleCopyContent = () => {
+        if (!selectedFilePath || !activeTabData?.parsedContent) return;
+        const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath);
+        if (file) {
+            clientIpc.sendToServer(ClientToServerChannel.RequestCopyTextToClipboard, { text: file.content });
+        }
+    };
+
+    const isReadyForNextCycle = !isNewCycleButtonDisabled;
+
+    if (currentCycle === null) {
+        return <div>Loading...</div>;
+    }
+    
+    if (currentCycle === -1) {
+        return (
+            <div className="onboarding-container">
+                <h1>No Folder Opened</h1>
+                <p>You have not yet opened a folder for the Data Curation Environment to manage.</p>
+                <button 
+                    className="dce-button-primary" 
+                    onClick={() => clientIpc.sendToServer(ClientToServerChannel.RequestOpenFolder, {})}
+                >
+                    <VscFolder /> Open Folder
+                </button>
+            </div>
+        );
+    }
+
+    if (currentCycle === 0) {
+        return <OnboardingView initialProjectScope={projectScope} onNavigateToCycle={(id) => handleCycleChange(null, id)} latestCycleId={maxCycle} onScopeChange={setCycleContext} />;
+    }
+
+    const collapsedNavigator = <div className="collapsed-navigator"><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0}><VscChevronLeft /></button><span className="cycle-display">C{currentCycle}</span><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button></div>;
+    const currentComparisonMetrics = selectedFilePath ? comparisonMetrics.get(pathOverrides.get(selectedFilePath) || selectedFilePath) : null;
+    
+    const renderContent = () => {
+        if (!isParsedMode || !activeTabData?.parsedContent) {
+            return <textarea className="response-textarea" placeholder={`Paste AI response for tab ${activeTab} here...`} value={activeTabData?.rawContent || ''} onChange={(e) => handleRawContentChange(e.target.value, activeTab)} onKeyDown={handleContextKeyDown} />;
+        }
+        return <div className="parsed-view-grid">
+            <div className="parsed-view-left" style={{ flexBasis: `${leftPaneWidth}%` }}>
+                <CollapsibleSection title="Associated Files" isCollapsed={isAssociatedFilesCollapsed} onToggle={() => setAssociatedFilesCollapsed(p => !p)}>
+                    <ul className="associated-files-list">{activeTabData.parsedContent.filesUpdated.map(file => {
+                        const fileExists = fileExistenceMap.get(file);
+                        const hasOverride = pathOverrides.has(file);
+                        return <li key={file} className={selectedFilePath === file ? 'selected' : ''} onClick={() => handleSelectForViewing(file)} title={file}>
+                            <div className="file-row">
+                                <input type="checkbox" checked={selectedFilesForReplacement.has(`${activeTab}:::${file}`)} onChange={() => handleFileSelectionToggle(file)} onClick={e => e.stopPropagation()} />
+                                {fileExists ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
+                                <span>{file}</span>
+                            </div>
+                            {!fileExists && selectedFilePath === file && (
+                                <div className="path-override-container" onClick={e => e.stopPropagation()}>
+                                    {hasOverride ? (
+                                        <>
+                                            <span>Linked to: {pathOverrides.get(file)}</span>
+                                            <button className="styled-button" onClick={() => handleUnlinkFile(file)}><VscDebugDisconnect /> Unlink</button>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <input type="text" placeholder="Enter correct relative path..." value={tempOverridePath} onChange={e => setTempOverridePath(e.target.value)} onKeyDown={e => {if(e.key === 'Enter') handleLinkFile(file)}} />
+                                            <button className="styled-button" onClick={() => handleLinkFile(file)}><VscLink /> Link</button>
+                                        </>
+                                    )}
+                                </div>
+                            )}
+                        </li>
+                    })}</ul>
+                </CollapsibleSection>
+                <CollapsibleSection title="Summary" isCollapsed={isThoughtsCollapsed} onToggle={() => setThoughtsCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown></CollapsibleSection>
+                <CollapsibleSection title="Course of Action" isCollapsed={isActionCollapsed} onToggle={() => setActionCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown></CollapsibleSection>
+            </div>
+            <div className="resizer" />
+            <div className="parsed-view-right">
+                <div className="response-acceptance-header"><button className={`styled-button ${selectedResponseId === activeTab.toString() ? 'toggled' : ''}`} onClick={() => setSelectedResponseId(prev => prev === activeTab.toString() ? null : activeTab.toString())}>{selectedResponseId === activeTab.toString() ? 'Response Selected' : 'Select This Response'}</button><button className="styled-button" onClick={handleSelectAllFilesToggle}><VscCheckAll/> {isAllFilesSelected ? 'Deselect All' : 'Select All'}</button><button className="styled-button" onClick={handleAcceptSelectedFiles} disabled={selectedFilesForReplacement.size === 0}><VscSave/> Accept Selected</button></div>
+                <div className="file-content-viewer-header">
+                    <span className="file-path" title={selectedFilePath || ''}>{selectedFilePath ? path.basename(selectedFilePath) : 'No file selected'}</span>
+                    <div className="file-actions">
+                        <div className="file-metadata">
+                            {currentComparisonMetrics && currentComparisonMetrics.originalTokens !== -1 && (
+                                <>
+                                    <span>Original: {formatLargeNumber(currentComparisonMetrics.originalTokens, 1)} tk</span>
+                                    <span>New: {formatLargeNumber(currentComparisonMetrics.modifiedTokens, 1)} tk</span>
+                                    <span>Similarity: {(currentComparisonMetrics.similarity * 100).toFixed(0)}%</span>
+                                </>
+                            )}
+                             {currentComparisonMetrics && currentComparisonMetrics.originalTokens === -1 && (
+                                <span style={{color: 'var(--vscode-errorForeground)'}}>Original file not found</span>
+                             )}
+                        </div>
+                        <button onClick={handleCopyContent} title="Copy file content" disabled={!selectedFilePath}><VscClippy /></button>
+                    </div>
+                </div>
+                <CodeViewer htmlContent={viewableContent} />
+            </div>
+        </div>;
+    };
+
+    return <div className="pc-view-container">
+        <div className="pc-header">
+            <div className="pc-toolbar">
+                <button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button>
+                <button onClick={handleGeneratePrompt} title="Generate prompt.md"><VscFileCode /> Generate prompt.md</button>
+                <button onClick={handleLogState} title="Log Current State"><VscBug/></button>
+                <button onClick={handleGlobalParseToggle} className={isParsedMode ? 'active' : ''}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button>
+            </div>
+            <div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} /></div>
+        </div>
+        <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''}><div className="cycle-navigator"><span>Cycle:</span><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0}><VscChevronLeft /></button><input type="number" value={currentCycle} onChange={e => setCurrentCycle(parseInt(e.target.value, 10) || 0)} className="cycle-input" /><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button><button onClick={handleNewCycle} title="New Cycle" disabled={isNewCycleButtonDisabled}><VscAdd /></button><input type="text" className="cycle-title-input" placeholder="Cycle Title..." value={cycleTitle} onChange={e => setCycleTitle(e.target.value)} /><button onClick={handleDeleteCycle} title="Delete Current Cycle"><VscTrash /></button><button onClick={handleResetHistory} title="Reset All History"><VscSync /></button><button onClick={handleExportHistory} title="Save Cycle History..."><VscCloudUpload /></button><button onClick={handleImportHistory} title="Load Cycle History..."><VscCloudDownload /></button></div>
+            <div className="context-inputs">
+                <div className="context-input-wrapper">
+                    <div className="context-label"><span>Cycle Context</span><span>Tokens: {cycleContextTokens}</span></div>
+                    <NumberedTextarea value={cycleContext} onChange={(e) => { setCycleContext(e.target.value); setCycleContextTokens(Math.ceil(e.target.value.length / 4)); }} placeholder="Cycle Context (notes for this cycle)..." onKeyDown={handleContextKeyDown} height={cycleContextHeight} onHeightChange={setCycleContextHeight} />
+                </div>
+                <div className="context-input-wrapper">
+                    <div className="context-label"><span>Ephemeral Context</span><span>Tokens: {ephemeralContextTokens}</span></div>
+                    <NumberedTextarea value={ephemeralContext} onChange={(e) => { setEphemeralContext(e.target.value); setEphemeralContextTokens(Math.ceil(e.target.value.length / 4)); }} placeholder="Ephemeral Context (for this cycle's prompt only)..." onKeyDown={handleContextKeyDown} height={ephemeralContextHeight} onHeightChange={setEphemeralContextHeight} />
+                </div>
+            </div>
+        </CollapsibleSection>
+        <div className="tab-bar-container">
+            <div className="tab-bar">{sortedTabIds.map((tabIndex) => {
+                const tabData = tabs[tabIndex.toString()];
+                const parsedData = tabData?.parsedContent;
+                return <div key={tabIndex} className={`tab ${activeTab === tabIndex ? 'active' : ''} ${selectedResponseId === tabIndex.toString() ? 'selected' : ''}`} onClick={() => setActiveTab(tabIndex)}><div className="tab-title">Resp {tabIndex}</div>{isParsedMode && parsedData && (<div className="tab-metadata"><span><VscFileCode /> {parsedData.files.length}</span><span><VscSymbolNumeric /> {formatLargeNumber(parsedData.totalTokens, 1)}</span></div>)}</div>;
+            })}</div>
+            {isParsedMode && <button onClick={() => setIsSortedByTokens(p => !p)} className={`sort-button ${isSortedByTokens ? 'active' : ''}`} title="Sort responses by token count">{isSortedByTokens ? <VscListOrdered/> : <VscListUnordered/>} Sort</button>}
+        </div>
+        <div className="tab-content">{activeTab !== null && <div className="tab-pane">{renderContent()}</div>}</div>
+    </div>;
+};
+
+const root = ReactDOM.createRoot(document.getElementById('root')!);
+root.render(<App />);
+</src/client/views/parallel-copilot.view/view.tsx>
+</Original view.tsx prior to refactoring>
 </file>
 
 <file path="src/Artifacts/A68. DCE - PCPP Context Pane UX Plan.md">
@@ -22158,7 +22715,7 @@ export class FileTreeService {
 </file>
 
 <file path="src/backend/services/flattener.service.ts">
-// Updated on: C167 (Add package-lock.json to non-selectable)
+// Updated on: C172 (Add in-memory flattening for cost estimation)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -22188,6 +22745,22 @@ const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
 export class FlattenerService {
 
+    public async getFlattenedContent(selectedPaths: string[]): Promise<string> {
+        const workspaceFolders = vscode.workspace.workspaceFolders;
+        if (!workspaceFolders || workspaceFolders.length === 0 || selectedPaths.length === 0) {
+            return '<!-- No files selected for flattening -->';
+        }
+        
+        const rootPath = workspaceFolders[0].uri.fsPath;
+        const allFilePaths = await this.expandDirectories(selectedPaths);
+        const uniqueFilePaths = [...new Set(allFilePaths)];
+
+        const fileStatsPromises = uniqueFilePaths.map(filePath => this.getFileStatsAndContent(filePath));
+        const results = await Promise.all(fileStatsPromises);
+        
+        return this.generateOutputContent(results, rootPath, 'in-memory-prompt.md', false);
+    }
+
     public async flatten(selectedPaths: string[]) {
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (!workspaceFolders || workspaceFolders.length === 0) {
@@ -22210,8 +22783,7 @@ export class FlattenerService {
             const results = await Promise.all(fileStatsPromises);
             const validResults = results.filter(r => !r.error);
 
-
-            const outputContent = this.generateOutputContent(results, rootPath, outputFilePath);
+            const outputContent = this.generateOutputContent(results, rootPath, outputFilePath, true);
 
             await fs.writeFile(outputFilePath, outputContent, 'utf-8');
             vscode.window.showInformationMessage(`Successfully flattened ${validResults.length} files to flattened_repo.md.`);
@@ -22349,26 +22921,30 @@ export class FlattenerService {
         }
     }
 
-    private generateOutputContent(results: FileStats[], rootDir: string, outputFilename: string): string {
+    private generateOutputContent(results: FileStats[], rootDir: string, outputFilename: string, includeHeader: boolean): string {
         const validResults = results.filter(r => !r.error);
-        const totalTokens = validResults.reduce((sum, r) => sum + r.tokens, 0);
         
-        let output = `<!--\n  File: ${path.basename(outputFilename)}\n  Source Directory: ${rootDir}\n  Date Generated: ${new Date().toISOString()}\n  ---\n`;
-        output += `  Total Files: ${validResults.length}\n  Approx. Tokens: ${totalTokens}\n-->\n\n`;
-        
-        output += `<!-- Top 10 Text Files by Token Count -->\n`;
-        [...validResults].filter(r => r.tokens > 0).sort((a, b) => b.tokens - a.tokens).slice(0, 10)
-            .forEach((r, i) => output += `${i + 1}. ${path.relative(rootDir, r.filePath)} (${r.tokens} tokens)\n`);
-        output += `\n`;
+        let output = '';
 
-        output += `<!-- Full File List -->\n`;
-        results.forEach((r, i) => {
-            const relPath = path.relative(rootDir, r.filePath);
-            if (r.error) output += `${i + 1}. ${relPath} - ERROR: ${r.error}\n`;
-            else if (r.isBinary) output += `${i + 1}. ${relPath} - [Binary] Size: ${formatBytes(r.sizeInBytes)}\n`;
-            else output += `${i + 1}. ${relPath} - Lines: ${r.lines} - Chars: ${r.characters} - Tokens: ${r.tokens}\n`;
-        });
-        output += `\n`;
+        if (includeHeader) {
+            const totalTokens = validResults.reduce((sum, r) => sum + r.tokens, 0);
+            output += `<!--\n  File: ${path.basename(outputFilename)}\n  Source Directory: ${rootDir}\n  Date Generated: ${new Date().toISOString()}\n  ---\n`;
+            output += `  Total Files: ${validResults.length}\n  Approx. Tokens: ${totalTokens}\n-->\n\n`;
+            
+            output += `<!-- Top 10 Text Files by Token Count -->\n`;
+            [...validResults].filter(r => r.tokens > 0).sort((a, b) => b.tokens - a.tokens).slice(0, 10)
+                .forEach((r, i) => output += `${i + 1}. ${path.relative(rootDir, r.filePath)} (${r.tokens} tokens)\n`);
+            output += `\n`;
+
+            output += `<!-- Full File List -->\n`;
+            results.forEach((r, i) => {
+                const relPath = path.relative(rootDir, r.filePath);
+                if (r.error) output += `${i + 1}. ${relPath} - ERROR: ${r.error}\n`;
+                else if (r.isBinary) output += `${i + 1}. ${relPath} - [Binary] Size: ${formatBytes(r.sizeInBytes)}\n`;
+                else output += `${i + 1}. ${relPath} - Lines: ${r.lines} - Chars: ${r.characters} - Tokens: ${r.tokens}\n`;
+            });
+            output += `\n`;
+        }
 
         for (const { filePath, content, error } of results) {
             const relativePath = path.relative(rootDir, filePath).replace(/\\/g, '/');
@@ -22755,13 +23331,14 @@ export class LoggerService {
 </file>
 
 <file path="src/backend/services/prompt.service.ts">
+// Updated on: C172 (Fix cost estimation logic)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
 import { Services } from './services';
 import { parseResponse } from '@/client/utils/response-parser';
 import { PcppCycle } from '@/common/types/pcpp.types';
-import { truncateCodeForLogging } from '@/common/utils/formatting';
+import { truncateCodeForLogging, calculatePromptCost } from '@/common/utils/formatting';
 import { ServerPostMessageManager } from '@/common/ipc/server-ipc';
 import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 
@@ -22866,12 +23443,85 @@ ${staticContext.trim()}
             cyclesContent += `</Cycle ${cycle.cycleId}>`;
         }
 
-        // Always add Cycle 0 at the end
         const cycle0Content = await this._generateCycle0Content();
         cyclesContent += `\n\n${cycle0Content}`;
 
         cyclesContent += '\n\n</M6. Cycles>';
         return cyclesContent;
+    }
+
+    private async getPromptParts(cycleData: PcppCycle, flattenedRepoContent: string): Promise<{ [key: string]: string }> {
+        const rootPath = this.workspaceRoot;
+        if (!rootPath) throw new Error("No workspace folder open.");
+
+        const fullHistoryFile = await Services.historyService.getFullHistory();
+        const fullHistory: PcppCycle[] = fullHistoryFile.cycles;
+        
+        const allCycles = [...fullHistory.filter(c => c.cycleId !== cycleData.cycleId), cycleData];
+        const sortedHistoryForOverview = allCycles.sort((a, b) => b.cycleId - a.cycleId);
+
+        let cycleOverview = '<M2. cycle overview>\n';
+        cycleOverview += `Current Cycle ${cycleData.cycleId} - ${cycleData.title}\n`;
+        for (const cycle of sortedHistoryForOverview) {
+            if (cycle.cycleId !== cycleData.cycleId) {
+                 cycleOverview += `Cycle ${cycle.cycleId} - ${cycle.title}\n`;
+            }
+        }
+        if (!cycleOverview.includes('Cycle 0')) {
+            cycleOverview += 'Cycle 0 - Project Initialization/Template Archive\n';
+        }
+        cycleOverview += '</M2. cycle overview>';
+        
+        const cyclesContent = await this._generateCyclesContent(cycleData, fullHistory);
+
+        const userA0Files = await vscode.workspace.findFiles('**/*A0*Master*Artifact*List.md', '**/node_modules/**', 1);
+        let a0Content = '<!-- Master Artifact List (A0) not found in workspace -->';
+        if (userA0Files.length > 0) {
+            const contentBuffer = await vscode.workspace.fs.readFile(userA0Files[0]);
+            a0Content = Buffer.from(contentBuffer).toString('utf-8');
+        }
+        
+        const a52_1_Content = await this.getArtifactContent('A52.1 DCE - Parser Logic and AI Guidance.md', '<!-- A52.1 Parser Logic not found -->');
+        const a52_2_Content = await this.getArtifactContent('A52.2 DCE - Interaction Schema Source.md', '<!-- A52.2 Interaction Schema Source not found -->');
+        const interactionSchemaContent = `<M3. Interaction Schema>\n${a52_2_Content}\n\n${a52_1_Content}\n</M3. Interaction Schema>`;
+
+        const projectScope = `<M4. current project scope>\n${fullHistoryFile.projectScope || 'No project scope defined.'}\n</M4. current project scope>`;
+        const m5Content = `<M5. organized artifacts list>\n${a0Content}\n</M5. organized artifacts list>`;
+        const m7Content = `<M7. Flattened Repo>\n${flattenedRepoContent}\n</M7. Flattened Repo>`;
+
+        return {
+            "Prompt Wrapper": `<prompt.md>\n\n</prompt.md>`,
+            "M1 Artifact Schema": this.artifactSchemaTemplate,
+            "M2 Cycle Overview": cycleOverview,
+            "M3 Interaction Schema": interactionSchemaContent,
+            "M4 Project Scope": projectScope,
+            "M5 Artifact List": m5Content,
+            "M6 Cycles": cyclesContent,
+            "M7 Flattened Repo": m7Content
+        };
+    }
+
+    public async handlePromptCostEstimationRequest(cycleData: PcppCycle, serverIpc: ServerPostMessageManager) {
+        try {
+            const selectedFiles = await Services.selectionService.getLastSelection();
+            const flattenedContent = await Services.flattenerService.getFlattenedContent(selectedFiles);
+            
+            const promptParts = await this.getPromptParts(cycleData, flattenedContent);
+            
+            const breakdown: { [key: string]: number } = {};
+            let totalTokens = 0;
+
+            for (const [key, value] of Object.entries(promptParts)) {
+                const partTokens = Math.ceil(value.length / 4);
+                breakdown[key] = partTokens;
+                totalTokens += partTokens;
+            }
+
+            const estimatedCost = calculatePromptCost(totalTokens);
+            serverIpc.sendToClient(ServerToClientChannel.SendPromptCostEstimation, { totalTokens, estimatedCost, breakdown });
+        } catch (error: any) {
+            Services.loggerService.error(`Failed to estimate prompt cost: ${error.message}`);
+        }
     }
 
     public async generateStateLog(currentState: PcppCycle) {
@@ -22932,76 +23582,33 @@ ${cyclesContent}
             return;
         }
         const rootPath = this.workspaceRoot;
-        const flattenedRepoPath = path.join(rootPath, 'flattened_repo.md');
         const promptMdPath = path.join(rootPath, 'prompt.md');
 
         try {
             Services.loggerService.log("Generating prompt.md file...");
             
             const lastSelection = await Services.selectionService.getLastSelection();
+            let flattenedContent = '<!-- No files selected for flattening -->';
             if (lastSelection.length > 0) {
                 await Services.flattenerService.flatten(lastSelection);
+                 try {
+                    flattenedContent = await fs.readFile(path.join(rootPath, 'flattened_repo.md'), 'utf-8');
+                } catch (e) {
+                    Services.loggerService.warn("'flattened_repo.md' not found after flattening. Will be empty in prompt.");
+                }
             } else {
-                Services.loggerService.warn("No files selected for flattening. 'flattened_repo.md' may be stale.");
+                Services.loggerService.warn("No files selected for flattening. 'flattened_repo.md' may be stale or non-existent.");
             }
-
-            const flattenedContent = await fs.readFile(flattenedRepoPath, 'utf-8');
-            const fullHistoryFile = await Services.historyService.getFullHistory();
-            const fullHistory: PcppCycle[] = fullHistoryFile.cycles;
             
+            const fullHistory = (await Services.historyService.getFullHistory()).cycles;
             const currentCycleDataFromHistory = fullHistory.find(c => c.cycleId === currentCycle);
             if (!currentCycleDataFromHistory) {
                 throw new Error(`Could not find data for current cycle (${currentCycle}) in history.`);
             }
             const currentCycleData = { ...currentCycleDataFromHistory, title: cycleTitle };
 
-            const allCycles = [...fullHistory.filter(c => c.cycleId !== currentCycle), currentCycleData];
-            const sortedHistoryForOverview = allCycles.sort((a, b) => b.cycleId - a.cycleId);
-
-            let cycleOverview = '<M2. cycle overview>\n';
-            cycleOverview += `Current Cycle ${currentCycle} - ${cycleTitle}\n`;
-            for (const cycle of sortedHistoryForOverview) {
-                if (cycle.cycleId !== currentCycle) {
-                     cycleOverview += `Cycle ${cycle.cycleId} - ${cycle.title}\n`;
-                }
-            }
-            if (!cycleOverview.includes('Cycle 0')) {
-                cycleOverview += 'Cycle 0 - Project Initialization/Template Archive\n';
-            }
-            cycleOverview += '</M2. cycle overview>';
-            
-            const cyclesContent = await this._generateCyclesContent(currentCycleData, fullHistory);
-
-            const userA0Files = await vscode.workspace.findFiles('**/*A0*Master*Artifact*List.md', '**/node_modules/**', 1);
-            let a0Content = '<!-- Master Artifact List (A0) not found in workspace -->';
-            if (userA0Files.length > 0) {
-                Services.loggerService.log(`Found Master Artifact List: ${userA0Files[0].fsPath}`);
-                const contentBuffer = await vscode.workspace.fs.readFile(userA0Files[0]);
-                a0Content = Buffer.from(contentBuffer).toString('utf-8');
-            } else {
-                Services.loggerService.warn(`Could not find a Master Artifact List file in the workspace.`);
-            }
-            
-            const a52_1_Content = await this.getArtifactContent('A52.1 DCE - Parser Logic and AI Guidance.md', '<!-- A52.1 Parser Logic not found -->');
-            const a52_2_Content = await this.getArtifactContent('A52.2 DCE - Interaction Schema Source.md', '<!-- A52.2 Interaction Schema Source not found -->');
-
-            const interactionSchemaContent = `<M3. Interaction Schema>\n${a52_2_Content}\n\n${a52_1_Content}\n</M3. Interaction Schema>`;
-
-            const projectScope = `<M4. current project scope>\n${fullHistoryFile.projectScope || 'No project scope defined.'}\n</M4. current project scope>`;
-
-            const promptParts = [
-                `<prompt.md>`,
-                this.artifactSchemaTemplate,
-                cycleOverview,
-                interactionSchemaContent,
-                projectScope,
-                `<M5. organized artifacts list>\n${a0Content}\n</M5. organized artifacts list>`,
-                cyclesContent,
-                `<M7. Flattened Repo>\n${flattenedContent}\n</M7. Flattened Repo>`,
-                `</prompt.md>`
-            ];
-
-            const finalPrompt = promptParts.join('\n\n');
+            const promptParts = await this.getPromptParts(currentCycleData, flattenedContent);
+            const finalPrompt = Object.values(promptParts).join('\n\n');
 
             await fs.writeFile(promptMdPath, finalPrompt, 'utf-8');
             vscode.window.showInformationMessage(`Successfully generated prompt.md.`);
@@ -23011,9 +23618,6 @@ ${cyclesContent}
 
         } catch (error: any) {
             let errorMessage = `Failed to generate prompt.md: ${error.message}`;
-            if (error.code === 'ENOENT' && error.path?.includes('flattened_repo.md')) {
-                errorMessage = "Failed to generate prompt.md: 'flattened_repo.md' not found. Please flatten context first.";
-            }
             vscode.window.showErrorMessage(errorMessage);
             Services.loggerService.error(errorMessage);
         }
@@ -25828,7 +26432,7 @@ export function registerViews(context: vscode.ExtensionContext) {
 
 <file path="src/client/views/parallel-copilot.view/components/CodeViewer.tsx">
 // src/client/views/parallel-copilot.view/components/CodeViewer.tsx
-// Updated on: C170 (Fix TS error)
+// Updated on: C172 (No functional changes, header update only)
 import * as React from 'react';
 
 const CodeViewer: React.FC<{ htmlContent: string | undefined | null }> = ({ htmlContent }) => {
@@ -25864,14 +26468,72 @@ export default CodeViewer;
 
 <file path="src/client/views/parallel-copilot.view/components/ContextInputs.tsx">
 // src/client/views/parallel-copilot.view/components/ContextInputs.tsx
-// New file in C169
+// Updated on: C172 (Implement component)
 import * as React from 'react';
+import NumberedTextarea from './NumberedTextarea';
+import { formatLargeNumber } from '@/common/utils/formatting';
 
-const ContextInputs = () => {
-    // Placeholder content
+interface ContextInputsProps {
+    cycleContext: string;
+    ephemeralContext: string;
+    cycleContextTokens: number;
+    ephemeralContextTokens: number;
+    onCycleContextChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+    onEphemeralContextChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+    onContextKeyDown: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
+    cycleContextHeight: number;
+    onCycleContextHeightChange: (height: number) => void;
+    ephemeralContextHeight: number;
+    onEphemeralContextHeightChange: (height: number) => void;
+    currentCycle: number;
+}
+
+const ContextInputs: React.FC<ContextInputsProps> = ({
+    cycleContext,
+    ephemeralContext,
+    cycleContextTokens,
+    ephemeralContextTokens,
+    onCycleContextChange,
+    onEphemeralContextChange,
+    onContextKeyDown,
+    cycleContextHeight,
+    onCycleContextHeightChange,
+    ephemeralContextHeight,
+    onEphemeralContextHeightChange,
+    currentCycle
+}) => {
     return (
-        <div>
-            Context Inputs Component Placeholder
+        <div className="context-inputs">
+            <div className="context-input-wrapper">
+                <div className="context-label">
+                    <span>Cycle Context</span>
+                    <span>({formatLargeNumber(cycleContextTokens, 1)} tk)</span>
+                </div>
+                <NumberedTextarea
+                    value={cycleContext}
+                    onChange={onCycleContextChange}
+                    placeholder="Cycle Context (notes for this cycle)..."
+                    onKeyDown={onContextKeyDown}
+                    height={cycleContextHeight}
+                    onHeightChange={onCycleContextHeightChange}
+                    id={`cycle-context-${currentCycle}`}
+                />
+            </div>
+            <div className="context-input-wrapper">
+                <div className="context-label">
+                    <span>Ephemeral Context</span>
+                    <span>({formatLargeNumber(ephemeralContextTokens, 1)} tk)</span>
+                </div>
+                <NumberedTextarea
+                    value={ephemeralContext}
+                    onChange={onEphemeralContextChange}
+                    placeholder="Ephemeral Context (for this cycle's prompt only)..."
+                    onKeyDown={onContextKeyDown}
+                    height={ephemeralContextHeight}
+                    onHeightChange={onEphemeralContextHeightChange}
+                    id={`ephemeral-context-${currentCycle}`}
+                />
+            </div>
         </div>
     );
 };
@@ -25881,7 +26543,7 @@ export default ContextInputs;
 
 <file path="src/client/views/parallel-copilot.view/components/CycleNavigator.tsx">
 // src/client/views/parallel-copilot.view/components/CycleNavigator.tsx
-// Updated on: C170 (Migrate logic from view.tsx)
+// Updated on: C172 (No functional changes, header update only)
 import * as React from 'react';
 import { VscChevronLeft, VscChevronRight, VscAdd, VscTrash, VscSync, VscCloudUpload, VscCloudDownload } from 'react-icons/vsc';
 
@@ -25950,7 +26612,7 @@ export default CycleNavigator;
 
 <file path="src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx">
 // src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx
-// Updated on: C169 (Refactor to include syntax highlighting)
+// Updated on: C172 (No functional changes, header update only)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -26050,14 +26712,88 @@ export default NumberedTextarea;
 
 <file path="src/client/views/parallel-copilot.view/components/ParsedView.tsx">
 // src/client/views/parallel-copilot.view/components/ParsedView.tsx
-// New file in C169
+// Updated on: C172 (Implement component)
 import * as React from 'react';
+import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscSave, VscCheckAll, VscClearAll, VscClippy } from 'react-icons/vsc';
+import ReactMarkdown from 'react-markdown';
+import * as path from 'path-browserify';
+import { ParsedResponse } from '@/common/types/pcpp.types';
+import { ComparisonMetrics } from '@/common/ipc/channels.type';
+import { formatLargeNumber } from '@/common/utils/formatting';
+import CodeViewer from './CodeViewer';
 
-const ParsedView = () => {
-    // Placeholder content
+const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; }> = ({ title, children, isCollapsed, onToggle }) => (
+    <div className="collapsible-section">
+        <div className="collapsible-header" onClick={onToggle}>{title}</div>
+        {!isCollapsed && <div className="collapsible-content">{children}</div>}
+    </div>
+);
+
+interface ParsedViewProps {
+    parsedContent: ParsedResponse;
+    fileExistenceMap: Map<string, boolean>;
+    selectedFilePath: string | null;
+    onSelectForViewing: (path: string) => void;
+    selectedFilesForReplacement: Set<string>;
+    onFileSelectionToggle: (path: string) => void;
+    activeTab: number;
+    pathOverrides: Map<string, string>;
+    tempOverridePath: string;
+    onTempOverridePathChange: (path: string) => void;
+    onLinkFile: (originalPath: string) => void;
+    onUnlinkFile: (originalPath: string) => void;
+    comparisonMetrics: ComparisonMetrics | null;
+    viewableContent: string | undefined | null;
+    onCopyContent: () => void;
+    selectedResponseId: string | null;
+    onSelectResponse: (id: string) => void;
+    onSelectAllFiles: () => void;
+    onDeselectAllFiles: () => void;
+    isAllFilesSelected: boolean;
+    onAcceptSelected: () => void;
+}
+
+const ParsedView: React.FC<ParsedViewProps> = (props) => {
+    const [isAssociatedFilesCollapsed, setAssociatedFilesCollapsed] = React.useState(false);
+    const [isThoughtsCollapsed, setThoughtsCollapsed] = React.useState(false);
+    const [isActionCollapsed, setActionCollapsed] = React.useState(false);
+
     return (
-        <div>
-            Parsed View Component Placeholder
+        <div className="parsed-view-grid">
+            <div className="parsed-view-left">
+                <CollapsibleSection title="Associated Files" isCollapsed={isAssociatedFilesCollapsed} onToggle={() => setAssociatedFilesCollapsed(p => !p)}>
+                    <ul className="associated-files-list">{props.parsedContent.filesUpdated.map(file => {
+                        const fileExists = props.fileExistenceMap.get(file);
+                        const hasOverride = props.pathOverrides.has(file);
+                        return <li key={file} className={props.selectedFilePath === file ? 'selected' : ''} onClick={() => props.onSelectForViewing(file)} title={file}>
+                            <div className="file-row">
+                                <input type="checkbox" checked={props.selectedFilesForReplacement.has(`${props.activeTab}:::${file}`)} onChange={() => props.onFileSelectionToggle(file)} onClick={e => e.stopPropagation()} />
+                                {fileExists ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
+                                <span>{file}</span>
+                            </div>
+                            {!fileExists && props.selectedFilePath === file && (
+                                <div className="path-override-container" onClick={e => e.stopPropagation()}>{hasOverride ? (<><span>Linked to: {props.pathOverrides.get(file)}</span><button className="styled-button" onClick={() => props.onUnlinkFile(file)}><VscDebugDisconnect /> Unlink</button></>) : (<><input type="text" placeholder="Enter correct relative path..." value={props.tempOverridePath} onChange={e => props.onTempOverridePathChange(e.target.value)} onKeyDown={e => {if(e.key === 'Enter') props.onLinkFile(file)}} /><button className="styled-button" onClick={() => props.onLinkFile(file)}><VscLink /> Link</button></>)}</div>
+                            )}
+                        </li>
+                    })}</ul>
+                </CollapsibleSection>
+                <CollapsibleSection title="Summary" isCollapsed={isThoughtsCollapsed} onToggle={() => setThoughtsCollapsed(p => !p)}><ReactMarkdown>{props.parsedContent.summary}</ReactMarkdown></CollapsibleSection>
+                <CollapsibleSection title="Course of Action" isCollapsed={isActionCollapsed} onToggle={() => setActionCollapsed(p => !p)}><ReactMarkdown>{props.parsedContent.courseOfAction}</ReactMarkdown></CollapsibleSection>
+            </div>
+            <div className="resizer" />
+            <div className="parsed-view-right">
+                <div className="response-acceptance-header">
+                    <button className={`styled-button ${props.selectedResponseId === props.activeTab.toString() ? 'toggled' : ''}`} onClick={() => props.onSelectResponse(props.activeTab.toString())}>{props.selectedResponseId === props.activeTab.toString() ? 'Response Selected' : 'Select This Response'}</button>
+                    <button className="styled-button" onClick={props.onSelectAllFiles}><VscCheckAll/> {props.isAllFilesSelected ? 'Deselect All' : 'Select All'}</button>
+                    <button className="styled-button" onClick={props.onDeselectAllFiles} title="Deselect All Files Across All Responses"><VscClearAll /></button>
+                    <button className="styled-button" onClick={props.onAcceptSelected} disabled={props.selectedFilesForReplacement.size === 0}><VscSave/> Accept Selected</button>
+                </div>
+                <div className="file-content-viewer-header">
+                    <span className="file-path" title={props.selectedFilePath || ''}>{props.selectedFilePath ? path.basename(props.selectedFilePath) : 'No file selected'}</span>
+                    <div className="file-actions"><div className="file-metadata">{props.comparisonMetrics && props.comparisonMetrics.originalTokens !== -1 && (<><span>Original: {formatLargeNumber(props.comparisonMetrics.originalTokens, 1)} tk</span><span>New: {formatLargeNumber(props.comparisonMetrics.modifiedTokens, 1)} tk</span><span>Similarity: {(props.comparisonMetrics.similarity * 100).toFixed(0)}%</span></>)}{props.comparisonMetrics && props.comparisonMetrics.originalTokens === -1 && (<span style={{color: 'var(--vscode-errorForeground)'}}>Original file not found</span>)}</div><button onClick={props.onCopyContent} title="Copy file content" disabled={!props.selectedFilePath}><VscClippy /></button></div>
+                </div>
+                <CodeViewer htmlContent={props.viewableContent} />
+            </div>
         </div>
     );
 };
@@ -26067,15 +26803,77 @@ export default ParsedView;
 
 <file path="src/client/views/parallel-copilot.view/components/ResponsePane.tsx">
 // src/client/views/parallel-copilot.view/components/ResponsePane.tsx
-// New file in C169
+// Updated on: C172 (Implement component)
 import * as React from 'react';
+import { TabState } from '../view';
+import ParsedView from './ParsedView';
+import { ComparisonMetrics } from '@/common/ipc/channels.type';
 
-const ResponsePane = () => {
-    // Placeholder content
+interface ResponsePaneProps {
+    isParsedMode: boolean;
+    activeTabData: TabState | undefined;
+    onRawContentChange: (content: string) => void;
+    onContextKeyDown: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
+    // Props for ParsedView
+    fileExistenceMap: Map<string, boolean>;
+    selectedFilePath: string | null;
+    onSelectForViewing: (path: string) => void;
+    selectedFilesForReplacement: Set<string>;
+    onFileSelectionToggle: (path: string) => void;
+    activeTab: number;
+    pathOverrides: Map<string, string>;
+    tempOverridePath: string;
+    onTempOverridePathChange: (path: string) => void;
+    onLinkFile: (originalPath: string) => void;
+    onUnlinkFile: (originalPath: string) => void;
+    comparisonMetrics: ComparisonMetrics | null;
+    viewableContent: string | undefined | null;
+    onCopyContent: () => void;
+    selectedResponseId: string | null;
+    onSelectResponse: (id: string) => void;
+    onSelectAllFiles: () => void;
+    onDeselectAllFiles: () => void;
+    isAllFilesSelected: boolean;
+    onAcceptSelected: () => void;
+}
+
+const ResponsePane: React.FC<ResponsePaneProps> = (props) => {
+    if (!props.isParsedMode || !props.activeTabData?.parsedContent) {
+        return (
+            <textarea
+                className="response-textarea"
+                placeholder={`Paste AI response here...`}
+                value={props.activeTabData?.rawContent || ''}
+                onChange={(e) => props.onRawContentChange(e.target.value)}
+                onKeyDown={props.onContextKeyDown}
+            />
+        );
+    }
+
     return (
-        <div>
-            Response Pane Component Placeholder
-        </div>
+        <ParsedView
+            parsedContent={props.activeTabData.parsedContent}
+            fileExistenceMap={props.fileExistenceMap}
+            selectedFilePath={props.selectedFilePath}
+            onSelectForViewing={props.onSelectForViewing}
+            selectedFilesForReplacement={props.selectedFilesForReplacement}
+            onFileSelectionToggle={props.onFileSelectionToggle}
+            activeTab={props.activeTab}
+            pathOverrides={props.pathOverrides}
+            tempOverridePath={props.tempOverridePath}
+            onTempOverridePathChange={props.onTempOverridePathChange}
+            onLinkFile={props.onLinkFile}
+            onUnlinkFile={props.onUnlinkFile}
+            comparisonMetrics={props.comparisonMetrics}
+            viewableContent={props.viewableContent}
+            onCopyContent={props.onCopyContent}
+            selectedResponseId={props.selectedResponseId}
+            onSelectResponse={props.onSelectResponse}
+            onSelectAllFiles={props.onSelectAllFiles}
+            onDeselectAllFiles={props.onDeselectAllFiles}
+            isAllFilesSelected={props.isAllFilesSelected}
+            onAcceptSelected={props.onAcceptSelected}
+        />
     );
 };
 
@@ -26084,14 +26882,65 @@ export default ResponsePane;
 
 <file path="src/client/views/parallel-copilot.view/components/ResponseTabs.tsx">
 // src/client/views/parallel-copilot.view/components/ResponseTabs.tsx
-// New file in C169
+// Updated on: C172 (Implement component)
 import * as React from 'react';
+import { VscFileCode, VscSymbolNumeric, VscListOrdered, VscListUnordered } from 'react-icons/vsc';
+import { TabState } from '../view';
+import { formatLargeNumber } from '@/common/utils/formatting';
 
-const ResponseTabs = () => {
-    // Placeholder content
+interface ResponseTabsProps {
+    sortedTabIds: number[];
+    tabs: { [key: string]: TabState };
+    activeTab: number;
+    selectedResponseId: string | null;
+    isParsedMode: boolean;
+    isSortedByTokens: boolean;
+    onTabSelect: (tabIndex: number) => void;
+    onSortToggle: () => void;
+}
+
+const ResponseTabs: React.FC<ResponseTabsProps> = ({
+    sortedTabIds,
+    tabs,
+    activeTab,
+    selectedResponseId,
+    isParsedMode,
+    isSortedByTokens,
+    onTabSelect,
+    onSortToggle
+}) => {
     return (
-        <div>
-            Response Tabs Component Placeholder
+        <div className="tab-bar-container">
+            <div className="tab-bar">
+                {sortedTabIds.map((tabIndex) => {
+                    const tabData = tabs[tabIndex.toString()];
+                    const parsedData = tabData?.parsedContent;
+                    return (
+                        <div
+                            key={tabIndex}
+                            className={`tab ${activeTab === tabIndex ? 'active' : ''} ${selectedResponseId === tabIndex.toString() ? 'selected' : ''}`}
+                            onClick={() => onTabSelect(tabIndex)}
+                        >
+                            <div className="tab-title">Resp {tabIndex}</div>
+                            {isParsedMode && parsedData && (
+                                <div className="tab-metadata">
+                                    <span><VscFileCode /> {parsedData.files.length}</span>
+                                    <span><VscSymbolNumeric /> {formatLargeNumber(parsedData.totalTokens, 1)}</span>
+                                </div>
+                            )}
+                        </div>
+                    );
+                })}
+            </div>
+            {isParsedMode && (
+                <button
+                    onClick={onSortToggle}
+                    className={`sort-button ${isSortedByTokens ? 'active' : ''}`}
+                    title="Sort responses by token count"
+                >
+                    {isSortedByTokens ? <VscListOrdered /> : <VscListUnordered />} Sort
+                </button>
+            )}
         </div>
     );
 };
@@ -26111,7 +26960,7 @@ export const viewConfig = {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/on-message.ts">
-// Updated on: C170 (Add missing import)
+// Updated on: C172 (Add prompt cost breakdown handler)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -26198,12 +27047,20 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     serverIpc.onClientMessage(ClientToServerChannel.RequestOpenFolder, () => {
         fileOperationService.handleOpenFolderRequest();
     });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestPromptCostEstimation, (data) => {
+        promptService.handlePromptCostEstimationRequest(data.cycleData, serverIpc);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestPromptCostBreakdown, (data) => {
+        promptService.handlePromptCostBreakdownRequest(data.cycleData, serverIpc);
+    });
 }
 </file>
 
 <file path="src/client/views/parallel-copilot.view/OnboardingView.tsx">
 // src/client/views/parallel-copilot.view/OnboardingView.tsx
-// Updated on: C167 (Pass scope changes up to parent)
+// Updated on: C172 (No functional changes, header update only)
 import * as React from 'react';
 import { VscRocket, VscArrowRight } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -26496,7 +27353,7 @@ export default TestPane3;
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
-/* Updated on: C170 (Add cost estimation styles) */
+/* Updated on: C172 (No functional changes, header update only) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -26594,10 +27451,6 @@ body {
             color: var(--vscode-descriptionForeground);
             display: flex;
             justify-content: space-between;
-
-            .cost-estimate {
-                font-style: italic;
-            }
         }
     }
 }
@@ -26685,6 +27538,14 @@ body {
     .chevron.collapsed {
         transform: rotate(-90deg);
     }
+
+    .total-prompt-cost {
+        font-size: 11px;
+        font-weight: normal;
+        text-transform: none;
+        color: var(--vscode-descriptionForeground);
+        font-style: italic;
+    }
 }
 
 .collapsible-content {
@@ -26707,6 +27568,28 @@ body {
     align-items: center;
     gap: 8px;
     width: 100%;
+
+    button {
+        background: none;
+        border: 1px solid var(--vscode-button-border, transparent);
+        color: var(--vscode-icon-foreground);
+        cursor: pointer;
+        padding: 4px;
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+
+        &:hover {
+            background-color: var(--vscode-toolbar-hoverBackground);
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
 }
 
 .pc-toolbar {
@@ -26733,7 +27616,7 @@ body {
     }
 }
 
-.cycle-navigator button, .pc-toolbar button, .file-actions button, .exit-diff-button, .styled-button, .sort-button {
+.pc-toolbar button, .file-actions button, .exit-diff-button, .styled-button, .sort-button {
     background: none;
     border: 1px solid var(--vscode-button-border, transparent);
     color: var(--vscode-icon-foreground);
@@ -27246,60 +28129,60 @@ body {
 }
 </file>
 
+<file path="src/client/views/parallel-copilot.view/view.ts">
+// src/client/views/parallel-copilot.view/view.ts
+// This file is a placeholder for type definitions or interfaces specific to the view.
+// It can be expanded as needed.
+
+import { ParsedResponse } from "@/common/types/pcpp.types";
+
+export interface TabState {
+    rawContent: string;
+    parsedContent: ParsedResponse | null;
+}
+</file>
+
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C170 (Fix bugs, add features, start refactor)
+// Updated on: C172 (Refactor to use child components)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { VscWand, VscCheck, VscError, VscFileCode, VscDiff, VscSave, VscBug, VscCheckAll, VscListOrdered, VscListUnordered, VscSymbolNumeric, VscClippy, VscLink, VscDebugDisconnect, VscBook, VscFolder, VscClearAll, VscChevronDown, VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
+import { VscWand, VscFileCode, VscBug, VscBook, VscFolder, VscChevronDown, VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
 import { ParsedResponse, PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
-import ReactMarkdown from 'react-markdown';
 import * as path from 'path-browserify';
 import { BatchWriteFile, ComparisonMetrics } from '@/common/ipc/channels.type';
 import OnboardingView from './OnboardingView';
-import { formatLargeNumber, calculatePromptCost } from '@/common/utils/formatting';
-import NumberedTextarea from './components/NumberedTextarea';
+import { formatLargeNumber } from '@/common/utils/formatting';
 import CycleNavigator from './components/CycleNavigator';
-import CodeViewer from './components/CodeViewer';
+import ContextInputs from './components/ContextInputs';
+import ResponseTabs from './components/ResponseTabs';
+import ResponsePane from './components/ResponsePane';
 
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
-
-    const debouncedFunction = React.useCallback((...args: any[]) => {
-        if (timeoutRef.current) {
-            clearTimeout(timeoutRef.current);
-        }
-        timeoutRef.current = setTimeout(() => {
-            callback(...args);
-        }, delay);
-    }, [callback, delay]);
-
+    const debouncedFunction = React.useCallback((...args: any[]) => { if (timeoutRef.current) clearTimeout(timeoutRef.current); timeoutRef.current = setTimeout(() => callback(...args), delay); }, [callback, delay]);
     return debouncedFunction;
 };
 
-interface TabState {
+export interface TabState {
     rawContent: string;
     parsedContent: ParsedResponse | null;
 }
 
-const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; collapsedContent?: React.ReactNode; className?: string; }> = ({ title, children, isCollapsed, onToggle, collapsedContent, className }) => (
+const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; collapsedContent?: React.ReactNode; className?: string; extraHeaderContent?: React.ReactNode; }> = ({ title, children, isCollapsed, onToggle, collapsedContent, className, extraHeaderContent }) => (
     <div className="collapsible-section">
         <div className={`collapsible-header ${className || ''}`} onClick={onToggle}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                <VscChevronDown className={`chevron ${isCollapsed ? 'collapsed' : ''}`} />
-                <span>{title}</span>
-            </div>
-            {isCollapsed && collapsedContent}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><VscChevronDown className={`chevron ${isCollapsed ? 'collapsed' : ''}`} /><span>{title}</span></div>
+            {isCollapsed ? collapsedContent : extraHeaderContent}
         </div>
         {!isCollapsed && <div className="collapsible-content">{children}</div>}
     </div>
 );
-
 
 const App = () => {
     const [activeTab, setActiveTab] = React.useState(1);
@@ -27312,7 +28195,6 @@ const App = () => {
     const [ephemeralContext, setEphemeralContext] = React.useState('');
     const [tabs, setTabs] = React.useState<{ [key: string]: TabState }>({});
     const [highlightedCodeBlocks, setHighlightedCodeBlocks] = React.useState<Map<string, string>>(new Map());
-    const [highlightedContexts, setHighlightedContexts] = React.useState<Map<string, string>>(new Map());
     const [fileExistenceMap, setFileExistenceMap] = React.useState<Map<string, boolean>>(new Map());
     const [isParsedMode, setIsParsedMode] = React.useState(false);
     const [selectedFilePath, setSelectedFilePath] = React.useState<string | null>(null);
@@ -27328,484 +28210,67 @@ const App = () => {
     const [ephemeralContextHeight, setEphemeralContextHeight] = React.useState(100);
     const [cycleContextTokens, setCycleContextTokens] = React.useState(0);
     const [ephemeralContextTokens, setEphemeralContextTokens] = React.useState(0);
-
-    const [isAssociatedFilesCollapsed, setAssociatedFilesCollapsed] = React.useState(false);
-    const [isThoughtsCollapsed, setThoughtsCollapsed] = React.useState(false);
-    const [isActionCollapsed, setActionCollapsed] = React.useState(false);
+    const [totalPromptTokens, setTotalPromptTokens] = React.useState(0);
+    const [estimatedPromptCost, setEstimatedPromptCost] = React.useState(0);
+    const [costBreakdown, setCostBreakdown] = React.useState<{[key: string]: number} | null>(null);
 
     const clientIpc = ClientPostMessageManager.getInstance();
 
-    const saveCurrentCycleState = React.useCallback(() => {
-        if (currentCycle === null) return;
-        const responses: { [key: string]: PcppResponse } = {};
-        for (let i = 1; i <= tabCount; i++) {
-            responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' };
-        }
-        
-        let cycleData: PcppCycle;
-        if (currentCycle === 0) {
-            cycleData = { cycleId: 0, cycleContext, ephemeralContext: '', responses: {}, timestamp: new Date().toISOString(), title: 'Project Setup' };
-        } else {
-            cycleData = {
-                cycleId: currentCycle, timestamp: new Date().toISOString(), title: cycleTitle, cycleContext, ephemeralContext, responses, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement: Array.from(selectedFilesForReplacement), tabCount, isSortedByTokens, pathOverrides: Object.fromEntries(pathOverrides), cycleContextHeight, ephemeralContextHeight,
-            };
-        }
-        clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
-    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, clientIpc, cycleContextHeight, ephemeralContextHeight]);
-
+    const getCurrentCycleData = React.useCallback((): PcppCycle | null => { if (currentCycle === null) return null; const responses: { [key: string]: PcppResponse } = {}; for (let i = 1; i <= tabCount; i++) responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' }; if (currentCycle === 0) return { cycleId: 0, cycleContext, ephemeralContext: '', responses: {}, timestamp: new Date().toISOString(), title: 'Project Setup' }; return { cycleId: currentCycle, timestamp: new Date().toISOString(), title: cycleTitle, cycleContext, ephemeralContext, responses, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement: Array.from(selectedFilesForReplacement), tabCount, isSortedByTokens, pathOverrides: Object.fromEntries(pathOverrides), cycleContextHeight, ephemeralContextHeight, }; }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, cycleContextHeight, ephemeralContextHeight]);
+    const saveCurrentCycleState = React.useCallback(() => { const cycleData = getCurrentCycleData(); if (cycleData) clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData }); }, [clientIpc, getCurrentCycleData]);
+    const requestCostEstimation = React.useCallback(() => { const cycleData = getCurrentCycleData(); if (cycleData) clientIpc.sendToServer(ClientToServerChannel.RequestPromptCostEstimation, { cycleData }); }, [clientIpc, getCurrentCycleData]);
     const debouncedSave = useDebounce(saveCurrentCycleState, 1000);
+    const debouncedCostRequest = useDebounce(requestCostEstimation, 500);
 
-    React.useEffect(() => {
-        debouncedSave();
-    }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, tabCount, isSortedByTokens, pathOverrides, debouncedSave, cycleContextHeight, ephemeralContextHeight]);
-    
-    React.useEffect(() => {
-        const handleVisibilityChange = () => {
-            if (document.visibilityState === 'hidden') {
-                saveCurrentCycleState();
-            }
-        };
-        document.addEventListener('visibilitychange', handleVisibilityChange);
-        return () => {
-            document.removeEventListener('visibilitychange', handleVisibilityChange);
-        };
-    }, [saveCurrentCycleState]);
-
-    const parseAllTabs = React.useCallback(() => {
-        setTabs(prevTabs => {
-            const allFilePaths = new Set<string>();
-            const updatedTabs = { ...prevTabs };
-            let needsUpdate = false;
-    
-            Object.values(updatedTabs).forEach(tabState => {
-                if (tabState.rawContent && !tabState.parsedContent) {
-                    needsUpdate = true;
-                    const parsed = parseResponse(tabState.rawContent);
-                    tabState.parsedContent = parsed;
-                    parsed.filesUpdated.forEach(file => allFilePaths.add(file));
-                    parsed.files.forEach(file => {
-                        const lang = path.extname(file.path).substring(1) || 'plaintext';
-                        const id = `${file.path}::${file.content}`;
-                        clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
-                    });
-                } else if (tabState.parsedContent) {
-                    tabState.parsedContent.filesUpdated.forEach(file => allFilePaths.add(file));
-                }
-            });
-    
-            if (allFilePaths.size > 0) {
-                clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) });
-            }
-    
-            return needsUpdate ? updatedTabs : prevTabs;
-        });
-    }, [clientIpc]);
-    
-    React.useEffect(() => {
-        const loadCycleData = (cycleData: PcppCycle, scope?: string) => {
-            setCurrentCycle(cycleData.cycleId);
-            setProjectScope(scope);
-            setCycleTitle(cycleData.title);
-            setCycleContext(cycleData.cycleContext);
-            setEphemeralContext(cycleData.ephemeralContext);
-            setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4));
-            setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4));
-            const newTabs: { [key: string]: TabState } = {};
-            Object.entries(cycleData.responses).forEach(([tabId, response]) => {
-                newTabs[tabId] = { rawContent: response.content, parsedContent: null };
-            });
-            setTabs(newTabs);
-            setTabCount(cycleData.tabCount || 4);
-            setIsParsedMode(cycleData.isParsedMode || false);
-            setLeftPaneWidth(cycleData.leftPaneWidth || 33);
-            setSelectedResponseId(cycleData.selectedResponseId || null);
-            setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || []));
-            setIsSortedByTokens(cycleData.isSortedByTokens || false);
-            setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {})));
-            setCycleContextHeight(cycleData.cycleContextHeight || 100);
-            setEphemeralContextHeight(cycleData.ephemeralContextHeight || 100);
-        };
-
-        clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); });
-        clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); });
-        clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml)));
-        clientIpc.onServerMessage(ServerToClientChannel.SendHighlightContext, ({ highlightedHtml, id }) => setHighlightedContexts(prev => new Map(prev).set(id, highlightedHtml)));
-        clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap))));
-        clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); });
-        clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { logger.log(`Received FilesWritten event for: ${paths.join(', ')}`); setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); });
-        clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, ({ filePath, originalTokens, modifiedTokens, similarity }) => {
-            setComparisonMetrics(prev => new Map(prev).set(filePath, { originalTokens, modifiedTokens, similarity }));
-        });
-        
-        clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});
-    }, [clientIpc]);
-
+    React.useEffect(() => { debouncedSave(); debouncedCostRequest(); }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, tabCount, isSortedByTokens, pathOverrides, debouncedSave, debouncedCostRequest, cycleContextHeight, ephemeralContextHeight]);
+    React.useEffect(() => { const handleVisibilityChange = () => { if (document.visibilityState === 'hidden') saveCurrentCycleState(); }; document.addEventListener('visibilitychange', handleVisibilityChange); return () => document.removeEventListener('visibilitychange', handleVisibilityChange); }, [saveCurrentCycleState]);
+    const parseAllTabs = React.useCallback(() => { setTabs(prevTabs => { const allFilePaths = new Set<string>(); const updatedTabs = { ...prevTabs }; let needsUpdate = false; Object.values(updatedTabs).forEach(tabState => { if (tabState.rawContent && !tabState.parsedContent) { needsUpdate = true; const parsed = parseResponse(tabState.rawContent); tabState.parsedContent = parsed; parsed.filesUpdated.forEach(file => allFilePaths.add(file)); parsed.files.forEach(file => { const lang = path.extname(file.path).substring(1) || 'plaintext'; const id = `${file.path}::${file.content}`; clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id }); }); } else if (tabState.parsedContent) { tabState.parsedContent.filesUpdated.forEach(file => allFilePaths.add(file)); } }); if (allFilePaths.size > 0) clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) }); return needsUpdate ? updatedTabs : prevTabs; }); }, [clientIpc]);
+    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string) => { setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setCycleContextHeight(cycleData.cycleContextHeight || 100); setEphemeralContextHeight(cycleData.ephemeralContextHeight || 100); }; clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, ({ filePath, originalTokens, modifiedTokens, similarity }) => { setComparisonMetrics(prev => new Map(prev).set(filePath, { originalTokens, modifiedTokens, similarity })); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); }, [clientIpc]);
     React.useEffect(() => { if (isParsedMode) parseAllTabs(); }, [isParsedMode, tabs, parseAllTabs]);
-    
-    React.useEffect(() => {
-        if (!selectedFilePath) return;
-    
-        const currentTabData = tabs[activeTab.toString()];
-        if (currentTabData?.parsedContent) {
-            const fileExistsInTab = currentTabData.parsedContent.files.some(f => f.path === selectedFilePath);
-            if (!fileExistsInTab) {
-                logger.log(`[State Cleanup] Selected file '${selectedFilePath}' not found in new tab '${activeTab}'. Clearing selection.`);
-                setSelectedFilePath(null);
-            }
-        }
-    }, [activeTab, tabs, selectedFilePath]);
+    React.useEffect(() => { if (!selectedFilePath) return; const currentTabData = tabs[activeTab.toString()]; if (currentTabData?.parsedContent) { const fileExistsInTab = currentTabData.parsedContent.files.some(f => f.path === selectedFilePath); if (!fileExistsInTab) setSelectedFilePath(null); } }, [activeTab, tabs, selectedFilePath]);
 
-    const handleCycleChange = (e: React.MouseEvent | null, newCycle: number) => { 
-        e?.stopPropagation(); 
-        if (newCycle >= 0 && newCycle <= maxCycle) { 
-            if (currentCycle !== 0) saveCurrentCycleState(); 
-            setSelectedFilesForReplacement(new Set()); 
-            setCurrentCycle(newCycle); 
-            clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); 
-        } 
-    };
-
-    const handleSelectForViewing = (filePath: string) => {
-        const newPath = selectedFilePath === filePath ? null : filePath;
-        setSelectedFilePath(newPath);
-        if (newPath) {
-            const file = activeTabData?.parsedContent?.files.find(f => f.path === newPath);
-            const pathForComparison = pathOverrides.get(newPath) || newPath;
-            if (file) {
-                clientIpc.sendToServer(ClientToServerChannel.RequestFileComparison, { filePath: pathForComparison, modifiedContent: file.content });
-            }
-        }
-    };
-
-    const handleAcceptSelectedFiles = () => {
-        if (selectedFilesForReplacement.size === 0) return;
-        const filesToWrite: BatchWriteFile[] = [];
-        selectedFilesForReplacement.forEach(compositeKey => {
-            const [responseId, filePath] = compositeKey.split(':::');
-            const responseData = tabs[responseId];
-            if (responseData?.parsedContent) {
-                const file = responseData.parsedContent.files.find(f => f.path === filePath);
-                if (file) {
-                    const finalPath = pathOverrides.get(file.path) || file.path;
-                    filesToWrite.push({ path: finalPath, content: file.content });
-                }
-            }
-        });
-        if (filesToWrite.length > 0) {
-            clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite });
-        }
-    };
-    
-    const handleLinkFile = (originalPath: string) => {
-        if (tempOverridePath.trim()) {
-            setPathOverrides(prev => new Map(prev).set(originalPath, tempOverridePath.trim()));
-            setFileExistenceMap(prev => new Map(prev).set(originalPath, true));
-            setTempOverridePath('');
-            handleSelectForViewing(originalPath);
-        }
-    };
-
-    const handleUnlinkFile = (originalPath: string) => {
-        setPathOverrides(prev => {
-            const newMap = new Map(prev);
-            newMap.delete(originalPath);
-            return newMap;
-        });
-        setFileExistenceMap(prev => new Map(prev).set(originalPath, false));
-    };
-
-    const handleContextKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-        if ((e.ctrlKey || e.metaKey) && e.key === 'z') {
-            return;
-        }
-        if ((e.ctrlKey || e.metaKey) && (e.key === 'y' || (e.shiftKey && e.key === 'Z'))) {
-            return;
-        }
-    };
-
+    const handleCycleChange = (e: React.MouseEvent | null, newCycle: number) => { e?.stopPropagation(); if (newCycle >= 0 && newCycle <= maxCycle) { if (currentCycle !== 0) saveCurrentCycleState(); setSelectedFilesForReplacement(new Set()); setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); } };
+    const handleSelectForViewing = (filePath: string) => { const newPath = selectedFilePath === filePath ? null : filePath; setSelectedFilePath(newPath); if (newPath) { const file = activeTabData?.parsedContent?.files.find(f => f.path === newPath); const pathForComparison = pathOverrides.get(newPath) || newPath; if (file) clientIpc.sendToServer(ClientToServerChannel.RequestFileComparison, { filePath: pathForComparison, modifiedContent: file.content }); } };
+    const handleAcceptSelectedFiles = () => { if (selectedFilesForReplacement.size === 0) return; const filesToWrite: BatchWriteFile[] = []; selectedFilesForReplacement.forEach(compositeKey => { const [responseId, filePath] = compositeKey.split(':::'); const responseData = tabs[responseId]; if (responseData?.parsedContent) { const file = responseData.parsedContent.files.find(f => f.path === filePath); if (file) { const finalPath = pathOverrides.get(file.path) || file.path; filesToWrite.push({ path: finalPath, content: file.content }); } } }); if (filesToWrite.length > 0) clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite }); };
+    const handleLinkFile = (originalPath: string) => { if (tempOverridePath.trim()) { setPathOverrides(prev => new Map(prev).set(originalPath, tempOverridePath.trim())); setFileExistenceMap(prev => new Map(prev).set(originalPath, true)); setTempOverridePath(''); handleSelectForViewing(originalPath); } };
+    const handleUnlinkFile = (originalPath: string) => { setPathOverrides(prev => { const newMap = new Map(prev); newMap.delete(originalPath); return newMap; }); setFileExistenceMap(prev => new Map(prev).set(originalPath, false)); };
+    const handleContextKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => { if ((e.ctrlKey || e.metaKey) && e.key === 'z') return; if ((e.ctrlKey || e.metaKey) && (e.key === 'y' || (e.shiftKey && e.key === 'Z'))) return; };
     const activeTabData = tabs[activeTab.toString()];
-
-    const sortedTabIds = React.useMemo(() => {
-        const tabIds = [...Array(tabCount)].map((_, i) => i + 1);
-        if (isParsedMode && isSortedByTokens) {
-            tabIds.sort((a, b) => {
-                const tokensA = tabs[a.toString()]?.parsedContent?.totalTokens ?? -1;
-                const tokensB = tabs[b.toString()]?.parsedContent?.totalTokens ?? -1;
-                return tokensB - tokensA;
-            });
-        }
-        return tabIds;
-    }, [tabs, isParsedMode, isSortedByTokens, tabCount]);
-
-    const viewableContent = React.useMemo(() => {
-        if (!selectedFilePath || !activeTabData?.parsedContent) return undefined;
-        const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath);
-        if (!file) return '<div>Error: File data not found in parsed response.</div>';
-        const id = `${file.path}::${file.content}`;
-        return highlightedCodeBlocks.get(id);
-    }, [selectedFilePath, activeTabData?.parsedContent, highlightedCodeBlocks]);
-
+    const sortedTabIds = React.useMemo(() => { const tabIds = [...Array(tabCount)].map((_, i) => i + 1); if (isParsedMode && isSortedByTokens) tabIds.sort((a, b) => { const tokensA = tabs[a.toString()]?.parsedContent?.totalTokens ?? -1; const tokensB = tabs[b.toString()]?.parsedContent?.totalTokens ?? -1; return tokensB - tokensA; }); return tabIds; }, [tabs, isParsedMode, isSortedByTokens, tabCount]);
+    const viewableContent = React.useMemo(() => { if (!selectedFilePath || !activeTabData?.parsedContent) return undefined; const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath); if (!file) return '<div>Error: File data not found in parsed response.</div>'; const id = `${file.path}::${file.content}`; return highlightedCodeBlocks.get(id); }, [selectedFilePath, activeTabData?.parsedContent, highlightedCodeBlocks]);
     const handleRawContentChange = (newContent: string, tabIndex: number) => setTabs(prev => ({ ...prev, [tabIndex.toString()]: { rawContent: newContent, parsedContent: null }}));
-    const handleGlobalParseToggle = () => {
-        const newParseMode = !isParsedMode;
-        setIsParsedMode(newParseMode);
-        setSelectedFilePath(null);
-        if (!newParseMode) setTabs(prev => { const newTabs = {...prev}; Object.keys(newTabs).forEach(key => { newTabs[key].parsedContent = null; }); return newTabs; });
-    };
-
-    const handleNewCycle = (e: React.MouseEvent) => {
-        e.stopPropagation();
-        saveCurrentCycleState();
-    
-        const newCycleId = maxCycle + 1;
-        setMaxCycle(newCycleId);
-        setCurrentCycle(newCycleId);
-        
-        setCycleTitle('New Cycle');
-        setCycleContext('');
-        setEphemeralContext('');
-        setTabs({});
-        setIsParsedMode(false);
-        setSelectedResponseId(null);
-        setSelectedFilesForReplacement(new Set());
-    };
-
-    const handleGeneratePrompt = () => {
-        if (currentCycle === null) return;
-        clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle });
-    }
-    
+    const handleGlobalParseToggle = () => { const newParseMode = !isParsedMode; setIsParsedMode(newParseMode); setSelectedFilePath(null); if (!newParseMode) setTabs(prev => { const newTabs = {...prev}; Object.keys(newTabs).forEach(key => { newTabs[key].parsedContent = null; }); return newTabs; }); };
+    const handleNewCycle = (e: React.MouseEvent) => { e.stopPropagation(); saveCurrentCycleState(); const newCycleId = maxCycle + 1; setMaxCycle(newCycleId); setCurrentCycle(newCycleId); setCycleTitle('New Cycle'); setCycleContext(''); setEphemeralContext(''); setTabs({}); setIsParsedMode(false); setSelectedResponseId(null); setSelectedFilesForReplacement(new Set()); };
+    const handleGeneratePrompt = () => { if (currentCycle === null) return; clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle }); }
     const handleDeleteCycle = () => { if(currentCycle !== null) clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle }); };
-    
-    const handleResetHistory = () => {
-        if (window.confirm("Are you sure you want to delete ALL cycle history? This action cannot be undone.")) {
-            clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {});
-        }
-    };
-
+    const handleResetHistory = () => { if (window.confirm("Are you sure you want to delete ALL cycle history? This action cannot be undone.")) clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {}); };
     const handleExportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestExportHistory, {});
     const handleImportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestImportHistory, {});
-    
-    const handleFileSelectionToggle = (filePath: string) => {
-        const currentTabId = activeTab.toString();
-        const compositeKeyForCurrent = `${currentTabId}:::${filePath}`;
-    
-        setSelectedFilesForReplacement(prev => {
-            const newSet = new Set(prev);
-            
-            let existingKey: string | undefined;
-            for (const key of newSet) {
-                if (key.endsWith(`:::${filePath}`)) {
-                    existingKey = key;
-                    break;
-                }
-            }
-    
-            if (existingKey) {
-                if (existingKey === compositeKeyForCurrent) {
-                    newSet.delete(existingKey);
-                } else {
-                    newSet.delete(existingKey);
-                    newSet.add(compositeKeyForCurrent);
-                }
-            } else {
-                newSet.add(compositeKeyForCurrent);
-            }
-            
-            return newSet;
-        });
-    };
-    
-    const handleSelectAllFilesToggle = () => {
-        if (!activeTabData?.parsedContent) return;
-        
-        const allFilesForTab = activeTabData.parsedContent.filesUpdated.map(fp => `${activeTab}:::${fp}`);
-        const isAllSelected = allFilesForTab.every(key => selectedFilesForReplacement.has(key));
-
-        setSelectedFilesForReplacement(prev => {
-            const newSet = new Set(prev);
-            if (isAllSelected) {
-                allFilesForTab.forEach(key => newSet.delete(key));
-            } else {
-                allFilesForTab.forEach(key => newSet.add(key));
-            }
-            return newSet;
-        });
-    };
-
-    const isAllFilesSelected = React.useMemo(() => {
-        if (!activeTabData?.parsedContent) return false;
-        const allFiles = activeTabData.parsedContent.filesUpdated;
-        if (allFiles.length === 0) return false;
-        return allFiles.every(file => selectedFilesForReplacement.has(`${activeTab}:::${file}`));
-    }, [selectedFilesForReplacement, activeTabData, activeTab]);
-
-    const isNewCycleButtonDisabled = React.useMemo(() => {
-        const hasTitle = cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== '';
-        const hasContext = cycleContext.trim() !== '';
-        const hasSelectedResponse = selectedResponseId !== null;
-        return !hasTitle || !hasContext || !hasSelectedResponse;
-    }, [cycleTitle, cycleContext, selectedResponseId]);
-    
-    const handleLogState = () => {
-        if (currentCycle === null) return;
-        const responses: { [key: string]: PcppResponse } = {};
-        for (let i = 1; i <= tabCount; i++) {
-            responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' };
-        }
-        const currentState: PcppCycle = { cycleId: currentCycle, timestamp: new Date().toISOString(), title: cycleTitle, cycleContext, ephemeralContext, responses, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement: Array.from(selectedFilesForReplacement), tabCount, isSortedByTokens, cycleContextHeight, ephemeralContextHeight };
-        clientIpc.sendToServer(ClientToServerChannel.RequestLogState, { currentState });
-    };
-
-    const handleCopyContent = () => {
-        if (!selectedFilePath || !activeTabData?.parsedContent) return;
-        const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath);
-        if (file) {
-            clientIpc.sendToServer(ClientToServerChannel.RequestCopyTextToClipboard, { text: file.content });
-        }
-    };
-
-    const totalContextTokens = cycleContextTokens + ephemeralContextTokens;
-    const estimatedCost = calculatePromptCost(totalContextTokens);
-
+    const handleFileSelectionToggle = (filePath: string) => { const currentTabId = activeTab.toString(); const compositeKeyForCurrent = `${currentTabId}:::${filePath}`; setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); let existingKey: string | undefined; for (const key of newSet) if (key.endsWith(`:::${filePath}`)) { existingKey = key; break; } if (existingKey) { if (existingKey === compositeKeyForCurrent) newSet.delete(existingKey); else { newSet.delete(existingKey); newSet.add(compositeKeyForCurrent); } } else newSet.add(compositeKeyForCurrent); return newSet; }); };
+    const handleSelectAllFilesToggle = () => { if (!activeTabData?.parsedContent) return; const allFilesForTab = activeTabData.parsedContent.filesUpdated.map(fp => `${activeTab}:::${fp}`); const isAllSelected = allFilesForTab.every(key => selectedFilesForReplacement.has(key)); setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); if (isAllSelected) allFilesForTab.forEach(key => newSet.delete(key)); else allFilesForTab.forEach(key => newSet.add(key)); return newSet; }); };
+    const isAllFilesSelected = React.useMemo(() => { if (!activeTabData?.parsedContent) return false; const allFiles = activeTabData.parsedContent.filesUpdated; if (allFiles.length === 0) return false; return allFiles.every(file => selectedFilesForReplacement.has(`${activeTab}:::${file}`)); }, [selectedFilesForReplacement, activeTabData, activeTab]);
+    const isNewCycleButtonDisabled = React.useMemo(() => { const hasTitle = cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== ''; const hasContext = cycleContext.trim() !== ''; const hasSelectedResponse = selectedResponseId !== null; return !hasTitle || !hasContext || !hasSelectedResponse; }, [cycleTitle, cycleContext, selectedResponseId]);
+    const handleLogState = () => { const currentState = getCurrentCycleData(); if (currentState) clientIpc.sendToServer(ClientToServerChannel.RequestLogState, { currentState }); };
+    const handleCopyContent = () => { if (!selectedFilePath || !activeTabData?.parsedContent) return; const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath); if (file) clientIpc.sendToServer(ClientToServerChannel.RequestCopyTextToClipboard, { text: file.content }); };
     const isReadyForNextCycle = !isNewCycleButtonDisabled;
+    const costBreakdownTooltip = React.useMemo(() => { if (!costBreakdown) return "Calculating..."; return Object.entries(costBreakdown).map(([key, value]) => `${key}: ${formatLargeNumber(value, 1)} tk`).join('\n'); }, [costBreakdown]);
 
-    if (currentCycle === null) {
-        return <div>Loading...</div>;
-    }
-    
-    if (currentCycle === -1) {
-        return (
-            <div className="onboarding-container">
-                <h1>No Folder Opened</h1>
-                <p>You have not yet opened a folder for the Data Curation Environment to manage.</p>
-                <button 
-                    className="dce-button-primary" 
-                    onClick={() => clientIpc.sendToServer(ClientToServerChannel.RequestOpenFolder, {})}
-                >
-                    <VscFolder /> Open Folder
-                </button>
-            </div>
-        );
-    }
-
-    if (currentCycle === 0) {
-        return <OnboardingView initialProjectScope={projectScope} onNavigateToCycle={(id) => handleCycleChange(null, id)} latestCycleId={maxCycle} onScopeChange={setCycleContext} />;
-    }
+    if (currentCycle === null) return <div>Loading...</div>;
+    if (currentCycle === -1) return <div className="onboarding-container"><h1>No Folder Opened</h1><p>You have not yet opened a folder for the Data Curation Environment to manage.</p><button className="dce-button-primary" onClick={() => clientIpc.sendToServer(ClientToServerChannel.RequestOpenFolder, {})}><VscFolder /> Open Folder</button></div>;
+    if (currentCycle === 0) return <OnboardingView initialProjectScope={projectScope} onNavigateToCycle={(id) => handleCycleChange(null, id)} latestCycleId={maxCycle} onScopeChange={setCycleContext} />;
 
     const collapsedNavigator = <div className="collapsed-navigator"><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0}><VscChevronLeft /></button><span className="cycle-display">C{currentCycle}</span><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}><VscChevronRight /></button></div>;
     const currentComparisonMetrics = selectedFilePath ? comparisonMetrics.get(pathOverrides.get(selectedFilePath) || selectedFilePath) : null;
-    
-    const renderContent = () => {
-        if (!isParsedMode || !activeTabData?.parsedContent) {
-            return <textarea className="response-textarea" placeholder={`Paste AI response for tab ${activeTab} here...`} value={activeTabData?.rawContent || ''} onChange={(e) => handleRawContentChange(e.target.value, activeTab)} onKeyDown={handleContextKeyDown} />;
-        }
-        return <div className="parsed-view-grid">
-            <div className="parsed-view-left" style={{ flexBasis: `${leftPaneWidth}%` }}>
-                <CollapsibleSection title="Associated Files" isCollapsed={isAssociatedFilesCollapsed} onToggle={() => setAssociatedFilesCollapsed(p => !p)}>
-                    <ul className="associated-files-list">{activeTabData.parsedContent.filesUpdated.map(file => {
-                        const fileExists = fileExistenceMap.get(file);
-                        const hasOverride = pathOverrides.has(file);
-                        return <li key={file} className={selectedFilePath === file ? 'selected' : ''} onClick={() => handleSelectForViewing(file)} title={file}>
-                            <div className="file-row">
-                                <input type="checkbox" checked={selectedFilesForReplacement.has(`${activeTab}:::${file}`)} onChange={() => handleFileSelectionToggle(file)} onClick={e => e.stopPropagation()} />
-                                {fileExists ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
-                                <span>{file}</span>
-                            </div>
-                            {!fileExists && selectedFilePath === file && (
-                                <div className="path-override-container" onClick={e => e.stopPropagation()}>
-                                    {hasOverride ? (
-                                        <>
-                                            <span>Linked to: {pathOverrides.get(file)}</span>
-                                            <button className="styled-button" onClick={() => handleUnlinkFile(file)}><VscDebugDisconnect /> Unlink</button>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <input type="text" placeholder="Enter correct relative path..." value={tempOverridePath} onChange={e => setTempOverridePath(e.target.value)} onKeyDown={e => {if(e.key === 'Enter') handleLinkFile(file)}} />
-                                            <button className="styled-button" onClick={() => handleLinkFile(file)}><VscLink /> Link</button>
-                                        </>
-                                    )}
-                                </div>
-                            )}
-                        </li>
-                    })}</ul>
-                </CollapsibleSection>
-                <CollapsibleSection title="Summary" isCollapsed={isThoughtsCollapsed} onToggle={() => setThoughtsCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.summary}</ReactMarkdown></CollapsibleSection>
-                <CollapsibleSection title="Course of Action" isCollapsed={isActionCollapsed} onToggle={() => setActionCollapsed(p => !p)}><ReactMarkdown>{activeTabData.parsedContent.courseOfAction}</ReactMarkdown></CollapsibleSection>
-            </div>
-            <div className="resizer" />
-            <div className="parsed-view-right">
-                <div className="response-acceptance-header"><button className={`styled-button ${selectedResponseId === activeTab.toString() ? 'toggled' : ''}`} onClick={() => setSelectedResponseId(prev => prev === activeTab.toString() ? null : activeTab.toString())}>{selectedResponseId === activeTab.toString() ? 'Response Selected' : 'Select This Response'}</button><button className="styled-button" onClick={handleSelectAllFilesToggle}><VscCheckAll/> {isAllFilesSelected ? 'Deselect All' : 'Select All'}</button><button className="styled-button" onClick={() => setSelectedFilesForReplacement(new Set())} title="Deselect All Files Across All Responses"><VscClearAll /></button><button className="styled-button" onClick={handleAcceptSelectedFiles} disabled={selectedFilesForReplacement.size === 0}><VscSave/> Accept Selected</button></div>
-                <div className="file-content-viewer-header">
-                    <span className="file-path" title={selectedFilePath || ''}>{selectedFilePath ? path.basename(selectedFilePath) : 'No file selected'}</span>
-                    <div className="file-actions">
-                        <div className="file-metadata">
-                            {currentComparisonMetrics && currentComparisonMetrics.originalTokens !== -1 && (
-                                <>
-                                    <span>Original: {formatLargeNumber(currentComparisonMetrics.originalTokens, 1)} tk</span>
-                                    <span>New: {formatLargeNumber(currentComparisonMetrics.modifiedTokens, 1)} tk</span>
-                                    <span>Similarity: {(currentComparisonMetrics.similarity * 100).toFixed(0)}%</span>
-                                </>
-                            )}
-                             {currentComparisonMetrics && currentComparisonMetrics.originalTokens === -1 && (
-                                <span style={{color: 'var(--vscode-errorForeground)'}}>Original file not found</span>
-                             )}
-                        </div>
-                        <button onClick={handleCopyContent} title="Copy file content" disabled={!selectedFilePath}><VscClippy /></button>
-                    </div>
-                </div>
-                <CodeViewer htmlContent={viewableContent} />
-            </div>
-        </div>;
-    };
+    const totalPromptCostDisplay = <span className="total-prompt-cost" title={costBreakdownTooltip}>Total Est: ({formatLargeNumber(totalPromptTokens, 1)} tk) ~ ${estimatedPromptCost.toFixed(4)}</span>;
 
     return <div className="pc-view-container">
-        <div className="pc-header">
-            <div className="pc-toolbar">
-                <button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button>
-                <button onClick={handleGeneratePrompt} title="Generate prompt.md"><VscFileCode /> Generate prompt.md</button>
-                <button onClick={handleLogState} title="Log Current State"><VscBug/></button>
-                <button onClick={handleGlobalParseToggle} className={isParsedMode ? 'active' : ''}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button>
-            </div>
-            <div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} /></div>
-        </div>
-        <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''}>
-            <CycleNavigator
-                currentCycle={currentCycle}
-                maxCycle={maxCycle}
-                cycleTitle={cycleTitle}
-                isNewCycleButtonDisabled={isNewCycleButtonDisabled}
-                onCycleChange={handleCycleChange}
-                onNewCycle={handleNewCycle}
-                onTitleChange={setCycleTitle}
-                onDeleteCycle={handleDeleteCycle}
-                onResetHistory={handleResetHistory}
-                onExportHistory={handleExportHistory}
-                onImportHistory={handleImportHistory}
-            />
-            <div className="context-inputs">
-                <div className="context-input-wrapper">
-                    <div className="context-label">
-                        <span>Cycle Context</span>
-                        <span className="cost-estimate" title="Estimated prompt input cost using Gemini 2.5 Pro pricing.">({formatLargeNumber(totalContextTokens, 1)} tk) ~ ${estimatedCost.toFixed(4)}</span>
-                    </div>
-                    <NumberedTextarea value={cycleContext} onChange={(e) => { setCycleContext(e.target.value); setCycleContextTokens(Math.ceil(e.target.value.length / 4)); }} placeholder="Cycle Context (notes for this cycle)..." onKeyDown={handleContextKeyDown} height={cycleContextHeight} onHeightChange={setCycleContextHeight} id={`cycle-context-${currentCycle}`} />
-                </div>
-                <div className="context-input-wrapper">
-                    <div className="context-label"><span>Ephemeral Context</span><span>Tokens: {ephemeralContextTokens}</span></div>
-                    <NumberedTextarea value={ephemeralContext} onChange={(e) => { setEphemeralContext(e.target.value); setEphemeralContextTokens(Math.ceil(e.target.value.length / 4)); }} placeholder="Ephemeral Context (for this cycle's prompt only)..." onKeyDown={handleContextKeyDown} height={ephemeralContextHeight} onHeightChange={setEphemeralContextHeight} id={`ephemeral-context-${currentCycle}`} />
-                </div>
-            </div>
+        <div className="pc-header"><div className="pc-toolbar"><button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button><button onClick={handleGeneratePrompt} title="Generate prompt.md"><VscFileCode /> Generate prompt.md</button><button onClick={handleLogState} title="Log Current State"><VscBug/></button><button onClick={handleGlobalParseToggle} className={isParsedMode ? 'active' : ''}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} /></div></div>
+        <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''} extraHeaderContent={totalPromptCostDisplay}>
+            <CycleNavigator currentCycle={currentCycle} maxCycle={maxCycle} cycleTitle={cycleTitle} isNewCycleButtonDisabled={isNewCycleButtonDisabled} onCycleChange={handleCycleChange} onNewCycle={handleNewCycle} onTitleChange={setCycleTitle} onDeleteCycle={handleDeleteCycle} onResetHistory={handleResetHistory} onExportHistory={handleExportHistory} onImportHistory={handleImportHistory}/>
+            <ContextInputs cycleContext={cycleContext} ephemeralContext={ephemeralContext} cycleContextTokens={cycleContextTokens} ephemeralContextTokens={ephemeralContextTokens} onCycleContextChange={(e) => { setCycleContext(e.target.value); setCycleContextTokens(Math.ceil(e.target.value.length / 4)); }} onEphemeralContextChange={(e) => { setEphemeralContext(e.target.value); setEphemeralContextTokens(Math.ceil(e.target.value.length / 4)); }} onContextKeyDown={handleContextKeyDown} cycleContextHeight={cycleContextHeight} onCycleContextHeightChange={setCycleContextHeight} ephemeralContextHeight={ephemeralContextHeight} onEphemeralContextHeightChange={setEphemeralContextHeight} currentCycle={currentCycle} />
         </CollapsibleSection>
-        <div className="tab-bar-container">
-            <div className="tab-bar">{sortedTabIds.map((tabIndex) => {
-                const tabData = tabs[tabIndex.toString()];
-                const parsedData = tabData?.parsedContent;
-                return <div key={tabIndex} className={`tab ${activeTab === tabIndex ? 'active' : ''} ${selectedResponseId === tabIndex.toString() ? 'selected' : ''}`} onClick={() => setActiveTab(tabIndex)}><div className="tab-title">Resp {tabIndex}</div>{isParsedMode && parsedData && (<div className="tab-metadata"><span><VscFileCode /> {parsedData.files.length}</span><span><VscSymbolNumeric /> {formatLargeNumber(parsedData.totalTokens, 1)}</span></div>)}</div>;
-            })}</div>
-            {isParsedMode && <button onClick={() => setIsSortedByTokens(p => !p)} className={`sort-button ${isSortedByTokens ? 'active' : ''}`} title="Sort responses by token count">{isSortedByTokens ? <VscListOrdered/> : <VscListUnordered/>} Sort</button>}
-        </div>
-        <div className="tab-content">{activeTab !== null && <div className="tab-pane">{renderContent()}</div>}</div>
+        <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} onSortToggle={() => setIsSortedByTokens(p => !p)} />
+        <div className="tab-content"><ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={currentComparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => setSelectedResponseId(prev => prev === id ? null : id)} onSelectAllFiles={handleSelectAllFilesToggle} onDeselectAllFiles={() => setSelectedFilesForReplacement(new Set())} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} /></div>
     </div>;
 };
 
@@ -27868,7 +28333,9 @@ export enum ClientToServerChannel {
     RequestFileComparison = "clientToServer.requestFileComparison",
     RequestExportHistory = "clientToServer.requestExportHistory",
     RequestImportHistory = "clientToServer.requestImportHistory",
-    RequestHighlightContext = "clientToServer.requestHighlightContext", // New in C169
+    RequestHighlightContext = "clientToServer.requestHighlightContext",
+    RequestPromptCostEstimation = "clientToServer.requestPromptCostEstimation",
+    RequestPromptCostBreakdown = "clientToServer.requestPromptCostBreakdown",
 }
 
 export enum ServerToClientChannel {
@@ -27887,16 +28354,18 @@ export enum ServerToClientChannel {
     // Phase 2: PCPP
     SendFileExistence = "serverToClient.sendFileExistence",
     SendSyntaxHighlight = "serverToClient.sendSyntaxHighlight",
+    SendHighlightContext = "serverToClient.sendHighlightContext",
     SendLatestCycleData = "serverToClient.sendLatestCycleData",
     SendCycleData = "serverToClient.sendCycleData",
     FilesWritten = "serverToClient.filesWritten",
     SendFileComparison = "serverToClient.sendFileComparison", 
-    SendHighlightContext = "serverToClient.sendHighlightContext", // New in C169
+    SendPromptCostEstimation = "serverToClient.sendPromptCostEstimation",
+    SendPromptCostBreakdown = "serverToClient.sendPromptCostBreakdown",
 }
 </file>
 
 <file path="src/common/ipc/channels.type.ts">
-// Updated on: C170 (Fix TS error on ComparisonMetrics)
+// Updated on: C172 (Add breakdown to prompt cost estimation)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -27956,6 +28425,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestFileComparison ? { filePath: string; modifiedContent: string; } :
     T extends ClientToServerChannel.RequestExportHistory ? {} :
     T extends ClientToServerChannel.RequestImportHistory ? {} :
+    T extends ClientToServerChannel.RequestPromptCostEstimation ? { cycleData: PcppCycle } :
     
     T extends ServerToClientChannel.SendWorkspaceFiles ? { files: FileNode[] } :
     T extends ServerToClientChannel.SendWorkspaceTrustState ? { isTrusted: boolean } :
@@ -27975,6 +28445,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SendCycleData ? { cycleData: PcppCycle | null, projectScope?: string; } :
     T extends ServerToClientChannel.FilesWritten ? { paths: string[] } :
     T extends ServerToClientChannel.SendFileComparison ? { filePath: string } & ComparisonMetrics :
+    T extends ServerToClientChannel.SendPromptCostEstimation ? { totalTokens: number; estimatedCost: number; breakdown: { [key: string]: number } } :
     never;
 </file>
 

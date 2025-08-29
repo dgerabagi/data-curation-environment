@@ -53,7 +53,8 @@ export enum ClientToServerChannel {
     RequestExportHistory = "clientToServer.requestExportHistory",
     RequestImportHistory = "clientToServer.requestImportHistory",
     RequestHighlightContext = "clientToServer.requestHighlightContext",
-    RequestPromptCostEstimation = "clientToServer.requestPromptCostEstimation", // New in C171
+    RequestPromptCostEstimation = "clientToServer.requestPromptCostEstimation",
+    RequestPromptCostBreakdown = "clientToServer.requestPromptCostBreakdown",
 }
 
 export enum ServerToClientChannel {
@@ -77,5 +78,6 @@ export enum ServerToClientChannel {
     SendCycleData = "serverToClient.sendCycleData",
     FilesWritten = "serverToClient.filesWritten",
     SendFileComparison = "serverToClient.sendFileComparison", 
-    SendPromptCostEstimation = "serverToClient.sendPromptCostEstimation", // New in C171
+    SendPromptCostEstimation = "serverToClient.sendPromptCostEstimation",
+    SendPromptCostBreakdown = "serverToClient.sendPromptCostBreakdown",
 }

@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/CodeViewer.tsx
-// Updated on: C170 (Fix TS error)
+// Updated on: C172 (No functional changes, header update only)
 import * as React from 'react';
 
 const CodeViewer: React.FC<{ htmlContent: string | undefined | null }> = ({ htmlContent }) => {

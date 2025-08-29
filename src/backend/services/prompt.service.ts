@@ -1,3 +1,4 @@
+// Updated on: C172 (Fix cost estimation logic)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -116,17 +117,9 @@ ${staticContext.trim()}
         return cyclesContent;
     }
 
-    private async getPromptParts(cycleData: PcppCycle): Promise<string[]> {
+    private async getPromptParts(cycleData: PcppCycle, flattenedRepoContent: string): Promise<{ [key: string]: string }> {
         const rootPath = this.workspaceRoot;
         if (!rootPath) throw new Error("No workspace folder open.");
-
-        const flattenedRepoPath = path.join(rootPath, 'flattened_repo.md');
-        let flattenedContent = '';
-        try {
-            flattenedContent = await fs.readFile(flattenedRepoPath, 'utf-8');
-        } catch (e) {
-            Services.loggerService.warn("'flattened_repo.md' not found. Will be empty in prompt.");
-        }
 
         const fullHistoryFile = await Services.historyService.getFullHistory();
         const fullHistory: PcppCycle[] = fullHistoryFile.cycles;
@@ -160,27 +153,39 @@ ${staticContext.trim()}
         const interactionSchemaContent = `<M3. Interaction Schema>\n${a52_2_Content}\n\n${a52_1_Content}\n</M3. Interaction Schema>`;
 
         const projectScope = `<M4. current project scope>\n${fullHistoryFile.projectScope || 'No project scope defined.'}\n</M4. current project scope>`;
+        const m5Content = `<M5. organized artifacts list>\n${a0Content}\n</M5. organized artifacts list>`;
+        const m7Content = `<M7. Flattened Repo>\n${flattenedRepoContent}\n</M7. Flattened Repo>`;
 
-        return [
-            `<prompt.md>`,
-            this.artifactSchemaTemplate,
-            cycleOverview,
-            interactionSchemaContent,
-            projectScope,
-            `<M5. organized artifacts list>\n${a0Content}\n</M5. organized artifacts list>`,
-            cyclesContent,
-            `<M7. Flattened Repo>\n${flattenedContent}\n</M7. Flattened Repo>`,
-            `</prompt.md>`
-        ];
+        return {
+            "Prompt Wrapper": `<prompt.md>\n\n</prompt.md>`,
+            "M1 Artifact Schema": this.artifactSchemaTemplate,
+            "M2 Cycle Overview": cycleOverview,
+            "M3 Interaction Schema": interactionSchemaContent,
+            "M4 Project Scope": projectScope,
+            "M5 Artifact List": m5Content,
+            "M6 Cycles": cyclesContent,
+            "M7 Flattened Repo": m7Content
+        };
     }
 
     public async handlePromptCostEstimationRequest(cycleData: PcppCycle, serverIpc: ServerPostMessageManager) {
         try {
-            const promptParts = await this.getPromptParts(cycleData);
-            const finalPrompt = promptParts.join('\n\n');
-            const totalTokens = Math.ceil(finalPrompt.length / 4);
+            const selectedFiles = await Services.selectionService.getLastSelection();
+            const flattenedContent = await Services.flattenerService.getFlattenedContent(selectedFiles);
+            
+            const promptParts = await this.getPromptParts(cycleData, flattenedContent);
+            
+            const breakdown: { [key: string]: number } = {};
+            let totalTokens = 0;
+
+            for (const [key, value] of Object.entries(promptParts)) {
+                const partTokens = Math.ceil(value.length / 4);
+                breakdown[key] = partTokens;
+                totalTokens += partTokens;
+            }
+
             const estimatedCost = calculatePromptCost(totalTokens);
-            serverIpc.sendToClient(ServerToClientChannel.SendPromptCostEstimation, { totalTokens, estimatedCost });
+            serverIpc.sendToClient(ServerToClientChannel.SendPromptCostEstimation, { totalTokens, estimatedCost, breakdown });
         } catch (error: any) {
             Services.loggerService.error(`Failed to estimate prompt cost: ${error.message}`);
         }
@@ -250,10 +255,16 @@ ${cyclesContent}
             Services.loggerService.log("Generating prompt.md file...");
             
             const lastSelection = await Services.selectionService.getLastSelection();
+            let flattenedContent = '<!-- No files selected for flattening -->';
             if (lastSelection.length > 0) {
                 await Services.flattenerService.flatten(lastSelection);
+                 try {
+                    flattenedContent = await fs.readFile(path.join(rootPath, 'flattened_repo.md'), 'utf-8');
+                } catch (e) {
+                    Services.loggerService.warn("'flattened_repo.md' not found after flattening. Will be empty in prompt.");
+                }
             } else {
-                Services.loggerService.warn("No files selected for flattening. 'flattened_repo.md' may be stale.");
+                Services.loggerService.warn("No files selected for flattening. 'flattened_repo.md' may be stale or non-existent.");
             }
             
             const fullHistory = (await Services.historyService.getFullHistory()).cycles;
@@ -263,8 +274,8 @@ ${cyclesContent}
             }
             const currentCycleData = { ...currentCycleDataFromHistory, title: cycleTitle };
 
-            const promptParts = await this.getPromptParts(currentCycleData);
-            const finalPrompt = promptParts.join('\n\n');
+            const promptParts = await this.getPromptParts(currentCycleData, flattenedContent);
+            const finalPrompt = Object.values(promptParts).join('\n\n');
 
             await fs.writeFile(promptMdPath, finalPrompt, 'utf-8');
             vscode.window.showInformationMessage(`Successfully generated prompt.md.`);
@@ -274,9 +285,6 @@ ${cyclesContent}
 
         } catch (error: any) {
             let errorMessage = `Failed to generate prompt.md: ${error.message}`;
-            if (error.code === 'ENOENT' && error.path?.includes('flattened_repo.md')) {
-                errorMessage = "Failed to generate prompt.md: 'flattened_repo.md' not found. Please flatten context first.";
-            }
             vscode.window.showErrorMessage(errorMessage);
             Services.loggerService.error(errorMessage);
         }

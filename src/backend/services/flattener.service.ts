@@ -1,4 +1,4 @@
-// Updated on: C167 (Add package-lock.json to non-selectable)
+// Updated on: C172 (Add in-memory flattening for cost estimation)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -28,6 +28,22 @@ const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
 export class FlattenerService {
 
+    public async getFlattenedContent(selectedPaths: string[]): Promise<string> {
+        const workspaceFolders = vscode.workspace.workspaceFolders;
+        if (!workspaceFolders || workspaceFolders.length === 0 || selectedPaths.length === 0) {
+            return '<!-- No files selected for flattening -->';
+        }
+        
+        const rootPath = workspaceFolders[0].uri.fsPath;
+        const allFilePaths = await this.expandDirectories(selectedPaths);
+        const uniqueFilePaths = [...new Set(allFilePaths)];
+
+        const fileStatsPromises = uniqueFilePaths.map(filePath => this.getFileStatsAndContent(filePath));
+        const results = await Promise.all(fileStatsPromises);
+        
+        return this.generateOutputContent(results, rootPath, 'in-memory-prompt.md', false);
+    }
+
     public async flatten(selectedPaths: string[]) {
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (!workspaceFolders || workspaceFolders.length === 0) {
@@ -50,8 +66,7 @@ export class FlattenerService {
             const results = await Promise.all(fileStatsPromises);
             const validResults = results.filter(r => !r.error);
 
-
-            const outputContent = this.generateOutputContent(results, rootPath, outputFilePath);
+            const outputContent = this.generateOutputContent(results, rootPath, outputFilePath, true);
 
             await fs.writeFile(outputFilePath, outputContent, 'utf-8');
             vscode.window.showInformationMessage(`Successfully flattened ${validResults.length} files to flattened_repo.md.`);
@@ -189,26 +204,30 @@ export class FlattenerService {
         }
     }
 
-    private generateOutputContent(results: FileStats[], rootDir: string, outputFilename: string): string {
+    private generateOutputContent(results: FileStats[], rootDir: string, outputFilename: string, includeHeader: boolean): string {
         const validResults = results.filter(r => !r.error);
-        const totalTokens = validResults.reduce((sum, r) => sum + r.tokens, 0);
         
-        let output = `<!--\n  File: ${path.basename(outputFilename)}\n  Source Directory: ${rootDir}\n  Date Generated: ${new Date().toISOString()}\n  ---\n`;
-        output += `  Total Files: ${validResults.length}\n  Approx. Tokens: ${totalTokens}\n-->\n\n`;
-        
-        output += `<!-- Top 10 Text Files by Token Count -->\n`;
-        [...validResults].filter(r => r.tokens > 0).sort((a, b) => b.tokens - a.tokens).slice(0, 10)
-            .forEach((r, i) => output += `${i + 1}. ${path.relative(rootDir, r.filePath)} (${r.tokens} tokens)\n`);
-        output += `\n`;
+        let output = '';
 
-        output += `<!-- Full File List -->\n`;
-        results.forEach((r, i) => {
-            const relPath = path.relative(rootDir, r.filePath);
-            if (r.error) output += `${i + 1}. ${relPath} - ERROR: ${r.error}\n`;
-            else if (r.isBinary) output += `${i + 1}. ${relPath} - [Binary] Size: ${formatBytes(r.sizeInBytes)}\n`;
-            else output += `${i + 1}. ${relPath} - Lines: ${r.lines} - Chars: ${r.characters} - Tokens: ${r.tokens}\n`;
-        });
-        output += `\n`;
+        if (includeHeader) {
+            const totalTokens = validResults.reduce((sum, r) => sum + r.tokens, 0);
+            output += `<!--\n  File: ${path.basename(outputFilename)}\n  Source Directory: ${rootDir}\n  Date Generated: ${new Date().toISOString()}\n  ---\n`;
+            output += `  Total Files: ${validResults.length}\n  Approx. Tokens: ${totalTokens}\n-->\n\n`;
+            
+            output += `<!-- Top 10 Text Files by Token Count -->\n`;
+            [...validResults].filter(r => r.tokens > 0).sort((a, b) => b.tokens - a.tokens).slice(0, 10)
+                .forEach((r, i) => output += `${i + 1}. ${path.relative(rootDir, r.filePath)} (${r.tokens} tokens)\n`);
+            output += `\n`;
+
+            output += `<!-- Full File List -->\n`;
+            results.forEach((r, i) => {
+                const relPath = path.relative(rootDir, r.filePath);
+                if (r.error) output += `${i + 1}. ${relPath} - ERROR: ${r.error}\n`;
+                else if (r.isBinary) output += `${i + 1}. ${relPath} - [Binary] Size: ${formatBytes(r.sizeInBytes)}\n`;
+                else output += `${i + 1}. ${relPath} - Lines: ${r.lines} - Chars: ${r.characters} - Tokens: ${r.tokens}\n`;
+            });
+            output += `\n`;
+        }
 
         for (const { filePath, content, error } of results) {
             const relativePath = path.relative(rootDir, filePath).replace(/\\/g, '/');

@@ -1,4 +1,4 @@
-// Updated on: C171 (Add prompt cost estimation channels)
+// Updated on: C172 (Add breakdown to prompt cost estimation)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -78,5 +78,5 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SendCycleData ? { cycleData: PcppCycle | null, projectScope?: string; } :
     T extends ServerToClientChannel.FilesWritten ? { paths: string[] } :
     T extends ServerToClientChannel.SendFileComparison ? { filePath: string } & ComparisonMetrics :
-    T extends ServerToClientChannel.SendPromptCostEstimation ? { totalTokens: number; estimatedCost: number; } :
+    T extends ServerToClientChannel.SendPromptCostEstimation ? { totalTokens: number; estimatedCost: number; breakdown: { [key: string]: number } } :
     never;
