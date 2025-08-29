@@ -1,4 +1,4 @@
-// Updated on: C166 (Add "No Folder Opened" view)
+// Updated on: C167 (Add Deselect All button)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -8,7 +8,7 @@ import { FileNode } from '@/common/types/file-node';
 import FileTree from '../../components/file-tree/FileTree';
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { formatLargeNumber, formatNumberWithCommas } from '@/common/utils/formatting';
-import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, VscNewFolder, VscLoading, VscSave, VscFolderLibrary, VscSettingsGear, VscCheckAll, VscSearch, VscExpandAll, VscShield, VscFolder } from 'react-icons/vsc';
+import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, VscNewFolder, VscLoading, VscSave, VscFolderLibrary, VscSettingsGear, VscCheckAll, VscSearch, VscExpandAll, VscShield, VscFolder, VscClose } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import SelectedFilesView from '../../components/SelectedFilesView';
 import { addRemovePathInSelectedFiles, removePathsFromSelected } from '@/client/components/file-tree/FileTree.utils';
@@ -67,13 +67,7 @@ const App = () => {
             else { node.children.forEach(addDescendantFiles); }
         };
 
-        checkedFiles.forEach(path => {
-            const node = fileMap.get(path);
-            if (node) {
-                if (node.children) { addDescendantFiles(node); } 
-                else if (node.isSelectable) { effectivelySelectedFiles.add(path); }
-            }
-        });
+        checkedFiles.forEach(path => { const node = fileMap.get(path); if (node) addDescendantFiles(node); });
 
         effectivelySelectedFiles.forEach(path => {
             if (processedFilesCache.current.has(path)) return;
@@ -139,6 +133,11 @@ const App = () => {
         return { totalFiles: selectedNodes.length, totalTokens, selectedFileNodes: selectedNodes };
     }, [checkedFiles, files]);
 
+    const handleDeselectAll = () => {
+        setCheckedFiles([]);
+        clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths: [] });
+    };
+
     if (isLoading) {
         return <div className="loading-message">Loading file tree...</div>;
     }
@@ -169,7 +168,10 @@ const App = () => {
             <SelectedFilesView selectedFileNodes={selectedFileNodes} onRemove={handleRemoveFromSelection} isMinimized={isSelectionListMinimized} onToggleMinimize={() => setIsSelectionListMinimized(prev => !prev)} />
             <div className="view-footer">
                 <div className="summary-panel"><span className='summary-item' title="Total number of individual files selected for flattening. This does not include empty directories."><VscFiles /> Selected Files: {formatNumberWithCommas(totalFiles)}</span><span className='summary-item' title="Total tokens in selected text files"><VscSymbolNumeric /> {formatLargeNumber(totalTokens, 1)}</span></div>
-                <button className="dce-button-primary" onClick={handleFlattenClick}>Flatten Context</button>
+                <div className="footer-buttons">
+                    <button className="dce-button-secondary" onClick={handleDeselectAll}>Deselect All</button>
+                    <button className="dce-button-primary" onClick={handleFlattenClick}>Flatten Context</button>
+                </div>
             </div>
         </div>
     );

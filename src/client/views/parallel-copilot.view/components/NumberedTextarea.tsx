@@ -1,3 +1,5 @@
+// src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx
+// New file in C167
 import * as React from 'react';
 
 interface NumberedTextareaProps {
@@ -13,7 +15,6 @@ const NumberedTextarea: React.FC<NumberedTextareaProps> = ({ value, onChange, pl
     const [lineCount, setLineCount] = React.useState(1);
     const textareaRef = React.useRef<HTMLTextAreaElement>(null);
     const lineNumbersRef = React.useRef<HTMLDivElement>(null);
-    const resizerRef = React.useRef<HTMLDivElement>(null);
 
     React.useEffect(() => {
         const lines = value.split('\n').length;
@@ -62,7 +63,6 @@ const NumberedTextarea: React.FC<NumberedTextareaProps> = ({ value, onChange, pl
                 style={{ resize: 'none' }}
             />
             <div
-                ref={resizerRef}
                 className="textarea-resizer"
                 onMouseDown={handleMouseDown}
             />

@@ -1,4 +1,5 @@
 // src/client/views/parallel-copilot.view/OnboardingView.tsx
+// Updated on: C167 (Pass scope changes up to parent)
 import * as React from 'react';
 import { VscRocket, VscArrowRight } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -28,6 +29,7 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope, on
         if (projectScope.trim()) {
             setIsGenerating(true);
             logger.log("Sending request to generate Cycle 0 prompt and save project scope.");
+            onScopeChange(projectScope); // Ensure parent has the latest scope before IPC call
             clientIpc.sendToServer(ClientToServerChannel.RequestCreateCycle0Prompt, { projectScope });
             setTimeout(() => {
                 setIsGenerating(false);

@@ -1,3 +1,4 @@
+// Updated on: C167 (Fix TS errors, array access)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -14,7 +15,7 @@ export class HistoryService {
     constructor() {
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (workspaceFolders && workspaceFolders.length > 0) {
-            this.workspaceRoot = workspaceFolders.uri.fsPath;
+            this.workspaceRoot = workspaceFolders[0].uri.fsPath;
             this.historyFilePath = path.join(this.workspaceRoot, '.vscode', 'dce_history.json');
         } else {
             Services.loggerService.warn("HistoryService: No workspace folder found. History will not be saved.");
@@ -214,12 +215,12 @@ export class HistoryService {
             return;
         }
         try {
-            const openUri = await vscode.window.showOpenDialog({
+            const openUris = await vscode.window.showOpenDialog({
                 canSelectMany: false,
                 filters: { 'JSON': ['json'] }
             });
-            if (openUri && openUri) {
-                const content = await fs.readFile(openUri.fsPath, 'utf-8');
+            if (openUris && openUris[0]) {
+                const content = await fs.readFile(openUris[0].fsPath, 'utf-8');
                 const historyData = JSON.parse(content);
                 if (historyData.version && Array.isArray(historyData.cycles)) {
                     await this._writeHistoryFile(historyData);

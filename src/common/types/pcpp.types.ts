@@ -1,5 +1,5 @@
 // src/common/types/pcpp.types.ts
-// Updated on: C1
+// Updated on: C167 (Add context pane heights)
 export interface PcppResponse {
     content: string;
 }

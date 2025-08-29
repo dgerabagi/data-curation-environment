@@ -1,4 +1,4 @@
-/* Updated on: C166 (Add primary button style) */
+/* Updated on: C167 (Add secondary button style) */
 body {
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -328,8 +328,13 @@ body {
     flex-shrink: 0;
 }
 
+.footer-buttons {
+    display: flex;
+    gap: 8px;
+}
+
 .dce-button-primary {
-    width: 100%;
+    flex-grow: 1;
     padding: 6px;
     border: 1px solid var(--vscode-button-border, var(--vscode-focusBorder));
     background-color: var(--vscode-button-background);
@@ -341,6 +346,21 @@ body {
         background-color: var(--vscode-button-hoverBackground);
     }
 }
+
+.dce-button-secondary {
+    flex-grow: 1;
+    padding: 6px;
+    border: 1px solid var(--vscode-button-border, var(--vscode-focusBorder));
+    background-color: var(--vscode-button-secondaryBackground);
+    color: var(--vscode-button-secondaryForeground);
+    cursor: pointer;
+    border-radius: 2px;
+
+    &:hover {
+        background-color: var(--vscode-button-secondaryHoverBackground);
+    }
+}
+
 
 .loading-message, .no-folder-message {
     padding: 16px;
@@ -581,6 +601,12 @@ body {
         &:hover {
             background-color: var(--vscode-menu-selectionBackground);
             color: var(--vscode-menu-selectionForeground);
+        }
+        
+        &.disabled {
+            color: var(--vscode-disabledForeground);
+            cursor: not-allowed;
+            background-color: transparent;
         }
     }
 

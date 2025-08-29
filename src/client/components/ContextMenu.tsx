@@ -1,3 +1,4 @@
+// Updated on: C167 (Fix multi-select delete)
 import React, { useEffect, useRef } from 'react';
 import { FileNode } from '@/common/types/file-node';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -44,11 +45,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({ menu, onClose, onRename }) =>
     };
 
     const handleDelete = () => {
-        if (isMultiSelect) {
-            clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileDelete, { paths });
-        } else {
-            clientIpc.sendToServer(ClientToServerChannel.RequestFileDelete, { path: node.absolutePath });
-        }
+        clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileDelete, { paths });
     };
 
     return (

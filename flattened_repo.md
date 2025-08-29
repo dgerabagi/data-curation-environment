@@ -1,25 +1,25 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-29T12:40:14.018Z
+  Date Generated: 2025-08-29T16:15:02.377Z
   ---
   Total Files: 256
-  Total Lines: 33990
-  Total Characters: 1931074
-  Approx. Tokens: 482860
+  Total Lines: 34009
+  Total Characters: 1931711
+  Approx. Tokens: 483021
 -->
 
 <!-- Top 10 Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (222969 tokens)
 2. src\Artifacts\A6. DCE - Initial Scaffolding Deployment Script.md (10834 tokens)
 3. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
-4. src\client\views\parallel-copilot.view\view.tsx (8412 tokens)
+4. src\client\views\parallel-copilot.view\view.tsx (8410 tokens)
 5. src\Artifacts\A11. DCE - Regression Case Studies.md (7032 tokens)
 6. src\Artifacts\A0. DCE Master Artifact List.md (6743 tokens)
-7. src\client\components\tree-view\TreeView.tsx (4436 tokens)
-8. src\backend\services\prompt.service.ts (4062 tokens)
-9. src\client\views\parallel-copilot.view\view.scss (4044 tokens)
-10. src\client\views\context-chooser.view\view.tsx (4038 tokens)
+7. src\client\components\tree-view\TreeView.tsx (4429 tokens)
+8. src\client\views\context-chooser.view\view.tsx (4085 tokens)
+9. src\backend\services\prompt.service.ts (4062 tokens)
+10. src\client\views\parallel-copilot.view\view.scss (4060 tokens)
 
 <!-- Full File List -->
 1. .gitignore - Lines: 10 - Chars: 128 - Tokens: 32
@@ -100,9 +100,9 @@
 76. src\Artifacts\A63. DCE - Cycle 158 - Task Tracker.md - Lines: 23 - Chars: 1760 - Tokens: 440
 77. src\Artifacts\A64. DCE - Cycle 159 - Task Tracker.md - Lines: 22 - Chars: 1550 - Tokens: 388
 78. src\Artifacts\A65. DCE - Universal Task Checklist.md - Lines: 87 - Chars: 5422 - Tokens: 1356
-79. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 22 - Chars: 1461 - Tokens: 366
-80. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 46 - Chars: 3450 - Tokens: 863
-81. src\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3747 - Tokens: 937
+79. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 22 - Chars: 1455 - Tokens: 364
+80. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 47 - Chars: 3537 - Tokens: 885
+81. src\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3311 - Tokens: 828
 82. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
 83. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
 84. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 33 - Chars: 2764 - Tokens: 691
@@ -131,47 +131,47 @@
 107. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
 108. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
 109. src\backend\services\file-operation.service.ts - Lines: 338 - Chars: 16082 - Tokens: 4021
-110. src\backend\services\file-tree.service.ts - Lines: 272 - Chars: 13568 - Tokens: 3392
+110. src\backend\services\file-tree.service.ts - Lines: 272 - Chars: 13702 - Tokens: 3426
 111. src\backend\services\flattener.service.ts - Lines: 222 - Chars: 11624 - Tokens: 2906
 112. src\backend\services\highlighting.service.ts - Lines: 58 - Chars: 2920 - Tokens: 730
-113. src\backend\services\history.service.ts - Lines: 240 - Chars: 10070 - Tokens: 2518
+113. src\backend\services\history.service.ts - Lines: 241 - Chars: 10133 - Tokens: 2534
 114. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
 115. src\backend\services\prompt.service.ts - Lines: 327 - Chars: 16245 - Tokens: 4062
 116. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 117. src\backend\services\services.ts - Lines: 38 - Chars: 1778 - Tokens: 445
 118. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
 119. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
-120. src\client\components\ContextMenu.tsx - Lines: 75 - Chars: 3473 - Tokens: 869
+120. src\client\components\ContextMenu.tsx - Lines: 72 - Chars: 3353 - Tokens: 839
 121. src\client\components\DiffViewer.tsx - Lines: 224 - Chars: 11386 - Tokens: 2847
-122. src\client\components\file-tree\FileTree.tsx - Lines: 258 - Chars: 12330 - Tokens: 3083
+122. src\client\components\file-tree\FileTree.tsx - Lines: 258 - Chars: 12226 - Tokens: 3057
 123. src\client\components\file-tree\FileTree.utils.ts - Lines: 117 - Chars: 4236 - Tokens: 1059
 124. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
 125. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13123 - Tokens: 3281
-126. src\client\components\tree-view\TreeView.tsx - Lines: 399 - Chars: 17742 - Tokens: 4436
+126. src\client\components\tree-view\TreeView.tsx - Lines: 395 - Chars: 17713 - Tokens: 4429
 127. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 128. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
 129. src\client\utils\response-parser.ts - Lines: 79 - Chars: 2994 - Tokens: 749
 130. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 131. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5090 - Tokens: 1273
-132. src\client\views\context-chooser.view\view.scss - Lines: 604 - Chars: 14206 - Tokens: 3552
-133. src\client\views\context-chooser.view\view.tsx - Lines: 179 - Chars: 16150 - Tokens: 4038
+132. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
+133. src\client\views\context-chooser.view\view.tsx - Lines: 181 - Chars: 16337 - Tokens: 4085
 134. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
-135. src\client\views\parallel-copilot.view\components\NumberedTextarea.tsx - Lines: 73 - Chars: 2544 - Tokens: 636
+135. src\client\views\parallel-copilot.view\components\NumberedTextarea.tsx - Lines: 73 - Chars: 2546 - Tokens: 637
 136. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 137. src\client\views\parallel-copilot.view\on-message.ts - Lines: 84 - Chars: 3857 - Tokens: 965
-138. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 85 - Chars: 3973 - Tokens: 994
+138. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 87 - Chars: 4122 - Tokens: 1031
 139. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 43 - Chars: 1890 - Tokens: 473
 140. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
 141. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
-142. src\client\views\parallel-copilot.view\view.scss - Lines: 719 - Chars: 16173 - Tokens: 4044
-143. src\client\views\parallel-copilot.view\view.tsx - Lines: 557 - Chars: 33648 - Tokens: 8412
+142. src\client\views\parallel-copilot.view\view.scss - Lines: 719 - Chars: 16238 - Tokens: 4060
+143. src\client\views\parallel-copilot.view\view.tsx - Lines: 551 - Chars: 33640 - Tokens: 8410
 144. src\common\ipc\channels.enum.ts - Lines: 77 - Chars: 3918 - Tokens: 980
 145. src\common\ipc\channels.type.ts - Lines: 71 - Chars: 5617 - Tokens: 1405
 146. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 147. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 148. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
 149. src\common\types\file-node.ts - Lines: 17 - Chars: 517 - Tokens: 130
-150. src\common\types\pcpp.types.ts - Lines: 43 - Chars: 1000 - Tokens: 250
+150. src\common\types\pcpp.types.ts - Lines: 43 - Chars: 1029 - Tokens: 258
 151. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
 152. src\common\utils\formatting.ts - Lines: 99 - Chars: 3475 - Tokens: 869
 153. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
@@ -19687,18 +19687,18 @@ This document lists the feedback and tasks from the first official development c
 | 2 | Fix project plan persistence bug in Cycle 0 view. | **In Progress** | Critical bug. State is not being lifted correctly from the onboarding view. |
 | 3 | Make `package-lock.json` non-selectable in the file tree. | **In Progress** | Simple configuration change in `file-tree.service.ts`. |
 | 4 | Make `.vscodeignore` selectable in the file tree. | **In Progress** | Simple configuration change in `file-tree.service.ts`. |
-| 5 | Plan for UX improvements to context panes (token count, line numbers). | **In Progress** | New artifact `A68` created to plan this feature. |
-| 6 | Plan for refactoring the large `parallel-copilot.view.tsx`. | **In Progress** | New artifact `A67` created to plan this refactor. |
+| 5 | Plan for UX improvements to context panes (token count, line numbers). | **Complete** | New artifact `A68` created to plan this feature. |
+| 6 | Plan for refactoring the large `parallel-copilot.view.tsx`. | **Complete** | New artifact `A67` created to plan this refactor. |
 </file>
 
 <file path="src/Artifacts/A67. DCE - PCPP View Refactoring Plan.md">
-# Artifact A67: DCE - PCPP View Refactoring Plan
-# Date Created: C1
+# Artifact A67. DCE - PCPP View Refactoring Plan
+# Date Created: C167
 # Author: AI Model & Curator
 
 - **Key/Value for A0:**
-- **Description:** A plan to refactor the monolithic `parallel-copilot.view/view.tsx` into smaller, more focused components to improve maintainability and readability.
-- **Tags:** refactor, architecture, technical debt, ui, ux
+- **Description:** A plan to refactor the large `parallel-copilot.view.tsx` into smaller, more manageable components to improve maintainability.
+- **Tags:** refactor, architecture, technical debt, pcpp
 
 ## 1. Problem Statement
 
@@ -19731,6 +19731,7 @@ The goal is to break down `view.tsx` into a series of smaller, single-responsibi
     -   **`ResponsePane.tsx`:** A larger component responsible for rendering the content of a single, active tab. It will contain the logic to display either the raw `textarea` or the parsed view.
     -   **`ParsedView.tsx`:** Renders the multi-pane parsed view, including the "Associated Files" list, summary, and course of action. It will contain the logic for selecting a file to view.
     -   **`CodeViewer.tsx`:** Renders the syntax-highlighted code or the `DiffViewer`. Receives the file content and diff data as props.
+    -   **`NumberedTextarea.tsx`:** The new reusable component for text areas with line numbers and resizing.
 
 ## 3. Benefits of Refactoring
 
@@ -19759,7 +19760,7 @@ The "Cycle Context" and "Ephemeral Context" text areas in the Parallel Co-Pilot 
 |---|---|---|
 | P2-CTX-01 | **See Context Token Count** | As a developer, I want to see a live token count for the Cycle Context and Ephemeral Context fields, so I can manage the size of my prompt effectively. | - Below each text area, a label displays the approximate token count of its content. <br> - The count updates in real-time as the user types. |
 | P2-CTX-02 | **See Line Numbers** | As a developer, I want to see line numbers in the context text areas, so I can easily reference specific parts of a long context or error log. | - A line number gutter is displayed to the left of the text input area. <br> - The line numbers scroll in sync with the text content. |
-| P2-CTX-03 | **Persistent Resizing** | As a developer, when I resize the height of a context text area, I want it to remain that size when I switch to another response tab and back, so I don't lose my layout preferences. | - The `height` of each text area is stored as part of the panel's state. <br> - When the user resizes a text area, its new height is saved. <br> - When the panel re-renders, the text areas are restored to their saved heights. |
+| P2-CTX-03 | **Persistent Resizing** | As a developer, when I resize the height of a context text area, I want it to remain that size when I navigate between cycles, so I don't lose my layout preferences. | - The `height` of each text area is stored as part of the `PcppCycle` state. <br> - When the user resizes a text area, its new height is saved. <br> - When the panel re-renders or a cycle is loaded, the text areas are restored to their saved heights. |
 
 ## 3. Technical Implementation Plan
 
@@ -19768,16 +19769,16 @@ The "Cycle Context" and "Ephemeral Context" text areas in the Parallel Co-Pilot 
 -   **UI:** Add `<span>` elements below each text area to display these state values.
 -   **Logic:** The `onChange` handlers for the text areas will be updated to calculate the token count (`e.target.value.length / 4`) and update the corresponding token count state.
 
-### 3.2. Line Numbers & Resizing (Combined Solution)
--   **Problem:** A standard HTML `<textarea>` does not support a line number gutter. Persisting its height after a manual resize (dragging the corner) is also not straightforward.
--   **Solution:** Replace the `<textarea>` elements with a custom "editor" component built from `<div>` elements. This is a common pattern for creating simple code editors.
--   **Implementation:**
-    1.  **New Component (`SimpleEditor.tsx`):** Create a new reusable component that takes `value` and `onChange` as props.
-    2.  **Structure:** The component will consist of a wrapper `div` containing two child `div`s: one for the line numbers and one for the text content.
-    3.  **Line Numbers:** The line number `div` will render a list of numbers based on the number of newlines in the `value` prop.
-    4.  **Text Input:** The content `div` will have the `contentEditable="true"` attribute, making it a live text editor. Its `onInput` event will be used to call the `onChange` prop.
-    5.  **Synchronization:** Both `div`s will be styled to ensure their line heights and fonts match, and they will scroll together.
-    6.  **Resizable Handle:** A draggable handle will be added to the bottom of the main wrapper. `onMouseDown`, `onMouseMove`, and `onMouseUp` handlers will be used to track the drag gesture and update a `height` prop, which will be stored in the main `view.tsx` state to ensure persistence.
+### 3.2. Line Numbers & Resizing
+-   **New Component (`NumberedTextarea.tsx`):**
+    -   Create a new reusable component that renders a `textarea` alongside a synchronized `div` for line numbers.
+    -   This component will manage its own internal state for line count based on the `value` prop.
+    -   It will include a draggable handle at the bottom. `onMouseDown`, `onMouseMove`, and `onMouseUp` handlers will be used to track the drag gesture.
+    -   It will call an `onHeightChange` prop function with the new height, allowing the parent to manage the state.
+-   **Integration (`view.tsx`):**
+    -   Replace the existing `<textarea>` elements with the new `<NumberedTextarea>` component.
+    -   **State:** Add `cycleContextHeight` and `ephemeralContextHeight` to the component's state and to the `PcppCycle` type definition.
+    -   The `onHeightChange` prop of the new component will be wired to update these state variables, which will be persisted via the existing debounced save mechanism.
 </file>
 
 <file path="src/Artifacts/A7. DCE - Development and Testing Guide.md">
@@ -21729,7 +21730,7 @@ export class FileOperationService {
 </file>
 
 <file path="src/backend/services/file-tree.service.ts">
-// Updated on: C1
+// Updated on: C167 (Fix TS errors, array access)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -21739,7 +21740,7 @@ import { FileNode } from "@/common/types/file-node";
 import { Services } from "@/backend/services/services";
 import { serverIPCs } from "@/client/views";
 import { VIEW_TYPES } from "@/common/view-types";
-import { API as GitAPI, Status } from "../types/git";
+import { API as GitAPI, Status, Repository } from "../types/git";
 import { ProblemCountsMap } from "@/common/ipc/channels.type";
 
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
@@ -21878,14 +21879,14 @@ export class FileTreeService {
         }
 
         const workspaceFolders = vscode.workspace.workspaceFolders;
-        if (!workspaceFolders?.) {
+        if (!workspaceFolders || workspaceFolders.length === 0) {
             Services.loggerService.warn(`No workspace folder found.`);
             serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: [] });
             return;
         }
         
         Services.loggerService.log(`Building file tree from scratch.`);
-        const fileTree = await this.buildTreeFromTraversal(workspaceFolders.uri);
+        const fileTree = await this.buildTreeFromTraversal(workspaceFolders[0].uri);
         this.fileTreeCache = [fileTree];
         Services.loggerService.log(`File tree built. Sending to client.`);
         serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: this.fileTreeCache });
@@ -21893,9 +21894,9 @@ export class FileTreeService {
     }
 
     private getGitStatusMap(): Map<string, string> {
-        if (!this.gitApi?.repositories) return new Map();
+        if (!this.gitApi?.repositories || this.gitApi.repositories.length === 0) return new Map();
         
-        const repo = this.gitApi.repositories;
+        const repo: Repository = this.gitApi.repositories[0];
         const getStatusChar = (s: Status) => ({ [Status.INDEX_ADDED]: 'A', [Status.MODIFIED]: 'M', [Status.DELETED]: 'D', [Status.UNTRACKED]: 'U', [Status.IGNORED]: 'I', [Status.CONFLICT]: 'C' }[s] || '');
         
         const changes = [...repo.state.workingTreeChanges, ...repo.state.indexChanges, ...repo.state.mergeChanges];
@@ -22290,6 +22291,7 @@ export class HighlightingService {
 </file>
 
 <file path="src/backend/services/history.service.ts">
+// Updated on: C167 (Fix TS errors, array access)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -22306,7 +22308,7 @@ export class HistoryService {
     constructor() {
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (workspaceFolders && workspaceFolders.length > 0) {
-            this.workspaceRoot = workspaceFolders.uri.fsPath;
+            this.workspaceRoot = workspaceFolders[0].uri.fsPath;
             this.historyFilePath = path.join(this.workspaceRoot, '.vscode', 'dce_history.json');
         } else {
             Services.loggerService.warn("HistoryService: No workspace folder found. History will not be saved.");
@@ -22506,12 +22508,12 @@ export class HistoryService {
             return;
         }
         try {
-            const openUri = await vscode.window.showOpenDialog({
+            const openUris = await vscode.window.showOpenDialog({
                 canSelectMany: false,
                 filters: { 'JSON': ['json'] }
             });
-            if (openUri && openUri) {
-                const content = await fs.readFile(openUri.fsPath, 'utf-8');
+            if (openUris && openUris[0]) {
+                const content = await fs.readFile(openUris[0].fsPath, 'utf-8');
                 const historyData = JSON.parse(content);
                 if (historyData.version && Array.isArray(historyData.cycles)) {
                     await this._writeHistoryFile(historyData);
@@ -23191,6 +23193,7 @@ export default Checkbox;
 </file>
 
 <file path="src/client/components/ContextMenu.tsx">
+// Updated on: C167 (Fix multi-select delete)
 import React, { useEffect, useRef } from 'react';
 import { FileNode } from '@/common/types/file-node';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -23237,11 +23240,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({ menu, onClose, onRename }) =>
     };
 
     const handleDelete = () => {
-        if (isMultiSelect) {
-            clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileDelete, { paths });
-        } else {
-            clientIpc.sendToServer(ClientToServerChannel.RequestFileDelete, { path: node.absolutePath });
-        }
+        clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileDelete, { paths });
     };
 
     return (
@@ -23496,7 +23495,7 @@ export default DiffViewer;
 </file>
 
 <file path="src/client/components/file-tree/FileTree.tsx">
-// Updated on: C162 (Refactor checkbox state calculation for new explicit selection model)
+// Updated on: C167 (Fix TS errors)
 import React, { useState, useMemo } from 'react';
 import TreeView, { TreeNode } from '../tree-view/TreeView';
 import { FileNode } from '@/common/types/file-node';
@@ -23511,7 +23510,7 @@ import ContextMenu from '../ContextMenu';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 import { ProblemCountsMap } from '@/common/ipc/channels.type';
-import { getAllSelectableFiles, getFileNodeByPath } from './FileTree.utils';
+import { getFileNodeByPath } from './FileTree.utils';
 
 interface FileTreeProps {
   data: FileNode[];
@@ -23577,7 +23576,7 @@ const filterTree = (nodes: FileNode[], term: string): FileNode[] => {
 
 
 const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, updateCheckedFiles, collapseTrigger, expandAllTrigger, searchTerm, problemMap, onNodeDrop, onCopy, clipboard }) => {
-    const [contextMenu, setContextMenu] = useState<{ x: number, y: number, node: FileNode, selection: Set<string> } | null>(null);
+    const [contextMenu, setContextMenu] = useState<{ x: number, y: number, node: FileNode, paths: string[] } | null>(null);
     const [renamingPath, setRenamingPath] = useState<string | null>(null);
     const [renameValue, setRenameValue] = useState('');
     const clientIpc = ClientPostMessageManager.getInstance();
@@ -23589,10 +23588,10 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
         updateCheckedFiles(filePath);
     };
 
-    const handleContextMenu = (event: React.MouseEvent, node: FileNode, selection: Set<string>) => {
+    const handleContextMenu = (event: React.MouseEvent, node: FileNode, paths: string[]) => {
         event.preventDefault();
         event.stopPropagation();
-        setContextMenu({ x: event.clientX, y: event.clientY, node, selection });
+        setContextMenu({ x: event.clientX, y: event.clientY, node, paths });
     };
 
     const handleRename = () => {
@@ -23739,7 +23738,7 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
             <TreeView 
                 data={filteredData as TreeNode[]} 
                 renderNodeContent={(node, isExpanded) => renderFileNodeContent(node, isExpanded as boolean)} 
-                onContextMenu={(e, node, selection) => handleContextMenu(e, node as FileNode, selection)} 
+                onContextMenu={(e, node, paths) => handleContextMenu(e, node as FileNode, paths)} 
                 collapseTrigger={collapseTrigger}
                 expandAllTrigger={expandAllTrigger}
                 activeFile={activeFile} 
@@ -24187,7 +24186,7 @@ export default SelectedFilesView;
 </file>
 
 <file path="src/client/components/tree-view/TreeView.tsx">
-// Updated on: C1
+// Updated on: C167 (Fix TS errors, array access)
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { VscChevronRight } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -24242,9 +24241,11 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     }, []);
 
     useEffect(() => {
-        flatNodeList.current = buildFlatNodeList(data, expandedNodes);
-        if (!focusedNodePath && flatNodeList.current.length > 0) {
-            setFocusedNodePath(flatNodeList.current.absolutePath);
+        if (data && data.length > 0) {
+            flatNodeList.current = buildFlatNodeList(data, expandedNodes);
+            if (!focusedNodePath && flatNodeList.current.length > 0) {
+                setFocusedNodePath(flatNodeList.current[0].absolutePath);
+            }
         }
     }, [data, expandedNodes, buildFlatNodeList, focusedNodePath]);
 
@@ -24253,20 +24254,14 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     };
 
     useEffect(() => {
-        if (data.length > 0) {
-            const rootNode = data;
-            if (rootNode) {
-                expandNode(rootNode.absolutePath);
-            }
+        if (data.length > 0 && data[0]) {
+            expandNode(data[0].absolutePath);
         }
     }, [data]);
 
     useEffect(() => {
-        if (collapseTrigger > 0 && data.length > 0) {
-            const rootNode = data;
-            if (rootNode) {
-                setExpandedNodes([rootNode.absolutePath]);
-            }
+        if (collapseTrigger > 0 && data.length > 0 && data[0]) {
+            setExpandedNodes([data[0].absolutePath]);
         }
     }, [collapseTrigger, data]);
 
@@ -24285,7 +24280,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     }, [expandAllTrigger, data]);
 
     useEffect(() => {
-        if (activeFile && data.length > 0) {
+        if (activeFile && data.length > 0 && data[0]) {
             logger.log(`[TreeView] activeFile prop changed: ${activeFile}. Attempting to reveal.`);
             const getParentPaths = (filePath: string, rootPath: string): string[] => {
                 if (!filePath.startsWith(rootPath) || filePath === rootPath) {
@@ -24301,7 +24296,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
                 }
                 return paths;
             };
-            const rootPath = data?.absolutePath;
+            const rootPath = data[0].absolutePath;
             if (rootPath) {
                 const parents = getParentPaths(activeFile, rootPath);
                 logger.log(`[TreeView] Parents to expand: ${JSON.stringify(parents)}`);
@@ -24800,7 +24795,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 </file>
 
 <file path="src/client/views/context-chooser.view/view.scss">
-/* Updated on: C166 (Add primary button style) */
+/* Updated on: C167 (Add secondary button style) */
 body {
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -25130,8 +25125,13 @@ body {
     flex-shrink: 0;
 }
 
+.footer-buttons {
+    display: flex;
+    gap: 8px;
+}
+
 .dce-button-primary {
-    width: 100%;
+    flex-grow: 1;
     padding: 6px;
     border: 1px solid var(--vscode-button-border, var(--vscode-focusBorder));
     background-color: var(--vscode-button-background);
@@ -25143,6 +25143,21 @@ body {
         background-color: var(--vscode-button-hoverBackground);
     }
 }
+
+.dce-button-secondary {
+    flex-grow: 1;
+    padding: 6px;
+    border: 1px solid var(--vscode-button-border, var(--vscode-focusBorder));
+    background-color: var(--vscode-button-secondaryBackground);
+    color: var(--vscode-button-secondaryForeground);
+    cursor: pointer;
+    border-radius: 2px;
+
+    &:hover {
+        background-color: var(--vscode-button-secondaryHoverBackground);
+    }
+}
+
 
 .loading-message, .no-folder-message {
     padding: 16px;
@@ -25384,6 +25399,12 @@ body {
             background-color: var(--vscode-menu-selectionBackground);
             color: var(--vscode-menu-selectionForeground);
         }
+        
+        &.disabled {
+            color: var(--vscode-disabledForeground);
+            cursor: not-allowed;
+            background-color: transparent;
+        }
     }
 
     hr {
@@ -25407,7 +25428,7 @@ body {
 </file>
 
 <file path="src/client/views/context-chooser.view/view.tsx">
-// Updated on: C166 (Add "No Folder Opened" view)
+// Updated on: C167 (Add Deselect All button)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -25417,7 +25438,7 @@ import { FileNode } from '@/common/types/file-node';
 import FileTree from '../../components/file-tree/FileTree';
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { formatLargeNumber, formatNumberWithCommas } from '@/common/utils/formatting';
-import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, VscNewFolder, VscLoading, VscSave, VscFolderLibrary, VscSettingsGear, VscCheckAll, VscSearch, VscExpandAll, VscShield, VscFolder } from 'react-icons/vsc';
+import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, VscNewFolder, VscLoading, VscSave, VscFolderLibrary, VscSettingsGear, VscCheckAll, VscSearch, VscExpandAll, VscShield, VscFolder, VscClose } from 'react-icons/vsc';
 import { logger } from '@/client/utils/logger';
 import SelectedFilesView from '../../components/SelectedFilesView';
 import { addRemovePathInSelectedFiles, removePathsFromSelected } from '@/client/components/file-tree/FileTree.utils';
@@ -25476,13 +25497,7 @@ const App = () => {
             else { node.children.forEach(addDescendantFiles); }
         };
 
-        checkedFiles.forEach(path => {
-            const node = fileMap.get(path);
-            if (node) {
-                if (node.children) { addDescendantFiles(node); } 
-                else if (node.isSelectable) { effectivelySelectedFiles.add(path); }
-            }
-        });
+        checkedFiles.forEach(path => { const node = fileMap.get(path); if (node) addDescendantFiles(node); });
 
         effectivelySelectedFiles.forEach(path => {
             if (processedFilesCache.current.has(path)) return;
@@ -25548,6 +25563,11 @@ const App = () => {
         return { totalFiles: selectedNodes.length, totalTokens, selectedFileNodes: selectedNodes };
     }, [checkedFiles, files]);
 
+    const handleDeselectAll = () => {
+        setCheckedFiles([]);
+        clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths: [] });
+    };
+
     if (isLoading) {
         return <div className="loading-message">Loading file tree...</div>;
     }
@@ -25578,7 +25598,10 @@ const App = () => {
             <SelectedFilesView selectedFileNodes={selectedFileNodes} onRemove={handleRemoveFromSelection} isMinimized={isSelectionListMinimized} onToggleMinimize={() => setIsSelectionListMinimized(prev => !prev)} />
             <div className="view-footer">
                 <div className="summary-panel"><span className='summary-item' title="Total number of individual files selected for flattening. This does not include empty directories."><VscFiles /> Selected Files: {formatNumberWithCommas(totalFiles)}</span><span className='summary-item' title="Total tokens in selected text files"><VscSymbolNumeric /> {formatLargeNumber(totalTokens, 1)}</span></div>
-                <button className="dce-button-primary" onClick={handleFlattenClick}>Flatten Context</button>
+                <div className="footer-buttons">
+                    <button className="dce-button-secondary" onClick={handleDeselectAll}>Deselect All</button>
+                    <button className="dce-button-primary" onClick={handleFlattenClick}>Flatten Context</button>
+                </div>
             </div>
         </div>
     );
@@ -25631,6 +25654,8 @@ export function registerViews(context: vscode.ExtensionContext) {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx">
+// src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx
+// New file in C167
 import * as React from 'react';
 
 interface NumberedTextareaProps {
@@ -25646,7 +25671,6 @@ const NumberedTextarea: React.FC<NumberedTextareaProps> = ({ value, onChange, pl
     const [lineCount, setLineCount] = React.useState(1);
     const textareaRef = React.useRef<HTMLTextAreaElement>(null);
     const lineNumbersRef = React.useRef<HTMLDivElement>(null);
-    const resizerRef = React.useRef<HTMLDivElement>(null);
 
     React.useEffect(() => {
         const lines = value.split('\n').length;
@@ -25695,7 +25719,6 @@ const NumberedTextarea: React.FC<NumberedTextareaProps> = ({ value, onChange, pl
                 style={{ resize: 'none' }}
             />
             <div
-                ref={resizerRef}
                 className="textarea-resizer"
                 onMouseDown={handleMouseDown}
             />
@@ -25806,6 +25829,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
 <file path="src/client/views/parallel-copilot.view/OnboardingView.tsx">
 // src/client/views/parallel-copilot.view/OnboardingView.tsx
+// Updated on: C167 (Pass scope changes up to parent)
 import * as React from 'react';
 import { VscRocket, VscArrowRight } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -25835,6 +25859,7 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope, on
         if (projectScope.trim()) {
             setIsGenerating(true);
             logger.log("Sending request to generate Cycle 0 prompt and save project scope.");
+            onScopeChange(projectScope); // Ensure parent has the latest scope before IPC call
             clientIpc.sendToServer(ClientToServerChannel.RequestCreateCycle0Prompt, { projectScope });
             setTimeout(() => {
                 setIsGenerating(false);
@@ -26097,7 +26122,7 @@ export default TestPane3;
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
-/* Updated on: C1 */
+/* Updated on: C167 (Add active style for parse button) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -26316,7 +26341,7 @@ body {
     }
 }
 
-.sort-button.active {
+.sort-button.active, .pc-toolbar button.active {
     background-color: var(--vscode-toolbar-hoverBackground);
     outline: 1px solid var(--vscode-focusBorder);
 }
@@ -26820,7 +26845,7 @@ body {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C1
+// Updated on: C167 (Fix TS errors, add active style to parse button)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -26832,16 +26857,10 @@ import { ParsedResponse, PcppCycle, PcppResponse } from '@/common/types/pcpp.typ
 import { parseResponse } from '@/client/utils/response-parser';
 import ReactMarkdown from 'react-markdown';
 import * as path from 'path-browserify';
-import { BatchWriteFile } from '@/common/ipc/channels.type';
+import { BatchWriteFile, ComparisonMetrics } from '@/common/ipc/channels.type';
 import OnboardingView from './OnboardingView';
 import { formatLargeNumber } from '@/common/utils/formatting';
 import NumberedTextarea from './components/NumberedTextarea';
-
-interface ComparisonMetrics {
-    originalTokens: number;
-    modifiedTokens: number;
-    similarity: number;
-}
 
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -26867,7 +26886,7 @@ const CodeViewer: React.FC<{ htmlContent: string | undefined | null }> = ({ html
     }
 
     const codeContentMatch = /<pre><code>([\s\S]*)<\/code><\/pre>/s.exec(htmlContent || '');
-    const code = codeContentMatch?. ?? (htmlContent || '');
+    const code = codeContentMatch?.[1] ?? (htmlContent || '');
 
     const lines = code.split('\n');
     if (lines.length > 1 && lines[lines.length - 1] === '') {
@@ -27024,7 +27043,7 @@ const App = () => {
         clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); });
         clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { logger.log(`Received FilesWritten event for: ${paths.join(', ')}`); setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); });
         clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, ({ filePath, originalTokens, modifiedTokens, similarity }) => {
-            setComparisonMetrics(prev => new Map(prev).set(filePath, { filePath, originalTokens, modifiedTokens, similarity }));
+            setComparisonMetrics(prev => new Map(prev).set(filePath, { originalTokens, modifiedTokens, similarity }));
         });
         
         clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});
@@ -27346,7 +27365,7 @@ const App = () => {
                 <button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button>
                 <button onClick={handleGeneratePrompt} title="Generate prompt.md"><VscFileCode /> Generate prompt.md</button>
                 <button onClick={handleLogState} title="Log Current State"><VscBug/></button>
-                <button onClick={handleGlobalParseToggle}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button>
+                <button onClick={handleGlobalParseToggle} className={isParsedMode ? 'active' : ''}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button>
             </div>
             <div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} /></div>
         </div>
@@ -27661,7 +27680,7 @@ export interface FileNode {
 
 <file path="src/common/types/pcpp.types.ts">
 // src/common/types/pcpp.types.ts
-// Updated on: C1
+// Updated on: C167 (Add context pane heights)
 export interface PcppResponse {
     content: string;
 }

@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C1
+// Updated on: C168 (Fix TS error for ComparisonMetrics import)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -11,16 +11,10 @@ import { ParsedResponse, PcppCycle, PcppResponse } from '@/common/types/pcpp.typ
 import { parseResponse } from '@/client/utils/response-parser';
 import ReactMarkdown from 'react-markdown';
 import * as path from 'path-browserify';
-import { BatchWriteFile } from '@/common/ipc/channels.type';
+import { BatchWriteFile, ComparisonMetrics } from '@/common/ipc/channels.type';
 import OnboardingView from './OnboardingView';
 import { formatLargeNumber } from '@/common/utils/formatting';
 import NumberedTextarea from './components/NumberedTextarea';
-
-interface ComparisonMetrics {
-    originalTokens: number;
-    modifiedTokens: number;
-    similarity: number;
-}
 
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -46,7 +40,7 @@ const CodeViewer: React.FC<{ htmlContent: string | undefined | null }> = ({ html
     }
 
     const codeContentMatch = /<pre><code>([\s\S]*)<\/code><\/pre>/s.exec(htmlContent || '');
-    const code = codeContentMatch?. ?? (htmlContent || '');
+    const code = codeContentMatch?.[1] ?? (htmlContent || '');
 
     const lines = code.split('\n');
     if (lines.length > 1 && lines[lines.length - 1] === '') {
@@ -203,7 +197,7 @@ const App = () => {
         clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); });
         clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { logger.log(`Received FilesWritten event for: ${paths.join(', ')}`); setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); });
         clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, ({ filePath, originalTokens, modifiedTokens, similarity }) => {
-            setComparisonMetrics(prev => new Map(prev).set(filePath, { filePath, originalTokens, modifiedTokens, similarity }));
+            setComparisonMetrics(prev => new Map(prev).set(filePath, { originalTokens, modifiedTokens, similarity }));
         });
         
         clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {});
@@ -525,7 +519,7 @@ const App = () => {
                 <button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button>
                 <button onClick={handleGeneratePrompt} title="Generate prompt.md"><VscFileCode /> Generate prompt.md</button>
                 <button onClick={handleLogState} title="Log Current State"><VscBug/></button>
-                <button onClick={handleGlobalParseToggle}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button>
+                <button onClick={handleGlobalParseToggle} className={isParsedMode ? 'active' : ''}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button>
             </div>
             <div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} /></div>
         </div>

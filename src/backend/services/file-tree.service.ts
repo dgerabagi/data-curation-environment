@@ -1,4 +1,4 @@
-// Updated on: C1
+// Updated on: C167 (Fix TS errors, array access)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -8,7 +8,7 @@ import { FileNode } from "@/common/types/file-node";
 import { Services } from "@/backend/services/services";
 import { serverIPCs } from "@/client/views";
 import { VIEW_TYPES } from "@/common/view-types";
-import { API as GitAPI, Status } from "../types/git";
+import { API as GitAPI, Status, Repository } from "../types/git";
 import { ProblemCountsMap } from "@/common/ipc/channels.type";
 
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
@@ -147,14 +147,14 @@ export class FileTreeService {
         }
 
         const workspaceFolders = vscode.workspace.workspaceFolders;
-        if (!workspaceFolders?.) {
+        if (!workspaceFolders || workspaceFolders.length === 0) {
             Services.loggerService.warn(`No workspace folder found.`);
             serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: [] });
             return;
         }
         
         Services.loggerService.log(`Building file tree from scratch.`);
-        const fileTree = await this.buildTreeFromTraversal(workspaceFolders.uri);
+        const fileTree = await this.buildTreeFromTraversal(workspaceFolders[0].uri);
         this.fileTreeCache = [fileTree];
         Services.loggerService.log(`File tree built. Sending to client.`);
         serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: this.fileTreeCache });
@@ -162,9 +162,9 @@ export class FileTreeService {
     }
 
     private getGitStatusMap(): Map<string, string> {
-        if (!this.gitApi?.repositories) return new Map();
+        if (!this.gitApi?.repositories || this.gitApi.repositories.length === 0) return new Map();
         
-        const repo = this.gitApi.repositories;
+        const repo: Repository = this.gitApi.repositories[0];
         const getStatusChar = (s: Status) => ({ [Status.INDEX_ADDED]: 'A', [Status.MODIFIED]: 'M', [Status.DELETED]: 'D', [Status.UNTRACKED]: 'U', [Status.IGNORED]: 'I', [Status.CONFLICT]: 'C' }[s] || '');
         
         const changes = [...repo.state.workingTreeChanges, ...repo.state.indexChanges, ...repo.state.mergeChanges];

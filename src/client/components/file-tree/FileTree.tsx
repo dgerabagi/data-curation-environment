@@ -1,4 +1,4 @@
-// Updated on: C162 (Refactor checkbox state calculation for new explicit selection model)
+// Updated on: C167 (Fix TS errors)
 import React, { useState, useMemo } from 'react';
 import TreeView, { TreeNode } from '../tree-view/TreeView';
 import { FileNode } from '@/common/types/file-node';
@@ -13,7 +13,7 @@ import ContextMenu from '../ContextMenu';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 import { ProblemCountsMap } from '@/common/ipc/channels.type';
-import { getAllSelectableFiles, getFileNodeByPath } from './FileTree.utils';
+import { getFileNodeByPath } from './FileTree.utils';
 
 interface FileTreeProps {
   data: FileNode[];
@@ -79,7 +79,7 @@ const filterTree = (nodes: FileNode[], term: string): FileNode[] => {
 
 
 const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, updateCheckedFiles, collapseTrigger, expandAllTrigger, searchTerm, problemMap, onNodeDrop, onCopy, clipboard }) => {
-    const [contextMenu, setContextMenu] = useState<{ x: number, y: number, node: FileNode, selection: Set<string> } | null>(null);
+    const [contextMenu, setContextMenu] = useState<{ x: number, y: number, node: FileNode, paths: string[] } | null>(null);
     const [renamingPath, setRenamingPath] = useState<string | null>(null);
     const [renameValue, setRenameValue] = useState('');
     const clientIpc = ClientPostMessageManager.getInstance();
@@ -91,10 +91,10 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
         updateCheckedFiles(filePath);
     };
 
-    const handleContextMenu = (event: React.MouseEvent, node: FileNode, selection: Set<string>) => {
+    const handleContextMenu = (event: React.MouseEvent, node: FileNode, paths: string[]) => {
         event.preventDefault();
         event.stopPropagation();
-        setContextMenu({ x: event.clientX, y: event.clientY, node, selection });
+        setContextMenu({ x: event.clientX, y: event.clientY, node, paths });
     };
 
     const handleRename = () => {
@@ -241,7 +241,7 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
             <TreeView 
                 data={filteredData as TreeNode[]} 
                 renderNodeContent={(node, isExpanded) => renderFileNodeContent(node, isExpanded as boolean)} 
-                onContextMenu={(e, node, selection) => handleContextMenu(e, node as FileNode, selection)} 
+                onContextMenu={(e, node, paths) => handleContextMenu(e, node as FileNode, paths)} 
                 collapseTrigger={collapseTrigger}
                 expandAllTrigger={expandAllTrigger}
                 activeFile={activeFile} 

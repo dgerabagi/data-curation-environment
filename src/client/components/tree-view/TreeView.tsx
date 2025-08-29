@@ -1,4 +1,4 @@
-// Updated on: C1
+// Updated on: C167 (Fix TS errors, array access)
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { VscChevronRight } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -53,9 +53,11 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     }, []);
 
     useEffect(() => {
-        flatNodeList.current = buildFlatNodeList(data, expandedNodes);
-        if (!focusedNodePath && flatNodeList.current.length > 0) {
-            setFocusedNodePath(flatNodeList.current.absolutePath);
+        if (data && data.length > 0) {
+            flatNodeList.current = buildFlatNodeList(data, expandedNodes);
+            if (!focusedNodePath && flatNodeList.current.length > 0) {
+                setFocusedNodePath(flatNodeList.current[0].absolutePath);
+            }
         }
     }, [data, expandedNodes, buildFlatNodeList, focusedNodePath]);
 
@@ -64,20 +66,14 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     };
 
     useEffect(() => {
-        if (data.length > 0) {
-            const rootNode = data;
-            if (rootNode) {
-                expandNode(rootNode.absolutePath);
-            }
+        if (data.length > 0 && data[0]) {
+            expandNode(data[0].absolutePath);
         }
     }, [data]);
 
     useEffect(() => {
-        if (collapseTrigger > 0 && data.length > 0) {
-            const rootNode = data;
-            if (rootNode) {
-                setExpandedNodes([rootNode.absolutePath]);
-            }
+        if (collapseTrigger > 0 && data.length > 0 && data[0]) {
+            setExpandedNodes([data[0].absolutePath]);
         }
     }, [collapseTrigger, data]);
 
@@ -96,7 +92,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     }, [expandAllTrigger, data]);
 
     useEffect(() => {
-        if (activeFile && data.length > 0) {
+        if (activeFile && data.length > 0 && data[0]) {
             logger.log(`[TreeView] activeFile prop changed: ${activeFile}. Attempting to reveal.`);
             const getParentPaths = (filePath: string, rootPath: string): string[] => {
                 if (!filePath.startsWith(rootPath) || filePath === rootPath) {
@@ -112,7 +108,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
                 }
                 return paths;
             };
-            const rootPath = data?.absolutePath;
+            const rootPath = data[0].absolutePath;
             if (rootPath) {
                 const parents = getParentPaths(activeFile, rootPath);
                 logger.log(`[TreeView] Parents to expand: ${JSON.stringify(parents)}`);

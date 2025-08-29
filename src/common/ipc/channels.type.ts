@@ -6,6 +6,12 @@ export type SelectionSet = { [name: string]: string[] };
 export type ProblemCountsMap = { [path: string]: { error: number; warning: number; } };
 export type BatchWriteFile = { path: string; content: string };
 
+export interface ComparisonMetrics {
+    originalTokens: number;
+    modifiedTokens: number;
+    similarity: number;
+}
+
 export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel> =
     T extends ClientToServerChannel.RequestInitialData ? {} :
     T extends ClientToServerChannel.RequestFlattenContext ? { selectedPaths: string[] } :
@@ -19,7 +25,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestRevealInExplorer ? { path: string } :
     T extends ClientToServerChannel.RequestCopyPath ? { path: string, relative: boolean } :
     T extends ClientToServerChannel.RequestOpenFile ? { path: string } :
-    T extends ClientToServerChannel.RequestOpenFolder ? {} : // New in C166
+    T extends ClientToServerChannel.RequestOpenFolder ? {} :
     T extends ClientToServerChannel.RequestFileContent ? { path: string } :
     T extends ClientToServerChannel.RequestMoveFile ? { oldPath: string, newPath: string } :
     T extends ClientToServerChannel.RequestCopyFile ? { sourcePath: string, destinationDir: string } :
@@ -67,5 +73,5 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SendLatestCycleData ? { cycleData: PcppCycle; projectScope?: string; } :
     T extends ServerToClientChannel.SendCycleData ? { cycleData: PcppCycle | null, projectScope?: string; } :
     T extends ServerToClientChannel.FilesWritten ? { paths: string[] } :
-    T extends ServerToClientChannel.SendFileComparison ? { filePath: string; originalTokens: number; modifiedTokens: number; similarity: number; } :
+    T extends ServerToClientChannel.SendFileComparison ? { filePath: string } & ComparisonMetrics :
     never;

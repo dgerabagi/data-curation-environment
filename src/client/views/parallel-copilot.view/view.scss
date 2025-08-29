@@ -1,4 +1,4 @@
-/* Updated on: C1 */
+/* Updated on: C167 (Add active style for parse button) */
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -217,7 +217,7 @@ body {
     }
 }
 
-.sort-button.active {
+.sort-button.active, .pc-toolbar button.active {
     background-color: var(--vscode-toolbar-hoverBackground);
     outline: 1px solid var(--vscode-focusBorder);
 }
