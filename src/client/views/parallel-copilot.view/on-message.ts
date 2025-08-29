@@ -1,4 +1,4 @@
-// Updated on: C172 (Add prompt cost breakdown handler)
+// Updated on: C173 (Fix channel name for cost breakdown)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -87,7 +87,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestPromptCostEstimation, (data) => {
-        promptService.handlePromptCostEstimationRequest(data.cycleData, serverIpc);
+        promptService.handlePromptCostBreakdownRequest(data.cycleData, serverIpc);
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestPromptCostBreakdown, (data) => {

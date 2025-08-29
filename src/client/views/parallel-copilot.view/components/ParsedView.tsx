@@ -1,7 +1,7 @@
 // src/client/views/parallel-copilot.view/components/ParsedView.tsx
-// Updated on: C172 (Implement component)
+// Updated on: C173 (Implement component)
 import * as React from 'react';
-import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscSave, VscCheckAll, VscClearAll, VscClippy } from 'react-icons/vsc';
+import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscSave, VscCheckAll, VscClearAll, VscClippy, VscChevronDown } from 'react-icons/vsc';
 import ReactMarkdown from 'react-markdown';
 import * as path from 'path-browserify';
 import { ParsedResponse } from '@/common/types/pcpp.types';
@@ -10,9 +10,12 @@ import { formatLargeNumber } from '@/common/utils/formatting';
 import CodeViewer from './CodeViewer';
 
 const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; }> = ({ title, children, isCollapsed, onToggle }) => (
-    <div className="collapsible-section">
-        <div className="collapsible-header" onClick={onToggle}>{title}</div>
-        {!isCollapsed && <div className="collapsible-content">{children}</div>}
+    <div className="collapsible-section-inner">
+        <div className="collapsible-header-inner" onClick={onToggle}>
+            <VscChevronDown className={`chevron ${isCollapsed ? 'collapsed' : ''}`} />
+            <span>{title}</span>
+        </div>
+        {!isCollapsed && <div className="collapsible-content-inner">{children}</div>}
     </div>
 );
 
@@ -38,6 +41,7 @@ interface ParsedViewProps {
     onDeselectAllFiles: () => void;
     isAllFilesSelected: boolean;
     onAcceptSelected: () => void;
+    leftPaneWidth: number;
 }
 
 const ParsedView: React.FC<ParsedViewProps> = (props) => {
@@ -47,7 +51,7 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
 
     return (
         <div className="parsed-view-grid">
-            <div className="parsed-view-left">
+            <div className="parsed-view-left" style={{ flexBasis: `${props.leftPaneWidth}%` }}>
                 <CollapsibleSection title="Associated Files" isCollapsed={isAssociatedFilesCollapsed} onToggle={() => setAssociatedFilesCollapsed(p => !p)}>
                     <ul className="associated-files-list">{props.parsedContent.filesUpdated.map(file => {
                         const fileExists = props.fileExistenceMap.get(file);

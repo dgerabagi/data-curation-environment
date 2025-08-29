@@ -1,4 +1,4 @@
-// Updated on: C167 (Fix TS errors, array access)
+// Updated on: C173 (Add confirmation dialog for reset history)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -171,6 +171,17 @@ export class HistoryService {
     }
 
     public async resetHistory(): Promise<void> {
+        const confirmation = await vscode.window.showWarningMessage(
+            "Are you sure you want to delete ALL cycle history? This action cannot be undone.",
+            { modal: true },
+            "Delete All", "Cancel"
+        );
+
+        if (confirmation !== "Delete All") {
+            Services.loggerService.log("History reset cancelled by user.");
+            return;
+        }
+
         Services.loggerService.log(`HistoryService: Resetting all cycle history.`);
         if (this.historyFilePath) {
             try {

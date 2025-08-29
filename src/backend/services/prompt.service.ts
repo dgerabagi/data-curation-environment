@@ -1,4 +1,4 @@
-// Updated on: C172 (Fix cost estimation logic)
+// Updated on: C173 (Rename handler to handlePromptCostBreakdownRequest)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -168,7 +168,7 @@ ${staticContext.trim()}
         };
     }
 
-    public async handlePromptCostEstimationRequest(cycleData: PcppCycle, serverIpc: ServerPostMessageManager) {
+    public async handlePromptCostBreakdownRequest(cycleData: PcppCycle, serverIpc: ServerPostMessageManager) {
         try {
             const selectedFiles = await Services.selectionService.getLastSelection();
             const flattenedContent = await Services.flattenerService.getFlattenedContent(selectedFiles);

@@ -1,4 +1,4 @@
-// Updated on: C172 (Add breakdown to prompt cost estimation)
+// Updated on: C173 (Fix missing payload for RequestPromptCostBreakdown)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -59,6 +59,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestExportHistory ? {} :
     T extends ClientToServerChannel.RequestImportHistory ? {} :
     T extends ClientToServerChannel.RequestPromptCostEstimation ? { cycleData: PcppCycle } :
+    T extends ClientToServerChannel.RequestPromptCostBreakdown ? { cycleData: PcppCycle } :
     
     T extends ServerToClientChannel.SendWorkspaceFiles ? { files: FileNode[] } :
     T extends ServerToClientChannel.SendWorkspaceTrustState ? { isTrusted: boolean } :

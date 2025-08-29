@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/ResponsePane.tsx
-// Updated on: C172 (Implement component)
+// Updated on: C173 (Implement component)
 import * as React from 'react';
 import { TabState } from '../view';
 import ParsedView from './ParsedView';
@@ -31,6 +31,7 @@ interface ResponsePaneProps {
     onDeselectAllFiles: () => void;
     isAllFilesSelected: boolean;
     onAcceptSelected: () => void;
+    leftPaneWidth: number;
 }
 
 const ResponsePane: React.FC<ResponsePaneProps> = (props) => {
@@ -69,6 +70,7 @@ const ResponsePane: React.FC<ResponsePaneProps> = (props) => {
             onDeselectAllFiles={props.onDeselectAllFiles}
             isAllFilesSelected={props.isAllFilesSelected}
             onAcceptSelected={props.onAcceptSelected}
+            leftPaneWidth={props.leftPaneWidth}
         />
     );
 };
