@@ -1,7 +1,7 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-29T22:47:50.473Z
+  Date Generated: 2025-08-30T13:40:42.568Z
   ---
   Total Files: 265
   Total Lines: 34417
