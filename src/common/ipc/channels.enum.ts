@@ -55,6 +55,8 @@ export enum ClientToServerChannel {
     RequestHighlightContext = "clientToServer.requestHighlightContext",
     RequestPromptCostEstimation = "clientToServer.requestPromptCostEstimation",
     RequestPromptCostBreakdown = "clientToServer.requestPromptCostBreakdown",
+    RequestGitBaseline = "clientToServer.requestGitBaseline",
+    RequestGitRestore = "clientToServer.requestGitRestore",
 }
 
 export enum ServerToClientChannel {
@@ -80,4 +82,5 @@ export enum ServerToClientChannel {
     SendFileComparison = "serverToClient.sendFileComparison", 
     SendPromptCostEstimation = "serverToClient.sendPromptCostEstimation",
     SendPromptCostBreakdown = "serverToClient.sendPromptCostBreakdown",
+    NotifyGitOperationResult = "serverToClient.notifyGitOperationResult",
 }

@@ -11,6 +11,7 @@ import { FileOperationService } from "./file-operation.service";
 import { ContentExtractionService } from "./content-extraction.service";
 import { HighlightingService } from "./highlighting.service";
 import * as vscode from 'vscode';
+import { GitService } from "./git.service";
 
 class ServiceContainer {
     public fileTreeService!: FileTreeService;
@@ -24,6 +25,7 @@ class ServiceContainer {
     public actionService = new ActionService();
     public historyService!: HistoryService;
     public promptService!: PromptService;
+    public gitService = new GitService();
     
     public initialize(context: vscode.ExtensionContext, gitApi?: GitAPI) {
         this.loggerService.log("Services initializing...");

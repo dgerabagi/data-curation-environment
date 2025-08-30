@@ -1,10 +1,10 @@
-// Updated on: C173 (Fix channel name for cost breakdown)
+// Updated on: C175 (Add Git handlers)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
 
 export function onMessage(serverIpc: ServerPostMessageManager) {
-    const { loggerService, promptService, fileOperationService, highlightingService, historyService } = Services;
+    const { loggerService, promptService, fileOperationService, highlightingService, historyService, gitService } = Services;
     loggerService.log("Parallel Co-Pilot view message handler initialized.");
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestCreatePromptFile, (data) => {
@@ -86,11 +86,15 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         fileOperationService.handleOpenFolderRequest();
     });
 
-    serverIpc.onClientMessage(ClientToServerChannel.RequestPromptCostEstimation, (data) => {
+    serverIpc.onClientMessage(ClientToServerChannel.RequestPromptCostBreakdown, (data) => {
         promptService.handlePromptCostBreakdownRequest(data.cycleData, serverIpc);
     });
 
-    serverIpc.onClientMessage(ClientToServerChannel.RequestPromptCostBreakdown, (data) => {
-        promptService.handlePromptCostBreakdownRequest(data.cycleData, serverIpc);
+    serverIpc.onClientMessage(ClientToServerChannel.RequestGitBaseline, (data) => {
+        gitService.handleGitBaselineRequest(data.commitMessage, serverIpc);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestGitRestore, () => {
+        gitService.handleGitRestoreRequest(serverIpc);
     });
 }

@@ -1,7 +1,7 @@
 // src/client/views/parallel-copilot.view/components/ParsedView.tsx
-// Updated on: C173 (Implement component)
+// Updated on: C175 (Add Git buttons)
 import * as React from 'react';
-import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscSave, VscCheckAll, VscClearAll, VscClippy, VscChevronDown } from 'react-icons/vsc';
+import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscSave, VscCheckAll, VscClearAll, VscClippy, VscChevronDown, VscSourceControl, VscDiscard } from 'react-icons/vsc';
 import ReactMarkdown from 'react-markdown';
 import * as path from 'path-browserify';
 import { ParsedResponse } from '@/common/types/pcpp.types';
@@ -42,6 +42,8 @@ interface ParsedViewProps {
     isAllFilesSelected: boolean;
     onAcceptSelected: () => void;
     leftPaneWidth: number;
+    onBaseline: () => void;
+    onRestore: () => void;
 }
 
 const ParsedView: React.FC<ParsedViewProps> = (props) => {
@@ -78,6 +80,8 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
                     <button className="styled-button" onClick={props.onSelectAllFiles}><VscCheckAll/> {props.isAllFilesSelected ? 'Deselect All' : 'Select All'}</button>
                     <button className="styled-button" onClick={props.onDeselectAllFiles} title="Deselect All Files Across All Responses"><VscClearAll /></button>
                     <button className="styled-button" onClick={props.onAcceptSelected} disabled={props.selectedFilesForReplacement.size === 0}><VscSave/> Accept Selected</button>
+                    <button className="styled-button" onClick={props.onBaseline} title="Baseline (Commit)"><VscSourceControl/> Baseline</button>
+                    <button className="styled-button" onClick={props.onRestore} title="Restore Baseline"><VscDiscard/> Restore</button>
                 </div>
                 <div className="file-content-viewer-header">
                     <span className="file-path" title={props.selectedFilePath || ''}>{props.selectedFilePath ? path.basename(props.selectedFilePath) : 'No file selected'}</span>

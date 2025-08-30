@@ -1,7 +1,7 @@
 // src/client/views/parallel-copilot.view/components/CycleNavigator.tsx
-// Updated on: C172 (No functional changes, header update only)
+// Updated on: C175 (Add Git buttons)
 import * as React from 'react';
-import { VscChevronLeft, VscChevronRight, VscAdd, VscTrash, VscSync, VscCloudUpload, VscCloudDownload } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscAdd, VscTrash, VscSync, VscCloudUpload, VscCloudDownload, VscSourceControl, VscDiscard } from 'react-icons/vsc';
 
 interface CycleNavigatorProps {
     currentCycle: number;
@@ -15,6 +15,8 @@ interface CycleNavigatorProps {
     onResetHistory: () => void;
     onExportHistory: () => void;
     onImportHistory: () => void;
+    onGitBaseline: () => void;
+    onGitRestore: () => void;
 }
 
 const CycleNavigator: React.FC<CycleNavigatorProps> = ({
@@ -28,7 +30,9 @@ const CycleNavigator: React.FC<CycleNavigatorProps> = ({
     onDeleteCycle,
     onResetHistory,
     onExportHistory,
-    onImportHistory
+    onImportHistory,
+    onGitBaseline,
+    onGitRestore
 }) => {
     return (
         <div className="cycle-navigator">
@@ -59,6 +63,9 @@ const CycleNavigator: React.FC<CycleNavigatorProps> = ({
             <button onClick={onResetHistory} title="Reset All History"><VscSync /></button>
             <button onClick={onExportHistory} title="Save Cycle History..."><VscCloudUpload /></button>
             <button onClick={onImportHistory} title="Load Cycle History..."><VscCloudDownload /></button>
+            <div className="button-separator"></div>
+            <button onClick={onGitBaseline} title="Baseline (Commit)"><VscSourceControl /> Baseline</button>
+            <button onClick={onGitRestore} title="Restore Baseline"><VscDiscard /> Restore</button>
         </div>
     );
 };
