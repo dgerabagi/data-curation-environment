@@ -7,7 +7,6 @@ import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 
 export class GitService {
     private getWorkspaceRoot(): string | undefined {
-        // C176: Fix syntax error from C175. Correctly access the first workspace folder.
         return vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
     }
 
@@ -55,8 +54,8 @@ export class GitService {
     public async handleGitRestoreRequest(serverIpc: ServerPostMessageManager) {
         Services.loggerService.log("Executing Git Restore.");
         try {
-            // The pathspec ':(exclude)...' is a powerful git feature to exclude specific files from an operation.
-            const command = `git restore -- . ':(exclude).vscode/dce_history.json'`;
+            // C177 Fix: Use double quotes around the pathspec to avoid shell parsing issues.
+            const command = `git restore -- . ":(exclude).vscode/dce_history.json"`;
             await this.execGitCommand(command);
             this.notifyFrontend(serverIpc, true, 'Successfully restored workspace to baseline.');
         } catch (error: any) {

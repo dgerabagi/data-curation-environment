@@ -1,12 +1,12 @@
 <!--
   File: flattened_repo.md
   Source Directory: C:\Projects\DCE
-  Date Generated: 2025-08-30T13:50:55.550Z
+  Date Generated: 2025-08-30T14:14:03.997Z
   ---
   Total Files: 267
-  Total Lines: 34564
-  Total Characters: 1968955
-  Approx. Tokens: 492331
+  Total Lines: 34567
+  Total Characters: 1968958
+  Approx. Tokens: 492332
 -->
 
 <!-- Top 10 Files by Token Count -->
@@ -15,7 +15,7 @@
 3. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
 4. src\Artifacts\A11. DCE - Regression Case Studies.md (7032 tokens)
 5. src\Artifacts\A0. DCE Master Artifact List.md (6985 tokens)
-6. src\client\views\parallel-copilot.view\view.tsx (6097 tokens)
+6. src\client\views\parallel-copilot.view\view.tsx (6114 tokens)
 7. src\client\views\parallel-copilot.view\view.scss (4606 tokens)
 8. src\client\components\tree-view\TreeView.tsx (4429 tokens)
 9. src\backend\services\prompt.service.ts (4424 tokens)
@@ -136,7 +136,7 @@
 112. src\backend\services\file-operation.service.ts - Lines: 338 - Chars: 16082 - Tokens: 4021
 113. src\backend\services\file-tree.service.ts - Lines: 276 - Chars: 13989 - Tokens: 3498
 114. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12580 - Tokens: 3145
-115. src\backend\services\git.service.ts - Lines: 65 - Chars: 2831 - Tokens: 708
+115. src\backend\services\git.service.ts - Lines: 66 - Chars: 2924 - Tokens: 731
 116. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4232 - Tokens: 1058
 117. src\backend\services\history.service.ts - Lines: 264 - Chars: 10959 - Tokens: 2740
 118. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
@@ -164,8 +164,8 @@
 140. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 72 - Chars: 2806 - Tokens: 702
 141. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 73 - Chars: 2882 - Tokens: 721
 142. src\client\views\parallel-copilot.view\components\NumberedTextarea.tsx - Lines: 96 - Chars: 3822 - Tokens: 956
-143. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 96 - Chars: 7376 - Tokens: 1844
-144. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 78 - Chars: 3252 - Tokens: 813
+143. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 94 - Chars: 7126 - Tokens: 1782
+144. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 82 - Chars: 3342 - Tokens: 836
 145. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 65 - Chars: 2467 - Tokens: 617
 146. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 147. src\client\views\parallel-copilot.view\on-message.ts - Lines: 100 - Chars: 4543 - Tokens: 1136
@@ -175,7 +175,7 @@
 151. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
 152. src\client\views\parallel-copilot.view\view.scss - Lines: 818 - Chars: 18421 - Tokens: 4606
 153. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-154. src\client\views\parallel-copilot.view\view.tsx - Lines: 142 - Chars: 24385 - Tokens: 6097
+154. src\client\views\parallel-copilot.view\view.tsx - Lines: 142 - Chars: 24455 - Tokens: 6114
 155. src\common\ipc\channels.enum.ts - Lines: 86 - Chars: 4556 - Tokens: 1139
 156. src\common\ipc\channels.type.ts - Lines: 86 - Chars: 6495 - Tokens: 1624
 157. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
@@ -22467,7 +22467,8 @@ import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 
 export class GitService {
     private getWorkspaceRoot(): string | undefined {
-        return vscode.workspace.workspaceFolders?.?.uri.fsPath;
+        // C176: Fix syntax error from C175. Correctly access the first workspace folder.
+        return vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
     }
 
     private async execGitCommand(command: string): Promise<{ stdout: string; stderr: string }> {
@@ -26310,7 +26311,7 @@ export default NumberedTextarea;
 
 <file path="src/client/views/parallel-copilot.view/components/ParsedView.tsx">
 // src/client/views/parallel-copilot.view/components/ParsedView.tsx
-// Updated on: C175 (Add Git buttons)
+// Updated on: C176 (Update props interface to accept Git functions)
 import * as React from 'react';
 import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscSave, VscCheckAll, VscClearAll, VscClippy, VscChevronDown, VscSourceControl, VscDiscard } from 'react-icons/vsc';
 import ReactMarkdown from 'react-markdown';
@@ -26391,8 +26392,6 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
                     <button className="styled-button" onClick={props.onSelectAllFiles}><VscCheckAll/> {props.isAllFilesSelected ? 'Deselect All' : 'Select All'}</button>
                     <button className="styled-button" onClick={props.onDeselectAllFiles} title="Deselect All Files Across All Responses"><VscClearAll /></button>
                     <button className="styled-button" onClick={props.onAcceptSelected} disabled={props.selectedFilesForReplacement.size === 0}><VscSave/> Accept Selected</button>
-                    <button className="styled-button" onClick={props.onBaseline} title="Baseline (Commit)"><VscSourceControl/> Baseline</button>
-                    <button className="styled-button" onClick={props.onRestore} title="Restore Baseline"><VscDiscard/> Restore</button>
                 </div>
                 <div className="file-content-viewer-header">
                     <span className="file-path" title={props.selectedFilePath || ''}>{props.selectedFilePath ? path.basename(props.selectedFilePath) : 'No file selected'}</span>
@@ -26409,7 +26408,7 @@ export default ParsedView;
 
 <file path="src/client/views/parallel-copilot.view/components/ResponsePane.tsx">
 // src/client/views/parallel-copilot.view/components/ResponsePane.tsx
-// Updated on: C173 (Implement component)
+// Updated on: C176 (Pass onBaseline and onRestore props to ParsedView)
 import * as React from 'react';
 import { TabState } from '../view';
 import ParsedView from './ParsedView';
@@ -26442,6 +26441,8 @@ interface ResponsePaneProps {
     isAllFilesSelected: boolean;
     onAcceptSelected: () => void;
     leftPaneWidth: number;
+    onBaseline: () => void;
+    onRestore: () => void;
 }
 
 const ResponsePane: React.FC<ResponsePaneProps> = (props) => {
@@ -26481,6 +26482,8 @@ const ResponsePane: React.FC<ResponsePaneProps> = (props) => {
             isAllFilesSelected={props.isAllFilesSelected}
             onAcceptSelected={props.onAcceptSelected}
             leftPaneWidth={props.leftPaneWidth}
+            onBaseline={props.onBaseline}
+            onRestore={props.onRestore}
         />
     );
 };
@@ -27800,7 +27803,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C175 (Add Git button handlers)
+// Updated on: C176 (Pass Git handlers to ResponsePane)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -27934,7 +27937,7 @@ const App = () => {
         </CollapsibleSection>
         <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} onSortToggle={() => setIsSortedByTokens(p => !p)} />
         <div className="tab-content">
-            <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={currentComparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => setSelectedResponseId(prev => prev === id ? null : id)} onSelectAllFiles={handleSelectAllFilesToggle} onDeselectAllFiles={() => setSelectedFilesForReplacement(new Set())} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} />
+            <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={currentComparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => setSelectedResponseId(prev => prev === id ? null : id)} onSelectAllFiles={handleSelectAllFilesToggle} onDeselectAllFiles={() => setSelectedFilesForReplacement(new Set())} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} onBaseline={handleGitBaseline} onRestore={handleGitRestore} />
         </div>
     </div>;
 };

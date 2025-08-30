@@ -1,5 +1,36 @@
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C175 (Add styles for Git buttons)
+// Updated on: C177 (Add styles for workflow highlight and fix cost color)
+@keyframes pulsing-glow {
+    0% {
+        box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
+        outline: 1px solid transparent;
+    }
+    50% {
+        box-shadow: 0 0 8px 2px var(--vscode-focusBorder);
+        outline: 1px solid var(--vscode-focusBorder);
+    }
+    100% {
+        box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
+        outline: 1px solid transparent;
+    }
+}
+
+.workflow-highlight {
+    animation: pulsing-glow 1.5s infinite ease-in-out;
+    border-radius: 4px; 
+}
+
+// Make sure specific elements get the highlight correctly
+.tab-bar .tab.workflow-highlight {
+    border-radius: 4px 4px 0 0;
+}
+
+.parsed-view-left .collapsible-section-inner.workflow-highlight,
+.response-acceptance-header .styled-button.workflow-highlight {
+    border-radius: 4px;
+}
+
+
 body {
     padding: 0;
     font-family: var(--vscode-font-family);
@@ -69,7 +100,6 @@ body {
         resize: none;
         z-index: 1;
         
-        // Hide scrollbars but keep it scrollable
         &::-webkit-scrollbar {
             display: none;
         }
@@ -183,6 +213,11 @@ body {
     &.selected {
         background-color: var(--vscode-testing-iconPassed);
         color: var(--vscode-button-foreground);
+
+        // C177 Fix: Change text color on green banner
+        .total-prompt-cost {
+            color: var(--vscode-button-foreground);
+        }
     }
 
     .chevron {
