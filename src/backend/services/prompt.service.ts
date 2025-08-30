@@ -157,7 +157,6 @@ ${staticContext.trim()}
         const m7Content = `<M7. Flattened Repo>\n${flattenedRepoContent}\n</M7. Flattened Repo>`;
 
         return {
-            "Prompt Wrapper": `<prompt.md>\n\n</prompt.md>`,
             "M1 Artifact Schema": this.artifactSchemaTemplate,
             "M2 Cycle Overview": cycleOverview,
             "M3 Interaction Schema": interactionSchemaContent,
@@ -275,7 +274,10 @@ ${cyclesContent}
             const currentCycleData = { ...currentCycleDataFromHistory, title: cycleTitle };
 
             const promptParts = await this.getPromptParts(currentCycleData, flattenedContent);
-            const finalPrompt = Object.values(promptParts).join('\n\n');
+            
+            // Fix for bug #6: Ensure prompt tags wrap the entire content
+            const promptContent = Object.values(promptParts).join('\n\n');
+            const finalPrompt = `<prompt.md>\n\n${promptContent}\n\n</prompt.md>`;
 
             await fs.writeFile(promptMdPath, finalPrompt, 'utf-8');
             vscode.window.showInformationMessage(`Successfully generated prompt.md.`);
@@ -321,10 +323,11 @@ ${cyclesContent}
             const flattenedRepoContent = `<M7. Flattened Repo>\n${readmeFileContent}\n</M7. Flattened Repo>`;
 
             const promptParts = [
-                `<prompt.md>`, this.artifactSchemaTemplate, `<M2. cycle overview>\nCurrent Cycle 0 - Project Initialization\n</M2. cycle overview>`, interactionSchemaContent, projectScopeContent, `<M5. organized artifacts list>\n# No artifacts exist yet.\n</M5. organized artifacts list>`, `<M6. Cycles>\n${cycle0Content}\n</M6. Cycles>`, flattenedRepoContent, `</prompt.md>`
+                this.artifactSchemaTemplate, `<M2. cycle overview>\nCurrent Cycle 0 - Project Initialization\n</M2. cycle overview>`, interactionSchemaContent, projectScopeContent, `<M5. organized artifacts list>\n# No artifacts exist yet.\n</M5. organized artifacts list>`, `<M6. Cycles>\n${cycle0Content}\n</M6. Cycles>`, flattenedRepoContent
             ];
+            const promptContent = promptParts.join('\n\n');
+            const finalPrompt = `<prompt.md>\n\n${promptContent}\n\n</prompt.md>`;
 
-            const finalPrompt = promptParts.join('\n\n');
             await vscode.workspace.fs.writeFile(vscode.Uri.file(promptMdPath), Buffer.from(finalPrompt, 'utf-8'));
             Services.loggerService.log("Successfully generated Cycle 0 prompt.md file.");
             
