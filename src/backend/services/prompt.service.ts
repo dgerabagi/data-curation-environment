@@ -1,4 +1,4 @@
-// Updated on: C173 (Rename handler to handlePromptCostBreakdownRequest)
+// Updated on: C179 (Add guard for empty selection in getFlattenedContent)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -57,6 +57,16 @@ M7. Flattened Repo
             const numA = parseInt(a.match(/T(\d+)/)?.[1] || '0', 10);
             const numB = parseInt(b.match(/T(\d+)/)?.[1] || '0', 10);
             return numA - numB;
+        });
+
+        // C179: Prioritize T14 and T7 by moving them to the front of the list if they exist.
+        const priorityArtifacts = ['T14. Template - GitHub Repository Setup Guide.md', 'T7. Template - Development and Testing Guide.md'];
+        priorityArtifacts.forEach(pa => {
+            const index = templateFilenames.indexOf(pa);
+            if (index > -1) {
+                templateFilenames.splice(index, 1);
+                templateFilenames.unshift(pa);
+            }
         });
 
         let staticContext = '<!-- START: Project Templates -->\n';
@@ -170,6 +180,10 @@ ${staticContext.trim()}
     public async handlePromptCostBreakdownRequest(cycleData: PcppCycle, serverIpc: ServerPostMessageManager) {
         try {
             const selectedFiles = await Services.selectionService.getLastSelection();
+            if (selectedFiles.length === 0) {
+                serverIpc.sendToClient(ServerToClientChannel.SendPromptCostEstimation, { totalTokens: 0, estimatedCost: 0, breakdown: {} });
+                return;
+            }
             const flattenedContent = await Services.flattenerService.getFlattenedContent(selectedFiles);
             
             const promptParts = await this.getPromptParts(cycleData, flattenedContent);

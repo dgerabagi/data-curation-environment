@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/ResponsePane.tsx
-// Updated on: C178 (Add workflowStep prop)
+// Updated on: C179 (Pass workflowStep to ParsedView)
 import * as React from 'react';
 import { TabState } from '../view';
 import ParsedView from './ParsedView';

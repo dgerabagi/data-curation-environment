@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/ResponseTabs.tsx
-// Updated on: C178 (Add workflow highlight prop)
+// Updated on: C179 (Add workflow highlighting class to response tabs)
 import * as React from 'react';
 import { VscFileCode, VscSymbolNumeric, VscListOrdered, VscListUnordered } from 'react-icons/vsc';
 import { TabState } from '../view';

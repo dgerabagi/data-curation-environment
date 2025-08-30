@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/ContextInputs.tsx
-// Updated on: C172 (Implement component)
+// Updated on: C179 (Pass workflowStep to NumberedTextarea)
 import * as React from 'react';
 import NumberedTextarea from './NumberedTextarea';
 import { formatLargeNumber } from '@/common/utils/formatting';
@@ -17,6 +17,7 @@ interface ContextInputsProps {
     ephemeralContextHeight: number;
     onEphemeralContextHeightChange: (height: number) => void;
     currentCycle: number;
+    workflowStep: string | null;
 }
 
 const ContextInputs: React.FC<ContextInputsProps> = ({
@@ -31,7 +32,8 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
     onCycleContextHeightChange,
     ephemeralContextHeight,
     onEphemeralContextHeightChange,
-    currentCycle
+    currentCycle,
+    workflowStep
 }) => {
     return (
         <div className="context-inputs">
@@ -48,6 +50,7 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
                     height={cycleContextHeight}
                     onHeightChange={onCycleContextHeightChange}
                     id={`cycle-context-${currentCycle}`}
+                    className={workflowStep === 'awaitingCycleContext' ? 'workflow-highlight' : ''}
                 />
             </div>
             <div className="context-input-wrapper">

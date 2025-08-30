@@ -1,4 +1,4 @@
-// Updated on: C170 (Add .vscode to exclusion patterns to prevent PCPP history saves from refreshing FTV)
+// Updated on: C179 (Add .git to exclusion patterns)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -15,7 +15,7 @@ const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
 const EXCLUSION_PATTERNS = ['.git', 'dce_cache', 'out', '.vscode']; 
-const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/flattened_repo.md', '/prompt.md', '/package-lock.json'];
+const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/.git/', '/flattened_repo.md', '/prompt.md', '/package-lock.json'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
@@ -226,7 +226,8 @@ export class FileTreeService {
             const entries = await vscode.workspace.fs.readDirectory(dirUri);
 
             for (const [name, type] of entries) {
-                if (EXCLUSION_PATTERNS.some(p => p === name)) continue;
+                // C179: Use includes to check for .git directory at any level.
+                if (EXCLUSION_PATTERNS.some(p => name === p)) continue;
 
                 const childUri = vscode.Uri.joinPath(dirUri, name);
                 const childPath = normalizePath(childUri.fsPath);
@@ -251,7 +252,7 @@ export class FileTreeService {
     private _aggregateStats(node: FileNode): void {
         if (!node.children) return;
         
-        if (node.name.toLowerCase() === 'node_modules' || node.name.toLowerCase() === '.vscode') {
+        if (node.name.toLowerCase() === 'node_modules' || node.name.toLowerCase() === '.git') {
             node.tokenCount = 0;
             node.fileCount = 0;
             node.sizeInBytes = 0;

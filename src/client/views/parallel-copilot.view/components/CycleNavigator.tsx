@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/CycleNavigator.tsx
-// Updated on: C178 (Add workflow highlight prop)
+// Updated on: C179 (Apply workflow highlighting class to title input)
 import * as React from 'react';
 import { VscChevronLeft, VscChevronRight, VscAdd, VscTrash, VscSync, VscCloudUpload, VscCloudDownload, VscSourceControl, VscDiscard } from 'react-icons/vsc';
 
@@ -61,7 +61,7 @@ const CycleNavigator: React.FC<CycleNavigatorProps> = ({
             </button>
             <input 
                 type="text" 
-                className="cycle-title-input" 
+                className={`cycle-title-input ${workflowStep === 'awaitingCycleTitle' ? 'workflow-highlight' : ''}`}
                 placeholder="Cycle Title..." 
                 value={cycleTitle} 
                 onChange={e => onTitleChange(e.target.value)} 

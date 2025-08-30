@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx
-// Updated on: C174 (Fix alignment issues between textarea and highlight div)
+// Updated on: C179 (Fix scrolling synchronization and alignment issues)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -12,13 +12,15 @@ interface NumberedTextareaProps {
     height: number;
     onHeightChange: (height: number) => void;
     id: string; // Unique ID for this textarea instance
+    className?: string; // For workflow highlighting
 }
 
-const NumberedTextarea: React.FC<NumberedTextareaProps> = ({ value, onChange, placeholder, onKeyDown, height, onHeightChange, id }) => {
+const NumberedTextarea: React.FC<NumberedTextareaProps> = ({ value, onChange, placeholder, onKeyDown, height, onHeightChange, id, className }) => {
     const [lineCount, setLineCount] = React.useState(1);
     const [highlightedHtml, setHighlightedHtml] = React.useState('');
     const textareaRef = React.useRef<HTMLTextAreaElement>(null);
     const highlightRef = React.useRef<HTMLDivElement>(null);
+    const lineNumbersRef = React.useRef<HTMLDivElement>(null);
     const clientIpc = ClientPostMessageManager.getInstance();
 
     React.useEffect(() => {
@@ -27,7 +29,9 @@ const NumberedTextarea: React.FC<NumberedTextareaProps> = ({ value, onChange, pl
                 setHighlightedHtml(html);
             }
         };
-        clientIpc.onServerMessage(ServerToClientChannel.SendHighlightContext, handleHighlightResponse);
+        const subscription = clientIpc.onServerMessage(ServerToClientChannel.SendHighlightContext, handleHighlightResponse);
+        // Assuming onServerMessage returns a function to unsubscribe, or similar mechanism.
+        // If not, this might need adjustment based on actual implementation of ClientPostMessageManager.
     }, [id, clientIpc]);
     
     React.useEffect(() => {
@@ -36,10 +40,11 @@ const NumberedTextarea: React.FC<NumberedTextareaProps> = ({ value, onChange, pl
         clientIpc.sendToServer(ClientToServerChannel.RequestHighlightContext, { context: value, id });
     }, [value, id, clientIpc]);
 
-    const handleScroll = () => {
-        if (highlightRef.current && textareaRef.current) {
-            highlightRef.current.scrollTop = textareaRef.current.scrollTop;
-            highlightRef.current.scrollLeft = textareaRef.current.scrollLeft;
+    const handleScroll = (e: React.UIEvent<HTMLTextAreaElement>) => {
+        if (highlightRef.current && lineNumbersRef.current) {
+            const scrollTop = e.currentTarget.scrollTop;
+            highlightRef.current.scrollTop = scrollTop;
+            lineNumbersRef.current.scrollTop = scrollTop;
         }
     };
 
@@ -49,21 +54,22 @@ const NumberedTextarea: React.FC<NumberedTextareaProps> = ({ value, onChange, pl
         document.addEventListener('mouseup', handleMouseUp);
     };
 
-    const handleMouseMove = (e: MouseEvent) => {
+    const handleMouseMove = React.useCallback((e: MouseEvent) => {
         if (textareaRef.current) {
-            const newHeight = e.clientY - textareaRef.current.getBoundingClientRect().top;
+            const containerTop = textareaRef.current.getBoundingClientRect().top;
+            const newHeight = e.clientY - containerTop;
             onHeightChange(Math.max(50, newHeight)); // min height 50px
         }
-    };
+    }, [textareaRef, onHeightChange]);
 
-    const handleMouseUp = () => {
+    const handleMouseUp = React.useCallback(() => {
         document.removeEventListener('mousemove', handleMouseMove);
         document.removeEventListener('mouseup', handleMouseUp);
-    };
+    }, [handleMouseMove]);
 
     return (
-        <div className="numbered-textarea-container" style={{ height: `${height}px` }}>
-            <div className="line-numbers-gutter">
+        <div className={`numbered-textarea-container ${className || ''}`} style={{ height: `${height}px` }}>
+            <div className="line-numbers-gutter" ref={lineNumbersRef}>
                 {Array.from({ length: lineCount }, (_, i) => (
                     <div key={i}>{i + 1}</div>
                 ))}
