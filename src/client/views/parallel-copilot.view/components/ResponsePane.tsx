@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/ResponsePane.tsx
-// Updated on: C173 (Implement component)
+// Updated on: C176 (Pass onBaseline and onRestore props to ParsedView)
 import * as React from 'react';
 import { TabState } from '../view';
 import ParsedView from './ParsedView';
@@ -32,6 +32,8 @@ interface ResponsePaneProps {
     isAllFilesSelected: boolean;
     onAcceptSelected: () => void;
     leftPaneWidth: number;
+    onBaseline: () => void;
+    onRestore: () => void;
 }
 
 const ResponsePane: React.FC<ResponsePaneProps> = (props) => {
@@ -71,6 +73,8 @@ const ResponsePane: React.FC<ResponsePaneProps> = (props) => {
             isAllFilesSelected={props.isAllFilesSelected}
             onAcceptSelected={props.onAcceptSelected}
             leftPaneWidth={props.leftPaneWidth}
+            onBaseline={props.onBaseline}
+            onRestore={props.onRestore}
         />
     );
 };
