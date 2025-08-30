@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/CycleNavigator.tsx
-// Updated on: C175 (Add Git buttons)
+// Updated on: C178 (Add workflow highlight prop)
 import * as React from 'react';
 import { VscChevronLeft, VscChevronRight, VscAdd, VscTrash, VscSync, VscCloudUpload, VscCloudDownload, VscSourceControl, VscDiscard } from 'react-icons/vsc';
 
@@ -17,6 +17,7 @@ interface CycleNavigatorProps {
     onImportHistory: () => void;
     onGitBaseline: () => void;
     onGitRestore: () => void;
+    workflowStep: string | null;
 }
 
 const CycleNavigator: React.FC<CycleNavigatorProps> = ({
@@ -32,7 +33,8 @@ const CycleNavigator: React.FC<CycleNavigatorProps> = ({
     onExportHistory,
     onImportHistory,
     onGitBaseline,
-    onGitRestore
+    onGitRestore,
+    workflowStep
 }) => {
     return (
         <div className="cycle-navigator">
@@ -49,7 +51,12 @@ const CycleNavigator: React.FC<CycleNavigatorProps> = ({
             <button onClick={(e) => onCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}>
                 <VscChevronRight />
             </button>
-            <button onClick={onNewCycle} title="New Cycle" disabled={isNewCycleButtonDisabled}>
+            <button 
+                onClick={onNewCycle} 
+                title="New Cycle" 
+                disabled={isNewCycleButtonDisabled}
+                className={workflowStep === 'readyForNewCycle' ? 'workflow-highlight' : ''}
+            >
                 <VscAdd />
             </button>
             <input 
@@ -64,8 +71,14 @@ const CycleNavigator: React.FC<CycleNavigatorProps> = ({
             <button onClick={onExportHistory} title="Save Cycle History..."><VscCloudUpload /></button>
             <button onClick={onImportHistory} title="Load Cycle History..."><VscCloudDownload /></button>
             <div className="button-separator"></div>
-            <button onClick={onGitBaseline} title="Baseline (Commit)"><VscSourceControl /> Baseline</button>
-            <button onClick={onGitRestore} title="Restore Baseline"><VscDiscard /> Restore</button>
+            <button 
+                onClick={onGitBaseline} 
+                title="Baseline (Commit)"
+                className={`git-button ${workflowStep === 'awaitingBaseline' ? 'workflow-highlight' : ''}`}
+            >
+                <VscSourceControl /> Baseline
+            </button>
+            <button onClick={onGitRestore} title="Restore Baseline" className="git-button"><VscDiscard /> Restore</button>
         </div>
     );
 };

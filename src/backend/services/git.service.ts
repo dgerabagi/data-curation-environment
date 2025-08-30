@@ -23,7 +23,7 @@ export class GitService {
                     reject(error);
                     return;
                 }
-                if (stderr) {
+                if (stderr && !stderr.includes('nothing to commit, working tree clean')) {
                     Services.loggerService.warn(`Git command stderr: ${stderr}`);
                 }
                 resolve({ stdout, stderr });
@@ -54,7 +54,7 @@ export class GitService {
     public async handleGitRestoreRequest(serverIpc: ServerPostMessageManager) {
         Services.loggerService.log("Executing Git Restore.");
         try {
-            // C177 Fix: Use double quotes around the pathspec to avoid shell parsing issues.
+            // C178 Fix: Use double quotes around the pathspec to avoid shell parsing issues.
             const command = `git restore -- . ":(exclude).vscode/dce_history.json"`;
             await this.execGitCommand(command);
             this.notifyFrontend(serverIpc, true, 'Successfully restored workspace to baseline.');

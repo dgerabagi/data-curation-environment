@@ -1,5 +1,5 @@
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C177 (Add styles for workflow highlight and fix cost color)
+// Updated on: C178 (Add styles for git buttons)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -285,6 +285,17 @@ body {
     height: 16px;
     background-color: var(--vscode-panel-border);
     margin: 0 4px;
+}
+
+.git-button {
+    background-color: var(--vscode-button-secondaryBackground) !important;
+    color: var(--vscode-button-secondaryForeground) !important;
+    padding: 4px 8px !important;
+    font-size: 12px;
+
+    &:hover {
+        background-color: var(--vscode-button-secondaryHoverBackground) !important;
+    }
 }
 
 .pc-toolbar {

@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/ResponsePane.tsx
-// Updated on: C176 (Pass onBaseline and onRestore props to ParsedView)
+// Updated on: C178 (Add workflowStep prop)
 import * as React from 'react';
 import { TabState } from '../view';
 import ParsedView from './ParsedView';
@@ -34,6 +34,7 @@ interface ResponsePaneProps {
     leftPaneWidth: number;
     onBaseline: () => void;
     onRestore: () => void;
+    workflowStep: string | null;
 }
 
 const ResponsePane: React.FC<ResponsePaneProps> = (props) => {
@@ -75,6 +76,7 @@ const ResponsePane: React.FC<ResponsePaneProps> = (props) => {
             leftPaneWidth={props.leftPaneWidth}
             onBaseline={props.onBaseline}
             onRestore={props.onRestore}
+            workflowStep={props.workflowStep}
         />
     );
 };

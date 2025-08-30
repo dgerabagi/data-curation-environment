@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/ParsedView.tsx
-// Updated on: C176 (Update props interface to accept Git functions)
+// Updated on: C178 (Add workflowStep prop for highlighting)
 import * as React from 'react';
 import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscSave, VscCheckAll, VscClearAll, VscClippy, VscChevronDown, VscSourceControl, VscDiscard } from 'react-icons/vsc';
 import ReactMarkdown from 'react-markdown';
@@ -9,8 +9,8 @@ import { ComparisonMetrics } from '@/common/ipc/channels.type';
 import { formatLargeNumber } from '@/common/utils/formatting';
 import CodeViewer from './CodeViewer';
 
-const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; }> = ({ title, children, isCollapsed, onToggle }) => (
-    <div className="collapsible-section-inner">
+const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; className?: string; }> = ({ title, children, isCollapsed, onToggle, className }) => (
+    <div className={`collapsible-section-inner ${className || ''}`}>
         <div className="collapsible-header-inner" onClick={onToggle}>
             <VscChevronDown className={`chevron ${isCollapsed ? 'collapsed' : ''}`} />
             <span>{title}</span>
@@ -44,6 +44,7 @@ interface ParsedViewProps {
     leftPaneWidth: number;
     onBaseline: () => void;
     onRestore: () => void;
+    workflowStep: string | null;
 }
 
 const ParsedView: React.FC<ParsedViewProps> = (props) => {
@@ -54,7 +55,7 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
     return (
         <div className="parsed-view-grid">
             <div className="parsed-view-left" style={{ flexBasis: `${props.leftPaneWidth}%` }}>
-                <CollapsibleSection title="Associated Files" isCollapsed={isAssociatedFilesCollapsed} onToggle={() => setAssociatedFilesCollapsed(p => !p)}>
+                <CollapsibleSection title="Associated Files" isCollapsed={isAssociatedFilesCollapsed} onToggle={() => setAssociatedFilesCollapsed(p => !p)} className={props.workflowStep === 'awaitingFileSelect' ? 'workflow-highlight' : ''}>
                     <ul className="associated-files-list">{props.parsedContent.filesUpdated.map(file => {
                         const fileExists = props.fileExistenceMap.get(file);
                         const hasOverride = props.pathOverrides.has(file);
@@ -76,10 +77,10 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
             <div className="resizer" />
             <div className="parsed-view-right">
                 <div className="response-acceptance-header">
-                    <button className={`styled-button ${props.selectedResponseId === props.activeTab.toString() ? 'toggled' : ''}`} onClick={() => props.onSelectResponse(props.activeTab.toString())}>{props.selectedResponseId === props.activeTab.toString() ? 'Response Selected' : 'Select This Response'}</button>
-                    <button className="styled-button" onClick={props.onSelectAllFiles}><VscCheckAll/> {props.isAllFilesSelected ? 'Deselect All' : 'Select All'}</button>
+                    <button className={`styled-button ${props.selectedResponseId === props.activeTab.toString() ? 'toggled' : ''} ${props.workflowStep === 'awaitingResponseSelect' ? 'workflow-highlight' : ''}`} onClick={() => props.onSelectResponse(props.activeTab.toString())}>{props.selectedResponseId === props.activeTab.toString() ? 'Response Selected' : 'Select This Response'}</button>
+                    <button className={`styled-button ${props.workflowStep === 'awaitingFileSelect' ? 'workflow-highlight' : ''}`} onClick={props.onSelectAllFiles}><VscCheckAll/> {props.isAllFilesSelected ? 'Deselect All' : 'Select All'}</button>
                     <button className="styled-button" onClick={props.onDeselectAllFiles} title="Deselect All Files Across All Responses"><VscClearAll /></button>
-                    <button className="styled-button" onClick={props.onAcceptSelected} disabled={props.selectedFilesForReplacement.size === 0}><VscSave/> Accept Selected</button>
+                    <button className={`styled-button ${props.workflowStep === 'awaitingAccept' ? 'workflow-highlight' : ''}`} onClick={props.onAcceptSelected} disabled={props.selectedFilesForReplacement.size === 0}><VscSave/> Accept Selected</button>
                 </div>
                 <div className="file-content-viewer-header">
                     <span className="file-path" title={props.selectedFilePath || ''}>{props.selectedFilePath ? path.basename(props.selectedFilePath) : 'No file selected'}</span>
