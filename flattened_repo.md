@@ -1,19 +1,19 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-08-30T21:32:12.828Z
+  Date Generated: 2025-08-31T15:30:12.567Z
   ---
   Total Files: 164
-  Approx. Tokens: 439968
+  Approx. Tokens: 440510
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (239424 tokens)
-2. src\Artifacts\A0. DCE Master Artifact List.md (7155 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (7130 tokens)
-4. src\Artifacts\A11. DCE - Regression Case Studies.md (7032 tokens)
-5. src\client\views\parallel-copilot.view\view.scss (5119 tokens)
-6. src\backend\services\prompt.service.ts (4737 tokens)
+2. src\Artifacts\A11. DCE - Regression Case Studies.md (7497 tokens)
+3. src\Artifacts\A0. DCE Master Artifact List.md (7155 tokens)
+4. src\client\views\parallel-copilot.view\view.tsx (7129 tokens)
+5. src\client\views\parallel-copilot.view\view.scss (4918 tokens)
+6. src\backend\services\prompt.service.ts (4867 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4429 tokens)
 8. src\client\views\context-chooser.view\view.tsx (4035 tokens)
 9. src\backend\services\file-operation.service.ts (4021 tokens)
@@ -30,7 +30,7 @@
 8. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
 9. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
 10. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
-11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 266 - Chars: 28128 - Tokens: 7032
+11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 279 - Chars: 29985 - Tokens: 7497
 12. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5710 - Tokens: 1428
 13. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
 14. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
@@ -83,7 +83,7 @@
 61. src\Artifacts\A57. DCE - Phase 2 - Cycle Management Plan.md - Lines: 44 - Chars: 3625 - Tokens: 907
 62. src\Artifacts\A58. DCE - WinMerge Source Code Analysis.md - Lines: 56 - Chars: 5322 - Tokens: 1331
 63. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 44 - Chars: 3786 - Tokens: 947
-64. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 35 - Chars: 4209 - Tokens: 1053
+64. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 35 - Chars: 4175 - Tokens: 1044
 65. src\Artifacts\A61. DCE - Phase 2 - Cycle History Management Plan.md - Lines: 45 - Chars: 3559 - Tokens: 890
 66. src\Artifacts\A62. DCE - Cycle 157 - Task Tracker.md - Lines: 31 - Chars: 2710 - Tokens: 678
 67. src\Artifacts\A63. DCE - Cycle 158 - Task Tracker.md - Lines: 23 - Chars: 1760 - Tokens: 440
@@ -92,7 +92,7 @@
 70. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1806 - Tokens: 452
 71. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 47 - Chars: 3537 - Tokens: 885
 72. src\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3311 - Tokens: 828
-73. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 4172 - Tokens: 1043
+73. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 4105 - Tokens: 1027
 74. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 56 - Chars: 4403 - Tokens: 1101
 75. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
 76. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 33 - Chars: 2764 - Tokens: 691
@@ -126,11 +126,11 @@
 104. src\backend\services\file-operation.service.ts - Lines: 338 - Chars: 16082 - Tokens: 4021
 105. src\backend\services\file-tree.service.ts - Lines: 277 - Chars: 14299 - Tokens: 3575
 106. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12820 - Tokens: 3205
-107. src\backend\services\git.service.ts - Lines: 65 - Chars: 2874 - Tokens: 719
+107. src\backend\services\git.service.ts - Lines: 76 - Chars: 3672 - Tokens: 918
 108. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4232 - Tokens: 1058
 109. src\backend\services\history.service.ts - Lines: 264 - Chars: 10959 - Tokens: 2740
 110. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-111. src\backend\services\prompt.service.ts - Lines: 372 - Chars: 18945 - Tokens: 4737
+111. src\backend\services\prompt.service.ts - Lines: 381 - Chars: 19466 - Tokens: 4867
 112. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 113. src\backend\services\services.ts - Lines: 40 - Chars: 1827 - Tokens: 457
 114. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
@@ -152,7 +152,7 @@
 130. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
 131. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 75 - Chars: 3049 - Tokens: 763
 132. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 86 - Chars: 3485 - Tokens: 872
-133. src\client\views\parallel-copilot.view\components\NumberedTextarea.tsx - Lines: 102 - Chars: 4499 - Tokens: 1125
+133. src\client\views\parallel-copilot.view\components\NumberedTextarea.tsx - Lines: 102 - Chars: 4398 - Tokens: 1100
 134. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 95 - Chars: 7630 - Tokens: 1908
 135. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 84 - Chars: 3486 - Tokens: 872
 136. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
@@ -162,9 +162,9 @@
 140. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 43 - Chars: 1890 - Tokens: 473
 141. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
 142. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
-143. src\client\views\parallel-copilot.view\view.scss - Lines: 864 - Chars: 20475 - Tokens: 5119
+143. src\client\views\parallel-copilot.view\view.scss - Lines: 865 - Chars: 19672 - Tokens: 4918
 144. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-145. src\client\views\parallel-copilot.view\view.tsx - Lines: 214 - Chars: 28518 - Tokens: 7130
+145. src\client\views\parallel-copilot.view\view.tsx - Lines: 224 - Chars: 28514 - Tokens: 7129
 146. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
 147. src\common\ipc\channels.enum.ts - Lines: 86 - Chars: 4556 - Tokens: 1139
 148. src\common\ipc\channels.type.ts - Lines: 86 - Chars: 6495 - Tokens: 1624
@@ -1127,7 +1127,7 @@ To enhance the data curation process, it is critical for the user to have immedi
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C146 (Add case for state loss on window move)
+# Updated on: C179 (Add case for NumberedTextarea component)
 
 - **Key/Value for A0:**
 - **Description:** Documents recurring bugs, their root causes, and codified solutions to prevent future regressions during development.
@@ -1138,6 +1138,19 @@ To enhance the data curation process, it is critical for the user to have immedi
 This document serves as a living record of persistent or complex bugs that have recurred across multiple development cycles. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 016: `NumberedTextarea` Scrolling & Alignment Failure
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx`, `src/client/views/parallel-copilot.view/view.scss`
+-   **Cycles Observed:** C1, C2, C3, C167, C174
+-   **Symptom:** The text areas used for "Cycle Context" and "Ephemeral Context" are functionally unusable. The line numbers in the left gutter do not scroll in sync with the text content. As the user types and the text wraps or scrolls, the cursor position becomes misaligned with the actual text insertion point, and text selection highlighting is inaccurate.
+-   **Root Cause Analysis (RCA):** The component attempted to render a line number gutter and a text area side-by-side. This approach is fundamentally flawed because the two elements have independent scrolling mechanisms. The `textarea` scrolls its internal content, while the line number `div` scrolls as part of the page flow. Furthermore, minor differences in padding, font metrics, or line-height between the visible highlighted `div` and the invisible `textarea` caused a "drift" in cursor alignment over multiple lines.
+-   **Codified Solution & Best Practice:**
+    1.  **Architectural Fix:** The component must be re-architected to use an overlay approach. A container element should use relative positioning. Inside it, both the `div` that displays the syntax-highlighted text and the transparent `textarea` used for input must be absolutely positioned to fill the container, ensuring they are perfectly on top of each other.
+    2.  **Synchronized Scrolling:** A single `onScroll` event handler on the `textarea` must programmatically update the `scrollTop` property of both the highlighted `div` and the line number gutter `div`. This ensures all three elements scroll in perfect unison.
+    3.  **Pixel-Perfect Styling:** All font properties (`font-family`, `font-size`, `line-height`), padding, and `box-sizing` must be identical between the `textarea` and the highlighted `div` to guarantee that the text lines up perfectly and the cursor position is always accurate.
 
 ---
 
@@ -4926,7 +4939,7 @@ The "Cycle Context" and "Ephemeral Context" text areas in the Parallel Co-Pilot 
 # Artifact A69: DCE - Animated UI Workflow Guide
 # Date Created: C169
 # Author: AI Model & Curator
-# Updated on: C179 (Revise workflow sequence based on Cycle 2 feedback)
+# Updated on: C179 (Revise workflow sequence based on Cycle 3 feedback)
 
 ## 1. Overview & Goal
 
@@ -4938,7 +4951,7 @@ The Parallel Co-Pilot Panel (PCPP) has a powerful, multi-step workflow that may 
 |---|---|---|
 | P2-WF-01 | **Guided Workflow** | As a new user, I want the UI to visually guide me through the steps of a development cycle, so I can learn the workflow intuitively. | - After a specific action is completed, the UI element for the next logical action is highlighted with a subtle animation (e.g., a pulsing blue glow). |
 
-## 3. The Animated Workflow Sequence (Cycle 2 Revision)
+## 3. The Animated Workflow Sequence (Cycle 3 Revision)
 
 The highlighting will follow this specific sequence of user actions:
 
@@ -4955,12 +4968,12 @@ The highlighting will follow this specific sequence of user actions:
     *   **Highlight:** The **`Select This Response`** button pulses.
 
 5.  **Select Response:** The user clicks `Select This Response` for one of the tabs.
-    *   **Highlight:** The "Associated Files" list panel and the **`Select All`** button within it pulse.
-
-6.  **Select Files:** The user checks one or more files in the "Associated Files" list.
     *   **Highlight:** The **`Baseline (Commit)`** button pulses.
 
-7.  **Create Baseline:** The user clicks `Baseline (Commit)`.
+6.  **Create Baseline:** The user clicks `Baseline (Commit)`.
+    *   **Highlight:** The "Associated Files" list panel and the **`Select All`** button within it pulse.
+
+7.  **Select Files:** The user checks one or more files in the "Associated Files" list.
     *   **Highlight:** The **`Accept Selected`** button pulses.
 
 8.  **Accept Changes:** The user clicks `Accept Selected`. The workflow for this cycle's changes is essentially complete.
@@ -21588,6 +21601,7 @@ export class FlattenerService {
 
 <file path="src/backend/services/git.service.ts">
 // src/backend/services/git.service.ts
+// Updated on: C179 (Add check for 'not a git repository' error)
 import * as vscode from 'vscode';
 import { exec } from 'child_process';
 import { Services } from './services';
@@ -21625,7 +21639,13 @@ export class GitService {
         if (success) {
             vscode.window.showInformationMessage(message);
         } else {
-            vscode.window.showErrorMessage(message);
+            vscode.window.showErrorMessage(message, "Open Git Setup Guide").then(selection => {
+                if (selection === "Open Git Setup Guide") {
+                    // This is a placeholder for opening the artifact. A more robust solution
+                    // would involve a command to open a specific file.
+                    vscode.window.showInformationMessage("Please refer to the 'A9. DCE - GitHub Repository Setup Guide.md' artifact in your project.");
+                }
+            });
         }
     }
 
@@ -21636,7 +21656,11 @@ export class GitService {
             await this.execGitCommand(`git commit -m "${commitMessage.replace(/"/g, '\\"')}"`);
             this.notifyFrontend(serverIpc, true, 'Successfully created baseline commit.');
         } catch (error: any) {
-            this.notifyFrontend(serverIpc, false, `Git Baseline failed: ${error.message}`);
+            let errorMessage = `Git Baseline failed: ${error.message}`;
+            if (error.message.includes('fatal: not a git repository')) {
+                errorMessage = 'Git Baseline failed: This is not a Git repository. Please run `git init` in your terminal. See A9 for guidance.';
+            }
+            this.notifyFrontend(serverIpc, false, errorMessage);
         }
     }
 
@@ -22050,7 +22074,7 @@ export class LoggerService {
 </file>
 
 <file path="src/backend/services/prompt.service.ts">
-// Updated on: C179 (Add guard for empty selection in getFlattenedContent)
+// Updated on: C179 (Refine Cycle 0 prompt instructions)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -22128,9 +22152,18 @@ M7. Flattened Repo
         }
         staticContext += '<!-- END: Project Templates -->';
 
+        const cycleContextInstructions = `Review the user's project scope in M4. Your task is to act as a senior project architect and generate a starter set of planning and documentation artifacts for this new project.
+
+**CRITICAL INSTRUCTIONS:**
+1.  You have been provided with a set of best-practice templates for software engineering documentation in the <Static Context> section.
+2.  Your primary goal is to **select the most relevant templates** and generate project-specific versions of them.
+3.  **PRIORITIZE ESSENTIAL GUIDES:** You **MUST** generate artifacts based on "T14. Template - GitHub Repository Setup Guide.md" and "T7. Template - Development and Testing Guide.md". These are mandatory for the user to begin their project.
+4.  Generate a Master Artifact List (A0) and at least two other core planning documents (e.g., Project Vision, Technical Scaffolding Plan).
+5.  **DO NOT** generate any code files (e.g., .ts, .tsx, .js) in this initial cycle. The focus is on planning and documentation only.`;
+
         return `<Cycle 0>
 <Cycle Context>
-This section contains a persistent archive of documentation templates. You can use these as a guide for creating new project artifacts.
+${cycleContextInstructions}
 </Cycle Context>
 <Static Context>
 ${staticContext.trim()}
@@ -26101,7 +26134,7 @@ export default TestPane3;
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C178 (Add styles for git buttons)
+// Updated on: C179 (Fix NumberedTextarea alignment)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -26161,6 +26194,7 @@ body {
         line-height: 1.5;
         z-index: 2;
         flex-shrink: 0;
+        overflow: hidden; // Prevents its own scrollbar
     }
     
     .content-wrapper {
@@ -27063,7 +27097,7 @@ const App = () => {
     React.useEffect(() => { debouncedSave(); debouncedCostRequest(); }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, tabCount, isSortedByTokens, pathOverrides, debouncedSave, debouncedCostRequest, cycleContextHeight, ephemeralContextHeight]);
     React.useEffect(() => { const handleVisibilityChange = () => { if (document.visibilityState === 'hidden') saveCurrentCycleState(); }; document.addEventListener('visibilitychange', handleVisibilityChange); return () => document.removeEventListener('visibilitychange', handleVisibilityChange); }, [saveCurrentCycleState]);
     const parseAllTabs = React.useCallback(() => { setTabs(prevTabs => { const allFilePaths = new Set<string>(); const updatedTabs = { ...prevTabs }; let needsUpdate = false; Object.values(updatedTabs).forEach(tabState => { if (tabState.rawContent && !tabState.parsedContent) { needsUpdate = true; const parsed = parseResponse(tabState.rawContent); tabState.parsedContent = parsed; parsed.filesUpdated.forEach(file => allFilePaths.add(file)); parsed.files.forEach(file => { const lang = path.extname(file.path).substring(1) || 'plaintext'; const id = `${file.path}::${file.content}`; clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id }); }); } else if (tabState.parsedContent) { tabState.parsedContent.filesUpdated.forEach(file => allFilePaths.add(file)); } }); if (allFilePaths.size > 0) clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) }); return needsUpdate ? updatedTabs : prevTabs; }); }, [clientIpc]);
-    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string) => { setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setCycleContextHeight(cycleData.cycleContextHeight || 100); setEphemeralContextHeight(cycleData.ephemeralContextHeight || 100); }; clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, ({ filePath, originalTokens, modifiedTokens, similarity }) => { setComparisonMetrics(prev => new Map(prev).set(filePath, { originalTokens, modifiedTokens, similarity })); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, ({ success, message }) => { logger.log(`Git Operation: ${success ? 'SUCCESS' : 'FAILURE'} - ${message}`); }); clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); }, [clientIpc]);
+    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string) => { setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setCycleContextHeight(cycleData.cycleContextHeight || 100); setEphemeralContextHeight(cycleData.ephemeralContextHeight || 100); }; clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, ({ filePath, originalTokens, modifiedTokens, similarity }) => { setComparisonMetrics(prev => new Map(prev).set(filePath, { originalTokens, modifiedTokens, similarity })); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, ({ success, message }) => { logger.log(`Git Operation: ${success ? 'SUCCESS' : 'FAILURE'} - ${message}`); if (success && workflowStep === 'awaitingBaseline') setWorkflowStep('awaitingFileSelect'); }); clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); }, [clientIpc]);
     React.useEffect(() => { if (isParsedMode) parseAllTabs(); }, [isParsedMode, tabs, parseAllTabs]);
     React.useEffect(() => { if (!selectedFilePath) return; const currentTabData = tabs[activeTab.toString()]; if (currentTabData?.parsedContent) { const fileExistsInTab = currentTabData.parsedContent.files.some(f => f.path === selectedFilePath); if (!fileExistsInTab) setSelectedFilePath(null); } }, [activeTab, tabs, selectedFilePath]);
 
@@ -27104,14 +27138,14 @@ const App = () => {
         
         if (workflowStep === 'awaitingFileSelect') { 
             if (selectedFilesForReplacement.size > 0) {
-                setWorkflowStep('awaitingBaseline'); 
+                setWorkflowStep('awaitingAccept'); 
             }
             return; 
         }
         
         if (workflowStep === 'awaitingResponseSelect') { 
             if (selectedResponseId) {
-                setWorkflowStep('awaitingFileSelect'); 
+                setWorkflowStep('awaitingBaseline'); 
             }
             return; 
         }
@@ -27155,6 +27189,16 @@ const App = () => {
     const sortedTabIds = React.useMemo(() => { const tabIds = [...Array(tabCount)].map((_, i) => i + 1); if (isParsedMode && isSortedByTokens) tabIds.sort((a, b) => { const tokensA = tabs[a.toString()]?.parsedContent?.totalTokens ?? -1; const tokensB = tabs[b.toString()]?.parsedContent?.totalTokens ?? -1; return tokensB - tokensA; }); return tabIds; }, [tabs, isParsedMode, isSortedByTokens, tabCount]);
     const viewableContent = React.useMemo(() => { if (!selectedFilePath || !activeTabData?.parsedContent) return undefined; const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath); if (!file) return '<div>Error: File data not found in parsed response.</div>'; const id = `${file.path}::${file.content}`; return highlightedCodeBlocks.get(id); }, [selectedFilePath, activeTabData?.parsedContent, highlightedCodeBlocks]);
     const handleRawContentChange = (newContent: string, tabIndex: number) => setTabs(prev => ({ ...prev, [tabIndex.toString()]: { rawContent: newContent, parsedContent: null }}));
+    
+    const handleSortToggle = () => {
+        if (workflowStep === 'awaitingSort') {
+            setIsSortedByTokens(true);
+            setWorkflowStep('awaitingResponseSelect');
+        } else {
+            setIsSortedByTokens(p => !p);
+        }
+    };
+    
     const handleGlobalParseToggle = () => { const newParseMode = !isParsedMode; setIsParsedMode(newParseMode); setSelectedFilePath(null); if (!newParseMode) setTabs(prev => { const newTabs = {...prev}; Object.keys(newTabs).forEach(key => { newTabs[key].parsedContent = null; }); return newTabs; }); if (newParseMode && workflowStep === 'awaitingParse') setWorkflowStep(isSortedByTokens ? 'awaitingResponseSelect' : 'awaitingSort'); };
     const handleNewCycle = (e: React.MouseEvent) => { e.stopPropagation(); saveCurrentCycleState(); const newCycleId = maxCycle + 1; setMaxCycle(newCycleId); setCurrentCycle(newCycleId); setCycleTitle('New Cycle'); setCycleContext(''); setEphemeralContext(''); setTabs({}); setIsParsedMode(false); setSelectedResponseId(null); setSelectedFilesForReplacement(new Set()); setWorkflowStep('awaitingResponsePaste_1'); };
     const handleGeneratePrompt = () => { if (currentCycle === null) return; clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle }); setWorkflowStep('readyForNewCycle'); }
@@ -27162,10 +27206,10 @@ const App = () => {
     const handleResetHistory = () => { clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {}); };
     const handleExportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestExportHistory, {});
     const handleImportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestImportHistory, {});
-    const handleGitBaseline = () => { const commitMessage = `DCE Baseline: Cycle ${currentCycle} - ${cycleTitle || 'Untitled'}`; clientIpc.sendToServer(ClientToServerChannel.RequestGitBaseline, { commitMessage }); setWorkflowStep('awaitingAccept'); };
+    const handleGitBaseline = () => { const commitMessage = `DCE Baseline: Cycle ${currentCycle} - ${cycleTitle || 'Untitled'}`; clientIpc.sendToServer(ClientToServerChannel.RequestGitBaseline, { commitMessage }); };
     const handleGitRestore = () => { clientIpc.sendToServer(ClientToServerChannel.RequestGitRestore, {}); };
-    const handleFileSelectionToggle = (filePath: string) => { const currentTabId = activeTab.toString(); const compositeKeyForCurrent = `${currentTabId}:::${filePath}`; setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); let existingKey: string | undefined; for (const key of newSet) if (key.endsWith(`:::${filePath}`)) { existingKey = key; break; } if (existingKey) { if (existingKey === compositeKeyForCurrent) newSet.delete(existingKey); else { newSet.delete(existingKey); newSet.add(compositeKeyForCurrent); } } else newSet.add(compositeKeyForCurrent); return newSet; }); if(workflowStep === 'awaitingFileSelect') setWorkflowStep('awaitingBaseline'); };
-    const handleSelectAllFilesToggle = () => { if (!activeTabData?.parsedContent) return; const allFilesForTab = activeTabData.parsedContent.filesUpdated.map(fp => `${activeTab}:::${fp}`); const isAllSelected = allFilesForTab.every(key => selectedFilesForReplacement.has(key)); setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); if (isAllSelected) allFilesForTab.forEach(key => newSet.delete(key)); else allFilesForTab.forEach(key => newSet.add(key)); return newSet; }); if(workflowStep === 'awaitingFileSelect') setWorkflowStep('awaitingBaseline'); };
+    const handleFileSelectionToggle = (filePath: string) => { const currentTabId = activeTab.toString(); const compositeKeyForCurrent = `${currentTabId}:::${filePath}`; setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); let existingKey: string | undefined; for (const key of newSet) if (key.endsWith(`:::${filePath}`)) { existingKey = key; break; } if (existingKey) { if (existingKey === compositeKeyForCurrent) newSet.delete(existingKey); else { newSet.delete(existingKey); newSet.add(compositeKeyForCurrent); } } else newSet.add(compositeKeyForCurrent); return newSet; }); if(workflowStep === 'awaitingFileSelect') setWorkflowStep('awaitingAccept'); };
+    const handleSelectAllFilesToggle = () => { if (!activeTabData?.parsedContent) return; const allFilesForTab = activeTabData.parsedContent.filesUpdated.map(fp => `${activeTab}:::${fp}`); const isAllSelected = allFilesForTab.every(key => selectedFilesForReplacement.has(key)); setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); if (isAllSelected) allFilesForTab.forEach(key => newSet.delete(key)); else allFilesForTab.forEach(key => newSet.add(key)); return newSet; }); if(workflowStep === 'awaitingFileSelect') setWorkflowStep('awaitingAccept'); };
     const isAllFilesSelected = React.useMemo(() => { if (!activeTabData?.parsedContent) return false; const allFiles = activeTabData.parsedContent.filesUpdated; if (allFiles.length === 0) return false; return allFiles.every(file => selectedFilesForReplacement.has(`${activeTab}:::${file}`)); }, [selectedFilesForReplacement, activeTabData, activeTab]);
     const handleLogState = () => { const currentState = getCurrentCycleData(); if (currentState) clientIpc.sendToServer(ClientToServerChannel.RequestLogState, { currentState }); };
     const handleCopyContent = () => { if (!selectedFilePath || !activeTabData?.parsedContent) return; const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath); if (file) clientIpc.sendToServer(ClientToServerChannel.RequestCopyTextToClipboard, { text: file.content }); };
@@ -27185,9 +27229,9 @@ const App = () => {
             <CycleNavigator currentCycle={currentCycle} maxCycle={maxCycle} cycleTitle={cycleTitle} isNewCycleButtonDisabled={isNewCycleButtonDisabled} onCycleChange={handleCycleChange} onNewCycle={handleNewCycle} onTitleChange={(title) => { setCycleTitle(title); }} onDeleteCycle={handleDeleteCycle} onResetHistory={handleResetHistory} onExportHistory={handleExportHistory} onImportHistory={handleImportHistory} onGitBaseline={handleGitBaseline} onGitRestore={handleGitRestore} workflowStep={workflowStep} />
             <ContextInputs cycleContext={cycleContext} ephemeralContext={ephemeralContext} cycleContextTokens={cycleContextTokens} ephemeralContextTokens={ephemeralContextTokens} onCycleContextChange={(e) => { setCycleContext(e.target.value); setCycleContextTokens(Math.ceil(e.target.value.length / 4)); }} onEphemeralContextChange={(e) => { setEphemeralContext(e.target.value); setEphemeralContextTokens(Math.ceil(e.target.value.length / 4)); }} onContextKeyDown={handleContextKeyDown} cycleContextHeight={cycleContextHeight} onCycleContextHeightChange={setCycleContextHeight} ephemeralContextHeight={ephemeralContextHeight} onEphemeralContextHeightChange={setEphemeralContextHeight} currentCycle={currentCycle} workflowStep={workflowStep} />
         </CollapsibleSection>
-        <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} onSortToggle={() => { setIsSortedByTokens(p => !p); if (workflowStep === 'awaitingSort') setWorkflowStep('awaitingResponseSelect'); }} workflowStep={workflowStep} />
+        <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} onSortToggle={handleSortToggle} workflowStep={workflowStep} />
         <div className="tab-content">
-            <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={currentComparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => { setSelectedResponseId(prev => prev === id ? null : id); if (workflowStep === 'awaitingResponseSelect') setWorkflowStep('awaitGFileSelect'); }} onSelectAllFiles={handleSelectAllFilesToggle} onDeselectAllFiles={() => setSelectedFilesForReplacement(new Set())} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} onBaseline={handleGitBaseline} onRestore={handleGitRestore} workflowStep={workflowStep} />
+            <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={currentComparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => { setSelectedResponseId(prev => prev === id ? null : id); if (workflowStep === 'awaitingResponseSelect') setWorkflowStep('awaitingBaseline'); }} onSelectAllFiles={handleSelectAllFilesToggle} onDeselectAllFiles={() => setSelectedFilesForReplacement(new Set())} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} onBaseline={handleGitBaseline} onRestore={handleGitRestore} workflowStep={workflowStep} />
         </div>
     </div>;
 };

@@ -1,4 +1,4 @@
-// Updated on: C179 (Add guard for empty selection in getFlattenedContent)
+// Updated on: C179 (Refine Cycle 0 prompt instructions)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -76,9 +76,18 @@ M7. Flattened Repo
         }
         staticContext += '<!-- END: Project Templates -->';
 
+        const cycleContextInstructions = `Review the user's project scope in M4. Your task is to act as a senior project architect and generate a starter set of planning and documentation artifacts for this new project.
+
+**CRITICAL INSTRUCTIONS:**
+1.  You have been provided with a set of best-practice templates for software engineering documentation in the <Static Context> section.
+2.  Your primary goal is to **select the most relevant templates** and generate project-specific versions of them.
+3.  **PRIORITIZE ESSENTIAL GUIDES:** You **MUST** generate artifacts based on "T14. Template - GitHub Repository Setup Guide.md" and "T7. Template - Development and Testing Guide.md". These are mandatory for the user to begin their project.
+4.  Generate a Master Artifact List (A0) and at least two other core planning documents (e.g., Project Vision, Technical Scaffolding Plan).
+5.  **DO NOT** generate any code files (e.g., .ts, .tsx, .js) in this initial cycle. The focus is on planning and documentation only.`;
+
         return `<Cycle 0>
 <Cycle Context>
-This section contains a persistent archive of documentation templates. You can use these as a guide for creating new project artifacts.
+${cycleContextInstructions}
 </Cycle Context>
 <Static Context>
 ${staticContext.trim()}

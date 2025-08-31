@@ -1,7 +1,5 @@
 <prompt.md>
 
-</prompt.md>
-
 <M1. artifact schema>
 M1. artifact schema
 M2. cycle overview
@@ -13,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 3 - animated workflow, abc test for cycle context field, make important templates mandatory
+Current Cycle 4 - hard stop--focus on cycle context text fields and flashing FTV
+Cycle 3 - animated workflow, abc test for cycle context field, make important templates mandatory
 Cycle 2 - continue working the workflow animations, context text fields wonky, ignore the .git directory
 Cycle 1 - address FTV flash when saving, line numbers for cycle context/ephemeral context not lining up or scrolling
 Cycle 0 - Project Initialization/Template Archive
@@ -610,6 +609,62 @@ transitioning between manual prompting method and using the dce we are creating 
 
 <M6. Cycles>
 
+<Cycle 4>
+<Cycle Context>
+1. okay we've got this flashing FTV that wont go away. every time i stop typing, it resaves, but it also flashes the entire data curation file tree view pane, ive explained this over and over, its still occuring. i just cleared the chat and will type this and stop and provide the logs. at [10:28:21 AM] is when i see the FTV flash.
+
+2. i asked for an original-a-b-c test for these text fields. just like last time, make an artifact, it desribes our training harness. we leave the original alone. we create three test panes accessible by three buttons. i can test each one and report my findings.
+</Cycle Context>
+<Ephemeral Context>
+[INFO] [10:28:18 AM] [CONTEXT-HIGHLIGHT] Received request for context ID: cycle-context-4
+[INFO] [10:28:19 AM] [SelectionService] Found 164 paths in persisted state. Validating...
+[INFO] [10:28:19 AM] [SelectionService] Returning 164 valid paths.
+[INFO] [10:28:19 AM] HistoryService: saving data for cycle 4.
+[INFO] [10:28:19 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/DCE/.vscode/dce_history.json
+[INFO] [10:28:19 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/DCE/.vscode/dce_history.json
+[INFO] [10:28:21 AM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [10:28:21 AM] handleWorkspaceFilesRequest started. forceRefresh=true
+[INFO] [10:28:21 AM] Building file tree from scratch.
+[INFO] [10:28:21 AM] buildTreeFromTraversal starting for root: c:\Projects\DCE
+[INFO] [10:28:21 AM] [SelectionService] Found 164 paths in persisted state. Validating...
+[INFO] [10:28:21 AM] [SelectionService] Returning 164 valid paths.
+[INFO] [10:28:22 AM] Persisted current selection of 164 items.
+[INFO] [10:28:22 AM] buildTreeFromTraversal finished. Root node has 16 children.
+[INFO] [10:28:22 AM] File tree built. Sending to client.
+[INFO] [10:28:22 AM] handleWorkspaceFilesRequest finished.
+
+</Ephemeral Context>
+<Previous Cycle 3 Summary of Actions>
+I have analyzed the detailed feedback from Cycle 2. The core tasks for this cycle are to fix the persistent and severe UI bugs in the context text areas, refine the animated workflow sequence based on your feedback, and correct a file filtering issue where the `.git` directory is being included in generated prompts.
+
+The text area bug (wonky cursor, non-scrolling line numbers) is a high priority as it impacts core usability. The animation workflow requires re-sequencing to better guide the user, especially around the "Baseline" and "Accept" steps. The `.git` directory issue points to an incomplete exclusion list in our file system traversal logic.
+
+My course of action is to first update the documentation to reflect the new workflow sequence. Then I will address the code, focusing on fixing the text area component, adjusting the workflow state machine, and updating the file exclusion patterns.
+
+1.  **Documentation Update (Workflow Refinement):**
+    *   I will update **`A69. DCE - Animated UI Workflow Guide.md`** to incorporate the new, more logical sequence outlined in your feedback (Items 4, 6, 7, 8). The key changes are:
+        *   Insert the "Baseline" step *before* "Accept Selected." The flow will be: Select files -> Highlight `Baseline (Commit)` -> Highlight `Accept Selected`.
+        *   Refine the post-acceptance flow to: Highlight `Cycle Context` -> Highlight `Cycle Title` -> Highlight `Generate prompt.md` -> Highlight `New Cycle Button (+)`.
+    *   I will update **`A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md`** to include the suggestion of making certain artifacts, like the Git setup guide (`T14`), mandatory or prioritized during the initial project generation to ensure users have critical documentation from the start.
+
+2.  **Fix Text Area Component (`NumberedTextarea.tsx` & `view.scss`):**
+    *   **Address Item 9:** The "wonky" behavior, scrolling issues, and potential element overlap in the context text areas are critical usability flaws. I will perform a significant refactor of the `NumberedTextarea.tsx` component.
+    *   **Sync Scrolling:** I will implement a scroll synchronization mechanism. The `onScroll` event of the `textarea` will programmatically update the `scrollTop` property of the line number gutter element, ensuring they move together perfectly.
+    *   **Fix Alignment:** I will meticulously review the CSS properties (`font-size`, `line-height`, `padding`, `font-family`) for both the textarea and any underlying highlighting elements to ensure exact pixel alignment, eliminating cursor and selection misalignment.
+
+3.  **Implement Workflow Animation State Machine (`view.tsx`):**
+    *   I will refactor the `workflowStep` state logic in `parallel-copilot.view/view.tsx` to match the updated sequence from `A69`.
+    *   The state transitions will be adjusted to correctly guide the user through pasting responses (Item 1), parsing (Item 2), sorting (Item 3), baselining (Item 4), accepting (Item 6), and context/prompt generation (Items 7-8).
+
+4.  **Fix `.git` Directory Exclusion (`file-tree.service.ts`):**
+    *   **Address Item 10:** The `.git` directory is being included because it's missing from the global exclusion list used by the file tree service.
+    *   I will add `.git` to the `EXCLUSION_PATTERNS` array in `file-tree.service.ts`. This will prevent it from appearing in the file tree view and subsequently being included in prompt generation.
+
+5.  **Update Onboarding Artifact Generation (`prompt.service.ts`):**
+    *   **Address Item 5:** To ensure critical guides are provided during onboarding, I will modify `generateCycle0Prompt` in `prompt.service.ts`. The prompt given to the AI will be updated to strongly suggest or mandate the inclusion of key artifacts like `T14. Template - GitHub Repository Setup Guide.md` and `T7. Template - Development and Testing Guide.md`.
+</Previous Cycle 3 Summary of Actions>
+</Cycle 4>
+
 <Cycle 3>
 <Cycle Context>
 1. okay, starting the workflow again.... okay, it works great up until:
@@ -745,10 +800,181 @@ M7. Flattened Repo
 
 <Cycle 0>
 <Cycle Context>
-This section contains a persistent archive of documentation templates. You can use these as a guide for creating new project artifacts.
+Review the user's project scope in M4. Your task is to act as a senior project architect and generate a starter set of planning and documentation artifacts for this new project.
+
+**CRITICAL INSTRUCTIONS:**
+1.  You have been provided with a set of best-practice templates for software engineering documentation in the <Static Context> section.
+2.  Your primary goal is to **select the most relevant templates** and generate project-specific versions of them.
+3.  **PRIORITIZE ESSENTIAL GUIDES:** You **MUST** generate artifacts based on "T14. Template - GitHub Repository Setup Guide.md" and "T7. Template - Development and Testing Guide.md". These are mandatory for the user to begin their project.
+4.  Generate a Master Artifact List (A0) and at least two other core planning documents (e.g., Project Vision, Technical Scaffolding Plan).
+5.  **DO NOT** generate any code files (e.g., .ts, .tsx, .js) in this initial cycle. The focus is on planning and documentation only.
 </Cycle Context>
 <Static Context>
 <!-- START: Project Templates -->
+<T7. Template - Development and Testing Guide.md>
+<!-- 
+  IMPORTANT AI INSTRUCTION:
+  When generating a file based on this template, you MUST wrap the entire file's content 
+  in <file path="src/Artifacts/[ProjectName]-A7-Dev-and-Testing-Guide.md"></file> tags.
+-->
+# Artifact T7: Template - Development and Testing Guide
+# Date Created: C139
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a development and testing guide.
+- **Tags:** template, cycle 0, documentation, project setup
+
+## 1. Purpose
+
+This guide provides the standard procedure for running, debugging, and testing the **[Your Project Name]** application locally.
+
+## 2. Development Workflow
+
+### Step 1: Install Dependencies
+
+Ensure all project dependencies are installed using npm.
+```bash
+npm install
+```
+
+### Step 2: Start the Development Server
+
+To compile the code and watch for changes, run the following command:```bash
+npm run watch
+```
+This will start the development server and automatically recompile your code when you save a file.
+
+### Step 3: Running the Application
+
+[Describe the specific steps to launch the application. For a VS Code extension, this would involve pressing F5 to launch the Extension Development Host. For a web app, it would be opening a browser to `http://localhost:3000`.]
+
+### Step 4: Debugging
+
+You can set breakpoints directly in your source code. [Describe how to attach a debugger. For a VS Code extension, this is automatic when launched with F5.]
+
+## 3. Testing
+
+The project is configured with a testing framework. To run the test suite, use the following command:
+```bash
+npm run test
+```
+This will execute all test files located in the project and report the results to the console.
+</T7. Template - Development and Testing Guide.md>
+
+<T14. Template - GitHub Repository Setup Guide.md>
+<!-- 
+  IMPORTANT AI INSTRUCTION:
+  When generating a file based on this template, you MUST wrap the entire file's content 
+  in <file path="src/Artifacts/A14. [Project Name] - GitHub Repository Setup Guide.md">...</file> tags.
+-->
+# Artifact T14: [Project Name] - GitHub Repository Setup Guide Template
+# Date Created: C152
+# Author: AI Model & Curator
+# Updated on: C160 (Add Sample Development Workflow section)
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a guide on setting up a new project with Git and GitHub, including a sample workflow.
+- **Tags:** template, cycle 0, git, github, version control, workflow
+
+## 1. Overview
+
+This guide provides the necessary commands to turn your local project folder into a Git repository, link it to a new repository on GitHub, and outlines a sample workflow for using Git alongside the Data Curation Environment (DCE).
+
+## 2. Prerequisites
+
+*   You have `git` installed on your machine.
+*   You have a GitHub account.
+
+## 3. Step-by-Step Setup
+
+### Step 1: Create a New Repository on GitHub
+
+1.  Go to [github.com](https://github.com) and log in.
+2.  In the top-right corner, click the `+` icon and select **"New repository"**.
+3.  **Repository name:** Enter a name for your project (e.g., `my-new-project`).
+4.  **Description:** (Optional) Provide a brief description of your project.
+5.  Choose **"Private"** or **"Public"**.
+6.  **IMPORTANT:** Do **not** initialize the repository with a `README`, `.gitignore`, or `license`. We will be pushing our existing files, and this will prevent conflicts.
+7.  Click **"Create repository"**.
+
+GitHub will now show you a page with command-line instructions. We will use the section titled **"...or push an existing repository from the command line"**.
+
+### Step 2: Initialize Git in Your Local Project
+
+Open a terminal and navigate to your project's root directory. Then, run the following commands one by one.
+
+1.  **Initialize the repository:**
+    ```bash
+    git init
+    ```
+
+2.  **Add all existing files:**
+    ```bash
+    git add .
+    ```
+
+3.  **Create the first commit:**
+    ```bash
+    git commit -m "Initial commit"
+    ```
+
+4.  **Rename the default branch to `main`:**
+    ```bash
+    git branch -M main
+    ```
+
+### Step 3: Link and Push to GitHub
+
+1.  **Add the remote repository:** Replace the placeholder URL with the one from your GitHub repository page.
+    ```bash
+    git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
+    ```
+
+2.  **Push your local `main` branch to GitHub:**
+    ```bash
+    git push -u origin main
+    ```
+
+After these commands complete, refresh your GitHub repository page. You should see all of your project files.
+
+## 4. Sample Development Workflow with DCE and Git
+
+Git is a powerful tool for managing the iterative changes produced by the DCE. It allows you to quickly test an AI's proposed solution and revert it cleanly if it doesn't work, without losing your place.
+
+### Step 1: Start with a Clean State
+Before starting a new cycle, ensure your working directory is clean. You can check this with `git status`. All your previous changes should be committed.
+
+### Step 2: Generate a Prompt and Get Responses
+Use the DCE to generate a `prompt.md` file. Use this prompt to get multiple responses (e.g., 4 to 8) from your preferred AI model.
+
+### Step 3: Paste and Parse
+Paste the responses into the Parallel Co-Pilot Panel and click "Parse All".
+
+### Step 4: Accept and Test
+1.  Review the responses and find one that looks promising.
+2.  Select that response and use the **"Accept Selected Files"** button to write the AI's proposed changes to your workspace.
+3.  Now, compile and test the application. Does it work? Does it have errors?
+
+### Step 5: The "Restore" Loop
+This is where Git becomes a powerful part of the workflow.
+
+*   **If the changes are bad (e.g., introduce bugs, don't work as expected):**
+    1.  Open the terminal in VS Code.
+    2.  Run the command: `git restore .`
+    3.  This command instantly discards all uncommitted changes in your workspace, reverting your files to the state of your last commit.
+    4.  You are now back to a clean state and can go back to the Parallel Co-Pilot Panel, select a *different* AI response, and click "Accept Selected Files" again to test the next proposed solution.
+
+*   **If the changes are good:**
+    1.  Open the Source Control panel in VS Code.
+    2.  Stage the changes (`git add .`).
+    3.  Write a commit message (e.g., "Feat: Implement user login via AI suggestion C15").
+    4.  Commit the changes.
+    5.  You are now ready to start the next development cycle from a new, clean state.
+
+This iterative loop of `accept -> test -> restore` allows you to rapidly audition multiple AI-generated solutions without fear of corrupting your codebase.
+</T14. Template - GitHub Repository Setup Guide.md>
+
 <T1. Template - Master Artifact List.md>
 <!-- 
   IMPORTANT AI INSTRUCTION:
@@ -1029,57 +1255,6 @@ async function deployScaffold() {
 deployScaffold();
 ```
 </T6. Template - Initial Scaffolding Deployment Script.md>
-
-<T7. Template - Development and Testing Guide.md>
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A7-Dev-and-Testing-Guide.md"></file> tags.
--->
-# Artifact T7: Template - Development and Testing Guide
-# Date Created: C139
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A generic template for a development and testing guide.
-- **Tags:** template, cycle 0, documentation, project setup
-
-## 1. Purpose
-
-This guide provides the standard procedure for running, debugging, and testing the **[Your Project Name]** application locally.
-
-## 2. Development Workflow
-
-### Step 1: Install Dependencies
-
-Ensure all project dependencies are installed using npm.
-```bash
-npm install
-```
-
-### Step 2: Start the Development Server
-
-To compile the code and watch for changes, run the following command:```bash
-npm run watch
-```
-This will start the development server and automatically recompile your code when you save a file.
-
-### Step 3: Running the Application
-
-[Describe the specific steps to launch the application. For a VS Code extension, this would involve pressing F5 to launch the Extension Development Host. For a web app, it would be opening a browser to `http://localhost:3000`.]
-
-### Step 4: Debugging
-
-You can set breakpoints directly in your source code. [Describe how to attach a debugger. For a VS Code extension, this is automatic when launched with F5.]
-
-## 3. Testing
-
-The project is configured with a testing framework. To run the test suite, use the following command:
-```bash
-npm run test
-```
-This will execute all test files located in the project and report the results to the console.
-</T7. Template - Development and Testing Guide.md>
 
 <T8. Template - Regression Case Studies.md>
 <!-- 
@@ -1363,119 +1538,6 @@ The monolithic file/class will be broken down into the following smaller, more f
 -   **Easier Testing:** The smaller, focused services will be easier to unit test in isolation.
 </T13. Template - Refactoring Plan.md>
 
-<T14. Template - GitHub Repository Setup Guide.md>
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/A14. [Project Name] - GitHub Repository Setup Guide.md">...</file> tags.
--->
-# Artifact T14: [Project Name] - GitHub Repository Setup Guide Template
-# Date Created: C152
-# Author: AI Model & Curator
-# Updated on: C160 (Add Sample Development Workflow section)
-
-- **Key/Value for A0:**
-- **Description:** A generic template for a guide on setting up a new project with Git and GitHub, including a sample workflow.
-- **Tags:** template, cycle 0, git, github, version control, workflow
-
-## 1. Overview
-
-This guide provides the necessary commands to turn your local project folder into a Git repository, link it to a new repository on GitHub, and outlines a sample workflow for using Git alongside the Data Curation Environment (DCE).
-
-## 2. Prerequisites
-
-*   You have `git` installed on your machine.
-*   You have a GitHub account.
-
-## 3. Step-by-Step Setup
-
-### Step 1: Create a New Repository on GitHub
-
-1.  Go to [github.com](https://github.com) and log in.
-2.  In the top-right corner, click the `+` icon and select **"New repository"**.
-3.  **Repository name:** Enter a name for your project (e.g., `my-new-project`).
-4.  **Description:** (Optional) Provide a brief description of your project.
-5.  Choose **"Private"** or **"Public"**.
-6.  **IMPORTANT:** Do **not** initialize the repository with a `README`, `.gitignore`, or `license`. We will be pushing our existing files, and this will prevent conflicts.
-7.  Click **"Create repository"**.
-
-GitHub will now show you a page with command-line instructions. We will use the section titled **"...or push an existing repository from the command line"**.
-
-### Step 2: Initialize Git in Your Local Project
-
-Open a terminal and navigate to your project's root directory. Then, run the following commands one by one.
-
-1.  **Initialize the repository:**
-    ```bash
-    git init
-    ```
-
-2.  **Add all existing files:**
-    ```bash
-    git add .
-    ```
-
-3.  **Create the first commit:**
-    ```bash
-    git commit -m "Initial commit"
-    ```
-
-4.  **Rename the default branch to `main`:**
-    ```bash
-    git branch -M main
-    ```
-
-### Step 3: Link and Push to GitHub
-
-1.  **Add the remote repository:** Replace the placeholder URL with the one from your GitHub repository page.
-    ```bash
-    git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
-    ```
-
-2.  **Push your local `main` branch to GitHub:**
-    ```bash
-    git push -u origin main
-    ```
-
-After these commands complete, refresh your GitHub repository page. You should see all of your project files.
-
-## 4. Sample Development Workflow with DCE and Git
-
-Git is a powerful tool for managing the iterative changes produced by the DCE. It allows you to quickly test an AI's proposed solution and revert it cleanly if it doesn't work, without losing your place.
-
-### Step 1: Start with a Clean State
-Before starting a new cycle, ensure your working directory is clean. You can check this with `git status`. All your previous changes should be committed.
-
-### Step 2: Generate a Prompt and Get Responses
-Use the DCE to generate a `prompt.md` file. Use this prompt to get multiple responses (e.g., 4 to 8) from your preferred AI model.
-
-### Step 3: Paste and Parse
-Paste the responses into the Parallel Co-Pilot Panel and click "Parse All".
-
-### Step 4: Accept and Test
-1.  Review the responses and find one that looks promising.
-2.  Select that response and use the **"Accept Selected Files"** button to write the AI's proposed changes to your workspace.
-3.  Now, compile and test the application. Does it work? Does it have errors?
-
-### Step 5: The "Restore" Loop
-This is where Git becomes a powerful part of the workflow.
-
-*   **If the changes are bad (e.g., introduce bugs, don't work as expected):**
-    1.  Open the terminal in VS Code.
-    2.  Run the command: `git restore .`
-    3.  This command instantly discards all uncommitted changes in your workspace, reverting your files to the state of your last commit.
-    4.  You are now back to a clean state and can go back to the Parallel Co-Pilot Panel, select a *different* AI response, and click "Accept Selected Files" again to test the next proposed solution.
-
-*   **If the changes are good:**
-    1.  Open the Source Control panel in VS Code.
-    2.  Stage the changes (`git add .`).
-    3.  Write a commit message (e.g., "Feat: Implement user login via AI suggestion C15").
-    4.  Commit the changes.
-    5.  You are now ready to start the next development cycle from a new, clean state.
-
-This iterative loop of `accept -> test -> restore` allows you to rapidly audition multiple AI-generated solutions without fear of corrupting your codebase.
-</T14. Template - GitHub Repository Setup Guide.md>
-
 <T15. Template - A-B-C Testing Strategy for UI Bugs.md>
 <!-- 
   IMPORTANT AI INSTRUCTION:
@@ -1678,19 +1740,19 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-08-30T21:32:12.828Z
+  Date Generated: 2025-08-31T15:30:12.567Z
   ---
   Total Files: 164
-  Approx. Tokens: 439968
+  Approx. Tokens: 440510
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (239424 tokens)
-2. src\Artifacts\A0. DCE Master Artifact List.md (7155 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (7130 tokens)
-4. src\Artifacts\A11. DCE - Regression Case Studies.md (7032 tokens)
-5. src\client\views\parallel-copilot.view\view.scss (5119 tokens)
-6. src\backend\services\prompt.service.ts (4737 tokens)
+2. src\Artifacts\A11. DCE - Regression Case Studies.md (7497 tokens)
+3. src\Artifacts\A0. DCE Master Artifact List.md (7155 tokens)
+4. src\client\views\parallel-copilot.view\view.tsx (7129 tokens)
+5. src\client\views\parallel-copilot.view\view.scss (4918 tokens)
+6. src\backend\services\prompt.service.ts (4867 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4429 tokens)
 8. src\client\views\context-chooser.view\view.tsx (4035 tokens)
 9. src\backend\services\file-operation.service.ts (4021 tokens)
@@ -1707,7 +1769,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 8. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
 9. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
 10. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
-11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 266 - Chars: 28128 - Tokens: 7032
+11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 279 - Chars: 29985 - Tokens: 7497
 12. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5710 - Tokens: 1428
 13. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
 14. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
@@ -1760,7 +1822,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 61. src\Artifacts\A57. DCE - Phase 2 - Cycle Management Plan.md - Lines: 44 - Chars: 3625 - Tokens: 907
 62. src\Artifacts\A58. DCE - WinMerge Source Code Analysis.md - Lines: 56 - Chars: 5322 - Tokens: 1331
 63. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 44 - Chars: 3786 - Tokens: 947
-64. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 35 - Chars: 4209 - Tokens: 1053
+64. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 35 - Chars: 4175 - Tokens: 1044
 65. src\Artifacts\A61. DCE - Phase 2 - Cycle History Management Plan.md - Lines: 45 - Chars: 3559 - Tokens: 890
 66. src\Artifacts\A62. DCE - Cycle 157 - Task Tracker.md - Lines: 31 - Chars: 2710 - Tokens: 678
 67. src\Artifacts\A63. DCE - Cycle 158 - Task Tracker.md - Lines: 23 - Chars: 1760 - Tokens: 440
@@ -1769,7 +1831,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 70. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1806 - Tokens: 452
 71. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 47 - Chars: 3537 - Tokens: 885
 72. src\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3311 - Tokens: 828
-73. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 4172 - Tokens: 1043
+73. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 4105 - Tokens: 1027
 74. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 56 - Chars: 4403 - Tokens: 1101
 75. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
 76. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 33 - Chars: 2764 - Tokens: 691
@@ -1803,11 +1865,11 @@ This file-centric approach helps in planning and prioritizing work, especially i
 104. src\backend\services\file-operation.service.ts - Lines: 338 - Chars: 16082 - Tokens: 4021
 105. src\backend\services\file-tree.service.ts - Lines: 277 - Chars: 14299 - Tokens: 3575
 106. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12820 - Tokens: 3205
-107. src\backend\services\git.service.ts - Lines: 65 - Chars: 2874 - Tokens: 719
+107. src\backend\services\git.service.ts - Lines: 76 - Chars: 3672 - Tokens: 918
 108. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4232 - Tokens: 1058
 109. src\backend\services\history.service.ts - Lines: 264 - Chars: 10959 - Tokens: 2740
 110. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-111. src\backend\services\prompt.service.ts - Lines: 372 - Chars: 18945 - Tokens: 4737
+111. src\backend\services\prompt.service.ts - Lines: 381 - Chars: 19466 - Tokens: 4867
 112. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 113. src\backend\services\services.ts - Lines: 40 - Chars: 1827 - Tokens: 457
 114. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
@@ -1829,7 +1891,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 130. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
 131. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 75 - Chars: 3049 - Tokens: 763
 132. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 86 - Chars: 3485 - Tokens: 872
-133. src\client\views\parallel-copilot.view\components\NumberedTextarea.tsx - Lines: 102 - Chars: 4499 - Tokens: 1125
+133. src\client\views\parallel-copilot.view\components\NumberedTextarea.tsx - Lines: 102 - Chars: 4398 - Tokens: 1100
 134. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 95 - Chars: 7630 - Tokens: 1908
 135. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 84 - Chars: 3486 - Tokens: 872
 136. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
@@ -1839,9 +1901,9 @@ This file-centric approach helps in planning and prioritizing work, especially i
 140. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 43 - Chars: 1890 - Tokens: 473
 141. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 71 - Chars: 3447 - Tokens: 862
 142. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 81 - Chars: 3827 - Tokens: 957
-143. src\client\views\parallel-copilot.view\view.scss - Lines: 864 - Chars: 20475 - Tokens: 5119
+143. src\client\views\parallel-copilot.view\view.scss - Lines: 865 - Chars: 19672 - Tokens: 4918
 144. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-145. src\client\views\parallel-copilot.view\view.tsx - Lines: 214 - Chars: 28518 - Tokens: 7130
+145. src\client\views\parallel-copilot.view\view.tsx - Lines: 224 - Chars: 28514 - Tokens: 7129
 146. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
 147. src\common\ipc\channels.enum.ts - Lines: 86 - Chars: 4556 - Tokens: 1139
 148. src\common\ipc\channels.type.ts - Lines: 86 - Chars: 6495 - Tokens: 1624
@@ -2804,7 +2866,7 @@ To enhance the data curation process, it is critical for the user to have immedi
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C146 (Add case for state loss on window move)
+# Updated on: C179 (Add case for NumberedTextarea component)
 
 - **Key/Value for A0:**
 - **Description:** Documents recurring bugs, their root causes, and codified solutions to prevent future regressions during development.
@@ -2815,6 +2877,19 @@ To enhance the data curation process, it is critical for the user to have immedi
 This document serves as a living record of persistent or complex bugs that have recurred across multiple development cycles. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 016: `NumberedTextarea` Scrolling & Alignment Failure
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx`, `src/client/views/parallel-copilot.view/view.scss`
+-   **Cycles Observed:** C1, C2, C3, C167, C174
+-   **Symptom:** The text areas used for "Cycle Context" and "Ephemeral Context" are functionally unusable. The line numbers in the left gutter do not scroll in sync with the text content. As the user types and the text wraps or scrolls, the cursor position becomes misaligned with the actual text insertion point, and text selection highlighting is inaccurate.
+-   **Root Cause Analysis (RCA):** The component attempted to render a line number gutter and a text area side-by-side. This approach is fundamentally flawed because the two elements have independent scrolling mechanisms. The `textarea` scrolls its internal content, while the line number `div` scrolls as part of the page flow. Furthermore, minor differences in padding, font metrics, or line-height between the visible highlighted `div` and the invisible `textarea` caused a "drift" in cursor alignment over multiple lines.
+-   **Codified Solution & Best Practice:**
+    1.  **Architectural Fix:** The component must be re-architected to use an overlay approach. A container element should use relative positioning. Inside it, both the `div` that displays the syntax-highlighted text and the transparent `textarea` used for input must be absolutely positioned to fill the container, ensuring they are perfectly on top of each other.
+    2.  **Synchronized Scrolling:** A single `onScroll` event handler on the `textarea` must programmatically update the `scrollTop` property of both the highlighted `div` and the line number gutter `div`. This ensures all three elements scroll in perfect unison.
+    3.  **Pixel-Perfect Styling:** All font properties (`font-family`, `font-size`, `line-height`), padding, and `box-sizing` must be identical between the `textarea` and the highlighted `div` to guarantee that the text lines up perfectly and the cursor position is always accurate.
 
 ---
 
@@ -6603,7 +6678,7 @@ The "Cycle Context" and "Ephemeral Context" text areas in the Parallel Co-Pilot 
 # Artifact A69: DCE - Animated UI Workflow Guide
 # Date Created: C169
 # Author: AI Model & Curator
-# Updated on: C179 (Revise workflow sequence based on Cycle 2 feedback)
+# Updated on: C179 (Revise workflow sequence based on Cycle 3 feedback)
 
 ## 1. Overview & Goal
 
@@ -6615,7 +6690,7 @@ The Parallel Co-Pilot Panel (PCPP) has a powerful, multi-step workflow that may 
 |---|---|---|
 | P2-WF-01 | **Guided Workflow** | As a new user, I want the UI to visually guide me through the steps of a development cycle, so I can learn the workflow intuitively. | - After a specific action is completed, the UI element for the next logical action is highlighted with a subtle animation (e.g., a pulsing blue glow). |
 
-## 3. The Animated Workflow Sequence (Cycle 2 Revision)
+## 3. The Animated Workflow Sequence (Cycle 3 Revision)
 
 The highlighting will follow this specific sequence of user actions:
 
@@ -6632,12 +6707,12 @@ The highlighting will follow this specific sequence of user actions:
     *   **Highlight:** The **`Select This Response`** button pulses.
 
 5.  **Select Response:** The user clicks `Select This Response` for one of the tabs.
-    *   **Highlight:** The "Associated Files" list panel and the **`Select All`** button within it pulse.
-
-6.  **Select Files:** The user checks one or more files in the "Associated Files" list.
     *   **Highlight:** The **`Baseline (Commit)`** button pulses.
 
-7.  **Create Baseline:** The user clicks `Baseline (Commit)`.
+6.  **Create Baseline:** The user clicks `Baseline (Commit)`.
+    *   **Highlight:** The "Associated Files" list panel and the **`Select All`** button within it pulse.
+
+7.  **Select Files:** The user checks one or more files in the "Associated Files" list.
     *   **Highlight:** The **`Accept Selected`** button pulses.
 
 8.  **Accept Changes:** The user clicks `Accept Selected`. The workflow for this cycle's changes is essentially complete.
@@ -23265,6 +23340,7 @@ export class FlattenerService {
 
 <file path="src/backend/services/git.service.ts">
 // src/backend/services/git.service.ts
+// Updated on: C179 (Add check for 'not a git repository' error)
 import * as vscode from 'vscode';
 import { exec } from 'child_process';
 import { Services } from './services';
@@ -23302,7 +23378,13 @@ export class GitService {
         if (success) {
             vscode.window.showInformationMessage(message);
         } else {
-            vscode.window.showErrorMessage(message);
+            vscode.window.showErrorMessage(message, "Open Git Setup Guide").then(selection => {
+                if (selection === "Open Git Setup Guide") {
+                    // This is a placeholder for opening the artifact. A more robust solution
+                    // would involve a command to open a specific file.
+                    vscode.window.showInformationMessage("Please refer to the 'A9. DCE - GitHub Repository Setup Guide.md' artifact in your project.");
+                }
+            });
         }
     }
 
@@ -23313,7 +23395,11 @@ export class GitService {
             await this.execGitCommand(`git commit -m "${commitMessage.replace(/"/g, '\\"')}"`);
             this.notifyFrontend(serverIpc, true, 'Successfully created baseline commit.');
         } catch (error: any) {
-            this.notifyFrontend(serverIpc, false, `Git Baseline failed: ${error.message}`);
+            let errorMessage = `Git Baseline failed: ${error.message}`;
+            if (error.message.includes('fatal: not a git repository')) {
+                errorMessage = 'Git Baseline failed: This is not a Git repository. Please run `git init` in your terminal. See A9 for guidance.';
+            }
+            this.notifyFrontend(serverIpc, false, errorMessage);
         }
     }
 
@@ -23727,7 +23813,7 @@ export class LoggerService {
 </file>
 
 <file path="src/backend/services/prompt.service.ts">
-// Updated on: C179 (Add guard for empty selection in getFlattenedContent)
+// Updated on: C179 (Refine Cycle 0 prompt instructions)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -23805,9 +23891,18 @@ M7. Flattened Repo
         }
         staticContext += '<!-- END: Project Templates -->';
 
+        const cycleContextInstructions = `Review the user's project scope in M4. Your task is to act as a senior project architect and generate a starter set of planning and documentation artifacts for this new project.
+
+**CRITICAL INSTRUCTIONS:**
+1.  You have been provided with a set of best-practice templates for software engineering documentation in the <Static Context> section.
+2.  Your primary goal is to **select the most relevant templates** and generate project-specific versions of them.
+3.  **PRIORITIZE ESSENTIAL GUIDES:** You **MUST** generate artifacts based on "T14. Template - GitHub Repository Setup Guide.md" and "T7. Template - Development and Testing Guide.md". These are mandatory for the user to begin their project.
+4.  Generate a Master Artifact List (A0) and at least two other core planning documents (e.g., Project Vision, Technical Scaffolding Plan).
+5.  **DO NOT** generate any code files (e.g., .ts, .tsx, .js) in this initial cycle. The focus is on planning and documentation only.`;
+
         return `<Cycle 0>
 <Cycle Context>
-This section contains a persistent archive of documentation templates. You can use these as a guide for creating new project artifacts.
+${cycleContextInstructions}
 </Cycle Context>
 <Static Context>
 ${staticContext.trim()}
@@ -27778,7 +27873,7 @@ export default TestPane3;
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C178 (Add styles for git buttons)
+// Updated on: C179 (Fix NumberedTextarea alignment)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -27838,6 +27933,7 @@ body {
         line-height: 1.5;
         z-index: 2;
         flex-shrink: 0;
+        overflow: hidden; // Prevents its own scrollbar
     }
     
     .content-wrapper {
@@ -28740,7 +28836,7 @@ const App = () => {
     React.useEffect(() => { debouncedSave(); debouncedCostRequest(); }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, tabCount, isSortedByTokens, pathOverrides, debouncedSave, debouncedCostRequest, cycleContextHeight, ephemeralContextHeight]);
     React.useEffect(() => { const handleVisibilityChange = () => { if (document.visibilityState === 'hidden') saveCurrentCycleState(); }; document.addEventListener('visibilitychange', handleVisibilityChange); return () => document.removeEventListener('visibilitychange', handleVisibilityChange); }, [saveCurrentCycleState]);
     const parseAllTabs = React.useCallback(() => { setTabs(prevTabs => { const allFilePaths = new Set<string>(); const updatedTabs = { ...prevTabs }; let needsUpdate = false; Object.values(updatedTabs).forEach(tabState => { if (tabState.rawContent && !tabState.parsedContent) { needsUpdate = true; const parsed = parseResponse(tabState.rawContent); tabState.parsedContent = parsed; parsed.filesUpdated.forEach(file => allFilePaths.add(file)); parsed.files.forEach(file => { const lang = path.extname(file.path).substring(1) || 'plaintext'; const id = `${file.path}::${file.content}`; clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id }); }); } else if (tabState.parsedContent) { tabState.parsedContent.filesUpdated.forEach(file => allFilePaths.add(file)); } }); if (allFilePaths.size > 0) clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) }); return needsUpdate ? updatedTabs : prevTabs; }); }, [clientIpc]);
-    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string) => { setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setCycleContextHeight(cycleData.cycleContextHeight || 100); setEphemeralContextHeight(cycleData.ephemeralContextHeight || 100); }; clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, ({ filePath, originalTokens, modifiedTokens, similarity }) => { setComparisonMetrics(prev => new Map(prev).set(filePath, { originalTokens, modifiedTokens, similarity })); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, ({ success, message }) => { logger.log(`Git Operation: ${success ? 'SUCCESS' : 'FAILURE'} - ${message}`); }); clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); }, [clientIpc]);
+    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string) => { setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setCycleContextHeight(cycleData.cycleContextHeight || 100); setEphemeralContextHeight(cycleData.ephemeralContextHeight || 100); }; clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, ({ filePath, originalTokens, modifiedTokens, similarity }) => { setComparisonMetrics(prev => new Map(prev).set(filePath, { originalTokens, modifiedTokens, similarity })); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, ({ success, message }) => { logger.log(`Git Operation: ${success ? 'SUCCESS' : 'FAILURE'} - ${message}`); if (success && workflowStep === 'awaitingBaseline') setWorkflowStep('awaitingFileSelect'); }); clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); }, [clientIpc]);
     React.useEffect(() => { if (isParsedMode) parseAllTabs(); }, [isParsedMode, tabs, parseAllTabs]);
     React.useEffect(() => { if (!selectedFilePath) return; const currentTabData = tabs[activeTab.toString()]; if (currentTabData?.parsedContent) { const fileExistsInTab = currentTabData.parsedContent.files.some(f => f.path === selectedFilePath); if (!fileExistsInTab) setSelectedFilePath(null); } }, [activeTab, tabs, selectedFilePath]);
 
@@ -28781,14 +28877,14 @@ const App = () => {
         
         if (workflowStep === 'awaitingFileSelect') { 
             if (selectedFilesForReplacement.size > 0) {
-                setWorkflowStep('awaitingBaseline'); 
+                setWorkflowStep('awaitingAccept'); 
             }
             return; 
         }
         
         if (workflowStep === 'awaitingResponseSelect') { 
             if (selectedResponseId) {
-                setWorkflowStep('awaitingFileSelect'); 
+                setWorkflowStep('awaitingBaseline'); 
             }
             return; 
         }
@@ -28832,6 +28928,16 @@ const App = () => {
     const sortedTabIds = React.useMemo(() => { const tabIds = [...Array(tabCount)].map((_, i) => i + 1); if (isParsedMode && isSortedByTokens) tabIds.sort((a, b) => { const tokensA = tabs[a.toString()]?.parsedContent?.totalTokens ?? -1; const tokensB = tabs[b.toString()]?.parsedContent?.totalTokens ?? -1; return tokensB - tokensA; }); return tabIds; }, [tabs, isParsedMode, isSortedByTokens, tabCount]);
     const viewableContent = React.useMemo(() => { if (!selectedFilePath || !activeTabData?.parsedContent) return undefined; const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath); if (!file) return '<div>Error: File data not found in parsed response.</div>'; const id = `${file.path}::${file.content}`; return highlightedCodeBlocks.get(id); }, [selectedFilePath, activeTabData?.parsedContent, highlightedCodeBlocks]);
     const handleRawContentChange = (newContent: string, tabIndex: number) => setTabs(prev => ({ ...prev, [tabIndex.toString()]: { rawContent: newContent, parsedContent: null }}));
+    
+    const handleSortToggle = () => {
+        if (workflowStep === 'awaitingSort') {
+            setIsSortedByTokens(true);
+            setWorkflowStep('awaitingResponseSelect');
+        } else {
+            setIsSortedByTokens(p => !p);
+        }
+    };
+    
     const handleGlobalParseToggle = () => { const newParseMode = !isParsedMode; setIsParsedMode(newParseMode); setSelectedFilePath(null); if (!newParseMode) setTabs(prev => { const newTabs = {...prev}; Object.keys(newTabs).forEach(key => { newTabs[key].parsedContent = null; }); return newTabs; }); if (newParseMode && workflowStep === 'awaitingParse') setWorkflowStep(isSortedByTokens ? 'awaitingResponseSelect' : 'awaitingSort'); };
     const handleNewCycle = (e: React.MouseEvent) => { e.stopPropagation(); saveCurrentCycleState(); const newCycleId = maxCycle + 1; setMaxCycle(newCycleId); setCurrentCycle(newCycleId); setCycleTitle('New Cycle'); setCycleContext(''); setEphemeralContext(''); setTabs({}); setIsParsedMode(false); setSelectedResponseId(null); setSelectedFilesForReplacement(new Set()); setWorkflowStep('awaitingResponsePaste_1'); };
     const handleGeneratePrompt = () => { if (currentCycle === null) return; clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle }); setWorkflowStep('readyForNewCycle'); }
@@ -28839,10 +28945,10 @@ const App = () => {
     const handleResetHistory = () => { clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {}); };
     const handleExportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestExportHistory, {});
     const handleImportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestImportHistory, {});
-    const handleGitBaseline = () => { const commitMessage = `DCE Baseline: Cycle ${currentCycle} - ${cycleTitle || 'Untitled'}`; clientIpc.sendToServer(ClientToServerChannel.RequestGitBaseline, { commitMessage }); setWorkflowStep('awaitingAccept'); };
+    const handleGitBaseline = () => { const commitMessage = `DCE Baseline: Cycle ${currentCycle} - ${cycleTitle || 'Untitled'}`; clientIpc.sendToServer(ClientToServerChannel.RequestGitBaseline, { commitMessage }); };
     const handleGitRestore = () => { clientIpc.sendToServer(ClientToServerChannel.RequestGitRestore, {}); };
-    const handleFileSelectionToggle = (filePath: string) => { const currentTabId = activeTab.toString(); const compositeKeyForCurrent = `${currentTabId}:::${filePath}`; setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); let existingKey: string | undefined; for (const key of newSet) if (key.endsWith(`:::${filePath}`)) { existingKey = key; break; } if (existingKey) { if (existingKey === compositeKeyForCurrent) newSet.delete(existingKey); else { newSet.delete(existingKey); newSet.add(compositeKeyForCurrent); } } else newSet.add(compositeKeyForCurrent); return newSet; }); if(workflowStep === 'awaitingFileSelect') setWorkflowStep('awaitingBaseline'); };
-    const handleSelectAllFilesToggle = () => { if (!activeTabData?.parsedContent) return; const allFilesForTab = activeTabData.parsedContent.filesUpdated.map(fp => `${activeTab}:::${fp}`); const isAllSelected = allFilesForTab.every(key => selectedFilesForReplacement.has(key)); setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); if (isAllSelected) allFilesForTab.forEach(key => newSet.delete(key)); else allFilesForTab.forEach(key => newSet.add(key)); return newSet; }); if(workflowStep === 'awaitingFileSelect') setWorkflowStep('awaitingBaseline'); };
+    const handleFileSelectionToggle = (filePath: string) => { const currentTabId = activeTab.toString(); const compositeKeyForCurrent = `${currentTabId}:::${filePath}`; setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); let existingKey: string | undefined; for (const key of newSet) if (key.endsWith(`:::${filePath}`)) { existingKey = key; break; } if (existingKey) { if (existingKey === compositeKeyForCurrent) newSet.delete(existingKey); else { newSet.delete(existingKey); newSet.add(compositeKeyForCurrent); } } else newSet.add(compositeKeyForCurrent); return newSet; }); if(workflowStep === 'awaitingFileSelect') setWorkflowStep('awaitingAccept'); };
+    const handleSelectAllFilesToggle = () => { if (!activeTabData?.parsedContent) return; const allFilesForTab = activeTabData.parsedContent.filesUpdated.map(fp => `${activeTab}:::${fp}`); const isAllSelected = allFilesForTab.every(key => selectedFilesForReplacement.has(key)); setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); if (isAllSelected) allFilesForTab.forEach(key => newSet.delete(key)); else allFilesForTab.forEach(key => newSet.add(key)); return newSet; }); if(workflowStep === 'awaitingFileSelect') setWorkflowStep('awaitingAccept'); };
     const isAllFilesSelected = React.useMemo(() => { if (!activeTabData?.parsedContent) return false; const allFiles = activeTabData.parsedContent.filesUpdated; if (allFiles.length === 0) return false; return allFiles.every(file => selectedFilesForReplacement.has(`${activeTab}:::${file}`)); }, [selectedFilesForReplacement, activeTabData, activeTab]);
     const handleLogState = () => { const currentState = getCurrentCycleData(); if (currentState) clientIpc.sendToServer(ClientToServerChannel.RequestLogState, { currentState }); };
     const handleCopyContent = () => { if (!selectedFilePath || !activeTabData?.parsedContent) return; const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath); if (file) clientIpc.sendToServer(ClientToServerChannel.RequestCopyTextToClipboard, { text: file.content }); };
@@ -28862,9 +28968,9 @@ const App = () => {
             <CycleNavigator currentCycle={currentCycle} maxCycle={maxCycle} cycleTitle={cycleTitle} isNewCycleButtonDisabled={isNewCycleButtonDisabled} onCycleChange={handleCycleChange} onNewCycle={handleNewCycle} onTitleChange={(title) => { setCycleTitle(title); }} onDeleteCycle={handleDeleteCycle} onResetHistory={handleResetHistory} onExportHistory={handleExportHistory} onImportHistory={handleImportHistory} onGitBaseline={handleGitBaseline} onGitRestore={handleGitRestore} workflowStep={workflowStep} />
             <ContextInputs cycleContext={cycleContext} ephemeralContext={ephemeralContext} cycleContextTokens={cycleContextTokens} ephemeralContextTokens={ephemeralContextTokens} onCycleContextChange={(e) => { setCycleContext(e.target.value); setCycleContextTokens(Math.ceil(e.target.value.length / 4)); }} onEphemeralContextChange={(e) => { setEphemeralContext(e.target.value); setEphemeralContextTokens(Math.ceil(e.target.value.length / 4)); }} onContextKeyDown={handleContextKeyDown} cycleContextHeight={cycleContextHeight} onCycleContextHeightChange={setCycleContextHeight} ephemeralContextHeight={ephemeralContextHeight} onEphemeralContextHeightChange={setEphemeralContextHeight} currentCycle={currentCycle} workflowStep={workflowStep} />
         </CollapsibleSection>
-        <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} onSortToggle={() => { setIsSortedByTokens(p => !p); if (workflowStep === 'awaitingSort') setWorkflowStep('awaitingResponseSelect'); }} workflowStep={workflowStep} />
+        <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} onSortToggle={handleSortToggle} workflowStep={workflowStep} />
         <div className="tab-content">
-            <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={currentComparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => { setSelectedResponseId(prev => prev === id ? null : id); if (workflowStep === 'awaitingResponseSelect') setWorkflowStep('awaitGFileSelect'); }} onSelectAllFiles={handleSelectAllFilesToggle} onDeselectAllFiles={() => setSelectedFilesForReplacement(new Set())} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} onBaseline={handleGitBaseline} onRestore={handleGitRestore} workflowStep={workflowStep} />
+            <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={currentComparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => { setSelectedResponseId(prev => prev === id ? null : id); if (workflowStep === 'awaitingResponseSelect') setWorkflowStep('awaitingBaseline'); }} onSelectAllFiles={handleSelectAllFilesToggle} onDeselectAllFiles={() => setSelectedFilesForReplacement(new Set())} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} onBaseline={handleGitBaseline} onRestore={handleGitRestore} workflowStep={workflowStep} />
         </div>
     </div>;
 };
@@ -29928,3 +30034,5 @@ module.exports = [extensionConfig, webviewConfig];
 
 
 </M7. Flattened Repo>
+
+</prompt.md>

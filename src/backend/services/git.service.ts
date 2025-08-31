@@ -1,4 +1,5 @@
 // src/backend/services/git.service.ts
+// Updated on: C179 (Add check for 'not a git repository' error)
 import * as vscode from 'vscode';
 import { exec } from 'child_process';
 import { Services } from './services';
@@ -36,7 +37,13 @@ export class GitService {
         if (success) {
             vscode.window.showInformationMessage(message);
         } else {
-            vscode.window.showErrorMessage(message);
+            vscode.window.showErrorMessage(message, "Open Git Setup Guide").then(selection => {
+                if (selection === "Open Git Setup Guide") {
+                    // This is a placeholder for opening the artifact. A more robust solution
+                    // would involve a command to open a specific file.
+                    vscode.window.showInformationMessage("Please refer to the 'A9. DCE - GitHub Repository Setup Guide.md' artifact in your project.");
+                }
+            });
         }
     }
 
@@ -47,7 +54,11 @@ export class GitService {
             await this.execGitCommand(`git commit -m "${commitMessage.replace(/"/g, '\\"')}"`);
             this.notifyFrontend(serverIpc, true, 'Successfully created baseline commit.');
         } catch (error: any) {
-            this.notifyFrontend(serverIpc, false, `Git Baseline failed: ${error.message}`);
+            let errorMessage = `Git Baseline failed: ${error.message}`;
+            if (error.message.includes('fatal: not a git repository')) {
+                errorMessage = 'Git Baseline failed: This is not a Git repository. Please run `git init` in your terminal. See A9 for guidance.';
+            }
+            this.notifyFrontend(serverIpc, false, errorMessage);
         }
     }
 
