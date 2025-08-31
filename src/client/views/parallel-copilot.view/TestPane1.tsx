@@ -1,41 +1,26 @@
 // src/client/views/parallel-copilot.view/TestPane1.tsx
 import * as React from 'react';
-import { VscCheck, VscError } from 'react-icons/vsc';
-import { ParsedResponse } from '@/common/types/pcpp.types';
-import { logger } from '@/client/utils/logger';
+import NumberedTextarea from './components/NumberedTextarea';
 
-interface TestPane1Props {
-    parsedContent: ParsedResponse | null;
-    fileExistenceMap: Map<string, boolean>;
-}
-
-const TestPane1: React.FC<TestPane1Props> = ({ parsedContent, fileExistenceMap }) => {
-    const [lastClicked, setLastClicked] = React.useState<string | null>(null);
-
-    if (!parsedContent) {
-        return <div className="test-pane-container">Go to the "Original" tab, paste a response, and click "Parse All" to populate test data.</div>;
-    }
+const TestPane1: React.FC = () => {
+    const [value, setValue] = React.useState('Test A: Focus on synchronized scrolling.\n\nType or paste multiple lines here.\n\nThen scroll the textarea to see if the line numbers scroll with it.');
+    const [height, setHeight] = React.useState(200);
 
     return (
         <div className="test-pane-container">
-            <h3>Test Pane A: Barebones Click Logger</h3>
-            <p>This test uses a raw list with a simple `onClick`. If clicks are logged and the text below updates, the fundamental event capture is working.</p>
-            <p><strong>Last Clicked:</strong> {lastClicked || 'None'}</p>
-            <hr style={{ margin: '8px 0', borderColor: 'var(--vscode-panel-border)' }} />
-            <ul className="associated-files-list">
-                {parsedContent.filesUpdated.map(file => (
-                    <li 
-                        key={file} 
-                        onClick={() => {
-                            logger.log(`[TEST PANE A] CLICKED: ${file}`);
-                            setLastClicked(file);
-                        }}
-                    >
-                        {fileExistenceMap.get(file) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
-                        <span>{file}</span>
-                    </li>
-                ))}
-            </ul>
+            <h3>Test A: Synchronized Scrolling</h3>
+            <p>This test focuses on the `onScroll` event. The line number gutter and the text content should scroll in perfect unison.</p>
+            <div style={{ border: '1px solid var(--vscode-focusBorder)', padding: '8px' }}>
+                <NumberedTextarea
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
+                    placeholder="Test Area 1"
+                    onKeyDown={() => {}}
+                    height={height}
+                    onHeightChange={setHeight}
+                    id="test-textarea-1"
+                />
+            </div>
         </div>
     );
 };

@@ -1,4 +1,4 @@
-// Updated on: C179 (Add .git to exclusion patterns)
+// Updated on: C179 (Add .vscode to exclusion patterns)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -65,7 +65,7 @@ export class FileTreeService {
         this.watcher = vscode.workspace.createFileSystemWatcher('**/*');
         const onFileChange = (uri: vscode.Uri) => {
             const normalizedPath = normalizePath(uri.fsPath);
-            if (EXCLUSION_PATTERNS.some(pattern => normalizedPath.includes(`/${pattern}/`) || normalizedPath.includes(`/${pattern}`))) {
+            if (EXCLUSION_PATTERNS.some(pattern => normalizedPath.includes(`/${pattern}/`) || normalizedPath.endsWith(`/${pattern}`))) {
                 Services.loggerService.log(`[Watcher] Ignoring change in excluded pattern: ${normalizedPath}`);
                 return;
             }
@@ -226,7 +226,6 @@ export class FileTreeService {
             const entries = await vscode.workspace.fs.readDirectory(dirUri);
 
             for (const [name, type] of entries) {
-                // C179: Use includes to check for .git directory at any level.
                 if (EXCLUSION_PATTERNS.some(p => name === p)) continue;
 
                 const childUri = vscode.Uri.joinPath(dirUri, name);

@@ -1,78 +1,25 @@
-// Updated on: C106 (Fix click handler and add separate state for content)
+// src/client/views/parallel-copilot.view/TestPane3.tsx
 import * as React from 'react';
-import { VscCheck, VscError } from 'react-icons/vsc';
-import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
-import { logger } from '@/client/utils/logger';
+import NumberedTextarea from './components/NumberedTextarea';
 
-// Child component to test prop drilling
-const FileList = ({ files, fileExistenceMap, onFileSelect, lastClickedFile }: { files: string[], fileExistenceMap: Map<string, boolean>, onFileSelect: (filePath: string) => void, lastClickedFile: string | null }) => (
-    <ul className="associated-files-list">
-        {files.map(filePath => (
-            <li 
-                key={filePath} 
-                onClick={() => onFileSelect(filePath)}
-                className={lastClickedFile === filePath ? 'selected' : ''}
-            >
-                {fileExistenceMap.get(filePath) ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
-                <span>{filePath}</span>
-            </li>
-        ))}
-    </ul>
-);
-
-interface TestPane3Props {
-    parsedContent: ParsedResponse | null;
-    fileExistenceMap: Map<string, boolean>;
-}
-
-const TestPane3: React.FC<TestPane3Props> = ({ parsedContent, fileExistenceMap }) => {
-    const [lastClickedFile, setLastClickedFile] = React.useState<string | null>(null);
-    const [selectedFileContent, setSelectedFileContent] = React.useState<string | null>(null);
-
-    if (!parsedContent) {
-        return <div className="test-pane-container">Go to the main input, paste a response, and click "Parse for Tests" to populate data.</div>;
-    }
-
-    const handleFileSelect = (filePath: string) => {
-        logger.log(`[TEST PANE C] Child component called onFileSelect prop for: ${filePath}.`);
-        setLastClickedFile(filePath);
-
-        const file = parsedContent.files.find(f => f.path === filePath);
-        if (file) {
-             logger.log(`[TEST PANE C] Found file content. Setting content state.`);
-            setSelectedFileContent(file.content);
-        } else {
-             logger.error(`[TEST PANE C] Could not find file object for path: ${filePath}`);
-             setSelectedFileContent(`Error: Could not find content for ${filePath}`);
-        }
-    };
+const TestPane3: React.FC = () => {
+    const [value, setValue] = React.useState('Test C: Combined Solution.\n\nThis is a clean implementation combining fixes for both scrolling and alignment. It should be fully functional.');
+    const [height, setHeight] = React.useState(200);
 
     return (
         <div className="test-pane-container">
-            <h3>Test Pane C: Prop-Driven Update</h3>
-            <p>This test uses a child component for the list, passing the click handler down as a prop. This tests for issues with prop drilling.</p>
-            <p><strong>Last Clicked:</strong> {lastClickedFile || 'None'}</p>
-            <hr style={{ margin: '8px 0', borderColor: 'var(--vscode-panel-border)' }} />
-             <div style={{ display: 'flex', gap: '8px' }}>
-                <div style={{ flex: 1 }}>
-                    <h4>Files (Child Component)</h4>
-                    <FileList 
-                        files={parsedContent.filesUpdated} 
-                        fileExistenceMap={fileExistenceMap} 
-                        onFileSelect={handleFileSelect}
-                        lastClickedFile={lastClickedFile}
-                    />
-                </div>
-                <div style={{ flex: 2, borderLeft: '1px solid var(--vscode-panel-border)', paddingLeft: '8px' }}>
-                    <h4>Content (Parent Component)</h4>
-                    {selectedFileContent !== null ? (
-                        <pre style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>
-                            <code>{selectedFileContent}</code>
-                        </pre>
-                    ) : (
-                        <div>Select a file to see its content.</div>
-                    )}
-                </div>
+            <h3>Test C: Combined & Cleaned Solution</h3>
+            <p>This test combines the fixes from A and B. It should exhibit no scrolling or alignment bugs.</p>
+            <div style={{ border: '1px solid var(--vscode-focusBorder)', padding: '8px' }}>
+                 <NumberedTextarea
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
+                    placeholder="Test Area 3"
+                    onKeyDown={() => {}}
+                    height={height}
+                    onHeightChange={setHeight}
+                    id="test-textarea-3"
+                />
             </div>
         </div>
     );

@@ -102,10 +102,17 @@ body {
         z-index: 1;
         
         &::-webkit-scrollbar {
-            display: none;
+            width: 10px;
         }
-        -ms-overflow-style: none;
-        scrollbar-width: none;
+        &::-webkit-scrollbar-thumb {
+            background: var(--vscode-scrollbarSlider-background);
+        }
+        &::-webkit-scrollbar-thumb:hover {
+            background: var(--vscode-scrollbarSlider-hoverBackground);
+        }
+        &::-webkit-scrollbar-thumb:active {
+            background: var(--vscode-scrollbarSlider-activeBackground);
+        }
     }
 
     .textarea-resizer {
@@ -741,7 +748,7 @@ body {
     display: flex;
     flex-direction: column;
     min-width: 0;
-    overflow: hidden;
+    overflow: auto;
     &:first-of-type { border-right: 1px solid var(--vscode-panel-border); }
 }
 
@@ -862,4 +869,35 @@ body {
 
 .collapsible-content-inner {
     padding: 8px;
+}
+
+.test-harness-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--vscode-panel-border);
+    padding: 0 8px;
+    flex-shrink: 0;
+
+    button {
+        padding: 6px 12px;
+        background: none;
+        border: none;
+        color: var(--vscode-tab-inactiveForeground);
+        border-bottom: 2px solid transparent;
+        cursor: pointer;
+
+        &.active {
+            color: var(--vscode-tab-activeForeground);
+            border-bottom-color: var(--vscode-tab-activeBorder);
+        }
+    }
+}
+
+.test-pane-container {
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-grow: 1;
+    min-height: 0;
+    overflow-y: auto;
 }
