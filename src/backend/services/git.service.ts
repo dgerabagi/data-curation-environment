@@ -1,5 +1,5 @@
 // src/backend/services/git.service.ts
-// Updated on: C183 (Refactor to return results instead of showing UI)
+// Updated on: C184 (Restore direct error handling for git init)
 import * as vscode from 'vscode';
 import { exec } from 'child_process';
 import * as path from 'path';
@@ -62,11 +62,26 @@ export class GitService {
                 }
             }
         } catch (error: any) {
-            let errorMessage = `Git Baseline failed: ${error.message}`;
             if (error.message.includes('fatal: not a git repository')) {
-                errorMessage = 'This is not a Git repository. Please initialize it first. Refer to the README for guidance.';
+                const openReadme = 'Open README Guide';
+                vscode.window.showErrorMessage(
+                    'This is not a Git repository. Please initialize it first to use the baseline feature.',
+                    openReadme
+                ).then(selection => {
+                    if (selection === openReadme) {
+                        const workspaceRoot = this.getWorkspaceRoot();
+                        if (workspaceRoot) {
+                            const readmePath = path.join(workspaceRoot, 'src', 'Artifacts', 'README.md');
+                            vscode.workspace.openTextDocument(vscode.Uri.file(readmePath)).then(doc => {
+                                vscode.window.showTextDocument(doc);
+                            });
+                        }
+                    }
+                });
+                // Don't send a failure message, as the UI pop-up is the feedback
+                return; 
             }
-            result = { success: false, message: errorMessage };
+            result = { success: false, message: `Git Baseline failed: ${error.message}` };
         }
         serverIpc.sendToClient(ServerToClientChannel.NotifyGitOperationResult, result);
     }

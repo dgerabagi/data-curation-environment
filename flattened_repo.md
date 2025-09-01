@@ -1,17 +1,17 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-01T18:28:06.478Z
+  Date Generated: 2025-09-01T18:49:39.206Z
   ---
   Total Files: 168
-  Approx. Tokens: 446514
+  Approx. Tokens: 447419
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (239424 tokens)
-2. src\Artifacts\A11. DCE - Regression Case Studies.md (9424 tokens)
+2. src\Artifacts\A11. DCE - Regression Case Studies.md (9909 tokens)
 3. src\Artifacts\A0. DCE Master Artifact List.md (7189 tokens)
-4. src\client\views\parallel-copilot.view\view.tsx (6922 tokens)
+4. src\client\views\parallel-copilot.view\view.tsx (6938 tokens)
 5. src\client\views\parallel-copilot.view\view.scss (5158 tokens)
 6. src\backend\services\prompt.service.ts (4908 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4429 tokens)
@@ -30,7 +30,7 @@
 8. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
 9. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
 10. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
-11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 335 - Chars: 37694 - Tokens: 9424
+11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 349 - Chars: 39634 - Tokens: 9909
 12. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5710 - Tokens: 1428
 13. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
 14. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
@@ -92,10 +92,10 @@
 70. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1806 - Tokens: 452
 71. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 47 - Chars: 3537 - Tokens: 885
 72. src\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3311 - Tokens: 828
-73. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 69 - Chars: 4067 - Tokens: 1017
-74. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 55 - Chars: 5070 - Tokens: 1268
+73. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 3801 - Tokens: 951
+74. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 57 - Chars: 5810 - Tokens: 1453
 75. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
-76. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 40 - Chars: 2804 - Tokens: 701
+76. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 43 - Chars: 2874 - Tokens: 719
 77. src\Artifacts\A73. DCE - GitService Plan.md - Lines: 44 - Chars: 2548 - Tokens: 637
 78. src\Artifacts\A74. DCE - Per-Input Undo-Redo Feature Plan.md - Lines: 49 - Chars: 3624 - Tokens: 906
 79. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
@@ -126,7 +126,7 @@
 104. src\backend\services\file-operation.service.ts - Lines: 338 - Chars: 16082 - Tokens: 4021
 105. src\backend\services\file-tree.service.ts - Lines: 276 - Chars: 14221 - Tokens: 3556
 106. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12820 - Tokens: 3205
-107. src\backend\services\git.service.ts - Lines: 86 - Chars: 4144 - Tokens: 1036
+107. src\backend\services\git.service.ts - Lines: 101 - Chars: 4904 - Tokens: 1226
 108. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4232 - Tokens: 1058
 109. src\backend\services\history.service.ts - Lines: 270 - Chars: 11310 - Tokens: 2828
 110. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
@@ -164,7 +164,7 @@
 142. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 28 - Chars: 1184 - Tokens: 296
 143. src\client\views\parallel-copilot.view\view.scss - Lines: 903 - Chars: 20629 - Tokens: 5158
 144. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-145. src\client\views\parallel-copilot.view\view.tsx - Lines: 159 - Chars: 27686 - Tokens: 6922
+145. src\client\views\parallel-copilot.view\view.tsx - Lines: 159 - Chars: 27751 - Tokens: 6938
 146. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
 147. src\common\ipc\channels.enum.ts - Lines: 88 - Chars: 4666 - Tokens: 1167
 148. src\common\ipc\channels.type.ts - Lines: 88 - Chars: 6637 - Tokens: 1660
@@ -178,7 +178,7 @@
 156. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
 157. src\common\utils\view-html.ts - Lines: 29 - Chars: 1117 - Tokens: 280
 158. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
-159. src\extension.ts - Lines: 121 - Chars: 5078 - Tokens: 1270
+159. src\extension.ts - Lines: 129 - Chars: 5386 - Tokens: 1347
 160. .gitignore - Lines: 10 - Chars: 128 - Tokens: 32
 161. .vscodeignore - Lines: 11 - Chars: 356 - Tokens: 89
 162. package.json - Lines: 139 - Chars: 4583 - Tokens: 1146
@@ -1139,7 +1139,7 @@ To enhance the data curation process, it is critical for the user to have immedi
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C183 (Add case for stuck Baseline highlighting)
+# Updated on: C184 (Add Git Init Popup Regression)
 
 - **Key/Value for A0:**
 - **Description:** Documents recurring bugs, their root causes, and codified solutions to prevent future regressions during development.
@@ -1153,10 +1153,24 @@ This document serves as a living record of persistent or complex bugs that have 
 
 ---
 
+### Case Study 022: Missing `git init` Error Popup
+
+-   **Artifacts Affected:** `src/backend/services/git.service.ts`
+-   **Cycles Observed:** C9
+-   **Symptom:** When a user opens a new project that is not a Git repository and clicks the "Baseline" button, the operation fails silently. An error is logged to the debug channel, but no UI notification is shown to the user to explain what happened or how to fix it. This is a regression from a previous version that did provide a helpful pop-up.
+-   **Root Cause Analysis (RCA):** The `git.service.ts` was refactored in C183 to return a result object (`{ success, message }`) to the frontend instead of directly showing UI notifications. While this is a good pattern for general success/failure communication that the frontend state machine needs to know about, it removed the direct, user-facing error handling for a very common and specific user error (forgetting to run `git init`). The frontend was not updated to take the error message from the returned object and display it in a `showErrorMessage` dialog.
+-   **Codified Solution & Best Practice:** For critical, common, and actionable user errors, it is better for the responsible backend service to show the error notification directly.
+    1.  **Backend (`git.service.ts`):** The `handleGitBaselineRequest` method must be modified. A `try...catch` block will be used. Inside the `catch`, it will inspect the error message.
+    2.  If the error contains `fatal: not a git repository`, the service will directly call `vscode.window.showErrorMessage`.
+    3.  This message will be user-friendly ("This is not a Git repository...") and will include an action button ("Open README Guide") that programmatically opens the relevant documentation to guide the user.
+    4.  For all other success or failure cases, the service can continue to use the `NotifyGitOperationResult` IPC channel to communicate with the frontend's state machine.
+
+---
+
 ### Case Study 021: Stuck `Baseline` Highlight in Animated Workflow
 
 -   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/backend/services/git.service.ts`
--   **Cycles Observed:** C8
+-   **Cycles Observed:** C8, C9
 -   **Symptom:** In the animated workflow, after the user selects a response, the `Baseline (Commit)` button is correctly highlighted. After the user clicks it and the baseline is successfully created, the highlight remains on the `Baseline` button and does not advance to the next step in the workflow (e.g., "Select All" in the Associated Files list).
 -   **Root Cause Analysis (RCA):** The frontend UI, which manages the `workflowStep` state, had no way of knowing when the backend Git operation was successfully completed. The `git.service.ts` method was a "fire-and-forget" operation from the frontend's perspective. It showed a `vscode.window.showInformationMessage` (a UI side-effect from the backend), but it did not send a structured success/failure message back to the webview client. The frontend's state machine was therefore never triggered to advance to the next step.
 -   **Codified Solution & Best Practice:** Backend services that perform actions triggered by the UI should provide a clear, awaitable response back to the client.
@@ -5002,7 +5016,7 @@ The "Cycle Context" and "Ephemeral Context" text areas in the Parallel Co-Pilot 
 # Artifact A69: DCE - Animated UI Workflow Guide
 # Date Created: C169
 # Author: AI Model & Curator
-# Updated on: C183 (Refine post-baseline transition and document API limitation)
+# Updated on: C184 (Add auto-open PCPP step)
 
 ## 1. Overview & Goal
 
@@ -5019,11 +5033,10 @@ The Parallel Co-Pilot Panel (PCPP) has a powerful, multi-step workflow that may 
 The highlighting will follow this specific sequence of user actions:
 
 ### Onboarding / Cycle 0
-1.  **Start (No Workspace):** User opens VS Code with no folder open.
-    *   **Highlight:** The **DCE icon** in the Activity Bar pulses.
-    *   **Note:** Direct animation of Activity Bar icons is not supported by the VS Code API. This step is a design goal that cannot be implemented with current technology. The guided workflow will begin at the next step.
+1.  **Start (New Workspace):** User opens a new, empty folder in VS Code.
+    *   **Auto-Action:** The **DCE Parallel Co-Pilot Panel** automatically opens.
 
-2.  **Open PCPP (Welcome View):** User clicks the DCE icon, opening the PCPP to the "Welcome" / "Onboarding" view.
+2.  **Open PCPP (Welcome View):** The PCPP is open to the "Welcome" / "Onboarding" view.
     *   **Highlight:** The **Project Scope `textarea`** pulses.
 
 3.  **Input Project Scope:** User types their project plan into the `textarea`.
@@ -5074,13 +5087,13 @@ The highlighting will follow this specific sequence of user actions:
 # Artifact A70: DCE - Git-Integrated Testing Workflow Plan
 # Date Created: C169
 # Author: AI Model & Curator
-# Updated on: C183 (Refine communication protocol for state transitions)
+# Updated on: C184 (Add requirement for Git Init error popup)
 
 ## 1. Overview & Goal
 
 A core part of the DCE workflow involves accepting an AI-generated response and testing it in the live workspace. If the response introduces bugs, the user must manually revert the changes. The goal of this feature is to automate this "test and revert" loop by deeply integrating with Git. This will provide a one-click method to create a baseline commit before testing and a one-click method to restore that baseline if the test fails.
 
-**Status (C183):** In Progress.
+**Status (C184):** In Progress.
 
 ## 2. User Stories
 
@@ -5089,6 +5102,7 @@ A core part of the DCE workflow involves accepting an AI-generated response and 
 | P2-GIT-01 | **Create Baseline** | As a developer, after accepting an AI response but before testing it, I want to click a "Baseline (Commit)" button to create a Git commit, so I have a safe restore point. | - A "Baseline (Commit)" button is available in the response acceptance header. <br> - Clicking it executes `git add .` and `git commit -m "DCE Baseline: Cycle [currentCycle] - [cycleTitle]"`. <br> - A success notification is shown. |
 | P2-GIT-02 | **Restore Baseline** | As a developer, after testing an AI response and finding issues, I want to click a "Restore Baseline" button to discard all changes, so I can quickly test a different response. | - A "Restore Baseline" button is available. <br> - Clicking it executes `git restore .`. <br> - The restore operation must **exclude** DCE-specific state files (e.g., `.vscode/dce_history.json`) to prevent data loss. |
 | P2-GIT-03 | **State-Aware Baseline** | As a developer, I don't want to be prompted to create a baseline if my project is already in a clean state, and I want clear feedback if I try to baseline an already-clean repository. | - Before highlighting the "Baseline" button, the extension checks the `git status`. <br> - If the working tree is clean, the "Baseline" step in the animated workflow is skipped. <br> - If the user manually clicks "Baseline" on a clean tree, a message like "Already baselined" is shown. |
+| P2-GIT-04 | **Guided Git Initialization** | As a new user who hasn't initialized a Git repository, when I click "Baseline," I want to see a clear error message that tells me what's wrong and guides me to the solution. | - If `git` is not initialized, clicking "Baseline" shows a `vscode.window.showErrorMessage`. <br> - The message explains that the folder is not a Git repository. <br> - The message includes an "Open README Guide" button that, when clicked, opens the project's `src/Artifacts/README.md` file, which contains instructions on how to run `git init`. |
 
 ## 3. Feasibility Analysis
 
@@ -5109,7 +5123,7 @@ A core part of the DCE workflow involves accepting an AI-generated response and 
     *   `ClientToServerChannel.RequestGitRestore`: No payload.
     *   `ClientToServerChannel.RequestGitStatus`: No payload.
     *   `ServerToClientChannel.SendGitStatus`: Payload `{ isClean: boolean }`.
-    *   **New:** `ServerToClientChannel.NotifyGitOperationResult`: Payload `{ success: boolean; message: string; }`. This channel is critical for the backend to provide explicit feedback to the frontend's workflow state machine.
+    *   `ServerToClientChannel.NotifyGitOperationResult`: Payload `{ success: boolean; message: string; }`. This channel is critical for the backend to provide explicit feedback to the frontend's workflow state machine.
 
 2.  **Backend (New `GitService` - See `A73`):**
     *   A new `GitService` will encapsulate all Git command logic.
@@ -5118,6 +5132,7 @@ A core part of the DCE workflow involves accepting an AI-generated response and 
         *   Checks the status first. If clean, it returns a specific "Already baselined" result.
         *   Otherwise, it executes `git add .` and `git commit -m "..."`.
         *   It returns a result object (e.g., `{ success: true, message: '...' }`).
+        *   **Crucially, it will have a specific `catch` block for "not a git repository" errors. This block will trigger the user-facing `showErrorMessage` with the "Open README" button.**
     *   **`handleGitRestoreRequest()`:**
         *   Executes `git restore -- . ':(exclude).vscode/dce_history.json'`.
         *   Returns a result object.
@@ -5211,7 +5226,7 @@ Review the user's project scope in M4. Your task is to act as a senior project a
 # Artifact A72: DCE - README for Artifacts
 # Date Created: C158
 # Author: AI Model & Curator
-# Updated on: C182 (Add Git setup and next steps guidance)
+# Updated on: C184 (Strengthen Git initialization guidance)
 
 - **Key/Value for A0:**
 - **Description:** The content for the `README.md` file that is automatically created in a new project's `src/Artifacts` directory, explaining the purpose of the extension and the artifact-driven workflow.
@@ -5235,7 +5250,10 @@ Development in the DCE is organized into **Cycles**. You have just completed the
 
 ### Your Next Steps
 
-1.  **Initialize Your Git Repository:** To take full advantage of the DCE's testing workflow, you should initialize a Git repository. Open a terminal in your project's root directory (you can use the integrated terminal in VS Code: `Terminal > New Terminal`) and run the following command:
+1.  **Initialize Your Git Repository (CRITICAL):**
+    To take full advantage of the DCE's testing workflow (creating baselines and restoring changes), you **must** initialize a Git repository.
+    
+    Open a terminal in your project's root directory (you can use the integrated terminal in VS Code: `Terminal > New Terminal`) and run the following command:
     ```bash
     git init
     ```
@@ -21670,7 +21688,7 @@ export class FlattenerService {
 
 <file path="src/backend/services/git.service.ts">
 // src/backend/services/git.service.ts
-// Updated on: C183 (Refactor to return results instead of showing UI)
+// Updated on: C184 (Restore direct error handling for git init)
 import * as vscode from 'vscode';
 import { exec } from 'child_process';
 import * as path from 'path';
@@ -21733,11 +21751,26 @@ export class GitService {
                 }
             }
         } catch (error: any) {
-            let errorMessage = `Git Baseline failed: ${error.message}`;
             if (error.message.includes('fatal: not a git repository')) {
-                errorMessage = 'This is not a Git repository. Please initialize it first. Refer to the README for guidance.';
+                const openReadme = 'Open README Guide';
+                vscode.window.showErrorMessage(
+                    'This is not a Git repository. Please initialize it first to use the baseline feature.',
+                    openReadme
+                ).then(selection => {
+                    if (selection === openReadme) {
+                        const workspaceRoot = this.getWorkspaceRoot();
+                        if (workspaceRoot) {
+                            const readmePath = path.join(workspaceRoot, 'src', 'Artifacts', 'README.md');
+                            vscode.workspace.openTextDocument(vscode.Uri.file(readmePath)).then(doc => {
+                                vscode.window.showTextDocument(doc);
+                            });
+                        }
+                    }
+                });
+                // Don't send a failure message, as the UI pop-up is the feedback
+                return; 
             }
-            result = { success: false, message: errorMessage };
+            result = { success: false, message: `Git Baseline failed: ${error.message}` };
         }
         serverIpc.sendToClient(ServerToClientChannel.NotifyGitOperationResult, result);
     }
@@ -27036,7 +27069,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C183 (Implement full workflow)
+// Updated on: C184 (Fix stuck baseline highlight)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './view.scss';
@@ -27162,7 +27195,7 @@ const App = () => {
     const handleResetHistory = () => { clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {}); };
     const handleExportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestExportHistory, {});
     const handleImportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestImportHistory, {});
-    const handleGitBaseline = () => { const commitMessage = `DCE Baseline: Cycle ${currentCycle} - ${cycleTitle || 'Untitled'}`; clientIpc.sendToServer(ClientToServerChannel.RequestGitBaseline, { commitMessage }); };
+    const handleGitBaseline = () => { const commitMessage = `DCE Baseline: Cycle ${currentCycle} - ${cycleTitle || 'New Cycle'}`; clientIpc.sendToServer(ClientToServerChannel.RequestGitBaseline, { commitMessage }); };
     const handleGitRestore = () => { clientIpc.sendToServer(ClientToServerChannel.RequestGitRestore, {}); };
     const handleFileSelectionToggle = (filePath: string) => { const currentTabId = activeTab.toString(); const compositeKeyForCurrent = `${currentTabId}:::${filePath}`; setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); let existingKey: string | undefined; for (const key of newSet) if (key.endsWith(`:::${filePath}`)) { existingKey = key; break; } if (existingKey) { if (existingKey === compositeKeyForCurrent) newSet.delete(existingKey); else { newSet.delete(existingKey); newSet.add(compositeKeyForCurrent); } } else newSet.add(compositeKeyForCurrent); return newSet; }); };
     const handleSelectAllFilesToggle = () => { if (!activeTabData?.parsedContent) return; const allFilesForTab = activeTabData.parsedContent.filesUpdated.map(fp => `${activeTab}:::${fp}`); const isAllSelected = allFilesForTab.every(key => selectedFilesForReplacement.has(key)); setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); if (isAllSelected) allFilesForTab.forEach(key => newSet.delete(key)); else allFilesForTab.forEach(key => newSet.add(key)); return newSet; }); };
@@ -27183,7 +27216,7 @@ const App = () => {
         <div className="pc-header"><div className="pc-toolbar"><button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button><button onClick={handleGeneratePrompt} title="Generate prompt.md" className={workflowStep === 'awaitingGeneratePrompt' ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button><button onClick={handleLogState} title="Log Current State"><VscBug/></button><button onClick={handleGlobalParseToggle} className={`${isParsedMode ? 'active' : ''} ${workflowStep === 'awaitingParse' ? 'workflow-highlight' : ''}`}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} /></div></div>
         <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''} extraHeaderContent={totalPromptCostDisplay}>
             <CycleNavigator currentCycle={currentCycle} maxCycle={maxCycle} cycleTitle={cycleTitle} isNewCycleButtonDisabled={isNewCycleButtonDisabled} onCycleChange={handleCycleChange} onNewCycle={handleNewCycle} onTitleChange={(title) => { setCycleTitle(title); }} onDeleteCycle={handleDeleteCycle} onResetHistory={handleResetHistory} onExportHistory={handleExportHistory} onImportHistory={handleImportHistory} onGitBaseline={handleGitBaseline} onGitRestore={handleGitRestore} workflowStep={workflowStep} />
-            <ContextInputs cycleContext={cycleContext} ephemeralContext={ephemeralContext} cycleContextTokens={cycleContextTokens} ephemeralContextTokens={ephemeralContextTokens} onCycleContextChange={onCycleContextChange} onEphemeralContextChange={onEphemeralContextChange} onContextKeyDown={handleContextKeyDown} cycleContextHeight={cycleContextHeight} onCycleContextHeightChange={setCycleContextHeight} ephemeralContextHeight={ephemeralContextHeight} currentCycle={currentCycle} workflowStep={workflowStep} />
+            <ContextInputs cycleContext={cycleContext} ephemeralContext={ephemeralContext} cycleContextTokens={cycleContextTokens} ephemeralContextTokens={ephemeralContextTokens} onCycleContextChange={onCycleContextChange} onEphemeralContextChange={onEphemeralContextChange} onContextKeyDown={handleContextKeyDown} cycleContextHeight={cycleContextHeight} onCycleContextHeightChange={setCycleContextHeight} ephemeralContextHeight={ephemeralContextHeight} onEphemeralContextHeightChange={setEphemeralContextHeight} currentCycle={currentCycle} workflowStep={workflowStep} />
         </CollapsibleSection>
         <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} onSortToggle={handleSortToggle} workflowStep={workflowStep} />
         <div className="tab-content">
@@ -27903,6 +27936,14 @@ export async function activate(context: vscode.ExtensionContext) {
             createOrShowParallelCopilotPanel(context);
         }));
         registerViews(context);
+
+        // Auto-open PCPP on first load
+        const isFresh = (await Services.historyService.getLatestCycle()).cycleId === 0;
+        if (isFresh && vscode.workspace.workspaceFolders && vscode.workspace.workspaceFolders.length > 0) {
+            Services.loggerService.log("Fresh environment, automatically opening Parallel Co-Pilot Panel.");
+            vscode.commands.executeCommand('dce.showParallelCopilot');
+        }
+
     } catch (error: any) {
         Services.loggerService.error(`CRITICAL - Error during activation: ${error.message}`);
         vscode.window.showErrorMessage("Data Curation Environment failed to activate.");

@@ -77,6 +77,14 @@ export async function activate(context: vscode.ExtensionContext) {
             createOrShowParallelCopilotPanel(context);
         }));
         registerViews(context);
+
+        // Auto-open PCPP on first load
+        const isFresh = (await Services.historyService.getLatestCycle()).cycleId === 0;
+        if (isFresh && vscode.workspace.workspaceFolders && vscode.workspace.workspaceFolders.length > 0) {
+            Services.loggerService.log("Fresh environment, automatically opening Parallel Co-Pilot Panel.");
+            vscode.commands.executeCommand('dce.showParallelCopilot');
+        }
+
     } catch (error: any) {
         Services.loggerService.error(`CRITICAL - Error during activation: ${error.message}`);
         vscode.window.showErrorMessage("Data Curation Environment failed to activate.");
