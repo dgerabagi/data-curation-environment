@@ -1,21 +1,21 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-01T19:27:22.850Z
+  Date Generated: 2025-09-01T20:04:41.141Z
   ---
   Total Files: 168
-  Approx. Tokens: 447813
+  Approx. Tokens: 448051
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (239424 tokens)
-2. src\Artifacts\A11. DCE - Regression Case Studies.md (10020 tokens)
+2. src\Artifacts\A11. DCE - Regression Case Studies.md (10023 tokens)
 3. src\Artifacts\A0. DCE Master Artifact List.md (7189 tokens)
-4. src\client\views\parallel-copilot.view\view.tsx (7016 tokens)
+4. src\client\views\parallel-copilot.view\view.tsx (7020 tokens)
 5. src\client\views\parallel-copilot.view\view.scss (5158 tokens)
 6. src\backend\services\prompt.service.ts (4908 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4429 tokens)
-8. src\backend\services\file-operation.service.ts (4095 tokens)
+8. src\backend\services\file-operation.service.ts (4181 tokens)
 9. src\client\views\context-chooser.view\view.tsx (4079 tokens)
 10. src\client\views\context-chooser.view\view.scss (3708 tokens)
 
@@ -30,7 +30,7 @@
 8. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
 9. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
 10. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
-11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 350 - Chars: 40080 - Tokens: 10020
+11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 349 - Chars: 40089 - Tokens: 10023
 12. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5710 - Tokens: 1428
 13. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
 14. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
@@ -92,8 +92,8 @@
 70. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1806 - Tokens: 452
 71. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 47 - Chars: 3537 - Tokens: 885
 72. src\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3311 - Tokens: 828
-73. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 3809 - Tokens: 953
-74. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 57 - Chars: 5834 - Tokens: 1459
+73. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 3762 - Tokens: 941
+74. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 58 - Chars: 6179 - Tokens: 1545
 75. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
 76. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 43 - Chars: 2874 - Tokens: 719
 77. src\Artifacts\A73. DCE - GitService Plan.md - Lines: 44 - Chars: 2548 - Tokens: 637
@@ -123,7 +123,7 @@
 101. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
 102. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
 103. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
-104. src\backend\services\file-operation.service.ts - Lines: 344 - Chars: 16380 - Tokens: 4095
+104. src\backend\services\file-operation.service.ts - Lines: 344 - Chars: 16723 - Tokens: 4181
 105. src\backend\services\file-tree.service.ts - Lines: 276 - Chars: 14221 - Tokens: 3556
 106. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12820 - Tokens: 3205
 107. src\backend\services\git.service.ts - Lines: 102 - Chars: 5013 - Tokens: 1254
@@ -157,17 +157,17 @@
 135. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 84 - Chars: 3486 - Tokens: 872
 136. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
 137. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-138. src\client\views\parallel-copilot.view\on-message.ts - Lines: 109 - Chars: 5021 - Tokens: 1256
+138. src\client\views\parallel-copilot.view\on-message.ts - Lines: 109 - Chars: 5129 - Tokens: 1283
 139. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 92 - Chars: 4340 - Tokens: 1085
 140. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 28 - Chars: 1213 - Tokens: 304
 141. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 28 - Chars: 1283 - Tokens: 321
 142. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 28 - Chars: 1184 - Tokens: 296
 143. src\client\views\parallel-copilot.view\view.scss - Lines: 903 - Chars: 20629 - Tokens: 5158
 144. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-145. src\client\views\parallel-copilot.view\view.tsx - Lines: 159 - Chars: 28064 - Tokens: 7016
+145. src\client\views\parallel-copilot.view\view.tsx - Lines: 159 - Chars: 28077 - Tokens: 7020
 146. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
-147. src\common\ipc\channels.enum.ts - Lines: 89 - Chars: 4750 - Tokens: 1188
-148. src\common\ipc\channels.type.ts - Lines: 89 - Chars: 6738 - Tokens: 1685
+147. src\common\ipc\channels.enum.ts - Lines: 89 - Chars: 4838 - Tokens: 1210
+148. src\common\ipc\channels.type.ts - Lines: 89 - Chars: 6826 - Tokens: 1707
 149. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 150. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 151. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
@@ -1139,7 +1139,7 @@ To enhance the data curation process, it is critical for the user to have immedi
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C185 (Update Stuck Baseline RCA)
+# Updated on: C186 (Update Stuck Baseline RCA again)
 
 - **Key/Value for A0:**
 - **Description:** Documents recurring bugs, their root causes, and codified solutions to prevent future regressions during development.
@@ -1156,14 +1156,13 @@ This document serves as a living record of persistent or complex bugs that have 
 ### Case Study 021: Stuck `Baseline` Highlight in Animated Workflow
 
 -   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/backend/services/git.service.ts`
--   **Cycles Observed:** C8, C9, C10
--   **Symptom:** In the animated workflow, after the user selects a response, the `Baseline (Commit)` button is correctly highlighted. After the user clicks it and the baseline is successfully created, the highlight remains on the `Baseline` button and does not advance to the next step in the workflow (e.g., "Select All" in the Associated Files list).
--   **Root Cause Analysis (RCA):** The frontend UI, which manages the `workflowStep` state, had no way of knowing when the backend Git operation was successfully completed. The `git.service.ts` method was a "fire-and-forget" operation from the frontend's perspective. It showed a `vscode.window.showInformationMessage` (a UI side-effect from the backend), but it did not send a structured success/failure message back to the webview client. The frontend's state machine was therefore never triggered to advance to the next step. Subsequent fixes attempted to send an IPC message back, but the frontend handler was either not receiving it or not acting on it correctly, failing to update the `workflowStep` state.
--   **Codified Solution & Best Practice:** Backend services that perform actions triggered by the UI must provide a clear, awaitable response back to the client. For critical user feedback, the frontend should also trigger a confirmation message.
+-   **Cycles Observed:** C8, C9, C10, C11
+-   **Symptom:** In the animated workflow, after the user selects a response, the `Baseline (Commit)` button is correctly highlighted. After the user clicks it and the baseline is successfully created (confirmed via logs and Git status), the highlight remains on the `Baseline` button and does not advance to the next step (`Select All`).
+-   **Root Cause Analysis (RCA):** The frontend UI, which manages the `workflowStep` state, had no reliable way of knowing when the backend Git operation was successfully completed. The `git.service.ts` method was a "fire-and-forget" operation from the frontend's perspective. It showed a UI side-effect from the backend (a VS Code notification), but it did not send a structured success/failure message back to the webview client that the state machine could act upon. Even after an IPC message (`NotifyGitOperationResult`) was implemented, the frontend handler was either not receiving it, not firing correctly due to a stale closure, or not correctly updating the `workflowStep` state. The state update is asynchronous and must be handled correctly in React.
+-   **Codified Solution & Best Practice:** Backend services that perform actions triggered by the UI must provide a clear, awaitable response back to the client. The frontend must have a robust listener for this response that reliably updates its state.
     1.  **Backend (`git.service.ts`):** The `handleGitBaselineRequest` method must send a specific IPC message (`NotifyGitOperationResult`) back to the PCPP frontend upon completion with a `{ success, message }` payload.
-    2.  **IPC (`on-message.ts`):** Ensure the IPC channel is correctly wired.
-    3.  **Frontend (`view.tsx`):** The frontend must have a message listener for `NotifyGitOperationResult`. When a success message is received and the current `workflowStep` is `'awaitingBaseline'`, it must immediately update the state to `'awaitingFileSelect'`.
-    4.  **User Feedback:** After successfully updating its state, the frontend should then send a `RequestShowInformationMessage` IPC message to the backend to trigger a "Baseline Successful" popup. This provides clear user feedback and confirms the success handler was executed.
+    2.  **Frontend (`view.tsx`):** The frontend must have a message listener for `NotifyGitOperationResult`. When a success message is received and the current `workflowStep` is `'awaitingBaseline'`, it must immediately and reliably call `setWorkflowStep('awaitingFileSelect')`. Adding detailed logging to this specific handler is critical for debugging.
+    3.  **Workflow Progression:** The rest of the workflow steps (`Select All` -> `Accept Selected` -> etc.) must be driven by subsequent user actions or state changes, each correctly transitioning the `workflowStep` state.
 
 ---
 
@@ -1270,7 +1269,7 @@ This document serves as a living record of persistent or complex bugs that have 
 -   **Artifacts Affected:** `file-operation.service.ts`, `parallel-copilot.view/on-message.ts`, `parallel-copilot.view/view.tsx`
 -   **Cycles Observed:** 135
 -   **Symptom:** In the Parallel Co-Pilot Panel, the "Associated Files" list shows a file that doesn't exist with a red `✗`. The user accepts this file into the workspace. The file is correctly created on the disk, but the UI in the PCPP does not update, and the icon remains a red `✗`.
--   **Root Cause Analysis (RCA):** The `fileExistenceMap` state, which controls the `✓`/`✗` icons, is only populated when the panel is parsed. The file write operation happens on the backend, and there was no mechanism to inform the PCPP frontend that the state of the file system (which it was displaying) had changed as a result of its own action. The file watcher correctly triggers a refresh for the *Context Chooser* view, but this does not affect the state of the separate *Parallel Co-Pilot* view.
+-   **Root Cause Analysis (RCA):** The `fileExistenceMap` state, which controls the `✓`/`✗` icons, is only populated when the panel is parsed. The file write operation happens on the backend, and there was no mechanism to inform the PCPP frontend that the state of the file system (which it was displaying) had changed as a result of its own action. The file watcher correctly triggers a refresh for the *Context Chooser* view, but this does not affect the state of the separate *Parallel Co-pilot* view.
 -   **Codified Solution & Best Practice:**
     1.  **Implement a Targeted Notification:** A new IPC channel, `ServerToClientChannel.FilesWritten`, was created.
     2.  **Backend Acknowledgment:** After the `file-operation.service` successfully writes files, it returns the list of affected paths to the `on-message.ts` handler.
@@ -5017,7 +5016,7 @@ The "Cycle Context" and "Ephemeral Context" text areas in the Parallel Co-Pilot 
 # Artifact A69: DCE - Animated UI Workflow Guide
 # Date Created: C169
 # Author: AI Model & Curator
-# Updated on: C185 (Confirm final workflow sequence)
+# Updated on: C186 (Finalize workflow sequence)
 
 ## 1. Overview & Goal
 
@@ -5065,7 +5064,7 @@ The highlighting will follow this specific sequence of user actions:
     *   **Highlight:** The **`Baseline (Commit)`** button pulses.
     *   **State-Aware Skip:** This step is skipped if the backend reports that the Git working tree is already clean.
 
-10. **Select Files for Acceptance:** User clicks `Baseline (Commit)` or the baseline step is skipped.
+10. **Select Files for Acceptance:** A successful baseline is created.
     *   **Highlight:** The "Associated Files" list panel and the **`Select All`** button within it pulse.
 
 11. **Accept Changes:** User checks one or more files in the "Associated Files" list.
@@ -5077,7 +5076,7 @@ The highlighting will follow this specific sequence of user actions:
 13. **Write Title:** User types into the "Cycle Context" `textarea`.
     *   **Highlight:** The **"Cycle Title"** input field pulses.
 
-14. **Generate Next Prompt:** User types into the "Cycle Title" input field.
+14. **Generate Next Prompt:** User types a bespoke "Cycle Title".
     *   **Highlight:** The **`Generate prompt.md`** button pulses.
 
 15. **Create New Cycle:** User clicks `Generate prompt.md`.
@@ -5088,13 +5087,13 @@ The highlighting will follow this specific sequence of user actions:
 # Artifact A70: DCE - Git-Integrated Testing Workflow Plan
 # Date Created: C169
 # Author: AI Model & Curator
-# Updated on: C185 (Add requirement for success popup)
+# Updated on: C186 (Update post-baseline workflow step)
 
 ## 1. Overview & Goal
 
 A core part of the DCE workflow involves accepting an AI-generated response and testing it in the live workspace. If the response introduces bugs, the user must manually revert the changes. The goal of this feature is to automate this "test and revert" loop by deeply integrating with Git. This will provide a one-click method to create a baseline commit before testing and a one-click method to restore that baseline if the test fails.
 
-**Status (C185):** In Progress.
+**Status (C186):** In Progress.
 
 ## 2. User Stories
 
@@ -5104,6 +5103,7 @@ A core part of the DCE workflow involves accepting an AI-generated response and 
 | P2-GIT-02 | **Restore Baseline** | As a developer, after testing an AI response and finding issues, I want to click a "Restore Baseline" button to discard all changes, so I can quickly test a different response. | - A "Restore Baseline" button is available. <br> - Clicking it executes `git restore .`. <br> - The restore operation must **exclude** DCE-specific state files (e.g., `.vscode/dce_history.json`) to prevent data loss. |
 | P2-GIT-03 | **State-Aware Baseline** | As a developer, I don't want to be prompted to create a baseline if my project is already in a clean state, and I want clear feedback if I try to baseline an already-clean repository. | - Before highlighting the "Baseline" button, the extension checks the `git status`. <br> - If the working tree is clean, the "Baseline" step in the animated workflow is skipped. <br> - If the user manually clicks "Baseline" on a clean tree, a message like "Already baselined" is shown. |
 | P2-GIT-04 | **Guided Git Initialization** | As a new user who hasn't initialized a Git repository, when I click "Baseline," I want to see a clear error message that tells me what's wrong and guides me to the solution. | - If `git` is not initialized, clicking "Baseline" shows a `vscode.window.showErrorMessage`. <br> - The message explains that the folder is not a Git repository. <br> - The message includes an "Open README Guide" button that, when clicked, opens the project's `src/Artifacts/README.md` file, which contains instructions on how to run `git init`. |
+| P2-GIT-05 | **Post-Baseline Workflow** | As a developer, after a successful baseline is created, I want the animated guide to immediately advance to the next step, so I know what to do next. | - After a successful baseline commit, the animated workflow highlight immediately moves to the "Select All" button in the "Associated Files" list. |
 
 ## 3. Feasibility Analysis
 
@@ -27081,7 +27081,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C185 (Add logging and popup to baseline success handler)
+// Updated on: C186 (Implement full animated workflow state machine)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './view.scss';
@@ -27162,7 +27162,7 @@ const App = () => {
     React.useEffect(() => { debouncedSave(); debouncedCostRequest(); }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, tabCount, isSortedByTokens, pathOverrides, debouncedSave, debouncedCostRequest, cycleContextHeight, ephemeralContextHeight]);
     React.useEffect(() => { const handleVisibilityChange = () => { if (document.visibilityState === 'hidden') saveCurrentCycleState(); }; document.addEventListener('visibilitychange', handleVisibilityChange); return () => document.removeEventListener('visibilitychange', handleVisibilityChange); }, [saveCurrentCycleState]);
     const parseAllTabs = React.useCallback(() => { setTabs(prevTabs => { const allFilePaths = new Set<string>(); const updatedTabs = { ...prevTabs }; let needsUpdate = false; Object.values(updatedTabs).forEach(tabState => { if (tabState.rawContent && !tabState.parsedContent) { needsUpdate = true; const parsed = parseResponse(tabState.rawContent); tabState.parsedContent = parsed; parsed.filesUpdated.forEach(file => allFilePaths.add(file)); parsed.files.forEach(file => { const lang = path.extname(file.path).substring(1) || 'plaintext'; const id = `${file.path}::${file.content}`; clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id }); }); } else if (tabState.parsedContent) { tabState.parsedContent.filesUpdated.forEach(file => allFilePaths.add(file)); } }); if (allFilePaths.size > 0) clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) }); return needsUpdate ? updatedTabs : prevTabs; }); }, [clientIpc]);
-    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string) => { setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setCycleContextHeight(cycleData.cycleContextHeight || 100); setEphemeralContextHeight(cycleData.ephemeralContextHeight || 100); }; clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, ({ filePath, originalTokens, modifiedTokens, similarity }) => { setComparisonMetrics(prev => new Map(prev).set(filePath, { originalTokens, modifiedTokens, similarity })); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { logger.log(`[VIEW] Received NotifyGitOperationResult: ${JSON.stringify(result)}`); if (result.success && workflowStep === 'awaitingBaseline') { logger.log(`[VIEW] Advancing workflow from 'awaitingBaseline' to 'awaitingFileSelect'.`); setWorkflowStep('awaitingFileSelect'); clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); } else if (!result.success) { logger.error(`[VIEW] Git operation failed: ${result.message}`); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); }, [clientIpc]);
+    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string) => { setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setCycleContextHeight(cycleData.cycleContextHeight || 100); setEphemeralContextHeight(cycleData.ephemeralContextHeight || 100); }; clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, ({ filePath, originalTokens, modifiedTokens, similarity }) => { setComparisonMetrics(prev => new Map(prev).set(filePath, { originalTokens, modifiedTokens, similarity })); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { logger.log(`[VIEW] Received NotifyGitOperationResult: ${JSON.stringify(result)}`); if (result.success && workflowStep === 'awaitingBaseline') { logger.log(`[WORKFLOW] Baseline successful. Advancing from 'awaitingBaseline' to 'awaitingFileSelect'.`); setWorkflowStep('awaitingFileSelect'); clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); } else if (!result.success) { logger.error(`[VIEW] Git operation failed: ${result.message}`); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); }, [clientIpc]);
     React.useEffect(() => { if (isParsedMode) parseAllTabs(); }, [isParsedMode, tabs, parseAllTabs]);
     React.useEffect(() => { if (!selectedFilePath) return; const currentTabData = tabs[activeTab.toString()]; if (currentTabData?.parsedContent) { const fileExistsInTab = currentTabData.parsedContent.files.some(f => f.path === selectedFilePath); if (!fileExistsInTab) setSelectedFilePath(null); } }, [activeTab, tabs, selectedFilePath]);
 
