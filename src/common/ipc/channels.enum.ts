@@ -57,6 +57,7 @@ export enum ClientToServerChannel {
     RequestPromptCostBreakdown = "clientToServer.requestPromptCostBreakdown",
     RequestGitBaseline = "clientToServer.requestGitBaseline",
     RequestGitRestore = "clientToServer.requestGitRestore",
+    RequestGitStatus = "clientToServer.requestGitStatus",
 }
 
 export enum ServerToClientChannel {
@@ -83,4 +84,5 @@ export enum ServerToClientChannel {
     SendPromptCostEstimation = "serverToClient.sendPromptCostEstimation",
     SendPromptCostBreakdown = "serverToClient.sendPromptCostBreakdown",
     NotifyGitOperationResult = "serverToClient.notifyGitOperationResult",
+    SendGitStatus = "serverToClient.sendGitStatus",
 }

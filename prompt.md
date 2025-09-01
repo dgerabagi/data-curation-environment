@@ -11,7 +11,9 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 6 - create artifact for word wrap, add additional animated workflow steps, `Resp 1` highlighting seems stuck, enhance generate prompt.md based on currently viewed cycle, state-aware sort animation
+Current Cycle 8 - continue perfecting the animated workflow based on testing observations/feedback
+Cycle 7 - hide/remove numbered lines for cycle context/ephemeral, align readme/popupmessages/onboarding, align baseline button, make our perfect closed loop animation workflow
+Cycle 6 - create artifact for word wrap, add additional animated workflow steps, `Resp 1` highlighting seems stuck, enhance generate prompt.md based on currently viewed cycle, state-aware sort animation
 Cycle 5 - still cannot progress.
 Cycle 4 - cannot progress to the next cycle
 Cycle 3 - animated workflow, abc test for cycle context field, make important templates mandatory
@@ -614,6 +616,456 @@ transitioning between manual prompting method and using the dce we are creating 
 </M5. organized artifacts list>
 
 <M6. Cycles>
+
+<Cycle 8>
+okay, selected this response, fixed ts errors, now initating a new test:
+
+<test 1>
+1. create a new folder 'TowerDefense7', i use the `Open Folder` button to open it as the workspace.
+2. moment of truth... will the pcpp icon be highlighted? im about to click the spiral, drumroll please....
+3. big sad. it is not highlighted. big big sad. fourth time im requesting this `DCE: Open Parallel Co-Pilot` icon get highlighted if the pcpp is not currently open.
+4. i click the pcpp icon
+5. the text window is perfectly sized! great job. its animation looks great.
+6. nice, the readme looks great. im copying/pasting the prompt.md into 4 responses now...
+7. okay after `Resp 4` is pasted in, the `Parse All` is highlighted, good.
+8. okay after parsing, the `Sort` button is highlighted, good.
+9. okay after sorting, the response tab is highlighted, and so is `Select This Response`, nice.
+10. i click on the longest response, and then i click on `Select This Response`. `Baseline` is highlighted. the readme popup appears when i click it when uninitialized. the readme has good language in it. nice.
+11. i run `git init` in the pwd. i then click `Baseline` for a second time. i see this popup: `Successfully created baseline commit.`, however the `Baseline` button is still highlighted, as per my previous cycle description. i continued to describe what should happen next. please continue to implement our perfect closed-loop solution based on this new test feedback.
+</test 1>
+
+<DCE console logs (FYR)>
+[INFO] [11:52:45 AM] Congratulations, your extension "Data Curation Environment" is now active!
+[INFO] [11:52:45 AM] Services initializing...
+[INFO] [11:52:45 AM] Services initialized successfully.
+[INFO] [11:52:45 AM] Registering 5 commands.
+[INFO] [11:52:45 AM] Context Chooser view message handler initialized.
+[INFO] [11:52:45 AM] Starry Night syntax highlighter initialized.
+[INFO] [11:52:46 AM] [on-message] Received RequestInitialData. Forwarding to services.
+[INFO] [11:52:46 AM] handleWorkspaceFilesRequest started. forceRefresh=false
+[INFO] [11:52:46 AM] Building file tree from scratch.
+[INFO] [11:52:46 AM] buildTreeFromTraversal starting for root: c:\Projects\TowerDefense7
+[INFO] [11:52:46 AM] [SelectionService] No last selection found in state.
+[INFO] [11:52:46 AM] buildTreeFromTraversal finished. Root node has 0 children.
+[INFO] [11:52:46 AM] File tree built. Sending to client.
+[INFO] [11:52:46 AM] handleWorkspaceFilesRequest finished.
+[INFO] [11:52:46 AM] Persisted current selection of 0 items.
+[INFO] [11:53:34 AM] Executing dce.openParallelCopilot command to open WebviewPanel.
+[INFO] [11:53:34 AM] Parallel Co-Pilot view message handler initialized.
+[INFO] [11:53:34 AM] HistoryService: getLatestCycle called.
+[INFO] [11:53:34 AM] Fresh environment detected. Returning Cycle 0.
+[INFO] [11:53:35 AM] [SelectionService] No last selection found in state.
+[INFO] [11:53:35 AM] Project scope saved.
+[INFO] [11:53:35 AM] [SelectionService] No last selection found in state.
+[INFO] [11:53:35 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.vscode
+[INFO] [11:53:35 AM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense7/.vscode/dce_history.json
+[INFO] [11:53:35 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.vscode/dce_history.json
+[INFO] [11:53:35 AM] Persisted current selection of 1 items.
+[INFO] [11:53:37 AM] [SelectionService] Found 1 paths in persisted state. Validating...
+[INFO] [11:53:37 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.vscode
+[INFO] [11:53:37 AM] [SelectionService] Returning 1 valid paths.
+[INFO] [11:53:37 AM] Persisted current selection of 1 items.
+[INFO] [11:54:21 AM] [SelectionService] Found 1 paths in persisted state. Validating...
+[INFO] [11:54:21 AM] [SelectionService] Returning 1 valid paths.
+[INFO] [11:54:21 AM] Project scope saved.
+[INFO] [11:54:21 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.vscode/dce_history.json
+[INFO] [11:54:21 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.vscode/dce_history.json
+[INFO] [11:54:23 AM] [SelectionService] Found 1 paths in persisted state. Validating...
+[INFO] [11:54:23 AM] [SelectionService] Returning 1 valid paths.
+[INFO] [11:54:23 AM] Project scope saved.
+[INFO] [11:54:23 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.vscode/dce_history.json
+[INFO] [11:54:23 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.vscode/dce_history.json
+[INFO] [11:55:54 AM] [SelectionService] Found 1 paths in persisted state. Validating...
+[INFO] [11:55:54 AM] [SelectionService] Returning 1 valid paths.
+[INFO] [11:55:54 AM] Project scope saved.
+[INFO] [11:55:55 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.vscode/dce_history.json
+[INFO] [11:55:55 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.vscode/dce_history.json
+[INFO] [11:56:04 AM] Generating Cycle 0 prompt.md file...
+[INFO] [11:56:04 AM] Project scope saved.
+[INFO] [11:56:04 AM] Created src/Artifacts/README.md for the new project.
+[INFO] [11:56:04 AM] Successfully generated Cycle 0 prompt.md file.
+[INFO] [11:56:04 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.vscode/dce_history.json
+[INFO] [11:56:04 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.vscode/dce_history.json
+[INFO] [11:56:04 AM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense7/prompt.md
+[INFO] [11:56:04 AM] [SelectionService] Found 1 paths in persisted state. Validating...
+[INFO] [11:56:04 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.vscode/dce_history.json
+[INFO] [11:56:04 AM] [SelectionService] Returning 1 valid paths.
+[INFO] [11:56:04 AM] Persisted current selection of 2 items.
+[INFO] [11:56:04 AM] [SelectionService] Found 2 paths in persisted state. Validating...
+[INFO] [11:56:04 AM] [SelectionService] Returning 2 valid paths.
+[INFO] [11:56:04 AM] Persisted current selection of 4 items.
+[INFO] [11:56:05 AM] HistoryService: saving data for cycle 1.
+[WARN] [11:56:05 AM] [WebView] [TreeView] Could not find ref for active file: c:/Projects/TowerDefense7/prompt.md
+[WARN] [11:56:05 AM] [WebView] [TreeView] Could not find ref for active file: c:/Projects/TowerDefense7/src/Artifacts/README.md
+[INFO] [11:56:05 AM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [11:56:05 AM] handleWorkspaceFilesRequest started. forceRefresh=true
+[INFO] [11:56:05 AM] Building file tree from scratch.
+[INFO] [11:56:05 AM] buildTreeFromTraversal starting for root: c:\Projects\TowerDefense7
+[INFO] [11:56:05 AM] [SelectionService] Found 4 paths in persisted state. Validating...
+[INFO] [11:56:05 AM] [SelectionService] Returning 4 valid paths.
+[INFO] [11:56:05 AM] Persisted current selection of 4 items.
+[INFO] [11:56:05 AM] buildTreeFromTraversal finished. Root node has 2 children.
+[INFO] [11:56:05 AM] File tree built. Sending to client.
+[INFO] [11:56:05 AM] handleWorkspaceFilesRequest finished.
+[INFO] [11:56:05 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.vscode/dce_history.json
+[INFO] [11:56:05 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.vscode/dce_history.json
+[INFO] [11:57:26 AM] HistoryService: getLatestCycle called.
+[INFO] [11:57:26 AM] Latest cycle found: 1
+[INFO] [11:57:26 AM] [CONTEXT-HIGHLIGHT] Received request for context ID: cycle-context-1
+[INFO] [11:57:26 AM] [CONTEXT-HIGHLIGHT] Received request for context ID: ephemeral-context-1
+[INFO] [11:57:27 AM] [SelectionService] Found 4 paths in persisted state. Validating...
+[INFO] [11:57:27 AM] [SelectionService] Returning 4 valid paths.
+[INFO] [11:57:27 AM] HistoryService: saving data for cycle 1.
+[INFO] [11:57:27 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.vscode/dce_history.json
+[INFO] [11:57:27 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.vscode/dce_history.json
+[INFO] [11:57:58 AM] [SelectionService] Found 4 paths in persisted state. Validating...
+[INFO] [11:57:58 AM] [SelectionService] Returning 4 valid paths.
+[INFO] [11:57:58 AM] HistoryService: saving data for cycle 1.
+[INFO] [11:57:58 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.vscode/dce_history.json
+[INFO] [11:57:58 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.vscode/dce_history.json
+[INFO] [11:58:04 AM] [SelectionService] Found 4 paths in persisted state. Validating...
+[INFO] [11:58:04 AM] [SelectionService] Returning 4 valid paths.
+[INFO] [11:58:04 AM] HistoryService: saving data for cycle 1.
+[INFO] [11:58:04 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.vscode/dce_history.json
+[INFO] [11:58:04 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.vscode/dce_history.json
+[INFO] [11:58:10 AM] [SelectionService] Found 4 paths in persisted state. Validating...
+[INFO] [11:58:10 AM] [SelectionService] Returning 4 valid paths.
+[INFO] [11:58:11 AM] HistoryService: saving data for cycle 1.
+[INFO] [11:58:11 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.vscode/dce_history.json
+[INFO] [11:58:11 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.vscode/dce_history.json
+[INFO] [11:58:16 AM] [SelectionService] Found 4 paths in persisted state. Validating...
+[INFO] [11:58:16 AM] [SelectionService] Returning 4 valid paths.
+[INFO] [11:58:16 AM] HistoryService: saving data for cycle 1.
+[INFO] [11:58:16 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.vscode/dce_history.json
+[INFO] [11:58:16 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.vscode/dce_history.json
+[INFO] [11:58:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A0: Tower[...]
+[INFO] [11:58:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A1: Tower[...]
+[INFO] [11:58:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A3: Tower[...]
+[INFO] [11:58:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A7: Tower[...]
+[INFO] [11:58:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A14: Towe[...]
+[INFO] [11:58:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A0: Tower[...]
+[INFO] [11:58:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A1: Tower[...]
+[INFO] [11:58:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A3: Tower[...]
+[INFO] [11:58:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A7: Tower[...]
+[INFO] [11:58:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A14: Towe[...]
+[INFO] [11:58:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A0: Tower[...]
+[INFO] [11:58:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A1: Tower[...]
+[INFO] [11:58:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A3: Tower[...]
+[INFO] [11:58:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A7: Tower[...]
+[INFO] [11:58:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A14: Towe[...]
+[INFO] [11:58:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A0: Tower[...]
+[INFO] [11:58:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A1: Tower[...]
+[INFO] [11:58:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A3: Tower[...]
+[INFO] [11:58:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A7: Tower[...]
+[INFO] [11:58:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A14: Towe[...]
+[INFO] [11:58:42 AM] [File Existence] Received request to check paths: ["src/Artifacts/TowerDefense-A0-Master-Artifact-List.md","src/Artifacts/TowerDefense-A1-Project-Vision-and-Goals.md","src/Artifacts/TowerDefense-A3-Technical-Scaffolding-Plan.md","src/Artifacts/TowerDefense-A7-Dev-and-Testing-Guide.md","src/Artifacts/TowerDefense-A14-GitHub-Repository-Setup-Guide.md","src/Artifacts/TowerGuard-A0-Master-Artifact-List.md","src/Artifacts/TowerGuard-A1-Project-Vision-and-Goals.md","src/Artifacts/TowerGuard-A3-Technical-Scaffolding-Plan.md","src/Artifacts/TowerGuard-A7-Dev-and-Testing-Guide.md","src/Artifacts/TowerGuard-A14-GitHub-Repository-Setup-Guide.md","src/Artifacts/Tower-Defense-A0-Master-Artifact-List.md","src/Artifacts/Tower-Defense-A1-Project-Vision-and-Goals.md","src/Artifacts/Tower-Defense-A3-Technical-Scaffolding-Plan.md","src/Artifacts/Tower-Defense-A7-Dev-and-Testing-Guide.md","src/Artifacts/Tower-Defense-A14-GitHub-Repository-Setup-Guide.md","src/Artifacts/A14. TowerDefense - GitHub Repository Setup Guide.md"]
+[INFO] [11:58:42 AM] [File Existence] Received request to check paths: ["src/Artifacts/TowerDefense-A0-Master-Artifact-List.md","src/Artifacts/TowerDefense-A1-Project-Vision-and-Goals.md","src/Artifacts/TowerDefense-A3-Technical-Scaffolding-Plan.md","src/Artifacts/TowerDefense-A7-Dev-and-Testing-Guide.md","src/Artifacts/TowerDefense-A14-GitHub-Repository-Setup-Guide.md","src/Artifacts/TowerGuard-A0-Master-Artifact-List.md","src/Artifacts/TowerGuard-A1-Project-Vision-and-Goals.md","src/Artifacts/TowerGuard-A3-Technical-Scaffolding-Plan.md","src/Artifacts/TowerGuard-A7-Dev-and-Testing-Guide.md","src/Artifacts/TowerGuard-A14-GitHub-Repository-Setup-Guide.md","src/Artifacts/Tower-Defense-A0-Master-Artifact-List.md","src/Artifacts/Tower-Defense-A1-Project-Vision-and-Goals.md","src/Artifacts/Tower-Defense-A3-Technical-Scaffolding-Plan.md","src/Artifacts/Tower-Defense-A7-Dev-and-Testing-Guide.md","src/Artifacts/Tower-Defense-A14-GitHub-Repository-Setup-Guide.md","src/Artifacts/A14. TowerDefense - GitHub Repository Setup Guide.md"]
+[INFO] [11:58:43 AM] [SelectionService] Found 4 paths in persisted state. Validating...
+[INFO] [11:58:43 AM] [SelectionService] Returning 4 valid paths.
+[INFO] [11:58:43 AM] HistoryService: saving data for cycle 1.
+[INFO] [11:58:43 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.vscode/dce_history.json
+[INFO] [11:58:43 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.vscode/dce_history.json
+[INFO] [11:58:56 AM] [SelectionService] Found 4 paths in persisted state. Validating...
+[INFO] [11:58:56 AM] [SelectionService] Returning 4 valid paths.
+[INFO] [11:58:56 AM] HistoryService: saving data for cycle 1.
+[INFO] [11:58:56 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.vscode/dce_history.json
+[INFO] [11:58:56 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.vscode/dce_history.json
+[INFO] [11:59:36 AM] Executing Git Status check.
+[ERROR] [11:59:36 AM] Git command error: Command failed: git status --porcelain
+fatal: not a git repository (or any of the parent directories): .git
+
+[INFO] [11:59:37 AM] [SelectionService] Found 4 paths in persisted state. Validating...
+[INFO] [11:59:37 AM] [SelectionService] Returning 4 valid paths.
+[INFO] [11:59:37 AM] HistoryService: saving data for cycle 1.
+[INFO] [11:59:37 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.vscode/dce_history.json
+[INFO] [11:59:37 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.vscode/dce_history.json
+[INFO] [11:59:49 AM] Executing Git Baseline with message: "DCE Baseline: Cycle 1 - New Cycle"
+[ERROR] [11:59:49 AM] Git command error: Command failed: git status --porcelain
+fatal: not a git repository (or any of the parent directories): .git
+
+[INFO] [12:00:45 PM] [SelectionService] Found 4 paths in persisted state. Validating...
+[INFO] [12:00:45 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.git
+[INFO] [12:00:45 PM] [SelectionService] Returning 4 valid paths.
+[INFO] [12:00:45 PM] Persisted current selection of 5 items.
+[INFO] [12:00:46 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense7/.git/HEAD
+[INFO] [12:00:46 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.git/HEAD
+[INFO] [12:00:46 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense7/.git/config
+[INFO] [12:00:46 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.git/config
+[INFO] [12:00:46 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense7/.git/description
+[INFO] [12:00:46 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.git/description
+[INFO] [12:00:46 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense7/.git/hooks
+[INFO] [12:00:46 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.git/hooks
+[INFO] [12:00:46 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense7/.git/hooks/applypatch-msg.sample
+[INFO] [12:00:46 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.git/hooks/applypatch-msg.sample
+[INFO] [12:00:46 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense7/.git/hooks/commit-msg.sample
+[INFO] [12:00:46 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.git/hooks/commit-msg.sample
+[INFO] [12:00:46 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense7/.git/hooks/fsmonitor-watchman.sample
+[INFO] [12:00:46 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.git/hooks/fsmonitor-watchman.sample
+[INFO] [12:00:46 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense7/.git/hooks/post-update.sample
+[INFO] [12:00:46 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.git/hooks/post-update.sample
+[INFO] [12:00:46 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense7/.git/hooks/pre-applypatch.sample
+[INFO] [12:00:46 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.git/hooks/pre-applypatch.sample
+[INFO] [12:00:46 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense7/.git/hooks/pre-commit.sample
+[INFO] [12:00:46 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.git/hooks/pre-commit.sample
+[INFO] [12:00:46 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense7/.git/hooks/pre-merge-commit.sample
+[INFO] [12:00:46 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.git/hooks/pre-merge-commit.sample
+[INFO] [12:00:46 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense7/.git/hooks/pre-push.sample
+[INFO] [12:00:46 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.git/hooks/pre-push.sample
+[INFO] [12:00:46 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense7/.git/hooks/pre-rebase.sample
+[INFO] [12:00:46 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.git/hooks/pre-rebase.sample
+[INFO] [12:00:46 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense7/.git/hooks/pre-receive.sample
+[INFO] [12:00:46 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.git/hooks/pre-receive.sample
+[INFO] [12:00:46 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense7/.git/hooks/prepare-commit-msg.sample
+[INFO] [12:00:46 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.git/hooks/prepare-commit-msg.sample
+[INFO] [12:00:46 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense7/.git/hooks/push-to-checkout.sample
+[INFO] [12:00:46 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.git/hooks/push-to-checkout.sample
+[INFO] [12:00:46 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense7/.git/hooks/sendemail-validate.sample
+[INFO] [12:00:46 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.git/hooks/sendemail-validate.sample
+[INFO] [12:00:46 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense7/.git/hooks/update.sample
+[INFO] [12:00:46 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.git/hooks/update.sample
+[INFO] [12:00:46 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense7/.git/info
+[INFO] [12:00:46 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.git/info
+[INFO] [12:00:46 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense7/.git/info/exclude
+[INFO] [12:00:46 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.git/info/exclude
+[INFO] [12:00:46 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense7/.git/refs
+[INFO] [12:00:46 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.git/refs
+[INFO] [12:00:46 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense7/.git/refs/heads
+[INFO] [12:00:46 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.git/refs/heads
+[INFO] [12:00:46 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense7/.git/refs/tags
+[INFO] [12:00:46 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.git/refs/tags
+[INFO] [12:00:46 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.git/tA5InIw
+[INFO] [12:00:47 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [12:00:47 PM] handleWorkspaceFilesRequest started. forceRefresh=true
+[INFO] [12:00:47 PM] Building file tree from scratch.
+[INFO] [12:00:47 PM] buildTreeFromTraversal starting for root: c:\Projects\TowerDefense7
+[INFO] [12:00:47 PM] [SelectionService] Found 5 paths in persisted state. Validating...
+[INFO] [12:00:47 PM] [SelectionService] Returning 5 valid paths.
+[INFO] [12:00:47 PM] Persisted current selection of 5 items.
+[INFO] [12:00:47 PM] buildTreeFromTraversal finished. Root node has 2 children.
+[INFO] [12:00:47 PM] File tree built. Sending to client.
+[INFO] [12:00:47 PM] handleWorkspaceFilesRequest finished.
+[INFO] [12:00:49 PM] HistoryService: getLatestCycle called.
+[INFO] [12:00:49 PM] Latest cycle found: 1
+[INFO] [12:00:49 PM] [CONTEXT-HIGHLIGHT] Received request for context ID: cycle-context-1
+[INFO] [12:00:49 PM] [CONTEXT-HIGHLIGHT] Received request for context ID: ephemeral-context-1
+[INFO] [12:00:49 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A0: Tower[...]
+[INFO] [12:00:49 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A1: Tower[...]
+[INFO] [12:00:49 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A3: Tower[...]
+[INFO] [12:00:49 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A7: Tower[...]
+[INFO] [12:00:49 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A14: Towe[...]
+[INFO] [12:00:49 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A0: Tower[...]
+[INFO] [12:00:49 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A1: Tower[...]
+[INFO] [12:00:49 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A3: Tower[...]
+[INFO] [12:00:49 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A7: Tower[...]
+[INFO] [12:00:49 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A14: Towe[...]
+[INFO] [12:00:49 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A0: Tower[...]
+[INFO] [12:00:49 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A1: Tower[...]
+[INFO] [12:00:49 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A3: Tower[...]
+[INFO] [12:00:49 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A7: Tower[...]
+[INFO] [12:00:49 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A14: Towe[...]
+[INFO] [12:00:49 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A0: Tower[...]
+[INFO] [12:00:49 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A1: Tower[...]
+[INFO] [12:00:49 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A3: Tower[...]
+[INFO] [12:00:49 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A7: Tower[...]
+[INFO] [12:00:49 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A14: Towe[...]
+[INFO] [12:00:49 PM] [File Existence] Received request to check paths: ["src/Artifacts/TowerDefense-A0-Master-Artifact-List.md","src/Artifacts/TowerDefense-A1-Project-Vision-and-Goals.md","src/Artifacts/TowerDefense-A3-Technical-Scaffolding-Plan.md","src/Artifacts/TowerDefense-A7-Dev-and-Testing-Guide.md","src/Artifacts/TowerDefense-A14-GitHub-Repository-Setup-Guide.md","src/Artifacts/TowerGuard-A0-Master-Artifact-List.md","src/Artifacts/TowerGuard-A1-Project-Vision-and-Goals.md","src/Artifacts/TowerGuard-A3-Technical-Scaffolding-Plan.md","src/Artifacts/TowerGuard-A7-Dev-and-Testing-Guide.md","src/Artifacts/TowerGuard-A14-GitHub-Repository-Setup-Guide.md","src/Artifacts/Tower-Defense-A0-Master-Artifact-List.md","src/Artifacts/Tower-Defense-A1-Project-Vision-and-Goals.md","src/Artifacts/Tower-Defense-A3-Technical-Scaffolding-Plan.md","src/Artifacts/Tower-Defense-A7-Dev-and-Testing-Guide.md","src/Artifacts/Tower-Defense-A14-GitHub-Repository-Setup-Guide.md","src/Artifacts/A14. TowerDefense - GitHub Repository Setup Guide.md"]
+[INFO] [12:00:49 PM] [File Existence] Received request to check paths: ["src/Artifacts/TowerDefense-A0-Master-Artifact-List.md","src/Artifacts/TowerDefense-A1-Project-Vision-and-Goals.md","src/Artifacts/TowerDefense-A3-Technical-Scaffolding-Plan.md","src/Artifacts/TowerDefense-A7-Dev-and-Testing-Guide.md","src/Artifacts/TowerDefense-A14-GitHub-Repository-Setup-Guide.md","src/Artifacts/TowerGuard-A0-Master-Artifact-List.md","src/Artifacts/TowerGuard-A1-Project-Vision-and-Goals.md","src/Artifacts/TowerGuard-A3-Technical-Scaffolding-Plan.md","src/Artifacts/TowerGuard-A7-Dev-and-Testing-Guide.md","src/Artifacts/TowerGuard-A14-GitHub-Repository-Setup-Guide.md","src/Artifacts/Tower-Defense-A0-Master-Artifact-List.md","src/Artifacts/Tower-Defense-A1-Project-Vision-and-Goals.md","src/Artifacts/Tower-Defense-A3-Technical-Scaffolding-Plan.md","src/Artifacts/Tower-Defense-A7-Dev-and-Testing-Guide.md","src/Artifacts/Tower-Defense-A14-GitHub-Repository-Setup-Guide.md","src/Artifacts/A14. TowerDefense - GitHub Repository Setup Guide.md"]
+[INFO] [12:00:49 PM] Executing Git Status check.
+[INFO] [12:00:50 PM] [SelectionService] Found 5 paths in persisted state. Validating...
+[INFO] [12:00:50 PM] HistoryService: saving data for cycle 1.
+[INFO] [12:00:50 PM] [SelectionService] Returning 5 valid paths.
+[INFO] [12:00:50 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.vscode/dce_history.json
+[INFO] [12:00:50 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.vscode/dce_history.json
+[INFO] [12:01:00 PM] Executing Git Baseline with message: "DCE Baseline: Cycle 1 - New Cycle"
+[WARN] [12:01:00 PM] Git command stderr: warning: in the working copy of '.vscode/dce_history.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'prompt.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/Artifacts/README.md', LF will be replaced by CRLF the next time Git touches it
+
+[INFO] [12:01:00 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense7/.git/index.lock
+[INFO] [12:01:00 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.git/index.lock
+[INFO] [12:01:00 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense7/.git/COMMIT_EDITMSG
+[INFO] [12:01:00 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.git/COMMIT_EDITMSG
+[INFO] [12:01:00 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense7/.git/index
+[INFO] [12:01:00 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.git/index
+[INFO] [12:01:00 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense7/.git/logs
+[INFO] [12:01:00 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.git/logs
+[INFO] [12:01:00 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense7/.git/logs/HEAD
+[INFO] [12:01:00 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.git/logs/HEAD
+[INFO] [12:01:00 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense7/.git/logs/refs
+[INFO] [12:01:00 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.git/logs/refs
+[INFO] [12:01:00 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense7/.git/logs/refs/heads
+[INFO] [12:01:00 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.git/logs/refs/heads
+[INFO] [12:01:00 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense7/.git/logs/refs/heads/master
+[INFO] [12:01:00 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.git/logs/refs/heads/master
+[INFO] [12:01:00 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense7/.git/refs/heads/master
+[INFO] [12:01:00 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.git/refs/heads/master
+[INFO] [12:01:00 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense7/.git/index.lock
+[INFO] [12:04:14 PM] --- GENERATING STATE LOG ---
+[INFO] [12:04:14 PM] 
+========================= CYCLE STATE DUMP =========================
+{
+  "FRONTEND_STATE": {
+    "currentCycle": 1,
+    "maxCycle": 1,
+    "isNewCycleButtonDisabled": true,
+    "conditions": {
+      "hasTitle": false,
+      "hasContext": false,
+      "hasSelectedResponse": true
+    }
+  },
+  "BACKEND_HISTORY_FILE": {
+    "version": 1,
+    "cycles": [
+      {
+        "cycleId": 1,
+        "timestamp": "2025-09-01T17:04:09.878Z",
+        "title": "New Cycle",
+        "cycleContext": "",
+        "ephemeralContext": "",
+        "responses": {
+          "1": {
+            "content": "resp 1 test"
+          },
+          "2": {
+            "content": "resp 2 test"
+          },
+          "3": {
+            "content": "resp 3 test"
+          },
+          "4": {
+            "content": "resp 4 test"
+          }
+        },
+        "isParsedMode": true,
+        "leftPaneWidth": 33,
+        "selectedResponseId": "3",
+        "selectedFilesForReplacement": [],
+        "tabCount": 4,
+        "isSortedByTokens": true,
+        "pathOverrides": {},
+        "cycleContextHeight": 100,
+        "ephemeralContextHeight": 100
+      }
+    ],
+    "projectScope": "i want to make a tower defense game."
+  }
+}
+======================================================================
+
+
+</DCE console logs (FYR)>
+<previous cycle 7 summary of actions>
+<summary>
+I have analyzed your comprehensive feedback from Cycle 7. My course of action is to implement the full, closed-loop animated workflow you've detailed. This involves removing the complex line numbering feature for now, aligning the onboarding experience by updating the `README.md` and associated pop-up messages, refining the state-aware behavior of the `Baseline` button, and implementing the precise sequence of UI highlights to guide the user through the entire process.
+
+This is a significant feature implementation that will touch multiple parts of the application, from backend services to frontend components and state management.
+
+</summary>
+
+<course_of_action>
+1.  **Documentation First (Codifying the "Perfect Loop"):**
+    *   I will thoroughly update **`A69. DCE - Animated UI Workflow Guide.md`** to reflect the complete, detailed sequence from Cycle 7's feedback. This includes the initial onboarding steps (animating the PCPP icon, welcome page text field, generate button) and the full main loop from baselining to creating a new cycle.
+    *   I will update **`A72. DCE - README for Artifacts.md`** with the new content you requested. This includes adding instructions for initializing a Git repository via the terminal and text to "close the loop" after the initial `prompt.md` is generated.
+    *   I will update **`A70. DCE - Git-Integrated Testing Workflow Plan.md`** to describe the new state-aware behavior of the Baseline button (e.g., checking `git status` for a clean working tree).
+
+2.  **Backend Logic & Messaging (`git.service.ts`, `prompt.service.ts`):**
+    *   **`prompt.service.ts`:** I will modify the `generateCycle0Prompt` method. After creating `prompt.md`, it will now also programmatically open `src/Artifacts/README.md` in a new editor tab to guide the user.
+    *   **`git.service.ts`:**
+        *   I will create a new private method to check the git status by running `git status --porcelain`. This command provides a clean, scriptable output. If the output is empty, the working tree is clean.
+        *   The `handleGitBaselineRequest` method will be updated to first check this status. If the tree is already clean, it will return a specific message like "Already baselined."
+        *   The error message for "not a git repository" will be made more generic, pointing the user to the `README.md` for guidance instead of a specific artifact number.
+
+3.  **Frontend UI & Workflow Implementation (`view.tsx`, `view.scss`, `NumberedTextarea.tsx`, `OnboardingView.tsx`):**
+    *   **Remove Line Numbers:** In `NumberedTextarea.tsx`, I will add a `showLineNumbers` prop (defaulting to true) and update the component to conditionally render the line number gutter. In `ContextInputs.tsx`, I will pass `showLineNumbers={false}`.
+    *   **Onboarding UI:**
+        *   In `OnboardingView.tsx` and `view.scss`, I will adjust the padding/width of the `.onboarding-textarea` to prevent the scrollbar from obscuring the highlight animation.
+    *   **Implement Full Workflow State Machine (`view.tsx`):**
+        *   I will expand the `workflowStep` state machine to include all new states from `A69`.
+        *   The logic will now correctly transition from the onboarding text input to the "Generate" button.
+        *   I will implement the full main loop: `Baseline` -> `Select All` -> `Accept Selected` -> `Cycle Context` -> `Cycle Title` -> `Generate prompt.md` -> `+ New Cycle`.
+        *   The state transitions will be driven by user actions (clicks, text input) and backend responses (e.g., a successful baseline).
+
+</course_of_action>
+</previous cycle 7 summary of actions>
+</Cycle 8>
+
+<Cycle 7>
+okay thanks for the analysis on the word wrap. can we please remove the line numbers? this will resolve the complex issue for now. we will not pursue it. perhaps later when there is more of a reason to implement a more serious code editor, we can look into that angle of attack. for now, lets hide the line numbering for our `Cycle Context` and `Ephemeral Context`.
+
+running a new test:
+
+1. created a folder, `TowerDefense6`.
+2. Opened Folder with DC FTV button `Open Folder`.
+3. clicked on the spiral to open the DCE now that the workspace is loaded.
+4. my `DCE: Open Parallel Co-Pilot` icon is not animated. I asked for this twice now. this is the third time im requesting such a simple addition, 'if not open, animate'. 
+5. after clicking the pcpp pane, half of this request has been fulfilled. the text field to input the project plan is highlighted and animated, however as i predicted, the right-side is cut off, its obscured, hidden from view by the overlapping scroll bar. please reduce the horizontal width of this text field to compensate for this very clearly articulated prediction that is now an observation.
+6. after inputting text into this field, the expectation is that the `Generate Intitial Artifacts Prompt` be highlighted. this is not the case. i am still seeing the text field animated. it should update once something is input. the user will write until they feel comfortable, we just need to show them what is the next step at this point, once they're ready.
+7. after clicking `Generate Initial Artifacts Prompt`, the prompt.md opened correctly. i have a great idea, can we also open the README file at this time that we generate? we can write down at the bottom, 'at this point, if the readme just opened, you're ready to submit your first prompt! simply copy/paste...' blah blah, just a sentence or two to 'close the loop'. by opening both the prompt.md, and the readme, and adding these instructions to the readme, we effectively close the loop on this initial stage because honestly everything after that is pretty cookie-cutter repeatable process.
+8. i am now copying/pasting the prompt.md into four aistudio conversations in parallel.
+9. pasting in the first one correctly incremented the `Resp 1` -> `Resp 2` animation. good.
+10. after pasting all 4 in, the `Parse All` highlighted, good.
+11. after parsing, the `Sort` is highlighted, good.
+12. after sorting, the `Select This Response` and the response tabs are highlighted, good.
+13. after clicking `Select This Response`, the baseline button gets highlighted, good.
+13.1. in addition, the changes you have made have encouraged the model to produce our github repository setup guide, which is perfect for the user, as when i click baseline, i see this:
+```
+Git Baseline failed: This is not a Git repository. Please run `git init` in your terminal. See A9 for guidance.
+Please refer to the 'A9. DCE - GitHub Repository Setup Guide.md' artifact in your project.
+```
+13.2. the problem is that this is too specific. the misalignment is in the artifact number, and the fact that the file names are not an identical match. if we losen the reference to just say something along the lines of 'the generated github repository setup guide', that should suffice. i will note that these four they all came back as A14, but again i think its better if we just reference the guide by name and not by number, if that makes sense. otherwise, the pop-up is working as expected, and the user does have the github guide at the moment in time that its suggested they use it. so this is working great, just tidy up the language.
+13.3. in our readme, we can also add guiding language to this point as well. in the read me, tell them to send it off, then the first thing they should do to completely integreate their workflow would be to inititalize their git, etc. and that will be a perfect closed loop i think. even suggesting the user open a terminal in vs code to manage this, single pane > multiple panes.
+14. okay, since i already have git installed, the only thing i need to do myself is write `git init` in my workspace pwd. i just did that. it initialized. now i am ready to click `Baseline`.
+15. once i clicked `Baseline`, as it is currently highlighted step, i see this: `Successfully created baseline commit.`, however `Baseline` is still highlighted.
+15.1. can we make it such that if the current git status is `nothing to commit, working tree clean`, then we can consider ourselves baselined?
+15.2. can we --i just realized, instead of `Open Git Setup Guide` button in the error, lets have it point to the readme, and put this static content in there that they need to know. thats actually perfect.-- as i was saying, can we make this more clear, i am already baselined, and i clicked it again, and i see this `Git Baseline failed: Command failed: git commit -m "DCE Baseline: Cycle 1 - New Cycle"`, can we make that language more clear? you're currently already baselined' or whatever?
+16. regardless, our baseline button ought to be state self-aware similar to the sort button. if already 'baselined', or once clicked and a baseline is established, then we can highlight the `Select All` button, so that the user then selects all currently selected responses `Associated Files`.
+17. once one or more associated files are selected, we can then highlight the `Accept Selected` button.
+18. once accepted, the Cycle context ought to be highlighted next. then the title, then the `Generate prompt.md` button.
+19. once the `Generate prompt.md` button is clicked, then its the `+` buttons turn to get highlighted. once that is clicked, the next cycle is created, and the process starts at the `Resp 1` -> `Resp N`, and its basically rinse and repeat. at that point, minus those initial onboarding steps.
+
+all and all, great work tbh, we are very close.
+
+this cycle, please remove the numbered lines, align our readme and our toast/popup/error messages to point to the readme, also refine around the baseline button, as discussed, then finally tie up any loose ends so that our animated workflow is a perfect closed loop solution for our users.
+
+<previous cycle 6 summary of actions>
+<summary>
+I have analyzed your comprehensive feedback from Cycle 6. My course of action is to address all five points, which involve creating new documentation to explain a complex technical challenge, implementing several enhancements to the animated workflow, fixing critical bugs with UI highlighting, and improving the `prompt.md` generation logic.
+
+First, I will create a new documentation artifact to explain why handling line numbers for word-wrapped text is a complex problem, as you requested. Then, I will update our existing animated workflow guide to incorporate all of your detailed testing feedback.
+
+With the documentation aligned, I will move to the implementation. I will fix the critical bug causing the `Resp 1` -> `Resp N` animated highlight to get stuck by making the state detection more robust. I will also fix the `prompt.md` generation to be aware of the currently viewed cycle. Finally, I will implement all the new animated workflow steps from your tests and make the sort animation state-aware.
+
+</summary>
+
+<course_of_action>
+1.  **Documentation First (Explaining Complexity & Updating Workflow):**
+    *   I will create a new artifact, **`A76. DCE - Word Wrap Line Numbering Challenges.md`**, to formally explain the technical complexities of implementing line numbers that respect word wrap. It will discuss the difference between logical lines (`\n`) and visual lines, the need for DOM measurement, and why it's a non-trivial feature.
+    *   I will thoroughly update **`A69. DCE - Animated UI Workflow Guide.md`** to incorporate the new, more detailed sequence outlined in your two tests. This includes the initial onboarding steps (animating the PCPP icon, welcome page text field, generate button) and the interaction with `prompt.md`.
+    *   I will add a new case study to **`A11. DCE - Regression Case Studies.md`** for the "Stuck `Resp N` Highlighting" bug, codifying its root cause and the more robust solution.
+    *   I will update **`A0. DCE Master Artifact List.md`** to include the new `A76` artifact.
+
+2.  **Fix Stuck `Resp N` Highlighting (`view.tsx`):**
+    *   The `useEffect` hook that manages the `workflowStep` for pasting responses is flawed. I will rewrite it to be more robust. The new logic will simply check if `tabs[i].rawContent` has a length greater than zero for each tab from 1 to `tabCount`. This removes the dependency on complex state and directly checks the user's action, fixing the bug where the highlight gets stuck on `Resp 1`.
+
+3.  **Enhance `prompt.md` Generation (`prompt.service.ts` & `view.tsx`):**
+    *   To fix the issue where the generated prompt includes future cycles, I will modify the `RequestCreatePromptFile` IPC channel to accept the `currentCycle` number from the frontend.
+    *   The `handleGeneratePrompt` function in `view.tsx` will now pass the `currentCycle` state.
+    *   The `_generateCyclesContent` method in `prompt.service.ts` will be updated to filter the history, only including cycles up to and including the `currentCycle` passed from the frontend.
+
+4.  **Implement New Animated Workflow Steps (`view.tsx`, `OnboardingView.tsx`, `view.scss`):**
+    *   I will add the new workflow states to the state machine in `view.tsx` (e.g., `awaitingProjectScope`, `awaitingGenerateInitialPrompt`).
+    *   I will implement the UI logic to highlight the PCPP icon, the text field in `OnboardingView.tsx`, and the "Generate Initial Artifacts Prompt" button.
+    *   I will fix the styling for the onboarding `textarea` in `view.scss`, adding padding and adjusting its width to match the button below it, ensuring the highlight animation is fully visible.
+    *   I will make the "Sort" button's animation state-aware by adding a condition to the workflow logic that skips the `awaitingSort` step if `isSortedByTokens` is already true.
+
+</course_of_action>
+
+
+</previous cycle 6 summary of actions>
+</Cycle 7>
+
+
 <Cycle 6>
 okay, so if the word wrap is truly a complex issue, then can you please create a documentation artifact which would outline its solution? is there not a library or some code thats open source we can get our hands on? i dont get why you insist that its complex. the easy solution would be to simply remove the numbered line but i dont want to do that. the numbers are extremely helpful to users. please plan this out more thoroughly so that i can then help implement it.
 
@@ -665,174 +1117,6 @@ please do the following:
 4. make it so that whichever cycle is being viewed when generate prompt is clicked, that the prompt cycles are generated up to that cycle as the current cycle and does not include cycles after that.
 5. ensure that the sort animation is state aware and skips over that animation if the sort button had already been selected.
 
-<DCE logs (FYR)>
-[INFO] [10:02:16 AM] Congratulations, your extension "Data Curation Environment" is now active!
-[INFO] [10:02:16 AM] Services initializing...
-[INFO] [10:02:16 AM] Services initialized successfully.
-[INFO] [10:02:16 AM] Registering 5 commands.
-[INFO] [10:02:16 AM] Context Chooser view message handler initialized.
-[INFO] [10:02:16 AM] Starry Night syntax highlighter initialized.
-[INFO] [10:02:16 AM] [on-message] Received RequestInitialData. Forwarding to services.
-[INFO] [10:02:16 AM] handleWorkspaceFilesRequest started. forceRefresh=false
-[INFO] [10:02:16 AM] Building file tree from scratch.
-[INFO] [10:02:16 AM] buildTreeFromTraversal starting for root: c:\Projects\TowerDefense5
-[INFO] [10:02:16 AM] [SelectionService] No last selection found in state.
-[INFO] [10:02:16 AM] buildTreeFromTraversal finished. Root node has 0 children.
-[INFO] [10:02:16 AM] File tree built. Sending to client.
-[INFO] [10:02:16 AM] handleWorkspaceFilesRequest finished.
-[INFO] [10:02:16 AM] Persisted current selection of 0 items.
-[INFO] [10:03:03 AM] Executing dce.openParallelCopilot command to open WebviewPanel.
-[INFO] [10:03:03 AM] Parallel Co-Pilot view message handler initialized.
-[INFO] [10:03:04 AM] HistoryService: getLatestCycle called.
-[INFO] [10:03:04 AM] Fresh environment detected. Returning Cycle 0.
-[INFO] [10:03:05 AM] [SelectionService] No last selection found in state.
-[INFO] [10:03:05 AM] Project scope saved.
-[INFO] [10:03:05 AM] [SelectionService] No last selection found in state.
-[INFO] [10:03:05 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode
-[INFO] [10:03:05 AM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense5/.vscode/dce_history.json
-[INFO] [10:03:05 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
-[INFO] [10:03:05 AM] Persisted current selection of 1 items.
-[INFO] [10:03:05 AM] [SelectionService] Found 1 paths in persisted state. Validating...
-[INFO] [10:03:05 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode
-[INFO] [10:03:05 AM] [SelectionService] Returning 1 valid paths.
-[INFO] [10:03:05 AM] Persisted current selection of 1 items.
-[INFO] [10:05:49 AM] [SelectionService] Found 1 paths in persisted state. Validating...
-[INFO] [10:05:49 AM] [SelectionService] Returning 1 valid paths.
-[INFO] [10:05:49 AM] Project scope saved.
-[INFO] [10:05:49 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
-[INFO] [10:05:49 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
-[INFO] [10:05:59 AM] Generating Cycle 0 prompt.md file...
-[INFO] [10:05:59 AM] Project scope saved.
-[INFO] [10:05:59 AM] Created src/Artifacts/README.md for the new project.
-[INFO] [10:05:59 AM] Successfully generated Cycle 0 prompt.md file.
-[INFO] [10:05:59 AM] HistoryService: saving data for cycle 1.
-[INFO] [10:05:59 AM] [CONTEXT-HIGHLIGHT] Received request for context ID: cycle-context-1
-[INFO] [10:05:59 AM] [CONTEXT-HIGHLIGHT] Received request for context ID: ephemeral-context-1
-[INFO] [10:05:59 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
-[INFO] [10:05:59 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
-[INFO] [10:05:59 AM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense5/prompt.md
-[INFO] [10:05:59 AM] [SelectionService] Found 1 paths in persisted state. Validating...
-[INFO] [10:05:59 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
-[INFO] [10:05:59 AM] [SelectionService] Returning 1 valid paths.
-[INFO] [10:05:59 AM] Persisted current selection of 2 items.
-[INFO] [10:05:59 AM] [SelectionService] Found 2 paths in persisted state. Validating...
-[INFO] [10:05:59 AM] [SelectionService] Returning 2 valid paths.
-[INFO] [10:05:59 AM] Persisted current selection of 4 items.
-[INFO] [10:06:00 AM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[INFO] [10:06:00 AM] handleWorkspaceFilesRequest started. forceRefresh=true
-[INFO] [10:06:00 AM] Building file tree from scratch.
-[INFO] [10:06:00 AM] buildTreeFromTraversal starting for root: c:\Projects\TowerDefense5
-[INFO] [10:06:00 AM] [SelectionService] Found 4 paths in persisted state. Validating...
-[INFO] [10:06:00 AM] [SelectionService] Returning 4 valid paths.
-[INFO] [10:06:00 AM] Persisted current selection of 4 items.
-[INFO] [10:06:00 AM] buildTreeFromTraversal finished. Root node has 2 children.
-[INFO] [10:06:00 AM] File tree built. Sending to client.
-[INFO] [10:06:00 AM] handleWorkspaceFilesRequest finished.
-[INFO] [10:06:00 AM] [SelectionService] Found 4 paths in persisted state. Validating...
-[INFO] [10:06:00 AM] [SelectionService] Returning 4 valid paths.
-[INFO] [10:06:01 AM] HistoryService: saving data for cycle 1.
-[INFO] [10:06:01 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
-[INFO] [10:06:01 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
-[INFO] [10:06:54 AM] [SelectionService] Found 4 paths in persisted state. Validating...
-[INFO] [10:06:54 AM] [SelectionService] Returning 4 valid paths.
-[INFO] [10:06:55 AM] HistoryService: saving data for cycle 1.
-[INFO] [10:06:55 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
-[INFO] [10:06:55 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
-[INFO] [10:08:27 AM] [CONTEXT-HIGHLIGHT] Received request for context ID: cycle-context-1
-[INFO] [10:08:28 AM] [SelectionService] Found 4 paths in persisted state. Validating...
-[INFO] [10:08:28 AM] [SelectionService] Returning 4 valid paths.
-[INFO] [10:08:28 AM] HistoryService: saving data for cycle 1.
-[INFO] [10:08:28 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
-[INFO] [10:08:28 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
-[INFO] [10:08:31 AM] [CONTEXT-HIGHLIGHT] Received request for context ID: cycle-context-1
-[INFO] [10:08:32 AM] [CONTEXT-HIGHLIGHT] Received request for context ID: cycle-context-1
-[INFO] [10:08:32 AM] [CONTEXT-HIGHLIGHT] Received request for context ID: cycle-context-1
-[INFO] [10:08:33 AM] [SelectionService] Found 4 paths in persisted state. Validating...
-[INFO] [10:08:33 AM] HistoryService: saving data for cycle 1.
-[INFO] [10:08:33 AM] [SelectionService] Returning 4 valid paths.
-[INFO] [10:08:33 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
-[INFO] [10:08:33 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
-[INFO] [10:08:40 AM] [SelectionService] Found 4 paths in persisted state. Validating...
-[INFO] [10:08:40 AM] HistoryService: saving data for cycle 1.
-[INFO] [10:08:40 AM] [SelectionService] Returning 4 valid paths.
-[INFO] [10:08:40 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
-[INFO] [10:08:40 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
-[INFO] [10:12:15 AM] [SelectionService] Found 4 paths in persisted state. Validating...
-[INFO] [10:12:15 AM] HistoryService: saving data for cycle 1.
-[INFO] [10:12:15 AM] [SelectionService] Returning 4 valid paths.
-[INFO] [10:12:15 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
-[INFO] [10:12:15 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
-[INFO] [10:13:42 AM] [CONTEXT-HIGHLIGHT] Received request for context ID: ephemeral-context-1
-[INFO] [10:13:42 AM] [CONTEXT-HIGHLIGHT] Received request for context ID: ephemeral-context-1
-[INFO] [10:13:42 AM] [CONTEXT-HIGHLIGHT] Received request for context ID: ephemeral-context-1
-[INFO] [10:13:43 AM] [SelectionService] Found 4 paths in persisted state. Validating...
-[INFO] [10:13:43 AM] [SelectionService] Returning 4 valid paths.
-[INFO] [10:13:44 AM] HistoryService: saving data for cycle 1.
-[INFO] [10:13:44 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
-[INFO] [10:13:44 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
-[INFO] [10:13:45 AM] HistoryService: saving data for cycle 1.
-[INFO] [10:13:45 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
-[INFO] [10:13:45 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
-[INFO] [10:17:06 AM] [SelectionService] Found 4 paths in persisted state. Validating...
-[INFO] [10:17:06 AM] HistoryService: saving data for cycle 1.
-[INFO] [10:17:06 AM] [SelectionService] Returning 4 valid paths.
-[INFO] [10:17:06 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
-[INFO] [10:17:06 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
-[INFO] [10:17:09 AM] --- GENERATING STATE LOG ---
-[INFO] [10:17:09 AM] 
-========================= CYCLE STATE DUMP =========================
-{
-  "FRONTEND_STATE": {
-    "currentCycle": 1,
-    "maxCycle": 1,
-    "isNewCycleButtonDisabled": true,
-    "conditions": {
-      "hasTitle": false,
-      "hasContext": true,
-      "hasSelectedResponse": false
-    }
-  },
-  "BACKEND_HISTORY_FILE": {
-    "version": 1,
-    "cycles": [
-      {
-        "cycleId": 1,
-        "timestamp": "2025-09-01T15:17:06.512Z",
-        "title": "New Cycle",
-        "cycleContext": "test",
-        "ephemeralContext": "ddd",
-        "responses": {
-          "1": {
-            "content": "test"
-          },
-          "2": {
-            "content": ""
-          },
-          "3": {
-            "content": ""
-          },
-          "4": {
-            "content": ""
-          }
-        },
-        "isParsedMode": false,
-        "leftPaneWidth": 33,
-        "selectedResponseId": null,
-        "selectedFilesForReplacement": [],
-        "tabCount": 4,
-        "isSortedByTokens": false,
-        "pathOverrides": {},
-        "cycleContextHeight": 230,
-        "ephemeralContextHeight": 100
-      }
-    ],
-    "projectScope": "i want to make a tower defense game"
-  }
-}
-======================================================================
-
-
-</DCE logs (FYR)>
 <previous cycle 5 summary of actions>
 <summary>
 I have analyzed your feedback from Cycle 5. The primary issue is the inability to create a new cycle after deleting a previous one, which points to a state synchronization bug between the frontend and backend. Additionally, there are persistent usability issues with the context text areas, including a single-character input bug and incorrect line numbering for word-wrapped text.
@@ -1996,31 +2280,29 @@ asdf
 <M7. Flattened Repo>
 
 
-
-
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-01T15:17:49.069Z
+  Date Generated: 2025-09-01T16:13:15.657Z
   ---
-  Total Files: 166
-  Approx. Tokens: 442531
+  Total Files: 168
+  Approx. Tokens: 445579
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (239424 tokens)
-2. src\Artifacts\A11. DCE - Regression Case Studies.md (8593 tokens)
-3. src\Artifacts\A0. DCE Master Artifact List.md (7119 tokens)
-4. src\client\views\parallel-copilot.view\view.tsx (6947 tokens)
-5. src\client\views\parallel-copilot.view\view.scss (5160 tokens)
-6. src\backend\services\prompt.service.ts (4876 tokens)
+2. src\Artifacts\A11. DCE - Regression Case Studies.md (8943 tokens)
+3. src\Artifacts\A0. DCE Master Artifact List.md (7189 tokens)
+4. src\client\views\parallel-copilot.view\view.tsx (6882 tokens)
+5. src\client\views\parallel-copilot.view\view.scss (5163 tokens)
+6. src\backend\services\prompt.service.ts (4851 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4429 tokens)
 8. src\client\views\context-chooser.view\view.tsx (4035 tokens)
 9. src\backend\services\file-operation.service.ts (4021 tokens)
 10. src\client\views\context-chooser.view\view.scss (3708 tokens)
 
 <!-- Full File List -->
-1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 420 - Chars: 28473 - Tokens: 7119
+1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 424 - Chars: 28756 - Tokens: 7189
 2. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 3. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
 4. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
@@ -2030,7 +2312,7 @@ asdf
 8. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
 9. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
 10. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
-11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 312 - Chars: 34372 - Tokens: 8593
+11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 322 - Chars: 35772 - Tokens: 8943
 12. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5710 - Tokens: 1428
 13. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
 14. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
@@ -2092,7 +2374,7 @@ asdf
 70. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1806 - Tokens: 452
 71. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 47 - Chars: 3537 - Tokens: 885
 72. src\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3311 - Tokens: 828
-73. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 4105 - Tokens: 1027
+73. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 84 - Chars: 4943 - Tokens: 1236
 74. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 56 - Chars: 4403 - Tokens: 1101
 75. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
 76. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 33 - Chars: 2764 - Tokens: 691
@@ -2130,7 +2412,7 @@ asdf
 108. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4232 - Tokens: 1058
 109. src\backend\services\history.service.ts - Lines: 270 - Chars: 11310 - Tokens: 2828
 110. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-111. src\backend\services\prompt.service.ts - Lines: 374 - Chars: 19501 - Tokens: 4876
+111. src\backend\services\prompt.service.ts - Lines: 374 - Chars: 19402 - Tokens: 4851
 112. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 113. src\backend\services\services.ts - Lines: 40 - Chars: 1827 - Tokens: 457
 114. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
@@ -2158,16 +2440,16 @@ asdf
 136. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
 137. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 138. src\client\views\parallel-copilot.view\on-message.ts - Lines: 100 - Chars: 4558 - Tokens: 1140
-139. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 87 - Chars: 4132 - Tokens: 1033
+139. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 92 - Chars: 4350 - Tokens: 1088
 140. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 28 - Chars: 1213 - Tokens: 304
 141. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 28 - Chars: 1283 - Tokens: 321
 142. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 28 - Chars: 1184 - Tokens: 296
-143. src\client\views\parallel-copilot.view\view.scss - Lines: 903 - Chars: 20639 - Tokens: 5160
+143. src\client\views\parallel-copilot.view\view.scss - Lines: 903 - Chars: 20650 - Tokens: 5163
 144. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-145. src\client\views\parallel-copilot.view\view.tsx - Lines: 158 - Chars: 27788 - Tokens: 6947
+145. src\client\views\parallel-copilot.view\view.tsx - Lines: 167 - Chars: 27525 - Tokens: 6882
 146. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
 147. src\common\ipc\channels.enum.ts - Lines: 86 - Chars: 4556 - Tokens: 1139
-148. src\common\ipc\channels.type.ts - Lines: 86 - Chars: 6511 - Tokens: 1628
+148. src\common\ipc\channels.type.ts - Lines: 86 - Chars: 6523 - Tokens: 1631
 149. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 150. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 151. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
@@ -2186,12 +2468,14 @@ asdf
 164. webpack.config.js - Lines: 104 - Chars: 2873 - Tokens: 719
 165. src\Artifacts\A75. DCE - Text Area Component A-B-C Test Plan.md - Lines: 50 - Chars: 4761 - Tokens: 1191
 166. dist\Artifacts\A75. DCE - Text Area Component A-B-C Test Plan.md - Lines: 50 - Chars: 4761 - Tokens: 1191
+167. src\Artifacts\A76. DCE - Word Wrap Line Numbering Challenges.md - Lines: 61 - Chars: 4895 - Tokens: 1224
+168. dist\Artifacts\A76. DCE - Word Wrap Line Numbering Challenges.md - Lines: 61 - Chars: 4895 - Tokens: 1224
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C180 (Add A75 for Text Area testing)
+# Updated on: C181 (Add A76 for Word Wrap explanation)
 
 ## 1. Purpose
 
@@ -2524,6 +2808,10 @@ asdf
 ### A75. DCE - Text Area Component A-B-C Test Plan
 - **Description:** A plan to create a test harness for the `NumberedTextarea` component to diagnose and fix persistent scrolling and alignment bugs.
 - **Tags:** plan, process, debugging, troubleshooting, ui, ux, react
+
+### A76. DCE - Word Wrap Line Numbering Challenges
+- **Description:** Explains the technical complexity of implementing line numbers that accurately reflect visual word wrapping in a textarea component.
+- **Tags:** documentation, technical debt, ui, ux, word wrap, line numbers
 
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
@@ -3133,7 +3421,7 @@ To enhance the data curation process, it is critical for the user to have immedi
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C180 (Add cases for cycle management and text area focus bugs)
+# Updated on: C181 (Add case for stuck response highlighting)
 
 - **Key/Value for A0:**
 - **Description:** Documents recurring bugs, their root causes, and codified solutions to prevent future regressions during development.
@@ -3144,6 +3432,16 @@ To enhance the data curation process, it is critical for the user to have immedi
 This document serves as a living record of persistent or complex bugs that have recurred across multiple development cycles. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 020: Animated Highlighting Stuck on Response Tabs
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`
+-   **Cycles Observed:** C6
+-   **Symptom:** In the animated workflow, after the user generates the initial `prompt.md` file, the `Resp 1` tab is correctly highlighted. However, after pasting content into `Resp 1`, the highlight does not advance to `Resp 2`. The animation remains stuck on `Resp 1`.
+-   **Root Cause Analysis (RCA):** The `useEffect` hook responsible for advancing the workflow state was flawed. Its logic was too complex or had an incorrect dependency array, preventing it from reliably detecting changes to the `tabs` state object. A robust state machine should rely on simple, direct checks of the current state to determine the next step.
+-   **Codified Solution & Best Practice:** The solution is to refactor the `useEffect` hook that manages the `workflowStep`. The new logic should be a simple, clean state machine that directly checks the `rawContent` of each tab in sequence. For example, when the `workflowStep` is `'awaitingResponsePaste_1'`, the effect should check if `tabs['1'].rawContent` has content. If it does, it should immediately transition the state to `'awaitingResponsePaste_2'`, and so on. This makes the logic declarative and removes dependencies on complex, intermediate states, making the workflow transitions reliable.
 
 ---
 
@@ -6973,11 +7271,11 @@ The "Cycle Context" and "Ephemeral Context" text areas in the Parallel Co-Pilot 
 # Artifact A69: DCE - Animated UI Workflow Guide
 # Date Created: C169
 # Author: AI Model & Curator
-# Updated on: C179 (Revise workflow sequence based on Cycle 3 feedback)
+# Updated on: C181 (Incorporate detailed onboarding and prompt.md workflow steps)
 
 ## 1. Overview & Goal
 
-The Parallel Co-Pilot Panel (PCPP) has a powerful, multi-step workflow that may not be immediately obvious to new users. The goal of this feature is to implement a guided experience using subtle UI animations. These animations will highlight the next logical action the user should take, gently guiding them through the process from creating a new cycle to accepting a response.
+The Parallel Co-Pilot Panel (PCPP) has a powerful, multi-step workflow that may not be immediately obvious to new users. The goal of this feature is to implement a guided experience using subtle UI animations. These animations will highlight the next logical action the user should take, gently guiding them through the process from project creation to generating the next cycle's prompt.
 
 ## 2. User Story
 
@@ -6985,42 +7283,59 @@ The Parallel Co-Pilot Panel (PCPP) has a powerful, multi-step workflow that may 
 |---|---|---|
 | P2-WF-01 | **Guided Workflow** | As a new user, I want the UI to visually guide me through the steps of a development cycle, so I can learn the workflow intuitively. | - After a specific action is completed, the UI element for the next logical action is highlighted with a subtle animation (e.g., a pulsing blue glow). |
 
-## 3. The Animated Workflow Sequence (Cycle 3 Revision)
+## 3. The Animated Workflow Sequence (Cycle 6 Revision)
 
 The highlighting will follow this specific sequence of user actions:
 
-1.  **Start (New Project):** The user opens the PCPP for the first time in a new project.
-    *   **Highlight:** The **`Resp 1`** tab pulses (or the main response input area if only one is visible by default).
+### Onboarding / Cycle 0
+1.  **Start (No Workspace):** User opens VS Code with no folder open.
+    *   **Highlight:** The **DCE icon** in the Activity Bar pulses.
 
-2.  **Paste Responses:** The user pastes content into the response tabs.
-    *   **Highlight:** Once content is present in all available response tabs, the **`Parse All`** button pulses.
+2.  **Open PCPP (Welcome View):** User clicks the DCE icon, opening the PCPP to the "Welcome" / "Onboarding" view.
+    *   **Highlight:** The **Project Scope `textarea`** pulses.
 
-3.  **Parse Responses:** The user clicks `Parse All`. The panel enters Parsed Mode.
-    *   **Highlight:** If the `Sort` button is not active, the **`Sort`** button pulses.
+3.  **Input Project Scope:** User types their project plan into the `textarea`.
+    *   **Highlight:** The **`Generate Initial Artifacts Prompt`** button pulses.
 
-4.  **Sort and Review:** The user clicks `Sort` (or reviews responses).
-    *   **Highlight:** The **`Select This Response`** button pulses.
+4.  **Generate `prompt.md`:** User clicks the button. `prompt.md` is created. The view transitions to Cycle 1.
+    *   **Highlight (Future):** The `prompt.md` file in the native File Explorer would pulse. (This is a potential future feature requiring deeper VS Code API integration). For now, we will auto-open it.
+    *   **Auto-Action:** The `prompt.md` file is automatically opened in the editor.
+    *   **Highlight:** The **`Resp 1`** tab in the PCPP pulses.
 
-5.  **Select Response:** The user clicks `Select This Response` for one of the tabs.
+### Main Loop (Cycle 1+)
+5.  **Paste Responses:** The user takes the `prompt.md` content, gets responses from an LLM, and pastes them into the response tabs.
+    *   **Highlight:** The highlight moves sequentially from **`Resp 1`** to **`Resp 2`**, etc., as each `textarea` is filled.
+    *   **Trigger:** Once content is present in all available response tabs, the highlight moves to the next step.
+
+6.  **Parse Responses:**
+    *   **Highlight:** The **`Parse All`** button pulses.
+
+7.  **Sort Responses:** User clicks `Parse All`.
+    *   **Highlight:** If `isSortedByTokens` is false, the **`Sort`** button pulses. If it's already sorted, this step is skipped.
+
+8.  **Select a Response:** User reviews the responses.
+    *   **Highlight:** The **`Select This Response`** button on each tab pulses.
+
+9.  **Create Baseline:** User clicks `Select This Response`.
     *   **Highlight:** The **`Baseline (Commit)`** button pulses.
 
-6.  **Create Baseline:** The user clicks `Baseline (Commit)`.
+10. **Select Files for Acceptance:** User clicks `Baseline (Commit)`.
     *   **Highlight:** The "Associated Files" list panel and the **`Select All`** button within it pulse.
 
-7.  **Select Files:** The user checks one or more files in the "Associated Files" list.
+11. **Accept Changes:** User checks one or more files.
     *   **Highlight:** The **`Accept Selected`** button pulses.
 
-8.  **Accept Changes:** The user clicks `Accept Selected`. The workflow for this cycle's changes is essentially complete.
-    *   **Highlight:** The **"Cycle Context"** text area pulses, prompting the user to start documenting the next cycle.
+12. **Write Context:** User clicks `Accept Selected`.
+    *   **Highlight:** The **"Cycle Context"** `textarea` pulses.
 
-9.  **Write Context:** The user types into the "Cycle Context" text area.
+13. **Write Title:** User types into the "Cycle Context" `textarea`.
     *   **Highlight:** The **"Cycle Title"** input field pulses.
 
-10. **Write Title:** The user types into the "Cycle Title" input field.
+14. **Generate Next Prompt:** User types into the "Cycle Title" input field.
     *   **Highlight:** The **`Generate prompt.md`** button pulses.
 
-11. **Generate Prompt:** The user clicks `Generate prompt.md`.
-    *   **Highlight:** The **`[ + ]` (New Cycle)** button pulses, prompting the user to move to the next cycle.
+15. **Create New Cycle:** User clicks `Generate prompt.md`.
+    *   **Highlight:** The **`[ + ]` (New Cycle)** button pulses, completing the loop.
 
 ## 4. Technical Implementation Plan
 
@@ -7030,14 +7345,13 @@ The highlighting will follow this specific sequence of user actions:
 
 2.  **State Management (`view.tsx`):**
     *   A state variable will track the current step in the workflow: `const [workflowStep, setWorkflowStep] = useState<string>('start');`.
-    *   The state values will correspond to the sequence above (e.g., `'awaitingResponsePaste_1'`, `'awaitingParse'`, `'awaitingBaseline'`, `'awaitingCycleContext'`).
+    *   The state values will correspond to the sequence above (e.g., `'awaitingProjectScope'`, `'awaitingResponsePaste_1'`, `'awaitingParse'`).
 
-3.  **Conditional Class Application (`view.tsx`):**
+3.  **Conditional Class Application (`view.tsx`, `OnboardingView.tsx`):**
     *   Each UI element in the sequence will have its `className` updated to be conditional based on the `workflowStep` state.
-    *   Example: `className={`my-button ${workflowStep === 'awaitingParse' ? 'workflow-highlight' : ''}`}`.
 
 4.  **Logic (`useEffect` hooks in `view.tsx`):**
-    *   A series of `useEffect` hooks will monitor user actions (pasting content, clicking buttons, typing in fields) to update the `workflowStep` state accordingly.
+    *   A series of `useEffect` hooks will monitor user actions (pasting content, clicking buttons, typing in fields) to update the `workflowStep` state accordingly. The logic will be made robust to handle the transitions reliably.
 </file>
 
 <file path="src/Artifacts/A70. DCE - Git-Integrated Testing Workflow Plan.md">
@@ -24113,7 +24427,7 @@ export class LoggerService {
 </file>
 
 <file path="src/backend/services/prompt.service.ts">
-// Updated on: C180 (Focus log output on cycle management state)
+// Updated on: C181 (Use currentCycle for prompt generation)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -24174,7 +24488,6 @@ M7. Flattened Repo
             return numA - numB;
         });
 
-        // C179: Prioritize T14 and T7 by moving them to the front of the list if they exist.
         const priorityArtifacts = ['T14. Template - GitHub Repository Setup Guide.md', 'T7. Template - Development and Testing Guide.md'];
         priorityArtifacts.forEach(pa => {
             const index = templateFilenames.indexOf(pa);
@@ -24220,7 +24533,7 @@ ${staticContext.trim()}
         let cyclesContent = '<M6. Cycles>';
     
         for (const cycle of sortedHistory) {
-            if (cycle.cycleId === 0) continue; // Skip cycle 0 as it will be added last
+            if (cycle.cycleId === 0) continue;
             cyclesContent += `\n\n<Cycle ${cycle.cycleId}>\n`;
     
             if (cycle.cycleContext && cycle.cycleContext.trim()) {
@@ -24232,7 +24545,7 @@ ${staticContext.trim()}
             }
     
             const previousCycleId = cycle.cycleId - 1;
-            if (previousCycleId > 0) { // Don't generate summary for Cycle 0
+            if (previousCycleId > 0) {
                 const previousCycle = cycleMap.get(previousCycleId);
                 if (previousCycle) {
                     const summary = this.getPreviousCycleSummary(previousCycle);
@@ -24258,8 +24571,8 @@ ${staticContext.trim()}
         const fullHistoryFile = await Services.historyService.getFullHistory();
         const fullHistory: PcppCycle[] = fullHistoryFile.cycles;
         
-        const allCycles = [...fullHistory.filter(c => c.cycleId !== cycleData.cycleId), cycleData];
-        const sortedHistoryForOverview = allCycles.sort((a, b) => b.cycleId - a.cycleId);
+        const allCycles = fullHistory.filter(c => c.cycleId <= cycleData.cycleId);
+        const sortedHistoryForOverview = [...allCycles].sort((a, b) => b.cycleId - a.cycleId);
 
         let cycleOverview = '<M2. cycle overview>\n';
         cycleOverview += `Current Cycle ${cycleData.cycleId} - ${cycleData.title}\n`;
@@ -24382,7 +24695,7 @@ ${JSON.stringify(stateDump, null, 2)}
         const promptMdPath = path.join(rootPath, 'prompt.md');
 
         try {
-            Services.loggerService.log("Generating prompt.md file...");
+            Services.loggerService.log(`Generating prompt.md file for cycle ${currentCycle}...`);
             
             const lastSelection = await Services.selectionService.getLastSelection();
             let flattenedContent = '<!-- No files selected for flattening -->';
@@ -24406,13 +24719,12 @@ ${JSON.stringify(stateDump, null, 2)}
 
             const promptParts = await this.getPromptParts(currentCycleData, flattenedContent);
             
-            // Fix for bug #6: Ensure prompt tags wrap the entire content
             const promptContent = Object.values(promptParts).join('\n\n');
             const finalPrompt = `<prompt.md>\n\n${promptContent}\n\n</prompt.md>`;
 
             await fs.writeFile(promptMdPath, finalPrompt, 'utf-8');
-            vscode.window.showInformationMessage(`Successfully generated prompt.md.`);
-            Services.loggerService.log("Successfully generated prompt.md file.");
+            vscode.window.showInformationMessage(`Successfully generated prompt.md for Cycle ${currentCycle}.`);
+            Services.loggerService.log(`Successfully generated prompt.md file for Cycle ${currentCycle}.`);
 
             await Services.fileOperationService.handleOpenFileRequest(promptMdPath);
 
@@ -24463,6 +24775,8 @@ ${JSON.stringify(stateDump, null, 2)}
             Services.loggerService.log("Successfully generated Cycle 0 prompt.md file.");
             
             vscode.window.showInformationMessage(`Successfully generated initial prompt.md and created src/Artifacts/README.md`);
+            await Services.fileOperationService.handleOpenFileRequest(promptMdPath);
+
 
             const cycle1Data: PcppCycle = {
                 cycleId: 1,
@@ -27869,7 +28183,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
 <file path="src/client/views/parallel-copilot.view/OnboardingView.tsx">
 // src/client/views/parallel-copilot.view/OnboardingView.tsx
-// Updated on: C172 (No functional changes, header update only)
+// Updated on: C181 (Add workflow highlighting class)
 import * as React from 'react';
 import { VscRocket, VscArrowRight } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -27881,9 +28195,10 @@ interface OnboardingViewProps {
     onNavigateToCycle: (cycleId: number) => void;
     latestCycleId: number;
     onScopeChange: (scope: string) => void;
+    workflowStep: string | null;
 }
 
-const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope, onNavigateToCycle, latestCycleId, onScopeChange }) => {
+const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope, onNavigateToCycle, latestCycleId, onScopeChange, workflowStep }) => {
     const [projectScope, setProjectScope] = React.useState(initialProjectScope || '');
     const [isGenerating, setIsGenerating] = React.useState(false);
     const [promptGenerated, setPromptGenerated] = React.useState(false);
@@ -27899,7 +28214,7 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope, on
         if (projectScope.trim()) {
             setIsGenerating(true);
             logger.log("Sending request to generate Cycle 0 prompt and save project scope.");
-            onScopeChange(projectScope); // Ensure parent has the latest scope before IPC call
+            onScopeChange(projectScope); 
             clientIpc.sendToServer(ClientToServerChannel.RequestCreateCycle0Prompt, { projectScope });
             setTimeout(() => {
                 setIsGenerating(false);
@@ -27928,7 +28243,7 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope, on
                 }
             </p>
             <textarea
-                className="onboarding-textarea"
+                className={`onboarding-textarea ${workflowStep === 'awaitingProjectScope' ? 'workflow-highlight' : ''}`}
                 placeholder="e.g., I want to build a web application that allows users to track their daily habits. It should have a simple UI, user authentication, and a dashboard to visualize progress..."
                 value={projectScope}
                 onChange={handleScopeChange}
@@ -27939,7 +28254,11 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope, on
                     <VscArrowRight /> Return to Cycle {latestCycleId}
                 </button>
             ) : !promptGenerated ? (
-                <button className="styled-button" onClick={handleGenerate} disabled={!projectScope.trim() || isGenerating}>
+                <button 
+                    className={`styled-button ${workflowStep === 'awaitingGenerateInitialPrompt' ? 'workflow-highlight' : ''}`}
+                    onClick={handleGenerate} 
+                    disabled={!projectScope.trim() || isGenerating}
+                >
                     <VscRocket /> {isGenerating ? 'Generating...' : 'Generate Initial Artifacts Prompt'}
                 </button>
             ) : (
@@ -28052,7 +28371,7 @@ export default TestPane3;
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C179 (Fix NumberedTextarea alignment)
+// Updated on: C181 (Fix onboarding textarea width)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -28239,6 +28558,7 @@ body {
     font-family: var(--vscode-editor-font-family);
     font-size: var(--vscode-editor-font-size);
     resize: none;
+    padding-right: 15px; // Add padding to avoid scrollbar overlap
     &:focus {
         outline: 1px solid var(--vscode-focusBorder);
     }
@@ -28275,7 +28595,6 @@ body {
         background-color: var(--vscode-testing-iconPassed);
         color: var(--vscode-button-foreground);
 
-        // C177 Fix: Change text color on green banner
         .total-prompt-cost {
             color: var(--vscode-button-foreground);
         }
@@ -28971,7 +29290,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C180 (Fix state management bugs and remove test harness)
+// Updated on: C181 (Implement workflow fixes and enhancements)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -29052,7 +29371,7 @@ const App = () => {
     React.useEffect(() => { debouncedSave(); debouncedCostRequest(); }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, tabCount, isSortedByTokens, pathOverrides, debouncedSave, debouncedCostRequest, cycleContextHeight, ephemeralContextHeight]);
     React.useEffect(() => { const handleVisibilityChange = () => { if (document.visibilityState === 'hidden') saveCurrentCycleState(); }; document.addEventListener('visibilitychange', handleVisibilityChange); return () => document.removeEventListener('visibilitychange', handleVisibilityChange); }, [saveCurrentCycleState]);
     const parseAllTabs = React.useCallback(() => { setTabs(prevTabs => { const allFilePaths = new Set<string>(); const updatedTabs = { ...prevTabs }; let needsUpdate = false; Object.values(updatedTabs).forEach(tabState => { if (tabState.rawContent && !tabState.parsedContent) { needsUpdate = true; const parsed = parseResponse(tabState.rawContent); tabState.parsedContent = parsed; parsed.filesUpdated.forEach(file => allFilePaths.add(file)); parsed.files.forEach(file => { const lang = path.extname(file.path).substring(1) || 'plaintext'; const id = `${file.path}::${file.content}`; clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id }); }); } else if (tabState.parsedContent) { tabState.parsedContent.filesUpdated.forEach(file => allFilePaths.add(file)); } }); if (allFilePaths.size > 0) clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) }); return needsUpdate ? updatedTabs : prevTabs; }); }, [clientIpc]);
-    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string) => { setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setCycleContextHeight(cycleData.cycleContextHeight || 100); setEphemeralContextHeight(cycleData.ephemeralContextHeight || 100); }; clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, ({ filePath, originalTokens, modifiedTokens, similarity }) => { setComparisonMetrics(prev => new Map(prev).set(filePath, { originalTokens, modifiedTokens, similarity })); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, ({ success, message }) => { logger.log(`Git Operation: ${success ? 'SUCCESS' : 'FAILURE'} - ${message}`); if (success && workflowStep === 'awaitingBaseline') setWorkflowStep('awaitingFileSelect'); }); clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); }, [clientIpc]);
+    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string) => { setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setCycleContextHeight(cycleData.cycleContextHeight || 100); setEphemeralContextHeight(cycleData.ephemeralContextHeight || 100); }; clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, ({ filePath, originalTokens, modifiedTokens, similarity }) => { setComparisonMetrics(prev => new Map(prev).set(filePath, { originalTokens, modifiedTokens, similarity })); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, ({ success, message }) => { logger.log(`Git Operation: ${success ? 'SUCCESS' : 'FAILURE'} - ${message}`); if (success && workflowStep === 'awaitingBaseline') setWorkflowStep('awaitingFileSelect'); }); clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); }, [clientIpc]);
     React.useEffect(() => { if (isParsedMode) parseAllTabs(); }, [isParsedMode, tabs, parseAllTabs]);
     React.useEffect(() => { if (!selectedFilePath) return; const currentTabData = tabs[activeTab.toString()]; if (currentTabData?.parsedContent) { const fileExistsInTab = currentTabData.parsedContent.files.some(f => f.path === selectedFilePath); if (!fileExistsInTab) setSelectedFilePath(null); } }, [activeTab, tabs, selectedFilePath]);
 
@@ -29061,6 +29380,7 @@ const App = () => {
     
     // Workflow State Machine Logic
     React.useEffect(() => {
+        if (workflowStep === null) return;
         if (workflowStep === 'readyForNewCycle') return;
         if (workflowStep === 'awaitingGeneratePrompt') return;
         if (workflowStep === 'awaitingCycleTitle') { if (cycleTitle.trim() && cycleTitle.trim() !== 'New Cycle') { setWorkflowStep('awaitingGeneratePrompt'); } return; }
@@ -29072,7 +29392,15 @@ const App = () => {
         if (workflowStep === 'awaitingSort') { if (isSortedByTokens) { setWorkflowStep('awaitingResponseSelect'); } return; }
         if (workflowStep === 'awaitingParse') { if (isParsedMode) { setWorkflowStep(isSortedByTokens ? 'awaitingResponseSelect' : 'awaitingSort'); } return; }
         const waitingForPaste = workflowStep?.startsWith('awaitingResponsePaste');
-        if (waitingForPaste && workflowStep) { const nextTabToFill = parseInt(workflowStep.split('_') || '1', 10); if (tabs[nextTabToFill]?.rawContent?.trim()) { if (nextTabToFill < tabCount) { setWorkflowStep(`awaitingResponsePaste_${nextTabToFill + 1}`); } else { setWorkflowStep('awaitingParse'); } } return; }
+        if (waitingForPaste) {
+            for (let i = 1; i <= tabCount; i++) {
+                if (!tabs[i.toString()]?.rawContent?.trim()) {
+                    setWorkflowStep(`awaitingResponsePaste_${i}`);
+                    return;
+                }
+            }
+            setWorkflowStep('awaitingParse');
+        }
     }, [workflowStep, selectedFilesForReplacement, selectedResponseId, isSortedByTokens, isParsedMode, tabs, cycleContext, cycleTitle, tabCount]);
 
     const handleCycleChange = (e: React.MouseEvent | null, newCycle: number) => { e?.stopPropagation(); if (newCycle >= 0 && newCycle <= maxCycle) { if (currentCycle !== 0) saveCurrentCycleState(); setSelectedFilesForReplacement(new Set()); setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); setWorkflowStep(null); } };
@@ -29088,8 +29416,8 @@ const App = () => {
     const viewableContent = React.useMemo(() => { if (!selectedFilePath || !activeTabData?.parsedContent) return undefined; const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath); if (!file) return '<div>Error: File data not found in parsed response.</div>'; const id = `${file.path}::${file.content}`; return highlightedCodeBlocks.get(id); }, [selectedFilePath, activeTabData?.parsedContent, highlightedCodeBlocks]);
     const handleRawContentChange = (newContent: string, tabIndex: number) => setTabs(prev => ({ ...prev, [tabIndex.toString()]: { rawContent: newContent, parsedContent: null }}));
     
-    const handleSortToggle = () => { if (workflowStep === 'awaitingSort') { setIsSortedByTokens(true); setWorkflowStep('awaitingResponseSelect'); } else { setIsSortedByTokens(p => !p); } };
-    const handleGlobalParseToggle = () => { const newParseMode = !isParsedMode; setIsParsedMode(newParseMode); setSelectedFilePath(null); if (!newParseMode) setTabs(prev => { const newTabs = {...prev}; Object.keys(newTabs).forEach(key => { newTabs[key].parsedContent = null; }); return newTabs; }); if (newParseMode && workflowStep === 'awaitingParse') setWorkflowStep(isSortedByTokens ? 'awaitingResponseSelect' : 'awaitingSort'); };
+    const handleSortToggle = () => { if (workflowStep === 'awaitingSort') { setIsSortedByTokens(true); } else { setIsSortedByTokens(p => !p); } };
+    const handleGlobalParseToggle = () => { const newParseMode = !isParsedMode; setIsParsedMode(newParseMode); setSelectedFilePath(null); if (!newParseMode) setTabs(prev => { const newTabs = {...prev}; Object.keys(newTabs).forEach(key => { newTabs[key].parsedContent = null; }); return newTabs; }); };
     const handleNewCycle = (e: React.MouseEvent) => { e.stopPropagation(); saveCurrentCycleState(); const newCycleId = maxCycle + 1; setMaxCycle(newCycleId); setCurrentCycle(newCycleId); setCycleTitle('New Cycle'); setCycleContext(''); setEphemeralContext(''); setTabs({}); setIsParsedMode(false); setSelectedResponseId(null); setSelectedFilesForReplacement(new Set()); setWorkflowStep('awaitingResponsePaste_1'); };
     const handleGeneratePrompt = () => { if (currentCycle === null) return; clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle }); setWorkflowStep('readyForNewCycle'); }
     const handleDeleteCycle = () => { if(currentCycle !== null) clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle }); };
@@ -29098,8 +29426,8 @@ const App = () => {
     const handleImportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestImportHistory, {});
     const handleGitBaseline = () => { const commitMessage = `DCE Baseline: Cycle ${currentCycle} - ${cycleTitle || 'Untitled'}`; clientIpc.sendToServer(ClientToServerChannel.RequestGitBaseline, { commitMessage }); };
     const handleGitRestore = () => { clientIpc.sendToServer(ClientToServerChannel.RequestGitRestore, {}); };
-    const handleFileSelectionToggle = (filePath: string) => { const currentTabId = activeTab.toString(); const compositeKeyForCurrent = `${currentTabId}:::${filePath}`; setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); let existingKey: string | undefined; for (const key of newSet) if (key.endsWith(`:::${filePath}`)) { existingKey = key; break; } if (existingKey) { if (existingKey === compositeKeyForCurrent) newSet.delete(existingKey); else { newSet.delete(existingKey); newSet.add(compositeKeyForCurrent); } } else newSet.add(compositeKeyForCurrent); return newSet; }); if(workflowStep === 'awaitingFileSelect') setWorkflowStep('awaitingAccept'); };
-    const handleSelectAllFilesToggle = () => { if (!activeTabData?.parsedContent) return; const allFilesForTab = activeTabData.parsedContent.filesUpdated.map(fp => `${activeTab}:::${fp}`); const isAllSelected = allFilesForTab.every(key => selectedFilesForReplacement.has(key)); setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); if (isAllSelected) allFilesForTab.forEach(key => newSet.delete(key)); else allFilesForTab.forEach(key => newSet.add(key)); return newSet; }); if(workflowStep === 'awaitingFileSelect') setWorkflowStep('awaitingAccept'); };
+    const handleFileSelectionToggle = (filePath: string) => { const currentTabId = activeTab.toString(); const compositeKeyForCurrent = `${currentTabId}:::${filePath}`; setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); let existingKey: string | undefined; for (const key of newSet) if (key.endsWith(`:::${filePath}`)) { existingKey = key; break; } if (existingKey) { if (existingKey === compositeKeyForCurrent) newSet.delete(existingKey); else { newSet.delete(existingKey); newSet.add(compositeKeyForCurrent); } } else newSet.add(compositeKeyForCurrent); return newSet; }); };
+    const handleSelectAllFilesToggle = () => { if (!activeTabData?.parsedContent) return; const allFilesForTab = activeTabData.parsedContent.filesUpdated.map(fp => `${activeTab}:::${fp}`); const isAllSelected = allFilesForTab.every(key => selectedFilesForReplacement.has(key)); setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); if (isAllSelected) allFilesForTab.forEach(key => newSet.delete(key)); else allFilesForTab.forEach(key => newSet.add(key)); return newSet; }); };
     const isAllFilesSelected = React.useMemo(() => { if (!activeTabData?.parsedContent) return false; const allFiles = activeTabData.parsedContent.filesUpdated; if (allFiles.length === 0) return false; return allFiles.every(file => selectedFilesForReplacement.has(`${activeTab}:::${file}`)); }, [selectedFilesForReplacement, activeTabData, activeTab]);
     const handleLogState = () => { const currentState = getCurrentCycleData(); if (currentState) clientIpc.sendToServer(ClientToServerChannel.RequestLogState, { currentState }); };
     const handleCopyContent = () => { if (!selectedFilePath || !activeTabData?.parsedContent) return; const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath); if (file) clientIpc.sendToServer(ClientToServerChannel.RequestCopyTextToClipboard, { text: file.content }); };
@@ -29107,7 +29435,7 @@ const App = () => {
 
     if (currentCycle === null) return <div>Loading...</div>;
     if (currentCycle === -1) return <div className="onboarding-container"><h1>No Folder Opened</h1><p>You have not yet opened a folder for the Data Curation Environment to manage.</p><button className="dce-button-primary" onClick={() => clientIpc.sendToServer(ClientToServerChannel.RequestOpenFolder, {})}><VscFolder /> Open Folder</button></div>;
-    if (currentCycle === 0) return <OnboardingView initialProjectScope={projectScope} onNavigateToCycle={(id) => handleCycleChange(null, id)} latestCycleId={maxCycle} onScopeChange={setCycleContext} />;
+    if (currentCycle === 0) return <OnboardingView initialProjectScope={projectScope} onNavigateToCycle={(id) => handleCycleChange(null, id)} latestCycleId={maxCycle} onScopeChange={setCycleContext} workflowStep={workflowStep} />;
     
     const collapsedNavigator = <div className="collapsed-navigator"><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0}>&lt;</button><span className="cycle-display">C{currentCycle}</span><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}>&gt;</button></div>;
     const currentComparisonMetrics = selectedFilePath ? comparisonMetrics.get(pathOverrides.get(selectedFilePath) || selectedFilePath) : null;
@@ -29121,7 +29449,7 @@ const App = () => {
         </CollapsibleSection>
         <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} onSortToggle={handleSortToggle} workflowStep={workflowStep} />
         <div className="tab-content">
-            <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={currentComparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => { setSelectedResponseId(prev => prev === id ? null : id); if (workflowStep === 'awaitingResponseSelect') setWorkflowStep('awaitingBaseline'); }} onSelectAllFiles={handleSelectAllFilesToggle} onDeselectAllFiles={() => setSelectedFilesForReplacement(new Set())} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} onBaseline={handleGitBaseline} onRestore={handleGitRestore} workflowStep={workflowStep} />
+            <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={currentComparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => { setSelectedResponseId(prev => prev === id ? null : id); }} onSelectAllFiles={handleSelectAllFilesToggle} onDeselectAllFiles={() => setSelectedFilesForReplacement(new Set())} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} onBaseline={handleGitBaseline} onRestore={handleGitRestore} workflowStep={workflowStep} />
         </div>
     </div>;
 };
@@ -29262,7 +29590,7 @@ export enum ServerToClientChannel {
 </file>
 
 <file path="src/common/ipc/channels.type.ts">
-// Updated on: C180 (Add return type for deleteCycle)
+// Updated on: C181 (Add currentCycle to RequestCreatePromptFile)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -30287,6 +30615,134 @@ Once a working pattern is identified in a test component:
 1.  **Codify Findings:** The successful pattern and the root cause of the failure will be documented in `A11. DCE - Regression Case Studies`.
 2.  **Integrate Solution:** The original `NumberedTextarea.tsx` component will be refactored to use the successful pattern.
 3.  **Remove Test Artifacts:** The test harness UI and the `TestPane*.tsx` component files will be removed from the project.
+</file>
+
+<file path="src/Artifacts/A76. DCE - Word Wrap Line Numbering Challenges.md">
+# Artifact A76: DCE - Word Wrap Line Numbering Challenges
+# Date Created: C181
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** Explains the technical complexity of implementing line numbers that accurately reflect visual word wrapping in a textarea component.
+- **Tags:** documentation, technical debt, ui, ux, word wrap, line numbers
+
+## 1. Problem Statement
+
+The user has requested that the line numbers in the `NumberedTextarea` component should respect word wrapping. Currently, the component counts lines based on newline characters (`\n`). This means a single logical line that visually wraps into three lines in the UI still only receives one line number. The user correctly points out that this is not ideal.
+
+This document explains why this seemingly simple feature is technically complex to implement in a standard HTML `<textarea>` and outlines potential solutions.
+
+## 2. The Core Challenge: Logical vs. Visual Lines
+
+The fundamental issue is the difference between how a `<textarea>` handles content versus how the browser renders it.
+
+*   **Logical Lines:** The `<textarea>` element's `value` is a simple string. The only concept of a "line" it has is the presence of a newline character (`\n`). When we split the string by `\n`, we are counting these logical lines. This is what our current implementation does, and it's fast and simple.
+
+*   **Visual Lines:** Word wrapping is a purely visual phenomenon handled by the browser's rendering engine. The browser calculates how many words fit on a line based on the element's width, font size, font family, letter spacing, and word spacing. It then visually breaks the line and renders the overflow text below. **Crucially, the browser does not expose a simple API to ask, "How many visual lines are you currently rendering for this text?"**
+
+Because we cannot directly query the rendered line count, we must resort to indirect methods to calculate it.
+
+## 3. Potential Solutions & Their Complexity
+
+Here are the common approaches to solving this problem, each with its own trade-offs.
+
+### Solution A: The Hidden `div` Measurement Technique
+
+This is the most common and reliable method.
+
+1.  **How it Works:**
+    *   Create a hidden `div` element off-screen or with `visibility: hidden`.
+    *   Apply the *exact same* CSS styles to this `div` as the `<textarea>` (width, font, padding, etc.).
+    *   Copy the content of the `<textarea>` into the `innerHTML` of the hidden `div`.
+    *   Calculate the number of visual lines by dividing the `scrollHeight` of the hidden `div` by its `line-height`.
+
+2.  **Complexity & Downsides:**
+    *   **Performance:** This calculation must be run on every single keystroke, as any character change could affect word wrapping. Copying large amounts of text into the DOM and forcing a browser re-layout on every key press can be performance-intensive and may cause input lag.
+    *   **Fragility:** The CSS styles must be perfectly synchronized. Any discrepancy in padding, border, font-size, etc., will result in an incorrect calculation.
+    *   **Implementation:** Requires careful DOM manipulation within our React component, managing refs to both the textarea and the hidden div, and ensuring the calculation is efficient.
+
+### Solution B: Using a Full-Fledged Code Editor Component
+
+Instead of building our own, we could replace the `<textarea>` with a lightweight, embeddable code editor library.
+
+1.  **How it Works:**
+    *   Integrate a library like **CodeMirror** or **Monaco Editor** (the editor that powers VS Code itself, though it's much heavier).
+    *   These components are not simple textareas; they are complete editing surfaces that render each line individually. Because they control the rendering process, they have full knowledge of visual lines and can provide accurate line numbering out of the box.
+
+2.  **Complexity & Downsides:**
+    *   **Bundle Size:** These libraries are significantly larger than a simple React component, which would increase the extension's load time.
+    *   **Integration:** Integrating them into our existing React and VS Code Webview architecture can be complex, requiring custom wrappers and careful handling of the component's lifecycle.
+    *   **Overkill:** For a simple context input field, using a full code editor might be architectural overkill.
+
+## 4. Conclusion & Path Forward
+
+The user's request is valid and would be a great UX improvement. However, due to the performance and implementation complexities described above, this feature is considered a significant piece of technical debt that requires a dedicated cycle to solve correctly.
+
+The current priority is to fix the more critical usability bugs like scrolling, focus management, and highlighting. Once the component is stable, we can revisit this challenge and dedicate a future cycle to implementing one of the more advanced solutions above.
+</file>
+
+<file path="dist/Artifacts/A76. DCE - Word Wrap Line Numbering Challenges.md">
+# Artifact A76: DCE - Word Wrap Line Numbering Challenges
+# Date Created: C181
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** Explains the technical complexity of implementing line numbers that accurately reflect visual word wrapping in a textarea component.
+- **Tags:** documentation, technical debt, ui, ux, word wrap, line numbers
+
+## 1. Problem Statement
+
+The user has requested that the line numbers in the `NumberedTextarea` component should respect word wrapping. Currently, the component counts lines based on newline characters (`\n`). This means a single logical line that visually wraps into three lines in the UI still only receives one line number. The user correctly points out that this is not ideal.
+
+This document explains why this seemingly simple feature is technically complex to implement in a standard HTML `<textarea>` and outlines potential solutions.
+
+## 2. The Core Challenge: Logical vs. Visual Lines
+
+The fundamental issue is the difference between how a `<textarea>` handles content versus how the browser renders it.
+
+*   **Logical Lines:** The `<textarea>` element's `value` is a simple string. The only concept of a "line" it has is the presence of a newline character (`\n`). When we split the string by `\n`, we are counting these logical lines. This is what our current implementation does, and it's fast and simple.
+
+*   **Visual Lines:** Word wrapping is a purely visual phenomenon handled by the browser's rendering engine. The browser calculates how many words fit on a line based on the element's width, font size, font family, letter spacing, and word spacing. It then visually breaks the line and renders the overflow text below. **Crucially, the browser does not expose a simple API to ask, "How many visual lines are you currently rendering for this text?"**
+
+Because we cannot directly query the rendered line count, we must resort to indirect methods to calculate it.
+
+## 3. Potential Solutions & Their Complexity
+
+Here are the common approaches to solving this problem, each with its own trade-offs.
+
+### Solution A: The Hidden `div` Measurement Technique
+
+This is the most common and reliable method.
+
+1.  **How it Works:**
+    *   Create a hidden `div` element off-screen or with `visibility: hidden`.
+    *   Apply the *exact same* CSS styles to this `div` as the `<textarea>` (width, font, padding, etc.).
+    *   Copy the content of the `<textarea>` into the `innerHTML` of the hidden `div`.
+    *   Calculate the number of visual lines by dividing the `scrollHeight` of the hidden `div` by its `line-height`.
+
+2.  **Complexity & Downsides:**
+    *   **Performance:** This calculation must be run on every single keystroke, as any character change could affect word wrapping. Copying large amounts of text into the DOM and forcing a browser re-layout on every key press can be performance-intensive and may cause input lag.
+    *   **Fragility:** The CSS styles must be perfectly synchronized. Any discrepancy in padding, border, font-size, etc., will result in an incorrect calculation.
+    *   **Implementation:** Requires careful DOM manipulation within our React component, managing refs to both the textarea and the hidden div, and ensuring the calculation is efficient.
+
+### Solution B: Using a Full-Fledged Code Editor Component
+
+Instead of building our own, we could replace the `<textarea>` with a lightweight, embeddable code editor library.
+
+1.  **How it Works:**
+    *   Integrate a library like **CodeMirror** or **Monaco Editor** (the editor that powers VS Code itself, though it's much heavier).
+    *   These components are not simple textareas; they are complete editing surfaces that render each line individually. Because they control the rendering process, they have full knowledge of visual lines and can provide accurate line numbering out of the box.
+
+2.  **Complexity & Downsides:**
+    *   **Bundle Size:** These libraries are significantly larger than a simple React component, which would increase the extension's load time.
+    *   **Integration:** Integrating them into our existing React and VS Code Webview architecture can be complex, requiring custom wrappers and careful handling of the component's lifecycle.
+    *   **Overkill:** For a simple context input field, using a full code editor might be architectural overkill.
+
+## 4. Conclusion & Path Forward
+
+The user's request is valid and would be a great UX improvement. However, due to the performance and implementation complexities described above, this feature is considered a significant piece of technical debt that requires a dedicated cycle to solve correctly.
+
+The current priority is to fix the more critical usability bugs like scrolling, focus management, and highlighting. Once the component is stable, we can revisit this challenge and dedicate a future cycle to implementing one of the more advanced solutions above.
 </file>
 
 

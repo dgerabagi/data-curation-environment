@@ -1,4 +1,4 @@
-// Updated on: C181 (Use currentCycle for prompt generation)
+// Updated on: C182 (Open README on Cycle 0 generation)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -346,8 +346,12 @@ ${JSON.stringify(stateDump, null, 2)}
             Services.loggerService.log("Successfully generated Cycle 0 prompt.md file.");
             
             vscode.window.showInformationMessage(`Successfully generated initial prompt.md and created src/Artifacts/README.md`);
-            await Services.fileOperationService.handleOpenFileRequest(promptMdPath);
-
+            
+            const filesToOpen = [vscode.Uri.file(promptMdPath), readmeUri];
+            for (const fileUri of filesToOpen) {
+                const document = await vscode.workspace.openTextDocument(fileUri);
+                await vscode.window.showTextDocument(document, { preview: false });
+            }
 
             const cycle1Data: PcppCycle = {
                 cycleId: 1,

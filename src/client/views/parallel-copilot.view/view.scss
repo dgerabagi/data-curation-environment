@@ -1,5 +1,5 @@
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C181 (Fix onboarding textarea width)
+// Updated on: C182 (Fix onboarding textarea width)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -176,7 +176,7 @@ body {
 }
 
 .onboarding-textarea {
-    width: 100%;
+    width: calc(100% - 15px); // Compensate for scrollbar
     flex-grow: 1;
     background-color: var(--vscode-input-background);
     color: var(--vscode-input-foreground);
@@ -186,7 +186,7 @@ body {
     font-family: var(--vscode-editor-font-family);
     font-size: var(--vscode-editor-font-size);
     resize: none;
-    padding-right: 15px; // Add padding to avoid scrollbar overlap
+    
     &:focus {
         outline: 1px solid var(--vscode-focusBorder);
     }

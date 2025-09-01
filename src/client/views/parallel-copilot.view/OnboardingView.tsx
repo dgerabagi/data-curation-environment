@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/OnboardingView.tsx
-// Updated on: C181 (Add workflow highlighting class)
+// Updated on: C182 (No functional changes)
 import * as React from 'react';
 import { VscRocket, VscArrowRight } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';

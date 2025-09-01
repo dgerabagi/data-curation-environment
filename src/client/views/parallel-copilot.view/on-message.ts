@@ -1,4 +1,4 @@
-// Updated on: C180 (Handle new maxCycle from delete)
+// Updated on: C182 (Add Git Status handler)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -47,8 +47,9 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         fileOperationService.handleFileContentRequest(data.path, serverIpc);
     });
 
-    serverIpc.onClientMessage(ClientToServerChannel.RequestDeleteCycle, (data) => {
-        historyService.deleteCycle(data.cycleId);
+    serverIpc.onClientMessage(ClientToServerChannel.RequestDeleteCycle, async (data) => {
+        const newMaxCycle = await historyService.deleteCycle(data.cycleId);
+        // C180: This response is now handled on the frontend via ForceRefresh
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestResetHistory, () => {
@@ -96,5 +97,9 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestGitRestore, () => {
         gitService.handleGitRestoreRequest(serverIpc);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestGitStatus, () => {
+        gitService.handleGitStatusRequest(serverIpc);
     });
 }

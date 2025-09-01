@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/ContextInputs.tsx
-// Updated on: C179 (Pass workflowStep to NumberedTextarea)
+// Updated on: C182 (Set showLineNumbers to false)
 import * as React from 'react';
 import NumberedTextarea from './NumberedTextarea';
 import { formatLargeNumber } from '@/common/utils/formatting';
@@ -51,6 +51,7 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
                     onHeightChange={onCycleContextHeightChange}
                     id={`cycle-context-${currentCycle}`}
                     className={workflowStep === 'awaitingCycleContext' ? 'workflow-highlight' : ''}
+                    showLineNumbers={false}
                 />
             </div>
             <div className="context-input-wrapper">
@@ -66,6 +67,7 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
                     height={ephemeralContextHeight}
                     onHeightChange={onEphemeralContextHeightChange}
                     id={`ephemeral-context-${currentCycle}`}
+                    showLineNumbers={false}
                 />
             </div>
         </div>

@@ -1,4 +1,4 @@
-// Updated on: C181 (Add currentCycle to RequestCreatePromptFile)
+// Updated on: C182 (Add Git Status channel)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -62,6 +62,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestPromptCostBreakdown ? { cycleData: PcppCycle } :
     T extends ClientToServerChannel.RequestGitBaseline ? { commitMessage: string } :
     T extends ClientToServerChannel.RequestGitRestore ? {} :
+    T extends ClientToServerChannel.RequestGitStatus ? {} :
     
     T extends ServerToClientChannel.SendWorkspaceFiles ? { files: FileNode[] } :
     T extends ServerToClientChannel.SendWorkspaceTrustState ? { isTrusted: boolean } :
@@ -83,4 +84,5 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SendFileComparison ? { filePath: string } & ComparisonMetrics :
     T extends ServerToClientChannel.SendPromptCostEstimation ? { totalTokens: number; estimatedCost: number; breakdown: { [key: string]: number } } :
     T extends ServerToClientChannel.NotifyGitOperationResult ? { success: boolean; message: string; } :
+    T extends ServerToClientChannel.SendGitStatus ? { isClean: boolean } :
     never;

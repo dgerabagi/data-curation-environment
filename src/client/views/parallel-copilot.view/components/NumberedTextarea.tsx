@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx
-// Updated on: C180 (Fix focus loss bug)
+// Updated on: C182 (Add showLineNumbers prop)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -13,9 +13,10 @@ interface NumberedTextareaProps {
     onHeightChange: (height: number) => void;
     id: string; // Unique ID for this textarea instance
     className?: string; // For workflow highlighting
+    showLineNumbers?: boolean;
 }
 
-const NumberedTextarea: React.FC<NumberedTextareaProps> = ({ value, onChange, placeholder, onKeyDown, height, onHeightChange, id, className }) => {
+const NumberedTextarea: React.FC<NumberedTextareaProps> = ({ value, onChange, placeholder, onKeyDown, height, onHeightChange, id, className, showLineNumbers = true }) => {
     const [lineCount, setLineCount] = React.useState(1);
     const [highlightedHtml, setHighlightedHtml] = React.useState('');
     const textareaRef = React.useRef<HTMLTextAreaElement>(null);
@@ -66,11 +67,13 @@ const NumberedTextarea: React.FC<NumberedTextareaProps> = ({ value, onChange, pl
 
     return (
         <div className={`numbered-textarea-container ${className || ''}`} style={{ height: `${height}px` }}>
-            <div className="line-numbers-gutter" ref={lineNumbersRef}>
-                {Array.from({ length: lineCount }, (_, i) => (
-                    <div key={i}>{i + 1}</div>
-                ))}
-            </div>
+            {showLineNumbers && (
+                <div className="line-numbers-gutter" ref={lineNumbersRef}>
+                    {Array.from({ length: lineCount }, (_, i) => (
+                        <div key={i}>{i + 1}</div>
+                    ))}
+                </div>
+            )}
             <div className="content-wrapper">
                 <div 
                     ref={highlightRef} 

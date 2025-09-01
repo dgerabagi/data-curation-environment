@@ -1,7 +1,8 @@
 // src/backend/services/git.service.ts
-// Updated on: C179 (Add check for 'not a git repository' error)
+// Updated on: C182 (Add status check and improve error messages)
 import * as vscode from 'vscode';
 import { exec } from 'child_process';
+import * as path from 'path';
 import { Services } from './services';
 import { ServerPostMessageManager } from '@/common/ipc/server-ipc';
 import { ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -24,7 +25,7 @@ export class GitService {
                     reject(error);
                     return;
                 }
-                if (stderr && !stderr.includes('nothing to commit, working tree clean')) {
+                if (stderr) {
                     Services.loggerService.warn(`Git command stderr: ${stderr}`);
                 }
                 resolve({ stdout, stderr });
@@ -37,26 +38,51 @@ export class GitService {
         if (success) {
             vscode.window.showInformationMessage(message);
         } else {
-            vscode.window.showErrorMessage(message, "Open Git Setup Guide").then(selection => {
-                if (selection === "Open Git Setup Guide") {
-                    // This is a placeholder for opening the artifact. A more robust solution
-                    // would involve a command to open a specific file.
-                    vscode.window.showInformationMessage("Please refer to the 'A9. DCE - GitHub Repository Setup Guide.md' artifact in your project.");
+            vscode.window.showErrorMessage(message, "Open README Guide").then(selection => {
+                if (selection === "Open README Guide") {
+                    const workspaceRoot = this.getWorkspaceRoot();
+                    if (workspaceRoot) {
+                        const readmePath = vscode.Uri.file(path.join(workspaceRoot, 'src', 'Artifacts', 'README.md'));
+                        vscode.commands.executeCommand('vscode.open', readmePath);
+                    }
                 }
             });
+        }
+    }
+
+    public async handleGitStatusRequest(serverIpc: ServerPostMessageManager) {
+        Services.loggerService.log("Executing Git Status check.");
+        try {
+            const { stdout } = await this.execGitCommand('git status --porcelain');
+            const isClean = stdout.trim() === '';
+            serverIpc.sendToClient(ServerToClientChannel.SendGitStatus, { isClean });
+        } catch (error) {
+            // Not a git repo, treat as not clean for workflow purposes
+            serverIpc.sendToClient(ServerToClientChannel.SendGitStatus, { isClean: false });
         }
     }
 
     public async handleGitBaselineRequest(commitMessage: string, serverIpc: ServerPostMessageManager) {
         Services.loggerService.log(`Executing Git Baseline with message: "${commitMessage}"`);
         try {
+            const { stdout: statusOutput } = await this.execGitCommand('git status --porcelain');
+            if (statusOutput.trim() === '') {
+                this.notifyFrontend(serverIpc, true, 'Workspace is already clean. No baseline needed.');
+                return;
+            }
+
             await this.execGitCommand('git add .');
-            await this.execGitCommand(`git commit -m "${commitMessage.replace(/"/g, '\\"')}"`);
-            this.notifyFrontend(serverIpc, true, 'Successfully created baseline commit.');
+            const { stderr } = await this.execGitCommand(`git commit -m "${commitMessage.replace(/"/g, '\\"')}"`);
+
+            if (stderr && stderr.includes('nothing to commit')) {
+                 this.notifyFrontend(serverIpc, true, 'You are already baselined.');
+            } else {
+                this.notifyFrontend(serverIpc, true, 'Successfully created baseline commit.');
+            }
         } catch (error: any) {
             let errorMessage = `Git Baseline failed: ${error.message}`;
             if (error.message.includes('fatal: not a git repository')) {
-                errorMessage = 'Git Baseline failed: This is not a Git repository. Please run `git init` in your terminal. See A9 for guidance.';
+                errorMessage = 'This is not a Git repository. Please initialize it first. Refer to the README for guidance.';
             }
             this.notifyFrontend(serverIpc, false, errorMessage);
         }
@@ -65,7 +91,6 @@ export class GitService {
     public async handleGitRestoreRequest(serverIpc: ServerPostMessageManager) {
         Services.loggerService.log("Executing Git Restore.");
         try {
-            // C178 Fix: Use double quotes around the pathspec to avoid shell parsing issues.
             const command = `git restore -- . ":(exclude).vscode/dce_history.json"`;
             await this.execGitCommand(command);
             this.notifyFrontend(serverIpc, true, 'Successfully restored workspace to baseline.');
