@@ -1,4 +1,4 @@
-// Updated on: C182 (Add Git Status handler)
+// Updated on: C183 (Add Git Status handler)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -91,12 +91,12 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         promptService.handlePromptCostBreakdownRequest(data.cycleData, serverIpc);
     });
 
-    serverIpc.onClientMessage(ClientToServerChannel.RequestGitBaseline, (data) => {
-        gitService.handleGitBaselineRequest(data.commitMessage, serverIpc);
+    serverIpc.onClientMessage(ClientToServerChannel.RequestGitBaseline, async (data) => {
+        await gitService.handleGitBaselineRequest(data.commitMessage, serverIpc);
     });
 
-    serverIpc.onClientMessage(ClientToServerChannel.RequestGitRestore, () => {
-        gitService.handleGitRestoreRequest(serverIpc);
+    serverIpc.onClientMessage(ClientToServerChannel.RequestGitRestore, async () => {
+        await gitService.handleGitRestoreRequest(serverIpc);
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestGitStatus, () => {

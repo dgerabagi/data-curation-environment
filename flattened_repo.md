@@ -1,21 +1,21 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-01T17:05:20.702Z
+  Date Generated: 2025-09-01T18:28:06.478Z
   ---
   Total Files: 168
-  Approx. Tokens: 445830
+  Approx. Tokens: 446514
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (239424 tokens)
-2. src\Artifacts\A11. DCE - Regression Case Studies.md (8943 tokens)
+2. src\Artifacts\A11. DCE - Regression Case Studies.md (9424 tokens)
 3. src\Artifacts\A0. DCE Master Artifact List.md (7189 tokens)
-4. src\client\views\parallel-copilot.view\view.tsx (6933 tokens)
+4. src\client\views\parallel-copilot.view\view.tsx (6922 tokens)
 5. src\client\views\parallel-copilot.view\view.scss (5158 tokens)
 6. src\backend\services\prompt.service.ts (4908 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4429 tokens)
-8. src\client\views\context-chooser.view\view.tsx (4035 tokens)
+8. src\client\views\context-chooser.view\view.tsx (4079 tokens)
 9. src\backend\services\file-operation.service.ts (4021 tokens)
 10. src\client\views\context-chooser.view\view.scss (3708 tokens)
 
@@ -30,7 +30,7 @@
 8. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
 9. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
 10. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
-11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 322 - Chars: 35772 - Tokens: 8943
+11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 335 - Chars: 37694 - Tokens: 9424
 12. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5710 - Tokens: 1428
 13. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
 14. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
@@ -92,8 +92,8 @@
 70. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1806 - Tokens: 452
 71. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 47 - Chars: 3537 - Tokens: 885
 72. src\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3311 - Tokens: 828
-73. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 67 - Chars: 3744 - Tokens: 936
-74. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 52 - Chars: 4612 - Tokens: 1153
+73. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 69 - Chars: 4067 - Tokens: 1017
+74. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 55 - Chars: 5070 - Tokens: 1268
 75. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
 76. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 40 - Chars: 2804 - Tokens: 701
 77. src\Artifacts\A73. DCE - GitService Plan.md - Lines: 44 - Chars: 2548 - Tokens: 637
@@ -124,9 +124,9 @@
 102. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
 103. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
 104. src\backend\services\file-operation.service.ts - Lines: 338 - Chars: 16082 - Tokens: 4021
-105. src\backend\services\file-tree.service.ts - Lines: 276 - Chars: 13946 - Tokens: 3487
+105. src\backend\services\file-tree.service.ts - Lines: 276 - Chars: 14221 - Tokens: 3556
 106. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12820 - Tokens: 3205
-107. src\backend\services\git.service.ts - Lines: 101 - Chars: 4622 - Tokens: 1156
+107. src\backend\services\git.service.ts - Lines: 86 - Chars: 4144 - Tokens: 1036
 108. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4232 - Tokens: 1058
 109. src\backend\services\history.service.ts - Lines: 270 - Chars: 11310 - Tokens: 2828
 110. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
@@ -146,9 +146,9 @@
 124. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
 125. src\client\utils\response-parser.ts - Lines: 79 - Chars: 2994 - Tokens: 749
 126. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-127. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5090 - Tokens: 1273
+127. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
 128. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
-129. src\client\views\context-chooser.view\view.tsx - Lines: 175 - Chars: 16140 - Tokens: 4035
+129. src\client\views\context-chooser.view\view.tsx - Lines: 175 - Chars: 16314 - Tokens: 4079
 130. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
 131. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 77 - Chars: 3054 - Tokens: 764
 132. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 86 - Chars: 3485 - Tokens: 872
@@ -157,14 +157,14 @@
 135. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 84 - Chars: 3486 - Tokens: 872
 136. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
 137. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-138. src\client\views\parallel-copilot.view\on-message.ts - Lines: 105 - Chars: 4801 - Tokens: 1201
+138. src\client\views\parallel-copilot.view\on-message.ts - Lines: 105 - Chars: 4825 - Tokens: 1207
 139. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 92 - Chars: 4340 - Tokens: 1085
 140. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 28 - Chars: 1213 - Tokens: 304
 141. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 28 - Chars: 1283 - Tokens: 321
 142. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 28 - Chars: 1184 - Tokens: 296
 143. src\client\views\parallel-copilot.view\view.scss - Lines: 903 - Chars: 20629 - Tokens: 5158
 144. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-145. src\client\views\parallel-copilot.view\view.tsx - Lines: 159 - Chars: 27731 - Tokens: 6933
+145. src\client\views\parallel-copilot.view\view.tsx - Lines: 159 - Chars: 27686 - Tokens: 6922
 146. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
 147. src\common\ipc\channels.enum.ts - Lines: 88 - Chars: 4666 - Tokens: 1167
 148. src\common\ipc\channels.type.ts - Lines: 88 - Chars: 6637 - Tokens: 1660
@@ -1139,7 +1139,7 @@ To enhance the data curation process, it is critical for the user to have immedi
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C181 (Add case for stuck response highlighting)
+# Updated on: C183 (Add case for stuck Baseline highlighting)
 
 - **Key/Value for A0:**
 - **Description:** Documents recurring bugs, their root causes, and codified solutions to prevent future regressions during development.
@@ -1150,6 +1150,19 @@ To enhance the data curation process, it is critical for the user to have immedi
 This document serves as a living record of persistent or complex bugs that have recurred across multiple development cycles. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 021: Stuck `Baseline` Highlight in Animated Workflow
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/backend/services/git.service.ts`
+-   **Cycles Observed:** C8
+-   **Symptom:** In the animated workflow, after the user selects a response, the `Baseline (Commit)` button is correctly highlighted. After the user clicks it and the baseline is successfully created, the highlight remains on the `Baseline` button and does not advance to the next step in the workflow (e.g., "Select All" in the Associated Files list).
+-   **Root Cause Analysis (RCA):** The frontend UI, which manages the `workflowStep` state, had no way of knowing when the backend Git operation was successfully completed. The `git.service.ts` method was a "fire-and-forget" operation from the frontend's perspective. It showed a `vscode.window.showInformationMessage` (a UI side-effect from the backend), but it did not send a structured success/failure message back to the webview client. The frontend's state machine was therefore never triggered to advance to the next step.
+-   **Codified Solution & Best Practice:** Backend services that perform actions triggered by the UI should provide a clear, awaitable response back to the client.
+    1.  **Backend (`git.service.ts`):** The `handleGitBaselineRequest` method must be refactored to return a result object (e.g., `{ success: boolean, message: string }`) instead of directly showing UI notifications.
+    2.  **IPC (`on-message.ts`):** A dedicated IPC channel (e.g., `NotifyGitOperationResult`) must be used for the backend message handler to send this result back to the frontend client.
+    3.  **Frontend (`view.tsx`):** The frontend must have a message listener for `NotifyGitOperationResult`. When it receives a success message, it can then reliably update its `workflowStep` state to advance the UI to the next step in the sequence.
 
 ---
 
@@ -4989,7 +5002,7 @@ The "Cycle Context" and "Ephemeral Context" text areas in the Parallel Co-Pilot 
 # Artifact A69: DCE - Animated UI Workflow Guide
 # Date Created: C169
 # Author: AI Model & Curator
-# Updated on: C182 (Finalize the full, closed-loop workflow)
+# Updated on: C183 (Refine post-baseline transition and document API limitation)
 
 ## 1. Overview & Goal
 
@@ -5008,6 +5021,7 @@ The highlighting will follow this specific sequence of user actions:
 ### Onboarding / Cycle 0
 1.  **Start (No Workspace):** User opens VS Code with no folder open.
     *   **Highlight:** The **DCE icon** in the Activity Bar pulses.
+    *   **Note:** Direct animation of Activity Bar icons is not supported by the VS Code API. This step is a design goal that cannot be implemented with current technology. The guided workflow will begin at the next step.
 
 2.  **Open PCPP (Welcome View):** User clicks the DCE icon, opening the PCPP to the "Welcome" / "Onboarding" view.
     *   **Highlight:** The **Project Scope `textarea`** pulses.
@@ -5034,9 +5048,10 @@ The highlighting will follow this specific sequence of user actions:
     *   **Highlight:** The **`Select This Response`** button on each tab pulses.
 
 9.  **Create Baseline:** User clicks `Select This Response`.
-    *   **Highlight:** The **`Baseline (Commit)`** button pulses. (Skips if working tree is already clean).
+    *   **Highlight:** The **`Baseline (Commit)`** button pulses.
+    *   **State-Aware Skip:** This step is skipped if the backend reports that the Git working tree is already clean.
 
-10. **Select Files for Acceptance:** User clicks `Baseline (Commit)` or the baseline is skipped.
+10. **Select Files for Acceptance:** User clicks `Baseline (Commit)` or the baseline step is skipped.
     *   **Highlight:** The "Associated Files" list panel and the **`Select All`** button within it pulse.
 
 11. **Accept Changes:** User checks one or more files in the "Associated Files" list.
@@ -5059,13 +5074,13 @@ The highlighting will follow this specific sequence of user actions:
 # Artifact A70: DCE - Git-Integrated Testing Workflow Plan
 # Date Created: C169
 # Author: AI Model & Curator
-# Updated on: C182 (Add state-aware baseline logic)
+# Updated on: C183 (Refine communication protocol for state transitions)
 
 ## 1. Overview & Goal
 
 A core part of the DCE workflow involves accepting an AI-generated response and testing it in the live workspace. If the response introduces bugs, the user must manually revert the changes. The goal of this feature is to automate this "test and revert" loop by deeply integrating with Git. This will provide a one-click method to create a baseline commit before testing and a one-click method to restore that baseline if the test fails.
 
-**Status (C182):** In Progress.
+**Status (C183):** In Progress.
 
 ## 2. User Stories
 
@@ -5094,20 +5109,23 @@ A core part of the DCE workflow involves accepting an AI-generated response and 
     *   `ClientToServerChannel.RequestGitRestore`: No payload.
     *   `ClientToServerChannel.RequestGitStatus`: No payload.
     *   `ServerToClientChannel.SendGitStatus`: Payload `{ isClean: boolean }`.
+    *   **New:** `ServerToClientChannel.NotifyGitOperationResult`: Payload `{ success: boolean; message: string; }`. This channel is critical for the backend to provide explicit feedback to the frontend's workflow state machine.
 
 2.  **Backend (New `GitService` - See `A73`):**
     *   A new `GitService` will encapsulate all Git command logic.
     *   **`handleGitStatusRequest()`:** A new handler that runs `git status --porcelain`. If the output is empty, it sends `{ isClean: true }` to the frontend.
     *   **`handleGitBaselineRequest(commitMessage)`:**
-        *   Checks the status first. If clean, it sends a specific "Already baselined" notification.
+        *   Checks the status first. If clean, it returns a specific "Already baselined" result.
         *   Otherwise, it executes `git add .` and `git commit -m "..."`.
+        *   It returns a result object (e.g., `{ success: true, message: '...' }`).
     *   **`handleGitRestoreRequest()`:**
         *   Executes `git restore -- . ':(exclude).vscode/dce_history.json'`.
+        *   Returns a result object.
 
-3.  **Frontend (`CycleNavigator.tsx`, `view.tsx`):**
+3.  **Frontend (`view.tsx`):**
     *   The frontend will request the Git status at appropriate times to drive the workflow state.
     *   The `onClick` handler for "Baseline" will construct the commit message and send the `RequestGitBaseline` message.
-    *   The `onClick` handler for "Restore" will send the `RequestGitRestore` message.
+    *   A new message handler for `NotifyGitOperationResult` will display the result message and, if successful, will advance the `workflowStep` state from `awaitingBaseline` to `awaitingFileSelect`.
 </file>
 
 <file path="src/Artifacts/A71. Sample M0 Prompt.md">
@@ -21652,7 +21670,7 @@ export class FlattenerService {
 
 <file path="src/backend/services/git.service.ts">
 // src/backend/services/git.service.ts
-// Updated on: C182 (Add status check and improve error messages)
+// Updated on: C183 (Refactor to return results instead of showing UI)
 import * as vscode from 'vscode';
 import { exec } from 'child_process';
 import * as path from 'path';
@@ -21686,23 +21704,6 @@ export class GitService {
         });
     }
 
-    private notifyFrontend(serverIpc: ServerPostMessageManager, success: boolean, message: string) {
-        serverIpc.sendToClient(ServerToClientChannel.NotifyGitOperationResult, { success, message });
-        if (success) {
-            vscode.window.showInformationMessage(message);
-        } else {
-            vscode.window.showErrorMessage(message, "Open README Guide").then(selection => {
-                if (selection === "Open README Guide") {
-                    const workspaceRoot = this.getWorkspaceRoot();
-                    if (workspaceRoot) {
-                        const readmePath = vscode.Uri.file(path.join(workspaceRoot, 'src', 'Artifacts', 'README.md'));
-                        vscode.commands.executeCommand('vscode.open', readmePath);
-                    }
-                }
-            });
-        }
-    }
-
     public async handleGitStatusRequest(serverIpc: ServerPostMessageManager) {
         Services.loggerService.log("Executing Git Status check.");
         try {
@@ -21717,39 +21718,41 @@ export class GitService {
 
     public async handleGitBaselineRequest(commitMessage: string, serverIpc: ServerPostMessageManager) {
         Services.loggerService.log(`Executing Git Baseline with message: "${commitMessage}"`);
+        let result = { success: false, message: 'An unknown error occurred.' };
         try {
             const { stdout: statusOutput } = await this.execGitCommand('git status --porcelain');
             if (statusOutput.trim() === '') {
-                this.notifyFrontend(serverIpc, true, 'Workspace is already clean. No baseline needed.');
-                return;
-            }
-
-            await this.execGitCommand('git add .');
-            const { stderr } = await this.execGitCommand(`git commit -m "${commitMessage.replace(/"/g, '\\"')}"`);
-
-            if (stderr && stderr.includes('nothing to commit')) {
-                 this.notifyFrontend(serverIpc, true, 'You are already baselined.');
+                result = { success: true, message: 'Workspace is already clean. No baseline needed.' };
             } else {
-                this.notifyFrontend(serverIpc, true, 'Successfully created baseline commit.');
+                await this.execGitCommand('git add .');
+                const { stderr } = await this.execGitCommand(`git commit -m "${commitMessage.replace(/"/g, '\\"')}"`);
+                if (stderr && stderr.includes('nothing to commit')) {
+                    result = { success: true, message: 'You are already baselined.' };
+                } else {
+                    result = { success: true, message: 'Successfully created baseline commit.' };
+                }
             }
         } catch (error: any) {
             let errorMessage = `Git Baseline failed: ${error.message}`;
             if (error.message.includes('fatal: not a git repository')) {
                 errorMessage = 'This is not a Git repository. Please initialize it first. Refer to the README for guidance.';
             }
-            this.notifyFrontend(serverIpc, false, errorMessage);
+            result = { success: false, message: errorMessage };
         }
+        serverIpc.sendToClient(ServerToClientChannel.NotifyGitOperationResult, result);
     }
 
     public async handleGitRestoreRequest(serverIpc: ServerPostMessageManager) {
         Services.loggerService.log("Executing Git Restore.");
+        let result = { success: false, message: 'An unknown error occurred.' };
         try {
             const command = `git restore -- . ":(exclude).vscode/dce_history.json"`;
             await this.execGitCommand(command);
-            this.notifyFrontend(serverIpc, true, 'Successfully restored workspace to baseline.');
+            result = { success: true, message: 'Successfully restored workspace to baseline.' };
         } catch (error: any) {
-            this.notifyFrontend(serverIpc, false, `Git Restore failed: ${error.message}`);
+            result = { success: false, message: `Git Restore failed: ${error.message}` };
         }
+        serverIpc.sendToClient(ServerToClientChannel.NotifyGitOperationResult, result);
     }
 }
 </file>
@@ -25817,7 +25820,7 @@ export const viewConfig = {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/on-message.ts">
-// Updated on: C182 (Add Git Status handler)
+// Updated on: C183 (Add Git Status handler)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -25910,12 +25913,12 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         promptService.handlePromptCostBreakdownRequest(data.cycleData, serverIpc);
     });
 
-    serverIpc.onClientMessage(ClientToServerChannel.RequestGitBaseline, (data) => {
-        gitService.handleGitBaselineRequest(data.commitMessage, serverIpc);
+    serverIpc.onClientMessage(ClientToServerChannel.RequestGitBaseline, async (data) => {
+        await gitService.handleGitBaselineRequest(data.commitMessage, serverIpc);
     });
 
-    serverIpc.onClientMessage(ClientToServerChannel.RequestGitRestore, () => {
-        gitService.handleGitRestoreRequest(serverIpc);
+    serverIpc.onClientMessage(ClientToServerChannel.RequestGitRestore, async () => {
+        await gitService.handleGitRestoreRequest(serverIpc);
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestGitStatus, () => {
@@ -27033,7 +27036,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C182 (Implement full workflow)
+// Updated on: C183 (Implement full workflow)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './view.scss';
@@ -27180,7 +27183,7 @@ const App = () => {
         <div className="pc-header"><div className="pc-toolbar"><button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button><button onClick={handleGeneratePrompt} title="Generate prompt.md" className={workflowStep === 'awaitingGeneratePrompt' ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button><button onClick={handleLogState} title="Log Current State"><VscBug/></button><button onClick={handleGlobalParseToggle} className={`${isParsedMode ? 'active' : ''} ${workflowStep === 'awaitingParse' ? 'workflow-highlight' : ''}`}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} /></div></div>
         <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''} extraHeaderContent={totalPromptCostDisplay}>
             <CycleNavigator currentCycle={currentCycle} maxCycle={maxCycle} cycleTitle={cycleTitle} isNewCycleButtonDisabled={isNewCycleButtonDisabled} onCycleChange={handleCycleChange} onNewCycle={handleNewCycle} onTitleChange={(title) => { setCycleTitle(title); }} onDeleteCycle={handleDeleteCycle} onResetHistory={handleResetHistory} onExportHistory={handleExportHistory} onImportHistory={handleImportHistory} onGitBaseline={handleGitBaseline} onGitRestore={handleGitRestore} workflowStep={workflowStep} />
-            <ContextInputs cycleContext={cycleContext} ephemeralContext={ephemeralContext} cycleContextTokens={cycleContextTokens} ephemeralContextTokens={ephemeralContextTokens} onCycleContextChange={onCycleContextChange} onEphemeralContextChange={onEphemeralContextChange} onContextKeyDown={handleContextKeyDown} cycleContextHeight={cycleContextHeight} onCycleContextHeightChange={setCycleContextHeight} ephemeralContextHeight={ephemeralContextHeight} onEphemeralContextHeightChange={setEphemeralContextHeight} currentCycle={currentCycle} workflowStep={workflowStep} />
+            <ContextInputs cycleContext={cycleContext} ephemeralContext={ephemeralContext} cycleContextTokens={cycleContextTokens} ephemeralContextTokens={ephemeralContextTokens} onCycleContextChange={onCycleContextChange} onEphemeralContextChange={onEphemeralContextChange} onContextKeyDown={handleContextKeyDown} cycleContextHeight={cycleContextHeight} onCycleContextHeightChange={setCycleContextHeight} ephemeralContextHeight={ephemeralContextHeight} currentCycle={currentCycle} workflowStep={workflowStep} />
         </CollapsibleSection>
         <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} onSortToggle={handleSortToggle} workflowStep={workflowStep} />
         <div className="tab-content">
@@ -27189,7 +27192,7 @@ const App = () => {
     </div>;
 };
 
-const root = ReactDOM.createRoot(document.getElementById('root')!);
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(<App />);
 </file>
 
@@ -27327,7 +27330,7 @@ export enum ServerToClientChannel {
 </file>
 
 <file path="src/common/ipc/channels.type.ts">
-// Updated on: C182 (Add Git Status channel)
+// Updated on: C183 (Add Git Status channel)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";

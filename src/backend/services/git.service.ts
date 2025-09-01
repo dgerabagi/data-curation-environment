@@ -1,5 +1,5 @@
 // src/backend/services/git.service.ts
-// Updated on: C182 (Add status check and improve error messages)
+// Updated on: C183 (Refactor to return results instead of showing UI)
 import * as vscode from 'vscode';
 import { exec } from 'child_process';
 import * as path from 'path';
@@ -33,23 +33,6 @@ export class GitService {
         });
     }
 
-    private notifyFrontend(serverIpc: ServerPostMessageManager, success: boolean, message: string) {
-        serverIpc.sendToClient(ServerToClientChannel.NotifyGitOperationResult, { success, message });
-        if (success) {
-            vscode.window.showInformationMessage(message);
-        } else {
-            vscode.window.showErrorMessage(message, "Open README Guide").then(selection => {
-                if (selection === "Open README Guide") {
-                    const workspaceRoot = this.getWorkspaceRoot();
-                    if (workspaceRoot) {
-                        const readmePath = vscode.Uri.file(path.join(workspaceRoot, 'src', 'Artifacts', 'README.md'));
-                        vscode.commands.executeCommand('vscode.open', readmePath);
-                    }
-                }
-            });
-        }
-    }
-
     public async handleGitStatusRequest(serverIpc: ServerPostMessageManager) {
         Services.loggerService.log("Executing Git Status check.");
         try {
@@ -64,38 +47,40 @@ export class GitService {
 
     public async handleGitBaselineRequest(commitMessage: string, serverIpc: ServerPostMessageManager) {
         Services.loggerService.log(`Executing Git Baseline with message: "${commitMessage}"`);
+        let result = { success: false, message: 'An unknown error occurred.' };
         try {
             const { stdout: statusOutput } = await this.execGitCommand('git status --porcelain');
             if (statusOutput.trim() === '') {
-                this.notifyFrontend(serverIpc, true, 'Workspace is already clean. No baseline needed.');
-                return;
-            }
-
-            await this.execGitCommand('git add .');
-            const { stderr } = await this.execGitCommand(`git commit -m "${commitMessage.replace(/"/g, '\\"')}"`);
-
-            if (stderr && stderr.includes('nothing to commit')) {
-                 this.notifyFrontend(serverIpc, true, 'You are already baselined.');
+                result = { success: true, message: 'Workspace is already clean. No baseline needed.' };
             } else {
-                this.notifyFrontend(serverIpc, true, 'Successfully created baseline commit.');
+                await this.execGitCommand('git add .');
+                const { stderr } = await this.execGitCommand(`git commit -m "${commitMessage.replace(/"/g, '\\"')}"`);
+                if (stderr && stderr.includes('nothing to commit')) {
+                    result = { success: true, message: 'You are already baselined.' };
+                } else {
+                    result = { success: true, message: 'Successfully created baseline commit.' };
+                }
             }
         } catch (error: any) {
             let errorMessage = `Git Baseline failed: ${error.message}`;
             if (error.message.includes('fatal: not a git repository')) {
                 errorMessage = 'This is not a Git repository. Please initialize it first. Refer to the README for guidance.';
             }
-            this.notifyFrontend(serverIpc, false, errorMessage);
+            result = { success: false, message: errorMessage };
         }
+        serverIpc.sendToClient(ServerToClientChannel.NotifyGitOperationResult, result);
     }
 
     public async handleGitRestoreRequest(serverIpc: ServerPostMessageManager) {
         Services.loggerService.log("Executing Git Restore.");
+        let result = { success: false, message: 'An unknown error occurred.' };
         try {
             const command = `git restore -- . ":(exclude).vscode/dce_history.json"`;
             await this.execGitCommand(command);
-            this.notifyFrontend(serverIpc, true, 'Successfully restored workspace to baseline.');
+            result = { success: true, message: 'Successfully restored workspace to baseline.' };
         } catch (error: any) {
-            this.notifyFrontend(serverIpc, false, `Git Restore failed: ${error.message}`);
+            result = { success: false, message: `Git Restore failed: ${error.message}` };
         }
+        serverIpc.sendToClient(ServerToClientChannel.NotifyGitOperationResult, result);
     }
 }
