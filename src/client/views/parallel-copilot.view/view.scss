@@ -1,5 +1,5 @@
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C179 (Fix NumberedTextarea alignment)
+// Updated on: C181 (Fix onboarding textarea width)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -186,6 +186,7 @@ body {
     font-family: var(--vscode-editor-font-family);
     font-size: var(--vscode-editor-font-size);
     resize: none;
+    padding-right: 15px; // Add padding to avoid scrollbar overlap
     &:focus {
         outline: 1px solid var(--vscode-focusBorder);
     }
@@ -222,7 +223,6 @@ body {
         background-color: var(--vscode-testing-iconPassed);
         color: var(--vscode-button-foreground);
 
-        // C177 Fix: Change text color on green banner
         .total-prompt-cost {
             color: var(--vscode-button-foreground);
         }

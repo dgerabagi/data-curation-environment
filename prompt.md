@@ -11,7 +11,7 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 6 - ts errors
+Current Cycle 6 - create artifact for word wrap, add additional animated workflow steps, `Resp 1` highlighting seems stuck, enhance generate prompt.md based on currently viewed cycle, state-aware sort animation
 Cycle 5 - still cannot progress.
 Cycle 4 - cannot progress to the next cycle
 Cycle 3 - animated workflow, abc test for cycle context field, make important templates mandatory
@@ -614,62 +614,225 @@ transitioning between manual prompting method and using the dce we are creating 
 </M5. organized artifacts list>
 
 <M6. Cycles>
-
 <Cycle 6>
-okay here are the resulting ts errors:
+okay, so if the word wrap is truly a complex issue, then can you please create a documentation artifact which would outline its solution? is there not a library or some code thats open source we can get our hands on? i dont get why you insist that its complex. the easy solution would be to simply remove the numbered line but i dont want to do that. the numbers are extremely helpful to users. please plan this out more thoroughly so that i can then help implement it.
 
-<ts errors>
+now, i will test our animated workflow more thoroughly, focusing on if we solved the `+` create new cycle button:
 
-ERROR in C:\Projects\DCE\src\backend\services\history.service.ts
-19:50-53
-[tsl] ERROR in C:\Projects\DCE\src\backend\services\history.service.ts(19,51)
-      TS2339: Property 'uri' does not exist on type 'readonly WorkspaceFolder[]'.
+okay starting a new project by creating a new folder. ill record my steps here:
+<test 1>
+1. i created a new folder 'towerdefense4' to serve as the workspace. i opened that folder as the workspace.
+1.1. at this state, the first animated highlight should be the pcpp panel button on the FTV.
+2. clicked pcpp. it opened the welcome page.
+3. i input 'i want to build a tower defense game', then clicked `Generate Initial Artifacts Prompt`.
+3.1. once the prompt.md file is created, is it possible to highlight and animate that file until it gets clicked on?
+3.2. currently, the `Resp 1` is highlighted. it would be preferrable if we could highlight the prompt.md first, once thats clicked, then we could begin highlighting the `Resp 1`.
+3.3. if we cannot animate prompt.md in the FTV, then we can just automatically open the prompt.md file.
+3.4. if we auto-pop it open, perhaps we can auto-select and auto-copy to clipboard the prompt.md? because thats what has to happen next.
+4. i then take the prompt and send it to gemini 2.5 pro via aistudio 4 times in parallel conversations.
+5. i take the responses back and place them in `Resp 1` through `Resp 4`. they do not seem to animate in succession as they used to. its unfortunate. is there a more robust way to simply detect if something is placed in the response text field or not? thats all you need to do for the trigger, no?
+7. once all four responses have input, the parse all button no longer highlights, still stuck on `Resp 1`.
+8. i click parse all, sort does not highlight, `Resp 1` is still highlighted.
+9. i clicked on the longest response (2) then clicked select resopnse, then selct all, then accept selected.
+10. once i clicked accept selected, the cycle context text field got highlighted. this part is correct. the next logical step once accepting a response is to write about observations from the accepted files.
+11. once i input something in the cycle context, then the cycle title highlights, this is correct.
+12. once i input something into cycle context, the generate prompt button and the cycle & context turns green and i can click `+` so it looks like that bug is fixed.
+13. im observing that if i click create cycle 2, then go back to cycle 1, then click generate prompt (while viewing cycle 1), i still get the cycle 2 placed inside the prompt. ideally, the generate prompt will generate up to whatever the current cycle is being viewed. this is because i only clicked new cycle, but i still need to generate and send cycle 1 off. as a user i simply clicked htis out of order. in doing so, our solution should be robust enough to allow the user to still generate either prompt they are trying to create.
+</test 1>
+so largely the test was good, especially the confirmation that `+` functions once again. im going to run another test, because i think this `Resp 1` needs to be made more robust, its wonky on my cycle 2 right now as well. im creating a new folder and running one more test:
+<test 2>
+1. created `TowerDefense5`
+2. clicked `Open Folder` in the DC FTV.
+3. selected the `TowerDefense5` Folder.
+4. clicked on the DCE spiral icon.
+4.1. the pcpp pane icon button should be animated. we can simply make this 'if not currently open, animate'. that seems easy and robust enough to work as we desire and in future situations.
+5. the welcome to the data curation environment pane opens.
+5.1. the text field on this pane should be animated, just like i saw the cycle context pane highlighted in test 1.
+5.2. as previously reported, the right-side of the text pane is covered, leading to only three-sides of the highlight affect being visible. the right-side of the text field is covered, seemingly by the scroll bar. if you can add some small % padding to the right, this should resolve the issue.
+5.3. ideally, if you could make the width of the text pane match the button below it, it would be more uniform and it would solve the overlapping issue that hides the right side of the text bar thats obscuring the highlight animation line.
+5.4. once something is input in this field, we can next highlight the `Generate Initial Artifacts Prompt`.
+6. i input 'i want to make a tower defense game' and then i click `Generate Initial Artifacts Prompt`.
+6.1. im observing `Resp 1` is immediately highlighted. without doing anything else, to test the highlighting that seemed broken in test 1, i will simply add some text into the resp 1 field and observe if the animated highlight correctly progresses to `Resp 2` or not.... it does not. this confirms it is actually broken as i did not click anything additional to obscure the clean slate state if that makes sense. 
+6.2. we want to be placing an animation right before this to solve for the observations in test 1.
+</test 2>
 
-ERROR in C:\Projects\DCE\src\backend\services\history.service.ts
-252:59-65
-[tsl] ERROR in C:\Projects\DCE\src\backend\services\history.service.ts(252,60)
-      TS2339: Property 'fsPath' does not exist on type 'Uri[]'.
+okay that was basically what i wanted to confirm with test 2, making sure the resp 1 was actually bugged and not some wonky state from my prior test being less controlled.
 
-ERROR in C:\Projects\DCE\src\backend\services\prompt.service.ts
-18:64-66
-[tsl] ERROR in C:\Projects\DCE\src\backend\services\prompt.service.ts(18,65)
-      TS1003: Identifier expected.
+please do the following:
+1. plan out what is so complex about the word wrap problem
+2. solve for the few additional animated workflow steps (the documentation for the animated workflow is critical, with so many meticulous steps, we have to keep the documentation well-aligned or else we have regression.
+3. solve for the seemingly stuck `Resp 1` -> `Resp N` animated highlighting. this was working seamlessly previously.
+4. make it so that whichever cycle is being viewed when generate prompt is clicked, that the prompt cycles are generated up to that cycle as the current cycle and does not include cycles after that.
+5. ensure that the sort animation is state aware and skips over that animation if the sort button had already been selected.
 
-ERROR in C:\Projects\DCE\src\backend\services\prompt.service.ts
-57:54-56
-[tsl] ERROR in C:\Projects\DCE\src\backend\services\prompt.service.ts(57,55)
-      TS1003: Identifier expected.
+<DCE logs (FYR)>
+[INFO] [10:02:16 AM] Congratulations, your extension "Data Curation Environment" is now active!
+[INFO] [10:02:16 AM] Services initializing...
+[INFO] [10:02:16 AM] Services initialized successfully.
+[INFO] [10:02:16 AM] Registering 5 commands.
+[INFO] [10:02:16 AM] Context Chooser view message handler initialized.
+[INFO] [10:02:16 AM] Starry Night syntax highlighter initialized.
+[INFO] [10:02:16 AM] [on-message] Received RequestInitialData. Forwarding to services.
+[INFO] [10:02:16 AM] handleWorkspaceFilesRequest started. forceRefresh=false
+[INFO] [10:02:16 AM] Building file tree from scratch.
+[INFO] [10:02:16 AM] buildTreeFromTraversal starting for root: c:\Projects\TowerDefense5
+[INFO] [10:02:16 AM] [SelectionService] No last selection found in state.
+[INFO] [10:02:16 AM] buildTreeFromTraversal finished. Root node has 0 children.
+[INFO] [10:02:16 AM] File tree built. Sending to client.
+[INFO] [10:02:16 AM] handleWorkspaceFilesRequest finished.
+[INFO] [10:02:16 AM] Persisted current selection of 0 items.
+[INFO] [10:03:03 AM] Executing dce.openParallelCopilot command to open WebviewPanel.
+[INFO] [10:03:03 AM] Parallel Co-Pilot view message handler initialized.
+[INFO] [10:03:04 AM] HistoryService: getLatestCycle called.
+[INFO] [10:03:04 AM] Fresh environment detected. Returning Cycle 0.
+[INFO] [10:03:05 AM] [SelectionService] No last selection found in state.
+[INFO] [10:03:05 AM] Project scope saved.
+[INFO] [10:03:05 AM] [SelectionService] No last selection found in state.
+[INFO] [10:03:05 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode
+[INFO] [10:03:05 AM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense5/.vscode/dce_history.json
+[INFO] [10:03:05 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
+[INFO] [10:03:05 AM] Persisted current selection of 1 items.
+[INFO] [10:03:05 AM] [SelectionService] Found 1 paths in persisted state. Validating...
+[INFO] [10:03:05 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode
+[INFO] [10:03:05 AM] [SelectionService] Returning 1 valid paths.
+[INFO] [10:03:05 AM] Persisted current selection of 1 items.
+[INFO] [10:05:49 AM] [SelectionService] Found 1 paths in persisted state. Validating...
+[INFO] [10:05:49 AM] [SelectionService] Returning 1 valid paths.
+[INFO] [10:05:49 AM] Project scope saved.
+[INFO] [10:05:49 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
+[INFO] [10:05:49 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
+[INFO] [10:05:59 AM] Generating Cycle 0 prompt.md file...
+[INFO] [10:05:59 AM] Project scope saved.
+[INFO] [10:05:59 AM] Created src/Artifacts/README.md for the new project.
+[INFO] [10:05:59 AM] Successfully generated Cycle 0 prompt.md file.
+[INFO] [10:05:59 AM] HistoryService: saving data for cycle 1.
+[INFO] [10:05:59 AM] [CONTEXT-HIGHLIGHT] Received request for context ID: cycle-context-1
+[INFO] [10:05:59 AM] [CONTEXT-HIGHLIGHT] Received request for context ID: ephemeral-context-1
+[INFO] [10:05:59 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
+[INFO] [10:05:59 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
+[INFO] [10:05:59 AM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense5/prompt.md
+[INFO] [10:05:59 AM] [SelectionService] Found 1 paths in persisted state. Validating...
+[INFO] [10:05:59 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
+[INFO] [10:05:59 AM] [SelectionService] Returning 1 valid paths.
+[INFO] [10:05:59 AM] Persisted current selection of 2 items.
+[INFO] [10:05:59 AM] [SelectionService] Found 2 paths in persisted state. Validating...
+[INFO] [10:05:59 AM] [SelectionService] Returning 2 valid paths.
+[INFO] [10:05:59 AM] Persisted current selection of 4 items.
+[INFO] [10:06:00 AM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [10:06:00 AM] handleWorkspaceFilesRequest started. forceRefresh=true
+[INFO] [10:06:00 AM] Building file tree from scratch.
+[INFO] [10:06:00 AM] buildTreeFromTraversal starting for root: c:\Projects\TowerDefense5
+[INFO] [10:06:00 AM] [SelectionService] Found 4 paths in persisted state. Validating...
+[INFO] [10:06:00 AM] [SelectionService] Returning 4 valid paths.
+[INFO] [10:06:00 AM] Persisted current selection of 4 items.
+[INFO] [10:06:00 AM] buildTreeFromTraversal finished. Root node has 2 children.
+[INFO] [10:06:00 AM] File tree built. Sending to client.
+[INFO] [10:06:00 AM] handleWorkspaceFilesRequest finished.
+[INFO] [10:06:00 AM] [SelectionService] Found 4 paths in persisted state. Validating...
+[INFO] [10:06:00 AM] [SelectionService] Returning 4 valid paths.
+[INFO] [10:06:01 AM] HistoryService: saving data for cycle 1.
+[INFO] [10:06:01 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
+[INFO] [10:06:01 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
+[INFO] [10:06:54 AM] [SelectionService] Found 4 paths in persisted state. Validating...
+[INFO] [10:06:54 AM] [SelectionService] Returning 4 valid paths.
+[INFO] [10:06:55 AM] HistoryService: saving data for cycle 1.
+[INFO] [10:06:55 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
+[INFO] [10:06:55 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
+[INFO] [10:08:27 AM] [CONTEXT-HIGHLIGHT] Received request for context ID: cycle-context-1
+[INFO] [10:08:28 AM] [SelectionService] Found 4 paths in persisted state. Validating...
+[INFO] [10:08:28 AM] [SelectionService] Returning 4 valid paths.
+[INFO] [10:08:28 AM] HistoryService: saving data for cycle 1.
+[INFO] [10:08:28 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
+[INFO] [10:08:28 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
+[INFO] [10:08:31 AM] [CONTEXT-HIGHLIGHT] Received request for context ID: cycle-context-1
+[INFO] [10:08:32 AM] [CONTEXT-HIGHLIGHT] Received request for context ID: cycle-context-1
+[INFO] [10:08:32 AM] [CONTEXT-HIGHLIGHT] Received request for context ID: cycle-context-1
+[INFO] [10:08:33 AM] [SelectionService] Found 4 paths in persisted state. Validating...
+[INFO] [10:08:33 AM] HistoryService: saving data for cycle 1.
+[INFO] [10:08:33 AM] [SelectionService] Returning 4 valid paths.
+[INFO] [10:08:33 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
+[INFO] [10:08:33 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
+[INFO] [10:08:40 AM] [SelectionService] Found 4 paths in persisted state. Validating...
+[INFO] [10:08:40 AM] HistoryService: saving data for cycle 1.
+[INFO] [10:08:40 AM] [SelectionService] Returning 4 valid paths.
+[INFO] [10:08:40 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
+[INFO] [10:08:40 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
+[INFO] [10:12:15 AM] [SelectionService] Found 4 paths in persisted state. Validating...
+[INFO] [10:12:15 AM] HistoryService: saving data for cycle 1.
+[INFO] [10:12:15 AM] [SelectionService] Returning 4 valid paths.
+[INFO] [10:12:15 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
+[INFO] [10:12:15 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
+[INFO] [10:13:42 AM] [CONTEXT-HIGHLIGHT] Received request for context ID: ephemeral-context-1
+[INFO] [10:13:42 AM] [CONTEXT-HIGHLIGHT] Received request for context ID: ephemeral-context-1
+[INFO] [10:13:42 AM] [CONTEXT-HIGHLIGHT] Received request for context ID: ephemeral-context-1
+[INFO] [10:13:43 AM] [SelectionService] Found 4 paths in persisted state. Validating...
+[INFO] [10:13:43 AM] [SelectionService] Returning 4 valid paths.
+[INFO] [10:13:44 AM] HistoryService: saving data for cycle 1.
+[INFO] [10:13:44 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
+[INFO] [10:13:44 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
+[INFO] [10:13:45 AM] HistoryService: saving data for cycle 1.
+[INFO] [10:13:45 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
+[INFO] [10:13:45 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
+[INFO] [10:17:06 AM] [SelectionService] Found 4 paths in persisted state. Validating...
+[INFO] [10:17:06 AM] HistoryService: saving data for cycle 1.
+[INFO] [10:17:06 AM] [SelectionService] Returning 4 valid paths.
+[INFO] [10:17:06 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
+[INFO] [10:17:06 AM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense5/.vscode/dce_history.json
+[INFO] [10:17:09 AM] --- GENERATING STATE LOG ---
+[INFO] [10:17:09 AM] 
+========================= CYCLE STATE DUMP =========================
+{
+  "FRONTEND_STATE": {
+    "currentCycle": 1,
+    "maxCycle": 1,
+    "isNewCycleButtonDisabled": true,
+    "conditions": {
+      "hasTitle": false,
+      "hasContext": true,
+      "hasSelectedResponse": false
+    }
+  },
+  "BACKEND_HISTORY_FILE": {
+    "version": 1,
+    "cycles": [
+      {
+        "cycleId": 1,
+        "timestamp": "2025-09-01T15:17:06.512Z",
+        "title": "New Cycle",
+        "cycleContext": "test",
+        "ephemeralContext": "ddd",
+        "responses": {
+          "1": {
+            "content": "test"
+          },
+          "2": {
+            "content": ""
+          },
+          "3": {
+            "content": ""
+          },
+          "4": {
+            "content": ""
+          }
+        },
+        "isParsedMode": false,
+        "leftPaneWidth": 33,
+        "selectedResponseId": null,
+        "selectedFilesForReplacement": [],
+        "tabCount": 4,
+        "isSortedByTokens": false,
+        "pathOverrides": {},
+        "cycleContextHeight": 230,
+        "ephemeralContextHeight": 100
+      }
+    ],
+    "projectScope": "i want to make a tower defense game"
+  }
+}
+======================================================================
 
-ERROR in C:\Projects\DCE\src\backend\services\prompt.service.ts
-58:54-56
-[tsl] ERROR in C:\Projects\DCE\src\backend\services\prompt.service.ts(58,55)
-      TS1003: Identifier expected.
 
-ERROR in C:\Projects\DCE\src\backend\services\prompt.service.ts
-338:96
-[tsl] ERROR in C:\Projects\DCE\src\backend\services\prompt.service.ts(338,97)
-      TS1160: Unterminated template literal.
-
-ERROR in C:\Projects\DCE\src\backend\services\prompt.service.ts
-18:66-69
-[tsl] ERROR in C:\Projects\DCE\src\backend\services\prompt.service.ts(18,67)
-      TS2304: Cannot find name 'uri'.
-
-ERROR in C:\Projects\DCE\src\backend\services\prompt.service.ts
-166:69-80
-[tsl] ERROR in C:\Projects\DCE\src\backend\services\prompt.service.ts(166,70)
-      TS2345: Argument of type 'Uri[]' is not assignable to parameter of type 'Uri'.
-  Type 'Uri[]' is missing the following properties from type 'Uri': scheme, authority, path, query, and 4 more.
-
-8 errors have detailed information that is not shown.
-Use 'stats.errorDetails: true' resp. '--stats-error-details' to show it.
-
-webpack 5.101.1 compiled with 8 errors in 10184 ms
-    [webpack-cli] Compiler is watching files for updates...
-
-
-</ts errors>
-
+</DCE logs (FYR)>
 <previous cycle 5 summary of actions>
 <summary>
 I have analyzed your feedback from Cycle 5. The primary issue is the inability to create a new cycle after deleting a previous one, which points to a state synchronization bug between the frontend and backend. Additionally, there are persistent usability issues with the context text areas, including a single-character input bug and incorrect line numbering for word-wrapped text.
@@ -703,7 +866,6 @@ My course of action is to fix these critical bugs to restore core functionality.
 
 </previous cycle 5 summary of actions>
 </Cycle 6>
-
 
 <Cycle 5>
 okay original text field is working better, still have the word wrap issue. im manually adding in this cycle 4 becuase i still cannot create a new cycle once deleting it. ive added the logs i see. is it possible to somehow reveal what the extension thinks my current state is, pertaining the the allowing of creating a new cycle? like when i click the log state button? make the log state button only do that. ill click it in this stte, and wea can analyze the logs.
@@ -1833,13 +1995,16 @@ asdf
 
 <M7. Flattened Repo>
 
+
+
+
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-01T14:30:15.595Z
+  Date Generated: 2025-09-01T15:17:49.069Z
   ---
   Total Files: 166
-  Approx. Tokens: 442042
+  Approx. Tokens: 442531
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -1848,8 +2013,8 @@ asdf
 3. src\Artifacts\A0. DCE Master Artifact List.md (7119 tokens)
 4. src\client\views\parallel-copilot.view\view.tsx (6947 tokens)
 5. src\client\views\parallel-copilot.view\view.scss (5160 tokens)
-6. src\client\components\tree-view\TreeView.tsx (4429 tokens)
-7. src\backend\services\prompt.service.ts (4389 tokens)
+6. src\backend\services\prompt.service.ts (4876 tokens)
+7. src\client\components\tree-view\TreeView.tsx (4429 tokens)
 8. src\client\views\context-chooser.view\view.tsx (4035 tokens)
 9. src\backend\services\file-operation.service.ts (4021 tokens)
 10. src\client\views\context-chooser.view\view.scss (3708 tokens)
@@ -1963,9 +2128,9 @@ asdf
 106. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12820 - Tokens: 3205
 107. src\backend\services\git.service.ts - Lines: 76 - Chars: 3672 - Tokens: 918
 108. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4232 - Tokens: 1058
-109. src\backend\services\history.service.ts - Lines: 270 - Chars: 11304 - Tokens: 2826
+109. src\backend\services\history.service.ts - Lines: 270 - Chars: 11310 - Tokens: 2828
 110. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-111. src\backend\services\prompt.service.ts - Lines: 338 - Chars: 17554 - Tokens: 4389
+111. src\backend\services\prompt.service.ts - Lines: 374 - Chars: 19501 - Tokens: 4876
 112. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 113. src\backend\services\services.ts - Lines: 40 - Chars: 1827 - Tokens: 457
 114. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
@@ -23652,7 +23817,7 @@ export class HistoryService {
     constructor() {
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (workspaceFolders && workspaceFolders.length > 0) {
-            this.workspaceRoot = workspaceFolders.uri.fsPath;
+            this.workspaceRoot = workspaceFolders[0].uri.fsPath;
             this.historyFilePath = path.join(this.workspaceRoot, '.vscode', 'dce_history.json');
         } else {
             Services.loggerService.warn("HistoryService: No workspace folder found. History will not be saved.");
@@ -23885,7 +24050,7 @@ export class HistoryService {
                 filters: { 'JSON': ['json'] }
             });
             if (openUris && openUris.length > 0) {
-                const content = await fs.readFile(openUris.fsPath, 'utf-8');
+                const content = await fs.readFile(openUris[0].fsPath, 'utf-8');
                 const historyData = JSON.parse(content);
                 if (historyData.version && Array.isArray(historyData.cycles)) {
                     await this._writeHistoryFile(historyData);
@@ -23965,7 +24130,7 @@ export class PromptService {
 
     constructor(extensionUri: vscode.Uri) {
         this.extensionUri = extensionUri;
-        this.workspaceRoot = vscode.workspace.workspaceFolders?.?.uri.fsPath;
+        this.workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
     }
 
     private artifactSchemaTemplate = `<M1. artifact schema>
@@ -24004,8 +24169,8 @@ M7. Flattened Repo
             .filter(filename => filename.startsWith('T') && filename.endsWith('.md'));
 
         templateFilenames.sort((a, b) => {
-            const numA = parseInt(a.match(/T(\d+)/)?. || '0', 10);
-            const numB = parseInt(b.match(/T(\d+)/)?. || '0', 10);
+            const numA = parseInt(a.match(/T(\d+)/)?.[1] || '0', 10);
+            const numB = parseInt(b.match(/T(\d+)/)?.[1] || '0', 10);
             return numA - numB;
         });
 
@@ -24113,7 +24278,7 @@ ${staticContext.trim()}
         const userA0Files = await vscode.workspace.findFiles('**/*A0*Master*Artifact*List.md', '**/node_modules/**', 1);
         let a0Content = '<!-- Master Artifact List (A0) not found in workspace -->';
         if (userA0Files.length > 0) {
-            const contentBuffer = await vscode.workspace.fs.readFile(userA0Files);
+            const contentBuffer = await vscode.workspace.fs.readFile(userA0Files[0]);
             a0Content = Buffer.from(contentBuffer).toString('utf-8');
         }
         
@@ -24285,7 +24450,43 @@ ${JSON.stringify(stateDump, null, 2)}
             await vscode.workspace.fs.writeFile(readmeUri, Buffer.from(readmeContent, 'utf-8'));
             Services.loggerService.log("Created src/Artifacts/README.md for the new project.");
             
-            const readmeFileContent = `<file path="src/Artifacts/README.md">\n${readmeContent}\n
+            const readmeFileContent = `<file path="src/Artifacts/README.md">\n${readmeContent}\n</file>`;
+            const flattenedRepoContent = `<M7. Flattened Repo>\n${readmeFileContent}\n</M7. Flattened Repo>`;
+
+            const promptParts = [
+                this.artifactSchemaTemplate, `<M2. cycle overview>\nCurrent Cycle 0 - Project Initialization\n</M2. cycle overview>`, interactionSchemaContent, projectScopeContent, `<M5. organized artifacts list>\n# No artifacts exist yet.\n</M5. organized artifacts list>`, `<M6. Cycles>\n${cycle0Content}\n</M6. Cycles>`, flattenedRepoContent
+            ];
+            const promptContent = promptParts.join('\n\n');
+            const finalPrompt = `<prompt.md>\n\n${promptContent}\n\n</prompt.md>`;
+
+            await vscode.workspace.fs.writeFile(vscode.Uri.file(promptMdPath), Buffer.from(finalPrompt, 'utf-8'));
+            Services.loggerService.log("Successfully generated Cycle 0 prompt.md file.");
+            
+            vscode.window.showInformationMessage(`Successfully generated initial prompt.md and created src/Artifacts/README.md`);
+
+            const cycle1Data: PcppCycle = {
+                cycleId: 1,
+                timestamp: new Date().toISOString(),
+                title: 'New Cycle',
+                cycleContext: '',
+                ephemeralContext: '',
+                responses: { "1": { content: "" } },
+                isParsedMode: false,
+                leftPaneWidth: 33,
+                selectedResponseId: null,
+                selectedFilesForReplacement: [],
+                tabCount: 4
+            };
+
+            await Services.historyService.saveCycleData(cycle1Data);
+            serverIpc.sendToClient(ServerToClientChannel.SendLatestCycleData, { cycleData: cycle1Data, projectScope });
+
+        } catch (error: any) {
+            vscode.window.showErrorMessage(`Failed to generate Cycle 0 prompt: ${error.message}`);
+            Services.loggerService.error(`Failed to generate Cycle 0 prompt: ${error.message}`);
+        }
+    }
+}
 </file>
 
 <file path="src/backend/services/selection.service.ts">
@@ -30087,6 +30288,8 @@ Once a working pattern is identified in a test component:
 2.  **Integrate Solution:** The original `NumberedTextarea.tsx` component will be refactored to use the successful pattern.
 3.  **Remove Test Artifacts:** The test harness UI and the `TestPane*.tsx` component files will be removed from the project.
 </file>
+
+
 
 
 

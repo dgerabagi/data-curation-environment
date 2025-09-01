@@ -1,4 +1,4 @@
-// Updated on: C180 (Focus log output on cycle management state)
+// Updated on: C181 (Use currentCycle for prompt generation)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -59,7 +59,6 @@ M7. Flattened Repo
             return numA - numB;
         });
 
-        // C179: Prioritize T14 and T7 by moving them to the front of the list if they exist.
         const priorityArtifacts = ['T14. Template - GitHub Repository Setup Guide.md', 'T7. Template - Development and Testing Guide.md'];
         priorityArtifacts.forEach(pa => {
             const index = templateFilenames.indexOf(pa);
@@ -105,7 +104,7 @@ ${staticContext.trim()}
         let cyclesContent = '<M6. Cycles>';
     
         for (const cycle of sortedHistory) {
-            if (cycle.cycleId === 0) continue; // Skip cycle 0 as it will be added last
+            if (cycle.cycleId === 0) continue;
             cyclesContent += `\n\n<Cycle ${cycle.cycleId}>\n`;
     
             if (cycle.cycleContext && cycle.cycleContext.trim()) {
@@ -117,7 +116,7 @@ ${staticContext.trim()}
             }
     
             const previousCycleId = cycle.cycleId - 1;
-            if (previousCycleId > 0) { // Don't generate summary for Cycle 0
+            if (previousCycleId > 0) {
                 const previousCycle = cycleMap.get(previousCycleId);
                 if (previousCycle) {
                     const summary = this.getPreviousCycleSummary(previousCycle);
@@ -143,8 +142,8 @@ ${staticContext.trim()}
         const fullHistoryFile = await Services.historyService.getFullHistory();
         const fullHistory: PcppCycle[] = fullHistoryFile.cycles;
         
-        const allCycles = [...fullHistory.filter(c => c.cycleId !== cycleData.cycleId), cycleData];
-        const sortedHistoryForOverview = allCycles.sort((a, b) => b.cycleId - a.cycleId);
+        const allCycles = fullHistory.filter(c => c.cycleId <= cycleData.cycleId);
+        const sortedHistoryForOverview = [...allCycles].sort((a, b) => b.cycleId - a.cycleId);
 
         let cycleOverview = '<M2. cycle overview>\n';
         cycleOverview += `Current Cycle ${cycleData.cycleId} - ${cycleData.title}\n`;
@@ -267,7 +266,7 @@ ${JSON.stringify(stateDump, null, 2)}
         const promptMdPath = path.join(rootPath, 'prompt.md');
 
         try {
-            Services.loggerService.log("Generating prompt.md file...");
+            Services.loggerService.log(`Generating prompt.md file for cycle ${currentCycle}...`);
             
             const lastSelection = await Services.selectionService.getLastSelection();
             let flattenedContent = '<!-- No files selected for flattening -->';
@@ -291,13 +290,12 @@ ${JSON.stringify(stateDump, null, 2)}
 
             const promptParts = await this.getPromptParts(currentCycleData, flattenedContent);
             
-            // Fix for bug #6: Ensure prompt tags wrap the entire content
             const promptContent = Object.values(promptParts).join('\n\n');
             const finalPrompt = `<prompt.md>\n\n${promptContent}\n\n</prompt.md>`;
 
             await fs.writeFile(promptMdPath, finalPrompt, 'utf-8');
-            vscode.window.showInformationMessage(`Successfully generated prompt.md.`);
-            Services.loggerService.log("Successfully generated prompt.md file.");
+            vscode.window.showInformationMessage(`Successfully generated prompt.md for Cycle ${currentCycle}.`);
+            Services.loggerService.log(`Successfully generated prompt.md file for Cycle ${currentCycle}.`);
 
             await Services.fileOperationService.handleOpenFileRequest(promptMdPath);
 
@@ -348,6 +346,8 @@ ${JSON.stringify(stateDump, null, 2)}
             Services.loggerService.log("Successfully generated Cycle 0 prompt.md file.");
             
             vscode.window.showInformationMessage(`Successfully generated initial prompt.md and created src/Artifacts/README.md`);
+            await Services.fileOperationService.handleOpenFileRequest(promptMdPath);
+
 
             const cycle1Data: PcppCycle = {
                 cycleId: 1,

@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/OnboardingView.tsx
-// Updated on: C172 (No functional changes, header update only)
+// Updated on: C181 (Add workflow highlighting class)
 import * as React from 'react';
 import { VscRocket, VscArrowRight } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -11,9 +11,10 @@ interface OnboardingViewProps {
     onNavigateToCycle: (cycleId: number) => void;
     latestCycleId: number;
     onScopeChange: (scope: string) => void;
+    workflowStep: string | null;
 }
 
-const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope, onNavigateToCycle, latestCycleId, onScopeChange }) => {
+const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope, onNavigateToCycle, latestCycleId, onScopeChange, workflowStep }) => {
     const [projectScope, setProjectScope] = React.useState(initialProjectScope || '');
     const [isGenerating, setIsGenerating] = React.useState(false);
     const [promptGenerated, setPromptGenerated] = React.useState(false);
@@ -29,7 +30,7 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope, on
         if (projectScope.trim()) {
             setIsGenerating(true);
             logger.log("Sending request to generate Cycle 0 prompt and save project scope.");
-            onScopeChange(projectScope); // Ensure parent has the latest scope before IPC call
+            onScopeChange(projectScope); 
             clientIpc.sendToServer(ClientToServerChannel.RequestCreateCycle0Prompt, { projectScope });
             setTimeout(() => {
                 setIsGenerating(false);
@@ -58,7 +59,7 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope, on
                 }
             </p>
             <textarea
-                className="onboarding-textarea"
+                className={`onboarding-textarea ${workflowStep === 'awaitingProjectScope' ? 'workflow-highlight' : ''}`}
                 placeholder="e.g., I want to build a web application that allows users to track their daily habits. It should have a simple UI, user authentication, and a dashboard to visualize progress..."
                 value={projectScope}
                 onChange={handleScopeChange}
@@ -69,7 +70,11 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope, on
                     <VscArrowRight /> Return to Cycle {latestCycleId}
                 </button>
             ) : !promptGenerated ? (
-                <button className="styled-button" onClick={handleGenerate} disabled={!projectScope.trim() || isGenerating}>
+                <button 
+                    className={`styled-button ${workflowStep === 'awaitingGenerateInitialPrompt' ? 'workflow-highlight' : ''}`}
+                    onClick={handleGenerate} 
+                    disabled={!projectScope.trim() || isGenerating}
+                >
                     <VscRocket /> {isGenerating ? 'Generating...' : 'Generate Initial Artifacts Prompt'}
                 </button>
             ) : (

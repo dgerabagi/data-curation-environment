@@ -1,4 +1,4 @@
-// Updated on: C180 (Add return type for deleteCycle)
+// Updated on: C181 (Add currentCycle to RequestCreatePromptFile)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
