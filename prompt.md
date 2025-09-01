@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 5 - still cannot progress.
+Current Cycle 6 - ts errors
+Cycle 5 - still cannot progress.
 Cycle 4 - cannot progress to the next cycle
 Cycle 3 - animated workflow, abc test for cycle context field, make important templates mandatory
 Cycle 2 - continue working the workflow animations, context text fields wonky, ignore the .git directory
@@ -613,6 +614,97 @@ transitioning between manual prompting method and using the dce we are creating 
 </M5. organized artifacts list>
 
 <M6. Cycles>
+
+<Cycle 6>
+okay here are the resulting ts errors:
+
+<ts errors>
+
+ERROR in C:\Projects\DCE\src\backend\services\history.service.ts
+19:50-53
+[tsl] ERROR in C:\Projects\DCE\src\backend\services\history.service.ts(19,51)
+      TS2339: Property 'uri' does not exist on type 'readonly WorkspaceFolder[]'.
+
+ERROR in C:\Projects\DCE\src\backend\services\history.service.ts
+252:59-65
+[tsl] ERROR in C:\Projects\DCE\src\backend\services\history.service.ts(252,60)
+      TS2339: Property 'fsPath' does not exist on type 'Uri[]'.
+
+ERROR in C:\Projects\DCE\src\backend\services\prompt.service.ts
+18:64-66
+[tsl] ERROR in C:\Projects\DCE\src\backend\services\prompt.service.ts(18,65)
+      TS1003: Identifier expected.
+
+ERROR in C:\Projects\DCE\src\backend\services\prompt.service.ts
+57:54-56
+[tsl] ERROR in C:\Projects\DCE\src\backend\services\prompt.service.ts(57,55)
+      TS1003: Identifier expected.
+
+ERROR in C:\Projects\DCE\src\backend\services\prompt.service.ts
+58:54-56
+[tsl] ERROR in C:\Projects\DCE\src\backend\services\prompt.service.ts(58,55)
+      TS1003: Identifier expected.
+
+ERROR in C:\Projects\DCE\src\backend\services\prompt.service.ts
+338:96
+[tsl] ERROR in C:\Projects\DCE\src\backend\services\prompt.service.ts(338,97)
+      TS1160: Unterminated template literal.
+
+ERROR in C:\Projects\DCE\src\backend\services\prompt.service.ts
+18:66-69
+[tsl] ERROR in C:\Projects\DCE\src\backend\services\prompt.service.ts(18,67)
+      TS2304: Cannot find name 'uri'.
+
+ERROR in C:\Projects\DCE\src\backend\services\prompt.service.ts
+166:69-80
+[tsl] ERROR in C:\Projects\DCE\src\backend\services\prompt.service.ts(166,70)
+      TS2345: Argument of type 'Uri[]' is not assignable to parameter of type 'Uri'.
+  Type 'Uri[]' is missing the following properties from type 'Uri': scheme, authority, path, query, and 4 more.
+
+8 errors have detailed information that is not shown.
+Use 'stats.errorDetails: true' resp. '--stats-error-details' to show it.
+
+webpack 5.101.1 compiled with 8 errors in 10184 ms
+    [webpack-cli] Compiler is watching files for updates...
+
+
+</ts errors>
+
+<previous cycle 5 summary of actions>
+<summary>
+I have analyzed your feedback from Cycle 5. The primary issue is the inability to create a new cycle after deleting a previous one, which points to a state synchronization bug between the frontend and backend. Additionally, there are persistent usability issues with the context text areas, including a single-character input bug and incorrect line numbering for word-wrapped text.
+
+My course of action is to fix these critical bugs to restore core functionality. I will first address the cycle creation blocker by ensuring the frontend's state is correctly updated after a deletion. Then, I will fix the text area input bug, which is a classic React focus management problem. Finally, I will formally document the word-wrap issue and the plan to address it in a future cycle using our A-B-C testing methodology.
+
+</summary>
+
+<course_of_action>
+1.  **Documentation First (Codifying Bugs & Plans):**
+    *   I will update **`A11. DCE - Regression Case Studies.md`** with two new case studies:
+        *   **"Stuck on Cycle Creation After Deletion":** The RCA is that the frontend's `maxCycle` state is not updated when a cycle is deleted. The solution is for the backend `deleteCycle` method to return the new maximum cycle, which the frontend then uses to update its state.
+        *   **"Single Character Input Bug in Text Area":** The RCA is a classic React focus management issue where the component re-renders on every keystroke, causing the input to lose focus. The solution is to ensure the component (`NumberedTextarea`) and its `onChange` handlers are properly memoized using `React.memo` and `useCallback`.
+    *   I will create a new artifact, **`A75. DCE - Text Area Component A-B-C Test Plan.md`**, to formally plan the diagnosis and resolution of the text area scrolling and word-wrap bugs using our established testing strategy. I will also add this to `A0`.
+    *   I will update **`A59. DCE - Phase 2 - Debugging and State Logging.md`** to specify that the "Log State" button will be modified to output only the state relevant to the cycle creation bug (`currentCycle`, `maxCycle`, etc.) to aid in diagnostics.
+
+2.  **Fix Cycle Creation Bug:**
+    *   **Backend (`history.service.ts`):** I will modify the `deleteCycle` method to return the new maximum `cycleId` after a successful deletion. Its signature will change from `Promise<void>` to `Promise<number>`.
+    *   **IPC (`channels.enum.ts`, `channels.type.ts`):** I will update the IPC channels to handle this response.
+    *   **Backend (`on-message.ts`):** The message handler for `RequestDeleteCycle` will now `await` the result from the `history.service.ts` and send a message back to the client with the new `maxCycle`.
+    *   **Frontend (`view.tsx`):** The `handleDeleteCycle` function will be updated to handle the response from the backend, setting the `maxCycle` state variable correctly. This will re-enable the `+` button at the appropriate time.
+
+3.  **Fix Single-Character Input Bug:**
+    *   **`NumberedTextarea.tsx`:** I will wrap the component export in `React.memo` to prevent it from re-rendering if its props have not changed.
+    *   **`view.tsx`:** The `onChange` handlers for the context text areas (`onCycleContextChange`, `onEphemeralContextChange`) will be wrapped in `useCallback` with the correct dependency arrays. This ensures a stable function is passed as a prop, preserving the memoization of the child component and preventing focus loss.
+
+4.  **Enhance "Log State" Button:**
+    *   **`prompt.service.ts`:** I will modify the `generateStateLog` method. It will now generate a focused report containing only the state variables relevant to cycle management (`currentCycle`, `maxCycle`, `isNewCycleButtonDisabled`, etc.) for easier debugging.
+
+</course_of_action>
+
+</previous cycle 5 summary of actions>
+</Cycle 6>
+
+
 <Cycle 5>
 okay original text field is working better, still have the word wrap issue. im manually adding in this cycle 4 becuase i still cannot create a new cycle once deleting it. ive added the logs i see. is it possible to somehow reveal what the extension thinks my current state is, pertaining the the allowing of creating a new cycle? like when i click the log state button? make the log state button only do that. ill click it in this stte, and wea can analyze the logs.
 
@@ -1737,24 +1829,27 @@ This file-centric approach helps in planning and prioritizing work, especially i
 
 </M6. Cycles>
 
+asdf
+
 <M7. Flattened Repo>
+
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-08-31T16:20:12.568Z
+  Date Generated: 2025-09-01T14:30:15.595Z
   ---
   Total Files: 166
-  Approx. Tokens: 442610
+  Approx. Tokens: 442042
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (239424 tokens)
 2. src\Artifacts\A11. DCE - Regression Case Studies.md (8593 tokens)
 3. src\Artifacts\A0. DCE Master Artifact List.md (7119 tokens)
-4. src\client\views\parallel-copilot.view\view.tsx (6937 tokens)
+4. src\client\views\parallel-copilot.view\view.tsx (6947 tokens)
 5. src\client\views\parallel-copilot.view\view.scss (5160 tokens)
-6. src\backend\services\prompt.service.ts (4867 tokens)
-7. src\client\components\tree-view\TreeView.tsx (4429 tokens)
+6. src\client\components\tree-view\TreeView.tsx (4429 tokens)
+7. src\backend\services\prompt.service.ts (4389 tokens)
 8. src\client\views\context-chooser.view\view.tsx (4035 tokens)
 9. src\backend\services\file-operation.service.ts (4021 tokens)
 10. src\client\views\context-chooser.view\view.scss (3708 tokens)
@@ -1822,7 +1917,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 60. src\Artifacts\A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md - Lines: 47 - Chars: 5687 - Tokens: 1422
 61. src\Artifacts\A57. DCE - Phase 2 - Cycle Management Plan.md - Lines: 44 - Chars: 3625 - Tokens: 907
 62. src\Artifacts\A58. DCE - WinMerge Source Code Analysis.md - Lines: 56 - Chars: 5322 - Tokens: 1331
-63. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 44 - Chars: 3786 - Tokens: 947
+63. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 39 - Chars: 3393 - Tokens: 849
 64. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 35 - Chars: 4175 - Tokens: 1044
 65. src\Artifacts\A61. DCE - Phase 2 - Cycle History Management Plan.md - Lines: 45 - Chars: 3559 - Tokens: 890
 66. src\Artifacts\A62. DCE - Cycle 157 - Task Tracker.md - Lines: 31 - Chars: 2710 - Tokens: 678
@@ -1868,9 +1963,9 @@ This file-centric approach helps in planning and prioritizing work, especially i
 106. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12820 - Tokens: 3205
 107. src\backend\services\git.service.ts - Lines: 76 - Chars: 3672 - Tokens: 918
 108. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4232 - Tokens: 1058
-109. src\backend\services\history.service.ts - Lines: 270 - Chars: 11310 - Tokens: 2828
+109. src\backend\services\history.service.ts - Lines: 270 - Chars: 11304 - Tokens: 2826
 110. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-111. src\backend\services\prompt.service.ts - Lines: 381 - Chars: 19466 - Tokens: 4867
+111. src\backend\services\prompt.service.ts - Lines: 338 - Chars: 17554 - Tokens: 4389
 112. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 113. src\backend\services\services.ts - Lines: 40 - Chars: 1827 - Tokens: 457
 114. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
@@ -1904,7 +1999,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 142. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 28 - Chars: 1184 - Tokens: 296
 143. src\client\views\parallel-copilot.view\view.scss - Lines: 903 - Chars: 20639 - Tokens: 5160
 144. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-145. src\client\views\parallel-copilot.view\view.tsx - Lines: 158 - Chars: 27746 - Tokens: 6937
+145. src\client\views\parallel-copilot.view\view.tsx - Lines: 158 - Chars: 27788 - Tokens: 6947
 146. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
 147. src\common\ipc\channels.enum.ts - Lines: 86 - Chars: 4556 - Tokens: 1139
 148. src\common\ipc\channels.type.ts - Lines: 86 - Chars: 6511 - Tokens: 1628
@@ -1931,7 +2026,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C179 (Add A75 for Text Area testing)
+# Updated on: C180 (Add A75 for Text Area testing)
 
 ## 1. Purpose
 
@@ -6292,7 +6387,7 @@ By studying the algorithms and architectural patterns in these key files, we can
 # Artifact A59: DCE - Phase 2 - Debugging and State Logging
 # Date Created: C134
 # Author: AI Model & Curator
-# Updated on: C137 (Specify code truncation in log output)
+# Updated on: C180 (Focus log output on cycle management state)
 
 - **Key/Value for A0:**
 - **Description:** Documents the plan for a "Log State" button that outputs critical state information (cycle history, current inputs) to the debug channel to accelerate troubleshooting.
@@ -6308,7 +6403,7 @@ The goal of this feature is to add a **"Log State"** button to the PCPP's main h
 
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
-| P2-LOG-01 | **Log Current State for Debugging** | As a curator encountering a bug, I want to click a "Log State" button that outputs the current state of the entire PCPP to the debug logs, so I can easily copy and paste this information for you to reproduce the issue. | - A "Log State" button is present in the main header of the PCPP. <br> - Clicking the button generates a formatted message in the "Data Curation Environment" output channel. <br> - The log contains two key pieces of information: <br> &nbsp;&nbsp;&nbsp; 1. A formatted JSON dump of the current state of all cycle data (titles, contexts, raw responses). <br> &nbsp;&nbsp;&nbsp; 2. The exact `<M6. Cycles>` block that *would be* generated for `prompt.md` based on the current state. <br> - **(C137 Update)** The `content` of AI responses within the JSON dump is truncated to show only the first and last few lines, making the log more readable. |
+| P2-LOG-01 | **Log Current State for Debugging** | As a curator encountering a bug, I want to click a "Log State" button that outputs the current state of the entire PCPP to the debug logs, so I can easily copy and paste this information for you to reproduce the issue. | - A "Log State" button is present in the main header of the PCPP. <br> - Clicking the button generates a formatted message in the "Data Curation Environment" output channel. <br> - **(C180 Update)** The log output is now focused specifically on the state variables relevant to cycle management to diagnose the "stuck on new cycle" bug. It will include: <br> &nbsp;&nbsp;&nbsp; 1. A summary of the key frontend state variables (`currentCycle`, `maxCycle`, `isNewCycleButtonDisabled`). <br> &nbsp;&nbsp;&nbsp; 2. A truncated JSON dump of the entire `dce_history.json` file from the backend for comparison. |
 
 ## 3. Technical Implementation Plan
 
@@ -6322,17 +6417,12 @@ The goal of this feature is to add a **"Log State"** button to the PCPP's main h
 
 3.  **Backend Logic (`prompt.service.ts`):**
     *   A new public method, `public async generateStateLog(currentState: PcppCycle)`, will be created.
-    *   **Step 1: Generate Formatted State Dump:**
-        *   It will call `Services.historyService.getFullHistory()` to get all historical cycle data.
-        *   **(C137)** It will iterate through the `currentState` and `fullHistory` objects, applying a new `truncateCodeForLogging` utility function to the `content` property of each response.
-        *   It will create a new object containing the truncated state data and `JSON.stringify` it for readability.
-    *   **Step 2: Generate `<M6. Cycles>` Content:**
-        *   It will re-use the existing logic from `generatePromptFile` to construct the complete `<M6. Cycles>` string.
-    *   **Step 3: Log to Output Channel:**
-        *   It will combine these two strings into a single, clearly labeled log message and send it to `Services.loggerService.log()`.
-
-4.  **Utility (`formatting.ts`):**
-    *   A new `truncateCodeForLogging` function will be created to implement the content truncation logic.
+    *   **Step 1: Generate Formatted State Dump (C180 Revision):**
+        *   It will fetch the full history from `history.service.ts`.
+        *   It will construct a focused log string containing the most relevant frontend state variables for the current bug (`currentCycle`, `maxCycle`, `isNewCycleButtonDisabled`, `cycleTitle`, `cycleContext`, `selectedResponseId`).
+        *   It will append a `JSON.stringify` of the full (but truncated) history file content.
+    *   **Step 2: Log to Output Channel:**
+        *   It will combine these strings into a single, clearly labeled log message and send it to `Services.loggerService.log()`.
 </file>
 
 <file path="src/Artifacts/A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md">
@@ -23562,7 +23652,7 @@ export class HistoryService {
     constructor() {
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (workspaceFolders && workspaceFolders.length > 0) {
-            this.workspaceRoot = workspaceFolders[0].uri.fsPath;
+            this.workspaceRoot = workspaceFolders.uri.fsPath;
             this.historyFilePath = path.join(this.workspaceRoot, '.vscode', 'dce_history.json');
         } else {
             Services.loggerService.warn("HistoryService: No workspace folder found. History will not be saved.");
@@ -23795,7 +23885,7 @@ export class HistoryService {
                 filters: { 'JSON': ['json'] }
             });
             if (openUris && openUris.length > 0) {
-                const content = await fs.readFile(openUris[0].fsPath, 'utf-8');
+                const content = await fs.readFile(openUris.fsPath, 'utf-8');
                 const historyData = JSON.parse(content);
                 if (historyData.version && Array.isArray(historyData.cycles)) {
                     await this._writeHistoryFile(historyData);
@@ -23858,7 +23948,7 @@ export class LoggerService {
 </file>
 
 <file path="src/backend/services/prompt.service.ts">
-// Updated on: C179 (Refine Cycle 0 prompt instructions)
+// Updated on: C180 (Focus log output on cycle management state)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -23875,7 +23965,7 @@ export class PromptService {
 
     constructor(extensionUri: vscode.Uri) {
         this.extensionUri = extensionUri;
-        this.workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+        this.workspaceRoot = vscode.workspace.workspaceFolders?.?.uri.fsPath;
     }
 
     private artifactSchemaTemplate = `<M1. artifact schema>
@@ -23914,8 +24004,8 @@ M7. Flattened Repo
             .filter(filename => filename.startsWith('T') && filename.endsWith('.md'));
 
         templateFilenames.sort((a, b) => {
-            const numA = parseInt(a.match(/T(\d+)/)?.[1] || '0', 10);
-            const numB = parseInt(b.match(/T(\d+)/)?.[1] || '0', 10);
+            const numA = parseInt(a.match(/T(\d+)/)?. || '0', 10);
+            const numB = parseInt(b.match(/T(\d+)/)?. || '0', 10);
             return numA - numB;
         });
 
@@ -24023,7 +24113,7 @@ ${staticContext.trim()}
         const userA0Files = await vscode.workspace.findFiles('**/*A0*Master*Artifact*List.md', '**/node_modules/**', 1);
         let a0Content = '<!-- Master Artifact List (A0) not found in workspace -->';
         if (userA0Files.length > 0) {
-            const contentBuffer = await vscode.workspace.fs.readFile(userA0Files[0]);
+            const contentBuffer = await vscode.workspace.fs.readFile(userA0Files);
             a0Content = Buffer.from(contentBuffer).toString('utf-8');
         }
         
@@ -24076,34 +24166,27 @@ ${staticContext.trim()}
     public async generateStateLog(currentState: PcppCycle) {
         Services.loggerService.log("--- GENERATING STATE LOG ---");
         try {
-            const fullHistory = (await Services.historyService.getFullHistory()).cycles;
+            const fullHistory = await Services.historyService.getFullHistory();
             
-            const truncatedHistory = JSON.parse(JSON.stringify(fullHistory));
-            const truncatedCurrentState = JSON.parse(JSON.stringify(currentState));
+            const isNewCycleButtonDisabled = !currentState.title || currentState.title.trim() === 'New Cycle' || currentState.title.trim() === '' || !currentState.cycleContext || currentState.cycleContext.trim() === '' || !currentState.selectedResponseId;
 
-            const truncateCycleResponses = (cycle: PcppCycle) => {
-                Object.values(cycle.responses).forEach(response => {
-                    response.content = truncateCodeForLogging(response.content);
-                });
-            };
-
-            truncatedHistory.forEach(truncateCycleResponses);
-            truncateCycleResponses(truncatedCurrentState);
-            
-            const cyclesContent = await this._generateCyclesContent(currentState, fullHistory);
-            
             const stateDump = {
-                "CURRENT_FRONTEND_STATE": truncatedCurrentState,
-                "FULL_HISTORY_FROM_BACKEND": truncatedHistory
+                "FRONTEND_STATE": {
+                    "currentCycle": currentState.cycleId,
+                    "maxCycle": fullHistory.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0),
+                    "isNewCycleButtonDisabled": isNewCycleButtonDisabled,
+                    "conditions": {
+                        "hasTitle": !!currentState.title && currentState.title.trim() !== 'New Cycle' && currentState.title.trim() !== '',
+                        "hasContext": !!currentState.cycleContext && currentState.cycleContext.trim() !== '',
+                        "hasSelectedResponse": !!currentState.selectedResponseId
+                    }
+                },
+                "BACKEND_HISTORY_FILE": fullHistory
             };
 
             const logMessage = `
-========================= CURRENT STATE DUMP =========================
+========================= CYCLE STATE DUMP =========================
 ${JSON.stringify(stateDump, null, 2)}
-======================================================================
-
-==================== GENERATED <M6. Cycles> BLOCK ====================
-${cyclesContent}
 ======================================================================
 `;
             Services.loggerService.log(logMessage);
@@ -24202,43 +24285,7 @@ ${cyclesContent}
             await vscode.workspace.fs.writeFile(readmeUri, Buffer.from(readmeContent, 'utf-8'));
             Services.loggerService.log("Created src/Artifacts/README.md for the new project.");
             
-            const readmeFileContent = `<file path="src/Artifacts/README.md">\n${readmeContent}\n</file>`;
-            const flattenedRepoContent = `<M7. Flattened Repo>\n${readmeFileContent}\n</M7. Flattened Repo>`;
-
-            const promptParts = [
-                this.artifactSchemaTemplate, `<M2. cycle overview>\nCurrent Cycle 0 - Project Initialization\n</M2. cycle overview>`, interactionSchemaContent, projectScopeContent, `<M5. organized artifacts list>\n# No artifacts exist yet.\n</M5. organized artifacts list>`, `<M6. Cycles>\n${cycle0Content}\n</M6. Cycles>`, flattenedRepoContent
-            ];
-            const promptContent = promptParts.join('\n\n');
-            const finalPrompt = `<prompt.md>\n\n${promptContent}\n\n</prompt.md>`;
-
-            await vscode.workspace.fs.writeFile(vscode.Uri.file(promptMdPath), Buffer.from(finalPrompt, 'utf-8'));
-            Services.loggerService.log("Successfully generated Cycle 0 prompt.md file.");
-            
-            vscode.window.showInformationMessage(`Successfully generated initial prompt.md and created src/Artifacts/README.md`);
-
-            const cycle1Data: PcppCycle = {
-                cycleId: 1,
-                timestamp: new Date().toISOString(),
-                title: 'New Cycle',
-                cycleContext: '',
-                ephemeralContext: '',
-                responses: { "1": { content: "" } },
-                isParsedMode: false,
-                leftPaneWidth: 33,
-                selectedResponseId: null,
-                selectedFilesForReplacement: [],
-                tabCount: 4
-            };
-
-            await Services.historyService.saveCycleData(cycle1Data);
-            serverIpc.sendToClient(ServerToClientChannel.SendLatestCycleData, { cycleData: cycle1Data, projectScope });
-
-        } catch (error: any) {
-            vscode.window.showErrorMessage(`Failed to generate Cycle 0 prompt: ${error.message}`);
-            Services.loggerService.error(`Failed to generate Cycle 0 prompt: ${error.message}`);
-        }
-    }
-}
+            const readmeFileContent = `<file path="src/Artifacts/README.md">\n${readmeContent}\n
 </file>
 
 <file path="src/backend/services/selection.service.ts">
@@ -28809,7 +28856,7 @@ const App = () => {
     React.useEffect(() => { if (!selectedFilePath) return; const currentTabData = tabs[activeTab.toString()]; if (currentTabData?.parsedContent) { const fileExistsInTab = currentTabData.parsedContent.files.some(f => f.path === selectedFilePath); if (!fileExistsInTab) setSelectedFilePath(null); } }, [activeTab, tabs, selectedFilePath]);
 
     const isReadyForNextCycle = React.useMemo(() => { const hasTitle = cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== ''; const hasContext = cycleContext.trim() !== ''; const hasSelectedResponse = selectedResponseId !== null; return hasTitle && hasContext && hasSelectedResponse; }, [cycleTitle, cycleContext, selectedResponseId]);
-    const isNewCycleButtonDisabled = React.useMemo(() => { if (currentCycle === 0) return false; return workflowStep !== 'readyForNewCycle'; }, [workflowStep, currentCycle]);
+    const isNewCycleButtonDisabled = React.useMemo(() => { if (currentCycle === 0) return true; if (currentCycle !== maxCycle) return true; return !isReadyForNextCycle; }, [currentCycle, maxCycle, isReadyForNextCycle]);
     
     // Workflow State Machine Logic
     React.useEffect(() => {
@@ -28824,7 +28871,7 @@ const App = () => {
         if (workflowStep === 'awaitingSort') { if (isSortedByTokens) { setWorkflowStep('awaitingResponseSelect'); } return; }
         if (workflowStep === 'awaitingParse') { if (isParsedMode) { setWorkflowStep(isSortedByTokens ? 'awaitingResponseSelect' : 'awaitingSort'); } return; }
         const waitingForPaste = workflowStep?.startsWith('awaitingResponsePaste');
-        if (waitingForPaste && workflowStep) { const nextTabToFill = parseInt(workflowStep.split('_')[1] || '1', 10); if (tabs[nextTabToFill]?.rawContent?.trim()) { if (nextTabToFill < tabCount) { setWorkflowStep(`awaitingResponsePaste_${nextTabToFill + 1}`); } else { setWorkflowStep('awaitingParse'); } } return; }
+        if (waitingForPaste && workflowStep) { const nextTabToFill = parseInt(workflowStep.split('_') || '1', 10); if (tabs[nextTabToFill]?.rawContent?.trim()) { if (nextTabToFill < tabCount) { setWorkflowStep(`awaitingResponsePaste_${nextTabToFill + 1}`); } else { setWorkflowStep('awaitingParse'); } } return; }
     }, [workflowStep, selectedFilesForReplacement, selectedResponseId, isSortedByTokens, isParsedMode, tabs, cycleContext, cycleTitle, tabCount]);
 
     const handleCycleChange = (e: React.MouseEvent | null, newCycle: number) => { e?.stopPropagation(); if (newCycle >= 0 && newCycle <= maxCycle) { if (currentCycle !== 0) saveCurrentCycleState(); setSelectedFilesForReplacement(new Set()); setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); setWorkflowStep(null); } };
@@ -30040,6 +30087,7 @@ Once a working pattern is identified in a test component:
 2.  **Integrate Solution:** The original `NumberedTextarea.tsx` component will be refactored to use the successful pattern.
 3.  **Remove Test Artifacts:** The test harness UI and the `TestPane*.tsx` component files will be removed from the project.
 </file>
+
 
 
 </M7. Flattened Repo>

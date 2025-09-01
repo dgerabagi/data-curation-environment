@@ -1,4 +1,4 @@
-// Updated on: C179 (Refine Cycle 0 prompt instructions)
+// Updated on: C180 (Focus log output on cycle management state)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -216,34 +216,27 @@ ${staticContext.trim()}
     public async generateStateLog(currentState: PcppCycle) {
         Services.loggerService.log("--- GENERATING STATE LOG ---");
         try {
-            const fullHistory = (await Services.historyService.getFullHistory()).cycles;
+            const fullHistory = await Services.historyService.getFullHistory();
             
-            const truncatedHistory = JSON.parse(JSON.stringify(fullHistory));
-            const truncatedCurrentState = JSON.parse(JSON.stringify(currentState));
+            const isNewCycleButtonDisabled = !currentState.title || currentState.title.trim() === 'New Cycle' || currentState.title.trim() === '' || !currentState.cycleContext || currentState.cycleContext.trim() === '' || !currentState.selectedResponseId;
 
-            const truncateCycleResponses = (cycle: PcppCycle) => {
-                Object.values(cycle.responses).forEach(response => {
-                    response.content = truncateCodeForLogging(response.content);
-                });
-            };
-
-            truncatedHistory.forEach(truncateCycleResponses);
-            truncateCycleResponses(truncatedCurrentState);
-            
-            const cyclesContent = await this._generateCyclesContent(currentState, fullHistory);
-            
             const stateDump = {
-                "CURRENT_FRONTEND_STATE": truncatedCurrentState,
-                "FULL_HISTORY_FROM_BACKEND": truncatedHistory
+                "FRONTEND_STATE": {
+                    "currentCycle": currentState.cycleId,
+                    "maxCycle": fullHistory.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0),
+                    "isNewCycleButtonDisabled": isNewCycleButtonDisabled,
+                    "conditions": {
+                        "hasTitle": !!currentState.title && currentState.title.trim() !== 'New Cycle' && currentState.title.trim() !== '',
+                        "hasContext": !!currentState.cycleContext && currentState.cycleContext.trim() !== '',
+                        "hasSelectedResponse": !!currentState.selectedResponseId
+                    }
+                },
+                "BACKEND_HISTORY_FILE": fullHistory
             };
 
             const logMessage = `
-========================= CURRENT STATE DUMP =========================
+========================= CYCLE STATE DUMP =========================
 ${JSON.stringify(stateDump, null, 2)}
-======================================================================
-
-==================== GENERATED <M6. Cycles> BLOCK ====================
-${cyclesContent}
 ======================================================================
 `;
             Services.loggerService.log(logMessage);

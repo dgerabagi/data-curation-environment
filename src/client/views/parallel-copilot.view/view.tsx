@@ -85,7 +85,7 @@ const App = () => {
     React.useEffect(() => { if (!selectedFilePath) return; const currentTabData = tabs[activeTab.toString()]; if (currentTabData?.parsedContent) { const fileExistsInTab = currentTabData.parsedContent.files.some(f => f.path === selectedFilePath); if (!fileExistsInTab) setSelectedFilePath(null); } }, [activeTab, tabs, selectedFilePath]);
 
     const isReadyForNextCycle = React.useMemo(() => { const hasTitle = cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== ''; const hasContext = cycleContext.trim() !== ''; const hasSelectedResponse = selectedResponseId !== null; return hasTitle && hasContext && hasSelectedResponse; }, [cycleTitle, cycleContext, selectedResponseId]);
-    const isNewCycleButtonDisabled = React.useMemo(() => { if (currentCycle === 0) return false; return workflowStep !== 'readyForNewCycle'; }, [workflowStep, currentCycle]);
+    const isNewCycleButtonDisabled = React.useMemo(() => { if (currentCycle === 0) return true; if (currentCycle !== maxCycle) return true; return !isReadyForNextCycle; }, [currentCycle, maxCycle, isReadyForNextCycle]);
     
     // Workflow State Machine Logic
     React.useEffect(() => {
@@ -100,7 +100,7 @@ const App = () => {
         if (workflowStep === 'awaitingSort') { if (isSortedByTokens) { setWorkflowStep('awaitingResponseSelect'); } return; }
         if (workflowStep === 'awaitingParse') { if (isParsedMode) { setWorkflowStep(isSortedByTokens ? 'awaitingResponseSelect' : 'awaitingSort'); } return; }
         const waitingForPaste = workflowStep?.startsWith('awaitingResponsePaste');
-        if (waitingForPaste && workflowStep) { const nextTabToFill = parseInt(workflowStep.split('_')[1] || '1', 10); if (tabs[nextTabToFill]?.rawContent?.trim()) { if (nextTabToFill < tabCount) { setWorkflowStep(`awaitingResponsePaste_${nextTabToFill + 1}`); } else { setWorkflowStep('awaitingParse'); } } return; }
+        if (waitingForPaste && workflowStep) { const nextTabToFill = parseInt(workflowStep.split('_') || '1', 10); if (tabs[nextTabToFill]?.rawContent?.trim()) { if (nextTabToFill < tabCount) { setWorkflowStep(`awaitingResponsePaste_${nextTabToFill + 1}`); } else { setWorkflowStep('awaitingParse'); } } return; }
     }, [workflowStep, selectedFilesForReplacement, selectedResponseId, isSortedByTokens, isParsedMode, tabs, cycleContext, cycleTitle, tabCount]);
 
     const handleCycleChange = (e: React.MouseEvent | null, newCycle: number) => { e?.stopPropagation(); if (newCycle >= 0 && newCycle <= maxCycle) { if (currentCycle !== 0) saveCurrentCycleState(); setSelectedFilesForReplacement(new Set()); setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); setWorkflowStep(null); } };
