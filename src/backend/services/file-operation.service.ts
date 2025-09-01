@@ -1,4 +1,5 @@
 // src/backend/services/file-operation.service.ts
+// Updated on: C185 (Add ShowInformationMessage handler)
 import * as vscode from "vscode";
 import * as path from "path";
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
@@ -20,6 +21,11 @@ export class FileOperationService {
         } catch {
             return false;
         }
+    }
+
+    public async handleShowInformationMessageRequest(message: string) {
+        Services.loggerService.log(`[UI NOTIFY] Received request to show message: "${message}"`);
+        vscode.window.showInformationMessage(message);
     }
 
     public async handleOpenFolderRequest() {
@@ -242,7 +248,7 @@ export class FileOperationService {
         Services.loggerService.log(`Received request to create file: ${filePath}`);
         try {
             const workspaceFolders = vscode.workspace.workspaceFolders;
-            if (!workspaceFolders || !workspaceFolders[0]) throw new Error("No workspace folder open.");
+            if (!workspaceFolders || workspaceFolders.length === 0) throw new Error("No workspace folder open.");
             const absolutePath = path.resolve(workspaceFolders[0].uri.fsPath, filePath);
             await vscode.workspace.fs.writeFile(vscode.Uri.file(absolutePath), new Uint8Array());
             Services.loggerService.log(`Successfully created file: ${filePath}`);

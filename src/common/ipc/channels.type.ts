@@ -1,4 +1,4 @@
-// Updated on: C183 (Add Git Status channel)
+// Updated on: C185 (Add RequestShowInformationMessage)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -36,6 +36,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestCopyFileFromUri ? { sourceUri: string, targetDir: string } :
     T extends ClientToServerChannel.RequestCreateFile ? { filePath: string } :
     T extends ClientToServerChannel.RequestCopyTextToClipboard ? { text: string } :
+    T extends ClientToServerChannel.RequestShowInformationMessage ? { message: string } :
     T extends ClientToServerChannel.RequestPdfToText ? { path: string } :
     T extends ClientToServerChannel.RequestExcelToText ? { path: string } :
     T extends ClientToServerChannel.RequestWordToText ? { path: string } :

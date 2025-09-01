@@ -24,6 +24,7 @@ export enum ClientToServerChannel {
     RequestBatchFileWrite = "clientToServer.requestBatchFileWrite",
     RequestCreateFile = "clientToServer.requestCreateFile",
     RequestCopyTextToClipboard = "clientToServer.requestCopyTextToClipboard",
+    RequestShowInformationMessage = "clientToServer.requestShowInformationMessage",
 
     // Special File Handling
     RequestPdfToText = "clientToServer.requestPdfToText",

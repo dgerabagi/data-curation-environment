@@ -1,5 +1,5 @@
 // src/backend/services/git.service.ts
-// Updated on: C184 (Restore direct error handling for git init)
+// Updated on: C185 (Add logging before sending IPC message)
 import * as vscode from 'vscode';
 import { exec } from 'child_process';
 import * as path from 'path';
@@ -83,6 +83,7 @@ export class GitService {
             }
             result = { success: false, message: `Git Baseline failed: ${error.message}` };
         }
+        Services.loggerService.log(`[GIT_SERVICE] Sending NotifyGitOperationResult: ${JSON.stringify(result)}`);
         serverIpc.sendToClient(ServerToClientChannel.NotifyGitOperationResult, result);
     }
 
