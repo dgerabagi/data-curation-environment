@@ -1,5 +1,5 @@
 // src/backend/services/history.service.ts
-// Updated on: C174 (Fix duplicate button in confirmation dialogs)
+// Updated on: C180 (Return new maxCycle on delete)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -151,7 +151,7 @@ export class HistoryService {
         await this._writeHistoryFile(history);
     }
 
-    public async deleteCycle(cycleId: number): Promise<void> {
+    public async deleteCycle(cycleId: number): Promise<number> {
         Services.loggerService.log(`HistoryService: Deleting cycle ${cycleId}.`);
         
         const confirmation = await vscode.window.showWarningMessage(
@@ -162,24 +162,30 @@ export class HistoryService {
 
         if (confirmation !== "Delete") {
             Services.loggerService.log("Cycle deletion cancelled by user.");
-            return;
+            const history = await this._readHistoryFile();
+            return history.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0);
         }
         
-        const history = await this._readHistoryFile();
+        let history = await this._readHistoryFile();
         if (history.cycles.length <= 1) {
             Services.loggerService.warn("Cannot delete the last remaining cycle.");
             vscode.window.showWarningMessage("Cannot delete the last cycle.");
-            return;
+            return 1;
         }
 
         history.cycles = history.cycles.filter(c => c.cycleId !== cycleId);
         await this._writeHistoryFile(history);
         Services.loggerService.log(`Cycle ${cycleId} deleted successfully.`);
         
+        // Re-read to get the new max cycle
+        const updatedHistory = await this._readHistoryFile();
+        const newMaxCycle = updatedHistory.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0);
+
         const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
         if (serverIpc) {
             serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, { reason: 'history' });
         }
+        return newMaxCycle;
     }
 
     public async resetHistory(): Promise<void> {
@@ -242,7 +248,7 @@ export class HistoryService {
                 canSelectMany: false,
                 filters: { 'JSON': ['json'] }
             });
-            if (openUris && openUris[0]) {
+            if (openUris && openUris.length > 0) {
                 const content = await fs.readFile(openUris[0].fsPath, 'utf-8');
                 const historyData = JSON.parse(content);
                 if (historyData.version && Array.isArray(historyData.cycles)) {

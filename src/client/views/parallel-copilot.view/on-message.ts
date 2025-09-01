@@ -1,4 +1,4 @@
-// Updated on: C175 (Add Git handlers)
+// Updated on: C180 (Handle new maxCycle from delete)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";

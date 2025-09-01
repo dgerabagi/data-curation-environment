@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 4 - cannot progress to the next cycle
+Current Cycle 5 - still cannot progress.
+Cycle 4 - cannot progress to the next cycle
 Cycle 3 - animated workflow, abc test for cycle context field, make important templates mandatory
 Cycle 2 - continue working the workflow animations, context text fields wonky, ignore the .git directory
 Cycle 1 - address FTV flash when saving, line numbers for cycle context/ephemeral context not lining up or scrolling
@@ -612,16 +613,25 @@ transitioning between manual prompting method and using the dce we are creating 
 </M5. organized artifacts list>
 
 <M6. Cycles>
+<Cycle 5>
+okay original text field is working better, still have the word wrap issue. im manually adding in this cycle 4 becuase i still cannot create a new cycle once deleting it. ive added the logs i see. is it possible to somehow reveal what the extension thinks my current state is, pertaining the the allowing of creating a new cycle? like when i click the log state button? make the log state button only do that. ill click it in this stte, and wea can analyze the logs.
 
+<console logs>
+[INFO] [11:14:27 AM] HistoryService: Deleting cycle 2.
+[INFO] [11:14:28 AM] Cycle 2 deleted successfully.
+[INFO] [11:14:28 AM] HistoryService: getLatestCycle called.
+[INFO] [11:14:29 AM] Latest cycle found: 1
+</console logs>
+
+</Cycle 5>
 <Cycle 4>
 <Cycle Context>
-1. i seem stuck on cycle 4. meaning, i am unable to click the `+`, despite seeing the green cycle & ccontext banner, which should be the indicator that all requirements have been met. i think the issue is, that i recall i did previously create the cycle 5, but i subsequently deleted it in order to go back to editing and working in cycle 4. i think that deletion has gotten me into a state where i cannot now create cycle 5. any ideas?
+1. i seem stuck on cycle 4. i am unable to click the `+`, despite seeing the green cycle & ccontext banner, which should be the indicator that all requirements have been met. i think the issue is, that i recall i did previously create the cycle 5, but i subsequently deleted it in order to go back to editing and working in cycle 4. i think that deletion has gotten me into a state where i cannot now create cycle 5. any ideas?
 
 2. feedback on the TestPanes...
 2.1. All of them feel the same. they function much better than the original version, but all still fall short in the same aspect...
 2.2. they do not seem to respect word wrapped lines. if a line is word-wrapped, it should not get a line number. this lack of respect of word wrapped lines leads to the length of the line counts being shorter than the actual text, as the actual text has many more lines from the word wrapping.
 2.3. none of these tests have the same misaligned cursor/text issue that is plaguing the originals.
-2.4. these text fields seem to get laggy with a lot of text. they are still aligned, but the lagginess sometimes makes it seem like they arent aligned. i have to scroll up and down before the text appears, but at least it appears in the correct spot.
 
 3. im noting that the flashing seems fixed, but now i am noticing that i can only type one character at a time into the original cycle context field. i have to click again to select the field again to type the next character.
 </Cycle Context>
@@ -1731,17 +1741,17 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-08-31T15:59:14.287Z
+  Date Generated: 2025-08-31T16:20:12.568Z
   ---
   Total Files: 166
-  Approx. Tokens: 441534
+  Approx. Tokens: 442610
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (239424 tokens)
-2. src\Artifacts\A11. DCE - Regression Case Studies.md (7797 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (7192 tokens)
-4. src\Artifacts\A0. DCE Master Artifact List.md (7119 tokens)
+2. src\Artifacts\A11. DCE - Regression Case Studies.md (8593 tokens)
+3. src\Artifacts\A0. DCE Master Artifact List.md (7119 tokens)
+4. src\client\views\parallel-copilot.view\view.tsx (6937 tokens)
 5. src\client\views\parallel-copilot.view\view.scss (5160 tokens)
 6. src\backend\services\prompt.service.ts (4867 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4429 tokens)
@@ -1760,7 +1770,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 8. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
 9. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
 10. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
-11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 289 - Chars: 31186 - Tokens: 7797
+11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 312 - Chars: 34372 - Tokens: 8593
 12. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5710 - Tokens: 1428
 13. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
 14. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
@@ -1858,7 +1868,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 106. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12820 - Tokens: 3205
 107. src\backend\services\git.service.ts - Lines: 76 - Chars: 3672 - Tokens: 918
 108. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4232 - Tokens: 1058
-109. src\backend\services\history.service.ts - Lines: 264 - Chars: 10959 - Tokens: 2740
+109. src\backend\services\history.service.ts - Lines: 270 - Chars: 11310 - Tokens: 2828
 110. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
 111. src\backend\services\prompt.service.ts - Lines: 381 - Chars: 19466 - Tokens: 4867
 112. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
@@ -1882,22 +1892,22 @@ This file-centric approach helps in planning and prioritizing work, especially i
 130. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
 131. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 75 - Chars: 3049 - Tokens: 763
 132. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 86 - Chars: 3485 - Tokens: 872
-133. src\client\views\parallel-copilot.view\components\NumberedTextarea.tsx - Lines: 102 - Chars: 4398 - Tokens: 1100
+133. src\client\views\parallel-copilot.view\components\NumberedTextarea.tsx - Lines: 99 - Chars: 4282 - Tokens: 1071
 134. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 95 - Chars: 7630 - Tokens: 1908
 135. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 84 - Chars: 3486 - Tokens: 872
 136. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
 137. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-138. src\client\views\parallel-copilot.view\on-message.ts - Lines: 100 - Chars: 4543 - Tokens: 1136
+138. src\client\views\parallel-copilot.view\on-message.ts - Lines: 100 - Chars: 4558 - Tokens: 1140
 139. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 87 - Chars: 4132 - Tokens: 1033
 140. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 28 - Chars: 1213 - Tokens: 304
 141. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 28 - Chars: 1283 - Tokens: 321
 142. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 28 - Chars: 1184 - Tokens: 296
 143. src\client\views\parallel-copilot.view\view.scss - Lines: 903 - Chars: 20639 - Tokens: 5160
 144. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-145. src\client\views\parallel-copilot.view\view.tsx - Lines: 179 - Chars: 28768 - Tokens: 7192
+145. src\client\views\parallel-copilot.view\view.tsx - Lines: 158 - Chars: 27746 - Tokens: 6937
 146. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
 147. src\common\ipc\channels.enum.ts - Lines: 86 - Chars: 4556 - Tokens: 1139
-148. src\common\ipc\channels.type.ts - Lines: 86 - Chars: 6495 - Tokens: 1624
+148. src\common\ipc\channels.type.ts - Lines: 86 - Chars: 6511 - Tokens: 1628
 149. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 150. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 151. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
@@ -1914,8 +1924,8 @@ This file-centric approach helps in planning and prioritizing work, especially i
 162. package.json - Lines: 139 - Chars: 4583 - Tokens: 1146
 163. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
 164. webpack.config.js - Lines: 104 - Chars: 2873 - Tokens: 719
-165. src\Artifacts\A75. DCE - Text Area Component A-B-C Test Plan.md - Lines: 43 - Chars: 3828 - Tokens: 957
-166. dist\Artifacts\A75. DCE - Text Area Component A-B-C Test Plan.md - Lines: 43 - Chars: 3828 - Tokens: 957
+165. src\Artifacts\A75. DCE - Text Area Component A-B-C Test Plan.md - Lines: 50 - Chars: 4761 - Tokens: 1191
+166. dist\Artifacts\A75. DCE - Text Area Component A-B-C Test Plan.md - Lines: 50 - Chars: 4761 - Tokens: 1191
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -2863,7 +2873,7 @@ To enhance the data curation process, it is critical for the user to have immedi
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C179 (Add case for FTV Flashing on Save)
+# Updated on: C180 (Add cases for cycle management and text area focus bugs)
 
 - **Key/Value for A0:**
 - **Description:** Documents recurring bugs, their root causes, and codified solutions to prevent future regressions during development.
@@ -2874,6 +2884,29 @@ To enhance the data curation process, it is critical for the user to have immedi
 This document serves as a living record of persistent or complex bugs that have recurred across multiple development cycles. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 019: Single Character Input Bug in Text Area
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx`
+-   **Cycles Observed:** C4
+-   **Symptom:** When typing into the Cycle Context or Ephemeral Context text areas, the user can only input one character at a time. After each character, the input field loses focus, forcing the user to click it again to type the next character, making it unusable.
+-   **Root Cause Analysis (RCA):** This is a classic React focus management bug. The `onChange` event handler updates the state in the parent component (`view.tsx`), which triggers a re-render. If the `NumberedTextarea` component or its props are not correctly memoized, it re-renders unnecessarily. If the underlying `<textarea>` element is re-created during this render (e.g., due to an unstable `key` prop or other rendering logic), it loses focus. The solution requires ensuring the component and its event handlers are stable across renders.
+-   **Codified Solution & Best Practice:**
+    1.  **Memoize Component:** The `NumberedTextarea` component must be wrapped in `React.memo` to prevent it from re-rendering if its props have not changed.
+    2.  **Memoize Handlers:** The `onChange` event handlers passed down from the parent (`view.tsx`) must be wrapped in `useCallback` with a correct dependency array. This prevents a new function instance from being created on every parent render, which would otherwise break the memoization of the child component.
+    3.  **Stable Keys:** Ensure any `key` or `id` prop passed to the component is stable and does not change on unrelated state updates.
+
+---
+
+### Case Study 018: Stuck on Cycle Creation After Deletion
+
+-   **Artifacts Affected:** `src/backend/services/history.service.ts`, `src/client/views/parallel-copilot.view/view.tsx`
+-   **Cycles Observed:** C4
+-   **Symptom:** The user creates cycles up to C5. They then delete C5. The UI correctly navigates back to C4. However, the `+` (New Cycle) button is now disabled, and the user is permanently stuck, unable to re-create C5.
+-   **Root Cause Analysis (RCA):** The frontend (`view.tsx`) maintained its own `maxCycle` state variable. When a cycle was deleted, the backend `history.service.ts` correctly removed it from the `dce_history.json` file. However, there was no mechanism to inform the frontend that the maximum cycle number had changed. The frontend state still believed `maxCycle` was 5, while `currentCycle` was 4. The condition to enable the `+` button (`currentCycle === maxCycle`) was therefore false, disabling the button permanently.
+-   **Codified Solution & Best Practice:** The backend service responsible for the data mutation must return the new, correct state to the client. The `deleteCycle` method in `history.service.ts` must be updated to, after deleting the cycle, re-read the history file, determine the new maximum `cycleId`, and return it. The frontend's event handler must then use this returned value to update its local `maxCycle` state, ensuring the UI is perfectly synchronized with the backend data.
 
 ---
 
@@ -23512,7 +23545,7 @@ export class HighlightingService {
 
 <file path="src/backend/services/history.service.ts">
 // src/backend/services/history.service.ts
-// Updated on: C174 (Fix duplicate button in confirmation dialogs)
+// Updated on: C180 (Return new maxCycle on delete)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -23664,7 +23697,7 @@ export class HistoryService {
         await this._writeHistoryFile(history);
     }
 
-    public async deleteCycle(cycleId: number): Promise<void> {
+    public async deleteCycle(cycleId: number): Promise<number> {
         Services.loggerService.log(`HistoryService: Deleting cycle ${cycleId}.`);
         
         const confirmation = await vscode.window.showWarningMessage(
@@ -23675,24 +23708,30 @@ export class HistoryService {
 
         if (confirmation !== "Delete") {
             Services.loggerService.log("Cycle deletion cancelled by user.");
-            return;
+            const history = await this._readHistoryFile();
+            return history.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0);
         }
         
-        const history = await this._readHistoryFile();
+        let history = await this._readHistoryFile();
         if (history.cycles.length <= 1) {
             Services.loggerService.warn("Cannot delete the last remaining cycle.");
             vscode.window.showWarningMessage("Cannot delete the last cycle.");
-            return;
+            return 1;
         }
 
         history.cycles = history.cycles.filter(c => c.cycleId !== cycleId);
         await this._writeHistoryFile(history);
         Services.loggerService.log(`Cycle ${cycleId} deleted successfully.`);
         
+        // Re-read to get the new max cycle
+        const updatedHistory = await this._readHistoryFile();
+        const newMaxCycle = updatedHistory.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0);
+
         const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
         if (serverIpc) {
             serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, { reason: 'history' });
         }
+        return newMaxCycle;
     }
 
     public async resetHistory(): Promise<void> {
@@ -23755,7 +23794,7 @@ export class HistoryService {
                 canSelectMany: false,
                 filters: { 'JSON': ['json'] }
             });
-            if (openUris && openUris[0]) {
+            if (openUris && openUris.length > 0) {
                 const content = await fs.readFile(openUris[0].fsPath, 'utf-8');
                 const historyData = JSON.parse(content);
                 if (historyData.version && Array.isArray(historyData.cycles)) {
@@ -27109,7 +27148,7 @@ export default CycleNavigator;
 
 <file path="src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx">
 // src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx
-// Updated on: C179 (Fix scrolling synchronization and alignment issues)
+// Updated on: C180 (Fix focus loss bug)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -27139,9 +27178,8 @@ const NumberedTextarea: React.FC<NumberedTextareaProps> = ({ value, onChange, pl
                 setHighlightedHtml(html);
             }
         };
-        const subscription = clientIpc.onServerMessage(ServerToClientChannel.SendHighlightContext, handleHighlightResponse);
-        // Assuming onServerMessage returns a function to unsubscribe, or similar mechanism.
-        // If not, this might need adjustment based on actual implementation of ClientPostMessageManager.
+        clientIpc.onServerMessage(ServerToClientChannel.SendHighlightContext, handleHighlightResponse);
+        // This is a simplified subscription model. A real implementation should return an unsubscribe function.
     }, [id, clientIpc]);
     
     React.useEffect(() => {
@@ -27158,24 +27196,22 @@ const NumberedTextarea: React.FC<NumberedTextareaProps> = ({ value, onChange, pl
         }
     };
 
-    const handleMouseDown = (e: React.MouseEvent) => {
+    const handleMouseDown = React.useCallback((e: React.MouseEvent) => {
         e.preventDefault();
+        const handleMouseMove = (mouseMoveEvent: MouseEvent) => {
+            if (textareaRef.current) {
+                const containerTop = textareaRef.current.getBoundingClientRect().top;
+                const newHeight = mouseMoveEvent.clientY - containerTop;
+                onHeightChange(Math.max(50, newHeight));
+            }
+        };
+        const handleMouseUp = () => {
+            document.removeEventListener('mousemove', handleMouseMove);
+            document.removeEventListener('mouseup', handleMouseUp);
+        };
         document.addEventListener('mousemove', handleMouseMove);
         document.addEventListener('mouseup', handleMouseUp);
-    };
-
-    const handleMouseMove = React.useCallback((e: MouseEvent) => {
-        if (textareaRef.current) {
-            const containerTop = textareaRef.current.getBoundingClientRect().top;
-            const newHeight = e.clientY - containerTop;
-            onHeightChange(Math.max(50, newHeight)); // min height 50px
-        }
     }, [textareaRef, onHeightChange]);
-
-    const handleMouseUp = React.useCallback(() => {
-        document.removeEventListener('mousemove', handleMouseMove);
-        document.removeEventListener('mouseup', handleMouseUp);
-    }, [handleMouseMove]);
 
     return (
         <div className={`numbered-textarea-container ${className || ''}`} style={{ height: `${height}px` }}>
@@ -27209,7 +27245,7 @@ const NumberedTextarea: React.FC<NumberedTextareaProps> = ({ value, onChange, pl
     );
 };
 
-export default NumberedTextarea;
+export default React.memo(NumberedTextarea);
 </file>
 
 <file path="src/client/views/parallel-copilot.view/components/ParsedView.tsx">
@@ -27481,7 +27517,7 @@ export const viewConfig = {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/on-message.ts">
-// Updated on: C175 (Add Git handlers)
+// Updated on: C180 (Handle new maxCycle from delete)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -28687,7 +28723,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C179 (Implement test harness)
+// Updated on: C180 (Fix state management bugs and remove test harness)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -28704,9 +28740,6 @@ import CycleNavigator from './components/CycleNavigator';
 import ContextInputs from './components/ContextInputs';
 import ResponseTabs from './components/ResponseTabs';
 import ResponsePane from './components/ResponsePane';
-import TestPane1 from './TestPane1';
-import TestPane2 from './TestPane2';
-import TestPane3 from './TestPane3';
 import * as path from 'path-browserify';
 
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
@@ -28730,10 +28763,7 @@ const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; i
     </div>
 );
 
-type TestView = 'Original' | 'TestA' | 'TestB' | 'TestC';
-
 const App = () => {
-    // ... (keep all existing state from previous cycle)
     const [activeTab, setActiveTab] = React.useState(1);
     const [tabCount, setTabCount] = React.useState(4);
     const [currentCycle, setCurrentCycle] = React.useState<number | null>(null);
@@ -28763,10 +28793,8 @@ const App = () => {
     const [estimatedPromptCost, setEstimatedPromptCost] = React.useState(0);
     const [costBreakdown, setCostBreakdown] = React.useState<{[key: string]: number} | null>(null);
     const [workflowStep, setWorkflowStep] = React.useState<string | null>(null);
-    const [activeTestView, setActiveTestView] = React.useState<TestView>('Original');
 
     const clientIpc = ClientPostMessageManager.getInstance();
-    // ... (keep all existing useEffects and handlers)
     const getCurrentCycleData = React.useCallback((): PcppCycle | null => { if (currentCycle === null) return null; const responses: { [key: string]: PcppResponse } = {}; for (let i = 1; i <= tabCount; i++) responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' }; if (currentCycle === 0) return { cycleId: 0, cycleContext, ephemeralContext: '', responses: {}, timestamp: new Date().toISOString(), title: 'Project Setup' }; return { cycleId: currentCycle, timestamp: new Date().toISOString(), title: cycleTitle, cycleContext, ephemeralContext, responses, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement: Array.from(selectedFilesForReplacement), tabCount, isSortedByTokens, pathOverrides: Object.fromEntries(pathOverrides), cycleContextHeight, ephemeralContextHeight, }; }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, cycleContextHeight, ephemeralContextHeight]);
     const saveCurrentCycleState = React.useCallback(() => { const cycleData = getCurrentCycleData(); if (cycleData) clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData }); }, [clientIpc, getCurrentCycleData]);
     const requestCostEstimation = React.useCallback(() => { const cycleData = getCurrentCycleData(); if (cycleData) clientIpc.sendToServer(ClientToServerChannel.RequestPromptCostBreakdown, { cycleData }); }, [clientIpc, getCurrentCycleData]);
@@ -28805,6 +28833,8 @@ const App = () => {
     const handleLinkFile = (originalPath: string) => { if (tempOverridePath.trim()) { setPathOverrides(prev => new Map(prev).set(originalPath, tempOverridePath.trim())); setFileExistenceMap(prev => new Map(prev).set(originalPath, true)); setTempOverridePath(''); handleSelectForViewing(originalPath); } };
     const handleUnlinkFile = (originalPath: string) => { setPathOverrides(prev => { const newMap = new Map(prev); newMap.delete(originalPath); return newMap; }); setFileExistenceMap(prev => new Map(prev).set(originalPath, false)); };
     const handleContextKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => { if ((e.ctrlKey || e.metaKey) && e.key === 'z') return; if ((e.ctrlKey || e.metaKey) && (e.key === 'y' || (e.shiftKey && e.key === 'Z'))) return; };
+    const onCycleContextChange = React.useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => { setCycleContext(e.target.value); setCycleContextTokens(Math.ceil(e.target.value.length / 4)); }, []);
+    const onEphemeralContextChange = React.useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => { setEphemeralContext(e.target.value); setEphemeralContextTokens(Math.ceil(e.target.value.length / 4)); }, []);
     const activeTabData = tabs[activeTab.toString()];
     const sortedTabIds = React.useMemo(() => { const tabIds = [...Array(tabCount)].map((_, i) => i + 1); if (isParsedMode && isSortedByTokens) tabIds.sort((a, b) => { const tokensA = tabs[a.toString()]?.parsedContent?.totalTokens ?? -1; const tokensB = tabs[b.toString()]?.parsedContent?.totalTokens ?? -1; return tokensB - tokensA; }); return tabIds; }, [tabs, isParsedMode, isSortedByTokens, tabCount]);
     const viewableContent = React.useMemo(() => { if (!selectedFilePath || !activeTabData?.parsedContent) return undefined; const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath); if (!file) return '<div>Error: File data not found in parsed response.</div>'; const id = `${file.path}::${file.content}`; return highlightedCodeBlocks.get(id); }, [selectedFilePath, activeTabData?.parsedContent, highlightedCodeBlocks]);
@@ -28831,35 +28861,20 @@ const App = () => {
     if (currentCycle === -1) return <div className="onboarding-container"><h1>No Folder Opened</h1><p>You have not yet opened a folder for the Data Curation Environment to manage.</p><button className="dce-button-primary" onClick={() => clientIpc.sendToServer(ClientToServerChannel.RequestOpenFolder, {})}><VscFolder /> Open Folder</button></div>;
     if (currentCycle === 0) return <OnboardingView initialProjectScope={projectScope} onNavigateToCycle={(id) => handleCycleChange(null, id)} latestCycleId={maxCycle} onScopeChange={setCycleContext} />;
     
-    const OriginalView = () => (
-        <>
-            <div className="pc-header"><div className="pc-toolbar"><button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button><button onClick={handleGeneratePrompt} title="Generate prompt.md" className={workflowStep === 'awaitingGeneratePrompt' ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button><button onClick={handleLogState} title="Log Current State"><VscBug/></button><button onClick={handleGlobalParseToggle} className={`${isParsedMode ? 'active' : ''} ${workflowStep === 'awaitingParse' ? 'workflow-highlight' : ''}`}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} /></div></div>
-            <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''} extraHeaderContent={totalPromptCostDisplay}>
-                <CycleNavigator currentCycle={currentCycle} maxCycle={maxCycle} cycleTitle={cycleTitle} isNewCycleButtonDisabled={isNewCycleButtonDisabled} onCycleChange={handleCycleChange} onNewCycle={handleNewCycle} onTitleChange={(title) => { setCycleTitle(title); }} onDeleteCycle={handleDeleteCycle} onResetHistory={handleResetHistory} onExportHistory={handleExportHistory} onImportHistory={handleImportHistory} onGitBaseline={handleGitBaseline} onGitRestore={handleGitRestore} workflowStep={workflowStep} />
-                <ContextInputs cycleContext={cycleContext} ephemeralContext={ephemeralContext} cycleContextTokens={cycleContextTokens} ephemeralContextTokens={ephemeralContextTokens} onCycleContextChange={(e) => { setCycleContext(e.target.value); setCycleContextTokens(Math.ceil(e.target.value.length / 4)); }} onEphemeralContextChange={(e) => { setEphemeralContext(e.target.value); setEphemeralContextTokens(Math.ceil(e.target.value.length / 4)); }} onContextKeyDown={handleContextKeyDown} cycleContextHeight={cycleContextHeight} onCycleContextHeightChange={setCycleContextHeight} ephemeralContextHeight={ephemeralContextHeight} onEphemeralContextHeightChange={setEphemeralContextHeight} currentCycle={currentCycle} workflowStep={workflowStep} />
-            </CollapsibleSection>
-            <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} onSortToggle={handleSortToggle} workflowStep={workflowStep} />
-            <div className="tab-content">
-                <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={currentComparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => { setSelectedResponseId(prev => prev === id ? null : id); if (workflowStep === 'awaitingResponseSelect') setWorkflowStep('awaitingBaseline'); }} onSelectAllFiles={handleSelectAllFilesToggle} onDeselectAllFiles={() => setSelectedFilesForReplacement(new Set())} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} onBaseline={handleGitBaseline} onRestore={handleGitRestore} workflowStep={workflowStep} />
-            </div>
-        </>
-    );
-
     const collapsedNavigator = <div className="collapsed-navigator"><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0}>&lt;</button><span className="cycle-display">C{currentCycle}</span><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}>&gt;</button></div>;
     const currentComparisonMetrics = selectedFilePath ? comparisonMetrics.get(pathOverrides.get(selectedFilePath) || selectedFilePath) : null;
     const totalPromptCostDisplay = ( <span className="total-prompt-cost" title={costBreakdownTooltip}> Total Est: ({formatLargeNumber(totalPromptTokens, 1)} tk) ~ ${estimatedPromptCost.toFixed(4)} {tabCount > 1 && ` x ${tabCount} = $${(estimatedPromptCost * tabCount).toFixed(4)}`} </span> );
 
     return <div className="pc-view-container">
-        <div className="test-harness-tabs">
-            <button className={activeTestView === 'Original' ? 'active' : ''} onClick={() => setActiveTestView('Original')}>Original</button>
-            <button className={activeTestView === 'TestA' ? 'active' : ''} onClick={() => setActiveTestView('TestA')}>Test A</button>
-            <button className={activeTestView === 'TestB' ? 'active' : ''} onClick={() => setActiveTestView('TestB')}>Test B</button>
-            <button className={activeTestView === 'TestC' ? 'active' : ''} onClick={() => setActiveTestView('TestC')}>Test C</button>
+        <div className="pc-header"><div className="pc-toolbar"><button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button><button onClick={handleGeneratePrompt} title="Generate prompt.md" className={workflowStep === 'awaitingGeneratePrompt' ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button><button onClick={handleLogState} title="Log Current State"><VscBug/></button><button onClick={handleGlobalParseToggle} className={`${isParsedMode ? 'active' : ''} ${workflowStep === 'awaitingParse' ? 'workflow-highlight' : ''}`}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} /></div></div>
+        <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''} extraHeaderContent={totalPromptCostDisplay}>
+            <CycleNavigator currentCycle={currentCycle} maxCycle={maxCycle} cycleTitle={cycleTitle} isNewCycleButtonDisabled={isNewCycleButtonDisabled} onCycleChange={handleCycleChange} onNewCycle={handleNewCycle} onTitleChange={(title) => { setCycleTitle(title); }} onDeleteCycle={handleDeleteCycle} onResetHistory={handleResetHistory} onExportHistory={handleExportHistory} onImportHistory={handleImportHistory} onGitBaseline={handleGitBaseline} onGitRestore={handleGitRestore} workflowStep={workflowStep} />
+            <ContextInputs cycleContext={cycleContext} ephemeralContext={ephemeralContext} cycleContextTokens={cycleContextTokens} ephemeralContextTokens={ephemeralContextTokens} onCycleContextChange={onCycleContextChange} onEphemeralContextChange={onEphemeralContextChange} onContextKeyDown={handleContextKeyDown} cycleContextHeight={cycleContextHeight} onCycleContextHeightChange={setCycleContextHeight} ephemeralContextHeight={ephemeralContextHeight} onEphemeralContextHeightChange={setEphemeralContextHeight} currentCycle={currentCycle} workflowStep={workflowStep} />
+        </CollapsibleSection>
+        <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} onSortToggle={handleSortToggle} workflowStep={workflowStep} />
+        <div className="tab-content">
+            <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={currentComparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => { setSelectedResponseId(prev => prev === id ? null : id); if (workflowStep === 'awaitingResponseSelect') setWorkflowStep('awaitingBaseline'); }} onSelectAllFiles={handleSelectAllFilesToggle} onDeselectAllFiles={() => setSelectedFilesForReplacement(new Set())} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} onBaseline={handleGitBaseline} onRestore={handleGitRestore} workflowStep={workflowStep} />
         </div>
-        {activeTestView === 'Original' && <OriginalView />}
-        {activeTestView === 'TestA' && <TestPane1 />}
-        {activeTestView === 'TestB' && <TestPane2 />}
-        {activeTestView === 'TestC' && <TestPane3 />}
     </div>;
 };
 
@@ -28999,7 +29014,7 @@ export enum ServerToClientChannel {
 </file>
 
 <file path="src/common/ipc/channels.type.ts">
-// Updated on: C175 (Add Git channels)
+// Updated on: C180 (Add return type for deleteCycle)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -29052,7 +29067,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestLatestCycleData ? {} :
     T extends ClientToServerChannel.RequestCycleData ? { cycleId: number } :
     T extends ClientToServerChannel.SaveCycleData ? { cycleData: PcppCycle } :
-    T extends ClientToServerChannel.RequestDeleteCycle ? { cycleId: number } :
+    T extends ClientToServerChannel.RequestDeleteCycle ? { cycleId: number; } :
     T extends ClientToServerChannel.RequestResetHistory ? {} :
     T extends ClientToServerChannel.RequestBatchFileWrite ? { files: BatchWriteFile[] } :
     T extends ClientToServerChannel.RequestLogState ? { currentState: PcppCycle } :
@@ -29924,6 +29939,7 @@ module.exports = [extensionConfig, webviewConfig];
 # Artifact A75: DCE - Text Area Component A-B-C Test Plan
 # Date Created: C179
 # Author: AI Model & Curator
+# Updated on: C180 (Acknowledge word-wrap limitation)
 
 - **Key/Value for A0:**
 - **Description:** A plan to create a test harness for the `NumberedTextarea` component to diagnose and fix persistent scrolling and alignment bugs.
@@ -29935,16 +29951,22 @@ The `NumberedTextarea` component, used for the "Cycle Context" and "Ephemeral Co
 
 The goal of this plan is to apply the "Original-A-B-C" testing strategy, as defined in `A51`, to definitively diagnose and resolve these issues. We will create a test harness within the PCPP that allows for parallel testing of the original component and three new, isolated test components, each attempting a different solution.
 
-## 2. The Strategy
+## 2. Known Limitation: Word-Wrap Line Numbering
 
-### 2.1. Test Harness Implementation
+As of Cycle 4, it has been observed that the current architecture of the `NumberedTextarea` (and all proposed test variants) does not correctly handle line numbering for word-wrapped text. The component counts lines based on newline characters (`\n`), not on how the text visually wraps in the view. This means a single line of text that wraps into three visual lines will only get one line number.
+
+**This is a known limitation.** A true fix for this requires a significantly more complex architecture, likely involving rendering text into a hidden element and measuring the resulting line boxes. For the current development phase, the priority is to fix the blocking usability bugs (scrolling, focus, performance). The word-wrap numbering issue will be deferred to a future cycle dedicated to advanced component architecture.
+
+## 3. The Strategy
+
+### 3.1. Test Harness Implementation
 The main `parallel-copilot.view/view.tsx` component will be refactored to include a new "Test Harness" mode.
 -   A new state, `activeTestView`, will control which view is active: `'Original'`, `'TestA'`, `'TestB'`, or `'TestC'`.
 -   A simple tab bar UI will be added to switch between these views.
 -   The "Original" view will render the current, fully-featured PCPP layout.
 -   The other views will render the isolated test components.
 
-### 2.2. Isolated Test Components
+### 3.2. Isolated Test Components
 Three new test components will be created to isolate and test specific variables.
 
 -   **Test A (`TestPane1.tsx`): Synchronized Scrolling**
@@ -29959,7 +29981,7 @@ Three new test components will be created to isolate and test specific variables
     -   **Hypothesis:** A clean implementation combining the lessons from Test A and Test B will provide a fully functional component.
     -   **Implementation:** This component will integrate the synchronized scrolling from Test A with the pixel-perfect styling from Test B into a new, clean version of the `NumberedTextarea` component, free from any other complex logic from the main view.
 
-## 3. Cleanup Process
+## 4. Cleanup Process
 Once a working pattern is identified in a test component:
 1.  **Codify Findings:** The successful pattern and the root cause of the failure will be documented in `A11. DCE - Regression Case Studies`.
 2.  **Integrate Solution:** The original `NumberedTextarea.tsx` component will be refactored to use the successful pattern.
@@ -29970,6 +29992,7 @@ Once a working pattern is identified in a test component:
 # Artifact A75: DCE - Text Area Component A-B-C Test Plan
 # Date Created: C179
 # Author: AI Model & Curator
+# Updated on: C180 (Acknowledge word-wrap limitation)
 
 - **Key/Value for A0:**
 - **Description:** A plan to create a test harness for the `NumberedTextarea` component to diagnose and fix persistent scrolling and alignment bugs.
@@ -29981,16 +30004,22 @@ The `NumberedTextarea` component, used for the "Cycle Context" and "Ephemeral Co
 
 The goal of this plan is to apply the "Original-A-B-C" testing strategy, as defined in `A51`, to definitively diagnose and resolve these issues. We will create a test harness within the PCPP that allows for parallel testing of the original component and three new, isolated test components, each attempting a different solution.
 
-## 2. The Strategy
+## 2. Known Limitation: Word-Wrap Line Numbering
 
-### 2.1. Test Harness Implementation
+As of Cycle 4, it has been observed that the current architecture of the `NumberedTextarea` (and all proposed test variants) does not correctly handle line numbering for word-wrapped text. The component counts lines based on newline characters (`\n`), not on how the text visually wraps in the view. This means a single line of text that wraps into three visual lines will only get one line number.
+
+**This is a known limitation.** A true fix for this requires a significantly more complex architecture, likely involving rendering text into a hidden element and measuring the resulting line boxes. For the current development phase, the priority is to fix the blocking usability bugs (scrolling, focus, performance). The word-wrap numbering issue will be deferred to a future cycle dedicated to advanced component architecture.
+
+## 3. The Strategy
+
+### 3.1. Test Harness Implementation
 The main `parallel-copilot.view/view.tsx` component will be refactored to include a new "Test Harness" mode.
 -   A new state, `activeTestView`, will control which view is active: `'Original'`, `'TestA'`, `'TestB'`, or `'TestC'`.
 -   A simple tab bar UI will be added to switch between these views.
 -   The "Original" view will render the current, fully-featured PCPP layout.
 -   The other views will render the isolated test components.
 
-### 2.2. Isolated Test Components
+### 3.2. Isolated Test Components
 Three new test components will be created to isolate and test specific variables.
 
 -   **Test A (`TestPane1.tsx`): Synchronized Scrolling**
@@ -30005,7 +30034,7 @@ Three new test components will be created to isolate and test specific variables
     -   **Hypothesis:** A clean implementation combining the lessons from Test A and Test B will provide a fully functional component.
     -   **Implementation:** This component will integrate the synchronized scrolling from Test A with the pixel-perfect styling from Test B into a new, clean version of the `NumberedTextarea` component, free from any other complex logic from the main view.
 
-## 3. Cleanup Process
+## 4. Cleanup Process
 Once a working pattern is identified in a test component:
 1.  **Codify Findings:** The successful pattern and the root cause of the failure will be documented in `A11. DCE - Regression Case Studies`.
 2.  **Integrate Solution:** The original `NumberedTextarea.tsx` component will be refactored to use the successful pattern.

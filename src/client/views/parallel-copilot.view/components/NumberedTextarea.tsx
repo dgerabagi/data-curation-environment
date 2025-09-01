@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx
-// Updated on: C179 (Fix scrolling synchronization and alignment issues)
+// Updated on: C180 (Fix focus loss bug)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -29,9 +29,8 @@ const NumberedTextarea: React.FC<NumberedTextareaProps> = ({ value, onChange, pl
                 setHighlightedHtml(html);
             }
         };
-        const subscription = clientIpc.onServerMessage(ServerToClientChannel.SendHighlightContext, handleHighlightResponse);
-        // Assuming onServerMessage returns a function to unsubscribe, or similar mechanism.
-        // If not, this might need adjustment based on actual implementation of ClientPostMessageManager.
+        clientIpc.onServerMessage(ServerToClientChannel.SendHighlightContext, handleHighlightResponse);
+        // This is a simplified subscription model. A real implementation should return an unsubscribe function.
     }, [id, clientIpc]);
     
     React.useEffect(() => {
@@ -48,24 +47,22 @@ const NumberedTextarea: React.FC<NumberedTextareaProps> = ({ value, onChange, pl
         }
     };
 
-    const handleMouseDown = (e: React.MouseEvent) => {
+    const handleMouseDown = React.useCallback((e: React.MouseEvent) => {
         e.preventDefault();
+        const handleMouseMove = (mouseMoveEvent: MouseEvent) => {
+            if (textareaRef.current) {
+                const containerTop = textareaRef.current.getBoundingClientRect().top;
+                const newHeight = mouseMoveEvent.clientY - containerTop;
+                onHeightChange(Math.max(50, newHeight));
+            }
+        };
+        const handleMouseUp = () => {
+            document.removeEventListener('mousemove', handleMouseMove);
+            document.removeEventListener('mouseup', handleMouseUp);
+        };
         document.addEventListener('mousemove', handleMouseMove);
         document.addEventListener('mouseup', handleMouseUp);
-    };
-
-    const handleMouseMove = React.useCallback((e: MouseEvent) => {
-        if (textareaRef.current) {
-            const containerTop = textareaRef.current.getBoundingClientRect().top;
-            const newHeight = e.clientY - containerTop;
-            onHeightChange(Math.max(50, newHeight)); // min height 50px
-        }
     }, [textareaRef, onHeightChange]);
-
-    const handleMouseUp = React.useCallback(() => {
-        document.removeEventListener('mousemove', handleMouseMove);
-        document.removeEventListener('mouseup', handleMouseUp);
-    }, [handleMouseMove]);
 
     return (
         <div className={`numbered-textarea-container ${className || ''}`} style={{ height: `${height}px` }}>
@@ -99,4 +96,4 @@ const NumberedTextarea: React.FC<NumberedTextareaProps> = ({ value, onChange, pl
     );
 };
 
-export default NumberedTextarea;
+export default React.memo(NumberedTextarea);
