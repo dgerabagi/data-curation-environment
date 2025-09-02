@@ -1,5 +1,5 @@
 // src/backend/services/git.service.ts
-// Updated on: C186 (Add logging before sending IPC message)
+// Updated on: C187 (Add handleGitInitRequest and two-button dialog)
 import * as vscode from 'vscode';
 import { exec } from 'child_process';
 import * as path from 'path';
@@ -9,7 +9,7 @@ import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 
 export class GitService {
     private getWorkspaceRoot(): string | undefined {
-        return vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+        return vscode.workspace.workspaceFolders?.[0].uri.fsPath;
     }
 
     private async execGitCommand(command: string): Promise<{ stdout: string; stderr: string }> {
@@ -33,6 +33,16 @@ export class GitService {
         });
     }
 
+    public async handleGitInitRequest() {
+        Services.loggerService.log("Executing Git Init.");
+        try {
+            await this.execGitCommand('git init');
+            vscode.window.showInformationMessage("Successfully initialized Git repository. You can now create a baseline.");
+        } catch (error: any) {
+            vscode.window.showErrorMessage(`Failed to initialize Git repository: ${error.message}`);
+        }
+    }
+
     public async handleGitStatusRequest(serverIpc: ServerPostMessageManager) {
         Services.loggerService.log("Executing Git Status check.");
         try {
@@ -40,7 +50,6 @@ export class GitService {
             const isClean = stdout.trim() === '';
             serverIpc.sendToClient(ServerToClientChannel.SendGitStatus, { isClean });
         } catch (error) {
-            // Not a git repo, treat as not clean for workflow purposes
             serverIpc.sendToClient(ServerToClientChannel.SendGitStatus, { isClean: false });
         }
     }
@@ -64,9 +73,11 @@ export class GitService {
         } catch (error: any) {
             if (error.message.includes('fatal: not a git repository')) {
                 const openReadme = 'Open README Guide';
+                const initRepo = 'Initialize Repository';
                 vscode.window.showErrorMessage(
                     'This is not a Git repository. Please initialize it first to use the baseline feature.',
-                    openReadme
+                    openReadme,
+                    initRepo
                 ).then(selection => {
                     if (selection === openReadme) {
                         const workspaceRoot = this.getWorkspaceRoot();
@@ -76,9 +87,10 @@ export class GitService {
                                 vscode.window.showTextDocument(doc);
                             });
                         }
+                    } else if (selection === initRepo) {
+                        vscode.commands.executeCommand('dce.gitInit');
                     }
                 });
-                // Don't send a failure message, as the UI pop-up is the feedback
                 return; 
             }
             result = { success: false, message: `Git Baseline failed: ${error.message}` };

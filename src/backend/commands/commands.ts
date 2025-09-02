@@ -1,4 +1,4 @@
-// Updated on: C115 (Fix fsService reference)
+// Updated on: C187 (Add gitInit command)
 import * as vscode from 'vscode';
 import { Services } from '../services/services';
 import { serverIPCs } from '@/client/views';
@@ -80,7 +80,6 @@ export const commands = [
             const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
             if (serverIpc) {
                 Services.loggerService.log("Executing dce.refreshTree command.");
-                // C115 Fix: Use fileTreeService instead of fsService
                 Services.fileTreeService.handleWorkspaceFilesRequest(serverIpc, true);
             } else {
                 Services.loggerService.warn("Could not refresh tree: serverIpc not found.");
@@ -92,6 +91,13 @@ export const commands = [
         callback: () => {
             Services.loggerService.log("Executing dce.openParallelCopilot command to open WebviewPanel.");
             vscode.commands.executeCommand('dce.showParallelCopilot');
+        }
+    },
+    {
+        commandId: 'dce.gitInit',
+        callback: () => {
+            Services.loggerService.log("Executing dce.gitInit command.");
+            Services.gitService.handleGitInitRequest();
         }
     }
 ];

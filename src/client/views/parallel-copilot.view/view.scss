@@ -1,5 +1,5 @@
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C182 (Fix onboarding textarea width)
+// Updated on: C187 (Add margin to collapsible section for animation)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -176,7 +176,7 @@ body {
 }
 
 .onboarding-textarea {
-    width: calc(100% - 15px); // Compensate for scrollbar
+    width: 100%;
     flex-grow: 1;
     background-color: var(--vscode-input-background);
     color: var(--vscode-input-foreground);
@@ -186,6 +186,7 @@ body {
     font-family: var(--vscode-editor-font-family);
     font-size: var(--vscode-editor-font-size);
     resize: none;
+    box-sizing: border-box;
     
     &:focus {
         outline: 1px solid var(--vscode-focusBorder);
@@ -846,6 +847,7 @@ body {
     border: 1px solid var(--vscode-panel-border);
     border-radius: 4px;
     width: 100%;
+    margin: 2px; /* C187 Fix: Add margin for animation highlight */
 }
 
 .collapsible-header-inner {

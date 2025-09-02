@@ -2552,14 +2552,13 @@ asdf
 <M7. Flattened Repo>
 
 
-
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-01T20:14:26.515Z
+  Date Generated: 2025-09-01T20:33:13.939Z
   ---
   Total Files: 168
-  Approx. Tokens: 447999
+  Approx. Tokens: 448004
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -2570,7 +2569,7 @@ asdf
 5. src\client\views\parallel-copilot.view\view.scss (5158 tokens)
 6. src\backend\services\prompt.service.ts (4908 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4429 tokens)
-8. src\backend\services\file-operation.service.ts (4091 tokens)
+8. src\backend\services\file-operation.service.ts (4095 tokens)
 9. src\client\views\context-chooser.view\view.tsx (4079 tokens)
 10. src\client\views\context-chooser.view\view.scss (3708 tokens)
 
@@ -2678,10 +2677,10 @@ asdf
 101. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
 102. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
 103. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
-104. src\backend\services\file-operation.service.ts - Lines: 344 - Chars: 16362 - Tokens: 4091
+104. src\backend\services\file-operation.service.ts - Lines: 344 - Chars: 16380 - Tokens: 4095
 105. src\backend\services\file-tree.service.ts - Lines: 276 - Chars: 14221 - Tokens: 3556
 106. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12820 - Tokens: 3205
-107. src\backend\services\git.service.ts - Lines: 102 - Chars: 5010 - Tokens: 1253
+107. src\backend\services\git.service.ts - Lines: 102 - Chars: 5013 - Tokens: 1254
 108. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4232 - Tokens: 1058
 109. src\backend\services\history.service.ts - Lines: 270 - Chars: 11310 - Tokens: 2828
 110. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
@@ -23436,7 +23435,7 @@ export class FileOperationService {
             const workspaceFolders = vscode.workspace.workspaceFolders;
             if (!workspaceFolders || workspaceFolders.length === 0) throw new Error("No workspace folder open.");
 
-            const absolutePath = path.resolve(workspaceFolders.uri.fsPath, filePath);
+            const absolutePath = path.resolve(workspaceFolders[0].uri.fsPath, filePath);
             const originalContentBuffer = await vscode.workspace.fs.readFile(vscode.Uri.file(absolutePath));
             const originalContent = Buffer.from(originalContentBuffer).toString('utf-8');
 
@@ -23469,7 +23468,7 @@ export class FileOperationService {
             vscode.window.showErrorMessage("Cannot write files: No workspace folder is open.");
             return [];
         }
-        const rootPath = workspaceFolders.uri.fsPath;
+        const rootPath = workspaceFolders[0].uri.fsPath;
         const successfulPaths: string[] = [];
 
         try {
@@ -23498,7 +23497,7 @@ export class FileOperationService {
             if (!workspaceFolders || workspaceFolders.length === 0) {
                 throw new Error("No workspace folder open.");
             }
-            const absolutePath = path.resolve(workspaceFolders.uri.fsPath, filePath);
+            const absolutePath = path.resolve(workspaceFolders[0].uri.fsPath, filePath);
             const uri = vscode.Uri.file(absolutePath);
             const contentBuffer = await vscode.workspace.fs.readFile(uri);
             const content = Buffer.from(contentBuffer).toString('utf-8');
@@ -23518,7 +23517,7 @@ export class FileOperationService {
             serverIpc.sendToClient(ServerToClientChannel.SendFileExistence, { existenceMap: {} });
             return;
         }
-        const rootPath = workspaceFolders.uri.fsPath;
+        const rootPath = workspaceFolders[0].uri.fsPath;
     
         const existenceMap: { [path: string]: boolean } = {};
         const checks = paths.map(async (p_raw) => {
@@ -23630,7 +23629,7 @@ export class FileOperationService {
         try {
             const workspaceFolders = vscode.workspace.workspaceFolders;
             if (!workspaceFolders || workspaceFolders.length === 0) throw new Error("No workspace folder open.");
-            const absolutePath = path.resolve(workspaceFolders.uri.fsPath, filePath);
+            const absolutePath = path.resolve(workspaceFolders[0].uri.fsPath, filePath);
             await vscode.workspace.fs.writeFile(vscode.Uri.file(absolutePath), new Uint8Array());
             Services.loggerService.log(`Successfully created file: ${filePath}`);
         } catch (error: any) {
@@ -23705,7 +23704,7 @@ export class FileOperationService {
         const workspaceFolders = vscode.workspace.workspaceFolders;
         let pathToCopy = filePath;
         if (relative && workspaceFolders && workspaceFolders.length > 0) {
-            pathToCopy = path.relative(workspaceFolders.uri.fsPath, filePath);
+            pathToCopy = path.relative(workspaceFolders[0].uri.fsPath, filePath);
         }
         vscode.env.clipboard.writeText(pathToCopy);
         vscode.window.showInformationMessage(`Copied to clipboard: ${pathToCopy}`);
@@ -24260,7 +24259,7 @@ import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 
 export class GitService {
     private getWorkspaceRoot(): string | undefined {
-        return vscode.workspace.workspaceFolders?.?.uri.fsPath;
+        return vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
     }
 
     private async execGitCommand(command: string): Promise<{ stdout: string; stderr: string }> {
@@ -31120,7 +31119,6 @@ The user's request is valid and would be a great UX improvement. However, due to
 
 The current priority is to fix the more critical usability bugs like scrolling, focus management, and highlighting. Once the component is stable, we can revisit this challenge and dedicate a future cycle to implementing one of the more advanced solutions above.
 </file>
-
 
 
 
