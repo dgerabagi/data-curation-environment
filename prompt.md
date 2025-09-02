@@ -11,8 +11,9 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 10 - continue perfecting the animated workflow based on testing observations/feedback
-Cycle 8-9 - continue perfecting the animated workflow based on testing observations/feedback
+Current Cycle 13 - nice! baseline -> associated files working! continue finalization almost done
+Cycle 12 - continue perfecting the animated workflow based on testing observations/feedback
+Cycle 8-11 - continue perfecting the animated workflow based on testing observations/feedback
 Cycle 7 - hide/remove numbered lines for cycle context/ephemeral, align readme/popupmessages/onboarding, align baseline button, make our perfect closed loop animation workflow
 Cycle 6 - create artifact for word wrap, add additional animated workflow steps, `Resp 1` highlighting seems stuck, enhance generate prompt.md based on currently viewed cycle, state-aware sort animation
 Cycle 5 - still cannot progress.
@@ -617,6 +618,482 @@ transitioning between manual prompting method and using the dce we are creating 
 </M5. organized artifacts list>
 
 <M6. Cycles>
+<Cycle 13>
+okay, initating a new test, i really hope at least one of these changes made it in...
+
+<new test>
+i rolled in the below response, resolved ts errors, and pressed F5 to start the extension in dev mode.
+
+1. i created a new folder 'TowerDefense13'.
+2. i use the `Open Folder` button in our DCE FTV pane and select the newly created folder to set as the Workspace.
+3. i select the DCE extension. this triggers both DCE windows to open, the FTV and the PCPP. this is good.
+4. i write 'i want to create a tower defense game' and click the intiate button. it opens the readme and generates prompt.md. this is all good.
+5. i send the prompt.md off to 4 parallel aistudio conversations. i paste them back in `Resp 1` -> `Resp 4`.
+6. the `Parse All` animates, i select it.
+7. the `Sort` animates, i select it.
+8. `Resp 4` is longest, i focus it, and then i click `Select This Response`.
+9. `Baseline` animates. I click it. I get the `Open README Guide`.
+9.1. note that we could also provide instructions like 'or if you've already got git installed, you can click the second button' and give them a second button to run the git init, which then we can programmatically confirm we can move on with the process correctly.
+10. i open a terminal in the pwd and type `git init`. a repo gets initialized.
+11. i then click `Baseline` once again. all you had to do was have it detect the commit and then move the animation to `Select All`... fingers crossed... testing now...
+12. fuck yes! it worked!!! what a relief!!!
+12.1. i see we are animating the `Associated Files` pane itself. theres a slight visual issue here that we have already encountered previously and have resolved. it was with the right side of the text field on the welcome page when we were animating it. the right side was obscured, covered by the scroll bar. here too this is occurring, however it is not the right side, this time it is both the top and the left side that are slightly obscured, causing the animation to not full present itself along those two sides. can this be corrected for? i like it getting animated, i would like to keep it and fix it in the same manner as we fixed the welcome page issue.
+13. i clicked `Accept All`, and `Accept Selected` became animated next, good.
+14. after clicking `Accept Selected`, the `Cycle Context` became animated, good.
+15. after writing in the `Cycle Context`, the `Cycle Title` became animated, good.
+15.1. okay this was issue #2 that needed to be resolved, we need to first prompt the user to generate the prompt.md before creating a new cycle. that is because the first thing you do once you create a new cycle, is paste in the responses, but the user wouldnt have any responses if they didnt first generate, and then send off the prompt.md to aistudio conversation windows. does that make sense? this is the only thing needed at this time. please focus on that. oh that and the second button on the popup that occurs when no git is yet initialized.
+</new test>
+
+<dce logs>
+[INFO] [3:20:04 PM] Congratulations, your extension "Data Curation Environment" is now active!
+[INFO] [3:20:04 PM] Services initializing...
+[INFO] [3:20:04 PM] Services initialized successfully.
+[INFO] [3:20:04 PM] Registering 5 commands.
+[INFO] [3:20:04 PM] HistoryService: getLatestCycle called.
+[INFO] [3:20:04 PM] Fresh environment detected. Returning Cycle 0.
+[INFO] [3:20:04 PM] Fresh environment, automatically opening Parallel Co-Pilot Panel.
+[INFO] [3:20:04 PM] Parallel Co-Pilot view message handler initialized.
+[INFO] [3:20:04 PM] Starry Night syntax highlighter initialized.
+[INFO] [3:20:04 PM] Context Chooser view message handler initialized.
+[INFO] [3:20:04 PM] [on-message] Received RequestInitialData. Forwarding to services.
+[INFO] [3:20:04 PM] handleWorkspaceFilesRequest started. forceRefresh=false
+[INFO] [3:20:04 PM] Building file tree from scratch.
+[INFO] [3:20:04 PM] buildTreeFromTraversal starting for root: c:\Projects\TowerDefense13
+[INFO] [3:20:04 PM] [SelectionService] No last selection found in state.
+[INFO] [3:20:04 PM] buildTreeFromTraversal finished. Root node has 0 children.
+[INFO] [3:20:04 PM] File tree built. Sending to client.
+[INFO] [3:20:04 PM] handleWorkspaceFilesRequest finished.
+[INFO] [3:20:04 PM] Persisted current selection of 0 items.
+[INFO] [3:20:04 PM] HistoryService: getLatestCycle called.
+[INFO] [3:20:04 PM] Fresh environment detected. Returning Cycle 0.
+[INFO] [3:20:04 PM] [SelectionService] No last selection found in state.
+[INFO] [3:20:05 PM] Project scope saved.
+[INFO] [3:20:05 PM] [SelectionService] No last selection found in state.
+[INFO] [3:20:05 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode
+[INFO] [3:20:05 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.vscode/dce_history.json
+[INFO] [3:20:05 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
+[INFO] [3:20:05 PM] Persisted current selection of 1 items.
+[INFO] [3:20:05 PM] [SelectionService] Found 1 paths in persisted state. Validating...
+[INFO] [3:20:05 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode
+[INFO] [3:20:05 PM] [SelectionService] Returning 1 valid paths.
+[INFO] [3:20:05 PM] Persisted current selection of 1 items.
+[INFO] [3:20:34 PM] [SelectionService] Found 1 paths in persisted state. Validating...
+[INFO] [3:20:34 PM] [SelectionService] Returning 1 valid paths.
+[INFO] [3:20:34 PM] Project scope saved.
+[INFO] [3:20:34 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
+[INFO] [3:20:34 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
+[INFO] [3:20:39 PM] Generating Cycle 0 prompt.md file...
+[INFO] [3:20:39 PM] Project scope saved.
+[INFO] [3:20:39 PM] Created src/Artifacts/README.md for the new project.
+[INFO] [3:20:39 PM] Successfully generated Cycle 0 prompt.md file.
+[INFO] [3:20:40 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
+[INFO] [3:20:40 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
+[INFO] [3:20:40 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/prompt.md
+[INFO] [3:20:40 PM] [SelectionService] Found 1 paths in persisted state. Validating...
+[INFO] [3:20:40 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
+[INFO] [3:20:40 PM] [SelectionService] Returning 1 valid paths.
+[INFO] [3:20:40 PM] Persisted current selection of 2 items.
+[INFO] [3:20:40 PM] [SelectionService] Found 2 paths in persisted state. Validating...
+[INFO] [3:20:40 PM] [SelectionService] Returning 2 valid paths.
+[INFO] [3:20:40 PM] HistoryService: saving data for cycle 1.
+[WARN] [3:20:40 PM] [WebView] [TreeView] Could not find ref for active file: c:/Projects/TowerDefense13/prompt.md
+[INFO] [3:20:40 PM] Persisted current selection of 4 items.
+[WARN] [3:20:40 PM] [WebView] [TreeView] Could not find ref for active file: c:/Projects/TowerDefense13/src/Artifacts/README.md
+[INFO] [3:20:40 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
+[INFO] [3:20:40 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
+[INFO] [3:20:40 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [3:20:40 PM] handleWorkspaceFilesRequest started. forceRefresh=true
+[INFO] [3:20:40 PM] Building file tree from scratch.
+[INFO] [3:20:40 PM] buildTreeFromTraversal starting for root: c:\Projects\TowerDefense13
+[INFO] [3:20:40 PM] [SelectionService] Found 4 paths in persisted state. Validating...
+[INFO] [3:20:40 PM] [SelectionService] Returning 4 valid paths.
+[INFO] [3:20:40 PM] Persisted current selection of 4 items.
+[INFO] [3:20:40 PM] buildTreeFromTraversal finished. Root node has 2 children.
+[INFO] [3:20:40 PM] File tree built. Sending to client.
+[INFO] [3:20:40 PM] handleWorkspaceFilesRequest finished.
+[INFO] [3:21:07 PM] HistoryService: getLatestCycle called.
+[INFO] [3:21:07 PM] Latest cycle found: 1
+[INFO] [3:21:07 PM] [CONTEXT-HIGHLIGHT] Received request for context ID: cycle-context-1
+[INFO] [3:21:07 PM] [CONTEXT-HIGHLIGHT] Received request for context ID: ephemeral-context-1
+[INFO] [3:21:08 PM] [SelectionService] Found 4 paths in persisted state. Validating...
+[INFO] [3:21:08 PM] [SelectionService] Returning 4 valid paths.
+[INFO] [3:21:09 PM] HistoryService: saving data for cycle 1.
+[INFO] [3:21:09 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
+[INFO] [3:21:09 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
+[INFO] [3:22:22 PM] HistoryService: getLatestCycle called.
+[INFO] [3:22:22 PM] Latest cycle found: 1
+[INFO] [3:22:22 PM] [CONTEXT-HIGHLIGHT] Received request for context ID: cycle-context-1
+[INFO] [3:22:22 PM] [CONTEXT-HIGHLIGHT] Received request for context ID: ephemeral-context-1
+[INFO] [3:22:23 PM] [SelectionService] Found 4 paths in persisted state. Validating...
+[INFO] [3:22:23 PM] [SelectionService] Returning 4 valid paths.
+[INFO] [3:22:23 PM] HistoryService: saving data for cycle 1.
+[INFO] [3:22:24 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
+[INFO] [3:22:24 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
+[INFO] [3:22:24 PM] [SelectionService] Found 4 paths in persisted state. Validating...
+[INFO] [3:22:24 PM] [SelectionService] Returning 4 valid paths.
+[INFO] [3:22:25 PM] HistoryService: saving data for cycle 1.
+[INFO] [3:22:25 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
+[INFO] [3:22:25 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
+[INFO] [3:22:32 PM] [SelectionService] Found 4 paths in persisted state. Validating...
+[INFO] [3:22:32 PM] [SelectionService] Returning 4 valid paths.
+[INFO] [3:22:33 PM] HistoryService: saving data for cycle 1.
+[INFO] [3:22:33 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
+[INFO] [3:22:33 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
+[INFO] [3:22:37 PM] [SelectionService] Found 4 paths in persisted state. Validating...
+[INFO] [3:22:37 PM] [SelectionService] Returning 4 valid paths.
+[INFO] [3:22:37 PM] HistoryService: saving data for cycle 1.
+[INFO] [3:22:38 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
+[INFO] [3:22:38 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
+[INFO] [3:22:45 PM] [SelectionService] Found 4 paths in persisted state. Validating...
+[INFO] [3:22:45 PM] [SelectionService] Returning 4 valid paths.
+[INFO] [3:22:46 PM] HistoryService: saving data for cycle 1.
+[INFO] [3:22:46 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
+[INFO] [3:22:46 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
+[INFO] [3:23:20 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A0: Tower[...]
+[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A1: Tower[...]
+[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A3: Tower[...]
+[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A7: Tower[...]
+[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A14: Towe[...]
+[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A0: Tower[...]
+[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A1: Tower[...]
+[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A3: Tower[...]
+[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A7: Tower[...]
+[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A11: Towe[...]
+[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A14: Towe[...]
+[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A0: Tower[...]
+[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A1: Tower[...]
+[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A3: Tower[...]
+[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A7: Tower[...]
+[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A14: Towe[...]
+[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A0: Tower[...]
+[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A1: Tower[...]
+[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A3: Tower[...]
+[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A7: Tower[...]
+[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A11: Towe[...]
+[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A14: Towe[...]
+[INFO] [3:23:21 PM] [File Existence] Received request to check paths: ["src/Artifacts/TowerDefense-A0-Master-Artifact-List.md","src/Artifacts/TowerDefense-A1-Project-Vision-and-Goals.md","src/Artifacts/TowerDefense-A3-Technical-Scaffolding-Plan.md","src/Artifacts/TowerDefense-A7-Dev-and-Testing-Guide.md","src/Artifacts/A14. TowerDefense - GitHub Repository Setup Guide.md","src/Artifacts/TowerDefense-A11-Implementation-Roadmap.md","src/Artifacts/TowerDefense-A14-GitHub-Repository-Setup-Guide.md","src/Artifacts/A0.TowerDefense-Master-Artifact-List.md","src/Artifacts/A1.TowerDefense-Project-Vision-and-Goals.md","src/Artifacts/A3.TowerDefense-Technical-Scaffolding-Plan.md","src/Artifacts/A7.TowerDefense-Dev-and-Testing-Guide.md","src/Artifacts/A14.TowerDefense-GitHub-Repository-Setup-Guide.md","src/Artifacts/TowerDefenseQuest-A0-Master-Artifact-List.md","src/Artifacts/TowerDefenseQuest-A1-Project-Vision-and-Goals.md","src/Artifacts/TowerDefenseQuest-A3-Technical-Scaffolding-Plan.md","src/Artifacts/TowerDefenseQuest-A7-Dev-and-Testing-Guide.md","src/Artifacts/TowerDefenseQuest-A11-Implementation-Roadmap.md","src/Artifacts/TowerDefenseQuest-A14-GitHub-Repository-Setup-Guide.md"]
+[INFO] [3:23:21 PM] [File Existence] Received request to check paths: ["src/Artifacts/TowerDefense-A0-Master-Artifact-List.md","src/Artifacts/TowerDefense-A1-Project-Vision-and-Goals.md","src/Artifacts/TowerDefense-A3-Technical-Scaffolding-Plan.md","src/Artifacts/TowerDefense-A7-Dev-and-Testing-Guide.md","src/Artifacts/A14. TowerDefense - GitHub Repository Setup Guide.md","src/Artifacts/TowerDefense-A11-Implementation-Roadmap.md","src/Artifacts/TowerDefense-A14-GitHub-Repository-Setup-Guide.md","src/Artifacts/A0.TowerDefense-Master-Artifact-List.md","src/Artifacts/A1.TowerDefense-Project-Vision-and-Goals.md","src/Artifacts/A3.TowerDefense-Technical-Scaffolding-Plan.md","src/Artifacts/A7.TowerDefense-Dev-and-Testing-Guide.md","src/Artifacts/A14.TowerDefense-GitHub-Repository-Setup-Guide.md","src/Artifacts/TowerDefenseQuest-A0-Master-Artifact-List.md","src/Artifacts/TowerDefenseQuest-A1-Project-Vision-and-Goals.md","src/Artifacts/TowerDefenseQuest-A3-Technical-Scaffolding-Plan.md","src/Artifacts/TowerDefenseQuest-A7-Dev-and-Testing-Guide.md","src/Artifacts/TowerDefenseQuest-A11-Implementation-Roadmap.md","src/Artifacts/TowerDefenseQuest-A14-GitHub-Repository-Setup-Guide.md"]
+[INFO] [3:23:21 PM] [SelectionService] Found 4 paths in persisted state. Validating...
+[INFO] [3:23:21 PM] [SelectionService] Returning 4 valid paths.
+[INFO] [3:23:21 PM] HistoryService: saving data for cycle 1.
+[INFO] [3:23:22 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
+[INFO] [3:23:22 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
+[INFO] [3:23:32 PM] [SelectionService] Found 4 paths in persisted state. Validating...
+[INFO] [3:23:32 PM] [SelectionService] Returning 4 valid paths.
+[INFO] [3:23:32 PM] HistoryService: saving data for cycle 1.
+[INFO] [3:23:32 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
+[INFO] [3:23:32 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
+[INFO] [3:23:55 PM] Executing Git Status check.
+[ERROR] [3:23:55 PM] Git command error: Command failed: git status --porcelain
+fatal: not a git repository (or any of the parent directories): .git
+
+[INFO] [3:23:56 PM] [SelectionService] Found 4 paths in persisted state. Validating...
+[INFO] [3:23:56 PM] [SelectionService] Returning 4 valid paths.
+[INFO] [3:23:56 PM] HistoryService: saving data for cycle 1.
+[INFO] [3:23:56 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
+[INFO] [3:23:56 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
+[INFO] [3:24:05 PM] Executing Git Baseline with message: "DCE Baseline: Cycle 1 - New Cycle"
+[ERROR] [3:24:05 PM] Git command error: Command failed: git status --porcelain
+fatal: not a git repository (or any of the parent directories): .git
+
+[INFO] [3:25:13 PM] [SelectionService] Found 4 paths in persisted state. Validating...
+[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git
+[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/HEAD
+[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/HEAD
+[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/config
+[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/config
+[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/description
+[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/description
+[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/hooks
+[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/hooks
+[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/hooks/applypatch-msg.sample
+[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/hooks/applypatch-msg.sample
+[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/hooks/commit-msg.sample
+[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/hooks/commit-msg.sample
+[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/hooks/fsmonitor-watchman.sample
+[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/hooks/fsmonitor-watchman.sample
+[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/hooks/post-update.sample
+[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/hooks/post-update.sample
+[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/hooks/pre-applypatch.sample
+[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/hooks/pre-applypatch.sample
+[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/hooks/pre-commit.sample
+[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/hooks/pre-commit.sample
+[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/hooks/pre-merge-commit.sample
+[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/hooks/pre-merge-commit.sample
+[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/hooks/pre-push.sample
+[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/hooks/pre-push.sample
+[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/hooks/pre-rebase.sample
+[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/hooks/pre-rebase.sample
+[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/hooks/pre-receive.sample
+[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/hooks/pre-receive.sample
+[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/hooks/prepare-commit-msg.sample
+[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/hooks/prepare-commit-msg.sample
+[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/hooks/push-to-checkout.sample
+[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/hooks/push-to-checkout.sample
+[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/hooks/sendemail-validate.sample
+[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/hooks/sendemail-validate.sample
+[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/hooks/update.sample
+[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/hooks/update.sample
+[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/info
+[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/info
+[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/info/exclude
+[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/info/exclude
+[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/refs
+[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/refs
+[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/refs/heads
+[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/refs/heads
+[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/refs/tags
+[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/refs/tags
+[INFO] [3:25:13 PM] [SelectionService] Returning 4 valid paths.
+[INFO] [3:25:13 PM] Persisted current selection of 5 items.
+[INFO] [3:25:14 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [3:25:14 PM] handleWorkspaceFilesRequest started. forceRefresh=true
+[INFO] [3:25:14 PM] Building file tree from scratch.
+[INFO] [3:25:14 PM] buildTreeFromTraversal starting for root: c:\Projects\TowerDefense13
+[INFO] [3:25:14 PM] [SelectionService] Found 5 paths in persisted state. Validating...
+[INFO] [3:25:14 PM] [SelectionService] Returning 5 valid paths.
+[INFO] [3:25:14 PM] Persisted current selection of 5 items.
+[INFO] [3:25:14 PM] buildTreeFromTraversal finished. Root node has 2 children.
+[INFO] [3:25:14 PM] File tree built. Sending to client.
+[INFO] [3:25:14 PM] handleWorkspaceFilesRequest finished.
+[INFO] [3:26:11 PM] Executing Git Baseline with message: "DCE Baseline: Cycle 1 - New Cycle"
+[WARN] [3:26:11 PM] Git command stderr: warning: in the working copy of '.vscode/dce_history.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'prompt.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/Artifacts/README.md', LF will be replaced by CRLF the next time Git touches it
+
+[INFO] [3:26:11 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/index.lock
+[INFO] [3:26:11 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/index.lock
+[INFO] [3:26:11 PM] [GIT_SERVICE] Sending NotifyGitOperationResult: {"success":true,"message":"Successfully created baseline commit."}
+[INFO] [3:26:11 PM] [UI NOTIFY] Received request to show message: "Successfully created baseline commit."
+[INFO] [3:26:11 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/COMMIT_EDITMSG
+[INFO] [3:26:11 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/COMMIT_EDITMSG
+[INFO] [3:26:11 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/index
+[INFO] [3:26:11 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/index
+[INFO] [3:26:11 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/logs
+[INFO] [3:26:11 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/logs
+[INFO] [3:26:11 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/logs/HEAD
+[INFO] [3:26:11 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/logs/HEAD
+[INFO] [3:26:11 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/logs/refs
+[INFO] [3:26:11 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/logs/refs
+[INFO] [3:26:11 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/logs/refs/heads
+[INFO] [3:26:11 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/logs/refs/heads
+[INFO] [3:26:11 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/logs/refs/heads/master
+[INFO] [3:26:11 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/logs/refs/heads/master
+[INFO] [3:26:11 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/refs/heads/master
+[INFO] [3:26:11 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/refs/heads/master
+[INFO] [3:26:11 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/index.lock
+[INFO] [3:28:37 PM] [SelectionService] Found 5 paths in persisted state. Validating...
+[INFO] [3:28:37 PM] [SelectionService] Returning 5 valid paths.
+[INFO] [3:28:37 PM] HistoryService: saving data for cycle 1.
+[INFO] [3:28:37 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
+[INFO] [3:28:37 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
+[INFO] [3:29:00 PM] [File Operation] Received request to write 6 files.
+[INFO] [3:29:00 PM] Successfully wrote content to: src/Artifacts/TowerDefenseQuest-A0-Master-Artifact-List.md
+[INFO] [3:29:00 PM] Successfully wrote content to: src/Artifacts/TowerDefenseQuest-A1-Project-Vision-and-Goals.md
+[INFO] [3:29:00 PM] Successfully wrote content to: src/Artifacts/TowerDefenseQuest-A3-Technical-Scaffolding-Plan.md
+[INFO] [3:29:00 PM] Successfully wrote content to: src/Artifacts/TowerDefenseQuest-A7-Dev-and-Testing-Guide.md
+[INFO] [3:29:00 PM] Successfully wrote content to: src/Artifacts/TowerDefenseQuest-A11-Implementation-Roadmap.md
+[INFO] [3:29:00 PM] Successfully wrote content to: src/Artifacts/TowerDefenseQuest-A14-GitHub-Repository-Setup-Guide.md
+[INFO] [3:29:00 PM] [SelectionService] Found 5 paths in persisted state. Validating...
+[INFO] [3:29:00 PM] [SelectionService] Returning 5 valid paths.
+[INFO] [3:29:00 PM] Persisted current selection of 6 items.
+[INFO] [3:29:00 PM] [SelectionService] Found 6 paths in persisted state. Validating...
+[INFO] [3:29:00 PM] [SelectionService] Returning 6 valid paths.
+[INFO] [3:29:00 PM] Persisted current selection of 11 items.
+[INFO] [3:29:00 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [3:29:00 PM] handleWorkspaceFilesRequest started. forceRefresh=true
+[INFO] [3:29:00 PM] Building file tree from scratch.
+[INFO] [3:29:00 PM] buildTreeFromTraversal starting for root: c:\Projects\TowerDefense13
+[INFO] [3:29:00 PM] [SelectionService] Found 11 paths in persisted state. Validating...
+[INFO] [3:29:00 PM] [SelectionService] Returning 11 valid paths.
+[INFO] [3:29:00 PM] Persisted current selection of 11 items.
+[INFO] [3:29:00 PM] buildTreeFromTraversal finished. Root node has 2 children.
+[INFO] [3:29:00 PM] File tree built. Sending to client.
+[INFO] [3:29:00 PM] handleWorkspaceFilesRequest finished.
+[INFO] [3:29:21 PM] [CONTEXT-HIGHLIGHT] Received request for context ID: cycle-context-1
+[INFO] [3:29:21 PM] [CONTEXT-HIGHLIGHT] Received request for context ID: cycle-context-1
+[INFO] [3:29:21 PM] [CONTEXT-HIGHLIGHT] Received request for context ID: cycle-context-1
+[INFO] [3:29:21 PM] [CONTEXT-HIGHLIGHT] Received request for context ID: cycle-context-1
+[INFO] [3:29:22 PM] [SelectionService] Found 11 paths in persisted state. Validating...
+[INFO] [3:29:22 PM] [SelectionService] Returning 11 valid paths.
+[INFO] [3:29:22 PM] HistoryService: saving data for cycle 1.
+[INFO] [3:29:22 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
+[INFO] [3:29:22 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
+[INFO] [3:29:23 PM] [SelectionService] Found 11 paths in persisted state. Validating...
+[INFO] [3:29:23 PM] [SelectionService] Returning 11 valid paths.
+[INFO] [3:29:23 PM] HistoryService: saving data for cycle 1.
+[INFO] [3:29:23 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
+[INFO] [3:29:23 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
+[INFO] [3:31:01 PM] HistoryService: saving data for cycle 1.
+[INFO] [3:31:01 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
+[INFO] [3:31:01 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
+
+</dce logs>
+
+<previous cycle 12 summary of actions>
+<summary>
+I have analyzed the detailed test feedback and your understandable frustration. The animated workflow is failing at a critical juncture: transitioning from a successful `Baseline` commit to the next step. This bug has persisted for far too long, and my previous attempts to fix it have been insufficient. The root cause is almost certainly a stale state closure in the frontend's message handler, which prevents it from correctly reacting to the success signal from the backend.
+
+My course of action is to implement a definitive fix for this state transition bug and to correctly implement the full, multi-step animated workflow you have meticulously detailed. I will also add the logging you requested to make the workflow's state changes transparent for future debugging.
+</summary>
+
+<course_of_action>
+1.  **Documentation First (Codifying the "Perfect Loop"):**
+    *   I will update **`A11. DCE - Regression Case Studies.md`**. The "Stuck `Baseline` Highlight" case study will be revised to reflect the persistent nature of the bug, with the root cause analysis now explicitly identifying a stale state closure in the frontend's message handler as the likely culprit.
+    *   I will thoroughly update **`A69. DCE - Animated UI Workflow Guide.md`** to serve as the definitive source of truth for the entire animated sequence, matching your detailed description from step `13.1` to `13.6` in your test feedback.
+
+2.  **Add Robust Logging and User Feedback:**
+    *   **`git.service.ts`:** I will add a log statement immediately before sending the `NotifyGitOperationResult` message to the frontend, providing a clear record in the logs that the backend has successfully completed its task.
+    *   **IPC & `file-operation.service.ts`:** I will add a new `RequestShowInformationMessage` IPC channel and handler, allowing the frontend to request native VS Code notifications. This will be used to provide clear user feedback and as a debugging tool to confirm frontend logic blocks are executing.
+    *   **`view.tsx`:** I will add a dedicated `useEffect` hook to log the `workflowStep` every time it changes, directly addressing your request for better diagnostic information.
+
+3.  **Implement the Definitive Fix and Full Workflow:**
+    *   **`view.tsx` (The Fix):** I will refactor the message handler for `NotifyGitOperationResult`. To prevent the stale closure issue, I will use the functional update form of the state setter (`setWorkflowStep(prevStep => ...)`). This ensures the check for `'awaitingBaseline'` is always against the most current state and will reliably transition the workflow to `'awaitingFileSelect'` upon success.
+    *   **`view.tsx` (The Full Workflow):** I will rewrite the main workflow `useEffect` hook to implement the complete state machine as defined in the updated `A69`, ensuring the correct sequence of highlights from `Select All` -> `Accept Selected` -> `Cycle Context` -> `Cycle Title` -> **`Generate prompt.md`** -> `+ New Cycle`.
+
+</course_of_action>
+
+
+</previous cycle 12 summary of actions>
+</Cycle 13>
+
+
+<Cycle 12>
+im getting frustrated. i listed three things. last cycle. i stated i saw no changes in them the cycle prior. i am now restating the same. you did not fix any of the three:
+
+1. `Basline` is still not working as expected. ive been very clear.
+2. `Accept Selected` is not getting animated.
+3. you're prematurely animating `+`. ive said repeatedly first the user needs to `Generate prompt.md` 
+
+why is this hard? heres my latest test:
+<test 1>
+1. created 'TowerDefense12', opened it as the workspace.
+2. when clicking on the DCE spiral extension, it opened the pcpp, nice. i wrote 'i want to make a tower defense game.'
+3. the readme opened, looks good.
+4. i switch to and copy/paste the prompt.md into 4 aistudio conversation windows in parallel.
+5. i switch back to the pcpp and the `Resp 1` is correctly animated as the next step, good.
+6. after pasting the `Resp 4`, the `Parse All` correctly animated, good.
+7. after clicking `Parse All`, the `Sort` correctly animated, good.
+8. after clicking `Sort`, the response tab and the `Select This Response` buttons are animated, good.
+9. after clicking on the longest response and then clicking `Select This Response`, the `Baseline` button is animated, good.
+10. after clicking `Baseline`, i get the readme popup again, and its working as expected, nice.
+11. i change my view back to the pcpp, however the `Baseline` button is no longer animated. this is interesting/confusing/unexpected/not intended behavior. its interesting because for the longest time we havent been able to get this thing not to animate at the right time. confusing because this is not the right time. unexpected because answer 2. not intended behavior, see 1 and 2.
+11.1. im going to just do git init and see how it behaves.
+11.2. what if we had two buttons on the pop-up, the second button automaticaly does the init then the initial commit?
+11.3. i now click `Baseline` even though its not animated, since i know that is the logical next step after `git init`.
+11.4. clicking `Baseline` does create the commit, but it does not proceed to animate `Select All`. so once again...
+12. >>>>>>>>>>>>>>>>> JFC you didnt change shit! <<<<<<<<<<<
+12.1. okay, i see the commit, however -still- the workflow does not progress; `Baseline` is still highlighted. 
+13. here is how the workflow is supposed to continue:
+13.1. after a current cycle baseline is created, the user is now ready to start auditioning the responses. since the user has the selected resposne focused, the next button to animate is the `Select All` button. this selects the current responses `Associated Files`.
+13.2. once one or more `Associated Files` are selected, the next step is to animate the `Accept Selected` button.
+13.3. once `Accept Selected` is clicked, our current workflow returns to expected behavior; it correctly animates the `Cycle Context` field.
+13.4. once `Cycle Context` has input, it correctly animates the Cycle Title field.
+13.5. once the `Cycle Title` field has bespoke input, our workflow needs to highlight the `Generate prompt.md` step BEFORE the `+` is highlighted. 
+13.6. once `Generate prompt.md` is clicked, then we can animate `+`.
+</test 1>
+
+why the fuck arent you placing whats getting animated in the logs? wouldnt that help?
+
+<super clear instructions>
+please, after a successful baseline, update the animated button from `Baseline` to `Select All` (to try to eliminite ambiguity, this is the `Select All` button next to `Select This Response`/`Response Selected` button).
+
+next, please MODIFY our animated workflow to INCLUDE `Generate prompt.md` BEFORE `+`.
+</super clear instructions>
+
+<previous cycle 11 summary of actions>
+
+
+<summary>
+I have analyzed the detailed test feedback. The core animated workflow is functioning correctly up until the "Baseline" step. Despite a successful Git commit, the UI highlight remains stuck on the `Baseline` button, failing to advance the user to the next step. This is a critical bug that has persisted across several cycles and is preventing the "perfect closed-loop" workflow from being realized.
+
+My course of action is to implement a definitive fix for this state transition failure. This involves correcting the frontend's message handler to reliably update the UI state after a successful Git operation from the backend. I will also implement the remaining steps of the animated workflow you have meticulously detailed.
+</summary>
+
+<course_of_action>
+1.  **Documentation First (Codifying the "Perfect Loop"):**
+    *   I will update **`A69. DCE - Animated UI Workflow Guide.md`** to reflect the complete, correct sequence as detailed in your test feedback, including all steps from `Baseline` success through to creating a new cycle.
+    *   I will update **`A11. DCE - Regression Case Studies.md`** for the "Stuck `Baseline` Highlight" case. The root cause remains a failure in the frontend's message handler to correctly update the `workflowStep` state. The codified solution will now be more explicit about the required state transitions.
+
+2.  **Implement Robust State Transition and Workflow:**
+    *   **Backend (`file-operation.service.ts` & IPC):** I will add a simple, generic handler for a new `RequestShowInformationMessage` IPC channel. This allows the frontend to request a VS Code notification, which we will use to confirm that the success logic block has been executed.
+    *   **Frontend (`view.tsx`):** This is where the primary fix will be implemented.
+        *   I will add detailed logging to the `useEffect` hook that listens for the `NotifyGitOperationResult` message to confirm the listener is active and that the message is being received from the backend.
+        *   The core logic in the message handler will be corrected: `if (result.success && workflowStep === 'awaitingBaseline')`. Inside this block, I will call `setWorkflowStep('awaitingFileSelect')` to advance the animated guide.
+        *   Immediately after, I will send the new `RequestShowInformationMessage` to the backend with the success message. This serves as both user feedback and a hard confirmation that the success logic was executed.
+        *   I will implement the remaining state transitions in the main workflow `useEffect` hook to complete the loop:
+            *   From `awaitingFileSelect` -> `awaitingAccept` (when files are checked).
+            *   The `onAcceptSelected` handler will transition to `awaitingCycleContext`.
+            *   From `awaitingCycleContext` -> `awaitingCycleTitle` (when context has text).
+            *   From `awaitingCycleTitle` -> `awaitingGeneratePrompt` (when title has text).
+            *   The `handleGeneratePrompt` handler will transition to `readyForNewCycle`.
+            *   The `onNewCycle` handler will transition back to `awaitingResponsePaste_1`.
+
+</course_of_action>
+
+</previous cycle 11 summary of actions>
+</Cycle 12>
+
+
+<Cycle 11>
+i see no changes from last cycle to this one. please focus on the baseline button. we are so close, theres like just a few changes:
+
+1. after successful baseline, animate `Select All`.
+2. after at least one`Associated Files` is selected, animate `Accept Selected`.
+3. after `Cycle Title`, animate `Generate prompt.md`
+
+almost everything else is perfect. please fix this. below is the test that i just ran:
+
+<test 1>
+1. created 'TowerDefense11', opened it as the workspace.
+2. when clicking on the DCE spiral extension, it opened the pcpp, nice. i wrote 'i want to make a tower defense game.'
+3. the readme opened, looks good.
+4. i switch to and copy/paste the prompt.md into 4 aistudio conversation windows in parallel.
+5. i switch back to the pcpp and the `Resp 1` is correctly animated as the next step, good.
+6. after pasting the `Resp 4`, the `Parse All` correctly animated, good.
+7. after clicking `Parse All`, the `Sort` correctly animated, good.
+8. after clicking `Sort`, the response tab and the `Select This Response` buttons are animated, good.
+9. after clicking on the longest response and then clicking `Select This Response`, the `Baseline` button is animated, good.
+10. after clicking `Baseline`, i get the readme popup again, and its working as expected, nice.
+11. i then read the readme as a user would, and then i understand that in my state i just need to run `git init`, and so i do that. i then try to click `Baseline` again.
+12. JFC you didnt change shit!
+12.1. okay, i can see that the commit did seem to take place: `[INFO] [2:18:53 PM] [GIT_SERVICE] Sending NotifyGitOperationResult: {"success":true,"message":"Successfully created baseline commit."}`, however -still- the workflow does not progress; `Baseline` is still highlighted. 
+13. here is how the workflow is supposed to continue:
+13.1. after a current cycle baseline is created, the user is now ready to start auditioning the responses. since the user has the selected resposne focused, the next button to animate is the `Select All` button. this selects the current responses `Associated Files`.
+13.2. once one or more `Associated Files` are selected, the next step is to animate the `Accept Selected` button.
+13.3. once `Accept Selected` is clicked, our current workflow returns to expected behavior; it correctly animates the `Cycle Context` field.
+13.4. once `Cycle Context` has input, it correctly animates the Cycle Title field.
+13.5. once the `Cycle Title` field has bespoke input, our workflow needs to highlight the `Generate prompt.md` step BEFORE the `+` is highlighted. 
+13.6. once `Generate prompt.md` is clicked, then we can animate `+`.
+</test 1>
+
+<previous cycle 10 summary of actions>
+
+<summary>
+I have analyzed the detailed test feedback from Cycle 10. The core animated workflow is functioning correctly up until the "Baseline" step. Despite a successful Git commit, the UI highlight remains stuck on the `Baseline` button, failing to advance the user to the next step. This is a critical bug that has persisted across several cycles and is preventing the "perfect closed-loop" workflow from being realized.
+
+My course of action is to implement a definitive fix for this state transition failure. This involves adding more robust communication between the backend and frontend to ensure the UI state is reliably updated after a successful Git operation. I will also re-introduce the user-facing "Baseline successful" notification to improve feedback, as you requested.
+</summary>
+
+<course_of_action>
+1.  **Documentation First (Codifying the Fix):**
+    *   I will update **`A11. DCE - Regression Case Studies.md`**. The case study for "Stuck `Baseline` Highlight in Animated Workflow" will be updated to reflect that previous fixes were insufficient. The root cause is a failure in the frontend to correctly process the success message from the backend. The codified solution will now explicitly require the frontend to not only update its state but also to trigger a user-facing notification as confirmation.
+    *   I will update **`A70. DCE - Git-Integrated Testing Workflow Plan.md`** to formally require a "Baseline successful" pop-up notification as part of the workflow, restoring this helpful piece of user feedback.
+
+2.  **Implement Robust State Transition and Notification:**
+    *   **Backend (`git.service.ts`):** I will add more detailed logging to the `handleGitBaselineRequest` method to explicitly log the success/failure result object *before* it is sent to the frontend. This will give us 100% certainty that the backend is sending the correct message.
+    *   **Frontend (`view.tsx`):** This is where the primary fix will be implemented.
+        *   I will add detailed logging to the `useEffect` hook that listens for the `NotifyGitOperationResult` message to confirm the listener is active.
+        *   Inside the message handler, I will log the received message to confirm it's arriving from the backend.
+        *   The core logic will be reviewed and corrected: `if (result.success && workflowStep === 'awaitingBaseline')`. Inside this block, I will first call `setWorkflowStep('awaitingFileSelect')` to advance the animated guide.
+        *   Immediately after updating the state, I will send a new IPC message, `RequestShowInformationMessage`, to the backend with the text "Successfully created baseline commit." This re-implements the success pop-up and serves as a hard confirmation that the success logic block was executed.
+    *   **Backend (`file-operation.service.ts` & IPC):** I will add a simple, generic handler for `RequestShowInformationMessage` that calls `vscode.window.showInformationMessage`, allowing the frontend to request notifications.
+</course_of_action>
+
+
+</previous cycle 10 summary of actions>
+</Cycle 11>
+
 <Cycle 10>
 
 <test 1>
@@ -635,325 +1112,6 @@ transitioning between manual prompting method and using the dce we are creating 
 13. continue the workflow. i dont want to describe it again, i have described it enough. i want to see it. 
 </test 1>
 
-<DCE console logs (FYR)>
-[INFO] [1:39:42 PM] Congratulations, your extension "Data Curation Environment" is now active!
-[INFO] [1:39:42 PM] Services initializing...
-[INFO] [1:39:42 PM] Services initialized successfully.
-[INFO] [1:39:42 PM] Registering 5 commands.
-[INFO] [1:39:42 PM] HistoryService: getLatestCycle called.
-[INFO] [1:39:42 PM] Fresh environment detected. Returning Cycle 0.
-[INFO] [1:39:42 PM] Fresh environment, automatically opening Parallel Co-Pilot Panel.
-[INFO] [1:39:42 PM] Parallel Co-Pilot view message handler initialized.
-[INFO] [1:39:42 PM] Starry Night syntax highlighter initialized.
-[INFO] [1:39:42 PM] Context Chooser view message handler initialized.
-[INFO] [1:39:42 PM] HistoryService: getLatestCycle called.
-[INFO] [1:39:42 PM] Fresh environment detected. Returning Cycle 0.
-[INFO] [1:39:42 PM] [on-message] Received RequestInitialData. Forwarding to services.
-[INFO] [1:39:42 PM] handleWorkspaceFilesRequest started. forceRefresh=false
-[INFO] [1:39:42 PM] Building file tree from scratch.
-[INFO] [1:39:42 PM] buildTreeFromTraversal starting for root: c:\Projects\TowerDefense10
-[INFO] [1:39:42 PM] [SelectionService] No last selection found in state.
-[INFO] [1:39:42 PM] buildTreeFromTraversal finished. Root node has 0 children.
-[INFO] [1:39:42 PM] File tree built. Sending to client.
-[INFO] [1:39:42 PM] handleWorkspaceFilesRequest finished.
-[INFO] [1:39:42 PM] Persisted current selection of 0 items.
-[INFO] [1:39:43 PM] [SelectionService] No last selection found in state.
-[INFO] [1:39:44 PM] Project scope saved.
-[INFO] [1:39:44 PM] [SelectionService] No last selection found in state.
-[INFO] [1:39:44 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.vscode
-[INFO] [1:39:44 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense10/.vscode/dce_history.json
-[INFO] [1:39:44 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.vscode/dce_history.json
-[INFO] [1:39:44 PM] Persisted current selection of 1 items.
-[INFO] [1:39:45 PM] [SelectionService] Found 1 paths in persisted state. Validating...
-[INFO] [1:39:45 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.vscode
-[INFO] [1:39:45 PM] [SelectionService] Returning 1 valid paths.
-[INFO] [1:39:45 PM] Persisted current selection of 1 items.
-[INFO] [1:40:24 PM] [SelectionService] Found 1 paths in persisted state. Validating...
-[INFO] [1:40:24 PM] [SelectionService] Returning 1 valid paths.
-[INFO] [1:40:24 PM] Project scope saved.
-[INFO] [1:40:24 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.vscode/dce_history.json
-[INFO] [1:40:24 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.vscode/dce_history.json
-[INFO] [1:40:25 PM] [SelectionService] Found 1 paths in persisted state. Validating...
-[INFO] [1:40:25 PM] [SelectionService] Returning 1 valid paths.
-[INFO] [1:40:26 PM] Project scope saved.
-[INFO] [1:40:26 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.vscode/dce_history.json
-[INFO] [1:40:26 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.vscode/dce_history.json
-[INFO] [1:40:27 PM] Generating Cycle 0 prompt.md file...
-[INFO] [1:40:27 PM] Project scope saved.
-[INFO] [1:40:27 PM] Created src/Artifacts/README.md for the new project.
-[INFO] [1:40:27 PM] Successfully generated Cycle 0 prompt.md file.
-[INFO] [1:40:27 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.vscode/dce_history.json
-[INFO] [1:40:28 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.vscode/dce_history.json
-[INFO] [1:40:28 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense10/prompt.md
-[INFO] [1:40:28 PM] [SelectionService] Found 1 paths in persisted state. Validating...
-[INFO] [1:40:28 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.vscode/dce_history.json
-[INFO] [1:40:28 PM] [SelectionService] Returning 1 valid paths.
-[INFO] [1:40:28 PM] Persisted current selection of 2 items.
-[INFO] [1:40:28 PM] [SelectionService] Found 2 paths in persisted state. Validating...
-[INFO] [1:40:28 PM] [SelectionService] Returning 2 valid paths.
-[INFO] [1:40:28 PM] Persisted current selection of 4 items.
-[WARN] [1:40:28 PM] [WebView] [TreeView] Could not find ref for active file: c:/Projects/TowerDefense10/prompt.md
-[INFO] [1:40:28 PM] HistoryService: saving data for cycle 1.
-[INFO] [1:40:28 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.vscode/dce_history.json
-[INFO] [1:40:28 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.vscode/dce_history.json
-[WARN] [1:40:28 PM] [WebView] [TreeView] Could not find ref for active file: c:/Projects/TowerDefense10/src/Artifacts/README.md
-[INFO] [1:40:28 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[INFO] [1:40:28 PM] handleWorkspaceFilesRequest started. forceRefresh=true
-[INFO] [1:40:28 PM] Building file tree from scratch.
-[INFO] [1:40:28 PM] buildTreeFromTraversal starting for root: c:\Projects\TowerDefense10
-[INFO] [1:40:28 PM] [SelectionService] Found 4 paths in persisted state. Validating...
-[INFO] [1:40:28 PM] [SelectionService] Returning 4 valid paths.
-[INFO] [1:40:28 PM] Persisted current selection of 4 items.
-[INFO] [1:40:28 PM] buildTreeFromTraversal finished. Root node has 2 children.
-[INFO] [1:40:28 PM] File tree built. Sending to client.
-[INFO] [1:40:28 PM] handleWorkspaceFilesRequest finished.
-[INFO] [1:41:49 PM] HistoryService: getLatestCycle called.
-[INFO] [1:41:49 PM] Latest cycle found: 1
-[INFO] [1:41:49 PM] [CONTEXT-HIGHLIGHT] Received request for context ID: cycle-context-1
-[INFO] [1:41:49 PM] [CONTEXT-HIGHLIGHT] Received request for context ID: ephemeral-context-1
-[INFO] [1:41:50 PM] [SelectionService] Found 4 paths in persisted state. Validating...
-[INFO] [1:41:50 PM] [SelectionService] Returning 4 valid paths.
-[INFO] [1:41:50 PM] HistoryService: saving data for cycle 1.
-[INFO] [1:41:50 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.vscode/dce_history.json
-[INFO] [1:41:50 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.vscode/dce_history.json
-[INFO] [1:41:52 PM] [SelectionService] Found 4 paths in persisted state. Validating...
-[INFO] [1:41:52 PM] [SelectionService] Returning 4 valid paths.
-[INFO] [1:41:52 PM] HistoryService: saving data for cycle 1.
-[INFO] [1:41:52 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.vscode/dce_history.json
-[INFO] [1:41:52 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.vscode/dce_history.json
-[INFO] [1:41:58 PM] [SelectionService] Found 4 paths in persisted state. Validating...
-[INFO] [1:41:58 PM] [SelectionService] Returning 4 valid paths.
-[INFO] [1:41:58 PM] HistoryService: saving data for cycle 1.
-[INFO] [1:41:58 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.vscode/dce_history.json
-[INFO] [1:41:58 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.vscode/dce_history.json
-[INFO] [1:42:03 PM] [SelectionService] Found 4 paths in persisted state. Validating...
-[INFO] [1:42:03 PM] [SelectionService] Returning 4 valid paths.
-[INFO] [1:42:04 PM] HistoryService: saving data for cycle 1.
-[INFO] [1:42:04 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.vscode/dce_history.json
-[INFO] [1:42:04 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.vscode/dce_history.json
-[INFO] [1:42:09 PM] [SelectionService] Found 4 paths in persisted state. Validating...
-[INFO] [1:42:09 PM] [SelectionService] Returning 4 valid paths.
-[INFO] [1:42:09 PM] HistoryService: saving data for cycle 1.
-[INFO] [1:42:09 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.vscode/dce_history.json
-[INFO] [1:42:09 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.vscode/dce_history.json
-[INFO] [1:42:18 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A0: Tower[...]
-[INFO] [1:42:18 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A1: Tower[...]
-[INFO] [1:42:18 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A3: Tower[...]
-[INFO] [1:42:18 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A7: Tower[...]
-[INFO] [1:42:18 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A14: Towe[...]
-[INFO] [1:42:18 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A0: Tower[...]
-[INFO] [1:42:18 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A1: Tower[...]
-[INFO] [1:42:18 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A3: Tower[...]
-[INFO] [1:42:18 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A7: Tower[...]
-[INFO] [1:42:18 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A14: Towe[...]
-[INFO] [1:42:18 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A0: Tower[...]
-[INFO] [1:42:18 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A1: Tower[...]
-[INFO] [1:42:18 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A3: Tower[...]
-[INFO] [1:42:18 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A7: Tower[...]
-[INFO] [1:42:18 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A14: Towe[...]
-[INFO] [1:42:18 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A0: Tower[...]
-[INFO] [1:42:18 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A1: Tower[...]
-[INFO] [1:42:18 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A3: Tower[...]
-[INFO] [1:42:18 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A7: Tower[...]
-[INFO] [1:42:18 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A11: Towe[...]
-[INFO] [1:42:18 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A14: Towe[...]
-[INFO] [1:42:18 PM] [File Existence] Received request to check paths: ["src/Artifacts/TowerDefenseSaga-A0-Master-Artifact-List.md","src/Artifacts/TowerDefenseSaga-A1-Project-Vision-and-Goals.md","src/Artifacts/TowerDefenseSaga-A3-Technical-Scaffolding-Plan.md","src/Artifacts/TowerDefenseSaga-A7-Dev-and-Testing-Guide.md","src/Artifacts/TowerDefenseSaga-A14-GitHub-Repository-Setup-Guide.md","src/Artifacts/TowerDefense-A0-Master-Artifact-List.md","src/Artifacts/TowerDefense-A1-Project-Vision-and-Goals.md","src/Artifacts/TowerDefense-A3-Technical-Scaffolding-Plan.md","src/Artifacts/TowerDefense-A7-Dev-and-Testing-Guide.md","src/Artifacts/TowerDefense-A14-GitHub-Repository-Setup-Guide.md","src/Artifacts/TowerDefenseQuest-A0-Master-Artifact-List.md","src/Artifacts/TowerDefenseQuest-A1-Project-Vision-and-Goals.md","src/Artifacts/TowerDefenseQuest-A3-Technical-Scaffolding-Plan.md","src/Artifacts/TowerDefenseQuest-A7-Dev-and-Testing-Guide.md","src/Artifacts/TowerDefenseQuest-A11-Implementation-Roadmap.md","src/Artifacts/A14. TowerDefenseQuest - GitHub Repository Setup Guide.md"]
-[INFO] [1:42:18 PM] [File Existence] Received request to check paths: ["src/Artifacts/TowerDefenseSaga-A0-Master-Artifact-List.md","src/Artifacts/TowerDefenseSaga-A1-Project-Vision-and-Goals.md","src/Artifacts/TowerDefenseSaga-A3-Technical-Scaffolding-Plan.md","src/Artifacts/TowerDefenseSaga-A7-Dev-and-Testing-Guide.md","src/Artifacts/TowerDefenseSaga-A14-GitHub-Repository-Setup-Guide.md","src/Artifacts/TowerDefense-A0-Master-Artifact-List.md","src/Artifacts/TowerDefense-A1-Project-Vision-and-Goals.md","src/Artifacts/TowerDefense-A3-Technical-Scaffolding-Plan.md","src/Artifacts/TowerDefense-A7-Dev-and-Testing-Guide.md","src/Artifacts/TowerDefense-A14-GitHub-Repository-Setup-Guide.md","src/Artifacts/TowerDefenseQuest-A0-Master-Artifact-List.md","src/Artifacts/TowerDefenseQuest-A1-Project-Vision-and-Goals.md","src/Artifacts/TowerDefenseQuest-A3-Technical-Scaffolding-Plan.md","src/Artifacts/TowerDefenseQuest-A7-Dev-and-Testing-Guide.md","src/Artifacts/TowerDefenseQuest-A11-Implementation-Roadmap.md","src/Artifacts/A14. TowerDefenseQuest - GitHub Repository Setup Guide.md"]
-[INFO] [1:42:19 PM] [SelectionService] Found 4 paths in persisted state. Validating...
-[INFO] [1:42:19 PM] [SelectionService] Returning 4 valid paths.
-[INFO] [1:42:19 PM] HistoryService: saving data for cycle 1.
-[INFO] [1:42:19 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.vscode/dce_history.json
-[INFO] [1:42:19 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.vscode/dce_history.json
-[INFO] [1:42:33 PM] [SelectionService] Found 4 paths in persisted state. Validating...
-[INFO] [1:42:33 PM] [SelectionService] Returning 4 valid paths.
-[INFO] [1:42:34 PM] HistoryService: saving data for cycle 1.
-[INFO] [1:42:34 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.vscode/dce_history.json
-[INFO] [1:42:34 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.vscode/dce_history.json
-[INFO] [1:42:40 PM] Executing Git Status check.
-[ERROR] [1:42:40 PM] Git command error: Command failed: git status --porcelain
-fatal: not a git repository (or any of the parent directories): .git
-
-[INFO] [1:42:41 PM] [SelectionService] Found 4 paths in persisted state. Validating...
-[INFO] [1:42:41 PM] [SelectionService] Returning 4 valid paths.
-[INFO] [1:42:41 PM] HistoryService: saving data for cycle 1.
-[INFO] [1:42:41 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.vscode/dce_history.json
-[INFO] [1:42:41 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.vscode/dce_history.json
-[INFO] [1:42:43 PM] Executing Git Baseline with message: "DCE Baseline: Cycle 1 - New Cycle"
-[ERROR] [1:42:43 PM] Git command error: Command failed: git status --porcelain
-fatal: not a git repository (or any of the parent directories): .git
-
-[INFO] [1:42:53 PM] [SelectionService] Found 4 paths in persisted state. Validating...
-[INFO] [1:42:53 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.git
-[INFO] [1:42:53 PM] [SelectionService] Returning 4 valid paths.
-[INFO] [1:42:53 PM] Persisted current selection of 5 items.
-[INFO] [1:42:53 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense10/.git/HEAD
-[INFO] [1:42:53 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.git/HEAD
-[INFO] [1:42:53 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense10/.git/config
-[INFO] [1:42:53 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.git/config
-[INFO] [1:42:53 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense10/.git/description
-[INFO] [1:42:53 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.git/description
-[INFO] [1:42:53 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense10/.git/hooks
-[INFO] [1:42:53 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.git/hooks
-[INFO] [1:42:53 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense10/.git/hooks/applypatch-msg.sample
-[INFO] [1:42:53 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.git/hooks/applypatch-msg.sample
-[INFO] [1:42:53 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense10/.git/hooks/commit-msg.sample
-[INFO] [1:42:53 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.git/hooks/commit-msg.sample
-[INFO] [1:42:53 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense10/.git/hooks/fsmonitor-watchman.sample
-[INFO] [1:42:53 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.git/hooks/fsmonitor-watchman.sample
-[INFO] [1:42:53 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense10/.git/hooks/post-update.sample
-[INFO] [1:42:53 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.git/hooks/post-update.sample
-[INFO] [1:42:53 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense10/.git/hooks/pre-applypatch.sample
-[INFO] [1:42:53 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.git/hooks/pre-applypatch.sample
-[INFO] [1:42:53 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense10/.git/hooks/pre-commit.sample
-[INFO] [1:42:53 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.git/hooks/pre-commit.sample
-[INFO] [1:42:53 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense10/.git/hooks/pre-merge-commit.sample
-[INFO] [1:42:53 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.git/hooks/pre-merge-commit.sample
-[INFO] [1:42:53 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense10/.git/hooks/pre-push.sample
-[INFO] [1:42:53 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.git/hooks/pre-push.sample
-[INFO] [1:42:53 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense10/.git/hooks/pre-rebase.sample
-[INFO] [1:42:53 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.git/hooks/pre-rebase.sample
-[INFO] [1:42:53 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense10/.git/hooks/pre-receive.sample
-[INFO] [1:42:53 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.git/hooks/pre-receive.sample
-[INFO] [1:42:53 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense10/.git/hooks/prepare-commit-msg.sample
-[INFO] [1:42:53 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.git/hooks/prepare-commit-msg.sample
-[INFO] [1:42:53 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense10/.git/hooks/push-to-checkout.sample
-[INFO] [1:42:53 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.git/hooks/push-to-checkout.sample
-[INFO] [1:42:53 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense10/.git/hooks/sendemail-validate.sample
-[INFO] [1:42:53 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.git/hooks/sendemail-validate.sample
-[INFO] [1:42:53 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense10/.git/hooks/update.sample
-[INFO] [1:42:53 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.git/hooks/update.sample
-[INFO] [1:42:53 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense10/.git/info
-[INFO] [1:42:53 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.git/info
-[INFO] [1:42:53 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense10/.git/info/exclude
-[INFO] [1:42:53 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.git/info/exclude
-[INFO] [1:42:53 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense10/.git/refs
-[INFO] [1:42:53 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.git/refs
-[INFO] [1:42:53 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense10/.git/refs/heads
-[INFO] [1:42:53 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.git/refs/heads
-[INFO] [1:42:53 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense10/.git/refs/tags
-[INFO] [1:42:53 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.git/refs/tags
-[INFO] [1:42:55 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[INFO] [1:42:55 PM] handleWorkspaceFilesRequest started. forceRefresh=true
-[INFO] [1:42:55 PM] Building file tree from scratch.
-[INFO] [1:42:55 PM] buildTreeFromTraversal starting for root: c:\Projects\TowerDefense10
-[INFO] [1:42:55 PM] [SelectionService] Found 5 paths in persisted state. Validating...
-[INFO] [1:42:55 PM] [SelectionService] Returning 5 valid paths.
-[INFO] [1:42:55 PM] Persisted current selection of 5 items.
-[INFO] [1:42:55 PM] buildTreeFromTraversal finished. Root node has 2 children.
-[INFO] [1:42:55 PM] File tree built. Sending to client.
-[INFO] [1:42:55 PM] handleWorkspaceFilesRequest finished.
-[INFO] [1:43:46 PM] HistoryService: getLatestCycle called.
-[INFO] [1:43:46 PM] Latest cycle found: 1
-[INFO] [1:43:46 PM] [CONTEXT-HIGHLIGHT] Received request for context ID: cycle-context-1
-[INFO] [1:43:46 PM] [CONTEXT-HIGHLIGHT] Received request for context ID: ephemeral-context-1
-[INFO] [1:43:46 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A0: Tower[...]
-[INFO] [1:43:46 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A1: Tower[...]
-[INFO] [1:43:46 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A3: Tower[...]
-[INFO] [1:43:46 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A7: Tower[...]
-[INFO] [1:43:46 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A14: Towe[...]
-[INFO] [1:43:46 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A0: Tower[...]
-[INFO] [1:43:46 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A1: Tower[...]
-[INFO] [1:43:46 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A3: Tower[...]
-[INFO] [1:43:46 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A7: Tower[...]
-[INFO] [1:43:46 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A14: Towe[...]
-[INFO] [1:43:46 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A0: Tower[...]
-[INFO] [1:43:46 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A1: Tower[...]
-[INFO] [1:43:46 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A3: Tower[...]
-[INFO] [1:43:46 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A7: Tower[...]
-[INFO] [1:43:46 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A14: Towe[...]
-[INFO] [1:43:46 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A0: Tower[...]
-[INFO] [1:43:46 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A1: Tower[...]
-[INFO] [1:43:46 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A3: Tower[...]
-[INFO] [1:43:46 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A7: Tower[...]
-[INFO] [1:43:46 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A11: Towe[...]
-[INFO] [1:43:46 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A14: Towe[...]
-[INFO] [1:43:46 PM] [File Existence] Received request to check paths: ["src/Artifacts/TowerDefenseSaga-A0-Master-Artifact-List.md","src/Artifacts/TowerDefenseSaga-A1-Project-Vision-and-Goals.md","src/Artifacts/TowerDefenseSaga-A3-Technical-Scaffolding-Plan.md","src/Artifacts/TowerDefenseSaga-A7-Dev-and-Testing-Guide.md","src/Artifacts/TowerDefenseSaga-A14-GitHub-Repository-Setup-Guide.md","src/Artifacts/TowerDefense-A0-Master-Artifact-List.md","src/Artifacts/TowerDefense-A1-Project-Vision-and-Goals.md","src/Artifacts/TowerDefense-A3-Technical-Scaffolding-Plan.md","src/Artifacts/TowerDefense-A7-Dev-and-Testing-Guide.md","src/Artifacts/TowerDefense-A14-GitHub-Repository-Setup-Guide.md","src/Artifacts/TowerDefenseQuest-A0-Master-Artifact-List.md","src/Artifacts/TowerDefenseQuest-A1-Project-Vision-and-Goals.md","src/Artifacts/TowerDefenseQuest-A3-Technical-Scaffolding-Plan.md","src/Artifacts/TowerDefenseQuest-A7-Dev-and-Testing-Guide.md","src/Artifacts/TowerDefenseQuest-A11-Implementation-Roadmap.md","src/Artifacts/A14. TowerDefenseQuest - GitHub Repository Setup Guide.md"]
-[INFO] [1:43:46 PM] [File Existence] Received request to check paths: ["src/Artifacts/TowerDefenseSaga-A0-Master-Artifact-List.md","src/Artifacts/TowerDefenseSaga-A1-Project-Vision-and-Goals.md","src/Artifacts/TowerDefenseSaga-A3-Technical-Scaffolding-Plan.md","src/Artifacts/TowerDefenseSaga-A7-Dev-and-Testing-Guide.md","src/Artifacts/TowerDefenseSaga-A14-GitHub-Repository-Setup-Guide.md","src/Artifacts/TowerDefense-A0-Master-Artifact-List.md","src/Artifacts/TowerDefense-A1-Project-Vision-and-Goals.md","src/Artifacts/TowerDefense-A3-Technical-Scaffolding-Plan.md","src/Artifacts/TowerDefense-A7-Dev-and-Testing-Guide.md","src/Artifacts/TowerDefense-A14-GitHub-Repository-Setup-Guide.md","src/Artifacts/TowerDefenseQuest-A0-Master-Artifact-List.md","src/Artifacts/TowerDefenseQuest-A1-Project-Vision-and-Goals.md","src/Artifacts/TowerDefenseQuest-A3-Technical-Scaffolding-Plan.md","src/Artifacts/TowerDefenseQuest-A7-Dev-and-Testing-Guide.md","src/Artifacts/TowerDefenseQuest-A11-Implementation-Roadmap.md","src/Artifacts/A14. TowerDefenseQuest - GitHub Repository Setup Guide.md"]
-[INFO] [1:43:46 PM] Executing Git Status check.
-[INFO] [1:43:47 PM] [SelectionService] Found 5 paths in persisted state. Validating...
-[INFO] [1:43:47 PM] [SelectionService] Returning 5 valid paths.
-[INFO] [1:43:48 PM] HistoryService: saving data for cycle 1.
-[INFO] [1:43:48 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.vscode/dce_history.json
-[INFO] [1:43:48 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.vscode/dce_history.json
-[INFO] [1:43:56 PM] Executing Git Baseline with message: "DCE Baseline: Cycle 1 - New Cycle"
-[WARN] [1:43:56 PM] Git command stderr: warning: in the working copy of '.vscode/dce_history.json', LF will be replaced by CRLF the next time Git touches it
-warning: in the working copy of 'prompt.md', LF will be replaced by CRLF the next time Git touches it
-warning: in the working copy of 'src/Artifacts/README.md', LF will be replaced by CRLF the next time Git touches it
-
-[INFO] [1:43:56 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense10/.git/index.lock
-[INFO] [1:43:56 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.git/index.lock
-[INFO] [1:43:56 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense10/.git/COMMIT_EDITMSG
-[INFO] [1:43:56 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.git/COMMIT_EDITMSG
-[INFO] [1:43:56 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense10/.git/index
-[INFO] [1:43:56 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.git/index
-[INFO] [1:43:56 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense10/.git/logs
-[INFO] [1:43:56 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.git/logs
-[INFO] [1:43:56 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense10/.git/logs/HEAD
-[INFO] [1:43:56 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.git/logs/HEAD
-[INFO] [1:43:56 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense10/.git/logs/refs
-[INFO] [1:43:56 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.git/logs/refs
-[INFO] [1:43:56 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense10/.git/logs/refs/heads
-[INFO] [1:43:56 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.git/logs/refs/heads
-[INFO] [1:43:56 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense10/.git/logs/refs/heads/master
-[INFO] [1:43:56 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.git/logs/refs/heads/master
-[INFO] [1:43:56 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense10/.git/refs/heads/master
-[INFO] [1:43:56 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.git/refs/heads/master
-[INFO] [1:43:56 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense10/.git/index.lock
-[INFO] [1:47:03 PM] --- GENERATING STATE LOG ---
-[INFO] [1:47:03 PM] 
-========================= CYCLE STATE DUMP =========================
-{
-  "FRONTEND_STATE": {
-    "currentCycle": 1,
-    "maxCycle": 1,
-    "isNewCycleButtonDisabled": true,
-    "conditions": {
-      "hasTitle": false,
-      "hasContext": false,
-      "hasSelectedResponse": true
-    }
-  },
-  "BACKEND_HISTORY_FILE": {
-    "version": 1,
-    "cycles": [
-      {
-        "cycleId": 1,
-        "timestamp": "2025-09-01T18:46:59.509Z",
-        "title": "New Cycle",
-        "cycleContext": "",
-        "ephemeralContext": "",
-        "responses": {
-          "1": {
-            "content": "asdf"
-          },
-          "2": {
-            "content": "asdf"
-          },
-          "3": {
-            "content": "asdf"
-          },
-          "4": {
-            "content": "asdf"
-          }
-        },
-        "isParsedMode": true,
-        "leftPaneWidth": 33,
-        "selectedResponseId": "4",
-        "selectedFilesForReplacement": [],
-        "tabCount": 4,
-        "isSortedByTokens": true,
-        "pathOverrides": {},
-        "cycleContextHeight": 100,
-        "ephemeralContextHeight": 100
-      }
-    ],
-    "projectScope": "i want to create a tower defense game."
-  }
-}
-======================================================================
-
-
-</DCE console logs (FYR)>
 <previous cycle 9 summary of actions>
 <summary>
 I have analyzed the detailed test feedback from Cycle 9. The core issues are a critical regression in handling new projects that are not Git repositories and a persistent bug where the animated workflow gets stuck after the "Baseline" step. Additionally, you've suggested an excellent improvement to the onboarding flow by automatically opening the Parallel Co-Pilot Panel (PCPP).
@@ -2393,25 +2551,27 @@ asdf
 
 <M7. Flattened Repo>
 
+
+
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-01T18:49:39.206Z
+  Date Generated: 2025-09-01T20:14:26.515Z
   ---
   Total Files: 168
-  Approx. Tokens: 447419
+  Approx. Tokens: 447999
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (239424 tokens)
-2. src\Artifacts\A11. DCE - Regression Case Studies.md (9909 tokens)
+2. src\Artifacts\A11. DCE - Regression Case Studies.md (10001 tokens)
 3. src\Artifacts\A0. DCE Master Artifact List.md (7189 tokens)
-4. src\client\views\parallel-copilot.view\view.tsx (6938 tokens)
+4. src\client\views\parallel-copilot.view\view.tsx (7152 tokens)
 5. src\client\views\parallel-copilot.view\view.scss (5158 tokens)
 6. src\backend\services\prompt.service.ts (4908 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4429 tokens)
-8. src\client\views\context-chooser.view\view.tsx (4079 tokens)
-9. src\backend\services\file-operation.service.ts (4021 tokens)
+8. src\backend\services\file-operation.service.ts (4091 tokens)
+9. src\client\views\context-chooser.view\view.tsx (4079 tokens)
 10. src\client\views\context-chooser.view\view.scss (3708 tokens)
 
 <!-- Full File List -->
@@ -2425,7 +2585,7 @@ asdf
 8. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
 9. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
 10. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
-11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 349 - Chars: 39634 - Tokens: 9909
+11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 349 - Chars: 40001 - Tokens: 10001
 12. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5710 - Tokens: 1428
 13. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
 14. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
@@ -2487,8 +2647,8 @@ asdf
 70. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1806 - Tokens: 452
 71. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 47 - Chars: 3537 - Tokens: 885
 72. src\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3311 - Tokens: 828
-73. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 3801 - Tokens: 951
-74. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 57 - Chars: 5810 - Tokens: 1453
+73. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 3762 - Tokens: 941
+74. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 58 - Chars: 6179 - Tokens: 1545
 75. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
 76. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 43 - Chars: 2874 - Tokens: 719
 77. src\Artifacts\A73. DCE - GitService Plan.md - Lines: 44 - Chars: 2548 - Tokens: 637
@@ -2518,10 +2678,10 @@ asdf
 101. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
 102. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
 103. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
-104. src\backend\services\file-operation.service.ts - Lines: 338 - Chars: 16082 - Tokens: 4021
+104. src\backend\services\file-operation.service.ts - Lines: 344 - Chars: 16362 - Tokens: 4091
 105. src\backend\services\file-tree.service.ts - Lines: 276 - Chars: 14221 - Tokens: 3556
 106. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12820 - Tokens: 3205
-107. src\backend\services\git.service.ts - Lines: 101 - Chars: 4904 - Tokens: 1226
+107. src\backend\services\git.service.ts - Lines: 102 - Chars: 5010 - Tokens: 1253
 108. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4232 - Tokens: 1058
 109. src\backend\services\history.service.ts - Lines: 270 - Chars: 11310 - Tokens: 2828
 110. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
@@ -2552,17 +2712,17 @@ asdf
 135. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 84 - Chars: 3486 - Tokens: 872
 136. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
 137. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-138. src\client\views\parallel-copilot.view\on-message.ts - Lines: 105 - Chars: 4825 - Tokens: 1207
+138. src\client\views\parallel-copilot.view\on-message.ts - Lines: 109 - Chars: 5021 - Tokens: 1256
 139. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 92 - Chars: 4340 - Tokens: 1085
 140. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 28 - Chars: 1213 - Tokens: 304
 141. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 28 - Chars: 1283 - Tokens: 321
 142. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 28 - Chars: 1184 - Tokens: 296
 143. src\client\views\parallel-copilot.view\view.scss - Lines: 903 - Chars: 20629 - Tokens: 5158
 144. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-145. src\client\views\parallel-copilot.view\view.tsx - Lines: 159 - Chars: 27751 - Tokens: 6938
+145. src\client\views\parallel-copilot.view\view.tsx - Lines: 183 - Chars: 28606 - Tokens: 7152
 146. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
-147. src\common\ipc\channels.enum.ts - Lines: 88 - Chars: 4666 - Tokens: 1167
-148. src\common\ipc\channels.type.ts - Lines: 88 - Chars: 6637 - Tokens: 1660
+147. src\common\ipc\channels.enum.ts - Lines: 89 - Chars: 4750 - Tokens: 1188
+148. src\common\ipc\channels.type.ts - Lines: 89 - Chars: 6738 - Tokens: 1685
 149. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 150. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 151. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
@@ -3534,7 +3694,7 @@ To enhance the data curation process, it is critical for the user to have immedi
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C184 (Add Git Init Popup Regression)
+# Updated on: C186 (Update Stuck Baseline RCA again)
 
 - **Key/Value for A0:**
 - **Description:** Documents recurring bugs, their root causes, and codified solutions to prevent future regressions during development.
@@ -3545,6 +3705,19 @@ To enhance the data curation process, it is critical for the user to have immedi
 This document serves as a living record of persistent or complex bugs that have recurred across multiple development cycles. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 021: Stuck `Baseline` Highlight in Animated Workflow
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/backend/services/git.service.ts`
+-   **Cycles Observed:** C8, C9, C10, C11, C12
+-   **Symptom:** In the animated workflow, after the user selects a response, the `Baseline (Commit)` button is correctly highlighted. After the user clicks it and the baseline is successfully created (confirmed via logs and Git status), the highlight remains on the `Baseline` button and does not advance to the next step (`Select All`).
+-   **Root Cause Analysis (RCA):** The frontend UI, which manages the `workflowStep` state, had no reliable way of knowing when the backend Git operation was successfully completed. After an IPC message (`NotifyGitOperationResult`) was implemented, the frontend handler was still failing. The most likely cause is a **stale closure**. The `useEffect` hook that registers the message listener captures the `workflowStep` state at the time it's created. When the message arrives later, the handler's logic checks against this old, stale state (`'awaitingResponseSelect'`), not the current state (`'awaitingBaseline'`), causing the condition to fail and the state transition to be missed.
+-   **Codified Solution & Best Practice:**
+    1.  **Backend (`git.service.ts`):** The `handleGitBaselineRequest` method must send a specific IPC message (`NotifyGitOperationResult`) back to the PCPP frontend upon completion with a `{ success, message }` payload.
+    2.  **Frontend (`view.tsx`):** The message listener for `NotifyGitOperationResult` must be made resilient to stale closures. The state update logic should use the **functional update form** of the state setter (e.g., `setWorkflowStep(prevStep => { ... })`). This guarantees the logic inside the setter is executed with the most recent state, allowing the condition `if (prevStep === 'awaitingBaseline')` to pass correctly and reliably transition the workflow to the next step (`'awaitingFileSelect'`).
+    3.  **Workflow Progression:** The rest of the workflow steps (`Select All` -> `Accept Selected` -> `Generate prompt.md` -> `+`) must be driven by subsequent user actions or state changes, each correctly transitioning the `workflowStep` state as defined in `A69`.
 
 ---
 
@@ -3559,19 +3732,6 @@ This document serves as a living record of persistent or complex bugs that have 
     2.  If the error contains `fatal: not a git repository`, the service will directly call `vscode.window.showErrorMessage`.
     3.  This message will be user-friendly ("This is not a Git repository...") and will include an action button ("Open README Guide") that programmatically opens the relevant documentation to guide the user.
     4.  For all other success or failure cases, the service can continue to use the `NotifyGitOperationResult` IPC channel to communicate with the frontend's state machine.
-
----
-
-### Case Study 021: Stuck `Baseline` Highlight in Animated Workflow
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/backend/services/git.service.ts`
--   **Cycles Observed:** C8, C9
--   **Symptom:** In the animated workflow, after the user selects a response, the `Baseline (Commit)` button is correctly highlighted. After the user clicks it and the baseline is successfully created, the highlight remains on the `Baseline` button and does not advance to the next step in the workflow (e.g., "Select All" in the Associated Files list).
--   **Root Cause Analysis (RCA):** The frontend UI, which manages the `workflowStep` state, had no way of knowing when the backend Git operation was successfully completed. The `git.service.ts` method was a "fire-and-forget" operation from the frontend's perspective. It showed a `vscode.window.showInformationMessage` (a UI side-effect from the backend), but it did not send a structured success/failure message back to the webview client. The frontend's state machine was therefore never triggered to advance to the next step.
--   **Codified Solution & Best Practice:** Backend services that perform actions triggered by the UI should provide a clear, awaitable response back to the client.
-    1.  **Backend (`git.service.ts`):** The `handleGitBaselineRequest` method must be refactored to return a result object (e.g., `{ success: boolean, message: string }`) instead of directly showing UI notifications.
-    2.  **IPC (`on-message.ts`):** A dedicated IPC channel (e.g., `NotifyGitOperationResult`) must be used for the backend message handler to send this result back to the frontend client.
-    3.  **Frontend (`view.tsx`):** The frontend must have a message listener for `NotifyGitOperationResult`. When it receives a success message, it can then reliably update its `workflowStep` state to advance the UI to the next step in the sequence.
 
 ---
 
@@ -3664,7 +3824,7 @@ This document serves as a living record of persistent or complex bugs that have 
 -   **Artifacts Affected:** `file-operation.service.ts`, `parallel-copilot.view/on-message.ts`, `parallel-copilot.view/view.tsx`
 -   **Cycles Observed:** 135
 -   **Symptom:** In the Parallel Co-Pilot Panel, the "Associated Files" list shows a file that doesn't exist with a red `✗`. The user accepts this file into the workspace. The file is correctly created on the disk, but the UI in the PCPP does not update, and the icon remains a red `✗`.
--   **Root Cause Analysis (RCA):** The `fileExistenceMap` state, which controls the `✓`/`✗` icons, is only populated when the panel is parsed. The file write operation happens on the backend, and there was no mechanism to inform the PCPP frontend that the state of the file system (which it was displaying) had changed as a result of its own action. The file watcher correctly triggers a refresh for the *Context Chooser* view, but this does not affect the state of the separate *Parallel Co-Pilot* view.
+-   **Root Cause Analysis (RCA):** The `fileExistenceMap` state, which controls the `✓`/`✗` icons, is only populated when the panel is parsed. The file write operation happens on the backend, and there was no mechanism to inform the PCPP frontend that the state of the file system (which it was displaying) had changed as a result of its own action. The file watcher correctly triggers a refresh for the *Context Chooser* view, but this does not affect the state of the separate *Parallel Co-pilot* view.
 -   **Codified Solution & Best Practice:**
     1.  **Implement a Targeted Notification:** A new IPC channel, `ServerToClientChannel.FilesWritten`, was created.
     2.  **Backend Acknowledgment:** After the `file-operation.service` successfully writes files, it returns the list of affected paths to the `on-message.ts` handler.
@@ -3792,7 +3952,7 @@ This document serves as a living record of persistent or complex bugs that have 
         *   Remove the high-level ancestor path (e.g., `src`) from the selection set.
         *   Get a list of **all descendant files** of that ancestor.
         *   Add all of these descendant files to the selection set, **except for the specific file that was the target of the uncheck action**.
-    3.  This correctly translates the selection from a single high-level path (`src`) into many individual low-level file paths, minus the one the user explicitly removed, preserving their intent perfectly.
+    3.  This correctly translates the selection from a single high-level path (`src`) into many individual file paths, minus the one the user explicitly removed, preserving their intent perfectly.
 
 ---
 
@@ -7411,7 +7571,7 @@ The "Cycle Context" and "Ephemeral Context" text areas in the Parallel Co-Pilot 
 # Artifact A69: DCE - Animated UI Workflow Guide
 # Date Created: C169
 # Author: AI Model & Curator
-# Updated on: C184 (Add auto-open PCPP step)
+# Updated on: C186 (Finalize workflow sequence)
 
 ## 1. Overview & Goal
 
@@ -7459,7 +7619,7 @@ The highlighting will follow this specific sequence of user actions:
     *   **Highlight:** The **`Baseline (Commit)`** button pulses.
     *   **State-Aware Skip:** This step is skipped if the backend reports that the Git working tree is already clean.
 
-10. **Select Files for Acceptance:** User clicks `Baseline (Commit)` or the baseline step is skipped.
+10. **Select Files for Acceptance:** A successful baseline is created.
     *   **Highlight:** The "Associated Files" list panel and the **`Select All`** button within it pulse.
 
 11. **Accept Changes:** User checks one or more files in the "Associated Files" list.
@@ -7471,7 +7631,7 @@ The highlighting will follow this specific sequence of user actions:
 13. **Write Title:** User types into the "Cycle Context" `textarea`.
     *   **Highlight:** The **"Cycle Title"** input field pulses.
 
-14. **Generate Next Prompt:** User types into the "Cycle Title" input field.
+14. **Generate Next Prompt:** User types a bespoke "Cycle Title".
     *   **Highlight:** The **`Generate prompt.md`** button pulses.
 
 15. **Create New Cycle:** User clicks `Generate prompt.md`.
@@ -7482,22 +7642,23 @@ The highlighting will follow this specific sequence of user actions:
 # Artifact A70: DCE - Git-Integrated Testing Workflow Plan
 # Date Created: C169
 # Author: AI Model & Curator
-# Updated on: C184 (Add requirement for Git Init error popup)
+# Updated on: C186 (Update post-baseline workflow step)
 
 ## 1. Overview & Goal
 
 A core part of the DCE workflow involves accepting an AI-generated response and testing it in the live workspace. If the response introduces bugs, the user must manually revert the changes. The goal of this feature is to automate this "test and revert" loop by deeply integrating with Git. This will provide a one-click method to create a baseline commit before testing and a one-click method to restore that baseline if the test fails.
 
-**Status (C184):** In Progress.
+**Status (C186):** In Progress.
 
 ## 2. User Stories
 
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
-| P2-GIT-01 | **Create Baseline** | As a developer, after accepting an AI response but before testing it, I want to click a "Baseline (Commit)" button to create a Git commit, so I have a safe restore point. | - A "Baseline (Commit)" button is available in the response acceptance header. <br> - Clicking it executes `git add .` and `git commit -m "DCE Baseline: Cycle [currentCycle] - [cycleTitle]"`. <br> - A success notification is shown. |
+| P2-GIT-01 | **Create Baseline** | As a developer, after accepting an AI response but before testing it, I want to click a "Baseline (Commit)" button to create a Git commit, so I have a safe restore point. | - A "Baseline (Commit)" button is available in the response acceptance header. <br> - Clicking it executes `git add .` and `git commit -m "DCE Baseline: Cycle [currentCycle] - [cycleTitle]"`. <br> - A "Successfully created baseline commit" notification is shown. |
 | P2-GIT-02 | **Restore Baseline** | As a developer, after testing an AI response and finding issues, I want to click a "Restore Baseline" button to discard all changes, so I can quickly test a different response. | - A "Restore Baseline" button is available. <br> - Clicking it executes `git restore .`. <br> - The restore operation must **exclude** DCE-specific state files (e.g., `.vscode/dce_history.json`) to prevent data loss. |
 | P2-GIT-03 | **State-Aware Baseline** | As a developer, I don't want to be prompted to create a baseline if my project is already in a clean state, and I want clear feedback if I try to baseline an already-clean repository. | - Before highlighting the "Baseline" button, the extension checks the `git status`. <br> - If the working tree is clean, the "Baseline" step in the animated workflow is skipped. <br> - If the user manually clicks "Baseline" on a clean tree, a message like "Already baselined" is shown. |
 | P2-GIT-04 | **Guided Git Initialization** | As a new user who hasn't initialized a Git repository, when I click "Baseline," I want to see a clear error message that tells me what's wrong and guides me to the solution. | - If `git` is not initialized, clicking "Baseline" shows a `vscode.window.showErrorMessage`. <br> - The message explains that the folder is not a Git repository. <br> - The message includes an "Open README Guide" button that, when clicked, opens the project's `src/Artifacts/README.md` file, which contains instructions on how to run `git init`. |
+| P2-GIT-05 | **Post-Baseline Workflow** | As a developer, after a successful baseline is created, I want the animated guide to immediately advance to the next step, so I know what to do next. | - After a successful baseline commit, the animated workflow highlight immediately moves to the "Select All" button in the "Associated Files" list. |
 
 ## 3. Feasibility Analysis
 
@@ -23219,6 +23380,7 @@ export class ContentExtractionService {
 
 <file path="src/backend/services/file-operation.service.ts">
 // src/backend/services/file-operation.service.ts
+// Updated on: C186 (Add ShowInformationMessage handler)
 import * as vscode from "vscode";
 import * as path from "path";
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
@@ -23240,6 +23402,11 @@ export class FileOperationService {
         } catch {
             return false;
         }
+    }
+
+    public async handleShowInformationMessageRequest(message: string) {
+        Services.loggerService.log(`[UI NOTIFY] Received request to show message: "${message}"`);
+        vscode.window.showInformationMessage(message);
     }
 
     public async handleOpenFolderRequest() {
@@ -23269,7 +23436,7 @@ export class FileOperationService {
             const workspaceFolders = vscode.workspace.workspaceFolders;
             if (!workspaceFolders || workspaceFolders.length === 0) throw new Error("No workspace folder open.");
 
-            const absolutePath = path.resolve(workspaceFolders[0].uri.fsPath, filePath);
+            const absolutePath = path.resolve(workspaceFolders.uri.fsPath, filePath);
             const originalContentBuffer = await vscode.workspace.fs.readFile(vscode.Uri.file(absolutePath));
             const originalContent = Buffer.from(originalContentBuffer).toString('utf-8');
 
@@ -23302,7 +23469,7 @@ export class FileOperationService {
             vscode.window.showErrorMessage("Cannot write files: No workspace folder is open.");
             return [];
         }
-        const rootPath = workspaceFolders[0].uri.fsPath;
+        const rootPath = workspaceFolders.uri.fsPath;
         const successfulPaths: string[] = [];
 
         try {
@@ -23331,7 +23498,7 @@ export class FileOperationService {
             if (!workspaceFolders || workspaceFolders.length === 0) {
                 throw new Error("No workspace folder open.");
             }
-            const absolutePath = path.resolve(workspaceFolders[0].uri.fsPath, filePath);
+            const absolutePath = path.resolve(workspaceFolders.uri.fsPath, filePath);
             const uri = vscode.Uri.file(absolutePath);
             const contentBuffer = await vscode.workspace.fs.readFile(uri);
             const content = Buffer.from(contentBuffer).toString('utf-8');
@@ -23351,7 +23518,7 @@ export class FileOperationService {
             serverIpc.sendToClient(ServerToClientChannel.SendFileExistence, { existenceMap: {} });
             return;
         }
-        const rootPath = workspaceFolders[0].uri.fsPath;
+        const rootPath = workspaceFolders.uri.fsPath;
     
         const existenceMap: { [path: string]: boolean } = {};
         const checks = paths.map(async (p_raw) => {
@@ -23462,8 +23629,8 @@ export class FileOperationService {
         Services.loggerService.log(`Received request to create file: ${filePath}`);
         try {
             const workspaceFolders = vscode.workspace.workspaceFolders;
-            if (!workspaceFolders || !workspaceFolders[0]) throw new Error("No workspace folder open.");
-            const absolutePath = path.resolve(workspaceFolders[0].uri.fsPath, filePath);
+            if (!workspaceFolders || workspaceFolders.length === 0) throw new Error("No workspace folder open.");
+            const absolutePath = path.resolve(workspaceFolders.uri.fsPath, filePath);
             await vscode.workspace.fs.writeFile(vscode.Uri.file(absolutePath), new Uint8Array());
             Services.loggerService.log(`Successfully created file: ${filePath}`);
         } catch (error: any) {
@@ -23538,7 +23705,7 @@ export class FileOperationService {
         const workspaceFolders = vscode.workspace.workspaceFolders;
         let pathToCopy = filePath;
         if (relative && workspaceFolders && workspaceFolders.length > 0) {
-            pathToCopy = path.relative(workspaceFolders[0].uri.fsPath, filePath);
+            pathToCopy = path.relative(workspaceFolders.uri.fsPath, filePath);
         }
         vscode.env.clipboard.writeText(pathToCopy);
         vscode.window.showInformationMessage(`Copied to clipboard: ${pathToCopy}`);
@@ -24083,7 +24250,7 @@ export class FlattenerService {
 
 <file path="src/backend/services/git.service.ts">
 // src/backend/services/git.service.ts
-// Updated on: C184 (Restore direct error handling for git init)
+// Updated on: C186 (Add logging before sending IPC message)
 import * as vscode from 'vscode';
 import { exec } from 'child_process';
 import * as path from 'path';
@@ -24093,7 +24260,7 @@ import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 
 export class GitService {
     private getWorkspaceRoot(): string | undefined {
-        return vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+        return vscode.workspace.workspaceFolders?.?.uri.fsPath;
     }
 
     private async execGitCommand(command: string): Promise<{ stdout: string; stderr: string }> {
@@ -24167,6 +24334,7 @@ export class GitService {
             }
             result = { success: false, message: `Git Baseline failed: ${error.message}` };
         }
+        Services.loggerService.log(`[GIT_SERVICE] Sending NotifyGitOperationResult: ${JSON.stringify(result)}`);
         serverIpc.sendToClient(ServerToClientChannel.NotifyGitOperationResult, result);
     }
 
@@ -28248,7 +28416,7 @@ export const viewConfig = {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/on-message.ts">
-// Updated on: C183 (Add Git Status handler)
+// Updated on: C186 (Add ShowInformationMessage handler)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -28351,6 +28519,10 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestGitStatus, () => {
         gitService.handleGitStatusRequest(serverIpc);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestShowInformationMessage, (data) => {
+        fileOperationService.handleShowInformationMessageRequest(data.message);
     });
 }
 </file>
@@ -29464,7 +29636,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C184 (Fix stuck baseline highlight)
+// Updated on: C186 (Implement full animated workflow state machine)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './view.scss';
@@ -29545,7 +29717,31 @@ const App = () => {
     React.useEffect(() => { debouncedSave(); debouncedCostRequest(); }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, tabCount, isSortedByTokens, pathOverrides, debouncedSave, debouncedCostRequest, cycleContextHeight, ephemeralContextHeight]);
     React.useEffect(() => { const handleVisibilityChange = () => { if (document.visibilityState === 'hidden') saveCurrentCycleState(); }; document.addEventListener('visibilitychange', handleVisibilityChange); return () => document.removeEventListener('visibilitychange', handleVisibilityChange); }, [saveCurrentCycleState]);
     const parseAllTabs = React.useCallback(() => { setTabs(prevTabs => { const allFilePaths = new Set<string>(); const updatedTabs = { ...prevTabs }; let needsUpdate = false; Object.values(updatedTabs).forEach(tabState => { if (tabState.rawContent && !tabState.parsedContent) { needsUpdate = true; const parsed = parseResponse(tabState.rawContent); tabState.parsedContent = parsed; parsed.filesUpdated.forEach(file => allFilePaths.add(file)); parsed.files.forEach(file => { const lang = path.extname(file.path).substring(1) || 'plaintext'; const id = `${file.path}::${file.content}`; clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id }); }); } else if (tabState.parsedContent) { tabState.parsedContent.filesUpdated.forEach(file => allFilePaths.add(file)); } }); if (allFilePaths.size > 0) clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) }); return needsUpdate ? updatedTabs : prevTabs; }); }, [clientIpc]);
-    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string) => { setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setCycleContextHeight(cycleData.cycleContextHeight || 100); setEphemeralContextHeight(cycleData.ephemeralContextHeight || 100); }; clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, ({ filePath, originalTokens, modifiedTokens, similarity }) => { setComparisonMetrics(prev => new Map(prev).set(filePath, { originalTokens, modifiedTokens, similarity })); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, ({ success, message }) => { logger.log(`Git Operation: ${success ? 'SUCCESS' : 'FAILURE'} - ${message}`); if (success && workflowStep === 'awaitingBaseline') setWorkflowStep('awaitingFileSelect'); }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); }, [clientIpc]);
+    
+    React.useEffect(() => {
+        logger.log(`[WORKFLOW] Step changed to: ${workflowStep}`);
+    }, [workflowStep]);
+
+    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string) => { setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setCycleContextHeight(cycleData.cycleContextHeight || 100); setEphemeralContextHeight(cycleData.ephemeralContextHeight || 100); }; clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, ({ filePath, originalTokens, modifiedTokens, similarity }) => { setComparisonMetrics(prev => new Map(prev).set(filePath, { originalTokens, modifiedTokens, similarity })); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); 
+        
+        clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => {
+            logger.log(`[VIEW] Received NotifyGitOperationResult: ${JSON.stringify(result)}`);
+            if (result.success) {
+                setWorkflowStep(prevStep => {
+                    logger.log(`[WORKFLOW] Functional update. Prev step: ${prevStep}.`);
+                    if (prevStep === 'awaitingBaseline') {
+                        logger.log(`[WORKFLOW] Advancing from 'awaitingBaseline' to 'awaitingFileSelect'.`);
+                        clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message });
+                        return 'awaitingFileSelect';
+                    }
+                    return prevStep;
+                });
+            } else {
+                logger.error(`[VIEW] Git operation failed: ${result.message}`);
+            }
+        });
+        
+        clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); }, [clientIpc]);
     React.useEffect(() => { if (isParsedMode) parseAllTabs(); }, [isParsedMode, tabs, parseAllTabs]);
     React.useEffect(() => { if (!selectedFilePath) return; const currentTabData = tabs[activeTab.toString()]; if (currentTabData?.parsedContent) { const fileExistsInTab = currentTabData.parsedContent.files.some(f => f.path === selectedFilePath); if (!fileExistsInTab) setSelectedFilePath(null); } }, [activeTab, tabs, selectedFilePath]);
 
@@ -29615,7 +29811,7 @@ const App = () => {
         </CollapsibleSection>
         <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} onSortToggle={handleSortToggle} workflowStep={workflowStep} />
         <div className="tab-content">
-            <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={currentComparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => { setSelectedResponseId(prev => prev === id ? null : id); }} onSelectAllFiles={handleSelectAllFilesToggle} onDeselectAllFiles={() => setSelectedFilesForReplacement(new Set())} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} onBaseline={handleGitBaseline} onRestore={handleGitRestore} workflowStep={workflowStep} />
+            <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={currentComparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => { setSelectedResponseId(prev => prev === id ? null : id); setWorkflowStep('awaitingResponseSelect'); }} onSelectAllFiles={handleSelectAllFilesToggle} onDeselectAllFiles={() => setSelectedFilesForReplacement(new Set())} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} onBaseline={handleGitBaseline} onRestore={handleGitRestore} workflowStep={workflowStep} />
         </div>
     </div>;
 };
@@ -29693,6 +29889,7 @@ export enum ClientToServerChannel {
     RequestBatchFileWrite = "clientToServer.requestBatchFileWrite",
     RequestCreateFile = "clientToServer.requestCreateFile",
     RequestCopyTextToClipboard = "clientToServer.requestCopyTextToClipboard",
+    RequestShowInformationMessage = "clientToServer.requestShowInformationMessage",
 
     // Special File Handling
     RequestPdfToText = "clientToServer.requestPdfToText",
@@ -29758,7 +29955,7 @@ export enum ServerToClientChannel {
 </file>
 
 <file path="src/common/ipc/channels.type.ts">
-// Updated on: C183 (Add Git Status channel)
+// Updated on: C186 (Add RequestShowInformationMessage)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -29796,6 +29993,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestCopyFileFromUri ? { sourceUri: string, targetDir: string } :
     T extends ClientToServerChannel.RequestCreateFile ? { filePath: string } :
     T extends ClientToServerChannel.RequestCopyTextToClipboard ? { text: string } :
+    T extends ClientToServerChannel.RequestShowInformationMessage ? { message: string } :
     T extends ClientToServerChannel.RequestPdfToText ? { path: string } :
     T extends ClientToServerChannel.RequestExcelToText ? { path: string } :
     T extends ClientToServerChannel.RequestWordToText ? { path: string } :
@@ -30922,6 +31120,7 @@ The user's request is valid and would be a great UX improvement. However, due to
 
 The current priority is to fix the more critical usability bugs like scrolling, focus management, and highlighting. Once the component is stable, we can revisit this challenge and dedicate a future cycle to implementing one of the more advanced solutions above.
 </file>
+
 
 
 

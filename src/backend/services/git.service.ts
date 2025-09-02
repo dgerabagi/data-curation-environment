@@ -1,5 +1,5 @@
 // src/backend/services/git.service.ts
-// Updated on: C185 (Add logging before sending IPC message)
+// Updated on: C186 (Add logging before sending IPC message)
 import * as vscode from 'vscode';
 import { exec } from 'child_process';
 import * as path from 'path';

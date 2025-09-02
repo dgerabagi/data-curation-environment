@@ -1,4 +1,4 @@
-// Updated on: C185 (Add ShowInformationMessage handler)
+// Updated on: C186 (Add ShowInformationMessage handler)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
