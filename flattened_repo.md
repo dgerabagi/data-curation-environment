@@ -1,18 +1,18 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-01T20:33:13.939Z
+  Date Generated: 2025-09-02T01:39:41.068Z
   ---
   Total Files: 168
-  Approx. Tokens: 448004
+  Approx. Tokens: 447689
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (239424 tokens)
 2. src\Artifacts\A11. DCE - Regression Case Studies.md (10001 tokens)
 3. src\Artifacts\A0. DCE Master Artifact List.md (7189 tokens)
-4. src\client\views\parallel-copilot.view\view.tsx (7152 tokens)
-5. src\client\views\parallel-copilot.view\view.scss (5158 tokens)
+4. src\client\views\parallel-copilot.view\view.tsx (7137 tokens)
+5. src\client\views\parallel-copilot.view\view.scss (5176 tokens)
 6. src\backend\services\prompt.service.ts (4908 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4429 tokens)
 8. src\backend\services\file-operation.service.ts (4095 tokens)
@@ -20,174 +20,597 @@
 10. src\client\views\context-chooser.view\view.scss (3708 tokens)
 
 <!-- Full File List -->
-1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 424 - Chars: 28756 - Tokens: 7189
-2. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
-3. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
-4. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
-5. src\Artifacts\A4. DCE - Analysis of The-Creator-AI Repo.md - Lines: 56 - Chars: 5722 - Tokens: 1431
-6. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
-7. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
-8. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
-9. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
-10. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
-11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 349 - Chars: 40001 - Tokens: 10001
-12. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5710 - Tokens: 1428
-13. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
-14. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
-15. src\Artifacts\A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md - Lines: 43 - Chars: 7263 - Tokens: 1816
-16. src\Artifacts\A16. DCE - Phase 1 - UI & UX Refinements Plan.md - Lines: 50 - Chars: 6421 - Tokens: 1606
-17. src\Artifacts\A17. DCE - Phase 1 - Advanced Tree View Features.md - Lines: 47 - Chars: 3888 - Tokens: 972
-18. src\Artifacts\A18. DCE - Phase 1 - Active File Sync Feature Plan.md - Lines: 46 - Chars: 4548 - Tokens: 1137
-19. src\Artifacts\A19. DCE - Phase 1 - Double-Click & Quick-Remove Feature Plan.md - Lines: 42 - Chars: 4603 - Tokens: 1151
-20. src\Artifacts\A20. DCE - Phase 1 - Advanced UX & Automation Plan.md - Lines: 47 - Chars: 7268 - Tokens: 1817
-21. src\Artifacts\A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer.md - Lines: 48 - Chars: 7385 - Tokens: 1847
-22. src\Artifacts\A22. DCE - Phase 1 - Search & Filter Feature Plan.md - Lines: 58 - Chars: 3663 - Tokens: 916
-23. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 37 - Chars: 5504 - Tokens: 1376
-24. src\Artifacts\A24. DCE - Selection Paradigm Terminology.md - Lines: 57 - Chars: 3330 - Tokens: 833
-25. src\Artifacts\A25. DCE - Phase 1 - Git & Problems Integration Plan.md - Lines: 61 - Chars: 5871 - Tokens: 1468
-26. src\Artifacts\A26. DCE - Phase 1 - File System Traversal & Caching Strategy.md - Lines: 42 - Chars: 3593 - Tokens: 899
-27. src\Artifacts\A27. DCE - Phase 1 - Undo-Redo Feature Plan.md - Lines: 50 - Chars: 4903 - Tokens: 1226
-28. src\Artifacts\A28. DCE - Packaging and Distribution Guide.md - Lines: 95 - Chars: 4366 - Tokens: 1092
-29. src\Artifacts\A29. DCE - Phase 1 - Binary and Image File Handling Strategy.md - Lines: 81 - Chars: 4217 - Tokens: 1055
-30. src\Artifacts\A30. DCE - Phase 1 - PDF Handling and Virtualization Strategy.md - Lines: 44 - Chars: 4431 - Tokens: 1108
-31. src\Artifacts\A31. DCE - Phase 2 - Multimodal Content Extraction (PDF Images).md - Lines: 44 - Chars: 4035 - Tokens: 1009
-32. src\Artifacts\A32. DCE - Phase 1 - Excel and CSV Handling Strategy.md - Lines: 44 - Chars: 4295 - Tokens: 1074
-33. src\Artifacts\A33. DCE - Phase 1 - Copy-Paste Feature Plan.md - Lines: 42 - Chars: 4456 - Tokens: 1114
-34. src\Artifacts\A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements.md - Lines: 45 - Chars: 6849 - Tokens: 1713
-35. src\Artifacts\A35. DCE - Phase 2 - UI Mockups and Flow.md - Lines: 54 - Chars: 3584 - Tokens: 896
-36. src\Artifacts\A36. DCE - Phase 2 - Technical Implementation Plan.md - Lines: 56 - Chars: 3621 - Tokens: 906
-37. src\Artifacts\A37. DCE - Phase 2 - Cycle Navigator & Knowledge Graph - Vision.md - Lines: 28 - Chars: 3242 - Tokens: 811
-38. src\Artifacts\A38. DCE - Phase 2 - Cycle Navigator - UI Mockup.md - Lines: 69 - Chars: 4621 - Tokens: 1156
-39. src\Artifacts\A39. DCE - Phase 2 - Cycle Navigator - Technical Plan.md - Lines: 84 - Chars: 4595 - Tokens: 1149
-40. src\Artifacts\A40. DCE - Phase 2 - Parallel Co-Pilot - Target File Structure.md - Lines: 66 - Chars: 3659 - Tokens: 915
-41. src\Artifacts\A40.1. DCE - Phase 2 - Competitive Analysis & Feature Ideas.md - Lines: 43 - Chars: 4784 - Tokens: 1196
-42. src\Artifacts\A41. DCE - Phase 2 - API Key Management - Feature Plan.md - Lines: 47 - Chars: 4542 - Tokens: 1136
-43. src\Artifacts\A41.1. DCE - Phase 2 - Advanced Features & Integrations Plan.md - Lines: 44 - Chars: 3946 - Tokens: 987
-44. src\Artifacts\A41.2. DCE - Phase 2 - Feature Ideation & Competitive Analysis.md - Lines: 40 - Chars: 4566 - Tokens: 1142
-45. src\Artifacts\A42. DCE - Phase 2 - Initial Scaffolding Deployment Script.md - Lines: 246 - Chars: 8264 - Tokens: 2066
-46. src\Artifacts\A43. DCE - Phase 2 - Implementation Roadmap.md - Lines: 69 - Chars: 4694 - Tokens: 1174
-47. src\Artifacts\A44. DCE - Phase 1 - Word Document Handling Strategy.md - Lines: 45 - Chars: 4626 - Tokens: 1157
-48. src\Artifacts\A45. DCE - Phase 2 - Pop-out Co-Pilot Window - Feature Plan.md - Lines: 49 - Chars: 4156 - Tokens: 1039
-49. src\Artifacts\A46. DCE - Phase 2 - Paste and Parse Response - Feature Plan.md - Lines: 38 - Chars: 3587 - Tokens: 897
-50. src\Artifacts\A47. DCE - Phase 2 - Prompt Amalgamation Feature Plan.md - Lines: 42 - Chars: 3499 - Tokens: 875
-51. src\Artifacts\A48. DCE - Phase 2 - Advanced Syntax Highlighting Plan.md - Lines: 49 - Chars: 4044 - Tokens: 1011
-52. src\Artifacts\A49. DCE - Phase 2 - File Association & Diffing Plan.md - Lines: 44 - Chars: 4452 - Tokens: 1113
-53. src\Artifacts\A50. DCE - Phase 2 - UI Component Plan (Resizable Panes & Inner Editors).md - Lines: 51 - Chars: 5128 - Tokens: 1282
-54. src\Artifacts\A51. DCE - A-B-C Testing Strategy for UI Bugs.md - Lines: 81 - Chars: 5490 - Tokens: 1373
-55. src\Artifacts\A52. DCE - Interaction Schema Refinement.md - Lines: 66 - Chars: 3444 - Tokens: 861
-56. src\Artifacts\A52.1 DCE - Parser Logic and AI Guidance.md - Lines: 128 - Chars: 5204 - Tokens: 1301
-57. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 34 - Chars: 9394 - Tokens: 2349
-58. src\Artifacts\A53. DCE - Phase 2 - Token Count and Similarity Analysis.md - Lines: 43 - Chars: 3500 - Tokens: 875
-59. src\Artifacts\A55. DCE - FSService Refactoring Plan.md - Lines: 77 - Chars: 4022 - Tokens: 1006
-60. src\Artifacts\A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md - Lines: 47 - Chars: 5687 - Tokens: 1422
-61. src\Artifacts\A57. DCE - Phase 2 - Cycle Management Plan.md - Lines: 44 - Chars: 3625 - Tokens: 907
-62. src\Artifacts\A58. DCE - WinMerge Source Code Analysis.md - Lines: 56 - Chars: 5322 - Tokens: 1331
-63. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 39 - Chars: 3393 - Tokens: 849
-64. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 35 - Chars: 4175 - Tokens: 1044
-65. src\Artifacts\A61. DCE - Phase 2 - Cycle History Management Plan.md - Lines: 45 - Chars: 3559 - Tokens: 890
-66. src\Artifacts\A62. DCE - Cycle 157 - Task Tracker.md - Lines: 31 - Chars: 2710 - Tokens: 678
-67. src\Artifacts\A63. DCE - Cycle 158 - Task Tracker.md - Lines: 23 - Chars: 1760 - Tokens: 440
-68. src\Artifacts\A64. DCE - Cycle 159 - Task Tracker.md - Lines: 22 - Chars: 1550 - Tokens: 388
-69. src\Artifacts\A65. DCE - Universal Task Checklist.md - Lines: 87 - Chars: 5422 - Tokens: 1356
-70. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1806 - Tokens: 452
-71. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 47 - Chars: 3537 - Tokens: 885
-72. src\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3311 - Tokens: 828
-73. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 3762 - Tokens: 941
-74. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 58 - Chars: 6179 - Tokens: 1545
-75. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
-76. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 43 - Chars: 2874 - Tokens: 719
-77. src\Artifacts\A73. DCE - GitService Plan.md - Lines: 44 - Chars: 2548 - Tokens: 637
-78. src\Artifacts\A74. DCE - Per-Input Undo-Redo Feature Plan.md - Lines: 49 - Chars: 3624 - Tokens: 906
-79. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
-80. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
-81. src\Artifacts\A200. Cycle Log.md - Lines: 13947 - Chars: 957696 - Tokens: 239424
-82. src\Artifacts\README.md - Lines: 33 - Chars: 2764 - Tokens: 691
-83. src\Artifacts\T1. Template - Master Artifact List.md - Lines: 36 - Chars: 1716 - Tokens: 429
-84. src\Artifacts\T2. Template - Project Vision and Goals.md - Lines: 38 - Chars: 1968 - Tokens: 492
-85. src\Artifacts\T3. Template - Phase 1 Requirements & Design.md - Lines: 37 - Chars: 1876 - Tokens: 469
-86. src\Artifacts\T4. Template - Technical Scaffolding Plan.md - Lines: 54 - Chars: 2180 - Tokens: 545
-87. src\Artifacts\T5. Template - Target File Structure.md - Lines: 35 - Chars: 1054 - Tokens: 264
-88. src\Artifacts\T6. Template - Initial Scaffolding Deployment Script.md - Lines: 63 - Chars: 2593 - Tokens: 649
-89. src\Artifacts\T7. Template - Development and Testing Guide.md - Lines: 48 - Chars: 1738 - Tokens: 435
-90. src\Artifacts\T8. Template - Regression Case Studies.md - Lines: 31 - Chars: 1971 - Tokens: 493
-91. src\Artifacts\T9. Template - Logging and Debugging Guide.md - Lines: 49 - Chars: 2590 - Tokens: 648
-92. src\Artifacts\T10. Template - Feature Plan Example.md - Lines: 32 - Chars: 2692 - Tokens: 673
-93. src\Artifacts\T11. Template - Implementation Roadmap.md - Lines: 55 - Chars: 2887 - Tokens: 722
-94. src\Artifacts\T12. Template - Competitive Analysis.md - Lines: 42 - Chars: 3227 - Tokens: 807
-95. src\Artifacts\T13. Template - Refactoring Plan.md - Lines: 55 - Chars: 2617 - Tokens: 655
-96. src\Artifacts\T14. Template - GitHub Repository Setup Guide.md - Lines: 110 - Chars: 4902 - Tokens: 1226
-97. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 41 - Chars: 3000 - Tokens: 750
-98. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 97 - Chars: 4047 - Tokens: 1012
-99. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 45 - Chars: 2899 - Tokens: 725
-100. src\backend\commands\commands.ts - Lines: 97 - Chars: 4211 - Tokens: 1053
-101. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
-102. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
-103. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
-104. src\backend\services\file-operation.service.ts - Lines: 344 - Chars: 16380 - Tokens: 4095
-105. src\backend\services\file-tree.service.ts - Lines: 276 - Chars: 14221 - Tokens: 3556
-106. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12820 - Tokens: 3205
-107. src\backend\services\git.service.ts - Lines: 102 - Chars: 5013 - Tokens: 1254
-108. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4232 - Tokens: 1058
-109. src\backend\services\history.service.ts - Lines: 270 - Chars: 11310 - Tokens: 2828
-110. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-111. src\backend\services\prompt.service.ts - Lines: 378 - Chars: 19630 - Tokens: 4908
-112. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
-113. src\backend\services\services.ts - Lines: 40 - Chars: 1827 - Tokens: 457
-114. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
-115. src\client\components\file-tree\FileTree.tsx - Lines: 258 - Chars: 12226 - Tokens: 3057
-116. src\client\components\file-tree\FileTree.utils.ts - Lines: 117 - Chars: 4236 - Tokens: 1059
-117. src\client\components\tree-view\TreeView.tsx - Lines: 395 - Chars: 17713 - Tokens: 4429
-118. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
-119. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
-120. src\client\components\ContextMenu.tsx - Lines: 72 - Chars: 3353 - Tokens: 839
-121. src\client\components\DiffViewer.tsx - Lines: 224 - Chars: 11386 - Tokens: 2847
-122. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
-123. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13123 - Tokens: 3281
-124. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
-125. src\client\utils\response-parser.ts - Lines: 79 - Chars: 2994 - Tokens: 749
-126. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-127. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
-128. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
-129. src\client\views\context-chooser.view\view.tsx - Lines: 175 - Chars: 16314 - Tokens: 4079
-130. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
-131. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 77 - Chars: 3054 - Tokens: 764
-132. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 86 - Chars: 3485 - Tokens: 872
-133. src\client\views\parallel-copilot.view\components\NumberedTextarea.tsx - Lines: 102 - Chars: 4412 - Tokens: 1103
-134. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 95 - Chars: 7630 - Tokens: 1908
-135. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 84 - Chars: 3486 - Tokens: 872
-136. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
-137. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-138. src\client\views\parallel-copilot.view\on-message.ts - Lines: 109 - Chars: 5021 - Tokens: 1256
-139. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 92 - Chars: 4340 - Tokens: 1085
-140. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 28 - Chars: 1213 - Tokens: 304
-141. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 28 - Chars: 1283 - Tokens: 321
-142. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 28 - Chars: 1184 - Tokens: 296
-143. src\client\views\parallel-copilot.view\view.scss - Lines: 903 - Chars: 20629 - Tokens: 5158
-144. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-145. src\client\views\parallel-copilot.view\view.tsx - Lines: 183 - Chars: 28606 - Tokens: 7152
-146. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
-147. src\common\ipc\channels.enum.ts - Lines: 89 - Chars: 4750 - Tokens: 1188
-148. src\common\ipc\channels.type.ts - Lines: 89 - Chars: 6738 - Tokens: 1685
-149. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
-150. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-151. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-152. src\common\types\file-node.ts - Lines: 17 - Chars: 517 - Tokens: 130
-153. src\common\types\pcpp.types.ts - Lines: 50 - Chars: 1240 - Tokens: 310
-154. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
-155. src\common\utils\formatting.ts - Lines: 120 - Chars: 3987 - Tokens: 997
-156. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
-157. src\common\utils\view-html.ts - Lines: 29 - Chars: 1117 - Tokens: 280
-158. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
-159. src\extension.ts - Lines: 129 - Chars: 5386 - Tokens: 1347
-160. .gitignore - Lines: 10 - Chars: 128 - Tokens: 32
-161. .vscodeignore - Lines: 11 - Chars: 356 - Tokens: 89
-162. package.json - Lines: 139 - Chars: 4583 - Tokens: 1146
-163. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
-164. webpack.config.js - Lines: 104 - Chars: 2873 - Tokens: 719
-165. src\Artifacts\A75. DCE - Text Area Component A-B-C Test Plan.md - Lines: 50 - Chars: 4761 - Tokens: 1191
-166. dist\Artifacts\A75. DCE - Text Area Component A-B-C Test Plan.md - Lines: 50 - Chars: 4761 - Tokens: 1191
-167. src\Artifacts\A76. DCE - Word Wrap Line Numbering Challenges.md - Lines: 61 - Chars: 4895 - Tokens: 1224
-168. dist\Artifacts\A76. DCE - Word Wrap Line Numbering Challenges.md - Lines: 61 - Chars: 4895 - Tokens: 1224
+1. .gitignore - Lines: 10 - Chars: 128 - Tokens: 32
+2. .vscodeignore - Lines: 11 - Chars: 356 - Tokens: 89
+3. package.json - Lines: 139 - Chars: 4583 - Tokens: 1146
+4. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
+5. webpack.config.js - Lines: 104 - Chars: 2873 - Tokens: 719
+6. dist\Artifacts\A75. DCE - Text Area Component A-B-C Test Plan.md - Lines: 50 - Chars: 4761 - Tokens: 1191
+7. dist\Artifacts\A76. DCE - Word Wrap Line Numbering Challenges.md - Lines: 61 - Chars: 4895 - Tokens: 1224
+8. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 424 - Chars: 28756 - Tokens: 7189
+9. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
+10. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
+11. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
+12. src\Artifacts\A4. DCE - Analysis of The-Creator-AI Repo.md - Lines: 56 - Chars: 5722 - Tokens: 1431
+13. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
+14. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
+15. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
+16. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
+17. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
+18. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 349 - Chars: 40001 - Tokens: 10001
+19. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5710 - Tokens: 1428
+20. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
+21. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
+22. src\Artifacts\A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md - Lines: 43 - Chars: 7263 - Tokens: 1816
+23. src\Artifacts\A16. DCE - Phase 1 - UI & UX Refinements Plan.md - Lines: 24 - Chars: 4349 - Tokens: 1088
+24. src\Artifacts\A17. DCE - Phase 1 - Advanced Tree View Features.md - Lines: 47 - Chars: 3888 - Tokens: 972
+25. src\Artifacts\A18. DCE - Phase 1 - Active File Sync Feature Plan.md - Lines: 46 - Chars: 4548 - Tokens: 1137
+26. src\Artifacts\A19. DCE - Phase 1 - Double-Click & Quick-Remove Feature Plan.md - Lines: 42 - Chars: 4603 - Tokens: 1151
+27. src\Artifacts\A20. DCE - Phase 1 - Advanced UX & Automation Plan.md - Lines: 47 - Chars: 7268 - Tokens: 1817
+28. src\Artifacts\A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer.md - Lines: 48 - Chars: 7385 - Tokens: 1847
+29. src\Artifacts\A22. DCE - Phase 1 - Search & Filter Feature Plan.md - Lines: 58 - Chars: 3663 - Tokens: 916
+30. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 37 - Chars: 5504 - Tokens: 1376
+31. src\Artifacts\A24. DCE - Selection Paradigm Terminology.md - Lines: 57 - Chars: 3330 - Tokens: 833
+32. src\Artifacts\A25. DCE - Phase 1 - Git & Problems Integration Plan.md - Lines: 61 - Chars: 5871 - Tokens: 1468
+33. src\Artifacts\A26. DCE - Phase 1 - File System Traversal & Caching Strategy.md - Lines: 42 - Chars: 3593 - Tokens: 899
+34. src\Artifacts\A27. DCE - Phase 1 - Undo-Redo Feature Plan.md - Lines: 50 - Chars: 4903 - Tokens: 1226
+35. src\Artifacts\A28. DCE - Packaging and Distribution Guide.md - Lines: 95 - Chars: 4366 - Tokens: 1092
+36. src\Artifacts\A29. DCE - Phase 1 - Binary and Image File Handling Strategy.md - Lines: 81 - Chars: 4217 - Tokens: 1055
+37. src\Artifacts\A30. DCE - Phase 1 - PDF Handling and Virtualization Strategy.md - Lines: 44 - Chars: 4431 - Tokens: 1108
+38. src\Artifacts\A31. DCE - Phase 2 - Multimodal Content Extraction (PDF Images).md - Lines: 44 - Chars: 4035 - Tokens: 1009
+39. src\Artifacts\A32. DCE - Phase 1 - Excel and CSV Handling Strategy.md - Lines: 44 - Chars: 4295 - Tokens: 1074
+40. src\Artifacts\A33. DCE - Phase 1 - Copy-Paste Feature Plan.md - Lines: 42 - Chars: 4456 - Tokens: 1114
+41. src\Artifacts\A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements.md - Lines: 45 - Chars: 6849 - Tokens: 1713
+42. src\Artifacts\A35. DCE - Phase 2 - UI Mockups and Flow.md - Lines: 54 - Chars: 3584 - Tokens: 896
+43. src\Artifacts\A36. DCE - Phase 2 - Technical Implementation Plan.md - Lines: 56 - Chars: 3621 - Tokens: 906
+44. src\Artifacts\A37. DCE - Phase 2 - Cycle Navigator & Knowledge Graph - Vision.md - Lines: 28 - Chars: 3242 - Tokens: 811
+45. src\Artifacts\A38. DCE - Phase 2 - Cycle Navigator - UI Mockup.md - Lines: 69 - Chars: 4621 - Tokens: 1156
+46. src\Artifacts\A39. DCE - Phase 2 - Cycle Navigator - Technical Plan.md - Lines: 84 - Chars: 4595 - Tokens: 1149
+47. src\Artifacts\A40. DCE - Phase 2 - Parallel Co-Pilot - Target File Structure.md - Lines: 66 - Chars: 3659 - Tokens: 915
+48. src\Artifacts\A40.1. DCE - Phase 2 - Competitive Analysis & Feature Ideas.md - Lines: 43 - Chars: 4784 - Tokens: 1196
+49. src\Artifacts\A41. DCE - Phase 2 - API Key Management - Feature Plan.md - Lines: 47 - Chars: 4542 - Tokens: 1136
+50. src\Artifacts\A41.1. DCE - Phase 2 - Advanced Features & Integrations Plan.md - Lines: 44 - Chars: 3946 - Tokens: 987
+51. src\Artifacts\A41.2. DCE - Phase 2 - Feature Ideation & Competitive Analysis.md - Lines: 40 - Chars: 4566 - Tokens: 1142
+52. src\Artifacts\A42. DCE - Phase 2 - Initial Scaffolding Deployment Script.md - Lines: 246 - Chars: 8264 - Tokens: 2066
+53. src\Artifacts\A43. DCE - Phase 2 - Implementation Roadmap.md - Lines: 69 - Chars: 4694 - Tokens: 1174
+54. src\Artifacts\A44. DCE - Phase 1 - Word Document Handling Strategy.md - Lines: 45 - Chars: 4626 - Tokens: 1157
+55. src\Artifacts\A45. DCE - Phase 2 - Pop-out Co-Pilot Window - Feature Plan.md - Lines: 49 - Chars: 4156 - Tokens: 1039
+56. src\Artifacts\A46. DCE - Phase 2 - Paste and Parse Response - Feature Plan.md - Lines: 38 - Chars: 3587 - Tokens: 897
+57. src\Artifacts\A47. DCE - Phase 2 - Prompt Amalgamation Feature Plan.md - Lines: 42 - Chars: 3499 - Tokens: 875
+58. src\Artifacts\A48. DCE - Phase 2 - Advanced Syntax Highlighting Plan.md - Lines: 49 - Chars: 4044 - Tokens: 1011
+59. src\Artifacts\A49. DCE - Phase 2 - File Association & Diffing Plan.md - Lines: 44 - Chars: 4452 - Tokens: 1113
+60. src\Artifacts\A50. DCE - Phase 2 - UI Component Plan (Resizable Panes & Inner Editors).md - Lines: 51 - Chars: 5128 - Tokens: 1282
+61. src\Artifacts\A51. DCE - A-B-C Testing Strategy for UI Bugs.md - Lines: 81 - Chars: 5490 - Tokens: 1373
+62. src\Artifacts\A52. DCE - Interaction Schema Refinement.md - Lines: 66 - Chars: 3444 - Tokens: 861
+63. src\Artifacts\A52.1 DCE - Parser Logic and AI Guidance.md - Lines: 128 - Chars: 5204 - Tokens: 1301
+64. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 34 - Chars: 9394 - Tokens: 2349
+65. src\Artifacts\A53. DCE - Phase 2 - Token Count and Similarity Analysis.md - Lines: 43 - Chars: 3500 - Tokens: 875
+66. src\Artifacts\A55. DCE - FSService Refactoring Plan.md - Lines: 77 - Chars: 4022 - Tokens: 1006
+67. src\Artifacts\A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md - Lines: 47 - Chars: 5687 - Tokens: 1422
+68. src\Artifacts\A57. DCE - Phase 2 - Cycle Management Plan.md - Lines: 44 - Chars: 3625 - Tokens: 907
+69. src\Artifacts\A58. DCE - WinMerge Source Code Analysis.md - Lines: 56 - Chars: 5322 - Tokens: 1331
+70. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 39 - Chars: 3393 - Tokens: 849
+71. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 35 - Chars: 4175 - Tokens: 1044
+72. src\Artifacts\A61. DCE - Phase 2 - Cycle History Management Plan.md - Lines: 45 - Chars: 3559 - Tokens: 890
+73. src\Artifacts\A62. DCE - Cycle 157 - Task Tracker.md - Lines: 31 - Chars: 2710 - Tokens: 678
+74. src\Artifacts\A63. DCE - Cycle 158 - Task Tracker.md - Lines: 23 - Chars: 1760 - Tokens: 440
+75. src\Artifacts\A64. DCE - Cycle 159 - Task Tracker.md - Lines: 22 - Chars: 1550 - Tokens: 388
+76. src\Artifacts\A65. DCE - Universal Task Checklist.md - Lines: 87 - Chars: 5422 - Tokens: 1356
+77. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1806 - Tokens: 452
+78. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 47 - Chars: 3537 - Tokens: 885
+79. src\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3311 - Tokens: 828
+80. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 3764 - Tokens: 941
+81. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 60 - Chars: 6426 - Tokens: 1607
+82. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
+83. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 43 - Chars: 2874 - Tokens: 719
+84. src\Artifacts\A73. DCE - GitService Plan.md - Lines: 44 - Chars: 2548 - Tokens: 637
+85. src\Artifacts\A74. DCE - Per-Input Undo-Redo Feature Plan.md - Lines: 49 - Chars: 3624 - Tokens: 906
+86. src\Artifacts\A75. DCE - Text Area Component A-B-C Test Plan.md - Lines: 50 - Chars: 4761 - Tokens: 1191
+87. src\Artifacts\A76. DCE - Word Wrap Line Numbering Challenges.md - Lines: 61 - Chars: 4895 - Tokens: 1224
+88. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
+89. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
+90. src\Artifacts\A200. Cycle Log.md - Lines: 13947 - Chars: 957696 - Tokens: 239424
+91. src\Artifacts\README.md - Lines: 33 - Chars: 2764 - Tokens: 691
+92. src\Artifacts\T1. Template - Master Artifact List.md - Lines: 36 - Chars: 1716 - Tokens: 429
+93. src\Artifacts\T2. Template - Project Vision and Goals.md - Lines: 38 - Chars: 1968 - Tokens: 492
+94. src\Artifacts\T3. Template - Phase 1 Requirements & Design.md - Lines: 37 - Chars: 1876 - Tokens: 469
+95. src\Artifacts\T4. Template - Technical Scaffolding Plan.md - Lines: 54 - Chars: 2180 - Tokens: 545
+96. src\Artifacts\T5. Template - Target File Structure.md - Lines: 35 - Chars: 1054 - Tokens: 264
+97. src\Artifacts\T6. Template - Initial Scaffolding Deployment Script.md - Lines: 63 - Chars: 2593 - Tokens: 649
+98. src\Artifacts\T7. Template - Development and Testing Guide.md - Lines: 48 - Chars: 1738 - Tokens: 435
+99. src\Artifacts\T8. Template - Regression Case Studies.md - Lines: 31 - Chars: 1971 - Tokens: 493
+100. src\Artifacts\T9. Template - Logging and Debugging Guide.md - Lines: 49 - Chars: 2590 - Tokens: 648
+101. src\Artifacts\T10. Template - Feature Plan Example.md - Lines: 32 - Chars: 2692 - Tokens: 673
+102. src\Artifacts\T11. Template - Implementation Roadmap.md - Lines: 55 - Chars: 2887 - Tokens: 722
+103. src\Artifacts\T12. Template - Competitive Analysis.md - Lines: 42 - Chars: 3227 - Tokens: 807
+104. src\Artifacts\T13. Template - Refactoring Plan.md - Lines: 55 - Chars: 2617 - Tokens: 655
+105. src\Artifacts\T14. Template - GitHub Repository Setup Guide.md - Lines: 110 - Chars: 4902 - Tokens: 1226
+106. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 41 - Chars: 3000 - Tokens: 750
+107. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 97 - Chars: 4047 - Tokens: 1012
+108. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 45 - Chars: 2899 - Tokens: 725
+109. src\backend\commands\commands.ts - Lines: 103 - Chars: 4254 - Tokens: 1064
+110. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
+111. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
+112. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
+113. src\backend\services\file-operation.service.ts - Lines: 344 - Chars: 16380 - Tokens: 4095
+114. src\backend\services\file-tree.service.ts - Lines: 276 - Chars: 14221 - Tokens: 3556
+115. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12820 - Tokens: 3205
+116. src\backend\services\git.service.ts - Lines: 114 - Chars: 5522 - Tokens: 1381
+117. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4232 - Tokens: 1058
+118. src\backend\services\history.service.ts - Lines: 270 - Chars: 11310 - Tokens: 2828
+119. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
+120. src\backend\services\prompt.service.ts - Lines: 378 - Chars: 19630 - Tokens: 4908
+121. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
+122. src\backend\services\services.ts - Lines: 40 - Chars: 1827 - Tokens: 457
+123. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
+124. src\client\components\file-tree\FileTree.tsx - Lines: 258 - Chars: 12226 - Tokens: 3057
+125. src\client\components\file-tree\FileTree.utils.ts - Lines: 117 - Chars: 4236 - Tokens: 1059
+126. src\client\components\tree-view\TreeView.tsx - Lines: 395 - Chars: 17713 - Tokens: 4429
+127. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
+128. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
+129. src\client\components\ContextMenu.tsx - Lines: 72 - Chars: 3353 - Tokens: 839
+130. src\client\components\DiffViewer.tsx - Lines: 224 - Chars: 11386 - Tokens: 2847
+131. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
+132. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13123 - Tokens: 3281
+133. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
+134. src\client\utils\response-parser.ts - Lines: 79 - Chars: 2994 - Tokens: 749
+135. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
+136. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
+137. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
+138. src\client\views\context-chooser.view\view.tsx - Lines: 175 - Chars: 16314 - Tokens: 4079
+139. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
+140. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 77 - Chars: 3054 - Tokens: 764
+141. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 86 - Chars: 3485 - Tokens: 872
+142. src\client\views\parallel-copilot.view\components\NumberedTextarea.tsx - Lines: 102 - Chars: 4412 - Tokens: 1103
+143. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 95 - Chars: 7630 - Tokens: 1908
+144. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 84 - Chars: 3486 - Tokens: 872
+145. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
+146. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
+147. src\client\views\parallel-copilot.view\on-message.ts - Lines: 109 - Chars: 5021 - Tokens: 1256
+148. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 92 - Chars: 4340 - Tokens: 1085
+149. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 28 - Chars: 1213 - Tokens: 304
+150. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 28 - Chars: 1283 - Tokens: 321
+151. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 28 - Chars: 1184 - Tokens: 296
+152. src\client\views\parallel-copilot.view\view.scss - Lines: 905 - Chars: 20702 - Tokens: 5176
+153. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
+154. src\client\views\parallel-copilot.view\view.tsx - Lines: 180 - Chars: 28546 - Tokens: 7137
+155. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
+156. src\common\ipc\channels.enum.ts - Lines: 89 - Chars: 4750 - Tokens: 1188
+157. src\common\ipc\channels.type.ts - Lines: 89 - Chars: 6738 - Tokens: 1685
+158. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
+159. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+160. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
+161. src\common\types\file-node.ts - Lines: 17 - Chars: 517 - Tokens: 130
+162. src\common\types\pcpp.types.ts - Lines: 50 - Chars: 1240 - Tokens: 310
+163. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
+164. src\common\utils\formatting.ts - Lines: 120 - Chars: 3987 - Tokens: 997
+165. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
+166. src\common\utils\view-html.ts - Lines: 29 - Chars: 1117 - Tokens: 280
+167. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
+168. src\extension.ts - Lines: 129 - Chars: 5386 - Tokens: 1347
+
+<file path=".gitignore">
+node_modules
+package-lock.json
+dist
+out
+*.vsix
+.vscode-test/
+.vscode/
+The-Creator-AI-main/
+prompt.md
+.vscode/dce_cache/
+</file>
+
+<file path=".vscodeignore">
+# This file tells the VS Code packaging tool which files to ignore.
+# We are removing 'node_modules' because our external dependencies (like xlsx)
+# need to be included in the final package to be available at runtime.
+# The `vsce` tool is smart enough to only bundle production dependencies.
+
+src
+.gitignore
+webpack.config.js
+tsconfig.json
+**/*.map
+**/*.ts
+</file>
+
+<file path="package.json">
+{
+    "name": "data-curation-environment",
+    "publisher": "DCE-Developer",
+    "displayName": "Data Curation Environment",
+    "description": "A VS Code extension for curating context for Large Language Models.",
+    "version": "0.0.9",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/dgerabagi/data-curation-environment.git"
+    },
+    "engines": {
+        "vscode": "^1.90.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onView:data-curation-environment",
+        "onCommand:dce.showParallelCopilot"
+    ],
+    "main": "./dist/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "dce.saveCurrentSelection",
+                "title": "DCE: Save Current Selection Set",
+                "category": "DCE"
+            },
+            {
+                "command": "dce.loadSelectionSet",
+                "title": "DCE: Load Selection Set",
+                "category": "DCE"
+            },
+            {
+                "command": "dce.manageSelectionSets",
+                "title": "DCE: Manage Selection Sets",
+                "category": "DCE"
+            },
+            {
+                "command": "dce.refreshTree",
+                "title": "DCE: Refresh Explorer",
+                "category": "DCE"
+            },
+            {
+                "command": "dce.openParallelCopilot",
+                "title": "DCE: Open Parallel Co-Pilot",
+                "category": "DCE",
+                "icon": "$(multiple-windows)"
+            },
+            {
+                "command": "dce.showParallelCopilot",
+                "title": "DCE: Show Parallel Co-Pilot"
+            }
+        ],
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "data-curation-environment",
+                    "title": "Data Curation",
+                    "icon": "public/spiral.svg"
+                },
+                {
+                    "id": "dce-parallel-copilot-container",
+                    "title": "DCE Parallel Co-Pilot",
+                    "icon": "public/copilot.svg"
+                }
+            ]
+        },
+        "views": {
+            "data-curation-environment": [
+                {
+                    "type": "webview",
+                    "id": "viewType.sidebar.contextChooser",
+                    "name": "Data Curation"
+                }
+            ]
+        },
+        "menus": {
+            "view/title": [
+                {
+                    "command": "dce.openParallelCopilot",
+                    "when": "view == viewType.sidebar.contextChooser",
+                    "group": "navigation"
+                }
+            ],
+            "activityBar/view/title": [
+                 {
+                    "command": "dce.showParallelCopilot",
+                    "when": "viewContainer == dce-parallel-copilot-container"
+                }
+            ]
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run package",
+        "compile": "webpack",
+        "watch": "webpack --watch",
+        "package": "webpack --mode production --devtool hidden-source-map",
+        "lint": "eslint src --ext ts"
+    },
+    "devDependencies": {
+        "@types/node": "18.x",
+        "@types/vscode": "^1.90.0",
+        "@typescript-eslint/eslint-plugin": "^7.7.1",
+        "@typescript-eslint/parser": "^7.7.1",
+        "eslint": "^8.57.0",
+        "ts-loader": "^9.5.1",
+        "typescript": "^5.4.5",
+        "webpack": "^5.91.0",
+        "webpack-cli": "^5.1.4",
+        "copy-webpack-plugin": "^12.0.2",
+        "mini-css-extract-plugin": "^2.9.0",
+        "style-loader": "^4.0.0",
+        "css-loader": "^7.1.2",
+        "sass-loader": "^16.0.1",
+        "sass": "^1.78.0",
+        "postcss-loader": "^8.1.1",
+        "babel-loader": "^9.1.3",
+        "@babel/preset-react": "^7.24.7",
+        "@babel/preset-typescript": "^7.24.7",
+        "process": "^0.11.10",
+        "path-browserify": "^1.0.1"
+    },
+    "dependencies": {
+        "@wooorm/starry-night": "^3.8.0",
+        "hast-util-to-html": "^9.0.1",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "react-icons": "^5.3.0",
+        "react-markdown": "^9.0.1",
+        "rxjs": "^7.8.1",
+        "reflect-metadata": "^0.2.2",
+        "pdf-parse": "^1.1.1",
+        "xlsx": "^0.18.5",
+        "mammoth": "^1.8.0",
+        "diff": "^5.2.0",
+        "@types/diff": "^5.2.1"
+    }
+}
+</file>
+
+<file path="tsconfig.json">
+{
+    "compilerOptions": {
+        "module": "esnext",
+        "moduleResolution": "bundler",
+        "target": "ESNext",
+        "lib": ["ES2022", "DOM"],
+        "jsx": "react",
+        "sourceMap": true,
+        "rootDir": "src",
+        "strict": false,
+        "baseUrl": "./",
+        "paths": {
+            "@/*": ["src/*"]
+        },
+        "experimentalDecorators": true,
+        "allowSyntheticDefaultImports": true
+    },
+    "include": [
+        "src/**/*.ts",
+        "src/**/*.tsx"
+    ],
+    "exclude": [
+        "node_modules",
+        ".vscode-test",
+        "The-Creator-AI-main"
+    ]
+}
+</file>
+
+<file path="webpack.config.js">
+const path = require('path');
+const CopyPlugin = require("copy-webpack-plugin");
+const webpack = require('webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+/** @type {import('webpack').Configuration} */
+const baseConfig = {
+    mode: 'none',
+    resolve: {
+        extensions: ['.ts', '.js', '.tsx', '.jsx'],
+        alias: {
+            "@": path.resolve(__dirname, 'src'),
+        }
+    },
+    module: {
+        rules: [
+            {
+                test: /\.ts$/,
+                exclude: /node_modules/,
+                use: [{ loader: 'ts-loader' }]
+            },
+            {
+                test: /\.?ts.?(x)$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        presets: ['@babel/preset-react', '@babel/preset-typescript']
+                    }
+                }
+            },
+        ]
+    },
+    devtool: 'nosources-source-map',
+    infrastructureLogging: {
+        level: "log",
+    },
+};
+
+/** @type {import('webpack').Configuration} */
+const extensionConfig = {
+    ...baseConfig,
+    target: 'node',
+    entry: {
+        extension: './src/extension.ts',
+    },
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'extension.js',
+        libraryTarget: 'commonjs2'
+    },
+    externals: {
+        vscode: 'commonjs vscode',
+    },
+};
+
+/** @type {import('webpack').Configuration} */
+const webviewConfig = {
+    ...baseConfig,
+    target: 'web',
+    entry: {
+        contextChooserView: './src/client/views/context-chooser.view/view.tsx',
+        parallelCopilotView: './src/client/views/parallel-copilot.view/view.tsx',
+    },
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: '[name].js',
+        libraryTarget: 'commonjs2'
+    },
+    module: {
+        ...baseConfig.module,
+        rules: [
+            ...baseConfig.module.rules,
+            {
+                test: /\.s[ac]ss$/i,
+                use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+            },
+        ]
+    },
+    resolve: {
+        ...baseConfig.resolve,
+        fallback: {
+            "path": require.resolve("path-browserify")
+        }
+    },
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: '[name].css'
+        }),
+        new CopyPlugin({
+            patterns: [
+                { from: "public", to: "public" },
+                { from: "node_modules/@wooorm/starry-night/style/both.css", to: "starry-night.css" },
+                // C164 Fix: Copy static artifacts needed by the backend into the dist folder.
+                { from: "src/Artifacts", to: "Artifacts" }
+            ],
+        }),
+        new webpack.ProvidePlugin({
+            process: 'process/browser',
+        }),
+    ],
+};
+
+module.exports = [extensionConfig, webviewConfig];
+</file>
+
+<file path="dist/Artifacts/A75. DCE - Text Area Component A-B-C Test Plan.md">
+# Artifact A75: DCE - Text Area Component A-B-C Test Plan
+# Date Created: C179
+# Author: AI Model & Curator
+# Updated on: C180 (Acknowledge word-wrap limitation)
+
+- **Key/Value for A0:**
+- **Description:** A plan to create a test harness for the `NumberedTextarea` component to diagnose and fix persistent scrolling and alignment bugs.
+- **Tags:** plan, process, debugging, troubleshooting, ui, ux, react
+
+## 1. Overview & Goal
+
+The `NumberedTextarea` component, used for the "Cycle Context" and "Ephemeral Context" fields in the Parallel Co-Pilot Panel, has been a persistent source of UI bugs across multiple cycles (C1, C2, C3, C167, C174). The primary issues are a lack of synchronized scrolling between the line numbers and the text content, and a misalignment of the cursor and text selection, making the component difficult to use.
+
+The goal of this plan is to apply the "Original-A-B-C" testing strategy, as defined in `A51`, to definitively diagnose and resolve these issues. We will create a test harness within the PCPP that allows for parallel testing of the original component and three new, isolated test components, each attempting a different solution.
+
+## 2. Known Limitation: Word-Wrap Line Numbering
+
+As of Cycle 4, it has been observed that the current architecture of the `NumberedTextarea` (and all proposed test variants) does not correctly handle line numbering for word-wrapped text. The component counts lines based on newline characters (`\n`), not on how the text visually wraps in the view. This means a single line of text that wraps into three visual lines will only get one line number.
+
+**This is a known limitation.** A true fix for this requires a significantly more complex architecture, likely involving rendering text into a hidden element and measuring the resulting line boxes. For the current development phase, the priority is to fix the blocking usability bugs (scrolling, focus, performance). The word-wrap numbering issue will be deferred to a future cycle dedicated to advanced component architecture.
+
+## 3. The Strategy
+
+### 3.1. Test Harness Implementation
+The main `parallel-copilot.view/view.tsx` component will be refactored to include a new "Test Harness" mode.
+-   A new state, `activeTestView`, will control which view is active: `'Original'`, `'TestA'`, `'TestB'`, or `'TestC'`.
+-   A simple tab bar UI will be added to switch between these views.
+-   The "Original" view will render the current, fully-featured PCPP layout.
+-   The other views will render the isolated test components.
+
+### 3.2. Isolated Test Components
+Three new test components will be created to isolate and test specific variables.
+
+-   **Test A (`TestPane1.tsx`): Synchronized Scrolling**
+    -   **Hypothesis:** The scrolling is failing because the `onScroll` event is not being correctly used to synchronize the `scrollTop` of the line number gutter and the text area.
+    -   **Implementation:** This component will feature a barebones `textarea` next to a `div` for line numbers. It will implement a robust `onScroll` handler that programmatically sets the `scrollTop` of the line number gutter, with extensive logging to confirm the event is firing and the values are changing.
+
+-   **Test B (`TestPane2.tsx`): Pixel-Perfect Alignment**
+    -   **Hypothesis:** The cursor and selection are misaligned due to subtle differences in CSS properties (`font-family`, `font-size`, `line-height`, `padding`, `box-sizing`) between the transparent `textarea` and the underlying `div` that displays the highlighted text.
+    -   **Implementation:** This component will implement the overlay approach. It will meticulously ensure that every single font and box-model CSS property is identical across both elements. It will contain no complex logic, only the minimal structure needed to test for visual alignment.
+
+-   **Test C (`TestPane3.tsx`): Combined & Cleaned Solution**
+    -   **Hypothesis:** A clean implementation combining the lessons from Test A and Test B will provide a fully functional component.
+    -   **Implementation:** This component will integrate the synchronized scrolling from Test A with the pixel-perfect styling from Test B into a new, clean version of the `NumberedTextarea` component, free from any other complex logic from the main view.
+
+## 4. Cleanup Process
+Once a working pattern is identified in a test component:
+1.  **Codify Findings:** The successful pattern and the root cause of the failure will be documented in `A11. DCE - Regression Case Studies`.
+2.  **Integrate Solution:** The original `NumberedTextarea.tsx` component will be refactored to use the successful pattern.
+3.  **Remove Test Artifacts:** The test harness UI and the `TestPane*.tsx` component files will be removed from the project.
+</file>
+
+<file path="dist/Artifacts/A76. DCE - Word Wrap Line Numbering Challenges.md">
+# Artifact A76: DCE - Word Wrap Line Numbering Challenges
+# Date Created: C181
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** Explains the technical complexity of implementing line numbers that accurately reflect visual word wrapping in a textarea component.
+- **Tags:** documentation, technical debt, ui, ux, word wrap, line numbers
+
+## 1. Problem Statement
+
+The user has requested that the line numbers in the `NumberedTextarea` component should respect word wrapping. Currently, the component counts lines based on newline characters (`\n`). This means a single logical line that visually wraps into three lines in the UI still only receives one line number. The user correctly points out that this is not ideal.
+
+This document explains why this seemingly simple feature is technically complex to implement in a standard HTML `<textarea>` and outlines potential solutions.
+
+## 2. The Core Challenge: Logical vs. Visual Lines
+
+The fundamental issue is the difference between how a `<textarea>` handles content versus how the browser renders it.
+
+*   **Logical Lines:** The `<textarea>` element's `value` is a simple string. The only concept of a "line" it has is the presence of a newline character (`\n`). When we split the string by `\n`, we are counting these logical lines. This is what our current implementation does, and it's fast and simple.
+
+*   **Visual Lines:** Word wrapping is a purely visual phenomenon handled by the browser's rendering engine. The browser calculates how many words fit on a line based on the element's width, font size, font family, letter spacing, and word spacing. It then visually breaks the line and renders the overflow text below. **Crucially, the browser does not expose a simple API to ask, "How many visual lines are you currently rendering for this text?"**
+
+Because we cannot directly query the rendered line count, we must resort to indirect methods to calculate it.
+
+## 3. Potential Solutions & Their Complexity
+
+Here are the common approaches to solving this problem, each with its own trade-offs.
+
+### Solution A: The Hidden `div` Measurement Technique
+
+This is the most common and reliable method.
+
+1.  **How it Works:**
+    *   Create a hidden `div` element off-screen or with `visibility: hidden`.
+    *   Apply the *exact same* CSS styles to this `div` as the `<textarea>` (width, font, padding, etc.).
+    *   Copy the content of the `<textarea>` into the `innerHTML` of the hidden `div`.
+    *   Calculate the number of visual lines by dividing the `scrollHeight` of the hidden `div` by its `line-height`.
+
+2.  **Complexity & Downsides:**
+    *   **Performance:** This calculation must be run on every single keystroke, as any character change could affect word wrapping. Copying large amounts of text into the DOM and forcing a browser re-layout on every key press can be performance-intensive and may cause input lag.
+    *   **Fragility:** The CSS styles must be perfectly synchronized. Any discrepancy in padding, border, font-size, etc., will result in an incorrect calculation.
+    *   **Implementation:** Requires careful DOM manipulation within our React component, managing refs to both the textarea and the hidden div, and ensuring the calculation is efficient.
+
+### Solution B: Using a Full-Fledged Code Editor Component
+
+Instead of building our own, we could replace the `<textarea>` with a lightweight, embeddable code editor library.
+
+1.  **How it Works:**
+    *   Integrate a library like **CodeMirror** or **Monaco Editor** (the editor that powers VS Code itself, though it's much heavier).
+    *   These components are not simple textareas; they are complete editing surfaces that render each line individually. Because they control the rendering process, they have full knowledge of visual lines and can provide accurate line numbering out of the box.
+
+2.  **Complexity & Downsides:**
+    *   **Bundle Size:** These libraries are significantly larger than a simple React component, which would increase the extension's load time.
+    *   **Integration:** Integrating them into our existing React and VS Code Webview architecture can be complex, requiring custom wrappers and careful handling of the component's lifecycle.
+    *   **Overkill:** For a simple context input field, using a full code editor might be architectural overkill.
+
+## 4. Conclusion & Path Forward
+
+The user's request is valid and would be a great UX improvement. However, due to the performance and implementation complexities described above, this feature is considered a significant piece of technical debt that requires a dedicated cycle to solve correctly.
+
+The current priority is to fix the more critical usability bugs like scrolling, focus management, and highlighting. Once the component is stable, we can revisit this challenge and dedicate a future cycle to implementing one of the more advanced solutions above.
+</file>
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -1735,7 +2158,7 @@ To elevate the Data Curation Environment beyond basic functionality, this plan i
 # Artifact A16: DCE - Phase 1 - UI & UX Refinements Plan
 # Date Created: Cycle 22
 # Author: AI Model
-# Updated on: C43 (Add Expand All button)
+# Updated on: C187 (Add Associated Files animation glitch)
 
 - **Key/Value for A0:**
 - **Description:** Covers visual and usability improvements like fixing panel layouts, resolving overflow bugs, adding loading indicators, and improving scrollbar visibility.
@@ -1755,33 +2178,7 @@ This document outlines a series of user interface (UI) and user experience (UX) 
 | UI-04 | **Visible Loading State** | As a user, when I perform a slow action like renaming a file or refreshing the explorer, I want to see a loading indicator, so I have clear feedback that the system is working and not frozen. | - A loading state (e.g., `isLoading`) is added to the main view's state. <br> - This state is set to `true` when a file system scan begins (e.g., on initial load or refresh). <br> - A loading indicator (e.g., a spinning icon) is displayed in the UI (e.g., in the header toolbar) while `isLoading` is true. <br> - The state is set to `false` when the file data is received from the backend. |
 | UI-05 | **Improved Scrollbar Gutter** | As a user, I find it difficult to distinguish between the extension's internal scrollbar and the main VS Code scrollbar when they are side-by-side. I want a clearer visual separation between them. | - A subtle vertical border (`border-right`) is added to the main file tree container. <br> - This creates a persistent, visible dividing line between the two scrollable areas, making it easier to position the mouse. |
 | UI-06 | **Expand All Button** | As a user, I want an "Expand All" button in the toolbar, so I can quickly see all files in the project without manually clicking every folder. | - An "Expand All" button is added to the main header toolbar. <br> - Clicking it expands every collapsed folder in the file tree. <br> - The button complements the existing "Collapse All" button. |
-
-## 3. Technical Implementation Plan
-
-1.  **Layout Fixes (`view.scss`):**
-    *   **Header:** Inspect the `.view-header` and `.toolbar` classes. Remove any unnecessary `margin` or `padding`. Consolidate into a single flex container with `justify-content: space-between` if the title is to be included, or simply adjust the container of the toolbar.
-    *   **Overflow:** This is a classic flexbox problem. The main container (`.view-container`) should be `display: flex; flex-direction: column; height: 100vh;`. The content area (`.file-tree-container`) must have `flex-grow: 1;` and crucially `min-height: 0;` to allow it to shrink. The "Selected Items" panel (`.selected-files-panel`) should have `flex-shrink: 0;` and `overflow-y: auto;` on its list container.
-    *   **Scrollbar Gutter:** Add `border-right: 1px solid var(--vscode-panel-border);` to the `.file-tree-container`.
-
-2.  **Loading Indicator (`view.tsx`):**
-    *   Add `const [isLoading, setIsLoading] = useState(true);`.
-    *   Set `setIsLoading(true)` at the start of the `requestFiles` function.
-    *   Set `setIsLoading(false)` inside the `handleFileResponse` message handler after files are received and set.
-    *   In the JSX for the `.toolbar`, add conditional rendering: `{isLoading && <SpinnerComponent />}`. The spinner can be an SVG or a component using `react-icons`.
-
-3.  **Resizable Panel:**
-    *   This is the most complex part of this plan. It typically requires a custom React hook or component.
-    *   An invisible `div` will be placed on the top border of the panel.
-    *   `onMouseDown`, `onMouseMove`, and `onMouseUp` event listeners will be used to track the drag gesture and calculate the new height for the panel.
-    *   The height will be applied as an inline style to the panel.
-    *   This feature will be implemented after the more critical bug fixes are complete.
-
-4.  **Expand All (`view.tsx`, `TreeView.tsx`):**
-    *   Add an "Expand All" button to the toolbar in `view.tsx`.
-    *   Add a new state trigger: `const [expandAllTrigger, setExpandAllTrigger] = useState(0);`.
-    *   The button's `onClick` handler will call `setExpandAllTrigger(c => c + 1)`.
-    *   Pass the trigger down as a prop to `TreeView.tsx`.
-    *   In `TreeView.tsx`, a `useEffect` will listen for changes to `expandAllTrigger`. When it fires, it will recursively traverse the `data` prop, collect all directory paths, and call `setExpandedNodes` with the full list.
+| UI-07 | **Associated Files Animation Glitch** | As a user, I want the animated highlight on the "Associated Files" panel to be fully visible, so the guided workflow is clear. | - The top and left edges of the pulsing blue highlight are currently slightly obscured. <br> - A small `margin` will be added to the `.collapsible-section-inner` class to provide space for the `box-shadow` to render completely. |
 </file>
 
 <file path="src/Artifacts/A17. DCE - Phase 1 - Advanced Tree View Features.md">
@@ -5016,7 +5413,7 @@ The "Cycle Context" and "Ephemeral Context" text areas in the Parallel Co-Pilot 
 # Artifact A69: DCE - Animated UI Workflow Guide
 # Date Created: C169
 # Author: AI Model & Curator
-# Updated on: C186 (Finalize workflow sequence)
+# Updated on: C187 (Correct final workflow steps)
 
 ## 1. Overview & Goal
 
@@ -5087,13 +5484,13 @@ The highlighting will follow this specific sequence of user actions:
 # Artifact A70: DCE - Git-Integrated Testing Workflow Plan
 # Date Created: C169
 # Author: AI Model & Curator
-# Updated on: C186 (Update post-baseline workflow step)
+# Updated on: C187 (Add two-button Git Init dialog)
 
 ## 1. Overview & Goal
 
 A core part of the DCE workflow involves accepting an AI-generated response and testing it in the live workspace. If the response introduces bugs, the user must manually revert the changes. The goal of this feature is to automate this "test and revert" loop by deeply integrating with Git. This will provide a one-click method to create a baseline commit before testing and a one-click method to restore that baseline if the test fails.
 
-**Status (C186):** In Progress.
+**Status (C187):** In Progress.
 
 ## 2. User Stories
 
@@ -5102,7 +5499,7 @@ A core part of the DCE workflow involves accepting an AI-generated response and 
 | P2-GIT-01 | **Create Baseline** | As a developer, after accepting an AI response but before testing it, I want to click a "Baseline (Commit)" button to create a Git commit, so I have a safe restore point. | - A "Baseline (Commit)" button is available in the response acceptance header. <br> - Clicking it executes `git add .` and `git commit -m "DCE Baseline: Cycle [currentCycle] - [cycleTitle]"`. <br> - A "Successfully created baseline commit" notification is shown. |
 | P2-GIT-02 | **Restore Baseline** | As a developer, after testing an AI response and finding issues, I want to click a "Restore Baseline" button to discard all changes, so I can quickly test a different response. | - A "Restore Baseline" button is available. <br> - Clicking it executes `git restore .`. <br> - The restore operation must **exclude** DCE-specific state files (e.g., `.vscode/dce_history.json`) to prevent data loss. |
 | P2-GIT-03 | **State-Aware Baseline** | As a developer, I don't want to be prompted to create a baseline if my project is already in a clean state, and I want clear feedback if I try to baseline an already-clean repository. | - Before highlighting the "Baseline" button, the extension checks the `git status`. <br> - If the working tree is clean, the "Baseline" step in the animated workflow is skipped. <br> - If the user manually clicks "Baseline" on a clean tree, a message like "Already baselined" is shown. |
-| P2-GIT-04 | **Guided Git Initialization** | As a new user who hasn't initialized a Git repository, when I click "Baseline," I want to see a clear error message that tells me what's wrong and guides me to the solution. | - If `git` is not initialized, clicking "Baseline" shows a `vscode.window.showErrorMessage`. <br> - The message explains that the folder is not a Git repository. <br> - The message includes an "Open README Guide" button that, when clicked, opens the project's `src/Artifacts/README.md` file, which contains instructions on how to run `git init`. |
+| P2-GIT-04 | **Guided Git Initialization** | As a new user who hasn't initialized a Git repository, when I click "Baseline," I want to see a clear error message that tells me what's wrong and gives me the option to fix it with one click. | - If `git` is not initialized, clicking "Baseline" shows a `vscode.window.showErrorMessage`. <br> - The message explains that the folder is not a Git repository. <br> - The message includes an "Open README Guide" button that opens the project's `README.md`. <br> - The message also includes an "Initialize Repository" button that, when clicked, automatically runs `git init` in the workspace. |
 | P2-GIT-05 | **Post-Baseline Workflow** | As a developer, after a successful baseline is created, I want the animated guide to immediately advance to the next step, so I know what to do next. | - After a successful baseline commit, the animated workflow highlight immediately moves to the "Select All" button in the "Associated Files" list. |
 
 ## 3. Feasibility Analysis
@@ -5123,6 +5520,7 @@ A core part of the DCE workflow involves accepting an AI-generated response and 
     *   `ClientToServerChannel.RequestGitBaseline`: Payload `{ commitMessage: string }`.
     *   `ClientToServerChannel.RequestGitRestore`: No payload.
     *   `ClientToServerChannel.RequestGitStatus`: No payload.
+    *   `ClientToServerChannel.RequestGitInit`: (New) No payload.
     *   `ServerToClientChannel.SendGitStatus`: Payload `{ isClean: boolean }`.
     *   `ServerToClientChannel.NotifyGitOperationResult`: Payload `{ success: boolean; message: string; }`. This channel is critical for the backend to provide explicit feedback to the frontend's workflow state machine.
 
@@ -5133,10 +5531,11 @@ A core part of the DCE workflow involves accepting an AI-generated response and 
         *   Checks the status first. If clean, it returns a specific "Already baselined" result.
         *   Otherwise, it executes `git add .` and `git commit -m "..."`.
         *   It returns a result object (e.g., `{ success: true, message: '...' }`).
-        *   **Crucially, it will have a specific `catch` block for "not a git repository" errors. This block will trigger the user-facing `showErrorMessage` with the "Open README" button.**
+        *   **Crucially, it will have a specific `catch` block for "not a git repository" errors. This block will trigger the user-facing `showErrorMessage` with the two action buttons.**
     *   **`handleGitRestoreRequest()`:**
         *   Executes `git restore -- . ':(exclude).vscode/dce_history.json'`.
         *   Returns a result object.
+    *   **`handleGitInitRequest()`:** (New) A new handler that executes `git init` and returns a success/failure result.
 
 3.  **Frontend (`view.tsx`):**
     *   The frontend will request the Git status at appropriate times to drive the workflow state.
@@ -5366,6 +5765,123 @@ This is a complex feature that requires overriding the browser's default undo/re
     *   The `NumberedTextarea` component will need to be updated to accept the new, more complex `onKeyDown` handler.
 
 This approach will provide the robust, per-input undo/redo functionality required for a professional user experience.
+</file>
+
+<file path="src/Artifacts/A75. DCE - Text Area Component A-B-C Test Plan.md">
+# Artifact A75: DCE - Text Area Component A-B-C Test Plan
+# Date Created: C179
+# Author: AI Model & Curator
+# Updated on: C180 (Acknowledge word-wrap limitation)
+
+- **Key/Value for A0:**
+- **Description:** A plan to create a test harness for the `NumberedTextarea` component to diagnose and fix persistent scrolling and alignment bugs.
+- **Tags:** plan, process, debugging, troubleshooting, ui, ux, react
+
+## 1. Overview & Goal
+
+The `NumberedTextarea` component, used for the "Cycle Context" and "Ephemeral Context" fields in the Parallel Co-Pilot Panel, has been a persistent source of UI bugs across multiple cycles (C1, C2, C3, C167, C174). The primary issues are a lack of synchronized scrolling between the line numbers and the text content, and a misalignment of the cursor and text selection, making the component difficult to use.
+
+The goal of this plan is to apply the "Original-A-B-C" testing strategy, as defined in `A51`, to definitively diagnose and resolve these issues. We will create a test harness within the PCPP that allows for parallel testing of the original component and three new, isolated test components, each attempting a different solution.
+
+## 2. Known Limitation: Word-Wrap Line Numbering
+
+As of Cycle 4, it has been observed that the current architecture of the `NumberedTextarea` (and all proposed test variants) does not correctly handle line numbering for word-wrapped text. The component counts lines based on newline characters (`\n`), not on how the text visually wraps in the view. This means a single line of text that wraps into three visual lines will only get one line number.
+
+**This is a known limitation.** A true fix for this requires a significantly more complex architecture, likely involving rendering text into a hidden element and measuring the resulting line boxes. For the current development phase, the priority is to fix the blocking usability bugs (scrolling, focus, performance). The word-wrap numbering issue will be deferred to a future cycle dedicated to advanced component architecture.
+
+## 3. The Strategy
+
+### 3.1. Test Harness Implementation
+The main `parallel-copilot.view/view.tsx` component will be refactored to include a new "Test Harness" mode.
+-   A new state, `activeTestView`, will control which view is active: `'Original'`, `'TestA'`, `'TestB'`, or `'TestC'`.
+-   A simple tab bar UI will be added to switch between these views.
+-   The "Original" view will render the current, fully-featured PCPP layout.
+-   The other views will render the isolated test components.
+
+### 3.2. Isolated Test Components
+Three new test components will be created to isolate and test specific variables.
+
+-   **Test A (`TestPane1.tsx`): Synchronized Scrolling**
+    -   **Hypothesis:** The scrolling is failing because the `onScroll` event is not being correctly used to synchronize the `scrollTop` of the line number gutter and the text area.
+    -   **Implementation:** This component will feature a barebones `textarea` next to a `div` for line numbers. It will implement a robust `onScroll` handler that programmatically sets the `scrollTop` of the line number gutter, with extensive logging to confirm the event is firing and the values are changing.
+
+-   **Test B (`TestPane2.tsx`): Pixel-Perfect Alignment**
+    -   **Hypothesis:** The cursor and selection are misaligned due to subtle differences in CSS properties (`font-family`, `font-size`, `line-height`, `padding`, `box-sizing`) between the transparent `textarea` and the underlying `div` that displays the highlighted text.
+    -   **Implementation:** This component will implement the overlay approach. It will meticulously ensure that every single font and box-model CSS property is identical across both elements. It will contain no complex logic, only the minimal structure needed to test for visual alignment.
+
+-   **Test C (`TestPane3.tsx`): Combined & Cleaned Solution**
+    -   **Hypothesis:** A clean implementation combining the lessons from Test A and Test B will provide a fully functional component.
+    -   **Implementation:** This component will integrate the synchronized scrolling from Test A with the pixel-perfect styling from Test B into a new, clean version of the `NumberedTextarea` component, free from any other complex logic from the main view.
+
+## 4. Cleanup Process
+Once a working pattern is identified in a test component:
+1.  **Codify Findings:** The successful pattern and the root cause of the failure will be documented in `A11. DCE - Regression Case Studies`.
+2.  **Integrate Solution:** The original `NumberedTextarea.tsx` component will be refactored to use the successful pattern.
+3.  **Remove Test Artifacts:** The test harness UI and the `TestPane*.tsx` component files will be removed from the project.
+</file>
+
+<file path="src/Artifacts/A76. DCE - Word Wrap Line Numbering Challenges.md">
+# Artifact A76: DCE - Word Wrap Line Numbering Challenges
+# Date Created: C181
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** Explains the technical complexity of implementing line numbers that accurately reflect visual word wrapping in a textarea component.
+- **Tags:** documentation, technical debt, ui, ux, word wrap, line numbers
+
+## 1. Problem Statement
+
+The user has requested that the line numbers in the `NumberedTextarea` component should respect word wrapping. Currently, the component counts lines based on newline characters (`\n`). This means a single logical line that visually wraps into three lines in the UI still only receives one line number. The user correctly points out that this is not ideal.
+
+This document explains why this seemingly simple feature is technically complex to implement in a standard HTML `<textarea>` and outlines potential solutions.
+
+## 2. The Core Challenge: Logical vs. Visual Lines
+
+The fundamental issue is the difference between how a `<textarea>` handles content versus how the browser renders it.
+
+*   **Logical Lines:** The `<textarea>` element's `value` is a simple string. The only concept of a "line" it has is the presence of a newline character (`\n`). When we split the string by `\n`, we are counting these logical lines. This is what our current implementation does, and it's fast and simple.
+
+*   **Visual Lines:** Word wrapping is a purely visual phenomenon handled by the browser's rendering engine. The browser calculates how many words fit on a line based on the element's width, font size, font family, letter spacing, and word spacing. It then visually breaks the line and renders the overflow text below. **Crucially, the browser does not expose a simple API to ask, "How many visual lines are you currently rendering for this text?"**
+
+Because we cannot directly query the rendered line count, we must resort to indirect methods to calculate it.
+
+## 3. Potential Solutions & Their Complexity
+
+Here are the common approaches to solving this problem, each with its own trade-offs.
+
+### Solution A: The Hidden `div` Measurement Technique
+
+This is the most common and reliable method.
+
+1.  **How it Works:**
+    *   Create a hidden `div` element off-screen or with `visibility: hidden`.
+    *   Apply the *exact same* CSS styles to this `div` as the `<textarea>` (width, font, padding, etc.).
+    *   Copy the content of the `<textarea>` into the `innerHTML` of the hidden `div`.
+    *   Calculate the number of visual lines by dividing the `scrollHeight` of the hidden `div` by its `line-height`.
+
+2.  **Complexity & Downsides:**
+    *   **Performance:** This calculation must be run on every single keystroke, as any character change could affect word wrapping. Copying large amounts of text into the DOM and forcing a browser re-layout on every key press can be performance-intensive and may cause input lag.
+    *   **Fragility:** The CSS styles must be perfectly synchronized. Any discrepancy in padding, border, font-size, etc., will result in an incorrect calculation.
+    *   **Implementation:** Requires careful DOM manipulation within our React component, managing refs to both the textarea and the hidden div, and ensuring the calculation is efficient.
+
+### Solution B: Using a Full-Fledged Code Editor Component
+
+Instead of building our own, we could replace the `<textarea>` with a lightweight, embeddable code editor library.
+
+1.  **How it Works:**
+    *   Integrate a library like **CodeMirror** or **Monaco Editor** (the editor that powers VS Code itself, though it's much heavier).
+    *   These components are not simple textareas; they are complete editing surfaces that render each line individually. Because they control the rendering process, they have full knowledge of visual lines and can provide accurate line numbering out of the box.
+
+2.  **Complexity & Downsides:**
+    *   **Bundle Size:** These libraries are significantly larger than a simple React component, which would increase the extension's load time.
+    *   **Integration:** Integrating them into our existing React and VS Code Webview architecture can be complex, requiring custom wrappers and careful handling of the component's lifecycle.
+    *   **Overkill:** For a simple context input field, using a full code editor might be architectural overkill.
+
+## 4. Conclusion & Path Forward
+
+The user's request is valid and would be a great UX improvement. However, due to the performance and implementation complexities described above, this feature is considered a significant piece of technical debt that requires a dedicated cycle to solve correctly.
+
+The current priority is to fix the more critical usability bugs like scrolling, focus management, and highlighting. Once the component is stable, we can revisit this challenge and dedicate a future cycle to implementing one of the more advanced solutions above.
 </file>
 
 <file path="src/Artifacts/A149. Local LLM Integration Plan.md">
@@ -20496,7 +21012,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 </file>
 
 <file path="src/backend/commands/commands.ts">
-// Updated on: C115 (Fix fsService reference)
+// Updated on: C187 (Add gitInit command)
 import * as vscode from 'vscode';
 import { Services } from '../services/services';
 import { serverIPCs } from '@/client/views';
@@ -20578,7 +21094,6 @@ export const commands = [
             const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
             if (serverIpc) {
                 Services.loggerService.log("Executing dce.refreshTree command.");
-                // C115 Fix: Use fileTreeService instead of fsService
                 Services.fileTreeService.handleWorkspaceFilesRequest(serverIpc, true);
             } else {
                 Services.loggerService.warn("Could not refresh tree: serverIpc not found.");
@@ -20590,6 +21105,13 @@ export const commands = [
         callback: () => {
             Services.loggerService.log("Executing dce.openParallelCopilot command to open WebviewPanel.");
             vscode.commands.executeCommand('dce.showParallelCopilot');
+        }
+    },
+    {
+        commandId: 'dce.gitInit',
+        callback: () => {
+            Services.loggerService.log("Executing dce.gitInit command.");
+            Services.gitService.handleGitInitRequest();
         }
     }
 ];
@@ -21695,7 +22217,7 @@ export class FlattenerService {
 
 <file path="src/backend/services/git.service.ts">
 // src/backend/services/git.service.ts
-// Updated on: C186 (Add logging before sending IPC message)
+// Updated on: C187 (Add handleGitInitRequest and two-button dialog)
 import * as vscode from 'vscode';
 import { exec } from 'child_process';
 import * as path from 'path';
@@ -21705,7 +22227,7 @@ import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 
 export class GitService {
     private getWorkspaceRoot(): string | undefined {
-        return vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+        return vscode.workspace.workspaceFolders?.[0].uri.fsPath;
     }
 
     private async execGitCommand(command: string): Promise<{ stdout: string; stderr: string }> {
@@ -21729,6 +22251,16 @@ export class GitService {
         });
     }
 
+    public async handleGitInitRequest() {
+        Services.loggerService.log("Executing Git Init.");
+        try {
+            await this.execGitCommand('git init');
+            vscode.window.showInformationMessage("Successfully initialized Git repository. You can now create a baseline.");
+        } catch (error: any) {
+            vscode.window.showErrorMessage(`Failed to initialize Git repository: ${error.message}`);
+        }
+    }
+
     public async handleGitStatusRequest(serverIpc: ServerPostMessageManager) {
         Services.loggerService.log("Executing Git Status check.");
         try {
@@ -21736,7 +22268,6 @@ export class GitService {
             const isClean = stdout.trim() === '';
             serverIpc.sendToClient(ServerToClientChannel.SendGitStatus, { isClean });
         } catch (error) {
-            // Not a git repo, treat as not clean for workflow purposes
             serverIpc.sendToClient(ServerToClientChannel.SendGitStatus, { isClean: false });
         }
     }
@@ -21760,9 +22291,11 @@ export class GitService {
         } catch (error: any) {
             if (error.message.includes('fatal: not a git repository')) {
                 const openReadme = 'Open README Guide';
+                const initRepo = 'Initialize Repository';
                 vscode.window.showErrorMessage(
                     'This is not a Git repository. Please initialize it first to use the baseline feature.',
-                    openReadme
+                    openReadme,
+                    initRepo
                 ).then(selection => {
                     if (selection === openReadme) {
                         const workspaceRoot = this.getWorkspaceRoot();
@@ -21772,9 +22305,10 @@ export class GitService {
                                 vscode.window.showTextDocument(doc);
                             });
                         }
+                    } else if (selection === initRepo) {
+                        vscode.commands.executeCommand('dce.gitInit');
                     }
                 });
-                // Don't send a failure message, as the UI pop-up is the feedback
                 return; 
             }
             result = { success: false, message: `Git Baseline failed: ${error.message}` };
@@ -26162,7 +26696,7 @@ export default TestPane3;
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C182 (Fix onboarding textarea width)
+// Updated on: C187 (Add margin to collapsible section for animation)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -26339,7 +26873,7 @@ body {
 }
 
 .onboarding-textarea {
-    width: calc(100% - 15px); // Compensate for scrollbar
+    width: 100%;
     flex-grow: 1;
     background-color: var(--vscode-input-background);
     color: var(--vscode-input-foreground);
@@ -26349,6 +26883,7 @@ body {
     font-family: var(--vscode-editor-font-family);
     font-size: var(--vscode-editor-font-size);
     resize: none;
+    box-sizing: border-box;
     
     &:focus {
         outline: 1px solid var(--vscode-focusBorder);
@@ -27009,6 +27544,7 @@ body {
     border: 1px solid var(--vscode-panel-border);
     border-radius: 4px;
     width: 100%;
+    margin: 2px; /* C187 Fix: Add margin for animation highlight */
 }
 
 .collapsible-header-inner {
@@ -27081,7 +27617,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C186 (Implement full animated workflow state machine)
+// Updated on: C187 (Correct final workflow steps)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './view.scss';
@@ -27163,9 +27699,7 @@ const App = () => {
     React.useEffect(() => { const handleVisibilityChange = () => { if (document.visibilityState === 'hidden') saveCurrentCycleState(); }; document.addEventListener('visibilitychange', handleVisibilityChange); return () => document.removeEventListener('visibilitychange', handleVisibilityChange); }, [saveCurrentCycleState]);
     const parseAllTabs = React.useCallback(() => { setTabs(prevTabs => { const allFilePaths = new Set<string>(); const updatedTabs = { ...prevTabs }; let needsUpdate = false; Object.values(updatedTabs).forEach(tabState => { if (tabState.rawContent && !tabState.parsedContent) { needsUpdate = true; const parsed = parseResponse(tabState.rawContent); tabState.parsedContent = parsed; parsed.filesUpdated.forEach(file => allFilePaths.add(file)); parsed.files.forEach(file => { const lang = path.extname(file.path).substring(1) || 'plaintext'; const id = `${file.path}::${file.content}`; clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id }); }); } else if (tabState.parsedContent) { tabState.parsedContent.filesUpdated.forEach(file => allFilePaths.add(file)); } }); if (allFilePaths.size > 0) clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) }); return needsUpdate ? updatedTabs : prevTabs; }); }, [clientIpc]);
     
-    React.useEffect(() => {
-        logger.log(`[WORKFLOW] Step changed to: ${workflowStep}`);
-    }, [workflowStep]);
+    React.useEffect(() => { logger.log(`[WORKFLOW] Step changed to: ${workflowStep}`); }, [workflowStep]);
 
     React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string) => { setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setCycleContextHeight(cycleData.cycleContextHeight || 100); setEphemeralContextHeight(cycleData.ephemeralContextHeight || 100); }; clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, ({ filePath, originalTokens, modifiedTokens, similarity }) => { setComparisonMetrics(prev => new Map(prev).set(filePath, { originalTokens, modifiedTokens, similarity })); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); 
         
@@ -27193,11 +27727,10 @@ const App = () => {
     const isReadyForNextCycle = React.useMemo(() => { const hasTitle = cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== ''; const hasContext = cycleContext.trim() !== ''; const hasSelectedResponse = selectedResponseId !== null; return hasTitle && hasContext && hasSelectedResponse; }, [cycleTitle, cycleContext, selectedResponseId]);
     const isNewCycleButtonDisabled = React.useMemo(() => { if (currentCycle === 0) return true; if (currentCycle !== maxCycle) return true; return !isReadyForNextCycle; }, [currentCycle, maxCycle, isReadyForNextCycle]);
     
-    // Workflow State Machine Logic
     React.useEffect(() => {
         if (workflowStep === null) return;
         if (workflowStep === 'readyForNewCycle') return;
-        if (workflowStep === 'awaitingGeneratePrompt') { if (isReadyForNextCycle) setWorkflowStep('readyForNewCycle'); return; }
+        if (workflowStep === 'awaitingGeneratePrompt') { if (isReadyForNextCycle) setWorkflowStep('awaitingGeneratePrompt'); return; }
         if (workflowStep === 'awaitingCycleTitle') { if (cycleTitle.trim() && cycleTitle.trim() !== 'New Cycle') { setWorkflowStep('awaitingGeneratePrompt'); } return; }
         if (workflowStep === 'awaitingCycleContext') { if (cycleContext.trim()) { setWorkflowStep('awaitingCycleTitle'); } return; }
         if (workflowStep === 'awaitingAccept') { return; }
@@ -28024,545 +28557,5 @@ export function getContext() {
 }
 
 export function deactivate() {}
-</file>
-
-<file path=".gitignore">
-node_modules
-package-lock.json
-dist
-out
-*.vsix
-.vscode-test/
-.vscode/
-The-Creator-AI-main/
-prompt.md
-.vscode/dce_cache/
-</file>
-
-<file path=".vscodeignore">
-# This file tells the VS Code packaging tool which files to ignore.
-# We are removing 'node_modules' because our external dependencies (like xlsx)
-# need to be included in the final package to be available at runtime.
-# The `vsce` tool is smart enough to only bundle production dependencies.
-
-src
-.gitignore
-webpack.config.js
-tsconfig.json
-**/*.map
-**/*.ts
-</file>
-
-<file path="package.json">
-{
-    "name": "data-curation-environment",
-    "publisher": "DCE-Developer",
-    "displayName": "Data Curation Environment",
-    "description": "A VS Code extension for curating context for Large Language Models.",
-    "version": "0.0.8",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/dgerabagi/data-curation-environment.git"
-    },
-    "engines": {
-        "vscode": "^1.90.0"
-    },
-    "categories": [
-        "Other"
-    ],
-    "activationEvents": [
-        "onView:data-curation-environment",
-        "onCommand:dce.showParallelCopilot"
-    ],
-    "main": "./dist/extension.js",
-    "contributes": {
-        "commands": [
-            {
-                "command": "dce.saveCurrentSelection",
-                "title": "DCE: Save Current Selection Set",
-                "category": "DCE"
-            },
-            {
-                "command": "dce.loadSelectionSet",
-                "title": "DCE: Load Selection Set",
-                "category": "DCE"
-            },
-            {
-                "command": "dce.manageSelectionSets",
-                "title": "DCE: Manage Selection Sets",
-                "category": "DCE"
-            },
-            {
-                "command": "dce.refreshTree",
-                "title": "DCE: Refresh Explorer",
-                "category": "DCE"
-            },
-            {
-                "command": "dce.openParallelCopilot",
-                "title": "DCE: Open Parallel Co-Pilot",
-                "category": "DCE",
-                "icon": "$(multiple-windows)"
-            },
-            {
-                "command": "dce.showParallelCopilot",
-                "title": "DCE: Show Parallel Co-Pilot"
-            }
-        ],
-        "viewsContainers": {
-            "activitybar": [
-                {
-                    "id": "data-curation-environment",
-                    "title": "Data Curation",
-                    "icon": "public/spiral.svg"
-                },
-                {
-                    "id": "dce-parallel-copilot-container",
-                    "title": "DCE Parallel Co-Pilot",
-                    "icon": "public/copilot.svg"
-                }
-            ]
-        },
-        "views": {
-            "data-curation-environment": [
-                {
-                    "type": "webview",
-                    "id": "viewType.sidebar.contextChooser",
-                    "name": "Data Curation"
-                }
-            ]
-        },
-        "menus": {
-            "view/title": [
-                {
-                    "command": "dce.openParallelCopilot",
-                    "when": "view == viewType.sidebar.contextChooser",
-                    "group": "navigation"
-                }
-            ],
-            "activityBar/view/title": [
-                 {
-                    "command": "dce.showParallelCopilot",
-                    "when": "viewContainer == dce-parallel-copilot-container"
-                }
-            ]
-        }
-    },
-    "scripts": {
-        "vscode:prepublish": "npm run package",
-        "compile": "webpack",
-        "watch": "webpack --watch",
-        "package": "webpack --mode production --devtool hidden-source-map",
-        "lint": "eslint src --ext ts"
-    },
-    "devDependencies": {
-        "@types/node": "18.x",
-        "@types/vscode": "^1.90.0",
-        "@typescript-eslint/eslint-plugin": "^7.7.1",
-        "@typescript-eslint/parser": "^7.7.1",
-        "eslint": "^8.57.0",
-        "ts-loader": "^9.5.1",
-        "typescript": "^5.4.5",
-        "webpack": "^5.91.0",
-        "webpack-cli": "^5.1.4",
-        "copy-webpack-plugin": "^12.0.2",
-        "mini-css-extract-plugin": "^2.9.0",
-        "style-loader": "^4.0.0",
-        "css-loader": "^7.1.2",
-        "sass-loader": "^16.0.1",
-        "sass": "^1.78.0",
-        "postcss-loader": "^8.1.1",
-        "babel-loader": "^9.1.3",
-        "@babel/preset-react": "^7.24.7",
-        "@babel/preset-typescript": "^7.24.7",
-        "process": "^0.11.10",
-        "path-browserify": "^1.0.1"
-    },
-    "dependencies": {
-        "@wooorm/starry-night": "^3.8.0",
-        "hast-util-to-html": "^9.0.1",
-        "react": "^18.3.1",
-        "react-dom": "^18.3.1",
-        "react-icons": "^5.3.0",
-        "react-markdown": "^9.0.1",
-        "rxjs": "^7.8.1",
-        "reflect-metadata": "^0.2.2",
-        "pdf-parse": "^1.1.1",
-        "xlsx": "^0.18.5",
-        "mammoth": "^1.8.0",
-        "diff": "^5.2.0",
-        "@types/diff": "^5.2.1"
-    }
-}
-</file>
-
-<file path="tsconfig.json">
-{
-    "compilerOptions": {
-        "module": "esnext",
-        "moduleResolution": "bundler",
-        "target": "ESNext",
-        "lib": ["ES2022", "DOM"],
-        "jsx": "react",
-        "sourceMap": true,
-        "rootDir": "src",
-        "strict": false,
-        "baseUrl": "./",
-        "paths": {
-            "@/*": ["src/*"]
-        },
-        "experimentalDecorators": true,
-        "allowSyntheticDefaultImports": true
-    },
-    "include": [
-        "src/**/*.ts",
-        "src/**/*.tsx"
-    ],
-    "exclude": [
-        "node_modules",
-        ".vscode-test",
-        "The-Creator-AI-main"
-    ]
-}
-</file>
-
-<file path="webpack.config.js">
-const path = require('path');
-const CopyPlugin = require("copy-webpack-plugin");
-const webpack = require('webpack');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
-/** @type {import('webpack').Configuration} */
-const baseConfig = {
-    mode: 'none',
-    resolve: {
-        extensions: ['.ts', '.js', '.tsx', '.jsx'],
-        alias: {
-            "@": path.resolve(__dirname, 'src'),
-        }
-    },
-    module: {
-        rules: [
-            {
-                test: /\.ts$/,
-                exclude: /node_modules/,
-                use: [{ loader: 'ts-loader' }]
-            },
-            {
-                test: /\.?ts.?(x)$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: "babel-loader",
-                    options: {
-                        presets: ['@babel/preset-react', '@babel/preset-typescript']
-                    }
-                }
-            },
-        ]
-    },
-    devtool: 'nosources-source-map',
-    infrastructureLogging: {
-        level: "log",
-    },
-};
-
-/** @type {import('webpack').Configuration} */
-const extensionConfig = {
-    ...baseConfig,
-    target: 'node',
-    entry: {
-        extension: './src/extension.ts',
-    },
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'extension.js',
-        libraryTarget: 'commonjs2'
-    },
-    externals: {
-        vscode: 'commonjs vscode',
-    },
-};
-
-/** @type {import('webpack').Configuration} */
-const webviewConfig = {
-    ...baseConfig,
-    target: 'web',
-    entry: {
-        contextChooserView: './src/client/views/context-chooser.view/view.tsx',
-        parallelCopilotView: './src/client/views/parallel-copilot.view/view.tsx',
-    },
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: '[name].js',
-        libraryTarget: 'commonjs2'
-    },
-    module: {
-        ...baseConfig.module,
-        rules: [
-            ...baseConfig.module.rules,
-            {
-                test: /\.s[ac]ss$/i,
-                use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
-            },
-        ]
-    },
-    resolve: {
-        ...baseConfig.resolve,
-        fallback: {
-            "path": require.resolve("path-browserify")
-        }
-    },
-    plugins: [
-        new MiniCssExtractPlugin({
-            filename: '[name].css'
-        }),
-        new CopyPlugin({
-            patterns: [
-                { from: "public", to: "public" },
-                { from: "node_modules/@wooorm/starry-night/style/both.css", to: "starry-night.css" },
-                // C164 Fix: Copy static artifacts needed by the backend into the dist folder.
-                { from: "src/Artifacts", to: "Artifacts" }
-            ],
-        }),
-        new webpack.ProvidePlugin({
-            process: 'process/browser',
-        }),
-    ],
-};
-
-module.exports = [extensionConfig, webviewConfig];
-</file>
-
-<file path="src/Artifacts/A75. DCE - Text Area Component A-B-C Test Plan.md">
-# Artifact A75: DCE - Text Area Component A-B-C Test Plan
-# Date Created: C179
-# Author: AI Model & Curator
-# Updated on: C180 (Acknowledge word-wrap limitation)
-
-- **Key/Value for A0:**
-- **Description:** A plan to create a test harness for the `NumberedTextarea` component to diagnose and fix persistent scrolling and alignment bugs.
-- **Tags:** plan, process, debugging, troubleshooting, ui, ux, react
-
-## 1. Overview & Goal
-
-The `NumberedTextarea` component, used for the "Cycle Context" and "Ephemeral Context" fields in the Parallel Co-Pilot Panel, has been a persistent source of UI bugs across multiple cycles (C1, C2, C3, C167, C174). The primary issues are a lack of synchronized scrolling between the line numbers and the text content, and a misalignment of the cursor and text selection, making the component difficult to use.
-
-The goal of this plan is to apply the "Original-A-B-C" testing strategy, as defined in `A51`, to definitively diagnose and resolve these issues. We will create a test harness within the PCPP that allows for parallel testing of the original component and three new, isolated test components, each attempting a different solution.
-
-## 2. Known Limitation: Word-Wrap Line Numbering
-
-As of Cycle 4, it has been observed that the current architecture of the `NumberedTextarea` (and all proposed test variants) does not correctly handle line numbering for word-wrapped text. The component counts lines based on newline characters (`\n`), not on how the text visually wraps in the view. This means a single line of text that wraps into three visual lines will only get one line number.
-
-**This is a known limitation.** A true fix for this requires a significantly more complex architecture, likely involving rendering text into a hidden element and measuring the resulting line boxes. For the current development phase, the priority is to fix the blocking usability bugs (scrolling, focus, performance). The word-wrap numbering issue will be deferred to a future cycle dedicated to advanced component architecture.
-
-## 3. The Strategy
-
-### 3.1. Test Harness Implementation
-The main `parallel-copilot.view/view.tsx` component will be refactored to include a new "Test Harness" mode.
--   A new state, `activeTestView`, will control which view is active: `'Original'`, `'TestA'`, `'TestB'`, or `'TestC'`.
--   A simple tab bar UI will be added to switch between these views.
--   The "Original" view will render the current, fully-featured PCPP layout.
--   The other views will render the isolated test components.
-
-### 3.2. Isolated Test Components
-Three new test components will be created to isolate and test specific variables.
-
--   **Test A (`TestPane1.tsx`): Synchronized Scrolling**
-    -   **Hypothesis:** The scrolling is failing because the `onScroll` event is not being correctly used to synchronize the `scrollTop` of the line number gutter and the text area.
-    -   **Implementation:** This component will feature a barebones `textarea` next to a `div` for line numbers. It will implement a robust `onScroll` handler that programmatically sets the `scrollTop` of the line number gutter, with extensive logging to confirm the event is firing and the values are changing.
-
--   **Test B (`TestPane2.tsx`): Pixel-Perfect Alignment**
-    -   **Hypothesis:** The cursor and selection are misaligned due to subtle differences in CSS properties (`font-family`, `font-size`, `line-height`, `padding`, `box-sizing`) between the transparent `textarea` and the underlying `div` that displays the highlighted text.
-    -   **Implementation:** This component will implement the overlay approach. It will meticulously ensure that every single font and box-model CSS property is identical across both elements. It will contain no complex logic, only the minimal structure needed to test for visual alignment.
-
--   **Test C (`TestPane3.tsx`): Combined & Cleaned Solution**
-    -   **Hypothesis:** A clean implementation combining the lessons from Test A and Test B will provide a fully functional component.
-    -   **Implementation:** This component will integrate the synchronized scrolling from Test A with the pixel-perfect styling from Test B into a new, clean version of the `NumberedTextarea` component, free from any other complex logic from the main view.
-
-## 4. Cleanup Process
-Once a working pattern is identified in a test component:
-1.  **Codify Findings:** The successful pattern and the root cause of the failure will be documented in `A11. DCE - Regression Case Studies`.
-2.  **Integrate Solution:** The original `NumberedTextarea.tsx` component will be refactored to use the successful pattern.
-3.  **Remove Test Artifacts:** The test harness UI and the `TestPane*.tsx` component files will be removed from the project.
-</file>
-
-<file path="dist/Artifacts/A75. DCE - Text Area Component A-B-C Test Plan.md">
-# Artifact A75: DCE - Text Area Component A-B-C Test Plan
-# Date Created: C179
-# Author: AI Model & Curator
-# Updated on: C180 (Acknowledge word-wrap limitation)
-
-- **Key/Value for A0:**
-- **Description:** A plan to create a test harness for the `NumberedTextarea` component to diagnose and fix persistent scrolling and alignment bugs.
-- **Tags:** plan, process, debugging, troubleshooting, ui, ux, react
-
-## 1. Overview & Goal
-
-The `NumberedTextarea` component, used for the "Cycle Context" and "Ephemeral Context" fields in the Parallel Co-Pilot Panel, has been a persistent source of UI bugs across multiple cycles (C1, C2, C3, C167, C174). The primary issues are a lack of synchronized scrolling between the line numbers and the text content, and a misalignment of the cursor and text selection, making the component difficult to use.
-
-The goal of this plan is to apply the "Original-A-B-C" testing strategy, as defined in `A51`, to definitively diagnose and resolve these issues. We will create a test harness within the PCPP that allows for parallel testing of the original component and three new, isolated test components, each attempting a different solution.
-
-## 2. Known Limitation: Word-Wrap Line Numbering
-
-As of Cycle 4, it has been observed that the current architecture of the `NumberedTextarea` (and all proposed test variants) does not correctly handle line numbering for word-wrapped text. The component counts lines based on newline characters (`\n`), not on how the text visually wraps in the view. This means a single line of text that wraps into three visual lines will only get one line number.
-
-**This is a known limitation.** A true fix for this requires a significantly more complex architecture, likely involving rendering text into a hidden element and measuring the resulting line boxes. For the current development phase, the priority is to fix the blocking usability bugs (scrolling, focus, performance). The word-wrap numbering issue will be deferred to a future cycle dedicated to advanced component architecture.
-
-## 3. The Strategy
-
-### 3.1. Test Harness Implementation
-The main `parallel-copilot.view/view.tsx` component will be refactored to include a new "Test Harness" mode.
--   A new state, `activeTestView`, will control which view is active: `'Original'`, `'TestA'`, `'TestB'`, or `'TestC'`.
--   A simple tab bar UI will be added to switch between these views.
--   The "Original" view will render the current, fully-featured PCPP layout.
--   The other views will render the isolated test components.
-
-### 3.2. Isolated Test Components
-Three new test components will be created to isolate and test specific variables.
-
--   **Test A (`TestPane1.tsx`): Synchronized Scrolling**
-    -   **Hypothesis:** The scrolling is failing because the `onScroll` event is not being correctly used to synchronize the `scrollTop` of the line number gutter and the text area.
-    -   **Implementation:** This component will feature a barebones `textarea` next to a `div` for line numbers. It will implement a robust `onScroll` handler that programmatically sets the `scrollTop` of the line number gutter, with extensive logging to confirm the event is firing and the values are changing.
-
--   **Test B (`TestPane2.tsx`): Pixel-Perfect Alignment**
-    -   **Hypothesis:** The cursor and selection are misaligned due to subtle differences in CSS properties (`font-family`, `font-size`, `line-height`, `padding`, `box-sizing`) between the transparent `textarea` and the underlying `div` that displays the highlighted text.
-    -   **Implementation:** This component will implement the overlay approach. It will meticulously ensure that every single font and box-model CSS property is identical across both elements. It will contain no complex logic, only the minimal structure needed to test for visual alignment.
-
--   **Test C (`TestPane3.tsx`): Combined & Cleaned Solution**
-    -   **Hypothesis:** A clean implementation combining the lessons from Test A and Test B will provide a fully functional component.
-    -   **Implementation:** This component will integrate the synchronized scrolling from Test A with the pixel-perfect styling from Test B into a new, clean version of the `NumberedTextarea` component, free from any other complex logic from the main view.
-
-## 4. Cleanup Process
-Once a working pattern is identified in a test component:
-1.  **Codify Findings:** The successful pattern and the root cause of the failure will be documented in `A11. DCE - Regression Case Studies`.
-2.  **Integrate Solution:** The original `NumberedTextarea.tsx` component will be refactored to use the successful pattern.
-3.  **Remove Test Artifacts:** The test harness UI and the `TestPane*.tsx` component files will be removed from the project.
-</file>
-
-<file path="src/Artifacts/A76. DCE - Word Wrap Line Numbering Challenges.md">
-# Artifact A76: DCE - Word Wrap Line Numbering Challenges
-# Date Created: C181
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** Explains the technical complexity of implementing line numbers that accurately reflect visual word wrapping in a textarea component.
-- **Tags:** documentation, technical debt, ui, ux, word wrap, line numbers
-
-## 1. Problem Statement
-
-The user has requested that the line numbers in the `NumberedTextarea` component should respect word wrapping. Currently, the component counts lines based on newline characters (`\n`). This means a single logical line that visually wraps into three lines in the UI still only receives one line number. The user correctly points out that this is not ideal.
-
-This document explains why this seemingly simple feature is technically complex to implement in a standard HTML `<textarea>` and outlines potential solutions.
-
-## 2. The Core Challenge: Logical vs. Visual Lines
-
-The fundamental issue is the difference between how a `<textarea>` handles content versus how the browser renders it.
-
-*   **Logical Lines:** The `<textarea>` element's `value` is a simple string. The only concept of a "line" it has is the presence of a newline character (`\n`). When we split the string by `\n`, we are counting these logical lines. This is what our current implementation does, and it's fast and simple.
-
-*   **Visual Lines:** Word wrapping is a purely visual phenomenon handled by the browser's rendering engine. The browser calculates how many words fit on a line based on the element's width, font size, font family, letter spacing, and word spacing. It then visually breaks the line and renders the overflow text below. **Crucially, the browser does not expose a simple API to ask, "How many visual lines are you currently rendering for this text?"**
-
-Because we cannot directly query the rendered line count, we must resort to indirect methods to calculate it.
-
-## 3. Potential Solutions & Their Complexity
-
-Here are the common approaches to solving this problem, each with its own trade-offs.
-
-### Solution A: The Hidden `div` Measurement Technique
-
-This is the most common and reliable method.
-
-1.  **How it Works:**
-    *   Create a hidden `div` element off-screen or with `visibility: hidden`.
-    *   Apply the *exact same* CSS styles to this `div` as the `<textarea>` (width, font, padding, etc.).
-    *   Copy the content of the `<textarea>` into the `innerHTML` of the hidden `div`.
-    *   Calculate the number of visual lines by dividing the `scrollHeight` of the hidden `div` by its `line-height`.
-
-2.  **Complexity & Downsides:**
-    *   **Performance:** This calculation must be run on every single keystroke, as any character change could affect word wrapping. Copying large amounts of text into the DOM and forcing a browser re-layout on every key press can be performance-intensive and may cause input lag.
-    *   **Fragility:** The CSS styles must be perfectly synchronized. Any discrepancy in padding, border, font-size, etc., will result in an incorrect calculation.
-    *   **Implementation:** Requires careful DOM manipulation within our React component, managing refs to both the textarea and the hidden div, and ensuring the calculation is efficient.
-
-### Solution B: Using a Full-Fledged Code Editor Component
-
-Instead of building our own, we could replace the `<textarea>` with a lightweight, embeddable code editor library.
-
-1.  **How it Works:**
-    *   Integrate a library like **CodeMirror** or **Monaco Editor** (the editor that powers VS Code itself, though it's much heavier).
-    *   These components are not simple textareas; they are complete editing surfaces that render each line individually. Because they control the rendering process, they have full knowledge of visual lines and can provide accurate line numbering out of the box.
-
-2.  **Complexity & Downsides:**
-    *   **Bundle Size:** These libraries are significantly larger than a simple React component, which would increase the extension's load time.
-    *   **Integration:** Integrating them into our existing React and VS Code Webview architecture can be complex, requiring custom wrappers and careful handling of the component's lifecycle.
-    *   **Overkill:** For a simple context input field, using a full code editor might be architectural overkill.
-
-## 4. Conclusion & Path Forward
-
-The user's request is valid and would be a great UX improvement. However, due to the performance and implementation complexities described above, this feature is considered a significant piece of technical debt that requires a dedicated cycle to solve correctly.
-
-The current priority is to fix the more critical usability bugs like scrolling, focus management, and highlighting. Once the component is stable, we can revisit this challenge and dedicate a future cycle to implementing one of the more advanced solutions above.
-</file>
-
-<file path="dist/Artifacts/A76. DCE - Word Wrap Line Numbering Challenges.md">
-# Artifact A76: DCE - Word Wrap Line Numbering Challenges
-# Date Created: C181
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** Explains the technical complexity of implementing line numbers that accurately reflect visual word wrapping in a textarea component.
-- **Tags:** documentation, technical debt, ui, ux, word wrap, line numbers
-
-## 1. Problem Statement
-
-The user has requested that the line numbers in the `NumberedTextarea` component should respect word wrapping. Currently, the component counts lines based on newline characters (`\n`). This means a single logical line that visually wraps into three lines in the UI still only receives one line number. The user correctly points out that this is not ideal.
-
-This document explains why this seemingly simple feature is technically complex to implement in a standard HTML `<textarea>` and outlines potential solutions.
-
-## 2. The Core Challenge: Logical vs. Visual Lines
-
-The fundamental issue is the difference between how a `<textarea>` handles content versus how the browser renders it.
-
-*   **Logical Lines:** The `<textarea>` element's `value` is a simple string. The only concept of a "line" it has is the presence of a newline character (`\n`). When we split the string by `\n`, we are counting these logical lines. This is what our current implementation does, and it's fast and simple.
-
-*   **Visual Lines:** Word wrapping is a purely visual phenomenon handled by the browser's rendering engine. The browser calculates how many words fit on a line based on the element's width, font size, font family, letter spacing, and word spacing. It then visually breaks the line and renders the overflow text below. **Crucially, the browser does not expose a simple API to ask, "How many visual lines are you currently rendering for this text?"**
-
-Because we cannot directly query the rendered line count, we must resort to indirect methods to calculate it.
-
-## 3. Potential Solutions & Their Complexity
-
-Here are the common approaches to solving this problem, each with its own trade-offs.
-
-### Solution A: The Hidden `div` Measurement Technique
-
-This is the most common and reliable method.
-
-1.  **How it Works:**
-    *   Create a hidden `div` element off-screen or with `visibility: hidden`.
-    *   Apply the *exact same* CSS styles to this `div` as the `<textarea>` (width, font, padding, etc.).
-    *   Copy the content of the `<textarea>` into the `innerHTML` of the hidden `div`.
-    *   Calculate the number of visual lines by dividing the `scrollHeight` of the hidden `div` by its `line-height`.
-
-2.  **Complexity & Downsides:**
-    *   **Performance:** This calculation must be run on every single keystroke, as any character change could affect word wrapping. Copying large amounts of text into the DOM and forcing a browser re-layout on every key press can be performance-intensive and may cause input lag.
-    *   **Fragility:** The CSS styles must be perfectly synchronized. Any discrepancy in padding, border, font-size, etc., will result in an incorrect calculation.
-    *   **Implementation:** Requires careful DOM manipulation within our React component, managing refs to both the textarea and the hidden div, and ensuring the calculation is efficient.
-
-### Solution B: Using a Full-Fledged Code Editor Component
-
-Instead of building our own, we could replace the `<textarea>` with a lightweight, embeddable code editor library.
-
-1.  **How it Works:**
-    *   Integrate a library like **CodeMirror** or **Monaco Editor** (the editor that powers VS Code itself, though it's much heavier).
-    *   These components are not simple textareas; they are complete editing surfaces that render each line individually. Because they control the rendering process, they have full knowledge of visual lines and can provide accurate line numbering out of the box.
-
-2.  **Complexity & Downsides:**
-    *   **Bundle Size:** These libraries are significantly larger than a simple React component, which would increase the extension's load time.
-    *   **Integration:** Integrating them into our existing React and VS Code Webview architecture can be complex, requiring custom wrappers and careful handling of the component's lifecycle.
-    *   **Overkill:** For a simple context input field, using a full code editor might be architectural overkill.
-
-## 4. Conclusion & Path Forward
-
-The user's request is valid and would be a great UX improvement. However, due to the performance and implementation complexities described above, this feature is considered a significant piece of technical debt that requires a dedicated cycle to solve correctly.
-
-The current priority is to fix the more critical usability bugs like scrolling, focus management, and highlighting. Once the component is stable, we can revisit this challenge and dedicate a future cycle to implementing one of the more advanced solutions above.
 </file>
 

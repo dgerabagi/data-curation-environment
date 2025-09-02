@@ -11,16 +11,7 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 13 - nice! baseline -> associated files working! continue finalization almost done
-Cycle 12 - continue perfecting the animated workflow based on testing observations/feedback
-Cycle 8-11 - continue perfecting the animated workflow based on testing observations/feedback
-Cycle 7 - hide/remove numbered lines for cycle context/ephemeral, align readme/popupmessages/onboarding, align baseline button, make our perfect closed loop animation workflow
-Cycle 6 - create artifact for word wrap, add additional animated workflow steps, `Resp 1` highlighting seems stuck, enhance generate prompt.md based on currently viewed cycle, state-aware sort animation
-Cycle 5 - still cannot progress.
-Cycle 4 - cannot progress to the next cycle
-Cycle 3 - animated workflow, abc test for cycle context field, make important templates mandatory
-Cycle 2 - continue working the workflow animations, context text fields wonky, ignore the .git directory
-Cycle 1 - address FTV flash when saving, line numbers for cycle context/ephemeral context not lining up or scrolling
+Current Cycle 1 - cycle context fields busted (still), ftv flashes when autosaving (still)
 Cycle 0 - Project Initialization/Template Archive
 </M2. cycle overview>
 
@@ -191,14 +182,14 @@ I have analyzed the request. My course of action is to update the main component
 </M3. Interaction Schema>
 
 <M4. current project scope>
-transitioning between manual prompting method and using the dce we are creating (exciting/precarious)
+fix cycle context and ephemeral context text fields and fix flashing FTV.
 </M4. current project scope>
 
 <M5. organized artifacts list>
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C179 (Add A75 for Text Area testing)
+# Updated on: C181 (Add A76 for Word Wrap explanation)
 
 ## 1. Purpose
 
@@ -532,6 +523,10 @@ transitioning between manual prompting method and using the dce we are creating 
 - **Description:** A plan to create a test harness for the `NumberedTextarea` component to diagnose and fix persistent scrolling and alignment bugs.
 - **Tags:** plan, process, debugging, troubleshooting, ui, ux, react
 
+### A76. DCE - Word Wrap Line Numbering Challenges
+- **Description:** Explains the technical complexity of implementing line numbers that accurately reflect visual word wrapping in a textarea component.
+- **Tags:** documentation, technical debt, ui, ux, word wrap, line numbers
+
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
 - **Tags:** history, log, development process, cycles
@@ -618,995 +613,36 @@ transitioning between manual prompting method and using the dce we are creating 
 </M5. organized artifacts list>
 
 <M6. Cycles>
-<Cycle 13>
-okay, initating a new test, i really hope at least one of these changes made it in...
-
-<new test>
-i rolled in the below response, resolved ts errors, and pressed F5 to start the extension in dev mode.
-
-1. i created a new folder 'TowerDefense13'.
-2. i use the `Open Folder` button in our DCE FTV pane and select the newly created folder to set as the Workspace.
-3. i select the DCE extension. this triggers both DCE windows to open, the FTV and the PCPP. this is good.
-4. i write 'i want to create a tower defense game' and click the intiate button. it opens the readme and generates prompt.md. this is all good.
-5. i send the prompt.md off to 4 parallel aistudio conversations. i paste them back in `Resp 1` -> `Resp 4`.
-6. the `Parse All` animates, i select it.
-7. the `Sort` animates, i select it.
-8. `Resp 4` is longest, i focus it, and then i click `Select This Response`.
-9. `Baseline` animates. I click it. I get the `Open README Guide`.
-9.1. note that we could also provide instructions like 'or if you've already got git installed, you can click the second button' and give them a second button to run the git init, which then we can programmatically confirm we can move on with the process correctly.
-10. i open a terminal in the pwd and type `git init`. a repo gets initialized.
-11. i then click `Baseline` once again. all you had to do was have it detect the commit and then move the animation to `Select All`... fingers crossed... testing now...
-12. fuck yes! it worked!!! what a relief!!!
-12.1. i see we are animating the `Associated Files` pane itself. theres a slight visual issue here that we have already encountered previously and have resolved. it was with the right side of the text field on the welcome page when we were animating it. the right side was obscured, covered by the scroll bar. here too this is occurring, however it is not the right side, this time it is both the top and the left side that are slightly obscured, causing the animation to not full present itself along those two sides. can this be corrected for? i like it getting animated, i would like to keep it and fix it in the same manner as we fixed the welcome page issue.
-13. i clicked `Accept All`, and `Accept Selected` became animated next, good.
-14. after clicking `Accept Selected`, the `Cycle Context` became animated, good.
-15. after writing in the `Cycle Context`, the `Cycle Title` became animated, good.
-15.1. okay this was issue #2 that needed to be resolved, we need to first prompt the user to generate the prompt.md before creating a new cycle. that is because the first thing you do once you create a new cycle, is paste in the responses, but the user wouldnt have any responses if they didnt first generate, and then send off the prompt.md to aistudio conversation windows. does that make sense? this is the only thing needed at this time. please focus on that. oh that and the second button on the popup that occurs when no git is yet initialized.
-</new test>
-
-<dce logs>
-[INFO] [3:20:04 PM] Congratulations, your extension "Data Curation Environment" is now active!
-[INFO] [3:20:04 PM] Services initializing...
-[INFO] [3:20:04 PM] Services initialized successfully.
-[INFO] [3:20:04 PM] Registering 5 commands.
-[INFO] [3:20:04 PM] HistoryService: getLatestCycle called.
-[INFO] [3:20:04 PM] Fresh environment detected. Returning Cycle 0.
-[INFO] [3:20:04 PM] Fresh environment, automatically opening Parallel Co-Pilot Panel.
-[INFO] [3:20:04 PM] Parallel Co-Pilot view message handler initialized.
-[INFO] [3:20:04 PM] Starry Night syntax highlighter initialized.
-[INFO] [3:20:04 PM] Context Chooser view message handler initialized.
-[INFO] [3:20:04 PM] [on-message] Received RequestInitialData. Forwarding to services.
-[INFO] [3:20:04 PM] handleWorkspaceFilesRequest started. forceRefresh=false
-[INFO] [3:20:04 PM] Building file tree from scratch.
-[INFO] [3:20:04 PM] buildTreeFromTraversal starting for root: c:\Projects\TowerDefense13
-[INFO] [3:20:04 PM] [SelectionService] No last selection found in state.
-[INFO] [3:20:04 PM] buildTreeFromTraversal finished. Root node has 0 children.
-[INFO] [3:20:04 PM] File tree built. Sending to client.
-[INFO] [3:20:04 PM] handleWorkspaceFilesRequest finished.
-[INFO] [3:20:04 PM] Persisted current selection of 0 items.
-[INFO] [3:20:04 PM] HistoryService: getLatestCycle called.
-[INFO] [3:20:04 PM] Fresh environment detected. Returning Cycle 0.
-[INFO] [3:20:04 PM] [SelectionService] No last selection found in state.
-[INFO] [3:20:05 PM] Project scope saved.
-[INFO] [3:20:05 PM] [SelectionService] No last selection found in state.
-[INFO] [3:20:05 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode
-[INFO] [3:20:05 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.vscode/dce_history.json
-[INFO] [3:20:05 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
-[INFO] [3:20:05 PM] Persisted current selection of 1 items.
-[INFO] [3:20:05 PM] [SelectionService] Found 1 paths in persisted state. Validating...
-[INFO] [3:20:05 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode
-[INFO] [3:20:05 PM] [SelectionService] Returning 1 valid paths.
-[INFO] [3:20:05 PM] Persisted current selection of 1 items.
-[INFO] [3:20:34 PM] [SelectionService] Found 1 paths in persisted state. Validating...
-[INFO] [3:20:34 PM] [SelectionService] Returning 1 valid paths.
-[INFO] [3:20:34 PM] Project scope saved.
-[INFO] [3:20:34 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
-[INFO] [3:20:34 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
-[INFO] [3:20:39 PM] Generating Cycle 0 prompt.md file...
-[INFO] [3:20:39 PM] Project scope saved.
-[INFO] [3:20:39 PM] Created src/Artifacts/README.md for the new project.
-[INFO] [3:20:39 PM] Successfully generated Cycle 0 prompt.md file.
-[INFO] [3:20:40 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
-[INFO] [3:20:40 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
-[INFO] [3:20:40 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/prompt.md
-[INFO] [3:20:40 PM] [SelectionService] Found 1 paths in persisted state. Validating...
-[INFO] [3:20:40 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
-[INFO] [3:20:40 PM] [SelectionService] Returning 1 valid paths.
-[INFO] [3:20:40 PM] Persisted current selection of 2 items.
-[INFO] [3:20:40 PM] [SelectionService] Found 2 paths in persisted state. Validating...
-[INFO] [3:20:40 PM] [SelectionService] Returning 2 valid paths.
-[INFO] [3:20:40 PM] HistoryService: saving data for cycle 1.
-[WARN] [3:20:40 PM] [WebView] [TreeView] Could not find ref for active file: c:/Projects/TowerDefense13/prompt.md
-[INFO] [3:20:40 PM] Persisted current selection of 4 items.
-[WARN] [3:20:40 PM] [WebView] [TreeView] Could not find ref for active file: c:/Projects/TowerDefense13/src/Artifacts/README.md
-[INFO] [3:20:40 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
-[INFO] [3:20:40 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
-[INFO] [3:20:40 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[INFO] [3:20:40 PM] handleWorkspaceFilesRequest started. forceRefresh=true
-[INFO] [3:20:40 PM] Building file tree from scratch.
-[INFO] [3:20:40 PM] buildTreeFromTraversal starting for root: c:\Projects\TowerDefense13
-[INFO] [3:20:40 PM] [SelectionService] Found 4 paths in persisted state. Validating...
-[INFO] [3:20:40 PM] [SelectionService] Returning 4 valid paths.
-[INFO] [3:20:40 PM] Persisted current selection of 4 items.
-[INFO] [3:20:40 PM] buildTreeFromTraversal finished. Root node has 2 children.
-[INFO] [3:20:40 PM] File tree built. Sending to client.
-[INFO] [3:20:40 PM] handleWorkspaceFilesRequest finished.
-[INFO] [3:21:07 PM] HistoryService: getLatestCycle called.
-[INFO] [3:21:07 PM] Latest cycle found: 1
-[INFO] [3:21:07 PM] [CONTEXT-HIGHLIGHT] Received request for context ID: cycle-context-1
-[INFO] [3:21:07 PM] [CONTEXT-HIGHLIGHT] Received request for context ID: ephemeral-context-1
-[INFO] [3:21:08 PM] [SelectionService] Found 4 paths in persisted state. Validating...
-[INFO] [3:21:08 PM] [SelectionService] Returning 4 valid paths.
-[INFO] [3:21:09 PM] HistoryService: saving data for cycle 1.
-[INFO] [3:21:09 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
-[INFO] [3:21:09 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
-[INFO] [3:22:22 PM] HistoryService: getLatestCycle called.
-[INFO] [3:22:22 PM] Latest cycle found: 1
-[INFO] [3:22:22 PM] [CONTEXT-HIGHLIGHT] Received request for context ID: cycle-context-1
-[INFO] [3:22:22 PM] [CONTEXT-HIGHLIGHT] Received request for context ID: ephemeral-context-1
-[INFO] [3:22:23 PM] [SelectionService] Found 4 paths in persisted state. Validating...
-[INFO] [3:22:23 PM] [SelectionService] Returning 4 valid paths.
-[INFO] [3:22:23 PM] HistoryService: saving data for cycle 1.
-[INFO] [3:22:24 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
-[INFO] [3:22:24 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
-[INFO] [3:22:24 PM] [SelectionService] Found 4 paths in persisted state. Validating...
-[INFO] [3:22:24 PM] [SelectionService] Returning 4 valid paths.
-[INFO] [3:22:25 PM] HistoryService: saving data for cycle 1.
-[INFO] [3:22:25 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
-[INFO] [3:22:25 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
-[INFO] [3:22:32 PM] [SelectionService] Found 4 paths in persisted state. Validating...
-[INFO] [3:22:32 PM] [SelectionService] Returning 4 valid paths.
-[INFO] [3:22:33 PM] HistoryService: saving data for cycle 1.
-[INFO] [3:22:33 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
-[INFO] [3:22:33 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
-[INFO] [3:22:37 PM] [SelectionService] Found 4 paths in persisted state. Validating...
-[INFO] [3:22:37 PM] [SelectionService] Returning 4 valid paths.
-[INFO] [3:22:37 PM] HistoryService: saving data for cycle 1.
-[INFO] [3:22:38 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
-[INFO] [3:22:38 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
-[INFO] [3:22:45 PM] [SelectionService] Found 4 paths in persisted state. Validating...
-[INFO] [3:22:45 PM] [SelectionService] Returning 4 valid paths.
-[INFO] [3:22:46 PM] HistoryService: saving data for cycle 1.
-[INFO] [3:22:46 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
-[INFO] [3:22:46 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
-[INFO] [3:23:20 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A0: Tower[...]
-[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A1: Tower[...]
-[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A3: Tower[...]
-[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A7: Tower[...]
-[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A14: Towe[...]
-[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A0: Tower[...]
-[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A1: Tower[...]
-[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A3: Tower[...]
-[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A7: Tower[...]
-[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A11: Towe[...]
-[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A14: Towe[...]
-[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A0: Tower[...]
-[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A1: Tower[...]
-[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A3: Tower[...]
-[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A7: Tower[...]
-[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A14: Towe[...]
-[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A0: Tower[...]
-[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A1: Tower[...]
-[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A3: Tower[...]
-[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A7: Tower[...]
-[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A11: Towe[...]
-[INFO] [3:23:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, code: # Artifact A14: Towe[...]
-[INFO] [3:23:21 PM] [File Existence] Received request to check paths: ["src/Artifacts/TowerDefense-A0-Master-Artifact-List.md","src/Artifacts/TowerDefense-A1-Project-Vision-and-Goals.md","src/Artifacts/TowerDefense-A3-Technical-Scaffolding-Plan.md","src/Artifacts/TowerDefense-A7-Dev-and-Testing-Guide.md","src/Artifacts/A14. TowerDefense - GitHub Repository Setup Guide.md","src/Artifacts/TowerDefense-A11-Implementation-Roadmap.md","src/Artifacts/TowerDefense-A14-GitHub-Repository-Setup-Guide.md","src/Artifacts/A0.TowerDefense-Master-Artifact-List.md","src/Artifacts/A1.TowerDefense-Project-Vision-and-Goals.md","src/Artifacts/A3.TowerDefense-Technical-Scaffolding-Plan.md","src/Artifacts/A7.TowerDefense-Dev-and-Testing-Guide.md","src/Artifacts/A14.TowerDefense-GitHub-Repository-Setup-Guide.md","src/Artifacts/TowerDefenseQuest-A0-Master-Artifact-List.md","src/Artifacts/TowerDefenseQuest-A1-Project-Vision-and-Goals.md","src/Artifacts/TowerDefenseQuest-A3-Technical-Scaffolding-Plan.md","src/Artifacts/TowerDefenseQuest-A7-Dev-and-Testing-Guide.md","src/Artifacts/TowerDefenseQuest-A11-Implementation-Roadmap.md","src/Artifacts/TowerDefenseQuest-A14-GitHub-Repository-Setup-Guide.md"]
-[INFO] [3:23:21 PM] [File Existence] Received request to check paths: ["src/Artifacts/TowerDefense-A0-Master-Artifact-List.md","src/Artifacts/TowerDefense-A1-Project-Vision-and-Goals.md","src/Artifacts/TowerDefense-A3-Technical-Scaffolding-Plan.md","src/Artifacts/TowerDefense-A7-Dev-and-Testing-Guide.md","src/Artifacts/A14. TowerDefense - GitHub Repository Setup Guide.md","src/Artifacts/TowerDefense-A11-Implementation-Roadmap.md","src/Artifacts/TowerDefense-A14-GitHub-Repository-Setup-Guide.md","src/Artifacts/A0.TowerDefense-Master-Artifact-List.md","src/Artifacts/A1.TowerDefense-Project-Vision-and-Goals.md","src/Artifacts/A3.TowerDefense-Technical-Scaffolding-Plan.md","src/Artifacts/A7.TowerDefense-Dev-and-Testing-Guide.md","src/Artifacts/A14.TowerDefense-GitHub-Repository-Setup-Guide.md","src/Artifacts/TowerDefenseQuest-A0-Master-Artifact-List.md","src/Artifacts/TowerDefenseQuest-A1-Project-Vision-and-Goals.md","src/Artifacts/TowerDefenseQuest-A3-Technical-Scaffolding-Plan.md","src/Artifacts/TowerDefenseQuest-A7-Dev-and-Testing-Guide.md","src/Artifacts/TowerDefenseQuest-A11-Implementation-Roadmap.md","src/Artifacts/TowerDefenseQuest-A14-GitHub-Repository-Setup-Guide.md"]
-[INFO] [3:23:21 PM] [SelectionService] Found 4 paths in persisted state. Validating...
-[INFO] [3:23:21 PM] [SelectionService] Returning 4 valid paths.
-[INFO] [3:23:21 PM] HistoryService: saving data for cycle 1.
-[INFO] [3:23:22 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
-[INFO] [3:23:22 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
-[INFO] [3:23:32 PM] [SelectionService] Found 4 paths in persisted state. Validating...
-[INFO] [3:23:32 PM] [SelectionService] Returning 4 valid paths.
-[INFO] [3:23:32 PM] HistoryService: saving data for cycle 1.
-[INFO] [3:23:32 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
-[INFO] [3:23:32 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
-[INFO] [3:23:55 PM] Executing Git Status check.
-[ERROR] [3:23:55 PM] Git command error: Command failed: git status --porcelain
-fatal: not a git repository (or any of the parent directories): .git
-
-[INFO] [3:23:56 PM] [SelectionService] Found 4 paths in persisted state. Validating...
-[INFO] [3:23:56 PM] [SelectionService] Returning 4 valid paths.
-[INFO] [3:23:56 PM] HistoryService: saving data for cycle 1.
-[INFO] [3:23:56 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
-[INFO] [3:23:56 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
-[INFO] [3:24:05 PM] Executing Git Baseline with message: "DCE Baseline: Cycle 1 - New Cycle"
-[ERROR] [3:24:05 PM] Git command error: Command failed: git status --porcelain
-fatal: not a git repository (or any of the parent directories): .git
-
-[INFO] [3:25:13 PM] [SelectionService] Found 4 paths in persisted state. Validating...
-[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git
-[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/HEAD
-[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/HEAD
-[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/config
-[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/config
-[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/description
-[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/description
-[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/hooks
-[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/hooks
-[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/hooks/applypatch-msg.sample
-[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/hooks/applypatch-msg.sample
-[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/hooks/commit-msg.sample
-[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/hooks/commit-msg.sample
-[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/hooks/fsmonitor-watchman.sample
-[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/hooks/fsmonitor-watchman.sample
-[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/hooks/post-update.sample
-[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/hooks/post-update.sample
-[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/hooks/pre-applypatch.sample
-[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/hooks/pre-applypatch.sample
-[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/hooks/pre-commit.sample
-[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/hooks/pre-commit.sample
-[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/hooks/pre-merge-commit.sample
-[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/hooks/pre-merge-commit.sample
-[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/hooks/pre-push.sample
-[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/hooks/pre-push.sample
-[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/hooks/pre-rebase.sample
-[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/hooks/pre-rebase.sample
-[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/hooks/pre-receive.sample
-[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/hooks/pre-receive.sample
-[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/hooks/prepare-commit-msg.sample
-[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/hooks/prepare-commit-msg.sample
-[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/hooks/push-to-checkout.sample
-[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/hooks/push-to-checkout.sample
-[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/hooks/sendemail-validate.sample
-[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/hooks/sendemail-validate.sample
-[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/hooks/update.sample
-[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/hooks/update.sample
-[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/info
-[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/info
-[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/info/exclude
-[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/info/exclude
-[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/refs
-[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/refs
-[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/refs/heads
-[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/refs/heads
-[INFO] [3:25:13 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/refs/tags
-[INFO] [3:25:13 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/refs/tags
-[INFO] [3:25:13 PM] [SelectionService] Returning 4 valid paths.
-[INFO] [3:25:13 PM] Persisted current selection of 5 items.
-[INFO] [3:25:14 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[INFO] [3:25:14 PM] handleWorkspaceFilesRequest started. forceRefresh=true
-[INFO] [3:25:14 PM] Building file tree from scratch.
-[INFO] [3:25:14 PM] buildTreeFromTraversal starting for root: c:\Projects\TowerDefense13
-[INFO] [3:25:14 PM] [SelectionService] Found 5 paths in persisted state. Validating...
-[INFO] [3:25:14 PM] [SelectionService] Returning 5 valid paths.
-[INFO] [3:25:14 PM] Persisted current selection of 5 items.
-[INFO] [3:25:14 PM] buildTreeFromTraversal finished. Root node has 2 children.
-[INFO] [3:25:14 PM] File tree built. Sending to client.
-[INFO] [3:25:14 PM] handleWorkspaceFilesRequest finished.
-[INFO] [3:26:11 PM] Executing Git Baseline with message: "DCE Baseline: Cycle 1 - New Cycle"
-[WARN] [3:26:11 PM] Git command stderr: warning: in the working copy of '.vscode/dce_history.json', LF will be replaced by CRLF the next time Git touches it
-warning: in the working copy of 'prompt.md', LF will be replaced by CRLF the next time Git touches it
-warning: in the working copy of 'src/Artifacts/README.md', LF will be replaced by CRLF the next time Git touches it
-
-[INFO] [3:26:11 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/index.lock
-[INFO] [3:26:11 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/index.lock
-[INFO] [3:26:11 PM] [GIT_SERVICE] Sending NotifyGitOperationResult: {"success":true,"message":"Successfully created baseline commit."}
-[INFO] [3:26:11 PM] [UI NOTIFY] Received request to show message: "Successfully created baseline commit."
-[INFO] [3:26:11 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/COMMIT_EDITMSG
-[INFO] [3:26:11 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/COMMIT_EDITMSG
-[INFO] [3:26:11 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/index
-[INFO] [3:26:11 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/index
-[INFO] [3:26:11 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/logs
-[INFO] [3:26:11 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/logs
-[INFO] [3:26:11 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/logs/HEAD
-[INFO] [3:26:11 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/logs/HEAD
-[INFO] [3:26:11 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/logs/refs
-[INFO] [3:26:11 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/logs/refs
-[INFO] [3:26:11 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/logs/refs/heads
-[INFO] [3:26:11 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/logs/refs/heads
-[INFO] [3:26:11 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/logs/refs/heads/master
-[INFO] [3:26:11 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/logs/refs/heads/master
-[INFO] [3:26:11 PM] [Auto-Add] Ignoring newly created non-selectable file: c:/Projects/TowerDefense13/.git/refs/heads/master
-[INFO] [3:26:11 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/refs/heads/master
-[INFO] [3:26:11 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.git/index.lock
-[INFO] [3:28:37 PM] [SelectionService] Found 5 paths in persisted state. Validating...
-[INFO] [3:28:37 PM] [SelectionService] Returning 5 valid paths.
-[INFO] [3:28:37 PM] HistoryService: saving data for cycle 1.
-[INFO] [3:28:37 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
-[INFO] [3:28:37 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
-[INFO] [3:29:00 PM] [File Operation] Received request to write 6 files.
-[INFO] [3:29:00 PM] Successfully wrote content to: src/Artifacts/TowerDefenseQuest-A0-Master-Artifact-List.md
-[INFO] [3:29:00 PM] Successfully wrote content to: src/Artifacts/TowerDefenseQuest-A1-Project-Vision-and-Goals.md
-[INFO] [3:29:00 PM] Successfully wrote content to: src/Artifacts/TowerDefenseQuest-A3-Technical-Scaffolding-Plan.md
-[INFO] [3:29:00 PM] Successfully wrote content to: src/Artifacts/TowerDefenseQuest-A7-Dev-and-Testing-Guide.md
-[INFO] [3:29:00 PM] Successfully wrote content to: src/Artifacts/TowerDefenseQuest-A11-Implementation-Roadmap.md
-[INFO] [3:29:00 PM] Successfully wrote content to: src/Artifacts/TowerDefenseQuest-A14-GitHub-Repository-Setup-Guide.md
-[INFO] [3:29:00 PM] [SelectionService] Found 5 paths in persisted state. Validating...
-[INFO] [3:29:00 PM] [SelectionService] Returning 5 valid paths.
-[INFO] [3:29:00 PM] Persisted current selection of 6 items.
-[INFO] [3:29:00 PM] [SelectionService] Found 6 paths in persisted state. Validating...
-[INFO] [3:29:00 PM] [SelectionService] Returning 6 valid paths.
-[INFO] [3:29:00 PM] Persisted current selection of 11 items.
-[INFO] [3:29:00 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[INFO] [3:29:00 PM] handleWorkspaceFilesRequest started. forceRefresh=true
-[INFO] [3:29:00 PM] Building file tree from scratch.
-[INFO] [3:29:00 PM] buildTreeFromTraversal starting for root: c:\Projects\TowerDefense13
-[INFO] [3:29:00 PM] [SelectionService] Found 11 paths in persisted state. Validating...
-[INFO] [3:29:00 PM] [SelectionService] Returning 11 valid paths.
-[INFO] [3:29:00 PM] Persisted current selection of 11 items.
-[INFO] [3:29:00 PM] buildTreeFromTraversal finished. Root node has 2 children.
-[INFO] [3:29:00 PM] File tree built. Sending to client.
-[INFO] [3:29:00 PM] handleWorkspaceFilesRequest finished.
-[INFO] [3:29:21 PM] [CONTEXT-HIGHLIGHT] Received request for context ID: cycle-context-1
-[INFO] [3:29:21 PM] [CONTEXT-HIGHLIGHT] Received request for context ID: cycle-context-1
-[INFO] [3:29:21 PM] [CONTEXT-HIGHLIGHT] Received request for context ID: cycle-context-1
-[INFO] [3:29:21 PM] [CONTEXT-HIGHLIGHT] Received request for context ID: cycle-context-1
-[INFO] [3:29:22 PM] [SelectionService] Found 11 paths in persisted state. Validating...
-[INFO] [3:29:22 PM] [SelectionService] Returning 11 valid paths.
-[INFO] [3:29:22 PM] HistoryService: saving data for cycle 1.
-[INFO] [3:29:22 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
-[INFO] [3:29:22 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
-[INFO] [3:29:23 PM] [SelectionService] Found 11 paths in persisted state. Validating...
-[INFO] [3:29:23 PM] [SelectionService] Returning 11 valid paths.
-[INFO] [3:29:23 PM] HistoryService: saving data for cycle 1.
-[INFO] [3:29:23 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
-[INFO] [3:29:23 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
-[INFO] [3:31:01 PM] HistoryService: saving data for cycle 1.
-[INFO] [3:31:01 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
-[INFO] [3:31:01 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/TowerDefense13/.vscode/dce_history.json
-
-</dce logs>
-
-<previous cycle 12 summary of actions>
-<summary>
-I have analyzed the detailed test feedback and your understandable frustration. The animated workflow is failing at a critical juncture: transitioning from a successful `Baseline` commit to the next step. This bug has persisted for far too long, and my previous attempts to fix it have been insufficient. The root cause is almost certainly a stale state closure in the frontend's message handler, which prevents it from correctly reacting to the success signal from the backend.
-
-My course of action is to implement a definitive fix for this state transition bug and to correctly implement the full, multi-step animated workflow you have meticulously detailed. I will also add the logging you requested to make the workflow's state changes transparent for future debugging.
-</summary>
-
-<course_of_action>
-1.  **Documentation First (Codifying the "Perfect Loop"):**
-    *   I will update **`A11. DCE - Regression Case Studies.md`**. The "Stuck `Baseline` Highlight" case study will be revised to reflect the persistent nature of the bug, with the root cause analysis now explicitly identifying a stale state closure in the frontend's message handler as the likely culprit.
-    *   I will thoroughly update **`A69. DCE - Animated UI Workflow Guide.md`** to serve as the definitive source of truth for the entire animated sequence, matching your detailed description from step `13.1` to `13.6` in your test feedback.
-
-2.  **Add Robust Logging and User Feedback:**
-    *   **`git.service.ts`:** I will add a log statement immediately before sending the `NotifyGitOperationResult` message to the frontend, providing a clear record in the logs that the backend has successfully completed its task.
-    *   **IPC & `file-operation.service.ts`:** I will add a new `RequestShowInformationMessage` IPC channel and handler, allowing the frontend to request native VS Code notifications. This will be used to provide clear user feedback and as a debugging tool to confirm frontend logic blocks are executing.
-    *   **`view.tsx`:** I will add a dedicated `useEffect` hook to log the `workflowStep` every time it changes, directly addressing your request for better diagnostic information.
-
-3.  **Implement the Definitive Fix and Full Workflow:**
-    *   **`view.tsx` (The Fix):** I will refactor the message handler for `NotifyGitOperationResult`. To prevent the stale closure issue, I will use the functional update form of the state setter (`setWorkflowStep(prevStep => ...)`). This ensures the check for `'awaitingBaseline'` is always against the most current state and will reliably transition the workflow to `'awaitingFileSelect'` upon success.
-    *   **`view.tsx` (The Full Workflow):** I will rewrite the main workflow `useEffect` hook to implement the complete state machine as defined in the updated `A69`, ensuring the correct sequence of highlights from `Select All` -> `Accept Selected` -> `Cycle Context` -> `Cycle Title` -> **`Generate prompt.md`** -> `+ New Cycle`.
-
-</course_of_action>
-
-
-</previous cycle 12 summary of actions>
-</Cycle 13>
-
-
-<Cycle 12>
-im getting frustrated. i listed three things. last cycle. i stated i saw no changes in them the cycle prior. i am now restating the same. you did not fix any of the three:
-
-1. `Basline` is still not working as expected. ive been very clear.
-2. `Accept Selected` is not getting animated.
-3. you're prematurely animating `+`. ive said repeatedly first the user needs to `Generate prompt.md` 
-
-why is this hard? heres my latest test:
-<test 1>
-1. created 'TowerDefense12', opened it as the workspace.
-2. when clicking on the DCE spiral extension, it opened the pcpp, nice. i wrote 'i want to make a tower defense game.'
-3. the readme opened, looks good.
-4. i switch to and copy/paste the prompt.md into 4 aistudio conversation windows in parallel.
-5. i switch back to the pcpp and the `Resp 1` is correctly animated as the next step, good.
-6. after pasting the `Resp 4`, the `Parse All` correctly animated, good.
-7. after clicking `Parse All`, the `Sort` correctly animated, good.
-8. after clicking `Sort`, the response tab and the `Select This Response` buttons are animated, good.
-9. after clicking on the longest response and then clicking `Select This Response`, the `Baseline` button is animated, good.
-10. after clicking `Baseline`, i get the readme popup again, and its working as expected, nice.
-11. i change my view back to the pcpp, however the `Baseline` button is no longer animated. this is interesting/confusing/unexpected/not intended behavior. its interesting because for the longest time we havent been able to get this thing not to animate at the right time. confusing because this is not the right time. unexpected because answer 2. not intended behavior, see 1 and 2.
-11.1. im going to just do git init and see how it behaves.
-11.2. what if we had two buttons on the pop-up, the second button automaticaly does the init then the initial commit?
-11.3. i now click `Baseline` even though its not animated, since i know that is the logical next step after `git init`.
-11.4. clicking `Baseline` does create the commit, but it does not proceed to animate `Select All`. so once again...
-12. >>>>>>>>>>>>>>>>> JFC you didnt change shit! <<<<<<<<<<<
-12.1. okay, i see the commit, however -still- the workflow does not progress; `Baseline` is still highlighted. 
-13. here is how the workflow is supposed to continue:
-13.1. after a current cycle baseline is created, the user is now ready to start auditioning the responses. since the user has the selected resposne focused, the next button to animate is the `Select All` button. this selects the current responses `Associated Files`.
-13.2. once one or more `Associated Files` are selected, the next step is to animate the `Accept Selected` button.
-13.3. once `Accept Selected` is clicked, our current workflow returns to expected behavior; it correctly animates the `Cycle Context` field.
-13.4. once `Cycle Context` has input, it correctly animates the Cycle Title field.
-13.5. once the `Cycle Title` field has bespoke input, our workflow needs to highlight the `Generate prompt.md` step BEFORE the `+` is highlighted. 
-13.6. once `Generate prompt.md` is clicked, then we can animate `+`.
-</test 1>
-
-why the fuck arent you placing whats getting animated in the logs? wouldnt that help?
-
-<super clear instructions>
-please, after a successful baseline, update the animated button from `Baseline` to `Select All` (to try to eliminite ambiguity, this is the `Select All` button next to `Select This Response`/`Response Selected` button).
-
-next, please MODIFY our animated workflow to INCLUDE `Generate prompt.md` BEFORE `+`.
-</super clear instructions>
-
-<previous cycle 11 summary of actions>
-
-
-<summary>
-I have analyzed the detailed test feedback. The core animated workflow is functioning correctly up until the "Baseline" step. Despite a successful Git commit, the UI highlight remains stuck on the `Baseline` button, failing to advance the user to the next step. This is a critical bug that has persisted across several cycles and is preventing the "perfect closed-loop" workflow from being realized.
-
-My course of action is to implement a definitive fix for this state transition failure. This involves correcting the frontend's message handler to reliably update the UI state after a successful Git operation from the backend. I will also implement the remaining steps of the animated workflow you have meticulously detailed.
-</summary>
-
-<course_of_action>
-1.  **Documentation First (Codifying the "Perfect Loop"):**
-    *   I will update **`A69. DCE - Animated UI Workflow Guide.md`** to reflect the complete, correct sequence as detailed in your test feedback, including all steps from `Baseline` success through to creating a new cycle.
-    *   I will update **`A11. DCE - Regression Case Studies.md`** for the "Stuck `Baseline` Highlight" case. The root cause remains a failure in the frontend's message handler to correctly update the `workflowStep` state. The codified solution will now be more explicit about the required state transitions.
-
-2.  **Implement Robust State Transition and Workflow:**
-    *   **Backend (`file-operation.service.ts` & IPC):** I will add a simple, generic handler for a new `RequestShowInformationMessage` IPC channel. This allows the frontend to request a VS Code notification, which we will use to confirm that the success logic block has been executed.
-    *   **Frontend (`view.tsx`):** This is where the primary fix will be implemented.
-        *   I will add detailed logging to the `useEffect` hook that listens for the `NotifyGitOperationResult` message to confirm the listener is active and that the message is being received from the backend.
-        *   The core logic in the message handler will be corrected: `if (result.success && workflowStep === 'awaitingBaseline')`. Inside this block, I will call `setWorkflowStep('awaitingFileSelect')` to advance the animated guide.
-        *   Immediately after, I will send the new `RequestShowInformationMessage` to the backend with the success message. This serves as both user feedback and a hard confirmation that the success logic was executed.
-        *   I will implement the remaining state transitions in the main workflow `useEffect` hook to complete the loop:
-            *   From `awaitingFileSelect` -> `awaitingAccept` (when files are checked).
-            *   The `onAcceptSelected` handler will transition to `awaitingCycleContext`.
-            *   From `awaitingCycleContext` -> `awaitingCycleTitle` (when context has text).
-            *   From `awaitingCycleTitle` -> `awaitingGeneratePrompt` (when title has text).
-            *   The `handleGeneratePrompt` handler will transition to `readyForNewCycle`.
-            *   The `onNewCycle` handler will transition back to `awaitingResponsePaste_1`.
-
-</course_of_action>
-
-</previous cycle 11 summary of actions>
-</Cycle 12>
-
-
-<Cycle 11>
-i see no changes from last cycle to this one. please focus on the baseline button. we are so close, theres like just a few changes:
-
-1. after successful baseline, animate `Select All`.
-2. after at least one`Associated Files` is selected, animate `Accept Selected`.
-3. after `Cycle Title`, animate `Generate prompt.md`
-
-almost everything else is perfect. please fix this. below is the test that i just ran:
-
-<test 1>
-1. created 'TowerDefense11', opened it as the workspace.
-2. when clicking on the DCE spiral extension, it opened the pcpp, nice. i wrote 'i want to make a tower defense game.'
-3. the readme opened, looks good.
-4. i switch to and copy/paste the prompt.md into 4 aistudio conversation windows in parallel.
-5. i switch back to the pcpp and the `Resp 1` is correctly animated as the next step, good.
-6. after pasting the `Resp 4`, the `Parse All` correctly animated, good.
-7. after clicking `Parse All`, the `Sort` correctly animated, good.
-8. after clicking `Sort`, the response tab and the `Select This Response` buttons are animated, good.
-9. after clicking on the longest response and then clicking `Select This Response`, the `Baseline` button is animated, good.
-10. after clicking `Baseline`, i get the readme popup again, and its working as expected, nice.
-11. i then read the readme as a user would, and then i understand that in my state i just need to run `git init`, and so i do that. i then try to click `Baseline` again.
-12. JFC you didnt change shit!
-12.1. okay, i can see that the commit did seem to take place: `[INFO] [2:18:53 PM] [GIT_SERVICE] Sending NotifyGitOperationResult: {"success":true,"message":"Successfully created baseline commit."}`, however -still- the workflow does not progress; `Baseline` is still highlighted. 
-13. here is how the workflow is supposed to continue:
-13.1. after a current cycle baseline is created, the user is now ready to start auditioning the responses. since the user has the selected resposne focused, the next button to animate is the `Select All` button. this selects the current responses `Associated Files`.
-13.2. once one or more `Associated Files` are selected, the next step is to animate the `Accept Selected` button.
-13.3. once `Accept Selected` is clicked, our current workflow returns to expected behavior; it correctly animates the `Cycle Context` field.
-13.4. once `Cycle Context` has input, it correctly animates the Cycle Title field.
-13.5. once the `Cycle Title` field has bespoke input, our workflow needs to highlight the `Generate prompt.md` step BEFORE the `+` is highlighted. 
-13.6. once `Generate prompt.md` is clicked, then we can animate `+`.
-</test 1>
-
-<previous cycle 10 summary of actions>
-
-<summary>
-I have analyzed the detailed test feedback from Cycle 10. The core animated workflow is functioning correctly up until the "Baseline" step. Despite a successful Git commit, the UI highlight remains stuck on the `Baseline` button, failing to advance the user to the next step. This is a critical bug that has persisted across several cycles and is preventing the "perfect closed-loop" workflow from being realized.
-
-My course of action is to implement a definitive fix for this state transition failure. This involves adding more robust communication between the backend and frontend to ensure the UI state is reliably updated after a successful Git operation. I will also re-introduce the user-facing "Baseline successful" notification to improve feedback, as you requested.
-</summary>
-
-<course_of_action>
-1.  **Documentation First (Codifying the Fix):**
-    *   I will update **`A11. DCE - Regression Case Studies.md`**. The case study for "Stuck `Baseline` Highlight in Animated Workflow" will be updated to reflect that previous fixes were insufficient. The root cause is a failure in the frontend to correctly process the success message from the backend. The codified solution will now explicitly require the frontend to not only update its state but also to trigger a user-facing notification as confirmation.
-    *   I will update **`A70. DCE - Git-Integrated Testing Workflow Plan.md`** to formally require a "Baseline successful" pop-up notification as part of the workflow, restoring this helpful piece of user feedback.
-
-2.  **Implement Robust State Transition and Notification:**
-    *   **Backend (`git.service.ts`):** I will add more detailed logging to the `handleGitBaselineRequest` method to explicitly log the success/failure result object *before* it is sent to the frontend. This will give us 100% certainty that the backend is sending the correct message.
-    *   **Frontend (`view.tsx`):** This is where the primary fix will be implemented.
-        *   I will add detailed logging to the `useEffect` hook that listens for the `NotifyGitOperationResult` message to confirm the listener is active.
-        *   Inside the message handler, I will log the received message to confirm it's arriving from the backend.
-        *   The core logic will be reviewed and corrected: `if (result.success && workflowStep === 'awaitingBaseline')`. Inside this block, I will first call `setWorkflowStep('awaitingFileSelect')` to advance the animated guide.
-        *   Immediately after updating the state, I will send a new IPC message, `RequestShowInformationMessage`, to the backend with the text "Successfully created baseline commit." This re-implements the success pop-up and serves as a hard confirmation that the success logic block was executed.
-    *   **Backend (`file-operation.service.ts` & IPC):** I will add a simple, generic handler for `RequestShowInformationMessage` that calls `vscode.window.showInformationMessage`, allowing the frontend to request notifications.
-</course_of_action>
-
-
-</previous cycle 10 summary of actions>
-</Cycle 11>
-
-<Cycle 10>
-
-<test 1>
-1. created 'TowerDefense10', opened it as the workspace.
-2. nice, when clicking on the DCE spiral extension, it opened the pcpp, nice. i wrote 'i want to make a tower defense game.'
-3. the readme opened, looks good.
-4. i switch to and copy/paste the prompt.md into 4 aistudio conversation windows in parallel.
-5. i switch back to the pcpp and the `Resp 1` is correctly animated as the next step, good.
-6. after pasting the `Resp 4`, the `Parse All` correctly animated, good.
-7. after clicking `Parse All`, the `Sort` correctly animated, good.
-8. after clicking `Sort`, the response tab and the `Select This Response` buttons are animated, good.
-9. after clicking on the longest response and then clicking `Select This Response`, the `Baseline` button is animated, good.
-10. after clicking `Baseline`, i get the readme popup again, and its working as expected, nice.
-11. i then read the readme as a user would, and then i understand that in my state i just need to run `git init`, and so i do that. i then try to click `Baseline` again.
-12. okay, i can see that the commit did seem to take place, however -still- the workflow does not progress; `Baseline` is still highlighted. it did appear the commit took place, i saw the green U disappear from README.md and prompt.md, however as a user, im not looking at commit, im looking at the animated workflow, and it did not update. a popup saying the baseline was successful would also be nice, not sure why that was removed/not re-implemented.
-13. continue the workflow. i dont want to describe it again, i have described it enough. i want to see it. 
-</test 1>
-
-<previous cycle 9 summary of actions>
-<summary>
-I have analyzed the detailed test feedback from Cycle 9. The core issues are a critical regression in handling new projects that are not Git repositories and a persistent bug where the animated workflow gets stuck after the "Baseline" step. Additionally, you've suggested an excellent improvement to the onboarding flow by automatically opening the Parallel Co-Pilot Panel (PCPP).
-
-My course of action is to fix these issues to perfect the animated workflow. I will restore the user-friendly pop-up for non-Git repositories, fix the state transition after a successful baseline, and implement the auto-open feature for the PCPP.
-</summary>
-<course_of_action>
-1.  **Documentation First (Aligning with Fixes):**
-    *   I will update **`A70. DCE - Git-Integrated Testing Workflow Plan.md`** to explicitly document the requirement for a user-facing error pop-up when `git init` has not been run. The pop-up must guide the user by offering to open the `README.md` file.
-    *   I will update **`A72. DCE - README for Artifacts.md`** to ensure the instructions for running `git init` are clear and prominent for new users.
-    *   I will add a new case study to **`A11. DCE - Regression Case Studies.md`** for the "Missing Git Init Error Popup" regression. The root cause is a refactor where the backend service stopped showing UI notifications directly, which I will now correct for this specific, critical error.
-    *   I will update **`A69. DCE - Animated UI Workflow Guide.md`** to reflect the new onboarding step where the PCPP is automatically opened for the user.
-
-2.  **Implement Auto-Open PCPP on First Load:**
-    *   **`extension.ts`:** I will modify the `activate` function. After services are initialized, it will check if it's a fresh environment (by calling a method on the `HistoryService`). If it is, it will programmatically execute the `dce.showParallelCopilot` command. This elegantly solves the problem of guiding the user to the panel without being able to animate the icon.
-
-3.  **Restore Git Error Pop-up and Fix Workflow Progression:**
-    *   **Backend (`git.service.ts`):** I will modify `handleGitBaselineRequest`.
-        *   I will add a specific `catch` block that checks for the "fatal: not a git repository" error message.
-        *   Inside this block, I will restore the previous, more helpful behavior of directly calling `vscode.window.showErrorMessage`. The message will include an "Open README Guide" button that, when clicked, opens the `src/Artifacts/README.md` file. This provides immediate, actionable guidance to the user.
-        *   For *successful* baseline operations, the service will continue to send the `NotifyGitOperationResult` message back to the frontend.
-    *   **Frontend (`view.tsx`):**
-        *   I will fix the "stuck highlight" bug. The message handler for `NotifyGitOperationResult` will be reviewed and corrected to ensure that when it receives a `success: true` message, it reliably updates the `workflowStep` state from `'awaitingBaseline'` to `'awaitingFileSelect'`, advancing the animated guide to the next step.
-</course_of_action>
-</previous cycle 9 summary of actions>
-</Cycle 10>
-
-<Cycle 9>
-okay, hmm... so if highlighting the `DCE: Open Parallel Co-Pilot` icon cannot be animated, then is it possible to just automatically open the pcpp for the user once they open a workspace? currently the default `Welcome` vscode tab opens, but we may as well open our pcpp as we have our own onboarding... this tiny automation would solve the problem altogether.
-
-
-
-selected this response, fixed ts errors... now initating a new test:
-
-<test 1>
-1. created 'TowerDefense9', opened it as the workspace.
-2. opened the pcpp, wrote 'i want to make a tower defense game.'
-3. the readme opened, looks good.
-4. i switch to and copy/paste the prompt.md into 4 aistudio conversation windows in parallel.
-5. i switch back to the pcpp and the `Resp 1` is correctly animated as the next step, good.
-6. after pasting the `Resp 4`, the `Parse All` correctly animated, good.
-7. after clicking `Parse All`, the `Sort` correctly animated, good.
-8. after clicking `Sort`, the response tab and the `Select This Response` buttons are animated, good.
-9. after clicking on the longest response and then clicking `Select This Response`, the `Baseline` button is animated, good.
-10. after clicking `Baseline`, i see nothing happen, actually. i go to my logs and i see this:
-<10. logs>
-[INFO] [1:21:52 PM] Executing Git Baseline with message: "DCE Baseline: Cycle 1 - New Cycle"
-[ERROR] [1:21:52 PM] Git command error: Command failed: git status --porcelain
-fatal: not a git repository (or any of the parent directories): .git
-</10. logs>
-</test 1>
-
-however the user needs to be informed of this, what happened to our prior pop-ups? they were perfect, they explained and opened the readme. why did this disappear? we need this to handle a user who doesnt know squat about git, and so at least we told them and showed them.
-
-11. i ran git init in this pwd just to move forward, but we want our workflow to handle this again. make sure our documentation is aligned, thats probably what caused the regression.
-
-12. okay, again nothing happens for the user. `Baseline` is still animated, so thats three cycles in a row now ive explained this, our workflow ceases functioning as desired here.
-
-13. i see a lot of logs that occurred so i will provide those below. please continue finalizing this animated workflow.
-
-<previous cycle 8 summary of actions>
-<summary>
-I have analyzed the detailed feedback from your test in Cycle 8. You've identified two key areas where the animated workflow is falling short of our "perfect closed-loop" goal:
-
-1.  **Initial Highlight:** The workflow doesn't begin by highlighting the DCE activity bar icon to prompt the user to open the panel. This has been a persistent request.
-2.  **Stuck on Baseline:** After a successful baseline commit, the UI highlight remains on the "Baseline" button instead of advancing to the next logical step (selecting files to accept).
-
-My course of action is to fix the state-aware logic for the `Baseline` button and update our documentation to reflect the complete, perfect workflow, while acknowledging the technical limitations of animating the activity bar icon.
-</summary>
-<course_of_action>
-### Course of Action
-
-1.  **Documentation First (Codifying the "Perfect Loop"):**
-    *   I will thoroughly update **`A69. DCE - Animated UI Workflow Guide.md`** to reflect the complete, detailed sequence from your test feedback. This will now include the initial step of highlighting the PCPP icon as the desired starting point.
-    *   I will update **`A70. DCE - Git-Integrated Testing Workflow Plan.md`** to explicitly state that after a successful baseline is created (or if the working tree is already clean), the workflow immediately progresses to highlighting the "Associated Files" list and the `Select All` button.
-
-2.  **Fix Post-Baseline Workflow Step:**
-    *   **Backend (`git.service.ts`):** I will refactor the `handleGitBaselineRequest` and `handleGitStatusRequest` methods. They will now use a new `notifyFrontend` helper function that sends a specific IPC message (`NotifyGitOperationResult` or `SendGitStatus`) back to the PCPP frontend upon completion. This provides the UI with the necessary signal to advance the workflow state.
-    *   **IPC Channels:** I will add the `ServerToClientChannel.NotifyGitOperationResult` channel to handle the explicit success/failure messages from Git operations.
-    *   **Frontend (`view.tsx`):** I will add a new message handler for `NotifyGitOperationResult`. When a successful baseline message is received and the current `workflowStep` is `'awaitingBaseline'`, it will immediately update the state to `'awaitingFileSelect'`. I will also enhance the `useEffect` that checks the workflow state to properly handle the response from the `RequestGitStatus` check, allowing it to skip the baseline step if the tree is already clean. This will fix the "stuck highlight" bug.
-
-3.  **Address PCPP Icon Highlighting:**
-    *   **Research Finding:** Direct animation of a VS Code Activity Bar icon is not supported by the standard extension API. It's a technical limitation.
-    *   **Path Forward:** While I cannot make the icon pulse or glow, the most critical part of the user journey is guiding them *after* they open the panel. The fixes in this cycle will ensure that once the PCPP is open, the rest of the animated guide is seamless and correct. The request is noted, but implementation is currently infeasible.
-
-### Files Updated This Cycle:
-*   `src/Artifacts/A69. DCE - Animated UI Workflow Guide.md` (Updated)
-*   `src/Artifacts/A70. DCE - Git-Integrated Testing Workflow Plan.md` (Updated)
-*   `src/common/ipc/channels.enum.ts` (Updated)
-*   `src/common/ipc/channels.type.ts` (Updated)
-*   `src/backend/services/git.service.ts` (Updated)
-*   `src/client/views/parallel-copilot.view/view.tsx` (Updated)
-</course_of_action>
-</previous cycle 8 summary of actions>
-</Cycle 9>
-
-
-
-<Cycle 8>
-okay, selected this response, fixed ts errors, now initating a new test:
-
-<test 1>
-1. create a new folder 'TowerDefense7', i use the `Open Folder` button to open it as the workspace.
-2. moment of truth... will the pcpp icon be highlighted? im about to click the spiral, drumroll please....
-3. big sad. it is not highlighted. big big sad. fourth time im requesting this `DCE: Open Parallel Co-Pilot` icon get highlighted if the pcpp is not currently open.
-4. i click the pcpp icon
-5. the text window is perfectly sized! great job. its animation looks great.
-6. nice, the readme looks great. im copying/pasting the prompt.md into 4 responses now...
-7. okay after `Resp 4` is pasted in, the `Parse All` is highlighted, good.
-8. okay after parsing, the `Sort` button is highlighted, good.
-9. okay after sorting, the response tab is highlighted, and so is `Select This Response`, nice.
-10. i click on the longest response, and then i click on `Select This Response`. `Baseline` is highlighted. the readme popup appears when i click it when uninitialized. the readme has good language in it. nice.
-11. i run `git init` in the pwd. i then click `Baseline` for a second time. i see this popup: `Successfully created baseline commit.`, however the `Baseline` button is still highlighted, as per my previous cycle description. i continued to describe what should happen next. please continue to implement our perfect closed-loop solution based on this new test feedback.
-</test 1>
-
-<previous cycle 7 summary of actions>
-<summary>
-I have analyzed your comprehensive feedback from Cycle 7. My course of action is to implement the full, closed-loop animated workflow you've detailed. This involves removing the complex line numbering feature for now, aligning the onboarding experience by updating the `README.md` and associated pop-up messages, refining the state-aware behavior of the `Baseline` button, and implementing the precise sequence of UI highlights to guide the user through the entire process.
-
-This is a significant feature implementation that will touch multiple parts of the application, from backend services to frontend components and state management.
-
-</summary>
-
-<course_of_action>
-1.  **Documentation First (Codifying the "Perfect Loop"):**
-    *   I will thoroughly update **`A69. DCE - Animated UI Workflow Guide.md`** to reflect the complete, detailed sequence from Cycle 7's feedback. This includes the initial onboarding steps (animating the PCPP icon, welcome page text field, generate button) and the full main loop from baselining to creating a new cycle.
-    *   I will update **`A72. DCE - README for Artifacts.md`** with the new content you requested. This includes adding instructions for initializing a Git repository via the terminal and text to "close the loop" after the initial `prompt.md` is generated.
-    *   I will update **`A70. DCE - Git-Integrated Testing Workflow Plan.md`** to describe the new state-aware behavior of the Baseline button (e.g., checking `git status` for a clean working tree).
-
-2.  **Backend Logic & Messaging (`git.service.ts`, `prompt.service.ts`):**
-    *   **`prompt.service.ts`:** I will modify the `generateCycle0Prompt` method. After creating `prompt.md`, it will now also programmatically open `src/Artifacts/README.md` in a new editor tab to guide the user.
-    *   **`git.service.ts`:**
-        *   I will create a new private method to check the git status by running `git status --porcelain`. This command provides a clean, scriptable output. If the output is empty, the working tree is clean.
-        *   The `handleGitBaselineRequest` method will be updated to first check this status. If the tree is already clean, it will return a specific message like "Already baselined."
-        *   The error message for "not a git repository" will be made more generic, pointing the user to the `README.md` for guidance instead of a specific artifact number.
-
-3.  **Frontend UI & Workflow Implementation (`view.tsx`, `view.scss`, `NumberedTextarea.tsx`, `OnboardingView.tsx`):**
-    *   **Remove Line Numbers:** In `NumberedTextarea.tsx`, I will add a `showLineNumbers` prop (defaulting to true) and update the component to conditionally render the line number gutter. In `ContextInputs.tsx`, I will pass `showLineNumbers={false}`.
-    *   **Onboarding UI:**
-        *   In `OnboardingView.tsx` and `view.scss`, I will adjust the padding/width of the `.onboarding-textarea` to prevent the scrollbar from obscuring the highlight animation.
-    *   **Implement Full Workflow State Machine (`view.tsx`):**
-        *   I will expand the `workflowStep` state machine to include all new states from `A69`.
-        *   The logic will now correctly transition from the onboarding text input to the "Generate" button.
-        *   I will implement the full main loop: `Baseline` -> `Select All` -> `Accept Selected` -> `Cycle Context` -> `Cycle Title` -> `Generate prompt.md` -> `+ New Cycle`.
-        *   The state transitions will be driven by user actions (clicks, text input) and backend responses (e.g., a successful baseline).
-
-</course_of_action>
-</previous cycle 7 summary of actions>
-</Cycle 8>
-
-<Cycle 7>
-okay thanks for the analysis on the word wrap. can we please remove the line numbers? this will resolve the complex issue for now. we will not pursue it. perhaps later when there is more of a reason to implement a more serious code editor, we can look into that angle of attack. for now, lets hide the line numbering for our `Cycle Context` and `Ephemeral Context`.
-
-running a new test:
-
-1. created a folder, `TowerDefense6`.
-2. Opened Folder with DC FTV button `Open Folder`.
-3. clicked on the spiral to open the DCE now that the workspace is loaded.
-4. my `DCE: Open Parallel Co-Pilot` icon is not animated. I asked for this twice now. this is the third time im requesting such a simple addition, 'if not open, animate'. 
-5. after clicking the pcpp pane, half of this request has been fulfilled. the text field to input the project plan is highlighted and animated, however as i predicted, the right-side is cut off, its obscured, hidden from view by the overlapping scroll bar. please reduce the horizontal width of this text field to compensate for this very clearly articulated prediction that is now an observation.
-6. after inputting text into this field, the expectation is that the `Generate Intitial Artifacts Prompt` be highlighted. this is not the case. i am still seeing the text field animated. it should update once something is input. the user will write until they feel comfortable, we just need to show them what is the next step at this point, once they're ready.
-7. after clicking `Generate Initial Artifacts Prompt`, the prompt.md opened correctly. i have a great idea, can we also open the README file at this time that we generate? we can write down at the bottom, 'at this point, if the readme just opened, you're ready to submit your first prompt! simply copy/paste...' blah blah, just a sentence or two to 'close the loop'. by opening both the prompt.md, and the readme, and adding these instructions to the readme, we effectively close the loop on this initial stage because honestly everything after that is pretty cookie-cutter repeatable process.
-8. i am now copying/pasting the prompt.md into four aistudio conversations in parallel.
-9. pasting in the first one correctly incremented the `Resp 1` -> `Resp 2` animation. good.
-10. after pasting all 4 in, the `Parse All` highlighted, good.
-11. after parsing, the `Sort` is highlighted, good.
-12. after sorting, the `Select This Response` and the response tabs are highlighted, good.
-13. after clicking `Select This Response`, the baseline button gets highlighted, good.
-13.1. in addition, the changes you have made have encouraged the model to produce our github repository setup guide, which is perfect for the user, as when i click baseline, i see this:
-```
-Git Baseline failed: This is not a Git repository. Please run `git init` in your terminal. See A9 for guidance.
-Please refer to the 'A9. DCE - GitHub Repository Setup Guide.md' artifact in your project.
-```
-13.2. the problem is that this is too specific. the misalignment is in the artifact number, and the fact that the file names are not an identical match. if we losen the reference to just say something along the lines of 'the generated github repository setup guide', that should suffice. i will note that these four they all came back as A14, but again i think its better if we just reference the guide by name and not by number, if that makes sense. otherwise, the pop-up is working as expected, and the user does have the github guide at the moment in time that its suggested they use it. so this is working great, just tidy up the language.
-13.3. in our readme, we can also add guiding language to this point as well. in the read me, tell them to send it off, then the first thing they should do to completely integreate their workflow would be to inititalize their git, etc. and that will be a perfect closed loop i think. even suggesting the user open a terminal in vs code to manage this, single pane > multiple panes.
-14. okay, since i already have git installed, the only thing i need to do myself is write `git init` in my workspace pwd. i just did that. it initialized. now i am ready to click `Baseline`.
-15. once i clicked `Baseline`, as it is currently highlighted step, i see this: `Successfully created baseline commit.`, however `Baseline` is still highlighted.
-15.1. can we make it such that if the current git status is `nothing to commit, working tree clean`, then we can consider ourselves baselined?
-15.2. can we --i just realized, instead of `Open Git Setup Guide` button in the error, lets have it point to the readme, and put this static content in there that they need to know. thats actually perfect.-- as i was saying, can we make this more clear, i am already baselined, and i clicked it again, and i see this `Git Baseline failed: Command failed: git commit -m "DCE Baseline: Cycle 1 - New Cycle"`, can we make that language more clear? you're currently already baselined' or whatever?
-16. regardless, our baseline button ought to be state self-aware similar to the sort button. if already 'baselined', or once clicked and a baseline is established, then we can highlight the `Select All` button, so that the user then selects all currently selected responses `Associated Files`.
-17. once one or more associated files are selected, we can then highlight the `Accept Selected` button.
-18. once accepted, the Cycle context ought to be highlighted next. then the title, then the `Generate prompt.md` button.
-19. once the `Generate prompt.md` button is clicked, then its the `+` buttons turn to get highlighted. once that is clicked, the next cycle is created, and the process starts at the `Resp 1` -> `Resp N`, and its basically rinse and repeat. at that point, minus those initial onboarding steps.
-
-all and all, great work tbh, we are very close.
-
-this cycle, please remove the numbered lines, align our readme and our toast/popup/error messages to point to the readme, also refine around the baseline button, as discussed, then finally tie up any loose ends so that our animated workflow is a perfect closed loop solution for our users.
-
-<previous cycle 6 summary of actions>
-<summary>
-I have analyzed your comprehensive feedback from Cycle 6. My course of action is to address all five points, which involve creating new documentation to explain a complex technical challenge, implementing several enhancements to the animated workflow, fixing critical bugs with UI highlighting, and improving the `prompt.md` generation logic.
-
-First, I will create a new documentation artifact to explain why handling line numbers for word-wrapped text is a complex problem, as you requested. Then, I will update our existing animated workflow guide to incorporate all of your detailed testing feedback.
-
-With the documentation aligned, I will move to the implementation. I will fix the critical bug causing the `Resp 1` -> `Resp N` animated highlight to get stuck by making the state detection more robust. I will also fix the `prompt.md` generation to be aware of the currently viewed cycle. Finally, I will implement all the new animated workflow steps from your tests and make the sort animation state-aware.
-
-</summary>
-
-<course_of_action>
-1.  **Documentation First (Explaining Complexity & Updating Workflow):**
-    *   I will create a new artifact, **`A76. DCE - Word Wrap Line Numbering Challenges.md`**, to formally explain the technical complexities of implementing line numbers that respect word wrap. It will discuss the difference between logical lines (`\n`) and visual lines, the need for DOM measurement, and why it's a non-trivial feature.
-    *   I will thoroughly update **`A69. DCE - Animated UI Workflow Guide.md`** to incorporate the new, more detailed sequence outlined in your two tests. This includes the initial onboarding steps (animating the PCPP icon, welcome page text field, generate button) and the interaction with `prompt.md`.
-    *   I will add a new case study to **`A11. DCE - Regression Case Studies.md`** for the "Stuck `Resp N` Highlighting" bug, codifying its root cause and the more robust solution.
-    *   I will update **`A0. DCE Master Artifact List.md`** to include the new `A76` artifact.
-
-2.  **Fix Stuck `Resp N` Highlighting (`view.tsx`):**
-    *   The `useEffect` hook that manages the `workflowStep` for pasting responses is flawed. I will rewrite it to be more robust. The new logic will simply check if `tabs[i].rawContent` has a length greater than zero for each tab from 1 to `tabCount`. This removes the dependency on complex state and directly checks the user's action, fixing the bug where the highlight gets stuck on `Resp 1`.
-
-3.  **Enhance `prompt.md` Generation (`prompt.service.ts` & `view.tsx`):**
-    *   To fix the issue where the generated prompt includes future cycles, I will modify the `RequestCreatePromptFile` IPC channel to accept the `currentCycle` number from the frontend.
-    *   The `handleGeneratePrompt` function in `view.tsx` will now pass the `currentCycle` state.
-    *   The `_generateCyclesContent` method in `prompt.service.ts` will be updated to filter the history, only including cycles up to and including the `currentCycle` passed from the frontend.
-
-4.  **Implement New Animated Workflow Steps (`view.tsx`, `OnboardingView.tsx`, `view.scss`):**
-    *   I will add the new workflow states to the state machine in `view.tsx` (e.g., `awaitingProjectScope`, `awaitingGenerateInitialPrompt`).
-    *   I will implement the UI logic to highlight the PCPP icon, the text field in `OnboardingView.tsx`, and the "Generate Initial Artifacts Prompt" button.
-    *   I will fix the styling for the onboarding `textarea` in `view.scss`, adding padding and adjusting its width to match the button below it, ensuring the highlight animation is fully visible.
-    *   I will make the "Sort" button's animation state-aware by adding a condition to the workflow logic that skips the `awaitingSort` step if `isSortedByTokens` is already true.
-
-</course_of_action>
-
-
-</previous cycle 6 summary of actions>
-</Cycle 7>
-
-
-<Cycle 6>
-okay, so if the word wrap is truly a complex issue, then can you please create a documentation artifact which would outline its solution? is there not a library or some code thats open source we can get our hands on? i dont get why you insist that its complex. the easy solution would be to simply remove the numbered line but i dont want to do that. the numbers are extremely helpful to users. please plan this out more thoroughly so that i can then help implement it.
-
-now, i will test our animated workflow more thoroughly, focusing on if we solved the `+` create new cycle button:
-
-okay starting a new project by creating a new folder. ill record my steps here:
-<test 1>
-1. i created a new folder 'towerdefense4' to serve as the workspace. i opened that folder as the workspace.
-1.1. at this state, the first animated highlight should be the pcpp panel button on the FTV.
-2. clicked pcpp. it opened the welcome page.
-3. i input 'i want to build a tower defense game', then clicked `Generate Initial Artifacts Prompt`.
-3.1. once the prompt.md file is created, is it possible to highlight and animate that file until it gets clicked on?
-3.2. currently, the `Resp 1` is highlighted. it would be preferrable if we could highlight the prompt.md first, once thats clicked, then we could begin highlighting the `Resp 1`.
-3.3. if we cannot animate prompt.md in the FTV, then we can just automatically open the prompt.md file.
-3.4. if we auto-pop it open, perhaps we can auto-select and auto-copy to clipboard the prompt.md? because thats what has to happen next.
-4. i then take the prompt and send it to gemini 2.5 pro via aistudio 4 times in parallel conversations.
-5. i take the responses back and place them in `Resp 1` through `Resp 4`. they do not seem to animate in succession as they used to. its unfortunate. is there a more robust way to simply detect if something is placed in the response text field or not? thats all you need to do for the trigger, no?
-7. once all four responses have input, the parse all button no longer highlights, still stuck on `Resp 1`.
-8. i click parse all, sort does not highlight, `Resp 1` is still highlighted.
-9. i clicked on the longest response (2) then clicked select resopnse, then selct all, then accept selected.
-10. once i clicked accept selected, the cycle context text field got highlighted. this part is correct. the next logical step once accepting a response is to write about observations from the accepted files.
-11. once i input something in the cycle context, then the cycle title highlights, this is correct.
-12. once i input something into cycle context, the generate prompt button and the cycle & context turns green and i can click `+` so it looks like that bug is fixed.
-13. im observing that if i click create cycle 2, then go back to cycle 1, then click generate prompt (while viewing cycle 1), i still get the cycle 2 placed inside the prompt. ideally, the generate prompt will generate up to whatever the current cycle is being viewed. this is because i only clicked new cycle, but i still need to generate and send cycle 1 off. as a user i simply clicked htis out of order. in doing so, our solution should be robust enough to allow the user to still generate either prompt they are trying to create.
-</test 1>
-so largely the test was good, especially the confirmation that `+` functions once again. im going to run another test, because i think this `Resp 1` needs to be made more robust, its wonky on my cycle 2 right now as well. im creating a new folder and running one more test:
-<test 2>
-1. created `TowerDefense5`
-2. clicked `Open Folder` in the DC FTV.
-3. selected the `TowerDefense5` Folder.
-4. clicked on the DCE spiral icon.
-4.1. the pcpp pane icon button should be animated. we can simply make this 'if not currently open, animate'. that seems easy and robust enough to work as we desire and in future situations.
-5. the welcome to the data curation environment pane opens.
-5.1. the text field on this pane should be animated, just like i saw the cycle context pane highlighted in test 1.
-5.2. as previously reported, the right-side of the text pane is covered, leading to only three-sides of the highlight affect being visible. the right-side of the text field is covered, seemingly by the scroll bar. if you can add some small % padding to the right, this should resolve the issue.
-5.3. ideally, if you could make the width of the text pane match the button below it, it would be more uniform and it would solve the overlapping issue that hides the right side of the text bar thats obscuring the highlight animation line.
-5.4. once something is input in this field, we can next highlight the `Generate Initial Artifacts Prompt`.
-6. i input 'i want to make a tower defense game' and then i click `Generate Initial Artifacts Prompt`.
-6.1. im observing `Resp 1` is immediately highlighted. without doing anything else, to test the highlighting that seemed broken in test 1, i will simply add some text into the resp 1 field and observe if the animated highlight correctly progresses to `Resp 2` or not.... it does not. this confirms it is actually broken as i did not click anything additional to obscure the clean slate state if that makes sense. 
-6.2. we want to be placing an animation right before this to solve for the observations in test 1.
-</test 2>
-
-okay that was basically what i wanted to confirm with test 2, making sure the resp 1 was actually bugged and not some wonky state from my prior test being less controlled.
-
-please do the following:
-1. plan out what is so complex about the word wrap problem
-2. solve for the few additional animated workflow steps (the documentation for the animated workflow is critical, with so many meticulous steps, we have to keep the documentation well-aligned or else we have regression.
-3. solve for the seemingly stuck `Resp 1` -> `Resp N` animated highlighting. this was working seamlessly previously.
-4. make it so that whichever cycle is being viewed when generate prompt is clicked, that the prompt cycles are generated up to that cycle as the current cycle and does not include cycles after that.
-5. ensure that the sort animation is state aware and skips over that animation if the sort button had already been selected.
-
-<previous cycle 5 summary of actions>
-<summary>
-I have analyzed your feedback from Cycle 5. The primary issue is the inability to create a new cycle after deleting a previous one, which points to a state synchronization bug between the frontend and backend. Additionally, there are persistent usability issues with the context text areas, including a single-character input bug and incorrect line numbering for word-wrapped text.
-
-My course of action is to fix these critical bugs to restore core functionality. I will first address the cycle creation blocker by ensuring the frontend's state is correctly updated after a deletion. Then, I will fix the text area input bug, which is a classic React focus management problem. Finally, I will formally document the word-wrap issue and the plan to address it in a future cycle using our A-B-C testing methodology.
-
-</summary>
-
-<course_of_action>
-1.  **Documentation First (Codifying Bugs & Plans):**
-    *   I will update **`A11. DCE - Regression Case Studies.md`** with two new case studies:
-        *   **"Stuck on Cycle Creation After Deletion":** The RCA is that the frontend's `maxCycle` state is not updated when a cycle is deleted. The solution is for the backend `deleteCycle` method to return the new maximum cycle, which the frontend then uses to update its state.
-        *   **"Single Character Input Bug in Text Area":** The RCA is a classic React focus management issue where the component re-renders on every keystroke, causing the input to lose focus. The solution is to ensure the component (`NumberedTextarea`) and its `onChange` handlers are properly memoized using `React.memo` and `useCallback`.
-    *   I will create a new artifact, **`A75. DCE - Text Area Component A-B-C Test Plan.md`**, to formally plan the diagnosis and resolution of the text area scrolling and word-wrap bugs using our established testing strategy. I will also add this to `A0`.
-    *   I will update **`A59. DCE - Phase 2 - Debugging and State Logging.md`** to specify that the "Log State" button will be modified to output only the state relevant to the cycle creation bug (`currentCycle`, `maxCycle`, etc.) to aid in diagnostics.
-
-2.  **Fix Cycle Creation Bug:**
-    *   **Backend (`history.service.ts`):** I will modify the `deleteCycle` method to return the new maximum `cycleId` after a successful deletion. Its signature will change from `Promise<void>` to `Promise<number>`.
-    *   **IPC (`channels.enum.ts`, `channels.type.ts`):** I will update the IPC channels to handle this response.
-    *   **Backend (`on-message.ts`):** The message handler for `RequestDeleteCycle` will now `await` the result from the `history.service.ts` and send a message back to the client with the new `maxCycle`.
-    *   **Frontend (`view.tsx`):** The `handleDeleteCycle` function will be updated to handle the response from the backend, setting the `maxCycle` state variable correctly. This will re-enable the `+` button at the appropriate time.
-
-3.  **Fix Single-Character Input Bug:**
-    *   **`NumberedTextarea.tsx`:** I will wrap the component export in `React.memo` to prevent it from re-rendering if its props have not changed.
-    *   **`view.tsx`:** The `onChange` handlers for the context text areas (`onCycleContextChange`, `onEphemeralContextChange`) will be wrapped in `useCallback` with the correct dependency arrays. This ensures a stable function is passed as a prop, preserving the memoization of the child component and preventing focus loss.
-
-4.  **Enhance "Log State" Button:**
-    *   **`prompt.service.ts`:** I will modify the `generateStateLog` method. It will now generate a focused report containing only the state variables relevant to cycle management (`currentCycle`, `maxCycle`, `isNewCycleButtonDisabled`, etc.) for easier debugging.
-
-</course_of_action>
-
-</previous cycle 5 summary of actions>
-</Cycle 6>
-
-<Cycle 5>
-okay original text field is working better, still have the word wrap issue. im manually adding in this cycle 4 becuase i still cannot create a new cycle once deleting it. ive added the logs i see. is it possible to somehow reveal what the extension thinks my current state is, pertaining the the allowing of creating a new cycle? like when i click the log state button? make the log state button only do that. ill click it in this stte, and wea can analyze the logs.
-
-<console logs>
-[INFO] [11:14:27 AM] HistoryService: Deleting cycle 2.
-[INFO] [11:14:28 AM] Cycle 2 deleted successfully.
-[INFO] [11:14:28 AM] HistoryService: getLatestCycle called.
-[INFO] [11:14:29 AM] Latest cycle found: 1
-</console logs>
-
-</Cycle 5>
-<Cycle 4>
-<Cycle Context>
-1. i seem stuck on cycle 4. i am unable to click the `+`, despite seeing the green cycle & ccontext banner, which should be the indicator that all requirements have been met. i think the issue is, that i recall i did previously create the cycle 5, but i subsequently deleted it in order to go back to editing and working in cycle 4. i think that deletion has gotten me into a state where i cannot now create cycle 5. any ideas?
-
-2. feedback on the TestPanes...
-2.1. All of them feel the same. they function much better than the original version, but all still fall short in the same aspect...
-2.2. they do not seem to respect word wrapped lines. if a line is word-wrapped, it should not get a line number. this lack of respect of word wrapped lines leads to the length of the line counts being shorter than the actual text, as the actual text has many more lines from the word wrapping.
-2.3. none of these tests have the same misaligned cursor/text issue that is plaguing the originals.
-
-3. im noting that the flashing seems fixed, but now i am noticing that i can only type one character at a time into the original cycle context field. i have to click again to select the field again to type the next character.
-</Cycle Context>
-<Previous Cycle 3 Summary of Actions>
-I have analyzed the detailed feedback from Cycle 2. The core tasks for this cycle are to fix the persistent and severe UI bugs in the context text areas, refine the animated workflow sequence based on your feedback, and correct a file filtering issue where the `.git` directory is being included in generated prompts.
-
-The text area bug (wonky cursor, non-scrolling line numbers) is a high priority as it impacts core usability. The animation workflow requires re-sequencing to better guide the user, especially around the "Baseline" and "Accept" steps. The `.git` directory issue points to an incomplete exclusion list in our file system traversal logic.
-
-My course of action is to first update the documentation to reflect the new workflow sequence. Then I will address the code, focusing on fixing the text area component, adjusting the workflow state machine, and updating the file exclusion patterns.
-
-1.  **Documentation Update (Workflow Refinement):**
-    *   I will update **`A69. DCE - Animated UI Workflow Guide.md`** to incorporate the new, more logical sequence outlined in your feedback (Items 4, 6, 7, 8). The key changes are:
-        *   Insert the "Baseline" step *before* "Accept Selected." The flow will be: Select files -> Highlight `Baseline (Commit)` -> Highlight `Accept Selected`.
-        *   Refine the post-acceptance flow to: Highlight `Cycle Context` -> Highlight `Cycle Title` -> Highlight `Generate prompt.md` -> Highlight `New Cycle Button (+)`.
-    *   I will update **`A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md`** to include the suggestion of making certain artifacts, like the Git setup guide (`T14`), mandatory or prioritized during the initial project generation to ensure users have critical documentation from the start.
-
-2.  **Fix Text Area Component (`NumberedTextarea.tsx` & `view.scss`):**
-    *   **Address Item 9:** The "wonky" behavior, scrolling issues, and potential element overlap in the context text areas are critical usability flaws. I will perform a significant refactor of the `NumberedTextarea.tsx` component.
-    *   **Sync Scrolling:** I will implement a scroll synchronization mechanism. The `onScroll` event of the `textarea` will programmatically update the `scrollTop` property of the line number gutter element, ensuring they move together perfectly.
-    *   **Fix Alignment:** I will meticulously review the CSS properties (`font-size`, `line-height`, `padding`, `font-family`) for both the textarea and any underlying highlighting elements to ensure exact pixel alignment, eliminating cursor and selection misalignment.
-
-3.  **Implement Workflow Animation State Machine (`view.tsx`):**
-    *   I will refactor the `workflowStep` state logic in `parallel-copilot.view/view.tsx` to match the updated sequence from `A69`.
-    *   The state transitions will be adjusted to correctly guide the user through pasting responses (Item 1), parsing (Item 2), sorting (Item 3), baselining (Item 4), accepting (Item 6), and context/prompt generation (Items 7-8).
-
-4.  **Fix `.git` Directory Exclusion (`file-tree.service.ts`):**
-    *   **Address Item 10:** The `.git` directory is being included because it's missing from the global exclusion list used by the file tree service.
-    *   I will add `.git` to the `EXCLUSION_PATTERNS` array in `file-tree.service.ts`. This will prevent it from appearing in the file tree view and subsequently being included in prompt generation.
-
-5.  **Update Onboarding Artifact Generation (`prompt.service.ts`):**
-    *   **Address Item 5:** To ensure critical guides are provided during onboarding, I will modify `generateCycle0Prompt` in `prompt.service.ts`. The prompt given to the AI will be updated to strongly suggest or mandate the inclusion of key artifacts like `T14. Template - GitHub Repository Setup Guide.md` and `T7. Template - Development and Testing Guide.md`.
-</Previous Cycle 3 Summary of Actions>
-</Cycle 4>
-
-<Cycle 3>
-<Cycle Context>
-1. okay, starting the workflow again.... okay, it works great up until:
-
-once i click `Response Selected`, after having pasted in four responses and parsing and then sorting, there is no next step highlighted. at this point, i would want to start rolling in the selected response, but i wouldnt want to do that until after baselining, so we would want to highlight baseline next, once a response is selected. after a successful baseline, we can then highlight the select all button, then accept selected.
-
-2. cycle context text field is still horrendous. the text and line numbers dont do their jobs. honestly i cant even use it. i have to just paste my content in that i write in notepad. why arent we fixing this? lets do an original-a-b-c test on this or something? 
-
-3. when i click baseline without having done git init, i still get this message `Git Baseline failed: Command failed: git add . fatal: not a git repository (or any of the parent directories): .git`. the intention is to make it more clear for hte user what they need to do. ideally we simply direct them to the git repo artifact, however what have you done to make those important template artifacts mandatory? currently, the model still is decidedly not providing that artifact in the project initialization step. not much of an initialization if it doesnt include the git init command, now is it? tautalogically speaking, of course...
-</Cycle Context>
-<Previous Cycle 2 Summary of Actions>
-I have analyzed the detailed feedback from Cycle 2. The primary issues are a series of misalignments in the animated user workflow, a critical and recurring bug with the context text areas, and an error where the `.git` directory is incorrectly included in generated prompts.
-
-My course of action is to first update our documentation to codify the correct, detailed workflow and the plan to make the onboarding process more robust. Then, I will perform a complete rework of the faulty text area component, fix the `.git` directory exclusion bug, and finally, implement the refined state machine for the animated guide.
-
-1.  **Documentation First (Planning & Tracking):**
-    *   I will update `A69. DCE - Animated UI Workflow Guide.md` to reflect the new, correct, and more detailed sequence for the animated highlights. This includes highlighting `Baseline` before `Accept Selected`, and guiding the user from accepting files all the way to generating the next prompt.
-    *   I will update `A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md` to include a new strategy for the onboarding process. The goal is to more strongly encourage the AI to generate the `GitHub Repository Setup Guide` and `Developer Environment Setup Guide` to prevent issues like the user encountering a `git` command failure.
-    *   I will add a new entry to `A11. DCE - Regression Case Studies.md` to document the persistent rendering and scrolling issues with the `NumberedTextarea` component, codifying the problem to prevent future regressions.
-
-2.  **Fix Critical Bugs:**
-    *   **Context Text Area Rework:** The text fields for cycle context are unusable. I will completely refactor the `NumberedTextarea.tsx` component. I will implement a robust solution using two synchronized scrolling elements and `useRef` hooks to ensure the line numbers and text content scroll together perfectly, fixing the visual glitches and alignment issues.
-    *   **`.git` Directory Exclusion:** The `Generate prompt.md` command is incorrectly including files from the `.git` directory. I will fix this by updating the `getAllFilesRecursive` method in `flattener.service.ts` to explicitly exclude the `.git` directory, ensuring it is never included in the flattened output.
-
-3.  **Implement Refined Animated Workflow:**
-    *   **State Machine (`view.tsx`):** I will refactor the `workflowStep` state machine to follow the new, precise sequence. This involves adding more granular states (e.g., `awaitingBaseline`, `awaitingCycleContext`, `awaitingCycleTitle`) and updating the `useEffect` hooks that monitor user actions to correctly transition between these states.
-    *   **Onboarding (`prompt.service.ts`):** To support the updated onboarding plan, I will modify the `generateCycle0Prompt` method to ensure the setup guide templates (`T14`, `T16`) are included in the static context for the AI.
-</Previous Cycle 2 Summary of Actions>
-</Cycle 3>
-
 <Cycle 2>
-<Cycle Context>
-okay i initiated a new project in order to test our animated workflow.
+once we integrate with the local llm, we are going to want to, for each animated step, also create an audio clip that describes what the purpose of the button is, and how its what the user should be 'doing' next, logically. instead of just displaying a tooltip with a textual instruction, we could play the audio clip describing the buttons function and purpose. so we will want an artifact which will capture the statements for each animated step.
 
-1. the animated workflow will start once the user inputs an initial project plan and views the pcpp. the inital prompt.md is created at this time. this is when the user should be placing in the responses, and so `Resp 1` to `Resp N` should be sequentially highlighted as the user pastes AI responses, but i currently do not see this in the current state.
-
-2. okay, i have pasted in all four responses. at this point, it should be instructing me to select parse all, but that is not occurring.
-
-3. okay, once parsed, the sort button is correctly animated. this is the first animation functioning as expected since initiating a new project.
-3.1. note the sort highlight animation needs to be state-aware. there are states where its 
-
-4. okay, after sorting, i 'focused' the longest response to by clicking it. then, 'selected' the longest response by clicking `Select This Response`. then, i selected all of this resposnes files by clicking `Select All`. this is where we need to change the highlights, they were working fine until this point.
-4.1. currently, i see the `Accept Selected` highlighted, but the idea here is first we want to instruct the user to `Baseline`. the idea is they baseline before accepting, so they can roll back to the baseline with restore to try another set of files out.
-
-5. if i click `Baseline` and i have not yet initialized a git repo, i get this error: `Git Baseline failed: Command failed: git add . fatal: not a git repository (or any of the parent directories): .git`. im observing that on cycle 0 project initialization, we arent providing the user with the github setup guide and the developer setup guide. how can we alter our onboarding process to encourage the model to be more generous with its intial creation of these template files? ideally, the user gets the git instructions at this point in time, in this very response, and so would be able to read it with the associated file viewer pane we have and then they could get through this hurdle. can we mark such artifacts as mandatory or something?
-
-6. ah okay, after i clicked `Accept Selected`, the `Baseline` infact became animated. so we do animate it just not quite at the right step.
-
-7. once the user `Accept Selected`, the next thing they would be doing in the pcp is writing the cycle context, so that should get highlighted next instead of `Baseline`. 
-
-8. once the user writes in cycle context, then we can highlight the 'cycle title'. once they input in the cycle title, we can highlight `Generate prompt.md`. once they click `Generate prompt.md`, thats when we can highlight `+`. can you work through that?
-
-9. these text fields are still wildly inaccurate as i write more in them. why are they so bad? 
-9.1. it almost looks like theres two text fields on top of each other or something? theres no conflict like that going on is there? the numbers still do not scroll with the lines themselves. as i scroll down, the text scrolls but the numbers remain fixed.
-
-10. it looks like we are including some `.git/` directory files, such as:
-<file path=".git/info/exclude">
-<file path=".git/COMMIT_EDITMSG">
-<file path=".git/index">
-
-and some others. all of them look unnecessary for the `flattened_repo.md`, can that directory be ignored? note they are appearing when i use the `Generate prompt.md` button, but not when i use the `Flatten Context` button.
-
-11. please first update our documentation then update the code files
-</Cycle Context>
-<Previous Cycle 1 Summary of Actions>
-I have analyzed the detailed feedback from Cycle 1. This is a significant set of tasks covering critical usability bugs in the Parallel Co-Pilot Panel (PCPP), a major `prompt.md` generation flaw, and a substantial new feature request for an animated, guided workflow.
-
-My course of action is to first codify all new feature requests and identified issues into our documentation. This ensures we have a clear plan. Then, I will address the most critical bugs, particularly the broken text areas and the faulty prompt generation. Finally, I will implement the new animated workflow guide.
-
-### Course of Action
-
-1.  **Documentation First (Planning & Tracking):**
-    *   I will create several new artifacts to plan and track the work for this cycle:
-        *   `A66. DCE - Cycle 1 - Task Tracker.md`: To log all feedback items from this cycle.
-        *   `A67. DCE - PCPP View Refactoring Plan.md`: To plan the necessary refactor of the large `view.tsx` file.
-        *   `A68. DCE - PCPP Context Pane UX Plan.md`: To specifically plan the UX improvements for the context text areas (line numbers, token counts).
-        *   `A69. DCE - Animated UI Workflow Guide.md`: To document the new guided workflow sequence you've outlined.
-        *   `A70. DCE - Git-Integrated Testing Workflow Plan.md`: To plan for the next logical step in the workflow, which is integrating Git for baselining and restoring.
-    *   I will update `A0. DCE Master Artifact List.md` to include all these new artifacts.
-
-2.  **Fix Critical Bugs:**
-    *   **`prompt.md` Generation Bug (Item #6):** The issue where `</prompt.md>` appears on the third line is a critical flaw. I will fix the string assembly logic in `prompt.service.ts` to ensure the opening and closing tags correctly wrap the entire file content.
-    *   **Context Text Area Rework (Items #2, #3, #7):** The issues with line numbers, scrolling, and cursor alignment are severe usability problems. I will perform a complete rework of the `NumberedTextarea.tsx` component to fix these issues, ensuring the line number gutter scrolls in sync with the content and that text selection highlighting is accurate.
-    *   **FTV Flashing (Item #1):** The flashing of the File Tree View is distracting. I will investigate the file watcher and refresh logic in `file-tree.service.ts` and `context-chooser.view/view.tsx` to make the UI updates less jarring, likely by preventing unnecessary full-component re-renders.
-
-3.  **Implement Animated Workflow Guide (Items #4, #5):**
-    *   **State Management (`view.tsx`):** I will introduce a new state variable, `workflowStep`, to track the user's progress through the guided sequence. A series of `useEffect` hooks will monitor user actions (creating a new cycle, pasting content, parsing, selecting a response, etc.) and update this state accordingly.
-    *   **UI Highlighting (`view.tsx` & `view.scss`):** I will create a new CSS keyframe animation for a "pulsing glow" effect. This animation will be applied via a `.workflow-highlight` class that is conditionally added to the appropriate UI elements based on the current `workflowStep`.
-</Previous Cycle 1 Summary of Actions>
+next, we are also going to want to consider a RAG solution. eventually our 'flatten context' button in the FTV will evolve to also create embeddings. 
 </Cycle 2>
-
 <Cycle 1>
 <Cycle Context>
-1. FTV flashing. each time something is saved, the entire file tree flashes. basically, when i type something into the cycle context field and then stop, the attached logs appear, and the pane flashes. we just do not want the pane to flash each time its very distracting.
+i thought we fixed this... still now each time i stop typing in the cycle context, the ftv flashes. in addition, if i write too much into this field, like more than 6 lines, it breaks essentially the entire text field. ive created a video of this occurring. 
 
-2. it seems that our line numbers for this cycle context field is not respecting wordwrap. for example, the 1. is actually the first line, between 'the pane' it word wraps to the next line. once i press return, the 2 appears, but it appears right below the 1, instead of respecting the additional word wrapped portion of line 1 and starting the '2' on the third actual line, if that makes sense. ill put a screenshot. where this 2. line starts, it should be line 3, but its not its line blank, because the 3 is one line above.
-
-3. the line numbers dont even scroll with the text field. these line numbers just need a complete rework it seems.
-
-4. okay, lets continue building out the blue highlight animation workflow. this time ill start from the very beginning. what i articulated was the typical productivity loop. id like the highlight animation right from the beginning. here goes:
-
-4.1. they very first thing is for the user to open a folder. we could place the highlighted animation on the Open Folder button in the file tree view (FTV).
-4.2. after clicking open folder and selecting a folder to open as the workspace, there should be no files selected (with checkmarks). therefore that is the next logical step, to make the file selections. 
-4.3. once more than 0 files are selected, the next logical step is then to open the pcpp itself, so we could animate the `DCE: Open Parallel Co-Pilot`.
-4.4. opening the pcpp for the first time should reveal the welcome page. we can highlight the entire project plan text field where they input their plan. once they've written something, we can then highlight the button below it. (note, this text field seems to be covered slightly, on the right side. i say this because the blue border that appears when i click inside this field only shows 3 of the four blue borders. the right one is covered. my concern is this will look odd when the highlighted animated effect is applied. can this be corrected for? perhaps its the scroll bar and for this screen it can be hidden? i do notice this on other screens and so i thought to bring it up here since we are highlighting it in the animation).
-4.5. after clicking the button to get to the cycle 1 pcpp, the next logical step is to start writing in the cycle context pane. once something is written in there, we can highlight the cycle title text field, as its much more natural to first articulate out your cycle context, and then to come back and give a title to it, rather than trying to summarize that which doesnt exist yet into a title.
-4.6. once something is written in the cycle title, the next logical step is to click `Generate prompt.md`. once clicked, the next logical step is the user takes that prompt, sends it off, and then starts placing the responses in, so that is where we sort of start to connect to the currently articulated workflow, from an onboarding perspective, because now its the workflow of placing in the responses, selecting, baselining, accepting, testing, potentially restoring, etc.
-
-5. update our workflow artifact with this portion and then lets implement it. the ideal scenario is that the next 'thing to do' is always animated. and so there should always be something animated. we will begin playtesting this until we get it it right.
-
-6. for some reason, when the `prompt.md` is generated, the third line is `</prompt.md>`. this tag is suppoed to be the last line, not the third line. here are the first 13 lines of the prompt.md file before i manually moved `</prompt.md>` to the bottom:
-
-```
-<prompt.md>
-
-</prompt.md>
-
-<M1. artifact schema>
-M1. artifact schema
-M2. cycle overview
-M3. interaction schema
-M4. current project scope
-M5. organized artifacts list
-M6. cycles
-M7. Flattened Repo
-</M1. artifact schema>
-```
-
-7. theres definitely something wrong with the cycle context text field still. eventually the cursor no longer lines up with where the text is being written. it is espeically wonky when i select this entire text with ctrl + a. even the highlighting doesnt respect the text locations. ill take a screenshot of this as well.
-
+finally, lets create a new artifact 11.1. we are to place any new regression cases into this artifact so that we do not have to re-write the 10k token A11 artifact. it can be now just referenceable,
 </Cycle Context>
+<Ephemeral Context>
+[INFO] [8:35:24 PM] [CONTEXT-HIGHLIGHT] Received request for context ID: cycle-context-1
+[INFO] [8:35:25 PM] [SelectionService] Found 169 paths in persisted state. Validating...
+[INFO] [8:35:25 PM] [SelectionService] Returning 169 valid paths.
+[INFO] [8:35:25 PM] HistoryService: saving data for cycle 1.
+[INFO] [8:35:26 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/DCE/.vscode/dce_history.json
+[INFO] [8:35:26 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/DCE/.vscode/dce_history.json
+[INFO] [8:35:27 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [8:35:27 PM] handleWorkspaceFilesRequest started. forceRefresh=true
+[INFO] [8:35:27 PM] Building file tree from scratch.
+[INFO] [8:35:27 PM] buildTreeFromTraversal starting for root: c:\Projects\DCE
+[INFO] [8:35:27 PM] [SelectionService] Found 169 paths in persisted state. Validating...
+[INFO] [8:35:27 PM] [SelectionService] Returning 169 valid paths.
+[INFO] [8:35:27 PM] Persisted current selection of 169 items.
+[INFO] [8:35:27 PM] buildTreeFromTraversal finished. Root node has 16 children.
+[INFO] [8:35:27 PM] File tree built. Sending to client.
+[INFO] [8:35:27 PM] handleWorkspaceFilesRequest finished.
+
+</Ephemeral Context>
 </Cycle 1>
 
 <Cycle 0>
@@ -2547,26 +1583,22 @@ This file-centric approach helps in planning and prioritizing work, especially i
 
 </M6. Cycles>
 
-asdf
-
 <M7. Flattened Repo>
-
-
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-01T20:33:13.939Z
+  Date Generated: 2025-09-02T01:39:41.068Z
   ---
   Total Files: 168
-  Approx. Tokens: 448004
+  Approx. Tokens: 447689
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (239424 tokens)
 2. src\Artifacts\A11. DCE - Regression Case Studies.md (10001 tokens)
 3. src\Artifacts\A0. DCE Master Artifact List.md (7189 tokens)
-4. src\client\views\parallel-copilot.view\view.tsx (7152 tokens)
-5. src\client\views\parallel-copilot.view\view.scss (5158 tokens)
+4. src\client\views\parallel-copilot.view\view.tsx (7137 tokens)
+5. src\client\views\parallel-copilot.view\view.scss (5176 tokens)
 6. src\backend\services\prompt.service.ts (4908 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4429 tokens)
 8. src\backend\services\file-operation.service.ts (4095 tokens)
@@ -2574,174 +1606,597 @@ asdf
 10. src\client\views\context-chooser.view\view.scss (3708 tokens)
 
 <!-- Full File List -->
-1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 424 - Chars: 28756 - Tokens: 7189
-2. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
-3. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
-4. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
-5. src\Artifacts\A4. DCE - Analysis of The-Creator-AI Repo.md - Lines: 56 - Chars: 5722 - Tokens: 1431
-6. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
-7. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
-8. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
-9. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
-10. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
-11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 349 - Chars: 40001 - Tokens: 10001
-12. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5710 - Tokens: 1428
-13. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
-14. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
-15. src\Artifacts\A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md - Lines: 43 - Chars: 7263 - Tokens: 1816
-16. src\Artifacts\A16. DCE - Phase 1 - UI & UX Refinements Plan.md - Lines: 50 - Chars: 6421 - Tokens: 1606
-17. src\Artifacts\A17. DCE - Phase 1 - Advanced Tree View Features.md - Lines: 47 - Chars: 3888 - Tokens: 972
-18. src\Artifacts\A18. DCE - Phase 1 - Active File Sync Feature Plan.md - Lines: 46 - Chars: 4548 - Tokens: 1137
-19. src\Artifacts\A19. DCE - Phase 1 - Double-Click & Quick-Remove Feature Plan.md - Lines: 42 - Chars: 4603 - Tokens: 1151
-20. src\Artifacts\A20. DCE - Phase 1 - Advanced UX & Automation Plan.md - Lines: 47 - Chars: 7268 - Tokens: 1817
-21. src\Artifacts\A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer.md - Lines: 48 - Chars: 7385 - Tokens: 1847
-22. src\Artifacts\A22. DCE - Phase 1 - Search & Filter Feature Plan.md - Lines: 58 - Chars: 3663 - Tokens: 916
-23. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 37 - Chars: 5504 - Tokens: 1376
-24. src\Artifacts\A24. DCE - Selection Paradigm Terminology.md - Lines: 57 - Chars: 3330 - Tokens: 833
-25. src\Artifacts\A25. DCE - Phase 1 - Git & Problems Integration Plan.md - Lines: 61 - Chars: 5871 - Tokens: 1468
-26. src\Artifacts\A26. DCE - Phase 1 - File System Traversal & Caching Strategy.md - Lines: 42 - Chars: 3593 - Tokens: 899
-27. src\Artifacts\A27. DCE - Phase 1 - Undo-Redo Feature Plan.md - Lines: 50 - Chars: 4903 - Tokens: 1226
-28. src\Artifacts\A28. DCE - Packaging and Distribution Guide.md - Lines: 95 - Chars: 4366 - Tokens: 1092
-29. src\Artifacts\A29. DCE - Phase 1 - Binary and Image File Handling Strategy.md - Lines: 81 - Chars: 4217 - Tokens: 1055
-30. src\Artifacts\A30. DCE - Phase 1 - PDF Handling and Virtualization Strategy.md - Lines: 44 - Chars: 4431 - Tokens: 1108
-31. src\Artifacts\A31. DCE - Phase 2 - Multimodal Content Extraction (PDF Images).md - Lines: 44 - Chars: 4035 - Tokens: 1009
-32. src\Artifacts\A32. DCE - Phase 1 - Excel and CSV Handling Strategy.md - Lines: 44 - Chars: 4295 - Tokens: 1074
-33. src\Artifacts\A33. DCE - Phase 1 - Copy-Paste Feature Plan.md - Lines: 42 - Chars: 4456 - Tokens: 1114
-34. src\Artifacts\A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements.md - Lines: 45 - Chars: 6849 - Tokens: 1713
-35. src\Artifacts\A35. DCE - Phase 2 - UI Mockups and Flow.md - Lines: 54 - Chars: 3584 - Tokens: 896
-36. src\Artifacts\A36. DCE - Phase 2 - Technical Implementation Plan.md - Lines: 56 - Chars: 3621 - Tokens: 906
-37. src\Artifacts\A37. DCE - Phase 2 - Cycle Navigator & Knowledge Graph - Vision.md - Lines: 28 - Chars: 3242 - Tokens: 811
-38. src\Artifacts\A38. DCE - Phase 2 - Cycle Navigator - UI Mockup.md - Lines: 69 - Chars: 4621 - Tokens: 1156
-39. src\Artifacts\A39. DCE - Phase 2 - Cycle Navigator - Technical Plan.md - Lines: 84 - Chars: 4595 - Tokens: 1149
-40. src\Artifacts\A40. DCE - Phase 2 - Parallel Co-Pilot - Target File Structure.md - Lines: 66 - Chars: 3659 - Tokens: 915
-41. src\Artifacts\A40.1. DCE - Phase 2 - Competitive Analysis & Feature Ideas.md - Lines: 43 - Chars: 4784 - Tokens: 1196
-42. src\Artifacts\A41. DCE - Phase 2 - API Key Management - Feature Plan.md - Lines: 47 - Chars: 4542 - Tokens: 1136
-43. src\Artifacts\A41.1. DCE - Phase 2 - Advanced Features & Integrations Plan.md - Lines: 44 - Chars: 3946 - Tokens: 987
-44. src\Artifacts\A41.2. DCE - Phase 2 - Feature Ideation & Competitive Analysis.md - Lines: 40 - Chars: 4566 - Tokens: 1142
-45. src\Artifacts\A42. DCE - Phase 2 - Initial Scaffolding Deployment Script.md - Lines: 246 - Chars: 8264 - Tokens: 2066
-46. src\Artifacts\A43. DCE - Phase 2 - Implementation Roadmap.md - Lines: 69 - Chars: 4694 - Tokens: 1174
-47. src\Artifacts\A44. DCE - Phase 1 - Word Document Handling Strategy.md - Lines: 45 - Chars: 4626 - Tokens: 1157
-48. src\Artifacts\A45. DCE - Phase 2 - Pop-out Co-Pilot Window - Feature Plan.md - Lines: 49 - Chars: 4156 - Tokens: 1039
-49. src\Artifacts\A46. DCE - Phase 2 - Paste and Parse Response - Feature Plan.md - Lines: 38 - Chars: 3587 - Tokens: 897
-50. src\Artifacts\A47. DCE - Phase 2 - Prompt Amalgamation Feature Plan.md - Lines: 42 - Chars: 3499 - Tokens: 875
-51. src\Artifacts\A48. DCE - Phase 2 - Advanced Syntax Highlighting Plan.md - Lines: 49 - Chars: 4044 - Tokens: 1011
-52. src\Artifacts\A49. DCE - Phase 2 - File Association & Diffing Plan.md - Lines: 44 - Chars: 4452 - Tokens: 1113
-53. src\Artifacts\A50. DCE - Phase 2 - UI Component Plan (Resizable Panes & Inner Editors).md - Lines: 51 - Chars: 5128 - Tokens: 1282
-54. src\Artifacts\A51. DCE - A-B-C Testing Strategy for UI Bugs.md - Lines: 81 - Chars: 5490 - Tokens: 1373
-55. src\Artifacts\A52. DCE - Interaction Schema Refinement.md - Lines: 66 - Chars: 3444 - Tokens: 861
-56. src\Artifacts\A52.1 DCE - Parser Logic and AI Guidance.md - Lines: 128 - Chars: 5204 - Tokens: 1301
-57. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 34 - Chars: 9394 - Tokens: 2349
-58. src\Artifacts\A53. DCE - Phase 2 - Token Count and Similarity Analysis.md - Lines: 43 - Chars: 3500 - Tokens: 875
-59. src\Artifacts\A55. DCE - FSService Refactoring Plan.md - Lines: 77 - Chars: 4022 - Tokens: 1006
-60. src\Artifacts\A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md - Lines: 47 - Chars: 5687 - Tokens: 1422
-61. src\Artifacts\A57. DCE - Phase 2 - Cycle Management Plan.md - Lines: 44 - Chars: 3625 - Tokens: 907
-62. src\Artifacts\A58. DCE - WinMerge Source Code Analysis.md - Lines: 56 - Chars: 5322 - Tokens: 1331
-63. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 39 - Chars: 3393 - Tokens: 849
-64. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 35 - Chars: 4175 - Tokens: 1044
-65. src\Artifacts\A61. DCE - Phase 2 - Cycle History Management Plan.md - Lines: 45 - Chars: 3559 - Tokens: 890
-66. src\Artifacts\A62. DCE - Cycle 157 - Task Tracker.md - Lines: 31 - Chars: 2710 - Tokens: 678
-67. src\Artifacts\A63. DCE - Cycle 158 - Task Tracker.md - Lines: 23 - Chars: 1760 - Tokens: 440
-68. src\Artifacts\A64. DCE - Cycle 159 - Task Tracker.md - Lines: 22 - Chars: 1550 - Tokens: 388
-69. src\Artifacts\A65. DCE - Universal Task Checklist.md - Lines: 87 - Chars: 5422 - Tokens: 1356
-70. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1806 - Tokens: 452
-71. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 47 - Chars: 3537 - Tokens: 885
-72. src\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3311 - Tokens: 828
-73. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 3762 - Tokens: 941
-74. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 58 - Chars: 6179 - Tokens: 1545
-75. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
-76. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 43 - Chars: 2874 - Tokens: 719
-77. src\Artifacts\A73. DCE - GitService Plan.md - Lines: 44 - Chars: 2548 - Tokens: 637
-78. src\Artifacts\A74. DCE - Per-Input Undo-Redo Feature Plan.md - Lines: 49 - Chars: 3624 - Tokens: 906
-79. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
-80. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
-81. src\Artifacts\A200. Cycle Log.md - Lines: 13947 - Chars: 957696 - Tokens: 239424
-82. src\Artifacts\README.md - Lines: 33 - Chars: 2764 - Tokens: 691
-83. src\Artifacts\T1. Template - Master Artifact List.md - Lines: 36 - Chars: 1716 - Tokens: 429
-84. src\Artifacts\T2. Template - Project Vision and Goals.md - Lines: 38 - Chars: 1968 - Tokens: 492
-85. src\Artifacts\T3. Template - Phase 1 Requirements & Design.md - Lines: 37 - Chars: 1876 - Tokens: 469
-86. src\Artifacts\T4. Template - Technical Scaffolding Plan.md - Lines: 54 - Chars: 2180 - Tokens: 545
-87. src\Artifacts\T5. Template - Target File Structure.md - Lines: 35 - Chars: 1054 - Tokens: 264
-88. src\Artifacts\T6. Template - Initial Scaffolding Deployment Script.md - Lines: 63 - Chars: 2593 - Tokens: 649
-89. src\Artifacts\T7. Template - Development and Testing Guide.md - Lines: 48 - Chars: 1738 - Tokens: 435
-90. src\Artifacts\T8. Template - Regression Case Studies.md - Lines: 31 - Chars: 1971 - Tokens: 493
-91. src\Artifacts\T9. Template - Logging and Debugging Guide.md - Lines: 49 - Chars: 2590 - Tokens: 648
-92. src\Artifacts\T10. Template - Feature Plan Example.md - Lines: 32 - Chars: 2692 - Tokens: 673
-93. src\Artifacts\T11. Template - Implementation Roadmap.md - Lines: 55 - Chars: 2887 - Tokens: 722
-94. src\Artifacts\T12. Template - Competitive Analysis.md - Lines: 42 - Chars: 3227 - Tokens: 807
-95. src\Artifacts\T13. Template - Refactoring Plan.md - Lines: 55 - Chars: 2617 - Tokens: 655
-96. src\Artifacts\T14. Template - GitHub Repository Setup Guide.md - Lines: 110 - Chars: 4902 - Tokens: 1226
-97. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 41 - Chars: 3000 - Tokens: 750
-98. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 97 - Chars: 4047 - Tokens: 1012
-99. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 45 - Chars: 2899 - Tokens: 725
-100. src\backend\commands\commands.ts - Lines: 97 - Chars: 4211 - Tokens: 1053
-101. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
-102. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
-103. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
-104. src\backend\services\file-operation.service.ts - Lines: 344 - Chars: 16380 - Tokens: 4095
-105. src\backend\services\file-tree.service.ts - Lines: 276 - Chars: 14221 - Tokens: 3556
-106. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12820 - Tokens: 3205
-107. src\backend\services\git.service.ts - Lines: 102 - Chars: 5013 - Tokens: 1254
-108. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4232 - Tokens: 1058
-109. src\backend\services\history.service.ts - Lines: 270 - Chars: 11310 - Tokens: 2828
-110. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-111. src\backend\services\prompt.service.ts - Lines: 378 - Chars: 19630 - Tokens: 4908
-112. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
-113. src\backend\services\services.ts - Lines: 40 - Chars: 1827 - Tokens: 457
-114. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
-115. src\client\components\file-tree\FileTree.tsx - Lines: 258 - Chars: 12226 - Tokens: 3057
-116. src\client\components\file-tree\FileTree.utils.ts - Lines: 117 - Chars: 4236 - Tokens: 1059
-117. src\client\components\tree-view\TreeView.tsx - Lines: 395 - Chars: 17713 - Tokens: 4429
-118. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
-119. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
-120. src\client\components\ContextMenu.tsx - Lines: 72 - Chars: 3353 - Tokens: 839
-121. src\client\components\DiffViewer.tsx - Lines: 224 - Chars: 11386 - Tokens: 2847
-122. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
-123. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13123 - Tokens: 3281
-124. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
-125. src\client\utils\response-parser.ts - Lines: 79 - Chars: 2994 - Tokens: 749
-126. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-127. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
-128. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
-129. src\client\views\context-chooser.view\view.tsx - Lines: 175 - Chars: 16314 - Tokens: 4079
-130. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
-131. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 77 - Chars: 3054 - Tokens: 764
-132. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 86 - Chars: 3485 - Tokens: 872
-133. src\client\views\parallel-copilot.view\components\NumberedTextarea.tsx - Lines: 102 - Chars: 4412 - Tokens: 1103
-134. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 95 - Chars: 7630 - Tokens: 1908
-135. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 84 - Chars: 3486 - Tokens: 872
-136. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
-137. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-138. src\client\views\parallel-copilot.view\on-message.ts - Lines: 109 - Chars: 5021 - Tokens: 1256
-139. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 92 - Chars: 4340 - Tokens: 1085
-140. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 28 - Chars: 1213 - Tokens: 304
-141. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 28 - Chars: 1283 - Tokens: 321
-142. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 28 - Chars: 1184 - Tokens: 296
-143. src\client\views\parallel-copilot.view\view.scss - Lines: 903 - Chars: 20629 - Tokens: 5158
-144. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-145. src\client\views\parallel-copilot.view\view.tsx - Lines: 183 - Chars: 28606 - Tokens: 7152
-146. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
-147. src\common\ipc\channels.enum.ts - Lines: 89 - Chars: 4750 - Tokens: 1188
-148. src\common\ipc\channels.type.ts - Lines: 89 - Chars: 6738 - Tokens: 1685
-149. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
-150. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-151. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-152. src\common\types\file-node.ts - Lines: 17 - Chars: 517 - Tokens: 130
-153. src\common\types\pcpp.types.ts - Lines: 50 - Chars: 1240 - Tokens: 310
-154. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
-155. src\common\utils\formatting.ts - Lines: 120 - Chars: 3987 - Tokens: 997
-156. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
-157. src\common\utils\view-html.ts - Lines: 29 - Chars: 1117 - Tokens: 280
-158. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
-159. src\extension.ts - Lines: 129 - Chars: 5386 - Tokens: 1347
-160. .gitignore - Lines: 10 - Chars: 128 - Tokens: 32
-161. .vscodeignore - Lines: 11 - Chars: 356 - Tokens: 89
-162. package.json - Lines: 139 - Chars: 4583 - Tokens: 1146
-163. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
-164. webpack.config.js - Lines: 104 - Chars: 2873 - Tokens: 719
-165. src\Artifacts\A75. DCE - Text Area Component A-B-C Test Plan.md - Lines: 50 - Chars: 4761 - Tokens: 1191
-166. dist\Artifacts\A75. DCE - Text Area Component A-B-C Test Plan.md - Lines: 50 - Chars: 4761 - Tokens: 1191
-167. src\Artifacts\A76. DCE - Word Wrap Line Numbering Challenges.md - Lines: 61 - Chars: 4895 - Tokens: 1224
-168. dist\Artifacts\A76. DCE - Word Wrap Line Numbering Challenges.md - Lines: 61 - Chars: 4895 - Tokens: 1224
+1. .gitignore - Lines: 10 - Chars: 128 - Tokens: 32
+2. .vscodeignore - Lines: 11 - Chars: 356 - Tokens: 89
+3. package.json - Lines: 139 - Chars: 4583 - Tokens: 1146
+4. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
+5. webpack.config.js - Lines: 104 - Chars: 2873 - Tokens: 719
+6. dist\Artifacts\A75. DCE - Text Area Component A-B-C Test Plan.md - Lines: 50 - Chars: 4761 - Tokens: 1191
+7. dist\Artifacts\A76. DCE - Word Wrap Line Numbering Challenges.md - Lines: 61 - Chars: 4895 - Tokens: 1224
+8. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 424 - Chars: 28756 - Tokens: 7189
+9. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
+10. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
+11. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
+12. src\Artifacts\A4. DCE - Analysis of The-Creator-AI Repo.md - Lines: 56 - Chars: 5722 - Tokens: 1431
+13. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
+14. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
+15. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
+16. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
+17. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
+18. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 349 - Chars: 40001 - Tokens: 10001
+19. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5710 - Tokens: 1428
+20. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
+21. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
+22. src\Artifacts\A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md - Lines: 43 - Chars: 7263 - Tokens: 1816
+23. src\Artifacts\A16. DCE - Phase 1 - UI & UX Refinements Plan.md - Lines: 24 - Chars: 4349 - Tokens: 1088
+24. src\Artifacts\A17. DCE - Phase 1 - Advanced Tree View Features.md - Lines: 47 - Chars: 3888 - Tokens: 972
+25. src\Artifacts\A18. DCE - Phase 1 - Active File Sync Feature Plan.md - Lines: 46 - Chars: 4548 - Tokens: 1137
+26. src\Artifacts\A19. DCE - Phase 1 - Double-Click & Quick-Remove Feature Plan.md - Lines: 42 - Chars: 4603 - Tokens: 1151
+27. src\Artifacts\A20. DCE - Phase 1 - Advanced UX & Automation Plan.md - Lines: 47 - Chars: 7268 - Tokens: 1817
+28. src\Artifacts\A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer.md - Lines: 48 - Chars: 7385 - Tokens: 1847
+29. src\Artifacts\A22. DCE - Phase 1 - Search & Filter Feature Plan.md - Lines: 58 - Chars: 3663 - Tokens: 916
+30. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 37 - Chars: 5504 - Tokens: 1376
+31. src\Artifacts\A24. DCE - Selection Paradigm Terminology.md - Lines: 57 - Chars: 3330 - Tokens: 833
+32. src\Artifacts\A25. DCE - Phase 1 - Git & Problems Integration Plan.md - Lines: 61 - Chars: 5871 - Tokens: 1468
+33. src\Artifacts\A26. DCE - Phase 1 - File System Traversal & Caching Strategy.md - Lines: 42 - Chars: 3593 - Tokens: 899
+34. src\Artifacts\A27. DCE - Phase 1 - Undo-Redo Feature Plan.md - Lines: 50 - Chars: 4903 - Tokens: 1226
+35. src\Artifacts\A28. DCE - Packaging and Distribution Guide.md - Lines: 95 - Chars: 4366 - Tokens: 1092
+36. src\Artifacts\A29. DCE - Phase 1 - Binary and Image File Handling Strategy.md - Lines: 81 - Chars: 4217 - Tokens: 1055
+37. src\Artifacts\A30. DCE - Phase 1 - PDF Handling and Virtualization Strategy.md - Lines: 44 - Chars: 4431 - Tokens: 1108
+38. src\Artifacts\A31. DCE - Phase 2 - Multimodal Content Extraction (PDF Images).md - Lines: 44 - Chars: 4035 - Tokens: 1009
+39. src\Artifacts\A32. DCE - Phase 1 - Excel and CSV Handling Strategy.md - Lines: 44 - Chars: 4295 - Tokens: 1074
+40. src\Artifacts\A33. DCE - Phase 1 - Copy-Paste Feature Plan.md - Lines: 42 - Chars: 4456 - Tokens: 1114
+41. src\Artifacts\A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements.md - Lines: 45 - Chars: 6849 - Tokens: 1713
+42. src\Artifacts\A35. DCE - Phase 2 - UI Mockups and Flow.md - Lines: 54 - Chars: 3584 - Tokens: 896
+43. src\Artifacts\A36. DCE - Phase 2 - Technical Implementation Plan.md - Lines: 56 - Chars: 3621 - Tokens: 906
+44. src\Artifacts\A37. DCE - Phase 2 - Cycle Navigator & Knowledge Graph - Vision.md - Lines: 28 - Chars: 3242 - Tokens: 811
+45. src\Artifacts\A38. DCE - Phase 2 - Cycle Navigator - UI Mockup.md - Lines: 69 - Chars: 4621 - Tokens: 1156
+46. src\Artifacts\A39. DCE - Phase 2 - Cycle Navigator - Technical Plan.md - Lines: 84 - Chars: 4595 - Tokens: 1149
+47. src\Artifacts\A40. DCE - Phase 2 - Parallel Co-Pilot - Target File Structure.md - Lines: 66 - Chars: 3659 - Tokens: 915
+48. src\Artifacts\A40.1. DCE - Phase 2 - Competitive Analysis & Feature Ideas.md - Lines: 43 - Chars: 4784 - Tokens: 1196
+49. src\Artifacts\A41. DCE - Phase 2 - API Key Management - Feature Plan.md - Lines: 47 - Chars: 4542 - Tokens: 1136
+50. src\Artifacts\A41.1. DCE - Phase 2 - Advanced Features & Integrations Plan.md - Lines: 44 - Chars: 3946 - Tokens: 987
+51. src\Artifacts\A41.2. DCE - Phase 2 - Feature Ideation & Competitive Analysis.md - Lines: 40 - Chars: 4566 - Tokens: 1142
+52. src\Artifacts\A42. DCE - Phase 2 - Initial Scaffolding Deployment Script.md - Lines: 246 - Chars: 8264 - Tokens: 2066
+53. src\Artifacts\A43. DCE - Phase 2 - Implementation Roadmap.md - Lines: 69 - Chars: 4694 - Tokens: 1174
+54. src\Artifacts\A44. DCE - Phase 1 - Word Document Handling Strategy.md - Lines: 45 - Chars: 4626 - Tokens: 1157
+55. src\Artifacts\A45. DCE - Phase 2 - Pop-out Co-Pilot Window - Feature Plan.md - Lines: 49 - Chars: 4156 - Tokens: 1039
+56. src\Artifacts\A46. DCE - Phase 2 - Paste and Parse Response - Feature Plan.md - Lines: 38 - Chars: 3587 - Tokens: 897
+57. src\Artifacts\A47. DCE - Phase 2 - Prompt Amalgamation Feature Plan.md - Lines: 42 - Chars: 3499 - Tokens: 875
+58. src\Artifacts\A48. DCE - Phase 2 - Advanced Syntax Highlighting Plan.md - Lines: 49 - Chars: 4044 - Tokens: 1011
+59. src\Artifacts\A49. DCE - Phase 2 - File Association & Diffing Plan.md - Lines: 44 - Chars: 4452 - Tokens: 1113
+60. src\Artifacts\A50. DCE - Phase 2 - UI Component Plan (Resizable Panes & Inner Editors).md - Lines: 51 - Chars: 5128 - Tokens: 1282
+61. src\Artifacts\A51. DCE - A-B-C Testing Strategy for UI Bugs.md - Lines: 81 - Chars: 5490 - Tokens: 1373
+62. src\Artifacts\A52. DCE - Interaction Schema Refinement.md - Lines: 66 - Chars: 3444 - Tokens: 861
+63. src\Artifacts\A52.1 DCE - Parser Logic and AI Guidance.md - Lines: 128 - Chars: 5204 - Tokens: 1301
+64. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 34 - Chars: 9394 - Tokens: 2349
+65. src\Artifacts\A53. DCE - Phase 2 - Token Count and Similarity Analysis.md - Lines: 43 - Chars: 3500 - Tokens: 875
+66. src\Artifacts\A55. DCE - FSService Refactoring Plan.md - Lines: 77 - Chars: 4022 - Tokens: 1006
+67. src\Artifacts\A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md - Lines: 47 - Chars: 5687 - Tokens: 1422
+68. src\Artifacts\A57. DCE - Phase 2 - Cycle Management Plan.md - Lines: 44 - Chars: 3625 - Tokens: 907
+69. src\Artifacts\A58. DCE - WinMerge Source Code Analysis.md - Lines: 56 - Chars: 5322 - Tokens: 1331
+70. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 39 - Chars: 3393 - Tokens: 849
+71. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 35 - Chars: 4175 - Tokens: 1044
+72. src\Artifacts\A61. DCE - Phase 2 - Cycle History Management Plan.md - Lines: 45 - Chars: 3559 - Tokens: 890
+73. src\Artifacts\A62. DCE - Cycle 157 - Task Tracker.md - Lines: 31 - Chars: 2710 - Tokens: 678
+74. src\Artifacts\A63. DCE - Cycle 158 - Task Tracker.md - Lines: 23 - Chars: 1760 - Tokens: 440
+75. src\Artifacts\A64. DCE - Cycle 159 - Task Tracker.md - Lines: 22 - Chars: 1550 - Tokens: 388
+76. src\Artifacts\A65. DCE - Universal Task Checklist.md - Lines: 87 - Chars: 5422 - Tokens: 1356
+77. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1806 - Tokens: 452
+78. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 47 - Chars: 3537 - Tokens: 885
+79. src\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3311 - Tokens: 828
+80. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 3764 - Tokens: 941
+81. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 60 - Chars: 6426 - Tokens: 1607
+82. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
+83. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 43 - Chars: 2874 - Tokens: 719
+84. src\Artifacts\A73. DCE - GitService Plan.md - Lines: 44 - Chars: 2548 - Tokens: 637
+85. src\Artifacts\A74. DCE - Per-Input Undo-Redo Feature Plan.md - Lines: 49 - Chars: 3624 - Tokens: 906
+86. src\Artifacts\A75. DCE - Text Area Component A-B-C Test Plan.md - Lines: 50 - Chars: 4761 - Tokens: 1191
+87. src\Artifacts\A76. DCE - Word Wrap Line Numbering Challenges.md - Lines: 61 - Chars: 4895 - Tokens: 1224
+88. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
+89. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
+90. src\Artifacts\A200. Cycle Log.md - Lines: 13947 - Chars: 957696 - Tokens: 239424
+91. src\Artifacts\README.md - Lines: 33 - Chars: 2764 - Tokens: 691
+92. src\Artifacts\T1. Template - Master Artifact List.md - Lines: 36 - Chars: 1716 - Tokens: 429
+93. src\Artifacts\T2. Template - Project Vision and Goals.md - Lines: 38 - Chars: 1968 - Tokens: 492
+94. src\Artifacts\T3. Template - Phase 1 Requirements & Design.md - Lines: 37 - Chars: 1876 - Tokens: 469
+95. src\Artifacts\T4. Template - Technical Scaffolding Plan.md - Lines: 54 - Chars: 2180 - Tokens: 545
+96. src\Artifacts\T5. Template - Target File Structure.md - Lines: 35 - Chars: 1054 - Tokens: 264
+97. src\Artifacts\T6. Template - Initial Scaffolding Deployment Script.md - Lines: 63 - Chars: 2593 - Tokens: 649
+98. src\Artifacts\T7. Template - Development and Testing Guide.md - Lines: 48 - Chars: 1738 - Tokens: 435
+99. src\Artifacts\T8. Template - Regression Case Studies.md - Lines: 31 - Chars: 1971 - Tokens: 493
+100. src\Artifacts\T9. Template - Logging and Debugging Guide.md - Lines: 49 - Chars: 2590 - Tokens: 648
+101. src\Artifacts\T10. Template - Feature Plan Example.md - Lines: 32 - Chars: 2692 - Tokens: 673
+102. src\Artifacts\T11. Template - Implementation Roadmap.md - Lines: 55 - Chars: 2887 - Tokens: 722
+103. src\Artifacts\T12. Template - Competitive Analysis.md - Lines: 42 - Chars: 3227 - Tokens: 807
+104. src\Artifacts\T13. Template - Refactoring Plan.md - Lines: 55 - Chars: 2617 - Tokens: 655
+105. src\Artifacts\T14. Template - GitHub Repository Setup Guide.md - Lines: 110 - Chars: 4902 - Tokens: 1226
+106. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 41 - Chars: 3000 - Tokens: 750
+107. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 97 - Chars: 4047 - Tokens: 1012
+108. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 45 - Chars: 2899 - Tokens: 725
+109. src\backend\commands\commands.ts - Lines: 103 - Chars: 4254 - Tokens: 1064
+110. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
+111. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
+112. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
+113. src\backend\services\file-operation.service.ts - Lines: 344 - Chars: 16380 - Tokens: 4095
+114. src\backend\services\file-tree.service.ts - Lines: 276 - Chars: 14221 - Tokens: 3556
+115. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12820 - Tokens: 3205
+116. src\backend\services\git.service.ts - Lines: 114 - Chars: 5522 - Tokens: 1381
+117. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4232 - Tokens: 1058
+118. src\backend\services\history.service.ts - Lines: 270 - Chars: 11310 - Tokens: 2828
+119. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
+120. src\backend\services\prompt.service.ts - Lines: 378 - Chars: 19630 - Tokens: 4908
+121. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
+122. src\backend\services\services.ts - Lines: 40 - Chars: 1827 - Tokens: 457
+123. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
+124. src\client\components\file-tree\FileTree.tsx - Lines: 258 - Chars: 12226 - Tokens: 3057
+125. src\client\components\file-tree\FileTree.utils.ts - Lines: 117 - Chars: 4236 - Tokens: 1059
+126. src\client\components\tree-view\TreeView.tsx - Lines: 395 - Chars: 17713 - Tokens: 4429
+127. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
+128. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
+129. src\client\components\ContextMenu.tsx - Lines: 72 - Chars: 3353 - Tokens: 839
+130. src\client\components\DiffViewer.tsx - Lines: 224 - Chars: 11386 - Tokens: 2847
+131. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
+132. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13123 - Tokens: 3281
+133. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
+134. src\client\utils\response-parser.ts - Lines: 79 - Chars: 2994 - Tokens: 749
+135. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
+136. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
+137. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
+138. src\client\views\context-chooser.view\view.tsx - Lines: 175 - Chars: 16314 - Tokens: 4079
+139. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
+140. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 77 - Chars: 3054 - Tokens: 764
+141. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 86 - Chars: 3485 - Tokens: 872
+142. src\client\views\parallel-copilot.view\components\NumberedTextarea.tsx - Lines: 102 - Chars: 4412 - Tokens: 1103
+143. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 95 - Chars: 7630 - Tokens: 1908
+144. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 84 - Chars: 3486 - Tokens: 872
+145. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
+146. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
+147. src\client\views\parallel-copilot.view\on-message.ts - Lines: 109 - Chars: 5021 - Tokens: 1256
+148. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 92 - Chars: 4340 - Tokens: 1085
+149. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 28 - Chars: 1213 - Tokens: 304
+150. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 28 - Chars: 1283 - Tokens: 321
+151. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 28 - Chars: 1184 - Tokens: 296
+152. src\client\views\parallel-copilot.view\view.scss - Lines: 905 - Chars: 20702 - Tokens: 5176
+153. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
+154. src\client\views\parallel-copilot.view\view.tsx - Lines: 180 - Chars: 28546 - Tokens: 7137
+155. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
+156. src\common\ipc\channels.enum.ts - Lines: 89 - Chars: 4750 - Tokens: 1188
+157. src\common\ipc\channels.type.ts - Lines: 89 - Chars: 6738 - Tokens: 1685
+158. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
+159. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+160. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
+161. src\common\types\file-node.ts - Lines: 17 - Chars: 517 - Tokens: 130
+162. src\common\types\pcpp.types.ts - Lines: 50 - Chars: 1240 - Tokens: 310
+163. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
+164. src\common\utils\formatting.ts - Lines: 120 - Chars: 3987 - Tokens: 997
+165. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
+166. src\common\utils\view-html.ts - Lines: 29 - Chars: 1117 - Tokens: 280
+167. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
+168. src\extension.ts - Lines: 129 - Chars: 5386 - Tokens: 1347
+
+<file path=".gitignore">
+node_modules
+package-lock.json
+dist
+out
+*.vsix
+.vscode-test/
+.vscode/
+The-Creator-AI-main/
+prompt.md
+.vscode/dce_cache/
+</file>
+
+<file path=".vscodeignore">
+# This file tells the VS Code packaging tool which files to ignore.
+# We are removing 'node_modules' because our external dependencies (like xlsx)
+# need to be included in the final package to be available at runtime.
+# The `vsce` tool is smart enough to only bundle production dependencies.
+
+src
+.gitignore
+webpack.config.js
+tsconfig.json
+**/*.map
+**/*.ts
+</file>
+
+<file path="package.json">
+{
+    "name": "data-curation-environment",
+    "publisher": "DCE-Developer",
+    "displayName": "Data Curation Environment",
+    "description": "A VS Code extension for curating context for Large Language Models.",
+    "version": "0.0.9",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/dgerabagi/data-curation-environment.git"
+    },
+    "engines": {
+        "vscode": "^1.90.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onView:data-curation-environment",
+        "onCommand:dce.showParallelCopilot"
+    ],
+    "main": "./dist/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "dce.saveCurrentSelection",
+                "title": "DCE: Save Current Selection Set",
+                "category": "DCE"
+            },
+            {
+                "command": "dce.loadSelectionSet",
+                "title": "DCE: Load Selection Set",
+                "category": "DCE"
+            },
+            {
+                "command": "dce.manageSelectionSets",
+                "title": "DCE: Manage Selection Sets",
+                "category": "DCE"
+            },
+            {
+                "command": "dce.refreshTree",
+                "title": "DCE: Refresh Explorer",
+                "category": "DCE"
+            },
+            {
+                "command": "dce.openParallelCopilot",
+                "title": "DCE: Open Parallel Co-Pilot",
+                "category": "DCE",
+                "icon": "$(multiple-windows)"
+            },
+            {
+                "command": "dce.showParallelCopilot",
+                "title": "DCE: Show Parallel Co-Pilot"
+            }
+        ],
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "data-curation-environment",
+                    "title": "Data Curation",
+                    "icon": "public/spiral.svg"
+                },
+                {
+                    "id": "dce-parallel-copilot-container",
+                    "title": "DCE Parallel Co-Pilot",
+                    "icon": "public/copilot.svg"
+                }
+            ]
+        },
+        "views": {
+            "data-curation-environment": [
+                {
+                    "type": "webview",
+                    "id": "viewType.sidebar.contextChooser",
+                    "name": "Data Curation"
+                }
+            ]
+        },
+        "menus": {
+            "view/title": [
+                {
+                    "command": "dce.openParallelCopilot",
+                    "when": "view == viewType.sidebar.contextChooser",
+                    "group": "navigation"
+                }
+            ],
+            "activityBar/view/title": [
+                 {
+                    "command": "dce.showParallelCopilot",
+                    "when": "viewContainer == dce-parallel-copilot-container"
+                }
+            ]
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run package",
+        "compile": "webpack",
+        "watch": "webpack --watch",
+        "package": "webpack --mode production --devtool hidden-source-map",
+        "lint": "eslint src --ext ts"
+    },
+    "devDependencies": {
+        "@types/node": "18.x",
+        "@types/vscode": "^1.90.0",
+        "@typescript-eslint/eslint-plugin": "^7.7.1",
+        "@typescript-eslint/parser": "^7.7.1",
+        "eslint": "^8.57.0",
+        "ts-loader": "^9.5.1",
+        "typescript": "^5.4.5",
+        "webpack": "^5.91.0",
+        "webpack-cli": "^5.1.4",
+        "copy-webpack-plugin": "^12.0.2",
+        "mini-css-extract-plugin": "^2.9.0",
+        "style-loader": "^4.0.0",
+        "css-loader": "^7.1.2",
+        "sass-loader": "^16.0.1",
+        "sass": "^1.78.0",
+        "postcss-loader": "^8.1.1",
+        "babel-loader": "^9.1.3",
+        "@babel/preset-react": "^7.24.7",
+        "@babel/preset-typescript": "^7.24.7",
+        "process": "^0.11.10",
+        "path-browserify": "^1.0.1"
+    },
+    "dependencies": {
+        "@wooorm/starry-night": "^3.8.0",
+        "hast-util-to-html": "^9.0.1",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "react-icons": "^5.3.0",
+        "react-markdown": "^9.0.1",
+        "rxjs": "^7.8.1",
+        "reflect-metadata": "^0.2.2",
+        "pdf-parse": "^1.1.1",
+        "xlsx": "^0.18.5",
+        "mammoth": "^1.8.0",
+        "diff": "^5.2.0",
+        "@types/diff": "^5.2.1"
+    }
+}
+</file>
+
+<file path="tsconfig.json">
+{
+    "compilerOptions": {
+        "module": "esnext",
+        "moduleResolution": "bundler",
+        "target": "ESNext",
+        "lib": ["ES2022", "DOM"],
+        "jsx": "react",
+        "sourceMap": true,
+        "rootDir": "src",
+        "strict": false,
+        "baseUrl": "./",
+        "paths": {
+            "@/*": ["src/*"]
+        },
+        "experimentalDecorators": true,
+        "allowSyntheticDefaultImports": true
+    },
+    "include": [
+        "src/**/*.ts",
+        "src/**/*.tsx"
+    ],
+    "exclude": [
+        "node_modules",
+        ".vscode-test",
+        "The-Creator-AI-main"
+    ]
+}
+</file>
+
+<file path="webpack.config.js">
+const path = require('path');
+const CopyPlugin = require("copy-webpack-plugin");
+const webpack = require('webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+/** @type {import('webpack').Configuration} */
+const baseConfig = {
+    mode: 'none',
+    resolve: {
+        extensions: ['.ts', '.js', '.tsx', '.jsx'],
+        alias: {
+            "@": path.resolve(__dirname, 'src'),
+        }
+    },
+    module: {
+        rules: [
+            {
+                test: /\.ts$/,
+                exclude: /node_modules/,
+                use: [{ loader: 'ts-loader' }]
+            },
+            {
+                test: /\.?ts.?(x)$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        presets: ['@babel/preset-react', '@babel/preset-typescript']
+                    }
+                }
+            },
+        ]
+    },
+    devtool: 'nosources-source-map',
+    infrastructureLogging: {
+        level: "log",
+    },
+};
+
+/** @type {import('webpack').Configuration} */
+const extensionConfig = {
+    ...baseConfig,
+    target: 'node',
+    entry: {
+        extension: './src/extension.ts',
+    },
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'extension.js',
+        libraryTarget: 'commonjs2'
+    },
+    externals: {
+        vscode: 'commonjs vscode',
+    },
+};
+
+/** @type {import('webpack').Configuration} */
+const webviewConfig = {
+    ...baseConfig,
+    target: 'web',
+    entry: {
+        contextChooserView: './src/client/views/context-chooser.view/view.tsx',
+        parallelCopilotView: './src/client/views/parallel-copilot.view/view.tsx',
+    },
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: '[name].js',
+        libraryTarget: 'commonjs2'
+    },
+    module: {
+        ...baseConfig.module,
+        rules: [
+            ...baseConfig.module.rules,
+            {
+                test: /\.s[ac]ss$/i,
+                use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+            },
+        ]
+    },
+    resolve: {
+        ...baseConfig.resolve,
+        fallback: {
+            "path": require.resolve("path-browserify")
+        }
+    },
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: '[name].css'
+        }),
+        new CopyPlugin({
+            patterns: [
+                { from: "public", to: "public" },
+                { from: "node_modules/@wooorm/starry-night/style/both.css", to: "starry-night.css" },
+                // C164 Fix: Copy static artifacts needed by the backend into the dist folder.
+                { from: "src/Artifacts", to: "Artifacts" }
+            ],
+        }),
+        new webpack.ProvidePlugin({
+            process: 'process/browser',
+        }),
+    ],
+};
+
+module.exports = [extensionConfig, webviewConfig];
+</file>
+
+<file path="dist/Artifacts/A75. DCE - Text Area Component A-B-C Test Plan.md">
+# Artifact A75: DCE - Text Area Component A-B-C Test Plan
+# Date Created: C179
+# Author: AI Model & Curator
+# Updated on: C180 (Acknowledge word-wrap limitation)
+
+- **Key/Value for A0:**
+- **Description:** A plan to create a test harness for the `NumberedTextarea` component to diagnose and fix persistent scrolling and alignment bugs.
+- **Tags:** plan, process, debugging, troubleshooting, ui, ux, react
+
+## 1. Overview & Goal
+
+The `NumberedTextarea` component, used for the "Cycle Context" and "Ephemeral Context" fields in the Parallel Co-Pilot Panel, has been a persistent source of UI bugs across multiple cycles (C1, C2, C3, C167, C174). The primary issues are a lack of synchronized scrolling between the line numbers and the text content, and a misalignment of the cursor and text selection, making the component difficult to use.
+
+The goal of this plan is to apply the "Original-A-B-C" testing strategy, as defined in `A51`, to definitively diagnose and resolve these issues. We will create a test harness within the PCPP that allows for parallel testing of the original component and three new, isolated test components, each attempting a different solution.
+
+## 2. Known Limitation: Word-Wrap Line Numbering
+
+As of Cycle 4, it has been observed that the current architecture of the `NumberedTextarea` (and all proposed test variants) does not correctly handle line numbering for word-wrapped text. The component counts lines based on newline characters (`\n`), not on how the text visually wraps in the view. This means a single line of text that wraps into three visual lines will only get one line number.
+
+**This is a known limitation.** A true fix for this requires a significantly more complex architecture, likely involving rendering text into a hidden element and measuring the resulting line boxes. For the current development phase, the priority is to fix the blocking usability bugs (scrolling, focus, performance). The word-wrap numbering issue will be deferred to a future cycle dedicated to advanced component architecture.
+
+## 3. The Strategy
+
+### 3.1. Test Harness Implementation
+The main `parallel-copilot.view/view.tsx` component will be refactored to include a new "Test Harness" mode.
+-   A new state, `activeTestView`, will control which view is active: `'Original'`, `'TestA'`, `'TestB'`, or `'TestC'`.
+-   A simple tab bar UI will be added to switch between these views.
+-   The "Original" view will render the current, fully-featured PCPP layout.
+-   The other views will render the isolated test components.
+
+### 3.2. Isolated Test Components
+Three new test components will be created to isolate and test specific variables.
+
+-   **Test A (`TestPane1.tsx`): Synchronized Scrolling**
+    -   **Hypothesis:** The scrolling is failing because the `onScroll` event is not being correctly used to synchronize the `scrollTop` of the line number gutter and the text area.
+    -   **Implementation:** This component will feature a barebones `textarea` next to a `div` for line numbers. It will implement a robust `onScroll` handler that programmatically sets the `scrollTop` of the line number gutter, with extensive logging to confirm the event is firing and the values are changing.
+
+-   **Test B (`TestPane2.tsx`): Pixel-Perfect Alignment**
+    -   **Hypothesis:** The cursor and selection are misaligned due to subtle differences in CSS properties (`font-family`, `font-size`, `line-height`, `padding`, `box-sizing`) between the transparent `textarea` and the underlying `div` that displays the highlighted text.
+    -   **Implementation:** This component will implement the overlay approach. It will meticulously ensure that every single font and box-model CSS property is identical across both elements. It will contain no complex logic, only the minimal structure needed to test for visual alignment.
+
+-   **Test C (`TestPane3.tsx`): Combined & Cleaned Solution**
+    -   **Hypothesis:** A clean implementation combining the lessons from Test A and Test B will provide a fully functional component.
+    -   **Implementation:** This component will integrate the synchronized scrolling from Test A with the pixel-perfect styling from Test B into a new, clean version of the `NumberedTextarea` component, free from any other complex logic from the main view.
+
+## 4. Cleanup Process
+Once a working pattern is identified in a test component:
+1.  **Codify Findings:** The successful pattern and the root cause of the failure will be documented in `A11. DCE - Regression Case Studies`.
+2.  **Integrate Solution:** The original `NumberedTextarea.tsx` component will be refactored to use the successful pattern.
+3.  **Remove Test Artifacts:** The test harness UI and the `TestPane*.tsx` component files will be removed from the project.
+</file>
+
+<file path="dist/Artifacts/A76. DCE - Word Wrap Line Numbering Challenges.md">
+# Artifact A76: DCE - Word Wrap Line Numbering Challenges
+# Date Created: C181
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** Explains the technical complexity of implementing line numbers that accurately reflect visual word wrapping in a textarea component.
+- **Tags:** documentation, technical debt, ui, ux, word wrap, line numbers
+
+## 1. Problem Statement
+
+The user has requested that the line numbers in the `NumberedTextarea` component should respect word wrapping. Currently, the component counts lines based on newline characters (`\n`). This means a single logical line that visually wraps into three lines in the UI still only receives one line number. The user correctly points out that this is not ideal.
+
+This document explains why this seemingly simple feature is technically complex to implement in a standard HTML `<textarea>` and outlines potential solutions.
+
+## 2. The Core Challenge: Logical vs. Visual Lines
+
+The fundamental issue is the difference between how a `<textarea>` handles content versus how the browser renders it.
+
+*   **Logical Lines:** The `<textarea>` element's `value` is a simple string. The only concept of a "line" it has is the presence of a newline character (`\n`). When we split the string by `\n`, we are counting these logical lines. This is what our current implementation does, and it's fast and simple.
+
+*   **Visual Lines:** Word wrapping is a purely visual phenomenon handled by the browser's rendering engine. The browser calculates how many words fit on a line based on the element's width, font size, font family, letter spacing, and word spacing. It then visually breaks the line and renders the overflow text below. **Crucially, the browser does not expose a simple API to ask, "How many visual lines are you currently rendering for this text?"**
+
+Because we cannot directly query the rendered line count, we must resort to indirect methods to calculate it.
+
+## 3. Potential Solutions & Their Complexity
+
+Here are the common approaches to solving this problem, each with its own trade-offs.
+
+### Solution A: The Hidden `div` Measurement Technique
+
+This is the most common and reliable method.
+
+1.  **How it Works:**
+    *   Create a hidden `div` element off-screen or with `visibility: hidden`.
+    *   Apply the *exact same* CSS styles to this `div` as the `<textarea>` (width, font, padding, etc.).
+    *   Copy the content of the `<textarea>` into the `innerHTML` of the hidden `div`.
+    *   Calculate the number of visual lines by dividing the `scrollHeight` of the hidden `div` by its `line-height`.
+
+2.  **Complexity & Downsides:**
+    *   **Performance:** This calculation must be run on every single keystroke, as any character change could affect word wrapping. Copying large amounts of text into the DOM and forcing a browser re-layout on every key press can be performance-intensive and may cause input lag.
+    *   **Fragility:** The CSS styles must be perfectly synchronized. Any discrepancy in padding, border, font-size, etc., will result in an incorrect calculation.
+    *   **Implementation:** Requires careful DOM manipulation within our React component, managing refs to both the textarea and the hidden div, and ensuring the calculation is efficient.
+
+### Solution B: Using a Full-Fledged Code Editor Component
+
+Instead of building our own, we could replace the `<textarea>` with a lightweight, embeddable code editor library.
+
+1.  **How it Works:**
+    *   Integrate a library like **CodeMirror** or **Monaco Editor** (the editor that powers VS Code itself, though it's much heavier).
+    *   These components are not simple textareas; they are complete editing surfaces that render each line individually. Because they control the rendering process, they have full knowledge of visual lines and can provide accurate line numbering out of the box.
+
+2.  **Complexity & Downsides:**
+    *   **Bundle Size:** These libraries are significantly larger than a simple React component, which would increase the extension's load time.
+    *   **Integration:** Integrating them into our existing React and VS Code Webview architecture can be complex, requiring custom wrappers and careful handling of the component's lifecycle.
+    *   **Overkill:** For a simple context input field, using a full code editor might be architectural overkill.
+
+## 4. Conclusion & Path Forward
+
+The user's request is valid and would be a great UX improvement. However, due to the performance and implementation complexities described above, this feature is considered a significant piece of technical debt that requires a dedicated cycle to solve correctly.
+
+The current priority is to fix the more critical usability bugs like scrolling, focus management, and highlighting. Once the component is stable, we can revisit this challenge and dedicate a future cycle to implementing one of the more advanced solutions above.
+</file>
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -4289,7 +3744,7 @@ To elevate the Data Curation Environment beyond basic functionality, this plan i
 # Artifact A16: DCE - Phase 1 - UI & UX Refinements Plan
 # Date Created: Cycle 22
 # Author: AI Model
-# Updated on: C43 (Add Expand All button)
+# Updated on: C187 (Add Associated Files animation glitch)
 
 - **Key/Value for A0:**
 - **Description:** Covers visual and usability improvements like fixing panel layouts, resolving overflow bugs, adding loading indicators, and improving scrollbar visibility.
@@ -4309,33 +3764,7 @@ This document outlines a series of user interface (UI) and user experience (UX) 
 | UI-04 | **Visible Loading State** | As a user, when I perform a slow action like renaming a file or refreshing the explorer, I want to see a loading indicator, so I have clear feedback that the system is working and not frozen. | - A loading state (e.g., `isLoading`) is added to the main view's state. <br> - This state is set to `true` when a file system scan begins (e.g., on initial load or refresh). <br> - A loading indicator (e.g., a spinning icon) is displayed in the UI (e.g., in the header toolbar) while `isLoading` is true. <br> - The state is set to `false` when the file data is received from the backend. |
 | UI-05 | **Improved Scrollbar Gutter** | As a user, I find it difficult to distinguish between the extension's internal scrollbar and the main VS Code scrollbar when they are side-by-side. I want a clearer visual separation between them. | - A subtle vertical border (`border-right`) is added to the main file tree container. <br> - This creates a persistent, visible dividing line between the two scrollable areas, making it easier to position the mouse. |
 | UI-06 | **Expand All Button** | As a user, I want an "Expand All" button in the toolbar, so I can quickly see all files in the project without manually clicking every folder. | - An "Expand All" button is added to the main header toolbar. <br> - Clicking it expands every collapsed folder in the file tree. <br> - The button complements the existing "Collapse All" button. |
-
-## 3. Technical Implementation Plan
-
-1.  **Layout Fixes (`view.scss`):**
-    *   **Header:** Inspect the `.view-header` and `.toolbar` classes. Remove any unnecessary `margin` or `padding`. Consolidate into a single flex container with `justify-content: space-between` if the title is to be included, or simply adjust the container of the toolbar.
-    *   **Overflow:** This is a classic flexbox problem. The main container (`.view-container`) should be `display: flex; flex-direction: column; height: 100vh;`. The content area (`.file-tree-container`) must have `flex-grow: 1;` and crucially `min-height: 0;` to allow it to shrink. The "Selected Items" panel (`.selected-files-panel`) should have `flex-shrink: 0;` and `overflow-y: auto;` on its list container.
-    *   **Scrollbar Gutter:** Add `border-right: 1px solid var(--vscode-panel-border);` to the `.file-tree-container`.
-
-2.  **Loading Indicator (`view.tsx`):**
-    *   Add `const [isLoading, setIsLoading] = useState(true);`.
-    *   Set `setIsLoading(true)` at the start of the `requestFiles` function.
-    *   Set `setIsLoading(false)` inside the `handleFileResponse` message handler after files are received and set.
-    *   In the JSX for the `.toolbar`, add conditional rendering: `{isLoading && <SpinnerComponent />}`. The spinner can be an SVG or a component using `react-icons`.
-
-3.  **Resizable Panel:**
-    *   This is the most complex part of this plan. It typically requires a custom React hook or component.
-    *   An invisible `div` will be placed on the top border of the panel.
-    *   `onMouseDown`, `onMouseMove`, and `onMouseUp` event listeners will be used to track the drag gesture and calculate the new height for the panel.
-    *   The height will be applied as an inline style to the panel.
-    *   This feature will be implemented after the more critical bug fixes are complete.
-
-4.  **Expand All (`view.tsx`, `TreeView.tsx`):**
-    *   Add an "Expand All" button to the toolbar in `view.tsx`.
-    *   Add a new state trigger: `const [expandAllTrigger, setExpandAllTrigger] = useState(0);`.
-    *   The button's `onClick` handler will call `setExpandAllTrigger(c => c + 1)`.
-    *   Pass the trigger down as a prop to `TreeView.tsx`.
-    *   In `TreeView.tsx`, a `useEffect` will listen for changes to `expandAllTrigger`. When it fires, it will recursively traverse the `data` prop, collect all directory paths, and call `setExpandedNodes` with the full list.
+| UI-07 | **Associated Files Animation Glitch** | As a user, I want the animated highlight on the "Associated Files" panel to be fully visible, so the guided workflow is clear. | - The top and left edges of the pulsing blue highlight are currently slightly obscured. <br> - A small `margin` will be added to the `.collapsible-section-inner` class to provide space for the `box-shadow` to render completely. |
 </file>
 
 <file path="src/Artifacts/A17. DCE - Phase 1 - Advanced Tree View Features.md">
@@ -7570,7 +6999,7 @@ The "Cycle Context" and "Ephemeral Context" text areas in the Parallel Co-Pilot 
 # Artifact A69: DCE - Animated UI Workflow Guide
 # Date Created: C169
 # Author: AI Model & Curator
-# Updated on: C186 (Finalize workflow sequence)
+# Updated on: C187 (Correct final workflow steps)
 
 ## 1. Overview & Goal
 
@@ -7641,13 +7070,13 @@ The highlighting will follow this specific sequence of user actions:
 # Artifact A70: DCE - Git-Integrated Testing Workflow Plan
 # Date Created: C169
 # Author: AI Model & Curator
-# Updated on: C186 (Update post-baseline workflow step)
+# Updated on: C187 (Add two-button Git Init dialog)
 
 ## 1. Overview & Goal
 
 A core part of the DCE workflow involves accepting an AI-generated response and testing it in the live workspace. If the response introduces bugs, the user must manually revert the changes. The goal of this feature is to automate this "test and revert" loop by deeply integrating with Git. This will provide a one-click method to create a baseline commit before testing and a one-click method to restore that baseline if the test fails.
 
-**Status (C186):** In Progress.
+**Status (C187):** In Progress.
 
 ## 2. User Stories
 
@@ -7656,7 +7085,7 @@ A core part of the DCE workflow involves accepting an AI-generated response and 
 | P2-GIT-01 | **Create Baseline** | As a developer, after accepting an AI response but before testing it, I want to click a "Baseline (Commit)" button to create a Git commit, so I have a safe restore point. | - A "Baseline (Commit)" button is available in the response acceptance header. <br> - Clicking it executes `git add .` and `git commit -m "DCE Baseline: Cycle [currentCycle] - [cycleTitle]"`. <br> - A "Successfully created baseline commit" notification is shown. |
 | P2-GIT-02 | **Restore Baseline** | As a developer, after testing an AI response and finding issues, I want to click a "Restore Baseline" button to discard all changes, so I can quickly test a different response. | - A "Restore Baseline" button is available. <br> - Clicking it executes `git restore .`. <br> - The restore operation must **exclude** DCE-specific state files (e.g., `.vscode/dce_history.json`) to prevent data loss. |
 | P2-GIT-03 | **State-Aware Baseline** | As a developer, I don't want to be prompted to create a baseline if my project is already in a clean state, and I want clear feedback if I try to baseline an already-clean repository. | - Before highlighting the "Baseline" button, the extension checks the `git status`. <br> - If the working tree is clean, the "Baseline" step in the animated workflow is skipped. <br> - If the user manually clicks "Baseline" on a clean tree, a message like "Already baselined" is shown. |
-| P2-GIT-04 | **Guided Git Initialization** | As a new user who hasn't initialized a Git repository, when I click "Baseline," I want to see a clear error message that tells me what's wrong and guides me to the solution. | - If `git` is not initialized, clicking "Baseline" shows a `vscode.window.showErrorMessage`. <br> - The message explains that the folder is not a Git repository. <br> - The message includes an "Open README Guide" button that, when clicked, opens the project's `src/Artifacts/README.md` file, which contains instructions on how to run `git init`. |
+| P2-GIT-04 | **Guided Git Initialization** | As a new user who hasn't initialized a Git repository, when I click "Baseline," I want to see a clear error message that tells me what's wrong and gives me the option to fix it with one click. | - If `git` is not initialized, clicking "Baseline" shows a `vscode.window.showErrorMessage`. <br> - The message explains that the folder is not a Git repository. <br> - The message includes an "Open README Guide" button that opens the project's `README.md`. <br> - The message also includes an "Initialize Repository" button that, when clicked, automatically runs `git init` in the workspace. |
 | P2-GIT-05 | **Post-Baseline Workflow** | As a developer, after a successful baseline is created, I want the animated guide to immediately advance to the next step, so I know what to do next. | - After a successful baseline commit, the animated workflow highlight immediately moves to the "Select All" button in the "Associated Files" list. |
 
 ## 3. Feasibility Analysis
@@ -7677,6 +7106,7 @@ A core part of the DCE workflow involves accepting an AI-generated response and 
     *   `ClientToServerChannel.RequestGitBaseline`: Payload `{ commitMessage: string }`.
     *   `ClientToServerChannel.RequestGitRestore`: No payload.
     *   `ClientToServerChannel.RequestGitStatus`: No payload.
+    *   `ClientToServerChannel.RequestGitInit`: (New) No payload.
     *   `ServerToClientChannel.SendGitStatus`: Payload `{ isClean: boolean }`.
     *   `ServerToClientChannel.NotifyGitOperationResult`: Payload `{ success: boolean; message: string; }`. This channel is critical for the backend to provide explicit feedback to the frontend's workflow state machine.
 
@@ -7687,10 +7117,11 @@ A core part of the DCE workflow involves accepting an AI-generated response and 
         *   Checks the status first. If clean, it returns a specific "Already baselined" result.
         *   Otherwise, it executes `git add .` and `git commit -m "..."`.
         *   It returns a result object (e.g., `{ success: true, message: '...' }`).
-        *   **Crucially, it will have a specific `catch` block for "not a git repository" errors. This block will trigger the user-facing `showErrorMessage` with the "Open README" button.**
+        *   **Crucially, it will have a specific `catch` block for "not a git repository" errors. This block will trigger the user-facing `showErrorMessage` with the two action buttons.**
     *   **`handleGitRestoreRequest()`:**
         *   Executes `git restore -- . ':(exclude).vscode/dce_history.json'`.
         *   Returns a result object.
+    *   **`handleGitInitRequest()`:** (New) A new handler that executes `git init` and returns a success/failure result.
 
 3.  **Frontend (`view.tsx`):**
     *   The frontend will request the Git status at appropriate times to drive the workflow state.
@@ -7920,6 +7351,123 @@ This is a complex feature that requires overriding the browser's default undo/re
     *   The `NumberedTextarea` component will need to be updated to accept the new, more complex `onKeyDown` handler.
 
 This approach will provide the robust, per-input undo/redo functionality required for a professional user experience.
+</file>
+
+<file path="src/Artifacts/A75. DCE - Text Area Component A-B-C Test Plan.md">
+# Artifact A75: DCE - Text Area Component A-B-C Test Plan
+# Date Created: C179
+# Author: AI Model & Curator
+# Updated on: C180 (Acknowledge word-wrap limitation)
+
+- **Key/Value for A0:**
+- **Description:** A plan to create a test harness for the `NumberedTextarea` component to diagnose and fix persistent scrolling and alignment bugs.
+- **Tags:** plan, process, debugging, troubleshooting, ui, ux, react
+
+## 1. Overview & Goal
+
+The `NumberedTextarea` component, used for the "Cycle Context" and "Ephemeral Context" fields in the Parallel Co-Pilot Panel, has been a persistent source of UI bugs across multiple cycles (C1, C2, C3, C167, C174). The primary issues are a lack of synchronized scrolling between the line numbers and the text content, and a misalignment of the cursor and text selection, making the component difficult to use.
+
+The goal of this plan is to apply the "Original-A-B-C" testing strategy, as defined in `A51`, to definitively diagnose and resolve these issues. We will create a test harness within the PCPP that allows for parallel testing of the original component and three new, isolated test components, each attempting a different solution.
+
+## 2. Known Limitation: Word-Wrap Line Numbering
+
+As of Cycle 4, it has been observed that the current architecture of the `NumberedTextarea` (and all proposed test variants) does not correctly handle line numbering for word-wrapped text. The component counts lines based on newline characters (`\n`), not on how the text visually wraps in the view. This means a single line of text that wraps into three visual lines will only get one line number.
+
+**This is a known limitation.** A true fix for this requires a significantly more complex architecture, likely involving rendering text into a hidden element and measuring the resulting line boxes. For the current development phase, the priority is to fix the blocking usability bugs (scrolling, focus, performance). The word-wrap numbering issue will be deferred to a future cycle dedicated to advanced component architecture.
+
+## 3. The Strategy
+
+### 3.1. Test Harness Implementation
+The main `parallel-copilot.view/view.tsx` component will be refactored to include a new "Test Harness" mode.
+-   A new state, `activeTestView`, will control which view is active: `'Original'`, `'TestA'`, `'TestB'`, or `'TestC'`.
+-   A simple tab bar UI will be added to switch between these views.
+-   The "Original" view will render the current, fully-featured PCPP layout.
+-   The other views will render the isolated test components.
+
+### 3.2. Isolated Test Components
+Three new test components will be created to isolate and test specific variables.
+
+-   **Test A (`TestPane1.tsx`): Synchronized Scrolling**
+    -   **Hypothesis:** The scrolling is failing because the `onScroll` event is not being correctly used to synchronize the `scrollTop` of the line number gutter and the text area.
+    -   **Implementation:** This component will feature a barebones `textarea` next to a `div` for line numbers. It will implement a robust `onScroll` handler that programmatically sets the `scrollTop` of the line number gutter, with extensive logging to confirm the event is firing and the values are changing.
+
+-   **Test B (`TestPane2.tsx`): Pixel-Perfect Alignment**
+    -   **Hypothesis:** The cursor and selection are misaligned due to subtle differences in CSS properties (`font-family`, `font-size`, `line-height`, `padding`, `box-sizing`) between the transparent `textarea` and the underlying `div` that displays the highlighted text.
+    -   **Implementation:** This component will implement the overlay approach. It will meticulously ensure that every single font and box-model CSS property is identical across both elements. It will contain no complex logic, only the minimal structure needed to test for visual alignment.
+
+-   **Test C (`TestPane3.tsx`): Combined & Cleaned Solution**
+    -   **Hypothesis:** A clean implementation combining the lessons from Test A and Test B will provide a fully functional component.
+    -   **Implementation:** This component will integrate the synchronized scrolling from Test A with the pixel-perfect styling from Test B into a new, clean version of the `NumberedTextarea` component, free from any other complex logic from the main view.
+
+## 4. Cleanup Process
+Once a working pattern is identified in a test component:
+1.  **Codify Findings:** The successful pattern and the root cause of the failure will be documented in `A11. DCE - Regression Case Studies`.
+2.  **Integrate Solution:** The original `NumberedTextarea.tsx` component will be refactored to use the successful pattern.
+3.  **Remove Test Artifacts:** The test harness UI and the `TestPane*.tsx` component files will be removed from the project.
+</file>
+
+<file path="src/Artifacts/A76. DCE - Word Wrap Line Numbering Challenges.md">
+# Artifact A76: DCE - Word Wrap Line Numbering Challenges
+# Date Created: C181
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** Explains the technical complexity of implementing line numbers that accurately reflect visual word wrapping in a textarea component.
+- **Tags:** documentation, technical debt, ui, ux, word wrap, line numbers
+
+## 1. Problem Statement
+
+The user has requested that the line numbers in the `NumberedTextarea` component should respect word wrapping. Currently, the component counts lines based on newline characters (`\n`). This means a single logical line that visually wraps into three lines in the UI still only receives one line number. The user correctly points out that this is not ideal.
+
+This document explains why this seemingly simple feature is technically complex to implement in a standard HTML `<textarea>` and outlines potential solutions.
+
+## 2. The Core Challenge: Logical vs. Visual Lines
+
+The fundamental issue is the difference between how a `<textarea>` handles content versus how the browser renders it.
+
+*   **Logical Lines:** The `<textarea>` element's `value` is a simple string. The only concept of a "line" it has is the presence of a newline character (`\n`). When we split the string by `\n`, we are counting these logical lines. This is what our current implementation does, and it's fast and simple.
+
+*   **Visual Lines:** Word wrapping is a purely visual phenomenon handled by the browser's rendering engine. The browser calculates how many words fit on a line based on the element's width, font size, font family, letter spacing, and word spacing. It then visually breaks the line and renders the overflow text below. **Crucially, the browser does not expose a simple API to ask, "How many visual lines are you currently rendering for this text?"**
+
+Because we cannot directly query the rendered line count, we must resort to indirect methods to calculate it.
+
+## 3. Potential Solutions & Their Complexity
+
+Here are the common approaches to solving this problem, each with its own trade-offs.
+
+### Solution A: The Hidden `div` Measurement Technique
+
+This is the most common and reliable method.
+
+1.  **How it Works:**
+    *   Create a hidden `div` element off-screen or with `visibility: hidden`.
+    *   Apply the *exact same* CSS styles to this `div` as the `<textarea>` (width, font, padding, etc.).
+    *   Copy the content of the `<textarea>` into the `innerHTML` of the hidden `div`.
+    *   Calculate the number of visual lines by dividing the `scrollHeight` of the hidden `div` by its `line-height`.
+
+2.  **Complexity & Downsides:**
+    *   **Performance:** This calculation must be run on every single keystroke, as any character change could affect word wrapping. Copying large amounts of text into the DOM and forcing a browser re-layout on every key press can be performance-intensive and may cause input lag.
+    *   **Fragility:** The CSS styles must be perfectly synchronized. Any discrepancy in padding, border, font-size, etc., will result in an incorrect calculation.
+    *   **Implementation:** Requires careful DOM manipulation within our React component, managing refs to both the textarea and the hidden div, and ensuring the calculation is efficient.
+
+### Solution B: Using a Full-Fledged Code Editor Component
+
+Instead of building our own, we could replace the `<textarea>` with a lightweight, embeddable code editor library.
+
+1.  **How it Works:**
+    *   Integrate a library like **CodeMirror** or **Monaco Editor** (the editor that powers VS Code itself, though it's much heavier).
+    *   These components are not simple textareas; they are complete editing surfaces that render each line individually. Because they control the rendering process, they have full knowledge of visual lines and can provide accurate line numbering out of the box.
+
+2.  **Complexity & Downsides:**
+    *   **Bundle Size:** These libraries are significantly larger than a simple React component, which would increase the extension's load time.
+    *   **Integration:** Integrating them into our existing React and VS Code Webview architecture can be complex, requiring custom wrappers and careful handling of the component's lifecycle.
+    *   **Overkill:** For a simple context input field, using a full code editor might be architectural overkill.
+
+## 4. Conclusion & Path Forward
+
+The user's request is valid and would be a great UX improvement. However, due to the performance and implementation complexities described above, this feature is considered a significant piece of technical debt that requires a dedicated cycle to solve correctly.
+
+The current priority is to fix the more critical usability bugs like scrolling, focus management, and highlighting. Once the component is stable, we can revisit this challenge and dedicate a future cycle to implementing one of the more advanced solutions above.
 </file>
 
 <file path="src/Artifacts/A149. Local LLM Integration Plan.md">
@@ -23050,7 +22598,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 </file>
 
 <file path="src/backend/commands/commands.ts">
-// Updated on: C115 (Fix fsService reference)
+// Updated on: C187 (Add gitInit command)
 import * as vscode from 'vscode';
 import { Services } from '../services/services';
 import { serverIPCs } from '@/client/views';
@@ -23132,7 +22680,6 @@ export const commands = [
             const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
             if (serverIpc) {
                 Services.loggerService.log("Executing dce.refreshTree command.");
-                // C115 Fix: Use fileTreeService instead of fsService
                 Services.fileTreeService.handleWorkspaceFilesRequest(serverIpc, true);
             } else {
                 Services.loggerService.warn("Could not refresh tree: serverIpc not found.");
@@ -23144,6 +22691,13 @@ export const commands = [
         callback: () => {
             Services.loggerService.log("Executing dce.openParallelCopilot command to open WebviewPanel.");
             vscode.commands.executeCommand('dce.showParallelCopilot');
+        }
+    },
+    {
+        commandId: 'dce.gitInit',
+        callback: () => {
+            Services.loggerService.log("Executing dce.gitInit command.");
+            Services.gitService.handleGitInitRequest();
         }
     }
 ];
@@ -24249,7 +23803,7 @@ export class FlattenerService {
 
 <file path="src/backend/services/git.service.ts">
 // src/backend/services/git.service.ts
-// Updated on: C186 (Add logging before sending IPC message)
+// Updated on: C187 (Add handleGitInitRequest and two-button dialog)
 import * as vscode from 'vscode';
 import { exec } from 'child_process';
 import * as path from 'path';
@@ -24259,7 +23813,7 @@ import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 
 export class GitService {
     private getWorkspaceRoot(): string | undefined {
-        return vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+        return vscode.workspace.workspaceFolders?.[0].uri.fsPath;
     }
 
     private async execGitCommand(command: string): Promise<{ stdout: string; stderr: string }> {
@@ -24283,6 +23837,16 @@ export class GitService {
         });
     }
 
+    public async handleGitInitRequest() {
+        Services.loggerService.log("Executing Git Init.");
+        try {
+            await this.execGitCommand('git init');
+            vscode.window.showInformationMessage("Successfully initialized Git repository. You can now create a baseline.");
+        } catch (error: any) {
+            vscode.window.showErrorMessage(`Failed to initialize Git repository: ${error.message}`);
+        }
+    }
+
     public async handleGitStatusRequest(serverIpc: ServerPostMessageManager) {
         Services.loggerService.log("Executing Git Status check.");
         try {
@@ -24290,7 +23854,6 @@ export class GitService {
             const isClean = stdout.trim() === '';
             serverIpc.sendToClient(ServerToClientChannel.SendGitStatus, { isClean });
         } catch (error) {
-            // Not a git repo, treat as not clean for workflow purposes
             serverIpc.sendToClient(ServerToClientChannel.SendGitStatus, { isClean: false });
         }
     }
@@ -24314,9 +23877,11 @@ export class GitService {
         } catch (error: any) {
             if (error.message.includes('fatal: not a git repository')) {
                 const openReadme = 'Open README Guide';
+                const initRepo = 'Initialize Repository';
                 vscode.window.showErrorMessage(
                     'This is not a Git repository. Please initialize it first to use the baseline feature.',
-                    openReadme
+                    openReadme,
+                    initRepo
                 ).then(selection => {
                     if (selection === openReadme) {
                         const workspaceRoot = this.getWorkspaceRoot();
@@ -24326,9 +23891,10 @@ export class GitService {
                                 vscode.window.showTextDocument(doc);
                             });
                         }
+                    } else if (selection === initRepo) {
+                        vscode.commands.executeCommand('dce.gitInit');
                     }
                 });
-                // Don't send a failure message, as the UI pop-up is the feedback
                 return; 
             }
             result = { success: false, message: `Git Baseline failed: ${error.message}` };
@@ -28716,7 +28282,7 @@ export default TestPane3;
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C182 (Fix onboarding textarea width)
+// Updated on: C187 (Add margin to collapsible section for animation)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -28893,7 +28459,7 @@ body {
 }
 
 .onboarding-textarea {
-    width: calc(100% - 15px); // Compensate for scrollbar
+    width: 100%;
     flex-grow: 1;
     background-color: var(--vscode-input-background);
     color: var(--vscode-input-foreground);
@@ -28903,6 +28469,7 @@ body {
     font-family: var(--vscode-editor-font-family);
     font-size: var(--vscode-editor-font-size);
     resize: none;
+    box-sizing: border-box;
     
     &:focus {
         outline: 1px solid var(--vscode-focusBorder);
@@ -29563,6 +29130,7 @@ body {
     border: 1px solid var(--vscode-panel-border);
     border-radius: 4px;
     width: 100%;
+    margin: 2px; /* C187 Fix: Add margin for animation highlight */
 }
 
 .collapsible-header-inner {
@@ -29635,7 +29203,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C186 (Implement full animated workflow state machine)
+// Updated on: C187 (Correct final workflow steps)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './view.scss';
@@ -29717,9 +29285,7 @@ const App = () => {
     React.useEffect(() => { const handleVisibilityChange = () => { if (document.visibilityState === 'hidden') saveCurrentCycleState(); }; document.addEventListener('visibilitychange', handleVisibilityChange); return () => document.removeEventListener('visibilitychange', handleVisibilityChange); }, [saveCurrentCycleState]);
     const parseAllTabs = React.useCallback(() => { setTabs(prevTabs => { const allFilePaths = new Set<string>(); const updatedTabs = { ...prevTabs }; let needsUpdate = false; Object.values(updatedTabs).forEach(tabState => { if (tabState.rawContent && !tabState.parsedContent) { needsUpdate = true; const parsed = parseResponse(tabState.rawContent); tabState.parsedContent = parsed; parsed.filesUpdated.forEach(file => allFilePaths.add(file)); parsed.files.forEach(file => { const lang = path.extname(file.path).substring(1) || 'plaintext'; const id = `${file.path}::${file.content}`; clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id }); }); } else if (tabState.parsedContent) { tabState.parsedContent.filesUpdated.forEach(file => allFilePaths.add(file)); } }); if (allFilePaths.size > 0) clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) }); return needsUpdate ? updatedTabs : prevTabs; }); }, [clientIpc]);
     
-    React.useEffect(() => {
-        logger.log(`[WORKFLOW] Step changed to: ${workflowStep}`);
-    }, [workflowStep]);
+    React.useEffect(() => { logger.log(`[WORKFLOW] Step changed to: ${workflowStep}`); }, [workflowStep]);
 
     React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string) => { setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setCycleContextHeight(cycleData.cycleContextHeight || 100); setEphemeralContextHeight(cycleData.ephemeralContextHeight || 100); }; clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, ({ filePath, originalTokens, modifiedTokens, similarity }) => { setComparisonMetrics(prev => new Map(prev).set(filePath, { originalTokens, modifiedTokens, similarity })); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); 
         
@@ -29747,11 +29313,10 @@ const App = () => {
     const isReadyForNextCycle = React.useMemo(() => { const hasTitle = cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== ''; const hasContext = cycleContext.trim() !== ''; const hasSelectedResponse = selectedResponseId !== null; return hasTitle && hasContext && hasSelectedResponse; }, [cycleTitle, cycleContext, selectedResponseId]);
     const isNewCycleButtonDisabled = React.useMemo(() => { if (currentCycle === 0) return true; if (currentCycle !== maxCycle) return true; return !isReadyForNextCycle; }, [currentCycle, maxCycle, isReadyForNextCycle]);
     
-    // Workflow State Machine Logic
     React.useEffect(() => {
         if (workflowStep === null) return;
         if (workflowStep === 'readyForNewCycle') return;
-        if (workflowStep === 'awaitingGeneratePrompt') { if (isReadyForNextCycle) setWorkflowStep('readyForNewCycle'); return; }
+        if (workflowStep === 'awaitingGeneratePrompt') { if (isReadyForNextCycle) setWorkflowStep('awaitingGeneratePrompt'); return; }
         if (workflowStep === 'awaitingCycleTitle') { if (cycleTitle.trim() && cycleTitle.trim() !== 'New Cycle') { setWorkflowStep('awaitingGeneratePrompt'); } return; }
         if (workflowStep === 'awaitingCycleContext') { if (cycleContext.trim()) { setWorkflowStep('awaitingCycleTitle'); } return; }
         if (workflowStep === 'awaitingAccept') { return; }
@@ -30579,550 +30144,6 @@ export function getContext() {
 
 export function deactivate() {}
 </file>
-
-<file path=".gitignore">
-node_modules
-package-lock.json
-dist
-out
-*.vsix
-.vscode-test/
-.vscode/
-The-Creator-AI-main/
-prompt.md
-.vscode/dce_cache/
-</file>
-
-<file path=".vscodeignore">
-# This file tells the VS Code packaging tool which files to ignore.
-# We are removing 'node_modules' because our external dependencies (like xlsx)
-# need to be included in the final package to be available at runtime.
-# The `vsce` tool is smart enough to only bundle production dependencies.
-
-src
-.gitignore
-webpack.config.js
-tsconfig.json
-**/*.map
-**/*.ts
-</file>
-
-<file path="package.json">
-{
-    "name": "data-curation-environment",
-    "publisher": "DCE-Developer",
-    "displayName": "Data Curation Environment",
-    "description": "A VS Code extension for curating context for Large Language Models.",
-    "version": "0.0.8",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/dgerabagi/data-curation-environment.git"
-    },
-    "engines": {
-        "vscode": "^1.90.0"
-    },
-    "categories": [
-        "Other"
-    ],
-    "activationEvents": [
-        "onView:data-curation-environment",
-        "onCommand:dce.showParallelCopilot"
-    ],
-    "main": "./dist/extension.js",
-    "contributes": {
-        "commands": [
-            {
-                "command": "dce.saveCurrentSelection",
-                "title": "DCE: Save Current Selection Set",
-                "category": "DCE"
-            },
-            {
-                "command": "dce.loadSelectionSet",
-                "title": "DCE: Load Selection Set",
-                "category": "DCE"
-            },
-            {
-                "command": "dce.manageSelectionSets",
-                "title": "DCE: Manage Selection Sets",
-                "category": "DCE"
-            },
-            {
-                "command": "dce.refreshTree",
-                "title": "DCE: Refresh Explorer",
-                "category": "DCE"
-            },
-            {
-                "command": "dce.openParallelCopilot",
-                "title": "DCE: Open Parallel Co-Pilot",
-                "category": "DCE",
-                "icon": "$(multiple-windows)"
-            },
-            {
-                "command": "dce.showParallelCopilot",
-                "title": "DCE: Show Parallel Co-Pilot"
-            }
-        ],
-        "viewsContainers": {
-            "activitybar": [
-                {
-                    "id": "data-curation-environment",
-                    "title": "Data Curation",
-                    "icon": "public/spiral.svg"
-                },
-                {
-                    "id": "dce-parallel-copilot-container",
-                    "title": "DCE Parallel Co-Pilot",
-                    "icon": "public/copilot.svg"
-                }
-            ]
-        },
-        "views": {
-            "data-curation-environment": [
-                {
-                    "type": "webview",
-                    "id": "viewType.sidebar.contextChooser",
-                    "name": "Data Curation"
-                }
-            ]
-        },
-        "menus": {
-            "view/title": [
-                {
-                    "command": "dce.openParallelCopilot",
-                    "when": "view == viewType.sidebar.contextChooser",
-                    "group": "navigation"
-                }
-            ],
-            "activityBar/view/title": [
-                 {
-                    "command": "dce.showParallelCopilot",
-                    "when": "viewContainer == dce-parallel-copilot-container"
-                }
-            ]
-        }
-    },
-    "scripts": {
-        "vscode:prepublish": "npm run package",
-        "compile": "webpack",
-        "watch": "webpack --watch",
-        "package": "webpack --mode production --devtool hidden-source-map",
-        "lint": "eslint src --ext ts"
-    },
-    "devDependencies": {
-        "@types/node": "18.x",
-        "@types/vscode": "^1.90.0",
-        "@typescript-eslint/eslint-plugin": "^7.7.1",
-        "@typescript-eslint/parser": "^7.7.1",
-        "eslint": "^8.57.0",
-        "ts-loader": "^9.5.1",
-        "typescript": "^5.4.5",
-        "webpack": "^5.91.0",
-        "webpack-cli": "^5.1.4",
-        "copy-webpack-plugin": "^12.0.2",
-        "mini-css-extract-plugin": "^2.9.0",
-        "style-loader": "^4.0.0",
-        "css-loader": "^7.1.2",
-        "sass-loader": "^16.0.1",
-        "sass": "^1.78.0",
-        "postcss-loader": "^8.1.1",
-        "babel-loader": "^9.1.3",
-        "@babel/preset-react": "^7.24.7",
-        "@babel/preset-typescript": "^7.24.7",
-        "process": "^0.11.10",
-        "path-browserify": "^1.0.1"
-    },
-    "dependencies": {
-        "@wooorm/starry-night": "^3.8.0",
-        "hast-util-to-html": "^9.0.1",
-        "react": "^18.3.1",
-        "react-dom": "^18.3.1",
-        "react-icons": "^5.3.0",
-        "react-markdown": "^9.0.1",
-        "rxjs": "^7.8.1",
-        "reflect-metadata": "^0.2.2",
-        "pdf-parse": "^1.1.1",
-        "xlsx": "^0.18.5",
-        "mammoth": "^1.8.0",
-        "diff": "^5.2.0",
-        "@types/diff": "^5.2.1"
-    }
-}
-</file>
-
-<file path="tsconfig.json">
-{
-    "compilerOptions": {
-        "module": "esnext",
-        "moduleResolution": "bundler",
-        "target": "ESNext",
-        "lib": ["ES2022", "DOM"],
-        "jsx": "react",
-        "sourceMap": true,
-        "rootDir": "src",
-        "strict": false,
-        "baseUrl": "./",
-        "paths": {
-            "@/*": ["src/*"]
-        },
-        "experimentalDecorators": true,
-        "allowSyntheticDefaultImports": true
-    },
-    "include": [
-        "src/**/*.ts",
-        "src/**/*.tsx"
-    ],
-    "exclude": [
-        "node_modules",
-        ".vscode-test",
-        "The-Creator-AI-main"
-    ]
-}
-</file>
-
-<file path="webpack.config.js">
-const path = require('path');
-const CopyPlugin = require("copy-webpack-plugin");
-const webpack = require('webpack');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
-/** @type {import('webpack').Configuration} */
-const baseConfig = {
-    mode: 'none',
-    resolve: {
-        extensions: ['.ts', '.js', '.tsx', '.jsx'],
-        alias: {
-            "@": path.resolve(__dirname, 'src'),
-        }
-    },
-    module: {
-        rules: [
-            {
-                test: /\.ts$/,
-                exclude: /node_modules/,
-                use: [{ loader: 'ts-loader' }]
-            },
-            {
-                test: /\.?ts.?(x)$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: "babel-loader",
-                    options: {
-                        presets: ['@babel/preset-react', '@babel/preset-typescript']
-                    }
-                }
-            },
-        ]
-    },
-    devtool: 'nosources-source-map',
-    infrastructureLogging: {
-        level: "log",
-    },
-};
-
-/** @type {import('webpack').Configuration} */
-const extensionConfig = {
-    ...baseConfig,
-    target: 'node',
-    entry: {
-        extension: './src/extension.ts',
-    },
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'extension.js',
-        libraryTarget: 'commonjs2'
-    },
-    externals: {
-        vscode: 'commonjs vscode',
-    },
-};
-
-/** @type {import('webpack').Configuration} */
-const webviewConfig = {
-    ...baseConfig,
-    target: 'web',
-    entry: {
-        contextChooserView: './src/client/views/context-chooser.view/view.tsx',
-        parallelCopilotView: './src/client/views/parallel-copilot.view/view.tsx',
-    },
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: '[name].js',
-        libraryTarget: 'commonjs2'
-    },
-    module: {
-        ...baseConfig.module,
-        rules: [
-            ...baseConfig.module.rules,
-            {
-                test: /\.s[ac]ss$/i,
-                use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
-            },
-        ]
-    },
-    resolve: {
-        ...baseConfig.resolve,
-        fallback: {
-            "path": require.resolve("path-browserify")
-        }
-    },
-    plugins: [
-        new MiniCssExtractPlugin({
-            filename: '[name].css'
-        }),
-        new CopyPlugin({
-            patterns: [
-                { from: "public", to: "public" },
-                { from: "node_modules/@wooorm/starry-night/style/both.css", to: "starry-night.css" },
-                // C164 Fix: Copy static artifacts needed by the backend into the dist folder.
-                { from: "src/Artifacts", to: "Artifacts" }
-            ],
-        }),
-        new webpack.ProvidePlugin({
-            process: 'process/browser',
-        }),
-    ],
-};
-
-module.exports = [extensionConfig, webviewConfig];
-</file>
-
-<file path="src/Artifacts/A75. DCE - Text Area Component A-B-C Test Plan.md">
-# Artifact A75: DCE - Text Area Component A-B-C Test Plan
-# Date Created: C179
-# Author: AI Model & Curator
-# Updated on: C180 (Acknowledge word-wrap limitation)
-
-- **Key/Value for A0:**
-- **Description:** A plan to create a test harness for the `NumberedTextarea` component to diagnose and fix persistent scrolling and alignment bugs.
-- **Tags:** plan, process, debugging, troubleshooting, ui, ux, react
-
-## 1. Overview & Goal
-
-The `NumberedTextarea` component, used for the "Cycle Context" and "Ephemeral Context" fields in the Parallel Co-Pilot Panel, has been a persistent source of UI bugs across multiple cycles (C1, C2, C3, C167, C174). The primary issues are a lack of synchronized scrolling between the line numbers and the text content, and a misalignment of the cursor and text selection, making the component difficult to use.
-
-The goal of this plan is to apply the "Original-A-B-C" testing strategy, as defined in `A51`, to definitively diagnose and resolve these issues. We will create a test harness within the PCPP that allows for parallel testing of the original component and three new, isolated test components, each attempting a different solution.
-
-## 2. Known Limitation: Word-Wrap Line Numbering
-
-As of Cycle 4, it has been observed that the current architecture of the `NumberedTextarea` (and all proposed test variants) does not correctly handle line numbering for word-wrapped text. The component counts lines based on newline characters (`\n`), not on how the text visually wraps in the view. This means a single line of text that wraps into three visual lines will only get one line number.
-
-**This is a known limitation.** A true fix for this requires a significantly more complex architecture, likely involving rendering text into a hidden element and measuring the resulting line boxes. For the current development phase, the priority is to fix the blocking usability bugs (scrolling, focus, performance). The word-wrap numbering issue will be deferred to a future cycle dedicated to advanced component architecture.
-
-## 3. The Strategy
-
-### 3.1. Test Harness Implementation
-The main `parallel-copilot.view/view.tsx` component will be refactored to include a new "Test Harness" mode.
--   A new state, `activeTestView`, will control which view is active: `'Original'`, `'TestA'`, `'TestB'`, or `'TestC'`.
--   A simple tab bar UI will be added to switch between these views.
--   The "Original" view will render the current, fully-featured PCPP layout.
--   The other views will render the isolated test components.
-
-### 3.2. Isolated Test Components
-Three new test components will be created to isolate and test specific variables.
-
--   **Test A (`TestPane1.tsx`): Synchronized Scrolling**
-    -   **Hypothesis:** The scrolling is failing because the `onScroll` event is not being correctly used to synchronize the `scrollTop` of the line number gutter and the text area.
-    -   **Implementation:** This component will feature a barebones `textarea` next to a `div` for line numbers. It will implement a robust `onScroll` handler that programmatically sets the `scrollTop` of the line number gutter, with extensive logging to confirm the event is firing and the values are changing.
-
--   **Test B (`TestPane2.tsx`): Pixel-Perfect Alignment**
-    -   **Hypothesis:** The cursor and selection are misaligned due to subtle differences in CSS properties (`font-family`, `font-size`, `line-height`, `padding`, `box-sizing`) between the transparent `textarea` and the underlying `div` that displays the highlighted text.
-    -   **Implementation:** This component will implement the overlay approach. It will meticulously ensure that every single font and box-model CSS property is identical across both elements. It will contain no complex logic, only the minimal structure needed to test for visual alignment.
-
--   **Test C (`TestPane3.tsx`): Combined & Cleaned Solution**
-    -   **Hypothesis:** A clean implementation combining the lessons from Test A and Test B will provide a fully functional component.
-    -   **Implementation:** This component will integrate the synchronized scrolling from Test A with the pixel-perfect styling from Test B into a new, clean version of the `NumberedTextarea` component, free from any other complex logic from the main view.
-
-## 4. Cleanup Process
-Once a working pattern is identified in a test component:
-1.  **Codify Findings:** The successful pattern and the root cause of the failure will be documented in `A11. DCE - Regression Case Studies`.
-2.  **Integrate Solution:** The original `NumberedTextarea.tsx` component will be refactored to use the successful pattern.
-3.  **Remove Test Artifacts:** The test harness UI and the `TestPane*.tsx` component files will be removed from the project.
-</file>
-
-<file path="dist/Artifacts/A75. DCE - Text Area Component A-B-C Test Plan.md">
-# Artifact A75: DCE - Text Area Component A-B-C Test Plan
-# Date Created: C179
-# Author: AI Model & Curator
-# Updated on: C180 (Acknowledge word-wrap limitation)
-
-- **Key/Value for A0:**
-- **Description:** A plan to create a test harness for the `NumberedTextarea` component to diagnose and fix persistent scrolling and alignment bugs.
-- **Tags:** plan, process, debugging, troubleshooting, ui, ux, react
-
-## 1. Overview & Goal
-
-The `NumberedTextarea` component, used for the "Cycle Context" and "Ephemeral Context" fields in the Parallel Co-Pilot Panel, has been a persistent source of UI bugs across multiple cycles (C1, C2, C3, C167, C174). The primary issues are a lack of synchronized scrolling between the line numbers and the text content, and a misalignment of the cursor and text selection, making the component difficult to use.
-
-The goal of this plan is to apply the "Original-A-B-C" testing strategy, as defined in `A51`, to definitively diagnose and resolve these issues. We will create a test harness within the PCPP that allows for parallel testing of the original component and three new, isolated test components, each attempting a different solution.
-
-## 2. Known Limitation: Word-Wrap Line Numbering
-
-As of Cycle 4, it has been observed that the current architecture of the `NumberedTextarea` (and all proposed test variants) does not correctly handle line numbering for word-wrapped text. The component counts lines based on newline characters (`\n`), not on how the text visually wraps in the view. This means a single line of text that wraps into three visual lines will only get one line number.
-
-**This is a known limitation.** A true fix for this requires a significantly more complex architecture, likely involving rendering text into a hidden element and measuring the resulting line boxes. For the current development phase, the priority is to fix the blocking usability bugs (scrolling, focus, performance). The word-wrap numbering issue will be deferred to a future cycle dedicated to advanced component architecture.
-
-## 3. The Strategy
-
-### 3.1. Test Harness Implementation
-The main `parallel-copilot.view/view.tsx` component will be refactored to include a new "Test Harness" mode.
--   A new state, `activeTestView`, will control which view is active: `'Original'`, `'TestA'`, `'TestB'`, or `'TestC'`.
--   A simple tab bar UI will be added to switch between these views.
--   The "Original" view will render the current, fully-featured PCPP layout.
--   The other views will render the isolated test components.
-
-### 3.2. Isolated Test Components
-Three new test components will be created to isolate and test specific variables.
-
--   **Test A (`TestPane1.tsx`): Synchronized Scrolling**
-    -   **Hypothesis:** The scrolling is failing because the `onScroll` event is not being correctly used to synchronize the `scrollTop` of the line number gutter and the text area.
-    -   **Implementation:** This component will feature a barebones `textarea` next to a `div` for line numbers. It will implement a robust `onScroll` handler that programmatically sets the `scrollTop` of the line number gutter, with extensive logging to confirm the event is firing and the values are changing.
-
--   **Test B (`TestPane2.tsx`): Pixel-Perfect Alignment**
-    -   **Hypothesis:** The cursor and selection are misaligned due to subtle differences in CSS properties (`font-family`, `font-size`, `line-height`, `padding`, `box-sizing`) between the transparent `textarea` and the underlying `div` that displays the highlighted text.
-    -   **Implementation:** This component will implement the overlay approach. It will meticulously ensure that every single font and box-model CSS property is identical across both elements. It will contain no complex logic, only the minimal structure needed to test for visual alignment.
-
--   **Test C (`TestPane3.tsx`): Combined & Cleaned Solution**
-    -   **Hypothesis:** A clean implementation combining the lessons from Test A and Test B will provide a fully functional component.
-    -   **Implementation:** This component will integrate the synchronized scrolling from Test A with the pixel-perfect styling from Test B into a new, clean version of the `NumberedTextarea` component, free from any other complex logic from the main view.
-
-## 4. Cleanup Process
-Once a working pattern is identified in a test component:
-1.  **Codify Findings:** The successful pattern and the root cause of the failure will be documented in `A11. DCE - Regression Case Studies`.
-2.  **Integrate Solution:** The original `NumberedTextarea.tsx` component will be refactored to use the successful pattern.
-3.  **Remove Test Artifacts:** The test harness UI and the `TestPane*.tsx` component files will be removed from the project.
-</file>
-
-<file path="src/Artifacts/A76. DCE - Word Wrap Line Numbering Challenges.md">
-# Artifact A76: DCE - Word Wrap Line Numbering Challenges
-# Date Created: C181
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** Explains the technical complexity of implementing line numbers that accurately reflect visual word wrapping in a textarea component.
-- **Tags:** documentation, technical debt, ui, ux, word wrap, line numbers
-
-## 1. Problem Statement
-
-The user has requested that the line numbers in the `NumberedTextarea` component should respect word wrapping. Currently, the component counts lines based on newline characters (`\n`). This means a single logical line that visually wraps into three lines in the UI still only receives one line number. The user correctly points out that this is not ideal.
-
-This document explains why this seemingly simple feature is technically complex to implement in a standard HTML `<textarea>` and outlines potential solutions.
-
-## 2. The Core Challenge: Logical vs. Visual Lines
-
-The fundamental issue is the difference between how a `<textarea>` handles content versus how the browser renders it.
-
-*   **Logical Lines:** The `<textarea>` element's `value` is a simple string. The only concept of a "line" it has is the presence of a newline character (`\n`). When we split the string by `\n`, we are counting these logical lines. This is what our current implementation does, and it's fast and simple.
-
-*   **Visual Lines:** Word wrapping is a purely visual phenomenon handled by the browser's rendering engine. The browser calculates how many words fit on a line based on the element's width, font size, font family, letter spacing, and word spacing. It then visually breaks the line and renders the overflow text below. **Crucially, the browser does not expose a simple API to ask, "How many visual lines are you currently rendering for this text?"**
-
-Because we cannot directly query the rendered line count, we must resort to indirect methods to calculate it.
-
-## 3. Potential Solutions & Their Complexity
-
-Here are the common approaches to solving this problem, each with its own trade-offs.
-
-### Solution A: The Hidden `div` Measurement Technique
-
-This is the most common and reliable method.
-
-1.  **How it Works:**
-    *   Create a hidden `div` element off-screen or with `visibility: hidden`.
-    *   Apply the *exact same* CSS styles to this `div` as the `<textarea>` (width, font, padding, etc.).
-    *   Copy the content of the `<textarea>` into the `innerHTML` of the hidden `div`.
-    *   Calculate the number of visual lines by dividing the `scrollHeight` of the hidden `div` by its `line-height`.
-
-2.  **Complexity & Downsides:**
-    *   **Performance:** This calculation must be run on every single keystroke, as any character change could affect word wrapping. Copying large amounts of text into the DOM and forcing a browser re-layout on every key press can be performance-intensive and may cause input lag.
-    *   **Fragility:** The CSS styles must be perfectly synchronized. Any discrepancy in padding, border, font-size, etc., will result in an incorrect calculation.
-    *   **Implementation:** Requires careful DOM manipulation within our React component, managing refs to both the textarea and the hidden div, and ensuring the calculation is efficient.
-
-### Solution B: Using a Full-Fledged Code Editor Component
-
-Instead of building our own, we could replace the `<textarea>` with a lightweight, embeddable code editor library.
-
-1.  **How it Works:**
-    *   Integrate a library like **CodeMirror** or **Monaco Editor** (the editor that powers VS Code itself, though it's much heavier).
-    *   These components are not simple textareas; they are complete editing surfaces that render each line individually. Because they control the rendering process, they have full knowledge of visual lines and can provide accurate line numbering out of the box.
-
-2.  **Complexity & Downsides:**
-    *   **Bundle Size:** These libraries are significantly larger than a simple React component, which would increase the extension's load time.
-    *   **Integration:** Integrating them into our existing React and VS Code Webview architecture can be complex, requiring custom wrappers and careful handling of the component's lifecycle.
-    *   **Overkill:** For a simple context input field, using a full code editor might be architectural overkill.
-
-## 4. Conclusion & Path Forward
-
-The user's request is valid and would be a great UX improvement. However, due to the performance and implementation complexities described above, this feature is considered a significant piece of technical debt that requires a dedicated cycle to solve correctly.
-
-The current priority is to fix the more critical usability bugs like scrolling, focus management, and highlighting. Once the component is stable, we can revisit this challenge and dedicate a future cycle to implementing one of the more advanced solutions above.
-</file>
-
-<file path="dist/Artifacts/A76. DCE - Word Wrap Line Numbering Challenges.md">
-# Artifact A76: DCE - Word Wrap Line Numbering Challenges
-# Date Created: C181
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** Explains the technical complexity of implementing line numbers that accurately reflect visual word wrapping in a textarea component.
-- **Tags:** documentation, technical debt, ui, ux, word wrap, line numbers
-
-## 1. Problem Statement
-
-The user has requested that the line numbers in the `NumberedTextarea` component should respect word wrapping. Currently, the component counts lines based on newline characters (`\n`). This means a single logical line that visually wraps into three lines in the UI still only receives one line number. The user correctly points out that this is not ideal.
-
-This document explains why this seemingly simple feature is technically complex to implement in a standard HTML `<textarea>` and outlines potential solutions.
-
-## 2. The Core Challenge: Logical vs. Visual Lines
-
-The fundamental issue is the difference between how a `<textarea>` handles content versus how the browser renders it.
-
-*   **Logical Lines:** The `<textarea>` element's `value` is a simple string. The only concept of a "line" it has is the presence of a newline character (`\n`). When we split the string by `\n`, we are counting these logical lines. This is what our current implementation does, and it's fast and simple.
-
-*   **Visual Lines:** Word wrapping is a purely visual phenomenon handled by the browser's rendering engine. The browser calculates how many words fit on a line based on the element's width, font size, font family, letter spacing, and word spacing. It then visually breaks the line and renders the overflow text below. **Crucially, the browser does not expose a simple API to ask, "How many visual lines are you currently rendering for this text?"**
-
-Because we cannot directly query the rendered line count, we must resort to indirect methods to calculate it.
-
-## 3. Potential Solutions & Their Complexity
-
-Here are the common approaches to solving this problem, each with its own trade-offs.
-
-### Solution A: The Hidden `div` Measurement Technique
-
-This is the most common and reliable method.
-
-1.  **How it Works:**
-    *   Create a hidden `div` element off-screen or with `visibility: hidden`.
-    *   Apply the *exact same* CSS styles to this `div` as the `<textarea>` (width, font, padding, etc.).
-    *   Copy the content of the `<textarea>` into the `innerHTML` of the hidden `div`.
-    *   Calculate the number of visual lines by dividing the `scrollHeight` of the hidden `div` by its `line-height`.
-
-2.  **Complexity & Downsides:**
-    *   **Performance:** This calculation must be run on every single keystroke, as any character change could affect word wrapping. Copying large amounts of text into the DOM and forcing a browser re-layout on every key press can be performance-intensive and may cause input lag.
-    *   **Fragility:** The CSS styles must be perfectly synchronized. Any discrepancy in padding, border, font-size, etc., will result in an incorrect calculation.
-    *   **Implementation:** Requires careful DOM manipulation within our React component, managing refs to both the textarea and the hidden div, and ensuring the calculation is efficient.
-
-### Solution B: Using a Full-Fledged Code Editor Component
-
-Instead of building our own, we could replace the `<textarea>` with a lightweight, embeddable code editor library.
-
-1.  **How it Works:**
-    *   Integrate a library like **CodeMirror** or **Monaco Editor** (the editor that powers VS Code itself, though it's much heavier).
-    *   These components are not simple textareas; they are complete editing surfaces that render each line individually. Because they control the rendering process, they have full knowledge of visual lines and can provide accurate line numbering out of the box.
-
-2.  **Complexity & Downsides:**
-    *   **Bundle Size:** These libraries are significantly larger than a simple React component, which would increase the extension's load time.
-    *   **Integration:** Integrating them into our existing React and VS Code Webview architecture can be complex, requiring custom wrappers and careful handling of the component's lifecycle.
-    *   **Overkill:** For a simple context input field, using a full code editor might be architectural overkill.
-
-## 4. Conclusion & Path Forward
-
-The user's request is valid and would be a great UX improvement. However, due to the performance and implementation complexities described above, this feature is considered a significant piece of technical debt that requires a dedicated cycle to solve correctly.
-
-The current priority is to fix the more critical usability bugs like scrolling, focus management, and highlighting. Once the component is stable, we can revisit this challenge and dedicate a future cycle to implementing one of the more advanced solutions above.
-</file>
-
-
-
-
 
 
 </M7. Flattened Repo>
