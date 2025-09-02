@@ -1,4 +1,4 @@
-// Updated on: C169 (Add handleHighlightContextRequest)
+// Updated on: C2 (Remove handleHighlightContextRequest)
 import { createStarryNight, common } from '@wooorm/starry-night';
 import sourceTsx from '@wooorm/starry-night/source.tsx';
 import sourceJs from '@wooorm/starry-night/source.js';
@@ -29,34 +29,9 @@ export class HighlightingService {
         }
     }
     
-    public async handleHighlightContextRequest(context: string, id: string, serverIpc: ServerPostMessageManager) {
-        Services.loggerService.log(`[CONTEXT-HIGHLIGHT] Received request for context ID: ${id}`);
-        if (!this.starryNight) {
-            Services.loggerService.error('Starry Night not initialized, cannot highlight context.');
-            serverIpc.sendToClient(ServerToClientChannel.SendHighlightContext, { highlightedHtml: context, id });
-            return;
-        }
-
-        const scope = this.starryNight.flagToScope('markdown');
-        if (!scope) {
-            Services.loggerService.warn(`[WARN] No Starry Night scope found for markdown.`);
-            serverIpc.sendToClient(ServerToClientChannel.SendHighlightContext, { highlightedHtml: context, id });
-            return;
-        }
-
-        try {
-            const tree = this.starryNight.highlight(context, scope);
-            const hastHtml = toHtml(tree);
-            serverIpc.sendToClient(ServerToClientChannel.SendHighlightContext, { highlightedHtml: hastHtml, id });
-        } catch (error) {
-            Services.loggerService.error(`Starry Night context highlighting failed: ${error}`);
-            serverIpc.sendToClient(ServerToClientChannel.SendHighlightContext, { highlightedHtml: context, id });
-        }
-    }
-
     public async handleSyntaxHighlightRequest(code: string, lang: string, id: string, serverIpc: ServerPostMessageManager) {
         const truncatedCode = code.length > 20 ? `${code.substring(0, 20)}[...]` : code;
-        Services.loggerService.log(`[SYNTAX-HIGHLIGHT] Received request for lang: ${lang}, code: ${truncatedCode}`);
+        Services.loggerService.log(`[SYNTAX-HIGHLIGHT] Received request for lang: ${lang}, id: ${id}`);
         
         if (!this.starryNight) {
             Services.loggerService.error('Starry Night not initialized, cannot highlight.');

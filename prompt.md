@@ -11,7 +11,9 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 1 - cycle context fields busted (still), ftv flashes when autosaving (still)
+Current Cycle 3 - New Cycle
+Cycle 2 - ts errors
+Cycle 1 - ts errors
 Cycle 0 - Project Initialization/Template Archive
 </M2. cycle overview>
 
@@ -249,6 +251,10 @@ fix cycle context and ephemeral context text fields and fix flashing FTV.
 
 ### A11. DCE - Regression Case Studies
 - **Description:** Documents recurring bugs, their root causes, and codified solutions to prevent future regressions during development.
+- **Tags:** bugs, regression, troubleshooting, development, best practices
+
+### A11.1 DCE - New Regression Case Studies
+- **Description:** A separate log for new regression case studies to avoid bloating the original A11 artifact.
 - **Tags:** bugs, regression, troubleshooting, development, best practices
 
 ### A12. DCE - Logging and Debugging Guide
@@ -613,36 +619,112 @@ fix cycle context and ephemeral context text fields and fix flashing FTV.
 </M5. organized artifacts list>
 
 <M6. Cycles>
-<Cycle 2>
-once we integrate with the local llm, we are going to want to, for each animated step, also create an audio clip that describes what the purpose of the button is, and how its what the user should be 'doing' next, logically. instead of just displaying a tooltip with a textual instruction, we could play the audio clip describing the buttons function and purpose. so we will want an artifact which will capture the statements for each animated step.
 
-next, we are also going to want to consider a RAG solution. eventually our 'flatten context' button in the FTV will evolve to also create embeddings. 
-</Cycle 2>
-<Cycle 1>
+<Cycle 3>
 <Cycle Context>
-i thought we fixed this... still now each time i stop typing in the cycle context, the ftv flashes. in addition, if i write too much into this field, like more than 6 lines, it breaks essentially the entire text field. ive created a video of this occurring. 
+okay cycle context and ephemeral context fields are good, however they lost the starry-night markdown coloration application. the reason i want that is because i think it will help train users to write with things like `tilde` when it actually changes the color of the text, leading to better prompting. 
 
-finally, lets create a new artifact 11.1. we are to place any new regression cases into this artifact so that we do not have to re-write the 10k token A11 artifact. it can be now just referenceable,
+but more importantly, you still did not fix the flashing! its so annoying! can you please fix that? the logs say its ignoring but clearly its still flashing each time i stop typing in the cycle context. it must be something else.
 </Cycle Context>
 <Ephemeral Context>
-[INFO] [8:35:24 PM] [CONTEXT-HIGHLIGHT] Received request for context ID: cycle-context-1
-[INFO] [8:35:25 PM] [SelectionService] Found 169 paths in persisted state. Validating...
-[INFO] [8:35:25 PM] [SelectionService] Returning 169 valid paths.
-[INFO] [8:35:25 PM] HistoryService: saving data for cycle 1.
-[INFO] [8:35:26 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/DCE/.vscode/dce_history.json
-[INFO] [8:35:26 PM] [Watcher] Ignoring change in excluded pattern: c:/Projects/DCE/.vscode/dce_history.json
-[INFO] [8:35:27 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[INFO] [8:35:27 PM] handleWorkspaceFilesRequest started. forceRefresh=true
-[INFO] [8:35:27 PM] Building file tree from scratch.
-[INFO] [8:35:27 PM] buildTreeFromTraversal starting for root: c:\Projects\DCE
-[INFO] [8:35:27 PM] [SelectionService] Found 169 paths in persisted state. Validating...
-[INFO] [8:35:27 PM] [SelectionService] Returning 169 valid paths.
-[INFO] [8:35:27 PM] Persisted current selection of 169 items.
-[INFO] [8:35:27 PM] buildTreeFromTraversal finished. Root node has 16 children.
-[INFO] [8:35:27 PM] File tree built. Sending to client.
-[INFO] [8:35:27 PM] handleWorkspaceFilesRequest finished.
-
+[INFO] [2:14:34 PM] [Watcher] File change detected: c:/Projects/DCE/.vscode/dce_history.json
+[INFO] [2:14:34 PM] [Watcher] Ignoring change in DCE history file: c:/Projects/DCE/.vscode/dce_history.json
+[INFO] [2:14:34 PM] [Watcher] File change detected: c:/Projects/DCE/.vscode/dce_history.json
+[INFO] [2:14:34 PM] [Watcher] Ignoring change in DCE history file: c:/Projects/DCE/.vscode/dce_history.json
+[INFO] [2:14:36 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [2:14:36 PM] handleWorkspaceFilesRequest started. forceRefresh=true
+[INFO] [2:14:36 PM] Building file tree from scratch.
+[INFO] [2:14:36 PM] buildTreeFromTraversal starting for root: c:\Projects\DCE
+[INFO] [2:14:36 PM] [SelectionService] Found 166 paths in persisted state. Validating...
+[INFO] [2:14:36 PM] [SelectionService] Returning 166 valid paths.
+[INFO] [2:14:36 PM] Persisted current selection of 166 items.
+[INFO] [2:14:36 PM] buildTreeFromTraversal finished. Root node has 16 children.
+[INFO] [2:14:36 PM] File tree built. Sending to client.
+[INFO] [2:14:36 PM] handleWorkspaceFilesRequest finished.
+[INFO] [2:14:38 PM] [SelectionService] Found 166 paths in persisted state. Validating...
+[INFO] [2:14:38 PM] [SelectionService] Returning 166 valid paths.
+[INFO] [2:14:38 PM] HistoryService: saving data for cycle 3.
+[INFO] [2:14:38 PM] [Watcher] File change detected: c:/Projects/DCE/.vscode/dce_history.json
+[INFO] [2:14:38 PM] [Watcher] Ignoring change in DCE history file: c:/Projects/DCE/.vscode/dce_history.json
+[INFO] [2:14:38 PM] [Watcher] File change detected: c:/Projects/DCE/.vscode/dce_history.json
+[INFO] [2:14:38 PM] [Watcher] Ignoring change in DCE history file: c:/Projects/DCE/.vscode/dce_history.json
+[INFO] [2:14:41 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [2:14:41 PM] handleWorkspaceFilesRequest started. forceRefresh=true
+[INFO] [2:14:41 PM] Building file tree from scratch.
+[INFO] [2:14:41 PM] buildTreeFromTraversal starting for root: c:\Projects\DCE
+[INFO] [2:14:41 PM] [SelectionService] Found 166 paths in persisted state. Validating...
+[INFO] [2:14:41 PM] [SelectionService] Returning 166 valid paths.
+[INFO] [2:14:41 PM] Persisted current selection of 166 items.
+[INFO] [2:14:41 PM] buildTreeFromTraversal finished. Root node has 16 children.
+[INFO] [2:14:41 PM] File tree built. Sending to client.
+[INFO] [2:14:41 PM] handleWorkspaceFilesRequest finished.
+[INFO] [2:14:46 PM] [SelectionService] Found 166 paths in persisted state. Validating...
+[INFO] [2:14:46 PM] [SelectionService] Returning 166 valid paths.
+[INFO] [2:14:46 PM] HistoryService: saving data for cycle 3.
+[INFO] [2:14:46 PM] [Watcher] File change detected: c:/Projects/DCE/.vscode/dce_history.json
+[INFO] [2:14:46 PM] [Watcher] Ignoring change in DCE history file: c:/Projects/DCE/.vscode/dce_history.json
+[INFO] [2:14:46 PM] [Watcher] File change detected: c:/Projects/DCE/.vscode/dce_history.json
+[INFO] [2:14:46 PM] [Watcher] Ignoring change in DCE history file: c:/Projects/DCE/.vscode/dce_history.json
+[INFO] [2:14:48 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [2:14:48 PM] handleWorkspaceFilesRequest started. forceRefresh=true
+[INFO] [2:14:48 PM] Building file tree from scratch.
+[INFO] [2:14:48 PM] buildTreeFromTraversal starting for root: c:\Projects\DCE
+[INFO] [2:14:48 PM] [SelectionService] Found 166 paths in persisted state. Validating...
+[INFO] [2:14:48 PM] [SelectionService] Returning 166 valid paths.
+[INFO] [2:14:48 PM] Persisted current selection of 166 items.
+[INFO] [2:14:48 PM] buildTreeFromTraversal finished. Root node has 16 children.
+[INFO] [2:14:48 PM] File tree built. Sending to client.
+[INFO] [2:14:48 PM] handleWorkspaceFilesRequest finished.
 </Ephemeral Context>
+<Previous Cycle 2 Summary of Actions>
+I have analyzed the TypeScript errors from the current cycle and the project's history. It's clear that the errors are a direct result of an incomplete refactoring from the previous cycle. The plan was to remove the complex and buggy `NumberedTextarea` component in favor of standard text areas for stability, but the old component and its test harness were not fully deleted, leaving behind code that references now-renamed IPC channels.
+
+My course of action is to complete the cleanup that was intended in Cycle 1. This will resolve all TypeScript errors and align the codebase with the documented decision to prioritize a stable user interface. I will also ensure the fix for the flashing File Tree View (FTV) is robust.
+
+1.  **Complete Component Cleanup:** The A-B-C test for the `NumberedTextarea` component concluded, and the decision was made to remove it. I will now finalize that removal.
+    *   **Delete Obsolete Files:** I will delete the following files, as they are no longer used and are the source of the build errors:
+        *   `src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx`
+        *   `src/client/views/parallel-copilot.view/TestPane1.tsx`
+        *   `src/client/views/parallel-copilot.view/TestPane2.tsx`
+        *   `src/client/views/parallel-copilot.view/TestPane3.tsx`
+    *   **Refactor `view.tsx`:** I will remove the A-B-C test harness logic from the main `parallel-copilot.view/view.tsx` component. This includes removing the `activeTestView` state, the test pane imports, and the conditional rendering logic for the test panes. The component will now directly render the main PCPP interface.
+    *   **Cleanup `view.scss`:** I will remove the CSS styles associated with the deleted test harness (`.test-harness-tabs`, `.test-pane-container`) from `parallel-copilot.view/view.scss`.
+
+2.  **Verify `ContextInputs.tsx`:** I will confirm that `ContextInputs.tsx` correctly uses standard `<textarea>` elements, ensuring the context input fields remain functional and stable as intended by the previous cycle's fix.
+
+3.  **Verify FTV Flashing Fix:** I will review `file-tree.service.ts` to confirm that the file watcher logic explicitly ignores `dce_history.json` to prevent the UI from flashing during auto-saves. The existing implementation appears correct and will be preserved.
+
+This comprehensive cleanup will resolve all TypeScript errors and complete the work from the previous cycle, resulting in a stable and functional extension.
+</Previous Cycle 2 Summary of Actions>
+</Cycle 3>
+
+<Cycle 2>
+<Cycle Context>
+ack, still ironing out this workflow, accidentally overwrote cycle 1 summary of actions. no matter. good work on this current cycle. i rolled in the selected cycle 2 response. in doing so, i ended up with 2 ts errors, or what i like to call directives in disguise... i checked the ts error, therses a comment saying 'blah blah in a -REAL- implementation blah blah', this is a real implementation, haha. as such, please address these ts errors in a -REAL- way haha.
+</Cycle Context>
+<Previous Cycle 1 Summary of Actions>
+I have analyzed the TypeScript errors and the ongoing issues with the context text fields and the file tree view (FTV) flashing. The TypeScript errors are the most immediate blocker and are caused by the `NumberedTextarea.tsx` component using IPC channels that were removed in a previous cycle. The "real" way to fix this is to adapt the component to use the existing, correct syntax highlighting service. The FTV flashing is a recurring regression that needs a more robust fix.
+
+My course of action is to first resolve the TypeScript errors by modifying `NumberedTextarea.tsx` to use the correct IPC channels for syntax highlighting. Concurrently, I will strengthen the file watcher's exclusion logic in `file-tree.service.ts` to definitively stop the FTV from flashing on auto-save.
+
+1.  **Fix TypeScript Errors in `NumberedTextarea.tsx` (Primary Task):**
+    *   The errors `TS2339: Property 'SendHighlightContext' does not exist...` and `TS2339: Property 'RequestHighlightContext' does not exist...` are occurring because the component is using old, deleted IPC channels.
+    *   I will modify `src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx`.
+    *   The component will be updated to use the existing, correct IPC channels for syntax highlighting: `ClientToServerChannel.RequestSyntaxHighlight` and `ServerToClientChannel.SendSyntaxHighlight`.
+    *   When sending the request, it will now include `lang: 'markdown'`, as the context panes are intended for Markdown content. This aligns the component with the "real" highlighting implementation currently used for code blocks.
+
+2.  **Fix File Tree View (FTV) Flashing (Secondary Task):**
+    *   The FTV flashing on auto-save is a recurring regression. The existing fix to ignore `.vscode/dce_history.json` is not working reliably.
+    *   I will update `src/backend/services/file-tree.service.ts`.
+    *   I will add more detailed logging to the file watcher's `onDidChange` and `onDidCreate` handlers. This will log the exact normalized path of every file change event, allowing us to see precisely what path is being reported when the PCPP auto-saves and why the current exclusion logic might be failing.
+    *   I will strengthen the exclusion logic by ensuring the check for `dce_history.json` is the very first thing that happens in the event handler, preventing any other logic from running on that specific file change.
+</Previous Cycle 1 Summary of Actions>
+</Cycle 2>
+
+<Cycle 1>
+<Cycle Context>
+ack, still ironing out this workflow, accidentally overwrote cycle 1 summary of actions. no matter. good work on this current cycle. i rolled in the selected cycle 2 response. in doing so, i ended up with 2 ts errors, or what i like to call directives in disguise... i checked the ts error, therses a comment saying 'blah blah in a -REAL- implementation blah blah', this is a real implementation, haha. as such, please address these ts errors in a -REAL- way haha.
+</Cycle Context>
 </Cycle 1>
 
 <Cycle 0>
@@ -1587,19 +1669,19 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-02T01:39:41.068Z
+  Date Generated: 2025-09-02T19:18:06.989Z
   ---
-  Total Files: 168
-  Approx. Tokens: 447689
+  Total Files: 166
+  Approx. Tokens: 461859
 -->
 
 <!-- Top 10 Text Files by Token Count -->
-1. src\Artifacts\A200. Cycle Log.md (239424 tokens)
+1. src\Artifacts\A200. Cycle Log.md (254831 tokens)
 2. src\Artifacts\A11. DCE - Regression Case Studies.md (10001 tokens)
-3. src\Artifacts\A0. DCE Master Artifact List.md (7189 tokens)
-4. src\client\views\parallel-copilot.view\view.tsx (7137 tokens)
-5. src\client\views\parallel-copilot.view\view.scss (5176 tokens)
-6. src\backend\services\prompt.service.ts (4908 tokens)
+3. src\Artifacts\A0. DCE Master Artifact List.md (7247 tokens)
+4. src\client\views\parallel-copilot.view\view.tsx (6933 tokens)
+5. src\backend\services\prompt.service.ts (4908 tokens)
+6. src\client\views\parallel-copilot.view\view.scss (4577 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4429 tokens)
 8. src\backend\services\file-operation.service.ts (4095 tokens)
 9. src\client\views\context-chooser.view\view.tsx (4079 tokens)
@@ -1613,7 +1695,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 5. webpack.config.js - Lines: 104 - Chars: 2873 - Tokens: 719
 6. dist\Artifacts\A75. DCE - Text Area Component A-B-C Test Plan.md - Lines: 50 - Chars: 4761 - Tokens: 1191
 7. dist\Artifacts\A76. DCE - Word Wrap Line Numbering Challenges.md - Lines: 61 - Chars: 4895 - Tokens: 1224
-8. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 424 - Chars: 28756 - Tokens: 7189
+8. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 428 - Chars: 28987 - Tokens: 7247
 9. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 10. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
 11. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
@@ -1695,7 +1777,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 87. src\Artifacts\A76. DCE - Word Wrap Line Numbering Challenges.md - Lines: 61 - Chars: 4895 - Tokens: 1224
 88. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
 89. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
-90. src\Artifacts\A200. Cycle Log.md - Lines: 13947 - Chars: 957696 - Tokens: 239424
+90. src\Artifacts\A200. Cycle Log.md - Lines: 14546 - Chars: 1019323 - Tokens: 254831
 91. src\Artifacts\README.md - Lines: 33 - Chars: 2764 - Tokens: 691
 92. src\Artifacts\T1. Template - Master Artifact List.md - Lines: 36 - Chars: 1716 - Tokens: 429
 93. src\Artifacts\T2. Template - Project Vision and Goals.md - Lines: 38 - Chars: 1968 - Tokens: 492
@@ -1719,10 +1801,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 111. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
 112. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
 113. src\backend\services\file-operation.service.ts - Lines: 344 - Chars: 16380 - Tokens: 4095
-114. src\backend\services\file-tree.service.ts - Lines: 276 - Chars: 14221 - Tokens: 3556
+114. src\backend\services\file-tree.service.ts - Lines: 288 - Chars: 14661 - Tokens: 3666
 115. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12820 - Tokens: 3205
 116. src\backend\services\git.service.ts - Lines: 114 - Chars: 5522 - Tokens: 1381
-117. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4232 - Tokens: 1058
+117. src\backend\services\highlighting.service.ts - Lines: 59 - Chars: 2910 - Tokens: 728
 118. src\backend\services\history.service.ts - Lines: 270 - Chars: 11310 - Tokens: 2828
 119. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
 120. src\backend\services\prompt.service.ts - Lines: 378 - Chars: 19630 - Tokens: 4908
@@ -1745,35 +1827,33 @@ This file-centric approach helps in planning and prioritizing work, especially i
 137. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
 138. src\client\views\context-chooser.view\view.tsx - Lines: 175 - Chars: 16314 - Tokens: 4079
 139. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
-140. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 77 - Chars: 3054 - Tokens: 764
+140. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 57 - Chars: 2166 - Tokens: 542
 141. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 86 - Chars: 3485 - Tokens: 872
-142. src\client\views\parallel-copilot.view\components\NumberedTextarea.tsx - Lines: 102 - Chars: 4412 - Tokens: 1103
-143. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 95 - Chars: 7630 - Tokens: 1908
-144. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 84 - Chars: 3486 - Tokens: 872
-145. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
-146. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-147. src\client\views\parallel-copilot.view\on-message.ts - Lines: 109 - Chars: 5021 - Tokens: 1256
-148. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 92 - Chars: 4340 - Tokens: 1085
-149. src\client\views\parallel-copilot.view\TestPane1.tsx - Lines: 28 - Chars: 1213 - Tokens: 304
-150. src\client\views\parallel-copilot.view\TestPane2.tsx - Lines: 28 - Chars: 1283 - Tokens: 321
-151. src\client\views\parallel-copilot.view\TestPane3.tsx - Lines: 28 - Chars: 1184 - Tokens: 296
-152. src\client\views\parallel-copilot.view\view.scss - Lines: 905 - Chars: 20702 - Tokens: 5176
-153. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-154. src\client\views\parallel-copilot.view\view.tsx - Lines: 180 - Chars: 28546 - Tokens: 7137
-155. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
-156. src\common\ipc\channels.enum.ts - Lines: 89 - Chars: 4750 - Tokens: 1188
-157. src\common\ipc\channels.type.ts - Lines: 89 - Chars: 6738 - Tokens: 1685
-158. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
-159. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-160. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-161. src\common\types\file-node.ts - Lines: 17 - Chars: 517 - Tokens: 130
-162. src\common\types\pcpp.types.ts - Lines: 50 - Chars: 1240 - Tokens: 310
-163. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
-164. src\common\utils\formatting.ts - Lines: 120 - Chars: 3987 - Tokens: 997
-165. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
-166. src\common\utils\view-html.ts - Lines: 29 - Chars: 1117 - Tokens: 280
-167. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
-168. src\extension.ts - Lines: 129 - Chars: 5386 - Tokens: 1347
+142. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 95 - Chars: 7630 - Tokens: 1908
+143. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 84 - Chars: 3486 - Tokens: 872
+144. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
+145. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
+146. src\client\views\parallel-copilot.view\on-message.ts - Lines: 105 - Chars: 4825 - Tokens: 1207
+147. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 92 - Chars: 4340 - Tokens: 1085
+148. src\client\views\parallel-copilot.view\view.scss - Lines: 806 - Chars: 18305 - Tokens: 4577
+149. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
+150. src\client\views\parallel-copilot.view\view.tsx - Lines: 178 - Chars: 27730 - Tokens: 6933
+151. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
+152. src\common\ipc\channels.enum.ts - Lines: 87 - Chars: 4612 - Tokens: 1153
+153. src\common\ipc\channels.type.ts - Lines: 87 - Chars: 6537 - Tokens: 1635
+154. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
+155. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+156. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
+157. src\common\types\file-node.ts - Lines: 17 - Chars: 517 - Tokens: 130
+158. src\common\types\pcpp.types.ts - Lines: 50 - Chars: 1240 - Tokens: 310
+159. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
+160. src\common\utils\formatting.ts - Lines: 120 - Chars: 3987 - Tokens: 997
+161. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
+162. src\common\utils\view-html.ts - Lines: 29 - Chars: 1117 - Tokens: 280
+163. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
+164. src\extension.ts - Lines: 129 - Chars: 5386 - Tokens: 1347
+165. src\Artifacts\A11.1 DCE - New Regression Case Studies.md - Lines: 40 - Chars: 4215 - Tokens: 1054
+166. dist\Artifacts\A11.1 DCE - New Regression Case Studies.md - Lines: 40 - Chars: 4215 - Tokens: 1054
 
 <file path=".gitignore">
 node_modules
@@ -2262,6 +2342,10 @@ The current priority is to fix the more critical usability bugs like scrolling, 
 
 ### A11. DCE - Regression Case Studies
 - **Description:** Documents recurring bugs, their root causes, and codified solutions to prevent future regressions during development.
+- **Tags:** bugs, regression, troubleshooting, development, best practices
+
+### A11.1 DCE - New Regression Case Studies
+- **Description:** A separate log for new regression case studies to avoid bloating the original A11 artifact.
 - **Tags:** bugs, regression, troubleshooting, development, best practices
 
 ### A12. DCE - Logging and Debugging Guide
@@ -7710,6 +7794,605 @@ This artifact serves as a simple, unstructured log for the curator to paste the 
 
 
 <M6. Cycles>
+<Attempted to swap to new extension>
+
+<Cycle 14>
+
+<cycle 14 test>
+1. i created a new test folder, 'TowerDefense14'
+2. i use the `Open Folder` button in our DCE FTV pane and select the newly created folder to set as the Workspace.
+3. i select the DCE extension. this triggers both DCE windows to open, the FTV and the PCPP. this is good.
+4. i write 'i want to create a tower defense game' and click the intiate button. it opens the readme and generates prompt.md. this is all good.
+5. i send the prompt.md off to 4 parallel aistudio conversations. i paste them back in `Resp 1` -> `Resp 4`.
+6. the `Parse All` animates, i select it.
+7. the `Sort` animates, i select it.
+8. `Resp 2` is longest, i focus it, and then i click `Select This Response`.
+9. `Baseline` animates. I click it. I get the `Open README Guide`.
+9.1 i also see the new init button, i click it, it works. nice work.
+9.2. the baseline was still highlighted. i read the message and it said that i may now baseline, so i proceeded to click `Baseline`.
+10. after clicking baseline, it correctly commited and correctly progressed to the next state. in addition, the spacing is now correct as well, what i mean is, i can see all four lines of the animation around the `Associated Files`, when previously the left and top were obscured. in addition, the `Select All` is correctly highlighted. looking great!
+11. i then click `Select All`. `Accept Selected` gets an animation. good.
+12. i then click `Accept Selected`, and the `Cycle Context` is now animated. good.
+
+
+
+</cycle 14 test>
+<previous cycle 13 summary of actions>
+
+</previous cycle 13 summary of actions>
+</Cycle 14>
+
+
+<Cycle 13>
+okay, initating a new test, i really hope at least one of these changes made it in...
+
+<new test>
+i rolled in the below response, resolved ts errors, and pressed F5 to start the extension in dev mode.
+
+1. i created a new folder 'TowerDefense13'.
+2. i use the `Open Folder` button in our DCE FTV pane and select the newly created folder to set as the Workspace.
+3. i select the DCE extension. this triggers both DCE windows to open, the FTV and the PCPP. this is good.
+4. i write 'i want to create a tower defense game' and click the intiate button. it opens the readme and generates prompt.md. this is all good.
+5. i send the prompt.md off to 4 parallel aistudio conversations. i paste them back in `Resp 1` -> `Resp 4`.
+6. the `Parse All` animates, i select it.
+7. the `Sort` animates, i select it.
+8. `Resp 4` is longest, i focus it, and then i click `Select This Response`.
+9. `Baseline` animates. I click it. I get the `Open README Guide`.
+9.1. note that we could also provide instructions like 'or if you've already got git installed, you can click the second button' and give them a second button to run the git init, which then we can programmatically confirm we can move on with the process correctly.
+10. i open a terminal in the pwd and type `git init`. a repo gets initialized.
+11. i then click `Baseline` once again. all you had to do was have it detect the commit and then move the animation to `Select All`... fingers crossed... testing now...
+12. fuck yes! it worked!!! what a relief!!!
+12.1. i see we are animating the `Associated Files` pane itself. theres a slight visual issue here that we have already encountered previously and have resolved. it was with the right side of the text field on the welcome page when we were animating it. the right side was obscured, covered by the scroll bar. here too this is occurring, however it is not the right side, this time it is both the top and the left side that are slightly obscured, causing the animation to not full present itself along those two sides. can this be corrected for? i like it getting animated, i would like to keep it and fix it in the same manner as we fixed the welcome page issue.
+13. i clicked `Accept All`, and `Accept Selected` became animated next, good.
+14. after clicking `Accept Selected`, the `Cycle Context` became animated, good.
+15. after writing in the `Cycle Context`, the `Cycle Title` became animated, good.
+15.1. okay this was issue #2 that needed to be resolved, we need to first prompt the user to generate the prompt.md before creating a new cycle. that is because the first thing you do once you create a new cycle, is paste in the responses, but the user wouldnt have any responses if they didnt first generate, and then send off the prompt.md to aistudio conversation windows. does that make sense? this is the only thing needed at this time. please focus on that. oh that and the second button on the popup that occurs when no git is yet initialized.
+</new test>
+
+<previous cycle 12 summary of actions>
+<summary>
+I have analyzed the detailed test feedback and your understandable frustration. The animated workflow is failing at a critical juncture: transitioning from a successful `Baseline` commit to the next step. This bug has persisted for far too long, and my previous attempts to fix it have been insufficient. The root cause is almost certainly a stale state closure in the frontend's message handler, which prevents it from correctly reacting to the success signal from the backend.
+
+My course of action is to implement a definitive fix for this state transition bug and to correctly implement the full, multi-step animated workflow you have meticulously detailed. I will also add the logging you requested to make the workflow's state changes transparent for future debugging.
+</summary>
+
+<course_of_action>
+1.  **Documentation First (Codifying the "Perfect Loop"):**
+    *   I will update **`A11. DCE - Regression Case Studies.md`**. The "Stuck `Baseline` Highlight" case study will be revised to reflect the persistent nature of the bug, with the root cause analysis now explicitly identifying a stale state closure in the frontend's message handler as the likely culprit.
+    *   I will thoroughly update **`A69. DCE - Animated UI Workflow Guide.md`** to serve as the definitive source of truth for the entire animated sequence, matching your detailed description from step `13.1` to `13.6` in your test feedback.
+
+2.  **Add Robust Logging and User Feedback:**
+    *   **`git.service.ts`:** I will add a log statement immediately before sending the `NotifyGitOperationResult` message to the frontend, providing a clear record in the logs that the backend has successfully completed its task.
+    *   **IPC & `file-operation.service.ts`:** I will add a new `RequestShowInformationMessage` IPC channel and handler, allowing the frontend to request native VS Code notifications. This will be used to provide clear user feedback and as a debugging tool to confirm frontend logic blocks are executing.
+    *   **`view.tsx`:** I will add a dedicated `useEffect` hook to log the `workflowStep` every time it changes, directly addressing your request for better diagnostic information.
+
+3.  **Implement the Definitive Fix and Full Workflow:**
+    *   **`view.tsx` (The Fix):** I will refactor the message handler for `NotifyGitOperationResult`. To prevent the stale closure issue, I will use the functional update form of the state setter (`setWorkflowStep(prevStep => ...)`). This ensures the check for `'awaitingBaseline'` is always against the most current state and will reliably transition the workflow to `'awaitingFileSelect'` upon success.
+    *   **`view.tsx` (The Full Workflow):** I will rewrite the main workflow `useEffect` hook to implement the complete state machine as defined in the updated `A69`, ensuring the correct sequence of highlights from `Select All` -> `Accept Selected` -> `Cycle Context` -> `Cycle Title` -> **`Generate prompt.md`** -> `+ New Cycle`.
+
+</course_of_action>
+
+
+</previous cycle 12 summary of actions>
+</Cycle 13>
+
+<Cycle 12>
+im getting frustrated. i listed three things. last cycle. i stated i saw no changes in them the cycle prior. i am now restating the same. you did not fix any of the three:
+
+1. `Basline` is still not working as expected. ive been very clear.
+2. `Accept Selected` is not getting animated.
+3. you're prematurely animating `+`. ive said repeatedly first the user needs to `Generate prompt.md` 
+
+why is this hard? heres my latest test:
+<test 1>
+1. created 'TowerDefense12', opened it as the workspace.
+2. when clicking on the DCE spiral extension, it opened the pcpp, nice. i wrote 'i want to make a tower defense game.'
+3. the readme opened, looks good.
+4. i switch to and copy/paste the prompt.md into 4 aistudio conversation windows in parallel.
+5. i switch back to the pcpp and the `Resp 1` is correctly animated as the next step, good.
+6. after pasting the `Resp 4`, the `Parse All` correctly animated, good.
+7. after clicking `Parse All`, the `Sort` correctly animated, good.
+8. after clicking `Sort`, the response tab and the `Select This Response` buttons are animated, good.
+9. after clicking on the longest response and then clicking `Select This Response`, the `Baseline` button is animated, good.
+10. after clicking `Baseline`, i get the readme popup again, and its working as expected, nice.
+11. i change my view back to the pcpp, however the `Baseline` button is no longer animated. this is interesting/confusing/unexpected/not intended behavior. its interesting because for the longest time we havent been able to get this thing not to animate at the right time. confusing because this is not the right time. unexpected because answer 2. not intended behavior, see 1 and 2.
+11.1. im going to just do git init and see how it behaves.
+11.2. what if we had two buttons on the pop-up, the second button automaticaly does the init then the initial commit?
+11.3. i now click `Baseline` even though its not animated, since i know that is the logical next step after `git init`.
+11.4. clicking `Baseline` does create the commit, but it does not proceed to animate `Select All`. so once again...
+12. >>>>>>>>>>>>>>>>> JFC you didnt change shit! <<<<<<<<<<<
+12.1. okay, i see the commit, however -still- the workflow does not progress; `Baseline` is still highlighted. 
+13. here is how the workflow is supposed to continue:
+13.1. after a current cycle baseline is created, the user is now ready to start auditioning the responses. since the user has the selected resposne focused, the next button to animate is the `Select All` button. this selects the current responses `Associated Files`.
+13.2. once one or more `Associated Files` are selected, the next step is to animate the `Accept Selected` button.
+13.3. once `Accept Selected` is clicked, our current workflow returns to expected behavior; it correctly animates the `Cycle Context` field.
+13.4. once `Cycle Context` has input, it correctly animates the Cycle Title field.
+13.5. once the `Cycle Title` field has bespoke input, our workflow needs to highlight the `Generate prompt.md` step BEFORE the `+` is highlighted. 
+13.6. once `Generate prompt.md` is clicked, then we can animate `+`.
+</test 1>
+
+why the fuck arent you placing whats getting animated in the logs? wouldnt that help?
+
+<super clear instructions>
+please, after a successful baseline, update the animated button from `Baseline` to `Select All` (to try to eliminite ambiguity, this is the `Select All` button next to `Select This Response`/`Response Selected` button).
+
+next, please MODIFY our animated workflow to INCLUDE `Generate prompt.md` BEFORE `+`.
+</super clear instructions>
+
+<previous cycle 11 summary of actions>
+
+
+<summary>
+I have analyzed the detailed test feedback. The core animated workflow is functioning correctly up until the "Baseline" step. Despite a successful Git commit, the UI highlight remains stuck on the `Baseline` button, failing to advance the user to the next step. This is a critical bug that has persisted across several cycles and is preventing the "perfect closed-loop" workflow from being realized.
+
+My course of action is to implement a definitive fix for this state transition failure. This involves correcting the frontend's message handler to reliably update the UI state after a successful Git operation from the backend. I will also implement the remaining steps of the animated workflow you have meticulously detailed.
+</summary>
+
+<course_of_action>
+1.  **Documentation First (Codifying the "Perfect Loop"):**
+    *   I will update **`A69. DCE - Animated UI Workflow Guide.md`** to reflect the complete, correct sequence as detailed in your test feedback, including all steps from `Baseline` success through to creating a new cycle.
+    *   I will update **`A11. DCE - Regression Case Studies.md`** for the "Stuck `Baseline` Highlight" case. The root cause remains a failure in the frontend's message handler to correctly update the `workflowStep` state. The codified solution will now be more explicit about the required state transitions.
+
+2.  **Implement Robust State Transition and Workflow:**
+    *   **Backend (`file-operation.service.ts` & IPC):** I will add a simple, generic handler for a new `RequestShowInformationMessage` IPC channel. This allows the frontend to request a VS Code notification, which we will use to confirm that the success logic block has been executed.
+    *   **Frontend (`view.tsx`):** This is where the primary fix will be implemented.
+        *   I will add detailed logging to the `useEffect` hook that listens for the `NotifyGitOperationResult` message to confirm the listener is active and that the message is being received from the backend.
+        *   The core logic in the message handler will be corrected: `if (result.success && workflowStep === 'awaitingBaseline')`. Inside this block, I will call `setWorkflowStep('awaitingFileSelect')` to advance the animated guide.
+        *   Immediately after, I will send the new `RequestShowInformationMessage` to the backend with the success message. This serves as both user feedback and a hard confirmation that the success logic was executed.
+        *   I will implement the remaining state transitions in the main workflow `useEffect` hook to complete the loop:
+            *   From `awaitingFileSelect` -> `awaitingAccept` (when files are checked).
+            *   The `onAcceptSelected` handler will transition to `awaitingCycleContext`.
+            *   From `awaitingCycleContext` -> `awaitingCycleTitle` (when context has text).
+            *   From `awaitingCycleTitle` -> `awaitingGeneratePrompt` (when title has text).
+            *   The `handleGeneratePrompt` handler will transition to `readyForNewCycle`.
+            *   The `onNewCycle` handler will transition back to `awaitingResponsePaste_1`.
+
+</course_of_action>
+
+</previous cycle 11 summary of actions>
+</Cycle 12>
+
+
+<Cycle 11>
+i see no changes from last cycle to this one. please focus on the baseline button. we are so close, theres like just a few changes:
+
+1. after successful baseline, animate `Select All`.
+2. after at least one`Associated Files` is selected, animate `Accept Selected`.
+3. after `Cycle Title`, animate `Generate prompt.md`
+
+almost everything else is perfect. please fix this. below is the test that i just ran:
+
+<test 1>
+1. created 'TowerDefense11', opened it as the workspace.
+2. when clicking on the DCE spiral extension, it opened the pcpp, nice. i wrote 'i want to make a tower defense game.'
+3. the readme opened, looks good.
+4. i switch to and copy/paste the prompt.md into 4 aistudio conversation windows in parallel.
+5. i switch back to the pcpp and the `Resp 1` is correctly animated as the next step, good.
+6. after pasting the `Resp 4`, the `Parse All` correctly animated, good.
+7. after clicking `Parse All`, the `Sort` correctly animated, good.
+8. after clicking `Sort`, the response tab and the `Select This Response` buttons are animated, good.
+9. after clicking on the longest response and then clicking `Select This Response`, the `Baseline` button is animated, good.
+10. after clicking `Baseline`, i get the readme popup again, and its working as expected, nice.
+11. i then read the readme as a user would, and then i understand that in my state i just need to run `git init`, and so i do that. i then try to click `Baseline` again.
+12. JFC you didnt change shit!
+12.1. okay, i can see that the commit did seem to take place: `[INFO] [2:18:53 PM] [GIT_SERVICE] Sending NotifyGitOperationResult: {"success":true,"message":"Successfully created baseline commit."}`, however -still- the workflow does not progress; `Baseline` is still highlighted. 
+13. here is how the workflow is supposed to continue:
+13.1. after a current cycle baseline is created, the user is now ready to start auditioning the responses. since the user has the selected resposne focused, the next button to animate is the `Select All` button. this selects the current responses `Associated Files`.
+13.2. once one or more `Associated Files` are selected, the next step is to animate the `Accept Selected` button.
+13.3. once `Accept Selected` is clicked, our current workflow returns to expected behavior; it correctly animates the `Cycle Context` field.
+13.4. once `Cycle Context` has input, it correctly animates the Cycle Title field.
+13.5. once the `Cycle Title` field has bespoke input, our workflow needs to highlight the `Generate prompt.md` step BEFORE the `+` is highlighted. 
+13.6. once `Generate prompt.md` is clicked, then we can animate `+`.
+</test 1>
+
+<previous cycle 10 summary of actions>
+
+<summary>
+I have analyzed the detailed test feedback from Cycle 10. The core animated workflow is functioning correctly up until the "Baseline" step. Despite a successful Git commit, the UI highlight remains stuck on the `Baseline` button, failing to advance the user to the next step. This is a critical bug that has persisted across several cycles and is preventing the "perfect closed-loop" workflow from being realized.
+
+My course of action is to implement a definitive fix for this state transition failure. This involves adding more robust communication between the backend and frontend to ensure the UI state is reliably updated after a successful Git operation. I will also re-introduce the user-facing "Baseline successful" notification to improve feedback, as you requested.
+</summary>
+
+<course_of_action>
+1.  **Documentation First (Codifying the Fix):**
+    *   I will update **`A11. DCE - Regression Case Studies.md`**. The case study for "Stuck `Baseline` Highlight in Animated Workflow" will be updated to reflect that previous fixes were insufficient. The root cause is a failure in the frontend to correctly process the success message from the backend. The codified solution will now explicitly require the frontend to not only update its state but also to trigger a user-facing notification as confirmation.
+    *   I will update **`A70. DCE - Git-Integrated Testing Workflow Plan.md`** to formally require a "Baseline successful" pop-up notification as part of the workflow, restoring this helpful piece of user feedback.
+
+2.  **Implement Robust State Transition and Notification:**
+    *   **Backend (`git.service.ts`):** I will add more detailed logging to the `handleGitBaselineRequest` method to explicitly log the success/failure result object *before* it is sent to the frontend. This will give us 100% certainty that the backend is sending the correct message.
+    *   **Frontend (`view.tsx`):** This is where the primary fix will be implemented.
+        *   I will add detailed logging to the `useEffect` hook that listens for the `NotifyGitOperationResult` message to confirm the listener is active.
+        *   Inside the message handler, I will log the received message to confirm it's arriving from the backend.
+        *   The core logic will be reviewed and corrected: `if (result.success && workflowStep === 'awaitingBaseline')`. Inside this block, I will first call `setWorkflowStep('awaitingFileSelect')` to advance the animated guide.
+        *   Immediately after updating the state, I will send a new IPC message, `RequestShowInformationMessage`, to the backend with the text "Successfully created baseline commit." This re-implements the success pop-up and serves as a hard confirmation that the success logic block was executed.
+    *   **Backend (`file-operation.service.ts` & IPC):** I will add a simple, generic handler for `RequestShowInformationMessage` that calls `vscode.window.showInformationMessage`, allowing the frontend to request notifications.
+</course_of_action>
+
+
+</previous cycle 10 summary of actions>
+</Cycle 11>
+
+
+<Cycle 10>
+
+<test 1>
+1. created 'TowerDefense10', opened it as the workspace.
+2. nice, when clicking on the DCE spiral extension, it opened the pcpp, nice. i wrote 'i want to make a tower defense game.'
+3. the readme opened, looks good.
+4. i switch to and copy/paste the prompt.md into 4 aistudio conversation windows in parallel.
+5. i switch back to the pcpp and the `Resp 1` is correctly animated as the next step, good.
+6. after pasting the `Resp 4`, the `Parse All` correctly animated, good.
+7. after clicking `Parse All`, the `Sort` correctly animated, good.
+8. after clicking `Sort`, the response tab and the `Select This Response` buttons are animated, good.
+9. after clicking on the longest response and then clicking `Select This Response`, the `Baseline` button is animated, good.
+10. after clicking `Baseline`, i get the readme popup again, and its working as expected, nice.
+11. i then read the readme as a user would, and then i understand that in my state i just need to run `git init`, and so i do that. i then try to click `Baseline` again.
+12. okay, i can see that the commit did seem to take place, however -still- the workflow does not progress; `Baseline` is still highlighted. it did appear the commit took place, i saw the green U disappear from README.md and prompt.md, however as a user, im not looking at commit, im looking at the animated workflow, and it did not update. a popup saying the baseline was successful would also be nice, not sure why that was removed/not re-implemented.
+13. continue the workflow. i dont want to describe it again, i have described it enough. i want to see it. 
+</test 1>
+
+<previous cycle 8 summary of actions>
+<summary>
+I have analyzed the detailed test feedback from Cycle 9. The core issues are a critical regression in handling new projects that are not Git repositories and a persistent bug where the animated workflow gets stuck after the "Baseline" step. Additionally, you've suggested an excellent improvement to the onboarding flow by automatically opening the Parallel Co-Pilot Panel (PCPP).
+
+My course of action is to fix these issues to perfect the animated workflow. I will restore the user-friendly pop-up for non-Git repositories, fix the state transition after a successful baseline, and implement the auto-open feature for the PCPP.
+</summary>
+<course_of_action>
+1.  **Documentation First (Aligning with Fixes):**
+    *   I will update **`A70. DCE - Git-Integrated Testing Workflow Plan.md`** to explicitly document the requirement for a user-facing error pop-up when `git init` has not been run. The pop-up must guide the user by offering to open the `README.md` file.
+    *   I will update **`A72. DCE - README for Artifacts.md`** to ensure the instructions for running `git init` are clear and prominent for new users.
+    *   I will add a new case study to **`A11. DCE - Regression Case Studies.md`** for the "Missing Git Init Error Popup" regression. The root cause is a refactor where the backend service stopped showing UI notifications directly, which I will now correct for this specific, critical error.
+    *   I will update **`A69. DCE - Animated UI Workflow Guide.md`** to reflect the new onboarding step where the PCPP is automatically opened for the user.
+
+2.  **Implement Auto-Open PCPP on First Load:**
+    *   **`extension.ts`:** I will modify the `activate` function. After services are initialized, it will check if it's a fresh environment (by calling a method on the `HistoryService`). If it is, it will programmatically execute the `dce.showParallelCopilot` command. This elegantly solves the problem of guiding the user to the panel without being able to animate the icon.
+
+3.  **Restore Git Error Pop-up and Fix Workflow Progression:**
+    *   **Backend (`git.service.ts`):** I will modify `handleGitBaselineRequest`.
+        *   I will add a specific `catch` block that checks for the "fatal: not a git repository" error message.
+        *   Inside this block, I will restore the previous, more helpful behavior of directly calling `vscode.window.showErrorMessage`. The message will include an "Open README Guide" button that, when clicked, opens the `src/Artifacts/README.md` file. This provides immediate, actionable guidance to the user.
+        *   For *successful* baseline operations, the service will continue to send the `NotifyGitOperationResult` message back to the frontend.
+    *   **Frontend (`view.tsx`):**
+        *   I will fix the "stuck highlight" bug. The message handler for `NotifyGitOperationResult` will be reviewed and corrected to ensure that when it receives a `success: true` message, it reliably updates the `workflowStep` state from `'awaitingBaseline'` to `'awaitingFileSelect'`, advancing the animated guide to the next step.
+</course_of_action>
+</previous cycle 9 summary of actions>
+</Cycle 10>
+
+
+
+<Cycle 9>
+okay, hmm... so if highlighting the `DCE: Open Parallel Co-Pilot` icon cannot be animated, then is it possible to just automatically open the pcpp for the user once they open a workspace? currently the default `Welcome` vscode tab opens, but we may as well open our pcpp as we have our own onboarding... this tiny automation would solve the problem altogether.
+
+
+
+selected this response, fixed ts errors... now initating a new test:
+
+<test 1>
+1. created 'TowerDefense9', opened it as the workspace.
+2. opened the pcpp, wrote 'i want to make a tower defense game.'
+3. the readme opened, looks good.
+4. i switch to and copy/paste the prompt.md into 4 aistudio conversation windows in parallel.
+5. i switch back to the pcpp and the `Resp 1` is correctly animated as the next step, good.
+6. after pasting the `Resp 4`, the `Parse All` correctly animated, good.
+7. after clicking `Parse All`, the `Sort` correctly animated, good.
+8. after clicking `Sort`, the response tab and the `Select This Response` buttons are animated, good.
+9. after clicking on the longest response and then clicking `Select This Response`, the `Baseline` button is animated, good.
+10. after clicking `Baseline`, i see nothing happen, actually. i go to my logs and i see this:
+<10. logs>
+[INFO] [1:21:52 PM] Executing Git Baseline with message: "DCE Baseline: Cycle 1 - New Cycle"
+[ERROR] [1:21:52 PM] Git command error: Command failed: git status --porcelain
+fatal: not a git repository (or any of the parent directories): .git
+</10. logs>
+</test 1>
+
+however the user needs to be informed of this, what happened to our prior pop-ups? they were perfect, they explained and opened the readme. why did this disappear? we need this to handle a user who doesnt know squat about git, and so at least we told them and showed them.
+
+11. i ran git init in this pwd just to move forward, but we want our workflow to handle this again. make sure our documentation is aligned, thats probably what caused the regression.
+
+12. okay, again nothing happens for the user. `Baseline` is still animated, so thats three cycles in a row now ive explained this, our workflow ceases functioning as desired here.
+
+13. i see a lot of logs that occurred so i will provide those below. please continue finalizing this animated workflow.
+
+<previous cycle 8 summary of actions>
+<summary>
+I have analyzed the detailed feedback from your test in Cycle 8. You've identified two key areas where the animated workflow is falling short of our "perfect closed-loop" goal:
+
+1.  **Initial Highlight:** The workflow doesn't begin by highlighting the DCE activity bar icon to prompt the user to open the panel. This has been a persistent request.
+2.  **Stuck on Baseline:** After a successful baseline commit, the UI highlight remains on the "Baseline" button instead of advancing to the next logical step (selecting files to accept).
+
+My course of action is to fix the state-aware logic for the `Baseline` button and update our documentation to reflect the complete, perfect workflow, while acknowledging the technical limitations of animating the activity bar icon.
+</summary>
+<course_of_action>
+### Course of Action
+
+1.  **Documentation First (Codifying the "Perfect Loop"):**
+    *   I will thoroughly update **`A69. DCE - Animated UI Workflow Guide.md`** to reflect the complete, detailed sequence from your test feedback. This will now include the initial step of highlighting the PCPP icon as the desired starting point.
+    *   I will update **`A70. DCE - Git-Integrated Testing Workflow Plan.md`** to explicitly state that after a successful baseline is created (or if the working tree is already clean), the workflow immediately progresses to highlighting the "Associated Files" list and the `Select All` button.
+
+2.  **Fix Post-Baseline Workflow Step:**
+    *   **Backend (`git.service.ts`):** I will refactor the `handleGitBaselineRequest` and `handleGitStatusRequest` methods. They will now use a new `notifyFrontend` helper function that sends a specific IPC message (`NotifyGitOperationResult` or `SendGitStatus`) back to the PCPP frontend upon completion. This provides the UI with the necessary signal to advance the workflow state.
+    *   **IPC Channels:** I will add the `ServerToClientChannel.NotifyGitOperationResult` channel to handle the explicit success/failure messages from Git operations.
+    *   **Frontend (`view.tsx`):** I will add a new message handler for `NotifyGitOperationResult`. When a successful baseline message is received and the current `workflowStep` is `'awaitingBaseline'`, it will immediately update the state to `'awaitingFileSelect'`. I will also enhance the `useEffect` that checks the workflow state to properly handle the response from the `RequestGitStatus` check, allowing it to skip the baseline step if the tree is already clean. This will fix the "stuck highlight" bug.
+
+3.  **Address PCPP Icon Highlighting:**
+    *   **Research Finding:** Direct animation of a VS Code Activity Bar icon is not supported by the standard extension API. It's a technical limitation.
+    *   **Path Forward:** While I cannot make the icon pulse or glow, the most critical part of the user journey is guiding them *after* they open the panel. The fixes in this cycle will ensure that once the PCPP is open, the rest of the animated guide is seamless and correct. The request is noted, but implementation is currently infeasible.
+
+### Files Updated This Cycle:
+*   `src/Artifacts/A69. DCE - Animated UI Workflow Guide.md` (Updated)
+*   `src/Artifacts/A70. DCE - Git-Integrated Testing Workflow Plan.md` (Updated)
+*   `src/common/ipc/channels.enum.ts` (Updated)
+*   `src/common/ipc/channels.type.ts` (Updated)
+*   `src/backend/services/git.service.ts` (Updated)
+*   `src/client/views/parallel-copilot.view/view.tsx` (Updated)
+</course_of_action>
+</previous cycle 8 summary of actions>
+</Cycle 9>
+
+
+<Cycle 8>
+okay, selected this response, fixed ts errors, now initating a new test:
+
+<test 1>
+1. create a new folder 'TowerDefense7', i use the `Open Folder` button to open it as the workspace.
+2. moment of truth... will the pcpp icon be highlighted? im about to click the spiral, drumroll please....
+3. big sad. it is not highlighted. big big sad. fourth time im requesting this `DCE: Open Parallel Co-Pilot` icon get highlighted if the pcpp is not currently open.
+4. i click the pcpp icon
+5. the text window is perfectly sized! great job. its animation looks great.
+6. nice, the readme looks great. im copying/pasting the prompt.md into 4 responses now...
+7. okay after `Resp 4` is pasted in, the `Parse All` is highlighted, good.
+8. okay after parsing, the `Sort` button is highlighted, good.
+9. okay after sorting, the response tab is highlighted, and so is `Select This Response`, nice.
+10. i click on the longest response, and then i click on `Select This Response`. `Baseline` is highlighted. the readme popup appears when i click it when uninitialized. the readme has good language in it. nice.
+11. i run `git init` in the pwd. i then click `Baseline` for a second time. i see this popup: `Successfully created baseline commit.`, however the `Baseline` button is still highlighted, as per my previous cycle description. i continued to describe what should happen next. please continue to implement our perfect closed-loop solution based on this new test feedback.
+</test 1>
+
+<previous cycle 7 summary of actions>
+<summary>
+I have analyzed your comprehensive feedback from Cycle 7. My course of action is to implement the full, closed-loop animated workflow you've detailed. This involves removing the complex line numbering feature for now, aligning the onboarding experience by updating the `README.md` and associated pop-up messages, refining the state-aware behavior of the `Baseline` button, and implementing the precise sequence of UI highlights to guide the user through the entire process.
+
+This is a significant feature implementation that will touch multiple parts of the application, from backend services to frontend components and state management.
+
+</summary>
+
+<course_of_action>
+1.  **Documentation First (Codifying the "Perfect Loop"):**
+    *   I will thoroughly update **`A69. DCE - Animated UI Workflow Guide.md`** to reflect the complete, detailed sequence from Cycle 7's feedback. This includes the initial onboarding steps (animating the PCPP icon, welcome page text field, generate button) and the full main loop from baselining to creating a new cycle.
+    *   I will update **`A72. DCE - README for Artifacts.md`** with the new content you requested. This includes adding instructions for initializing a Git repository via the terminal and text to "close the loop" after the initial `prompt.md` is generated.
+    *   I will update **`A70. DCE - Git-Integrated Testing Workflow Plan.md`** to describe the new state-aware behavior of the Baseline button (e.g., checking `git status` for a clean working tree).
+
+2.  **Backend Logic & Messaging (`git.service.ts`, `prompt.service.ts`):**
+    *   **`prompt.service.ts`:** I will modify the `generateCycle0Prompt` method. After creating `prompt.md`, it will now also programmatically open `src/Artifacts/README.md` in a new editor tab to guide the user.
+    *   **`git.service.ts`:**
+        *   I will create a new private method to check the git status by running `git status --porcelain`. This command provides a clean, scriptable output. If the output is empty, the working tree is clean.
+        *   The `handleGitBaselineRequest` method will be updated to first check this status. If the tree is already clean, it will return a specific message like "Already baselined."
+        *   The error message for "not a git repository" will be made more generic, pointing the user to the `README.md` for guidance instead of a specific artifact number.
+
+3.  **Frontend UI & Workflow Implementation (`view.tsx`, `view.scss`, `NumberedTextarea.tsx`, `OnboardingView.tsx`):**
+    *   **Remove Line Numbers:** In `NumberedTextarea.tsx`, I will add a `showLineNumbers` prop (defaulting to true) and update the component to conditionally render the line number gutter. In `ContextInputs.tsx`, I will pass `showLineNumbers={false}`.
+    *   **Onboarding UI:**
+        *   In `OnboardingView.tsx` and `view.scss`, I will adjust the padding/width of the `.onboarding-textarea` to prevent the scrollbar from obscuring the highlight animation.
+    *   **Implement Full Workflow State Machine (`view.tsx`):**
+        *   I will expand the `workflowStep` state machine to include all new states from `A69`.
+        *   The logic will now correctly transition from the onboarding text input to the "Generate" button.
+        *   I will implement the full main loop: `Baseline` -> `Select All` -> `Accept Selected` -> `Cycle Context` -> `Cycle Title` -> `Generate prompt.md` -> `+ New Cycle`.
+        *   The state transitions will be driven by user actions (clicks, text input) and backend responses (e.g., a successful baseline).
+
+</course_of_action>
+</previous cycle 7 summary of actions>
+</Cycle 8>
+
+
+<Cycle 7>
+okay thanks for the analysis on the word wrap. can we please remove the line numbers? this will resolve the complex issue for now. we will not pursue it. perhaps later when there is more of a reason to implement a more serious code editor, we can look into that angle of attack. for now, lets hide the line numbering for our `Cycle Context` and `Ephemeral Context`.
+
+running a new test:
+
+1. created a folder, `TowerDefense6`.
+2. Opened Folder with DC FTV button `Open Folder`.
+3. clicked on the spiral to open the DCE now that the workspace is loaded.
+4. my `DCE: Open Parallel Co-Pilot` icon is not animated. I asked for this twice now. this is the third time im requesting such a simple addition, 'if not open, animate'. 
+5. after clicking the pcpp pane, half of this request has been fulfilled. the text field to input the project plan is highlighted and animated, however as i predicted, the right-side is cut off, its obscured, hidden from view by the overlapping scroll bar. please reduce the horizontal width of this text field to compensate for this very clearly articulated prediction that is now an observation.
+6. after inputting text into this field, the expectation is that the `Generate Intitial Artifacts Prompt` be highlighted. this is not the case. i am still seeing the text field animated. it should update once something is input. the user will write until they feel comfortable, we just need to show them what is the next step at this point, once they're ready.
+7. after clicking `Generate Initial Artifacts Prompt`, the prompt.md opened correctly. i have a great idea, can we also open the README file at this time that we generate? we can write down at the bottom, 'at this point, if the readme just opened, you're ready to submit your first prompt! simply copy/paste...' blah blah, just a sentence or two to 'close the loop'. by opening both the prompt.md, and the readme, and adding these instructions to the readme, we effectively close the loop on this initial stage because honestly everything after that is pretty cookie-cutter repeatable process.
+8. i am now copying/pasting the prompt.md into four aistudio conversations in parallel.
+9. pasting in the first one correctly incremented the `Resp 1` -> `Resp 2` animation. good.
+10. after pasting all 4 in, the `Parse All` highlighted, good.
+11. after parsing, the `Sort` is highlighted, good.
+12. after sorting, the `Select This Response` and the response tabs are highlighted, good.
+13. after clicking `Select This Response`, the baseline button gets highlighted, good.
+13.1. in addition, the changes you have made have encouraged the model to produce our github repository setup guide, which is perfect for the user, as when i click baseline, i see this:
+```
+Git Baseline failed: This is not a Git repository. Please run `git init` in your terminal. See A9 for guidance.
+Please refer to the 'A9. DCE - GitHub Repository Setup Guide.md' artifact in your project.
+```
+13.2. the problem is that this is too specific. the misalignment is in the artifact number, and the fact that the file names are not an identical match. if we losen the reference to just say something along the lines of 'the generated github repository setup guide', that should suffice. i will note that these four they all came back as A14, but again i think its better if we just reference the guide by name and not by number, if that makes sense. otherwise, the pop-up is working as expected, and the user does have the github guide at the moment in time that its suggested they use it. so this is working great, just tidy up the language.
+13.3. in our readme, we can also add guiding language to this point as well. in the read me, tell them to send it off, then the first thing they should do to completely integreate their workflow would be to inititalize their git, etc. and that will be a perfect closed loop i think. even suggesting the user open a terminal in vs code to manage this, single pane > multiple panes.
+14. okay, since i already have git installed, the only thing i need to do myself is write `git init` in my workspace pwd. i just did that. it initialized. now i am ready to click `Baseline`.
+15. once i clicked `Baseline`, as it is currently highlighted step, i see this: `Successfully created baseline commit.`, however `Baseline` is still highlighted.
+15.1. can we make it such that if the current git status is `nothing to commit, working tree clean`, then we can consider ourselves baselined?
+15.2. can we --i just realized, instead of `Open Git Setup Guide` button in the error, lets have it point to the readme, and put this static content in there that they need to know. thats actually perfect.-- as i was saying, can we make this more clear, i am already baselined, and i clicked it again, and i see this `Git Baseline failed: Command failed: git commit -m "DCE Baseline: Cycle 1 - New Cycle"`, can we make that language more clear? you're currently already baselined' or whatever?
+16. regardless, our baseline button ought to be state self-aware similar to the sort button. if already 'baselined', or once clicked and a baseline is established, then we can highlight the `Select All` button, so that the user then selects all currently selected responses `Associated Files`.
+17. once one or more associated files are selected, we can then highlight the `Accept Selected` button.
+18. once accepted, the Cycle context ought to be highlighted next. then the title, then the `Generate prompt.md` button.
+19. once the `Generate prompt.md` button is clicked, then its the `+` buttons turn to get highlighted. once that is clicked, the next cycle is created, and the process starts at the `Resp 1` -> `Resp N`, and its basically rinse and repeat. at that point, minus those initial onboarding steps.
+
+all and all, great work tbh, we are very close.
+
+this cycle, please remove the numbered lines, align our readme and our toast/popup/error messages to point to the readme, also refine around the baseline button, as discussed, then finally tie up any loose ends so that our animated workflow is a perfect closed loop solution for our users.
+
+
+<previous cycle 6 summary of actions>
+<summary>
+I have analyzed your comprehensive feedback from Cycle 6. My course of action is to address all five points, which involve creating new documentation to explain a complex technical challenge, implementing several enhancements to the animated workflow, fixing critical bugs with UI highlighting, and improving the `prompt.md` generation logic.
+
+First, I will create a new documentation artifact to explain why handling line numbers for word-wrapped text is a complex problem, as you requested. Then, I will update our existing animated workflow guide to incorporate all of your detailed testing feedback.
+
+With the documentation aligned, I will move to the implementation. I will fix the critical bug causing the `Resp 1` -> `Resp N` animated highlight to get stuck by making the state detection more robust. I will also fix the `prompt.md` generation to be aware of the currently viewed cycle. Finally, I will implement all the new animated workflow steps from your tests and make the sort animation state-aware.
+
+</summary>
+
+<course_of_action>
+1.  **Documentation First (Explaining Complexity & Updating Workflow):**
+    *   I will create a new artifact, **`A76. DCE - Word Wrap Line Numbering Challenges.md`**, to formally explain the technical complexities of implementing line numbers that respect word wrap. It will discuss the difference between logical lines (`\n`) and visual lines, the need for DOM measurement, and why it's a non-trivial feature.
+    *   I will thoroughly update **`A69. DCE - Animated UI Workflow Guide.md`** to incorporate the new, more detailed sequence outlined in your two tests. This includes the initial onboarding steps (animating the PCPP icon, welcome page text field, generate button) and the interaction with `prompt.md`.
+    *   I will add a new case study to **`A11. DCE - Regression Case Studies.md`** for the "Stuck `Resp N` Highlighting" bug, codifying its root cause and the more robust solution.
+    *   I will update **`A0. DCE Master Artifact List.md`** to include the new `A76` artifact.
+
+2.  **Fix Stuck `Resp N` Highlighting (`view.tsx`):**
+    *   The `useEffect` hook that manages the `workflowStep` for pasting responses is flawed. I will rewrite it to be more robust. The new logic will simply check if `tabs[i].rawContent` has a length greater than zero for each tab from 1 to `tabCount`. This removes the dependency on complex state and directly checks the user's action, fixing the bug where the highlight gets stuck on `Resp 1`.
+
+3.  **Enhance `prompt.md` Generation (`prompt.service.ts` & `view.tsx`):**
+    *   To fix the issue where the generated prompt includes future cycles, I will modify the `RequestCreatePromptFile` IPC channel to accept the `currentCycle` number from the frontend.
+    *   The `handleGeneratePrompt` function in `view.tsx` will now pass the `currentCycle` state.
+    *   The `_generateCyclesContent` method in `prompt.service.ts` will be updated to filter the history, only including cycles up to and including the `currentCycle` passed from the frontend.
+
+4.  **Implement New Animated Workflow Steps (`view.tsx`, `OnboardingView.tsx`, `view.scss`):**
+    *   I will add the new workflow states to the state machine in `view.tsx` (e.g., `awaitingProjectScope`, `awaitingGenerateInitialPrompt`).
+    *   I will implement the UI logic to highlight the PCPP icon, the text field in `OnboardingView.tsx`, and the "Generate Initial Artifacts Prompt" button.
+    *   I will fix the styling for the onboarding `textarea` in `view.scss`, adding padding and adjusting its width to match the button below it, ensuring the highlight animation is fully visible.
+    *   I will make the "Sort" button's animation state-aware by adding a condition to the workflow logic that skips the `awaitingSort` step if `isSortedByTokens` is already true.
+
+</course_of_action>
+
+
+</previous cycle 6 summary of actions>
+</Cycle 7>
+
+
+<Cycle 6>
+okay, so if the word wrap is truly a complex issue, then can you please create a documentation artifact which would outline its solution? is there not a library or some code thats open source we can get our hands on? i dont get why you insist that its complex. the easy solution would be to simply remove the numbered line but i dont want to do that. the numbers are extremely helpful to users. please plan this out more thoroughly so that i can then help implement it.
+
+now, i will test our animated workflow more thoroughly, focusing on if we solved the `+` create new cycle button:
+
+okay starting a new project by creating a new folder. ill record my steps here:
+<test 1>
+1. i created a new folder 'towerdefense4' to serve as the workspace. i opened that folder as the workspace.
+1.1. at this state, the first animated highlight should be the pcpp panel button on the FTV.
+2. clicked pcpp. it opened the welcome page.
+3. i input 'i want to build a tower defense game', then clicked `Generate Initial Artifacts Prompt`.
+3.1. once the prompt.md file is created, is it possible to highlight and animate that file until it gets clicked on?
+3.2. currently, the `Resp 1` is highlighted. it would be preferrable if we could highlight the prompt.md first, once thats clicked, then we could begin highlighting the `Resp 1`.
+3.3. if we cannot animate prompt.md in the FTV, then we can just automatically open the prompt.md file.
+3.4. if we auto-pop it open, perhaps we can auto-select and auto-copy to clipboard the prompt.md? because thats what has to happen next.
+4. i then take the prompt and send it to gemini 2.5 pro via aistudio 4 times in parallel conversations.
+5. i take the responses back and place them in `Resp 1` through `Resp 4`. they do not seem to animate in succession as they used to. its unfortunate. is there a more robust way to simply detect if something is placed in the response text field or not? thats all you need to do for the trigger, no?
+7. once all four responses have input, the parse all button no longer highlights, still stuck on `Resp 1`.
+8. i click parse all, sort does not highlight, `Resp 1` is still highlighted.
+9. i clicked on the longest response (2) then clicked select resopnse, then selct all, then accept selected.
+10. once i clicked accept selected, the cycle context text field got highlighted. this part is correct. the next logical step once accepting a response is to write about observations from the accepted files.
+11. once i input something in the cycle context, then the cycle title highlights, this is correct.
+12. once i input something into cycle context, the generate prompt button and the cycle & context turns green and i can click `+` so it looks like that bug is fixed.
+13. im observing that if i click create cycle 2, then go back to cycle 1, then click generate prompt (while viewing cycle 1), i still get the cycle 2 placed inside the prompt. ideally, the generate prompt will generate up to whatever the current cycle is being viewed. this is because i only clicked new cycle, but i still need to generate and send cycle 1 off. as a user i simply clicked htis out of order. in doing so, our solution should be robust enough to allow the user to still generate either prompt they are trying to create.
+</test 1>
+so largely the test was good, especially the confirmation that `+` functions once again. im going to run another test, because i think this `Resp 1` needs to be made more robust, its wonky on my cycle 2 right now as well. im creating a new folder and running one more test:
+<test 2>
+1. created `TowerDefense5`
+2. clicked `Open Folder` in the DC FTV.
+3. selected the `TowerDefense5` Folder.
+4. clicked on the DCE spiral icon.
+4.1. the pcpp pane icon button should be animated. we can simply make this 'if not currently open, animate'. that seems easy and robust enough to work as we desire and in future situations.
+5. the welcome to the data curation environment pane opens.
+5.1. the text field on this pane should be animated, just like i saw the cycle context pane highlighted in test 1.
+5.2. as previously reported, the right-side of the text pane is covered, leading to only three-sides of the highlight affect being visible. the right-side of the text field is covered, seemingly by the scroll bar. if you can add some small % padding to the right, this should resolve the issue.
+5.3. ideally, if you could make the width of the text pane match the button below it, it would be more uniform and it would solve the overlapping issue that hides the right side of the text bar thats obscuring the highlight animation line.
+5.4. once something is input in this field, we can next highlight the `Generate Initial Artifacts Prompt`.
+6. i input 'i want to make a tower defense game' and then i click `Generate Initial Artifacts Prompt`.
+6.1. im observing `Resp 1` is immediately highlighted. without doing anything else, to test the highlighting that seemed broken in test 1, i will simply add some text into the resp 1 field and observe if the animated highlight correctly progresses to `Resp 2` or not.... it does not. this confirms it is actually broken as i did not click anything additional to obscure the clean slate state if that makes sense. 
+6.2. we want to be placing an animation right before this to solve for the observations in test 1.
+</test 2>
+
+okay that was basically what i wanted to confirm with test 2, making sure the resp 1 was actually bugged and not some wonky state from my prior test being less controlled.
+
+please do the following:
+1. plan out what is so complex about the word wrap problem
+2. solve for the few additional animated workflow steps (the documentation for the animated workflow is critical, with so many meticulous steps, we have to keep the documentation well-aligned or else we have regression.
+3. solve for the seemingly stuck `Resp 1` -> `Resp N` animated highlighting. this was working seamlessly previously.
+4. make it so that whichever cycle is being viewed when generate prompt is clicked, that the prompt cycles are generated up to that cycle as the current cycle and does not include cycles after that.
+5. ensure that the sort animation is state aware and skips over that animation if the sort button had already been selected.
+
+<previous cycle 5 summary of actions>
+<summary>
+I have analyzed your feedback from Cycle 5. The primary issue is the inability to create a new cycle after deleting a previous one, which points to a state synchronization bug between the frontend and backend. Additionally, there are persistent usability issues with the context text areas, including a single-character input bug and incorrect line numbering for word-wrapped text.
+
+My course of action is to fix these critical bugs to restore core functionality. I will first address the cycle creation blocker by ensuring the frontend's state is correctly updated after a deletion. Then, I will fix the text area input bug, which is a classic React focus management problem. Finally, I will formally document the word-wrap issue and the plan to address it in a future cycle using our A-B-C testing methodology.
+
+</summary>
+
+<course_of_action>
+1.  **Documentation First (Codifying Bugs & Plans):**
+    *   I will update **`A11. DCE - Regression Case Studies.md`** with two new case studies:
+        *   **"Stuck on Cycle Creation After Deletion":** The RCA is that the frontend's `maxCycle` state is not updated when a cycle is deleted. The solution is for the backend `deleteCycle` method to return the new maximum cycle, which the frontend then uses to update its state.
+        *   **"Single Character Input Bug in Text Area":** The RCA is a classic React focus management issue where the component re-renders on every keystroke, causing the input to lose focus. The solution is to ensure the component (`NumberedTextarea`) and its `onChange` handlers are properly memoized using `React.memo` and `useCallback`.
+    *   I will create a new artifact, **`A75. DCE - Text Area Component A-B-C Test Plan.md`**, to formally plan the diagnosis and resolution of the text area scrolling and word-wrap bugs using our established testing strategy. I will also add this to `A0`.
+    *   I will update **`A59. DCE - Phase 2 - Debugging and State Logging.md`** to specify that the "Log State" button will be modified to output only the state relevant to the cycle creation bug (`currentCycle`, `maxCycle`, etc.) to aid in diagnostics.
+
+2.  **Fix Cycle Creation Bug:**
+    *   **Backend (`history.service.ts`):** I will modify the `deleteCycle` method to return the new maximum `cycleId` after a successful deletion. Its signature will change from `Promise<void>` to `Promise<number>`.
+    *   **IPC (`channels.enum.ts`, `channels.type.ts`):** I will update the IPC channels to handle this response.
+    *   **Backend (`on-message.ts`):** The message handler for `RequestDeleteCycle` will now `await` the result from the `history.service.ts` and send a message back to the client with the new `maxCycle`.
+    *   **Frontend (`view.tsx`):** The `handleDeleteCycle` function will be updated to handle the response from the backend, setting the `maxCycle` state variable correctly. This will re-enable the `+` button at the appropriate time.
+
+3.  **Fix Single-Character Input Bug:**
+    *   **`NumberedTextarea.tsx`:** I will wrap the component export in `React.memo` to prevent it from re-rendering if its props have not changed.
+    *   **`view.tsx`:** The `onChange` handlers for the context text areas (`onCycleContextChange`, `onEphemeralContextChange`) will be wrapped in `useCallback` with the correct dependency arrays. This ensures a stable function is passed as a prop, preserving the memoization of the child component and preventing focus loss.
+
+4.  **Enhance "Log State" Button:**
+    *   **`prompt.service.ts`:** I will modify the `generateStateLog` method. It will now generate a focused report containing only the state variables relevant to cycle management (`currentCycle`, `maxCycle`, `isNewCycleButtonDisabled`, etc.) for easier debugging.
+
+</course_of_action>
+
+</previous cycle 5 summary of actions>
+</Cycle 6>
+
+
+
+<Cycle 5>
+okay original text field is working better, still have the word wrap issue. im manually adding in this cycle 4 becuase i still cannot create a new cycle once deleting it. ive added the logs i see. is it possible to somehow reveal what the extension thinks my current state is, pertaining the the allowing of creating a new cycle? like when i click the log state button? make the log state button only do that. ill click it in this stte, and wea can analyze the logs.
+
+<console logs>
+[INFO] [11:14:27 AM] HistoryService: Deleting cycle 2.
+[INFO] [11:14:28 AM] Cycle 2 deleted successfully.
+[INFO] [11:14:28 AM] HistoryService: getLatestCycle called.
+[INFO] [11:14:29 AM] Latest cycle found: 1
+</console logs>
+
+</Cycle 5>
+
+
+
+<summary>
+I have analyzed the feedback from Cycle 4. There are three primary issues: a critical bug preventing the creation of new cycles, persistent UI bugs in the context text areas (lag, focus loss), and a regression where the File Tree View (FTV) flashes on save.
+
+My course of action is to address these issues systematically, prioritizing the critical bugs to restore core functionality and usability.
+
+1.  **Fix Cycle Creation Bug:** The inability to create Cycle 5 after deleting it is a state management issue. The UI logic for enabling the "New Cycle" button has become desynchronized from the conditions that indicate readiness to proceed. I will simplify this logic to be more robust.
+2.  **Fix Text Area Bugs:** The lag and focus loss in the context text areas are caused by excessive re-renders and expensive operations happening on every keystroke. I will fix this by debouncing the syntax highlighting requests and isolating the component from unnecessary re-renders caused by workflow state changes.
+3.  **Fix FTV Flashing:** This is a regression where the file watcher is reacting to the extension's own history file being saved. I will fix this by adding the `.vscode` directory to the watcher's exclusion list, which was the original solution for this problem.
+4.  **Documentation:** I will update our documentation to codify the findings and solutions for these bugs to prevent future regressions.
+
+</summary>
+
+<course_of_action>
+1.  **Documentation First (Codify Findings):**
+    *   I will update **`A11. DCE - Regression Case Studies.md`** with a new entry for "FTV Flashing on Save," documenting the root cause (file watcher reacting to `.vscode/dce_history.json`) and the solution (adding `.vscode` to the exclusion list).
+    *   I will update **`A75. DCE - Text Area Component A-B-C Test Plan.md`** to formally conclude the test. The findings are that a combination of synchronized scrolling and pixel-perfect CSS alignment is required for a functional component. I will also note that handling line numbers for word-wrapped text is a complex problem deferred for future consideration.
+
+2.  **Fix Cycle Creation Bug (`parallel-copilot.view/view.tsx`):**
+    *   The `isNewCycleButtonDisabled` logic is currently tied to the complex `workflowStep` state.
+    *   I will change this logic to be directly tied to the `isReadyForNextCycle` memoized value, which is the same state that controls the green banner. This ensures that if the user sees the green banner indicating they are ready to proceed, the `+` button will always be enabled.
+
+3.  **Fix Text Area Performance and Focus Bugs:**
+    *   **Debounce Highlighting (`NumberedTextarea.tsx`):** To fix the lag with large amounts of text, I will wrap the `useEffect` that sends the `RequestHighlightContext` IPC message in a debounce utility. This will prevent an expensive backend call on every single keystroke.
+    *   **Prevent Focus Loss (`ContextInputs.tsx`):** The single-character input bug is caused by the component re-rendering when the workflow step changes. I will move the `workflow-highlight` className from the `NumberedTextarea` component itself to its parent wrapper `div` in `ContextInputs.tsx`. This isolates the component from the workflow state change, preventing the re-render that causes focus to be lost.
+    *   **Memoize Component (`NumberedTextarea.tsx`):** I will wrap the `NumberedTextarea` component export in `React.memo` to prevent unnecessary re-renders when its props have not changed.
+
+4.  **Fix FTV Flashing Bug (`file-tree.service.ts`):**
+    *   This is a regression. I will add `.vscode` to the `EXCLUSION_PATTERNS` array in `file-tree.service.ts`. This will prevent the file watcher from reacting to writes to `dce_history.json` and triggering an unnecessary and distracting refresh of the File Tree View.
+
+</course_of_action>
+
+</Attempted to swap to new extension>
 <Cycle 178>
 nice, okay good progress. the restore button is functional. now lets focus on A69 implementation.
 
@@ -23279,7 +23962,7 @@ export class FileOperationService {
 </file>
 
 <file path="src/backend/services/file-tree.service.ts">
-// Updated on: C179 (Add .vscode to exclusion patterns)
+// Updated on: C2 (Add more explicit logging to file watcher)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -23346,6 +24029,13 @@ export class FileTreeService {
         this.watcher = vscode.workspace.createFileSystemWatcher('**/*');
         const onFileChange = (uri: vscode.Uri) => {
             const normalizedPath = normalizePath(uri.fsPath);
+            // C2 FIX: Add more explicit logging to diagnose FTV flashing
+            Services.loggerService.log(`[Watcher] File change detected: ${normalizedPath}`);
+            
+            if (normalizedPath.endsWith('.vscode/dce_history.json')) {
+                Services.loggerService.log(`[Watcher] Ignoring change in DCE history file: ${normalizedPath}`);
+                return;
+            }
             if (EXCLUSION_PATTERNS.some(pattern => normalizedPath.includes(`/${pattern}/`) || normalizedPath.endsWith(`/${pattern}`))) {
                 Services.loggerService.log(`[Watcher] Ignoring change in excluded pattern: ${normalizedPath}`);
                 return;
@@ -23355,6 +24045,11 @@ export class FileTreeService {
 
         this.watcher.onDidCreate(async (uri: vscode.Uri) => {
             const normalizedPath = normalizePath(uri.fsPath);
+            Services.loggerService.log(`[Watcher] File created: ${normalizedPath}`);
+            if (normalizedPath.endsWith('.vscode/dce_history.json')) {
+                Services.loggerService.log(`[Watcher] Ignoring creation of DCE history file: ${normalizedPath}`);
+                return;
+            }
             
             const isNonSelectable = !this._isSelectable(uri.fsPath, vscode.FileType.File);
 
@@ -23919,7 +24614,7 @@ export class GitService {
 </file>
 
 <file path="src/backend/services/highlighting.service.ts">
-// Updated on: C169 (Add handleHighlightContextRequest)
+// Updated on: C2 (Remove handleHighlightContextRequest)
 import { createStarryNight, common } from '@wooorm/starry-night';
 import sourceTsx from '@wooorm/starry-night/source.tsx';
 import sourceJs from '@wooorm/starry-night/source.js';
@@ -23950,34 +24645,9 @@ export class HighlightingService {
         }
     }
     
-    public async handleHighlightContextRequest(context: string, id: string, serverIpc: ServerPostMessageManager) {
-        Services.loggerService.log(`[CONTEXT-HIGHLIGHT] Received request for context ID: ${id}`);
-        if (!this.starryNight) {
-            Services.loggerService.error('Starry Night not initialized, cannot highlight context.');
-            serverIpc.sendToClient(ServerToClientChannel.SendHighlightContext, { highlightedHtml: context, id });
-            return;
-        }
-
-        const scope = this.starryNight.flagToScope('markdown');
-        if (!scope) {
-            Services.loggerService.warn(`[WARN] No Starry Night scope found for markdown.`);
-            serverIpc.sendToClient(ServerToClientChannel.SendHighlightContext, { highlightedHtml: context, id });
-            return;
-        }
-
-        try {
-            const tree = this.starryNight.highlight(context, scope);
-            const hastHtml = toHtml(tree);
-            serverIpc.sendToClient(ServerToClientChannel.SendHighlightContext, { highlightedHtml: hastHtml, id });
-        } catch (error) {
-            Services.loggerService.error(`Starry Night context highlighting failed: ${error}`);
-            serverIpc.sendToClient(ServerToClientChannel.SendHighlightContext, { highlightedHtml: context, id });
-        }
-    }
-
     public async handleSyntaxHighlightRequest(code: string, lang: string, id: string, serverIpc: ServerPostMessageManager) {
         const truncatedCode = code.length > 20 ? `${code.substring(0, 20)}[...]` : code;
-        Services.loggerService.log(`[SYNTAX-HIGHLIGHT] Received request for lang: ${lang}, code: ${truncatedCode}`);
+        Services.loggerService.log(`[SYNTAX-HIGHLIGHT] Received request for lang: ${lang}, id: ${id}`);
         
         if (!this.starryNight) {
             Services.loggerService.error('Starry Night not initialized, cannot highlight.');
@@ -27440,9 +28110,8 @@ export default CodeViewer;
 
 <file path="src/client/views/parallel-copilot.view/components/ContextInputs.tsx">
 // src/client/views/parallel-copilot.view/components/ContextInputs.tsx
-// Updated on: C182 (Set showLineNumbers to false)
+// Updated on: C1 (Replace NumberedTextarea with standard textarea)
 import * as React from 'react';
-import NumberedTextarea from './NumberedTextarea';
 import { formatLargeNumber } from '@/common/utils/formatting';
 
 interface ContextInputsProps {
@@ -27452,12 +28121,6 @@ interface ContextInputsProps {
     ephemeralContextTokens: number;
     onCycleContextChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
     onEphemeralContextChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-    onContextKeyDown: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
-    cycleContextHeight: number;
-    onCycleContextHeightChange: (height: number) => void;
-    ephemeralContextHeight: number;
-    onEphemeralContextHeightChange: (height: number) => void;
-    currentCycle: number;
     workflowStep: string | null;
 }
 
@@ -27468,12 +28131,6 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
     ephemeralContextTokens,
     onCycleContextChange,
     onEphemeralContextChange,
-    onContextKeyDown,
-    cycleContextHeight,
-    onCycleContextHeightChange,
-    ephemeralContextHeight,
-    onEphemeralContextHeightChange,
-    currentCycle,
     workflowStep
 }) => {
     return (
@@ -27483,16 +28140,12 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
                     <span>Cycle Context</span>
                     <span>({formatLargeNumber(cycleContextTokens, 1)} tk)</span>
                 </div>
-                <NumberedTextarea
+                <textarea
+                    className={`context-textarea ${workflowStep === 'awaitingCycleContext' ? 'workflow-highlight' : ''}`}
                     value={cycleContext}
                     onChange={onCycleContextChange}
                     placeholder="Cycle Context (notes for this cycle)..."
-                    onKeyDown={onContextKeyDown}
-                    height={cycleContextHeight}
-                    onHeightChange={onCycleContextHeightChange}
-                    id={`cycle-context-${currentCycle}`}
-                    className={workflowStep === 'awaitingCycleContext' ? 'workflow-highlight' : ''}
-                    showLineNumbers={false}
+                    spellCheck={false}
                 />
             </div>
             <div className="context-input-wrapper">
@@ -27500,15 +28153,12 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
                     <span>Ephemeral Context</span>
                     <span>({formatLargeNumber(ephemeralContextTokens, 1)} tk)</span>
                 </div>
-                <NumberedTextarea
+                <textarea
+                    className="context-textarea"
                     value={ephemeralContext}
                     onChange={onEphemeralContextChange}
                     placeholder="Ephemeral Context (for this cycle's prompt only)..."
-                    onKeyDown={onContextKeyDown}
-                    height={ephemeralContextHeight}
-                    onHeightChange={onEphemeralContextHeightChange}
-                    id={`ephemeral-context-${currentCycle}`}
-                    showLineNumbers={false}
+                    spellCheck={false}
                 />
             </div>
         </div>
@@ -27605,111 +28255,6 @@ const CycleNavigator: React.FC<CycleNavigatorProps> = ({
 };
 
 export default CycleNavigator;
-</file>
-
-<file path="src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx">
-// src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx
-// Updated on: C182 (Add showLineNumbers prop)
-import * as React from 'react';
-import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
-import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
-
-interface NumberedTextareaProps {
-    value: string;
-    onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-    placeholder: string;
-    onKeyDown: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
-    height: number;
-    onHeightChange: (height: number) => void;
-    id: string; // Unique ID for this textarea instance
-    className?: string; // For workflow highlighting
-    showLineNumbers?: boolean;
-}
-
-const NumberedTextarea: React.FC<NumberedTextareaProps> = ({ value, onChange, placeholder, onKeyDown, height, onHeightChange, id, className, showLineNumbers = true }) => {
-    const [lineCount, setLineCount] = React.useState(1);
-    const [highlightedHtml, setHighlightedHtml] = React.useState('');
-    const textareaRef = React.useRef<HTMLTextAreaElement>(null);
-    const highlightRef = React.useRef<HTMLDivElement>(null);
-    const lineNumbersRef = React.useRef<HTMLDivElement>(null);
-    const clientIpc = ClientPostMessageManager.getInstance();
-
-    React.useEffect(() => {
-        const handleHighlightResponse = ({ highlightedHtml: html, id: responseId }: { highlightedHtml: string, id: string }) => {
-            if (responseId === id) {
-                setHighlightedHtml(html);
-            }
-        };
-        clientIpc.onServerMessage(ServerToClientChannel.SendHighlightContext, handleHighlightResponse);
-        // This is a simplified subscription model. A real implementation should return an unsubscribe function.
-    }, [id, clientIpc]);
-    
-    React.useEffect(() => {
-        const lines = value.split('\n').length;
-        setLineCount(lines);
-        clientIpc.sendToServer(ClientToServerChannel.RequestHighlightContext, { context: value, id });
-    }, [value, id, clientIpc]);
-
-    const handleScroll = (e: React.UIEvent<HTMLTextAreaElement>) => {
-        if (highlightRef.current && lineNumbersRef.current) {
-            const scrollTop = e.currentTarget.scrollTop;
-            highlightRef.current.scrollTop = scrollTop;
-            lineNumbersRef.current.scrollTop = scrollTop;
-        }
-    };
-
-    const handleMouseDown = React.useCallback((e: React.MouseEvent) => {
-        e.preventDefault();
-        const handleMouseMove = (mouseMoveEvent: MouseEvent) => {
-            if (textareaRef.current) {
-                const containerTop = textareaRef.current.getBoundingClientRect().top;
-                const newHeight = mouseMoveEvent.clientY - containerTop;
-                onHeightChange(Math.max(50, newHeight));
-            }
-        };
-        const handleMouseUp = () => {
-            document.removeEventListener('mousemove', handleMouseMove);
-            document.removeEventListener('mouseup', handleMouseUp);
-        };
-        document.addEventListener('mousemove', handleMouseMove);
-        document.addEventListener('mouseup', handleMouseUp);
-    }, [textareaRef, onHeightChange]);
-
-    return (
-        <div className={`numbered-textarea-container ${className || ''}`} style={{ height: `${height}px` }}>
-            {showLineNumbers && (
-                <div className="line-numbers-gutter" ref={lineNumbersRef}>
-                    {Array.from({ length: lineCount }, (_, i) => (
-                        <div key={i}>{i + 1}</div>
-                    ))}
-                </div>
-            )}
-            <div className="content-wrapper">
-                <div 
-                    ref={highlightRef} 
-                    className="highlight-content"
-                    dangerouslySetInnerHTML={{ __html: highlightedHtml }}
-                />
-                <textarea
-                    ref={textareaRef}
-                    className="context-textarea"
-                    placeholder={placeholder}
-                    value={value}
-                    onChange={onChange}
-                    onKeyDown={onKeyDown}
-                    onScroll={handleScroll}
-                    spellCheck={false}
-                />
-            </div>
-            <div
-                className="textarea-resizer"
-                onMouseDown={handleMouseDown}
-            />
-        </div>
-    );
-};
-
-export default React.memo(NumberedTextarea);
 </file>
 
 <file path="src/client/views/parallel-copilot.view/components/ParsedView.tsx">
@@ -27981,7 +28526,7 @@ export const viewConfig = {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/on-message.ts">
-// Updated on: C186 (Add ShowInformationMessage handler)
+// Updated on: C1 (Remove HighlightContext handler)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -28004,10 +28549,6 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestSyntaxHighlight, (data) => {
         highlightingService.handleSyntaxHighlightRequest(data.code, data.lang, data.id, serverIpc);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestHighlightContext, (data) => {
-        highlightingService.handleHighlightContextRequest(data.context, data.id, serverIpc);
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestLatestCycleData, async () => {
@@ -28187,102 +28728,9 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope, on
 export default OnboardingView;
 </file>
 
-<file path="src/client/views/parallel-copilot.view/TestPane1.tsx">
-// src/client/views/parallel-copilot.view/TestPane1.tsx
-import * as React from 'react';
-import NumberedTextarea from './components/NumberedTextarea';
-
-const TestPane1: React.FC = () => {
-    const [value, setValue] = React.useState('Test A: Focus on synchronized scrolling.\n\nType or paste multiple lines here.\n\nThen scroll the textarea to see if the line numbers scroll with it.');
-    const [height, setHeight] = React.useState(200);
-
-    return (
-        <div className="test-pane-container">
-            <h3>Test A: Synchronized Scrolling</h3>
-            <p>This test focuses on the `onScroll` event. The line number gutter and the text content should scroll in perfect unison.</p>
-            <div style={{ border: '1px solid var(--vscode-focusBorder)', padding: '8px' }}>
-                <NumberedTextarea
-                    value={value}
-                    onChange={(e) => setValue(e.target.value)}
-                    placeholder="Test Area 1"
-                    onKeyDown={() => {}}
-                    height={height}
-                    onHeightChange={setHeight}
-                    id="test-textarea-1"
-                />
-            </div>
-        </div>
-    );
-};
-
-export default TestPane1;
-</file>
-
-<file path="src/client/views/parallel-copilot.view/TestPane2.tsx">
-// src/client/views/parallel-copilot.view/TestPane2.tsx
-import * as React from 'react';
-import NumberedTextarea from './components/NumberedTextarea';
-
-const TestPane2: React.FC = () => {
-    const [value, setValue] = React.useState('Test B: Focus on pixel-perfect alignment.\n\nType here and check if the cursor position, text wrapping, and selection highlighting perfectly match the line numbers and the visible text.');
-    const [height, setHeight] = React.useState(200);
-
-    return (
-        <div className="test-pane-container">
-            <h3>Test B: Pixel-Perfect Alignment</h3>
-            <p>This test focuses on CSS properties. The cursor, selection, and text should align perfectly with the line numbers, especially with long, wrapped lines.</p>
-            <div style={{ border: '1px solid var(--vscode-focusBorder)', padding: '8px' }}>
-                 <NumberedTextarea
-                    value={value}
-                    onChange={(e) => setValue(e.target.value)}
-                    placeholder="Test Area 2"
-                    onKeyDown={() => {}}
-                    height={height}
-                    onHeightChange={setHeight}
-                    id="test-textarea-2"
-                />
-            </div>
-        </div>
-    );
-};
-
-export default TestPane2;
-</file>
-
-<file path="src/client/views/parallel-copilot.view/TestPane3.tsx">
-// src/client/views/parallel-copilot.view/TestPane3.tsx
-import * as React from 'react';
-import NumberedTextarea from './components/NumberedTextarea';
-
-const TestPane3: React.FC = () => {
-    const [value, setValue] = React.useState('Test C: Combined Solution.\n\nThis is a clean implementation combining fixes for both scrolling and alignment. It should be fully functional.');
-    const [height, setHeight] = React.useState(200);
-
-    return (
-        <div className="test-pane-container">
-            <h3>Test C: Combined & Cleaned Solution</h3>
-            <p>This test combines the fixes from A and B. It should exhibit no scrolling or alignment bugs.</p>
-            <div style={{ border: '1px solid var(--vscode-focusBorder)', padding: '8px' }}>
-                 <NumberedTextarea
-                    value={value}
-                    onChange={(e) => setValue(e.target.value)}
-                    placeholder="Test Area 3"
-                    onKeyDown={() => {}}
-                    height={height}
-                    onHeightChange={setHeight}
-                    id="test-textarea-3"
-                />
-            </div>
-        </div>
-    );
-};
-
-export default TestPane3;
-</file>
-
 <file path="src/client/views/parallel-copilot.view/view.scss">
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C187 (Add margin to collapsible section for animation)
+// Updated on: C2 (Remove test harness styles)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -28322,93 +28770,6 @@ body {
     background-color: var(--vscode-editor-background);
 }
 
-.numbered-textarea-container {
-    position: relative;
-    display: flex;
-    border: 1px solid var(--vscode-input-border);
-    border-radius: 2px;
-    background-color: var(--vscode-editor-background);
-    min-height: 50px;
-    overflow: hidden;
-
-    .line-numbers-gutter {
-        padding: 4px 8px;
-        color: var(--vscode-editorLineNumber-foreground);
-        background-color: var(--vscode-editorGutter-background);
-        text-align: right;
-        user-select: none;
-        font-family: var(--vscode-editor-font-family);
-        font-size: var(--vscode-editor-font-size);
-        line-height: 1.5;
-        z-index: 2;
-        flex-shrink: 0;
-        overflow: hidden; // Prevents its own scrollbar
-    }
-    
-    .content-wrapper {
-        position: relative;
-        flex-grow: 1;
-        min-width: 0;
-        overflow: hidden;
-    }
-
-    .highlight-content, .context-textarea {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding: 4px;
-        box-sizing: border-box;
-        border: none;
-        font-family: var(--vscode-editor-font-family);
-        font-size: var(--vscode-editor-font-size);
-        line-height: 1.5;
-        white-space: pre-wrap;
-        word-wrap: break-word;
-        overflow: auto;
-    }
-    
-    .highlight-content {
-        pointer-events: none;
-        span {
-            background-color: transparent !important;
-        }
-    }
-
-    .context-textarea {
-        background-color: transparent;
-        color: transparent;
-        caret-color: var(--vscode-editor-foreground);
-        resize: none;
-        z-index: 1;
-        
-        &::-webkit-scrollbar {
-            width: 10px;
-        }
-        &::-webkit-scrollbar-thumb {
-            background: var(--vscode-scrollbarSlider-background);
-        }
-        &::-webkit-scrollbar-thumb:hover {
-            background: var(--vscode-scrollbarSlider-hoverBackground);
-        }
-        &::-webkit-scrollbar-thumb:active {
-            background: var(--vscode-scrollbarSlider-activeBackground);
-        }
-    }
-
-    .textarea-resizer {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 5px;
-        cursor: ns-resize;
-        z-index: 3;
-    }
-}
-
 .context-inputs {
     display: flex;
     flex-direction: column;
@@ -28425,6 +28786,25 @@ body {
             color: var(--vscode-descriptionForeground);
             display: flex;
             justify-content: space-between;
+        }
+    }
+
+    .context-textarea {
+        width: 100%;
+        height: 100px; /* Default height */
+        min-height: 50px;
+        resize: vertical;
+        background-color: var(--vscode-input-background);
+        color: var(--vscode-input-foreground);
+        border: 1px solid var(--vscode-input-border);
+        border-radius: 2px;
+        padding: 4px;
+        font-family: var(--vscode-editor-font-family);
+        font-size: var(--vscode-editor-font-size);
+        line-height: 1.5;
+
+        &:focus {
+            outline: 1px solid var(--vscode-focusBorder);
         }
     }
 }
@@ -29155,37 +29535,6 @@ body {
 .collapsible-content-inner {
     padding: 8px;
 }
-
-.test-harness-tabs {
-    display: flex;
-    border-bottom: 1px solid var(--vscode-panel-border);
-    padding: 0 8px;
-    flex-shrink: 0;
-
-    button {
-        padding: 6px 12px;
-        background: none;
-        border: none;
-        color: var(--vscode-tab-inactiveForeground);
-        border-bottom: 2px solid transparent;
-        cursor: pointer;
-
-        &.active {
-            color: var(--vscode-tab-activeForeground);
-            border-bottom-color: var(--vscode-tab-activeBorder);
-        }
-    }
-}
-
-.test-pane-container {
-    padding: 8px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    flex-grow: 1;
-    min-height: 0;
-    overflow-y: auto;
-}
 </file>
 
 <file path="src/client/views/parallel-copilot.view/view.ts">
@@ -29203,7 +29552,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C187 (Correct final workflow steps)
+// Updated on: C2 (Remove A-B-C test harness)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './view.scss';
@@ -29265,8 +29614,6 @@ const App = () => {
     const [isSortedByTokens, setIsSortedByTokens] = React.useState(false);
     const [pathOverrides, setPathOverrides] = React.useState<Map<string, string>>(new Map());
     const [tempOverridePath, setTempOverridePath] = React.useState('');
-    const [cycleContextHeight, setCycleContextHeight] = React.useState(100);
-    const [ephemeralContextHeight, setEphemeralContextHeight] = React.useState(100);
     const [cycleContextTokens, setCycleContextTokens] = React.useState(0);
     const [ephemeralContextTokens, setEphemeralContextTokens] = React.useState(0);
     const [totalPromptTokens, setTotalPromptTokens] = React.useState(0);
@@ -29275,19 +29622,19 @@ const App = () => {
     const [workflowStep, setWorkflowStep] = React.useState<string | null>(null);
 
     const clientIpc = ClientPostMessageManager.getInstance();
-    const getCurrentCycleData = React.useCallback((): PcppCycle | null => { if (currentCycle === null) return null; const responses: { [key: string]: PcppResponse } = {}; for (let i = 1; i <= tabCount; i++) responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' }; if (currentCycle === 0) return { cycleId: 0, cycleContext, ephemeralContext: '', responses: {}, timestamp: new Date().toISOString(), title: 'Project Setup' }; return { cycleId: currentCycle, timestamp: new Date().toISOString(), title: cycleTitle, cycleContext, ephemeralContext, responses, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement: Array.from(selectedFilesForReplacement), tabCount, isSortedByTokens, pathOverrides: Object.fromEntries(pathOverrides), cycleContextHeight, ephemeralContextHeight, }; }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, cycleContextHeight, ephemeralContextHeight]);
+    const getCurrentCycleData = React.useCallback((): PcppCycle | null => { if (currentCycle === null) return null; const responses: { [key: string]: PcppResponse } = {}; for (let i = 1; i <= tabCount; i++) responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' }; if (currentCycle === 0) return { cycleId: 0, cycleContext, ephemeralContext: '', responses: {}, timestamp: new Date().toISOString(), title: 'Project Setup' }; return { cycleId: currentCycle, timestamp: new Date().toISOString(), title: cycleTitle, cycleContext, ephemeralContext, responses, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement: Array.from(selectedFilesForReplacement), tabCount, isSortedByTokens, pathOverrides: Object.fromEntries(pathOverrides) }; }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides]);
     const saveCurrentCycleState = React.useCallback(() => { const cycleData = getCurrentCycleData(); if (cycleData) clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData }); }, [clientIpc, getCurrentCycleData]);
     const requestCostEstimation = React.useCallback(() => { const cycleData = getCurrentCycleData(); if (cycleData) clientIpc.sendToServer(ClientToServerChannel.RequestPromptCostBreakdown, { cycleData }); }, [clientIpc, getCurrentCycleData]);
     const debouncedSave = useDebounce(saveCurrentCycleState, 1000);
     const debouncedCostRequest = useDebounce(requestCostEstimation, 500);
 
-    React.useEffect(() => { debouncedSave(); debouncedCostRequest(); }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, tabCount, isSortedByTokens, pathOverrides, debouncedSave, debouncedCostRequest, cycleContextHeight, ephemeralContextHeight]);
+    React.useEffect(() => { debouncedSave(); debouncedCostRequest(); }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, tabCount, isSortedByTokens, pathOverrides, debouncedSave, debouncedCostRequest]);
     React.useEffect(() => { const handleVisibilityChange = () => { if (document.visibilityState === 'hidden') saveCurrentCycleState(); }; document.addEventListener('visibilitychange', handleVisibilityChange); return () => document.removeEventListener('visibilitychange', handleVisibilityChange); }, [saveCurrentCycleState]);
     const parseAllTabs = React.useCallback(() => { setTabs(prevTabs => { const allFilePaths = new Set<string>(); const updatedTabs = { ...prevTabs }; let needsUpdate = false; Object.values(updatedTabs).forEach(tabState => { if (tabState.rawContent && !tabState.parsedContent) { needsUpdate = true; const parsed = parseResponse(tabState.rawContent); tabState.parsedContent = parsed; parsed.filesUpdated.forEach(file => allFilePaths.add(file)); parsed.files.forEach(file => { const lang = path.extname(file.path).substring(1) || 'plaintext'; const id = `${file.path}::${file.content}`; clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id }); }); } else if (tabState.parsedContent) { tabState.parsedContent.filesUpdated.forEach(file => allFilePaths.add(file)); } }); if (allFilePaths.size > 0) clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) }); return needsUpdate ? updatedTabs : prevTabs; }); }, [clientIpc]);
     
     React.useEffect(() => { logger.log(`[WORKFLOW] Step changed to: ${workflowStep}`); }, [workflowStep]);
 
-    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string) => { setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setCycleContextHeight(cycleData.cycleContextHeight || 100); setEphemeralContextHeight(cycleData.ephemeralContextHeight || 100); }; clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, ({ filePath, originalTokens, modifiedTokens, similarity }) => { setComparisonMetrics(prev => new Map(prev).set(filePath, { originalTokens, modifiedTokens, similarity })); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); 
+    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string) => { setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); }; clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, ({ filePath, originalTokens, modifiedTokens, similarity }) => { setComparisonMetrics(prev => new Map(prev).set(filePath, { originalTokens, modifiedTokens, similarity })); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); 
         
         clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => {
             logger.log(`[VIEW] Received NotifyGitOperationResult: ${JSON.stringify(result)}`);
@@ -29334,13 +29681,13 @@ const App = () => {
     const handleAcceptSelectedFiles = () => { if (selectedFilesForReplacement.size === 0) return; const filesToWrite: BatchWriteFile[] = []; selectedFilesForReplacement.forEach(compositeKey => { const [responseId, filePath] = compositeKey.split(':::'); const responseData = tabs[responseId]; if (responseData?.parsedContent) { const file = responseData.parsedContent.files.find(f => f.path === filePath); if (file) { const finalPath = pathOverrides.get(file.path) || file.path; filesToWrite.push({ path: finalPath, content: file.content }); } } }); if (filesToWrite.length > 0) clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite }); setWorkflowStep('awaitingCycleContext'); };
     const handleLinkFile = (originalPath: string) => { if (tempOverridePath.trim()) { setPathOverrides(prev => new Map(prev).set(originalPath, tempOverridePath.trim())); setFileExistenceMap(prev => new Map(prev).set(originalPath, true)); setTempOverridePath(''); handleSelectForViewing(originalPath); } };
     const handleUnlinkFile = (originalPath: string) => { setPathOverrides(prev => { const newMap = new Map(prev); newMap.delete(originalPath); return newMap; }); setFileExistenceMap(prev => new Map(prev).set(originalPath, false)); };
-    const handleContextKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => { if ((e.ctrlKey || e.metaKey) && e.key === 'z') return; if ((e.ctrlKey || e.metaKey) && (e.key === 'y' || (e.shiftKey && e.key === 'Z'))) return; };
     const onCycleContextChange = React.useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => { setCycleContext(e.target.value); setCycleContextTokens(Math.ceil(e.target.value.length / 4)); }, []);
     const onEphemeralContextChange = React.useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => { setEphemeralContext(e.target.value); setEphemeralContextTokens(Math.ceil(e.target.value.length / 4)); }, []);
     const activeTabData = tabs[activeTab.toString()];
     const sortedTabIds = React.useMemo(() => { const tabIds = [...Array(tabCount)].map((_, i) => i + 1); if (isParsedMode && isSortedByTokens) tabIds.sort((a, b) => { const tokensA = tabs[a.toString()]?.parsedContent?.totalTokens ?? -1; const tokensB = tabs[b.toString()]?.parsedContent?.totalTokens ?? -1; return tokensB - tokensA; }); return tabIds; }, [tabs, isParsedMode, isSortedByTokens, tabCount]);
     const viewableContent = React.useMemo(() => { if (!selectedFilePath || !activeTabData?.parsedContent) return undefined; const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath); if (!file) return '<div>Error: File data not found in parsed response.</div>'; const id = `${file.path}::${file.content}`; return highlightedCodeBlocks.get(id); }, [selectedFilePath, activeTabData?.parsedContent, highlightedCodeBlocks]);
     const handleRawContentChange = (newContent: string, tabIndex: number) => setTabs(prev => ({ ...prev, [tabIndex.toString()]: { rawContent: newContent, parsedContent: null }}));
+    const handleContextKeyDown = React.useCallback(() => { /* Placeholder for potential future use */ }, []);
     
     const handleSortToggle = () => { if (workflowStep === 'awaitingSort') { setIsSortedByTokens(true); } else { setIsSortedByTokens(p => !p); } };
     const handleGlobalParseToggle = () => { const newParseMode = !isParsedMode; setIsParsedMode(newParseMode); setSelectedFilePath(null); if (!newParseMode) setTabs(prev => { const newTabs = {...prev}; Object.keys(newTabs).forEach(key => { newTabs[key].parsedContent = null; }); return newTabs; }); };
@@ -29371,7 +29718,7 @@ const App = () => {
         <div className="pc-header"><div className="pc-toolbar"><button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button><button onClick={handleGeneratePrompt} title="Generate prompt.md" className={workflowStep === 'awaitingGeneratePrompt' ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button><button onClick={handleLogState} title="Log Current State"><VscBug/></button><button onClick={handleGlobalParseToggle} className={`${isParsedMode ? 'active' : ''} ${workflowStep === 'awaitingParse' ? 'workflow-highlight' : ''}`}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} /></div></div>
         <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''} extraHeaderContent={totalPromptCostDisplay}>
             <CycleNavigator currentCycle={currentCycle} maxCycle={maxCycle} cycleTitle={cycleTitle} isNewCycleButtonDisabled={isNewCycleButtonDisabled} onCycleChange={handleCycleChange} onNewCycle={handleNewCycle} onTitleChange={(title) => { setCycleTitle(title); }} onDeleteCycle={handleDeleteCycle} onResetHistory={handleResetHistory} onExportHistory={handleExportHistory} onImportHistory={handleImportHistory} onGitBaseline={handleGitBaseline} onGitRestore={handleGitRestore} workflowStep={workflowStep} />
-            <ContextInputs cycleContext={cycleContext} ephemeralContext={ephemeralContext} cycleContextTokens={cycleContextTokens} ephemeralContextTokens={ephemeralContextTokens} onCycleContextChange={onCycleContextChange} onEphemeralContextChange={onEphemeralContextChange} onContextKeyDown={handleContextKeyDown} cycleContextHeight={cycleContextHeight} onCycleContextHeightChange={setCycleContextHeight} ephemeralContextHeight={ephemeralContextHeight} onEphemeralContextHeightChange={setEphemeralContextHeight} currentCycle={currentCycle} workflowStep={workflowStep} />
+            <ContextInputs cycleContext={cycleContext} ephemeralContext={ephemeralContext} cycleContextTokens={cycleContextTokens} ephemeralContextTokens={ephemeralContextTokens} onCycleContextChange={onCycleContextChange} onEphemeralContextChange={onEphemeralContextChange} workflowStep={workflowStep} />
         </CollapsibleSection>
         <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} onSortToggle={handleSortToggle} workflowStep={workflowStep} />
         <div className="tab-content">
@@ -29482,7 +29829,6 @@ export enum ClientToServerChannel {
     RequestFileComparison = "clientToServer.requestFileComparison",
     RequestExportHistory = "clientToServer.requestExportHistory",
     RequestImportHistory = "clientToServer.requestImportHistory",
-    RequestHighlightContext = "clientToServer.requestHighlightContext",
     RequestPromptCostEstimation = "clientToServer.requestPromptCostEstimation",
     RequestPromptCostBreakdown = "clientToServer.requestPromptCostBreakdown",
     RequestGitBaseline = "clientToServer.requestGitBaseline",
@@ -29506,7 +29852,6 @@ export enum ServerToClientChannel {
     // Phase 2: PCPP
     SendFileExistence = "serverToClient.sendFileExistence",
     SendSyntaxHighlight = "serverToClient.sendSyntaxHighlight",
-    SendHighlightContext = "serverToClient.sendHighlightContext",
     SendLatestCycleData = "serverToClient.sendLatestCycleData",
     SendCycleData = "serverToClient.sendCycleData",
     FilesWritten = "serverToClient.filesWritten",
@@ -29519,7 +29864,7 @@ export enum ServerToClientChannel {
 </file>
 
 <file path="src/common/ipc/channels.type.ts">
-// Updated on: C186 (Add RequestShowInformationMessage)
+// Updated on: C2 (Remove HighlightContext channels)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -29569,7 +29914,6 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestCreateCycle0Prompt ? { projectScope: string } :
     T extends ClientToServerChannel.RequestFileExistence ? { paths: string[] } :
     T extends ClientToServerChannel.RequestSyntaxHighlight ? { code: string; lang: string, id: string } :
-    T extends ClientToServerChannel.RequestHighlightContext ? { context: string; id: string; } :
     T extends ClientToServerChannel.RequestLatestCycleData ? {} :
     T extends ClientToServerChannel.RequestCycleData ? { cycleId: number } :
     T extends ClientToServerChannel.SaveCycleData ? { cycleData: PcppCycle } :
@@ -29599,7 +29943,6 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SendFileContent ? { path: string, content: string | null } :
     T extends ServerToClientChannel.SendFileExistence ? { existenceMap: { [path: string]: boolean } } :
     T extends ServerToClientChannel.SendSyntaxHighlight ? { highlightedHtml: string, id: string } :
-    T extends ServerToClientChannel.SendHighlightContext ? { highlightedHtml: string, id: string } :
     T extends ServerToClientChannel.SendLatestCycleData ? { cycleData: PcppCycle; projectScope?: string; } :
     T extends ServerToClientChannel.SendCycleData ? { cycleData: PcppCycle | null, projectScope?: string; } :
     T extends ServerToClientChannel.FilesWritten ? { paths: string[] } :
@@ -30143,6 +30486,92 @@ export function getContext() {
 }
 
 export function deactivate() {}
+</file>
+
+<file path="src/Artifacts/A11.1 DCE - New Regression Case Studies.md">
+# Artifact A11.1: DCE - New Regression Case Studies
+# Date Created: C1
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A separate log for new regression case studies to avoid bloating the original A11 artifact.
+- **Tags:** bugs, regression, troubleshooting, development, best practices
+
+## 1. Purpose
+
+This document serves as a living record of persistent or complex bugs that have recurred during development. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase. This artifact is a supplement to `A11`.
+
+## 2. Case Studies
+
+---
+
+### Case Study 001: PCPP Context Textarea Instability
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx`, `src/client/views/parallel-copilot.view/components/ContextInputs.tsx`
+-   **Cycles Observed:** C1, C2, C3, C167, C174, C1
+-   **Symptom:** The "Cycle Context" and "Ephemeral Context" text fields in the PCPP become unusable when a large amount of text is entered. The cursor becomes misaligned, text selection is inaccurate, and the component is extremely slow, making it impossible to edit content effectively.
+-   **Root Cause Analysis (RCA):** The `NumberedTextarea` component uses a complex overlay approach to render line numbers and syntax highlighting. A `div` with the highlighted content is rendered behind a transparent `<textarea>`. The instability is caused by a combination of:
+    1.  **Performance:** The syntax highlighting is re-calculated on every single keystroke, which is computationally expensive for large blocks of text and causes severe input lag.
+    2.  **Synchronization Failure:** Subtle differences in CSS (`font`, `padding`, `line-height`) and rendering between the overlay `div` and the transparent `textarea` cause a "drift" in alignment as content grows, leading to the cursor and selection bugs.
+-   **Codified Solution & Best Practice:**
+    1.  **Prioritize Stability:** For critical user inputs, stability and performance are more important than advanced features like line numbers or syntax highlighting.
+    2.  **Simplify:** The complex `NumberedTextarea` component was replaced in `ContextInputs.tsx` with a standard, native `<textarea>` element.
+    3.  **Conclusion:** This change guarantees a reliable and performant text input experience. While it represents a temporary removal of features, it fixes a critical usability bug. A more robust implementation of a custom code editor can be planned for a future cycle, but the default should always be a stable, native component.
+
+---
+
+### Case Study 002: FTV Flashing on PCPP Auto-Save
+
+-   **Artifacts Affected:** `src/backend/services/file-tree.service.ts`
+-   **Cycles Observed:** C1, C4, C1
+-   **Symptom:** The entire Data Curation file tree view (FTV) flashes or completely reloads whenever the user stops typing in one of the Parallel Co-Pilot Panel's text areas.
+-   **Root Cause Analysis (RCA):** The PCPP automatically saves its state to `dce_history.json` (located in the `.vscode` directory) after a brief period of inactivity. The backend `FileSystemWatcher` in `file-tree.service.ts` was configured to monitor the entire workspace for changes to trigger a refresh of the FTV. It was incorrectly reacting to the legitimate writes to the history file, treating it as a workspace change that required a full UI refresh. The initial fix was to add `.vscode` to a general exclusion pattern, but this was not specific enough.
+-   **Codified Solution & Best Practice:**
+    1.  **Be Specific in Watcher Exclusions:** The file watcher logic must be highly specific about what it ignores. The fix was to add an explicit check at the beginning of the `onDidCreate` and `onDidChange` handlers to immediately ignore any event related to the exact path of the history file (`.vscode/dce_history.json`).
+    2.  **Example:** `if (normalizedPath.endsWith('.vscode/dce_history.json')) { return; }`. This prevents the watcher from reacting to the extension's own internal state changes while still correctly monitoring user-made changes to the workspace.
+</file>
+
+<file path="dist/Artifacts/A11.1 DCE - New Regression Case Studies.md">
+# Artifact A11.1: DCE - New Regression Case Studies
+# Date Created: C1
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A separate log for new regression case studies to avoid bloating the original A11 artifact.
+- **Tags:** bugs, regression, troubleshooting, development, best practices
+
+## 1. Purpose
+
+This document serves as a living record of persistent or complex bugs that have recurred during development. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase. This artifact is a supplement to `A11`.
+
+## 2. Case Studies
+
+---
+
+### Case Study 001: PCPP Context Textarea Instability
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx`, `src/client/views/parallel-copilot.view/components/ContextInputs.tsx`
+-   **Cycles Observed:** C1, C2, C3, C167, C174, C1
+-   **Symptom:** The "Cycle Context" and "Ephemeral Context" text fields in the PCPP become unusable when a large amount of text is entered. The cursor becomes misaligned, text selection is inaccurate, and the component is extremely slow, making it impossible to edit content effectively.
+-   **Root Cause Analysis (RCA):** The `NumberedTextarea` component uses a complex overlay approach to render line numbers and syntax highlighting. A `div` with the highlighted content is rendered behind a transparent `<textarea>`. The instability is caused by a combination of:
+    1.  **Performance:** The syntax highlighting is re-calculated on every single keystroke, which is computationally expensive for large blocks of text and causes severe input lag.
+    2.  **Synchronization Failure:** Subtle differences in CSS (`font`, `padding`, `line-height`) and rendering between the overlay `div` and the transparent `textarea` cause a "drift" in alignment as content grows, leading to the cursor and selection bugs.
+-   **Codified Solution & Best Practice:**
+    1.  **Prioritize Stability:** For critical user inputs, stability and performance are more important than advanced features like line numbers or syntax highlighting.
+    2.  **Simplify:** The complex `NumberedTextarea` component was replaced in `ContextInputs.tsx` with a standard, native `<textarea>` element.
+    3.  **Conclusion:** This change guarantees a reliable and performant text input experience. While it represents a temporary removal of features, it fixes a critical usability bug. A more robust implementation of a custom code editor can be planned for a future cycle, but the default should always be a stable, native component.
+
+---
+
+### Case Study 002: FTV Flashing on PCPP Auto-Save
+
+-   **Artifacts Affected:** `src/backend/services/file-tree.service.ts`
+-   **Cycles Observed:** C1, C4, C1
+-   **Symptom:** The entire Data Curation file tree view (FTV) flashes or completely reloads whenever the user stops typing in one of the Parallel Co-Pilot Panel's text areas.
+-   **Root Cause Analysis (RCA):** The PCPP automatically saves its state to `dce_history.json` (located in the `.vscode` directory) after a brief period of inactivity. The backend `FileSystemWatcher` in `file-tree.service.ts` was configured to monitor the entire workspace for changes to trigger a refresh of the FTV. It was incorrectly reacting to the legitimate writes to the history file, treating it as a workspace change that required a full UI refresh. The initial fix was to add `.vscode` to a general exclusion pattern, but this was not specific enough.
+-   **Codified Solution & Best Practice:**
+    1.  **Be Specific in Watcher Exclusions:** The file watcher logic must be highly specific about what it ignores. The fix was to add an explicit check at the beginning of the `onDidCreate` and `onDidChange` handlers to immediately ignore any event related to the exact path of the history file (`.vscode/dce_history.json`).
+    2.  **Example:** `if (normalizedPath.endsWith('.vscode/dce_history.json')) { return; }`. This prevents the watcher from reacting to the extension's own internal state changes while still correctly monitoring user-made changes to the workspace.
 </file>
 
 

@@ -53,7 +53,6 @@ export enum ClientToServerChannel {
     RequestFileComparison = "clientToServer.requestFileComparison",
     RequestExportHistory = "clientToServer.requestExportHistory",
     RequestImportHistory = "clientToServer.requestImportHistory",
-    RequestHighlightContext = "clientToServer.requestHighlightContext",
     RequestPromptCostEstimation = "clientToServer.requestPromptCostEstimation",
     RequestPromptCostBreakdown = "clientToServer.requestPromptCostBreakdown",
     RequestGitBaseline = "clientToServer.requestGitBaseline",
@@ -77,7 +76,6 @@ export enum ServerToClientChannel {
     // Phase 2: PCPP
     SendFileExistence = "serverToClient.sendFileExistence",
     SendSyntaxHighlight = "serverToClient.sendSyntaxHighlight",
-    SendHighlightContext = "serverToClient.sendHighlightContext",
     SendLatestCycleData = "serverToClient.sendLatestCycleData",
     SendCycleData = "serverToClient.sendCycleData",
     FilesWritten = "serverToClient.filesWritten",

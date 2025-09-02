@@ -1,4 +1,4 @@
-// Updated on: C179 (Add .vscode to exclusion patterns)
+// Updated on: C2 (Add more explicit logging to file watcher)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -65,6 +65,13 @@ export class FileTreeService {
         this.watcher = vscode.workspace.createFileSystemWatcher('**/*');
         const onFileChange = (uri: vscode.Uri) => {
             const normalizedPath = normalizePath(uri.fsPath);
+            // C2 FIX: Add more explicit logging to diagnose FTV flashing
+            Services.loggerService.log(`[Watcher] File change detected: ${normalizedPath}`);
+            
+            if (normalizedPath.endsWith('.vscode/dce_history.json')) {
+                Services.loggerService.log(`[Watcher] Ignoring change in DCE history file: ${normalizedPath}`);
+                return;
+            }
             if (EXCLUSION_PATTERNS.some(pattern => normalizedPath.includes(`/${pattern}/`) || normalizedPath.endsWith(`/${pattern}`))) {
                 Services.loggerService.log(`[Watcher] Ignoring change in excluded pattern: ${normalizedPath}`);
                 return;
@@ -74,6 +81,11 @@ export class FileTreeService {
 
         this.watcher.onDidCreate(async (uri: vscode.Uri) => {
             const normalizedPath = normalizePath(uri.fsPath);
+            Services.loggerService.log(`[Watcher] File created: ${normalizedPath}`);
+            if (normalizedPath.endsWith('.vscode/dce_history.json')) {
+                Services.loggerService.log(`[Watcher] Ignoring creation of DCE history file: ${normalizedPath}`);
+                return;
+            }
             
             const isNonSelectable = !this._isSelectable(uri.fsPath, vscode.FileType.File);
 

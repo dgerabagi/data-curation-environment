@@ -1,7 +1,6 @@
 // src/client/views/parallel-copilot.view/components/ContextInputs.tsx
-// Updated on: C182 (Set showLineNumbers to false)
+// Updated on: C1 (Replace NumberedTextarea with standard textarea)
 import * as React from 'react';
-import NumberedTextarea from './NumberedTextarea';
 import { formatLargeNumber } from '@/common/utils/formatting';
 
 interface ContextInputsProps {
@@ -11,12 +10,6 @@ interface ContextInputsProps {
     ephemeralContextTokens: number;
     onCycleContextChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
     onEphemeralContextChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-    onContextKeyDown: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
-    cycleContextHeight: number;
-    onCycleContextHeightChange: (height: number) => void;
-    ephemeralContextHeight: number;
-    onEphemeralContextHeightChange: (height: number) => void;
-    currentCycle: number;
     workflowStep: string | null;
 }
 
@@ -27,12 +20,6 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
     ephemeralContextTokens,
     onCycleContextChange,
     onEphemeralContextChange,
-    onContextKeyDown,
-    cycleContextHeight,
-    onCycleContextHeightChange,
-    ephemeralContextHeight,
-    onEphemeralContextHeightChange,
-    currentCycle,
     workflowStep
 }) => {
     return (
@@ -42,16 +29,12 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
                     <span>Cycle Context</span>
                     <span>({formatLargeNumber(cycleContextTokens, 1)} tk)</span>
                 </div>
-                <NumberedTextarea
+                <textarea
+                    className={`context-textarea ${workflowStep === 'awaitingCycleContext' ? 'workflow-highlight' : ''}`}
                     value={cycleContext}
                     onChange={onCycleContextChange}
                     placeholder="Cycle Context (notes for this cycle)..."
-                    onKeyDown={onContextKeyDown}
-                    height={cycleContextHeight}
-                    onHeightChange={onCycleContextHeightChange}
-                    id={`cycle-context-${currentCycle}`}
-                    className={workflowStep === 'awaitingCycleContext' ? 'workflow-highlight' : ''}
-                    showLineNumbers={false}
+                    spellCheck={false}
                 />
             </div>
             <div className="context-input-wrapper">
@@ -59,15 +42,12 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
                     <span>Ephemeral Context</span>
                     <span>({formatLargeNumber(ephemeralContextTokens, 1)} tk)</span>
                 </div>
-                <NumberedTextarea
+                <textarea
+                    className="context-textarea"
                     value={ephemeralContext}
                     onChange={onEphemeralContextChange}
                     placeholder="Ephemeral Context (for this cycle's prompt only)..."
-                    onKeyDown={onContextKeyDown}
-                    height={ephemeralContextHeight}
-                    onHeightChange={onEphemeralContextHeightChange}
-                    id={`ephemeral-context-${currentCycle}`}
-                    showLineNumbers={false}
+                    spellCheck={false}
                 />
             </div>
         </div>
