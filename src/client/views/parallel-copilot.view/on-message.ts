@@ -1,4 +1,4 @@
-// Updated on: C1 (Remove HighlightContext handler)
+// Updated on: C3 (Add HighlightContext handler)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -21,6 +21,10 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestSyntaxHighlight, (data) => {
         highlightingService.handleSyntaxHighlightRequest(data.code, data.lang, data.id, serverIpc);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestHighlightContext, (data) => {
+        highlightingService.handleHighlightContextRequest(data.context, data.id, serverIpc);
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestLatestCycleData, async () => {

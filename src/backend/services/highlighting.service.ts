@@ -1,4 +1,4 @@
-// Updated on: C2 (Remove handleHighlightContextRequest)
+// Updated on: C3 (Add handleHighlightContextRequest)
 import { createStarryNight, common } from '@wooorm/starry-night';
 import sourceTsx from '@wooorm/starry-night/source.tsx';
 import sourceJs from '@wooorm/starry-night/source.js';
@@ -54,6 +54,31 @@ export class HighlightingService {
         } catch (error) {
             Services.loggerService.error(`Starry Night highlighting failed for lang ${lang}: ${error}`);
             serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml: `<pre><code>${code}</code></pre>`, id });
+        }
+    }
+
+    public async handleHighlightContextRequest(context: string, id: string, serverIpc: ServerPostMessageManager) {
+        Services.loggerService.log(`[CONTEXT-HIGHLIGHT] Received request for id: ${id}`);
+        if (!this.starryNight) {
+            Services.loggerService.error('Starry Night not initialized, cannot highlight context.');
+            serverIpc.sendToClient(ServerToClientChannel.SendHighlightContext, { highlightedHtml: context, id });
+            return;
+        }
+
+        const scope = this.starryNight.flagToScope('markdown');
+        if (!scope) {
+            Services.loggerService.warn(`[WARN] No Starry Night scope found for language: markdown`);
+            serverIpc.sendToClient(ServerToClientChannel.SendHighlightContext, { highlightedHtml: context, id });
+            return;
+        }
+        
+        try {
+            const tree = this.starryNight.highlight(context, scope);
+            const hastHtml = toHtml(tree);
+            serverIpc.sendToClient(ServerToClientChannel.SendHighlightContext, { highlightedHtml: hastHtml, id });
+        } catch (error) {
+            Services.loggerService.error(`Starry Night context highlighting failed: ${error}`);
+            serverIpc.sendToClient(ServerToClientChannel.SendHighlightContext, { highlightedHtml: context, id });
         }
     }
 }

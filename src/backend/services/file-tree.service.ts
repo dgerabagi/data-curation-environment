@@ -1,4 +1,4 @@
-// Updated on: C2 (Add more explicit logging to file watcher)
+// Updated on: C3 (Broaden .vscode ignore rule to fix FTV flashing)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -14,7 +14,7 @@ import { ProblemCountsMap } from "@/common/ipc/channels.type";
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
-const EXCLUSION_PATTERNS = ['.git', 'dce_cache', 'out', '.vscode']; 
+const EXCLUSION_PATTERNS = ['.git', 'dce_cache', 'out']; 
 const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/.git/', '/flattened_repo.md', '/prompt.md', '/package-lock.json'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
@@ -65,11 +65,11 @@ export class FileTreeService {
         this.watcher = vscode.workspace.createFileSystemWatcher('**/*');
         const onFileChange = (uri: vscode.Uri) => {
             const normalizedPath = normalizePath(uri.fsPath);
-            // C2 FIX: Add more explicit logging to diagnose FTV flashing
             Services.loggerService.log(`[Watcher] File change detected: ${normalizedPath}`);
             
-            if (normalizedPath.endsWith('.vscode/dce_history.json')) {
-                Services.loggerService.log(`[Watcher] Ignoring change in DCE history file: ${normalizedPath}`);
+            // C3 Fix: Broaden the ignore rule to catch the .vscode directory itself, not just the file inside it.
+            if (normalizedPath.includes('/.vscode/')) {
+                Services.loggerService.log(`[Watcher] Ignoring change within .vscode directory: ${normalizedPath}`);
                 return;
             }
             if (EXCLUSION_PATTERNS.some(pattern => normalizedPath.includes(`/${pattern}/`) || normalizedPath.endsWith(`/${pattern}`))) {
@@ -82,8 +82,8 @@ export class FileTreeService {
         this.watcher.onDidCreate(async (uri: vscode.Uri) => {
             const normalizedPath = normalizePath(uri.fsPath);
             Services.loggerService.log(`[Watcher] File created: ${normalizedPath}`);
-            if (normalizedPath.endsWith('.vscode/dce_history.json')) {
-                Services.loggerService.log(`[Watcher] Ignoring creation of DCE history file: ${normalizedPath}`);
+            if (normalizedPath.includes('/.vscode/')) {
+                Services.loggerService.log(`[Watcher] Ignoring creation within .vscode directory: ${normalizedPath}`);
                 return;
             }
             

@@ -1,15 +1,17 @@
 // src/client/views/parallel-copilot.view/components/ContextInputs.tsx
-// Updated on: C1 (Replace NumberedTextarea with standard textarea)
+// Updated on: C3 (Re-introduce HighlightedTextarea)
 import * as React from 'react';
 import { formatLargeNumber } from '@/common/utils/formatting';
+import HighlightedTextarea from './HighlightedTextarea';
 
 interface ContextInputsProps {
     cycleContext: string;
     ephemeralContext: string;
     cycleContextTokens: number;
     ephemeralContextTokens: number;
-    onCycleContextChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-    onEphemeralContextChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+    onCycleContextChange: (value: string) => void;
+    onEphemeralContextChange: (value: string) => void;
+    onContextKeyDown: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
     workflowStep: string | null;
 }
 
@@ -20,6 +22,7 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
     ephemeralContextTokens,
     onCycleContextChange,
     onEphemeralContextChange,
+    onContextKeyDown,
     workflowStep
 }) => {
     return (
@@ -29,12 +32,13 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
                     <span>Cycle Context</span>
                     <span>({formatLargeNumber(cycleContextTokens, 1)} tk)</span>
                 </div>
-                <textarea
-                    className={`context-textarea ${workflowStep === 'awaitingCycleContext' ? 'workflow-highlight' : ''}`}
-                    value={cycleContext}
+                <HighlightedTextarea
+                    id="cycle-context"
+                    initialValue={cycleContext}
                     onChange={onCycleContextChange}
+                    onKeyDown={onContextKeyDown}
                     placeholder="Cycle Context (notes for this cycle)..."
-                    spellCheck={false}
+                    className={workflowStep === 'awaitingCycleContext' ? 'workflow-highlight' : ''}
                 />
             </div>
             <div className="context-input-wrapper">
@@ -42,12 +46,12 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
                     <span>Ephemeral Context</span>
                     <span>({formatLargeNumber(ephemeralContextTokens, 1)} tk)</span>
                 </div>
-                <textarea
-                    className="context-textarea"
-                    value={ephemeralContext}
+                 <HighlightedTextarea
+                    id="ephemeral-context"
+                    initialValue={ephemeralContext}
                     onChange={onEphemeralContextChange}
+                    onKeyDown={onContextKeyDown}
                     placeholder="Ephemeral Context (for this cycle's prompt only)..."
-                    spellCheck={false}
                 />
             </div>
         </div>
