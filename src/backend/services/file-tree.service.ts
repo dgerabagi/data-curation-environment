@@ -1,4 +1,4 @@
-// Updated on: C3 (Broaden .vscode ignore rule to fix FTV flashing)
+// Updated on: C3 (Add more explicit logging to file watcher)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -14,7 +14,7 @@ import { ProblemCountsMap } from "@/common/ipc/channels.type";
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
-const EXCLUSION_PATTERNS = ['.git', 'dce_cache', 'out']; 
+const EXCLUSION_PATTERNS = ['.git', 'dce_cache', 'out', '.vscode']; 
 const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/.git/', '/flattened_repo.md', '/prompt.md', '/package-lock.json'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
@@ -27,18 +27,26 @@ export class FileTreeService {
     private gitApi?: GitAPI;
     private autoAddQueue: string[] = [];
     private isProcessingAutoAdd = false;
+    private historyFilePath: string | undefined;
+
 
     constructor(gitApi?: GitAPI) {
         this.gitApi = gitApi;
+        const workspaceFolders = vscode.workspace.workspaceFolders;
+        if (workspaceFolders && workspaceFolders.length > 0) {
+            this.historyFilePath = normalizePath(path.join(workspaceFolders[0].uri.fsPath, '.vscode', 'dce_history.json'));
+        }
+
         if (this.gitApi) {
-            this.gitApi.onDidOpenRepository(() => this.triggerFullRefresh());
+            this.gitApi.onDidOpenRepository(() => this.triggerFullRefresh('git repo opened'));
             this.gitApi.repositories.forEach(repo => {
-                repo.state.onDidChange(() => this.triggerFullRefresh());
+                repo.state.onDidChange(() => this.triggerFullRefresh('git state change'));
             });
         }
     }
 
-    private triggerFullRefresh() {
+    private triggerFullRefresh(reason: string) {
+        Services.loggerService.log(`[triggerFullRefresh] Called because: ${reason}`);
         if (this.refreshDebounceTimer) clearTimeout(this.refreshDebounceTimer);
         this.refreshDebounceTimer = setTimeout(() => {
             this.fileTreeCache = null;
@@ -63,27 +71,26 @@ export class FileTreeService {
         if (this.watcher) this.watcher.dispose();
         
         this.watcher = vscode.workspace.createFileSystemWatcher('**/*');
-        const onFileChange = (uri: vscode.Uri) => {
+        const onFileChange = (uri: vscode.Uri, source: string) => {
             const normalizedPath = normalizePath(uri.fsPath);
-            Services.loggerService.log(`[Watcher] File change detected: ${normalizedPath}`);
+            Services.loggerService.log(`[Watcher] File change detected from ${source}: ${normalizedPath}`);
             
-            // C3 Fix: Broaden the ignore rule to catch the .vscode directory itself, not just the file inside it.
-            if (normalizedPath.includes('/.vscode/')) {
-                Services.loggerService.log(`[Watcher] Ignoring change within .vscode directory: ${normalizedPath}`);
+            if (this.historyFilePath && normalizedPath === this.historyFilePath) {
+                Services.loggerService.log(`[Watcher] Ignoring change in DCE history file: ${normalizedPath}`);
                 return;
             }
             if (EXCLUSION_PATTERNS.some(pattern => normalizedPath.includes(`/${pattern}/`) || normalizedPath.endsWith(`/${pattern}`))) {
                 Services.loggerService.log(`[Watcher] Ignoring change in excluded pattern: ${normalizedPath}`);
                 return;
             }
-            this.triggerFullRefresh();
+            this.triggerFullRefresh(`file change: ${path.basename(normalizedPath)}`);
         };
 
         this.watcher.onDidCreate(async (uri: vscode.Uri) => {
             const normalizedPath = normalizePath(uri.fsPath);
             Services.loggerService.log(`[Watcher] File created: ${normalizedPath}`);
-            if (normalizedPath.includes('/.vscode/')) {
-                Services.loggerService.log(`[Watcher] Ignoring creation within .vscode directory: ${normalizedPath}`);
+            if (this.historyFilePath && normalizedPath === this.historyFilePath) {
+                Services.loggerService.log(`[Watcher] Ignoring creation of DCE history file: ${normalizedPath}`);
                 return;
             }
             
@@ -91,7 +98,7 @@ export class FileTreeService {
 
             if (isNonSelectable) {
                 Services.loggerService.log(`[Auto-Add] Ignoring newly created non-selectable file: ${normalizedPath}`);
-                onFileChange(uri);
+                onFileChange(uri, 'onDidCreate');
                 return;
             }
 
@@ -101,10 +108,10 @@ export class FileTreeService {
                 this.autoAddQueue.push(normalizedPath);
                 this.processAutoAddQueue();
             }
-            onFileChange(uri);
+            onFileChange(uri, 'onDidCreate');
         });
-        this.watcher.onDidChange(onFileChange);
-        this.watcher.onDidDelete(onFileChange);
+        this.watcher.onDidChange((uri) => onFileChange(uri, 'onDidChange'));
+        this.watcher.onDidDelete((uri) => onFileChange(uri, 'onDidDelete'));
         vscode.languages.onDidChangeDiagnostics(() => this.triggerDiagnosticsUpdate());
     }
 

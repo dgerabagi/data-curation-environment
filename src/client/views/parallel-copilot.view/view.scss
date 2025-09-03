@@ -1,5 +1,5 @@
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C3 (Add styles for HighlightedTextarea)
+// Updated on: C3 (Add styles for Monaco Editor container)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -30,6 +30,10 @@
     border-radius: 4px;
 }
 
+.context-input-wrapper.workflow-highlight {
+    border-radius: 4px;
+}
+
 
 body {
     padding: 0;
@@ -38,69 +42,6 @@ body {
     color: var(--vscode-editor-foreground);
     background-color: var(--vscode-editor-background);
 }
-
-.highlighted-textarea-wrapper {
-    position: relative;
-    width: 100%;
-    height: 100px; /* Default height */
-    min-height: 50px;
-    resize: vertical;
-    overflow: hidden;
-    background-color: var(--vscode-input-background);
-    border: 1px solid var(--vscode-input-border);
-    border-radius: 2px;
-    font-family: var(--vscode-editor-font-family);
-    font-size: var(--vscode-editor-font-size);
-    line-height: 1.5;
-
-    &:focus-within {
-        outline: 1px solid var(--vscode-focusBorder);
-        border-color: var(--vscode-focusBorder);
-    }
-
-    .highlighted-content, .highlight-textarea {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        padding: 4px;
-        margin: 0;
-        border: none;
-        box-sizing: border-box;
-        font-family: inherit;
-        font-size: inherit;
-        line-height: inherit;
-        white-space: pre-wrap;
-        word-wrap: break-word;
-    }
-
-    .highlighted-content {
-        color: transparent;
-        pointer-events: none;
-        overflow: hidden;
-        z-index: 1;
-
-        code > span {
-            background-color: transparent !important;
-            color: var(--vscode-editor-foreground); // Fallback
-        }
-    }
-
-    .highlight-textarea {
-        background-color: transparent;
-        color: transparent;
-        caret-color: var(--vscode-editor-foreground);
-        resize: none;
-        overflow: auto;
-        z-index: 2;
-        
-        &:focus {
-            outline: none;
-        }
-    }
-}
-
 
 .context-inputs {
     display: flex;
@@ -121,23 +62,10 @@ body {
         }
     }
 
-    .context-textarea {
-        width: 100%;
-        height: 100px; /* Default height */
-        min-height: 50px;
-        resize: vertical;
-        background-color: var(--vscode-input-background);
-        color: var(--vscode-input-foreground);
+    .editor-container {
         border: 1px solid var(--vscode-input-border);
         border-radius: 2px;
-        padding: 4px;
-        font-family: var(--vscode-editor-font-family);
-        font-size: var(--vscode-editor-font-size);
-        line-height: 1.5;
-
-        &:focus {
-            outline: 1px solid var(--vscode-focusBorder);
-        }
+        height: 150px; /* Match editor height */
     }
 }
 

@@ -2,6 +2,7 @@ const path = require('path');
 const CopyPlugin = require("copy-webpack-plugin");
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 /** @type {import('webpack').Configuration} */
 const baseConfig = {
@@ -75,6 +76,14 @@ const webviewConfig = {
                 test: /\.s[ac]ss$/i,
                 use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
             },
+            {
+				test: /\.css$/,
+				use: [MiniCssExtractPlugin.loader, 'css-loader']
+			},
+			{
+				test: /\.ttf$/,
+				type: 'asset/resource'
+			}
         ]
     },
     resolve: {
@@ -86,6 +95,10 @@ const webviewConfig = {
     plugins: [
         new MiniCssExtractPlugin({
             filename: '[name].css'
+        }),
+        new MonacoWebpackPlugin({
+            languages: ['markdown', 'typescript', 'javascript', 'scss', 'css', 'json', 'html', 'xml'],
+            filename: '[name].worker.js'
         }),
         new CopyPlugin({
             patterns: [
