@@ -3,13 +3,12 @@ import * as vscode from "vscode";
 export function getViewHtml({ webview, nonce, scriptUri, styleUris = [] }: { webview: vscode.Webview; nonce: string; scriptUri: string; styleUris?: vscode.Uri[]; }): string {
     const styles = styleUris.map(uri => `<link href="${uri}" rel="stylesheet">`).join('\n');
     
-    // C181: Updated CSP to support Monaco Editor's web workers and fonts.
+    // Reverted CSP to a stricter policy as web workers are no longer needed.
     const csp = `
         default-src 'none';
         style-src ${webview.cspSource} 'unsafe-inline';
         script-src 'nonce-${nonce}';
         font-src ${webview.cspSource};
-        worker-src ${webview.cspSource} blob:;
     `.trim();
 
     return `<!DOCTYPE html>

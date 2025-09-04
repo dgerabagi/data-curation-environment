@@ -1,17 +1,17 @@
 // src/client/views/parallel-copilot.view/components/ContextInputs.tsx
-// Updated on: C181 (Add onMount logging to Editor)
+// Updated on: C183 (Fix implementation to use prism-react-renderer)
 import * as React from 'react';
 import { formatLargeNumber } from '@/common/utils/formatting';
-import Editor from '@monaco-editor/react';
-import { logger } from '@/client/utils/logger';
+import Editor from 'react-simple-code-editor';
+import { Highlight, themes } from 'prism-react-renderer';
 
 interface ContextInputsProps {
     cycleContext: string;
     ephemeralContext: string;
     cycleContextTokens: number;
     ephemeralContextTokens: number;
-    onCycleContextChange: (value: string | undefined) => void;
-    onEphemeralContextChange: (value: string | undefined) => void;
+    onCycleContextChange: (value: string) => void;
+    onEphemeralContextChange: (value: string) => void;
     workflowStep: string | null;
 }
 
@@ -24,17 +24,25 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
     onEphemeralContextChange,
     workflowStep
 }) => {
-    const editorOptions = {
-        minimap: { enabled: true },
-        wordWrap: 'on' as const,
-        lineNumbers: 'on' as const,
-        glyphMargin: false,
-        folding: true,
-        lineDecorationsWidth: 10,
-        lineNumbersMinChars: 3,
-        scrollBeyondLastLine: false,
-        automaticLayout: true,
-    };
+    const highlightWrapper = (code: string) => (
+        <Highlight
+            theme={themes.vsDark}
+            code={code}
+            language="markdown"
+        >
+            {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                <pre className={className} style={{...style, margin: 0, padding: 0, backgroundColor: 'transparent' }}>
+                    {tokens.map((line, i) => (
+                        <div key={i} {...getLineProps({ line })}>
+                            {line.map((token, key) => (
+                                <span key={key} {...getTokenProps({ token })} />
+                            ))}
+                        </div>
+                    ))}
+                </pre>
+            )}
+        </Highlight>
+    );
 
     return (
         <div className="context-inputs">
@@ -43,15 +51,17 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
                     <span>Cycle Context</span>
                     <span>({formatLargeNumber(cycleContextTokens, 1)} tk)</span>
                 </div>
-                <div className="editor-container">
+                <div className="editor-container simple-editor">
                     <Editor
-                        height="150px"
-                        language="markdown"
                         value={cycleContext}
-                        onChange={onCycleContextChange}
-                        theme="vs-dark"
-                        options={editorOptions}
-                        onMount={() => logger.log('Cycle Context Monaco Editor instance mounted successfully.')}
+                        onValueChange={onCycleContextChange}
+                        highlight={highlightWrapper}
+                        padding={10}
+                        style={{
+                            fontFamily: 'var(--vscode-editor-font-family)',
+                            fontSize: 'var(--vscode-editor-font-size)',
+                            lineHeight: '1.5',
+                        }}
                     />
                 </div>
             </div>
@@ -60,15 +70,17 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
                     <span>Ephemeral Context</span>
                     <span>({formatLargeNumber(ephemeralContextTokens, 1)} tk)</span>
                 </div>
-                 <div className="editor-container">
+                 <div className="editor-container simple-editor">
                     <Editor
-                        height="150px"
-                        language="markdown"
                         value={ephemeralContext}
-                        onChange={onEphemeralContextChange}
-                        theme="vs-dark"
-                        options={editorOptions}
-                        onMount={() => logger.log('Ephemeral Context Monaco Editor instance mounted successfully.')}
+                        onValueChange={onEphemeralContextChange}
+                        highlight={highlightWrapper}
+                        padding={10}
+                        style={{
+                            fontFamily: 'var(--vscode-editor-font-family)',
+                            fontSize: 'var(--vscode-editor-font-size)',
+                            lineHeight: '1.5',
+                        }}
                     />
                 </div>
             </div>

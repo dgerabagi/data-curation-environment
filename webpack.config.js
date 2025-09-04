@@ -2,7 +2,6 @@ const path = require('path');
 const CopyPlugin = require("copy-webpack-plugin");
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 /** @type {import('webpack').Configuration} */
 const baseConfig = {
@@ -67,7 +66,6 @@ const webviewConfig = {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].js',
         libraryTarget: 'commonjs2',
-        publicPath: '/', // Important for Monaco workers
     },
     module: {
         ...baseConfig.module,
@@ -77,7 +75,7 @@ const webviewConfig = {
                 test: /\.s[ac]ss$/i,
                 use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
             },
-            {
+			{
 				test: /\.css$/,
 				use: [MiniCssExtractPlugin.loader, 'css-loader']
 			},
@@ -96,12 +94,6 @@ const webviewConfig = {
     plugins: [
         new MiniCssExtractPlugin({
             filename: '[name].css'
-        }),
-        new MonacoWebpackPlugin({
-            languages: ['markdown', 'typescript', 'javascript', 'scss', 'css', 'json', 'html', 'xml'],
-            // Filename for worker scripts. Default is '[name].worker.js'.
-            // The publicPath option specifies the public URL directory of the output files when referenced in a browser.
-            publicPath: 'auto'
         }),
         new CopyPlugin({
             patterns: [

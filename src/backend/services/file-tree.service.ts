@@ -1,4 +1,4 @@
-// Updated on: C3 (Add more explicit logging to file watcher)
+// Updated on: C182 (Add aggressive logging and `dist` exclusion)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -14,7 +14,7 @@ import { ProblemCountsMap } from "@/common/ipc/channels.type";
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
-const EXCLUSION_PATTERNS = ['.git', 'dce_cache', 'out', '.vscode']; 
+const EXCLUSION_PATTERNS = ['.git', 'dce_cache', 'out', '.vscode', 'dist']; 
 const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/.git/', '/flattened_repo.md', '/prompt.md', '/package-lock.json'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
@@ -73,7 +73,8 @@ export class FileTreeService {
         this.watcher = vscode.workspace.createFileSystemWatcher('**/*');
         const onFileChange = (uri: vscode.Uri, source: string) => {
             const normalizedPath = normalizePath(uri.fsPath);
-            Services.loggerService.log(`[Watcher] File change detected from ${source}: ${normalizedPath}`);
+            // AGGRESSIVE LOGGING FOR FTV FLASHING BUG
+            Services.loggerService.warn(`[FTV-FLASH-DEBUG] Watcher event: ${source} on path: ${normalizedPath}`);
             
             if (this.historyFilePath && normalizedPath === this.historyFilePath) {
                 Services.loggerService.log(`[Watcher] Ignoring change in DCE history file: ${normalizedPath}`);
