@@ -66,7 +66,8 @@ const webviewConfig = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].js',
-        libraryTarget: 'commonjs2'
+        libraryTarget: 'commonjs2',
+        publicPath: '/', // Important for Monaco workers
     },
     module: {
         ...baseConfig.module,
@@ -98,13 +99,14 @@ const webviewConfig = {
         }),
         new MonacoWebpackPlugin({
             languages: ['markdown', 'typescript', 'javascript', 'scss', 'css', 'json', 'html', 'xml'],
-            filename: '[name].worker.js'
+            // Filename for worker scripts. Default is '[name].worker.js'.
+            // The publicPath option specifies the public URL directory of the output files when referenced in a browser.
+            publicPath: 'auto'
         }),
         new CopyPlugin({
             patterns: [
                 { from: "public", to: "public" },
                 { from: "node_modules/@wooorm/starry-night/style/both.css", to: "starry-night.css" },
-                // C164 Fix: Copy static artifacts needed by the backend into the dist folder.
                 { from: "src/Artifacts", to: "Artifacts" }
             ],
         }),

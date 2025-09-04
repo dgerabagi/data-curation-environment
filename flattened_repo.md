@@ -1,548 +1,663 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-03T22:15:04.545Z
+  Date Generated: 2025-09-04T02:46:43.337Z
   ---
-  Total Files: 93
-  Approx. Tokens: 102281
+  Total Files: 90
+  Approx. Tokens: 100118
 -->
 
 <!-- Top 10 Text Files by Token Count -->
-1. src\Artifacts\A0. DCE Master Artifact List.md (7247 tokens)
-2. src\Artifacts\A77. DCE - Whitepaper Generation Plan.md (1992 tokens)
-3. src\Artifacts\A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer.md (1847 tokens)
-4. src\Artifacts\A10. DCE - Metadata and Statistics Display.md (1822 tokens)
-5. src\Artifacts\A20. DCE - Phase 1 - Advanced UX & Automation Plan.md (1817 tokens)
-6. src\Artifacts\A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md (1816 tokens)
-7. src\Artifacts\A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements.md (1713 tokens)
-8. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md (1607 tokens)
-9. src\Artifacts\A149. Local LLM Integration Plan.md (1552 tokens)
-10. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md (1517 tokens)
+1. src\Artifacts\A0. DCE Master Artifact List.md (7558 tokens)
+2. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md (2455 tokens)
+3. src\Artifacts\A77. DCE - Whitepaper Generation Plan.md (2202 tokens)
+4. src\Artifacts\A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer.md (1847 tokens)
+5. src\Artifacts\A10. DCE - Metadata and Statistics Display.md (1822 tokens)
+6. src\Artifacts\A20. DCE - Phase 1 - Advanced UX & Automation Plan.md (1817 tokens)
+7. src\Artifacts\A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md (1816 tokens)
+8. src\Artifacts\A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements.md (1713 tokens)
+9. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md (1607 tokens)
+10. src\Artifacts\A149. Local LLM Integration Plan.md (1552 tokens)
 
 <!-- Full File List -->
-1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 428 - Chars: 28987 - Tokens: 7247
+1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 547 - Chars: 30230 - Tokens: 7558
 2. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 3. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
 4. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
-5. src\Artifacts\A4. DCE - Analysis of The-Creator-AI Repo.md - Lines: 56 - Chars: 5722 - Tokens: 1431
-6. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
-7. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
-8. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
-9. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
-10. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
-11. src\Artifacts\A11.1 DCE - New Regression Case Studies.md - Lines: 40 - Chars: 4215 - Tokens: 1054
-12. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5710 - Tokens: 1428
-13. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
-14. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
-15. src\Artifacts\A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md - Lines: 43 - Chars: 7263 - Tokens: 1816
-16. src\Artifacts\A16. DCE - Phase 1 - UI & UX Refinements Plan.md - Lines: 24 - Chars: 4349 - Tokens: 1088
-17. src\Artifacts\A17. DCE - Phase 1 - Advanced Tree View Features.md - Lines: 47 - Chars: 3888 - Tokens: 972
-18. src\Artifacts\A18. DCE - Phase 1 - Active File Sync Feature Plan.md - Lines: 46 - Chars: 4548 - Tokens: 1137
-19. src\Artifacts\A19. DCE - Phase 1 - Double-Click & Quick-Remove Feature Plan.md - Lines: 42 - Chars: 4603 - Tokens: 1151
-20. src\Artifacts\A20. DCE - Phase 1 - Advanced UX & Automation Plan.md - Lines: 47 - Chars: 7268 - Tokens: 1817
-21. src\Artifacts\A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer.md - Lines: 48 - Chars: 7385 - Tokens: 1847
-22. src\Artifacts\A22. DCE - Phase 1 - Search & Filter Feature Plan.md - Lines: 58 - Chars: 3663 - Tokens: 916
-23. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 37 - Chars: 5504 - Tokens: 1376
-24. src\Artifacts\A24. DCE - Selection Paradigm Terminology.md - Lines: 57 - Chars: 3330 - Tokens: 833
-25. src\Artifacts\A25. DCE - Phase 1 - Git & Problems Integration Plan.md - Lines: 61 - Chars: 5871 - Tokens: 1468
-26. src\Artifacts\A26. DCE - Phase 1 - File System Traversal & Caching Strategy.md - Lines: 42 - Chars: 3593 - Tokens: 899
-27. src\Artifacts\A27. DCE - Phase 1 - Undo-Redo Feature Plan.md - Lines: 50 - Chars: 4903 - Tokens: 1226
-28. src\Artifacts\A28. DCE - Packaging and Distribution Guide.md - Lines: 95 - Chars: 4366 - Tokens: 1092
-29. src\Artifacts\A29. DCE - Phase 1 - Binary and Image File Handling Strategy.md - Lines: 81 - Chars: 4217 - Tokens: 1055
-30. src\Artifacts\A30. DCE - Phase 1 - PDF Handling and Virtualization Strategy.md - Lines: 44 - Chars: 4431 - Tokens: 1108
-31. src\Artifacts\A31. DCE - Phase 2 - Multimodal Content Extraction (PDF Images).md - Lines: 44 - Chars: 4035 - Tokens: 1009
-32. src\Artifacts\A32. DCE - Phase 1 - Excel and CSV Handling Strategy.md - Lines: 44 - Chars: 4295 - Tokens: 1074
-33. src\Artifacts\A33. DCE - Phase 1 - Copy-Paste Feature Plan.md - Lines: 42 - Chars: 4456 - Tokens: 1114
-34. src\Artifacts\A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements.md - Lines: 45 - Chars: 6849 - Tokens: 1713
-35. src\Artifacts\A35. DCE - Phase 2 - UI Mockups and Flow.md - Lines: 54 - Chars: 3584 - Tokens: 896
-36. src\Artifacts\A36. DCE - Phase 2 - Technical Implementation Plan.md - Lines: 56 - Chars: 3621 - Tokens: 906
-37. src\Artifacts\A37. DCE - Phase 2 - Cycle Navigator & Knowledge Graph - Vision.md - Lines: 28 - Chars: 3242 - Tokens: 811
-38. src\Artifacts\A38. DCE - Phase 2 - Cycle Navigator - UI Mockup.md - Lines: 69 - Chars: 4621 - Tokens: 1156
-39. src\Artifacts\A39. DCE - Phase 2 - Cycle Navigator - Technical Plan.md - Lines: 84 - Chars: 4595 - Tokens: 1149
-40. src\Artifacts\A40. DCE - Phase 2 - Parallel Co-Pilot - Target File Structure.md - Lines: 66 - Chars: 3659 - Tokens: 915
-41. src\Artifacts\A40.1. DCE - Phase 2 - Competitive Analysis & Feature Ideas.md - Lines: 43 - Chars: 4784 - Tokens: 1196
-42. src\Artifacts\A41. DCE - Phase 2 - API Key Management - Feature Plan.md - Lines: 47 - Chars: 4542 - Tokens: 1136
-43. src\Artifacts\A41.1. DCE - Phase 2 - Advanced Features & Integrations Plan.md - Lines: 44 - Chars: 3946 - Tokens: 987
-44. src\Artifacts\A41.2. DCE - Phase 2 - Feature Ideation & Competitive Analysis.md - Lines: 40 - Chars: 4566 - Tokens: 1142
-45. src\Artifacts\A43. DCE - Phase 2 - Implementation Roadmap.md - Lines: 69 - Chars: 4694 - Tokens: 1174
-46. src\Artifacts\A44. DCE - Phase 1 - Word Document Handling Strategy.md - Lines: 45 - Chars: 4626 - Tokens: 1157
-47. src\Artifacts\A45. DCE - Phase 2 - Pop-out Co-Pilot Window - Feature Plan.md - Lines: 49 - Chars: 4156 - Tokens: 1039
-48. src\Artifacts\A46. DCE - Phase 2 - Paste and Parse Response - Feature Plan.md - Lines: 38 - Chars: 3587 - Tokens: 897
-49. src\Artifacts\A47. DCE - Phase 2 - Prompt Amalgamation Feature Plan.md - Lines: 42 - Chars: 3499 - Tokens: 875
-50. src\Artifacts\A48. DCE - Phase 2 - Advanced Syntax Highlighting Plan.md - Lines: 49 - Chars: 4044 - Tokens: 1011
-51. src\Artifacts\A49. DCE - Phase 2 - File Association & Diffing Plan.md - Lines: 44 - Chars: 4452 - Tokens: 1113
-52. src\Artifacts\A50. DCE - Phase 2 - UI Component Plan (Resizable Panes & Inner Editors).md - Lines: 51 - Chars: 5128 - Tokens: 1282
-53. src\Artifacts\A51. DCE - A-B-C Testing Strategy for UI Bugs.md - Lines: 81 - Chars: 5490 - Tokens: 1373
-54. src\Artifacts\A52. DCE - Interaction Schema Refinement.md - Lines: 66 - Chars: 3444 - Tokens: 861
-55. src\Artifacts\A52.1 DCE - Parser Logic and AI Guidance.md - Lines: 128 - Chars: 5204 - Tokens: 1301
-56. src\Artifacts\A53. DCE - Phase 2 - Token Count and Similarity Analysis.md - Lines: 43 - Chars: 3500 - Tokens: 875
-57. src\Artifacts\A55. DCE - FSService Refactoring Plan.md - Lines: 77 - Chars: 4022 - Tokens: 1006
-58. src\Artifacts\A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md - Lines: 47 - Chars: 5687 - Tokens: 1422
-59. src\Artifacts\A57. DCE - Phase 2 - Cycle Management Plan.md - Lines: 44 - Chars: 3625 - Tokens: 907
-60. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 39 - Chars: 3393 - Tokens: 849
-61. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 35 - Chars: 4175 - Tokens: 1044
-62. src\Artifacts\A61. DCE - Phase 2 - Cycle History Management Plan.md - Lines: 45 - Chars: 3559 - Tokens: 890
-63. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1806 - Tokens: 452
-64. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 47 - Chars: 3537 - Tokens: 885
-65. src\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3347 - Tokens: 837
-66. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 3764 - Tokens: 941
-67. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 60 - Chars: 6426 - Tokens: 1607
-68. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 43 - Chars: 2874 - Tokens: 719
-69. src\Artifacts\A73. DCE - GitService Plan.md - Lines: 44 - Chars: 2548 - Tokens: 637
-70. src\Artifacts\A74. DCE - Per-Input Undo-Redo Feature Plan.md - Lines: 49 - Chars: 3624 - Tokens: 906
-71. src\Artifacts\A75. DCE - Text Area Component A-B-C Test Plan.md - Lines: 50 - Chars: 4761 - Tokens: 1191
-72. src\Artifacts\A76. DCE - Word Wrap Line Numbering Challenges.md - Lines: 61 - Chars: 4895 - Tokens: 1224
-73. src\Artifacts\A77. DCE - Whitepaper Generation Plan.md - Lines: 57 - Chars: 7968 - Tokens: 1992
-74. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
-75. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
-76. src\Artifacts\README.md - Lines: 33 - Chars: 2764 - Tokens: 691
-77. src\Artifacts\T1. Template - Master Artifact List.md - Lines: 36 - Chars: 1716 - Tokens: 429
-78. src\Artifacts\T2. Template - Project Vision and Goals.md - Lines: 38 - Chars: 1968 - Tokens: 492
-79. src\Artifacts\T3. Template - Phase 1 Requirements & Design.md - Lines: 37 - Chars: 1876 - Tokens: 469
-80. src\Artifacts\T4. Template - Technical Scaffolding Plan.md - Lines: 54 - Chars: 2180 - Tokens: 545
-81. src\Artifacts\T5. Template - Target File Structure.md - Lines: 35 - Chars: 1054 - Tokens: 264
-82. src\Artifacts\T6. Template - Initial Scaffolding Deployment Script.md - Lines: 63 - Chars: 2593 - Tokens: 649
-83. src\Artifacts\T7. Template - Development and Testing Guide.md - Lines: 48 - Chars: 1738 - Tokens: 435
-84. src\Artifacts\T8. Template - Regression Case Studies.md - Lines: 31 - Chars: 1971 - Tokens: 493
-85. src\Artifacts\T9. Template - Logging and Debugging Guide.md - Lines: 49 - Chars: 2590 - Tokens: 648
-86. src\Artifacts\T10. Template - Feature Plan Example.md - Lines: 32 - Chars: 2692 - Tokens: 673
-87. src\Artifacts\T11. Template - Implementation Roadmap.md - Lines: 55 - Chars: 2887 - Tokens: 722
-88. src\Artifacts\T12. Template - Competitive Analysis.md - Lines: 42 - Chars: 3227 - Tokens: 807
-89. src\Artifacts\T13. Template - Refactoring Plan.md - Lines: 55 - Chars: 2617 - Tokens: 655
-90. src\Artifacts\T14. Template - GitHub Repository Setup Guide.md - Lines: 110 - Chars: 4902 - Tokens: 1226
-91. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 41 - Chars: 3000 - Tokens: 750
-92. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 97 - Chars: 4047 - Tokens: 1012
-93. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 45 - Chars: 2899 - Tokens: 725
+5. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
+6. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
+7. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
+8. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
+9. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
+10. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
+11. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
+12. src\Artifacts\A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md - Lines: 43 - Chars: 7263 - Tokens: 1816
+13. src\Artifacts\A16. DCE - Phase 1 - UI & UX Refinements Plan.md - Lines: 24 - Chars: 4349 - Tokens: 1088
+14. src\Artifacts\A17. DCE - Phase 1 - Advanced Tree View Features.md - Lines: 47 - Chars: 3888 - Tokens: 972
+15. src\Artifacts\A18. DCE - Phase 1 - Active File Sync Feature Plan.md - Lines: 46 - Chars: 4548 - Tokens: 1137
+16. src\Artifacts\A19. DCE - Phase 1 - Double-Click & Quick-Remove Feature Plan.md - Lines: 42 - Chars: 4603 - Tokens: 1151
+17. src\Artifacts\A20. DCE - Phase 1 - Advanced UX & Automation Plan.md - Lines: 47 - Chars: 7268 - Tokens: 1817
+18. src\Artifacts\A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer.md - Lines: 48 - Chars: 7385 - Tokens: 1847
+19. src\Artifacts\A22. DCE - Phase 1 - Search & Filter Feature Plan.md - Lines: 58 - Chars: 3663 - Tokens: 916
+20. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 37 - Chars: 5504 - Tokens: 1376
+21. src\Artifacts\A24. DCE - Selection Paradigm Terminology.md - Lines: 57 - Chars: 3330 - Tokens: 833
+22. src\Artifacts\A25. DCE - Phase 1 - Git & Problems Integration Plan.md - Lines: 61 - Chars: 5871 - Tokens: 1468
+23. src\Artifacts\A26. DCE - Phase 1 - File System Traversal & Caching Strategy.md - Lines: 42 - Chars: 3593 - Tokens: 899
+24. src\Artifacts\A27. DCE - Phase 1 - Undo-Redo Feature Plan.md - Lines: 50 - Chars: 4903 - Tokens: 1226
+25. src\Artifacts\A28. DCE - Packaging and Distribution Guide.md - Lines: 95 - Chars: 4366 - Tokens: 1092
+26. src\Artifacts\A29. DCE - Phase 1 - Binary and Image File Handling Strategy.md - Lines: 81 - Chars: 4217 - Tokens: 1055
+27. src\Artifacts\A30. DCE - Phase 1 - PDF Handling and Virtualization Strategy.md - Lines: 44 - Chars: 4431 - Tokens: 1108
+28. src\Artifacts\A31. DCE - Phase 2 - Multimodal Content Extraction (PDF Images).md - Lines: 44 - Chars: 4035 - Tokens: 1009
+29. src\Artifacts\A32. DCE - Phase 1 - Excel and CSV Handling Strategy.md - Lines: 44 - Chars: 4295 - Tokens: 1074
+30. src\Artifacts\A33. DCE - Phase 1 - Copy-Paste Feature Plan.md - Lines: 42 - Chars: 4456 - Tokens: 1114
+31. src\Artifacts\A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements.md - Lines: 45 - Chars: 6849 - Tokens: 1713
+32. src\Artifacts\A35. DCE - Phase 2 - UI Mockups and Flow.md - Lines: 54 - Chars: 3584 - Tokens: 896
+33. src\Artifacts\A36. DCE - Phase 2 - Technical Implementation Plan.md - Lines: 56 - Chars: 3621 - Tokens: 906
+34. src\Artifacts\A37. DCE - Phase 2 - Cycle Navigator & Knowledge Graph - Vision.md - Lines: 28 - Chars: 3242 - Tokens: 811
+35. src\Artifacts\A38. DCE - Phase 2 - Cycle Navigator - UI Mockup.md - Lines: 69 - Chars: 4621 - Tokens: 1156
+36. src\Artifacts\A39. DCE - Phase 2 - Cycle Navigator - Technical Plan.md - Lines: 84 - Chars: 4595 - Tokens: 1149
+37. src\Artifacts\A40. DCE - Phase 2 - Parallel Co-Pilot - Target File Structure.md - Lines: 66 - Chars: 3659 - Tokens: 915
+38. src\Artifacts\A40.1. DCE - Phase 2 - Competitive Analysis & Feature Ideas.md - Lines: 43 - Chars: 4784 - Tokens: 1196
+39. src\Artifacts\A41. DCE - Phase 2 - API Key Management - Feature Plan.md - Lines: 47 - Chars: 4542 - Tokens: 1136
+40. src\Artifacts\A41.1. DCE - Phase 2 - Advanced Features & Integrations Plan.md - Lines: 44 - Chars: 3946 - Tokens: 987
+41. src\Artifacts\A41.2. DCE - Phase 2 - Feature Ideation & Competitive Analysis.md - Lines: 40 - Chars: 4566 - Tokens: 1142
+42. src\Artifacts\A43. DCE - Phase 2 - Implementation Roadmap.md - Lines: 69 - Chars: 4694 - Tokens: 1174
+43. src\Artifacts\A44. DCE - Phase 1 - Word Document Handling Strategy.md - Lines: 45 - Chars: 4626 - Tokens: 1157
+44. src\Artifacts\A45. DCE - Phase 2 - Pop-out Co-Pilot Window - Feature Plan.md - Lines: 49 - Chars: 4156 - Tokens: 1039
+45. src\Artifacts\A46. DCE - Phase 2 - Paste and Parse Response - Feature Plan.md - Lines: 38 - Chars: 3587 - Tokens: 897
+46. src\Artifacts\A47. DCE - Phase 2 - Prompt Amalgamation Feature Plan.md - Lines: 42 - Chars: 3499 - Tokens: 875
+47. src\Artifacts\A48. DCE - Phase 2 - Advanced Syntax Highlighting Plan.md - Lines: 49 - Chars: 4044 - Tokens: 1011
+48. src\Artifacts\A49. DCE - Phase 2 - File Association & Diffing Plan.md - Lines: 44 - Chars: 4452 - Tokens: 1113
+49. src\Artifacts\A50. DCE - Phase 2 - UI Component Plan (Resizable Panes & Inner Editors).md - Lines: 51 - Chars: 5128 - Tokens: 1282
+50. src\Artifacts\A51. DCE - A-B-C Testing Strategy for UI Bugs.md - Lines: 81 - Chars: 5490 - Tokens: 1373
+51. src\Artifacts\A52. DCE - Interaction Schema Refinement.md - Lines: 66 - Chars: 3444 - Tokens: 861
+52. src\Artifacts\A52.1 DCE - Parser Logic and AI Guidance.md - Lines: 128 - Chars: 5204 - Tokens: 1301
+53. src\Artifacts\A53. DCE - Phase 2 - Token Count and Similarity Analysis.md - Lines: 43 - Chars: 3500 - Tokens: 875
+54. src\Artifacts\A55. DCE - FSService Refactoring Plan.md - Lines: 77 - Chars: 4022 - Tokens: 1006
+55. src\Artifacts\A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md - Lines: 47 - Chars: 5687 - Tokens: 1422
+56. src\Artifacts\A57. DCE - Phase 2 - Cycle Management Plan.md - Lines: 44 - Chars: 3625 - Tokens: 907
+57. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 39 - Chars: 3393 - Tokens: 849
+58. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 35 - Chars: 4175 - Tokens: 1044
+59. src\Artifacts\A61. DCE - Phase 2 - Cycle History Management Plan.md - Lines: 45 - Chars: 3559 - Tokens: 890
+60. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1806 - Tokens: 452
+61. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 47 - Chars: 3537 - Tokens: 885
+62. src\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3347 - Tokens: 837
+63. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 3764 - Tokens: 941
+64. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 60 - Chars: 6426 - Tokens: 1607
+65. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 43 - Chars: 2874 - Tokens: 719
+66. src\Artifacts\A73. DCE - GitService Plan.md - Lines: 44 - Chars: 2548 - Tokens: 637
+67. src\Artifacts\A74. DCE - Per-Input Undo-Redo Feature Plan.md - Lines: 49 - Chars: 3624 - Tokens: 906
+68. src\Artifacts\A75. DCE - Text Area Component A-B-C Test Plan.md - Lines: 50 - Chars: 4761 - Tokens: 1191
+69. src\Artifacts\A76. DCE - Word Wrap Line Numbering Challenges.md - Lines: 61 - Chars: 4895 - Tokens: 1224
+70. src\Artifacts\A77. DCE - Whitepaper Generation Plan.md - Lines: 75 - Chars: 8806 - Tokens: 2202
+71. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
+72. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
+73. src\Artifacts\README.md - Lines: 33 - Chars: 2764 - Tokens: 691
+74. src\Artifacts\T1. Template - Master Artifact List.md - Lines: 36 - Chars: 1716 - Tokens: 429
+75. src\Artifacts\T2. Template - Project Vision and Goals.md - Lines: 38 - Chars: 1968 - Tokens: 492
+76. src\Artifacts\T3. Template - Phase 1 Requirements & Design.md - Lines: 37 - Chars: 1876 - Tokens: 469
+77. src\Artifacts\T4. Template - Technical Scaffolding Plan.md - Lines: 54 - Chars: 2180 - Tokens: 545
+78. src\Artifacts\T5. Template - Target File Structure.md - Lines: 35 - Chars: 1054 - Tokens: 264
+79. src\Artifacts\T6. Template - Initial Scaffolding Deployment Script.md - Lines: 63 - Chars: 2593 - Tokens: 649
+80. src\Artifacts\T7. Template - Development and Testing Guide.md - Lines: 48 - Chars: 1738 - Tokens: 435
+81. src\Artifacts\T8. Template - Regression Case Studies.md - Lines: 31 - Chars: 1971 - Tokens: 493
+82. src\Artifacts\T9. Template - Logging and Debugging Guide.md - Lines: 49 - Chars: 2590 - Tokens: 648
+83. src\Artifacts\T10. Template - Feature Plan Example.md - Lines: 32 - Chars: 2692 - Tokens: 673
+84. src\Artifacts\T11. Template - Implementation Roadmap.md - Lines: 55 - Chars: 2887 - Tokens: 722
+85. src\Artifacts\T12. Template - Competitive Analysis.md - Lines: 42 - Chars: 3227 - Tokens: 807
+86. src\Artifacts\T13. Template - Refactoring Plan.md - Lines: 55 - Chars: 2617 - Tokens: 655
+87. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 41 - Chars: 3000 - Tokens: 750
+88. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 97 - Chars: 4047 - Tokens: 1012
+89. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 45 - Chars: 2899 - Tokens: 725
+90. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
-# Date Created: C1
-# Author: AI Model & Curator
-# Updated on: C181 (Add A76 for Word Wrap explanation)
 
-## 1. Purpose
+# Date Created: C1
+
+# Author: AI Model & Curator
+
+# Updated on: C182 (Add A78 Whitepaper)
+
+## 1\. Purpose
 
 # This file serves as the definitive, parseable list of all documentation artifacts for the "Data Curation Environment" (DCE) VS Code Extension project.
 
-## 2. Formatting Rules for Parsing
+## 2\. Formatting Rules for Parsing
 
-# *   Lines beginning with `#` are comments and are ignored.
-# *   `##` denotes a major category header and is ignored.
-# *   `###` denotes an artifact entry. The text following it is the artifact's full name and ID.
-# *   Lines beginning with `- **Description:**` provide context for the project.
-# *   Lines beginning with `- **Tags:**` provide keywords for Inference.
+# \*   Lines beginning with `#` are comments and are ignored.
 
-## 3. Artifacts List
+# \*   `##` denotes a major category header and is ignored.
+
+# \*   `###` denotes an artifact entry. The text following it is the artifact's full name and ID.
+
+# \*   Lines beginning with `- **Description:**` provide context for the project.
+
+# \*   Lines beginning with `- **Tags:**` provide keywords for Inference.
+
+## 3\. Artifacts List
 
 ## I. Project Planning & Design
 
 ### A1. DCE - Project Vision and Goals
-- **Description:** High-level overview of the DCE VS Code extension, its purpose, and the three-phase development plan.
-- **Tags:** project vision, goals, scope, phase 1, phase 2, phase 3, vs code extension
+
+  - **Description:** High-level overview of the DCE VS Code extension, its purpose, and the three-phase development plan.
+  - **Tags:** project vision, goals, scope, phase 1, phase 2, phase 3, vs code extension
 
 ### A2. DCE - Phase 1 - Context Chooser - Requirements & Design
-- **Description:** Detailed functional and technical requirements for Phase 1, focusing on the file tree with checkboxes and the flattening functionality.
-- **Tags:** requirements, design, phase 1, context chooser, tree view, checkbox, flatten, vs code api
+
+  - **Description:** Detailed functional and technical requirements for Phase 1, focusing on the file tree with checkboxes and the flattening functionality.
+  - **Tags:** requirements, design, phase 1, context chooser, tree view, checkbox, flatten, vs code api
 
 ### A3. DCE - Technical Scaffolding Plan
-- **Description:** Outlines the proposed file structure, technologies, and key VS Code API components for the extension, based on the `The-Creator-AI-main` reference repo.
-- **Tags:** technical plan, scaffolding, file structure, typescript, vs code extension, api
+
+  - **Description:** Outlines the proposed file structure, technologies, and key VS Code API components for the extension, based on the `The-Creator-AI-main` reference repo.
+  - **Tags:** technical plan, scaffolding, file structure, typescript, vs code extension, api
 
 ### A4. DCE - Analysis of The-Creator-AI Repo
-- **Description:** Provides a detailed analysis of the `The-Creator-AI-main` reference repository, its architecture, and its mapping to the Data Curation Environment project goals.
-- **Tags:** analysis, repository, architecture, vscode-extension, project-planning
+
+  - **Description:** Provides a detailed analysis of the `The-Creator-AI-main` reference repository, its architecture, and its mapping to the Data Curation Environment project goals.
+  - **Tags:** analysis, repository, architecture, vscode-extension, project-planning
 
 ### A5. DCE - Target File Structure
-- **Description:** A text-based representation of the target file structure for the DCE extension, outlining the layout of directories and key files.
-- **Tags:** file structure, architecture, project layout, scaffolding
+
+  - **Description:** A text-based representation of the target file structure for the DCE extension, outlining the layout of directories and key files.
+  - **Tags:** file structure, architecture, project layout, scaffolding
 
 ### A6. DCE - Initial Scaffolding Deployment Script (DEPRECATED)
-- **Description:** (Deprecated) Contains a Node.js script that creates the initial directory structure. This is obsolete as the AI now generates files directly.
-- **Tags:** deployment, script, scaffolding, bootstrap, nodejs, automation, deprecated
+
+  - **Description:** (Deprecated) Contains a Node.js script that creates the initial directory structure. This is obsolete as the AI now generates files directly.
+  - **Tags:** deployment, script, scaffolding, bootstrap, nodejs, automation, deprecated
 
 ### A7. DCE - Development and Testing Guide
-- **Description:** A step-by-step guide explaining how to run, debug, and test the DCE extension within VS Code using the Extension Development Host.
-- **Tags:** development, testing, debugging, workflow, vs code extension, f5
+
+  - **Description:** A step-by-step guide explaining how to run, debug, and test the DCE extension within VS Code using the Extension Development Host.
+  - **Tags:** development, testing, debugging, workflow, vs code extension, f5
 
 ### A8. DCE - Phase 1 - Selection Sets Feature Plan
-- **Description:** A plan outlining the user stories, UI/UX, and technical implementation for saving, loading, and persisting different sets of selected files (selection profiles).
-- **Tags:** feature plan, selection sets, profiles, context management, persistence, phase 1
+
+  - **Description:** A plan outlining the user stories, UI/UX, and technical implementation for saving, loading, and persisting different sets of selected files (selection profiles).
+  - **Tags:** feature plan, selection sets, profiles, context management, persistence, phase 1
 
 ### A9. DCE - GitHub Repository Setup Guide
-- **Description:** A step-by-step guide with the necessary git commands to initialize the project as a local repository and push it to a new remote repository on GitHub.
-- **Tags:** git, github, version control, setup, repository
+
+  - **Description:** A step-by-step guide with the necessary git commands to initialize the project as a local repository and push it to a new remote repository on GitHub.
+  - **Tags:** git, github, version control, setup, repository
 
 ### A10. DCE - Metadata and Statistics Display
-- **Description:** Outlines the requirements and design for displaying live metadata (total selected files, total tokens) and for showing aggregate statistics (token and file counts) for folders in the file tree.
-- **Tags:** feature plan, metadata, statistics, token count, ui, ux
+
+  - **Description:** Outlines the requirements and design for displaying live metadata (total selected files, total tokens) and for showing aggregate statistics (token and file counts) for folders in the file tree.
+  - **Tags:** feature plan, metadata, statistics, token count, ui, ux
 
 ### A11. DCE - Regression Case Studies
-- **Description:** Documents recurring bugs, their root causes, and codified solutions to prevent future regressions during development.
-- **Tags:** bugs, regression, troubleshooting, development, best practices
+
+  - **Description:** Documents recurring bugs, their root causes, and codified solutions to prevent future regressions during development.
+  - **Tags:** bugs, regression, troubleshooting, development, best practices
 
 ### A11.1 DCE - New Regression Case Studies
-- **Description:** A separate log for new regression case studies to avoid bloating the original A11 artifact.
-- **Tags:** bugs, regression, troubleshooting, development, best practices
+
+  - **Description:** A separate log for new regression case studies to avoid bloating the original A11 artifact.
+  - **Tags:** bugs, regression, troubleshooting, development, best practices
 
 ### A12. DCE - Logging and Debugging Guide
-- **Description:** Explains how to access and use the integrated logging solution for debugging the extension's backend and frontend components.
-- **Tags:** logging, debugging, troubleshooting, development, output channel
+
+  - **Description:** Explains how to access and use the integrated logging solution for debugging the extension's backend and frontend components.
+  - **Tags:** logging, debugging, troubleshooting, development, output channel
 
 ### A13. DCE - Phase 1 - Right-Click Context Menu
-- **Description:** A plan for implementing standard file explorer context menu actions (e.g., Rename, Delete, Copy Path) in the custom file tree.
-- **Tags:** feature plan, context menu, right-click, file operations, ux, phase 1
+
+  - **Description:** A plan for implementing standard file explorer context menu actions (e.g., Rename, Delete, Copy Path) in the custom file tree.
+  - **Tags:** feature plan, context menu, right-click, file operations, ux, phase 1
 
 ### A14. DCE - Ongoing Development Issues
-- **Description:** A tracking document for recurring or persistent issues that need to be monitored across development cycles until they are confirmed as resolved.
-- **Tags:** bugs, tracking, issues, logging, node_modules, performance
+
+  - **Description:** A tracking document for recurring or persistent issues that need to be monitored across development cycles until they are confirmed as resolved.
+  - **Tags:** bugs, tracking, issues, logging, node\_modules, performance
 
 ### A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan
-- **Description:** Details the requirements for multi-selection (click, Ctrl, Shift) in both the main file tree and the "Selected Items" panel, and multi-level column sorting.
-- **Tags:** feature plan, multi-select, sorting, list view, ux, phase 1
+
+  - **Description:** Details the requirements for multi-selection (click, Ctrl, Shift) in both the main file tree and the "Selected Items" panel, and multi-level column sorting.
+  - **Tags:** feature plan, multi-select, sorting, list view, ux, phase 1
 
 ### A16. DCE - Phase 1 - UI & UX Refinements Plan
-- **Description:** Covers visual and usability improvements like fixing panel layouts, resolving overflow bugs, adding loading indicators, and improving scrollbar visibility.
-- **Tags:** feature plan, ui, ux, layout, bug fix, loading indicator, phase 1
+
+  - **Description:** Covers visual and usability improvements like fixing panel layouts, resolving overflow bugs, adding loading indicators, and improving scrollbar visibility.
+  - **Tags:** feature plan, ui, ux, layout, bug fix, loading indicator, phase 1
 
 ### A17. DCE - Phase 1 - Advanced Tree View Features
-- **Description:** Outlines the plan for advanced tree view interactions, specifically the implementation of scrollable, self-contained views for large, expanded folders.
-- **Tags:** feature plan, tree view, ux, scrollable, phase 1
+
+  - **Description:** Outlines the plan for advanced tree view interactions, specifically the implementation of scrollable, self-contained views for large, expanded folders.
+  - **Tags:** feature plan, tree view, ux, scrollable, phase 1
 
 ### A18. DCE - Phase 1 - Active File Sync Feature Plan
-- **Description:** Details the requirements and implementation for automatically revealing and highlighting the active editor's file in the custom Data Curation file tree.
-- **Tags:** feature plan, active file, sync, reveal, tree view, ux, phase 1
+
+  - **Description:** Details the requirements and implementation for automatically revealing and highlighting the active editor's file in the custom Data Curation file tree.
+  - **Tags:** feature plan, active file, sync, reveal, tree view, ux, phase 1
 
 ### A19. DCE - Phase 1 - File Interaction Plan (Click & Remove)
-- **Description:** Details the requirements for opening files by single-clicking them and quickly removing single files from the selection list via a mouse-over action.
-- **Tags:** feature plan, single-click, open file, quick remove, ux, phase 1
+
+  - **Description:** Details the requirements for opening files by single-clicking them and quickly removing single files from the selection list via a mouse-over action.
+  - **Tags:** feature plan, single-click, open file, quick remove, ux, phase 1
 
 ### A20. DCE - Phase 1 - Advanced UX & Automation Plan
-- **Description:** Details plans for several UX enhancements, including auto-revealing the flattened file, showing selected counts in folder stats, and providing an option to auto-add new files to the selection.
-- **Tags:** feature plan, ux, automation, reveal, statistics, auto-add, phase 1
+
+  - **Description:** Details plans for several UX enhancements, including auto-revealing the flattened file, showing selected counts in folder stats, and providing an option to auto-add new files to the selection.
+  - **Tags:** feature plan, ux, automation, reveal, statistics, auto-add, phase 1
 
 ### A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer
-- **Description:** A comparative analysis documenting the functional and behavioral differences between the DCE custom file view and the native VS Code Explorer to guide future development and feature parity.
-- **Tags:** feature plan, analysis, drift, ux, vs code explorer, parity
+
+  - **Description:** A comparative analysis documenting the functional and behavioral differences between the DCE custom file view and the native VS Code Explorer to guide future development and feature parity.
+  - **Tags:** feature plan, analysis, drift, ux, vs code explorer, parity
 
 ### A22. DCE - Phase 1 - Search & Filter Feature Plan
-- **Description:** Outlines the requirements and implementation for a search bar to filter the main file tree view by file or folder name.
-- **Tags:** feature plan, search, filter, tree view, ux, phase 1
+
+  - **Description:** Outlines the requirements and implementation for a search bar to filter the main file tree view by file or folder name.
+  - **Tags:** feature plan, search, filter, tree view, ux, phase 1
 
 ### A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan
-- **Description:** Details the requirements for implementing full keyboard navigation and drag-and-drop file/folder operations within the main file tree.
-- **Tags:** feature plan, keyboard navigation, drag and drop, file operations, accessibility, ux, phase 1
+
+  - **Description:** Details the requirements for implementing full keyboard navigation and drag-and-drop file/folder operations within the main file tree.
+  - **Tags:** feature plan, keyboard navigation, drag and drop, file operations, accessibility, ux, phase 1
 
 ### A24. DCE - Selection Paradigm Terminology
-- **Description:** A document to clarify the terminology used within the project to distinguish between different types of user selections (e.g., "checking" for flattening vs. "selecting" for actions).
-- **Tags:** documentation, terminology, selection, checking, design
+
+  - **Description:** A document to clarify the terminology used within the project to distinguish between different types of user selections (e.g., "checking" for flattening vs. "selecting" for actions).
+  - **Tags:** documentation, terminology, selection, checking, design
 
 ### A25. DCE - Phase 1 - Git & Problems Integration Plan
-- **Description:** Outlines the user stories and technical approach for integrating Git status indicators and VS Code Problem Diagnostics into the custom file tree.
-- **Tags:** feature plan, git, problems, diagnostics, ux, phase 1
+
+  - **Description:** Outlines the user stories and technical approach for integrating Git status indicators and VS Code Problem Diagnostics into the custom file tree.
+  - **Tags:** feature plan, git, problems, diagnostics, ux, phase 1
 
 ### A26. DCE - Phase 1 - File System Traversal & Caching Strategy
-- **Description:** Documents the root cause of the folder visibility bug and outlines the new strategy of using recursive directory traversal instead of `findFiles` to build a complete and accurate file system map.
-- **Tags:** bug fix, file system, traversal, refresh, cache, architecture
+
+  - **Description:** Documents the root cause of the folder visibility bug and outlines the new strategy of using recursive directory traversal instead of `findFiles` to build a complete and accurate file system map.
+  - **Tags:** bug fix, file system, traversal, refresh, cache, architecture
 
 ### A27. DCE - Phase 1 - Undo-Redo Feature Plan
-- **Description:** Details the requirements for implementing an undo/redo stack for file system operations (move, delete) performed within the DCE view, to achieve parity with the native explorer's Ctrl+Z functionality.
-- **Tags:** feature plan, undo, redo, ctrl+z, file operations, ux, phase 1
+
+  - **Description:** Details the requirements for implementing an undo/redo stack for file system operations (move, delete) performed within the DCE view, to achieve parity with the native explorer's Ctrl+Z functionality.
+  - **Tags:** feature plan, undo, redo, ctrl+z, file operations, ux, phase 1
 
 ### A28. DCE - Packaging and Distribution Guide
-- **Description:** Provides a step-by-step guide on how to package the extension into a `.vsix` file for beta testing and distribution.
-- **Tags:** packaging, distribution, vsix, vsce, deployment
+
+  - **Description:** Provides a step-by-step guide on how to package the extension into a `.vsix` file for beta testing and distribution.
+  - **Tags:** packaging, distribution, vsix, vsce, deployment
 
 ### A29. DCE - Phase 1 - Binary and Image File Handling Strategy
-- **Description:** Defines the strategy for handling binary files; they can be checked, but only their metadata (path, size) is included in the flattened output, not their content.
-- **Tags:** feature plan, binary, image, metadata, flatten, phase 1
+
+  - **Description:** Defines the strategy for handling binary files; they can be checked, but only their metadata (path, size) is included in the flattened output, not their content.
+  - **Tags:** feature plan, binary, image, metadata, flatten, phase 1
 
 ### A30. DCE - Phase 1 - PDF Handling and Virtualization Strategy
-- **Description:** Defines the strategy for handling PDF files. Text is extracted on-demand and cached in memory for flattening, creating a "virtual" markdown file without modifying the user's workspace.
-- **Tags:** feature plan, pdf, text extraction, virtualization, cache, phase 1
+
+  - **Description:** Defines the strategy for handling PDF files. Text is extracted on-demand and cached in memory for flattening, creating a "virtual" markdown file without modifying the user's workspace.
+  - **Tags:** feature plan, pdf, text extraction, virtualization, cache, phase 1
 
 ### A31. DCE - Phase 2 - Multimodal Content Extraction (PDF Images)
-- **Description:** A plan for a future feature to extract images from PDF files and use a multimodal LLM to generate rich, textual descriptions for inclusion in the context.
-- **Tags:** feature plan, multimodal, image to text, pdf, llm, phase 2
+
+  - **Description:** A plan for a future feature to extract images from PDF files and use a multimodal LLM to generate rich, textual descriptions for inclusion in the context.
+  - **Tags:** feature plan, multimodal, image to text, pdf, llm, phase 2
 
 ### A32. DCE - Phase 1 - Excel and CSV Handling Strategy
-- **Description:** Defines the strategy for handling tabular data files (.xlsx, .xls, .csv) by converting them to Markdown tables on-demand and caching them in memory for flattening.
-- **Tags:** feature plan, excel, csv, text extraction, virtualization, cache, phase 1
+
+  - **Description:** Defines the strategy for handling tabular data files (.xlsx, .xls, .csv) by converting them to Markdown tables on-demand and caching them in memory for flattening.
+  - **Tags:** feature plan, excel, csv, text extraction, virtualization, cache, phase 1
 
 ### A33. DCE - Phase 1 - Copy-Paste Feature Plan
-- **Description:** Details the requirements and implementation for copying and pasting files and folders within the DCE file tree using standard keyboard shortcuts (Ctrl+C, Ctrl+V).
-- **Tags:** feature plan, copy, paste, file operations, keyboard shortcuts, ux, phase 1
+
+  - **Description:** Details the requirements and implementation for copying and pasting files and folders within the DCE file tree using standard keyboard shortcuts (Ctrl+C, Ctrl+V).
+  - **Tags:** feature plan, copy, paste, file operations, keyboard shortcuts, ux, phase 1
 
 ### A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements
-- **Description:** Outlines the high-level vision and user stories for the Phase 2 multi-tabbed editor panel, designed for comparing and managing multiple AI-generated responses.
-- **Tags:** feature plan, phase 2, co-pilot, multi-tab, ui, ux, requirements
+
+  - **Description:** Outlines the high-level vision and user stories for the Phase 2 multi-tabbed editor panel, designed for comparing and managing multiple AI-generated responses.
+  - **Tags:** feature plan, phase 2, co-pilot, multi-tab, ui, ux, requirements
 
 ### A35. DCE - Phase 2 - UI Mockups and Flow
-- **Description:** Provides a detailed textual description and flow diagram for the user interface of the Parallel Co-Pilot Panel, including tab management and the "swap" interaction.
-- **Tags:** feature plan, phase 2, ui, ux, mockup, workflow
+
+  - **Description:** Provides a detailed textual description and flow diagram for the user interface of the Parallel Co-Pilot Panel, including tab management and the "swap" interaction.
+  - **Tags:** feature plan, phase 2, ui, ux, mockup, workflow
 
 ### A36. DCE - Phase 2 - Technical Implementation Plan
-- **Description:** Details the technical approach for building the Parallel Co-Pilot Panel, including the new webview provider, state management, IPC channels, and backend logic for file content swapping.
-- **Tags:** feature plan, phase 2, technical plan, architecture, webview, ipc
+
+  - **Description:** Details the technical approach for building the Parallel Co-Pilot Panel, including the new webview provider, state management, IPC channels, and backend logic for file content swapping.
+  - **Tags:** feature plan, phase 2, technical plan, architecture, webview, ipc
 
 ### A37. DCE - Phase 2 - Cycle Navigator & Knowledge Graph - Vision
-- **Description:** Outlines the vision for a cycle-based navigation system to browse the history of AI-generated responses and project states, creating a navigable knowledge graph.
-- **Tags:** feature plan, phase 2, knowledge graph, history, cycle navigator, ui, ux
+
+  - **Description:** Outlines the vision for a cycle-based navigation system to browse the history of AI-generated responses and project states, creating a navigable knowledge graph.
+  - **Tags:** feature plan, phase 2, knowledge graph, history, cycle navigator, ui, ux
 
 ### A38. DCE - Phase 2 - Cycle Navigator - UI Mockup
-- **Description:** Provides a textual mockup and interaction flow for the Cycle Navigator UI, including the cycle counter and navigation controls within the Parallel Co-Pilot Panel.
-- **Tags:** feature plan, phase 2, ui, ux, mockup, workflow, cycle navigator
+
+  - **Description:** Provides a textual mockup and interaction flow for the Cycle Navigator UI, including the cycle counter and navigation controls within the Parallel Co-Pilot Panel.
+  - **Tags:** feature plan, phase 2, ui, ux, mockup, workflow, cycle navigator
 
 ### A39. DCE - Phase 2 - Cycle Navigator - Technical Plan
-- **Description:** Details the technical approach for implementing the Cycle Navigator, including data structures for storing cycle-specific responses and the state management for historical navigation.
-- **Tags:** feature plan, phase 2, technical plan, architecture, state management, data model
+
+  - **Description:** Details the technical approach for implementing the Cycle Navigator, including data structures for storing cycle-specific responses and the state management for historical navigation.
+  - **Tags:** feature plan, phase 2, technical plan, architecture, state management, data model
 
 ### A40. DCE - Phase 2 - Parallel Co-Pilot - Target File Structure
-- **Description:** A text-based representation of the target file structure for the new Phase 2 Parallel Co-Pilot panel, outlining the layout of new directories and key files.
-- **Tags:** file structure, architecture, project layout, scaffolding, phase 2
+
+  - **Description:** A text-based representation of the target file structure for the new Phase 2 Parallel Co-Pilot panel, outlining the layout of new directories and key files.
+  - **Tags:** file structure, architecture, project layout, scaffolding, phase 2
 
 ### A40.1. DCE - Phase 2 - Competitive Analysis & Feature Ideas
-- **Description:** An analysis of existing tools and extensions for managing multiple AI responses, with a list of potential features to incorporate into the Parallel Co-Pilot panel.
-- **Tags:** feature plan, phase 2, research, competitive analysis, co-pilot
+
+  - **Description:** An analysis of existing tools and extensions for managing multiple AI responses, with a list of potential features to incorporate into the Parallel Co-Pilot panel.
+  - **Tags:** feature plan, phase 2, research, competitive analysis, co-pilot
 
 ### A41. DCE - Phase 2 - API Key Management - Feature Plan
-- **Description:** Outlines the user stories and technical plan for a settings UI where users can securely input and manage their API keys for various LLM services.
-- **Tags:** feature plan, phase 2, settings, api key, configuration, security
+
+  - **Description:** Outlines the user stories and technical plan for a settings UI where users can securely input and manage their API keys for various LLM services.
+  - **Tags:** feature plan, phase 2, settings, api key, configuration, security
 
 ### A41.1. DCE - Phase 2 - Advanced Features & Integrations Plan
-- **Description:** Explores future enhancements for the Parallel Co-Pilot, such as applying AI responses as diff patches and integrating with Git for direct commits.
-- **Tags:** feature plan, phase 2, ideation, diff, patch, git, workflow
+
+  - **Description:** Explores future enhancements for the Parallel Co-Pilot, such as applying AI responses as diff patches and integrating with Git for direct commits.
+  - **Tags:** feature plan, phase 2, ideation, diff, patch, git, workflow
 
 ### A41.2. DCE - Phase 2 - Feature Ideation & Competitive Analysis
-- **Description:** An analysis of similar AI coding assistant tools (e.g., Cursor.sh, Copilot Chat) and a brainstorm of potential advanced features for the Parallel Co-Pilot panel.
-- **Tags:** feature plan, phase 2, research, competitive analysis, ideation, roadmap
+
+  - **Description:** An analysis of similar AI coding assistant tools (e.g., Cursor.sh, Copilot Chat) and a brainstorm of potential advanced features for the Parallel Co-Pilot panel.
+  - **Tags:** feature plan, phase 2, research, competitive analysis, ideation, roadmap
 
 ### A42. DCE - Phase 2 - Initial Scaffolding Deployment Script
-- **Description:** Contains a Node.js script that, when executed, creates the file and directory structure for the Phase 2 Parallel Co-Pilot panel.
-- **Tags:** deployment, script, scaffolding, bootstrap, nodejs, automation, phase 2
+
+  - **Description:** Contains a Node.js script that, when executed, creates the file and directory structure for the Phase 2 Parallel Co-Pilot panel.
+  - **Tags:** deployment, script, scaffolding, bootstrap, nodejs, automation, phase 2
 
 ### A43. DCE - Phase 2 - Implementation Roadmap
-- **Description:** Provides a step-by-step implementation plan for building the Phase 2 features, including the Parallel Co-Pilot panel and the integrated Diff Tool.
-- **Tags:** feature plan, phase 2, roadmap, project plan, diff tool
+
+  - **Description:** Provides a step-by-step implementation plan for building the Phase 2 features, including the Parallel Co-Pilot panel and the integrated Diff Tool.
+  - **Tags:** feature plan, phase 2, roadmap, project plan, diff tool
 
 ### A44. DCE - Phase 1 - Word Document Handling Strategy
-- **Description:** Defines the strategy for handling Word document files (.docx) by converting them to text on-demand and caching them in memory for flattening.
-- **Tags:** feature plan, docx, text extraction, virtualization, cache, phase 1
+
+  - **Description:** Defines the strategy for handling Word document files (.docx) by converting them to text on-demand and caching them in memory for flattening.
+  - **Tags:** feature plan, docx, text extraction, virtualization, cache, phase 1
 
 ### A45. DCE - Phase 2 - Pop-out Co-Pilot Window - Feature Plan
-- **Description:** Outlines the technical strategy to allow the Parallel Co-Pilot panel to be "popped out" into a separate window by re-implementing it as a main editor WebviewPanel.
-- **Tags:** feature plan, phase 2, pop-out, window, webview, ux
+
+  - **Description:** Outlines the technical strategy to allow the Parallel Co-Pilot panel to be "popped out" into a separate window by re-implementing it as a main editor WebviewPanel.
+  - **Tags:** feature plan, phase 2, pop-out, window, webview, ux
 
 ### A46. DCE - Phase 2 - Paste and Parse Response - Feature Plan
-- **Description:** Details the plan for allowing users to paste a full AI response into a tab, which the extension will then parse to identify file paths referenced within XML tags.
-- **Tags:** feature plan, phase 2, paste, parse, workflow, automation
+
+  - **Description:** Details the plan for allowing users to paste a full AI response into a tab, which the extension will then parse to identify file paths referenced within XML tags.
+  - **Tags:** feature plan, phase 2, paste, parse, workflow, automation
 
 ### A48. DCE - Phase 2 - Advanced Syntax Highlighting Plan
-- **Description:** Outlines the strategy to replace the plain textarea in response tabs with a proper code editor component to provide rich syntax highlighting for Markdown and embedded code.
-- **Tags:** feature plan, phase 2, ui, ux, syntax highlighting, monaco, codemirror
+
+  - **Description:** Outlines the strategy to replace the plain textarea in response tabs with a proper code editor component to provide rich syntax highlighting for Markdown and embedded code.
+  - **Tags:** feature plan, phase 2, ui, ux, syntax highlighting, monaco, codemirror
 
 ### A49. DCE - Phase 2 - File Association & Diffing Plan
-- **Description:** Plans the UI and backend logic to visually link file blocks in an AI response to workspace files and sets the stage for an integrated diff tool.
-- **Tags:** feature plan, phase 2, ui, ux, diff, file association
+
+  - **Description:** Plans the UI and backend logic to visually link file blocks in an AI response to workspace files and sets the stage for an integrated diff tool.
+  - **Tags:** feature plan, phase 2, ui, ux, diff, file association
 
 ### A50. DCE - Phase 2 - UI Component Plan (Resizable Panes & Inner Editors)
-- **Description:** Documents the plan for advanced UI components like resizable panes and nested, scrollable editors within the Parallel Co-Pilot panel.
-- **Tags:** feature plan, phase 2, ui, ux, resizable, scrollable, editor
+
+  - **Description:** Documents the plan for advanced UI components like resizable panes and nested, scrollable editors within the Parallel Co-Pilot panel.
+  - **Tags:** feature plan, phase 2, ui, ux, resizable, scrollable, editor
 
 ### A51. DCE - A-B-C Testing Strategy for UI Bugs
-- **Description:** Outlines a development pattern for creating parallel, isolated test components to diagnose and resolve persistent UI bugs, such as event handling or rendering issues.
-- **Tags:** process, debugging, troubleshooting, ui, ux, react
+
+  - **Description:** Outlines a development pattern for creating parallel, isolated test components to diagnose and resolve persistent UI bugs, such as event handling or rendering issues.
+  - **Tags:** process, debugging, troubleshooting, ui, ux, react
 
 ### A52. DCE - Interaction Schema Refinement
-- **Description:** Proposes a set of refined rules for the AI's output format to improve the reliability and consistency of automated parsing within the Parallel Co-Pilot Panel.
-- **Tags:** documentation, process, parsing, interaction schema, roadmap
+
+  - **Description:** Proposes a set of refined rules for the AI's output format to improve the reliability and consistency of automated parsing within the Parallel Co-Pilot Panel.
+  - **Tags:** documentation, process, parsing, interaction schema, roadmap
 
 ### A52.1 DCE - Parser Logic and AI Guidance
-- **Description:** Provides the literal source code for the response parser and explicit instructions to the AI on how to format its output to ensure successful parsing.
-- **Tags:** documentation, process, parsing, metainterpretability, source of truth
+
+  - **Description:** Provides the literal source code for the response parser and explicit instructions to the AI on how to format its output to ensure successful parsing.
+  - **Tags:** documentation, process, parsing, metainterpretability, source of truth
 
 ### A52.2 DCE - Interaction Schema Source
-- **Description:** The canonical source text for the M3. Interaction Schema, which is injected into all generated prompts.
-- **Tags:** documentation, process, interaction schema, source of truth
+
+  - **Description:** The canonical source text for the M3. Interaction Schema, which is injected into all generated prompts.
+  - **Tags:** documentation, process, interaction schema, source of truth
 
 ### A53. DCE - Phase 2 - Token Count and Similarity Analysis
-- **Description:** Details the plan to implement token counting for raw and parsed responses, and to calculate a similarity score between AI-generated files and their workspace originals.
-- **Tags:** feature plan, phase 2, token count, similarity, metrics, ui, ux
+
+  - **Description:** Details the plan to implement token counting for raw and parsed responses, and to calculate a similarity score between AI-generated files and their workspace originals.
+  - **Tags:** feature plan, phase 2, token count, similarity, metrics, ui, ux
 
 ### A54. starry-night Readme
-- **Description:** A copy of the readme.md file for the `@wooorm/starry-night` syntax highlighting library, providing a reference for available languages and API usage.
-- **Tags:** documentation, library, syntax highlighting, starry-night
+
+  - **Description:** A copy of the readme.md file for the `@wooorm/starry-night` syntax highlighting library, providing a reference for available languages and API usage.
+  - **Tags:** documentation, library, syntax highlighting, starry-night
 
 ### A55. DCE - FSService Refactoring Plan
-- **Description:** Outlines a strategic plan to refactor the monolithic `FSService` into smaller, more focused services to improve modularity, maintainability, and reduce token count.
-- **Tags:** refactor, architecture, technical debt, services
+
+  - **Description:** Outlines a strategic plan to refactor the monolithic `FSService` into smaller, more focused services to improve modularity, maintainability, and reduce token count.
+  - **Tags:** refactor, architecture, technical debt, services
 
 ### A56. DCE - Phase 2 - Advanced Diff Viewer Plan
-- **Description:** Details the plan to enhance the integrated diff viewer with background coloring for changes and WinMerge-like navigation controls to jump between differences.
-- **Tags:** feature plan, phase 2, ui, ux, diff, navigation, side-by-side
+
+  - **Description:** Details the plan to enhance the integrated diff viewer with background coloring for changes and WinMerge-like navigation controls to jump between differences.
+  - **Tags:** feature plan, phase 2, ui, ux, diff, navigation, side-by-side
 
 ### A57. DCE - Phase 2 - Cycle Management Features
-- **Description:** Details the plan for adding critical cycle management features to the Parallel Co-Pilot panel, including deleting the current cycle and resetting the entire history.
-- **Tags:** feature plan, phase 2, ui, ux, history, cycle management
+
+  - **Description:** Details the plan for adding critical cycle management features to the Parallel Co-Pilot panel, including deleting the current cycle and resetting the entire history.
+  - **Tags:** feature plan, phase 2, ui, ux, history, cycle management
 
 ### A58. DCE - WinMerge Source Code Analysis
-- **Description:** Documents the key files and concepts from the WinMerge source code that are relevant to building a high-quality diff viewer.
-- **Tags:** research, analysis, diff, winmerge, source code
+
+  - **Description:** Documents the key files and concepts from the WinMerge source code that are relevant to building a high-quality diff viewer.
+  - **Tags:** research, analysis, diff, winmerge, source code
 
 ### A59. DCE - Phase 2 - Debugging and State Logging
-- **Description:** Documents the plan for a "Log State" button that outputs critical state information (cycle history, current inputs) to the debug channel to accelerate troubleshooting.
-- **Tags:** feature plan, phase 2, ui, ux, debugging, logging, state management
+
+  - **Description:** Documents the plan for a "Log State" button that outputs critical state information (cycle history, current inputs) to the debug channel to accelerate troubleshooting.
+  - **Tags:** feature plan, phase 2, ui, ux, debugging, logging, state management
 
 ### A60. DCE - Phase 2 - Cycle 0 Onboarding Experience
-- **Description:** Documents the plan for a special "Cycle 0" mode to guide new users in setting up their project by generating an initial set of planning documents.
-- **Tags:** feature plan, phase 2, onboarding, first-run, project setup
+
+  - **Description:** Documents the plan for a special "Cycle 0" mode to guide new users in setting up their project by generating an initial set of planning documents.
+  - **Tags:** feature plan, phase 2, onboarding, first-run, project setup
 
 ### A61. DCE - Phase 2 - Cycle History Management Plan
-- **Description:** Outlines the plan to allow users to save and load their entire cycle history (`dce_history.json`), enabling them to manage multiple development threads or back up their work.
-- **Tags:** feature plan, phase 2, history, import, export, cycle management
+
+  - **Description:** Outlines the plan to allow users to save and load their entire cycle history (`dce_history.json`), enabling them to manage multiple development threads or back up their work.
+  - **Tags:** feature plan, phase 2, history, import, export, cycle management
 
 ### A62. DCE - Cycle 157 - Task Tracker
-- **Description:** A tracking document for the large number of feedback items and tasks from Cycle 157, used to manage the backlog for subsequent cycles.
-- **Tags:** bugs, tracking, issues, backlog, cycle 157
+
+  - **Description:** A tracking document for the large number of feedback items and tasks from Cycle 157, used to manage the backlog for subsequent cycles.
+  - **Tags:** bugs, tracking, issues, backlog, cycle 157
 
 ### A63. DCE - Cycle 158 - Task Tracker
-- **Description:** A tracking document for the large number of feedback items and tasks from Cycle 158, used to manage the backlog for subsequent cycles.
-- **Tags:** bugs, tracking, issues, backlog, cycle 158
+
+  - **Description:** A tracking document for the large number of feedback items and tasks from Cycle 158, used to manage the backlog for subsequent cycles.
+  - **Tags:** bugs, tracking, issues, backlog, cycle 158
 
 ### A64. DCE - Cycle 159 - Task Tracker
-- **Description:** A tracking document for the large number of feedback items and tasks from Cycle 159, used to manage the backlog for subsequent cycles.
-- **Tags:** bugs, tracking, issues, backlog, cycle 159
+
+  - **Description:** A tracking document for the large number of feedback items and tasks from Cycle 159, used to manage the backlog for subsequent cycles.
+  - **Tags:** bugs, tracking, issues, backlog, cycle 159
 
 ### A65. DCE - Universal Task Checklist
-- **Description:** A universal checklist for organizing development tasks by file, focusing on complexity in terms of token count and estimated cycles for completion.
-- **Tags:** process, checklist, task management, planning, workflow
+
+  - **Description:** A universal checklist for organizing development tasks by file, focusing on complexity in terms of token count and estimated cycles for completion.
+  - **Tags:** process, checklist, task management, planning, workflow
 
 ### A66. DCE - Cycle 1 - Task Tracker
-- **Description:** A tracking document for the feedback items and tasks from the first cycle of using the DCE to build itself.
-- **Tags:** bugs, tracking, issues, backlog, cycle 1
+
+  - **Description:** A tracking document for the feedback items and tasks from the first cycle of using the DCE to build itself.
+  - **Tags:** bugs, tracking, issues, backlog, cycle 1
 
 ### A67. DCE - PCPP View Refactoring Plan
-- **Description:** A plan to refactor the large `parallel-copilot.view.tsx` into smaller, more manageable components to improve maintainability.
-- **Tags:** refactor, architecture, technical debt, pcpp
+
+  - **Description:** A plan to refactor the large `parallel-copilot.view.tsx` into smaller, more manageable components to improve maintainability.
+  - **Tags:** refactor, architecture, technical debt, pcpp
 
 ### A68. DCE - PCPP Context Pane UX Plan
-- **Description:** A plan to enhance the UX of the cycle context and ephemeral context text areas with features like token counts and line numbers.
-- **Tags:** feature plan, ui, ux, pcpp, context
+
+  - **Description:** A plan to enhance the UX of the cycle context and ephemeral context text areas with features like token counts and line numbers.
+  - **Tags:** feature plan, ui, ux, pcpp, context
 
 ### A69. DCE - Animated UI Workflow Guide
-- **Description:** A plan for a guided user workflow that uses animated UI highlighting to indicate the next logical step in the process.
-- **Tags:** feature plan, ui, ux, workflow, animation, guidance
+
+  - **Description:** A plan for a guided user workflow that uses animated UI highlighting to indicate the next logical step in the process.
+  - **Tags:** feature plan, ui, ux, workflow, animation, guidance
 
 ### A70. DCE - Git-Integrated Testing Workflow Plan
-- **Description:** Outlines the plan for `Baseline (Commit)` and `Restore Baseline` buttons to streamline the testing of AI-generated code by leveraging Git.
-- **Tags:** feature plan, workflow, git, testing, automation
+
+  - **Description:** Outlines the plan for `Baseline (Commit)` and `Restore Baseline` buttons to streamline the testing of AI-generated code by leveraging Git.
+  - **Tags:** feature plan, workflow, git, testing, automation
 
 ### A71. Sample M0 Prompt.md
-- **Description:** An example of a fully-formed `prompt.md` file generated by the Cycle 0 onboarding experience.
-- **Tags:** example, cycle 0, onboarding, prompt
+
+  - **Description:** An example of a fully-formed `prompt.md` file generated by the Cycle 0 onboarding experience.
+  - **Tags:** example, cycle 0, onboarding, prompt
 
 ### A72. DCE - README for Artifacts
-- **Description:** The content for the `README.md` file that is automatically created in a new project's `src/Artifacts` directory, explaining the purpose of the extension and the artifact-driven workflow.
-- **Tags:** documentation, onboarding, readme, source of truth
+
+  - **Description:** The content for the `README.md` file that is automatically created in a new project's `src/Artifacts` directory, explaining the purpose of the extension and the artifact-driven workflow.
+  - **Tags:** documentation, onboarding, readme, source of truth
 
 ### A73. DCE - GitService Plan
-- **Description:** A plan for a dedicated backend service to encapsulate all interactions with the Git command line for features like baselining and restoring.
-- **Tags:** plan, architecture, backend, git, service
+
+  - **Description:** A plan for a dedicated backend service to encapsulate all interactions with the Git command line for features like baselining and restoring.
+  - **Tags:** plan, architecture, backend, git, service
 
 ### A74. DCE - Per-Input Undo-Redo Feature Plan
-- **Description:** A plan to implement a separate undo/redo history for each major text input in the PCPP to provide a more intuitive editing experience.
-- **Tags:** feature plan, ui, ux, undo, redo, state management
+
+  - **Description:** A plan to implement a separate undo/redo history for each major text input in the PCPP to provide a more intuitive editing experience.
+  - **Tags:** feature plan, ui, ux, undo, redo, state management
 
 ### A75. DCE - Text Area Component A-B-C Test Plan
-- **Description:** A plan to create a test harness for the `NumberedTextarea` component to diagnose and fix persistent scrolling and alignment bugs.
-- **Tags:** plan, process, debugging, troubleshooting, ui, ux, react
+
+  - **Description:** A plan to create a test harness for the `NumberedTextarea` component to diagnose and fix persistent scrolling and alignment bugs.
+  - **Tags:** plan, process, debugging, troubleshooting, ui, ux, react
 
 ### A76. DCE - Word Wrap Line Numbering Challenges
-- **Description:** Explains the technical complexity of implementing line numbers that accurately reflect visual word wrapping in a textarea component.
-- **Tags:** documentation, technical debt, ui, ux, word wrap, line numbers
+
+  - **Description:** Explains the technical complexity of implementing line numbers that accurately reflect visual word wrapping in a textarea component.
+  - **Tags:** documentation, technical debt, ui, ux, word wrap, line numbers
+
+### A77. DCE - Whitepaper Generation Plan
+
+  - **Description:** A plan for brainstorming and developing a whitepaper to explain the value of the DCE to external stakeholders, particularly those in government and military contexts.
+  - **Tags:** documentation, planning, whitepaper, stakeholders, government, military
+
+### A78. DCE - Whitepaper - Process as Asset
+
+  - **Description:** A whitepaper targeted at high-level stakeholders (NSA, UKILRN) explaining the strategic value of the DCE by focusing on how it transforms the human-AI interaction process into a persistent, shareable asset that accelerates specialized content creation.
+  - **Tags:** whitepaper, documentation, strategy, process, acceleration, human-ai collaboration
 
 ### A200. Cycle Log
-- **Description:** A log of all development cycles for historical reference and context.
-- **Tags:** history, log, development process, cycles
+
+  - **Description:** A log of all development cycles for historical reference and context.
+  - **Tags:** history, log, development process, cycles
 
 ## II. Standalone Utilities & Guides
 
 ### A149. Local LLM Integration Plan
-- **Description:** The technical plan for integrating a locally hosted LLM into the game via a secure backend proxy.
-- **Tags:** llm, integration, plan, backend, api
+
+  - **Description:** The technical plan for integrating a locally hosted LLM into the game via a secure backend proxy.
+  - **Tags:** llm, integration, plan, backend, api
 
 ### A189. Number Formatting Reference Guide
-- **Description:** A standalone guide and utility script for formatting large numbers with K/M/B/T suffixes and dynamic decimal place adjustment for clean UI presentation.
-- **Tags:** utility, script, formatting, numbers, ui, ux, javascript, typescript
+
+  - **Description:** A standalone guide and utility script for formatting large numbers with K/M/B/T suffixes and dynamic decimal place adjustment for clean UI presentation.
+  - **Tags:** utility, script, formatting, numbers, ui, ux, javascript, typescript
 
 ## III. Cycle 0 Static Content Templates
 
 ### T1. Template - Master Artifact List
-- **Description:** A generic template for a Master Artifact List, to be used as static context in the Cycle 0 prompt.
-- **Tags:** template, cycle 0, documentation, project setup
+
+  - **Description:** A generic template for a Master Artifact List, to be used as static context in the Cycle 0 prompt.
+  - **Tags:** template, cycle 0, documentation, project setup
 
 ### T2. Template - Project Vision and Goals
-- **Description:** A generic template for a Project Vision and Goals document.
-- **Tags:** template, cycle 0, documentation, project setup
+
+  - **Description:** A generic template for a Project Vision and Goals document.
+  - **Tags:** template, cycle 0, documentation, project setup
 
 ### T3. Template - Phase 1 Requirements & Design
-- **Description:** A generic template for a requirements and design document.
-- **Tags:** template, cycle 0, documentation, project setup
+
+  - **Description:** A generic template for a requirements and design document.
+  - **Tags:** template, cycle 0, documentation, project setup
 
 ### T4. Template - Technical Scaffolding Plan
-- **Description:** A generic template for a technical scaffolding plan.
-- **Tags:** template, cycle 0, documentation, project setup
+
+  - **Description:** A generic template for a technical scaffolding plan.
+  - **Tags:** template, cycle 0, documentation, project setup
 
 ### T5. Template - Target File Structure
-- **Description:** A generic template for a target file structure document.
-- **Tags:** template, cycle 0, documentation, project setup
+
+  - **Description:** A generic template for a target file structure document.
+  - **Tags:** template, cycle 0, documentation, project setup
 
 ### T6. Template - Initial Scaffolding Deployment Script (DEPRECATED)
-- **Description:** (Deprecated) A generic template for a scaffolding deployment script. This is obsolete.
-- **Tags:** template, cycle 0, documentation, project setup, deprecated
+
+  - **Description:** (Deprecated) A generic template for a scaffolding deployment script. This is obsolete.
+  - **Tags:** template, cycle 0, documentation, project setup, deprecated
 
 ### T7. Template - Development and Testing Guide
-- **Description:** A generic template for a development and testing guide.
-- **Tags:** template, cycle 0, documentation, project setup
+
+  - **Description:** A generic template for a development and testing guide.
+  - **Tags:** template, cycle 0, documentation, project setup
 
 ### T8. Template - Regression Case Studies
-- **Description:** A generic template for a regression case studies document, promoting development best practices.
-- **Tags:** template, cycle 0, documentation, project setup
+
+  - **Description:** A generic template for a regression case studies document, promoting development best practices.
+  - **Tags:** template, cycle 0, documentation, project setup
 
 ### T9. Template - Logging and Debugging Guide
-- **Description:** A generic template for a logging and debugging guide.
-- **Tags:** template, cycle 0, documentation, project setup
+
+  - **Description:** A generic template for a logging and debugging guide.
+  - **Tags:** template, cycle 0, documentation, project setup
 
 ### T10. Template - Feature Plan Example
-- **Description:** A generic template for a feature plan, using a right-click context menu as an example.
-- **Tags:** template, cycle 0, documentation, project setup
+
+  - **Description:** A generic template for a feature plan, using a right-click context menu as an example.
+  - **Tags:** template, cycle 0, documentation, project setup
 
 ### T11. Template - Implementation Roadmap
-- **Description:** A generic template for an implementation roadmap document, guiding the development process.
-- **Tags:** template, cycle 0, documentation, project setup, roadmap
+
+  - **Description:** A generic template for an implementation roadmap document, guiding the development process.
+  - **Tags:** template, cycle 0, documentation, project setup, roadmap
 
 ### T12. Template - Competitive Analysis
-- **Description:** A generic template for a competitive analysis document, used for feature ideation.
-- **Tags:** template, cycle 0, documentation, project setup, research
+
+  - **Description:** A generic template for a competitive analysis document, used for feature ideation.
+  - **Tags:** template, cycle 0, documentation, project setup, research
 
 ### T13. Template - Refactoring Plan
-- **Description:** A generic template for a refactoring plan, guiding users to consider constraints like token count.
-- **Tags:** template, cycle 0, documentation, project setup, refactor
+
+  - **Description:** A generic template for a refactoring plan, guiding users to consider constraints like token count.
+  - **Tags:** template, cycle 0, documentation, project setup, refactor
 
 ### T14. Template - GitHub Repository Setup Guide
-- **Description:** A generic template for a guide on setting up a new project with Git and GitHub.
-- **Tags:** template, cycle 0, git, github, version control
+
+  - **Description:** A generic template for a guide on setting up a new project with Git and GitHub.
+  - **Tags:** template, cycle 0, git, github, version control
 
 ### T15. Template - A-B-C Testing Strategy for UI Bugs
-- **Description:** A generic template for a guide on using the A-B-C testing pattern to diagnose UI bugs.
-- **Tags:** template, cycle 0, process, debugging, troubleshooting
+
+  - **Description:** A generic template for a guide on using the A-B-C testing pattern to diagnose UI bugs.
+  - **Tags:** template, cycle 0, process, debugging, troubleshooting
 
 ### T16. Template - Developer Environment Setup Guide
-- **Description:** A generic template for a guide on setting up a new project's development environment, including OS, tools, and installation steps.
-- **Tags:** template, cycle 0, documentation, project setup, environment
+
+  - **Description:** A generic template for a guide on setting up a new project's development environment, including OS, tools, and installation steps.
+  - **Tags:** template, cycle 0, documentation, project setup, environment
 
 ### T17. Template - Universal Task Checklist
-- **Description:** A generic template for a universal task checklist, designed to organize work by file and complexity.
-- **Tags:** template, process, checklist, task management, planning
+
+  - **Description:** A generic template for a universal task checklist, designed to organize work by file and complexity.
+  - **Tags:** template, process, checklist, task management, planning
 </file>
 
 <file path="src/Artifacts/A1. DCE - Project Vision and Goals.md">
@@ -668,65 +783,6 @@ The project will adhere to the following directory structure, derived directly f
 -   **Modular Frontend:** The `src/client/modules/` directory allows for building complex UIs by composing smaller, feature-focused modules.
 -   **Component-Based UI:** The `src/client/components/` directory holds the fundamental building blocks of the UI, promoting reusability.
 -   **Typed IPC Communication:** The use of `channels.enum.ts` and `channels.type.ts` in `src/common/ipc/` provides a strongly-typed and well-documented contract for communication between the webview and the extension host, reducing runtime errors.
-</file>
-
-<file path="src/Artifacts/A4. DCE - Analysis of The-Creator-AI Repo.md">
-# Artifact A4: DCE - Analysis of The-Creator-AI Repo
-# Date Created: Cycle 2
-# Author: AI Model
-- **Description:** Provides a detailed analysis of the `The-Creator-AI-main` reference repository, its architecture, and its mapping to the Data Curation Environment project goals.
-- **Tags:** analysis, repository, architecture, vscode-extension, project-planning
-
-## 1. Overview
-
-The `The-Creator-AI-main` repository is a comprehensive and well-structured VS Code extension that functions as a sophisticated AI coding assistant. It utilizes a modern tech stack including TypeScript, React for webviews, and TailwindCSS for styling. Its architecture is service-oriented on the backend (extension host) and modular on the frontend (webview). The discovery of this repository provides a massive head-start for our project, as it contains pre-built solutions for many of our planned features.
-
-## 2. Backend Architecture (Extension Host)
-
-The backend, located primarily in `src/backend/`, follows a clean, service-oriented architecture.
-
--   **`extension.ts`**: The main entry point. It initializes services and registers the commands and webview providers.
--   **`services/`**: A directory containing distinct services for handling specific concerns:
-    -   `LlmService.ts`: Manages interactions with multiple AI models (Gemini, OpenAI). It includes logic for API key management and prompt construction.
-    -   `FSService.ts`: Handles all file system operations, including reading files, creating a file tree, and respecting `.gitignore`.
-    -   `CodeService.ts`: Contains logic for applying code changes, parsing diffs, and generating code.
-    -   `GitService.ts`: Provides an interface for Git operations, like committing changes.
-    -   `MessageService.ts`: Orchestrates the flow of messages between the frontend and the LLM service.
-    -   `PlanExImService.ts`: Manages exporting and importing of "Change Plans".
-    -   `Services.ts`: A dependency injection container that initializes and provides access to all other services.
--   **`repositories/`**: Manages data persistence within the VS Code workspace state (e.g., `PersistentStoreRepository.ts`, `SettingsRepository.ts`).
--   **`commands/`**: Defines all the commands exposed by the extension in `package.json`.
-
-## 3. Frontend Architecture (Webview)
-
-The frontend, located in `src/client/`, is a React application bundled with Webpack.
-
--   **`views/`**: The application is divided into distinct views, each with its own entry point, state management, and logic (e.g., `change-plan.view`).
--   **`modules/`**: Contains reusable UI/logic modules that are composed into the main view, such as:
-    -   `context.module/Context.tsx`: Renders the file explorer.
-    -   `plan.module/Plan.tsx`: Handles displaying the AI-generated plan and user input.
--   **`components/`**: A collection of generic, reusable React components:
-    -   `file-tree/FileTree.tsx`: A fully functional file tree component with checkbox selection, expansion state, and active file highlighting. This is directly applicable to our Phase 1 goal.
-    -   `AutoResizingTextarea.tsx`, `Modal.tsx`, `ProgressSteps.tsx`: Other useful UI components.
--   **State Management**: Each view appears to have its own local store (`store/`), using RxJS `BehaviorSubject` for reactivity. This is a simple yet effective approach for managing state within a contained webview.
--   **IPC**: Communication with the backend is handled via a robust `ClientPostMessageManager` (`src/common/ipc/`) which defines clear channels for client-server interaction.
-
-## 4. Mapping to DCE Project Goals
-
-The reference repository provides solutions or strong foundations for all three of our project phases.
-
--   **Phase 1 (Context Chooser):** **Largely Complete.** The `FileTree.tsx` component in `src/client/components/file-tree/` combined with `FSService.ts` on the backend already provides the core functionality of a checkbox-based file explorer for context selection. Our work shifts from building this from scratch to adapting and integrating this existing, powerful component.
-
--   **Phase 2 (Parallel 'Co-pilot' Panel):** **Partially Complete.** The "Change Plan" view (`src/client/views/change-plan.view/`) is essentially a single "co-pilot" panel. It allows a user to describe a change, get an AI-generated plan, and interact with it. Our goal of *parallel* panels is not implemented, but the foundation for a single panel is incredibly strong.
-
--   **Phase 3 (Diff Tool):** **Not Present.** There is no integrated diff-viewing tool like WinMerge. However, the `CodeService.ts` *does* contain logic for parsing and applying diffs in a custom `<<<<<<< SEARCH` format, and the extension can trigger VS Code's native diff viewer (`git.openChange`).
-
-## 5. Recommendations & Path Forward
-
-1.  **Adopt the Architecture:** We should officially adopt the architecture of `The-Creator-AI-main` as the blueprint for our project. It is robust, scalable, and well-organized.
-2.  **Focus on Adaptation:** Our immediate efforts for Phase 1 should be to isolate the `FileTree` component and its backend dependencies (`FSService.ts`) and ensure they can be used to generate the `flattened_repo.md` as originally specified.
-3.  **De-risk Phase 2:** The "Change Plan" functionality is a perfect starting point for our parallel co-pilot. We should analyze its state management and IPC communication to understand how we might instantiate multiple, independent instances of it.
-4.  **Update All Documentation:** All planning artifacts (`A1`, `A2`, `A3`) must be updated immediately to reflect this new context. Our plan has evolved from "build" to "analyze, adapt, and extend".
 </file>
 
 <file path="src/Artifacts/A5. DCE - Target File Structure.md">
@@ -1062,132 +1118,6 @@ To enhance the data curation process, it is critical for the user to have immedi
     *   The `useMemo` hook that calculates the summary will be updated to correctly sum the total number of files and total tokens from the selected items. It will continue to ignore image sizes for the token total to avoid mixing units.
     *   The rendered output will use the new formatting utilities and icons.
     *   **(C40)** The label and title attribute will be updated for clarity.
-</file>
-
-<file path="src/Artifacts/A11.1 DCE - New Regression Case Studies.md">
-# Artifact A11.1: DCE - New Regression Case Studies
-# Date Created: C1
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A separate log for new regression case studies to avoid bloating the original A11 artifact.
-- **Tags:** bugs, regression, troubleshooting, development, best practices
-
-## 1. Purpose
-
-This document serves as a living record of persistent or complex bugs that have recurred during development. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase. This artifact is a supplement to `A11`.
-
-## 2. Case Studies
-
----
-
-### Case Study 001: PCPP Context Textarea Instability
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx`, `src/client/views/parallel-copilot.view/components/ContextInputs.tsx`
--   **Cycles Observed:** C1, C2, C3, C167, C174, C1
--   **Symptom:** The "Cycle Context" and "Ephemeral Context" text fields in the PCPP become unusable when a large amount of text is entered. The cursor becomes misaligned, text selection is inaccurate, and the component is extremely slow, making it impossible to edit content effectively.
--   **Root Cause Analysis (RCA):** The `NumberedTextarea` component uses a complex overlay approach to render line numbers and syntax highlighting. A `div` with the highlighted content is rendered behind a transparent `<textarea>`. The instability is caused by a combination of:
-    1.  **Performance:** The syntax highlighting is re-calculated on every single keystroke, which is computationally expensive for large blocks of text and causes severe input lag.
-    2.  **Synchronization Failure:** Subtle differences in CSS (`font`, `padding`, `line-height`) and rendering between the overlay `div` and the transparent `textarea` cause a "drift" in alignment as content grows, leading to the cursor and selection bugs.
--   **Codified Solution & Best Practice:**
-    1.  **Prioritize Stability:** For critical user inputs, stability and performance are more important than advanced features like line numbers or syntax highlighting.
-    2.  **Simplify:** The complex `NumberedTextarea` component was replaced in `ContextInputs.tsx` with a standard, native `<textarea>` element.
-    3.  **Conclusion:** This change guarantees a reliable and performant text input experience. While it represents a temporary removal of features, it fixes a critical usability bug. A more robust implementation of a custom code editor can be planned for a future cycle, but the default should always be a stable, native component.
-
----
-
-### Case Study 002: FTV Flashing on PCPP Auto-Save
-
--   **Artifacts Affected:** `src/backend/services/file-tree.service.ts`
--   **Cycles Observed:** C1, C4, C1
--   **Symptom:** The entire Data Curation file tree view (FTV) flashes or completely reloads whenever the user stops typing in one of the Parallel Co-Pilot Panel's text areas.
--   **Root Cause Analysis (RCA):** The PCPP automatically saves its state to `dce_history.json` (located in the `.vscode` directory) after a brief period of inactivity. The backend `FileSystemWatcher` in `file-tree.service.ts` was configured to monitor the entire workspace for changes to trigger a refresh of the FTV. It was incorrectly reacting to the legitimate writes to the history file, treating it as a workspace change that required a full UI refresh. The initial fix was to add `.vscode` to a general exclusion pattern, but this was not specific enough.
--   **Codified Solution & Best Practice:**
-    1.  **Be Specific in Watcher Exclusions:** The file watcher logic must be highly specific about what it ignores. The fix was to add an explicit check at the beginning of the `onDidCreate` and `onDidChange` handlers to immediately ignore any event related to the exact path of the history file (`.vscode/dce_history.json`).
-    2.  **Example:** `if (normalizedPath.endsWith('.vscode/dce_history.json')) { return; }`. This prevents the watcher from reacting to the extension's own internal state changes while still correctly monitoring user-made changes to the workspace.
-</file>
-
-<file path="src/Artifacts/A12. DCE - Logging and Debugging Guide.md">
-# Artifact A12: DCE - Logging and Debugging Guide
-# Date Created: Cycle 19
-# Author: AI Model & Curator
-# Updated on: C126 (Add section on truncated logging)
-
-- **Key/Value for A0:**
-- **Description:** Explains how to access and use the integrated logging solution for debugging the extension's backend and frontend components.
-- **Tags:** logging, debugging, troubleshooting, development, output channel
-
-## 1. Purpose
-
-This document provides instructions on how to access and use the logging features built into the Data Curation Environment (DCE) extension. Effective logging is crucial for diagnosing performance issues, tracking down bugs, and understanding the extension's behavior during development.
-
-## 2. Two Primary Log Locations
-
-There are two separate places to look for logs, depending on where the code is running.
-
-### Location 1: The "Debug Console" (For `console.log`)
-
-This is where you find logs from the **backend** (the extension's main Node.js process).
-
--   **What you'll see here:** `console.log()` statements from files in `src/backend/` and `src/extension.ts`. This is useful for debugging the extension's core activation and services *before* the UI is even visible.
--   **Where to find it:** In your **main development window** (the one where you press `F5`), look in the bottom panel for the **"DEBUG CONSOLE"** tab.
-
-    ```
-    -----------------------------------------------------------------------------------
-    | PROBLEMS    OUTPUT    DEBUG CONSOLE    TERMINAL                                 |
-    |---------------------------------------------------------------------------------|
-    |                                                                                 |
-    |  > Congratulations, your extension "Data Curation Environment" is now active!   |
-    |  > FSService watcher initialized.                                               |
-    |  ...                                                                            |
-    -----------------------------------------------------------------------------------
-    ```
-
-### Location 2: The "Output" Channel (For Centralized Logging)
-
-This is the primary, centralized log for the entire extension, including messages from the **frontend (WebView)**.
-
--   **What you'll see here:** Formatted log messages from both the backend (`LoggerService`) and the frontend (`logger.ts`). All messages are prefixed with a level (`[INFO]`, `[WARN]`, `[ERROR]`) and a timestamp. Frontend messages are also prefixed with `[WebView]`.
--   **Where to find it:** In the **"[Extension Development Host]" window** (the new window that opens after you press `F5`), follow these steps:
-    1.  **Open the Panel:** Press `Ctrl+J` (or `Cmd+J` on Mac).
-    2.  **Navigate to the "OUTPUT" Tab.**
-    3.  In the dropdown menu on the right, select **`Data Curation Environment`**.
-
-    ```
-    -----------------------------------------------------------------------------------
-    | PROBLEMS    OUTPUT    DEBUG CONSOLE    TERMINAL                                 |
-    |---------------------------------------------------------------------------------|
-    |                                                 [Data Curation Environment v]   |
-    |                                                                                 |
-    |  [INFO] [2:30:00 PM] Services initialized.                                      |
-    |  [INFO] [2:30:01 PM] Received request for workspace files.                      |
-    |  [INFO] [2:30:01 PM] [WebView] Initializing view and requesting workspace files.|
-    |  [INFO] [2:30:01 PM] Scanning for files with exclusion pattern: ...             |
-    |  ...                                                                            |
-    -----------------------------------------------------------------------------------
-    ```
-
-## 3. Tactical Debugging with Logs (C93)
-
-When a feature is not working as expected, especially one that involves communication between the frontend and backend, the most effective debugging technique is to add **tactical logs** at every step of the data's journey.
-
-### Case Study: Fixing the "Associated Files" Parser (Cycle 93)
-
--   **Problem:** The UI was incorrectly reporting that files from a parsed AI response did not exist in the workspace.
--   **Data Flow:**
-    1.  **Frontend (`view.tsx`):** User clicks "Parse All".
-    2.  **Frontend (`response-parser.ts`):** Raw text is parsed into a list of relative file paths (e.g., `src/main.ts`).
-    3.  **IPC (`RequestFileExistence`):** The list of relative paths is sent to the backend.
-    4.  **Backend (`fs.service.ts`):** The backend receives the list and compares it against its own list of known workspace files, which are stored as absolute paths (e.g., `c:/project/src/main.ts`). The comparison fails.
-
-## 4. Truncated Logging for Large Content (C126)
-
-To prevent the output channel from becoming overwhelmed with large blocks of text (e.g., entire file contents), a logging utility has been implemented to truncate long strings.
-
--   **Behavior:** When a service logs a large piece of content (like a code block for syntax highlighting), it will use the `truncateStringForLogging` utility.
--   **Format:** If a string is longer than a set threshold (e.g., 100 characters), it will be displayed in the logs in a format like this:
-    `[First 50 characters]...[Last 50 characters]`
--   **Benefit:** This keeps the logs clean and readable, allowing you to see that a large piece of data was processed without having its entire content flood the output. You can still see the beginning and end of the content to verify its identity.
 </file>
 
 <file path="src/Artifacts/A13. DCE - Phase 1 - Right-Click Context Menu.md">
@@ -4484,60 +4414,77 @@ The current priority is to fix the more critical usability bugs like scrolling, 
 
 <file path="src/Artifacts/A77. DCE - Whitepaper Generation Plan.md">
 # Artifact A77: DCE - Whitepaper Generation Plan
+
 # Date Created: C181
+
 # Author: AI Model & Curator
 
-- **Key/Value for A0:**
-- **Description:** A plan for brainstorming and developing a whitepaper to explain the value of the DCE to external stakeholders, particularly those in government and military contexts.
-- **Tags:** documentation, planning, whitepaper, stakeholders, government, military
+# Updated on: C182 (Incorporate "Process as Asset" theme and use case)
 
-## 1. Overview & Goal
+  - **Key/Value for A0:**
+  - **Description:** A plan for brainstorming and developing a whitepaper to explain the value of the DCE to external stakeholders, particularly those in government and military contexts.
+  - **Tags:** documentation, planning, whitepaper, stakeholders, government, military
 
-The director of UKILRN, along with NSA and naval officers, has expressed interest in the Data Curation Environment (DCE) project and requested a whitepaper to better understand its value and potential applications. The goal of this artifact is to brainstorm potential themes for this whitepaper, develop sample abstracts for the most promising directions, and outline a plan for its production. The final document must be professional, clear, and tailored to an audience focused on efficiency, auditability, and the application of technology to complex, mission-critical systems.
+## 1\. Overview & Goal
 
-## 2. Brainstormed Whitepaper Themes
+The director of UKILRN, along with NSA and naval officers, has expressed interest in the Data Curation Environment (DCE) project and requested a whitepaper. The goal of this artifact is to brainstorm themes and develop abstracts tailored to an audience focused on efficiency, auditability, and the application of technology to complex, mission-critical systems.
 
-1.  **Theme A: The Knowledge Graph as a Force Multiplier in Complex Systems Analysis.**
-    *   **Focus:** This theme emphasizes the value of the DCE's cycle history (`dce_history.json`). It frames the history not just as a log, but as a structured, navigable **Knowledge Graph** of the problem-solving process. Each cycle is a node representing a state of the system and the human's intent, and the selected AI response is the edge that transitions to the next state.
-    *   **Audience Appeal:** Highly relevant for military and intelligence communities. The concepts of auditability ("replay the tape"), after-action reviews, knowledge transfer, and training new analysts on past decision-making processes are directly applicable.
+## 2\. Key Value Proposition & Use Case (Updated C182)
 
-2.  **Theme B: Accelerating Mission-Critical Software Development through Parallel AI Scrutiny.**
-    *   **Focus:** This theme centers on the efficiency and quality gains from the DCE's core workflow. It highlights how the ability to generate, compare, and test multiple AI solutions in parallel de-risks the adoption of AI-generated code and significantly shortens development cycles.
-    *   **Audience Appeal:** Appeals to program managers and technical leadership focused on delivering complex systems faster and more reliably. It's a strong business and operational case.
+The central argument for the DCE is that it **accelerates the development and maintenance of complex systems by transforming the human-AI interaction workflow.** It moves beyond ad-hoc prompting to a structured process where curated context becomes a persistent, shared asset, enabling rapid iteration and efficient collaboration.
 
-3.  **Theme C: Beyond Chat: A Framework for Structured Human-AI Collaboration.**
-    *   **Focus:** This theme positions the DCE as a methodological advancement over simple, unstructured AI chat interfaces. It argues that for complex, high-stakes tasks, a structured, human-in-the-loop process is essential for quality, safety, and accountability. The DCE is presented as the first comprehensive tool to implement such a framework.
-    *   **Audience Appeal:** Appeals to strategists and policymakers interested in the formal processes and governance required for AI adoption in government and defense.
+### 2.1. Use Case Spotlight: Rapid Iteration on Curated Datasets
 
-4.  **Theme D: High-Fidelity Context Management for AI-Powered Intelligence Analysis.**
-    *   **Focus:** A more specialized version of Theme C, this angle focuses on the "Data Curation" aspect. It would detail how the precise selection of context (source code, intelligence reports, technical documents) is the most critical factor for getting high-quality, relevant output from an LLM, and how the DCE is the premier tool for this curation process.
-    *   **Audience Appeal:** Directly targets intelligence analysts and their leadership, speaking to the "garbage in, garbage out" problem they face when dealing with massive datasets and LLMs.
+A compelling example of the DCE's value is the curation and maintenance of specialized datasets, such as labs, lessons, or intelligence reports.
 
-## 3. Selected Themes & Sample Abstracts
+1.  **Curation:** An operator uses the DCE to precisely select the relevant source materials (e.g., a set of exam questions) for a specific task.
+2.  **Collaboration:** This "selection set" (the curated context) is a shareable asset. A colleague can instantly load the exact same context, review the previous cycle's work (the history), and continue the task.
+3.  **Rapid Iteration:** When feedback is received (e.g., "The correct answer is too often the longest choice"), the operator doesn't need to manually edit the files. They simply load the curated context and issue a targeted instruction to the AI (e.g., "Camouflage the distractors with more meaningful but ultimately fluffy language"). The AI performs the complex edits against the precise context, completing the update in a single, efficient cycle.
 
-Based on the initial brainstorming, Themes A, B, and C are selected as the most promising directions, offering strategic, operational, and methodological perspectives.
+## 3\. Brainstormed Whitepaper Themes
 
----
+*(See previous versions for initial brainstorming themes A-D)*
+
+### 3.1. Refined Theme (C182)
+
+Based on feedback emphasizing the DCE as an accelerator for existing priorities, a new primary theme has been developed.
+
+**Theme E: Process as Asset: Accelerating specialized content creation through structured Human-AI collaboration.**
+
+  * **Focus:** This theme emphasizes that the DCE transforms the workflow itself into a valuable, reusable asset. It highlights how the combination of rapid data curation, seamless sharing of context (Selection Sets), and the persistent knowledge graph (Cycle History) dramatically accelerates the creation and maintenance of specialized content.
+  * **Audience Appeal:** Directly addresses the concern of "too many priorities" by positioning the DCE as the tool that makes achieving those priorities faster and more efficient. It appeals to operational leadership focused on scaling expertise and accelerating output.
+
+## 4\. Selected Themes & Sample Abstracts
+
+The following abstracts represent the most promising directions. **Sample 4 (Theme E) is the recommended primary direction based on C182 feedback.**
+
+-----
 
 ### **Sample 1: Accelerating Complex Systems Development with Parallel AI Scrutiny**
 
 **Executive Summary:** The integration of Artificial Intelligence into the software development lifecycle (SDLC) promises to accelerate delivery and enhance innovation. However, the stochastic nature of Large Language Models (LLMs) introduces significant risks, as a single AI-generated solution may contain subtle flaws, security vulnerabilities, or inefficiencies. This whitepaper introduces the Data Curation Environment (DCE), a novel framework integrated into Visual Studio Code that mitigates these risks by enabling a parallelized workflow. The DCE allows developers to generate, manage, and test multiple, distinct AI-generated solutions simultaneously. By providing tools for rapid, side-by-side comparison, integrated diffing, and one-click testing within a version-controlled environment, the DCE transforms the process from a linear, high-risk "accept/reject" decision into a strategic portfolio management approach. This paper details the DCE methodology and presents a case for its adoption in mission-critical software projects where speed, quality, and reliability are paramount.
 
----
+-----
 
 ### **Sample 2: The Auditable Knowledge Graph: Structuring Human-AI Collaboration for Mission-Critical Systems**
 
 **Executive Summary:** As Artificial Intelligence becomes a collaborative partner in complex problem-solving, the process of interaction—the prompts, the AI's suggestions, and the human's decisions—becomes a valuable asset. Traditional AI chat interfaces leave this history as an unstructured, ephemeral transcript. This whitepaper presents the Data Curation Environment (DCE), a system that captures the iterative human-AI collaboration process as a structured, persistent **Knowledge Graph**. Each "cycle" in the DCE workflow creates a node representing the system's state, the curated data context, the human's intent, multiple AI-generated solutions, and the operator's final decision. The resulting graph provides an unprecedented, fully auditable record of the entire analytical or development process. This has profound implications for after-action reviews, training new personnel on complex decision-making, and ensuring accountability in high-stakes environments. This paper outlines the architecture of the DCE and its application in creating transparent, traceable, and valuable knowledge assets from every human-AI interaction.
 
----
+-----
 
 ### **Sample 3: A Framework for High-Fidelity Context Management in AI-Assisted Operations**
 
 **Executive Summary:** The quality of output from any Large Language Model (LLM) is fundamentally dependent on the quality and precision of the input context. In high-stakes government and military applications, providing incomplete, incorrect, or bloated context can lead to flawed, misleading, or insecure results. This whitepaper introduces the Data Curation Environment (DCE), a framework and toolset designed to solve this "last mile" problem of context engineering. The DCE provides operators with a high-fidelity interface to precisely select, manage, and version the exact data—source code, technical documents, intelligence reports—that forms the prompt for an LLM. By integrating directly into the operator's native environment (VS Code), the DCE minimizes workflow friction and enables a rigorous, repeatable, and auditable process for context curation. This paper argues that such a framework is an essential component for the safe and effective operationalization of AI, moving beyond ad-hoc prompting to a deliberate, engineered approach to human-AI interaction.
 
-## 4. Production Plan
+-----
 
-1.  **Theme Selection:** The curator will review the three sample abstracts and select the final direction for the whitepaper.
+### **Sample 4 (Recommended): Process as Asset: Accelerating Specialized Content Creation through Structured Human-AI Collaboration**
+
+**Executive Summary:** Organizations tasked with developing highly specialized content—such as technical training materials, intelligence reports, or complex software documentation—face a constant bottleneck: the time and expertise required to curate accurate data, collaborate effectively, and rapidly iterate on feedback. Traditional workflows are often manual, opaque, and inefficient. This whitepaper introduces the Data Curation Environment (DCE), a framework that transforms the content creation process itself into a valuable organizational asset. The DCE provides a structured, human-in-the-loop methodology that enables rapid dataset curation, seamless sharing of curated contexts between colleagues, and instant iteration on feedback. By capturing the entire workflow as a persistent, auditable knowledge graph, the DCE doesn't just help teams build content faster; it provides the infrastructure necessary to scale expertise, ensure quality, and accelerate the entire organizational mission.
+
+## 5\. Production Plan
+
+1.  **Theme Selection:** The curator will review the sample abstracts and select the final direction for the whitepaper. (Recommended: Sample 4).
 2.  **Full Draft Generation:** In a subsequent cycle, the AI will be tasked to write the full whitepaper based on the selected theme, using all existing project artifacts as context.
 3.  **Review and Refine:** The curator will review the AI-generated draft, provide feedback, and iterate until the whitepaper is finalized.
 </file>
@@ -5415,119 +5362,6 @@ The monolithic file/class will be broken down into the following smaller, more f
 -   **Easier Testing:** The smaller, focused services will be easier to unit test in isolation.
 </file>
 
-<file path="src/Artifacts/T14. Template - GitHub Repository Setup Guide.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/A14. [Project Name] - GitHub Repository Setup Guide.md">...</file> tags.
--->
-# Artifact T14: [Project Name] - GitHub Repository Setup Guide Template
-# Date Created: C152
-# Author: AI Model & Curator
-# Updated on: C160 (Add Sample Development Workflow section)
-
-- **Key/Value for A0:**
-- **Description:** A generic template for a guide on setting up a new project with Git and GitHub, including a sample workflow.
-- **Tags:** template, cycle 0, git, github, version control, workflow
-
-## 1. Overview
-
-This guide provides the necessary commands to turn your local project folder into a Git repository, link it to a new repository on GitHub, and outlines a sample workflow for using Git alongside the Data Curation Environment (DCE).
-
-## 2. Prerequisites
-
-*   You have `git` installed on your machine.
-*   You have a GitHub account.
-
-## 3. Step-by-Step Setup
-
-### Step 1: Create a New Repository on GitHub
-
-1.  Go to [github.com](https://github.com) and log in.
-2.  In the top-right corner, click the `+` icon and select **"New repository"**.
-3.  **Repository name:** Enter a name for your project (e.g., `my-new-project`).
-4.  **Description:** (Optional) Provide a brief description of your project.
-5.  Choose **"Private"** or **"Public"**.
-6.  **IMPORTANT:** Do **not** initialize the repository with a `README`, `.gitignore`, or `license`. We will be pushing our existing files, and this will prevent conflicts.
-7.  Click **"Create repository"**.
-
-GitHub will now show you a page with command-line instructions. We will use the section titled **"...or push an existing repository from the command line"**.
-
-### Step 2: Initialize Git in Your Local Project
-
-Open a terminal and navigate to your project's root directory. Then, run the following commands one by one.
-
-1.  **Initialize the repository:**
-    ```bash
-    git init
-    ```
-
-2.  **Add all existing files:**
-    ```bash
-    git add .
-    ```
-
-3.  **Create the first commit:**
-    ```bash
-    git commit -m "Initial commit"
-    ```
-
-4.  **Rename the default branch to `main`:**
-    ```bash
-    git branch -M main
-    ```
-
-### Step 3: Link and Push to GitHub
-
-1.  **Add the remote repository:** Replace the placeholder URL with the one from your GitHub repository page.
-    ```bash
-    git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
-    ```
-
-2.  **Push your local `main` branch to GitHub:**
-    ```bash
-    git push -u origin main
-    ```
-
-After these commands complete, refresh your GitHub repository page. You should see all of your project files.
-
-## 4. Sample Development Workflow with DCE and Git
-
-Git is a powerful tool for managing the iterative changes produced by the DCE. It allows you to quickly test an AI's proposed solution and revert it cleanly if it doesn't work, without losing your place.
-
-### Step 1: Start with a Clean State
-Before starting a new cycle, ensure your working directory is clean. You can check this with `git status`. All your previous changes should be committed.
-
-### Step 2: Generate a Prompt and Get Responses
-Use the DCE to generate a `prompt.md` file. Use this prompt to get multiple responses (e.g., 4 to 8) from your preferred AI model.
-
-### Step 3: Paste and Parse
-Paste the responses into the Parallel Co-Pilot Panel and click "Parse All".
-
-### Step 4: Accept and Test
-1.  Review the responses and find one that looks promising.
-2.  Select that response and use the **"Accept Selected Files"** button to write the AI's proposed changes to your workspace.
-3.  Now, compile and test the application. Does it work? Does it have errors?
-
-### Step 5: The "Restore" Loop
-This is where Git becomes a powerful part of the workflow.
-
-*   **If the changes are bad (e.g., introduce bugs, don't work as expected):**
-    1.  Open the terminal in VS Code.
-    2.  Run the command: `git restore .`
-    3.  This command instantly discards all uncommitted changes in your workspace, reverting your files to the state of your last commit.
-    4.  You are now back to a clean state and can go back to the Parallel Co-Pilot Panel, select a *different* AI response, and click "Accept Selected Files" again to test the next proposed solution.
-
-*   **If the changes are good:**
-    1.  Open the Source Control panel in VS Code.
-    2.  Stage the changes (`git add .`).
-    3.  Write a commit message (e.g., "Feat: Implement user login via AI suggestion C15").
-    4.  Commit the changes.
-    5.  You are now ready to start the next development cycle from a new, clean state.
-
-This iterative loop of `accept -> test -> restore` allows you to rapidly audition multiple AI-generated solutions without fear of corrupting your codebase.
-</file>
-
 <file path="src/Artifacts/T15. Template - A-B-C Testing Strategy for UI Bugs.md">
 <!-- 
   IMPORTANT AI INSTRUCTION:
@@ -5718,5 +5552,116 @@ This file-centric approach helps in planning and prioritizing work, especially i
 2.  **Expected:** [Expected outcome of the first step]
 3.  [Second verification step]
 4.  **Expected:** [Expected outcome of the second step]
+</file>
+
+<file path="src/Artifacts/A78. DCE - Whitepaper - Process as Asset.md">
+# Artifact A78: DCE - Whitepaper - Process as Asset
+
+# Date Created: C182
+
+# Author: AI Model & Curator
+
+  - **Key/Value for A0:**
+  - **Description:** A whitepaper targeted at high-level stakeholders (NSA, UKILRN) explaining the strategic value of the DCE by focusing on how it transforms the human-AI interaction process into a persistent, shareable asset that accelerates specialized content creation.
+  - **Tags:** whitepaper, documentation, strategy, process, acceleration, human-ai collaboration
+
+-----
+
+# Process as Asset: Accelerating Specialized Content Creation through Structured Human-AI Collaboration
+
+**A Whitepaper on the Data Curation Environment (DCE)**
+
+**Date:** September 4, 2025
+**Audience:** High-Level Stakeholders (NSA, UKILRN, Naval Operations)
+
+-----
+
+## 1\. Executive Summary
+
+Organizations tasked with developing highly specialized content—such as technical training materials, intelligence reports, or complex software documentation—face a constant bottleneck: the time and expertise required to curate accurate data, collaborate effectively, and rapidly iterate on feedback. Traditional workflows, even those augmented by Artificial Intelligence (AI), are often ad-hoc, opaque, and inefficient.
+
+This whitepaper introduces the Data Curation Environment (DCE), a framework and toolset integrated into the standard developer environment (Visual Studio Code) that transforms the content creation process itself into a valuable organizational asset. The DCE provides a structured, human-in-the-loop methodology that enables rapid dataset curation, seamless sharing of curated contexts between colleagues, and instant iteration on feedback.
+
+By capturing the entire workflow as a persistent, auditable knowledge graph, the DCE doesn't just help teams build content faster; it provides the infrastructure necessary to scale expertise, ensure quality, and accelerate the entire organizational mission.
+
+## 2\. The Challenge: The Bottleneck of Ad-Hoc AI Interaction
+
+The integration of Large Language Models (LLMs) into organizational workflows promises significant acceleration. However, the way most organizations interact with these models remains unstructured and inefficient, creating several critical bottlenecks:
+
+1.  **The Context Problem:** The quality of an LLM's output is entirely dependent on the quality of its input context. Manually selecting, copying, and pasting relevant data (code, documents, reports) into a chat interface is time-consuming, error-prone, and often results in incomplete or bloated context.
+2.  **The Collaboration Gap:** When a task is handed off, the context is lost. A colleague must manually reconstruct the previous operator's dataset and understand their intent, leading to significant delays and duplication of effort.
+3.  **The Iteration Overhead:** When feedback requires changes to a complex dataset, operators often resort to manual edits because re-prompting the AI requires reconstructing the entire context again. This negates the efficiency gains of using AI in the first place.
+4.  **The Auditability Vacuum:** The iterative process of human-AI interaction—the prompts, the AI's suggestions, and the human's decisions—is a valuable record of the work, yet it is rarely captured in a structured, reusable format.
+
+These challenges prevent organizations from fully realizing the potential of AI. They are forced to choose between the speed of AI and the rigor of a structured process.
+
+## 3\. The Solution: The Data Curation Environment (DCE)
+
+The Data Curation Environment (DCE) is designed to eliminate these bottlenecks by providing a structured framework for human-AI collaboration directly within the operator's working environment. It moves beyond the limitations of simple chat interfaces by introducing three core capabilities:
+
+### 3.1. Precision Context Curation
+
+The DCE replaces manual copy-pasting with an intuitive, integrated file management interface. Operators can precisely select the exact files, folders, or documents required for a task with simple checkboxes. The DCE intelligently handles various file types—including code, PDFs, Word documents, and Excel spreadsheets—extracting the relevant textual content automatically.
+
+This ensures that the AI receives the highest fidelity context possible, maximizing the quality of its output while minimizing operator effort.
+
+### 3.2. Parallel AI Scrutiny and Integrated Testing
+
+The DCE recognizes that relying on a single AI response is risky. The "Parallel Co-Pilot Panel" allows operators to manage, compare, and test multiple AI-generated solutions simultaneously.
+
+Integrated diffing tools provide immediate visualization of proposed changes. Crucially, the DCE offers a one-click "Accept" mechanism, integrated with Git version control, allowing operators to instantly apply an AI's suggestion to the live workspace, test it, and revert it if necessary. This creates a rapid, low-risk loop for evaluating multiple AI approaches.
+
+### 3.3. The Cycle Navigator and Persistent Knowledge Graph
+
+Every interaction within the DCE is captured as a "Cycle." A cycle includes the curated context, the operator's instructions, all AI-generated responses, and the operator's final decision. This history is saved as a structured, persistent Knowledge Graph.
+
+The "Cycle Navigator" allows operators to step back through the history, review past decisions, and understand the evolution of the project.
+
+## 4\. Transforming the Process into an Asset
+
+The true power of the DCE lies in how these capabilities combine to transform the workflow itself into a persistent organizational asset.
+
+### 4.1. The Curated Context as a Shareable Asset
+
+In the DCE workflow, the curated context (the "Selection Set") is not ephemeral; it is a saved, versioned asset. When a task is handed off, the new operator doesn't just receive the files; they receive the exact context and the complete history of the previous operator's interactions.
+
+This seamless handoff eliminates the "collaboration gap," allowing teams to work asynchronously and efficiently on complex datasets without duplication of effort.
+
+### 4.2. Accelerating Iteration and Maintenance
+
+The DCE dramatically reduces the overhead associated with feedback and maintenance. Because the context is already curated and saved, operators can rapidly iterate on complex datasets without manual reconstruction.
+
+If feedback requires changes, the operator simply loads the curated context and issues a targeted instruction to the AI. The AI performs the edits against the precise context, completing the update in a single, efficient cycle. This enables organizations to maintain complex systems and content with unprecedented speed.
+
+### 4.3. Scaling Expertise and Ensuring Auditability
+
+The Knowledge Graph generated by the DCE serves as a detailed, auditable record of the entire development process. This is invaluable for:
+
+  * **Training and Onboarding:** New personnel can review the cycle history to understand complex decision-making processes and best practices.
+  * **After-Action Reviews:** The graph provides a precise record of what was known, what was instructed, and how the AI responded, enabling rigorous analysis.
+  * **Accountability:** In mission-critical environments, the DCE provides a transparent and traceable record of human-AI interaction.
+
+## 5\. Use Case Spotlight: Rapid Development of Training Materials
+
+A government agency needs to rapidly update a specialized technical training lab based on new operational feedback. The feedback indicates that in the existing exam questions, "the correct answer is too often the longest answer choice," creating a pattern that undermines the assessment's validity.
+
+### The Traditional Workflow (Weeks)
+
+1.  **Identify Affected Files:** An analyst manually searches the repository to find all relevant question files (days).
+2.  **Manual Editing:** The analyst manually edits each file, attempting to rewrite the "distractor" answers to be longer and more plausible without changing the technical meaning (weeks).
+3.  **Review and Rework:** The changes are reviewed, often leading to further manual edits (days).
+
+### The DCE Workflow (Hours)
+
+1.  **Curate Context (Minutes):** The analyst uses the DCE interface to quickly select the folder containing all exam questions. This creates a precise, curated dataset.
+2.  **Instruct the AI (Minutes):** The analyst loads the curated context into the Parallel Co-Pilot Panel and provides a targeted instruction: "Review the following exam questions. For any question where the correct answer is significantly longer than the distractors, rewrite the distractors to include more meaningful but ultimately fluffy language to camouflage the length difference, without changing the technical accuracy."
+3.  **Review and Accept (Hours):** The AI generates several proposed solutions. The analyst uses the integrated diff viewer to compare the options. They select the best solution and "Accept" the changes with a single click.
+4.  **Verification:** The updated lab is immediately ready for final verification.
+
+## 6\. Conclusion
+
+The Data Curation Environment is more than just a developer tool; it is a strategic framework for operationalizing AI in complex environments. By addressing the critical bottlenecks of context curation, collaboration, and iteration, the DCE transforms the human-AI interaction workflow into a structured, persistent, and valuable organizational asset.
+
+For organizations facing an ever-increasing list of priorities and a need to accelerate the development of specialized content, the DCE provides the necessary infrastructure to scale expertise, ensure quality, and achieve the mission faster.
 </file>
 

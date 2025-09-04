@@ -1,8 +1,9 @@
 // src/client/views/parallel-copilot.view/components/ContextInputs.tsx
-// Updated on: C3 (Replace textarea with Monaco Editor)
+// Updated on: C181 (Add onMount logging to Editor)
 import * as React from 'react';
 import { formatLargeNumber } from '@/common/utils/formatting';
 import Editor from '@monaco-editor/react';
+import { logger } from '@/client/utils/logger';
 
 interface ContextInputsProps {
     cycleContext: string;
@@ -50,6 +51,7 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
                         onChange={onCycleContextChange}
                         theme="vs-dark"
                         options={editorOptions}
+                        onMount={() => logger.log('Cycle Context Monaco Editor instance mounted successfully.')}
                     />
                 </div>
             </div>
@@ -66,6 +68,7 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
                         onChange={onEphemeralContextChange}
                         theme="vs-dark"
                         options={editorOptions}
+                        onMount={() => logger.log('Ephemeral Context Monaco Editor instance mounted successfully.')}
                     />
                 </div>
             </div>
