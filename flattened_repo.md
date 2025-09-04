@@ -1,10 +1,10 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-04T03:13:47.768Z
+  Date Generated: 2025-09-04T04:15:00.672Z
   ---
   Total Files: 165
-  Approx. Tokens: 462953
+  Approx. Tokens: 461895
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -13,7 +13,7 @@
 3. src\Artifacts\A0. DCE Master Artifact List.md (7318 tokens)
 4. src\client\views\parallel-copilot.view\view.tsx (6956 tokens)
 5. src\backend\services\prompt.service.ts (4908 tokens)
-6. src\client\views\parallel-copilot.view\view.scss (4584 tokens)
+6. src\client\views\parallel-copilot.view\view.scss (4598 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4429 tokens)
 8. src\backend\services\file-operation.service.ts (4095 tokens)
 9. src\client\views\context-chooser.view\view.tsx (4079 tokens)
@@ -92,99 +92,99 @@
 70. src\Artifacts\A74. DCE - Per-Input Undo-Redo Feature Plan.md - Lines: 49 - Chars: 3624 - Tokens: 906
 71. src\Artifacts\A75. DCE - Text Area Component A-B-C Test Plan.md - Lines: 50 - Chars: 4761 - Tokens: 1191
 72. src\Artifacts\A76. DCE - Word Wrap Line Numbering Challenges.md - Lines: 61 - Chars: 4895 - Tokens: 1224
-73. src\Artifacts\A77. DCE - Whitepaper Generation Plan.md - Lines: 75 - Chars: 8806 - Tokens: 2202
-74. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
-75. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
-76. src\Artifacts\README.md - Lines: 33 - Chars: 2764 - Tokens: 691
-77. src\Artifacts\T1. Template - Master Artifact List.md - Lines: 36 - Chars: 1716 - Tokens: 429
-78. src\Artifacts\T2. Template - Project Vision and Goals.md - Lines: 38 - Chars: 1968 - Tokens: 492
-79. src\Artifacts\T3. Template - Phase 1 Requirements & Design.md - Lines: 37 - Chars: 1876 - Tokens: 469
-80. src\Artifacts\T4. Template - Technical Scaffolding Plan.md - Lines: 54 - Chars: 2180 - Tokens: 545
-81. src\Artifacts\T5. Template - Target File Structure.md - Lines: 35 - Chars: 1054 - Tokens: 264
-82. src\Artifacts\T6. Template - Initial Scaffolding Deployment Script.md - Lines: 63 - Chars: 2593 - Tokens: 649
-83. src\Artifacts\T7. Template - Development and Testing Guide.md - Lines: 48 - Chars: 1738 - Tokens: 435
-84. src\Artifacts\T8. Template - Regression Case Studies.md - Lines: 31 - Chars: 1971 - Tokens: 493
-85. src\Artifacts\T9. Template - Logging and Debugging Guide.md - Lines: 49 - Chars: 2590 - Tokens: 648
-86. src\Artifacts\T10. Template - Feature Plan Example.md - Lines: 32 - Chars: 2692 - Tokens: 673
-87. src\Artifacts\T11. Template - Implementation Roadmap.md - Lines: 55 - Chars: 2887 - Tokens: 722
-88. src\Artifacts\T12. Template - Competitive Analysis.md - Lines: 42 - Chars: 3227 - Tokens: 807
-89. src\Artifacts\T13. Template - Refactoring Plan.md - Lines: 55 - Chars: 2617 - Tokens: 655
-90. src\Artifacts\T14. Template - GitHub Repository Setup Guide.md - Lines: 110 - Chars: 4902 - Tokens: 1226
-91. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 41 - Chars: 3000 - Tokens: 750
-92. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 97 - Chars: 4047 - Tokens: 1012
-93. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 45 - Chars: 2899 - Tokens: 725
-94. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 364 - Chars: 42142 - Tokens: 10536
-95. src\Artifacts\A42. DCE - Phase 2 - Initial Scaffolding Deployment Script.md - Lines: 246 - Chars: 8264 - Tokens: 2066
-96. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 34 - Chars: 9394 - Tokens: 2349
-97. src\Artifacts\A58. DCE - WinMerge Source Code Analysis.md - Lines: 56 - Chars: 5322 - Tokens: 1331
-98. src\Artifacts\A62. DCE - Cycle 157 - Task Tracker.md - Lines: 31 - Chars: 2710 - Tokens: 678
-99. src\Artifacts\A63. DCE - Cycle 158 - Task Tracker.md - Lines: 23 - Chars: 1760 - Tokens: 440
-100. src\Artifacts\A64. DCE - Cycle 159 - Task Tracker.md - Lines: 22 - Chars: 1550 - Tokens: 388
-101. src\Artifacts\A65. DCE - Universal Task Checklist.md - Lines: 87 - Chars: 5422 - Tokens: 1356
-102. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
-103. src\Artifacts\A200. Cycle Log.md - Lines: 14546 - Chars: 1019323 - Tokens: 254831
-104. src\backend\commands\commands.ts - Lines: 103 - Chars: 4254 - Tokens: 1064
-105. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
-106. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
-107. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
-108. src\backend\services\file-operation.service.ts - Lines: 344 - Chars: 16380 - Tokens: 4095
-109. src\backend\services\file-tree.service.ts - Lines: 296 - Chars: 15301 - Tokens: 3826
-110. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12820 - Tokens: 3205
-111. src\backend\services\git.service.ts - Lines: 114 - Chars: 5522 - Tokens: 1381
-112. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-113. src\backend\services\history.service.ts - Lines: 270 - Chars: 11310 - Tokens: 2828
-114. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-115. src\backend\services\prompt.service.ts - Lines: 378 - Chars: 19630 - Tokens: 4908
-116. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
-117. src\backend\services\services.ts - Lines: 40 - Chars: 1827 - Tokens: 457
-118. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
-119. src\client\components\file-tree\FileTree.tsx - Lines: 258 - Chars: 12226 - Tokens: 3057
-120. src\client\components\file-tree\FileTree.utils.ts - Lines: 117 - Chars: 4236 - Tokens: 1059
-121. src\client\components\tree-view\TreeView.tsx - Lines: 395 - Chars: 17713 - Tokens: 4429
-122. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
-123. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
-124. src\client\components\ContextMenu.tsx - Lines: 72 - Chars: 3353 - Tokens: 839
-125. src\client\components\DiffViewer.tsx - Lines: 224 - Chars: 11386 - Tokens: 2847
-126. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
-127. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13123 - Tokens: 3281
-128. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
-129. src\client\utils\response-parser.ts - Lines: 79 - Chars: 2994 - Tokens: 749
-130. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-131. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
-132. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
-133. src\client\views\context-chooser.view\view.tsx - Lines: 175 - Chars: 16314 - Tokens: 4079
-134. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
-135. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 71 - Chars: 2830 - Tokens: 708
-136. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 86 - Chars: 3485 - Tokens: 872
-137. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
-138. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 95 - Chars: 7630 - Tokens: 1908
-139. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 84 - Chars: 3486 - Tokens: 872
-140. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
-141. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-142. src\client\views\parallel-copilot.view\on-message.ts - Lines: 109 - Chars: 5013 - Tokens: 1254
-143. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 92 - Chars: 4340 - Tokens: 1085
-144. src\client\views\parallel-copilot.view\view.scss - Lines: 813 - Chars: 18336 - Tokens: 4584
-145. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-146. src\client\views\parallel-copilot.view\view.tsx - Lines: 178 - Chars: 27824 - Tokens: 6956
-147. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
-148. src\common\ipc\channels.enum.ts - Lines: 89 - Chars: 4776 - Tokens: 1194
-149. src\common\ipc\channels.type.ts - Lines: 89 - Chars: 6731 - Tokens: 1683
-150. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
-151. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-152. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-153. src\common\types\file-node.ts - Lines: 17 - Chars: 517 - Tokens: 130
-154. src\common\types\pcpp.types.ts - Lines: 50 - Chars: 1240 - Tokens: 310
-155. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
-156. src\common\utils\formatting.ts - Lines: 120 - Chars: 3987 - Tokens: 997
-157. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
-158. src\common\utils\view-html.ts - Lines: 37 - Chars: 1314 - Tokens: 329
-159. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
-160. src\extension.ts - Lines: 131 - Chars: 5357 - Tokens: 1340
-161. webpack.config.js - Lines: 111 - Chars: 2929 - Tokens: 733
-162. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
-163. package.json - Lines: 141 - Chars: 4534 - Tokens: 1134
-164. .vscodeignore - Lines: 11 - Chars: 356 - Tokens: 89
-165. .gitignore - Lines: 10 - Chars: 128 - Tokens: 32
+73. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
+74. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
+75. src\Artifacts\README.md - Lines: 33 - Chars: 2764 - Tokens: 691
+76. src\Artifacts\T1. Template - Master Artifact List.md - Lines: 36 - Chars: 1716 - Tokens: 429
+77. src\Artifacts\T2. Template - Project Vision and Goals.md - Lines: 38 - Chars: 1968 - Tokens: 492
+78. src\Artifacts\T3. Template - Phase 1 Requirements & Design.md - Lines: 37 - Chars: 1876 - Tokens: 469
+79. src\Artifacts\T4. Template - Technical Scaffolding Plan.md - Lines: 54 - Chars: 2180 - Tokens: 545
+80. src\Artifacts\T5. Template - Target File Structure.md - Lines: 35 - Chars: 1054 - Tokens: 264
+81. src\Artifacts\T6. Template - Initial Scaffolding Deployment Script.md - Lines: 63 - Chars: 2593 - Tokens: 649
+82. src\Artifacts\T7. Template - Development and Testing Guide.md - Lines: 48 - Chars: 1738 - Tokens: 435
+83. src\Artifacts\T8. Template - Regression Case Studies.md - Lines: 31 - Chars: 1971 - Tokens: 493
+84. src\Artifacts\T9. Template - Logging and Debugging Guide.md - Lines: 49 - Chars: 2590 - Tokens: 648
+85. src\Artifacts\T10. Template - Feature Plan Example.md - Lines: 32 - Chars: 2692 - Tokens: 673
+86. src\Artifacts\T11. Template - Implementation Roadmap.md - Lines: 55 - Chars: 2887 - Tokens: 722
+87. src\Artifacts\T12. Template - Competitive Analysis.md - Lines: 42 - Chars: 3227 - Tokens: 807
+88. src\Artifacts\T13. Template - Refactoring Plan.md - Lines: 55 - Chars: 2617 - Tokens: 655
+89. src\Artifacts\T14. Template - GitHub Repository Setup Guide.md - Lines: 110 - Chars: 4902 - Tokens: 1226
+90. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 41 - Chars: 3000 - Tokens: 750
+91. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 97 - Chars: 4047 - Tokens: 1012
+92. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 45 - Chars: 2899 - Tokens: 725
+93. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 364 - Chars: 42142 - Tokens: 10536
+94. src\Artifacts\A42. DCE - Phase 2 - Initial Scaffolding Deployment Script.md - Lines: 246 - Chars: 8264 - Tokens: 2066
+95. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 34 - Chars: 9394 - Tokens: 2349
+96. src\Artifacts\A58. DCE - WinMerge Source Code Analysis.md - Lines: 56 - Chars: 5322 - Tokens: 1331
+97. src\Artifacts\A62. DCE - Cycle 157 - Task Tracker.md - Lines: 31 - Chars: 2710 - Tokens: 678
+98. src\Artifacts\A63. DCE - Cycle 158 - Task Tracker.md - Lines: 23 - Chars: 1760 - Tokens: 440
+99. src\Artifacts\A64. DCE - Cycle 159 - Task Tracker.md - Lines: 22 - Chars: 1550 - Tokens: 388
+100. src\Artifacts\A65. DCE - Universal Task Checklist.md - Lines: 87 - Chars: 5422 - Tokens: 1356
+101. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
+102. src\Artifacts\A200. Cycle Log.md - Lines: 14546 - Chars: 1019323 - Tokens: 254831
+103. src\backend\commands\commands.ts - Lines: 103 - Chars: 4254 - Tokens: 1064
+104. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
+105. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
+106. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
+107. src\backend\services\file-operation.service.ts - Lines: 344 - Chars: 16380 - Tokens: 4095
+108. src\backend\services\file-tree.service.ts - Lines: 296 - Chars: 15301 - Tokens: 3826
+109. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12820 - Tokens: 3205
+110. src\backend\services\git.service.ts - Lines: 114 - Chars: 5522 - Tokens: 1381
+111. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
+112. src\backend\services\history.service.ts - Lines: 270 - Chars: 11310 - Tokens: 2828
+113. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
+114. src\backend\services\prompt.service.ts - Lines: 378 - Chars: 19630 - Tokens: 4908
+115. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
+116. src\backend\services\services.ts - Lines: 40 - Chars: 1827 - Tokens: 457
+117. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
+118. src\client\components\file-tree\FileTree.tsx - Lines: 258 - Chars: 12226 - Tokens: 3057
+119. src\client\components\file-tree\FileTree.utils.ts - Lines: 117 - Chars: 4236 - Tokens: 1059
+120. src\client\components\tree-view\TreeView.tsx - Lines: 395 - Chars: 17713 - Tokens: 4429
+121. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
+122. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
+123. src\client\components\ContextMenu.tsx - Lines: 72 - Chars: 3353 - Tokens: 839
+124. src\client\components\DiffViewer.tsx - Lines: 224 - Chars: 11386 - Tokens: 2847
+125. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
+126. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13123 - Tokens: 3281
+127. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
+128. src\client\utils\response-parser.ts - Lines: 79 - Chars: 2994 - Tokens: 749
+129. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
+130. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
+131. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
+132. src\client\views\context-chooser.view\view.tsx - Lines: 175 - Chars: 16314 - Tokens: 4079
+133. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
+134. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 91 - Chars: 3554 - Tokens: 889
+135. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 86 - Chars: 3485 - Tokens: 872
+136. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
+137. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 95 - Chars: 7630 - Tokens: 1908
+138. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 84 - Chars: 3486 - Tokens: 872
+139. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
+140. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
+141. src\client\views\parallel-copilot.view\on-message.ts - Lines: 109 - Chars: 5013 - Tokens: 1254
+142. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 92 - Chars: 4340 - Tokens: 1085
+143. src\client\views\parallel-copilot.view\view.scss - Lines: 814 - Chars: 18390 - Tokens: 4598
+144. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
+145. src\client\views\parallel-copilot.view\view.tsx - Lines: 178 - Chars: 27824 - Tokens: 6956
+146. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
+147. src\common\ipc\channels.enum.ts - Lines: 89 - Chars: 4776 - Tokens: 1194
+148. src\common\ipc\channels.type.ts - Lines: 89 - Chars: 6731 - Tokens: 1683
+149. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
+150. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+151. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
+152. src\common\types\file-node.ts - Lines: 17 - Chars: 517 - Tokens: 130
+153. src\common\types\pcpp.types.ts - Lines: 50 - Chars: 1240 - Tokens: 310
+154. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
+155. src\common\utils\formatting.ts - Lines: 120 - Chars: 3987 - Tokens: 997
+156. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
+157. src\common\utils\view-html.ts - Lines: 37 - Chars: 1314 - Tokens: 329
+158. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
+159. src\extension.ts - Lines: 131 - Chars: 5357 - Tokens: 1340
+160. webpack.config.js - Lines: 111 - Chars: 2920 - Tokens: 730
+161. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
+162. package.json - Lines: 147 - Chars: 4730 - Tokens: 1183
+163. .vscodeignore - Lines: 11 - Chars: 356 - Tokens: 89
+164. .gitignore - Lines: 10 - Chars: 128 - Tokens: 32
+165. src\Artifacts\A77. DCE - Monaco Editor Replacement Plan.md - Lines: 42 - Chars: 3610 - Tokens: 903
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -4556,83 +4556,6 @@ Instead of building our own, we could replace the `<textarea>` with a lightweigh
 The user's request is valid and would be a great UX improvement. However, due to the performance and implementation complexities described above, this feature is considered a significant piece of technical debt that requires a dedicated cycle to solve correctly.
 
 The current priority is to fix the more critical usability bugs like scrolling, focus management, and highlighting. Once the component is stable, we can revisit this challenge and dedicate a future cycle to implementing one of the more advanced solutions above.
-</file>
-
-<file path="src/Artifacts/A77. DCE - Whitepaper Generation Plan.md">
-# Artifact A77: DCE - Whitepaper Generation Plan
-
-# Date Created: C181
-
-# Author: AI Model & Curator
-
-# Updated on: C182 (Incorporate "Process as Asset" theme and use case)
-
-  - **Key/Value for A0:**
-  - **Description:** A plan for brainstorming and developing a whitepaper to explain the value of the DCE to external stakeholders, particularly those in government and military contexts.
-  - **Tags:** documentation, planning, whitepaper, stakeholders, government, military
-
-## 1\. Overview & Goal
-
-The director of UKILRN, along with NSA and naval officers, has expressed interest in the Data Curation Environment (DCE) project and requested a whitepaper. The goal of this artifact is to brainstorm themes and develop abstracts tailored to an audience focused on efficiency, auditability, and the application of technology to complex, mission-critical systems.
-
-## 2\. Key Value Proposition & Use Case (Updated C182)
-
-The central argument for the DCE is that it **accelerates the development and maintenance of complex systems by transforming the human-AI interaction workflow.** It moves beyond ad-hoc prompting to a structured process where curated context becomes a persistent, shared asset, enabling rapid iteration and efficient collaboration.
-
-### 2.1. Use Case Spotlight: Rapid Iteration on Curated Datasets
-
-A compelling example of the DCE's value is the curation and maintenance of specialized datasets, such as labs, lessons, or intelligence reports.
-
-1.  **Curation:** An operator uses the DCE to precisely select the relevant source materials (e.g., a set of exam questions) for a specific task.
-2.  **Collaboration:** This "selection set" (the curated context) is a shareable asset. A colleague can instantly load the exact same context, review the previous cycle's work (the history), and continue the task.
-3.  **Rapid Iteration:** When feedback is received (e.g., "The correct answer is too often the longest choice"), the operator doesn't need to manually edit the files. They simply load the curated context and issue a targeted instruction to the AI (e.g., "Camouflage the distractors with more meaningful but ultimately fluffy language"). The AI performs the complex edits against the precise context, completing the update in a single, efficient cycle.
-
-## 3\. Brainstormed Whitepaper Themes
-
-*(See previous versions for initial brainstorming themes A-D)*
-
-### 3.1. Refined Theme (C182)
-
-Based on feedback emphasizing the DCE as an accelerator for existing priorities, a new primary theme has been developed.
-
-**Theme E: Process as Asset: Accelerating specialized content creation through structured Human-AI collaboration.**
-
-  * **Focus:** This theme emphasizes that the DCE transforms the workflow itself into a valuable, reusable asset. It highlights how the combination of rapid data curation, seamless sharing of context (Selection Sets), and the persistent knowledge graph (Cycle History) dramatically accelerates the creation and maintenance of specialized content.
-  * **Audience Appeal:** Directly addresses the concern of "too many priorities" by positioning the DCE as the tool that makes achieving those priorities faster and more efficient. It appeals to operational leadership focused on scaling expertise and accelerating output.
-
-## 4\. Selected Themes & Sample Abstracts
-
-The following abstracts represent the most promising directions. **Sample 4 (Theme E) is the recommended primary direction based on C182 feedback.**
-
------
-
-### **Sample 1: Accelerating Complex Systems Development with Parallel AI Scrutiny**
-
-**Executive Summary:** The integration of Artificial Intelligence into the software development lifecycle (SDLC) promises to accelerate delivery and enhance innovation. However, the stochastic nature of Large Language Models (LLMs) introduces significant risks, as a single AI-generated solution may contain subtle flaws, security vulnerabilities, or inefficiencies. This whitepaper introduces the Data Curation Environment (DCE), a novel framework integrated into Visual Studio Code that mitigates these risks by enabling a parallelized workflow. The DCE allows developers to generate, manage, and test multiple, distinct AI-generated solutions simultaneously. By providing tools for rapid, side-by-side comparison, integrated diffing, and one-click testing within a version-controlled environment, the DCE transforms the process from a linear, high-risk "accept/reject" decision into a strategic portfolio management approach. This paper details the DCE methodology and presents a case for its adoption in mission-critical software projects where speed, quality, and reliability are paramount.
-
------
-
-### **Sample 2: The Auditable Knowledge Graph: Structuring Human-AI Collaboration for Mission-Critical Systems**
-
-**Executive Summary:** As Artificial Intelligence becomes a collaborative partner in complex problem-solving, the process of interaction—the prompts, the AI's suggestions, and the human's decisions—becomes a valuable asset. Traditional AI chat interfaces leave this history as an unstructured, ephemeral transcript. This whitepaper presents the Data Curation Environment (DCE), a system that captures the iterative human-AI collaboration process as a structured, persistent **Knowledge Graph**. Each "cycle" in the DCE workflow creates a node representing the system's state, the curated data context, the human's intent, multiple AI-generated solutions, and the operator's final decision. The resulting graph provides an unprecedented, fully auditable record of the entire analytical or development process. This has profound implications for after-action reviews, training new personnel on complex decision-making, and ensuring accountability in high-stakes environments. This paper outlines the architecture of the DCE and its application in creating transparent, traceable, and valuable knowledge assets from every human-AI interaction.
-
------
-
-### **Sample 3: A Framework for High-Fidelity Context Management in AI-Assisted Operations**
-
-**Executive Summary:** The quality of output from any Large Language Model (LLM) is fundamentally dependent on the quality and precision of the input context. In high-stakes government and military applications, providing incomplete, incorrect, or bloated context can lead to flawed, misleading, or insecure results. This whitepaper introduces the Data Curation Environment (DCE), a framework and toolset designed to solve this "last mile" problem of context engineering. The DCE provides operators with a high-fidelity interface to precisely select, manage, and version the exact data—source code, technical documents, intelligence reports—that forms the prompt for an LLM. By integrating directly into the operator's native environment (VS Code), the DCE minimizes workflow friction and enables a rigorous, repeatable, and auditable process for context curation. This paper argues that such a framework is an essential component for the safe and effective operationalization of AI, moving beyond ad-hoc prompting to a deliberate, engineered approach to human-AI interaction.
-
------
-
-### **Sample 4 (Recommended): Process as Asset: Accelerating Specialized Content Creation through Structured Human-AI Collaboration**
-
-**Executive Summary:** Organizations tasked with developing highly specialized content—such as technical training materials, intelligence reports, or complex software documentation—face a constant bottleneck: the time and expertise required to curate accurate data, collaborate effectively, and rapidly iterate on feedback. Traditional workflows are often manual, opaque, and inefficient. This whitepaper introduces the Data Curation Environment (DCE), a framework that transforms the content creation process itself into a valuable organizational asset. The DCE provides a structured, human-in-the-loop methodology that enables rapid dataset curation, seamless sharing of curated contexts between colleagues, and instant iteration on feedback. By capturing the entire workflow as a persistent, auditable knowledge graph, the DCE doesn't just help teams build content faster; it provides the infrastructure necessary to scale expertise, ensure quality, and accelerate the entire organizational mission.
-
-## 5\. Production Plan
-
-1.  **Theme Selection:** The curator will review the sample abstracts and select the final direction for the whitepaper. (Recommended: Sample 4).
-2.  **Full Draft Generation:** In a subsequent cycle, the AI will be tasked to write the full whitepaper based on the selected theme, using all existing project artifacts as context.
-3.  **Review and Refine:** The curator will review the AI-generated draft, provide feedback, and iterate until the whitepaper is finalized.
 </file>
 
 <file path="src/Artifacts/A149. Local LLM Integration Plan.md">
@@ -26190,13 +26113,11 @@ export default CodeViewer;
 
 <file path="src/client/views/parallel-copilot.view/components/ContextInputs.tsx">
 // src/client/views/parallel-copilot.view/components/ContextInputs.tsx
-// Updated on: C182 (Replace Monaco Editor with react-simple-code-editor)
+// Updated on: C183 (Fix implementation to use prism-react-renderer)
 import * as React from 'react';
 import { formatLargeNumber } from '@/common/utils/formatting';
 import Editor from 'react-simple-code-editor';
-import { highlight, languages } from 'prismjs';
-import 'prismjs/components/prism-markdown';
-import 'prismjs/themes/prism-tomorrow.css'; // Using a standard Prism theme
+import { Highlight, themes } from 'prism-react-renderer';
 
 interface ContextInputsProps {
     cycleContext: string;
@@ -26217,6 +26138,26 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
     onEphemeralContextChange,
     workflowStep
 }) => {
+    const highlightWrapper = (code: string) => (
+        <Highlight
+            theme={themes.vsDark}
+            code={code}
+            language="markdown"
+        >
+            {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                <pre className={className} style={{...style, margin: 0, padding: 0, backgroundColor: 'transparent' }}>
+                    {tokens.map((line, i) => (
+                        <div key={i} {...getLineProps({ line })}>
+                            {line.map((token, key) => (
+                                <span key={key} {...getTokenProps({ token })} />
+                            ))}
+                        </div>
+                    ))}
+                </pre>
+            )}
+        </Highlight>
+    );
+
     return (
         <div className="context-inputs">
             <div className={`context-input-wrapper ${workflowStep === 'awaitingCycleContext' ? 'workflow-highlight' : ''}`}>
@@ -26228,11 +26169,12 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
                     <Editor
                         value={cycleContext}
                         onValueChange={onCycleContextChange}
-                        highlight={code => highlight(code, languages.markdown, 'markdown')}
+                        highlight={highlightWrapper}
                         padding={10}
                         style={{
-                            fontFamily: '"Fira Code", "Fira Mono", monospace',
-                            fontSize: 12,
+                            fontFamily: 'var(--vscode-editor-font-family)',
+                            fontSize: 'var(--vscode-editor-font-size)',
+                            lineHeight: '1.5',
                         }}
                     />
                 </div>
@@ -26246,11 +26188,12 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
                     <Editor
                         value={ephemeralContext}
                         onValueChange={onEphemeralContextChange}
-                        highlight={code => highlight(code, languages.markdown, 'markdown')}
+                        highlight={highlightWrapper}
                         padding={10}
                         style={{
-                            fontFamily: '"Fira Code", "Fira Mono", monospace',
-                            fontSize: 12,
+                            fontFamily: 'var(--vscode-editor-font-family)',
+                            fontSize: 'var(--vscode-editor-font-size)',
+                            lineHeight: '1.5',
                         }}
                     />
                 </div>
@@ -26920,7 +26863,7 @@ export default OnboardingView;
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C182 (Add styles for react-simple-code-editor)
+// Updated on: C183 (Add styles for react-simple-code-editor)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -27002,6 +26945,7 @@ body {
             outline: none !important;
             box-shadow: none !important;
             border: none !important;
+            background-color: transparent !important;
         }
     }
 }
@@ -28777,7 +28721,7 @@ const webviewConfig = {
                 test: /\.s[ac]ss$/i,
                 use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
             },
-            {
+			{
 				test: /\.css$/,
 				use: [MiniCssExtractPlugin.loader, 'css-loader']
 			},
@@ -28896,6 +28840,10 @@ module.exports = [extensionConfig, webviewConfig];
             {
                 "command": "dce.showParallelCopilot",
                 "title": "DCE: Show Parallel Co-Pilot"
+            },
+            {
+                "command": "dce.gitInit",
+                "title": "DCE: Initialize Git Repository"
             }
         ],
         "viewsContainers": {
@@ -28965,7 +28913,8 @@ module.exports = [extensionConfig, webviewConfig];
         "@babel/preset-react": "^7.24.7",
         "@babel/preset-typescript": "^7.24.7",
         "process": "^0.11.10",
-        "path-browserify": "^1.0.1"
+        "path-browserify": "^1.0.1",
+        "@types/prismjs": "^1.26.4"
     },
     "dependencies": {
         "@wooorm/starry-night": "^3.8.0",
@@ -28982,7 +28931,8 @@ module.exports = [extensionConfig, webviewConfig];
         "diff": "^5.2.0",
         "@types/diff": "^5.2.1",
         "react-simple-code-editor": "^0.13.1",
-        "prism-react-renderer": "^2.3.1"
+        "prism-react-renderer": "^2.3.1",
+        "prismjs": "^1.29.0"
     }
 }
 </file>
@@ -29012,5 +28962,50 @@ out
 The-Creator-AI-main/
 prompt.md
 .vscode/dce_cache/
+</file>
+
+<file path="src/Artifacts/A77. DCE - Monaco Editor Replacement Plan.md">
+# Artifact A77: DCE - Monaco Editor Replacement Plan
+# Date Created: C182
+# Author: AI Model & Curator
+# Updated on: C183 (Reflect correct implementation with prism-react-renderer)
+
+- **Key/Value for A0:**
+- **Description:** Documents the failure of the Monaco Editor integration and the new plan to switch to a lighter-weight, non-worker-based editor component.
+- **Tags:** plan, refactor, ui, ux, monaco, codemirror, technical debt, react-simple-code-editor, prism-react-renderer
+
+## 1. Problem Statement
+
+The attempt to integrate the Monaco Editor (`@monaco-editor/react`) into the Parallel Co-Pilot Panel's context panes (Cycles C179-C182) was a failure. Despite multiple attempts to configure the Webpack plugin and adjust the Content Security Policy (CSP), the editor component remained stuck in a perpetual "Loading..." state.
+
+-   **Symptom:** The "Cycle Context" and "Ephemeral Context" panes displayed a "Loading..." message and were completely non-functional.
+-   **Root Cause Analysis (RCA):** The Monaco Editor is a complex component that relies heavily on web workers for its performance and features. The VS Code webview environment has a strict security model (CSP) that makes the setup and bundling of these web workers exceptionally difficult. The "Loading..." state was a direct result of the webview blocking the editor's worker scripts from loading, even with a relaxed CSP. This indicates a fundamental incompatibility between the editor's architecture and the webview's security constraints.
+
+## 2. The Pivot: Prioritizing Stability and Simplicity
+
+A feature-rich but non-functional editor is useless. The new strategy is to pivot away from complex, worker-based editors like Monaco (and likely CodeMirror, which would face similar issues) and adopt a more lightweight and reliable solution that is known to work well within restricted environments.
+
+The new chosen stack is:
+1.  **`react-simple-code-editor`**: A very lightweight library that provides the core functionality of a code editor (maintaining indentation, etc.) using a simple `<textarea>` and a `<pre>` overlay. It does not use web workers, completely avoiding the CSP issues.
+2.  **`prism-react-renderer`**: A popular, React-focused wrapper around `prismjs`. It provides high-quality syntax highlighting and is designed to be integrated with components like `react-simple-code-editor`.
+
+## 3. Technical Implementation Plan (C183)
+
+1.  **Dependencies (`package.json`):**
+    *   **Remove:** `@monaco-editor/react`, `monaco-editor-webpack-plugin`.
+    *   **Add:** `react-simple-code-editor`, `prism-react-renderer`, `prismjs`, and `@types/prismjs`.
+
+2.  **Build Configuration (`webpack.config.js`):**
+    *   Remove the `MonacoWebpackPlugin` entirely.
+
+3.  **CSP Reversion (`common/utils/view-html.ts`):**
+    *   Revert the Content Security Policy to a stricter version, as `worker-src 'blob:'` is no longer needed.
+
+4.  **Component Implementation (`ContextInputs.tsx`):**
+    *   The `<Editor>` component from `@monaco-editor/react` will be replaced with the `<Editor>` component from `react-simple-code-editor`.
+    *   The `highlight` prop of the new editor will be wired to a function that uses the `<Highlight>` component from `prism-react-renderer`. This is the correct pattern for combining these two libraries.
+    *   The component will be configured to use a standard theme (e.g., `themes.vsDark`) and the `markdown` language grammar.
+
+This approach provides the desired Markdown syntax highlighting in a stable, performant, and lightweight component that is compatible with the VS Code webview's security model.
 </file>
 
