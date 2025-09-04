@@ -1,11 +1,25 @@
 # This file tells the VS Code packaging tool which files to ignore.
-# We are removing 'node_modules' because our external dependencies (like xlsx)
-# need to be included in the final package to be available at runtime.
-# The `vsce` tool is smart enough to only bundle production dependencies.
 
-src
-.gitignore
-webpack.config.js
-tsconfig.json
+# Exclude development-time artifacts and large output files
+prompt.md
+flattened_repo.md
+log-state-logs.md
+bootstrap-flattener.js
+
+# Exclude reference directories
+The-Creator-AI-main/
+
+# Exclude project-specific VSCode settings
+.vscode/
+
+# Exclude source maps, which are not needed in the final package
 **/*.map
-**/*.ts
+
+# Exclude source files (they are compiled into dist/)
+# We need to keep the Artifacts .md files for the Cycle 0 onboarding
+# So we can't just ignore all of src.
+# The below lines are commented out as they might be too aggressive
+# and break runtime file reads from dist/ if not handled carefully.
+# We will rely on the .gitignore and the specific file exclusions above for now.
+# src/**/*.ts
+# src/**/*.tsx

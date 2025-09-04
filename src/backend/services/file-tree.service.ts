@@ -1,4 +1,4 @@
-// Updated on: C182 (Add aggressive logging and `dist` exclusion)
+// Updated on: C183 (Add more aggressive logging for FTV flashing bug)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -34,13 +34,16 @@ export class FileTreeService {
         this.gitApi = gitApi;
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (workspaceFolders && workspaceFolders.length > 0) {
-            this.historyFilePath = normalizePath(path.join(workspaceFolders[0].uri.fsPath, '.vscode', 'dce_history.json'));
+            this.historyFilePath = normalizePath(path.join(workspaceFolders.uri.fsPath, '.vscode', 'dce_history.json'));
         }
 
         if (this.gitApi) {
             this.gitApi.onDidOpenRepository(() => this.triggerFullRefresh('git repo opened'));
             this.gitApi.repositories.forEach(repo => {
-                repo.state.onDidChange(() => this.triggerFullRefresh('git state change'));
+                repo.state.onDidChange(() => {
+                    Services.loggerService.warn(`[FTV-FLASH-DEBUG] Git repo state onDidChange event fired.`);
+                    this.triggerFullRefresh('git state change');
+                });
             });
         }
     }
@@ -54,7 +57,7 @@ export class FileTreeService {
             if (serverIpc) {
                 serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, { reason: 'fileOp' });
             }
-        }, 500);
+        }, 1500); // Increased debounce to 1.5s to weather event storms
     }
 
     private triggerDiagnosticsUpdate() {
@@ -73,16 +76,18 @@ export class FileTreeService {
         this.watcher = vscode.workspace.createFileSystemWatcher('**/*');
         const onFileChange = (uri: vscode.Uri, source: string) => {
             const normalizedPath = normalizePath(uri.fsPath);
-            // AGGRESSIVE LOGGING FOR FTV FLASHING BUG
             Services.loggerService.warn(`[FTV-FLASH-DEBUG] Watcher event: ${source} on path: ${normalizedPath}`);
             
             if (this.historyFilePath && normalizedPath === this.historyFilePath) {
                 Services.loggerService.log(`[Watcher] Ignoring change in DCE history file: ${normalizedPath}`);
                 return;
             }
-            if (EXCLUSION_PATTERNS.some(pattern => normalizedPath.includes(`/${pattern}/`) || normalizedPath.endsWith(`/${pattern}`))) {
-                Services.loggerService.log(`[Watcher] Ignoring change in excluded pattern: ${normalizedPath}`);
-                return;
+            for (const pattern of EXCLUSION_PATTERNS) {
+                const searchPattern = `/${pattern}/`;
+                if (normalizedPath.includes(searchPattern)) {
+                    Services.loggerService.log(`[Watcher] Ignoring change in excluded pattern '${pattern}': ${normalizedPath}`);
+                    return;
+                }
             }
             this.triggerFullRefresh(`file change: ${path.basename(normalizedPath)}`);
         };
@@ -178,7 +183,7 @@ export class FileTreeService {
         }
         
         Services.loggerService.log(`Building file tree from scratch.`);
-        const fileTree = await this.buildTreeFromTraversal(workspaceFolders[0].uri);
+        const fileTree = await this.buildTreeFromTraversal(workspaceFolders.uri);
         this.fileTreeCache = [fileTree];
         Services.loggerService.log(`File tree built. Sending to client.`);
         serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: this.fileTreeCache });
@@ -188,7 +193,7 @@ export class FileTreeService {
     private getGitStatusMap(): Map<string, string> {
         if (!this.gitApi?.repositories || this.gitApi.repositories.length === 0) return new Map();
         
-        const repo: Repository = this.gitApi.repositories[0];
+        const repo: Repository = this.gitApi.repositories;
         const getStatusChar = (s: Status) => ({ [Status.INDEX_ADDED]: 'A', [Status.MODIFIED]: 'M', [Status.DELETED]: 'D', [Status.UNTRACKED]: 'U', [Status.IGNORED]: 'I', [Status.CONFLICT]: 'C' }[s] || '');
         
         const changes = [...repo.state.workingTreeChanges, ...repo.state.indexChanges, ...repo.state.mergeChanges];

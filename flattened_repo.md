@@ -1,26 +1,26 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-04T04:15:00.672Z
+  Date Generated: 2025-09-04T11:19:25.411Z
   ---
-  Total Files: 165
-  Approx. Tokens: 461895
+  Total Files: 166
+  Approx. Tokens: 463242
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (254831 tokens)
-2. src\Artifacts\A11. DCE - Regression Case Studies.md (10536 tokens)
-3. src\Artifacts\A0. DCE Master Artifact List.md (7318 tokens)
+2. src\Artifacts\A11. DCE - Regression Case Studies.md (10646 tokens)
+3. src\Artifacts\A0. DCE Master Artifact List.md (7388 tokens)
 4. src\client\views\parallel-copilot.view\view.tsx (6956 tokens)
 5. src\backend\services\prompt.service.ts (4908 tokens)
 6. src\client\views\parallel-copilot.view\view.scss (4598 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4429 tokens)
 8. src\backend\services\file-operation.service.ts (4095 tokens)
 9. src\client\views\context-chooser.view\view.tsx (4079 tokens)
-10. src\backend\services\file-tree.service.ts (3826 tokens)
+10. src\backend\services\file-tree.service.ts (3881 tokens)
 
 <!-- Full File List -->
-1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 432 - Chars: 29271 - Tokens: 7318
+1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 436 - Chars: 29549 - Tokens: 7388
 2. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 3. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
 4. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
@@ -87,7 +87,7 @@
 65. src\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3347 - Tokens: 837
 66. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 3764 - Tokens: 941
 67. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 60 - Chars: 6426 - Tokens: 1607
-68. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 43 - Chars: 2874 - Tokens: 719
+68. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 47 - Chars: 3127 - Tokens: 782
 69. src\Artifacts\A73. DCE - GitService Plan.md - Lines: 44 - Chars: 2548 - Tokens: 637
 70. src\Artifacts\A74. DCE - Per-Input Undo-Redo Feature Plan.md - Lines: 49 - Chars: 3624 - Tokens: 906
 71. src\Artifacts\A75. DCE - Text Area Component A-B-C Test Plan.md - Lines: 50 - Chars: 4761 - Tokens: 1191
@@ -112,7 +112,7 @@
 90. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 41 - Chars: 3000 - Tokens: 750
 91. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 97 - Chars: 4047 - Tokens: 1012
 92. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 45 - Chars: 2899 - Tokens: 725
-93. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 364 - Chars: 42142 - Tokens: 10536
+93. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 366 - Chars: 42584 - Tokens: 10646
 94. src\Artifacts\A42. DCE - Phase 2 - Initial Scaffolding Deployment Script.md - Lines: 246 - Chars: 8264 - Tokens: 2066
 95. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 34 - Chars: 9394 - Tokens: 2349
 96. src\Artifacts\A58. DCE - WinMerge Source Code Analysis.md - Lines: 56 - Chars: 5322 - Tokens: 1331
@@ -127,7 +127,7 @@
 105. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
 106. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
 107. src\backend\services\file-operation.service.ts - Lines: 344 - Chars: 16380 - Tokens: 4095
-108. src\backend\services\file-tree.service.ts - Lines: 296 - Chars: 15301 - Tokens: 3826
+108. src\backend\services\file-tree.service.ts - Lines: 301 - Chars: 15522 - Tokens: 3881
 109. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12820 - Tokens: 3205
 110. src\backend\services\git.service.ts - Lines: 114 - Chars: 5522 - Tokens: 1381
 111. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
@@ -182,15 +182,16 @@
 160. webpack.config.js - Lines: 111 - Chars: 2920 - Tokens: 730
 161. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
 162. package.json - Lines: 147 - Chars: 4730 - Tokens: 1183
-163. .vscodeignore - Lines: 11 - Chars: 356 - Tokens: 89
+163. .vscodeignore - Lines: 25 - Chars: 787 - Tokens: 197
 164. .gitignore - Lines: 10 - Chars: 128 - Tokens: 32
-165. src\Artifacts\A77. DCE - Monaco Editor Replacement Plan.md - Lines: 42 - Chars: 3610 - Tokens: 903
+165. src\Artifacts\A78. DCE - VSIX Packaging and FTV Flashing Bug.md - Lines: 50 - Chars: 3687 - Tokens: 922
+166. dist\Artifacts\A78. DCE - VSIX Packaging and FTV Flashing Bug.md - Lines: 50 - Chars: 3687 - Tokens: 922
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C182 (Add A77 for Monaco Editor replacement plan)
+# Updated on: C183 (Add A78 for packaging and flashing bug)
 
 ## 1. Purpose
 
@@ -535,6 +536,10 @@
 ### A77. DCE - Monaco Editor Replacement Plan
 - **Description:** Documents the failure of the Monaco Editor integration and the new plan to switch to a lighter-weight, non-worker-based editor component.
 - **Tags:** plan, refactor, ui, ux, monaco, codemirror, technical debt
+
+### A78. DCE - VSIX Packaging and FTV Flashing Bug
+- **Description:** Documents the root cause and solution for the bloated VSIX package and the persistent File Tree View flashing bug in the packaged extension.
+- **Tags:** bug fix, packaging, vsix, vscodeignore, file watcher, git
 
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
@@ -4300,7 +4305,7 @@ A core part of the DCE workflow involves accepting an AI-generated response and 
 # Artifact A72: DCE - README for Artifacts
 # Date Created: C158
 # Author: AI Model & Curator
-# Updated on: C184 (Strengthen Git initialization guidance)
+# Updated on: C183 (Strengthen Git initialization and `.gitignore` guidance)
 
 - **Key/Value for A0:**
 - **Description:** The content for the `README.md` file that is automatically created in a new project's `src/Artifacts` directory, explaining the purpose of the extension and the artifact-driven workflow.
@@ -4327,11 +4332,15 @@ Development in the DCE is organized into **Cycles**. You have just completed the
 1.  **Initialize Your Git Repository (CRITICAL):**
     To take full advantage of the DCE's testing workflow (creating baselines and restoring changes), you **must** initialize a Git repository.
     
-    Open a terminal in your project's root directory (you can use the integrated terminal in VS Code: `Terminal > New Terminal`) and run the following command:
+    Open a terminal in your project's root directory (you can use the integrated terminal in VS Code: `Terminal > New Terminal`) and run the following commands:
     ```bash
     git init
+    # Create or update your .gitignore file with the line below
+    echo ".vscode/" >> .gitignore
+    git add .
+    git commit -m "Initial commit"
     ```
-    For a complete guide on setting up your repository and linking it to a service like GitHub, please refer to the `GitHub Repository Setup Guide.md` artifact that was generated alongside this file.
+    **Why `.gitignore`?** The DCE saves its state in a `.vscode/dce_history.json` file. Adding `.vscode/` to your `.gitignore` is crucial to prevent the extension's UI from flashing every time it auto-saves. For a complete guide, refer to the `GitHub Repository Setup Guide.md` artifact.
 
 2.  **Submit Your First Prompt:** The `prompt.md` file has been automatically opened for you. This file contains your project plan and instructions for the AI. Copy its entire contents and paste it into your preferred AI chat interface (like Google's AI Studio, ChatGPT, etc.).
 
@@ -5740,7 +5749,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C182 (Update FTV Flashing RCA)
+# Updated on: C183 (Expand FTV Flashing RCA to include Git API)
 
 - **Key/Value for A0:**
 - **Description:** Documents recurring bugs, their root causes, and codified solutions to prevent future regressions during development.
@@ -5757,15 +5766,17 @@ This document serves as a living record of persistent or complex bugs that have 
 ### Case Study 023: FTV Flashing on PCPP Auto-Save
 
 -   **Artifacts Affected:** `src/backend/services/file-tree.service.ts`
--   **Cycles Observed:** C1, C4, C1, C179, C182
--   **Symptom:** The entire Data Curation file tree view (FTV) flashes or completely reloads whenever the user stops typing in one of the Parallel Co-Pilot Panel's text areas, or potentially when other background file changes occur (e.g., from `npm run watch` compiling to the `dist` folder).
--   **Root Cause Analysis (RCA):** The backend `FileSystemWatcher` in `file-tree.service.ts` is configured to monitor the entire workspace for changes to trigger a refresh of the FTV. It was incorrectly reacting to legitimate, high-frequency writes to files that are part of the extension's own operation, not the user's source code. The two primary culprits are:
-    1.  The PCPP automatically saving its state to `dce_history.json` in the `.vscode` directory.
-    2.  The Webpack `watch` process constantly recompiling source files into the `dist` directory.
+-   **Cycles Observed:** C1, C4, C1, C179, C182, C183
+-   **Symptom:** The entire Data Curation file tree view (FTV) flashes or completely reloads. This is especially noticeable in the packaged version of the extension. The trigger appears to be a storm of file change events.
+-   **Root Cause Analysis (RCA):** The backend `FileSystemWatcher` and the Git API integration in `file-tree.service.ts` are configured to monitor the workspace for changes to trigger a refresh of the FTV. The system is overly sensitive and reacts to legitimate, high-frequency writes that are part of the extension's own operation or the development environment, not the user's source code. The primary culprits are:
+    1.  **PCPP Auto-Save:** The Parallel Co-Pilot Panel automatically saving its state to `dce_history.json` in the `.vscode` directory.
+    2.  **Build Artifacts:** The Webpack `watch` process constantly recompiling source files into the `dist` directory.
+    3.  **Git API Events:** The listener for `repo.state.onDidChange` is extremely sensitive. It fires for almost any change in the repository, including those in ignored files or internal Git state, creating a "refresh storm."
 -   **Codified Solution & Best Practice:**
-    1.  **Aggressive, Pre-emptive Logging:** When this bug recurs, the first step is to add an unconditional `Services.loggerService.log` at the absolute beginning of the `onFileChange` handler in `file-tree.service.ts`. This log must output the URI of every single event the watcher sees, *before* any filtering logic is applied. This provides a definitive, unfiltered view of what is triggering the refresh.
+    1.  **Aggressive, Pre-emptive Logging:** When this bug recurs, the first step is to add an unconditional `Services.loggerService.log` at the absolute beginning of the `onFileChange` handler and inside the `repo.state.onDidChange` listener. This log must output the URI of every single event the system sees, *before* any filtering logic is applied, to provide a definitive view of what is triggering the refresh.
     2.  **Specific Watcher Exclusions:** The file watcher logic must be highly specific about what it ignores. The fix is to add an explicit check at the beginning of the change handlers to immediately ignore any event related to the exact path of the history file (`.vscode/dce_history.json`) and any file within the `dist` directory.
-    3.  **Example:** `if (normalizedPath.includes('/dist/') || normalizedPath.endsWith('.vscode/dce_history.json')) { return; }`. This prevents the watcher from reacting to the extension's own internal state changes and build artifacts while still correctly monitoring user-made changes to the workspace.
+    3.  **Dampen Git API Listener:** The `repo.state.onDidChange` listener is too broad. It should be debounced heavily or replaced with more specific listeners if the API allows. For now, a long debounce on the `triggerFullRefresh` function is the primary mitigation for this source of refresh events.
+    4.  **Example Exclusion:** `if (normalizedPath.includes('/dist/') || normalizedPath.endsWith('.vscode/dce_history.json')) { return; }`.
 
 ---
 
@@ -21932,7 +21943,7 @@ export class FileOperationService {
 </file>
 
 <file path="src/backend/services/file-tree.service.ts">
-// Updated on: C182 (Add aggressive logging and `dist` exclusion)
+// Updated on: C183 (Add more aggressive logging for FTV flashing bug)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -21968,13 +21979,16 @@ export class FileTreeService {
         this.gitApi = gitApi;
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (workspaceFolders && workspaceFolders.length > 0) {
-            this.historyFilePath = normalizePath(path.join(workspaceFolders[0].uri.fsPath, '.vscode', 'dce_history.json'));
+            this.historyFilePath = normalizePath(path.join(workspaceFolders.uri.fsPath, '.vscode', 'dce_history.json'));
         }
 
         if (this.gitApi) {
             this.gitApi.onDidOpenRepository(() => this.triggerFullRefresh('git repo opened'));
             this.gitApi.repositories.forEach(repo => {
-                repo.state.onDidChange(() => this.triggerFullRefresh('git state change'));
+                repo.state.onDidChange(() => {
+                    Services.loggerService.warn(`[FTV-FLASH-DEBUG] Git repo state onDidChange event fired.`);
+                    this.triggerFullRefresh('git state change');
+                });
             });
         }
     }
@@ -21988,7 +22002,7 @@ export class FileTreeService {
             if (serverIpc) {
                 serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, { reason: 'fileOp' });
             }
-        }, 500);
+        }, 1500); // Increased debounce to 1.5s to weather event storms
     }
 
     private triggerDiagnosticsUpdate() {
@@ -22007,16 +22021,18 @@ export class FileTreeService {
         this.watcher = vscode.workspace.createFileSystemWatcher('**/*');
         const onFileChange = (uri: vscode.Uri, source: string) => {
             const normalizedPath = normalizePath(uri.fsPath);
-            // AGGRESSIVE LOGGING FOR FTV FLASHING BUG
             Services.loggerService.warn(`[FTV-FLASH-DEBUG] Watcher event: ${source} on path: ${normalizedPath}`);
             
             if (this.historyFilePath && normalizedPath === this.historyFilePath) {
                 Services.loggerService.log(`[Watcher] Ignoring change in DCE history file: ${normalizedPath}`);
                 return;
             }
-            if (EXCLUSION_PATTERNS.some(pattern => normalizedPath.includes(`/${pattern}/`) || normalizedPath.endsWith(`/${pattern}`))) {
-                Services.loggerService.log(`[Watcher] Ignoring change in excluded pattern: ${normalizedPath}`);
-                return;
+            for (const pattern of EXCLUSION_PATTERNS) {
+                const searchPattern = `/${pattern}/`;
+                if (normalizedPath.includes(searchPattern)) {
+                    Services.loggerService.log(`[Watcher] Ignoring change in excluded pattern '${pattern}': ${normalizedPath}`);
+                    return;
+                }
             }
             this.triggerFullRefresh(`file change: ${path.basename(normalizedPath)}`);
         };
@@ -22112,7 +22128,7 @@ export class FileTreeService {
         }
         
         Services.loggerService.log(`Building file tree from scratch.`);
-        const fileTree = await this.buildTreeFromTraversal(workspaceFolders[0].uri);
+        const fileTree = await this.buildTreeFromTraversal(workspaceFolders.uri);
         this.fileTreeCache = [fileTree];
         Services.loggerService.log(`File tree built. Sending to client.`);
         serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: this.fileTreeCache });
@@ -22122,7 +22138,7 @@ export class FileTreeService {
     private getGitStatusMap(): Map<string, string> {
         if (!this.gitApi?.repositories || this.gitApi.repositories.length === 0) return new Map();
         
-        const repo: Repository = this.gitApi.repositories[0];
+        const repo: Repository = this.gitApi.repositories;
         const getStatusChar = (s: Status) => ({ [Status.INDEX_ADDED]: 'A', [Status.MODIFIED]: 'M', [Status.DELETED]: 'D', [Status.UNTRACKED]: 'U', [Status.IGNORED]: 'I', [Status.CONFLICT]: 'C' }[s] || '');
         
         const changes = [...repo.state.workingTreeChanges, ...repo.state.indexChanges, ...repo.state.mergeChanges];
@@ -28939,16 +28955,30 @@ module.exports = [extensionConfig, webviewConfig];
 
 <file path=".vscodeignore">
 # This file tells the VS Code packaging tool which files to ignore.
-# We are removing 'node_modules' because our external dependencies (like xlsx)
-# need to be included in the final package to be available at runtime.
-# The `vsce` tool is smart enough to only bundle production dependencies.
 
-src
-.gitignore
-webpack.config.js
-tsconfig.json
+# Exclude development-time artifacts and large output files
+prompt.md
+flattened_repo.md
+log-state-logs.md
+bootstrap-flattener.js
+
+# Exclude reference directories
+The-Creator-AI-main/
+
+# Exclude project-specific VSCode settings
+.vscode/
+
+# Exclude source maps, which are not needed in the final package
 **/*.map
-**/*.ts
+
+# Exclude source files (they are compiled into dist/)
+# We need to keep the Artifacts .md files for the Cycle 0 onboarding
+# So we can't just ignore all of src.
+# The below lines are commented out as they might be too aggressive
+# and break runtime file reads from dist/ if not handled carefully.
+# We will rely on the .gitignore and the specific file exclusions above for now.
+# src/**/*.ts
+# src/**/*.tsx
 </file>
 
 <file path=".gitignore">
@@ -28964,48 +28994,109 @@ prompt.md
 .vscode/dce_cache/
 </file>
 
-<file path="src/Artifacts/A77. DCE - Monaco Editor Replacement Plan.md">
-# Artifact A77: DCE - Monaco Editor Replacement Plan
-# Date Created: C182
+<file path="src/Artifacts/A78. DCE - VSIX Packaging and FTV Flashing Bug.md">
+# Artifact A78: DCE - VSIX Packaging and FTV Flashing Bug
+# Date Created: C183
 # Author: AI Model & Curator
-# Updated on: C183 (Reflect correct implementation with prism-react-renderer)
 
 - **Key/Value for A0:**
-- **Description:** Documents the failure of the Monaco Editor integration and the new plan to switch to a lighter-weight, non-worker-based editor component.
-- **Tags:** plan, refactor, ui, ux, monaco, codemirror, technical debt, react-simple-code-editor, prism-react-renderer
+- **Description:** Documents the root cause and solution for the bloated VSIX package and the persistent File Tree View flashing bug in the packaged extension.
+- **Tags:** bug fix, packaging, vsix, vscodeignore, file watcher, git
 
-## 1. Problem Statement
+## 1. Overview
 
-The attempt to integrate the Monaco Editor (`@monaco-editor/react`) into the Parallel Co-Pilot Panel's context panes (Cycles C179-C182) was a failure. Despite multiple attempts to configure the Webpack plugin and adjust the Content Security Policy (CSP), the editor component remained stuck in a perpetual "Loading..." state.
+This document addresses two critical issues identified during the packaging and testing of the DCE extension in Cycle 183:
+1.  The final `.vsix` extension file is excessively large due to the inclusion of unnecessary development files.
+2.  The File Tree View (FTV) exhibits a rapid "flashing" or refresh storm in the packaged version, which does not occur in the Extension Development Host.
 
--   **Symptom:** The "Cycle Context" and "Ephemeral Context" panes displayed a "Loading..." message and were completely non-functional.
--   **Root Cause Analysis (RCA):** The Monaco Editor is a complex component that relies heavily on web workers for its performance and features. The VS Code webview environment has a strict security model (CSP) that makes the setup and bundling of these web workers exceptionally difficult. The "Loading..." state was a direct result of the webview blocking the editor's worker scripts from loading, even with a relaxed CSP. This indicates a fundamental incompatibility between the editor's architecture and the webview's security constraints.
+## 2. Problem 1: Bloated VSIX Package
 
-## 2. The Pivot: Prioritizing Stability and Simplicity
+-   **Symptom:** The generated `.vsix` file is over 80MB and contains numerous files and directories that are not required for the extension to run, such as `prompt.md`, `flattened_repo.md`, the `The-Creator-AI-main/` reference directory, and the project's own `.vscode/` settings.
+-   **Root Cause Analysis (RCA):** The `.vscodeignore` file, which instructs the `vsce` packaging tool which files to exclude, was incomplete. By default, `vsce` includes all files not explicitly ignored or listed in `.gitignore`.
+-   **Codified Solution:** The `.vscodeignore` file must be updated to include patterns for all development-time artifacts, large output files, and source code that is not needed at runtime. This ensures a lean, efficient package.
 
-A feature-rich but non-functional editor is useless. The new strategy is to pivot away from complex, worker-based editors like Monaco (and likely CodeMirror, which would face similar issues) and adopt a more lightweight and reliable solution that is known to work well within restricted environments.
+### Proposed `.vscodeignore` additions:
+```
+# Development and output files
+prompt.md
+flattened_repo.md
+log-state-logs.md
+bootstrap-flattener.js
 
-The new chosen stack is:
-1.  **`react-simple-code-editor`**: A very lightweight library that provides the core functionality of a code editor (maintaining indentation, etc.) using a simple `<textarea>` and a `<pre>` overlay. It does not use web workers, completely avoiding the CSP issues.
-2.  **`prism-react-renderer`**: A popular, React-focused wrapper around `prismjs`. It provides high-quality syntax highlighting and is designed to be integrated with components like `react-simple-code-editor`.
+# Reference directories
+The-Creator-AI-main/
 
-## 3. Technical Implementation Plan (C183)
+# Project-specific VSCode settings
+.vscode/
 
-1.  **Dependencies (`package.json`):**
-    *   **Remove:** `@monaco-editor/react`, `monaco-editor-webpack-plugin`.
-    *   **Add:** `react-simple-code-editor`, `prism-react-renderer`, `prismjs`, and `@types/prismjs`.
+# Source maps and source code (already compiled to dist/)
+**/*.map
+**/*.ts
+**/*.tsx
+```
 
-2.  **Build Configuration (`webpack.config.js`):**
-    *   Remove the `MonacoWebpackPlugin` entirely.
+## 3. Problem 2: FTV Flashing in Packaged Extension
 
-3.  **CSP Reversion (`common/utils/view-html.ts`):**
-    *   Revert the Content Security Policy to a stricter version, as `worker-src 'blob:'` is no longer needed.
+-   **Symptom:** The FTV continuously refreshes, making it unusable. Console logs show a storm of `[triggerFullRefresh] Called because: git state change` events.
+-   **Root Cause Analysis (RCA):** The refresh storm is caused by an overly sensitive event listener combined with file system activity. The listener for `repo.state.onDidChange` in `file-tree.service.ts` is the primary culprit. This event fires for almost any change detected by the Git extension, including changes to build artifacts in the `dist/` directory or internal Git state files. In the packaged extension, the file layout and timing differ from the dev host, likely exposing this sensitivity more acutely. The file system watcher may also be contributing by picking up changes that slip past the exclusion patterns.
+-   **Codified Solution & Best Practice:**
+    1.  **Diagnose with Aggressive Logging:** The immediate solution is to inject high-visibility logging into `file-tree.service.ts` to pinpoint the exact trigger.
+        *   Add a log inside the `repo.state.onDidChange` listener to confirm its firing frequency.
+        *   Add a log at the very beginning of the `onFileChange` handler to see every single file path the watcher detects, before any exclusion logic is applied.
+    2.  **Strengthen Exclusions:** The exclusion logic in `file-tree.service.ts` must be made more robust to explicitly ignore build artifacts and internal state files under all conditions.
+    3.  **Dampen Event Listener:** The `repo.state.onDidChange` listener should be heavily debounced via the `triggerFullRefresh` function to prevent a storm of events from causing a storm of UI updates. A longer-term solution would be to find a more specific Git API event to listen to, if one exists.
+</file>
 
-4.  **Component Implementation (`ContextInputs.tsx`):**
-    *   The `<Editor>` component from `@monaco-editor/react` will be replaced with the `<Editor>` component from `react-simple-code-editor`.
-    *   The `highlight` prop of the new editor will be wired to a function that uses the `<Highlight>` component from `prism-react-renderer`. This is the correct pattern for combining these two libraries.
-    *   The component will be configured to use a standard theme (e.g., `themes.vsDark`) and the `markdown` language grammar.
+<file path="dist/Artifacts/A78. DCE - VSIX Packaging and FTV Flashing Bug.md">
+# Artifact A78: DCE - VSIX Packaging and FTV Flashing Bug
+# Date Created: C183
+# Author: AI Model & Curator
 
-This approach provides the desired Markdown syntax highlighting in a stable, performant, and lightweight component that is compatible with the VS Code webview's security model.
+- **Key/Value for A0:**
+- **Description:** Documents the root cause and solution for the bloated VSIX package and the persistent File Tree View flashing bug in the packaged extension.
+- **Tags:** bug fix, packaging, vsix, vscodeignore, file watcher, git
+
+## 1. Overview
+
+This document addresses two critical issues identified during the packaging and testing of the DCE extension in Cycle 183:
+1.  The final `.vsix` extension file is excessively large due to the inclusion of unnecessary development files.
+2.  The File Tree View (FTV) exhibits a rapid "flashing" or refresh storm in the packaged version, which does not occur in the Extension Development Host.
+
+## 2. Problem 1: Bloated VSIX Package
+
+-   **Symptom:** The generated `.vsix` file is over 80MB and contains numerous files and directories that are not required for the extension to run, such as `prompt.md`, `flattened_repo.md`, the `The-Creator-AI-main/` reference directory, and the project's own `.vscode/` settings.
+-   **Root Cause Analysis (RCA):** The `.vscodeignore` file, which instructs the `vsce` packaging tool which files to exclude, was incomplete. By default, `vsce` includes all files not explicitly ignored or listed in `.gitignore`.
+-   **Codified Solution:** The `.vscodeignore` file must be updated to include patterns for all development-time artifacts, large output files, and source code that is not needed at runtime. This ensures a lean, efficient package.
+
+### Proposed `.vscodeignore` additions:
+```
+# Development and output files
+prompt.md
+flattened_repo.md
+log-state-logs.md
+bootstrap-flattener.js
+
+# Reference directories
+The-Creator-AI-main/
+
+# Project-specific VSCode settings
+.vscode/
+
+# Source maps and source code (already compiled to dist/)
+**/*.map
+**/*.ts
+**/*.tsx
+```
+
+## 3. Problem 2: FTV Flashing in Packaged Extension
+
+-   **Symptom:** The FTV continuously refreshes, making it unusable. Console logs show a storm of `[triggerFullRefresh] Called because: git state change` events.
+-   **Root Cause Analysis (RCA):** The refresh storm is caused by an overly sensitive event listener combined with file system activity. The listener for `repo.state.onDidChange` in `file-tree.service.ts` is the primary culprit. This event fires for almost any change detected by the Git extension, including changes to build artifacts in the `dist/` directory or internal Git state files. In the packaged extension, the file layout and timing differ from the dev host, likely exposing this sensitivity more acutely. The file system watcher may also be contributing by picking up changes that slip past the exclusion patterns.
+-   **Codified Solution & Best Practice:**
+    1.  **Diagnose with Aggressive Logging:** The immediate solution is to inject high-visibility logging into `file-tree.service.ts` to pinpoint the exact trigger.
+        *   Add a log inside the `repo.state.onDidChange` listener to confirm its firing frequency.
+        *   Add a log at the very beginning of the `onFileChange` handler to see every single file path the watcher detects, before any exclusion logic is applied.
+    2.  **Strengthen Exclusions:** The exclusion logic in `file-tree.service.ts` must be made more robust to explicitly ignore build artifacts and internal state files under all conditions.
+    3.  **Dampen Event Listener:** The `repo.state.onDidChange` listener should be heavily debounced via the `triggerFullRefresh` function to prevent a storm of events from causing a storm of UI updates. A longer-term solution would be to find a more specific Git API event to listen to, if one exists.
 </file>
 
