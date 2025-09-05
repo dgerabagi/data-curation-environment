@@ -1,5 +1,5 @@
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C183 (Add styles for react-simple-code-editor)
+// Updated on: C5 (Remove simple-editor styles)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -60,28 +60,10 @@ body {
             display: flex;
             justify-content: space-between;
         }
-    }
 
-    .editor-container {
-        border: 1px solid var(--vscode-input-border);
-        border-radius: 2px;
-        height: 150px; 
-        background-color: var(--vscode-input-background);
-        overflow: hidden;
-        position: relative;
-    }
-
-    .simple-editor {
-        & > div {
-            height: 100%;
-            overflow: auto !important;
-        }
-
-        textarea, pre {
-            outline: none !important;
-            box-shadow: none !important;
-            border: none !important;
-            background-color: transparent !important;
+        // Use response-textarea styles for consistency
+        .response-textarea {
+            height: 150px;
         }
     }
 }
@@ -444,7 +426,7 @@ body {
     padding: 4px;
     font-family: var(--vscode-editor-font-family);
     font-size: var(--vscode-editor-font-size);
-    resize: none;
+    resize: vertical;
      &:focus {
         outline: 1px solid var(--vscode-focusBorder);
     }
