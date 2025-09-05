@@ -1,10 +1,11 @@
-// Updated on: C3 (Add HighlightContext channels)
+// Updated on: C184 (Add UpdateDecorations channel)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
 
 export type SelectionSet = { [name: string]: string[] };
 export type ProblemCountsMap = { [path: string]: { error: number; warning: number; } };
+export type GitStatusMap = { [path: string]: string };
 export type BatchWriteFile = { path: string; content: string };
 
 export interface ComparisonMetrics {
@@ -74,6 +75,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.FocusFile ? { path: string } :
     T extends ServerToClientChannel.SendAutoAddState ? { enabled: boolean } :
     T extends ServerToClientChannel.UpdateProblemCounts ? { problemMap: ProblemCountsMap } :
+    T extends ServerToClientChannel.UpdateDecorations ? { problemMap: ProblemCountsMap, gitStatusMap: GitStatusMap } :
     T extends ServerToClientChannel.UpdateNodeStats ? { path: string, tokenCount: number, error?: string } :
     T extends ServerToClientChannel.SendFileContent ? { path: string, content: string | null } :
     T extends ServerToClientChannel.SendFileExistence ? { existenceMap: { [path: string]: boolean } } :

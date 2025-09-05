@@ -71,6 +71,7 @@ export enum ServerToClientChannel {
     FocusFile = "serverToClient.focusFile",
     SendAutoAddState = "serverToClient.sendAutoAddState",
     UpdateProblemCounts = "serverToClient.updateProblemCounts",
+    UpdateDecorations = "serverToClient.updateDecorations", // New in C184
     UpdateNodeStats = "serverToClient.updateNodeStats",
     SendFileContent = "serverToClient.sendFileContent",
     

@@ -10,8 +10,7 @@ export interface FileNode {
     isPdf: boolean;
     isExcel: boolean;
     isWordDoc: boolean;
-    isSelectable: boolean; // New in C160
-    gitStatus?: string; 
-    problemCounts?: { error: number; warning: number; };
+    isSelectable: boolean;
+    // gitStatus and problemCounts are removed as they are now handled dynamically
     error?: string;
 }

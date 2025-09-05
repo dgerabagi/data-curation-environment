@@ -1,4 +1,4 @@
-// Updated on: C170 (Fix TS errors from array access)
+// Updated on: C184 (Add gitStatusMap state and handler)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -12,7 +12,7 @@ import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, Vsc
 import { logger } from '@/client/utils/logger';
 import SelectedFilesView from '../../components/SelectedFilesView';
 import { addRemovePathInSelectedFiles, removePathsFromSelected } from '@/client/components/file-tree/FileTree.utils';
-import { SelectionSet, ProblemCountsMap } from '@/common/ipc/channels.type';
+import { SelectionSet, ProblemCountsMap, GitStatusMap } from '@/common/ipc/channels.type';
 import path from 'path-browserify';
 
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
@@ -31,8 +31,9 @@ const App = () => {
     const [isSearchVisible, setIsSearchVisible] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [problemMap, setProblemMap] = useState<ProblemCountsMap>({});
+    const [gitStatusMap, setGitStatusMap] = useState<GitStatusMap>({});
     const [isDraggingOver, setIsDraggingOver] = useState(false);
-    const [isWorkspaceTrusted, setIsWorkspaceTrusted] = useState(true); // Assume trusted by default
+    const [isWorkspaceTrusted, setIsWorkspaceTrusted] = useState(true);
     const [clipboard, setClipboard] = useState<{ path: string; type: 'copy' } | null>(null);
     const suppressActiveFileReveal = useRef(false);
     const processedFilesCache = useRef(new Set<string>());
@@ -54,30 +55,13 @@ const App = () => {
 
     useEffect(() => {
         if (files.length === 0 || checkedFiles.length === 0) return;
-
         const effectivelySelectedFiles = new Set<string>();
         const fileMap = new Map<string, FileNode>();
-        
         const buildFileMap = (node: FileNode) => { fileMap.set(node.absolutePath, node); node.children?.forEach(buildFileMap); };
         files.forEach(buildFileMap);
-
-        const addDescendantFiles = (node: FileNode) => {
-            if (!node.isSelectable) return;
-            if (!node.children) { if (!effectivelySelectedFiles.has(node.absolutePath)) { effectivelySelectedFiles.add(node.absolutePath); } } 
-            else { node.children.forEach(addDescendantFiles); }
-        };
-
+        const addDescendantFiles = (node: FileNode) => { if (!node.isSelectable) return; if (!node.children) { if (!effectivelySelectedFiles.has(node.absolutePath)) { effectivelySelectedFiles.add(node.absolutePath); } } else { node.children.forEach(addDescendantFiles); } };
         checkedFiles.forEach(path => { const node = fileMap.get(path); if (node) addDescendantFiles(node); });
-
-        effectivelySelectedFiles.forEach(path => {
-            if (processedFilesCache.current.has(path)) return;
-            const extension = `.${path.split('.').pop()?.toLowerCase() || ''}`;
-            let requested = false;
-            if (extension === '.pdf') { clientIpc.sendToServer(ClientToServerChannel.RequestPdfToText, { path }); requested = true; } 
-            else if (EXCEL_EXTENSIONS.has(extension)) { clientIpc.sendToServer(ClientToServerChannel.RequestExcelToText, { path }); requested = true; } 
-            else if (WORD_EXTENSIONS.has(extension)) { clientIpc.sendToServer(ClientToServerChannel.RequestWordToText, { path }); requested = true; }
-            if (requested) processedFilesCache.current.add(path);
-        });
+        effectivelySelectedFiles.forEach(path => { if (processedFilesCache.current.has(path)) return; const extension = `.${path.split('.').pop()?.toLowerCase() || ''}`; let requested = false; if (extension === '.pdf') { clientIpc.sendToServer(ClientToServerChannel.RequestPdfToText, { path }); requested = true; } else if (EXCEL_EXTENSIONS.has(extension)) { clientIpc.sendToServer(ClientToServerChannel.RequestExcelToText, { path }); requested = true; } else if (WORD_EXTENSIONS.has(extension)) { clientIpc.sendToServer(ClientToServerChannel.RequestWordToText, { path }); requested = true; } if (requested) processedFilesCache.current.add(path); });
     }, [checkedFiles, files, clientIpc]);
 
     useEffect(() => {
@@ -90,17 +74,8 @@ const App = () => {
         clientIpc.onServerMessage(ServerToClientChannel.SendAutoAddState, ({ enabled }) => setIsAutoAddEnabled(enabled));
         clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'fileOp') { suppressActiveFileReveal.current = true; setTimeout(() => { suppressActiveFileReveal.current = false; }, 2000); } requestFiles(true); clientIpc.sendToServer(ClientToServerChannel.RequestLastSelection, {}); });
         clientIpc.onServerMessage(ServerToClientChannel.UpdateProblemCounts, ({ problemMap: newProblemMap }) => setProblemMap(newProblemMap));
-        clientIpc.onServerMessage(ServerToClientChannel.UpdateNodeStats, ({ path, tokenCount, error }) => {
-            processedFilesCache.current.add(path); 
-            setFiles(currentFiles => {
-                const newFiles = JSON.parse(JSON.stringify(currentFiles));
-                const findAndUpdate = (nodes: FileNode[]) => {
-                    for (const node of nodes) { if (node.absolutePath === path) { node.tokenCount = tokenCount; node.error = error; return true; } if (node.children && findAndUpdate(node.children)) return true; }
-                    return false;
-                };
-                findAndUpdate(newFiles); return newFiles;
-            });
-        });
+        clientIpc.onServerMessage(ServerToClientChannel.UpdateDecorations, ({ problemMap, gitStatusMap }) => { setProblemMap(problemMap); setGitStatusMap(gitStatusMap); });
+        clientIpc.onServerMessage(ServerToClientChannel.UpdateNodeStats, ({ path, tokenCount, error }) => { processedFilesCache.current.add(path); setFiles(currentFiles => { const newFiles = JSON.parse(JSON.stringify(currentFiles)); const findAndUpdate = (nodes: FileNode[]) => { for (const node of nodes) { if (node.absolutePath === path) { node.tokenCount = tokenCount; node.error = error; return true; } if (node.children && findAndUpdate(node.children)) return true; } return false; }; findAndUpdate(newFiles); return newFiles; }); });
         clientIpc.sendToServer(ClientToServerChannel.RequestInitialData, {});
         clientIpc.sendToServer(ClientToServerChannel.RequestLastSelection, {});
     }, [clientIpc]);
@@ -109,13 +84,13 @@ const App = () => {
     const handleRefresh = () => { processedFilesCache.current.clear(); requestFiles(true); };
     const handleExpandAll = () => setExpandAllTrigger(c => c + 1);
     const handleCollapseAll = () => setCollapseTrigger(c => c + 1);
-    const getParentDirForNewItem = (): string => { if (activeFile) { const nodeMap = new Map<string, FileNode>(); const buildMap = (node: FileNode) => { nodeMap.set(node.absolutePath, node); node.children?.forEach(buildMap); }; files.forEach(buildMap); const activeNode = nodeMap.get(activeFile); if (activeNode) { return activeNode.children ? activeNode.absolutePath : activeFile.substring(0, activeFile.lastIndexOf('/')); } } return files.length > 0 && files[0] ? files[0].absolutePath : ''; };
+    const getParentDirForNewItem = (): string => { if (activeFile) { const nodeMap = new Map<string, FileNode>(); const buildMap = (node: FileNode) => { nodeMap.set(node.absolutePath, node); node.children?.forEach(buildMap); }; files.forEach(buildMap); const activeNode = nodeMap.get(activeFile); if (activeNode) { return activeNode.children ? activeNode.absolutePath : activeFile.substring(0, activeFile.lastIndexOf('/')); } } return files.length > 0 ? files[0].absolutePath : ''; };
     const handleNewFile = () => clientIpc.sendToServer(ClientToServerChannel.RequestNewFile, { parentDirectory: getParentDirForNewItem() });
     const handleNewFolder = () => clientIpc.sendToServer(ClientToServerChannel.RequestNewFolder, { parentDirectory: getParentDirForNewItem() });
     const handleToggleAutoAdd = () => { const newState = !isAutoAddEnabled; setIsAutoAddEnabled(newState); clientIpc.sendToServer(ClientToServerChannel.SaveAutoAddState, { enabled: newState }); };
     const handleRemoveFromSelection = (pathsToRemove: string[]) => { setCheckedFiles(currentChecked => { const newChecked = removePathsFromSelected(pathsToRemove, currentChecked, files); clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths: newChecked }); return newChecked; }); };
     const processDrop = (event: React.DragEvent, node: FileNode) => { const targetDir = node.children ? node.absolutePath : path.dirname(node.absolutePath); if (event.dataTransfer.files?.length > 0) { Array.from(event.dataTransfer.files).forEach(file => { const reader = new FileReader(); reader.onload = (e) => { if (e.target?.result instanceof ArrayBuffer) { clientIpc.sendToServer(ClientToServerChannel.RequestAddFileFromBuffer, { targetPath: `${targetDir}/${file.name}`.replace(/\\/g, '/'), data: new Uint8Array(e.target.result) }); } }; reader.readAsArrayBuffer(file); }); return; } const uriList = event.dataTransfer.getData('text/uri-list'); if (uriList) { const sourceUri = uriList.split('\n')[0].trim(); if (sourceUri) clientIpc.sendToServer(ClientToServerChannel.RequestCopyFileFromUri, { sourceUri, targetDir }); } };
-    const handleContainerDrop = (event: React.DragEvent<HTMLDivElement>) => { event.preventDefault(); event.stopPropagation(); setIsDraggingOver(false); if (!isWorkspaceTrusted) return; const rootDir = files.length > 0 && files[0] ? files[0].absolutePath : ''; if (rootDir) processDrop(event, { absolutePath: rootDir, name: path.basename(rootDir), children: [], tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false, isSelectable: true }); };
+    const handleContainerDrop = (event: React.DragEvent<HTMLDivElement>) => { event.preventDefault(); event.stopPropagation(); setIsDraggingOver(false); if (!isWorkspaceTrusted) return; const rootDir = files.length > 0 ? files[0].absolutePath : ''; if (rootDir) processDrop(event, { absolutePath: rootDir, name: path.basename(rootDir), children: [], tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false, isSelectable: true }); };
     const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => { event.preventDefault(); event.stopPropagation(); event.dataTransfer.dropEffect = (isWorkspaceTrusted && (event.dataTransfer.types.includes('Files') || event.dataTransfer.types.includes('text/uri-list'))) ? 'copy' : 'none'; };
     const handleDragEnter = (event: React.DragEvent<HTMLDivElement>) => { event.preventDefault(); event.stopPropagation(); if (isWorkspaceTrusted && (event.dataTransfer.types.includes('Files') || event.dataTransfer.types.includes('text/uri-list'))) setIsDraggingOver(true); };
     const handleDragLeave = (event: React.DragEvent<HTMLDivElement>) => { event.preventDefault(); event.stopPropagation(); if (!event.currentTarget.contains(event.relatedTarget as Node)) setIsDraggingOver(false); };
@@ -159,7 +134,7 @@ const App = () => {
                  </div>
                 {isSearchVisible && (<div className="search-container"><input type="text" placeholder="Filter files..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} /></div>)}
             </div>
-            <div className="file-tree-container"><FileTree data={files} checkedFiles={checkedFiles} updateCheckedFiles={updateCheckedFiles} activeFile={activeFile} collapseTrigger={collapseTrigger} expandAllTrigger={expandAllTrigger} searchTerm={searchTerm} problemMap={problemMap} onNodeDrop={processDrop} onCopy={(path) => setClipboard({ path, type: 'copy' })} clipboard={clipboard} /></div>
+            <div className="file-tree-container"><FileTree data={files} checkedFiles={checkedFiles} updateCheckedFiles={updateCheckedFiles} activeFile={activeFile} collapseTrigger={collapseTrigger} expandAllTrigger={expandAllTrigger} searchTerm={searchTerm} problemMap={problemMap} gitStatusMap={gitStatusMap} onNodeDrop={processDrop} onCopy={(path) => setClipboard({ path, type: 'copy' })} clipboard={clipboard} /></div>
             <SelectedFilesView selectedFileNodes={selectedFileNodes} onRemove={handleRemoveFromSelection} isMinimized={isSelectionListMinimized} onToggleMinimize={() => setIsSelectionListMinimized(prev => !prev)} />
             <div className="view-footer">
                 <div className="summary-panel"><span className='summary-item' title="Total number of individual files selected for flattening. This does not include empty directories."><VscFiles /> Selected Files: {formatNumberWithCommas(totalFiles)}</span><span className='summary-item' title="Total tokens in selected text files"><VscSymbolNumeric /> {formatLargeNumber(totalTokens, 1)}</span></div>
