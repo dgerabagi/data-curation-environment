@@ -1,5 +1,5 @@
 // src/common/utils/formatting.ts
-// Updated on: C170 (Add calculatePromptCost)
+// Updated on: C185 (Add truncateCodeForLogging)
 
 const KMBT_SUFFIXES = ['', 'K', 'M', 'B', 'T', 'Q']; // Extend as needed
 
@@ -110,6 +110,7 @@ export function truncateStringForLogging(str: string, maxLength: number = 100): 
  * @returns A truncated code string.
  */
 export function truncateCodeForLogging(code: string, totalLines: number = 30, startLines: number = 15, endLines: number = 15): string {
+    if (!code) return code;
     const lines = code.split('\n');
     if (lines.length <= totalLines) {
         return code;

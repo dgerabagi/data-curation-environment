@@ -1,18 +1,18 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-07T13:21:06.815Z
+  Date Generated: 2025-09-07T14:04:28.536Z
   ---
   Total Files: 166
-  Approx. Tokens: 461578
+  Approx. Tokens: 462361
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (254831 tokens)
-2. src\Artifacts\A11. DCE - Regression Case Studies.md (10523 tokens)
+2. src\Artifacts\A11. DCE - Regression Case Studies.md (10946 tokens)
 3. src\Artifacts\A0. DCE Master Artifact List.md (7388 tokens)
-4. src\client\views\parallel-copilot.view\view.tsx (6956 tokens)
-5. src\backend\services\prompt.service.ts (4908 tokens)
+4. src\client\views\parallel-copilot.view\view.tsx (7232 tokens)
+5. src\backend\services\prompt.service.ts (4990 tokens)
 6. src\client\views\parallel-copilot.view\view.scss (4482 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4429 tokens)
 8. src\backend\services\file-operation.service.ts (4095 tokens)
@@ -31,7 +31,7 @@
 9. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
 10. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
 11. src\Artifacts\A11.1 DCE - New Regression Case Studies.md - Lines: 40 - Chars: 4640 - Tokens: 1160
-12. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5710 - Tokens: 1428
+12. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5687 - Tokens: 1422
 13. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
 14. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
 15. src\Artifacts\A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md - Lines: 43 - Chars: 7263 - Tokens: 1816
@@ -112,7 +112,7 @@
 90. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 41 - Chars: 3000 - Tokens: 750
 91. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 97 - Chars: 4047 - Tokens: 1012
 92. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 45 - Chars: 2899 - Tokens: 725
-93. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 362 - Chars: 42091 - Tokens: 10523
+93. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 374 - Chars: 43784 - Tokens: 10946
 94. src\Artifacts\A42. DCE - Phase 2 - Initial Scaffolding Deployment Script.md - Lines: 246 - Chars: 8264 - Tokens: 2066
 95. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 34 - Chars: 9394 - Tokens: 2349
 96. src\Artifacts\A58. DCE - WinMerge Source Code Analysis.md - Lines: 56 - Chars: 5322 - Tokens: 1331
@@ -133,7 +133,7 @@
 111. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
 112. src\backend\services\history.service.ts - Lines: 270 - Chars: 11310 - Tokens: 2828
 113. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-114. src\backend\services\prompt.service.ts - Lines: 378 - Chars: 19630 - Tokens: 4908
+114. src\backend\services\prompt.service.ts - Lines: 385 - Chars: 19958 - Tokens: 4990
 115. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 116. src\backend\services\services.ts - Lines: 40 - Chars: 1827 - Tokens: 457
 117. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
@@ -164,7 +164,7 @@
 142. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 92 - Chars: 4340 - Tokens: 1085
 143. src\client\views\parallel-copilot.view\view.scss - Lines: 796 - Chars: 17928 - Tokens: 4482
 144. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-145. src\client\views\parallel-copilot.view\view.tsx - Lines: 178 - Chars: 27824 - Tokens: 6956
+145. src\client\views\parallel-copilot.view\view.tsx - Lines: 218 - Chars: 28927 - Tokens: 7232
 146. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
 147. src\common\ipc\channels.enum.ts - Lines: 90 - Chars: 4851 - Tokens: 1213
 148. src\common\ipc\channels.type.ts - Lines: 91 - Chars: 6907 - Tokens: 1727
@@ -174,7 +174,7 @@
 152. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
 153. src\common\types\pcpp.types.ts - Lines: 50 - Chars: 1240 - Tokens: 310
 154. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
-155. src\common\utils\formatting.ts - Lines: 120 - Chars: 3987 - Tokens: 997
+155. src\common\utils\formatting.ts - Lines: 121 - Chars: 4018 - Tokens: 1005
 156. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
 157. src\common\utils\view-html.ts - Lines: 37 - Chars: 1314 - Tokens: 329
 158. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
@@ -1192,7 +1192,7 @@ This document serves as a living record of persistent or complex bugs that have 
 # Artifact A12: DCE - Logging and Debugging Guide
 # Date Created: Cycle 19
 # Author: AI Model & Curator
-# Updated on: C126 (Add section on truncated logging)
+# Updated on: C185 (Mandate truncated logging for large data)
 
 - **Key/Value for A0:**
 - **Description:** Explains how to access and use the integrated logging solution for debugging the extension's backend and frontend components.
@@ -1261,13 +1261,13 @@ When a feature is not working as expected, especially one that involves communic
     3.  **IPC (`RequestFileExistence`):** The list of relative paths is sent to the backend.
     4.  **Backend (`fs.service.ts`):** The backend receives the list and compares it against its own list of known workspace files, which are stored as absolute paths (e.g., `c:/project/src/main.ts`). The comparison fails.
 
-## 4. Truncated Logging for Large Content (C126)
+## 4. Truncated Logging for Large Content (C185)
 
-To prevent the output channel from becoming overwhelmed with large blocks of text (e.g., entire file contents), a logging utility has been implemented to truncate long strings.
+To prevent the output channel from becoming overwhelmed with large blocks of text (e.g., entire file contents or full AI responses), a logging utility has been implemented to truncate long strings.
 
--   **Behavior:** When a service logs a large piece of content (like a code block for syntax highlighting), it will use the `truncateStringForLogging` utility.
--   **Format:** If a string is longer than a set threshold (e.g., 100 characters), it will be displayed in the logs in a format like this:
-    `[First 50 characters]...[Last 50 characters]`
+-   **Behavior:** When a service logs a large piece of content (like a code block for syntax highlighting or the entire application state), it **must** use the `truncateCodeForLogging` utility.
+-   **Format:** If a string is longer than a set threshold, it will be displayed in the logs in a format like this:
+    `[First 15 lines]...// (content truncated) ...[Last 15 lines]`
 -   **Benefit:** This keeps the logs clean and readable, allowing you to see that a large piece of data was processed without having its entire content flood the output. You can still see the beginning and end of the content to verify its identity.
 </file>
 
@@ -5736,7 +5736,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C184 (Finalize FTV Flashing RCA - Decouple Decoration Refresh)
+# Updated on: C185 (Add PCPP Context/Title Data Loss case study)
 
 - **Key/Value for A0:**
 - **Description:** Documents recurring bugs, their root causes, and codified solutions to prevent future regressions during development.
@@ -5747,6 +5747,18 @@ This file-centric approach helps in planning and prioritizing work, especially i
 This document serves as a living record of persistent or complex bugs that have recurred across multiple development cycles. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 024: PCPP Context/Title Data Loss on Tab Switch
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`
+-   **Cycles Observed:** C185
+-   **Symptom:** Text entered into the "Cycle Context," "Ephemeral Context," or "Cycle Title" fields is lost when the user switches to a different cycle or another VS Code tab and then returns. The data is not persisted to `dce_history.json`.
+-   **Root Cause Analysis (RCA):** This is a critical data loss bug caused by a race condition between the application's debounced save mechanism and its state loading logic. The application waits for a pause in user input before saving changes to disk (debouncing) to improve performance. However, when the user performs an action that causes the view to reload its state (like switching cycles), the state is reloaded from the `dce_history.json` file *before* the debounced save has had a chance to execute. This overwrites the user's recent, unsaved changes with the older, stale data from the file.
+-   **Codified Solution & Best Practice:**
+    1.  **Trigger Save Before Navigation:** The event handler for any action that causes a state reload (e.g., `handleCycleChange`) **must** trigger an immediate, non-debounced save of the current component's state *before* dispatching the request to load the new state.
+    2.  **Implementation:** The `saveCurrentCycleState` function should be callable directly. The `handleCycleChange` function must be modified to call `saveCurrentCycleState()` before it sends the `RequestCycleData` IPC message. This ensures the latest changes are always persisted before a potentially overwriting state load occurs, eliminating the race condition.
 
 ---
 
@@ -22936,7 +22948,7 @@ export class LoggerService {
 </file>
 
 <file path="src/backend/services/prompt.service.ts">
-// Updated on: C182 (Open README on Cycle 0 generation)
+// Updated on: C185 (Implement truncated logging for state dump)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -23155,6 +23167,13 @@ ${staticContext.trim()}
         try {
             const fullHistory = await Services.historyService.getFullHistory();
             
+            // Truncate response content before logging
+            fullHistory.cycles.forEach(cycle => {
+                Object.keys(cycle.responses).forEach(respId => {
+                    cycle.responses[respId].content = truncateCodeForLogging(cycle.responses[respId].content);
+                });
+            });
+
             const isNewCycleButtonDisabled = !currentState.title || currentState.title.trim() === 'New Cycle' || currentState.title.trim() === '' || !currentState.cycleContext || currentState.cycleContext.trim() === '' || !currentState.selectedResponseId;
 
             const stateDump = {
@@ -27475,7 +27494,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C182 (Change onCycleContextChange to pass string)
+// Updated on: C185 (Fix data loss bug with immediate save on cycle change)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './view.scss';
@@ -27545,14 +27564,54 @@ const App = () => {
     const [workflowStep, setWorkflowStep] = React.useState<string | null>(null);
 
     const clientIpc = ClientPostMessageManager.getInstance();
-    const getCurrentCycleData = React.useCallback((): PcppCycle | null => { if (currentCycle === null) return null; const responses: { [key: string]: PcppResponse } = {}; for (let i = 1; i <= tabCount; i++) responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' }; if (currentCycle === 0) return { cycleId: 0, cycleContext, ephemeralContext: '', responses: {}, timestamp: new Date().toISOString(), title: 'Project Setup' }; return { cycleId: currentCycle, timestamp: new Date().toISOString(), title: cycleTitle, cycleContext, ephemeralContext, responses, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement: Array.from(selectedFilesForReplacement), tabCount, isSortedByTokens, pathOverrides: Object.fromEntries(pathOverrides) }; }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides]);
-    const saveCurrentCycleState = React.useCallback(() => { const cycleData = getCurrentCycleData(); if (cycleData) clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData }); }, [clientIpc, getCurrentCycleData]);
-    const requestCostEstimation = React.useCallback(() => { const cycleData = getCurrentCycleData(); if (cycleData) clientIpc.sendToServer(ClientToServerChannel.RequestPromptCostBreakdown, { cycleData }); }, [clientIpc, getCurrentCycleData]);
+    
+    const stateRef = React.useRef({
+        currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides
+    });
+
+    React.useEffect(() => {
+        stateRef.current = {
+            currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides
+        };
+    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides]);
+
+    const saveCurrentCycleState = React.useCallback((immediate = false) => {
+        const { currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides } = stateRef.current;
+
+        if (currentCycle === null) return;
+        const responses: { [key: string]: PcppResponse } = {};
+        for (let i = 1; i <= tabCount; i++) {
+            responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' };
+        }
+        if (currentCycle === 0) {
+            clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData: { cycleId: 0, cycleContext, ephemeralContext: '', responses: {}, timestamp: new Date().toISOString(), title: 'Project Setup' } });
+            return;
+        }
+        const cycleData: PcppCycle = {
+            cycleId: currentCycle,
+            timestamp: new Date().toISOString(),
+            title: cycleTitle,
+            cycleContext,
+            ephemeralContext,
+            responses,
+            isParsedMode,
+            leftPaneWidth,
+            selectedResponseId,
+            selectedFilesForReplacement: Array.from(selectedFilesForReplacement),
+            tabCount,
+            isSortedByTokens,
+            pathOverrides: Object.fromEntries(pathOverrides)
+        };
+        clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
+    }, [clientIpc]);
+    
     const debouncedSave = useDebounce(saveCurrentCycleState, 1000);
+    const getCurrentCycleData = React.useCallback(() => stateRef.current, []);
+    const requestCostEstimation = React.useCallback(() => { const cycleData = getCurrentCycleData(); if (cycleData.currentCycle) clientIpc.sendToServer(ClientToServerChannel.RequestPromptCostBreakdown, { cycleData: cycleData as any }); }, [clientIpc, getCurrentCycleData]);
     const debouncedCostRequest = useDebounce(requestCostEstimation, 500);
 
     React.useEffect(() => { debouncedSave(); debouncedCostRequest(); }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, tabCount, isSortedByTokens, pathOverrides, debouncedSave, debouncedCostRequest]);
-    React.useEffect(() => { const handleVisibilityChange = () => { if (document.visibilityState === 'hidden') saveCurrentCycleState(); }; document.addEventListener('visibilitychange', handleVisibilityChange); return () => document.removeEventListener('visibilitychange', handleVisibilityChange); }, [saveCurrentCycleState]);
+    React.useEffect(() => { const handleVisibilityChange = () => { if (document.visibilityState === 'hidden') saveCurrentCycleState(true); }; document.addEventListener('visibilitychange', handleVisibilityChange); return () => document.removeEventListener('visibilitychange', handleVisibilityChange); }, [saveCurrentCycleState]);
     const parseAllTabs = React.useCallback(() => { setTabs(prevTabs => { const allFilePaths = new Set<string>(); const updatedTabs = { ...prevTabs }; let needsUpdate = false; Object.values(updatedTabs).forEach(tabState => { if (tabState.rawContent && !tabState.parsedContent) { needsUpdate = true; const parsed = parseResponse(tabState.rawContent); tabState.parsedContent = parsed; parsed.filesUpdated.forEach(file => allFilePaths.add(file)); parsed.files.forEach(file => { const lang = path.extname(file.path).substring(1) || 'plaintext'; const id = `${file.path}::${file.content}`; clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id }); }); } else if (tabState.parsedContent) { tabState.parsedContent.filesUpdated.forEach(file => allFilePaths.add(file)); } }); if (allFilePaths.size > 0) clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) }); return needsUpdate ? updatedTabs : prevTabs; }); }, [clientIpc]);
     
     React.useEffect(() => { logger.log(`[WORKFLOW] Step changed to: ${workflowStep}`); }, [workflowStep]);
@@ -27599,7 +27658,7 @@ const App = () => {
         if (waitingForPaste) { for (let i = 1; i <= tabCount; i++) { if (!tabs[i.toString()]?.rawContent?.trim()) { setWorkflowStep(`awaitingResponsePaste_${i}`); return; } } setWorkflowStep('awaitingParse'); }
     }, [workflowStep, selectedFilesForReplacement, selectedResponseId, isSortedByTokens, isParsedMode, tabs, cycleContext, cycleTitle, tabCount, isReadyForNextCycle, clientIpc]);
 
-    const handleCycleChange = (e: React.MouseEvent | null, newCycle: number) => { e?.stopPropagation(); if (newCycle >= 0 && newCycle <= maxCycle) { if (currentCycle !== 0) saveCurrentCycleState(); setSelectedFilesForReplacement(new Set()); setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); setWorkflowStep(null); } };
+    const handleCycleChange = (e: React.MouseEvent | null, newCycle: number) => { e?.stopPropagation(); if (newCycle >= 0 && newCycle <= maxCycle) { saveCurrentCycleState(true); setSelectedFilesForReplacement(new Set()); setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); setWorkflowStep(null); } };
     const handleSelectForViewing = (filePath: string) => { const newPath = selectedFilePath === filePath ? null : filePath; setSelectedFilePath(newPath); if (newPath) { const file = activeTabData?.parsedContent?.files.find(f => f.path === newPath); const pathForComparison = pathOverrides.get(newPath) || newPath; if (file) clientIpc.sendToServer(ClientToServerChannel.RequestFileComparison, { filePath: pathForComparison, modifiedContent: file.content }); } };
     const handleAcceptSelectedFiles = () => { if (selectedFilesForReplacement.size === 0) return; const filesToWrite: BatchWriteFile[] = []; selectedFilesForReplacement.forEach(compositeKey => { const [responseId, filePath] = compositeKey.split(':::'); const responseData = tabs[responseId]; if (responseData?.parsedContent) { const file = responseData.parsedContent.files.find(f => f.path === filePath); if (file) { const finalPath = pathOverrides.get(file.path) || file.path; filesToWrite.push({ path: finalPath, content: file.content }); } } }); if (filesToWrite.length > 0) clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite }); setWorkflowStep('awaitingCycleContext'); };
     const handleLinkFile = (originalPath: string) => { if (tempOverridePath.trim()) { setPathOverrides(prev => new Map(prev).set(originalPath, tempOverridePath.trim())); setFileExistenceMap(prev => new Map(prev).set(originalPath, true)); setTempOverridePath(''); handleSelectForViewing(originalPath); } };
@@ -27614,7 +27673,7 @@ const App = () => {
     
     const handleSortToggle = () => { if (workflowStep === 'awaitingSort') { setIsSortedByTokens(true); } else { setIsSortedByTokens(p => !p); } };
     const handleGlobalParseToggle = () => { const newParseMode = !isParsedMode; setIsParsedMode(newParseMode); setSelectedFilePath(null); if (!newParseMode) setTabs(prev => { const newTabs = {...prev}; Object.keys(newTabs).forEach(key => { newTabs[key].parsedContent = null; }); return newTabs; }); };
-    const handleNewCycle = (e: React.MouseEvent) => { e.stopPropagation(); saveCurrentCycleState(); const newCycleId = maxCycle + 1; setMaxCycle(newCycleId); setCurrentCycle(newCycleId); setCycleTitle('New Cycle'); setCycleContext(''); setEphemeralContext(''); setTabs({}); setIsParsedMode(false); setSelectedResponseId(null); setSelectedFilesForReplacement(new Set()); setWorkflowStep('awaitingResponsePaste_1'); };
+    const handleNewCycle = (e: React.MouseEvent) => { e.stopPropagation(); saveCurrentCycleState(true); const newCycleId = maxCycle + 1; setMaxCycle(newCycleId); setCurrentCycle(newCycleId); setCycleTitle('New Cycle'); setCycleContext(''); setEphemeralContext(''); setTabs({}); setIsParsedMode(false); setSelectedResponseId(null); setSelectedFilesForReplacement(new Set()); setWorkflowStep('awaitingResponsePaste_1'); };
     const handleGeneratePrompt = () => { if (currentCycle === null) return; clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle }); setWorkflowStep('readyForNewCycle'); }
     const handleDeleteCycle = () => { if(currentCycle !== null) clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle }); };
     const handleResetHistory = () => { clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {}); };
@@ -27625,7 +27684,7 @@ const App = () => {
     const handleFileSelectionToggle = (filePath: string) => { const currentTabId = activeTab.toString(); const compositeKeyForCurrent = `${currentTabId}:::${filePath}`; setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); let existingKey: string | undefined; for (const key of newSet) if (key.endsWith(`:::${filePath}`)) { existingKey = key; break; } if (existingKey) { if (existingKey === compositeKeyForCurrent) newSet.delete(existingKey); else { newSet.delete(existingKey); newSet.add(compositeKeyForCurrent); } } else newSet.add(compositeKeyForCurrent); return newSet; }); };
     const handleSelectAllFilesToggle = () => { if (!activeTabData?.parsedContent) return; const allFilesForTab = activeTabData.parsedContent.filesUpdated.map(fp => `${activeTab}:::${fp}`); const isAllSelected = allFilesForTab.every(key => selectedFilesForReplacement.has(key)); setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); if (isAllSelected) allFilesForTab.forEach(key => newSet.delete(key)); else allFilesForTab.forEach(key => newSet.add(key)); return newSet; }); };
     const isAllFilesSelected = React.useMemo(() => { if (!activeTabData?.parsedContent) return false; const allFiles = activeTabData.parsedContent.filesUpdated; if (allFiles.length === 0) return false; return allFiles.every(file => selectedFilesForReplacement.has(`${activeTab}:::${file}`)); }, [selectedFilesForReplacement, activeTabData, activeTab]);
-    const handleLogState = () => { const currentState = getCurrentCycleData(); if (currentState) clientIpc.sendToServer(ClientToServerChannel.RequestLogState, { currentState }); };
+    const handleLogState = () => { const currentState = getCurrentCycleData(); if (currentState) clientIpc.sendToServer(ClientToServerChannel.RequestLogState, { currentState: currentState as any }); };
     const handleCopyContent = () => { if (!selectedFilePath || !activeTabData?.parsedContent) return; const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath); if (file) clientIpc.sendToServer(ClientToServerChannel.RequestCopyTextToClipboard, { text: file.content }); };
     const costBreakdownTooltip = React.useMemo(() => { if (!costBreakdown) return "Calculating..."; return Object.entries(costBreakdown).map(([key, value]) => `${key}: ${formatLargeNumber(value, 1)} tk`).join('\n'); }, [costBreakdown]);
 
@@ -28082,7 +28141,7 @@ declare global {
 
 <file path="src/common/utils/formatting.ts">
 // src/common/utils/formatting.ts
-// Updated on: C170 (Add calculatePromptCost)
+// Updated on: C185 (Add truncateCodeForLogging)
 
 const KMBT_SUFFIXES = ['', 'K', 'M', 'B', 'T', 'Q']; // Extend as needed
 
@@ -28193,6 +28252,7 @@ export function truncateStringForLogging(str: string, maxLength: number = 100): 
  * @returns A truncated code string.
  */
 export function truncateCodeForLogging(code: string, totalLines: number = 30, startLines: number = 15, endLines: number = 15): string {
+    if (!code) return code;
     const lines = code.split('\n');
     if (lines.length <= totalLines) {
         return code;

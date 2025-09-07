@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C182 (Change onCycleContextChange to pass string)
+// Updated on: C185 (Fix data loss bug with immediate save on cycle change)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './view.scss';
@@ -69,14 +69,54 @@ const App = () => {
     const [workflowStep, setWorkflowStep] = React.useState<string | null>(null);
 
     const clientIpc = ClientPostMessageManager.getInstance();
-    const getCurrentCycleData = React.useCallback((): PcppCycle | null => { if (currentCycle === null) return null; const responses: { [key: string]: PcppResponse } = {}; for (let i = 1; i <= tabCount; i++) responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' }; if (currentCycle === 0) return { cycleId: 0, cycleContext, ephemeralContext: '', responses: {}, timestamp: new Date().toISOString(), title: 'Project Setup' }; return { cycleId: currentCycle, timestamp: new Date().toISOString(), title: cycleTitle, cycleContext, ephemeralContext, responses, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement: Array.from(selectedFilesForReplacement), tabCount, isSortedByTokens, pathOverrides: Object.fromEntries(pathOverrides) }; }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides]);
-    const saveCurrentCycleState = React.useCallback(() => { const cycleData = getCurrentCycleData(); if (cycleData) clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData }); }, [clientIpc, getCurrentCycleData]);
-    const requestCostEstimation = React.useCallback(() => { const cycleData = getCurrentCycleData(); if (cycleData) clientIpc.sendToServer(ClientToServerChannel.RequestPromptCostBreakdown, { cycleData }); }, [clientIpc, getCurrentCycleData]);
+    
+    const stateRef = React.useRef({
+        currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides
+    });
+
+    React.useEffect(() => {
+        stateRef.current = {
+            currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides
+        };
+    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides]);
+
+    const saveCurrentCycleState = React.useCallback((immediate = false) => {
+        const { currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides } = stateRef.current;
+
+        if (currentCycle === null) return;
+        const responses: { [key: string]: PcppResponse } = {};
+        for (let i = 1; i <= tabCount; i++) {
+            responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' };
+        }
+        if (currentCycle === 0) {
+            clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData: { cycleId: 0, cycleContext, ephemeralContext: '', responses: {}, timestamp: new Date().toISOString(), title: 'Project Setup' } });
+            return;
+        }
+        const cycleData: PcppCycle = {
+            cycleId: currentCycle,
+            timestamp: new Date().toISOString(),
+            title: cycleTitle,
+            cycleContext,
+            ephemeralContext,
+            responses,
+            isParsedMode,
+            leftPaneWidth,
+            selectedResponseId,
+            selectedFilesForReplacement: Array.from(selectedFilesForReplacement),
+            tabCount,
+            isSortedByTokens,
+            pathOverrides: Object.fromEntries(pathOverrides)
+        };
+        clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
+    }, [clientIpc]);
+    
     const debouncedSave = useDebounce(saveCurrentCycleState, 1000);
+    const getCurrentCycleData = React.useCallback(() => stateRef.current, []);
+    const requestCostEstimation = React.useCallback(() => { const cycleData = getCurrentCycleData(); if (cycleData.currentCycle) clientIpc.sendToServer(ClientToServerChannel.RequestPromptCostBreakdown, { cycleData: cycleData as any }); }, [clientIpc, getCurrentCycleData]);
     const debouncedCostRequest = useDebounce(requestCostEstimation, 500);
 
     React.useEffect(() => { debouncedSave(); debouncedCostRequest(); }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, tabCount, isSortedByTokens, pathOverrides, debouncedSave, debouncedCostRequest]);
-    React.useEffect(() => { const handleVisibilityChange = () => { if (document.visibilityState === 'hidden') saveCurrentCycleState(); }; document.addEventListener('visibilitychange', handleVisibilityChange); return () => document.removeEventListener('visibilitychange', handleVisibilityChange); }, [saveCurrentCycleState]);
+    React.useEffect(() => { const handleVisibilityChange = () => { if (document.visibilityState === 'hidden') saveCurrentCycleState(true); }; document.addEventListener('visibilitychange', handleVisibilityChange); return () => document.removeEventListener('visibilitychange', handleVisibilityChange); }, [saveCurrentCycleState]);
     const parseAllTabs = React.useCallback(() => { setTabs(prevTabs => { const allFilePaths = new Set<string>(); const updatedTabs = { ...prevTabs }; let needsUpdate = false; Object.values(updatedTabs).forEach(tabState => { if (tabState.rawContent && !tabState.parsedContent) { needsUpdate = true; const parsed = parseResponse(tabState.rawContent); tabState.parsedContent = parsed; parsed.filesUpdated.forEach(file => allFilePaths.add(file)); parsed.files.forEach(file => { const lang = path.extname(file.path).substring(1) || 'plaintext'; const id = `${file.path}::${file.content}`; clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id }); }); } else if (tabState.parsedContent) { tabState.parsedContent.filesUpdated.forEach(file => allFilePaths.add(file)); } }); if (allFilePaths.size > 0) clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) }); return needsUpdate ? updatedTabs : prevTabs; }); }, [clientIpc]);
     
     React.useEffect(() => { logger.log(`[WORKFLOW] Step changed to: ${workflowStep}`); }, [workflowStep]);
@@ -123,7 +163,7 @@ const App = () => {
         if (waitingForPaste) { for (let i = 1; i <= tabCount; i++) { if (!tabs[i.toString()]?.rawContent?.trim()) { setWorkflowStep(`awaitingResponsePaste_${i}`); return; } } setWorkflowStep('awaitingParse'); }
     }, [workflowStep, selectedFilesForReplacement, selectedResponseId, isSortedByTokens, isParsedMode, tabs, cycleContext, cycleTitle, tabCount, isReadyForNextCycle, clientIpc]);
 
-    const handleCycleChange = (e: React.MouseEvent | null, newCycle: number) => { e?.stopPropagation(); if (newCycle >= 0 && newCycle <= maxCycle) { if (currentCycle !== 0) saveCurrentCycleState(); setSelectedFilesForReplacement(new Set()); setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); setWorkflowStep(null); } };
+    const handleCycleChange = (e: React.MouseEvent | null, newCycle: number) => { e?.stopPropagation(); if (newCycle >= 0 && newCycle <= maxCycle) { saveCurrentCycleState(true); setSelectedFilesForReplacement(new Set()); setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); setWorkflowStep(null); } };
     const handleSelectForViewing = (filePath: string) => { const newPath = selectedFilePath === filePath ? null : filePath; setSelectedFilePath(newPath); if (newPath) { const file = activeTabData?.parsedContent?.files.find(f => f.path === newPath); const pathForComparison = pathOverrides.get(newPath) || newPath; if (file) clientIpc.sendToServer(ClientToServerChannel.RequestFileComparison, { filePath: pathForComparison, modifiedContent: file.content }); } };
     const handleAcceptSelectedFiles = () => { if (selectedFilesForReplacement.size === 0) return; const filesToWrite: BatchWriteFile[] = []; selectedFilesForReplacement.forEach(compositeKey => { const [responseId, filePath] = compositeKey.split(':::'); const responseData = tabs[responseId]; if (responseData?.parsedContent) { const file = responseData.parsedContent.files.find(f => f.path === filePath); if (file) { const finalPath = pathOverrides.get(file.path) || file.path; filesToWrite.push({ path: finalPath, content: file.content }); } } }); if (filesToWrite.length > 0) clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite }); setWorkflowStep('awaitingCycleContext'); };
     const handleLinkFile = (originalPath: string) => { if (tempOverridePath.trim()) { setPathOverrides(prev => new Map(prev).set(originalPath, tempOverridePath.trim())); setFileExistenceMap(prev => new Map(prev).set(originalPath, true)); setTempOverridePath(''); handleSelectForViewing(originalPath); } };
@@ -138,7 +178,7 @@ const App = () => {
     
     const handleSortToggle = () => { if (workflowStep === 'awaitingSort') { setIsSortedByTokens(true); } else { setIsSortedByTokens(p => !p); } };
     const handleGlobalParseToggle = () => { const newParseMode = !isParsedMode; setIsParsedMode(newParseMode); setSelectedFilePath(null); if (!newParseMode) setTabs(prev => { const newTabs = {...prev}; Object.keys(newTabs).forEach(key => { newTabs[key].parsedContent = null; }); return newTabs; }); };
-    const handleNewCycle = (e: React.MouseEvent) => { e.stopPropagation(); saveCurrentCycleState(); const newCycleId = maxCycle + 1; setMaxCycle(newCycleId); setCurrentCycle(newCycleId); setCycleTitle('New Cycle'); setCycleContext(''); setEphemeralContext(''); setTabs({}); setIsParsedMode(false); setSelectedResponseId(null); setSelectedFilesForReplacement(new Set()); setWorkflowStep('awaitingResponsePaste_1'); };
+    const handleNewCycle = (e: React.MouseEvent) => { e.stopPropagation(); saveCurrentCycleState(true); const newCycleId = maxCycle + 1; setMaxCycle(newCycleId); setCurrentCycle(newCycleId); setCycleTitle('New Cycle'); setCycleContext(''); setEphemeralContext(''); setTabs({}); setIsParsedMode(false); setSelectedResponseId(null); setSelectedFilesForReplacement(new Set()); setWorkflowStep('awaitingResponsePaste_1'); };
     const handleGeneratePrompt = () => { if (currentCycle === null) return; clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle }); setWorkflowStep('readyForNewCycle'); }
     const handleDeleteCycle = () => { if(currentCycle !== null) clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle }); };
     const handleResetHistory = () => { clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {}); };
@@ -149,7 +189,7 @@ const App = () => {
     const handleFileSelectionToggle = (filePath: string) => { const currentTabId = activeTab.toString(); const compositeKeyForCurrent = `${currentTabId}:::${filePath}`; setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); let existingKey: string | undefined; for (const key of newSet) if (key.endsWith(`:::${filePath}`)) { existingKey = key; break; } if (existingKey) { if (existingKey === compositeKeyForCurrent) newSet.delete(existingKey); else { newSet.delete(existingKey); newSet.add(compositeKeyForCurrent); } } else newSet.add(compositeKeyForCurrent); return newSet; }); };
     const handleSelectAllFilesToggle = () => { if (!activeTabData?.parsedContent) return; const allFilesForTab = activeTabData.parsedContent.filesUpdated.map(fp => `${activeTab}:::${fp}`); const isAllSelected = allFilesForTab.every(key => selectedFilesForReplacement.has(key)); setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); if (isAllSelected) allFilesForTab.forEach(key => newSet.delete(key)); else allFilesForTab.forEach(key => newSet.add(key)); return newSet; }); };
     const isAllFilesSelected = React.useMemo(() => { if (!activeTabData?.parsedContent) return false; const allFiles = activeTabData.parsedContent.filesUpdated; if (allFiles.length === 0) return false; return allFiles.every(file => selectedFilesForReplacement.has(`${activeTab}:::${file}`)); }, [selectedFilesForReplacement, activeTabData, activeTab]);
-    const handleLogState = () => { const currentState = getCurrentCycleData(); if (currentState) clientIpc.sendToServer(ClientToServerChannel.RequestLogState, { currentState }); };
+    const handleLogState = () => { const currentState = getCurrentCycleData(); if (currentState) clientIpc.sendToServer(ClientToServerChannel.RequestLogState, { currentState: currentState as any }); };
     const handleCopyContent = () => { if (!selectedFilePath || !activeTabData?.parsedContent) return; const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath); if (file) clientIpc.sendToServer(ClientToServerChannel.RequestCopyTextToClipboard, { text: file.content }); };
     const costBreakdownTooltip = React.useMemo(() => { if (!costBreakdown) return "Calculating..."; return Object.entries(costBreakdown).map(([key, value]) => `${key}: ${formatLargeNumber(value, 1)} tk`).join('\n'); }, [costBreakdown]);
 

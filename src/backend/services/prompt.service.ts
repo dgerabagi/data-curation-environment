@@ -1,4 +1,4 @@
-// Updated on: C182 (Open README on Cycle 0 generation)
+// Updated on: C185 (Implement truncated logging for state dump)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -217,6 +217,13 @@ ${staticContext.trim()}
         try {
             const fullHistory = await Services.historyService.getFullHistory();
             
+            // Truncate response content before logging
+            fullHistory.cycles.forEach(cycle => {
+                Object.keys(cycle.responses).forEach(respId => {
+                    cycle.responses[respId].content = truncateCodeForLogging(cycle.responses[respId].content);
+                });
+            });
+
             const isNewCycleButtonDisabled = !currentState.title || currentState.title.trim() === 'New Cycle' || currentState.title.trim() === '' || !currentState.cycleContext || currentState.cycleContext.trim() === '' || !currentState.selectedResponseId;
 
             const stateDump = {
