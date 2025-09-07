@@ -1,5 +1,5 @@
 // src/client/utils/response-parser.ts
-// Updated on: C187 (Fix invalid syntax)
+// Updated on: C188 (Fix invalid syntax in for loop)
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /<summary>([\s\S]*?)<\/summary>/;

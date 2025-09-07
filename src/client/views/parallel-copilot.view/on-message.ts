@@ -1,4 +1,4 @@
-// Updated on: C186 (Add SaveLastViewedCycle handler)
+// Updated on: C188 (Add logging)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -28,6 +28,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestInitialCycleData, async () => {
+        loggerService.log("[PCPP on-message] Received RequestInitialCycleData from client.");
         const historyFile = await historyService.getFullHistory();
         const initialCycle = await historyService.getInitialCycle();
         serverIpc.sendToClient(ServerToClientChannel.SendInitialCycleData, { cycleData: initialCycle, projectScope: historyFile.projectScope });

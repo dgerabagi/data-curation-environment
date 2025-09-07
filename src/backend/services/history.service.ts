@@ -1,5 +1,5 @@
 // src/backend/services/history.service.ts
-// Updated on: C187 (Fix array access errors)
+// Updated on: C188 (Add missing pathOverrides property to default cycle)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -80,7 +80,21 @@ export class HistoryService {
         } catch (e) { isFreshEnvironment = true; }
         
         const defaultCycle: PcppCycle = {
-            cycleId: isFreshEnvironment ? 0 : 1, timestamp: new Date().toISOString(), title: 'New Cycle', cycleContext: '', ephemeralContext: '', responses: { "1": { content: "" } }, isParsedMode: false, leftPaneWidth: 33, selectedResponseId: null, selectedFilesForReplacement: [], tabCount: 4, isSortedByTokens: false, cycleContextHeight: 100, ephemeralContextHeight: 100,
+            cycleId: isFreshEnvironment ? 0 : 1, 
+            timestamp: new Date().toISOString(), 
+            title: 'New Cycle', 
+            cycleContext: '', 
+            ephemeralContext: '', 
+            responses: { "1": { content: "" } }, 
+            isParsedMode: false, 
+            leftPaneWidth: 33, 
+            selectedResponseId: null, 
+            selectedFilesForReplacement: [], 
+            tabCount: 4, 
+            isSortedByTokens: false, 
+            cycleContextHeight: 100, 
+            ephemeralContextHeight: 100,
+            pathOverrides: {},
         };
 
         if (isFreshEnvironment) {
@@ -113,7 +127,7 @@ export class HistoryService {
             Services.loggerService.log("Returning special case for Cycle 0.");
             const history = await this._readHistoryFile();
             return {
-                cycleId: 0, timestamp: new Date().toISOString(), title: 'Project Setup', cycleContext: history.projectScope || '', ephemeralContext: '', responses: {}, isParsedMode: false, tabCount: 4, isSortedByTokens: false,
+                cycleId: 0, timestamp: new Date().toISOString(), title: 'Project Setup', cycleContext: history.projectScope || '', ephemeralContext: '', responses: {}, isParsedMode: false, tabCount: 4, isSortedByTokens: false, pathOverrides: {},
             };
         }
 
