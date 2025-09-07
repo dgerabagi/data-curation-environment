@@ -1,0 +1,47 @@
+# Artifact A72: DCE - README for Artifacts
+# Date Created: C158
+# Author: AI Model & Curator
+# Updated on: C183 (Strengthen Git initialization and `.gitignore` guidance)
+
+- **Key/Value for A0:**
+- **Description:** The content for the `README.md` file that is automatically created in a new project's `src/Artifacts` directory, explaining the purpose of the extension and the artifact-driven workflow.
+- **Tags:** documentation, onboarding, readme, source of truth
+
+## 1. Welcome to the Data Curation Environment (DCE)
+
+This directory (`src/Artifacts/`) is the heart of your project's planning and documentation. It's managed by the **Data Curation Environment (DCE)**, a VS Code extension designed to streamline AI-assisted development.
+
+This `README.md` file was automatically generated to provide context for you (the developer) and for the AI assistants you will be working with.
+
+## 2. What is an "Artifact"?
+
+In the context of this workflow, an **Artifact** is a formal, written document that serves as a "source of truth" for a specific part of your project. Think of these files as the official blueprints, plans, and records.
+
+The core principle of the DCE workflow is **"Documentation First."** Before writing code, you and your AI partner should first create or update an artifact that describes the plan.
+
+## 3. The Iterative Cycle Workflow
+
+Development in the DCE is organized into **Cycles**. You have just completed the initial setup.
+
+### Your Next Steps
+
+1.  **Initialize Your Git Repository (CRITICAL):**
+    To take full advantage of the DCE's testing workflow (creating baselines and restoring changes), you **must** initialize a Git repository.
+    
+    Open a terminal in your project's root directory (you can use the integrated terminal in VS Code: `Terminal > New Terminal`) and run the following commands:
+    ```bash
+    git init
+    # Create or update your .gitignore file with the line below
+    echo ".vscode/" >> .gitignore
+    git add .
+    git commit -m "Initial commit"
+    ```
+    **Why `.gitignore`?** The DCE saves its state in a `.vscode/dce_history.json` file. Adding `.vscode/` to your `.gitignore` is crucial to prevent the extension's UI from flashing every time it auto-saves. For a complete guide, refer to the `GitHub Repository Setup Guide.md` artifact.
+
+2.  **Submit Your First Prompt:** The `prompt.md` file has been automatically opened for you. This file contains your project plan and instructions for the AI. Copy its entire contents and paste it into your preferred AI chat interface (like Google's AI Studio, ChatGPT, etc.).
+
+3.  **Review and Accept Responses:** Paste the AI's responses back into the "Resp 1", "Resp 2", etc. tabs in the Parallel Co-Pilot panel. The UI will guide you through parsing the responses, selecting the best one, and accepting its changes into your workspace.
+
+4.  **Repeat:** This completes a cycle. You then start the next cycle, building upon the newly accepted code and documentation.
+
+This structured, iterative process helps maintain project quality and ensures that both human and AI developers are always aligned with the project's goals.

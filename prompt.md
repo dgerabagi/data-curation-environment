@@ -11,11 +11,7 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 5 - text editor issue root cause identified
-Cycle 4 - New Cycle
-Cycle 3 - New Cycle
-Cycle 2 - ts errors
-Cycle 1 - ts errors
+Current Cycle 1 - cycle title wipes/replaces subsequent cycle titles...
 Cycle 0 - Project Initialization/Template Archive
 </M2. cycle overview>
 
@@ -23,6 +19,7 @@ Cycle 0 - Project Initialization/Template Archive
 # Artifact A52.2: DCE - Interaction Schema Source
 # Date Created: C156
 # Author: AI Model & Curator
+# Updated on: C186 (Change file closing tag to </file_artifact>)
 
 - **Key/Value for A0:**
 - **Description:** The canonical source text for the M3. Interaction Schema, which is injected into all generated prompts.
@@ -30,7 +27,7 @@ Cycle 0 - Project Initialization/Template Archive
 
 ## Interaction Schema Text
 
-1.  Artifacts are complete, individual texts enclosed in `<xmltags>`. To ensure consistent parsing by the DCE extension, all file artifacts **must** be enclosed in `<file path="path/to/file.ts">...</file>` tags. The path must be relative to the workspace root. The closing tag must be a simple `</file>`. Do not use the file path in the closing tag.
+1.  Artifacts are complete, individual texts enclosed in `<xmltags>`. To ensure consistent parsing by the DCE extension, all file artifacts **must** be enclosed in `<file path="path/to/file.ts">...</file_artifact>` tags. The path must be relative to the workspace root. The closing tag must be a simple `</file_artifact>`. Do not use the file path in the closing tag.
 2.  Our Document Artifacts serve as our `Source of Truth` throughout multiple cycles. As such, over time, as issues occur, or code repeatedly regresses in the same way, seek to align our `Source of Truth` such that the Root Cause of such occurances is codified so that it can be avoided on subsequent cycles visits to those Code artifacts.
 3.  Please output entire Document or Code artifacts. Do not worry about Token length. If your length continues for too long, and you reach the 600 second timeout, I will simply incorporate the work you did complete, and we can simply continue from where you left off. Better to have half of a solution to get started with, than not to have it. **Preference is for larger, more complete updates over smaller, incremental ones to align with the human curator's parallel processing workflow.** The human curator often sends the same prompt to multiple AI instances simultaneously and selects the most comprehensive response as the primary base for the next cycle, using other responses as supplementary information. Providing more complete updates increases the likelihood of a response being selected as the primary base.
 4.  Do not output artifacts that do not require updates in this cycle. (Eg. Do not do this: // Updated on: Cycle 1040 (No functional changes, only cycle header))
@@ -58,6 +55,7 @@ Cycle 0 - Project Initialization/Template Archive
 # Artifact A52.1: DCE - Parser Logic and AI Guidance
 # Date Created: C155
 # Author: AI Model & Curator
+# Updated on: C187 (Fix parser code example)
 
 - **Key/Value for A0:**
 - **Description:** Provides the literal source code for the response parser and explicit instructions to the AI on how to format its output to ensure successful parsing.
@@ -80,33 +78,37 @@ import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /<summary>([\s\S]*?)<\/summary>/;
 const COURSE_OF_ACTION_REGEX = /<course_of_action>([\s\S]*?)<\/course_of_action>/;
-const FILE_TAG_REGEX = /<file path="([^"]+)">([\s\S]*?)<\/file>/g;
+const FILE_TAG_REGEX = /<file path="([^"]+)">([\s\S]*?)<\/file_artifact>/g; // Updated closing tag
 const CODE_FENCE_START_REGEX = /^\s*```[a-zA-Z]*\n/;
 
 export function parseResponse(rawText: string): ParsedResponse {
     const files: ParsedFile[] = [];
     let totalTokens = 0;
 
-    const tagMatches = [...rawText.matchAll(FILE_TAG_REGEX)];
+    // Pre-process to remove common escape characters from other models
+    let processedText = rawText.replace(/\\</g, '<').replace(/\\>/g, '>').replace(/\\_/g, '_');
 
-    if (tagMatches.length === 0 && rawText.includes('<file path')) {
-        const summary = `**PARSING FAILED:** Could not find valid \`<file path="...">\` tags. The response may be malformed or incomplete. Displaying raw response below.\n\n---\n\n${rawText}`;
+    const tagMatches = [...processedText.matchAll(FILE_TAG_REGEX)];
+
+    if (tagMatches.length === 0 && processedText.includes('<file path')) {
+        const summary = `**PARSING FAILED:** Could not find valid \`<file path="...">...</file_artifact>\` tags. The response may be malformed or incomplete. Displaying raw response below.\n\n---\n\n${processedText}`;
         return {
             summary: summary,
             courseOfAction: '',
             filesUpdated: [],
             files: [],
-            totalTokens: Math.ceil(rawText.length / 4),
+            totalTokens: Math.ceil(processedText.length / 4),
         };
     }
 
     for (const match of tagMatches) {
-        const path = (match?.[1] ?? '').trim();
-        let content = (match?.[2] ?? '');
+        const path = (match?. ?? '').trim();
+        let content = (match?. ?? '');
 
         if (path) {
             content = content.replace(CODE_FENCE_START_REGEX, '');
-            const patternsToRemove = [`</file>`, `</${path}>`, '```', '***'];
+            // Updated patterns to remove
+            const patternsToRemove = [`</file_artifact>`, `</${path}>`, '```', '***'];
             let changed = true;
             while(changed) {
                 const originalContent = content;
@@ -126,22 +128,22 @@ export function parseResponse(rawText: string): ParsedResponse {
         }
     }
 
-    const summaryMatch = rawText.match(SUMMARY_REGEX);
-    const courseOfActionMatch = rawText.match(COURSE_OF_ACTION_REGEX);
+    const summaryMatch = processedText.match(SUMMARY_REGEX);
+    const courseOfActionMatch = processedText.match(COURSE_OF_ACTION_REGEX);
 
-    const summary = (summaryMatch?. ?? 'Could not parse summary.').trim();
-    const courseOfAction = (courseOfActionMatch?. ?? 'Could not parse course of action.').trim();
+    const summary = (summaryMatch?.[1] ?? 'Could not parse summary.').trim();
+    const courseOfAction = (courseOfActionMatch?.[1] ?? 'Could not parse course of action.').trim();
     
     const filesUpdatedList = files.map(f => f.path);
 
     // Fallback if no file tags are found at all
     if (files.length === 0 && !summaryMatch && !courseOfActionMatch) {
         return {
-            summary: rawText,
+            summary: processedText,
             courseOfAction: '',
             filesUpdated: [],
             files: [],
-            totalTokens: Math.ceil(rawText.length / 4),
+            totalTokens: Math.ceil(processedText.length / 4),
         };
     }
 
@@ -161,7 +163,7 @@ To guarantee successful parsing, every response **must** follow this structure:
 
 1.  **Summary:** Your high-level analysis and plan must be enclosed in `<summary>...</summary>` tags.
 2.  **Course of Action:** Your point-by-point plan must be enclosed in `<course_of_action>...</course_of_action>` tags.
-3.  **File Blocks:** Every file you generate must be enclosed in `<file path="..."></file>` tags. The parser uses a global regex (`/g`) to find all occurrences of this pattern. The closing tag must be exactly `</file>`.
+3.  **File Blocks:** Every file you generate must be enclosed in `<file path="..."></file_artifact>` tags. The parser uses a global regex (`/g`) to find all occurrences of this pattern. The closing tag must be exactly `</file_artifact>`.
 
 ### Canonical Example:
 
@@ -177,16 +179,15 @@ I have analyzed the request. My course of action is to update the main component
 
 <file path="src/client/views/my-view/view.tsx">
 // Full content of the view.tsx file...
-</file>
+</file_artifact>
 
 <file path="src/client/views/my-view/view.scss">
 /* Full content of the view.scss file... */
-</file>
-```
+</file_artifact>
 </M3. Interaction Schema>
 
 <M4. current project scope>
-fix cycle context and ephemeral context text fields and fix flashing FTV.
+No project scope defined.
 </M4. current project scope>
 
 <M5. organized artifacts list>
@@ -630,126 +631,132 @@ fix cycle context and ephemeral context text fields and fix flashing FTV.
 
 <M6. Cycles>
 
-<Cycle 5>
-<Cycle Context>
-okay great, okay now i think im noticing a pattern with the CC and EC text windows, which is scrolling is the culprit. i discovered this by simply typing this 
-sentence and once the words ran off the screen, my cursor respected the word wrap, and moved to the second line, but the characters being typed did not, 
-they continued on the first line. that is the disconnect that simply gets more apparent/worse the more text gets input. lets fix this once and for all! below is my 
-first explanation of the issue:
-
-when im typing within the text field as it appears on the screen, i have no issues what so ever. its whenever im trying to write text that falls outside of the 
-rendered text field, so scrolling to the right for long.... okay i just saw whats going on. the cursor is respecting word wrap, but the characters that are 
-being typed is not. i still get odd visual glitches going in the downward direction as well.
-</Cycle Context>
-<Previous Cycle 4 Summary of Actions>
-I have analyzed the console logs from Cycle 184. The logs confirm the diagnosis from the previous cycle: the File Tree View (FTV) flashing is a "refresh storm" caused by a feedback loop between the extension's auto-save functionality and an overly sensitive Git API event listener.
-
-Here's the loop:
-1.  The extension saves its state to `.vscode/dce_history.json`.
-2.  The VS Code Git extension detects this file change in the workspace.
-3.  The Git extension fires a generic `repo.state.onDidChange` event.
-4.  Our listener for this event in `file-tree.service.ts` interprets this as a significant workspace change and triggers a full refresh of the FTV.
-5.  The UI refresh potentially causes a state change that triggers another auto-save, repeating the cycle.
-
-The `[Watcher] Ignoring change in DCE history file...` log shows that our direct file watcher is working correctly, but it cannot prevent the Git extension from seeing the change and firing its own event.
-
-My course of action is to break this feedback loop by making our Git event listener less aggressive. A full tree rebuild is a heavyweight operation that should only be triggered by actual file additions or deletions, which our file watcher already handles. The Git listener should only be responsible for updating status decorations (like colors and badges), which is a much lighter operation.
-
-1.  **Documentation First (Codifying the Fix):**
-    *   I will update **`A11. DCE - Regression Case Studies.md`**. The "FTV Flashing" case study will be updated to definitively identify the `repo.state.onDidChange` event storm as the root cause. The codified solution will be to change this listener to trigger a lightweight diagnostics update instead of a full, destructive refresh.
-    *   I will update **`A72. DCE - README for Artifacts.md`**. The instructions for new users will be strengthened to include a critical step: adding the `.vscode/` directory to their project's `.gitignore` file. This is a best practice that prevents the extension's state files from being tracked by Git, which is the most robust way to prevent this issue.
-
-2.  **Break the Refresh Loop (`file-tree.service.ts`):**
-    *   This is the primary code fix. I will modify the constructor of the `FileTreeService`.
-    *   The listener for `repo.state.onDidChange` will no longer call `this.triggerFullRefresh('git state change')`.
-    *   Instead, it will now call `this.triggerDiagnosticsUpdate()`.
-    *   This change is critical because `triggerDiagnosticsUpdate` only re-calculates problem and Git statuses and sends a lightweight message to the frontend to update the UI decorations. It does **not** rebuild the entire file tree, which was the cause of the "flashing." This breaks the feedback loop while preserving the desired functionality of live-updating Git status colors.
-</Previous Cycle 4 Summary of Actions>
-</Cycle 5>
-
-<Cycle 4>
-<Cycle Context>
-how do i 
-</Cycle Context>
-<Previous Cycle 3 Summary of Actions>
-I have analyzed the console logs from Cycle 184. The logs confirm the diagnosis from the previous cycle: the File Tree View (FTV) flashing is a "refresh storm" caused by a feedback loop between the extension's auto-save functionality and an overly sensitive Git API event listener.
-
-Here's the loop:
-1.  The extension saves its state to `.vscode/dce_history.json`.
-2.  The VS Code Git extension detects this file change in the workspace.
-3.  The Git extension fires a generic `repo.state.onDidChange` event.
-4.  Our listener for this event in `file-tree.service.ts` interprets this as a significant workspace change and triggers a full refresh of the FTV.
-5.  The UI refresh potentially causes a state change that triggers another auto-save, repeating the cycle.
-
-The `[Watcher] Ignoring change in DCE history file...` log shows that our direct file watcher is working correctly, but it cannot prevent the Git extension from seeing the change and firing its own event.
-
-My course of action is to break this feedback loop by making our Git event listener less aggressive. A full tree rebuild is a heavyweight operation that should only be triggered by actual file additions or deletions, which our file watcher already handles. The Git listener should only be responsible for updating status decorations (like colors and badges), which is a much lighter operation.
-
-1.  **Documentation First (Codifying the Fix):**
-    *   I will update **`A11. DCE - Regression Case Studies.md`**. The "FTV Flashing" case study will be updated to definitively identify the `repo.state.onDidChange` event storm as the root cause. The codified solution will be to change this listener to trigger a lightweight diagnostics update instead of a full, destructive refresh.
-    *   I will update **`A72. DCE - README for Artifacts.md`**. The instructions for new users will be strengthened to include a critical step: adding the `.vscode/` directory to their project's `.gitignore` file. This is a best practice that prevents the extension's state files from being tracked by Git, which is the most robust way to prevent this issue.
-
-2.  **Break the Refresh Loop (`file-tree.service.ts`):**
-    *   This is the primary code fix. I will modify the constructor of the `FileTreeService`.
-    *   The listener for `repo.state.onDidChange` will no longer call `this.triggerFullRefresh('git state change')`.
-    *   Instead, it will now call `this.triggerDiagnosticsUpdate()`.
-    *   This change is critical because `triggerDiagnosticsUpdate` only re-calculates problem and Git statuses and sends a lightweight message to the frontend to update the UI decorations. It does **not** rebuild the entire file tree, which was the cause of the "flashing." This breaks the feedback loop while preserving the desired functionality of live-updating Git status colors.
-</Previous Cycle 3 Summary of Actions>
-</Cycle 4>
-
-<Cycle 3>
-<Cycle Context>
-asdffd pls no flash man y u flasaaah
-</Cycle Context>
-<Previous Cycle 2 Summary of Actions>
-I have analyzed the TypeScript errors from the current cycle and the project's history. It's clear that the errors are a direct result of an incomplete refactoring from the previous cycle. The plan was to remove the complex and buggy `NumberedTextarea` component in favor of standard text areas for stability, but the old component and its test harness were not fully deleted, leaving behind code that references now-renamed IPC channels.
-
-My course of action is to complete the cleanup that was intended in Cycle 1. This will resolve all TypeScript errors and align the codebase with the documented decision to prioritize a stable user interface. I will also ensure the fix for the flashing File Tree View (FTV) is robust.
-
-1.  **Complete Component Cleanup:** The A-B-C test for the `NumberedTextarea` component concluded, and the decision was made to remove it. I will now finalize that removal.
-    *   **Delete Obsolete Files:** I will delete the following files, as they are no longer used and are the source of the build errors:
-        *   `src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx`
-        *   `src/client/views/parallel-copilot.view/TestPane1.tsx`
-        *   `src/client/views/parallel-copilot.view/TestPane2.tsx`
-        *   `src/client/views/parallel-copilot.view/TestPane3.tsx`
-    *   **Refactor `view.tsx`:** I will remove the A-B-C test harness logic from the main `parallel-copilot.view/view.tsx` component. This includes removing the `activeTestView` state, the test pane imports, and the conditional rendering logic for the test panes. The component will now directly render the main PCPP interface.
-    *   **Cleanup `view.scss`:** I will remove the CSS styles associated with the deleted test harness (`.test-harness-tabs`, `.test-pane-container`) from `parallel-copilot.view/view.scss`.
-
-2.  **Verify `ContextInputs.tsx`:** I will confirm that `ContextInputs.tsx` correctly uses standard `<textarea>` elements, ensuring the context input fields remain functional and stable as intended by the previous cycle's fix.
-
-3.  **Verify FTV Flashing Fix:** I will review `file-tree.service.ts` to confirm that the file watcher logic explicitly ignores `dce_history.json` to prevent the UI from flashing during auto-saves. The existing implementation appears correct and will be preserved.
-
-This comprehensive cleanup will resolve all TypeScript errors and complete the work from the previous cycle, resulting in a stable and functional extension.
-</Previous Cycle 2 Summary of Actions>
-</Cycle 3>
-
-<Cycle 2>
-<Cycle Context>
-ack, still ironing out this workflow, accidentally overwrote cycle 1 summary of actions. no matter. good work on this current cycle. i rolled in the selected cycle 2 response. in doing so, i ended up with 2 ts errors, or what i like to call directives in disguise... i checked the ts error, therses a comment saying 'blah blah in a -REAL- implementation blah blah', this is a real implementation, haha. as such, please address these ts errors in a -REAL- way haha.
-</Cycle Context>
-<Previous Cycle 1 Summary of Actions>
-I have analyzed the TypeScript errors and the ongoing issues with the context text fields and the file tree view (FTV) flashing. The TypeScript errors are the most immediate blocker and are caused by the `NumberedTextarea.tsx` component using IPC channels that were removed in a previous cycle. The "real" way to fix this is to adapt the component to use the existing, correct syntax highlighting service. The FTV flashing is a recurring regression that needs a more robust fix.
-
-My course of action is to first resolve the TypeScript errors by modifying `NumberedTextarea.tsx` to use the correct IPC channels for syntax highlighting. Concurrently, I will strengthen the file watcher's exclusion logic in `file-tree.service.ts` to definitively stop the FTV from flashing on auto-save.
-
-1.  **Fix TypeScript Errors in `NumberedTextarea.tsx` (Primary Task):**
-    *   The errors `TS2339: Property 'SendHighlightContext' does not exist...` and `TS2339: Property 'RequestHighlightContext' does not exist...` are occurring because the component is using old, deleted IPC channels.
-    *   I will modify `src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx`.
-    *   The component will be updated to use the existing, correct IPC channels for syntax highlighting: `ClientToServerChannel.RequestSyntaxHighlight` and `ServerToClientChannel.SendSyntaxHighlight`.
-    *   When sending the request, it will now include `lang: 'markdown'`, as the context panes are intended for Markdown content. This aligns the component with the "real" highlighting implementation currently used for code blocks.
-
-2.  **Fix File Tree View (FTV) Flashing (Secondary Task):**
-    *   The FTV flashing on auto-save is a recurring regression. The existing fix to ignore `.vscode/dce_history.json` is not working reliably.
-    *   I will update `src/backend/services/file-tree.service.ts`.
-    *   I will add more detailed logging to the file watcher's `onDidChange` and `onDidCreate` handlers. This will log the exact normalized path of every file change event, allowing us to see precisely what path is being reported when the PCPP auto-saves and why the current exclusion logic might be failing.
-    *   I will strengthen the exclusion logic by ensuring the check for `dce_history.json` is the very first thing that happens in the event handler, preventing any other logic from running on that specific file change.
-</Previous Cycle 1 Summary of Actions>
-</Cycle 2>
-
 <Cycle 1>
 <Cycle Context>
-ack, still ironing out this workflow, accidentally overwrote cycle 1 summary of actions. no matter. good work on this current cycle. i rolled in the selected cycle 2 response. in doing so, i ended up with 2 ts errors, or what i like to call directives in disguise... i checked the ts error, therses a comment saying 'blah blah in a -REAL- implementation blah blah', this is a real implementation, haha. as such, please address these ts errors in a -REAL- way haha.
+pretty annoying... okay so what im doing now that we fixed the issues im attempting to test the robustness of the extension by starting a new project which will be like battle school for enders game but for cybersecurity/cognitive security domain for uscybercom. i am up to cycle 4 in that project, just doing initial planning. it was when i clsoed and relaunched that project that i lost my CC and EC and cycle titles (CT) fields for cycles 1 - 4. luckily the `prompt.md` was still generated and contained the content, so we fixed the issue potentially and i am in the process of restoring my cycle context, however, in doing so, ive discovered another data loss issue occurring, ill describe what im doing and the behavior so you can narrow it down...
+
+okay after attempting the test in the EC, i realize this is seriously really buggy as shit and its hard as fuck for me to test this out. im going to try again...
+
+1. i have my `Cycle-3-Start.json` file which i will provide in the EC below.
+2. in my project, i reset my cycle history, and then i load the `Cycle-3-Start.json` file.
+3. only a cycle 1 seems to appear, as i am unable to navigate from cycle 1 to cycle 2 or to cycle 3, despite there being three `cycleId` entries in existence in the `Cycle-3-Start.json` export file... i think this is the closest i can get to the root cause observation/analysis, especially with providing you the .json file.
+4. theres another observation i would like to surface in this test. itll show up if i attempt to manually re-create the missing cycles. since currently, i have met the criteria in cycle 1 to click the `+` to create a cycle 2 (note, it is very important that we add a tooltip on the `+` button which displays the current blockers that are stopping the user from being able to click the button `+` so that the user knows what they need to do if they are trying to start another cycle but are for some reason blocked by the button being disabled due to our workflow validation rules.
+4.1. i am going to click `+` as it is available to me, and attempt to manually paste in the CC and just the selected response, and then to select it and then repeat to fill in cycle 3, with the goal of continuing development....
+4.2. i click `New Cycle` and i pasted into the CT: `flesh out features, final preparations`.
+4.3. i click out of this text field and into the CC field in the event this triggers a save action.
+4.4. i need do nothing else at this point other than to switch my tab to and from the pcpp. when i do this, and return to the pcpp, i am back to viewing cycle 1, and am one again unable to navigate to the cycle 2 i just created and input a title for.
 </Cycle Context>
+<Ephemeral Context>
+1. ive got 4 cycles of responses that lack the CT, CC and EC that i am attempting to add back in. i first navigate to cycle 1, and i paste the following into the CT: `planning scenarios and a features list`. i click out of the field, then i navigate to cycle 2.
+2. i already observe that cycle 2 now has the string `planning scenarios and a features list` despite it being somethign i placed into cycle 1 only. it is now in cycle 2. im going to check right now to see what the dce_history.json shows for cycle 2 and cycle 3. my prediction is cycle 2 shows the string now but cycle 3 does not yet, but once i click to view cycle 3 in the pcpp, the pcpp will somehow magically copy over what was pasted in cycle 1 and copied in cycle 2 the first time this process happened. kinda annoyed such data loss is occuring tbh, but yeah see if you can fix it...
+2.1. checking dce_history.json, yes cycle 3 is currentlly blank. cycle 2 has the string. im going to click next in the pcpp...
+3. ugh okay wtf now i cant even navigate to cycle 2...
+
+<Cycle-3-Start.json>
+{
+  "version": 1,
+  "cycles": [
+    {
+      "cycleId": 1,
+      "timestamp": "2025-09-04T21:09:05.927Z",
+      "title": "planning scenarios and a features list",
+      "cycleContext": "fantastic work. lets go deeper. lets create an artifat that is a list of scen[...]feature at this point in time.",
+      "ephemeralContext": "",
+      "responses": {
+        "1": {
+          "content": "<summary>\nI have analyzed the user's request to cr[...]ear of corrupting your codebase.\n</file>"
+        }
+		[...]
+      },
+      "isParsedMode": true,
+      "leftPaneWidth": 33,
+      "selectedResponseId": "7",
+      "selectedFilesForReplacement": [
+        "7:::src/Artifacts/A1. VCPG - Project Vision and Goals.md",
+        "7:::src/Artifacts/A12. VCPG - Competitive Analysis.md",
+        "7:::src/Artifacts/A3. VCPG - Technical Scaffolding Plan.md",
+        "7:::src/Artifacts/A2. VCPG - Phase 1 Requirements & Design.md",
+        "7:::src/Artifacts/A11. VCPG - Implementation Roadmap.md",
+        "7:::src/Artifacts/A14. VCPG - GitHub Repository Setup Guide.md",
+        "7:::src/Artifacts/A16. VCPG - Developer Environment Setup Guide.md",
+        "7:::src/Artifacts/A7. VCPG - Development and Testing Guide.md",
+        "7:::src/Artifacts/A0. VCPG - Master Artifact List.md"
+      ],
+      "tabCount": 7,
+      "isSortedByTokens": true,
+      "pathOverrides": {}
+    },
+    {
+      "cycleId": 2,
+      "timestamp": "2025-09-04T21:35:08.665Z",
+      "title": "flesh out features, final preparations",
+      "cycleContext": "incredible, now lets create arti[...]have for additional artifacts before we begin?",
+      "ephemeralContext": "",
+      "responses": {
+        "1": {
+          "content": "<summary>\nExcellent, let's deepen the project's definition. I w[...]low, project setup, monorepo\n</file>"
+        }
+		[...]
+      },
+      "isParsedMode": true,
+      "leftPaneWidth": 33,
+      "selectedResponseId": "7",
+      "selectedFilesForReplacement": [
+        "7:::src/Artifacts/A22. VCPG - Scenario 4 - Forward Base Blackout.md",
+        "7:::src/Artifacts/A17. VCPG - Master Features List.md",
+        "7:::src/Artifacts/A18. VCPG - Scenario Index.md",
+        "7:::src/Artifacts/A19. VCPG - Scenario 1 - Operation Stolen Scepter.md",
+        "7:::src/Artifacts/A20. VCPG - Scenario 2 - Silent Running.md",
+        "7:::src/Artifacts/A21. VCPG - Scenario 3 - Ghost Fleet.md",
+        "7:::src/Artifacts/A0. VCPG - Master Artifact List.md"
+      ],
+      "tabCount": 7,
+      "isSortedByTokens": true,
+      "pathOverrides": {}
+    },
+    {
+      "cycleId": 3,
+      "timestamp": "2025-09-04T21:35:09.671Z",
+      "title": "New Cycle",
+      "cycleContext": "",
+      "ephemeralContext": "",
+      "responses": {
+        "1": {
+          "content": ""
+        },
+        "2": {
+          "content": ""
+        },
+        "3": {
+          "content": ""
+        },
+        "4": {
+          "content": ""
+        },
+        "5": {
+          "content": ""
+        },
+        "6": {
+          "content": ""
+        },
+        "7": {
+          "content": ""
+        }
+      },
+      "isParsedMode": false,
+      "leftPaneWidth": 33,
+      "selectedResponseId": null,
+      "selectedFilesForReplacement": [],
+      "tabCount": 7,
+      "isSortedByTokens": true,
+      "pathOverrides": {}
+    }
+  ],
+  "projectScope": "i want to create a cybersecurity training platform/environment that is ga[...] training for the DoD/USCYBERCOM."
+}
+</Cycle-3-Start.json>
+
+</Ephemeral Context>
 </Cycle 1>
 
 <Cycle 0>
@@ -1694,19 +1701,19 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-05T21:57:05.772Z
+  Date Generated: 2025-09-07T16:05:50.431Z
   ---
-  Total Files: 166
-  Approx. Tokens: 462008
+  Total Files: 168
+  Approx. Tokens: 464830
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (254831 tokens)
-2. src\Artifacts\A11. DCE - Regression Case Studies.md (10523 tokens)
+2. src\Artifacts\A11. DCE - Regression Case Studies.md (11360 tokens)
 3. src\Artifacts\A0. DCE Master Artifact List.md (7388 tokens)
-4. src\client\views\parallel-copilot.view\view.tsx (6956 tokens)
-5. src\backend\services\prompt.service.ts (4908 tokens)
-6. src\client\views\parallel-copilot.view\view.scss (4598 tokens)
+4. src\client\views\parallel-copilot.view\view.tsx (7319 tokens)
+5. src\backend\services\prompt.service.ts (4995 tokens)
+6. src\client\views\parallel-copilot.view\view.scss (4485 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4429 tokens)
 8. src\backend\services\file-operation.service.ts (4095 tokens)
 9. src\client\views\context-chooser.view\view.tsx (4019 tokens)
@@ -1723,8 +1730,8 @@ This file-centric approach helps in planning and prioritizing work, especially i
 8. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
 9. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
 10. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
-11. src\Artifacts\A11.1 DCE - New Regression Case Studies.md - Lines: 40 - Chars: 4215 - Tokens: 1054
-12. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5710 - Tokens: 1428
+11. src\Artifacts\A11.1 DCE - New Regression Case Studies.md - Lines: 43 - Chars: 4884 - Tokens: 1221
+12. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5687 - Tokens: 1422
 13. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
 14. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
 15. src\Artifacts\A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md - Lines: 43 - Chars: 7263 - Tokens: 1816
@@ -1767,19 +1774,19 @@ This file-centric approach helps in planning and prioritizing work, especially i
 52. src\Artifacts\A50. DCE - Phase 2 - UI Component Plan (Resizable Panes & Inner Editors).md - Lines: 51 - Chars: 5128 - Tokens: 1282
 53. src\Artifacts\A51. DCE - A-B-C Testing Strategy for UI Bugs.md - Lines: 81 - Chars: 5490 - Tokens: 1373
 54. src\Artifacts\A52. DCE - Interaction Schema Refinement.md - Lines: 66 - Chars: 3444 - Tokens: 861
-55. src\Artifacts\A52.1 DCE - Parser Logic and AI Guidance.md - Lines: 128 - Chars: 5204 - Tokens: 1301
+55. src\Artifacts\A52.1 DCE - Parser Logic and AI Guidance.md - Lines: 132 - Chars: 5473 - Tokens: 1369
 56. src\Artifacts\A53. DCE - Phase 2 - Token Count and Similarity Analysis.md - Lines: 43 - Chars: 3500 - Tokens: 875
 57. src\Artifacts\A55. DCE - FSService Refactoring Plan.md - Lines: 77 - Chars: 4022 - Tokens: 1006
 58. src\Artifacts\A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md - Lines: 47 - Chars: 5687 - Tokens: 1422
 59. src\Artifacts\A57. DCE - Phase 2 - Cycle Management Plan.md - Lines: 44 - Chars: 3625 - Tokens: 907
 60. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 39 - Chars: 3393 - Tokens: 849
-61. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 35 - Chars: 4175 - Tokens: 1044
+61. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 35 - Chars: 4177 - Tokens: 1045
 62. src\Artifacts\A61. DCE - Phase 2 - Cycle History Management Plan.md - Lines: 45 - Chars: 3559 - Tokens: 890
 63. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1806 - Tokens: 452
 64. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 47 - Chars: 3537 - Tokens: 885
 65. src\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3347 - Tokens: 837
-66. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 3764 - Tokens: 941
-67. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 60 - Chars: 6426 - Tokens: 1607
+66. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 3772 - Tokens: 943
+67. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 60 - Chars: 6430 - Tokens: 1608
 68. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 47 - Chars: 3127 - Tokens: 782
 69. src\Artifacts\A73. DCE - GitService Plan.md - Lines: 44 - Chars: 2548 - Tokens: 637
 70. src\Artifacts\A74. DCE - Per-Input Undo-Redo Feature Plan.md - Lines: 49 - Chars: 3624 - Tokens: 906
@@ -1805,9 +1812,9 @@ This file-centric approach helps in planning and prioritizing work, especially i
 90. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 41 - Chars: 3000 - Tokens: 750
 91. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 97 - Chars: 4047 - Tokens: 1012
 92. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 45 - Chars: 2899 - Tokens: 725
-93. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 362 - Chars: 42091 - Tokens: 10523
+93. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 384 - Chars: 45439 - Tokens: 11360
 94. src\Artifacts\A42. DCE - Phase 2 - Initial Scaffolding Deployment Script.md - Lines: 246 - Chars: 8264 - Tokens: 2066
-95. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 34 - Chars: 9394 - Tokens: 2349
+95. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 35 - Chars: 9444 - Tokens: 2361
 96. src\Artifacts\A58. DCE - WinMerge Source Code Analysis.md - Lines: 56 - Chars: 5322 - Tokens: 1331
 97. src\Artifacts\A62. DCE - Cycle 157 - Task Tracker.md - Lines: 31 - Chars: 2710 - Tokens: 678
 98. src\Artifacts\A63. DCE - Cycle 158 - Task Tracker.md - Lines: 23 - Chars: 1760 - Tokens: 440
@@ -1824,9 +1831,9 @@ This file-centric approach helps in planning and prioritizing work, especially i
 109. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12820 - Tokens: 3205
 110. src\backend\services\git.service.ts - Lines: 114 - Chars: 5522 - Tokens: 1381
 111. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-112. src\backend\services\history.service.ts - Lines: 270 - Chars: 11310 - Tokens: 2828
+112. src\backend\services\history.service.ts - Lines: 281 - Chars: 11986 - Tokens: 2997
 113. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-114. src\backend\services\prompt.service.ts - Lines: 378 - Chars: 19630 - Tokens: 4908
+114. src\backend\services\prompt.service.ts - Lines: 385 - Chars: 19979 - Tokens: 4995
 115. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 116. src\backend\services\services.ts - Lines: 40 - Chars: 1827 - Tokens: 457
 117. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
@@ -1839,46 +1846,48 @@ This file-centric approach helps in planning and prioritizing work, especially i
 124. src\client\components\DiffViewer.tsx - Lines: 224 - Chars: 11386 - Tokens: 2847
 125. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
 126. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13123 - Tokens: 3281
-127. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
-128. src\client\utils\response-parser.ts - Lines: 79 - Chars: 2994 - Tokens: 749
+127. src\client\utils\logger.ts - Lines: 19 - Chars: 744 - Tokens: 186
+128. src\client\utils\response-parser.ts - Lines: 82 - Chars: 3149 - Tokens: 788
 129. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 130. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
 131. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
 132. src\client\views\context-chooser.view\view.tsx - Lines: 150 - Chars: 16076 - Tokens: 4019
 133. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
-134. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 91 - Chars: 3554 - Tokens: 889
+134. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 55 - Chars: 1994 - Tokens: 499
 135. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 86 - Chars: 3485 - Tokens: 872
 136. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
 137. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 95 - Chars: 7630 - Tokens: 1908
 138. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 84 - Chars: 3486 - Tokens: 872
 139. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
 140. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-141. src\client\views\parallel-copilot.view\on-message.ts - Lines: 109 - Chars: 5013 - Tokens: 1254
+141. src\client\views\parallel-copilot.view\on-message.ts - Lines: 114 - Chars: 5251 - Tokens: 1313
 142. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 92 - Chars: 4340 - Tokens: 1085
-143. src\client\views\parallel-copilot.view\view.scss - Lines: 814 - Chars: 18390 - Tokens: 4598
+143. src\client\views\parallel-copilot.view\view.scss - Lines: 796 - Chars: 17937 - Tokens: 4485
 144. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-145. src\client\views\parallel-copilot.view\view.tsx - Lines: 178 - Chars: 27824 - Tokens: 6956
+145. src\client\views\parallel-copilot.view\view.tsx - Lines: 207 - Chars: 29273 - Tokens: 7319
 146. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
-147. src\common\ipc\channels.enum.ts - Lines: 90 - Chars: 4851 - Tokens: 1213
-148. src\common\ipc\channels.type.ts - Lines: 91 - Chars: 6907 - Tokens: 1727
+147. src\common\ipc\channels.enum.ts - Lines: 91 - Chars: 4919 - Tokens: 1230
+148. src\common\ipc\channels.type.ts - Lines: 92 - Chars: 6991 - Tokens: 1748
 149. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 150. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 151. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
 152. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
-153. src\common\types\pcpp.types.ts - Lines: 50 - Chars: 1240 - Tokens: 310
+153. src\common\types\pcpp.types.ts - Lines: 43 - Chars: 1035 - Tokens: 259
 154. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
-155. src\common\utils\formatting.ts - Lines: 120 - Chars: 3987 - Tokens: 997
+155. src\common\utils\formatting.ts - Lines: 121 - Chars: 4018 - Tokens: 1005
 156. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
 157. src\common\utils\view-html.ts - Lines: 37 - Chars: 1314 - Tokens: 329
 158. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
-159. src\extension.ts - Lines: 131 - Chars: 5357 - Tokens: 1340
+159. src\extension.ts - Lines: 131 - Chars: 5366 - Tokens: 1342
 160. webpack.config.js - Lines: 111 - Chars: 2920 - Tokens: 730
 161. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
-162. package.json - Lines: 147 - Chars: 4730 - Tokens: 1183
+162. package.json - Lines: 144 - Chars: 4612 - Tokens: 1153
 163. .vscodeignore - Lines: 25 - Chars: 787 - Tokens: 197
 164. .gitignore - Lines: 10 - Chars: 128 - Tokens: 32
 165. src\Artifacts\A78. DCE - VSIX Packaging and FTV Flashing Bug.md - Lines: 50 - Chars: 3687 - Tokens: 922
 166. dist\Artifacts\A78. DCE - VSIX Packaging and FTV Flashing Bug.md - Lines: 50 - Chars: 3687 - Tokens: 922
+167. src\Artifacts\DCE_README.md - Lines: 47 - Chars: 3127 - Tokens: 782
+168. dist\Artifacts\DCE_README.md - Lines: 47 - Chars: 3127 - Tokens: 782
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -2842,6 +2851,7 @@ To enhance the data curation process, it is critical for the user to have immedi
 # Artifact A11.1: DCE - New Regression Case Studies
 # Date Created: C1
 # Author: AI Model & Curator
+# Updated on: C187 (Clarify role as the historical archive)
 
 - **Key/Value for A0:**
 - **Description:** A separate log for new regression case studies to avoid bloating the original A11 artifact.
@@ -2849,7 +2859,9 @@ To enhance the data curation process, it is critical for the user to have immedi
 
 ## 1. Purpose
 
-This document serves as a living record of persistent or complex bugs that have recurred during development. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase. This artifact is a supplement to `A11`.
+This document serves as a living record of persistent or complex bugs that have recurred during development. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase.
+
+**This artifact is the historical archive for older case studies.** New, active issues should be logged in `A11. DCE - Regression Case Studies.md`. This separation keeps the primary document focused and manageable in size.
 
 ## 2. Case Studies
 
@@ -2858,15 +2870,15 @@ This document serves as a living record of persistent or complex bugs that have 
 ### Case Study 001: PCPP Context Textarea Instability
 
 -   **Artifacts Affected:** `src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx`, `src/client/views/parallel-copilot.view/components/ContextInputs.tsx`
--   **Cycles Observed:** C1, C2, C3, C167, C174, C1
--   **Symptom:** The "Cycle Context" and "Ephemeral Context" text fields in the PCPP become unusable when a large amount of text is entered. The cursor becomes misaligned, text selection is inaccurate, and the component is extremely slow, making it impossible to edit content effectively.
--   **Root Cause Analysis (RCA):** The `NumberedTextarea` component uses a complex overlay approach to render line numbers and syntax highlighting. A `div` with the highlighted content is rendered behind a transparent `<textarea>`. The instability is caused by a combination of:
-    1.  **Performance:** The syntax highlighting is re-calculated on every single keystroke, which is computationally expensive for large blocks of text and causes severe input lag.
-    2.  **Synchronization Failure:** Subtle differences in CSS (`font`, `padding`, `line-height`) and rendering between the overlay `div` and the transparent `textarea` cause a "drift" in alignment as content grows, leading to the cursor and selection bugs.
+-   **Cycles Observed:** C1, C2, C3, C167, C174, C1, C5
+-   **Symptom:** The "Cycle Context" and "Ephemeral Context" text fields in the PCPP become unusable when a large amount of text is entered, especially when scrolling or word-wrapping is involved. The cursor's visual position desynchronizes from the actual text insertion point. The cursor may appear on the correct wrapped line, but typed characters will continue to render on a previous line, off-screen. This makes editing content impossible.
+-   **Root Cause Analysis (RCA):** This bug has recurred with multiple implementations (`NumberedTextarea`, `react-simple-code-editor`). The root cause is the architectural choice of using an overlay approach to render line numbers or syntax highlighting. This involves rendering a `div` or `<pre>` block with the styled content behind a transparent `<textarea>`. The instability is caused by a synchronization failure:
+    1.  **Performance:** Re-calculating syntax highlighting and re-rendering the DOM on every single keystroke is computationally expensive for large blocks of text, causing severe input lag.
+    2.  **Synchronization Failure:** Subtle differences in CSS (`font`, `padding`, `line-height`, `word-spacing`, etc.) and the browser's rendering engine between the overlay `div` and the transparent `textarea` cause a "drift" in alignment as content grows and wraps. This leads to the cursor and text selection bugs.
 -   **Codified Solution & Best Practice:**
-    1.  **Prioritize Stability:** For critical user inputs, stability and performance are more important than advanced features like line numbers or syntax highlighting.
-    2.  **Simplify:** The complex `NumberedTextarea` component was replaced in `ContextInputs.tsx` with a standard, native `<textarea>` element.
-    3.  **Conclusion:** This change guarantees a reliable and performant text input experience. While it represents a temporary removal of features, it fixes a critical usability bug. A more robust implementation of a custom code editor can be planned for a future cycle, but the default should always be a stable, native component.
+    1.  **Prioritize Stability:** For critical user inputs, stability and performance are more important than advanced features like line numbers or real-time syntax highlighting.
+    2.  **Simplify:** The complex overlay-based editor component in `ContextInputs.tsx` must be replaced with a standard, native `<textarea>` element.
+    3.  **Conclusion:** This change guarantees a reliable and performant text input experience. While it represents a temporary removal of a feature, it fixes a critical usability bug. A more robust implementation of a custom code editor (e.g., using Monaco or CodeMirror) can be planned for a future cycle, but the default should always be a stable, native component.
 
 ---
 
@@ -2885,7 +2897,7 @@ This document serves as a living record of persistent or complex bugs that have 
 # Artifact A12: DCE - Logging and Debugging Guide
 # Date Created: Cycle 19
 # Author: AI Model & Curator
-# Updated on: C126 (Add section on truncated logging)
+# Updated on: C185 (Mandate truncated logging for large data)
 
 - **Key/Value for A0:**
 - **Description:** Explains how to access and use the integrated logging solution for debugging the extension's backend and frontend components.
@@ -2954,13 +2966,13 @@ When a feature is not working as expected, especially one that involves communic
     3.  **IPC (`RequestFileExistence`):** The list of relative paths is sent to the backend.
     4.  **Backend (`fs.service.ts`):** The backend receives the list and compares it against its own list of known workspace files, which are stored as absolute paths (e.g., `c:/project/src/main.ts`). The comparison fails.
 
-## 4. Truncated Logging for Large Content (C126)
+## 4. Truncated Logging for Large Content (C185)
 
-To prevent the output channel from becoming overwhelmed with large blocks of text (e.g., entire file contents), a logging utility has been implemented to truncate long strings.
+To prevent the output channel from becoming overwhelmed with large blocks of text (e.g., entire file contents or full AI responses), a logging utility has been implemented to truncate long strings.
 
--   **Behavior:** When a service logs a large piece of content (like a code block for syntax highlighting), it will use the `truncateStringForLogging` utility.
--   **Format:** If a string is longer than a set threshold (e.g., 100 characters), it will be displayed in the logs in a format like this:
-    `[First 50 characters]...[Last 50 characters]`
+-   **Behavior:** When a service logs a large piece of content (like a code block for syntax highlighting or the entire application state), it **must** use the `truncateCodeForLogging` utility.
+-   **Format:** If a string is longer than a set threshold, it will be displayed in the logs in a format like this:
+    `[First 15 lines]...// (content truncated) ...[Last 15 lines]`
 -   **Benefit:** This keeps the logs clean and readable, allowing you to see that a large piece of data was processed without having its entire content flood the output. You can still see the beginning and end of the content to verify its identity.
 </file>
 
@@ -5251,6 +5263,7 @@ To guarantee successful parsing, every response should follow this structure:
 # Artifact A52.1: DCE - Parser Logic and AI Guidance
 # Date Created: C155
 # Author: AI Model & Curator
+# Updated on: C187 (Fix parser code example)
 
 - **Key/Value for A0:**
 - **Description:** Provides the literal source code for the response parser and explicit instructions to the AI on how to format its output to ensure successful parsing.
@@ -5273,33 +5286,37 @@ import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /<summary>([\s\S]*?)<\/summary>/;
 const COURSE_OF_ACTION_REGEX = /<course_of_action>([\s\S]*?)<\/course_of_action>/;
-const FILE_TAG_REGEX = /<file path="([^"]+)">([\s\S]*?)<\/file>/g;
+const FILE_TAG_REGEX = /<file path="([^"]+)">([\s\S]*?)<\/file_artifact>/g; // Updated closing tag
 const CODE_FENCE_START_REGEX = /^\s*```[a-zA-Z]*\n/;
 
 export function parseResponse(rawText: string): ParsedResponse {
     const files: ParsedFile[] = [];
     let totalTokens = 0;
 
-    const tagMatches = [...rawText.matchAll(FILE_TAG_REGEX)];
+    // Pre-process to remove common escape characters from other models
+    let processedText = rawText.replace(/\\</g, '<').replace(/\\>/g, '>').replace(/\\_/g, '_');
 
-    if (tagMatches.length === 0 && rawText.includes('<file path')) {
-        const summary = `**PARSING FAILED:** Could not find valid \`<file path="...">\` tags. The response may be malformed or incomplete. Displaying raw response below.\n\n---\n\n${rawText}`;
+    const tagMatches = [...processedText.matchAll(FILE_TAG_REGEX)];
+
+    if (tagMatches.length === 0 && processedText.includes('<file path')) {
+        const summary = `**PARSING FAILED:** Could not find valid \`<file path="...">...</file_artifact>\` tags. The response may be malformed or incomplete. Displaying raw response below.\n\n---\n\n${processedText}`;
         return {
             summary: summary,
             courseOfAction: '',
             filesUpdated: [],
             files: [],
-            totalTokens: Math.ceil(rawText.length / 4),
+            totalTokens: Math.ceil(processedText.length / 4),
         };
     }
 
     for (const match of tagMatches) {
-        const path = (match?.[1] ?? '').trim();
-        let content = (match?.[2] ?? '');
+        const path = (match?. ?? '').trim();
+        let content = (match?. ?? '');
 
         if (path) {
             content = content.replace(CODE_FENCE_START_REGEX, '');
-            const patternsToRemove = [`</file>`, `</${path}>`, '```', '***'];
+            // Updated patterns to remove
+            const patternsToRemove = [`</file_artifact>`, `</${path}>`, '```', '***'];
             let changed = true;
             while(changed) {
                 const originalContent = content;
@@ -5319,22 +5336,22 @@ export function parseResponse(rawText: string): ParsedResponse {
         }
     }
 
-    const summaryMatch = rawText.match(SUMMARY_REGEX);
-    const courseOfActionMatch = rawText.match(COURSE_OF_ACTION_REGEX);
+    const summaryMatch = processedText.match(SUMMARY_REGEX);
+    const courseOfActionMatch = processedText.match(COURSE_OF_ACTION_REGEX);
 
-    const summary = (summaryMatch?. ?? 'Could not parse summary.').trim();
-    const courseOfAction = (courseOfActionMatch?. ?? 'Could not parse course of action.').trim();
+    const summary = (summaryMatch?.[1] ?? 'Could not parse summary.').trim();
+    const courseOfAction = (courseOfActionMatch?.[1] ?? 'Could not parse course of action.').trim();
     
     const filesUpdatedList = files.map(f => f.path);
 
     // Fallback if no file tags are found at all
     if (files.length === 0 && !summaryMatch && !courseOfActionMatch) {
         return {
-            summary: rawText,
+            summary: processedText,
             courseOfAction: '',
             filesUpdated: [],
             files: [],
-            totalTokens: Math.ceil(rawText.length / 4),
+            totalTokens: Math.ceil(processedText.length / 4),
         };
     }
 
@@ -5354,7 +5371,7 @@ To guarantee successful parsing, every response **must** follow this structure:
 
 1.  **Summary:** Your high-level analysis and plan must be enclosed in `<summary>...</summary>` tags.
 2.  **Course of Action:** Your point-by-point plan must be enclosed in `<course_of_action>...</course_of_action>` tags.
-3.  **File Blocks:** Every file you generate must be enclosed in `<file path="..."></file>` tags. The parser uses a global regex (`/g`) to find all occurrences of this pattern. The closing tag must be exactly `</file>`.
+3.  **File Blocks:** Every file you generate must be enclosed in `<file path="..."></file_artifact>` tags. The parser uses a global regex (`/g`) to find all occurrences of this pattern. The closing tag must be exactly `</file_artifact>`.
 
 ### Canonical Example:
 
@@ -5370,12 +5387,11 @@ I have analyzed the request. My course of action is to update the main component
 
 <file path="src/client/views/my-view/view.tsx">
 // Full content of the view.tsx file...
-</file>
+</file_artifact>
 
 <file path="src/client/views/my-view/view.scss">
 /* Full content of the view.scss file... */
-</file>
-```
+</file_artifact>
 </file>
 
 <file path="src/Artifacts/A53. DCE - Phase 2 - Token Count and Similarity Analysis.md">
@@ -5647,13 +5663,13 @@ The goal of this feature is to add a **"Log State"** button to the PCPP's main h
 # Artifact A60: DCE - Phase 2 - Cycle 0 Onboarding Experience
 # Date Created: C139
 # Author: AI Model & Curator
-# Updated on: C179 (Refine artifact generation instructions)
+# Updated on: C187 (Rename README.md to DCE_README.md)
 
 ## 1. Vision & Goal
 
 The Parallel Co-Pilot Panel (PCPP) is a powerful tool, but its effectiveness relies on a structured set of planning and documentation artifacts. For a new user, bootstrapping this structure is a major hurdle.
 
-The goal of the "Cycle 0" onboarding experience is to automate this bootstrapping process. The extension will capture the user's high-level project scope and generate a prompt that instructs an AI to create a starter pack of essential **planning and documentation artifacts**. As part of this process, it will also create a `README.md` file within the `src/Artifacts` directory that explains the artifact-driven workflow itself, providing meta-context to both the user and the AI.
+The goal of the "Cycle 0" onboarding experience is to automate this bootstrapping process. The extension will capture the user's high-level project scope and generate a prompt that instructs an AI to create a starter pack of essential **planning and documentation artifacts**. As part of this process, it will also create a `DCE_README.md` file within the `src/Artifacts` directory that explains the artifact-driven workflow itself, providing meta-context to both the user and the AI.
 
 ## 2. User Flow
 
@@ -5664,7 +5680,7 @@ The goal of the "Cycle 0" onboarding experience is to automate this bootstrappin
 5.  **Backend Process:**
     *   The backend `PromptService` constructs a unique `prompt.md` file. The prompt's static context will contain the content of all template artifacts (files prefixed with `T` in the extension's artifacts).
     *   **Prompt Instruction Refinement (C179):** The instructions within the generated prompt will be updated to strongly encourage the AI to generate a comprehensive set of initial artifacts. It will explicitly prioritize foundational documents like **`T14. Template - GitHub Repository Setup Guide.md`** and **`T7. Template - Development and Testing Guide.md`** to ensure the user receives critical operational guidance from the very beginning, addressing potential setup hurdles like Git initialization proactively.
-    *   It creates `src/Artifacts/README.md`, populated with the content from the extension's internal `A72. DCE - README for Artifacts.md`.
+    *   It creates `src/Artifacts/DCE_README.md`, populated with the content from the extension's internal `A72. DCE - README for Artifacts.md`.
     *   It saves the user's "Project Scope" to a persistent field in `dce_history.json`.
 6.  **Transition to Cycle 1:** The frontend reloads its state. Since an `A0` file does not yet exist, the user is presented with a "Continue to Cycle 1" button. Clicking this transitions them to the main PCPP interface.
 7.  **User Action:** The user takes the generated `prompt.md` and uses it with their preferred LLM.
@@ -5877,8 +5893,8 @@ The highlighting will follow this specific sequence of user actions:
 3.  **Input Project Scope:** User types their project plan into the `textarea`.
     *   **Highlight:** The **`Generate Initial Artifacts Prompt`** button pulses.
 
-4.  **Generate `prompt.md`:** User clicks the button. `prompt.md` and `README.md` are created. The view transitions to Cycle 1.
-    *   **Auto-Action:** `prompt.md` and `src/Artifacts/README.md` are automatically opened in the editor.
+4.  **Generate `prompt.md`:** User clicks the button. `prompt.md` and `DCE_README.md` are created. The view transitions to Cycle 1.
+    *   **Auto-Action:** `prompt.md` and `src/Artifacts/DCE_README.md` are automatically opened in the editor.
     *   **Highlight:** The **`Resp 1`** tab in the PCPP pulses.
 
 ### Main Loop (Cycle 1+)
@@ -5937,7 +5953,7 @@ A core part of the DCE workflow involves accepting an AI-generated response and 
 | P2-GIT-01 | **Create Baseline** | As a developer, after accepting an AI response but before testing it, I want to click a "Baseline (Commit)" button to create a Git commit, so I have a safe restore point. | - A "Baseline (Commit)" button is available in the response acceptance header. <br> - Clicking it executes `git add .` and `git commit -m "DCE Baseline: Cycle [currentCycle] - [cycleTitle]"`. <br> - A "Successfully created baseline commit" notification is shown. |
 | P2-GIT-02 | **Restore Baseline** | As a developer, after testing an AI response and finding issues, I want to click a "Restore Baseline" button to discard all changes, so I can quickly test a different response. | - A "Restore Baseline" button is available. <br> - Clicking it executes `git restore .`. <br> - The restore operation must **exclude** DCE-specific state files (e.g., `.vscode/dce_history.json`) to prevent data loss. |
 | P2-GIT-03 | **State-Aware Baseline** | As a developer, I don't want to be prompted to create a baseline if my project is already in a clean state, and I want clear feedback if I try to baseline an already-clean repository. | - Before highlighting the "Baseline" button, the extension checks the `git status`. <br> - If the working tree is clean, the "Baseline" step in the animated workflow is skipped. <br> - If the user manually clicks "Baseline" on a clean tree, a message like "Already baselined" is shown. |
-| P2-GIT-04 | **Guided Git Initialization** | As a new user who hasn't initialized a Git repository, when I click "Baseline," I want to see a clear error message that tells me what's wrong and gives me the option to fix it with one click. | - If `git` is not initialized, clicking "Baseline" shows a `vscode.window.showErrorMessage`. <br> - The message explains that the folder is not a Git repository. <br> - The message includes an "Open README Guide" button that opens the project's `README.md`. <br> - The message also includes an "Initialize Repository" button that, when clicked, automatically runs `git init` in the workspace. |
+| P2-GIT-04 | **Guided Git Initialization** | As a new user who hasn't initialized a Git repository, when I click "Baseline," I want to see a clear error message that tells me what's wrong and gives me the option to fix it with one click. | - If `git` is not initialized, clicking "Baseline" shows a `vscode.window.showErrorMessage`. <br> - The message explains that the folder is not a Git repository. <br> - The message includes an "Open README Guide" button that opens the project's `DCE_README.md`. <br> - The message also includes an "Initialize Repository" button that, when clicked, automatically runs `git init` in the workspace. |
 | P2-GIT-05 | **Post-Baseline Workflow** | As a developer, after a successful baseline is created, I want the animated guide to immediately advance to the next step, so I know what to do next. | - After a successful baseline commit, the animated workflow highlight immediately moves to the "Select All" button in the "Associated Files" list. |
 
 ## 3. Feasibility Analysis
@@ -7429,17 +7445,39 @@ This file-centric approach helps in planning and prioritizing work, especially i
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C184 (Finalize FTV Flashing RCA - Decouple Decoration Refresh)
-
-- **Key/Value for A0:**
-- **Description:** Documents recurring bugs, their root causes, and codified solutions to prevent future regressions during development.
-- **Tags:** bugs, regression, troubleshooting, development, best practices
+# Updated on: C188 (Add case study for runtime syntax errors)
 
 ## 1. Purpose
 
-This document serves as a living record of persistent or complex bugs that have recurred across multiple development cycles. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase.
+This document serves as a living record of persistent or complex bugs that have recurred during development. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase.
+
+**This artifact is the primary log for new and recent case studies.** Older, resolved issues are archived in `A11.1 DCE - New Regression Case Studies.md` to keep this document concise and focused on currently relevant issues.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 025: Runtime vs. Build-time Syntax Errors
+
+-   **Artifacts Affected:** `src/client/utils/response-parser.ts`
+-   **Cycles Observed:** C188
+-   **Symptom:** The Parallel Co-Pilot Panel appears as a completely blank white screen. No errors are visible in the extension host logs, but the webview fails to render any content.
+-   **Root Cause Analysis (RCA):** The webview's JavaScript bundle contained a subtle but fatal syntax error that was not caught by the TypeScript/Babel build process. The code attempted to use an invalid form of optional chaining and nullish coalescing (`match?. ?? ''`) when trying to access properties of a regex match object. While the build completed successfully, the browser's JavaScript engine encountered this invalid syntax upon loading the script and immediately threw an `Uncaught SyntaxError`, halting all further execution and preventing React from rendering. The lack of build-time errors made this difficult to diagnose without inspecting the webview's own developer console.
+-   **Codified Solution & Best Practice:**
+    1.  **Correct Syntax:** The only way to access an element from an array-like object (such as a regex match) using optional chaining is with bracket notation: `match?.[1]`. The invalid `match?.` syntax must be corrected.
+    2.  **Best Practice:** When debugging a "blank screen" webview with no backend errors, the first step is always to open the Webview Developer Tools (`Developer: Open Webview Developer Tools` from the Command Palette). This provides access to the client-side console, which will immediately reveal any runtime JavaScript errors that are preventing the application from loading.
+
+---
+
+### Case Study 024: PCPP Context/Title Data Loss on Tab Switch
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`
+-   **Cycles Observed:** C185
+-   **Symptom:** Text entered into the "Cycle Context," "Ephemeral Context," or "Cycle Title" fields is lost when the user switches to a different cycle or another VS Code tab and then returns. The data is not persisted to `dce_history.json`.
+-   **Root Cause Analysis (RCA):** This is a critical data loss bug caused by a race condition between the application's debounced save mechanism and its state loading logic. The application waits for a pause in user input before saving changes to disk (debouncing) to improve performance. However, when the user performs an action that causes the view to reload its state (like switching cycles), the state is reloaded from the `dce_history.json` file *before* the debounced save has had a chance to execute. This overwrites the user's recent, unsaved changes with the older, stale data from the file.
+-   **Codified Solution & Best Practice:**
+    1.  **Trigger Save Before Navigation:** The event handler for any action that causes a state reload (e.g., `handleCycleChange`) **must** trigger an immediate, non-debounced save of the current component's state *before* dispatching the request to load the new state.
+    2.  **Implementation:** The `saveCurrentCycleState` function should be callable directly. The `handleCycleChange` function must be modified to call `saveCurrentCycleState()` before it sends the `RequestCycleData` IPC message. This ensures the latest changes are always persisted before a potentially overwriting state load occurs, eliminating the race condition.
 
 ---
 
@@ -8043,6 +8081,7 @@ deployScaffold();
 # Artifact A52.2: DCE - Interaction Schema Source
 # Date Created: C156
 # Author: AI Model & Curator
+# Updated on: C186 (Change file closing tag to </file_artifact>)
 
 - **Key/Value for A0:**
 - **Description:** The canonical source text for the M3. Interaction Schema, which is injected into all generated prompts.
@@ -8050,7 +8089,7 @@ deployScaffold();
 
 ## Interaction Schema Text
 
-1.  Artifacts are complete, individual texts enclosed in `<xmltags>`. To ensure consistent parsing by the DCE extension, all file artifacts **must** be enclosed in `<file path="path/to/file.ts">...</file>` tags. The path must be relative to the workspace root. The closing tag must be a simple `</file>`. Do not use the file path in the closing tag.
+1.  Artifacts are complete, individual texts enclosed in `<xmltags>`. To ensure consistent parsing by the DCE extension, all file artifacts **must** be enclosed in `<file path="path/to/file.ts">...</file_artifact>` tags. The path must be relative to the workspace root. The closing tag must be a simple `</file_artifact>`. Do not use the file path in the closing tag.
 2.  Our Document Artifacts serve as our `Source of Truth` throughout multiple cycles. As such, over time, as issues occur, or code repeatedly regresses in the same way, seek to align our `Source of Truth` such that the Root Cause of such occurances is codified so that it can be avoided on subsequent cycles visits to those Code artifacts.
 3.  Please output entire Document or Code artifacts. Do not worry about Token length. If your length continues for too long, and you reach the 600 second timeout, I will simply incorporate the work you did complete, and we can simply continue from where you left off. Better to have half of a solution to get started with, than not to have it. **Preference is for larger, more complete updates over smaller, incremental ones to align with the human curator's parallel processing workflow.** The human curator often sends the same prompt to multiple AI instances simultaneously and selects the most comprehensive response as the primary base for the next cycle, using other responses as supplementary information. Providing more complete updates increases the likelihood of a response being selected as the primary base.
 4.  Do not output artifacts that do not require updates in this cycle. (Eg. Do not do this: // Updated on: Cycle 1040 (No functional changes, only cycle header))
@@ -24316,7 +24355,7 @@ export class HighlightingService {
 
 <file path="src/backend/services/history.service.ts">
 // src/backend/services/history.service.ts
-// Updated on: C180 (Return new maxCycle on delete)
+// Updated on: C188 (Add missing pathOverrides property to default cycle)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -24325,10 +24364,17 @@ import { serverIPCs } from '@/client/views';
 import { VIEW_TYPES } from '@/common/view-types';
 import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 import { promises as fs } from 'fs';
+import { getContext } from '@/extension';
+
+const LAST_VIEWED_CYCLE_ID_KEY = 'dce.lastViewedCycleId';
 
 export class HistoryService {
     private historyFilePath: string | undefined;
     private workspaceRoot: string | undefined;
+
+    private get context(): vscode.ExtensionContext {
+        return getContext();
+    }
 
     constructor() {
         const workspaceFolders = vscode.workspace.workspaceFolders;
@@ -24366,39 +24412,45 @@ export class HistoryService {
         return await this._readHistoryFile();
     }
 
-    public async getLatestCycle(): Promise<PcppCycle> {
-        Services.loggerService.log("HistoryService: getLatestCycle called.");
+    public async saveLastViewedCycleId(id: number): Promise<void> {
+        await this.context.workspaceState.update(LAST_VIEWED_CYCLE_ID_KEY, id);
+        Services.loggerService.log(`Saved last viewed cycle ID: ${id}`);
+    }
+
+    public getLastViewedCycleId(): number | undefined {
+        return this.context.workspaceState.get<number>(LAST_VIEWED_CYCLE_ID_KEY);
+    }
+
+    public async getInitialCycle(): Promise<PcppCycle> {
+        Services.loggerService.log("HistoryService: getInitialCycle called.");
 
         if (!this.workspaceRoot) {
-            Services.loggerService.log("No workspace folder open. Returning special -1 cycle state.");
             return { cycleId: -1, timestamp: '', title: '', cycleContext: '', ephemeralContext: '', responses: {} };
         }
 
         const history = await this._readHistoryFile();
         let isFreshEnvironment = true;
-
         try {
-            await vscode.workspace.fs.stat(vscode.Uri.file(path.join(this.workspaceRoot, 'src/Artifacts/README.md')));
+            await vscode.workspace.fs.stat(vscode.Uri.file(path.join(this.workspaceRoot, 'src/Artifacts/DCE_README.md')));
             isFreshEnvironment = false;
-        } catch (e) {
-            isFreshEnvironment = true;
-        }
+        } catch (e) { isFreshEnvironment = true; }
         
         const defaultCycle: PcppCycle = {
-            cycleId: isFreshEnvironment ? 0 : 1,
-            timestamp: new Date().toISOString(),
-            title: 'New Cycle',
-            cycleContext: '',
-            ephemeralContext: '',
-            responses: { "1": { content: "" } },
-            isParsedMode: false,
-            leftPaneWidth: 33,
-            selectedResponseId: null,
-            selectedFilesForReplacement: [],
-            tabCount: 4,
-            isSortedByTokens: false,
-            cycleContextHeight: 100,
+            cycleId: isFreshEnvironment ? 0 : 1, 
+            timestamp: new Date().toISOString(), 
+            title: 'New Cycle', 
+            cycleContext: '', 
+            ephemeralContext: '', 
+            responses: { "1": { content: "" } }, 
+            isParsedMode: false, 
+            leftPaneWidth: 33, 
+            selectedResponseId: null, 
+            selectedFilesForReplacement: [], 
+            tabCount: 4, 
+            isSortedByTokens: false, 
+            cycleContextHeight: 100, 
             ephemeralContextHeight: 100,
+            pathOverrides: {},
         };
 
         if (isFreshEnvironment) {
@@ -24411,9 +24463,16 @@ export class HistoryService {
             await this.saveCycleData(defaultCycle);
             return defaultCycle;
         }
+
+        const lastViewedId = this.getLastViewedCycleId();
+        const lastViewedCycle = history.cycles.find(c => c.cycleId === lastViewedId);
+        if (lastViewedCycle) {
+            Services.loggerService.log(`Found last viewed cycle: ${lastViewedId}`);
+            return lastViewedCycle;
+        }
         
         const latestCycle = history.cycles.reduce((latest, current) => current.cycleId > latest.cycleId ? current : latest);
-        Services.loggerService.log(`Latest cycle found: ${latestCycle.cycleId}`);
+        Services.loggerService.log(`No last-viewed cycle found. Falling back to latest cycle: ${latestCycle.cycleId}`);
         return latestCycle;
     }
 
@@ -24424,15 +24483,7 @@ export class HistoryService {
             Services.loggerService.log("Returning special case for Cycle 0.");
             const history = await this._readHistoryFile();
             return {
-                cycleId: 0,
-                timestamp: new Date().toISOString(),
-                title: 'Project Setup',
-                cycleContext: history.projectScope || '', // Return the saved scope
-                ephemeralContext: '',
-                responses: {},
-                isParsedMode: false,
-                tabCount: 4,
-                isSortedByTokens: false,
+                cycleId: 0, timestamp: new Date().toISOString(), title: 'Project Setup', cycleContext: history.projectScope || '', ephemeralContext: '', responses: {}, isParsedMode: false, tabCount: 4, isSortedByTokens: false, pathOverrides: {},
             };
         }
 
@@ -24494,7 +24545,6 @@ export class HistoryService {
         await this._writeHistoryFile(history);
         Services.loggerService.log(`Cycle ${cycleId} deleted successfully.`);
         
-        // Re-read to get the new max cycle
         const updatedHistory = await this._readHistoryFile();
         const newMaxCycle = updatedHistory.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0);
 
@@ -24629,7 +24679,7 @@ export class LoggerService {
 </file>
 
 <file path="src/backend/services/prompt.service.ts">
-// Updated on: C182 (Open README on Cycle 0 generation)
+// Updated on: C187 (Fix array access and IPC channel name)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -24848,6 +24898,13 @@ ${staticContext.trim()}
         try {
             const fullHistory = await Services.historyService.getFullHistory();
             
+            // Truncate response content before logging
+            fullHistory.cycles.forEach(cycle => {
+                Object.keys(cycle.responses).forEach(respId => {
+                    cycle.responses[respId].content = truncateCodeForLogging(cycle.responses[respId].content);
+                });
+            });
+
             const isNewCycleButtonDisabled = !currentState.title || currentState.title.trim() === 'New Cycle' || currentState.title.trim() === '' || !currentState.cycleContext || currentState.cycleContext.trim() === '' || !currentState.selectedResponseId;
 
             const stateDump = {
@@ -24960,11 +25017,11 @@ ${JSON.stringify(stateDump, null, 2)}
 
             await vscode.workspace.fs.createDirectory(vscode.Uri.file(artifactsDirInWorkspace));
             const readmeContent = await this.getArtifactContent('A72. DCE - README for Artifacts.md', '# Welcome to the Data Curation Environment!');
-            const readmeUri = vscode.Uri.file(path.join(artifactsDirInWorkspace, 'README.md'));
+            const readmeUri = vscode.Uri.file(path.join(artifactsDirInWorkspace, 'DCE_README.md'));
             await vscode.workspace.fs.writeFile(readmeUri, Buffer.from(readmeContent, 'utf-8'));
-            Services.loggerService.log("Created src/Artifacts/README.md for the new project.");
+            Services.loggerService.log("Created src/Artifacts/DCE_README.md for the new project.");
             
-            const readmeFileContent = `<file path="src/Artifacts/README.md">\n${readmeContent}\n</file>`;
+            const readmeFileContent = `<file path="src/Artifacts/DCE_README.md">\n${readmeContent}\n</file_artifact>`;
             const flattenedRepoContent = `<M7. Flattened Repo>\n${readmeFileContent}\n</M7. Flattened Repo>`;
 
             const promptParts = [
@@ -24976,7 +25033,7 @@ ${JSON.stringify(stateDump, null, 2)}
             await vscode.workspace.fs.writeFile(vscode.Uri.file(promptMdPath), Buffer.from(finalPrompt, 'utf-8'));
             Services.loggerService.log("Successfully generated Cycle 0 prompt.md file.");
             
-            vscode.window.showInformationMessage(`Successfully generated initial prompt.md and created src/Artifacts/README.md`);
+            vscode.window.showInformationMessage(`Successfully generated initial prompt.md and created src/Artifacts/DCE_README.md`);
             
             const filesToOpen = [vscode.Uri.file(promptMdPath), readmeUri];
             for (const fileUri of filesToOpen) {
@@ -24999,7 +25056,7 @@ ${JSON.stringify(stateDump, null, 2)}
             };
 
             await Services.historyService.saveCycleData(cycle1Data);
-            serverIpc.sendToClient(ServerToClientChannel.SendLatestCycleData, { cycleData: cycle1Data, projectScope });
+            serverIpc.sendToClient(ServerToClientChannel.SendInitialCycleData, { cycleData: cycle1Data, projectScope });
 
         } catch (error: any) {
             vscode.window.showErrorMessage(`Failed to generate Cycle 0 prompt: ${error.message}`);
@@ -26647,28 +26704,31 @@ export const logger = {
 
 <file path="src/client/utils/response-parser.ts">
 // src/client/utils/response-parser.ts
-// Updated on: C154 (Switch to XML tags for summary and course of action)
+// Updated on: C188 (Fix invalid syntax in for loop)
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /<summary>([\s\S]*?)<\/summary>/;
 const COURSE_OF_ACTION_REGEX = /<course_of_action>([\s\S]*?)<\/course_of_action>/;
-const FILE_TAG_REGEX = /<file path="([^"]+)">([\s\S]*?)<\/file>/g;
+const FILE_TAG_REGEX = /<file path="([^"]+)">([\s\S]*?)<\/file_artifact>/g;
 const CODE_FENCE_START_REGEX = /^\s*```[a-zA-Z]*\n/;
 
 export function parseResponse(rawText: string): ParsedResponse {
     const files: ParsedFile[] = [];
     let totalTokens = 0;
 
-    const tagMatches = [...rawText.matchAll(FILE_TAG_REGEX)];
+    // Pre-process to remove common escape characters from other models
+    let processedText = rawText.replace(/\\</g, '<').replace(/\\>/g, '>').replace(/\\_/g, '_');
 
-    if (tagMatches.length === 0 && rawText.includes('<file path')) {
-        const summary = `**PARSING FAILED:** Could not find valid \`<file path="...">\` tags. The response may be malformed or incomplete. Displaying raw response below.\n\n---\n\n${rawText}`;
+    const tagMatches = [...processedText.matchAll(FILE_TAG_REGEX)];
+
+    if (tagMatches.length === 0 && processedText.includes('<file path')) {
+        const summary = `**PARSING FAILED:** Could not find valid \`<file path="...">...</file_artifact>\` tags. The response may be malformed or incomplete. Displaying raw response below.\n\n---\n\n${processedText}`;
         return {
             summary: summary,
             courseOfAction: '',
             filesUpdated: [],
             files: [],
-            totalTokens: Math.ceil(rawText.length / 4),
+            totalTokens: Math.ceil(processedText.length / 4),
         };
     }
 
@@ -26678,7 +26738,7 @@ export function parseResponse(rawText: string): ParsedResponse {
 
         if (path) {
             content = content.replace(CODE_FENCE_START_REGEX, '');
-            const patternsToRemove = [`</file>`, `</${path}>`, '```', '***'];
+            const patternsToRemove = [`</file_artifact>`, `</${path}>`, '```', '***'];
             let changed = true;
             while(changed) {
                 const originalContent = content;
@@ -26698,8 +26758,8 @@ export function parseResponse(rawText: string): ParsedResponse {
         }
     }
 
-    const summaryMatch = rawText.match(SUMMARY_REGEX);
-    const courseOfActionMatch = rawText.match(COURSE_OF_ACTION_REGEX);
+    const summaryMatch = processedText.match(SUMMARY_REGEX);
+    const courseOfActionMatch = processedText.match(COURSE_OF_ACTION_REGEX);
 
     const summary = (summaryMatch?.[1] ?? 'Could not parse summary.').trim();
     const courseOfAction = (courseOfActionMatch?.[1] ?? 'Could not parse course of action.').trim();
@@ -26709,11 +26769,11 @@ export function parseResponse(rawText: string): ParsedResponse {
     // Fallback if no file tags are found at all
     if (files.length === 0 && !summaryMatch && !courseOfActionMatch) {
         return {
-            summary: rawText,
+            summary: processedText,
             courseOfAction: '',
             filesUpdated: [],
             files: [],
-            totalTokens: Math.ceil(rawText.length / 4),
+            totalTokens: Math.ceil(processedText.length / 4),
         };
     }
 
@@ -27642,11 +27702,9 @@ export default CodeViewer;
 
 <file path="src/client/views/parallel-copilot.view/components/ContextInputs.tsx">
 // src/client/views/parallel-copilot.view/components/ContextInputs.tsx
-// Updated on: C183 (Fix implementation to use prism-react-renderer)
+// Updated on: C5 (Reverted to standard textarea for stability)
 import * as React from 'react';
 import { formatLargeNumber } from '@/common/utils/formatting';
-import Editor from 'react-simple-code-editor';
-import { Highlight, themes } from 'prism-react-renderer';
 
 interface ContextInputsProps {
     cycleContext: string;
@@ -27667,26 +27725,6 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
     onEphemeralContextChange,
     workflowStep
 }) => {
-    const highlightWrapper = (code: string) => (
-        <Highlight
-            theme={themes.vsDark}
-            code={code}
-            language="markdown"
-        >
-            {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                <pre className={className} style={{...style, margin: 0, padding: 0, backgroundColor: 'transparent' }}>
-                    {tokens.map((line, i) => (
-                        <div key={i} {...getLineProps({ line })}>
-                            {line.map((token, key) => (
-                                <span key={key} {...getTokenProps({ token })} />
-                            ))}
-                        </div>
-                    ))}
-                </pre>
-            )}
-        </Highlight>
-    );
-
     return (
         <div className="context-inputs">
             <div className={`context-input-wrapper ${workflowStep === 'awaitingCycleContext' ? 'workflow-highlight' : ''}`}>
@@ -27694,38 +27732,24 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
                     <span>Cycle Context</span>
                     <span>({formatLargeNumber(cycleContextTokens, 1)} tk)</span>
                 </div>
-                <div className="editor-container simple-editor">
-                    <Editor
-                        value={cycleContext}
-                        onValueChange={onCycleContextChange}
-                        highlight={highlightWrapper}
-                        padding={10}
-                        style={{
-                            fontFamily: 'var(--vscode-editor-font-family)',
-                            fontSize: 'var(--vscode-editor-font-size)',
-                            lineHeight: '1.5',
-                        }}
-                    />
-                </div>
+                <textarea
+                    className="response-textarea"
+                    value={cycleContext}
+                    onChange={(e) => onCycleContextChange(e.target.value)}
+                    spellCheck={false}
+                />
             </div>
             <div className="context-input-wrapper">
                 <div className="context-label">
                     <span>Ephemeral Context</span>
                     <span>({formatLargeNumber(ephemeralContextTokens, 1)} tk)</span>
                 </div>
-                 <div className="editor-container simple-editor">
-                    <Editor
-                        value={ephemeralContext}
-                        onValueChange={onEphemeralContextChange}
-                        highlight={highlightWrapper}
-                        padding={10}
-                        style={{
-                            fontFamily: 'var(--vscode-editor-font-family)',
-                            fontSize: 'var(--vscode-editor-font-size)',
-                            lineHeight: '1.5',
-                        }}
-                    />
-                </div>
+                <textarea
+                    className="response-textarea"
+                    value={ephemeralContext}
+                    onChange={(e) => onEphemeralContextChange(e.target.value)}
+                    spellCheck={false}
+                />
             </div>
         </div>
     );
@@ -28184,7 +28208,7 @@ export const viewConfig = {
 </file>
 
 <file path="src/client/views/parallel-copilot.view/on-message.ts">
-// Updated on: C3 (Add HighlightContext handler)
+// Updated on: C188 (Add logging)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -28213,10 +28237,11 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         highlightingService.handleHighlightContextRequest(data.context, data.id, serverIpc);
     });
 
-    serverIpc.onClientMessage(ClientToServerChannel.RequestLatestCycleData, async () => {
+    serverIpc.onClientMessage(ClientToServerChannel.RequestInitialCycleData, async () => {
+        loggerService.log("[PCPP on-message] Received RequestInitialCycleData from client.");
         const historyFile = await historyService.getFullHistory();
-        const latestCycle = await historyService.getLatestCycle();
-        serverIpc.sendToClient(ServerToClientChannel.SendLatestCycleData, { cycleData: latestCycle, projectScope: historyFile.projectScope });
+        const initialCycle = await historyService.getInitialCycle();
+        serverIpc.sendToClient(ServerToClientChannel.SendInitialCycleData, { cycleData: initialCycle, projectScope: historyFile.projectScope });
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestCycleData, async (data) => {
@@ -28291,6 +28316,10 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestShowInformationMessage, (data) => {
         fileOperationService.handleShowInformationMessageRequest(data.message);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.SaveLastViewedCycle, (data) => {
+        historyService.saveLastViewedCycleId(data.cycleId);
     });
 }
 </file>
@@ -28392,7 +28421,7 @@ export default OnboardingView;
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C183 (Add styles for react-simple-code-editor)
+// Updated on: C187 (Add margin for animation highlight)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -28453,28 +28482,10 @@ body {
             display: flex;
             justify-content: space-between;
         }
-    }
 
-    .editor-container {
-        border: 1px solid var(--vscode-input-border);
-        border-radius: 2px;
-        height: 150px; 
-        background-color: var(--vscode-input-background);
-        overflow: hidden;
-        position: relative;
-    }
-
-    .simple-editor {
-        & > div {
-            height: 100%;
-            overflow: auto !important;
-        }
-
-        textarea, pre {
-            outline: none !important;
-            box-shadow: none !important;
-            border: none !important;
-            background-color: transparent !important;
+        // Use response-textarea styles for consistency
+        .response-textarea {
+            height: 150px;
         }
     }
 }
@@ -28837,7 +28848,7 @@ body {
     padding: 4px;
     font-family: var(--vscode-editor-font-family);
     font-size: var(--vscode-editor-font-size);
-    resize: none;
+    resize: vertical;
      &:focus {
         outline: 1px solid var(--vscode-focusBorder);
     }
@@ -29222,12 +29233,11 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C182 (Change onCycleContextChange to pass string)
+// Updated on: C188 (Add diagnostic logging and error handling)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './view.scss';
 import { VscWand, VscFileCode, VscBug, VscBook, VscFolder, VscChevronDown } from 'react-icons/vsc';
-import { logger } from '../../../client/utils/logger';
 import { ClientPostMessageManager } from '../../../common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '../../../common/ipc/channels.enum';
 import { ParsedResponse, PcppCycle, PcppResponse } from '../../../common/types/pcpp.types';
@@ -29240,6 +29250,8 @@ import ContextInputs from './components/ContextInputs';
 import ResponseTabs from './components/ResponseTabs';
 import ResponsePane from './components/ResponsePane';
 import * as path from 'path-browserify';
+
+console.log('[PCPP View] view.tsx module loaded');
 
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -29263,6 +29275,7 @@ const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; i
 );
 
 const App = () => {
+    console.log('[PCPP View] App component rendering...');
     const [activeTab, setActiveTab] = React.useState(1);
     const [tabCount, setTabCount] = React.useState(4);
     const [currentCycle, setCurrentCycle] = React.useState<number | null>(null);
@@ -29292,61 +29305,84 @@ const App = () => {
     const [workflowStep, setWorkflowStep] = React.useState<string | null>(null);
 
     const clientIpc = ClientPostMessageManager.getInstance();
-    const getCurrentCycleData = React.useCallback((): PcppCycle | null => { if (currentCycle === null) return null; const responses: { [key: string]: PcppResponse } = {}; for (let i = 1; i <= tabCount; i++) responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' }; if (currentCycle === 0) return { cycleId: 0, cycleContext, ephemeralContext: '', responses: {}, timestamp: new Date().toISOString(), title: 'Project Setup' }; return { cycleId: currentCycle, timestamp: new Date().toISOString(), title: cycleTitle, cycleContext, ephemeralContext, responses, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement: Array.from(selectedFilesForReplacement), tabCount, isSortedByTokens, pathOverrides: Object.fromEntries(pathOverrides) }; }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides]);
-    const saveCurrentCycleState = React.useCallback(() => { const cycleData = getCurrentCycleData(); if (cycleData) clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData }); }, [clientIpc, getCurrentCycleData]);
-    const requestCostEstimation = React.useCallback(() => { const cycleData = getCurrentCycleData(); if (cycleData) clientIpc.sendToServer(ClientToServerChannel.RequestPromptCostBreakdown, { cycleData }); }, [clientIpc, getCurrentCycleData]);
+    
+    const stateRef = React.useRef({
+        currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides
+    });
+
+    React.useEffect(() => {
+        stateRef.current = {
+            currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides
+        };
+    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides]);
+
+    const saveCurrentCycleState = React.useCallback((immediate = false) => {
+        const { currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides } = stateRef.current;
+
+        if (currentCycle === null) return;
+        const responses: { [key: string]: PcppResponse } = {};
+        for (let i = 1; i <= tabCount; i++) {
+            responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' };
+        }
+        if (currentCycle === 0) {
+            clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData: { cycleId: 0, cycleContext, ephemeralContext: '', responses: {}, timestamp: new Date().toISOString(), title: 'Project Setup' } });
+            return;
+        }
+        const cycleData: PcppCycle = {
+            cycleId: currentCycle,
+            timestamp: new Date().toISOString(),
+            title: cycleTitle,
+            cycleContext,
+            ephemeralContext,
+            responses,
+            isParsedMode,
+            leftPaneWidth,
+            selectedResponseId,
+            selectedFilesForReplacement: Array.from(selectedFilesForReplacement),
+            tabCount,
+            isSortedByTokens,
+            pathOverrides: Object.fromEntries(pathOverrides)
+        };
+        clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
+    }, [clientIpc]);
+    
     const debouncedSave = useDebounce(saveCurrentCycleState, 1000);
+    const getCurrentCycleData = React.useCallback(() => stateRef.current, []);
+    const requestCostEstimation = React.useCallback(() => { const cycleData = getCurrentCycleData(); if (cycleData.currentCycle) clientIpc.sendToServer(ClientToServerChannel.RequestPromptCostBreakdown, { cycleData: cycleData as any }); }, [clientIpc, getCurrentCycleData]);
     const debouncedCostRequest = useDebounce(requestCostEstimation, 500);
 
     React.useEffect(() => { debouncedSave(); debouncedCostRequest(); }, [cycleTitle, cycleContext, ephemeralContext, tabs, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, tabCount, isSortedByTokens, pathOverrides, debouncedSave, debouncedCostRequest]);
-    React.useEffect(() => { const handleVisibilityChange = () => { if (document.visibilityState === 'hidden') saveCurrentCycleState(); }; document.addEventListener('visibilitychange', handleVisibilityChange); return () => document.removeEventListener('visibilitychange', handleVisibilityChange); }, [saveCurrentCycleState]);
+    React.useEffect(() => {
+        const handleVisibilityChange = () => {
+            if (document.visibilityState === 'hidden') {
+                saveCurrentCycleState(true);
+                if (stateRef.current.currentCycle !== null) {
+                    clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: stateRef.current.currentCycle });
+                }
+            }
+        };
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+        return () => {
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+            if (stateRef.current.currentCycle !== null) {
+                clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: stateRef.current.currentCycle });
+            }
+        };
+    }, [saveCurrentCycleState, clientIpc]);
     const parseAllTabs = React.useCallback(() => { setTabs(prevTabs => { const allFilePaths = new Set<string>(); const updatedTabs = { ...prevTabs }; let needsUpdate = false; Object.values(updatedTabs).forEach(tabState => { if (tabState.rawContent && !tabState.parsedContent) { needsUpdate = true; const parsed = parseResponse(tabState.rawContent); tabState.parsedContent = parsed; parsed.filesUpdated.forEach(file => allFilePaths.add(file)); parsed.files.forEach(file => { const lang = path.extname(file.path).substring(1) || 'plaintext'; const id = `${file.path}::${file.content}`; clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id }); }); } else if (tabState.parsedContent) { tabState.parsedContent.filesUpdated.forEach(file => allFilePaths.add(file)); } }); if (allFilePaths.size > 0) clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) }); return needsUpdate ? updatedTabs : prevTabs; }); }, [clientIpc]);
     
-    React.useEffect(() => { logger.log(`[WORKFLOW] Step changed to: ${workflowStep}`); }, [workflowStep]);
+    React.useEffect(() => { console.log(`[PCPP WORKFLOW] Step changed to: ${workflowStep}`); }, [workflowStep]);
 
-    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string) => { logger.log(`[PCPP View] Loading cycle data: ${JSON.stringify({cycleContext: cycleData.cycleContext?.length, ephemeralContext: cycleData.ephemeralContext?.length})}`); setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); }; clientIpc.onServerMessage(ServerToClientChannel.SendLatestCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, ({ filePath, originalTokens, modifiedTokens, similarity }) => { setComparisonMetrics(prev => new Map(prev).set(filePath, { originalTokens, modifiedTokens, similarity })); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); 
-        
-        clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => {
-            logger.log(`[VIEW] Received NotifyGitOperationResult: ${JSON.stringify(result)}`);
-            if (result.success) {
-                setWorkflowStep(prevStep => {
-                    logger.log(`[WORKFLOW] Functional update. Prev step: ${prevStep}.`);
-                    if (prevStep === 'awaitingBaseline') {
-                        logger.log(`[WORKFLOW] Advancing from 'awaitingBaseline' to 'awaitingFileSelect'.`);
-                        clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message });
-                        return 'awaitingFileSelect';
-                    }
-                    return prevStep;
-                });
-            } else {
-                logger.error(`[VIEW] Git operation failed: ${result.message}`);
-            }
-        });
-        
-        clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.sendToServer(ClientToServerChannel.RequestLatestCycleData, {}); }, [clientIpc]);
+    const isReadyForNextCycle = React.useMemo(() => { const hasTitle = cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== ''; const hasContext = cycleContext.trim() !== ''; const hasSelectedResponse = selectedResponseId !== null; return hasTitle && hasContext && hasSelectedResponse; }, [cycleTitle, cycleContext, selectedResponseId]);
+
+    React.useEffect(() => { if (workflowStep === null) return; if (workflowStep === 'readyForNewCycle') return; if (workflowStep === 'awaitingGeneratePrompt') { if (isReadyForNextCycle) setWorkflowStep('awaitingGeneratePrompt'); return; } if (workflowStep === 'awaitingCycleTitle') { if (cycleTitle.trim() && cycleTitle.trim() !== 'New Cycle') { setWorkflowStep('awaitingGeneratePrompt'); } return; } if (workflowStep === 'awaitingCycleContext') { if (cycleContext.trim()) { setWorkflowStep('awaitingCycleTitle'); } return; } if (workflowStep === 'awaitingAccept') { return; } if (workflowStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestGitStatus, {}); return; } if (workflowStep === 'awaitingFileSelect') { if (selectedFilesForReplacement.size > 0) { setWorkflowStep('awaitingAccept'); } return; } if (workflowStep === 'awaitingResponseSelect') { if (selectedResponseId) { setWorkflowStep('awaitingBaseline'); } return; } if (workflowStep === 'awaitingSort') { if (isSortedByTokens) { setWorkflowStep('awaitingResponseSelect'); } return; } if (workflowStep === 'awaitingParse') { if (isParsedMode) { setWorkflowStep(isSortedByTokens ? 'awaitingResponseSelect' : 'awaitingSort'); } return; } const waitingForPaste = workflowStep?.startsWith('awaitingResponsePaste'); if (waitingForPaste) { for (let i = 1; i <= tabCount; i++) { if (!tabs[i.toString()]?.rawContent?.trim()) { setWorkflowStep(`awaitingResponsePaste_${i}`); return; } } setWorkflowStep('awaitingParse'); } }, [workflowStep, selectedFilesForReplacement, selectedResponseId, isSortedByTokens, isParsedMode, tabs, cycleContext, cycleTitle, tabCount, isReadyForNextCycle, clientIpc]);
+    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string) => { console.log(`[PCPP View] Loading cycle data for cycle ${cycleData.cycleId}`); setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, ({ filePath, originalTokens, modifiedTokens, similarity }) => { setComparisonMetrics(prev => new Map(prev).set(filePath, { originalTokens, modifiedTokens, similarity })); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { console.log(`[PCPP VIEW] Received NotifyGitOperationResult: ${JSON.stringify(result)}`); if (result.success) { setWorkflowStep(prevStep => { console.log(`[PCPP WORKFLOW] Functional update. Prev step: ${prevStep}.`); if (prevStep === 'awaitingBaseline') { console.log(`[PCPP WORKFLOW] Advancing from 'awaitingBaseline' to 'awaitingFileSelect'.`); clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } else { console.error(`[PCPP VIEW] Git operation failed: ${result.message}`); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }, [clientIpc]);
     React.useEffect(() => { if (isParsedMode) parseAllTabs(); }, [isParsedMode, tabs, parseAllTabs]);
     React.useEffect(() => { if (!selectedFilePath) return; const currentTabData = tabs[activeTab.toString()]; if (currentTabData?.parsedContent) { const fileExistsInTab = currentTabData.parsedContent.files.some(f => f.path === selectedFilePath); if (!fileExistsInTab) setSelectedFilePath(null); } }, [activeTab, tabs, selectedFilePath]);
 
-    const isReadyForNextCycle = React.useMemo(() => { const hasTitle = cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== ''; const hasContext = cycleContext.trim() !== ''; const hasSelectedResponse = selectedResponseId !== null; return hasTitle && hasContext && hasSelectedResponse; }, [cycleTitle, cycleContext, selectedResponseId]);
     const isNewCycleButtonDisabled = React.useMemo(() => { if (currentCycle === 0) return true; if (currentCycle !== maxCycle) return true; return !isReadyForNextCycle; }, [currentCycle, maxCycle, isReadyForNextCycle]);
-    
-    React.useEffect(() => {
-        if (workflowStep === null) return;
-        if (workflowStep === 'readyForNewCycle') return;
-        if (workflowStep === 'awaitingGeneratePrompt') { if (isReadyForNextCycle) setWorkflowStep('awaitingGeneratePrompt'); return; }
-        if (workflowStep === 'awaitingCycleTitle') { if (cycleTitle.trim() && cycleTitle.trim() !== 'New Cycle') { setWorkflowStep('awaitingGeneratePrompt'); } return; }
-        if (workflowStep === 'awaitingCycleContext') { if (cycleContext.trim()) { setWorkflowStep('awaitingCycleTitle'); } return; }
-        if (workflowStep === 'awaitingAccept') { return; }
-        if (workflowStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestGitStatus, {}); return; }
-        if (workflowStep === 'awaitingFileSelect') { if (selectedFilesForReplacement.size > 0) { setWorkflowStep('awaitingAccept'); } return; }
-        if (workflowStep === 'awaitingResponseSelect') { if (selectedResponseId) { setWorkflowStep('awaitingBaseline'); } return; }
-        if (workflowStep === 'awaitingSort') { if (isSortedByTokens) { setWorkflowStep('awaitingResponseSelect'); } return; }
-        if (workflowStep === 'awaitingParse') { if (isParsedMode) { setWorkflowStep(isSortedByTokens ? 'awaitingResponseSelect' : 'awaitingSort'); } return; }
-        const waitingForPaste = workflowStep?.startsWith('awaitingResponsePaste');
-        if (waitingForPaste) { for (let i = 1; i <= tabCount; i++) { if (!tabs[i.toString()]?.rawContent?.trim()) { setWorkflowStep(`awaitingResponsePaste_${i}`); return; } } setWorkflowStep('awaitingParse'); }
-    }, [workflowStep, selectedFilesForReplacement, selectedResponseId, isSortedByTokens, isParsedMode, tabs, cycleContext, cycleTitle, tabCount, isReadyForNextCycle, clientIpc]);
 
-    const handleCycleChange = (e: React.MouseEvent | null, newCycle: number) => { e?.stopPropagation(); if (newCycle >= 0 && newCycle <= maxCycle) { if (currentCycle !== 0) saveCurrentCycleState(); setSelectedFilesForReplacement(new Set()); setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); setWorkflowStep(null); } };
+    const handleCycleChange = (e: React.MouseEvent | null, newCycle: number) => { e?.stopPropagation(); if (newCycle >= 0 && newCycle <= maxCycle) { saveCurrentCycleState(true); if (currentCycle !== null) clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: currentCycle }); setSelectedFilesForReplacement(new Set()); setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); setWorkflowStep(null); } };
     const handleSelectForViewing = (filePath: string) => { const newPath = selectedFilePath === filePath ? null : filePath; setSelectedFilePath(newPath); if (newPath) { const file = activeTabData?.parsedContent?.files.find(f => f.path === newPath); const pathForComparison = pathOverrides.get(newPath) || newPath; if (file) clientIpc.sendToServer(ClientToServerChannel.RequestFileComparison, { filePath: pathForComparison, modifiedContent: file.content }); } };
     const handleAcceptSelectedFiles = () => { if (selectedFilesForReplacement.size === 0) return; const filesToWrite: BatchWriteFile[] = []; selectedFilesForReplacement.forEach(compositeKey => { const [responseId, filePath] = compositeKey.split(':::'); const responseData = tabs[responseId]; if (responseData?.parsedContent) { const file = responseData.parsedContent.files.find(f => f.path === filePath); if (file) { const finalPath = pathOverrides.get(file.path) || file.path; filesToWrite.push({ path: finalPath, content: file.content }); } } }); if (filesToWrite.length > 0) clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite }); setWorkflowStep('awaitingCycleContext'); };
     const handleLinkFile = (originalPath: string) => { if (tempOverridePath.trim()) { setPathOverrides(prev => new Map(prev).set(originalPath, tempOverridePath.trim())); setFileExistenceMap(prev => new Map(prev).set(originalPath, true)); setTempOverridePath(''); handleSelectForViewing(originalPath); } };
@@ -29361,7 +29397,7 @@ const App = () => {
     
     const handleSortToggle = () => { if (workflowStep === 'awaitingSort') { setIsSortedByTokens(true); } else { setIsSortedByTokens(p => !p); } };
     const handleGlobalParseToggle = () => { const newParseMode = !isParsedMode; setIsParsedMode(newParseMode); setSelectedFilePath(null); if (!newParseMode) setTabs(prev => { const newTabs = {...prev}; Object.keys(newTabs).forEach(key => { newTabs[key].parsedContent = null; }); return newTabs; }); };
-    const handleNewCycle = (e: React.MouseEvent) => { e.stopPropagation(); saveCurrentCycleState(); const newCycleId = maxCycle + 1; setMaxCycle(newCycleId); setCurrentCycle(newCycleId); setCycleTitle('New Cycle'); setCycleContext(''); setEphemeralContext(''); setTabs({}); setIsParsedMode(false); setSelectedResponseId(null); setSelectedFilesForReplacement(new Set()); setWorkflowStep('awaitingResponsePaste_1'); };
+    const handleNewCycle = (e: React.MouseEvent) => { e.stopPropagation(); saveCurrentCycleState(true); const newCycleId = maxCycle + 1; setMaxCycle(newCycleId); setCurrentCycle(newCycleId); setCycleTitle('New Cycle'); setCycleContext(''); setEphemeralContext(''); setTabs({}); setIsParsedMode(false); setSelectedResponseId(null); setSelectedFilesForReplacement(new Set()); setWorkflowStep('awaitingResponsePaste_1'); };
     const handleGeneratePrompt = () => { if (currentCycle === null) return; clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle }); setWorkflowStep('readyForNewCycle'); }
     const handleDeleteCycle = () => { if(currentCycle !== null) clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle }); };
     const handleResetHistory = () => { clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {}); };
@@ -29372,7 +29408,7 @@ const App = () => {
     const handleFileSelectionToggle = (filePath: string) => { const currentTabId = activeTab.toString(); const compositeKeyForCurrent = `${currentTabId}:::${filePath}`; setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); let existingKey: string | undefined; for (const key of newSet) if (key.endsWith(`:::${filePath}`)) { existingKey = key; break; } if (existingKey) { if (existingKey === compositeKeyForCurrent) newSet.delete(existingKey); else { newSet.delete(existingKey); newSet.add(compositeKeyForCurrent); } } else newSet.add(compositeKeyForCurrent); return newSet; }); };
     const handleSelectAllFilesToggle = () => { if (!activeTabData?.parsedContent) return; const allFilesForTab = activeTabData.parsedContent.filesUpdated.map(fp => `${activeTab}:::${fp}`); const isAllSelected = allFilesForTab.every(key => selectedFilesForReplacement.has(key)); setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); if (isAllSelected) allFilesForTab.forEach(key => newSet.delete(key)); else allFilesForTab.forEach(key => newSet.add(key)); return newSet; }); };
     const isAllFilesSelected = React.useMemo(() => { if (!activeTabData?.parsedContent) return false; const allFiles = activeTabData.parsedContent.filesUpdated; if (allFiles.length === 0) return false; return allFiles.every(file => selectedFilesForReplacement.has(`${activeTab}:::${file}`)); }, [selectedFilesForReplacement, activeTabData, activeTab]);
-    const handleLogState = () => { const currentState = getCurrentCycleData(); if (currentState) clientIpc.sendToServer(ClientToServerChannel.RequestLogState, { currentState }); };
+    const handleLogState = () => { const currentState = getCurrentCycleData(); if (currentState) clientIpc.sendToServer(ClientToServerChannel.RequestLogState, { currentState: currentState as any }); };
     const handleCopyContent = () => { if (!selectedFilePath || !activeTabData?.parsedContent) return; const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath); if (file) clientIpc.sendToServer(ClientToServerChannel.RequestCopyTextToClipboard, { text: file.content }); };
     const costBreakdownTooltip = React.useMemo(() => { if (!costBreakdown) return "Calculating..."; return Object.entries(costBreakdown).map(([key, value]) => `${key}: ${formatLargeNumber(value, 1)} tk`).join('\n'); }, [costBreakdown]);
 
@@ -29397,8 +29433,12 @@ const App = () => {
     </div>;
 };
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
-root.render(<App />);
+try {
+    const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+    root.render(<App />);
+} catch (error) {
+    console.error('[PCPP View] CRITICAL: Failed to render React root.', error);
+}
 </file>
 
 <file path="src/client/views/index.ts">
@@ -29491,7 +29531,7 @@ export enum ClientToServerChannel {
     RequestFileExistence = "clientToServer.requestFileExistence",
     RequestSyntaxHighlight = "clientToServer.requestSyntaxHighlight",
     RequestHighlightContext = "clientToServer.requestHighlightContext", // New in C3
-    RequestLatestCycleData = "clientToServer.requestLatestCycleData",
+    RequestInitialCycleData = "clientToServer.requestInitialCycleData",
     RequestCycleData = "clientToServer.requestCycleData",
     SaveCycleData = "clientToServer.saveCycleData",
     RequestDeleteCycle = "clientToServer.requestDeleteCycle",
@@ -29505,6 +29545,7 @@ export enum ClientToServerChannel {
     RequestGitBaseline = "clientToServer.requestGitBaseline",
     RequestGitRestore = "clientToServer.requestGitRestore",
     RequestGitStatus = "clientToServer.requestGitStatus",
+    SaveLastViewedCycle = "clientToServer.saveLastViewedCycle",
 }
 
 export enum ServerToClientChannel {
@@ -29525,7 +29566,7 @@ export enum ServerToClientChannel {
     SendFileExistence = "serverToClient.sendFileExistence",
     SendSyntaxHighlight = "serverToClient.sendSyntaxHighlight",
     SendHighlightContext = "serverToClient.sendHighlightContext", // New in C3
-    SendLatestCycleData = "serverToClient.sendLatestCycleData",
+    SendInitialCycleData = "serverToClient.sendInitialCycleData",
     SendCycleData = "serverToClient.sendCycleData",
     FilesWritten = "serverToClient.filesWritten",
     SendFileComparison = "serverToClient.sendFileComparison", 
@@ -29537,7 +29578,7 @@ export enum ServerToClientChannel {
 </file>
 
 <file path="src/common/ipc/channels.type.ts">
-// Updated on: C184 (Add UpdateDecorations channel)
+// Updated on: C186 (Add SaveLastViewedCycle channel)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -29589,7 +29630,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestFileExistence ? { paths: string[] } :
     T extends ClientToServerChannel.RequestSyntaxHighlight ? { code: string; lang: string, id: string } :
     T extends ClientToServerChannel.RequestHighlightContext ? { context: string; id: string } :
-    T extends ClientToServerChannel.RequestLatestCycleData ? {} :
+    T extends ClientToServerChannel.RequestInitialCycleData ? {} :
     T extends ClientToServerChannel.RequestCycleData ? { cycleId: number } :
     T extends ClientToServerChannel.SaveCycleData ? { cycleData: PcppCycle } :
     T extends ClientToServerChannel.RequestDeleteCycle ? { cycleId: number; } :
@@ -29604,6 +29645,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestGitBaseline ? { commitMessage: string } :
     T extends ClientToServerChannel.RequestGitRestore ? {} :
     T extends ClientToServerChannel.RequestGitStatus ? {} :
+    T extends ClientToServerChannel.SaveLastViewedCycle ? { cycleId: number } :
     
     T extends ServerToClientChannel.SendWorkspaceFiles ? { files: FileNode[] } :
     T extends ServerToClientChannel.SendWorkspaceTrustState ? { isTrusted: boolean } :
@@ -29620,7 +29662,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SendFileExistence ? { existenceMap: { [path: string]: boolean } } :
     T extends ServerToClientChannel.SendSyntaxHighlight ? { highlightedHtml: string, id: string } :
     T extends ServerToClientChannel.SendHighlightContext ? { highlightedHtml: string, id: string } :
-    T extends ServerToClientChannel.SendLatestCycleData ? { cycleData: PcppCycle; projectScope?: string; } :
+    T extends ServerToClientChannel.SendInitialCycleData ? { cycleData: PcppCycle; projectScope?: string; } :
     T extends ServerToClientChannel.SendCycleData ? { cycleData: PcppCycle | null, projectScope?: string; } :
     T extends ServerToClientChannel.FilesWritten ? { paths: string[] } :
     T extends ServerToClientChannel.SendFileComparison ? { filePath: string } & ComparisonMetrics :
@@ -29758,7 +29800,7 @@ export interface FileNode {
 
 <file path="src/common/types/pcpp.types.ts">
 // src/common/types/pcpp.types.ts
-// Updated on: C170 (Fix TS error on ComparisonMetrics)
+// Updated on: C186 (Add pathOverrides to PcppCycle)
 export interface PcppResponse {
     content: string;
 }
@@ -29800,13 +29842,6 @@ export interface ParsedResponse {
     files: ParsedFile[];
     totalTokens: number;
 }
-
-// This type was moved to channels.type.ts to resolve build errors
-// export interface ComparisonMetrics {
-//     originalTokens: number;
-//     modifiedTokens: number;
-//     similarity: number;
-// }
 </file>
 
 <file path="src/common/types/vscode-webview.d.ts">
@@ -29829,7 +29864,7 @@ declare global {
 
 <file path="src/common/utils/formatting.ts">
 // src/common/utils/formatting.ts
-// Updated on: C170 (Add calculatePromptCost)
+// Updated on: C185 (Add truncateCodeForLogging)
 
 const KMBT_SUFFIXES = ['', 'K', 'M', 'B', 'T', 'Q']; // Extend as needed
 
@@ -29940,6 +29975,7 @@ export function truncateStringForLogging(str: string, maxLength: number = 100): 
  * @returns A truncated code string.
  */
 export function truncateCodeForLogging(code: string, totalLines: number = 30, startLines: number = 15, endLines: number = 15): string {
+    if (!code) return code;
     const lines = code.split('\n');
     if (lines.length <= totalLines) {
         return code;
@@ -30124,8 +30160,8 @@ export async function activate(context: vscode.ExtensionContext) {
         registerViews(context);
 
         // Auto-open PCPP on first load
-        const isFresh = (await Services.historyService.getLatestCycle()).cycleId === 0;
-        if (isFresh && vscode.workspace.workspaceFolders && vscode.workspace.workspaceFolders.length > 0) {
+        const initialCycle = await Services.historyService.getInitialCycle();
+        if (initialCycle.cycleId === 0 && vscode.workspace.workspaceFolders && vscode.workspace.workspaceFolders.length > 0) {
             Services.loggerService.log("Fresh environment, automatically opening Parallel Co-Pilot Panel.");
             vscode.commands.executeCommand('dce.showParallelCopilot');
         }
@@ -30324,7 +30360,7 @@ module.exports = [extensionConfig, webviewConfig];
     "publisher": "DCE-Developer",
     "displayName": "Data Curation Environment",
     "description": "A VS Code extension for curating context for Large Language Models.",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "repository": {
         "type": "git",
         "url": "https://github.com/dgerabagi/data-curation-environment.git"
@@ -30460,10 +30496,7 @@ module.exports = [extensionConfig, webviewConfig];
         "xlsx": "^0.18.5",
         "mammoth": "^1.8.0",
         "diff": "^5.2.0",
-        "@types/diff": "^5.2.1",
-        "react-simple-code-editor": "^0.13.1",
-        "prism-react-renderer": "^2.3.1",
-        "prismjs": "^1.29.0"
+        "@types/diff": "^5.2.1"
     }
 }
 </file>
@@ -30613,6 +30646,106 @@ The-Creator-AI-main/
         *   Add a log at the very beginning of the `onFileChange` handler to see every single file path the watcher detects, before any exclusion logic is applied.
     2.  **Strengthen Exclusions:** The exclusion logic in `file-tree.service.ts` must be made more robust to explicitly ignore build artifacts and internal state files under all conditions.
     3.  **Dampen Event Listener:** The `repo.state.onDidChange` listener should be heavily debounced via the `triggerFullRefresh` function to prevent a storm of events from causing a storm of UI updates. A longer-term solution would be to find a more specific Git API event to listen to, if one exists.
+</file>
+
+<file path="src/Artifacts/DCE_README.md">
+# Artifact A72: DCE - README for Artifacts
+# Date Created: C158
+# Author: AI Model & Curator
+# Updated on: C183 (Strengthen Git initialization and `.gitignore` guidance)
+
+- **Key/Value for A0:**
+- **Description:** The content for the `README.md` file that is automatically created in a new project's `src/Artifacts` directory, explaining the purpose of the extension and the artifact-driven workflow.
+- **Tags:** documentation, onboarding, readme, source of truth
+
+## 1. Welcome to the Data Curation Environment (DCE)
+
+This directory (`src/Artifacts/`) is the heart of your project's planning and documentation. It's managed by the **Data Curation Environment (DCE)**, a VS Code extension designed to streamline AI-assisted development.
+
+This `README.md` file was automatically generated to provide context for you (the developer) and for the AI assistants you will be working with.
+
+## 2. What is an "Artifact"?
+
+In the context of this workflow, an **Artifact** is a formal, written document that serves as a "source of truth" for a specific part of your project. Think of these files as the official blueprints, plans, and records.
+
+The core principle of the DCE workflow is **"Documentation First."** Before writing code, you and your AI partner should first create or update an artifact that describes the plan.
+
+## 3. The Iterative Cycle Workflow
+
+Development in the DCE is organized into **Cycles**. You have just completed the initial setup.
+
+### Your Next Steps
+
+1.  **Initialize Your Git Repository (CRITICAL):**
+    To take full advantage of the DCE's testing workflow (creating baselines and restoring changes), you **must** initialize a Git repository.
+    
+    Open a terminal in your project's root directory (you can use the integrated terminal in VS Code: `Terminal > New Terminal`) and run the following commands:
+    ```bash
+    git init
+    # Create or update your .gitignore file with the line below
+    echo ".vscode/" >> .gitignore
+    git add .
+    git commit -m "Initial commit"
+    ```
+    **Why `.gitignore`?** The DCE saves its state in a `.vscode/dce_history.json` file. Adding `.vscode/` to your `.gitignore` is crucial to prevent the extension's UI from flashing every time it auto-saves. For a complete guide, refer to the `GitHub Repository Setup Guide.md` artifact.
+
+2.  **Submit Your First Prompt:** The `prompt.md` file has been automatically opened for you. This file contains your project plan and instructions for the AI. Copy its entire contents and paste it into your preferred AI chat interface (like Google's AI Studio, ChatGPT, etc.).
+
+3.  **Review and Accept Responses:** Paste the AI's responses back into the "Resp 1", "Resp 2", etc. tabs in the Parallel Co-Pilot panel. The UI will guide you through parsing the responses, selecting the best one, and accepting its changes into your workspace.
+
+4.  **Repeat:** This completes a cycle. You then start the next cycle, building upon the newly accepted code and documentation.
+
+This structured, iterative process helps maintain project quality and ensures that both human and AI developers are always aligned with the project's goals.
+</file>
+
+<file path="dist/Artifacts/DCE_README.md">
+# Artifact A72: DCE - README for Artifacts
+# Date Created: C158
+# Author: AI Model & Curator
+# Updated on: C183 (Strengthen Git initialization and `.gitignore` guidance)
+
+- **Key/Value for A0:**
+- **Description:** The content for the `README.md` file that is automatically created in a new project's `src/Artifacts` directory, explaining the purpose of the extension and the artifact-driven workflow.
+- **Tags:** documentation, onboarding, readme, source of truth
+
+## 1. Welcome to the Data Curation Environment (DCE)
+
+This directory (`src/Artifacts/`) is the heart of your project's planning and documentation. It's managed by the **Data Curation Environment (DCE)**, a VS Code extension designed to streamline AI-assisted development.
+
+This `README.md` file was automatically generated to provide context for you (the developer) and for the AI assistants you will be working with.
+
+## 2. What is an "Artifact"?
+
+In the context of this workflow, an **Artifact** is a formal, written document that serves as a "source of truth" for a specific part of your project. Think of these files as the official blueprints, plans, and records.
+
+The core principle of the DCE workflow is **"Documentation First."** Before writing code, you and your AI partner should first create or update an artifact that describes the plan.
+
+## 3. The Iterative Cycle Workflow
+
+Development in the DCE is organized into **Cycles**. You have just completed the initial setup.
+
+### Your Next Steps
+
+1.  **Initialize Your Git Repository (CRITICAL):**
+    To take full advantage of the DCE's testing workflow (creating baselines and restoring changes), you **must** initialize a Git repository.
+    
+    Open a terminal in your project's root directory (you can use the integrated terminal in VS Code: `Terminal > New Terminal`) and run the following commands:
+    ```bash
+    git init
+    # Create or update your .gitignore file with the line below
+    echo ".vscode/" >> .gitignore
+    git add .
+    git commit -m "Initial commit"
+    ```
+    **Why `.gitignore`?** The DCE saves its state in a `.vscode/dce_history.json` file. Adding `.vscode/` to your `.gitignore` is crucial to prevent the extension's UI from flashing every time it auto-saves. For a complete guide, refer to the `GitHub Repository Setup Guide.md` artifact.
+
+2.  **Submit Your First Prompt:** The `prompt.md` file has been automatically opened for you. This file contains your project plan and instructions for the AI. Copy its entire contents and paste it into your preferred AI chat interface (like Google's AI Studio, ChatGPT, etc.).
+
+3.  **Review and Accept Responses:** Paste the AI's responses back into the "Resp 1", "Resp 2", etc. tabs in the Parallel Co-Pilot panel. The UI will guide you through parsing the responses, selecting the best one, and accepting its changes into your workspace.
+
+4.  **Repeat:** This completes a cycle. You then start the next cycle, building upon the newly accepted code and documentation.
+
+This structured, iterative process helps maintain project quality and ensures that both human and AI developers are always aligned with the project's goals.
 </file>
 
 
