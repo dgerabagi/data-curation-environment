@@ -1,5 +1,5 @@
 // src/backend/services/history.service.ts
-// Updated on: C180 (Return new maxCycle on delete)
+// Updated on: C186 (Implement last-viewed cycle persistence)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -8,15 +8,22 @@ import { serverIPCs } from '@/client/views';
 import { VIEW_TYPES } from '@/common/view-types';
 import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 import { promises as fs } from 'fs';
+import { getContext } from '@/extension';
+
+const LAST_VIEWED_CYCLE_ID_KEY = 'dce.lastViewedCycleId';
 
 export class HistoryService {
     private historyFilePath: string | undefined;
     private workspaceRoot: string | undefined;
 
+    private get context(): vscode.ExtensionContext {
+        return getContext();
+    }
+
     constructor() {
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (workspaceFolders && workspaceFolders.length > 0) {
-            this.workspaceRoot = workspaceFolders[0].uri.fsPath;
+            this.workspaceRoot = workspaceFolders.uri.fsPath;
             this.historyFilePath = path.join(this.workspaceRoot, '.vscode', 'dce_history.json');
         } else {
             Services.loggerService.warn("HistoryService: No workspace folder found. History will not be saved.");
@@ -49,39 +56,31 @@ export class HistoryService {
         return await this._readHistoryFile();
     }
 
-    public async getLatestCycle(): Promise<PcppCycle> {
-        Services.loggerService.log("HistoryService: getLatestCycle called.");
+    public async saveLastViewedCycleId(id: number): Promise<void> {
+        await this.context.workspaceState.update(LAST_VIEWED_CYCLE_ID_KEY, id);
+        Services.loggerService.log(`Saved last viewed cycle ID: ${id}`);
+    }
+
+    public getLastViewedCycleId(): number | undefined {
+        return this.context.workspaceState.get<number>(LAST_VIEWED_CYCLE_ID_KEY);
+    }
+
+    public async getInitialCycle(): Promise<PcppCycle> {
+        Services.loggerService.log("HistoryService: getInitialCycle called.");
 
         if (!this.workspaceRoot) {
-            Services.loggerService.log("No workspace folder open. Returning special -1 cycle state.");
             return { cycleId: -1, timestamp: '', title: '', cycleContext: '', ephemeralContext: '', responses: {} };
         }
 
         const history = await this._readHistoryFile();
         let isFreshEnvironment = true;
-
         try {
-            await vscode.workspace.fs.stat(vscode.Uri.file(path.join(this.workspaceRoot, 'src/Artifacts/README.md')));
+            await vscode.workspace.fs.stat(vscode.Uri.file(path.join(this.workspaceRoot, 'src/Artifacts/DCE_README.md')));
             isFreshEnvironment = false;
-        } catch (e) {
-            isFreshEnvironment = true;
-        }
+        } catch (e) { isFreshEnvironment = true; }
         
         const defaultCycle: PcppCycle = {
-            cycleId: isFreshEnvironment ? 0 : 1,
-            timestamp: new Date().toISOString(),
-            title: 'New Cycle',
-            cycleContext: '',
-            ephemeralContext: '',
-            responses: { "1": { content: "" } },
-            isParsedMode: false,
-            leftPaneWidth: 33,
-            selectedResponseId: null,
-            selectedFilesForReplacement: [],
-            tabCount: 4,
-            isSortedByTokens: false,
-            cycleContextHeight: 100,
-            ephemeralContextHeight: 100,
+            cycleId: isFreshEnvironment ? 0 : 1, timestamp: new Date().toISOString(), title: 'New Cycle', cycleContext: '', ephemeralContext: '', responses: { "1": { content: "" } }, isParsedMode: false, leftPaneWidth: 33, selectedResponseId: null, selectedFilesForReplacement: [], tabCount: 4, isSortedByTokens: false, cycleContextHeight: 100, ephemeralContextHeight: 100,
         };
 
         if (isFreshEnvironment) {
@@ -94,9 +93,16 @@ export class HistoryService {
             await this.saveCycleData(defaultCycle);
             return defaultCycle;
         }
+
+        const lastViewedId = this.getLastViewedCycleId();
+        const lastViewedCycle = history.cycles.find(c => c.cycleId === lastViewedId);
+        if (lastViewedCycle) {
+            Services.loggerService.log(`Found last viewed cycle: ${lastViewedId}`);
+            return lastViewedCycle;
+        }
         
         const latestCycle = history.cycles.reduce((latest, current) => current.cycleId > latest.cycleId ? current : latest);
-        Services.loggerService.log(`Latest cycle found: ${latestCycle.cycleId}`);
+        Services.loggerService.log(`No last-viewed cycle found. Falling back to latest cycle: ${latestCycle.cycleId}`);
         return latestCycle;
     }
 
@@ -107,15 +113,7 @@ export class HistoryService {
             Services.loggerService.log("Returning special case for Cycle 0.");
             const history = await this._readHistoryFile();
             return {
-                cycleId: 0,
-                timestamp: new Date().toISOString(),
-                title: 'Project Setup',
-                cycleContext: history.projectScope || '', // Return the saved scope
-                ephemeralContext: '',
-                responses: {},
-                isParsedMode: false,
-                tabCount: 4,
-                isSortedByTokens: false,
+                cycleId: 0, timestamp: new Date().toISOString(), title: 'Project Setup', cycleContext: history.projectScope || '', ephemeralContext: '', responses: {}, isParsedMode: false, tabCount: 4, isSortedByTokens: false,
             };
         }
 
@@ -177,7 +175,6 @@ export class HistoryService {
         await this._writeHistoryFile(history);
         Services.loggerService.log(`Cycle ${cycleId} deleted successfully.`);
         
-        // Re-read to get the new max cycle
         const updatedHistory = await this._readHistoryFile();
         const newMaxCycle = updatedHistory.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0);
 
@@ -249,7 +246,7 @@ export class HistoryService {
                 filters: { 'JSON': ['json'] }
             });
             if (openUris && openUris.length > 0) {
-                const content = await fs.readFile(openUris[0].fsPath, 'utf-8');
+                const content = await fs.readFile(openUris.fsPath, 'utf-8');
                 const historyData = JSON.parse(content);
                 if (historyData.version && Array.isArray(historyData.cycles)) {
                     await this._writeHistoryFile(historyData);

@@ -45,7 +45,7 @@ export enum ClientToServerChannel {
     RequestFileExistence = "clientToServer.requestFileExistence",
     RequestSyntaxHighlight = "clientToServer.requestSyntaxHighlight",
     RequestHighlightContext = "clientToServer.requestHighlightContext", // New in C3
-    RequestLatestCycleData = "clientToServer.requestLatestCycleData",
+    RequestInitialCycleData = "clientToServer.requestInitialCycleData",
     RequestCycleData = "clientToServer.requestCycleData",
     SaveCycleData = "clientToServer.saveCycleData",
     RequestDeleteCycle = "clientToServer.requestDeleteCycle",
@@ -59,6 +59,7 @@ export enum ClientToServerChannel {
     RequestGitBaseline = "clientToServer.requestGitBaseline",
     RequestGitRestore = "clientToServer.requestGitRestore",
     RequestGitStatus = "clientToServer.requestGitStatus",
+    SaveLastViewedCycle = "clientToServer.saveLastViewedCycle",
 }
 
 export enum ServerToClientChannel {
@@ -79,7 +80,7 @@ export enum ServerToClientChannel {
     SendFileExistence = "serverToClient.sendFileExistence",
     SendSyntaxHighlight = "serverToClient.sendSyntaxHighlight",
     SendHighlightContext = "serverToClient.sendHighlightContext", // New in C3
-    SendLatestCycleData = "serverToClient.sendLatestCycleData",
+    SendInitialCycleData = "serverToClient.sendInitialCycleData",
     SendCycleData = "serverToClient.sendCycleData",
     FilesWritten = "serverToClient.filesWritten",
     SendFileComparison = "serverToClient.sendFileComparison", 

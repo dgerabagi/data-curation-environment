@@ -1,5 +1,5 @@
 // src/common/types/pcpp.types.ts
-// Updated on: C170 (Fix TS error on ComparisonMetrics)
+// Updated on: C186 (Add pathOverrides to PcppCycle)
 export interface PcppResponse {
     content: string;
 }
@@ -41,10 +41,3 @@ export interface ParsedResponse {
     files: ParsedFile[];
     totalTokens: number;
 }
-
-// This type was moved to channels.type.ts to resolve build errors
-// export interface ComparisonMetrics {
-//     originalTokens: number;
-//     modifiedTokens: number;
-//     similarity: number;
-// }

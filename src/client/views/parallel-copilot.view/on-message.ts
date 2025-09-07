@@ -1,4 +1,4 @@
-// Updated on: C3 (Add HighlightContext handler)
+// Updated on: C186 (Add SaveLastViewedCycle handler)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -27,10 +27,10 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         highlightingService.handleHighlightContextRequest(data.context, data.id, serverIpc);
     });
 
-    serverIpc.onClientMessage(ClientToServerChannel.RequestLatestCycleData, async () => {
+    serverIpc.onClientMessage(ClientToServerChannel.RequestInitialCycleData, async () => {
         const historyFile = await historyService.getFullHistory();
-        const latestCycle = await historyService.getLatestCycle();
-        serverIpc.sendToClient(ServerToClientChannel.SendLatestCycleData, { cycleData: latestCycle, projectScope: historyFile.projectScope });
+        const initialCycle = await historyService.getInitialCycle();
+        serverIpc.sendToClient(ServerToClientChannel.SendInitialCycleData, { cycleData: initialCycle, projectScope: historyFile.projectScope });
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestCycleData, async (data) => {
@@ -105,5 +105,9 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestShowInformationMessage, (data) => {
         fileOperationService.handleShowInformationMessageRequest(data.message);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.SaveLastViewedCycle, (data) => {
+        historyService.saveLastViewedCycleId(data.cycleId);
     });
 }

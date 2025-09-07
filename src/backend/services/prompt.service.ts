@@ -1,4 +1,4 @@
-// Updated on: C185 (Implement truncated logging for state dump)
+// Updated on: C186 (Rename README.md, use new closing tag)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -15,7 +15,7 @@ export class PromptService {
 
     constructor(extensionUri: vscode.Uri) {
         this.extensionUri = extensionUri;
-        this.workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+        this.workspaceRoot = vscode.workspace.workspaceFolders?.?.uri.fsPath;
     }
 
     private artifactSchemaTemplate = `<M1. artifact schema>
@@ -54,8 +54,8 @@ M7. Flattened Repo
             .filter(filename => filename.startsWith('T') && filename.endsWith('.md'));
 
         templateFilenames.sort((a, b) => {
-            const numA = parseInt(a.match(/T(\d+)/)?.[1] || '0', 10);
-            const numB = parseInt(b.match(/T(\d+)/)?.[1] || '0', 10);
+            const numA = parseInt(a.match(/T(\d+)/)?. || '0', 10);
+            const numB = parseInt(b.match(/T(\d+)/)?. || '0', 10);
             return numA - numB;
         });
 
@@ -162,7 +162,7 @@ ${staticContext.trim()}
         const userA0Files = await vscode.workspace.findFiles('**/*A0*Master*Artifact*List.md', '**/node_modules/**', 1);
         let a0Content = '<!-- Master Artifact List (A0) not found in workspace -->';
         if (userA0Files.length > 0) {
-            const contentBuffer = await vscode.workspace.fs.readFile(userA0Files[0]);
+            const contentBuffer = await vscode.workspace.fs.readFile(userA0Files);
             a0Content = Buffer.from(contentBuffer).toString('utf-8');
         }
         
@@ -336,11 +336,11 @@ ${JSON.stringify(stateDump, null, 2)}
 
             await vscode.workspace.fs.createDirectory(vscode.Uri.file(artifactsDirInWorkspace));
             const readmeContent = await this.getArtifactContent('A72. DCE - README for Artifacts.md', '# Welcome to the Data Curation Environment!');
-            const readmeUri = vscode.Uri.file(path.join(artifactsDirInWorkspace, 'README.md'));
+            const readmeUri = vscode.Uri.file(path.join(artifactsDirInWorkspace, 'DCE_README.md'));
             await vscode.workspace.fs.writeFile(readmeUri, Buffer.from(readmeContent, 'utf-8'));
-            Services.loggerService.log("Created src/Artifacts/README.md for the new project.");
+            Services.loggerService.log("Created src/Artifacts/DCE_README.md for the new project.");
             
-            const readmeFileContent = `<file path="src/Artifacts/README.md">\n${readmeContent}\n</file>`;
+            const readmeFileContent = `<file path="src/Artifacts/DCE_README.md">\n${readmeContent}\n</file_artifact>`;
             const flattenedRepoContent = `<M7. Flattened Repo>\n${readmeFileContent}\n</M7. Flattened Repo>`;
 
             const promptParts = [
@@ -352,7 +352,7 @@ ${JSON.stringify(stateDump, null, 2)}
             await vscode.workspace.fs.writeFile(vscode.Uri.file(promptMdPath), Buffer.from(finalPrompt, 'utf-8'));
             Services.loggerService.log("Successfully generated Cycle 0 prompt.md file.");
             
-            vscode.window.showInformationMessage(`Successfully generated initial prompt.md and created src/Artifacts/README.md`);
+            vscode.window.showInformationMessage(`Successfully generated initial prompt.md and created src/Artifacts/DCE_README.md`);
             
             const filesToOpen = [vscode.Uri.file(promptMdPath), readmeUri];
             for (const fileUri of filesToOpen) {

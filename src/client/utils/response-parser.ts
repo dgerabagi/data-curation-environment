@@ -1,26 +1,29 @@
 // src/client/utils/response-parser.ts
-// Updated on: C154 (Switch to XML tags for summary and course of action)
+// Updated on: C186 (Update parser for new closing tag and escaped characters)
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /<summary>([\s\S]*?)<\/summary>/;
 const COURSE_OF_ACTION_REGEX = /<course_of_action>([\s\S]*?)<\/course_of_action>/;
-const FILE_TAG_REGEX = /<file path="([^"]+)">([\s\S]*?)<\/file>/g;
+const FILE_TAG_REGEX = /<file path="([^"]+)">([\s\S]*?)<\/file_artifact>/g; // Updated closing tag
 const CODE_FENCE_START_REGEX = /^\s*```[a-zA-Z]*\n/;
 
 export function parseResponse(rawText: string): ParsedResponse {
     const files: ParsedFile[] = [];
     let totalTokens = 0;
 
-    const tagMatches = [...rawText.matchAll(FILE_TAG_REGEX)];
+    // Pre-process to remove common escape characters from other models
+    let processedText = rawText.replace(/\\</g, '<').replace(/\\>/g, '>').replace(/\\_/g, '_');
 
-    if (tagMatches.length === 0 && rawText.includes('<file path')) {
-        const summary = `**PARSING FAILED:** Could not find valid \`<file path="...">\` tags. The response may be malformed or incomplete. Displaying raw response below.\n\n---\n\n${rawText}`;
+    const tagMatches = [...processedText.matchAll(FILE_TAG_REGEX)];
+
+    if (tagMatches.length === 0 && processedText.includes('<file path')) {
+        const summary = `**PARSING FAILED:** Could not find valid \`<file path="...">...</file_artifact>\` tags. The response may be malformed or incomplete. Displaying raw response below.\n\n---\n\n${processedText}`;
         return {
             summary: summary,
             courseOfAction: '',
             filesUpdated: [],
             files: [],
-            totalTokens: Math.ceil(rawText.length / 4),
+            totalTokens: Math.ceil(processedText.length / 4),
         };
     }
 
@@ -30,7 +33,8 @@ export function parseResponse(rawText: string): ParsedResponse {
 
         if (path) {
             content = content.replace(CODE_FENCE_START_REGEX, '');
-            const patternsToRemove = [`</file>`, `</${path}>`, '```', '***'];
+            // Updated patterns to remove
+            const patternsToRemove = [`</file_artifact>`, `</${path}>`, '```', '***'];
             let changed = true;
             while(changed) {
                 const originalContent = content;
@@ -50,22 +54,22 @@ export function parseResponse(rawText: string): ParsedResponse {
         }
     }
 
-    const summaryMatch = rawText.match(SUMMARY_REGEX);
-    const courseOfActionMatch = rawText.match(COURSE_OF_ACTION_REGEX);
+    const summaryMatch = processedText.match(SUMMARY_REGEX);
+    const courseOfActionMatch = processedText.match(COURSE_OF_ACTION_REGEX);
 
-    const summary = (summaryMatch?.[1] ?? 'Could not parse summary.').trim();
-    const courseOfAction = (courseOfActionMatch?.[1] ?? 'Could not parse course of action.').trim();
+    const summary = (summaryMatch?. ?? 'Could not parse summary.').trim();
+    const courseOfAction = (courseOfActionMatch?. ?? 'Could not parse course of action.').trim();
     
     const filesUpdatedList = files.map(f => f.path);
 
     // Fallback if no file tags are found at all
     if (files.length === 0 && !summaryMatch && !courseOfActionMatch) {
         return {
-            summary: rawText,
+            summary: processedText,
             courseOfAction: '',
             filesUpdated: [],
             files: [],
-            totalTokens: Math.ceil(rawText.length / 4),
+            totalTokens: Math.ceil(processedText.length / 4),
         };
     }
 

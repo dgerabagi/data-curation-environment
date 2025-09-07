@@ -81,8 +81,8 @@ export async function activate(context: vscode.ExtensionContext) {
         registerViews(context);
 
         // Auto-open PCPP on first load
-        const isFresh = (await Services.historyService.getLatestCycle()).cycleId === 0;
-        if (isFresh && vscode.workspace.workspaceFolders && vscode.workspace.workspaceFolders.length > 0) {
+        const initialCycle = await Services.historyService.getInitialCycle();
+        if (initialCycle.cycleId === 0 && vscode.workspace.workspaceFolders && vscode.workspace.workspaceFolders.length > 0) {
             Services.loggerService.log("Fresh environment, automatically opening Parallel Co-Pilot Panel.");
             vscode.commands.executeCommand('dce.showParallelCopilot');
         }
