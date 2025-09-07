@@ -1,4 +1,4 @@
-// Updated on: C187 (Fix array access and IPC channel name)
+// Updated on: C2 (Implement generateStateLog)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -218,7 +218,8 @@ ${staticContext.trim()}
             const fullHistory = await Services.historyService.getFullHistory();
             
             // Truncate response content before logging
-            fullHistory.cycles.forEach(cycle => {
+            const historyForLogging = JSON.parse(JSON.stringify(fullHistory));
+            historyForLogging.cycles.forEach((cycle: PcppCycle) => {
                 Object.keys(cycle.responses).forEach(respId => {
                     cycle.responses[respId].content = truncateCodeForLogging(cycle.responses[respId].content);
                 });
@@ -237,7 +238,7 @@ ${staticContext.trim()}
                         "hasSelectedResponse": !!currentState.selectedResponseId
                     }
                 },
-                "BACKEND_HISTORY_FILE": fullHistory
+                "BACKEND_HISTORY_FILE": historyForLogging
             };
 
             const logMessage = `

@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/ContextInputs.tsx
-// Updated on: C1 (Add onBlur handlers)
+// Updated on: C2 (Add onBlur handlers)
 import * as React from 'react';
 import { formatLargeNumber } from '@/common/utils/formatting';
 
