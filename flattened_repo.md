@@ -1,10 +1,10 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-05T21:57:05.772Z
+  Date Generated: 2025-09-07T13:21:06.815Z
   ---
   Total Files: 166
-  Approx. Tokens: 462008
+  Approx. Tokens: 461578
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -13,7 +13,7 @@
 3. src\Artifacts\A0. DCE Master Artifact List.md (7388 tokens)
 4. src\client\views\parallel-copilot.view\view.tsx (6956 tokens)
 5. src\backend\services\prompt.service.ts (4908 tokens)
-6. src\client\views\parallel-copilot.view\view.scss (4598 tokens)
+6. src\client\views\parallel-copilot.view\view.scss (4482 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4429 tokens)
 8. src\backend\services\file-operation.service.ts (4095 tokens)
 9. src\client\views\context-chooser.view\view.tsx (4019 tokens)
@@ -30,7 +30,7 @@
 8. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
 9. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
 10. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
-11. src\Artifacts\A11.1 DCE - New Regression Case Studies.md - Lines: 40 - Chars: 4215 - Tokens: 1054
+11. src\Artifacts\A11.1 DCE - New Regression Case Studies.md - Lines: 40 - Chars: 4640 - Tokens: 1160
 12. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5710 - Tokens: 1428
 13. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
 14. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
@@ -153,7 +153,7 @@
 131. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
 132. src\client\views\context-chooser.view\view.tsx - Lines: 150 - Chars: 16076 - Tokens: 4019
 133. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
-134. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 91 - Chars: 3554 - Tokens: 889
+134. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 55 - Chars: 1994 - Tokens: 499
 135. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 86 - Chars: 3485 - Tokens: 872
 136. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
 137. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 95 - Chars: 7630 - Tokens: 1908
@@ -162,7 +162,7 @@
 140. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 141. src\client\views\parallel-copilot.view\on-message.ts - Lines: 109 - Chars: 5013 - Tokens: 1254
 142. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 92 - Chars: 4340 - Tokens: 1085
-143. src\client\views\parallel-copilot.view\view.scss - Lines: 814 - Chars: 18390 - Tokens: 4598
+143. src\client\views\parallel-copilot.view\view.scss - Lines: 796 - Chars: 17928 - Tokens: 4482
 144. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
 145. src\client\views\parallel-copilot.view\view.tsx - Lines: 178 - Chars: 27824 - Tokens: 6956
 146. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
@@ -181,7 +181,7 @@
 159. src\extension.ts - Lines: 131 - Chars: 5357 - Tokens: 1340
 160. webpack.config.js - Lines: 111 - Chars: 2920 - Tokens: 730
 161. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
-162. package.json - Lines: 147 - Chars: 4730 - Tokens: 1183
+162. package.json - Lines: 144 - Chars: 4612 - Tokens: 1153
 163. .vscodeignore - Lines: 25 - Chars: 787 - Tokens: 197
 164. .gitignore - Lines: 10 - Chars: 128 - Tokens: 32
 165. src\Artifacts\A78. DCE - VSIX Packaging and FTV Flashing Bug.md - Lines: 50 - Chars: 3687 - Tokens: 922
@@ -1165,15 +1165,15 @@ This document serves as a living record of persistent or complex bugs that have 
 ### Case Study 001: PCPP Context Textarea Instability
 
 -   **Artifacts Affected:** `src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx`, `src/client/views/parallel-copilot.view/components/ContextInputs.tsx`
--   **Cycles Observed:** C1, C2, C3, C167, C174, C1
--   **Symptom:** The "Cycle Context" and "Ephemeral Context" text fields in the PCPP become unusable when a large amount of text is entered. The cursor becomes misaligned, text selection is inaccurate, and the component is extremely slow, making it impossible to edit content effectively.
--   **Root Cause Analysis (RCA):** The `NumberedTextarea` component uses a complex overlay approach to render line numbers and syntax highlighting. A `div` with the highlighted content is rendered behind a transparent `<textarea>`. The instability is caused by a combination of:
-    1.  **Performance:** The syntax highlighting is re-calculated on every single keystroke, which is computationally expensive for large blocks of text and causes severe input lag.
-    2.  **Synchronization Failure:** Subtle differences in CSS (`font`, `padding`, `line-height`) and rendering between the overlay `div` and the transparent `textarea` cause a "drift" in alignment as content grows, leading to the cursor and selection bugs.
+-   **Cycles Observed:** C1, C2, C3, C167, C174, C1, C5
+-   **Symptom:** The "Cycle Context" and "Ephemeral Context" text fields in the PCPP become unusable when a large amount of text is entered, especially when scrolling or word-wrapping is involved. The cursor's visual position desynchronizes from the actual text insertion point. The cursor may appear on the correct wrapped line, but typed characters will continue to render on a previous line, off-screen. This makes editing content impossible.
+-   **Root Cause Analysis (RCA):** This bug has recurred with multiple implementations (`NumberedTextarea`, `react-simple-code-editor`). The root cause is the architectural choice of using an overlay approach to render line numbers or syntax highlighting. This involves rendering a `div` or `<pre>` block with the styled content behind a transparent `<textarea>`. The instability is caused by a synchronization failure:
+    1.  **Performance:** Re-calculating syntax highlighting and re-rendering the DOM on every single keystroke is computationally expensive for large blocks of text, causing severe input lag.
+    2.  **Synchronization Failure:** Subtle differences in CSS (`font`, `padding`, `line-height`, `word-spacing`, etc.) and the browser's rendering engine between the overlay `div` and the transparent `textarea` cause a "drift" in alignment as content grows and wraps. This leads to the cursor and text selection bugs.
 -   **Codified Solution & Best Practice:**
-    1.  **Prioritize Stability:** For critical user inputs, stability and performance are more important than advanced features like line numbers or syntax highlighting.
-    2.  **Simplify:** The complex `NumberedTextarea` component was replaced in `ContextInputs.tsx` with a standard, native `<textarea>` element.
-    3.  **Conclusion:** This change guarantees a reliable and performant text input experience. While it represents a temporary removal of features, it fixes a critical usability bug. A more robust implementation of a custom code editor can be planned for a future cycle, but the default should always be a stable, native component.
+    1.  **Prioritize Stability:** For critical user inputs, stability and performance are more important than advanced features like line numbers or real-time syntax highlighting.
+    2.  **Simplify:** The complex overlay-based editor component in `ContextInputs.tsx` must be replaced with a standard, native `<textarea>` element.
+    3.  **Conclusion:** This change guarantees a reliable and performant text input experience. While it represents a temporary removal of a feature, it fixes a critical usability bug. A more robust implementation of a custom code editor (e.g., using Monaco or CodeMirror) can be planned for a future cycle, but the default should always be a stable, native component.
 
 ---
 
@@ -25949,11 +25949,9 @@ export default CodeViewer;
 
 <file path="src/client/views/parallel-copilot.view/components/ContextInputs.tsx">
 // src/client/views/parallel-copilot.view/components/ContextInputs.tsx
-// Updated on: C183 (Fix implementation to use prism-react-renderer)
+// Updated on: C5 (Reverted to standard textarea for stability)
 import * as React from 'react';
 import { formatLargeNumber } from '@/common/utils/formatting';
-import Editor from 'react-simple-code-editor';
-import { Highlight, themes } from 'prism-react-renderer';
 
 interface ContextInputsProps {
     cycleContext: string;
@@ -25974,26 +25972,6 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
     onEphemeralContextChange,
     workflowStep
 }) => {
-    const highlightWrapper = (code: string) => (
-        <Highlight
-            theme={themes.vsDark}
-            code={code}
-            language="markdown"
-        >
-            {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                <pre className={className} style={{...style, margin: 0, padding: 0, backgroundColor: 'transparent' }}>
-                    {tokens.map((line, i) => (
-                        <div key={i} {...getLineProps({ line })}>
-                            {line.map((token, key) => (
-                                <span key={key} {...getTokenProps({ token })} />
-                            ))}
-                        </div>
-                    ))}
-                </pre>
-            )}
-        </Highlight>
-    );
-
     return (
         <div className="context-inputs">
             <div className={`context-input-wrapper ${workflowStep === 'awaitingCycleContext' ? 'workflow-highlight' : ''}`}>
@@ -26001,38 +25979,24 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
                     <span>Cycle Context</span>
                     <span>({formatLargeNumber(cycleContextTokens, 1)} tk)</span>
                 </div>
-                <div className="editor-container simple-editor">
-                    <Editor
-                        value={cycleContext}
-                        onValueChange={onCycleContextChange}
-                        highlight={highlightWrapper}
-                        padding={10}
-                        style={{
-                            fontFamily: 'var(--vscode-editor-font-family)',
-                            fontSize: 'var(--vscode-editor-font-size)',
-                            lineHeight: '1.5',
-                        }}
-                    />
-                </div>
+                <textarea
+                    className="response-textarea"
+                    value={cycleContext}
+                    onChange={(e) => onCycleContextChange(e.target.value)}
+                    spellCheck={false}
+                />
             </div>
             <div className="context-input-wrapper">
                 <div className="context-label">
                     <span>Ephemeral Context</span>
                     <span>({formatLargeNumber(ephemeralContextTokens, 1)} tk)</span>
                 </div>
-                 <div className="editor-container simple-editor">
-                    <Editor
-                        value={ephemeralContext}
-                        onValueChange={onEphemeralContextChange}
-                        highlight={highlightWrapper}
-                        padding={10}
-                        style={{
-                            fontFamily: 'var(--vscode-editor-font-family)',
-                            fontSize: 'var(--vscode-editor-font-size)',
-                            lineHeight: '1.5',
-                        }}
-                    />
-                </div>
+                <textarea
+                    className="response-textarea"
+                    value={ephemeralContext}
+                    onChange={(e) => onEphemeralContextChange(e.target.value)}
+                    spellCheck={false}
+                />
             </div>
         </div>
     );
@@ -26699,7 +26663,7 @@ export default OnboardingView;
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C183 (Add styles for react-simple-code-editor)
+// Updated on: C5 (Remove simple-editor styles)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -26760,28 +26724,10 @@ body {
             display: flex;
             justify-content: space-between;
         }
-    }
 
-    .editor-container {
-        border: 1px solid var(--vscode-input-border);
-        border-radius: 2px;
-        height: 150px; 
-        background-color: var(--vscode-input-background);
-        overflow: hidden;
-        position: relative;
-    }
-
-    .simple-editor {
-        & > div {
-            height: 100%;
-            overflow: auto !important;
-        }
-
-        textarea, pre {
-            outline: none !important;
-            box-shadow: none !important;
-            border: none !important;
-            background-color: transparent !important;
+        // Use response-textarea styles for consistency
+        .response-textarea {
+            height: 150px;
         }
     }
 }
@@ -27144,7 +27090,7 @@ body {
     padding: 4px;
     font-family: var(--vscode-editor-font-family);
     font-size: var(--vscode-editor-font-size);
-    resize: none;
+    resize: vertical;
      &:focus {
         outline: 1px solid var(--vscode-focusBorder);
     }
@@ -28631,7 +28577,7 @@ module.exports = [extensionConfig, webviewConfig];
     "publisher": "DCE-Developer",
     "displayName": "Data Curation Environment",
     "description": "A VS Code extension for curating context for Large Language Models.",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "repository": {
         "type": "git",
         "url": "https://github.com/dgerabagi/data-curation-environment.git"
@@ -28767,10 +28713,7 @@ module.exports = [extensionConfig, webviewConfig];
         "xlsx": "^0.18.5",
         "mammoth": "^1.8.0",
         "diff": "^5.2.0",
-        "@types/diff": "^5.2.1",
-        "react-simple-code-editor": "^0.13.1",
-        "prism-react-renderer": "^2.3.1",
-        "prismjs": "^1.29.0"
+        "@types/diff": "^5.2.1"
     }
 }
 </file>
