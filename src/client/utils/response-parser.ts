@@ -1,10 +1,10 @@
 // src/client/utils/response-parser.ts
-// Updated on: C186 (Update parser for new closing tag and escaped characters)
+// Updated on: C187 (Fix invalid syntax)
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /<summary>([\s\S]*?)<\/summary>/;
 const COURSE_OF_ACTION_REGEX = /<course_of_action>([\s\S]*?)<\/course_of_action>/;
-const FILE_TAG_REGEX = /<file path="([^"]+)">([\s\S]*?)<\/file_artifact>/g; // Updated closing tag
+const FILE_TAG_REGEX = /<file path="([^"]+)">([\s\S]*?)<\/file_artifact>/g;
 const CODE_FENCE_START_REGEX = /^\s*```[a-zA-Z]*\n/;
 
 export function parseResponse(rawText: string): ParsedResponse {
@@ -33,7 +33,6 @@ export function parseResponse(rawText: string): ParsedResponse {
 
         if (path) {
             content = content.replace(CODE_FENCE_START_REGEX, '');
-            // Updated patterns to remove
             const patternsToRemove = [`</file_artifact>`, `</${path}>`, '```', '***'];
             let changed = true;
             while(changed) {
@@ -57,8 +56,8 @@ export function parseResponse(rawText: string): ParsedResponse {
     const summaryMatch = processedText.match(SUMMARY_REGEX);
     const courseOfActionMatch = processedText.match(COURSE_OF_ACTION_REGEX);
 
-    const summary = (summaryMatch?. ?? 'Could not parse summary.').trim();
-    const courseOfAction = (courseOfActionMatch?. ?? 'Could not parse course of action.').trim();
+    const summary = (summaryMatch?.[1] ?? 'Could not parse summary.').trim();
+    const courseOfAction = (courseOfActionMatch?.[1] ?? 'Could not parse course of action.').trim();
     
     const filesUpdatedList = files.map(f => f.path);
 

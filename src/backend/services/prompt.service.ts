@@ -1,4 +1,4 @@
-// Updated on: C186 (Rename README.md, use new closing tag)
+// Updated on: C187 (Fix array access and IPC channel name)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -15,7 +15,7 @@ export class PromptService {
 
     constructor(extensionUri: vscode.Uri) {
         this.extensionUri = extensionUri;
-        this.workspaceRoot = vscode.workspace.workspaceFolders?.?.uri.fsPath;
+        this.workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
     }
 
     private artifactSchemaTemplate = `<M1. artifact schema>
@@ -54,8 +54,8 @@ M7. Flattened Repo
             .filter(filename => filename.startsWith('T') && filename.endsWith('.md'));
 
         templateFilenames.sort((a, b) => {
-            const numA = parseInt(a.match(/T(\d+)/)?. || '0', 10);
-            const numB = parseInt(b.match(/T(\d+)/)?. || '0', 10);
+            const numA = parseInt(a.match(/T(\d+)/)?.[1] || '0', 10);
+            const numB = parseInt(b.match(/T(\d+)/)?.[1] || '0', 10);
             return numA - numB;
         });
 
@@ -162,7 +162,7 @@ ${staticContext.trim()}
         const userA0Files = await vscode.workspace.findFiles('**/*A0*Master*Artifact*List.md', '**/node_modules/**', 1);
         let a0Content = '<!-- Master Artifact List (A0) not found in workspace -->';
         if (userA0Files.length > 0) {
-            const contentBuffer = await vscode.workspace.fs.readFile(userA0Files);
+            const contentBuffer = await vscode.workspace.fs.readFile(userA0Files[0]);
             a0Content = Buffer.from(contentBuffer).toString('utf-8');
         }
         
@@ -375,7 +375,7 @@ ${JSON.stringify(stateDump, null, 2)}
             };
 
             await Services.historyService.saveCycleData(cycle1Data);
-            serverIpc.sendToClient(ServerToClientChannel.SendLatestCycleData, { cycleData: cycle1Data, projectScope });
+            serverIpc.sendToClient(ServerToClientChannel.SendInitialCycleData, { cycleData: cycle1Data, projectScope });
 
         } catch (error: any) {
             vscode.window.showErrorMessage(`Failed to generate Cycle 0 prompt: ${error.message}`);

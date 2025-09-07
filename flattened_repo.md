@@ -1,10 +1,10 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-07T14:38:05.495Z
+  Date Generated: 2025-09-07T15:03:43.319Z
   ---
   Total Files: 166
-  Approx. Tokens: 462767
+  Approx. Tokens: 462741
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -12,8 +12,8 @@
 2. src\Artifacts\A11. DCE - Regression Case Studies.md (10942 tokens)
 3. src\Artifacts\A0. DCE Master Artifact List.md (7388 tokens)
 4. src\client\views\parallel-copilot.view\view.tsx (7290 tokens)
-5. src\backend\services\prompt.service.ts (4992 tokens)
-6. src\client\views\parallel-copilot.view\view.scss (4482 tokens)
+5. src\backend\services\prompt.service.ts (4995 tokens)
+6. src\client\views\parallel-copilot.view\view.scss (4485 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4429 tokens)
 8. src\backend\services\file-operation.service.ts (4095 tokens)
 9. src\client\views\context-chooser.view\view.tsx (4019 tokens)
@@ -74,7 +74,7 @@
 52. src\Artifacts\A50. DCE - Phase 2 - UI Component Plan (Resizable Panes & Inner Editors).md - Lines: 51 - Chars: 5128 - Tokens: 1282
 53. src\Artifacts\A51. DCE - A-B-C Testing Strategy for UI Bugs.md - Lines: 81 - Chars: 5490 - Tokens: 1373
 54. src\Artifacts\A52. DCE - Interaction Schema Refinement.md - Lines: 66 - Chars: 3444 - Tokens: 861
-55. src\Artifacts\A52.1 DCE - Parser Logic and AI Guidance.md - Lines: 132 - Chars: 5506 - Tokens: 1377
+55. src\Artifacts\A52.1 DCE - Parser Logic and AI Guidance.md - Lines: 132 - Chars: 5473 - Tokens: 1369
 56. src\Artifacts\A53. DCE - Phase 2 - Token Count and Similarity Analysis.md - Lines: 43 - Chars: 3500 - Tokens: 875
 57. src\Artifacts\A55. DCE - FSService Refactoring Plan.md - Lines: 77 - Chars: 4022 - Tokens: 1006
 58. src\Artifacts\A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md - Lines: 47 - Chars: 5687 - Tokens: 1422
@@ -85,8 +85,8 @@
 63. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1806 - Tokens: 452
 64. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 47 - Chars: 3537 - Tokens: 885
 65. src\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3347 - Tokens: 837
-66. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 3764 - Tokens: 941
-67. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 60 - Chars: 6426 - Tokens: 1607
+66. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 3772 - Tokens: 943
+67. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 60 - Chars: 6430 - Tokens: 1608
 68. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 47 - Chars: 3127 - Tokens: 782
 69. src\Artifacts\A73. DCE - GitService Plan.md - Lines: 44 - Chars: 2548 - Tokens: 637
 70. src\Artifacts\A74. DCE - Per-Input Undo-Redo Feature Plan.md - Lines: 49 - Chars: 3624 - Tokens: 906
@@ -131,9 +131,9 @@
 109. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12820 - Tokens: 3205
 110. src\backend\services\git.service.ts - Lines: 114 - Chars: 5522 - Tokens: 1381
 111. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-112. src\backend\services\history.service.ts - Lines: 267 - Chars: 11749 - Tokens: 2938
+112. src\backend\services\history.service.ts - Lines: 267 - Chars: 11739 - Tokens: 2935
 113. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-114. src\backend\services\prompt.service.ts - Lines: 385 - Chars: 19966 - Tokens: 4992
+114. src\backend\services\prompt.service.ts - Lines: 385 - Chars: 19979 - Tokens: 4995
 115. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 116. src\backend\services\services.ts - Lines: 40 - Chars: 1827 - Tokens: 457
 117. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
@@ -147,7 +147,7 @@
 125. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
 126. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13123 - Tokens: 3281
 127. src\client\utils\logger.ts - Lines: 19 - Chars: 762 - Tokens: 191
-128. src\client\utils\response-parser.ts - Lines: 83 - Chars: 3234 - Tokens: 809
+128. src\client\utils\response-parser.ts - Lines: 82 - Chars: 3137 - Tokens: 785
 129. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 130. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
 131. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
@@ -162,7 +162,7 @@
 140. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 141. src\client\views\parallel-copilot.view\on-message.ts - Lines: 113 - Chars: 5177 - Tokens: 1295
 142. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 92 - Chars: 4340 - Tokens: 1085
-143. src\client\views\parallel-copilot.view\view.scss - Lines: 796 - Chars: 17928 - Tokens: 4482
+143. src\client\views\parallel-copilot.view\view.scss - Lines: 796 - Chars: 17937 - Tokens: 4485
 144. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
 145. src\client\views\parallel-copilot.view\view.tsx - Lines: 200 - Chars: 29159 - Tokens: 7290
 146. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
@@ -1149,7 +1149,7 @@ To enhance the data curation process, it is critical for the user to have immedi
 # Artifact A11.1: DCE - New Regression Case Studies
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C186 (Clarify role as the historical archive)
+# Updated on: C187 (Clarify role as the historical archive)
 
 - **Key/Value for A0:**
 - **Description:** A separate log for new regression case studies to avoid bloating the original A11 artifact.
@@ -3561,7 +3561,7 @@ To guarantee successful parsing, every response should follow this structure:
 # Artifact A52.1: DCE - Parser Logic and AI Guidance
 # Date Created: C155
 # Author: AI Model & Curator
-# Updated on: C186 (Update parser for new closing tag and escaped characters)
+# Updated on: C187 (Fix parser code example)
 
 - **Key/Value for A0:**
 - **Description:** Provides the literal source code for the response parser and explicit instructions to the AI on how to format its output to ensure successful parsing.
@@ -3961,7 +3961,7 @@ The goal of this feature is to add a **"Log State"** button to the PCPP's main h
 # Artifact A60: DCE - Phase 2 - Cycle 0 Onboarding Experience
 # Date Created: C139
 # Author: AI Model & Curator
-# Updated on: C186 (Rename README.md to DCE_README.md)
+# Updated on: C187 (Rename README.md to DCE_README.md)
 
 ## 1. Vision & Goal
 
@@ -4191,8 +4191,8 @@ The highlighting will follow this specific sequence of user actions:
 3.  **Input Project Scope:** User types their project plan into the `textarea`.
     *   **Highlight:** The **`Generate Initial Artifacts Prompt`** button pulses.
 
-4.  **Generate `prompt.md`:** User clicks the button. `prompt.md` and `README.md` are created. The view transitions to Cycle 1.
-    *   **Auto-Action:** `prompt.md` and `src/Artifacts/README.md` are automatically opened in the editor.
+4.  **Generate `prompt.md`:** User clicks the button. `prompt.md` and `DCE_README.md` are created. The view transitions to Cycle 1.
+    *   **Auto-Action:** `prompt.md` and `src/Artifacts/DCE_README.md` are automatically opened in the editor.
     *   **Highlight:** The **`Resp 1`** tab in the PCPP pulses.
 
 ### Main Loop (Cycle 1+)
@@ -4251,7 +4251,7 @@ A core part of the DCE workflow involves accepting an AI-generated response and 
 | P2-GIT-01 | **Create Baseline** | As a developer, after accepting an AI response but before testing it, I want to click a "Baseline (Commit)" button to create a Git commit, so I have a safe restore point. | - A "Baseline (Commit)" button is available in the response acceptance header. <br> - Clicking it executes `git add .` and `git commit -m "DCE Baseline: Cycle [currentCycle] - [cycleTitle]"`. <br> - A "Successfully created baseline commit" notification is shown. |
 | P2-GIT-02 | **Restore Baseline** | As a developer, after testing an AI response and finding issues, I want to click a "Restore Baseline" button to discard all changes, so I can quickly test a different response. | - A "Restore Baseline" button is available. <br> - Clicking it executes `git restore .`. <br> - The restore operation must **exclude** DCE-specific state files (e.g., `.vscode/dce_history.json`) to prevent data loss. |
 | P2-GIT-03 | **State-Aware Baseline** | As a developer, I don't want to be prompted to create a baseline if my project is already in a clean state, and I want clear feedback if I try to baseline an already-clean repository. | - Before highlighting the "Baseline" button, the extension checks the `git status`. <br> - If the working tree is clean, the "Baseline" step in the animated workflow is skipped. <br> - If the user manually clicks "Baseline" on a clean tree, a message like "Already baselined" is shown. |
-| P2-GIT-04 | **Guided Git Initialization** | As a new user who hasn't initialized a Git repository, when I click "Baseline," I want to see a clear error message that tells me what's wrong and gives me the option to fix it with one click. | - If `git` is not initialized, clicking "Baseline" shows a `vscode.window.showErrorMessage`. <br> - The message explains that the folder is not a Git repository. <br> - The message includes an "Open README Guide" button that opens the project's `README.md`. <br> - The message also includes an "Initialize Repository" button that, when clicked, automatically runs `git init` in the workspace. |
+| P2-GIT-04 | **Guided Git Initialization** | As a new user who hasn't initialized a Git repository, when I click "Baseline," I want to see a clear error message that tells me what's wrong and gives me the option to fix it with one click. | - If `git` is not initialized, clicking "Baseline" shows a `vscode.window.showErrorMessage`. <br> - The message explains that the folder is not a Git repository. <br> - The message includes an "Open README Guide" button that opens the project's `DCE_README.md`. <br> - The message also includes an "Initialize Repository" button that, when clicked, automatically runs `git init` in the workspace. |
 | P2-GIT-05 | **Post-Baseline Workflow** | As a developer, after a successful baseline is created, I want the animated guide to immediately advance to the next step, so I know what to do next. | - After a successful baseline commit, the animated workflow highlight immediately moves to the "Select All" button in the "Associated Files" list. |
 
 ## 3. Feasibility Analysis
@@ -5743,7 +5743,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C186 (Clarify role as the active log for new case studies)
+# Updated on: C187 (Clarify role as the active log for new case studies)
 
 ## 1. Purpose
 
@@ -22641,7 +22641,7 @@ export class HighlightingService {
 
 <file path="src/backend/services/history.service.ts">
 // src/backend/services/history.service.ts
-// Updated on: C186 (Implement last-viewed cycle persistence)
+// Updated on: C187 (Fix array access errors)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -22665,7 +22665,7 @@ export class HistoryService {
     constructor() {
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (workspaceFolders && workspaceFolders.length > 0) {
-            this.workspaceRoot = workspaceFolders.uri.fsPath;
+            this.workspaceRoot = workspaceFolders[0].uri.fsPath;
             this.historyFilePath = path.join(this.workspaceRoot, '.vscode', 'dce_history.json');
         } else {
             Services.loggerService.warn("HistoryService: No workspace folder found. History will not be saved.");
@@ -22888,7 +22888,7 @@ export class HistoryService {
                 filters: { 'JSON': ['json'] }
             });
             if (openUris && openUris.length > 0) {
-                const content = await fs.readFile(openUris.fsPath, 'utf-8');
+                const content = await fs.readFile(openUris[0].fsPath, 'utf-8');
                 const historyData = JSON.parse(content);
                 if (historyData.version && Array.isArray(historyData.cycles)) {
                     await this._writeHistoryFile(historyData);
@@ -22951,7 +22951,7 @@ export class LoggerService {
 </file>
 
 <file path="src/backend/services/prompt.service.ts">
-// Updated on: C186 (Rename README.md, use new closing tag)
+// Updated on: C187 (Fix array access and IPC channel name)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -22968,7 +22968,7 @@ export class PromptService {
 
     constructor(extensionUri: vscode.Uri) {
         this.extensionUri = extensionUri;
-        this.workspaceRoot = vscode.workspace.workspaceFolders?.?.uri.fsPath;
+        this.workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
     }
 
     private artifactSchemaTemplate = `<M1. artifact schema>
@@ -23007,8 +23007,8 @@ M7. Flattened Repo
             .filter(filename => filename.startsWith('T') && filename.endsWith('.md'));
 
         templateFilenames.sort((a, b) => {
-            const numA = parseInt(a.match(/T(\d+)/)?. || '0', 10);
-            const numB = parseInt(b.match(/T(\d+)/)?. || '0', 10);
+            const numA = parseInt(a.match(/T(\d+)/)?.[1] || '0', 10);
+            const numB = parseInt(b.match(/T(\d+)/)?.[1] || '0', 10);
             return numA - numB;
         });
 
@@ -23115,7 +23115,7 @@ ${staticContext.trim()}
         const userA0Files = await vscode.workspace.findFiles('**/*A0*Master*Artifact*List.md', '**/node_modules/**', 1);
         let a0Content = '<!-- Master Artifact List (A0) not found in workspace -->';
         if (userA0Files.length > 0) {
-            const contentBuffer = await vscode.workspace.fs.readFile(userA0Files);
+            const contentBuffer = await vscode.workspace.fs.readFile(userA0Files[0]);
             a0Content = Buffer.from(contentBuffer).toString('utf-8');
         }
         
@@ -23328,7 +23328,7 @@ ${JSON.stringify(stateDump, null, 2)}
             };
 
             await Services.historyService.saveCycleData(cycle1Data);
-            serverIpc.sendToClient(ServerToClientChannel.SendLatestCycleData, { cycleData: cycle1Data, projectScope });
+            serverIpc.sendToClient(ServerToClientChannel.SendInitialCycleData, { cycleData: cycle1Data, projectScope });
 
         } catch (error: any) {
             vscode.window.showErrorMessage(`Failed to generate Cycle 0 prompt: ${error.message}`);
@@ -24976,12 +24976,12 @@ export const logger = {
 
 <file path="src/client/utils/response-parser.ts">
 // src/client/utils/response-parser.ts
-// Updated on: C186 (Update parser for new closing tag and escaped characters)
+// Updated on: C187 (Fix invalid syntax)
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /<summary>([\s\S]*?)<\/summary>/;
 const COURSE_OF_ACTION_REGEX = /<course_of_action>([\s\S]*?)<\/course_of_action>/;
-const FILE_TAG_REGEX = /<file path="([^"]+)">([\s\S]*?)<\/file_artifact>/g; // Updated closing tag
+const FILE_TAG_REGEX = /<file path="([^"]+)">([\s\S]*?)<\/file_artifact>/g;
 const CODE_FENCE_START_REGEX = /^\s*```[a-zA-Z]*\n/;
 
 export function parseResponse(rawText: string): ParsedResponse {
@@ -25010,7 +25010,6 @@ export function parseResponse(rawText: string): ParsedResponse {
 
         if (path) {
             content = content.replace(CODE_FENCE_START_REGEX, '');
-            // Updated patterns to remove
             const patternsToRemove = [`</file_artifact>`, `</${path}>`, '```', '***'];
             let changed = true;
             while(changed) {
@@ -25034,8 +25033,8 @@ export function parseResponse(rawText: string): ParsedResponse {
     const summaryMatch = processedText.match(SUMMARY_REGEX);
     const courseOfActionMatch = processedText.match(COURSE_OF_ACTION_REGEX);
 
-    const summary = (summaryMatch?. ?? 'Could not parse summary.').trim();
-    const courseOfAction = (courseOfActionMatch?. ?? 'Could not parse course of action.').trim();
+    const summary = (summaryMatch?.[1] ?? 'Could not parse summary.').trim();
+    const courseOfAction = (courseOfActionMatch?.[1] ?? 'Could not parse course of action.').trim();
     
     const filesUpdatedList = files.map(f => f.path);
 
@@ -26693,7 +26692,7 @@ export default OnboardingView;
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C5 (Remove simple-editor styles)
+// Updated on: C187 (Add margin for animation highlight)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
