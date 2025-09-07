@@ -23,7 +23,7 @@ export class HistoryService {
     constructor() {
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (workspaceFolders && workspaceFolders.length > 0) {
-            this.workspaceRoot = workspaceFolders[0].uri.fsPath;
+            this.workspaceRoot = workspaceFolders.uri.fsPath;
             this.historyFilePath = path.join(this.workspaceRoot, '.vscode', 'dce_history.json');
         } else {
             Services.loggerService.warn("HistoryService: No workspace folder found. History will not be saved.");
@@ -260,7 +260,7 @@ export class HistoryService {
                 filters: { 'JSON': ['json'] }
             });
             if (openUris && openUris.length > 0) {
-                const content = await fs.readFile(openUris[0].fsPath, 'utf-8');
+                const content = await fs.readFile(openUris.fsPath, 'utf-8');
                 const historyData = JSON.parse(content);
                 if (historyData.version && Array.isArray(historyData.cycles)) {
                     await this._writeHistoryFile(historyData);

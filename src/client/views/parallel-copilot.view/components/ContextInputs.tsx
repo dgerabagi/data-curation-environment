@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/ContextInputs.tsx
-// Updated on: C5 (Reverted to standard textarea for stability)
+// Updated on: C1 (Add onBlur handlers)
 import * as React from 'react';
 import { formatLargeNumber } from '@/common/utils/formatting';
 
@@ -10,6 +10,7 @@ interface ContextInputsProps {
     ephemeralContextTokens: number;
     onCycleContextChange: (value: string) => void;
     onEphemeralContextChange: (value: string) => void;
+    onBlur: () => void;
     workflowStep: string | null;
 }
 
@@ -20,6 +21,7 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
     ephemeralContextTokens,
     onCycleContextChange,
     onEphemeralContextChange,
+    onBlur,
     workflowStep
 }) => {
     return (
@@ -33,6 +35,7 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
                     className="response-textarea"
                     value={cycleContext}
                     onChange={(e) => onCycleContextChange(e.target.value)}
+                    onBlur={onBlur}
                     spellCheck={false}
                 />
             </div>
@@ -45,6 +48,7 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
                     className="response-textarea"
                     value={ephemeralContext}
                     onChange={(e) => onEphemeralContextChange(e.target.value)}
+                    onBlur={onBlur}
                     spellCheck={false}
                 />
             </div>

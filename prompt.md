@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 1 - cycle title wipes/replaces subsequent cycle titles...
+Current Cycle 2 - still losing cycles
+Cycle 1 - cycle title wipes/replaces subsequent cycle titles...
 Cycle 0 - Project Initialization/Template Archive
 </M2. cycle overview>
 
@@ -631,6 +632,50 @@ No project scope defined.
 
 <M6. Cycles>
 
+<Cycle 2>
+<Cycle Context>
+okay, so we got the context for why the new cycle button is disabled, which is good, but none of the responses solved the simple issue of when i create a new cycle, navigate away and back, and the new cycle is gone and im back to viewing cycle 1. i see no valuable logs, cant you do both? make good logs while trying to solve the problem in the event that what you try doesnt work? at least going into the second time you'll get relevant logs.
+
+here, this is what im going to do. im going to select the `log-state-logs.md` button as we havent really been leveraging it. but you will do so now. i dont care how, but make it so that when i click the log-state-log button, you make it generate a test run/logs for that which you are currently trying to solve rather than me trying to manually uncover it. can you do that for this? also you are providing these code files back with the same ts errors over and over again, so this time instead of using co-pilot in vs code to solve them, as it could also be the case that the co-pilot, without complete context (this file), it makes mistakes that break your work. therefore, ill provide you with the ts errors that resulted. 
+</Cycle Context>
+<Ephemeral Context>
+
+ERROR in C:\Projects\DCE\src\backend\services\history.service.ts
+26:50-53
+[tsl] ERROR in C:\Projects\DCE\src\backend\services\history.service.ts(26,51)
+      TS2339: Property 'uri' does not exist on type 'readonly WorkspaceFolder[]'.
+ts-loader-default_e3b0c44298fc1c14
+
+ERROR in C:\Projects\DCE\src\backend\services\history.service.ts
+263:59-65
+[tsl] ERROR in C:\Projects\DCE\src\backend\services\history.service.ts(263,60)
+      TS2339: Property 'fsPath' does not exist on type 'Uri[]'.
+ts-loader-default_e3b0c44298fc1c14
+
+webpack 5.101.1 compiled with 2 errors in 11143 ms
+    [webpack-cli] Compiler is watching files for updates...
+</Ephemeral Context>
+<Previous Cycle 1 Summary of Actions>
+I have analyzed the user's detailed bug report concerning critical data loss and state management failures within the Parallel Co-Pilot Panel (PCPP). The issues, including data bleeding between cycles, failure to load a full history, and data loss on tab switching, all point to fundamental flaws in how the frontend state is being synchronized with the persisted history on the backend. My course of action is to implement a more robust state management and persistence strategy to eliminate these bugs.
+
+1.  **Documentation First (Codify the Bug):**
+    *   I will update **`A11. DCE - Regression Case Studies.md`** with a new case study titled "PCPP Context/Title Data Loss on Tab Switch". This will document the root cause as a race condition between the debounced save mechanism and the state loading logic, and codify the solution of triggering an immediate save before any navigation or state-reloading event.
+
+2.  **Implement Immediate Save on State Change:**
+    *   **`history.service.ts`:** I will add a new `saveLastViewedCycleId` method and a corresponding IPC channel. This will allow the frontend to tell the backend which cycle the user was on before a potential reload. The `getInitialCycle` method will be updated to use this saved ID to restore the user's session correctly.
+    *   **`view.tsx`:**
+        *   The core of the fix is to prevent data loss from the debounced save. I will add a `useEffect` hook that listens for the `visibilitychange` event on the document. When the panel is hidden (e.g., the user switches tabs), it will trigger an immediate, non-debounced save of the current cycle's state.
+        *   The `handleCycleChange` and `handleNewCycle` functions will also be modified to trigger this immediate save *before* requesting new cycle data, ensuring the user's current work is always persisted before navigating.
+
+3.  **Fix History Loading and Navigation:**
+    *   **`history.service.ts`:** The `getInitialCycle` method will be made more robust. It will now correctly determine the maximum cycle ID from the loaded history file and return the last viewed cycle, or the latest cycle if no last-viewed ID is found.
+    *   **`view.tsx`:** The message handler for `SendInitialCycleData` will be updated to receive and set not just the cycle data, but also the `maxCycle` value from the backend. This will correctly initialize the navigator's bounds, fixing the bug where the user was unable to navigate past cycle 1 after importing a history file.
+
+4.  **Add Tooltip for "New Cycle" Button:**
+    *   **`CycleNavigator.tsx`:** I will update the component to dynamically generate a descriptive `title` attribute for the `+` (New Cycle) button when it is disabled. The tooltip will list the specific conditions that are not yet met (e.g., "A cycle title is required," "Cycle context cannot be empty," "A response must be selected.").
+</Previous Cycle 1 Summary of Actions>
+</Cycle 2>
+
 <Cycle 1>
 <Cycle Context>
 pretty annoying... okay so what im doing now that we fixed the issues im attempting to test the robustness of the extension by starting a new project which will be like battle school for enders game but for cybersecurity/cognitive security domain for uscybercom. i am up to cycle 4 in that project, just doing initial planning. it was when i clsoed and relaunched that project that i lost my CC and EC and cycle titles (CT) fields for cycles 1 - 4. luckily the `prompt.md` was still generated and contained the content, so we fixed the issue potentially and i am in the process of restoring my cycle context, however, in doing so, ive discovered another data loss issue occurring, ill describe what im doing and the behavior so you can narrow it down...
@@ -646,117 +691,6 @@ okay after attempting the test in the EC, i realize this is seriously really bug
 4.3. i click out of this text field and into the CC field in the event this triggers a save action.
 4.4. i need do nothing else at this point other than to switch my tab to and from the pcpp. when i do this, and return to the pcpp, i am back to viewing cycle 1, and am one again unable to navigate to the cycle 2 i just created and input a title for.
 </Cycle Context>
-<Ephemeral Context>
-1. ive got 4 cycles of responses that lack the CT, CC and EC that i am attempting to add back in. i first navigate to cycle 1, and i paste the following into the CT: `planning scenarios and a features list`. i click out of the field, then i navigate to cycle 2.
-2. i already observe that cycle 2 now has the string `planning scenarios and a features list` despite it being somethign i placed into cycle 1 only. it is now in cycle 2. im going to check right now to see what the dce_history.json shows for cycle 2 and cycle 3. my prediction is cycle 2 shows the string now but cycle 3 does not yet, but once i click to view cycle 3 in the pcpp, the pcpp will somehow magically copy over what was pasted in cycle 1 and copied in cycle 2 the first time this process happened. kinda annoyed such data loss is occuring tbh, but yeah see if you can fix it...
-2.1. checking dce_history.json, yes cycle 3 is currentlly blank. cycle 2 has the string. im going to click next in the pcpp...
-3. ugh okay wtf now i cant even navigate to cycle 2...
-
-<Cycle-3-Start.json>
-{
-  "version": 1,
-  "cycles": [
-    {
-      "cycleId": 1,
-      "timestamp": "2025-09-04T21:09:05.927Z",
-      "title": "planning scenarios and a features list",
-      "cycleContext": "fantastic work. lets go deeper. lets create an artifat that is a list of scen[...]feature at this point in time.",
-      "ephemeralContext": "",
-      "responses": {
-        "1": {
-          "content": "<summary>\nI have analyzed the user's request to cr[...]ear of corrupting your codebase.\n</file>"
-        }
-		[...]
-      },
-      "isParsedMode": true,
-      "leftPaneWidth": 33,
-      "selectedResponseId": "7",
-      "selectedFilesForReplacement": [
-        "7:::src/Artifacts/A1. VCPG - Project Vision and Goals.md",
-        "7:::src/Artifacts/A12. VCPG - Competitive Analysis.md",
-        "7:::src/Artifacts/A3. VCPG - Technical Scaffolding Plan.md",
-        "7:::src/Artifacts/A2. VCPG - Phase 1 Requirements & Design.md",
-        "7:::src/Artifacts/A11. VCPG - Implementation Roadmap.md",
-        "7:::src/Artifacts/A14. VCPG - GitHub Repository Setup Guide.md",
-        "7:::src/Artifacts/A16. VCPG - Developer Environment Setup Guide.md",
-        "7:::src/Artifacts/A7. VCPG - Development and Testing Guide.md",
-        "7:::src/Artifacts/A0. VCPG - Master Artifact List.md"
-      ],
-      "tabCount": 7,
-      "isSortedByTokens": true,
-      "pathOverrides": {}
-    },
-    {
-      "cycleId": 2,
-      "timestamp": "2025-09-04T21:35:08.665Z",
-      "title": "flesh out features, final preparations",
-      "cycleContext": "incredible, now lets create arti[...]have for additional artifacts before we begin?",
-      "ephemeralContext": "",
-      "responses": {
-        "1": {
-          "content": "<summary>\nExcellent, let's deepen the project's definition. I w[...]low, project setup, monorepo\n</file>"
-        }
-		[...]
-      },
-      "isParsedMode": true,
-      "leftPaneWidth": 33,
-      "selectedResponseId": "7",
-      "selectedFilesForReplacement": [
-        "7:::src/Artifacts/A22. VCPG - Scenario 4 - Forward Base Blackout.md",
-        "7:::src/Artifacts/A17. VCPG - Master Features List.md",
-        "7:::src/Artifacts/A18. VCPG - Scenario Index.md",
-        "7:::src/Artifacts/A19. VCPG - Scenario 1 - Operation Stolen Scepter.md",
-        "7:::src/Artifacts/A20. VCPG - Scenario 2 - Silent Running.md",
-        "7:::src/Artifacts/A21. VCPG - Scenario 3 - Ghost Fleet.md",
-        "7:::src/Artifacts/A0. VCPG - Master Artifact List.md"
-      ],
-      "tabCount": 7,
-      "isSortedByTokens": true,
-      "pathOverrides": {}
-    },
-    {
-      "cycleId": 3,
-      "timestamp": "2025-09-04T21:35:09.671Z",
-      "title": "New Cycle",
-      "cycleContext": "",
-      "ephemeralContext": "",
-      "responses": {
-        "1": {
-          "content": ""
-        },
-        "2": {
-          "content": ""
-        },
-        "3": {
-          "content": ""
-        },
-        "4": {
-          "content": ""
-        },
-        "5": {
-          "content": ""
-        },
-        "6": {
-          "content": ""
-        },
-        "7": {
-          "content": ""
-        }
-      },
-      "isParsedMode": false,
-      "leftPaneWidth": 33,
-      "selectedResponseId": null,
-      "selectedFilesForReplacement": [],
-      "tabCount": 7,
-      "isSortedByTokens": true,
-      "pathOverrides": {}
-    }
-  ],
-  "projectScope": "i want to create a cybersecurity training platform/environment that is ga[...] training for the DoD/USCYBERCOM."
-}
-</Cycle-3-Start.json>
-
-</Ephemeral Context>
 </Cycle 1>
 
 <Cycle 0>
@@ -1701,17 +1635,17 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-07T16:05:50.431Z
+  Date Generated: 2025-09-07T16:50:05.276Z
   ---
   Total Files: 168
-  Approx. Tokens: 464830
+  Approx. Tokens: 465128
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (254831 tokens)
-2. src\Artifacts\A11. DCE - Regression Case Studies.md (11360 tokens)
-3. src\Artifacts\A0. DCE Master Artifact List.md (7388 tokens)
-4. src\client\views\parallel-copilot.view\view.tsx (7319 tokens)
+2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (7458 tokens)
+4. src\Artifacts\A0. DCE Master Artifact List.md (7388 tokens)
 5. src\backend\services\prompt.service.ts (4995 tokens)
 6. src\client\views\parallel-copilot.view\view.scss (4485 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4429 tokens)
@@ -1730,7 +1664,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 8. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
 9. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
 10. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
-11. src\Artifacts\A11.1 DCE - New Regression Case Studies.md - Lines: 43 - Chars: 4884 - Tokens: 1221
+11. src\Artifacts\A11.1 DCE - New Regression Case Studies.md - Lines: 391 - Chars: 46197 - Tokens: 11550
 12. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5687 - Tokens: 1422
 13. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
 14. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
@@ -1812,7 +1746,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 90. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 41 - Chars: 3000 - Tokens: 750
 91. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 97 - Chars: 4047 - Tokens: 1012
 92. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 45 - Chars: 2899 - Tokens: 725
-93. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 384 - Chars: 45439 - Tokens: 11360
+93. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 41 - Chars: 4655 - Tokens: 1164
 94. src\Artifacts\A42. DCE - Phase 2 - Initial Scaffolding Deployment Script.md - Lines: 246 - Chars: 8264 - Tokens: 2066
 95. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 35 - Chars: 9444 - Tokens: 2361
 96. src\Artifacts\A58. DCE - WinMerge Source Code Analysis.md - Lines: 56 - Chars: 5322 - Tokens: 1331
@@ -1831,7 +1765,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 109. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12820 - Tokens: 3205
 110. src\backend\services\git.service.ts - Lines: 114 - Chars: 5522 - Tokens: 1381
 111. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-112. src\backend\services\history.service.ts - Lines: 281 - Chars: 11986 - Tokens: 2997
+112. src\backend\services\history.service.ts - Lines: 281 - Chars: 11980 - Tokens: 2995
 113. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
 114. src\backend\services\prompt.service.ts - Lines: 385 - Chars: 19979 - Tokens: 4995
 115. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
@@ -1853,8 +1787,8 @@ This file-centric approach helps in planning and prioritizing work, especially i
 131. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
 132. src\client\views\context-chooser.view\view.tsx - Lines: 150 - Chars: 16076 - Tokens: 4019
 133. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
-134. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 55 - Chars: 1994 - Tokens: 499
-135. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 86 - Chars: 3485 - Tokens: 872
+134. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 59 - Chars: 2078 - Tokens: 520
+135. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 88 - Chars: 3513 - Tokens: 879
 136. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
 137. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 95 - Chars: 7630 - Tokens: 1908
 138. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 84 - Chars: 3486 - Tokens: 872
@@ -1864,7 +1798,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 142. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 92 - Chars: 4340 - Tokens: 1085
 143. src\client\views\parallel-copilot.view\view.scss - Lines: 796 - Chars: 17937 - Tokens: 4485
 144. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-145. src\client\views\parallel-copilot.view\view.tsx - Lines: 207 - Chars: 29273 - Tokens: 7319
+145. src\client\views\parallel-copilot.view\view.tsx - Lines: 208 - Chars: 29829 - Tokens: 7458
 146. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
 147. src\common\ipc\channels.enum.ts - Lines: 91 - Chars: 4919 - Tokens: 1230
 148. src\common\ipc\channels.type.ts - Lines: 92 - Chars: 6991 - Tokens: 1748
@@ -2891,6 +2825,354 @@ This document serves as a living record of persistent or complex bugs that have 
 -   **Codified Solution & Best Practice:**
     1.  **Be Specific in Watcher Exclusions:** The file watcher logic must be highly specific about what it ignores. The fix was to add an explicit check at the beginning of the `onDidCreate` and `onDidChange` handlers to immediately ignore any event related to the exact path of the history file (`.vscode/dce_history.json`).
     2.  **Example:** `if (normalizedPath.endsWith('.vscode/dce_history.json')) { return; }`. This prevents the watcher from reacting to the extension's own internal state changes while still correctly monitoring user-made changes to the workspace.
+    
+---
+
+### Case Study 023: FTV Flashing on PCPP Auto-Save
+
+-   **Artifacts Affected:** `src/backend/services/file-tree.service.ts`, `src/client/views/context-chooser.view/view.tsx`
+-   **Cycles Observed:** C1, C4, C1, C179, C182, C183, C184
+-   **Symptom:** The entire Data Curation file tree view (FTV) flashes or completely reloads, especially in the packaged version of the extension. Logs show a storm of `git state change` events.
+-   **Root Cause Analysis (RCA):** The definitive root cause is the `repo.state.onDidChange` event listener in `file-tree.service.ts`. This listener is extremely sensitive and fires for almost any change in the repository, including internal state changes and writes to files listed in `.gitignore` (like `.vscode/dce_history.json`). The original implementation treated this event as a structural change, triggering a full, expensive rebuild of the entire file tree. This created a refresh storm that made the UI unusable.
+-   **Codified Solution & Best Practice:** The architectural solution is to **decouple structural refreshes from decoration refreshes**.
+    1.  **Structural Changes:** The `FileSystemWatcher` is the source of truth for structural changes (files created, deleted, renamed). It should be the only trigger for a full tree rebuild (`triggerFullRefresh`).
+    2.  **Decoration Changes:** The `repo.state.onDidChange` event should only trigger a lightweight update. This involves creating a new `triggerDecorationsUpdate` method that solely re-calculates the Git status and problem maps and sends them to the frontend via a dedicated IPC channel.
+    3.  **Frontend State:** The frontend no longer receives Git status as part of the `FileNode` tree structure. Instead, it maintains a separate state map for Git statuses. When it receives a decoration update, it updates this map, causing a cheap re-render that applies the new styles without rebuilding the entire tree. This approach eliminates the flashing by making the most frequent update operation lightweight and non-disruptive.
+
+---
+
+### Case Study 021: Stuck `Baseline` Highlight in Animated Workflow
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/backend/services/git.service.ts`
+-   **Cycles Observed:** C8, C9, C10, C11, C12
+-   **Symptom:** In the animated workflow, after the user selects a response, the `Baseline (Commit)` button is correctly highlighted. After the user clicks it and the baseline is successfully created (confirmed via logs and Git status), the highlight remains on the `Baseline` button and does not advance to the next step (`Select All`).
+-   **Root Cause Analysis (RCA):** The frontend UI, which manages the `workflowStep` state, had no reliable way of knowing when the backend Git operation was successfully completed. After an IPC message (`NotifyGitOperationResult`) was implemented, the frontend handler was still failing. The most likely cause is a **stale closure**. The `useEffect` hook that registers the message listener captures the `workflowStep` state at the time it's created. When the message arrives later, the handler's logic checks against this old, stale state (`'awaitingResponseSelect'`), not the current state (`'awaitingBaseline'`), causing the condition to fail and the state transition to be missed.
+-   **Codified Solution & Best Practice:**
+    1.  **Backend (`git.service.ts`):** The `handleGitBaselineRequest` method must send a specific IPC message (`NotifyGitOperationResult`) back to the PCPP frontend upon completion with a `{ success, message }` payload.
+    2.  **Frontend (`view.tsx`):** The message listener for `NotifyGitOperationResult` must be made resilient to stale closures. The state update logic should use the **functional update form** of the state setter (e.g., `setWorkflowStep(prevStep => { ... })`). This guarantees the logic inside the setter is executed with the most recent state, allowing the condition `if (prevStep === 'awaitingBaseline')` to pass correctly and reliably transition the workflow to the next step (`'awaitingFileSelect'`).
+    3.  **Workflow Progression:** The rest of the workflow steps (`Select All` -> `Accept Selected` -> `Generate prompt.md` -> `+`) must be driven by subsequent user actions or state changes, each correctly transitioning the `workflowStep` state as defined in `A69`.
+
+---
+
+### Case Study 022: Missing `git init` Error Popup
+
+-   **Artifacts Affected:** `src/backend/services/git.service.ts`
+-   **Cycles Observed:** C9
+-   **Symptom:** When a user opens a new project that is not a Git repository and clicks the "Baseline" button, the operation fails silently. An error is logged to the debug channel, but no UI notification is shown to the user to explain what happened or how to fix it. This is a regression from a previous version that did provide a helpful pop-up.
+-   **Root Cause Analysis (RCA):** The `git.service.ts` was refactored in C183 to return a result object (`{ success, message }`) to the frontend instead of directly showing UI notifications. While this is a good pattern for general success/failure communication that the frontend state machine needs to know about, it removed the direct, user-facing error handling for a very common and specific user error (forgetting to run `git init`). The frontend was not updated to take the error message from the returned object and display it in a `showErrorMessage` dialog.
+-   **Codified Solution & Best Practice:** For critical, common, and actionable user errors, it is better for the responsible backend service to show the error notification directly.
+    1.  **Backend (`git.service.ts`):** The `handleGitBaselineRequest` method must be modified. A `try...catch` block will be used. Inside the `catch`, it will inspect the error message.
+    2.  If the error contains `fatal: not a git repository`, the service will directly call `vscode.window.showErrorMessage`.
+    3.  This message will be user-friendly ("This is not a Git repository...") and will include an action button ("Open README Guide") that programmatically opens the relevant documentation to guide the user.
+    4.  For all other success or failure cases, the service can continue to use the `NotifyGitOperationResult` IPC channel to communicate with the frontend's state machine.
+
+---
+
+### Case Study 020: Animated Highlighting Stuck on Response Tabs
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`
+-   **Cycles Observed:** C6
+-   **Symptom:** In the animated workflow, after the user generates the initial `prompt.md` file, the `Resp 1` tab is correctly highlighted. However, after pasting content into `Resp 1`, the highlight does not advance to `Resp 2`. The animation remains stuck on `Resp 1`.
+-   **Root Cause Analysis (RCA):** The `useEffect` hook responsible for advancing the workflow state was flawed. Its logic was too complex or had an incorrect dependency array, preventing it from reliably detecting changes to the `tabs` state object. A robust state machine should rely on simple, direct checks of the current state to determine the next step.
+-   **Codified Solution & Best Practice:** The solution is to refactor the `useEffect` hook that manages the `workflowStep`. The new logic should be a simple, clean state machine that directly checks the `rawContent` of each tab in sequence. For example, when the `workflowStep` is `'awaitingResponsePaste_1'`, the effect should check if `tabs['1'].rawContent` has content. If it does, it should immediately transition the state to `'awaitingResponsePaste_2'`, and so on. This makes the logic declarative and removes dependencies on complex, intermediate states, making the workflow transitions reliable.
+
+---
+
+### Case Study 019: Single Character Input Bug in Text Area
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx`
+-   **Cycles Observed:** C4
+-   **Symptom:** When typing into the Cycle Context or Ephemeral Context text areas, the user can only input one character at a time. After each character, the input field loses focus, forcing the user to click it again to type the next character, making it unusable.
+-   **Root Cause Analysis (RCA):** This is a classic React focus management bug. The `onChange` event handler updates the state in the parent component (`view.tsx`), which triggers a re-render. If the `NumberedTextarea` component or its props are not correctly memoized, it re-renders unnecessarily. If the underlying `<textarea>` element is re-created during this render (e.g., due to an unstable `key` prop or other rendering logic), it loses focus. The solution requires ensuring the component and its event handlers are stable across renders.
+-   **Codified Solution & Best Practice:**
+    1.  **Memoize Component:** The `NumberedTextarea` component must be wrapped in `React.memo` to prevent it from re-rendering if its props have not changed.
+    2.  **Memoize Handlers:** The `onChange` event handlers passed down from the parent (`view.tsx`) must be wrapped in `useCallback` with a correct dependency array. This prevents a new function instance from being created on every parent render, which would otherwise break the memoization of the child component.
+    3.  **Stable Keys:** Ensure any `key` or `id` prop passed to the component is stable and does not change on unrelated state updates.
+
+---
+
+### Case Study 018: Stuck on Cycle Creation After Deletion
+
+-   **Artifacts Affected:** `src/backend/services/history.service.ts`, `src/client/views/parallel-copilot.view/view.tsx`
+-   **Cycles Observed:** C4
+-   **Symptom:** The user creates cycles up to C5. They then delete C5. The UI correctly navigates back to C4. However, the `+` (New Cycle) button is now disabled, and the user is permanently stuck, unable to re-create C5.
+-   **Root Cause Analysis (RCA):** The frontend (`view.tsx`) maintained its own `maxCycle` state variable. When a cycle was deleted, the backend `history.service.ts` correctly removed it from the `dce_history.json` file. However, there was no mechanism to inform the frontend that the maximum cycle number had changed. The frontend state still believed `maxCycle` was 5, while `currentCycle` was 4. The condition to enable the `+` button (`currentCycle === maxCycle`) was therefore false, disabling the button permanently.
+-   **Codified Solution & Best Practice:** The backend service responsible for the data mutation must return the new, correct state to the client. The `deleteCycle` method in `history.service.ts` must be updated to, after deleting the cycle, re-read the history file, determine the new maximum `cycleId`, and return it. The frontend's event handler must then use this returned value to update its local `maxCycle` state, ensuring the UI is perfectly synchronized with the backend data.
+
+---
+
+### Case Study 017: FTV Flashing on Save (DEPRECATED - See 023)
+
+-   **Artifacts Affected:** `src/backend/services/file-tree.service.ts`
+-   **Cycles Observed:** C1, C4
+-   **Symptom:** The entire Data Curation file tree view (FTV) flashes or reloads whenever the user stops typing in one of the Parallel Co-Pilot Panel's text areas.
+-   **Root Cause Analysis (RCA):** The PCPP automatically saves its state to `dce_history.json` (located in the `.vscode` directory) after a brief period of inactivity. The backend `FileSystemWatcher` was configured to monitor the entire workspace for changes to trigger a refresh of the FTV. It was incorrectly reacting to the legitimate writes to the history file, treating it as a workspace change that required a full UI refresh. This created a distracting and unnecessary UI flash.
+-   **Codified Solution & Best Practice:** The solution is to make the file watcher more specific about what it ignores. The `.vscode` directory, which is intended for editor-specific metadata and should not be considered part of the user's source code context, must be added to the watcher's exclusion list. This prevents the watcher from reacting to internal state changes of the extension itself.
+
+---
+
+### Case Study 016: `NumberedTextarea` Scrolling & Alignment Failure
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx`, `src/client/views/parallel-copilot.view/view.scss`
+-   **Cycles Observed:** C1, C2, C3, C167, C174
+-   **Symptom:** The text areas used for "Cycle Context" and "Ephemeral Context" are functionally unusable. The line numbers in the left gutter do not scroll in sync with the text content. As the user types and the text wraps or scrolls, the cursor position becomes misaligned with the actual text insertion point, and text selection highlighting is inaccurate.
+-   **Root Cause Analysis (RCA):** The component attempted to render a line number gutter and a text area side-by-side. This approach is fundamentally flawed because the two elements have independent scrolling mechanisms. The `textarea` scrolls its internal content, while the line number `div` scrolls as part of the page flow. Furthermore, minor differences in padding, font metrics, or line-height between the visible highlighted `div` and the invisible `textarea` caused a "drift" in cursor alignment over multiple lines.
+-   **Codified Solution & Best Practice:**
+    1.  **Architectural Fix:** The component must be re-architected to use an overlay approach. A container element should use relative positioning. Inside it, both the `div` that displays the syntax-highlighted text and the transparent `textarea` used for input must be absolutely positioned to fill the container, ensuring they are perfectly on top of each other.
+    2.  **Synchronized Scrolling:** A single `onScroll` event handler on the `textarea` must programmatically update the `scrollTop` property of both the highlighted `div` and the line number gutter `div`. This ensures all three elements scroll in perfect unison.
+    3.  **Pixel-Perfect Styling:** All font properties (`font-family`, `font-size`, `line-height`), padding, and `box-sizing` must be identical between the `textarea` and the highlighted `div` to guarantee that the text lines up perfectly and the cursor position is always accurate.
+
+---
+
+### Case Study 015: PCPP State Loss on Window Move
+
+-   **Artifacts Affected:** `pcpp.types.ts`, `history.service.ts`, `view.tsx`
+-   **Cycles Observed:** 146
+-   **Symptom:** In the Parallel Co-Pilot Panel, the user changes a piece of UI state that is not directly part of the response content (e.g., increases the number of response tabs from 4 to 8). When the user moves the PCPP panel (e.g., from a separate window back into the main VS Code window), the webview re-initializes, and the UI state reverts to its default (e.g., 4 tabs).
+-   **Root Cause Analysis (RCA):** The state in question (`tabCount`) was a transient, local UI state within the `view.tsx` component. It was not being saved as part of the `PcppCycle` data object. When the panel was moved, the webview was destroyed and recreated, causing it to load the latest cycle data from the backend. Since `tabCount` was not part of that persisted data, it was re-initialized to its default value, losing the user's change.
+-   **Codified Solution & Best Practice:**
+    1.  **Extend Data Model:** Add a new optional property, `tabCount?: number`, to the `PcppCycle` interface in `pcpp.types.ts`.
+    2.  **Persist State:** In `view.tsx`, the `saveCurrentCycleState` function must be updated to include the `tabCount` in the data payload sent to the backend for persistence.
+    3.  **Restore State:** The logic in `view.tsx` that loads cycle data must be updated to read the `tabCount` property from the incoming cycle data and use it to initialize the `tabCount` state.
+    4.  **Best Practice:** Any UI configuration that a user can change and would reasonably expect to persist (like the number of visible tabs, pane widths, etc.) must be included in the persisted data model for that view.
+
+---
+
+### Case Study 014: Associated File Selection Not Persisting Across Cycles
+
+-   **Artifacts Affected:** `pcpp.types.ts`, `history.service.ts`, `view.tsx`
+-   **Cycles Observed:** 137
+-   **Symptom:** In the Parallel Co-Pilot Panel, a user checks files in the "Associated Files" list for replacement. When they then navigate to a different cycle and then return, the checkboxes are no longer checked.
+-   **Root Cause Analysis (RCA):** The state managing the set of files checked for replacement (`selectedFilesForReplacement`) was a transient, local UI state within the `view.tsx` component. It was not being saved as part of the `PcppCycle` data object when the user navigated away. When the user returned to the cycle, the state was re-initialized to an empty set, losing their previous selections. This is the same root cause as "PCPP Selection State Persistence Failure" (Case Study 010), but for a different piece of state.
+-   **Codified Solution & Best Practice:**
+    1.  **Extend Data Model:** Add a new optional property, `selectedFilesForReplacement?: string[]`, to the `PcppCycle` interface in `pcpp.types.ts`.
+    2.  **Persist State:** In `view.tsx`, the `saveCurrentCycleState` function must be updated to include `Array.from(selectedFilesForReplacement)` in the data payload sent to the backend for persistence.
+    3.  **Restore State:** The `loadCycleData` function in `view.tsx` must be updated to read the `selectedFilesForReplacement` array from the incoming cycle data and use it to initialize the `selectedFilesForReplacement` state `Set`.
+    4.  **Best Practice:** Any user selection or input that should be remembered within a specific context (like a cycle) must be part of that context's persisted data model. State that is not explicitly saved will be lost on re-render or navigation.
+
+---
+
+### Case Study 013: UI State Desynchronization After File Creation
+
+-   **Artifacts Affected:** `file-operation.service.ts`, `parallel-copilot.view/on-message.ts`, `parallel-copilot.view/view.tsx`
+-   **Cycles Observed:** 135
+-   **Symptom:** In the Parallel Co-Pilot Panel, the "Associated Files" list shows a file that doesn't exist with a red `✗`. The user accepts this file into the workspace. The file is correctly created on the disk, but the UI in the PCPP does not update, and the icon remains a red `✗`.
+-   **Root Cause Analysis (RCA):** The `fileExistenceMap` state, which controls the `✓`/`✗` icons, is only populated when the panel is parsed. The file write operation happens on the backend, and there was no mechanism to inform the PCPP frontend that the state of the file system (which it was displaying) had changed as a result of its own action. The file watcher correctly triggers a refresh for the *Context Chooser* view, but this does not affect the state of the separate *Parallel Co-pilot* view.
+-   **Codified Solution & Best Practice:**
+    1.  **Implement a Targeted Notification:** A new IPC channel, `ServerToClientChannel.FilesWritten`, was created.
+    2.  **Backend Acknowledgment:** After the `file-operation.service` successfully writes files, it returns the list of affected paths to the `on-message.ts` handler.
+    3.  **Frontend Update:** The `on-message.ts` handler then immediately sends the `FilesWritten` message back to the PCPP frontend. The frontend listens for this message and updates its local `fileExistenceMap` state, setting the received paths to `true`.
+    4.  **Best Practice:** When a frontend action triggers a backend process that changes a state the frontend is displaying, the backend must explicitly notify the frontend of the change's completion and result. Relying on global refreshes can be inefficient and may not work across separate webview panels.
+
+---
+
+### Case Study 012: Cross-Cycle State Bleeding
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`
+-   **Cycles Observed:** 134
+-   **Symptom:** When a user checks files for replacement in a response (e.g., in Cycle 1), and then navigates to a new or different cycle (e.g., Cycle 2), the same files are already checked in the new cycle's responses if they happen to share the same file path. This is incorrect behavior, as each cycle should be a clean slate for review.
+-   **Root Cause Analysis (RCA):** The React state variable responsible for tracking the set of checked files for replacement (`selectedFilesForReplacement`) was not being reset when the cycle changed. The component would load the new cycle's data, but the old selection state from the previous cycle would persist, leading to the UI incorrectly showing checkmarks for files that the user had not yet reviewed in the new context.
+-   **Codified Solution & Best Practice:**
+    1.  **Explicit State Reset:** The event handlers responsible for changing the cycle (`handleCycleChange` and `handleNewCycle`) must be updated to explicitly reset the selection state.
+    2.  **Implementation:** Inside these functions, a call to `setSelectedFilesForReplacement(new Set())` must be added. This ensures that any time the user navigates away from the current cycle, the set of files checked for replacement is cleared.
+    3.  **Best Practice:** When designing components with complex, multi-layered state (like a view that manages both a "current item" and "selections within that item"), always identify which pieces of state are local to the "current item." Ensure that these local states are explicitly reset whenever the "current item" (in this case, the cycle) changes.
+
+---
+
+### Case Study 011: PCPP Metadata Regression
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/client/utils/response-parser.ts`
+-   **Cycles Observed:** 133
+-   **Symptom:** The Parallel Co-Pilot Panel UI stopped displaying response-level metadata (total token count) and file-level metadata (token count, similarity score) that was previously functional.
+-   **Root Cause Analysis (RCA):** During a series of rapid refactors focused on other features (like the diff viewer and state management), the logic responsible for calculating and rendering this metadata was inadvertently removed or commented out. The `ParsedResponse` type may have lost fields, or the UI components were simplified and the props for displaying the data were removed. This is a classic regression where functionality is lost during unrelated code changes.
+-   **Codified Solution & Best Practice:**
+    1.  **Re-implement Calculation:** The logic to calculate token counts for the entire response and for each individual file must be re-added to `response-parser.ts`.
+    2.  **Restore UI Components:** The JSX in `view.tsx` responsible for displaying this metadata in the response header and file viewer header must be restored.
+    3.  **Verify Data Flow:** Ensure that the `ParsedResponse` object correctly holds the metadata and that it is passed as props to the relevant UI components.
+    4.  **Best Practice:** Before committing significant refactors, a quick check against the documented UI mockups (`A35`) and feature plans (`A53`) should be performed to ensure that no existing, documented features have been accidentally removed.
+
+---
+
+### Case Study 010: PCPP Selection State Persistence Failure
+
+-   **Artifacts Affected:** `src/common/types/pcpp.types.ts`, `src/backend/services/history.service.ts`, `src/backend/services/prompt.service.ts`, `src/client/views/parallel-copilot.view/view.tsx`
+-   **Cycles Observed:** 133
+-   **Symptom:** A user selects a response in the PCPP. When they perform an action that causes the view to re-read its state (like generating a `prompt.md` file or reloading the window), the selected response becomes un-selected. This constitutes a critical data loss and workflow interruption.
+-   **Root Cause Analysis (RCA):** The state variable tracking the user's selected response was a transient, frontend-only state (`useState`). It was not being included in the `PcppCycle` data object that was periodically saved to the `dce_history.json` file on the backend. When the view reloaded or another service read the history, there was no record of which response had been selected, so the UI defaulted back to no selection.
+-   **Codified Solution & Best Practice:**
+    1.  **Extend Data Model:** The `PcppCycle` interface in `src/common/types/pcpp.types.ts` must be extended to include a persistent field, such as `selectedResponseId: string | null`.
+    2.  **Save the State:** The `saveCurrentCycleState` function in `view.tsx` must be updated to include this new `selectedResponseId` in the payload it sends to the backend.
+    3.  **Load the State:** The logic in `view.tsx` that loads cycle data from the backend must use the incoming `selectedResponseId` to correctly initialize its selection state.
+    4.  **Update Dependent Services:** Services that rely on this selection, like `prompt.service.ts`, must be updated to read the `selectedResponseId` from the history file to access the correct response data, rather than relying on a transient state.
+    5.  **Best Practice:** Any piece of UI state that represents a significant user decision and needs to survive a reload or be accessed by other parts of the extension **must** be included in the backend persistence model.
+
+---
+
+### Case Study 009: TypeScript Type Inference with RegExp Results
+
+-   **Artifacts Affected:** `src/client/utils/response-parser.ts`
+-   **Cycles Observed:** 130
+-   **Symptom:** TypeScript build fails with errors like `TS2339: Property 'trim' does not exist on type 'RegExpMatchArray'`. This occurs when trying to access a capture group from the result of `String.prototype.match()` or `RegExp.prototype.exec()`.
+-   **Root Cause Analysis (RCA):** The TypeScript compiler, in some complex scenarios, can have difficulty inferring the precise type of a capture group within a `RegExpMatchArray` or `RegExpExecArray`. While the developer knows that `match[1]` should be a `string`, the compiler may infer a wider, incorrect type for the array element itself, leading to the erroneous belief that methods like `.trim()` or `.split()` do not exist.
+-   **Codified Solution & Best Practice:**
+    1.  **Use `matchAll` for Multiple Matches:** For global regular expressions, `String.prototype.matchAll()` is superior to a `while(regex.exec())` loop. It returns an iterator of `RegExpMatchArray` objects, and its type definitions are generally more robust and modern, making it easier for TypeScript to infer the correct types for capture groups.
+    2.  **Use Optional Chaining and Nullish Coalescing:** For single matches (`String.prototype.match()`), the safest way to access a capture group is with optional chaining (`?.[]`) and the nullish coalescing operator (`??`). This pattern is both safe and clear to the TypeScript compiler.
+-   **Example of Flawed Logic (Conceptual):**
+    ```typescript
+    const match = myString.match(/.../);
+    const value = match ? match.trim() : ''; // This can fail if TS inference is poor
+    ```
+-   **Example of Correct Logic (Conceptual):**
+    ```typescript
+    const match = myString.match(/.../);
+    const value = (match?.[1] ?? '').trim(); // This is type-safe and robust
+    ```
+
+---
+
+### Case Study 008: PCPP Parse/Un-Parse State Instability
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`
+-   **Cycles Observed:** 124, 126
+-   **Symptom:** The "Parse All" button exhibits unstable behavior.
+    1.  Clicking it toggles the UI to the "Un-Parse All" state but immediately reverts to "Parse All". A second click is required for the state to stick.
+    2.  When the UI is in the "Un-Parse All" state, selecting a file from the "Associated Files" list incorrectly toggles the mode back to "Parse All", making it impossible to view files.
+-   **Root Cause Analysis (RCA):** The bug is caused by a dependency cycle in the React component's state management. The `parseAllTabs` function, which was wrapped in a `useCallback`, had a dependency on the `tabs` state. Inside the function, it called `setTabs`. This created a loop where the `useEffect` hook responsible for parsing would run, call `parseAllTabs`, which would update the `tabs` state, which would create a new `parseAllTabs` function on re-render, which would re-trigger the `useEffect`. This loop caused rapid, unpredictable state changes, leading to the observed UI flickering and instability.
+-   **Codified Solution & Best Practice:**
+    1.  **Break Dependency Cycle:** The `useCallback` hook for the `parseAllTabs` function was refactored. It now uses the functional update form of its `setTabs` call (e.g., `setTabs(prevTabs => ...)`).
+    2.  This removes the need for the `tabs` state to be in the `useCallback` dependency array. The function is now stable across re-renders.
+    3.  **Refine `useEffect`:** The `useEffect` that triggers the parsing logic can now safely depend on `parseAllTabs` without causing a loop. Its dependency array should be limited to `isParsedMode` and the raw content of the tabs, preventing it from running on unrelated UI state changes like file selection.
+    4.  **Best Practice:** When a memoized callback (`useCallback`) needs to update a state that it also depends on, always use the functional update form to break the dependency cycle.
+
+---
+
+### Case Study 007: Corrupted or Unsupported Document Files
+-   **Artifacts Affected:** `src/backend/services/content-extraction.service.ts`, `A44. DCE - Phase 1 - Word Document Handling Strategy.md`
+-   **Cycles Observed:** 81
+-   **Symptom:** Some `.docx` files fail to process with a `Can't find end of central directory` error in the logs, while legacy `.doc` files show an "Unsupported format" message in the UI.
+-   **Root Cause Analysis (RCA):** This is not a bug, but rather the system correctly handling invalid inputs.
+    1.  **Corrupted `.docx`:** The `.docx` format is a standard zip archive. The parsing library (`mammoth`, which uses `jszip`) throws the "central directory" error when a file is not a valid zip archive. This indicates the source file itself is corrupted or was saved incorrectly.
+    2.  **Legacy `.doc`:** The `mammoth` library does not support the old binary `.doc` format. Our documented strategy in `A44` is to explicitly reject these files.
+-   **Codified Solution & Best Practice:**
+    1.  The error handling in `content-extraction.service.ts` is working as intended.
+    2.  The `catch` block in `handleWordToTextRequest` should be enhanced to check for the specific "central directory" error message.
+    3.  When this specific error is caught, a more user-friendly message like "File appears to be corrupted or is not a valid .docx format" should be sent to the frontend.
+    4.  The system should continue to correctly identify `.doc` files and send the "Legacy .doc format not supported" message. This confirms the system is robust against invalid user inputs.
+
+---
+
+### Case Study 006: Special File Type Caching Fails on Initialization
+-   **Artifacts Affected:** `src/client/views/context-chooser.view/view.tsx`
+-   **Cycles Observed:** 65, 66, 75, 76, 78, 79, 80, 81
+-   **Symptom:** When the extension loads and restores the previous selection, special file types (`.pdf`, `.xlsx`, `.docx`) have a token count of 0. When "Flatten Context" is clicked, the output shows `<!-- content not processed or cached -->`. The caching only works if the user manually un-checks and re-checks the file.
+-   **Root Cause Analysis (RCA):** The frontend logic for "pre-warming" the cache was flawed. It was attempting to find the file nodes for the restored selection paths *before* the main file tree had been loaded from the backend. This race condition meant it found no files to process, so the cache was never populated on startup.
+-   **Codified Solution & Best Practice:**
+    1.  **Decouple and Defer Pre-warming:** The logic must be architected to handle asynchronous data arrival gracefully.
+    2.  **Use a Trigger State:** In `view.tsx`, the `ApplySelectionSet` message handler should do nothing more than set two state variables: one for the `checkedFiles` (for the UI) and a separate "trigger" state (e.g., `selectionToPrewarm: string[]`).
+    3.  **Use a Multi-Dependency `useEffect`:** A dedicated `useEffect` hook must be created to perform the pre-warming logic. Its dependency array **must** include both the trigger state and the file tree state (e.g., `[selectionToPrewarm, files]`).
+    4.  This ensures the pre-warming code only executes when both the selection and the file tree data are guaranteed to be present, eliminating the race condition. After executing, the trigger state should be reset to `null` to prevent re-runs.
+
+---
+
+### Case Study 005: Spacebar De-selects Wrong Parent Folder
+-   **Artifacts Affected:** `src/client/components/file-tree/FileTree.utils.ts`
+-   **Cycles Observed:** 61, 68
+-   **Symptom:** When a parent folder (e.g., `src`) is checked, focusing on a deeply nested descendant file (e.g., `src/components/menus/file.ts`) and pressing the spacebar causes a mid-level parent folder (e.g., `src/components`) to be de-selected instead of just the single focused file.
+-   **Root Cause Analysis (RCA):** The logic for a "subtractive uncheck" in `addRemovePathInSelectedFiles` was flawed. It correctly identified the selected ancestor (e.g., `src`) but then attempted to re-add only its *direct children*, failing to handle nested structures. It would incorrectly identify which direct child to exclude based on the deep file path, leading to the removal of an entire subdirectory from the selection.
+-   **Codified Solution & Best Practice:**
+    1.  The `addRemovePathInSelectedFiles` function was refactored for the "subtractive uncheck" case.
+    2.  The new logic is more explicit and reliable:
+        *   Remove the high-level ancestor path (e.g., `src`) from the selection set.
+        *   Get a list of **all descendant files** of that ancestor.
+        *   Add all of these descendant files to the selection set, **except for the specific file that was the target of the uncheck action**.
+    3.  This correctly translates the selection from a single high-level path (`src`) into many individual file paths, minus the one the user explicitly removed, preserving their intent perfectly.
+
+---
+
+### Case Study 004: Spacebar De-selects Parent Folder Instead of File
+
+-   **Artifacts Affected:** `src/client/components/file-tree/FileTree.utils.ts`
+-   **Cycles Observed:** 61
+-   **Symptom:** When a parent folder (e.g., `src`) is checked, focusing on a descendant file (e.g., `src/components/file.ts`) and pressing the spacebar causes the entire sub-folder (`src/components`) to be removed from the selection, rather than just the single file.
+-   **Root Cause Analysis (RCA):** The logic for a "subtractive uncheck" was flawed. When attempting to uncheck a child of an already-selected parent, the utility function would correctly remove the parent from the selection set but would then re-add the parent's *direct children* except for the one containing the target file. This was too aggressive and did not correctly represent the user's intent to remove only a single file.
+-   **Codified Solution & Best Practice:**
+    1.  The `addRemovePathInSelectedFiles` function was refactored for the "subtractive uncheck" case.
+    2.  The new logic is more explicit:
+        *   Remove the ancestor path (e.g., `src`) from the selection.
+        *   Get a list of **all descendant files** of that ancestor.
+        *   Add all descendant files to the selection, **except for the specific file that was unchecked**.
+    3.  This correctly translates the selection from a single high-level path (`src`) into many individual low-level paths, minus the one the user removed, preserving their intent.
+
+---
+
+### Case Study 003: Incorrect File Count in Flatten Success Message
+
+-   **Artifacts Affected:** `src/backend/services/flattener.service.ts`
+-   **Cycles Observed:** 61
+-   **Symptom:** The success message after flattening (e.g., "Successfully flattened X files...") shows an incorrect count of files, often higher than what was actually selected and written.
+-   **Root Cause Analysis (RCA):** The `flattener.service` was using the count of all unique file paths it was *initially given* for the success message. This list could include paths that were later filtered out (e.g., binary files before metadata handling was implemented) or files that failed to be read. The message did not reflect the final count of files successfully processed and written to the output file.
+-   **Codified Solution & Best Practice:**
+    1.  The `generateOutputContent` function is responsible for creating the final string to be written to disk. It already has access to the array of successfully processed file results.
+    2.  The `vscode.window.showInformationMessage` call inside the `flatten` method was modified to use the `length` of this final, validated list of results (`validResults.length`) instead of the initial input list. This ensures the user is always shown the exact number of files included in the output.
+
+---
+
+### Case Study 002: Checkbox State Management in File Tree
+
+-   **Artifacts Affected:** `src/client/components/file-tree/FileTree.utils.ts`, `src/client/components/file-tree/FileTree.tsx`
+-   **Cycles Observed:** 14, 15, 16
+-   **Symptom:** Checkbox functionality in the file tree is erratic. Only the root checkbox works as expected, but individual files or sub-folders cannot be checked or unchecked correctly. Clicking a checkbox on a child of an already-selected folder fails to deselect it.
+-   **Root Cause Analysis (RCA):**
+    The core issue was overly complex and flawed state management logic within the `addRemovePathInSelectedFiles` utility function. The logic attempted to handle the "unchecking a child of a selected parent" case by removing the parent and re-adding all of its other children (the "siblings"). This approach was brittle and failed to correctly calculate the new state, leading to a UI that did not update correctly. The complexity made the function difficult to debug and maintain.
+
+-   **Codified Solution & Best Practice:**
+    1.  **Simplify State Logic:** The state management logic was rewritten to be more direct and declarative, using a `Set` for efficient manipulation of selected paths.
+    2.  **Handle Cases Explicitly:** The new function explicitly handles the three primary user actions:
+        *   **CHECK:** When a node is checked, any of its descendants that are already in the selection are removed, and the node's own path is added. This ensures the most senior selected path is always the one stored in state.
+        *   **UNCHECK (Direct):** When a node that is explicitly in the selection list is unchecked, its path and the paths of all its descendants are removed.
+        *   **UNCHECK (Subtractive):** When a node is unchecked because its parent was checked, the parent is removed from the selection. Then, all of the parent's direct children *except for the one that was clicked* are added to the selection. This correctly "subtracts" the item from the parent's group selection without complex traversals.
+    3.  **Robust Event Handling:** Ensure the checkbox `onChange` handler in the React component uses `event.stopPropagation()` to prevent the click event from bubbling up and triggering other actions, such as folder expansion.
+
+-   **Example of Flawed Logic (Conceptual):**
+    ```typescript
+    // OLD LOGIC
+    if (unchecking a child of a selected parent) {
+      // 1. Remove parent from selected list.
+      // 2. Traverse the entire tree from the parent.
+      // 3. Add every descendant of the parent back, EXCEPT the clicked child.
+      // This was inefficient and error-prone.
+    }
+    ```
+
+-   **Example of Correct Logic (Conceptual):**
+    ```typescript
+    // NEW LOGIC
+    if (unchecking a child of a selected parent) {
+      // 1. Remove the parent from the selection set.
+      const parentNode = findParentNode(clickedPath);
+      // 2. Add all of the parent's *direct children* to the selection set,
+      //    except for the clicked child itself.
+      parentNode.children.forEach(child => {
+        if (child.path !== clickedPath) {
+          selectionSet.add(child.path);
+        }
+      });
+    }
+    ```
+
+---
+
+### Case Study 001: `path.sep` Usage in Frontend Components
+
+-   **Artifacts Affected:** `src/client/components/file-tree/FileTree.tsx`
+-   **Cycles Observed:** 13, 14, 16
+-   **Symptom:** The webpack build process fails with TypeScript errors similar to `TS2339: Property 'sep' does not exist on type 'string'`.
+-   **Root Cause Analysis (RCA):**
+    The error occurs when frontend code (React components running in a webview) attempts to use `path.sep`. The `path` module is a core part of the Node.js runtime, but it does not exist in the browser-like context of a webview.
+-   **Codified Solution & Best Practice:**
+    1.  **Strict Environment Separation:** All file system path manipulation **must** occur in the backend (`src/backend/`).
+    2.  **Normalized Paths:** The backend must normalize all paths to use forward slashes (`/`) before sending them to the frontend.
+    3.  **Frontend Simplicity:** The frontend code must treat all file paths as simple strings and should never attempt to parse or join them using path-specific separators.
 </file>
 
 <file path="src/Artifacts/A12. DCE - Logging and Debugging Guide.md">
@@ -7471,361 +7753,17 @@ This document serves as a living record of persistent or complex bugs that have 
 
 ### Case Study 024: PCPP Context/Title Data Loss on Tab Switch
 
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`
--   **Cycles Observed:** C185
--   **Symptom:** Text entered into the "Cycle Context," "Ephemeral Context," or "Cycle Title" fields is lost when the user switches to a different cycle or another VS Code tab and then returns. The data is not persisted to `dce_history.json`.
--   **Root Cause Analysis (RCA):** This is a critical data loss bug caused by a race condition between the application's debounced save mechanism and its state loading logic. The application waits for a pause in user input before saving changes to disk (debouncing) to improve performance. However, when the user performs an action that causes the view to reload its state (like switching cycles), the state is reloaded from the `dce_history.json` file *before* the debounced save has had a chance to execute. This overwrites the user's recent, unsaved changes with the older, stale data from the file.
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/backend/services/history.service.ts`
+-   **Cycles Observed:** C185, C1
+-   **Symptom:** Text entered into the "Cycle Context," "Ephemeral Context," or "Cycle Title" fields is lost when the user switches to a different cycle, switches to another VS Code tab and back, or creates a new cycle. The data is not persisted to `dce_history.json`, and sometimes data from a previous cycle "bleeds" into the next.
+-   **Root Cause Analysis (RCA):** This is a critical data loss bug caused by a race condition between the application's debounced save mechanism and its state loading logic. The application waits for a pause in user input before saving changes to disk (debouncing) to improve performance. However, when the user performs an action that causes the view to reload its state (like switching cycles or tabs), the state is reloaded from the `dce_history.json` file *before* the debounced save has had a chance to execute. This overwrites the user's recent, unsaved changes with the older, stale data from the file.
 -   **Codified Solution & Best Practice:**
-    1.  **Trigger Save Before Navigation:** The event handler for any action that causes a state reload (e.g., `handleCycleChange`) **must** trigger an immediate, non-debounced save of the current component's state *before* dispatching the request to load the new state.
-    2.  **Implementation:** The `saveCurrentCycleState` function should be callable directly. The `handleCycleChange` function must be modified to call `saveCurrentCycleState()` before it sends the `RequestCycleData` IPC message. This ensures the latest changes are always persisted before a potentially overwriting state load occurs, eliminating the race condition.
+    1.  **Trigger Save Before Navigation/State Change:** The event handler for any action that causes a state reload (e.g., `handleCycleChange`, `handleNewCycle`) **must** trigger an immediate, non-debounced save of the current component's state *before* dispatching the request to load the new state.
+    2.  **Save on Visibility Change:** A `visibilitychange` event listener must be added to the document. When the webview panel is hidden, an immediate save must be triggered. This handles cases like switching VS Code tabs.
+    3.  **Correct State Scoping:** The `handleNewCycle` function must be refactored to create a completely new, default-state cycle object. It must not carry over any state from the previous cycle, which was the cause of the data "bleeding."
+    4.  **Implementation:** The `saveCurrentCycleState` function should be callable directly (non-debounced). The various event handlers must be modified to call this function at the appropriate time to eliminate the race condition entirely.
 
 ---
-
-### Case Study 023: FTV Flashing on PCPP Auto-Save
-
--   **Artifacts Affected:** `src/backend/services/file-tree.service.ts`, `src/client/views/context-chooser.view/view.tsx`
--   **Cycles Observed:** C1, C4, C1, C179, C182, C183, C184
--   **Symptom:** The entire Data Curation file tree view (FTV) flashes or completely reloads, especially in the packaged version of the extension. Logs show a storm of `git state change` events.
--   **Root Cause Analysis (RCA):** The definitive root cause is the `repo.state.onDidChange` event listener in `file-tree.service.ts`. This listener is extremely sensitive and fires for almost any change in the repository, including internal state changes and writes to files listed in `.gitignore` (like `.vscode/dce_history.json`). The original implementation treated this event as a structural change, triggering a full, expensive rebuild of the entire file tree. This created a refresh storm that made the UI unusable.
--   **Codified Solution & Best Practice:** The architectural solution is to **decouple structural refreshes from decoration refreshes**.
-    1.  **Structural Changes:** The `FileSystemWatcher` is the source of truth for structural changes (files created, deleted, renamed). It should be the only trigger for a full tree rebuild (`triggerFullRefresh`).
-    2.  **Decoration Changes:** The `repo.state.onDidChange` event should only trigger a lightweight update. This involves creating a new `triggerDecorationsUpdate` method that solely re-calculates the Git status and problem maps and sends them to the frontend via a dedicated IPC channel.
-    3.  **Frontend State:** The frontend no longer receives Git status as part of the `FileNode` tree structure. Instead, it maintains a separate state map for Git statuses. When it receives a decoration update, it updates this map, causing a cheap re-render that applies the new styles without rebuilding the entire tree. This approach eliminates the flashing by making the most frequent update operation lightweight and non-disruptive.
-
----
-
-### Case Study 021: Stuck `Baseline` Highlight in Animated Workflow
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/backend/services/git.service.ts`
--   **Cycles Observed:** C8, C9, C10, C11, C12
--   **Symptom:** In the animated workflow, after the user selects a response, the `Baseline (Commit)` button is correctly highlighted. After the user clicks it and the baseline is successfully created (confirmed via logs and Git status), the highlight remains on the `Baseline` button and does not advance to the next step (`Select All`).
--   **Root Cause Analysis (RCA):** The frontend UI, which manages the `workflowStep` state, had no reliable way of knowing when the backend Git operation was successfully completed. After an IPC message (`NotifyGitOperationResult`) was implemented, the frontend handler was still failing. The most likely cause is a **stale closure**. The `useEffect` hook that registers the message listener captures the `workflowStep` state at the time it's created. When the message arrives later, the handler's logic checks against this old, stale state (`'awaitingResponseSelect'`), not the current state (`'awaitingBaseline'`), causing the condition to fail and the state transition to be missed.
--   **Codified Solution & Best Practice:**
-    1.  **Backend (`git.service.ts`):** The `handleGitBaselineRequest` method must send a specific IPC message (`NotifyGitOperationResult`) back to the PCPP frontend upon completion with a `{ success, message }` payload.
-    2.  **Frontend (`view.tsx`):** The message listener for `NotifyGitOperationResult` must be made resilient to stale closures. The state update logic should use the **functional update form** of the state setter (e.g., `setWorkflowStep(prevStep => { ... })`). This guarantees the logic inside the setter is executed with the most recent state, allowing the condition `if (prevStep === 'awaitingBaseline')` to pass correctly and reliably transition the workflow to the next step (`'awaitingFileSelect'`).
-    3.  **Workflow Progression:** The rest of the workflow steps (`Select All` -> `Accept Selected` -> `Generate prompt.md` -> `+`) must be driven by subsequent user actions or state changes, each correctly transitioning the `workflowStep` state as defined in `A69`.
-
----
-
-### Case Study 022: Missing `git init` Error Popup
-
--   **Artifacts Affected:** `src/backend/services/git.service.ts`
--   **Cycles Observed:** C9
--   **Symptom:** When a user opens a new project that is not a Git repository and clicks the "Baseline" button, the operation fails silently. An error is logged to the debug channel, but no UI notification is shown to the user to explain what happened or how to fix it. This is a regression from a previous version that did provide a helpful pop-up.
--   **Root Cause Analysis (RCA):** The `git.service.ts` was refactored in C183 to return a result object (`{ success, message }`) to the frontend instead of directly showing UI notifications. While this is a good pattern for general success/failure communication that the frontend state machine needs to know about, it removed the direct, user-facing error handling for a very common and specific user error (forgetting to run `git init`). The frontend was not updated to take the error message from the returned object and display it in a `showErrorMessage` dialog.
--   **Codified Solution & Best Practice:** For critical, common, and actionable user errors, it is better for the responsible backend service to show the error notification directly.
-    1.  **Backend (`git.service.ts`):** The `handleGitBaselineRequest` method must be modified. A `try...catch` block will be used. Inside the `catch`, it will inspect the error message.
-    2.  If the error contains `fatal: not a git repository`, the service will directly call `vscode.window.showErrorMessage`.
-    3.  This message will be user-friendly ("This is not a Git repository...") and will include an action button ("Open README Guide") that programmatically opens the relevant documentation to guide the user.
-    4.  For all other success or failure cases, the service can continue to use the `NotifyGitOperationResult` IPC channel to communicate with the frontend's state machine.
-
----
-
-### Case Study 020: Animated Highlighting Stuck on Response Tabs
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`
--   **Cycles Observed:** C6
--   **Symptom:** In the animated workflow, after the user generates the initial `prompt.md` file, the `Resp 1` tab is correctly highlighted. However, after pasting content into `Resp 1`, the highlight does not advance to `Resp 2`. The animation remains stuck on `Resp 1`.
--   **Root Cause Analysis (RCA):** The `useEffect` hook responsible for advancing the workflow state was flawed. Its logic was too complex or had an incorrect dependency array, preventing it from reliably detecting changes to the `tabs` state object. A robust state machine should rely on simple, direct checks of the current state to determine the next step.
--   **Codified Solution & Best Practice:** The solution is to refactor the `useEffect` hook that manages the `workflowStep`. The new logic should be a simple, clean state machine that directly checks the `rawContent` of each tab in sequence. For example, when the `workflowStep` is `'awaitingResponsePaste_1'`, the effect should check if `tabs['1'].rawContent` has content. If it does, it should immediately transition the state to `'awaitingResponsePaste_2'`, and so on. This makes the logic declarative and removes dependencies on complex, intermediate states, making the workflow transitions reliable.
-
----
-
-### Case Study 019: Single Character Input Bug in Text Area
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx`
--   **Cycles Observed:** C4
--   **Symptom:** When typing into the Cycle Context or Ephemeral Context text areas, the user can only input one character at a time. After each character, the input field loses focus, forcing the user to click it again to type the next character, making it unusable.
--   **Root Cause Analysis (RCA):** This is a classic React focus management bug. The `onChange` event handler updates the state in the parent component (`view.tsx`), which triggers a re-render. If the `NumberedTextarea` component or its props are not correctly memoized, it re-renders unnecessarily. If the underlying `<textarea>` element is re-created during this render (e.g., due to an unstable `key` prop or other rendering logic), it loses focus. The solution requires ensuring the component and its event handlers are stable across renders.
--   **Codified Solution & Best Practice:**
-    1.  **Memoize Component:** The `NumberedTextarea` component must be wrapped in `React.memo` to prevent it from re-rendering if its props have not changed.
-    2.  **Memoize Handlers:** The `onChange` event handlers passed down from the parent (`view.tsx`) must be wrapped in `useCallback` with a correct dependency array. This prevents a new function instance from being created on every parent render, which would otherwise break the memoization of the child component.
-    3.  **Stable Keys:** Ensure any `key` or `id` prop passed to the component is stable and does not change on unrelated state updates.
-
----
-
-### Case Study 018: Stuck on Cycle Creation After Deletion
-
--   **Artifacts Affected:** `src/backend/services/history.service.ts`, `src/client/views/parallel-copilot.view/view.tsx`
--   **Cycles Observed:** C4
--   **Symptom:** The user creates cycles up to C5. They then delete C5. The UI correctly navigates back to C4. However, the `+` (New Cycle) button is now disabled, and the user is permanently stuck, unable to re-create C5.
--   **Root Cause Analysis (RCA):** The frontend (`view.tsx`) maintained its own `maxCycle` state variable. When a cycle was deleted, the backend `history.service.ts` correctly removed it from the `dce_history.json` file. However, there was no mechanism to inform the frontend that the maximum cycle number had changed. The frontend state still believed `maxCycle` was 5, while `currentCycle` was 4. The condition to enable the `+` button (`currentCycle === maxCycle`) was therefore false, disabling the button permanently.
--   **Codified Solution & Best Practice:** The backend service responsible for the data mutation must return the new, correct state to the client. The `deleteCycle` method in `history.service.ts` must be updated to, after deleting the cycle, re-read the history file, determine the new maximum `cycleId`, and return it. The frontend's event handler must then use this returned value to update its local `maxCycle` state, ensuring the UI is perfectly synchronized with the backend data.
-
----
-
-### Case Study 017: FTV Flashing on Save (DEPRECATED - See 023)
-
--   **Artifacts Affected:** `src/backend/services/file-tree.service.ts`
--   **Cycles Observed:** C1, C4
--   **Symptom:** The entire Data Curation file tree view (FTV) flashes or reloads whenever the user stops typing in one of the Parallel Co-Pilot Panel's text areas.
--   **Root Cause Analysis (RCA):** The PCPP automatically saves its state to `dce_history.json` (located in the `.vscode` directory) after a brief period of inactivity. The backend `FileSystemWatcher` was configured to monitor the entire workspace for changes to trigger a refresh of the FTV. It was incorrectly reacting to the legitimate writes to the history file, treating it as a workspace change that required a full UI refresh. This created a distracting and unnecessary UI flash.
--   **Codified Solution & Best Practice:** The solution is to make the file watcher more specific about what it ignores. The `.vscode` directory, which is intended for editor-specific metadata and should not be considered part of the user's source code context, must be added to the watcher's exclusion list. This prevents the watcher from reacting to internal state changes of the extension itself.
-
----
-
-### Case Study 016: `NumberedTextarea` Scrolling & Alignment Failure
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx`, `src/client/views/parallel-copilot.view/view.scss`
--   **Cycles Observed:** C1, C2, C3, C167, C174
--   **Symptom:** The text areas used for "Cycle Context" and "Ephemeral Context" are functionally unusable. The line numbers in the left gutter do not scroll in sync with the text content. As the user types and the text wraps or scrolls, the cursor position becomes misaligned with the actual text insertion point, and text selection highlighting is inaccurate.
--   **Root Cause Analysis (RCA):** The component attempted to render a line number gutter and a text area side-by-side. This approach is fundamentally flawed because the two elements have independent scrolling mechanisms. The `textarea` scrolls its internal content, while the line number `div` scrolls as part of the page flow. Furthermore, minor differences in padding, font metrics, or line-height between the visible highlighted `div` and the invisible `textarea` caused a "drift" in cursor alignment over multiple lines.
--   **Codified Solution & Best Practice:**
-    1.  **Architectural Fix:** The component must be re-architected to use an overlay approach. A container element should use relative positioning. Inside it, both the `div` that displays the syntax-highlighted text and the transparent `textarea` used for input must be absolutely positioned to fill the container, ensuring they are perfectly on top of each other.
-    2.  **Synchronized Scrolling:** A single `onScroll` event handler on the `textarea` must programmatically update the `scrollTop` property of both the highlighted `div` and the line number gutter `div`. This ensures all three elements scroll in perfect unison.
-    3.  **Pixel-Perfect Styling:** All font properties (`font-family`, `font-size`, `line-height`), padding, and `box-sizing` must be identical between the `textarea` and the highlighted `div` to guarantee that the text lines up perfectly and the cursor position is always accurate.
-
----
-
-### Case Study 015: PCPP State Loss on Window Move
-
--   **Artifacts Affected:** `pcpp.types.ts`, `history.service.ts`, `view.tsx`
--   **Cycles Observed:** 146
--   **Symptom:** In the Parallel Co-Pilot Panel, the user changes a piece of UI state that is not directly part of the response content (e.g., increases the number of response tabs from 4 to 8). When the user moves the PCPP panel (e.g., from a separate window back into the main VS Code window), the webview re-initializes, and the UI state reverts to its default (e.g., 4 tabs).
--   **Root Cause Analysis (RCA):** The state in question (`tabCount`) was a transient, local UI state within the `view.tsx` component. It was not being saved as part of the `PcppCycle` data object. When the panel was moved, the webview was destroyed and recreated, causing it to load the latest cycle data from the backend. Since `tabCount` was not part of that persisted data, it was re-initialized to its default value, losing the user's change.
--   **Codified Solution & Best Practice:**
-    1.  **Extend Data Model:** Add a new optional property, `tabCount?: number`, to the `PcppCycle` interface in `pcpp.types.ts`.
-    2.  **Persist State:** In `view.tsx`, the `saveCurrentCycleState` function must be updated to include the `tabCount` in the data payload sent to the backend for persistence.
-    3.  **Restore State:** The logic in `view.tsx` that loads cycle data must be updated to read the `tabCount` property from the incoming cycle data and use it to initialize the `tabCount` state.
-    4.  **Best Practice:** Any UI configuration that a user can change and would reasonably expect to persist (like the number of visible tabs, pane widths, etc.) must be included in the persisted data model for that view.
-
----
-
-### Case Study 014: Associated File Selection Not Persisting Across Cycles
-
--   **Artifacts Affected:** `pcpp.types.ts`, `history.service.ts`, `view.tsx`
--   **Cycles Observed:** 137
--   **Symptom:** In the Parallel Co-Pilot Panel, a user checks files in the "Associated Files" list for replacement. When they then navigate to a different cycle and then return, the checkboxes are no longer checked.
--   **Root Cause Analysis (RCA):** The state managing the set of files checked for replacement (`selectedFilesForReplacement`) was a transient, local UI state within the `view.tsx` component. It was not being saved as part of the `PcppCycle` data object when the user navigated away. When the user returned to the cycle, the state was re-initialized to an empty set, losing their previous selections. This is the same root cause as "PCPP Selection State Persistence Failure" (Case Study 010), but for a different piece of state.
--   **Codified Solution & Best Practice:**
-    1.  **Extend Data Model:** Add a new optional property, `selectedFilesForReplacement?: string[]`, to the `PcppCycle` interface in `pcpp.types.ts`.
-    2.  **Persist State:** In `view.tsx`, the `saveCurrentCycleState` function must be updated to include `Array.from(selectedFilesForReplacement)` in the data payload sent to the backend for persistence.
-    3.  **Restore State:** The `loadCycleData` function in `view.tsx` must be updated to read the `selectedFilesForReplacement` array from the incoming cycle data and use it to initialize the `selectedFilesForReplacement` state `Set`.
-    4.  **Best Practice:** Any user selection or input that should be remembered within a specific context (like a cycle) must be part of that context's persisted data model. State that is not explicitly saved will be lost on re-render or navigation.
-
----
-
-### Case Study 013: UI State Desynchronization After File Creation
-
--   **Artifacts Affected:** `file-operation.service.ts`, `parallel-copilot.view/on-message.ts`, `parallel-copilot.view/view.tsx`
--   **Cycles Observed:** 135
--   **Symptom:** In the Parallel Co-Pilot Panel, the "Associated Files" list shows a file that doesn't exist with a red `✗`. The user accepts this file into the workspace. The file is correctly created on the disk, but the UI in the PCPP does not update, and the icon remains a red `✗`.
--   **Root Cause Analysis (RCA):** The `fileExistenceMap` state, which controls the `✓`/`✗` icons, is only populated when the panel is parsed. The file write operation happens on the backend, and there was no mechanism to inform the PCPP frontend that the state of the file system (which it was displaying) had changed as a result of its own action. The file watcher correctly triggers a refresh for the *Context Chooser* view, but this does not affect the state of the separate *Parallel Co-pilot* view.
--   **Codified Solution & Best Practice:**
-    1.  **Implement a Targeted Notification:** A new IPC channel, `ServerToClientChannel.FilesWritten`, was created.
-    2.  **Backend Acknowledgment:** After the `file-operation.service` successfully writes files, it returns the list of affected paths to the `on-message.ts` handler.
-    3.  **Frontend Update:** The `on-message.ts` handler then immediately sends the `FilesWritten` message back to the PCPP frontend. The frontend listens for this message and updates its local `fileExistenceMap` state, setting the received paths to `true`.
-    4.  **Best Practice:** When a frontend action triggers a backend process that changes a state the frontend is displaying, the backend must explicitly notify the frontend of the change's completion and result. Relying on global refreshes can be inefficient and may not work across separate webview panels.
-
----
-
-### Case Study 012: Cross-Cycle State Bleeding
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`
--   **Cycles Observed:** 134
--   **Symptom:** When a user checks files for replacement in a response (e.g., in Cycle 1), and then navigates to a new or different cycle (e.g., Cycle 2), the same files are already checked in the new cycle's responses if they happen to share the same file path. This is incorrect behavior, as each cycle should be a clean slate for review.
--   **Root Cause Analysis (RCA):** The React state variable responsible for tracking the set of checked files for replacement (`selectedFilesForReplacement`) was not being reset when the cycle changed. The component would load the new cycle's data, but the old selection state from the previous cycle would persist, leading to the UI incorrectly showing checkmarks for files that the user had not yet reviewed in the new context.
--   **Codified Solution & Best Practice:**
-    1.  **Explicit State Reset:** The event handlers responsible for changing the cycle (`handleCycleChange` and `handleNewCycle`) must be updated to explicitly reset the selection state.
-    2.  **Implementation:** Inside these functions, a call to `setSelectedFilesForReplacement(new Set())` must be added. This ensures that any time the user navigates away from the current cycle, the set of files checked for replacement is cleared.
-    3.  **Best Practice:** When designing components with complex, multi-layered state (like a view that manages both a "current item" and "selections within that item"), always identify which pieces of state are local to the "current item." Ensure that these local states are explicitly reset whenever the "current item" (in this case, the cycle) changes.
-
----
-
-### Case Study 011: PCPP Metadata Regression
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/client/utils/response-parser.ts`
--   **Cycles Observed:** 133
--   **Symptom:** The Parallel Co-Pilot Panel UI stopped displaying response-level metadata (total token count) and file-level metadata (token count, similarity score) that was previously functional.
--   **Root Cause Analysis (RCA):** During a series of rapid refactors focused on other features (like the diff viewer and state management), the logic responsible for calculating and rendering this metadata was inadvertently removed or commented out. The `ParsedResponse` type may have lost fields, or the UI components were simplified and the props for displaying the data were removed. This is a classic regression where functionality is lost during unrelated code changes.
--   **Codified Solution & Best Practice:**
-    1.  **Re-implement Calculation:** The logic to calculate token counts for the entire response and for each individual file must be re-added to `response-parser.ts`.
-    2.  **Restore UI Components:** The JSX in `view.tsx` responsible for displaying this metadata in the response header and file viewer header must be restored.
-    3.  **Verify Data Flow:** Ensure that the `ParsedResponse` object correctly holds the metadata and that it is passed as props to the relevant UI components.
-    4.  **Best Practice:** Before committing significant refactors, a quick check against the documented UI mockups (`A35`) and feature plans (`A53`) should be performed to ensure that no existing, documented features have been accidentally removed.
-
----
-
-### Case Study 010: PCPP Selection State Persistence Failure
-
--   **Artifacts Affected:** `src/common/types/pcpp.types.ts`, `src/backend/services/history.service.ts`, `src/backend/services/prompt.service.ts`, `src/client/views/parallel-copilot.view/view.tsx`
--   **Cycles Observed:** 133
--   **Symptom:** A user selects a response in the PCPP. When they perform an action that causes the view to re-read its state (like generating a `prompt.md` file or reloading the window), the selected response becomes un-selected. This constitutes a critical data loss and workflow interruption.
--   **Root Cause Analysis (RCA):** The state variable tracking the user's selected response was a transient, frontend-only state (`useState`). It was not being included in the `PcppCycle` data object that was periodically saved to the `dce_history.json` file on the backend. When the view reloaded or another service read the history, there was no record of which response had been selected, so the UI defaulted back to no selection.
--   **Codified Solution & Best Practice:**
-    1.  **Extend Data Model:** The `PcppCycle` interface in `src/common/types/pcpp.types.ts` must be extended to include a persistent field, such as `selectedResponseId: string | null`.
-    2.  **Save the State:** The `saveCurrentCycleState` function in `view.tsx` must be updated to include this new `selectedResponseId` in the payload it sends to the backend.
-    3.  **Load the State:** The logic in `view.tsx` that loads cycle data from the backend must use the incoming `selectedResponseId` to correctly initialize its selection state.
-    4.  **Update Dependent Services:** Services that rely on this selection, like `prompt.service.ts`, must be updated to read the `selectedResponseId` from the history file to access the correct response data, rather than relying on a transient state.
-    5.  **Best Practice:** Any piece of UI state that represents a significant user decision and needs to survive a reload or be accessed by other parts of the extension **must** be included in the backend persistence model.
-
----
-
-### Case Study 009: TypeScript Type Inference with RegExp Results
-
--   **Artifacts Affected:** `src/client/utils/response-parser.ts`
--   **Cycles Observed:** 130
--   **Symptom:** TypeScript build fails with errors like `TS2339: Property 'trim' does not exist on type 'RegExpMatchArray'`. This occurs when trying to access a capture group from the result of `String.prototype.match()` or `RegExp.prototype.exec()`.
--   **Root Cause Analysis (RCA):** The TypeScript compiler, in some complex scenarios, can have difficulty inferring the precise type of a capture group within a `RegExpMatchArray` or `RegExpExecArray`. While the developer knows that `match[1]` should be a `string`, the compiler may infer a wider, incorrect type for the array element itself, leading to the erroneous belief that methods like `.trim()` or `.split()` do not exist.
--   **Codified Solution & Best Practice:**
-    1.  **Use `matchAll` for Multiple Matches:** For global regular expressions, `String.prototype.matchAll()` is superior to a `while(regex.exec())` loop. It returns an iterator of `RegExpMatchArray` objects, and its type definitions are generally more robust and modern, making it easier for TypeScript to infer the correct types for capture groups.
-    2.  **Use Optional Chaining and Nullish Coalescing:** For single matches (`String.prototype.match()`), the safest way to access a capture group is with optional chaining (`?.[]`) and the nullish coalescing operator (`??`). This pattern is both safe and clear to the TypeScript compiler.
--   **Example of Flawed Logic (Conceptual):**
-    ```typescript
-    const match = myString.match(/.../);
-    const value = match ? match.trim() : ''; // This can fail if TS inference is poor
-    ```
--   **Example of Correct Logic (Conceptual):**
-    ```typescript
-    const match = myString.match(/.../);
-    const value = (match?.[1] ?? '').trim(); // This is type-safe and robust
-    ```
-
----
-
-### Case Study 008: PCPP Parse/Un-Parse State Instability
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`
--   **Cycles Observed:** 124, 126
--   **Symptom:** The "Parse All" button exhibits unstable behavior.
-    1.  Clicking it toggles the UI to the "Un-Parse All" state but immediately reverts to "Parse All". A second click is required for the state to stick.
-    2.  When the UI is in the "Un-Parse All" state, selecting a file from the "Associated Files" list incorrectly toggles the mode back to "Parse All", making it impossible to view files.
--   **Root Cause Analysis (RCA):** The bug is caused by a dependency cycle in the React component's state management. The `parseAllTabs` function, which was wrapped in a `useCallback`, had a dependency on the `tabs` state. Inside the function, it called `setTabs`. This created a loop where the `useEffect` hook responsible for parsing would run, call `parseAllTabs`, which would update the `tabs` state, which would create a new `parseAllTabs` function on re-render, which would re-trigger the `useEffect`. This loop caused rapid, unpredictable state changes, leading to the observed UI flickering and instability.
--   **Codified Solution & Best Practice:**
-    1.  **Break Dependency Cycle:** The `useCallback` hook for the `parseAllTabs` function was refactored. It now uses the functional update form of its `setTabs` call (e.g., `setTabs(prevTabs => ...)`).
-    2.  This removes the need for the `tabs` state to be in the `useCallback` dependency array. The function is now stable across re-renders.
-    3.  **Refine `useEffect`:** The `useEffect` that triggers the parsing logic can now safely depend on `parseAllTabs` without causing a loop. Its dependency array should be limited to `isParsedMode` and the raw content of the tabs, preventing it from running on unrelated UI state changes like file selection.
-    4.  **Best Practice:** When a memoized callback (`useCallback`) needs to update a state that it also depends on, always use the functional update form to break the dependency cycle.
-
----
-
-### Case Study 007: Corrupted or Unsupported Document Files
--   **Artifacts Affected:** `src/backend/services/content-extraction.service.ts`, `A44. DCE - Phase 1 - Word Document Handling Strategy.md`
--   **Cycles Observed:** 81
--   **Symptom:** Some `.docx` files fail to process with a `Can't find end of central directory` error in the logs, while legacy `.doc` files show an "Unsupported format" message in the UI.
--   **Root Cause Analysis (RCA):** This is not a bug, but rather the system correctly handling invalid inputs.
-    1.  **Corrupted `.docx`:** The `.docx` format is a standard zip archive. The parsing library (`mammoth`, which uses `jszip`) throws the "central directory" error when a file is not a valid zip archive. This indicates the source file itself is corrupted or was saved incorrectly.
-    2.  **Legacy `.doc`:** The `mammoth` library does not support the old binary `.doc` format. Our documented strategy in `A44` is to explicitly reject these files.
--   **Codified Solution & Best Practice:**
-    1.  The error handling in `content-extraction.service.ts` is working as intended.
-    2.  The `catch` block in `handleWordToTextRequest` should be enhanced to check for the specific "central directory" error message.
-    3.  When this specific error is caught, a more user-friendly message like "File appears to be corrupted or is not a valid .docx format" should be sent to the frontend.
-    4.  The system should continue to correctly identify `.doc` files and send the "Legacy .doc format not supported" message. This confirms the system is robust against invalid user inputs.
-
----
-
-### Case Study 006: Special File Type Caching Fails on Initialization
--   **Artifacts Affected:** `src/client/views/context-chooser.view/view.tsx`
--   **Cycles Observed:** 65, 66, 75, 76, 78, 79, 80, 81
--   **Symptom:** When the extension loads and restores the previous selection, special file types (`.pdf`, `.xlsx`, `.docx`) have a token count of 0. When "Flatten Context" is clicked, the output shows `<!-- content not processed or cached -->`. The caching only works if the user manually un-checks and re-checks the file.
--   **Root Cause Analysis (RCA):** The frontend logic for "pre-warming" the cache was flawed. It was attempting to find the file nodes for the restored selection paths *before* the main file tree had been loaded from the backend. This race condition meant it found no files to process, so the cache was never populated on startup.
--   **Codified Solution & Best Practice:**
-    1.  **Decouple and Defer Pre-warming:** The logic must be architected to handle asynchronous data arrival gracefully.
-    2.  **Use a Trigger State:** In `view.tsx`, the `ApplySelectionSet` message handler should do nothing more than set two state variables: one for the `checkedFiles` (for the UI) and a separate "trigger" state (e.g., `selectionToPrewarm: string[]`).
-    3.  **Use a Multi-Dependency `useEffect`:** A dedicated `useEffect` hook must be created to perform the pre-warming logic. Its dependency array **must** include both the trigger state and the file tree state (e.g., `[selectionToPrewarm, files]`).
-    4.  This ensures the pre-warming code only executes when both the selection and the file tree data are guaranteed to be present, eliminating the race condition. After executing, the trigger state should be reset to `null` to prevent re-runs.
-
----
-
-### Case Study 005: Spacebar De-selects Wrong Parent Folder
--   **Artifacts Affected:** `src/client/components/file-tree/FileTree.utils.ts`
--   **Cycles Observed:** 61, 68
--   **Symptom:** When a parent folder (e.g., `src`) is checked, focusing on a deeply nested descendant file (e.g., `src/components/menus/file.ts`) and pressing the spacebar causes a mid-level parent folder (e.g., `src/components`) to be de-selected instead of just the single focused file.
--   **Root Cause Analysis (RCA):** The logic for a "subtractive uncheck" in `addRemovePathInSelectedFiles` was flawed. It correctly identified the selected ancestor (e.g., `src`) but then attempted to re-add only its *direct children*, failing to handle nested structures. It would incorrectly identify which direct child to exclude based on the deep file path, leading to the removal of an entire subdirectory from the selection.
--   **Codified Solution & Best Practice:**
-    1.  The `addRemovePathInSelectedFiles` function was refactored for the "subtractive uncheck" case.
-    2.  The new logic is more explicit and reliable:
-        *   Remove the high-level ancestor path (e.g., `src`) from the selection set.
-        *   Get a list of **all descendant files** of that ancestor.
-        *   Add all of these descendant files to the selection set, **except for the specific file that was the target of the uncheck action**.
-    3.  This correctly translates the selection from a single high-level path (`src`) into many individual file paths, minus the one the user explicitly removed, preserving their intent perfectly.
-
----
-
-### Case Study 004: Spacebar De-selects Parent Folder Instead of File
-
--   **Artifacts Affected:** `src/client/components/file-tree/FileTree.utils.ts`
--   **Cycles Observed:** 61
--   **Symptom:** When a parent folder (e.g., `src`) is checked, focusing on a descendant file (e.g., `src/components/file.ts`) and pressing the spacebar causes the entire sub-folder (`src/components`) to be removed from the selection, rather than just the single file.
--   **Root Cause Analysis (RCA):** The logic for a "subtractive uncheck" was flawed. When attempting to uncheck a child of an already-selected parent, the utility function would correctly remove the parent from the selection set but would then re-add the parent's *direct children* except for the one containing the target file. This was too aggressive and did not correctly represent the user's intent to remove only a single file.
--   **Codified Solution & Best Practice:**
-    1.  The `addRemovePathInSelectedFiles` function was refactored for the "subtractive uncheck" case.
-    2.  The new logic is more explicit:
-        *   Remove the ancestor path (e.g., `src`) from the selection.
-        *   Get a list of **all descendant files** of that ancestor.
-        *   Add all descendant files to the selection, **except for the specific file that was unchecked**.
-    3.  This correctly translates the selection from a single high-level path (`src`) into many individual low-level paths, minus the one the user removed, preserving their intent.
-
----
-
-### Case Study 003: Incorrect File Count in Flatten Success Message
-
--   **Artifacts Affected:** `src/backend/services/flattener.service.ts`
--   **Cycles Observed:** 61
--   **Symptom:** The success message after flattening (e.g., "Successfully flattened X files...") shows an incorrect count of files, often higher than what was actually selected and written.
--   **Root Cause Analysis (RCA):** The `flattener.service` was using the count of all unique file paths it was *initially given* for the success message. This list could include paths that were later filtered out (e.g., binary files before metadata handling was implemented) or files that failed to be read. The message did not reflect the final count of files successfully processed and written to the output file.
--   **Codified Solution & Best Practice:**
-    1.  The `generateOutputContent` function is responsible for creating the final string to be written to disk. It already has access to the array of successfully processed file results.
-    2.  The `vscode.window.showInformationMessage` call inside the `flatten` method was modified to use the `length` of this final, validated list of results (`validResults.length`) instead of the initial input list. This ensures the user is always shown the exact number of files included in the output.
-
----
-
-### Case Study 002: Checkbox State Management in File Tree
-
--   **Artifacts Affected:** `src/client/components/file-tree/FileTree.utils.ts`, `src/client/components/file-tree/FileTree.tsx`
--   **Cycles Observed:** 14, 15, 16
--   **Symptom:** Checkbox functionality in the file tree is erratic. Only the root checkbox works as expected, but individual files or sub-folders cannot be checked or unchecked correctly. Clicking a checkbox on a child of an already-selected folder fails to deselect it.
--   **Root Cause Analysis (RCA):**
-    The core issue was overly complex and flawed state management logic within the `addRemovePathInSelectedFiles` utility function. The logic attempted to handle the "unchecking a child of a selected parent" case by removing the parent and re-adding all of its other children (the "siblings"). This approach was brittle and failed to correctly calculate the new state, leading to a UI that did not update correctly. The complexity made the function difficult to debug and maintain.
-
--   **Codified Solution & Best Practice:**
-    1.  **Simplify State Logic:** The state management logic was rewritten to be more direct and declarative, using a `Set` for efficient manipulation of selected paths.
-    2.  **Handle Cases Explicitly:** The new function explicitly handles the three primary user actions:
-        *   **CHECK:** When a node is checked, any of its descendants that are already in the selection are removed, and the node's own path is added. This ensures the most senior selected path is always the one stored in state.
-        *   **UNCHECK (Direct):** When a node that is explicitly in the selection list is unchecked, its path and the paths of all its descendants are removed.
-        *   **UNCHECK (Subtractive):** When a node is unchecked because its parent was checked, the parent is removed from the selection. Then, all of the parent's direct children *except for the one that was clicked* are added to the selection. This correctly "subtracts" the item from the parent's group selection without complex traversals.
-    3.  **Robust Event Handling:** Ensure the checkbox `onChange` handler in the React component uses `event.stopPropagation()` to prevent the click event from bubbling up and triggering other actions, such as folder expansion.
-
--   **Example of Flawed Logic (Conceptual):**
-    ```typescript
-    // OLD LOGIC
-    if (unchecking a child of a selected parent) {
-      // 1. Remove parent from selected list.
-      // 2. Traverse the entire tree from the parent.
-      // 3. Add every descendant of the parent back, EXCEPT the clicked child.
-      // This was inefficient and error-prone.
-    }
-    ```
-
--   **Example of Correct Logic (Conceptual):**
-    ```typescript
-    // NEW LOGIC
-    if (unchecking a child of a selected parent) {
-      // 1. Remove the parent from the selection set.
-      const parentNode = findParentNode(clickedPath);
-      // 2. Add all of the parent's *direct children* to the selection set,
-      //    except for the clicked child itself.
-      parentNode.children.forEach(child => {
-        if (child.path !== clickedPath) {
-          selectionSet.add(child.path);
-        }
-      });
-    }
-    ```
-
----
-
-### Case Study 001: `path.sep` Usage in Frontend Components
-
--   **Artifacts Affected:** `src/client/components/file-tree/FileTree.tsx`
--   **Cycles Observed:** 13, 14, 16
--   **Symptom:** The webpack build process fails with TypeScript errors similar to `TS2339: Property 'sep' does not exist on type 'string'`.
--   **Root Cause Analysis (RCA):**
-    The error occurs when frontend code (React components running in a webview) attempts to use `path.sep`. The `path` module is a core part of the Node.js runtime, but it does not exist in the browser-like context of a webview.
--   **Codified Solution & Best Practice:**
-    1.  **Strict Environment Separation:** All file system path manipulation **must** occur in the backend (`src/backend/`).
-    2.  **Normalized Paths:** The backend must normalize all paths to use forward slashes (`/`) before sending them to the frontend.
-    3.  **Frontend Simplicity:** The frontend code must treat all file paths as simple strings and should never attempt to parse or join them using path-specific separators.
 </file>
 
 <file path="src/Artifacts/A42. DCE - Phase 2 - Initial Scaffolding Deployment Script.md">
@@ -24379,7 +24317,7 @@ export class HistoryService {
     constructor() {
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (workspaceFolders && workspaceFolders.length > 0) {
-            this.workspaceRoot = workspaceFolders[0].uri.fsPath;
+            this.workspaceRoot = workspaceFolders.uri.fsPath;
             this.historyFilePath = path.join(this.workspaceRoot, '.vscode', 'dce_history.json');
         } else {
             Services.loggerService.warn("HistoryService: No workspace folder found. History will not be saved.");
@@ -24616,7 +24554,7 @@ export class HistoryService {
                 filters: { 'JSON': ['json'] }
             });
             if (openUris && openUris.length > 0) {
-                const content = await fs.readFile(openUris[0].fsPath, 'utf-8');
+                const content = await fs.readFile(openUris.fsPath, 'utf-8');
                 const historyData = JSON.parse(content);
                 if (historyData.version && Array.isArray(historyData.cycles)) {
                     await this._writeHistoryFile(historyData);
@@ -27702,7 +27640,7 @@ export default CodeViewer;
 
 <file path="src/client/views/parallel-copilot.view/components/ContextInputs.tsx">
 // src/client/views/parallel-copilot.view/components/ContextInputs.tsx
-// Updated on: C5 (Reverted to standard textarea for stability)
+// Updated on: C1 (Add onBlur handlers)
 import * as React from 'react';
 import { formatLargeNumber } from '@/common/utils/formatting';
 
@@ -27713,6 +27651,7 @@ interface ContextInputsProps {
     ephemeralContextTokens: number;
     onCycleContextChange: (value: string) => void;
     onEphemeralContextChange: (value: string) => void;
+    onBlur: () => void;
     workflowStep: string | null;
 }
 
@@ -27723,6 +27662,7 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
     ephemeralContextTokens,
     onCycleContextChange,
     onEphemeralContextChange,
+    onBlur,
     workflowStep
 }) => {
     return (
@@ -27736,6 +27676,7 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
                     className="response-textarea"
                     value={cycleContext}
                     onChange={(e) => onCycleContextChange(e.target.value)}
+                    onBlur={onBlur}
                     spellCheck={false}
                 />
             </div>
@@ -27748,6 +27689,7 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
                     className="response-textarea"
                     value={ephemeralContext}
                     onChange={(e) => onEphemeralContextChange(e.target.value)}
+                    onBlur={onBlur}
                     spellCheck={false}
                 />
             </div>
@@ -27760,7 +27702,7 @@ export default ContextInputs;
 
 <file path="src/client/views/parallel-copilot.view/components/CycleNavigator.tsx">
 // src/client/views/parallel-copilot.view/components/CycleNavigator.tsx
-// Updated on: C179 (Apply workflow highlighting class to title input)
+// Updated on: C1 (Add tooltip to disabled new cycle button)
 import * as React from 'react';
 import { VscChevronLeft, VscChevronRight, VscAdd, VscTrash, VscSync, VscCloudUpload, VscCloudDownload, VscSourceControl, VscDiscard } from 'react-icons/vsc';
 
@@ -27779,6 +27721,7 @@ interface CycleNavigatorProps {
     onGitBaseline: () => void;
     onGitRestore: () => void;
     workflowStep: string | null;
+    disabledReason: string;
 }
 
 const CycleNavigator: React.FC<CycleNavigatorProps> = ({
@@ -27795,7 +27738,8 @@ const CycleNavigator: React.FC<CycleNavigatorProps> = ({
     onImportHistory,
     onGitBaseline,
     onGitRestore,
-    workflowStep
+    workflowStep,
+    disabledReason
 }) => {
     return (
         <div className="cycle-navigator">
@@ -27814,7 +27758,7 @@ const CycleNavigator: React.FC<CycleNavigatorProps> = ({
             </button>
             <button 
                 onClick={onNewCycle} 
-                title="New Cycle" 
+                title={isNewCycleButtonDisabled ? `Cannot start new cycle:\n${disabledReason}` : "New Cycle"}
                 disabled={isNewCycleButtonDisabled}
                 className={workflowStep === 'readyForNewCycle' ? 'workflow-highlight' : ''}
             >
@@ -29233,7 +29177,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C188 (Add diagnostic logging and error handling)
+// Updated on: C1 (Implement robust state saving and loading)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './view.scss';
@@ -29374,9 +29318,10 @@ const App = () => {
     React.useEffect(() => { console.log(`[PCPP WORKFLOW] Step changed to: ${workflowStep}`); }, [workflowStep]);
 
     const isReadyForNextCycle = React.useMemo(() => { const hasTitle = cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== ''; const hasContext = cycleContext.trim() !== ''; const hasSelectedResponse = selectedResponseId !== null; return hasTitle && hasContext && hasSelectedResponse; }, [cycleTitle, cycleContext, selectedResponseId]);
+    const newCycleButtonDisabledReason = React.useMemo(() => { const reasons = []; if (!cycleTitle || cycleTitle.trim() === 'New Cycle' || cycleTitle.trim() === '') reasons.push("- A cycle title is required."); if (!cycleContext || cycleContext.trim() === '') reasons.push("- Cycle context cannot be empty."); if (!selectedResponseId) reasons.push("- A response must be selected."); return reasons.join('\n'); }, [cycleTitle, cycleContext, selectedResponseId]);
 
     React.useEffect(() => { if (workflowStep === null) return; if (workflowStep === 'readyForNewCycle') return; if (workflowStep === 'awaitingGeneratePrompt') { if (isReadyForNextCycle) setWorkflowStep('awaitingGeneratePrompt'); return; } if (workflowStep === 'awaitingCycleTitle') { if (cycleTitle.trim() && cycleTitle.trim() !== 'New Cycle') { setWorkflowStep('awaitingGeneratePrompt'); } return; } if (workflowStep === 'awaitingCycleContext') { if (cycleContext.trim()) { setWorkflowStep('awaitingCycleTitle'); } return; } if (workflowStep === 'awaitingAccept') { return; } if (workflowStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestGitStatus, {}); return; } if (workflowStep === 'awaitingFileSelect') { if (selectedFilesForReplacement.size > 0) { setWorkflowStep('awaitingAccept'); } return; } if (workflowStep === 'awaitingResponseSelect') { if (selectedResponseId) { setWorkflowStep('awaitingBaseline'); } return; } if (workflowStep === 'awaitingSort') { if (isSortedByTokens) { setWorkflowStep('awaitingResponseSelect'); } return; } if (workflowStep === 'awaitingParse') { if (isParsedMode) { setWorkflowStep(isSortedByTokens ? 'awaitingResponseSelect' : 'awaitingSort'); } return; } const waitingForPaste = workflowStep?.startsWith('awaitingResponsePaste'); if (waitingForPaste) { for (let i = 1; i <= tabCount; i++) { if (!tabs[i.toString()]?.rawContent?.trim()) { setWorkflowStep(`awaitingResponsePaste_${i}`); return; } } setWorkflowStep('awaitingParse'); } }, [workflowStep, selectedFilesForReplacement, selectedResponseId, isSortedByTokens, isParsedMode, tabs, cycleContext, cycleTitle, tabCount, isReadyForNextCycle, clientIpc]);
-    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string) => { console.log(`[PCPP View] Loading cycle data for cycle ${cycleData.cycleId}`); setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, ({ filePath, originalTokens, modifiedTokens, similarity }) => { setComparisonMetrics(prev => new Map(prev).set(filePath, { originalTokens, modifiedTokens, similarity })); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { console.log(`[PCPP VIEW] Received NotifyGitOperationResult: ${JSON.stringify(result)}`); if (result.success) { setWorkflowStep(prevStep => { console.log(`[PCPP WORKFLOW] Functional update. Prev step: ${prevStep}.`); if (prevStep === 'awaitingBaseline') { console.log(`[PCPP WORKFLOW] Advancing from 'awaitingBaseline' to 'awaitingFileSelect'.`); clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } else { console.error(`[PCPP VIEW] Git operation failed: ${result.message}`); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }, [clientIpc]);
+    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string, newMax?: number) => { console.log(`[PCPP View] Loading cycle data for cycle ${cycleData.cycleId}`); setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); if (newMax) setMaxCycle(newMax); }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, ({ filePath, originalTokens, modifiedTokens, similarity }) => { setComparisonMetrics(prev => new Map(prev).set(filePath, { originalTokens, modifiedTokens, similarity })); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { console.log(`[PCPP VIEW] Received NotifyGitOperationResult: ${JSON.stringify(result)}`); if (result.success) { setWorkflowStep(prevStep => { console.log(`[PCPP WORKFLOW] Functional update. Prev step: ${prevStep}.`); if (prevStep === 'awaitingBaseline') { console.log(`[PCPP WORKFLOW] Advancing from 'awaitingBaseline' to 'awaitingFileSelect'.`); clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } else { console.error(`[PCPP VIEW] Git operation failed: ${result.message}`); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }, [clientIpc]);
     React.useEffect(() => { if (isParsedMode) parseAllTabs(); }, [isParsedMode, tabs, parseAllTabs]);
     React.useEffect(() => { if (!selectedFilePath) return; const currentTabData = tabs[activeTab.toString()]; if (currentTabData?.parsedContent) { const fileExistsInTab = currentTabData.parsedContent.files.some(f => f.path === selectedFilePath); if (!fileExistsInTab) setSelectedFilePath(null); } }, [activeTab, tabs, selectedFilePath]);
 
@@ -29423,7 +29368,7 @@ const App = () => {
     return <div className="pc-view-container">
         <div className="pc-header"><div className="pc-toolbar"><button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button><button onClick={handleGeneratePrompt} title="Generate prompt.md" className={workflowStep === 'awaitingGeneratePrompt' ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button><button onClick={handleLogState} title="Log Current State"><VscBug/></button><button onClick={handleGlobalParseToggle} className={`${isParsedMode ? 'active' : ''} ${workflowStep === 'awaitingParse' ? 'workflow-highlight' : ''}`}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} /></div></div>
         <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''} extraHeaderContent={totalPromptCostDisplay}>
-            <CycleNavigator currentCycle={currentCycle} maxCycle={maxCycle} cycleTitle={cycleTitle} isNewCycleButtonDisabled={isNewCycleButtonDisabled} onCycleChange={handleCycleChange} onNewCycle={handleNewCycle} onTitleChange={(title) => { setCycleTitle(title); }} onDeleteCycle={handleDeleteCycle} onResetHistory={handleResetHistory} onExportHistory={handleExportHistory} onImportHistory={handleImportHistory} onGitBaseline={handleGitBaseline} onGitRestore={handleGitRestore} workflowStep={workflowStep} />
+            <CycleNavigator currentCycle={currentCycle} maxCycle={maxCycle} cycleTitle={cycleTitle} isNewCycleButtonDisabled={isNewCycleButtonDisabled} onCycleChange={handleCycleChange} onNewCycle={handleNewCycle} onTitleChange={(title) => { setCycleTitle(title); }} onDeleteCycle={handleDeleteCycle} onResetHistory={handleResetHistory} onExportHistory={handleExportHistory} onImportHistory={handleImportHistory} onGitBaseline={handleGitBaseline} onGitRestore={handleGitRestore} workflowStep={workflowStep} disabledReason={newCycleButtonDisabledReason} />
             <ContextInputs cycleContext={cycleContext} ephemeralContext={ephemeralContext} cycleContextTokens={cycleContextTokens} ephemeralContextTokens={ephemeralContextTokens} onCycleContextChange={onCycleContextChange} onEphemeralContextChange={onEphemeralContextChange} workflowStep={workflowStep} />
         </CollapsibleSection>
         <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} onSortToggle={handleSortToggle} workflowStep={workflowStep} />

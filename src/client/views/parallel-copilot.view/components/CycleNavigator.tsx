@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/CycleNavigator.tsx
-// Updated on: C179 (Apply workflow highlighting class to title input)
+// Updated on: C1 (Add tooltip to disabled new cycle button)
 import * as React from 'react';
 import { VscChevronLeft, VscChevronRight, VscAdd, VscTrash, VscSync, VscCloudUpload, VscCloudDownload, VscSourceControl, VscDiscard } from 'react-icons/vsc';
 
@@ -18,6 +18,7 @@ interface CycleNavigatorProps {
     onGitBaseline: () => void;
     onGitRestore: () => void;
     workflowStep: string | null;
+    disabledReason: string;
 }
 
 const CycleNavigator: React.FC<CycleNavigatorProps> = ({
@@ -34,7 +35,8 @@ const CycleNavigator: React.FC<CycleNavigatorProps> = ({
     onImportHistory,
     onGitBaseline,
     onGitRestore,
-    workflowStep
+    workflowStep,
+    disabledReason
 }) => {
     return (
         <div className="cycle-navigator">
@@ -53,7 +55,7 @@ const CycleNavigator: React.FC<CycleNavigatorProps> = ({
             </button>
             <button 
                 onClick={onNewCycle} 
-                title="New Cycle" 
+                title={isNewCycleButtonDisabled ? `Cannot start new cycle:\n${disabledReason}` : "New Cycle"}
                 disabled={isNewCycleButtonDisabled}
                 className={workflowStep === 'readyForNewCycle' ? 'workflow-highlight' : ''}
             >
