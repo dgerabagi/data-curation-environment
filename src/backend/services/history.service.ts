@@ -1,5 +1,5 @@
 // src/backend/services/history.service.ts
-// Updated on: C3 (Fix data loss bugs with saveLastViewedCycleId and robust getInitialCycle)
+// Updated on: C4 (Fix data loss bugs with saveLastViewedCycleId and robust getInitialCycle)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';

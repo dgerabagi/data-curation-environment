@@ -1,10 +1,10 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-08T21:26:49.382Z
+  Date Generated: 2025-09-08T22:36:51.196Z
   ---
   Total Files: 168
-  Approx. Tokens: 465777
+  Approx. Tokens: 465786
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -112,7 +112,7 @@
 90. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 41 - Chars: 3009 - Tokens: 753
 91. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 97 - Chars: 4056 - Tokens: 1014
 92. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 45 - Chars: 2899 - Tokens: 725
-93. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 42 - Chars: 5566 - Tokens: 1392
+93. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 42 - Chars: 5570 - Tokens: 1393
 94. src\Artifacts\A42. DCE - Phase 2 - Initial Scaffolding Deployment Script.md - Lines: 246 - Chars: 8264 - Tokens: 2066
 95. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 35 - Chars: 9444 - Tokens: 2361
 96. src\Artifacts\A58. DCE - WinMerge Source Code Analysis.md - Lines: 56 - Chars: 5322 - Tokens: 1331
@@ -127,7 +127,7 @@
 105. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
 106. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
 107. src\backend\services\file-operation.service.ts - Lines: 344 - Chars: 16380 - Tokens: 4095
-108. src\backend\services\file-tree.service.ts - Lines: 244 - Chars: 13043 - Tokens: 3261
+108. src\backend\services\file-tree.service.ts - Lines: 244 - Chars: 13078 - Tokens: 3270
 109. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12609 - Tokens: 3153
 110. src\backend\services\git.service.ts - Lines: 114 - Chars: 5522 - Tokens: 1381
 111. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
@@ -174,7 +174,7 @@
 152. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
 153. src\common\types\pcpp.types.ts - Lines: 43 - Chars: 1035 - Tokens: 259
 154. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
-155. src\common\utils\formatting.ts - Lines: 121 - Chars: 4018 - Tokens: 1005
+155. src\common\utils\formatting.ts - Lines: 121 - Chars: 4016 - Tokens: 1004
 156. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
 157. src\common\utils\view-html.ts - Lines: 37 - Chars: 1314 - Tokens: 329
 158. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
@@ -6121,7 +6121,7 @@ This document serves as a living record of persistent or complex bugs that have 
 ### Case Study 024: PCPP Context/Title Data Loss or Corruption on Navigation
 
 -   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/backend/services/history.service.ts`
--   **Cycles Observed:** C185, C189, C190, C2, C3
+-   **Cycles Observed:** C185, C189, C190, C2, C3, C4
 -   **Symptom:** Text entered into the "Cycle Context," "Ephemeral Context," or "Cycle Title" fields is lost or, more critically, data from one cycle is saved over another. This occurs when the user performs an action that reloads the view's state from disk, such as creating a new cycle, switching to a different cycle, or importing a history file. The data is not persisted to `dce_history.json` in time, or the wrong cycle's data is saved, corrupting the history.
 -   **Root Cause Analysis (RCA):** This is a critical data integrity bug caused by two related race conditions:
     1.  **Debounced Save vs. State Load:** The application waits for a pause in user input before saving changes to disk (debouncing). When the user navigates to a new cycle, the state is reloaded from `dce_history.json` *before* the debounced save has executed. This causes the UI's current state (with the old cycle's data) to be saved over the newly loaded cycle's data, corrupting the history file.
@@ -21965,7 +21965,7 @@ export class FileOperationService {
 </file_artifact>
 
 <file path="src/backend/services/file-tree.service.ts">
-// Updated on: C190 (Add .git and .venv to non-selectable patterns)
+// Updated on: C4 (Add explicit history file exclusion)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -21981,7 +21981,7 @@ import { ProblemCountsMap, GitStatusMap } from "@/common/ipc/channels.type";
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
-const EXCLUSION_PATTERNS = ['dce_cache', 'out', '.vscode', 'dist']; 
+const EXCLUSION_PATTERNS = ['dce_cache', 'out', 'dist']; 
 const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/.git/', '/venv/', '/.venv/', 'flattened_repo.md', 'prompt.md', 'package-lock.json'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
@@ -22046,7 +22046,7 @@ export class FileTreeService {
         const onFileChange = (uri: vscode.Uri, source: string) => {
             const normalizedPath = normalizePath(uri.fsPath);
             if (this.historyFilePath && normalizedPath === this.historyFilePath) {
-                return;
+                return; // Explicitly ignore the history file to prevent flashing
             }
             for (const pattern of EXCLUSION_PATTERNS) {
                 if (normalizedPath.includes(`/${pattern}/`)) {
@@ -22661,7 +22661,7 @@ export class HighlightingService {
 
 <file path="src/backend/services/history.service.ts">
 // src/backend/services/history.service.ts
-// Updated on: C3 (Fix data loss bugs with saveLastViewedCycleId and robust getInitialCycle)
+// Updated on: C4 (Fix data loss bugs with saveLastViewedCycleId and robust getInitialCycle)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -22985,7 +22985,7 @@ export class LoggerService {
 </file_artifact>
 
 <file path="src/backend/services/prompt.service.ts">
-// Updated on: C3 (Implement truncated state log)
+// Updated on: C4 (Implement truncated state log)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -26522,7 +26522,7 @@ export const viewConfig = {
 </file_artifact>
 
 <file path="src/client/views/parallel-copilot.view/on-message.ts">
-// Updated on: C3 (Add SaveLastViewedCycle handler)
+// Updated on: C4 (Add SaveLastViewedCycle handler)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -27547,7 +27547,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C3 (Implement "save before navigate" to fix data loss)
+// Updated on: C4 (Implement "save before navigate" to fix data loss)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './view.scss';
@@ -27931,7 +27931,7 @@ export enum ServerToClientChannel {
 </file_artifact>
 
 <file path="src/common/ipc/channels.type.ts">
-// Updated on: C3 (Add SaveLastViewedCycle channel)
+// Updated on: C4 (Add SaveLastViewedCycle channel)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -28216,7 +28216,7 @@ declare global {
 
 <file path="src/common/utils/formatting.ts">
 // src/common/utils/formatting.ts
-// Updated on: C185 (Add truncateCodeForLogging)
+// Updated on: C4 (Add truncateCodeForLogging)
 
 const KMBT_SUFFIXES = ['', 'K', 'M', 'B', 'T', 'Q']; // Extend as needed
 

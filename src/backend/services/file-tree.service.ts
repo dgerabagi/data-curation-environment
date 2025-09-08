@@ -1,4 +1,4 @@
-// Updated on: C190 (Add .git and .venv to non-selectable patterns)
+// Updated on: C4 (Add explicit history file exclusion)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -14,7 +14,7 @@ import { ProblemCountsMap, GitStatusMap } from "@/common/ipc/channels.type";
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
-const EXCLUSION_PATTERNS = ['dce_cache', 'out', '.vscode', 'dist']; 
+const EXCLUSION_PATTERNS = ['dce_cache', 'out', 'dist']; 
 const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/.git/', '/venv/', '/.venv/', 'flattened_repo.md', 'prompt.md', 'package-lock.json'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
@@ -79,7 +79,7 @@ export class FileTreeService {
         const onFileChange = (uri: vscode.Uri, source: string) => {
             const normalizedPath = normalizePath(uri.fsPath);
             if (this.historyFilePath && normalizedPath === this.historyFilePath) {
-                return;
+                return; // Explicitly ignore the history file to prevent flashing
             }
             for (const pattern of EXCLUSION_PATTERNS) {
                 if (normalizedPath.includes(`/${pattern}/`)) {

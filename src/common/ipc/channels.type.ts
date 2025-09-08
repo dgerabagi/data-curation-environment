@@ -1,4 +1,4 @@
-// Updated on: C3 (Add SaveLastViewedCycle channel)
+// Updated on: C4 (Add SaveLastViewedCycle channel)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";

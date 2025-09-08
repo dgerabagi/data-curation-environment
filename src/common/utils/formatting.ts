@@ -1,5 +1,5 @@
 // src/common/utils/formatting.ts
-// Updated on: C185 (Add truncateCodeForLogging)
+// Updated on: C4 (Add truncateCodeForLogging)
 
 const KMBT_SUFFIXES = ['', 'K', 'M', 'B', 'T', 'Q']; // Extend as needed
 

@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 4 - same shit
+Current Cycle 5 - test theory
+Cycle 4 - same shit
 Cycle 3 - still data loss
 Cycle 2 - cycles still getting wiped
 Cycle 0 - Project Initialization/Template Archive
@@ -633,6 +634,39 @@ No project scope defined.
 
 <M6. Cycles>
 
+<Cycle 5>
+<Cycle Context>
+i think i figured out the root cause of my problem... i couldnt seem to induce the data loss in a brand new project, but it happened (sporadically) but reliably in my main test project. then i tried just using my arrow keys to flip in between the few small cycles in my small project rapidly and bam, induced the data loss issue. i think my solution will be to clearly describe out how i want the process to flow, such that we dont need to save when swapping cycles (seemingly, an intensive enough process to tamper with save files by simply changing small cycles too fast or larger cycles at all):
+
+1. lets display an auto save status indication/indicator to the user. perhaps near the cycle navigator as that is what will have functionality closely tied to it.
+2. when a change is detected and before the necessary auto-save has completed, lets 'lock out' the cycle changing.
+3. once any current cycle changes have been auto-saved, the indicator would show autosaved, and the ability to change cycles would be unlocked once again.
+4. when the user changes to view a next or previous cycle, no saving will be necessary, we can simply load the correct/requested cycle.
+
+
+</Cycle Context>
+<Previous Cycle 4 Summary of Actions>
+I have analyzed the detailed bug report and the accompanying logs. The data loss you are experiencing when navigating between cycles is a critical data integrity bug. My analysis points to a classic race condition in the state management logic: the debounced auto-save of the cycle you are leaving fires *after* the application has loaded the state for the new cycle, causing the old data to overwrite the new. This is unacceptable, and I will implement a definitive fix.
+
+Additionally, your request to make the "Log State" button more useful by truncating large data blobs is an excellent and necessary improvement for effective debugging.
+
+My course of action is to implement a "save before navigate" pattern to resolve the race condition and to refactor the state logging function to produce a concise, useful report.
+
+1.  **Documentation First (Codifying the Bug):**
+    *   I will update **`A11. DCE - Regression Case Studies.md`** with a new, detailed case study: "PCPP Context/Title Data Loss or Corruption on Navigation". This will document the root cause (race condition between debounced save and state loading) and codify the "save before navigate" and "synchronize last viewed cycle ID" patterns as the official solution to prevent future regressions.
+    *   I will update **`A59. DCE - Phase 2 - Debugging and State Logging.md`** to reflect the new, more useful output format of the "Log State" button, specifying that large data fields will be truncated.
+
+2.  **Fix Cycle Data Loss (Race Condition):**
+    *   **`view.tsx`:** I will modify the `handleCycleChange` and `handleNewCycle` functions. They will now trigger an immediate, non-debounced save of the current state *before* sending the request to load the new cycle's data. They will also send a new `SaveLastViewedCycle` IPC message to immediately synchronize the backend's pointer to the current view.
+    *   **`history.service.ts`:** I will add a new `saveLastViewedCycleId` method to handle the new IPC message. I will also make the `getInitialCycle` logic more robust; it will now validate that the `lastViewedCycleId` from the state actually exists in the history file before loading it, falling back to the latest cycle if it's a stale ID.
+    *   **IPC:** I will add the new `SaveLastViewedCycle` channel to `channels.enum.ts` and `channels.type.ts`.
+    *   **`on-message.ts`:** I will add the corresponding handler for the new channel.
+
+3.  **Improve "Log State" Button Functionality:**
+    *   **`prompt.service.ts`:** I will refactor the `generateStateLog` method. It will now generate a focused report that includes key frontend state variables relevant to cycle management. Critically, it will use the `truncateCodeForLogging` utility on the `content` of each response in the history dump, drastically reducing the token count of the log output while preserving the essential structure for debugging.
+</Previous Cycle 4 Summary of Actions>
+</Cycle 5>
+
 <Cycle 4>
 <Cycle Context>
 i mean so, did you even do anything? why the fuck is the log state log output still 30k?? you didnt truncate shit... and the actual logs when performing the test also look the exact same, and the sporadic error still persists... 
@@ -646,207 +680,6 @@ why the fuck are you even saving shit when nothings changed? like why the fuck i
 4. went cycle 1 -> cycle 2, cycle 2 got replaced with cycle 1.
 </this cycle test run, logs in ephemeral>
 </Cycle Context>
-<Ephemeral Context>
-<logs>
-[INFO] [4:20:09 PM] Congratulations, your extension "Data Curation Environment" is now active!
-[INFO] [4:20:09 PM] Starry Night syntax highlighter initialized.
-[INFO] [4:20:09 PM] Services initializing...
-[INFO] [4:20:09 PM] Services initialized successfully.
-[INFO] [4:20:09 PM] Registering 6 commands.
-[INFO] [4:20:09 PM] HistoryService: getInitialCycle called.
-[INFO] [4:20:11 PM] [triggerFullRefresh] Called because: git repo opened
-[INFO] [4:20:11 PM] Found valid last viewed cycle: 4
-[INFO] [4:20:11 PM] Context Chooser view message handler initialized.
-[INFO] [4:20:12 PM] [on-message] Received RequestInitialData. Forwarding to services.
-[INFO] [4:20:12 PM] [SelectionService] Found 69 paths in persisted state. Validating...
-[INFO] [4:20:12 PM] [SelectionService] Returning 69 valid paths.
-[INFO] [4:20:12 PM] Persisted current selection of 69 items.
-[INFO] [4:20:14 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[INFO] [4:20:14 PM] [SelectionService] Found 69 paths in persisted state. Validating...
-[INFO] [4:20:14 PM] [SelectionService] Returning 69 valid paths.
-[INFO] [4:20:14 PM] Persisted current selection of 69 items.
-[INFO] [4:20:17 PM] Executing dce.openParallelCopilot command to open WebviewPanel.
-[INFO] [4:20:17 PM] Parallel Co-Pilot view message handler initialized.
-[INFO] [4:20:18 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [4:20:18 PM] HistoryService: getInitialCycle called.
-[INFO] [4:20:18 PM] Found valid last viewed cycle: 4
-[INFO] [4:20:19 PM] [SelectionService] Found 69 paths in persisted state. Validating...
-[INFO] [4:20:19 PM] HistoryService: saving data for cycle 4.
-[INFO] [4:20:19 PM] [SelectionService] Returning 69 valid paths.
-[INFO] [4:20:19 PM] Importing cycle history.
-[INFO] [4:20:22 PM] Saved last viewed cycle ID: null
-[INFO] [4:20:22 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [4:20:22 PM] HistoryService: getInitialCycle called.
-[INFO] [4:20:22 PM] No valid last-viewed cycle found. Falling back to latest cycle: 5
-[INFO] [4:20:23 PM] [SelectionService] Found 69 paths in persisted state. Validating...
-[INFO] [4:20:23 PM] [SelectionService] Returning 69 valid paths.
-[INFO] [4:20:24 PM] HistoryService: saving data for cycle 5.
-[INFO] [4:20:26 PM] [SelectionService] Found 69 paths in persisted state. Validating...
-[INFO] [4:20:26 PM] HistoryService: saving data for cycle 5.
-[INFO] [4:20:26 PM] [SelectionService] Returning 69 valid paths.
-[INFO] [4:20:29 PM] HistoryService: saving data for cycle 5.
-[INFO] [4:20:29 PM] Saved last viewed cycle ID: 5
-[INFO] [4:20:29 PM] Saved last viewed cycle ID: 4
-[INFO] [4:20:29 PM] HistoryService: getting data for cycle 4.
-[INFO] [4:20:30 PM] [SelectionService] Found 69 paths in persisted state. Validating...
-[INFO] [4:20:30 PM] HistoryService: saving data for cycle 4.
-[INFO] [4:20:30 PM] [SelectionService] Returning 69 valid paths.
-[INFO] [4:20:32 PM] HistoryService: saving data for cycle 4.
-[INFO] [4:20:32 PM] Saved last viewed cycle ID: 4
-[INFO] [4:20:32 PM] Saved last viewed cycle ID: 3
-[INFO] [4:20:32 PM] HistoryService: getting data for cycle 3.
-[INFO] [4:20:33 PM] [SelectionService] Found 69 paths in persisted state. Validating...
-[INFO] [4:20:33 PM] HistoryService: saving data for cycle 3.
-[INFO] [4:20:33 PM] [SelectionService] Returning 69 valid paths.
-[INFO] [4:20:35 PM] HistoryService: saving data for cycle 3.
-[INFO] [4:20:35 PM] Saved last viewed cycle ID: 3
-[INFO] [4:20:35 PM] Saved last viewed cycle ID: 2
-[INFO] [4:20:35 PM] HistoryService: getting data for cycle 2.
-[INFO] [4:20:36 PM] [SelectionService] Found 69 paths in persisted state. Validating...
-[INFO] [4:20:36 PM] [SelectionService] Returning 69 valid paths.
-[INFO] [4:20:36 PM] HistoryService: saving data for cycle 2.
-[INFO] [4:20:38 PM] HistoryService: saving data for cycle 2.
-[INFO] [4:20:38 PM] Saved last viewed cycle ID: 2
-[INFO] [4:20:38 PM] Saved last viewed cycle ID: 1
-[INFO] [4:20:38 PM] HistoryService: getting data for cycle 1.
-[INFO] [4:20:40 PM] [SelectionService] Found 69 paths in persisted state. Validating...
-[INFO] [4:20:40 PM] HistoryService: saving data for cycle 1.
-[INFO] [4:20:40 PM] [SelectionService] Returning 69 valid paths.
-[INFO] [4:21:50 PM] HistoryService: saving data for cycle 1.
-[INFO] [4:21:50 PM] Saved last viewed cycle ID: 1
-[INFO] [4:21:50 PM] Saved last viewed cycle ID: 2
-[INFO] [4:21:50 PM] HistoryService: getting data for cycle 2.
-[INFO] [4:21:51 PM] [SelectionService] Found 69 paths in persisted state. Validating...
-[INFO] [4:21:51 PM] [SelectionService] Returning 69 valid paths.
-[INFO] [4:21:52 PM] HistoryService: saving data for cycle 2.
-</logs>
-
-<Cycle-5-Start.json>
-{
-  "version": 1,
-  "cycles": [
-    {
-      "cycleId": 1,
-      "timestamp": "2025-09-05T22:25:16.270Z",
-      "title": "planning scenarios and a features list",
-      "cycleContext": "[...]",
-      "ephemeralContext": "",
-      "responses": {[...]]},
-      "isParsedMode": true,
-      "leftPaneWidth": 33,
-      "selectedResponseId": "7",
-      "selectedFilesForReplacement": [
-        "7:::src/Artifacts/A1. VCPG - Project Vision and Goals.md",
-        "7:::src/Artifacts/A12. VCPG - Competitive Analysis.md",
-        "7:::src/Artifacts/A3. VCPG - Technical Scaffolding Plan.md",
-        "7:::src/Artifacts/A2. VCPG - Phase 1 Requirements & Design.md",
-        "7:::src/Artifacts/A11. VCPG - Implementation Roadmap.md",
-        "7:::src/Artifacts/A14. VCPG - GitHub Repository Setup Guide.md",
-        "7:::src/Artifacts/A16. VCPG - Developer Environment Setup Guide.md",
-        "7:::src/Artifacts/A7. VCPG - Development and Testing Guide.md",
-        "7:::src/Artifacts/A0. VCPG - Master Artifact List.md"
-      ],
-      "tabCount": 7,
-      "isSortedByTokens": true,
-      "pathOverrides": {}
-    },
-    {
-      "cycleId": 2,
-      "timestamp": "2025-09-05T22:34:25.578Z",
-      "title": "flesh out features, final preparations",
-      "cycleContext": "[...]",
-      "ephemeralContext": "",
-      "responses": {[...]},
-      "isParsedMode": true,
-      "leftPaneWidth": 33,
-      "selectedResponseId": "7",
-      "selectedFilesForReplacement": [
-        "7:::src/Artifacts/A22. VCPG - Scenario 4 - Forward Base Blackout.md",
-        "7:::src/Artifacts/A17. VCPG - Master Features List.md",
-        "7:::src/Artifacts/A18. VCPG - Scenario Index.md",
-        "7:::src/Artifacts/A19. VCPG - Scenario 1 - Operation Stolen Scepter.md",
-        "7:::src/Artifacts/A20. VCPG - Scenario 2 - Silent Running.md",
-        "7:::src/Artifacts/A21. VCPG - Scenario 3 - Ghost Fleet.md",
-        "7:::src/Artifacts/A0. VCPG - Master Artifact List.md"
-      ],
-      "tabCount": 7,
-      "isSortedByTokens": true,
-      "pathOverrides": {}
-    },
-    {
-      "cycleId": 3,
-      "timestamp": "2025-09-06T16:35:48.644Z",
-      "title": "battleschool",
-      "cycleContext": "[...]",
-      "ephemeralContext": "",
-      "responses": {[...]},
-      "isParsedMode": true,
-      "leftPaneWidth": 33,
-      "selectedResponseId": "7",
-      "selectedFilesForReplacement": [
-        "7:::src/Artifacts/A38. VCPG - Resource Management Plan.md",
-        "7:::src/Artifacts/A11.1. VCPG - Implementation Plan - Step 1 - Foundational Setup.md",
-        "7:::src/Artifacts/A11.2. VCPG - Implementation Plan - Step 2 - Authentication and User Management.md",
-        "7:::src/Artifacts/A11.3. VCPG - Implementation Plan - Step 3 - Core Synchronization and Lobby.md",
-        "7:::src/Artifacts/A11.4. VCPG - Implementation Plan - Step 4 - Range Orchestration and Terminal Access.md",
-        "7:::src/Artifacts/A11.5. VCPG - Implementation Plan - Step 5 - Scenario Engine MVP and Integration.md",
-        "7:::src/Artifacts/A11. VCPG - Implementation Roadmap.md",
-        "7:::src/Artifacts/A0. VCPG - Master Artifact List.md"
-      ],
-      "tabCount": 7,
-      "isSortedByTokens": true,
-      "pathOverrides": {}
-    },
-    {
-      "cycleId": 4,
-      "timestamp": "2025-09-06T17:36:03.557Z",
-      "title": "visualizing scenarios",
-      "cycleContext": "[...]",
-      "ephemeralContext": "",
-      "responses": {[...]},
-      "isParsedMode": true,
-      "leftPaneWidth": 33,
-      "selectedResponseId": "2",
-      "selectedFilesForReplacement": [
-        "2:::src/Artifacts/A39. VCPG - AI Integration Strategy (@JANE).md",
-        "2:::src/Artifacts/A40. VCPG - AI Persona (@JANE).md",
-        "2:::src/Artifacts/A41. VCPG - Trainee Skill Assessment Framework.md",
-        "2:::src/Artifacts/A42. VCPG - RAG and Knowledge Base Architecture.md",
-        "2:::src/Artifacts/A43. VCPG - TTS and Audio Narration System.md",
-        "2:::src/Artifacts/A1. VCPG - Project Vision and Goals.md",
-        "2:::src/Artifacts/A17. VCPG - Master Features List.md",
-        "2:::src/Artifacts/A34. VCPG - Analytics and After-Action Review Strategy.md",
-        "2:::src/Artifacts/A30. VCPG - Gamification and Scoring Strategy.md",
-        "2:::src/Artifacts/A33. VCPG - Instructor Overwatch and Dynamic Injection Plan.md",
-        "2:::src/Artifacts/A11. VCPG - Implementation Roadmap.md",
-        "2:::src/Artifacts/A11.6. VCPG - Implementation Plan - Step 6 - AI Integration & Skill Assessment MVP.md",
-        "2:::src/Artifacts/A11.5. VCPG - Implementation Plan - Step 5 - Scenario Engine MVP and Integration.md",
-        "2:::src/Artifacts/A0. VCPG - Master Artifact List.md"
-      ],
-      "tabCount": 10,
-      "isSortedByTokens": true,
-      "pathOverrides": {}
-    },
-    {
-      "cycleId": 5,
-      "timestamp": "2025-09-06T17:43:19.229Z",
-      "title": "New Cycle",
-      "cycleContext": "",
-      "ephemeralContext": "",
-      "responses": {[...]},
-      "isParsedMode": false,
-      "leftPaneWidth": 33,
-      "selectedResponseId": null,
-      "selectedFilesForReplacement": [],
-      "tabCount": 10,
-      "isSortedByTokens": true,
-      "pathOverrides": {}
-    }
-  ],
-  "projectScope": "[...]"
-}
-</Cycle-5-Start.json>
-</Ephemeral Context>
 <Previous Cycle 3 Summary of Actions>
 I have analyzed the critical data loss bug you've reported. The logs confirm a severe race condition in the state management logic. When you navigate from a newer cycle (e.g., Cycle 5) to an older one (Cycle 4), the application immediately saves the UI's current state—which still holds the data from Cycle 5—and overwrites the historical data for Cycle 4 in `dce_history.json`. This is a critical flaw that corrupts the integrity of the cycle history.
 
@@ -1853,10 +1686,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-08T21:26:49.382Z
+  Date Generated: 2025-09-08T22:36:51.196Z
   ---
   Total Files: 168
-  Approx. Tokens: 465777
+  Approx. Tokens: 465786
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -1964,7 +1797,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 90. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 41 - Chars: 3009 - Tokens: 753
 91. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 97 - Chars: 4056 - Tokens: 1014
 92. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 45 - Chars: 2899 - Tokens: 725
-93. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 42 - Chars: 5566 - Tokens: 1392
+93. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 42 - Chars: 5570 - Tokens: 1393
 94. src\Artifacts\A42. DCE - Phase 2 - Initial Scaffolding Deployment Script.md - Lines: 246 - Chars: 8264 - Tokens: 2066
 95. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 35 - Chars: 9444 - Tokens: 2361
 96. src\Artifacts\A58. DCE - WinMerge Source Code Analysis.md - Lines: 56 - Chars: 5322 - Tokens: 1331
@@ -1979,7 +1812,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 105. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
 106. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
 107. src\backend\services\file-operation.service.ts - Lines: 344 - Chars: 16380 - Tokens: 4095
-108. src\backend\services\file-tree.service.ts - Lines: 244 - Chars: 13043 - Tokens: 3261
+108. src\backend\services\file-tree.service.ts - Lines: 244 - Chars: 13078 - Tokens: 3270
 109. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12609 - Tokens: 3153
 110. src\backend\services\git.service.ts - Lines: 114 - Chars: 5522 - Tokens: 1381
 111. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
@@ -2026,7 +1859,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 152. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
 153. src\common\types\pcpp.types.ts - Lines: 43 - Chars: 1035 - Tokens: 259
 154. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
-155. src\common\utils\formatting.ts - Lines: 121 - Chars: 4018 - Tokens: 1005
+155. src\common\utils\formatting.ts - Lines: 121 - Chars: 4016 - Tokens: 1004
 156. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
 157. src\common\utils\view-html.ts - Lines: 37 - Chars: 1314 - Tokens: 329
 158. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
@@ -7973,7 +7806,7 @@ This document serves as a living record of persistent or complex bugs that have 
 ### Case Study 024: PCPP Context/Title Data Loss or Corruption on Navigation
 
 -   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/backend/services/history.service.ts`
--   **Cycles Observed:** C185, C189, C190, C2, C3
+-   **Cycles Observed:** C185, C189, C190, C2, C3, C4
 -   **Symptom:** Text entered into the "Cycle Context," "Ephemeral Context," or "Cycle Title" fields is lost or, more critically, data from one cycle is saved over another. This occurs when the user performs an action that reloads the view's state from disk, such as creating a new cycle, switching to a different cycle, or importing a history file. The data is not persisted to `dce_history.json` in time, or the wrong cycle's data is saved, corrupting the history.
 -   **Root Cause Analysis (RCA):** This is a critical data integrity bug caused by two related race conditions:
     1.  **Debounced Save vs. State Load:** The application waits for a pause in user input before saving changes to disk (debouncing). When the user navigates to a new cycle, the state is reloaded from `dce_history.json` *before* the debounced save has executed. This causes the UI's current state (with the old cycle's data) to be saved over the newly loaded cycle's data, corrupting the history file.
@@ -23817,7 +23650,7 @@ export class FileOperationService {
 </file_artifact>
 
 <file path="src/backend/services/file-tree.service.ts">
-// Updated on: C190 (Add .git and .venv to non-selectable patterns)
+// Updated on: C4 (Add explicit history file exclusion)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -23833,7 +23666,7 @@ import { ProblemCountsMap, GitStatusMap } from "@/common/ipc/channels.type";
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
-const EXCLUSION_PATTERNS = ['dce_cache', 'out', '.vscode', 'dist']; 
+const EXCLUSION_PATTERNS = ['dce_cache', 'out', 'dist']; 
 const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/.git/', '/venv/', '/.venv/', 'flattened_repo.md', 'prompt.md', 'package-lock.json'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
@@ -23898,7 +23731,7 @@ export class FileTreeService {
         const onFileChange = (uri: vscode.Uri, source: string) => {
             const normalizedPath = normalizePath(uri.fsPath);
             if (this.historyFilePath && normalizedPath === this.historyFilePath) {
-                return;
+                return; // Explicitly ignore the history file to prevent flashing
             }
             for (const pattern of EXCLUSION_PATTERNS) {
                 if (normalizedPath.includes(`/${pattern}/`)) {
@@ -24513,7 +24346,7 @@ export class HighlightingService {
 
 <file path="src/backend/services/history.service.ts">
 // src/backend/services/history.service.ts
-// Updated on: C3 (Fix data loss bugs with saveLastViewedCycleId and robust getInitialCycle)
+// Updated on: C4 (Fix data loss bugs with saveLastViewedCycleId and robust getInitialCycle)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -24837,7 +24670,7 @@ export class LoggerService {
 </file_artifact>
 
 <file path="src/backend/services/prompt.service.ts">
-// Updated on: C3 (Implement truncated state log)
+// Updated on: C4 (Implement truncated state log)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -28374,7 +28207,7 @@ export const viewConfig = {
 </file_artifact>
 
 <file path="src/client/views/parallel-copilot.view/on-message.ts">
-// Updated on: C3 (Add SaveLastViewedCycle handler)
+// Updated on: C4 (Add SaveLastViewedCycle handler)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -29399,7 +29232,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C3 (Implement "save before navigate" to fix data loss)
+// Updated on: C4 (Implement "save before navigate" to fix data loss)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './view.scss';
@@ -29783,7 +29616,7 @@ export enum ServerToClientChannel {
 </file_artifact>
 
 <file path="src/common/ipc/channels.type.ts">
-// Updated on: C3 (Add SaveLastViewedCycle channel)
+// Updated on: C4 (Add SaveLastViewedCycle channel)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -30068,7 +29901,7 @@ declare global {
 
 <file path="src/common/utils/formatting.ts">
 // src/common/utils/formatting.ts
-// Updated on: C185 (Add truncateCodeForLogging)
+// Updated on: C4 (Add truncateCodeForLogging)
 
 const KMBT_SUFFIXES = ['', 'K', 'M', 'B', 'T', 'Q']; // Extend as needed
 
