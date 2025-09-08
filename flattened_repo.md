@@ -1,16 +1,16 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-08T02:51:36.373Z
+  Date Generated: 2025-09-08T19:34:22.225Z
   ---
   Total Files: 168
-  Approx. Tokens: 465515
+  Approx. Tokens: 465579
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (254831 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (7751 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (7753 tokens)
 4. src\Artifacts\A0. DCE Master Artifact List.md (7388 tokens)
 5. src\backend\services\prompt.service.ts (5018 tokens)
 6. src\client\views\parallel-copilot.view\view.scss (4485 tokens)
@@ -112,7 +112,7 @@
 90. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 41 - Chars: 3000 - Tokens: 750
 91. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 97 - Chars: 4047 - Tokens: 1012
 92. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 45 - Chars: 2899 - Tokens: 725
-93. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 40 - Chars: 5106 - Tokens: 1277
+93. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 42 - Chars: 5431 - Tokens: 1358
 94. src\Artifacts\A42. DCE - Phase 2 - Initial Scaffolding Deployment Script.md - Lines: 246 - Chars: 8264 - Tokens: 2066
 95. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 35 - Chars: 9444 - Tokens: 2361
 96. src\Artifacts\A58. DCE - WinMerge Source Code Analysis.md - Lines: 56 - Chars: 5322 - Tokens: 1331
@@ -127,7 +127,7 @@
 105. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
 106. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
 107. src\backend\services\file-operation.service.ts - Lines: 344 - Chars: 16380 - Tokens: 4095
-108. src\backend\services\file-tree.service.ts - Lines: 245 - Chars: 13117 - Tokens: 3280
+108. src\backend\services\file-tree.service.ts - Lines: 244 - Chars: 13043 - Tokens: 3261
 109. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12609 - Tokens: 3153
 110. src\backend\services\git.service.ts - Lines: 114 - Chars: 5522 - Tokens: 1381
 111. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
@@ -164,7 +164,7 @@
 142. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 92 - Chars: 4340 - Tokens: 1085
 143. src\client\views\parallel-copilot.view\view.scss - Lines: 796 - Chars: 17937 - Tokens: 4485
 144. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-145. src\client\views\parallel-copilot.view\view.tsx - Lines: 248 - Chars: 31001 - Tokens: 7751
+145. src\client\views\parallel-copilot.view\view.tsx - Lines: 245 - Chars: 31011 - Tokens: 7753
 146. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
 147. src\common\ipc\channels.enum.ts - Lines: 91 - Chars: 4919 - Tokens: 1230
 148. src\common\ipc\channels.type.ts - Lines: 92 - Chars: 6991 - Tokens: 1748
@@ -6093,7 +6093,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C189 (Expand data loss case study for new cycle creation)
+# Updated on: C190 (Expand data loss case study for new cycle creation and navigation)
 
 ## 1. Purpose
 
@@ -6120,14 +6120,16 @@ This document serves as a living record of persistent or complex bugs that have 
 ### Case Study 024: PCPP Context/Title Data Loss on Tab Switch or Cycle Change
 
 -   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/backend/services/history.service.ts`
--   **Cycles Observed:** C185, C189
--   **Symptom:** Text entered into the "Cycle Context," "Ephemeral Context," or "Cycle Title" fields is lost. This can also manifest as a newly created cycle disappearing entirely. The data loss occurs when the user performs an action that reloads the view's state from disk, such as switching to a different cycle, creating a new cycle, or switching to another VS Code tab and then returning. The data is not persisted to `dce_history.json` in time.
--   **Root Cause Analysis (RCA):** This is a critical data loss bug caused by a race condition between the application's debounced save mechanism and its state loading logic. The application waits for a pause in user input before saving changes to disk (debouncing) to improve performance. However, when the user performs an action that causes the view to reload its state (like switching cycles or tabbing away), the state is reloaded from `dce_history.json` *before* the debounced save has had a chance to execute. This overwrites the user's recent, unsaved changes with the older, stale data from the file. The same issue occurs when creating a new cycle: the new, empty cycle state is not saved immediately, so if the user tabs away, the state is lost and the UI reverts to the previous cycle.
+-   **Cycles Observed:** C185, C189, C190
+-   **Symptom:** Text entered into the "Cycle Context," "Ephemeral Context," or "Cycle Title" fields is lost. This can also manifest as a newly created cycle disappearing entirely from the UI after navigating away and back. The data loss occurs when the user performs an action that reloads the view's state from disk, such as creating a new cycle, switching to a different cycle, or switching to another VS Code tab and then returning. The data is not persisted to `dce_history.json` in time, or the wrong cycle is loaded on re-initialization.
+-   **Root Cause Analysis (RCA):** This is a critical data loss bug caused by two related race conditions:
+    1.  **Debounced Save vs. State Load:** The application waits for a pause in user input before saving changes to disk (debouncing). When the user switches cycles, the state is reloaded from `dce_history.json` *before* the debounced save has executed, overwriting recent changes with stale data from the file.
+    2.  **Stale `lastViewedCycleId`:** The application persists the ID of the last cycle the user was viewing. However, this ID was only being updated by a fallback `visibilitychange` event handler. When a user created a new cycle or navigated to an existing one, this ID was not updated immediately. Upon panel re-initialization (e.g., tabbing away and back), the panel would request the initial data, and the backend would serve the data for the *old, stale* `lastViewedCycleId`, causing the UI to revert to a previous cycle and making the new cycle's content inaccessible.
 -   **Codified Solution & Best Practice:**
-    1.  **Trigger Save Before Navigation/State Change:** The event handler for any action that causes a state reload (e.g., `handleCycleChange`) **must** trigger an immediate, non-debounced save of the current component's state *before* dispatching the request to load the new state.
-    2.  **Save on New Cycle Creation:** The `handleNewCycle` function **must** perform two synchronous saves: first, it saves the state of the cycle being departed. Second, after setting the state for the new, empty cycle, it **must** immediately construct the new cycle object and save it. This ensures the new cycle is persisted to disk before any other user action can occur.
-    3.  **Save on Visibility Change:** A `visibilitychange` event listener must be added to the document. When the webview panel is hidden, an immediate save must be triggered. This handles cases like switching VS Code tabs.
-    4.  **Implementation:** The `saveCurrentCycleState` function should be callable directly (non-debounced). The various event handlers must be modified to call this function at the appropriate times to eliminate the race condition entirely.
+    1.  **Trigger Save Before Navigation:** The event handler for any action that causes a state reload (e.g., `handleCycleChange`) **must** trigger an immediate, non-debounced save of the current component's state *before* dispatching the request to load the new state.
+    2.  **Synchronize `lastViewedCycleId`:** The event handlers for creating a new cycle (`handleNewCycle`) and changing the current cycle (`handleCycleChange`) **must** send an immediate, synchronous IPC message (`SaveLastViewedCycle`) to the backend. This ensures the backend's record of the last viewed cycle is never stale.
+    3.  **Save on Visibility Change:** The `visibilitychange` event listener remains as a crucial fallback to handle cases like switching VS Code tabs or closing the window.
+    4.  **Save on New Cycle Creation:** The `handleNewCycle` function must perform two synchronous saves: first, it saves the state of the cycle being departed. Second, after setting the state for the new, empty cycle, it must immediately construct the new cycle object and save it to disk. This ensures the new cycle is persisted before any other user action can occur.
 
 ---
 </file_artifact>
@@ -21962,7 +21964,7 @@ export class FileOperationService {
 </file_artifact>
 
 <file path="src/backend/services/file-tree.service.ts">
-// Updated on: C190 (Add .venv to non-selectable patterns)
+// Updated on: C190 (Add .git and .venv to non-selectable patterns)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -21978,8 +21980,8 @@ import { ProblemCountsMap, GitStatusMap } from "@/common/ipc/channels.type";
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
-const EXCLUSION_PATTERNS = ['.git', 'dce_cache', 'out', '.vscode', 'dist']; 
-const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/.git/', '/venv/', '/.venv/', '/flattened_repo.md', '/prompt.md', '/package-lock.json'];
+const EXCLUSION_PATTERNS = ['dce_cache', 'out', '.vscode', 'dist']; 
+const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/.git/', '/venv/', '/.venv/', 'flattened_repo.md', 'prompt.md', 'package-lock.json'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
@@ -22168,7 +22170,6 @@ export class FileTreeService {
         try {
             const entries = await vscode.workspace.fs.readDirectory(dirUri);
             for (const [name, type] of entries) {
-                if (EXCLUSION_PATTERNS.some(p => name === p)) continue;
                 const childUri = vscode.Uri.joinPath(dirUri, name);
                 const childPath = normalizePath(childUri.fsPath);
                 const isSelectable = this._isSelectable(childPath, type);
@@ -27544,7 +27545,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C189 (Fix new cycle data loss)
+// Updated on: C190 (Fix new cycle data loss)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './view.scss';
@@ -27694,7 +27695,7 @@ const App = () => {
 
     const isNewCycleButtonDisabled = React.useMemo(() => { if (currentCycle === 0) return true; if (currentCycle !== maxCycle) return true; return !isReadyForNextCycle; }, [currentCycle, maxCycle, isReadyForNextCycle]);
 
-    const handleCycleChange = (e: React.MouseEvent | null, newCycle: number) => { e?.stopPropagation(); if (newCycle >= 0 && newCycle <= maxCycle) { saveCurrentCycleState(true); if (currentCycle !== null) clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: currentCycle }); setSelectedFilesForReplacement(new Set()); setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); setWorkflowStep(null); } };
+    const handleCycleChange = (e: React.MouseEvent | null, newCycle: number) => { e?.stopPropagation(); if (newCycle >= 0 && newCycle <= maxCycle) { saveCurrentCycleState(true); if (currentCycle !== null) clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: currentCycle }); setSelectedFilesForReplacement(new Set()); setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycle }); setWorkflowStep(null); } };
     const handleSelectForViewing = (filePath: string) => { const newPath = selectedFilePath === filePath ? null : filePath; setSelectedFilePath(newPath); if (newPath) { const file = activeTabData?.parsedContent?.files.find(f => f.path === newPath); const pathForComparison = pathOverrides.get(newPath) || newPath; if (file) clientIpc.sendToServer(ClientToServerChannel.RequestFileComparison, { filePath: pathForComparison, modifiedContent: file.content }); } };
     const handleAcceptSelectedFiles = () => { if (selectedFilesForReplacement.size === 0) return; const filesToWrite: BatchWriteFile[] = []; selectedFilesForReplacement.forEach(compositeKey => { const [responseId, filePath] = compositeKey.split(':::'); const responseData = tabs[responseId]; if (responseData?.parsedContent) { const file = responseData.parsedContent.files.find(f => f.path === filePath); if (file) { const finalPath = pathOverrides.get(file.path) || file.path; filesToWrite.push({ path: finalPath, content: file.content }); } } }); if (filesToWrite.length > 0) clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite }); setWorkflowStep('awaitingCycleContext'); };
     const handleLinkFile = (originalPath: string) => { if (tempOverridePath.trim()) { setPathOverrides(prev => new Map(prev).set(originalPath, tempOverridePath.trim())); setFileExistenceMap(prev => new Map(prev).set(originalPath, true)); setTempOverridePath(''); handleSelectForViewing(originalPath); } };
@@ -27712,14 +27713,12 @@ const App = () => {
     
     const handleNewCycle = (e: React.MouseEvent) => {
         e.stopPropagation();
-        saveCurrentCycleState(true); // Save current cycle before creating a new one
+        saveCurrentCycleState(true);
         const newCycleId = maxCycle + 1;
         const newTabs: { [key: string]: TabState } = {};
         for (let i = 1; i <= tabCount; i++) {
             newTabs[i.toString()] = { rawContent: '', parsedContent: null };
         }
-
-        // Set all new state
         setMaxCycle(newCycleId);
         setCurrentCycle(newCycleId);
         setCycleTitle('New Cycle');
@@ -27730,15 +27729,13 @@ const App = () => {
         setSelectedResponseId(null);
         setSelectedFilesForReplacement(new Set());
         setWorkflowStep('awaitingResponsePaste_1');
-
-        // Immediately save the newly created cycle's state
         const newCycleData: PcppCycle = {
             cycleId: newCycleId,
             timestamp: new Date().toISOString(),
             title: 'New Cycle',
             cycleContext: '',
             ephemeralContext: '',
-            responses: { "1": { content: "" } }, // Initialize with at least one response
+            responses: { "1": { content: "" } },
             isParsedMode: false,
             leftPaneWidth: leftPaneWidth,
             selectedResponseId: null,
@@ -27748,6 +27745,7 @@ const App = () => {
             pathOverrides: {}
         };
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData: newCycleData });
+        clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycleId });
     };
 
     const handleGeneratePrompt = () => { if (currentCycle === null) return; clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle }); setWorkflowStep('readyForNewCycle'); }
