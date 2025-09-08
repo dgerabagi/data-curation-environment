@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C2 (Implement robust state saving and loading)
+// Updated on: C189 (Fix new cycle data loss)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './view.scss';
@@ -164,7 +164,47 @@ const App = () => {
     
     const handleSortToggle = () => { if (workflowStep === 'awaitingSort') { setIsSortedByTokens(true); } else { setIsSortedByTokens(p => !p); } };
     const handleGlobalParseToggle = () => { const newParseMode = !isParsedMode; setIsParsedMode(newParseMode); setSelectedFilePath(null); if (!newParseMode) setTabs(prev => { const newTabs = {...prev}; Object.keys(newTabs).forEach(key => { newTabs[key].parsedContent = null; }); return newTabs; }); };
-    const handleNewCycle = (e: React.MouseEvent) => { e.stopPropagation(); saveCurrentCycleState(true); const newCycleId = maxCycle + 1; const newTabs: { [key: string]: TabState } = {}; for (let i = 1; i <= tabCount; i++) { newTabs[i.toString()] = { rawContent: '', parsedContent: null }; } setMaxCycle(newCycleId); setCurrentCycle(newCycleId); setCycleTitle('New Cycle'); setCycleContext(''); setEphemeralContext(''); setTabs(newTabs); setIsParsedMode(false); setSelectedResponseId(null); setSelectedFilesForReplacement(new Set()); setWorkflowStep('awaitingResponsePaste_1'); };
+    
+    const handleNewCycle = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        saveCurrentCycleState(true); // Save current cycle before creating a new one
+        const newCycleId = maxCycle + 1;
+        const newTabs: { [key: string]: TabState } = {};
+        for (let i = 1; i <= tabCount; i++) {
+            newTabs[i.toString()] = { rawContent: '', parsedContent: null };
+        }
+
+        // Set all new state
+        setMaxCycle(newCycleId);
+        setCurrentCycle(newCycleId);
+        setCycleTitle('New Cycle');
+        setCycleContext('');
+        setEphemeralContext('');
+        setTabs(newTabs);
+        setIsParsedMode(false);
+        setSelectedResponseId(null);
+        setSelectedFilesForReplacement(new Set());
+        setWorkflowStep('awaitingResponsePaste_1');
+
+        // Immediately save the newly created cycle's state
+        const newCycleData: PcppCycle = {
+            cycleId: newCycleId,
+            timestamp: new Date().toISOString(),
+            title: 'New Cycle',
+            cycleContext: '',
+            ephemeralContext: '',
+            responses: { "1": { content: "" } }, // Initialize with at least one response
+            isParsedMode: false,
+            leftPaneWidth: leftPaneWidth,
+            selectedResponseId: null,
+            selectedFilesForReplacement: [],
+            tabCount: tabCount,
+            isSortedByTokens: isSortedByTokens,
+            pathOverrides: {}
+        };
+        clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData: newCycleData });
+    };
+
     const handleGeneratePrompt = () => { if (currentCycle === null) return; clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle }); setWorkflowStep('readyForNewCycle'); }
     const handleDeleteCycle = () => { if(currentCycle !== null) clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle }); };
     const handleResetHistory = () => { clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {}); };

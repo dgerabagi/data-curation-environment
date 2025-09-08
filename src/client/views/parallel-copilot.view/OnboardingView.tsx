@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/OnboardingView.tsx
-// Updated on: C182 (No functional changes)
+// Updated on: C189 (No functional changes)
 import * as React from 'react';
 import { VscRocket, VscArrowRight } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';

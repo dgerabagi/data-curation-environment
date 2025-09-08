@@ -1,4 +1,4 @@
-// Updated on: C172 (Add in-memory flattening for cost estimation)
+// Updated on: C189 (Add .git and venv to non-selectable patterns)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -22,7 +22,7 @@ interface FileStats {
 const BINARY_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico', '.exe', '.dll', '.bin', '.zip', '.gz', '.7z', '.mp3', '.wav', '.mov', '.mp4']);
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
-const NON_SELECTABLE_PATTERNS = ['/node_modules', '/.vscode', 'flattened_repo.md', 'prompt.md', 'package-lock.json'];
+const NON_SELECTABLE_PATTERNS = ['/node_modules', '/.vscode', '/.git', '/venv', 'flattened_repo.md', 'prompt.md', 'package-lock.json'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
@@ -234,7 +234,7 @@ export class FlattenerService {
             output += `<file path="${relativePath}">\n`;
             output += error ? `Error reading file: ${error}\n` : content;
             if (content && !content.endsWith('\n')) output += '\n';
-            output += `</file>\n\n`;
+            output += `</file_artifact>\n\n`;
         }
         return output;
     }
