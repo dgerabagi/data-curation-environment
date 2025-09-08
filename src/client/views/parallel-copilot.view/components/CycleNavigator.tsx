@@ -50,7 +50,11 @@ const CycleNavigator: React.FC<CycleNavigatorProps> = ({
                 onChange={e => onCycleChange(null, parseInt(e.target.value, 10) || 0)} 
                 className="cycle-input" 
             />
-            <button onClick={(e) => onCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}>
+            <button 
+                onClick={(e) => onCycleChange(e, currentCycle + 1)} 
+                disabled={currentCycle >= maxCycle}
+                title={currentCycle >= maxCycle ? "You are on the latest cycle" : "Next Cycle"}
+            >
                 <VscChevronRight />
             </button>
             <button 

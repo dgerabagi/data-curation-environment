@@ -1,18 +1,18 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-08T19:34:22.225Z
+  Date Generated: 2025-09-08T20:13:09.437Z
   ---
   Total Files: 168
-  Approx. Tokens: 465579
+  Approx. Tokens: 465830
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (254831 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (7753 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (7764 tokens)
 4. src\Artifacts\A0. DCE Master Artifact List.md (7388 tokens)
-5. src\backend\services\prompt.service.ts (5018 tokens)
+5. src\backend\services\prompt.service.ts (5039 tokens)
 6. src\client\views\parallel-copilot.view\view.scss (4485 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4429 tokens)
 8. src\backend\services\file-operation.service.ts (4095 tokens)
@@ -79,7 +79,7 @@
 57. src\Artifacts\A55. DCE - FSService Refactoring Plan.md - Lines: 77 - Chars: 4022 - Tokens: 1006
 58. src\Artifacts\A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md - Lines: 47 - Chars: 5687 - Tokens: 1422
 59. src\Artifacts\A57. DCE - Phase 2 - Cycle Management Plan.md - Lines: 44 - Chars: 3625 - Tokens: 907
-60. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 39 - Chars: 3387 - Tokens: 847
+60. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 40 - Chars: 3674 - Tokens: 919
 61. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 35 - Chars: 4177 - Tokens: 1045
 62. src\Artifacts\A61. DCE - Phase 2 - Cycle History Management Plan.md - Lines: 45 - Chars: 3559 - Tokens: 890
 63. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1806 - Tokens: 452
@@ -112,7 +112,7 @@
 90. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 41 - Chars: 3000 - Tokens: 750
 91. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 97 - Chars: 4047 - Tokens: 1012
 92. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 45 - Chars: 2899 - Tokens: 725
-93. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 42 - Chars: 5431 - Tokens: 1358
+93. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 42 - Chars: 5762 - Tokens: 1441
 94. src\Artifacts\A42. DCE - Phase 2 - Initial Scaffolding Deployment Script.md - Lines: 246 - Chars: 8264 - Tokens: 2066
 95. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 35 - Chars: 9444 - Tokens: 2361
 96. src\Artifacts\A58. DCE - WinMerge Source Code Analysis.md - Lines: 56 - Chars: 5322 - Tokens: 1331
@@ -131,9 +131,9 @@
 109. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12609 - Tokens: 3153
 110. src\backend\services\git.service.ts - Lines: 114 - Chars: 5522 - Tokens: 1381
 111. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-112. src\backend\services\history.service.ts - Lines: 281 - Chars: 11973 - Tokens: 2994
-113. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-114. src\backend\services\prompt.service.ts - Lines: 386 - Chars: 20070 - Tokens: 5018
+112. src\backend\services\history.service.ts - Lines: 283 - Chars: 12119 - Tokens: 3030
+113. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
+114. src\backend\services\prompt.service.ts - Lines: 387 - Chars: 20155 - Tokens: 5039
 115. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 116. src\backend\services\services.ts - Lines: 40 - Chars: 1827 - Tokens: 457
 117. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
@@ -154,7 +154,7 @@
 132. src\client\views\context-chooser.view\view.tsx - Lines: 150 - Chars: 16076 - Tokens: 4019
 133. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
 134. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 59 - Chars: 2078 - Tokens: 520
-135. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 88 - Chars: 3513 - Tokens: 879
+135. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 92 - Chars: 3656 - Tokens: 914
 136. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
 137. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 95 - Chars: 7630 - Tokens: 1908
 138. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 84 - Chars: 3486 - Tokens: 872
@@ -164,10 +164,10 @@
 142. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 92 - Chars: 4340 - Tokens: 1085
 143. src\client\views\parallel-copilot.view\view.scss - Lines: 796 - Chars: 17937 - Tokens: 4485
 144. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-145. src\client\views\parallel-copilot.view\view.tsx - Lines: 245 - Chars: 31011 - Tokens: 7753
+145. src\client\views\parallel-copilot.view\view.tsx - Lines: 246 - Chars: 31056 - Tokens: 7764
 146. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
 147. src\common\ipc\channels.enum.ts - Lines: 91 - Chars: 4919 - Tokens: 1230
-148. src\common\ipc\channels.type.ts - Lines: 92 - Chars: 6991 - Tokens: 1748
+148. src\common\ipc\channels.type.ts - Lines: 92 - Chars: 6998 - Tokens: 1750
 149. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 150. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 151. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
@@ -4285,7 +4285,7 @@ The goal of this feature is to add a **"Log State"** button to the PCPP's main h
 
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
-| P2-LOG-01 | **Log Current State for Debugging** | As a curator encountering a bug, I want to click a "Log State" button that outputs the current state of the entire PCPP to the debug logs, so I can easily copy and paste this information for you to reproduce the issue. | - A "Log State" button is present in the main header of the PCPP. <br> - Clicking the button generates a formatted message in the "Data Curation Environment" output channel. <br> - **(C2 Update)** The log output is now focused specifically on the state variables relevant to cycle management to diagnose the "stuck on new cycle" bug. It will include: <br> &nbsp;&nbsp;&nbsp; 1. A summary of the key frontend state variables (`currentCycle`, `maxCycle`, `isNewCycleButtonDisabled`). <br> &nbsp;&nbsp;&nbsp; 2. A truncated JSON dump of the entire `dce_history.json` file from the backend for comparison. |
+| P2-LOG-01 | **Log Current State for Debugging** | As a curator encountering a bug, I want to click a "Log State" button that outputs the current state of the entire PCPP to the debug logs, so I can easily copy and paste this information for you to reproduce the issue. | - A "Log State" button is present in the main header of the PCPP. <br> - Clicking the button generates a formatted message in the "Data Curation Environment" output channel. <br> - **(C2 Update)** The log output is now focused specifically on the state variables relevant to cycle management to diagnose bugs like data loss or being stuck on a cycle. It will include: <br> &nbsp;&nbsp;&nbsp; 1. A summary of the key frontend state variables (`currentCycle`, `maxCycle`, `isNewCycleButtonDisabled`). <br> &nbsp;&nbsp;&nbsp; 2. A **truncated** JSON dump of the entire `dce_history.json` file from the backend for comparison, with large code blocks shortened to prevent flooding the logs. |
 
 ## 3. Technical Implementation Plan
 
@@ -4302,9 +4302,10 @@ The goal of this feature is to add a **"Log State"** button to the PCPP's main h
     *   **Step 1: Generate Formatted State Dump (C2 Revision):**
         *   It will fetch the full history from `history.service.ts`.
         *   It will construct a focused log string containing the most relevant frontend state variables for the current bug (`currentCycle`, `maxCycle`, `isNewCycleButtonDisabled`, `cycleTitle`, `cycleContext`, `selectedResponseId`).
-        *   It will append a `JSON.stringify` of the full (but truncated) history file content.
+        *   It will use the `truncateCodeForLogging` utility on the `content` of each response in the history before creating a `JSON.stringify` of the full history file content.
     *   **Step 2: Log to Output Channel:**
         *   It will combine these strings into a single, clearly labeled log message and send it to `Services.loggerService.log()`.
+        *   It will then call `Services.loggerService.show()` to programmatically open the output channel for the user.
 </file_artifact>
 
 <file path="src/Artifacts/A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md">
@@ -6120,15 +6121,15 @@ This document serves as a living record of persistent or complex bugs that have 
 ### Case Study 024: PCPP Context/Title Data Loss on Tab Switch or Cycle Change
 
 -   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/backend/services/history.service.ts`
--   **Cycles Observed:** C185, C189, C190
--   **Symptom:** Text entered into the "Cycle Context," "Ephemeral Context," or "Cycle Title" fields is lost. This can also manifest as a newly created cycle disappearing entirely from the UI after navigating away and back. The data loss occurs when the user performs an action that reloads the view's state from disk, such as creating a new cycle, switching to a different cycle, or switching to another VS Code tab and then returning. The data is not persisted to `dce_history.json` in time, or the wrong cycle is loaded on re-initialization.
+-   **Cycles Observed:** C185, C189, C190, C1
+-   **Symptom:** Text entered into the "Cycle Context," "Ephemeral Context," or "Cycle Title" fields is lost. This can also manifest as a newly created cycle disappearing entirely from the UI after navigating away and back, or an imported cycle history failing to display correctly. The data loss occurs when the user performs an action that reloads the view's state from disk, such as creating a new cycle, switching to a different cycle, or importing a history file. The data is not persisted to `dce_history.json` in time, or the wrong cycle is loaded on re-initialization.
 -   **Root Cause Analysis (RCA):** This is a critical data loss bug caused by two related race conditions:
     1.  **Debounced Save vs. State Load:** The application waits for a pause in user input before saving changes to disk (debouncing). When the user switches cycles, the state is reloaded from `dce_history.json` *before* the debounced save has executed, overwriting recent changes with stale data from the file.
-    2.  **Stale `lastViewedCycleId`:** The application persists the ID of the last cycle the user was viewing. However, this ID was only being updated by a fallback `visibilitychange` event handler. When a user created a new cycle or navigated to an existing one, this ID was not updated immediately. Upon panel re-initialization (e.g., tabbing away and back), the panel would request the initial data, and the backend would serve the data for the *old, stale* `lastViewedCycleId`, causing the UI to revert to a previous cycle and making the new cycle's content inaccessible.
+    2.  **Stale `lastViewedCycleId`:** The application persists the ID of the last cycle the user was viewing. However, this ID was only being updated by a fallback `visibilitychange` event handler. When a user created a new cycle, navigated to an existing one, or imported a new history, this ID was not updated immediately. Upon panel re-initialization (e.g., tabbing away and back), the panel would request the initial data, and the backend would serve the data for the *old, stale* `lastViewedCycleId`, causing the UI to revert to a previous cycle and making the new cycle's content inaccessible.
 -   **Codified Solution & Best Practice:**
     1.  **Trigger Save Before Navigation:** The event handler for any action that causes a state reload (e.g., `handleCycleChange`) **must** trigger an immediate, non-debounced save of the current component's state *before* dispatching the request to load the new state.
-    2.  **Synchronize `lastViewedCycleId`:** The event handlers for creating a new cycle (`handleNewCycle`) and changing the current cycle (`handleCycleChange`) **must** send an immediate, synchronous IPC message (`SaveLastViewedCycle`) to the backend. This ensures the backend's record of the last viewed cycle is never stale.
-    3.  **Save on Visibility Change:** The `visibilitychange` event listener remains as a crucial fallback to handle cases like switching VS Code tabs or closing the window.
+    2.  **Synchronize `lastViewedCycleId`:** The event handlers for creating a new cycle (`handleNewCycle`) and changing the current cycle (`handleCycleChange`) **must** send an immediate, synchronous IPC message (`SaveLastViewedCycle`) to the backend. The handler for importing history must clear this value. This ensures the backend's record of the last viewed cycle is never stale.
+    3.  **Self-Healing Initial Load:** The backend's `getInitialCycle` logic must be self-healing. If a `lastViewedCycleId` is found, it must first verify that a cycle with that ID actually exists in the history file. If it doesn't, the service must ignore the stale ID and fall back to loading the cycle with the highest ID number, ensuring the user always sees valid, accessible data.
     4.  **Save on New Cycle Creation:** The `handleNewCycle` function must perform two synchronous saves: first, it saves the state of the cycle being departed. Second, after setting the state for the new, empty cycle, it must immediately construct the new cycle object and save it to disk. This ensures the new cycle is persisted before any other user action can occur.
 
 ---
@@ -22717,7 +22718,7 @@ export class HistoryService {
         return await this._readHistoryFile();
     }
 
-    public async saveLastViewedCycleId(id: number): Promise<void> {
+    public async saveLastViewedCycleId(id: number | null): Promise<void> {
         await this.context.workspaceState.update(LAST_VIEWED_CYCLE_ID_KEY, id);
         Services.loggerService.log(`Saved last viewed cycle ID: ${id}`);
     }
@@ -22770,14 +22771,15 @@ export class HistoryService {
         }
 
         const lastViewedId = this.getLastViewedCycleId();
-        const lastViewedCycle = history.cycles.find(c => c.cycleId === lastViewedId);
-        if (lastViewedCycle) {
-            Services.loggerService.log(`Found last viewed cycle: ${lastViewedId}`);
-            return lastViewedCycle;
+        const cycleMap = new Map(history.cycles.map(c => [c.cycleId, c]));
+
+        if (lastViewedId !== undefined && cycleMap.has(lastViewedId)) {
+            Services.loggerService.log(`Found valid last viewed cycle: ${lastViewedId}`);
+            return cycleMap.get(lastViewedId)!;
         }
         
         const latestCycle = history.cycles.reduce((latest, current) => current.cycleId > latest.cycleId ? current : latest);
-        Services.loggerService.log(`No last-viewed cycle found. Falling back to latest cycle: ${latestCycle.cycleId}`);
+        Services.loggerService.log(`No valid last-viewed cycle found. Falling back to latest cycle: ${latestCycle.cycleId}`);
         return latestCycle;
     }
 
@@ -22925,6 +22927,7 @@ export class HistoryService {
                 const historyData = JSON.parse(content);
                 if (historyData.version && Array.isArray(historyData.cycles)) {
                     await this._writeHistoryFile(historyData);
+                    await this.saveLastViewedCycleId(null); // Clear last viewed ID
                     vscode.window.showInformationMessage("Cycle history imported successfully. Reloading...");
                     const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
                     if (serverIpc) {
@@ -23203,7 +23206,6 @@ ${staticContext.trim()}
         try {
             const fullHistory = await Services.historyService.getFullHistory();
             
-            // Truncate response content before logging
             const historyForLogging = JSON.parse(JSON.stringify(fullHistory));
             historyForLogging.cycles.forEach((cycle: PcppCycle) => {
                 Object.keys(cycle.responses).forEach(respId => {
@@ -23211,12 +23213,14 @@ ${staticContext.trim()}
                 });
             });
 
-            const isNewCycleButtonDisabled = !currentState.title || currentState.title.trim() === 'New Cycle' || currentState.title.trim() === '' || !currentState.cycleContext || currentState.cycleContext.trim() === '' || !currentState.selectedResponseId;
+            const maxCycleId = fullHistory.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0);
+            const isReadyForNextCycle = currentState.title && currentState.title.trim() !== 'New Cycle' && currentState.title.trim() !== '' && currentState.cycleContext && currentState.cycleContext.trim() !== '' && currentState.selectedResponseId;
+            const isNewCycleButtonDisabled = currentState.cycleId !== maxCycleId || !isReadyForNextCycle;
 
             const stateDump = {
                 "FRONTEND_STATE": {
                     "currentCycle": currentState.cycleId,
-                    "maxCycle": fullHistory.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0),
+                    "maxCycle": maxCycleId,
                     "isNewCycleButtonDisabled": isNewCycleButtonDisabled,
                     "conditions": {
                         "hasTitle": !!currentState.title && currentState.title.trim() !== 'New Cycle' && currentState.title.trim() !== '',
@@ -26121,7 +26125,11 @@ const CycleNavigator: React.FC<CycleNavigatorProps> = ({
                 onChange={e => onCycleChange(null, parseInt(e.target.value, 10) || 0)} 
                 className="cycle-input" 
             />
-            <button onClick={(e) => onCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}>
+            <button 
+                onClick={(e) => onCycleChange(e, currentCycle + 1)} 
+                disabled={currentCycle >= maxCycle}
+                title={currentCycle >= maxCycle ? "You are on the latest cycle" : "Next Cycle"}
+            >
                 <VscChevronRight />
             </button>
             <button 
@@ -27695,7 +27703,7 @@ const App = () => {
 
     const isNewCycleButtonDisabled = React.useMemo(() => { if (currentCycle === 0) return true; if (currentCycle !== maxCycle) return true; return !isReadyForNextCycle; }, [currentCycle, maxCycle, isReadyForNextCycle]);
 
-    const handleCycleChange = (e: React.MouseEvent | null, newCycle: number) => { e?.stopPropagation(); if (newCycle >= 0 && newCycle <= maxCycle) { saveCurrentCycleState(true); if (currentCycle !== null) clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: currentCycle }); setSelectedFilesForReplacement(new Set()); setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycle }); setWorkflowStep(null); } };
+    const handleCycleChange = (e: React.MouseEvent | null, newCycle: number) => { e?.stopPropagation(); if (newCycle >= 0 && newCycle <= maxCycle) { saveCurrentCycleState(true); clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: currentCycle }); setSelectedFilesForReplacement(new Set()); setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycle }); setWorkflowStep(null); } };
     const handleSelectForViewing = (filePath: string) => { const newPath = selectedFilePath === filePath ? null : filePath; setSelectedFilePath(newPath); if (newPath) { const file = activeTabData?.parsedContent?.files.find(f => f.path === newPath); const pathForComparison = pathOverrides.get(newPath) || newPath; if (file) clientIpc.sendToServer(ClientToServerChannel.RequestFileComparison, { filePath: pathForComparison, modifiedContent: file.content }); } };
     const handleAcceptSelectedFiles = () => { if (selectedFilesForReplacement.size === 0) return; const filesToWrite: BatchWriteFile[] = []; selectedFilesForReplacement.forEach(compositeKey => { const [responseId, filePath] = compositeKey.split(':::'); const responseData = tabs[responseId]; if (responseData?.parsedContent) { const file = responseData.parsedContent.files.find(f => f.path === filePath); if (file) { const finalPath = pathOverrides.get(file.path) || file.path; filesToWrite.push({ path: finalPath, content: file.content }); } } }); if (filesToWrite.length > 0) clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite }); setWorkflowStep('awaitingCycleContext'); };
     const handleLinkFile = (originalPath: string) => { if (tempOverridePath.trim()) { setPathOverrides(prev => new Map(prev).set(originalPath, tempOverridePath.trim())); setFileExistenceMap(prev => new Map(prev).set(originalPath, true)); setTempOverridePath(''); handleSelectForViewing(originalPath); } };
@@ -27713,7 +27721,7 @@ const App = () => {
     
     const handleNewCycle = (e: React.MouseEvent) => {
         e.stopPropagation();
-        saveCurrentCycleState(true);
+        saveCurrentCycleState(true); // Save departing cycle
         const newCycleId = maxCycle + 1;
         const newTabs: { [key: string]: TabState } = {};
         for (let i = 1; i <= tabCount; i++) {
@@ -27744,6 +27752,7 @@ const App = () => {
             isSortedByTokens: isSortedByTokens,
             pathOverrides: {}
         };
+        // Immediately save the new empty cycle
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData: newCycleData });
         clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycleId });
     };
@@ -27995,7 +28004,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestGitBaseline ? { commitMessage: string } :
     T extends ClientToServerChannel.RequestGitRestore ? {} :
     T extends ClientToServerChannel.RequestGitStatus ? {} :
-    T extends ClientToServerChannel.SaveLastViewedCycle ? { cycleId: number } :
+    T extends ClientToServerChannel.SaveLastViewedCycle ? { cycleId: number | null } :
     
     T extends ServerToClientChannel.SendWorkspaceFiles ? { files: FileNode[] } :
     T extends ServerToClientChannel.SendWorkspaceTrustState ? { isTrusted: boolean } :

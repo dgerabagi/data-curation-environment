@@ -65,7 +65,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestGitBaseline ? { commitMessage: string } :
     T extends ClientToServerChannel.RequestGitRestore ? {} :
     T extends ClientToServerChannel.RequestGitStatus ? {} :
-    T extends ClientToServerChannel.SaveLastViewedCycle ? { cycleId: number } :
+    T extends ClientToServerChannel.SaveLastViewedCycle ? { cycleId: number | null } :
     
     T extends ServerToClientChannel.SendWorkspaceFiles ? { files: FileNode[] } :
     T extends ServerToClientChannel.SendWorkspaceTrustState ? { isTrusted: boolean } :

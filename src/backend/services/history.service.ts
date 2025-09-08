@@ -56,7 +56,7 @@ export class HistoryService {
         return await this._readHistoryFile();
     }
 
-    public async saveLastViewedCycleId(id: number): Promise<void> {
+    public async saveLastViewedCycleId(id: number | null): Promise<void> {
         await this.context.workspaceState.update(LAST_VIEWED_CYCLE_ID_KEY, id);
         Services.loggerService.log(`Saved last viewed cycle ID: ${id}`);
     }
@@ -109,14 +109,15 @@ export class HistoryService {
         }
 
         const lastViewedId = this.getLastViewedCycleId();
-        const lastViewedCycle = history.cycles.find(c => c.cycleId === lastViewedId);
-        if (lastViewedCycle) {
-            Services.loggerService.log(`Found last viewed cycle: ${lastViewedId}`);
-            return lastViewedCycle;
+        const cycleMap = new Map(history.cycles.map(c => [c.cycleId, c]));
+
+        if (lastViewedId !== undefined && cycleMap.has(lastViewedId)) {
+            Services.loggerService.log(`Found valid last viewed cycle: ${lastViewedId}`);
+            return cycleMap.get(lastViewedId)!;
         }
         
         const latestCycle = history.cycles.reduce((latest, current) => current.cycleId > latest.cycleId ? current : latest);
-        Services.loggerService.log(`No last-viewed cycle found. Falling back to latest cycle: ${latestCycle.cycleId}`);
+        Services.loggerService.log(`No valid last-viewed cycle found. Falling back to latest cycle: ${latestCycle.cycleId}`);
         return latestCycle;
     }
 
@@ -264,6 +265,7 @@ export class HistoryService {
                 const historyData = JSON.parse(content);
                 if (historyData.version && Array.isArray(historyData.cycles)) {
                     await this._writeHistoryFile(historyData);
+                    await this.saveLastViewedCycleId(null); // Clear last viewed ID
                     vscode.window.showInformationMessage("Cycle history imported successfully. Reloading...");
                     const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
                     if (serverIpc) {

@@ -217,7 +217,6 @@ ${staticContext.trim()}
         try {
             const fullHistory = await Services.historyService.getFullHistory();
             
-            // Truncate response content before logging
             const historyForLogging = JSON.parse(JSON.stringify(fullHistory));
             historyForLogging.cycles.forEach((cycle: PcppCycle) => {
                 Object.keys(cycle.responses).forEach(respId => {
@@ -225,12 +224,14 @@ ${staticContext.trim()}
                 });
             });
 
-            const isNewCycleButtonDisabled = !currentState.title || currentState.title.trim() === 'New Cycle' || currentState.title.trim() === '' || !currentState.cycleContext || currentState.cycleContext.trim() === '' || !currentState.selectedResponseId;
+            const maxCycleId = fullHistory.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0);
+            const isReadyForNextCycle = currentState.title && currentState.title.trim() !== 'New Cycle' && currentState.title.trim() !== '' && currentState.cycleContext && currentState.cycleContext.trim() !== '' && currentState.selectedResponseId;
+            const isNewCycleButtonDisabled = currentState.cycleId !== maxCycleId || !isReadyForNextCycle;
 
             const stateDump = {
                 "FRONTEND_STATE": {
                     "currentCycle": currentState.cycleId,
-                    "maxCycle": fullHistory.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0),
+                    "maxCycle": maxCycleId,
                     "isNewCycleButtonDisabled": isNewCycleButtonDisabled,
                     "conditions": {
                         "hasTitle": !!currentState.title && currentState.title.trim() !== 'New Cycle' && currentState.title.trim() !== '',
