@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C190 (Fix new cycle data loss)
+// Updated on: C3 (Implement "save before navigate" to fix data loss)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './view.scss';

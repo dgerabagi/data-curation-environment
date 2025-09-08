@@ -1,5 +1,5 @@
 // src/backend/services/history.service.ts
-// Updated on: C2 (Fix TS errors, add saveLastViewedCycleId)
+// Updated on: C3 (Fix data loss bugs with saveLastViewedCycleId and robust getInitialCycle)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -92,8 +92,6 @@ export class HistoryService {
             selectedFilesForReplacement: [], 
             tabCount: 4, 
             isSortedByTokens: false, 
-            cycleContextHeight: 100, 
-            ephemeralContextHeight: 100,
             pathOverrides: {},
         };
 

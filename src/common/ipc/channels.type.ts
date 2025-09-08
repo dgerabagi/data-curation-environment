@@ -1,4 +1,4 @@
-// Updated on: C186 (Add SaveLastViewedCycle channel)
+// Updated on: C3 (Add SaveLastViewedCycle channel)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -55,7 +55,6 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.SaveCycleData ? { cycleData: PcppCycle } :
     T extends ClientToServerChannel.RequestDeleteCycle ? { cycleId: number; } :
     T extends ClientToServerChannel.RequestResetHistory ? {} :
-    T extends ClientToServerChannel.RequestBatchFileWrite ? { files: BatchWriteFile[] } :
     T extends ClientToServerChannel.RequestLogState ? { currentState: PcppCycle } :
     T extends ClientToServerChannel.RequestFileComparison ? { filePath: string; modifiedContent: string; } :
     T extends ClientToServerChannel.RequestExportHistory ? {} :

@@ -1,4 +1,4 @@
-// Updated on: C188 (Add logging)
+// Updated on: C3 (Add SaveLastViewedCycle handler)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -57,7 +57,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         historyService.resetHistory();
     });
 
-    serverIpc.onClientMessage(ClientToServerChannel.RequestBatchFileWrite, async (data) => {
+    serverIpc.onClientMessage(ClientToServerChannel.RequestBatchFileWrite, async (data: { files: { path: string, content: string }[] }) => {
         const writtenPaths = await fileOperationService.handleBatchFileWrite(data.files);
         if (writtenPaths.length > 0) {
             serverIpc.sendToClient(ServerToClientChannel.FilesWritten, { paths: writtenPaths });

@@ -1,18 +1,18 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-08T20:59:21.642Z
+  Date Generated: 2025-09-08T21:26:49.382Z
   ---
   Total Files: 168
-  Approx. Tokens: 465888
+  Approx. Tokens: 465777
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (254831 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (7754 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (7760 tokens)
 4. src\Artifacts\A0. DCE Master Artifact List.md (7388 tokens)
-5. src\backend\services\prompt.service.ts (5136 tokens)
+5. src\backend\services\prompt.service.ts (5040 tokens)
 6. src\client\views\parallel-copilot.view\view.scss (4485 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4429 tokens)
 8. src\backend\services\file-operation.service.ts (4095 tokens)
@@ -79,7 +79,7 @@
 57. src\Artifacts\A55. DCE - FSService Refactoring Plan.md - Lines: 77 - Chars: 4022 - Tokens: 1006
 58. src\Artifacts\A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md - Lines: 47 - Chars: 5687 - Tokens: 1422
 59. src\Artifacts\A57. DCE - Phase 2 - Cycle Management Plan.md - Lines: 44 - Chars: 3625 - Tokens: 907
-60. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 40 - Chars: 3713 - Tokens: 929
+60. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 40 - Chars: 3698 - Tokens: 925
 61. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 35 - Chars: 4177 - Tokens: 1045
 62. src\Artifacts\A61. DCE - Phase 2 - Cycle History Management Plan.md - Lines: 45 - Chars: 3559 - Tokens: 890
 63. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1806 - Tokens: 452
@@ -112,7 +112,7 @@
 90. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 41 - Chars: 3009 - Tokens: 753
 91. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 97 - Chars: 4056 - Tokens: 1014
 92. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 45 - Chars: 2899 - Tokens: 725
-93. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 42 - Chars: 5562 - Tokens: 1391
+93. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 42 - Chars: 5566 - Tokens: 1392
 94. src\Artifacts\A42. DCE - Phase 2 - Initial Scaffolding Deployment Script.md - Lines: 246 - Chars: 8264 - Tokens: 2066
 95. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 35 - Chars: 9444 - Tokens: 2361
 96. src\Artifacts\A58. DCE - WinMerge Source Code Analysis.md - Lines: 56 - Chars: 5322 - Tokens: 1331
@@ -131,9 +131,9 @@
 109. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12609 - Tokens: 3153
 110. src\backend\services\git.service.ts - Lines: 114 - Chars: 5522 - Tokens: 1381
 111. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-112. src\backend\services\history.service.ts - Lines: 283 - Chars: 12119 - Tokens: 3030
+112. src\backend\services\history.service.ts - Lines: 281 - Chars: 12072 - Tokens: 3018
 113. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
-114. src\backend\services\prompt.service.ts - Lines: 387 - Chars: 20541 - Tokens: 5136
+114. src\backend\services\prompt.service.ts - Lines: 387 - Chars: 20158 - Tokens: 5040
 115. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 116. src\backend\services\services.ts - Lines: 40 - Chars: 1827 - Tokens: 457
 117. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
@@ -160,14 +160,14 @@
 138. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 84 - Chars: 3486 - Tokens: 872
 139. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
 140. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-141. src\client\views\parallel-copilot.view\on-message.ts - Lines: 114 - Chars: 5251 - Tokens: 1313
+141. src\client\views\parallel-copilot.view\on-message.ts - Lines: 114 - Chars: 5317 - Tokens: 1330
 142. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 92 - Chars: 4340 - Tokens: 1085
 143. src\client\views\parallel-copilot.view\view.scss - Lines: 796 - Chars: 17937 - Tokens: 4485
 144. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-145. src\client\views\parallel-copilot.view\view.tsx - Lines: 246 - Chars: 31013 - Tokens: 7754
+145. src\client\views\parallel-copilot.view\view.tsx - Lines: 246 - Chars: 31037 - Tokens: 7760
 146. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
 147. src\common\ipc\channels.enum.ts - Lines: 91 - Chars: 4919 - Tokens: 1230
-148. src\common\ipc\channels.type.ts - Lines: 92 - Chars: 6998 - Tokens: 1750
+148. src\common\ipc\channels.type.ts - Lines: 91 - Chars: 6906 - Tokens: 1727
 149. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 150. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 151. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
@@ -4269,7 +4269,7 @@ As the number of development cycles increases, users need tools to manage their 
 # Artifact A59: DCE - Phase 2 - Debugging and State Logging
 # Date Created: C134
 # Author: AI Model & Curator
-# Updated on: C2 (Focus log output on cycle management state)
+# Updated on: C3 (Focus log output on cycle management state and truncate large data)
 
 - **Key/Value for A0:**
 - **Description:** Documents the plan for a "Log State" button that outputs critical state information (cycle history, current inputs) to the debug channel to accelerate troubleshooting.
@@ -4285,7 +4285,7 @@ The goal of this feature is to add a **"Log State"** button to the PCPP's main h
 
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
-| P2-LOG-01 | **Log Current State for Debugging** | As a curator encountering a bug, I want to click a "Log State" button that outputs the current state of the entire PCPP to the debug logs, so I can easily copy and paste this information for you to reproduce the issue. | - A "Log State" button is present in the main header of the PCPP. <br> - Clicking the button generates a formatted message in the "Data Curation Environment" output channel. <br> - **(C2 Update)** The log output is now focused specifically on the state variables relevant to cycle management to diagnose bugs like data loss or being stuck on a cycle. It will include: <br> &nbsp;&nbsp;&nbsp; 1. A summary of the key frontend state variables (`currentCycle`, `maxCycle`, `isNewCycleButtonDisabled`). <br> &nbsp;&nbsp;&nbsp; 2. A **truncated** JSON dump of the entire `dce_history.json` file from the backend for comparison, with large code blocks shortened to prevent flooding the logs. |
+| P2-LOG-01 | **Log Current State for Debugging** | As a curator encountering a bug, I want to click a "Log State" button that outputs the current state of the entire PCPP to the debug logs, so I can easily copy and paste this information for you to reproduce the issue. | - A "Log State" button is present in the main header of the PCPP. <br> - Clicking the button generates a formatted message in the "Data Curation Environment" output channel. <br> - **(C3 Update)** The log output is now focused specifically on the state variables relevant to cycle management to diagnose bugs like data loss or being stuck on a cycle. It will include: <br> &nbsp;&nbsp;&nbsp; 1. A summary of the key frontend state variables (`currentCycle`, `maxCycle`, `isNewCycleButtonDisabled`). <br> &nbsp;&nbsp;&nbsp; 2. A **truncated** JSON dump of the entire `dce_history.json` file from the backend for comparison, with large code blocks shortened to prevent flooding the logs. |
 
 ## 3. Technical Implementation Plan
 
@@ -4299,7 +4299,7 @@ The goal of this feature is to add a **"Log State"** button to the PCPP's main h
 
 3.  **Backend Logic (`prompt.service.ts`):**
     *   A new public method, `public async generateStateLog(currentState: PcppCycle)`, will be created.
-    *   **Step 1: Generate Formatted State Dump (C2 Revision):**
+    *   **Step 1: Generate Formatted State Dump (C3 Revision):**
         *   It will fetch the full history from `history.service.ts`.
         *   It will construct a focused log string containing the most relevant frontend state variables for the current bug (`currentCycle`, `maxCycle`, `isNewCycleButtonDisabled`, `cycleTitle`, `cycleContext`, `selectedResponseId`).
         *   It will use the `truncateCodeForLogging` utility on the `content` of each response in the history before creating a `JSON.stringify` of the full history file content.
@@ -6121,7 +6121,7 @@ This document serves as a living record of persistent or complex bugs that have 
 ### Case Study 024: PCPP Context/Title Data Loss or Corruption on Navigation
 
 -   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/backend/services/history.service.ts`
--   **Cycles Observed:** C185, C189, C190, C2
+-   **Cycles Observed:** C185, C189, C190, C2, C3
 -   **Symptom:** Text entered into the "Cycle Context," "Ephemeral Context," or "Cycle Title" fields is lost or, more critically, data from one cycle is saved over another. This occurs when the user performs an action that reloads the view's state from disk, such as creating a new cycle, switching to a different cycle, or importing a history file. The data is not persisted to `dce_history.json` in time, or the wrong cycle's data is saved, corrupting the history.
 -   **Root Cause Analysis (RCA):** This is a critical data integrity bug caused by two related race conditions:
     1.  **Debounced Save vs. State Load:** The application waits for a pause in user input before saving changes to disk (debouncing). When the user navigates to a new cycle, the state is reloaded from `dce_history.json` *before* the debounced save has executed. This causes the UI's current state (with the old cycle's data) to be saved over the newly loaded cycle's data, corrupting the history file.
@@ -22661,7 +22661,7 @@ export class HighlightingService {
 
 <file path="src/backend/services/history.service.ts">
 // src/backend/services/history.service.ts
-// Updated on: C2 (Fix TS errors, add saveLastViewedCycleId)
+// Updated on: C3 (Fix data loss bugs with saveLastViewedCycleId and robust getInitialCycle)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -22754,8 +22754,6 @@ export class HistoryService {
             selectedFilesForReplacement: [], 
             tabCount: 4, 
             isSortedByTokens: false, 
-            cycleContextHeight: 100, 
-            ephemeralContextHeight: 100,
             pathOverrides: {},
         };
 
@@ -22987,7 +22985,7 @@ export class LoggerService {
 </file_artifact>
 
 <file path="src/backend/services/prompt.service.ts">
-// Updated on: C2 (Implement generateStateLog)
+// Updated on: C3 (Implement truncated state log)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -26524,7 +26522,7 @@ export const viewConfig = {
 </file_artifact>
 
 <file path="src/client/views/parallel-copilot.view/on-message.ts">
-// Updated on: C188 (Add logging)
+// Updated on: C3 (Add SaveLastViewedCycle handler)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -26583,7 +26581,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         historyService.resetHistory();
     });
 
-    serverIpc.onClientMessage(ClientToServerChannel.RequestBatchFileWrite, async (data) => {
+    serverIpc.onClientMessage(ClientToServerChannel.RequestBatchFileWrite, async (data: { files: { path: string, content: string }[] }) => {
         const writtenPaths = await fileOperationService.handleBatchFileWrite(data.files);
         if (writtenPaths.length > 0) {
             serverIpc.sendToClient(ServerToClientChannel.FilesWritten, { paths: writtenPaths });
@@ -27549,7 +27547,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C190 (Fix new cycle data loss)
+// Updated on: C3 (Implement "save before navigate" to fix data loss)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './view.scss';
@@ -27933,7 +27931,7 @@ export enum ServerToClientChannel {
 </file_artifact>
 
 <file path="src/common/ipc/channels.type.ts">
-// Updated on: C186 (Add SaveLastViewedCycle channel)
+// Updated on: C3 (Add SaveLastViewedCycle channel)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -27990,7 +27988,6 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.SaveCycleData ? { cycleData: PcppCycle } :
     T extends ClientToServerChannel.RequestDeleteCycle ? { cycleId: number; } :
     T extends ClientToServerChannel.RequestResetHistory ? {} :
-    T extends ClientToServerChannel.RequestBatchFileWrite ? { files: BatchWriteFile[] } :
     T extends ClientToServerChannel.RequestLogState ? { currentState: PcppCycle } :
     T extends ClientToServerChannel.RequestFileComparison ? { filePath: string; modifiedContent: string; } :
     T extends ClientToServerChannel.RequestExportHistory ? {} :

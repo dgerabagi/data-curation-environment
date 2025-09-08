@@ -1,4 +1,4 @@
-// Updated on: C2 (Implement generateStateLog)
+// Updated on: C3 (Implement truncated state log)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
