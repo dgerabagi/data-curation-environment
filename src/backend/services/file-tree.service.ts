@@ -1,4 +1,4 @@
-// Updated on: C189 (Add .git and venv to non-selectable patterns)
+// Updated on: C190 (Add .venv to non-selectable patterns)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -15,7 +15,7 @@ const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
 const EXCLUSION_PATTERNS = ['.git', 'dce_cache', 'out', '.vscode', 'dist']; 
-const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/.git/', '/venv/', '/flattened_repo.md', '/prompt.md', '/package-lock.json'];
+const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/.git/', '/venv/', '/.venv/', '/flattened_repo.md', '/prompt.md', '/package-lock.json'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
@@ -209,7 +209,7 @@ export class FileTreeService {
                 const childPath = normalizePath(childUri.fsPath);
                 const isSelectable = this._isSelectable(childPath, type);
                 if (type === vscode.FileType.Directory) {
-                    const isSpecialDir = ['node_modules', '.git', 'venv'].includes(name.toLowerCase());
+                    const isSpecialDir = ['node_modules', '.git', 'venv', '.venv'].includes(name.toLowerCase());
                     const dirNode: FileNode = { name, absolutePath: childPath, children: isSpecialDir ? [] : await this._traverseDirectory(childUri), tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false, isSelectable };
                     this._aggregateStats(dirNode);
                     children.push(dirNode);
@@ -226,7 +226,7 @@ export class FileTreeService {
 
     private _aggregateStats(node: FileNode): void {
         if (!node.children) return;
-        if (['node_modules', '.git', 'venv'].includes(node.name.toLowerCase())) {
+        if (['node_modules', '.git', 'venv', '.venv'].includes(node.name.toLowerCase())) {
             node.tokenCount = 0;
             node.fileCount = 0;
             node.sizeInBytes = 0;
