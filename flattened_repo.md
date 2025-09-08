@@ -1,18 +1,18 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-07T16:50:05.276Z
+  Date Generated: 2025-09-08T00:35:34.660Z
   ---
   Total Files: 168
-  Approx. Tokens: 465128
+  Approx. Tokens: 465234
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (254831 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (7458 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (7511 tokens)
 4. src\Artifacts\A0. DCE Master Artifact List.md (7388 tokens)
-5. src\backend\services\prompt.service.ts (4995 tokens)
+5. src\backend\services\prompt.service.ts (5018 tokens)
 6. src\client\views\parallel-copilot.view\view.scss (4485 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4429 tokens)
 8. src\backend\services\file-operation.service.ts (4095 tokens)
@@ -79,7 +79,7 @@
 57. src\Artifacts\A55. DCE - FSService Refactoring Plan.md - Lines: 77 - Chars: 4022 - Tokens: 1006
 58. src\Artifacts\A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md - Lines: 47 - Chars: 5687 - Tokens: 1422
 59. src\Artifacts\A57. DCE - Phase 2 - Cycle Management Plan.md - Lines: 44 - Chars: 3625 - Tokens: 907
-60. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 39 - Chars: 3393 - Tokens: 849
+60. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 39 - Chars: 3387 - Tokens: 847
 61. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 35 - Chars: 4177 - Tokens: 1045
 62. src\Artifacts\A61. DCE - Phase 2 - Cycle History Management Plan.md - Lines: 45 - Chars: 3559 - Tokens: 890
 63. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1806 - Tokens: 452
@@ -112,7 +112,7 @@
 90. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 41 - Chars: 3000 - Tokens: 750
 91. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 97 - Chars: 4047 - Tokens: 1012
 92. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 45 - Chars: 2899 - Tokens: 725
-93. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 41 - Chars: 4655 - Tokens: 1164
+93. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 40 - Chars: 4787 - Tokens: 1197
 94. src\Artifacts\A42. DCE - Phase 2 - Initial Scaffolding Deployment Script.md - Lines: 246 - Chars: 8264 - Tokens: 2066
 95. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 35 - Chars: 9444 - Tokens: 2361
 96. src\Artifacts\A58. DCE - WinMerge Source Code Analysis.md - Lines: 56 - Chars: 5322 - Tokens: 1331
@@ -131,9 +131,9 @@
 109. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12820 - Tokens: 3205
 110. src\backend\services\git.service.ts - Lines: 114 - Chars: 5522 - Tokens: 1381
 111. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-112. src\backend\services\history.service.ts - Lines: 281 - Chars: 11980 - Tokens: 2995
+112. src\backend\services\history.service.ts - Lines: 281 - Chars: 11973 - Tokens: 2994
 113. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1115 - Tokens: 279
-114. src\backend\services\prompt.service.ts - Lines: 385 - Chars: 19979 - Tokens: 4995
+114. src\backend\services\prompt.service.ts - Lines: 386 - Chars: 20070 - Tokens: 5018
 115. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 116. src\backend\services\services.ts - Lines: 40 - Chars: 1827 - Tokens: 457
 117. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
@@ -164,7 +164,7 @@
 142. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 92 - Chars: 4340 - Tokens: 1085
 143. src\client\views\parallel-copilot.view\view.scss - Lines: 796 - Chars: 17937 - Tokens: 4485
 144. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-145. src\client\views\parallel-copilot.view\view.tsx - Lines: 208 - Chars: 29829 - Tokens: 7458
+145. src\client\views\parallel-copilot.view\view.tsx - Lines: 208 - Chars: 30041 - Tokens: 7511
 146. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
 147. src\common\ipc\channels.enum.ts - Lines: 91 - Chars: 4919 - Tokens: 1230
 148. src\common\ipc\channels.type.ts - Lines: 92 - Chars: 6991 - Tokens: 1748
@@ -4269,7 +4269,7 @@ As the number of development cycles increases, users need tools to manage their 
 # Artifact A59: DCE - Phase 2 - Debugging and State Logging
 # Date Created: C134
 # Author: AI Model & Curator
-# Updated on: C180 (Focus log output on cycle management state)
+# Updated on: C2 (Focus log output on cycle management state)
 
 - **Key/Value for A0:**
 - **Description:** Documents the plan for a "Log State" button that outputs critical state information (cycle history, current inputs) to the debug channel to accelerate troubleshooting.
@@ -4285,7 +4285,7 @@ The goal of this feature is to add a **"Log State"** button to the PCPP's main h
 
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
-| P2-LOG-01 | **Log Current State for Debugging** | As a curator encountering a bug, I want to click a "Log State" button that outputs the current state of the entire PCPP to the debug logs, so I can easily copy and paste this information for you to reproduce the issue. | - A "Log State" button is present in the main header of the PCPP. <br> - Clicking the button generates a formatted message in the "Data Curation Environment" output channel. <br> - **(C180 Update)** The log output is now focused specifically on the state variables relevant to cycle management to diagnose the "stuck on new cycle" bug. It will include: <br> &nbsp;&nbsp;&nbsp; 1. A summary of the key frontend state variables (`currentCycle`, `maxCycle`, `isNewCycleButtonDisabled`). <br> &nbsp;&nbsp;&nbsp; 2. A truncated JSON dump of the entire `dce_history.json` file from the backend for comparison. |
+| P2-LOG-01 | **Log Current State for Debugging** | As a curator encountering a bug, I want to click a "Log State" button that outputs the current state of the entire PCPP to the debug logs, so I can easily copy and paste this information for you to reproduce the issue. | - A "Log State" button is present in the main header of the PCPP. <br> - Clicking the button generates a formatted message in the "Data Curation Environment" output channel. <br> - **(C2 Update)** The log output is now focused specifically on the state variables relevant to cycle management to diagnose the "stuck on new cycle" bug. It will include: <br> &nbsp;&nbsp;&nbsp; 1. A summary of the key frontend state variables (`currentCycle`, `maxCycle`, `isNewCycleButtonDisabled`). <br> &nbsp;&nbsp;&nbsp; 2. A truncated JSON dump of the entire `dce_history.json` file from the backend for comparison. |
 
 ## 3. Technical Implementation Plan
 
@@ -4299,7 +4299,7 @@ The goal of this feature is to add a **"Log State"** button to the PCPP's main h
 
 3.  **Backend Logic (`prompt.service.ts`):**
     *   A new public method, `public async generateStateLog(currentState: PcppCycle)`, will be created.
-    *   **Step 1: Generate Formatted State Dump (C180 Revision):**
+    *   **Step 1: Generate Formatted State Dump (C2 Revision):**
         *   It will fetch the full history from `history.service.ts`.
         *   It will construct a focused log string containing the most relevant frontend state variables for the current bug (`currentCycle`, `maxCycle`, `isNewCycleButtonDisabled`, `cycleTitle`, `cycleContext`, `selectedResponseId`).
         *   It will append a `JSON.stringify` of the full (but truncated) history file content.
@@ -6117,16 +6117,16 @@ This document serves as a living record of persistent or complex bugs that have 
 
 ---
 
-### Case Study 024: PCPP Context/Title Data Loss on Tab Switch
+### Case Study 024: PCPP Context/Title Data Loss on Tab Switch or Cycle Change
 
 -   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/backend/services/history.service.ts`
--   **Cycles Observed:** C185, C1
--   **Symptom:** Text entered into the "Cycle Context," "Ephemeral Context," or "Cycle Title" fields is lost when the user switches to a different cycle, switches to another VS Code tab and back, or creates a new cycle. The data is not persisted to `dce_history.json`, and sometimes data from a previous cycle "bleeds" into the next.
+-   **Cycles Observed:** C185, C1, C2
+-   **Symptom:** Text entered into the "Cycle Context," "Ephemeral Context," or "Cycle Title" fields is lost. This can also manifest as a newly created cycle disappearing entirely. The data loss occurs when the user performs an action that reloads the view's state from disk, such as switching to a different cycle, creating a new cycle, or switching to another VS Code tab and then returning. The data is not persisted to `dce_history.json` in time.
 -   **Root Cause Analysis (RCA):** This is a critical data loss bug caused by a race condition between the application's debounced save mechanism and its state loading logic. The application waits for a pause in user input before saving changes to disk (debouncing) to improve performance. However, when the user performs an action that causes the view to reload its state (like switching cycles or tabs), the state is reloaded from the `dce_history.json` file *before* the debounced save has had a chance to execute. This overwrites the user's recent, unsaved changes with the older, stale data from the file.
 -   **Codified Solution & Best Practice:**
     1.  **Trigger Save Before Navigation/State Change:** The event handler for any action that causes a state reload (e.g., `handleCycleChange`, `handleNewCycle`) **must** trigger an immediate, non-debounced save of the current component's state *before* dispatching the request to load the new state.
     2.  **Save on Visibility Change:** A `visibilitychange` event listener must be added to the document. When the webview panel is hidden, an immediate save must be triggered. This handles cases like switching VS Code tabs.
-    3.  **Correct State Scoping:** The `handleNewCycle` function must be refactored to create a completely new, default-state cycle object. It must not carry over any state from the previous cycle, which was the cause of the data "bleeding."
+    3.  **Correct State Scoping:** The `handleNewCycle` function must be refactored to create a completely new, default-state cycle object. It must not carry over any state from the previous cycle, which was the cause of data "bleeding."
     4.  **Implementation:** The `saveCurrentCycleState` function should be callable directly (non-debounced). The various event handlers must be modified to call this function at the appropriate time to eliminate the race condition entirely.
 
 ---
@@ -22659,7 +22659,7 @@ export class HighlightingService {
 
 <file path="src/backend/services/history.service.ts">
 // src/backend/services/history.service.ts
-// Updated on: C188 (Add missing pathOverrides property to default cycle)
+// Updated on: C2 (Fix TS errors, add saveLastViewedCycleId)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -22683,7 +22683,7 @@ export class HistoryService {
     constructor() {
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (workspaceFolders && workspaceFolders.length > 0) {
-            this.workspaceRoot = workspaceFolders.uri.fsPath;
+            this.workspaceRoot = workspaceFolders[0].uri.fsPath;
             this.historyFilePath = path.join(this.workspaceRoot, '.vscode', 'dce_history.json');
         } else {
             Services.loggerService.warn("HistoryService: No workspace folder found. History will not be saved.");
@@ -22920,7 +22920,7 @@ export class HistoryService {
                 filters: { 'JSON': ['json'] }
             });
             if (openUris && openUris.length > 0) {
-                const content = await fs.readFile(openUris.fsPath, 'utf-8');
+                const content = await fs.readFile(openUris[0].fsPath, 'utf-8');
                 const historyData = JSON.parse(content);
                 if (historyData.version && Array.isArray(historyData.cycles)) {
                     await this._writeHistoryFile(historyData);
@@ -22983,7 +22983,7 @@ export class LoggerService {
 </file>
 
 <file path="src/backend/services/prompt.service.ts">
-// Updated on: C187 (Fix array access and IPC channel name)
+// Updated on: C2 (Implement generateStateLog)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -23203,7 +23203,8 @@ ${staticContext.trim()}
             const fullHistory = await Services.historyService.getFullHistory();
             
             // Truncate response content before logging
-            fullHistory.cycles.forEach(cycle => {
+            const historyForLogging = JSON.parse(JSON.stringify(fullHistory));
+            historyForLogging.cycles.forEach((cycle: PcppCycle) => {
                 Object.keys(cycle.responses).forEach(respId => {
                     cycle.responses[respId].content = truncateCodeForLogging(cycle.responses[respId].content);
                 });
@@ -23222,7 +23223,7 @@ ${staticContext.trim()}
                         "hasSelectedResponse": !!currentState.selectedResponseId
                     }
                 },
-                "BACKEND_HISTORY_FILE": fullHistory
+                "BACKEND_HISTORY_FILE": historyForLogging
             };
 
             const logMessage = `
@@ -26006,7 +26007,7 @@ export default CodeViewer;
 
 <file path="src/client/views/parallel-copilot.view/components/ContextInputs.tsx">
 // src/client/views/parallel-copilot.view/components/ContextInputs.tsx
-// Updated on: C1 (Add onBlur handlers)
+// Updated on: C2 (Add onBlur handlers)
 import * as React from 'react';
 import { formatLargeNumber } from '@/common/utils/formatting';
 
@@ -27543,7 +27544,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C1 (Implement robust state saving and loading)
+// Updated on: C2 (Implement robust state saving and loading)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './view.scss';
@@ -27684,7 +27685,7 @@ const App = () => {
     React.useEffect(() => { console.log(`[PCPP WORKFLOW] Step changed to: ${workflowStep}`); }, [workflowStep]);
 
     const isReadyForNextCycle = React.useMemo(() => { const hasTitle = cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== ''; const hasContext = cycleContext.trim() !== ''; const hasSelectedResponse = selectedResponseId !== null; return hasTitle && hasContext && hasSelectedResponse; }, [cycleTitle, cycleContext, selectedResponseId]);
-    const newCycleButtonDisabledReason = React.useMemo(() => { const reasons = []; if (!cycleTitle || cycleTitle.trim() === 'New Cycle' || cycleTitle.trim() === '') reasons.push("- A cycle title is required."); if (!cycleContext || cycleContext.trim() === '') reasons.push("- Cycle context cannot be empty."); if (!selectedResponseId) reasons.push("- A response must be selected."); return reasons.join('\n'); }, [cycleTitle, cycleContext, selectedResponseId]);
+    const newCycleButtonDisabledReason = React.useMemo(() => { const reasons: string[] = []; if (!cycleTitle || cycleTitle.trim() === 'New Cycle' || cycleTitle.trim() === '') reasons.push("- A cycle title is required."); if (!cycleContext || cycleContext.trim() === '') reasons.push("- Cycle context cannot be empty."); if (!selectedResponseId) reasons.push("- A response must be selected."); return reasons.join('\n'); }, [cycleTitle, cycleContext, selectedResponseId]);
 
     React.useEffect(() => { if (workflowStep === null) return; if (workflowStep === 'readyForNewCycle') return; if (workflowStep === 'awaitingGeneratePrompt') { if (isReadyForNextCycle) setWorkflowStep('awaitingGeneratePrompt'); return; } if (workflowStep === 'awaitingCycleTitle') { if (cycleTitle.trim() && cycleTitle.trim() !== 'New Cycle') { setWorkflowStep('awaitingGeneratePrompt'); } return; } if (workflowStep === 'awaitingCycleContext') { if (cycleContext.trim()) { setWorkflowStep('awaitingCycleTitle'); } return; } if (workflowStep === 'awaitingAccept') { return; } if (workflowStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestGitStatus, {}); return; } if (workflowStep === 'awaitingFileSelect') { if (selectedFilesForReplacement.size > 0) { setWorkflowStep('awaitingAccept'); } return; } if (workflowStep === 'awaitingResponseSelect') { if (selectedResponseId) { setWorkflowStep('awaitingBaseline'); } return; } if (workflowStep === 'awaitingSort') { if (isSortedByTokens) { setWorkflowStep('awaitingResponseSelect'); } return; } if (workflowStep === 'awaitingParse') { if (isParsedMode) { setWorkflowStep(isSortedByTokens ? 'awaitingResponseSelect' : 'awaitingSort'); } return; } const waitingForPaste = workflowStep?.startsWith('awaitingResponsePaste'); if (waitingForPaste) { for (let i = 1; i <= tabCount; i++) { if (!tabs[i.toString()]?.rawContent?.trim()) { setWorkflowStep(`awaitingResponsePaste_${i}`); return; } } setWorkflowStep('awaitingParse'); } }, [workflowStep, selectedFilesForReplacement, selectedResponseId, isSortedByTokens, isParsedMode, tabs, cycleContext, cycleTitle, tabCount, isReadyForNextCycle, clientIpc]);
     React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string, newMax?: number) => { console.log(`[PCPP View] Loading cycle data for cycle ${cycleData.cycleId}`); setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); if (newMax) setMaxCycle(newMax); }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, ({ filePath, originalTokens, modifiedTokens, similarity }) => { setComparisonMetrics(prev => new Map(prev).set(filePath, { originalTokens, modifiedTokens, similarity })); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { console.log(`[PCPP VIEW] Received NotifyGitOperationResult: ${JSON.stringify(result)}`); if (result.success) { setWorkflowStep(prevStep => { console.log(`[PCPP WORKFLOW] Functional update. Prev step: ${prevStep}.`); if (prevStep === 'awaitingBaseline') { console.log(`[PCPP WORKFLOW] Advancing from 'awaitingBaseline' to 'awaitingFileSelect'.`); clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } else { console.error(`[PCPP VIEW] Git operation failed: ${result.message}`); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }, [clientIpc]);
@@ -27708,7 +27709,7 @@ const App = () => {
     
     const handleSortToggle = () => { if (workflowStep === 'awaitingSort') { setIsSortedByTokens(true); } else { setIsSortedByTokens(p => !p); } };
     const handleGlobalParseToggle = () => { const newParseMode = !isParsedMode; setIsParsedMode(newParseMode); setSelectedFilePath(null); if (!newParseMode) setTabs(prev => { const newTabs = {...prev}; Object.keys(newTabs).forEach(key => { newTabs[key].parsedContent = null; }); return newTabs; }); };
-    const handleNewCycle = (e: React.MouseEvent) => { e.stopPropagation(); saveCurrentCycleState(true); const newCycleId = maxCycle + 1; setMaxCycle(newCycleId); setCurrentCycle(newCycleId); setCycleTitle('New Cycle'); setCycleContext(''); setEphemeralContext(''); setTabs({}); setIsParsedMode(false); setSelectedResponseId(null); setSelectedFilesForReplacement(new Set()); setWorkflowStep('awaitingResponsePaste_1'); };
+    const handleNewCycle = (e: React.MouseEvent) => { e.stopPropagation(); saveCurrentCycleState(true); const newCycleId = maxCycle + 1; const newTabs: { [key: string]: TabState } = {}; for (let i = 1; i <= tabCount; i++) { newTabs[i.toString()] = { rawContent: '', parsedContent: null }; } setMaxCycle(newCycleId); setCurrentCycle(newCycleId); setCycleTitle('New Cycle'); setCycleContext(''); setEphemeralContext(''); setTabs(newTabs); setIsParsedMode(false); setSelectedResponseId(null); setSelectedFilesForReplacement(new Set()); setWorkflowStep('awaitingResponsePaste_1'); };
     const handleGeneratePrompt = () => { if (currentCycle === null) return; clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle }); setWorkflowStep('readyForNewCycle'); }
     const handleDeleteCycle = () => { if(currentCycle !== null) clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle }); };
     const handleResetHistory = () => { clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {}); };
@@ -27735,7 +27736,7 @@ const App = () => {
         <div className="pc-header"><div className="pc-toolbar"><button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button><button onClick={handleGeneratePrompt} title="Generate prompt.md" className={workflowStep === 'awaitingGeneratePrompt' ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button><button onClick={handleLogState} title="Log Current State"><VscBug/></button><button onClick={handleGlobalParseToggle} className={`${isParsedMode ? 'active' : ''} ${workflowStep === 'awaitingParse' ? 'workflow-highlight' : ''}`}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} /></div></div>
         <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''} extraHeaderContent={totalPromptCostDisplay}>
             <CycleNavigator currentCycle={currentCycle} maxCycle={maxCycle} cycleTitle={cycleTitle} isNewCycleButtonDisabled={isNewCycleButtonDisabled} onCycleChange={handleCycleChange} onNewCycle={handleNewCycle} onTitleChange={(title) => { setCycleTitle(title); }} onDeleteCycle={handleDeleteCycle} onResetHistory={handleResetHistory} onExportHistory={handleExportHistory} onImportHistory={handleImportHistory} onGitBaseline={handleGitBaseline} onGitRestore={handleGitRestore} workflowStep={workflowStep} disabledReason={newCycleButtonDisabledReason} />
-            <ContextInputs cycleContext={cycleContext} ephemeralContext={ephemeralContext} cycleContextTokens={cycleContextTokens} ephemeralContextTokens={ephemeralContextTokens} onCycleContextChange={onCycleContextChange} onEphemeralContextChange={onEphemeralContextChange} workflowStep={workflowStep} />
+            <ContextInputs cycleContext={cycleContext} ephemeralContext={ephemeralContext} cycleContextTokens={cycleContextTokens} ephemeralContextTokens={ephemeralContextTokens} onCycleContextChange={onCycleContextChange} onEphemeralContextChange={onEphemeralContextChange} onBlur={() => saveCurrentCycleState(true)} workflowStep={workflowStep} />
         </CollapsibleSection>
         <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} onSortToggle={handleSortToggle} workflowStep={workflowStep} />
         <div className="tab-content">
@@ -28671,7 +28672,7 @@ module.exports = [extensionConfig, webviewConfig];
     "publisher": "DCE-Developer",
     "displayName": "Data Curation Environment",
     "description": "A VS Code extension for curating context for Large Language Models.",
-    "version": "0.0.10",
+    "version": "0.0.11",
     "repository": {
         "type": "git",
         "url": "https://github.com/dgerabagi/data-curation-environment.git"
