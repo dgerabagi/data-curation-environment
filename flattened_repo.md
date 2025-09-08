@@ -1,18 +1,18 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-08T20:13:09.437Z
+  Date Generated: 2025-09-08T20:59:21.642Z
   ---
   Total Files: 168
-  Approx. Tokens: 465830
+  Approx. Tokens: 465888
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (254831 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (7764 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (7754 tokens)
 4. src\Artifacts\A0. DCE Master Artifact List.md (7388 tokens)
-5. src\backend\services\prompt.service.ts (5039 tokens)
+5. src\backend\services\prompt.service.ts (5136 tokens)
 6. src\client\views\parallel-copilot.view\view.scss (4485 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4429 tokens)
 8. src\backend\services\file-operation.service.ts (4095 tokens)
@@ -79,7 +79,7 @@
 57. src\Artifacts\A55. DCE - FSService Refactoring Plan.md - Lines: 77 - Chars: 4022 - Tokens: 1006
 58. src\Artifacts\A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md - Lines: 47 - Chars: 5687 - Tokens: 1422
 59. src\Artifacts\A57. DCE - Phase 2 - Cycle Management Plan.md - Lines: 44 - Chars: 3625 - Tokens: 907
-60. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 40 - Chars: 3674 - Tokens: 919
+60. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 40 - Chars: 3713 - Tokens: 929
 61. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 35 - Chars: 4177 - Tokens: 1045
 62. src\Artifacts\A61. DCE - Phase 2 - Cycle History Management Plan.md - Lines: 45 - Chars: 3559 - Tokens: 890
 63. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1806 - Tokens: 452
@@ -95,24 +95,24 @@
 73. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
 74. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
 75. src\Artifacts\README.md - Lines: 33 - Chars: 2764 - Tokens: 691
-76. src\Artifacts\T1. Template - Master Artifact List.md - Lines: 36 - Chars: 1716 - Tokens: 429
-77. src\Artifacts\T2. Template - Project Vision and Goals.md - Lines: 38 - Chars: 1968 - Tokens: 492
-78. src\Artifacts\T3. Template - Phase 1 Requirements & Design.md - Lines: 37 - Chars: 1876 - Tokens: 469
-79. src\Artifacts\T4. Template - Technical Scaffolding Plan.md - Lines: 54 - Chars: 2180 - Tokens: 545
-80. src\Artifacts\T5. Template - Target File Structure.md - Lines: 35 - Chars: 1054 - Tokens: 264
-81. src\Artifacts\T6. Template - Initial Scaffolding Deployment Script.md - Lines: 63 - Chars: 2593 - Tokens: 649
-82. src\Artifacts\T7. Template - Development and Testing Guide.md - Lines: 48 - Chars: 1738 - Tokens: 435
-83. src\Artifacts\T8. Template - Regression Case Studies.md - Lines: 31 - Chars: 1971 - Tokens: 493
-84. src\Artifacts\T9. Template - Logging and Debugging Guide.md - Lines: 49 - Chars: 2590 - Tokens: 648
-85. src\Artifacts\T10. Template - Feature Plan Example.md - Lines: 32 - Chars: 2692 - Tokens: 673
-86. src\Artifacts\T11. Template - Implementation Roadmap.md - Lines: 55 - Chars: 2887 - Tokens: 722
-87. src\Artifacts\T12. Template - Competitive Analysis.md - Lines: 42 - Chars: 3227 - Tokens: 807
-88. src\Artifacts\T13. Template - Refactoring Plan.md - Lines: 55 - Chars: 2617 - Tokens: 655
-89. src\Artifacts\T14. Template - GitHub Repository Setup Guide.md - Lines: 110 - Chars: 4902 - Tokens: 1226
-90. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 41 - Chars: 3000 - Tokens: 750
-91. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 97 - Chars: 4047 - Tokens: 1012
+76. src\Artifacts\T1. Template - Master Artifact List.md - Lines: 36 - Chars: 1725 - Tokens: 432
+77. src\Artifacts\T2. Template - Project Vision and Goals.md - Lines: 38 - Chars: 1977 - Tokens: 495
+78. src\Artifacts\T3. Template - Phase 1 Requirements & Design.md - Lines: 37 - Chars: 1885 - Tokens: 472
+79. src\Artifacts\T4. Template - Technical Scaffolding Plan.md - Lines: 54 - Chars: 2189 - Tokens: 548
+80. src\Artifacts\T5. Template - Target File Structure.md - Lines: 35 - Chars: 1063 - Tokens: 266
+81. src\Artifacts\T6. Template - Initial Scaffolding Deployment Script.md - Lines: 63 - Chars: 2602 - Tokens: 651
+82. src\Artifacts\T7. Template - Development and Testing Guide.md - Lines: 48 - Chars: 1747 - Tokens: 437
+83. src\Artifacts\T8. Template - Regression Case Studies.md - Lines: 31 - Chars: 1980 - Tokens: 495
+84. src\Artifacts\T9. Template - Logging and Debugging Guide.md - Lines: 49 - Chars: 2599 - Tokens: 650
+85. src\Artifacts\T10. Template - Feature Plan Example.md - Lines: 32 - Chars: 2701 - Tokens: 676
+86. src\Artifacts\T11. Template - Implementation Roadmap.md - Lines: 55 - Chars: 2896 - Tokens: 724
+87. src\Artifacts\T12. Template - Competitive Analysis.md - Lines: 42 - Chars: 3236 - Tokens: 809
+88. src\Artifacts\T13. Template - Refactoring Plan.md - Lines: 55 - Chars: 2626 - Tokens: 657
+89. src\Artifacts\T14. Template - GitHub Repository Setup Guide.md - Lines: 110 - Chars: 4911 - Tokens: 1228
+90. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 41 - Chars: 3009 - Tokens: 753
+91. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 97 - Chars: 4056 - Tokens: 1014
 92. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 45 - Chars: 2899 - Tokens: 725
-93. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 42 - Chars: 5762 - Tokens: 1441
+93. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 42 - Chars: 5562 - Tokens: 1391
 94. src\Artifacts\A42. DCE - Phase 2 - Initial Scaffolding Deployment Script.md - Lines: 246 - Chars: 8264 - Tokens: 2066
 95. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 35 - Chars: 9444 - Tokens: 2361
 96. src\Artifacts\A58. DCE - WinMerge Source Code Analysis.md - Lines: 56 - Chars: 5322 - Tokens: 1331
@@ -133,7 +133,7 @@
 111. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
 112. src\backend\services\history.service.ts - Lines: 283 - Chars: 12119 - Tokens: 3030
 113. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
-114. src\backend\services\prompt.service.ts - Lines: 387 - Chars: 20155 - Tokens: 5039
+114. src\backend\services\prompt.service.ts - Lines: 387 - Chars: 20541 - Tokens: 5136
 115. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 116. src\backend\services\services.ts - Lines: 40 - Chars: 1827 - Tokens: 457
 117. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
@@ -153,7 +153,7 @@
 131. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
 132. src\client\views\context-chooser.view\view.tsx - Lines: 150 - Chars: 16076 - Tokens: 4019
 133. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
-134. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 59 - Chars: 2078 - Tokens: 520
+134. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 55 - Chars: 1970 - Tokens: 493
 135. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 92 - Chars: 3656 - Tokens: 914
 136. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
 137. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 95 - Chars: 7630 - Tokens: 1908
@@ -164,7 +164,7 @@
 142. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 92 - Chars: 4340 - Tokens: 1085
 143. src\client\views\parallel-copilot.view\view.scss - Lines: 796 - Chars: 17937 - Tokens: 4485
 144. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-145. src\client\views\parallel-copilot.view\view.tsx - Lines: 246 - Chars: 31056 - Tokens: 7764
+145. src\client\views\parallel-copilot.view\view.tsx - Lines: 246 - Chars: 31013 - Tokens: 7754
 146. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
 147. src\common\ipc\channels.enum.ts - Lines: 91 - Chars: 4919 - Tokens: 1230
 148. src\common\ipc\channels.type.ts - Lines: 92 - Chars: 6998 - Tokens: 1750
@@ -5175,7 +5175,7 @@ This structured, iterative process helps maintain project quality and ensures th
 <!-- 
   IMPORTANT AI INSTRUCTION:
   When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A0-Master-Artifact-List.md"></file> tags.
+  in <file path="src/Artifacts/[ProjectName]-A0-Master-Artifact-List.md"></file_artifact> tags.
 -->
 # Artifact T1: Template - Master Artifact List
 # Date Created: C139
@@ -5214,7 +5214,7 @@ This file serves as the definitive, parseable list of all documentation artifact
 <!-- 
   IMPORTANT AI INSTRUCTION:
   When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A1-Project-Vision-and-Goals.md"></file> tags.
+  in <file path="src/Artifacts/[ProjectName]-A1-Project-Vision-and-Goals.md"></file_artifact> tags.
 -->
 # Artifact T2: Template - Project Vision and Goals
 # Date Created: C139
@@ -5255,7 +5255,7 @@ This phase focuses on refining the product, improving performance, and ensuring 
 <!-- 
   IMPORTANT AI INSTRUCTION:
   When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A2-Phase1-Requirements.md"></file> tags.
+  in <file path="src/Artifacts/[ProjectName]-A2-Phase1-Requirements.md"></file_artifact> tags.
 -->
 # Artifact T3: Template - Phase 1 Requirements & Design
 # Date Created: C139
@@ -5295,7 +5295,7 @@ The implementation of Phase 1 will involve the following components:
 <!-- 
   IMPORTANT AI INSTRUCTION:
   When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A3-Technical-Scaffolding-Plan.md"></file> tags.
+  in <file path="src/Artifacts/[ProjectName]-A3-Technical-Scaffolding-Plan.md"></file_artifact> tags.
 -->
 # Artifact T4: Template - Technical Scaffolding Plan
 # Date Created: C139
@@ -5352,7 +5352,7 @@ The project will adhere to a standard, feature-driven directory structure:
 <!-- 
   IMPORTANT AI INSTRUCTION:
   When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A5-Target-File-Structure.md"></file> tags.
+  in <file path="src/Artifacts/[ProjectName]-A5-Target-File-Structure.md"></file_artifact> tags.
 -->
 # Artifact T5: Template - Target File Structure
 # Date Created: C139
@@ -5390,7 +5390,7 @@ This document provides a visual representation of the file structure that the `T
 <!-- 
   IMPORTANT AI INSTRUCTION:
   When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A6-Scaffolding-Script.md"></file> tags.
+  in <file path="src/Artifacts/[ProjectName]-A6-Scaffolding-Script.md"></file_artifact> tags.
 -->
 # Artifact T6: Template - Initial Scaffolding Deployment Script (DEPRECATED)
 # Date Created: C139
@@ -5456,7 +5456,7 @@ deployScaffold();
 <!-- 
   IMPORTANT AI INSTRUCTION:
   When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A7-Dev-and-Testing-Guide.md"></file> tags.
+  in <file path="src/Artifacts/[ProjectName]-A7-Dev-and-Testing-Guide.md"></file_artifact> tags.
 -->
 # Artifact T7: Template - Development and Testing Guide
 # Date Created: C139
@@ -5507,7 +5507,7 @@ This will execute all test files located in the project and report the results t
 <!-- 
   IMPORTANT AI INSTRUCTION:
   When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A8-Regression-Case-Studies.md"></file> tags.
+  in <file path="src/Artifacts/[ProjectName]-A8-Regression-Case-Studies.md"></file_artifact> tags.
 -->
 # Artifact T8: Template - Regression Case Studies
 # Date Created: C141
@@ -5541,7 +5541,7 @@ This document serves as a living record of persistent or complex bugs that have 
 <!-- 
   IMPORTANT AI INSTRUCTION:
   When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A9-Logging-and-Debugging.md"></file> tags.
+  in <file path="src/Artifacts/[ProjectName]-A9-Logging-and-Debugging.md"></file_artifact> tags.
 -->
 # Artifact T9: Template - Logging and Debugging Guide
 # Date Created: C141
@@ -5593,7 +5593,7 @@ By following the logs through this chain, you can identify exactly where the dat
 <!-- 
   IMPORTANT AI INSTRUCTION:
   When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A10-Feature-Plan-Example.md"></file> tags.
+  in <file path="src/Artifacts/[ProjectName]-A10-Feature-Plan-Example.md"></file_artifact> tags.
 -->
 # Artifact T10: Template - Feature Plan Example
 # Date Created: C141
@@ -5628,7 +5628,7 @@ This document outlines the plan for implementing a standard right-click context 
 <!-- 
   IMPORTANT AI INSTRUCTION:
   When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A11-Implementation-Roadmap.md"></file> tags.
+  in <file path="src/Artifacts/[ProjectName]-A11-Implementation-Roadmap.md"></file_artifact> tags.
 -->
 # Artifact T11: Template - Implementation Roadmap
 # Date Created: C152
@@ -5686,7 +5686,7 @@ This document provides a clear, step-by-step roadmap for the implementation of *
 <!-- 
   IMPORTANT AI INSTRUCTION:
   When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/A12. [Project Name] - Competitive Analysis.md">...</file> tags.
+  in <file path="src/Artifacts/A12. [Project Name] - Competitive Analysis.md">...</file_artifact> tags.
 -->
 # Artifact T12: [Project Name] - Competitive Analysis Template
 # Date Created: C152
@@ -5731,7 +5731,7 @@ Based on the analysis, here are potential features and strategic opportunities f
 <!-- 
   IMPORTANT AI INSTRUCTION:
   When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A13-Refactoring-Plan.md"></file> tags.
+  in <file path="src/Artifacts/[ProjectName]-A13-Refactoring-Plan.md"></file_artifact> tags.
 -->
 # Artifact T13: Template - Refactoring Plan
 # Date Created: C152
@@ -5789,7 +5789,7 @@ The monolithic file/class will be broken down into the following smaller, more f
 <!-- 
   IMPORTANT AI INSTRUCTION:
   When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/A14. [Project Name] - GitHub Repository Setup Guide.md">...</file> tags.
+  in <file path="src/Artifacts/A14. [Project Name] - GitHub Repository Setup Guide.md">...</file_artifact> tags.
 -->
 # Artifact T14: [Project Name] - GitHub Repository Setup Guide Template
 # Date Created: C152
@@ -5902,7 +5902,7 @@ This iterative loop of `accept -> test -> restore` allows you to rapidly auditio
 <!-- 
   IMPORTANT AI INSTRUCTION:
   When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A15-ABC-Testing-Strategy.md"></file> tags.
+  in <file path="src/Artifacts/[ProjectName]-A15-ABC-Testing-Strategy.md"></file_artifact> tags.
 -->
 # Artifact T15: Template - A-B-C Testing Strategy for UI Bugs
 # Date Created: C154
@@ -5946,7 +5946,7 @@ Once a working pattern is identified in a test component:
 <!-- 
   IMPORTANT AI INSTRUCTION:
   When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/A16. [Project Name] - Developer Environment Setup Guide.md">...</file> tags.
+  in <file path="src/Artifacts/A16. [Project Name] - Developer Environment Setup Guide.md">...</file_artifact> tags.
 -->
 # Artifact T16: [Project Name] - Developer Environment Setup Guide Template
 # Date Created: C158
@@ -6118,16 +6118,16 @@ This document serves as a living record of persistent or complex bugs that have 
 
 ---
 
-### Case Study 024: PCPP Context/Title Data Loss on Tab Switch or Cycle Change
+### Case Study 024: PCPP Context/Title Data Loss or Corruption on Navigation
 
 -   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/backend/services/history.service.ts`
--   **Cycles Observed:** C185, C189, C190, C1
--   **Symptom:** Text entered into the "Cycle Context," "Ephemeral Context," or "Cycle Title" fields is lost. This can also manifest as a newly created cycle disappearing entirely from the UI after navigating away and back, or an imported cycle history failing to display correctly. The data loss occurs when the user performs an action that reloads the view's state from disk, such as creating a new cycle, switching to a different cycle, or importing a history file. The data is not persisted to `dce_history.json` in time, or the wrong cycle is loaded on re-initialization.
--   **Root Cause Analysis (RCA):** This is a critical data loss bug caused by two related race conditions:
-    1.  **Debounced Save vs. State Load:** The application waits for a pause in user input before saving changes to disk (debouncing). When the user switches cycles, the state is reloaded from `dce_history.json` *before* the debounced save has executed, overwriting recent changes with stale data from the file.
-    2.  **Stale `lastViewedCycleId`:** The application persists the ID of the last cycle the user was viewing. However, this ID was only being updated by a fallback `visibilitychange` event handler. When a user created a new cycle, navigated to an existing one, or imported a new history, this ID was not updated immediately. Upon panel re-initialization (e.g., tabbing away and back), the panel would request the initial data, and the backend would serve the data for the *old, stale* `lastViewedCycleId`, causing the UI to revert to a previous cycle and making the new cycle's content inaccessible.
+-   **Cycles Observed:** C185, C189, C190, C2
+-   **Symptom:** Text entered into the "Cycle Context," "Ephemeral Context," or "Cycle Title" fields is lost or, more critically, data from one cycle is saved over another. This occurs when the user performs an action that reloads the view's state from disk, such as creating a new cycle, switching to a different cycle, or importing a history file. The data is not persisted to `dce_history.json` in time, or the wrong cycle's data is saved, corrupting the history.
+-   **Root Cause Analysis (RCA):** This is a critical data integrity bug caused by two related race conditions:
+    1.  **Debounced Save vs. State Load:** The application waits for a pause in user input before saving changes to disk (debouncing). When the user navigates to a new cycle, the state is reloaded from `dce_history.json` *before* the debounced save has executed. This causes the UI's current state (with the old cycle's data) to be saved over the newly loaded cycle's data, corrupting the history file.
+    2.  **Stale `lastViewedCycleId`:** The application persists the ID of the last cycle the user was viewing. However, this ID was not being updated immediately upon navigation. When the panel re-initialized (e.g., tabbing away and back), the backend would serve the data for the *old, stale* `lastViewedCycleId`, causing the UI to revert to a previous cycle and making the new cycle's content inaccessible.
 -   **Codified Solution & Best Practice:**
-    1.  **Trigger Save Before Navigation:** The event handler for any action that causes a state reload (e.g., `handleCycleChange`) **must** trigger an immediate, non-debounced save of the current component's state *before* dispatching the request to load the new state.
+    1.  **Save Before Navigate:** The event handler for any action that causes a state reload (e.g., `handleCycleChange`, `handleNewCycle`) **must** trigger an immediate, non-debounced save of the current component's state *before* dispatching the request to load the new state.
     2.  **Synchronize `lastViewedCycleId`:** The event handlers for creating a new cycle (`handleNewCycle`) and changing the current cycle (`handleCycleChange`) **must** send an immediate, synchronous IPC message (`SaveLastViewedCycle`) to the backend. The handler for importing history must clear this value. This ensures the backend's record of the last viewed cycle is never stale.
     3.  **Self-Healing Initial Load:** The backend's `getInitialCycle` logic must be self-healing. If a `lastViewedCycleId` is found, it must first verify that a cycle with that ID actually exists in the history file. If it doesn't, the service must ignore the stale ID and fall back to loading the cycle with the highest ID number, ensuring the user always sees valid, accessible data.
     4.  **Save on New Cycle Creation:** The `handleNewCycle` function must perform two synchronous saves: first, it saves the state of the cycle being departed. Second, after setting the state for the new, empty cycle, it must immediately construct the new cycle object and save it to disk. This ensures the new cycle is persisted before any other user action can occur.
@@ -26023,7 +26023,6 @@ interface ContextInputsProps {
     ephemeralContextTokens: number;
     onCycleContextChange: (value: string) => void;
     onEphemeralContextChange: (value: string) => void;
-    onBlur: () => void;
     workflowStep: string | null;
 }
 
@@ -26034,7 +26033,6 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
     ephemeralContextTokens,
     onCycleContextChange,
     onEphemeralContextChange,
-    onBlur,
     workflowStep
 }) => {
     return (
@@ -26048,7 +26046,6 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
                     className="response-textarea"
                     value={cycleContext}
                     onChange={(e) => onCycleContextChange(e.target.value)}
-                    onBlur={onBlur}
                     spellCheck={false}
                 />
             </div>
@@ -26061,7 +26058,6 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
                     className="response-textarea"
                     value={ephemeralContext}
                     onChange={(e) => onEphemeralContextChange(e.target.value)}
-                    onBlur={onBlur}
                     spellCheck={false}
                 />
             </div>
@@ -27783,7 +27779,7 @@ const App = () => {
         <div className="pc-header"><div className="pc-toolbar"><button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button><button onClick={handleGeneratePrompt} title="Generate prompt.md" className={workflowStep === 'awaitingGeneratePrompt' ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button><button onClick={handleLogState} title="Log Current State"><VscBug/></button><button onClick={handleGlobalParseToggle} className={`${isParsedMode ? 'active' : ''} ${workflowStep === 'awaitingParse' ? 'workflow-highlight' : ''}`}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => setTabCount(parseInt(e.target.value, 10) || 1)} /></div></div>
         <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''} extraHeaderContent={totalPromptCostDisplay}>
             <CycleNavigator currentCycle={currentCycle} maxCycle={maxCycle} cycleTitle={cycleTitle} isNewCycleButtonDisabled={isNewCycleButtonDisabled} onCycleChange={handleCycleChange} onNewCycle={handleNewCycle} onTitleChange={(title) => { setCycleTitle(title); }} onDeleteCycle={handleDeleteCycle} onResetHistory={handleResetHistory} onExportHistory={handleExportHistory} onImportHistory={handleImportHistory} onGitBaseline={handleGitBaseline} onGitRestore={handleGitRestore} workflowStep={workflowStep} disabledReason={newCycleButtonDisabledReason} />
-            <ContextInputs cycleContext={cycleContext} ephemeralContext={ephemeralContext} cycleContextTokens={cycleContextTokens} ephemeralContextTokens={ephemeralContextTokens} onCycleContextChange={onCycleContextChange} onEphemeralContextChange={onEphemeralContextChange} onBlur={() => saveCurrentCycleState(true)} workflowStep={workflowStep} />
+            <ContextInputs cycleContext={cycleContext} ephemeralContext={ephemeralContext} cycleContextTokens={cycleContextTokens} ephemeralContextTokens={ephemeralContextTokens} onCycleContextChange={onCycleContextChange} onEphemeralContextChange={onEphemeralContextChange} workflowStep={workflowStep} />
         </CollapsibleSection>
         <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} onSortToggle={handleSortToggle} workflowStep={workflowStep} />
         <div className="tab-content">
