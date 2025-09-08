@@ -1,10 +1,10 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-08T01:24:35.004Z
+  Date Generated: 2025-09-08T02:51:36.373Z
   ---
   Total Files: 168
-  Approx. Tokens: 465508
+  Approx. Tokens: 465515
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -127,8 +127,8 @@
 105. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
 106. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
 107. src\backend\services\file-operation.service.ts - Lines: 344 - Chars: 16380 - Tokens: 4095
-108. src\backend\services\file-tree.service.ts - Lines: 245 - Chars: 13096 - Tokens: 3274
-109. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12607 - Tokens: 3152
+108. src\backend\services\file-tree.service.ts - Lines: 245 - Chars: 13117 - Tokens: 3280
+109. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12609 - Tokens: 3153
 110. src\backend\services\git.service.ts - Lines: 114 - Chars: 5522 - Tokens: 1381
 111. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
 112. src\backend\services\history.service.ts - Lines: 281 - Chars: 11973 - Tokens: 2994
@@ -21962,7 +21962,7 @@ export class FileOperationService {
 </file_artifact>
 
 <file path="src/backend/services/file-tree.service.ts">
-// Updated on: C189 (Add .git and venv to non-selectable patterns)
+// Updated on: C190 (Add .venv to non-selectable patterns)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -21979,7 +21979,7 @@ const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
 const EXCLUSION_PATTERNS = ['.git', 'dce_cache', 'out', '.vscode', 'dist']; 
-const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/.git/', '/venv/', '/flattened_repo.md', '/prompt.md', '/package-lock.json'];
+const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/.git/', '/venv/', '/.venv/', '/flattened_repo.md', '/prompt.md', '/package-lock.json'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
@@ -22173,7 +22173,7 @@ export class FileTreeService {
                 const childPath = normalizePath(childUri.fsPath);
                 const isSelectable = this._isSelectable(childPath, type);
                 if (type === vscode.FileType.Directory) {
-                    const isSpecialDir = ['node_modules', '.git', 'venv'].includes(name.toLowerCase());
+                    const isSpecialDir = ['node_modules', '.git', 'venv', '.venv'].includes(name.toLowerCase());
                     const dirNode: FileNode = { name, absolutePath: childPath, children: isSpecialDir ? [] : await this._traverseDirectory(childUri), tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false, isSelectable };
                     this._aggregateStats(dirNode);
                     children.push(dirNode);
@@ -22190,7 +22190,7 @@ export class FileTreeService {
 
     private _aggregateStats(node: FileNode): void {
         if (!node.children) return;
-        if (['node_modules', '.git', 'venv'].includes(node.name.toLowerCase())) {
+        if (['node_modules', '.git', 'venv', '.venv'].includes(node.name.toLowerCase())) {
             node.tokenCount = 0;
             node.fileCount = 0;
             node.sizeInBytes = 0;
@@ -22210,7 +22210,7 @@ export class FileTreeService {
 </file_artifact>
 
 <file path="src/backend/services/flattener.service.ts">
-// Updated on: C189 (Add .git and venv to non-selectable patterns)
+// Updated on: C190 (Add .venv to non-selectable patterns)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -22234,7 +22234,7 @@ interface FileStats {
 const BINARY_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico', '.exe', '.dll', '.bin', '.zip', '.gz', '.7z', '.mp3', '.wav', '.mov', '.mp4']);
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
-const NON_SELECTABLE_PATTERNS = ['/node_modules', '/.vscode', '/.git', '/venv', 'flattened_repo.md', 'prompt.md', 'package-lock.json'];
+const NON_SELECTABLE_PATTERNS = ['/node_modules', '/.vscode', '/.git', '/venv', '/.venv', 'flattened_repo.md', 'prompt.md', 'package-lock.json'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
