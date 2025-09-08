@@ -1,4 +1,4 @@
-// Updated on: C4 (Add SaveLastViewedCycle channel)
+// Updated on: C5 (Add NotifySaveComplete channel)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -88,4 +88,5 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SendPromptCostEstimation ? { totalTokens: number; estimatedCost: number; breakdown: { [key: string]: number } } :
     T extends ServerToClientChannel.NotifyGitOperationResult ? { success: boolean; message: string; } :
     T extends ServerToClientChannel.SendGitStatus ? { isClean: boolean } :
+    T extends ServerToClientChannel.NotifySaveComplete ? { cycleId: number } :
     never;

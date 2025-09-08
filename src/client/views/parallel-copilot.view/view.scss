@@ -1,5 +1,5 @@
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C187 (Add margin for animation highlight)
+// Updated on: C5 (Add styles for save status indicator)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -32,6 +32,29 @@
 
 .context-input-wrapper.workflow-highlight {
     border-radius: 4px;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.save-status-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+
+    .saving {
+        animation: spin 1.5s linear infinite;
+    }
+    .unsaved {
+        color: var(--vscode-testing-iconQueued); // yellow
+    }
+    .saved {
+        color: var(--vscode-testing-iconPassed); // green
+    }
 }
 
 
@@ -315,6 +338,10 @@ body {
     border: 1px solid var(--vscode-input-border);
     text-align: center;
     border-radius: 2px;
+
+    &:disabled {
+        opacity: 0.7;
+    }
 }
 
 .cycle-title-input {

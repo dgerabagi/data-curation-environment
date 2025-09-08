@@ -1,5 +1,5 @@
 // src/backend/services/history.service.ts
-// Updated on: C4 (Fix data loss bugs with saveLastViewedCycleId and robust getInitialCycle)
+// Updated on: C5 (Send NotifySaveComplete message after writing file)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -160,6 +160,11 @@ export class HistoryService {
         history.cycles.sort((a, b) => a.cycleId - b.cycleId);
 
         await this._writeHistoryFile(history);
+
+        const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
+        if (serverIpc) {
+            serverIpc.sendToClient(ServerToClientChannel.NotifySaveComplete, { cycleId: cycleData.cycleId });
+        }
     }
 
     public async deleteCycle(cycleId: number): Promise<number> {

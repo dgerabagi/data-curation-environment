@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/CycleNavigator.tsx
-// Updated on: C1 (Add tooltip to disabled new cycle button)
+// Updated on: C5 (Disable buttons based on saveStatus)
 import * as React from 'react';
 import { VscChevronLeft, VscChevronRight, VscAdd, VscTrash, VscSync, VscCloudUpload, VscCloudDownload, VscSourceControl, VscDiscard } from 'react-icons/vsc';
 
@@ -19,6 +19,7 @@ interface CycleNavigatorProps {
     onGitRestore: () => void;
     workflowStep: string | null;
     disabledReason: string;
+    saveStatus: 'saved' | 'saving' | 'unsaved';
 }
 
 const CycleNavigator: React.FC<CycleNavigatorProps> = ({
@@ -36,12 +37,15 @@ const CycleNavigator: React.FC<CycleNavigatorProps> = ({
     onGitBaseline,
     onGitRestore,
     workflowStep,
-    disabledReason
+    disabledReason,
+    saveStatus
 }) => {
+    const isNavDisabled = saveStatus !== 'saved';
+
     return (
         <div className="cycle-navigator">
             <span>Cycle:</span>
-            <button onClick={(e) => onCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0}>
+            <button onClick={(e) => onCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0 || isNavDisabled} title={isNavDisabled ? "Unsaved changes..." : "Previous Cycle"}>
                 <VscChevronLeft />
             </button>
             <input 
@@ -49,18 +53,19 @@ const CycleNavigator: React.FC<CycleNavigatorProps> = ({
                 value={currentCycle} 
                 onChange={e => onCycleChange(null, parseInt(e.target.value, 10) || 0)} 
                 className="cycle-input" 
+                disabled={isNavDisabled}
             />
             <button 
                 onClick={(e) => onCycleChange(e, currentCycle + 1)} 
-                disabled={currentCycle >= maxCycle}
-                title={currentCycle >= maxCycle ? "You are on the latest cycle" : "Next Cycle"}
+                disabled={currentCycle >= maxCycle || isNavDisabled}
+                title={currentCycle >= maxCycle ? "You are on the latest cycle" : isNavDisabled ? "Unsaved changes..." : "Next Cycle"}
             >
                 <VscChevronRight />
             </button>
             <button 
                 onClick={onNewCycle} 
-                title={isNewCycleButtonDisabled ? `Cannot start new cycle:\n${disabledReason}` : "New Cycle"}
-                disabled={isNewCycleButtonDisabled}
+                title={isNewCycleButtonDisabled ? `Cannot start new cycle:\n${disabledReason}` : isNavDisabled ? "Unsaved changes..." : "New Cycle"}
+                disabled={isNewCycleButtonDisabled || isNavDisabled}
                 className={workflowStep === 'readyForNewCycle' ? 'workflow-highlight' : ''}
             >
                 <VscAdd />

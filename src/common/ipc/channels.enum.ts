@@ -88,4 +88,5 @@ export enum ServerToClientChannel {
     SendPromptCostBreakdown = "serverToClient.sendPromptCostBreakdown",
     NotifyGitOperationResult = "serverToClient.notifyGitOperationResult",
     SendGitStatus = "serverToClient.sendGitStatus",
+    NotifySaveComplete = "serverToClient.notifySaveComplete",
 }

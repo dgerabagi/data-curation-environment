@@ -1,4 +1,4 @@
-// Updated on: C4 (Add SaveLastViewedCycle handler)
+// Updated on: C5 (No functional changes, only cycle header)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
