@@ -1,16 +1,16 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-08T00:35:34.660Z
+  Date Generated: 2025-09-08T01:24:35.004Z
   ---
   Total Files: 168
-  Approx. Tokens: 465234
+  Approx. Tokens: 465508
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (254831 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (7511 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (7751 tokens)
 4. src\Artifacts\A0. DCE Master Artifact List.md (7388 tokens)
 5. src\backend\services\prompt.service.ts (5018 tokens)
 6. src\client\views\parallel-copilot.view\view.scss (4485 tokens)
@@ -112,7 +112,7 @@
 90. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 41 - Chars: 3000 - Tokens: 750
 91. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 97 - Chars: 4047 - Tokens: 1012
 92. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 45 - Chars: 2899 - Tokens: 725
-93. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 40 - Chars: 4787 - Tokens: 1197
+93. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 40 - Chars: 5106 - Tokens: 1277
 94. src\Artifacts\A42. DCE - Phase 2 - Initial Scaffolding Deployment Script.md - Lines: 246 - Chars: 8264 - Tokens: 2066
 95. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 35 - Chars: 9444 - Tokens: 2361
 96. src\Artifacts\A58. DCE - WinMerge Source Code Analysis.md - Lines: 56 - Chars: 5322 - Tokens: 1331
@@ -127,8 +127,8 @@
 105. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
 106. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
 107. src\backend\services\file-operation.service.ts - Lines: 344 - Chars: 16380 - Tokens: 4095
-108. src\backend\services\file-tree.service.ts - Lines: 245 - Chars: 13066 - Tokens: 3267
-109. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12820 - Tokens: 3205
+108. src\backend\services\file-tree.service.ts - Lines: 245 - Chars: 13096 - Tokens: 3274
+109. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12607 - Tokens: 3152
 110. src\backend\services\git.service.ts - Lines: 114 - Chars: 5522 - Tokens: 1381
 111. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
 112. src\backend\services\history.service.ts - Lines: 281 - Chars: 11973 - Tokens: 2994
@@ -164,7 +164,7 @@
 142. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 92 - Chars: 4340 - Tokens: 1085
 143. src\client\views\parallel-copilot.view\view.scss - Lines: 796 - Chars: 17937 - Tokens: 4485
 144. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-145. src\client\views\parallel-copilot.view\view.tsx - Lines: 208 - Chars: 30041 - Tokens: 7511
+145. src\client\views\parallel-copilot.view\view.tsx - Lines: 248 - Chars: 31001 - Tokens: 7751
 146. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
 147. src\common\ipc\channels.enum.ts - Lines: 91 - Chars: 4919 - Tokens: 1230
 148. src\common\ipc\channels.type.ts - Lines: 92 - Chars: 6991 - Tokens: 1748
@@ -626,7 +626,7 @@
 ### T17. Template - Universal Task Checklist
 - **Description:** A generic template for a universal task checklist, designed to organize work by file and complexity.
 - **Tags:** template, process, checklist, task management, planning
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A1. DCE - Project Vision and Goals.md">
 # Artifact A1: DCE - Project Vision and Goals
@@ -670,7 +670,7 @@ This phase focuses on deeper integration with AI services and providing support 
 -   **Core Functionality:** Implement direct API calls to various LLM providers (e.g., Gemini, OpenAI, Anthropic) from within the Parallel Co-Pilot panel, populating the tabs automatically. This requires building a secure API key management system.
 -   **Local LLM Support:** Allow users to configure an endpoint URL for a locally hosted LLM (e.g., via LM Studio, Ollama), enabling fully offline and private AI-assisted development.
 -   **Outcome:** The DCE becomes a fully-featured AI interaction environment, supporting both cloud and local models, and automating the entire prompt-to-test workflow.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md">
 # Artifact A2: DCE - Phase 1 - Context Chooser - Requirements & Design
@@ -693,7 +693,7 @@ This document outlines the requirements for Phase 1 of the Data Curation Environ
 | FR-03 | **Checkbox Selection** | As a user, I want to select and deselect files and folders for my context using checkboxes. | - Every file and folder in the tree has a checkbox. <br> - Checking a folder checks all its children. <br> - Unchecking a folder unchecks all its children. <br> - A folder shows an "indeterminate" state if only some of its children are checked. | **Adaptation.** The reference component appears to support this logic. We must verify and adapt its state management (`selectedFiles` array). |
 | FR-04 | **Flatten Selected Context** | As a user, I want a single button to package all my selected files into one context file. | - A "Flatten Context" button is present in the view. <br> - Clicking it triggers a process that reads the content of all checked files. <br> - The contents are concatenated into a single `flattened_repo.md` file in the project root. | **Implementation.** The logic for this will need to be implemented, using the state from the `FileTree` component as input for our enhanced `bootstrap-flattener.js` logic. |
 | FR-05 | **Handle Binary Files** | As a user, I want to be able to select binary/image files to include their metadata in the context, without including their raw content. | - All files, including binary and image files, are selectable via their checkbox. <br> - When a binary/image file is selected and flattened, only its metadata (path, size, type) is included in `flattened_repo.md`. <br> - See `A29` for the full strategy. | **Revised (C46)** |
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A3. DCE - Technical Scaffolding Plan.md">
 # Artifact A3: DCE - Technical Scaffolding Plan
@@ -751,7 +751,7 @@ The project will adhere to the following directory structure, derived directly f
 -   **Modular Frontend:** The `src/client/modules/` directory allows for building complex UIs by composing smaller, feature-focused modules.
 -   **Component-Based UI:** The `src/client/components/` directory holds the fundamental building blocks of the UI, promoting reusability.
 -   **Typed IPC Communication:** The use of `channels.enum.ts` and `channels.type.ts` in `src/common/ipc/` provides a strongly-typed and well-documented contract for communication between the webview and the extension host, reducing runtime errors.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A4. DCE - Analysis of The-Creator-AI Repo.md">
 # Artifact A4: DCE - Analysis of The-Creator-AI Repo
@@ -810,7 +810,7 @@ The reference repository provides solutions or strong foundations for all three 
 2.  **Focus on Adaptation:** Our immediate efforts for Phase 1 should be to isolate the `FileTree` component and its backend dependencies (`FSService.ts`) and ensure they can be used to generate the `flattened_repo.md` as originally specified.
 3.  **De-risk Phase 2:** The "Change Plan" functionality is a perfect starting point for our parallel co-pilot. We should analyze its state management and IPC communication to understand how we might instantiate multiple, independent instances of it.
 4.  **Update All Documentation:** All planning artifacts (`A1`, `A2`, `A3`) must be updated immediately to reflect this new context. Our plan has evolved from "build" to "analyze, adapt, and extend".
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A5. DCE - Target File Structure.md">
 # Artifact A5: DCE - Target File Structure
@@ -880,7 +880,7 @@ DCE/
     │
     └── extension.ts
 ```
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A7. DCE - Development and Testing Guide.md">
 # Artifact A7: DCE - Development and Testing Guide
@@ -930,7 +930,7 @@ In the newly opened **Extension Development Host** window, look at the activity 
 3.  **Reload the Host:** To see your changes, go to the **Extension Development Host** window (the one you launched with F5) and reload it. The easiest way is to open the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P`) and run the command **`Developer: Reload Window`**.
 
 You only need to stop the debugger (Shift+F5) and restart it (F5) if you make changes to configuration files like `package.json`. For all other code changes, simply reloading the host window is sufficient and much faster.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A8. DCE - Phase 1 - Selection Sets Feature Plan.md">
 # Artifact A8: DCE - Phase 1 - Selection Sets Feature Plan
@@ -998,7 +998,7 @@ The functionality will be consolidated into the `view-header` of our Context Cho
     *   Implement an effect to listen for `ApplySelectionSet` and call `setSelectedFiles()` with the new paths.
     *   Render the new "Save" and "Load" buttons in the header toolbar.
     *   The `onClick` handler for the "Save" button will trigger an IPC message that executes the `dce.saveSelectionSet` command, passing the current `selectedFiles` state.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A9. DCE - GitHub Repository Setup Guide.md">
 # Artifact A9: DCE - GitHub Repository Setup Guide
@@ -1089,7 +1089,7 @@ Once your project is set up with Git, you can leverage it to create a powerful a
 6.  **Repeat:** Your workspace is now clean again. You can go back to the Parallel Co-Pilot Panel, accept the files from "Resp 2," and repeat the testing process.
 
 This workflow allows you to rapidly test multiple complex, multi-file changes from different AI responses without the risk of permanently breaking your codebase.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A10. DCE - Metadata and Statistics Display.md">
 # Artifact A10: DCE - Metadata and Statistics Display
@@ -1145,7 +1145,7 @@ To enhance the data curation process, it is critical for the user to have immedi
     *   The `useMemo` hook that calculates the summary will be updated to correctly sum the total number of files and total tokens from the selected items. It will continue to ignore image sizes for the token total to avoid mixing units.
     *   The rendered output will use the new formatting utilities and icons.
     *   **(C40)** The label and title attribute will be updated for clarity.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A11.1 DCE - New Regression Case Studies.md">
 # Artifact A11.1: DCE - New Regression Case Studies
@@ -1539,7 +1539,7 @@ This document serves as a living record of persistent or complex bugs that have 
     1.  **Strict Environment Separation:** All file system path manipulation **must** occur in the backend (`src/backend/`).
     2.  **Normalized Paths:** The backend must normalize all paths to use forward slashes (`/`) before sending them to the frontend.
     3.  **Frontend Simplicity:** The frontend code must treat all file paths as simple strings and should never attempt to parse or join them using path-specific separators.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A12. DCE - Logging and Debugging Guide.md">
 # Artifact A12: DCE - Logging and Debugging Guide
@@ -1622,7 +1622,7 @@ To prevent the output channel from becoming overwhelmed with large blocks of tex
 -   **Format:** If a string is longer than a set threshold, it will be displayed in the logs in a format like this:
     `[First 15 lines]...// (content truncated) ...[Last 15 lines]`
 -   **Benefit:** This keeps the logs clean and readable, allowing you to see that a large piece of data was processed without having its entire content flood the output. You can still see the beginning and end of the content to verify its identity.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A13. DCE - Phase 1 - Right-Click Context Menu.md">
 # Artifact A13: DCE - Phase 1 - Right-Click Context Menu
@@ -1670,7 +1670,7 @@ This plan covers three distinct context menus: one for the main file tree, one f
     1.  **IPC:** Create a new `ClientToServerChannel.RequestCreateFile` channel with a payload of `{ filePath: string }`.
     2.  **Backend (`file-operation.service.ts`):** Implement `handleCreateFileRequest`. It will receive the relative path, resolve it to an absolute path, and use `vscode.workspace.fs.writeFile` with an empty `Uint8Array` to create the file. The file watcher will trigger a refresh.
     3.  **Frontend (`view.tsx`):** In the "Associated Files" list rendering logic, if a file does not exist (`!fileExistenceMap.get(file)`), render a "Create File" button. The button will be visible on hover. Its `onClick` handler will send the new IPC message.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A14. DCE - Ongoing Development Issues.md">
 # Artifact A14: DCE - Ongoing Development Issues
@@ -1737,7 +1737,7 @@ This artifact serves as a centralized list to track ongoing and recurring issues
 -   **Symptom:** The file tree reloaded from scratch on every tab switch and did not auto-update on file changes.
 -   **First Reported:** Cycle 19
 -   **Status (C23):** **Resolved (C20).** A frontend cache was implemented by changing the `useEffect` dependency array. A backend `FileSystemWatcher` was implemented in `fs.service.ts` to detect changes and push updates to the client, triggering a refresh.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md">
 # Artifact A15: DCE - Phase 1 - Multi-Select & Sorting Feature Plan
@@ -1783,7 +1783,7 @@ To elevate the Data Curation Environment beyond basic functionality, this plan i
     *   The selection state and handler functions will need to be passed down through `FileTree` to `TreeView`.
     *   **(Fix for C31):** The `handleNodeClick` event handler in `TreeView.tsx` must be corrected. The anchor for shift-click (`lastClickedPath`) must only be updated on a click *without* the Shift key pressed. The logic for Ctrl-click must be revised to correctly toggle a path's inclusion in the selection set without clearing other selections.
     *   The `onContextMenu` handler will need to be updated to check if the right-clicked node is part of the current `contextSelection` and pass the entire selection to the backend if an action is chosen.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A16. DCE - Phase 1 - UI & UX Refinements Plan.md">
 # Artifact A16: DCE - Phase 1 - UI & UX Refinements Plan
@@ -1810,7 +1810,7 @@ This document outlines a series of user interface (UI) and user experience (UX) 
 | UI-05 | **Improved Scrollbar Gutter** | As a user, I find it difficult to distinguish between the extension's internal scrollbar and the main VS Code scrollbar when they are side-by-side. I want a clearer visual separation between them. | - A subtle vertical border (`border-right`) is added to the main file tree container. <br> - This creates a persistent, visible dividing line between the two scrollable areas, making it easier to position the mouse. |
 | UI-06 | **Expand All Button** | As a user, I want an "Expand All" button in the toolbar, so I can quickly see all files in the project without manually clicking every folder. | - An "Expand All" button is added to the main header toolbar. <br> - Clicking it expands every collapsed folder in the file tree. <br> - The button complements the existing "Collapse All" button. |
 | UI-07 | **Associated Files Animation Glitch** | As a user, I want the animated highlight on the "Associated Files" panel to be fully visible, so the guided workflow is clear. | - The top and left edges of the pulsing blue highlight are currently slightly obscured. <br> - A small `margin` will be added to the `.collapsible-section-inner` class to provide space for the `box-shadow` to render completely. |
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A17. DCE - Phase 1 - Advanced Tree View Features.md">
 # Artifact A17: DCE - Phase 1 - Advanced Tree View Features
@@ -1860,7 +1860,7 @@ This is a significant UI/UX enhancement and will require careful implementation 
 3.  **Performance Considerations:**
     *   This approach avoids virtualizing the entire tree, which is much more complex. It only contains the content of single, large folders.
     *   Rendering hundreds of nodes within the scrollable container might still have a minor performance impact on initial render, but it will be contained and will not affect the performance of the main tree's scrolling.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A18. DCE - Phase 1 - Active File Sync Feature Plan.md">
 # Artifact A18: DCE - Phase 1 - Active File Sync Feature Plan
@@ -1909,7 +1909,7 @@ To create a more seamless and integrated experience, the Data Curation Environme
 
 -   **Root Cause of C30 Regression:** The feature failed because of a path normalization mismatch. The `editor.document.uri.fsPath` property from the VS Code API returns paths with **backslashes (`\`)** on Windows. The frontend webview components, however, exclusively use and expect **forward slashes (`/`)** for path comparisons and manipulations.
 -   **Codified Solution:** The path from the `onDidChangeActiveTextEditor` event **must** be normalized to use forward slashes *before* it is sent to the frontend via the IPC channel.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A19. DCE - Phase 1 - Double-Click & Quick-Remove Feature Plan.md">
 # Artifact A19: DCE - Phase 1 - File Interaction Plan (Click & Remove)
@@ -1954,7 +1954,7 @@ To further align the Data Curation Environment with standard, intuitive user wor
     *   **Conditional Rendering:** In the JSX for the index column, render conditionally: if the row is hovered, show an 'X' icon with an `onClick` handler; otherwise, show the row number.
     *   **Styling:** Add styles for the `.quick-remove` class in `view.scss` to ensure it's clickable and has appropriate hover effects.
     *   The `onClick` handler for the 'X' icon will call the existing `onRemove` prop and use `stopPropagation` to prevent the click from also selecting the row.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A20. DCE - Phase 1 - Advanced UX & Automation Plan.md">
 # Artifact A20: DCE - Phase 1 - Advanced UX & Automation Plan
@@ -2004,7 +2004,7 @@ This document outlines a series of advanced user experience (UX) and automation 
     -   Add a `title` attribute to the `<li>` to explain the risk associated with the token count.
 -   **Auto-Uncheck Folder (UXA-07):**
     -   Frontend (`FileTree.utils.ts`): The `removePathsFromSelected` function will be enhanced. After calculating the new effective selection set, it will need to perform a check. For each removed path, it can traverse up the tree to find its parent directories. For each parent, it can check if any of its other children are still in the effective selection set. If not, the parent should not be included in the final compressed path list. This is complex and requires careful state calculation.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer.md">
 # Artifact A21: DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer
@@ -2055,7 +2055,7 @@ Based on the analysis, the following features represent the most significant gap
 1.  **Undo / Redo (Ctrl+Z):** The ability to undo a file move or deletion is a fundamental expectation for any file manager and its absence is a major point of friction.
 2.  **Cut / Copy / Paste:** Adding standard clipboard operations for files is a key missing piece of basic file management.
 3.  **Expanded Context Menu:** Adding more of the native right-click options, especially `Open in Integrated Terminal` and `Compare Selected`, would significantly reduce the need for users to switch back to the native Explorer.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A22. DCE - Phase 1 - Search & Filter Feature Plan.md">
 # Artifact A22: DCE - Phase 1 - Search & Filter Feature Plan
@@ -2116,7 +2116,7 @@ To improve navigation and usability in large projects, this feature introduces a
 3.  **State Management:**
     *   The filtering is a pure frontend operation. No backend changes or IPC communication are required for this feature.
     *   The search term is transient UI state and does not need to be persisted.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md">
 # Artifact A23: DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan
@@ -2156,7 +2156,7 @@ These features are stable and complete, with the exception of the noted spacebar
     2.  **VS Code URI-based API (`text/uri-list`):** This approach correctly captured the URI of the file being dropped from the VS Code Explorer. The URI was passed to the backend, which then used the `vscode.workspace.fs.copy()` API.
 -   **Root Cause of Failure:** Despite correctly implementing the URI-based approach, the drag-and-drop events (`onDrop`, `onDragOver`) failed to fire reliably or at all when dragging from an external source into the webview. The root cause appears to be a complex interaction with VS Code's webview security model, event propagation, and possibly the Workspace Trust feature, which could not be resolved within a reasonable number of cycles.
 -   **Path Forward:** This feature is now considered a **tertiary, long-term research goal**. The core functionality of the extension is not dependent on it. For now, users can add new files using the native VS Code Explorer, the "New File..." button in the DCE toolbar, or by simply creating the file, which will then appear on refresh.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A24. DCE - Selection Paradigm Terminology.md">
 # Artifact A24: DCE - Selection Paradigm Terminology
@@ -2216,7 +2216,7 @@ Henceforth, the following terms will be used to describe user interactions with 
 | **Focus** | Keyboard navigation | Target for Keyboard Actions | Focus ring | `focusedPath` |
 
 By adhering to this terminology, we can ensure clarity in communication and precision in our technical implementation.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A25. DCE - Phase 1 - Git & Problems Integration Plan.md">
 # Artifact A25: DCE - Phase 1 - Git & Problems Integration Plan
@@ -2267,7 +2267,7 @@ The frontend receives the file tree structure and decoration data separately and
     *   The `gitStatus` and `problemCounts` properties are **removed** from the `FileNode` type, as this data is no longer static.
     *   When rendering a file node, the component looks up the node's `absolutePath` in the `gitStatusMap` and `problemMap` props to get the most current decoration data.
     *   This allows the Git and problem indicators to update frequently without the expensive process of rebuilding the entire tree structure.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A26. DCE - Phase 1 - File System Traversal & Caching Strategy.md">
 # Artifact A26: DCE - Phase 1 - File System Traversal & Caching Strategy
@@ -2312,7 +2312,7 @@ To resolve this, the reliance on `vscode.workspace.findFiles` for building the t
 -   **Accuracy:** The method builds a true representation of the file system, including empty directories.
 -   **Performance:** By special-casing `node_modules`, the initial tree scan remains fast and responsive.
 -   **Control:** It gives us full control over the traversal, allowing for sophisticated filtering and caching.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A27. DCE - Phase 1 - Undo-Redo Feature Plan.md">
 # Artifact A27: DCE - Phase 1 - Undo-Redo Feature Plan
@@ -2365,7 +2365,7 @@ This feature will be implemented primarily on the backend to manage the file sys
 
 5.  **Frontend Focus:**
     *   The main `TreeView` component needs to be focusable (`tabIndex="0"`) to capture the keyboard shortcuts. The `onKeyDown` handler will check for `event.ctrlKey` and the specific key (`z` or `y`) and then send the IPC message.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A28. DCE - Packaging and Distribution Guide.md">
 # Artifact A28: DCE - Packaging and Distribution Guide
@@ -2462,7 +2462,7 @@ You will see the `.vsix` file in the root of your project directory.
     *   Select **"Install from VSIX..."**.
     *   In the file dialog that opens, navigate to and select the `.vsix` file you provided.
     *   VS Code will install the extension and prompt for a reload.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A29. DCE - Phase 1 - Binary and Image File Handling Strategy.md">
 # Artifact A29: DCE - Phase 1 - Binary and Image File Handling Strategy
@@ -2546,7 +2546,7 @@ When a binary file is included, its entry in the `<files content>` section of `f
         *   Collect the name, directory, type, size, and (if available) dimensions.
         *   Construct the formatted JSON string.
         *   Return a `FileStats` object where `content` is this JSON string, and `tokens` is 0.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A30. DCE - Phase 1 - PDF Handling and Virtualization Strategy.md">
 # Artifact A30: DCE - Phase 1 - PDF Handling and Virtualization Strategy
@@ -2593,7 +2593,7 @@ Users need to include the textual content of PDF documents in their flattened co
 
 5.  **External Drag-and-Drop:**
     *   This will be handled by the generic "External Drag-and-Drop" feature planned in `A23`. The implementation will read the file buffer and send it to the backend for creation, which works for PDFs just as it does for any other file type.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A31. DCE - Phase 2 - Multimodal Content Extraction (PDF Images).md">
 # Artifact A31: DCE - Phase 2 - Multimodal Content Extraction (PDF Images)
@@ -2640,7 +2640,7 @@ This is a complex feature that will require new services and dependencies, likel
         *   Enable/disable this feature.
         *   Configure their multimodal API provider and key.
         *   Potentially set a budget or limit on the number of images to process per document.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A32. DCE - Phase 1 - Excel and CSV Handling Strategy.md">
 # Artifact A32: DCE - Phase 1 - Excel and CSV Handling Strategy
@@ -2687,7 +2687,7 @@ Following the successful implementation of PDF virtualization, users now require
 3.  **Frontend & Flattener Integration:**
     *   The frontend (`view.tsx`) will continue to trigger the `RequestExcelToText` message on-demand.
     *   The backend (`flattener.service.ts`) will continue to retrieve the virtual Markdown content from the `FSService`'s cache. No changes are needed in these files.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A33. DCE - Phase 1 - Copy-Paste Feature Plan.md">
 # Artifact A33: DCE - Phase 1 - Copy-Paste Feature Plan
@@ -2732,7 +2732,7 @@ To achieve greater feature parity with the native VS Code Explorer and improve w
         *   It will return the first available unique path.
     *   **File Copy:** The main handler will call `_findAvailableCopyName` to get the final target path and then use `vscode.workspace.fs.copy(sourceUri, targetUri)` to perform the recursive copy.
     *   The existing file system watcher will automatically detect the new file/folder and trigger a UI refresh.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements.md">
 # Artifact A34: DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements
@@ -2780,7 +2780,7 @@ The goal of the **Parallel Co-Pilot Panel** is to create an integrated, **persis
 | P2-US-07 | **Review Changes with Diff** | As a developer, I want to click on any file in the "Associated Files" list to see a diff, so I can review the exact changes before testing. | - Clicking a file path in the list opens a diff view comparing the workspace version with the AI's version. |
 | P2-US-08 | **Navigate Cycle History** | As a developer, I want to navigate backward and forward through my project's development cycles, so I can review past AI suggestions. | - UI controls exist to move between cycles. <br> - Navigating to a past cycle loads its saved raw responses into the panel. |
 | P2-US-09 | **Visual Feedback on Selection** | As a user, when I select a response that is ready to be used for the next cycle, I want clear visual feedback, so I know I can proceed with confidence. | - When a response is selected (and other conditions like having a cycle title are met), the current cycle's tab and the selected response's tab turn a distinct color (e.g., green). |
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A35. DCE - Phase 2 - UI Mockups and Flow.md">
 # Artifact A35: DCE - Phase 2 - UI Mockups and Flow
@@ -2837,7 +2837,7 @@ The tabs now display metadata when in parsed mode.
 2.  **Paste & Parse:** User pastes responses and clicks "Parse All". The tabs update to show metadata (e.g., "Resp 1 (5 files, 2.1K tk)").
 3.  **Sort Responses:** The user notices "Resp 2" has a higher token count than "Resp 1". They click the **"Sort by Tokens"** button. The order of the tabs in the tab bar immediately changes to `[ Resp 2 ] [ Resp 1 ] [ Resp 4 ] [ Resp 3 ]` (based on their respective token counts). The user can now review the longest, likely most detailed, response first.
 4.  **Select & Accept:** The rest of the workflow for selecting and accepting files remains the same.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A36. DCE - Phase 2 - Technical Implementation Plan.md">
 # Artifact A36: DCE - Phase 2 - Technical Implementation Plan
@@ -2896,7 +2896,7 @@ interface PcppState {
 
 *   **Goal:** Implement the logic for the "Log State" button.
 *   **Implementation:** A new method, `generateStateLog`, will be added to `PromptService`. It will receive the frontend state, construct a comprehensive log message including a JSON dump and the generated `<M6. Cycles>` block, and send it to the `LoggerService`.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A37. DCE - Phase 2 - Cycle Navigator & Knowledge Graph - Vision.md">
 # Artifact A37: DCE - Phase 2 - Cycle Navigator & Knowledge Graph - Vision
@@ -2927,7 +2927,7 @@ The goal is to transform the series of AI interactions from a linear conversatio
 | P2-US-06 | **Navigate Project History** | As a developer, I want to navigate backward and forward through my project's development cycles, so I can review past decisions and the AI suggestions that prompted them. | - A UI control (e.g., left/right arrows and a cycle number display) is present in the Parallel Co-Pilot panel. <br> - Clicking the arrows changes the currently viewed cycle. |
 | P2-US-07 | **View Historical Responses** | As a developer, when I navigate to a previous cycle, I want the Parallel Co-Pilot tabs to automatically populate with the AI-generated responses from that specific cycle, so I can see exactly what options I was considering at that time. | - Navigating to a cycle loads the associated set of AI responses into the tabs. <br> - The metadata (token counts, etc.) for these historical responses is also displayed. |
 | P2-US-08 | **Preserve Interaction Context** | As a developer, I want every AI response to be automatically saved and associated with the current cycle, so a complete and accurate history of the project is built over time. | - A mechanism exists to automatically persist all AI responses received. <br> - Each response is tagged with a Cycle ID and a unique response UUID. |
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A38. DCE - Phase 2 - Cycle Navigator - UI Mockup.md">
 # Artifact A38: DCE - Phase 2 - Cycle Navigator - UI Mockup
@@ -2999,7 +2999,7 @@ The Cycle Navigator will be a new UI element added to the top of the Parallel Co
     *   The user is viewing Cycle 69 and clicks the **`>`** button.
     *   **Action:** The state moves forward to `C70`.
     *   **UI Update & Data Load:** The UI returns to the state described in step 1. The `>` button becomes disabled again.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A39. DCE - Phase 2 - Cycle Navigator - Technical Plan.md">
 # Artifact A39: DCE - Phase 2 - Cycle Navigator - Technical Plan
@@ -3086,7 +3086,7 @@ interface PcppState {
     *   **Action:** Backend sends the complete, latest cycle data to the frontend for initialization.
 *   `ClientToServerChannel.RequestCycleData`: Still used for navigating to *older* cycles.
 *   `ClientToServerChannel.SaveCycleData`: Unchanged. It sends the entire state of the *current* cycle to the backend to be persisted. It's critical that the `cycleId` in the payload is correct.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A40. DCE - Phase 2 - Parallel Co-Pilot - Target File Structure.md">
 # Artifact A40: DCE - Phase 2 - Parallel Co-Pilot - Target File Structure
@@ -3155,7 +3155,7 @@ src/
 
 -   **`.vscode/dce_history.json`:**
     -   This file will be automatically created and managed by the `HistoryService`. Storing it in `.vscode` is standard practice for workspace-specific extension data that should not typically be checked into source control. It will be added to `.gitignore`.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A40.1. DCE - Phase 2 - Competitive Analysis & Feature Ideas.md">
 # Artifact A40.1: DCE - Phase 2 - Competitive Analysis & Feature Ideas
@@ -3201,7 +3201,7 @@ Based on the analysis and our project goals, here are some new or refined featur
 | **Response Annotation & Rating** | A feature the user liked: Allow adding thumbs up/down, tags (e.g., `refactor`, `bug-fix`), and comments to each response tab. This metadata would be saved with the cycle history, adding valuable context. |
 | **Intent Buttons** | As per user feedback, instead of slash commands, provide clear buttons for common refinement tasks like "Add Documentation," "Find Bugs," or "Refactor for Readability." These would re-prompt the AI with the tab's content and the specific instruction. |
 | **Ephemeral "Cycles Context" Field** | As per user feedback, add a separate text field for temporary context like error logs that are useful for the current cycle's prompt but should not be saved in the long-term cycle history to avoid token bloat. |
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A41. DCE - Phase 2 - API Key Management - Feature Plan.md">
 # Artifact A41: DCE - Phase 2 - API Key Management - Feature Plan
@@ -3251,7 +3251,7 @@ This functionality is heavily inspired by the `ApiKeysManagement.tsx` module in 
     *   `DeleteApiKey`: Frontend requests the deletion of a specific key.
     *   `RequestLocalLlmUrl` / `SendLocalLlmUrl`
     *   `SaveLocalLlmUrl`
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A41.1. DCE - Phase 2 - Advanced Features & Integrations Plan.md">
 # Artifact A41.1: DCE - Phase 2 - Advanced Features & Integrations Plan
@@ -3298,7 +3298,7 @@ This document explores potential high-impact features that could be built on top
     2.  **Persistence:** These annotations would be saved as part of the `dce_history.json` file, associated with that specific response.
     3.  **Benefit:** When navigating back through cycles, these notes would provide valuable context about the quality and outcome of each AI suggestion, enhancing the "knowledge graph" of the project.
 -   **Technical Notes:** This requires extending the data model in `A39` and adding the corresponding UI elements and state management.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A41.2. DCE - Phase 2 - Feature Ideation & Competitive Analysis.md">
 # Artifact A41.2: DCE - Phase 2 - Feature Ideation & Competitive Analysis
@@ -3341,7 +3341,7 @@ This is a backlog of potential features for the Parallel Co-Pilot panel, inspire
 | **P2-F05** | **Response Annotation & Rating** | A feature the user liked: Add UI for thumbs up/down, short text notes, and tags (e.g., "works", "buggy"). This metadata is saved with the cycle history, enhancing the knowledge graph. | Medium |
 | **P2-F06** | **Highlight-to-Context** | Allow a user to highlight a block of code in the main editor, right-click, and select "Send to Parallel Co-Pilot". This would open a new tab in the panel, pre-filled with the highlighted code. | Medium |
 | **P2-F07** | **Ephemeral "Cycles Context" Field** | Per user feedback, add a separate text field for temporary context (e.g., error logs). This content is included in the prompt for the current cycle but is NOT saved to the permanent `dce_history.json` to prevent token bloat over time. | High |
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A43. DCE - Phase 2 - Implementation Roadmap.md">
 # Artifact A43: DCE - Phase 2 - Implementation Roadmap
@@ -3413,7 +3413,7 @@ This document provides a clear, step-by-step roadmap for the implementation of P
     *   Annotation and Rating (Comments, Thumbs Up/Down).
     *   Live API Integration (The new Phase 3).
     *   Advanced UI from `A50` (Resizable panes, inner editors).
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A44. DCE - Phase 1 - Word Document Handling Strategy.md">
 # Artifact A44: DCE - Phase 1 - Word Document Handling Strategy
@@ -3461,7 +3461,7 @@ To further expand the data curation capabilities of the extension, users need to
 
 4.  **Backend (`flattener.service.ts`):**
     *   **Virtual Content Retrieval:** The flattener will retrieve the text from the `wordTextCache` in the `FSService` instead of reading the binary file. It will correctly handle the "Unsupported Format" and "Corrupted File" messages from the cache.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A45. DCE - Phase 2 - Pop-out Co-Pilot Window - Feature Plan.md">
 # Artifact A45: DCE - Phase 2 - Pop-out Co-Pilot Window - Feature Plan
@@ -3513,7 +3513,7 @@ This is a significant architectural change that has been implemented.
 
 3.  **State Management:**
     *   Because the panel is now created on-demand, its state (tab content, cycle number) must be managed in a backend service to be restored if the panel is closed and reopened. This is a future enhancement. For now, the state is ephemeral to the panel's lifecycle.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A46. DCE - Phase 2 - Paste and Parse Response - Feature Plan.md">
 # Artifact A46: DCE - Phase 2 - Paste and Parse Response - Feature Plan
@@ -3554,7 +3554,7 @@ The manual workflow for using the Parallel Co-Pilot involves copying an entire A
     *   It will display a list of the detected file paths, perhaps as clickable links that could set the active `sourceFilePath` for the tab.
 
 3.  **No Backend Changes:** This feature is entirely a frontend concern, involving UI event handling, string parsing, and state management within the React component.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A47. DCE - Phase 2 - Prompt Amalgamation Feature Plan.md">
 # Artifact A47: DCE - Phase 2 - Prompt Amalgamation Feature Plan
@@ -3599,7 +3599,7 @@ The process of constructing the final `prompt.md` file is a core part of the cur
 4.  **Integration:**
     *   The new `PromptService` will be instantiated in `services.ts`.
     *   A new handler for `RequestCreatePromptFile` will be added to the `on-message.ts` for the Parallel Co-Pilot view, which will call the `PromptService`.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A48. DCE - Phase 2 - Advanced Syntax Highlighting Plan.md">
 # Artifact A48: DCE - Phase 2 - Advanced Syntax Highlighting Plan
@@ -3651,7 +3651,7 @@ After research and consideration of alternatives like `refractor`, **`@wooorm/st
     *   A state map (`highlightedCodeBlocks: Map<string, string>`) caches the HTML returned from the backend.
     *   The component that renders the file's code uses `dangerouslySetInnerHTML` to display the highlighted HTML.
     *   The `summary` and `courseOfAction` sections are rendered using the `<ReactMarkdown>` component to display formatted text.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A49. DCE - Phase 2 - File Association & Diffing Plan.md">
 # Artifact A49: DCE - Phase 2 - File Association & Diffing Plan
@@ -3698,7 +3698,7 @@ The core workflow is now defined as **"accept/replace"**: a one-way copy of cont
 4.  **Backend - File Writing (`file-operation.service.ts`):**
     *   **Status:** **To be implemented.**
     *   Implement `handleWriteFileRequest` and `handleBatchFileWrite` to receive new content and overwrite the corresponding files in the workspace using `vscode.workspace.fs.writeFile`.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A50. DCE - Phase 2 - UI Component Plan (Resizable Panes & Inner Editors).md">
 # Artifact A50: DCE - Phase 2 - UI Component Plan (Resizable Panes & Inner Editors)
@@ -3752,7 +3752,7 @@ As the Parallel Co-Pilot Panel (PCPP) becomes more feature-rich, its UI needs to
     -   It will have a header displaying the file path and the file-specific action buttons (Accept, Diff, etc.).
     -   The main content area will be a `div` with CSS properties `max-height: 300px;` (or similar) and `overflow-y: auto;`.
     -   The code content within this `div` will be syntax-highlighted as before.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A51. DCE - A-B-C Testing Strategy for UI Bugs.md">
 # Artifact A51: DCE - A-B-C Testing Strategy for UI Bugs
@@ -3836,7 +3836,7 @@ export default TestComponent;
     border-bottom: 1px solid var(--vscode-panel-border);
 }
 ```
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A52. DCE - Interaction Schema Refinement.md">
 # Artifact A52: DCE - Interaction Schema Refinement
@@ -3905,7 +3905,7 @@ To guarantee successful parsing, every response should follow this structure:
 # Full content of the second file...
 </file>
 ```
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A52.1 DCE - Parser Logic and AI Guidance.md">
 # Artifact A52.1: DCE - Parser Logic and AI Guidance
@@ -4040,7 +4040,7 @@ I have analyzed the request. My course of action is to update the main component
 <file path="src/client/views/my-view/view.scss">
 /* Full content of the view.scss file... */
 </file_artifact>
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A53. DCE - Phase 2 - Token Count and Similarity Analysis.md">
 # Artifact A53: DCE - Phase 2 - Token Count and Similarity Analysis
@@ -4086,7 +4086,7 @@ To enhance the curator's decision-making process, the Parallel Co-Pilot Panel (P
     *   A state variable, `comparisonMetrics`, holds the returned results.
     *   The message handler for `SendFileComparison` updates this state.
     *   The UI in the code viewer header renders the live data from the `comparisonMetrics` state.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A55. DCE - FSService Refactoring Plan.md">
 # Artifact A55: DCE - FSService Refactoring Plan
@@ -4166,7 +4166,7 @@ The `FSService` has been successfully broken down into four new, more focused se
 <Original fs.service.ts>
 Removed after completing refactor.
 </Original fs.service.ts>
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md">
 # Artifact A56: DCE - Phase 2 - Advanced Diff Viewer Plan
@@ -4216,7 +4216,7 @@ The current diff view is functional but lacks key usability features found in ma
     3.  Create a new array based on `originalLines`.
     4.  Splice the new lines from the AI response into the correct position in the new array, replacing the old lines.
     5.  Call `setOriginalLines` with this new array. This will trigger a re-render, visually showing the change as "accepted".
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A57. DCE - Phase 2 - Cycle Management Plan.md">
 # Artifact A57: DCE - Phase 2 - Cycle Management Plan
@@ -4263,7 +4263,7 @@ As the number of development cycles increases, users need tools to manage their 
 4.  **Message Handling (`on-message.ts`):**
     *   Add handlers for the new IPC channels that call the corresponding methods in `HistoryService`.
     *   After a successful deletion or reset, the backend should send a message back to the client (e.g., a `ForceRefresh` or a new dedicated message) to trigger a full state reload.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A59. DCE - Phase 2 - Debugging and State Logging.md">
 # Artifact A59: DCE - Phase 2 - Debugging and State Logging
@@ -4305,7 +4305,7 @@ The goal of this feature is to add a **"Log State"** button to the PCPP's main h
         *   It will append a `JSON.stringify` of the full (but truncated) history file content.
     *   **Step 2: Log to Output Channel:**
         *   It will combine these strings into a single, clearly labeled log message and send it to `Services.loggerService.log()`.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md">
 # Artifact A60: DCE - Phase 2 - Cycle 0 Onboarding Experience
@@ -4343,7 +4343,7 @@ To ensure the AI can always generate perfectly parsable responses, the DCE injec
 -   **Cycle 1+ (Iterative Development):** The `prompt.service.ts` automatically reads and injects the following critical artifacts into the `<M3. Interaction Schema>` section of every generated `prompt.md`:
     -   **`A52.1 DCE - Parser Logic and AI Guidance.md`**: Contains the literal source code of the response parser, showing the AI exactly how its output will be interpreted.
     -   **`A52.2 DCE - Interaction Schema Source.md`**: Contains the canonical rules of interaction, ensuring the AI always has the latest formatting guidelines.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A61. DCE - Phase 2 - Cycle History Management Plan.md">
 # Artifact A61: DCE - Phase 2 - Cycle History Management Plan
@@ -4391,7 +4391,7 @@ The goal of this feature is to provide commands and UI controls to **export** th
     *   The "Save History" (`VscCloudUpload`) and "Load History" (`VscCloudDownload`) buttons in the cycle navigator toolbar will be enabled.
     *   Their `onClick` handlers will trigger the corresponding IPC messages.
     *   The existing handler for the `ForceRefresh` message will automatically handle the UI update after a successful import.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A66. DCE - Cycle 1 - Task Tracker.md">
 # Artifact A66: DCE - Cycle 1 - Task Tracker
@@ -4419,7 +4419,7 @@ This document lists the feedback and tasks from the first official development c
 | 7 | Plan for UX improvements to context panes (token count, line numbers). | **Complete** | New artifact `A68` created to plan this feature. |
 | 8 | Plan for refactoring the large `parallel-copilot.view.tsx`. | **Complete** | New artifact `A67` created to plan this refactor. |
 | 9 | Plan for Git-integrated testing workflow. | **Complete** | New artifact `A70` created to plan this feature. |
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A67. DCE - PCPP View Refactoring Plan.md">
 # Artifact A67. DCE - PCPP View Refactoring Plan
@@ -4469,7 +4469,7 @@ The goal is to break down `view.tsx` into a series of smaller, single-responsibi
 -   **Improved Maintainability:** Bugs and feature requests can be addressed in isolated components, reducing the risk of unintended side effects.
 -   **Reduced Token Count:** Splitting the large file into many smaller ones makes each file more manageable for both human and AI developers.
 -   **Better Performance:** Memoization (`React.memo`) can be applied more effectively to smaller components, preventing unnecessary re-renders.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A68. DCE - PCPP Context Pane UX Plan.md">
 # Artifact A68: DCE - PCPP Context Pane UX Plan
@@ -4509,7 +4509,7 @@ The "Cycle Context" and "Ephemeral Context" text areas in the Parallel Co-Pilot 
     -   Replace the existing `<textarea>` elements with the new `<NumberedTextarea>` component.
     -   **State:** Add `cycleContextHeight` and `ephemeralContextHeight` to the component's state and to the `PcppCycle` type definition.
     -   The `onHeightChange` prop of the new component will be wired to update these state variables, which will be persisted via the existing debounced save mechanism.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A69. DCE - Animated UI Workflow Guide.md">
 # Artifact A69: DCE - Animated UI Workflow Guide
@@ -4580,7 +4580,7 @@ The highlighting will follow this specific sequence of user actions:
 
 15. **Create New Cycle:** User clicks `Generate prompt.md`.
     *   **Highlight:** The **`[ + ]` (New Cycle)** button pulses, completing the loop and preparing for the next iteration which starts back at Step 5.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A70. DCE - Git-Integrated Testing Workflow Plan.md">
 # Artifact A70: DCE - Git-Integrated Testing Workflow Plan
@@ -4643,7 +4643,7 @@ A core part of the DCE workflow involves accepting an AI-generated response and 
     *   The frontend will request the Git status at appropriate times to drive the workflow state.
     *   The `onClick` handler for "Baseline" will construct the commit message and send the `RequestGitBaseline` message.
     *   A new message handler for `NotifyGitOperationResult` will display the result message and, if successful, will advance the `workflowStep` state from `awaitingBaseline` to `awaitingFileSelect`.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A72. DCE - README for Artifacts.md">
 # Artifact A72: DCE - README for Artifacts
@@ -4693,7 +4693,7 @@ Development in the DCE is organized into **Cycles**. You have just completed the
 4.  **Repeat:** This completes a cycle. You then start the next cycle, building upon the newly accepted code and documentation.
 
 This structured, iterative process helps maintain project quality and ensures that both human and AI developers are always aligned with the project's goals.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A73. DCE - GitService Plan.md">
 # Artifact A73: DCE - GitService Plan
@@ -4740,7 +4740,7 @@ The `GitService` will be responsible for:
 4.  **Integration:**
     *   The new `GitService` will be instantiated in `src/backend/services/services.ts`.
     *   The `parallel-copilot.view/on-message.ts` file will be updated to call the new service's methods when it receives the `RequestGitBaseline` and `RequestGitRestore` IPC messages.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A74. DCE - Per-Input Undo-Redo Feature Plan.md">
 # Artifact A74: DCE - Per-Input Undo-Redo Feature Plan
@@ -4792,7 +4792,7 @@ This is a complex feature that requires overriding the browser's default undo/re
     *   The `NumberedTextarea` component will need to be updated to accept the new, more complex `onKeyDown` handler.
 
 This approach will provide the robust, per-input undo/redo functionality required for a professional user experience.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A75. DCE - Text Area Component A-B-C Test Plan.md">
 # Artifact A75: DCE - Text Area Component A-B-C Test Plan
@@ -4845,7 +4845,7 @@ Once a working pattern is identified in a test component:
 1.  **Codify Findings:** The successful pattern and the root cause of the failure will be documented in `A11. DCE - Regression Case Studies`.
 2.  **Integrate Solution:** The original `NumberedTextarea.tsx` component will be refactored to use the successful pattern.
 3.  **Remove Test Artifacts:** The test harness UI and the `TestPane*.tsx` component files will be removed from the project.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A76. DCE - Word Wrap Line Numbering Challenges.md">
 # Artifact A76: DCE - Word Wrap Line Numbering Challenges
@@ -4909,7 +4909,7 @@ Instead of building our own, we could replace the `<textarea>` with a lightweigh
 The user's request is valid and would be a great UX improvement. However, due to the performance and implementation complexities described above, this feature is considered a significant piece of technical debt that requires a dedicated cycle to solve correctly.
 
 The current priority is to fix the more critical usability bugs like scrolling, focus management, and highlighting. Once the component is stable, we can revisit this challenge and dedicate a future cycle to implementing one of the more advanced solutions above.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A149. Local LLM Integration Plan.md">
 # Artifact: A149. Local LLM Integration Plan
@@ -5011,7 +5011,7 @@ A new Zustand store will be created to manage the state of LLM-related interacti
 *   **State:** `src/state/llmStore.ts`
 
 This plan establishes a secure and extensible foundation for integrating LLM-powered features into AI Ascent.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A189. Number Formatting Reference Guide.md">
 # Artifact A189: Number Formatting Guide (K/M Suffixes & Dynamic Decimals)
@@ -5132,7 +5132,7 @@ console.log(formatLargeNumber(0.0000001));  // "0.00"
       return <div>Tokens: {displayValue}</div>;
     };
     ```
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/README.md">
 # Artifact A72: DCE - README for Artifacts
@@ -5168,7 +5168,7 @@ Development in the DCE is organized into **Cycles**. You are currently in the ea
 5.  **Repeat:** This completes a cycle. You then start the next cycle, building upon the newly accepted code and documentation.
 
 This structured, iterative process helps maintain project quality and ensures that both human and AI developers are always aligned with the project's goals.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/T1. Template - Master Artifact List.md">
 <!-- 
@@ -5207,7 +5207,7 @@ This file serves as the definitive, parseable list of all documentation artifact
 ### A2. [Your Project Name] - Phase 1 - Requirements & Design
 - **Description:** Detailed functional and technical requirements for the first phase of the project.
 - **Tags:** requirements, design, phase 1, features
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/T2. Template - Project Vision and Goals.md">
 <!-- 
@@ -5248,7 +5248,7 @@ This phase will build upon the foundation of Phase 1 by adding key features that
 This phase focuses on refining the product, improving performance, and ensuring it is ready for a wider audience.
 -   **Core Functionality:** [Describe features related to performance, security, or advanced user interactions].
 -   **Outcome:** [Describe the final, polished state of the project].
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/T3. Template - Phase 1 Requirements & Design.md">
 <!-- 
@@ -5288,7 +5288,7 @@ The implementation of Phase 1 will involve the following components:
 -   **[Component A]:** Responsible for [its primary function].
 -   **[Component B]:** Responsible for [its primary function].
 -   **[Data Model]:** The core data will be structured as [describe the basic data structure].
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/T4. Template - Technical Scaffolding Plan.md">
 <!-- 
@@ -5345,7 +5345,7 @@ The project will adhere to a standard, feature-driven directory structure:
 -   **Component-Based UI:** The UI will be built by composing small, reusable components.
 -   **Service Layer:** Business logic and external communication (e.g., API calls) will be encapsulated in services to keep components clean.
 -   **Strong Typing:** TypeScript will be used throughout the project to ensure type safety and improve developer experience.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/T5. Template - Target File Structure.md">
 <!-- 
@@ -5383,7 +5383,7 @@ This document provides a visual representation of the file structure that the `T
     │   └── index.ts
     └── main.ts
 ```
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/T6. Template - Initial Scaffolding Deployment Script.md">
 <!-- 
@@ -5449,7 +5449,7 @@ async function deployScaffold() {
 
 deployScaffold();
 ```
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/T7. Template - Development and Testing Guide.md">
 <!-- 
@@ -5500,7 +5500,7 @@ The project is configured with a testing framework. To run the test suite, use t
 npm run test
 ```
 This will execute all test files located in the project and report the results to the console.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/T8. Template - Regression Case Studies.md">
 <!-- 
@@ -5534,7 +5534,7 @@ This document serves as a living record of persistent or complex bugs that have 
     1.  [Describe the specific code change, e.g., "The API service was updated to always return a default object instead of null."]
     2.  [Describe the pattern or best practice to follow, e.g., "All API calls made within a React component's `useEffect` hook must include a cleanup function to cancel the request or ignore the result if the component unmounts."]
 ---
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/T9. Template - Logging and Debugging Guide.md">
 <!-- 
@@ -5586,7 +5586,7 @@ When a feature is not working as expected, the most effective debugging techniqu
     `console.log('[DB Service] Attempting to write to database:', data);`
 
 By following the logs through this chain, you can identify exactly where the data becomes corrupted, is dropped, or causes an error.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/T10. Template - Feature Plan Example.md">
 <!-- 
@@ -5621,7 +5621,7 @@ This document outlines the plan for implementing a standard right-click context 
 -   **New Menu Component:** Render a custom context menu component conditionally based on the `contextMenu` state. It will contain the options defined in the user stories.
 -   **Action Handlers:** Implement the functions for `handleRename`, `handleDelete`, etc. These will be called by the menu items' `onClick` handlers.
 -   **Overlay:** An overlay will be added to the entire screen when the menu is open. Clicking this overlay will close the menu.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/T11. Template - Implementation Roadmap.md">
 <!-- 
@@ -5679,7 +5679,7 @@ This document provides a clear, step-by-step roadmap for the implementation of *
     3.  **Documentation:** Write user-facing documentation and guides.
     4.  **Deployment:** Package and deploy the application.
 -   **Outcome:** A stable, polished, and documented application.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/T12. Template - Competitive Analysis.md">
 <!-- 
@@ -5724,7 +5724,7 @@ Based on the analysis, here are potential features and strategic opportunities f
 | **[Differentiating Feature]** | This is a key feature that none of the competitors offer. It would allow users to [describe the benefit] and would be our primary unique selling proposition. |
 | **[Improvement on Existing Feature]** | Competitor A has [Feature 1], but it's slow. We can implement a more performant version by [your technical advantage]. |
 | **[User Experience Enhancement]** | Many existing tools have a complex setup process. We can win users by making our onboarding experience significantly simpler and more intuitive. |
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/T13. Template - Refactoring Plan.md">
 <!-- 
@@ -5782,7 +5782,7 @@ The monolithic file/class will be broken down into the following smaller, more f
 -   **Reduced Token Count:** The original file's token count will be significantly reduced.
 -   **Improved Maintainability:** Each new service has a single, clear responsibility.
 -   **Easier Testing:** The smaller, focused services will be easier to unit test in isolation.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/T14. Template - GitHub Repository Setup Guide.md">
 <!-- 
@@ -5895,7 +5895,7 @@ This is where Git becomes a powerful part of the workflow.
     5.  You are now ready to start the next development cycle from a new, clean state.
 
 This iterative loop of `accept -> test -> restore` allows you to rapidly audition multiple AI-generated solutions without fear of corrupting your codebase.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/T15. Template - A-B-C Testing Strategy for UI Bugs.md">
 <!-- 
@@ -5939,7 +5939,7 @@ Once a working pattern is identified in a test component:
 1.  **Codify Findings:** Document the successful pattern and the root cause of the failure.
 2.  **Integrate Solution:** Refactor the original component to use the successful pattern.
 3.  **Remove Test Artifacts:** Delete the test harness UI and the temporary test component files.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/T16. Template - Developer Environment Setup Guide.md">
 <!-- 
@@ -6039,7 +6039,7 @@ To provide an AI assistant with the necessary context about which environment va
 4.  **Exclude `.env`:** Ensure your `.gitignore` file includes `.env` to prevent your actual secrets from ever being committed to version control.
 
 This allows the AI to see the names of all available constants (e.g., `OPENAI_API_KEY`) so it can write code that uses them correctly, but it never sees the actual secret values.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/T17. Template - Universal Task Checklist.md">
 # Artifact A[XX]: [Project Name] - Universal Task Checklist
@@ -6087,13 +6087,13 @@ This file-centric approach helps in planning and prioritizing work, especially i
 2.  **Expected:** [Expected outcome of the first step]
 3.  [Second verification step]
 4.  **Expected:** [Expected outcome of the second step]
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A11. DCE - Regression Case Studies.md">
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C188 (Add case study for runtime syntax errors)
+# Updated on: C189 (Expand data loss case study for new cycle creation)
 
 ## 1. Purpose
 
@@ -6120,17 +6120,17 @@ This document serves as a living record of persistent or complex bugs that have 
 ### Case Study 024: PCPP Context/Title Data Loss on Tab Switch or Cycle Change
 
 -   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/backend/services/history.service.ts`
--   **Cycles Observed:** C185, C1, C2
+-   **Cycles Observed:** C185, C189
 -   **Symptom:** Text entered into the "Cycle Context," "Ephemeral Context," or "Cycle Title" fields is lost. This can also manifest as a newly created cycle disappearing entirely. The data loss occurs when the user performs an action that reloads the view's state from disk, such as switching to a different cycle, creating a new cycle, or switching to another VS Code tab and then returning. The data is not persisted to `dce_history.json` in time.
--   **Root Cause Analysis (RCA):** This is a critical data loss bug caused by a race condition between the application's debounced save mechanism and its state loading logic. The application waits for a pause in user input before saving changes to disk (debouncing) to improve performance. However, when the user performs an action that causes the view to reload its state (like switching cycles or tabs), the state is reloaded from the `dce_history.json` file *before* the debounced save has had a chance to execute. This overwrites the user's recent, unsaved changes with the older, stale data from the file.
+-   **Root Cause Analysis (RCA):** This is a critical data loss bug caused by a race condition between the application's debounced save mechanism and its state loading logic. The application waits for a pause in user input before saving changes to disk (debouncing) to improve performance. However, when the user performs an action that causes the view to reload its state (like switching cycles or tabbing away), the state is reloaded from `dce_history.json` *before* the debounced save has had a chance to execute. This overwrites the user's recent, unsaved changes with the older, stale data from the file. The same issue occurs when creating a new cycle: the new, empty cycle state is not saved immediately, so if the user tabs away, the state is lost and the UI reverts to the previous cycle.
 -   **Codified Solution & Best Practice:**
-    1.  **Trigger Save Before Navigation/State Change:** The event handler for any action that causes a state reload (e.g., `handleCycleChange`, `handleNewCycle`) **must** trigger an immediate, non-debounced save of the current component's state *before* dispatching the request to load the new state.
-    2.  **Save on Visibility Change:** A `visibilitychange` event listener must be added to the document. When the webview panel is hidden, an immediate save must be triggered. This handles cases like switching VS Code tabs.
-    3.  **Correct State Scoping:** The `handleNewCycle` function must be refactored to create a completely new, default-state cycle object. It must not carry over any state from the previous cycle, which was the cause of data "bleeding."
-    4.  **Implementation:** The `saveCurrentCycleState` function should be callable directly (non-debounced). The various event handlers must be modified to call this function at the appropriate time to eliminate the race condition entirely.
+    1.  **Trigger Save Before Navigation/State Change:** The event handler for any action that causes a state reload (e.g., `handleCycleChange`) **must** trigger an immediate, non-debounced save of the current component's state *before* dispatching the request to load the new state.
+    2.  **Save on New Cycle Creation:** The `handleNewCycle` function **must** perform two synchronous saves: first, it saves the state of the cycle being departed. Second, after setting the state for the new, empty cycle, it **must** immediately construct the new cycle object and save it. This ensures the new cycle is persisted to disk before any other user action can occur.
+    3.  **Save on Visibility Change:** A `visibilitychange` event listener must be added to the document. When the webview panel is hidden, an immediate save must be triggered. This handles cases like switching VS Code tabs.
+    4.  **Implementation:** The `saveCurrentCycleState` function should be callable directly (non-debounced). The various event handlers must be modified to call this function at the appropriate times to eliminate the race condition entirely.
 
 ---
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A42. DCE - Phase 2 - Initial Scaffolding Deployment Script.md">
 # Artifact A42: DCE - Phase 2 - Initial Scaffolding Deployment Script
@@ -6379,7 +6379,7 @@ async function deployScaffold() {
 
 deployScaffold();
 ```
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A52.2 DCE - Interaction Schema Source.md">
 # Artifact A52.2: DCE - Interaction Schema Source
@@ -6417,7 +6417,7 @@ deployScaffold();
 20. This is a misaligned statement: `// (For full history, see master_content.txt)` because your changes get rolled into master_content.txt. therefore, if you remove the history, then when your updates are rolled in, they will remove the full history. understand? after a while, the history is not relevant and can be rolled out, for a while, it ought to stay. you can see what we're working on + the current cycle and make this determination.
 21. Each time we create a new documentation artifact, lets also create the key/value pairs needed for me to add it into our Master Artifact List. they can simply be added into the new artifact itself and ill make the new entry in A0. this will solve for me manually generating a description and tag for each new documentation artifact. also, dont place `/` in the title/name of a documentation artifact. VSCode treats it as a folder separator.
 21.1. when creating a new documentation artifact, also just update the master artifacts list itself.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A58. DCE - WinMerge Source Code Analysis.md">
 # Artifact A58: DCE - WinMerge Source Code Analysis
@@ -6476,7 +6476,7 @@ Beyond specific algorithms, the WinMerge source code reveals important architect
 ## 4. Path Forward
 
 By studying the algorithms and architectural patterns in these key files, we can create a clear development plan to implement these advanced features in our TypeScript and React-based extension. The immediate priority is to refactor our UI to a vertical, fixed-pane layout, and then we can begin to incrementally incorporate the more advanced logic inspired by these files.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A62. DCE - Cycle 157 - Task Tracker.md">
 # Artifact A62: DCE - Cycle 157 - Task Tracker
@@ -6510,7 +6510,7 @@ This document lists the feedback and tasks from Cycle 157. It serves as a checkl
 | 13 | Prevent `.vscode` folder from being auto-added to selection. | **In Progress** | Add to exclusion list in `file-tree.service.ts` watcher. |
 | 14 | Ensure `Artifacts` directory files are always flattened first. | **To Do** | Logic change in `flattener.service.ts`. |
 | 15 | Create this tracking artifact. | **Complete** | This artifact serves as the tracker. |
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A63. DCE - Cycle 158 - Task Tracker.md">
 # Artifact A63: DCE - Cycle 158 - Task Tracker
@@ -6536,7 +6536,7 @@ This document lists the feedback and tasks from Cycle 158. It serves as a checkl
 | 5 | Fix focused tab border to highlight any active tab. | **In Progress** | CSS fix in `view.scss`. The selector is likely too specific. |
 | 6 | Open `prompt.md` instead of `flattened_repo.md` after generation. | **In Progress** | Backend change in `prompt.service.ts` to call the open file service. |
 | 7 | Repurpose the initial `A0` file into a valuable `README.md`. | **In Progress** | Core workflow change. Requires new `A72` artifact, and changes to `prompt.service.ts` and `history.service.ts`. |
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A64. DCE - Cycle 159 - Task Tracker.md">
 # Artifact A64: DCE - Cycle 159 - Task Tracker
@@ -6561,7 +6561,7 @@ This document lists the feedback and tasks from Cycle 159. It serves as a checkl
 | 4 | Fix PCPP onboarding check to be based on `README.md` existence. | **In Progress** | Critical workflow bug. Modify `isFreshEnvironment` check in `history.service.ts`. |
 | 5 | Add a visual highlight to the "Sort" button when it is active. | **In Progress** | UI polish. Requires conditional class in `view.tsx` and new style in `view.scss`. |
 | 6 | Fix race condition causing "auto-add" to fail for multiple files. | **In Progress** | Critical bug. Requires implementing a queuing mechanism in `file-tree.service.ts`. |
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A65. DCE - Universal Task Checklist.md">
 # Artifact A65: DCE - Universal Task Checklist
@@ -6651,7 +6651,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 3.  Check the root directory of the project.
 4.  Click "Flatten Context".
 5.  **Expected:** Open the `flattened_repo.md` file. The `package-lock.json` file and its content should NOT be present.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A71. Sample M0 Prompt.md">
 <prompt.md>
@@ -6730,7 +6730,7 @@ Review the user's project scope in M4. Your task is to act as a senior project a
 </M7. Flattened Repo>
 
 </prompt.md>
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A200. Cycle Log.md">
 # Artifact A200: Cycle Log
@@ -21278,7 +21278,7 @@ flatten_docs.js
 flattened_repo.txt
 </Cycle 0>
 </M6. Cycles>
-</file>
+</file_artifact>
 
 <file path="src/backend/commands/commands.ts">
 // Updated on: C187 (Add gitInit command)
@@ -21384,7 +21384,7 @@ export const commands = [
         }
     }
 ];
-</file>
+</file_artifact>
 
 <file path="src/backend/commands/register-commands.ts">
 import * as vscode from "vscode";
@@ -21398,7 +21398,7 @@ export function registerCommands(context: vscode.ExtensionContext) {
         context.subscriptions.push(disposable);
     });
 }
-</file>
+</file_artifact>
 
 <file path="src/backend/services/action.service.ts">
 // Updated on: C114 (Refactor to use new services)
@@ -21461,7 +21461,7 @@ export class ActionService {
         }
     }
 }
-</file>
+</file_artifact>
 
 <file path="src/backend/services/content-extraction.service.ts">
 // src/backend/services/content-extraction.service.ts
@@ -21612,7 +21612,7 @@ export class ContentExtractionService {
         }
     }
 }
-</file>
+</file_artifact>
 
 <file path="src/backend/services/file-operation.service.ts">
 // src/backend/services/file-operation.service.ts
@@ -21959,10 +21959,10 @@ export class FileOperationService {
         this.filesToIgnoreForAutoAdd.delete(filePath);
     }
 }
-</file>
+</file_artifact>
 
 <file path="src/backend/services/file-tree.service.ts">
-// Updated on: C184 (Implement decoration-based refresh)
+// Updated on: C189 (Add .git and venv to non-selectable patterns)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -21979,7 +21979,7 @@ const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
 const EXCLUSION_PATTERNS = ['.git', 'dce_cache', 'out', '.vscode', 'dist']; 
-const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/.git/', '/flattened_repo.md', '/prompt.md', '/package-lock.json'];
+const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/.git/', '/venv/', '/flattened_repo.md', '/prompt.md', '/package-lock.json'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
@@ -22173,7 +22173,7 @@ export class FileTreeService {
                 const childPath = normalizePath(childUri.fsPath);
                 const isSelectable = this._isSelectable(childPath, type);
                 if (type === vscode.FileType.Directory) {
-                    const isSpecialDir = name.toLowerCase() === 'node_modules';
+                    const isSpecialDir = ['node_modules', '.git', 'venv'].includes(name.toLowerCase());
                     const dirNode: FileNode = { name, absolutePath: childPath, children: isSpecialDir ? [] : await this._traverseDirectory(childUri), tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false, isSelectable };
                     this._aggregateStats(dirNode);
                     children.push(dirNode);
@@ -22190,7 +22190,7 @@ export class FileTreeService {
 
     private _aggregateStats(node: FileNode): void {
         if (!node.children) return;
-        if (node.name.toLowerCase() === 'node_modules' || node.name.toLowerCase() === '.git') {
+        if (['node_modules', '.git', 'venv'].includes(node.name.toLowerCase())) {
             node.tokenCount = 0;
             node.fileCount = 0;
             node.sizeInBytes = 0;
@@ -22207,10 +22207,10 @@ export class FileTreeService {
         node.sizeInBytes = totalBytes;
     }
 }
-</file>
+</file_artifact>
 
 <file path="src/backend/services/flattener.service.ts">
-// Updated on: C172 (Add in-memory flattening for cost estimation)
+// Updated on: C189 (Add .git and venv to non-selectable patterns)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -22234,7 +22234,7 @@ interface FileStats {
 const BINARY_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico', '.exe', '.dll', '.bin', '.zip', '.gz', '.7z', '.mp3', '.wav', '.mov', '.mp4']);
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
-const NON_SELECTABLE_PATTERNS = ['/node_modules', '/.vscode', 'flattened_repo.md', 'prompt.md', 'package-lock.json'];
+const NON_SELECTABLE_PATTERNS = ['/node_modules', '/.vscode', '/.git', '/venv', 'flattened_repo.md', 'prompt.md', 'package-lock.json'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
@@ -22446,12 +22446,12 @@ export class FlattenerService {
             output += `<file path="${relativePath}">\n`;
             output += error ? `Error reading file: ${error}\n` : content;
             if (content && !content.endsWith('\n')) output += '\n';
-            output += `</file>\n\n`;
+            output += `</file_artifact>\n\n`;
         }
         return output;
     }
 }
-</file>
+</file_artifact>
 
 <file path="src/backend/services/git.service.ts">
 // src/backend/services/git.service.ts
@@ -22568,7 +22568,7 @@ export class GitService {
         serverIpc.sendToClient(ServerToClientChannel.NotifyGitOperationResult, result);
     }
 }
-</file>
+</file_artifact>
 
 <file path="src/backend/services/highlighting.service.ts">
 // Updated on: C3 (Add handleHighlightContextRequest)
@@ -22655,7 +22655,7 @@ export class HighlightingService {
         }
     }
 }
-</file>
+</file_artifact>
 
 <file path="src/backend/services/history.service.ts">
 // src/backend/services/history.service.ts
@@ -22939,7 +22939,7 @@ export class HistoryService {
         }
     }
 }
-</file>
+</file_artifact>
 
 <file path="src/backend/services/logger.service.ts">
 import * as vscode from 'vscode';
@@ -22980,7 +22980,7 @@ export class LoggerService {
         this.logMessage('ERROR', message);
     }
 }
-</file>
+</file_artifact>
 
 <file path="src/backend/services/prompt.service.ts">
 // Updated on: C2 (Implement generateStateLog)
@@ -23369,7 +23369,7 @@ ${JSON.stringify(stateDump, null, 2)}
         }
     }
 }
-</file>
+</file_artifact>
 
 <file path="src/backend/services/selection.service.ts">
 import * as vscode from 'vscode';
@@ -23505,7 +23505,7 @@ export class SelectionService {
         Services.loggerService.log(`Auto-add new files state saved: ${enabled}.`);
     }
 }
-</file>
+</file_artifact>
 
 <file path="src/backend/services/services.ts">
 import "reflect-metadata";
@@ -23548,7 +23548,7 @@ class ServiceContainer {
 }
 
 export const Services = new ServiceContainer();
-</file>
+</file_artifact>
 
 <file path="src/backend/types/git.ts">
 // This file is a placeholder for the complex types from the vscode.git extension API.
@@ -23630,7 +23630,7 @@ export const enum Status {
     BOTH_DELETED, // Both Deleted
     BOTH_MODIFIED, // Both Modified
 }
-</file>
+</file_artifact>
 
 <file path="src/client/components/file-tree/FileTree.tsx">
 // Updated on: C184 (Refactor to use gitStatusMap prop)
@@ -23809,7 +23809,7 @@ const FileTree: React.FC<FileTreeProps> = ({ data, checkedFiles, activeFile, upd
 };
 
 export default FileTree;
-</file>
+</file_artifact>
 
 <file path="src/client/components/file-tree/FileTree.utils.ts">
 // Updated on: C162 (Overhaul selection logic to be explicit and file-based)
@@ -23929,7 +23929,7 @@ export const removePathsFromSelected = (
     logger.log(`[Batch Remove] After removal, ${effectiveFileSelection.size} files remain.`);
     return Array.from(effectiveFileSelection);
 };
-</file>
+</file_artifact>
 
 <file path="src/client/components/tree-view/TreeView.tsx">
 // Updated on: C167 (Fix TS errors, array access)
@@ -24327,7 +24327,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
 };
 
 export default TreeView;
-</file>
+</file_artifact>
 
 <file path="src/client/components/tree-view/TreeView.utils.ts">
 import { TreeNode } from "./TreeView";
@@ -24343,7 +24343,7 @@ export const getExpandedNodes = (data: TreeNode[]): string[] => {
     return acc;
   }, []);
 };
-</file>
+</file_artifact>
 
 <file path="src/client/components/Checkbox.tsx">
 import React from "react";
@@ -24371,7 +24371,7 @@ const Checkbox = (props: CheckboxProps) => {
 };
 
 export default Checkbox;
-</file>
+</file_artifact>
 
 <file path="src/client/components/ContextMenu.tsx">
 // Updated on: C167 (Fix multi-select delete)
@@ -24446,7 +24446,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({ menu, onClose, onRename }) =>
 };
 
 export default ContextMenu;
-</file>
+</file_artifact>
 
 <file path="src/client/components/DiffViewer.tsx">
 // Updated on: C132 (Add keyboard nav, accept logic, and four scrollbars)
@@ -24673,7 +24673,7 @@ const DiffViewer: React.FC<{ original: { content: string, path: string }, modifi
 };
 
 export default DiffViewer;
-</file>
+</file_artifact>
 
 <file path="src/client/components/LocationPane.tsx">
 // src/client/components/LocationPane.tsx
@@ -24704,7 +24704,7 @@ const LocationPane: React.FC<LocationPaneProps> = ({ pairedLines, onLineClick })
 };
 
 export default LocationPane;
-</file>
+</file_artifact>
 
 <file path="src/client/components/SelectedFilesView.tsx">
 import * as React from 'react';
@@ -24983,7 +24983,7 @@ const SelectedFilesView: React.FC<SelectedFilesViewProps> = ({ selectedFileNodes
 };
 
 export default SelectedFilesView;
-</file>
+</file_artifact>
 
 <file path="src/client/utils/logger.ts">
 import { ClientPostMessageManager } from "@/common/ipc/client-ipc";
@@ -25005,7 +25005,7 @@ export const logger = {
         clientIpc.sendToServer(ClientToServerChannel.LogMessage, { level: 'error', message });
     }
 };
-</file>
+</file_artifact>
 
 <file path="src/client/utils/response-parser.ts">
 // src/client/utils/response-parser.ts
@@ -25090,7 +25090,7 @@ export function parseResponse(rawText: string): ParsedResponse {
         totalTokens,
     };
 }
-</file>
+</file_artifact>
 
 <file path="src/client/views/context-chooser.view/index.ts">
 import { onMessage } from "./on-message";
@@ -25100,7 +25100,7 @@ export const viewConfig = {
     type: "viewType.sidebar.contextChooser",
     handleMessage: onMessage,
 };
-</file>
+</file_artifact>
 
 <file path="src/client/views/context-chooser.view/on-message.ts">
 // Updated on: C166 (Add RequestOpenFolder handler)
@@ -25181,7 +25181,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     serverIpc.onClientMessage(ClientToServerChannel.RequestExcelToText, (data) => contentExtractionService.handleExcelToTextRequest(data.path, serverIpc));
     serverIpc.onClientMessage(ClientToServerChannel.RequestWordToText, (data) => contentExtractionService.handleWordToTextRequest(data.path, serverIpc));
 }
-</file>
+</file_artifact>
 
 <file path="src/client/views/context-chooser.view/view.scss">
 /* Updated on: C167 (Add secondary button style) */
@@ -25814,7 +25814,7 @@ body {
     font-size: inherit;
     font-family: inherit;
 }
-</file>
+</file_artifact>
 
 <file path="src/client/views/context-chooser.view/view.tsx">
 // Updated on: C184 (Add gitStatusMap state and handler)
@@ -25967,7 +25967,7 @@ const App = () => {
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 root.render(<App />);
-</file>
+</file_artifact>
 
 <file path="src/client/views/parallel-copilot.view/components/CodeViewer.tsx">
 // src/client/views/parallel-copilot.view/components/CodeViewer.tsx
@@ -26003,7 +26003,7 @@ const CodeViewer: React.FC<{ htmlContent: string | undefined | null }> = ({ html
 };
 
 export default CodeViewer;
-</file>
+</file_artifact>
 
 <file path="src/client/views/parallel-copilot.view/components/ContextInputs.tsx">
 // src/client/views/parallel-copilot.view/components/ContextInputs.tsx
@@ -26065,7 +26065,7 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
 };
 
 export default ContextInputs;
-</file>
+</file_artifact>
 
 <file path="src/client/views/parallel-copilot.view/components/CycleNavigator.tsx">
 // src/client/views/parallel-copilot.view/components/CycleNavigator.tsx
@@ -26156,7 +26156,7 @@ const CycleNavigator: React.FC<CycleNavigatorProps> = ({
 };
 
 export default CycleNavigator;
-</file>
+</file_artifact>
 
 <file path="src/client/views/parallel-copilot.view/components/HighlightedTextarea.tsx">
 // src/client/views/parallel-copilot.view/components/HighlightedTextarea.tsx
@@ -26248,7 +26248,7 @@ const HighlightedTextarea: React.FC<HighlightedTextareaProps> = ({ id, initialVa
 };
 
 export default HighlightedTextarea;
-</file>
+</file_artifact>
 
 <file path="src/client/views/parallel-copilot.view/components/ParsedView.tsx">
 // src/client/views/parallel-copilot.view/components/ParsedView.tsx
@@ -26346,7 +26346,7 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
 };
 
 export default ParsedView;
-</file>
+</file_artifact>
 
 <file path="src/client/views/parallel-copilot.view/components/ResponsePane.tsx">
 // src/client/views/parallel-copilot.view/components/ResponsePane.tsx
@@ -26433,7 +26433,7 @@ const ResponsePane: React.FC<ResponsePaneProps> = (props) => {
 };
 
 export default ResponsePane;
-</file>
+</file_artifact>
 
 <file path="src/client/views/parallel-copilot.view/components/ResponseTabs.tsx">
 // src/client/views/parallel-copilot.view/components/ResponseTabs.tsx
@@ -26505,7 +26505,7 @@ const ResponseTabs: React.FC<ResponseTabsProps> = ({
 };
 
 export default ResponseTabs;
-</file>
+</file_artifact>
 
 <file path="src/client/views/parallel-copilot.view/index.ts">
 // src/client/views/parallel-copilot.view/index.ts
@@ -26516,7 +26516,7 @@ export const viewConfig = {
     type: "viewType.sidebar.parallelCopilot",
     handleMessage: onMessage,
 };
-</file>
+</file_artifact>
 
 <file path="src/client/views/parallel-copilot.view/on-message.ts">
 // Updated on: C188 (Add logging)
@@ -26633,11 +26633,11 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         historyService.saveLastViewedCycleId(data.cycleId);
     });
 }
-</file>
+</file_artifact>
 
 <file path="src/client/views/parallel-copilot.view/OnboardingView.tsx">
 // src/client/views/parallel-copilot.view/OnboardingView.tsx
-// Updated on: C182 (No functional changes)
+// Updated on: C189 (No functional changes)
 import * as React from 'react';
 import { VscRocket, VscArrowRight } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -26728,7 +26728,7 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope, on
 };
 
 export default OnboardingView;
-</file>
+</file_artifact>
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
 /* src/client/views/parallel-copilot.view/view.scss */
@@ -27527,7 +27527,7 @@ body {
 .collapsible-content-inner {
     padding: 8px;
 }
-</file>
+</file_artifact>
 
 <file path="src/client/views/parallel-copilot.view/view.ts">
 // src/client/views/parallel-copilot.view/view.ts
@@ -27540,11 +27540,11 @@ export interface TabState {
     rawContent: string;
     parsedContent: ParsedResponse | null;
 }
-</file>
+</file_artifact>
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C2 (Implement robust state saving and loading)
+// Updated on: C189 (Fix new cycle data loss)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './view.scss';
@@ -27709,7 +27709,47 @@ const App = () => {
     
     const handleSortToggle = () => { if (workflowStep === 'awaitingSort') { setIsSortedByTokens(true); } else { setIsSortedByTokens(p => !p); } };
     const handleGlobalParseToggle = () => { const newParseMode = !isParsedMode; setIsParsedMode(newParseMode); setSelectedFilePath(null); if (!newParseMode) setTabs(prev => { const newTabs = {...prev}; Object.keys(newTabs).forEach(key => { newTabs[key].parsedContent = null; }); return newTabs; }); };
-    const handleNewCycle = (e: React.MouseEvent) => { e.stopPropagation(); saveCurrentCycleState(true); const newCycleId = maxCycle + 1; const newTabs: { [key: string]: TabState } = {}; for (let i = 1; i <= tabCount; i++) { newTabs[i.toString()] = { rawContent: '', parsedContent: null }; } setMaxCycle(newCycleId); setCurrentCycle(newCycleId); setCycleTitle('New Cycle'); setCycleContext(''); setEphemeralContext(''); setTabs(newTabs); setIsParsedMode(false); setSelectedResponseId(null); setSelectedFilesForReplacement(new Set()); setWorkflowStep('awaitingResponsePaste_1'); };
+    
+    const handleNewCycle = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        saveCurrentCycleState(true); // Save current cycle before creating a new one
+        const newCycleId = maxCycle + 1;
+        const newTabs: { [key: string]: TabState } = {};
+        for (let i = 1; i <= tabCount; i++) {
+            newTabs[i.toString()] = { rawContent: '', parsedContent: null };
+        }
+
+        // Set all new state
+        setMaxCycle(newCycleId);
+        setCurrentCycle(newCycleId);
+        setCycleTitle('New Cycle');
+        setCycleContext('');
+        setEphemeralContext('');
+        setTabs(newTabs);
+        setIsParsedMode(false);
+        setSelectedResponseId(null);
+        setSelectedFilesForReplacement(new Set());
+        setWorkflowStep('awaitingResponsePaste_1');
+
+        // Immediately save the newly created cycle's state
+        const newCycleData: PcppCycle = {
+            cycleId: newCycleId,
+            timestamp: new Date().toISOString(),
+            title: 'New Cycle',
+            cycleContext: '',
+            ephemeralContext: '',
+            responses: { "1": { content: "" } }, // Initialize with at least one response
+            isParsedMode: false,
+            leftPaneWidth: leftPaneWidth,
+            selectedResponseId: null,
+            selectedFilesForReplacement: [],
+            tabCount: tabCount,
+            isSortedByTokens: isSortedByTokens,
+            pathOverrides: {}
+        };
+        clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData: newCycleData });
+    };
+
     const handleGeneratePrompt = () => { if (currentCycle === null) return; clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle }); setWorkflowStep('readyForNewCycle'); }
     const handleDeleteCycle = () => { if(currentCycle !== null) clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle }); };
     const handleResetHistory = () => { clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {}); };
@@ -27751,7 +27791,7 @@ try {
 } catch (error) {
     console.error('[PCPP View] CRITICAL: Failed to render React root.', error);
 }
-</file>
+</file_artifact>
 
 <file path="src/client/views/index.ts">
 import { viewConfig as contextChooserViewConfig } from "./context-chooser.view";
@@ -27793,7 +27833,7 @@ export function registerViews(context: vscode.ExtensionContext) {
         );
     });
 }
-</file>
+</file_artifact>
 
 <file path="src/common/ipc/channels.enum.ts">
 export enum ClientToServerChannel {
@@ -27887,7 +27927,7 @@ export enum ServerToClientChannel {
     NotifyGitOperationResult = "serverToClient.notifyGitOperationResult",
     SendGitStatus = "serverToClient.sendGitStatus",
 }
-</file>
+</file_artifact>
 
 <file path="src/common/ipc/channels.type.ts">
 // Updated on: C186 (Add SaveLastViewedCycle channel)
@@ -27982,7 +28022,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.NotifyGitOperationResult ? { success: boolean; message: string; } :
     T extends ServerToClientChannel.SendGitStatus ? { isClean: boolean } :
     never;
-</file>
+</file_artifact>
 
 <file path="src/common/ipc/client-ipc.ts">
 // Updated on: C1 (Add getVscodeApi method)
@@ -28029,7 +28069,7 @@ export class ClientPostMessageManager {
         this._listeners.push({ channel, callback: callback as any });
     }
 }
-</file>
+</file_artifact>
 
 <file path="src/common/ipc/get-vscode-api.ts">
 import { WebviewApi } from "../types/vscode-webview";
@@ -28044,7 +28084,7 @@ const getVscode = () => {
 };
 
 export default getVscode;
-</file>
+</file_artifact>
 
 <file path="src/common/ipc/server-ipc.ts">
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
@@ -28089,7 +28129,7 @@ export class ServerPostMessageManager {
         this._listeners.push({ channel, callback: callback as any });
     }
 }
-</file>
+</file_artifact>
 
 <file path="src/common/types/file-node.ts">
 export interface FileNode {
@@ -28108,7 +28148,7 @@ export interface FileNode {
     // gitStatus and problemCounts are removed as they are now handled dynamically
     error?: string;
 }
-</file>
+</file_artifact>
 
 <file path="src/common/types/pcpp.types.ts">
 // src/common/types/pcpp.types.ts
@@ -28154,7 +28194,7 @@ export interface ParsedResponse {
     files: ParsedFile[];
     totalTokens: number;
 }
-</file>
+</file_artifact>
 
 <file path="src/common/types/vscode-webview.d.ts">
 // Updated on: C1 (Add pcppLeftPaneWidth to ViewState)
@@ -28172,7 +28212,7 @@ export interface ViewState {
 declare global {
     function acquireVsCodeApi<StateType = ViewState>(): WebviewApi<StateType>;
 }
-</file>
+</file_artifact>
 
 <file path="src/common/utils/formatting.ts">
 // src/common/utils/formatting.ts
@@ -28296,7 +28336,7 @@ export function truncateCodeForLogging(code: string, totalLines: number = 30, st
     const end = lines.slice(-endLines).join('\n');
     return `${start}\n\n// ... (content truncated) ...\n\n${end}`;
 }
-</file>
+</file_artifact>
 
 <file path="src/common/utils/similarity.ts">
 // src/common/utils/similarity.ts
@@ -28335,7 +28375,7 @@ export function diceCoefficient(str1: string, str2: string): number {
 
     return (2 * intersectionSize) / (bigrams1.size + bigrams2.size);
 }
-</file>
+</file_artifact>
 
 <file path="src/common/utils/view-html.ts">
 import * as vscode from "vscode";
@@ -28375,7 +28415,7 @@ function getNonce() {
     return text;
 }
 export { getNonce };
-</file>
+</file_artifact>
 
 <file path="src/common/view-types.ts">
 export const VIEW_TYPES = {
@@ -28386,7 +28426,7 @@ export const VIEW_TYPES = {
     PARALLEL_COPILOT: "viewType.panel.parallelCopilot",
   }
 };
-</file>
+</file_artifact>
 
 <file path="src/extension.ts">
 import * as vscode from "vscode";
@@ -28520,7 +28560,7 @@ export function getContext() {
 }
 
 export function deactivate() {}
-</file>
+</file_artifact>
 
 <file path="webpack.config.js">
 const path = require('path');
@@ -28634,7 +28674,7 @@ const webviewConfig = {
 };
 
 module.exports = [extensionConfig, webviewConfig];
-</file>
+</file_artifact>
 
 <file path="tsconfig.json">
 {
@@ -28664,7 +28704,7 @@ module.exports = [extensionConfig, webviewConfig];
         "The-Creator-AI-main"
     ]
 }
-</file>
+</file_artifact>
 
 <file path="package.json">
 {
@@ -28672,7 +28712,7 @@ module.exports = [extensionConfig, webviewConfig];
     "publisher": "DCE-Developer",
     "displayName": "Data Curation Environment",
     "description": "A VS Code extension for curating context for Large Language Models.",
-    "version": "0.0.11",
+    "version": "0.0.12",
     "repository": {
         "type": "git",
         "url": "https://github.com/dgerabagi/data-curation-environment.git"
@@ -28811,7 +28851,7 @@ module.exports = [extensionConfig, webviewConfig];
         "@types/diff": "^5.2.1"
     }
 }
-</file>
+</file_artifact>
 
 <file path=".vscodeignore">
 # This file tells the VS Code packaging tool which files to ignore.
@@ -28839,7 +28879,7 @@ The-Creator-AI-main/
 # We will rely on the .gitignore and the specific file exclusions above for now.
 # src/**/*.ts
 # src/**/*.tsx
-</file>
+</file_artifact>
 
 <file path=".gitignore">
 node_modules
@@ -28852,7 +28892,7 @@ out
 The-Creator-AI-main/
 prompt.md
 .vscode/dce_cache/
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/A78. DCE - VSIX Packaging and FTV Flashing Bug.md">
 # Artifact A78: DCE - VSIX Packaging and FTV Flashing Bug
@@ -28905,7 +28945,7 @@ The-Creator-AI-main/
         *   Add a log at the very beginning of the `onFileChange` handler to see every single file path the watcher detects, before any exclusion logic is applied.
     2.  **Strengthen Exclusions:** The exclusion logic in `file-tree.service.ts` must be made more robust to explicitly ignore build artifacts and internal state files under all conditions.
     3.  **Dampen Event Listener:** The `repo.state.onDidChange` listener should be heavily debounced via the `triggerFullRefresh` function to prevent a storm of events from causing a storm of UI updates. A longer-term solution would be to find a more specific Git API event to listen to, if one exists.
-</file>
+</file_artifact>
 
 <file path="dist/Artifacts/A78. DCE - VSIX Packaging and FTV Flashing Bug.md">
 # Artifact A78: DCE - VSIX Packaging and FTV Flashing Bug
@@ -28958,7 +28998,7 @@ The-Creator-AI-main/
         *   Add a log at the very beginning of the `onFileChange` handler to see every single file path the watcher detects, before any exclusion logic is applied.
     2.  **Strengthen Exclusions:** The exclusion logic in `file-tree.service.ts` must be made more robust to explicitly ignore build artifacts and internal state files under all conditions.
     3.  **Dampen Event Listener:** The `repo.state.onDidChange` listener should be heavily debounced via the `triggerFullRefresh` function to prevent a storm of events from causing a storm of UI updates. A longer-term solution would be to find a more specific Git API event to listen to, if one exists.
-</file>
+</file_artifact>
 
 <file path="src/Artifacts/DCE_README.md">
 # Artifact A72: DCE - README for Artifacts
@@ -29008,7 +29048,7 @@ Development in the DCE is organized into **Cycles**. You have just completed the
 4.  **Repeat:** This completes a cycle. You then start the next cycle, building upon the newly accepted code and documentation.
 
 This structured, iterative process helps maintain project quality and ensures that both human and AI developers are always aligned with the project's goals.
-</file>
+</file_artifact>
 
 <file path="dist/Artifacts/DCE_README.md">
 # Artifact A72: DCE - README for Artifacts
@@ -29058,5 +29098,5 @@ Development in the DCE is organized into **Cycles**. You have just completed the
 4.  **Repeat:** This completes a cycle. You then start the next cycle, building upon the newly accepted code and documentation.
 
 This structured, iterative process helps maintain project quality and ensures that both human and AI developers are always aligned with the project's goals.
-</file>
+</file_artifact>
 
