@@ -1,4 +1,4 @@
-// Updated on: C10 (Add Undo/Redo handlers)
+// Updated on: C13 (Add settings panel handlers)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";

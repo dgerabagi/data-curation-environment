@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C12 (Update onGitRestore handler)
+// Updated on: C13 (Implement tab persistence fix)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './view.scss';
@@ -106,7 +106,7 @@ const App = () => {
             selectedResponseId,
             selectedFilesForReplacement: Array.from(selectedFilesForReplacement),
             tabCount,
-            activeTab,
+            activeTab, // <-- This is the fix
             isSortedByTokens,
             pathOverrides: Object.fromEntries(pathOverrides)
         };

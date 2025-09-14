@@ -1,5 +1,5 @@
 // src/backend/services/file-operation.service.ts
-// Updated on: C12 (Add logic for ignoring files for auto-add)
+// Updated on: C13 (Add handlers for README and Changelog)
 import * as vscode from "vscode";
 import * as path from "path";
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
@@ -8,11 +8,40 @@ import { Services } from "./services";
 import { Action, MoveActionPayload } from "./action.service";
 import { BatchWriteFile } from "@/common/ipc/channels.type";
 import { diceCoefficient } from "@/common/utils/similarity";
+import { promises as fs } from 'fs';
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
 export class FileOperationService {
     private filesToIgnoreForAutoAdd: Set<string> = new Set();
+    
+    private getWorkspaceRoot(): string {
+        const workspaceFolders = vscode.workspace.workspaceFolders;
+        if (!workspaceFolders || workspaceFolders.length === 0) {
+            throw new Error("No workspace folder open.");
+        }
+        return workspaceFolders[0].uri.fsPath;
+    }
+
+    public async handleReadmeContentRequest(serverIpc: ServerPostMessageManager) {
+        try {
+            const readmePath = path.join(this.getWorkspaceRoot(), 'README.md');
+            const content = await fs.readFile(readmePath, 'utf-8');
+            serverIpc.sendToClient(ServerToClientChannel.SendReadmeContent, { content });
+        } catch (error) {
+            serverIpc.sendToClient(ServerToClientChannel.SendReadmeContent, { content: '# README not found.' });
+        }
+    }
+
+    public async handleChangelogContentRequest(serverIpc: ServerPostMessageManager) {
+        try {
+            const changelogPath = path.join(this.getWorkspaceRoot(), 'CHANGELOG.md');
+            const content = await fs.readFile(changelogPath, 'utf-8');
+            serverIpc.sendToClient(ServerToClientChannel.SendChangelogContent, { content });
+        } catch (error) {
+            serverIpc.sendToClient(ServerToClientChannel.SendChangelogContent, { content: '# Changelog not found.' });
+        }
+    }
 
     public async fileExists(filePath: string): Promise<boolean> {
         try {
@@ -52,10 +81,7 @@ export class FileOperationService {
     public async handleFileComparisonRequest(filePath: string, modifiedContent: string, serverIpc: ServerPostMessageManager) {
         Services.loggerService.log(`[Comparison] Received request for: ${filePath}`);
         try {
-            const workspaceFolders = vscode.workspace.workspaceFolders;
-            if (!workspaceFolders || workspaceFolders.length === 0) throw new Error("No workspace folder open.");
-
-            const absolutePath = path.resolve(workspaceFolders[0].uri.fsPath, filePath);
+            const absolutePath = path.resolve(this.getWorkspaceRoot(), filePath);
             const originalContentBuffer = await vscode.workspace.fs.readFile(vscode.Uri.file(absolutePath));
             const originalContent = Buffer.from(originalContentBuffer).toString('utf-8');
 
@@ -83,12 +109,7 @@ export class FileOperationService {
 
     public async handleBatchFileWrite(files: BatchWriteFile[]): Promise<string[]> {
         Services.loggerService.log(`[File Operation] Received request to write ${files.length} files.`);
-        const workspaceFolders = vscode.workspace.workspaceFolders;
-        if (!workspaceFolders || workspaceFolders.length === 0) {
-            vscode.window.showErrorMessage("Cannot write files: No workspace folder is open.");
-            return [];
-        }
-        const rootPath = workspaceFolders[0].uri.fsPath;
+        const rootPath = this.getWorkspaceRoot();
         const successfulPaths: string[] = [];
 
         try {
@@ -113,11 +134,7 @@ export class FileOperationService {
     public async handleFileContentRequest(filePath: string, serverIpc: ServerPostMessageManager) {
         Services.loggerService.log(`handleFileContentRequest initiated for: ${filePath}`);
         try {
-            const workspaceFolders = vscode.workspace.workspaceFolders;
-            if (!workspaceFolders || workspaceFolders.length === 0) {
-                throw new Error("No workspace folder open.");
-            }
-            const absolutePath = path.resolve(workspaceFolders[0].uri.fsPath, filePath);
+            const absolutePath = path.resolve(this.getWorkspaceRoot(), filePath);
             const uri = vscode.Uri.file(absolutePath);
             const contentBuffer = await vscode.workspace.fs.readFile(uri);
             const content = Buffer.from(contentBuffer).toString('utf-8');
@@ -131,13 +148,7 @@ export class FileOperationService {
 
     public async handleFileExistenceRequest(paths: string[], serverIpc: ServerPostMessageManager) {
         Services.loggerService.log(`[File Existence] Received request to check paths: ${JSON.stringify(paths)}`);
-        const workspaceFolders = vscode.workspace.workspaceFolders;
-        if (!workspaceFolders || workspaceFolders.length === 0) {
-            Services.loggerService.error("[File Existence] Cannot check for files, no workspace folder is open.");
-            serverIpc.sendToClient(ServerToClientChannel.SendFileExistence, { existenceMap: {} });
-            return;
-        }
-        const rootPath = workspaceFolders[0].uri.fsPath;
+        const rootPath = this.getWorkspaceRoot();
     
         const existenceMap: { [path: string]: boolean } = {};
         const checks = paths.map(async (p_raw) => {
@@ -247,9 +258,7 @@ export class FileOperationService {
     public async handleCreateFileRequest(filePath: string) {
         Services.loggerService.log(`Received request to create file: ${filePath}`);
         try {
-            const workspaceFolders = vscode.workspace.workspaceFolders;
-            if (!workspaceFolders || workspaceFolders.length === 0) throw new Error("No workspace folder open.");
-            const absolutePath = path.resolve(workspaceFolders[0].uri.fsPath, filePath);
+            const absolutePath = path.resolve(this.getWorkspaceRoot(), filePath);
             await vscode.workspace.fs.writeFile(vscode.Uri.file(absolutePath), new Uint8Array());
             Services.loggerService.log(`Successfully created file: ${filePath}`);
         } catch (error: any) {

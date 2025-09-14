@@ -16,3 +16,27 @@ body {
         margin-bottom: 16px;
     }
 }
+
+.tab-bar {
+    display: flex;
+    border-bottom: 1px solid var(--vscode-panel-border);
+    margin-bottom: 16px;
+}
+
+.tab {
+    padding: 6px 12px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    color: var(--vscode-tab-inactiveForeground);
+}
+
+.tab.active {
+    color: var(--vscode-tab-activeForeground);
+    border-bottom-color: var(--vscode-tab-activeBorder);
+}
+
+.tab-content {
+    h2 {
+        margin-top: 0;
+    }
+}

@@ -1,4 +1,4 @@
-// Updated on: C12 (Add filesToDelete to RequestGitRestore)
+// Updated on: C13 (Add settings panel channels)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -39,6 +39,8 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestCreateFile ? { filePath: string } :
     T extends ClientToServerChannel.RequestCopyTextToClipboard ? { text: string } :
     T extends ClientToServerChannel.RequestShowInformationMessage ? { message: string } :
+    T extends ClientToServerChannel.RequestReadmeContent ? {} :
+    T extends ClientToServerChannel.RequestChangelogContent ? {} :
     T extends ClientToServerChannel.RequestPdfToText ? { path: string } :
     T extends ClientToServerChannel.RequestExcelToText ? { path: string } :
     T extends ClientToServerChannel.RequestWordToText ? { path: string } :
@@ -79,6 +81,8 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.UpdateDecorations ? { problemMap: ProblemCountsMap, gitStatusMap: GitStatusMap } :
     T extends ServerToClientChannel.UpdateNodeStats ? { path: string, tokenCount: number, error?: string } :
     T extends ServerToClientChannel.SendFileContent ? { path: string, content: string | null } :
+    T extends ServerToClientChannel.SendReadmeContent ? { content: string } :
+    T extends ServerToClientChannel.SendChangelogContent ? { content: string } :
     T extends ServerToClientChannel.SendFileExistence ? { existenceMap: { [path: string]: boolean } } :
     T extends ServerToClientChannel.SendSyntaxHighlight ? { highlightedHtml: string, id: string } :
     T extends ServerToClientChannel.SendHighlightContext ? { highlightedHtml: string, id: string } :

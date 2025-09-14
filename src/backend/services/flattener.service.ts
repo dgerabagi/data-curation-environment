@@ -1,4 +1,4 @@
-// Updated on: C190 (Add .venv to non-selectable patterns)
+// Updated on: C13 (Add tsconfig.tsbuildinfo to exclusion list)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -22,7 +22,7 @@ interface FileStats {
 const BINARY_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico', '.exe', '.dll', '.bin', '.zip', '.gz', '.7z', '.mp3', '.wav', '.mov', '.mp4']);
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
-const NON_SELECTABLE_PATTERNS = ['/node_modules', '/.vscode', '/.git', '/venv', '/.venv', 'flattened_repo.md', 'prompt.md', 'package-lock.json'];
+const NON_SELECTABLE_PATTERNS = ['/node_modules', '/.vscode', '/.git', '/venv', '/.venv', 'flattened_repo.md', 'prompt.md', 'package-lock.json', 'tsconfig.tsbuildinfo'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
@@ -117,7 +117,7 @@ export class FlattenerService {
                 const fullPath = path.join(dirPath, entry.name);
                 const normalizedFullPath = normalizePath(fullPath);
 
-                if (NON_SELECTABLE_PATTERNS.some(p => normalizedFullPath.includes(p))) {
+                if (NON_SELECTABLE_PATTERNS.some(p => normalizedFullPath.includes(p) || entry.name === p)) {
                     continue;
                 }
 

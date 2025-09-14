@@ -1,4 +1,4 @@
-// Resp 12-Updated on: C12 (Use FileOperationService for ignore list)
+// Resp 12-Updated on: C13 (Add tsconfig.tsbuildinfo to exclusion list)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -205,6 +205,7 @@ export class FileTreeService {
     private _isSelectable(filePath: string, fileType: vscode.FileType): boolean {
         const normalizedPath = normalizePath(filePath);
         const name = path.basename(normalizedPath);
+        if (name === 'tsconfig.tsbuildinfo') return false;
         const pathWithSlash = normalizedPath + (fileType === vscode.FileType.Directory ? '/' : '');
         return !NON_SELECTABLE_PATTERNS.some(p => pathWithSlash.includes(p) || name.startsWith(p));
     }

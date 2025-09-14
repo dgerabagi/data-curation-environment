@@ -1,5 +1,5 @@
 // src/common/types/pcpp.types.ts
-// Updated on: C10 (Add activeTab to PcppCycle)
+// Updated on: C13 (No functional changes, comment alignment)
 export interface PcppResponse {
     content: string;
 }

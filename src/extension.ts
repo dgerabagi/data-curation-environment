@@ -81,6 +81,7 @@ function createOrShowSettingsPanel(context: vscode.ExtensionContext) {
         settingsPanel.webview.onDidReceiveMessage,
         (data: any) => settingsPanel?.webview.postMessage(data)
     );
+    serverIPCs['viewType.panel.settings'] = serverIpc;
     onSettingsMessage(serverIpc);
 
     settingsPanel.onDidDispose(() => {

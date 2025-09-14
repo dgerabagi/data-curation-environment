@@ -25,6 +25,8 @@ export enum ClientToServerChannel {
     RequestCreateFile = "clientToServer.requestCreateFile",
     RequestCopyTextToClipboard = "clientToServer.requestCopyTextToClipboard",
     RequestShowInformationMessage = "clientToServer.requestShowInformationMessage",
+    RequestReadmeContent = "clientToServer.requestReadmeContent",
+    RequestChangelogContent = "clientToServer.requestChangelogContent",
 
     // Special File Handling
     RequestPdfToText = "clientToServer.requestPdfToText",
@@ -75,6 +77,8 @@ export enum ServerToClientChannel {
     UpdateDecorations = "serverToClient.updateDecorations", // New in C184
     UpdateNodeStats = "serverToClient.updateNodeStats",
     SendFileContent = "serverToClient.sendFileContent",
+    SendReadmeContent = "serverToClient.sendReadmeContent",
+    SendChangelogContent = "serverToClient.sendChangelogContent",
     
     // Phase 2: PCPP
     SendFileExistence = "serverToClient.sendFileExistence",
