@@ -23,7 +23,7 @@ interface ResponsePaneProps {
     onTempOverridePathChange: (path: string) => void;
     onLinkFile: (originalPath: string) => void;
     onUnlinkFile: (originalPath: string) => void;
-    comparisonMetrics: ComparisonMetrics | null;
+    comparisonMetrics: Map<string, ComparisonMetrics> | null;
     viewableContent: string | undefined | null;
     onCopyContent: () => void;
     selectedResponseId: string | null;

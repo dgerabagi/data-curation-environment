@@ -1,5 +1,5 @@
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C7 (Add styles for save status indicator)
+// Updated on: C8 (Add style for similarity score)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -620,6 +620,14 @@ body {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+    }
+
+    .similarity-score {
+        margin-left: auto;
+        padding-left: 8px;
+        font-size: 11px;
+        color: var(--vscode-descriptionForeground);
+        font-style: italic;
     }
 
     input[type="checkbox"] {

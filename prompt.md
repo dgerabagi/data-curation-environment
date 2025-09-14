@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 8 - T-3 from A83
+Current Cycle 9 - Finalize T-3, Update A83 for the next steps game plan
+Cycle 8 - T-3 from A83
 Cycle 7 - working through A83 checklist
 Cycle 6 - laundry list of feedback/observations to organize/plan solutions for
 Cycle 5 - test theory
@@ -658,6 +659,36 @@ No project scope defined.
 
 <M6. Cycles>
 
+<Cycle 9>
+<Cycle Context>
+great work! the color and the percentage is working great. there is an issue where if the associated file path is too long, then i cannot see the percentage value. past a certain length, can we truncate the middle of the file path? whats most important is the beginning and the end of a file path. if the user needs to reveal the middle portion, they simply hover over to see it. also, the right click copy file path is supposed to function. i do see something when i right click, but its not a right-click context menu. instead some pane appears on the pcpp itself, a new area to the right of the response viewer, which says: `[bulletpoint] Copy Relative Path`
+
+just fix those two above, which are listed as 3.2 and 3.3 in A83, and then i'd say we're on track for T-4, which seems like the planning artifacts have commenced, but i think we need to update A83 to include the game plan to implement.
+</Cycle Context>
+<Previous Cycle 8 Summary of Actions>
+I have analyzed the request for Cycle 7. The primary objective is to begin work on task T-2 from the `A83` checklist, which focuses on data integrity and core user experience improvements. This involves implementing a robust autosave and navigation locking mechanism to prevent the critical data loss bug, and refining the "auto-tab on paste" feature to be more intelligent.
+
+My course of action is to address all items in T-2. I will start by creating the necessary documentation to codify the definitive fix for the data loss bug. Then, I will implement the frontend and backend changes for the navigation locking feature. Finally, I will implement the more robust auto-tab logic and add the requested exclusion patterns to the file tree service.
+
+1.  **Documentation First (Codifying the Fix):**
+    *   I will create a new artifact, **`A79. DCE - Autosave and Navigation Locking Plan.md`**, to formally document the solution for the data loss race condition. This plan will detail the UI/UX for the save status indicator and the logic for locking navigation controls, serving as our new source of truth.
+    *   I will update **`A11. DCE - Regression Case Studies.md`** to expand the "PCPP Context/Title Data Loss" case study, codifying this new "Navigation Locking" pattern as the definitive solution.
+    *   I will update **`A0. DCE Master Artifact List.md`** to include the new `A79` artifact.
+
+2.  **Implement Save Status and Navigation Locking:**
+    *   **IPC:** I will add a `NotifySaveComplete` channel to `channels.enum.ts` and `channels.type.ts`.
+    *   **Backend (`history.service.ts`):** The `saveCycleData` method will be updated to send the `NotifySaveComplete` message back to the client after successfully writing to the history file.
+    *   **Frontend (`view.tsx`):** I will introduce a `saveStatus` state (`'saved'`, `'saving'`, `'unsaved'`). All `onChange` handlers for persisted data will set this to `'unsaved'`. The debounced save function will set it to `'saving'`, and the new `NotifySaveComplete` handler will set it back to `'saved'`.
+    *   **UI (`CycleNavigator.tsx`, `view.scss`):** The navigation buttons in the `CycleNavigator` will be disabled whenever the `saveStatus` is not `'saved'`. I will also add a new UI element with an icon to visually represent the current save status to the user.
+
+3.  **Refine Auto-Tab on Paste Logic:**
+    *   **`view.tsx`:** I will modify the `onPaste` event handler. It will now only switch to the next tab if two conditions are met: the pasted text is over 1,000 tokens, AND the current response tab's content is empty. This prevents unintended navigation during minor edits.
+
+4.  **Update Exclusion List:**
+    *   **`file-tree.service.ts`:** I will add `'tsconfig.tsbuildinfo'` and `'dce_history_export_'` to the `NON_SELECTABLE_PATTERNS` array to prevent these files from being included in the flattened context.
+</Previous Cycle 8 Summary of Actions>
+</Cycle 9>
+
 <Cycle 8>
 <Cycle Context>
 nice! okay results from T-2: autosave locking is working more robustly, the previous case that caused data loss no longer can cause data loss, nice. 
@@ -670,21 +701,6 @@ also getting an error in the view.tsx, ive provided the error in ephemeral below
 
 then, given that, lets proceed to implement T-3.
 </Cycle Context>
-<Ephemeral Context>
-[{
-	"resource": "/c:/Projects/DCE/src/client/views/parallel-copilot.view/view.tsx",
-	"owner": "typescript",
-	"code": "2345",
-	"severity": 8,
-	"message": "Argument of type 'BatchWriteFile[]' is not assignable to parameter of type 'never'.",
-	"source": "ts",
-	"startLineNumber": 154,
-	"startColumn": 647,
-	"endLineNumber": 154,
-	"endColumn": 659,
-	"origin": "extHost1"
-}]
-</Ephemeral Context>
 <Previous Cycle 7 Summary of Actions>
 I have meticulously analyzed the comprehensive "laundry list" of feedback. It's an excellent collection of bug reports, quality-of-life improvements, and strategic feature requests that will significantly mature the extension. My course of action is to first organize this work into a structured plan using a new "Universal Task Checklist" artifact. This allows us to prioritize logically and tackle related items together.
 
@@ -1895,21 +1911,21 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-14T17:03:45.960Z
+  Date Generated: 2025-09-14T17:33:51.754Z
   ---
   Total Files: 178
-  Approx. Tokens: 449145
+  Approx. Tokens: 449537
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (7819 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (7866 tokens)
 4. src\Artifacts\A0. DCE Master Artifact List.md (7724 tokens)
 5. src\backend\services\prompt.service.ts (5042 tokens)
-6. src\client\views\parallel-copilot.view\view.scss (4610 tokens)
+6. src\client\views\parallel-copilot.view\view.scss (4656 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4429 tokens)
-8. src\backend\services\file-operation.service.ts (4095 tokens)
+8. src\backend\services\file-operation.service.ts (4096 tokens)
 9. src\client\views\context-chooser.view\view.tsx (4019 tokens)
 10. src\client\views\context-chooser.view\view.scss (3708 tokens)
 
@@ -2019,8 +2035,8 @@ This file-centric approach helps in planning and prioritizing work, especially i
 103. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
 104. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
 105. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
-106. src\backend\services\file-operation.service.ts - Lines: 344 - Chars: 16380 - Tokens: 4095
-107. src\backend\services\file-tree.service.ts - Lines: 252 - Chars: 13683 - Tokens: 3421
+106. src\backend\services\file-operation.service.ts - Lines: 344 - Chars: 16383 - Tokens: 4096
+107. src\backend\services\file-tree.service.ts - Lines: 252 - Chars: 13674 - Tokens: 3419
 108. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12609 - Tokens: 3153
 109. src\backend\services\git.service.ts - Lines: 114 - Chars: 5522 - Tokens: 1381
 110. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
@@ -2049,18 +2065,18 @@ This file-centric approach helps in planning and prioritizing work, especially i
 133. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 55 - Chars: 1970 - Tokens: 493
 134. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 97 - Chars: 4000 - Tokens: 1000
 135. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
-136. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 135 - Chars: 9810 - Tokens: 2453
-137. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 86 - Chars: 3562 - Tokens: 891
+136. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 139 - Chars: 10083 - Tokens: 2521
+137. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 86 - Chars: 3575 - Tokens: 894
 138. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
 139. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 140. src\client\views\parallel-copilot.view\on-message.ts - Lines: 114 - Chars: 5326 - Tokens: 1332
 141. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 92 - Chars: 4340 - Tokens: 1085
-142. src\client\views\parallel-copilot.view\view.scss - Lines: 823 - Chars: 18440 - Tokens: 4610
+142. src\client\views\parallel-copilot.view\view.scss - Lines: 831 - Chars: 18624 - Tokens: 4656
 143. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-144. src\client\views\parallel-copilot.view\view.tsx - Lines: 222 - Chars: 31275 - Tokens: 7819
+144. src\client\views\parallel-copilot.view\view.tsx - Lines: 236 - Chars: 31461 - Tokens: 7866
 145. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
 146. src\common\ipc\channels.enum.ts - Lines: 92 - Chars: 4981 - Tokens: 1246
-147. src\common\ipc\channels.type.ts - Lines: 92 - Chars: 6984 - Tokens: 1746
+147. src\common\ipc\channels.type.ts - Lines: 93 - Chars: 7074 - Tokens: 1769
 148. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 149. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 150. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
@@ -2087,11 +2103,11 @@ This file-centric approach helps in planning and prioritizing work, especially i
 171. src\Artifacts\A80. DCE - Settings Panel Plan.md - Lines: 35 - Chars: 2931 - Tokens: 733
 172. src\Artifacts\A81. DCE - Curator Activity Plan.md - Lines: 34 - Chars: 2346 - Tokens: 587
 173. src\Artifacts\A82. DCE - Advanced Exclusion Management Plan.md - Lines: 40 - Chars: 3010 - Tokens: 753
-174. src\Artifacts\A83. DCE - Universal Task Checklist for Cycle 6.md - Lines: 93 - Chars: 4829 - Tokens: 1208
+174. src\Artifacts\A83. DCE - Universal Task Checklist for Cycle 6.md - Lines: 100 - Chars: 5244 - Tokens: 1311
 175. dist\Artifacts\A80. DCE - Settings Panel Plan.md - Lines: 35 - Chars: 2931 - Tokens: 733
 176. dist\Artifacts\A81. DCE - Curator Activity Plan.md - Lines: 34 - Chars: 2346 - Tokens: 587
 177. dist\Artifacts\A82. DCE - Advanced Exclusion Management Plan.md - Lines: 40 - Chars: 3010 - Tokens: 753
-178. dist\Artifacts\A83. DCE - Universal Task Checklist for Cycle 6.md - Lines: 93 - Chars: 4829 - Tokens: 1208
+178. dist\Artifacts\A83. DCE - Universal Task Checklist for Cycle 6.md - Lines: 100 - Chars: 5244 - Tokens: 1311
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -9015,7 +9031,7 @@ export class ContentExtractionService {
 
 <file path="src/backend/services/file-operation.service.ts">
 // src/backend/services/file-operation.service.ts
-// Updated on: C186 (Add ShowInformationMessage handler)
+// Updated on: C8 (Fix handleBatchFileWrite parameter type)
 import * as vscode from "vscode";
 import * as path from "path";
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
@@ -9361,7 +9377,7 @@ export class FileOperationService {
 </file_artifact>
 
 <file path="src/backend/services/file-tree.service.ts">
-// Resp 12-Updated on: C7 (Add tsconfig.tsbuildinfo and history exports to non-selectable)
+// Resp 12-Updated on: C8 (Add dist to non-selectable patterns)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -9377,8 +9393,8 @@ import { ProblemCountsMap, GitStatusMap } from "@/common/ipc/channels.type";
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
-const EXCLUSION_PATTERNS = ['dce_cache', 'out', 'dist']; 
-const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/.git/', '/venv/', '/.venv/', 'flattened_repo.md', 'prompt.md', 'package-lock.json', 'tsconfig.tsbuildinfo', 'dce_history_export_'];
+const EXCLUSION_PATTERNS = ['dce_cache', 'out']; 
+const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/.git/', '/venv/', '/.venv/', 'flattened_repo.md', 'prompt.md', 'package-lock.json', 'tsconfig.tsbuildinfo', 'dce_history_export_', '/dist/'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
@@ -9579,7 +9595,7 @@ export class FileTreeService {
                 const childPath = normalizePath(childUri.fsPath);
                 const isSelectable = this._isSelectable(childPath, type);
                 if (type === vscode.FileType.Directory) {
-                    const isSpecialDir = ['node_modules', '.git', 'venv', '.venv'].includes(name.toLowerCase());
+                    const isSpecialDir = ['node_modules', '.git', 'venv', '.venv', 'dist'].includes(name.toLowerCase());
                     const dirNode: FileNode = { name, absolutePath: childPath, children: isSpecialDir ? [] : await this._traverseDirectory(childUri), tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false, isSelectable };
                     this._aggregateStats(dirNode);
                     children.push(dirNode);
@@ -9596,7 +9612,7 @@ export class FileTreeService {
 
     private _aggregateStats(node: FileNode): void {
         if (!node.children) return;
-        if (['node_modules', '.git', 'venv', '.venv'].includes(node.name.toLowerCase())) {
+        if (['node_modules', '.git', 'venv', '.venv', 'dist'].includes(node.name.toLowerCase())) {
             node.tokenCount = 0;
             node.fileCount = 0;
             node.sizeInBytes = 0;
@@ -13661,7 +13677,7 @@ export default HighlightedTextarea;
 
 <file path="src/client/views/parallel-copilot.view/components/ParsedView.tsx">
 // src/client/views/parallel-copilot.view/components/ParsedView.tsx
-// Updated on: C6 (Add Curator Activity section, color gradient, and context menu)
+// Updated on: C8 (Display similarity score percentage)
 import * as React from 'react';
 import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscSave, VscCheckAll, VscClearAll, VscClippy, VscChevronDown, VscSourceControl, VscDiscard } from 'react-icons/vsc';
 import ReactMarkdown from 'react-markdown';
@@ -13701,7 +13717,7 @@ interface ParsedViewProps {
     onTempOverridePathChange: (path: string) => void;
     onLinkFile: (originalPath: string) => void;
     onUnlinkFile: (originalPath: string) => void;
-    comparisonMetrics: ComparisonMetrics | null;
+    comparisonMetrics: Map<string, ComparisonMetrics | null>;
     viewableContent: string | undefined | null;
     onCopyContent: () => void;
     selectedResponseId: string | null;
@@ -13737,6 +13753,8 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
         }
     };
 
+    const currentComparisonMetrics = props.selectedFilePath ? props.comparisonMetrics.get(props.pathOverrides.get(props.selectedFilePath) || props.selectedFilePath) : null;
+
     return (
         <div className="parsed-view-grid">
             <div className="parsed-view-left" style={{ flexBasis: `${props.leftPaneWidth}%` }}>
@@ -13744,13 +13762,15 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
                     <ul className="associated-files-list">{props.parsedContent.filesUpdated.map(file => {
                         const fileExists = props.fileExistenceMap.get(file);
                         const hasOverride = props.pathOverrides.has(file);
-                        const metrics = props.comparisonMetrics;
-                        const bgColor = (metrics && fileExists) ? getSimilarityColor(metrics.similarity) : 'transparent';
+                        const metrics = props.comparisonMetrics.get(props.pathOverrides.get(file) || file);
+                        const similarity = metrics?.similarity ?? 0;
+                        const bgColor = (metrics && fileExists) ? getSimilarityColor(similarity) : 'transparent';
                         return <li key={file} className={props.selectedFilePath === file ? 'selected' : ''} onClick={() => props.onSelectForViewing(file)} onContextMenu={(e) => handleContextMenu(e, file)} title={file} style={{ backgroundColor: bgColor }}>
                             <div className="file-row">
                                 <input type="checkbox" checked={props.selectedFilesForReplacement.has(`${props.activeTab}:::${file}`)} onChange={() => props.onFileSelectionToggle(file)} onClick={e => e.stopPropagation()} />
                                 {fileExists ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
                                 <span>{file}</span>
+                                {metrics && fileExists && <span className="similarity-score">{ (similarity * 100).toFixed(0) }%</span>}
                             </div>
                             {!fileExists && props.selectedFilePath === file && (
                                 <div className="path-override-container" onClick={e => e.stopPropagation()}>{hasOverride ? (<><span>Linked to: {props.pathOverrides.get(file)}</span><button className="styled-button" onClick={() => props.onUnlinkFile(file)}><VscDebugDisconnect /> Unlink</button></>) : (<><input type="text" placeholder="Enter correct relative path..." value={props.tempOverridePath} onChange={e => props.onTempOverridePathChange(e.target.value)} onKeyDown={e => {if(e.key === 'Enter') props.onLinkFile(file)}} /><button className="styled-button" onClick={() => props.onLinkFile(file)}><VscLink /> Link</button></>)}</div>
@@ -13776,7 +13796,7 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
                 </div>
                 <div className="file-content-viewer-header">
                     <span className="file-path" title={props.selectedFilePath || ''}>{props.selectedFilePath ? path.basename(props.selectedFilePath) : 'No file selected'}</span>
-                    <div className="file-actions"><div className="file-metadata">{props.comparisonMetrics && props.comparisonMetrics.originalTokens !== -1 && (<><span>Original: {formatLargeNumber(props.comparisonMetrics.originalTokens, 1)} tk</span><span>New: {formatLargeNumber(props.comparisonMetrics.modifiedTokens, 1)} tk</span><span>Similarity: {(props.comparisonMetrics.similarity * 100).toFixed(0)}%</span></>)}{props.comparisonMetrics && props.comparisonMetrics.originalTokens === -1 && (<span style={{color: 'var(--vscode-errorForeground)'}}>Original file not found</span>)}</div><button onClick={props.onCopyContent} title="Copy file content" disabled={!props.selectedFilePath}><VscClippy /></button></div>
+                    <div className="file-actions"><div className="file-metadata">{currentComparisonMetrics && currentComparisonMetrics.originalTokens !== -1 && (<><span>Original: {formatLargeNumber(currentComparisonMetrics.originalTokens, 1)} tk</span><span>New: {formatLargeNumber(currentComparisonMetrics.modifiedTokens, 1)} tk</span><span>Similarity: {(currentComparisonMetrics.similarity * 100).toFixed(0)}%</span></>)}{currentComparisonMetrics && currentComparisonMetrics.originalTokens === -1 && (<span style={{color: 'var(--vscode-errorForeground)'}}>Original file not found</span>)}</div><button onClick={props.onCopyContent} title="Copy file content" disabled={!props.selectedFilePath}><VscClippy /></button></div>
                 </div>
                 <CodeViewer htmlContent={props.viewableContent} />
             </div>
@@ -13823,7 +13843,7 @@ interface ResponsePaneProps {
     onTempOverridePathChange: (path: string) => void;
     onLinkFile: (originalPath: string) => void;
     onUnlinkFile: (originalPath: string) => void;
-    comparisonMetrics: ComparisonMetrics | null;
+    comparisonMetrics: Map<string, ComparisonMetrics> | null;
     viewableContent: string | undefined | null;
     onCopyContent: () => void;
     selectedResponseId: string | null;
@@ -14183,7 +14203,7 @@ export default OnboardingView;
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C7 (Add styles for save status indicator)
+// Updated on: C8 (Add style for similarity score)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -14806,6 +14826,14 @@ body {
         text-overflow: ellipsis;
     }
 
+    .similarity-score {
+        margin-left: auto;
+        padding-left: 8px;
+        font-size: 11px;
+        color: var(--vscode-descriptionForeground);
+        font-style: italic;
+    }
+
     input[type="checkbox"] {
         margin-right: 4px;
     }
@@ -15022,7 +15050,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C7 (Implement auto-tab on paste)
+// Updated on: C8 (Implement similarity score display)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './view.scss';
@@ -15082,7 +15110,7 @@ const App = () => {
     const [leftPaneWidth, setLeftPaneWidth] = React.useState(33);
     const [selectedFilesForReplacement, setSelectedFilesForReplacement] = React.useState<Set<string>>(new Set());
     const [selectedResponseId, setSelectedResponseId] = React.useState<string | null>(null);
-    const [comparisonMetrics, setComparisonMetrics] = React.useState<Map<string, ComparisonMetrics>>(new Map());
+    const [comparisonMetrics, setComparisonMetrics] = React.useState<Map<string, ComparisonMetrics | null>>(new Map());
     const [isSortedByTokens, setIsSortedByTokens] = React.useState(false);
     const [pathOverrides, setPathOverrides] = React.useState<Map<string, string>>(new Map());
     const [tempOverridePath, setTempOverridePath] = React.useState('');
@@ -15143,10 +15171,11 @@ const App = () => {
         const currentContent = tabs[tabIndex.toString()]?.rawContent || '';
         const tokenCount = Math.ceil(pastedText.length / 4);
 
-        handleRawContentChange(pastedText, tabIndex);
-        
         if (tokenCount > 1000 && currentContent.trim() === '' && tabIndex < tabCount) {
+            handleRawContentChange(pastedText, tabIndex);
             setActiveTab(tabIndex + 1);
+        } else {
+            handleRawContentChange(pastedText, tabIndex);
         }
     };
 
@@ -15158,7 +15187,22 @@ const App = () => {
 
     React.useEffect(() => { if (saveStatus === 'unsaved') debouncedSave(); }, [saveStatus, debouncedSave]);
     React.useEffect(() => { const handleVisibilityChange = () => { if (document.visibilityState === 'hidden' && stateRef.current.currentCycle !== null) clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: stateRef.current.currentCycle }); }; document.addEventListener('visibilitychange', handleVisibilityChange); return () => document.removeEventListener('visibilitychange', handleVisibilityChange); }, [clientIpc]);
-    const parseAllTabs = React.useCallback(() => { setTabs(prevTabs => { const allFilePaths = new Set<string>(); const updatedTabs = { ...prevTabs }; let needsUpdate = false; Object.values(updatedTabs).forEach(tabState => { if (tabState.rawContent && !tabState.parsedContent) { needsUpdate = true; const parsed = parseResponse(tabState.rawContent); tabState.parsedContent = parsed; parsed.filesUpdated.forEach(file => allFilePaths.add(file)); parsed.files.forEach(file => { const lang = path.extname(file.path).substring(1) || 'plaintext'; const id = `${file.path}::${file.content}`; clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id }); }); } else if (tabState.parsedContent) { tabState.parsedContent.filesUpdated.forEach(file => allFilePaths.add(file)); } }); if (allFilePaths.size > 0) clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) }); return needsUpdate ? updatedTabs : prevTabs; }); }, [clientIpc]);
+    
+    const requestAllMetrics = React.useCallback((parsedResponse: ParsedResponse) => {
+        if (!parsedResponse) return;
+        parsedResponse.filesUpdated.forEach(filePath => {
+            const file = parsedResponse.files.find(f => f.path === filePath);
+            if (file) {
+                const pathForComparison = pathOverrides.get(filePath) || filePath;
+                clientIpc.sendToServer(ClientToServerChannel.RequestFileComparison, {
+                    filePath: pathForComparison,
+                    modifiedContent: file.content
+                });
+            }
+        });
+    }, [clientIpc, pathOverrides]);
+    
+    const parseAllTabs = React.useCallback(() => { setTabs(prevTabs => { const allFilePaths = new Set<string>(); const updatedTabs = { ...prevTabs }; let needsUpdate = false; Object.values(updatedTabs).forEach(tabState => { if (tabState.rawContent && !tabState.parsedContent) { needsUpdate = true; const parsed = parseResponse(tabState.rawContent); tabState.parsedContent = parsed; parsed.filesUpdated.forEach(file => allFilePaths.add(file)); requestAllMetrics(parsed); parsed.files.forEach(file => { const lang = path.extname(file.path).substring(1) || 'plaintext'; const id = `${file.path}::${file.content}`; clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id }); }); } else if (tabState.parsedContent) { tabState.parsedContent.filesUpdated.forEach(file => allFilePaths.add(file)); } }); if (allFilePaths.size > 0) clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) }); return needsUpdate ? updatedTabs : prevTabs; }); }, [clientIpc, requestAllMetrics]);
     
     React.useEffect(() => { console.log(`[PCPP WORKFLOW] Step changed to: ${workflowStep}`); }, [workflowStep]);
 
@@ -15166,15 +15210,15 @@ const App = () => {
     const newCycleButtonDisabledReason = React.useMemo(() => { const reasons: string[] = []; if (!cycleTitle || cycleTitle.trim() === 'New Cycle' || cycleTitle.trim() === '') reasons.push("- A cycle title is required."); if (!cycleContext || cycleContext.trim() === '') reasons.push("- Cycle context cannot be empty."); if (!selectedResponseId) reasons.push("- A response must be selected."); return reasons.join('\n'); }, [cycleTitle, cycleContext, selectedResponseId]);
 
     React.useEffect(() => { if (workflowStep === null) return; if (workflowStep === 'readyForNewCycle') return; if (workflowStep === 'awaitingGeneratePrompt') { if (isReadyForNextCycle) setWorkflowStep('awaitingGeneratePrompt'); return; } if (workflowStep === 'awaitingCycleTitle') { if (cycleTitle.trim() && cycleTitle.trim() !== 'New Cycle') { setWorkflowStep('awaitingGeneratePrompt'); } return; } if (workflowStep === 'awaitingCycleContext') { if (cycleContext.trim()) { setWorkflowStep('awaitingCycleTitle'); } return; } if (workflowStep === 'awaitingAccept') { return; } if (workflowStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestGitStatus, {}); return; } if (workflowStep === 'awaitingFileSelect') { if (selectedFilesForReplacement.size > 0) { setWorkflowStep('awaitingAccept'); } return; } if (workflowStep === 'awaitingResponseSelect') { if (selectedResponseId) { setWorkflowStep('awaitingBaseline'); } return; } if (workflowStep === 'awaitingSort') { if (isSortedByTokens) { setWorkflowStep('awaitingResponseSelect'); } return; } if (workflowStep === 'awaitingParse') { if (isParsedMode) { setWorkflowStep(isSortedByTokens ? 'awaitingResponseSelect' : 'awaitingSort'); } return; } const waitingForPaste = workflowStep?.startsWith('awaitingResponsePaste'); if (waitingForPaste) { for (let i = 1; i <= tabCount; i++) { if (!tabs[i.toString()]?.rawContent?.trim()) { setWorkflowStep(`awaitingResponsePaste_${i}`); return; } } setWorkflowStep('awaitingParse'); } }, [workflowStep, selectedFilesForReplacement, selectedResponseId, isSortedByTokens, isParsedMode, tabs, cycleContext, cycleTitle, tabCount, isReadyForNextCycle, clientIpc]);
-    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string, newMax?: number) => { console.log(`[PCPP View] Loading cycle data for cycle ${cycleData.cycleId}`); setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); if (newMax) setMaxCycle(newMax); setSaveStatus('saved'); }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, ({ filePath, originalTokens, modifiedTokens, similarity }) => { setComparisonMetrics(prev => new Map(prev).set(filePath, { originalTokens, modifiedTokens, similarity })); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { console.log(`[PCPP VIEW] Received NotifyGitOperationResult: ${JSON.stringify(result)}`); if (result.success) { setWorkflowStep(prevStep => { console.log(`[PCPP WORKFLOW] Functional update. Prev step: ${prevStep}.`); if (prevStep === 'awaitingBaseline') { console.log(`[PCPP WORKFLOW] Advancing from 'awaitingBaseline' to 'awaitingFileSelect'.`); clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } else { console.error(`[PCPP VIEW] Git operation failed: ${result.message}`); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => { if (cycleId === stateRef.current.currentCycle) setSaveStatus('saved'); }); clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }, [clientIpc]);
+    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string, newMax?: number) => { console.log(`[PCPP View] Loading cycle data for cycle ${cycleData.cycleId}`); setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); if (newMax) setMaxCycle(newMax); setSaveStatus('saved'); }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => { setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics)); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { console.log(`[PCPP VIEW] Received NotifyGitOperationResult: ${JSON.stringify(result)}`); if (result.success) { setWorkflowStep(prevStep => { console.log(`[PCPP WORKFLOW] Functional update. Prev step: ${prevStep}.`); if (prevStep === 'awaitingBaseline') { console.log(`[PCPP WORKFLOW] Advancing from 'awaitingBaseline' to 'awaitingFileSelect'.`); clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } else { console.error(`[PCPP VIEW] Git operation failed: ${result.message}`); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => { if (cycleId === stateRef.current.currentCycle) setSaveStatus('saved'); }); clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }, [clientIpc]);
     React.useEffect(() => { if (isParsedMode) parseAllTabs(); }, [isParsedMode, tabs, parseAllTabs]);
     React.useEffect(() => { if (!selectedFilePath) return; const currentTabData = tabs[activeTab.toString()]; if (currentTabData?.parsedContent) { const fileExistsInTab = currentTabData.parsedContent.files.some(f => f.path === selectedFilePath); if (!fileExistsInTab) setSelectedFilePath(null); } }, [activeTab, tabs, selectedFilePath]);
 
     const isNewCycleButtonDisabled = React.useMemo(() => { if (currentCycle === 0) return true; if (currentCycle !== maxCycle) return true; return !isReadyForNextCycle; }, [currentCycle, maxCycle, isReadyForNextCycle]);
 
     const handleCycleChange = (e: React.MouseEvent | null, newCycle: number) => { e?.stopPropagation(); if (saveStatus !== 'saved') return; if (newCycle >= 0 && newCycle <= maxCycle) { setSelectedFilesForReplacement(new Set()); setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycle }); setWorkflowStep(null); } };
-    const handleSelectForViewing = (filePath: string) => { const newPath = selectedFilePath === filePath ? null : filePath; setSelectedFilePath(newPath); if (newPath) { const file = activeTabData?.parsedContent?.files.find(f => f.path === newPath); const pathForComparison = pathOverrides.get(newPath) || newPath; if (file) clientIpc.sendToServer(ClientToServerChannel.RequestFileComparison, { filePath: pathForComparison, modifiedContent: file.content }); } };
-    const handleAcceptSelectedFiles = () => { if (selectedFilesForReplacement.size === 0) return; const filesToWrite: BatchWriteFile[] = []; selectedFilesForReplacement.forEach(compositeKey => { const [responseId, filePath] = compositeKey.split(':::'); const responseData = tabs[responseId]; if (responseData?.parsedContent) { const file = responseData.parsedContent.files.find(f => f.path === filePath); if (file) { const finalPath = pathOverrides.get(file.path) || file.path; filesToWrite.push({ path: finalPath, content: file.content }); } } }); if (filesToWrite.length > 0) clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite }); setWorkflowStep('awaitingCycleContext'); };
+    const handleSelectForViewing = (filePath: string) => { const newPath = selectedFilePath === filePath ? null : filePath; setSelectedFilePath(newPath); };
+    const handleAcceptSelectedFiles = () => { if (selectedFilesForReplacement.size === 0) return; const filesToWrite: BatchWriteFile[] = []; selectedFilesForReplacement.forEach(compositeKey => { const [responseId, filePath] = compositeKey.split(':::'); const responseData = tabs[responseId]; if (responseData?.parsedContent) { const file = responseData.parsedContent.files.find(f => f.path === filePath); if (file) { const finalPath = pathOverrides.get(file.path) || file.path; filesToWrite.push({ path: finalPath, content: file.content }); } } }); if (filesToWrite.length > 0) { clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite }); } setWorkflowStep('awaitingCycleContext'); };
     const handleLinkFile = (originalPath: string) => { if (tempOverridePath.trim()) { setPathOverrides(prev => new Map(prev).set(originalPath, tempOverridePath.trim())); setFileExistenceMap(prev => new Map(prev).set(originalPath, true)); setTempOverridePath(''); handleSelectForViewing(originalPath); } };
     const handleUnlinkFile = (originalPath: string) => { setPathOverrides(prev => { const newMap = new Map(prev); newMap.delete(originalPath); return newMap; }); setFileExistenceMap(prev => new Map(prev).set(originalPath, false)); };
     const onCycleContextChange = React.useCallback((value: string) => { setCycleContext(value); setCycleContextTokens(Math.ceil(value.length / 4)); setSaveStatus('unsaved'); }, []);
@@ -15183,7 +15227,6 @@ const App = () => {
     const sortedTabIds = React.useMemo(() => { const tabIds = [...Array(tabCount)].map((_, i) => i + 1); if (isParsedMode && isSortedByTokens) tabIds.sort((a, b) => { const tokensA = tabs[a.toString()]?.parsedContent?.totalTokens ?? -1; const tokensB = tabs[b.toString()]?.parsedContent?.totalTokens ?? -1; return tokensB - tokensA; }); return tabIds; }, [tabs, isParsedMode, isSortedByTokens, tabCount]);
     const viewableContent = React.useMemo(() => { if (!selectedFilePath || !activeTabData?.parsedContent) return undefined; const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath); if (!file) return '<div>Error: File data not found in parsed response.</div>'; const id = `${file.path}::${file.content}`; return highlightedCodeBlocks.get(id); }, [selectedFilePath, activeTabData?.parsedContent, highlightedCodeBlocks]);
     
-    // Auto-tab on paste is handled in ResponsePane now
     const handleContextKeyDown = React.useCallback(() => { /* Placeholder for potential future use */ }, []);
     
     const handleSortToggle = () => { if (workflowStep === 'awaitingSort') { setIsSortedByTokens(true); } else { setIsSortedByTokens(p => !p); } setSaveStatus('unsaved'); };
@@ -15209,7 +15252,6 @@ const App = () => {
     if (currentCycle === 0) return <OnboardingView initialProjectScope={projectScope} onNavigateToCycle={(id) => handleCycleChange(null, id)} latestCycleId={maxCycle} onScopeChange={setCycleContext} workflowStep={workflowStep} />;
     
     const collapsedNavigator = <div className="collapsed-navigator"><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0 || saveStatus !== 'saved'}>&lt;</button><span className="cycle-display">C{currentCycle}</span><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle || saveStatus !== 'saved'}>&gt;</button></div>;
-    const currentComparisonMetrics = selectedFilePath ? comparisonMetrics.get(pathOverrides.get(selectedFilePath) || selectedFilePath) : null;
     const totalPromptCostDisplay = ( <span className="total-prompt-cost" title={costBreakdownTooltip}> Total Est: ({formatLargeNumber(totalPromptTokens, 1)} tk) ~ ${estimatedPromptCost.toFixed(4)} {tabCount > 1 && ` x ${tabCount} = $${(estimatedPromptCost * tabCount).toFixed(4)}`} </span> );
 
     const SaveStatusIndicator = () => {
@@ -15232,7 +15274,7 @@ const App = () => {
         </CollapsibleSection>
         <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} onSortToggle={handleSortToggle} workflowStep={workflowStep} />
         <div className="tab-content">
-            <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} onPaste={(e) => handlePaste(e, activeTab)} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={currentComparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => { setSelectedResponseId(prev => prev === id ? null : id); setWorkflowStep('awaitingResponseSelect'); setSaveStatus('unsaved'); }} onSelectAllFiles={handleSelectAllFilesToggle} onDeselectAllFiles={() => {setSelectedFilesForReplacement(new Set()); setSaveStatus('unsaved');}} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} onBaseline={handleGitBaseline} onRestore={handleGitRestore} workflowStep={workflowStep} />
+            <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} onPaste={(e) => handlePaste(e, activeTab)} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={comparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => { setSelectedResponseId(prev => prev === id ? null : id); setWorkflowStep('awaitingResponseSelect'); setSaveStatus('unsaved'); }} onSelectAllFiles={handleSelectAllFilesToggle} onDeselectAllFiles={() => {setSelectedFilesForReplacement(new Set()); setSaveStatus('unsaved');}} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} onBaseline={handleGitBaseline} onRestore={handleGitRestore} workflowStep={workflowStep} />
         </div>
     </div>;
 };
@@ -15383,7 +15425,7 @@ export enum ServerToClientChannel {
 </file_artifact>
 
 <file path="src/common/ipc/channels.type.ts">
-// Updated on: C7 (Add NotifySaveComplete channel)
+// Updated on: C8 (Fix RequestBatchFileWrite type)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -15420,6 +15462,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestRedo ? {} :
     T extends ClientToServerChannel.RequestAddFileFromBuffer ? { targetPath: string, data: Uint8Array } :
     T extends ClientToServerChannel.RequestCopyFileFromUri ? { sourceUri: string, targetDir: string } :
+    T extends ClientToServerChannel.RequestBatchFileWrite ? { files: BatchWriteFile[] } :
     T extends ClientToServerChannel.RequestCreateFile ? { filePath: string } :
     T extends ClientToServerChannel.RequestCopyTextToClipboard ? { text: string } :
     T extends ClientToServerChannel.RequestShowInformationMessage ? { message: string } :
@@ -25831,6 +25874,7 @@ This approach leverages VS Code's built-in settings infrastructure, making the e
 # Artifact A83: DCE - Universal Task Checklist for Cycle 6
 # Date Created: C6
 # Author: AI Model & Curator
+# Updated on: C8 (Update T-3 to include displaying similarity score percentage)
 
 - **Key/Value for A0:**
 - **Description:** A structured checklist for organizing the development tasks, feedback, and bugs from the "laundry list" provided in Cycle 6.
@@ -25853,6 +25897,7 @@ This artifact provides a structured, universal format for tracking the developme
     - `src/client/views/parallel-copilot.view/components/ParsedView.tsx`
 - **Total Tokens:** ~6,000
 - **More than one cycle?** No
+- **Status:** Completed in C7
 
 - [X] **Task (T-ID: 1.1):** Create `A81` to plan the new `<curator_activity>` section.
 - [X] **Task (T-ID: 1.2):** Update `A52.2` to be more explicit about the `</file_artifact>` closing tag and to include the new `curator_activity` section.
@@ -25874,6 +25919,7 @@ This artifact provides a structured, universal format for tracking the developme
     - `src/common/ipc/channels.type.ts`
 - **Total Tokens:** ~12,000
 - **More than one cycle?** No
+- **Status:** Completed in C7
 
 - [X] **Task (T-ID: 2.1):** Implement the autosave locking feature from `A79`. Add `saveStatus` state to `view.tsx`.
 - [X] **Task (T-ID: 2.2):** Add `NotifySaveComplete` IPC channel and have `history.service.ts` send it after a successful write.
@@ -25893,18 +25939,21 @@ This artifact provides a structured, universal format for tracking the developme
 - **Files Involved:**
     - `src/client/views/parallel-copilot.view/components/ParsedView.tsx`
     - `src/client/views/parallel-copilot.view/view.scss`
+    - `src/client/views/parallel-copilot.view/view.tsx`
     - `src/common/ipc/channels.enum.ts`
     - `src/common/ipc/channels.type.ts`
     - `src/backend/services/file-operation.service.ts`
-- **Total Tokens:** ~4,500
+- **Total Tokens:** ~15,000
 - **More than one cycle?** No
+- **Status:** In Progress
 
-- [ ] **Task (T-ID: 3.1):** Implement a color gradient on "Associated Files" list items based on similarity score.
-- [ ] **Task (T-ID: 3.2):** Add a right-click context menu to "Associated Files" list items to copy the relative path.
+- [X] **Task (T-ID: 3.1):** Implement a color gradient on "Associated Files" list items based on similarity score.
+- [-] **Task (T-ID: 3.2):** Display the similarity score as a percentage next to the file name.
+- [-] **Task (T-ID: 3.3):** Add a right-click context menu to "Associated Files" list items to copy the relative path.
 
 ### Verification Steps
 1.  Parse a response with varying similarity scores.
-2.  **Expected:** The file list items should have background colors ranging from green (high similarity) to red (low similarity).
+2.  **Expected:** The file list items should have background colors ranging from green (high similarity) to red (low similarity). A percentage value (e.g., "98%") should be visible for each file.
 3.  Right-click a file in the list.
 4.  **Expected:** A context menu should appear with a "Copy Relative Path" option. Clicking it should copy the path to the clipboard.
 
@@ -25914,9 +25963,10 @@ This artifact provides a structured, universal format for tracking the developme
     - `src/Artifacts/A82. DCE - Advanced Exclusion Management Plan.md`
 - **Total Tokens:** ~2,000
 - **More than one cycle?** Yes (Implementation is deferred)
+- **Status:** Completed in C7
 
-- [ ] **Task (T-ID: 4.1):** Create `A80` to plan the settings/help panel.
-- [ ] **Task (T-ID: 4.2):** Create `A82` to plan the advanced exclusion management feature.
+- [X] **Task (T-ID: 4.1):** Create `A80` to plan the settings/help panel.
+- [X] **Task (T-ID: 4.2):** Create `A82` to plan the advanced exclusion management feature.
 
 ### Verification Steps
 1.  Check the master artifacts list.
@@ -26045,6 +26095,7 @@ This approach leverages VS Code's built-in settings infrastructure, making the e
 # Artifact A83: DCE - Universal Task Checklist for Cycle 6
 # Date Created: C6
 # Author: AI Model & Curator
+# Updated on: C8 (Update T-3 to include displaying similarity score percentage)
 
 - **Key/Value for A0:**
 - **Description:** A structured checklist for organizing the development tasks, feedback, and bugs from the "laundry list" provided in Cycle 6.
@@ -26067,6 +26118,7 @@ This artifact provides a structured, universal format for tracking the developme
     - `src/client/views/parallel-copilot.view/components/ParsedView.tsx`
 - **Total Tokens:** ~6,000
 - **More than one cycle?** No
+- **Status:** Completed in C7
 
 - [X] **Task (T-ID: 1.1):** Create `A81` to plan the new `<curator_activity>` section.
 - [X] **Task (T-ID: 1.2):** Update `A52.2` to be more explicit about the `</file_artifact>` closing tag and to include the new `curator_activity` section.
@@ -26088,6 +26140,7 @@ This artifact provides a structured, universal format for tracking the developme
     - `src/common/ipc/channels.type.ts`
 - **Total Tokens:** ~12,000
 - **More than one cycle?** No
+- **Status:** Completed in C7
 
 - [X] **Task (T-ID: 2.1):** Implement the autosave locking feature from `A79`. Add `saveStatus` state to `view.tsx`.
 - [X] **Task (T-ID: 2.2):** Add `NotifySaveComplete` IPC channel and have `history.service.ts` send it after a successful write.
@@ -26107,18 +26160,21 @@ This artifact provides a structured, universal format for tracking the developme
 - **Files Involved:**
     - `src/client/views/parallel-copilot.view/components/ParsedView.tsx`
     - `src/client/views/parallel-copilot.view/view.scss`
+    - `src/client/views/parallel-copilot.view/view.tsx`
     - `src/common/ipc/channels.enum.ts`
     - `src/common/ipc/channels.type.ts`
     - `src/backend/services/file-operation.service.ts`
-- **Total Tokens:** ~4,500
+- **Total Tokens:** ~15,000
 - **More than one cycle?** No
+- **Status:** In Progress
 
-- [ ] **Task (T-ID: 3.1):** Implement a color gradient on "Associated Files" list items based on similarity score.
-- [ ] **Task (T-ID: 3.2):** Add a right-click context menu to "Associated Files" list items to copy the relative path.
+- [X] **Task (T-ID: 3.1):** Implement a color gradient on "Associated Files" list items based on similarity score.
+- [-] **Task (T-ID: 3.2):** Display the similarity score as a percentage next to the file name.
+- [-] **Task (T-ID: 3.3):** Add a right-click context menu to "Associated Files" list items to copy the relative path.
 
 ### Verification Steps
 1.  Parse a response with varying similarity scores.
-2.  **Expected:** The file list items should have background colors ranging from green (high similarity) to red (low similarity).
+2.  **Expected:** The file list items should have background colors ranging from green (high similarity) to red (low similarity). A percentage value (e.g., "98%") should be visible for each file.
 3.  Right-click a file in the list.
 4.  **Expected:** A context menu should appear with a "Copy Relative Path" option. Clicking it should copy the path to the clipboard.
 
@@ -26128,9 +26184,10 @@ This artifact provides a structured, universal format for tracking the developme
     - `src/Artifacts/A82. DCE - Advanced Exclusion Management Plan.md`
 - **Total Tokens:** ~2,000
 - **More than one cycle?** Yes (Implementation is deferred)
+- **Status:** Completed in C7
 
-- [ ] **Task (T-ID: 4.1):** Create `A80` to plan the settings/help panel.
-- [ ] **Task (T-ID: 4.2):** Create `A82` to plan the advanced exclusion management feature.
+- [X] **Task (T-ID: 4.1):** Create `A80` to plan the settings/help panel.
+- [X] **Task (T-ID: 4.2):** Create `A82` to plan the advanced exclusion management feature.
 
 ### Verification Steps
 1.  Check the master artifacts list.

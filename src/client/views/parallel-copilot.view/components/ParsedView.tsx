@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/ParsedView.tsx
-// Updated on: C6 (Add Curator Activity section, color gradient, and context menu)
+// Updated on: C8 (Display similarity score percentage)
 import * as React from 'react';
 import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscSave, VscCheckAll, VscClearAll, VscClippy, VscChevronDown, VscSourceControl, VscDiscard } from 'react-icons/vsc';
 import ReactMarkdown from 'react-markdown';
@@ -39,7 +39,7 @@ interface ParsedViewProps {
     onTempOverridePathChange: (path: string) => void;
     onLinkFile: (originalPath: string) => void;
     onUnlinkFile: (originalPath: string) => void;
-    comparisonMetrics: ComparisonMetrics | null;
+    comparisonMetrics: Map<string, ComparisonMetrics | null>;
     viewableContent: string | undefined | null;
     onCopyContent: () => void;
     selectedResponseId: string | null;
@@ -75,6 +75,8 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
         }
     };
 
+    const currentComparisonMetrics = props.selectedFilePath ? props.comparisonMetrics.get(props.pathOverrides.get(props.selectedFilePath) || props.selectedFilePath) : null;
+
     return (
         <div className="parsed-view-grid">
             <div className="parsed-view-left" style={{ flexBasis: `${props.leftPaneWidth}%` }}>
@@ -82,13 +84,15 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
                     <ul className="associated-files-list">{props.parsedContent.filesUpdated.map(file => {
                         const fileExists = props.fileExistenceMap.get(file);
                         const hasOverride = props.pathOverrides.has(file);
-                        const metrics = props.comparisonMetrics;
-                        const bgColor = (metrics && fileExists) ? getSimilarityColor(metrics.similarity) : 'transparent';
+                        const metrics = props.comparisonMetrics.get(props.pathOverrides.get(file) || file);
+                        const similarity = metrics?.similarity ?? 0;
+                        const bgColor = (metrics && fileExists) ? getSimilarityColor(similarity) : 'transparent';
                         return <li key={file} className={props.selectedFilePath === file ? 'selected' : ''} onClick={() => props.onSelectForViewing(file)} onContextMenu={(e) => handleContextMenu(e, file)} title={file} style={{ backgroundColor: bgColor }}>
                             <div className="file-row">
                                 <input type="checkbox" checked={props.selectedFilesForReplacement.has(`${props.activeTab}:::${file}`)} onChange={() => props.onFileSelectionToggle(file)} onClick={e => e.stopPropagation()} />
                                 {fileExists ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
                                 <span>{file}</span>
+                                {metrics && fileExists && <span className="similarity-score">{ (similarity * 100).toFixed(0) }%</span>}
                             </div>
                             {!fileExists && props.selectedFilePath === file && (
                                 <div className="path-override-container" onClick={e => e.stopPropagation()}>{hasOverride ? (<><span>Linked to: {props.pathOverrides.get(file)}</span><button className="styled-button" onClick={() => props.onUnlinkFile(file)}><VscDebugDisconnect /> Unlink</button></>) : (<><input type="text" placeholder="Enter correct relative path..." value={props.tempOverridePath} onChange={e => props.onTempOverridePathChange(e.target.value)} onKeyDown={e => {if(e.key === 'Enter') props.onLinkFile(file)}} /><button className="styled-button" onClick={() => props.onLinkFile(file)}><VscLink /> Link</button></>)}</div>
@@ -114,7 +118,7 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
                 </div>
                 <div className="file-content-viewer-header">
                     <span className="file-path" title={props.selectedFilePath || ''}>{props.selectedFilePath ? path.basename(props.selectedFilePath) : 'No file selected'}</span>
-                    <div className="file-actions"><div className="file-metadata">{props.comparisonMetrics && props.comparisonMetrics.originalTokens !== -1 && (<><span>Original: {formatLargeNumber(props.comparisonMetrics.originalTokens, 1)} tk</span><span>New: {formatLargeNumber(props.comparisonMetrics.modifiedTokens, 1)} tk</span><span>Similarity: {(props.comparisonMetrics.similarity * 100).toFixed(0)}%</span></>)}{props.comparisonMetrics && props.comparisonMetrics.originalTokens === -1 && (<span style={{color: 'var(--vscode-errorForeground)'}}>Original file not found</span>)}</div><button onClick={props.onCopyContent} title="Copy file content" disabled={!props.selectedFilePath}><VscClippy /></button></div>
+                    <div className="file-actions"><div className="file-metadata">{currentComparisonMetrics && currentComparisonMetrics.originalTokens !== -1 && (<><span>Original: {formatLargeNumber(currentComparisonMetrics.originalTokens, 1)} tk</span><span>New: {formatLargeNumber(currentComparisonMetrics.modifiedTokens, 1)} tk</span><span>Similarity: {(currentComparisonMetrics.similarity * 100).toFixed(0)}%</span></>)}{currentComparisonMetrics && currentComparisonMetrics.originalTokens === -1 && (<span style={{color: 'var(--vscode-errorForeground)'}}>Original file not found</span>)}</div><button onClick={props.onCopyContent} title="Copy file content" disabled={!props.selectedFilePath}><VscClippy /></button></div>
                 </div>
                 <CodeViewer htmlContent={props.viewableContent} />
             </div>

@@ -1,4 +1,4 @@
-// Resp 12-Updated on: C7 (Add tsconfig.tsbuildinfo and history exports to non-selectable)
+// Resp 12-Updated on: C8 (Add dist to non-selectable patterns)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -14,8 +14,8 @@ import { ProblemCountsMap, GitStatusMap } from "@/common/ipc/channels.type";
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico']);
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
-const EXCLUSION_PATTERNS = ['dce_cache', 'out', 'dist']; 
-const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/.git/', '/venv/', '/.venv/', 'flattened_repo.md', 'prompt.md', 'package-lock.json', 'tsconfig.tsbuildinfo', 'dce_history_export_'];
+const EXCLUSION_PATTERNS = ['dce_cache', 'out']; 
+const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/.git/', '/venv/', '/.venv/', 'flattened_repo.md', 'prompt.md', 'package-lock.json', 'tsconfig.tsbuildinfo', 'dce_history_export_', '/dist/'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
@@ -216,7 +216,7 @@ export class FileTreeService {
                 const childPath = normalizePath(childUri.fsPath);
                 const isSelectable = this._isSelectable(childPath, type);
                 if (type === vscode.FileType.Directory) {
-                    const isSpecialDir = ['node_modules', '.git', 'venv', '.venv'].includes(name.toLowerCase());
+                    const isSpecialDir = ['node_modules', '.git', 'venv', '.venv', 'dist'].includes(name.toLowerCase());
                     const dirNode: FileNode = { name, absolutePath: childPath, children: isSpecialDir ? [] : await this._traverseDirectory(childUri), tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false, isSelectable };
                     this._aggregateStats(dirNode);
                     children.push(dirNode);
@@ -233,7 +233,7 @@ export class FileTreeService {
 
     private _aggregateStats(node: FileNode): void {
         if (!node.children) return;
-        if (['node_modules', '.git', 'venv', '.venv'].includes(node.name.toLowerCase())) {
+        if (['node_modules', '.git', 'venv', '.venv', 'dist'].includes(node.name.toLowerCase())) {
             node.tokenCount = 0;
             node.fileCount = 0;
             node.sizeInBytes = 0;

@@ -1,4 +1,4 @@
-// Updated on: C7 (Add NotifySaveComplete channel)
+// Updated on: C8 (Fix RequestBatchFileWrite type)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -35,6 +35,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestRedo ? {} :
     T extends ClientToServerChannel.RequestAddFileFromBuffer ? { targetPath: string, data: Uint8Array } :
     T extends ClientToServerChannel.RequestCopyFileFromUri ? { sourceUri: string, targetDir: string } :
+    T extends ClientToServerChannel.RequestBatchFileWrite ? { files: BatchWriteFile[] } :
     T extends ClientToServerChannel.RequestCreateFile ? { filePath: string } :
     T extends ClientToServerChannel.RequestCopyTextToClipboard ? { text: string } :
     T extends ClientToServerChannel.RequestShowInformationMessage ? { message: string } :

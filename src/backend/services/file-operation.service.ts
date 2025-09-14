@@ -1,5 +1,5 @@
 // src/backend/services/file-operation.service.ts
-// Updated on: C186 (Add ShowInformationMessage handler)
+// Updated on: C8 (Fix handleBatchFileWrite parameter type)
 import * as vscode from "vscode";
 import * as path from "path";
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
