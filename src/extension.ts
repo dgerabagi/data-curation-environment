@@ -7,10 +7,12 @@ import { ServerToClientChannel } from "./common/ipc/channels.enum";
 import { API as GitAPI, GitExtension } from "./backend/types/git";
 import { getNonce, getViewHtml } from "./common/utils/view-html";
 import { onMessage as onParallelCopilotMessage } from "./client/views/parallel-copilot.view/on-message";
+import { onMessage as onSettingsMessage } from "./client/views/settings.view/on-message";
 import { ServerPostMessageManager } from "./common/ipc/server-ipc";
 
 let globalContext: vscode.ExtensionContext | null = null;
 let parallelCopilotPanel: vscode.WebviewPanel | undefined;
+let settingsPanel: vscode.WebviewPanel | undefined;
 
 function createOrShowParallelCopilotPanel(context: vscode.ExtensionContext) {
     const column = vscode.window.activeTextEditor?.viewColumn;
@@ -57,6 +59,36 @@ function createOrShowParallelCopilotPanel(context: vscode.ExtensionContext) {
     }, null, context.subscriptions);
 }
 
+function createOrShowSettingsPanel(context: vscode.ExtensionContext) {
+    if (settingsPanel) {
+        settingsPanel.reveal(vscode.ViewColumn.One);
+        return;
+    }
+
+    settingsPanel = vscode.window.createWebviewPanel(
+        'dce.settingsPanel', 'DCE Settings & Help', vscode.ViewColumn.One, { enableScripts: true, localResourceRoots: [context.extensionUri] }
+    );
+
+    const scriptUri = settingsPanel.webview.asWebviewUri(vscode.Uri.joinPath(context.extensionUri, "dist", "settingsView.js"));
+    const styleUri = settingsPanel.webview.asWebviewUri(vscode.Uri.joinPath(context.extensionUri, "dist", "settingsView.css"));
+    const nonce = getNonce();
+
+    settingsPanel.webview.html = getViewHtml({
+        webview: settingsPanel.webview, nonce, scriptUri: scriptUri.toString(), styleUris: [styleUri],
+    });
+
+    const serverIpc = ServerPostMessageManager.getInstance(
+        settingsPanel.webview.onDidReceiveMessage,
+        (data: any) => settingsPanel?.webview.postMessage(data)
+    );
+    onSettingsMessage(serverIpc);
+
+    settingsPanel.onDidDispose(() => {
+        settingsPanel = undefined;
+    }, null, context.subscriptions);
+}
+
+
 export async function activate(context: vscode.ExtensionContext) {
     Services.loggerService.log('Congratulations, your extension "Data Curation Environment" is now active!');
     globalContext = context;
@@ -77,6 +109,9 @@ export async function activate(context: vscode.ExtensionContext) {
         registerCommands(context);
         context.subscriptions.push(vscode.commands.registerCommand('dce.showParallelCopilot', () => {
             createOrShowParallelCopilotPanel(context);
+        }));
+        context.subscriptions.push(vscode.commands.registerCommand('dce.openSettingsPanel', () => {
+            createOrShowSettingsPanel(context);
         }));
         registerViews(context);
 

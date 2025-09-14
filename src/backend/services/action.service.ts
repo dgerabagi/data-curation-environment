@@ -1,4 +1,4 @@
-// Updated on: C114 (Refactor to use new services)
+// Updated on: C10 (New File)
 import * as vscode from 'vscode';
 import { Services } from './services';
 
@@ -21,18 +21,27 @@ export class ActionService {
     public push(action: Action) {
         this.undoStack.push(action);
         this.redoStack = [];
+        Services.loggerService.log(`[ActionService] Pushed action to undo stack: ${action.type}`);
     }
 
     public async undo() {
         const action = this.undoStack.pop();
-        if (!action) return;
+        if (!action) {
+            Services.loggerService.log(`[ActionService] Undo stack is empty.`);
+            return;
+        }
+        Services.loggerService.log(`[ActionService] Undoing action: ${action.type}`);
         await this.performReverseAction(action);
         this.redoStack.push(action);
     }
 
     public async redo() {
         const action = this.redoStack.pop();
-        if (!action) return;
+        if (!action) {
+            Services.loggerService.log(`[ActionService] Redo stack is empty.`);
+            return;
+        }
+        Services.loggerService.log(`[ActionService] Redoing action: ${action.type}`);
         await this.performOriginalAction(action);
         this.undoStack.push(action);
     }

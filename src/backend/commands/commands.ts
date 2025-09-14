@@ -1,4 +1,4 @@
-// Updated on: C187 (Add gitInit command)
+// Updated on: C10 (Add openSettingsPanel command)
 import * as vscode from 'vscode';
 import { Services } from '../services/services';
 import { serverIPCs } from '@/client/views';
@@ -91,6 +91,13 @@ export const commands = [
         callback: () => {
             Services.loggerService.log("Executing dce.openParallelCopilot command to open WebviewPanel.");
             vscode.commands.executeCommand('dce.showParallelCopilot');
+        }
+    },
+    {
+        commandId: 'dce.openSettingsPanel',
+        callback: () => {
+            Services.loggerService.log("Executing dce.openSettingsPanel command.");
+            // Logic to create/show the settings WebviewPanel will be in extension.ts
         }
     },
     {

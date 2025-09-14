@@ -1,5 +1,5 @@
 // src/backend/services/history.service.ts
-// Updated on: C7 (Send NotifySaveComplete message after writing file)
+// Updated on: C10 (Add activeTab to default cycle)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -91,6 +91,7 @@ export class HistoryService {
             selectedResponseId: null, 
             selectedFilesForReplacement: [], 
             tabCount: 4, 
+            activeTab: 1,
             isSortedByTokens: false, 
             pathOverrides: {},
         };

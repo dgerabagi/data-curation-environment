@@ -1,5 +1,5 @@
 // src/backend/services/file-operation.service.ts
-// Updated on: C8 (Fix handleBatchFileWrite parameter type)
+// Updated on: C10 (Integrate ActionService)
 import * as vscode from "vscode";
 import * as path from "path";
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";

@@ -1,0 +1,18 @@
+/* src/client/views/settings.view/view.scss */
+body {
+    padding: 16px;
+    font-family: var(--vscode-font-family);
+    font-size: var(--vscode-font-size);
+    color: var(--vscode-editor-foreground);
+    background-color: var(--vscode-editor-background);
+}
+
+.settings-view-container {
+    h1 {
+        font-size: 1.5em;
+        font-weight: bold;
+        border-bottom: 1px solid var(--vscode-panel-border);
+        padding-bottom: 8px;
+        margin-bottom: 16px;
+    }
+}

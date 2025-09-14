@@ -1,4 +1,4 @@
-// Updated on: C167 (Fix TS errors, array access)
+// Updated on: C10 (Add onKeyDown handler for Undo/Redo)
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { VscChevronRight } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -66,13 +66,13 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     };
 
     useEffect(() => {
-        if (data.length > 0 && data[0]) {
+        if (data.length > 0) {
             expandNode(data[0].absolutePath);
         }
     }, [data]);
 
     useEffect(() => {
-        if (collapseTrigger > 0 && data.length > 0 && data[0]) {
+        if (collapseTrigger > 0 && data.length > 0) {
             setExpandedNodes([data[0].absolutePath]);
         }
     }, [collapseTrigger, data]);
@@ -92,7 +92,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     }, [expandAllTrigger, data]);
 
     useEffect(() => {
-        if (activeFile && data.length > 0 && data[0]) {
+        if (activeFile && data.length > 0) {
             logger.log(`[TreeView] activeFile prop changed: ${activeFile}. Attempting to reveal.`);
             const getParentPaths = (filePath: string, rootPath: string): string[] => {
                 if (!filePath.startsWith(rootPath) || filePath === rootPath) {

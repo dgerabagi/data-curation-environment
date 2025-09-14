@@ -1,5 +1,5 @@
 // src/common/types/pcpp.types.ts
-// Updated on: C6 (Add curatorActivity to ParsedResponse)
+// Updated on: C10 (Add activeTab to PcppCycle)
 export interface PcppResponse {
     content: string;
 }
@@ -16,6 +16,7 @@ export interface PcppCycle {
     selectedResponseId?: string | null;
     selectedFilesForReplacement?: string[];
     tabCount?: number;
+    activeTab?: number;
     isSortedByTokens?: boolean;
     pathOverrides?: { [originalPath: string]: string };
     cycleContextHeight?: number;

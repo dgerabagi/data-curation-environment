@@ -1,10 +1,10 @@
-// Updated on: C5 (No functional changes, only cycle header)
+// Updated on: C10 (Add Undo/Redo handlers)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
 
 export function onMessage(serverIpc: ServerPostMessageManager) {
-    const { loggerService, promptService, fileOperationService, highlightingService, historyService, gitService } = Services;
+    const { loggerService, promptService, fileOperationService, highlightingService, historyService, gitService, actionService } = Services;
     loggerService.log("Parallel Co-Pilot view message handler initialized.");
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestCreatePromptFile, (data) => {
@@ -111,4 +111,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     serverIpc.onClientMessage(ClientToServerChannel.SaveLastViewedCycle, (data) => {
         historyService.saveLastViewedCycleId(data.cycleId);
     });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestUndo, () => actionService.undo());
+    serverIpc.onClientMessage(ClientToServerChannel.RequestRedo, () => actionService.redo());
 }

@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 10 - A83 finished, begin working through A84
+Current Cycle 11 - Error during activation: command 'dce.openSettingsPanel' already exists; Restore should delete any newly created files (U) since baseline
+Cycle 10 - A83 finished, begin working through A84
 Cycle 9 - Finalize T-3, Update A83 for the next steps game plan
 Cycle 8 - T-3 from A83
 Cycle 7 - working through A83 checklist
@@ -663,6 +664,43 @@ No project scope defined.
 </M5. organized artifacts list>
 
 <M6. Cycles>
+
+<Cycle 11>
+<Cycle Context>
+okay, i accepted the most complete response, and have resolved the ts errors, however i get an error upon startup, see ephemeral
+
+additionally, ive observed that the `Restore` does not seem to delete any newly created files since the baseline. currently, there is a green file with a U, because ive clicked `Baseline` and then i created this file using the associated files to select and accept that file to create it. then i clicked `Restore` but that file did not get deleted. a true baseline restore would remove any added files.
+</Cycle Context>
+<Ephemeral Context>
+[INFO] [1:29:52 PM] Congratulations, your extension "Data Curation Environment" is now active!
+[INFO] [1:29:52 PM] Starry Night syntax highlighter initialized.
+[INFO] [1:29:52 PM] Services initializing...
+[WARN] [1:29:52 PM] HistoryService: No workspace folder found. History will not be saved.
+[INFO] [1:29:52 PM] Services initialized successfully.
+[INFO] [1:29:52 PM] Registering 7 commands.
+[ERROR] [1:29:52 PM] CRITICAL - Error during activation: command 'dce.openSettingsPanel' already exists
+</Ephemeral Context>
+<Previous Cycle 10 Summary of Actions>
+I have analyzed the feedback for Cycle 9. The primary objectives are to fix two UI bugs in the "Associated Files" list as outlined in `A83` (T-3.2 and T-3.3) and to update our planning artifact, `A83`, with a game plan for the next set of tasks (T-4).
+
+My course of action is to first implement the UI fixes. I will add a path truncation utility to prevent long file paths from obscuring the similarity score and replace the incorrect custom pane with a proper right-click context menu for copying file paths.
+
+With the bug fixes complete, I will then turn to documentation. I will update `A83` to mark T-3 as complete and add a new task, T-4, which will involve creating a new "Universal Task Checklist" artifact to plan out the next phase of development. I will also create this new checklist artifact (`A84`) and add it to the master list.
+
+1.  **Fix Path Truncation (T-3.2):**
+    *   **`src/common/utils/formatting.ts`:** I will create a new utility function, `truncatePath(path, maxLength)`, that shortens the middle of a file path string while preserving the beginning and end.
+    *   **`src/client/views/parallel-copilot.view/components/ParsedView.tsx`:** I will update the component that renders the file path. It will now use the new `truncatePath` utility for the displayed text and will set the `title` attribute to the full, un-truncated path, making it visible on hover.
+
+2.  **Fix Right-Click Context Menu (T-3.3):**
+    *   **`src/client/views/parallel-copilot.view/components/ParsedView.tsx`:** I will remove the logic that was incorrectly showing a new pane on right-click. I will replace it with a standard context menu implementation. This involves adding state to manage the menu's position and visibility and adding an `onContextMenu` handler to the list items.
+    *   The new context menu will have a "Copy Relative Path" option that triggers an IPC message to the backend, which will use `vscode.env.clipboard.writeText()` to copy the path.
+
+3.  **Update Planning Artifacts (T-4):**
+    *   **`src/Artifacts/A83. DCE - Universal Task Checklist for Cycle 6.md`:** I will update this artifact to mark tasks 3.2 and 3.3 as complete. I will then add a new task package, `T-4`, titled "Plan Next Development Phase."
+    *   **`src/Artifacts/A84. DCE - Universal Task Checklist for Cycle 10+.md`:** I will create this new artifact to serve as the checklist for the next development phase, populating it with high-priority features from our existing backlog (like Undo/Redo from `A27` and Cut/Copy/Paste from `A33`).
+    *   **`src/Artifacts/A0. DCE Master Artifact List.md`:** I will add the new `A84` artifact to the master list.
+</Previous Cycle 10 Summary of Actions>
+</Cycle 11>
 
 <Cycle 10>
 <Cycle Context>
@@ -1960,21 +1998,21 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-14T18:10:14.124Z
+  Date Generated: 2025-09-14T18:31:39.593Z
   ---
-  Total Files: 182
-  Approx. Tokens: 451660
+  Total Files: 186
+  Approx. Tokens: 449355
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (8083 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (8148 tokens)
 4. src\Artifacts\A0. DCE Master Artifact List.md (7794 tokens)
 5. src\backend\services\prompt.service.ts (5042 tokens)
 6. src\client\views\parallel-copilot.view\view.scss (4978 tokens)
-7. src\client\components\tree-view\TreeView.tsx (4429 tokens)
-8. src\backend\services\file-operation.service.ts (4096 tokens)
+7. src\client\components\tree-view\TreeView.tsx (4422 tokens)
+8. src\backend\services\file-operation.service.ts (4092 tokens)
 9. src\client\views\context-chooser.view\view.tsx (4019 tokens)
 10. src\client\views\context-chooser.view\view.scss (3708 tokens)
 
@@ -2005,7 +2043,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 24. src\Artifacts\A24. DCE - Selection Paradigm Terminology.md - Lines: 57 - Chars: 3330 - Tokens: 833
 25. src\Artifacts\A25. DCE - Phase 1 - Git & Problems Integration Plan.md - Lines: 48 - Chars: 5004 - Tokens: 1251
 26. src\Artifacts\A26. DCE - Phase 1 - File System Traversal & Caching Strategy.md - Lines: 42 - Chars: 3593 - Tokens: 899
-27. src\Artifacts\A27. DCE - Phase 1 - Undo-Redo Feature Plan.md - Lines: 50 - Chars: 4903 - Tokens: 1226
+27. src\Artifacts\A27. DCE - Phase 1 - Undo-Redo Feature Plan.md - Lines: 53 - Chars: 4960 - Tokens: 1240
 28. src\Artifacts\A28. DCE - Packaging and Distribution Guide.md - Lines: 95 - Chars: 4366 - Tokens: 1092
 29. src\Artifacts\A29. DCE - Phase 1 - Binary and Image File Handling Strategy.md - Lines: 81 - Chars: 4217 - Tokens: 1055
 30. src\Artifacts\A30. DCE - Phase 1 - PDF Handling and Virtualization Strategy.md - Lines: 44 - Chars: 4431 - Tokens: 1108
@@ -2070,7 +2108,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 89. src\Artifacts\T14. Template - GitHub Repository Setup Guide.md - Lines: 110 - Chars: 4911 - Tokens: 1228
 90. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 41 - Chars: 3009 - Tokens: 753
 91. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 97 - Chars: 4056 - Tokens: 1014
-92. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 45 - Chars: 2899 - Tokens: 725
+92. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 55 - Chars: 3473 - Tokens: 869
 93. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 40 - Chars: 4564 - Tokens: 1141
 94. src\Artifacts\A42. DCE - Phase 2 - Initial Scaffolding Deployment Script.md - Lines: 246 - Chars: 8264 - Tokens: 2066
 95. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 57 - Chars: 9891 - Tokens: 2473
@@ -2080,16 +2118,16 @@ This file-centric approach helps in planning and prioritizing work, especially i
 99. src\Artifacts\A64. DCE - Cycle 159 - Task Tracker.md - Lines: 22 - Chars: 1550 - Tokens: 388
 100. src\Artifacts\A65. DCE - Universal Task Checklist.md - Lines: 87 - Chars: 5422 - Tokens: 1356
 101. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
-102. src\backend\commands\commands.ts - Lines: 103 - Chars: 4254 - Tokens: 1064
+102. src\backend\commands\commands.ts - Lines: 110 - Chars: 4526 - Tokens: 1132
 103. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
-104. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
+104. src\backend\services\action.service.ts - Lines: 69 - Chars: 2230 - Tokens: 558
 105. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
-106. src\backend\services\file-operation.service.ts - Lines: 344 - Chars: 16383 - Tokens: 4096
+106. src\backend\services\file-operation.service.ts - Lines: 344 - Chars: 16368 - Tokens: 4092
 107. src\backend\services\file-tree.service.ts - Lines: 252 - Chars: 13674 - Tokens: 3419
 108. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12609 - Tokens: 3153
 109. src\backend\services\git.service.ts - Lines: 114 - Chars: 5522 - Tokens: 1381
 110. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-111. src\backend\services\history.service.ts - Lines: 286 - Chars: 12269 - Tokens: 3068
+111. src\backend\services\history.service.ts - Lines: 287 - Chars: 12276 - Tokens: 3069
 112. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 113. src\backend\services\prompt.service.ts - Lines: 388 - Chars: 20166 - Tokens: 5042
 114. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
@@ -2097,7 +2135,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 116. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
 117. src\client\components\file-tree\FileTree.tsx - Lines: 176 - Chars: 11127 - Tokens: 2782
 118. src\client\components\file-tree\FileTree.utils.ts - Lines: 117 - Chars: 4236 - Tokens: 1059
-119. src\client\components\tree-view\TreeView.tsx - Lines: 395 - Chars: 17713 - Tokens: 4429
+119. src\client\components\tree-view\TreeView.tsx - Lines: 395 - Chars: 17687 - Tokens: 4422
 120. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 121. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
 122. src\client\components\ContextMenu.tsx - Lines: 72 - Chars: 3353 - Tokens: 839
@@ -2118,28 +2156,28 @@ This file-centric approach helps in planning and prioritizing work, especially i
 137. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 86 - Chars: 3575 - Tokens: 894
 138. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
 139. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-140. src\client\views\parallel-copilot.view\on-message.ts - Lines: 114 - Chars: 5326 - Tokens: 1332
+140. src\client\views\parallel-copilot.view\on-message.ts - Lines: 117 - Chars: 5513 - Tokens: 1379
 141. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 92 - Chars: 4340 - Tokens: 1085
 142. src\client\views\parallel-copilot.view\view.scss - Lines: 891 - Chars: 19912 - Tokens: 4978
 143. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-144. src\client\views\parallel-copilot.view\view.tsx - Lines: 245 - Chars: 32332 - Tokens: 8083
+144. src\client\views\parallel-copilot.view\view.tsx - Lines: 246 - Chars: 32592 - Tokens: 8148
 145. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
 146. src\common\ipc\channels.enum.ts - Lines: 92 - Chars: 4981 - Tokens: 1246
-147. src\common\ipc\channels.type.ts - Lines: 93 - Chars: 7074 - Tokens: 1769
+147. src\common\ipc\channels.type.ts - Lines: 93 - Chars: 7075 - Tokens: 1769
 148. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 149. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 150. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
 151. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
-152. src\common\types\pcpp.types.ts - Lines: 44 - Chars: 1070 - Tokens: 268
+152. src\common\types\pcpp.types.ts - Lines: 45 - Chars: 1084 - Tokens: 271
 153. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
 154. src\common\utils\formatting.ts - Lines: 141 - Chars: 4606 - Tokens: 1152
 155. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
 156. src\common\utils\view-html.ts - Lines: 37 - Chars: 1314 - Tokens: 329
-157. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
-158. src\extension.ts - Lines: 131 - Chars: 5366 - Tokens: 1342
-159. webpack.config.js - Lines: 111 - Chars: 2920 - Tokens: 730
+157. src\common\view-types.ts - Lines: 8 - Chars: 175 - Tokens: 44
+158. src\extension.ts - Lines: 166 - Chars: 6824 - Tokens: 1706
+159. webpack.config.js - Lines: 112 - Chars: 2987 - Tokens: 747
 160. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
-161. package.json - Lines: 144 - Chars: 4611 - Tokens: 1153
+161. package.json - Lines: 148 - Chars: 4745 - Tokens: 1187
 162. .vscodeignore - Lines: 25 - Chars: 787 - Tokens: 197
 163. .gitignore - Lines: 10 - Chars: 128 - Tokens: 32
 164. src\Artifacts\A78. DCE - VSIX Packaging and FTV Flashing Bug.md - Lines: 50 - Chars: 3687 - Tokens: 922
@@ -2153,14 +2191,18 @@ This file-centric approach helps in planning and prioritizing work, especially i
 172. src\Artifacts\A81. DCE - Curator Activity Plan.md - Lines: 34 - Chars: 2346 - Tokens: 587
 173. src\Artifacts\A82. DCE - Advanced Exclusion Management Plan.md - Lines: 40 - Chars: 3010 - Tokens: 753
 174. src\Artifacts\A83. DCE - Universal Task Checklist for Cycle 6.md - Lines: 95 - Chars: 5172 - Tokens: 1293
-175. dist\Artifacts\A80. DCE - Settings Panel Plan.md - Lines: 35 - Chars: 2931 - Tokens: 733
-176. dist\Artifacts\A81. DCE - Curator Activity Plan.md - Lines: 34 - Chars: 2346 - Tokens: 587
-177. dist\Artifacts\A82. DCE - Advanced Exclusion Management Plan.md - Lines: 40 - Chars: 3010 - Tokens: 753
-178. dist\Artifacts\A83. DCE - Universal Task Checklist for Cycle 6.md - Lines: 95 - Chars: 5172 - Tokens: 1293
-179. src\Artifacts\A84. DCE - Universal Task Checklist for Cycle 10+.md - Lines: 55 - Chars: 2541 - Tokens: 636
-180. dist\Artifacts\A84. DCE - Universal Task Checklist for Cycle 10+.md - Lines: 55 - Chars: 2541 - Tokens: 636
-181. new-folder\new-file.ts - Lines: 1 - Chars: 0 - Tokens: 0
-182. new-folder\new-file.ts - Lines: 1 - Chars: 0 - Tokens: 0
+175. src\Artifacts\A84. DCE - Universal Task Checklist for Cycle 10+.md - Lines: 55 - Chars: 2541 - Tokens: 636
+176. new-folder\new-file.ts - Lines: 1 - Chars: 0 - Tokens: 0
+177. new-folder\new-file.ts - Lines: 1 - Chars: 0 - Tokens: 0
+178. CHANGELOG.md - Lines: 8 - Chars: 179 - Tokens: 45
+179. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
+180. src\client\views\settings.view\on-message.ts - Lines: 10 - Chars: 400 - Tokens: 100
+181. src\client\views\settings.view\view.scss - Lines: 18 - Chars: 474 - Tokens: 119
+182. src\client\views\settings.view\view.tsx - Lines: 16 - Chars: 454 - Tokens: 114
+183. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
+184. src\client\views\settings.view\on-message.ts - Lines: 10 - Chars: 400 - Tokens: 100
+185. src\client\views\settings.view\view.scss - Lines: 18 - Chars: 474 - Tokens: 119
+186. src\client\views\settings.view\view.tsx - Lines: 16 - Chars: 454 - Tokens: 114
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -4315,6 +4357,7 @@ To resolve this, the reliance on `vscode.workspace.findFiles` for building the t
 # Artifact A27: DCE - Phase 1 - Undo-Redo Feature Plan
 # Date Created: C35
 # Author: AI Model
+# Updated on: C10 (Mark as active implementation)
 
 - **Key/Value for A0:**
 - **Description:** Details the requirements for implementing an undo/redo stack for file system operations (move, delete) performed within the DCE view, to achieve parity with the native explorer's Ctrl+Z functionality.
@@ -4323,6 +4366,8 @@ To resolve this, the reliance on `vscode.workspace.findFiles` for building the t
 ## 1. Overview & Goal
 
 A critical feature for achieving parity with the native VS Code Explorer is the ability to undo file system operations. Users expect to be able to press `Ctrl+Z` to revert an accidental file move or deletion. The goal of this feature is to implement a robust undo/redo stack for file operations initiated from within the Data Curation Environment view.
+
+**Status (C10):** In Progress.
 
 ## 2. User Stories
 
@@ -4345,8 +4390,8 @@ This feature will be implemented primarily on the backend to manage the file sys
         *   `undo`: Pops from `undoStack`, performs the reverse operation, and pushes the original action to `redoStack`.
         *   `redo`: Pops from `redoStack`, performs the original operation, and pushes it back to `undoStack`.
 
-2.  **Integrate with `fs.service.ts`:**
-    *   The `handleMoveFileRequest` and `handleFileDeleteRequest` methods in `fs.service.ts` will be updated.
+2.  **Integrate with `file-operation.service.ts`:**
+    *   The `handleMoveFileRequest` and `handleFileDeleteRequest` methods in `file-operation.service.ts` will be updated.
     *   *Before* performing the file system operation, they will create the corresponding `Action` object.
     *   *After* the operation succeeds, they will call `Services.actionService.push(action)`.
 
@@ -8043,6 +8088,7 @@ This allows the AI to see the names of all available constants (e.g., `OPENAI_AP
 # Artifact A[XX]: [Project Name] - Universal Task Checklist
 # Date Created: C[XX]
 # Author: AI Model & Curator
+# Updated on: C10 (Add guidance for planning next cycle)
 
 - **Key/Value for A0:**
 - **Description:** A generic template for a universal task checklist, designed to organize work by file and complexity.
@@ -8064,6 +8110,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 -   **List Action Items:** Under each file package, create a checklist of specific actions, bugs to fix, or features to implement.
 -   **Add Verification Steps:** After the action items, add a section describing how the curator should test the feature to confirm it is working as expected.
 -   **Note on Output Length:** Remember that the maximum output length for a single response is approximately 65,000 tokens. Do not prematurely stop generating files; attempt to complete as many full files as possible within this limit.
+-   **Plan for the Future:** Always conclude your task list with a final task to create the checklist for the next cycle (e.g., `T-X: Create A[XX+1] Universal Task Checklist for Cycle [Y+]`). This creates a continuous planning loop.
 -   **Keep it Current:** At the beginning of each new cycle, review and update this checklist. Move completed tasks to a "Completed" section, add new tasks based on feedback, and re-prioritize as needed. This ensures the checklist remains a living, accurate reflection of the project's status.
 
 ---
@@ -8085,6 +8132,14 @@ This file-centric approach helps in planning and prioritizing work, especially i
 2.  **Expected:** [Expected outcome of the first step]
 3.  [Second verification step]
 4.  **Expected:** [Expected outcome of the second step]
+
+## T-2: Plan for Next Cycle
+- **Files Involved:**
+    - `src/Artifacts/A[XX+1]-New-Checklist.md`
+- **Total Tokens:** [e.g., ~500]
+- **More than one cycle?** No
+
+- [ ] **Task (T-ID: 2.1):** Create the Universal Task Checklist for the next cycle based on current progress and backlog.
 </file_artifact>
 
 <file path="src/Artifacts/A11. DCE - Regression Case Studies.md">
@@ -8753,7 +8808,7 @@ Review the user's project scope in M4. Your task is to act as a senior project a
 </file_artifact>
 
 <file path="src/backend/commands/commands.ts">
-// Updated on: C187 (Add gitInit command)
+// Updated on: C10 (Add openSettingsPanel command)
 import * as vscode from 'vscode';
 import { Services } from '../services/services';
 import { serverIPCs } from '@/client/views';
@@ -8849,6 +8904,13 @@ export const commands = [
         }
     },
     {
+        commandId: 'dce.openSettingsPanel',
+        callback: () => {
+            Services.loggerService.log("Executing dce.openSettingsPanel command.");
+            // Logic to create/show the settings WebviewPanel will be in extension.ts
+        }
+    },
+    {
         commandId: 'dce.gitInit',
         callback: () => {
             Services.loggerService.log("Executing dce.gitInit command.");
@@ -8873,7 +8935,7 @@ export function registerCommands(context: vscode.ExtensionContext) {
 </file_artifact>
 
 <file path="src/backend/services/action.service.ts">
-// Updated on: C114 (Refactor to use new services)
+// Updated on: C10 (New File)
 import * as vscode from 'vscode';
 import { Services } from './services';
 
@@ -8896,18 +8958,27 @@ export class ActionService {
     public push(action: Action) {
         this.undoStack.push(action);
         this.redoStack = [];
+        Services.loggerService.log(`[ActionService] Pushed action to undo stack: ${action.type}`);
     }
 
     public async undo() {
         const action = this.undoStack.pop();
-        if (!action) return;
+        if (!action) {
+            Services.loggerService.log(`[ActionService] Undo stack is empty.`);
+            return;
+        }
+        Services.loggerService.log(`[ActionService] Undoing action: ${action.type}`);
         await this.performReverseAction(action);
         this.redoStack.push(action);
     }
 
     public async redo() {
         const action = this.redoStack.pop();
-        if (!action) return;
+        if (!action) {
+            Services.loggerService.log(`[ActionService] Redo stack is empty.`);
+            return;
+        }
+        Services.loggerService.log(`[ActionService] Redoing action: ${action.type}`);
         await this.performOriginalAction(action);
         this.undoStack.push(action);
     }
@@ -9088,7 +9159,7 @@ export class ContentExtractionService {
 
 <file path="src/backend/services/file-operation.service.ts">
 // src/backend/services/file-operation.service.ts
-// Updated on: C8 (Fix handleBatchFileWrite parameter type)
+// Updated on: C10 (Integrate ActionService)
 import * as vscode from "vscode";
 import * as path from "path";
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
@@ -10138,7 +10209,7 @@ export class HighlightingService {
 
 <file path="src/backend/services/history.service.ts">
 // src/backend/services/history.service.ts
-// Updated on: C7 (Send NotifySaveComplete message after writing file)
+// Updated on: C10 (Add activeTab to default cycle)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -10230,6 +10301,7 @@ export class HistoryService {
             selectedResponseId: null, 
             selectedFilesForReplacement: [], 
             tabCount: 4, 
+            activeTab: 1,
             isSortedByTokens: false, 
             pathOverrides: {},
         };
@@ -11418,7 +11490,7 @@ export const removePathsFromSelected = (
 </file_artifact>
 
 <file path="src/client/components/tree-view/TreeView.tsx">
-// Updated on: C167 (Fix TS errors, array access)
+// Updated on: C10 (Add onKeyDown handler for Undo/Redo)
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { VscChevronRight } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -11486,13 +11558,13 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     };
 
     useEffect(() => {
-        if (data.length > 0 && data[0]) {
+        if (data.length > 0) {
             expandNode(data[0].absolutePath);
         }
     }, [data]);
 
     useEffect(() => {
-        if (collapseTrigger > 0 && data.length > 0 && data[0]) {
+        if (collapseTrigger > 0 && data.length > 0) {
             setExpandedNodes([data[0].absolutePath]);
         }
     }, [collapseTrigger, data]);
@@ -11512,7 +11584,7 @@ const TreeView: React.FC<TreeViewProps> = ({ data, renderNodeContent, collapseTr
     }, [expandAllTrigger, data]);
 
     useEffect(() => {
-        if (activeFile && data.length > 0 && data[0]) {
+        if (activeFile && data.length > 0) {
             logger.log(`[TreeView] activeFile prop changed: ${activeFile}. Attempting to reveal.`);
             const getParentPaths = (filePath: string, rootPath: string): string[] => {
                 if (!filePath.startsWith(rootPath) || filePath === rootPath) {
@@ -14058,13 +14130,13 @@ export const viewConfig = {
 </file_artifact>
 
 <file path="src/client/views/parallel-copilot.view/on-message.ts">
-// Updated on: C5 (No functional changes, only cycle header)
+// Updated on: C10 (Add Undo/Redo handlers)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
 
 export function onMessage(serverIpc: ServerPostMessageManager) {
-    const { loggerService, promptService, fileOperationService, highlightingService, historyService, gitService } = Services;
+    const { loggerService, promptService, fileOperationService, highlightingService, historyService, gitService, actionService } = Services;
     loggerService.log("Parallel Co-Pilot view message handler initialized.");
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestCreatePromptFile, (data) => {
@@ -14171,6 +14243,9 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     serverIpc.onClientMessage(ClientToServerChannel.SaveLastViewedCycle, (data) => {
         historyService.saveLastViewedCycleId(data.cycleId);
     });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestUndo, () => actionService.undo());
+    serverIpc.onClientMessage(ClientToServerChannel.RequestRedo, () => actionService.redo());
 }
 </file_artifact>
 
@@ -15178,11 +15253,11 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C9 (Add context menu for associated files)
+// Updated on: C10 (Add activeTab to state and persistence)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './view.scss';
-import { VscWand, VscFileCode, VscBug, VscBook, VscFolder, VscChevronDown, VscLoading, VscCheck, VscVm, VscWarning } from 'react-icons/vsc';
+import { VscWand, VscFileCode, VscBug, VscBook, VscFolder, VscChevronDown, VscLoading, VscCheck, VscVm, VscWarning, VscQuestion } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '../../../common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '../../../common/ipc/channels.enum';
 import { ParsedResponse, PcppCycle, PcppResponse } from '../../../common/types/pcpp.types';
@@ -15256,17 +15331,17 @@ const App = () => {
     
     // ... (existing stateRef, saveCurrentCycleState, etc.)
     const stateRef = React.useRef({
-        currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides
+        currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides
     });
 
     React.useEffect(() => {
         stateRef.current = {
-            currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides
+            currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides
         };
-    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides]);
+    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides]);
 
     const saveCurrentCycleState = React.useCallback(() => {
-        const { currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides } = stateRef.current;
+        const { currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides } = stateRef.current;
         if (currentCycle === null || currentCycle === 0) return;
         setSaveStatus('saving');
         const responses: { [key: string]: PcppResponse } = {};
@@ -15285,6 +15360,7 @@ const App = () => {
             selectedResponseId,
             selectedFilesForReplacement: Array.from(selectedFilesForReplacement),
             tabCount,
+            activeTab,
             isSortedByTokens,
             pathOverrides: Object.fromEntries(pathOverrides)
         };
@@ -15346,7 +15422,7 @@ const App = () => {
     const newCycleButtonDisabledReason = React.useMemo(() => { const reasons: string[] = []; if (!cycleTitle || cycleTitle.trim() === 'New Cycle' || cycleTitle.trim() === '') reasons.push("- A cycle title is required."); if (!cycleContext || cycleContext.trim() === '') reasons.push("- Cycle context cannot be empty."); if (!selectedResponseId) reasons.push("- A response must be selected."); return reasons.join('\n'); }, [cycleTitle, cycleContext, selectedResponseId]);
 
     React.useEffect(() => { if (workflowStep === null) return; if (workflowStep === 'readyForNewCycle') return; if (workflowStep === 'awaitingGeneratePrompt') { if (isReadyForNextCycle) setWorkflowStep('awaitingGeneratePrompt'); return; } if (workflowStep === 'awaitingCycleTitle') { if (cycleTitle.trim() && cycleTitle.trim() !== 'New Cycle') { setWorkflowStep('awaitingGeneratePrompt'); } return; } if (workflowStep === 'awaitingCycleContext') { if (cycleContext.trim()) { setWorkflowStep('awaitingCycleTitle'); } return; } if (workflowStep === 'awaitingAccept') { return; } if (workflowStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestGitStatus, {}); return; } if (workflowStep === 'awaitingFileSelect') { if (selectedFilesForReplacement.size > 0) { setWorkflowStep('awaitingAccept'); } return; } if (workflowStep === 'awaitingResponseSelect') { if (selectedResponseId) { setWorkflowStep('awaitingBaseline'); } return; } if (workflowStep === 'awaitingSort') { if (isSortedByTokens) { setWorkflowStep('awaitingResponseSelect'); } return; } if (workflowStep === 'awaitingParse') { if (isParsedMode) { setWorkflowStep(isSortedByTokens ? 'awaitingResponseSelect' : 'awaitingSort'); } return; } const waitingForPaste = workflowStep?.startsWith('awaitingResponsePaste'); if (waitingForPaste) { for (let i = 1; i <= tabCount; i++) { if (!tabs[i.toString()]?.rawContent?.trim()) { setWorkflowStep(`awaitingResponsePaste_${i}`); return; } } setWorkflowStep('awaitingParse'); } }, [workflowStep, selectedFilesForReplacement, selectedResponseId, isSortedByTokens, isParsedMode, tabs, cycleContext, cycleTitle, tabCount, isReadyForNextCycle, clientIpc]);
-    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string, newMax?: number) => { console.log(`[PCPP View] Loading cycle data for cycle ${cycleData.cycleId}`); setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); if (newMax) setMaxCycle(newMax); setSaveStatus('saved'); }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => { setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics)); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { console.log(`[PCPP VIEW] Received NotifyGitOperationResult: ${JSON.stringify(result)}`); if (result.success) { setWorkflowStep(prevStep => { console.log(`[PCPP WORKFLOW] Functional update. Prev step: ${prevStep}.`); if (prevStep === 'awaitingBaseline') { console.log(`[PCPP WORKFLOW] Advancing from 'awaitingBaseline' to 'awaitingFileSelect'.`); clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } else { console.error(`[PCPP VIEW] Git operation failed: ${result.message}`); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => { if (cycleId === stateRef.current.currentCycle) setSaveStatus('saved'); }); clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }, [clientIpc]);
+    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string, newMax?: number) => { console.log(`[PCPP View] Loading cycle data for cycle ${cycleData.cycleId}`); setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setActiveTab(cycleData.activeTab || 1); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); if (newMax) setMaxCycle(newMax); setSaveStatus('saved'); }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => { setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics)); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { console.log(`[PCPP VIEW] Received NotifyGitOperationResult: ${JSON.stringify(result)}`); if (result.success) { setWorkflowStep(prevStep => { console.log(`[PCPP WORKFLOW] Functional update. Prev step: ${prevStep}.`); if (prevStep === 'awaitingBaseline') { console.log(`[PCPP WORKFLOW] Advancing from 'awaitingBaseline' to 'awaitingFileSelect'.`); clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } else { console.error(`[PCPP VIEW] Git operation failed: ${result.message}`); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => { if (cycleId === stateRef.current.currentCycle) setSaveStatus('saved'); }); clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }, [clientIpc]);
     React.useEffect(() => { if (isParsedMode) parseAllTabs(); }, [isParsedMode, tabs, parseAllTabs]);
     React.useEffect(() => { if (!selectedFilePath) return; const currentTabData = tabs[activeTab.toString()]; if (currentTabData?.parsedContent) { const fileExistsInTab = currentTabData.parsedContent.files.some(f => f.path === selectedFilePath); if (!fileExistsInTab) setSelectedFilePath(null); } }, [activeTab, tabs, selectedFilePath]);
 
@@ -15403,12 +15479,12 @@ const App = () => {
     };
 
     return <div className="pc-view-container">
-        <div className="pc-header"><div className="pc-toolbar"><button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button><button onClick={handleGeneratePrompt} title="Generate prompt.md" className={workflowStep === 'awaitingGeneratePrompt' ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button><button onClick={handleLogState} title="Log Current State"><VscBug/></button><button onClick={handleGlobalParseToggle} className={`${isParsedMode ? 'active' : ''} ${workflowStep === 'awaitingParse' ? 'workflow-highlight' : ''}`}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => {setTabCount(parseInt(e.target.value, 10) || 1); setSaveStatus('unsaved');}} /></div></div>
+        <div className="pc-header"><div className="pc-toolbar"><button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button><button onClick={handleGeneratePrompt} title="Generate prompt.md" className={workflowStep === 'awaitingGeneratePrompt' ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button><button onClick={handleLogState} title="Log Current State"><VscBug/></button><button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.openSettingsPanel' })} title="Settings & Help"><VscQuestion /></button><button onClick={handleGlobalParseToggle} className={`${isParsedMode ? 'active' : ''} ${workflowStep === 'awaitingParse' ? 'workflow-highlight' : ''}`}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => {setTabCount(parseInt(e.target.value, 10) || 1); setSaveStatus('unsaved');}} /></div></div>
         <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''} extraHeaderContent={<div style={{display: 'flex', alignItems: 'center', gap: '8px'}}><SaveStatusIndicator /> {totalPromptCostDisplay}</div>}>
             <CycleNavigator currentCycle={currentCycle} maxCycle={maxCycle} cycleTitle={cycleTitle} isNewCycleButtonDisabled={isNewCycleButtonDisabled} onCycleChange={handleCycleChange} onNewCycle={handleNewCycle} onTitleChange={(title) => { setCycleTitle(title); setSaveStatus('unsaved'); }} onDeleteCycle={handleDeleteCycle} onResetHistory={handleResetHistory} onExportHistory={handleExportHistory} onImportHistory={handleImportHistory} onGitBaseline={handleGitBaseline} onGitRestore={handleGitRestore} workflowStep={workflowStep} disabledReason={newCycleButtonDisabledReason} saveStatus={saveStatus} />
             <ContextInputs cycleContext={cycleContext} ephemeralContext={ephemeralContext} cycleContextTokens={cycleContextTokens} ephemeralContextTokens={ephemeralContextTokens} onCycleContextChange={onCycleContextChange} onEphemeralContextChange={onEphemeralContextChange} workflowStep={workflowStep} />
         </CollapsibleSection>
-        <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} onSortToggle={handleSortToggle} workflowStep={workflowStep} />
+        <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} workflowStep={workflowStep} />
         <div className="tab-content">
             <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} onPaste={(e) => handlePaste(e, activeTab)} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={comparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => { setSelectedResponseId(prev => prev === id ? null : id); setWorkflowStep('awaitingResponseSelect'); setSaveStatus('unsaved'); }} onSelectAllFiles={handleSelectAllFilesToggle} onDeselectAllFiles={() => {setSelectedFilesForReplacement(new Set()); setSaveStatus('unsaved');}} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} onBaseline={handleGitBaseline} onRestore={handleGitRestore} workflowStep={workflowStep} onAssociatedFileContextMenu={handleAssociatedFileContextMenu} />
         </div>
@@ -15562,7 +15638,7 @@ export enum ServerToClientChannel {
 </file_artifact>
 
 <file path="src/common/ipc/channels.type.ts">
-// Updated on: C8 (Fix RequestBatchFileWrite type)
+// Updated on: C10 (Add PcppCycle to SaveCycleData)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -15785,7 +15861,7 @@ export interface FileNode {
 
 <file path="src/common/types/pcpp.types.ts">
 // src/common/types/pcpp.types.ts
-// Updated on: C6 (Add curatorActivity to ParsedResponse)
+// Updated on: C10 (Add activeTab to PcppCycle)
 export interface PcppResponse {
     content: string;
 }
@@ -15802,6 +15878,7 @@ export interface PcppCycle {
     selectedResponseId?: string | null;
     selectedFilesForReplacement?: string[];
     tabCount?: number;
+    activeTab?: number;
     isSortedByTokens?: boolean;
     pathOverrides?: { [originalPath: string]: string };
     cycleContextHeight?: number;
@@ -16092,10 +16169,12 @@ import { ServerToClientChannel } from "./common/ipc/channels.enum";
 import { API as GitAPI, GitExtension } from "./backend/types/git";
 import { getNonce, getViewHtml } from "./common/utils/view-html";
 import { onMessage as onParallelCopilotMessage } from "./client/views/parallel-copilot.view/on-message";
+import { onMessage as onSettingsMessage } from "./client/views/settings.view/on-message";
 import { ServerPostMessageManager } from "./common/ipc/server-ipc";
 
 let globalContext: vscode.ExtensionContext | null = null;
 let parallelCopilotPanel: vscode.WebviewPanel | undefined;
+let settingsPanel: vscode.WebviewPanel | undefined;
 
 function createOrShowParallelCopilotPanel(context: vscode.ExtensionContext) {
     const column = vscode.window.activeTextEditor?.viewColumn;
@@ -16142,6 +16221,36 @@ function createOrShowParallelCopilotPanel(context: vscode.ExtensionContext) {
     }, null, context.subscriptions);
 }
 
+function createOrShowSettingsPanel(context: vscode.ExtensionContext) {
+    if (settingsPanel) {
+        settingsPanel.reveal(vscode.ViewColumn.One);
+        return;
+    }
+
+    settingsPanel = vscode.window.createWebviewPanel(
+        'dce.settingsPanel', 'DCE Settings & Help', vscode.ViewColumn.One, { enableScripts: true, localResourceRoots: [context.extensionUri] }
+    );
+
+    const scriptUri = settingsPanel.webview.asWebviewUri(vscode.Uri.joinPath(context.extensionUri, "dist", "settingsView.js"));
+    const styleUri = settingsPanel.webview.asWebviewUri(vscode.Uri.joinPath(context.extensionUri, "dist", "settingsView.css"));
+    const nonce = getNonce();
+
+    settingsPanel.webview.html = getViewHtml({
+        webview: settingsPanel.webview, nonce, scriptUri: scriptUri.toString(), styleUris: [styleUri],
+    });
+
+    const serverIpc = ServerPostMessageManager.getInstance(
+        settingsPanel.webview.onDidReceiveMessage,
+        (data: any) => settingsPanel?.webview.postMessage(data)
+    );
+    onSettingsMessage(serverIpc);
+
+    settingsPanel.onDidDispose(() => {
+        settingsPanel = undefined;
+    }, null, context.subscriptions);
+}
+
+
 export async function activate(context: vscode.ExtensionContext) {
     Services.loggerService.log('Congratulations, your extension "Data Curation Environment" is now active!');
     globalContext = context;
@@ -16162,6 +16271,9 @@ export async function activate(context: vscode.ExtensionContext) {
         registerCommands(context);
         context.subscriptions.push(vscode.commands.registerCommand('dce.showParallelCopilot', () => {
             createOrShowParallelCopilotPanel(context);
+        }));
+        context.subscriptions.push(vscode.commands.registerCommand('dce.openSettingsPanel', () => {
+            createOrShowSettingsPanel(context);
         }));
         registerViews(context);
 
@@ -16280,6 +16392,7 @@ const webviewConfig = {
     entry: {
         contextChooserView: './src/client/views/context-chooser.view/view.tsx',
         parallelCopilotView: './src/client/views/parallel-copilot.view/view.tsx',
+        settingsView: './src/client/views/settings.view/view.tsx',
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -16413,6 +16526,10 @@ module.exports = [extensionConfig, webviewConfig];
             {
                 "command": "dce.showParallelCopilot",
                 "title": "DCE: Show Parallel Co-Pilot"
+            },
+            {
+                "command": "dce.openSettingsPanel",
+                "title": "DCE: Open Settings & Help"
             },
             {
                 "command": "dce.gitInit",
@@ -26125,222 +26242,6 @@ This artifact provides a structured, universal format for tracking the developme
 2.  **Expected:** The new `A84` artifact should be present and contain the feature plans for the next cycle.
 </file_artifact>
 
-<file path="dist/Artifacts/A80. DCE - Settings Panel Plan.md">
-# Artifact A80: DCE - Settings Panel Plan
-# Date Created: C6
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A plan for a new settings panel, accessible via a help icon, to house changelogs, settings, and other informational content.
-- **Tags:** feature plan, settings, ui, ux, changelog
-
-## 1. Overview & Goal
-
-As the Data Curation Environment (DCE) grows in features, users will need a centralized location to manage settings, view changelogs, and access help documentation. The goal of this feature is to create a dedicated "Settings" or "Help" panel, accessible via a new icon in the Parallel Co-Pilot Panel (PCPP), that serves as this central hub.
-
-## 2. User Stories
-
-| ID | User Story | Acceptance Criteria |
-|---|---|---|
-| P2-SET-01 | **Access Help and Settings** | As a user, I want to click a help icon (`?`) in the PCPP to open a dedicated panel, so I can access settings and information about the extension. | - A help icon is present in the main header of the PCPP. <br> - Clicking it opens a new `WebviewPanel` in the main editor area, titled "DCE Settings & Help". |
-| P2-SET-02 | **View Changelog** | As a user, I want to view a changelog within the settings panel, so I can see what has changed in the latest version of the extension. | - The settings panel has a "Changelog" tab. <br> - This tab displays the content of a `CHANGELOG.md` file, rendered as formatted Markdown. |
-| P2-SET-03 | **Manage Settings** | As a user, I want to manage extension settings from this panel, so I can configure features to my preference. | - The settings panel has a "Settings" tab. <br> - It provides UI controls for managing settings, such as API keys (from `A41`), exclusion list patterns (from `A82`), and other configurable options. |
-
-## 3. Technical Implementation Plan
-
-1.  **New Command & Icon:**
-    *   **UI (`view.tsx`):** Add a new help/question mark icon button to the main header of the PCPP.
-    *   **Command (`commands.ts`):** The button will trigger a new command, `dce.openSettingsPanel`.
-    *   **`extension.ts`:** The command handler will create and manage a singleton `WebviewPanel`, similar to how the PCPP itself is managed.
-
-2.  **New Settings Webview:**
-    *   A new view will be created under `src/client/views/settings.view/`.
-    *   It will have its own `view.tsx`, `view.scss`, `on-message.ts`, etc.
-    *   The `view.tsx` will render a tabbed interface ("Settings", "Changelog", "About").
-
-3.  **Backend Logic:**
-    *   **Changelog:** The backend will have a service that reads the `CHANGELOG.md` file from the extension's root directory and sends its content to the settings webview to be rendered.
-    *   **Settings:** The backend will need a new `SettingsService` that interacts with `vscode.workspace.getConfiguration()` to get and set both global and workspace-level settings for the extension. This will be the backend for the UI controls in the settings tab.
-</file_artifact>
-
-<file path="dist/Artifacts/A81. DCE - Curator Activity Plan.md">
-# Artifact A81: DCE - Curator Activity Plan
-# Date Created: C6
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A plan to introduce a new `<curator_activity>` section to the AI response format, allowing for explicit instructions to the human curator.
-- **Tags:** documentation, process, interaction schema, workflow
-
-## 1. Overview & Goal
-
-Currently, if the AI needs the human curator to perform an action it cannot (e.g., delete a file, install a dependency), it must embed this instruction within the "Course of Action" or summary. This can be missed and is not machine-parsable.
-
-The goal of this feature is to create a formal, dedicated channel for these instructions. A new `<curator_activity>...</curator_activity>` section will be added to the interaction schema. The extension will parse this section and display it in a distinct, highly visible area of the UI, ensuring the curator sees and can act upon these critical instructions.
-
-## 2. User Story
-
-| ID | User Story | Acceptance Criteria |
-|---|---|---|
-| P2-CA-01 | **Receive Curator Instructions** | As a curator, when an AI response includes actions I need to perform manually, I want to see them clearly separated from the AI's own course of action, so I don't miss them. | - The AI can include a `<curator_activity>` block in its response. <br> - The PCPP parser extracts the content of this block. <br> - The UI displays this content in a new, clearly labeled "Curator Activity" collapsible section. |
-
-## 3. Technical Implementation Plan
-
-1.  **Update Interaction Schema:**
-    *   **`A52.2 DCE - Interaction Schema Source.md`:** A new rule will be added, defining the `<curator_activity>...</curator_activity>` section and explaining its purpose to the AI.
-
-2.  **Update Parser (`response-parser.ts`):**
-    *   A new `CURATOR_ACTIVITY_REGEX` will be added to extract the content from the new tags.
-    *   The `ParsedResponse` interface in `pcpp.types.ts` will be updated with a new optional property, `curatorActivity?: string`.
-
-3.  **Update UI (`ParsedView.tsx`):**
-    *   A new `CollapsibleSection` will be added to the parsed view.
-    *   It will be titled "Curator Activity".
-    *   It will be conditionally rendered only if `parsedContent.curatorActivity` exists and is not empty.
-    *   The content will be rendered as formatted Markdown.
-</file_artifact>
-
-<file path="dist/Artifacts/A82. DCE - Advanced Exclusion Management Plan.md">
-# Artifact A82: DCE - Advanced Exclusion Management Plan
-# Date Created: C6
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A plan for a feature allowing users to right-click files or folders and add them to a persistent exclusion list, preventing them from being automatically selected or flattened.
-- **Tags:** feature plan, context menu, exclusion, ignore, ux
-
-## 1. Overview & Goal
-
-Users need a simple, intuitive way to manage which files are included in the Data Curation Environment's view and processes. While some files are excluded by default (e.g., `.git`), users may have project-specific directories (like `dist`, `build`, or custom log folders) that they want to permanently ignore.
-
-The goal of this feature is to allow users to right-click any file or folder in the main file tree and add it to a persistent exclusion list, which will be stored in the workspace's settings.
-
-## 2. User Story
-
-| ID | User Story | Acceptance Criteria |
-|---|---|---|
-| P1-EX-01 | **Exclude from View** | As a developer, I want to right-click a build output directory (e.g., `dist`) and select "Add to DCE Exclusions", so it no longer appears in the Data Curation file tree and is never included in flattened contexts. | - A new "Add to DCE Exclusions" option is available in the file tree's right-click context menu. <br> - Selecting this option adds the file or folder's path to a custom setting in `.vscode/settings.json`. <br> - The file tree immediately refreshes and the excluded item (and its children) is no longer visible. |
-
-## 3. Technical Implementation Plan
-
-1.  **Configuration (`package.json`):**
-    *   A new configuration point will be defined in the `contributes.configuration` section.
-    *   This will create a new setting, `dce.files.exclude`, which will be an object similar to the native `files.exclude`.
-
-2.  **Backend (`file-tree.service.ts`):**
-    *   The file traversal logic will be updated to read this new `dce.files.exclude` setting from the workspace configuration.
-    *   It will merge these user-defined patterns with the default exclusion patterns before scanning the file system.
-
-3.  **UI & IPC:**
-    *   **`ContextMenu.tsx`:** A new menu item, "Add to DCE Exclusions," will be added.
-    *   **IPC:** A new IPC channel, `RequestAddToExclusions`, will be created.
-    *   **Backend Handler (`settings.service.ts` - new or existing):** A new handler will receive the path to exclude. It will:
-        1.  Get the current exclusion configuration object using `vscode.workspace.getConfiguration('dce')`.
-        2.  Add the new path to the object (`newExclusion[path] = true`).
-        3.  Update the configuration using `config.update('files.exclude', newExclusion, vscode.ConfigurationTarget.Workspace)`.
-        4.  This will automatically trigger a refresh of the file tree as the configuration has changed.
-
-This approach leverages VS Code's built-in settings infrastructure, making the exclusions persistent and easily manageable for the user.
-</file_artifact>
-
-<file path="dist/Artifacts/A83. DCE - Universal Task Checklist for Cycle 6.md">
-# Artifact A83: DCE - Universal Task Checklist for Cycle 6
-# Date Created: C6
-# Author: AI Model & Curator
-# Updated on: C9 (Finalize T-3 and add T-4)
-
-- **Key/Value for A0:**
-- **Description:** A structured checklist for organizing the development tasks, feedback, and bugs from the "laundry list" provided in Cycle 6.
-- **Tags:** process, checklist, task management, planning, workflow
-
-## 1. Purpose
-
-This artifact provides a structured, universal format for tracking the development tasks derived from the "laundry list" of feedback in Cycle 6. It organizes work by logical feature areas and the group of files involved.
-
----
-
-## Task List
-
-## T-1: Parsing & Interaction Schema
-- **Files Involved:**
-    - `src/Artifacts/A52.2 DCE - Interaction Schema Source.md`
-    - `src/Artifacts/A81. DCE - Curator Activity Plan.md`
-    - `src/client/utils/response-parser.ts`
-    - `src/common/types/pcpp.types.ts`
-    - `src/client/views/parallel-copilot.view/components/ParsedView.tsx`
-- **Total Tokens:** ~6,000
-- **More than one cycle?** No
-- **Status:** Completed in C7
-
-- [X] **Task (T-ID: 1.1):** Create `A81` to plan the new `<curator_activity>` section.
-- [X] **Task (T-ID: 1.2):** Update `A52.2` to be more explicit about the `</file_artifact>` closing tag and to include the new `curator_activity` section.
-- [X] **Task (T-ID: 1.3):** Update the parser to extract the `<curator_activity>` section and to de-duplicate the `files` array, keeping the last occurrence of a path.
-- [X] **Task (T-ID: 1.4):** Update the UI to render the new `curatorActivity` content in its own collapsible section.
-
-### Verification Steps
-1.  Provide a response with duplicate file paths and a `<curator_activity>` section.
-2.  Click "Parse All".
-3.  **Expected:** The file counter on the response tab should reflect the unique file count. The "Curator Activity" section should appear with the correct content.
-
-## T-2: Data Integrity & Core UX
-- **Files Involved:**
-    - `src/Artifacts/A79. DCE - Autosave and Navigation Locking Plan.md`
-    - `src/client/views/parallel-copilot.view/view.tsx`
-    - `src/client/views/parallel-copilot.view/components/CycleNavigator.tsx`
-    - `src/backend/services/history.service.ts`
-    - `src/common/ipc/channels.enum.ts`
-    - `src/common/ipc/channels.type.ts`
-- **Total Tokens:** ~12,000
-- **More than one cycle?** No
-- **Status:** Completed in C8
-
-- [X] **Task (T-ID: 2.1):** Implement the autosave locking feature from `A79`. Add `saveStatus` state to `view.tsx`.
-- [X] **Task (T-ID: 2.2):** Add `NotifySaveComplete` IPC channel and have `history.service.ts` send it after a successful write.
-- [X] **Task (T-ID: 2.3):** Disable navigation buttons in `CycleNavigator.tsx` when `saveStatus` is not `'saved'`.
-- [X] **Task (T-ID: 2.4):** Implement auto-tabbing on paste in `view.tsx`.
-- [X] **Task (T-ID: 2.5):** Add `tsconfig.tsbuildinfo` and `dist` to `NON_SELECTABLE_PATTERNS` in `file-tree.service.ts`.
-
-### Verification Steps
-1.  Type text into the Cycle Context.
-2.  **Expected:** The save status indicator should show "unsaved" and the cycle navigation buttons should be disabled.
-3.  Wait for the autosave to complete.
-4.  **Expected:** The status should become "saved" and the buttons should be re-enabled.
-5.  Paste content into `Resp 1` textarea.
-6.  **Expected:** The UI should automatically switch focus to the `Resp 2` tab.
-
-## T-3: Advanced UX Features
-- **Files Involved:**
-    - `src/client/views/parallel-copilot.view/components/ParsedView.tsx`
-    - `src/client/views/parallel-copilot.view/view.scss`
-    - `src/common/utils/formatting.ts`
-- **Total Tokens:** ~5,000
-- **More than one cycle?** No
-- **Status:** Completed in C9
-
-- [X] **Task (T-ID: 3.1):** Implement a color gradient on "Associated Files" list items based on similarity score.
-- [X] **Task (T-ID: 3.2):** Display the similarity score as a percentage and truncate long file paths.
-- [X] **Task (T-ID: 3.3):** Add a right-click context menu to "Associated Files" list items to copy the relative path.
-
-### Verification Steps
-1.  Parse a response with varying similarity scores and a very long file path.
-2.  **Expected:** The file list items should have background colors ranging from green (high similarity) to red (low similarity). A percentage value (e.g., "98%") should be visible. The long file path should be truncated in the middle. Hovering over it shows the full path.
-3.  Right-click a file in the list.
-4.  **Expected:** A context menu should appear with a "Copy Relative Path" option. Clicking it should copy the path to the clipboard.
-
-## T-4: Plan Next Development Phase
-- **Files Involved:**
-    - `src/Artifacts/A84. DCE - Universal Task Checklist for Cycle 10+.md`
-- **Total Tokens:** ~1,500
-- **More than one cycle?** Yes (Implementation is deferred)
-- **Status:** In Progress
-
-- [X] **Task (T-ID: 4.1):** Create `A84` to plan the next phase of development, focusing on high-priority features from the existing backlog to achieve feature parity with the native VS Code explorer.
-
-### Verification Steps
-1.  Check the master artifacts list.
-2.  **Expected:** The new `A84` artifact should be present and contain the feature plans for the next cycle.
-</file_artifact>
-
 <file path="src/Artifacts/A84. DCE - Universal Task Checklist for Cycle 10+.md">
 # Artifact A84: DCE - Universal Task Checklist for Cycle 10+
 # Date Created: C9
@@ -26399,68 +26300,149 @@ This artifact provides a structured, universal format for tracking the next phas
 5.  **Expected:** A second copy appears with a modified name (e.g., `file-copy.ts`).
 </file_artifact>
 
-<file path="dist/Artifacts/A84. DCE - Universal Task Checklist for Cycle 10+.md">
-# Artifact A84: DCE - Universal Task Checklist for Cycle 10+
-# Date Created: C9
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A structured checklist for organizing the next phase of development tasks, focusing on feature parity with the native VS Code explorer.
-- **Tags:** process, checklist, task management, planning, workflow
-
-## 1. Purpose
-
-This artifact provides a structured, universal format for tracking the next phase of development tasks, feedback, and bugs. The primary goal of this phase is to achieve greater feature parity with the native VS Code Explorer, focusing on core file operations and interactions that users expect.
-
----
-
-## Task List
-
-## T-1: Undo/Redo File Operations
-- **Files Involved:**
-    - `src/Artifacts/A27. DCE - Phase 1 - Undo-Redo Feature Plan.md`
-    - `src/backend/services/action.service.ts`
-    - `src/backend/services/file-operation.service.ts`
-    - `src/client/components/tree-view/TreeView.tsx`
-- **Total Tokens:** ~8,000
-- **More than one cycle?** No
-
-- [ ] **Task (T-ID: 1.1):** Implement the `ActionService` to manage undo/redo stacks.
-- [ ] **Task (T-ID: 1.2):** Integrate `ActionService` with `FileOperationService` to push move/delete actions onto the stack.
-- [ ] **Task (T-ID: 1.3):** Implement `Ctrl+Z` / `Ctrl+Y` keyboard shortcuts in `TreeView.tsx` to trigger undo/redo.
-
-### Verification Steps
-1.  Drag and drop a file to move it.
-2.  Press `Ctrl+Z`.
-3.  **Expected:** The file moves back to its original location.
-4.  Press `Ctrl+Y`.
-5.  **Expected:** The file moves back to the new location.
-
-## T-2: Copy/Paste File Operations
-- **Files Involved:**
-    - `src/Artifacts/A33. DCE - Phase 1 - Copy-Paste Feature Plan.md`
-    - `src/backend/services/file-operation.service.ts`
-    - `src/client/components/tree-view/TreeView.tsx`
-    - `src/client/views/context-chooser.view/view.tsx`
-- **Total Tokens:** ~10,000
-- **More than one cycle?** No
-
-- [ ] **Task (T-ID: 2.1):** Implement internal clipboard state in `view.tsx`.
-- [ ] **Task (T-ID: 2.2):** Implement `Ctrl+C` / `Ctrl+V` handlers in `TreeView.tsx`.
-- [ ] **Task (T-ID: 2.3):** Implement backend `handleCopyFileRequest` logic in `file-operation.service.ts`, including robust name collision handling.
-
-### Verification Steps
-1.  Focus a file and press `Ctrl+C`.
-2.  Focus a directory and press `Ctrl+V`.
-3.  **Expected:** A copy of the file appears in the directory.
-4.  Press `Ctrl+V` again in the same directory.
-5.  **Expected:** A second copy appears with a modified name (e.g., `file-copy.ts`).
+<file path="new-folder/new-file.ts">
 </file_artifact>
 
 <file path="new-folder/new-file.ts">
 </file_artifact>
 
-<file path="new-folder/new-file.ts">
+<file path="CHANGELOG.md">
+# DCE Changelog
+
+All notable changes to the "Data Curation Environment" extension will be documented in this file.
+
+## [Unreleased]
+
+### Added
+- Placeholder for changelog content.
+</file_artifact>
+
+<file path="src/client/views/settings.view/index.ts">
+// src/client/views/settings.view/index.ts
+import { onMessage } from "./on-message";
+
+export const viewConfig = {
+    entry: "settingsView.js",
+    type: "viewType.panel.settings", // Note: This type is for internal reference, not a registered view
+    handleMessage: onMessage,
+};
+</file_artifact>
+
+<file path="src/client/views/settings.view/on-message.ts">
+// src/client/views/settings.view/on-message.ts
+import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
+import { Services } from "@/backend/services/services";
+
+export function onMessage(serverIpc: ServerPostMessageManager) {
+    const { loggerService } = Services;
+    loggerService.log("Settings view message handler initialized.");
+
+    // Add message handlers for settings view here
+}
+</file_artifact>
+
+<file path="src/client/views/settings.view/view.scss">
+/* src/client/views/settings.view/view.scss */
+body {
+    padding: 16px;
+    font-family: var(--vscode-font-family);
+    font-size: var(--vscode-font-size);
+    color: var(--vscode-editor-foreground);
+    background-color: var(--vscode-editor-background);
+}
+
+.settings-view-container {
+    h1 {
+        font-size: 1.5em;
+        font-weight: bold;
+        border-bottom: 1px solid var(--vscode-panel-border);
+        padding-bottom: 8px;
+        margin-bottom: 16px;
+    }
+}
+</file_artifact>
+
+<file path="src/client/views/settings.view/view.tsx">
+// src/client/views/settings.view/view.tsx
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import './view.scss';
+
+const App = () => {
+    return (
+        <div className="settings-view-container">
+            <h1>DCE Settings & Help</h1>
+            <p>This panel will contain the changelog and future settings.</p>
+        </div>
+    );
+};
+
+const root = ReactDOM.createRoot(document.getElementById('root')!);
+root.render(<App />);
+</file_artifact>
+
+<file path="src/client/views/settings.view/index.ts">
+// src/client/views/settings.view/index.ts
+import { onMessage } from "./on-message";
+
+export const viewConfig = {
+    entry: "settingsView.js",
+    type: "viewType.panel.settings", // Note: This type is for internal reference, not a registered view
+    handleMessage: onMessage,
+};
+</file_artifact>
+
+<file path="src/client/views/settings.view/on-message.ts">
+// src/client/views/settings.view/on-message.ts
+import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
+import { Services } from "@/backend/services/services";
+
+export function onMessage(serverIpc: ServerPostMessageManager) {
+    const { loggerService } = Services;
+    loggerService.log("Settings view message handler initialized.");
+
+    // Add message handlers for settings view here
+}
+</file_artifact>
+
+<file path="src/client/views/settings.view/view.scss">
+/* src/client/views/settings.view/view.scss */
+body {
+    padding: 16px;
+    font-family: var(--vscode-font-family);
+    font-size: var(--vscode-font-size);
+    color: var(--vscode-editor-foreground);
+    background-color: var(--vscode-editor-background);
+}
+
+.settings-view-container {
+    h1 {
+        font-size: 1.5em;
+        font-weight: bold;
+        border-bottom: 1px solid var(--vscode-panel-border);
+        padding-bottom: 8px;
+        margin-bottom: 16px;
+    }
+}
+</file_artifact>
+
+<file path="src/client/views/settings.view/view.tsx">
+// src/client/views/settings.view/view.tsx
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import './view.scss';
+
+const App = () => {
+    return (
+        <div className="settings-view-container">
+            <h1>DCE Settings & Help</h1>
+            <p>This panel will contain the changelog and future settings.</p>
+        </div>
+    );
+};
+
+const root = ReactDOM.createRoot(document.getElementById('root')!);
+root.render(<App />);
 </file_artifact>
 
 

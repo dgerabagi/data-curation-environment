@@ -61,6 +61,7 @@ const webviewConfig = {
     entry: {
         contextChooserView: './src/client/views/context-chooser.view/view.tsx',
         parallelCopilotView: './src/client/views/parallel-copilot.view/view.tsx',
+        settingsView: './src/client/views/settings.view/view.tsx',
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
