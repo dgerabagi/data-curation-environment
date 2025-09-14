@@ -1,5 +1,5 @@
 // src/backend/services/git.service.ts
-// Updated on: C187 (Add handleGitInitRequest and two-button dialog)
+// Updated on: C11 (Add git clean to restore)
 import * as vscode from 'vscode';
 import { exec } from 'child_process';
 import * as path from 'path';
@@ -9,7 +9,7 @@ import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 
 export class GitService {
     private getWorkspaceRoot(): string | undefined {
-        return vscode.workspace.workspaceFolders?.[0].uri.fsPath;
+        return vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
     }
 
     private async execGitCommand(command: string): Promise<{ stdout: string; stderr: string }> {
@@ -103,9 +103,13 @@ export class GitService {
         Services.loggerService.log("Executing Git Restore.");
         let result = { success: false, message: 'An unknown error occurred.' };
         try {
-            const command = `git restore -- . ":(exclude).vscode/dce_history.json"`;
-            await this.execGitCommand(command);
-            result = { success: true, message: 'Successfully restored workspace to baseline.' };
+            const restoreCommand = `git restore -- . ":(exclude).vscode/dce_history.json"`;
+            await this.execGitCommand(restoreCommand);
+
+            const cleanCommand = `git clean -fdx --exclude=.vscode/dce_history.json`;
+            await this.execGitCommand(cleanCommand);
+
+            result = { success: true, message: 'Successfully restored workspace to baseline. Modified and new files have been reverted.' };
         } catch (error: any) {
             result = { success: false, message: `Git Restore failed: ${error.message}` };
         }

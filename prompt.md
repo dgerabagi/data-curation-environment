@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 11 - Error during activation: command 'dce.openSettingsPanel' already exists; Restore should delete any newly created files (U) since baseline
+Current Cycle 12 - continue QoL improvements
+Cycle 11 - Error during activation: command 'dce.openSettingsPanel' already exists; Restore should delete any newly created files (U) since baseline
 Cycle 10 - A83 finished, begin working through A84
 Cycle 9 - Finalize T-3, Update A83 for the next steps game plan
 Cycle 8 - T-3 from A83
@@ -665,21 +666,60 @@ No project scope defined.
 
 <M6. Cycles>
 
+<Cycle 12>
+<Cycle Context>
+nice okay, for the `Restore`, lets put a check to make sure it only is deleting files which were listed in the associated files. any other changes would be out of scope of the specific `Restore` button function.
+
+next, i see the ? icon but clicking it currently doesnt open anything.
+
+third, great work on the ctrl + z to undo a file move in the FTV, i just tested that and its working well. one tiny case to consider, we want to respect the files flatten selection status, because it seems the 'Automatically add' is too aggressive, if i move a file an unchecked file to an unchecked folder, it moves in unchecked. but, if i then use ctrl + z to undo that move, when the file appears in its original location, it now has the checkbox selected to include the file in flatten repo. this is the choice we want to respect during the ctrl + z and ctrl + y process. i believe its the `Automatically add new files to selection` that is the culprit. this relates to 1.3 in A84.
+
+As for T-2 in A84, i just tested this functionality and it seems to exist. we have the ability to copy and paste a file and it does create a copy using ctrl + c and ctrl + v in the FTV.
+
+
+
+
+</Cycle Context>
+<Previous Cycle 11 Summary of Actions>
+I have analyzed the feedback from Cycle 10. My course of action is to address the remaining items from the A83 laundry list to officially complete that phase of work, and to prepare for the next phase as outlined in A84.
+
+First, I will fix the tab persistence glitch you've identified. This is a crucial usability fix. The state of the active response tab is not being correctly persisted and restored, and I will correct the state management logic to resolve this.
+
+Second, I will implement the user-facing feature for a changelog, which was a key item from the original laundry list. I will create the planning artifact for a settings/help panel and add a `?` icon to the Parallel Co-Pilot Panel's header that opens this new view.
+
+Third, I will update the Universal Task Checklist template as you requested, codifying the excellent suggestion of always planning for the next cycle's checklist.
+
+Finally, I will begin implementing the Undo/Redo functionality (T-1 from A84), which is the next major step towards achieving feature parity with the native VS Code explorer.
+
+1.  **Documentation First (Planning & Codifying):**
+    *   I will update **`A80. DCE - Settings Panel Plan.md`** to formally plan the new panel that will house the changelog and future settings.
+    *   I will update **`A27. DCE - Phase 1 - Undo-Redo Feature Plan.md`** to reflect that it is the active task for this cycle.
+    *   I will update the template artifact **`src/Artifacts/T17. Template - Universal Task Checklist.md`** to include a new best-practice step: "Always conclude your task list with a final task to create the checklist for the next cycle."
+
+2.  **Fix Tab Persistence Bug:**
+    *   **`src/common/types/pcpp.types.ts`:** I will add a new optional property, `activeTab?: number`, to the `PcppCycle` interface.
+    *   **`src/backend/services/history.service.ts`:** I will update the service to save and load this new property.
+    *   **`src/client/views/parallel-copilot.view/view.tsx`:** I will update the `saveCurrentCycleState` function to include the `activeTab` state. The logic that loads cycle data will be updated to read this property and set the active tab, making the selection persistent.
+
+3.  **Implement Settings/Changelog Panel (`?` Icon):**
+    *   **`src/client/views/parallel-copilot.view/view.tsx`:** I will add a new `?` icon button to the main header toolbar. Its `onClick` handler will trigger a new `dce.openSettingsPanel` command.
+    *   **`src/backend/commands/commands.ts` & `src/extension.ts`:** I will register the new command and add the logic to create and manage a new `WebviewPanel` for the settings view.
+    *   **Scaffolding:** I will create the placeholder files for the new view (`src/client/views/settings.view/view.tsx`, etc.) and a placeholder `CHANGELOG.md` file in the project root.
+
+4.  **Implement Undo/Redo for File Operations (A84 T-1):**
+    *   **New Service (`src/backend/services/action.service.ts`):** I will create a new service to manage the `undoStack` and `redoStack`.
+    *   **IPC:** I will add `RequestUndo` and `RequestRedo` channels to the IPC definitions.
+    *   **Integration (`file-operation.service.ts`):** The `handleMoveFileRequest` and `handleFileDeleteRequest` methods will be updated to push an `Action` object onto the `ActionService`'s undo stack after a successful operation.
+    *   **Frontend (`TreeView.tsx`):** I will add an `onKeyDown` handler to the tree view to capture `Ctrl+Z` and `Ctrl+Y` and send the appropriate IPC messages to trigger the undo/redo logic on the backend.
+</Previous Cycle 11 Summary of Actions>
+</Cycle 12>
+
 <Cycle 11>
 <Cycle Context>
 okay, i accepted the most complete response, and have resolved the ts errors, however i get an error upon startup, see ephemeral
 
 additionally, ive observed that the `Restore` does not seem to delete any newly created files since the baseline. currently, there is a green file with a U, because ive clicked `Baseline` and then i created this file using the associated files to select and accept that file to create it. then i clicked `Restore` but that file did not get deleted. a true baseline restore would remove any added files.
 </Cycle Context>
-<Ephemeral Context>
-[INFO] [1:29:52 PM] Congratulations, your extension "Data Curation Environment" is now active!
-[INFO] [1:29:52 PM] Starry Night syntax highlighter initialized.
-[INFO] [1:29:52 PM] Services initializing...
-[WARN] [1:29:52 PM] HistoryService: No workspace folder found. History will not be saved.
-[INFO] [1:29:52 PM] Services initialized successfully.
-[INFO] [1:29:52 PM] Registering 7 commands.
-[ERROR] [1:29:52 PM] CRITICAL - Error during activation: command 'dce.openSettingsPanel' already exists
-</Ephemeral Context>
 <Previous Cycle 10 Summary of Actions>
 I have analyzed the feedback for Cycle 9. The primary objectives are to fix two UI bugs in the "Associated Files" list as outlined in `A83` (T-3.2 and T-3.3) and to update our planning artifact, `A83`, with a game plan for the next set of tasks (T-4).
 
@@ -1998,10 +2038,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-14T18:31:39.593Z
+  Date Generated: 2025-09-14T18:54:42.154Z
   ---
   Total Files: 186
-  Approx. Tokens: 449355
+  Approx. Tokens: 449815
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -2083,7 +2123,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 64. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 47 - Chars: 3537 - Tokens: 885
 65. src\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3347 - Tokens: 837
 66. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 3772 - Tokens: 943
-67. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 60 - Chars: 6430 - Tokens: 1608
+67. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 60 - Chars: 6585 - Tokens: 1647
 68. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 47 - Chars: 3127 - Tokens: 782
 69. src\Artifacts\A73. DCE - GitService Plan.md - Lines: 44 - Chars: 2548 - Tokens: 637
 70. src\Artifacts\A74. DCE - Per-Input Undo-Redo Feature Plan.md - Lines: 49 - Chars: 3624 - Tokens: 906
@@ -2109,7 +2149,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 90. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 41 - Chars: 3009 - Tokens: 753
 91. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 97 - Chars: 4056 - Tokens: 1014
 92. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 55 - Chars: 3473 - Tokens: 869
-93. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 40 - Chars: 4564 - Tokens: 1141
+93. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 52 - Chars: 6092 - Tokens: 1523
 94. src\Artifacts\A42. DCE - Phase 2 - Initial Scaffolding Deployment Script.md - Lines: 246 - Chars: 8264 - Tokens: 2066
 95. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 57 - Chars: 9891 - Tokens: 2473
 96. src\Artifacts\A58. DCE - WinMerge Source Code Analysis.md - Lines: 56 - Chars: 5322 - Tokens: 1331
@@ -2118,14 +2158,14 @@ This file-centric approach helps in planning and prioritizing work, especially i
 99. src\Artifacts\A64. DCE - Cycle 159 - Task Tracker.md - Lines: 22 - Chars: 1550 - Tokens: 388
 100. src\Artifacts\A65. DCE - Universal Task Checklist.md - Lines: 87 - Chars: 5422 - Tokens: 1356
 101. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
-102. src\backend\commands\commands.ts - Lines: 110 - Chars: 4526 - Tokens: 1132
+102. src\backend\commands\commands.ts - Lines: 110 - Chars: 4507 - Tokens: 1127
 103. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
 104. src\backend\services\action.service.ts - Lines: 69 - Chars: 2230 - Tokens: 558
 105. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
 106. src\backend\services\file-operation.service.ts - Lines: 344 - Chars: 16368 - Tokens: 4092
 107. src\backend\services\file-tree.service.ts - Lines: 252 - Chars: 13674 - Tokens: 3419
 108. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12609 - Tokens: 3153
-109. src\backend\services\git.service.ts - Lines: 114 - Chars: 5522 - Tokens: 1381
+109. src\backend\services\git.service.ts - Lines: 118 - Chars: 5698 - Tokens: 1425
 110. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
 111. src\backend\services\history.service.ts - Lines: 287 - Chars: 12276 - Tokens: 3069
 112. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
@@ -6629,7 +6669,7 @@ The highlighting will follow this specific sequence of user actions:
 # Artifact A70: DCE - Git-Integrated Testing Workflow Plan
 # Date Created: C169
 # Author: AI Model & Curator
-# Updated on: C187 (Add two-button Git Init dialog)
+# Updated on: C11 (Specify that Restore must delete new files)
 
 ## 1. Overview & Goal
 
@@ -6642,7 +6682,7 @@ A core part of the DCE workflow involves accepting an AI-generated response and 
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
 | P2-GIT-01 | **Create Baseline** | As a developer, after accepting an AI response but before testing it, I want to click a "Baseline (Commit)" button to create a Git commit, so I have a safe restore point. | - A "Baseline (Commit)" button is available in the response acceptance header. <br> - Clicking it executes `git add .` and `git commit -m "DCE Baseline: Cycle [currentCycle] - [cycleTitle]"`. <br> - A "Successfully created baseline commit" notification is shown. |
-| P2-GIT-02 | **Restore Baseline** | As a developer, after testing an AI response and finding issues, I want to click a "Restore Baseline" button to discard all changes, so I can quickly test a different response. | - A "Restore Baseline" button is available. <br> - Clicking it executes `git restore .`. <br> - The restore operation must **exclude** DCE-specific state files (e.g., `.vscode/dce_history.json`) to prevent data loss. |
+| P2-GIT-02 | **Restore Baseline** | As a developer, after testing an AI response and finding issues, I want to click a "Restore Baseline" button to discard all changes, so I can quickly test a different response. | - A "Restore Baseline" button is available. <br> - Clicking it executes `git restore .` to revert changes to tracked files. <br> - It also executes `git clean -fdx` to delete any new, untracked files and directories. <br> - The restore operation must **exclude** DCE-specific state files (e.g., `.vscode/dce_history.json`) to prevent data loss. |
 | P2-GIT-03 | **State-Aware Baseline** | As a developer, I don't want to be prompted to create a baseline if my project is already in a clean state, and I want clear feedback if I try to baseline an already-clean repository. | - Before highlighting the "Baseline" button, the extension checks the `git status`. <br> - If the working tree is clean, the "Baseline" step in the animated workflow is skipped. <br> - If the user manually clicks "Baseline" on a clean tree, a message like "Already baselined" is shown. |
 | P2-GIT-04 | **Guided Git Initialization** | As a new user who hasn't initialized a Git repository, when I click "Baseline," I want to see a clear error message that tells me what's wrong and gives me the option to fix it with one click. | - If `git` is not initialized, clicking "Baseline" shows a `vscode.window.showErrorMessage`. <br> - The message explains that the folder is not a Git repository. <br> - The message includes an "Open README Guide" button that opens the project's `DCE_README.md`. <br> - The message also includes an "Initialize Repository" button that, when clicked, automatically runs `git init` in the workspace. |
 | P2-GIT-05 | **Post-Baseline Workflow** | As a developer, after a successful baseline is created, I want the animated guide to immediately advance to the next step, so I know what to do next. | - After a successful baseline commit, the animated workflow highlight immediately moves to the "Select All" button in the "Associated Files" list. |
@@ -6675,10 +6715,10 @@ A core part of the DCE workflow involves accepting an AI-generated response and 
     *   **`handleGitBaselineRequest(commitMessage)`:**
         *   Checks the status first. If clean, it returns a specific "Already baselined" result.
         *   Otherwise, it executes `git add .` and `git commit -m "..."`.
-        *   It returns a result object (e.g., `{ success: true, message: '...' }`).
         *   **Crucially, it will have a specific `catch` block for "not a git repository" errors. This block will trigger the user-facing `showErrorMessage` with the two action buttons.**
     *   **`handleGitRestoreRequest()`:**
         *   Executes `git restore -- . ':(exclude).vscode/dce_history.json'`.
+        *   Executes `git clean -fdx --exclude=.vscode/dce_history.json` to remove untracked files.
         *   Returns a result object.
     *   **`handleGitInitRequest()`:** (New) A new handler that executes `git init` and returns a success/failure result.
 
@@ -8146,7 +8186,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C7 (Add data loss case study)
+# Updated on: C11 (Add command registration case study)
 
 ## 1. Purpose
 
@@ -8155,6 +8195,18 @@ This document serves as a living record of persistent or complex bugs that have 
 **This artifact is the primary log for new and recent case studies.** Older, resolved issues are archived in `A11.1 DCE - New Regression Case Studies.md` to keep this document concise and focused on currently relevant issues.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 026: "Command Already Exists" Activation Error
+
+-   **Artifacts Affected:** `src/extension.ts`, `src/backend/commands/commands.ts`
+-   **Cycles Observed:** C11
+-   **Symptom:** The extension fails to activate with a critical error: `Error during activation: command 'dce.openSettingsPanel' already exists`.
+-   **Root Cause Analysis (RCA):** The command ID `dce.openSettingsPanel` was being registered in two different places. It was registered once via the loop in `registerCommands` (which reads from the `commands.ts` array) and then registered a second time explicitly with `vscode.commands.registerCommand` in `extension.ts`. VS Code's command registry requires all command IDs to be unique, and this duplication caused a fatal activation error.
+-   **Codified Solution & Best Practice:** The established pattern in the project is to use an internal command alias for commands that need access to the `ExtensionContext`.
+    1.  The command defined in `commands.ts` (e.g., `dce.openSettingsPanel`) should be the "public" command triggered by the UI. Its callback should do nothing more than execute a different, "internal" command (e.g., `vscode.commands.executeCommand('dce.showSettingsPanel')`).
+    2.  The "internal" command (e.g., `dce.showSettingsPanel`) is the one registered explicitly in `extension.ts`. This is where the logic that requires the `context` (like creating a webview panel) resides. This pattern ensures each command ID is registered only once, preventing conflicts.
 
 ---
 
@@ -8808,7 +8860,7 @@ Review the user's project scope in M4. Your task is to act as a senior project a
 </file_artifact>
 
 <file path="src/backend/commands/commands.ts">
-// Updated on: C10 (Add openSettingsPanel command)
+// Updated on: C11 (Alias dce.openSettingsPanel)
 import * as vscode from 'vscode';
 import { Services } from '../services/services';
 import { serverIPCs } from '@/client/views';
@@ -8907,7 +8959,7 @@ export const commands = [
         commandId: 'dce.openSettingsPanel',
         callback: () => {
             Services.loggerService.log("Executing dce.openSettingsPanel command.");
-            // Logic to create/show the settings WebviewPanel will be in extension.ts
+            vscode.commands.executeCommand('dce.showSettingsPanel');
         }
     },
     {
@@ -10005,7 +10057,7 @@ export class FlattenerService {
 
 <file path="src/backend/services/git.service.ts">
 // src/backend/services/git.service.ts
-// Updated on: C187 (Add handleGitInitRequest and two-button dialog)
+// Updated on: C11 (Add git clean to restore)
 import * as vscode from 'vscode';
 import { exec } from 'child_process';
 import * as path from 'path';
@@ -10015,7 +10067,7 @@ import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 
 export class GitService {
     private getWorkspaceRoot(): string | undefined {
-        return vscode.workspace.workspaceFolders?.[0].uri.fsPath;
+        return vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
     }
 
     private async execGitCommand(command: string): Promise<{ stdout: string; stderr: string }> {
@@ -10109,9 +10161,13 @@ export class GitService {
         Services.loggerService.log("Executing Git Restore.");
         let result = { success: false, message: 'An unknown error occurred.' };
         try {
-            const command = `git restore -- . ":(exclude).vscode/dce_history.json"`;
-            await this.execGitCommand(command);
-            result = { success: true, message: 'Successfully restored workspace to baseline.' };
+            const restoreCommand = `git restore -- . ":(exclude).vscode/dce_history.json"`;
+            await this.execGitCommand(restoreCommand);
+
+            const cleanCommand = `git clean -fdx --exclude=.vscode/dce_history.json`;
+            await this.execGitCommand(cleanCommand);
+
+            result = { success: true, message: 'Successfully restored workspace to baseline. Modified and new files have been reverted.' };
         } catch (error: any) {
             result = { success: false, message: `Git Restore failed: ${error.message}` };
         }
@@ -16272,7 +16328,7 @@ export async function activate(context: vscode.ExtensionContext) {
         context.subscriptions.push(vscode.commands.registerCommand('dce.showParallelCopilot', () => {
             createOrShowParallelCopilotPanel(context);
         }));
-        context.subscriptions.push(vscode.commands.registerCommand('dce.openSettingsPanel', () => {
+        context.subscriptions.push(vscode.commands.registerCommand('dce.showSettingsPanel', () => {
             createOrShowSettingsPanel(context);
         }));
         registerViews(context);
@@ -26268,9 +26324,9 @@ This artifact provides a structured, universal format for tracking the next phas
 - **Total Tokens:** ~8,000
 - **More than one cycle?** No
 
-- [ ] **Task (T-ID: 1.1):** Implement the `ActionService` to manage undo/redo stacks.
-- [ ] **Task (T-ID: 1.2):** Integrate `ActionService` with `FileOperationService` to push move/delete actions onto the stack.
-- [ ] **Task (T-ID: 1.3):** Implement `Ctrl+Z` / `Ctrl+Y` keyboard shortcuts in `TreeView.tsx` to trigger undo/redo.
+- [X] **Task (T-ID: 1.1):** Implement the `ActionService` to manage undo/redo stacks.
+- [X] **Task (T-ID: 1.2):** Integrate `ActionService` with `FileOperationService` to push move/delete actions onto the stack.
+- [-] **Task (T-ID: 1.3):** Implement `Ctrl+Z` / `Ctrl+Y` keyboard shortcuts in `TreeView.tsx` to trigger undo/redo.
 
 ### Verification Steps
 1.  Drag and drop a file to move it.
@@ -26288,9 +26344,9 @@ This artifact provides a structured, universal format for tracking the next phas
 - **Total Tokens:** ~10,000
 - **More than one cycle?** No
 
-- [ ] **Task (T-ID: 2.1):** Implement internal clipboard state in `view.tsx`.
-- [ ] **Task (T-ID: 2.2):** Implement `Ctrl+C` / `Ctrl+V` handlers in `TreeView.tsx`.
-- [ ] **Task (T-ID: 2.3):** Implement backend `handleCopyFileRequest` logic in `file-operation.service.ts`, including robust name collision handling.
+- [X] **Task (T-ID: 2.1):** Implement internal clipboard state in `view.tsx`.
+- [X] **Task (T-ID: 2.2):** Implement `Ctrl+C` / `Ctrl+V` handlers in `TreeView.tsx`.
+- [X] **Task (T-ID: 2.3):** Implement backend `handleCopyFileRequest` logic in `file-operation.service.ts`, including robust name collision handling.
 
 ### Verification Steps
 1.  Focus a file and press `Ctrl+C`.

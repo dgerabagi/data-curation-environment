@@ -110,7 +110,7 @@ export async function activate(context: vscode.ExtensionContext) {
         context.subscriptions.push(vscode.commands.registerCommand('dce.showParallelCopilot', () => {
             createOrShowParallelCopilotPanel(context);
         }));
-        context.subscriptions.push(vscode.commands.registerCommand('dce.openSettingsPanel', () => {
+        context.subscriptions.push(vscode.commands.registerCommand('dce.showSettingsPanel', () => {
             createOrShowSettingsPanel(context);
         }));
         registerViews(context);

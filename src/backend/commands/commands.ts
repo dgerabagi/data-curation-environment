@@ -1,4 +1,4 @@
-// Updated on: C10 (Add openSettingsPanel command)
+// Updated on: C11 (Alias dce.openSettingsPanel)
 import * as vscode from 'vscode';
 import { Services } from '../services/services';
 import { serverIPCs } from '@/client/views';
@@ -97,7 +97,7 @@ export const commands = [
         commandId: 'dce.openSettingsPanel',
         callback: () => {
             Services.loggerService.log("Executing dce.openSettingsPanel command.");
-            // Logic to create/show the settings WebviewPanel will be in extension.ts
+            vscode.commands.executeCommand('dce.showSettingsPanel');
         }
     },
     {
