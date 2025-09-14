@@ -1,21 +1,21 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-14T18:54:42.154Z
+  Date Generated: 2025-09-14T20:39:08.598Z
   ---
   Total Files: 186
-  Approx. Tokens: 449815
+  Approx. Tokens: 450426
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (8148 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (8205 tokens)
 4. src\Artifacts\A0. DCE Master Artifact List.md (7794 tokens)
 5. src\backend\services\prompt.service.ts (5042 tokens)
 6. src\client\views\parallel-copilot.view\view.scss (4978 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4422 tokens)
-8. src\backend\services\file-operation.service.ts (4092 tokens)
+8. src\backend\services\file-operation.service.ts (4123 tokens)
 9. src\client\views\context-chooser.view\view.tsx (4019 tokens)
 10. src\client\views\context-chooser.view\view.scss (3708 tokens)
 
@@ -46,7 +46,7 @@
 24. src\Artifacts\A24. DCE - Selection Paradigm Terminology.md - Lines: 57 - Chars: 3330 - Tokens: 833
 25. src\Artifacts\A25. DCE - Phase 1 - Git & Problems Integration Plan.md - Lines: 48 - Chars: 5004 - Tokens: 1251
 26. src\Artifacts\A26. DCE - Phase 1 - File System Traversal & Caching Strategy.md - Lines: 42 - Chars: 3593 - Tokens: 899
-27. src\Artifacts\A27. DCE - Phase 1 - Undo-Redo Feature Plan.md - Lines: 53 - Chars: 4960 - Tokens: 1240
+27. src\Artifacts\A27. DCE - Phase 1 - Undo-Redo Feature Plan.md - Lines: 55 - Chars: 5701 - Tokens: 1426
 28. src\Artifacts\A28. DCE - Packaging and Distribution Guide.md - Lines: 95 - Chars: 4366 - Tokens: 1092
 29. src\Artifacts\A29. DCE - Phase 1 - Binary and Image File Handling Strategy.md - Lines: 81 - Chars: 4217 - Tokens: 1055
 30. src\Artifacts\A30. DCE - Phase 1 - PDF Handling and Virtualization Strategy.md - Lines: 44 - Chars: 4431 - Tokens: 1108
@@ -86,7 +86,7 @@
 64. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 47 - Chars: 3537 - Tokens: 885
 65. src\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3347 - Tokens: 837
 66. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 3772 - Tokens: 943
-67. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 60 - Chars: 6585 - Tokens: 1647
+67. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 61 - Chars: 6827 - Tokens: 1707
 68. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 47 - Chars: 3127 - Tokens: 782
 69. src\Artifacts\A73. DCE - GitService Plan.md - Lines: 44 - Chars: 2548 - Tokens: 637
 70. src\Artifacts\A74. DCE - Per-Input Undo-Redo Feature Plan.md - Lines: 49 - Chars: 3624 - Tokens: 906
@@ -123,12 +123,12 @@
 101. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
 102. src\backend\commands\commands.ts - Lines: 110 - Chars: 4507 - Tokens: 1127
 103. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
-104. src\backend\services\action.service.ts - Lines: 69 - Chars: 2230 - Tokens: 558
+104. src\backend\services\action.service.ts - Lines: 71 - Chars: 2444 - Tokens: 611
 105. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
-106. src\backend\services\file-operation.service.ts - Lines: 344 - Chars: 16368 - Tokens: 4092
-107. src\backend\services\file-tree.service.ts - Lines: 252 - Chars: 13674 - Tokens: 3419
+106. src\backend\services\file-operation.service.ts - Lines: 345 - Chars: 16490 - Tokens: 4123
+107. src\backend\services\file-tree.service.ts - Lines: 254 - Chars: 13797 - Tokens: 3450
 108. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12609 - Tokens: 3153
-109. src\backend\services\git.service.ts - Lines: 118 - Chars: 5698 - Tokens: 1425
+109. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 110. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
 111. src\backend\services\history.service.ts - Lines: 287 - Chars: 12276 - Tokens: 3069
 112. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
@@ -159,14 +159,14 @@
 137. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 86 - Chars: 3575 - Tokens: 894
 138. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
 139. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-140. src\client\views\parallel-copilot.view\on-message.ts - Lines: 117 - Chars: 5513 - Tokens: 1379
+140. src\client\views\parallel-copilot.view\on-message.ts - Lines: 117 - Chars: 5537 - Tokens: 1385
 141. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 92 - Chars: 4340 - Tokens: 1085
 142. src\client\views\parallel-copilot.view\view.scss - Lines: 891 - Chars: 19912 - Tokens: 4978
 143. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-144. src\client\views\parallel-copilot.view\view.tsx - Lines: 246 - Chars: 32592 - Tokens: 8148
+144. src\client\views\parallel-copilot.view\view.tsx - Lines: 246 - Chars: 32820 - Tokens: 8205
 145. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
 146. src\common\ipc\channels.enum.ts - Lines: 92 - Chars: 4981 - Tokens: 1246
-147. src\common\ipc\channels.type.ts - Lines: 93 - Chars: 7075 - Tokens: 1769
+147. src\common\ipc\channels.type.ts - Lines: 93 - Chars: 7108 - Tokens: 1777
 148. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 149. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 150. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
@@ -190,7 +190,7 @@
 168. src\Artifacts\A77. DCE - Whitepaper Generation Plan.md - Lines: 74 - Chars: 8731 - Tokens: 2183
 169. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
 170. src\Artifacts\A200. Cycle Log.md - Lines: 8971 - Chars: 901614 - Tokens: 225404
-171. src\Artifacts\A80. DCE - Settings Panel Plan.md - Lines: 35 - Chars: 2931 - Tokens: 733
+171. src\Artifacts\A80. DCE - Settings Panel Plan.md - Lines: 38 - Chars: 3013 - Tokens: 754
 172. src\Artifacts\A81. DCE - Curator Activity Plan.md - Lines: 34 - Chars: 2346 - Tokens: 587
 173. src\Artifacts\A82. DCE - Advanced Exclusion Management Plan.md - Lines: 40 - Chars: 3010 - Tokens: 753
 174. src\Artifacts\A83. DCE - Universal Task Checklist for Cycle 6.md - Lines: 95 - Chars: 5172 - Tokens: 1293
@@ -2360,7 +2360,7 @@ To resolve this, the reliance on `vscode.workspace.findFiles` for building the t
 # Artifact A27: DCE - Phase 1 - Undo-Redo Feature Plan
 # Date Created: C35
 # Author: AI Model
-# Updated on: C10 (Mark as active implementation)
+# Updated on: C12 (Add requirement for preserving selection state)
 
 - **Key/Value for A0:**
 - **Description:** Details the requirements for implementing an undo/redo stack for file system operations (move, delete) performed within the DCE view, to achieve parity with the native explorer's Ctrl+Z functionality.
@@ -2379,6 +2379,7 @@ A critical feature for achieving parity with the native VS Code Explorer is the 
 | UR-01 | **Undo File Move** | As a user, after I drag and drop a file to a new location, I want to be able to press `Ctrl+Z` to move it back to its original location, so I can easily correct mistakes. | - Performing a file/folder move pushes an "action" object onto an undo stack. <br> - Pressing `Ctrl+Z` while the DCE view is focused pops the last action and reverses it (moves the file back). <br> - The file tree updates to reflect the reversed move. |
 | UR-02 | **Undo File Deletion** | As a user, after I delete a file or folder (to the trash), I want to be able to press `Ctrl+Z` to restore it, so I don't lose work accidentally. | - Deleting a file/folder pushes an "action" object onto the undo stack. <br> - Pressing `Ctrl+Z` reverses the deletion. Since we use `useTrash: true`, this might be handled by a native VS Code command, or we may need to implement a restore from trash mechanism if possible. |
 | UR-03 | **Redo Operation** | As a user, after I undo an action, I want to be able to press `Ctrl+Y` (or `Ctrl+Shift+Z`) to redo the action, so I can toggle between states. | - Undoing an action moves it from the undo stack to a redo stack. <br> - Pressing `Ctrl+Y` pops the last action from the redo stack and re-applies it. <br> - The file tree updates accordingly. |
+| UR-04 | **Preserve Selection State** | As a user, if I move a file that is *not* checked for flattening, and then I undo that move, I expect the file to still be unchecked when it returns to its original location, so its selection state is preserved. | - The "auto-add new files" feature must not incorrectly re-check a file that is being restored via an undo operation. |
 
 ## 3. Technical Implementation Plan
 
@@ -2407,6 +2408,7 @@ This feature will be implemented primarily on the backend to manage the file sys
     *   The `undo()` method will contain the logic to reverse actions.
     *   **Move:** To undo a move from `A` to `B`, it calls `vscode.workspace.fs.rename(B, A)`.
     *   **Delete:** Undoing a delete is more complex. Since we use `useTrash: true`, VS Code might not expose a direct API to "un-delete". Research is needed. The simplest approach might be to leverage a built-in command like `files.restoreFromTrash` if it can be targeted, or we may need to inform the user to use the native Explorer's undo for deletions. For a first pass, we might only support undo for **move** operations.
+    *   **Selection State Preservation (UR-04):** Before performing the reverse `rename`, the `undo` method will call a new method on the `FileOperationService` to temporarily add the original file path to an "ignore" list for the "auto-add new files" feature. This prevents the file watcher from incorrectly re-checking the file when it reappears.
 
 5.  **Frontend Focus:**
     *   The main `TreeView` component needs to be focusable (`tabIndex="0"`) to capture the keyboard shortcuts. The `onKeyDown` handler will check for `event.ctrlKey` and the specific key (`z` or `y`) and then send the IPC message.
@@ -4632,7 +4634,7 @@ The highlighting will follow this specific sequence of user actions:
 # Artifact A70: DCE - Git-Integrated Testing Workflow Plan
 # Date Created: C169
 # Author: AI Model & Curator
-# Updated on: C11 (Specify that Restore must delete new files)
+# Updated on: C12 (Specify that Restore must only delete associated new files)
 
 ## 1. Overview & Goal
 
@@ -4645,7 +4647,7 @@ A core part of the DCE workflow involves accepting an AI-generated response and 
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
 | P2-GIT-01 | **Create Baseline** | As a developer, after accepting an AI response but before testing it, I want to click a "Baseline (Commit)" button to create a Git commit, so I have a safe restore point. | - A "Baseline (Commit)" button is available in the response acceptance header. <br> - Clicking it executes `git add .` and `git commit -m "DCE Baseline: Cycle [currentCycle] - [cycleTitle]"`. <br> - A "Successfully created baseline commit" notification is shown. |
-| P2-GIT-02 | **Restore Baseline** | As a developer, after testing an AI response and finding issues, I want to click a "Restore Baseline" button to discard all changes, so I can quickly test a different response. | - A "Restore Baseline" button is available. <br> - Clicking it executes `git restore .` to revert changes to tracked files. <br> - It also executes `git clean -fdx` to delete any new, untracked files and directories. <br> - The restore operation must **exclude** DCE-specific state files (e.g., `.vscode/dce_history.json`) to prevent data loss. |
+| P2-GIT-02 | **Restore Baseline** | As a developer, after testing an AI response and finding issues, I want to click a "Restore Baseline" button to discard all changes, so I can quickly test a different response. | - A "Restore Baseline" button is available. <br> - Clicking it executes `git restore .` to revert changes to tracked files. <br> - It also deletes any new, untracked files that were part of the accepted AI response, leaving other untracked files untouched. <br> - The restore operation must **exclude** DCE-specific state files (e.g., `.vscode/dce_history.json`) to prevent data loss. |
 | P2-GIT-03 | **State-Aware Baseline** | As a developer, I don't want to be prompted to create a baseline if my project is already in a clean state, and I want clear feedback if I try to baseline an already-clean repository. | - Before highlighting the "Baseline" button, the extension checks the `git status`. <br> - If the working tree is clean, the "Baseline" step in the animated workflow is skipped. <br> - If the user manually clicks "Baseline" on a clean tree, a message like "Already baselined" is shown. |
 | P2-GIT-04 | **Guided Git Initialization** | As a new user who hasn't initialized a Git repository, when I click "Baseline," I want to see a clear error message that tells me what's wrong and gives me the option to fix it with one click. | - If `git` is not initialized, clicking "Baseline" shows a `vscode.window.showErrorMessage`. <br> - The message explains that the folder is not a Git repository. <br> - The message includes an "Open README Guide" button that opens the project's `DCE_README.md`. <br> - The message also includes an "Initialize Repository" button that, when clicked, automatically runs `git init` in the workspace. |
 | P2-GIT-05 | **Post-Baseline Workflow** | As a developer, after a successful baseline is created, I want the animated guide to immediately advance to the next step, so I know what to do next. | - After a successful baseline commit, the animated workflow highlight immediately moves to the "Select All" button in the "Associated Files" list. |
@@ -4666,7 +4668,7 @@ A core part of the DCE workflow involves accepting an AI-generated response and 
 
 1.  **IPC Channels:**
     *   `ClientToServerChannel.RequestGitBaseline`: Payload `{ commitMessage: string }`.
-    *   `ClientToServerChannel.RequestGitRestore`: No payload.
+    *   `ClientToServerChannel.RequestGitRestore`: Payload `{ filesToDelete: string[] }`.
     *   `ClientToServerChannel.RequestGitStatus`: No payload.
     *   `ClientToServerChannel.RequestGitInit`: (New) No payload.
     *   `ServerToClientChannel.SendGitStatus`: Payload `{ isClean: boolean }`.
@@ -4679,15 +4681,16 @@ A core part of the DCE workflow involves accepting an AI-generated response and 
         *   Checks the status first. If clean, it returns a specific "Already baselined" result.
         *   Otherwise, it executes `git add .` and `git commit -m "..."`.
         *   **Crucially, it will have a specific `catch` block for "not a git repository" errors. This block will trigger the user-facing `showErrorMessage` with the two action buttons.**
-    *   **`handleGitRestoreRequest()`:**
+    *   **`handleGitRestoreRequest({ filesToDelete })`:**
         *   Executes `git restore -- . ':(exclude).vscode/dce_history.json'`.
-        *   Executes `git clean -fdx --exclude=.vscode/dce_history.json` to remove untracked files.
+        *   Iterates through `filesToDelete` and deletes each one using `vscode.workspace.fs.delete`.
         *   Returns a result object.
     *   **`handleGitInitRequest()`:** (New) A new handler that executes `git init` and returns a success/failure result.
 
 3.  **Frontend (`view.tsx`):**
     *   The frontend will request the Git status at appropriate times to drive the workflow state.
     *   The `onClick` handler for "Baseline" will construct the commit message and send the `RequestGitBaseline` message.
+    *   The `onClick` handler for "Restore" will determine which files were newly created and send them in the `RequestGitRestore` message.
     *   A new message handler for `NotifyGitOperationResult` will display the result message and, if successful, will advance the `workflowStep` state from `awaitingBaseline` to `awaitingFileSelect`.
 </file_artifact>
 
@@ -6950,7 +6953,7 @@ export function registerCommands(context: vscode.ExtensionContext) {
 </file_artifact>
 
 <file path="src/backend/services/action.service.ts">
-// Updated on: C10 (New File)
+// Updated on: C12 (Add logic to ignore file for auto-add on undo)
 import * as vscode from 'vscode';
 import { Services } from './services';
 
@@ -7002,6 +7005,8 @@ export class ActionService {
         switch (action.type) {
             case 'move':
                 const { fromPath, toPath } = action.payload as MoveActionPayload;
+                // Temporarily ignore the original path so the auto-adder doesn't re-check it
+                Services.fileOperationService.addFileToIgnoreForAutoAdd(fromPath);
                 await vscode.workspace.fs.rename(vscode.Uri.file(toPath), vscode.Uri.file(fromPath));
                 break;
         }
@@ -7174,7 +7179,7 @@ export class ContentExtractionService {
 
 <file path="src/backend/services/file-operation.service.ts">
 // src/backend/services/file-operation.service.ts
-// Updated on: C10 (Integrate ActionService)
+// Updated on: C12 (Add logic for ignoring files for auto-add)
 import * as vscode from "vscode";
 import * as path from "path";
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
@@ -7456,8 +7461,7 @@ export class FileOperationService {
         try {
             const lastSelection = await Services.selectionService.getLastSelection();
             if (!lastSelection.some(p => p.startsWith(oldPath))) {
-                this.filesToIgnoreForAutoAdd.add(newPath);
-                setTimeout(() => this.filesToIgnoreForAutoAdd.delete(newPath), 2000);
+                this.addFileToIgnoreForAutoAdd(newPath);
             }
 
             await vscode.workspace.fs.rename(vscode.Uri.file(oldPath), vscode.Uri.file(newPath));
@@ -7506,7 +7510,9 @@ export class FileOperationService {
     }
 
     public addFileToIgnoreForAutoAdd(filePath: string) {
+        Services.loggerService.log(`[Auto-Add] Temporarily ignoring: ${filePath}`);
         this.filesToIgnoreForAutoAdd.add(filePath);
+        setTimeout(() => this.removeFileToIgnoreForAutoAdd(filePath), 2000); // Auto-remove after 2 seconds
     }
 
     public hasFileToIgnoreForAutoAdd(filePath: string): boolean {
@@ -7520,7 +7526,7 @@ export class FileOperationService {
 </file_artifact>
 
 <file path="src/backend/services/file-tree.service.ts">
-// Resp 12-Updated on: C9 (Add dist to non-selectable patterns)
+// Resp 12-Updated on: C12 (Use FileOperationService for ignore list)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -7620,7 +7626,9 @@ export class FileTreeService {
                 onFileChange(uri, 'onDidCreate');
                 return;
             }
+
             if (Services.fileOperationService.hasFileToIgnoreForAutoAdd(normalizedPath)) {
+                Services.loggerService.log(`[Auto-Add] Ignoring create event for ${normalizedPath} as requested.`);
                 Services.fileOperationService.removeFileToIgnoreForAutoAdd(normalizedPath);
             } else if (Services.selectionService.getAutoAddState()) {
                 this.autoAddQueue.push(normalizedPath);
@@ -8020,7 +8028,7 @@ export class FlattenerService {
 
 <file path="src/backend/services/git.service.ts">
 // src/backend/services/git.service.ts
-// Updated on: C11 (Add git clean to restore)
+// Updated on: C12 (Refine Restore logic)
 import * as vscode from 'vscode';
 import { exec } from 'child_process';
 import * as path from 'path';
@@ -8103,7 +8111,7 @@ export class GitService {
                     if (selection === openReadme) {
                         const workspaceRoot = this.getWorkspaceRoot();
                         if (workspaceRoot) {
-                            const readmePath = path.join(workspaceRoot, 'src', 'Artifacts', 'README.md');
+                            const readmePath = path.join(workspaceRoot, 'src', 'Artifacts', 'DCE_README.md');
                             vscode.workspace.openTextDocument(vscode.Uri.file(readmePath)).then(doc => {
                                 vscode.window.showTextDocument(doc);
                             });
@@ -8120,17 +8128,29 @@ export class GitService {
         serverIpc.sendToClient(ServerToClientChannel.NotifyGitOperationResult, result);
     }
 
-    public async handleGitRestoreRequest(serverIpc: ServerPostMessageManager) {
+    public async handleGitRestoreRequest(filesToDelete: string[], serverIpc: ServerPostMessageManager) {
         Services.loggerService.log("Executing Git Restore.");
         let result = { success: false, message: 'An unknown error occurred.' };
+        const workspaceRoot = this.getWorkspaceRoot();
+        if (!workspaceRoot) {
+            result = { success: false, message: 'No workspace open.'};
+            serverIpc.sendToClient(ServerToClientChannel.NotifyGitOperationResult, result);
+            return;
+        }
+
         try {
+            // 1. Revert changes to all tracked files, excluding the history file
             const restoreCommand = `git restore -- . ":(exclude).vscode/dce_history.json"`;
             await this.execGitCommand(restoreCommand);
 
-            const cleanCommand = `git clean -fdx --exclude=.vscode/dce_history.json`;
-            await this.execGitCommand(cleanCommand);
+            // 2. Surgically delete only the newly created files from the accepted response
+            for (const file of filesToDelete) {
+                const absolutePath = path.resolve(workspaceRoot, file);
+                Services.loggerService.log(`[Restore] Deleting newly created file: ${absolutePath}`);
+                await vscode.workspace.fs.delete(vscode.Uri.file(absolutePath), { recursive: true });
+            }
 
-            result = { success: true, message: 'Successfully restored workspace to baseline. Modified and new files have been reverted.' };
+            result = { success: true, message: 'Successfully restored workspace to baseline.' };
         } catch (error: any) {
             result = { success: false, message: `Git Restore failed: ${error.message}` };
         }
@@ -12247,8 +12267,8 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         await gitService.handleGitBaselineRequest(data.commitMessage, serverIpc);
     });
 
-    serverIpc.onClientMessage(ClientToServerChannel.RequestGitRestore, async () => {
-        await gitService.handleGitRestoreRequest(serverIpc);
+    serverIpc.onClientMessage(ClientToServerChannel.RequestGitRestore, async (data) => {
+        await gitService.handleGitRestoreRequest(data.filesToDelete, serverIpc);
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestGitStatus, () => {
@@ -13272,7 +13292,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C10 (Add activeTab to state and persistence)
+// Updated on: C12 (Update onGitRestore handler)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './view.scss';
@@ -13350,14 +13370,14 @@ const App = () => {
     
     // ... (existing stateRef, saveCurrentCycleState, etc.)
     const stateRef = React.useRef({
-        currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides
+        currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, fileExistenceMap
     });
 
     React.useEffect(() => {
         stateRef.current = {
-            currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides
+            currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, fileExistenceMap
         };
-    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides]);
+    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, fileExistenceMap]);
 
     const saveCurrentCycleState = React.useCallback(() => {
         const { currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides } = stateRef.current;
@@ -13470,7 +13490,7 @@ const App = () => {
     const handleExportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestExportHistory, {});
     const handleImportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestImportHistory, {});
     const handleGitBaseline = () => { const commitMessage = `DCE Baseline: Cycle ${currentCycle} - ${cycleTitle || 'New Cycle'}`; clientIpc.sendToServer(ClientToServerChannel.RequestGitBaseline, { commitMessage }); };
-    const handleGitRestore = () => { clientIpc.sendToServer(ClientToServerChannel.RequestGitRestore, {}); };
+    const onGitRestore = () => { const { selectedFilesForReplacement, fileExistenceMap } = stateRef.current; const filesToDelete = Array.from(selectedFilesForReplacement).map(key => key.split(':::')).filter(path => !fileExistenceMap.get(path)); clientIpc.sendToServer(ClientToServerChannel.RequestGitRestore, { filesToDelete }); };
     const handleFileSelectionToggle = (filePath: string) => { const currentTabId = activeTab.toString(); const compositeKeyForCurrent = `${currentTabId}:::${filePath}`; setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); let existingKey: string | undefined; for (const key of newSet) if (key.endsWith(`:::${filePath}`)) { existingKey = key; break; } if (existingKey) { if (existingKey === compositeKeyForCurrent) newSet.delete(existingKey); else { newSet.delete(existingKey); newSet.add(compositeKeyForCurrent); } } else newSet.add(compositeKeyForCurrent); return newSet; }); setSaveStatus('unsaved'); };
     const handleSelectAllFilesToggle = () => { if (!activeTabData?.parsedContent) return; const allFilesForTab = activeTabData.parsedContent.filesUpdated.map(fp => `${activeTab}:::${fp}`); const isAllSelected = allFilesForTab.every(key => selectedFilesForReplacement.has(key)); setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); if (isAllSelected) allFilesForTab.forEach(key => newSet.delete(key)); else allFilesForTab.forEach(key => newSet.add(key)); return newSet; }); setSaveStatus('unsaved'); };
     const isAllFilesSelected = React.useMemo(() => { if (!activeTabData?.parsedContent) return false; const allFiles = activeTabData.parsedContent.filesUpdated; if (allFiles.length === 0) return false; return allFiles.every(file => selectedFilesForReplacement.has(`${activeTab}:::${file}`)); }, [selectedFilesForReplacement, activeTabData, activeTab]);
@@ -13500,12 +13520,12 @@ const App = () => {
     return <div className="pc-view-container">
         <div className="pc-header"><div className="pc-toolbar"><button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button><button onClick={handleGeneratePrompt} title="Generate prompt.md" className={workflowStep === 'awaitingGeneratePrompt' ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button><button onClick={handleLogState} title="Log Current State"><VscBug/></button><button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.openSettingsPanel' })} title="Settings & Help"><VscQuestion /></button><button onClick={handleGlobalParseToggle} className={`${isParsedMode ? 'active' : ''} ${workflowStep === 'awaitingParse' ? 'workflow-highlight' : ''}`}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => {setTabCount(parseInt(e.target.value, 10) || 1); setSaveStatus('unsaved');}} /></div></div>
         <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''} extraHeaderContent={<div style={{display: 'flex', alignItems: 'center', gap: '8px'}}><SaveStatusIndicator /> {totalPromptCostDisplay}</div>}>
-            <CycleNavigator currentCycle={currentCycle} maxCycle={maxCycle} cycleTitle={cycleTitle} isNewCycleButtonDisabled={isNewCycleButtonDisabled} onCycleChange={handleCycleChange} onNewCycle={handleNewCycle} onTitleChange={(title) => { setCycleTitle(title); setSaveStatus('unsaved'); }} onDeleteCycle={handleDeleteCycle} onResetHistory={handleResetHistory} onExportHistory={handleExportHistory} onImportHistory={handleImportHistory} onGitBaseline={handleGitBaseline} onGitRestore={handleGitRestore} workflowStep={workflowStep} disabledReason={newCycleButtonDisabledReason} saveStatus={saveStatus} />
+            <CycleNavigator currentCycle={currentCycle} maxCycle={maxCycle} cycleTitle={cycleTitle} isNewCycleButtonDisabled={isNewCycleButtonDisabled} onCycleChange={handleCycleChange} onNewCycle={handleNewCycle} onTitleChange={(title) => { setCycleTitle(title); setSaveStatus('unsaved'); }} onDeleteCycle={handleDeleteCycle} onResetHistory={handleResetHistory} onExportHistory={handleExportHistory} onImportHistory={handleImportHistory} onGitBaseline={handleGitBaseline} onGitRestore={onGitRestore} workflowStep={workflowStep} disabledReason={newCycleButtonDisabledReason} saveStatus={saveStatus} />
             <ContextInputs cycleContext={cycleContext} ephemeralContext={ephemeralContext} cycleContextTokens={cycleContextTokens} ephemeralContextTokens={ephemeralContextTokens} onCycleContextChange={onCycleContextChange} onEphemeralContextChange={onEphemeralContextChange} workflowStep={workflowStep} />
         </CollapsibleSection>
-        <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} workflowStep={workflowStep} />
+        <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} workflowStep={workflowStep} onSortToggle={handleSortToggle} />
         <div className="tab-content">
-            <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} onPaste={(e) => handlePaste(e, activeTab)} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={comparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => { setSelectedResponseId(prev => prev === id ? null : id); setWorkflowStep('awaitingResponseSelect'); setSaveStatus('unsaved'); }} onSelectAllFiles={handleSelectAllFilesToggle} onDeselectAllFiles={() => {setSelectedFilesForReplacement(new Set()); setSaveStatus('unsaved');}} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} onBaseline={handleGitBaseline} onRestore={handleGitRestore} workflowStep={workflowStep} onAssociatedFileContextMenu={handleAssociatedFileContextMenu} />
+            <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} onPaste={(e) => handlePaste(e, activeTab)} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={comparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => { setSelectedResponseId(prev => prev === id ? null : id); setWorkflowStep('awaitingResponseSelect'); setSaveStatus('unsaved'); }} onSelectAllFiles={handleSelectAllFilesToggle} onDeselectAllFiles={() => {setSelectedFilesForReplacement(new Set()); setSaveStatus('unsaved');}} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} onBaseline={handleGitBaseline} onRestore={onGitRestore} workflowStep={workflowStep} />
         </div>
         {associatedFileMenu && <div className="context-menu" style={{ top: associatedFileMenu.y, left: associatedFileMenu.x }}><ul onMouseLeave={() => setAssociatedFileMenu(null)}><li onClick={() => { clientIpc.sendToServer(ClientToServerChannel.RequestCopyPath, { path: associatedFileMenu.path, relative: true }); setAssociatedFileMenu(null); }}>Copy Relative Path</li></ul></div>}
     </div>;
@@ -13657,7 +13677,7 @@ export enum ServerToClientChannel {
 </file_artifact>
 
 <file path="src/common/ipc/channels.type.ts">
-// Updated on: C10 (Add PcppCycle to SaveCycleData)
+// Updated on: C12 (Add filesToDelete to RequestGitRestore)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -13722,7 +13742,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestPromptCostEstimation ? { cycleData: PcppCycle } :
     T extends ClientToServerChannel.RequestPromptCostBreakdown ? { cycleData: PcppCycle } :
     T extends ClientToServerChannel.RequestGitBaseline ? { commitMessage: string } :
-    T extends ClientToServerChannel.RequestGitRestore ? {} :
+    T extends ClientToServerChannel.RequestGitRestore ? { filesToDelete: string[] } :
     T extends ClientToServerChannel.RequestGitStatus ? {} :
     T extends ClientToServerChannel.SaveLastViewedCycle ? { cycleId: number | null } :
     
@@ -14498,7 +14518,7 @@ module.exports = [extensionConfig, webviewConfig];
     "publisher": "DCE-Developer",
     "displayName": "Data Curation Environment",
     "description": "A VS Code extension for curating context for Large Language Models.",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "repository": {
         "type": "git",
         "url": "https://github.com/dgerabagi/data-curation-environment.git"
@@ -24049,6 +24069,7 @@ flattened_repo.txt
 # Artifact A80: DCE - Settings Panel Plan
 # Date Created: C6
 # Author: AI Model & Curator
+# Updated on: C12 (Mark as active implementation)
 
 - **Key/Value for A0:**
 - **Description:** A plan for a new settings panel, accessible via a help icon, to house changelogs, settings, and other informational content.
@@ -24057,6 +24078,8 @@ flattened_repo.txt
 ## 1. Overview & Goal
 
 As the Data Curation Environment (DCE) grows in features, users will need a centralized location to manage settings, view changelogs, and access help documentation. The goal of this feature is to create a dedicated "Settings" or "Help" panel, accessible via a new icon in the Parallel Co-Pilot Panel (PCPP), that serves as this central hub.
+
+**Status (C12):** In Progress.
 
 ## 2. User Stories
 
