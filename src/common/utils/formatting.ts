@@ -1,7 +1,27 @@
 // src/common/utils/formatting.ts
-// Updated on: C4 (Add truncateCodeForLogging)
+// Updated on: C9 (Add truncatePath utility)
 
 const KMBT_SUFFIXES = ['', 'K', 'M', 'B', 'T', 'Q']; // Extend as needed
+
+/**
+ * Truncates the middle of a file path if it exceeds a maximum length.
+ * @param path The file path string.
+ * @param maxLength The maximum desired length.
+ * @returns The truncated path.
+ */
+export function truncatePath(path: string, maxLength: number = 50): string {
+    if (path.length <= maxLength) {
+        return path;
+    }
+
+    const startLength = Math.ceil((maxLength - 3) / 2);
+    const endLength = Math.floor((maxLength - 3) / 2);
+
+    const start = path.substring(0, startLength);
+    const end = path.substring(path.length - endLength);
+
+    return `${start}...${end}`;
+}
 
 /**
  * Calculates the estimated cost for an LLM prompt based on tiered pricing.

@@ -1,12 +1,12 @@
 // src/client/views/parallel-copilot.view/components/ParsedView.tsx
-// Updated on: C8 (Display similarity score percentage)
+// Updated on: C9 (Implement path truncation and context menu)
 import * as React from 'react';
-import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscSave, VscCheckAll, VscClearAll, VscClippy, VscChevronDown, VscSourceControl, VscDiscard } from 'react-icons/vsc';
+import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscSave, VscCheckAll, VscClearAll, VscClippy, VscChevronDown } from 'react-icons/vsc';
 import ReactMarkdown from 'react-markdown';
 import * as path from 'path-browserify';
 import { ParsedResponse } from '@/common/types/pcpp.types';
 import { ComparisonMetrics } from '@/common/ipc/channels.type';
-import { formatLargeNumber } from '@/common/utils/formatting';
+import { formatLargeNumber, truncatePath } from '@/common/utils/formatting';
 import CodeViewer from './CodeViewer';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -61,6 +61,17 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
     const [isCuratorActivityCollapsed, setCuratorActivityCollapsed] = React.useState(false);
     const [contextMenu, setContextMenu] = React.useState<{ x: number, y: number, path: string } | null>(null);
     const clientIpc = ClientPostMessageManager.getInstance();
+    const menuRef = React.useRef<HTMLDivElement>(null);
+
+    React.useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+                setContextMenu(null);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
 
     const handleContextMenu = (event: React.MouseEvent, path: string) => {
         event.preventDefault();
@@ -91,7 +102,7 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
                             <div className="file-row">
                                 <input type="checkbox" checked={props.selectedFilesForReplacement.has(`${props.activeTab}:::${file}`)} onChange={() => props.onFileSelectionToggle(file)} onClick={e => e.stopPropagation()} />
                                 {fileExists ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
-                                <span>{file}</span>
+                                <span className="file-path-text" title={file}>{truncatePath(file, 40)}</span>
                                 {metrics && fileExists && <span className="similarity-score">{ (similarity * 100).toFixed(0) }%</span>}
                             </div>
                             {!fileExists && props.selectedFilePath === file && (
@@ -125,7 +136,7 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
             {contextMenu && (
                 <>
                     <div className="context-menu-overlay" onClick={() => setContextMenu(null)}></div>
-                    <div className="context-menu" style={{ top: contextMenu.y, left: contextMenu.x }}>
+                    <div ref={menuRef} className="context-menu" style={{ top: contextMenu.y, left: contextMenu.x }}>
                         <ul>
                             <li onClick={handleCopyPath}>Copy Relative Path</li>
                         </ul>

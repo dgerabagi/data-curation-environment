@@ -1,4 +1,4 @@
-// Resp 12-Updated on: C8 (Add dist to non-selectable patterns)
+// Resp 12-Updated on: C9 (Add dist to non-selectable patterns)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";

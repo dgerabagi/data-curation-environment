@@ -1,5 +1,5 @@
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C8 (Add style for similarity score)
+// Updated on: C9 (Add styling for path truncation)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -622,12 +622,20 @@ body {
         text-overflow: ellipsis;
     }
 
+    .file-path-text {
+        flex-grow: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
     .similarity-score {
         margin-left: auto;
         padding-left: 8px;
         font-size: 11px;
         color: var(--vscode-descriptionForeground);
         font-style: italic;
+        flex-shrink: 0;
     }
 
     input[type="checkbox"] {
@@ -828,4 +836,56 @@ body {
 
 .collapsible-content-inner {
     padding: 8px;
+}
+
+.context-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+}
+
+.context-menu {
+    position: absolute;
+    background-color: var(--vscode-menu-background);
+    border: 1px solid var(--vscode-menu-border);
+    color: var(--vscode-menu-foreground);
+    box-shadow: 0 2px 8px var(--vscode-widget-shadow);
+    border-radius: 4px;
+    padding: 4px 0;
+    min-width: 180px;
+    z-index: 1000;
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    li {
+        padding: 4px 12px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        &:hover {
+            background-color: var(--vscode-menu-selectionBackground);
+            color: var(--vscode-menu-selectionForeground);
+        }
+        
+        &.disabled {
+            color: var(--vscode-disabledForeground);
+            cursor: not-allowed;
+            background-color: transparent;
+        }
+    }
+
+    hr {
+        border: none;
+        border-top: 1px solid var(--vscode-menu-separatorBackground);
+        margin: 4px 0;
+    }
 }

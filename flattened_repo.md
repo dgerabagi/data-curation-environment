@@ -1,26 +1,26 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-14T17:33:51.754Z
+  Date Generated: 2025-09-14T18:10:14.124Z
   ---
-  Total Files: 178
-  Approx. Tokens: 449537
+  Total Files: 182
+  Approx. Tokens: 451660
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (7866 tokens)
-4. src\Artifacts\A0. DCE Master Artifact List.md (7724 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (8083 tokens)
+4. src\Artifacts\A0. DCE Master Artifact List.md (7794 tokens)
 5. src\backend\services\prompt.service.ts (5042 tokens)
-6. src\client\views\parallel-copilot.view\view.scss (4656 tokens)
+6. src\client\views\parallel-copilot.view\view.scss (4978 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4429 tokens)
 8. src\backend\services\file-operation.service.ts (4096 tokens)
 9. src\client\views\context-chooser.view\view.tsx (4019 tokens)
 10. src\client\views\context-chooser.view\view.scss (3708 tokens)
 
 <!-- Full File List -->
-1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 456 - Chars: 30895 - Tokens: 7724
+1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 460 - Chars: 31173 - Tokens: 7794
 2. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 3. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
 4. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
@@ -155,15 +155,15 @@
 133. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 55 - Chars: 1970 - Tokens: 493
 134. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 97 - Chars: 4000 - Tokens: 1000
 135. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
-136. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 139 - Chars: 10083 - Tokens: 2521
+136. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 150 - Chars: 10604 - Tokens: 2651
 137. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 86 - Chars: 3575 - Tokens: 894
 138. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
 139. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 140. src\client\views\parallel-copilot.view\on-message.ts - Lines: 114 - Chars: 5326 - Tokens: 1332
 141. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 92 - Chars: 4340 - Tokens: 1085
-142. src\client\views\parallel-copilot.view\view.scss - Lines: 831 - Chars: 18624 - Tokens: 4656
+142. src\client\views\parallel-copilot.view\view.scss - Lines: 891 - Chars: 19912 - Tokens: 4978
 143. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-144. src\client\views\parallel-copilot.view\view.tsx - Lines: 236 - Chars: 31461 - Tokens: 7866
+144. src\client\views\parallel-copilot.view\view.tsx - Lines: 245 - Chars: 32332 - Tokens: 8083
 145. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
 146. src\common\ipc\channels.enum.ts - Lines: 92 - Chars: 4981 - Tokens: 1246
 147. src\common\ipc\channels.type.ts - Lines: 93 - Chars: 7074 - Tokens: 1769
@@ -173,7 +173,7 @@
 151. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
 152. src\common\types\pcpp.types.ts - Lines: 44 - Chars: 1070 - Tokens: 268
 153. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
-154. src\common\utils\formatting.ts - Lines: 121 - Chars: 4016 - Tokens: 1004
+154. src\common\utils\formatting.ts - Lines: 141 - Chars: 4606 - Tokens: 1152
 155. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
 156. src\common\utils\view-html.ts - Lines: 37 - Chars: 1314 - Tokens: 329
 157. src\common\view-types.ts - Lines: 8 - Chars: 182 - Tokens: 46
@@ -193,17 +193,21 @@
 171. src\Artifacts\A80. DCE - Settings Panel Plan.md - Lines: 35 - Chars: 2931 - Tokens: 733
 172. src\Artifacts\A81. DCE - Curator Activity Plan.md - Lines: 34 - Chars: 2346 - Tokens: 587
 173. src\Artifacts\A82. DCE - Advanced Exclusion Management Plan.md - Lines: 40 - Chars: 3010 - Tokens: 753
-174. src\Artifacts\A83. DCE - Universal Task Checklist for Cycle 6.md - Lines: 100 - Chars: 5244 - Tokens: 1311
+174. src\Artifacts\A83. DCE - Universal Task Checklist for Cycle 6.md - Lines: 95 - Chars: 5172 - Tokens: 1293
 175. dist\Artifacts\A80. DCE - Settings Panel Plan.md - Lines: 35 - Chars: 2931 - Tokens: 733
 176. dist\Artifacts\A81. DCE - Curator Activity Plan.md - Lines: 34 - Chars: 2346 - Tokens: 587
 177. dist\Artifacts\A82. DCE - Advanced Exclusion Management Plan.md - Lines: 40 - Chars: 3010 - Tokens: 753
-178. dist\Artifacts\A83. DCE - Universal Task Checklist for Cycle 6.md - Lines: 100 - Chars: 5244 - Tokens: 1311
+178. dist\Artifacts\A83. DCE - Universal Task Checklist for Cycle 6.md - Lines: 95 - Chars: 5172 - Tokens: 1293
+179. src\Artifacts\A84. DCE - Universal Task Checklist for Cycle 10+.md - Lines: 55 - Chars: 2541 - Tokens: 636
+180. dist\Artifacts\A84. DCE - Universal Task Checklist for Cycle 10+.md - Lines: 55 - Chars: 2541 - Tokens: 636
+181. new-folder\new-file.ts - Lines: 1 - Chars: 0 - Tokens: 0
+182. new-folder\new-file.ts - Lines: 1 - Chars: 0 - Tokens: 0
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C7 (Add A79)
+# Updated on: C9 (Add A84)
 
 ## 1. Purpose
 
@@ -571,6 +575,10 @@
 
 ### A83. DCE - Universal Task Checklist for Cycle 6
 - **Description:** A structured checklist for organizing the development tasks, feedback, and bugs from the "laundry list" provided in Cycle 6.
+- **Tags:** process, checklist, task management, planning, workflow
+
+### A84. DCE - Universal Task Checklist for Cycle 10+
+- **Description:** A structured checklist for organizing the next phase of development tasks, focusing on feature parity with the native VS Code explorer.
 - **Tags:** process, checklist, task management, planning, workflow
 
 ### A200. Cycle Log
@@ -7467,7 +7475,7 @@ export class FileOperationService {
 </file_artifact>
 
 <file path="src/backend/services/file-tree.service.ts">
-// Resp 12-Updated on: C8 (Add dist to non-selectable patterns)
+// Resp 12-Updated on: C9 (Add dist to non-selectable patterns)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -11767,14 +11775,14 @@ export default HighlightedTextarea;
 
 <file path="src/client/views/parallel-copilot.view/components/ParsedView.tsx">
 // src/client/views/parallel-copilot.view/components/ParsedView.tsx
-// Updated on: C8 (Display similarity score percentage)
+// Updated on: C9 (Implement path truncation and context menu)
 import * as React from 'react';
-import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscSave, VscCheckAll, VscClearAll, VscClippy, VscChevronDown, VscSourceControl, VscDiscard } from 'react-icons/vsc';
+import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscSave, VscCheckAll, VscClearAll, VscClippy, VscChevronDown } from 'react-icons/vsc';
 import ReactMarkdown from 'react-markdown';
 import * as path from 'path-browserify';
 import { ParsedResponse } from '@/common/types/pcpp.types';
 import { ComparisonMetrics } from '@/common/ipc/channels.type';
-import { formatLargeNumber } from '@/common/utils/formatting';
+import { formatLargeNumber, truncatePath } from '@/common/utils/formatting';
 import CodeViewer from './CodeViewer';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -11829,6 +11837,17 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
     const [isCuratorActivityCollapsed, setCuratorActivityCollapsed] = React.useState(false);
     const [contextMenu, setContextMenu] = React.useState<{ x: number, y: number, path: string } | null>(null);
     const clientIpc = ClientPostMessageManager.getInstance();
+    const menuRef = React.useRef<HTMLDivElement>(null);
+
+    React.useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+                setContextMenu(null);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
 
     const handleContextMenu = (event: React.MouseEvent, path: string) => {
         event.preventDefault();
@@ -11859,7 +11878,7 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
                             <div className="file-row">
                                 <input type="checkbox" checked={props.selectedFilesForReplacement.has(`${props.activeTab}:::${file}`)} onChange={() => props.onFileSelectionToggle(file)} onClick={e => e.stopPropagation()} />
                                 {fileExists ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
-                                <span>{file}</span>
+                                <span className="file-path-text" title={file}>{truncatePath(file, 40)}</span>
                                 {metrics && fileExists && <span className="similarity-score">{ (similarity * 100).toFixed(0) }%</span>}
                             </div>
                             {!fileExists && props.selectedFilePath === file && (
@@ -11893,7 +11912,7 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
             {contextMenu && (
                 <>
                     <div className="context-menu-overlay" onClick={() => setContextMenu(null)}></div>
-                    <div className="context-menu" style={{ top: contextMenu.y, left: contextMenu.x }}>
+                    <div ref={menuRef} className="context-menu" style={{ top: contextMenu.y, left: contextMenu.x }}>
                         <ul>
                             <li onClick={handleCopyPath}>Copy Relative Path</li>
                         </ul>
@@ -12293,7 +12312,7 @@ export default OnboardingView;
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C8 (Add style for similarity score)
+// Updated on: C9 (Add styling for path truncation)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -12916,12 +12935,20 @@ body {
         text-overflow: ellipsis;
     }
 
+    .file-path-text {
+        flex-grow: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
     .similarity-score {
         margin-left: auto;
         padding-left: 8px;
         font-size: 11px;
         color: var(--vscode-descriptionForeground);
         font-style: italic;
+        flex-shrink: 0;
     }
 
     input[type="checkbox"] {
@@ -13123,6 +13150,58 @@ body {
 .collapsible-content-inner {
     padding: 8px;
 }
+
+.context-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+}
+
+.context-menu {
+    position: absolute;
+    background-color: var(--vscode-menu-background);
+    border: 1px solid var(--vscode-menu-border);
+    color: var(--vscode-menu-foreground);
+    box-shadow: 0 2px 8px var(--vscode-widget-shadow);
+    border-radius: 4px;
+    padding: 4px 0;
+    min-width: 180px;
+    z-index: 1000;
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    li {
+        padding: 4px 12px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        &:hover {
+            background-color: var(--vscode-menu-selectionBackground);
+            color: var(--vscode-menu-selectionForeground);
+        }
+        
+        &.disabled {
+            color: var(--vscode-disabledForeground);
+            cursor: not-allowed;
+            background-color: transparent;
+        }
+    }
+
+    hr {
+        border: none;
+        border-top: 1px solid var(--vscode-menu-separatorBackground);
+        margin: 4px 0;
+    }
+}
 </file_artifact>
 
 <file path="src/client/views/parallel-copilot.view/view.ts">
@@ -13140,7 +13219,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C8 (Implement similarity score display)
+// Updated on: C9 (Add context menu for associated files)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './view.scss';
@@ -13157,6 +13236,7 @@ import ContextInputs from './components/ContextInputs';
 import ResponseTabs from './components/ResponseTabs';
 import ResponsePane from './components/ResponsePane';
 import * as path from 'path-browserify';
+import ContextMenu from '@/client/components/ContextMenu';
 
 console.log('[PCPP View] view.tsx module loaded');
 
@@ -13211,6 +13291,7 @@ const App = () => {
     const [costBreakdown, setCostBreakdown] = React.useState<{[key: string]: number} | null>(null);
     const [workflowStep, setWorkflowStep] = React.useState<string | null>(null);
     const [saveStatus, setSaveStatus] = React.useState<'saved' | 'saving' | 'unsaved'>('saved');
+    const [associatedFileMenu, setAssociatedFileMenu] = React.useState<{ x: number; y: number; path: string } | null>(null);
 
     const clientIpc = ClientPostMessageManager.getInstance();
     
@@ -13267,6 +13348,12 @@ const App = () => {
         } else {
             handleRawContentChange(pastedText, tabIndex);
         }
+    };
+
+    const handleAssociatedFileContextMenu = (event: React.MouseEvent, path: string) => {
+        event.preventDefault();
+        event.stopPropagation();
+        setAssociatedFileMenu({ x: event.clientX, y: event.clientY, path });
     };
 
     // ... (rest of the component logic)
@@ -13364,8 +13451,9 @@ const App = () => {
         </CollapsibleSection>
         <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} onSortToggle={handleSortToggle} workflowStep={workflowStep} />
         <div className="tab-content">
-            <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} onPaste={(e) => handlePaste(e, activeTab)} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={comparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => { setSelectedResponseId(prev => prev === id ? null : id); setWorkflowStep('awaitingResponseSelect'); setSaveStatus('unsaved'); }} onSelectAllFiles={handleSelectAllFilesToggle} onDeselectAllFiles={() => {setSelectedFilesForReplacement(new Set()); setSaveStatus('unsaved');}} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} onBaseline={handleGitBaseline} onRestore={handleGitRestore} workflowStep={workflowStep} />
+            <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} onPaste={(e) => handlePaste(e, activeTab)} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={comparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => { setSelectedResponseId(prev => prev === id ? null : id); setWorkflowStep('awaitingResponseSelect'); setSaveStatus('unsaved'); }} onSelectAllFiles={handleSelectAllFilesToggle} onDeselectAllFiles={() => {setSelectedFilesForReplacement(new Set()); setSaveStatus('unsaved');}} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} onBaseline={handleGitBaseline} onRestore={handleGitRestore} workflowStep={workflowStep} onAssociatedFileContextMenu={handleAssociatedFileContextMenu} />
         </div>
+        {associatedFileMenu && <div className="context-menu" style={{ top: associatedFileMenu.y, left: associatedFileMenu.x }}><ul onMouseLeave={() => setAssociatedFileMenu(null)}><li onClick={() => { clientIpc.sendToServer(ClientToServerChannel.RequestCopyPath, { path: associatedFileMenu.path, relative: true }); setAssociatedFileMenu(null); }}>Copy Relative Path</li></ul></div>}
     </div>;
 };
 
@@ -13803,9 +13891,29 @@ declare global {
 
 <file path="src/common/utils/formatting.ts">
 // src/common/utils/formatting.ts
-// Updated on: C4 (Add truncateCodeForLogging)
+// Updated on: C9 (Add truncatePath utility)
 
 const KMBT_SUFFIXES = ['', 'K', 'M', 'B', 'T', 'Q']; // Extend as needed
+
+/**
+ * Truncates the middle of a file path if it exceeds a maximum length.
+ * @param path The file path string.
+ * @param maxLength The maximum desired length.
+ * @returns The truncated path.
+ */
+export function truncatePath(path: string, maxLength: number = 50): string {
+    if (path.length <= maxLength) {
+        return path;
+    }
+
+    const startLength = Math.ceil((maxLength - 3) / 2);
+    const endLength = Math.floor((maxLength - 3) / 2);
+
+    const start = path.substring(0, startLength);
+    const end = path.substring(path.length - endLength);
+
+    return `${start}...${end}`;
+}
 
 /**
  * Calculates the estimated cost for an LLM prompt based on tiered pricing.
@@ -23964,7 +24072,7 @@ This approach leverages VS Code's built-in settings infrastructure, making the e
 # Artifact A83: DCE - Universal Task Checklist for Cycle 6
 # Date Created: C6
 # Author: AI Model & Curator
-# Updated on: C8 (Update T-3 to include displaying similarity score percentage)
+# Updated on: C9 (Finalize T-3 and add T-4)
 
 - **Key/Value for A0:**
 - **Description:** A structured checklist for organizing the development tasks, feedback, and bugs from the "laundry list" provided in Cycle 6.
@@ -24009,13 +24117,13 @@ This artifact provides a structured, universal format for tracking the developme
     - `src/common/ipc/channels.type.ts`
 - **Total Tokens:** ~12,000
 - **More than one cycle?** No
-- **Status:** Completed in C7
+- **Status:** Completed in C8
 
 - [X] **Task (T-ID: 2.1):** Implement the autosave locking feature from `A79`. Add `saveStatus` state to `view.tsx`.
 - [X] **Task (T-ID: 2.2):** Add `NotifySaveComplete` IPC channel and have `history.service.ts` send it after a successful write.
 - [X] **Task (T-ID: 2.3):** Disable navigation buttons in `CycleNavigator.tsx` when `saveStatus` is not `'saved'`.
 - [X] **Task (T-ID: 2.4):** Implement auto-tabbing on paste in `view.tsx`.
-- [X] **Task (T-ID: 2.5):** Add `tsconfig.tsbuildinfo` to `NON_SELECTABLE_PATTERNS` in `file-tree.service.ts`.
+- [X] **Task (T-ID: 2.5):** Add `tsconfig.tsbuildinfo` and `dist` to `NON_SELECTABLE_PATTERNS` in `file-tree.service.ts`.
 
 ### Verification Steps
 1.  Type text into the Cycle Context.
@@ -24029,38 +24137,33 @@ This artifact provides a structured, universal format for tracking the developme
 - **Files Involved:**
     - `src/client/views/parallel-copilot.view/components/ParsedView.tsx`
     - `src/client/views/parallel-copilot.view/view.scss`
-    - `src/client/views/parallel-copilot.view/view.tsx`
-    - `src/common/ipc/channels.enum.ts`
-    - `src/common/ipc/channels.type.ts`
-    - `src/backend/services/file-operation.service.ts`
-- **Total Tokens:** ~15,000
+    - `src/common/utils/formatting.ts`
+- **Total Tokens:** ~5,000
 - **More than one cycle?** No
-- **Status:** In Progress
+- **Status:** Completed in C9
 
 - [X] **Task (T-ID: 3.1):** Implement a color gradient on "Associated Files" list items based on similarity score.
-- [-] **Task (T-ID: 3.2):** Display the similarity score as a percentage next to the file name.
-- [-] **Task (T-ID: 3.3):** Add a right-click context menu to "Associated Files" list items to copy the relative path.
+- [X] **Task (T-ID: 3.2):** Display the similarity score as a percentage and truncate long file paths.
+- [X] **Task (T-ID: 3.3):** Add a right-click context menu to "Associated Files" list items to copy the relative path.
 
 ### Verification Steps
-1.  Parse a response with varying similarity scores.
-2.  **Expected:** The file list items should have background colors ranging from green (high similarity) to red (low similarity). A percentage value (e.g., "98%") should be visible for each file.
+1.  Parse a response with varying similarity scores and a very long file path.
+2.  **Expected:** The file list items should have background colors ranging from green (high similarity) to red (low similarity). A percentage value (e.g., "98%") should be visible. The long file path should be truncated in the middle. Hovering over it shows the full path.
 3.  Right-click a file in the list.
 4.  **Expected:** A context menu should appear with a "Copy Relative Path" option. Clicking it should copy the path to the clipboard.
 
-## T-4: Future Feature Planning
+## T-4: Plan Next Development Phase
 - **Files Involved:**
-    - `src/Artifacts/A80. DCE - Settings Panel Plan.md`
-    - `src/Artifacts/A82. DCE - Advanced Exclusion Management Plan.md`
-- **Total Tokens:** ~2,000
+    - `src/Artifacts/A84. DCE - Universal Task Checklist for Cycle 10+.md`
+- **Total Tokens:** ~1,500
 - **More than one cycle?** Yes (Implementation is deferred)
-- **Status:** Completed in C7
+- **Status:** In Progress
 
-- [X] **Task (T-ID: 4.1):** Create `A80` to plan the settings/help panel.
-- [X] **Task (T-ID: 4.2):** Create `A82` to plan the advanced exclusion management feature.
+- [X] **Task (T-ID: 4.1):** Create `A84` to plan the next phase of development, focusing on high-priority features from the existing backlog to achieve feature parity with the native VS Code explorer.
 
 ### Verification Steps
 1.  Check the master artifacts list.
-2.  **Expected:** The new `A80` and `A82` artifacts should be present and contain the feature plans.
+2.  **Expected:** The new `A84` artifact should be present and contain the feature plans for the next cycle.
 </file_artifact>
 
 <file path="dist/Artifacts/A80. DCE - Settings Panel Plan.md">
@@ -24185,7 +24288,7 @@ This approach leverages VS Code's built-in settings infrastructure, making the e
 # Artifact A83: DCE - Universal Task Checklist for Cycle 6
 # Date Created: C6
 # Author: AI Model & Curator
-# Updated on: C8 (Update T-3 to include displaying similarity score percentage)
+# Updated on: C9 (Finalize T-3 and add T-4)
 
 - **Key/Value for A0:**
 - **Description:** A structured checklist for organizing the development tasks, feedback, and bugs from the "laundry list" provided in Cycle 6.
@@ -24230,13 +24333,13 @@ This artifact provides a structured, universal format for tracking the developme
     - `src/common/ipc/channels.type.ts`
 - **Total Tokens:** ~12,000
 - **More than one cycle?** No
-- **Status:** Completed in C7
+- **Status:** Completed in C8
 
 - [X] **Task (T-ID: 2.1):** Implement the autosave locking feature from `A79`. Add `saveStatus` state to `view.tsx`.
 - [X] **Task (T-ID: 2.2):** Add `NotifySaveComplete` IPC channel and have `history.service.ts` send it after a successful write.
 - [X] **Task (T-ID: 2.3):** Disable navigation buttons in `CycleNavigator.tsx` when `saveStatus` is not `'saved'`.
 - [X] **Task (T-ID: 2.4):** Implement auto-tabbing on paste in `view.tsx`.
-- [X] **Task (T-ID: 2.5):** Add `tsconfig.tsbuildinfo` to `NON_SELECTABLE_PATTERNS` in `file-tree.service.ts`.
+- [X] **Task (T-ID: 2.5):** Add `tsconfig.tsbuildinfo` and `dist` to `NON_SELECTABLE_PATTERNS` in `file-tree.service.ts`.
 
 ### Verification Steps
 1.  Type text into the Cycle Context.
@@ -24250,37 +24353,154 @@ This artifact provides a structured, universal format for tracking the developme
 - **Files Involved:**
     - `src/client/views/parallel-copilot.view/components/ParsedView.tsx`
     - `src/client/views/parallel-copilot.view/view.scss`
-    - `src/client/views/parallel-copilot.view/view.tsx`
-    - `src/common/ipc/channels.enum.ts`
-    - `src/common/ipc/channels.type.ts`
-    - `src/backend/services/file-operation.service.ts`
-- **Total Tokens:** ~15,000
+    - `src/common/utils/formatting.ts`
+- **Total Tokens:** ~5,000
 - **More than one cycle?** No
-- **Status:** In Progress
+- **Status:** Completed in C9
 
 - [X] **Task (T-ID: 3.1):** Implement a color gradient on "Associated Files" list items based on similarity score.
-- [-] **Task (T-ID: 3.2):** Display the similarity score as a percentage next to the file name.
-- [-] **Task (T-ID: 3.3):** Add a right-click context menu to "Associated Files" list items to copy the relative path.
+- [X] **Task (T-ID: 3.2):** Display the similarity score as a percentage and truncate long file paths.
+- [X] **Task (T-ID: 3.3):** Add a right-click context menu to "Associated Files" list items to copy the relative path.
 
 ### Verification Steps
-1.  Parse a response with varying similarity scores.
-2.  **Expected:** The file list items should have background colors ranging from green (high similarity) to red (low similarity). A percentage value (e.g., "98%") should be visible for each file.
+1.  Parse a response with varying similarity scores and a very long file path.
+2.  **Expected:** The file list items should have background colors ranging from green (high similarity) to red (low similarity). A percentage value (e.g., "98%") should be visible. The long file path should be truncated in the middle. Hovering over it shows the full path.
 3.  Right-click a file in the list.
 4.  **Expected:** A context menu should appear with a "Copy Relative Path" option. Clicking it should copy the path to the clipboard.
 
-## T-4: Future Feature Planning
+## T-4: Plan Next Development Phase
 - **Files Involved:**
-    - `src/Artifacts/A80. DCE - Settings Panel Plan.md`
-    - `src/Artifacts/A82. DCE - Advanced Exclusion Management Plan.md`
-- **Total Tokens:** ~2,000
+    - `src/Artifacts/A84. DCE - Universal Task Checklist for Cycle 10+.md`
+- **Total Tokens:** ~1,500
 - **More than one cycle?** Yes (Implementation is deferred)
-- **Status:** Completed in C7
+- **Status:** In Progress
 
-- [X] **Task (T-ID: 4.1):** Create `A80` to plan the settings/help panel.
-- [X] **Task (T-ID: 4.2):** Create `A82` to plan the advanced exclusion management feature.
+- [X] **Task (T-ID: 4.1):** Create `A84` to plan the next phase of development, focusing on high-priority features from the existing backlog to achieve feature parity with the native VS Code explorer.
 
 ### Verification Steps
 1.  Check the master artifacts list.
-2.  **Expected:** The new `A80` and `A82` artifacts should be present and contain the feature plans.
+2.  **Expected:** The new `A84` artifact should be present and contain the feature plans for the next cycle.
+</file_artifact>
+
+<file path="src/Artifacts/A84. DCE - Universal Task Checklist for Cycle 10+.md">
+# Artifact A84: DCE - Universal Task Checklist for Cycle 10+
+# Date Created: C9
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A structured checklist for organizing the next phase of development tasks, focusing on feature parity with the native VS Code explorer.
+- **Tags:** process, checklist, task management, planning, workflow
+
+## 1. Purpose
+
+This artifact provides a structured, universal format for tracking the next phase of development tasks, feedback, and bugs. The primary goal of this phase is to achieve greater feature parity with the native VS Code Explorer, focusing on core file operations and interactions that users expect.
+
+---
+
+## Task List
+
+## T-1: Undo/Redo File Operations
+- **Files Involved:**
+    - `src/Artifacts/A27. DCE - Phase 1 - Undo-Redo Feature Plan.md`
+    - `src/backend/services/action.service.ts`
+    - `src/backend/services/file-operation.service.ts`
+    - `src/client/components/tree-view/TreeView.tsx`
+- **Total Tokens:** ~8,000
+- **More than one cycle?** No
+
+- [ ] **Task (T-ID: 1.1):** Implement the `ActionService` to manage undo/redo stacks.
+- [ ] **Task (T-ID: 1.2):** Integrate `ActionService` with `FileOperationService` to push move/delete actions onto the stack.
+- [ ] **Task (T-ID: 1.3):** Implement `Ctrl+Z` / `Ctrl+Y` keyboard shortcuts in `TreeView.tsx` to trigger undo/redo.
+
+### Verification Steps
+1.  Drag and drop a file to move it.
+2.  Press `Ctrl+Z`.
+3.  **Expected:** The file moves back to its original location.
+4.  Press `Ctrl+Y`.
+5.  **Expected:** The file moves back to the new location.
+
+## T-2: Copy/Paste File Operations
+- **Files Involved:**
+    - `src/Artifacts/A33. DCE - Phase 1 - Copy-Paste Feature Plan.md`
+    - `src/backend/services/file-operation.service.ts`
+    - `src/client/components/tree-view/TreeView.tsx`
+    - `src/client/views/context-chooser.view/view.tsx`
+- **Total Tokens:** ~10,000
+- **More than one cycle?** No
+
+- [ ] **Task (T-ID: 2.1):** Implement internal clipboard state in `view.tsx`.
+- [ ] **Task (T-ID: 2.2):** Implement `Ctrl+C` / `Ctrl+V` handlers in `TreeView.tsx`.
+- [ ] **Task (T-ID: 2.3):** Implement backend `handleCopyFileRequest` logic in `file-operation.service.ts`, including robust name collision handling.
+
+### Verification Steps
+1.  Focus a file and press `Ctrl+C`.
+2.  Focus a directory and press `Ctrl+V`.
+3.  **Expected:** A copy of the file appears in the directory.
+4.  Press `Ctrl+V` again in the same directory.
+5.  **Expected:** A second copy appears with a modified name (e.g., `file-copy.ts`).
+</file_artifact>
+
+<file path="dist/Artifacts/A84. DCE - Universal Task Checklist for Cycle 10+.md">
+# Artifact A84: DCE - Universal Task Checklist for Cycle 10+
+# Date Created: C9
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A structured checklist for organizing the next phase of development tasks, focusing on feature parity with the native VS Code explorer.
+- **Tags:** process, checklist, task management, planning, workflow
+
+## 1. Purpose
+
+This artifact provides a structured, universal format for tracking the next phase of development tasks, feedback, and bugs. The primary goal of this phase is to achieve greater feature parity with the native VS Code Explorer, focusing on core file operations and interactions that users expect.
+
+---
+
+## Task List
+
+## T-1: Undo/Redo File Operations
+- **Files Involved:**
+    - `src/Artifacts/A27. DCE - Phase 1 - Undo-Redo Feature Plan.md`
+    - `src/backend/services/action.service.ts`
+    - `src/backend/services/file-operation.service.ts`
+    - `src/client/components/tree-view/TreeView.tsx`
+- **Total Tokens:** ~8,000
+- **More than one cycle?** No
+
+- [ ] **Task (T-ID: 1.1):** Implement the `ActionService` to manage undo/redo stacks.
+- [ ] **Task (T-ID: 1.2):** Integrate `ActionService` with `FileOperationService` to push move/delete actions onto the stack.
+- [ ] **Task (T-ID: 1.3):** Implement `Ctrl+Z` / `Ctrl+Y` keyboard shortcuts in `TreeView.tsx` to trigger undo/redo.
+
+### Verification Steps
+1.  Drag and drop a file to move it.
+2.  Press `Ctrl+Z`.
+3.  **Expected:** The file moves back to its original location.
+4.  Press `Ctrl+Y`.
+5.  **Expected:** The file moves back to the new location.
+
+## T-2: Copy/Paste File Operations
+- **Files Involved:**
+    - `src/Artifacts/A33. DCE - Phase 1 - Copy-Paste Feature Plan.md`
+    - `src/backend/services/file-operation.service.ts`
+    - `src/client/components/tree-view/TreeView.tsx`
+    - `src/client/views/context-chooser.view/view.tsx`
+- **Total Tokens:** ~10,000
+- **More than one cycle?** No
+
+- [ ] **Task (T-ID: 2.1):** Implement internal clipboard state in `view.tsx`.
+- [ ] **Task (T-ID: 2.2):** Implement `Ctrl+C` / `Ctrl+V` handlers in `TreeView.tsx`.
+- [ ] **Task (T-ID: 2.3):** Implement backend `handleCopyFileRequest` logic in `file-operation.service.ts`, including robust name collision handling.
+
+### Verification Steps
+1.  Focus a file and press `Ctrl+C`.
+2.  Focus a directory and press `Ctrl+V`.
+3.  **Expected:** A copy of the file appears in the directory.
+4.  Press `Ctrl+V` again in the same directory.
+5.  **Expected:** A second copy appears with a modified name (e.g., `file-copy.ts`).
+</file_artifact>
+
+<file path="new-folder/new-file.ts">
+</file_artifact>
+
+<file path="new-folder/new-file.ts">
 </file_artifact>
 

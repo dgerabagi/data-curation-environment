@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C8 (Implement similarity score display)
+// Updated on: C9 (Add context menu for associated files)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './view.scss';
@@ -16,6 +16,7 @@ import ContextInputs from './components/ContextInputs';
 import ResponseTabs from './components/ResponseTabs';
 import ResponsePane from './components/ResponsePane';
 import * as path from 'path-browserify';
+import ContextMenu from '@/client/components/ContextMenu';
 
 console.log('[PCPP View] view.tsx module loaded');
 
@@ -70,6 +71,7 @@ const App = () => {
     const [costBreakdown, setCostBreakdown] = React.useState<{[key: string]: number} | null>(null);
     const [workflowStep, setWorkflowStep] = React.useState<string | null>(null);
     const [saveStatus, setSaveStatus] = React.useState<'saved' | 'saving' | 'unsaved'>('saved');
+    const [associatedFileMenu, setAssociatedFileMenu] = React.useState<{ x: number; y: number; path: string } | null>(null);
 
     const clientIpc = ClientPostMessageManager.getInstance();
     
@@ -126,6 +128,12 @@ const App = () => {
         } else {
             handleRawContentChange(pastedText, tabIndex);
         }
+    };
+
+    const handleAssociatedFileContextMenu = (event: React.MouseEvent, path: string) => {
+        event.preventDefault();
+        event.stopPropagation();
+        setAssociatedFileMenu({ x: event.clientX, y: event.clientY, path });
     };
 
     // ... (rest of the component logic)
@@ -223,8 +231,9 @@ const App = () => {
         </CollapsibleSection>
         <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} onSortToggle={handleSortToggle} workflowStep={workflowStep} />
         <div className="tab-content">
-            <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} onPaste={(e) => handlePaste(e, activeTab)} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={comparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => { setSelectedResponseId(prev => prev === id ? null : id); setWorkflowStep('awaitingResponseSelect'); setSaveStatus('unsaved'); }} onSelectAllFiles={handleSelectAllFilesToggle} onDeselectAllFiles={() => {setSelectedFilesForReplacement(new Set()); setSaveStatus('unsaved');}} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} onBaseline={handleGitBaseline} onRestore={handleGitRestore} workflowStep={workflowStep} />
+            <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} onPaste={(e) => handlePaste(e, activeTab)} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={comparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => { setSelectedResponseId(prev => prev === id ? null : id); setWorkflowStep('awaitingResponseSelect'); setSaveStatus('unsaved'); }} onSelectAllFiles={handleSelectAllFilesToggle} onDeselectAllFiles={() => {setSelectedFilesForReplacement(new Set()); setSaveStatus('unsaved');}} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} onBaseline={handleGitBaseline} onRestore={handleGitRestore} workflowStep={workflowStep} onAssociatedFileContextMenu={handleAssociatedFileContextMenu} />
         </div>
+        {associatedFileMenu && <div className="context-menu" style={{ top: associatedFileMenu.y, left: associatedFileMenu.x }}><ul onMouseLeave={() => setAssociatedFileMenu(null)}><li onClick={() => { clientIpc.sendToServer(ClientToServerChannel.RequestCopyPath, { path: associatedFileMenu.path, relative: true }); setAssociatedFileMenu(null); }}>Copy Relative Path</li></ul></div>}
     </div>;
 };
 
