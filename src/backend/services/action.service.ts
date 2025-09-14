@@ -1,4 +1,4 @@
-// Updated on: C10 (New File)
+// Updated on: C12 (Add logic to ignore file for auto-add on undo)
 import * as vscode from 'vscode';
 import { Services } from './services';
 
@@ -50,6 +50,8 @@ export class ActionService {
         switch (action.type) {
             case 'move':
                 const { fromPath, toPath } = action.payload as MoveActionPayload;
+                // Temporarily ignore the original path so the auto-adder doesn't re-check it
+                Services.fileOperationService.addFileToIgnoreForAutoAdd(fromPath);
                 await vscode.workspace.fs.rename(vscode.Uri.file(toPath), vscode.Uri.file(fromPath));
                 break;
         }

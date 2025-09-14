@@ -1,5 +1,5 @@
 // src/backend/services/file-operation.service.ts
-// Updated on: C10 (Integrate ActionService)
+// Updated on: C12 (Add logic for ignoring files for auto-add)
 import * as vscode from "vscode";
 import * as path from "path";
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
@@ -281,8 +281,7 @@ export class FileOperationService {
         try {
             const lastSelection = await Services.selectionService.getLastSelection();
             if (!lastSelection.some(p => p.startsWith(oldPath))) {
-                this.filesToIgnoreForAutoAdd.add(newPath);
-                setTimeout(() => this.filesToIgnoreForAutoAdd.delete(newPath), 2000);
+                this.addFileToIgnoreForAutoAdd(newPath);
             }
 
             await vscode.workspace.fs.rename(vscode.Uri.file(oldPath), vscode.Uri.file(newPath));
@@ -331,7 +330,9 @@ export class FileOperationService {
     }
 
     public addFileToIgnoreForAutoAdd(filePath: string) {
+        Services.loggerService.log(`[Auto-Add] Temporarily ignoring: ${filePath}`);
         this.filesToIgnoreForAutoAdd.add(filePath);
+        setTimeout(() => this.removeFileToIgnoreForAutoAdd(filePath), 2000); // Auto-remove after 2 seconds
     }
 
     public hasFileToIgnoreForAutoAdd(filePath: string): boolean {

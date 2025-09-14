@@ -1,4 +1,4 @@
-// Resp 12-Updated on: C9 (Add dist to non-selectable patterns)
+// Resp 12-Updated on: C12 (Use FileOperationService for ignore list)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -98,7 +98,9 @@ export class FileTreeService {
                 onFileChange(uri, 'onDidCreate');
                 return;
             }
+
             if (Services.fileOperationService.hasFileToIgnoreForAutoAdd(normalizedPath)) {
+                Services.loggerService.log(`[Auto-Add] Ignoring create event for ${normalizedPath} as requested.`);
                 Services.fileOperationService.removeFileToIgnoreForAutoAdd(normalizedPath);
             } else if (Services.selectionService.getAutoAddState()) {
                 this.autoAddQueue.push(normalizedPath);

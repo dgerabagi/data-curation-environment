@@ -1,5 +1,5 @@
 // src/backend/services/git.service.ts
-// Updated on: C11 (Add git clean to restore)
+// Updated on: C12 (Refine Restore logic)
 import * as vscode from 'vscode';
 import { exec } from 'child_process';
 import * as path from 'path';
@@ -82,7 +82,7 @@ export class GitService {
                     if (selection === openReadme) {
                         const workspaceRoot = this.getWorkspaceRoot();
                         if (workspaceRoot) {
-                            const readmePath = path.join(workspaceRoot, 'src', 'Artifacts', 'README.md');
+                            const readmePath = path.join(workspaceRoot, 'src', 'Artifacts', 'DCE_README.md');
                             vscode.workspace.openTextDocument(vscode.Uri.file(readmePath)).then(doc => {
                                 vscode.window.showTextDocument(doc);
                             });
@@ -99,17 +99,29 @@ export class GitService {
         serverIpc.sendToClient(ServerToClientChannel.NotifyGitOperationResult, result);
     }
 
-    public async handleGitRestoreRequest(serverIpc: ServerPostMessageManager) {
+    public async handleGitRestoreRequest(filesToDelete: string[], serverIpc: ServerPostMessageManager) {
         Services.loggerService.log("Executing Git Restore.");
         let result = { success: false, message: 'An unknown error occurred.' };
+        const workspaceRoot = this.getWorkspaceRoot();
+        if (!workspaceRoot) {
+            result = { success: false, message: 'No workspace open.'};
+            serverIpc.sendToClient(ServerToClientChannel.NotifyGitOperationResult, result);
+            return;
+        }
+
         try {
+            // 1. Revert changes to all tracked files, excluding the history file
             const restoreCommand = `git restore -- . ":(exclude).vscode/dce_history.json"`;
             await this.execGitCommand(restoreCommand);
 
-            const cleanCommand = `git clean -fdx --exclude=.vscode/dce_history.json`;
-            await this.execGitCommand(cleanCommand);
+            // 2. Surgically delete only the newly created files from the accepted response
+            for (const file of filesToDelete) {
+                const absolutePath = path.resolve(workspaceRoot, file);
+                Services.loggerService.log(`[Restore] Deleting newly created file: ${absolutePath}`);
+                await vscode.workspace.fs.delete(vscode.Uri.file(absolutePath), { recursive: true });
+            }
 
-            result = { success: true, message: 'Successfully restored workspace to baseline. Modified and new files have been reverted.' };
+            result = { success: true, message: 'Successfully restored workspace to baseline.' };
         } catch (error: any) {
             result = { success: false, message: `Git Restore failed: ${error.message}` };
         }

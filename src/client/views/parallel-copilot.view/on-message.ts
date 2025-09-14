@@ -96,8 +96,8 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         await gitService.handleGitBaselineRequest(data.commitMessage, serverIpc);
     });
 
-    serverIpc.onClientMessage(ClientToServerChannel.RequestGitRestore, async () => {
-        await gitService.handleGitRestoreRequest(serverIpc);
+    serverIpc.onClientMessage(ClientToServerChannel.RequestGitRestore, async (data) => {
+        await gitService.handleGitRestoreRequest(data.filesToDelete, serverIpc);
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestGitStatus, () => {
