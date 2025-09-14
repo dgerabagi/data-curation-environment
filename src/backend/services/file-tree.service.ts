@@ -1,4 +1,4 @@
-// Updated on: C4 (Add explicit history file exclusion)
+// Resp 12-Updated on: C6 (Add tsconfig.tsbuildinfo and history exports to non-selectable)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -15,7 +15,7 @@ const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
 const EXCLUSION_PATTERNS = ['dce_cache', 'out', 'dist']; 
-const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/.git/', '/venv/', '/.venv/', 'flattened_repo.md', 'prompt.md', 'package-lock.json'];
+const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/.git/', '/venv/', '/.venv/', 'flattened_repo.md', 'prompt.md', 'package-lock.json', 'tsconfig.tsbuildinfo', 'dce_history_export_'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
@@ -136,11 +136,17 @@ export class FileTreeService {
             if (isPdf) return { ...baseStats, tokenCount: Services.contentExtractionService.getVirtualPdfContent(filePath)?.tokenCount || 0, isSelectable: true };
             if (isExcel) return { ...baseStats, tokenCount: Services.contentExtractionService.getVirtualExcelContent(filePath)?.tokenCount || 0, isSelectable: true };
             if (isWordDoc) return { ...baseStats, tokenCount: Services.contentExtractionService.getVirtualWordContent(filePath)?.tokenCount || 0, isSelectable: true };
-            if (stats.size > 5_000_000) return { ...baseStats, tokenCount: 0, isSelectable: true };
+            if (stats.size > 5_000_000) return { ...baseStats, tokenCount: 0, isSelectable: true }; // Fallback for large files
             const content = await fs.readFile(filePath, 'utf-8');
             return { ...baseStats, tokenCount: Math.ceil(content.length / 4), isSelectable: true };
         } catch (error: any) {
-            return { tokenCount: 0, sizeInBytes: 0, isImage: false, extension, isPdf: false, isExcel: false, isWordDoc: false, fileCount: 1, error: error.message, isSelectable: true };
+            // C6 Fix: If reading fails, still return size if possible
+            try {
+                const stats = await fs.stat(filePath);
+                return { tokenCount: 0, sizeInBytes: stats.size, isImage: false, extension, isPdf: false, isExcel: false, isWordDoc: false, fileCount: 1, error: error.message, isSelectable: true };
+            } catch (statError) {
+                return { tokenCount: 0, sizeInBytes: 0, isImage: false, extension, isPdf: false, isExcel: false, isWordDoc: false, fileCount: 1, error: error.message, isSelectable: true };
+            }
         }
     }
 
@@ -195,8 +201,10 @@ export class FileTreeService {
     }
     
     private _isSelectable(filePath: string, fileType: vscode.FileType): boolean {
-        const normalizedPathWithSlash = normalizePath(filePath) + (fileType === vscode.FileType.Directory ? '/' : '');
-        return !NON_SELECTABLE_PATTERNS.some(p => normalizedPathWithSlash.includes(p));
+        const normalizedPath = normalizePath(filePath);
+        const name = path.basename(normalizedPath);
+        const pathWithSlash = normalizedPath + (fileType === vscode.FileType.Directory ? '/' : '');
+        return !NON_SELECTABLE_PATTERNS.some(p => pathWithSlash.includes(p) || name.startsWith(p));
     }
 
     private async _traverseDirectory(dirUri: vscode.Uri): Promise<FileNode[]> {

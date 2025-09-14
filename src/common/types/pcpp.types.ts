@@ -1,5 +1,5 @@
 // src/common/types/pcpp.types.ts
-// Updated on: C186 (Add pathOverrides to PcppCycle)
+// Updated on: C6 (Add curatorActivity to ParsedResponse)
 export interface PcppResponse {
     content: string;
 }
@@ -37,6 +37,7 @@ export interface ParsedFile {
 export interface ParsedResponse {
     summary: string;
     courseOfAction: string;
+    curatorActivity?: string;
     filesUpdated: string[];
     files: ParsedFile[];
     totalTokens: number;

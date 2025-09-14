@@ -1,4 +1,4 @@
-// Updated on: C5 (Add NotifySaveComplete channel)
+// Updated on: C6 (Add NotifySaveComplete channel)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";

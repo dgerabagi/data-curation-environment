@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/ParsedView.tsx
-// Updated on: C179 (Apply workflow highlighting to Baseline and Accept buttons)
+// Updated on: C6 (Add Curator Activity section, color gradient, and context menu)
 import * as React from 'react';
 import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscSave, VscCheckAll, VscClearAll, VscClippy, VscChevronDown, VscSourceControl, VscDiscard } from 'react-icons/vsc';
 import ReactMarkdown from 'react-markdown';
@@ -8,6 +8,8 @@ import { ParsedResponse } from '@/common/types/pcpp.types';
 import { ComparisonMetrics } from '@/common/ipc/channels.type';
 import { formatLargeNumber } from '@/common/utils/formatting';
 import CodeViewer from './CodeViewer';
+import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
+import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 
 const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; className?: string; }> = ({ title, children, isCollapsed, onToggle, className }) => (
     <div className={`collapsible-section-inner ${className || ''}`}>
@@ -18,6 +20,11 @@ const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; i
         {!isCollapsed && <div className="collapsible-content-inner">{children}</div>}
     </div>
 );
+
+const getSimilarityColor = (similarity: number): string => {
+    const hue = (similarity * 120).toString(10); // 0 (red) -> 120 (green)
+    return `hsl(${hue}, 70%, 50%, 0.15)`;
+};
 
 interface ParsedViewProps {
     parsedContent: ParsedResponse;
@@ -51,6 +58,22 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
     const [isAssociatedFilesCollapsed, setAssociatedFilesCollapsed] = React.useState(false);
     const [isThoughtsCollapsed, setThoughtsCollapsed] = React.useState(false);
     const [isActionCollapsed, setActionCollapsed] = React.useState(false);
+    const [isCuratorActivityCollapsed, setCuratorActivityCollapsed] = React.useState(false);
+    const [contextMenu, setContextMenu] = React.useState<{ x: number, y: number, path: string } | null>(null);
+    const clientIpc = ClientPostMessageManager.getInstance();
+
+    const handleContextMenu = (event: React.MouseEvent, path: string) => {
+        event.preventDefault();
+        event.stopPropagation();
+        setContextMenu({ x: event.clientX, y: event.clientY, path });
+    };
+
+    const handleCopyPath = () => {
+        if (contextMenu) {
+            clientIpc.sendToServer(ClientToServerChannel.RequestCopyPath, { path: contextMenu.path, relative: true });
+            setContextMenu(null);
+        }
+    };
 
     return (
         <div className="parsed-view-grid">
@@ -59,7 +82,9 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
                     <ul className="associated-files-list">{props.parsedContent.filesUpdated.map(file => {
                         const fileExists = props.fileExistenceMap.get(file);
                         const hasOverride = props.pathOverrides.has(file);
-                        return <li key={file} className={props.selectedFilePath === file ? 'selected' : ''} onClick={() => props.onSelectForViewing(file)} title={file}>
+                        const metrics = props.comparisonMetrics;
+                        const bgColor = (metrics && fileExists) ? getSimilarityColor(metrics.similarity) : 'transparent';
+                        return <li key={file} className={props.selectedFilePath === file ? 'selected' : ''} onClick={() => props.onSelectForViewing(file)} onContextMenu={(e) => handleContextMenu(e, file)} title={file} style={{ backgroundColor: bgColor }}>
                             <div className="file-row">
                                 <input type="checkbox" checked={props.selectedFilesForReplacement.has(`${props.activeTab}:::${file}`)} onChange={() => props.onFileSelectionToggle(file)} onClick={e => e.stopPropagation()} />
                                 {fileExists ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
@@ -73,6 +98,11 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
                 </CollapsibleSection>
                 <CollapsibleSection title="Summary" isCollapsed={isThoughtsCollapsed} onToggle={() => setThoughtsCollapsed(p => !p)}><ReactMarkdown>{props.parsedContent.summary}</ReactMarkdown></CollapsibleSection>
                 <CollapsibleSection title="Course of Action" isCollapsed={isActionCollapsed} onToggle={() => setActionCollapsed(p => !p)}><ReactMarkdown>{props.parsedContent.courseOfAction}</ReactMarkdown></CollapsibleSection>
+                {props.parsedContent.curatorActivity && (
+                    <CollapsibleSection title="Curator Activity" isCollapsed={isCuratorActivityCollapsed} onToggle={() => setCuratorActivityCollapsed(p => !p)}>
+                        <ReactMarkdown>{props.parsedContent.curatorActivity}</ReactMarkdown>
+                    </CollapsibleSection>
+                )}
             </div>
             <div className="resizer" />
             <div className="parsed-view-right">
@@ -88,6 +118,16 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
                 </div>
                 <CodeViewer htmlContent={props.viewableContent} />
             </div>
+            {contextMenu && (
+                <>
+                    <div className="context-menu-overlay" onClick={() => setContextMenu(null)}></div>
+                    <div className="context-menu" style={{ top: contextMenu.y, left: contextMenu.x }}>
+                        <ul>
+                            <li onClick={handleCopyPath}>Copy Relative Path</li>
+                        </ul>
+                    </div>
+                </>
+            )}
         </div>
     );
 };

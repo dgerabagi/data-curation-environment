@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/ResponsePane.tsx
-// Updated on: C179 (Pass workflowStep to ParsedView)
+// Updated on: C6 (Add onPaste handler)
 import * as React from 'react';
 import { TabState } from '../view';
 import ParsedView from './ParsedView';
@@ -10,6 +10,7 @@ interface ResponsePaneProps {
     activeTabData: TabState | undefined;
     onRawContentChange: (content: string) => void;
     onContextKeyDown: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
+    onPaste: (e: React.ClipboardEvent) => void;
     // Props for ParsedView
     fileExistenceMap: Map<string, boolean>;
     selectedFilePath: string | null;
@@ -46,6 +47,7 @@ const ResponsePane: React.FC<ResponsePaneProps> = (props) => {
                 value={props.activeTabData?.rawContent || ''}
                 onChange={(e) => props.onRawContentChange(e.target.value)}
                 onKeyDown={props.onContextKeyDown}
+                onPaste={props.onPaste}
             />
         );
     }
