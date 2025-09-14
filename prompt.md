@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 6 - laundry list of feedback/observations to organize/plan solutions for
+Current Cycle 7 - working through A83 checklist
+Cycle 6 - laundry list of feedback/observations to organize/plan solutions for
 Cycle 5 - test theory
 Cycle 4 - same shit
 Cycle 3 - still data loss
@@ -199,7 +200,7 @@ No project scope defined.
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C183 (Add A78 for packaging and flashing bug)
+# Updated on: C6 (Add A80, A81, A82, A83)
 
 ## 1. Purpose
 
@@ -553,6 +554,22 @@ No project scope defined.
 - **Description:** Outlines the plan to fix the cycle data loss bug by implementing a UI-driven autosave status indicator and locking navigation controls while there are unsaved changes.
 - **Tags:** bug fix, data integrity, race condition, autosave, ui, ux
 
+### A80. DCE - Settings Panel Plan
+- **Description:** A plan for a new settings panel, accessible via a help icon, to house changelogs, settings, and other informational content.
+- **Tags:** feature plan, settings, ui, ux, changelog
+
+### A81. DCE - Curator Activity Plan
+- **Description:** A plan to introduce a new `<curator_activity>` section to the AI response format, allowing for explicit instructions to the human curator.
+- **Tags:** documentation, process, interaction schema, workflow
+
+### A82. DCE - Advanced Exclusion Management Plan
+- **Description:** A plan for a feature allowing users to right-click files or folders and add them to a persistent exclusion list, preventing them from being automatically selected or flattened.
+- **Tags:** feature plan, context menu, exclusion, ignore, ux
+
+### A83. DCE - Universal Task Checklist for Cycle 6
+- **Description:** A structured checklist for organizing the development tasks, feedback, and bugs from the "laundry list" provided in Cycle 6.
+- **Tags:** process, checklist, task management, planning, workflow
+
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
 - **Tags:** history, log, development process, cycles
@@ -640,6 +657,38 @@ No project scope defined.
 
 <M6. Cycles>
 
+<Cycle 7>
+<Cycle Context>
+okay i accepted the most holistic response. referencing A83, this response seems to have accomplished task T-1. i can see the curatory activity section and i can see the duplicate check is working correctly.
+
+for the the paste auto-tab, it needs to be a bit more robust. make it only under this condition: if the user is pasting more than 1,000 tokens, and there is currently nothing in the response tab. that way, if a user pastes a short string on already-existing context because they're editing something, they won't be tabbed away from their work.
+
+other than that great job, lets move on to begin working on T-2.
+</Cycle Context>
+<Previous Cycle 6 Summary of Actions>
+Could not parse summary.
+
+1.  **Documentation First (Codifying the Definitive Fix):**
+    *   I will create a new artifact, **`A79. DCE - Autosave and Navigation Locking Plan.md`**, to formally document your proposed solution. This plan will detail the UI/UX for the save status indicator and the logic for locking navigation controls, serving as our new source of truth for this feature.
+    *   I will significantly update the case study for "PCPP Context/Title Data Loss" in **`A11. DCE - Regression Case Studies.md`**. The root cause analysis will be expanded, and the new "Navigation Locking" pattern will be codified as the definitive solution to prevent future regressions.
+    *   I will update **`A0. DCE Master Artifact List.md`** to include the new `A79` artifact.
+
+2.  **Implement IPC Acknowledgment for Saves:**
+    *   To make the UI aware of when a save is complete, the backend must notify the frontend. I will add a new `ServerToClientChannel.NotifySaveComplete` channel to **`channels.enum.ts`** and **`channels.type.ts`**.
+    *   In **`history.service.ts`**, the `saveCycleData` method will now, after successfully writing to `dce_history.json`, send this new acknowledgment message back to the client.
+
+3.  **Implement Frontend State Management and UI (`view.tsx`):**
+    *   I will introduce a new state variable, `const [saveStatus, setSaveStatus] = useState<'saved' | 'saving' | 'unsaved'>('saved');`.
+    *   All `onChange` handlers for persisted data (cycle title, contexts, response tabs) will now immediately call `setSaveStatus('unsaved')`.
+    *   The debounced `saveCurrentCycleState` function will be refactored. When it executes, it will first call `setSaveStatus('saving')` before sending the data to the backend.
+    *   A new message handler will listen for `NotifySaveComplete`. Upon receiving this message, it will call `setSaveStatus('saved')`.
+
+4.  **Implement UI Locking and Status Indicator:**
+    *   **`CycleNavigator.tsx`:** This component will now receive the `saveStatus` as a prop. The `disabled` attribute of the "Previous" (`<`), "Next" (`>`), and "New" (`+`) cycle buttons will be set to `saveStatus !== 'saved'`, preventing navigation while changes are pending.
+    *   **`view.tsx` & `view.scss`:** I will add a new UI element next to the cycle navigator that visually represents the `saveStatus`. This will include unique icons and tooltips for "Unsaved changes," "Saving...," and "Saved," providing clear feedback to the user.
+</Previous Cycle 6 Summary of Actions>
+</Cycle 7>
+
 <Cycle 6>
 <Cycle Context>
 okay for the laundry list below, i have been beta testing this 0.1.0 version of the extension by creating a new project. I basically made a multiplayer, gamified "battle school/JANE inspired" version of the Persistent Cyber Training Environment that ive called the Virtual Cyber Proving Ground. in doing so, i was able to surface many key sticking points with our 0.1.0 that i have addressed in the laundry list below. in order to adequately address each and every point, given that on the surface i cannot tell which issues will be easy "low hanging fruits" solved with minimal effort/cycles, and which of these issues may span across multiple files, may require some pre-planning artifacts generated, and so on requiring a higher effort/cycle requirement. we will plan out and list each issue described in an organized manner, the key points of organization are which files are involved with the change as token output is our main constraint, so we cant solve 120k tokens worth of problems no matter how basic the problems are, we simply are limited by 65k output. generally you quit your responses long before reaching that primary constraint, which is frustrating because we have much mroe work to do, and so if you have more time to build more of the project, or plan more of it out, i do not see why you would do it, as i can accept/critique/debate or ultimate discard any additional work you've done. but i digress, once we have that list of organized action items we can review and make sure the approaches are sound. and then act on them. before creating a new artifact do be sure that we do not have a pre-existing artifact close enough to the topic that we dont need an entirely new artifact but could add a section in an existing one. otherwise new artifact is np.
@@ -675,91 +724,6 @@ okay for the laundry list below, i have been beta testing this 0.1.0 version of 
 14. we are having consistent issues with the closing tag for the file paths. the AI continually produces it as </file>, or </file_path>, rather than </file_artifact>. 99% this is due to my poor instruction on how to approach this parsing. perhaps the leading tag should match? maybe thats causing some misalignment? you would know better, you're creating the prompt that gets sent to you, so... so i guess, if i have to provide guidance, id rather let you iron it out, but instead of `<file_artifact="src/backend/services/highlighting.service.ts">code</file>`, we do `<file_artifact="src/backend/services/highlighting.service.ts">code</file_artifact>` to avoid any ambiguity?
 </laundry list>
 </Cycle Context>
-<Ephemeral Context>
-<Artifact 67>
-# Artifact A67: VCPG - Project State & Next Steps Questionnaire
-
-# Date Created: C42
-# Author: AI Model
-
-- **Key/Value for A0:**
-- **Description:** A structured questionnaire for the project curator to fill out, providing the AI with clear direction, priorities, and context for the upcoming development cycle.
-- **Tags:** guide, process, planning, feedback, project management
-
-## 1. Purpose
-
-This document establishes a formal feedback and planning loop between the human curator and the AI development partner. The goal is to create a structured way for the AI to "ask" for the most critical information needed to plan an effective and aligned development cycle.
-
-By providing answers to these questions in the `Cycle Context`, the curator can ensure the AI focuses on the highest-priority tasks, addresses the most painful bugs, and understands any shifts in project direction.
-
-## 2. The Questionnaire
-
-*(Please copy the following section into the `Cycle Context` for the next cycle and provide your answers.)*
-
----
-
-### **VCPG Cycle Planning Questionnaire**
-
-**1. Primary Objective:**
-   - What is the single most important feature, bug, or piece of documentation to complete in this next cycle?
-
-**2. Regressions & Bugs:**
-   - Are there any new bugs that have appeared?
-   - Has any previously working functionality stopped working correctly? Please describe it.
-
-**3. User Experience (UX) Feedback:**
-   - What is the most confusing or frustrating part of the user interface right now?
-   - Is the current layout working as you envisioned? What would you change?
-
-**4. Strategic Direction & New Ideas:**
-   - Have any new ideas for features or changes to existing ones emerged?
-   - Has the overall goal or priority of the project shifted?
-
-**5. Missing Information:**
-   - Is there any part of the project (code, documentation, process) that feels unclear or is missing information that would help you make decisions?
-
----
-</Artifact 67>
-<possible structured json format draft>
-{
-  "summary": "I have analyzed the feedback from Cycle 73, which includes a critical simulator crash, several high-value UI/UX improvements, and gameplay design suggestions. My course of action is to first fix the critical crash to restore the scenario's functionality. Then, I will implement all the requested UI enhancements for the UAV and Base status windows. Finally, I will update our documentation to incorporate the more complex hijack countermeasure you've designed.\n\nThe simulator crash is caused by a `TypeError` in `uav_simulator.py`, where `random.choice()` is called without any options. I will fix this by providing a list of possible jamming frequencies for it to select from.\n\nFor the UI, I will overhaul the UAV tracking window to create a cleaner, more organized layout and remove the non-thematic data fields. I will also refactor the Base Status window into a single, combined view that displays the health of both friendly and enemy bases simultaneously, making better use of the screen space as you suggested.\n\nI will then codify your excellent suggestion for a more complex hijack countermeasure by updating the relevant documentation (`A77` and `A62`). The numbered trainee feature is a significant architectural change outlined in `A73` and will be prioritized for a subsequent cycle.",
-  "course_of_action": [
-    {
-      "step": 1,
-      "description": "Fix Simulator Crash: In `infrastructure/scenarios/s003-ghost-fleet/configuration/uav_simulator.py`, I will define a list of possible jamming frequencies and modify the `update_adversary_events` function to use `random.choice()` correctly, resolving the fatal `TypeError`."
-    },
-    {
-      "step": 2,
-      "description": "Improve Thematic Naming: In the same `uav_simulator.py` file, I will rename the lane identifiers from `top`, `mid`, `bot` to the more thematically appropriate `north`, `central`, and `south`."
-    },
-    {
-      "step": 3,
-      "description": "Overhaul UAV Tracking Window: In `apps/client/src/features/scenario/ite/UavTrackingWindow.tsx`, I will refactor the display to present the data in a cleaner, more readable key/value format and filter out the unnecessary, non-thematic fields (`spawn_protection_until`, `engagement_timer`, `event_timer`, etc.)."
-    },
-    {
-      "step": 4,
-      "description": "Combine Base Status Windows:\nI will refactor `apps/client/src/features/scenario/ite/BaseStatusWindow.tsx` to remove the `baseId` prop and instead display the status of *both* the friendly and enemy bases from the `telemetryData` prop.\nIn `apps/client/src/features/scenario/ite/TacticalMap.tsx`, I will update the `onClick` handlers for the bases to open this single, unified status window.\nIn `apps/client/src/store/useWindowManagerStore.ts`, I will ensure the `BASE_STATUS` window type is treated as a singleton, so only one instance can be open."
-    },
-    {
-      "step": 5,
-      "description": "Update Hijack Countermeasure Documentation:\nI will update `src/Artifacts/A77. VCPG - Scenario Countermeasures Guide.md` to replace the simple hijack countermeasure with the new, more complex multi-step process (e.g., local key generation, secure transmission, and rotation).\nI will update `src/Artifacts/A62. VCPG - S003 Ghost Fleet - Narrative and Event Flow.md` to align with this more sophisticated user workflow."
-    },
-    {
-      "step": 6,
-      "description": "Review Intel Chip Creation: I will re-verify the existing implementation in `App.tsx` and `ContextMenu.tsx` that enables intel chip creation via a left-click on selected text."
-    }
-  ],
-  "files_updated": [
-    "infrastructure/scenarios/s003-ghost-fleet/configuration/uav_simulator.py",
-    "apps/client/src/features/scenario/ite/UavTrackingWindow.tsx",
-    "apps/client/src/features/scenario/ite/BaseStatusWindow.tsx",
-    "apps/client/src/features/scenario/ite/TacticalMap.tsx",
-    "apps/client/src/store/useWindowManagerStore.ts",
-    "src/Artifacts/A77. VCPG - Scenario Countermeasures Guide.md"
-  ]
-}
-</possible structured json format draft>
-</Ephemeral Context>
 <Previous Cycle 5 Summary of Actions>
 I have analyzed the critical data loss bug, the useless "Log State" output, and the related FTV flashing issue. Your frustration is completely justified. The current state management logic has a severe race condition that corrupts the cycle history when navigating, which is an unacceptable failure. My previous attempts to fix this were insufficient.
 
@@ -1867,17 +1831,17 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-14T15:05:53.537Z
+  Date Generated: 2025-09-14T15:58:26.841Z
   ---
-  Total Files: 170
-  Approx. Tokens: 441289
+  Total Files: 178
+  Approx. Tokens: 449123
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (7621 tokens)
-4. src\Artifacts\A0. DCE Master Artifact List.md (7465 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (7759 tokens)
+4. src\Artifacts\A0. DCE Master Artifact List.md (7728 tokens)
 5. src\backend\services\prompt.service.ts (5042 tokens)
 6. src\client\views\parallel-copilot.view\view.scss (4610 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4429 tokens)
@@ -1886,7 +1850,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 10. src\client\views\context-chooser.view\view.scss (3708 tokens)
 
 <!-- Full File List -->
-1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 440 - Chars: 29859 - Tokens: 7465
+1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 456 - Chars: 30910 - Tokens: 7728
 2. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 3. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
 4. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
@@ -1980,7 +1944,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 92. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 45 - Chars: 2899 - Tokens: 725
 93. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 40 - Chars: 4699 - Tokens: 1175
 94. src\Artifacts\A42. DCE - Phase 2 - Initial Scaffolding Deployment Script.md - Lines: 246 - Chars: 8264 - Tokens: 2066
-95. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 35 - Chars: 9444 - Tokens: 2361
+95. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 57 - Chars: 9891 - Tokens: 2473
 96. src\Artifacts\A58. DCE - WinMerge Source Code Analysis.md - Lines: 56 - Chars: 5322 - Tokens: 1331
 97. src\Artifacts\A62. DCE - Cycle 157 - Task Tracker.md - Lines: 31 - Chars: 2710 - Tokens: 678
 98. src\Artifacts\A63. DCE - Cycle 158 - Task Tracker.md - Lines: 23 - Chars: 1760 - Tokens: 440
@@ -1992,7 +1956,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 104. src\backend\services\action.service.ts - Lines: 60 - Chars: 1831 - Tokens: 458
 105. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
 106. src\backend\services\file-operation.service.ts - Lines: 344 - Chars: 16380 - Tokens: 4095
-107. src\backend\services\file-tree.service.ts - Lines: 244 - Chars: 13078 - Tokens: 3270
+107. src\backend\services\file-tree.service.ts - Lines: 252 - Chars: 13683 - Tokens: 3421
 108. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12609 - Tokens: 3153
 109. src\backend\services\git.service.ts - Lines: 114 - Chars: 5522 - Tokens: 1381
 110. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
@@ -2012,7 +1976,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 124. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
 125. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13123 - Tokens: 3281
 126. src\client\utils\logger.ts - Lines: 19 - Chars: 744 - Tokens: 186
-127. src\client\utils\response-parser.ts - Lines: 82 - Chars: 3149 - Tokens: 788
+127. src\client\utils\response-parser.ts - Lines: 73 - Chars: 3289 - Tokens: 823
 128. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 129. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
 130. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
@@ -2021,15 +1985,15 @@ This file-centric approach helps in planning and prioritizing work, especially i
 133. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 55 - Chars: 1970 - Tokens: 493
 134. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 97 - Chars: 4000 - Tokens: 1000
 135. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
-136. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 95 - Chars: 7630 - Tokens: 1908
-137. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 84 - Chars: 3486 - Tokens: 872
+136. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 135 - Chars: 9810 - Tokens: 2453
+137. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 86 - Chars: 3562 - Tokens: 891
 138. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
 139. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 140. src\client\views\parallel-copilot.view\on-message.ts - Lines: 114 - Chars: 5326 - Tokens: 1332
 141. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 92 - Chars: 4340 - Tokens: 1085
 142. src\client\views\parallel-copilot.view\view.scss - Lines: 823 - Chars: 18440 - Tokens: 4610
 143. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-144. src\client\views\parallel-copilot.view\view.tsx - Lines: 202 - Chars: 30481 - Tokens: 7621
+144. src\client\views\parallel-copilot.view\view.tsx - Lines: 217 - Chars: 31036 - Tokens: 7759
 145. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
 146. src\common\ipc\channels.enum.ts - Lines: 92 - Chars: 4981 - Tokens: 1246
 147. src\common\ipc\channels.type.ts - Lines: 92 - Chars: 6984 - Tokens: 1746
@@ -2037,7 +2001,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 149. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 150. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
 151. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
-152. src\common\types\pcpp.types.ts - Lines: 43 - Chars: 1035 - Tokens: 259
+152. src\common\types\pcpp.types.ts - Lines: 44 - Chars: 1070 - Tokens: 268
 153. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
 154. src\common\utils\formatting.ts - Lines: 121 - Chars: 4016 - Tokens: 1004
 155. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
@@ -2056,12 +2020,20 @@ This file-centric approach helps in planning and prioritizing work, especially i
 168. src\Artifacts\A77. DCE - Whitepaper Generation Plan.md - Lines: 74 - Chars: 8731 - Tokens: 2183
 169. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
 170. src\Artifacts\A200. Cycle Log.md - Lines: 8971 - Chars: 901614 - Tokens: 225404
+171. src\Artifacts\A80. DCE - Settings Panel Plan.md - Lines: 35 - Chars: 2931 - Tokens: 733
+172. src\Artifacts\A81. DCE - Curator Activity Plan.md - Lines: 34 - Chars: 2346 - Tokens: 587
+173. src\Artifacts\A82. DCE - Advanced Exclusion Management Plan.md - Lines: 40 - Chars: 3010 - Tokens: 753
+174. src\Artifacts\A83. DCE - Universal Task Checklist for Cycle 6.md - Lines: 93 - Chars: 4829 - Tokens: 1208
+175. dist\Artifacts\A80. DCE - Settings Panel Plan.md - Lines: 35 - Chars: 2931 - Tokens: 733
+176. dist\Artifacts\A81. DCE - Curator Activity Plan.md - Lines: 34 - Chars: 2346 - Tokens: 587
+177. dist\Artifacts\A82. DCE - Advanced Exclusion Management Plan.md - Lines: 40 - Chars: 3010 - Tokens: 753
+178. dist\Artifacts\A83. DCE - Universal Task Checklist for Cycle 6.md - Lines: 93 - Chars: 4829 - Tokens: 1208
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C183 (Add A78 for packaging and flashing bug)
+# Updated on: C6 (Add A80, A81, A82, A83)
 
 ## 1. Purpose
 
@@ -2414,6 +2386,22 @@ This file-centric approach helps in planning and prioritizing work, especially i
 ### A79. DCE - Autosave and Navigation Locking Plan
 - **Description:** Outlines the plan to fix the cycle data loss bug by implementing a UI-driven autosave status indicator and locking navigation controls while there are unsaved changes.
 - **Tags:** bug fix, data integrity, race condition, autosave, ui, ux
+
+### A80. DCE - Settings Panel Plan
+- **Description:** A plan for a new settings panel, accessible via a help icon, to house changelogs, settings, and other informational content.
+- **Tags:** feature plan, settings, ui, ux, changelog
+
+### A81. DCE - Curator Activity Plan
+- **Description:** A plan to introduce a new `<curator_activity>` section to the AI response format, allowing for explicit instructions to the human curator.
+- **Tags:** documentation, process, interaction schema, workflow
+
+### A82. DCE - Advanced Exclusion Management Plan
+- **Description:** A plan for a feature allowing users to right-click files or folders and add them to a persistent exclusion list, preventing them from being automatically selected or flattened.
+- **Tags:** feature plan, context menu, exclusion, ignore, ux
+
+### A83. DCE - Universal Task Checklist for Cycle 6
+- **Description:** A structured checklist for organizing the development tasks, feedback, and bugs from the "laundry list" provided in Cycle 6.
+- **Tags:** process, checklist, task management, planning, workflow
 
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
@@ -8258,7 +8246,7 @@ deployScaffold();
 # Artifact A52.2: DCE - Interaction Schema Source
 # Date Created: C156
 # Author: AI Model & Curator
-# Updated on: C186 (Change file closing tag to </file_artifact>)
+# Updated on: C6 (Clarify closing tag and add curator activity section)
 
 - **Key/Value for A0:**
 - **Description:** The canonical source text for the M3. Interaction Schema, which is injected into all generated prompts.
@@ -8266,30 +8254,52 @@ deployScaffold();
 
 ## Interaction Schema Text
 
-1.  Artifacts are complete, individual texts enclosed in `<xmltags>`. To ensure consistent parsing by the DCE extension, all file artifacts **must** be enclosed in `<file path="path/to/file.ts">...</file_artifact>` tags. The path must be relative to the workspace root. The closing tag must be a simple `</file_artifact>`. Do not use the file path in the closing tag.
+1.  Artifacts are complete, individual texts enclosed in `<xmltags>`. To ensure consistent parsing by the DCE extension, all file artifacts **must** be enclosed in `<file path="path/to/file.ts">...</file_artifact>` tags. The path must be relative to the workspace root. **The closing tag must be exactly `</file_artifact>`.** Do not use the file path in the closing tag (e.g., `</file path="...">` is incorrect). Do not write the closing tag as `</file>` or `</file_path>`. Only `</file_artifact>` will parse successfully.
+
 2.  Our Document Artifacts serve as our `Source of Truth` throughout multiple cycles. As such, over time, as issues occur, or code repeatedly regresses in the same way, seek to align our `Source of Truth` such that the Root Cause of such occurances is codified so that it can be avoided on subsequent cycles visits to those Code artifacts.
+
 3.  Please output entire Document or Code artifacts. Do not worry about Token length. If your length continues for too long, and you reach the 600 second timeout, I will simply incorporate the work you did complete, and we can simply continue from where you left off. Better to have half of a solution to get started with, than not to have it. **Preference is for larger, more complete updates over smaller, incremental ones to align with the human curator's parallel processing workflow.** The human curator often sends the same prompt to multiple AI instances simultaneously and selects the most comprehensive response as the primary base for the next cycle, using other responses as supplementary information. Providing more complete updates increases the likelihood of a response being selected as the primary base.
+
 4.  Do not output artifacts that do not require updates in this cycle. (Eg. Do not do this: // Updated on: Cycle 1040 (No functional changes, only cycle header))
+
 5.  **Critical: `flattened_repo_v2.txt` contains all project files. Output updated *individual* files that are part of it (like `<src/state/coreStore.ts>...`). However, do **NOT** output the surrounding Artifact container tags (`<flattened_repo_v2.txt>...</flattened_repo_v2.txt>`) or any auto-generated metadata sections within it (like the Total Files summary, Top 10 list, or the `<files list>` section) which are created by the `flatten.js` script.**
 5.1. `flattened_repo_v2.txt` is a copy of the codebase, generated by a script; assume its an accurate representation of the existing codebase, but not necessarily a 'source of truth' like we treat our documents as, our codebase is a living artifact, documents, while we can update them, should be considered less transient.
 5.2. **`.local` File Convention:** To manage token count, some large data files (e.g., `researchNodes.ts`) may be represented by a truncated `.local.ts` version in the context. This version contains the essential structure and a few examples. If the full content of a file is required for a task (e.g., a comprehensive data refactor or fixing a bug related to a specific entry), explicitly state this need in your summary of actions and request that the curator swap the `.local.ts` file with the full `.ts` version in the `files_list.txt` for the subsequent cycle.
+
 6.  remember to output complete artifacts without placeholders, im taking your output, putting it in winmerge, and confirming we arent losing data in the update. when you provide placeholders, my cursory review turns into a meticulous file parsing, taking me from what is 5 seconds per artifact to upwards of 5 minutes, only to realize that the output is actually un-parseable, due to the nature of relativity, as the theory of relativity also applies to code. if you give me a code snippet, and do not give me the code surrounding that snippet, i do not know where that code should go. by providing the complete file, on the other hand, i can put it in a diff, see easily what was altered, and if anything was accidentally omitted or lost, i can be sure that it's retained.
+
 7.  **Update documentation before writing code.** document artifacts are like our project readme files, our source of truth. they are our blueprints. they guide the code we write. when we realize we need to alter our approach or invent new game mechanics, we update the source of truth first, cause english is easy and flexible, then we codify that.
+
 8.  this query is part of a larger software engineering project
+
 9.  After you complete delivery on a code artifact, review it to make sure you did not miss any intermediary files. for instance, if we have a DevelopmentSystem.ts, using the componentData.ts, which is displaying on the ComponentProductionTab.tsx. But then theres also still a DevPanel.tsx file that is in-between that *could*, but shouldnt, get overlooked.
+
 10. If you are deciding where to put a particular piece of code or function, and due to its nature, there are one or more candidate files that it could be placed in, choose the smaller file (in tokens).
+
 11. Begin your response with a course of action and end with a review of your work, surface any self corrections in the summary of changes for the subsequent cycle.
+
 12. do not underestimate how much you can accomplish in a given cycle; you'd only accomplish handicapping yourself. (Eg. you've authored this whole thing with just my guidance. good job, keep it up.)
+
 13. Not as relevant for this project: **Log State Button:** The 'Log State' button in the `DevInfoOverlay` is a dynamic debugging tool. Modify the `triggerDebugLogs` action in `uiStore.ts` to output specific state information relevant to the current bug being investigated. **See A85 (Logging Guide) for usage details.**
+
 14. Not as relevant for this project: **Regression Case Studies:** Use Artifact A106 to document persistent or complex bugs and their resolutions. Add entries *after* a fix is confirmed to codify the RCA and solution, preventing future regressions.
+
 15. Include in your cycle summary, a short list of files you've updated. This makes it easy for my reviews.
+
 16. if you seem to have spare time in a cycle, see if you can spot any particular file with excessive levels of comments or logging that seems extensive and for troubleshooting an error that has since been resolved, see to it to clean those files but preserve their functionalities. im just looking to shave off excess tokens wherever possible in the master_content.txt file.
+
 17. if you see `(No change from C850)` such language, it's data loss. there was supposed to be actual language behind that placeholder, but in one iteration (C850, in this case) you had provided a placeholder, and i 'missed it' and did not capture the initial information. you either need to deliver the placeholder in such a way as i can easily press the left arrow instead of the rigth arrow in winmerge to not accept that part, but to also not have winmerge confuse it with the rest, otherwise i must manually parse the information. when the process is a single keystroke, i can manage it quickly enough. when we remove that ability because you provided me data in a format that has placeholders AND the placeholders do not parse within winmerge such that it removes the benefit winmerge is adding, then we have our problem. when you see this, try to correct it using whatever current relevant context you have.
+
 18. basically, you should not worry about brevity, because when you go too long, your response gets interrupted by the system anyway. its better that the products you do deliver are all complete except for the last one, rather than you delivering all incomplete products, including the last one. does that make sense?
+
 19. remember, do not stop outputting for the reason of preventing a potential artifact interruption mid-output. you actually end up stopping yourself from producting two or three additional files before you actually get interrupted. what i mean is, in the outputs where you do not do this, you produce for 500 seconds, producing 7-9 files, and only the last one is interrupted and unusable. compared to when you stop yourself prematurely, for the reason stated, and you produce for 180 seconds and provide maybe 3-4 files. even with the -1, producing as much as you can still outperforms the alternative.
+
 20. This is a misaligned statement: `// (For full history, see master_content.txt)` because your changes get rolled into master_content.txt. therefore, if you remove the history, then when your updates are rolled in, they will remove the full history. understand? after a while, the history is not relevant and can be rolled out, for a while, it ought to stay. you can see what we're working on + the current cycle and make this determination.
+
 21. Each time we create a new documentation artifact, lets also create the key/value pairs needed for me to add it into our Master Artifact List. they can simply be added into the new artifact itself and ill make the new entry in A0. this will solve for me manually generating a description and tag for each new documentation artifact. also, dont place `/` in the title/name of a documentation artifact. VSCode treats it as a folder separator.
 21.1. when creating a new documentation artifact, also just update the master artifacts list itself.
+
+22. **New: Curator Activity Section:** If you need the human curator to perform an action that you cannot (e.g., delete a file, run a specific command), include these instructions in a dedicated `<curator_activity>...</curator_activity>` section in your response.
 </file_artifact>
 
 <file path="src/Artifacts/A58. DCE - WinMerge Source Code Analysis.md">
@@ -9287,7 +9297,7 @@ export class FileOperationService {
 </file_artifact>
 
 <file path="src/backend/services/file-tree.service.ts">
-// Updated on: C4 (Add explicit history file exclusion)
+// Resp 12-Updated on: C6 (Add tsconfig.tsbuildinfo and history exports to non-selectable)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -9304,7 +9314,7 @@ const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
 const EXCLUSION_PATTERNS = ['dce_cache', 'out', 'dist']; 
-const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/.git/', '/venv/', '/.venv/', 'flattened_repo.md', 'prompt.md', 'package-lock.json'];
+const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/.git/', '/venv/', '/.venv/', 'flattened_repo.md', 'prompt.md', 'package-lock.json', 'tsconfig.tsbuildinfo', 'dce_history_export_'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
@@ -9425,11 +9435,17 @@ export class FileTreeService {
             if (isPdf) return { ...baseStats, tokenCount: Services.contentExtractionService.getVirtualPdfContent(filePath)?.tokenCount || 0, isSelectable: true };
             if (isExcel) return { ...baseStats, tokenCount: Services.contentExtractionService.getVirtualExcelContent(filePath)?.tokenCount || 0, isSelectable: true };
             if (isWordDoc) return { ...baseStats, tokenCount: Services.contentExtractionService.getVirtualWordContent(filePath)?.tokenCount || 0, isSelectable: true };
-            if (stats.size > 5_000_000) return { ...baseStats, tokenCount: 0, isSelectable: true };
+            if (stats.size > 5_000_000) return { ...baseStats, tokenCount: 0, isSelectable: true }; // Fallback for large files
             const content = await fs.readFile(filePath, 'utf-8');
             return { ...baseStats, tokenCount: Math.ceil(content.length / 4), isSelectable: true };
         } catch (error: any) {
-            return { tokenCount: 0, sizeInBytes: 0, isImage: false, extension, isPdf: false, isExcel: false, isWordDoc: false, fileCount: 1, error: error.message, isSelectable: true };
+            // C6 Fix: If reading fails, still return size if possible
+            try {
+                const stats = await fs.stat(filePath);
+                return { tokenCount: 0, sizeInBytes: stats.size, isImage: false, extension, isPdf: false, isExcel: false, isWordDoc: false, fileCount: 1, error: error.message, isSelectable: true };
+            } catch (statError) {
+                return { tokenCount: 0, sizeInBytes: 0, isImage: false, extension, isPdf: false, isExcel: false, isWordDoc: false, fileCount: 1, error: error.message, isSelectable: true };
+            }
         }
     }
 
@@ -9484,8 +9500,10 @@ export class FileTreeService {
     }
     
     private _isSelectable(filePath: string, fileType: vscode.FileType): boolean {
-        const normalizedPathWithSlash = normalizePath(filePath) + (fileType === vscode.FileType.Directory ? '/' : '');
-        return !NON_SELECTABLE_PATTERNS.some(p => normalizedPathWithSlash.includes(p));
+        const normalizedPath = normalizePath(filePath);
+        const name = path.basename(normalizedPath);
+        const pathWithSlash = normalizedPath + (fileType === vscode.FileType.Directory ? '/' : '');
+        return !NON_SELECTABLE_PATTERNS.some(p => pathWithSlash.includes(p) || name.startsWith(p));
     }
 
     private async _traverseDirectory(dirUri: vscode.Uri): Promise<FileNode[]> {
@@ -12340,32 +12358,27 @@ export const logger = {
 
 <file path="src/client/utils/response-parser.ts">
 // src/client/utils/response-parser.ts
-// Updated on: C188 (Fix invalid syntax in for loop)
+// Updated on: C6 (De-duplicate file list)
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /<summary>([\s\S]*?)<\/summary>/;
 const COURSE_OF_ACTION_REGEX = /<course_of_action>([\s\S]*?)<\/course_of_action>/;
+const CURATOR_ACTIVITY_REGEX = /<curator_activity>([\s\S]*?)<\/curator_activity>/;
 const FILE_TAG_REGEX = /<file path="([^"]+)">([\s\S]*?)<\/file_artifact>/g;
 const CODE_FENCE_START_REGEX = /^\s*```[a-zA-Z]*\n/;
 
 export function parseResponse(rawText: string): ParsedResponse {
     const files: ParsedFile[] = [];
+    const fileMap = new Map<string, ParsedFile>();
     let totalTokens = 0;
 
-    // Pre-process to remove common escape characters from other models
     let processedText = rawText.replace(/\\</g, '<').replace(/\\>/g, '>').replace(/\\_/g, '_');
 
     const tagMatches = [...processedText.matchAll(FILE_TAG_REGEX)];
 
     if (tagMatches.length === 0 && processedText.includes('<file path')) {
         const summary = `**PARSING FAILED:** Could not find valid \`<file path="...">...</file_artifact>\` tags. The response may be malformed or incomplete. Displaying raw response below.\n\n---\n\n${processedText}`;
-        return {
-            summary: summary,
-            courseOfAction: '',
-            filesUpdated: [],
-            files: [],
-            totalTokens: Math.ceil(processedText.length / 4),
-        };
+        return { summary, courseOfAction: '', filesUpdated: [], files: [], totalTokens: Math.ceil(processedText.length / 4) };
     }
 
     for (const match of tagMatches) {
@@ -12383,41 +12396,37 @@ export function parseResponse(rawText: string): ParsedResponse {
                         content = content.trim().slice(0, -pattern.length);
                     }
                 }
-                if (content === originalContent) {
-                    changed = false;
-                }
+                if (content === originalContent) { changed = false; }
             }
             content = content.trim();
             const tokenCount = Math.ceil(content.length / 4);
-            totalTokens += tokenCount;
-            files.push({ path, content, tokenCount });
+            fileMap.set(path, { path, content, tokenCount });
         }
     }
 
+    const finalFiles = Array.from(fileMap.values());
+    totalTokens = finalFiles.reduce((sum, file) => sum + file.tokenCount, 0);
+
     const summaryMatch = processedText.match(SUMMARY_REGEX);
     const courseOfActionMatch = processedText.match(COURSE_OF_ACTION_REGEX);
+    const curatorActivityMatch = processedText.match(CURATOR_ACTIVITY_REGEX);
 
     const summary = (summaryMatch?.[1] ?? 'Could not parse summary.').trim();
     const courseOfAction = (courseOfActionMatch?.[1] ?? 'Could not parse course of action.').trim();
+    const curatorActivity = (curatorActivityMatch?.[1] ?? '').trim();
     
-    const filesUpdatedList = files.map(f => f.path);
+    const filesUpdatedList = finalFiles.map(f => f.path);
 
-    // Fallback if no file tags are found at all
-    if (files.length === 0 && !summaryMatch && !courseOfActionMatch) {
-        return {
-            summary: processedText,
-            courseOfAction: '',
-            filesUpdated: [],
-            files: [],
-            totalTokens: Math.ceil(processedText.length / 4),
-        };
+    if (finalFiles.length === 0 && !summaryMatch && !courseOfActionMatch && !curatorActivityMatch) {
+        return { summary: processedText, courseOfAction: '', filesUpdated: [], files: [], totalTokens: Math.ceil(processedText.length / 4) };
     }
 
     return {
         summary,
         courseOfAction,
+        curatorActivity,
         filesUpdated: [...new Set(filesUpdatedList)],
-        files,
+        files: finalFiles,
         totalTokens,
     };
 }
@@ -13588,7 +13597,7 @@ export default HighlightedTextarea;
 
 <file path="src/client/views/parallel-copilot.view/components/ParsedView.tsx">
 // src/client/views/parallel-copilot.view/components/ParsedView.tsx
-// Updated on: C179 (Apply workflow highlighting to Baseline and Accept buttons)
+// Updated on: C6 (Add Curator Activity section, color gradient, and context menu)
 import * as React from 'react';
 import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscSave, VscCheckAll, VscClearAll, VscClippy, VscChevronDown, VscSourceControl, VscDiscard } from 'react-icons/vsc';
 import ReactMarkdown from 'react-markdown';
@@ -13597,6 +13606,8 @@ import { ParsedResponse } from '@/common/types/pcpp.types';
 import { ComparisonMetrics } from '@/common/ipc/channels.type';
 import { formatLargeNumber } from '@/common/utils/formatting';
 import CodeViewer from './CodeViewer';
+import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
+import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 
 const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; className?: string; }> = ({ title, children, isCollapsed, onToggle, className }) => (
     <div className={`collapsible-section-inner ${className || ''}`}>
@@ -13607,6 +13618,11 @@ const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; i
         {!isCollapsed && <div className="collapsible-content-inner">{children}</div>}
     </div>
 );
+
+const getSimilarityColor = (similarity: number): string => {
+    const hue = (similarity * 120).toString(10); // 0 (red) -> 120 (green)
+    return `hsl(${hue}, 70%, 50%, 0.15)`;
+};
 
 interface ParsedViewProps {
     parsedContent: ParsedResponse;
@@ -13640,6 +13656,22 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
     const [isAssociatedFilesCollapsed, setAssociatedFilesCollapsed] = React.useState(false);
     const [isThoughtsCollapsed, setThoughtsCollapsed] = React.useState(false);
     const [isActionCollapsed, setActionCollapsed] = React.useState(false);
+    const [isCuratorActivityCollapsed, setCuratorActivityCollapsed] = React.useState(false);
+    const [contextMenu, setContextMenu] = React.useState<{ x: number, y: number, path: string } | null>(null);
+    const clientIpc = ClientPostMessageManager.getInstance();
+
+    const handleContextMenu = (event: React.MouseEvent, path: string) => {
+        event.preventDefault();
+        event.stopPropagation();
+        setContextMenu({ x: event.clientX, y: event.clientY, path });
+    };
+
+    const handleCopyPath = () => {
+        if (contextMenu) {
+            clientIpc.sendToServer(ClientToServerChannel.RequestCopyPath, { path: contextMenu.path, relative: true });
+            setContextMenu(null);
+        }
+    };
 
     return (
         <div className="parsed-view-grid">
@@ -13648,7 +13680,9 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
                     <ul className="associated-files-list">{props.parsedContent.filesUpdated.map(file => {
                         const fileExists = props.fileExistenceMap.get(file);
                         const hasOverride = props.pathOverrides.has(file);
-                        return <li key={file} className={props.selectedFilePath === file ? 'selected' : ''} onClick={() => props.onSelectForViewing(file)} title={file}>
+                        const metrics = props.comparisonMetrics;
+                        const bgColor = (metrics && fileExists) ? getSimilarityColor(metrics.similarity) : 'transparent';
+                        return <li key={file} className={props.selectedFilePath === file ? 'selected' : ''} onClick={() => props.onSelectForViewing(file)} onContextMenu={(e) => handleContextMenu(e, file)} title={file} style={{ backgroundColor: bgColor }}>
                             <div className="file-row">
                                 <input type="checkbox" checked={props.selectedFilesForReplacement.has(`${props.activeTab}:::${file}`)} onChange={() => props.onFileSelectionToggle(file)} onClick={e => e.stopPropagation()} />
                                 {fileExists ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
@@ -13662,6 +13696,11 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
                 </CollapsibleSection>
                 <CollapsibleSection title="Summary" isCollapsed={isThoughtsCollapsed} onToggle={() => setThoughtsCollapsed(p => !p)}><ReactMarkdown>{props.parsedContent.summary}</ReactMarkdown></CollapsibleSection>
                 <CollapsibleSection title="Course of Action" isCollapsed={isActionCollapsed} onToggle={() => setActionCollapsed(p => !p)}><ReactMarkdown>{props.parsedContent.courseOfAction}</ReactMarkdown></CollapsibleSection>
+                {props.parsedContent.curatorActivity && (
+                    <CollapsibleSection title="Curator Activity" isCollapsed={isCuratorActivityCollapsed} onToggle={() => setCuratorActivityCollapsed(p => !p)}>
+                        <ReactMarkdown>{props.parsedContent.curatorActivity}</ReactMarkdown>
+                    </CollapsibleSection>
+                )}
             </div>
             <div className="resizer" />
             <div className="parsed-view-right">
@@ -13677,6 +13716,16 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
                 </div>
                 <CodeViewer htmlContent={props.viewableContent} />
             </div>
+            {contextMenu && (
+                <>
+                    <div className="context-menu-overlay" onClick={() => setContextMenu(null)}></div>
+                    <div className="context-menu" style={{ top: contextMenu.y, left: contextMenu.x }}>
+                        <ul>
+                            <li onClick={handleCopyPath}>Copy Relative Path</li>
+                        </ul>
+                    </div>
+                </>
+            )}
         </div>
     );
 };
@@ -13686,7 +13735,7 @@ export default ParsedView;
 
 <file path="src/client/views/parallel-copilot.view/components/ResponsePane.tsx">
 // src/client/views/parallel-copilot.view/components/ResponsePane.tsx
-// Updated on: C179 (Pass workflowStep to ParsedView)
+// Updated on: C6 (Add onPaste handler)
 import * as React from 'react';
 import { TabState } from '../view';
 import ParsedView from './ParsedView';
@@ -13697,6 +13746,7 @@ interface ResponsePaneProps {
     activeTabData: TabState | undefined;
     onRawContentChange: (content: string) => void;
     onContextKeyDown: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
+    onPaste: (e: React.ClipboardEvent) => void;
     // Props for ParsedView
     fileExistenceMap: Map<string, boolean>;
     selectedFilePath: string | null;
@@ -13733,6 +13783,7 @@ const ResponsePane: React.FC<ResponsePaneProps> = (props) => {
                 value={props.activeTabData?.rawContent || ''}
                 onChange={(e) => props.onRawContentChange(e.target.value)}
                 onKeyDown={props.onContextKeyDown}
+                onPaste={props.onPaste}
             />
         );
     }
@@ -14907,7 +14958,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C5 (Implement save status and navigation locking)
+// Updated on: C6 (Implement auto-tab on paste)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './view.scss';
@@ -14949,7 +15000,7 @@ const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; i
 );
 
 const App = () => {
-    console.log('[PCPP View] App component rendering...');
+    // ... (existing state declarations)
     const [activeTab, setActiveTab] = React.useState(1);
     const [tabCount, setTabCount] = React.useState(4);
     const [currentCycle, setCurrentCycle] = React.useState<number | null>(null);
@@ -14981,6 +15032,7 @@ const App = () => {
 
     const clientIpc = ClientPostMessageManager.getInstance();
     
+    // ... (existing stateRef, saveCurrentCycleState, etc.)
     const stateRef = React.useRef({
         currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides
     });
@@ -15016,7 +15068,20 @@ const App = () => {
         };
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
     }, [clientIpc]);
-    
+
+    const handleRawContentChange = (newContent: string, tabIndex: number) => { 
+        setTabs(prev => ({ ...prev, [tabIndex.toString()]: { rawContent: newContent, parsedContent: null }})); 
+        setSaveStatus('unsaved'); 
+    };
+
+    const handlePaste = (e: React.ClipboardEvent, tabIndex: number) => {
+        handleRawContentChange(e.clipboardData.getData('text'), tabIndex);
+        if (tabIndex < tabCount) {
+            setActiveTab(tabIndex + 1);
+        }
+    };
+
+    // ... (rest of the component logic)
     const debouncedSave = useDebounce(saveCurrentCycleState, 1500);
     const getCurrentCycleData = React.useCallback(() => stateRef.current, []);
     const requestCostEstimation = React.useCallback(() => { const cycleData = getCurrentCycleData(); if (cycleData.currentCycle) clientIpc.sendToServer(ClientToServerChannel.RequestPromptCostBreakdown, { cycleData: cycleData as any }); }, [clientIpc, getCurrentCycleData]);
@@ -15038,7 +15103,7 @@ const App = () => {
 
     const isNewCycleButtonDisabled = React.useMemo(() => { if (currentCycle === 0) return true; if (currentCycle !== maxCycle) return true; return !isReadyForNextCycle; }, [currentCycle, maxCycle, isReadyForNextCycle]);
 
-    const handleCycleChange = (e: React.MouseEvent | null, newCycle: number) => { e?.stopPropagation(); if (newCycle >= 0 && newCycle <= maxCycle) { setSelectedFilesForReplacement(new Set()); setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycle }); setWorkflowStep(null); } };
+    const handleCycleChange = (e: React.MouseEvent | null, newCycle: number) => { e?.stopPropagation(); if (saveStatus !== 'saved') return; if (newCycle >= 0 && newCycle <= maxCycle) { setSelectedFilesForReplacement(new Set()); setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycle }); setWorkflowStep(null); } };
     const handleSelectForViewing = (filePath: string) => { const newPath = selectedFilePath === filePath ? null : filePath; setSelectedFilePath(newPath); if (newPath) { const file = activeTabData?.parsedContent?.files.find(f => f.path === newPath); const pathForComparison = pathOverrides.get(newPath) || newPath; if (file) clientIpc.sendToServer(ClientToServerChannel.RequestFileComparison, { filePath: pathForComparison, modifiedContent: file.content }); } };
     const handleAcceptSelectedFiles = () => { if (selectedFilesForReplacement.size === 0) return; const filesToWrite: BatchWriteFile[] = []; selectedFilesForReplacement.forEach(compositeKey => { const [responseId, filePath] = compositeKey.split(':::'); const responseData = tabs[responseId]; if (responseData?.parsedContent) { const file = responseData.parsedContent.files.find(f => f.path === filePath); if (file) { const finalPath = pathOverrides.get(file.path) || file.path; filesToWrite.push({ path: finalPath, content: file.content }); } } }); if (filesToWrite.length > 0) clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite }); setWorkflowStep('awaitingCycleContext'); };
     const handleLinkFile = (originalPath: string) => { if (tempOverridePath.trim()) { setPathOverrides(prev => new Map(prev).set(originalPath, tempOverridePath.trim())); setFileExistenceMap(prev => new Map(prev).set(originalPath, true)); setTempOverridePath(''); handleSelectForViewing(originalPath); } };
@@ -15048,13 +15113,14 @@ const App = () => {
     const activeTabData = tabs[activeTab.toString()];
     const sortedTabIds = React.useMemo(() => { const tabIds = [...Array(tabCount)].map((_, i) => i + 1); if (isParsedMode && isSortedByTokens) tabIds.sort((a, b) => { const tokensA = tabs[a.toString()]?.parsedContent?.totalTokens ?? -1; const tokensB = tabs[b.toString()]?.parsedContent?.totalTokens ?? -1; return tokensB - tokensA; }); return tabIds; }, [tabs, isParsedMode, isSortedByTokens, tabCount]);
     const viewableContent = React.useMemo(() => { if (!selectedFilePath || !activeTabData?.parsedContent) return undefined; const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath); if (!file) return '<div>Error: File data not found in parsed response.</div>'; const id = `${file.path}::${file.content}`; return highlightedCodeBlocks.get(id); }, [selectedFilePath, activeTabData?.parsedContent, highlightedCodeBlocks]);
-    const handleRawContentChange = (newContent: string, tabIndex: number) => { setTabs(prev => ({ ...prev, [tabIndex.toString()]: { rawContent: newContent, parsedContent: null }})); setSaveStatus('unsaved'); };
+    
+    // Auto-tab on paste is handled in ResponsePane now
     const handleContextKeyDown = React.useCallback(() => { /* Placeholder for potential future use */ }, []);
     
     const handleSortToggle = () => { if (workflowStep === 'awaitingSort') { setIsSortedByTokens(true); } else { setIsSortedByTokens(p => !p); } setSaveStatus('unsaved'); };
     const handleGlobalParseToggle = () => { const newParseMode = !isParsedMode; setIsParsedMode(newParseMode); setSelectedFilePath(null); if (!newParseMode) setTabs(prev => { const newTabs = {...prev}; Object.keys(newTabs).forEach(key => { newTabs[key].parsedContent = null; }); return newTabs; }); setSaveStatus('unsaved'); };
     
-    const handleNewCycle = (e: React.MouseEvent) => { e.stopPropagation(); const newCycleId = maxCycle + 1; const newTabs: { [key: string]: TabState } = {}; for (let i = 1; i <= tabCount; i++) newTabs[i.toString()] = { rawContent: '', parsedContent: null }; setMaxCycle(newCycleId); setCurrentCycle(newCycleId); setCycleTitle('New Cycle'); setCycleContext(''); setEphemeralContext(''); setTabs(newTabs); setIsParsedMode(false); setSelectedResponseId(null); setSelectedFilesForReplacement(new Set()); setWorkflowStep('awaitingResponsePaste_1'); clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycleId }); setSaveStatus('unsaved'); };
+    const handleNewCycle = (e: React.MouseEvent) => { e.stopPropagation(); if (saveStatus !== 'saved') return; const newCycleId = maxCycle + 1; const newTabs: { [key: string]: TabState } = {}; for (let i = 1; i <= tabCount; i++) newTabs[i.toString()] = { rawContent: '', parsedContent: null }; setMaxCycle(newCycleId); setCurrentCycle(newCycleId); setCycleTitle('New Cycle'); setCycleContext(''); setEphemeralContext(''); setTabs(newTabs); setIsParsedMode(false); setSelectedResponseId(null); setSelectedFilesForReplacement(new Set()); setWorkflowStep('awaitingResponsePaste_1'); clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycleId }); setSaveStatus('unsaved'); };
     const handleGeneratePrompt = () => { if (currentCycle === null) return; clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle }); setWorkflowStep('readyForNewCycle'); }
     const handleDeleteCycle = () => { if(currentCycle !== null) clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle }); };
     const handleResetHistory = () => { clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {}); };
@@ -15073,7 +15139,7 @@ const App = () => {
     if (currentCycle === -1) return <div className="onboarding-container"><h1>No Folder Opened</h1><p>You have not yet opened a folder for the Data Curation Environment to manage.</p><button className="dce-button-primary" onClick={() => clientIpc.sendToServer(ClientToServerChannel.RequestOpenFolder, {})}><VscFolder /> Open Folder</button></div>;
     if (currentCycle === 0) return <OnboardingView initialProjectScope={projectScope} onNavigateToCycle={(id) => handleCycleChange(null, id)} latestCycleId={maxCycle} onScopeChange={setCycleContext} workflowStep={workflowStep} />;
     
-    const collapsedNavigator = <div className="collapsed-navigator"><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0}>&lt;</button><span className="cycle-display">C{currentCycle}</span><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle}>&gt;</button></div>;
+    const collapsedNavigator = <div className="collapsed-navigator"><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0 || saveStatus !== 'saved'}>&lt;</button><span className="cycle-display">C{currentCycle}</span><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle || saveStatus !== 'saved'}>&gt;</button></div>;
     const currentComparisonMetrics = selectedFilePath ? comparisonMetrics.get(pathOverrides.get(selectedFilePath) || selectedFilePath) : null;
     const totalPromptCostDisplay = ( <span className="total-prompt-cost" title={costBreakdownTooltip}> Total Est: ({formatLargeNumber(totalPromptTokens, 1)} tk) ~ ${estimatedPromptCost.toFixed(4)} {tabCount > 1 && ` x ${tabCount} = $${(estimatedPromptCost * tabCount).toFixed(4)}`} </span> );
 
@@ -15097,7 +15163,7 @@ const App = () => {
         </CollapsibleSection>
         <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} onSortToggle={handleSortToggle} workflowStep={workflowStep} />
         <div className="tab-content">
-            <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={currentComparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => { setSelectedResponseId(prev => prev === id ? null : id); setWorkflowStep('awaitingResponseSelect'); setSaveStatus('unsaved'); }} onSelectAllFiles={handleSelectAllFilesToggle} onDeselectAllFiles={() => {setSelectedFilesForReplacement(new Set()); setSaveStatus('unsaved');}} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} onBaseline={handleGitBaseline} onRestore={handleGitRestore} workflowStep={workflowStep} />
+            <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} onPaste={(e) => handlePaste(e, activeTab)} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={currentComparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => { setSelectedResponseId(prev => prev === id ? null : id); setWorkflowStep('awaitingResponseSelect'); setSaveStatus('unsaved'); }} onSelectAllFiles={handleSelectAllFilesToggle} onDeselectAllFiles={() => {setSelectedFilesForReplacement(new Set()); setSaveStatus('unsaved');}} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} onBaseline={handleGitBaseline} onRestore={handleGitRestore} workflowStep={workflowStep} />
         </div>
     </div>;
 };
@@ -15248,7 +15314,7 @@ export enum ServerToClientChannel {
 </file_artifact>
 
 <file path="src/common/ipc/channels.type.ts">
-// Updated on: C5 (Add NotifySaveComplete channel)
+// Updated on: C6 (Add NotifySaveComplete channel)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -15470,7 +15536,7 @@ export interface FileNode {
 
 <file path="src/common/types/pcpp.types.ts">
 // src/common/types/pcpp.types.ts
-// Updated on: C186 (Add pathOverrides to PcppCycle)
+// Updated on: C6 (Add curatorActivity to ParsedResponse)
 export interface PcppResponse {
     content: string;
 }
@@ -15508,6 +15574,7 @@ export interface ParsedFile {
 export interface ParsedResponse {
     summary: string;
     courseOfAction: string;
+    curatorActivity?: string;
     filesUpdated: string[];
     files: ParsedFile[];
     totalTokens: number;
@@ -25571,6 +25638,434 @@ flatten_docs.js
 flattened_repo.txt
 </Cycle 0>
 </M6. Cycles>
+</file_artifact>
+
+<file path="src/Artifacts/A80. DCE - Settings Panel Plan.md">
+# Artifact A80: DCE - Settings Panel Plan
+# Date Created: C6
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A plan for a new settings panel, accessible via a help icon, to house changelogs, settings, and other informational content.
+- **Tags:** feature plan, settings, ui, ux, changelog
+
+## 1. Overview & Goal
+
+As the Data Curation Environment (DCE) grows in features, users will need a centralized location to manage settings, view changelogs, and access help documentation. The goal of this feature is to create a dedicated "Settings" or "Help" panel, accessible via a new icon in the Parallel Co-Pilot Panel (PCPP), that serves as this central hub.
+
+## 2. User Stories
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| P2-SET-01 | **Access Help and Settings** | As a user, I want to click a help icon (`?`) in the PCPP to open a dedicated panel, so I can access settings and information about the extension. | - A help icon is present in the main header of the PCPP. <br> - Clicking it opens a new `WebviewPanel` in the main editor area, titled "DCE Settings & Help". |
+| P2-SET-02 | **View Changelog** | As a user, I want to view a changelog within the settings panel, so I can see what has changed in the latest version of the extension. | - The settings panel has a "Changelog" tab. <br> - This tab displays the content of a `CHANGELOG.md` file, rendered as formatted Markdown. |
+| P2-SET-03 | **Manage Settings** | As a user, I want to manage extension settings from this panel, so I can configure features to my preference. | - The settings panel has a "Settings" tab. <br> - It provides UI controls for managing settings, such as API keys (from `A41`), exclusion list patterns (from `A82`), and other configurable options. |
+
+## 3. Technical Implementation Plan
+
+1.  **New Command & Icon:**
+    *   **UI (`view.tsx`):** Add a new help/question mark icon button to the main header of the PCPP.
+    *   **Command (`commands.ts`):** The button will trigger a new command, `dce.openSettingsPanel`.
+    *   **`extension.ts`:** The command handler will create and manage a singleton `WebviewPanel`, similar to how the PCPP itself is managed.
+
+2.  **New Settings Webview:**
+    *   A new view will be created under `src/client/views/settings.view/`.
+    *   It will have its own `view.tsx`, `view.scss`, `on-message.ts`, etc.
+    *   The `view.tsx` will render a tabbed interface ("Settings", "Changelog", "About").
+
+3.  **Backend Logic:**
+    *   **Changelog:** The backend will have a service that reads the `CHANGELOG.md` file from the extension's root directory and sends its content to the settings webview to be rendered.
+    *   **Settings:** The backend will need a new `SettingsService` that interacts with `vscode.workspace.getConfiguration()` to get and set both global and workspace-level settings for the extension. This will be the backend for the UI controls in the settings tab.
+</file_artifact>
+
+<file path="src/Artifacts/A81. DCE - Curator Activity Plan.md">
+# Artifact A81: DCE - Curator Activity Plan
+# Date Created: C6
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A plan to introduce a new `<curator_activity>` section to the AI response format, allowing for explicit instructions to the human curator.
+- **Tags:** documentation, process, interaction schema, workflow
+
+## 1. Overview & Goal
+
+Currently, if the AI needs the human curator to perform an action it cannot (e.g., delete a file, install a dependency), it must embed this instruction within the "Course of Action" or summary. This can be missed and is not machine-parsable.
+
+The goal of this feature is to create a formal, dedicated channel for these instructions. A new `<curator_activity>...</curator_activity>` section will be added to the interaction schema. The extension will parse this section and display it in a distinct, highly visible area of the UI, ensuring the curator sees and can act upon these critical instructions.
+
+## 2. User Story
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| P2-CA-01 | **Receive Curator Instructions** | As a curator, when an AI response includes actions I need to perform manually, I want to see them clearly separated from the AI's own course of action, so I don't miss them. | - The AI can include a `<curator_activity>` block in its response. <br> - The PCPP parser extracts the content of this block. <br> - The UI displays this content in a new, clearly labeled "Curator Activity" collapsible section. |
+
+## 3. Technical Implementation Plan
+
+1.  **Update Interaction Schema:**
+    *   **`A52.2 DCE - Interaction Schema Source.md`:** A new rule will be added, defining the `<curator_activity>...</curator_activity>` section and explaining its purpose to the AI.
+
+2.  **Update Parser (`response-parser.ts`):**
+    *   A new `CURATOR_ACTIVITY_REGEX` will be added to extract the content from the new tags.
+    *   The `ParsedResponse` interface in `pcpp.types.ts` will be updated with a new optional property, `curatorActivity?: string`.
+
+3.  **Update UI (`ParsedView.tsx`):**
+    *   A new `CollapsibleSection` will be added to the parsed view.
+    *   It will be titled "Curator Activity".
+    *   It will be conditionally rendered only if `parsedContent.curatorActivity` exists and is not empty.
+    *   The content will be rendered as formatted Markdown.
+</file_artifact>
+
+<file path="src/Artifacts/A82. DCE - Advanced Exclusion Management Plan.md">
+# Artifact A82: DCE - Advanced Exclusion Management Plan
+# Date Created: C6
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A plan for a feature allowing users to right-click files or folders and add them to a persistent exclusion list, preventing them from being automatically selected or flattened.
+- **Tags:** feature plan, context menu, exclusion, ignore, ux
+
+## 1. Overview & Goal
+
+Users need a simple, intuitive way to manage which files are included in the Data Curation Environment's view and processes. While some files are excluded by default (e.g., `.git`), users may have project-specific directories (like `dist`, `build`, or custom log folders) that they want to permanently ignore.
+
+The goal of this feature is to allow users to right-click any file or folder in the main file tree and add it to a persistent exclusion list, which will be stored in the workspace's settings.
+
+## 2. User Story
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| P1-EX-01 | **Exclude from View** | As a developer, I want to right-click a build output directory (e.g., `dist`) and select "Add to DCE Exclusions", so it no longer appears in the Data Curation file tree and is never included in flattened contexts. | - A new "Add to DCE Exclusions" option is available in the file tree's right-click context menu. <br> - Selecting this option adds the file or folder's path to a custom setting in `.vscode/settings.json`. <br> - The file tree immediately refreshes and the excluded item (and its children) is no longer visible. |
+
+## 3. Technical Implementation Plan
+
+1.  **Configuration (`package.json`):**
+    *   A new configuration point will be defined in the `contributes.configuration` section.
+    *   This will create a new setting, `dce.files.exclude`, which will be an object similar to the native `files.exclude`.
+
+2.  **Backend (`file-tree.service.ts`):**
+    *   The file traversal logic will be updated to read this new `dce.files.exclude` setting from the workspace configuration.
+    *   It will merge these user-defined patterns with the default exclusion patterns before scanning the file system.
+
+3.  **UI & IPC:**
+    *   **`ContextMenu.tsx`:** A new menu item, "Add to DCE Exclusions," will be added.
+    *   **IPC:** A new IPC channel, `RequestAddToExclusions`, will be created.
+    *   **Backend Handler (`settings.service.ts` - new or existing):** A new handler will receive the path to exclude. It will:
+        1.  Get the current exclusion configuration object using `vscode.workspace.getConfiguration('dce')`.
+        2.  Add the new path to the object (`newExclusion[path] = true`).
+        3.  Update the configuration using `config.update('files.exclude', newExclusion, vscode.ConfigurationTarget.Workspace)`.
+        4.  This will automatically trigger a refresh of the file tree as the configuration has changed.
+
+This approach leverages VS Code's built-in settings infrastructure, making the exclusions persistent and easily manageable for the user.
+</file_artifact>
+
+<file path="src/Artifacts/A83. DCE - Universal Task Checklist for Cycle 6.md">
+# Artifact A83: DCE - Universal Task Checklist for Cycle 6
+# Date Created: C6
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A structured checklist for organizing the development tasks, feedback, and bugs from the "laundry list" provided in Cycle 6.
+- **Tags:** process, checklist, task management, planning, workflow
+
+## 1. Purpose
+
+This artifact provides a structured, universal format for tracking the development tasks derived from the "laundry list" of feedback in Cycle 6. It organizes work by logical feature areas and the group of files involved.
+
+---
+
+## Task List
+
+## T-1: Parsing & Interaction Schema
+- **Files Involved:**
+    - `src/Artifacts/A52.2 DCE - Interaction Schema Source.md`
+    - `src/Artifacts/A81. DCE - Curator Activity Plan.md`
+    - `src/client/utils/response-parser.ts`
+    - `src/common/types/pcpp.types.ts`
+    - `src/client/views/parallel-copilot.view/components/ParsedView.tsx`
+- **Total Tokens:** ~6,000
+- **More than one cycle?** No
+
+- [ ] **Task (T-ID: 1.1):** Create `A81` to plan the new `<curator_activity>` section.
+- [ ] **Task (T-ID: 1.2):** Update `A52.2` to be more explicit about the `</file_artifact>` closing tag and to include the new `curator_activity` section.
+- [ ] **Task (T-ID: 1.3):** Update the parser to extract the `<curator_activity>` section and to de-duplicate the `files` array, keeping the last occurrence of a path.
+- [ ] **Task (T-ID: 1.4):** Update the UI to render the new `curatorActivity` content in its own collapsible section.
+
+### Verification Steps
+1.  Provide a response with duplicate file paths and a `<curator_activity>` section.
+2.  Click "Parse All".
+3.  **Expected:** The file counter on the response tab should reflect the unique file count. The "Curator Activity" section should appear with the correct content.
+
+## T-2: Data Integrity & Core UX
+- **Files Involved:**
+    - `src/Artifacts/A79. DCE - Autosave and Navigation Locking Plan.md`
+    - `src/client/views/parallel-copilot.view/view.tsx`
+    - `src/client/views/parallel-copilot.view/components/CycleNavigator.tsx`
+    - `src/backend/services/history.service.ts`
+    - `src/common/ipc/channels.enum.ts`
+    - `src/common/ipc/channels.type.ts`
+- **Total Tokens:** ~12,000
+- **More than one cycle?** No
+
+- [ ] **Task (T-ID: 2.1):** Implement the autosave locking feature from `A79`. Add `saveStatus` state to `view.tsx`.
+- [ ] **Task (T-ID: 2.2):** Add `NotifySaveComplete` IPC channel and have `history.service.ts` send it after a successful write.
+- [ ] **Task (T-ID: 2.3):** Disable navigation buttons in `CycleNavigator.tsx` when `saveStatus` is not `'saved'`.
+- [ ] **Task (T-ID: 2.4):** Implement auto-tabbing on paste in `view.tsx`.
+- [ ] **Task (T-ID: 2.5):** Add `tsconfig.tsbuildinfo` to `NON_SELECTABLE_PATTERNS` in `file-tree.service.ts`.
+
+### Verification Steps
+1.  Type text into the Cycle Context.
+2.  **Expected:** The save status indicator should show "unsaved" and the cycle navigation buttons should be disabled.
+3.  Wait for the autosave to complete.
+4.  **Expected:** The status should become "saved" and the buttons should be re-enabled.
+5.  Paste content into `Resp 1` textarea.
+6.  **Expected:** The UI should automatically switch focus to the `Resp 2` tab.
+
+## T-3: Advanced UX Features
+- **Files Involved:**
+    - `src/client/views/parallel-copilot.view/components/ParsedView.tsx`
+    - `src/client/views/parallel-copilot.view/view.scss`
+    - `src/common/ipc/channels.enum.ts`
+    - `src/common/ipc/channels.type.ts`
+    - `src/backend/services/file-operation.service.ts`
+- **Total Tokens:** ~4,500
+- **More than one cycle?** No
+
+- [ ] **Task (T-ID: 3.1):** Implement a color gradient on "Associated Files" list items based on similarity score.
+- [ ] **Task (T-ID: 3.2):** Add a right-click context menu to "Associated Files" list items to copy the relative path.
+
+### Verification Steps
+1.  Parse a response with varying similarity scores.
+2.  **Expected:** The file list items should have background colors ranging from green (high similarity) to red (low similarity).
+3.  Right-click a file in the list.
+4.  **Expected:** A context menu should appear with a "Copy Relative Path" option. Clicking it should copy the path to the clipboard.
+
+## T-4: Future Feature Planning
+- **Files Involved:**
+    - `src/Artifacts/A80. DCE - Settings Panel Plan.md`
+    - `src/Artifacts/A82. DCE - Advanced Exclusion Management Plan.md`
+- **Total Tokens:** ~2,000
+- **More than one cycle?** Yes (Implementation is deferred)
+
+- [ ] **Task (T-ID: 4.1):** Create `A80` to plan the settings/help panel.
+- [ ] **Task (T-ID: 4.2):** Create `A82` to plan the advanced exclusion management feature.
+
+### Verification Steps
+1.  Check the master artifacts list.
+2.  **Expected:** The new `A80` and `A82` artifacts should be present and contain the feature plans.
+</file_artifact>
+
+<file path="dist/Artifacts/A80. DCE - Settings Panel Plan.md">
+# Artifact A80: DCE - Settings Panel Plan
+# Date Created: C6
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A plan for a new settings panel, accessible via a help icon, to house changelogs, settings, and other informational content.
+- **Tags:** feature plan, settings, ui, ux, changelog
+
+## 1. Overview & Goal
+
+As the Data Curation Environment (DCE) grows in features, users will need a centralized location to manage settings, view changelogs, and access help documentation. The goal of this feature is to create a dedicated "Settings" or "Help" panel, accessible via a new icon in the Parallel Co-Pilot Panel (PCPP), that serves as this central hub.
+
+## 2. User Stories
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| P2-SET-01 | **Access Help and Settings** | As a user, I want to click a help icon (`?`) in the PCPP to open a dedicated panel, so I can access settings and information about the extension. | - A help icon is present in the main header of the PCPP. <br> - Clicking it opens a new `WebviewPanel` in the main editor area, titled "DCE Settings & Help". |
+| P2-SET-02 | **View Changelog** | As a user, I want to view a changelog within the settings panel, so I can see what has changed in the latest version of the extension. | - The settings panel has a "Changelog" tab. <br> - This tab displays the content of a `CHANGELOG.md` file, rendered as formatted Markdown. |
+| P2-SET-03 | **Manage Settings** | As a user, I want to manage extension settings from this panel, so I can configure features to my preference. | - The settings panel has a "Settings" tab. <br> - It provides UI controls for managing settings, such as API keys (from `A41`), exclusion list patterns (from `A82`), and other configurable options. |
+
+## 3. Technical Implementation Plan
+
+1.  **New Command & Icon:**
+    *   **UI (`view.tsx`):** Add a new help/question mark icon button to the main header of the PCPP.
+    *   **Command (`commands.ts`):** The button will trigger a new command, `dce.openSettingsPanel`.
+    *   **`extension.ts`:** The command handler will create and manage a singleton `WebviewPanel`, similar to how the PCPP itself is managed.
+
+2.  **New Settings Webview:**
+    *   A new view will be created under `src/client/views/settings.view/`.
+    *   It will have its own `view.tsx`, `view.scss`, `on-message.ts`, etc.
+    *   The `view.tsx` will render a tabbed interface ("Settings", "Changelog", "About").
+
+3.  **Backend Logic:**
+    *   **Changelog:** The backend will have a service that reads the `CHANGELOG.md` file from the extension's root directory and sends its content to the settings webview to be rendered.
+    *   **Settings:** The backend will need a new `SettingsService` that interacts with `vscode.workspace.getConfiguration()` to get and set both global and workspace-level settings for the extension. This will be the backend for the UI controls in the settings tab.
+</file_artifact>
+
+<file path="dist/Artifacts/A81. DCE - Curator Activity Plan.md">
+# Artifact A81: DCE - Curator Activity Plan
+# Date Created: C6
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A plan to introduce a new `<curator_activity>` section to the AI response format, allowing for explicit instructions to the human curator.
+- **Tags:** documentation, process, interaction schema, workflow
+
+## 1. Overview & Goal
+
+Currently, if the AI needs the human curator to perform an action it cannot (e.g., delete a file, install a dependency), it must embed this instruction within the "Course of Action" or summary. This can be missed and is not machine-parsable.
+
+The goal of this feature is to create a formal, dedicated channel for these instructions. A new `<curator_activity>...</curator_activity>` section will be added to the interaction schema. The extension will parse this section and display it in a distinct, highly visible area of the UI, ensuring the curator sees and can act upon these critical instructions.
+
+## 2. User Story
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| P2-CA-01 | **Receive Curator Instructions** | As a curator, when an AI response includes actions I need to perform manually, I want to see them clearly separated from the AI's own course of action, so I don't miss them. | - The AI can include a `<curator_activity>` block in its response. <br> - The PCPP parser extracts the content of this block. <br> - The UI displays this content in a new, clearly labeled "Curator Activity" collapsible section. |
+
+## 3. Technical Implementation Plan
+
+1.  **Update Interaction Schema:**
+    *   **`A52.2 DCE - Interaction Schema Source.md`:** A new rule will be added, defining the `<curator_activity>...</curator_activity>` section and explaining its purpose to the AI.
+
+2.  **Update Parser (`response-parser.ts`):**
+    *   A new `CURATOR_ACTIVITY_REGEX` will be added to extract the content from the new tags.
+    *   The `ParsedResponse` interface in `pcpp.types.ts` will be updated with a new optional property, `curatorActivity?: string`.
+
+3.  **Update UI (`ParsedView.tsx`):**
+    *   A new `CollapsibleSection` will be added to the parsed view.
+    *   It will be titled "Curator Activity".
+    *   It will be conditionally rendered only if `parsedContent.curatorActivity` exists and is not empty.
+    *   The content will be rendered as formatted Markdown.
+</file_artifact>
+
+<file path="dist/Artifacts/A82. DCE - Advanced Exclusion Management Plan.md">
+# Artifact A82: DCE - Advanced Exclusion Management Plan
+# Date Created: C6
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A plan for a feature allowing users to right-click files or folders and add them to a persistent exclusion list, preventing them from being automatically selected or flattened.
+- **Tags:** feature plan, context menu, exclusion, ignore, ux
+
+## 1. Overview & Goal
+
+Users need a simple, intuitive way to manage which files are included in the Data Curation Environment's view and processes. While some files are excluded by default (e.g., `.git`), users may have project-specific directories (like `dist`, `build`, or custom log folders) that they want to permanently ignore.
+
+The goal of this feature is to allow users to right-click any file or folder in the main file tree and add it to a persistent exclusion list, which will be stored in the workspace's settings.
+
+## 2. User Story
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| P1-EX-01 | **Exclude from View** | As a developer, I want to right-click a build output directory (e.g., `dist`) and select "Add to DCE Exclusions", so it no longer appears in the Data Curation file tree and is never included in flattened contexts. | - A new "Add to DCE Exclusions" option is available in the file tree's right-click context menu. <br> - Selecting this option adds the file or folder's path to a custom setting in `.vscode/settings.json`. <br> - The file tree immediately refreshes and the excluded item (and its children) is no longer visible. |
+
+## 3. Technical Implementation Plan
+
+1.  **Configuration (`package.json`):**
+    *   A new configuration point will be defined in the `contributes.configuration` section.
+    *   This will create a new setting, `dce.files.exclude`, which will be an object similar to the native `files.exclude`.
+
+2.  **Backend (`file-tree.service.ts`):**
+    *   The file traversal logic will be updated to read this new `dce.files.exclude` setting from the workspace configuration.
+    *   It will merge these user-defined patterns with the default exclusion patterns before scanning the file system.
+
+3.  **UI & IPC:**
+    *   **`ContextMenu.tsx`:** A new menu item, "Add to DCE Exclusions," will be added.
+    *   **IPC:** A new IPC channel, `RequestAddToExclusions`, will be created.
+    *   **Backend Handler (`settings.service.ts` - new or existing):** A new handler will receive the path to exclude. It will:
+        1.  Get the current exclusion configuration object using `vscode.workspace.getConfiguration('dce')`.
+        2.  Add the new path to the object (`newExclusion[path] = true`).
+        3.  Update the configuration using `config.update('files.exclude', newExclusion, vscode.ConfigurationTarget.Workspace)`.
+        4.  This will automatically trigger a refresh of the file tree as the configuration has changed.
+
+This approach leverages VS Code's built-in settings infrastructure, making the exclusions persistent and easily manageable for the user.
+</file_artifact>
+
+<file path="dist/Artifacts/A83. DCE - Universal Task Checklist for Cycle 6.md">
+# Artifact A83: DCE - Universal Task Checklist for Cycle 6
+# Date Created: C6
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A structured checklist for organizing the development tasks, feedback, and bugs from the "laundry list" provided in Cycle 6.
+- **Tags:** process, checklist, task management, planning, workflow
+
+## 1. Purpose
+
+This artifact provides a structured, universal format for tracking the development tasks derived from the "laundry list" of feedback in Cycle 6. It organizes work by logical feature areas and the group of files involved.
+
+---
+
+## Task List
+
+## T-1: Parsing & Interaction Schema
+- **Files Involved:**
+    - `src/Artifacts/A52.2 DCE - Interaction Schema Source.md`
+    - `src/Artifacts/A81. DCE - Curator Activity Plan.md`
+    - `src/client/utils/response-parser.ts`
+    - `src/common/types/pcpp.types.ts`
+    - `src/client/views/parallel-copilot.view/components/ParsedView.tsx`
+- **Total Tokens:** ~6,000
+- **More than one cycle?** No
+
+- [ ] **Task (T-ID: 1.1):** Create `A81` to plan the new `<curator_activity>` section.
+- [ ] **Task (T-ID: 1.2):** Update `A52.2` to be more explicit about the `</file_artifact>` closing tag and to include the new `curator_activity` section.
+- [ ] **Task (T-ID: 1.3):** Update the parser to extract the `<curator_activity>` section and to de-duplicate the `files` array, keeping the last occurrence of a path.
+- [ ] **Task (T-ID: 1.4):** Update the UI to render the new `curatorActivity` content in its own collapsible section.
+
+### Verification Steps
+1.  Provide a response with duplicate file paths and a `<curator_activity>` section.
+2.  Click "Parse All".
+3.  **Expected:** The file counter on the response tab should reflect the unique file count. The "Curator Activity" section should appear with the correct content.
+
+## T-2: Data Integrity & Core UX
+- **Files Involved:**
+    - `src/Artifacts/A79. DCE - Autosave and Navigation Locking Plan.md`
+    - `src/client/views/parallel-copilot.view/view.tsx`
+    - `src/client/views/parallel-copilot.view/components/CycleNavigator.tsx`
+    - `src/backend/services/history.service.ts`
+    - `src/common/ipc/channels.enum.ts`
+    - `src/common/ipc/channels.type.ts`
+- **Total Tokens:** ~12,000
+- **More than one cycle?** No
+
+- [ ] **Task (T-ID: 2.1):** Implement the autosave locking feature from `A79`. Add `saveStatus` state to `view.tsx`.
+- [ ] **Task (T-ID: 2.2):** Add `NotifySaveComplete` IPC channel and have `history.service.ts` send it after a successful write.
+- [ ] **Task (T-ID: 2.3):** Disable navigation buttons in `CycleNavigator.tsx` when `saveStatus` is not `'saved'`.
+- [ ] **Task (T-ID: 2.4):** Implement auto-tabbing on paste in `view.tsx`.
+- [ ] **Task (T-ID: 2.5):** Add `tsconfig.tsbuildinfo` to `NON_SELECTABLE_PATTERNS` in `file-tree.service.ts`.
+
+### Verification Steps
+1.  Type text into the Cycle Context.
+2.  **Expected:** The save status indicator should show "unsaved" and the cycle navigation buttons should be disabled.
+3.  Wait for the autosave to complete.
+4.  **Expected:** The status should become "saved" and the buttons should be re-enabled.
+5.  Paste content into `Resp 1` textarea.
+6.  **Expected:** The UI should automatically switch focus to the `Resp 2` tab.
+
+## T-3: Advanced UX Features
+- **Files Involved:**
+    - `src/client/views/parallel-copilot.view/components/ParsedView.tsx`
+    - `src/client/views/parallel-copilot.view/view.scss`
+    - `src/common/ipc/channels.enum.ts`
+    - `src/common/ipc/channels.type.ts`
+    - `src/backend/services/file-operation.service.ts`
+- **Total Tokens:** ~4,500
+- **More than one cycle?** No
+
+- [ ] **Task (T-ID: 3.1):** Implement a color gradient on "Associated Files" list items based on similarity score.
+- [ ] **Task (T-ID: 3.2):** Add a right-click context menu to "Associated Files" list items to copy the relative path.
+
+### Verification Steps
+1.  Parse a response with varying similarity scores.
+2.  **Expected:** The file list items should have background colors ranging from green (high similarity) to red (low similarity).
+3.  Right-click a file in the list.
+4.  **Expected:** A context menu should appear with a "Copy Relative Path" option. Clicking it should copy the path to the clipboard.
+
+## T-4: Future Feature Planning
+- **Files Involved:**
+    - `src/Artifacts/A80. DCE - Settings Panel Plan.md`
+    - `src/Artifacts/A82. DCE - Advanced Exclusion Management Plan.md`
+- **Total Tokens:** ~2,000
+- **More than one cycle?** Yes (Implementation is deferred)
+
+- [ ] **Task (T-ID: 4.1):** Create `A80` to plan the settings/help panel.
+- [ ] **Task (T-ID: 4.2):** Create `A82` to plan the advanced exclusion management feature.
+
+### Verification Steps
+1.  Check the master artifacts list.
+2.  **Expected:** The new `A80` and `A82` artifacts should be present and contain the feature plans.
 </file_artifact>
 
 
