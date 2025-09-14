@@ -1,4 +1,4 @@
-// Resp 12-Updated on: C6 (Add tsconfig.tsbuildinfo and history exports to non-selectable)
+// Resp 12-Updated on: C7 (Add tsconfig.tsbuildinfo and history exports to non-selectable)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";

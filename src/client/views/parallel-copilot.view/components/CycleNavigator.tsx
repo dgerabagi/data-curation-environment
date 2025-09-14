@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/CycleNavigator.tsx
-// Updated on: C5 (Disable buttons based on saveStatus)
+// Updated on: C7 (Disable buttons based on saveStatus)
 import * as React from 'react';
 import { VscChevronLeft, VscChevronRight, VscAdd, VscTrash, VscSync, VscCloudUpload, VscCloudDownload, VscSourceControl, VscDiscard } from 'react-icons/vsc';
 

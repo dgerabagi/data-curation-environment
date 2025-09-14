@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C6 (Implement auto-tab on paste)
+// Updated on: C7 (Implement auto-tab on paste)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './view.scss';
@@ -116,8 +116,13 @@ const App = () => {
     };
 
     const handlePaste = (e: React.ClipboardEvent, tabIndex: number) => {
-        handleRawContentChange(e.clipboardData.getData('text'), tabIndex);
-        if (tabIndex < tabCount) {
+        const pastedText = e.clipboardData.getData('text');
+        const currentContent = tabs[tabIndex.toString()]?.rawContent || '';
+        const tokenCount = Math.ceil(pastedText.length / 4);
+
+        handleRawContentChange(pastedText, tabIndex);
+        
+        if (tokenCount > 1000 && currentContent.trim() === '' && tabIndex < tabCount) {
             setActiveTab(tabIndex + 1);
         }
     };

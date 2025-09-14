@@ -1,5 +1,5 @@
 // src/backend/services/history.service.ts
-// Updated on: C5 (Send NotifySaveComplete message after writing file)
+// Updated on: C7 (Send NotifySaveComplete message after writing file)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
