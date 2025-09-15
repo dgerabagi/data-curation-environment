@@ -1,5 +1,5 @@
 // src/backend/services/file-operation.service.ts
-// Updated on: C15 (Add handlers for README and Changelog)
+// Updated on: C17 (Fix paths for README and Changelog)
 import * as vscode from "vscode";
 import * as path from "path";
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
@@ -20,26 +20,31 @@ export class FileOperationService {
         if (!workspaceFolders || workspaceFolders.length === 0) {
             throw new Error("No workspace folder open.");
         }
+        // Use the first workspace folder's URI
         return workspaceFolders[0].uri.fsPath;
     }
 
     public async handleReadmeContentRequest(serverIpc: ServerPostMessageManager) {
         try {
             const readmePath = path.join(this.getWorkspaceRoot(), 'README.md');
+            Services.loggerService.log(`Attempting to read README from: ${readmePath}`);
             const content = await fs.readFile(readmePath, 'utf-8');
             serverIpc.sendToClient(ServerToClientChannel.SendReadmeContent, { content });
         } catch (error) {
-            serverIpc.sendToClient(ServerToClientChannel.SendReadmeContent, { content: '# README not found.' });
+            Services.loggerService.error(`Failed to read README.md: ${error}`);
+            serverIpc.sendToClient(ServerToClientChannel.SendReadmeContent, { content: '# README.md not found in workspace root.' });
         }
     }
 
     public async handleChangelogContentRequest(serverIpc: ServerPostMessageManager) {
         try {
             const changelogPath = path.join(this.getWorkspaceRoot(), 'CHANGELOG.md');
+            Services.loggerService.log(`Attempting to read CHANGELOG from: ${changelogPath}`);
             const content = await fs.readFile(changelogPath, 'utf-8');
             serverIpc.sendToClient(ServerToClientChannel.SendChangelogContent, { content });
         } catch (error) {
-            serverIpc.sendToClient(ServerToClientChannel.SendChangelogContent, { content: '# Changelog not found.' });
+            Services.loggerService.error(`Failed to read CHANGELOG.md: ${error}`);
+            serverIpc.sendToClient(ServerToClientChannel.SendChangelogContent, { content: '# CHANGELOG.md not found in workspace root.' });
         }
     }
 
@@ -332,6 +337,7 @@ export class FileOperationService {
         const workspaceFolders = vscode.workspace.workspaceFolders;
         let pathToCopy = filePath;
         if (relative && workspaceFolders && workspaceFolders.length > 0) {
+            // Use the first workspace folder's URI to compute a relative path
             pathToCopy = path.relative(workspaceFolders[0].uri.fsPath, filePath);
         }
         vscode.env.clipboard.writeText(pathToCopy);

@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 17 - settings opens!
+Current Cycle 18 - fix changelog/readme source
+Cycle 17 - settings opens!
 Cycle 16 - dist ignored, now get the settings panel to work
 Cycle 15 - still dist, still ? icon doesnt open
 Cycle 14 - two issues, one parsing the other is dist files getting added to flatten context
@@ -232,7 +233,7 @@ No project scope defined.
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C9 (Add A84)
+# Updated on: C17 (Add A85)
 
 ## 1. Purpose
 
@@ -606,6 +607,10 @@ No project scope defined.
 - **Description:** A structured checklist for organizing the next phase of development tasks, focusing on feature parity with the native VS Code explorer.
 - **Tags:** process, checklist, task management, planning, workflow
 
+### A85. DCE - Model Card Management Plan
+- **Description:** A plan for an enhanced settings panel where users can create and manage "model cards" to easily switch between different LLM providers and configurations.
+- **Tags:** feature plan, settings, ui, ux, llm, configuration, model management
+
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
 - **Tags:** history, log, development process, cycles
@@ -692,6 +697,33 @@ No project scope defined.
 </M5. organized artifacts list>
 
 <M6. Cycles>
+
+<Cycle 18>
+<Cycle Context>
+nice nice nice! okay, now there seems to be some confusion with how the changelog and readme are supposed to work lol... it says `CHANGELOG.md not found in workspace root.` and `README.md not found in workspace root.` when i run this extension in debug mode. well of course they wouldnt be located there! you're looking in some random repo for this extensions change logs lol... no we write up the change logs and present them in the settings panel. i dont know why you're trying to get them from within the projects repo/workspace...
+</Cycle Context>
+<Previous Cycle 17 Summary of Actions>
+I have analyzed the request from Cycle 16. My course of action is to address the two distinct issues: the visual bug where unselectable folders like `.git` and `node_modules` no longer have a grayed-out checkbox, and the long-standing problem of the non-functional `?` icon.
+
+Your suggestion to move the `?` icon and have it open a main editor panel is an excellent one. It leverages an architectural pattern that is already proven to work for the Parallel Co-Pilot Panel (PCPP). I will implement this new settings panel as requested, complete with collapsible sections and placeholders for future settings. I will also fix the checkbox visual regression.
+
+1.  **Documentation First (Aligning with New Plan):**
+    *   I will update **`A80. DCE - Settings Panel Plan.md`** to reflect the new implementation strategy. The plan will now specify that the settings panel will be a `WebviewPanel` opened in the main editor area via a command, mirroring the PCPP's successful architecture.
+    *   I will add a new case study to **`A11. DCE - Regression Case Studies.md`** for the "Incorrect Checkbox State for Non-Selectable Folders" bug to prevent future regressions.
+
+2.  **Fix Checkbox Visual State:**
+    *   **Backend (`file-tree.service.ts`):** The root cause of the checkbox bug is that the `_isSelectable` method's pattern matching is not correctly handling root-level directories like `.git`. I will make the pattern matching more robust to ensure that these specific folders are correctly flagged as non-selectable.
+    *   **Frontend (`FileTree.tsx`):** I will verify that the `disabled` prop of the `Checkbox` component is correctly bound to the `isSelectable` property received from the backend.
+
+3.  **Implement New Settings Panel:**
+    *   **Relocate Button (`package.json`):** I will remove the `?` icon from the PCPP's internal header. I will add a new contribution to the `view/title` menu for the *Context Chooser* view. This will place a new "Settings" icon button in the header of the main file tree panel, next to the "Open Parallel Co-Pilot" button, making it always accessible.
+    *   **Command Logic (`extension.ts`):** I will rewrite the `createOrShowSettingsPanel` function to be nearly identical to the one for the PCPP. It will now create and manage a singleton `WebviewPanel`, which opens in the main editor area. This is a proven and reliable approach.
+    *   **IPC & Backend (`file-operation.service.ts`):** The existing channels to request README and Changelog content are sufficient and will be reused.
+    *   **Settings UI (`settings.view.tsx` & `view.scss`):** I will update the settings view to match your new requirements. It will feature:
+        *   Collapsible sections for "About" (displaying `README.md`) and "Changelog".
+        *   A new, collapsible "Settings" section containing placeholders for a local API URL input and a "Free Mode" vs. "Local Mode" toggle.
+</Previous Cycle 17 Summary of Actions>
+</Cycle 18>
 
 <Cycle 17>
 <Cycle Context>
@@ -2271,26 +2303,26 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-15T13:20:38.110Z
+  Date Generated: 2025-09-15T13:47:14.385Z
   ---
   Total Files: 186
-  Approx. Tokens: 454396
+  Approx. Tokens: 454570
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (8280 tokens)
-4. src\Artifacts\A0. DCE Master Artifact List.md (7794 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (8294 tokens)
+4. src\Artifacts\A0. DCE Master Artifact List.md (7868 tokens)
 5. src\backend\services\prompt.service.ts (5042 tokens)
 6. src\client\views\parallel-copilot.view\view.scss (4978 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4422 tokens)
-8. src\backend\services\file-operation.service.ts (4133 tokens)
+8. src\backend\services\file-operation.service.ts (4261 tokens)
 9. src\client\views\context-chooser.view\view.tsx (4019 tokens)
 10. src\client\views\context-chooser.view\view.scss (3708 tokens)
 
 <!-- Full File List -->
-1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 460 - Chars: 31173 - Tokens: 7794
+1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 464 - Chars: 31472 - Tokens: 7868
 2. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 3. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
 4. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
@@ -2349,7 +2381,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 57. src\Artifacts\A55. DCE - FSService Refactoring Plan.md - Lines: 77 - Chars: 4022 - Tokens: 1006
 58. src\Artifacts\A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md - Lines: 47 - Chars: 5687 - Tokens: 1422
 59. src\Artifacts\A57. DCE - Phase 2 - Cycle Management Plan.md - Lines: 44 - Chars: 3625 - Tokens: 907
-60. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 40 - Chars: 3698 - Tokens: 925
+60. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 40 - Chars: 3737 - Tokens: 935
 61. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 35 - Chars: 4177 - Tokens: 1045
 62. src\Artifacts\A61. DCE - Phase 2 - Cycle History Management Plan.md - Lines: 45 - Chars: 3559 - Tokens: 890
 63. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1806 - Tokens: 452
@@ -2395,7 +2427,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 103. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
 104. src\backend\services\action.service.ts - Lines: 71 - Chars: 2444 - Tokens: 611
 105. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
-106. src\backend\services\file-operation.service.ts - Lines: 354 - Chars: 16529 - Tokens: 4133
+106. src\backend\services\file-operation.service.ts - Lines: 360 - Chars: 17042 - Tokens: 4261
 107. src\backend\services\file-tree.service.ts - Lines: 272 - Chars: 14424 - Tokens: 3606
 108. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12658 - Tokens: 3165
 109. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
@@ -2433,7 +2465,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 141. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 92 - Chars: 4340 - Tokens: 1085
 142. src\client\views\parallel-copilot.view\view.scss - Lines: 891 - Chars: 19912 - Tokens: 4978
 143. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-144. src\client\views\parallel-copilot.view\view.tsx - Lines: 271 - Chars: 33117 - Tokens: 8280
+144. src\client\views\parallel-copilot.view\view.tsx - Lines: 271 - Chars: 33175 - Tokens: 8294
 145. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
 146. src\common\ipc\channels.enum.ts - Lines: 96 - Chars: 5288 - Tokens: 1322
 147. src\common\ipc\channels.type.ts - Lines: 97 - Chars: 7483 - Tokens: 1871
@@ -2450,7 +2482,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 158. src\extension.ts - Lines: 168 - Chars: 6874 - Tokens: 1719
 159. webpack.config.js - Lines: 112 - Chars: 2987 - Tokens: 747
 160. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
-161. package.json - Lines: 157 - Chars: 5115 - Tokens: 1279
+161. package.json - Lines: 157 - Chars: 5271 - Tokens: 1318
 162. .vscodeignore - Lines: 25 - Chars: 787 - Tokens: 197
 163. .gitignore - Lines: 10 - Chars: 128 - Tokens: 32
 164. src\Artifacts\A78. DCE - VSIX Packaging and FTV Flashing Bug.md - Lines: 50 - Chars: 3687 - Tokens: 922
@@ -2460,14 +2492,14 @@ This file-centric approach helps in planning and prioritizing work, especially i
 168. src\Artifacts\A77. DCE - Whitepaper Generation Plan.md - Lines: 74 - Chars: 8731 - Tokens: 2183
 169. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
 170. src\Artifacts\A200. Cycle Log.md - Lines: 8971 - Chars: 901614 - Tokens: 225404
-171. src\Artifacts\A80. DCE - Settings Panel Plan.md - Lines: 39 - Chars: 3970 - Tokens: 993
+171. src\Artifacts\A80. DCE - Settings Panel Plan.md - Lines: 39 - Chars: 3592 - Tokens: 898
 172. src\Artifacts\A81. DCE - Curator Activity Plan.md - Lines: 34 - Chars: 2346 - Tokens: 587
 173. src\Artifacts\A82. DCE - Advanced Exclusion Management Plan.md - Lines: 40 - Chars: 3010 - Tokens: 753
 174. src\Artifacts\A83. DCE - Universal Task Checklist for Cycle 6.md - Lines: 95 - Chars: 5172 - Tokens: 1293
 175. src\Artifacts\A84. DCE - Universal Task Checklist for Cycle 10+.md - Lines: 55 - Chars: 2541 - Tokens: 636
 176. new-folder\new-file.ts - Lines: 1 - Chars: 0 - Tokens: 0
 177. new-folder\new-file.ts - Lines: 1 - Chars: 0 - Tokens: 0
-178. CHANGELOG.md - Lines: 15 - Chars: 876 - Tokens: 219
+178. CHANGELOG.md - Lines: 15 - Chars: 890 - Tokens: 223
 179. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 180. src\client\views\settings.view\on-message.ts - Lines: 17 - Chars: 762 - Tokens: 191
 181. src\client\views\settings.view\view.scss - Lines: 87 - Chars: 1767 - Tokens: 442
@@ -2481,7 +2513,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C9 (Add A84)
+# Updated on: C17 (Add A85)
 
 ## 1. Purpose
 
@@ -2854,6 +2886,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 ### A84. DCE - Universal Task Checklist for Cycle 10+
 - **Description:** A structured checklist for organizing the next phase of development tasks, focusing on feature parity with the native VS Code explorer.
 - **Tags:** process, checklist, task management, planning, workflow
+
+### A85. DCE - Model Card Management Plan
+- **Description:** A plan for an enhanced settings panel where users can create and manage "model cards" to easily switch between different LLM providers and configurations.
+- **Tags:** feature plan, settings, ui, ux, llm, configuration, model management
 
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
@@ -9462,7 +9498,7 @@ export class ContentExtractionService {
 
 <file path="src/backend/services/file-operation.service.ts">
 // src/backend/services/file-operation.service.ts
-// Updated on: C15 (Add handlers for README and Changelog)
+// Updated on: C17 (Fix paths for README and Changelog)
 import * as vscode from "vscode";
 import * as path from "path";
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
@@ -9483,26 +9519,31 @@ export class FileOperationService {
         if (!workspaceFolders || workspaceFolders.length === 0) {
             throw new Error("No workspace folder open.");
         }
+        // Use the first workspace folder's URI
         return workspaceFolders[0].uri.fsPath;
     }
 
     public async handleReadmeContentRequest(serverIpc: ServerPostMessageManager) {
         try {
             const readmePath = path.join(this.getWorkspaceRoot(), 'README.md');
+            Services.loggerService.log(`Attempting to read README from: ${readmePath}`);
             const content = await fs.readFile(readmePath, 'utf-8');
             serverIpc.sendToClient(ServerToClientChannel.SendReadmeContent, { content });
         } catch (error) {
-            serverIpc.sendToClient(ServerToClientChannel.SendReadmeContent, { content: '# README not found.' });
+            Services.loggerService.error(`Failed to read README.md: ${error}`);
+            serverIpc.sendToClient(ServerToClientChannel.SendReadmeContent, { content: '# README.md not found in workspace root.' });
         }
     }
 
     public async handleChangelogContentRequest(serverIpc: ServerPostMessageManager) {
         try {
             const changelogPath = path.join(this.getWorkspaceRoot(), 'CHANGELOG.md');
+            Services.loggerService.log(`Attempting to read CHANGELOG from: ${changelogPath}`);
             const content = await fs.readFile(changelogPath, 'utf-8');
             serverIpc.sendToClient(ServerToClientChannel.SendChangelogContent, { content });
         } catch (error) {
-            serverIpc.sendToClient(ServerToClientChannel.SendChangelogContent, { content: '# Changelog not found.' });
+            Services.loggerService.error(`Failed to read CHANGELOG.md: ${error}`);
+            serverIpc.sendToClient(ServerToClientChannel.SendChangelogContent, { content: '# CHANGELOG.md not found in workspace root.' });
         }
     }
 
@@ -9795,6 +9836,7 @@ export class FileOperationService {
         const workspaceFolders = vscode.workspace.workspaceFolders;
         let pathToCopy = filePath;
         if (relative && workspaceFolders && workspaceFolders.length > 0) {
+            // Use the first workspace folder's URI to compute a relative path
             pathToCopy = path.relative(workspaceFolders[0].uri.fsPath, filePath);
         }
         vscode.env.clipboard.writeText(pathToCopy);
@@ -15602,7 +15644,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C16 (Remove settings button)
+// Updated on: C17 (Add tooltip to Log State button)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -15853,7 +15895,7 @@ const App = () => {
     };
 
     return <div className="pc-view-container">
-        <div className="pc-header"><div className="pc-toolbar"><button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button><button onClick={handleGeneratePrompt} title="Generate prompt.md" className={workflowStep === 'awaitingGeneratePrompt' ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button><button onClick={handleLogState} title="Log Current State"><VscBug/></button><button onClick={handleGlobalParseToggle} className={`${isParsedMode ? 'active' : ''} ${workflowStep === 'awaitingParse' ? 'workflow-highlight' : ''}`}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => {setTabCount(parseInt(e.target.value, 10) || 1); setSaveStatus('unsaved');}} /></div></div>
+        <div className="pc-header"><div className="pc-toolbar"><button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button><button onClick={handleGeneratePrompt} title="Generate prompt.md" className={workflowStep === 'awaitingGeneratePrompt' ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button><button onClick={handleLogState} title="For developer use only. Logs internal state to the output channel."><VscBug/></button><button onClick={handleGlobalParseToggle} className={`${isParsedMode ? 'active' : ''} ${workflowStep === 'awaitingParse' ? 'workflow-highlight' : ''}`}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => {setTabCount(parseInt(e.target.value, 10) || 1); setSaveStatus('unsaved');}} /></div></div>
         <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''} extraHeaderContent={<div style={{display: 'flex', alignItems: 'center', gap: '8px'}}><SaveStatusIndicator /> {totalPromptCostDisplay}</div>}>
             <CycleNavigator currentCycle={currentCycle} maxCycle={maxCycle} cycleTitle={cycleTitle} isNewCycleButtonDisabled={isNewCycleButtonDisabled} onCycleChange={handleCycleChange} onNewCycle={handleNewCycle} onTitleChange={(title) => { setCycleTitle(title); setSaveStatus('unsaved'); }} onDeleteCycle={handleDeleteCycle} onResetHistory={handleResetHistory} onExportHistory={handleExportHistory} onImportHistory={handleImportHistory} onGitBaseline={handleGitBaseline} onGitRestore={onGitRestore} workflowStep={workflowStep} disabledReason={newCycleButtonDisabledReason} saveStatus={saveStatus} />
             <ContextInputs cycleContext={cycleContext} ephemeralContext={ephemeralContext} cycleContextTokens={cycleContextTokens} ephemeralContextTokens={ephemeralContextTokens} onCycleContextChange={onCycleContextChange} onEphemeralContextChange={onEphemeralContextChange} workflowStep={workflowStep} />
@@ -26423,42 +26465,42 @@ flattened_repo.txt
 # Artifact A80: DCE - Settings Panel Plan
 # Date Created: C6
 # Author: AI Model & Curator
-# Updated on: C16 (Adopt WebviewPanel strategy)
+# Updated on: C17 (Reflect removal of Context Chooser icon)
 
 - **Key/Value for A0:**
-- **Description:** A plan for a new settings panel, accessible via an icon, to house changelogs, settings, and other informational content.
+- **Description:** A plan for a new settings panel, accessible via a command, to house changelogs, settings, and other informational content.
 - **Tags:** feature plan, settings, ui, ux, changelog
 
 ## 1. Overview & Goal
 
-As the Data Curation Environment (DCE) grows in features, users will need a centralized location to manage settings, view changelogs, and access help documentation. The goal of this feature is to create a dedicated "Settings & Help" panel, accessible via a new icon in the main Context Chooser toolbar, that serves as this central hub.
+As the Data Curation Environment (DCE) grows in features, users will need a centralized location to manage settings, view changelogs, and access help documentation. The goal of this feature is to create a dedicated "Settings & Help" panel that serves as this central hub.
 
-**Status (C16):** In Progress. The implementation strategy has been updated to use a `WebviewPanel`, which opens in the main editor area, ensuring a more robust and user-friendly experience.
+**Status (C17):** Implemented. The panel is now functional and opens as a `WebviewPanel` in the main editor area. The entry point icon from the Context Chooser view has been removed, and the panel is now accessed via the `DCE: Open Settings & Help` command.
 
 ## 2. User Stories
 
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
-| P2-SET-01 | **Access Help and Settings** | As a user, I want to click an icon in the main Data Curation toolbar to open a dedicated panel, so I can access settings and information about the extension. | - A settings/help icon is present in the main header of the Data Curation (Context Chooser) view. <br> - Clicking it executes a command that opens a new `WebviewPanel` in the main editor area, titled "DCE Settings & Help". |
+| P2-SET-01 | **Access Help and Settings** | As a user, I want to execute a command to open a dedicated panel, so I can access settings and information about the extension. | - A command `DCE: Open Settings & Help` is available in the command palette. <br> - Executing it opens a new `WebviewPanel` in the main editor area, titled "DCE Settings & Help". |
 | P2-SET-02 | **View Changelog** | As a user, I want to view a changelog within the settings panel, so I can see what has changed in the latest version of the extension. | - The settings panel has a "Changelog" tab or collapsible section. <br> - This section displays the content of a `CHANGELOG.md` file from the workspace root, rendered as formatted Markdown. |
 | P2-SET-03 | **View About/README** | As a user, I want to view an "About" page that explains the purpose and workflow of the DCE, so I can get help on how to use it. | - The settings panel has an "About" tab or collapsible section. <br> - This section displays the content of the `README.md` file from the workspace root. |
 | P2-SET-04 | **Manage Settings** | As a user, I want to manage extension settings from this panel, so I can configure features to my preference. | - The settings panel has a "Settings" section. <br> - It provides UI controls for managing settings, such as a field for a local API URL and a toggle for "Free Mode" vs. "Local Mode". |
 
 ## 3. Technical Implementation Plan
 
-1.  **New Command & Icon:**
-    *   **UI (`package.json`):** A new icon button will be added to the `view/title` menu contribution for the `viewType.sidebar.contextChooser`. This places the button in the header of the file tree view. It will trigger the `dce.openSettingsPanel` command.
-    *   **Command (`commands.ts`):** The command executes an internal `dce.showSettingsPanel` command to follow our established architectural pattern.
-    *   **`extension.ts`:** The handler for `dce.showSettingsPanel` will create and manage a singleton `WebviewPanel`, ensuring only one settings panel can exist. This logic will be nearly identical to the `createOrShowParallelCopilotPanel` function.
+1.  **Command Registration:**
+    *   **`package.json`:** The `view/title` menu contribution for the `viewType.sidebar.contextChooser` has been removed. A new command `dce.openSettingsPanel` is registered for the command palette.
+    *   **`commands.ts`:** The command executes an internal `dce.showSettingsPanel` command.
+    *   **`extension.ts`:** The handler for `dce.showSettingsPanel` creates and manages a singleton `WebviewPanel`.
 
 2.  **New Settings Webview (`settings.view/`):**
-    *   `view.tsx` will render a UI with collapsible sections for "Changelog", "About", and "Settings".
-    *   On mount, it will send IPC messages to the backend to request the content for the `CHANGELOG.md` and `README.md` files.
-    *   The "Settings" section will contain placeholder UI elements (input field, radio buttons) for future functionality.
+    *   `view.tsx` renders a UI with collapsible sections for "Changelog", "About", and "Settings".
+    *   On mount, it sends IPC messages to the backend to request the content for the `CHANGELOG.md` and `README.md` files.
+    *   The "Settings" section contains placeholder UI elements for future functionality.
 
 3.  **Backend Logic (`file-operation.service.ts`):**
-    *   The existing handlers (`handleChangelogContentRequest`, `handleReadmeContentRequest`) will be used to read the respective files from the workspace root and send their content back to the settings webview.
-    *   **IPC:** The existing channels (`RequestChangelogContent`, `SendChangelogContent`, etc.) will facilitate this communication.
+    *   The `handleChangelogContentRequest` and `handleReadmeContentRequest` methods read the respective files from the workspace root and send their content back to the settings webview.
+    *   **IPC:** The existing channels (`RequestChangelogContent`, `SendChangelogContent`, etc.) facilitate this communication.
 </file_artifact>
 
 <file path="src/Artifacts/A81. DCE - Curator Activity Plan.md">
