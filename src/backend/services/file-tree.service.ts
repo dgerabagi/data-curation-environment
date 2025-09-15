@@ -1,5 +1,5 @@
 // src/backend/services/file-tree.service.ts
-// Updated on: C15 (Use globstar for dist pattern)
+// Updated on: C16 (Refine _isSelectable logic)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -16,7 +16,7 @@ const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
 const EXCLUSION_PATTERNS = ['dce_cache', 'out']; 
-const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/.git/', '/venv/', '/.venv/', 'flattened_repo.md', 'prompt.md', 'package-lock.json', 'tsconfig.tsbuildinfo', 'dce_history_export_', '**/dist/**'];
+const NON_SELECTABLE_PATTERNS = ['node_modules', '.vscode', '.git', 'venv', '.venv', 'flattened_repo.md', 'prompt.md', 'package-lock.json', 'tsconfig.tsbuildinfo', 'dce_history_export_', 'dist'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
@@ -164,8 +164,8 @@ export class FileTreeService {
             serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: [] });
             return;
         }
-        const fileTree = await this.buildTreeFromTraversal(workspaceFolders[0].uri);
-        this.fileTreeCache = [fileTree];
+        const fileTrees = await Promise.all(workspaceFolders.map(wf => this.buildTreeFromTraversal(wf.uri)));
+        this.fileTreeCache = fileTrees;
         serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: this.fileTreeCache });
         this.triggerDecorationsUpdate();
     }
@@ -211,13 +211,19 @@ export class FileTreeService {
     private _isSelectable(filePath: string, fileType: vscode.FileType): boolean {
         const normalizedPath = normalizePath(filePath);
         const name = path.basename(normalizedPath);
-        if (name === 'tsconfig.tsbuildinfo') return false;
-        // Use minimatch-like logic for globstar
+        
         return !NON_SELECTABLE_PATTERNS.some(pattern => {
+            // Check for full name match (e.g., 'node_modules', 'prompt.md')
+            if (name === pattern) return true;
+            // Check for inclusion for path-based patterns (e.g., '/.git/')
+            if (normalizedPath.includes(`/${pattern}/`)) return true;
+            // Check for globstar pattern
             if (pattern.startsWith('**/') && pattern.endsWith('/**')) {
-                return normalizedPath.includes(pattern.slice(3, -3));
+                return normalizedPath.includes(`/${pattern.slice(3, -3)}/`);
             }
-            return normalizedPath.includes(pattern) || name.startsWith(pattern);
+            // Check for prefix for patterns like 'dce_history_export_'
+            if (name.startsWith(pattern)) return true;
+            return false;
         });
     }
 

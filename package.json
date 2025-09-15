@@ -53,7 +53,9 @@
             },
             {
                 "command": "dce.openSettingsPanel",
-                "title": "DCE: Open Settings & Help"
+                "title": "DCE: Open Settings & Help",
+                "category": "DCE",
+                "icon": "$(settings-gear)"
             },
             {
                 "command": "dce.gitInit",
@@ -89,6 +91,11 @@
                     "command": "dce.openParallelCopilot",
                     "when": "view == viewType.sidebar.contextChooser",
                     "group": "navigation"
+                },
+                {
+                    "command": "dce.openSettingsPanel",
+                    "when": "view == viewType.sidebar.contextChooser",
+                    "group": "navigation@2"
                 }
             ],
             "activityBar/view/title": [

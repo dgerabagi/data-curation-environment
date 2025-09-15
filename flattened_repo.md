@@ -1,16 +1,16 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-15T12:58:27.955Z
+  Date Generated: 2025-09-15T13:20:38.110Z
   ---
   Total Files: 186
-  Approx. Tokens: 452764
+  Approx. Tokens: 454396
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (8323 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (8280 tokens)
 4. src\Artifacts\A0. DCE Master Artifact List.md (7794 tokens)
 5. src\backend\services\prompt.service.ts (5042 tokens)
 6. src\client\views\parallel-copilot.view\view.scss (4978 tokens)
@@ -112,7 +112,7 @@
 90. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 41 - Chars: 3009 - Tokens: 753
 91. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 97 - Chars: 4056 - Tokens: 1014
 92. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 55 - Chars: 3473 - Tokens: 869
-93. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 64 - Chars: 7495 - Tokens: 1874
+93. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 74 - Chars: 8690 - Tokens: 2173
 94. src\Artifacts\A42. DCE - Phase 2 - Initial Scaffolding Deployment Script.md - Lines: 246 - Chars: 8264 - Tokens: 2066
 95. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 57 - Chars: 9891 - Tokens: 2473
 96. src\Artifacts\A58. DCE - WinMerge Source Code Analysis.md - Lines: 56 - Chars: 5322 - Tokens: 1331
@@ -126,7 +126,7 @@
 104. src\backend\services\action.service.ts - Lines: 71 - Chars: 2444 - Tokens: 611
 105. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
 106. src\backend\services\file-operation.service.ts - Lines: 354 - Chars: 16529 - Tokens: 4133
-107. src\backend\services\file-tree.service.ts - Lines: 266 - Chars: 14127 - Tokens: 3532
+107. src\backend\services\file-tree.service.ts - Lines: 272 - Chars: 14424 - Tokens: 3606
 108. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12658 - Tokens: 3165
 109. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 110. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
@@ -163,7 +163,7 @@
 141. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 92 - Chars: 4340 - Tokens: 1085
 142. src\client\views\parallel-copilot.view\view.scss - Lines: 891 - Chars: 19912 - Tokens: 4978
 143. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-144. src\client\views\parallel-copilot.view\view.tsx - Lines: 271 - Chars: 33291 - Tokens: 8323
+144. src\client\views\parallel-copilot.view\view.tsx - Lines: 271 - Chars: 33117 - Tokens: 8280
 145. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
 146. src\common\ipc\channels.enum.ts - Lines: 96 - Chars: 5288 - Tokens: 1322
 147. src\common\ipc\channels.type.ts - Lines: 97 - Chars: 7483 - Tokens: 1871
@@ -180,7 +180,7 @@
 158. src\extension.ts - Lines: 168 - Chars: 6874 - Tokens: 1719
 159. webpack.config.js - Lines: 112 - Chars: 2987 - Tokens: 747
 160. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
-161. package.json - Lines: 150 - Chars: 4828 - Tokens: 1207
+161. package.json - Lines: 157 - Chars: 5115 - Tokens: 1279
 162. .vscodeignore - Lines: 25 - Chars: 787 - Tokens: 197
 163. .gitignore - Lines: 10 - Chars: 128 - Tokens: 32
 164. src\Artifacts\A78. DCE - VSIX Packaging and FTV Flashing Bug.md - Lines: 50 - Chars: 3687 - Tokens: 922
@@ -190,22 +190,22 @@
 168. src\Artifacts\A77. DCE - Whitepaper Generation Plan.md - Lines: 74 - Chars: 8731 - Tokens: 2183
 169. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
 170. src\Artifacts\A200. Cycle Log.md - Lines: 8971 - Chars: 901614 - Tokens: 225404
-171. src\Artifacts\A80. DCE - Settings Panel Plan.md - Lines: 39 - Chars: 3380 - Tokens: 845
+171. src\Artifacts\A80. DCE - Settings Panel Plan.md - Lines: 39 - Chars: 3970 - Tokens: 993
 172. src\Artifacts\A81. DCE - Curator Activity Plan.md - Lines: 34 - Chars: 2346 - Tokens: 587
 173. src\Artifacts\A82. DCE - Advanced Exclusion Management Plan.md - Lines: 40 - Chars: 3010 - Tokens: 753
 174. src\Artifacts\A83. DCE - Universal Task Checklist for Cycle 6.md - Lines: 95 - Chars: 5172 - Tokens: 1293
 175. src\Artifacts\A84. DCE - Universal Task Checklist for Cycle 10+.md - Lines: 55 - Chars: 2541 - Tokens: 636
 176. new-folder\new-file.ts - Lines: 1 - Chars: 0 - Tokens: 0
 177. new-folder\new-file.ts - Lines: 1 - Chars: 0 - Tokens: 0
-178. CHANGELOG.md - Lines: 15 - Chars: 913 - Tokens: 229
+178. CHANGELOG.md - Lines: 15 - Chars: 876 - Tokens: 219
 179. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 180. src\client\views\settings.view\on-message.ts - Lines: 17 - Chars: 762 - Tokens: 191
-181. src\client\views\settings.view\view.scss - Lines: 42 - Chars: 911 - Tokens: 228
-182. src\client\views\settings.view\view.tsx - Lines: 43 - Chars: 1964 - Tokens: 491
+181. src\client\views\settings.view\view.scss - Lines: 87 - Chars: 1767 - Tokens: 442
+182. src\client\views\settings.view\view.tsx - Lines: 74 - Chars: 3291 - Tokens: 823
 183. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 184. src\client\views\settings.view\on-message.ts - Lines: 17 - Chars: 762 - Tokens: 191
-185. src\client\views\settings.view\view.scss - Lines: 42 - Chars: 911 - Tokens: 228
-186. src\client\views\settings.view\view.tsx - Lines: 43 - Chars: 1964 - Tokens: 491
+185. src\client\views\settings.view\view.scss - Lines: 87 - Chars: 1767 - Tokens: 442
+186. src\client\views\settings.view\view.tsx - Lines: 74 - Chars: 3291 - Tokens: 823
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -6143,7 +6143,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C15 (Add dist file auto-add case study)
+# Updated on: C16 (Add checkbox state regression)
 
 ## 1. Purpose
 
@@ -6152,6 +6152,16 @@ This document serves as a living record of persistent or complex bugs that have 
 **This artifact is the primary log for new and recent case studies.** Older, resolved issues are archived in `A11.1 DCE - New Regression Case Studies.md` to keep this document concise and focused on currently relevant issues.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 028: Incorrect Checkbox State for Non-Selectable Folders
+
+-   **Artifacts Affected:** `src/backend/services/file-tree.service.ts`
+-   **Cycles Observed:** C16
+-   **Symptom:** Special, non-selectable folders like `.git`, `.vscode`, and `node_modules` appear with a normal, enabled checkbox instead of a grayed-out, disabled one. The checkbox is still not clickable, but the visual cue that it is non-selectable is missing.
+-   **Root Cause Analysis (RCA):** The pattern matching logic in the `_isSelectable` method of `file-tree.service.ts` was not robust enough. Patterns like `'/.git/'` were being checked with `filePath.includes(pattern)`, which fails for root-level directories where the path is simply `c:/project/.git` and does not contain surrounding slashes.
+-   **Codified Solution & Best Practice:** The pattern matching must account for different path structures. The solution is to check if the normalized path *includes* the pattern (for nested cases) OR if the `basename` of the path *is* the pattern name (for root-level cases). This ensures that directories like `.git` are correctly identified as non-selectable regardless of their position in the path string.
 
 ---
 
@@ -7539,7 +7549,7 @@ export class FileOperationService {
 
 <file path="src/backend/services/file-tree.service.ts">
 // src/backend/services/file-tree.service.ts
-// Updated on: C15 (Use globstar for dist pattern)
+// Updated on: C16 (Refine _isSelectable logic)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -7556,7 +7566,7 @@ const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
 const EXCLUSION_PATTERNS = ['dce_cache', 'out']; 
-const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/.git/', '/venv/', '/.venv/', 'flattened_repo.md', 'prompt.md', 'package-lock.json', 'tsconfig.tsbuildinfo', 'dce_history_export_', '**/dist/**'];
+const NON_SELECTABLE_PATTERNS = ['node_modules', '.vscode', '.git', 'venv', '.venv', 'flattened_repo.md', 'prompt.md', 'package-lock.json', 'tsconfig.tsbuildinfo', 'dce_history_export_', 'dist'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
@@ -7704,8 +7714,8 @@ export class FileTreeService {
             serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: [] });
             return;
         }
-        const fileTree = await this.buildTreeFromTraversal(workspaceFolders[0].uri);
-        this.fileTreeCache = [fileTree];
+        const fileTrees = await Promise.all(workspaceFolders.map(wf => this.buildTreeFromTraversal(wf.uri)));
+        this.fileTreeCache = fileTrees;
         serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: this.fileTreeCache });
         this.triggerDecorationsUpdate();
     }
@@ -7751,13 +7761,19 @@ export class FileTreeService {
     private _isSelectable(filePath: string, fileType: vscode.FileType): boolean {
         const normalizedPath = normalizePath(filePath);
         const name = path.basename(normalizedPath);
-        if (name === 'tsconfig.tsbuildinfo') return false;
-        // Use minimatch-like logic for globstar
+        
         return !NON_SELECTABLE_PATTERNS.some(pattern => {
+            // Check for full name match (e.g., 'node_modules', 'prompt.md')
+            if (name === pattern) return true;
+            // Check for inclusion for path-based patterns (e.g., '/.git/')
+            if (normalizedPath.includes(`/${pattern}/`)) return true;
+            // Check for globstar pattern
             if (pattern.startsWith('**/') && pattern.endsWith('/**')) {
-                return normalizedPath.includes(pattern.slice(3, -3));
+                return normalizedPath.includes(`/${pattern.slice(3, -3)}/`);
             }
-            return normalizedPath.includes(pattern) || name.startsWith(pattern);
+            // Check for prefix for patterns like 'dce_history_export_'
+            if (name.startsWith(pattern)) return true;
+            return false;
         });
     }
 
@@ -13316,11 +13332,11 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C15 (Fix TS errors)
+// Updated on: C16 (Remove settings button)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
-import { VscWand, VscFileCode, VscBug, VscBook, VscFolder, VscChevronDown, VscLoading, VscCheck, VscVm, VscWarning, VscQuestion } from 'react-icons/vsc';
+import { VscWand, VscFileCode, VscBug, VscBook, VscFolder, VscChevronDown, VscLoading, VscCheck, VscVm, VscWarning } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '../../../common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '../../../common/ipc/channels.enum';
 import { ParsedResponse, PcppCycle, PcppResponse } from '../../../common/types/pcpp.types';
@@ -13567,7 +13583,7 @@ const App = () => {
     };
 
     return <div className="pc-view-container">
-        <div className="pc-header"><div className="pc-toolbar"><button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button><button onClick={handleGeneratePrompt} title="Generate prompt.md" className={workflowStep === 'awaitingGeneratePrompt' ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button><button onClick={handleLogState} title="Log Current State"><VscBug/></button><button onClick={() => clientIpc.sendToServer(ClientToServerChannel.VSCodeCommand, { command: 'dce.openSettingsPanel' })} title="Settings & Help"><VscQuestion /></button><button onClick={handleGlobalParseToggle} className={`${isParsedMode ? 'active' : ''} ${workflowStep === 'awaitingParse' ? 'workflow-highlight' : ''}`}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => {setTabCount(parseInt(e.target.value, 10) || 1); setSaveStatus('unsaved');}} /></div></div>
+        <div className="pc-header"><div className="pc-toolbar"><button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button><button onClick={handleGeneratePrompt} title="Generate prompt.md" className={workflowStep === 'awaitingGeneratePrompt' ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button><button onClick={handleLogState} title="Log Current State"><VscBug/></button><button onClick={handleGlobalParseToggle} className={`${isParsedMode ? 'active' : ''} ${workflowStep === 'awaitingParse' ? 'workflow-highlight' : ''}`}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => {setTabCount(parseInt(e.target.value, 10) || 1); setSaveStatus('unsaved');}} /></div></div>
         <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''} extraHeaderContent={<div style={{display: 'flex', alignItems: 'center', gap: '8px'}}><SaveStatusIndicator /> {totalPromptCostDisplay}</div>}>
             <CycleNavigator currentCycle={currentCycle} maxCycle={maxCycle} cycleTitle={cycleTitle} isNewCycleButtonDisabled={isNewCycleButtonDisabled} onCycleChange={handleCycleChange} onNewCycle={handleNewCycle} onTitleChange={(title) => { setCycleTitle(title); setSaveStatus('unsaved'); }} onDeleteCycle={handleDeleteCycle} onResetHistory={handleResetHistory} onExportHistory={handleExportHistory} onImportHistory={handleImportHistory} onGitBaseline={handleGitBaseline} onGitRestore={onGitRestore} workflowStep={workflowStep} disabledReason={newCycleButtonDisabledReason} saveStatus={saveStatus} />
             <ContextInputs cycleContext={cycleContext} ephemeralContext={ephemeralContext} cycleContextTokens={cycleContextTokens} ephemeralContextTokens={ephemeralContextTokens} onCycleContextChange={onCycleContextChange} onEphemeralContextChange={onEphemeralContextChange} workflowStep={workflowStep} />
@@ -14627,7 +14643,9 @@ module.exports = [extensionConfig, webviewConfig];
             },
             {
                 "command": "dce.openSettingsPanel",
-                "title": "DCE: Open Settings & Help"
+                "title": "DCE: Open Settings & Help",
+                "category": "DCE",
+                "icon": "$(settings-gear)"
             },
             {
                 "command": "dce.gitInit",
@@ -14663,6 +14681,11 @@ module.exports = [extensionConfig, webviewConfig];
                     "command": "dce.openParallelCopilot",
                     "when": "view == viewType.sidebar.contextChooser",
                     "group": "navigation"
+                },
+                {
+                    "command": "dce.openSettingsPanel",
+                    "when": "view == viewType.sidebar.contextChooser",
+                    "group": "navigation@2"
                 }
             ],
             "activityBar/view/title": [
@@ -24130,42 +24153,42 @@ flattened_repo.txt
 # Artifact A80: DCE - Settings Panel Plan
 # Date Created: C6
 # Author: AI Model & Curator
-# Updated on: C15 (Mark as active implementation)
+# Updated on: C16 (Adopt WebviewPanel strategy)
 
 - **Key/Value for A0:**
-- **Description:** A plan for a new settings panel, accessible via a help icon, to house changelogs, settings, and other informational content.
+- **Description:** A plan for a new settings panel, accessible via an icon, to house changelogs, settings, and other informational content.
 - **Tags:** feature plan, settings, ui, ux, changelog
 
 ## 1. Overview & Goal
 
-As the Data Curation Environment (DCE) grows in features, users will need a centralized location to manage settings, view changelogs, and access help documentation. The goal of this feature is to create a dedicated "Settings & Help" panel, accessible via a new `?` icon in the Parallel Co-Pilot Panel (PCPP), that serves as this central hub.
+As the Data Curation Environment (DCE) grows in features, users will need a centralized location to manage settings, view changelogs, and access help documentation. The goal of this feature is to create a dedicated "Settings & Help" panel, accessible via a new icon in the main Context Chooser toolbar, that serves as this central hub.
 
-**Status (C15):** In Progress.
+**Status (C16):** In Progress. The implementation strategy has been updated to use a `WebviewPanel`, which opens in the main editor area, ensuring a more robust and user-friendly experience.
 
 ## 2. User Stories
 
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
-| P2-SET-01 | **Access Help and Settings** | As a user, I want to click a help icon (`?`) in the PCPP to open a dedicated panel, so I can access settings and information about the extension. | - A help icon is present in the main header of the PCPP. <br> - Clicking it opens a new `WebviewPanel` in the main editor area, titled "DCE Settings & Help". |
-| P2-SET-02 | **View Changelog** | As a user, I want to view a changelog within the settings panel, so I can see what has changed in the latest version of the extension. | - The settings panel has a "Changelog" tab. <br> - This tab displays the content of a `CHANGELOG.md` file from the workspace root, rendered as formatted Markdown. |
-| P2-SET-03 | **View About/README** | As a user, I want to view an "About" page that explains the purpose and workflow of the DCE, so I can get help on how to use it. | - The settings panel has an "About" tab. <br> - This tab displays the content of the `README.md` file from the workspace root. |
-| P2-SET-04 | **Manage Settings (Future)** | As a user, I want to manage extension settings from this panel, so I can configure features to my preference. | - The settings panel has a "Settings" tab. <br> - It provides UI controls for managing settings, such as API keys (from `A41`) and the future URL-based LLM endpoint. |
+| P2-SET-01 | **Access Help and Settings** | As a user, I want to click an icon in the main Data Curation toolbar to open a dedicated panel, so I can access settings and information about the extension. | - A settings/help icon is present in the main header of the Data Curation (Context Chooser) view. <br> - Clicking it executes a command that opens a new `WebviewPanel` in the main editor area, titled "DCE Settings & Help". |
+| P2-SET-02 | **View Changelog** | As a user, I want to view a changelog within the settings panel, so I can see what has changed in the latest version of the extension. | - The settings panel has a "Changelog" tab or collapsible section. <br> - This section displays the content of a `CHANGELOG.md` file from the workspace root, rendered as formatted Markdown. |
+| P2-SET-03 | **View About/README** | As a user, I want to view an "About" page that explains the purpose and workflow of the DCE, so I can get help on how to use it. | - The settings panel has an "About" tab or collapsible section. <br> - This section displays the content of the `README.md` file from the workspace root. |
+| P2-SET-04 | **Manage Settings** | As a user, I want to manage extension settings from this panel, so I can configure features to my preference. | - The settings panel has a "Settings" section. <br> - It provides UI controls for managing settings, such as a field for a local API URL and a toggle for "Free Mode" vs. "Local Mode". |
 
 ## 3. Technical Implementation Plan
 
 1.  **New Command & Icon:**
-    *   **UI (`view.tsx`):** A help/question mark icon button in the main header of the PCPP triggers the `dce.openSettingsPanel` command.
+    *   **UI (`package.json`):** A new icon button will be added to the `view/title` menu contribution for the `viewType.sidebar.contextChooser`. This places the button in the header of the file tree view. It will trigger the `dce.openSettingsPanel` command.
     *   **Command (`commands.ts`):** The command executes an internal `dce.showSettingsPanel` command to follow our established architectural pattern.
-    *   **`extension.ts`:** The handler for `dce.showSettingsPanel` creates and manages a singleton `WebviewPanel`, ensuring only one settings panel can exist.
+    *   **`extension.ts`:** The handler for `dce.showSettingsPanel` will create and manage a singleton `WebviewPanel`, ensuring only one settings panel can exist. This logic will be nearly identical to the `createOrShowParallelCopilotPanel` function.
 
-2.  **New Settings Webview:**
-    *   A new view will be created under `src/client/views/settings.view/`.
-    *   `view.tsx` will render a simple tabbed interface ("Changelog", "About").
+2.  **New Settings Webview (`settings.view/`):**
+    *   `view.tsx` will render a UI with collapsible sections for "Changelog", "About", and "Settings".
     *   On mount, it will send IPC messages to the backend to request the content for the `CHANGELOG.md` and `README.md` files.
+    *   The "Settings" section will contain placeholder UI elements (input field, radio buttons) for future functionality.
 
-3.  **Backend Logic:**
-    *   **`file-operation.service.ts`:** New handlers (`handleChangelogContentRequest`, `handleReadmeContentRequest`) will be added to read the respective files from the workspace root and send their content back to the settings webview.
-    *   **IPC:** New channels (`RequestChangelogContent`, `SendChangelogContent`, etc.) will be added to facilitate this communication.
+3.  **Backend Logic (`file-operation.service.ts`):**
+    *   The existing handlers (`handleChangelogContentRequest`, `handleReadmeContentRequest`) will be used to read the respective files from the workspace root and send their content back to the settings webview.
+    *   **IPC:** The existing channels (`RequestChangelogContent`, `SendChangelogContent`, etc.) will facilitate this communication.
 </file_artifact>
 
 <file path="src/Artifacts/A81. DCE - Curator Activity Plan.md">
@@ -24418,14 +24441,14 @@ All notable changes to the "Data Curation Environment" extension will be documen
 ## [0.1.1] - Q3 2025
 
 ### Added
-- **Git-Integrated Testing:** Added "Baseline (Commit)" and "Restore Baseline" buttons to the PCPP for a rapid test-and-revert workflow. The restore logic now correctly handles newly created files.
+- **Git-Integrated Testing:** Added "Baseline (Commit)" and "Restore Baseline" buttons to the PCPP for a rapid test-and-revert workflow.
 - **Undo/Redo for File Operations:** Implemented `Ctrl+Z` and `Ctrl+Y` in the File Tree View to undo/redo file moves.
 - **Settings & Help Panel:** Added a `?` icon to the PCPP that opens this panel, containing the changelog and README.
 - **Tab Persistence:** The active response tab in the PCPP is now saved and restored across sessions.
 
 ### Fixed
 - **Command Registration:** Fixed a critical activation error caused by a command being registered twice.
-- **Exclusion List:** `tsconfig.tsbuildinfo` is now correctly excluded from the flattened context.
+- **Exclusion List:** `tsconfig.tsbuildinfo` and `dist` directories are now correctly excluded from selection and the flattened context.
 </file_artifact>
 
 <file path="src/client/views/settings.view/index.ts">
@@ -24470,36 +24493,81 @@ body {
 }
 
 .settings-view-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
     h1 {
         font-size: 1.5em;
         font-weight: bold;
         border-bottom: 1px solid var(--vscode-panel-border);
         padding-bottom: 8px;
-        margin-bottom: 16px;
+        margin-bottom: 0;
     }
 }
 
-.tab-bar {
-    display: flex;
-    border-bottom: 1px solid var(--vscode-panel-border);
-    margin-bottom: 16px;
+.collapsible-section {
+    border: 1px solid var(--vscode-panel-border);
+    border-radius: 4px;
 }
 
-.tab {
-    padding: 6px 12px;
+.collapsible-header {
+    background-color: var(--vscode-sideBar-sectionHeaderBackground);
+    padding: 6px 10px;
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: bold;
     cursor: pointer;
-    border-bottom: 2px solid transparent;
-    color: var(--vscode-tab-inactiveForeground);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    .chevron {
+        transition: transform 0.2s ease-in-out;
+    }
+    .chevron.collapsed {
+        transform: rotate(-90deg);
+    }
 }
 
-.tab.active {
-    color: var(--vscode-tab-activeForeground);
-    border-bottom-color: var(--vscode-tab-activeBorder);
+.collapsible-content {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
-.tab-content {
-    h2 {
-        margin-top: 0;
+.settings-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    label {
+        font-weight: bold;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        background-color: var(--vscode-input-background);
+        color: var(--vscode-input-foreground);
+        border: 1px solid var(--vscode-input-border);
+        padding: 4px;
+        border-radius: 2px;
+        outline: none;
+
+        &:focus {
+            border-color: var(--vscode-focusBorder);
+        }
+    }
+}
+
+.radio-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    label {
+        font-weight: normal;
     }
 }
 </file_artifact>
@@ -24512,9 +24580,22 @@ import './view.scss';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
 import ReactMarkdown from 'react-markdown';
+import { VscChevronDown } from 'react-icons/vsc';
+
+const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; initialCollapsed?: boolean }> = ({ title, children, initialCollapsed = false }) => {
+    const [isCollapsed, setIsCollapsed] = React.useState(initialCollapsed);
+    return (
+        <div className="collapsible-section">
+            <div className="collapsible-header" onClick={() => setIsCollapsed(!isCollapsed)}>
+                <VscChevronDown className={`chevron ${isCollapsed ? 'collapsed' : ''}`} />
+                <span>{title}</span>
+            </div>
+            {!isCollapsed && <div className="collapsible-content">{children}</div>}
+        </div>
+    );
+};
 
 const App = () => {
-    const [activeTab, setActiveTab] = React.useState('changelog');
     const [readmeContent, setReadmeContent] = React.useState('Loading...');
     const [changelogContent, setChangelogContent] = React.useState('Loading...');
     const clientIpc = ClientPostMessageManager.getInstance();
@@ -24534,14 +24615,32 @@ const App = () => {
     return (
         <div className="settings-view-container">
             <h1>DCE Settings & Help</h1>
-            <div className="tab-bar">
-                <div className={`tab ${activeTab === 'changelog' ? 'active' : ''}`} onClick={() => setActiveTab('changelog')}>Changelog</div>
-                <div className={`tab ${activeTab === 'readme' ? 'active' : ''}`} onClick={() => setActiveTab('readme')}>About</div>
-            </div>
-            <div className="tab-content">
-                {activeTab === 'changelog' && <ReactMarkdown>{changelogContent}</ReactMarkdown>}
-                {activeTab === 'readme' && <ReactMarkdown>{readmeContent}</ReactMarkdown>}
-            </div>
+            
+            <CollapsibleSection title="Settings">
+                <div className="settings-group">
+                    <label htmlFor="api-url">Local API URL</label>
+                    <input type="text" id="api-url" placeholder="http://localhost:1234/v1/chat/completions" />
+                </div>
+                <div className="settings-group">
+                    <label>Mode</label>
+                    <div className="radio-group">
+                        <input type="radio" id="free-mode" name="mode" value="free" defaultChecked />
+                        <label htmlFor="free-mode">Free Mode (Manual Copy/Paste)</label>
+                    </div>
+                    <div className="radio-group">
+                        <input type="radio" id="local-mode" name="mode" value="local" />
+                        <label htmlFor="local-mode">Local LLM Mode</label>
+                    </div>
+                </div>
+            </CollapsibleSection>
+
+            <CollapsibleSection title="Changelog">
+                <ReactMarkdown>{changelogContent}</ReactMarkdown>
+            </CollapsibleSection>
+
+            <CollapsibleSection title="About (README)">
+                <ReactMarkdown>{readmeContent}</ReactMarkdown>
+            </CollapsibleSection>
         </div>
     );
 };
@@ -24592,36 +24691,81 @@ body {
 }
 
 .settings-view-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
     h1 {
         font-size: 1.5em;
         font-weight: bold;
         border-bottom: 1px solid var(--vscode-panel-border);
         padding-bottom: 8px;
-        margin-bottom: 16px;
+        margin-bottom: 0;
     }
 }
 
-.tab-bar {
-    display: flex;
-    border-bottom: 1px solid var(--vscode-panel-border);
-    margin-bottom: 16px;
+.collapsible-section {
+    border: 1px solid var(--vscode-panel-border);
+    border-radius: 4px;
 }
 
-.tab {
-    padding: 6px 12px;
+.collapsible-header {
+    background-color: var(--vscode-sideBar-sectionHeaderBackground);
+    padding: 6px 10px;
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: bold;
     cursor: pointer;
-    border-bottom: 2px solid transparent;
-    color: var(--vscode-tab-inactiveForeground);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    .chevron {
+        transition: transform 0.2s ease-in-out;
+    }
+    .chevron.collapsed {
+        transform: rotate(-90deg);
+    }
 }
 
-.tab.active {
-    color: var(--vscode-tab-activeForeground);
-    border-bottom-color: var(--vscode-tab-activeBorder);
+.collapsible-content {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
-.tab-content {
-    h2 {
-        margin-top: 0;
+.settings-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    label {
+        font-weight: bold;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        background-color: var(--vscode-input-background);
+        color: var(--vscode-input-foreground);
+        border: 1px solid var(--vscode-input-border);
+        padding: 4px;
+        border-radius: 2px;
+        outline: none;
+
+        &:focus {
+            border-color: var(--vscode-focusBorder);
+        }
+    }
+}
+
+.radio-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    label {
+        font-weight: normal;
     }
 }
 </file_artifact>
@@ -24634,9 +24778,22 @@ import './view.scss';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
 import ReactMarkdown from 'react-markdown';
+import { VscChevronDown } from 'react-icons/vsc';
+
+const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; initialCollapsed?: boolean }> = ({ title, children, initialCollapsed = false }) => {
+    const [isCollapsed, setIsCollapsed] = React.useState(initialCollapsed);
+    return (
+        <div className="collapsible-section">
+            <div className="collapsible-header" onClick={() => setIsCollapsed(!isCollapsed)}>
+                <VscChevronDown className={`chevron ${isCollapsed ? 'collapsed' : ''}`} />
+                <span>{title}</span>
+            </div>
+            {!isCollapsed && <div className="collapsible-content">{children}</div>}
+        </div>
+    );
+};
 
 const App = () => {
-    const [activeTab, setActiveTab] = React.useState('changelog');
     const [readmeContent, setReadmeContent] = React.useState('Loading...');
     const [changelogContent, setChangelogContent] = React.useState('Loading...');
     const clientIpc = ClientPostMessageManager.getInstance();
@@ -24656,14 +24813,32 @@ const App = () => {
     return (
         <div className="settings-view-container">
             <h1>DCE Settings & Help</h1>
-            <div className="tab-bar">
-                <div className={`tab ${activeTab === 'changelog' ? 'active' : ''}`} onClick={() => setActiveTab('changelog')}>Changelog</div>
-                <div className={`tab ${activeTab === 'readme' ? 'active' : ''}`} onClick={() => setActiveTab('readme')}>About</div>
-            </div>
-            <div className="tab-content">
-                {activeTab === 'changelog' && <ReactMarkdown>{changelogContent}</ReactMarkdown>}
-                {activeTab === 'readme' && <ReactMarkdown>{readmeContent}</ReactMarkdown>}
-            </div>
+            
+            <CollapsibleSection title="Settings">
+                <div className="settings-group">
+                    <label htmlFor="api-url">Local API URL</label>
+                    <input type="text" id="api-url" placeholder="http://localhost:1234/v1/chat/completions" />
+                </div>
+                <div className="settings-group">
+                    <label>Mode</label>
+                    <div className="radio-group">
+                        <input type="radio" id="free-mode" name="mode" value="free" defaultChecked />
+                        <label htmlFor="free-mode">Free Mode (Manual Copy/Paste)</label>
+                    </div>
+                    <div className="radio-group">
+                        <input type="radio" id="local-mode" name="mode" value="local" />
+                        <label htmlFor="local-mode">Local LLM Mode</label>
+                    </div>
+                </div>
+            </CollapsibleSection>
+
+            <CollapsibleSection title="Changelog">
+                <ReactMarkdown>{changelogContent}</ReactMarkdown>
+            </CollapsibleSection>
+
+            <CollapsibleSection title="About (README)">
+                <ReactMarkdown>{readmeContent}</ReactMarkdown>
+            </CollapsibleSection>
         </div>
     );
 };

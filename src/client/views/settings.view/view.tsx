@@ -5,9 +5,22 @@ import './view.scss';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
 import ReactMarkdown from 'react-markdown';
+import { VscChevronDown } from 'react-icons/vsc';
+
+const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; initialCollapsed?: boolean }> = ({ title, children, initialCollapsed = false }) => {
+    const [isCollapsed, setIsCollapsed] = React.useState(initialCollapsed);
+    return (
+        <div className="collapsible-section">
+            <div className="collapsible-header" onClick={() => setIsCollapsed(!isCollapsed)}>
+                <VscChevronDown className={`chevron ${isCollapsed ? 'collapsed' : ''}`} />
+                <span>{title}</span>
+            </div>
+            {!isCollapsed && <div className="collapsible-content">{children}</div>}
+        </div>
+    );
+};
 
 const App = () => {
-    const [activeTab, setActiveTab] = React.useState('changelog');
     const [readmeContent, setReadmeContent] = React.useState('Loading...');
     const [changelogContent, setChangelogContent] = React.useState('Loading...');
     const clientIpc = ClientPostMessageManager.getInstance();
@@ -27,14 +40,32 @@ const App = () => {
     return (
         <div className="settings-view-container">
             <h1>DCE Settings & Help</h1>
-            <div className="tab-bar">
-                <div className={`tab ${activeTab === 'changelog' ? 'active' : ''}`} onClick={() => setActiveTab('changelog')}>Changelog</div>
-                <div className={`tab ${activeTab === 'readme' ? 'active' : ''}`} onClick={() => setActiveTab('readme')}>About</div>
-            </div>
-            <div className="tab-content">
-                {activeTab === 'changelog' && <ReactMarkdown>{changelogContent}</ReactMarkdown>}
-                {activeTab === 'readme' && <ReactMarkdown>{readmeContent}</ReactMarkdown>}
-            </div>
+            
+            <CollapsibleSection title="Settings">
+                <div className="settings-group">
+                    <label htmlFor="api-url">Local API URL</label>
+                    <input type="text" id="api-url" placeholder="http://localhost:1234/v1/chat/completions" />
+                </div>
+                <div className="settings-group">
+                    <label>Mode</label>
+                    <div className="radio-group">
+                        <input type="radio" id="free-mode" name="mode" value="free" defaultChecked />
+                        <label htmlFor="free-mode">Free Mode (Manual Copy/Paste)</label>
+                    </div>
+                    <div className="radio-group">
+                        <input type="radio" id="local-mode" name="mode" value="local" />
+                        <label htmlFor="local-mode">Local LLM Mode</label>
+                    </div>
+                </div>
+            </CollapsibleSection>
+
+            <CollapsibleSection title="Changelog">
+                <ReactMarkdown>{changelogContent}</ReactMarkdown>
+            </CollapsibleSection>
+
+            <CollapsibleSection title="About (README)">
+                <ReactMarkdown>{readmeContent}</ReactMarkdown>
+            </CollapsibleSection>
         </div>
     );
 };
