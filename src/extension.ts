@@ -106,7 +106,7 @@ export async function activate(context: vscode.ExtensionContext) {
     }
 
     try {
-        Services.initialize(context, gitApi); // Pass the full context
+        Services.initialize(context, gitApi); 
         registerCommands(context);
         context.subscriptions.push(vscode.commands.registerCommand('dce.showParallelCopilot', () => {
             createOrShowParallelCopilotPanel(context);
@@ -116,7 +116,6 @@ export async function activate(context: vscode.ExtensionContext) {
         }));
         registerViews(context);
 
-        // Auto-open PCPP on first load
         const initialCycle = await Services.historyService.getInitialCycle();
         if (initialCycle.cycleId === 0 && vscode.workspace.workspaceFolders && vscode.workspace.workspaceFolders.length > 0) {
             Services.loggerService.log("Fresh environment, automatically opening Parallel Co-Pilot Panel.");

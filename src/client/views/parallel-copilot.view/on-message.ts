@@ -1,4 +1,4 @@
-// Updated on: C13 (Add settings panel handlers)
+// Updated on: C14 (Add settings panel handlers)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -50,7 +50,6 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestDeleteCycle, async (data) => {
         const newMaxCycle = await historyService.deleteCycle(data.cycleId);
-        // C180: This response is now handled on the frontend via ForceRefresh
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestResetHistory, () => {

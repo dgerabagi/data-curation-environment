@@ -1,4 +1,4 @@
-// Updated on: C13 (Add settings panel channels)
+// Updated on: C14 (Add settings panel channels)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";

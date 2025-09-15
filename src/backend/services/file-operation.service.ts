@@ -1,5 +1,5 @@
 // src/backend/services/file-operation.service.ts
-// Updated on: C13 (Add handlers for README and Changelog)
+// Updated on: C14 (Add handlers for README and Changelog)
 import * as vscode from "vscode";
 import * as path from "path";
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
@@ -341,7 +341,7 @@ export class FileOperationService {
     public addFileToIgnoreForAutoAdd(filePath: string) {
         Services.loggerService.log(`[Auto-Add] Temporarily ignoring: ${filePath}`);
         this.filesToIgnoreForAutoAdd.add(filePath);
-        setTimeout(() => this.removeFileToIgnoreForAutoAdd(filePath), 2000); // Auto-remove after 2 seconds
+        setTimeout(() => this.removeFileToIgnoreForAutoAdd(filePath), 2000);
     }
 
     public hasFileToIgnoreForAutoAdd(filePath: string): boolean {

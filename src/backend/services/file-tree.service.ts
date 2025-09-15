@@ -1,4 +1,5 @@
-// Resp 12-Updated on: C13 (Add tsconfig.tsbuildinfo to exclusion list)
+// src/backend/services/file-tree.service.ts
+// Updated on: C14 (Add selectable check to auto-add)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -41,7 +42,7 @@ export class FileTreeService {
             this.gitApi.repositories.forEach(repo => {
                 repo.state.onDidChange(() => {
                     Services.loggerService.warn(`[FTV-FLASH-DEBUG] Git repo state onDidChange event fired.`);
-                    this.triggerDecorationsUpdate(); // Use lightweight update
+                    this.triggerDecorationsUpdate();
                 });
             });
         }
@@ -79,7 +80,7 @@ export class FileTreeService {
         const onFileChange = (uri: vscode.Uri, source: string) => {
             const normalizedPath = normalizePath(uri.fsPath);
             if (this.historyFilePath && normalizedPath === this.historyFilePath) {
-                return; // Explicitly ignore the history file to prevent flashing
+                return;
             }
             for (const pattern of EXCLUSION_PATTERNS) {
                 if (normalizedPath.includes(`/${pattern}/`)) {
@@ -93,8 +94,9 @@ export class FileTreeService {
             const normalizedPath = normalizePath(uri.fsPath);
             if (this.historyFilePath && normalizedPath === this.historyFilePath) return;
             
-            const isNonSelectable = !this._isSelectable(uri.fsPath, vscode.FileType.File);
+            const isNonSelectable = !this._isSelectable(normalizedPath, vscode.FileType.File);
             if (isNonSelectable) {
+                Services.loggerService.log(`[Auto-Add] Ignoring non-selectable new file: ${normalizedPath}`);
                 onFileChange(uri, 'onDidCreate');
                 return;
             }
@@ -138,11 +140,10 @@ export class FileTreeService {
             if (isPdf) return { ...baseStats, tokenCount: Services.contentExtractionService.getVirtualPdfContent(filePath)?.tokenCount || 0, isSelectable: true };
             if (isExcel) return { ...baseStats, tokenCount: Services.contentExtractionService.getVirtualExcelContent(filePath)?.tokenCount || 0, isSelectable: true };
             if (isWordDoc) return { ...baseStats, tokenCount: Services.contentExtractionService.getVirtualWordContent(filePath)?.tokenCount || 0, isSelectable: true };
-            if (stats.size > 5_000_000) return { ...baseStats, tokenCount: 0, isSelectable: true }; // Fallback for large files
+            if (stats.size > 5_000_000) return { ...baseStats, tokenCount: 0, isSelectable: true };
             const content = await fs.readFile(filePath, 'utf-8');
             return { ...baseStats, tokenCount: Math.ceil(content.length / 4), isSelectable: true };
         } catch (error: any) {
-            // C6 Fix: If reading fails, still return size if possible
             try {
                 const stats = await fs.stat(filePath);
                 return { tokenCount: 0, sizeInBytes: stats.size, isImage: false, extension, isPdf: false, isExcel: false, isWordDoc: false, fileCount: 1, error: error.message, isSelectable: true };
@@ -155,7 +156,7 @@ export class FileTreeService {
     public async handleWorkspaceFilesRequest(serverIpc: ServerPostMessageManager, forceRefresh: boolean = false) {
         if (!forceRefresh && this.fileTreeCache) {
             serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: this.fileTreeCache });
-            this.triggerDecorationsUpdate(); // Also send latest decorations
+            this.triggerDecorationsUpdate();
             return;
         }
         const workspaceFolders = vscode.workspace.workspaceFolders;
@@ -166,7 +167,7 @@ export class FileTreeService {
         const fileTree = await this.buildTreeFromTraversal(workspaceFolders[0].uri);
         this.fileTreeCache = [fileTree];
         serverIpc.sendToClient(ServerToClientChannel.SendWorkspaceFiles, { files: this.fileTreeCache });
-        this.triggerDecorationsUpdate(); // Also send latest decorations
+        this.triggerDecorationsUpdate();
     }
 
     private getGitStatusMap(): GitStatusMap {

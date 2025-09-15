@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C13 (Implement tab persistence fix)
+// Updated on: C14 (Add settings panel command)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './view.scss';
@@ -42,7 +42,6 @@ const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; i
 );
 
 const App = () => {
-    // ... (existing state declarations)
     const [activeTab, setActiveTab] = React.useState(1);
     const [tabCount, setTabCount] = React.useState(4);
     const [currentCycle, setCurrentCycle] = React.useState<number | null>(null);
@@ -75,7 +74,6 @@ const App = () => {
 
     const clientIpc = ClientPostMessageManager.getInstance();
     
-    // ... (existing stateRef, saveCurrentCycleState, etc.)
     const stateRef = React.useRef({
         currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, fileExistenceMap
     });
@@ -106,7 +104,7 @@ const App = () => {
             selectedResponseId,
             selectedFilesForReplacement: Array.from(selectedFilesForReplacement),
             tabCount,
-            activeTab, // <-- This is the fix
+            activeTab,
             isSortedByTokens,
             pathOverrides: Object.fromEntries(pathOverrides)
         };
@@ -137,7 +135,6 @@ const App = () => {
         setAssociatedFileMenu({ x: event.clientX, y: event.clientY, path });
     };
 
-    // ... (rest of the component logic)
     const debouncedSave = useDebounce(saveCurrentCycleState, 1500);
     const getCurrentCycleData = React.useCallback(() => stateRef.current, []);
     const requestCostEstimation = React.useCallback(() => { const cycleData = getCurrentCycleData(); if (cycleData.currentCycle) clientIpc.sendToServer(ClientToServerChannel.RequestPromptCostBreakdown, { cycleData: cycleData as any }); }, [clientIpc, getCurrentCycleData]);

@@ -13,7 +13,7 @@ export enum ClientToServerChannel {
     RequestRevealInExplorer = "clientToServer.requestRevealInExplorer",
     RequestCopyPath = "clientToServer.requestCopyPath",
     RequestOpenFile = "clientToServer.requestOpenFile",
-    RequestOpenFolder = "clientToServer.requestOpenFolder", // New in C166
+    RequestOpenFolder = "clientToServer.requestOpenFolder", 
     RequestFileContent = "clientToServer.requestFileContent",
     RequestMoveFile = "clientToServer.requestMoveFile",
     RequestCopyFile = "clientToServer.requestCopyFile",
@@ -46,7 +46,7 @@ export enum ClientToServerChannel {
     RequestCreateCycle0Prompt = "clientToServer.requestCreateCycle0Prompt",
     RequestFileExistence = "clientToServer.requestFileExistence",
     RequestSyntaxHighlight = "clientToServer.requestSyntaxHighlight",
-    RequestHighlightContext = "clientToServer.requestHighlightContext", // New in C3
+    RequestHighlightContext = "clientToServer.requestHighlightContext", 
     RequestInitialCycleData = "clientToServer.requestInitialCycleData",
     RequestCycleData = "clientToServer.requestCycleData",
     SaveCycleData = "clientToServer.saveCycleData",
@@ -74,7 +74,7 @@ export enum ServerToClientChannel {
     FocusFile = "serverToClient.focusFile",
     SendAutoAddState = "serverToClient.sendAutoAddState",
     UpdateProblemCounts = "serverToClient.updateProblemCounts",
-    UpdateDecorations = "serverToClient.updateDecorations", // New in C184
+    UpdateDecorations = "serverToClient.updateDecorations", 
     UpdateNodeStats = "serverToClient.updateNodeStats",
     SendFileContent = "serverToClient.sendFileContent",
     SendReadmeContent = "serverToClient.sendReadmeContent",
@@ -83,7 +83,7 @@ export enum ServerToClientChannel {
     // Phase 2: PCPP
     SendFileExistence = "serverToClient.sendFileExistence",
     SendSyntaxHighlight = "serverToClient.sendSyntaxHighlight",
-    SendHighlightContext = "serverToClient.sendHighlightContext", // New in C3
+    SendHighlightContext = "serverToClient.sendHighlightContext", 
     SendInitialCycleData = "serverToClient.sendInitialCycleData",
     SendCycleData = "serverToClient.sendCycleData",
     FilesWritten = "serverToClient.filesWritten",

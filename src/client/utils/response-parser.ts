@@ -1,15 +1,15 @@
 // src/client/utils/response-parser.ts
-// Updated on: C6 (De-duplicate file list)
+// Updated on: C14 (Make file tag parsing more flexible)
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /<summary>([\s\S]*?)<\/summary>/;
 const COURSE_OF_ACTION_REGEX = /<course_of_action>([\s\S]*?)<\/course_of_action>/;
 const CURATOR_ACTIVITY_REGEX = /<curator_activity>([\s\S]*?)<\/curator_activity>/;
-const FILE_TAG_REGEX = /<file path="([^"]+)">([\s\S]*?)<\/file_artifact>/g;
+// C14 Update: More flexible closing tag matching
+const FILE_TAG_REGEX = /<file path="([^"]+)">([\s\S]*?)(?:<\/file_path>|<\/file>|<\/filepath>|<\/file_artifact>)/g;
 const CODE_FENCE_START_REGEX = /^\s*```[a-zA-Z]*\n/;
 
 export function parseResponse(rawText: string): ParsedResponse {
-    const files: ParsedFile[] = [];
     const fileMap = new Map<string, ParsedFile>();
     let totalTokens = 0;
 
@@ -18,7 +18,7 @@ export function parseResponse(rawText: string): ParsedResponse {
     const tagMatches = [...processedText.matchAll(FILE_TAG_REGEX)];
 
     if (tagMatches.length === 0 && processedText.includes('<file path')) {
-        const summary = `**PARSING FAILED:** Could not find valid \`<file path="...">...</file_artifact>\` tags. The response may be malformed or incomplete. Displaying raw response below.\n\n---\n\n${processedText}`;
+        const summary = `**PARSING FAILED:** Could not find valid \`<file path="...">...</file_artifact>\` (or similar) tags. The response may be malformed or incomplete. Displaying raw response below.\n\n---\n\n${processedText}`;
         return { summary, courseOfAction: '', filesUpdated: [], files: [], totalTokens: Math.ceil(processedText.length / 4) };
     }
 
@@ -28,7 +28,8 @@ export function parseResponse(rawText: string): ParsedResponse {
 
         if (path) {
             content = content.replace(CODE_FENCE_START_REGEX, '');
-            const patternsToRemove = [`</file_artifact>`, `</${path}>`, '```', '***'];
+            // C14 Update: Add new tags to the removal list
+            const patternsToRemove = [`</file_artifact>`, `</file_path>`, `</filepath>`, `</file>`, `</${path}>`, '```', '***'];
             let changed = true;
             while(changed) {
                 const originalContent = content;
