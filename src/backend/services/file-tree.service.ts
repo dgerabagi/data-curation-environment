@@ -1,5 +1,5 @@
 // src/backend/services/file-tree.service.ts
-// Updated on: C14 (Add selectable check to auto-add)
+// Updated on: C15 (Use globstar for dist pattern)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -16,7 +16,7 @@ const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
 const EXCLUSION_PATTERNS = ['dce_cache', 'out']; 
-const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/.git/', '/venv/', '/.venv/', 'flattened_repo.md', 'prompt.md', 'package-lock.json', 'tsconfig.tsbuildinfo', 'dce_history_export_', '/dist/'];
+const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/.git/', '/venv/', '/.venv/', 'flattened_repo.md', 'prompt.md', 'package-lock.json', 'tsconfig.tsbuildinfo', 'dce_history_export_', '**/dist/**'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
@@ -172,14 +172,19 @@ export class FileTreeService {
 
     private getGitStatusMap(): GitStatusMap {
         if (!this.gitApi?.repositories || this.gitApi.repositories.length === 0) return {};
-        const repo: Repository = this.gitApi.repositories[0];
         const getStatusChar = (s: Status) => ({ [Status.INDEX_ADDED]: 'A', [Status.MODIFIED]: 'M', [Status.DELETED]: 'D', [Status.UNTRACKED]: 'U', [Status.IGNORED]: 'I', [Status.CONFLICT]: 'C' }[s] || '');
-        const changes = [...repo.state.workingTreeChanges, ...repo.state.indexChanges, ...repo.state.mergeChanges];
         const statusMap: GitStatusMap = {};
-        changes.forEach(change => {
-            const statusChar = getStatusChar(change.status);
-            if (statusChar) statusMap[normalizePath(change.uri.fsPath)] = statusChar;
-        });
+        for (const repo of this.gitApi.repositories) {
+            try {
+                const changes = [...repo.state.workingTreeChanges, ...repo.state.indexChanges, ...repo.state.mergeChanges];
+                changes.forEach(change => {
+                    const statusChar = getStatusChar(change.status);
+                    if (statusChar) statusMap[normalizePath(change.uri.fsPath)] = statusChar;
+                });
+            } catch (e) {
+                Services.loggerService.warn(`[getGitStatusMap] Error reading repo status: ${(e as Error).message}`);
+            }
+        }
         return statusMap;
     }
 
@@ -207,8 +212,13 @@ export class FileTreeService {
         const normalizedPath = normalizePath(filePath);
         const name = path.basename(normalizedPath);
         if (name === 'tsconfig.tsbuildinfo') return false;
-        const pathWithSlash = normalizedPath + (fileType === vscode.FileType.Directory ? '/' : '');
-        return !NON_SELECTABLE_PATTERNS.some(p => pathWithSlash.includes(p) || name.startsWith(p));
+        // Use minimatch-like logic for globstar
+        return !NON_SELECTABLE_PATTERNS.some(pattern => {
+            if (pattern.startsWith('**/') && pattern.endsWith('/**')) {
+                return normalizedPath.includes(pattern.slice(3, -3));
+            }
+            return normalizedPath.includes(pattern) || name.startsWith(pattern);
+        });
     }
 
     private async _traverseDirectory(dirUri: vscode.Uri): Promise<FileNode[]> {

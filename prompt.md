@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 15 - still dist, still ? icon doesnt open
+Current Cycle 16 - dist ignored, now get the settings panel to work
+Cycle 15 - still dist, still ? icon doesnt open
 Cycle 14 - two issues, one parsing the other is dist files getting added to flatten context
 Cycle 13 - three outstanding issues
 Cycle 12 - continue QoL improvements
@@ -691,109 +692,46 @@ No project scope defined.
 
 <M6. Cycles>
 
+<Cycle 16>
+<Cycle Context>
+okay i think this response finally successfully ignores the `dist` files that are created when i do `npm run dev`. okay, now for some reason, the checkbox for .git, .vscode, and node_modules is no longer gray. i still cannot select that checkbox, but unlike files like `flattened_repo.md`, `package-lock.json`, and prompt.md`, which all do correctly depict the check box as a gray box, because it is unselectable. as i was testing responses, i saw one other response which caused this same issue. however, in order to resolve the dist issue, im accepting this response with this issue in the hopes you can fix it in this cycle.
+
+next, as for the `?` icon, it still does not open anything. i have an idea. can we please just move the `?` button, turn it into a settings button, and place it next to the `DCE: Open Parallel Co-Pilot` button? that way, just like the `DCE: Open Parallel Co-Pilot` button opens a pcpp window, so too should the new settings button open up a settings window. if one button works, why cant you get the other one to work? on the settings, we just want to display the readme/change logs (which each can be collapsed so as to not take up the space) and then the settings placeholder for the user to input their local API URL, and an option to change between free mode and local mode. 
+</Cycle Context>
+<Previous Cycle 15 Summary of Actions>
+I have analyzed the request from Cycle 14. My course of action is to address the three distinct tasks provided: improving the response parser's flexibility, fixing a bug where `dist` files are incorrectly auto-selected, and implementing a functional settings/help panel for the `?` icon.
+
+I will begin by updating our documentation. I will modify the parser logic guide (`A52.1`) to reflect the new, more lenient parsing strategy and create a regression case study for the `dist` file bug.
+
+With the documentation aligned, I will implement the code changes. The response parser will be updated to accept multiple valid closing tags for file artifacts. The file tree service will be modified to ensure its "auto-add new files" feature respects the project's exclusion patterns, preventing `dist` files from being added. Finally, I will implement the full logic for the settings panel, leveraging the work from previous cycles to create a functional view that displays the project's changelog and README, resolving the long-standing issue with the `?` icon.
+
+1.  **Documentation First (Aligning with New Requirements):**
+    *   I will update **`A52.1 DCE - Parser Logic and AI Guidance.md`**. The `FILE_TAG_REGEX` will be modified to accept multiple closing tags (`</file_path>`, `</file>`, `</filepath>`, `</file_artifact>`), and the code example in the document will be updated to reflect this change.
+    *   I will create a new case study in **`A11. DCE - Regression Case Studies.md`** for the "Dist files auto-added" bug. The root cause is the `onDidCreate` file watcher not checking against the `NON_SELECTABLE_PATTERNS`. The codified solution is to apply this check before auto-adding a new file.
+    *   I will update **`A80. DCE - Settings Panel Plan.md`** to reflect the final implementation details.
+
+2.  **Enhance Response Parser (`response-parser.ts`):**
+    *   I will modify the `FILE_TAG_REGEX` to use a non-capturing group for the closing tag: `(?:<\/file_path>|<\/file>|<\/filepath>|<\/file_artifact>)`.
+    *   I will update the `patternsToRemove` array within the `parseResponse` function to include these new possible closing tags, ensuring the extracted code content is clean.
+
+3.  **Fix `dist` File Auto-Addition (`file-tree.service.ts`):**
+    *   In the `onDidCreate` file watcher handler, before a new file is pushed to the `autoAddQueue`, I will add a check using the existing `this._isSelectable(normalizedPath, vscode.FileType.File)` method.
+    *   If the method returns `false`, the file will not be added to the queue, preventing it from being automatically checked.
+
+4.  **Implement Settings/Help Panel:**
+    *   **IPC:** I will add new `RequestReadmeContent` and `RequestChangelogContent` channels to the IPC definitions.
+    *   **Backend (`file-operation.service.ts`):** I will create two new handlers, `handleReadmeContentRequest` and `handleChangelogContentRequest`. These will read the `README.md` and `CHANGELOG.md` files from the workspace root and send their content to the client.
+    *   **Backend (`extension.ts`):** I will finalize the implementation of the `createOrShowSettingsPanel` function. It will correctly create a singleton `WebviewPanel`, set its HTML content, and wire up the message handlers. This ensures the `?` icon is fully functional.
+    *   **Frontend (`settings.view`):** I will provide the full implementation for the settings view, including a simple tabbed interface to switch between the "About" (README) and "Changelog" content, which it will request from the backend on load.
+</Previous Cycle 15 Summary of Actions>
+</Cycle 16>
+
 <Cycle 15>
 <Cycle Context>
 nope, look at all those nasty `dist` files making their way into our flattened context still (see screenshot). in addition, clicking the `?` still does nothing. am i steering you wrong by saying `open a window`? are you trying to open something that you cant? it can just be another pane like our parallel co-pilot. like when i click on Project Plan, it opens the 'project plan window', and if i click return to cycle x, then i go back to the 'cycles window'. im looking for another 'window' for our info and settings. can you do that please?
 
 finally, there were some problems when launching the extension in dev/debug mode, see the ephemeral below
 </Cycle Context>
-<Ephemeral Context>
-[{
-	"resource": "/c:/Projects/DCE/src/client/views/parallel-copilot.view/view.tsx",
-	"owner": "typescript",
-	"code": "7016",
-	"severity": 8,
-	"message": "Could not find a declaration file for module 'react-dom'. 'c:/Projects/DCE/node_modules/react-dom/index.js' implicitly has an 'any' type.\n  Try `npm i --save-dev @types/react-dom` if it exists or add a new declaration (.d.ts) file containing `declare module 'react-dom';`",
-	"source": "ts",
-	"startLineNumber": 4,
-	"startColumn": 27,
-	"endLineNumber": 4,
-	"endColumn": 38,
-	"origin": "extHost2"
-},{
-	"resource": "/c:/Projects/DCE/src/client/views/parallel-copilot.view/view.tsx",
-	"owner": "typescript",
-	"code": "7016",
-	"severity": 8,
-	"message": "Could not find a declaration file for module 'path-browserify'. 'c:/Projects/DCE/node_modules/path-browserify/index.js' implicitly has an 'any' type.\n  Try `npm i --save-dev @types/path-browserify` if it exists or add a new declaration (.d.ts) file containing `declare module 'path-browserify';`",
-	"source": "ts",
-	"startLineNumber": 18,
-	"startColumn": 23,
-	"endLineNumber": 18,
-	"endColumn": 40,
-	"origin": "extHost2"
-},{
-	"resource": "/c:/Projects/DCE/src/client/views/parallel-copilot.view/view.tsx",
-	"owner": "typescript",
-	"code": "2307",
-	"severity": 8,
-	"message": "Cannot find module '@/client/components/ContextMenu' or its corresponding type declarations.",
-	"source": "ts",
-	"startLineNumber": 19,
-	"startColumn": 25,
-	"endLineNumber": 19,
-	"endColumn": 58,
-	"origin": "extHost2"
-},{
-	"resource": "/c:/Projects/DCE/src/client/views/parallel-copilot.view/view.tsx",
-	"owner": "typescript",
-	"code": "7006",
-	"severity": 8,
-	"message": "Parameter 'file' implicitly has an 'any' type.",
-	"source": "ts",
-	"startLineNumber": 160,
-	"startColumn": 411,
-	"endLineNumber": 160,
-	"endColumn": 415,
-	"origin": "extHost2"
-},{
-	"resource": "/c:/Projects/DCE/src/client/views/parallel-copilot.view/view.tsx",
-	"owner": "typescript",
-	"code": "7006",
-	"severity": 8,
-	"message": "Parameter 'file' implicitly has an 'any' type.",
-	"source": "ts",
-	"startLineNumber": 160,
-	"startColumn": 492,
-	"endLineNumber": 160,
-	"endColumn": 496,
-	"origin": "extHost2"
-},{
-	"resource": "/c:/Projects/DCE/src/client/views/parallel-copilot.view/view.tsx",
-	"owner": "typescript",
-	"code": "2345",
-	"severity": 8,
-	"message": "Argument of type 'string[]' is not assignable to parameter of type 'string'.",
-	"source": "ts",
-	"startLineNumber": 197,
-	"startColumn": 238,
-	"endLineNumber": 197,
-	"endColumn": 242,
-	"origin": "extHost2"
-},{
-	"resource": "/c:/Projects/DCE/src/client/views/parallel-copilot.view/view.tsx",
-	"owner": "typescript",
-	"code": "2322",
-	"severity": 8,
-	"message": "Type 'string[][]' is not assignable to type 'string[]'.\n  Type 'string[]' is not assignable to type 'string'.",
-	"source": "ts",
-	"startLineNumber": 197,
-	"startColumn": 312,
-	"endLineNumber": 197,
-	"endColumn": 325,
-	"relatedInformation": [
-		{
-			"startLineNumber": 68,
-			"startColumn": 59,
-			"endLineNumber": 68,
-			"endColumn": 72,
-			"message": "The expected type comes from property 'filesToDelete' which is declared here on type '{ filesToDelete: string[]; }'",
-			"resource": "/c:/Projects/DCE/src/common/ipc/channels.type.ts"
-		}
-	],
-	"origin": "extHost2"
-}]
-</Ephemeral Context>
 <Previous Cycle 14 Summary of Actions>
 I have analyzed the three outstanding issues from Cycle 13. My course of action is to resolve all of them to improve state persistence, clean up the flattened output, and implement the help panel functionality.
 
@@ -2285,16 +2223,16 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-15T12:06:36.683Z
+  Date Generated: 2025-09-15T12:58:27.955Z
   ---
   Total Files: 186
-  Approx. Tokens: 452381
+  Approx. Tokens: 452764
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (8170 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (8323 tokens)
 4. src\Artifacts\A0. DCE Master Artifact List.md (7794 tokens)
 5. src\backend\services\prompt.service.ts (5042 tokens)
 6. src\client\views\parallel-copilot.view\view.scss (4978 tokens)
@@ -2396,7 +2334,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 90. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 41 - Chars: 3009 - Tokens: 753
 91. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 97 - Chars: 4056 - Tokens: 1014
 92. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 55 - Chars: 3473 - Tokens: 869
-93. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 62 - Chars: 7340 - Tokens: 1835
+93. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 64 - Chars: 7495 - Tokens: 1874
 94. src\Artifacts\A42. DCE - Phase 2 - Initial Scaffolding Deployment Script.md - Lines: 246 - Chars: 8264 - Tokens: 2066
 95. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 57 - Chars: 9891 - Tokens: 2473
 96. src\Artifacts\A58. DCE - WinMerge Source Code Analysis.md - Lines: 56 - Chars: 5322 - Tokens: 1331
@@ -2410,7 +2348,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 104. src\backend\services\action.service.ts - Lines: 71 - Chars: 2444 - Tokens: 611
 105. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
 106. src\backend\services\file-operation.service.ts - Lines: 354 - Chars: 16529 - Tokens: 4133
-107. src\backend\services\file-tree.service.ts - Lines: 256 - Chars: 13752 - Tokens: 3438
+107. src\backend\services\file-tree.service.ts - Lines: 266 - Chars: 14127 - Tokens: 3532
 108. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12658 - Tokens: 3165
 109. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 110. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
@@ -2447,10 +2385,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 141. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 92 - Chars: 4340 - Tokens: 1085
 142. src\client\views\parallel-copilot.view\view.scss - Lines: 891 - Chars: 19912 - Tokens: 4978
 143. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-144. src\client\views\parallel-copilot.view\view.tsx - Lines: 243 - Chars: 32677 - Tokens: 8170
-145. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
-146. src\common\ipc\channels.enum.ts - Lines: 96 - Chars: 5193 - Tokens: 1299
-147. src\common\ipc\channels.type.ts - Lines: 97 - Chars: 7387 - Tokens: 1847
+144. src\client\views\parallel-copilot.view\view.tsx - Lines: 271 - Chars: 33291 - Tokens: 8323
+145. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
+146. src\common\ipc\channels.enum.ts - Lines: 96 - Chars: 5288 - Tokens: 1322
+147. src\common\ipc\channels.type.ts - Lines: 97 - Chars: 7483 - Tokens: 1871
 148. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 149. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 150. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
@@ -2461,10 +2399,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 155. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
 156. src\common\utils\view-html.ts - Lines: 37 - Chars: 1314 - Tokens: 329
 157. src\common\view-types.ts - Lines: 8 - Chars: 175 - Tokens: 44
-158. src\extension.ts - Lines: 166 - Chars: 6815 - Tokens: 1704
+158. src\extension.ts - Lines: 168 - Chars: 6874 - Tokens: 1719
 159. webpack.config.js - Lines: 112 - Chars: 2987 - Tokens: 747
 160. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
-161. package.json - Lines: 148 - Chars: 4745 - Tokens: 1187
+161. package.json - Lines: 150 - Chars: 4828 - Tokens: 1207
 162. .vscodeignore - Lines: 25 - Chars: 787 - Tokens: 197
 163. .gitignore - Lines: 10 - Chars: 128 - Tokens: 32
 164. src\Artifacts\A78. DCE - VSIX Packaging and FTV Flashing Bug.md - Lines: 50 - Chars: 3687 - Tokens: 922
@@ -2481,15 +2419,15 @@ This file-centric approach helps in planning and prioritizing work, especially i
 175. src\Artifacts\A84. DCE - Universal Task Checklist for Cycle 10+.md - Lines: 55 - Chars: 2541 - Tokens: 636
 176. new-folder\new-file.ts - Lines: 1 - Chars: 0 - Tokens: 0
 177. new-folder\new-file.ts - Lines: 1 - Chars: 0 - Tokens: 0
-178. CHANGELOG.md - Lines: 15 - Chars: 899 - Tokens: 225
+178. CHANGELOG.md - Lines: 15 - Chars: 913 - Tokens: 229
 179. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 180. src\client\views\settings.view\on-message.ts - Lines: 17 - Chars: 762 - Tokens: 191
 181. src\client\views\settings.view\view.scss - Lines: 42 - Chars: 911 - Tokens: 228
-182. src\client\views\settings.view\view.tsx - Lines: 43 - Chars: 1957 - Tokens: 490
+182. src\client\views\settings.view\view.tsx - Lines: 43 - Chars: 1964 - Tokens: 491
 183. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 184. src\client\views\settings.view\on-message.ts - Lines: 17 - Chars: 762 - Tokens: 191
 185. src\client\views\settings.view\view.scss - Lines: 42 - Chars: 911 - Tokens: 228
-186. src\client\views\settings.view\view.tsx - Lines: 43 - Chars: 1957 - Tokens: 490
+186. src\client\views\settings.view\view.tsx - Lines: 43 - Chars: 1964 - Tokens: 491
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -8427,7 +8365,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C14 (Add dist file auto-add case study)
+# Updated on: C15 (Add dist file auto-add case study)
 
 ## 1. Purpose
 
@@ -8442,10 +8380,12 @@ This document serves as a living record of persistent or complex bugs that have 
 ### Case Study 027: Dist Files Incorrectly Auto-Added to Selection
 
 -   **Artifacts Affected:** `src/backend/services/file-tree.service.ts`
--   **Cycles Observed:** C14
--   **Symptom:** When a build process creates new files inside an excluded directory like `dist/`, the "Automatically add new files to selection" feature incorrectly adds these new files to the selection set, even though the `dist` folder itself is correctly marked as non-selectable.
--   **Root Cause Analysis (RCA):** The logic for the `onDidCreate` file system watcher was incomplete. It was checking if the "auto-add" feature was enabled but was failing to also check if the newly created file's path matched any of the defined `NON_SELECTABLE_PATTERNS`. This meant it would add any new file regardless of whether it was in a `dist`, `.git`, or `node_modules` folder.
--   **Codified Solution & Best Practice:** The `onDidCreate` handler in `file-tree.service.ts` must perform the same check that the UI rendering does. Before queuing a file for auto-addition, it must call the `_isSelectable(filePath, fileType)` helper method. If this method returns `false`, the file must be ignored. This ensures that the auto-add feature fully respects the project's exclusion rules.
+-   **Cycles Observed:** C14, C15
+-   **Symptom:** When a build process creates new files inside an excluded directory like `dist/` or `apps/backend/dist/`, the "Automatically add new files to selection" feature incorrectly adds these new files to the selection set, even though the `dist` folder itself is correctly marked as non-selectable.
+-   **Root Cause Analysis (RCA):** The logic for the `onDidCreate` file system watcher was incomplete. It was checking if the "auto-add" feature was enabled but was failing to also check if the newly created file's path matched any of the defined `NON_SELECTABLE_PATTERNS`. The initial pattern `'/dist/'` was also not robust enough as it only matched `dist` at the root.
+-   **Codified Solution & Best Practice:**
+    1.  The exclusion patterns must be robust. A pattern like `'**/dist/**'` should be used to match `dist` directories at any depth.
+    2.  The `onDidCreate` handler in `file-tree.service.ts` must perform the same check that the UI rendering does. Before queuing a file for auto-addition, it must call the `_isSelectable(filePath, fileType)` helper method. If this method returns `false`, the file must be ignored. This ensures that the auto-add feature fully respects the project's exclusion rules.
 
 ---
 
@@ -9464,7 +9404,7 @@ export class ContentExtractionService {
 
 <file path="src/backend/services/file-operation.service.ts">
 // src/backend/services/file-operation.service.ts
-// Updated on: C14 (Add handlers for README and Changelog)
+// Updated on: C15 (Add handlers for README and Changelog)
 import * as vscode from "vscode";
 import * as path from "path";
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
@@ -9821,7 +9761,7 @@ export class FileOperationService {
 
 <file path="src/backend/services/file-tree.service.ts">
 // src/backend/services/file-tree.service.ts
-// Updated on: C14 (Add selectable check to auto-add)
+// Updated on: C15 (Use globstar for dist pattern)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -9838,7 +9778,7 @@ const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
 const EXCLUSION_PATTERNS = ['dce_cache', 'out']; 
-const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/.git/', '/venv/', '/.venv/', 'flattened_repo.md', 'prompt.md', 'package-lock.json', 'tsconfig.tsbuildinfo', 'dce_history_export_', '/dist/'];
+const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/.git/', '/venv/', '/.venv/', 'flattened_repo.md', 'prompt.md', 'package-lock.json', 'tsconfig.tsbuildinfo', 'dce_history_export_', '**/dist/**'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
@@ -9994,14 +9934,19 @@ export class FileTreeService {
 
     private getGitStatusMap(): GitStatusMap {
         if (!this.gitApi?.repositories || this.gitApi.repositories.length === 0) return {};
-        const repo: Repository = this.gitApi.repositories[0];
         const getStatusChar = (s: Status) => ({ [Status.INDEX_ADDED]: 'A', [Status.MODIFIED]: 'M', [Status.DELETED]: 'D', [Status.UNTRACKED]: 'U', [Status.IGNORED]: 'I', [Status.CONFLICT]: 'C' }[s] || '');
-        const changes = [...repo.state.workingTreeChanges, ...repo.state.indexChanges, ...repo.state.mergeChanges];
         const statusMap: GitStatusMap = {};
-        changes.forEach(change => {
-            const statusChar = getStatusChar(change.status);
-            if (statusChar) statusMap[normalizePath(change.uri.fsPath)] = statusChar;
-        });
+        for (const repo of this.gitApi.repositories) {
+            try {
+                const changes = [...repo.state.workingTreeChanges, ...repo.state.indexChanges, ...repo.state.mergeChanges];
+                changes.forEach(change => {
+                    const statusChar = getStatusChar(change.status);
+                    if (statusChar) statusMap[normalizePath(change.uri.fsPath)] = statusChar;
+                });
+            } catch (e) {
+                Services.loggerService.warn(`[getGitStatusMap] Error reading repo status: ${(e as Error).message}`);
+            }
+        }
         return statusMap;
     }
 
@@ -10029,8 +9974,13 @@ export class FileTreeService {
         const normalizedPath = normalizePath(filePath);
         const name = path.basename(normalizedPath);
         if (name === 'tsconfig.tsbuildinfo') return false;
-        const pathWithSlash = normalizedPath + (fileType === vscode.FileType.Directory ? '/' : '');
-        return !NON_SELECTABLE_PATTERNS.some(p => pathWithSlash.includes(p) || name.startsWith(p));
+        // Use minimatch-like logic for globstar
+        return !NON_SELECTABLE_PATTERNS.some(pattern => {
+            if (pattern.startsWith('**/') && pattern.endsWith('/**')) {
+                return normalizedPath.includes(pattern.slice(3, -3));
+            }
+            return normalizedPath.includes(pattern) || name.startsWith(pattern);
+        });
     }
 
     private async _traverseDirectory(dirUri: vscode.Uri): Promise<FileNode[]> {
@@ -15588,9 +15538,9 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C14 (Add settings panel command)
+// Updated on: C15 (Fix TS errors)
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import './view.scss';
 import { VscWand, VscFileCode, VscBug, VscBook, VscFolder, VscChevronDown, VscLoading, VscCheck, VscVm, VscWarning, VscQuestion } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '../../../common/ipc/client-ipc';
@@ -15605,7 +15555,6 @@ import ContextInputs from './components/ContextInputs';
 import ResponseTabs from './components/ResponseTabs';
 import ResponsePane from './components/ResponsePane';
 import * as path from 'path-browserify';
-import ContextMenu from '@/client/components/ContextMenu';
 
 console.log('[PCPP View] view.tsx module loaded');
 
@@ -15746,7 +15695,36 @@ const App = () => {
         });
     }, [clientIpc, pathOverrides]);
     
-    const parseAllTabs = React.useCallback(() => { setTabs(prevTabs => { const allFilePaths = new Set<string>(); const updatedTabs = { ...prevTabs }; let needsUpdate = false; Object.values(updatedTabs).forEach(tabState => { if (tabState.rawContent && !tabState.parsedContent) { needsUpdate = true; const parsed = parseResponse(tabState.rawContent); tabState.parsedContent = parsed; parsed.filesUpdated.forEach(file => allFilePaths.add(file)); requestAllMetrics(parsed); parsed.files.forEach(file => { const lang = path.extname(file.path).substring(1) || 'plaintext'; const id = `${file.path}::${file.content}`; clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id }); }); } else if (tabState.parsedContent) { tabState.parsedContent.filesUpdated.forEach(file => allFilePaths.add(file)); } }); if (allFilePaths.size > 0) clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) }); return needsUpdate ? updatedTabs : prevTabs; }); }, [clientIpc, requestAllMetrics]);
+    const parseAllTabs: () => void = React.useCallback((): void => {
+        interface TabMap { [key: string]: TabState }
+        interface ParsedFile { path: string; content: string }
+
+        setTabs((prevTabs: TabMap) => {
+            const allFilePaths: Set<string> = new Set<string>();
+            const updatedTabs: TabMap = { ...prevTabs };
+            let needsUpdate: boolean = false;
+
+            Object.values(updatedTabs).forEach((tabState: TabState) => {
+                if (tabState.rawContent && !tabState.parsedContent) {
+                    needsUpdate = true;
+                    const parsed: ParsedResponse = parseResponse(tabState.rawContent);
+                    tabState.parsedContent = parsed;
+                    parsed.filesUpdated.forEach((filePath: string) => allFilePaths.add(filePath));
+                    requestAllMetrics(parsed);
+                    parsed.files.forEach((file: ParsedFile) => {
+                        const lang: string = path.extname(file.path).substring(1) || 'plaintext';
+                        const id: string = `${file.path}::${file.content}`;
+                        clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
+                    });
+                } else if (tabState.parsedContent) {
+                    tabState.parsedContent.filesUpdated.forEach((filePath: string) => allFilePaths.add(filePath));
+                }
+            });
+
+            if (allFilePaths.size > 0) clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) });
+            return needsUpdate ? updatedTabs : prevTabs;
+        });
+    }, [clientIpc, requestAllMetrics]);
     
     React.useEffect(() => { console.log(`[PCPP WORKFLOW] Step changed to: ${workflowStep}`); }, [workflowStep]);
 
@@ -15783,7 +15761,7 @@ const App = () => {
     const handleExportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestExportHistory, {});
     const handleImportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestImportHistory, {});
     const handleGitBaseline = () => { const commitMessage = `DCE Baseline: Cycle ${currentCycle} - ${cycleTitle || 'New Cycle'}`; clientIpc.sendToServer(ClientToServerChannel.RequestGitBaseline, { commitMessage }); };
-    const onGitRestore = () => { const { selectedFilesForReplacement, fileExistenceMap } = stateRef.current; const filesToDelete = Array.from(selectedFilesForReplacement).map(key => key.split(':::')).filter(path => !fileExistenceMap.get(path)); clientIpc.sendToServer(ClientToServerChannel.RequestGitRestore, { filesToDelete }); };
+    const onGitRestore = () => { const { selectedFilesForReplacement, fileExistenceMap } = stateRef.current; const filesToDelete = Array.from(selectedFilesForReplacement).map(key => key.split(':::')).filter((file: any) => !fileExistenceMap.get(file)).map((file: any) => file); clientIpc.sendToServer(ClientToServerChannel.RequestGitRestore, { filesToDelete }); };
     const handleFileSelectionToggle = (filePath: string) => { const currentTabId = activeTab.toString(); const compositeKeyForCurrent = `${currentTabId}:::${filePath}`; setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); let existingKey: string | undefined; for (const key of newSet) if (key.endsWith(`:::${filePath}`)) { existingKey = key; break; } if (existingKey) { if (existingKey === compositeKeyForCurrent) newSet.delete(existingKey); else { newSet.delete(existingKey); newSet.add(compositeKeyForCurrent); } } else newSet.add(compositeKeyForCurrent); return newSet; }); setSaveStatus('unsaved'); };
     const handleSelectAllFilesToggle = () => { if (!activeTabData?.parsedContent) return; const allFilesForTab = activeTabData.parsedContent.filesUpdated.map(fp => `${activeTab}:::${fp}`); const isAllSelected = allFilesForTab.every(key => selectedFilesForReplacement.has(key)); setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); if (isAllSelected) allFilesForTab.forEach(key => newSet.delete(key)); else allFilesForTab.forEach(key => newSet.add(key)); return newSet; }); setSaveStatus('unsaved'); };
     const isAllFilesSelected = React.useMemo(() => { if (!activeTabData?.parsedContent) return false; const allFiles = activeTabData.parsedContent.filesUpdated; if (allFiles.length === 0) return false; return allFiles.every(file => selectedFilesForReplacement.has(`${activeTab}:::${file}`)); }, [selectedFilesForReplacement, activeTabData, activeTab]);
@@ -15825,7 +15803,7 @@ const App = () => {
 };
 
 try {
-    const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+    const root = createRoot(document.getElementById('root') as HTMLElement);
     root.render(<App />);
 } catch (error) {
     console.error('[PCPP View] CRITICAL: Failed to render React root.', error);
@@ -16562,13 +16540,15 @@ function createOrShowParallelCopilotPanel(context: vscode.ExtensionContext) {
 }
 
 function createOrShowSettingsPanel(context: vscode.ExtensionContext) {
+    const column = vscode.window.activeTextEditor?.viewColumn;
+
     if (settingsPanel) {
-        settingsPanel.reveal(vscode.ViewColumn.One);
+        settingsPanel.reveal(column);
         return;
     }
 
     settingsPanel = vscode.window.createWebviewPanel(
-        'dce.settingsPanel', 'DCE Settings & Help', vscode.ViewColumn.One, { enableScripts: true, localResourceRoots: [context.extensionUri] }
+        'dce.settingsPanel', 'DCE Settings & Help', column || vscode.ViewColumn.One, { enableScripts: true, localResourceRoots: [context.extensionUri] }
     );
 
     const scriptUri = settingsPanel.webview.asWebviewUri(vscode.Uri.joinPath(context.extensionUri, "dist", "settingsView.js"));
@@ -16944,7 +16924,9 @@ module.exports = [extensionConfig, webviewConfig];
         "@babel/preset-typescript": "^7.24.7",
         "process": "^0.11.10",
         "path-browserify": "^1.0.1",
-        "@types/prismjs": "^1.26.4"
+        "@types/prismjs": "^1.26.4",
+        "@types/react-dom": "^18.3.0",
+        "@types/path-browserify": "^1.0.2"
     },
     "dependencies": {
         "@wooorm/starry-night": "^3.8.0",
@@ -26370,7 +26352,7 @@ flattened_repo.txt
 # Artifact A80: DCE - Settings Panel Plan
 # Date Created: C6
 # Author: AI Model & Curator
-# Updated on: C14 (Mark as active implementation)
+# Updated on: C15 (Mark as active implementation)
 
 - **Key/Value for A0:**
 - **Description:** A plan for a new settings panel, accessible via a help icon, to house changelogs, settings, and other informational content.
@@ -26380,7 +26362,7 @@ flattened_repo.txt
 
 As the Data Curation Environment (DCE) grows in features, users will need a centralized location to manage settings, view changelogs, and access help documentation. The goal of this feature is to create a dedicated "Settings & Help" panel, accessible via a new `?` icon in the Parallel Co-Pilot Panel (PCPP), that serves as this central hub.
 
-**Status (C14):** In Progress.
+**Status (C15):** In Progress.
 
 ## 2. User Stories
 
@@ -26747,7 +26729,7 @@ body {
 <file path="src/client/views/settings.view/view.tsx">
 // src/client/views/settings.view/view.tsx
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import * as ReactDOM from 'react-dom/client';
 import './view.scss';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -26869,7 +26851,7 @@ body {
 <file path="src/client/views/settings.view/view.tsx">
 // src/client/views/settings.view/view.tsx
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import * as ReactDOM from 'react-dom/client';
 import './view.scss';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';

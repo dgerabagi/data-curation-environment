@@ -1,16 +1,16 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-15T12:06:36.683Z
+  Date Generated: 2025-09-15T12:58:27.955Z
   ---
   Total Files: 186
-  Approx. Tokens: 452381
+  Approx. Tokens: 452764
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (8170 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (8323 tokens)
 4. src\Artifacts\A0. DCE Master Artifact List.md (7794 tokens)
 5. src\backend\services\prompt.service.ts (5042 tokens)
 6. src\client\views\parallel-copilot.view\view.scss (4978 tokens)
@@ -112,7 +112,7 @@
 90. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 41 - Chars: 3009 - Tokens: 753
 91. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 97 - Chars: 4056 - Tokens: 1014
 92. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 55 - Chars: 3473 - Tokens: 869
-93. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 62 - Chars: 7340 - Tokens: 1835
+93. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 64 - Chars: 7495 - Tokens: 1874
 94. src\Artifacts\A42. DCE - Phase 2 - Initial Scaffolding Deployment Script.md - Lines: 246 - Chars: 8264 - Tokens: 2066
 95. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 57 - Chars: 9891 - Tokens: 2473
 96. src\Artifacts\A58. DCE - WinMerge Source Code Analysis.md - Lines: 56 - Chars: 5322 - Tokens: 1331
@@ -126,7 +126,7 @@
 104. src\backend\services\action.service.ts - Lines: 71 - Chars: 2444 - Tokens: 611
 105. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
 106. src\backend\services\file-operation.service.ts - Lines: 354 - Chars: 16529 - Tokens: 4133
-107. src\backend\services\file-tree.service.ts - Lines: 256 - Chars: 13752 - Tokens: 3438
+107. src\backend\services\file-tree.service.ts - Lines: 266 - Chars: 14127 - Tokens: 3532
 108. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12658 - Tokens: 3165
 109. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 110. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
@@ -163,10 +163,10 @@
 141. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 92 - Chars: 4340 - Tokens: 1085
 142. src\client\views\parallel-copilot.view\view.scss - Lines: 891 - Chars: 19912 - Tokens: 4978
 143. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-144. src\client\views\parallel-copilot.view\view.tsx - Lines: 243 - Chars: 32677 - Tokens: 8170
-145. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
-146. src\common\ipc\channels.enum.ts - Lines: 96 - Chars: 5193 - Tokens: 1299
-147. src\common\ipc\channels.type.ts - Lines: 97 - Chars: 7387 - Tokens: 1847
+144. src\client\views\parallel-copilot.view\view.tsx - Lines: 271 - Chars: 33291 - Tokens: 8323
+145. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
+146. src\common\ipc\channels.enum.ts - Lines: 96 - Chars: 5288 - Tokens: 1322
+147. src\common\ipc\channels.type.ts - Lines: 97 - Chars: 7483 - Tokens: 1871
 148. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 149. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 150. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
@@ -177,10 +177,10 @@
 155. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
 156. src\common\utils\view-html.ts - Lines: 37 - Chars: 1314 - Tokens: 329
 157. src\common\view-types.ts - Lines: 8 - Chars: 175 - Tokens: 44
-158. src\extension.ts - Lines: 166 - Chars: 6815 - Tokens: 1704
+158. src\extension.ts - Lines: 168 - Chars: 6874 - Tokens: 1719
 159. webpack.config.js - Lines: 112 - Chars: 2987 - Tokens: 747
 160. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
-161. package.json - Lines: 148 - Chars: 4745 - Tokens: 1187
+161. package.json - Lines: 150 - Chars: 4828 - Tokens: 1207
 162. .vscodeignore - Lines: 25 - Chars: 787 - Tokens: 197
 163. .gitignore - Lines: 10 - Chars: 128 - Tokens: 32
 164. src\Artifacts\A78. DCE - VSIX Packaging and FTV Flashing Bug.md - Lines: 50 - Chars: 3687 - Tokens: 922
@@ -197,15 +197,15 @@
 175. src\Artifacts\A84. DCE - Universal Task Checklist for Cycle 10+.md - Lines: 55 - Chars: 2541 - Tokens: 636
 176. new-folder\new-file.ts - Lines: 1 - Chars: 0 - Tokens: 0
 177. new-folder\new-file.ts - Lines: 1 - Chars: 0 - Tokens: 0
-178. CHANGELOG.md - Lines: 15 - Chars: 899 - Tokens: 225
+178. CHANGELOG.md - Lines: 15 - Chars: 913 - Tokens: 229
 179. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 180. src\client\views\settings.view\on-message.ts - Lines: 17 - Chars: 762 - Tokens: 191
 181. src\client\views\settings.view\view.scss - Lines: 42 - Chars: 911 - Tokens: 228
-182. src\client\views\settings.view\view.tsx - Lines: 43 - Chars: 1957 - Tokens: 490
+182. src\client\views\settings.view\view.tsx - Lines: 43 - Chars: 1964 - Tokens: 491
 183. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 184. src\client\views\settings.view\on-message.ts - Lines: 17 - Chars: 762 - Tokens: 191
 185. src\client\views\settings.view\view.scss - Lines: 42 - Chars: 911 - Tokens: 228
-186. src\client\views\settings.view\view.tsx - Lines: 43 - Chars: 1957 - Tokens: 490
+186. src\client\views\settings.view\view.tsx - Lines: 43 - Chars: 1964 - Tokens: 491
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -6143,7 +6143,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C14 (Add dist file auto-add case study)
+# Updated on: C15 (Add dist file auto-add case study)
 
 ## 1. Purpose
 
@@ -6158,10 +6158,12 @@ This document serves as a living record of persistent or complex bugs that have 
 ### Case Study 027: Dist Files Incorrectly Auto-Added to Selection
 
 -   **Artifacts Affected:** `src/backend/services/file-tree.service.ts`
--   **Cycles Observed:** C14
--   **Symptom:** When a build process creates new files inside an excluded directory like `dist/`, the "Automatically add new files to selection" feature incorrectly adds these new files to the selection set, even though the `dist` folder itself is correctly marked as non-selectable.
--   **Root Cause Analysis (RCA):** The logic for the `onDidCreate` file system watcher was incomplete. It was checking if the "auto-add" feature was enabled but was failing to also check if the newly created file's path matched any of the defined `NON_SELECTABLE_PATTERNS`. This meant it would add any new file regardless of whether it was in a `dist`, `.git`, or `node_modules` folder.
--   **Codified Solution & Best Practice:** The `onDidCreate` handler in `file-tree.service.ts` must perform the same check that the UI rendering does. Before queuing a file for auto-addition, it must call the `_isSelectable(filePath, fileType)` helper method. If this method returns `false`, the file must be ignored. This ensures that the auto-add feature fully respects the project's exclusion rules.
+-   **Cycles Observed:** C14, C15
+-   **Symptom:** When a build process creates new files inside an excluded directory like `dist/` or `apps/backend/dist/`, the "Automatically add new files to selection" feature incorrectly adds these new files to the selection set, even though the `dist` folder itself is correctly marked as non-selectable.
+-   **Root Cause Analysis (RCA):** The logic for the `onDidCreate` file system watcher was incomplete. It was checking if the "auto-add" feature was enabled but was failing to also check if the newly created file's path matched any of the defined `NON_SELECTABLE_PATTERNS`. The initial pattern `'/dist/'` was also not robust enough as it only matched `dist` at the root.
+-   **Codified Solution & Best Practice:**
+    1.  The exclusion patterns must be robust. A pattern like `'**/dist/**'` should be used to match `dist` directories at any depth.
+    2.  The `onDidCreate` handler in `file-tree.service.ts` must perform the same check that the UI rendering does. Before queuing a file for auto-addition, it must call the `_isSelectable(filePath, fileType)` helper method. If this method returns `false`, the file must be ignored. This ensures that the auto-add feature fully respects the project's exclusion rules.
 
 ---
 
@@ -7180,7 +7182,7 @@ export class ContentExtractionService {
 
 <file path="src/backend/services/file-operation.service.ts">
 // src/backend/services/file-operation.service.ts
-// Updated on: C14 (Add handlers for README and Changelog)
+// Updated on: C15 (Add handlers for README and Changelog)
 import * as vscode from "vscode";
 import * as path from "path";
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
@@ -7537,7 +7539,7 @@ export class FileOperationService {
 
 <file path="src/backend/services/file-tree.service.ts">
 // src/backend/services/file-tree.service.ts
-// Updated on: C14 (Add selectable check to auto-add)
+// Updated on: C15 (Use globstar for dist pattern)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -7554,7 +7556,7 @@ const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
 const EXCLUSION_PATTERNS = ['dce_cache', 'out']; 
-const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/.git/', '/venv/', '/.venv/', 'flattened_repo.md', 'prompt.md', 'package-lock.json', 'tsconfig.tsbuildinfo', 'dce_history_export_', '/dist/'];
+const NON_SELECTABLE_PATTERNS = ['/node_modules/', '/.vscode/', '/.git/', '/venv/', '/.venv/', 'flattened_repo.md', 'prompt.md', 'package-lock.json', 'tsconfig.tsbuildinfo', 'dce_history_export_', '**/dist/**'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
@@ -7710,14 +7712,19 @@ export class FileTreeService {
 
     private getGitStatusMap(): GitStatusMap {
         if (!this.gitApi?.repositories || this.gitApi.repositories.length === 0) return {};
-        const repo: Repository = this.gitApi.repositories[0];
         const getStatusChar = (s: Status) => ({ [Status.INDEX_ADDED]: 'A', [Status.MODIFIED]: 'M', [Status.DELETED]: 'D', [Status.UNTRACKED]: 'U', [Status.IGNORED]: 'I', [Status.CONFLICT]: 'C' }[s] || '');
-        const changes = [...repo.state.workingTreeChanges, ...repo.state.indexChanges, ...repo.state.mergeChanges];
         const statusMap: GitStatusMap = {};
-        changes.forEach(change => {
-            const statusChar = getStatusChar(change.status);
-            if (statusChar) statusMap[normalizePath(change.uri.fsPath)] = statusChar;
-        });
+        for (const repo of this.gitApi.repositories) {
+            try {
+                const changes = [...repo.state.workingTreeChanges, ...repo.state.indexChanges, ...repo.state.mergeChanges];
+                changes.forEach(change => {
+                    const statusChar = getStatusChar(change.status);
+                    if (statusChar) statusMap[normalizePath(change.uri.fsPath)] = statusChar;
+                });
+            } catch (e) {
+                Services.loggerService.warn(`[getGitStatusMap] Error reading repo status: ${(e as Error).message}`);
+            }
+        }
         return statusMap;
     }
 
@@ -7745,8 +7752,13 @@ export class FileTreeService {
         const normalizedPath = normalizePath(filePath);
         const name = path.basename(normalizedPath);
         if (name === 'tsconfig.tsbuildinfo') return false;
-        const pathWithSlash = normalizedPath + (fileType === vscode.FileType.Directory ? '/' : '');
-        return !NON_SELECTABLE_PATTERNS.some(p => pathWithSlash.includes(p) || name.startsWith(p));
+        // Use minimatch-like logic for globstar
+        return !NON_SELECTABLE_PATTERNS.some(pattern => {
+            if (pattern.startsWith('**/') && pattern.endsWith('/**')) {
+                return normalizedPath.includes(pattern.slice(3, -3));
+            }
+            return normalizedPath.includes(pattern) || name.startsWith(pattern);
+        });
     }
 
     private async _traverseDirectory(dirUri: vscode.Uri): Promise<FileNode[]> {
@@ -13304,9 +13316,9 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C14 (Add settings panel command)
+// Updated on: C15 (Fix TS errors)
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import './view.scss';
 import { VscWand, VscFileCode, VscBug, VscBook, VscFolder, VscChevronDown, VscLoading, VscCheck, VscVm, VscWarning, VscQuestion } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '../../../common/ipc/client-ipc';
@@ -13321,7 +13333,6 @@ import ContextInputs from './components/ContextInputs';
 import ResponseTabs from './components/ResponseTabs';
 import ResponsePane from './components/ResponsePane';
 import * as path from 'path-browserify';
-import ContextMenu from '@/client/components/ContextMenu';
 
 console.log('[PCPP View] view.tsx module loaded');
 
@@ -13462,7 +13473,36 @@ const App = () => {
         });
     }, [clientIpc, pathOverrides]);
     
-    const parseAllTabs = React.useCallback(() => { setTabs(prevTabs => { const allFilePaths = new Set<string>(); const updatedTabs = { ...prevTabs }; let needsUpdate = false; Object.values(updatedTabs).forEach(tabState => { if (tabState.rawContent && !tabState.parsedContent) { needsUpdate = true; const parsed = parseResponse(tabState.rawContent); tabState.parsedContent = parsed; parsed.filesUpdated.forEach(file => allFilePaths.add(file)); requestAllMetrics(parsed); parsed.files.forEach(file => { const lang = path.extname(file.path).substring(1) || 'plaintext'; const id = `${file.path}::${file.content}`; clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id }); }); } else if (tabState.parsedContent) { tabState.parsedContent.filesUpdated.forEach(file => allFilePaths.add(file)); } }); if (allFilePaths.size > 0) clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) }); return needsUpdate ? updatedTabs : prevTabs; }); }, [clientIpc, requestAllMetrics]);
+    const parseAllTabs: () => void = React.useCallback((): void => {
+        interface TabMap { [key: string]: TabState }
+        interface ParsedFile { path: string; content: string }
+
+        setTabs((prevTabs: TabMap) => {
+            const allFilePaths: Set<string> = new Set<string>();
+            const updatedTabs: TabMap = { ...prevTabs };
+            let needsUpdate: boolean = false;
+
+            Object.values(updatedTabs).forEach((tabState: TabState) => {
+                if (tabState.rawContent && !tabState.parsedContent) {
+                    needsUpdate = true;
+                    const parsed: ParsedResponse = parseResponse(tabState.rawContent);
+                    tabState.parsedContent = parsed;
+                    parsed.filesUpdated.forEach((filePath: string) => allFilePaths.add(filePath));
+                    requestAllMetrics(parsed);
+                    parsed.files.forEach((file: ParsedFile) => {
+                        const lang: string = path.extname(file.path).substring(1) || 'plaintext';
+                        const id: string = `${file.path}::${file.content}`;
+                        clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
+                    });
+                } else if (tabState.parsedContent) {
+                    tabState.parsedContent.filesUpdated.forEach((filePath: string) => allFilePaths.add(filePath));
+                }
+            });
+
+            if (allFilePaths.size > 0) clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) });
+            return needsUpdate ? updatedTabs : prevTabs;
+        });
+    }, [clientIpc, requestAllMetrics]);
     
     React.useEffect(() => { console.log(`[PCPP WORKFLOW] Step changed to: ${workflowStep}`); }, [workflowStep]);
 
@@ -13499,7 +13539,7 @@ const App = () => {
     const handleExportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestExportHistory, {});
     const handleImportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestImportHistory, {});
     const handleGitBaseline = () => { const commitMessage = `DCE Baseline: Cycle ${currentCycle} - ${cycleTitle || 'New Cycle'}`; clientIpc.sendToServer(ClientToServerChannel.RequestGitBaseline, { commitMessage }); };
-    const onGitRestore = () => { const { selectedFilesForReplacement, fileExistenceMap } = stateRef.current; const filesToDelete = Array.from(selectedFilesForReplacement).map(key => key.split(':::')).filter(path => !fileExistenceMap.get(path)); clientIpc.sendToServer(ClientToServerChannel.RequestGitRestore, { filesToDelete }); };
+    const onGitRestore = () => { const { selectedFilesForReplacement, fileExistenceMap } = stateRef.current; const filesToDelete = Array.from(selectedFilesForReplacement).map(key => key.split(':::')).filter((file: any) => !fileExistenceMap.get(file)).map((file: any) => file); clientIpc.sendToServer(ClientToServerChannel.RequestGitRestore, { filesToDelete }); };
     const handleFileSelectionToggle = (filePath: string) => { const currentTabId = activeTab.toString(); const compositeKeyForCurrent = `${currentTabId}:::${filePath}`; setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); let existingKey: string | undefined; for (const key of newSet) if (key.endsWith(`:::${filePath}`)) { existingKey = key; break; } if (existingKey) { if (existingKey === compositeKeyForCurrent) newSet.delete(existingKey); else { newSet.delete(existingKey); newSet.add(compositeKeyForCurrent); } } else newSet.add(compositeKeyForCurrent); return newSet; }); setSaveStatus('unsaved'); };
     const handleSelectAllFilesToggle = () => { if (!activeTabData?.parsedContent) return; const allFilesForTab = activeTabData.parsedContent.filesUpdated.map(fp => `${activeTab}:::${fp}`); const isAllSelected = allFilesForTab.every(key => selectedFilesForReplacement.has(key)); setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); if (isAllSelected) allFilesForTab.forEach(key => newSet.delete(key)); else allFilesForTab.forEach(key => newSet.add(key)); return newSet; }); setSaveStatus('unsaved'); };
     const isAllFilesSelected = React.useMemo(() => { if (!activeTabData?.parsedContent) return false; const allFiles = activeTabData.parsedContent.filesUpdated; if (allFiles.length === 0) return false; return allFiles.every(file => selectedFilesForReplacement.has(`${activeTab}:::${file}`)); }, [selectedFilesForReplacement, activeTabData, activeTab]);
@@ -13541,7 +13581,7 @@ const App = () => {
 };
 
 try {
-    const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+    const root = createRoot(document.getElementById('root') as HTMLElement);
     root.render(<App />);
 } catch (error) {
     console.error('[PCPP View] CRITICAL: Failed to render React root.', error);
@@ -14278,13 +14318,15 @@ function createOrShowParallelCopilotPanel(context: vscode.ExtensionContext) {
 }
 
 function createOrShowSettingsPanel(context: vscode.ExtensionContext) {
+    const column = vscode.window.activeTextEditor?.viewColumn;
+
     if (settingsPanel) {
-        settingsPanel.reveal(vscode.ViewColumn.One);
+        settingsPanel.reveal(column);
         return;
     }
 
     settingsPanel = vscode.window.createWebviewPanel(
-        'dce.settingsPanel', 'DCE Settings & Help', vscode.ViewColumn.One, { enableScripts: true, localResourceRoots: [context.extensionUri] }
+        'dce.settingsPanel', 'DCE Settings & Help', column || vscode.ViewColumn.One, { enableScripts: true, localResourceRoots: [context.extensionUri] }
     );
 
     const scriptUri = settingsPanel.webview.asWebviewUri(vscode.Uri.joinPath(context.extensionUri, "dist", "settingsView.js"));
@@ -14660,7 +14702,9 @@ module.exports = [extensionConfig, webviewConfig];
         "@babel/preset-typescript": "^7.24.7",
         "process": "^0.11.10",
         "path-browserify": "^1.0.1",
-        "@types/prismjs": "^1.26.4"
+        "@types/prismjs": "^1.26.4",
+        "@types/react-dom": "^18.3.0",
+        "@types/path-browserify": "^1.0.2"
     },
     "dependencies": {
         "@wooorm/starry-night": "^3.8.0",
@@ -24086,7 +24130,7 @@ flattened_repo.txt
 # Artifact A80: DCE - Settings Panel Plan
 # Date Created: C6
 # Author: AI Model & Curator
-# Updated on: C14 (Mark as active implementation)
+# Updated on: C15 (Mark as active implementation)
 
 - **Key/Value for A0:**
 - **Description:** A plan for a new settings panel, accessible via a help icon, to house changelogs, settings, and other informational content.
@@ -24096,7 +24140,7 @@ flattened_repo.txt
 
 As the Data Curation Environment (DCE) grows in features, users will need a centralized location to manage settings, view changelogs, and access help documentation. The goal of this feature is to create a dedicated "Settings & Help" panel, accessible via a new `?` icon in the Parallel Co-Pilot Panel (PCPP), that serves as this central hub.
 
-**Status (C14):** In Progress.
+**Status (C15):** In Progress.
 
 ## 2. User Stories
 
@@ -24463,7 +24507,7 @@ body {
 <file path="src/client/views/settings.view/view.tsx">
 // src/client/views/settings.view/view.tsx
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import * as ReactDOM from 'react-dom/client';
 import './view.scss';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -24585,7 +24629,7 @@ body {
 <file path="src/client/views/settings.view/view.tsx">
 // src/client/views/settings.view/view.tsx
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import * as ReactDOM from 'react-dom/client';
 import './view.scss';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';

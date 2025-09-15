@@ -60,13 +60,15 @@ function createOrShowParallelCopilotPanel(context: vscode.ExtensionContext) {
 }
 
 function createOrShowSettingsPanel(context: vscode.ExtensionContext) {
+    const column = vscode.window.activeTextEditor?.viewColumn;
+
     if (settingsPanel) {
-        settingsPanel.reveal(vscode.ViewColumn.One);
+        settingsPanel.reveal(column);
         return;
     }
 
     settingsPanel = vscode.window.createWebviewPanel(
-        'dce.settingsPanel', 'DCE Settings & Help', vscode.ViewColumn.One, { enableScripts: true, localResourceRoots: [context.extensionUri] }
+        'dce.settingsPanel', 'DCE Settings & Help', column || vscode.ViewColumn.One, { enableScripts: true, localResourceRoots: [context.extensionUri] }
     );
 
     const scriptUri = settingsPanel.webview.asWebviewUri(vscode.Uri.joinPath(context.extensionUri, "dist", "settingsView.js"));

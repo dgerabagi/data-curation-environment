@@ -1,7 +1,7 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C14 (Add settings panel command)
+// Updated on: C15 (Fix TS errors)
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import './view.scss';
 import { VscWand, VscFileCode, VscBug, VscBook, VscFolder, VscChevronDown, VscLoading, VscCheck, VscVm, VscWarning, VscQuestion } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '../../../common/ipc/client-ipc';
@@ -16,7 +16,6 @@ import ContextInputs from './components/ContextInputs';
 import ResponseTabs from './components/ResponseTabs';
 import ResponsePane from './components/ResponsePane';
 import * as path from 'path-browserify';
-import ContextMenu from '@/client/components/ContextMenu';
 
 console.log('[PCPP View] view.tsx module loaded');
 
@@ -157,7 +156,36 @@ const App = () => {
         });
     }, [clientIpc, pathOverrides]);
     
-    const parseAllTabs = React.useCallback(() => { setTabs(prevTabs => { const allFilePaths = new Set<string>(); const updatedTabs = { ...prevTabs }; let needsUpdate = false; Object.values(updatedTabs).forEach(tabState => { if (tabState.rawContent && !tabState.parsedContent) { needsUpdate = true; const parsed = parseResponse(tabState.rawContent); tabState.parsedContent = parsed; parsed.filesUpdated.forEach(file => allFilePaths.add(file)); requestAllMetrics(parsed); parsed.files.forEach(file => { const lang = path.extname(file.path).substring(1) || 'plaintext'; const id = `${file.path}::${file.content}`; clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id }); }); } else if (tabState.parsedContent) { tabState.parsedContent.filesUpdated.forEach(file => allFilePaths.add(file)); } }); if (allFilePaths.size > 0) clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) }); return needsUpdate ? updatedTabs : prevTabs; }); }, [clientIpc, requestAllMetrics]);
+    const parseAllTabs: () => void = React.useCallback((): void => {
+        interface TabMap { [key: string]: TabState }
+        interface ParsedFile { path: string; content: string }
+
+        setTabs((prevTabs: TabMap) => {
+            const allFilePaths: Set<string> = new Set<string>();
+            const updatedTabs: TabMap = { ...prevTabs };
+            let needsUpdate: boolean = false;
+
+            Object.values(updatedTabs).forEach((tabState: TabState) => {
+                if (tabState.rawContent && !tabState.parsedContent) {
+                    needsUpdate = true;
+                    const parsed: ParsedResponse = parseResponse(tabState.rawContent);
+                    tabState.parsedContent = parsed;
+                    parsed.filesUpdated.forEach((filePath: string) => allFilePaths.add(filePath));
+                    requestAllMetrics(parsed);
+                    parsed.files.forEach((file: ParsedFile) => {
+                        const lang: string = path.extname(file.path).substring(1) || 'plaintext';
+                        const id: string = `${file.path}::${file.content}`;
+                        clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
+                    });
+                } else if (tabState.parsedContent) {
+                    tabState.parsedContent.filesUpdated.forEach((filePath: string) => allFilePaths.add(filePath));
+                }
+            });
+
+            if (allFilePaths.size > 0) clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) });
+            return needsUpdate ? updatedTabs : prevTabs;
+        });
+    }, [clientIpc, requestAllMetrics]);
     
     React.useEffect(() => { console.log(`[PCPP WORKFLOW] Step changed to: ${workflowStep}`); }, [workflowStep]);
 
@@ -194,7 +222,7 @@ const App = () => {
     const handleExportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestExportHistory, {});
     const handleImportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestImportHistory, {});
     const handleGitBaseline = () => { const commitMessage = `DCE Baseline: Cycle ${currentCycle} - ${cycleTitle || 'New Cycle'}`; clientIpc.sendToServer(ClientToServerChannel.RequestGitBaseline, { commitMessage }); };
-    const onGitRestore = () => { const { selectedFilesForReplacement, fileExistenceMap } = stateRef.current; const filesToDelete = Array.from(selectedFilesForReplacement).map(key => key.split(':::')).filter(path => !fileExistenceMap.get(path)); clientIpc.sendToServer(ClientToServerChannel.RequestGitRestore, { filesToDelete }); };
+    const onGitRestore = () => { const { selectedFilesForReplacement, fileExistenceMap } = stateRef.current; const filesToDelete = Array.from(selectedFilesForReplacement).map(key => key.split(':::')).filter((file: any) => !fileExistenceMap.get(file)).map((file: any) => file); clientIpc.sendToServer(ClientToServerChannel.RequestGitRestore, { filesToDelete }); };
     const handleFileSelectionToggle = (filePath: string) => { const currentTabId = activeTab.toString(); const compositeKeyForCurrent = `${currentTabId}:::${filePath}`; setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); let existingKey: string | undefined; for (const key of newSet) if (key.endsWith(`:::${filePath}`)) { existingKey = key; break; } if (existingKey) { if (existingKey === compositeKeyForCurrent) newSet.delete(existingKey); else { newSet.delete(existingKey); newSet.add(compositeKeyForCurrent); } } else newSet.add(compositeKeyForCurrent); return newSet; }); setSaveStatus('unsaved'); };
     const handleSelectAllFilesToggle = () => { if (!activeTabData?.parsedContent) return; const allFilesForTab = activeTabData.parsedContent.filesUpdated.map(fp => `${activeTab}:::${fp}`); const isAllSelected = allFilesForTab.every(key => selectedFilesForReplacement.has(key)); setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); if (isAllSelected) allFilesForTab.forEach(key => newSet.delete(key)); else allFilesForTab.forEach(key => newSet.add(key)); return newSet; }); setSaveStatus('unsaved'); };
     const isAllFilesSelected = React.useMemo(() => { if (!activeTabData?.parsedContent) return false; const allFiles = activeTabData.parsedContent.filesUpdated; if (allFiles.length === 0) return false; return allFiles.every(file => selectedFilesForReplacement.has(`${activeTab}:::${file}`)); }, [selectedFilesForReplacement, activeTabData, activeTab]);
@@ -236,7 +264,7 @@ const App = () => {
 };
 
 try {
-    const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+    const root = createRoot(document.getElementById('root') as HTMLElement);
     root.render(<App />);
 } catch (error) {
     console.error('[PCPP View] CRITICAL: Failed to render React root.', error);
