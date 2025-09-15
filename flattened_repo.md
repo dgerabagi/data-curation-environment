@@ -1,21 +1,21 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-14T20:39:08.598Z
+  Date Generated: 2025-09-15T11:01:02.386Z
   ---
   Total Files: 186
-  Approx. Tokens: 450426
+  Approx. Tokens: 451964
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (8205 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (8212 tokens)
 4. src\Artifacts\A0. DCE Master Artifact List.md (7794 tokens)
 5. src\backend\services\prompt.service.ts (5042 tokens)
 6. src\client\views\parallel-copilot.view\view.scss (4978 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4422 tokens)
-8. src\backend\services\file-operation.service.ts (4123 tokens)
+8. src\backend\services\file-operation.service.ts (4140 tokens)
 9. src\client\views\context-chooser.view\view.tsx (4019 tokens)
 10. src\client\views\context-chooser.view\view.scss (3708 tokens)
 
@@ -125,9 +125,9 @@
 103. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
 104. src\backend\services\action.service.ts - Lines: 71 - Chars: 2444 - Tokens: 611
 105. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
-106. src\backend\services\file-operation.service.ts - Lines: 345 - Chars: 16490 - Tokens: 4123
-107. src\backend\services\file-tree.service.ts - Lines: 254 - Chars: 13797 - Tokens: 3450
-108. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12609 - Tokens: 3153
+106. src\backend\services\file-operation.service.ts - Lines: 354 - Chars: 16560 - Tokens: 4140
+107. src\backend\services\file-tree.service.ts - Lines: 255 - Chars: 13858 - Tokens: 3465
+108. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12658 - Tokens: 3165
 109. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 110. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
 111. src\backend\services\history.service.ts - Lines: 287 - Chars: 12276 - Tokens: 3069
@@ -159,25 +159,25 @@
 137. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 86 - Chars: 3575 - Tokens: 894
 138. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
 139. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-140. src\client\views\parallel-copilot.view\on-message.ts - Lines: 117 - Chars: 5537 - Tokens: 1385
+140. src\client\views\parallel-copilot.view\on-message.ts - Lines: 117 - Chars: 5542 - Tokens: 1386
 141. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 92 - Chars: 4340 - Tokens: 1085
 142. src\client\views\parallel-copilot.view\view.scss - Lines: 891 - Chars: 19912 - Tokens: 4978
 143. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-144. src\client\views\parallel-copilot.view\view.tsx - Lines: 246 - Chars: 32820 - Tokens: 8205
+144. src\client\views\parallel-copilot.view\view.tsx - Lines: 246 - Chars: 32845 - Tokens: 8212
 145. src\client\views\index.ts - Lines: 39 - Chars: 1890 - Tokens: 473
-146. src\common\ipc\channels.enum.ts - Lines: 92 - Chars: 4981 - Tokens: 1246
-147. src\common\ipc\channels.type.ts - Lines: 93 - Chars: 7108 - Tokens: 1777
+146. src\common\ipc\channels.enum.ts - Lines: 96 - Chars: 5245 - Tokens: 1312
+147. src\common\ipc\channels.type.ts - Lines: 97 - Chars: 7387 - Tokens: 1847
 148. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 149. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 150. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
 151. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
-152. src\common\types\pcpp.types.ts - Lines: 45 - Chars: 1084 - Tokens: 271
+152. src\common\types\pcpp.types.ts - Lines: 45 - Chars: 1098 - Tokens: 275
 153. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
 154. src\common\utils\formatting.ts - Lines: 141 - Chars: 4606 - Tokens: 1152
 155. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
 156. src\common\utils\view-html.ts - Lines: 37 - Chars: 1314 - Tokens: 329
 157. src\common\view-types.ts - Lines: 8 - Chars: 175 - Tokens: 44
-158. src\extension.ts - Lines: 166 - Chars: 6824 - Tokens: 1706
+158. src\extension.ts - Lines: 167 - Chars: 6879 - Tokens: 1720
 159. webpack.config.js - Lines: 112 - Chars: 2987 - Tokens: 747
 160. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
 161. package.json - Lines: 148 - Chars: 4745 - Tokens: 1187
@@ -197,15 +197,15 @@
 175. src\Artifacts\A84. DCE - Universal Task Checklist for Cycle 10+.md - Lines: 55 - Chars: 2541 - Tokens: 636
 176. new-folder\new-file.ts - Lines: 1 - Chars: 0 - Tokens: 0
 177. new-folder\new-file.ts - Lines: 1 - Chars: 0 - Tokens: 0
-178. CHANGELOG.md - Lines: 8 - Chars: 179 - Tokens: 45
+178. CHANGELOG.md - Lines: 15 - Chars: 899 - Tokens: 225
 179. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
-180. src\client\views\settings.view\on-message.ts - Lines: 10 - Chars: 400 - Tokens: 100
-181. src\client\views\settings.view\view.scss - Lines: 18 - Chars: 474 - Tokens: 119
-182. src\client\views\settings.view\view.tsx - Lines: 16 - Chars: 454 - Tokens: 114
+180. src\client\views\settings.view\on-message.ts - Lines: 17 - Chars: 762 - Tokens: 191
+181. src\client\views\settings.view\view.scss - Lines: 42 - Chars: 911 - Tokens: 228
+182. src\client\views\settings.view\view.tsx - Lines: 43 - Chars: 1957 - Tokens: 490
 183. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
-184. src\client\views\settings.view\on-message.ts - Lines: 10 - Chars: 400 - Tokens: 100
-185. src\client\views\settings.view\view.scss - Lines: 18 - Chars: 474 - Tokens: 119
-186. src\client\views\settings.view\view.tsx - Lines: 16 - Chars: 454 - Tokens: 114
+184. src\client\views\settings.view\on-message.ts - Lines: 17 - Chars: 762 - Tokens: 191
+185. src\client\views\settings.view\view.scss - Lines: 42 - Chars: 911 - Tokens: 228
+186. src\client\views\settings.view\view.tsx - Lines: 43 - Chars: 1957 - Tokens: 490
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -7179,7 +7179,7 @@ export class ContentExtractionService {
 
 <file path="src/backend/services/file-operation.service.ts">
 // src/backend/services/file-operation.service.ts
-// Updated on: C12 (Add logic for ignoring files for auto-add)
+// Updated on: C13 (Add handlers for README and Changelog)
 import * as vscode from "vscode";
 import * as path from "path";
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
@@ -7188,11 +7188,40 @@ import { Services } from "./services";
 import { Action, MoveActionPayload } from "./action.service";
 import { BatchWriteFile } from "@/common/ipc/channels.type";
 import { diceCoefficient } from "@/common/utils/similarity";
+import { promises as fs } from 'fs';
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
 export class FileOperationService {
     private filesToIgnoreForAutoAdd: Set<string> = new Set();
+    
+    private getWorkspaceRoot(): string {
+        const workspaceFolders = vscode.workspace.workspaceFolders;
+        if (!workspaceFolders || workspaceFolders.length === 0) {
+            throw new Error("No workspace folder open.");
+        }
+        return workspaceFolders[0].uri.fsPath;
+    }
+
+    public async handleReadmeContentRequest(serverIpc: ServerPostMessageManager) {
+        try {
+            const readmePath = path.join(this.getWorkspaceRoot(), 'README.md');
+            const content = await fs.readFile(readmePath, 'utf-8');
+            serverIpc.sendToClient(ServerToClientChannel.SendReadmeContent, { content });
+        } catch (error) {
+            serverIpc.sendToClient(ServerToClientChannel.SendReadmeContent, { content: '# README not found.' });
+        }
+    }
+
+    public async handleChangelogContentRequest(serverIpc: ServerPostMessageManager) {
+        try {
+            const changelogPath = path.join(this.getWorkspaceRoot(), 'CHANGELOG.md');
+            const content = await fs.readFile(changelogPath, 'utf-8');
+            serverIpc.sendToClient(ServerToClientChannel.SendChangelogContent, { content });
+        } catch (error) {
+            serverIpc.sendToClient(ServerToClientChannel.SendChangelogContent, { content: '# Changelog not found.' });
+        }
+    }
 
     public async fileExists(filePath: string): Promise<boolean> {
         try {
@@ -7232,10 +7261,7 @@ export class FileOperationService {
     public async handleFileComparisonRequest(filePath: string, modifiedContent: string, serverIpc: ServerPostMessageManager) {
         Services.loggerService.log(`[Comparison] Received request for: ${filePath}`);
         try {
-            const workspaceFolders = vscode.workspace.workspaceFolders;
-            if (!workspaceFolders || workspaceFolders.length === 0) throw new Error("No workspace folder open.");
-
-            const absolutePath = path.resolve(workspaceFolders[0].uri.fsPath, filePath);
+            const absolutePath = path.resolve(this.getWorkspaceRoot(), filePath);
             const originalContentBuffer = await vscode.workspace.fs.readFile(vscode.Uri.file(absolutePath));
             const originalContent = Buffer.from(originalContentBuffer).toString('utf-8');
 
@@ -7263,12 +7289,7 @@ export class FileOperationService {
 
     public async handleBatchFileWrite(files: BatchWriteFile[]): Promise<string[]> {
         Services.loggerService.log(`[File Operation] Received request to write ${files.length} files.`);
-        const workspaceFolders = vscode.workspace.workspaceFolders;
-        if (!workspaceFolders || workspaceFolders.length === 0) {
-            vscode.window.showErrorMessage("Cannot write files: No workspace folder is open.");
-            return [];
-        }
-        const rootPath = workspaceFolders[0].uri.fsPath;
+        const rootPath = this.getWorkspaceRoot();
         const successfulPaths: string[] = [];
 
         try {
@@ -7293,11 +7314,7 @@ export class FileOperationService {
     public async handleFileContentRequest(filePath: string, serverIpc: ServerPostMessageManager) {
         Services.loggerService.log(`handleFileContentRequest initiated for: ${filePath}`);
         try {
-            const workspaceFolders = vscode.workspace.workspaceFolders;
-            if (!workspaceFolders || workspaceFolders.length === 0) {
-                throw new Error("No workspace folder open.");
-            }
-            const absolutePath = path.resolve(workspaceFolders[0].uri.fsPath, filePath);
+            const absolutePath = path.resolve(this.getWorkspaceRoot(), filePath);
             const uri = vscode.Uri.file(absolutePath);
             const contentBuffer = await vscode.workspace.fs.readFile(uri);
             const content = Buffer.from(contentBuffer).toString('utf-8');
@@ -7311,13 +7328,7 @@ export class FileOperationService {
 
     public async handleFileExistenceRequest(paths: string[], serverIpc: ServerPostMessageManager) {
         Services.loggerService.log(`[File Existence] Received request to check paths: ${JSON.stringify(paths)}`);
-        const workspaceFolders = vscode.workspace.workspaceFolders;
-        if (!workspaceFolders || workspaceFolders.length === 0) {
-            Services.loggerService.error("[File Existence] Cannot check for files, no workspace folder is open.");
-            serverIpc.sendToClient(ServerToClientChannel.SendFileExistence, { existenceMap: {} });
-            return;
-        }
-        const rootPath = workspaceFolders[0].uri.fsPath;
+        const rootPath = this.getWorkspaceRoot();
     
         const existenceMap: { [path: string]: boolean } = {};
         const checks = paths.map(async (p_raw) => {
@@ -7427,9 +7438,7 @@ export class FileOperationService {
     public async handleCreateFileRequest(filePath: string) {
         Services.loggerService.log(`Received request to create file: ${filePath}`);
         try {
-            const workspaceFolders = vscode.workspace.workspaceFolders;
-            if (!workspaceFolders || workspaceFolders.length === 0) throw new Error("No workspace folder open.");
-            const absolutePath = path.resolve(workspaceFolders[0].uri.fsPath, filePath);
+            const absolutePath = path.resolve(this.getWorkspaceRoot(), filePath);
             await vscode.workspace.fs.writeFile(vscode.Uri.file(absolutePath), new Uint8Array());
             Services.loggerService.log(`Successfully created file: ${filePath}`);
         } catch (error: any) {
@@ -7526,7 +7535,7 @@ export class FileOperationService {
 </file_artifact>
 
 <file path="src/backend/services/file-tree.service.ts">
-// Resp 12-Updated on: C12 (Use FileOperationService for ignore list)
+// Resp 12-Updated on: C13 (Add tsconfig.tsbuildinfo to exclusion list)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -7733,6 +7742,7 @@ export class FileTreeService {
     private _isSelectable(filePath: string, fileType: vscode.FileType): boolean {
         const normalizedPath = normalizePath(filePath);
         const name = path.basename(normalizedPath);
+        if (name === 'tsconfig.tsbuildinfo') return false;
         const pathWithSlash = normalizedPath + (fileType === vscode.FileType.Directory ? '/' : '');
         return !NON_SELECTABLE_PATTERNS.some(p => pathWithSlash.includes(p) || name.startsWith(p));
     }
@@ -7783,7 +7793,7 @@ export class FileTreeService {
 </file_artifact>
 
 <file path="src/backend/services/flattener.service.ts">
-// Updated on: C190 (Add .venv to non-selectable patterns)
+// Updated on: C13 (Add tsconfig.tsbuildinfo to exclusion list)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -7807,7 +7817,7 @@ interface FileStats {
 const BINARY_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg', '.webp', '.ico', '.exe', '.dll', '.bin', '.zip', '.gz', '.7z', '.mp3', '.wav', '.mov', '.mp4']);
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
-const NON_SELECTABLE_PATTERNS = ['/node_modules', '/.vscode', '/.git', '/venv', '/.venv', 'flattened_repo.md', 'prompt.md', 'package-lock.json'];
+const NON_SELECTABLE_PATTERNS = ['/node_modules', '/.vscode', '/.git', '/venv', '/.venv', 'flattened_repo.md', 'prompt.md', 'package-lock.json', 'tsconfig.tsbuildinfo'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
@@ -7902,7 +7912,7 @@ export class FlattenerService {
                 const fullPath = path.join(dirPath, entry.name);
                 const normalizedFullPath = normalizePath(fullPath);
 
-                if (NON_SELECTABLE_PATTERNS.some(p => normalizedFullPath.includes(p))) {
+                if (NON_SELECTABLE_PATTERNS.some(p => normalizedFullPath.includes(p) || entry.name === p)) {
                     continue;
                 }
 
@@ -12169,7 +12179,7 @@ export const viewConfig = {
 </file_artifact>
 
 <file path="src/client/views/parallel-copilot.view/on-message.ts">
-// Updated on: C10 (Add Undo/Redo handlers)
+// Updated on: C13 (Add settings panel handlers)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -13292,7 +13302,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C12 (Update onGitRestore handler)
+// Updated on: C13 (Implement tab persistence fix)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './view.scss';
@@ -13399,7 +13409,7 @@ const App = () => {
             selectedResponseId,
             selectedFilesForReplacement: Array.from(selectedFilesForReplacement),
             tabCount,
-            activeTab,
+            activeTab, // <-- This is the fix
             isSortedByTokens,
             pathOverrides: Object.fromEntries(pathOverrides)
         };
@@ -13609,6 +13619,8 @@ export enum ClientToServerChannel {
     RequestCreateFile = "clientToServer.requestCreateFile",
     RequestCopyTextToClipboard = "clientToServer.requestCopyTextToClipboard",
     RequestShowInformationMessage = "clientToServer.requestShowInformationMessage",
+    RequestReadmeContent = "clientToServer.requestReadmeContent",
+    RequestChangelogContent = "clientToServer.requestChangelogContent",
 
     // Special File Handling
     RequestPdfToText = "clientToServer.requestPdfToText",
@@ -13659,6 +13671,8 @@ export enum ServerToClientChannel {
     UpdateDecorations = "serverToClient.updateDecorations", // New in C184
     UpdateNodeStats = "serverToClient.updateNodeStats",
     SendFileContent = "serverToClient.sendFileContent",
+    SendReadmeContent = "serverToClient.sendReadmeContent",
+    SendChangelogContent = "serverToClient.sendChangelogContent",
     
     // Phase 2: PCPP
     SendFileExistence = "serverToClient.sendFileExistence",
@@ -13677,7 +13691,7 @@ export enum ServerToClientChannel {
 </file_artifact>
 
 <file path="src/common/ipc/channels.type.ts">
-// Updated on: C12 (Add filesToDelete to RequestGitRestore)
+// Updated on: C13 (Add settings panel channels)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -13718,6 +13732,8 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestCreateFile ? { filePath: string } :
     T extends ClientToServerChannel.RequestCopyTextToClipboard ? { text: string } :
     T extends ClientToServerChannel.RequestShowInformationMessage ? { message: string } :
+    T extends ClientToServerChannel.RequestReadmeContent ? {} :
+    T extends ClientToServerChannel.RequestChangelogContent ? {} :
     T extends ClientToServerChannel.RequestPdfToText ? { path: string } :
     T extends ClientToServerChannel.RequestExcelToText ? { path: string } :
     T extends ClientToServerChannel.RequestWordToText ? { path: string } :
@@ -13758,6 +13774,8 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.UpdateDecorations ? { problemMap: ProblemCountsMap, gitStatusMap: GitStatusMap } :
     T extends ServerToClientChannel.UpdateNodeStats ? { path: string, tokenCount: number, error?: string } :
     T extends ServerToClientChannel.SendFileContent ? { path: string, content: string | null } :
+    T extends ServerToClientChannel.SendReadmeContent ? { content: string } :
+    T extends ServerToClientChannel.SendChangelogContent ? { content: string } :
     T extends ServerToClientChannel.SendFileExistence ? { existenceMap: { [path: string]: boolean } } :
     T extends ServerToClientChannel.SendSyntaxHighlight ? { highlightedHtml: string, id: string } :
     T extends ServerToClientChannel.SendHighlightContext ? { highlightedHtml: string, id: string } :
@@ -13900,7 +13918,7 @@ export interface FileNode {
 
 <file path="src/common/types/pcpp.types.ts">
 // src/common/types/pcpp.types.ts
-// Updated on: C10 (Add activeTab to PcppCycle)
+// Updated on: C13 (No functional changes, comment alignment)
 export interface PcppResponse {
     content: string;
 }
@@ -14282,6 +14300,7 @@ function createOrShowSettingsPanel(context: vscode.ExtensionContext) {
         settingsPanel.webview.onDidReceiveMessage,
         (data: any) => settingsPanel?.webview.postMessage(data)
     );
+    serverIPCs['viewType.panel.settings'] = serverIpc;
     onSettingsMessage(serverIpc);
 
     settingsPanel.onDidDispose(() => {
@@ -24353,10 +24372,17 @@ This artifact provides a structured, universal format for tracking the next phas
 
 All notable changes to the "Data Curation Environment" extension will be documented in this file.
 
-## [Unreleased]
+## [0.1.1] - Q3 2025
 
 ### Added
-- Placeholder for changelog content.
+- **Git-Integrated Testing:** Added "Baseline (Commit)" and "Restore Baseline" buttons to the PCPP for a rapid test-and-revert workflow. The restore logic now correctly handles newly created files.
+- **Undo/Redo for File Operations:** Implemented `Ctrl+Z` and `Ctrl+Y` in the File Tree View to undo/redo file moves.
+- **Settings & Help Panel:** Added a `?` icon to the PCPP that opens this panel, containing the changelog and README.
+- **Tab Persistence:** The active response tab in the PCPP is now saved and restored across sessions.
+
+### Fixed
+- **Command Registration:** Fixed a critical activation error caused by a command being registered twice.
+- **Exclusion List:** `tsconfig.tsbuildinfo` is now correctly excluded from the flattened context.
 </file_artifact>
 
 <file path="src/client/views/settings.view/index.ts">
@@ -24374,12 +24400,19 @@ export const viewConfig = {
 // src/client/views/settings.view/on-message.ts
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
+import { ClientToServerChannel } from "@/common/ipc/channels.enum";
 
 export function onMessage(serverIpc: ServerPostMessageManager) {
-    const { loggerService } = Services;
+    const { loggerService, fileOperationService } = Services;
     loggerService.log("Settings view message handler initialized.");
 
-    // Add message handlers for settings view here
+    serverIpc.onClientMessage(ClientToServerChannel.RequestReadmeContent, () => {
+        fileOperationService.handleReadmeContentRequest(serverIpc);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestChangelogContent, () => {
+        fileOperationService.handleChangelogContentRequest(serverIpc);
+    });
 }
 </file_artifact>
 
@@ -24402,6 +24435,30 @@ body {
         margin-bottom: 16px;
     }
 }
+
+.tab-bar {
+    display: flex;
+    border-bottom: 1px solid var(--vscode-panel-border);
+    margin-bottom: 16px;
+}
+
+.tab {
+    padding: 6px 12px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    color: var(--vscode-tab-inactiveForeground);
+}
+
+.tab.active {
+    color: var(--vscode-tab-activeForeground);
+    border-bottom-color: var(--vscode-tab-activeBorder);
+}
+
+.tab-content {
+    h2 {
+        margin-top: 0;
+    }
+}
 </file_artifact>
 
 <file path="src/client/views/settings.view/view.tsx">
@@ -24409,12 +24466,39 @@ body {
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './view.scss';
+import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
+import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
+import ReactMarkdown from 'react-markdown';
 
 const App = () => {
+    const [activeTab, setActiveTab] = React.useState('changelog');
+    const [readmeContent, setReadmeContent] = React.useState('Loading...');
+    const [changelogContent, setChangelogContent] = React.useState('Loading...');
+    const clientIpc = ClientPostMessageManager.getInstance();
+
+    React.useEffect(() => {
+        clientIpc.onServerMessage(ServerToClientChannel.SendReadmeContent, ({ content }) => {
+            setReadmeContent(content);
+        });
+        clientIpc.onServerMessage(ServerToClientChannel.SendChangelogContent, ({ content }) => {
+            setChangelogContent(content);
+        });
+
+        clientIpc.sendToServer(ClientToServerChannel.RequestReadmeContent, {});
+        clientIpc.sendToServer(ClientToServerChannel.RequestChangelogContent, {});
+    }, [clientIpc]);
+
     return (
         <div className="settings-view-container">
             <h1>DCE Settings & Help</h1>
-            <p>This panel will contain the changelog and future settings.</p>
+            <div className="tab-bar">
+                <div className={`tab ${activeTab === 'changelog' ? 'active' : ''}`} onClick={() => setActiveTab('changelog')}>Changelog</div>
+                <div className={`tab ${activeTab === 'readme' ? 'active' : ''}`} onClick={() => setActiveTab('readme')}>About</div>
+            </div>
+            <div className="tab-content">
+                {activeTab === 'changelog' && <ReactMarkdown>{changelogContent}</ReactMarkdown>}
+                {activeTab === 'readme' && <ReactMarkdown>{readmeContent}</ReactMarkdown>}
+            </div>
         </div>
     );
 };
@@ -24438,12 +24522,19 @@ export const viewConfig = {
 // src/client/views/settings.view/on-message.ts
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
+import { ClientToServerChannel } from "@/common/ipc/channels.enum";
 
 export function onMessage(serverIpc: ServerPostMessageManager) {
-    const { loggerService } = Services;
+    const { loggerService, fileOperationService } = Services;
     loggerService.log("Settings view message handler initialized.");
 
-    // Add message handlers for settings view here
+    serverIpc.onClientMessage(ClientToServerChannel.RequestReadmeContent, () => {
+        fileOperationService.handleReadmeContentRequest(serverIpc);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestChangelogContent, () => {
+        fileOperationService.handleChangelogContentRequest(serverIpc);
+    });
 }
 </file_artifact>
 
@@ -24466,6 +24557,30 @@ body {
         margin-bottom: 16px;
     }
 }
+
+.tab-bar {
+    display: flex;
+    border-bottom: 1px solid var(--vscode-panel-border);
+    margin-bottom: 16px;
+}
+
+.tab {
+    padding: 6px 12px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    color: var(--vscode-tab-inactiveForeground);
+}
+
+.tab.active {
+    color: var(--vscode-tab-activeForeground);
+    border-bottom-color: var(--vscode-tab-activeBorder);
+}
+
+.tab-content {
+    h2 {
+        margin-top: 0;
+    }
+}
 </file_artifact>
 
 <file path="src/client/views/settings.view/view.tsx">
@@ -24473,12 +24588,39 @@ body {
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './view.scss';
+import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
+import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
+import ReactMarkdown from 'react-markdown';
 
 const App = () => {
+    const [activeTab, setActiveTab] = React.useState('changelog');
+    const [readmeContent, setReadmeContent] = React.useState('Loading...');
+    const [changelogContent, setChangelogContent] = React.useState('Loading...');
+    const clientIpc = ClientPostMessageManager.getInstance();
+
+    React.useEffect(() => {
+        clientIpc.onServerMessage(ServerToClientChannel.SendReadmeContent, ({ content }) => {
+            setReadmeContent(content);
+        });
+        clientIpc.onServerMessage(ServerToClientChannel.SendChangelogContent, ({ content }) => {
+            setChangelogContent(content);
+        });
+
+        clientIpc.sendToServer(ClientToServerChannel.RequestReadmeContent, {});
+        clientIpc.sendToServer(ClientToServerChannel.RequestChangelogContent, {});
+    }, [clientIpc]);
+
     return (
         <div className="settings-view-container">
             <h1>DCE Settings & Help</h1>
-            <p>This panel will contain the changelog and future settings.</p>
+            <div className="tab-bar">
+                <div className={`tab ${activeTab === 'changelog' ? 'active' : ''}`} onClick={() => setActiveTab('changelog')}>Changelog</div>
+                <div className={`tab ${activeTab === 'readme' ? 'active' : ''}`} onClick={() => setActiveTab('readme')}>About</div>
+            </div>
+            <div className="tab-content">
+                {activeTab === 'changelog' && <ReactMarkdown>{changelogContent}</ReactMarkdown>}
+                {activeTab === 'readme' && <ReactMarkdown>{readmeContent}</ReactMarkdown>}
+            </div>
         </div>
     );
 };
