@@ -1,5 +1,5 @@
 // src/backend/services/file-operation.service.ts
-// Updated on: C17 (Fix paths for README and Changelog)
+// Updated on: C18 (Use extensionPath for asset files)
 import * as vscode from "vscode";
 import * as path from "path";
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
@@ -20,31 +20,31 @@ export class FileOperationService {
         if (!workspaceFolders || workspaceFolders.length === 0) {
             throw new Error("No workspace folder open.");
         }
-        // Use the first workspace folder's URI
+        // Use the first workspace folder's URI when multiple folders are open
         return workspaceFolders[0].uri.fsPath;
     }
 
     public async handleReadmeContentRequest(serverIpc: ServerPostMessageManager) {
         try {
-            const readmePath = path.join(this.getWorkspaceRoot(), 'README.md');
-            Services.loggerService.log(`Attempting to read README from: ${readmePath}`);
+            const readmePath = path.join(Services.context.extensionPath, 'README.md');
+            Services.loggerService.log(`Attempting to read README from extension path: ${readmePath}`);
             const content = await fs.readFile(readmePath, 'utf-8');
             serverIpc.sendToClient(ServerToClientChannel.SendReadmeContent, { content });
         } catch (error) {
             Services.loggerService.error(`Failed to read README.md: ${error}`);
-            serverIpc.sendToClient(ServerToClientChannel.SendReadmeContent, { content: '# README.md not found in workspace root.' });
+            serverIpc.sendToClient(ServerToClientChannel.SendReadmeContent, { content: '# README.md not found in extension files.' });
         }
     }
 
     public async handleChangelogContentRequest(serverIpc: ServerPostMessageManager) {
         try {
-            const changelogPath = path.join(this.getWorkspaceRoot(), 'CHANGELOG.md');
-            Services.loggerService.log(`Attempting to read CHANGELOG from: ${changelogPath}`);
+            const changelogPath = path.join(Services.context.extensionPath, 'CHANGELOG.md');
+            Services.loggerService.log(`Attempting to read CHANGELOG from extension path: ${changelogPath}`);
             const content = await fs.readFile(changelogPath, 'utf-8');
             serverIpc.sendToClient(ServerToClientChannel.SendChangelogContent, { content });
         } catch (error) {
             Services.loggerService.error(`Failed to read CHANGELOG.md: ${error}`);
-            serverIpc.sendToClient(ServerToClientChannel.SendChangelogContent, { content: '# CHANGELOG.md not found in workspace root.' });
+            serverIpc.sendToClient(ServerToClientChannel.SendChangelogContent, { content: '# CHANGELOG.md not found in extension files.' });
         }
     }
 

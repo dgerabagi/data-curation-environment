@@ -26,8 +26,10 @@ class ServiceContainer {
     public historyService!: HistoryService;
     public promptService!: PromptService;
     public gitService = new GitService();
+    public context!: vscode.ExtensionContext;
     
     public initialize(context: vscode.ExtensionContext, gitApi?: GitAPI) {
+        this.context = context;
         this.loggerService.log("Services initializing...");
         this.promptService = new PromptService(context.extensionUri);
         this.historyService = new HistoryService();

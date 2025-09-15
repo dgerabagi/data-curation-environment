@@ -2,12 +2,20 @@
 
 All notable changes to the "Data Curation Environment" extension will be documented in this file.
 
+## [0.1.2] - Q3 2025
+
+### Added
+- **Similarity Score:** The PCPP now displays a similarity score for associated files and uses a color gradient to indicate the degree of change.
+- **Robust Autosave:** Implemented a more robust autosave with navigation locking to prevent data loss when switching cycles.
+- **Settings Panel:** Created a new settings panel to display the README and Changelog.
+- **Auto-Tab on Paste:** The PCPP now automatically advances to the next empty response tab after pasting in a large response.
+- **Smarter Restore:** The "Restore Baseline" button now correctly deletes newly created files that were part of the accepted response.
+
 ## [0.1.1] - Q3 2025
 
 ### Added
 - **Git-Integrated Testing:** Added "Baseline (Commit)" and "Restore Baseline" buttons to the PCPP for a rapid test-and-revert workflow.
 - **Undo/Redo for File Operations:** Implemented `Ctrl+Z` and `Ctrl+Y` in the File Tree View to undo/redo file moves.
-- **Settings & Help Panel:** Added a `?` icon to the PCPP that opens this panel, containing the changelog and README.
 - **Tab Persistence:** The active response tab in the PCPP is now saved and restored across sessions.
 
 ### Fixed
