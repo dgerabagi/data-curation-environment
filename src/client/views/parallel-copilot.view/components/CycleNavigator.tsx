@@ -1,7 +1,7 @@
 // src/client/views/parallel-copilot.view/components/CycleNavigator.tsx
-// Updated on: C7 (Disable buttons based on saveStatus)
+// Updated on: C19 (Remove Git buttons)
 import * as React from 'react';
-import { VscChevronLeft, VscChevronRight, VscAdd, VscTrash, VscSync, VscCloudUpload, VscCloudDownload, VscSourceControl, VscDiscard } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscAdd, VscTrash, VscSync, VscCloudUpload, VscCloudDownload } from 'react-icons/vsc';
 
 interface CycleNavigatorProps {
     currentCycle: number;
@@ -15,8 +15,6 @@ interface CycleNavigatorProps {
     onResetHistory: () => void;
     onExportHistory: () => void;
     onImportHistory: () => void;
-    onGitBaseline: () => void;
-    onGitRestore: () => void;
     workflowStep: string | null;
     disabledReason: string;
     saveStatus: 'saved' | 'saving' | 'unsaved';
@@ -34,8 +32,6 @@ const CycleNavigator: React.FC<CycleNavigatorProps> = ({
     onResetHistory,
     onExportHistory,
     onImportHistory,
-    onGitBaseline,
-    onGitRestore,
     workflowStep,
     disabledReason,
     saveStatus
@@ -81,15 +77,6 @@ const CycleNavigator: React.FC<CycleNavigatorProps> = ({
             <button onClick={onResetHistory} title="Reset All History"><VscSync /></button>
             <button onClick={onExportHistory} title="Save Cycle History..."><VscCloudUpload /></button>
             <button onClick={onImportHistory} title="Load Cycle History..."><VscCloudDownload /></button>
-            <div className="button-separator"></div>
-            <button 
-                onClick={onGitBaseline} 
-                title="Baseline (Commit)"
-                className={`git-button ${workflowStep === 'awaitingBaseline' ? 'workflow-highlight' : ''}`}
-            >
-                <VscSourceControl /> Baseline
-            </button>
-            <button onClick={onGitRestore} title="Restore Baseline" className="git-button"><VscDiscard /> Restore</button>
         </div>
     );
 };

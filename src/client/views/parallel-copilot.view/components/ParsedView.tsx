@@ -1,7 +1,7 @@
 // src/client/views/parallel-copilot.view/components/ParsedView.tsx
-// Updated on: C9 (Implement path truncation and context menu)
+// Updated on: C19 (Remove response-level buttons)
 import * as React from 'react';
-import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscSave, VscCheckAll, VscClearAll, VscClippy, VscChevronDown } from 'react-icons/vsc';
+import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscCheckAll, VscClearAll, VscClippy, VscChevronDown } from 'react-icons/vsc';
 import ReactMarkdown from 'react-markdown';
 import * as path from 'path-browserify';
 import { ParsedResponse } from '@/common/types/pcpp.types';
@@ -42,15 +42,6 @@ interface ParsedViewProps {
     comparisonMetrics: Map<string, ComparisonMetrics | null>;
     viewableContent: string | undefined | null;
     onCopyContent: () => void;
-    selectedResponseId: string | null;
-    onSelectResponse: (id: string) => void;
-    onSelectAllFiles: () => void;
-    onDeselectAllFiles: () => void;
-    isAllFilesSelected: boolean;
-    onAcceptSelected: () => void;
-    leftPaneWidth: number;
-    onBaseline: () => void;
-    onRestore: () => void;
     workflowStep: string | null;
 }
 
@@ -121,12 +112,6 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
             </div>
             <div className="resizer" />
             <div className="parsed-view-right">
-                <div className="response-acceptance-header">
-                    <button className={`styled-button ${props.selectedResponseId === props.activeTab.toString() ? 'toggled' : ''} ${props.workflowStep === 'awaitingResponseSelect' ? 'workflow-highlight' : ''}`} onClick={() => props.onSelectResponse(props.activeTab.toString())}>{props.selectedResponseId === props.activeTab.toString() ? 'Response Selected' : 'Select This Response'}</button>
-                    <button className={`styled-button ${props.workflowStep === 'awaitingFileSelect' ? 'workflow-highlight' : ''}`} onClick={props.onSelectAllFiles}><VscCheckAll/> {props.isAllFilesSelected ? 'Deselect All' : 'Select All'}</button>
-                    <button className="styled-button" onClick={props.onDeselectAllFiles} title="Deselect All Files Across All Responses"><VscClearAll /></button>
-                    <button className={`styled-button ${props.workflowStep === 'awaitingAccept' ? 'workflow-highlight' : ''}`} onClick={props.onAcceptSelected} disabled={props.selectedFilesForReplacement.size === 0}><VscSave/> Accept Selected</button>
-                </div>
                 <div className="file-content-viewer-header">
                     <span className="file-path" title={props.selectedFilePath || ''}>{props.selectedFilePath ? path.basename(props.selectedFilePath) : 'No file selected'}</span>
                     <div className="file-actions"><div className="file-metadata">{currentComparisonMetrics && currentComparisonMetrics.originalTokens !== -1 && (<><span>Original: {formatLargeNumber(currentComparisonMetrics.originalTokens, 1)} tk</span><span>New: {formatLargeNumber(currentComparisonMetrics.modifiedTokens, 1)} tk</span><span>Similarity: {(currentComparisonMetrics.similarity * 100).toFixed(0)}%</span></>)}{currentComparisonMetrics && currentComparisonMetrics.originalTokens === -1 && (<span style={{color: 'var(--vscode-errorForeground)'}}>Original file not found</span>)}</div><button onClick={props.onCopyContent} title="Copy file content" disabled={!props.selectedFilePath}><VscClippy /></button></div>

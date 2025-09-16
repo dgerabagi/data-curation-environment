@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 19 - centralize workflow buttons
+Current Cycle 20 - ts errors and one additional bug report
+Cycle 19 - centralize workflow buttons
 Cycle 18 - fix changelog/readme source
 Cycle 17 - settings opens!
 Cycle 16 - dist ignored, now get the settings panel to work
@@ -225,7 +226,7 @@ No project scope defined.
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C18 (Add A85)
+# Updated on: C19 (Add A86)
 
 ## 1. Purpose
 
@@ -603,6 +604,10 @@ No project scope defined.
 - **Description:** A plan for an enhanced settings panel where users can create and manage "model cards" to easily switch between different LLM providers and configurations.
 - **Tags:** feature plan, settings, ui, ux, llm, configuration, model management
 
+### A86. DCE - PCPP Workflow Centralization and UI Persistence Plan
+- **Description:** A plan to centralize the main workflow buttons in the PCPP, make the animated workflow highlight persistent, and fix the broken cost calculation.
+- **Tags:** feature plan, ui, ux, workflow, refactor, bug fix
+
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
 - **Tags:** history, log, development process, cycles
@@ -689,6 +694,77 @@ No project scope defined.
 </M5. organized artifacts list>
 
 <M6. Cycles>
+
+<Cycle 20>
+<Cycle Context>
+okay i selected the best response and rolled it in, but gome some ts errors. also i discovered a persistence issue with the project plan page. when seeing that project plan for the first time, so during project initalization (cycle 0), if the user changes their view away from the pcpp and back to it, anything they wrote in that text box that turns into the project plan in the prompt gets wiped.
+</Cycle Context>
+<Ephemeral Context>
+
+ERROR in C:\Projects\DCE\src\backend\services\history.service.ts
+26:50-53
+[tsl] ERROR in C:\Projects\DCE\src\backend\services\history.service.ts(26,51)
+      TS2339: Property 'uri' does not exist on type 'readonly WorkspaceFolder[]'.
+
+ERROR in C:\Projects\DCE\src\backend\services\history.service.ts
+269:59-65
+[tsl] ERROR in C:\Projects\DCE\src\backend\services\history.service.ts(269,60)
+      TS2339: Property 'fsPath' does not exist on type 'Uri[]'.
+
+ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\components\ParsedView.tsx
+./src/client/views/parallel-copilot.view/components/ParsedView.tsx 84:75-88
+[tsl] ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\components\ParsedView.tsx(84,76)
+      TS2339: Property 'leftPaneWidth' does not exist on type 'ParsedViewProps'.
+ @ ./src/client/views/parallel-copilot.view/components/ResponsePane.tsx 4:0-38 16:42-52
+ @ ./src/client/views/parallel-copilot.view/view.tsx 15:0-53 844:38-50
+
+ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\components\ResponsePane.tsx
+./src/client/views/parallel-copilot.view/components/ResponsePane.tsx 72:12-30
+[tsl] ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\components\ResponsePane.tsx(72,13)
+      TS2322: Type '{ parsedContent: ParsedResponse; fileExistenceMap: Map<string, boolean>; selectedFilePath: string; onSelectForViewing: (path: string) => void; selectedFilesForReplacement: Set<...>; ... 19 more ...; workflowStep: string; }' is not assignable to type 'IntrinsicAttributes & ParsedViewProps'.
+  Property 'selectedResponseId' does not exist on type 'IntrinsicAttributes & ParsedViewProps'.
+ @ ./src/client/views/parallel-copilot.view/view.tsx 15:0-53 844:38-50
+
+4 errors have detailed information that is not shown.
+Use 'stats.errorDetails: true' resp. '--stats-error-details' to show it.
+
+webpack 5.101.1 compiled with 4 errors in 10091 ms
+    [webpack-cli] Compiler is watching files for updates...
+
+</Ephemeral Context>
+<Previous Cycle 19 Summary of Actions>
+I have analyzed the issue from Cycle 18. You've correctly identified a significant bug: the settings panel is looking for the `CHANGELOG.md` and `README.md` files in the user's active workspace, not within the extension's own directory. This is why it fails when you run the extension in debug mode against another project.
+
+My course of action is to fix this by making the backend services aware of the extension's own installation path and using that path to locate these asset files. This ensures the settings panel will always be able to display its content, regardless of what workspace the user has open.
+
+### Course of Action
+
+1.  **Documentation First (Codifying the Bug):**
+    *   I will add a new case study to **`A11. DCE - Regression Case Studies.md`**.
+        *   **Name:** "Settings Panel Fails to Load Content in Extension Host"
+        *   **Root Cause:** The `file-operation.service` was using `vscode.workspace.workspaceFolders[0].uri.fsPath` (the user's workspace) to find asset files (`README.md`, etc.) that are bundled with the extension itself.
+        *   **Codified Solution:** Backend services that need to read the extension's own files must be initialized with the `vscode.ExtensionContext` object. They should use `context.extensionPath` to construct absolute paths to their internal assets, making them independent of the user's workspace.
+
+2.  **Provide Extension Context to Services:**
+    *   **`extension.ts`:** I will update the `activate` function to pass the `context` object to the service initializer: `Services.initialize(context, gitApi);`.
+    *   **`src/backend/services/services.ts`:** I will update the `ServiceContainer` to store the provided `ExtensionContext`.
+
+3.  **Fix File Paths in `file-operation.service.ts`:**
+    *   I will refactor the `handleReadmeContentRequest` and `handleChangelogContentRequest` methods.
+    *   Instead of using the user's workspace root, they will now construct the path using `Services.context.extensionPath`. For example: `const readmePath = path.join(Services.context.extensionPath, 'README.md');`. This ensures the service always looks for the files inside the installed extension's directory.
+
+### Files Updated This Cycle:
+*   `src/Artifacts/A11. DCE - Regression Case Studies.md` (Updated)
+*   `src/extension.ts` (Updated)
+*   `src/backend/services/services.ts` (Updated)
+*   `src/backend/services/file-operation.service.ts` (Updated)
+
+1.  **Update `A11. DCE - Regression Case Studies.md`:** Add a new case study for the settings panel content loading failure.
+2.  **Update `extension.ts`:** Pass the `ExtensionContext` to the `Services.initialize` method.
+3.  **Update `services.ts`:** Store the `ExtensionContext` in the `ServiceContainer`.
+4.  **Update `file-operation.service.ts`:** Modify the `handleReadmeContentRequest` and `handleChangelogContentRequest` methods to use the `extensionPath` for locating the `README.md` and `CHANGELOG.md` files.
+</Previous Cycle 19 Summary of Actions>
+</Cycle 20>
 
 <Cycle 19>
 <Cycle Context>
@@ -2326,19 +2402,19 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-15T22:35:00.568Z
+  Date Generated: 2025-09-16T21:13:05.899Z
   ---
   Total Files: 188
-  Approx. Tokens: 462713
+  Approx. Tokens: 462277
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (8362 tokens)
-4. src\Artifacts\A0. DCE Master Artifact List.md (7984 tokens)
-5. src\client\views\parallel-copilot.view\view.scss (5201 tokens)
-6. src\backend\services\prompt.service.ts (5042 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (8434 tokens)
+4. src\Artifacts\A0. DCE Master Artifact List.md (7942 tokens)
+5. src\client\views\parallel-copilot.view\view.scss (5152 tokens)
+6. src\backend\services\prompt.service.ts (5139 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 8. src\backend\services\file-operation.service.ts (4280 tokens)
 9. src\client\views\context-chooser.view\view.tsx (4019 tokens)
@@ -2347,7 +2423,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!-- Full File List -->
 1. public\copilot.svg - [Binary] Size: 445 Bytes
 2. public\spiral.svg - [Binary] Size: 459 Bytes
-3. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 464 - Chars: 31935 - Tokens: 7984
+3. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 468 - Chars: 31768 - Tokens: 7942
 4. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 5. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
 6. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
@@ -2473,9 +2549,9 @@ This file-centric approach helps in planning and prioritizing work, especially i
 126. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12658 - Tokens: 3165
 127. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 128. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-129. src\backend\services\history.service.ts - Lines: 287 - Chars: 12276 - Tokens: 3069
+129. src\backend\services\history.service.ts - Lines: 288 - Chars: 12317 - Tokens: 3080
 130. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
-131. src\backend\services\prompt.service.ts - Lines: 388 - Chars: 20166 - Tokens: 5042
+131. src\backend\services\prompt.service.ts - Lines: 388 - Chars: 20553 - Tokens: 5139
 132. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 133. src\backend\services\services.ts - Lines: 42 - Chars: 1905 - Tokens: 477
 134. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
@@ -2496,17 +2572,17 @@ This file-centric approach helps in planning and prioritizing work, especially i
 149. src\client\views\context-chooser.view\view.tsx - Lines: 150 - Chars: 16076 - Tokens: 4019
 150. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
 151. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 55 - Chars: 1970 - Tokens: 493
-152. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 97 - Chars: 4000 - Tokens: 1000
+152. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 84 - Chars: 3386 - Tokens: 847
 153. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
-154. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 150 - Chars: 10604 - Tokens: 2651
+154. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 135 - Chars: 9144 - Tokens: 2286
 155. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 86 - Chars: 3575 - Tokens: 894
 156. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
 157. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 158. src\client\views\parallel-copilot.view\on-message.ts - Lines: 116 - Chars: 5463 - Tokens: 1366
 159. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 92 - Chars: 4340 - Tokens: 1085
-160. src\client\views\parallel-copilot.view\view.scss - Lines: 891 - Chars: 20802 - Tokens: 5201
+160. src\client\views\parallel-copilot.view\view.scss - Lines: 922 - Chars: 20608 - Tokens: 5152
 161. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-162. src\client\views\parallel-copilot.view\view.tsx - Lines: 271 - Chars: 33445 - Tokens: 8362
+162. src\client\views\parallel-copilot.view\view.tsx - Lines: 274 - Chars: 33735 - Tokens: 8434
 163. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 164. src\client\views\settings.view\on-message.ts - Lines: 17 - Chars: 762 - Tokens: 191
 165. src\client\views\settings.view\view.scss - Lines: 87 - Chars: 1767 - Tokens: 442
@@ -2518,7 +2594,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 171. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 172. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
 173. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
-174. src\common\types\pcpp.types.ts - Lines: 45 - Chars: 1142 - Tokens: 286
+174. src\common\types\pcpp.types.ts - Lines: 46 - Chars: 1113 - Tokens: 279
 175. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
 176. src\common\utils\formatting.ts - Lines: 141 - Chars: 4606 - Tokens: 1152
 177. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
@@ -2560,7 +2636,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C18 (Add A85)
+# Updated on: C19 (Add A86)
 
 ## 1. Purpose
 
@@ -2937,6 +3013,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 ### A85. DCE - Model Card Management Plan
 - **Description:** A plan for an enhanced settings panel where users can create and manage "model cards" to easily switch between different LLM providers and configurations.
 - **Tags:** feature plan, settings, ui, ux, llm, configuration, model management
+
+### A86. DCE - PCPP Workflow Centralization and UI Persistence Plan
+- **Description:** A plan to centralize the main workflow buttons in the PCPP, make the animated workflow highlight persistent, and fix the broken cost calculation.
+- **Tags:** feature plan, ui, ux, workflow, refactor, bug fix
 
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
@@ -20479,7 +20559,7 @@ export class HighlightingService {
 
 <file path="src/backend/services/history.service.ts">
 // src/backend/services/history.service.ts
-// Updated on: C10 (Add activeTab to default cycle)
+// Updated on: C19 (Add activeWorkflowStep to default cycle)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -20503,7 +20583,7 @@ export class HistoryService {
     constructor() {
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (workspaceFolders && workspaceFolders.length > 0) {
-            this.workspaceRoot = workspaceFolders[0].uri.fsPath;
+            this.workspaceRoot = workspaceFolders.uri.fsPath;
             this.historyFilePath = path.join(this.workspaceRoot, '.vscode', 'dce_history.json');
         } else {
             Services.loggerService.warn("HistoryService: No workspace folder found. History will not be saved.");
@@ -20574,6 +20654,7 @@ export class HistoryService {
             activeTab: 1,
             isSortedByTokens: false, 
             pathOverrides: {},
+            activeWorkflowStep: null,
         };
 
         if (isFreshEnvironment) {
@@ -20745,7 +20826,7 @@ export class HistoryService {
                 filters: { 'JSON': ['json'] }
             });
             if (openUris && openUris.length > 0) {
-                const content = await fs.readFile(openUris[0].fsPath, 'utf-8');
+                const content = await fs.readFile(openUris.fsPath, 'utf-8');
                 const historyData = JSON.parse(content);
                 if (historyData.version && Array.isArray(historyData.cycles)) {
                     await this._writeHistoryFile(historyData);
@@ -23887,9 +23968,9 @@ export default ContextInputs;
 
 <file path="src/client/views/parallel-copilot.view/components/CycleNavigator.tsx">
 // src/client/views/parallel-copilot.view/components/CycleNavigator.tsx
-// Updated on: C7 (Disable buttons based on saveStatus)
+// Updated on: C19 (Remove Git buttons)
 import * as React from 'react';
-import { VscChevronLeft, VscChevronRight, VscAdd, VscTrash, VscSync, VscCloudUpload, VscCloudDownload, VscSourceControl, VscDiscard } from 'react-icons/vsc';
+import { VscChevronLeft, VscChevronRight, VscAdd, VscTrash, VscSync, VscCloudUpload, VscCloudDownload } from 'react-icons/vsc';
 
 interface CycleNavigatorProps {
     currentCycle: number;
@@ -23903,8 +23984,6 @@ interface CycleNavigatorProps {
     onResetHistory: () => void;
     onExportHistory: () => void;
     onImportHistory: () => void;
-    onGitBaseline: () => void;
-    onGitRestore: () => void;
     workflowStep: string | null;
     disabledReason: string;
     saveStatus: 'saved' | 'saving' | 'unsaved';
@@ -23922,8 +24001,6 @@ const CycleNavigator: React.FC<CycleNavigatorProps> = ({
     onResetHistory,
     onExportHistory,
     onImportHistory,
-    onGitBaseline,
-    onGitRestore,
     workflowStep,
     disabledReason,
     saveStatus
@@ -23969,15 +24046,6 @@ const CycleNavigator: React.FC<CycleNavigatorProps> = ({
             <button onClick={onResetHistory} title="Reset All History"><VscSync /></button>
             <button onClick={onExportHistory} title="Save Cycle History..."><VscCloudUpload /></button>
             <button onClick={onImportHistory} title="Load Cycle History..."><VscCloudDownload /></button>
-            <div className="button-separator"></div>
-            <button 
-                onClick={onGitBaseline} 
-                title="Baseline (Commit)"
-                className={`git-button ${workflowStep === 'awaitingBaseline' ? 'workflow-highlight' : ''}`}
-            >
-                <VscSourceControl /> Baseline
-            </button>
-            <button onClick={onGitRestore} title="Restore Baseline" className="git-button"><VscDiscard /> Restore</button>
         </div>
     );
 };
@@ -24079,9 +24147,9 @@ export default HighlightedTextarea;
 
 <file path="src/client/views/parallel-copilot.view/components/ParsedView.tsx">
 // src/client/views/parallel-copilot.view/components/ParsedView.tsx
-// Updated on: C9 (Implement path truncation and context menu)
+// Updated on: C19 (Remove response-level buttons)
 import * as React from 'react';
-import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscSave, VscCheckAll, VscClearAll, VscClippy, VscChevronDown } from 'react-icons/vsc';
+import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscCheckAll, VscClearAll, VscClippy, VscChevronDown } from 'react-icons/vsc';
 import ReactMarkdown from 'react-markdown';
 import * as path from 'path-browserify';
 import { ParsedResponse } from '@/common/types/pcpp.types';
@@ -24122,15 +24190,6 @@ interface ParsedViewProps {
     comparisonMetrics: Map<string, ComparisonMetrics | null>;
     viewableContent: string | undefined | null;
     onCopyContent: () => void;
-    selectedResponseId: string | null;
-    onSelectResponse: (id: string) => void;
-    onSelectAllFiles: () => void;
-    onDeselectAllFiles: () => void;
-    isAllFilesSelected: boolean;
-    onAcceptSelected: () => void;
-    leftPaneWidth: number;
-    onBaseline: () => void;
-    onRestore: () => void;
     workflowStep: string | null;
 }
 
@@ -24201,12 +24260,6 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
             </div>
             <div className="resizer" />
             <div className="parsed-view-right">
-                <div className="response-acceptance-header">
-                    <button className={`styled-button ${props.selectedResponseId === props.activeTab.toString() ? 'toggled' : ''} ${props.workflowStep === 'awaitingResponseSelect' ? 'workflow-highlight' : ''}`} onClick={() => props.onSelectResponse(props.activeTab.toString())}>{props.selectedResponseId === props.activeTab.toString() ? 'Response Selected' : 'Select This Response'}</button>
-                    <button className={`styled-button ${props.workflowStep === 'awaitingFileSelect' ? 'workflow-highlight' : ''}`} onClick={props.onSelectAllFiles}><VscCheckAll/> {props.isAllFilesSelected ? 'Deselect All' : 'Select All'}</button>
-                    <button className="styled-button" onClick={props.onDeselectAllFiles} title="Deselect All Files Across All Responses"><VscClearAll /></button>
-                    <button className={`styled-button ${props.workflowStep === 'awaitingAccept' ? 'workflow-highlight' : ''}`} onClick={props.onAcceptSelected} disabled={props.selectedFilesForReplacement.size === 0}><VscSave/> Accept Selected</button>
-                </div>
                 <div className="file-content-viewer-header">
                     <span className="file-path" title={props.selectedFilePath || ''}>{props.selectedFilePath ? path.basename(props.selectedFilePath) : 'No file selected'}</span>
                     <div className="file-actions"><div className="file-metadata">{currentComparisonMetrics && currentComparisonMetrics.originalTokens !== -1 && (<><span>Original: {formatLargeNumber(currentComparisonMetrics.originalTokens, 1)} tk</span><span>New: {formatLargeNumber(currentComparisonMetrics.modifiedTokens, 1)} tk</span><span>Similarity: {(currentComparisonMetrics.similarity * 100).toFixed(0)}%</span></>)}{currentComparisonMetrics && currentComparisonMetrics.originalTokens === -1 && (<span style={{color: 'var(--vscode-errorForeground)'}}>Original file not found</span>)}</div><button onClick={props.onCopyContent} title="Copy file content" disabled={!props.selectedFilePath}><VscClippy /></button></div>
@@ -24618,7 +24671,7 @@ export default OnboardingView;
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C9 (Add styling for path truncation)
+// Updated on: C19 (Add styles for WorkflowToolbar)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -24895,7 +24948,7 @@ body {
     }
 }
 
-.pc-toolbar button, .file-actions button, .exit-diff-button, .styled-button, .sort-button {
+.pc-toolbar button, .file-actions button, .exit-diff-button, .styled-button {
     background: none;
     border: 1px solid var(--vscode-button-border, transparent);
     color: var(--vscode-icon-foreground);
@@ -24917,7 +24970,7 @@ body {
     }
 }
 
-.sort-button.active, .pc-toolbar button.active {
+.pc-toolbar button.active {
     background-color: var(--vscode-toolbar-hoverBackground);
     outline: 1px solid var(--vscode-focusBorder);
 }
@@ -25508,6 +25561,37 @@ body {
         margin: 4px 0;
     }
 }
+
+.workflow-toolbar {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 4px 8px;
+    background-color: var(--vscode-sideBar-sectionHeaderBackground);
+    border-radius: 4px;
+
+    button {
+        background: none;
+        border: 1px solid var(--vscode-button-border, transparent);
+        color: var(--vscode-icon-foreground);
+        cursor: pointer;
+        padding: 4px;
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+    
+        &:hover {
+            background-color: var(--vscode-toolbar-hoverBackground);
+        }
+    
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
+}
 </file_artifact>
 
 <file path="src/client/views/parallel-copilot.view/view.ts">
@@ -25525,7 +25609,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C17 (Add tooltip to Log State button)
+// Updated on: C19 (Centralize workflow buttons and persist highlight)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -25542,6 +25626,7 @@ import ContextInputs from './components/ContextInputs';
 import ResponseTabs from './components/ResponseTabs';
 import ResponsePane from './components/ResponsePane';
 import * as path from 'path-browserify';
+import WorkflowToolbar from './components/WorkflowToolbar';
 
 console.log('[PCPP View] view.tsx module loaded');
 
@@ -25600,17 +25685,17 @@ const App = () => {
     const clientIpc = ClientPostMessageManager.getInstance();
     
     const stateRef = React.useRef({
-        currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, fileExistenceMap
+        currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, fileExistenceMap, workflowStep
     });
 
     React.useEffect(() => {
         stateRef.current = {
-            currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, fileExistenceMap
+            currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, fileExistenceMap, workflowStep
         };
-    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, fileExistenceMap]);
+    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, fileExistenceMap, workflowStep]);
 
     const saveCurrentCycleState = React.useCallback(() => {
-        const { currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides } = stateRef.current;
+        const { currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, workflowStep } = stateRef.current;
         if (currentCycle === null || currentCycle === 0) return;
         setSaveStatus('saving');
         const responses: { [key: string]: PcppResponse } = {};
@@ -25631,7 +25716,8 @@ const App = () => {
             tabCount,
             activeTab,
             isSortedByTokens,
-            pathOverrides: Object.fromEntries(pathOverrides)
+            pathOverrides: Object.fromEntries(pathOverrides),
+            activeWorkflowStep: workflowStep
         };
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
     }, [clientIpc]);
@@ -25719,7 +25805,7 @@ const App = () => {
     const newCycleButtonDisabledReason = React.useMemo(() => { const reasons: string[] = []; if (!cycleTitle || cycleTitle.trim() === 'New Cycle' || cycleTitle.trim() === '') reasons.push("- A cycle title is required."); if (!cycleContext || cycleContext.trim() === '') reasons.push("- Cycle context cannot be empty."); if (!selectedResponseId) reasons.push("- A response must be selected."); return reasons.join('\n'); }, [cycleTitle, cycleContext, selectedResponseId]);
 
     React.useEffect(() => { if (workflowStep === null) return; if (workflowStep === 'readyForNewCycle') return; if (workflowStep === 'awaitingGeneratePrompt') { if (isReadyForNextCycle) setWorkflowStep('awaitingGeneratePrompt'); return; } if (workflowStep === 'awaitingCycleTitle') { if (cycleTitle.trim() && cycleTitle.trim() !== 'New Cycle') { setWorkflowStep('awaitingGeneratePrompt'); } return; } if (workflowStep === 'awaitingCycleContext') { if (cycleContext.trim()) { setWorkflowStep('awaitingCycleTitle'); } return; } if (workflowStep === 'awaitingAccept') { return; } if (workflowStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestGitStatus, {}); return; } if (workflowStep === 'awaitingFileSelect') { if (selectedFilesForReplacement.size > 0) { setWorkflowStep('awaitingAccept'); } return; } if (workflowStep === 'awaitingResponseSelect') { if (selectedResponseId) { setWorkflowStep('awaitingBaseline'); } return; } if (workflowStep === 'awaitingSort') { if (isSortedByTokens) { setWorkflowStep('awaitingResponseSelect'); } return; } if (workflowStep === 'awaitingParse') { if (isParsedMode) { setWorkflowStep(isSortedByTokens ? 'awaitingResponseSelect' : 'awaitingSort'); } return; } const waitingForPaste = workflowStep?.startsWith('awaitingResponsePaste'); if (waitingForPaste) { for (let i = 1; i <= tabCount; i++) { if (!tabs[i.toString()]?.rawContent?.trim()) { setWorkflowStep(`awaitingResponsePaste_${i}`); return; } } setWorkflowStep('awaitingParse'); } }, [workflowStep, selectedFilesForReplacement, selectedResponseId, isSortedByTokens, isParsedMode, tabs, cycleContext, cycleTitle, tabCount, isReadyForNextCycle, clientIpc]);
-    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string, newMax?: number) => { console.log(`[PCPP View] Loading cycle data for cycle ${cycleData.cycleId}`); setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setActiveTab(cycleData.activeTab || 1); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); if (newMax) setMaxCycle(newMax); setSaveStatus('saved'); }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => { setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics)); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { console.log(`[PCPP VIEW] Received NotifyGitOperationResult: ${JSON.stringify(result)}`); if (result.success) { setWorkflowStep(prevStep => { console.log(`[PCPP WORKFLOW] Functional update. Prev step: ${prevStep}.`); if (prevStep === 'awaitingBaseline') { console.log(`[PCPP WORKFLOW] Advancing from 'awaitingBaseline' to 'awaitingFileSelect'.`); clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } else { console.error(`[PCPP VIEW] Git operation failed: ${result.message}`); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => { if (cycleId === stateRef.current.currentCycle) setSaveStatus('saved'); }); clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }, [clientIpc]);
+    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string, newMax?: number) => { console.log(`[PCPP View] Loading cycle data for cycle ${cycleData.cycleId}`); setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setActiveTab(cycleData.activeTab || 1); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setWorkflowStep(cycleData.activeWorkflowStep || null); if (newMax) setMaxCycle(newMax); setSaveStatus('saved'); requestCostEstimation(); }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => { setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics)); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { console.log(`[PCPP VIEW] Received NotifyGitOperationResult: ${JSON.stringify(result)}`); if (result.success) { setWorkflowStep(prevStep => { console.log(`[PCPP WORKFLOW] Functional update. Prev step: ${prevStep}.`); if (prevStep === 'awaitingBaseline') { console.log(`[PCPP WORKFLOW] Advancing from 'awaitingBaseline' to 'awaitingFileSelect'.`); clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } else { console.error(`[PCPP VIEW] Git operation failed: ${result.message}`); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => { if (cycleId === stateRef.current.currentCycle) setSaveStatus('saved'); }); clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }, [clientIpc, requestCostEstimation]);
     React.useEffect(() => { if (isParsedMode) parseAllTabs(); }, [isParsedMode, tabs, parseAllTabs]);
     React.useEffect(() => { if (!selectedFilePath) return; const currentTabData = tabs[activeTab.toString()]; if (currentTabData?.parsedContent) { const fileExistsInTab = currentTabData.parsedContent.files.some(f => f.path === selectedFilePath); if (!fileExistsInTab) setSelectedFilePath(null); } }, [activeTab, tabs, selectedFilePath]);
 
@@ -25776,14 +25862,15 @@ const App = () => {
     };
 
     return <div className="pc-view-container">
-        <div className="pc-header"><div className="pc-toolbar"><button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button><button onClick={handleGeneratePrompt} title="Generate prompt.md" className={workflowStep === 'awaitingGeneratePrompt' ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button><button onClick={handleLogState} title="For developer use only. Logs internal state to the output channel."><VscBug/></button><button onClick={handleGlobalParseToggle} className={`${isParsedMode ? 'active' : ''} ${workflowStep === 'awaitingParse' ? 'workflow-highlight' : ''}`}><VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}</button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => {setTabCount(parseInt(e.target.value, 10) || 1); setSaveStatus('unsaved');}} /></div></div>
+        <div className="pc-header"><div className="pc-toolbar"><button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button><button onClick={handleGeneratePrompt} title="Generate prompt.md" className={workflowStep === 'awaitingGeneratePrompt' ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button><button onClick={handleLogState} title="For developer use only. Logs internal state to the output channel."><VscBug/></button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => {setTabCount(parseInt(e.target.value, 10) || 1); setSaveStatus('unsaved');}} /></div></div>
         <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''} extraHeaderContent={<div style={{display: 'flex', alignItems: 'center', gap: '8px'}}><SaveStatusIndicator /> {totalPromptCostDisplay}</div>}>
-            <CycleNavigator currentCycle={currentCycle} maxCycle={maxCycle} cycleTitle={cycleTitle} isNewCycleButtonDisabled={isNewCycleButtonDisabled} onCycleChange={handleCycleChange} onNewCycle={handleNewCycle} onTitleChange={(title) => { setCycleTitle(title); setSaveStatus('unsaved'); }} onDeleteCycle={handleDeleteCycle} onResetHistory={handleResetHistory} onExportHistory={handleExportHistory} onImportHistory={handleImportHistory} onGitBaseline={handleGitBaseline} onGitRestore={onGitRestore} workflowStep={workflowStep} disabledReason={newCycleButtonDisabledReason} saveStatus={saveStatus} />
+            <CycleNavigator currentCycle={currentCycle} maxCycle={maxCycle} cycleTitle={cycleTitle} isNewCycleButtonDisabled={isNewCycleButtonDisabled} onCycleChange={handleCycleChange} onNewCycle={handleNewCycle} onTitleChange={(title) => { setCycleTitle(title); setSaveStatus('unsaved'); }} onDeleteCycle={handleDeleteCycle} onResetHistory={handleResetHistory} onExportHistory={handleExportHistory} onImportHistory={handleImportHistory} workflowStep={workflowStep} disabledReason={newCycleButtonDisabledReason} saveStatus={saveStatus} />
             <ContextInputs cycleContext={cycleContext} ephemeralContext={ephemeralContext} cycleContextTokens={cycleContextTokens} ephemeralContextTokens={ephemeralContextTokens} onCycleContextChange={onCycleContextChange} onEphemeralContextChange={onEphemeralContextChange} workflowStep={workflowStep} />
         </CollapsibleSection>
         <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} workflowStep={workflowStep} onSortToggle={handleSortToggle} />
+        <WorkflowToolbar isParsedMode={isParsedMode} onParseToggle={handleGlobalParseToggle} isSortedByTokens={isSortedByTokens} onSortToggle={handleSortToggle} onSelectResponse={() => { setSelectedResponseId(prev => prev === activeTab.toString() ? null : activeTab.toString()); setWorkflowStep('awaitingResponseSelect'); setSaveStatus('unsaved'); }} selectedResponseId={selectedResponseId} activeTab={activeTab} onBaseline={handleGitBaseline} onRestore={onGitRestore} onAcceptSelected={handleAcceptSelectedFiles} selectedFilesForReplacementCount={selectedFilesForReplacement.size} workflowStep={workflowStep} />
         <div className="tab-content">
-            <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} onPaste={(e) => handlePaste(e, activeTab)} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={comparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => { setSelectedResponseId(prev => prev === id ? null : id); setWorkflowStep('awaitingResponseSelect'); setSaveStatus('unsaved'); }} onSelectAllFiles={handleSelectAllFilesToggle} onDeselectAllFiles={() => {setSelectedFilesForReplacement(new Set()); setSaveStatus('unsaved');}} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} onBaseline={handleGitBaseline} onRestore={onGitRestore} workflowStep={workflowStep} />
+            <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} onPaste={(e) => handlePaste(e, activeTab)} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={comparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => { setSelectedResponseId(prev => prev === id ? null : id); setWorkflowStep('awaitingResponseSelect'); setSaveStatus('unsaved'); }} onSelectAllFiles={handleSelectAllFilesToggle} onDeselectAllFiles={() => {setSelectedFilesForReplacement(new Set()); setSaveStatus('unsaved');}} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} workflowStep={workflowStep} />
         </div>
         {associatedFileMenu && <div className="context-menu" style={{ top: associatedFileMenu.y, left: associatedFileMenu.x }}><ul onMouseLeave={() => setAssociatedFileMenu(null)}><li onClick={() => { clientIpc.sendToServer(ClientToServerChannel.RequestCopyPath, { path: associatedFileMenu.path, relative: true }); setAssociatedFileMenu(null); }}>Copy Relative Path</li></ul></div>}
     </div>;
@@ -26364,7 +26451,7 @@ export interface FileNode {
 
 <file path="src/common/types/pcpp.types.ts">
 // src/common/types/pcpp.types.ts
-// Updated on: C13 (No functional changes, comment alignment)
+// Updated on: C19 (Add activeWorkflowStep)
 export interface PcppResponse {
     content: string;
 }
@@ -26386,6 +26473,7 @@ export interface PcppCycle {
     pathOverrides?: { [originalPath: string]: string };
     cycleContextHeight?: number;
     ephemeralContextHeight?: number;
+    activeWorkflowStep?: string;
 }
 
 export interface PcppHistoryFile {

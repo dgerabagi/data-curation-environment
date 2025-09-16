@@ -1,5 +1,5 @@
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C9 (Add styling for path truncation)
+// Updated on: C19 (Add styles for WorkflowToolbar)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -276,7 +276,7 @@ body {
     }
 }
 
-.pc-toolbar button, .file-actions button, .exit-diff-button, .styled-button, .sort-button {
+.pc-toolbar button, .file-actions button, .exit-diff-button, .styled-button {
     background: none;
     border: 1px solid var(--vscode-button-border, transparent);
     color: var(--vscode-icon-foreground);
@@ -298,7 +298,7 @@ body {
     }
 }
 
-.sort-button.active, .pc-toolbar button.active {
+.pc-toolbar button.active {
     background-color: var(--vscode-toolbar-hoverBackground);
     outline: 1px solid var(--vscode-focusBorder);
 }
@@ -887,5 +887,36 @@ body {
         border: none;
         border-top: 1px solid var(--vscode-menu-separatorBackground);
         margin: 4px 0;
+    }
+}
+
+.workflow-toolbar {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 4px 8px;
+    background-color: var(--vscode-sideBar-sectionHeaderBackground);
+    border-radius: 4px;
+
+    button {
+        background: none;
+        border: 1px solid var(--vscode-button-border, transparent);
+        color: var(--vscode-icon-foreground);
+        cursor: pointer;
+        padding: 4px;
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+    
+        &:hover {
+            background-color: var(--vscode-toolbar-hoverBackground);
+        }
+    
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
     }
 }

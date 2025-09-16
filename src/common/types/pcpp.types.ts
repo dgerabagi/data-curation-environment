@@ -1,5 +1,5 @@
 // src/common/types/pcpp.types.ts
-// Updated on: C13 (No functional changes, comment alignment)
+// Updated on: C19 (Add activeWorkflowStep)
 export interface PcppResponse {
     content: string;
 }
@@ -21,6 +21,7 @@ export interface PcppCycle {
     pathOverrides?: { [originalPath: string]: string };
     cycleContextHeight?: number;
     ephemeralContextHeight?: number;
+    activeWorkflowStep?: string;
 }
 
 export interface PcppHistoryFile {
