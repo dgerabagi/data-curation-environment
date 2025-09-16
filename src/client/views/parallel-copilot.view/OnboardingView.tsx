@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/OnboardingView.tsx
-// Updated on: C189 (No functional changes)
+// Updated on: C20 (Refactor state management)
 import * as React from 'react';
 import { VscRocket, VscArrowRight } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -7,30 +7,24 @@ import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 import { logger } from '@/client/utils/logger';
 
 interface OnboardingViewProps {
-    initialProjectScope?: string;
+    projectScope: string;
+    onScopeChange: (scope: string) => void;
     onNavigateToCycle: (cycleId: number) => void;
     latestCycleId: number;
-    onScopeChange: (scope: string) => void;
     workflowStep: string | null;
 }
 
-const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope, onNavigateToCycle, latestCycleId, onScopeChange, workflowStep }) => {
-    const [projectScope, setProjectScope] = React.useState(initialProjectScope || '');
+const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeChange, onNavigateToCycle, latestCycleId, workflowStep }) => {
     const [isGenerating, setIsGenerating] = React.useState(false);
     const [promptGenerated, setPromptGenerated] = React.useState(false);
     const clientIpc = ClientPostMessageManager.getInstance();
 
     const isNavigatingBack = latestCycleId > 0;
 
-    React.useEffect(() => {
-        setProjectScope(initialProjectScope || '');
-    }, [initialProjectScope]);
-
     const handleGenerate = () => {
         if (projectScope.trim()) {
             setIsGenerating(true);
             logger.log("Sending request to generate Cycle 0 prompt and save project scope.");
-            onScopeChange(projectScope); 
             clientIpc.sendToServer(ClientToServerChannel.RequestCreateCycle0Prompt, { projectScope });
             setTimeout(() => {
                 setIsGenerating(false);
@@ -42,11 +36,6 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope, on
     const handleReturnToCycles = () => {
         logger.log("Returning to latest cycle from Project Plan view.");
         onNavigateToCycle(latestCycleId);
-    };
-
-    const handleScopeChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        setProjectScope(e.target.value);
-        onScopeChange(e.target.value);
     };
 
     return (
@@ -62,7 +51,7 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope, on
                 className={`onboarding-textarea ${workflowStep === 'awaitingProjectScope' ? 'workflow-highlight' : ''}`}
                 placeholder="e.g., I want to build a web application that allows users to track their daily habits. It should have a simple UI, user authentication, and a dashboard to visualize progress..."
                 value={projectScope}
-                onChange={handleScopeChange}
+                onChange={(e) => onScopeChange(e.target.value)}
                 disabled={isGenerating || (promptGenerated && !isNavigatingBack)}
             />
             {isNavigatingBack ? (

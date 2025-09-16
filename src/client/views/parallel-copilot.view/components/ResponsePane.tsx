@@ -23,7 +23,7 @@ interface ResponsePaneProps {
     onTempOverridePathChange: (path: string) => void;
     onLinkFile: (originalPath: string) => void;
     onUnlinkFile: (originalPath: string) => void;
-    comparisonMetrics: Map<string, ComparisonMetrics> | null;
+    comparisonMetrics: Map<string, ComparisonMetrics | null> | null;
     viewableContent: string | undefined | null;
     onCopyContent: () => void;
     selectedResponseId: string | null;
@@ -70,14 +70,7 @@ const ResponsePane: React.FC<ResponsePaneProps> = (props) => {
             viewableContent={props.viewableContent}
             onCopyContent={props.onCopyContent}
             selectedResponseId={props.selectedResponseId}
-            onSelectResponse={props.onSelectResponse}
-            onSelectAllFiles={props.onSelectAllFiles}
-            onDeselectAllFiles={props.onDeselectAllFiles}
-            isAllFilesSelected={props.isAllFilesSelected}
-            onAcceptSelected={props.onAcceptSelected}
             leftPaneWidth={props.leftPaneWidth}
-            onBaseline={props.onBaseline}
-            onRestore={props.onRestore}
             workflowStep={props.workflowStep}
         />
     );

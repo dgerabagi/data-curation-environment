@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/ParsedView.tsx
-// Updated on: C19 (Remove response-level buttons)
+// Updated on: C20 (Add missing props to interface)
 import * as React from 'react';
 import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscCheckAll, VscClearAll, VscClippy, VscChevronDown } from 'react-icons/vsc';
 import ReactMarkdown from 'react-markdown';
@@ -43,6 +43,8 @@ interface ParsedViewProps {
     viewableContent: string | undefined | null;
     onCopyContent: () => void;
     workflowStep: string | null;
+    leftPaneWidth: number; // Added
+    selectedResponseId: string | null; // Added
 }
 
 const ParsedView: React.FC<ParsedViewProps> = (props) => {

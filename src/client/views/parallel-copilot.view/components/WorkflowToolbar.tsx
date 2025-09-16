@@ -1,16 +1,14 @@
 // src/client/views/parallel-copilot.view/components/WorkflowToolbar.tsx
-// New in C19
+// New file in C19
 import * as React from 'react';
-import { VscWand, VscListOrdered, VscListUnordered, VscSourceControl, VscDiscard, VscSave, VscCheckAll } from 'react-icons/vsc';
+import { VscWand, VscListOrdered, VscListUnordered, VscCheck, VscSourceControl, VscDiscard, VscCheckAll } from 'react-icons/vsc';
 
 interface WorkflowToolbarProps {
     isParsedMode: boolean;
     onParseToggle: () => void;
-    isSortedByTokens: boolean;
-    onSortToggle: () => void;
-    onSelectResponse: () => void;
     selectedResponseId: string | null;
     activeTab: number;
+    onSelectResponse: () => void;
     onBaseline: () => void;
     onRestore: () => void;
     onAcceptSelected: () => void;
@@ -18,52 +16,69 @@ interface WorkflowToolbarProps {
     workflowStep: string | null;
 }
 
-const WorkflowToolbar: React.FC<WorkflowToolbarProps> = (props) => {
+const WorkflowToolbar: React.FC<WorkflowToolbarProps> = ({
+    isParsedMode,
+    onParseToggle,
+    selectedResponseId,
+    activeTab,
+    onSelectResponse,
+    onBaseline,
+    onRestore,
+    onAcceptSelected,
+    selectedFilesForReplacementCount,
+    workflowStep
+}) => {
+    if (!isParsedMode) {
+        return (
+            <div className="workflow-toolbar">
+                <button
+                    onClick={onParseToggle}
+                    className={workflowStep === 'awaitingParse' ? 'workflow-highlight' : ''}
+                    title={isParsedMode ? "Return to raw text view" : "Parse all responses into structured view"}
+                >
+                    <VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}
+                </button>
+            </div>
+        );
+    }
+
     return (
         <div className="workflow-toolbar">
-            <button 
-                onClick={props.onParseToggle} 
-                className={`${props.isParsedMode ? 'active' : ''} ${props.workflowStep === 'awaitingParse' ? 'workflow-highlight' : ''}`}
+            <button
+                onClick={onParseToggle}
+                className={workflowStep === 'awaitingParse' ? 'workflow-highlight' : ''}
+                title={isParsedMode ? "Return to raw text view" : "Parse all responses into structured view"}
             >
-                <VscWand /> {props.isParsedMode ? 'Un-Parse All' : 'Parse All'}
+                <VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}
             </button>
             <button
-                onClick={props.onSortToggle}
-                className={`${props.isSortedByTokens ? 'active' : ''} ${props.workflowStep === 'awaitingSort' ? 'workflow-highlight' : ''}`}
-                title="Sort responses by token count"
-                disabled={!props.isParsedMode}
+                onClick={onSelectResponse}
+                className={`styled-button ${selectedResponseId === activeTab.toString() ? 'toggled' : ''} ${workflowStep === 'awaitingResponseSelect' ? 'workflow-highlight' : ''}`}
+                title="Select this response as the basis for the next cycle"
             >
-                {props.isSortedByTokens ? <VscListOrdered /> : <VscListUnordered />} Sort
+                <VscCheck /> {selectedResponseId === activeTab.toString() ? 'Response Selected' : 'Select This Response'}
             </button>
-            <button 
-                className={`styled-button ${props.selectedResponseId === props.activeTab.toString() ? 'toggled' : ''} ${props.workflowStep === 'awaitingResponseSelect' ? 'workflow-highlight' : ''}`} 
-                onClick={props.onSelectResponse}
-                disabled={!props.isParsedMode}
+            <button
+                onClick={onBaseline}
+                className={`git-button ${workflowStep === 'awaitingBaseline' ? 'workflow-highlight' : ''}`}
+                title="Create a git commit with all current changes as a safe restore point"
             >
-                {props.selectedResponseId === props.activeTab.toString() ? 'Response Selected' : 'Select This Response'}
+                <VscSourceControl /> Baseline (Commit)
             </button>
-            <button 
-                onClick={props.onBaseline} 
-                title="Baseline (Commit)"
-                className={`git-button ${props.workflowStep === 'awaitingBaseline' ? 'workflow-highlight' : ''}`}
-                disabled={!props.isParsedMode}
-            >
-                <VscSourceControl /> Baseline
-            </button>
-            <button 
-                onClick={props.onRestore} 
-                title="Restore Baseline" 
+            <button
+                onClick={onRestore}
                 className="git-button"
-                disabled={!props.isParsedMode}
+                title="Restore all files in the workspace to the last baseline commit"
             >
-                <VscDiscard /> Restore
+                <VscDiscard /> Restore Baseline
             </button>
-            <button 
-                className={`styled-button ${props.workflowStep === 'awaitingAccept' ? 'workflow-highlight' : ''}`} 
-                onClick={props.onAcceptSelected} 
-                disabled={props.selectedFilesForReplacementCount === 0 || !props.isParsedMode}
+            <button
+                onClick={onAcceptSelected}
+                className={`styled-button ${workflowStep === 'awaitingAccept' ? 'workflow-highlight' : ''}`}
+                disabled={selectedFilesForReplacementCount === 0}
+                title="Accept checked files from this response into your workspace"
             >
-                <VscSave/> Accept Selected
+                <VscCheckAll /> Accept Selected ({selectedFilesForReplacementCount})
             </button>
         </div>
     );
