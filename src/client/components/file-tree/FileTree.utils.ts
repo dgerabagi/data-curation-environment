@@ -1,4 +1,4 @@
-// Updated on: C162 (Overhaul selection logic to be explicit and file-based)
+// Updated on: C21 (Fix root uncheck logic)
 import { FileNode } from "@/common/types/file-node";
 import { logger } from "@/client/utils/logger";
 

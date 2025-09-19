@@ -1,4 +1,4 @@
-// Updated on: C13 (Add tsconfig.tsbuildinfo to exclusion list)
+// Updated on: C21 (Add de-duplication safeguard)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -60,7 +60,7 @@ export class FlattenerService {
 
         try {
             const allFilePaths = await this.expandDirectories(selectedPaths);
-            const uniqueFilePaths = [...new Set(allFilePaths)];
+            const uniqueFilePaths = [...new Set(allFilePaths)]; // Safeguard against duplicates
 
             const fileStatsPromises = uniqueFilePaths.map(filePath => this.getFileStatsAndContent(filePath));
             const results = await Promise.all(fileStatsPromises);

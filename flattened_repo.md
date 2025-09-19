@@ -1,18 +1,18 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-19T12:01:16.257Z
+  Date Generated: 2025-09-19T13:04:25.062Z
   ---
-  Total Files: 169
-  Approx. Tokens: 450716
+  Total Files: 170
+  Approx. Tokens: 453361
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (8485 tokens)
-4. src\Artifacts\A0. DCE Master Artifact List.md (7942 tokens)
-5. src\client\views\parallel-copilot.view\view.scss (5152 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (8513 tokens)
+4. src\Artifacts\A0. DCE Master Artifact List.md (8022 tokens)
+5. src\client\views\parallel-copilot.view\view.scss (5344 tokens)
 6. src\backend\services\prompt.service.ts (5139 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 8. src\backend\services\file-operation.service.ts (4280 tokens)
@@ -22,7 +22,7 @@
 <!-- Full File List -->
 1. public\copilot.svg - [Binary] Size: 445 Bytes
 2. public\spiral.svg - [Binary] Size: 459 Bytes
-3. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 468 - Chars: 31768 - Tokens: 7942
+3. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 472 - Chars: 32086 - Tokens: 8022
 4. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 5. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
 6. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
@@ -32,7 +32,7 @@
 10. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
 11. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
 12. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
-13. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 94 - Chars: 11211 - Tokens: 2803
+13. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 106 - Chars: 12884 - Tokens: 3221
 14. src\Artifacts\A11.1 DCE - New Regression Case Studies.md - Lines: 391 - Chars: 46197 - Tokens: 11550
 15. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5687 - Tokens: 1422
 16. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
@@ -87,7 +87,7 @@
 65. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 40 - Chars: 3737 - Tokens: 935
 66. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 35 - Chars: 4177 - Tokens: 1045
 67. src\Artifacts\A61. DCE - Phase 2 - Cycle History Management Plan.md - Lines: 45 - Chars: 3559 - Tokens: 890
-68. src\Artifacts\A65. DCE - Universal Task Checklist.md - Lines: 87 - Chars: 5422 - Tokens: 1356
+68. src\Artifacts\A65. DCE - Universal Task Checklist.md - Lines: 102 - Chars: 6910 - Tokens: 1728
 69. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1806 - Tokens: 452
 70. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 47 - Chars: 3537 - Tokens: 885
 71. src\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3347 - Tokens: 837
@@ -122,8 +122,8 @@
 100. src\backend\services\action.service.ts - Lines: 71 - Chars: 2444 - Tokens: 611
 101. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
 102. src\backend\services\file-operation.service.ts - Lines: 360 - Chars: 17118 - Tokens: 4280
-103. src\backend\services\file-tree.service.ts - Lines: 272 - Chars: 14424 - Tokens: 3606
-104. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12658 - Tokens: 3165
+103. src\backend\services\file-tree.service.ts - Lines: 272 - Chars: 14461 - Tokens: 3616
+104. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12676 - Tokens: 3169
 105. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 106. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
 107. src\backend\services\history.service.ts - Lines: 288 - Chars: 12307 - Tokens: 3077
@@ -133,7 +133,7 @@
 111. src\backend\services\services.ts - Lines: 42 - Chars: 1905 - Tokens: 477
 112. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
 113. src\client\components\file-tree\FileTree.tsx - Lines: 176 - Chars: 11127 - Tokens: 2782
-114. src\client\components\file-tree\FileTree.utils.ts - Lines: 117 - Chars: 4236 - Tokens: 1059
+114. src\client\components\file-tree\FileTree.utils.ts - Lines: 117 - Chars: 4087 - Tokens: 1022
 115. src\client\components\tree-view\TreeView.tsx - Lines: 395 - Chars: 17687 - Tokens: 4422
 116. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 117. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
@@ -156,10 +156,10 @@
 134. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
 135. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 116 - Chars: 5463 - Tokens: 1366
-137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 81 - Chars: 3939 - Tokens: 985
-138. src\client\views\parallel-copilot.view\view.scss - Lines: 922 - Chars: 20608 - Tokens: 5152
+137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 100 - Chars: 4903 - Tokens: 1226
+138. src\client\views\parallel-copilot.view\view.scss - Lines: 959 - Chars: 21373 - Tokens: 5344
 139. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-140. src\client\views\parallel-copilot.view\view.tsx - Lines: 282 - Chars: 33939 - Tokens: 8485
+140. src\client\views\parallel-copilot.view\view.tsx - Lines: 281 - Chars: 34052 - Tokens: 8513
 141. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 142. src\client\views\settings.view\on-message.ts - Lines: 17 - Chars: 762 - Tokens: 191
 143. src\client\views\settings.view\view.scss - Lines: 87 - Chars: 1767 - Tokens: 442
@@ -186,9 +186,10 @@
 164. README.md - Lines: 28 - Chars: 2456 - Tokens: 614
 165. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
 166. webpack.config.js - Lines: 112 - Chars: 2987 - Tokens: 747
-167. src\Artifacts\A86. DCE - PCPP Workflow Centralization and UI Persistence Plan.md - Lines: 72 - Chars: 5641 - Tokens: 1411
+167. src\Artifacts\A86. DCE - PCPP Workflow Centralization and UI Persistence Plan.md - Lines: 74 - Chars: 5931 - Tokens: 1483
 168. src\Artifacts\A76. DCE - Word Wrap Line Numbering Challenges.md - Lines: 61 - Chars: 4895 - Tokens: 1224
-169. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 87 - Chars: 3428 - Tokens: 857
+169. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
+170. src\Artifacts\A87. VCPG - vLLM High-Throughput Inference Plan.md - Lines: 60 - Chars: 4433 - Tokens: 1109
 
 <file path="public/copilot.svg">
 <metadata>
@@ -597,6 +598,10 @@
 ### A86. DCE - PCPP Workflow Centralization and UI Persistence Plan
 - **Description:** A plan to centralize the main workflow buttons in the PCPP, make the animated workflow highlight persistent, and fix the broken cost calculation.
 - **Tags:** feature plan, ui, ux, workflow, refactor, bug fix
+
+### A87. VCPG - vLLM High-Throughput Inference Plan
+- **Description:** A research and planning document analyzing the potential of using vLLM for high-throughput, low-latency inference for JANE, particularly for batched tool calling.
+- **Tags:** guide, research, planning, ai, jane, llm, vllm, inference, performance
 
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
@@ -1206,7 +1211,7 @@ To enhance the data curation process, it is critical for the user to have immedi
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C20 (Add Project Plan data loss case)
+# Updated on: C21 (Add Duplicate Files on Root Deselection case)
 
 ## 1. Purpose
 
@@ -1215,6 +1220,18 @@ This document serves as a living record of persistent or complex bugs that have 
 **This artifact is the primary log for new and recent case studies.** Older, resolved issues are archived in `A11.1 DCE - New Regression Case Studies.md` to keep this document concise and focused on currently relevant issues.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 031: Duplicate Files in Context due to Incomplete Root Deselection
+
+-   **Artifacts Affected:** `src/client/components/file-tree/FileTree.utils.ts`, `src/backend/services/flattener.service.ts`
+-   **Cycles Observed:** C21
+-   **Symptom:** When a user checks the root directory (selecting all files), then unchecks it, some files remain in the "Selected Items" list. If the user then re-checks the root directory, these leftover files are added again, resulting in duplicates in the `flattened_repo.md` file.
+-   **Root Cause Analysis (RCA):** The bug has two layers. The primary cause is a flaw in the frontend state management logic in `FileTree.utils.ts`. The "uncheck" logic was not correctly removing all descendant files from the selection state when an ancestor checkbox was toggled off. This left a stale, incorrect selection state. The secondary issue is that the `flattener.service.ts` trusted its input implicitly and did not perform a final de-duplication pass before processing the files.
+-   **Codified Solution & Best Practice:**
+    1.  **Backend Safeguard:** The `flattener.service.ts` must be made resilient to faulty input. Before processing, the `flatten` method must de-duplicate the incoming array of file paths using `[...new Set(paths)]`. This provides a robust, final guarantee against duplicates in the output.
+    2.  **Frontend Fix:** The selection logic in `FileTree.utils.ts` must be corrected. The `addRemovePathInSelectedFiles` function must ensure that when a node is unchecked, *all* of its descendant files are recursively found and removed from the selection set, ensuring perfect state synchronization.
 
 ---
 
@@ -4855,11 +4872,7 @@ The goal of this feature is to provide commands and UI controls to **export** th
 # Artifact A65: DCE - Universal Task Checklist
 # Date Created: C165
 # Author: AI Model & Curator
-# Updated on: C167 (Encourage cyclic updates)
-
-- **Key/Value for A0:**
-- **Description:** A universal checklist for organizing development tasks by file, focusing on complexity in terms of token count and estimated cycles for completion.
-- **Tags:** process, checklist, task management, planning, workflow
+# Updated on: C21 (Add new tasks from playtest feedback)
 
 ## 1. Purpose
 
@@ -4881,64 +4894,83 @@ This file-centric approach helps in planning and prioritizing work, especially i
 
 ---
 
-## Task List
+## Task List for Cycle 21+
 
-## T-1: PCPP - No Workspace View
+## T-1: Fix UI Regressions and Minor Bugs
 - **Files Involved:**
-    - `src/backend/services/history.service.ts`
-    - `src/client/views/parallel-copilot.view/view.tsx`
-    - `src/common/ipc/channels.enum.ts`
-    - `src/common/ipc/channels.type.ts`
-    - `src/backend/services/file-operation.service.ts`
-    - `src/client/views/parallel-copilot.view/on-message.ts`
-    - `src/client/views/context-chooser.view/view.tsx`
-- **Total Tokens:** ~25,000
-- **More than one cycle?** No
-
-- [ ] **Task (T-ID: 1.1):** Clicking the "Open Folder" button should trigger the native VS Code open folder dialog.
-- [ ] **Task (T-ID: 1.2):** Add the same "No Folder Opened" UI to the Context Chooser panel.
-- [ ] **Task (T-ID: 1.3):** Ensure the "Open Folder" buttons in both views use the same primary button style as "Flatten Context".
-
-### Verification Steps
-1.  Close any open workspace in the VS Code Extension Development Host (`File > Close Folder`).
-2.  Open the Parallel Co-Pilot Panel.
-3.  **Expected:** The panel should display a "No Folder Opened" message and an "Open Folder" button.
-4.  Click the "Open Folder" button.
-5.  **Expected:** The native VS Code "Open Folder" dialog should appear.
-6.  Close the dialog and open the Data Curation (Context Chooser) panel.
-7.  **Expected:** This panel should also display the "No Folder Opened" message and button.
-8.  Click the button and open a folder.
-9.  **Expected:** Both panels should now load their respective UIs for the opened workspace.
-
-## T-2: Prompt Generation
-- **Files Involved:**
-    - `src/backend/services/prompt.service.ts`
-- **Total Tokens:** ~4,000
-- **More than one cycle?** No
-
-- [ ] **Bug Fix (T-ID: 2.1):** The `<M5. organized artifacts list>` section should be populated from the user's workspace `A0*.md` file, not the extension's internal one.
-- [ ] **Bug Fix (T-ID: 2.2):** The `<M6. Cycles>` block must be generated with cycles in descending order (newest first).
-
-### Verification Steps
-1.  In a test project with a custom-named A0 file (e.g., `MyProject-A0-Master-List.md`), navigate to the latest cycle in the PCPP.
-2.  Click "Generate prompt.md".
-3.  **Expected:** Open the `prompt.md` file. The `<M5>` section should contain the content of `MyProject-A0-Master-List.md`. The `<M6>` section should show the highest cycle number first.
-
-## T-3: File Flattening
-- **Files Involved:**
+    - `src/client/views/parallel-copilot.view/view.scss`
     - `src/backend/services/file-tree.service.ts`
-    - `src/backend/services/flattener.service.ts`
-- **Total Tokens:** ~6,500
+- **Total Tokens:** ~8,800
 - **More than one cycle?** No
 
-- [ ] **Bug Fix (T-ID: 3.1):** `package-lock.json` must be excluded from the flattened output, even if its parent directory is checked.
+- [X] **Task (T-ID: 1.1):** Restore the correct theme/style for the "Sort" button so it matches other workflow buttons.
+- [X] **Task (T-ID: 1.2):** Add the `.next` directory to the `NON_SELECTABLE_PATTERNS` to exclude it from selection.
 
 ### Verification Steps
-1.  Open the Context Chooser panel.
-2.  **Expected:** The `package-lock.json` file should have a disabled checkbox.
-3.  Check the root directory of the project.
-4.  Click "Flatten Context".
-5.  **Expected:** Open the `flattened_repo.md` file. The `package-lock.json` file and its content should NOT be present.
+1.  Launch the extension and open the PCPP. Parse a response.
+2.  **Expected:** The "Sort" button in the response tab bar should have the same visual style as the buttons in the main workflow toolbar below it.
+3.  Open a project that contains a `.next` build directory.
+4.  **Expected:** The `.next` directory in the File Tree View should have a disabled/grayed-out checkbox and should not be selectable.
+
+## T-2: Restore "Select All" Buttons for Associated Files
+- **Files Involved:**
+    - `src/Artifacts/A86. DCE - PCPP Workflow Centralization and UI Persistence Plan.md`
+    - `src/client/views/parallel-copilot.view/components/WorkflowToolbar.tsx`
+    - `src/client/views/parallel-copilot.view/view.tsx`
+- **Total Tokens:** ~10,000
+- **More than one cycle?** No
+
+- [X] **Task (T-ID: 2.1):** Re-add the "Select All" and "Deselect All Across All Responses" buttons to the `WorkflowToolbar`.
+- [X] **Task (T-ID: 2.2):** Implement the `handleSelectAllAssociatedFiles` logic. It must select all files in the *active* tab.
+- [X] **Task (T-ID: 2.3):** Ensure the "Select All" logic also de-selects any other instance of the same file path from other response tabs to prevent conflicts.
+- [X] **Task (T-ID: 2.4):** Update `A86` to reflect that these buttons are being restored.
+
+### Verification Steps
+1.  Parse multiple responses where two or more responses modify the same file (e.g., `src/main.ts`).
+2.  Manually check the box for `src/main.ts` in `Resp 2`.
+3.  Navigate to `Resp 1`. Click the new "Select All" button.
+4.  **Expected:** All files in `Resp 1` should become checked. The checkbox for `src/main.ts` in `Resp 2` should become unchecked.
+5.  Click "Deselect All Across All Responses".
+6.  **Expected:** All checkboxes in all response tabs should become unchecked.
+
+## T-3: Fix File Duplication Bug
+- **Files Involved:**
+    - `src/Artifacts/A11. DCE - Regression Case Studies.md`
+    - `src/backend/services/flattener.service.ts`
+    - `src/client/components/file-tree/FileTree.utils.ts`
+- **Total Tokens:** ~8,000
+- **More than one cycle?** No
+
+- [ ] **Task (T-ID: 3.1):** Add a safeguard in `flattener.service.ts` to de-duplicate the incoming file path list using a `Set`.
+- [ ] **Task (T-ID: 3.2):** Fix the root cause in `FileTree.utils.ts` to ensure unchecking the root directory correctly removes all descendant files from the selection state.
+- [ ] **Task (T-ID: 3.3):** Create a new regression case study in `A11` for this bug.
+
+### Verification Steps
+1.  Check the root directory checkbox. Note the number of selected items.
+2.  Uncheck the root directory checkbox.
+3.  **Expected:** The "Selected Items" count should drop to 0.
+4.  Re-check the root directory checkbox.
+5.  **Expected:** The "Selected Items" count should return to the original number, with no duplicates.
+6.  Click "Flatten Context" and inspect `flattened_repo.md`.
+7.  **Expected:** The file list and content should contain no duplicate file paths.
+
+## T-4: Enhance Onboarding View & Animation Persistence
+- **Files Involved:**
+    - `src/client/views/parallel-copilot.view/OnboardingView.tsx`
+    - `src/client/views/parallel-copilot.view/view.tsx`
+- **Total Tokens:** ~9,500
+- **More than one cycle?** No
+
+- [X] **Task (T-ID: 4.1):** In `OnboardingView.tsx`, add a `<label>` or `<h3>` with the title "Project Scope" above the main text area.
+- [-] **Task (T-ID: 4.2):** Integrate the `SaveStatusIndicator` component into the `OnboardingView` to show save status.
+- [X] **Task (T-ID: 4.3):** In `view.tsx`, add a call to `saveCurrentCycleState()` inside the `visibilitychange` event listener to ensure the latest `workflowStep` is persisted when the user switches tabs.
+
+### Verification Steps
+1.  Start the extension in a fresh workspace to trigger the onboarding view.
+2.  **Expected:** The view should now have a title above the text area, and the save status indicator should be visible.
+3.  Proceed to the main PCPP view. Advance the workflow until "Generate prompt.md" is highlighted. Click it. The view will switch to the editor.
+4.  Immediately switch back to the PCPP view.
+5.  **Expected:** The highlight should now be on the `+` (New Cycle) button, and should not have reverted to "Generate prompt.md".
 </file_artifact>
 
 <file path="src/Artifacts/A66. DCE - Cycle 1 - Task Tracker.md">
@@ -16273,7 +16305,7 @@ export class FileOperationService {
 
 <file path="src/backend/services/file-tree.service.ts">
 // src/backend/services/file-tree.service.ts
-// Updated on: C16 (Refine _isSelectable logic)
+// Updated on: C21 (Add .next to non-selectable patterns)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -16290,7 +16322,7 @@ const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
 const WORD_EXTENSIONS = new Set(['.docx', '.doc']);
 const EXCLUSION_PATTERNS = ['dce_cache', 'out']; 
-const NON_SELECTABLE_PATTERNS = ['node_modules', '.vscode', '.git', 'venv', '.venv', 'flattened_repo.md', 'prompt.md', 'package-lock.json', 'tsconfig.tsbuildinfo', 'dce_history_export_', 'dist'];
+const NON_SELECTABLE_PATTERNS = ['node_modules', '.vscode', '.git', 'venv', '.venv', 'flattened_repo.md', 'prompt.md', 'package-lock.json', 'tsconfig.tsbuildinfo', 'dce_history_export_', 'dist', '.next'];
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
@@ -16510,7 +16542,7 @@ export class FileTreeService {
                 const childPath = normalizePath(childUri.fsPath);
                 const isSelectable = this._isSelectable(childPath, type);
                 if (type === vscode.FileType.Directory) {
-                    const isSpecialDir = ['node_modules', '.git', 'venv', '.venv', 'dist'].includes(name.toLowerCase());
+                    const isSpecialDir = ['node_modules', '.git', 'venv', '.venv', 'dist', '.next'].includes(name.toLowerCase());
                     const dirNode: FileNode = { name, absolutePath: childPath, children: isSpecialDir ? [] : await this._traverseDirectory(childUri), tokenCount: 0, fileCount: 0, isImage: false, sizeInBytes: 0, extension: '', isPdf: false, isExcel: false, isWordDoc: false, isSelectable };
                     this._aggregateStats(dirNode);
                     children.push(dirNode);
@@ -16527,7 +16559,7 @@ export class FileTreeService {
 
     private _aggregateStats(node: FileNode): void {
         if (!node.children) return;
-        if (['node_modules', '.git', 'venv', '.venv', 'dist'].includes(node.name.toLowerCase())) {
+        if (['node_modules', '.git', 'venv', '.venv', 'dist', '.next'].includes(node.name.toLowerCase())) {
             node.tokenCount = 0;
             node.fileCount = 0;
             node.sizeInBytes = 0;
@@ -16547,7 +16579,7 @@ export class FileTreeService {
 </file_artifact>
 
 <file path="src/backend/services/flattener.service.ts">
-// Updated on: C13 (Add tsconfig.tsbuildinfo to exclusion list)
+// Updated on: C21 (Add de-duplication safeguard)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -16609,7 +16641,7 @@ export class FlattenerService {
 
         try {
             const allFilePaths = await this.expandDirectories(selectedPaths);
-            const uniqueFilePaths = [...new Set(allFilePaths)];
+            const uniqueFilePaths = [...new Set(allFilePaths)]; // Safeguard against duplicates
 
             const fileStatsPromises = uniqueFilePaths.map(filePath => this.getFileStatsAndContent(filePath));
             const results = await Promise.all(fileStatsPromises);
@@ -18176,7 +18208,7 @@ export default FileTree;
 </file_artifact>
 
 <file path="src/client/components/file-tree/FileTree.utils.ts">
-// Updated on: C162 (Overhaul selection logic to be explicit and file-based)
+// Updated on: C21 (Fix root uncheck logic)
 import { FileNode } from "@/common/types/file-node";
 import { logger } from "@/client/utils/logger";
 
@@ -21024,9 +21056,9 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
 <file path="src/client/views/parallel-copilot.view/OnboardingView.tsx">
 // src/client/views/parallel-copilot.view/OnboardingView.tsx
-// Updated on: C20 (Refactor state management)
+// Updated on: C21 (Add title and save status indicator)
 import * as React from 'react';
-import { VscRocket, VscArrowRight } from 'react-icons/vsc';
+import { VscRocket, VscArrowRight, VscLoading, VscCheck, VscWarning } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 import { logger } from '@/client/utils/logger';
@@ -21037,9 +21069,22 @@ interface OnboardingViewProps {
     onNavigateToCycle: (cycleId: number) => void;
     latestCycleId: number;
     workflowStep: string | null;
+    saveStatus: 'saved' | 'saving' | 'unsaved';
 }
 
-const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeChange, onNavigateToCycle, latestCycleId, workflowStep }) => {
+const SaveStatusIndicator: React.FC<{ saveStatus: 'saved' | 'saving' | 'unsaved' }> = ({ saveStatus }) => {
+    let icon;
+    let title;
+    switch(saveStatus) {
+        case 'saving': icon = <VscLoading className="saving"/>; title = "Saving..."; break;
+        case 'unsaved': icon = <VscWarning className="unsaved"/>; title = "Unsaved changes"; break;
+        case 'saved': icon = <VscCheck className="saved"/>; title = "Saved"; break;
+        default: icon = null; title = "";
+    }
+    return <div className="save-status-indicator" title={title}>{icon}</div>;
+};
+
+const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeChange, onNavigateToCycle, latestCycleId, workflowStep, saveStatus }) => {
     const [isGenerating, setIsGenerating] = React.useState(false);
     const [promptGenerated, setPromptGenerated] = React.useState(false);
     const clientIpc = ClientPostMessageManager.getInstance();
@@ -21072,13 +21117,19 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeCh
                     : 'To get started, describe the goals and scope of your new project in the text area below. When you\'re ready, we\'ll generate an initial prompt that will instruct an AI to create a set of planning documents to bootstrap your development process.'
                 }
             </p>
-            <textarea
-                className={`onboarding-textarea ${workflowStep === 'awaitingProjectScope' ? 'workflow-highlight' : ''}`}
-                placeholder="e.g., I want to build a web application that allows users to track their daily habits. It should have a simple UI, user authentication, and a dashboard to visualize progress..."
-                value={projectScope}
-                onChange={(e) => onScopeChange(e.target.value)}
-                disabled={isGenerating || (promptGenerated && !isNavigatingBack)}
-            />
+            <div className="onboarding-textarea-wrapper">
+                 <div className="onboarding-header">
+                    <h3>Project Scope</h3>
+                    <SaveStatusIndicator saveStatus={saveStatus} />
+                </div>
+                <textarea
+                    className={`onboarding-textarea ${workflowStep === 'awaitingProjectScope' ? 'workflow-highlight' : ''}`}
+                    placeholder="e.g., I want to build a web application that allows users to track their daily habits. It should have a simple UI, user authentication, and a dashboard to visualize progress..."
+                    value={projectScope}
+                    onChange={(e) => onScopeChange(e.target.value)}
+                    disabled={isGenerating || (promptGenerated && !isNavigatingBack)}
+                />
+            </div>
             {isNavigatingBack ? (
                 <button className="styled-button" onClick={handleReturnToCycles}>
                     <VscArrowRight /> Return to Cycle {latestCycleId}
@@ -21108,7 +21159,7 @@ export default OnboardingView;
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C19 (Add styles for WorkflowToolbar)
+// Updated on: C21 (Fix sort button style)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -21217,6 +21268,21 @@ body {
         color: var(--vscode-descriptionForeground);
     }
 }
+
+.onboarding-textarea-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-height: 0;
+}
+
+.onboarding-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
 
 .onboarding-success {
     display: flex;
@@ -21488,6 +21554,28 @@ body {
 .tab-bar {
     display: flex;
     flex-shrink: 0;
+}
+
+.sort-button {
+    background: none;
+    border: 1px solid var(--vscode-button-border, transparent);
+    color: var(--vscode-icon-foreground);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    &:hover {
+        background-color: var(--vscode-toolbar-hoverBackground);
+    }
+    
+    &.active {
+        background-color: var(--vscode-toolbar-hoverBackground);
+        outline: 1px solid var(--vscode-focusBorder);
+    }
 }
 
 .tab {
@@ -22046,7 +22134,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C20 (Fix onboarding state management)
+// Updated on: C21 (Add animation persistence and Select All logic)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -22189,7 +22277,7 @@ const App = () => {
     const debouncedCostRequest = useDebounce(requestCostEstimation, 500);
 
     React.useEffect(() => { if (saveStatus === 'unsaved') debouncedSave(); }, [saveStatus, debouncedSave]);
-    React.useEffect(() => { const handleVisibilityChange = () => { if (document.visibilityState === 'hidden' && stateRef.current.currentCycle !== null) clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: stateRef.current.currentCycle }); }; document.addEventListener('visibilitychange', handleVisibilityChange); return () => document.removeEventListener('visibilitychange', handleVisibilityChange); }, [clientIpc]);
+    React.useEffect(() => { const handleVisibilityChange = () => { if (document.visibilityState === 'hidden' && stateRef.current.currentCycle !== null) { clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: stateRef.current.currentCycle }); saveCurrentCycleState(); } }; document.addEventListener('visibilitychange', handleVisibilityChange); return () => document.removeEventListener('visibilitychange', handleVisibilityChange); }, [clientIpc, saveCurrentCycleState]);
     
     const requestAllMetrics = React.useCallback((parsedResponse: ParsedResponse) => {
         if (!parsedResponse) return;
@@ -22273,7 +22361,7 @@ const App = () => {
     const handleGitBaseline = () => { const commitMessage = `DCE Baseline: Cycle ${currentCycle} - ${cycleTitle || 'New Cycle'}`; clientIpc.sendToServer(ClientToServerChannel.RequestGitBaseline, { commitMessage }); };
     const onGitRestore = () => { const { selectedFilesForReplacement, fileExistenceMap } = stateRef.current; const filesToDelete = Array.from(selectedFilesForReplacement).map(key => key.split(':::')).filter(fileParts => !fileExistenceMap.get(fileParts[1])).map(fileParts => fileParts[1]); clientIpc.sendToServer(ClientToServerChannel.RequestGitRestore, { filesToDelete }); };
     const handleFileSelectionToggle = (filePath: string) => { const currentTabId = activeTab.toString(); const compositeKeyForCurrent = `${currentTabId}:::${filePath}`; setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); let existingKey: string | undefined; for (const key of newSet) if (key.endsWith(`:::${filePath}`)) { existingKey = key; break; } if (existingKey) { if (existingKey === compositeKeyForCurrent) newSet.delete(existingKey); else { newSet.delete(existingKey); newSet.add(compositeKeyForCurrent); } } else newSet.add(compositeKeyForCurrent); return newSet; }); setSaveStatus('unsaved'); };
-    const handleSelectAllFilesToggle = () => { if (!activeTabData?.parsedContent) return; const allFilesForTab = activeTabData.parsedContent.filesUpdated.map(fp => `${activeTab}:::${fp}`); const isAllSelected = allFilesForTab.every(key => selectedFilesForReplacement.has(key)); setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); if (isAllSelected) allFilesForTab.forEach(key => newSet.delete(key)); else allFilesForTab.forEach(key => newSet.add(key)); return newSet; }); setSaveStatus('unsaved'); };
+    const handleSelectAllAssociatedFiles = () => { if (!activeTabData?.parsedContent) return; const allFilesForTab = activeTabData.parsedContent.filesUpdated; setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); allFilesForTab.forEach(filePath => { for (const key of newSet) { if (key.endsWith(`:::${filePath}`)) { newSet.delete(key); } } }); allFilesForTab.forEach(filePath => newSet.add(`${activeTab}:::${filePath}`)); return newSet; }); setSaveStatus('unsaved'); };
     const isAllFilesSelected = React.useMemo(() => { if (!activeTabData?.parsedContent) return false; const allFiles = activeTabData.parsedContent.filesUpdated; if (allFiles.length === 0) return false; return allFiles.every(file => selectedFilesForReplacement.has(`${activeTab}:::${file}`)); }, [selectedFilesForReplacement, activeTabData, activeTab]);
     const handleLogState = () => { const currentState = getCurrentCycleData(); if (currentState) clientIpc.sendToServer(ClientToServerChannel.RequestLogState, { currentState: currentState as any }); };
     const handleCopyContent = () => { if (!selectedFilePath || !activeTabData?.parsedContent) return; const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath); if (file) clientIpc.sendToServer(ClientToServerChannel.RequestCopyTextToClipboard, { text: file.content }); };
@@ -22282,14 +22370,13 @@ const App = () => {
     const onScopeChange = (scope: string) => {
         if (currentCycle === 0) {
             setProjectScope(scope);
-            setCycleContext(scope); // Align with save logic
-            setSaveStatus('unsaved');
+            onCycleContextChange(scope);
         }
     };
 
     if (currentCycle === null) return <div>Loading...</div>;
     if (currentCycle === -1) return <div className="onboarding-container"><h1>No Folder Opened</h1><p>You have not yet opened a folder for the Data Curation Environment to manage.</p><button className="dce-button-primary" onClick={() => clientIpc.sendToServer(ClientToServerChannel.RequestOpenFolder, {})}><VscFolder /> Open Folder</button></div>;
-    if (currentCycle === 0) return <OnboardingView projectScope={projectScope || ''} onScopeChange={onScopeChange} onNavigateToCycle={(id) => handleCycleChange(null, id)} latestCycleId={maxCycle} workflowStep={workflowStep} />;
+    if (currentCycle === 0) return <OnboardingView projectScope={projectScope || ''} onScopeChange={onScopeChange} onNavigateToCycle={(id) => handleCycleChange(null, id)} latestCycleId={maxCycle} workflowStep={workflowStep} saveStatus={saveStatus} />;
     
     const collapsedNavigator = <div className="collapsed-navigator"><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0 || saveStatus !== 'saved'}>&lt;</button><span className="cycle-display">C{currentCycle}</span><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle || saveStatus !== 'saved'}>&gt;</button></div>;
     const totalPromptCostDisplay = ( <span className="total-prompt-cost" title={costBreakdownTooltip}> Total Est: ({formatLargeNumber(totalPromptTokens, 1)} tk) ~ ${estimatedPromptCost.toFixed(4)} {tabCount > 1 && ` x ${tabCount} = $${(estimatedPromptCost * tabCount).toFixed(4)}`} </span> );
@@ -22313,9 +22400,9 @@ const App = () => {
             <ContextInputs cycleContext={cycleContext} ephemeralContext={ephemeralContext} cycleContextTokens={cycleContextTokens} ephemeralContextTokens={ephemeralContextTokens} onCycleContextChange={onCycleContextChange} onEphemeralContextChange={onEphemeralContextChange} workflowStep={workflowStep} />
         </CollapsibleSection>
         <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} workflowStep={workflowStep} onSortToggle={handleSortToggle} />
-        <WorkflowToolbar isParsedMode={isParsedMode} onParseToggle={handleGlobalParseToggle} onSelectResponse={() => { setSelectedResponseId(prev => prev === activeTab.toString() ? null : activeTab.toString()); setWorkflowStep('awaitingResponseSelect'); setSaveStatus('unsaved'); }} selectedResponseId={selectedResponseId} activeTab={activeTab} onBaseline={handleGitBaseline} onRestore={onGitRestore} onAcceptSelected={handleAcceptSelectedFiles} selectedFilesForReplacementCount={selectedFilesForReplacement.size} workflowStep={workflowStep} />
+        <WorkflowToolbar isParsedMode={isParsedMode} onParseToggle={handleGlobalParseToggle} onSelectResponse={() => { setSelectedResponseId(prev => prev === activeTab.toString() ? null : activeTab.toString()); setWorkflowStep('awaitingResponseSelect'); setSaveStatus('unsaved'); }} selectedResponseId={selectedResponseId} activeTab={activeTab} onBaseline={handleGitBaseline} onRestore={onGitRestore} onAcceptSelected={handleAcceptSelectedFiles} selectedFilesForReplacementCount={selectedFilesForReplacement.size} workflowStep={workflowStep} onSelectAll={handleSelectAllAssociatedFiles} onDeselectAll={() => setSelectedFilesForReplacement(new Set())} />
         <div className="tab-content">
-            <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} onPaste={(e) => handlePaste(e, activeTab)} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={comparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => { setSelectedResponseId(prev => prev === id ? null : id); setWorkflowStep('awaitingResponseSelect'); setSaveStatus('unsaved'); }} onSelectAllFiles={handleSelectAllFilesToggle} onDeselectAllFiles={() => {setSelectedFilesForReplacement(new Set()); setSaveStatus('unsaved');}} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} onBaseline={handleGitBaseline} onRestore={onGitRestore} workflowStep={workflowStep} />
+            <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} onPaste={(e) => handlePaste(e, activeTab)} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={comparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => { setSelectedResponseId(prev => prev === id ? null : id); setWorkflowStep('awaitingResponseSelect'); setSaveStatus('unsaved'); }} onSelectAllFiles={handleSelectAllAssociatedFiles} onDeselectAllFiles={() => {setSelectedFilesForReplacement(new Set()); setSaveStatus('unsaved');}} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} onBaseline={handleGitBaseline} onRestore={onGitRestore} workflowStep={workflowStep} />
         </div>
         {associatedFileMenu && <div className="context-menu" style={{ top: associatedFileMenu.y, left: associatedFileMenu.x }}><ul onMouseLeave={() => setAssociatedFileMenu(null)}><li onClick={() => { clientIpc.sendToServer(ClientToServerChannel.RequestCopyPath, { path: associatedFileMenu.path, relative: true }); setAssociatedFileMenu(null); }}>Copy Relative Path</li></ul></div>}
     </div>;
@@ -24146,6 +24233,7 @@ module.exports = [extensionConfig, webviewConfig];
 # Artifact A86: DCE - PCPP Workflow Centralization and UI Persistence Plan
 # Date Created: C19
 # Author: AI Model & Curator
+# Updated on: C21 (Re-add requirement for Select All buttons)
 
 - **Key/Value for A0:**
 - **Description:** A plan to centralize the main workflow buttons in the PCPP, make the animated workflow highlight persistent, and fix the broken cost calculation.
@@ -24186,7 +24274,7 @@ The new, centralized toolbar will be located directly below the response tabs, m
 |   | [ Parse All ] [ Select This Resp ] [ Baseline ] [ Restore ] [ Accept Selected ]         |   |
 |   +-----------------------------------------------------------------------------------------+   |
 |                                                                                                 |
-| | [v] Associated Files (5) [Select All] [Deselect All]                                      | | |
+| | [v] Associated Files (5) [Select All] [Deselect All Across Responses]                     | | |
 | |-------------------------------------------------------------------------------------------| | |
 | | [✓] [ ] src/Artifacts/A86. ... .md                                                        | | |
 | | [✓] [ ] src/client/views/.../view.tsx                                                     | | |
@@ -24196,6 +24284,7 @@ The new, centralized toolbar will be located directly below the response tabs, m
 ### 3.2. Technical Implementation
 -   A new component, `src/client/views/parallel-copilot.view/components/WorkflowToolbar.tsx`, will be created.
 -   It will contain all the buttons related to the main workflow.
+-   **(C21 Update):** The "Select All" and "Deselect All Across Responses" buttons, which were lost in a previous refactor, will be re-added to the toolbar to provide critical batch selection functionality for associated files.
 -   The main `view.tsx` will manage the state for enabling/disabling these buttons and pass the state and `onClick` handlers down as props.
 -   The buttons will be removed from their old locations (the main header and the `ParsedView` header). The "Select This Response" button will now act on the currently active tab.
 
@@ -24283,9 +24372,9 @@ The current priority is to fix the more critical usability bugs like scrolling, 
 
 <file path="src/client/views/parallel-copilot.view/components/WorkflowToolbar.tsx">
 // src/client/views/parallel-copilot.view/components/WorkflowToolbar.tsx
-// New file in C19
+// Updated on: C21 (Re-add Select All buttons)
 import * as React from 'react';
-import { VscWand, VscListOrdered, VscListUnordered, VscCheck, VscSourceControl, VscDiscard, VscCheckAll } from 'react-icons/vsc';
+import { VscWand, VscCheck, VscSourceControl, VscDiscard, VscCheckAll, VscClearAll } from 'react-icons/vsc';
 
 interface WorkflowToolbarProps {
     isParsedMode: boolean;
@@ -24296,6 +24385,8 @@ interface WorkflowToolbarProps {
     onBaseline: () => void;
     onRestore: () => void;
     onAcceptSelected: () => void;
+    onSelectAll: () => void;
+    onDeselectAll: () => void;
     selectedFilesForReplacementCount: number;
     workflowStep: string | null;
 }
@@ -24309,23 +24400,11 @@ const WorkflowToolbar: React.FC<WorkflowToolbarProps> = ({
     onBaseline,
     onRestore,
     onAcceptSelected,
+    onSelectAll,
+    onDeselectAll,
     selectedFilesForReplacementCount,
     workflowStep
 }) => {
-    if (!isParsedMode) {
-        return (
-            <div className="workflow-toolbar">
-                <button
-                    onClick={onParseToggle}
-                    className={workflowStep === 'awaitingParse' ? 'workflow-highlight' : ''}
-                    title={isParsedMode ? "Return to raw text view" : "Parse all responses into structured view"}
-                >
-                    <VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}
-                </button>
-            </div>
-        );
-    }
-
     return (
         <div className="workflow-toolbar">
             <button
@@ -24335,39 +24414,121 @@ const WorkflowToolbar: React.FC<WorkflowToolbarProps> = ({
             >
                 <VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}
             </button>
-            <button
-                onClick={onSelectResponse}
-                className={`styled-button ${selectedResponseId === activeTab.toString() ? 'toggled' : ''} ${workflowStep === 'awaitingResponseSelect' ? 'workflow-highlight' : ''}`}
-                title="Select this response as the basis for the next cycle"
-            >
-                <VscCheck /> {selectedResponseId === activeTab.toString() ? 'Response Selected' : 'Select This Response'}
-            </button>
-            <button
-                onClick={onBaseline}
-                className={`git-button ${workflowStep === 'awaitingBaseline' ? 'workflow-highlight' : ''}`}
-                title="Create a git commit with all current changes as a safe restore point"
-            >
-                <VscSourceControl /> Baseline (Commit)
-            </button>
-            <button
-                onClick={onRestore}
-                className="git-button"
-                title="Restore all files in the workspace to the last baseline commit"
-            >
-                <VscDiscard /> Restore Baseline
-            </button>
-            <button
-                onClick={onAcceptSelected}
-                className={`styled-button ${workflowStep === 'awaitingAccept' ? 'workflow-highlight' : ''}`}
-                disabled={selectedFilesForReplacementCount === 0}
-                title="Accept checked files from this response into your workspace"
-            >
-                <VscCheckAll /> Accept Selected ({selectedFilesForReplacementCount})
-            </button>
+            {isParsedMode && (
+                <>
+                    <button
+                        onClick={onSelectResponse}
+                        className={`styled-button ${selectedResponseId === activeTab.toString() ? 'toggled' : ''} ${workflowStep === 'awaitingResponseSelect' ? 'workflow-highlight' : ''}`}
+                        title="Select this response as the basis for the next cycle"
+                    >
+                        <VscCheck /> {selectedResponseId === activeTab.toString() ? 'Response Selected' : 'Select This Response'}
+                    </button>
+                    <button
+                        onClick={onBaseline}
+                        className={`git-button ${workflowStep === 'awaitingBaseline' ? 'workflow-highlight' : ''}`}
+                        title="Create a git commit with all current changes as a safe restore point"
+                    >
+                        <VscSourceControl /> Baseline (Commit)
+                    </button>
+                    <button
+                        onClick={onRestore}
+                        className="git-button"
+                        title="Restore all files in the workspace to the last baseline commit"
+                    >
+                        <VscDiscard /> Restore Baseline
+                    </button>
+                    <div className="button-separator" />
+                    <button
+                        onClick={onSelectAll}
+                        className={`styled-button ${workflowStep === 'awaitingFileSelect' ? 'workflow-highlight' : ''}`}
+                        title="Select all files from this response"
+                    >
+                        <VscCheckAll /> Select All
+                    </button>
+                    <button
+                        onClick={onDeselectAll}
+                        className="styled-button"
+                        title="Deselect all files across all responses"
+                    >
+                        <VscClearAll /> Deselect All
+                    </button>
+                    <button
+                        onClick={onAcceptSelected}
+                        className={`styled-button ${workflowStep === 'awaitingAccept' ? 'workflow-highlight' : ''}`}
+                        disabled={selectedFilesForReplacementCount === 0}
+                        title="Accept checked files from this response into your workspace"
+                    >
+                        <VscCheckAll /> Accept Selected ({selectedFilesForReplacementCount})
+                    </button>
+                </>
+            )}
         </div>
     );
 };
 
 export default WorkflowToolbar;
+</file_artifact>
+
+<file path="src/Artifacts/A87. VCPG - vLLM High-Throughput Inference Plan.md">
+# Artifact A87: VCPG - vLLM High-Throughput Inference Plan
+
+# Date Created: C78
+# Author: AI Model
+
+- **Key/Value for A0:**
+- **Description:** A research and planning document analyzing the potential of using vLLM for high-throughput, low-latency inference for JANE, particularly for batched tool calling.
+- **Tags:** guide, research, planning, ai, jane, llm, vllm, inference, performance
+
+## 1. Vision & Goal
+
+The goal is to investigate and plan the migration of the VCPG's AI inference backend from the current LM Studio setup to a more performant and scalable solution using **vLLM**. As described by the curator's research, vLLM offers significant performance gains through techniques like continuous batching, which could enable more advanced AI capabilities, such as near-real-time analysis of multiple data streams or providing concurrent, low-latency AI assistance to every user.
+
+## 2. Analysis of Curator's Research
+
+The provided Reddit post highlights several key advantages of vLLM, particularly with the `gpt-oss-20b` model:
+-   **High Throughput:** The demonstration of 10,000 tokens/second on a single 4090 GPU is a massive performance increase.
+-   **Continuous Batching:** vLLM's core innovation is its ability to dynamically batch incoming requests. This is highly efficient for a multi-user environment like VCPG, where many users might be querying JANE simultaneously. Instead of processing requests one-by-one, vLLM can process them in parallel batches.
+-   **Low Latency:** The post mentions sub-100ms time-to-first-token (TTFT), which is critical for a responsive user experience.
+-   **Efficient VRAM Usage:** The claim of running 100 agents, each with a large context window, on a single 24GB GPU suggests highly efficient memory management.
+
+The concept of "one vLLM per user" is likely a misunderstanding of the technology. The power of vLLM comes from a *single* instance serving *many* users concurrently through batching, not from running many instances.
+
+## 3. Proposed Architecture
+
+The plan is to replace the LM Studio API endpoint with a self-hosted, OpenAI-compatible server powered by vLLM.
+
+```
++--------------------------+      +---------------------------+      +----------------------+
+|   VCPG Frontend (Client) |----->|   VCPG Backend (NestJS)   |----->|   vLLM Server (Python) |
+| (Asks JANE a question)   |      | (Acts as a secure proxy)  |      | (Hosts gpt-oss-20b)    |
++--------------------------+      +---------------------------+      +----------------------+
+```
+
+### 3.1. vLLM Server Setup
+
+-   **Deployment:** The vLLM server will be deployed as a dedicated Python application, likely within a Docker container on the AI Services Host (192.168.1.85).
+-   **Model:** It will be configured to serve the `unsloth/gpt-oss-20b` model.
+-   **Interface:** vLLM provides a built-in OpenAI-compatible server. This is critical, as it means our NestJS backend (`ai.service.ts`) will require minimal changes to its `fetch` logic—it will simply point to the new vLLM server URL.
+
+### 3.2. VCPG Backend Integration
+
+-   The `LLM_API_URL` environment variable will be updated to point to the new vLLM server's endpoint.
+-   The backend will continue to be responsible for prompt engineering, context injection (RAG), and state management. The backend sends the final prompt to vLLM; vLLM handles the high-speed inference.
+
+## 4. Implementation Plan (Future Cycle)
+
+1.  **Setup vLLM Server:**
+    *   Install vLLM and its dependencies on the AI Services Host.
+    *   Write a Python script to initialize the `LLM` engine and start the OpenAI-compatible server, loading the `gpt-oss-20b` model.
+    *   Containerize this setup using Docker for easy deployment and management.
+2.  **Test vLLM Endpoint:**
+    *   Directly test the new vLLM server using `curl` or a simple client to ensure it's responding correctly to OpenAI-compatible requests.
+3.  **Update VCPG Backend:**
+    *   Change the `LLM_API_URL` in the `.env` file to point to the vLLM server.
+    *   Test the full loop from the VCPG client, through the NestJS backend, to the vLLM server.
+4.  **Performance Benchmarking:**
+    *   Once integrated, conduct performance tests to measure the improvement in response time and throughput compared to the LM Studio setup.
+
+This migration promises to significantly enhance JANE's performance and scalability, paving the way for more complex and responsive AI-driven features in the future.
 </file_artifact>
 

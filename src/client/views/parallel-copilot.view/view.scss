@@ -1,5 +1,5 @@
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C19 (Add styles for WorkflowToolbar)
+// Updated on: C21 (Fix sort button style)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -108,6 +108,21 @@ body {
         color: var(--vscode-descriptionForeground);
     }
 }
+
+.onboarding-textarea-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-height: 0;
+}
+
+.onboarding-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
 
 .onboarding-success {
     display: flex;
@@ -379,6 +394,28 @@ body {
 .tab-bar {
     display: flex;
     flex-shrink: 0;
+}
+
+.sort-button {
+    background: none;
+    border: 1px solid var(--vscode-button-border, transparent);
+    color: var(--vscode-icon-foreground);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    &:hover {
+        background-color: var(--vscode-toolbar-hoverBackground);
+    }
+    
+    &.active {
+        background-color: var(--vscode-toolbar-hoverBackground);
+        outline: 1px solid var(--vscode-focusBorder);
+    }
 }
 
 .tab {

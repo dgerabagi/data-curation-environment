@@ -1,7 +1,7 @@
 // src/client/views/parallel-copilot.view/OnboardingView.tsx
-// Updated on: C20 (Refactor state management)
+// Updated on: C21 (Add title and save status indicator)
 import * as React from 'react';
-import { VscRocket, VscArrowRight } from 'react-icons/vsc';
+import { VscRocket, VscArrowRight, VscLoading, VscCheck, VscWarning } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 import { logger } from '@/client/utils/logger';
@@ -12,9 +12,22 @@ interface OnboardingViewProps {
     onNavigateToCycle: (cycleId: number) => void;
     latestCycleId: number;
     workflowStep: string | null;
+    saveStatus: 'saved' | 'saving' | 'unsaved';
 }
 
-const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeChange, onNavigateToCycle, latestCycleId, workflowStep }) => {
+const SaveStatusIndicator: React.FC<{ saveStatus: 'saved' | 'saving' | 'unsaved' }> = ({ saveStatus }) => {
+    let icon;
+    let title;
+    switch(saveStatus) {
+        case 'saving': icon = <VscLoading className="saving"/>; title = "Saving..."; break;
+        case 'unsaved': icon = <VscWarning className="unsaved"/>; title = "Unsaved changes"; break;
+        case 'saved': icon = <VscCheck className="saved"/>; title = "Saved"; break;
+        default: icon = null; title = "";
+    }
+    return <div className="save-status-indicator" title={title}>{icon}</div>;
+};
+
+const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeChange, onNavigateToCycle, latestCycleId, workflowStep, saveStatus }) => {
     const [isGenerating, setIsGenerating] = React.useState(false);
     const [promptGenerated, setPromptGenerated] = React.useState(false);
     const clientIpc = ClientPostMessageManager.getInstance();
@@ -47,13 +60,19 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeCh
                     : 'To get started, describe the goals and scope of your new project in the text area below. When you\'re ready, we\'ll generate an initial prompt that will instruct an AI to create a set of planning documents to bootstrap your development process.'
                 }
             </p>
-            <textarea
-                className={`onboarding-textarea ${workflowStep === 'awaitingProjectScope' ? 'workflow-highlight' : ''}`}
-                placeholder="e.g., I want to build a web application that allows users to track their daily habits. It should have a simple UI, user authentication, and a dashboard to visualize progress..."
-                value={projectScope}
-                onChange={(e) => onScopeChange(e.target.value)}
-                disabled={isGenerating || (promptGenerated && !isNavigatingBack)}
-            />
+            <div className="onboarding-textarea-wrapper">
+                 <div className="onboarding-header">
+                    <h3>Project Scope</h3>
+                    <SaveStatusIndicator saveStatus={saveStatus} />
+                </div>
+                <textarea
+                    className={`onboarding-textarea ${workflowStep === 'awaitingProjectScope' ? 'workflow-highlight' : ''}`}
+                    placeholder="e.g., I want to build a web application that allows users to track their daily habits. It should have a simple UI, user authentication, and a dashboard to visualize progress..."
+                    value={projectScope}
+                    onChange={(e) => onScopeChange(e.target.value)}
+                    disabled={isGenerating || (promptGenerated && !isNavigatingBack)}
+                />
+            </div>
             {isNavigatingBack ? (
                 <button className="styled-button" onClick={handleReturnToCycles}>
                     <VscArrowRight /> Return to Cycle {latestCycleId}
