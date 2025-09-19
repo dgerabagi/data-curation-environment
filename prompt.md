@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 20 - ts errors and one additional bug report
+Current Cycle 21 - playtesting obesrvations/feedback
+Cycle 20 - ts errors and one additional bug report
 Cycle 19 - centralize workflow buttons
 Cycle 18 - fix changelog/readme source
 Cycle 17 - settings opens!
@@ -695,43 +696,49 @@ No project scope defined.
 
 <M6. Cycles>
 
+<Cycle 21>
+<Cycle Context>
+incredible work, okay i have done more testing of the extension. below are my <observations/feedback>. please go through them and update our artifact 65 with a new task list for the observations/feedback below.
+
+<observations/feedback>
+1. the sort button just lost its style/thematic appearance. it does not look like/match the style of the other buttons. can you switch its appearance back? 
+
+2. additionally, lets see if we can make sure that there is always an animated/highlighted step in the workflow. there are still times when nothing is animated, i think the main culprit is persistence when switching to and from the pcpp. if we can eliminate that from the equation we can see if theres anything else hindering this animation.
+2.1. example of when sometimes the animation doesnt work correctly. currently, i see `Generate prompt.md` highlighted, which is the correct next step in my current state. i proceed to click on it. this act opens two files (as expected), the `flattened_repo.md` and the `prompt.md`. before those files open, i can see the animation update correctly, it switches from `Generate prompt.md` to the `+` new cycle button. but then when those two files open and my vs code view switches from pcpp to the prompt.md, when i immediately switch back, i no longer see the `+` which i witnessed change before my view switched, and instead the `Generate prompt.md` is highlighted once again. this is an example of the persistence issue described above/before.
+
+3. also i seem to have lost the `Select All` button for the `Associated Files`. without that button, i have had to manually check/select each associated file. this is tediuous and having the `Select All` and `De-Select All Across all Responses` buttons helped alleviate that. additionally, this time, lets make sure that the `Select All` button also performs the same 'de-selection' of any previously selected files of the same relative name/path, like we do when the user manually checks a file under that condition.  was this functionality clearly documented in our artifacts? is this the cause of the regression? if they are, be sure they're aligned. if they are not, be sure to codify them first. in a86, it does depict them, the select/de-select all buttons.
+
+4. there are times when, i am seeking to ensure i have all my files in context. i do so by going to the root directory and unchecking/checking that checkmark. in doing so, it should be de-selecting all, and then re-selecting all. however, when i do this, there are times where it does not actually de-select all files. if i do not notice that it did not actually de-select all files (again these are files that are under the root directory and so by rights should get de-selected when the root directory is de-selected, but dont) which is easy to do because the human eye has a focal point of 1-2 degress, what happens is i re-add and do not notice that ive just duplicated a bunch of files in the selected items. the only clue is when the `flattened_repo.md` appears, if i notice on the top 10 or on the files list that some of them have been listed twice. the solution currently is for me to go to the `Selected Items` section of the FTV and to ctrl + a and press delete, and then confirming the `Selected Items (0)` reads 0. this replaces the faulty un-check as previously described. then, i check the root directory as previously described, and i receive a complete list, devoid of duplicates. we shouldnt have an un-select bug, but we also shouldnt be tolerating opportunities for duplicte files to appear in our context. can you fix both?
+4.1. i think an easy fix would be to just perform a check when flattening, if duplicates are found, a) dont include and b) automatically de-duplicate the selected items list?
+
+5. in order to help connect some dots on the `Welcome to the Data Curation Environment` tab, can you give a title to the text box? something like Project Scope or Project Plan? then, can we also display our auto-save icon indicating the autosave status?
+
+6. i see a new directory that ought to be added to our 'do not ever select' exclusion list (aka treated like .git, node_modules, .vscode, etc). its: `.next`, its a build directory. can that be added as well?
+</observations/feedback>
+</Cycle Context>
+<Previous Cycle 20 Summary of Actions>
+I have analyzed the three requests from Cycle 19. My course of action is to create a new planning artifact to document the requested changes, and then implement them. I will centralize the scattered workflow buttons into a single toolbar for a more intuitive user experience. I will fix the bug causing the animated UI highlight to disappear by making its state persistent within the cycle data. Finally, I will resolve the issue with the broken cost calculation by ensuring it is triggered correctly when a cycle is loaded.
+
+1.  **Documentation:**
+    *   Create a new artifact, **`A86. DCE - PCPP Workflow Centralization and UI Persistence Plan.md`**, to document the plan for all three tasks.
+    *   Update **`A0. DCE Master Artifact List.md`** to include the new artifact.
+2.  **Centralize Buttons:**
+    *   Create a new `WorkflowToolbar.tsx` component to house the `Parse All`, `Sort`, `Select This Response`, `Baseline`, `Restore`, and `Accept Selected` buttons.
+    *   Relocate this new toolbar to a central position below the response tabs.
+    *   Remove the buttons from their old locations in `view.tsx`, `CycleNavigator.tsx`, and `ParsedView.tsx`.
+3.  **Make Highlight Persistent:**
+    *   Add `activeWorkflowStep` to the `PcppCycle` type in `pcpp.types.ts`.
+    *   Update `history.service.ts` to include a default value for the new property.
+    *   Update `view.tsx` to save the `workflowStep` state as part of the cycle data and restore it when a cycle is loaded.
+4.  **Fix Cost Calculation:**
+    *   In `view.tsx`, update the `useEffect` hook that loads cycle data to also trigger a call to `requestCostEstimation`, ensuring the cost is calculated and displayed whenever a cycle is viewed.
+</Previous Cycle 20 Summary of Actions>
+</Cycle 21>
+
 <Cycle 20>
 <Cycle Context>
 okay i selected the best response and rolled it in, but gome some ts errors. also i discovered a persistence issue with the project plan page. when seeing that project plan for the first time, so during project initalization (cycle 0), if the user changes their view away from the pcpp and back to it, anything they wrote in that text box that turns into the project plan in the prompt gets wiped.
 </Cycle Context>
-<Ephemeral Context>
-
-ERROR in C:\Projects\DCE\src\backend\services\history.service.ts
-26:50-53
-[tsl] ERROR in C:\Projects\DCE\src\backend\services\history.service.ts(26,51)
-      TS2339: Property 'uri' does not exist on type 'readonly WorkspaceFolder[]'.
-
-ERROR in C:\Projects\DCE\src\backend\services\history.service.ts
-269:59-65
-[tsl] ERROR in C:\Projects\DCE\src\backend\services\history.service.ts(269,60)
-      TS2339: Property 'fsPath' does not exist on type 'Uri[]'.
-
-ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\components\ParsedView.tsx
-./src/client/views/parallel-copilot.view/components/ParsedView.tsx 84:75-88
-[tsl] ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\components\ParsedView.tsx(84,76)
-      TS2339: Property 'leftPaneWidth' does not exist on type 'ParsedViewProps'.
- @ ./src/client/views/parallel-copilot.view/components/ResponsePane.tsx 4:0-38 16:42-52
- @ ./src/client/views/parallel-copilot.view/view.tsx 15:0-53 844:38-50
-
-ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\components\ResponsePane.tsx
-./src/client/views/parallel-copilot.view/components/ResponsePane.tsx 72:12-30
-[tsl] ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\components\ResponsePane.tsx(72,13)
-      TS2322: Type '{ parsedContent: ParsedResponse; fileExistenceMap: Map<string, boolean>; selectedFilePath: string; onSelectForViewing: (path: string) => void; selectedFilesForReplacement: Set<...>; ... 19 more ...; workflowStep: string; }' is not assignable to type 'IntrinsicAttributes & ParsedViewProps'.
-  Property 'selectedResponseId' does not exist on type 'IntrinsicAttributes & ParsedViewProps'.
- @ ./src/client/views/parallel-copilot.view/view.tsx 15:0-53 844:38-50
-
-4 errors have detailed information that is not shown.
-Use 'stats.errorDetails: true' resp. '--stats-error-details' to show it.
-
-webpack 5.101.1 compiled with 4 errors in 10091 ms
-    [webpack-cli] Compiler is watching files for updates...
-
-</Ephemeral Context>
 <Previous Cycle 19 Summary of Actions>
 I have analyzed the issue from Cycle 18. You've correctly identified a significant bug: the settings panel is looking for the `CHANGELOG.md` and `README.md` files in the user's active workspace, not within the extension's own directory. This is why it fails when you run the extension in debug mode against another project.
 
@@ -2402,16 +2409,16 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-16T21:13:05.899Z
+  Date Generated: 2025-09-19T12:01:16.257Z
   ---
-  Total Files: 188
-  Approx. Tokens: 462277
+  Total Files: 169
+  Approx. Tokens: 450716
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (8434 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (8485 tokens)
 4. src\Artifacts\A0. DCE Master Artifact List.md (7942 tokens)
 5. src\client\views\parallel-copilot.view\view.scss (5152 tokens)
 6. src\backend\services\prompt.service.ts (5139 tokens)
@@ -2433,7 +2440,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 10. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
 11. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
 12. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
-13. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 84 - Chars: 9917 - Tokens: 2480
+13. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 94 - Chars: 11211 - Tokens: 2803
 14. src\Artifacts\A11.1 DCE - New Regression Case Studies.md - Lines: 391 - Chars: 46197 - Tokens: 11550
 15. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5687 - Tokens: 1422
 16. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
@@ -2485,130 +2492,111 @@ This file-centric approach helps in planning and prioritizing work, especially i
 62. src\Artifacts\A55. DCE - FSService Refactoring Plan.md - Lines: 77 - Chars: 4022 - Tokens: 1006
 63. src\Artifacts\A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md - Lines: 47 - Chars: 5687 - Tokens: 1422
 64. src\Artifacts\A57. DCE - Phase 2 - Cycle Management Plan.md - Lines: 44 - Chars: 3625 - Tokens: 907
-65. src\Artifacts\A58. DCE - WinMerge Source Code Analysis.md - Lines: 56 - Chars: 5322 - Tokens: 1331
-66. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 40 - Chars: 3737 - Tokens: 935
-67. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 35 - Chars: 4177 - Tokens: 1045
-68. src\Artifacts\A61. DCE - Phase 2 - Cycle History Management Plan.md - Lines: 45 - Chars: 3559 - Tokens: 890
-69. src\Artifacts\A62. DCE - Cycle 157 - Task Tracker.md - Lines: 31 - Chars: 2710 - Tokens: 678
-70. src\Artifacts\A63. DCE - Cycle 158 - Task Tracker.md - Lines: 23 - Chars: 1760 - Tokens: 440
-71. src\Artifacts\A64. DCE - Cycle 159 - Task Tracker.md - Lines: 22 - Chars: 1550 - Tokens: 388
-72. src\Artifacts\A65. DCE - Universal Task Checklist.md - Lines: 87 - Chars: 5422 - Tokens: 1356
-73. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1806 - Tokens: 452
-74. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 47 - Chars: 3537 - Tokens: 885
-75. src\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3347 - Tokens: 837
-76. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 3772 - Tokens: 943
-77. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 61 - Chars: 6827 - Tokens: 1707
-78. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
-79. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 47 - Chars: 3127 - Tokens: 782
-80. src\Artifacts\A73. DCE - GitService Plan.md - Lines: 44 - Chars: 2548 - Tokens: 637
-81. src\Artifacts\A74. DCE - Per-Input Undo-Redo Feature Plan.md - Lines: 49 - Chars: 3624 - Tokens: 906
-82. src\Artifacts\A75. DCE - Text Area Component A-B-C Test Plan.md - Lines: 50 - Chars: 4761 - Tokens: 1191
-83. src\Artifacts\A76. DCE - Word Wrap Line Numbering Challenges.md - Lines: 61 - Chars: 4895 - Tokens: 1224
-84. src\Artifacts\A77. DCE - Monaco Editor Replacement Plan.md - Lines: 42 - Chars: 3610 - Tokens: 903
-85. src\Artifacts\A77. DCE - Whitepaper Generation Plan.md - Lines: 74 - Chars: 8731 - Tokens: 2183
-86. src\Artifacts\A78. DCE - VSIX Packaging and FTV Flashing Bug.md - Lines: 50 - Chars: 3687 - Tokens: 922
-87. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
-88. src\Artifacts\A79. DCE - Autosave and Navigation Locking Plan.md - Lines: 49 - Chars: 4291 - Tokens: 1073
-89. src\Artifacts\A80. DCE - Settings Panel Plan.md - Lines: 39 - Chars: 3592 - Tokens: 898
-90. src\Artifacts\A81. DCE - Curator Activity Plan.md - Lines: 34 - Chars: 2346 - Tokens: 587
-91. src\Artifacts\A82. DCE - Advanced Exclusion Management Plan.md - Lines: 40 - Chars: 3010 - Tokens: 753
-92. src\Artifacts\A83. DCE - Universal Task Checklist for Cycle 6.md - Lines: 95 - Chars: 5172 - Tokens: 1293
-93. src\Artifacts\A84. DCE - Universal Task Checklist for Cycle 10+.md - Lines: 55 - Chars: 2541 - Tokens: 636
-94. src\Artifacts\A85. DCE - Model Card Feature Plan.md - Lines: 28 - Chars: 3060 - Tokens: 765
-95. src\Artifacts\A85. DCE - Model Card Management Plan.md - Lines: 42 - Chars: 3466 - Tokens: 867
-96. src\Artifacts\A85. DCE - Phase 2 - Model Card Management Plan.md - Lines: 48 - Chars: 4046 - Tokens: 1012
-97. src\Artifacts\A85. DCE - Phase 3 - Model Cards Feature Plan.md - Lines: 53 - Chars: 4197 - Tokens: 1050
-98. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
-99. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
-100. src\Artifacts\A200. Cycle Log.md - Lines: 8971 - Chars: 901614 - Tokens: 225404
-101. src\Artifacts\DCE_README.md - Lines: 47 - Chars: 3127 - Tokens: 782
-102. src\Artifacts\README.md - Lines: 33 - Chars: 2764 - Tokens: 691
-103. src\Artifacts\T1. Template - Master Artifact List.md - Lines: 36 - Chars: 1725 - Tokens: 432
-104. src\Artifacts\T2. Template - Project Vision and Goals.md - Lines: 38 - Chars: 1977 - Tokens: 495
-105. src\Artifacts\T3. Template - Phase 1 Requirements & Design.md - Lines: 37 - Chars: 1885 - Tokens: 472
-106. src\Artifacts\T4. Template - Technical Scaffolding Plan.md - Lines: 54 - Chars: 2189 - Tokens: 548
-107. src\Artifacts\T5. Template - Target File Structure.md - Lines: 35 - Chars: 1063 - Tokens: 266
-108. src\Artifacts\T6. Template - Initial Scaffolding Deployment Script.md - Lines: 63 - Chars: 2602 - Tokens: 651
-109. src\Artifacts\T7. Template - Development and Testing Guide.md - Lines: 48 - Chars: 1747 - Tokens: 437
-110. src\Artifacts\T8. Template - Regression Case Studies.md - Lines: 31 - Chars: 1980 - Tokens: 495
-111. src\Artifacts\T9. Template - Logging and Debugging Guide.md - Lines: 49 - Chars: 2599 - Tokens: 650
-112. src\Artifacts\T10. Template - Feature Plan Example.md - Lines: 32 - Chars: 2701 - Tokens: 676
-113. src\Artifacts\T11. Template - Implementation Roadmap.md - Lines: 55 - Chars: 2896 - Tokens: 724
-114. src\Artifacts\T12. Template - Competitive Analysis.md - Lines: 42 - Chars: 3236 - Tokens: 809
-115. src\Artifacts\T13. Template - Refactoring Plan.md - Lines: 55 - Chars: 2626 - Tokens: 657
-116. src\Artifacts\T14. Template - GitHub Repository Setup Guide.md - Lines: 110 - Chars: 4911 - Tokens: 1228
-117. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 41 - Chars: 3009 - Tokens: 753
-118. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 97 - Chars: 4056 - Tokens: 1014
-119. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 55 - Chars: 3473 - Tokens: 869
-120. src\backend\commands\commands.ts - Lines: 110 - Chars: 4507 - Tokens: 1127
-121. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
-122. src\backend\services\action.service.ts - Lines: 71 - Chars: 2444 - Tokens: 611
-123. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
-124. src\backend\services\file-operation.service.ts - Lines: 360 - Chars: 17118 - Tokens: 4280
-125. src\backend\services\file-tree.service.ts - Lines: 272 - Chars: 14424 - Tokens: 3606
-126. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12658 - Tokens: 3165
-127. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
-128. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-129. src\backend\services\history.service.ts - Lines: 288 - Chars: 12317 - Tokens: 3080
-130. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
-131. src\backend\services\prompt.service.ts - Lines: 388 - Chars: 20553 - Tokens: 5139
-132. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
-133. src\backend\services\services.ts - Lines: 42 - Chars: 1905 - Tokens: 477
-134. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
-135. src\client\components\file-tree\FileTree.tsx - Lines: 176 - Chars: 11127 - Tokens: 2782
-136. src\client\components\file-tree\FileTree.utils.ts - Lines: 117 - Chars: 4236 - Tokens: 1059
-137. src\client\components\tree-view\TreeView.tsx - Lines: 395 - Chars: 17687 - Tokens: 4422
-138. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
-139. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
-140. src\client\components\ContextMenu.tsx - Lines: 72 - Chars: 3353 - Tokens: 839
-141. src\client\components\DiffViewer.tsx - Lines: 224 - Chars: 11386 - Tokens: 2847
-142. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
-143. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13123 - Tokens: 3281
-144. src\client\utils\logger.ts - Lines: 19 - Chars: 744 - Tokens: 186
-145. src\client\utils\response-parser.ts - Lines: 74 - Chars: 3472 - Tokens: 868
-146. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-147. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
-148. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
-149. src\client\views\context-chooser.view\view.tsx - Lines: 150 - Chars: 16076 - Tokens: 4019
-150. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
-151. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 55 - Chars: 1970 - Tokens: 493
-152. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 84 - Chars: 3386 - Tokens: 847
-153. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
-154. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 135 - Chars: 9144 - Tokens: 2286
-155. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 86 - Chars: 3575 - Tokens: 894
-156. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
-157. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-158. src\client\views\parallel-copilot.view\on-message.ts - Lines: 116 - Chars: 5463 - Tokens: 1366
-159. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 92 - Chars: 4340 - Tokens: 1085
-160. src\client\views\parallel-copilot.view\view.scss - Lines: 922 - Chars: 20608 - Tokens: 5152
-161. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-162. src\client\views\parallel-copilot.view\view.tsx - Lines: 274 - Chars: 33735 - Tokens: 8434
-163. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
-164. src\client\views\settings.view\on-message.ts - Lines: 17 - Chars: 762 - Tokens: 191
-165. src\client\views\settings.view\view.scss - Lines: 87 - Chars: 1767 - Tokens: 442
-166. src\client\views\settings.view\view.tsx - Lines: 74 - Chars: 3291 - Tokens: 823
-167. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
-168. src\common\ipc\channels.enum.ts - Lines: 96 - Chars: 5288 - Tokens: 1322
-169. src\common\ipc\channels.type.ts - Lines: 97 - Chars: 7483 - Tokens: 1871
-170. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
-171. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-172. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-173. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
-174. src\common\types\pcpp.types.ts - Lines: 46 - Chars: 1113 - Tokens: 279
-175. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
-176. src\common\utils\formatting.ts - Lines: 141 - Chars: 4606 - Tokens: 1152
-177. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
-178. src\common\utils\view-html.ts - Lines: 37 - Chars: 1314 - Tokens: 329
-179. src\common\view-types.ts - Lines: 8 - Chars: 175 - Tokens: 44
-180. src\extension.ts - Lines: 168 - Chars: 6874 - Tokens: 1719
-181. bootstrap-flattener.js - Lines: 185 - Chars: 5834 - Tokens: 1459
-182. CHANGELOG.md - Lines: 23 - Chars: 1414 - Tokens: 354
-183. LICENSE - Lines: 21 - Chars: 1090 - Tokens: 273
-184. log-state-logs.md - Lines: 200 - Chars: 11855 - Tokens: 2964
-185. package.json - Lines: 157 - Chars: 5271 - Tokens: 1318
-186. README.md - Lines: 28 - Chars: 2456 - Tokens: 614
-187. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
-188. webpack.config.js - Lines: 112 - Chars: 2987 - Tokens: 747
+65. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 40 - Chars: 3737 - Tokens: 935
+66. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 35 - Chars: 4177 - Tokens: 1045
+67. src\Artifacts\A61. DCE - Phase 2 - Cycle History Management Plan.md - Lines: 45 - Chars: 3559 - Tokens: 890
+68. src\Artifacts\A65. DCE - Universal Task Checklist.md - Lines: 87 - Chars: 5422 - Tokens: 1356
+69. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1806 - Tokens: 452
+70. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 47 - Chars: 3537 - Tokens: 885
+71. src\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3347 - Tokens: 837
+72. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 3772 - Tokens: 943
+73. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 61 - Chars: 6827 - Tokens: 1707
+74. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
+75. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 47 - Chars: 3127 - Tokens: 782
+76. src\Artifacts\A73. DCE - GitService Plan.md - Lines: 44 - Chars: 2548 - Tokens: 637
+77. src\Artifacts\A74. DCE - Per-Input Undo-Redo Feature Plan.md - Lines: 49 - Chars: 3624 - Tokens: 906
+78. src\Artifacts\A75. DCE - Text Area Component A-B-C Test Plan.md - Lines: 50 - Chars: 4761 - Tokens: 1191
+79. src\Artifacts\A77. DCE - Monaco Editor Replacement Plan.md - Lines: 42 - Chars: 3610 - Tokens: 903
+80. src\Artifacts\A77. DCE - Whitepaper Generation Plan.md - Lines: 74 - Chars: 8731 - Tokens: 2183
+81. src\Artifacts\A78. DCE - VSIX Packaging and FTV Flashing Bug.md - Lines: 50 - Chars: 3687 - Tokens: 922
+82. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
+83. src\Artifacts\A79. DCE - Autosave and Navigation Locking Plan.md - Lines: 49 - Chars: 4291 - Tokens: 1073
+84. src\Artifacts\A80. DCE - Settings Panel Plan.md - Lines: 39 - Chars: 3592 - Tokens: 898
+85. src\Artifacts\A81. DCE - Curator Activity Plan.md - Lines: 34 - Chars: 2346 - Tokens: 587
+86. src\Artifacts\A82. DCE - Advanced Exclusion Management Plan.md - Lines: 40 - Chars: 3010 - Tokens: 753
+87. src\Artifacts\A83. DCE - Universal Task Checklist for Cycle 6.md - Lines: 95 - Chars: 5172 - Tokens: 1293
+88. src\Artifacts\A84. DCE - Universal Task Checklist for Cycle 10+.md - Lines: 55 - Chars: 2541 - Tokens: 636
+89. src\Artifacts\A85. DCE - Model Card Feature Plan.md - Lines: 28 - Chars: 3060 - Tokens: 765
+90. src\Artifacts\A85. DCE - Model Card Management Plan.md - Lines: 42 - Chars: 3466 - Tokens: 867
+91. src\Artifacts\A85. DCE - Phase 2 - Model Card Management Plan.md - Lines: 48 - Chars: 4046 - Tokens: 1012
+92. src\Artifacts\A85. DCE - Phase 3 - Model Cards Feature Plan.md - Lines: 53 - Chars: 4197 - Tokens: 1050
+93. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
+94. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
+95. src\Artifacts\A200. Cycle Log.md - Lines: 8971 - Chars: 901614 - Tokens: 225404
+96. src\Artifacts\DCE_README.md - Lines: 47 - Chars: 3127 - Tokens: 782
+97. src\Artifacts\README.md - Lines: 33 - Chars: 2764 - Tokens: 691
+98. src\backend\commands\commands.ts - Lines: 110 - Chars: 4507 - Tokens: 1127
+99. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
+100. src\backend\services\action.service.ts - Lines: 71 - Chars: 2444 - Tokens: 611
+101. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
+102. src\backend\services\file-operation.service.ts - Lines: 360 - Chars: 17118 - Tokens: 4280
+103. src\backend\services\file-tree.service.ts - Lines: 272 - Chars: 14424 - Tokens: 3606
+104. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12658 - Tokens: 3165
+105. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
+106. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
+107. src\backend\services\history.service.ts - Lines: 288 - Chars: 12307 - Tokens: 3077
+108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
+109. src\backend\services\prompt.service.ts - Lines: 388 - Chars: 20553 - Tokens: 5139
+110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
+111. src\backend\services\services.ts - Lines: 42 - Chars: 1905 - Tokens: 477
+112. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
+113. src\client\components\file-tree\FileTree.tsx - Lines: 176 - Chars: 11127 - Tokens: 2782
+114. src\client\components\file-tree\FileTree.utils.ts - Lines: 117 - Chars: 4236 - Tokens: 1059
+115. src\client\components\tree-view\TreeView.tsx - Lines: 395 - Chars: 17687 - Tokens: 4422
+116. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
+117. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
+118. src\client\components\ContextMenu.tsx - Lines: 72 - Chars: 3353 - Tokens: 839
+119. src\client\components\DiffViewer.tsx - Lines: 224 - Chars: 11386 - Tokens: 2847
+120. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
+121. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13123 - Tokens: 3281
+122. src\client\utils\logger.ts - Lines: 19 - Chars: 744 - Tokens: 186
+123. src\client\utils\response-parser.ts - Lines: 74 - Chars: 3472 - Tokens: 868
+124. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
+125. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
+126. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
+127. src\client\views\context-chooser.view\view.tsx - Lines: 150 - Chars: 16076 - Tokens: 4019
+128. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
+129. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 55 - Chars: 1970 - Tokens: 493
+130. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 84 - Chars: 3386 - Tokens: 847
+131. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
+132. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 137 - Chars: 9229 - Tokens: 2308
+133. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 79 - Chars: 3137 - Tokens: 785
+134. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
+135. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
+136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 116 - Chars: 5463 - Tokens: 1366
+137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 81 - Chars: 3939 - Tokens: 985
+138. src\client\views\parallel-copilot.view\view.scss - Lines: 922 - Chars: 20608 - Tokens: 5152
+139. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
+140. src\client\views\parallel-copilot.view\view.tsx - Lines: 282 - Chars: 33939 - Tokens: 8485
+141. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
+142. src\client\views\settings.view\on-message.ts - Lines: 17 - Chars: 762 - Tokens: 191
+143. src\client\views\settings.view\view.scss - Lines: 87 - Chars: 1767 - Tokens: 442
+144. src\client\views\settings.view\view.tsx - Lines: 74 - Chars: 3291 - Tokens: 823
+145. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
+146. src\common\ipc\channels.enum.ts - Lines: 96 - Chars: 5288 - Tokens: 1322
+147. src\common\ipc\channels.type.ts - Lines: 97 - Chars: 7483 - Tokens: 1871
+148. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
+149. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+150. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
+151. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
+152. src\common\types\pcpp.types.ts - Lines: 46 - Chars: 1113 - Tokens: 279
+153. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
+154. src\common\utils\formatting.ts - Lines: 141 - Chars: 4606 - Tokens: 1152
+155. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
+156. src\common\utils\view-html.ts - Lines: 37 - Chars: 1314 - Tokens: 329
+157. src\common\view-types.ts - Lines: 8 - Chars: 175 - Tokens: 44
+158. src\extension.ts - Lines: 168 - Chars: 6874 - Tokens: 1719
+159. bootstrap-flattener.js - Lines: 185 - Chars: 5834 - Tokens: 1459
+160. CHANGELOG.md - Lines: 23 - Chars: 1414 - Tokens: 354
+161. LICENSE - Lines: 21 - Chars: 1090 - Tokens: 273
+162. log-state-logs.md - Lines: 200 - Chars: 11855 - Tokens: 2964
+163. package.json - Lines: 157 - Chars: 5271 - Tokens: 1318
+164. README.md - Lines: 28 - Chars: 2456 - Tokens: 614
+165. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
+166. webpack.config.js - Lines: 112 - Chars: 2987 - Tokens: 747
+167. src\Artifacts\A86. DCE - PCPP Workflow Centralization and UI Persistence Plan.md - Lines: 72 - Chars: 5641 - Tokens: 1411
+168. src\Artifacts\A76. DCE - Word Wrap Line Numbering Challenges.md - Lines: 61 - Chars: 4895 - Tokens: 1224
+169. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 87 - Chars: 3428 - Tokens: 857
 
 <file path="public/copilot.svg">
 <metadata>
@@ -3626,7 +3614,7 @@ To enhance the data curation process, it is critical for the user to have immedi
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C18 (Add settings panel content loading regression)
+# Updated on: C20 (Add Project Plan data loss case)
 
 ## 1. Purpose
 
@@ -3638,12 +3626,22 @@ This document serves as a living record of persistent or complex bugs that have 
 
 ---
 
+### Case Study 030: Project Plan Data Loss on Tab Switch (Cycle 0)
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`
+-   **Cycles Observed:** C20
+-   **Symptom:** When in the "Cycle 0" onboarding view, any text typed into the "Project Scope" text area is lost if the user navigates to a different VS Code tab and then returns to the PCPP.
+-   **Root Cause Analysis (RCA):** The `OnboardingView` component's `onScopeChange` prop was wired directly to the `setCycleContext` state setter in the parent `view.tsx` component. This updated the state but bypassed the `onCycleContextChange` handler function, which is responsible for also setting the `saveStatus` to `'unsaved'`. Without the `saveStatus` change, the debounced auto-save mechanism was never triggered, and the unsaved changes were lost when the webview's state was reloaded on tab focus.
+-   **Codified Solution & Best Practice:** When a child component needs to update a parent's state, it should be passed the full handler function (e.g., `onCycleContextChange`) as a prop, not just the raw state setter. This ensures all related logic, such as triggering saves or updating derived state (like token counts), is executed correctly. The parent component should pass `onScopeChange={onCycleContextChange}` to the child.
+
+---
+
 ### Case Study 029: Settings Panel Fails to Load Content in Extension Host
 
 -   **Artifacts Affected:** `src/backend/services/file-operation.service.ts`
 -   **Cycles Observed:** C18
 -   **Symptom:** When running the extension in a debug host, the settings panel displays "README.md not found in workspace root." and "CHANGELOG.md not found in workspace root."
--   **Root Cause Analysis (RCA):** The `file-operation.service` was using `vscode.workspace.workspaceFolders[0].uri.fsPath` to construct the path to the README and CHANGELOG files. This path points to the root of the *user's currently open project*, not the extension's own installation directory. The asset files are bundled with the extension and are not present in the user's workspace.
+-   **Root Cause Analysis (RCA):** The `file-operation.service` was using `vscode.workspace.workspaceFolders.uri.fsPath` to construct the path to the README and CHANGELOG files. This path points to the root of the *user's currently open project*, not the extension's own installation directory. The asset files are bundled with the extension and are not present in the user's workspace.
 -   **Codified Solution & Best Practice:** Backend services that need to read the extension's own bundled files must be initialized with or have access to the `vscode.ExtensionContext` object provided during activation. The correct, reliable path to bundled assets should be constructed using `context.extensionPath`. This ensures that the extension always looks inside its own directory for its own files, regardless of what workspace the user has open.
 
 ---
@@ -3689,7 +3687,7 @@ This document serves as a living record of persistent or complex bugs that have 
 -   **Symptom:** The Parallel Co-Pilot Panel appears as a completely blank white screen. No errors are visible in the extension host logs, but the webview fails to render any content.
 -   **Root Cause Analysis (RCA):** The webview's JavaScript bundle contained a subtle but fatal syntax error that was not caught by the TypeScript/Babel build process. The code attempted to use an invalid form of optional chaining and nullish coalescing (`match?. ?? ''`) when trying to access properties of a regex match object. While the build completed successfully, the browser's JavaScript engine encountered this invalid syntax upon loading the script and immediately threw an `Uncaught SyntaxError`, halting all further execution and preventing React from rendering. The lack of build-time errors made this difficult to diagnose without inspecting the webview's own developer console.
 -   **Codified Solution & Best Practice:**
-    1.  **Correct Syntax:** The only way to access an element from an array-like object (such as a regex match) using optional chaining is with bracket notation: `match?.[1]`. The invalid `match?.` syntax must be corrected.
+    1.  **Correct Syntax:** The only way to access an element from an array-like object (such as a regex match) using optional chaining is with bracket notation: `match?.`. The invalid `match?.` syntax must be corrected.
     2.  **Best Practice:** When debugging a "blank screen" webview with no backend errors, the first step is always to open the Webview Developer Tools (`Developer: Open Webview Developer Tools` from the Command Palette). This provides access to the client-side console, which will immediately reveal any runtime JavaScript errors that are preventing the application from loading.
 
 ---
@@ -7132,65 +7130,6 @@ As the number of development cycles increases, users need tools to manage their 
     *   After a successful deletion or reset, the backend should send a message back to the client (e.g., a `ForceRefresh` or a new dedicated message) to trigger a full state reload.
 </file_artifact>
 
-<file path="src/Artifacts/A58. DCE - WinMerge Source Code Analysis.md">
-# Artifact A58: DCE - WinMerge Source Code Analysis
-# Date Created: C129
-# Author: AI Model & Curator
-# Updated on: C130 (Add Architectural and UX Insights)
-
-- **Key/Value for A0:**
-- **Description:** Documents the key files and concepts from the WinMerge source code that are relevant to building a high-quality diff viewer.
-- **Tags:** research, analysis, diff, winmerge, source code
-
-## 1. Overview
-
-To significantly improve the quality of our integrated diff viewer, an analysis of the open-source WinMerge utility was conducted. This document codifies the key findings from that analysis, listing the most valuable files from the WinMerge source code. These files serve as a reference for implementing advanced diffing features such as a more accurate core algorithm, inline (intra-line) difference highlighting, and moved block detection, as well as architectural patterns for creating a robust and flexible tool.
-
-## 2. Key Reference Files from WinMerge Source
-
-The following files from the WinMerge repository contain the core concepts needed to elevate our diff viewer's quality.
-
-### 2.1. Core Algorithm & Heuristics
-
-These files detail the logic behind WinMerge's highly optimized and accurate line-level diffing, which is based on the GNU `diffutils` engine.
-
-*   **`Winmerge-Src\Src\diffutils\src\analyze.c`**: The heart of the GNU diff algorithm. The `diag` function implements the core logic for finding the "shortest edit script." Studying this reveals the heuristics used to achieve high-quality and performant diffs.
-*   **`Winmerge-Src\Src\DiffWrapper.cpp`**: This is a C++ wrapper around the `diffutils` engine. It demonstrates how the raw output from the C functions is processed into a more usable format for the application, serving as a model for processing diff results.
-
-### 2.2. Inline (Intra-Line) Difference Highlighting
-
-This file contains the logic for highlighting the specific characters that have changed *within* a line.
-
-*   **`Winmerge-Src\Src\stringdiffs.cpp`**: Contains WinMerge's dedicated algorithm for performing intra-line diffs. Analyzing its approach can help improve our own character-level diff rendering.
-
-### 2.3. Moved Block Detection
-
-This is one of WinMerge's most powerful features, providing essential context for refactoring.
-
-*   **`Winmerge-Src\Src\MovedBlocks.cpp`**: This file contains the complete algorithm WinMerge uses to analyze the diff list, find matching blocks of text that have been moved, and link them together. This is the primary reference for implementing this feature.
-
-### 2.4. Data Structures & UI Rendering
-
-These files show how the data is structured and rendered to the user in the side-by-side view.
-
-*   **`Winmerge-Src\Src\MergeDoc.cpp`**: Acts as the data model for the application. It shows how the diff list is structured to accommodate advanced concepts like moved lines. Our `PairedLine` interface can be modeled on the data structures found here.
-*   **`Winmerge-Src\Src\MergeEditView.cpp`**: This is the main rendering component. It contains the logic for taking the results of the line and intra-line diffs and drawing the text with the correct highlighting and layout.
-*   **`Winmerge-Src\Src\DiffList.h`**: This header defines the core data structures for the list of differences and is an excellent reference for designing a more robust data model.
-*   **`Winmerge-Src\Src\MainFrm.cpp`**: The main application window frame. This file is valuable for understanding how the different components (the document/model, the view, user options, etc.) are all integrated and managed at the application level.
-
-## 3. Architectural and UX Insights (C130)
-
-Beyond specific algorithms, the WinMerge source code reveals important architectural patterns for building a high-quality diffing tool.
-
-*   **Configurability (`CompareOptions.h`, `OptionsMgr.h`):** WinMerge is extremely configurable. The code shows a clear separation between the core diffing logic and the user-configurable options (e.g., whitespace handling, case sensitivity, filtering). This is a strong pattern to emulate, ensuring our tool can be adapted to various user needs.
-*   **Text Encoding (`unicoder.h`, `codepage_detect.cpp`):** The project has dedicated, robust code for detecting and handling different text encodings. This is a critical, non-trivial feature for a diff tool that must work with files from various sources. It highlights the importance of pre-processing file content into a consistent format *before* passing it to the diff algorithm.
-*   **Pluggable Compare Engines (`CompareEngines` directory):** WinMerge uses a strategy pattern, allowing different comparison engines (e.g., `BinaryCompare`, `ImageCompare`, `TimeSizeCompare`) to be used. This is a powerful architectural concept that could allow our tool to be extended with new comparison methods in the future (e.g., semantic code diffing).
-
-## 4. Path Forward
-
-By studying the algorithms and architectural patterns in these key files, we can create a clear development plan to implement these advanced features in our TypeScript and React-based extension. The immediate priority is to refactor our UI to a vertical, fixed-pane layout, and then we can begin to incrementally incorporate the more advanced logic inspired by these files.
-</file_artifact>
-
 <file path="src/Artifacts/A59. DCE - Phase 2 - Debugging and State Logging.md">
 # Artifact A59: DCE - Phase 2 - Debugging and State Logging
 # Date Created: C134
@@ -7318,91 +7257,6 @@ The goal of this feature is to provide commands and UI controls to **export** th
     *   The "Save History" (`VscCloudUpload`) and "Load History" (`VscCloudDownload`) buttons in the cycle navigator toolbar will be enabled.
     *   Their `onClick` handlers will trigger the corresponding IPC messages.
     *   The existing handler for the `ForceRefresh` message will automatically handle the UI update after a successful import.
-</file_artifact>
-
-<file path="src/Artifacts/A62. DCE - Cycle 157 - Task Tracker.md">
-# Artifact A62: DCE - Cycle 157 - Task Tracker
-# Date Created: C157
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A tracking document for the large number of feedback items and tasks from Cycle 157, used to manage the backlog for subsequent cycles.
-- **Tags:** bugs, tracking, issues, backlog, cycle 157
-
-## 1. Overview
-
-This document lists the feedback and tasks from Cycle 157. It serves as a checklist to ensure all items are addressed and provides a backlog for future development cycles.
-
-## 2. Task List
-
-| ID | Task | Status (C157) | Notes |
-|---|---|---|---|
-| 1 | Fix `A52.2 ... not found` error during prompt generation. | **In Progress** | Critical blocker. Requires passing extension URI to services. |
-| 2 | Improve Cycle 0 prompt to guide AI to "pick from" templates. | **In Progress** | Prompt engineering change in `prompt.service.ts`. |
-| 3 | Verify that parser code (`A52.1`) is injected into prompts. | **To Do** | Review `prompt.service.ts` to ensure this is happening for C1+. |
-| 4 | Fix "Sort by Tokens" to be a persistent toggle. | **In Progress** | Regression. Check state loading logic in `view.tsx`. |
-| 5 | Enable `Ctrl+Z` (undo) in cycle context text fields. | **In Progress** | Check for `onKeyDown` handlers that block default behavior. |
-| 6 | Fix bug where new associated files aren't auto-added. | **To Do** | Likely a state/timing issue in the file watcher/auto-add logic. |
-| 7 | Add a border around the focused response tab for clarity. | **In Progress** | Simple CSS change in `view.scss`. |
-| 8 | Change "Link" button to "Unlink" after a path override is set. | **To Do** | UI state change in `view.tsx` based on `pathOverrides` map. |
-| 9 | Fix "Select All" to enforce atomic selection across all tabs. | **In Progress** | Refactor `handleSelectAllFilesToggle` in `view.tsx`. |
-| 10 | Allow dragging multiple selected files in the main tree view. | **To Do** | Complex feature. Requires significant change to drag/drop logic in `TreeView.tsx`. |
-| 11 | Guide AI to place generated artifacts in `src/Artifacts`. | **In Progress** | Prompt engineering. Update template headers with example paths. |
-| 12 | Prevent `flattened_repo.md` from being auto-added to selection. | **In Progress** | Add to exclusion list in `file-tree.service.ts` watcher. |
-| 13 | Prevent `.vscode` folder from being auto-added to selection. | **In Progress** | Add to exclusion list in `file-tree.service.ts` watcher. |
-| 14 | Ensure `Artifacts` directory files are always flattened first. | **To Do** | Logic change in `flattener.service.ts`. |
-| 15 | Create this tracking artifact. | **Complete** | This artifact serves as the tracker. |
-</file_artifact>
-
-<file path="src/Artifacts/A63. DCE - Cycle 158 - Task Tracker.md">
-# Artifact A63: DCE - Cycle 158 - Task Tracker
-# Date Created: C158
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A tracking document for the large number of feedback items and tasks from Cycle 158, used to manage the backlog for subsequent cycles.
-- **Tags:** bugs, tracking, issues, backlog, cycle 158
-
-## 1. Overview
-
-This document lists the feedback and tasks from Cycle 158. It serves as a checklist to ensure all items are addressed and provides a backlog for future development cycles.
-
-## 2. Task List
-
-| ID | Task | Status (C158) | Notes |
-|---|---|---|---|
-| 1 | Fix adjustable vertical bar in PCPP getting stuck. | **In Progress** | Critical UI bug. Likely a stale state closure in `view.tsx` event handlers. |
-| 2 | Add navigation to/from the Cycle 0 "Project Plan" view. | **In Progress** | High-impact UX. Requires UI buttons and logic changes in `view.tsx` and `OnboardingView.tsx`. |
-| 3 | Guide AI to research AI-generated content in competitive analysis. | **In Progress** | Simple documentation update to `T12. Template - Competitive Analysis.md`. |
-| 4 | Create a "Setup Developer Environment" template artifact. | **In Progress** | New artifact `T16` to be created and added to `A0`. |
-| 5 | Fix focused tab border to highlight any active tab. | **In Progress** | CSS fix in `view.scss`. The selector is likely too specific. |
-| 6 | Open `prompt.md` instead of `flattened_repo.md` after generation. | **In Progress** | Backend change in `prompt.service.ts` to call the open file service. |
-| 7 | Repurpose the initial `A0` file into a valuable `README.md`. | **In Progress** | Core workflow change. Requires new `A72` artifact, and changes to `prompt.service.ts` and `history.service.ts`. |
-</file_artifact>
-
-<file path="src/Artifacts/A64. DCE - Cycle 159 - Task Tracker.md">
-# Artifact A64: DCE - Cycle 159 - Task Tracker
-# Date Created: C159
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A tracking document for the feedback items and tasks from Cycle 159, used to manage the backlog for subsequent cycles.
-- **Tags:** bugs, tracking, issues, backlog, cycle 159
-
-## 1. Overview
-
-This document lists the feedback and tasks from Cycle 159. It serves as a checklist to ensure all items are addressed.
-
-## 2. Task List
-
-| ID | Task | Status (C159) | Notes |
-|---|---|---|---|
-| 1 | Remove resizable vertical bar in PCPP and make it static. | **In Progress** | Recurring UI bug. Will remove `onMouseDown` and related logic/styles. |
-| 2 | Include `src/Artifacts/README.md` in the initial `prompt.md` file. | **In Progress** | Workflow enhancement. Modify `generateCycle0Prompt` in `prompt.service.ts`. |
-| 3 | Make "Automatically add new files to selection" enabled by default. | **In Progress** | Simple change to default value in `selection.service.ts`. |
-| 4 | Fix PCPP onboarding check to be based on `README.md` existence. | **In Progress** | Critical workflow bug. Modify `isFreshEnvironment` check in `history.service.ts`. |
-| 5 | Add a visual highlight to the "Sort" button when it is active. | **In Progress** | UI polish. Requires conditional class in `view.tsx` and new style in `view.scss`. |
-| 6 | Fix race condition causing "auto-add" to fail for multiple files. | **In Progress** | Critical bug. Requires implementing a queuing mechanism in `file-tree.service.ts`. |
 </file_artifact>
 
 <file path="src/Artifacts/A65. DCE - Universal Task Checklist.md">
@@ -8027,70 +7881,6 @@ Once a working pattern is identified in a test component:
 1.  **Codify Findings:** The successful pattern and the root cause of the failure will be documented in `A11. DCE - Regression Case Studies`.
 2.  **Integrate Solution:** The original `NumberedTextarea.tsx` component will be refactored to use the successful pattern.
 3.  **Remove Test Artifacts:** The test harness UI and the `TestPane*.tsx` component files will be removed from the project.
-</file_artifact>
-
-<file path="src/Artifacts/A76. DCE - Word Wrap Line Numbering Challenges.md">
-# Artifact A76: DCE - Word Wrap Line Numbering Challenges
-# Date Created: C181
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** Explains the technical complexity of implementing line numbers that accurately reflect visual word wrapping in a textarea component.
-- **Tags:** documentation, technical debt, ui, ux, word wrap, line numbers
-
-## 1. Problem Statement
-
-The user has requested that the line numbers in the `NumberedTextarea` component should respect word wrapping. Currently, the component counts lines based on newline characters (`\n`). This means a single logical line that visually wraps into three lines in the UI still only receives one line number. The user correctly points out that this is not ideal.
-
-This document explains why this seemingly simple feature is technically complex to implement in a standard HTML `<textarea>` and outlines potential solutions.
-
-## 2. The Core Challenge: Logical vs. Visual Lines
-
-The fundamental issue is the difference between how a `<textarea>` handles content versus how the browser renders it.
-
-*   **Logical Lines:** The `<textarea>` element's `value` is a simple string. The only concept of a "line" it has is the presence of a newline character (`\n`). When we split the string by `\n`, we are counting these logical lines. This is what our current implementation does, and it's fast and simple.
-
-*   **Visual Lines:** Word wrapping is a purely visual phenomenon handled by the browser's rendering engine. The browser calculates how many words fit on a line based on the element's width, font size, font family, letter spacing, and word spacing. It then visually breaks the line and renders the overflow text below. **Crucially, the browser does not expose a simple API to ask, "How many visual lines are you currently rendering for this text?"**
-
-Because we cannot directly query the rendered line count, we must resort to indirect methods to calculate it.
-
-## 3. Potential Solutions & Their Complexity
-
-Here are the common approaches to solving this problem, each with its own trade-offs.
-
-### Solution A: The Hidden `div` Measurement Technique
-
-This is the most common and reliable method.
-
-1.  **How it Works:**
-    *   Create a hidden `div` element off-screen or with `visibility: hidden`.
-    *   Apply the *exact same* CSS styles to this `div` as the `<textarea>` (width, font, padding, etc.).
-    *   Copy the content of the `<textarea>` into the `innerHTML` of the hidden `div`.
-    *   Calculate the number of visual lines by dividing the `scrollHeight` of the hidden `div` by its `line-height`.
-
-2.  **Complexity & Downsides:**
-    *   **Performance:** This calculation must be run on every single keystroke, as any character change could affect word wrapping. Copying large amounts of text into the DOM and forcing a browser re-layout on every key press can be performance-intensive and may cause input lag.
-    *   **Fragility:** The CSS styles must be perfectly synchronized. Any discrepancy in padding, border, font-size, etc., will result in an incorrect calculation.
-    *   **Implementation:** Requires careful DOM manipulation within our React component, managing refs to both the textarea and the hidden div, and ensuring the calculation is efficient.
-
-### Solution B: Using a Full-Fledged Code Editor Component
-
-Instead of building our own, we could replace the `<textarea>` with a lightweight, embeddable code editor library.
-
-1.  **How it Works:**
-    *   Integrate a library like **CodeMirror** or **Monaco Editor** (the editor that powers VS Code itself, though it's much heavier).
-    *   These components are not simple textareas; they are complete editing surfaces that render each line individually. Because they control the rendering process, they have full knowledge of visual lines and can provide accurate line numbering out of the box.
-
-2.  **Complexity & Downsides:**
-    *   **Bundle Size:** These libraries are significantly larger than a simple React component, which would increase the extension's load time.
-    *   **Integration:** Integrating them into our existing React and VS Code Webview architecture can be complex, requiring custom wrappers and careful handling of the component's lifecycle.
-    *   **Overkill:** For a simple context input field, using a full code editor might be architectural overkill.
-
-## 4. Conclusion & Path Forward
-
-The user's request is valid and would be a great UX improvement. However, due to the performance and implementation complexities described above, this feature is considered a significant piece of technical debt that requires a dedicated cycle to solve correctly.
-
-The current priority is to fix the more critical usability bugs like scrolling, focus management, and highlighting. Once the component is stable, we can revisit this challenge and dedicate a future cycle to implementing one of the more advanced solutions above.
 </file_artifact>
 
 <file path="src/Artifacts/A77. DCE - Monaco Editor Replacement Plan.md">
@@ -18174,935 +17964,6 @@ Development in the DCE is organized into **Cycles**. You are currently in the ea
 This structured, iterative process helps maintain project quality and ensures that both human and AI developers are always aligned with the project's goals.
 </file_artifact>
 
-<file path="src/Artifacts/T1. Template - Master Artifact List.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A0-Master-Artifact-List.md"></file_artifact> tags.
--->
-# Artifact T1: Template - Master Artifact List
-# Date Created: C139
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A generic template for a Master Artifact List, to be used as static context in the Cycle 0 prompt.
-- **Tags:** template, cycle 0, documentation, project setup
-
-## 1. Purpose
-
-This file serves as the definitive, parseable list of all documentation artifacts for your project. Maintaining this list is crucial for organizing project knowledge and ensuring that both human developers and AI assistants have a clear map of the "Source of Truth" documents.
-
-## 2. Formatting Rules for Parsing
-
-*   Lines beginning with `#` are comments and are ignored.
-*   `##` denotes a major category header and is ignored.
-*   `###` denotes an artifact entry. The text following it is the artifact's full name and ID.
-*   Lines beginning with `- **Description:**` provide context for the project.
-*   Lines beginning with `- **Tags:**` provide keywords for Inference.
-
-## 3. Example Structure
-
-## I. Project Planning & Design
-
-### A1. [Your Project Name] - Project Vision and Goals
-- **Description:** High-level overview of the project, its purpose, and the development plan.
-- **Tags:** project vision, goals, scope, planning
-
-### A2. [Your Project Name] - Phase 1 - Requirements & Design
-- **Description:** Detailed functional and technical requirements for the first phase of the project.
-- **Tags:** requirements, design, phase 1, features
-</file_artifact>
-
-<file path="src/Artifacts/T2. Template - Project Vision and Goals.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A1-Project-Vision-and-Goals.md"></file_artifact> tags.
--->
-# Artifact T2: Template - Project Vision and Goals
-# Date Created: C139
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A generic template for a Project Vision and Goals document.
-- **Tags:** template, cycle 0, documentation, project setup
-
-## 1. Project Vision
-
-The vision of **[Your Project Name]** is to **[State the core problem you are solving and the ultimate goal of the project]**. It aims to provide a **[brief description of the product or system]** that will **[describe the key benefit or value proposition]**.
-
-## 2. High-Level Goals & Phases
-
-The project will be developed in distinct phases to ensure an iterative and manageable workflow.
-
-### Phase 1: [Name of Phase 1, e.g., Core Functionality]
-
-The goal of this phase is to establish the foundational elements of the project.
--   **Core Functionality:** [Describe the most critical feature to be built first].
--   **Outcome:** [Describe the state of the project at the end of this phase, e.g., "A user can perform the core action of X"].
-
-### Phase 2: [Name of Phase 2, e.g., Feature Expansion]
-
-This phase will build upon the foundation of Phase 1 by adding key features that enhance the user experience.
--   **Core Functionality:** [Describe the next set of important features].
--   **Outcome:** [Describe the state of the project at the end of this phase].
-
-### Phase 3: [Name of Phase 3, e.g., Scalability and Polish]
-
-This phase focuses on refining the product, improving performance, and ensuring it is ready for a wider audience.
--   **Core Functionality:** [Describe features related to performance, security, or advanced user interactions].
--   **Outcome:** [Describe the final, polished state of the project].
-</file_artifact>
-
-<file path="src/Artifacts/T3. Template - Phase 1 Requirements & Design.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A2-Phase1-Requirements.md"></file_artifact> tags.
--->
-# Artifact T3: Template - Phase 1 Requirements & Design
-# Date Created: C139
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A generic template for a requirements and design document.
-- **Tags:** template, cycle 0, documentation, project setup
-
-## 1. Overview
-
-This document outlines the detailed requirements for Phase 1 of **[Your Project Name]**. The primary goal of this phase is to implement the core functionality as defined in the Project Vision.
-
-## 2. Functional Requirements
-
-| ID | Requirement | User Story | Acceptance Criteria |
-|---|---|---|---|
-| FR-01 | **[Feature Name]** | As a [user type], I want to [perform an action], so that [I can achieve a goal]. | - [Criterion 1: A specific, testable outcome] <br> - [Criterion 2: Another specific, testable outcome] |
-| FR-02 | **[Another Feature Name]** | As a [user type], I want to [perform an action], so that [I can achieve a goal]. | - [Criterion 1] <br> - [Criterion 2] |
-
-## 3. Non-Functional Requirements
-
-| ID | Requirement | Description |
-|---|---|---|
-| NFR-01 | **Performance** | The core action of [describe action] should complete in under [time, e.g., 500ms]. |
-| NFR-02 | **Usability** | The user interface should be intuitive and follow standard design conventions for [platform, e.g., web applications]. |
-
-## 4. High-Level Design
-
-The implementation of Phase 1 will involve the following components:
--   **[Component A]:** Responsible for [its primary function].
--   **[Component B]:** Responsible for [its primary function].
--   **[Data Model]:** The core data will be structured as [describe the basic data structure].
-</file_artifact>
-
-<file path="src/Artifacts/T4. Template - Technical Scaffolding Plan.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A3-Technical-Scaffolding-Plan.md"></file_artifact> tags.
--->
-# Artifact T4: Template - Technical Scaffolding Plan
-# Date Created: C139
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A generic template for a technical scaffolding plan.
-- **Tags:** template, cycle 0, documentation, project setup
-
-## 1. Overview
-
-This document outlines the proposed technical scaffolding and file structure for **[Your Project Name]**. This plan serves as a blueprint for the initial project setup, ensuring a clean, scalable, and maintainable architecture from the start.
-
-## 2. Technology Stack
-
--   **Language:** [e.g., TypeScript]
--   **Framework/Library:** [e.g., React, Node.js with Express]
--   **Styling:** [e.g., SCSS, TailwindCSS]
--   **Bundler:** [e.g., Webpack, Vite]
-
-## 3. Proposed File Structure
-
-The project will adhere to a standard, feature-driven directory structure:
-
-```
-.
-├── src/
-│   ├── components/       # Reusable UI components (e.g., Button, Modal)
-│   │
-│   ├── features/         # Feature-specific modules
-│   │   └── [feature-one]/
-│   │       ├── index.ts
-│   │       └── components/
-│   │
-│   ├── services/         # Core backend or client-side services (e.g., api.service.ts)
-│   │
-│   ├── types/            # Shared TypeScript type definitions
-│   │
-│   └── main.ts           # Main application entry point
-│
-├── package.json          # Project manifest and dependencies
-└── tsconfig.json         # TypeScript configuration
-```
-
-## 4. Key Architectural Concepts
-
--   **Separation of Concerns:** The structure separates UI components, feature logic, and core services.
--   **Component-Based UI:** The UI will be built by composing small, reusable components.
--   **Service Layer:** Business logic and external communication (e.g., API calls) will be encapsulated in services to keep components clean.
--   **Strong Typing:** TypeScript will be used throughout the project to ensure type safety and improve developer experience.
-</file_artifact>
-
-<file path="src/Artifacts/T5. Template - Target File Structure.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A5-Target-File-Structure.md"></file_artifact> tags.
--->
-# Artifact T5: Template - Target File Structure
-# Date Created: C139
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A generic template for a target file structure document.
-- **Tags:** template, cycle 0, documentation, project setup
-
-## 1. Overview
-
-This document provides a visual representation of the file structure that the `T6. Template - Initial Scaffolding Deployment Script` will create. It is based on the architecture defined in `T4. Template - Technical Scaffolding Plan`.
-
-## 2. File Tree
-
-```
-[Your Project Name]/
-├── .gitignore
-├── package.json
-├── tsconfig.json
-└── src/
-    ├── components/
-    │   └── placeholder.ts
-    ├── features/
-    │   └── placeholder.ts
-    ├── services/
-    │   └── placeholder.ts
-    ├── types/
-    │   └── index.ts
-    └── main.ts
-```
-</file_artifact>
-
-<file path="src/Artifacts/T6. Template - Initial Scaffolding Deployment Script.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A6-Scaffolding-Script.md"></file_artifact> tags.
--->
-# Artifact T6: Template - Initial Scaffolding Deployment Script (DEPRECATED)
-# Date Created: C139
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** (Deprecated) A generic template for a scaffolding deployment script. This is obsolete.
-- **Tags:** template, cycle 0, documentation, project setup, deprecated
-
-## 1. Overview
-
-This artifact contains a simple Node.js script (`deploy_scaffold.js`). Its purpose is to automate the creation of the initial project structure for **[Your Project Name]**, as outlined in `T5. Template - Target File Structure`.
-
-**Note:** This approach is now considered obsolete. The preferred method is to have the AI generate the necessary files directly in its response.
-
-## 2. How to Use
-
-1.  Save the code below as `deploy_scaffold.js` in your project's root directory.
-2.  Open a terminal in that directory.
-3.  Run the script using Node.js: `node deploy_scaffold.js`
-
-## 3. Script: `deploy_scaffold.js`
-
-```javascript
-const fs = require('fs').promises;
-const path = require('path');
-
-const filesToCreate = [
-    { path: 'package.json', content: '{ "name": "my-new-project", "version": "0.0.1" }' },
-    { path: 'tsconfig.json', content: '{ "compilerOptions": { "strict": true } }' },
-    { path: '.gitignore', content: 'node_modules\ndist' },
-    { path: 'src/main.ts', content: '// Main application entry point' },
-    { path: 'src/components/placeholder.ts', content: '// Reusable components' },
-    { path: 'src/features/placeholder.ts', content: '// Feature modules' },
-    { path: 'src/services/placeholder.ts', content: '// Core services' },
-    { path: 'src/types/index.ts', content: '// Shared types' },
-];
-
-async function deployScaffold() {
-    console.log('Deploying project scaffold...');
-    const rootDir = process.cwd();
-
-    for (const file of filesToCreate) {
-        const fullPath = path.join(rootDir, file.path);
-        const dir = path.dirname(fullPath);
-
-        try {
-            await fs.mkdir(dir, { recursive: true });
-            await fs.writeFile(fullPath, file.content, 'utf-8');
-            console.log(`✅ Created: ${file.path}`);
-        } catch (error) {
-            console.error(`❌ Failed to create ${file.path}: ${error.message}`);
-        }
-    }
-    console.log('\n🚀 Scaffold deployment complete!');
-}
-
-deployScaffold();
-```
-</file_artifact>
-
-<file path="src/Artifacts/T7. Template - Development and Testing Guide.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A7-Dev-and-Testing-Guide.md"></file_artifact> tags.
--->
-# Artifact T7: Template - Development and Testing Guide
-# Date Created: C139
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A generic template for a development and testing guide.
-- **Tags:** template, cycle 0, documentation, project setup
-
-## 1. Purpose
-
-This guide provides the standard procedure for running, debugging, and testing the **[Your Project Name]** application locally.
-
-## 2. Development Workflow
-
-### Step 1: Install Dependencies
-
-Ensure all project dependencies are installed using npm.
-```bash
-npm install
-```
-
-### Step 2: Start the Development Server
-
-To compile the code and watch for changes, run the following command:```bash
-npm run watch
-```
-This will start the development server and automatically recompile your code when you save a file.
-
-### Step 3: Running the Application
-
-[Describe the specific steps to launch the application. For a VS Code extension, this would involve pressing F5 to launch the Extension Development Host. For a web app, it would be opening a browser to `http://localhost:3000`.]
-
-### Step 4: Debugging
-
-You can set breakpoints directly in your source code. [Describe how to attach a debugger. For a VS Code extension, this is automatic when launched with F5.]
-
-## 3. Testing
-
-The project is configured with a testing framework. To run the test suite, use the following command:
-```bash
-npm run test
-```
-This will execute all test files located in the project and report the results to the console.
-</file_artifact>
-
-<file path="src/Artifacts/T8. Template - Regression Case Studies.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A8-Regression-Case-Studies.md"></file_artifact> tags.
--->
-# Artifact T8: Template - Regression Case Studies
-# Date Created: C141
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A generic template for a regression case studies document, promoting development best practices.
-- **Tags:** template, cycle 0, documentation, project setup
-
-## 1. Purpose
-
-This document serves as a living record of persistent or complex bugs that have recurred during development. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase.
-
-## 2. Case Studies
-
----
-
-### Case Study 001: [Name of the Bug]
-
--   **Artifacts Affected:** [List of files, e.g., `src/components/MyComponent.tsx`, `src/services/api.service.ts`]
--   **Cycles Observed:** [e.g., C10, C15]
--   **Symptom:** [Describe what the user sees. e.g., "When a user clicks the 'Save' button, the application crashes silently."]
--   **Root Cause Analysis (RCA):** [Describe the underlying technical reason for the bug. e.g., "The API service was not correctly handling a null response from the server. A race condition occurred where the UI component would unmount before the API promise resolved, leading to a state update on an unmounted component."]
--   **Codified Solution & Best Practice:**
-    1.  [Describe the specific code change, e.g., "The API service was updated to always return a default object instead of null."]
-    2.  [Describe the pattern or best practice to follow, e.g., "All API calls made within a React component's `useEffect` hook must include a cleanup function to cancel the request or ignore the result if the component unmounts."]
----
-</file_artifact>
-
-<file path="src/Artifacts/T9. Template - Logging and Debugging Guide.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A9-Logging-and-Debugging.md"></file_artifact> tags.
--->
-# Artifact T9: Template - Logging and Debugging Guide
-# Date Created: C141
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A generic template for a logging and debugging guide.
-- **Tags:** template, cycle 0, documentation, project setup
-
-## 1. Purpose
-
-This document provides instructions on how to access and use the logging features built into the project. Effective logging is crucial for diagnosing performance issues, tracking down bugs, and understanding the application's behavior during development.
-
-## 2. Log Locations
-
-### Location 1: The Browser Developer Console
-
-This is where you find logs from the **frontend**.
-
--   **What you'll see here:** `console.log()` statements from React components and client-side scripts.
--   **Where to find it:** Open your browser, right-click anywhere on the page, select "Inspect", and navigate to the "Console" tab.
-
-### Location 2: The Server Terminal
-
-This is where you find logs from the **backend** (the Node.js process).
-
--   **What you'll see here:** `console.log()` statements from your server-side code, API handlers, and services.
--   **Where to find it:** The terminal window where you started the server (e.g., via `npm start`).
-
-## 3. Tactical Debugging with Logs
-
-When a feature is not working as expected, the most effective debugging technique is to add **tactical logs** at every step of the data's journey to pinpoint where the process is failing.
-
-### Example Data Flow for Debugging:
-
-1.  **Frontend Component (`MyComponent.tsx`):** Log the user's input right before sending it.
-    `console.log('[Component] User clicked save. Sending data:', dataToSend);`
-2.  **Frontend Service (`api.service.ts`):** Log the data just before it's sent over the network.
-    `console.log('[API Service] Making POST request to /api/data with body:', body);`
-3.  **Backend Route (`server.ts`):** Log the data as soon as it's received by the server.
-    `console.log('[API Route] Received POST request on /api/data with body:', req.body);`
-4.  **Backend Service (`database.service.ts`):** Log the data just before it's written to the database.
-    `console.log('[DB Service] Attempting to write to database:', data);`
-
-By following the logs through this chain, you can identify exactly where the data becomes corrupted, is dropped, or causes an error.
-</file_artifact>
-
-<file path="src/Artifacts/T10. Template - Feature Plan Example.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A10-Feature-Plan-Example.md"></file_artifact> tags.
--->
-# Artifact T10: Template - Feature Plan Example
-# Date Created: C141
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A generic template for a feature plan, using a right-click context menu as an example.
-- **Tags:** template, cycle 0, documentation, project setup
-
-## 1. Overview & Goal
-
-This document outlines the plan for implementing a standard right-click context menu. The goal is to provide essential management operations directly within the application, reducing the need for users to switch contexts for common tasks.
-
-## 2. User Stories
-
-| ID | User Story | Acceptance Criteria |
-|---|---|---|
-| US-01 | **Copy Item Name** | As a user, I want to right-click an item and copy its name to my clipboard, so I can easily reference it elsewhere. | - Right-clicking an item opens a context menu. <br> - The menu contains a "Copy Name" option. <br> - Selecting the option copies the item's name string to the system clipboard. |
-| US-02 | **Rename Item** | As a user, I want to right-click an item and rename it, so I can correct mistakes or update its label. | - The context menu contains a "Rename" option. <br> - Selecting it turns the item's name into an editable input field. <br> - Pressing Enter or clicking away saves the new name. |
-| US-03 | **Delete Item** | As a user, I want to right-click an item and delete it, so I can remove unnecessary items. | - The context menu contains a "Delete" option. <br> - Selecting it shows a confirmation dialog to prevent accidental deletion. <br> - Upon confirmation, the item is removed. |
-
-## 3. Technical Implementation Plan
-
--   **State Management:** Introduce new state to manage the context menu's visibility and position: `const [contextMenu, setContextMenu] = useState<{ x: number; y: number; item: any } | null>(null);`.
--   **Event Handling:** Add an `onContextMenu` handler to the item element. This will prevent the default browser menu and set the state to show our custom menu at the event's coordinates.
--   **New Menu Component:** Render a custom context menu component conditionally based on the `contextMenu` state. It will contain the options defined in the user stories.
--   **Action Handlers:** Implement the functions for `handleRename`, `handleDelete`, etc. These will be called by the menu items' `onClick` handlers.
--   **Overlay:** An overlay will be added to the entire screen when the menu is open. Clicking this overlay will close the menu.
-</file_artifact>
-
-<file path="src/Artifacts/T11. Template - Implementation Roadmap.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A11-Implementation-Roadmap.md"></file_artifact> tags.
--->
-# Artifact T11: Template - Implementation Roadmap
-# Date Created: C152
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A generic template for an implementation roadmap document, guiding the development process.
-- **Tags:** template, cycle 0, documentation, project setup, roadmap
-
-## 1. Overview & Goal
-
-This document provides a clear, step-by-step roadmap for the implementation of **[Your Project Name]**. This roadmap breaks the project vision into smaller, manageable, and testable steps. The goal is to build the functionality incrementally, ensuring a stable foundation at each stage.
-
-## 2. Implementation Steps
-
-### Step 1: Foundational Setup & Core Logic
-
--   **Goal:** Create the basic project structure and implement the single most critical feature.
--   **Tasks:**
-    1.  **Scaffolding:** Set up the initial file and directory structure based on the technical plan.
-    2.  **Core Data Model:** Define the primary data structures for the application.
-    3.  **Implement [Core Feature]:** Build the first, most essential piece of functionality (e.g., the main user action).
--   **Outcome:** A runnable application with the core feature working in a basic form.
-
-### Step 2: UI Development & User Interaction
-
--   **Goal:** Build out the primary user interface and make the application interactive.
--   **Tasks:**
-    1.  **Component Library:** Create a set of reusable UI components (buttons, inputs, etc.).
-    2.  **Main View:** Construct the main application view that users will interact with.
-    3.  **State Management:** Implement robust state management to handle user input and data flow.
--   **Outcome:** A visually complete and interactive user interface.
-
-### Step 3: Feature Expansion
-
--   **Goal:** Add secondary features that build upon the core functionality.
--   **Tasks:**
-    1.  **Implement [Feature A]:** Build the next most important feature.
-    2.  **Implement [Feature B]:** Build another key feature.
-    3.  **Integration:** Ensure all new features are well-integrated with the core application.
--   **Outcome:** A feature-complete application ready for polishing.
-
-### Step 4: Polish, Testing, and Deployment
-
--   **Goal:** Refine the application, fix bugs, and prepare for release.
--   **Tasks:**
-    1.  **UI/UX Polish:** Address any minor layout, styling, or interaction issues.
-    2.  **Testing:** Conduct thorough testing to identify and fix bugs.
-    3.  **Documentation:** Write user-facing documentation and guides.
-    4.  **Deployment:** Package and deploy the application.
--   **Outcome:** A stable, polished, and documented application.
-</file_artifact>
-
-<file path="src/Artifacts/T12. Template - Competitive Analysis.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/A12. [Project Name] - Competitive Analysis.md">...</file_artifact> tags.
--->
-# Artifact T12: [Project Name] - Competitive Analysis Template
-# Date Created: C152
-# Author: AI Model & Curator
-# Updated on: C158 (Add guidance for researching AI-generated content)
-
-- **Key/Value for A0:**
-- **Description:** A generic template for a competitive analysis document, used for feature ideation.
-- **Tags:** template, cycle 0, documentation, project setup, research
-
-## 1. Overview
-
-This document provides an analysis of existing tools and products that solve a similar problem to **[Project Name]**. The goal is to identify common features, discover innovative ideas, and understand the competitive landscape to ensure our project has a unique value proposition.
-
-## 2. Research Summary
-
-A search for "[keywords related to your project's core problem]" reveals several existing solutions. The market appears to be [describe the market: mature, emerging, niche, etc.]. The primary competitors or inspirational projects are [Competitor A], [Competitor B], and [Tool C].
-
-The key pain point these tools address is [describe the common problem they solve]. The general approach is [describe the common solution pattern].
-
-## 3. Existing Tools & Inspirations
-
-| Tool / Product | Relevant Features | How It Inspires Your Project |
-| :--- | :--- | :--- |
-| **[Competitor A]** | - [Feature 1 of Competitor A] <br> - [Feature 2 of Competitor A] | This tool validates the need for [core concept]. Its approach to [Feature 1] is a good model, but we can differentiate by [your unique approach]. |
-| **[Competitor B]** | - [Feature 1 of Competitor B] <br> - [Feature 2 of Competitor B] | The user interface of this tool is very polished. We should aim for a similar level of usability. Its weakness is [describe a weakness you can exploit]. |
-| **[Tool C]** | - [Feature 1 of Tool C] | This tool has an innovative feature, [Feature 1], that we had not considered. We should evaluate if a similar feature would fit into our project's scope. |
-| **AI-Generated Projects** | - [Novel feature from an AI-generated example] | Researching other seemingly AI-generated solutions for similar problems can reveal novel approaches or features that are not yet common in human-developed tools. This can be a source of cutting-edge ideas. |
-
-## 4. Feature Ideas & Opportunities
-
-Based on the analysis, here are potential features and strategic opportunities for **[Project Name]**:
-
-| Feature Idea | Description |
-| :--- | :--- |
-| **[Differentiating Feature]** | This is a key feature that none of the competitors offer. It would allow users to [describe the benefit] and would be our primary unique selling proposition. |
-| **[Improvement on Existing Feature]** | Competitor A has [Feature 1], but it's slow. We can implement a more performant version by [your technical advantage]. |
-| **[User Experience Enhancement]** | Many existing tools have a complex setup process. We can win users by making our onboarding experience significantly simpler and more intuitive. |
-</file_artifact>
-
-<file path="src/Artifacts/T13. Template - Refactoring Plan.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A13-Refactoring-Plan.md"></file_artifact> tags.
--->
-# Artifact T13: Template - Refactoring Plan
-# Date Created: C152
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A generic template for a refactoring plan, guiding users to consider constraints like token count.
-- **Tags:** template, cycle 0, documentation, project setup, refactor
-
-## 1. Problem Statement
-
-The file `[path/to/problematic/file.ts]` has become difficult to maintain due to [e.g., its large size, high complexity, mixing of multiple responsibilities]. This is leading to [e.g., slower development, increased bugs, high token count for LLM context].
-
-## 2. Refactoring Goals
-
-1.  **Improve Readability:** Make the code easier to understand and follow.
-2.  **Reduce Complexity:** Break down large functions and classes into smaller, more focused units.
-3.  **Increase Maintainability:** Make it easier to add new features or fix bugs in the future.
-4.  **Constraint:** The primary constraint for this refactor is to **reduce the token count** of the file(s) to make them more manageable for AI-assisted development.
-
-## 3. Proposed Refactoring Plan
-
-The monolithic file/class will be broken down into the following smaller, more focused modules/services:
-
-### 3.1. New Service/Module A: `[e.g., DataProcessingService.ts]`
-
--   **Responsibility:** This service will be responsible for all logic related to [e.g., processing raw data].
--   **Functions/Methods to move here:**
-    -   `functionA()`
-    -   `functionB()`
-
-### 3.2. New Service/Module B: `[e.g., ApiClientService.ts]`
-
--   **Responsibility:** This service will encapsulate all external API communication.
--   **Functions/Methods to move here:**
-    -   `fetchDataFromApi()`
-    -   `postDataToApi()`
-
-### 3.3. Original File (`[e.g., MainController.ts]`):
-
--   **Responsibility:** The original file will be simplified to act as a coordinator, orchestrating calls to the new services.
--   **Changes:**
-    -   Remove the moved functions.
-    -   Import and instantiate the new services.
-    -   Update the main logic to delegate work to the appropriate service.
-
-## 4. Benefits
-
--   **Reduced Token Count:** The original file's token count will be significantly reduced.
--   **Improved Maintainability:** Each new service has a single, clear responsibility.
--   **Easier Testing:** The smaller, focused services will be easier to unit test in isolation.
-</file_artifact>
-
-<file path="src/Artifacts/T14. Template - GitHub Repository Setup Guide.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/A14. [Project Name] - GitHub Repository Setup Guide.md">...</file_artifact> tags.
--->
-# Artifact T14: [Project Name] - GitHub Repository Setup Guide Template
-# Date Created: C152
-# Author: AI Model & Curator
-# Updated on: C160 (Add Sample Development Workflow section)
-
-- **Key/Value for A0:**
-- **Description:** A generic template for a guide on setting up a new project with Git and GitHub, including a sample workflow.
-- **Tags:** template, cycle 0, git, github, version control, workflow
-
-## 1. Overview
-
-This guide provides the necessary commands to turn your local project folder into a Git repository, link it to a new repository on GitHub, and outlines a sample workflow for using Git alongside the Data Curation Environment (DCE).
-
-## 2. Prerequisites
-
-*   You have `git` installed on your machine.
-*   You have a GitHub account.
-
-## 3. Step-by-Step Setup
-
-### Step 1: Create a New Repository on GitHub
-
-1.  Go to [github.com](https://github.com) and log in.
-2.  In the top-right corner, click the `+` icon and select **"New repository"**.
-3.  **Repository name:** Enter a name for your project (e.g., `my-new-project`).
-4.  **Description:** (Optional) Provide a brief description of your project.
-5.  Choose **"Private"** or **"Public"**.
-6.  **IMPORTANT:** Do **not** initialize the repository with a `README`, `.gitignore`, or `license`. We will be pushing our existing files, and this will prevent conflicts.
-7.  Click **"Create repository"**.
-
-GitHub will now show you a page with command-line instructions. We will use the section titled **"...or push an existing repository from the command line"**.
-
-### Step 2: Initialize Git in Your Local Project
-
-Open a terminal and navigate to your project's root directory. Then, run the following commands one by one.
-
-1.  **Initialize the repository:**
-    ```bash
-    git init
-    ```
-
-2.  **Add all existing files:**
-    ```bash
-    git add .
-    ```
-
-3.  **Create the first commit:**
-    ```bash
-    git commit -m "Initial commit"
-    ```
-
-4.  **Rename the default branch to `main`:**
-    ```bash
-    git branch -M main
-    ```
-
-### Step 3: Link and Push to GitHub
-
-1.  **Add the remote repository:** Replace the placeholder URL with the one from your GitHub repository page.
-    ```bash
-    git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
-    ```
-
-2.  **Push your local `main` branch to GitHub:**
-    ```bash
-    git push -u origin main
-    ```
-
-After these commands complete, refresh your GitHub repository page. You should see all of your project files.
-
-## 4. Sample Development Workflow with DCE and Git
-
-Git is a powerful tool for managing the iterative changes produced by the DCE. It allows you to quickly test an AI's proposed solution and revert it cleanly if it doesn't work, without losing your place.
-
-### Step 1: Start with a Clean State
-Before starting a new cycle, ensure your working directory is clean. You can check this with `git status`. All your previous changes should be committed.
-
-### Step 2: Generate a Prompt and Get Responses
-Use the DCE to generate a `prompt.md` file. Use this prompt to get multiple responses (e.g., 4 to 8) from your preferred AI model.
-
-### Step 3: Paste and Parse
-Paste the responses into the Parallel Co-Pilot Panel and click "Parse All".
-
-### Step 4: Accept and Test
-1.  Review the responses and find one that looks promising.
-2.  Select that response and use the **"Accept Selected Files"** button to write the AI's proposed changes to your workspace.
-3.  Now, compile and test the application. Does it work? Does it have errors?
-
-### Step 5: The "Restore" Loop
-This is where Git becomes a powerful part of the workflow.
-
-*   **If the changes are bad (e.g., introduce bugs, don't work as expected):**
-    1.  Open the terminal in VS Code.
-    2.  Run the command: `git restore .`
-    3.  This command instantly discards all uncommitted changes in your workspace, reverting your files to the state of your last commit.
-    4.  You are now back to a clean state and can go back to the Parallel Co-Pilot Panel, select a *different* AI response, and click "Accept Selected Files" again to test the next proposed solution.
-
-*   **If the changes are good:**
-    1.  Open the Source Control panel in VS Code.
-    2.  Stage the changes (`git add .`).
-    3.  Write a commit message (e.g., "Feat: Implement user login via AI suggestion C15").
-    4.  Commit the changes.
-    5.  You are now ready to start the next development cycle from a new, clean state.
-
-This iterative loop of `accept -> test -> restore` allows you to rapidly audition multiple AI-generated solutions without fear of corrupting your codebase.
-</file_artifact>
-
-<file path="src/Artifacts/T15. Template - A-B-C Testing Strategy for UI Bugs.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A15-ABC-Testing-Strategy.md"></file_artifact> tags.
--->
-# Artifact T15: Template - A-B-C Testing Strategy for UI Bugs
-# Date Created: C154
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A generic template for a guide on using the A-B-C testing pattern to diagnose UI bugs.
-- **Tags:** template, cycle 0, process, debugging, troubleshooting
-
-## 1. Overview & Goal
-
-When a user interface (UI) bug, particularly related to event handling (`onClick`, `onDrop`, etc.), proves resistant to conventional debugging, it often indicates a complex root cause. Continuously attempting small fixes on the main, complex component can be inefficient.
-
-The goal of the **A-B-C Testing Strategy** is to break this cycle by creating a test harness with multiple, simplified, independent test components. Each test component attempts to solve the same basic problem using a slightly different technical approach, allowing for rapid diagnosis.
-
-## 2. The Strategy
-
-### 2.1. Core Principles
-1.  **Preserve the Original:** Never remove existing functionality to build a test case. The original component should remain as the "control" in the experiment.
-2.  **Isolate Variables:** Each test case should be as simple as possible, designed to test a single variable (e.g., raw event handling vs. local state updates).
-3.  **Run in Parallel:** The original component and all test components should be accessible from the same UI (e.g., via tabs) for immediate comparison.
-
-### 2.2. Steps
-1.  **Identify the Core Problem:** Isolate the most fundamental action that is failing (e.g., "A click on a list item is not being registered").
-2.  **Create Test Harness:** Refactor the main view to act as a "test harness" that can switch between the original component and several new test components.
-3.  **Implement Isolated Test Components:** Create new, simple components for each test case.
-    *   **Test A (Barebones):** The simplest possible implementation. Use raw HTML elements with inline event handlers that only log to the console.
-    *   **Test B (Local State):** Introduce state management to test the component's ability to re-render on an event.
-    *   **Test C (Prop-Driven):** Use a child component that calls a function passed down via props, testing the prop-drilling pattern.
-4.  **Analyze Results:** Interact with each tab to see which implementation succeeds, thereby isolating the architectural pattern that is failing.
-
-## 3. Cleanup Process
-
-Once a working pattern is identified in a test component:
-1.  **Codify Findings:** Document the successful pattern and the root cause of the failure.
-2.  **Integrate Solution:** Refactor the original component to use the successful pattern.
-3.  **Remove Test Artifacts:** Delete the test harness UI and the temporary test component files.
-</file_artifact>
-
-<file path="src/Artifacts/T16. Template - Developer Environment Setup Guide.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/A16. [Project Name] - Developer Environment Setup Guide.md">...</file_artifact> tags.
--->
-# Artifact T16: [Project Name] - Developer Environment Setup Guide Template
-# Date Created: C158
-# Author: AI Model & Curator
-# Updated on: C160 (Add section for managing environment variables)
-
-- **Key/Value for A0:**
-- **Description:** A generic template for a guide on setting up a new project's development environment, including OS, tools, and installation steps.
-- **Tags:** template, cycle 0, documentation, project setup, environment
-
-## 1. Overview
-
-This document provides a step-by-step guide for setting up the local development environment required to build and run **[Project Name]**. Following these instructions will ensure that all developers have a consistent and correct setup.
-
-## 2. System Requirements
-
-Before you begin, please ensure your system meets the following requirements. This information is critical for providing the correct commands and troubleshooting steps in subsequent development cycles.
-
--   **Operating System:** [e.g., Windows 11, macOS Sonoma, Ubuntu 22.04]
--   **Package Manager:** [e.g., npm, yarn, pnpm]
--   **Node.js Version:** [e.g., v20.11.0 or later]
--   **Code Editor:** Visual Studio Code (Recommended)
-
-## 3. Required Tools & Software
-
-Please install the following tools if you do not already have them:
-
-1.  **Node.js:** [Provide a link to the official Node.js download page: https://nodejs.org/]
-2.  **Git:** [Provide a link to the official Git download page: https://git-scm.com/downloads]
-3.  **[Any other required tool, e.g., Docker, Python]:** [Link to installation guide]
-
-## 4. Step-by-Step Setup Instructions
-
-### Step 1: Clone the Repository
-
-First, clone the project repository from GitHub to your local machine.
-
-```bash
-# Replace with your repository URL
-git clone https://github.com/your-username/your-project.git
-cd your-project
-```
-
-### Step 2: Install Project Dependencies
-
-Next, install all the necessary project dependencies using your package manager.
-
-```bash
-# For npm
-npm install
-
-# For yarn
-# yarn install
-```
-
-### Step 3: Configure Environment Variables
-
-Create a `.env` file in the root of the project by copying the example file.
-
-```bash
-cp .env.example .env
-```
-
-Now, open the `.env` file and fill in the required environment variables:
--   `API_KEY`: [Description of what this key is for]
--   `DATABASE_URL`: [Description of the database connection string]
-
-### Step 4: Run the Development Server
-
-To start the local development server, run the following command. This will typically compile the code and watch for any changes you make.
-
-```bash
-# For npm
-npm run dev
-
-# For yarn
-# yarn dev
-```
-
-### Step 5: Verify the Setup
-
-Once the development server is running, you should be able to access the application at [e.g., `http://localhost:3000`]. [Describe what the developer should see to confirm that the setup was successful].
-
-## 5. Managing Environment Variables and Secrets
-
-To provide an AI assistant with the necessary context about which environment variables are available without exposing sensitive secrets, follow this best practice:
-
-1.  **Create a `.env.local` file:** Make a copy of your `.env` file and name it `.env.local`.
-2.  **Redact Secret Values:** In the `.env.local` file, replace all sensitive values (like API keys, passwords, or tokens) with the placeholder `[REDACTED]`.
-3.  **Include in Context:** When curating your context for the AI, check the box for the `.env.local` file.
-4.  **Exclude `.env`:** Ensure your `.gitignore` file includes `.env` to prevent your actual secrets from ever being committed to version control.
-
-This allows the AI to see the names of all available constants (e.g., `OPENAI_API_KEY`) so it can write code that uses them correctly, but it never sees the actual secret values.
-</file_artifact>
-
-<file path="src/Artifacts/T17. Template - Universal Task Checklist.md">
-# Artifact A[XX]: [Project Name] - Universal Task Checklist
-# Date Created: C[XX]
-# Author: AI Model & Curator
-# Updated on: C10 (Add guidance for planning next cycle)
-
-- **Key/Value for A0:**
-- **Description:** A generic template for a universal task checklist, designed to organize work by file and complexity.
-- **Tags:** template, process, checklist, task management, planning
-
-## 1. Purpose
-
-This artifact provides a structured, universal format for tracking development tasks, feedback, and bugs. Unlike cycle-specific trackers, this checklist organizes work by the group of files involved in a given task. It also introduces a simple complexity metric based on the total token count of the affected files and an estimation of whether the task will require more than one development cycle to complete.
-
-This file-centric approach helps in planning and prioritizing work, especially in an AI-assisted development workflow where context size (token count) is a primary constraint.
-
-## 2. How to Use
-
--   **Group by File Packages:** Create a new `##` section for each logical task or feature. List all the files that are expected to be modified for this task.
--   **Assign an ID:** Give each task package a unique, simple ID (e.g., `T-1`, `T-2`) for easy reference in feedback.
--   **Estimate Complexity:**
-    -   Calculate the **Total Tokens** for all files in the package. This gives a quantitative measure of the context size.
-    -   Estimate if the task is likely to take **More than one cycle?**. This is a qualitative judgment based on the complexity of the changes required.
--   **List Action Items:** Under each file package, create a checklist of specific actions, bugs to fix, or features to implement.
--   **Add Verification Steps:** After the action items, add a section describing how the curator should test the feature to confirm it is working as expected.
--   **Note on Output Length:** Remember that the maximum output length for a single response is approximately 65,000 tokens. Do not prematurely stop generating files; attempt to complete as many full files as possible within this limit.
--   **Plan for the Future:** Always conclude your task list with a final task to create the checklist for the next cycle (e.g., `T-X: Create A[XX+1] Universal Task Checklist for Cycle [Y+]`). This creates a continuous planning loop.
--   **Keep it Current:** At the beginning of each new cycle, review and update this checklist. Move completed tasks to a "Completed" section, add new tasks based on feedback, and re-prioritize as needed. This ensures the checklist remains a living, accurate reflection of the project's status.
-
----
-
-## Example Task List
-
-## T-1: [Feature Name or Bug Area]
-- **Files Involved:**
-    - `src/path/to/fileA.ts`
-    - `src/path/to/fileB.tsx`
-- **Total Tokens:** [e.g., ~5,500]
-- **More than one cycle?** [e.g., No]
-
-- [ ] **Task (T-ID: 1.1):** [Description of the first action item]
-- [ ] **Bug Fix (T-ID: 1.2):** [Description of the bug to be fixed]
-
-### Verification Steps
-1.  [First verification step]
-2.  **Expected:** [Expected outcome of the first step]
-3.  [Second verification step]
-4.  **Expected:** [Expected outcome of the second step]
-
-## T-2: Plan for Next Cycle
-- **Files Involved:**
-    - `src/Artifacts/A[XX+1]-New-Checklist.md`
-- **Total Tokens:** [e.g., ~500]
-- **More than one cycle?** No
-
-- [ ] **Task (T-ID: 2.1):** Create the Universal Task Checklist for the next cycle based on current progress and backlog.
-</file_artifact>
-
 <file path="src/backend/commands/commands.ts">
 // Updated on: C11 (Alias dce.openSettingsPanel)
 import * as vscode from 'vscode';
@@ -20559,7 +19420,7 @@ export class HighlightingService {
 
 <file path="src/backend/services/history.service.ts">
 // src/backend/services/history.service.ts
-// Updated on: C19 (Add activeWorkflowStep to default cycle)
+// Updated on: C20 (Fix array access errors)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -20583,7 +19444,7 @@ export class HistoryService {
     constructor() {
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (workspaceFolders && workspaceFolders.length > 0) {
-            this.workspaceRoot = workspaceFolders.uri.fsPath;
+            this.workspaceRoot = workspaceFolders[0].uri.fsPath;
             this.historyFilePath = path.join(this.workspaceRoot, '.vscode', 'dce_history.json');
         } else {
             Services.loggerService.warn("HistoryService: No workspace folder found. History will not be saved.");
@@ -20826,7 +19687,7 @@ export class HistoryService {
                 filters: { 'JSON': ['json'] }
             });
             if (openUris && openUris.length > 0) {
-                const content = await fs.readFile(openUris.fsPath, 'utf-8');
+                const content = await fs.readFile(openUris[0].fsPath, 'utf-8');
                 const historyData = JSON.parse(content);
                 if (historyData.version && Array.isArray(historyData.cycles)) {
                     await this._writeHistoryFile(historyData);
@@ -24147,7 +23008,7 @@ export default HighlightedTextarea;
 
 <file path="src/client/views/parallel-copilot.view/components/ParsedView.tsx">
 // src/client/views/parallel-copilot.view/components/ParsedView.tsx
-// Updated on: C19 (Remove response-level buttons)
+// Updated on: C20 (Add missing props to interface)
 import * as React from 'react';
 import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscCheckAll, VscClearAll, VscClippy, VscChevronDown } from 'react-icons/vsc';
 import ReactMarkdown from 'react-markdown';
@@ -24191,6 +23052,8 @@ interface ParsedViewProps {
     viewableContent: string | undefined | null;
     onCopyContent: () => void;
     workflowStep: string | null;
+    leftPaneWidth: number; // Added
+    selectedResponseId: string | null; // Added
 }
 
 const ParsedView: React.FC<ParsedViewProps> = (props) => {
@@ -24309,7 +23172,7 @@ interface ResponsePaneProps {
     onTempOverridePathChange: (path: string) => void;
     onLinkFile: (originalPath: string) => void;
     onUnlinkFile: (originalPath: string) => void;
-    comparisonMetrics: Map<string, ComparisonMetrics> | null;
+    comparisonMetrics: Map<string, ComparisonMetrics | null> | null;
     viewableContent: string | undefined | null;
     onCopyContent: () => void;
     selectedResponseId: string | null;
@@ -24356,14 +23219,7 @@ const ResponsePane: React.FC<ResponsePaneProps> = (props) => {
             viewableContent={props.viewableContent}
             onCopyContent={props.onCopyContent}
             selectedResponseId={props.selectedResponseId}
-            onSelectResponse={props.onSelectResponse}
-            onSelectAllFiles={props.onSelectAllFiles}
-            onDeselectAllFiles={props.onDeselectAllFiles}
-            isAllFilesSelected={props.isAllFilesSelected}
-            onAcceptSelected={props.onAcceptSelected}
             leftPaneWidth={props.leftPaneWidth}
-            onBaseline={props.onBaseline}
-            onRestore={props.onRestore}
             workflowStep={props.workflowStep}
         />
     );
@@ -24576,7 +23432,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
 <file path="src/client/views/parallel-copilot.view/OnboardingView.tsx">
 // src/client/views/parallel-copilot.view/OnboardingView.tsx
-// Updated on: C189 (No functional changes)
+// Updated on: C20 (Refactor state management)
 import * as React from 'react';
 import { VscRocket, VscArrowRight } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -24584,30 +23440,24 @@ import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 import { logger } from '@/client/utils/logger';
 
 interface OnboardingViewProps {
-    initialProjectScope?: string;
+    projectScope: string;
+    onScopeChange: (scope: string) => void;
     onNavigateToCycle: (cycleId: number) => void;
     latestCycleId: number;
-    onScopeChange: (scope: string) => void;
     workflowStep: string | null;
 }
 
-const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope, onNavigateToCycle, latestCycleId, onScopeChange, workflowStep }) => {
-    const [projectScope, setProjectScope] = React.useState(initialProjectScope || '');
+const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeChange, onNavigateToCycle, latestCycleId, workflowStep }) => {
     const [isGenerating, setIsGenerating] = React.useState(false);
     const [promptGenerated, setPromptGenerated] = React.useState(false);
     const clientIpc = ClientPostMessageManager.getInstance();
 
     const isNavigatingBack = latestCycleId > 0;
 
-    React.useEffect(() => {
-        setProjectScope(initialProjectScope || '');
-    }, [initialProjectScope]);
-
     const handleGenerate = () => {
         if (projectScope.trim()) {
             setIsGenerating(true);
             logger.log("Sending request to generate Cycle 0 prompt and save project scope.");
-            onScopeChange(projectScope); 
             clientIpc.sendToServer(ClientToServerChannel.RequestCreateCycle0Prompt, { projectScope });
             setTimeout(() => {
                 setIsGenerating(false);
@@ -24619,11 +23469,6 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope, on
     const handleReturnToCycles = () => {
         logger.log("Returning to latest cycle from Project Plan view.");
         onNavigateToCycle(latestCycleId);
-    };
-
-    const handleScopeChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        setProjectScope(e.target.value);
-        onScopeChange(e.target.value);
     };
 
     return (
@@ -24639,7 +23484,7 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ initialProjectScope, on
                 className={`onboarding-textarea ${workflowStep === 'awaitingProjectScope' ? 'workflow-highlight' : ''}`}
                 placeholder="e.g., I want to build a web application that allows users to track their daily habits. It should have a simple UI, user authentication, and a dashboard to visualize progress..."
                 value={projectScope}
-                onChange={handleScopeChange}
+                onChange={(e) => onScopeChange(e.target.value)}
                 disabled={isGenerating || (promptGenerated && !isNavigatingBack)}
             />
             {isNavigatingBack ? (
@@ -25609,7 +24454,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C19 (Centralize workflow buttons and persist highlight)
+// Updated on: C20 (Fix onboarding state management)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -25696,7 +24541,7 @@ const App = () => {
 
     const saveCurrentCycleState = React.useCallback(() => {
         const { currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, workflowStep } = stateRef.current;
-        if (currentCycle === null || currentCycle === 0) return;
+        if (currentCycle === null) return;
         setSaveStatus('saving');
         const responses: { [key: string]: PcppResponse } = {};
         for (let i = 1; i <= tabCount; i++) {
@@ -25717,7 +24562,7 @@ const App = () => {
             activeTab,
             isSortedByTokens,
             pathOverrides: Object.fromEntries(pathOverrides),
-            activeWorkflowStep: workflowStep
+            activeWorkflowStep: workflowStep || undefined
         };
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
     }, [clientIpc]);
@@ -25834,7 +24679,7 @@ const App = () => {
     const handleExportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestExportHistory, {});
     const handleImportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestImportHistory, {});
     const handleGitBaseline = () => { const commitMessage = `DCE Baseline: Cycle ${currentCycle} - ${cycleTitle || 'New Cycle'}`; clientIpc.sendToServer(ClientToServerChannel.RequestGitBaseline, { commitMessage }); };
-    const onGitRestore = () => { const { selectedFilesForReplacement, fileExistenceMap } = stateRef.current; const filesToDelete = Array.from(selectedFilesForReplacement).map(key => key.split(':::')).filter((file: any) => !fileExistenceMap.get(file)).map((file: any) => file); clientIpc.sendToServer(ClientToServerChannel.RequestGitRestore, { filesToDelete }); };
+    const onGitRestore = () => { const { selectedFilesForReplacement, fileExistenceMap } = stateRef.current; const filesToDelete = Array.from(selectedFilesForReplacement).map(key => key.split(':::')).filter(fileParts => !fileExistenceMap.get(fileParts[1])).map(fileParts => fileParts[1]); clientIpc.sendToServer(ClientToServerChannel.RequestGitRestore, { filesToDelete }); };
     const handleFileSelectionToggle = (filePath: string) => { const currentTabId = activeTab.toString(); const compositeKeyForCurrent = `${currentTabId}:::${filePath}`; setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); let existingKey: string | undefined; for (const key of newSet) if (key.endsWith(`:::${filePath}`)) { existingKey = key; break; } if (existingKey) { if (existingKey === compositeKeyForCurrent) newSet.delete(existingKey); else { newSet.delete(existingKey); newSet.add(compositeKeyForCurrent); } } else newSet.add(compositeKeyForCurrent); return newSet; }); setSaveStatus('unsaved'); };
     const handleSelectAllFilesToggle = () => { if (!activeTabData?.parsedContent) return; const allFilesForTab = activeTabData.parsedContent.filesUpdated.map(fp => `${activeTab}:::${fp}`); const isAllSelected = allFilesForTab.every(key => selectedFilesForReplacement.has(key)); setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); if (isAllSelected) allFilesForTab.forEach(key => newSet.delete(key)); else allFilesForTab.forEach(key => newSet.add(key)); return newSet; }); setSaveStatus('unsaved'); };
     const isAllFilesSelected = React.useMemo(() => { if (!activeTabData?.parsedContent) return false; const allFiles = activeTabData.parsedContent.filesUpdated; if (allFiles.length === 0) return false; return allFiles.every(file => selectedFilesForReplacement.has(`${activeTab}:::${file}`)); }, [selectedFilesForReplacement, activeTabData, activeTab]);
@@ -25842,9 +24687,17 @@ const App = () => {
     const handleCopyContent = () => { if (!selectedFilePath || !activeTabData?.parsedContent) return; const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath); if (file) clientIpc.sendToServer(ClientToServerChannel.RequestCopyTextToClipboard, { text: file.content }); };
     const costBreakdownTooltip = React.useMemo(() => { if (!costBreakdown) return "Calculating..."; return Object.entries(costBreakdown).map(([key, value]) => `${key}: ${formatLargeNumber(value, 1)} tk`).join('\n'); }, [costBreakdown]);
 
+    const onScopeChange = (scope: string) => {
+        if (currentCycle === 0) {
+            setProjectScope(scope);
+            setCycleContext(scope); // Align with save logic
+            setSaveStatus('unsaved');
+        }
+    };
+
     if (currentCycle === null) return <div>Loading...</div>;
     if (currentCycle === -1) return <div className="onboarding-container"><h1>No Folder Opened</h1><p>You have not yet opened a folder for the Data Curation Environment to manage.</p><button className="dce-button-primary" onClick={() => clientIpc.sendToServer(ClientToServerChannel.RequestOpenFolder, {})}><VscFolder /> Open Folder</button></div>;
-    if (currentCycle === 0) return <OnboardingView initialProjectScope={projectScope} onNavigateToCycle={(id) => handleCycleChange(null, id)} latestCycleId={maxCycle} onScopeChange={setCycleContext} workflowStep={workflowStep} />;
+    if (currentCycle === 0) return <OnboardingView projectScope={projectScope || ''} onScopeChange={onScopeChange} onNavigateToCycle={(id) => handleCycleChange(null, id)} latestCycleId={maxCycle} workflowStep={workflowStep} />;
     
     const collapsedNavigator = <div className="collapsed-navigator"><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0 || saveStatus !== 'saved'}>&lt;</button><span className="cycle-display">C{currentCycle}</span><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle || saveStatus !== 'saved'}>&gt;</button></div>;
     const totalPromptCostDisplay = ( <span className="total-prompt-cost" title={costBreakdownTooltip}> Total Est: ({formatLargeNumber(totalPromptTokens, 1)} tk) ~ ${estimatedPromptCost.toFixed(4)} {tabCount > 1 && ` x ${tabCount} = $${(estimatedPromptCost * tabCount).toFixed(4)}`} </span> );
@@ -25868,9 +24721,9 @@ const App = () => {
             <ContextInputs cycleContext={cycleContext} ephemeralContext={ephemeralContext} cycleContextTokens={cycleContextTokens} ephemeralContextTokens={ephemeralContextTokens} onCycleContextChange={onCycleContextChange} onEphemeralContextChange={onEphemeralContextChange} workflowStep={workflowStep} />
         </CollapsibleSection>
         <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} workflowStep={workflowStep} onSortToggle={handleSortToggle} />
-        <WorkflowToolbar isParsedMode={isParsedMode} onParseToggle={handleGlobalParseToggle} isSortedByTokens={isSortedByTokens} onSortToggle={handleSortToggle} onSelectResponse={() => { setSelectedResponseId(prev => prev === activeTab.toString() ? null : activeTab.toString()); setWorkflowStep('awaitingResponseSelect'); setSaveStatus('unsaved'); }} selectedResponseId={selectedResponseId} activeTab={activeTab} onBaseline={handleGitBaseline} onRestore={onGitRestore} onAcceptSelected={handleAcceptSelectedFiles} selectedFilesForReplacementCount={selectedFilesForReplacement.size} workflowStep={workflowStep} />
+        <WorkflowToolbar isParsedMode={isParsedMode} onParseToggle={handleGlobalParseToggle} onSelectResponse={() => { setSelectedResponseId(prev => prev === activeTab.toString() ? null : activeTab.toString()); setWorkflowStep('awaitingResponseSelect'); setSaveStatus('unsaved'); }} selectedResponseId={selectedResponseId} activeTab={activeTab} onBaseline={handleGitBaseline} onRestore={onGitRestore} onAcceptSelected={handleAcceptSelectedFiles} selectedFilesForReplacementCount={selectedFilesForReplacement.size} workflowStep={workflowStep} />
         <div className="tab-content">
-            <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} onPaste={(e) => handlePaste(e, activeTab)} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={comparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => { setSelectedResponseId(prev => prev === id ? null : id); setWorkflowStep('awaitingResponseSelect'); setSaveStatus('unsaved'); }} onSelectAllFiles={handleSelectAllFilesToggle} onDeselectAllFiles={() => {setSelectedFilesForReplacement(new Set()); setSaveStatus('unsaved');}} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} workflowStep={workflowStep} />
+            <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} onPaste={(e) => handlePaste(e, activeTab)} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={comparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => { setSelectedResponseId(prev => prev === id ? null : id); setWorkflowStep('awaitingResponseSelect'); setSaveStatus('unsaved'); }} onSelectAllFiles={handleSelectAllFilesToggle} onDeselectAllFiles={() => {setSelectedFilesForReplacement(new Set()); setSaveStatus('unsaved');}} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} onBaseline={handleGitBaseline} onRestore={onGitRestore} workflowStep={workflowStep} />
         </div>
         {associatedFileMenu && <div className="context-menu" style={{ top: associatedFileMenu.y, left: associatedFileMenu.x }}><ul onMouseLeave={() => setAssociatedFileMenu(null)}><li onClick={() => { clientIpc.sendToServer(ClientToServerChannel.RequestCopyPath, { path: associatedFileMenu.path, relative: true }); setAssociatedFileMenu(null); }}>Copy Relative Path</li></ul></div>}
     </div>;
@@ -27695,6 +26548,235 @@ const webviewConfig = {
 };
 
 module.exports = [extensionConfig, webviewConfig];
+</file_artifact>
+
+<file path="src/Artifacts/A86. DCE - PCPP Workflow Centralization and UI Persistence Plan.md">
+# Artifact A86: DCE - PCPP Workflow Centralization and UI Persistence Plan
+# Date Created: C19
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A plan to centralize the main workflow buttons in the PCPP, make the animated workflow highlight persistent, and fix the broken cost calculation.
+- **Tags:** feature plan, ui, ux, workflow, refactor, bug fix
+
+## 1. Overview & Goal
+
+User feedback from Cycle 19 identified three key areas for improvement in the Parallel Co-Pilot Panel (PCPP):
+1.  **Scattered UI:** The buttons for the core workflow are located in different places, making the process unintuitive.
+2.  **Ephemeral UI State:** The animated highlight that guides the user disappears if they switch away from the PCPP tab.
+3.  **Broken Metric:** The total estimated cost calculation is non-functional.
+
+The goal of this plan is to address all three issues to create a more intuitive, robust, and functional user experience.
+
+## 2. The User Workflow Articulated
+
+To centralize the buttons effectively, we must first define the ideal user workflow as a sequence of steps.
+
+1.  **Paste & Parse:** User pastes responses into tabs. Clicks **`Parse All`**.
+2.  **Sort & Select:** User reviews metadata. Clicks **`Sort`** to order responses. Clicks **`Select This Response`** on the most promising one.
+3.  **Baseline (Optional):** User may click **`Baseline (Commit)`** to save the current state before testing.
+4.  **Accept:** User checks files in the "Associated Files" list and clicks **`Accept Selected`**.
+5.  **Test & Restore (Loop):** User tests the applied changes. If they fail, the user clicks **`Restore Baseline`** and returns to Step 4 to test a different set of files or a different response.
+6.  **Finalize & Proceed:** Once satisfied, the user provides a cycle title/context and clicks **`Generate prompt.md`** and then **`+`** to start the next cycle.
+
+## 3. Button Centralization Plan
+
+### 3.1. ASCII Mockup of New Toolbar
+
+The new, centralized toolbar will be located directly below the response tabs, making it the central point of interaction.
+
+```
+|=================================================================================================|
+| [ Resp 1 (5 files, 2.1K tk) ] [ Resp 2 (4 files, 1.8K tk) ] [ Resp 3 ] [ Resp 4 ]      [ Sort ] |
+|-------------------------------------------------------------------------------------------------|
+|                                                                                                 |
+|   +-----------------------------------------------------------------------------------------+   |
+|   | [ Parse All ] [ Select This Resp ] [ Baseline ] [ Restore ] [ Accept Selected ]         |   |
+|   +-----------------------------------------------------------------------------------------+   |
+|                                                                                                 |
+| | [v] Associated Files (5) [Select All] [Deselect All]                                      | | |
+| |-------------------------------------------------------------------------------------------| | |
+| | [✓] [ ] src/Artifacts/A86. ... .md                                                        | | |
+| | [✓] [ ] src/client/views/.../view.tsx                                                     | | |
+| | ...                                                                                       | | |
+|-------------------------------------------------------------------------------------------------|```
+
+### 3.2. Technical Implementation
+-   A new component, `src/client/views/parallel-copilot.view/components/WorkflowToolbar.tsx`, will be created.
+-   It will contain all the buttons related to the main workflow.
+-   The main `view.tsx` will manage the state for enabling/disabling these buttons and pass the state and `onClick` handlers down as props.
+-   The buttons will be removed from their old locations (the main header and the `ParsedView` header). The "Select This Response" button will now act on the currently active tab.
+
+## 4. Persistent Animation Plan
+
+-   **Problem:** The `workflowStep` state is currently a local `useState` in `view.tsx`, which is lost when the webview is hidden and shown again.
+-   **Solution:** The `workflowStep` will be elevated to become part of the persisted cycle state.
+    1.  **Type Definition:** Add `activeWorkflowStep?: string;` to the `PcppCycle` interface in `src/common/types/pcpp.types.ts`.
+    2.  **State Management:** The `saveCurrentCycleState` function in `view.tsx` will now also update the main `PcppCycle` object with the current `workflowStep`.
+    3.  **Restoration:** When a cycle is loaded, the `activeWorkflowStep` from the loaded data will be used to initialize the state, ensuring the highlight is correctly re-applied.
+
+## 5. Cost Calculation Fix Plan
+
+-   **Problem:** The total estimated cost always shows `$0.00`.
+-   **Investigation:** The cost is calculated based on a `totalPromptTokens` state, which is populated by a message from the backend. The request for this calculation is debounced and triggered by changes to the cycle context or title. It appears this request is not being triggered on the initial load of a cycle.
+-   **Solution:**
+    1.  In `view.tsx`, locate the `useEffect` hook that handles the `SendInitialCycleData` and `SendCycleData` messages.
+    2.  Inside this hook, after the component's state is updated with the new cycle data, add a direct call to the `requestCostEstimation()` function.
+    3.  This will ensure that a cost estimation is requested from the backend every time a cycle is loaded, fixing the bug and displaying an accurate cost.
+</file_artifact>
+
+<file path="src/Artifacts/A76. DCE - Word Wrap Line Numbering Challenges.md">
+# Artifact A76: DCE - Word Wrap Line Numbering Challenges
+# Date Created: C181
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** Explains the technical complexity of implementing line numbers that accurately reflect visual word wrapping in a textarea component.
+- **Tags:** documentation, technical debt, ui, ux, word wrap, line numbers
+
+## 1. Problem Statement
+
+The user has requested that the line numbers in the `NumberedTextarea` component should respect word wrapping. Currently, the component counts lines based on newline characters (`\n`). This means a single logical line that visually wraps into three lines in the UI still only receives one line number. The user correctly points out that this is not ideal.
+
+This document explains why this seemingly simple feature is technically complex to implement in a standard HTML `<textarea>` and outlines potential solutions.
+
+## 2. The Core Challenge: Logical vs. Visual Lines
+
+The fundamental issue is the difference between how a `<textarea>` handles content versus how the browser renders it.
+
+*   **Logical Lines:** The `<textarea>` element's `value` is a simple string. The only concept of a "line" it has is the presence of a newline character (`\n`). When we split the string by `\n`, we are counting these logical lines. This is what our current implementation does, and it's fast and simple.
+
+*   **Visual Lines:** Word wrapping is a purely visual phenomenon handled by the browser's rendering engine. The browser calculates how many words fit on a line based on the element's width, font size, font family, letter spacing, and word spacing. It then visually breaks the line and renders the overflow text below. **Crucially, the browser does not expose a simple API to ask, "How many visual lines are you currently rendering for this text?"**
+
+Because we cannot directly query the rendered line count, we must resort to indirect methods to calculate it.
+
+## 3. Potential Solutions & Their Complexity
+
+Here are the common approaches to solving this problem, each with its own trade-offs.
+
+### Solution A: The Hidden `div` Measurement Technique
+
+This is the most common and reliable method.
+
+1.  **How it Works:**
+    *   Create a hidden `div` element off-screen or with `visibility: hidden`.
+    *   Apply the *exact same* CSS styles to this `div` as the `<textarea>` (width, font, padding, etc.).
+    *   Copy the content of the `<textarea>` into the `innerHTML` of the hidden `div`.
+    *   Calculate the number of visual lines by dividing the `scrollHeight` of the hidden `div` by its `line-height`.
+
+2.  **Complexity & Downsides:**
+    *   **Performance:** This calculation must be run on every single keystroke, as any character change could affect word wrapping. Copying large amounts of text into the DOM and forcing a browser re-layout on every key press can be performance-intensive and may cause input lag.
+    *   **Fragility:** The CSS styles must be perfectly synchronized. Any discrepancy in padding, border, font-size, etc., will result in an incorrect calculation.
+    *   **Implementation:** Requires careful DOM manipulation within our React component, managing refs to both the textarea and the hidden div, and ensuring the calculation is efficient.
+
+### Solution B: Using a Full-Fledged Code Editor Component
+
+Instead of building our own, we could replace the `<textarea>` with a lightweight, embeddable code editor library.
+
+1.  **How it Works:**
+    *   Integrate a library like **CodeMirror** or **Monaco Editor** (the editor that powers VS Code itself, though it's much heavier).
+    *   These components are not simple textareas; they are complete editing surfaces that render each line individually. Because they control the rendering process, they have full knowledge of visual lines and can provide accurate line numbering out of the box.
+
+2.  **Complexity & Downsides:**
+    *   **Bundle Size:** These libraries are significantly larger than a simple React component, which would increase the extension's load time.
+    *   **Integration:** Integrating them into our existing React and VS Code Webview architecture can be complex, requiring custom wrappers and careful handling of the component's lifecycle.
+    *   **Overkill:** For a simple context input field, using a full code editor might be architectural overkill.
+
+## 4. Conclusion & Path Forward
+
+The user's request is valid and would be a great UX improvement. However, due to the performance and implementation complexities described above, this feature is considered a significant piece of technical debt that requires a dedicated cycle to solve correctly.
+
+The current priority is to fix the more critical usability bugs like scrolling, focus management, and highlighting. Once the component is stable, we can revisit this challenge and dedicate a future cycle to implementing one of the more advanced solutions above.
+</file_artifact>
+
+<file path="src/client/views/parallel-copilot.view/components/WorkflowToolbar.tsx">
+// src/client/views/parallel-copilot.view/components/WorkflowToolbar.tsx
+// New file in C19
+import * as React from 'react';
+import { VscWand, VscListOrdered, VscListUnordered, VscCheck, VscSourceControl, VscDiscard, VscCheckAll } from 'react-icons/vsc';
+
+interface WorkflowToolbarProps {
+    isParsedMode: boolean;
+    onParseToggle: () => void;
+    selectedResponseId: string | null;
+    activeTab: number;
+    onSelectResponse: () => void;
+    onBaseline: () => void;
+    onRestore: () => void;
+    onAcceptSelected: () => void;
+    selectedFilesForReplacementCount: number;
+    workflowStep: string | null;
+}
+
+const WorkflowToolbar: React.FC<WorkflowToolbarProps> = ({
+    isParsedMode,
+    onParseToggle,
+    selectedResponseId,
+    activeTab,
+    onSelectResponse,
+    onBaseline,
+    onRestore,
+    onAcceptSelected,
+    selectedFilesForReplacementCount,
+    workflowStep
+}) => {
+    if (!isParsedMode) {
+        return (
+            <div className="workflow-toolbar">
+                <button
+                    onClick={onParseToggle}
+                    className={workflowStep === 'awaitingParse' ? 'workflow-highlight' : ''}
+                    title={isParsedMode ? "Return to raw text view" : "Parse all responses into structured view"}
+                >
+                    <VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}
+                </button>
+            </div>
+        );
+    }
+
+    return (
+        <div className="workflow-toolbar">
+            <button
+                onClick={onParseToggle}
+                className={workflowStep === 'awaitingParse' ? 'workflow-highlight' : ''}
+                title={isParsedMode ? "Return to raw text view" : "Parse all responses into structured view"}
+            >
+                <VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}
+            </button>
+            <button
+                onClick={onSelectResponse}
+                className={`styled-button ${selectedResponseId === activeTab.toString() ? 'toggled' : ''} ${workflowStep === 'awaitingResponseSelect' ? 'workflow-highlight' : ''}`}
+                title="Select this response as the basis for the next cycle"
+            >
+                <VscCheck /> {selectedResponseId === activeTab.toString() ? 'Response Selected' : 'Select This Response'}
+            </button>
+            <button
+                onClick={onBaseline}
+                className={`git-button ${workflowStep === 'awaitingBaseline' ? 'workflow-highlight' : ''}`}
+                title="Create a git commit with all current changes as a safe restore point"
+            >
+                <VscSourceControl /> Baseline (Commit)
+            </button>
+            <button
+                onClick={onRestore}
+                className="git-button"
+                title="Restore all files in the workspace to the last baseline commit"
+            >
+                <VscDiscard /> Restore Baseline
+            </button>
+            <button
+                onClick={onAcceptSelected}
+                className={`styled-button ${workflowStep === 'awaitingAccept' ? 'workflow-highlight' : ''}`}
+                disabled={selectedFilesForReplacementCount === 0}
+                title="Accept checked files from this response into your workspace"
+            >
+                <VscCheckAll /> Accept Selected ({selectedFilesForReplacementCount})
+            </button>
+        </div>
+    );
+};
+
+export default WorkflowToolbar;
 </file_artifact>
 
 
