@@ -1,4 +1,4 @@
-// Updated on: C184 (Add gitStatusMap state and handler)
+// Updated on: C22 (Add logging for duplication bug)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -80,7 +80,11 @@ const App = () => {
         clientIpc.sendToServer(ClientToServerChannel.RequestLastSelection, {});
     }, [clientIpc]);
 
-    const handleFlattenClick = () => clientIpc.sendToServer(ClientToServerChannel.RequestFlattenContext, { selectedPaths: checkedFiles });
+    const handleFlattenClick = () => {
+        logger.log(`[DUPLICATION-BUG-LOG] Flatten button clicked. Sending ${checkedFiles.length} paths.`);
+        logger.log(`[DUPLICATION-BUG-LOG] Paths: ${JSON.stringify(checkedFiles)}`);
+        clientIpc.sendToServer(ClientToServerChannel.RequestFlattenContext, { selectedPaths: checkedFiles });
+    };
     const handleRefresh = () => { processedFilesCache.current.clear(); requestFiles(true); };
     const handleExpandAll = () => setExpandAllTrigger(c => c + 1);
     const handleCollapseAll = () => setCollapseTrigger(c => c + 1);

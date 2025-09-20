@@ -1,5 +1,5 @@
 // src/backend/services/history.service.ts
-// Updated on: C20 (Fix array access errors)
+// Updated on: C22 (Fix auto-save icon bug for Cycle 0)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -144,8 +144,13 @@ export class HistoryService {
     }
 
     public async saveCycleData(cycleData: PcppCycle): Promise<void> {
+        const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
+
         if (cycleData.cycleId === 0) {
             await this.saveProjectScope(cycleData.cycleContext);
+            if (serverIpc) {
+                serverIpc.sendToClient(ServerToClientChannel.NotifySaveComplete, { cycleId: 0 });
+            }
             return;
         }
 
@@ -163,7 +168,6 @@ export class HistoryService {
 
         await this._writeHistoryFile(history);
 
-        const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
         if (serverIpc) {
             serverIpc.sendToClient(ServerToClientChannel.NotifySaveComplete, { cycleId: cycleData.cycleId });
         }

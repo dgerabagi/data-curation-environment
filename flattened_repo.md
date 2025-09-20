@@ -1,22 +1,22 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-19T22:57:38.800Z
+  Date Generated: 2025-09-20T01:50:30.994Z
   ---
   Total Files: 171
-  Approx. Tokens: 454910
+  Approx. Tokens: 454905
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (8583 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (8552 tokens)
 4. src\Artifacts\A0. DCE Master Artifact List.md (8106 tokens)
 5. src\client\views\parallel-copilot.view\view.scss (5583 tokens)
 6. src\backend\services\prompt.service.ts (5139 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 8. src\backend\services\file-operation.service.ts (4370 tokens)
-9. src\client\views\context-chooser.view\view.tsx (4019 tokens)
+9. src\client\views\context-chooser.view\view.tsx (4070 tokens)
 10. src\client\views\context-chooser.view\view.scss (3708 tokens)
 
 <!-- Full File List -->
@@ -122,11 +122,11 @@
 100. src\backend\services\action.service.ts - Lines: 71 - Chars: 2444 - Tokens: 611
 101. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
 102. src\backend\services\file-operation.service.ts - Lines: 360 - Chars: 17477 - Tokens: 4370
-103. src\backend\services\file-tree.service.ts - Lines: 272 - Chars: 14732 - Tokens: 3683
-104. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12916 - Tokens: 3229
+103. src\backend\services\file-tree.service.ts - Lines: 273 - Chars: 14651 - Tokens: 3663
+104. src\backend\services\flattener.service.ts - Lines: 244 - Chars: 13031 - Tokens: 3258
 105. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 106. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-107. src\backend\services\history.service.ts - Lines: 288 - Chars: 12594 - Tokens: 3149
+107. src\backend\services\history.service.ts - Lines: 292 - Chars: 12460 - Tokens: 3115
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 109. src\backend\services\prompt.service.ts - Lines: 388 - Chars: 20553 - Tokens: 5139
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
@@ -146,7 +146,7 @@
 124. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 125. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
 126. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
-127. src\client\views\context-chooser.view\view.tsx - Lines: 150 - Chars: 16076 - Tokens: 4019
+127. src\client\views\context-chooser.view\view.tsx - Lines: 154 - Chars: 16280 - Tokens: 4070
 128. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
 129. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 55 - Chars: 1970 - Tokens: 493
 130. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 84 - Chars: 3386 - Tokens: 847
@@ -159,7 +159,7 @@
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 100 - Chars: 5002 - Tokens: 1251
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 959 - Chars: 22331 - Tokens: 5583
 139. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-140. src\client\views\parallel-copilot.view\view.tsx - Lines: 281 - Chars: 34332 - Tokens: 8583
+140. src\client\views\parallel-copilot.view\view.tsx - Lines: 282 - Chars: 34208 - Tokens: 8552
 141. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 142. src\client\views\settings.view\on-message.ts - Lines: 17 - Chars: 762 - Tokens: 191
 143. src\client\views\settings.view\view.scss - Lines: 87 - Chars: 1767 - Tokens: 442
@@ -16301,7 +16301,7 @@ export class FileOperationService {
 
 <file path="src/backend/services/file-tree.service.ts">
 // src/backend/services/file-tree.service.ts
-// Updated on: C21 (Add .next to non-selectable patterns)
+// Updated on: C22 (Add logging for duplication bug)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -16424,6 +16424,7 @@ export class FileTreeService {
         this.autoAddQueue = [];
         const currentSelection = await Services.selectionService.getLastSelection();
         const newSelection = [...new Set([...currentSelection, ...pathsToAdd])];
+        Services.loggerService.log(`[DUPLICATION-BUG-LOG] AutoAdd: Current selection has ${currentSelection.length}. Adding ${pathsToAdd.length}. New selection will be ${newSelection.length}.`);
         await Services.selectionService.saveCurrentSelection(newSelection);
         this.isProcessingAutoAdd = false;
         if (this.autoAddQueue.length > 0) this.processAutoAddQueue();
@@ -16575,7 +16576,7 @@ export class FileTreeService {
 </file_artifact>
 
 <file path="src/backend/services/flattener.service.ts">
-// Updated on: C21 (Add de-duplication safeguard)
+// Updated on: C22 (Add logging for duplication bug)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -16584,6 +16585,7 @@ import { VIEW_TYPES } from '@/common/view-types';
 import { serverIPCs } from '@/client/views';
 import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 import { formatBytes } from '@/common/utils/formatting';
+import { logger } from '@/client/utils/logger';
 
 interface FileStats {
     filePath: string;
@@ -16622,6 +16624,7 @@ export class FlattenerService {
     }
 
     public async flatten(selectedPaths: string[]) {
+        Services.loggerService.log(`[DUPLICATION-BUG-LOG] Flattener service received ${selectedPaths.length} paths: ${JSON.stringify(selectedPaths)}`);
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (!workspaceFolders || workspaceFolders.length === 0) {
             vscode.window.showErrorMessage("Cannot flatten context: No workspace folder is open.");
@@ -16638,6 +16641,7 @@ export class FlattenerService {
         try {
             const allFilePaths = await this.expandDirectories(selectedPaths);
             const uniqueFilePaths = [...new Set(allFilePaths)]; // Safeguard against duplicates
+            Services.loggerService.log(`[DUPLICATION-BUG-LOG] After expansion and de-duplication, processing ${uniqueFilePaths.length} unique paths.`);
 
             const fileStatsPromises = uniqueFilePaths.map(filePath => this.getFileStatsAndContent(filePath));
             const results = await Promise.all(fileStatsPromises);
@@ -17040,7 +17044,7 @@ export class HighlightingService {
 
 <file path="src/backend/services/history.service.ts">
 // src/backend/services/history.service.ts
-// Updated on: C20 (Fix array access errors)
+// Updated on: C22 (Fix auto-save icon bug for Cycle 0)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -17185,8 +17189,13 @@ export class HistoryService {
     }
 
     public async saveCycleData(cycleData: PcppCycle): Promise<void> {
+        const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
+
         if (cycleData.cycleId === 0) {
             await this.saveProjectScope(cycleData.cycleContext);
+            if (serverIpc) {
+                serverIpc.sendToClient(ServerToClientChannel.NotifySaveComplete, { cycleId: 0 });
+            }
             return;
         }
 
@@ -17204,7 +17213,6 @@ export class HistoryService {
 
         await this._writeHistoryFile(history);
 
-        const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
         if (serverIpc) {
             serverIpc.sendToClient(ServerToClientChannel.NotifySaveComplete, { cycleId: cycleData.cycleId });
         }
@@ -20201,7 +20209,7 @@ body {
 </file_artifact>
 
 <file path="src/client/views/context-chooser.view/view.tsx">
-// Updated on: C184 (Add gitStatusMap state and handler)
+// Updated on: C22 (Add logging for duplication bug)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -20283,7 +20291,11 @@ const App = () => {
         clientIpc.sendToServer(ClientToServerChannel.RequestLastSelection, {});
     }, [clientIpc]);
 
-    const handleFlattenClick = () => clientIpc.sendToServer(ClientToServerChannel.RequestFlattenContext, { selectedPaths: checkedFiles });
+    const handleFlattenClick = () => {
+        logger.log(`[DUPLICATION-BUG-LOG] Flatten button clicked. Sending ${checkedFiles.length} paths.`);
+        logger.log(`[DUPLICATION-BUG-LOG] Paths: ${JSON.stringify(checkedFiles)}`);
+        clientIpc.sendToServer(ClientToServerChannel.RequestFlattenContext, { selectedPaths: checkedFiles });
+    };
     const handleRefresh = () => { processedFilesCache.current.clear(); requestFiles(true); };
     const handleExpandAll = () => setExpandAllTrigger(c => c + 1);
     const handleCollapseAll = () => setCollapseTrigger(c => c + 1);
@@ -22130,7 +22142,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C21 (Add animation persistence and Select All logic)
+// Updated on: C22 (Add logging for duplication bug)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -22148,6 +22160,7 @@ import ResponseTabs from './components/ResponseTabs';
 import ResponsePane from './components/ResponsePane';
 import * as path from 'path-browserify';
 import WorkflowToolbar from './components/WorkflowToolbar';
+import { logger } from '../../utils/logger';
 
 console.log('[PCPP View] view.tsx module loaded');
 
@@ -22334,7 +22347,7 @@ const App = () => {
 
     const handleCycleChange = (e: React.MouseEvent | null, newCycle: number) => { e?.stopPropagation(); if (saveStatus !== 'saved') return; if (newCycle >= 0 && newCycle <= maxCycle) { setSelectedFilesForReplacement(new Set()); setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycle }); setWorkflowStep(null); } };
     const handleSelectForViewing = (filePath: string) => { const newPath = selectedFilePath === filePath ? null : filePath; setSelectedFilePath(newPath); };
-    const handleAcceptSelectedFiles = () => { if (selectedFilesForReplacement.size === 0) return; const filesToWrite: BatchWriteFile[] = []; selectedFilesForReplacement.forEach(compositeKey => { const [responseId, filePath] = compositeKey.split(':::'); const responseData = tabs[responseId]; if (responseData?.parsedContent) { const file = responseData.parsedContent.files.find(f => f.path === filePath); if (file) { const finalPath = pathOverrides.get(file.path) || file.path; filesToWrite.push({ path: finalPath, content: file.content }); } } }); if (filesToWrite.length > 0) { clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite }); } setWorkflowStep('awaitingCycleContext'); };
+    const handleAcceptSelectedFiles = () => { if (selectedFilesForReplacement.size === 0) return; const filesToWrite: BatchWriteFile[] = []; selectedFilesForReplacement.forEach(compositeKey => { const [responseId, filePath] = compositeKey.split(':::'); const responseData = tabs[responseId]; if (responseData?.parsedContent) { const file = responseData.parsedContent.files.find(f => f.path === filePath); if (file) { const finalPath = pathOverrides.get(file.path) || file.path; filesToWrite.push({ path: finalPath, content: file.content }); } } }); logger.log(`[DUPLICATION-BUG-LOG] Accepting ${filesToWrite.length} files: ${JSON.stringify(filesToWrite.map(f => f.path))}`); if (filesToWrite.length > 0) { clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite }); } setWorkflowStep('awaitingCycleContext'); };
     const handleLinkFile = (originalPath: string) => { if (tempOverridePath.trim()) { setPathOverrides(prev => new Map(prev).set(originalPath, tempOverridePath.trim())); setFileExistenceMap(prev => new Map(prev).set(originalPath, true)); setTempOverridePath(''); handleSelectForViewing(originalPath); } };
     const handleUnlinkFile = (originalPath: string) => { setPathOverrides(prev => { const newMap = new Map(prev); newMap.delete(originalPath); return newMap; }); setFileExistenceMap(prev => new Map(prev).set(originalPath, false)); };
     const onCycleContextChange = React.useCallback((value: string) => { setCycleContext(value); setCycleContextTokens(Math.ceil(value.length / 4)); setSaveStatus('unsaved'); }, []);

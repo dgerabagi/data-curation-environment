@@ -1,5 +1,5 @@
 // src/backend/services/file-tree.service.ts
-// Updated on: C21 (Add .next to non-selectable patterns)
+// Updated on: C22 (Add logging for duplication bug)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -122,6 +122,7 @@ export class FileTreeService {
         this.autoAddQueue = [];
         const currentSelection = await Services.selectionService.getLastSelection();
         const newSelection = [...new Set([...currentSelection, ...pathsToAdd])];
+        Services.loggerService.log(`[DUPLICATION-BUG-LOG] AutoAdd: Current selection has ${currentSelection.length}. Adding ${pathsToAdd.length}. New selection will be ${newSelection.length}.`);
         await Services.selectionService.saveCurrentSelection(newSelection);
         this.isProcessingAutoAdd = false;
         if (this.autoAddQueue.length > 0) this.processAutoAddQueue();

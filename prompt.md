@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 22 - feedback from prior cycle (nice work)
+Current Cycle 23 - resolve duplicate files in flatten_repo.md
+Cycle 22 - feedback from prior cycle (nice work)
 Cycle 21 - playtesting obesrvations/feedback
 Cycle 20 - ts errors and one additional bug report
 Cycle 19 - centralize workflow buttons
@@ -705,6 +706,285 @@ No project scope defined.
 
 <M6. Cycles>
 
+<Cycle 23>
+<Cycle Context>
+nice, okay the onboardingview is working perfectly, now lets focus on the duplicate files appearing. i ran through those same steps, and again we got duplicates. this time, i captured the DCE logs outputs and provided them in ephemeral below.
+
+also, there seems to be something wrong with the price calculation. we ran some logs before and you determined the the back end was providing a cost estimate calculation, it was that the front end wasnt receiving it. if you need to, add a cost calculation log that does a dry run through the calculation that reveals any mistakes that might cause the calculation to not make it to the front end.
+</Cycle Context>
+<Ephemeral Context>
+[INFO] [8:38:48 PM] Congratulations, your extension "Data Curation Environment" is now active!
+[INFO] [8:38:48 PM] Starry Night syntax highlighter initialized.
+[INFO] [8:38:48 PM] Services initializing...
+[INFO] [8:38:48 PM] Services initialized successfully.
+[INFO] [8:38:48 PM] Registering 7 commands.
+[INFO] [8:38:48 PM] HistoryService: getInitialCycle called.
+[INFO] [8:38:50 PM] Fresh environment detected. Returning Cycle 0.
+[INFO] [8:38:50 PM] Fresh environment, automatically opening Parallel Co-Pilot Panel.
+[INFO] [8:38:50 PM] Parallel Co-Pilot view message handler initialized.
+[INFO] [8:38:50 PM] Context Chooser view message handler initialized.
+[INFO] [8:38:51 PM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [8:38:51 PM] [on-message] Received RequestInitialData. Forwarding to services.
+[INFO] [8:38:51 PM] [SelectionService] No last selection found in state.
+[INFO] [8:38:51 PM] Persisted current selection of 0 items.
+[INFO] [8:38:51 PM] HistoryService: getInitialCycle called.
+[INFO] [8:38:51 PM] Fresh environment detected. Returning Cycle 0.
+[INFO] [8:38:56 PM] Project scope saved.
+[INFO] [8:39:03 PM] Project scope saved.
+[INFO] [8:39:06 PM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [8:39:06 PM] HistoryService: getInitialCycle called.
+[INFO] [8:39:06 PM] Fresh environment detected. Returning Cycle 0.
+[INFO] [8:41:11 PM] Project scope saved.
+[INFO] [8:41:13 PM] Project scope saved.
+[INFO] [8:41:14 PM] Project scope saved.
+[INFO] [8:41:15 PM] Generating Cycle 0 prompt.md file...
+[INFO] [8:41:15 PM] Project scope saved.
+[INFO] [8:41:15 PM] Created src/Artifacts/DCE_README.md for the new project.
+[INFO] [8:41:15 PM] Successfully generated Cycle 0 prompt.md file.
+[INFO] [8:41:15 PM] [Auto-Add] Ignoring non-selectable new file: c:/Projects/TowerDefense2/prompt.md
+[INFO] [8:41:15 PM] [triggerFullRefresh] Called because: file change: prompt.md
+[INFO] [8:41:15 PM] [SelectionService] No last selection found in state.
+[INFO] [8:41:15 PM] [triggerFullRefresh] Called because: file change: src
+[INFO] [8:41:15 PM] [triggerFullRefresh] Called because: file change: Artifacts
+[INFO] [8:41:15 PM] [triggerFullRefresh] Called because: file change: DCE_README.md
+[INFO] [8:41:15 PM] [DUPLICATION-BUG-LOG] AutoAdd: Current selection has 0. Adding 1. New selection will be 1.
+[INFO] [8:41:15 PM] Persisted current selection of 1 items.
+[INFO] [8:41:15 PM] [SelectionService] Found 1 paths in persisted state. Validating...
+[INFO] [8:41:15 PM] [SelectionService] Returning 1 valid paths.
+[INFO] [8:41:15 PM] [DUPLICATION-BUG-LOG] AutoAdd: Current selection has 1. Adding 2. New selection will be 3.
+[INFO] [8:41:19 PM] Persisted current selection of 3 items.
+[WARN] [8:41:19 PM] [WebView] [TreeView] Could not find ref for active file: c:/Projects/TowerDefense2/prompt.md
+[INFO] [8:41:19 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [8:41:19 PM] [SelectionService] Found 3 paths in persisted state. Validating...
+[INFO] [8:41:19 PM] [SelectionService] Returning 3 valid paths.
+[INFO] [8:41:19 PM] HistoryService: saving data for cycle 1.
+[INFO] [8:41:19 PM] Persisted current selection of 3 items.
+[INFO] [8:44:24 PM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [8:44:24 PM] HistoryService: getInitialCycle called.
+[INFO] [8:44:24 PM] No valid last-viewed cycle found. Falling back to latest cycle: 1
+[INFO] [8:44:28 PM] HistoryService: saving data for cycle 1.
+[INFO] [8:44:34 PM] HistoryService: saving data for cycle 1.
+[INFO] [8:44:39 PM] HistoryService: saving data for cycle 1.
+[INFO] [8:44:46 PM] [Comparison] Received request for: src/Artifacts/TowerDefense-A0-Master-Artifact-List.md
+[INFO] [8:44:46 PM] [Comparison] Received request for: src/Artifacts/TowerDefense-A1-Project-Vision-and-Goals.md
+[INFO] [8:44:46 PM] [Comparison] Received request for: src/Artifacts/TowerDefense-A2-Technical-Scaffolding-Plan.md
+[INFO] [8:44:46 PM] [Comparison] Received request for: src/Artifacts/TowerDefense-A3-Dev-and-Testing-Guide.md
+[INFO] [8:44:46 PM] [Comparison] Received request for: src/Artifacts/TowerDefense-A4-Implementation-Roadmap.md
+[INFO] [8:44:46 PM] [Comparison] Received request for: src/Artifacts/TowerDefense-A5-GitHub-Repository-Setup-Guide.md
+[INFO] [8:44:46 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/TowerDefense-A0-Master-Artifact-List.md::# Artifact A0: TowerDefense - Master Artifact List
+[INFO] [8:44:46 PM] [Comparison] Received request for: src/Artifacts/TD-Genesis-A0-Master-Artifact-List.md
+[INFO] [8:44:46 PM] [Comparison] Received request for: src/Artifacts/TD-Genesis-A1-Project-Vision-and-Goals.md
+[INFO] [8:44:46 PM] [Comparison] Received request for: src/Artifacts/TD-Genesis-A3-Technical-Scaffolding-Plan.md
+[INFO] [8:44:46 PM] [Comparison] Received request for: src/Artifacts/TD-Genesis-A7-Dev-and-Testing-Guide.md
+[INFO] [8:44:46 PM] [Comparison] Received request for: src/Artifacts/TD-Genesis-A14-GitHub-Repository-Setup-Guide.md
+[INFO] [8:44:46 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/TD-Genesis-A0-Master-Artifact-List.md::# Artifact A0: TD Genesis - Master Artifact List
+[INFO] [8:44:46 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/TD-Genesis-A1-Project-Vision-and-Goals.md::# Artifact A1: TD Genesis - Project Vision and Goals
+[INFO] [8:44:46 PM] [File Existence] Received request to check paths: ["src/Artifacts/TowerDefense-A0-Master-Artifact-List.md","src/Artifacts/TowerDefense-A1-Project-Vision-and-Goals.md","src/Artifacts/TowerDefense-A2-Technical-Scaffolding-Plan.md","src/Artifacts/TowerDefense-A3-Dev-and-Testing-Guide.md","src/Artifacts/TowerDefense-A4-Implementation-Roadmap.md","src/Artifacts/TowerDefense-A5-GitHub-Repository-Setup-Guide.md","src/Artifacts/TD-Genesis-A0-Master-Artifact-List.md","src/Artifacts/TD-Genesis-A1-Project-Vision-and-Goals.md","src/Artifacts/TD-Genesis-A3-Technical-Scaffolding-Plan.md","src/Artifacts/TD-Genesis-A7-Dev-and-Testing-Guide.md","src/Artifacts/TD-Genesis-A14-GitHub-Repository-Setup-Guide.md","src/Artifacts/TowerDefense-A3-Technical-Scaffolding-Plan.md","src/Artifacts/TowerDefense-A7-Dev-and-Testing-Guide.md","src/Artifacts/TowerDefense-A14-GitHub-Repository-Setup-Guide.md"]
+[INFO] [8:44:46 PM] [File Existence] Received request to check paths: ["src/Artifacts/TowerDefense-A0-Master-Artifact-List.md","src/Artifacts/TowerDefense-A1-Project-Vision-and-Goals.md","src/Artifacts/TowerDefense-A2-Technical-Scaffolding-Plan.md","src/Artifacts/TowerDefense-A3-Dev-and-Testing-Guide.md","src/Artifacts/TowerDefense-A4-Implementation-Roadmap.md","src/Artifacts/TowerDefense-A5-GitHub-Repository-Setup-Guide.md","src/Artifacts/TD-Genesis-A0-Master-Artifact-List.md","src/Artifacts/TD-Genesis-A1-Project-Vision-and-Goals.md","src/Artifacts/TD-Genesis-A3-Technical-Scaffolding-Plan.md","src/Artifacts/TD-Genesis-A7-Dev-and-Testing-Guide.md","src/Artifacts/TD-Genesis-A14-GitHub-Repository-Setup-Guide.md","src/Artifacts/TowerDefense-A3-Technical-Scaffolding-Plan.md","src/Artifacts/TowerDefense-A7-Dev-and-Testing-Guide.md","src/Artifacts/TowerDefense-A14-GitHub-Repository-Setup-Guide.md"]
+[INFO] [8:44:46 PM] HistoryService: saving data for cycle 1.
+[ERROR] [8:44:46 PM] [Comparison] Failed for src/Artifacts/TowerDefense-A1-Project-Vision-and-Goals.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense2\src\Artifacts\TowerDefense-A1-Project-Vision-and-Goals.md'
+[ERROR] [8:44:46 PM] [Comparison] Failed for src/Artifacts/TowerDefense-A2-Technical-Scaffolding-Plan.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense2\src\Artifacts\TowerDefense-A2-Technical-Scaffolding-Plan.md'
+[ERROR] [8:44:46 PM] [Comparison] Failed for src/Artifacts/TowerDefense-A3-Dev-and-Testing-Guide.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense2\src\Artifacts\TowerDefense-A3-Dev-and-Testing-Guide.md'
+[ERROR] [8:44:46 PM] [Comparison] Failed for src/Artifacts/TowerDefense-A4-Implementation-Roadmap.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense2\src\Artifacts\TowerDefense-A4-Implementation-Roadmap.md'
+[ERROR] [8:44:46 PM] [Comparison] Failed for src/Artifacts/TowerDefense-A5-GitHub-Repository-Setup-Guide.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense2\src\Artifacts\TowerDefense-A5-GitHub-Repository-Setup-Guide.md'
+[ERROR] [8:44:46 PM] [Comparison] Failed for src/Artifacts/TD-Genesis-A0-Master-Artifact-List.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense2\src\Artifacts\TD-Genesis-A0-Master-Artifact-List.md'
+[ERROR] [8:44:46 PM] [Comparison] Failed for src/Artifacts/TD-Genesis-A1-Project-Vision-and-Goals.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense2\src\Artifacts\TD-Genesis-A1-Project-Vision-and-Goals.md'
+[ERROR] [8:44:46 PM] [Comparison] Failed for src/Artifacts/TD-Genesis-A3-Technical-Scaffolding-Plan.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense2\src\Artifacts\TD-Genesis-A3-Technical-Scaffolding-Plan.md'
+[ERROR] [8:44:46 PM] [Comparison] Failed for src/Artifacts/TD-Genesis-A7-Dev-and-Testing-Guide.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense2\src\Artifacts\TD-Genesis-A7-Dev-and-Testing-Guide.md'
+[ERROR] [8:44:46 PM] [Comparison] Failed for src/Artifacts/TD-Genesis-A14-GitHub-Repository-Setup-Guide.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense2\src\Artifacts\TD-Genesis-A14-GitHub-Repository-Setup-Guide.md'
+[ERROR] [8:44:46 PM] [Comparison] Failed for src/Artifacts/TowerDefense-A0-Master-Artifact-List.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense2\src\Artifacts\TowerDefense-A0-Master-Artifact-List.md'
+[ERROR] [8:44:46 PM] [Comparison] Failed for src/Artifacts/TowerDefense-A1-Project-Vision-and-Goals.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense2\src\Artifacts\TowerDefense-A1-Project-Vision-and-Goals.md'
+[ERROR] [8:44:46 PM] [Comparison] Failed for src/Artifacts/TowerDefense-A3-Technical-Scaffolding-Plan.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense2\src\Artifacts\TowerDefense-A3-Technical-Scaffolding-Plan.md'
+[ERROR] [8:44:46 PM] [Comparison] Failed for src/Artifacts/TowerDefense-A7-Dev-and-Testing-Guide.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense2\src\Artifacts\TowerDefense-A7-Dev-and-Testing-Guide.md'
+[ERROR] [8:44:46 PM] [Comparison] Failed for src/Artifacts/TowerDefense-A14-GitHub-Repository-Setup-Guide.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense2\src\Artifacts\TowerDefense-A14-GitHub-Repository-Setup-Guide.md'
+[ERROR] [8:44:46 PM] [Comparison] Failed for src/Artifacts/TowerDefense-A0-Master-Artifact-List.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense2\src\Artifacts\TowerDefense-A0-Master-Artifact-List.md'
+[ERROR] [8:44:46 PM] [Comparison] Failed for src/Artifacts/TowerDefense-A1-Project-Vision-and-Goals.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense2\src\Artifacts\TowerDefense-A1-Project-Vision-and-Goals.md'
+[ERROR] [8:44:46 PM] [Comparison] Failed for src/Artifacts/TowerDefense-A3-Technical-Scaffolding-Plan.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense2\src\Artifacts\TowerDefense-A3-Technical-Scaffolding-Plan.md'
+[ERROR] [8:44:46 PM] [Comparison] Failed for src/Artifacts/TowerDefense-A7-Dev-and-Testing-Guide.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense2\src\Artifacts\TowerDefense-A7-Dev-and-Testing-Guide.md'
+[ERROR] [8:44:46 PM] [Comparison] Failed for src/Artifacts/TowerDefense-A14-GitHub-Repository-Setup-Guide.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense2\src\Artifacts\TowerDefense-A14-GitHub-Repository-Setup-Guide.md'
+[INFO] [8:44:52 PM] HistoryService: saving data for cycle 1.
+[INFO] [8:45:00 PM] Executing Git Status check.
+[ERROR] [8:45:00 PM] Git command error: Command failed: git status --porcelain
+fatal: not a git repository (or any of the parent directories): .git
+
+[INFO] [8:45:02 PM] HistoryService: saving data for cycle 1.
+[INFO] [8:45:03 PM] Executing Git Baseline with message: "DCE Baseline: Cycle 1 - New Cycle"
+[ERROR] [8:45:03 PM] Git command error: Command failed: git status --porcelain
+fatal: not a git repository (or any of the parent directories): .git
+
+[INFO] [8:45:04 PM] Executing dce.gitInit command.
+[INFO] [8:45:04 PM] Executing Git Init.
+[INFO] [8:45:04 PM] [Auto-Add] Ignoring non-selectable new file: c:/Projects/TowerDefense2/.git
+[INFO] [8:45:04 PM] [triggerFullRefresh] Called because: file change: .git
+[INFO] [8:45:04 PM] [Auto-Add] Ignoring non-selectable new file: c:/Projects/TowerDefense2/.git/HEAD
+[INFO] [8:45:04 PM] [triggerFullRefresh] Called because: file change: HEAD
+[INFO] [8:45:04 PM] [Auto-Add] Ignoring non-selectable new file: c:/Projects/TowerDefense2/.git/config
+[INFO] [8:45:04 PM] [triggerFullRefresh] Called because: file change: config
+[INFO] [8:45:04 PM] [Auto-Add] Ignoring non-selectable new file: c:/Projects/TowerDefense2/.git/description
+[INFO] [8:45:04 PM] [triggerFullRefresh] Called because: file change: description
+[INFO] [8:45:04 PM] [Auto-Add] Ignoring non-selectable new file: c:/Projects/TowerDefense2/.git/hooks
+[INFO] [8:45:04 PM] [triggerFullRefresh] Called because: file change: hooks
+[INFO] [8:45:04 PM] [Auto-Add] Ignoring non-selectable new file: c:/Projects/TowerDefense2/.git/hooks/applypatch-msg.sample
+[INFO] [8:45:04 PM] [triggerFullRefresh] Called because: file change: applypatch-msg.sample
+[INFO] [8:45:04 PM] [Auto-Add] Ignoring non-selectable new file: c:/Projects/TowerDefense2/.git/hooks/commit-msg.sample
+[INFO] [8:45:04 PM] [triggerFullRefresh] Called because: file change: commit-msg.sample
+[INFO] [8:45:04 PM] [Auto-Add] Ignoring non-selectable new file: c:/Projects/TowerDefense2/.git/hooks/fsmonitor-watchman.sample
+[INFO] [8:45:04 PM] [triggerFullRefresh] Called because: file change: fsmonitor-watchman.sample
+[INFO] [8:45:04 PM] [Auto-Add] Ignoring non-selectable new file: c:/Projects/TowerDefense2/.git/hooks/post-update.sample
+[INFO] [8:45:04 PM] [triggerFullRefresh] Called because: file change: post-update.sample
+[INFO] [8:45:04 PM] [Auto-Add] Ignoring non-selectable new file: c:/Projects/TowerDefense2/.git/hooks/pre-applypatch.sample
+[INFO] [8:45:04 PM] [triggerFullRefresh] Called because: file change: pre-applypatch.sample
+[INFO] [8:45:04 PM] [Auto-Add] Ignoring non-selectable new file: c:/Projects/TowerDefense2/.git/hooks/pre-commit.sample
+[INFO] [8:45:04 PM] [triggerFullRefresh] Called because: file change: pre-commit.sample
+[INFO] [8:45:04 PM] [Auto-Add] Ignoring non-selectable new file: c:/Projects/TowerDefense2/.git/hooks/pre-merge-commit.sample
+[INFO] [8:45:04 PM] [triggerFullRefresh] Called because: file change: pre-merge-commit.sample
+[INFO] [8:45:04 PM] [Auto-Add] Ignoring non-selectable new file: c:/Projects/TowerDefense2/.git/hooks/pre-push.sample
+[INFO] [8:45:04 PM] [triggerFullRefresh] Called because: file change: pre-push.sample
+[INFO] [8:45:04 PM] [Auto-Add] Ignoring non-selectable new file: c:/Projects/TowerDefense2/.git/hooks/pre-rebase.sample
+[INFO] [8:45:04 PM] [triggerFullRefresh] Called because: file change: pre-rebase.sample
+[INFO] [8:45:04 PM] [Auto-Add] Ignoring non-selectable new file: c:/Projects/TowerDefense2/.git/hooks/pre-receive.sample
+[INFO] [8:45:04 PM] [triggerFullRefresh] Called because: file change: pre-receive.sample
+[INFO] [8:45:04 PM] [Auto-Add] Ignoring non-selectable new file: c:/Projects/TowerDefense2/.git/hooks/prepare-commit-msg.sample
+[INFO] [8:45:04 PM] [triggerFullRefresh] Called because: file change: prepare-commit-msg.sample
+[INFO] [8:45:04 PM] [Auto-Add] Ignoring non-selectable new file: c:/Projects/TowerDefense2/.git/hooks/push-to-checkout.sample
+[INFO] [8:45:04 PM] [triggerFullRefresh] Called because: file change: push-to-checkout.sample
+[INFO] [8:45:04 PM] [Auto-Add] Ignoring non-selectable new file: c:/Projects/TowerDefense2/.git/hooks/sendemail-validate.sample
+[INFO] [8:45:04 PM] [triggerFullRefresh] Called because: file change: sendemail-validate.sample
+[INFO] [8:45:04 PM] [Auto-Add] Ignoring non-selectable new file: c:/Projects/TowerDefense2/.git/hooks/update.sample
+[INFO] [8:45:04 PM] [triggerFullRefresh] Called because: file change: update.sample
+[INFO] [8:45:04 PM] [Auto-Add] Ignoring non-selectable new file: c:/Projects/TowerDefense2/.git/info
+[INFO] [8:45:04 PM] [triggerFullRefresh] Called because: file change: info
+[INFO] [8:45:04 PM] [Auto-Add] Ignoring non-selectable new file: c:/Projects/TowerDefense2/.git/info/exclude
+[INFO] [8:45:04 PM] [triggerFullRefresh] Called because: file change: exclude
+[INFO] [8:45:04 PM] [Auto-Add] Ignoring non-selectable new file: c:/Projects/TowerDefense2/.git/refs
+[INFO] [8:45:04 PM] [triggerFullRefresh] Called because: file change: refs
+[INFO] [8:45:04 PM] [Auto-Add] Ignoring non-selectable new file: c:/Projects/TowerDefense2/.git/refs/heads
+[INFO] [8:45:04 PM] [triggerFullRefresh] Called because: file change: heads
+[INFO] [8:45:04 PM] [Auto-Add] Ignoring non-selectable new file: c:/Projects/TowerDefense2/.git/refs/tags
+[INFO] [8:45:04 PM] [triggerFullRefresh] Called because: file change: tags
+[INFO] [8:45:05 PM] [triggerFullRefresh] Called because: git repo opened
+[INFO] [8:45:07 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [8:45:07 PM] [SelectionService] Found 3 paths in persisted state. Validating...
+[INFO] [8:45:07 PM] [SelectionService] Returning 3 valid paths.
+[INFO] [8:45:07 PM] Persisted current selection of 3 items.
+[INFO] [8:45:11 PM] Executing Git Baseline with message: "DCE Baseline: Cycle 1 - New Cycle"
+[WARN] [8:45:11 PM] Git command stderr: warning: in the working copy of '.vscode/dce_history.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'prompt.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/Artifacts/DCE_README.md', LF will be replaced by CRLF the next time Git touches it
+
+[INFO] [8:45:11 PM] [GIT_SERVICE] Sending NotifyGitOperationResult: {"success":true,"message":"Successfully created baseline commit."}
+[INFO] [8:45:11 PM] [UI NOTIFY] Received request to show message: "Successfully created baseline commit."
+[INFO] [8:45:11 PM] [Auto-Add] Ignoring non-selectable new file: c:/Projects/TowerDefense2/.git/index
+[INFO] [8:45:11 PM] [triggerFullRefresh] Called because: file change: index
+[INFO] [8:45:11 PM] [Auto-Add] Ignoring non-selectable new file: c:/Projects/TowerDefense2/.git/COMMIT_EDITMSG
+[INFO] [8:45:11 PM] [triggerFullRefresh] Called because: file change: COMMIT_EDITMSG
+[INFO] [8:45:11 PM] [Auto-Add] Ignoring non-selectable new file: c:/Projects/TowerDefense2/.git/logs
+[INFO] [8:45:11 PM] [triggerFullRefresh] Called because: file change: logs
+[INFO] [8:45:11 PM] [Auto-Add] Ignoring non-selectable new file: c:/Projects/TowerDefense2/.git/logs/HEAD
+[INFO] [8:45:11 PM] [triggerFullRefresh] Called because: file change: HEAD
+[INFO] [8:45:11 PM] [Auto-Add] Ignoring non-selectable new file: c:/Projects/TowerDefense2/.git/logs/refs
+[INFO] [8:45:11 PM] [triggerFullRefresh] Called because: file change: refs
+[INFO] [8:45:11 PM] [Auto-Add] Ignoring non-selectable new file: c:/Projects/TowerDefense2/.git/logs/refs/heads
+[INFO] [8:45:11 PM] [triggerFullRefresh] Called because: file change: heads
+[INFO] [8:45:11 PM] [Auto-Add] Ignoring non-selectable new file: c:/Projects/TowerDefense2/.git/logs/refs/heads/master
+[INFO] [8:45:11 PM] [triggerFullRefresh] Called because: file change: master
+[INFO] [8:45:11 PM] [Auto-Add] Ignoring non-selectable new file: c:/Projects/TowerDefense2/.git/refs/heads/master
+[INFO] [8:45:11 PM] [triggerFullRefresh] Called because: file change: master
+[INFO] [8:45:11 PM] [triggerFullRefresh] Called because: file change: index
+[INFO] [8:45:13 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [8:45:13 PM] [SelectionService] Found 3 paths in persisted state. Validating...
+[INFO] [8:45:13 PM] [SelectionService] Returning 3 valid paths.
+[INFO] [8:45:13 PM] Persisted current selection of 3 items.
+[INFO] [8:45:15 PM] [File Operation] Received request to write 6 files.
+[INFO] [8:45:15 PM] Successfully wrote content to: src/Artifacts/TowerDefense-A0-Master-Artifact-List.md
+[INFO] [8:45:15 PM] Successfully wrote content to: src/Artifacts/TowerDefense-A1-Project-Vision-and-Goals.md
+[INFO] [8:45:15 PM] Successfully wrote content to: src/Artifacts/TowerDefense-A2-Technical-Scaffolding-Plan.md
+[INFO] [8:45:15 PM] Successfully wrote content to: src/Artifacts/TowerDefense-A3-Dev-and-Testing-Guide.md
+[INFO] [8:45:15 PM] Successfully wrote content to: src/Artifacts/TowerDefense-A4-Implementation-Roadmap.md
+[INFO] [8:45:15 PM] Successfully wrote content to: src/Artifacts/TowerDefense-A5-GitHub-Repository-Setup-Guide.md
+[INFO] [8:45:15 PM] [SelectionService] Found 3 paths in persisted state. Validating...
+[INFO] [8:45:15 PM] [triggerFullRefresh] Called because: file change: TowerDefense-A0-Master-Artifact-List.md
+[INFO] [8:45:15 PM] [SelectionService] Returning 3 valid paths.
+[INFO] [8:45:15 PM] [DUPLICATION-BUG-LOG] AutoAdd: Current selection has 3. Adding 1. New selection will be 4.
+[INFO] [8:45:15 PM] Persisted current selection of 4 items.
+[INFO] [8:45:15 PM] [SelectionService] Found 4 paths in persisted state. Validating...
+[INFO] [8:45:15 PM] [triggerFullRefresh] Called because: file change: TowerDefense-A1-Project-Vision-and-Goals.md
+[INFO] [8:45:15 PM] [triggerFullRefresh] Called because: file change: TowerDefense-A2-Technical-Scaffolding-Plan.md
+[INFO] [8:45:15 PM] [triggerFullRefresh] Called because: file change: TowerDefense-A3-Dev-and-Testing-Guide.md
+[INFO] [8:45:15 PM] [triggerFullRefresh] Called because: file change: TowerDefense-A4-Implementation-Roadmap.md
+[INFO] [8:45:15 PM] [triggerFullRefresh] Called because: file change: TowerDefense-A5-GitHub-Repository-Setup-Guide.md
+[INFO] [8:45:15 PM] [triggerFullRefresh] Called because: file change: TowerDefense-A0-Master-Artifact-List.md
+[INFO] [8:45:15 PM] [SelectionService] Returning 4 valid paths.
+[INFO] [8:45:15 PM] [DUPLICATION-BUG-LOG] AutoAdd: Current selection has 4. Adding 1. New selection will be 5.
+[INFO] [8:45:15 PM] Persisted current selection of 5 items.
+[INFO] [8:45:15 PM] [SelectionService] Found 5 paths in persisted state. Validating...
+[INFO] [8:45:15 PM] [SelectionService] Returning 5 valid paths.
+[INFO] [8:45:15 PM] [DUPLICATION-BUG-LOG] AutoAdd: Current selection has 5. Adding 4. New selection will be 9.
+[INFO] [8:45:15 PM] Persisted current selection of 9 items.
+[INFO] [8:45:15 PM] HistoryService: saving data for cycle 1.
+[INFO] [8:45:17 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [8:45:17 PM] [SelectionService] Found 9 paths in persisted state. Validating...
+[INFO] [8:45:17 PM] [SelectionService] Returning 9 valid paths.
+[INFO] [8:45:17 PM] Persisted current selection of 9 items.
+[INFO] [8:45:21 PM] HistoryService: saving data for cycle 1.
+[INFO] [8:45:23 PM] HistoryService: saving data for cycle 1.
+[INFO] [8:45:24 PM] Generating prompt.md file for cycle 1...
+[INFO] [8:45:24 PM] [SelectionService] Found 9 paths in persisted state. Validating...
+[INFO] [8:45:24 PM] [SelectionService] Returning 9 valid paths.
+[INFO] [8:45:24 PM] [DUPLICATION-BUG-LOG] Flattener service received 9 paths: ["c:/Projects/TowerDefense2/src","c:/Projects/TowerDefense2/src/Artifacts","c:/Projects/TowerDefense2/src/Artifacts/DCE_README.md","c:/Projects/TowerDefense2/src/Artifacts/TowerDefense-A0-Master-Artifact-List.md","c:/Projects/TowerDefense2/src/Artifacts/TowerDefense-A1-Project-Vision-and-Goals.md","c:/Projects/TowerDefense2/src/Artifacts/TowerDefense-A2-Technical-Scaffolding-Plan.md","c:/Projects/TowerDefense2/src/Artifacts/TowerDefense-A3-Dev-and-Testing-Guide.md","c:/Projects/TowerDefense2/src/Artifacts/TowerDefense-A4-Implementation-Roadmap.md","c:/Projects/TowerDefense2/src/Artifacts/TowerDefense-A5-GitHub-Repository-Setup-Guide.md"]
+[INFO] [8:45:24 PM] [DUPLICATION-BUG-LOG] After expansion and de-duplication, processing 14 unique paths.
+[INFO] [8:45:24 PM] Opening flattened file: c:\Projects\TowerDefense2\flattened_repo.md
+[INFO] [8:45:24 PM] [Auto-Add] Ignoring non-selectable new file: c:/Projects/TowerDefense2/flattened_repo.md
+[INFO] [8:45:24 PM] [triggerFullRefresh] Called because: file change: flattened_repo.md
+[WARN] [8:45:24 PM] [WebView] [TreeView] Could not find ref for active file: c:/Projects/TowerDefense2/flattened_repo.md
+[INFO] [8:45:25 PM] Successfully generated prompt.md file for Cycle 1.
+[INFO] [8:45:25 PM] [triggerFullRefresh] Called because: file change: prompt.md
+[WARN] [8:45:25 PM] [WebView] [TreeView] Could not find ref for active file: c:\Projects\TowerDefense2\flattened_repo.md
+[INFO] [8:45:26 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [8:45:26 PM] [SelectionService] Found 9 paths in persisted state. Validating...
+[INFO] [8:45:26 PM] [SelectionService] Returning 9 valid paths.
+[INFO] [8:45:26 PM] Persisted current selection of 9 items.
+[WARN] [8:45:27 PM] [WebView] [TreeView] Could not find ref for active file: c:\Projects\TowerDefense2\flattened_repo.md
+
+</Ephemeral Context>
+<Previous Cycle 22 Summary of Actions>
+I have analyzed the comprehensive feedback from your playtesting session in Cycle 21. It's an excellent list of bug reports and quality-of-life improvements that will significantly enhance the extension's stability and usability.
+
+My course of action is to first organize this work into a structured plan using our Universal Task Checklist artifact (`A65`). This allows us to track each item and its associated files. Then, I will systematically implement the fixes and features, prioritizing the most critical bugs like data duplication and regressions in UI functionality.
+
+### Course of Action
+
+1.  **Documentation First (Planning & Codifying):**
+    *   I will update **`A65. DCE - Universal Task Checklist.md`** with a new set of tasks corresponding to the six feedback items from Cycle 21.
+    *   I will add a new case study to **`A11. DCE - Regression Case Studies.md`** for the "Duplicate Files in Context due to Incomplete Root Deselection" bug. This will codify the root cause and the two-part solution (UI logic fix and backend safeguard) to prevent future regressions.
+    *   I will update **`A86. DCE - PCPP Workflow Centralization and UI Persistence Plan.md`** to re-iterate the requirement for the "Select All" and "Deselect All" buttons in the central workflow toolbar, noting that they were lost in a previous refactor.
+
+2.  **Implement Bug Fixes & Regressions:**
+    *   **Sort Button Style (Item #1):** I will fix the CSS for the `sort-button` in `view.scss` to match the style of the other primary workflow buttons.
+    *   **"Select All" Buttons (Item #3):** I will re-add the "Select All" and "Deselect All Across All Responses" buttons to the `WorkflowToolbar.tsx` component. The `handleSelectAllAssociatedFiles` logic will be implemented in `view.tsx` to correctly select all files in the *active* tab while de-selecting any conflicting files from other tabs.
+    *   **Duplicate Files Bug (Item #4):**
+        *   **Safeguard:** In `flattener.service.ts`, I will add a line to de-duplicate the list of file paths using `[...new Set(paths)]` before processing. This provides an immediate and robust safeguard against duplicates in the output.
+        *   **Root Cause:** I will fix the underlying bug in `FileTree.utils.ts` to ensure that when a root/ancestor directory is unchecked, all of its descendant files are correctly and completely removed from the selection state.
+    *   **Workflow Animation Persistence (Item #2):** To fix the highlight disappearing on tab switch, I will add a call to the immediate `saveCurrentCycleState` function to the `visibilitychange` event listener in `view.tsx`. This ensures the latest UI state (including the `workflowStep`) is persisted when the panel is hidden.
+
+3.  **Implement Enhancements:**
+    *   **Onboarding View UI (Item #5):** I will update `OnboardingView.tsx` to add a title ("Project Scope") above the text area and will integrate the `SaveStatusIndicator` component to provide save status feedback.
+    *   **Exclusion List (Item #6):** I will add `'.next'` to the `NON_SELECTABLE_PATTERNS` array in `file-tree.service.ts` to ensure it is ignored by default.
+
+### Files Updated This Cycle:
+*   `src/Artifacts/A11. DCE - Regression Case Studies.md` (Updated)
+*   `src/Artifacts/A65. DCE - Universal Task Checklist.md` (Updated)
+*   `src/Artifacts/A86. DCE - PCPP Workflow Centralization and UI Persistence Plan.md` (Updated)
+*   `src/backend/services/file-tree.service.ts` (Updated)
+*   `src/backend/services/flattener.service.ts` (Updated)
+*   `src/client/components/file-tree/FileTree.utils.ts` (Updated)
+*   `src/client/views/parallel-copilot.view/components/WorkflowToolbar.tsx` (Updated)
+*   `src/client/views/parallel-copilot.view/OnboardingView.tsx` (Updated)
+*   `src/client/views/parallel-copilot.view/view.scss` (Updated)
+*   `src/client/views/parallel-copilot.view/view.tsx` (Updated)
+</Previous Cycle 22 Summary of Actions>
+</Cycle 23>
+
 <Cycle 22>
 <Cycle Context>
 okay fantastic work! below i will recap my observations/findings after rolling in the files from your previous response:
@@ -725,45 +1005,6 @@ now as for the duplicate, it still exists. ill describe my process below. please
 </previous cycle requests (A65)>
 
 </Cycle Context>
-<Ephemeral Context>
-<!--
-  File: flattened_repo.md
-  Source Directory: c:\Projects\TowerDefense
-  Date Generated: 2025-09-19T12:55:57.624Z
-  ---
-  Total Files: 14
-  Approx. Tokens: 9896
--->
-
-<!-- Top 10 Text Files by Token Count -->
-1. src\Artifacts\TowerGuard-A14-GitHub-Repository-Setup-Guide.md (1122 tokens)
-2. src\Artifacts\TowerGuard-A14-GitHub-Repository-Setup-Guide.md (1122 tokens)
-3. src\Artifacts\TowerGuard-A11-Implementation-Roadmap.md (791 tokens)
-4. src\Artifacts\TowerGuard-A11-Implementation-Roadmap.md (791 tokens)
-5. src\Artifacts\DCE_README.md (782 tokens)
-6. src\Artifacts\DCE_README.md (782 tokens)
-7. src\Artifacts\TowerGuard-A1-Project-Vision-and-Goals.md (641 tokens)
-8. src\Artifacts\TowerGuard-A3-Technical-Scaffolding-Plan.md (641 tokens)
-9. src\Artifacts\TowerGuard-A1-Project-Vision-and-Goals.md (641 tokens)
-10. src\Artifacts\TowerGuard-A3-Technical-Scaffolding-Plan.md (641 tokens)
-
-<!-- Full File List -->
-1. src\Artifacts\DCE_README.md - Lines: 47 - Chars: 3127 - Tokens: 782
-2. src\Artifacts\TowerGuard-A0-Master-Artifact-List.md - Lines: 43 - Chars: 2222 - Tokens: 556
-3. src\Artifacts\TowerGuard-A1-Project-Vision-and-Goals.md - Lines: 46 - Chars: 2563 - Tokens: 641
-4. src\Artifacts\TowerGuard-A11-Implementation-Roadmap.md - Lines: 53 - Chars: 3163 - Tokens: 791
-5. src\Artifacts\TowerGuard-A14-GitHub-Repository-Setup-Guide.md - Lines: 104 - Chars: 4485 - Tokens: 1122
-6. src\Artifacts\TowerGuard-A3-Technical-Scaffolding-Plan.md - Lines: 53 - Chars: 2561 - Tokens: 641
-7. src\Artifacts\TowerGuard-A7-Dev-and-Testing-Guide.md - Lines: 42 - Chars: 1659 - Tokens: 415
-8. src\Artifacts\DCE_README.md - Lines: 47 - Chars: 3127 - Tokens: 782
-9. src\Artifacts\TowerGuard-A0-Master-Artifact-List.md - Lines: 43 - Chars: 2222 - Tokens: 556
-10. src\Artifacts\TowerGuard-A1-Project-Vision-and-Goals.md - Lines: 46 - Chars: 2563 - Tokens: 641
-11. src\Artifacts\TowerGuard-A11-Implementation-Roadmap.md - Lines: 53 - Chars: 3163 - Tokens: 791
-12. src\Artifacts\TowerGuard-A14-GitHub-Repository-Setup-Guide.md - Lines: 104 - Chars: 4485 - Tokens: 1122
-13. src\Artifacts\TowerGuard-A3-Technical-Scaffolding-Plan.md - Lines: 53 - Chars: 2561 - Tokens: 641
-14. src\Artifacts\TowerGuard-A7-Dev-and-Testing-Guide.md - Lines: 42 - Chars: 1659 - Tokens: 415
-
-</Ephemeral Context>
 <Previous Cycle 21 Summary of Actions>
 I have analyzed the four TypeScript errors and the project plan persistence bug from Cycle 20. The errors are all related to incorrect type handling—specifically, trying to access properties on arrays instead of their elements, and props being passed to React components that are not declared in their type interfaces. The persistence bug is a classic state management issue where changes to the project plan in the onboarding view were not triggering the auto-save mechanism.
 
@@ -2496,22 +2737,22 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-19T22:57:38.800Z
+  Date Generated: 2025-09-20T01:50:30.994Z
   ---
   Total Files: 171
-  Approx. Tokens: 454910
+  Approx. Tokens: 454905
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (8583 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (8552 tokens)
 4. src\Artifacts\A0. DCE Master Artifact List.md (8106 tokens)
 5. src\client\views\parallel-copilot.view\view.scss (5583 tokens)
 6. src\backend\services\prompt.service.ts (5139 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 8. src\backend\services\file-operation.service.ts (4370 tokens)
-9. src\client\views\context-chooser.view\view.tsx (4019 tokens)
+9. src\client\views\context-chooser.view\view.tsx (4070 tokens)
 10. src\client\views\context-chooser.view\view.scss (3708 tokens)
 
 <!-- Full File List -->
@@ -2617,11 +2858,11 @@ This file-centric approach helps in planning and prioritizing work, especially i
 100. src\backend\services\action.service.ts - Lines: 71 - Chars: 2444 - Tokens: 611
 101. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
 102. src\backend\services\file-operation.service.ts - Lines: 360 - Chars: 17477 - Tokens: 4370
-103. src\backend\services\file-tree.service.ts - Lines: 272 - Chars: 14732 - Tokens: 3683
-104. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12916 - Tokens: 3229
+103. src\backend\services\file-tree.service.ts - Lines: 273 - Chars: 14651 - Tokens: 3663
+104. src\backend\services\flattener.service.ts - Lines: 244 - Chars: 13031 - Tokens: 3258
 105. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 106. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-107. src\backend\services\history.service.ts - Lines: 288 - Chars: 12594 - Tokens: 3149
+107. src\backend\services\history.service.ts - Lines: 292 - Chars: 12460 - Tokens: 3115
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 109. src\backend\services\prompt.service.ts - Lines: 388 - Chars: 20553 - Tokens: 5139
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
@@ -2641,7 +2882,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 124. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 125. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
 126. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
-127. src\client\views\context-chooser.view\view.tsx - Lines: 150 - Chars: 16076 - Tokens: 4019
+127. src\client\views\context-chooser.view\view.tsx - Lines: 154 - Chars: 16280 - Tokens: 4070
 128. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
 129. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 55 - Chars: 1970 - Tokens: 493
 130. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 84 - Chars: 3386 - Tokens: 847
@@ -2654,7 +2895,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 100 - Chars: 5002 - Tokens: 1251
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 959 - Chars: 22331 - Tokens: 5583
 139. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-140. src\client\views\parallel-copilot.view\view.tsx - Lines: 281 - Chars: 34332 - Tokens: 8583
+140. src\client\views\parallel-copilot.view\view.tsx - Lines: 282 - Chars: 34208 - Tokens: 8552
 141. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 142. src\client\views\settings.view\on-message.ts - Lines: 17 - Chars: 762 - Tokens: 191
 143. src\client\views\settings.view\view.scss - Lines: 87 - Chars: 1767 - Tokens: 442
@@ -18796,7 +19037,7 @@ export class FileOperationService {
 
 <file path="src/backend/services/file-tree.service.ts">
 // src/backend/services/file-tree.service.ts
-// Updated on: C21 (Add .next to non-selectable patterns)
+// Updated on: C22 (Add logging for duplication bug)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -18919,6 +19160,7 @@ export class FileTreeService {
         this.autoAddQueue = [];
         const currentSelection = await Services.selectionService.getLastSelection();
         const newSelection = [...new Set([...currentSelection, ...pathsToAdd])];
+        Services.loggerService.log(`[DUPLICATION-BUG-LOG] AutoAdd: Current selection has ${currentSelection.length}. Adding ${pathsToAdd.length}. New selection will be ${newSelection.length}.`);
         await Services.selectionService.saveCurrentSelection(newSelection);
         this.isProcessingAutoAdd = false;
         if (this.autoAddQueue.length > 0) this.processAutoAddQueue();
@@ -19070,7 +19312,7 @@ export class FileTreeService {
 </file_artifact>
 
 <file path="src/backend/services/flattener.service.ts">
-// Updated on: C21 (Add de-duplication safeguard)
+// Updated on: C22 (Add logging for duplication bug)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -19079,6 +19321,7 @@ import { VIEW_TYPES } from '@/common/view-types';
 import { serverIPCs } from '@/client/views';
 import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 import { formatBytes } from '@/common/utils/formatting';
+import { logger } from '@/client/utils/logger';
 
 interface FileStats {
     filePath: string;
@@ -19117,6 +19360,7 @@ export class FlattenerService {
     }
 
     public async flatten(selectedPaths: string[]) {
+        Services.loggerService.log(`[DUPLICATION-BUG-LOG] Flattener service received ${selectedPaths.length} paths: ${JSON.stringify(selectedPaths)}`);
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (!workspaceFolders || workspaceFolders.length === 0) {
             vscode.window.showErrorMessage("Cannot flatten context: No workspace folder is open.");
@@ -19133,6 +19377,7 @@ export class FlattenerService {
         try {
             const allFilePaths = await this.expandDirectories(selectedPaths);
             const uniqueFilePaths = [...new Set(allFilePaths)]; // Safeguard against duplicates
+            Services.loggerService.log(`[DUPLICATION-BUG-LOG] After expansion and de-duplication, processing ${uniqueFilePaths.length} unique paths.`);
 
             const fileStatsPromises = uniqueFilePaths.map(filePath => this.getFileStatsAndContent(filePath));
             const results = await Promise.all(fileStatsPromises);
@@ -19535,7 +19780,7 @@ export class HighlightingService {
 
 <file path="src/backend/services/history.service.ts">
 // src/backend/services/history.service.ts
-// Updated on: C20 (Fix array access errors)
+// Updated on: C22 (Fix auto-save icon bug for Cycle 0)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -19680,8 +19925,13 @@ export class HistoryService {
     }
 
     public async saveCycleData(cycleData: PcppCycle): Promise<void> {
+        const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
+
         if (cycleData.cycleId === 0) {
             await this.saveProjectScope(cycleData.cycleContext);
+            if (serverIpc) {
+                serverIpc.sendToClient(ServerToClientChannel.NotifySaveComplete, { cycleId: 0 });
+            }
             return;
         }
 
@@ -19699,7 +19949,6 @@ export class HistoryService {
 
         await this._writeHistoryFile(history);
 
-        const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
         if (serverIpc) {
             serverIpc.sendToClient(ServerToClientChannel.NotifySaveComplete, { cycleId: cycleData.cycleId });
         }
@@ -22696,7 +22945,7 @@ body {
 </file_artifact>
 
 <file path="src/client/views/context-chooser.view/view.tsx">
-// Updated on: C184 (Add gitStatusMap state and handler)
+// Updated on: C22 (Add logging for duplication bug)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -22778,7 +23027,11 @@ const App = () => {
         clientIpc.sendToServer(ClientToServerChannel.RequestLastSelection, {});
     }, [clientIpc]);
 
-    const handleFlattenClick = () => clientIpc.sendToServer(ClientToServerChannel.RequestFlattenContext, { selectedPaths: checkedFiles });
+    const handleFlattenClick = () => {
+        logger.log(`[DUPLICATION-BUG-LOG] Flatten button clicked. Sending ${checkedFiles.length} paths.`);
+        logger.log(`[DUPLICATION-BUG-LOG] Paths: ${JSON.stringify(checkedFiles)}`);
+        clientIpc.sendToServer(ClientToServerChannel.RequestFlattenContext, { selectedPaths: checkedFiles });
+    };
     const handleRefresh = () => { processedFilesCache.current.clear(); requestFiles(true); };
     const handleExpandAll = () => setExpandAllTrigger(c => c + 1);
     const handleCollapseAll = () => setCollapseTrigger(c => c + 1);
@@ -24625,7 +24878,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C21 (Add animation persistence and Select All logic)
+// Updated on: C22 (Add logging for duplication bug)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -24643,6 +24896,7 @@ import ResponseTabs from './components/ResponseTabs';
 import ResponsePane from './components/ResponsePane';
 import * as path from 'path-browserify';
 import WorkflowToolbar from './components/WorkflowToolbar';
+import { logger } from '../../utils/logger';
 
 console.log('[PCPP View] view.tsx module loaded');
 
@@ -24829,7 +25083,7 @@ const App = () => {
 
     const handleCycleChange = (e: React.MouseEvent | null, newCycle: number) => { e?.stopPropagation(); if (saveStatus !== 'saved') return; if (newCycle >= 0 && newCycle <= maxCycle) { setSelectedFilesForReplacement(new Set()); setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycle }); setWorkflowStep(null); } };
     const handleSelectForViewing = (filePath: string) => { const newPath = selectedFilePath === filePath ? null : filePath; setSelectedFilePath(newPath); };
-    const handleAcceptSelectedFiles = () => { if (selectedFilesForReplacement.size === 0) return; const filesToWrite: BatchWriteFile[] = []; selectedFilesForReplacement.forEach(compositeKey => { const [responseId, filePath] = compositeKey.split(':::'); const responseData = tabs[responseId]; if (responseData?.parsedContent) { const file = responseData.parsedContent.files.find(f => f.path === filePath); if (file) { const finalPath = pathOverrides.get(file.path) || file.path; filesToWrite.push({ path: finalPath, content: file.content }); } } }); if (filesToWrite.length > 0) { clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite }); } setWorkflowStep('awaitingCycleContext'); };
+    const handleAcceptSelectedFiles = () => { if (selectedFilesForReplacement.size === 0) return; const filesToWrite: BatchWriteFile[] = []; selectedFilesForReplacement.forEach(compositeKey => { const [responseId, filePath] = compositeKey.split(':::'); const responseData = tabs[responseId]; if (responseData?.parsedContent) { const file = responseData.parsedContent.files.find(f => f.path === filePath); if (file) { const finalPath = pathOverrides.get(file.path) || file.path; filesToWrite.push({ path: finalPath, content: file.content }); } } }); logger.log(`[DUPLICATION-BUG-LOG] Accepting ${filesToWrite.length} files: ${JSON.stringify(filesToWrite.map(f => f.path))}`); if (filesToWrite.length > 0) { clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite }); } setWorkflowStep('awaitingCycleContext'); };
     const handleLinkFile = (originalPath: string) => { if (tempOverridePath.trim()) { setPathOverrides(prev => new Map(prev).set(originalPath, tempOverridePath.trim())); setFileExistenceMap(prev => new Map(prev).set(originalPath, true)); setTempOverridePath(''); handleSelectForViewing(originalPath); } };
     const handleUnlinkFile = (originalPath: string) => { setPathOverrides(prev => { const newMap = new Map(prev); newMap.delete(originalPath); return newMap; }); setFileExistenceMap(prev => new Map(prev).set(originalPath, false)); };
     const onCycleContextChange = React.useCallback((value: string) => { setCycleContext(value); setCycleContextTokens(Math.ceil(value.length / 4)); setSaveStatus('unsaved'); }, []);

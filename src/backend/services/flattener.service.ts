@@ -1,4 +1,4 @@
-// Updated on: C21 (Add de-duplication safeguard)
+// Updated on: C22 (Add logging for duplication bug)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -7,6 +7,7 @@ import { VIEW_TYPES } from '@/common/view-types';
 import { serverIPCs } from '@/client/views';
 import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 import { formatBytes } from '@/common/utils/formatting';
+import { logger } from '@/client/utils/logger';
 
 interface FileStats {
     filePath: string;
@@ -45,6 +46,7 @@ export class FlattenerService {
     }
 
     public async flatten(selectedPaths: string[]) {
+        Services.loggerService.log(`[DUPLICATION-BUG-LOG] Flattener service received ${selectedPaths.length} paths: ${JSON.stringify(selectedPaths)}`);
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (!workspaceFolders || workspaceFolders.length === 0) {
             vscode.window.showErrorMessage("Cannot flatten context: No workspace folder is open.");
@@ -61,6 +63,7 @@ export class FlattenerService {
         try {
             const allFilePaths = await this.expandDirectories(selectedPaths);
             const uniqueFilePaths = [...new Set(allFilePaths)]; // Safeguard against duplicates
+            Services.loggerService.log(`[DUPLICATION-BUG-LOG] After expansion and de-duplication, processing ${uniqueFilePaths.length} unique paths.`);
 
             const fileStatsPromises = uniqueFilePaths.map(filePath => this.getFileStatsAndContent(filePath));
             const results = await Promise.all(fileStatsPromises);
