@@ -1,23 +1,23 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-20T15:41:12.508Z
+  Date Generated: 2025-09-20T16:28:19.118Z
   ---
   Total Files: 171
-  Approx. Tokens: 455956
+  Approx. Tokens: 455076
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (8519 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (8343 tokens)
 4. src\Artifacts\A0. DCE Master Artifact List.md (8106 tokens)
 5. src\client\views\parallel-copilot.view\view.scss (5583 tokens)
 6. src\backend\services\prompt.service.ts (5237 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 8. src\backend\services\file-operation.service.ts (4370 tokens)
-9. src\Artifacts\A11. DCE - Regression Case Studies.md (4143 tokens)
-10. src\client\views\context-chooser.view\view.tsx (4038 tokens)
+9. src\Artifacts\A11. DCE - Regression Case Studies.md (4059 tokens)
+10. src\client\views\context-chooser.view\view.tsx (4033 tokens)
 
 <!-- Full File List -->
 1. public\copilot.svg - [Binary] Size: 445 Bytes
@@ -32,7 +32,7 @@
 10. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
 11. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
 12. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
-13. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 128 - Chars: 16571 - Tokens: 4143
+13. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 126 - Chars: 16234 - Tokens: 4059
 14. src\Artifacts\A11.1 DCE - New Regression Case Studies.md - Lines: 391 - Chars: 46197 - Tokens: 11550
 15. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5687 - Tokens: 1422
 16. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
@@ -122,18 +122,18 @@
 100. src\backend\services\action.service.ts - Lines: 71 - Chars: 2444 - Tokens: 611
 101. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
 102. src\backend\services\file-operation.service.ts - Lines: 360 - Chars: 17477 - Tokens: 4370
-103. src\backend\services\file-tree.service.ts - Lines: 287 - Chars: 14986 - Tokens: 3747
-104. src\backend\services\flattener.service.ts - Lines: 243 - Chars: 12817 - Tokens: 3205
+103. src\backend\services\file-tree.service.ts - Lines: 282 - Chars: 14582 - Tokens: 3646
+104. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
 105. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 106. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-107. src\backend\services\history.service.ts - Lines: 291 - Chars: 12352 - Tokens: 3088
+107. src\backend\services\history.service.ts - Lines: 266 - Chars: 10521 - Tokens: 2631
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 109. src\backend\services\prompt.service.ts - Lines: 396 - Chars: 20945 - Tokens: 5237
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 111. src\backend\services\services.ts - Lines: 42 - Chars: 1905 - Tokens: 477
 112. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
 113. src\client\components\file-tree\FileTree.tsx - Lines: 176 - Chars: 11127 - Tokens: 2782
-114. src\client\components\file-tree\FileTree.utils.ts - Lines: 130 - Chars: 4742 - Tokens: 1186
+114. src\client\components\file-tree\FileTree.utils.ts - Lines: 134 - Chars: 4721 - Tokens: 1181
 115. src\client\components\tree-view\TreeView.tsx - Lines: 395 - Chars: 17687 - Tokens: 4422
 116. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 117. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
@@ -146,7 +146,7 @@
 124. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 125. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
 126. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
-127. src\client\views\context-chooser.view\view.tsx - Lines: 158 - Chars: 16150 - Tokens: 4038
+127. src\client\views\context-chooser.view\view.tsx - Lines: 151 - Chars: 16129 - Tokens: 4033
 128. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
 129. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 55 - Chars: 1970 - Tokens: 493
 130. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 84 - Chars: 3386 - Tokens: 847
@@ -159,7 +159,7 @@
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 100 - Chars: 5002 - Tokens: 1251
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 959 - Chars: 22331 - Tokens: 5583
 139. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-140. src\client\views\parallel-copilot.view\view.tsx - Lines: 282 - Chars: 34076 - Tokens: 8519
+140. src\client\views\parallel-copilot.view\view.tsx - Lines: 277 - Chars: 33369 - Tokens: 8343
 141. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 142. src\client\views\settings.view\on-message.ts - Lines: 17 - Chars: 762 - Tokens: 191
 143. src\client\views\settings.view\view.scss - Lines: 87 - Chars: 1767 - Tokens: 442
@@ -1216,7 +1216,7 @@ To enhance the data curation process, it is critical for the user to have immedi
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C25 (Add Auto-Add Race Condition case)
+# Updated on: C26 (Add Auto-Add Race Condition case)
 
 ## 1. Purpose
 
@@ -1230,13 +1230,11 @@ This document serves as a living record of persistent or complex bugs that have 
 
 ### Case Study 033: Selection State Desynchronization Due to Auto-Add Race Condition
 
--   **Artifacts Affected:** `src/client/views/context-chooser.view/view.tsx`, `src/client/components/file-tree/FileTree.utils.ts`
--   **Cycles Observed:** C25
--   **Symptom:** When "Automatically add new files to selection" is enabled, a newly created file is added to the "Selected Items" list but cannot be removed by unchecking its checkbox. The UI state becomes desynchronized.
--   **Root Cause Analysis (RCA):** The bug is caused by a race condition on the frontend. The file watcher on the backend triggers two separate events almost simultaneously: a `ForceRefresh` message (for the file tree structure) and an `ApplySelectionSet` message (for the updated selection). The `ForceRefresh` handler was incorrectly designed to also request the latest selection state, creating two conflicting sources of truth for the selection. It was possible for the selection state (`checkedFiles`) to update from the `ApplySelectionSet` message before the file tree state (`files`) was updated from the `ForceRefresh`. If the user then clicked the checkbox, the state update logic would try to find the new file node in the old, stale file tree, fail to find it, and therefore fail to update the selection.
--   **Codified Solution & Best Practice:**
-    1.  **Decouple Client-Side Refreshes:** The `ForceRefresh` message handler on the client must only be responsible for refreshing the data it's named for: the file tree. It should not also trigger a request for selection state. The selection state must only be updated when the client receives an explicit `ApplySelectionSet` message from the backend. This removes the race condition.
-    2.  **Resilient State Utilities:** Client-side utilities that operate on state (like `addRemovePathInSelectedFiles`) should be defensively coded. In this case, if the utility is asked to remove a file path that exists in the selection set but cannot be found in the file tree (due to temporary staleness), it should still proceed to remove the path from the selection set to ensure the UI remains responsive to the user's intent.
+-   **Artifacts Affected:** `src/client/components/file-tree/FileTree.utils.ts`, `src/client/views/context-chooser.view/view.tsx`
+-   **Cycles Observed:** C25, C26
+-   **Symptom:** When "Automatically add new files to selection" is enabled, a newly created file is added to the "Selected Items" list but cannot be removed by unchecking its checkbox or its parent directory's checkbox. The UI state becomes desynchronized, leaving the item "stuck" in the selection.
+-   **Root Cause Analysis (RCA):** The bug is caused by a race condition on the frontend. After a file is created, the backend sends two messages in close succession: an `ApplySelectionSet` message (to update the selection) and a `ForceRefresh` message (to update the file tree structure). It is possible for the user to interact with the UI after the selection state (`checkedFiles`) has been updated but before the file tree state (`files`) has been rebuilt. If the user unchecks a parent directory in this state, the uncheck logic traverses the *stale* file tree, fails to find the newly added file (as it's not in the old tree structure), and therefore fails to remove it from the selection set.
+-   **Codified Solution & Best Practice:** The uncheck logic must be made resilient to a temporarily stale file tree. When unchecking a directory, in addition to removing descendants found via tree traversal, a secondary, path-based check must be performed. The logic must iterate through the current selection set and defensively remove any file path that is a string-descendant of the directory being unchecked (i.e., `filePath.startsWith(directoryPath)`). This ensures the user's intent is respected even if the component's state is momentarily out of sync.
 
 ---
 
@@ -16323,7 +16321,7 @@ export class FileOperationService {
 
 <file path="src/backend/services/file-tree.service.ts">
 // src/backend/services/file-tree.service.ts
-// Updated on: C25 (Add diagnostic logging)
+// Updated on: C26 (Add targeted logging)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -16365,7 +16363,6 @@ export class FileTreeService {
             this.gitApi.onDidOpenRepository(() => this.triggerFullRefresh('git repo opened'));
             this.gitApi.repositories.forEach(repo => {
                 repo.state.onDidChange(() => {
-                    Services.loggerService.warn(`[FTV-FLASH-DEBUG] Git repo state onDidChange event fired.`);
                     this.triggerDecorationsUpdate();
                 });
             });
@@ -16383,7 +16380,7 @@ export class FileTreeService {
     }
 
     private triggerFullRefresh(reason: string) {
-        Services.loggerService.log(`[triggerFullRefresh] Called because: ${reason}`);
+        Services.loggerService.log(`[FTV Refresh] Full refresh triggered. Reason: ${reason}`);
         if (this.refreshDebounceTimer) clearTimeout(this.refreshDebounceTimer);
         this.refreshDebounceTimer = setTimeout(() => {
             this.fileTreeCache = null;
@@ -16430,13 +16427,11 @@ export class FileTreeService {
             
             const isNonSelectable = !this._isSelectable(normalizedPath, vscode.FileType.File);
             if (isNonSelectable) {
-                Services.loggerService.log(`[Auto-Add] Ignoring non-selectable new file: ${normalizedPath}`);
                 onFileChange(uri, 'onDidCreate');
                 return;
             }
 
             if (Services.fileOperationService.hasFileToIgnoreForAutoAdd(normalizedPath)) {
-                Services.loggerService.log(`[Auto-Add] Ignoring create event for ${normalizedPath} as requested.`);
                 Services.fileOperationService.removeFileToIgnoreForAutoAdd(normalizedPath);
             } else if (Services.selectionService.getAutoAddState()) {
                 this.autoAddQueue.push(normalizedPath);
@@ -16454,18 +16449,16 @@ export class FileTreeService {
     
         const pathsToAdd = [...new Set(this.autoAddQueue)];
         this.autoAddQueue = [];
-    
+        Services.loggerService.log(`[Auto-Add] Processing queue with ${pathsToAdd.length} files: ${JSON.stringify(pathsToAdd)}`);
+
         const currentSelection = await Services.selectionService.getLastSelection();
         const newSelection = [...new Set([...currentSelection, ...pathsToAdd])];
     
-        Services.loggerService.log(`[AUTO-ADD DEBUG] currentSelection: ${JSON.stringify(currentSelection)}`);
-        Services.loggerService.log(`[AUTO-ADD DEBUG] pathsToAdd: ${JSON.stringify(pathsToAdd)}`);
-        Services.loggerService.log(`[AUTO-ADD DEBUG] newSelection being saved and sent: ${JSON.stringify(newSelection)}`);
-
         await Services.selectionService.saveCurrentSelection(newSelection);
         
         const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
         if (serverIpc) {
+            Services.loggerService.log(`[Auto-Add] Sending ApplySelectionSet to client with ${newSelection.length} total paths.`);
             serverIpc.sendToClient(ServerToClientChannel.ApplySelectionSet, { paths: newSelection });
         }
     }
@@ -16612,7 +16605,7 @@ export class FileTreeService {
 </file_artifact>
 
 <file path="src/backend/services/flattener.service.ts">
-// Updated on: C24 (Remove diagnostic logging)
+// Updated on: C26 (Remove logging)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -16621,7 +16614,6 @@ import { VIEW_TYPES } from '@/common/view-types';
 import { serverIPCs } from '@/client/views';
 import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 import { formatBytes } from '@/common/utils/formatting';
-import { logger } from '@/client/utils/logger';
 
 interface FileStats {
     filePath: string;
@@ -16675,7 +16667,7 @@ export class FlattenerService {
 
         try {
             const allFilePaths = await this.expandDirectories(selectedPaths);
-            const uniqueFilePaths = [...new Set(allFilePaths)]; 
+            const uniqueFilePaths = [...new Set(allFilePaths.map(p => normalizePath(p)))];
 
             const fileStatsPromises = uniqueFilePaths.map(filePath => this.getFileStatsAndContent(filePath));
             const results = await Promise.all(fileStatsPromises);
@@ -16685,8 +16677,6 @@ export class FlattenerService {
 
             await fs.writeFile(outputFilePath, outputContent, 'utf-8');
             vscode.window.showInformationMessage(`Successfully flattened ${validResults.length} files to flattened_repo.md.`);
-
-            Services.loggerService.log(`Opening flattened file: ${outputFilePath}`);
             
             const isFileOpen = vscode.window.visibleTextEditors.some(editor => editor.document.uri.fsPath === outputFilePath);
             if (!isFileOpen) {
@@ -16702,7 +16692,6 @@ export class FlattenerService {
 
         } catch (error: any) {
             vscode.window.showErrorMessage(`Failed to flatten context: ${error.message}`);
-            console.error(error);
         }
     }
 
@@ -16718,7 +16707,7 @@ export class FlattenerService {
                     allFiles.push(p);
                 }
             } catch (e) {
-                console.warn(`Could not stat path ${p}, skipping.`);
+                // Ignore errors for paths that might not exist
             }
         }
         return allFiles;
@@ -16744,7 +16733,7 @@ export class FlattenerService {
                 }
             }
         } catch (e) {
-            console.error(`Error reading directory ${normalizedDirPath}:`, e);
+            // Ignore errors
         }
         return files;
     }
@@ -17079,7 +17068,7 @@ export class HighlightingService {
 
 <file path="src/backend/services/history.service.ts">
 // src/backend/services/history.service.ts
-// Updated on: C24 (Remove diagnostic logging)
+// Updated on: C26 (Remove logging)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -17105,8 +17094,6 @@ export class HistoryService {
         if (workspaceFolders && workspaceFolders.length > 0) {
             this.workspaceRoot = workspaceFolders[0].uri.fsPath;
             this.historyFilePath = path.join(this.workspaceRoot, '.vscode', 'dce_history.json');
-        } else {
-            Services.loggerService.warn("HistoryService: No workspace folder found. History will not be saved.");
         }
     }
 
@@ -17138,7 +17125,6 @@ export class HistoryService {
 
     public async saveLastViewedCycleId(id: number | null): Promise<void> {
         await this.context.workspaceState.update(LAST_VIEWED_CYCLE_ID_KEY, id);
-        Services.loggerService.log(`Saved last viewed cycle ID: ${id}`);
     }
 
     public getLastViewedCycleId(): number | undefined {
@@ -17146,8 +17132,6 @@ export class HistoryService {
     }
 
     public async getInitialCycle(): Promise<PcppCycle> {
-        Services.loggerService.log("HistoryService: getInitialCycle called.");
-
         if (!this.workspaceRoot) {
             return { cycleId: -1, timestamp: '', title: '', cycleContext: '', ephemeralContext: '', responses: {} };
         }
@@ -17178,12 +17162,10 @@ export class HistoryService {
         };
 
         if (isFreshEnvironment) {
-             Services.loggerService.log("Fresh environment detected. Returning Cycle 0.");
              return defaultCycle;
         }
 
         if (history.cycles.length === 0) {
-            Services.loggerService.log("No history found, creating default cycle 1.");
             await this.saveCycleData(defaultCycle);
             return defaultCycle;
         }
@@ -17192,20 +17174,15 @@ export class HistoryService {
         const cycleMap = new Map(history.cycles.map(c => [c.cycleId, c]));
 
         if (lastViewedId !== undefined && cycleMap.has(lastViewedId)) {
-            Services.loggerService.log(`Found valid last viewed cycle: ${lastViewedId}`);
             return cycleMap.get(lastViewedId)!;
         }
         
         const latestCycle = history.cycles.reduce((latest, current) => current.cycleId > latest.cycleId ? current : latest);
-        Services.loggerService.log(`No valid last-viewed cycle found. Falling back to latest cycle: ${latestCycle.cycleId}`);
         return latestCycle;
     }
 
     public async getCycleData(cycleId: number): Promise<PcppCycle | null> {
-        Services.loggerService.log(`HistoryService: getting data for cycle ${cycleId}.`);
-        
         if (cycleId === 0) {
-            Services.loggerService.log("Returning special case for Cycle 0.");
             const history = await this._readHistoryFile();
             return {
                 cycleId: 0, timestamp: new Date().toISOString(), title: 'Project Setup', cycleContext: history.projectScope || '', ephemeralContext: '', responses: {}, isParsedMode: false, tabCount: 4, isSortedByTokens: false, pathOverrides: {},
@@ -17220,7 +17197,6 @@ export class HistoryService {
         const history = await this._readHistoryFile();
         history.projectScope = scope;
         await this._writeHistoryFile(history);
-        Services.loggerService.log("Project scope saved.");
     }
 
     public async saveCycleData(cycleData: PcppCycle): Promise<void> {
@@ -17253,8 +17229,6 @@ export class HistoryService {
     }
 
     public async deleteCycle(cycleId: number): Promise<number> {
-        Services.loggerService.log(`HistoryService: Deleting cycle ${cycleId}.`);
-        
         const confirmation = await vscode.window.showWarningMessage(
             `Are you sure you want to delete Cycle ${cycleId}? This action cannot be undone.`,
             { modal: true },
@@ -17262,21 +17236,18 @@ export class HistoryService {
         );
 
         if (confirmation !== "Delete") {
-            Services.loggerService.log("Cycle deletion cancelled by user.");
             const history = await this._readHistoryFile();
             return history.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0);
         }
         
         let history = await this._readHistoryFile();
         if (history.cycles.length <= 1) {
-            Services.loggerService.warn("Cannot delete the last remaining cycle.");
             vscode.window.showWarningMessage("Cannot delete the last cycle.");
             return 1;
         }
 
         history.cycles = history.cycles.filter(c => c.cycleId !== cycleId);
         await this._writeHistoryFile(history);
-        Services.loggerService.log(`Cycle ${cycleId} deleted successfully.`);
         
         const updatedHistory = await this._readHistoryFile();
         const newMaxCycle = updatedHistory.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0);
@@ -17296,15 +17267,12 @@ export class HistoryService {
         );
 
         if (confirmation !== "Delete All") {
-            Services.loggerService.log("History reset cancelled by user.");
             return;
         }
 
-        Services.loggerService.log(`HistoryService: Resetting all cycle history.`);
         if (this.historyFilePath) {
             try {
                 await vscode.workspace.fs.delete(vscode.Uri.file(this.historyFilePath));
-                Services.loggerService.log("dce_history.json deleted successfully.");
                  const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
                 if (serverIpc) {
                     serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, { reason: 'history' });
@@ -17316,7 +17284,6 @@ export class HistoryService {
     }
 
     public async handleExportHistory() {
-        Services.loggerService.log("Exporting cycle history.");
         if (!this.historyFilePath || !this.workspaceRoot) {
             vscode.window.showErrorMessage("History file path not found.");
             return;
@@ -17333,12 +17300,10 @@ export class HistoryService {
             }
         } catch (error: any) {
             vscode.window.showErrorMessage(`Failed to export history: ${error.message}`);
-            Services.loggerService.error(`Failed to export history: ${error.message}`);
         }
     }
 
     public async handleImportHistory() {
-        Services.loggerService.log("Importing cycle history.");
         if (!this.historyFilePath) {
             vscode.window.showErrorMessage("History file path not found.");
             return;
@@ -17353,7 +17318,7 @@ export class HistoryService {
                 const historyData = JSON.parse(content);
                 if (historyData.version && Array.isArray(historyData.cycles)) {
                     await this._writeHistoryFile(historyData);
-                    await this.saveLastViewedCycleId(null); // Clear last viewed ID
+                    await this.saveLastViewedCycleId(null);
                     vscode.window.showInformationMessage("Cycle history imported successfully. Reloading...");
                     const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
                     if (serverIpc) {
@@ -17365,7 +17330,6 @@ export class HistoryService {
             }
         } catch (error: any) {
             vscode.window.showErrorMessage(`Failed to import history: ${error.message}`);
-            Services.loggerService.error(`Failed to import history: ${error.message}`);
         }
     }
 }
@@ -18254,7 +18218,7 @@ export default FileTree;
 </file_artifact>
 
 <file path="src/client/components/file-tree/FileTree.utils.ts">
-// Updated on: C25 (Add defensive logic for stale tree)
+// Updated on: C26 (Make uncheck logic resilient to stale tree)
 import { FileNode } from "@/common/types/file-node";
 import { logger } from "@/client/utils/logger";
 
@@ -18312,30 +18276,34 @@ export const addRemovePathInSelectedFiles = (
 
     if (!node) {
         logger.warn(`[Selection Util] Node not found in file tree for path: ${path}. Selection cannot be changed robustly.`);
-        // Defensive check: If the node isn't in the tree (likely stale state),
-        // but the path IS in the selection, assume the user wants to uncheck it.
         if (currentSelection.has(path)) {
-            logger.log(`[Selection Util] Node not in tree, but path is in selection. Removing it.`);
             currentSelection.delete(path);
             return Array.from(currentSelection);
         }
-        return selectedFiles; // Can't do anything if node isn't found and isn't selected
+        return selectedFiles;
     }
     
     if (!node.isSelectable) return selectedFiles;
 
     const filesToToggle = getAllSelectableFiles(node);
-    
-    // A node is considered "checked" if all its selectable descendant files are in the selection.
     const isCurrentlyChecked = filesToToggle.length > 0 && filesToToggle.every(file => currentSelection.has(file));
 
     if (isCurrentlyChecked) {
         // UNCHECK: Remove all selectable files under this node from the selection.
-        logger.log(`[Selection] Unchecking ${filesToToggle.length} files under ${node.name}`);
         filesToToggle.forEach(file => currentSelection.delete(file));
+        
+        // C26 Fix: Defensively remove any selected file that is a descendant by path,
+        // in case the fileTree state was stale and missed some newly added files.
+        if (node.children) { // Only apply this logic to directories
+            const dirPathWithSlash = node.absolutePath.endsWith('/') ? node.absolutePath : node.absolutePath + '/';
+            for (const selectedFile of selectedFiles) {
+                if (selectedFile.startsWith(dirPathWithSlash)) {
+                    currentSelection.delete(selectedFile);
+                }
+            }
+        }
     } else {
         // CHECK: Add all selectable files under this node to the selection.
-        logger.log(`[Selection] Checking ${filesToToggle.length} files under ${node.name}`);
         filesToToggle.forEach(file => currentSelection.add(file));
     }
   
@@ -20264,7 +20232,7 @@ body {
 </file_artifact>
 
 <file path="src/client/views/context-chooser.view/view.tsx">
-// Updated on: C25 (Remove RequestLastSelection from ForceRefresh handler)
+// Updated on: C26 (Add targeted logging)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -20331,20 +20299,13 @@ const App = () => {
     }, [checkedFiles, files, clientIpc]);
 
     useEffect(() => {
-        clientIpc.onServerMessage(ServerToClientChannel.SendWorkspaceTrustState, ({ isTrusted }) => setIsWorkspaceTrusted(isTrusted));
-        clientIpc.onServerMessage(ServerToClientChannel.SendWorkspaceFiles, ({ files: receivedFiles }) => { setFiles(receivedFiles); setIsLoading(false); });
-        clientIpc.onServerMessage(ServerToClientChannel.ApplySelectionSet, ({ paths }) => { setCheckedFiles(paths); clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths }); });
+        clientIpc.onServerMessage(ServerToClientChannel.SendWorkspaceFiles, ({ files: receivedFiles }) => { logger.log(`[FTV] Received SendWorkspaceFiles with ${receivedFiles.length} root nodes.`); setFiles(receivedFiles); setIsLoading(false); });
+        clientIpc.onServerMessage(ServerToClientChannel.ApplySelectionSet, ({ paths }) => { logger.log(`[FTV] Received ApplySelectionSet with ${paths.length} paths.`); setCheckedFiles(paths); clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths }); });
         clientIpc.onServerMessage(ServerToClientChannel.SendSelectionSets, ({ sets }) => setSelectionSets(sets));
         clientIpc.onServerMessage(ServerToClientChannel.SetActiveFile, ({ path }) => { if (!suppressActiveFileReveal.current) { setActiveFile(path); } else { suppressActiveFileReveal.current = false; } });
         clientIpc.onServerMessage(ServerToClientChannel.FocusFile, ({ path }) => setActiveFile(path));
         clientIpc.onServerMessage(ServerToClientChannel.SendAutoAddState, ({ enabled }) => setIsAutoAddEnabled(enabled));
-        clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { 
-            if (reason === 'fileOp') { 
-                suppressActiveFileReveal.current = true; 
-                setTimeout(() => { suppressActiveFileReveal.current = false; }, 2000); 
-            } 
-            requestFiles(true); 
-        });
+        clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { logger.log(`[FTV] Received ForceRefresh. Reason: ${reason}.`); if (reason === 'fileOp') { suppressActiveFileReveal.current = true; setTimeout(() => { suppressActiveFileReveal.current = false; }, 2000); } requestFiles(true); });
         clientIpc.onServerMessage(ServerToClientChannel.UpdateProblemCounts, ({ problemMap: newProblemMap }) => setProblemMap(newProblemMap));
         clientIpc.onServerMessage(ServerToClientChannel.UpdateDecorations, ({ problemMap, gitStatusMap }) => { setProblemMap(problemMap); setGitStatusMap(gitStatusMap); });
         clientIpc.onServerMessage(ServerToClientChannel.UpdateNodeStats, ({ path, tokenCount, error }) => { processedFilesCache.current.add(path); setFiles(currentFiles => { const newFiles = JSON.parse(JSON.stringify(currentFiles)); const findAndUpdate = (nodes: FileNode[]) => { for (const node of nodes) { if (node.absolutePath === path) { node.tokenCount = tokenCount; node.error = error; return true; } if (node.children && findAndUpdate(node.children)) return true; } return false; }; findAndUpdate(newFiles); return newFiles; }); });
@@ -22201,7 +22162,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C24 (Remove diagnostic logging)
+// Updated on: C26 (Remove logging)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -22219,9 +22180,6 @@ import ResponseTabs from './components/ResponseTabs';
 import ResponsePane from './components/ResponsePane';
 import * as path from 'path-browserify';
 import WorkflowToolbar from './components/WorkflowToolbar';
-import { logger } from '../../utils/logger';
-
-console.log('[PCPP View] view.tsx module loaded');
 
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -22392,13 +22350,11 @@ const App = () => {
         });
     }, [clientIpc, requestAllMetrics]);
     
-    React.useEffect(() => { console.log(`[PCPP WORKFLOW] Step changed to: ${workflowStep}`); }, [workflowStep]);
-
     const isReadyForNextCycle = React.useMemo(() => { const hasTitle = cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== ''; const hasContext = cycleContext.trim() !== ''; const hasSelectedResponse = selectedResponseId !== null; return hasTitle && hasContext && hasSelectedResponse; }, [cycleTitle, cycleContext, selectedResponseId]);
     const newCycleButtonDisabledReason = React.useMemo(() => { const reasons: string[] = []; if (!cycleTitle || cycleTitle.trim() === 'New Cycle' || cycleTitle.trim() === '') reasons.push("- A cycle title is required."); if (!cycleContext || cycleContext.trim() === '') reasons.push("- Cycle context cannot be empty."); if (!selectedResponseId) reasons.push("- A response must be selected."); return reasons.join('\n'); }, [cycleTitle, cycleContext, selectedResponseId]);
 
     React.useEffect(() => { if (workflowStep === null) return; if (workflowStep === 'readyForNewCycle') return; if (workflowStep === 'awaitingGeneratePrompt') { if (isReadyForNextCycle) setWorkflowStep('awaitingGeneratePrompt'); return; } if (workflowStep === 'awaitingCycleTitle') { if (cycleTitle.trim() && cycleTitle.trim() !== 'New Cycle') { setWorkflowStep('awaitingGeneratePrompt'); } return; } if (workflowStep === 'awaitingCycleContext') { if (cycleContext.trim()) { setWorkflowStep('awaitingCycleTitle'); } return; } if (workflowStep === 'awaitingAccept') { return; } if (workflowStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestGitStatus, {}); return; } if (workflowStep === 'awaitingFileSelect') { if (selectedFilesForReplacement.size > 0) { setWorkflowStep('awaitingAccept'); } return; } if (workflowStep === 'awaitingResponseSelect') { if (selectedResponseId) { setWorkflowStep('awaitingBaseline'); } return; } if (workflowStep === 'awaitingSort') { if (isSortedByTokens) { setWorkflowStep('awaitingResponseSelect'); } return; } if (workflowStep === 'awaitingParse') { if (isParsedMode) { setWorkflowStep(isSortedByTokens ? 'awaitingResponseSelect' : 'awaitingSort'); } return; } const waitingForPaste = workflowStep?.startsWith('awaitingResponsePaste'); if (waitingForPaste) { for (let i = 1; i <= tabCount; i++) { if (!tabs[i.toString()]?.rawContent?.trim()) { setWorkflowStep(`awaitingResponsePaste_${i}`); return; } } setWorkflowStep('awaitingParse'); } }, [workflowStep, selectedFilesForReplacement, selectedResponseId, isSortedByTokens, isParsedMode, tabs, cycleContext, cycleTitle, tabCount, isReadyForNextCycle, clientIpc]);
-    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string, newMax?: number) => { console.log(`[PCPP View] Loading cycle data for cycle ${cycleData.cycleId}`); setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setActiveTab(cycleData.activeTab || 1); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setWorkflowStep(cycleData.activeWorkflowStep || null); if (newMax) setMaxCycle(newMax); setSaveStatus('saved'); requestCostEstimation(); }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => { setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics)); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { console.log(`[PCPP VIEW] Received NotifyGitOperationResult: ${JSON.stringify(result)}`); if (result.success) { setWorkflowStep(prevStep => { console.log(`[PCPP WORKFLOW] Functional update. Prev step: ${prevStep}.`); if (prevStep === 'awaitingBaseline') { console.log(`[PCPP WORKFLOW] Advancing from 'awaitingBaseline' to 'awaitingFileSelect'.`); clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } else { console.error(`[PCPP VIEW] Git operation failed: ${result.message}`); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => { if (cycleId === stateRef.current.currentCycle) setSaveStatus('saved'); }); clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }, [clientIpc, requestCostEstimation]);
+    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string, newMax?: number) => { setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setActiveTab(cycleData.activeTab || 1); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setWorkflowStep(cycleData.activeWorkflowStep || null); if (newMax) setMaxCycle(newMax); setSaveStatus('saved'); requestCostEstimation(); }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => { setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics)); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { if (result.success) { setWorkflowStep(prevStep => { if (prevStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => { if (cycleId === stateRef.current.currentCycle) setSaveStatus('saved'); }); clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }, [clientIpc, requestCostEstimation]);
     React.useEffect(() => { if (isParsedMode) parseAllTabs(); }, [isParsedMode, tabs, parseAllTabs]);
     React.useEffect(() => { if (!selectedFilePath) return; const currentTabData = tabs[activeTab.toString()]; if (currentTabData?.parsedContent) { const fileExistsInTab = currentTabData.parsedContent.files.some(f => f.path === selectedFilePath); if (!fileExistsInTab) setSelectedFilePath(null); } }, [activeTab, tabs, selectedFilePath]);
 
@@ -22480,7 +22436,7 @@ try {
     const root = createRoot(document.getElementById('root') as HTMLElement);
     root.render(<App />);
 } catch (error) {
-    console.error('[PCPP View] CRITICAL: Failed to render React root.', error);
+    //
 }
 </file_artifact>
 

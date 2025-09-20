@@ -1,5 +1,5 @@
 // src/backend/services/file-tree.service.ts
-// Updated on: C25 (Add diagnostic logging)
+// Updated on: C26 (Add targeted logging)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -41,7 +41,6 @@ export class FileTreeService {
             this.gitApi.onDidOpenRepository(() => this.triggerFullRefresh('git repo opened'));
             this.gitApi.repositories.forEach(repo => {
                 repo.state.onDidChange(() => {
-                    Services.loggerService.warn(`[FTV-FLASH-DEBUG] Git repo state onDidChange event fired.`);
                     this.triggerDecorationsUpdate();
                 });
             });
@@ -59,7 +58,7 @@ export class FileTreeService {
     }
 
     private triggerFullRefresh(reason: string) {
-        Services.loggerService.log(`[triggerFullRefresh] Called because: ${reason}`);
+        Services.loggerService.log(`[FTV Refresh] Full refresh triggered. Reason: ${reason}`);
         if (this.refreshDebounceTimer) clearTimeout(this.refreshDebounceTimer);
         this.refreshDebounceTimer = setTimeout(() => {
             this.fileTreeCache = null;
@@ -106,13 +105,11 @@ export class FileTreeService {
             
             const isNonSelectable = !this._isSelectable(normalizedPath, vscode.FileType.File);
             if (isNonSelectable) {
-                Services.loggerService.log(`[Auto-Add] Ignoring non-selectable new file: ${normalizedPath}`);
                 onFileChange(uri, 'onDidCreate');
                 return;
             }
 
             if (Services.fileOperationService.hasFileToIgnoreForAutoAdd(normalizedPath)) {
-                Services.loggerService.log(`[Auto-Add] Ignoring create event for ${normalizedPath} as requested.`);
                 Services.fileOperationService.removeFileToIgnoreForAutoAdd(normalizedPath);
             } else if (Services.selectionService.getAutoAddState()) {
                 this.autoAddQueue.push(normalizedPath);
@@ -130,18 +127,16 @@ export class FileTreeService {
     
         const pathsToAdd = [...new Set(this.autoAddQueue)];
         this.autoAddQueue = [];
-    
+        Services.loggerService.log(`[Auto-Add] Processing queue with ${pathsToAdd.length} files: ${JSON.stringify(pathsToAdd)}`);
+
         const currentSelection = await Services.selectionService.getLastSelection();
         const newSelection = [...new Set([...currentSelection, ...pathsToAdd])];
     
-        Services.loggerService.log(`[AUTO-ADD DEBUG] currentSelection: ${JSON.stringify(currentSelection)}`);
-        Services.loggerService.log(`[AUTO-ADD DEBUG] pathsToAdd: ${JSON.stringify(pathsToAdd)}`);
-        Services.loggerService.log(`[AUTO-ADD DEBUG] newSelection being saved and sent: ${JSON.stringify(newSelection)}`);
-
         await Services.selectionService.saveCurrentSelection(newSelection);
         
         const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
         if (serverIpc) {
+            Services.loggerService.log(`[Auto-Add] Sending ApplySelectionSet to client with ${newSelection.length} total paths.`);
             serverIpc.sendToClient(ServerToClientChannel.ApplySelectionSet, { paths: newSelection });
         }
     }

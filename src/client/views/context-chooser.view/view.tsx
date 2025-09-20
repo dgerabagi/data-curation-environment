@@ -1,4 +1,4 @@
-// Updated on: C25 (Remove RequestLastSelection from ForceRefresh handler)
+// Updated on: C26 (Add targeted logging)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -65,20 +65,13 @@ const App = () => {
     }, [checkedFiles, files, clientIpc]);
 
     useEffect(() => {
-        clientIpc.onServerMessage(ServerToClientChannel.SendWorkspaceTrustState, ({ isTrusted }) => setIsWorkspaceTrusted(isTrusted));
-        clientIpc.onServerMessage(ServerToClientChannel.SendWorkspaceFiles, ({ files: receivedFiles }) => { setFiles(receivedFiles); setIsLoading(false); });
-        clientIpc.onServerMessage(ServerToClientChannel.ApplySelectionSet, ({ paths }) => { setCheckedFiles(paths); clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths }); });
+        clientIpc.onServerMessage(ServerToClientChannel.SendWorkspaceFiles, ({ files: receivedFiles }) => { logger.log(`[FTV] Received SendWorkspaceFiles with ${receivedFiles.length} root nodes.`); setFiles(receivedFiles); setIsLoading(false); });
+        clientIpc.onServerMessage(ServerToClientChannel.ApplySelectionSet, ({ paths }) => { logger.log(`[FTV] Received ApplySelectionSet with ${paths.length} paths.`); setCheckedFiles(paths); clientIpc.sendToServer(ClientToServerChannel.SaveCurrentSelection, { paths }); });
         clientIpc.onServerMessage(ServerToClientChannel.SendSelectionSets, ({ sets }) => setSelectionSets(sets));
         clientIpc.onServerMessage(ServerToClientChannel.SetActiveFile, ({ path }) => { if (!suppressActiveFileReveal.current) { setActiveFile(path); } else { suppressActiveFileReveal.current = false; } });
         clientIpc.onServerMessage(ServerToClientChannel.FocusFile, ({ path }) => setActiveFile(path));
         clientIpc.onServerMessage(ServerToClientChannel.SendAutoAddState, ({ enabled }) => setIsAutoAddEnabled(enabled));
-        clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { 
-            if (reason === 'fileOp') { 
-                suppressActiveFileReveal.current = true; 
-                setTimeout(() => { suppressActiveFileReveal.current = false; }, 2000); 
-            } 
-            requestFiles(true); 
-        });
+        clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { logger.log(`[FTV] Received ForceRefresh. Reason: ${reason}.`); if (reason === 'fileOp') { suppressActiveFileReveal.current = true; setTimeout(() => { suppressActiveFileReveal.current = false; }, 2000); } requestFiles(true); });
         clientIpc.onServerMessage(ServerToClientChannel.UpdateProblemCounts, ({ problemMap: newProblemMap }) => setProblemMap(newProblemMap));
         clientIpc.onServerMessage(ServerToClientChannel.UpdateDecorations, ({ problemMap, gitStatusMap }) => { setProblemMap(problemMap); setGitStatusMap(gitStatusMap); });
         clientIpc.onServerMessage(ServerToClientChannel.UpdateNodeStats, ({ path, tokenCount, error }) => { processedFilesCache.current.add(path); setFiles(currentFiles => { const newFiles = JSON.parse(JSON.stringify(currentFiles)); const findAndUpdate = (nodes: FileNode[]) => { for (const node of nodes) { if (node.absolutePath === path) { node.tokenCount = tokenCount; node.error = error; return true; } if (node.children && findAndUpdate(node.children)) return true; } return false; }; findAndUpdate(newFiles); return newFiles; }); });

@@ -1,4 +1,4 @@
-// Updated on: C25 (Add defensive logic for stale tree)
+// Updated on: C26 (Make uncheck logic resilient to stale tree)
 import { FileNode } from "@/common/types/file-node";
 import { logger } from "@/client/utils/logger";
 
@@ -56,30 +56,34 @@ export const addRemovePathInSelectedFiles = (
 
     if (!node) {
         logger.warn(`[Selection Util] Node not found in file tree for path: ${path}. Selection cannot be changed robustly.`);
-        // Defensive check: If the node isn't in the tree (likely stale state),
-        // but the path IS in the selection, assume the user wants to uncheck it.
         if (currentSelection.has(path)) {
-            logger.log(`[Selection Util] Node not in tree, but path is in selection. Removing it.`);
             currentSelection.delete(path);
             return Array.from(currentSelection);
         }
-        return selectedFiles; // Can't do anything if node isn't found and isn't selected
+        return selectedFiles;
     }
     
     if (!node.isSelectable) return selectedFiles;
 
     const filesToToggle = getAllSelectableFiles(node);
-    
-    // A node is considered "checked" if all its selectable descendant files are in the selection.
     const isCurrentlyChecked = filesToToggle.length > 0 && filesToToggle.every(file => currentSelection.has(file));
 
     if (isCurrentlyChecked) {
         // UNCHECK: Remove all selectable files under this node from the selection.
-        logger.log(`[Selection] Unchecking ${filesToToggle.length} files under ${node.name}`);
         filesToToggle.forEach(file => currentSelection.delete(file));
+        
+        // C26 Fix: Defensively remove any selected file that is a descendant by path,
+        // in case the fileTree state was stale and missed some newly added files.
+        if (node.children) { // Only apply this logic to directories
+            const dirPathWithSlash = node.absolutePath.endsWith('/') ? node.absolutePath : node.absolutePath + '/';
+            for (const selectedFile of selectedFiles) {
+                if (selectedFile.startsWith(dirPathWithSlash)) {
+                    currentSelection.delete(selectedFile);
+                }
+            }
+        }
     } else {
         // CHECK: Add all selectable files under this node to the selection.
-        logger.log(`[Selection] Checking ${filesToToggle.length} files under ${node.name}`);
         filesToToggle.forEach(file => currentSelection.add(file));
     }
   

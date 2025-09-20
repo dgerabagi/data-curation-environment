@@ -1,5 +1,5 @@
 // src/backend/services/history.service.ts
-// Updated on: C24 (Remove diagnostic logging)
+// Updated on: C26 (Remove logging)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -25,8 +25,6 @@ export class HistoryService {
         if (workspaceFolders && workspaceFolders.length > 0) {
             this.workspaceRoot = workspaceFolders[0].uri.fsPath;
             this.historyFilePath = path.join(this.workspaceRoot, '.vscode', 'dce_history.json');
-        } else {
-            Services.loggerService.warn("HistoryService: No workspace folder found. History will not be saved.");
         }
     }
 
@@ -58,7 +56,6 @@ export class HistoryService {
 
     public async saveLastViewedCycleId(id: number | null): Promise<void> {
         await this.context.workspaceState.update(LAST_VIEWED_CYCLE_ID_KEY, id);
-        Services.loggerService.log(`Saved last viewed cycle ID: ${id}`);
     }
 
     public getLastViewedCycleId(): number | undefined {
@@ -66,8 +63,6 @@ export class HistoryService {
     }
 
     public async getInitialCycle(): Promise<PcppCycle> {
-        Services.loggerService.log("HistoryService: getInitialCycle called.");
-
         if (!this.workspaceRoot) {
             return { cycleId: -1, timestamp: '', title: '', cycleContext: '', ephemeralContext: '', responses: {} };
         }
@@ -98,12 +93,10 @@ export class HistoryService {
         };
 
         if (isFreshEnvironment) {
-             Services.loggerService.log("Fresh environment detected. Returning Cycle 0.");
              return defaultCycle;
         }
 
         if (history.cycles.length === 0) {
-            Services.loggerService.log("No history found, creating default cycle 1.");
             await this.saveCycleData(defaultCycle);
             return defaultCycle;
         }
@@ -112,20 +105,15 @@ export class HistoryService {
         const cycleMap = new Map(history.cycles.map(c => [c.cycleId, c]));
 
         if (lastViewedId !== undefined && cycleMap.has(lastViewedId)) {
-            Services.loggerService.log(`Found valid last viewed cycle: ${lastViewedId}`);
             return cycleMap.get(lastViewedId)!;
         }
         
         const latestCycle = history.cycles.reduce((latest, current) => current.cycleId > latest.cycleId ? current : latest);
-        Services.loggerService.log(`No valid last-viewed cycle found. Falling back to latest cycle: ${latestCycle.cycleId}`);
         return latestCycle;
     }
 
     public async getCycleData(cycleId: number): Promise<PcppCycle | null> {
-        Services.loggerService.log(`HistoryService: getting data for cycle ${cycleId}.`);
-        
         if (cycleId === 0) {
-            Services.loggerService.log("Returning special case for Cycle 0.");
             const history = await this._readHistoryFile();
             return {
                 cycleId: 0, timestamp: new Date().toISOString(), title: 'Project Setup', cycleContext: history.projectScope || '', ephemeralContext: '', responses: {}, isParsedMode: false, tabCount: 4, isSortedByTokens: false, pathOverrides: {},
@@ -140,7 +128,6 @@ export class HistoryService {
         const history = await this._readHistoryFile();
         history.projectScope = scope;
         await this._writeHistoryFile(history);
-        Services.loggerService.log("Project scope saved.");
     }
 
     public async saveCycleData(cycleData: PcppCycle): Promise<void> {
@@ -173,8 +160,6 @@ export class HistoryService {
     }
 
     public async deleteCycle(cycleId: number): Promise<number> {
-        Services.loggerService.log(`HistoryService: Deleting cycle ${cycleId}.`);
-        
         const confirmation = await vscode.window.showWarningMessage(
             `Are you sure you want to delete Cycle ${cycleId}? This action cannot be undone.`,
             { modal: true },
@@ -182,21 +167,18 @@ export class HistoryService {
         );
 
         if (confirmation !== "Delete") {
-            Services.loggerService.log("Cycle deletion cancelled by user.");
             const history = await this._readHistoryFile();
             return history.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0);
         }
         
         let history = await this._readHistoryFile();
         if (history.cycles.length <= 1) {
-            Services.loggerService.warn("Cannot delete the last remaining cycle.");
             vscode.window.showWarningMessage("Cannot delete the last cycle.");
             return 1;
         }
 
         history.cycles = history.cycles.filter(c => c.cycleId !== cycleId);
         await this._writeHistoryFile(history);
-        Services.loggerService.log(`Cycle ${cycleId} deleted successfully.`);
         
         const updatedHistory = await this._readHistoryFile();
         const newMaxCycle = updatedHistory.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0);
@@ -216,15 +198,12 @@ export class HistoryService {
         );
 
         if (confirmation !== "Delete All") {
-            Services.loggerService.log("History reset cancelled by user.");
             return;
         }
 
-        Services.loggerService.log(`HistoryService: Resetting all cycle history.`);
         if (this.historyFilePath) {
             try {
                 await vscode.workspace.fs.delete(vscode.Uri.file(this.historyFilePath));
-                Services.loggerService.log("dce_history.json deleted successfully.");
                  const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
                 if (serverIpc) {
                     serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, { reason: 'history' });
@@ -236,7 +215,6 @@ export class HistoryService {
     }
 
     public async handleExportHistory() {
-        Services.loggerService.log("Exporting cycle history.");
         if (!this.historyFilePath || !this.workspaceRoot) {
             vscode.window.showErrorMessage("History file path not found.");
             return;
@@ -253,12 +231,10 @@ export class HistoryService {
             }
         } catch (error: any) {
             vscode.window.showErrorMessage(`Failed to export history: ${error.message}`);
-            Services.loggerService.error(`Failed to export history: ${error.message}`);
         }
     }
 
     public async handleImportHistory() {
-        Services.loggerService.log("Importing cycle history.");
         if (!this.historyFilePath) {
             vscode.window.showErrorMessage("History file path not found.");
             return;
@@ -273,7 +249,7 @@ export class HistoryService {
                 const historyData = JSON.parse(content);
                 if (historyData.version && Array.isArray(historyData.cycles)) {
                     await this._writeHistoryFile(historyData);
-                    await this.saveLastViewedCycleId(null); // Clear last viewed ID
+                    await this.saveLastViewedCycleId(null);
                     vscode.window.showInformationMessage("Cycle history imported successfully. Reloading...");
                     const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
                     if (serverIpc) {
@@ -285,7 +261,6 @@ export class HistoryService {
             }
         } catch (error: any) {
             vscode.window.showErrorMessage(`Failed to import history: ${error.message}`);
-            Services.loggerService.error(`Failed to import history: ${error.message}`);
         }
     }
 }

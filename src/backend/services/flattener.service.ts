@@ -1,4 +1,4 @@
-// Updated on: C24 (Remove diagnostic logging)
+// Updated on: C26 (Remove logging)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -7,7 +7,6 @@ import { VIEW_TYPES } from '@/common/view-types';
 import { serverIPCs } from '@/client/views';
 import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 import { formatBytes } from '@/common/utils/formatting';
-import { logger } from '@/client/utils/logger';
 
 interface FileStats {
     filePath: string;
@@ -61,7 +60,7 @@ export class FlattenerService {
 
         try {
             const allFilePaths = await this.expandDirectories(selectedPaths);
-            const uniqueFilePaths = [...new Set(allFilePaths)]; 
+            const uniqueFilePaths = [...new Set(allFilePaths.map(p => normalizePath(p)))];
 
             const fileStatsPromises = uniqueFilePaths.map(filePath => this.getFileStatsAndContent(filePath));
             const results = await Promise.all(fileStatsPromises);
@@ -71,8 +70,6 @@ export class FlattenerService {
 
             await fs.writeFile(outputFilePath, outputContent, 'utf-8');
             vscode.window.showInformationMessage(`Successfully flattened ${validResults.length} files to flattened_repo.md.`);
-
-            Services.loggerService.log(`Opening flattened file: ${outputFilePath}`);
             
             const isFileOpen = vscode.window.visibleTextEditors.some(editor => editor.document.uri.fsPath === outputFilePath);
             if (!isFileOpen) {
@@ -88,7 +85,6 @@ export class FlattenerService {
 
         } catch (error: any) {
             vscode.window.showErrorMessage(`Failed to flatten context: ${error.message}`);
-            console.error(error);
         }
     }
 
@@ -104,7 +100,7 @@ export class FlattenerService {
                     allFiles.push(p);
                 }
             } catch (e) {
-                console.warn(`Could not stat path ${p}, skipping.`);
+                // Ignore errors for paths that might not exist
             }
         }
         return allFiles;
@@ -130,7 +126,7 @@ export class FlattenerService {
                 }
             }
         } catch (e) {
-            console.error(`Error reading directory ${normalizedDirPath}:`, e);
+            // Ignore errors
         }
         return files;
     }
