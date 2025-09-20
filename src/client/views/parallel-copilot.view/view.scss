@@ -1,5 +1,5 @@
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C27 (Add native diff button style)
+// Updated on: C28 (Style native diff button)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -667,6 +667,15 @@ body {
         transition: opacity 0.1s ease-in-out;
         margin-left: auto;
         padding: 0 4px;
+        font-size: 12px;
+        /* Inherit from styled-button for consistency */
+        background-color: var(--vscode-button-secondaryBackground);
+        color: var(--vscode-button-secondaryForeground);
+        border: 1px solid var(--vscode-button-border, transparent);
+        
+        &:hover {
+            background-color: var(--vscode-button-secondaryHoverBackground);
+        }
     }
 
 

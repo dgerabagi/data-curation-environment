@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/ParsedView.tsx
-// Updated on: C27 (Add native diff button, remove old diff state)
+// Updated on: C28 (No functional changes, only minor class name consistency)
 import * as React from 'react';
 import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscClippy, VscChevronDown, VscDiff } from 'react-icons/vsc';
 import ReactMarkdown from 'react-markdown';
@@ -110,7 +110,7 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
                                 {fileExists ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
                                 <span className="file-path-text" title={file}>{truncatePath(file, 40)}</span>
                                 {metrics && fileExists && <span className="similarity-score">{ (similarity * 100).toFixed(0) }%</span>}
-                                {fileExists && <button className="native-diff-button" title="Open Changes" onClick={(e) => handleNativeDiff(e, file)}><VscDiff /></button>}
+                                {fileExists && <button className="native-diff-button styled-button" title="Open Changes" onClick={(e) => handleNativeDiff(e, file)}><VscDiff /></button>}
                             </div>
                             {!fileExists && props.selectedFilePath === file && (
                                 <div className="path-override-container" onClick={e => e.stopPropagation()}>{hasOverride ? (<><span>Linked to: {props.pathOverrides.get(file)}</span><button className="styled-button" onClick={() => props.onUnlinkFile(file)}><VscDebugDisconnect /> Unlink</button></>) : (<><input type="text" placeholder="Enter correct relative path..." value={props.tempOverridePath} onChange={e => props.onTempOverridePathChange(e.target.value)} onKeyDown={e => {if(e.key === 'Enter') props.onLinkFile(file)}} /><button className="styled-button" onClick={() => props.onLinkFile(file)}><VscLink /> Link</button></>)}</div>

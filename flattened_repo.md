@@ -1,10 +1,10 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-20T20:52:54.667Z
+  Date Generated: 2025-09-20T21:25:35.497Z
   ---
   Total Files: 172
-  Approx. Tokens: 452677
+  Approx. Tokens: 452780
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -12,7 +12,7 @@
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
 3. src\client\views\parallel-copilot.view\view.tsx (8347 tokens)
 4. src\Artifacts\A0. DCE Master Artifact List.md (8106 tokens)
-5. src\client\views\parallel-copilot.view\view.scss (5403 tokens)
+5. src\client\views\parallel-copilot.view\view.scss (5499 tokens)
 6. src\backend\services\prompt.service.ts (5237 tokens)
 7. src\backend\services\file-operation.service.ts (4526 tokens)
 8. src\client\components\tree-view\TreeView.tsx (4422 tokens)
@@ -150,13 +150,13 @@
 128. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 55 - Chars: 1970 - Tokens: 493
 129. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 84 - Chars: 3386 - Tokens: 847
 130. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
-131. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 151 - Chars: 9908 - Tokens: 2477
+131. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 151 - Chars: 9933 - Tokens: 2484
 132. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 79 - Chars: 3137 - Tokens: 785
 133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
 134. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 135. src\client\views\parallel-copilot.view\on-message.ts - Lines: 120 - Chars: 5668 - Tokens: 1417
 136. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 100 - Chars: 5002 - Tokens: 1251
-137. src\client\views\parallel-copilot.view\view.scss - Lines: 970 - Chars: 21611 - Tokens: 5403
+137. src\client\views\parallel-copilot.view\view.scss - Lines: 979 - Chars: 21996 - Tokens: 5499
 138. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
 139. src\client\views\parallel-copilot.view\view.tsx - Lines: 277 - Chars: 33386 - Tokens: 8347
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
@@ -20439,7 +20439,7 @@ export default HighlightedTextarea;
 
 <file path="src/client/views/parallel-copilot.view/components/ParsedView.tsx">
 // src/client/views/parallel-copilot.view/components/ParsedView.tsx
-// Updated on: C27 (Add native diff button, remove old diff state)
+// Updated on: C28 (No functional changes, only minor class name consistency)
 import * as React from 'react';
 import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscClippy, VscChevronDown, VscDiff } from 'react-icons/vsc';
 import ReactMarkdown from 'react-markdown';
@@ -20550,7 +20550,7 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
                                 {fileExists ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
                                 <span className="file-path-text" title={file}>{truncatePath(file, 40)}</span>
                                 {metrics && fileExists && <span className="similarity-score">{ (similarity * 100).toFixed(0) }%</span>}
-                                {fileExists && <button className="native-diff-button" title="Open Changes" onClick={(e) => handleNativeDiff(e, file)}><VscDiff /></button>}
+                                {fileExists && <button className="native-diff-button styled-button" title="Open Changes" onClick={(e) => handleNativeDiff(e, file)}><VscDiff /></button>}
                             </div>
                             {!fileExists && props.selectedFilePath === file && (
                                 <div className="path-override-container" onClick={e => e.stopPropagation()}>{hasOverride ? (<><span>Linked to: {props.pathOverrides.get(file)}</span><button className="styled-button" onClick={() => props.onUnlinkFile(file)}><VscDebugDisconnect /> Unlink</button></>) : (<><input type="text" placeholder="Enter correct relative path..." value={props.tempOverridePath} onChange={e => props.onTempOverridePathChange(e.target.value)} onKeyDown={e => {if(e.key === 'Enter') props.onLinkFile(file)}} /><button className="styled-button" onClick={() => props.onLinkFile(file)}><VscLink /> Link</button></>)}</div>
@@ -20984,7 +20984,7 @@ export default OnboardingView;
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C27 (Add native diff button style)
+// Updated on: C28 (Style native diff button)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -21652,6 +21652,15 @@ body {
         transition: opacity 0.1s ease-in-out;
         margin-left: auto;
         padding: 0 4px;
+        font-size: 12px;
+        /* Inherit from styled-button for consistency */
+        background-color: var(--vscode-button-secondaryBackground);
+        color: var(--vscode-button-secondaryForeground);
+        border: 1px solid var(--vscode-button-border, transparent);
+        
+        &:hover {
+            background-color: var(--vscode-button-secondaryHoverBackground);
+        }
     }
 
 

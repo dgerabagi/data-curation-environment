@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 28 - style the diff viewer button
+Current Cycle 29 - implement vllm solution to experiment with parallelization
+Cycle 28 - style the diff viewer button
 Cycle 27 - implement vscode native diff solution
 Cycle 26 - create logging to determine root cause
 Cycle 25 - auto add function seems to be the culprit
@@ -710,6 +711,382 @@ No project scope defined.
 </M5. organized artifacts list>
 
 <M6. Cycles>
+
+<Cycle 29>
+<Cycle Context>
+great work! okay, now lets begin the integration with our local llm. i just sent a project initialization prompt to it to test how performant it is, and its fairly acceptable. i sent it 11.5k tokens, and i got 3.5k tokens back at 70 tok/sec with 100 ttft which is all reasonable given what we're working with and what we are trying to do.
+
+okay so this is what i want to do. let me know how feasible this is. i want to:
+1. setup my llm with vLLM instead of lmstudio in order to leverage that parallelization to get crazy 10k tokens per second.
+2. combine my parallel response approach with the parallelization with vllm in order to deliver 10 responses simultaneously.
+3. make it so that anyone who has my extension is using my llm also.
+
+i already hosting my https://aiascent.game/ at this location, ive got a server.ts that im runnign along with a caddyfile. those two files are what let me host my game server. couldnt we just leverage server.ts to route the right incoming traffic to the llm from the extension? ill provide those two files below, make some artifacts which represent them and any changes needed i can roll them in to that project to get the routing. A135 is from the aiascent.game project and contains much of the self-hosting information. any new artifacts related to the vllm inference plan can be numbered A86.x
+
+
+</Cycle Context>
+<Ephemeral Context>
+<server.ts>
+// Updated on: C1384 (Correct import path for generateSpeech from llmService.)
+// Updated on: C1383 (Add /api/tts/generate route handler.)
+// Updated on: C1355 (Add /api/report/vote route handler.)
+import dotenv from 'dotenv';
+dotenv.config();
+
+import express from 'express';
+import http from 'http';
+import { Server as SocketIOServer } from 'socket.io';
+import NextAuth from 'next-auth';
+import { authOptions } from './pages/api/auth/[...nextauth]';
+import cors from 'cors';
+import { logInfo, logError, logWarn } from './logger';
+import cookieParser from 'cookie-parser';
+import path from 'path';
+import fs from 'fs';
+import { type PlayerDirection, type PlayerProfile, type PoetryBattleChatbotData } from './state/gameStoreTypes';
+import type { Founder } from './state';
+import { CompetitionSystem } from './game/systems/CompetitionSystem';
+import { PvpSystem } from './game/systems/PvpSystem';
+import { PoetryBattleSystem } from './game/systems/PoetryBattleSystem';
+import { handleAscentiaStream, handleAscentiaWelcome, loadAscentiaKnowledgeBase, loadReportKnowledgeBase, handleReportAscentiaStream } from './server/api/ascentiaHandler';
+import { handlePlayerProductStream, handlePlayerProductRequest, generateSpeech } from './server/llmService';
+import updateProfileHandler from './server/api/userProfileHandler';
+import { handleReportVote } from './server/api/reportHandler';
+import threadsHandler from './pages/api/bbs/threads';
+import postsHandler from './pages/api/bbs/posts';
+import voteHandler from './pages/api/bbs/vote';
+import tagsHandler from './pages/api/bbs/tags';
+import leaderboardHandler from './pages/api/leaderboard';
+import leaderboardUpdateHandler from './pages/api/leaderboard/update';
+import playersListHandler from './pages/api/players/list';
+import playerProfileHandler from './pages/api/players/[userId]';
+import prisma from './lib/prisma';
+import { Readable } from 'stream';
+
+const app = express();
+const server = http.createServer(app);
+const port = process.env.PORT || 3001;
+const isProduction = process.env.NODE_ENV === 'production';
+
+let clientOrigin = 'http://localhost:8867';
+if (process.env.NEXTAUTH_URL) {
+    try {
+        const url = new URL(process.env.NEXTAUTH_URL);
+        clientOrigin = url.origin;
+    } catch (e) {
+        logError('[SERVER]', `Invalid NEXTAUTH_URL format: ${process.env.NEXTAUTH_URL}. Falling back to default localhost.`);
+    }
+} else {
+    logWarn('[SERVER]', 'NEXTAUTH_URL environment variable is not set. CORS may fail in production.');
+}
+
+logInfo('[SERVER]', `Server starting... Client Origin for CORS: ${clientOrigin}, Production: ${isProduction}`);
+
+// Instantiate systems
+const competitionSystem = new CompetitionSystem();
+const io = new SocketIOServer(server, {
+    path: "/api/socket.io",
+    cors: {
+        origin: clientOrigin,
+        methods: ["GET", "POST"]
+    },
+    connectTimeout: 90000,
+    pingTimeout: 90000,
+    pingInterval: 25000,
+});
+const pvpSystem = new PvpSystem(competitionSystem, io);
+const poetryBattleSystem = new PoetryBattleSystem(io);
+(global as any).world = { poetryBattleSystem };
+
+app.use(cors({
+    origin: clientOrigin,
+    credentials: true,
+}));
+
+logInfo('[SERVER]', 'Socket.IO server initialized.');
+
+export interface PlayerState {
+    id: string; // socket.id
+    userId: string;
+    x: number;
+    y: number;
+    direction: PlayerDirection;
+    isMoving: boolean;
+    displayName: string;
+    founderKey: Founder;
+    countryCode: string | null;
+}
+const players: Record<string, PlayerState> = {};
+
+// --- Socket.IO Connection Handling ---
+io.on('connection', (socket) => {
+    logInfo('[SOCKET.IO]', `Player connected: ${socket.id}`);
+    
+    (socket as any).playerState = {};
+
+    socket.on('identify', (data) => {
+        logInfo('[SOCKET.IO]', `Player identified: ${socket.id} as ${data.displayName} (User ID: ${data.userId})`);
+        const playerState: PlayerState = {
+            id: socket.id,
+            userId: data.userId,
+            x: data.x,
+            y: data.y,
+            direction: data.direction,
+            isMoving: false,
+            displayName: data.displayName,
+            founderKey: data.founderKey,
+            countryCode: data.countryCode,
+        };
+        players[socket.id] = playerState;
+        (socket as any).playerState = playerState;
+
+        socket.emit('playersUpdate', Object.values(players));
+        socket.broadcast.emit('playerJoined', players[socket.id]);
+        pvpSystem.handleRejoin(data.userId, socket.id);
+    });
+
+    socket.on('playerMove', (data) => {
+        if (players[socket.id]) {
+            players[socket.id] = { ...players[socket.id], ...data };
+            socket.broadcast.emit('playerMoved', players[socket.id]);
+        }
+    });
+
+    // --- Delegate Handlers ---
+    socket.on('get_ascentia_welcome', (payload) => handleAscentiaWelcome(socket, players, payload));
+    socket.on('start_ascentia_stream', (payload) => handleAscentiaStream(io, socket, players, payload));
+    socket.on('start_report_ascentia_stream', (payload) => handleReportAscentiaStream(io, socket, players, payload));
+    socket.on('start_chatbot_stream', (payload) => handlePlayerProductStream(socket, players, payload));
+
+    // --- PvP Handlers (Delegated to PvpSystem) ---
+    socket.on('send_pvp_challenge', (payload) => pvpSystem.handleChallenge(socket, players, payload));
+    socket.on('accept_pvp_challenge', (payload) => pvpSystem.handleAcceptChallenge(socket, players, payload));
+    socket.on('decline_pvp_challenge', (payload) => pvpSystem.handleDeclineChallenge(socket, players, payload));
+    socket.on('claim_pvp_rewards', (payload) => pvpSystem.claimRewards(players[socket.id]?.userId, payload.matchId));
+    socket.on('change_pvp_speed', (payload) => pvpSystem.handleChangeSpeed(players[socket.id]?.userId, payload.matchId, payload.requestedSpeed));
+    
+    socket.on('send_poetry_battle_challenge', (payload) => {
+        const challenger = players[socket.id];
+        const target = players[payload.targetSocketId];
+        logInfo('[[SERVER]]', `Received 'send_poetry_battle_challenge' from ${challenger?.displayName ?? 'Unknown'} to ${target?.displayName ?? 'Unknown'} (socketId: ${payload.targetSocketId})`);
+        pvpSystem.handlePoetryBattleChallenge(socket, players, payload);
+    });
+    socket.on('accept_poetry_battle_challenge', (payload) => pvpSystem.handleAcceptPoetryBattleChallenge(socket, players, payload));
+    socket.on('decline_poetry_battle_challenge', (payload) => pvpSystem.handleDeclinePoetryBattleChallenge(socket, players, payload));
+    socket.on('poetry_battle_submit_move', (payload) => poetryBattleSystem.handlePlayerMove(socket, payload));
+    
+    socket.on('submit_poetry_chatbot_data', (payload: { matchId: string, chatbotData: PoetryBattleChatbotData | null }) => {
+        pvpSystem.handleSubmitPoetryChatbotData(socket, players, payload);
+    });
+
+    socket.on('send_pvp_match_message', async (payload) => {
+        const logPrefix = '[SocketHandler:send_pvp_match_message]';
+        const senderState = players[socket.id];
+        if (!senderState) {
+            logWarn(logPrefix, `Received message from unidentified socket ${socket.id}`);
+            return;
+        }
+
+        try {
+            const senderDb = await prisma.leaderboardEntry.findUnique({
+                where: { userId: senderState.userId },
+                include: { user: { select: { displayName: true, countryCode: true } } }
+            });
+
+            if (!senderDb || !senderDb.user) {
+                logError(logPrefix, `Could not find DB entry for sender ${senderState.userId}`);
+                return;
+            }
+            
+            const senderProfile: PlayerProfile = {
+                userId: senderState.userId,
+                displayName: senderDb.user.displayName ?? 'Player',
+                companyName: senderDb.companyName ?? 'Company',
+                agentName: senderDb.gameAiAgentName ?? 'Agent',
+                elo: senderDb.highestGameAIElo,
+                countryCode: senderDb.user.countryCode,
+                socketId: senderState.id,
+            };
+            
+            pvpSystem.handleMatchChatMessage(senderState.userId, payload.matchId, payload.message, senderProfile);
+        } catch (error) {
+            logError(logPrefix, `Error constructing sender profile for chat message.`, error);
+        }
+    });
+
+    socket.on('sendMessage', (payload) => pvpSystem.handleLobbyChatMessage(io, socket, players, payload));
+    
+    socket.on('disconnect', (reason) => {
+        logInfo('[SOCKET.IO]', `Player disconnected: ${socket.id}. Reason: ${reason}`);
+        pvpSystem.handleDisconnect(socket.id, players);
+        delete players[socket.id];
+        io.emit('playerLeft', { id: socket.id });
+    });
+});
+
+// --- PvpSystem Global Timer ---
+setInterval(() => {
+    pvpSystem.tickMatches(1); // Tick every 1 second
+}, 1000);
+
+// --- Middleware and API Routes ---
+app.use(cookieParser());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use((req, res, next) => {
+    (req as any).io = io;
+    (req as any).players = players;
+    next();
+});
+
+app.all('/api/auth/*', (req, res) => {
+    if (!(req.query as any).nextauth) {
+      const nextauth = req.path.split('/').slice(3);
+      (req.query as any).nextauth = nextauth;
+      logInfo('[SERVER:Auth]', `Manually setting req.query.nextauth to:`, nextauth);
+    }
+    return NextAuth(req as any, res as any, authOptions);
+});
+
+// --- API Routes ---
+app.get('/api/bbs/threads', (req, res) => threadsHandler(req as any, res as any));
+app.post('/api/bbs/threads', (req, res) => threadsHandler(req as any, res as any));
+app.put('/api/bbs/threads', (req, res) => threadsHandler(req as any, res as any));
+app.delete('/api/bbs/threads', (req, res) => threadsHandler(req as any, res as any));
+app.get('/api/bbs/posts', (req, res) => postsHandler(req as any, res as any));
+app.post('/api/bbs/posts', (req, res) => postsHandler(req as any, res as any));
+app.post('/api/bbs/vote', (req, res) => voteHandler(req as any, res as any));
+app.get('/api/bbs/tags', (req, res) => tagsHandler(req as any, res as any));
+app.get('/api/leaderboard', (req, res) => leaderboardHandler(req as any, res as any));
+app.post('/api/leaderboard/update', (req, res) => leaderboardUpdateHandler(req as any, res as any));
+app.get('/api/players/list', (req, res) => playersListHandler(req as any, res as any));
+app.get('/api/players/:userId', (req, res) => playerProfileHandler(req as any, res as any));
+app.post('/api/user/updateProfile', (req, res) => updateProfileHandler(req as any, res as any));
+app.post('/api/llm/proxy', (req, res) => handlePlayerProductRequest(req as any, res as any));
+app.post('/api/report/vote', (req, res) => handleReportVote(req as any, res as any));
+
+// NEW: TTS Proxy Route
+app.post('/api/tts/generate', async (req, res) => {
+    try {
+        const { text } = req.body;
+        if (!text || typeof text !== 'string') {
+            return res.status(400).send('Invalid request: "text" field is required.');
+        }
+
+        const audioStream = await generateSpeech(text);
+        
+        if (audioStream) {
+            res.setHeader('Content-Type', 'audio/wav');
+            audioStream.pipe(res);
+        } else {
+            res.status(500).send('Failed to generate speech.');
+        }
+    } catch (error) {
+        logError('[API:TTS]', 'Error in TTS generation route', error);
+        res.status(500).send('Internal server error during TTS generation.');
+    }
+});
+
+
+// --- Static File Serving (Production Only) ---
+if (isProduction) {
+    const buildPath = path.join(__dirname);
+    logInfo('[SERVER]', `Production mode detected. Serving static files from: ${buildPath}`);
+    app.use(express.static(buildPath));
+
+    app.get('*', (req, res) => {
+        const indexPath = path.join(buildPath, 'index.html');
+        if (fs.existsSync(indexPath)) {
+            res.sendFile(indexPath);
+        } else {
+            res.status(404).send(`'index.html' not found.`);
+        }
+    });
+}
+
+// --- Server Startup ---
+server.listen(port, () => {
+    logInfo('[SERVER]', `Server listening on http://localhost:${port}`);
+    const publicPath = isProduction ? __dirname : path.join(__dirname, '..', 'public');
+    loadAscentiaKnowledgeBase(publicPath);
+    loadReportKnowledgeBase(publicPath);
+});
+
+process.on('SIGINT', () => {
+    logInfo('[SERVER]', 'Shutting down...');
+    io.close();
+    server.close(() => process.exit(0));
+});
+</server.ts>
+<caddyfile>
+# Artifact 146: Caddyfile (Production)
+# Date Created: Cycle 1188
+# Author: AI Model
+# Updated on: C1268 (Refactor for production static file serving.)
+
+# This Caddyfile provides a robust configuration for running AI Ascent in a production
+# environment. It automatically handles HTTPS, serves the static client application,
+# and correctly routes API and WebSocket traffic to the backend Node.js server.
+
+aiascent.game {
+    # Caddy will automatically provision and renew a free SSL certificate from Let's Encrypt.
+    
+    # Enable gzip and zstd compression for better performance.
+    encode zstd gzip
+
+    # Log all requests and errors.
+    log {
+        output file aiascent_caddy.log
+    }
+
+    # Reverse proxy ALL incoming requests to the backend Node.js server,
+    # which is now responsible for handling API, WebSockets, and serving static files.
+    # The `header_up` directives ensure WebSocket connections can be established correctly.
+    reverse_proxy localhost:3001 {
+        header_up Host {host}
+        header_up X-Real-IP {remote_ip}
+        header_up X-Forwarded-For {remote_ip}
+        header_up X-Forwarded-Proto {scheme}
+        header_up Connection {>Connection}
+        header_up Upgrade {>Upgrade}
+    }
+}
+
+# Optional: Redirect www to the main domain
+www.aiascent.game {
+    redir https://aiascent.game{uri} permanent
+}
+</caddyfile>
+</Ephemeral Context>
+<Previous Cycle 28 Summary of Actions>
+This is an excellent and exciting request! Integrating VS Code's native diff viewer is the perfect solution, providing a far superior user experience while simplifying our extension's codebase. The plan outlined in `A88. DCE - Native Diff Integration Plan.md` is sound, and I will execute it.
+
+My course of action is to implement the `TextDocumentContentProvider` as planned. This provider will serve the AI-generated, in-memory content to VS Code under a custom URI scheme. I will then add an "Open Changes" button to the "Associated Files" list, which will trigger a new backend process. This process will cache the AI's content with the provider and then execute the native `vscode.diff` command, showing the user a familiar, high-fidelity diff view.
+
+Finally, I will deprecate and remove our custom `DiffViewer` component, as it is now obsolete.
+
+1.  **Documentation (Aligning with the New Plan):**
+    *   I will update **`A88. DCE - Native Diff Integration Plan.md`** to mark it as "In Progress."
+    *   I will update **`A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md`** and **`A49. DCE - Phase 2 - File Association & Diffing Plan.md`** to formally state that the custom `DiffViewer` component is now deprecated and has been replaced by the native `vscode.diff` integration.
+
+2.  **Create the Virtual Content Provider (Backend):**
+    *   I will create a new file, **`src/backend/providers/ResponseContentProvider.ts`**. This class will implement `vscode.TextDocumentContentProvider`.
+    *   It will have a public `Map` to cache the AI-generated content, keyed by a unique URI.
+    *   Its `provideTextDocumentContent` method will read from this cache and serve the content to VS Code.
+
+3.  **Register the Provider and Implement Backend Logic:**
+    *   **`services.ts`:** The `ServiceContainer` will be updated to instantiate and hold a singleton instance of the new `ResponseContentProvider`.
+    *   **`extension.ts`:** In the `activate` function, I will register the new provider with a custom URI scheme: `vscode.workspace.registerTextDocumentContentProvider('dce-response', Services.responseContentProvider);`.
+    *   **IPC:** I will create a new `RequestNativeDiff` channel.
+    *   **`file-operation.service.ts`:** I will implement the `handleNativeDiffRequest` method. It will receive the original file path and the modified content, generate a unique virtual URI, store the content in the provider's cache, and execute the `vscode.diff` command.
+
+4.  **Implement Frontend UI and Deprecate Old Diff Viewer:**
+    *   **`ParsedView.tsx` & `view.scss`:** I will add a new "Open Changes" icon button (`VscCompareChanges`) to each item in the "Associated Files" list. It will be styled to appear on hover for a clean UI. Its `onClick` handler will trigger the new `RequestNativeDiff` IPC message.
+    *   **`view.tsx`:** I will remove all state and logic related to the old, custom diff viewer (e.g., `isDiffMode`, `diffTarget`, `originalFileContent`).
+    *   **`DiffViewer.tsx`:** I will remove this component file entirely as it is now obsolete.
+</Previous Cycle 28 Summary of Actions>
+</Cycle 29>
 
 <Cycle 28>
 <Cycle Context>
@@ -2713,10 +3090,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-20T20:52:54.667Z
+  Date Generated: 2025-09-20T21:25:35.497Z
   ---
   Total Files: 172
-  Approx. Tokens: 452677
+  Approx. Tokens: 452780
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -2724,7 +3101,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
 3. src\client\views\parallel-copilot.view\view.tsx (8347 tokens)
 4. src\Artifacts\A0. DCE Master Artifact List.md (8106 tokens)
-5. src\client\views\parallel-copilot.view\view.scss (5403 tokens)
+5. src\client\views\parallel-copilot.view\view.scss (5499 tokens)
 6. src\backend\services\prompt.service.ts (5237 tokens)
 7. src\backend\services\file-operation.service.ts (4526 tokens)
 8. src\client\components\tree-view\TreeView.tsx (4422 tokens)
@@ -2862,13 +3239,13 @@ This file-centric approach helps in planning and prioritizing work, especially i
 128. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 55 - Chars: 1970 - Tokens: 493
 129. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 84 - Chars: 3386 - Tokens: 847
 130. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
-131. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 151 - Chars: 9908 - Tokens: 2477
+131. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 151 - Chars: 9933 - Tokens: 2484
 132. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 79 - Chars: 3137 - Tokens: 785
 133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
 134. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 135. src\client\views\parallel-copilot.view\on-message.ts - Lines: 120 - Chars: 5668 - Tokens: 1417
 136. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 100 - Chars: 5002 - Tokens: 1251
-137. src\client\views\parallel-copilot.view\view.scss - Lines: 970 - Chars: 21611 - Tokens: 5403
+137. src\client\views\parallel-copilot.view\view.scss - Lines: 979 - Chars: 21996 - Tokens: 5499
 138. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
 139. src\client\views\parallel-copilot.view\view.tsx - Lines: 277 - Chars: 33386 - Tokens: 8347
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
@@ -23151,7 +23528,7 @@ export default HighlightedTextarea;
 
 <file path="src/client/views/parallel-copilot.view/components/ParsedView.tsx">
 // src/client/views/parallel-copilot.view/components/ParsedView.tsx
-// Updated on: C27 (Add native diff button, remove old diff state)
+// Updated on: C28 (No functional changes, only minor class name consistency)
 import * as React from 'react';
 import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscClippy, VscChevronDown, VscDiff } from 'react-icons/vsc';
 import ReactMarkdown from 'react-markdown';
@@ -23262,7 +23639,7 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
                                 {fileExists ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
                                 <span className="file-path-text" title={file}>{truncatePath(file, 40)}</span>
                                 {metrics && fileExists && <span className="similarity-score">{ (similarity * 100).toFixed(0) }%</span>}
-                                {fileExists && <button className="native-diff-button" title="Open Changes" onClick={(e) => handleNativeDiff(e, file)}><VscDiff /></button>}
+                                {fileExists && <button className="native-diff-button styled-button" title="Open Changes" onClick={(e) => handleNativeDiff(e, file)}><VscDiff /></button>}
                             </div>
                             {!fileExists && props.selectedFilePath === file && (
                                 <div className="path-override-container" onClick={e => e.stopPropagation()}>{hasOverride ? (<><span>Linked to: {props.pathOverrides.get(file)}</span><button className="styled-button" onClick={() => props.onUnlinkFile(file)}><VscDebugDisconnect /> Unlink</button></>) : (<><input type="text" placeholder="Enter correct relative path..." value={props.tempOverridePath} onChange={e => props.onTempOverridePathChange(e.target.value)} onKeyDown={e => {if(e.key === 'Enter') props.onLinkFile(file)}} /><button className="styled-button" onClick={() => props.onLinkFile(file)}><VscLink /> Link</button></>)}</div>
@@ -23696,7 +24073,7 @@ export default OnboardingView;
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C27 (Add native diff button style)
+// Updated on: C28 (Style native diff button)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -24364,6 +24741,15 @@ body {
         transition: opacity 0.1s ease-in-out;
         margin-left: auto;
         padding: 0 4px;
+        font-size: 12px;
+        /* Inherit from styled-button for consistency */
+        background-color: var(--vscode-button-secondaryBackground);
+        color: var(--vscode-button-secondaryForeground);
+        border: 1px solid var(--vscode-button-border, transparent);
+        
+        &:hover {
+            background-color: var(--vscode-button-secondaryHoverBackground);
+        }
     }
 
 
