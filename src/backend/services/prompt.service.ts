@@ -1,4 +1,4 @@
-// Updated on: C4 (Implement truncated state log)
+// Updated on: C23 (Add cost calculation logging)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -187,29 +187,37 @@ ${staticContext.trim()}
     }
 
     public async handlePromptCostBreakdownRequest(cycleData: PcppCycle, serverIpc: ServerPostMessageManager) {
+        Services.loggerService.log("--- COST CALCULATION DRY RUN ---");
         try {
             const selectedFiles = await Services.selectionService.getLastSelection();
+            Services.loggerService.log(`[CostCalc] Found ${selectedFiles.length} selected files.`);
             if (selectedFiles.length === 0) {
                 serverIpc.sendToClient(ServerToClientChannel.SendPromptCostEstimation, { totalTokens: 0, estimatedCost: 0, breakdown: {} });
+                Services.loggerService.log("[CostCalc] No files selected, sending 0 cost.");
                 return;
             }
             const flattenedContent = await Services.flattenerService.getFlattenedContent(selectedFiles);
+            Services.loggerService.log(`[CostCalc] In-memory flattened content generated (${Math.ceil(flattenedContent.length / 4)} tokens).`);
             
             const promptParts = await this.getPromptParts(cycleData, flattenedContent);
             
             const breakdown: { [key: string]: number } = {};
             let totalTokens = 0;
 
+            Services.loggerService.log("[CostCalc] Calculating breakdown:");
             for (const [key, value] of Object.entries(promptParts)) {
                 const partTokens = Math.ceil(value.length / 4);
                 breakdown[key] = partTokens;
                 totalTokens += partTokens;
+                Services.loggerService.log(`  - ${key}: ${partTokens} tokens`);
             }
 
             const estimatedCost = calculatePromptCost(totalTokens);
+            Services.loggerService.log(`[CostCalc] Total Tokens: ${totalTokens}, Estimated Cost: $${estimatedCost}`);
+            Services.loggerService.log("[CostCalc] Sending estimation to client.");
             serverIpc.sendToClient(ServerToClientChannel.SendPromptCostEstimation, { totalTokens, estimatedCost, breakdown });
         } catch (error: any) {
-            Services.loggerService.error(`Failed to estimate prompt cost: ${error.message}`);
+            Services.loggerService.error(`[CostCalc] Failed to estimate prompt cost: ${error.message}`);
         }
     }
 

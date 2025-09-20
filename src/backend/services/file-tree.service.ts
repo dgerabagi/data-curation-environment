@@ -1,5 +1,5 @@
 // src/backend/services/file-tree.service.ts
-// Updated on: C22 (Add logging for duplication bug)
+// Updated on: C23 (Implement debounced auto-add queue)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -27,8 +27,8 @@ export class FileTreeService {
     private decorationsDebounceTimer: NodeJS.Timeout | null = null;
     private gitApi?: GitAPI;
     private autoAddQueue: string[] = [];
-    private isProcessingAutoAdd = false;
     private historyFilePath: string | undefined;
+    private debouncedProcessAutoAdd: () => void;
 
     constructor(gitApi?: GitAPI) {
         this.gitApi = gitApi;
@@ -46,6 +46,17 @@ export class FileTreeService {
                 });
             });
         }
+        
+        // Debounce the queue processing
+        this.debouncedProcessAutoAdd = this.debounce(this.processAutoAddQueue.bind(this), 200);
+    }
+
+    private debounce(func: (...args: any[]) => void, delay: number) {
+        let timeoutId: NodeJS.Timeout | null = null;
+        return (...args: any[]) => {
+            if (timeoutId) clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => func(...args), delay);
+        };
     }
 
     private triggerFullRefresh(reason: string) {
@@ -106,7 +117,7 @@ export class FileTreeService {
                 Services.fileOperationService.removeFileToIgnoreForAutoAdd(normalizedPath);
             } else if (Services.selectionService.getAutoAddState()) {
                 this.autoAddQueue.push(normalizedPath);
-                this.processAutoAddQueue();
+                this.debouncedProcessAutoAdd();
             }
             onFileChange(uri, 'onDidCreate');
         });
@@ -116,16 +127,22 @@ export class FileTreeService {
     }
 
     private async processAutoAddQueue() {
-        if (this.isProcessingAutoAdd || this.autoAddQueue.length === 0) return;
-        this.isProcessingAutoAdd = true;
-        const pathsToAdd = [...this.autoAddQueue];
+        if (this.autoAddQueue.length === 0) return;
+    
+        const pathsToAdd = [...new Set(this.autoAddQueue)];
         this.autoAddQueue = [];
+    
         const currentSelection = await Services.selectionService.getLastSelection();
         const newSelection = [...new Set([...currentSelection, ...pathsToAdd])];
-        Services.loggerService.log(`[DUPLICATION-BUG-LOG] AutoAdd: Current selection has ${currentSelection.length}. Adding ${pathsToAdd.length}. New selection will be ${newSelection.length}.`);
+    
+        Services.loggerService.log(`[DUPLICATION-BUG-LOG] AutoAdd (Debounced): Current has ${currentSelection.length}. Adding ${pathsToAdd.length}. New total ${newSelection.length}.`);
         await Services.selectionService.saveCurrentSelection(newSelection);
-        this.isProcessingAutoAdd = false;
-        if (this.autoAddQueue.length > 0) this.processAutoAddQueue();
+        
+        // After saving, we need to tell the UI to refresh its selection state
+        const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
+        if (serverIpc) {
+            serverIpc.sendToClient(ServerToClientChannel.ApplySelectionSet, { paths: newSelection });
+        }
     }
 
     private async getFileStats(filePath: string): Promise<Omit<FileNode, 'name' | 'absolutePath' | 'children'>> {

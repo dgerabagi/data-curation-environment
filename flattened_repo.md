@@ -1,23 +1,23 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-20T01:50:30.994Z
+  Date Generated: 2025-09-20T02:22:17.014Z
   ---
   Total Files: 171
-  Approx. Tokens: 454905
+  Approx. Tokens: 455567
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (8552 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (8579 tokens)
 4. src\Artifacts\A0. DCE Master Artifact List.md (8106 tokens)
 5. src\client\views\parallel-copilot.view\view.scss (5583 tokens)
-6. src\backend\services\prompt.service.ts (5139 tokens)
+6. src\backend\services\prompt.service.ts (5237 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 8. src\backend\services\file-operation.service.ts (4370 tokens)
 9. src\client\views\context-chooser.view\view.tsx (4070 tokens)
-10. src\client\views\context-chooser.view\view.scss (3708 tokens)
+10. src\backend\services\file-tree.service.ts (3810 tokens)
 
 <!-- Full File List -->
 1. public\copilot.svg - [Binary] Size: 445 Bytes
@@ -32,7 +32,7 @@
 10. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
 11. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
 12. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
-13. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 106 - Chars: 12989 - Tokens: 3248
+13. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 116 - Chars: 14426 - Tokens: 3607
 14. src\Artifacts\A11.1 DCE - New Regression Case Studies.md - Lines: 391 - Chars: 46197 - Tokens: 11550
 15. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5687 - Tokens: 1422
 16. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
@@ -122,13 +122,13 @@
 100. src\backend\services\action.service.ts - Lines: 71 - Chars: 2444 - Tokens: 611
 101. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
 102. src\backend\services\file-operation.service.ts - Lines: 360 - Chars: 17477 - Tokens: 4370
-103. src\backend\services\file-tree.service.ts - Lines: 273 - Chars: 14651 - Tokens: 3663
-104. src\backend\services\flattener.service.ts - Lines: 244 - Chars: 13031 - Tokens: 3258
+103. src\backend\services\file-tree.service.ts - Lines: 290 - Chars: 15238 - Tokens: 3810
+104. src\backend\services\flattener.service.ts - Lines: 245 - Chars: 13153 - Tokens: 3289
 105. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 106. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
 107. src\backend\services\history.service.ts - Lines: 292 - Chars: 12460 - Tokens: 3115
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
-109. src\backend\services\prompt.service.ts - Lines: 388 - Chars: 20553 - Tokens: 5139
+109. src\backend\services\prompt.service.ts - Lines: 396 - Chars: 20945 - Tokens: 5237
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 111. src\backend\services\services.ts - Lines: 42 - Chars: 1905 - Tokens: 477
 112. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
@@ -159,7 +159,7 @@
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 100 - Chars: 5002 - Tokens: 1251
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 959 - Chars: 22331 - Tokens: 5583
 139. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-140. src\client\views\parallel-copilot.view\view.tsx - Lines: 282 - Chars: 34208 - Tokens: 8552
+140. src\client\views\parallel-copilot.view\view.tsx - Lines: 282 - Chars: 34315 - Tokens: 8579
 141. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 142. src\client\views\settings.view\on-message.ts - Lines: 17 - Chars: 762 - Tokens: 191
 143. src\client\views\settings.view\view.scss - Lines: 87 - Chars: 1767 - Tokens: 442
@@ -1216,7 +1216,7 @@ To enhance the data curation process, it is critical for the user to have immedi
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C21 (Add Duplicate Files on Root Deselection case)
+# Updated on: C23 (Add Duplication on Path Normalization case)
 
 ## 1. Purpose
 
@@ -1225,6 +1225,16 @@ This document serves as a living record of persistent or complex bugs that have 
 **This artifact is the primary log for new and recent case studies.** Older, resolved issues are archived in `A11.1 DCE - New Regression Case Studies.md` to keep this document concise and focused on currently relevant issues.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 032: Duplicate Files in Flattened Context Due to Path Normalization Issues
+
+-   **Artifacts Affected:** `src/backend/services/flattener.service.ts`
+-   **Cycles Observed:** C22, C23
+-   **Symptom:** When the user's selection includes both a parent directory (e.g., `src`) and files within that directory, the final `flattened_repo.md` contains duplicate entries for those files.
+-   **Root Cause Analysis (RCA):** The `expandDirectories` function recursively gathered all file paths. If the input was `['c:/proj/src', 'c:/proj/src/main.ts']`, the function would add `c:/proj/src/main.ts` once from the recursive scan and a second time from the explicit file path. A subsequent de-duplication step using `new Set()` was intended to prevent this, but it failed. The failure was due to inconsistent path separators on Windows. The recursive traversal might produce paths with forward slashes (`/`), while other parts of the system might use backslashes (`\`). The `Set` treated `'c:/proj/src/main.ts'` and `'c:\proj\src\main.ts'` as two unique strings, defeating the de-duplication.
+-   **Codified Solution & Best Practice:** All file paths must be normalized to a consistent format *before* being used in collections or for comparison. A simple utility function that replaces all backslashes (`\`) with forward slashes (`/`) should be applied to every path string as soon as it is read or constructed. This ensures that path comparisons and `Set`-based de-duplication are always reliable, regardless of the operating system.
 
 ---
 
@@ -16301,7 +16311,7 @@ export class FileOperationService {
 
 <file path="src/backend/services/file-tree.service.ts">
 // src/backend/services/file-tree.service.ts
-// Updated on: C22 (Add logging for duplication bug)
+// Updated on: C23 (Implement debounced auto-add queue)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -16329,8 +16339,8 @@ export class FileTreeService {
     private decorationsDebounceTimer: NodeJS.Timeout | null = null;
     private gitApi?: GitAPI;
     private autoAddQueue: string[] = [];
-    private isProcessingAutoAdd = false;
     private historyFilePath: string | undefined;
+    private debouncedProcessAutoAdd: () => void;
 
     constructor(gitApi?: GitAPI) {
         this.gitApi = gitApi;
@@ -16348,6 +16358,17 @@ export class FileTreeService {
                 });
             });
         }
+        
+        // Debounce the queue processing
+        this.debouncedProcessAutoAdd = this.debounce(this.processAutoAddQueue.bind(this), 200);
+    }
+
+    private debounce(func: (...args: any[]) => void, delay: number) {
+        let timeoutId: NodeJS.Timeout | null = null;
+        return (...args: any[]) => {
+            if (timeoutId) clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => func(...args), delay);
+        };
     }
 
     private triggerFullRefresh(reason: string) {
@@ -16408,7 +16429,7 @@ export class FileTreeService {
                 Services.fileOperationService.removeFileToIgnoreForAutoAdd(normalizedPath);
             } else if (Services.selectionService.getAutoAddState()) {
                 this.autoAddQueue.push(normalizedPath);
-                this.processAutoAddQueue();
+                this.debouncedProcessAutoAdd();
             }
             onFileChange(uri, 'onDidCreate');
         });
@@ -16418,16 +16439,22 @@ export class FileTreeService {
     }
 
     private async processAutoAddQueue() {
-        if (this.isProcessingAutoAdd || this.autoAddQueue.length === 0) return;
-        this.isProcessingAutoAdd = true;
-        const pathsToAdd = [...this.autoAddQueue];
+        if (this.autoAddQueue.length === 0) return;
+    
+        const pathsToAdd = [...new Set(this.autoAddQueue)];
         this.autoAddQueue = [];
+    
         const currentSelection = await Services.selectionService.getLastSelection();
         const newSelection = [...new Set([...currentSelection, ...pathsToAdd])];
-        Services.loggerService.log(`[DUPLICATION-BUG-LOG] AutoAdd: Current selection has ${currentSelection.length}. Adding ${pathsToAdd.length}. New selection will be ${newSelection.length}.`);
+    
+        Services.loggerService.log(`[DUPLICATION-BUG-LOG] AutoAdd (Debounced): Current has ${currentSelection.length}. Adding ${pathsToAdd.length}. New total ${newSelection.length}.`);
         await Services.selectionService.saveCurrentSelection(newSelection);
-        this.isProcessingAutoAdd = false;
-        if (this.autoAddQueue.length > 0) this.processAutoAddQueue();
+        
+        // After saving, we need to tell the UI to refresh its selection state
+        const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
+        if (serverIpc) {
+            serverIpc.sendToClient(ServerToClientChannel.ApplySelectionSet, { paths: newSelection });
+        }
     }
 
     private async getFileStats(filePath: string): Promise<Omit<FileNode, 'name' | 'absolutePath' | 'children'>> {
@@ -16576,7 +16603,7 @@ export class FileTreeService {
 </file_artifact>
 
 <file path="src/backend/services/flattener.service.ts">
-// Updated on: C22 (Add logging for duplication bug)
+// Updated on: C23 (Fix path normalization bug)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -16673,7 +16700,7 @@ export class FlattenerService {
     }
 
     private async expandDirectories(paths: string[]): Promise<string[]> {
-        const uniquePaths = [...new Set(paths)]; 
+        const uniquePaths = [...new Set(paths.map(normalizePath))]; 
         const allFiles: string[] = [];
         for (const p of uniquePaths) {
             try {
@@ -16692,10 +16719,11 @@ export class FlattenerService {
 
     private async getAllFilesRecursive(dirPath: string): Promise<string[]> {
         let files: string[] = [];
+        const normalizedDirPath = normalizePath(dirPath);
         try {
-            const entries = await fs.readdir(dirPath, { withFileTypes: true });
+            const entries = await fs.readdir(normalizedDirPath, { withFileTypes: true });
             for (const entry of entries) {
-                const fullPath = path.join(dirPath, entry.name);
+                const fullPath = path.join(normalizedDirPath, entry.name);
                 const normalizedFullPath = normalizePath(fullPath);
 
                 if (NON_SELECTABLE_PATTERNS.some(p => normalizedFullPath.includes(p) || entry.name === p)) {
@@ -16703,13 +16731,13 @@ export class FlattenerService {
                 }
 
                 if (entry.isDirectory()) {
-                    files = files.concat(await this.getAllFilesRecursive(fullPath));
+                    files = files.concat(await this.getAllFilesRecursive(normalizedFullPath));
                 } else {
-                    files.push(fullPath);
+                    files.push(normalizedFullPath);
                 }
             }
         } catch (e) {
-            console.error(`Error reading directory ${dirPath}:`, e);
+            console.error(`Error reading directory ${normalizedDirPath}:`, e);
         }
         return files;
     }
@@ -17379,7 +17407,7 @@ export class LoggerService {
 </file_artifact>
 
 <file path="src/backend/services/prompt.service.ts">
-// Updated on: C4 (Implement truncated state log)
+// Updated on: C23 (Add cost calculation logging)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -17568,29 +17596,37 @@ ${staticContext.trim()}
     }
 
     public async handlePromptCostBreakdownRequest(cycleData: PcppCycle, serverIpc: ServerPostMessageManager) {
+        Services.loggerService.log("--- COST CALCULATION DRY RUN ---");
         try {
             const selectedFiles = await Services.selectionService.getLastSelection();
+            Services.loggerService.log(`[CostCalc] Found ${selectedFiles.length} selected files.`);
             if (selectedFiles.length === 0) {
                 serverIpc.sendToClient(ServerToClientChannel.SendPromptCostEstimation, { totalTokens: 0, estimatedCost: 0, breakdown: {} });
+                Services.loggerService.log("[CostCalc] No files selected, sending 0 cost.");
                 return;
             }
             const flattenedContent = await Services.flattenerService.getFlattenedContent(selectedFiles);
+            Services.loggerService.log(`[CostCalc] In-memory flattened content generated (${Math.ceil(flattenedContent.length / 4)} tokens).`);
             
             const promptParts = await this.getPromptParts(cycleData, flattenedContent);
             
             const breakdown: { [key: string]: number } = {};
             let totalTokens = 0;
 
+            Services.loggerService.log("[CostCalc] Calculating breakdown:");
             for (const [key, value] of Object.entries(promptParts)) {
                 const partTokens = Math.ceil(value.length / 4);
                 breakdown[key] = partTokens;
                 totalTokens += partTokens;
+                Services.loggerService.log(`  - ${key}: ${partTokens} tokens`);
             }
 
             const estimatedCost = calculatePromptCost(totalTokens);
+            Services.loggerService.log(`[CostCalc] Total Tokens: ${totalTokens}, Estimated Cost: $${estimatedCost}`);
+            Services.loggerService.log("[CostCalc] Sending estimation to client.");
             serverIpc.sendToClient(ServerToClientChannel.SendPromptCostEstimation, { totalTokens, estimatedCost, breakdown });
         } catch (error: any) {
-            Services.loggerService.error(`Failed to estimate prompt cost: ${error.message}`);
+            Services.loggerService.error(`[CostCalc] Failed to estimate prompt cost: ${error.message}`);
         }
     }
 
@@ -22142,7 +22178,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C22 (Add logging for duplication bug)
+// Updated on: C23 (Add logging for cost calculation)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -22339,7 +22375,7 @@ const App = () => {
     const newCycleButtonDisabledReason = React.useMemo(() => { const reasons: string[] = []; if (!cycleTitle || cycleTitle.trim() === 'New Cycle' || cycleTitle.trim() === '') reasons.push("- A cycle title is required."); if (!cycleContext || cycleContext.trim() === '') reasons.push("- Cycle context cannot be empty."); if (!selectedResponseId) reasons.push("- A response must be selected."); return reasons.join('\n'); }, [cycleTitle, cycleContext, selectedResponseId]);
 
     React.useEffect(() => { if (workflowStep === null) return; if (workflowStep === 'readyForNewCycle') return; if (workflowStep === 'awaitingGeneratePrompt') { if (isReadyForNextCycle) setWorkflowStep('awaitingGeneratePrompt'); return; } if (workflowStep === 'awaitingCycleTitle') { if (cycleTitle.trim() && cycleTitle.trim() !== 'New Cycle') { setWorkflowStep('awaitingGeneratePrompt'); } return; } if (workflowStep === 'awaitingCycleContext') { if (cycleContext.trim()) { setWorkflowStep('awaitingCycleTitle'); } return; } if (workflowStep === 'awaitingAccept') { return; } if (workflowStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestGitStatus, {}); return; } if (workflowStep === 'awaitingFileSelect') { if (selectedFilesForReplacement.size > 0) { setWorkflowStep('awaitingAccept'); } return; } if (workflowStep === 'awaitingResponseSelect') { if (selectedResponseId) { setWorkflowStep('awaitingBaseline'); } return; } if (workflowStep === 'awaitingSort') { if (isSortedByTokens) { setWorkflowStep('awaitingResponseSelect'); } return; } if (workflowStep === 'awaitingParse') { if (isParsedMode) { setWorkflowStep(isSortedByTokens ? 'awaitingResponseSelect' : 'awaitingSort'); } return; } const waitingForPaste = workflowStep?.startsWith('awaitingResponsePaste'); if (waitingForPaste) { for (let i = 1; i <= tabCount; i++) { if (!tabs[i.toString()]?.rawContent?.trim()) { setWorkflowStep(`awaitingResponsePaste_${i}`); return; } } setWorkflowStep('awaitingParse'); } }, [workflowStep, selectedFilesForReplacement, selectedResponseId, isSortedByTokens, isParsedMode, tabs, cycleContext, cycleTitle, tabCount, isReadyForNextCycle, clientIpc]);
-    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string, newMax?: number) => { console.log(`[PCPP View] Loading cycle data for cycle ${cycleData.cycleId}`); setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setActiveTab(cycleData.activeTab || 1); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setWorkflowStep(cycleData.activeWorkflowStep || null); if (newMax) setMaxCycle(newMax); setSaveStatus('saved'); requestCostEstimation(); }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => { setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics)); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { console.log(`[PCPP VIEW] Received NotifyGitOperationResult: ${JSON.stringify(result)}`); if (result.success) { setWorkflowStep(prevStep => { console.log(`[PCPP WORKFLOW] Functional update. Prev step: ${prevStep}.`); if (prevStep === 'awaitingBaseline') { console.log(`[PCPP WORKFLOW] Advancing from 'awaitingBaseline' to 'awaitingFileSelect'.`); clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } else { console.error(`[PCPP VIEW] Git operation failed: ${result.message}`); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => { if (cycleId === stateRef.current.currentCycle) setSaveStatus('saved'); }); clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }, [clientIpc, requestCostEstimation]);
+    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string, newMax?: number) => { console.log(`[PCPP View] Loading cycle data for cycle ${cycleData.cycleId}`); setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setActiveTab(cycleData.activeTab || 1); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setWorkflowStep(cycleData.activeWorkflowStep || null); if (newMax) setMaxCycle(newMax); setSaveStatus('saved'); requestCostEstimation(); }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => { setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics)); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { logger.log(`[CostCalc] Received cost estimation from backend: ${totalTokens} tokens, $${estimatedCost}`); setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { console.log(`[PCPP VIEW] Received NotifyGitOperationResult: ${JSON.stringify(result)}`); if (result.success) { setWorkflowStep(prevStep => { console.log(`[PCPP WORKFLOW] Functional update. Prev step: ${prevStep}.`); if (prevStep === 'awaitingBaseline') { console.log(`[PCPP WORKFLOW] Advancing from 'awaitingBaseline' to 'awaitingFileSelect'.`); clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } else { console.error(`[PCPP VIEW] Git operation failed: ${result.message}`); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => { if (cycleId === stateRef.current.currentCycle) setSaveStatus('saved'); }); clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }, [clientIpc, requestCostEstimation]);
     React.useEffect(() => { if (isParsedMode) parseAllTabs(); }, [isParsedMode, tabs, parseAllTabs]);
     React.useEffect(() => { if (!selectedFilePath) return; const currentTabData = tabs[activeTab.toString()]; if (currentTabData?.parsedContent) { const fileExistsInTab = currentTabData.parsedContent.files.some(f => f.path === selectedFilePath); if (!fileExistsInTab) setSelectedFilePath(null); } }, [activeTab, tabs, selectedFilePath]);
 

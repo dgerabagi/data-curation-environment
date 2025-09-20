@@ -1,4 +1,4 @@
-// Updated on: C22 (Add logging for duplication bug)
+// Updated on: C23 (Fix path normalization bug)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -95,7 +95,7 @@ export class FlattenerService {
     }
 
     private async expandDirectories(paths: string[]): Promise<string[]> {
-        const uniquePaths = [...new Set(paths)]; 
+        const uniquePaths = [...new Set(paths.map(normalizePath))]; 
         const allFiles: string[] = [];
         for (const p of uniquePaths) {
             try {
@@ -114,10 +114,11 @@ export class FlattenerService {
 
     private async getAllFilesRecursive(dirPath: string): Promise<string[]> {
         let files: string[] = [];
+        const normalizedDirPath = normalizePath(dirPath);
         try {
-            const entries = await fs.readdir(dirPath, { withFileTypes: true });
+            const entries = await fs.readdir(normalizedDirPath, { withFileTypes: true });
             for (const entry of entries) {
-                const fullPath = path.join(dirPath, entry.name);
+                const fullPath = path.join(normalizedDirPath, entry.name);
                 const normalizedFullPath = normalizePath(fullPath);
 
                 if (NON_SELECTABLE_PATTERNS.some(p => normalizedFullPath.includes(p) || entry.name === p)) {
@@ -125,13 +126,13 @@ export class FlattenerService {
                 }
 
                 if (entry.isDirectory()) {
-                    files = files.concat(await this.getAllFilesRecursive(fullPath));
+                    files = files.concat(await this.getAllFilesRecursive(normalizedFullPath));
                 } else {
-                    files.push(fullPath);
+                    files.push(normalizedFullPath);
                 }
             }
         } catch (e) {
-            console.error(`Error reading directory ${dirPath}:`, e);
+            console.error(`Error reading directory ${normalizedDirPath}:`, e);
         }
         return files;
     }
