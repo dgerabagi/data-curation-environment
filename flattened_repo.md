@@ -1,28 +1,28 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-19T13:04:25.062Z
+  Date Generated: 2025-09-19T22:57:38.800Z
   ---
-  Total Files: 170
-  Approx. Tokens: 453361
+  Total Files: 171
+  Approx. Tokens: 454910
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (8513 tokens)
-4. src\Artifacts\A0. DCE Master Artifact List.md (8022 tokens)
-5. src\client\views\parallel-copilot.view\view.scss (5344 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (8583 tokens)
+4. src\Artifacts\A0. DCE Master Artifact List.md (8106 tokens)
+5. src\client\views\parallel-copilot.view\view.scss (5583 tokens)
 6. src\backend\services\prompt.service.ts (5139 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4422 tokens)
-8. src\backend\services\file-operation.service.ts (4280 tokens)
+8. src\backend\services\file-operation.service.ts (4370 tokens)
 9. src\client\views\context-chooser.view\view.tsx (4019 tokens)
 10. src\client\views\context-chooser.view\view.scss (3708 tokens)
 
 <!-- Full File List -->
 1. public\copilot.svg - [Binary] Size: 445 Bytes
 2. public\spiral.svg - [Binary] Size: 459 Bytes
-3. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 472 - Chars: 32086 - Tokens: 8022
+3. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 476 - Chars: 32424 - Tokens: 8106
 4. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 5. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
 6. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
@@ -32,7 +32,7 @@
 10. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
 11. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
 12. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
-13. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 106 - Chars: 12884 - Tokens: 3221
+13. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 106 - Chars: 12989 - Tokens: 3248
 14. src\Artifacts\A11.1 DCE - New Regression Case Studies.md - Lines: 391 - Chars: 46197 - Tokens: 11550
 15. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5687 - Tokens: 1422
 16. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
@@ -87,7 +87,7 @@
 65. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 40 - Chars: 3737 - Tokens: 935
 66. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 35 - Chars: 4177 - Tokens: 1045
 67. src\Artifacts\A61. DCE - Phase 2 - Cycle History Management Plan.md - Lines: 45 - Chars: 3559 - Tokens: 890
-68. src\Artifacts\A65. DCE - Universal Task Checklist.md - Lines: 102 - Chars: 6910 - Tokens: 1728
+68. src\Artifacts\A65. DCE - Universal Task Checklist.md - Lines: 93 - Chars: 5650 - Tokens: 1413
 69. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1806 - Tokens: 452
 70. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 47 - Chars: 3537 - Tokens: 885
 71. src\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3347 - Tokens: 837
@@ -121,19 +121,19 @@
 99. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
 100. src\backend\services\action.service.ts - Lines: 71 - Chars: 2444 - Tokens: 611
 101. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
-102. src\backend\services\file-operation.service.ts - Lines: 360 - Chars: 17118 - Tokens: 4280
-103. src\backend\services\file-tree.service.ts - Lines: 272 - Chars: 14461 - Tokens: 3616
-104. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12676 - Tokens: 3169
+102. src\backend\services\file-operation.service.ts - Lines: 360 - Chars: 17477 - Tokens: 4370
+103. src\backend\services\file-tree.service.ts - Lines: 272 - Chars: 14732 - Tokens: 3683
+104. src\backend\services\flattener.service.ts - Lines: 241 - Chars: 12916 - Tokens: 3229
 105. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 106. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-107. src\backend\services\history.service.ts - Lines: 288 - Chars: 12307 - Tokens: 3077
+107. src\backend\services\history.service.ts - Lines: 288 - Chars: 12594 - Tokens: 3149
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 109. src\backend\services\prompt.service.ts - Lines: 388 - Chars: 20553 - Tokens: 5139
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 111. src\backend\services\services.ts - Lines: 42 - Chars: 1905 - Tokens: 477
 112. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
 113. src\client\components\file-tree\FileTree.tsx - Lines: 176 - Chars: 11127 - Tokens: 2782
-114. src\client\components\file-tree\FileTree.utils.ts - Lines: 117 - Chars: 4087 - Tokens: 1022
+114. src\client\components\file-tree\FileTree.utils.ts - Lines: 117 - Chars: 4203 - Tokens: 1051
 115. src\client\components\tree-view\TreeView.tsx - Lines: 395 - Chars: 17687 - Tokens: 4422
 116. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 117. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
@@ -151,15 +151,15 @@
 129. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 55 - Chars: 1970 - Tokens: 493
 130. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 84 - Chars: 3386 - Tokens: 847
 131. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
-132. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 137 - Chars: 9229 - Tokens: 2308
+132. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 137 - Chars: 9365 - Tokens: 2342
 133. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 79 - Chars: 3137 - Tokens: 785
 134. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
 135. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 116 - Chars: 5463 - Tokens: 1366
-137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 100 - Chars: 4903 - Tokens: 1226
-138. src\client\views\parallel-copilot.view\view.scss - Lines: 959 - Chars: 21373 - Tokens: 5344
+136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 116 - Chars: 5578 - Tokens: 1395
+137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 100 - Chars: 5002 - Tokens: 1251
+138. src\client\views\parallel-copilot.view\view.scss - Lines: 959 - Chars: 22331 - Tokens: 5583
 139. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-140. src\client\views\parallel-copilot.view\view.tsx - Lines: 281 - Chars: 34052 - Tokens: 8513
+140. src\client\views\parallel-copilot.view\view.tsx - Lines: 281 - Chars: 34332 - Tokens: 8583
 141. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 142. src\client\views\settings.view\on-message.ts - Lines: 17 - Chars: 762 - Tokens: 191
 143. src\client\views\settings.view\view.scss - Lines: 87 - Chars: 1767 - Tokens: 442
@@ -190,6 +190,7 @@
 168. src\Artifacts\A76. DCE - Word Wrap Line Numbering Challenges.md - Lines: 61 - Chars: 4895 - Tokens: 1224
 169. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
 170. src\Artifacts\A87. VCPG - vLLM High-Throughput Inference Plan.md - Lines: 60 - Chars: 4433 - Tokens: 1109
+171. src\Artifacts\A88. DCE - Native Diff Integration Plan.md - Lines: 42 - Chars: 4152 - Tokens: 1038
 
 <file path="public/copilot.svg">
 <metadata>
@@ -217,7 +218,7 @@
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C19 (Add A86)
+# Updated on: C22 (Add A88)
 
 ## 1. Purpose
 
@@ -602,6 +603,10 @@
 ### A87. VCPG - vLLM High-Throughput Inference Plan
 - **Description:** A research and planning document analyzing the potential of using vLLM for high-throughput, low-latency inference for JANE, particularly for batched tool calling.
 - **Tags:** guide, research, planning, ai, jane, llm, vllm, inference, performance
+
+### A88. DCE - Native Diff Integration Plan
+- **Description:** A plan to integrate VS Code's native diff viewer (`vscode.diff`) for comparing AI-generated file content against the current workspace file, leveraging a TextDocumentContentProvider for in-memory content.
+- **Tags:** feature plan, ui, ux, diff, vscode api, virtual document
 
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
@@ -4872,7 +4877,7 @@ The goal of this feature is to provide commands and UI controls to **export** th
 # Artifact A65: DCE - Universal Task Checklist
 # Date Created: C165
 # Author: AI Model & Curator
-# Updated on: C21 (Add new tasks from playtest feedback)
+# Updated on: C22 (Add new tasks from playtest feedback)
 
 ## 1. Purpose
 
@@ -4894,83 +4899,74 @@ This file-centric approach helps in planning and prioritizing work, especially i
 
 ---
 
-## Task List for Cycle 21+
+## Task List for Cycle 22+
 
-## T-1: Fix UI Regressions and Minor Bugs
+## T-1: Fix Onboarding Auto-Save Icon
 - **Files Involved:**
-    - `src/client/views/parallel-copilot.view/view.scss`
-    - `src/backend/services/file-tree.service.ts`
-- **Total Tokens:** ~8,800
-- **More than one cycle?** No
-
-- [X] **Task (T-ID: 1.1):** Restore the correct theme/style for the "Sort" button so it matches other workflow buttons.
-- [X] **Task (T-ID: 1.2):** Add the `.next` directory to the `NON_SELECTABLE_PATTERNS` to exclude it from selection.
-
-### Verification Steps
-1.  Launch the extension and open the PCPP. Parse a response.
-2.  **Expected:** The "Sort" button in the response tab bar should have the same visual style as the buttons in the main workflow toolbar below it.
-3.  Open a project that contains a `.next` build directory.
-4.  **Expected:** The `.next` directory in the File Tree View should have a disabled/grayed-out checkbox and should not be selectable.
-
-## T-2: Restore "Select All" Buttons for Associated Files
-- **Files Involved:**
-    - `src/Artifacts/A86. DCE - PCPP Workflow Centralization and UI Persistence Plan.md`
-    - `src/client/views/parallel-copilot.view/components/WorkflowToolbar.tsx`
     - `src/client/views/parallel-copilot.view/view.tsx`
-- **Total Tokens:** ~10,000
+- **Total Tokens:** ~8,500
 - **More than one cycle?** No
+- **Status:** In Progress
 
-- [X] **Task (T-ID: 2.1):** Re-add the "Select All" and "Deselect All Across All Responses" buttons to the `WorkflowToolbar`.
-- [X] **Task (T-ID: 2.2):** Implement the `handleSelectAllAssociatedFiles` logic. It must select all files in the *active* tab.
-- [X] **Task (T-ID: 2.3):** Ensure the "Select All" logic also de-selects any other instance of the same file path from other response tabs to prevent conflicts.
-- [X] **Task (T-ID: 2.4):** Update `A86` to reflect that these buttons are being restored.
+- [ ] **Task (T-ID: 1.1):** The `useEffect` hook listening for `NotifySaveComplete` is missing a dependency on `saveStatus`. Add it to the dependency array to ensure the callback has the latest state and can correctly transition from 'saving' to 'saved'.
 
 ### Verification Steps
-1.  Parse multiple responses where two or more responses modify the same file (e.g., `src/main.ts`).
-2.  Manually check the box for `src/main.ts` in `Resp 2`.
-3.  Navigate to `Resp 1`. Click the new "Select All" button.
-4.  **Expected:** All files in `Resp 1` should become checked. The checkbox for `src/main.ts` in `Resp 2` should become unchecked.
-5.  Click "Deselect All Across All Responses".
-6.  **Expected:** All checkboxes in all response tabs should become unchecked.
+1.  Launch the extension in a fresh workspace to trigger the onboarding view.
+2.  Type a character in the "Project Scope" text area.
+3.  **Expected:** The save status icon should change from a checkmark to a caution sign.
+4.  Stop typing.
+5.  **Expected:** The icon should change to a circular processing animation, and then, after a short delay, it should change back to the green checkmark. It should not get stuck on the processing animation.
 
-## T-3: Fix File Duplication Bug
+## T-2: Fix File Duplication Bug
 - **Files Involved:**
-    - `src/Artifacts/A11. DCE - Regression Case Studies.md`
     - `src/backend/services/flattener.service.ts`
-    - `src/client/components/file-tree/FileTree.utils.ts`
+    - `src/backend/services/file-tree.service.ts`
+- **Total Tokens:** ~6,800
+- **More than one cycle?** No
+- **Status:** In Progress
+
+- [ ] **Task (T-ID: 2.1):** Add a safeguard in `flattener.service.ts` to de-duplicate the incoming file path list using `[...new Set(paths)]` before any processing occurs.
+- [ ] **Task (T-ID: 2.2):** Review and harden the `processAutoAddQueue` logic in `file-tree.service.ts` to prevent race conditions that might add duplicate files to the selection state.
+
+### Verification Steps
+1.  Enable "Automatically add new files to selection".
+2.  Create a new workspace and go through the Cycle 0 onboarding to generate the initial set of artifacts.
+3.  Click "Flatten Context".
+4.  Inspect the generated `flattened_repo.md` file.
+5.  **Expected:** The file list and content should contain no duplicate file paths.
+
+## T-3: Implement "Open All" Button
+- **Files Involved:**
+    - `src/client/views/parallel-copilot.view/components/ParsedView.tsx`
+    - `src/backend/services/file-operation.service.ts`
+    - `src/common/ipc/channels.enum.ts`
+    - `src/common/ipc/channels.type.ts`
+    - `src/client/views/parallel-copilot.view/on-message.ts`
 - **Total Tokens:** ~8,000
 - **More than one cycle?** No
+- **Status:** In Progress
 
-- [ ] **Task (T-ID: 3.1):** Add a safeguard in `flattener.service.ts` to de-duplicate the incoming file path list using a `Set`.
-- [ ] **Task (T-ID: 3.2):** Fix the root cause in `FileTree.utils.ts` to ensure unchecking the root directory correctly removes all descendant files from the selection state.
-- [ ] **Task (T-ID: 3.3):** Create a new regression case study in `A11` for this bug.
+- [ ] **Task (T-ID: 3.1):** Add an "Open All" button to the header of the "Associated Files" section in `ParsedView.tsx`.
+- [ ] **Task (T-ID: 3.2):** Create a new `RequestBatchFileOpen` IPC channel.
+- [ ] **Task (T-ID: 3.3):** Implement the `handleBatchFileOpenRequest` method in `file-operation.service.ts` to iterate through a list of paths and open each one.
 
 ### Verification Steps
-1.  Check the root directory checkbox. Note the number of selected items.
-2.  Uncheck the root directory checkbox.
-3.  **Expected:** The "Selected Items" count should drop to 0.
-4.  Re-check the root directory checkbox.
-5.  **Expected:** The "Selected Items" count should return to the original number, with no duplicates.
-6.  Click "Flatten Context" and inspect `flattened_repo.md`.
-7.  **Expected:** The file list and content should contain no duplicate file paths.
+1.  Parse a response with multiple associated files.
+2.  Click the "Open All" button.
+3.  **Expected:** All files listed in the "Associated Files" section should open as new tabs in the VS Code editor.
 
-## T-4: Enhance Onboarding View & Animation Persistence
+## T-4: Plan Native Diff Integration
 - **Files Involved:**
-    - `src/client/views/parallel-copilot.view/OnboardingView.tsx`
-    - `src/client/views/parallel-copilot.view/view.tsx`
-- **Total Tokens:** ~9,500
-- **More than one cycle?** No
+    - `src/Artifacts/A88. DCE - Native Diff Integration Plan.md`
+- **Total Tokens:** ~1,000
+- **More than one cycle?** Yes (Implementation is deferred)
+- **Status:** In Progress
 
-- [X] **Task (T-ID: 4.1):** In `OnboardingView.tsx`, add a `<label>` or `<h3>` with the title "Project Scope" above the main text area.
-- [-] **Task (T-ID: 4.2):** Integrate the `SaveStatusIndicator` component into the `OnboardingView` to show save status.
-- [X] **Task (T-ID: 4.3):** In `view.tsx`, add a call to `saveCurrentCycleState()` inside the `visibilitychange` event listener to ensure the latest `workflowStep` is persisted when the user switches tabs.
+- [ ] **Task (T-ID: 4.1):** Create the new planning artifact `A88` to detail the implementation of a native VS Code diff view using a `TextDocumentContentProvider`.
 
 ### Verification Steps
-1.  Start the extension in a fresh workspace to trigger the onboarding view.
-2.  **Expected:** The view should now have a title above the text area, and the save status indicator should be visible.
-3.  Proceed to the main PCPP view. Advance the workflow until "Generate prompt.md" is highlighted. Click it. The view will switch to the editor.
-4.  Immediately switch back to the PCPP view.
-5.  **Expected:** The highlight should now be on the `+` (New Cycle) button, and should not have reverted to "Generate prompt.md".
+1.  Check the `src/Artifacts` directory.
+2.  **Expected:** The new `A88` artifact should exist and contain a detailed technical plan.
 </file_artifact>
 
 <file path="src/Artifacts/A66. DCE - Cycle 1 - Task Tracker.md">
@@ -24530,5 +24526,50 @@ The plan is to replace the LM Studio API endpoint with a self-hosted, OpenAI-com
     *   Once integrated, conduct performance tests to measure the improvement in response time and throughput compared to the LM Studio setup.
 
 This migration promises to significantly enhance JANE's performance and scalability, paving the way for more complex and responsive AI-driven features in the future.
+</file_artifact>
+
+<file path="src/Artifacts/A88. DCE - Native Diff Integration Plan.md">
+# Artifact A88: DCE - Native Diff Integration Plan
+# Date Created: C22
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A plan to integrate VS Code's native diff viewer (`vscode.diff`) for comparing AI-generated file content against the current workspace file, leveraging a TextDocumentContentProvider for in-memory content.
+- **Tags:** feature plan, ui, ux, diff, vscode api, virtual document
+
+## 1. Overview & Goal
+
+The current integrated diff viewer is functional but lacks the native feel, performance, and rich features of VS Code's own diffing engine (e.g., syntax highlighting, minimap, inline actions). The goal of this feature is to replace our custom `DiffViewer` component with a button that triggers the built-in `vscode.diff` command.
+
+This provides a superior user experience and reduces the maintenance burden of our custom component. The primary technical challenge is that the AI-generated content exists only in the frontend's state (in-memory) and not as a file on disk. The solution is to create a **Virtual Document** using a `TextDocumentContentProvider`.
+
+## 2. User Story
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| P2-DIFF-NATIVE-01 | **View Diff Natively** | As a developer, when I hover over an associated file in the PCPP, I want to click an "Open Changes" button that opens the diff in a native VS Code diff tab, so I can use all the familiar features of the editor to review the changes. | - An "Open Changes" icon appears on hover for each existing file in the "Associated Files" list. <br> - Clicking it executes the `vscode.diff` command. <br> - A new editor tab opens, showing a side-by-side diff. <br> - The right side shows the current content of the workspace file. <br> - The left side shows the AI-generated content from the response tab. |
+
+## 3. Technical Implementation Plan
+
+This implementation involves creating a new backend provider and coordinating state between the frontend and backend.
+
+### Step 1: Create a TextDocumentContentProvider
+-   **New File (`src/backend/providers/ResponseContentProvider.ts`):** A new class will be created that implements `vscode.TextDocumentContentProvider`.
+-   **State Cache:** This provider will need a simple in-memory cache (e.g., a `Map<string, string>`) to store the AI-generated content. The key will be a unique identifier (like the URI itself), and the value will be the file content string.
+-   **`provideTextDocumentContent` method:** This is the core method. When VS Code needs to open a virtual document (e.g., `dce-response:path/to/file.ts?cycle=22&resp=1`), this method will be called with the URI. It will look up the content in its cache using the URI as the key and return it.
+
+### Step 2: Register the Provider and Command
+-   **`extension.ts`:** In the `activate` function, the new provider will be registered with a custom URI scheme: `vscode.workspace.registerTextDocumentContentProvider('dce-response', responseContentProvider);`.
+
+### Step 3: Implement the Frontend-to-Backend Workflow
+-   **UI (`ParsedView.tsx`):** An "Open Changes" button will be added to each associated file item, visible on hover.
+-   **IPC Channel (`RequestNativeDiff`):** A new IPC channel will be created. Its payload will be `{ originalPath: string; modifiedContent: string; }`.
+-   **Backend Handler (`file-operation.service.ts`):**
+    1.  A new `handleNativeDiffRequest` method will be implemented.
+    2.  When it receives a request, it will generate a unique URI for the virtual document, incorporating the file path and potentially cycle/response IDs to ensure uniqueness (e.g., `dce-response:${originalPath}?cycle=${cycleId}&resp=${respId}`).
+    3.  It will store the `modifiedContent` in the `ResponseContentProvider`'s cache, keyed by this unique URI.
+    4.  It will then execute the command: `vscode.commands.executeCommand('vscode.diff', vscode.Uri.file(originalAbsolutePath), vscode.Uri.parse(virtualUri), 'Original ↔ AI Response');`.
+
+This sequence allows us to show a native diff between a real file on disk and a string that only exists in our extension's memory, providing a seamless and powerful user experience.
 </file_artifact>
 
