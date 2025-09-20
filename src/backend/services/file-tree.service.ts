@@ -1,5 +1,5 @@
 // src/backend/services/file-tree.service.ts
-// Updated on: C24 (Remove diagnostic logging)
+// Updated on: C25 (Add diagnostic logging)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -134,6 +134,10 @@ export class FileTreeService {
         const currentSelection = await Services.selectionService.getLastSelection();
         const newSelection = [...new Set([...currentSelection, ...pathsToAdd])];
     
+        Services.loggerService.log(`[AUTO-ADD DEBUG] currentSelection: ${JSON.stringify(currentSelection)}`);
+        Services.loggerService.log(`[AUTO-ADD DEBUG] pathsToAdd: ${JSON.stringify(pathsToAdd)}`);
+        Services.loggerService.log(`[AUTO-ADD DEBUG] newSelection being saved and sent: ${JSON.stringify(newSelection)}`);
+
         await Services.selectionService.saveCurrentSelection(newSelection);
         
         const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];

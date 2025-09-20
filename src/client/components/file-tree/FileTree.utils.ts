@@ -1,4 +1,4 @@
-// Updated on: C21 (Fix root uncheck logic)
+// Updated on: C25 (Add defensive logic for stale tree)
 import { FileNode } from "@/common/types/file-node";
 import { logger } from "@/client/utils/logger";
 
@@ -52,9 +52,22 @@ export const addRemovePathInSelectedFiles = (
   selectedFiles: string[] // The current set of selected FILE paths
 ): string[] => {
     const node = getFileNodeByPath(fileTree, path);
-    if (!node || !node.isSelectable) return selectedFiles;
-
     const currentSelection = new Set(selectedFiles);
+
+    if (!node) {
+        logger.warn(`[Selection Util] Node not found in file tree for path: ${path}. Selection cannot be changed robustly.`);
+        // Defensive check: If the node isn't in the tree (likely stale state),
+        // but the path IS in the selection, assume the user wants to uncheck it.
+        if (currentSelection.has(path)) {
+            logger.log(`[Selection Util] Node not in tree, but path is in selection. Removing it.`);
+            currentSelection.delete(path);
+            return Array.from(currentSelection);
+        }
+        return selectedFiles; // Can't do anything if node isn't found and isn't selected
+    }
+    
+    if (!node.isSelectable) return selectedFiles;
+
     const filesToToggle = getAllSelectableFiles(node);
     
     // A node is considered "checked" if all its selectable descendant files are in the selection.

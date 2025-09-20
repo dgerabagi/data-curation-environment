@@ -1,4 +1,4 @@
-// Updated on: C24 (Fix stale state bug for selected items)
+// Updated on: C25 (Remove RequestLastSelection from ForceRefresh handler)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -72,7 +72,13 @@ const App = () => {
         clientIpc.onServerMessage(ServerToClientChannel.SetActiveFile, ({ path }) => { if (!suppressActiveFileReveal.current) { setActiveFile(path); } else { suppressActiveFileReveal.current = false; } });
         clientIpc.onServerMessage(ServerToClientChannel.FocusFile, ({ path }) => setActiveFile(path));
         clientIpc.onServerMessage(ServerToClientChannel.SendAutoAddState, ({ enabled }) => setIsAutoAddEnabled(enabled));
-        clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'fileOp') { suppressActiveFileReveal.current = true; setTimeout(() => { suppressActiveFileReveal.current = false; }, 2000); } requestFiles(true); clientIpc.sendToServer(ClientToServerChannel.RequestLastSelection, {}); });
+        clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { 
+            if (reason === 'fileOp') { 
+                suppressActiveFileReveal.current = true; 
+                setTimeout(() => { suppressActiveFileReveal.current = false; }, 2000); 
+            } 
+            requestFiles(true); 
+        });
         clientIpc.onServerMessage(ServerToClientChannel.UpdateProblemCounts, ({ problemMap: newProblemMap }) => setProblemMap(newProblemMap));
         clientIpc.onServerMessage(ServerToClientChannel.UpdateDecorations, ({ problemMap, gitStatusMap }) => { setProblemMap(problemMap); setGitStatusMap(gitStatusMap); });
         clientIpc.onServerMessage(ServerToClientChannel.UpdateNodeStats, ({ path, tokenCount, error }) => { processedFilesCache.current.add(path); setFiles(currentFiles => { const newFiles = JSON.parse(JSON.stringify(currentFiles)); const findAndUpdate = (nodes: FileNode[]) => { for (const node of nodes) { if (node.absolutePath === path) { node.tokenCount = tokenCount; node.error = error; return true; } if (node.children && findAndUpdate(node.children)) return true; } return false; }; findAndUpdate(newFiles); return newFiles; }); });

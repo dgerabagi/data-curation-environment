@@ -83,6 +83,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SendFileContent ? { path: string, content: string | null } :
     T extends ServerToClientChannel.SendReadmeContent ? { content: string } :
     T extends ServerToClientChannel.SendChangelogContent ? { content: string } :
+    T extends ServerToClientChannel.AutoAddNewFile ? { path: string } :
     T extends ServerToClientChannel.SendFileExistence ? { existenceMap: { [path: string]: boolean } } :
     T extends ServerToClientChannel.SendSyntaxHighlight ? { highlightedHtml: string, id: string } :
     T extends ServerToClientChannel.SendHighlightContext ? { highlightedHtml: string, id: string } :

@@ -79,6 +79,7 @@ export enum ServerToClientChannel {
     SendFileContent = "serverToClient.sendFileContent",
     SendReadmeContent = "serverToClient.sendReadmeContent",
     SendChangelogContent = "serverToClient.sendChangelogContent",
+    AutoAddNewFile = "serverToClient.autoAddNewFile",
     
     // Phase 2: PCPP
     SendFileExistence = "serverToClient.sendFileExistence",
