@@ -27,6 +27,7 @@ export enum ClientToServerChannel {
     RequestShowInformationMessage = "clientToServer.requestShowInformationMessage",
     RequestReadmeContent = "clientToServer.requestReadmeContent",
     RequestChangelogContent = "clientToServer.requestChangelogContent",
+    RequestNativeDiff = "clientToServer.requestNativeDiff",
 
     // Special File Handling
     RequestPdfToText = "clientToServer.requestPdfToText",

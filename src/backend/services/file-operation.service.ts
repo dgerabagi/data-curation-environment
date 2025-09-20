@@ -1,14 +1,14 @@
 // src/backend/services/file-operation.service.ts
-// Updated on: C18 (Use extensionPath for asset files)
+// Updated on: C27 (Add handleNativeDiffRequest)
 import * as vscode from "vscode";
 import * as path from "path";
+import { promises as fs } from 'fs';
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { ServerToClientChannel } from "@/common/ipc/channels.enum";
 import { Services } from "./services";
 import { Action, MoveActionPayload } from "./action.service";
 import { BatchWriteFile } from "@/common/ipc/channels.type";
 import { diceCoefficient } from "@/common/utils/similarity";
-import { promises as fs } from 'fs';
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
@@ -20,8 +20,27 @@ export class FileOperationService {
         if (!workspaceFolders || workspaceFolders.length === 0) {
             throw new Error("No workspace folder open.");
         }
-        // Use the first workspace folder's URI when multiple folders are open
         return workspaceFolders[0].uri.fsPath;
+    }
+
+    public async handleNativeDiffRequest(originalPath: string, modifiedContent: string, title: string) {
+        Services.loggerService.log(`[Native Diff] Received request for: ${originalPath}`);
+        try {
+            const workspaceRoot = this.getWorkspaceRoot();
+            const originalUri = vscode.Uri.file(path.resolve(workspaceRoot, originalPath));
+
+            // Create a unique URI for the virtual document
+            const virtualUri = vscode.Uri.parse(`dce-response:${originalPath}?ts=${new Date().getTime()}`);
+            
+            // Cache the AI-generated content in our provider
+            Services.responseContentProvider.cacheContent(virtualUri, modifiedContent);
+
+            // Execute the diff command
+            await vscode.commands.executeCommand('vscode.diff', originalUri, virtualUri, title);
+        } catch (error: any) {
+            Services.loggerService.error(`[Native Diff] Failed to open diff view: ${error.message}`);
+            vscode.window.showErrorMessage(`Failed to open diff view: ${error.message}`);
+        }
     }
 
     public async handleReadmeContentRequest(serverIpc: ServerPostMessageManager) {

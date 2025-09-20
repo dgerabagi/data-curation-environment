@@ -1,21 +1,21 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-20T16:28:19.118Z
+  Date Generated: 2025-09-20T20:52:54.667Z
   ---
-  Total Files: 171
-  Approx. Tokens: 455076
+  Total Files: 172
+  Approx. Tokens: 452677
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (8343 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (8347 tokens)
 4. src\Artifacts\A0. DCE Master Artifact List.md (8106 tokens)
-5. src\client\views\parallel-copilot.view\view.scss (5583 tokens)
+5. src\client\views\parallel-copilot.view\view.scss (5403 tokens)
 6. src\backend\services\prompt.service.ts (5237 tokens)
-7. src\client\components\tree-view\TreeView.tsx (4422 tokens)
-8. src\backend\services\file-operation.service.ts (4370 tokens)
+7. src\backend\services\file-operation.service.ts (4526 tokens)
+8. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 9. src\Artifacts\A11. DCE - Regression Case Studies.md (4059 tokens)
 10. src\client\views\context-chooser.view\view.tsx (4033 tokens)
 
@@ -74,7 +74,7 @@
 52. src\Artifacts\A46. DCE - Phase 2 - Paste and Parse Response - Feature Plan.md - Lines: 38 - Chars: 3587 - Tokens: 897
 53. src\Artifacts\A47. DCE - Phase 2 - Prompt Amalgamation Feature Plan.md - Lines: 42 - Chars: 3499 - Tokens: 875
 54. src\Artifacts\A48. DCE - Phase 2 - Advanced Syntax Highlighting Plan.md - Lines: 49 - Chars: 4044 - Tokens: 1011
-55. src\Artifacts\A49. DCE - Phase 2 - File Association & Diffing Plan.md - Lines: 44 - Chars: 4452 - Tokens: 1113
+55. src\Artifacts\A49. DCE - Phase 2 - File Association & Diffing Plan.md - Lines: 42 - Chars: 4285 - Tokens: 1072
 56. src\Artifacts\A50. DCE - Phase 2 - UI Component Plan (Resizable Panes & Inner Editors).md - Lines: 51 - Chars: 5128 - Tokens: 1282
 57. src\Artifacts\A51. DCE - A-B-C Testing Strategy for UI Bugs.md - Lines: 81 - Chars: 5490 - Tokens: 1373
 58. src\Artifacts\A52. DCE - Interaction Schema Refinement.md - Lines: 66 - Chars: 3444 - Tokens: 861
@@ -82,7 +82,7 @@
 60. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 57 - Chars: 9891 - Tokens: 2473
 61. src\Artifacts\A53. DCE - Phase 2 - Token Count and Similarity Analysis.md - Lines: 43 - Chars: 3500 - Tokens: 875
 62. src\Artifacts\A55. DCE - FSService Refactoring Plan.md - Lines: 77 - Chars: 4022 - Tokens: 1006
-63. src\Artifacts\A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md - Lines: 47 - Chars: 5687 - Tokens: 1422
+63. src\Artifacts\A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md - Lines: 33 - Chars: 4213 - Tokens: 1054
 64. src\Artifacts\A57. DCE - Phase 2 - Cycle Management Plan.md - Lines: 44 - Chars: 3625 - Tokens: 907
 65. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 40 - Chars: 3737 - Tokens: 935
 66. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 35 - Chars: 4177 - Tokens: 1045
@@ -121,7 +121,7 @@
 99. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
 100. src\backend\services\action.service.ts - Lines: 71 - Chars: 2444 - Tokens: 611
 101. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
-102. src\backend\services\file-operation.service.ts - Lines: 360 - Chars: 17477 - Tokens: 4370
+102. src\backend\services\file-operation.service.ts - Lines: 379 - Chars: 18104 - Tokens: 4526
 103. src\backend\services\file-tree.service.ts - Lines: 282 - Chars: 14582 - Tokens: 3646
 104. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
 105. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
@@ -130,7 +130,7 @@
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 109. src\backend\services\prompt.service.ts - Lines: 396 - Chars: 20945 - Tokens: 5237
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
-111. src\backend\services\services.ts - Lines: 42 - Chars: 1905 - Tokens: 477
+111. src\backend\services\services.ts - Lines: 44 - Chars: 2053 - Tokens: 514
 112. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
 113. src\client\components\file-tree\FileTree.tsx - Lines: 176 - Chars: 11127 - Tokens: 2782
 114. src\client\components\file-tree\FileTree.utils.ts - Lines: 134 - Chars: 4721 - Tokens: 1181
@@ -138,59 +138,60 @@
 116. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
 117. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
 118. src\client\components\ContextMenu.tsx - Lines: 72 - Chars: 3353 - Tokens: 839
-119. src\client\components\DiffViewer.tsx - Lines: 224 - Chars: 11386 - Tokens: 2847
-120. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
-121. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13123 - Tokens: 3281
-122. src\client\utils\logger.ts - Lines: 19 - Chars: 744 - Tokens: 186
-123. src\client\utils\response-parser.ts - Lines: 74 - Chars: 3472 - Tokens: 868
-124. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-125. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
-126. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
-127. src\client\views\context-chooser.view\view.tsx - Lines: 151 - Chars: 16129 - Tokens: 4033
-128. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
-129. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 55 - Chars: 1970 - Tokens: 493
-130. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 84 - Chars: 3386 - Tokens: 847
-131. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
-132. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 137 - Chars: 9365 - Tokens: 2342
-133. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 79 - Chars: 3137 - Tokens: 785
-134. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
-135. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 116 - Chars: 5578 - Tokens: 1395
-137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 100 - Chars: 5002 - Tokens: 1251
-138. src\client\views\parallel-copilot.view\view.scss - Lines: 959 - Chars: 22331 - Tokens: 5583
-139. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-140. src\client\views\parallel-copilot.view\view.tsx - Lines: 277 - Chars: 33369 - Tokens: 8343
-141. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
-142. src\client\views\settings.view\on-message.ts - Lines: 17 - Chars: 762 - Tokens: 191
-143. src\client\views\settings.view\view.scss - Lines: 87 - Chars: 1767 - Tokens: 442
-144. src\client\views\settings.view\view.tsx - Lines: 74 - Chars: 3291 - Tokens: 823
-145. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
-146. src\common\ipc\channels.enum.ts - Lines: 97 - Chars: 5247 - Tokens: 1312
-147. src\common\ipc\channels.type.ts - Lines: 98 - Chars: 7459 - Tokens: 1865
-148. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
-149. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-150. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-151. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
-152. src\common\types\pcpp.types.ts - Lines: 46 - Chars: 1113 - Tokens: 279
-153. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
-154. src\common\utils\formatting.ts - Lines: 141 - Chars: 4606 - Tokens: 1152
-155. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
-156. src\common\utils\view-html.ts - Lines: 37 - Chars: 1314 - Tokens: 329
-157. src\common\view-types.ts - Lines: 8 - Chars: 175 - Tokens: 44
-158. src\extension.ts - Lines: 168 - Chars: 6874 - Tokens: 1719
-159. bootstrap-flattener.js - Lines: 185 - Chars: 5834 - Tokens: 1459
-160. CHANGELOG.md - Lines: 23 - Chars: 1414 - Tokens: 354
-161. LICENSE - Lines: 21 - Chars: 1090 - Tokens: 273
-162. log-state-logs.md - Lines: 200 - Chars: 11855 - Tokens: 2964
-163. package.json - Lines: 157 - Chars: 5271 - Tokens: 1318
-164. README.md - Lines: 28 - Chars: 2456 - Tokens: 614
-165. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
-166. webpack.config.js - Lines: 112 - Chars: 2987 - Tokens: 747
-167. src\Artifacts\A86. DCE - PCPP Workflow Centralization and UI Persistence Plan.md - Lines: 74 - Chars: 5931 - Tokens: 1483
-168. src\Artifacts\A76. DCE - Word Wrap Line Numbering Challenges.md - Lines: 61 - Chars: 4895 - Tokens: 1224
-169. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
-170. src\Artifacts\A87. VCPG - vLLM High-Throughput Inference Plan.md - Lines: 60 - Chars: 4433 - Tokens: 1109
-171. src\Artifacts\A88. DCE - Native Diff Integration Plan.md - Lines: 42 - Chars: 4152 - Tokens: 1038
+119. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
+120. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13123 - Tokens: 3281
+121. src\client\utils\logger.ts - Lines: 19 - Chars: 744 - Tokens: 186
+122. src\client\utils\response-parser.ts - Lines: 74 - Chars: 3472 - Tokens: 868
+123. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
+124. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
+125. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
+126. src\client\views\context-chooser.view\view.tsx - Lines: 151 - Chars: 16129 - Tokens: 4033
+127. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
+128. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 55 - Chars: 1970 - Tokens: 493
+129. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 84 - Chars: 3386 - Tokens: 847
+130. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
+131. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 151 - Chars: 9908 - Tokens: 2477
+132. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 79 - Chars: 3137 - Tokens: 785
+133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
+134. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
+135. src\client\views\parallel-copilot.view\on-message.ts - Lines: 120 - Chars: 5668 - Tokens: 1417
+136. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 100 - Chars: 5002 - Tokens: 1251
+137. src\client\views\parallel-copilot.view\view.scss - Lines: 970 - Chars: 21611 - Tokens: 5403
+138. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 277 - Chars: 33386 - Tokens: 8347
+140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
+141. src\client\views\settings.view\on-message.ts - Lines: 17 - Chars: 762 - Tokens: 191
+142. src\client\views\settings.view\view.scss - Lines: 87 - Chars: 1767 - Tokens: 442
+143. src\client\views\settings.view\view.tsx - Lines: 74 - Chars: 3291 - Tokens: 823
+144. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
+145. src\common\ipc\channels.enum.ts - Lines: 98 - Chars: 5307 - Tokens: 1327
+146. src\common\ipc\channels.type.ts - Lines: 99 - Chars: 7577 - Tokens: 1895
+147. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
+148. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+149. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
+150. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
+151. src\common\types\pcpp.types.ts - Lines: 46 - Chars: 1113 - Tokens: 279
+152. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
+153. src\common\utils\formatting.ts - Lines: 141 - Chars: 4606 - Tokens: 1152
+154. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
+155. src\common\utils\view-html.ts - Lines: 37 - Chars: 1314 - Tokens: 329
+156. src\common\view-types.ts - Lines: 8 - Chars: 175 - Tokens: 44
+157. src\extension.ts - Lines: 174 - Chars: 7202 - Tokens: 1801
+158. bootstrap-flattener.js - Lines: 185 - Chars: 5834 - Tokens: 1459
+159. CHANGELOG.md - Lines: 23 - Chars: 1414 - Tokens: 354
+160. LICENSE - Lines: 21 - Chars: 1090 - Tokens: 273
+161. log-state-logs.md - Lines: 200 - Chars: 11855 - Tokens: 2964
+162. package.json - Lines: 157 - Chars: 5271 - Tokens: 1318
+163. README.md - Lines: 28 - Chars: 2456 - Tokens: 614
+164. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
+165. webpack.config.js - Lines: 112 - Chars: 2987 - Tokens: 747
+166. src\Artifacts\A86. DCE - PCPP Workflow Centralization and UI Persistence Plan.md - Lines: 74 - Chars: 5931 - Tokens: 1483
+167. src\Artifacts\A76. DCE - Word Wrap Line Numbering Challenges.md - Lines: 61 - Chars: 4895 - Tokens: 1224
+168. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
+169. src\Artifacts\A87. VCPG - vLLM High-Throughput Inference Plan.md - Lines: 60 - Chars: 4433 - Tokens: 1109
+170. src\Artifacts\A88. DCE - Native Diff Integration Plan.md - Lines: 43 - Chars: 4053 - Tokens: 1014
+171. src\backend\providers\ResponseContentProvider.ts - Lines: 24 - Chars: 1160 - Tokens: 290
+172. src\backend\providers\ResponseContentProvider.ts - Lines: 24 - Chars: 1160 - Tokens: 290
 
 <file path="public/copilot.svg">
 <metadata>
@@ -4105,7 +4106,7 @@ After research and consideration of alternatives like `refractor`, **`@wooorm/st
 # Artifact A49: DCE - Phase 2 - File Association & Diffing Plan
 # Date Created: C82
 # Author: AI Model
-# Updated on: C132 (Change workflow from 'swap' to 'accept/replace')
+# Updated on: C27 (Deprecate custom diff viewer in favor of native integration)
 
 - **Key/Value for A0:**
 - **Description:** Plans the UI and backend logic to visually link file blocks in an AI response to workspace files and sets the stage for an integrated diff tool.
@@ -4115,7 +4116,7 @@ After research and consideration of alternatives like `refractor`, **`@wooorm/st
 
 To make the Parallel Co-Pilot Panel's workflow trustworthy and intuitive, users need a clear visual confirmation of which local file an AI-generated code block is intended to modify. This feature introduces a "file association" mechanism that parses AI responses, verifies the existence of the mentioned files, and displays this status to the user.
 
-The core workflow is now defined as **"accept/replace"**: a one-way copy of content from the AI response into the user's workspace files.
+**Update (C27):** The custom, integrated diff viewer has been **deprecated**. It is being replaced by an integration with VS Code's native diff viewer (`vscode.diff`), as detailed in `A88. DCE - Native Diff Integration Plan.md`. This provides a superior user experience with all the features of the native editor.
 
 ## 2. User Stories
 
@@ -4123,29 +4124,27 @@ The core workflow is now defined as **"accept/replace"**: a one-way copy of cont
 |---|---|---|
 | P2-ASSOC-01 | **See Affected Files** | As a developer, when I parse an AI response, I want the extension to automatically show me a list of all the file paths it intends to modify, so I can understand the scope of the proposed changes. | - After parsing, a collapsible "Associated Files" section appears in the tab's UI. <br> - This section displays a list of all file paths found in the response. |
 | P2-ASSOC-02 | **Verify File Existence** | As a developer, for each file listed, I want to see a visual indicator of whether that file already exists in my workspace, so I can spot potential errors or new files proposed by the AI. | - Next to each listed file path, an icon is displayed. <br> - A green checkmark (`✓`) indicates the file exists at that path. <br> - A red cross (`✗`) indicates the file does not exist. |
-| P2-ASSOC-03 | **Preview AI Code** | As a developer, I want to click on a file in the "Associated Files" list to immediately see a syntax-highlighted view of the AI's proposed code, so I can review it. | - Clicking a file with a `✓` in the list opens a single-pane view in the right-hand panel. <br> - This view displays only the AI's proposed code, with full syntax highlighting. |
-| P2-ASSOC-04 | **Preview Changes with Diff** | As a developer, I want a "View Diff" button to see a side-by-side comparison of the original file and the AI's proposed changes, so I can review the exact changes before accepting them. | - A "View Diff" button is available for the selected file. <br> - Clicking it replaces the single-pane view with a two-pane diff component. <br> - The diff view clearly shows added, removed, and common lines. |
-| P2-ASSOC-05 | **Accept Changes** | As a developer, I want to be able to accept changes from the AI response into my workspace, either for a single file or for a batch of selected files. | - An "Accept this file" button replaces the content of the workspace file with the AI's version. <br> - A separate "Accept Selected Files" button performs a bulk replacement for all files checked in the "Associated Files" list. <br> - This is a one-way copy from the AI response to the workspace. |
+| P2-ASSOC-03 | **Preview Changes with Native Diff** | As a developer, I want an "Open Changes" button to see a side-by-side comparison of the original file and the AI's proposed changes in a native VS Code diff tab, so I can review the exact changes before accepting them. | - An "Open Changes" icon appears on hover for each existing file in the "Associated Files" list. <br> - Clicking it opens a new editor tab showing the native VS Code diff view. <br> - The right side shows the current content of the workspace file. <br> - The left side shows the AI-generated content from the response tab. |
+| P2-ASSOC-04 | **Accept Changes** | As a developer, I want to be able to accept changes from the AI response into my workspace, either for a single file or for a batch of selected files. | - An "Accept this file" button replaces the content of the workspace file with the AI's version. <br> - A separate "Accept Selected Files" button performs a bulk replacement for all files checked in the "Associated Files" list. <br> - This is a one-way copy from the AI response to the workspace. |
 
 ## 3. Technical Implementation Plan
 
 1.  **Frontend - Parsing (`response-parser.ts`):**
     *   **Status:** **Complete.**
 
-2.  **Backend - Verification & Highlighting (`fs.service.ts`):**
+2.  **Backend - Verification & Highlighting (`file-operation.service.ts`, `highlighting.service.ts`):**
     *   **Status:** **Complete.** The `handleFileExistenceRequest` and `handleSyntaxHighlightRequest` handlers are working.
 
 3.  **Frontend - UI & State (`view.tsx`):**
     *   **Status:** **In Progress.**
-    *   **File List & Diff View:** Implement the "Associated Files" list. Clicking a file fetches its content for diffing and displays the `DiffViewer` component.
+    *   **File List & Native Diff:** Implement the "Associated Files" list. An "Open Changes" button on each item will trigger the new native diff workflow as outlined in `A88`.
     *   **Selection State:** Manage a `Set<string>` of `selectedFilesForReplacement` to track which files are checked.
     *   **Accept/Replace Logic:**
-        *   The "Accept this file" button will trigger a new `RequestWriteFile` IPC message.
-        *   The "Accept Selected Files" button will trigger a new `RequestBatchFileWrite` IPC message with an array of file paths and their new content.
+        *   The "Accept this file" button will trigger a `RequestWriteFile` IPC message.
+        *   The "Accept Selected Files" button will trigger a `RequestBatchFileWrite` IPC message with an array of file paths and their new content.
 
 4.  **Backend - File Writing (`file-operation.service.ts`):**
-    *   **Status:** **To be implemented.**
-    *   Implement `handleWriteFileRequest` and `handleBatchFileWrite` to receive new content and overwrite the corresponding files in the workspace using `vscode.workspace.fs.writeFile`.
+    *   **Status:** **Complete.** `handleWriteFileRequest` and `handleBatchFileWrite` are implemented.
 </file_artifact>
 
 <file path="src/Artifacts/A50. DCE - Phase 2 - UI Component Plan (Resizable Panes & Inner Editors).md">
@@ -4671,13 +4670,18 @@ Removed after completing refactor.
 # Artifact A56: DCE - Phase 2 - Advanced Diff Viewer Plan
 # Date Created: C120
 # Author: AI Model & Curator
-# Updated on: C132 (Add keyboard navigation and clarify scrollbar behavior)
+# Updated on: C27 (Deprecate custom diff viewer)
 
 - **Key/Value for A0:**
 - **Description:** Details the plan to enhance the integrated diff viewer with a side-by-side layout, scroll-locking, keyboard navigation, and a location pane.
 - **Tags:** feature plan, phase 2, ui, ux, diff, navigation, side-by-side, scroll-lock, keyboard
 
 ## 1. Overview & Goal
+
+**Status (C27):** This custom component has been **deprecated**. It is being replaced by an integration with VS Code's native diff viewer (`vscode.diff`), which provides a superior user experience. See `A88. DCE - Native Diff Integration Plan.md` for the current implementation details.
+
+---
+**(Historical Plan)**
 
 The current diff view is functional but lacks key usability features found in mature diff tools like WinMerge. The goal of this plan is to enhance the diff viewer to provide a much clearer and more efficient user experience. This involves several key enhancements:
 1.  **Side-by-Side Main Layout:** Displaying the original and modified files in two parallel, vertical panes.
@@ -4686,7 +4690,7 @@ The current diff view is functional but lacks key usability features found in ma
 4.  **Keyboard Navigation:** Allowing users to navigate between differences and accept changes using only the keyboard.
 5.  **Location Pane (Future):** A visual overview of all changes in the file.
 
-## 2. User Stories
+## 2. User Stories (Historical)
 
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
@@ -4696,25 +4700,6 @@ The current diff view is functional but lacks key usability features found in ma
 | P2-DIFF-04 | **Keyboard Navigation & Acceptance** | As a developer, I want to use the up/down arrow keys to navigate between differences and the right arrow key to accept the change from the response, so I can review and merge code without using the mouse. | - Pressing `ArrowDown` selects the next difference block. <br> - Pressing `ArrowUp` selects the previous difference block. <br> - Pressing `ArrowRight` accepts the change from the left (AI) pane, visually updating the right (original) pane's content *in memory*. |
 | P2-DIFF-05 | **Location Pane (Future)** | As a developer, I want to see a miniature, vertical map of all the changes in the file, so I can understand the overall scope of the diff and quickly jump to any section. | - A new "Location Pane" is displayed above the main diff view. <br> - It shows a compressed visual representation of the entire file, with colored blocks indicating added, removed, and changed lines. <br> - Clicking on a block in this pane scrolls the main diff view to that location. |
 | P2-DIFF-06 | **Line Numbers in Detail Pane (Future)** | As a developer, I want to see line numbers in the bottom character-level diff panes, so I have context for where the detailed change is occurring. | - The bottom panes display the relevant line numbers next to the content. |
-
-## 3. Technical Implementation Plan
-
-### 3.1. Layout & Scroll-Locking (`DiffViewer.tsx`, `view.scss`)
--   **Layout:** The main container will use `flex-direction: row` (side-by-side) and the detail container will use `flex-direction: column` (top/bottom).
--   **Scroll-Locking:** `useRef` will be used for all four scrollable panes. `onScroll` event handlers will synchronize the `scrollTop` or `scrollLeft` properties of their counterparts. CSS will no longer hide any scrollbars.
-
-### 3.2. Keyboard Navigation (`DiffViewer.tsx`)
--   **Event Listener:** A `useEffect` hook will add a `keydown` event listener to the component's main wrapper `div` (which must have a `tabIndex` to be focusable).
--   **State Management:**
-    *   The existing `selectedDiffIndex` state will be used. The `ArrowUp` and `ArrowDown` handlers will simply increment or decrement this state.
-    *   A new state will be added to manage the content of the original file: `const [originalLines, setOriginalLines] = useState(original.content.split('\n'));`.
-    *   The diff generation logic in the `useMemo` hook will be updated to use `originalLines` as its source instead of the static `original.content` prop.
--   **Accept Logic (`ArrowRight`):**
-    1.  Get the current difference block from `pairedLines` using `selectedDiffIndex`.
-    2.  Identify the line numbers and content for this block from both the `left` (AI) and `right` (original) sides.
-    3.  Create a new array based on `originalLines`.
-    4.  Splice the new lines from the AI response into the correct position in the new array, replacing the old lines.
-    5.  Call `setOriginalLines` with this new array. This will trigger a re-render, visually showing the change as "accepted".
 </file_artifact>
 
 <file path="src/Artifacts/A57. DCE - Phase 2 - Cycle Management Plan.md">
@@ -15958,16 +15943,16 @@ export class ContentExtractionService {
 
 <file path="src/backend/services/file-operation.service.ts">
 // src/backend/services/file-operation.service.ts
-// Updated on: C18 (Use extensionPath for asset files)
+// Updated on: C27 (Add handleNativeDiffRequest)
 import * as vscode from "vscode";
 import * as path from "path";
+import { promises as fs } from 'fs';
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { ServerToClientChannel } from "@/common/ipc/channels.enum";
 import { Services } from "./services";
 import { Action, MoveActionPayload } from "./action.service";
 import { BatchWriteFile } from "@/common/ipc/channels.type";
 import { diceCoefficient } from "@/common/utils/similarity";
-import { promises as fs } from 'fs';
 
 const normalizePath = (p: string) => p.replace(/\\/g, '/');
 
@@ -15979,8 +15964,27 @@ export class FileOperationService {
         if (!workspaceFolders || workspaceFolders.length === 0) {
             throw new Error("No workspace folder open.");
         }
-        // Use the first workspace folder's URI when multiple folders are open
         return workspaceFolders[0].uri.fsPath;
+    }
+
+    public async handleNativeDiffRequest(originalPath: string, modifiedContent: string, title: string) {
+        Services.loggerService.log(`[Native Diff] Received request for: ${originalPath}`);
+        try {
+            const workspaceRoot = this.getWorkspaceRoot();
+            const originalUri = vscode.Uri.file(path.resolve(workspaceRoot, originalPath));
+
+            // Create a unique URI for the virtual document
+            const virtualUri = vscode.Uri.parse(`dce-response:${originalPath}?ts=${new Date().getTime()}`);
+            
+            // Cache the AI-generated content in our provider
+            Services.responseContentProvider.cacheContent(virtualUri, modifiedContent);
+
+            // Execute the diff command
+            await vscode.commands.executeCommand('vscode.diff', originalUri, virtualUri, title);
+        } catch (error: any) {
+            Services.loggerService.error(`[Native Diff] Failed to open diff view: ${error.message}`);
+            vscode.window.showErrorMessage(`Failed to open diff view: ${error.message}`);
+        }
     }
 
     public async handleReadmeContentRequest(serverIpc: ServerPostMessageManager) {
@@ -17913,6 +17917,7 @@ export class SelectionService {
 
 <file path="src/backend/services/services.ts">
 import "reflect-metadata";
+import * as vscode from 'vscode';
 import { FlattenerService } from "./flattener.service";
 import { SelectionService } from "./selection.service";
 import { LoggerService } from "./logger.service";
@@ -17924,8 +17929,8 @@ import { FileTreeService } from "./file-tree.service";
 import { FileOperationService } from "./file-operation.service";
 import { ContentExtractionService } from "./content-extraction.service";
 import { HighlightingService } from "./highlighting.service";
-import * as vscode from 'vscode';
 import { GitService } from "./git.service";
+import { ResponseContentProvider } from "../providers/ResponseContentProvider";
 
 class ServiceContainer {
     public fileTreeService!: FileTreeService;
@@ -17941,6 +17946,7 @@ class ServiceContainer {
     public promptService!: PromptService;
     public gitService = new GitService();
     public context!: vscode.ExtensionContext;
+    public responseContentProvider = new ResponseContentProvider();
     
     public initialize(context: vscode.ExtensionContext, gitApi?: GitAPI) {
         this.context = context;
@@ -18869,233 +18875,6 @@ const ContextMenu: React.FC<ContextMenuProps> = ({ menu, onClose, onRename }) =>
 };
 
 export default ContextMenu;
-</file_artifact>
-
-<file path="src/client/components/DiffViewer.tsx">
-// Updated on: C132 (Add keyboard nav, accept logic, and four scrollbars)
-import * as React from 'react';
-import { diffArrays, diffChars, Change } from 'diff';
-import { VscArrowUp, VscArrowDown } from 'react-icons/vsc';
-
-interface DiffLine {
-    type: 'added' | 'removed' | 'common' | 'placeholder';
-    content?: string;
-}
-
-interface PairedLine {
-    left: DiffLine & { lineNum?: number };
-    right: DiffLine & { lineNum?: number };
-    isDiff: boolean;
-}
-
-interface DiffBlock {
-    start: number;
-    end: number;
-}
-
-const DiffViewer: React.FC<{ original: { content: string, path: string }, modified: { content: string, path: string } }> = ({ original, modified }) => {
-    const [selectedDiffIndex, setSelectedDiffIndex] = React.useState<number>(0);
-    const [originalLines, setOriginalLines] = React.useState<string[]>(() => original.content.split('\n'));
-    const diffLineRefs = React.useRef<Map<number, HTMLDivElement>>(new Map());
-    const leftPaneRef = React.useRef<HTMLDivElement>(null);
-    const rightPaneRef = React.useRef<HTMLDivElement>(null);
-    const leftDetailRef = React.useRef<HTMLDivElement>(null);
-    const rightDetailRef = React.useRef<HTMLDivElement>(null);
-    const wrapperRef = React.useRef<HTMLDivElement>(null);
-
-    React.useEffect(() => {
-        setOriginalLines(original.content.split('\n'));
-    }, [original.content]);
-
-    const { pairedLines, diffBlocks } = React.useMemo(() => {
-        const modifiedLines = modified.content.split('\n');
-        const changes = diffArrays(originalLines, modifiedLines);
-        
-        const result: PairedLine[] = [];
-        const diffBlockIndices: DiffBlock[] = [];
-        let leftLineNum = 1;
-        let rightLineNum = 1;
-
-        for (const change of changes) {
-            const blockStart = result.length;
-            let isDiffBlock = false;
-            if (change.added) {
-                isDiffBlock = true;
-                for (const line of change.value) {
-                    result.push({ left: { type: 'placeholder' }, right: { type: 'added', content: line, lineNum: rightLineNum++ }, isDiff: true });
-                }
-            } else if (change.removed) {
-                isDiffBlock = true;
-                for (const line of change.value) {
-                    result.push({ left: { type: 'removed', content: line, lineNum: leftLineNum++ }, right: { type: 'placeholder' }, isDiff: true });
-                }
-            } else {
-                for (const line of change.value) {
-                    result.push({ left: { type: 'common', content: line, lineNum: leftLineNum++ }, right: { type: 'common', content: line, lineNum: rightLineNum++ }, isDiff: false });
-                }
-            }
-            if (isDiffBlock) {
-                diffBlockIndices.push({ start: blockStart, end: result.length - 1 });
-            }
-        }
-        return { pairedLines: result, diffBlocks: diffBlockIndices };
-    }, [originalLines, modified.content]);
-
-    const goToDiff = React.useCallback((index: number) => {
-        if (index >= 0 && index < diffBlocks.length) {
-            setSelectedDiffIndex(index);
-            const lineIndex = diffBlocks[index].start;
-            diffLineRefs.current.get(lineIndex)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-    }, [diffBlocks]);
-
-    React.useEffect(() => {
-        goToDiff(selectedDiffIndex);
-    }, [selectedDiffIndex, goToDiff]);
-
-    const handleAcceptChange = () => {
-        if (selectedDiffIndex < 0 || selectedDiffIndex >= diffBlocks.length) return;
-    
-        const block = diffBlocks[selectedDiffIndex];
-        const blockLines = pairedLines.slice(block.start, block.end + 1);
-    
-        const originalBlockLines = blockLines.filter(l => l.left.type === 'removed').map(l => l.left.content);
-        const modifiedBlockLines = blockLines.filter(l => l.right.type === 'added').map(l => l.right.content);
-    
-        const firstOriginalLineNum = blockLines.find(l => l.left.lineNum)?.left.lineNum;
-    
-        if (firstOriginalLineNum === undefined) return;
-    
-        const startIndex = firstOriginalLineNum - 1;
-        const deleteCount = originalBlockLines.length;
-    
-        setOriginalLines(prev => {
-            const newLines = [...prev];
-            newLines.splice(startIndex, deleteCount, ...modifiedBlockLines as string[]);
-            return newLines;
-        });
-    };
-
-    React.useEffect(() => {
-        const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.key === 'ArrowDown') {
-                e.preventDefault();
-                setSelectedDiffIndex(prev => Math.min(prev + 1, diffBlocks.length - 1));
-            } else if (e.key === 'ArrowUp') {
-                e.preventDefault();
-                setSelectedDiffIndex(prev => Math.max(prev - 1, 0));
-            } else if (e.key === 'ArrowRight') {
-                e.preventDefault();
-                handleAcceptChange();
-            }
-        };
-
-        const wrapper = wrapperRef.current;
-        wrapper?.addEventListener('keydown', handleKeyDown);
-        return () => wrapper?.removeEventListener('keydown', handleKeyDown);
-    }, [diffBlocks.length, handleAcceptChange]);
-
-
-    const handleScroll = (scroller: 'left' | 'right') => {
-        if (!leftPaneRef.current || !rightPaneRef.current) return;
-        if (scroller === 'left' && rightPaneRef.current.scrollTop !== leftPaneRef.current.scrollTop) {
-            rightPaneRef.current.scrollTop = leftPaneRef.current.scrollTop;
-        } else if (scroller === 'right' && leftPaneRef.current.scrollTop !== rightPaneRef.current.scrollTop) {
-            leftPaneRef.current.scrollTop = rightPaneRef.current.scrollTop;
-        }
-    };
-
-    const handleDetailScroll = (scroller: 'left' | 'right') => {
-        if (!leftDetailRef.current || !rightDetailRef.current) return;
-        if (scroller === 'left' && rightDetailRef.current.scrollLeft !== leftDetailRef.current.scrollLeft) {
-            rightDetailRef.current.scrollLeft = leftDetailRef.current.scrollLeft;
-        } else if (scroller === 'right' && leftDetailRef.current.scrollLeft !== rightDetailRef.current.scrollLeft) {
-            leftDetailRef.current.scrollLeft = rightDetailRef.current.scrollLeft;
-        }
-    };
-
-
-    const renderCharDiff = (originalText: string, modifiedText: string) => {
-        const charChanges = diffChars(originalText, modifiedText);
-        const leftSpans: React.ReactNode[] = [];
-        const rightSpans: React.ReactNode[] = [];
-
-        charChanges.forEach((part, index) => {
-            const key = `char-${index}`;
-            const className = part.added ? 'char-added' : part.removed ? 'char-removed' : '';
-            if (part.added) {
-                rightSpans.push(<span key={key} className={className}>{part.value}</span>);
-            } else if (part.removed) {
-                leftSpans.push(<span key={key} className={className}>{part.value}</span>);
-            } else {
-                leftSpans.push(<span key={key}>{part.value}</span>);
-                rightSpans.push(<span key={key}>{part.value}</span>);
-            }
-        });
-        return { left: <>{leftSpans}</>, right: <>{rightSpans}</> };
-    };
-
-    const selectedDiffContent = React.useMemo(() => {
-        if (diffBlocks.length === 0 || selectedDiffIndex < 0 || selectedDiffIndex >= diffBlocks.length) return { left: [], right: [] };
-        const block = diffBlocks[selectedDiffIndex];
-        const blockLines = pairedLines.slice(block.start, block.end + 1);
-        
-        const originalLines = blockLines.map(l => l.left.content).filter(Boolean) as string[];
-        const modifiedLines = blockLines.map(l => l.right.content).filter(Boolean) as string[];
-
-        return renderCharDiff(originalLines.join('\n'), modifiedLines.join('\n'));
-    }, [selectedDiffIndex, pairedLines, diffBlocks]);
-
-    return (
-        <div className="diff-viewer-wrapper" ref={wrapperRef} tabIndex={-1}>
-            <div className="diff-viewer-main-container">
-                {/* Modified Pane (Left) */}
-                <div className="diff-pane" onScroll={() => handleScroll('left')} ref={leftPaneRef}>
-                    <div className="diff-pane-header">Response: {modified.path}</div>
-                    <div className="diff-pane-content">
-                        <div className="line-numbers">{pairedLines.map((line, i) => <span key={`L${i}`}>{line.right.lineNum || ' '}</span>)}</div>
-                        <div className="diff-lines">
-                            {pairedLines.map((line, i) => (
-                                <div key={`L${i}`} className={`line ${line.right.type} ${diffBlocks[selectedDiffIndex]?.start <= i && i <= diffBlocks[selectedDiffIndex]?.end ? 'selected-diff' : ''}`} ref={ref => { if (ref) diffLineRefs.current.set(i, ref); }}>
-                                    <pre><code>{line.right.content || ''}</code></pre>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-                {/* Original Pane (Right) */}
-                <div className="diff-pane" onScroll={() => handleScroll('right')} ref={rightPaneRef}>
-                     <div className="diff-pane-header">Original: {original.path}</div>
-                     <div className="diff-pane-content">
-                        <div className="line-numbers">{pairedLines.map((line, i) => <span key={`R${i}`}>{line.left.lineNum || ' '}</span>)}</div>
-                        <div className="diff-lines">
-                            {pairedLines.map((line, i) => (
-                                <div key={`R${i}`} className={`line ${line.left.type} ${diffBlocks[selectedDiffIndex]?.start <= i && i <= diffBlocks[selectedDiffIndex]?.end ? 'selected-diff' : ''}`}>
-                                    <pre><code>{line.left.content || ''}</code></pre>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="diff-detail-container">
-                <div className="diff-detail-header">
-                    <span>Difference {diffBlocks.length > 0 ? selectedDiffIndex + 1 : 0} of {diffBlocks.length}</span>
-                    <div className="diff-nav-buttons">
-                        <button onClick={() => goToDiff(selectedDiffIndex - 1)} disabled={selectedDiffIndex <= 0}><VscArrowUp /> Prev</button>
-                        <button onClick={() => goToDiff(selectedDiffIndex + 1)} disabled={selectedDiffIndex >= diffBlocks.length - 1}><VscArrowDown /> Next</button>
-                    </div>
-                </div>
-                <div className="diff-detail-panes">
-                    <div className="diff-detail-pane added" ref={rightDetailRef} onScroll={() => handleDetailScroll('right')}><pre><code>{selectedDiffContent.right}</code></pre></div>
-                    <div className="diff-detail-pane removed" ref={leftDetailRef} onScroll={() => handleDetailScroll('left')}><pre><code>{selectedDiffContent.left}</code></pre></div>
-                </div>
-            </div>
-        </div>
-    );
-};
-
-export default DiffViewer;
 </file_artifact>
 
 <file path="src/client/components/LocationPane.tsx">
@@ -20660,9 +20439,9 @@ export default HighlightedTextarea;
 
 <file path="src/client/views/parallel-copilot.view/components/ParsedView.tsx">
 // src/client/views/parallel-copilot.view/components/ParsedView.tsx
-// Updated on: C20 (Add missing props to interface)
+// Updated on: C27 (Add native diff button, remove old diff state)
 import * as React from 'react';
-import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscCheckAll, VscClearAll, VscClippy, VscChevronDown } from 'react-icons/vsc';
+import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscClippy, VscChevronDown, VscDiff } from 'react-icons/vsc';
 import ReactMarkdown from 'react-markdown';
 import * as path from 'path-browserify';
 import { ParsedResponse } from '@/common/types/pcpp.types';
@@ -20704,8 +20483,8 @@ interface ParsedViewProps {
     viewableContent: string | undefined | null;
     onCopyContent: () => void;
     workflowStep: string | null;
-    leftPaneWidth: number; // Added
-    selectedResponseId: string | null; // Added
+    leftPaneWidth: number; 
+    selectedResponseId: string | null;
 }
 
 const ParsedView: React.FC<ParsedViewProps> = (props) => {
@@ -20740,6 +20519,19 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
         }
     };
 
+    const handleNativeDiff = (e: React.MouseEvent, filePath: string) => {
+        e.stopPropagation();
+        const fileData = props.parsedContent.files.find(f => f.path === filePath);
+        if (fileData) {
+            const title = `${path.basename(filePath)} (Workspace) ↔ (AI Response)`;
+            clientIpc.sendToServer(ClientToServerChannel.RequestNativeDiff, {
+                originalPath: filePath,
+                modifiedContent: fileData.content,
+                title: title
+            });
+        }
+    };
+
     const currentComparisonMetrics = props.selectedFilePath ? props.comparisonMetrics.get(props.pathOverrides.get(props.selectedFilePath) || props.selectedFilePath) : null;
 
     return (
@@ -20758,6 +20550,7 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
                                 {fileExists ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
                                 <span className="file-path-text" title={file}>{truncatePath(file, 40)}</span>
                                 {metrics && fileExists && <span className="similarity-score">{ (similarity * 100).toFixed(0) }%</span>}
+                                {fileExists && <button className="native-diff-button" title="Open Changes" onClick={(e) => handleNativeDiff(e, file)}><VscDiff /></button>}
                             </div>
                             {!fileExists && props.selectedFilePath === file && (
                                 <div className="path-override-container" onClick={e => e.stopPropagation()}>{hasOverride ? (<><span>Linked to: {props.pathOverrides.get(file)}</span><button className="styled-button" onClick={() => props.onUnlinkFile(file)}><VscDebugDisconnect /> Unlink</button></>) : (<><input type="text" placeholder="Enter correct relative path..." value={props.tempOverridePath} onChange={e => props.onTempOverridePathChange(e.target.value)} onKeyDown={e => {if(e.key === 'Enter') props.onLinkFile(file)}} /><button className="styled-button" onClick={() => props.onLinkFile(file)}><VscLink /> Link</button></>)}</div>
@@ -20964,7 +20757,7 @@ export const viewConfig = {
 </file_artifact>
 
 <file path="src/client/views/parallel-copilot.view/on-message.ts">
-// Updated on: C14 (Add settings panel handlers)
+// Updated on: C27 (Add RequestNativeDiff handler)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -21079,6 +20872,10 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestUndo, () => actionService.undo());
     serverIpc.onClientMessage(ClientToServerChannel.RequestRedo, () => actionService.redo());
+    
+    serverIpc.onClientMessage(ClientToServerChannel.RequestNativeDiff, (data) => {
+        fileOperationService.handleNativeDiffRequest(data.originalPath, data.modifiedContent, data.title);
+    });
 }
 </file_artifact>
 
@@ -21187,7 +20984,7 @@ export default OnboardingView;
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C21 (Fix sort button style)
+// Updated on: C27 (Add native diff button style)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -21828,6 +21625,9 @@ body {
 
         &:hover {
             background-color: var(--vscode-list-hoverBackground);
+            .native-diff-button {
+                opacity: 1;
+            }
         }
 
         &.selected {
@@ -21846,6 +21646,14 @@ body {
         overflow: hidden;
         text-overflow: ellipsis;
     }
+    
+    .native-diff-button {
+        opacity: 0;
+        transition: opacity 0.1s ease-in-out;
+        margin-left: auto;
+        padding: 0 4px;
+    }
+
 
     .file-path-text {
         flex-grow: 1;
@@ -22162,7 +21970,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C26 (Remove logging)
+// Updated on: C27 (Remove custom diff viewer logic)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -22710,6 +22518,7 @@ export enum ClientToServerChannel {
     RequestShowInformationMessage = "clientToServer.requestShowInformationMessage",
     RequestReadmeContent = "clientToServer.requestReadmeContent",
     RequestChangelogContent = "clientToServer.requestChangelogContent",
+    RequestNativeDiff = "clientToServer.requestNativeDiff",
 
     // Special File Handling
     RequestPdfToText = "clientToServer.requestPdfToText",
@@ -22781,7 +22590,7 @@ export enum ServerToClientChannel {
 </file_artifact>
 
 <file path="src/common/ipc/channels.type.ts">
-// Updated on: C14 (Add settings panel channels)
+// Updated on: C27 (Add RequestNativeDiff)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -22824,6 +22633,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestShowInformationMessage ? { message: string } :
     T extends ClientToServerChannel.RequestReadmeContent ? {} :
     T extends ClientToServerChannel.RequestChangelogContent ? {} :
+    T extends ClientToServerChannel.RequestNativeDiff ? { originalPath: string; modifiedContent: string; title: string; } :
     T extends ClientToServerChannel.RequestPdfToText ? { path: string } :
     T extends ClientToServerChannel.RequestExcelToText ? { path: string } :
     T extends ClientToServerChannel.RequestWordToText ? { path: string } :
@@ -23320,6 +23130,7 @@ import { getNonce, getViewHtml } from "./common/utils/view-html";
 import { onMessage as onParallelCopilotMessage } from "./client/views/parallel-copilot.view/on-message";
 import { onMessage as onSettingsMessage } from "./client/views/settings.view/on-message";
 import { ServerPostMessageManager } from "./common/ipc/server-ipc";
+import { ResponseContentProvider } from "./backend/providers/ResponseContentProvider";
 
 let globalContext: vscode.ExtensionContext | null = null;
 let parallelCopilotPanel: vscode.WebviewPanel | undefined;
@@ -23428,6 +23239,11 @@ export async function activate(context: vscode.ExtensionContext) {
             createOrShowSettingsPanel(context);
         }));
         registerViews(context);
+
+        // Register the TextDocumentContentProvider for our virtual documents
+        context.subscriptions.push(
+            vscode.workspace.registerTextDocumentContentProvider('dce-response', Services.responseContentProvider)
+        );
 
         const initialCycle = await Services.historyService.getInitialCycle();
         if (initialCycle.cycleId === 0 && vscode.workspace.workspaceFolders && vscode.workspace.workspaceFolders.length > 0) {
@@ -24562,12 +24378,15 @@ This migration promises to significantly enhance JANE's performance and scalabil
 # Artifact A88: DCE - Native Diff Integration Plan
 # Date Created: C22
 # Author: AI Model & Curator
+# Updated on: C27 (Mark as In Progress)
 
 - **Key/Value for A0:**
 - **Description:** A plan to integrate VS Code's native diff viewer (`vscode.diff`) for comparing AI-generated file content against the current workspace file, leveraging a TextDocumentContentProvider for in-memory content.
 - **Tags:** feature plan, ui, ux, diff, vscode api, virtual document
 
 ## 1. Overview & Goal
+
+**Status (C27): In Progress**
 
 The current integrated diff viewer is functional but lacks the native feel, performance, and rich features of VS Code's own diffing engine (e.g., syntax highlighting, minimap, inline actions). The goal of this feature is to replace our custom `DiffViewer` component with a button that triggers the built-in `vscode.diff` command.
 
@@ -24593,13 +24412,65 @@ This implementation involves creating a new backend provider and coordinating st
 
 ### Step 3: Implement the Frontend-to-Backend Workflow
 -   **UI (`ParsedView.tsx`):** An "Open Changes" button will be added to each associated file item, visible on hover.
--   **IPC Channel (`RequestNativeDiff`):** A new IPC channel will be created. Its payload will be `{ originalPath: string; modifiedContent: string; }`.
+-   **IPC Channel (`RequestNativeDiff`):** A new IPC channel will be created. Its payload will be `{ originalPath: string; modifiedContent: string; title: string; }`.
 -   **Backend Handler (`file-operation.service.ts`):**
     1.  A new `handleNativeDiffRequest` method will be implemented.
-    2.  When it receives a request, it will generate a unique URI for the virtual document, incorporating the file path and potentially cycle/response IDs to ensure uniqueness (e.g., `dce-response:${originalPath}?cycle=${cycleId}&resp=${respId}`).
+    2.  When it receives a request, it will generate a unique URI for the virtual document, incorporating the file path and potentially cycle/response IDs to ensure uniqueness (e.g., `dce-response:${originalPath}?cycle=${cycleId}&resp=${respId}&ts=${Date.now()}`).
     3.  It will store the `modifiedContent` in the `ResponseContentProvider`'s cache, keyed by this unique URI.
-    4.  It will then execute the command: `vscode.commands.executeCommand('vscode.diff', vscode.Uri.file(originalAbsolutePath), vscode.Uri.parse(virtualUri), 'Original ↔ AI Response');`.
+    4.  It will then execute the command: `vscode.commands.executeCommand('vscode.diff', vscode.Uri.file(originalAbsolutePath), vscode.Uri.parse(virtualUri), title);`.
+</file_artifact>
 
-This sequence allows us to show a native diff between a real file on disk and a string that only exists in our extension's memory, providing a seamless and powerful user experience.
+<file path="src/backend/providers/ResponseContentProvider.ts">
+// src/backend/providers/ResponseContentProvider.ts
+// New file in C27
+import * as vscode from 'vscode';
+import { Services } from '../services/services';
+
+export class ResponseContentProvider implements vscode.TextDocumentContentProvider {
+    public readonly onDidChangeEmitter = new vscode.EventEmitter<vscode.Uri>();
+    public readonly onDidChange = this.onDidChangeEmitter.event;
+
+    // A simple cache to hold the in-memory content of AI responses
+    private contentCache = new Map<string, string>();
+
+    public provideTextDocumentContent(uri: vscode.Uri): string {
+        Services.loggerService.log(`[ResponseContentProvider] Providing content for URI: ${uri.toString()}`);
+        return this.contentCache.get(uri.toString()) || '// Content not found for this response.';
+    }
+
+    public cacheContent(uri: vscode.Uri, content: string): void {
+        Services.loggerService.log(`[ResponseContentProvider] Caching content for URI: ${uri.toString()}`);
+        this.contentCache.set(uri.toString(), content);
+        // Notify VS Code that the content for this URI has changed (or is now available)
+        this.onDidChangeEmitter.fire(uri);
+    }
+}
+</file_artifact>
+
+<file path="src/backend/providers/ResponseContentProvider.ts">
+// src/backend/providers/ResponseContentProvider.ts
+// New file in C27
+import * as vscode from 'vscode';
+import { Services } from '../services/services';
+
+export class ResponseContentProvider implements vscode.TextDocumentContentProvider {
+    public readonly onDidChangeEmitter = new vscode.EventEmitter<vscode.Uri>();
+    public readonly onDidChange = this.onDidChangeEmitter.event;
+
+    // A simple cache to hold the in-memory content of AI responses
+    private contentCache = new Map<string, string>();
+
+    public provideTextDocumentContent(uri: vscode.Uri): string {
+        Services.loggerService.log(`[ResponseContentProvider] Providing content for URI: ${uri.toString()}`);
+        return this.contentCache.get(uri.toString()) || '// Content not found for this response.';
+    }
+
+    public cacheContent(uri: vscode.Uri, content: string): void {
+        Services.loggerService.log(`[ResponseContentProvider] Caching content for URI: ${uri.toString()}`);
+        this.contentCache.set(uri.toString(), content);
+        // Notify VS Code that the content for this URI has changed (or is now available)
+        this.onDidChangeEmitter.fire(uri);
+    }
+}
 </file_artifact>
 

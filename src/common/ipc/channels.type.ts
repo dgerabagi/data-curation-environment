@@ -1,4 +1,4 @@
-// Updated on: C14 (Add settings panel channels)
+// Updated on: C27 (Add RequestNativeDiff)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -41,6 +41,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestShowInformationMessage ? { message: string } :
     T extends ClientToServerChannel.RequestReadmeContent ? {} :
     T extends ClientToServerChannel.RequestChangelogContent ? {} :
+    T extends ClientToServerChannel.RequestNativeDiff ? { originalPath: string; modifiedContent: string; title: string; } :
     T extends ClientToServerChannel.RequestPdfToText ? { path: string } :
     T extends ClientToServerChannel.RequestExcelToText ? { path: string } :
     T extends ClientToServerChannel.RequestWordToText ? { path: string } :

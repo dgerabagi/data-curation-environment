@@ -1,5 +1,5 @@
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C21 (Fix sort button style)
+// Updated on: C27 (Add native diff button style)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -640,6 +640,9 @@ body {
 
         &:hover {
             background-color: var(--vscode-list-hoverBackground);
+            .native-diff-button {
+                opacity: 1;
+            }
         }
 
         &.selected {
@@ -658,6 +661,14 @@ body {
         overflow: hidden;
         text-overflow: ellipsis;
     }
+    
+    .native-diff-button {
+        opacity: 0;
+        transition: opacity 0.1s ease-in-out;
+        margin-left: auto;
+        padding: 0 4px;
+    }
+
 
     .file-path-text {
         flex-grow: 1;

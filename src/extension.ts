@@ -9,6 +9,7 @@ import { getNonce, getViewHtml } from "./common/utils/view-html";
 import { onMessage as onParallelCopilotMessage } from "./client/views/parallel-copilot.view/on-message";
 import { onMessage as onSettingsMessage } from "./client/views/settings.view/on-message";
 import { ServerPostMessageManager } from "./common/ipc/server-ipc";
+import { ResponseContentProvider } from "./backend/providers/ResponseContentProvider";
 
 let globalContext: vscode.ExtensionContext | null = null;
 let parallelCopilotPanel: vscode.WebviewPanel | undefined;
@@ -117,6 +118,11 @@ export async function activate(context: vscode.ExtensionContext) {
             createOrShowSettingsPanel(context);
         }));
         registerViews(context);
+
+        // Register the TextDocumentContentProvider for our virtual documents
+        context.subscriptions.push(
+            vscode.workspace.registerTextDocumentContentProvider('dce-response', Services.responseContentProvider)
+        );
 
         const initialCycle = await Services.historyService.getInitialCycle();
         if (initialCycle.cycleId === 0 && vscode.workspace.workspaceFolders && vscode.workspace.workspaceFolders.length > 0) {

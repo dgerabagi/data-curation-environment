@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C26 (Remove logging)
+// Updated on: C27 (Remove custom diff viewer logic)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';

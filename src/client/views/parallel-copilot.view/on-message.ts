@@ -1,4 +1,4 @@
-// Updated on: C14 (Add settings panel handlers)
+// Updated on: C27 (Add RequestNativeDiff handler)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -113,4 +113,8 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestUndo, () => actionService.undo());
     serverIpc.onClientMessage(ClientToServerChannel.RequestRedo, () => actionService.redo());
+    
+    serverIpc.onClientMessage(ClientToServerChannel.RequestNativeDiff, (data) => {
+        fileOperationService.handleNativeDiffRequest(data.originalPath, data.modifiedContent, data.title);
+    });
 }
