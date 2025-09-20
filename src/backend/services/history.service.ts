@@ -1,5 +1,5 @@
 // src/backend/services/history.service.ts
-// Updated on: C22 (Fix auto-save icon bug for Cycle 0)
+// Updated on: C24 (Remove diagnostic logging)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -154,7 +154,6 @@ export class HistoryService {
             return;
         }
 
-        Services.loggerService.log(`HistoryService: saving data for cycle ${cycleData.cycleId}.`);
         const history = await this._readHistoryFile();
         const cycleIndex = history.cycles.findIndex(c => c.cycleId === cycleData.cycleId);
 

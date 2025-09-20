@@ -1,18 +1,18 @@
-// Updated on: C22 (Add logging for duplication bug)
+// Updated on: C24 (Fix stale state bug for selected items)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
-import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
-import { FileNode } from '@/common/types/file-node';
+import { ClientPostMessageManager } from '../../../common/ipc/client-ipc';
+import { ClientToServerChannel, ServerToClientChannel } from '../../../common/ipc/channels.enum';
+import { FileNode } from '../../../common/types/file-node';
 import FileTree from '../../components/file-tree/FileTree';
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
-import { formatLargeNumber, formatNumberWithCommas } from '@/common/utils/formatting';
+import { formatLargeNumber, formatNumberWithCommas } from '../../../common/utils/formatting';
 import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, VscNewFolder, VscLoading, VscSave, VscFolderLibrary, VscSettingsGear, VscCheckAll, VscSearch, VscExpandAll, VscShield, VscFolder } from 'react-icons/vsc';
-import { logger } from '@/client/utils/logger';
+import { logger } from '../../utils/logger';
 import SelectedFilesView from '../../components/SelectedFilesView';
-import { addRemovePathInSelectedFiles, removePathsFromSelected } from '@/client/components/file-tree/FileTree.utils';
-import { SelectionSet, ProblemCountsMap, GitStatusMap } from '@/common/ipc/channels.type';
+import { addRemovePathInSelectedFiles, removePathsFromSelected } from '../../components/file-tree/FileTree.utils';
+import { SelectionSet, ProblemCountsMap, GitStatusMap } from '../../../common/ipc/channels.type';
 import path from 'path-browserify';
 
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
@@ -81,8 +81,6 @@ const App = () => {
     }, [clientIpc]);
 
     const handleFlattenClick = () => {
-        logger.log(`[DUPLICATION-BUG-LOG] Flatten button clicked. Sending ${checkedFiles.length} paths.`);
-        logger.log(`[DUPLICATION-BUG-LOG] Paths: ${JSON.stringify(checkedFiles)}`);
         clientIpc.sendToServer(ClientToServerChannel.RequestFlattenContext, { selectedPaths: checkedFiles });
     };
     const handleRefresh = () => { processedFilesCache.current.clear(); requestFiles(true); };

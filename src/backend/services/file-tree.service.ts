@@ -1,5 +1,5 @@
 // src/backend/services/file-tree.service.ts
-// Updated on: C23 (Implement debounced auto-add queue)
+// Updated on: C24 (Remove diagnostic logging)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -47,7 +47,6 @@ export class FileTreeService {
             });
         }
         
-        // Debounce the queue processing
         this.debouncedProcessAutoAdd = this.debounce(this.processAutoAddQueue.bind(this), 200);
     }
 
@@ -135,10 +134,8 @@ export class FileTreeService {
         const currentSelection = await Services.selectionService.getLastSelection();
         const newSelection = [...new Set([...currentSelection, ...pathsToAdd])];
     
-        Services.loggerService.log(`[DUPLICATION-BUG-LOG] AutoAdd (Debounced): Current has ${currentSelection.length}. Adding ${pathsToAdd.length}. New total ${newSelection.length}.`);
         await Services.selectionService.saveCurrentSelection(newSelection);
         
-        // After saving, we need to tell the UI to refresh its selection state
         const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
         if (serverIpc) {
             serverIpc.sendToClient(ServerToClientChannel.ApplySelectionSet, { paths: newSelection });
@@ -231,15 +228,11 @@ export class FileTreeService {
         const name = path.basename(normalizedPath);
         
         return !NON_SELECTABLE_PATTERNS.some(pattern => {
-            // Check for full name match (e.g., 'node_modules', 'prompt.md')
             if (name === pattern) return true;
-            // Check for inclusion for path-based patterns (e.g., '/.git/')
             if (normalizedPath.includes(`/${pattern}/`)) return true;
-            // Check for globstar pattern
             if (pattern.startsWith('**/') && pattern.endsWith('/**')) {
                 return normalizedPath.includes(`/${pattern.slice(3, -3)}/`);
             }
-            // Check for prefix for patterns like 'dce_history_export_'
             if (name.startsWith(pattern)) return true;
             return false;
         });

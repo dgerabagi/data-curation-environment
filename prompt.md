@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 24 - look into selected items logic for issues based on observations
+Current Cycle 25 - auto add function seems to be the culprit
+Cycle 24 - look into selected items logic for issues based on observations
 Cycle 23 - resolve duplicate files in flatten_repo.md
 Cycle 22 - feedback from prior cycle (nice work)
 Cycle 21 - playtesting obesrvations/feedback
@@ -707,11 +708,65 @@ No project scope defined.
 
 <M6. Cycles>
 
+<Cycle 25>
+<Cycle Context>
+hmmm, okay its still persisting, and i am noticing it even earlier like right after onboarding. here is another test run/observation:
+
+1. new workspace
+2. when i switch to the FTV (spiral icon), the pcpp auto-opens. at this stage, the root directory is not checked, but the auto add new files to selection is checked (its automatically enabled). i write a brief scope and click `Generate Initial Artifacts Prompt`.
+3. upon clicking this, i witness the /Artifacts/DCE_README.md get created. it is at that time i winess the root directory get checked, and i see the DCE_README.md appear in the Selected Items section at the bottom of the FTV. i feel like right here was the issue, because i need not do anything else, i am already glitched. if i just click flatten context, i should see two readmes. okay actually i only see one readme, but unchecking the checkbox next to readme does not remove it from the selection, so it might be two different bugs. im going to re-run another test from scratch but without the auto add checked from the beginning.
+
+okay! i think it has to do with the auto add. im going to re-describe both tests from this new observation:
+
+1. i create a new workspace.
+2. i input a new project scope and click generate initial prompt
+3. if auto add is on, the DCE_README.md gets added to the Selected Items in such a way that if I de-select the check mark, it does not actually remove it from the Selected Items.
+4. if auto add is off, the DCE_README.md does not ge added to the Selected Items. when i manually add it with the check mark, it successfully gets added. the difference in behavior is that when i de-select it with the check box, it actually gets removed, unlike if auto add is on when i generate the prompt.md. can you analyze wtf that auto add is doing to fubar this? i think we're close to the solution here.
+
+just to be thorough, im going to try to trigger the duplication bug again, because when i tried at the beginning of this cycle it didnt quite happen, but i didnt follow the exact same procedure to a T when i did it... so lets see...
+
+1. new workspace
+2. writing project plan, auto add is checked, generated initial prompt.
+3. sent prompt, received response, added response, selected files, clicked accept selected.
+4. files auto selected, i see them all appear in selected items.
+5. i go to generate... okay, no duplicates... i think we fixed that? now its just this de-selection issue
+</Cycle Context>
+<Previous Cycle 24 Summary of Actions>
+I have analyzed the two primary issues: the persistent duplication of files in the flattened context and the broken cost calculation.
+
+My analysis of the logs indicates the duplication bug originates within the `flattener.service.ts`. When the service receives a selection that includes both parent directories (e.g., `src/`) and files within those directories (e.g., `src/Artifacts/DCE_README.md`), the directory expansion logic adds the same files multiple times. The subsequent de-duplication step fails because of inconsistent path formatting (e.g., a mix of forward and backward slashes on Windows), causing the `Set` to treat identical paths as unique.
+
+For the cost calculation, the backend service appears to be calculating the cost, but the data is not being reflected on the frontend. This suggests a breakdown in the communication between the backend and the frontend, or an issue in how the frontend processes the received data.
+
+My course of action is to implement a definitive fix for the path normalization issue and to add extensive, end-to-end logging to the cost calculation process to pinpoint the exact point of failure.
+
+1.  **Documentation (Codify Duplication Bug):**
+    *   I will add a new case study to **`A11. DCE - Regression Case Studies.md`**.
+        *   **Name:** "Duplicate Files in Flattened Context Due to Path Normalization Issues".
+        *   **Root Cause Analysis (RCA):** The `expandDirectories` function collected paths from multiple sources. When these paths were de-duplicated using a `Set`, subtle differences in path separators (e.g., `c:\path` vs `c:/path`) caused the `Set` to treat them as unique entries, leading to duplicates in the final list.
+        *   **Codified Solution:** All file paths must be normalized to a consistent format (using forward slashes) *before* being added to any collection or `Set` for de-duplication. This must be done at every point a path is read or constructed within the flattener service.
+
+2.  **Fix File Duplication Bug (`flattener.service.ts`):**
+    *   I will update both the `expandDirectories` and `getAllFilesRecursive` methods.
+    *   Every file path will be passed through a `normalizePath` utility function (which replaces backslashes with forward slashes) before it is added to the list of files to be processed.
+    *   This ensures the `[...new Set(allFilePaths)]` operation in the main `flatten` method receives a list of consistently formatted paths and will correctly remove all duplicates.
+
+3.  **Add Diagnostic Logging for Cost Calculation:**
+    *   **Backend (`prompt.service.ts`):** I will add detailed, step-by-step logging to the `handlePromptCostBreakdownRequest` method. This "dry run" log will output:
+        *   The list of selected files received for the calculation.
+        *   The token count for the in-memory flattened content.
+        *   The token count for the schema, history, and context portions.
+        *   The final total tokens and the calculated cost.
+        *   A final confirmation log immediately before the `SendPromptCostEstimation` message is sent to the client.
+    *   **Frontend (`view.tsx`):** I will add a log statement to the message handler for `SendPromptCostEstimation`. This will confirm whether the frontend is receiving the data from the backend, allowing us to determine if the issue is in the backend, the IPC communication, or the frontend state update.
+</Previous Cycle 24 Summary of Actions>
+</Cycle 25>
+
 <Cycle 24>
 <Cycle Context>
-hmm, okay im beginning to think we're looking at the wrong root cause. if i uncheck the root directory and de-select all files for flattening, the `Selected Items (7)` remains at 7. Now, when i flatten, theres no duplicates, but i have no files checked, so by rights, nothing should get flattened, yet there are 7 selected items. next, ill delete one of the 7 manually to see what log (if any) it generates.
+hmm, okay im beginning to think we're looking at the wrong root cause. if i uncheck the root directory and de-select all files for flattening, the `Selected Items (7)` remains at 7. Now, when i flatten, theres no duplicates, but i have no files checked, so by rights, nothing should get flattened, yet there are 7 selected items. ill send a screenshot depicting this. next, ill delete one of the 7 manually to see what log (if any) it generates.
 
-okay, once i selected one of the files from within the `Selected Items` list, and pressed delete, the persisted current selection log went from 9 to 6. i am not clear on what that is signifying. the curious thing is, after deleting from the selected items, now when i go to check and uncheck from the root directory, the selected items actually goes to (0). now, everything seems fine.
+okay, once i selected one of the files from within the `Selected Items` list, and pressed delete, the persisted current selection log went from 9 to 6. i am not clear on what that is signifying, perhaps youll deduce it from the screenshot. the curious thing is, after deleting from the selected items, now when i go to check and uncheck from the root directory, the selected items actually goes to (0). now, everything seems fine.
 
 what are your thoughts on these observations?
 </Cycle Context>
@@ -2545,23 +2600,23 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-20T02:22:17.014Z
+  Date Generated: 2025-09-20T03:07:44.862Z
   ---
   Total Files: 171
-  Approx. Tokens: 455567
+  Approx. Tokens: 455213
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (8579 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (8519 tokens)
 4. src\Artifacts\A0. DCE Master Artifact List.md (8106 tokens)
 5. src\client\views\parallel-copilot.view\view.scss (5583 tokens)
 6. src\backend\services\prompt.service.ts (5237 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 8. src\backend\services\file-operation.service.ts (4370 tokens)
-9. src\client\views\context-chooser.view\view.tsx (4070 tokens)
-10. src\backend\services\file-tree.service.ts (3810 tokens)
+9. src\client\views\context-chooser.view\view.tsx (4032 tokens)
+10. src\client\views\context-chooser.view\view.scss (3708 tokens)
 
 <!-- Full File List -->
 1. public\copilot.svg - [Binary] Size: 445 Bytes
@@ -2666,11 +2721,11 @@ This file-centric approach helps in planning and prioritizing work, especially i
 100. src\backend\services\action.service.ts - Lines: 71 - Chars: 2444 - Tokens: 611
 101. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
 102. src\backend\services\file-operation.service.ts - Lines: 360 - Chars: 17477 - Tokens: 4370
-103. src\backend\services\file-tree.service.ts - Lines: 290 - Chars: 15238 - Tokens: 3810
-104. src\backend\services\flattener.service.ts - Lines: 245 - Chars: 13153 - Tokens: 3289
+103. src\backend\services\file-tree.service.ts - Lines: 283 - Chars: 14657 - Tokens: 3665
+104. src\backend\services\flattener.service.ts - Lines: 243 - Chars: 12817 - Tokens: 3205
 105. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 106. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-107. src\backend\services\history.service.ts - Lines: 292 - Chars: 12460 - Tokens: 3115
+107. src\backend\services\history.service.ts - Lines: 291 - Chars: 12352 - Tokens: 3088
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 109. src\backend\services\prompt.service.ts - Lines: 396 - Chars: 20945 - Tokens: 5237
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
@@ -2690,7 +2745,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 124. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 125. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
 126. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
-127. src\client\views\context-chooser.view\view.tsx - Lines: 154 - Chars: 16280 - Tokens: 4070
+127. src\client\views\context-chooser.view\view.tsx - Lines: 152 - Chars: 16125 - Tokens: 4032
 128. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
 129. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 55 - Chars: 1970 - Tokens: 493
 130. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 84 - Chars: 3386 - Tokens: 847
@@ -2703,7 +2758,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 100 - Chars: 5002 - Tokens: 1251
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 959 - Chars: 22331 - Tokens: 5583
 139. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-140. src\client\views\parallel-copilot.view\view.tsx - Lines: 282 - Chars: 34315 - Tokens: 8579
+140. src\client\views\parallel-copilot.view\view.tsx - Lines: 282 - Chars: 34076 - Tokens: 8519
 141. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 142. src\client\views\settings.view\on-message.ts - Lines: 17 - Chars: 762 - Tokens: 191
 143. src\client\views\settings.view\view.scss - Lines: 87 - Chars: 1767 - Tokens: 442
@@ -18855,7 +18910,7 @@ export class FileOperationService {
 
 <file path="src/backend/services/file-tree.service.ts">
 // src/backend/services/file-tree.service.ts
-// Updated on: C23 (Implement debounced auto-add queue)
+// Updated on: C24 (Remove diagnostic logging)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -18903,7 +18958,6 @@ export class FileTreeService {
             });
         }
         
-        // Debounce the queue processing
         this.debouncedProcessAutoAdd = this.debounce(this.processAutoAddQueue.bind(this), 200);
     }
 
@@ -18991,10 +19045,8 @@ export class FileTreeService {
         const currentSelection = await Services.selectionService.getLastSelection();
         const newSelection = [...new Set([...currentSelection, ...pathsToAdd])];
     
-        Services.loggerService.log(`[DUPLICATION-BUG-LOG] AutoAdd (Debounced): Current has ${currentSelection.length}. Adding ${pathsToAdd.length}. New total ${newSelection.length}.`);
         await Services.selectionService.saveCurrentSelection(newSelection);
         
-        // After saving, we need to tell the UI to refresh its selection state
         const serverIpc = serverIPCs[VIEW_TYPES.SIDEBAR.CONTEXT_CHOOSER];
         if (serverIpc) {
             serverIpc.sendToClient(ServerToClientChannel.ApplySelectionSet, { paths: newSelection });
@@ -19087,15 +19139,11 @@ export class FileTreeService {
         const name = path.basename(normalizedPath);
         
         return !NON_SELECTABLE_PATTERNS.some(pattern => {
-            // Check for full name match (e.g., 'node_modules', 'prompt.md')
             if (name === pattern) return true;
-            // Check for inclusion for path-based patterns (e.g., '/.git/')
             if (normalizedPath.includes(`/${pattern}/`)) return true;
-            // Check for globstar pattern
             if (pattern.startsWith('**/') && pattern.endsWith('/**')) {
                 return normalizedPath.includes(`/${pattern.slice(3, -3)}/`);
             }
-            // Check for prefix for patterns like 'dce_history_export_'
             if (name.startsWith(pattern)) return true;
             return false;
         });
@@ -19147,7 +19195,7 @@ export class FileTreeService {
 </file_artifact>
 
 <file path="src/backend/services/flattener.service.ts">
-// Updated on: C23 (Fix path normalization bug)
+// Updated on: C24 (Remove diagnostic logging)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -19195,7 +19243,6 @@ export class FlattenerService {
     }
 
     public async flatten(selectedPaths: string[]) {
-        Services.loggerService.log(`[DUPLICATION-BUG-LOG] Flattener service received ${selectedPaths.length} paths: ${JSON.stringify(selectedPaths)}`);
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (!workspaceFolders || workspaceFolders.length === 0) {
             vscode.window.showErrorMessage("Cannot flatten context: No workspace folder is open.");
@@ -19211,8 +19258,7 @@ export class FlattenerService {
 
         try {
             const allFilePaths = await this.expandDirectories(selectedPaths);
-            const uniqueFilePaths = [...new Set(allFilePaths)]; // Safeguard against duplicates
-            Services.loggerService.log(`[DUPLICATION-BUG-LOG] After expansion and de-duplication, processing ${uniqueFilePaths.length} unique paths.`);
+            const uniqueFilePaths = [...new Set(allFilePaths)]; 
 
             const fileStatsPromises = uniqueFilePaths.map(filePath => this.getFileStatsAndContent(filePath));
             const results = await Promise.all(fileStatsPromises);
@@ -19616,7 +19662,7 @@ export class HighlightingService {
 
 <file path="src/backend/services/history.service.ts">
 // src/backend/services/history.service.ts
-// Updated on: C22 (Fix auto-save icon bug for Cycle 0)
+// Updated on: C24 (Remove diagnostic logging)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -19771,7 +19817,6 @@ export class HistoryService {
             return;
         }
 
-        Services.loggerService.log(`HistoryService: saving data for cycle ${cycleData.cycleId}.`);
         const history = await this._readHistoryFile();
         const cycleIndex = history.cycles.findIndex(c => c.cycleId === cycleData.cycleId);
 
@@ -22789,21 +22834,21 @@ body {
 </file_artifact>
 
 <file path="src/client/views/context-chooser.view/view.tsx">
-// Updated on: C22 (Add logging for duplication bug)
+// Updated on: C24 (Fix stale state bug for selected items)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
-import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
-import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
-import { FileNode } from '@/common/types/file-node';
+import { ClientPostMessageManager } from '../../../common/ipc/client-ipc';
+import { ClientToServerChannel, ServerToClientChannel } from '../../../common/ipc/channels.enum';
+import { FileNode } from '../../../common/types/file-node';
 import FileTree from '../../components/file-tree/FileTree';
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
-import { formatLargeNumber, formatNumberWithCommas } from '@/common/utils/formatting';
+import { formatLargeNumber, formatNumberWithCommas } from '../../../common/utils/formatting';
 import { VscFiles, VscSymbolNumeric, VscCollapseAll, VscRefresh, VscNewFile, VscNewFolder, VscLoading, VscSave, VscFolderLibrary, VscSettingsGear, VscCheckAll, VscSearch, VscExpandAll, VscShield, VscFolder } from 'react-icons/vsc';
-import { logger } from '@/client/utils/logger';
+import { logger } from '../../utils/logger';
 import SelectedFilesView from '../../components/SelectedFilesView';
-import { addRemovePathInSelectedFiles, removePathsFromSelected } from '@/client/components/file-tree/FileTree.utils';
-import { SelectionSet, ProblemCountsMap, GitStatusMap } from '@/common/ipc/channels.type';
+import { addRemovePathInSelectedFiles, removePathsFromSelected } from '../../components/file-tree/FileTree.utils';
+import { SelectionSet, ProblemCountsMap, GitStatusMap } from '../../../common/ipc/channels.type';
 import path from 'path-browserify';
 
 const EXCEL_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv']);
@@ -22872,8 +22917,6 @@ const App = () => {
     }, [clientIpc]);
 
     const handleFlattenClick = () => {
-        logger.log(`[DUPLICATION-BUG-LOG] Flatten button clicked. Sending ${checkedFiles.length} paths.`);
-        logger.log(`[DUPLICATION-BUG-LOG] Paths: ${JSON.stringify(checkedFiles)}`);
         clientIpc.sendToServer(ClientToServerChannel.RequestFlattenContext, { selectedPaths: checkedFiles });
     };
     const handleRefresh = () => { processedFilesCache.current.clear(); requestFiles(true); };
@@ -24722,7 +24765,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C23 (Add logging for cost calculation)
+// Updated on: C24 (Remove diagnostic logging)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -24919,7 +24962,7 @@ const App = () => {
     const newCycleButtonDisabledReason = React.useMemo(() => { const reasons: string[] = []; if (!cycleTitle || cycleTitle.trim() === 'New Cycle' || cycleTitle.trim() === '') reasons.push("- A cycle title is required."); if (!cycleContext || cycleContext.trim() === '') reasons.push("- Cycle context cannot be empty."); if (!selectedResponseId) reasons.push("- A response must be selected."); return reasons.join('\n'); }, [cycleTitle, cycleContext, selectedResponseId]);
 
     React.useEffect(() => { if (workflowStep === null) return; if (workflowStep === 'readyForNewCycle') return; if (workflowStep === 'awaitingGeneratePrompt') { if (isReadyForNextCycle) setWorkflowStep('awaitingGeneratePrompt'); return; } if (workflowStep === 'awaitingCycleTitle') { if (cycleTitle.trim() && cycleTitle.trim() !== 'New Cycle') { setWorkflowStep('awaitingGeneratePrompt'); } return; } if (workflowStep === 'awaitingCycleContext') { if (cycleContext.trim()) { setWorkflowStep('awaitingCycleTitle'); } return; } if (workflowStep === 'awaitingAccept') { return; } if (workflowStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestGitStatus, {}); return; } if (workflowStep === 'awaitingFileSelect') { if (selectedFilesForReplacement.size > 0) { setWorkflowStep('awaitingAccept'); } return; } if (workflowStep === 'awaitingResponseSelect') { if (selectedResponseId) { setWorkflowStep('awaitingBaseline'); } return; } if (workflowStep === 'awaitingSort') { if (isSortedByTokens) { setWorkflowStep('awaitingResponseSelect'); } return; } if (workflowStep === 'awaitingParse') { if (isParsedMode) { setWorkflowStep(isSortedByTokens ? 'awaitingResponseSelect' : 'awaitingSort'); } return; } const waitingForPaste = workflowStep?.startsWith('awaitingResponsePaste'); if (waitingForPaste) { for (let i = 1; i <= tabCount; i++) { if (!tabs[i.toString()]?.rawContent?.trim()) { setWorkflowStep(`awaitingResponsePaste_${i}`); return; } } setWorkflowStep('awaitingParse'); } }, [workflowStep, selectedFilesForReplacement, selectedResponseId, isSortedByTokens, isParsedMode, tabs, cycleContext, cycleTitle, tabCount, isReadyForNextCycle, clientIpc]);
-    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string, newMax?: number) => { console.log(`[PCPP View] Loading cycle data for cycle ${cycleData.cycleId}`); setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setActiveTab(cycleData.activeTab || 1); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setWorkflowStep(cycleData.activeWorkflowStep || null); if (newMax) setMaxCycle(newMax); setSaveStatus('saved'); requestCostEstimation(); }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => { setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics)); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { logger.log(`[CostCalc] Received cost estimation from backend: ${totalTokens} tokens, $${estimatedCost}`); setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { console.log(`[PCPP VIEW] Received NotifyGitOperationResult: ${JSON.stringify(result)}`); if (result.success) { setWorkflowStep(prevStep => { console.log(`[PCPP WORKFLOW] Functional update. Prev step: ${prevStep}.`); if (prevStep === 'awaitingBaseline') { console.log(`[PCPP WORKFLOW] Advancing from 'awaitingBaseline' to 'awaitingFileSelect'.`); clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } else { console.error(`[PCPP VIEW] Git operation failed: ${result.message}`); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => { if (cycleId === stateRef.current.currentCycle) setSaveStatus('saved'); }); clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }, [clientIpc, requestCostEstimation]);
+    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string, newMax?: number) => { console.log(`[PCPP View] Loading cycle data for cycle ${cycleData.cycleId}`); setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setActiveTab(cycleData.activeTab || 1); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setWorkflowStep(cycleData.activeWorkflowStep || null); if (newMax) setMaxCycle(newMax); setSaveStatus('saved'); requestCostEstimation(); }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => { setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics)); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { console.log(`[PCPP VIEW] Received NotifyGitOperationResult: ${JSON.stringify(result)}`); if (result.success) { setWorkflowStep(prevStep => { console.log(`[PCPP WORKFLOW] Functional update. Prev step: ${prevStep}.`); if (prevStep === 'awaitingBaseline') { console.log(`[PCPP WORKFLOW] Advancing from 'awaitingBaseline' to 'awaitingFileSelect'.`); clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } else { console.error(`[PCPP VIEW] Git operation failed: ${result.message}`); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => { if (cycleId === stateRef.current.currentCycle) setSaveStatus('saved'); }); clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }, [clientIpc, requestCostEstimation]);
     React.useEffect(() => { if (isParsedMode) parseAllTabs(); }, [isParsedMode, tabs, parseAllTabs]);
     React.useEffect(() => { if (!selectedFilePath) return; const currentTabData = tabs[activeTab.toString()]; if (currentTabData?.parsedContent) { const fileExistsInTab = currentTabData.parsedContent.files.some(f => f.path === selectedFilePath); if (!fileExistsInTab) setSelectedFilePath(null); } }, [activeTab, tabs, selectedFilePath]);
 
@@ -24927,7 +24970,7 @@ const App = () => {
 
     const handleCycleChange = (e: React.MouseEvent | null, newCycle: number) => { e?.stopPropagation(); if (saveStatus !== 'saved') return; if (newCycle >= 0 && newCycle <= maxCycle) { setSelectedFilesForReplacement(new Set()); setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycle }); setWorkflowStep(null); } };
     const handleSelectForViewing = (filePath: string) => { const newPath = selectedFilePath === filePath ? null : filePath; setSelectedFilePath(newPath); };
-    const handleAcceptSelectedFiles = () => { if (selectedFilesForReplacement.size === 0) return; const filesToWrite: BatchWriteFile[] = []; selectedFilesForReplacement.forEach(compositeKey => { const [responseId, filePath] = compositeKey.split(':::'); const responseData = tabs[responseId]; if (responseData?.parsedContent) { const file = responseData.parsedContent.files.find(f => f.path === filePath); if (file) { const finalPath = pathOverrides.get(file.path) || file.path; filesToWrite.push({ path: finalPath, content: file.content }); } } }); logger.log(`[DUPLICATION-BUG-LOG] Accepting ${filesToWrite.length} files: ${JSON.stringify(filesToWrite.map(f => f.path))}`); if (filesToWrite.length > 0) { clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite }); } setWorkflowStep('awaitingCycleContext'); };
+    const handleAcceptSelectedFiles = () => { if (selectedFilesForReplacement.size === 0) return; const filesToWrite: BatchWriteFile[] = []; selectedFilesForReplacement.forEach(compositeKey => { const [responseId, filePath] = compositeKey.split(':::'); const responseData = tabs[responseId]; if (responseData?.parsedContent) { const file = responseData.parsedContent.files.find(f => f.path === filePath); if (file) { const finalPath = pathOverrides.get(file.path) || file.path; filesToWrite.push({ path: finalPath, content: file.content }); } } }); if (filesToWrite.length > 0) { clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite }); } setWorkflowStep('awaitingCycleContext'); };
     const handleLinkFile = (originalPath: string) => { if (tempOverridePath.trim()) { setPathOverrides(prev => new Map(prev).set(originalPath, tempOverridePath.trim())); setFileExistenceMap(prev => new Map(prev).set(originalPath, true)); setTempOverridePath(''); handleSelectForViewing(originalPath); } };
     const handleUnlinkFile = (originalPath: string) => { setPathOverrides(prev => { const newMap = new Map(prev); newMap.delete(originalPath); return newMap; }); setFileExistenceMap(prev => new Map(prev).set(originalPath, false)); };
     const onCycleContextChange = React.useCallback((value: string) => { setCycleContext(value); setCycleContextTokens(Math.ceil(value.length / 4)); setSaveStatus('unsaved'); }, []);

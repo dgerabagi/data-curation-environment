@@ -1,4 +1,4 @@
-// Updated on: C23 (Fix path normalization bug)
+// Updated on: C24 (Remove diagnostic logging)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -46,7 +46,6 @@ export class FlattenerService {
     }
 
     public async flatten(selectedPaths: string[]) {
-        Services.loggerService.log(`[DUPLICATION-BUG-LOG] Flattener service received ${selectedPaths.length} paths: ${JSON.stringify(selectedPaths)}`);
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (!workspaceFolders || workspaceFolders.length === 0) {
             vscode.window.showErrorMessage("Cannot flatten context: No workspace folder is open.");
@@ -62,8 +61,7 @@ export class FlattenerService {
 
         try {
             const allFilePaths = await this.expandDirectories(selectedPaths);
-            const uniqueFilePaths = [...new Set(allFilePaths)]; // Safeguard against duplicates
-            Services.loggerService.log(`[DUPLICATION-BUG-LOG] After expansion and de-duplication, processing ${uniqueFilePaths.length} unique paths.`);
+            const uniqueFilePaths = [...new Set(allFilePaths)]; 
 
             const fileStatsPromises = uniqueFilePaths.map(filePath => this.getFileStatsAndContent(filePath));
             const results = await Promise.all(fileStatsPromises);
