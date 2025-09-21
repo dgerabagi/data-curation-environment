@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C31 (Add logging to cost estimation handler)
+// Updated on: C32 (Fix cost estimation display)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -17,7 +17,7 @@ import ResponseTabs from './components/ResponseTabs';
 import ResponsePane from './components/ResponsePane';
 import * as path from 'path-browserify';
 import WorkflowToolbar from './components/WorkflowToolbar';
-import { logger } from '@/client/utils/logger';
+import { logger } from '../../utils/logger';
 
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -136,8 +136,37 @@ const App = () => {
     };
 
     const debouncedSave = useDebounce(saveCurrentCycleState, 1500);
-    const getCurrentCycleData = React.useCallback(() => stateRef.current, []);
-    const requestCostEstimation = React.useCallback(() => { const cycleData = getCurrentCycleData(); if (cycleData.currentCycle) clientIpc.sendToServer(ClientToServerChannel.RequestPromptCostBreakdown, { cycleData: cycleData as any }); }, [clientIpc, getCurrentCycleData]);
+    const getCurrentCycleData = React.useCallback(() => {
+        const { currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, workflowStep } = stateRef.current;
+        if (currentCycle === null) return null;
+        const responses: { [key: string]: PcppResponse } = {};
+        for (let i = 1; i <= tabCount; i++) {
+            responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' };
+        }
+        return {
+            cycleId: currentCycle,
+            timestamp: new Date().toISOString(),
+            title: cycleTitle,
+            cycleContext,
+            ephemeralContext,
+            responses,
+            isParsedMode,
+            leftPaneWidth,
+            selectedResponseId,
+            selectedFilesForReplacement: Array.from(selectedFilesForReplacement),
+            tabCount,
+            activeTab,
+            isSortedByTokens,
+            pathOverrides: Object.fromEntries(pathOverrides),
+            activeWorkflowStep: workflowStep || undefined
+        };
+    }, []);
+    const requestCostEstimation = React.useCallback(() => { 
+        const cycleData = getCurrentCycleData(); 
+        if (cycleData?.cycleId) {
+            clientIpc.sendToServer(ClientToServerChannel.RequestPromptCostBreakdown, { cycleData: cycleData as PcppCycle }); 
+        }
+    }, [clientIpc, getCurrentCycleData]);
     const debouncedCostRequest = useDebounce(requestCostEstimation, 500);
 
     React.useEffect(() => { if (saveStatus === 'unsaved') debouncedSave(); }, [saveStatus, debouncedSave]);
@@ -221,7 +250,7 @@ const App = () => {
     const handleExportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestExportHistory, {});
     const handleImportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestImportHistory, {});
     const handleGitBaseline = () => { const commitMessage = `DCE Baseline: Cycle ${currentCycle} - ${cycleTitle || 'New Cycle'}`; clientIpc.sendToServer(ClientToServerChannel.RequestGitBaseline, { commitMessage }); };
-    const onGitRestore = () => { const { selectedFilesForReplacement, fileExistenceMap } = stateRef.current; const filesToDelete = Array.from(selectedFilesForReplacement).map(key => key.split(':::')).filter(fileParts => !fileExistenceMap.get(fileParts)).map(fileParts => fileParts); clientIpc.sendToServer(ClientToServerChannel.RequestGitRestore, { filesToDelete }); };
+    const onGitRestore = () => { const { selectedFilesForReplacement, fileExistenceMap } = stateRef.current; const filesToDelete = Array.from(selectedFilesForReplacement).map(key => key.split(':::')).filter(fileParts => fileParts[1] && !fileExistenceMap.get(fileParts[1])).map(fileParts => fileParts[1]); clientIpc.sendToServer(ClientToServerChannel.RequestGitRestore, { filesToDelete }); };
     const handleFileSelectionToggle = (filePath: string) => { const currentTabId = activeTab.toString(); const compositeKeyForCurrent = `${currentTabId}:::${filePath}`; setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); let existingKey: string | undefined; for (const key of newSet) if (key.endsWith(`:::${filePath}`)) { existingKey = key; break; } if (existingKey) { if (existingKey === compositeKeyForCurrent) newSet.delete(existingKey); else { newSet.delete(existingKey); newSet.add(compositeKeyForCurrent); } } else newSet.add(compositeKeyForCurrent); return newSet; }); setSaveStatus('unsaved'); };
     const handleSelectAllAssociatedFiles = () => { if (!activeTabData?.parsedContent) return; const allFilesForTab = activeTabData.parsedContent.filesUpdated; setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); allFilesForTab.forEach(filePath => { for (const key of newSet) { if (key.endsWith(`:::${filePath}`)) { newSet.delete(key); } } }); allFilesForTab.forEach(filePath => newSet.add(`${activeTab}:::${filePath}`)); return newSet; }); setSaveStatus('unsaved'); };
     const isAllFilesSelected = React.useMemo(() => { if (!activeTabData?.parsedContent) return false; const allFiles = activeTabData.parsedContent.filesUpdated; if (allFiles.length === 0) return false; return allFiles.every(file => selectedFilesForReplacement.has(`${activeTab}:::${file}`)); }, [selectedFilesForReplacement, activeTabData, activeTab]);

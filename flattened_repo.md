@@ -1,17 +1,17 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-21T03:19:49.529Z
+  Date Generated: 2025-09-21T04:01:24.997Z
   ---
-  Total Files: 179
-  Approx. Tokens: 464689
+  Total Files: 180
+  Approx. Tokens: 466454
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (8440 tokens)
-4. src\Artifacts\A0. DCE Master Artifact List.md (8368 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (8724 tokens)
+4. src\Artifacts\A0. DCE Master Artifact List.md (8430 tokens)
 5. src\client\views\parallel-copilot.view\view.scss (5499 tokens)
 6. src\backend\services\prompt.service.ts (4904 tokens)
 7. src\backend\services\file-operation.service.ts (4526 tokens)
@@ -22,7 +22,7 @@
 <!-- Full File List -->
 1. public\copilot.svg - [Binary] Size: 445 Bytes
 2. public\spiral.svg - [Binary] Size: 459 Bytes
-3. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 492 - Chars: 33471 - Tokens: 8368
+3. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 496 - Chars: 33720 - Tokens: 8430
 4. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 5. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
 6. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
@@ -158,7 +158,7 @@
 136. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 100 - Chars: 5002 - Tokens: 1251
 137. src\client\views\parallel-copilot.view\view.scss - Lines: 979 - Chars: 21996 - Tokens: 5499
 138. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 278 - Chars: 33759 - Tokens: 8440
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 307 - Chars: 34894 - Tokens: 8724
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 17 - Chars: 762 - Tokens: 191
 142. src\client\views\settings.view\view.scss - Lines: 87 - Chars: 1767 - Tokens: 442
@@ -178,10 +178,10 @@
 156. src\common\view-types.ts - Lines: 8 - Chars: 175 - Tokens: 44
 157. src\extension.ts - Lines: 174 - Chars: 7202 - Tokens: 1801
 158. bootstrap-flattener.js - Lines: 185 - Chars: 5834 - Tokens: 1459
-159. CHANGELOG.md - Lines: 33 - Chars: 2339 - Tokens: 585
+159. CHANGELOG.md - Lines: 38 - Chars: 2614 - Tokens: 654
 160. LICENSE - Lines: 21 - Chars: 1090 - Tokens: 273
 161. log-state-logs.md - Lines: 200 - Chars: 11855 - Tokens: 2964
-162. package.json - Lines: 157 - Chars: 5115 - Tokens: 1279
+162. package.json - Lines: 157 - Chars: 5116 - Tokens: 1279
 163. README.md - Lines: 28 - Chars: 2456 - Tokens: 614
 164. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
 165. webpack.config.js - Lines: 112 - Chars: 2987 - Tokens: 747
@@ -195,10 +195,11 @@
 173. src\Artifacts\A90. AI Ascent - server.ts for DCE Proxy.md - Lines: 347 - Chars: 15394 - Tokens: 3849
 174. src\Artifacts\A91. AI Ascent - Caddyfile for DCE Proxy.md - Lines: 60 - Chars: 2596 - Tokens: 649
 175. src\Artifacts\A87. VCPG - vLLM High-Throughput Inference Plan.md - Lines: 56 - Chars: 4251 - Tokens: 1063
-176. src\Artifacts\A89. DCE - Phase 3 - Hosted LLM & vLLM Integration Plan.md - Lines: 62 - Chars: 5097 - Tokens: 1275
+176. src\Artifacts\A89. DCE - Phase 3 - Hosted LLM & vLLM Integration Plan.md - Lines: 64 - Chars: 5344 - Tokens: 1336
 177. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 306 - Chars: 13156 - Tokens: 3289
 178. src\Artifacts\A91. AI Ascent - Caddyfile (Reference).md - Lines: 54 - Chars: 2305 - Tokens: 577
-179. src\Artifacts\A92. DCE - vLLM Setup Guide.md - Lines: 98 - Chars: 3995 - Tokens: 999
+179. src\Artifacts\A92. DCE - vLLM Setup Guide.md - Lines: 115 - Chars: 5340 - Tokens: 1335
+180. src\Artifacts\A93. DCE - vLLM Encryption in Transit Guide.md - Lines: 65 - Chars: 3811 - Tokens: 953
 
 <file path="public/copilot.svg">
 <metadata>
@@ -226,7 +227,7 @@
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C29 (Add A89, A90, A91)
+# Updated on: C32 (Add A93)
 
 ## 1. Purpose
 
@@ -631,6 +632,10 @@
 ### A92. DCE - vLLM Setup Guide
 - **Description:** A step-by-step guide for setting up the vLLM inference server with an OpenAI-compatible API endpoint for use with the DCE.
 - **Tags:** guide, setup, vllm, llm, inference, performance, openai
+
+### A93. DCE - vLLM Encryption in Transit Guide
+- **Description:** Explains the standard architectural pattern of using a reverse proxy to provide HTTPS encryption for the vLLM API endpoint.
+- **Tags:** guide, security, encryption, https, proxy, caddy, vllm
 
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
@@ -21986,7 +21991,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C31 (Add logging to cost estimation handler)
+// Updated on: C32 (Fix cost estimation display)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -22004,7 +22009,7 @@ import ResponseTabs from './components/ResponseTabs';
 import ResponsePane from './components/ResponsePane';
 import * as path from 'path-browserify';
 import WorkflowToolbar from './components/WorkflowToolbar';
-import { logger } from '@/client/utils/logger';
+import { logger } from '../../utils/logger';
 
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -22123,8 +22128,37 @@ const App = () => {
     };
 
     const debouncedSave = useDebounce(saveCurrentCycleState, 1500);
-    const getCurrentCycleData = React.useCallback(() => stateRef.current, []);
-    const requestCostEstimation = React.useCallback(() => { const cycleData = getCurrentCycleData(); if (cycleData.currentCycle) clientIpc.sendToServer(ClientToServerChannel.RequestPromptCostBreakdown, { cycleData: cycleData as any }); }, [clientIpc, getCurrentCycleData]);
+    const getCurrentCycleData = React.useCallback(() => {
+        const { currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, workflowStep } = stateRef.current;
+        if (currentCycle === null) return null;
+        const responses: { [key: string]: PcppResponse } = {};
+        for (let i = 1; i <= tabCount; i++) {
+            responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' };
+        }
+        return {
+            cycleId: currentCycle,
+            timestamp: new Date().toISOString(),
+            title: cycleTitle,
+            cycleContext,
+            ephemeralContext,
+            responses,
+            isParsedMode,
+            leftPaneWidth,
+            selectedResponseId,
+            selectedFilesForReplacement: Array.from(selectedFilesForReplacement),
+            tabCount,
+            activeTab,
+            isSortedByTokens,
+            pathOverrides: Object.fromEntries(pathOverrides),
+            activeWorkflowStep: workflowStep || undefined
+        };
+    }, []);
+    const requestCostEstimation = React.useCallback(() => { 
+        const cycleData = getCurrentCycleData(); 
+        if (cycleData?.cycleId) {
+            clientIpc.sendToServer(ClientToServerChannel.RequestPromptCostBreakdown, { cycleData: cycleData as PcppCycle }); 
+        }
+    }, [clientIpc, getCurrentCycleData]);
     const debouncedCostRequest = useDebounce(requestCostEstimation, 500);
 
     React.useEffect(() => { if (saveStatus === 'unsaved') debouncedSave(); }, [saveStatus, debouncedSave]);
@@ -22208,7 +22242,7 @@ const App = () => {
     const handleExportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestExportHistory, {});
     const handleImportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestImportHistory, {});
     const handleGitBaseline = () => { const commitMessage = `DCE Baseline: Cycle ${currentCycle} - ${cycleTitle || 'New Cycle'}`; clientIpc.sendToServer(ClientToServerChannel.RequestGitBaseline, { commitMessage }); };
-    const onGitRestore = () => { const { selectedFilesForReplacement, fileExistenceMap } = stateRef.current; const filesToDelete = Array.from(selectedFilesForReplacement).map(key => key.split(':::')).filter(fileParts => !fileExistenceMap.get(fileParts)).map(fileParts => fileParts); clientIpc.sendToServer(ClientToServerChannel.RequestGitRestore, { filesToDelete }); };
+    const onGitRestore = () => { const { selectedFilesForReplacement, fileExistenceMap } = stateRef.current; const filesToDelete = Array.from(selectedFilesForReplacement).map(key => key.split(':::')).filter(fileParts => fileParts[1] && !fileExistenceMap.get(fileParts[1])).map(fileParts => fileParts[1]); clientIpc.sendToServer(ClientToServerChannel.RequestGitRestore, { filesToDelete }); };
     const handleFileSelectionToggle = (filePath: string) => { const currentTabId = activeTab.toString(); const compositeKeyForCurrent = `${currentTabId}:::${filePath}`; setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); let existingKey: string | undefined; for (const key of newSet) if (key.endsWith(`:::${filePath}`)) { existingKey = key; break; } if (existingKey) { if (existingKey === compositeKeyForCurrent) newSet.delete(existingKey); else { newSet.delete(existingKey); newSet.add(compositeKeyForCurrent); } } else newSet.add(compositeKeyForCurrent); return newSet; }); setSaveStatus('unsaved'); };
     const handleSelectAllAssociatedFiles = () => { if (!activeTabData?.parsedContent) return; const allFilesForTab = activeTabData.parsedContent.filesUpdated; setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); allFilesForTab.forEach(filePath => { for (const key of newSet) { if (key.endsWith(`:::${filePath}`)) { newSet.delete(key); } } }); allFilesForTab.forEach(filePath => newSet.add(`${activeTab}:::${filePath}`)); return newSet; }); setSaveStatus('unsaved'); };
     const isAllFilesSelected = React.useMemo(() => { if (!activeTabData?.parsedContent) return false; const allFiles = activeTabData.parsedContent.filesUpdated; if (allFiles.length === 0) return false; return allFiles.every(file => selectedFilesForReplacement.has(`${activeTab}:::${file}`)); }, [selectedFilesForReplacement, activeTabData, activeTab]);
@@ -23505,6 +23539,11 @@ main().catch(err => {
 
 All notable changes to the "Data Curation Environment" extension will be documented in this file.
 
+## [0.1.10] - Q3 2025
+
+### Fixed
+- **Cost Calculation Display:** Fixed an issue where the estimated prompt cost was not being correctly displayed on the frontend, often remaining at $0.00 despite changes in context. The calculation is now correctly triggered and displayed.
+
 ## [0.1.9] - Q3 2025
 
 ### Added
@@ -23768,7 +23807,7 @@ I have analyzed the comprehensive feedback from Cycle 132. There are several reg
     "publisher": "DCE-Developer",
     "displayName": "Data Curation Environment",
     "description": "A VS Code extension for curating context for Large Language Models.",
-    "version": "0.1.9",
+    "version": "0.1.10",
     "repository": {
         "type": "git",
         "url": "https://github.com/dgerabagi/data-curation-environment.git"
@@ -24978,6 +25017,7 @@ To securely connect the DCE extension to a powerful vLLM instance, we will use a
 # Artifact A89: DCE - Phase 3 - Hosted LLM & vLLM Integration Plan
 # Date Created: C29
 # Author: AI Model & Curator
+# Updated on: C32 (Add reference to Encryption Guide)
 
 - **Key/Value for A0:**
 - **Description:** Outlines the architecture and roadmap for integrating the DCE extension with a remote, high-throughput vLLM backend via a secure proxy server.
@@ -25004,14 +25044,21 @@ The system will consist of three main components:
 2.  **Proxy Server (e.g., `aiascent.game`):** This existing Node.js/Express server will be modified to act as a secure gateway. It will expose a new API endpoint specifically for the DCE. Its role is to receive requests, potentially add authentication or logging, and forward them to the internal vLLM server. This is critical for security, as it keeps the vLLM endpoint from being publicly exposed.
 3.  **vLLM Backend:** This is a separate Python process running the vLLM engine with a loaded model. vLLM provides an OpenAI-compatible API endpoint that can accept a prompt and a parameter `n` to generate multiple completions in parallel.
 
-## 3. User Stories
+## 3. Security & Encryption
+
+The connection between the DCE Extension and the Proxy Server must be encrypted. The connection between the Proxy Server and the vLLM Backend can be over plain HTTP as it occurs on a trusted, internal network.
+
+-   **Mechanism:** A reverse proxy like Caddy or Nginx should be placed in front of the Node.js Proxy Server. This reverse proxy is responsible for terminating HTTPS traffic, managing TLS certificates (e.g., via Let's Encrypt), and forwarding the decrypted traffic to the Node.js application.
+-   **Reference:** For a detailed explanation of this architecture, see **`A93. DCE - vLLM Encryption in Transit Guide.md`**. For a sample configuration, see **`A91. AI Ascent - Caddyfile (Reference).md`**.
+
+## 4. User Stories
 
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
 | P3-LLM-01 | **Configure Remote Endpoint** | As a curator, I want to configure my DCE extension in the settings panel to point to my hosted proxy server URL, so it knows where to send prompts. | - The settings panel has a field for a "Remote Generation URL". |
 | P3-LLM-02 | **Automated Parallel Generation** | As a curator, after generating a `prompt.md`, I want to click a "Generate Responses" button that sends the prompt to my server and automatically populates the PCPP tabs with the 10 parallel responses from vLLM. | - A "Generate Responses" button appears in the PCPP. <br> - Clicking it sends the `prompt.md` content to the configured proxy URL. <br> - The server forwards this to vLLM with `n=10`. <br> - The server returns an array of 10 response strings. <br> - The PCPP automatically populates the content of the first 10 response tabs with the results. |
 
-## 4. Technical Implementation Plan
+## 5. Technical Implementation Plan
 
 ### Step 1: vLLM Server Setup (Curator Task)
 -   Set up a Python environment with vLLM.
@@ -25031,12 +25078,6 @@ The system will consist of three main components:
 -   Add a "Generate Responses" button to the PCPP UI.
 -   Implement the `fetch` call to the proxy server.
 -   Implement the logic to take the returned array of responses and populate the `tabs` state in the PCPP.
-
-## 5. Considerations
-
--   **Scalability & Cost:** Serving a high-performance model with vLLM requires significant GPU resources. Providing this as a service to other users has major cost and infrastructure implications.
--   **Security:** The proxy server must have an authentication mechanism (e.g., API key) to prevent unauthorized use of the expensive GPU resources.
--   **Privacy:** This architecture involves sending user code and prompts to a remote server. This has privacy implications that must be made clear to any user of the extension.
 </file_artifact>
 
 <file path="src/Artifacts/A90. AI Ascent - server.ts (Reference).md">
@@ -25409,7 +25450,7 @@ www.aiascent.game {
 # Artifact A92: DCE - vLLM Setup Guide
 # Date Created: C30
 # Author: AI Model & Curator
-# Updated on: C31 (Add Windows-specific instructions)
+# Updated on: C33 (Address uvloop incompatibility on Windows and suggest winloop)
 
 - **Key/Value for A0:**
 - **Description:** A step-by-step guide for setting up the vLLM inference server with an OpenAI-compatible API endpoint for use with the DCE.
@@ -25421,7 +25462,7 @@ This guide provides the necessary steps to install `vLLM` and run a large langua
 
 ## 2. Prerequisites
 
-*   **OS:** Linux (Recommended) or Windows with WSL2.
+*   **OS:** Linux (Recommended) or Windows with WSL2. vLLM can run on native Windows, but some performance-enhancing libraries may not be available.
 *   **Python:** Version 3.9 - 3.12.
 *   **GPU:** An NVIDIA GPU with CUDA drivers installed. Compute capability 7.0 or higher is recommended (e.g., V100, T4, RTX 20-series or newer).
 *   **Package Manager:** `pip` is required. Using a virtual environment manager like `venv` or `conda` is highly recommended to avoid package conflicts.
@@ -25448,12 +25489,24 @@ vllm-env\Scripts\activate
 # source vllm-env/bin/activate
 ```
 
-### Step 2: Install vLLM
+### Step 2: Install vLLM and Performance Libraries
 
-With your virtual environment activated, install `vLLM` using `pip`. The library will automatically detect your CUDA version and install the appropriate PyTorch binaries.
+With your virtual environment activated, install `vLLM`. The networking libraries are platform-specific.
 
 ```bash
+# First, install vLLM itself
 pip install vllm
+```
+
+#### For Linux/WSL Users (Recommended):
+For the best performance, install `uvloop`.```bash
+pip install uvloop
+```
+
+#### For Native Windows Users (Optional, Recommended):
+The `uvloop` library is **not compatible with Windows**. The vLLM server will still work using Python's standard `asyncio` library. However, for significantly better performance, you can install `winloop`, a Windows-compatible port of `uvloop`.```bash
+# This step is optional but recommended for performance on Windows
+pip install winloop
 ```
 
 ### Step 3: Launch the OpenAI-Compatible Server
@@ -25469,7 +25522,7 @@ python -m vllm.entrypoints.openai.api_server --model "unsloth/gpt-oss-20b"
 
 The first time you run this, it will download the model weights, which may take some time. Subsequent launches will be much faster as it will use the cached model.
 
-### Step 4: Server Customization (Optional Arguments)
+## 4. Server Customization (Optional Arguments)
 
 You can customize the server's behavior with various command-line arguments.
 
@@ -25496,13 +25549,86 @@ You can customize the server's behavior with various command-line arguments.
       --trust-remote-code
     ```
 
-### Step 5: Connect from DCE
+## 5. Production Deployment & Security
 
-Once the server is running, you can configure a "Model Card" in the DCE settings to connect to it.
+For a production or shared environment, it is **highly recommended** to run the vLLM server behind a reverse proxy (like Caddy or Nginx).
 
-*   **Endpoint URL:** `http://<SERVER_IP_ADDRESS>:8000/v1/chat/completions` (or `/v1/completions` depending on the model).
-*   **API Key:** Can be left blank.
+-   **Purpose:** The reverse proxy will handle HTTPS termination (SSL/TLS certificates), providing a secure `https` endpoint for the DCE extension to connect to. The proxy then forwards the traffic to the internal `http://...` vLLM server.
+-   **Architecture:** For a detailed explanation of this secure architecture, see **`A89. DCE - Phase 3 - Hosted LLM & vLLM Integration Plan.md`**.
+-   **Example:** A sample `Caddyfile` for this purpose can be found in **`A91. AI Ascent - Caddyfile (Reference).md`**.
 
-The server is now ready to receive requests from the DCE extension via your proxy.
+## 6. Troubleshooting
+
+-   **Error:** `RuntimeError: uvloop does not support Windows at the moment`
+    -   **Cause:** You are trying to install `uvloop` on a native Windows environment, where it is not supported.
+    -   **Solution:** Skip the `pip install uvloop` step. The server will fall back to the standard `asyncio` event loop. For better performance on Windows, consider installing `winloop` instead.
+</file_artifact>
+
+<file path="src/Artifacts/A93. DCE - vLLM Encryption in Transit Guide.md">
+# Artifact A93: DCE - vLLM Encryption in Transit Guide
+# Date Created: C32
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** Explains the standard architectural pattern of using a reverse proxy to provide HTTPS encryption for the vLLM API endpoint.
+- **Tags:** guide, security, encryption, https, proxy, caddy, vllm
+
+## 1. The Challenge: Securing LLM Traffic
+
+When the Data Curation Environment (DCE) extension communicates with a remote vLLM server, the data (which includes source code and prompts) must be encrypted in transit to prevent eavesdropping. The vLLM OpenAI-compatible server runs on plain `http` by default, which is unencrypted. Connecting to an `http` endpoint over the public internet is insecure.
+
+The goal is to provide a secure `https` endpoint for the DCE extension while allowing the vLLM server to run in its default, simple configuration.
+
+## 2. The Solution: The Reverse Proxy Pattern
+
+The standard and most robust solution is to place a **reverse proxy** in front of the vLLM server. The reverse proxy acts as a secure, public-facing gateway.
+
+### 2.1. How It Works
+
+The data flow is as follows:
+
+```
++---------------+      +----------------------+      +----------------------+
+| DCE Extension |----->|  Reverse Proxy       |----->|   vLLM Server        |
+| (Client)      |      |  (e.g., Caddy/Nginx) |      | (Internal Service)   |
+|               |      |                      |      |                      |
+| (HTTPS Request)      |  (Handles TLS/SSL)   |      |  (HTTP Request)      |
++---------------+      +----------------------+      +----------------------+
+```
+
+1.  **Encrypted Connection:** The DCE extension makes a request to a secure URL, like `https://my-llm-server.com`. This connection is encrypted using HTTPS.
+2.  **HTTPS Termination:** The reverse proxy server (e.g., Caddy) receives this encrypted request. Its primary job is to handle the complexity of TLS/SSL certificates. It decrypts the request.
+3.  **Forwarding:** After decrypting the request, the proxy forwards it to the internal vLLM server over a trusted local network (e.g., to `http://localhost:8000`). Since this traffic never leaves the secure server environment, it does not need to be re-encrypted.
+4.  **Response:** The vLLM server processes the request and sends its `http` response back to the proxy, which then encrypts it and sends it back to the DCE extension over `https`.
+
+### 2.2. Benefits of this Architecture
+
+-   **Security:** All traffic over the public internet is encrypted.
+-   **Simplicity:** The vLLM server itself does not need to be configured with complex SSL certificates. Tools like Caddy can automatically provision and renew free Let's Encrypt certificates, making setup very easy.
+-   **Flexibility:** The proxy can also handle load balancing, caching, and routing to multiple backend services if needed in the future.
+
+## 3. Implementation Example with Caddy
+
+Caddy is a modern web server that makes this process extremely simple.
+
+-   **Prerequisites:** You need a server with a public IP address and a domain name pointing to it.
+-   **Example `Caddyfile`:**
+    ```caddy
+    # Your domain name
+    my-llm-server.com {
+        # Caddy will automatically handle HTTPS for this domain
+        
+        # Log all requests for debugging
+        log {
+            output file /var/log/caddy/vllm.log
+        }
+
+        # Reverse proxy all requests to the vLLM server running on port 8000
+        reverse_proxy localhost:8000
+    }
+    ```
+-   **Reference:** For a more detailed example of a production `Caddyfile` used in a similar project, see **`A91. AI Ascent - Caddyfile (Reference).md`**.
+
+This architecture is the industry standard for securing web services and is the recommended approach for deploying the vLLM server for use with the DCE.
 </file_artifact>
 

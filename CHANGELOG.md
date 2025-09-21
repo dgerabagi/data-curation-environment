@@ -2,6 +2,11 @@
 
 All notable changes to the "Data Curation Environment" extension will be documented in this file.
 
+## [0.1.10] - Q3 2025
+
+### Fixed
+- **Cost Calculation Display:** Fixed an issue where the estimated prompt cost was not being correctly displayed on the frontend, often remaining at $0.00 despite changes in context. The calculation is now correctly triggered and displayed.
+
 ## [0.1.9] - Q3 2025
 
 ### Added
