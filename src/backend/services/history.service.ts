@@ -1,5 +1,5 @@
 // src/backend/services/history.service.ts
-// Updated on: C42 (Add createNewCycleWithResponses)
+// Updated on: C43 (Return newMaxCycle from createNewCycleWithResponses)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -159,7 +159,7 @@ export class HistoryService {
         }
     }
 
-    public async createNewCycleWithResponses(responses: string[], tabCount: number): Promise<number> {
+    public async createNewCycleWithResponses(responses: string[], tabCount: number): Promise<{ newCycleId: number; newMaxCycle: number; }> {
         const history = await this._readHistoryFile();
         const newCycleId = (history.cycles.reduce((maxId, cycle) => Math.max(maxId, cycle.cycleId), 0)) + 1;
         
@@ -181,7 +181,9 @@ export class HistoryService {
         history.cycles.push(newCycle);
         await this._writeHistoryFile(history);
         Services.loggerService.log(`Created new cycle ${newCycleId} with ${responses.length} responses.`);
-        return newCycleId;
+        
+        const newMaxCycle = Math.max(newCycleId, ...history.cycles.map(c => c.cycleId));
+        return { newCycleId, newMaxCycle };
     }
 
     public async deleteCycle(cycleId: number): Promise<number> {

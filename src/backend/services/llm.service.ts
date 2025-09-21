@@ -1,5 +1,5 @@
 // src/backend/services/llm.service.ts
-// New file in C37
+// Updated on: C43 (Fix response parsing)
 import { Services } from './services';
 import fetch from 'node-fetch';
 import { PcppCycle } from '@/common/types/pcpp.types';
@@ -29,18 +29,15 @@ export class LlmService {
         try {
             Services.loggerService.log(`Sending batch request for ${count} responses to: ${endpointUrl}`);
             
-            // This is a simplified example. A real implementation would need to
-            // construct a proper OpenAI-compatible request body.
             const response = await fetch(endpointUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    // Assuming the endpoint supports a similar structure to OpenAI completions
-                    model: "local-model", // This might need to be configurable
+                    model: "local-model",
                     prompt: prompt,
                     n: count,
-                    max_tokens: 4096, // A reasonable default
-                    stream: false // For this cycle, we are not streaming
+                    max_tokens: 4096,
+                    stream: false
                 }),
             });
 
@@ -51,9 +48,9 @@ export class LlmService {
 
             const responseData = await response.json() as any;
             
-            // Assuming OpenAI-like response structure
-            if (responseData.choices && Array.isArray(responseData.choices)) {
-                const results = responseData.choices.map((choice: any) => choice.text || '');
+            // C43 Fix: The proxy returns a { "responses": [...] } object.
+            if (responseData.responses && Array.isArray(responseData.responses)) {
+                const results = responseData.responses;
                 Services.loggerService.log(`Received ${results.length} responses from LLM.`);
                 return results;
             } else {
@@ -62,7 +59,8 @@ export class LlmService {
 
         } catch (error: any) {
             Services.loggerService.error(`Failed to generate batch responses: ${error.message}`);
-            return [];
+            // Return an empty array of the correct size to create an empty cycle for inspection
+            return Array(count).fill('');
         }
     }
 }

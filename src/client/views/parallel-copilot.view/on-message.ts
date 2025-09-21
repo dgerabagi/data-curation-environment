@@ -1,4 +1,4 @@
-// Updated on: C42 (Refactor batch generation handler)
+// Updated on: C43 (Pass newMaxCycle to SendBatchGenerationComplete)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -15,8 +15,8 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         loggerService.log(`Received RequestBatchGeneration for ${data.count} responses from cycle ${data.cycleData.cycleId}.`);
         const prompt = await promptService.generatePromptString(data.cycleData);
         const responses = await llmService.generateBatch(prompt, data.count, data.cycleData);
-        const newCycleId = await historyService.createNewCycleWithResponses(responses, data.cycleData.tabCount || 4);
-        serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId });
+        const { newCycleId, newMaxCycle } = await historyService.createNewCycleWithResponses(responses, data.cycleData.tabCount || 4);
+        serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId, newMaxCycle });
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestSettings, async () => {

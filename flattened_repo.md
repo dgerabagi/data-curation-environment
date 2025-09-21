@@ -1,23 +1,23 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-21T21:45:12.254Z
+  Date Generated: 2025-09-21T22:28:15.406Z
   ---
-  Total Files: 181
-  Approx. Tokens: 468245
+  Total Files: 199
+  Approx. Tokens: 539963
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
-2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (9248 tokens)
-4. src\Artifacts\A0. DCE Master Artifact List.md (8565 tokens)
-5. src\Artifacts\A11. DCE - Regression Case Studies.md (5744 tokens)
-6. src\client\views\parallel-copilot.view\view.scss (5575 tokens)
-7. src\backend\services\prompt.service.ts (4919 tokens)
-8. src\backend\services\file-operation.service.ts (4526 tokens)
-9. src\client\components\tree-view\TreeView.tsx (4422 tokens)
-10. src\client\views\context-chooser.view\view.tsx (4033 tokens)
+2. GPT-OSS\templates\harmony_demo.html (27803 tokens)
+3. GPT-OSS\harmony_vllm_app.py (15557 tokens)
+4. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
+5. src\client\views\parallel-copilot.view\view.tsx (9334 tokens)
+6. src\Artifacts\A0. DCE Master Artifact List.md (8565 tokens)
+7. GPT-OSS\hackernews_response.json (6355 tokens)
+8. GPT-OSS\python\openai_harmony\__init__.py (6132 tokens)
+9. src\Artifacts\A11. DCE - Regression Case Studies.md (6081 tokens)
+10. src\client\views\parallel-copilot.view\view.scss (5575 tokens)
 
 <!-- Full File List -->
 1. public\copilot.svg - [Binary] Size: 445 Bytes
@@ -32,7 +32,7 @@
 10. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
 11. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
 12. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
-13. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 176 - Chars: 22976 - Tokens: 5744
+13. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 186 - Chars: 24323 - Tokens: 6081
 14. src\Artifacts\A11.1 DCE - New Regression Case Studies.md - Lines: 391 - Chars: 46197 - Tokens: 11550
 15. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5687 - Tokens: 1422
 16. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
@@ -126,7 +126,7 @@
 104. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
 105. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 106. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-107. src\backend\services\history.service.ts - Lines: 291 - Chars: 11626 - Tokens: 2907
+107. src\backend\services\history.service.ts - Lines: 293 - Chars: 11799 - Tokens: 2950
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 109. src\backend\services\prompt.service.ts - Lines: 372 - Chars: 19675 - Tokens: 4919
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
@@ -154,18 +154,18 @@
 132. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 79 - Chars: 3137 - Tokens: 785
 133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
 134. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-135. src\client\views\parallel-copilot.view\on-message.ts - Lines: 137 - Chars: 6731 - Tokens: 1683
+135. src\client\views\parallel-copilot.view\on-message.ts - Lines: 137 - Chars: 6775 - Tokens: 1694
 136. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 100 - Chars: 5002 - Tokens: 1251
 137. src\client\views\parallel-copilot.view\view.scss - Lines: 996 - Chars: 22300 - Tokens: 5575
 138. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 350 - Chars: 36992 - Tokens: 9248
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 363 - Chars: 37334 - Tokens: 9334
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
 143. src\client\views\settings.view\view.tsx - Lines: 120 - Chars: 6337 - Tokens: 1585
 144. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
 145. src\common\ipc\channels.enum.ts - Lines: 104 - Chars: 5689 - Tokens: 1423
-146. src\common\ipc\channels.type.ts - Lines: 106 - Chars: 8292 - Tokens: 2073
+146. src\common\ipc\channels.type.ts - Lines: 106 - Chars: 8324 - Tokens: 2081
 147. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 148. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 149. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
@@ -193,14 +193,32 @@
 171. src\Artifacts\A89. DCE - vLLM Integration and API Proxy Plan.md - Lines: 61 - Chars: 3736 - Tokens: 934
 172. src\Artifacts\A87. VCPG - vLLM High-Throughput Inference Plan.md - Lines: 56 - Chars: 4251 - Tokens: 1063
 173. src\Artifacts\A89. DCE - Phase 3 - Hosted LLM & vLLM Integration Plan.md - Lines: 95 - Chars: 7548 - Tokens: 1887
-174. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 249 - Chars: 10225 - Tokens: 2557
+174. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 357 - Chars: 15976 - Tokens: 3994
 175. src\Artifacts\A91. AI Ascent - Caddyfile (Reference).md - Lines: 54 - Chars: 2305 - Tokens: 577
 176. src\Artifacts\A92. DCE - vLLM Setup Guide.md - Lines: 70 - Chars: 4020 - Tokens: 1005
 177. src\Artifacts\A93. DCE - vLLM Encryption in Transit Guide.md - Lines: 65 - Chars: 3811 - Tokens: 953
 178. src\Artifacts\A94. DCE - Connecting to a Local LLM Guide.md - Lines: 42 - Chars: 2565 - Tokens: 642
 179. src\Artifacts\A95. DCE - LLM Connection Modes Plan.md - Lines: 54 - Chars: 4725 - Tokens: 1182
-180. src\backend\services\llm.service.ts - Lines: 68 - Chars: 2794 - Tokens: 699
+180. src\backend\services\llm.service.ts - Lines: 66 - Chars: 2574 - Tokens: 644
 181. src\backend\services\settings.service.ts - Lines: 44 - Chars: 1670 - Tokens: 418
+182. GPT-OSS\examples\test_tools.py - Lines: 69 - Chars: 1756 - Tokens: 439
+183. GPT-OSS\python\openai_harmony\__init__.py - Lines: 723 - Chars: 24526 - Tokens: 6132
+184. GPT-OSS\static\test_final_verification.html - Lines: 176 - Chars: 7891 - Tokens: 1973
+185. GPT-OSS\builtin_tool_instructions.py - Lines: 122 - Chars: 3044 - Tokens: 761
+186. GPT-OSS\custom_python_instruction.py - Lines: 59 - Chars: 1605 - Tokens: 402
+187. GPT-OSS\hackernews_response.json - Lines: 1 - Chars: 25417 - Tokens: 6355
+188. GPT-OSS\harmony_vllm_app.py - Lines: 1396 - Chars: 62225 - Tokens: 15557
+189. GPT-OSS\LICENSE - Lines: 21 - Chars: 1085 - Tokens: 272
+190. GPT-OSS\official_python_instruction.py - Lines: 10 - Chars: 742 - Tokens: 186
+191. GPT-OSS\python_function_wrapper.py - Lines: 103 - Chars: 3444 - Tokens: 861
+192. GPT-OSS\python_tool_wrapper.py - Lines: 164 - Chars: 6624 - Tokens: 1656
+193. GPT-OSS\README.md - Lines: 157 - Chars: 3863 - Tokens: 966
+194. GPT-OSS\requirements.txt - Lines: 35 - Chars: 530 - Tokens: 133
+195. GPT-OSS\run.sh - Lines: 21 - Chars: 538 - Tokens: 135
+196. GPT-OSS\setup.sh - Lines: 56 - Chars: 1657 - Tokens: 415
+197. GPT-OSS\vision_browser_tool.py - Lines: 318 - Chars: 12695 - Tokens: 3174
+198. GPT-OSS\vision_browser_wrapper.py - Lines: 258 - Chars: 10521 - Tokens: 2631
+199. GPT-OSS\templates\harmony_demo.html - Lines: 2859 - Chars: 111209 - Tokens: 27803
 
 <file path="public/copilot.svg">
 <metadata>
@@ -1254,7 +1272,7 @@ To enhance the data curation process, it is critical for the user to have immedi
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C41 (Add Proxy Server 404 case)
+# Updated on: C43 (Add API Contract Mismatch case)
 
 ## 1. Purpose
 
@@ -1266,14 +1284,24 @@ This document serves as a living record of persistent or complex bugs that have 
 
 ---
 
+### Case Study 038: API Contract Mismatch Causes `Invalid response structure` Error
+
+-   **Artifacts Affected:** `src/backend/services/llm.service.ts`, `A90. AI Ascent - server.ts (Reference).md`
+-   **Cycles Observed:** C43
+-   **Symptom:** When requesting batch generations, the process fails with the error `Failed to generate batch responses: Invalid response structure from LLM endpoint.`
+-   **Root Cause Analysis (RCA):** This is a classic API contract mismatch. The client-side service (`llm.service.ts`) was programmed to expect a standard OpenAI-compatible response structure, which includes a top-level `choices` array (e.g., `{ "choices": [...] }`). However, the `aiascent.game` proxy server, which it was calling, was designed to pre-process this response and return a simplified object with a different key: `{ "responses": [...] }`. The client's parsing logic failed because it could not find the expected `choices` key in the actual response it received.
+-   **Codified Solution & Best Practice:** When integrating two services, the client must be programmed to handle the exact data structure that the server provides. The server's API documentation or reference implementation (in this case, `A90`) is the source of truth. The client-side parsing logic must be aligned with the server's actual output format to prevent such errors.
+
+---
+
 ### Case Study 037: Proxy Server `curl` Test Returns `404 Not Found`
 
 -   **Artifacts Affected:** `A90. AI Ascent - server.ts (Reference).md`, `A89. DCE - Phase 3 - Hosted LLM & vLLM Integration Plan.md`
 -   **Cycles Observed:** C41
 -   **Symptom:** When testing the proxy server endpoint with a `curl` command, the server responds with `HTTP/1.1 404 Not Found` and an HTML body containing `Cannot POST /api/dce/proxy`.
--   **Root Cause Analysis (RCA):** This error is not a network failure; it's an application-level error from the Express.js server. It confirms the request successfully reached the server, but the server has no route handler defined that matches the specific path (`/api/dce/proxy`) and HTTP method (`POST`). [1, 2, 3] This is almost always caused by one of two things:
+-   **Root Cause Analysis (RCA):** This error is not a network failure; it's an application-level error from the Express.js server. It confirms the request successfully reached the server, but the server has no route handler defined that matches the specific path (`/api/dce/proxy`) and HTTP method (`POST`). This is almost always caused by one of two things:
     1.  A typo or mismatch in the route path defined in the `server.ts` file.
-    2.  The Node.js server process was not restarted after the new route handler code was added, so it is still running an old version of the code. [6]
+    2.  The Node.js server process was not restarted after the new route handler code was added, so it is still running an old version of the code.
 -   **Codified Solution & Best Practice:** When a `404 Not Found` is received from an Express server for a route that is believed to exist, the first diagnostic steps are always:
     1.  Meticulously verify the route path and HTTP method in the server's code (e.g., `app.post('/api/dce/proxy', ...)`).
     2.  Stop and restart the Node.js server process to ensure all code changes are loaded into memory. If using a process manager like `pm2`, use its restart command.
@@ -17157,7 +17185,7 @@ export class HighlightingService {
 
 <file path="src/backend/services/history.service.ts">
 // src/backend/services/history.service.ts
-// Updated on: C42 (Add createNewCycleWithResponses)
+// Updated on: C43 (Return newMaxCycle from createNewCycleWithResponses)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -17317,7 +17345,7 @@ export class HistoryService {
         }
     }
 
-    public async createNewCycleWithResponses(responses: string[], tabCount: number): Promise<number> {
+    public async createNewCycleWithResponses(responses: string[], tabCount: number): Promise<{ newCycleId: number; newMaxCycle: number; }> {
         const history = await this._readHistoryFile();
         const newCycleId = (history.cycles.reduce((maxId, cycle) => Math.max(maxId, cycle.cycleId), 0)) + 1;
         
@@ -17339,7 +17367,9 @@ export class HistoryService {
         history.cycles.push(newCycle);
         await this._writeHistoryFile(history);
         Services.loggerService.log(`Created new cycle ${newCycleId} with ${responses.length} responses.`);
-        return newCycleId;
+        
+        const newMaxCycle = Math.max(newCycleId, ...history.cycles.map(c => c.cycleId));
+        return { newCycleId, newMaxCycle };
     }
 
     public async deleteCycle(cycleId: number): Promise<number> {
@@ -20847,7 +20877,7 @@ export const viewConfig = {
 </file_artifact>
 
 <file path="src/client/views/parallel-copilot.view/on-message.ts">
-// Updated on: C42 (Refactor batch generation handler)
+// Updated on: C43 (Pass newMaxCycle to SendBatchGenerationComplete)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -20864,8 +20894,8 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         loggerService.log(`Received RequestBatchGeneration for ${data.count} responses from cycle ${data.cycleData.cycleId}.`);
         const prompt = await promptService.generatePromptString(data.cycleData);
         const responses = await llmService.generateBatch(prompt, data.count, data.cycleData);
-        const newCycleId = await historyService.createNewCycleWithResponses(responses, data.cycleData.tabCount || 4);
-        serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId });
+        const { newCycleId, newMaxCycle } = await historyService.createNewCycleWithResponses(responses, data.cycleData.tabCount || 4);
+        serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId, newMaxCycle });
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestSettings, async () => {
@@ -22103,7 +22133,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C42 (Refactor batch generation handler)
+// Updated on: C43 (Fix navigation logic on batch generation complete)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -22332,15 +22362,29 @@ const App = () => {
     const isReadyForNextCycle = React.useMemo(() => { const hasTitle = cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== ''; const hasContext = cycleContext.trim() !== ''; const hasSelectedResponse = selectedResponseId !== null; return hasTitle && hasContext && hasSelectedResponse; }, [cycleTitle, cycleContext, selectedResponseId]);
     const newCycleButtonDisabledReason = React.useMemo(() => { const reasons: string[] = []; if (!cycleTitle || cycleTitle.trim() === 'New Cycle' || cycleTitle.trim() === '') reasons.push("- A cycle title is required."); if (!cycleContext || cycleContext.trim() === '') reasons.push("- Cycle context cannot be empty."); if (!selectedResponseId) reasons.push("- A response must be selected."); return reasons.join('\n'); }, [cycleTitle, cycleContext, selectedResponseId]);
 
+    const handleCycleChange = React.useCallback((e: React.MouseEvent | null, newCycle: number) => {
+        e?.stopPropagation();
+        if (saveStatus !== 'saved') return;
+        // C43 Fix: Allow navigating to a cycle that is the new max cycle
+        if (newCycle >= 0 && (newCycle <= maxCycle || newCycle === maxCycle + 1)) {
+            setSelectedFilesForReplacement(new Set());
+            setCurrentCycle(newCycle);
+            clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle });
+            clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycle });
+            setWorkflowStep(null);
+        }
+    }, [saveStatus, maxCycle, clientIpc]);
+
     React.useEffect(() => { if (workflowStep === null) return; if (workflowStep === 'readyForNewCycle') return; if (workflowStep === 'awaitingGeneratePrompt') { if (isReadyForNextCycle) setWorkflowStep('awaitingGeneratePrompt'); return; } if (workflowStep === 'awaitingCycleTitle') { if (cycleTitle.trim() && cycleTitle.trim() !== 'New Cycle') { setWorkflowStep('awaitingGeneratePrompt'); } return; } if (workflowStep === 'awaitingCycleContext') { if (cycleContext.trim()) { setWorkflowStep('awaitingCycleTitle'); } return; } if (workflowStep === 'awaitingAccept') { return; } if (workflowStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestGitStatus, {}); return; } if (workflowStep === 'awaitingFileSelect') { if (selectedFilesForReplacement.size > 0) { setWorkflowStep('awaitingAccept'); } return; } if (workflowStep === 'awaitingResponseSelect') { if (selectedResponseId) { setWorkflowStep('awaitingBaseline'); } return; } if (workflowStep === 'awaitingSort') { if (isSortedByTokens) { setWorkflowStep('awaitingResponseSelect'); } return; } if (workflowStep === 'awaitingParse') { if (isParsedMode) { setWorkflowStep(isSortedByTokens ? 'awaitingResponseSelect' : 'awaitingSort'); } return; } const waitingForPaste = workflowStep?.startsWith('awaitingResponsePaste'); if (waitingForPaste) { for (let i = 1; i <= tabCount; i++) { if (!tabs[i.toString()]?.rawContent?.trim()) { setWorkflowStep(`awaitingResponsePaste_${i}`); return; } } setWorkflowStep('awaitingParse'); } }, [workflowStep, selectedFilesForReplacement, selectedResponseId, isSortedByTokens, isParsedMode, tabs, cycleContext, cycleTitle, tabCount, isReadyForNextCycle, clientIpc]);
     React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string, newMax?: number) => { setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setActiveTab(cycleData.activeTab || 1); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setWorkflowStep(cycleData.activeWorkflowStep || null); if (newMax) setMaxCycle(newMax); setSaveStatus('saved'); requestCostEstimation(); }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => { setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics)); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { logger.log(`[COST_ESTIMATION_RECEIVED] Tokens: ${totalTokens}, Cost: ${estimatedCost}`); setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { if (result.success) { setWorkflowStep(prevStep => { if (prevStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => { if (cycleId === stateRef.current.currentCycle) setSaveStatus('saved'); }); 
         clientIpc.onServerMessage(ServerToClientChannel.SendSettings, ({ settings }) => { setConnectionMode(settings.connectionMode) });
-        clientIpc.onServerMessage(ServerToClientChannel.SendBatchGenerationComplete, ({ newCycleId }) => {
+        clientIpc.onServerMessage(ServerToClientChannel.SendBatchGenerationComplete, ({ newCycleId, newMaxCycle }) => {
+            setMaxCycle(newMaxCycle);
             handleCycleChange(null, newCycleId);
         });
         clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); 
         clientIpc.sendToServer(ClientToServerChannel.RequestSettings, {});
-    }, [clientIpc, requestCostEstimation]);
+    }, [clientIpc, requestCostEstimation, handleCycleChange]);
     React.useEffect(() => { if (isParsedMode) parseAllTabs(); }, [isParsedMode, tabs, parseAllTabs]);
     React.useEffect(() => { if (!selectedFilePath) return; const currentTabData = tabs[activeTab.toString()]; if (currentTabData?.parsedContent) { const fileExistsInTab = currentTabData.parsedContent.files.some(f => f.path === selectedFilePath); if (!fileExistsInTab) setSelectedFilePath(null); } }, [activeTab, tabs, selectedFilePath]);
 
@@ -22360,7 +22404,6 @@ const App = () => {
     };
 
     // ... (rest of handlers and component return)
-    const handleCycleChange = (e: React.MouseEvent | null, newCycle: number) => { e?.stopPropagation(); if (saveStatus !== 'saved') return; if (newCycle >= 0 && newCycle <= maxCycle) { setSelectedFilesForReplacement(new Set()); setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycle }); setWorkflowStep(null); } };
     const handleSelectForViewing = (filePath: string) => { const newPath = selectedFilePath === filePath ? null : filePath; setSelectedFilePath(newPath); };
     const handleAcceptSelectedFiles = () => { if (selectedFilesForReplacement.size === 0) return; const filesToWrite: BatchWriteFile[] = []; selectedFilesForReplacement.forEach(compositeKey => { const [responseId, filePath] = compositeKey.split(':::'); const responseData = tabs[responseId]; if (responseData?.parsedContent) { const file = responseData.parsedContent.files.find(f => f.path === filePath); if (file) { const finalPath = pathOverrides.get(file.path) || file.path; filesToWrite.push({ path: finalPath, content: file.content }); } } }); if (filesToWrite.length > 0) { clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite }); } setWorkflowStep('awaitingCycleContext'); };
     const handleLinkFile = (originalPath: string) => { if (tempOverridePath.trim()) { setPathOverrides(prev => new Map(prev).set(originalPath, tempOverridePath.trim())); setFileExistenceMap(prev => new Map(prev).set(originalPath, true)); setTempOverridePath(''); handleSelectForViewing(originalPath); } };
@@ -22886,7 +22929,7 @@ export enum ServerToClientChannel {
 </file_artifact>
 
 <file path="src/common/ipc/channels.type.ts">
-// Updated on: C42 (Update batch generation channels)
+// Updated on: C43 (Update SendBatchGenerationComplete payload)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -22990,7 +23033,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.NotifySaveComplete ? { cycleId: number } :
     T extends ServerToClientChannel.SendSettings ? { settings: DceSettings } :
     T extends ServerToClientChannel.SendBatchGenerationResult ? { responses: string[], newCycleId: number } :
-    T extends ServerToClientChannel.SendBatchGenerationComplete ? { newCycleId: number } :
+    T extends ServerToClientChannel.SendBatchGenerationComplete ? { newCycleId: number; newMaxCycle: number; } :
     never;
 </file_artifact>
 
@@ -25051,12 +25094,103 @@ export interface PlayerState {
 }
 const players: Record<string, PlayerState> = {};
 
-// --- Socket.IO Connection Handling (omitted for brevity, no changes) ---
-// ... (existing socket.io logic)
+// --- Socket.IO Connection Handling ---
+io.on('connection', (socket) => {
+    logInfo('[SOCKET.IO]', `Player connected: ${socket.id}`);
+    (socket as any).playerState = {};
+    socket.on('identify', (data) => {
+        logInfo('[SOCKET.IO]', `Player identified: ${socket.id} as ${data.displayName} (User ID: ${data.userId})`);
+        const playerState: PlayerState = {
+            id: socket.id,
+            userId: data.userId,
+            x: data.x,
+            y: data.y,
+            direction: data.direction,
+            isMoving: false,
+            displayName: data.displayName,
+            founderKey: data.founderKey,
+            countryCode: data.countryCode,
+        };
+        players[socket.id] = playerState;
+        (socket as any).playerState = playerState;
+        socket.emit('playersUpdate', Object.values(players));
+        socket.broadcast.emit('playerJoined', players[socket.id]);
+        pvpSystem.handleRejoin(data.userId, socket.id);
+    });
+    socket.on('playerMove', (data) => {
+        if (players[socket.id]) {
+            players[socket.id] = { ...players[socket.id], ...data };
+            socket.broadcast.emit('playerMoved', players[socket.id]);
+        }
+    });
+    // --- Delegate Handlers ---
+    socket.on('get_ascentia_welcome', (payload) => handleAscentiaWelcome(socket, players, payload));
+    socket.on('start_ascentia_stream', (payload) => handleAscentiaStream(io, socket, players, payload));
+    socket.on('start_report_ascentia_stream', (payload) => handleReportAscentiaStream(io, socket, players, payload));
+    socket.on('start_chatbot_stream', (payload) => handlePlayerProductStream(socket, players, payload));
+    // --- PvP Handlers (Delegated to PvpSystem) ---
+    socket.on('send_pvp_challenge', (payload) => pvpSystem.handleChallenge(socket, players, payload));
+    socket.on('accept_pvp_challenge', (payload) => pvpSystem.handleAcceptChallenge(socket, players, payload));
+    socket.on('decline_pvp_challenge', (payload) => pvpSystem.handleDeclineChallenge(socket, players, payload));
+    socket.on('claim_pvp_rewards', (payload) => pvpSystem.claimRewards(players[socket.id]?.userId, payload.matchId));
+    socket.on('change_pvp_speed', (payload) => pvpSystem.handleChangeSpeed(players[socket.id]?.userId, payload.matchId, payload.requestedSpeed));
+    socket.on('send_poetry_battle_challenge', (payload) => {
+        const challenger = players[socket.id];
+        const target = players[payload.targetSocketId];
+        logInfo('[[SERVER]]', `Received 'send_poetry_battle_challenge' from ${challenger?.displayName ?? 'Unknown'} to ${target?.displayName ?? 'Unknown'} (socketId: ${payload.targetSocketId})`);
+        pvpSystem.handlePoetryBattleChallenge(socket, players, payload);
+    });
+    socket.on('accept_poetry_battle_challenge', (payload) => pvpSystem.handleAcceptPoetryBattleChallenge(socket, players, payload));
+    socket.on('decline_poetry_battle_challenge', (payload) => pvpSystem.handleDeclinePoetryBattleChallenge(socket, players, payload));
+    socket.on('poetry_battle_submit_move', (payload) => poetryBattleSystem.handlePlayerMove(socket, payload));
+    socket.on('submit_poetry_chatbot_data', (payload: { matchId: string, chatbotData: PoetryBattleChatbotData | null }) => {
+        pvpSystem.handleSubmitPoetryChatbotData(socket, players, payload);
+    });
+    socket.on('send_pvp_match_message', async (payload) => {
+        const logPrefix = '[SocketHandler:send_pvp_match_message]';
+        const senderState = players[socket.id];
+        if (!senderState) {
+            logWarn(logPrefix, `Received message from unidentified socket ${socket.id}`);
+            return;
+        }
+        try {
+            const senderDb = await prisma.leaderboardEntry.findUnique({
+                where: { userId: senderState.userId },
+                include: { user: { select: { displayName: true, countryCode: true } } }
+            });
+            if (!senderDb || !senderDb.user) {
+                logError(logPrefix, `Could not find DB entry for sender ${senderState.userId}`);
+                return;
+            }
+            const senderProfile: PlayerProfile = {
+                userId: senderState.userId,
+                displayName: senderDb.user.displayName ?? 'Player',
+                companyName: senderDb.companyName ?? 'Company',
+                agentName: senderDb.gameAiAgentName ?? 'Agent',
+                elo: senderDb.highestGameAIElo,
+                countryCode: senderDb.user.countryCode,
+                socketId: senderState.id,
+            };
+            pvpSystem.handleMatchChatMessage(senderState.userId, payload.matchId, payload.message, senderProfile);
+        } catch (error) {
+            logError(logPrefix, `Error constructing sender profile for chat message.`, error);
+        }
+    });
 
-// --- PvpSystem Global Timer (omitted for brevity, no changes) ---
-// ... (existing setInterval logic)
+    socket.on('sendMessage', (payload) => pvpSystem.handleLobbyChatMessage(io, socket, players, payload));
 
+    socket.on('disconnect', (reason) => {
+        logInfo('[SOCKET.IO]', `Player disconnected: ${socket.id}. Reason: ${reason}`);
+        pvpSystem.handleDisconnect(socket.id, players);
+        delete players[socket.id];
+        io.emit('playerLeft', { id: socket.id });
+    });
+});
+
+// --- PvpSystem Global Timer ---
+setInterval(() => {
+    pvpSystem.tickMatches(1); // Tick every 1 second
+}, 1000);
 // --- Middleware and API Routes ---
 app.use(cookieParser());
 app.use(express.json({ limit: '50mb' })); // Increase limit for large prompts
@@ -25107,7 +25241,7 @@ app.post('/api/dce/proxy', async (req, res) => {
         }
     }
 
-    const { prompt, n = 10, max_tokens = 4096, stop = ["</file_artifact>"] } = req.body;
+    const { prompt, n = 10, max_tokens = 131000, stop = ["</file_artifact>"] } = req.body;
 
     if (!prompt) {
         logError('[DCE]', 'Bad request: Missing prompt content.');
@@ -25151,7 +25285,24 @@ app.post('/api/dce/proxy', async (req, res) => {
 
 
 // NEW: TTS Proxy Route (omitted for brevity, no changes)
-// ... (existing TTS logic)
+app.post('/api/tts/generate', async (req, res) => {
+    try {
+        const { text } = req.body;
+        if (!text || typeof text !== 'string') {
+            return res.status(400).send('Invalid request: "text" field is required.');
+        }
+        const audioStream = await generateSpeech(text);
+        if (audioStream) {
+            res.setHeader('Content-Type', 'audio/wav');
+            audioStream.pipe(res);
+        } else {
+            res.status(500).send('Failed to generate speech.');
+        }
+    } catch (error) {
+        logError('[API:TTS]', 'Error in TTS generation route', error);
+        res.status(500).send('Internal server error during TTS generation.');
+    }
+});
 
 
 // --- Static File Serving (Production Only) ---
@@ -25488,7 +25639,7 @@ The workflow is now designed to be more robust and atomic, with the backend hand
 
 <file path="src/backend/services/llm.service.ts">
 // src/backend/services/llm.service.ts
-// New file in C37
+// Updated on: C43 (Fix response parsing)
 import { Services } from './services';
 import fetch from 'node-fetch';
 import { PcppCycle } from '@/common/types/pcpp.types';
@@ -25518,18 +25669,15 @@ export class LlmService {
         try {
             Services.loggerService.log(`Sending batch request for ${count} responses to: ${endpointUrl}`);
             
-            // This is a simplified example. A real implementation would need to
-            // construct a proper OpenAI-compatible request body.
             const response = await fetch(endpointUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    // Assuming the endpoint supports a similar structure to OpenAI completions
-                    model: "local-model", // This might need to be configurable
+                    model: "local-model",
                     prompt: prompt,
                     n: count,
-                    max_tokens: 4096, // A reasonable default
-                    stream: false // For this cycle, we are not streaming
+                    max_tokens: 4096,
+                    stream: false
                 }),
             });
 
@@ -25540,9 +25688,9 @@ export class LlmService {
 
             const responseData = await response.json() as any;
             
-            // Assuming OpenAI-like response structure
-            if (responseData.choices && Array.isArray(responseData.choices)) {
-                const results = responseData.choices.map((choice: any) => choice.text || '');
+            // C43 Fix: The proxy returns a { "responses": [...] } object.
+            if (responseData.responses && Array.isArray(responseData.responses)) {
+                const results = responseData.responses;
                 Services.loggerService.log(`Received ${results.length} responses from LLM.`);
                 return results;
             } else {
@@ -25551,7 +25699,8 @@ export class LlmService {
 
         } catch (error: any) {
             Services.loggerService.error(`Failed to generate batch responses: ${error.message}`);
-            return [];
+            // Return an empty array of the correct size to create an empty cycle for inspection
+            return Array(count).fill('');
         }
     }
 }
@@ -25602,5 +25751,6605 @@ export class SettingsService {
         }
     }
 }
+</file_artifact>
+
+<file path="GPT-OSS/examples/test_tools.py">
+#!/usr/bin/env python3
+"""
+Example script to test the Harmony tools
+"""
+
+import requests
+import json
+
+# Test the Python tool
+def test_python_tool():
+    """Test Python execution"""
+    print("Testing Python tool...")
+    
+    response = requests.post(
+        "http://localhost:5002/chat",
+        json={
+            "messages": [
+                {
+                    "role": "user",
+                    "content": "Calculate the 1000th prime number"
+                }
+            ],
+            "model": "meta-llama/Llama-3.2-3B-Instruct",
+            "temperature": 0.7,
+            "stream": False,
+            "tools": ["python"]
+        }
+    )
+    
+    print(f"Status: {response.status_code}")
+    print(f"Response: {response.json()}")
+
+# Test the browser tool
+def test_browser_tool():
+    """Test browser navigation"""
+    print("\nTesting Browser tool...")
+    
+    response = requests.post(
+        "http://localhost:5002/chat",
+        json={
+            "messages": [
+                {
+                    "role": "user",
+                    "content": "Go to example.com and tell me what you see"
+                }
+            ],
+            "model": "meta-llama/Llama-3.2-3B-Instruct",
+            "temperature": 0.7,
+            "stream": False,
+            "tools": ["browser"]
+        }
+    )
+    
+    print(f"Status: {response.status_code}")
+    print(f"Response: {response.json()}")
+
+if __name__ == "__main__":
+    print("Make sure the Harmony app is running on http://localhost:5002")
+    print("=" * 50)
+    
+    try:
+        test_python_tool()
+    except Exception as e:
+        print(f"Python tool test failed: {e}")
+    
+    try:
+        test_browser_tool()
+    except Exception as e:
+        print(f"Browser tool test failed: {e}")
+</file_artifact>
+
+<file path="GPT-OSS/python/openai_harmony/__init__.py">
+"""Python wrapper around the Rust implementation of *harmony*.
+
+The heavy lifting (tokenisation, rendering, parsing, …) is implemented in
+Rust.  The thin bindings are available through the private ``openai_harmony``
+extension module which is compiled via *maturin* / *PyO3*.
+
+This package provides a small, typed convenience layer that mirrors the public
+API of the Rust crate so that it can be used from Python code in an
+idiomatic way (``dataclasses``, ``Enum``s, …).
+"""
+
+from __future__ import annotations
+
+import functools
+import json
+from enum import Enum
+from typing import (
+    AbstractSet,
+    Any,
+    Collection,
+    Dict,
+    List,
+    Literal,
+    Optional,
+    Pattern,
+    Sequence,
+    TypeVar,
+    Union,
+)
+
+import re
+from pydantic import BaseModel, Field
+
+# Re-export the low-level Rust bindings under a private name so that we can
+# keep the *public* namespace clean and purely Pythonic.
+try:
+    from .openai_harmony import (
+        HarmonyError as HarmonyError,  # expose the actual Rust error directly
+    )
+    from .openai_harmony import PyHarmonyEncoding as _PyHarmonyEncoding  # type: ignore
+    from .openai_harmony import (
+        PyStreamableParser as _PyStreamableParser,  # type: ignore
+    )
+    from .openai_harmony import (
+        load_harmony_encoding as _load_harmony_encoding,  # type: ignore
+    )
+
+except ModuleNotFoundError:  # pragma: no cover – raised during type-checking
+    # When running *mypy* without the compiled extension in place we still want
+    # to succeed.  Therefore we create dummy stubs that satisfy the type
+    # checker.  They will, however, raise at **runtime** if accessed.
+
+    class _Stub:  # pylint: disable=too-few-public-methods
+        def __getattr__(self, name: str) -> None:  # noqa: D401
+            raise RuntimeError(
+                "The compiled harmony bindings are not available. Make sure to "
+                "build the project with `maturin develop` before running this "
+                "code."
+            )
+
+    _load_harmony_encoding = _Stub()  # type: ignore
+    _PyHarmonyEncoding = _Stub()  # type: ignore
+    _PyStreamableParser = _Stub()  # type: ignore
+    _HarmonyError = RuntimeError
+
+
+def _special_token_regex(tokens: frozenset[str]) -> Pattern[str]:
+    inner = "|".join(re.escape(token) for token in tokens)
+    return re.compile(f"({inner})")
+
+
+def raise_disallowed_special_token(token: str) -> None:
+    raise HarmonyError(
+        "Encountered text corresponding to disallowed special token "
+        f"{token!r}.\n"
+        "If you want this text to be encoded as a special token, "
+        f"pass it to `allowed_special`, e.g. `allowed_special={{'{token}', ...}}`.\n"
+        "If you want this text to be encoded as normal text, disable the check for this token "
+        f"by passing `disallowed_special=(enc.special_tokens_set - {{'{token}'}})`.\n"
+        "To disable this check for all special tokens, pass `disallowed_special=()`.\n"
+    )
+
+
+# ---------------------------------------------------------------------------
+# Chat-related data-structures (mirroring ``src/chat.rs``)
+# ---------------------------------------------------------------------------
+
+
+class Role(str, Enum):
+    """The role of a message author (mirrors ``chat::Role``)."""
+
+    USER = "user"
+    ASSISTANT = "assistant"
+    SYSTEM = "system"
+    DEVELOPER = "developer"
+    TOOL = "tool"
+
+    @classmethod
+    def _missing_(cls, value: object) -> "Role":  # type: ignore[override]
+        raise ValueError(f"Unknown role: {value!r}")
+
+
+class Author(BaseModel):
+    role: Role
+    name: Optional[str] = None
+
+    @classmethod
+    def new(cls, role: Role, name: str) -> "Author":  # noqa: D401 – keep parity with Rust API
+        return cls(role=role, name=name)
+
+
+# Content hierarchy ---------------------------------------------------------
+
+
+T = TypeVar("T")
+
+
+class Content(BaseModel):  # noqa: D101 – simple wrapper
+    def to_dict(self) -> Dict[str, Any]:
+        raise NotImplementedError
+
+
+class TextContent(Content):
+    text: str
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {"type": "text", "text": self.text}
+
+
+class ToolDescription(BaseModel):
+    name: str
+    description: str
+    parameters: Optional[dict] = None
+
+    @classmethod
+    def new(
+        cls, name: str, description: str, parameters: Optional[dict] = None
+    ) -> "ToolDescription":  # noqa: D401
+        return cls(name=name, description=description, parameters=parameters)
+
+
+class ReasoningEffort(str, Enum):
+    LOW = "Low"
+    MEDIUM = "Medium"
+    HIGH = "High"
+
+
+class ChannelConfig(BaseModel):
+    valid_channels: List[str]
+    channel_required: bool
+
+    @classmethod
+    def require_channels(cls, channels: List[str]) -> "ChannelConfig":  # noqa: D401
+        return cls(valid_channels=channels, channel_required=True)
+
+
+class ToolNamespaceConfig(BaseModel):
+    name: str
+    description: Optional[str] = None
+    tools: List[ToolDescription]
+
+    @staticmethod
+    def browser() -> "ToolNamespaceConfig":
+        from .openai_harmony import (
+            get_tool_namespace_config as _get_tool_namespace_config,
+        )
+
+        cfg = _get_tool_namespace_config("browser")
+        return ToolNamespaceConfig(**cfg)
+
+    @staticmethod
+    def python() -> "ToolNamespaceConfig":
+        from .openai_harmony import (
+            get_tool_namespace_config as _get_tool_namespace_config,
+        )
+
+        cfg = _get_tool_namespace_config("python")
+        return ToolNamespaceConfig(**cfg)
+
+
+class SystemContent(Content):
+    model_identity: Optional[str] = (
+        "You are ChatGPT, a large language model trained by OpenAI."
+    )
+    reasoning_effort: Optional[ReasoningEffort] = ReasoningEffort.MEDIUM
+    conversation_start_date: Optional[str] = None
+    knowledge_cutoff: Optional[str] = "2024-06"
+    channel_config: Optional[ChannelConfig] = Field(
+        default_factory=lambda: ChannelConfig.require_channels(
+            ["analysis", "commentary", "final"]
+        )
+    )
+    tools: Optional[dict[str, ToolNamespaceConfig]] = None
+
+    @classmethod
+    def new(cls) -> "SystemContent":
+        return cls()
+
+    # Fluent interface ------------------------------------------------------
+
+    def with_model_identity(self, model_identity: str) -> "SystemContent":
+        self.model_identity = model_identity
+        return self
+
+    def with_reasoning_effort(
+        self, reasoning_effort: ReasoningEffort
+    ) -> "SystemContent":
+        self.reasoning_effort = reasoning_effort
+        return self
+
+    def with_conversation_start_date(
+        self, conversation_start_date: str
+    ) -> "SystemContent":
+        self.conversation_start_date = conversation_start_date
+        return self
+
+    def with_knowledge_cutoff(self, knowledge_cutoff: str) -> "SystemContent":
+        self.knowledge_cutoff = knowledge_cutoff
+        return self
+
+    def with_channel_config(self, channel_config: ChannelConfig) -> "SystemContent":
+        self.channel_config = channel_config
+        return self
+
+    def with_required_channels(self, channels: list[str]) -> "SystemContent":
+        self.channel_config = ChannelConfig.require_channels(channels)
+        return self
+
+    def with_tools(self, ns_config: ToolNamespaceConfig) -> "SystemContent":
+        if self.tools is None:
+            self.tools = {}
+        self.tools[ns_config.name] = ns_config
+        return self
+
+    def with_browser_tool(self) -> "SystemContent":
+        return self.with_tools(ToolNamespaceConfig.browser())
+
+    def with_python_tool(self) -> "SystemContent":
+        return self.with_tools(ToolNamespaceConfig.python())
+
+    def to_dict(self) -> dict:
+        out = self.model_dump(exclude_none=True)
+        out["type"] = "system_content"
+        return out
+
+    @classmethod
+    def from_dict(cls, raw: dict) -> "SystemContent":
+        return cls(**raw)
+
+
+class DeveloperContent(Content):
+    instructions: Optional[str] = None
+    tools: Optional[dict[str, ToolNamespaceConfig]] = None
+
+    @classmethod
+    def new(cls) -> "DeveloperContent":
+        return cls()
+
+    def with_instructions(self, instructions: str) -> "DeveloperContent":
+        self.instructions = instructions
+        return self
+
+    def with_tools(self, ns_config: ToolNamespaceConfig) -> "DeveloperContent":
+        if self.tools is None:
+            self.tools = {}
+        self.tools[ns_config.name] = ns_config
+        return self
+
+    def with_function_tools(
+        self, tools: Sequence[ToolDescription]
+    ) -> "DeveloperContent":
+        return self.with_tools(
+            ToolNamespaceConfig(name="functions", description=None, tools=list(tools))
+        )
+
+    def to_dict(self) -> dict:
+        out = self.model_dump(exclude_none=True)
+        out["type"] = "developer_content"
+        return out
+
+    @classmethod
+    def from_dict(cls, raw: dict) -> "DeveloperContent":
+        return cls(**raw)
+
+
+# Message & Conversation -----------------------------------------------------
+
+
+class Message(BaseModel):
+    author: Author
+    content: List[Content] = Field(default_factory=list)
+    channel: Optional[str] = None
+    recipient: Optional[str] = None
+    content_type: Optional[str] = None
+
+    # ------------------------------------------------------------------
+    # Convenience constructors (mirroring the Rust API)
+    # ------------------------------------------------------------------
+
+    @classmethod
+    def from_author_and_content(
+        cls, author: Author, content: Union[str, Content]
+    ) -> "Message":
+        if isinstance(content, str):
+            content = TextContent(text=content)
+        return cls(author=author, content=[content])
+
+    @classmethod
+    def from_role_and_content(
+        cls, role: Role, content: Union[str, Content]
+    ) -> "Message":  # noqa: D401 – parity with Rust API
+        return cls.from_author_and_content(Author(role=role), content)
+
+    @classmethod
+    def from_role_and_contents(
+        cls, role: Role, contents: Sequence[Content]
+    ) -> "Message":
+        return cls(author=Author(role=role), content=list(contents))
+
+    # ------------------------------------------------------------------
+    # Builder helpers
+    # ------------------------------------------------------------------
+
+    def adding_content(self, content: Union[str, Content]) -> "Message":
+        if isinstance(content, str):
+            content = TextContent(text=content)
+        self.content.append(content)
+        return self
+
+    def with_channel(self, channel: str) -> "Message":
+        self.channel = channel
+        return self
+
+    def with_recipient(self, recipient: str) -> "Message":
+        self.recipient = recipient
+        return self
+
+    def with_content_type(self, content_type: str) -> "Message":
+        self.content_type = content_type
+        return self
+
+    # ------------------------------------------------------------------
+    # Serialisation helpers
+    # ------------------------------------------------------------------
+
+    def to_dict(self) -> Dict[str, Any]:  # noqa: D401 – simple mapper
+        out: Dict[str, Any] = {
+            **self.author.model_dump(),
+            "content": [c.to_dict() for c in self.content],
+        }
+        if self.channel is not None:
+            out["channel"] = self.channel
+        if self.recipient is not None:
+            out["recipient"] = self.recipient
+        if self.content_type is not None:
+            out["content_type"] = self.content_type
+        return out
+
+    def to_json(self) -> str:  # noqa: D401
+        return json.dumps(self.to_dict())
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> "Message":
+        # Simple, sufficient implementation for test-roundtrip purposes.
+        role = Role(data["role"])
+        author = Author(role=role, name=data.get("name"))
+
+        contents: List[Content] = []
+
+        raw_content = data["content"]
+
+        # The Rust side serialises *single* text contents as a **plain string**
+        # for convenience.  Detect this shortcut and normalise it to the list
+        # representation that the rest of the Python code expects.
+        if isinstance(raw_content, str):
+            raw_content = [{"type": "text", "text": raw_content}]
+
+        for raw in raw_content:
+            if raw.get("type") == "text":
+                contents.append(TextContent(**raw))
+            elif raw.get("type") == "system_content":
+                contents.append(SystemContent(**raw))
+            elif raw.get("type") == "developer_content":
+                contents.append(DeveloperContent(**raw))
+            else:  # pragma: no cover – unknown variant
+                raise ValueError(f"Unknown content variant: {raw}")
+
+        msg = cls(author=author, content=contents)
+        msg.channel = data.get("channel")
+        msg.recipient = data.get("recipient")
+        msg.content_type = data.get("content_type")
+        return msg
+
+
+class Conversation(BaseModel):
+    messages: List[Message] = Field(default_factory=list)
+
+    @classmethod
+    def from_messages(cls, messages: Sequence[Message]) -> "Conversation":  # noqa: D401
+        return cls(messages=list(messages))
+
+    def __iter__(self):
+        return iter(self.messages)
+
+    # Serialisation helpers -------------------------------------------------
+
+    def to_dict(self) -> Dict[str, Any]:  # noqa: D401
+        return {"messages": [m.to_dict() for m in self.messages]}
+
+    def to_json(self) -> str:  # noqa: D401
+        return json.dumps(self.to_dict())
+
+    @classmethod
+    def from_json(cls, payload: str) -> "Conversation":  # noqa: D401
+        data = json.loads(payload)
+        return cls(messages=[Message.from_dict(m) for m in data["messages"]])
+
+
+# ---------------------------------------------------------------------------
+# Encoding interaction (thin wrappers around the Rust bindings)
+# ---------------------------------------------------------------------------
+
+
+class RenderConversationConfig(BaseModel):
+    auto_drop_analysis: bool = True
+
+
+class RenderOptions(BaseModel):
+    conversation_has_function_tools: bool = False
+
+
+class HarmonyEncoding:
+    """High-level wrapper around the Rust ``PyHarmonyEncoding`` class."""
+
+    def __init__(self, inner: _PyHarmonyEncoding):
+        self._inner = inner
+
+    # ------------------------------------------------------------------
+    # Delegated helpers
+    # ------------------------------------------------------------------
+
+    @property
+    def name(self) -> str:  # noqa: D401
+        return self._inner.name  # type: ignore[attr-defined]
+
+    @functools.cached_property
+    def special_tokens_set(self) -> set[str]:
+        return set(self._inner.special_tokens())
+
+    # -- Rendering -----------------------------------------------------
+
+    def render_conversation_for_completion(
+        self,
+        conversation: Conversation,
+        next_turn_role: Role,
+        config: Optional[RenderConversationConfig] = None,
+    ) -> List[int]:
+        """
+        Render a conversation for completion.
+        Args:
+            conversation: Conversation object
+            next_turn_role: Role for the next turn
+            config: Optional RenderConversationConfig (default auto_drop_analysis=True)
+        """
+        if config is None:
+            config_dict = {"auto_drop_analysis": True}
+        else:
+            config_dict = {"auto_drop_analysis": config.auto_drop_analysis}
+        return self._inner.render_conversation_for_completion(
+            conversation_json=conversation.to_json(),
+            next_turn_role=str(next_turn_role.value),
+            config=config_dict,
+        )
+
+    def render_conversation(
+        self,
+        conversation: Conversation,
+        config: Optional[RenderConversationConfig] = None,
+    ) -> List[int]:
+        """Render a conversation without appending a new role."""
+        if config is None:
+            config_dict = {"auto_drop_analysis": True}
+        else:
+            config_dict = {"auto_drop_analysis": config.auto_drop_analysis}
+        return self._inner.render_conversation(
+            conversation_json=conversation.to_json(),
+            config=config_dict,
+        )
+
+    def render_conversation_for_training(
+        self,
+        conversation: Conversation,
+        config: Optional[RenderConversationConfig] = None,
+    ) -> List[int]:
+        """Render a conversation for training."""
+        if config is None:
+            config_dict = {"auto_drop_analysis": True}
+        else:
+            config_dict = {"auto_drop_analysis": config.auto_drop_analysis}
+        return self._inner.render_conversation_for_training(
+            conversation_json=conversation.to_json(),
+            config=config_dict,
+        )
+
+    def render(
+        self, message: Message, render_options: Optional[RenderOptions] = None
+    ) -> List[int]:
+        """Render a single message into tokens."""
+        if render_options is None:
+            render_options_dict = {"conversation_has_function_tools": False}
+        else:
+            render_options_dict = {
+                "conversation_has_function_tools": render_options.conversation_has_function_tools
+            }
+
+        return self._inner.render(
+            message_json=message.to_json(), render_options=render_options_dict
+        )
+
+    # -- Parsing -------------------------------------------------------
+
+    def parse_messages_from_completion_tokens(
+        self, tokens: Sequence[int], role: Optional[Role] | None = None
+    ) -> List[Message]:
+        raw_json: str = self._inner.parse_messages_from_completion_tokens(
+            list(tokens), None if role is None else str(role.value)
+        )
+        return [Message.from_dict(m) for m in json.loads(raw_json)]
+
+    # -- Token decoding ------------------------------------------------
+
+    def decode_utf8(self, tokens: Sequence[int]) -> str:
+        """Decode a list of tokens into a UTF-8 string. Will raise an error if the tokens result in invalid UTF-8. Use decode if you want to replace invalid UTF-8 with the unicode replacement character."""
+        return self._inner.decode_utf8(list(tokens))
+
+    def encode(
+        self,
+        text: str,
+        *,
+        allowed_special: Literal["all"] | AbstractSet[str] = set(),
+        disallowed_special: Literal["all"] | Collection[str] = "all",
+    ) -> list[int]:
+        """Encodes a string into tokens.
+
+        Special tokens are artificial tokens used to unlock capabilities from a model,
+        such as fill-in-the-middle. So we want to be careful about accidentally encoding special
+        tokens, since they can be used to trick a model into doing something we don't want it to do.
+
+        Hence, by default, encode will raise an error if it encounters text that corresponds
+        to a special token. This can be controlled on a per-token level using the `allowed_special`
+        and `disallowed_special` parameters. In particular:
+        - Setting `disallowed_special` to () will prevent this function from raising errors and
+          cause all text corresponding to special tokens to be encoded as natural text.
+        - Setting `allowed_special` to "all" will cause this function to treat all text
+          corresponding to special tokens to be encoded as special tokens.
+
+        ```
+        >>> enc.encode("hello world")
+        [31373, 995]
+        >>> enc.encode("<|endoftext|>", allowed_special={"<|endoftext|>"})
+        [50256]
+        >>> enc.encode("<|endoftext|>", allowed_special="all")
+        [50256]
+        >>> enc.encode("<|endoftext|>")
+        # Raises ValueError
+        >>> enc.encode("<|endoftext|>", disallowed_special=())
+        [27, 91, 437, 1659, 5239, 91, 29]
+        ```
+        """
+        if allowed_special == "all":
+            allowed_special = self.special_tokens_set
+        if disallowed_special == "all":
+            disallowed_special = self.special_tokens_set - set(allowed_special)
+        if disallowed_special:
+            if not isinstance(disallowed_special, frozenset):
+                disallowed_special = frozenset(disallowed_special)
+            if match := _special_token_regex(disallowed_special).search(text):
+                raise_disallowed_special_token(match.group())
+
+        try:
+            return self._inner.encode(text, list(allowed_special))
+        except UnicodeEncodeError:
+            text = text.encode("utf-16", "surrogatepass").decode("utf-16", "replace")
+            return self._inner.encode(text, list(allowed_special))
+
+    def decode(self, tokens: Sequence[int], errors: str = "replace") -> str:
+        """Decodes a list of tokens into a string.
+
+        WARNING: the default behaviour of this function is lossy, since decoded bytes are not
+        guaranteed to be valid UTF-8. You can use `decode_utf8` if you want to raise an error on invalid UTF-8.
+
+        ```
+        >>> enc.decode([31373, 995])
+        'hello world'
+        ```
+        """
+        data = bytes(self._inner.decode_bytes(list(tokens)))
+        return data.decode("utf-8", errors=errors)
+
+    def is_special_token(self, token: int) -> bool:
+        """Returns if an individual token is a special token"""
+        return self._inner.is_special_token(token)
+
+    # -- Stop tokens --------------------------------------------------
+
+    def stop_tokens(self) -> List[int]:
+        return self._inner.stop_tokens()
+
+    def stop_tokens_for_assistant_actions(self) -> List[int]:
+        return self._inner.stop_tokens_for_assistant_actions()
+
+
+class StreamState(Enum):
+    EXPECT_START = "ExpectStart"
+    HEADER = "Header"
+    CONTENT = "Content"
+
+
+class StreamableParser:
+    """Incremental parser over completion tokens."""
+
+    def __init__(self, encoding: HarmonyEncoding, role: Role | None):
+        role_str = str(role.value) if role is not None else None
+        self._inner = _PyStreamableParser(encoding._inner, role_str)
+
+    def process(self, token: int) -> "StreamableParser":
+        self._inner.process(token)
+        return self
+
+    def process_eos(self) -> "StreamableParser":
+        self._inner.process_eos()
+        return self
+
+    @property
+    def current_content(self) -> str:
+        return self._inner.current_content
+
+    @property
+    def current_role(self) -> Optional[Role]:
+        raw = self._inner.current_role
+        return Role(raw) if raw is not None else None
+
+    @property
+    def current_content_type(self) -> Optional[str]:
+        return self._inner.current_content_type
+
+    @property
+    def last_content_delta(self) -> Optional[str]:
+        return self._inner.last_content_delta
+
+    @property
+    def messages(self) -> List[Message]:
+        raw = self._inner.messages
+        return [Message.from_dict(m) for m in json.loads(raw)]
+
+    @property
+    def tokens(self) -> List[int]:
+        return self._inner.tokens
+
+    @property
+    def state_data(self) -> Dict[str, Any]:
+        """Return a JSON string representing the parser's internal state."""
+        return json.loads(self._inner.state)
+
+    @property
+    def state(self) -> StreamState:
+        data = self.state_data
+        return StreamState(data["state"])
+
+    @property
+    def current_recipient(self) -> Optional[str]:
+        return self._inner.current_recipient
+
+    @property
+    def current_channel(self) -> Optional[str]:
+        return self._inner.current_channel
+
+
+# Public helper --------------------------------------------------------------
+
+
+def load_harmony_encoding(name: str | "HarmonyEncodingName") -> HarmonyEncoding:  # type: ignore[name-defined]
+    """Load an encoding by *name* (delegates to the Rust implementation)."""
+
+    # Allow both strings and enum values.
+    if not isinstance(name, str):
+        name = str(name)
+
+    inner: _PyHarmonyEncoding = _load_harmony_encoding(name)
+    return HarmonyEncoding(inner)
+
+
+# For *mypy* we expose a minimal stub of the `HarmonyEncodingName` enum.  At
+# **runtime** the user is expected to pass the *string* names because the Rust
+# side only operates on strings anyway.
+
+
+class HarmonyEncodingName(str, Enum):  # noqa: D101 – simple enum stub
+    HARMONY_GPT_OSS = "HarmonyGptOss"
+
+    def __str__(self) -> str:  # noqa: D401
+        return str(self.value)
+
+
+# What should be re-exported when the user does ``from harmony import *``?
+__all__ = [
+    "Role",
+    "Author",
+    "Content",
+    "TextContent",
+    "DeveloperContent",
+    "ToolDescription",
+    "SystemContent",
+    "Message",
+    "Conversation",
+    "HarmonyEncoding",
+    "HarmonyEncodingName",
+    "load_harmony_encoding",
+    "StreamableParser",
+    "StreamState",
+    "HarmonyError",
+]
+</file_artifact>
+
+<file path="GPT-OSS/static/test_final_verification.html">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Conversation Order Verification</title>
+    <style>
+        body { font-family: monospace; padding: 20px; }
+        .test { margin: 20px 0; padding: 10px; border: 1px solid #ccc; }
+        .pass { background: #d4edda; }
+        .fail { background: #f8d7da; }
+        button { padding: 10px 20px; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <h1>Conversation Order Test</h1>
+    
+    <div id="test1" class="test">
+        <h2>Test 1: Check Array Order</h2>
+        <button onclick="runTest1()">Run Test 1</button>
+        <pre id="test1-result"></pre>
+    </div>
+    
+    <div id="test2" class="test">
+        <h2>Test 2: Simulate Message Flow</h2>
+        <button onclick="runTest2()">Run Test 2</button>
+        <pre id="test2-result"></pre>
+    </div>
+    
+    <div id="test3" class="test">
+        <h2>Test 3: Backend Communication</h2>
+        <button onclick="runTest3()">Run Test 3</button>
+        <pre id="test3-result"></pre>
+    </div>
+    
+    <script>
+        function runTest1() {
+            const result = document.getElementById('test1-result');
+            result.textContent = 'Testing array push order...\n\n';
+            
+            let history = [];
+            
+            // Simulate what our code does
+            result.textContent += 'history.push({ role: "user", content: "Question?" });\n';
+            history.push({ role: "user", content: "Question?" });
+            
+            result.textContent += 'history.push({ role: "assistant", content: "Answer." });\n\n';
+            history.push({ role: "assistant", content: "Answer." });
+            
+            result.textContent += 'Result:\n';
+            history.forEach((msg, i) => {
+                result.textContent += `[${i}] ${msg.role}: ${msg.content}\n`;
+            });
+            
+            // Check order
+            const correct = history[0].role === 'user' && history[1].role === 'assistant';
+            document.getElementById('test1').className = correct ? 'test pass' : 'test fail';
+            result.textContent += `\n${correct ? '✓ PASS' : '✗ FAIL'}: Order is ${correct ? 'correct' : 'WRONG'}`;
+        }
+        
+        function runTest2() {
+            const result = document.getElementById('test2-result');
+            result.textContent = 'Simulating actual message flow...\n\n';
+            
+            let conversationHistory = [];
+            
+            // First message
+            result.textContent += '1. User sends first message\n';
+            const userInput1 = "What's the weather in SF?";
+            
+            // What gets sent to backend
+            const config1 = {
+                conversation_history: conversationHistory,  // Empty
+                current_message: userInput1
+            };
+            result.textContent += `   Sent: conversation_history=${JSON.stringify(config1.conversation_history)}\n`;
+            result.textContent += `         current_message="${config1.current_message}"\n\n`;
+            
+            // Simulate response
+            const response1 = "Weather in SF: 18°C, foggy";
+            
+            // Update history AFTER response (like our code does)
+            conversationHistory.push({ role: 'user', content: userInput1 });
+            conversationHistory.push({ role: 'assistant', content: response1 });
+            
+            result.textContent += '2. After first exchange:\n';
+            conversationHistory.forEach((msg, i) => {
+                result.textContent += `   [${i}] ${msg.role}: ${msg.content}\n`;
+            });
+            
+            // Second message
+            result.textContent += '\n3. User sends second message\n';
+            const userInput2 = "How about LA?";
+            
+            const config2 = {
+                conversation_history: conversationHistory,
+                current_message: userInput2
+            };
+            
+            result.textContent += '   conversation_history sent to backend:\n';
+            config2.conversation_history.forEach((msg, i) => {
+                result.textContent += `     [${i}] ${msg.role}: ${msg.content}\n`;
+            });
+            
+            // Check order
+            const correct = conversationHistory[0].role === 'user';
+            document.getElementById('test2').className = correct ? 'test pass' : 'test fail';
+            result.textContent += `\n${correct ? '✓ PASS' : '✗ FAIL'}: Messages in chronological order`;
+        }
+        
+        async function runTest3() {
+            const result = document.getElementById('test3-result');
+            result.textContent = 'Testing actual backend...\n\n';
+            
+            try {
+                // Check what a real prompt looks like
+                const testConfig = {
+                    model_identity: "Test",
+                    knowledge_cutoff: "2024-06",
+                    current_date: "2025-08-15",
+                    reasoning_level: "high",
+                    instructions: "Test",
+                    tools: [],
+                    conversation_history: [
+                        { role: "user", content: "First question?" },
+                        { role: "assistant", content: "First answer." },
+                        { role: "user", content: "Second question?" },
+                        { role: "assistant", content: "Second answer." }
+                    ],
+                    current_message: "Third question?",
+                    max_tokens: 100,
+                    temperature: 0.7
+                };
+                
+                const response = await fetch('/api/render_prompt', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(testConfig)
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    result.textContent += 'Prompt structure:\n';
+                    
+                    // Extract message order from prompt
+                    const prompt = data.prompt;
+                    const messages = prompt.split('<|start|>').filter(s => s.includes('<|message|>'));
+                    
+                    messages.forEach((msg, i) => {
+                        const role = msg.includes('user<|message|>') ? 'user' : 
+                                     msg.includes('assistant<|message|>') ? 'assistant' : 'system';
+                        const content = msg.split('<|message|>')[1]?.split('<|end|>')[0]?.trim().substring(0, 30) || '';
+                        if (content) {
+                            result.textContent += `   ${role}: ${content}...\n`;
+                        }
+                    });
+                    
+                    // Check if messages appear in correct order
+                    const correct = prompt.indexOf('First question') < prompt.indexOf('First answer') &&
+                                  prompt.indexOf('First answer') < prompt.indexOf('Second question') &&
+                                  prompt.indexOf('Second question') < prompt.indexOf('Second answer') &&
+                                  prompt.indexOf('Second answer') < prompt.indexOf('Third question');
+                    
+                    document.getElementById('test3').className = correct ? 'test pass' : 'test fail';
+                    result.textContent += `\n${correct ? '✓ PASS' : '✗ FAIL'}: Backend preserves chronological order`;
+                } else {
+                    result.textContent += 'Error: ' + data.error;
+                    document.getElementById('test3').className = 'test fail';
+                }
+            } catch (e) {
+                result.textContent += 'Exception: ' + e.message;
+                document.getElementById('test3').className = 'test fail';
+            }
+        }
+    </script>
+</body>
+</html>
+</file_artifact>
+
+<file path="GPT-OSS/builtin_tool_instructions.py">
+#!/usr/bin/env python3
+"""
+Instructions for built-in tools that should be added directly to developer message
+"""
+
+def get_builtin_tools_instruction(include_python=False, include_browser=False):
+    """Get instructions for enabled built-in tools"""
+    if not include_python and not include_browser:
+        return ""
+    
+    sections = ["# Built-in Tools"]
+    
+    if include_python:
+        sections.append("""
+## python
+
+The `python` tool executes Python code for calculations, data processing, and internal reasoning. When asked to perform calculations, generate sequences, or process data, you should use this tool to ensure accuracy.
+
+### Usage
+To use the python tool, send a message in the analysis channel:
+```
+<|channel|>analysis to=python<|message|>
+# Your Python code here
+print(result)  # Use print to see output
+<|end|>
+```
+
+### Important Notes
+- The code runs in a stateless environment - variables don't persist between calls
+- Always use `print()` to see results - return values alone won't be visible
+- The code execution has a 30-second timeout
+- Standard library modules are available (math, datetime, json, etc.)
+- External packages like numpy, pandas are NOT available
+
+### Examples
+
+1. **Mathematical calculations:**
+```
+<|channel|>analysis to=python<|message|>
+import math
+x = 5
+y = 12
+hypotenuse = math.sqrt(x**2 + y**2)
+print(f"The hypotenuse of a {x}-{y} right triangle is {hypotenuse}")
+<|end|>
+```
+
+2. **Date/time operations:**
+```
+<|channel|>analysis to=python<|message|>
+from datetime import datetime, timedelta
+today = datetime.now()
+future = today + timedelta(days=30)
+print(f"30 days from now will be: {future.strftime('%Y-%m-%d')}")
+<|end|>
+```
+
+3. **Data processing:**
+```
+<|channel|>analysis to=python<|message|>
+data = [23, 45, 12, 67, 34, 89, 21]
+average = sum(data) / len(data)
+print(f"Average: {average:.2f}")
+print(f"Max: {max(data)}, Min: {min(data)}")
+<|end|>
+```""")
+    
+    if include_browser:
+        sections.append("""
+## browser
+
+The built-in browser tool allows me to help you find information on the web and browse specific web pages.
+
+I can search the web, open pages, find specific content on pages, and navigate through search results. The browser runs in a stateless mode where each command starts fresh.
+
+### Available Commands
+
+1. **Search the web:**
+```
+<|channel|>analysis to=browser<|message|>
+search [query] [optional: topn=5] [optional: source=web]
+<|end|>
+```
+
+2. **Open a search result or URL:**
+```
+<|channel|>analysis to=browser<|message|>
+open [id or url]
+<|end|>
+```
+
+3. **Find text on the current page:**
+```
+<|channel|>analysis to=browser<|message|>
+find [text]
+<|end|>
+```
+
+### Example Usage
+
+**Searching for information:**
+```
+<|channel|>analysis to=browser<|message|>
+search "latest AI developments" topn=5
+<|end|>
+```
+
+**Opening a specific result:**
+```
+<|channel|>analysis to=browser<|message|>
+open 1
+<|end|>
+```
+
+**Finding specific content:**
+```
+<|channel|>analysis to=browser<|message|>
+find "machine learning"
+<|end|>
+```""")
+    
+    return "\n".join(sections)
+</file_artifact>
+
+<file path="GPT-OSS/custom_python_instruction.py">
+#!/usr/bin/env python3
+"""
+Custom Python tool instruction for HARMONY
+"""
+
+PYTHON_INSTRUCTION = """
+## python
+
+The `python` tool executes Python code for calculations, data processing, and internal reasoning. When asked to perform calculations, generate sequences, or process data, you should use this tool to ensure accuracy.
+
+### Usage
+To use the python tool, send a message in the analysis channel:
+```
+<|channel|>analysis to=python<|message|>
+# Your Python code here
+print(result)  # Use print to see output
+<|end|>
+```
+
+### Important Notes
+- The code runs in a stateless environment - variables don't persist between calls
+- Always use `print()` to see results - return values alone won't be visible
+- The code execution has a 30-second timeout
+- Standard library modules are available (math, datetime, json, etc.)
+- External packages like numpy, pandas are NOT available
+
+### Examples
+
+1. **Mathematical calculations:**
+```
+<|channel|>analysis to=python<|message|>
+import math
+x = 5
+y = 12
+hypotenuse = math.sqrt(x**2 + y**2)
+print(f"The hypotenuse of a {x}-{y} right triangle is {hypotenuse}")
+<|end|>
+```
+
+2. **Date/time operations:**
+```
+<|channel|>analysis to=python<|message|>
+from datetime import datetime, timedelta
+today = datetime.now()
+future = today + timedelta(days=30)
+print(f"30 days from now will be: {future.strftime('%Y-%m-%d')}")
+<|end|>
+```
+
+3. **Data processing:**
+```
+<|channel|>analysis to=python<|message|>
+data = [23, 45, 12, 67, 34, 89, 21]
+average = sum(data) / len(data)
+print(f"Average: {average:.2f}")
+print(f"Max: {max(data)}, Min: {min(data)}")
+<|end|>
+```
+""".strip()
+</file_artifact>
+
+<file path="GPT-OSS/hackernews_response.json">
+{"id":"cmpl-2b05a761429b429fbd09e93bbbb04969","object":"text_completion","created":1755394833,"model":"openai/gpt-oss-20b","choices":[{"index":0,"text":"analysisThe user: \"Please browse to Hacker News (news.ycombinator.com) and tell me what is currently on the front page. The browser will automatically extract the text content when you navigate there.\"\n\nWe have a browser tool. They want the current front page. We need to navigate to news.ycombinator.com, then read the content. The browser tool will extract the text content. So we can call browser.navigate with url: \"https://news.ycombinator.com/\". Then we should parse the result. The tool returns the page text. We can then summarize the front page. The user wants the current front page. We are asked to browse. So we should use the browser tool. We need to produce an answer with the data extracted. Since the content changes daily, we need to fetch the current front page. We'll call the tool.assistantcommentary to=browser.navigate json{\"url\":\"https://news.ycombinator.com/\"}","logprobs":{"text_offset":[0,11,19,30,33,38,39,41,47,54,57,64,69,71,75,77,80,83,87,91,92,96,101,104,109,112,122,125,129,135,140,141,145,153,158,172,180,184,189,197,202,206,215,221,225,227,232,234,242,247,248,253,258,262,270,276,281,282,285,290,293,302,305,310,312,315,318,322,326,327,332,337,341,349,350,354,362,367,372,380,384,389,397,398,401,404,408,413,421,430,435,439,440,442,447,450,454,456,459,462,466,470,471,473,478,481,488,494,498,505,506,510,515,523,527,532,537,538,541,545,550,560,564,570,575,576,580,585,591,595,603,609,614,615,618,622,628,631,638,639,642,645,652,656,660,668,673,674,677,682,685,693,696,703,708,712,717,727,728,734,738,746,754,760,761,764,769,772,778,782,790,796,801,802,808,813,817,822,823,830,839,848,859,866,869,872,873,880,889,890,903,907,918,920,923,926,931,934,938,940,943,946,950,954,955,957],"token_logprobs":[0.0,-1.1920928244535389e-07,-2.3841855067985307e-07,-0.22889479994773865,-0.008838224224746227,-3.8591623306274414,-0.00632025022059679,-4.8636207793606445e-05,-1.311301275563892e-06,-5.280832192511298e-05,-0.00012444675667211413,-3.361645576660521e-05,-0.011081107892096043,-8.344646857949556e-07,-1.0728830375228426e-06,-4.768370445162873e-07,-3.576278118089249e-07,-1.1920928244535389e-07,-3.2186455882765586e-06,-5.757642793469131e-05,-1.0609570381348021e-05,-7.986990567587782e-06,-1.811964830267243e-05,-0.00015484087634831667,-6.556489552167477e-06,0.0,-1.4305104514278355e-06,-1.6569954823353328e-05,-1.1920928244535389e-07,-6.9141146923357155e-06,-0.07270609587430954,-5.507317473529838e-05,-7.86750388215296e-05,-7.033100700937212e-05,-7.629365427419543e-06,-1.0490362910786644e-05,-0.000558220490347594,-2.7418097943154862e-06,-4.184158387943171e-05,-0.0001429217227268964,-5.602820692729438e-06,-2.3841855067985307e-07,-4.6491513785440475e-06,-0.12745364010334015,-0.2128196507692337,-1.3582308292388916,-0.7604897618293762,-0.31051722168922424,-0.00853060558438301,-0.5724529027938843,-3.7032196521759033,-0.08229513466358185,-1.3633003234863281,-0.4239061772823334,-0.0724753886461258,-0.0026226192712783813,-1.2744358777999878,-0.6585198044776917,-0.44968023896217346,-0.0015555436257272959,-0.7545604705810547,-0.09699602425098419,-0.35215523838996887,-0.00018714107864070684,-2.3841855067985307e-07,-2.145764938177308e-06,-5.960462772236497e-07,-1.6569954823353328e-05,-2.003174304962158,-0.8651430010795593,-1.9687273502349854,-0.1944030076265335,-1.18265962600708,-0.4167555868625641,-0.8109342455863953,-1.0392719507217407,-0.5145334005355835,-0.8309096693992615,-1.329468011856079,-0.5971313714981079,-0.035467375069856644,-0.09370923787355423,-0.7837228178977966,-1.9745166301727295,-0.14073139429092407,-2.9242730140686035,-0.9744328260421753,-0.16780593991279602,-0.0015025765169411898,-0.24196863174438477,-0.6314674019813538,-0.899524986743927,-0.1240944117307663,-0.004231665749102831,-4.529942543740617e-06,-7.152555099310121e-07,-2.3841855067985307e-07,0.0,-7.152555099310121e-07,-1.1920928244535389e-07,-1.1920858014491387e-05,-1.1170740127563477,-0.08807703852653503,-0.23354922235012054,-0.5734027624130249,-2.624272584915161,-1.2598419189453125,-0.12443636357784271,-1.9121966361999512,-0.6148221492767334,-0.7085628509521484,-1.0043895244598389,-1.2357721328735352,-0.9231871366500854,-2.6897525787353516,-2.2851743698120117,-0.9539519548416138,-0.7992834448814392,-1.7144591808319092,-0.7905244827270508,-1.9623411893844604,-1.6463701725006104,-0.6662498712539673,-0.004205313045531511,-1.0812759399414062,-1.1590754985809326,-0.5749728083610535,-0.9691146612167358,-2.201676845550537,-0.7069014310836792,-0.13313238322734833,-0.0009037939016707242,-0.4632224440574646,-1.1411527395248413,-5.87957763671875,-3.253979206085205,-0.0420602411031723,-0.37366464734077454,-0.9545236825942993,-1.021250605583191,-0.2663269639015198,-1.4135019779205322,-1.1695091724395752,-0.09457007050514221,-0.3878311216831207,-0.3981632590293884,-0.693077027797699,-2.7496225833892822,-1.0956284999847412,-0.012985900044441223,-1.6083476543426514,-2.671891689300537,-0.3761020600795746,-1.6930975914001465,-0.2839636504650116,-5.343405246734619,-1.9944663047790527,-0.5191641449928284,-3.5956153869628906,-0.6255300045013428,-2.6114702224731445,-1.8719309568405151,-2.4460606575012207,-0.04850897192955017,-0.2562078833580017,-0.4312364459037781,-0.13452625274658203,-1.0711508989334106,-0.8187952041625977,-0.665515124797821,-1.3213051557540894,-0.007262970320880413,-0.4291999638080597,-1.6846827268600464,-1.5231972932815552,-0.5288972854614258,-1.3898946046829224,-0.7244131565093994,-1.243277668952942,0.0,0.0,-1.1920928244535389e-07,-1.1920928244535389e-07,0.0,-0.0009012927766889334,-1.7881377516459906e-06,0.0,-0.0010068115079775453,-0.00608176551759243,-1.1920928244535389e-07,-0.003194232005625963,-0.00024136967840604484,-0.005465446040034294,-2.3841855067985307e-07,-0.0011704268399626017,-6.460934673668817e-05,-5.483612312673358e-06,-2.3841855067985307e-07,0.0,-1.6689286894688848e-06,-3.576278118089249e-07,-1.1920928244535389e-07,-2.264974000354414e-06,-0.0012473430251702666,-1.1920928244535389e-07,-3.576278118089249e-07],"tokens":["<|channel|>","analysis","<|message|>","The"," user",":"," \"","Please"," browse"," to"," Hacker"," News"," (","news",".y","com","bin","ator",".com",")"," and"," tell"," me"," what"," is"," currently"," on"," the"," front"," page","."," The"," browser"," will"," automatically"," extract"," the"," text"," content"," when"," you"," navigate"," there",".\"\n\n","We"," have"," a"," browser"," tool","."," They"," want"," the"," current"," front"," page","."," We"," need"," to"," navigate"," to"," news",".y","com","bin","ator",".com",","," then"," read"," the"," content","."," The"," browser"," tool"," will"," extract"," the"," text"," content","."," So"," we"," can"," call"," browser",".navigate"," with"," url",":"," \"","https","://","news",".y","com","bin","ator",".com","/","\"."," Then"," we"," should"," parse"," the"," result","."," The"," tool"," returns"," the"," page"," text","."," We"," can"," then"," summarize"," the"," front"," page","."," The"," user"," wants"," the"," current"," front"," page","."," We"," are"," asked"," to"," browse","."," So"," we"," should"," use"," the"," browser"," tool","."," We"," need"," to"," produce"," an"," answer"," with"," the"," data"," extracted","."," Since"," the"," content"," changes"," daily",","," we"," need"," to"," fetch"," the"," current"," front"," page","."," We'll"," call"," the"," tool",".","<|end|>","<|start|>","assistant","<|channel|>","comment","ary"," to","=","browser",".navigate"," ","<|constrain|>","json","<|message|>","{\"","url","\":\"","https","://","news",".y","com","bin","ator",".com","/","\"}","<|call|>"],"top_logprobs":[{"<|channel|>":0.0,"<|constrain|>":-26.0," ":-26.9375},{"analysis":-1.1920928244535389e-07,"comment":-15.75,"analytic":-26.875},{"<|message|>":-2.3841855067985307e-07," to":-15.25,"<|channel|>":-17.25},{"The":-0.22889479994773865,"We":-1.728894829750061,"User":-3.8538947105407715},{" user":-0.008838224224746227," task":-5.258838176727295," request":-7.133838176727295},{":":-3.8591623306274414," wants":-0.4841623902320862," asks":-1.7341623306274414," requests":-2.2341623306274414},{" \"":-0.00632025022059679," wants":-6.006320476531982," “":-6.381320476531982},{"Please":-4.8636207793606445e-05,"please":-10.125048637390137,"Browse":-12.250048637390137},{" browse":-1.311301275563892e-06," browser":-14.375000953674316," brows":-15.125000953674316},{" to":-5.280832192511298e-05," ...":-10.812552452087402,"...":-11.250052452087402},{" Hacker":-0.00012444675667211413," H":-9.750123977661133," Hack":-10.250123977661133},{" News":-3.361645576660521e-05," ":-10.875033378601074," news":-11.375033378601074},{" (":-0.011081107892096043," and":-4.636081218719482," ...":-7.261081218719482},{"news":-8.344646857949556e-07,"https":-14.250000953674316," news":-15.750000953674316},{".y":-1.0728830375228426e-06,".":-14.750000953674316,".Y":-15.500000953674316},{"com":-4.768370445162873e-07,".com":-15.625,"comb":-15.875},{"bin":-3.576278118089249e-07,"bol":-15.625,"bil":-15.75},{"ator":-1.1920928244535389e-07,"aton":-16.25,"ators":-17.125},{".com":-3.2186455882765586e-06,".org":-13.12500286102295,")":-15.37500286102295},{")":-5.757642793469131e-05,").":-10.875057220458984,")\"":-11.125057220458984},{" and":-1.0609570381348021e-05," ...":-11.75001049041748,"and":-14.37501049041748},{" tell":-7.986990567587782e-06," tells":-12.375007629394531," told":-13.875007629394531},{" me":-1.811964830267243e-05," us":-11.500018119812012," what":-12.375018119812012},{" what":-0.00015484087634831667," what's":-8.875154495239258,"...":-12.125154495239258},{" is":-6.556489552167477e-06," *":-13.750006675720215," was":-14.250006675720215},{" currently":0.0," actually":-17.625," presently":-17.75},{" on":-1.4305104514278355e-06," in":-14.500000953674316," ...":-14.875000953674316},{" the":-1.6569954823353328e-05," front":-11.250016212463379," that":-14.625016212463379},{" front":-1.1920928244535389e-07," Front":-17.25," frontend":-17.5},{" page":-6.9141146923357155e-06,"page":-12.250006675720215," pages":-14.000006675720215},{".":-0.07270609587430954,".\"":-2.9477059841156006,".\"\n\n":-4.07270622253418},{" The":-5.507317473529838e-05," ...":-11.000055313110352," Browser":-11.812555313110352},{" browser":-7.86750388215296e-05," browsing":-10.000078201293945," browse":-11.375078201293945},{" will":-7.033100700937212e-05," tool":-9.750070571899414," would":-12.500070571899414},{" automatically":-7.629365427419543e-06," auto":-12.500007629394531," ...":-13.375007629394531},{" extract":-1.0490362910786644e-05," extracts":-12.37501049041748," extraction":-13.00001049041748},{" the":-0.000558220490347594," text":-7.750558376312256,"...":-10.063057899475098},{" text":-2.7418097943154862e-06," content":-13.50000286102295," textual":-14.50000286102295},{" content":-4.184158387943171e-05," when":-11.625041961669922," contents":-11.875041961669922},{" when":-0.0001429217227268964,".\"\n\n":-10.125143051147461,".\"":-10.250143051147461},{" you":-5.602820692729438e-06," I":-12.875005722045898," we":-13.750005722045898},{" navigate":-2.3841855067985307e-07,".navigate":-16.875," n":-17.375},{" there":-4.6491513785440475e-06,".\"\n\n":-12.875004768371582,".\"":-14.250004768371582},{".\"\n\n":-0.12745364010334015,".\"":-2.127453565597534,".\"\n":-7.877453804016113},{"We":-0.2128196507692337,"They":-2.7128195762634277,"So":-2.9628195762634277},{" have":-1.3582308292388916," need":-0.6082308292388916," must":-2.4832308292388916},{" a":-0.7604897618293762," to":-1.1354897022247314," the":-2.7604897022247314},{" browser":-0.31051722168922424," tool":-2.1855173110961914," browsing":-2.9355173110961914},{" tool":-0.00853060558438301," capability":-5.883530616760254," navigation":-6.821030616760254},{".":-0.5724529027938843," available":-2.072453022003174," to":-2.697453022003174},{" They":-3.7032196521759033," We":-0.4532196521759033," The":-2.0782196521759033," I":-3.2032196521759033},{" want":-0.08229513466358185," ask":-3.9572951793670654," instruct":-4.332294940948486},{" the":-1.3633003234863281," to":-1.2383003234863281," us":-1.3633003234863281},{" current":-0.4239061772823334," front":-1.5489062070846558," content":-2.548906087875366},{" front":-0.0724753886461258," content":-3.0724754333496094," contents":-4.947475433349609},{" page":-0.0026226192712783813,"-page":-6.377622604370117,"page":-7.127622604370117},{".":-1.2744358777999878," of":-1.1494358777999878," content":-1.3994358777999878},{" We":-0.6585198044776917," So":-2.283519744873047," The":-2.533519744873047},{" need":-0.44968023896217346," should":-1.949680209159851," must":-2.0746803283691406},{" to":-0.0015555436257272959," navigate":-7.564055442810059," browse":-8.564055442810059},{" navigate":-0.7545604705810547," browse":-1.3795604705810547," use":-1.7545604705810547},{" to":-0.09699602425098419,".":-3.0969960689544678," and":-4.096995830535889},{" news":-0.35215523838996887," the":-2.1021552085876465," that":-2.6021552085876465},{".y":-0.00018714107864070684,".":-9.250186920166016,".Y":-9.875186920166016},{"com":-2.3841855067985307e-07,"comb":-16.625,".com":-16.875},{"bin":-2.145764938177308e-06,"lin":-13.125001907348633,"bol":-15.750001907348633},{"ator":-5.960462772236497e-07,"ators":-15.375000953674316,"ato":-15.375000953674316},{".com":-1.6569954823353328e-05,".com's":-11.500016212463379,".":-12.250016212463379},{",":-2.003174304962158,".":-0.7531741857528687," and":-1.2531741857528687},{" then":-0.8651430010795593," get":-1.990143060684204," and":-2.240143060684204},{" read":-1.9687273502349854," extract":-1.0937273502349854," parse":-2.3437273502349854},{" the":-0.1944030076265335," content":-2.9444029331207275," extracted":-3.8194029331207275},{" content":-1.18265962600708," extracted":-1.30765962600708," text":-1.80765962600708},{".":-0.4167555868625641,".\n\n":-2.6667556762695312,",":-2.7917556762695312},{" The":-0.8109342455863953," We":-1.81093430519104," Then":-2.93593430519104},{" browser":-1.0392719507217407," tool":-1.5392719507217407," instructions":-2.789271831512451},{" tool":-0.5145334005355835," will":-1.3895334005355835,"'s":-3.764533519744873},{" will":-0.8309096693992615," returns":-1.9559097290039062,"'s":-2.8309097290039062},{" extract":-1.329468011856079," automatically":-0.9544680118560791," return":-2.079468011856079},{" the":-0.5971313714981079," text":-0.8471313714981079," content":-4.847131252288818},{" text":-0.035467375069856644," content":-4.410467147827148," page":-4.410467147827148},{" content":-0.09370923787355423,".":-2.8437092304229736," when":-5.093709468841553},{".":-0.7837228178977966," when":-1.4087228775024414," automatically":-2.1587228775024414},{" So":-1.9745166301727295," We":-0.9745166301727295," Then":-2.3495166301727295},{" we":-0.14073139429092407," I":-3.2657313346862793," presumably":-4.390731334686279},{" can":-2.9242730140686035," need":-0.7992729544639587," should":-1.5492730140686035," call":-2.6742730140686035},{" call":-0.9744328260421753," use":-1.4744328260421753," do":-2.099432945251465},{" browser":-0.16780593991279602," the":-2.6678059101104736," navigate":-3.2928059101104736},{".navigate":-0.0015025765169411898," navigate":-7.251502513885498,"::":-7.876502513885498},{" with":-0.24196863174438477,"({":-2.4919686317443848,".":-2.8669686317443848},{" url":-0.6314674019813538," URL":-1.506467342376709," the":-1.881467342376709},{":":-0.899524986743927," \"":-1.0245249271392822,".":-2.3995249271392822},{" \"":-0.1240944117307663," '":-2.3740944862365723," news":-3.9990944862365723},{"https":-0.004231665749102831,"news":-5.6292314529418945,"http":-7.3792314529418945},{"://":-4.529942543740617e-06,"...":-13.625004768371582,"\".":-13.750004768371582},{"news":-7.152555099310121e-07,"hn":-15.000000953674316,"www":-15.125000953674316},{".y":-2.3841855067985307e-07,"-y":-16.125,".Y":-16.875},{"com":0.0,"comb":-18.75,".com":-18.75},{"bin":-7.152555099310121e-07,"lin":-15.000000953674316,"bon":-15.500000953674316},{"ator":-1.1920928244535389e-07,"ators":-16.0,"aton":-17.25},{".com":-1.1920858014491387e-05,".org":-11.500011444091797,"\"":-14.250011444091797},{"/":-1.1170740127563477,"\".":-0.6170739531517029,"\".\n\n":-2.8670740127563477},{"\".":-0.08807703852653503,"\".\n\n":-2.5880770683288574,"\"\n\n":-4.713077068328857},{" Then":-0.23354922235012054," The":-2.983549118041992," That":-3.483549118041992},{" we":-0.5734027624130249," the":-2.0734028816223145," parse":-2.8234028816223145},{" should":-2.624272584915161," need":-0.8742725849151611," get":-2.124272584915161," can":-2.124272584915161},{" parse":-1.2598419189453125," get":-1.7598419189453125," read":-2.8848419189453125},{" the":-0.12443636357784271," or":-3.499436378479004," output":-4.624436378479004},{" result":-1.9121966361999512," returned":-1.4121966361999512," output":-1.7871966361999512},{".":-0.6148221492767334,"?":-2.2398221492767334,".\n\n":-2.3648221492767334},{" The":-0.7085628509521484," But":-1.9585628509521484," We":-2.5835628509521484},{" tool":-1.0043895244598389," browser":-1.8793895244598389," result":-2.629389524459839},{" returns":-1.2357721328735352," will":-1.2357721328735352," likely":-2.360772132873535},{" the":-0.9231871366500854," something":-2.298187255859375," some":-2.298187255859375},{" page":-2.6897525787353516," extracted":-0.6897526383399963," text":-1.8147525787353516," content":-2.1897525787353516},{" text":-2.2851743698120117," content":-0.4101743698120117,"'s":-1.9101743698120117},{".":-0.9539519548416138,"?":-1.5789519548416138," content":-1.7039519548416138},{" We":-0.7992834448814392," Then":-1.799283504486084," We'll":-2.549283504486084},{" can":-1.7144591808319092," need":-0.714459240436554," then":-2.214459180831909},{" then":-0.7905244827270508," read":-2.540524482727051," provide":-3.040524482727051},{" summarize":-1.9623411893844604," provide":-1.8373411893844604," parse":-2.46234130859375},{" the":-1.6463701725006104," or":-0.8963701128959656,".":-1.7713701725006104},{" front":-0.6662498712539673," top":-2.1662497520446777," content":-2.2912497520446777},{" page":-0.004205313045531511,"-page":-6.129205226898193,"page":-6.879205226898193},{".":-1.0812759399414062," items":-1.4562759399414062,".\n\n":-1.7062759399414062},{" The":-1.1590754985809326," We":-1.9090754985809326," Let's":-2.5340754985809326},{" user":-0.5749728083610535," front":-2.5749728679656982," question":-2.5749728679656982},{" wants":-0.9691146612167358," likely":-1.5941146612167358," just":-2.9691147804260254},{" the":-2.201676845550537," \"":-0.9516767263412476," to":-1.7016767263412476," what":-1.8266767263412476},{" current":-0.7069014310836792," content":-1.5819014310836792," front":-2.3319015502929688},{" front":-0.13313238322734833," content":-2.8831324577331543," items":-3.7581324577331543},{" page":-0.0009037939016707242,".":-8.000904083251953,"-page":-8.250904083251953},{".":-0.4632224440574646," content":-2.0882225036621094,",":-3.0882225036621094},{" We":-1.1411527395248413," So":-1.3911527395248413," The":-2.766152858734131},{" are":-5.87957763671875," need":-0.9420774579048157," should":-1.192077398300171," can":-2.067077398300171},{" asked":-3.253979206085205," to":-0.9414791464805603," Chat":-2.066479206085205," in":-2.316479206085205},{" to":-0.0420602411031723,":":-4.292060375213623," for":-4.917060375213623},{" browse":-0.37366464734077454," \"":-2.373664617538452," provide":-2.748664617538452},{".":-0.9545236825942993," to":-1.3295236825942993," and":-1.5795236825942993},{" So":-1.021250605583191," We":-1.896250605583191," The":-2.0212507247924805},{" we":-0.2663269639015198," let's":-2.391326904296875," I":-3.766326904296875},{" should":-1.4135019779205322," need":-1.0385019779205322," must":-1.7885019779205322},{" use":-1.1695091724395752," call":-1.5445091724395752," do":-1.5445091724395752},{" the":-0.09457007050514221," browser":-2.5945701599121094," tool":-5.282070159912109},{" browser":-0.3878311216831207," tool":-1.2628310918807983," browse":-4.950331211090088},{" tool":-0.3981632590293884,".":-2.148163318634033," to":-2.648163318634033},{".":-0.693077027797699,".\n\n":-1.3180770874023438," to":-1.9430770874023438},{" We":-2.7496225833892822," Then":-1.1246225833892822," The":-1.9996225833892822," Let's":-2.1246225833892822},{" need":-1.0956284999847412," should":-1.7206284999847412," must":-2.095628499984741},{" to":-0.012985900044441223," a":-5.387985706329346," the":-5.950485706329346},{" produce":-1.6083476543426514," call":-1.8583476543426514," output":-2.2333476543426514},{" an":-2.671891689300537," a":-0.5468918085098267," the":-1.4218918085098267},{" answer":-0.3761020600795746," output":-1.376102089881897," assistant":-4.376101970672607},{" with":-1.6930975914001465," that":-1.6930975914001465,".":-1.9430975914001465},{" the":-0.2839636504650116," a":-2.533963680267334," friendly":-3.283963680267334},{" data":-5.343405246734619," front":-1.2809053659439087," content":-1.4059053659439087," current":-2.030905246734619},{" extracted":-1.9944663047790527,".":-0.8694663047790527,".\n\n":-1.6194663047790527," from":-1.8694663047790527},{".":-0.5191641449928284,".\n\n":-1.3941640853881836," from":-2.3941640853881836},{" Since":-3.5956153869628906," The":-1.1581155061721802," We":-1.9081155061721802," Let's":-2.2831153869628906},{" the":-0.6255300045013428," we":-1.5005300045013428," it's":-2.2505300045013428},{" content":-2.6114702224731445," tool":-1.736470341682434," browser":-1.861470341682434," front":-2.1114702224731445},{" changes":-1.8719309568405151," is":-1.3719309568405151," may":-1.6219309568405151," might":-1.8719309568405151},{" daily":-2.4460606575012207," frequently":-1.0710606575012207,",":-1.3210606575012207," over":-2.4460606575012207},{",":-0.04850897192955017,".":-3.673508882522583," and":-4.548509120941162},{" we":-0.2562078833580017," but":-2.6312079429626465," the":-3.0062079429626465},{" need":-0.4312364459037781," must":-2.431236505508423," should":-2.431236505508423},{" to":-0.13452625274658203," the":-2.634526252746582," up":-4.509526252746582},{" fetch":-1.0711508989334106," get":-1.9461508989334106," capture":-2.571150779724121},{" the":-0.8187952041625977," it":-1.4437952041625977," current":-2.6937952041625977},{" current":-0.665515124797821," page":-1.9155151844024658," actual":-2.415515184402466},{" front":-1.3213051557540894," page":-1.1963051557540894," content":-1.5713051557540894},{" page":-0.007262970320880413,".":-5.25726318359375,".\n\n":-7.25726318359375},{".":-0.4291999638080597,".\n\n":-1.9291999340057373," at":-2.9291999340057373},{" We'll":-1.6846827268600464," Let's":-1.6846827268600464," The":-1.9346827268600464},{" call":-1.5231972932815552," use":-1.5231972932815552," do":-1.6481972932815552},{" the":-0.5288972854614258," browser":-1.5288972854614258," navigate":-1.7788972854614258},{" tool":-1.3898946046829224," browser":-0.7648946046829224," navigate":-1.3898946046829224},{".":-0.7244131565093994,".\n\n":-1.0994131565093994,",":-3.4744131565093994},{"<|end|>":-1.243277668952942," Then":-1.118277668952942," Let's":-2.2432775497436523},{"<|start|>":0.0,"<|end|>":-26.125,"\n\n":-29.625},{"assistant":0.0,"Assistant":-22.125," assistant":-22.875},{"<|channel|>":-1.1920928244535389e-07," to":-16.375,"<|constrain|>":-22.125},{"comment":-1.1920928244535389e-07,"analysis":-15.625,"final":-18.875},{"ary":0.0,"ator":-26.375,"ariat":-27.75},{" to":-0.0009012927766889334," ":-7.250901222229004," -":-9.625901222229004},{"=":-1.7881377516459906e-06,"=b":-13.250001907348633," =":-17.375001907348633},{"browser":0.0," browser":-18.0,"container":-18.0},{".navigate":-0.0010068115079775453,".n":-7.251006603240967,".run":-8.376007080078125},{" ":-0.00608176551759243," code":-5.506081581115723,"<|channel|>":-7.006081581115723},{"<|constrain|>":-1.1920928244535389e-07,"<|channel|>":-16.625,"1":-20.875},{"json":-0.003194232005625963,"JSON":-5.878194332122803,"id":-8.503193855285645},{"<|message|>":-0.00024136967840604484,"<|channel|>":-8.37524127960205,"<|constrain|>":-12.62524127960205},{"{\"":-0.005465446040034294,"{\n":-5.255465507507324,"{":-8.380465507507324},{"url":-2.3841855067985307e-07,"uri":-16.25,"id":-16.5},{"\":\"":-0.0011704268399626017,"\":":-6.751170635223389,"\":[\"":-16.376171112060547},{"https":-6.460934673668817e-05,"http":-10.000064849853516,"news":-11.250064849853516},{"://":-5.483612312673358e-06,":\\/\\/":-12.125005722045898,":\\\\":-17.3750057220459},{"news":-2.3841855067985307e-07,"hn":-15.875,"www":-16.125},{".y":0.0,".yahoo":-18.0,"_y":-18.25},{"com":-1.6689286894688848e-06,"con":-13.875001907348633,".com":-14.125001907348633},{"bin":-3.576278118089249e-07,"lin":-15.375,"binant":-17.125},{"ator":-1.1920928244535389e-07,"itor":-16.0,"aton":-17.0},{".com":-2.264974000354414e-06,".org":-13.125001907348633,".com's":-16.875001907348633},{"/":-0.0012473430251702666,"/\"":-7.001247406005859,"\"}":-8.00124740600586},{"\"}":-1.1920928244535389e-07,"\"}\n":-17.0," \"}":-17.25},{"<|call|>":-3.576278118089249e-07,"<|return|>":-15.0,"<|constrain|>":-20.0}]},"finish_reason":"stop","stop_reason":200012,"prompt_logprobs":null}],"service_tier":null,"system_fingerprint":null,"usage":{"prompt_tokens":166,"total_tokens":372,"completion_tokens":206,"prompt_tokens_details":null},"kv_transfer_params":null}
+</file_artifact>
+
+<file path="GPT-OSS/harmony_vllm_app.py">
+#!/usr/bin/env python3
+"""
+HARMONY vLLM Demo Application
+Uses OpenAI's official harmony renderer library to properly format prompts
+"""
+
+from flask import Flask, render_template, request, jsonify, Response, send_from_directory
+import json
+import requests
+from typing import List, Dict, Any, Optional
+import logging
+from dataclasses import dataclass, asdict
+from datetime import datetime
+import random
+import re
+import asyncio
+# from browser_tool_wrapper import browser_tool_wrapper  # Removed old browser
+# from custom_browser_instruction import BROWSER_INSTRUCTION  # Removed old browser
+from python_tool_wrapper import python_tool_wrapper
+from python_function_wrapper import PythonFunctionTool
+from custom_python_instruction import PYTHON_INSTRUCTION
+from official_python_instruction import OFFICIAL_PYTHON_INSTRUCTION
+# from official_browser_instruction import OFFICIAL_BROWSER_INSTRUCTION  # Removed old browser
+from builtin_tool_instructions import get_builtin_tools_instruction
+
+# Import harmony components
+from openai_harmony import (
+    Author,
+    Conversation,
+    DeveloperContent,
+    HarmonyEncodingName,
+    Message,
+    Role,
+    SystemContent,
+    ToolDescription,
+    load_harmony_encoding,
+    ReasoningEffort,
+    StreamableParser
+)
+
+app = Flask(__name__)
+logging.basicConfig(level=logging.INFO)
+
+# vLLM server configuration
+VLLM_BASE_URL = "http://localhost:8000"
+MODEL_NAME = "openai/gpt-oss-20b"
+
+# Load harmony encoding
+try:
+    encoding = load_harmony_encoding(HarmonyEncodingName.HARMONY_GPT_OSS)
+    logging.info("Harmony encoding loaded successfully")
+    
+    # Debug: Check available attributes
+    logging.info(f"Encoding attributes: {dir(encoding)}")
+    
+    # Try to get special tokens
+    if hasattr(encoding, 'special_tokens'):
+        logging.info(f"Has special_tokens method")
+    elif hasattr(encoding, 'special_tokens_set'):
+        logging.info(f"Has special_tokens_set attribute")
+    else:
+        logging.warning("No special tokens attribute found")
+        
+except Exception as e:
+    logging.error(f"Failed to load harmony encoding: {e}")
+    encoding = None
+
+@dataclass
+class ConversationState:
+    """Maintains conversation state"""
+    messages: List[Message]
+    system_config: Dict[str, Any]
+    developer_config: Dict[str, Any]
+    
+conversation_state = ConversationState(messages=[], system_config={}, developer_config={})
+
+# Vision browser instance will be created on demand
+_vision_browser_instance = None
+
+
+# Removed old browser system message function
+
+
+def create_system_message_with_builtin_tools(data: Dict[str, Any]) -> str:
+    """Create system message with built-in tools in the correct format"""
+    model_identity = data.get('model_identity', 'You are ChatGPT, a large language model trained by OpenAI.')
+    knowledge_cutoff = data.get('knowledge_cutoff', '2024-06')
+    current_date = data.get('current_date', datetime.now().strftime("%Y-%m-%d"))
+    reasoning_level = data.get('reasoning_level', 'HIGH')
+    
+    # Build the system message parts
+    system_parts = []
+    system_parts.append(model_identity)
+    system_parts.append(f"\nKnowledge cutoff: {knowledge_cutoff}")
+    system_parts.append(f"\nCurrent date: {current_date}")
+    
+    # Add reasoning level only if not "o1" (default)
+    if reasoning_level and reasoning_level.upper() != "O1":
+        system_parts.append(f"\nReasoning: {reasoning_level.lower()}")
+    
+    # Add valid channels line
+    system_parts.append("\n\n# Valid channels: analysis, commentary, final. Channel must be included for every message.")
+    
+    # Add the tools line if there are function tools
+    tools = data.get('tools', [])
+    if tools:
+        system_parts.append("\nCalls to these tools must go to the commentary channel: 'functions'.")
+    
+    return "".join(system_parts)
+
+# Update Python timeout constant
+PYTHON_TIMEOUT = 120  # 120 seconds as per spec
+
+# Fake weather database
+WEATHER_DATA = {
+    "San Francisco, CA": {"temp_c": 18, "temp_f": 64, "condition": "foggy", "humidity": 75, "wind_speed": 15},
+    "New York, NY": {"temp_c": 22, "temp_f": 72, "condition": "partly cloudy", "humidity": 60, "wind_speed": 10},
+    "Tokyo": {"temp_c": 26, "temp_f": 79, "condition": "sunny", "humidity": 55, "wind_speed": 8},
+    "London": {"temp_c": 16, "temp_f": 61, "condition": "rainy", "humidity": 85, "wind_speed": 20},
+    "Paris": {"temp_c": 20, "temp_f": 68, "condition": "cloudy", "humidity": 65, "wind_speed": 12},
+    "Sydney": {"temp_c": 24, "temp_f": 75, "condition": "sunny", "humidity": 50, "wind_speed": 18},
+}
+
+def get_fake_weather(location: str, format: str = "celsius") -> Dict[str, Any]:
+    """Get fake weather data for a location"""
+    # Normalize location
+    location = location.strip()
+    
+    # Check if we have data for this location
+    if location in WEATHER_DATA:
+        data = WEATHER_DATA[location]
+    else:
+        # Generate random weather for unknown locations
+        data = {
+            "temp_c": random.randint(10, 35),
+            "temp_f": random.randint(50, 95),
+            "condition": random.choice(["sunny", "cloudy", "rainy", "foggy", "partly cloudy"]),
+            "humidity": random.randint(30, 90),
+            "wind_speed": random.randint(5, 25),
+        }
+    
+    # Format response based on requested format
+    if format == "fahrenheit":
+        return {
+            "temperature": data["temp_f"],
+            "unit": "fahrenheit",
+            "condition": data["condition"],
+            "humidity": data["humidity"],
+            "wind_speed": data["wind_speed"],
+            "location": location
+        }
+    else:
+        return {
+            "temperature": data["temp_c"],
+            "unit": "celsius",
+            "condition": data["condition"],
+            "humidity": data["humidity"],
+            "wind_speed": data["wind_speed"],
+            "location": location
+        }
+
+def validate_weather_params(params: Dict[str, Any]) -> tuple[bool, Optional[str]]:
+    """Validate weather API parameters"""
+    if not isinstance(params, dict):
+        return False, "Parameters must be a JSON object"
+    
+    if "location" not in params:
+        return False, "Missing required parameter: location"
+    
+    if not isinstance(params["location"], str):
+        return False, "Location must be a string"
+    
+    if "format" in params and params["format"] not in ["celsius", "fahrenheit"]:
+        return False, f"Invalid format: {params['format']}. Must be 'celsius' or 'fahrenheit'"
+    
+    return True, None
+
+# Removed old browser tool execution function
+
+def execute_tool_call(tool_name: str, params: Dict[str, Any]) -> Dict[str, Any]:
+    """Execute a tool call and return the result"""
+    
+    # Handle Python tool (built-in)
+    if tool_name == "python":
+        script = params.get("script", params.get("code", ""))
+        if not script:
+            return {"error": "Python tool requires 'script' parameter"}
+        
+        # Run async function in sync context
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        try:
+            result = loop.run_until_complete(
+                python_tool_wrapper.execute(script)
+            )
+            return {"output": result}
+        finally:
+            loop.close()
+    
+    # Handle Python as a function tool
+    elif tool_name == "functions.python":
+        python_func_tool = PythonFunctionTool()
+        return python_func_tool.handle_tool_call(params)
+    
+    # Handle vision browser tool
+    elif tool_name == "functions.browser":
+        try:
+            from vision_browser_wrapper import VisionBrowserWrapper
+            # Use a global instance to maintain browser state
+            global _vision_browser_instance
+            if _vision_browser_instance is None:
+                _vision_browser_instance = VisionBrowserWrapper(mock_mode=False)  # Use real browser
+            return _vision_browser_instance.execute(params)
+        except ImportError:
+            return {"error": "Vision browser tool not available. Install with: pip install selenium helium pillow"}
+    
+    # Handle weather functions
+    elif tool_name == "functions.get_current_weather":
+        valid, error = validate_weather_params(params)
+        if not valid:
+            return {"error": error}
+        
+        location = params["location"]
+        format = params.get("format", "celsius")
+        return get_fake_weather(location, format)
+    
+    elif tool_name == "functions.get_location":
+        # Fake user location
+        return {"location": "San Francisco, CA", "country": "United States"}
+    
+    elif tool_name == "functions.get_multiple_weathers":
+        if "locations" not in params:
+            return {"error": "Missing required parameter: locations"}
+        
+        if not isinstance(params["locations"], list):
+            return {"error": "Locations must be an array"}
+        
+        format = params.get("format", "celsius")
+        results = []
+        for location in params["locations"]:
+            if isinstance(location, str):
+                results.append(get_fake_weather(location, format))
+            else:
+                results.append({"error": f"Invalid location: {location}"})
+        
+        return {"locations": results}
+    
+    # Removed old browser tool calls
+    
+    else:
+        return {"error": f"Unknown tool: {tool_name}"}
+
+def extract_tool_calls(text: str) -> List[Dict[str, Any]]:
+    """Extract tool calls from model output"""
+    tool_calls = []
+    
+    # Pattern for commentary channel (functions.*)
+    # More lenient - capture everything after <|message|> until we hit another <|start|> or end
+    commentary_pattern = r'<\|channel\|>commentary\s+to=([\w\.]+).*?<\|message\|>(.*?)(?:<\|call\|>|<\|end\|>|<\|start\|>|$)'
+    
+    # Pattern for analysis channel (browser.*)
+    analysis_pattern = r'<\|channel\|>analysis\s+to=([\w\.]+).*?<\|message\|>(.*?)(?:<\|call\|>|<\|end\|>|<\|start\|>|$)'
+    
+    # Find all matches for both patterns
+    all_matches = []
+    
+    # Commentary channel matches
+    matches = re.findall(commentary_pattern, text, re.DOTALL)
+    for recipient, content in matches:
+        all_matches.append((recipient, content, "commentary"))
+    
+    # Analysis channel matches
+    matches = re.findall(analysis_pattern, text, re.DOTALL)
+    for recipient, content in matches:
+        all_matches.append((recipient, content, "analysis"))
+    
+    for recipient, content, channel in all_matches:
+        content = content.strip()
+        
+        # Special handling for Python tool - it takes raw code, not JSON
+        if recipient == "python":
+            tool_calls.append({
+                "tool": recipient,
+                "params": {"script": content},
+                "raw_content": content,
+                "channel": channel
+            })
+            continue
+        
+        # Clean up content - sometimes it includes extra protocol text
+        # Try to extract JSON - look for balanced braces
+        brace_count = 0
+        json_start = -1
+        json_end = -1
+        
+        for i, char in enumerate(content):
+            if char == '{':
+                if json_start == -1:
+                    json_start = i
+                brace_count += 1
+            elif char == '}':
+                brace_count -= 1
+                if brace_count == 0 and json_start != -1:
+                    json_end = i + 1
+                    break
+        
+        if json_start != -1 and json_end != -1:
+            json_content = content[json_start:json_end]
+            try:
+                params = json.loads(json_content)
+                tool_calls.append({
+                    "tool": recipient,
+                    "params": params,
+                    "raw_content": content,
+                    "channel": channel
+                })
+                continue
+            except json.JSONDecodeError:
+                pass
+        
+        # If not valid JSON, skip this tool call
+        logging.warning(f"Skipping invalid tool call for {recipient}: {content[:100]}...")
+    
+    logging.info(f"Extracted {len(tool_calls)} tool calls from text")
+    if tool_calls:
+        logging.info(f"Tool calls: {tool_calls}")
+    return tool_calls
+
+def extract_final_content(raw_response: str) -> str:
+    """Extract only the final channel content from raw HARMONY response"""
+    # First try to find content in final channel
+    pattern = r'<\|channel\|>final<\|message\|>(.*?)(?:<\|return\|>|<\|end\|>|$)'
+    matches = re.findall(pattern, raw_response, re.DOTALL)
+    if matches:
+        return matches[-1].strip()
+    
+    # If no final channel, check if this is a continuation response
+    # Look for content after the last <|end|>
+    if '<|end|>' in raw_response:
+        parts = raw_response.split('<|end|>')
+        # Get the last non-empty part
+        for part in reversed(parts):
+            clean_part = part.strip()
+            # Skip if it's empty or starts with special tokens
+            if clean_part and not clean_part.startswith('<|') and not clean_part.startswith('{'):
+                # This is likely the final user-facing message
+                return clean_part
+    
+    return ""
+
+def filter_cot_from_content(content: str) -> str:
+    """Remove analysis channel content from assistant messages for conversation history"""
+    # Remove everything between <|channel|>analysis and <|channel|>final
+    pattern = r'<\|channel\|>analysis.*?(?=<\|channel\|>final)'
+    filtered = re.sub(pattern, '', content, flags=re.DOTALL)
+    
+    # Also remove standalone analysis blocks
+    pattern2 = r'<\|channel\|>analysis.*?<\|end\|>'
+    filtered = re.sub(pattern2, '', filtered, flags=re.DOTALL)
+    
+    return filtered.strip()
+
+def normalize_stop_token(response: str) -> str:
+    """Normalize stop tokens - convert <|return|> to <|end|>"""
+    return response.replace('<|return|>', '<|end|>')
+
+@app.route('/')
+def index():
+    """Serve the main HTML interface"""
+    return render_template('harmony_demo.html')
+
+@app.route('/test')
+def test():
+    """Serve the test page"""
+    return send_from_directory('.', 'test_tools.html')
+
+@app.route('/test2')
+def test2():
+    """Serve the frontend test page"""
+    return send_from_directory('.', 'test_frontend.html')
+
+@app.route('/demos/d20')
+def d20_demo():
+    """Serve the D20 demo"""
+    return send_from_directory('.', 'd20_demo.html')
+
+@app.route('/demos/d20-detailed')
+def d20_demo_detailed():
+    """Serve the detailed D20 demo"""
+    return send_from_directory('.', 'd20_demo_detailed.html')
+
+@app.route('/demos/compare')
+def serve_compare():
+    """Serve the comparison HTML"""
+    return send_from_directory('.', 'compare_approaches.html')
+
+@app.route('/demos/d20-cycling')
+def serve_d20_cycling():
+    """Serve the D20 demo with cycling examples"""
+    return send_from_directory('.', 'd20_demo_cycling.html')
+
+@app.route('/api/check_server', methods=['GET'])
+def check_server():
+    """Check if vLLM server is accessible"""
+    try:
+        response = requests.get(f"{VLLM_BASE_URL}/v1/models")
+        return jsonify({
+            "status": "connected",
+            "models": response.json()
+        })
+    except Exception as e:
+        return jsonify({
+            "status": "error",
+            "error": str(e)
+        }), 500
+
+@app.route('/api/tokenize', methods=['POST'])
+def tokenize():
+    """Tokenize text using harmony encoding"""
+    if not encoding:
+        return jsonify({"error": "Harmony encoding not loaded"}), 500
+    
+    try:
+        text = request.json.get('text', '')
+        # Try different methods to encode with special tokens
+        try:
+            # Try the encode method with allowed_special parameter
+            tokens = list(encoding.encode(text, allowed_special="all"))
+        except:
+            try:
+                # Try just encode without parameters
+                tokens = list(encoding.encode(text))
+            except Exception as e:
+                return jsonify({"error": f"Failed to encode text: {str(e)}"}), 500
+        
+        token_texts = [encoding.decode([t]) for t in tokens]
+        
+        # Get special tokens if available
+        special_tokens = {}
+        if hasattr(encoding, 'special_tokens'):
+            try:
+                special_tokens = {k: v for k, v in encoding.special_tokens().items()}
+            except:
+                special_tokens = list(encoding.special_tokens) if hasattr(encoding.special_tokens, '__iter__') else {}
+        elif hasattr(encoding, 'special_tokens_set'):
+            # It's a set, not a dict
+            special_tokens = list(encoding.special_tokens_set)
+        
+        return jsonify({
+            "tokens": tokens,
+            "token_texts": token_texts,
+            "special_tokens": special_tokens
+        })
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+def safe_json_serialize(obj):
+    """Convert objects to JSON-serializable format"""
+    if hasattr(obj, '__dict__'):
+        return obj.__dict__
+    elif hasattr(obj, '_asdict'):
+        return obj._asdict()
+    else:
+        return str(obj)
+
+@app.route('/api/render_prompt', methods=['POST'])
+def render_prompt():
+    """Render the full prompt using harmony"""
+    if not encoding:
+        return jsonify({"error": "Harmony encoding not loaded"}), 500
+    
+    try:
+        data = request.json
+        
+        # Check if built-in tools are enabled
+        include_python = data.get('include_python', False)
+        include_browser = data.get('include_browser', False)
+        
+        if include_python or include_browser:
+            # Use custom system message with built-in tools
+            system_text = create_system_message_with_builtin_tools(data)
+            system_message = Message.from_role_and_content(Role.SYSTEM, system_text)
+        else:
+            # Use standard system message
+            system_message = (
+                SystemContent.new()
+                .with_model_identity(data.get('model_identity', 'You are ChatGPT, a large language model trained by OpenAI.'))
+                .with_reasoning_effort(ReasoningEffort[data.get('reasoning_level', 'HIGH').upper()])
+                .with_conversation_start_date(data.get('current_date', datetime.now().strftime("%Y-%m-%d")))
+                .with_knowledge_cutoff(data.get('knowledge_cutoff', '2024-06'))
+                .with_required_channels(["analysis", "commentary", "final"])
+            )
+        
+        # Create developer message
+        developer_message = DeveloperContent.new()
+        
+        # Add regular instructions
+        instructions_parts = []
+        if data.get('instructions'):
+            instructions_parts.append(data['instructions'])
+        
+        # Add built-in tool instructions if enabled
+        if include_python or include_browser:
+            from builtin_tool_instructions import get_builtin_tools_instruction
+            builtin_instructions = get_builtin_tools_instruction(
+                include_python=include_python,
+                include_browser=include_browser
+            )
+            if builtin_instructions:
+                instructions_parts.append(builtin_instructions)
+        
+        # Combine all instructions
+        if instructions_parts:
+            combined_instructions = '\n\n'.join(instructions_parts)
+            developer_message = developer_message.with_instructions(combined_instructions)
+        
+        # Get function tool descriptions for developer message
+        tools = data.get('tools', [])
+        
+        tool_descriptions = []
+        for tool in tools:
+            td = ToolDescription.new(
+                tool['name'],
+                tool['description'],
+                parameters=tool.get('parameters', {})
+            )
+            tool_descriptions.append(td)
+        
+        # Add function tools to developer message if any are available
+        if tool_descriptions:
+            # Try different method names
+            try:
+                developer_message = developer_message.with_function_tools(tool_descriptions)
+            except AttributeError:
+                try:
+                    developer_message = developer_message.with_tools(tool_descriptions)
+                except AttributeError:
+                    logging.warning("Could not add tools to developer message")
+        
+        # Build conversation
+        if include_python or include_browser:
+            # system_message is already a Message object
+            messages = [
+                system_message,
+                Message.from_role_and_content(Role.DEVELOPER, developer_message)
+            ]
+        else:
+            messages = [
+                Message.from_role_and_content(Role.SYSTEM, system_message),
+                Message.from_role_and_content(Role.DEVELOPER, developer_message)
+            ]
+        
+        # Add conversation history with CoT filtering
+        for msg in data.get('conversation_history', []):
+            if msg['role'] == 'user':
+                messages.append(Message.from_role_and_content(Role.USER, msg['content']))
+            elif msg['role'] == 'assistant':
+                # Filter out CoT from assistant messages
+                filtered_content = filter_cot_from_content(msg['content'])
+                if filtered_content:  # Only add if there's content after filtering
+                    assistant_msg = Message.from_role_and_content(Role.ASSISTANT, filtered_content)
+                    if 'channel' in msg:
+                        assistant_msg = assistant_msg.with_channel(msg['channel'])
+                    if 'recipient' in msg:
+                        assistant_msg = assistant_msg.with_recipient(msg['recipient'])
+                    if 'content_type' in msg:
+                        assistant_msg = assistant_msg.with_content_type(msg['content_type'])
+                    messages.append(assistant_msg)
+            elif msg['role'] == 'tool':
+                # Handle tool messages
+                tool_msg = Message.from_author_and_content(
+                    Author.new(Role.TOOL, msg.get('name', 'tool')),
+                    msg['content']
+                )
+                if 'recipient' in msg:
+                    tool_msg = tool_msg.with_recipient(msg['recipient'])
+                if 'channel' in msg:
+                    tool_msg = tool_msg.with_channel(msg['channel'])
+                messages.append(tool_msg)
+        
+        # Add current user message or messages array
+        if data.get('current_message'):
+            messages.append(Message.from_role_and_content(Role.USER, data['current_message']))
+        elif data.get('messages'):
+            # Handle messages array format
+            for msg in data['messages']:
+                if msg['role'] == 'user':
+                    messages.append(Message.from_role_and_content(Role.USER, msg['content']))
+        
+        # Create conversation
+        conversation = Conversation.from_messages(messages)
+        
+        # Render to tokens
+        tokens = encoding.render_conversation_for_completion(conversation, Role.ASSISTANT)
+        
+        # Convert tokens to text for display
+        prompt_text = encoding.decode(tokens)
+        
+        # Don't add constrain token - we want the model to use channel format, not JSON
+        
+        # Also get token details
+        token_texts = [encoding.decode([t]) for t in tokens]
+        
+        # Ensure everything is JSON serializable
+        response_data = {
+            "prompt": prompt_text,
+            "tokens": [int(t) for t in tokens],  # Ensure tokens are ints
+            "token_texts": token_texts,
+            "token_count": len(tokens)
+        }
+        
+        return jsonify(response_data)
+        
+    except Exception as e:
+        logging.error(f"Error rendering prompt: {e}")
+        logging.error(f"Error type: {type(e)}")
+        import traceback
+        logging.error(f"Traceback: {traceback.format_exc()}")
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/api/execute_tool', methods=['POST'])
+def execute_tool():
+    """Execute a tool call"""
+    try:
+        data = request.json
+        tool_name = data.get('tool')
+        params = data.get('params', {})
+        
+        if not tool_name:
+            return jsonify({"error": "Missing tool name"}), 400
+        
+        result = execute_tool_call(tool_name, params)
+        
+        return jsonify({
+            "tool": tool_name,
+            "params": params,
+            "result": result
+        })
+    except Exception as e:
+        logging.error(f"Error executing tool: {e}")
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/api/chat', methods=['POST'])
+def chat():
+    """Send chat request to vLLM server with harmony formatting"""
+    if not encoding:
+        return jsonify({"error": "Harmony encoding not loaded"}), 500
+    
+    # Track all prompts sent during this request
+    prompts_sent = []
+    
+    try:
+        data = request.json
+        
+        # Don't call render_prompt() directly as it creates a Flask response
+        # Instead, inline the rendering logic here
+        try:
+            # Check if built-in tools are enabled
+            include_python = data.get('include_python', False)
+            include_browser = data.get('include_browser', False)
+            
+            if include_python or include_browser:
+                # Use custom system message with built-in tools
+                system_text = create_system_message_with_builtin_tools(data)
+                system_message = Message.from_role_and_content(Role.SYSTEM, system_text)
+            else:
+                # Use standard system message
+                system_message = (
+                    SystemContent.new()
+                    .with_model_identity(data.get('model_identity', 'You are ChatGPT, a large language model trained by OpenAI.'))
+                    .with_reasoning_effort(ReasoningEffort[data.get('reasoning_level', 'HIGH').upper()])
+                    .with_conversation_start_date(data.get('current_date', datetime.now().strftime("%Y-%m-%d")))
+                    .with_knowledge_cutoff(data.get('knowledge_cutoff', '2024-06'))
+                    .with_required_channels(["analysis", "commentary", "final"])
+                )
+            
+            # Create developer message
+            developer_message = DeveloperContent.new()
+            if data.get('instructions'):
+                developer_message = developer_message.with_instructions(data['instructions'])
+            
+            # Get function tool descriptions
+            tools = data.get('tools', [])
+            
+            # Add vision browser to tools if include_browser is True
+            if include_browser:
+                # Add vision browser to tools list if not already present
+                if not any(t.get('name') == 'browser' for t in tools):
+                    from vision_browser_wrapper import VisionBrowserWrapper
+                    wrapper = VisionBrowserWrapper(mock_mode=False)  # Use real browser
+                    browser_def = wrapper.get_tool_definition()
+                    tools.append(browser_def)
+            
+            tool_descriptions = []
+            for tool in tools:
+                td = ToolDescription.new(
+                    tool['name'],
+                    tool['description'],
+                    parameters=tool.get('parameters', {})
+                )
+                tool_descriptions.append(td)
+            
+            # Add function tools to developer message if any are available
+            if tool_descriptions:
+                try:
+                    developer_message = developer_message.with_function_tools(tool_descriptions)
+                except AttributeError:
+                    try:
+                        developer_message = developer_message.with_tools(tool_descriptions)
+                    except AttributeError:
+                        logging.warning("Could not add tools to developer message")
+            
+            # Build conversation
+            if include_python or include_browser:
+                # system_message is already a Message object
+                messages = [
+                    system_message,
+                    Message.from_role_and_content(Role.DEVELOPER, developer_message)
+                ]
+            else:
+                messages = [
+                    Message.from_role_and_content(Role.SYSTEM, system_message),
+                    Message.from_role_and_content(Role.DEVELOPER, developer_message)
+                ]
+            
+            # Add conversation history with CoT filtering
+            for msg in data.get('conversation_history', []):
+                if msg['role'] == 'user':
+                    messages.append(Message.from_role_and_content(Role.USER, msg['content']))
+                elif msg['role'] == 'assistant':
+                    # Filter out CoT from assistant messages
+                    filtered_content = filter_cot_from_content(msg['content'])
+                    if filtered_content:  # Only add if there's content after filtering
+                        assistant_msg = Message.from_role_and_content(Role.ASSISTANT, filtered_content)
+                        if 'channel' in msg:
+                            assistant_msg = assistant_msg.with_channel(msg['channel'])
+                        if 'recipient' in msg:
+                            assistant_msg = assistant_msg.with_recipient(msg['recipient'])
+                        if 'content_type' in msg:
+                            assistant_msg = assistant_msg.with_content_type(msg['content_type'])
+                        messages.append(assistant_msg)
+                elif msg['role'] == 'tool':
+                    tool_msg = Message.from_author_and_content(
+                        Author.new(Role.TOOL, msg.get('name', 'tool')),
+                        msg['content']
+                    )
+                    if 'recipient' in msg:
+                        tool_msg = tool_msg.with_recipient(msg['recipient'])
+                    if 'channel' in msg:
+                        tool_msg = tool_msg.with_channel(msg['channel'])
+                    messages.append(tool_msg)
+            
+            # Add current user message or messages array
+            if data.get('current_message'):
+                messages.append(Message.from_role_and_content(Role.USER, data['current_message']))
+            elif data.get('messages'):
+                # Handle messages array format
+                for msg in data['messages']:
+                    if msg['role'] == 'user':
+                        messages.append(Message.from_role_and_content(Role.USER, msg['content']))
+            
+            # Create conversation and render
+            conversation = Conversation.from_messages(messages)
+            tokens = encoding.render_conversation_for_completion(conversation, Role.ASSISTANT)
+            prompt = encoding.decode(tokens)
+            
+            # Don't add constrain token - we want the model to use channel format, not JSON
+            
+        except Exception as e:
+            logging.error(f"Error rendering prompt in chat: {e}")
+            return jsonify({"error": f"Failed to render prompt: {str(e)}"}), 500
+        
+        # Track this initial prompt (will add response later)
+        initial_prompt_info = {
+            "stage": "initial",
+            "prompt": prompt,
+            "token_count": len(tokens),
+            "timestamp": datetime.now().isoformat()
+        }
+        
+        # Send to vLLM
+        vllm_response = requests.post(
+            f"{VLLM_BASE_URL}/v1/completions",
+            json={
+                "model": MODEL_NAME,
+                "prompt": prompt,
+                "max_tokens": data.get('max_tokens', 2048),
+                "temperature": data.get('temperature', 0.7),
+                "stop": ["<|return|>", "<|call|>"],
+                "stream": False,
+                "skip_special_tokens": False,
+                "logprobs": 1
+            }
+        )
+        
+        if vllm_response.status_code != 200:
+            return jsonify({"error": f"vLLM error: {vllm_response.text}"}), 500
+        
+        vllm_data = vllm_response.json()
+        response_text = vllm_data['choices'][0]['text']
+        finish_reason = vllm_data['choices'][0].get('finish_reason', 'unknown')
+        
+        logging.info(f"vLLM finish_reason: {finish_reason}")
+        logging.info(f"Response length: {len(response_text)}")
+        logging.info(f"Response ends with: {response_text[-50:] if len(response_text) > 50 else response_text}")
+        
+        # Check if response contains tool calls
+        tool_calls = extract_tool_calls(response_text)
+        logging.info(f"Initial response extracted {len(tool_calls)} tool calls: {tool_calls}")
+        logging.info(f"Initial response text ends with: ...{repr(response_text[-200:])}")
+        
+        # If stopped because of <|call|>, append it
+        if finish_reason == 'stop' and not response_text.endswith('<|call|>'):
+            response_text += '<|call|>'
+            logging.info("Appended <|call|> because finish_reason was 'stop'")
+        
+        # Add response to initial prompt info and track it
+        initial_prompt_info['response'] = response_text
+        prompts_sent.append(initial_prompt_info)
+        
+        # Handle multiple rounds of tool calls
+        all_tool_responses = []
+        current_prompt = prompt
+        current_response = response_text
+        max_rounds = 3  # Prevent infinite loops - reduced from 10
+        round_count = 0
+        
+        while tool_calls and round_count < max_rounds:
+            round_count += 1
+            logging.info(f"Processing tool calls round {round_count}: {len(tool_calls)} calls")
+            
+            # Execute tool calls for this round
+            tool_responses = []
+            
+            for tool_call in tool_calls:
+                tool_name = tool_call['tool']
+                params = tool_call['params']
+                channel = tool_call.get('channel', 'commentary')
+                
+                logging.info(f"Executing tool: {tool_name} with params: {params}")
+                
+                # Execute the tool
+                result = execute_tool_call(tool_name, params)
+                
+                # Format tool response in HARMONY format
+                # Use the same channel as the request (analysis for browser, commentary for others)
+                # Built-in tools (python, browser) return raw output, functions return JSON
+                if tool_name in ['python', 'browser']:
+                    # Built-in tools return raw output
+                    tool_response = f'<|return|>{result}<|end|>'
+                else:
+                    # Function tools return JSON
+                    tool_response = f'<|return|>{json.dumps(result)}<|end|>'
+                tool_responses.append({
+                    'tool': tool_name,
+                    'params': params,
+                    'result': result,
+                    'formatted_response': tool_response
+                })
+            
+            all_tool_responses.extend(tool_responses)
+            
+            # Append tool responses to the conversation and continue
+            continued_prompt = current_prompt + current_response
+            for tr in tool_responses:
+                continued_prompt += tr['formatted_response']
+            continued_prompt += '<|start|>assistant<|message|>'
+            
+            # Prepare continuation prompt info (will add response later)
+            continuation_prompt_info = {
+                "stage": f"continuation_round_{round_count}",
+                "prompt": continued_prompt,
+                "token_count": len(list(encoding.encode(continued_prompt, allowed_special="all"))),
+                "timestamp": datetime.now().isoformat(),
+                "tool_calls": tool_calls
+            }
+            
+            # Make another request to vLLM to continue after tool execution
+            continue_response = requests.post(
+                f"{VLLM_BASE_URL}/v1/completions",
+                json={
+                    "model": MODEL_NAME,
+                    "prompt": continued_prompt,
+                    "max_tokens": data.get('max_tokens', 2048),
+                    "temperature": data.get('temperature', 0.7),
+                    "stop": ["<|return|>", "<|call|>", "<|end|>"],  # Stop on return, call, or end
+                    "stream": False,
+                    "skip_special_tokens": False,
+                    "logprobs": 1
+                }
+            )
+            
+            if continue_response.status_code == 200:
+                continue_data = continue_response.json()
+                continued_text = continue_data['choices'][0]['text']
+                finish_reason = continue_data['choices'][0].get('finish_reason', 'unknown')
+                
+                logging.info(f"Round {round_count} finish_reason: {finish_reason}")
+                logging.info(f"Round {round_count} response ends with: {continued_text[-50:] if len(continued_text) > 50 else continued_text}")
+                
+                # Check if we have an incomplete tool call at the end
+                if finish_reason == 'stop' and not continued_text.endswith('<|call|>'):
+                    # Check for tool call patterns
+                    if any(pattern in continued_text[-150:] for pattern in ['to=browser.', 'to=functions.']):
+                        continued_text += '<|call|>'
+                        logging.info("Appended <|call|> to incomplete tool call")
+                
+                # Add response to continuation prompt info and track it
+                continuation_prompt_info['response'] = continued_text
+                prompts_sent.append(continuation_prompt_info)
+                
+                # Update for next iteration
+                current_prompt = continued_prompt
+                current_response = continued_text
+                
+                # Check for more tool calls in the continued response
+                tool_calls = extract_tool_calls(continued_text)
+                logging.info(f"Round {round_count} found {len(tool_calls)} new tool calls")
+                logging.info(f"Round {round_count} continued text: {continued_text}")
+                
+                # If no more tool calls, we're done
+                if not tool_calls:
+                    break
+            else:
+                logging.error(f"Failed to continue after tool execution: {continue_response.text}")
+                # Still track the failed continuation
+                continuation_prompt_info['response'] = f"[Error: {continue_response.status_code}]"
+                continuation_prompt_info['error'] = continue_response.text
+                prompts_sent.append(continuation_prompt_info)
+                break
+        
+        # Build the complete response from all rounds
+        full_response = response_text
+        for tr in all_tool_responses:
+            full_response += tr['formatted_response']
+        if round_count > 0:  # If we did any continuations
+            full_response += current_response
+        
+        # Parse the complete response
+        try:
+            response_tokens = list(encoding.encode(full_response, allowed_special="all"))
+        except:
+            response_tokens = list(encoding.encode(full_response))
+        
+        try:
+            parsed_messages = encoding.parse_messages_from_completion_tokens(response_tokens, Role.ASSISTANT)
+        except Exception as e:
+            logging.warning(f"Failed to parse messages: {e}")
+            parsed_messages = []
+        
+        # Extract structured information
+        channels = {}
+        for msg in parsed_messages:
+            channel = getattr(msg, 'channel', 'default')
+            
+            # Skip tool messages - we don't want to display these in the channels
+            if hasattr(msg, 'author') and hasattr(msg.author, 'role') and msg.author.role == Role.TOOL:
+                continue
+                
+            if channel not in channels:
+                channels[channel] = []
+            
+            # Extract content as string
+            content_str = ""
+            if hasattr(msg, 'content'):
+                if isinstance(msg.content, str):
+                    content_str = msg.content
+                elif isinstance(msg.content, list):
+                    # Extract text from TextContent objects
+                    for item in msg.content:
+                        if hasattr(item, 'text'):
+                            content_str += item.text
+                        else:
+                            content_str += str(item)
+                else:
+                    content_str = str(msg.content)
+            else:
+                content_str = str(msg)
+            
+            # Skip if this is a code/JSON message (tool call)
+            recipient = getattr(msg, 'recipient', None)
+            content_type = getattr(msg, 'content_type', None)
+            
+            # Filter out JSON tool calls from display
+            if recipient and '.' in str(recipient) and content_type == 'code':
+                # This is a tool call, skip it
+                continue
+                
+            channels[channel].append({
+                'content': content_str,
+                'recipient': recipient,
+                'content_type': content_type
+            })
+        
+        # Extract final content for conversation history
+        final_content = extract_final_content(full_response)
+        
+        logging.info(f"Sending response with {len(full_response)} chars, {round_count} rounds, {len(all_tool_responses)} tool calls")
+        logging.info(f"Full response ends with: {repr(full_response[-100:])}")
+        
+        return jsonify({
+            "raw_response": full_response,
+            "final_content": final_content,
+            "tokens": response_tokens,
+            "parsed_messages": channels,
+            "tool_calls": all_tool_responses,
+            "prompts_sent": prompts_sent,
+            "rounds": round_count,
+            "logprobs": vllm_data['choices'][0].get('logprobs', {})
+        })
+        
+    except Exception as e:
+        logging.error(f"Error in chat: {e}")
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/api/stream', methods=['POST'])
+def stream():
+    """Stream chat responses with live parsing"""
+    if not encoding:
+        return jsonify({"error": "Harmony encoding not loaded"}), 500
+    
+    # Get data before entering the generator
+    data = request.get_json()
+    
+    # Track all prompts sent during this streaming request
+    prompts_sent = []
+    
+    def generate(data):
+        try:
+            
+            # Inline prompt rendering (same as in chat endpoint)
+            try:
+                # Check if built-in tools are enabled
+                include_python = data.get('include_python', False)
+                include_browser = data.get('include_browser', False)
+                
+                if include_python or include_browser:
+                    # Use custom system message with built-in tools
+                    system_text = create_system_message_with_builtin_tools(data)
+                    system_message = Message.from_role_and_content(Role.SYSTEM, system_text)
+                else:
+                    # Use standard system message
+                    system_message = (
+                        SystemContent.new()
+                        .with_model_identity(data.get('model_identity', 'You are ChatGPT, a large language model trained by OpenAI.'))
+                        .with_reasoning_effort(ReasoningEffort[data.get('reasoning_level', 'HIGH').upper()])
+                        .with_conversation_start_date(data.get('current_date', datetime.now().strftime("%Y-%m-%d")))
+                        .with_knowledge_cutoff(data.get('knowledge_cutoff', '2024-06'))
+                        .with_required_channels(["analysis", "commentary", "final"])
+                    )
+                
+                # Create developer message
+                developer_message = DeveloperContent.new()
+                
+                # Add regular instructions
+                instructions_parts = []
+                if data.get('instructions'):
+                    instructions_parts.append(data['instructions'])
+                
+                # Add built-in tool instructions if enabled
+                if include_python or include_browser:
+                    from builtin_tool_instructions import get_builtin_tools_instruction
+                    builtin_instructions = get_builtin_tools_instruction(
+                        include_python=include_python,
+                        include_browser=include_browser
+                    )
+                    if builtin_instructions:
+                        instructions_parts.append(builtin_instructions)
+                
+                # Combine all instructions
+                if instructions_parts:
+                    combined_instructions = '\n\n'.join(instructions_parts)
+                    developer_message = developer_message.with_instructions(combined_instructions)
+                
+                # Get function tool descriptions
+                tools = data.get('tools', [])
+                
+                tool_descriptions = []
+                for tool in tools:
+                    td = ToolDescription.new(
+                        tool['name'],
+                        tool['description'],
+                        parameters=tool.get('parameters', {})
+                    )
+                    tool_descriptions.append(td)
+                
+                # Add function tools to developer message if any are available
+                if tool_descriptions:
+                    try:
+                        developer_message = developer_message.with_function_tools(tool_descriptions)
+                    except AttributeError:
+                        try:
+                            developer_message = developer_message.with_tools(tool_descriptions)
+                        except AttributeError:
+                            logging.warning("Could not add tools to developer message")
+                
+                # Build conversation
+                if include_python or include_browser:
+                    # system_message is already a Message object
+                    messages = [
+                        system_message,
+                        Message.from_role_and_content(Role.DEVELOPER, developer_message)
+                    ]
+                else:
+                    messages = [
+                        Message.from_role_and_content(Role.SYSTEM, system_message),
+                        Message.from_role_and_content(Role.DEVELOPER, developer_message)
+                    ]
+                
+                # Add conversation history - properly handle raw content
+                for msg in data.get('conversation_history', []):
+                    if msg['role'] == 'user':
+                        messages.append(Message.from_role_and_content(Role.USER, msg['content']))
+                    elif msg['role'] == 'assistant':
+                        # If we have raw content, just append it directly to prompt
+                        if 'rawContent' in msg:
+                            # We'll handle this differently - store for later
+                            pass
+                        else:
+                            # Old format compatibility
+                            assistant_msg = Message.from_role_and_content(Role.ASSISTANT, msg.get('content', ''))
+                            if 'channel' in msg:
+                                assistant_msg = assistant_msg.with_channel(msg['channel'])
+                            if 'recipient' in msg:
+                                assistant_msg = assistant_msg.with_recipient(msg['recipient'])
+                            if 'content_type' in msg:
+                                assistant_msg = assistant_msg.with_content_type(msg['content_type'])
+                            messages.append(assistant_msg)
+                    elif msg['role'] == 'tool':
+                        tool_msg = Message.from_author_and_content(
+                            Author.new(Role.TOOL, msg.get('name', 'tool')),
+                            msg['content']
+                        )
+                        if 'recipient' in msg:
+                            tool_msg = tool_msg.with_recipient(msg['recipient'])
+                        if 'channel' in msg:
+                            tool_msg = tool_msg.with_channel(msg['channel'])
+                        messages.append(tool_msg)
+                
+                # Add current user message
+                messages.append(Message.from_role_and_content(Role.USER, data['current_message']))
+                
+                # Create conversation and render
+                conversation = Conversation.from_messages(messages)
+                tokens = encoding.render_conversation_for_completion(conversation, Role.ASSISTANT)
+                prompt = encoding.decode(tokens)
+                
+            except Exception as e:
+                yield f"data: {json.dumps({'error': f'Failed to render prompt: {str(e)}'})}\n\n"
+                return
+            
+            # Track the initial prompt (will add response later)
+            initial_prompt_info = {
+                "stage": "initial",
+                "prompt": prompt,
+                "token_count": len(tokens),
+                "timestamp": datetime.now().isoformat()
+            }
+            
+            # Create streaming parser
+            parser = StreamableParser(encoding, role=Role.ASSISTANT)
+            accumulated_text = ""  # Accumulate text to handle partial special tokens
+            
+            # Send streaming request to vLLM
+            with requests.post(
+                f"{VLLM_BASE_URL}/v1/completions",
+                json={
+                    "model": MODEL_NAME,
+                    "prompt": prompt,
+                    "max_tokens": data.get('max_tokens', 2048),
+                    "temperature": data.get('temperature', 0.7),
+                    "stop": ["<|return|>"],
+                    "stream": True,
+                    "skip_special_tokens": False,
+                    "logprobs": 1
+                },
+                stream=True
+            ) as response:
+                
+                for line in response.iter_lines():
+                    if line:
+                        line = line.decode('utf-8')
+                        if line.startswith('data: '):
+                            chunk_data = line[6:]
+                            if chunk_data == '[DONE]':
+                                break
+                            
+                            try:
+                                chunk = json.loads(chunk_data)
+                                if 'choices' in chunk and chunk['choices']:
+                                    text = chunk['choices'][0].get('text', '')
+                                    
+                                    if text:
+                                        accumulated_text += text
+                                        
+                                        # Send update with accumulated text
+                                        yield f"data: {json.dumps({
+                                            'text': text,
+                                            'accumulated': accumulated_text,
+                                            'current_role': 'assistant',
+                                            'current_channel': None,
+                                            'last_content_delta': text,
+                                            'current_content': accumulated_text,
+                                            'current_recipient': None,
+                                            'current_content_type': None
+                                        })}\n\n"
+                                        
+                            except json.JSONDecodeError:
+                                continue
+                
+                # Add initial response to prompt info
+                initial_prompt_info['response'] = accumulated_text
+                prompts_sent.append(initial_prompt_info)
+                
+                # Check if response contains tool calls
+                tool_calls = extract_tool_calls(accumulated_text)
+                
+                # If the stream stopped but we have a tool call pattern, append <|call|>
+                if tool_calls and not accumulated_text.endswith('<|call|>'):
+                    for tc in tool_calls:
+                        if tc['tool'] and tc['params']:
+                            accumulated_text += '<|call|>'
+                            logging.info("Appended <|call|> to streaming response")
+                            break
+                
+                if tool_calls and '<|call|>' in accumulated_text:
+                    # Execute tool calls and continue the conversation
+                    tool_responses = []
+                    
+                    for tool_call in tool_calls:
+                        tool_name = tool_call['tool']
+                        params = tool_call['params']
+                        channel = tool_call.get('channel', 'commentary')
+                        
+                        # Execute the tool
+                        result = execute_tool_call(tool_name, params)
+                        
+                        # Format tool response
+                        # Use the same channel as the request (analysis for browser, commentary for others)
+                        tool_response = f'<|start|>{tool_name} to=assistant<|channel|>{channel}<|message|>{json.dumps(result)}<|end|>'
+                        tool_responses.append({
+                            'tool': tool_name,
+                            'params': params,
+                            'result': result,
+                            'formatted_response': tool_response
+                        })
+                        
+                        # Send tool execution info
+                        yield f"data: {json.dumps({
+                            'tool_executed': {
+                                'tool': tool_name,
+                                'params': params,
+                                'result': result
+                            }
+                        })}\n\n"
+                    
+                    # Continue the conversation with tool responses
+                    continued_prompt = prompt + accumulated_text
+                    for tr in tool_responses:
+                        continued_prompt += tr['formatted_response']
+                    continued_prompt += '<|start|>assistant<|message|>'
+                    
+                    # Prepare continuation prompt info (will add response later)
+                    continuation_prompt_info = {
+                        "stage": "continuation_after_tools",
+                        "prompt": continued_prompt,
+                        "token_count": len(list(encoding.encode(continued_prompt, allowed_special="all"))),
+                        "timestamp": datetime.now().isoformat(),
+                        "tool_calls": tool_calls
+                    }
+                    
+                    # Add tool responses to accumulated text for complete raw response
+                    for tr in tool_responses:
+                        accumulated_text += tr['formatted_response']
+                    
+                    # Stream the continuation
+                    yield f"data: {json.dumps({'continuing_after_tools': True})}\n\n"
+                    
+                    with requests.post(
+                        f"{VLLM_BASE_URL}/v1/completions",
+                        json={
+                            "model": MODEL_NAME,
+                            "prompt": continued_prompt,
+                            "max_tokens": data.get('max_tokens', 2048),
+                            "temperature": data.get('temperature', 0.7),
+                            "stop": ["<|return|>"],
+                            "stream": True,
+                            "skip_special_tokens": False,
+                            "logprobs": 1
+                        },
+                        stream=True
+                    ) as continue_response:
+                        
+                        for line in continue_response.iter_lines():
+                            if line:
+                                line = line.decode('utf-8')
+                                if line.startswith('data: '):
+                                    chunk_data = line[6:]
+                                    if chunk_data == '[DONE]':
+                                        break
+                                    
+                                    try:
+                                        chunk = json.loads(chunk_data)
+                                        if 'choices' in chunk and chunk['choices']:
+                                            text = chunk['choices'][0].get('text', '')
+                                            
+                                            if text:
+                                                accumulated_text += text
+                                                
+                                                yield f"data: {json.dumps({
+                                                    'text': text,
+                                                    'accumulated': accumulated_text,
+                                                    'is_continuation': True
+                                                })}\n\n"
+                                                
+                                    except json.JSONDecodeError:
+                                        continue
+                        
+                        # Add continuation response to prompt info
+                        if 'continuation_prompt_info' in locals():
+                            # Get the continuation response text by finding what was added after the prompt
+                            continuation_start = len(continuation_prompt_info['prompt'])
+                            continuation_response = accumulated_text[continuation_start:] if len(accumulated_text) > continuation_start else accumulated_text
+                            continuation_prompt_info['response'] = continuation_response
+                            prompts_sent.append(continuation_prompt_info)
+                
+                # Parse the complete accumulated text
+                if accumulated_text:
+                    # Extract all content manually
+                    parsed_messages = []
+                    
+                    # Extract channel content using regex
+                    import re
+                    
+                    # Find all analysis messages
+                    for match in re.finditer(r'<\|channel\|>analysis<\|message\|>(.*?)(?=<\|end\|>|<\|start\|>|$)', accumulated_text, re.DOTALL):
+                        parsed_messages.append({
+                            'role': 'assistant',
+                            'channel': 'analysis',
+                            'content': match.group(1).strip(),
+                            'recipient': None,
+                            'content_type': None
+                        })
+                    
+                    # Find all commentary/tool calls
+                    for match in re.finditer(r'<\|channel\|>commentary(?:\s+to=([\w\.]+))?.*?<\|message\|>(.*?)(?=<\|call\|>|<\|end\|>|<\|start\|>|$)', accumulated_text, re.DOTALL):
+                        parsed_messages.append({
+                            'role': 'assistant',
+                            'channel': 'commentary',
+                            'content': match.group(2).strip() if match.group(2) else '',
+                            'recipient': match.group(1) if match.group(1) else None,
+                            'content_type': None
+                        })
+                    
+                    # Find all final messages
+                    for match in re.finditer(r'<\|channel\|>final<\|message\|>(.*?)(?=<\|return\|>|<\|end\|>|<\|start\|>|$)', accumulated_text, re.DOTALL):
+                        parsed_messages.append({
+                            'role': 'assistant',
+                            'channel': 'final',
+                            'content': match.group(1).strip(),
+                            'recipient': None,
+                            'content_type': None
+                        })
+                else:
+                    parsed_messages = []
+                
+                # Build the complete raw response including tool responses
+                if 'tool_responses' in locals() and tool_responses:
+                    # We had tool calls, so build the full response
+                    full_raw_response = accumulated_text
+                    # Note: accumulated_text already includes everything because we accumulated
+                    # from both the initial response AND the continuation after tools
+                else:
+                    # No tool calls, just the direct response
+                    full_raw_response = accumulated_text
+                
+                # Extract final content for conversation history
+                final_content = extract_final_content(full_raw_response) if full_raw_response else ""
+                
+                # Send final parsed messages with tool info and all prompts
+                yield f"data: {json.dumps({
+                    'done': True,
+                    'raw_response': full_raw_response,  # Include the complete raw response
+                    'final_content': final_content,  # Add clean content for frontend
+                    'parsed_messages': parsed_messages,
+                    'tool_calls': tool_responses if 'tool_responses' in locals() else [],
+                    'prompts_sent': prompts_sent  # All prompts sent during streaming
+                })}\n\n"
+                
+        except Exception as e:
+            yield f"data: {json.dumps({'error': str(e)})}\n\n"
+    
+    return Response(generate(data), mimetype='text/event-stream')
+
+if __name__ == '__main__':
+    app.run(debug=False, port=5000)
+</file_artifact>
+
+<file path="GPT-OSS/LICENSE">
+MIT License
+
+Copyright (c) 2024 Harmony VLLM App Contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+</file_artifact>
+
+<file path="GPT-OSS/official_python_instruction.py">
+#!/usr/bin/env python3
+"""
+Official Python tool instruction from OpenAI documentation
+"""
+
+OFFICIAL_PYTHON_INSTRUCTION = """## python
+
+Use this tool to execute Python code in your chain of thought. The code will not be shown to the user. This tool should be used for internal reasoning, but not for code that is intended to be visible to the user (e.g. when creating plots, tables, or files).
+
+When you send a message containing Python code to python, it will be executed in a stateful Jupyter notebook environment. python will respond with the output of the execution or time out after 120.0 seconds. The drive at '/mnt/data' can be used to save and persist user files. Internet access for this session is UNKNOWN. Depends on the cluster."""
+</file_artifact>
+
+<file path="GPT-OSS/python_function_wrapper.py">
+#!/usr/bin/env python3
+"""
+Python as a Function Tool Wrapper
+Based on OpenAI's gpt-oss implementation but adapted for function namespace
+"""
+
+import asyncio
+import subprocess
+import tempfile
+import os
+import sys
+import json
+from typing import Dict, Any
+
+class PythonFunctionTool:
+    """Python tool that works in the functions namespace"""
+    
+    def __init__(self, timeout=120):
+        self.timeout = timeout
+        
+    def get_tool_definition(self) -> Dict[str, Any]:
+        """Return the tool definition for the functions namespace"""
+        return {
+            "name": "python",
+            "description": "Execute Python code and return the output. IMPORTANT: You MUST use print() to produce output. The code runs in a stateless environment. Example: print(random.randint(1,20)) NOT just random.randint(1,20)",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "string",
+                        "description": "Python code to execute. ALWAYS use print() to show results. Example: print(random.randint(1,20)) will output the number. Just random.randint(1,20) will output nothing."
+                    }
+                },
+                "required": ["code"]
+            }
+        }
+    
+    def execute(self, code: str) -> Dict[str, Any]:
+        """Execute Python code and return the result"""
+        try:
+            # Create a temporary file
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=False) as f:
+                f.write(code)
+                temp_file = f.name
+            
+            # Execute the script
+            result = subprocess.run(
+                [sys.executable, temp_file],
+                capture_output=True,
+                text=True,
+                timeout=self.timeout
+            )
+            
+            # Clean up
+            os.unlink(temp_file)
+            
+            # Prepare output
+            output = result.stdout
+            if result.stderr:
+                output += f"\n[STDERR]\n{result.stderr}"
+                
+            return {"output": output if output else "[No output]"}
+            
+        except subprocess.TimeoutExpired:
+            return {"error": f"Code execution timed out after {self.timeout} seconds"}
+        except Exception as e:
+            return {"error": f"Execution error: {str(e)}"}
+    
+    def handle_tool_call(self, params: Dict[str, Any]) -> Dict[str, Any]:
+        """Handle a tool call from the model"""
+        code = params.get('code', '')
+        if not code:
+            return {"error": "No code provided"}
+        
+        return self.execute(code)
+
+
+# Integration helper
+def add_python_to_functions(existing_tools: list) -> list:
+    """Add Python tool to the functions list"""
+    python_tool = PythonFunctionTool()
+    tools = existing_tools.copy()
+    tools.append(python_tool.get_tool_definition())
+    return tools
+
+
+# Test if run directly
+if __name__ == "__main__":
+    tool = PythonFunctionTool()
+    
+    # Test the tool
+    test_code = """
+import random
+result = random.randint(1, 20)
+print(f"D20 roll: {result}")
+"""
+    
+    print("Testing Python as Function Tool")
+    print("="*60)
+    print(f"Tool definition: {json.dumps(tool.get_tool_definition(), indent=2)}")
+    print(f"\nExecuting test code:")
+    print(test_code)
+    print(f"\nResult: {tool.handle_tool_call({'code': test_code})}")
+</file_artifact>
+
+<file path="GPT-OSS/python_tool_wrapper.py">
+#!/usr/bin/env python3
+"""
+Wrapper to make Python execution work with our string-based system
+Can use either Docker-based execution or direct subprocess execution
+"""
+
+import asyncio
+import subprocess
+import tempfile
+import os
+import sys
+from typing import Dict, Any, AsyncIterator
+from openai_harmony import Message, TextContent
+
+
+class PythonToolWrapper:
+    """Wrapper around Python execution to provide string-based interface"""
+    
+    def __init__(self, use_docker=None):
+        # Auto-detect Docker if not specified
+        if use_docker is None:
+            try:
+                # Check if Docker is available
+                result = subprocess.run(['docker', '--version'], capture_output=True, text=True)
+                self.use_docker = result.returncode == 0
+            except:
+                self.use_docker = False
+        else:
+            self.use_docker = use_docker
+        if use_docker:
+            try:
+                import docker
+                self.docker_client = docker.from_env()
+                # Try to pull python:3.11 image if not present
+                try:
+                    self.docker_client.images.get("python:3.11")
+                except:
+                    print("Pulling python:3.11 Docker image...")
+                    self.docker_client.images.pull("python:3.11")
+            except Exception as e:
+                print(f"Docker not available: {e}. Falling back to subprocess.")
+                self.use_docker = False
+                self.docker_client = None
+        else:
+            self.docker_client = None
+    
+    def instruction(self) -> str:
+        """Get the Python tool instruction"""
+        sandbox_info = "Docker container" if self.use_docker else "subprocess"
+        return f"""
+Use this tool to execute Python code in your chain of thought. The code will not be shown to the user. This tool should be used for internal reasoning, calculations, and data processing.
+When you send a message containing python code to python, it will be executed in a {"sandboxed Docker container with no network access and limited resources" if self.use_docker else "stateless subprocess environment"}, and the stdout of that process will be returned to you. You have to use print statements to access the output.
+        """.strip()
+    
+    def _execute_subprocess(self, script: str) -> str:
+        """Execute Python script using subprocess"""
+        try:
+            # Create a temporary file
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=False) as f:
+                f.write(script)
+                temp_file = f.name
+            
+            # Execute the script
+            result = subprocess.run(
+                [sys.executable, temp_file],
+                capture_output=True,
+                text=True,
+                timeout=120  # 120 second timeout as per spec
+            )
+            
+            # Clean up
+            os.unlink(temp_file)
+            
+            # Combine stdout and stderr
+            output = result.stdout
+            if result.stderr:
+                output += f"\n[STDERR]\n{result.stderr}"
+            
+            return output if output else "[No output]"
+            
+        except subprocess.TimeoutExpired:
+            return "[Error: Script execution timed out after 30 seconds]"
+        except Exception as e:
+            return f"[Error executing script: {str(e)}]"
+    
+    def _execute_docker(self, script: str) -> str:
+        """Execute Python script using Docker"""
+        if not self.docker_client:
+            return self._execute_subprocess(script)
+        
+        try:
+            import io
+            import tarfile
+            
+            # Create a temporary tar archive containing the script
+            script_name = "script.py"
+            tarstream = io.BytesIO()
+            with tarfile.open(fileobj=tarstream, mode="w") as tar:
+                script_bytes = script.encode("utf-8")
+                tarinfo = tarfile.TarInfo(name=script_name)
+                tarinfo.size = len(script_bytes)
+                tar.addfile(tarinfo, io.BytesIO(script_bytes))
+            tarstream.seek(0)
+            
+            # Start the container with security restrictions
+            container = self.docker_client.containers.create(
+                "python:3.11-slim",  # Use slim image
+                command="sleep infinity", 
+                detach=True,
+                mem_limit="512m",  # Limit memory to 512MB
+                cpu_period=100000,
+                cpu_quota=50000,  # Limit to 50% of one CPU
+                network_mode="none",  # No network access
+                # read_only=True,  # Can't use this - prevents copying script
+                tmpfs={'/tmp': 'size=100M,mode=1777'},  # /tmp is writable (100MB limit)
+                security_opt=["no-new-privileges"]  # Security hardening
+            )
+            
+            try:
+                container.start()
+                # Put the script into the container
+                container.put_archive(path="/tmp", data=tarstream.read())
+                # Execute the script with timeout
+                exec_result = container.exec_run(
+                    f"python /tmp/{script_name}",
+                    demux=True
+                )
+                
+                # Get stdout and stderr
+                stdout, stderr = exec_result.output
+                output = ""
+                
+                if stdout:
+                    output = stdout.decode("utf-8")
+                if stderr:
+                    output += f"\n[STDERR]\n{stderr.decode('utf-8')}"
+                
+                return output if output else "[No output]"
+                
+            finally:
+                container.remove(force=True)
+                
+        except Exception as e:
+            return f"[Docker execution error: {str(e)}. Falling back to subprocess.]"
+    
+    async def execute(self, script: str) -> str:
+        """Execute Python script asynchronously"""
+        try:
+            # Run execution in thread pool to avoid blocking
+            loop = asyncio.get_event_loop()
+            
+            if self.use_docker:
+                result = await loop.run_in_executor(None, self._execute_docker, script)
+            else:
+                result = await loop.run_in_executor(None, self._execute_subprocess, script)
+            
+            return result
+            
+        except Exception as e:
+            return f"[Execution error: {str(e)}]"
+
+
+# Global instance - auto-detect Docker, fallback to subprocess if not available
+python_tool_wrapper = PythonToolWrapper(use_docker=None)
+</file_artifact>
+
+<file path="GPT-OSS/README.md">
+# Harmony VLLM App
+
+A Flask web application that demonstrates the OpenAI Harmony format with VLLM backend, featuring browser automation and sandboxed Python execution.
+
+## Features
+
+- **OpenAI Harmony Format**: Implements the Harmony prompt format for tool use
+- **VLLM Integration**: Uses VLLM for fast local LLM inference
+- **Vision Browser Tool**: Selenium-based browser automation with screenshot capabilities
+- **Sandboxed Python Tool**: Docker-sandboxed Python execution for safety
+- **Real-time Streaming**: Server-sent events for streaming responses
+- **Dark Mode UI**: Modern interface with dark mode support
+
+## Prerequisites
+
+- Python 3.11+
+- Docker (for sandboxed Python execution)
+- Chrome/Chromium browser (for browser tool)
+- VLLM-compatible GPU (for local inference)
+
+## Installation
+
+Clone the repository
+
+Install dependencies:
+
+Install ChromeDriver:
+```bash
+# On Ubuntu/Debian
+sudo apt-get update
+sudo apt-get install chromium-chromedriver
+
+# On macOS with Homebrew
+brew install chromedriver
+
+# Or download manually from https://chromedriver.chromium.org/
+```
+
+Pull Docker Python image (for sandboxed execution):
+```bash
+docker pull python:3.11-slim
+```
+
+## Configuration
+
+1. Set up your OpenAI API key (if using OpenAI backend):
+```bash
+export OPENAI_API_KEY="your-api-key-here"
+```
+
+2. For VLLM backend, ensure your model is loaded:
+```bash
+# Example for loading a model with VLLM
+python -m vllm.entrypoints.openai.api_server \
+  --model meta-llama/Llama-3.2-3B-Instruct \
+  --port 5001
+```
+
+## Usage
+
+1. Start the Flask application:
+```bash
+python harmony_vllm_app.py
+```
+
+2. Open your browser to `http://localhost:5002`
+
+3. Select your desired tools:
+   - **Vision Browser Tool**: For web browsing and screenshots
+   - **Python Tool**: For calculations and data processing
+
+4. Start chatting! The AI will use the enabled tools to help with your requests.
+
+## Tool Details
+
+### Vision Browser Tool
+- Uses Selenium WebDriver for browser automation
+- Captures screenshots for visual analysis
+- Extracts text content from web pages
+- **Note**: Many sites have anti-bot protection (Cloudflare, etc.)
+
+### Python Tool
+- Executes Python code in Docker containers
+- Security restrictions:
+  - No network access
+  - 512MB memory limit
+  - 50% CPU limit
+  - Read-only filesystem (except /tmp)
+- Falls back to subprocess if Docker unavailable
+
+## Security Considerations
+
+1. **Python Execution**: Always runs in sandboxed environment
+2. **Browser Tool**: Uses separate browser profile, no access to personal data
+3. **API Keys**: Never commit API keys to repository
+4. **Docker**: Ensure Docker daemon is properly secured
+
+## Architecture
+
+- `harmony_vllm_app.py`: Main Flask application
+- `vision_browser_wrapper.py`: Browser tool wrapper
+- `python_tool_wrapper.py`: Python execution wrapper
+- `templates/harmony_demo.html`: Frontend UI
+- `python/openai_harmony/`: Harmony format types
+
+## Development
+
+Run tests:
+```bash
+pytest
+```
+
+Format code:
+```bash
+black .
+```
+
+Lint code:
+```bash
+flake8 .
+```
+
+## Troubleshooting
+
+### Browser Tool Issues
+- Ensure ChromeDriver is installed and in PATH
+- Check Chrome/Chromium version compatibility
+- Some sites block automated browsers
+
+### Python Tool Issues
+- Verify Docker is installed: `docker --version`
+- Check Docker permissions: `docker ps`
+- Ensure python:3.11-slim image is pulled
+
+### VLLM Issues
+- Check GPU availability: `nvidia-smi`
+- Verify VLLM server is running on correct port
+- Monitor memory usage for large models
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see LICENSE file for details.
+
+## Acknowledgments
+
+- OpenAI for the Harmony format specification
+- VLLM team for the inference engine
+- Selenium project for browser automation
+</file_artifact>
+
+<file path="GPT-OSS/requirements.txt">
+# Core dependencies
+flask==3.0.0
+flask-cors==4.0.0
+aiohttp==3.9.1
+python-dotenv==1.0.0
+
+# AI/ML dependencies
+openai==1.12.0
+vllm>=0.3.0
+
+# Browser automation
+selenium==4.15.0
+helium==3.0.9
+pillow==10.1.0
+
+# Docker support for Python sandbox
+docker==7.0.0
+
+# Browser profile support
+undetected-chromedriver==3.5.5
+
+# Utilities
+requests==2.31.0
+beautifulsoup4==4.12.2
+lxml==4.9.3
+
+# Development dependencies
+pytest==7.4.3
+black==23.11.0
+flake8==6.1.0
+mypy==1.7.1
+
+# Optional performance dependencies
+uvicorn==0.24.0
+gunicorn==21.2.0
+</file_artifact>
+
+<file path="GPT-OSS/run.sh">
+#!/bin/bash
+# Run script for Harmony VLLM App
+
+# Activate virtual environment if it exists
+if [ -d "venv" ]; then
+    source venv/bin/activate
+fi
+
+# Check if port 5002 is already in use
+if lsof -Pi :5002 -sTCP:LISTEN -t >/dev/null ; then
+    echo "Port 5002 is already in use. Please stop the existing process."
+    exit 1
+fi
+
+# Set default environment variables
+export FLASK_APP=harmony_vllm_app.py
+export FLASK_ENV=development
+
+# Start the application
+echo "Starting Harmony VLLM App on http://localhost:5002"
+python harmony_vllm_app.py
+</file_artifact>
+
+<file path="GPT-OSS/setup.sh">
+#!/bin/bash
+# Setup script for Harmony VLLM App
+
+echo "Setting up Harmony VLLM App..."
+echo "=============================="
+
+# Check Python version
+python_version=$(python3 --version 2>&1 | awk '{print $2}')
+echo "Python version: $python_version"
+
+# Create virtual environment
+echo "Creating virtual environment..."
+python3 -m venv venv
+source venv/bin/activate
+
+# Install dependencies
+echo "Installing Python dependencies..."
+pip install -r requirements.txt
+
+# Check Docker
+echo "Checking Docker..."
+if command -v docker &> /dev/null; then
+    echo "✓ Docker is installed"
+    echo "Pulling Python Docker image..."
+    docker pull python:3.11-slim
+else
+    echo "⚠ Docker is not installed. Python tool will use subprocess mode."
+    echo "  To enable sandboxed execution, install Docker:"
+    echo "  sudo apt-get install docker.io"
+fi
+
+# Check ChromeDriver
+echo "Checking ChromeDriver..."
+if command -v chromedriver &> /dev/null; then
+    echo "✓ ChromeDriver is installed"
+    chromedriver --version
+else
+    echo "⚠ ChromeDriver is not installed. Browser tool will not work."
+    echo "  Install with: sudo apt-get install chromium-chromedriver"
+fi
+
+# Create necessary directories
+echo "Creating directories..."
+mkdir -p logs
+mkdir -p screenshots
+
+echo ""
+echo "Setup complete!"
+echo ""
+echo "To start the app:"
+echo "1. Activate virtual environment: source venv/bin/activate"
+echo "2. Set OpenAI API key: export OPENAI_API_KEY='your-key'"
+echo "3. Run the app: python harmony_vllm_app.py"
+echo ""
+echo "For VLLM backend, start VLLM server first:"
+echo "python -m vllm.entrypoints.openai.api_server --model meta-llama/Llama-3.2-3B-Instruct --port 5001"
+</file_artifact>
+
+<file path="GPT-OSS/vision_browser_tool.py">
+"""
+Vision-based browser tool for Harmony
+Adapted from smolagents vision_web_browser.py
+"""
+
+import os
+import base64
+import json
+import logging
+from io import BytesIO
+from typing import Dict, Any, Optional, List
+from time import sleep
+import re
+
+try:
+    import PIL.Image
+    from selenium import webdriver
+    from selenium.webdriver.common.by import By
+    from selenium.webdriver.common.keys import Keys
+    from selenium.webdriver.support.ui import WebDriverWait
+    from selenium.webdriver.support import expected_conditions as EC
+    import helium
+    HAS_SELENIUM = True
+except ImportError:
+    HAS_SELENIUM = False
+    logging.warning("Selenium/Helium not available. Install with: pip install selenium helium pillow")
+
+class VisionBrowserTool:
+    """Browser tool that provides visual feedback through screenshots"""
+    
+    def __init__(self, headless: bool = False, use_personal_profile: bool = True):
+        self.headless = headless
+        self.use_personal_profile = use_personal_profile
+        self.driver = None
+        self.last_screenshot = None
+        
+    def initialize_driver(self):
+        """Initialize the Selenium WebDriver"""
+        if not HAS_SELENIUM:
+            raise ImportError("Selenium is required for browser tool")
+            
+        chrome_options = webdriver.ChromeOptions()
+        
+        # Use a dedicated AI assistant browser profile (separate from personal)
+        if self.use_personal_profile:
+            profile_dir = os.path.expanduser("~/.harmony_ai_browser_profile")
+            if not os.path.exists(profile_dir):
+                os.makedirs(profile_dir)
+            chrome_options.add_argument(f"--user-data-dir={profile_dir}")
+            chrome_options.add_argument("--profile-directory=AIAssistant")
+            logging.info(f"Using AI assistant browser profile: {profile_dir}")
+        
+        # Set window size
+        chrome_options.add_argument("--window-size=1200,800")
+        chrome_options.add_argument("--force-device-scale-factor=1")
+        
+        # Make it behave like a real browser
+        chrome_options.add_argument("--disable-blink-features=AutomationControlled")
+        chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
+        chrome_options.add_experimental_option('useAutomationExtension', False)
+        
+        # Use an honest user agent that identifies as an AI assistant
+        chrome_options.add_argument("user-agent=Mozilla/5.0 (compatible; HarmonyAI/1.0; +https://github.com/harmony-ai) Chrome/136.0.0.0")
+        
+        # Enable features a real user would have
+        chrome_options.add_argument("--enable-features=NetworkService,NetworkServiceInProcess")
+        chrome_options.add_argument("--disable-features=VizDisplayCompositor")
+        chrome_options.add_argument("--disable-dev-shm-usage")
+        chrome_options.add_argument("--no-sandbox")  # Required for some Linux environments
+        
+        # Set preferences to act more human
+        prefs = {
+            "credentials_enable_service": True,
+            "profile.password_manager_enabled": True,
+            "profile.default_content_setting_values.notifications": 1,
+            "profile.default_content_setting_values.geolocation": 1,
+        }
+        chrome_options.add_experimental_option("prefs", prefs)
+        
+        if self.headless:
+            chrome_options.add_argument("--headless=new")  # Use new headless mode
+            
+        self.driver = helium.start_chrome(headless=self.headless, options=chrome_options)
+        return self.driver
+    
+    def take_screenshot(self) -> Dict[str, Any]:
+        """Take a screenshot and return it as base64"""
+        if not self.driver:
+            return {"error": "Browser not initialized"}
+            
+        try:
+            sleep(0.5)  # Let animations complete
+            png_bytes = self.driver.get_screenshot_as_png()
+            image = PIL.Image.open(BytesIO(png_bytes))
+            
+            # Convert to base64 for easy transmission
+            buffered = BytesIO()
+            image.save(buffered, format="PNG")
+            img_base64 = base64.b64encode(buffered.getvalue()).decode()
+            
+            self.last_screenshot = image
+            
+            return {
+                "screenshot": f"data:image/png;base64,{img_base64}",
+                "size": image.size,
+                "url": self.driver.current_url
+            }
+        except Exception as e:
+            return {"error": f"Screenshot failed: {str(e)}"}
+    
+    def execute_browser_command(self, command: str, params: Dict[str, Any] = None) -> Dict[str, Any]:
+        """Execute a browser command and return result with screenshot"""
+        if not self.driver:
+            self.initialize_driver()
+            
+        result = {"command": command, "params": params}
+        
+        try:
+            if command == "navigate":
+                url = params.get("url", "")
+                if not url.startswith(("http://", "https://")):
+                    url = "https://" + url
+                helium.go_to(url)
+                result["status"] = "success"
+                result["message"] = f"Navigated to {url}"
+                
+                # Wait a bit for the page to fully load
+                sleep(2)
+                
+                # Automatically extract text after navigation
+                try:
+                    page_text = self.driver.find_element(By.TAG_NAME, "body").text
+                    result["text"] = page_text
+                except Exception as e:
+                    logging.warning(f"Could not extract text after navigation: {e}")
+                
+            elif command == "click":
+                text = params.get("text", "")
+                element_type = params.get("type", "any")  # any, link, button
+                
+                if element_type == "link":
+                    helium.click(helium.Link(text))
+                else:
+                    helium.click(text)
+                result["status"] = "success"
+                result["message"] = f"Clicked on '{text}'"
+                
+            elif command == "type":
+                text = params.get("text", "")
+                into = params.get("into", None)
+                
+                if into:
+                    helium.write(text, into=into)
+                else:
+                    helium.write(text)
+                result["status"] = "success"
+                result["message"] = f"Typed '{text}'"
+                
+            elif command == "press":
+                key = params.get("key", "ENTER")
+                key_map = {
+                    "ENTER": Keys.ENTER,
+                    "TAB": Keys.TAB,
+                    "ESCAPE": Keys.ESCAPE,
+                    "BACKSPACE": Keys.BACKSPACE,
+                    "DELETE": Keys.DELETE,
+                    "UP": Keys.UP,
+                    "DOWN": Keys.DOWN,
+                    "LEFT": Keys.LEFT,
+                    "RIGHT": Keys.RIGHT,
+                }
+                helium.press(key_map.get(key, Keys.ENTER))
+                result["status"] = "success"
+                result["message"] = f"Pressed {key}"
+                
+            elif command == "scroll":
+                direction = params.get("direction", "down")
+                amount = params.get("amount", 500)
+                
+                if direction == "down":
+                    helium.scroll_down(num_pixels=amount)
+                else:
+                    helium.scroll_up(num_pixels=amount)
+                result["status"] = "success"
+                result["message"] = f"Scrolled {direction} {amount}px"
+                
+            elif command == "search":
+                text = params.get("text", "")
+                nth = params.get("nth", 1)
+                
+                elements = self.driver.find_elements(By.XPATH, f"//*[contains(text(), '{text}')]")
+                if nth > len(elements):
+                    result["status"] = "error"
+                    result["message"] = f"Only {len(elements)} matches found for '{text}'"
+                else:
+                    elem = elements[nth - 1]
+                    self.driver.execute_script("arguments[0].scrollIntoView(true);", elem)
+                    result["status"] = "success"
+                    result["message"] = f"Found {len(elements)} matches, focused on #{nth}"
+                    
+            elif command == "back":
+                self.driver.back()
+                result["status"] = "success"
+                result["message"] = "Went back to previous page"
+                
+            elif command == "refresh":
+                self.driver.refresh()
+                result["status"] = "success"
+                result["message"] = "Refreshed the page"
+                
+            elif command == "close_popups":
+                webdriver.ActionChains(self.driver).send_keys(Keys.ESCAPE).perform()
+                result["status"] = "success"
+                result["message"] = "Pressed ESC to close popups"
+                
+            elif command == "wait":
+                seconds = params.get("seconds", 2)
+                sleep(seconds)
+                result["status"] = "success"
+                result["message"] = f"Waited {seconds} seconds"
+                
+            elif command == "extract_text":
+                # Extract all visible text from the page
+                text = self.driver.find_element(By.TAG_NAME, "body").text
+                result["status"] = "success"
+                result["text"] = text
+                result["message"] = f"Extracted {len(text)} characters of text"
+                
+            elif command == "extract_links":
+                # Extract all links from the page
+                links = []
+                elements = self.driver.find_elements(By.TAG_NAME, "a")
+                for elem in elements:
+                    href = elem.get_attribute("href")
+                    text = elem.text.strip()
+                    if href and text:
+                        links.append({"text": text, "url": href})
+                result["status"] = "success"
+                result["links"] = links
+                result["message"] = f"Found {len(links)} links"
+                
+            elif command == "screenshot":
+                # Just take a screenshot without any action
+                result["status"] = "success"
+                result["message"] = "Screenshot taken"
+                
+            else:
+                result["status"] = "error"
+                result["message"] = f"Unknown command: {command}"
+                
+        except Exception as e:
+            result["status"] = "error"
+            result["message"] = str(e)
+            
+        # Always include a screenshot with the result
+        screenshot_data = self.take_screenshot()
+        result.update(screenshot_data)
+        
+        return result
+    
+    def close(self):
+        """Close the browser"""
+        if self.driver:
+            self.driver.quit()
+            self.driver = None
+            
+
+# Function to handle tool calls from the harmony app
+def handle_browser_tool_call(params: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Handle browser tool calls in the harmony format
+    
+    Expected params format:
+    {
+        "action": "navigate|click|type|scroll|search|etc",
+        "parameters": {
+            // action-specific parameters
+        }
+    }
+    """
+    global _browser_instance
+    
+    # Initialize browser if needed
+    if '_browser_instance' not in globals():
+        _browser_instance = VisionBrowserTool(headless=False)
+    
+    action = params.get("action", "screenshot")
+    parameters = params.get("parameters", {})
+    
+    # Map the action to browser command
+    return _browser_instance.execute_browser_command(action, parameters)
+
+
+# Example usage for testing
+if __name__ == "__main__":
+    browser = VisionBrowserTool(headless=False)
+    
+    # Navigate to a page
+    result = browser.execute_browser_command("navigate", {"url": "https://www.google.com"})
+    print(f"Navigate result: {result['message']}")
+    
+    # Type in search box
+    result = browser.execute_browser_command("type", {"text": "OpenAI GPT", "into": "Search"})
+    print(f"Type result: {result['message']}")
+    
+    # Press Enter
+    result = browser.execute_browser_command("press", {"key": "ENTER"})
+    print(f"Press result: {result['message']}")
+    
+    # Wait for results
+    result = browser.execute_browser_command("wait", {"seconds": 2})
+    
+    # Extract links
+    result = browser.execute_browser_command("extract_links", {})
+    print(f"Found {len(result.get('links', []))} links")
+    
+    # Close browser
+    browser.close()
+</file_artifact>
+
+<file path="GPT-OSS/vision_browser_wrapper.py">
+"""
+Wrapper to integrate vision browser tool with harmony format
+"""
+
+import json
+import logging
+from typing import Dict, Any, Optional
+
+from vision_browser_tool import VisionBrowserTool, HAS_SELENIUM
+
+class VisionBrowserWrapper:
+    """Wrapper that provides browser functionality in harmony functions format"""
+    
+    def __init__(self, mock_mode=False):
+        self.browser = None
+        self.initialized = False
+        self.mock_mode = mock_mode or not HAS_SELENIUM
+        
+    def get_tool_definition(self) -> Dict[str, Any]:
+        """Return the tool definition for the functions namespace"""
+        return {
+            "name": "browser",
+            "description": "Control a web browser with visual feedback. Navigation automatically extracts page text. Actions: navigate, click, type, scroll, search, extract_text, extract_links, back, refresh, close_popups, wait, screenshot",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "action": {
+                        "type": "string",
+                        "enum": ["navigate", "click", "type", "scroll", "search", "extract_text", 
+                                "extract_links", "back", "refresh", "close_popups", "wait", "screenshot"],
+                        "description": "The browser action to perform"
+                    },
+                    "parameters": {
+                        "type": "object",
+                        "description": "Action-specific parameters",
+                        "properties": {
+                            "url": {"type": "string", "description": "URL to navigate to (for navigate action)"},
+                            "text": {"type": "string", "description": "Text to click/type/search (for click/type/search actions)"},
+                            "into": {"type": "string", "description": "Element to type into (for type action)"},
+                            "type": {"type": "string", "enum": ["any", "link", "button"], "description": "Element type (for click action)"},
+                            "direction": {"type": "string", "enum": ["up", "down"], "description": "Scroll direction"},
+                            "amount": {"type": "integer", "description": "Scroll amount in pixels"},
+                            "nth": {"type": "integer", "description": "Which occurrence to find (for search action)"},
+                            "key": {"type": "string", "enum": ["ENTER", "TAB", "ESCAPE", "BACKSPACE", "DELETE", "UP", "DOWN", "LEFT", "RIGHT"], "description": "Key to press"},
+                            "seconds": {"type": "number", "description": "Seconds to wait"}
+                        }
+                    }
+                },
+                "required": ["action"]
+            }
+        }
+    
+    def execute(self, params: Dict[str, Any]) -> Dict[str, Any]:
+        """Execute the browser tool with given parameters"""
+        # Check if we're in mock mode
+        if self.mock_mode:
+            return self._execute_mock(params)
+            
+        if not HAS_SELENIUM:
+            return {
+                "error": "Browser tool requires selenium and helium. Install with: pip install selenium helium pillow",
+                "status": "error"
+            }
+            
+        try:
+            # Initialize browser on first use
+            if not self.initialized:
+                self.browser = VisionBrowserTool(headless=False)
+                self.initialized = True
+                
+            action = params.get("action", "screenshot")
+            action_params = params.get("parameters", {})
+            
+            # Execute the browser command
+            result = self.browser.execute_browser_command(action, action_params)
+            
+            # Format the response for harmony
+            if result.get("status") == "success":
+                response = {
+                    "status": "success",
+                    "message": result.get("message", ""),
+                    "url": result.get("url", ""),
+                }
+                
+                # Include extracted data if available
+                if "text" in result:
+                    response["extracted_text"] = result["text"]
+                if "links" in result:
+                    response["links"] = result["links"]
+                    
+                # Include screenshot info (not the full base64 to avoid bloating the response)
+                if "screenshot" in result:
+                    response["screenshot_available"] = True
+                    response["screenshot_size"] = result.get("size", [])
+                    
+                return response
+            else:
+                return {
+                    "status": "error",
+                    "error": result.get("message", "Unknown error"),
+                    "url": result.get("url", "")
+                }
+                
+        except Exception as e:
+            logging.error(f"Browser tool error: {e}")
+            return {
+                "status": "error",
+                "error": str(e)
+            }
+    
+    def close(self):
+        """Close the browser"""
+        if self.browser:
+            self.browser.close()
+            self.browser = None
+            self.initialized = False
+    
+    def _execute_mock(self, params: Dict[str, Any]) -> Dict[str, Any]:
+        """Execute mock browser actions for testing"""
+        action = params.get("action", "screenshot")
+        action_params = params.get("parameters", {})
+        
+        # Mock responses for different actions
+        if action == "navigate":
+            url = action_params.get("url", "")
+            # Automatically extract text after navigation
+            mock_text = "Example Domain\n\nThis domain is for use in illustrative examples in documents. You may use this domain in literature without prior coordination or asking for permission.\n\nMore information..."
+            return {
+                "status": "success",
+                "message": f"[MOCK] Navigated to {url}",
+                "url": url,
+                "screenshot_available": True,
+                "screenshot_size": [1200, 800],
+                "extracted_text": mock_text
+            }
+        
+        elif action == "extract_text":
+            # Return mock text based on current URL
+            return {
+                "status": "success",
+                "message": "[MOCK] Extracted page text",
+                "extracted_text": "Example Domain\n\nThis domain is for use in illustrative examples in documents. You may use this domain in literature without prior coordination or asking for permission.\n\nMore information...",
+                "url": "https://example.com"
+            }
+        
+        elif action == "click":
+            text = action_params.get("text", "")
+            return {
+                "status": "success",
+                "message": f"[MOCK] Clicked on '{text}'",
+                "url": "https://example.com/clicked"
+            }
+        
+        elif action == "type":
+            text = action_params.get("text", "")
+            return {
+                "status": "success",
+                "message": f"[MOCK] Typed '{text}'",
+                "url": "https://example.com"
+            }
+        
+        elif action == "scroll":
+            direction = action_params.get("direction", "down")
+            amount = action_params.get("amount", 500)
+            return {
+                "status": "success",
+                "message": f"[MOCK] Scrolled {direction} {amount}px",
+                "url": "https://example.com"
+            }
+        
+        elif action == "extract_links":
+            return {
+                "status": "success",
+                "message": "[MOCK] Extracted links",
+                "links": [
+                    {"text": "More information...", "url": "https://www.iana.org/domains/example"},
+                    {"text": "Example link", "url": "https://example.com/page"}
+                ],
+                "url": "https://example.com"
+            }
+        
+        else:
+            return {
+                "status": "success",
+                "message": f"[MOCK] Executed action: {action}",
+                "url": "https://example.com"
+            }
+
+
+# Usage instructions for the model
+BROWSER_INSTRUCTIONS = """
+The browser tool allows you to control a web browser with these actions:
+
+1. **navigate**: Go to a URL
+   Example: {"action": "navigate", "parameters": {"url": "https://www.google.com"}}
+
+2. **click**: Click on text or elements
+   Example: {"action": "click", "parameters": {"text": "Sign in", "type": "link"}}
+
+3. **type**: Type text into input fields
+   Example: {"action": "type", "parameters": {"text": "hello world", "into": "Search"}}
+
+4. **scroll**: Scroll the page
+   Example: {"action": "scroll", "parameters": {"direction": "down", "amount": 500}}
+
+5. **search**: Find text on the page (like Ctrl+F)
+   Example: {"action": "search", "parameters": {"text": "Python", "nth": 2}}
+
+6. **extract_text**: Get all visible text from the page
+   Example: {"action": "extract_text", "parameters": {}}
+
+7. **extract_links**: Get all links from the page
+   Example: {"action": "extract_links", "parameters": {}}
+
+8. **back**: Go back to previous page
+   Example: {"action": "back", "parameters": {}}
+
+9. **wait**: Wait for a few seconds
+   Example: {"action": "wait", "parameters": {"seconds": 2}}
+
+10. **screenshot**: Take a screenshot of current state
+    Example: {"action": "screenshot", "parameters": {}}
+
+Tips:
+- Always navigate to a URL before trying other actions
+- Use wait after navigation or clicks to let pages load
+- Extract text or links to understand page content
+- Use search to find specific content on the page
+"""
+
+
+# Test the wrapper
+if __name__ == "__main__":
+    wrapper = VisionBrowserWrapper()
+    
+    # Test navigation
+    result = wrapper.execute({
+        "action": "navigate",
+        "parameters": {"url": "https://en.wikipedia.org/wiki/Python_(programming_language)"}
+    })
+    print(f"Navigation result: {json.dumps(result, indent=2)}")
+    
+    # Test text extraction
+    result = wrapper.execute({
+        "action": "extract_text",
+        "parameters": {}
+    })
+    print(f"Extracted {len(result.get('extracted_text', ''))} characters")
+    
+    # Test search
+    result = wrapper.execute({
+        "action": "search",
+        "parameters": {"text": "Guido van Rossum"}
+    })
+    print(f"Search result: {json.dumps(result, indent=2)}")
+    
+    # Close browser
+    wrapper.close()
+</file_artifact>
+
+<file path="GPT-OSS/templates/harmony_demo.html">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HARMONY Prompt Explorer | OpenAI</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f7f7f8;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Header Styles */
+        .app-header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e5e5;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .openai-logo {
+            width: 24px;
+            height: 24px;
+            color: #000;
+        }
+        
+        .app-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #000;
+            margin: 0;
+            letter-spacing: -0.02em;
+        }
+        
+        .beta-badge {
+            background: #10a37f;
+            color: white;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .header-right {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .header-button {
+            background: transparent;
+            border: 1px solid #e5e5e5;
+            color: #353740;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+        
+        .header-button:hover {
+            background: #f7f7f8;
+            border-color: #d9d9e3;
+        }
+        
+        .header-button svg {
+            width: 16px;
+            height: 16px;
+        }
+        
+        body.dark-mode .app-header {
+            background: #202123;
+            border-bottom-color: #353740;
+        }
+        
+        body.dark-mode .openai-logo {
+            color: #fff;
+        }
+        
+        body.dark-mode .app-title {
+            color: #fff;
+        }
+        
+        body.dark-mode .header-button {
+            color: #ececf1;
+            border-color: #353740;
+        }
+        
+        body.dark-mode .header-button:hover {
+            background: #2a2b32;
+            border-color: #565869;
+        }
+        
+        /* Dark mode styles */
+        body.dark-mode {
+            color: #e0e0e0;
+            background-color: #1a1a1a;
+        }
+        
+        body.dark-mode h1,
+        body.dark-mode h2,
+        body.dark-mode h3,
+        body.dark-mode h4 {
+            color: #f0f0f0;
+        }
+        
+        body.dark-mode .subtitle {
+            color: #b0b0b0;
+        }
+        
+        body.dark-mode .panel {
+            background: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        body.dark-mode .panel h2 {
+            color: #f0f0f0;
+        }
+        
+        body.dark-mode label {
+            color: #d0d0d0;
+        }
+        
+        body.dark-mode input[type="text"],
+        body.dark-mode input[type="date"],
+        body.dark-mode input[type="number"],
+        body.dark-mode select,
+        body.dark-mode textarea {
+            background: #3a3a3a;
+            border: 1px solid #4a4a4a;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode input[type="text"]:focus,
+        body.dark-mode input[type="date"]:focus,
+        body.dark-mode input[type="number"]:focus,
+        body.dark-mode select:focus,
+        body.dark-mode textarea:focus {
+            border-color: #5a5a5a;
+            outline: none;
+        }
+        
+        body.dark-mode .code-display {
+            background: #1e1e1e;
+            border: 1px solid #3a3a3a;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .special-token {
+            color: #4db8ff;
+            background: #1a3a52;
+        }
+        
+        body.dark-mode .channel-analysis {
+            background: #3a3a1a;
+            border-left-color: #ffcc00;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .channel-commentary {
+            background: #1a2a3a;
+            border-left-color: #4db8ff;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .channel-final {
+            background: #1a3a2a;
+            border-left-color: #4dff88;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode button {
+            background: #4a4a4a;
+            color: #f0f0f0;
+        }
+        
+        body.dark-mode button:hover {
+            background: #5a5a5a;
+        }
+        
+        body.dark-mode button:disabled {
+            background: #2a2a2a;
+            color: #6a6a6a;
+        }
+        
+        body.dark-mode .message {
+            background: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        body.dark-mode .message-header {
+            color: #b0b0b0;
+            border-bottom-color: #3a3a3a;
+        }
+        
+        body.dark-mode .message-content {
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .tool-definition {
+            background: #2a2a2a;
+            border: 1px solid #3a3a3a;
+        }
+        
+        body.dark-mode .token-display {
+            background: #1e1e1e;
+            border: 1px solid #3a3a3a;
+        }
+        
+        body.dark-mode .token-item {
+            background: #3a3a3a;
+            color: #e0e0e0;
+        }
+        
+        /* Dark mode for browser warning dialog */
+        body.dark-mode .browser-warning-content {
+            background: #2a2a2a !important;
+            color: #e0e0e0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5) !important;
+        }
+        
+        /* Light mode browser warning title */
+        .browser-warning-title {
+            color: #d73502;
+        }
+        
+        /* Dark mode browser warning title */
+        body.dark-mode .browser-warning-title {
+            color: #d08050 !important;  /* Much softer orange for dark mode */
+        }
+        
+        body.dark-mode #browser-warning-cancel {
+            background: #4a4a4a;
+            border: 1px solid #5a5a5a;
+            color: #f0f0f0;
+        }
+        
+        body.dark-mode #browser-warning-cancel:hover {
+            background: #5a5a5a;
+            border-color: #6a6a6a;
+        }
+        
+        body.dark-mode #browser-warning-ok {
+            background: #6a4030;  /* Much darker, muted brown-red */
+            color: #e0e0e0;
+            border: 1px solid #7a5040;
+        }
+        
+        body.dark-mode #browser-warning-ok:hover {
+            background: #7a5040;
+            border-color: #8a6050;
+        }
+        
+        body.dark-mode .error {
+            background: #3a1a1a;
+            color: #ff9999;
+            border: 1px solid #5a2a2a;
+        }
+        
+        body.dark-mode .success {
+            background: #1a3a1a;
+            color: #99ff99;
+            border: 1px solid #2a5a2a;
+        }
+        
+        body.dark-mode .info-box {
+            background: #1a2a3a;
+            border: 1px solid #2a3a4a;
+            color: #b0d0f0;
+        }
+        
+        body.dark-mode .tab {
+            background: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .tab.active {
+            background: #3a3a3a;
+            color: #f0f0f0;
+        }
+        
+        body.dark-mode .parsing-state {
+            background: #2a2a2a;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .tool-call-item {
+            background: #1a2a3a;
+            border: 1px solid #2a3a4a;
+        }
+        
+        body.dark-mode .tool-call-header {
+            color: #4db8ff;
+        }
+        
+        body.dark-mode .tool-params {
+            background: #2a2a2a;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .tool-result {
+            background: #1a3a1a;
+            border: 1px solid #2a4a2a;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .modal-content {
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .close {
+            color: #aaa;
+        }
+        
+        body.dark-mode .close:hover,
+        body.dark-mode .close:focus {
+            color: #fff;
+        }
+        
+        body.dark-mode .prompt-json {
+            background: #1e1e1e;
+            border: 1px solid #3a3a3a;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .channel-final table {
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .channel-final th,
+        body.dark-mode .channel-final td {
+            border-color: #3a3a3a;
+        }
+        
+        body.dark-mode .channel-final th {
+            background-color: #2a2a2a;
+        }
+        
+        body.dark-mode .channel-final tr:nth-child(even) {
+            background-color: #252525;
+        }
+        
+        body.dark-mode .channel-final code {
+            background-color: #2a2a2a;
+            color: #f0f0f0;
+        }
+        
+        body.dark-mode .channel-final pre {
+            background-color: #2a2a2a;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode #settings-panel {
+            background: #2a2a2a !important;
+            border-color: #3a3a3a !important;
+        }
+        
+        body.dark-mode #settings-panel h3 {
+            color: #f0f0f0;
+        }
+        
+        body.dark-mode #settings-panel label {
+            color: #d0d0d0;
+        }
+        
+        body.dark-mode #settings-panel small {
+            color: #9a9a9a !important;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+        
+        h1 {
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .panel {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .panel h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #111827;
+        }
+        
+        .control-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        
+        input[type="text"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .code-display {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 15px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 13px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-x: auto;
+            /* Removed max-height to show full raw response */
+        }
+        
+        .special-token {
+            color: #0066cc;
+            font-weight: bold;
+            background: #e6f2ff;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+        
+        .channel-analysis {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 5px 10px;
+            margin: 5px 0;
+        }
+        
+        .channel-commentary {
+            background: #cfe2ff;
+            border-left: 4px solid #0d6efd;
+            padding: 5px 10px;
+            margin: 5px 0;
+        }
+        
+        .channel-final {
+            background: #d1e7dd;
+            border-left: 4px solid #198754;
+            padding: 5px 10px;
+            margin: 5px 0;
+        }
+        
+        button {
+            background: #10a37f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        
+        button:hover {
+            background: #0e8f6e;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        button:disabled {
+            background: #d9d9e3;
+            color: #8e8ea0;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .secondary-button {
+            background: transparent;
+            color: #353740;
+            border: 1px solid #d9d9e3;
+        }
+        
+        .secondary-button:hover {
+            background: #f7f7f8;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        body.dark-mode .secondary-button {
+            color: #ececf1;
+            border-color: #565869;
+        }
+        
+        body.dark-mode .secondary-button:hover {
+            background: #2a2b32;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        
+        .message-header {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #666;
+            margin-bottom: 8px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .message-content {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .message-content ul,
+        .message-content ol {
+            margin: 10px 0;
+            padding-left: 25px;
+        }
+        
+        .message-content li {
+            margin: 5px 0;
+        }
+        
+        .message-content p {
+            margin: 10px 0;
+        }
+        
+        .message-content p:first-child {
+            margin-top: 0;
+        }
+        
+        .message-content p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* User message styling */
+        .message-user {
+            background: #f0f7ff;
+            border-color: #cce5ff;
+        }
+        
+        .message-user .message-header {
+            color: #004085;
+            border-bottom-color: #d1e7ff;
+        }
+        
+        /* Assistant message styling */
+        .message-assistant {
+            background: #f6ffed;
+            border-color: #d4edda;
+        }
+        
+        .message-assistant .message-header {
+            color: #155724;
+            border-bottom-color: #dff0e6;
+        }
+        
+        /* Dark mode user/assistant styling */
+        body.dark-mode .message-user {
+            background: #1a2a3a;
+            border-color: #2a4a6a;
+        }
+        
+        body.dark-mode .message-user .message-header {
+            color: #6cb3ff;
+            border-bottom-color: #2a4a6a;
+        }
+        
+        body.dark-mode .message-assistant {
+            background: #1a3a2a;
+            border-color: #2a5a3a;
+        }
+        
+        body.dark-mode .message-assistant .message-header {
+            color: #7dff7d;
+            border-bottom-color: #2a5a3a;
+        }
+        
+        .message-content table {
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        
+        .message-content th,
+        .message-content td {
+            border: 1px solid #dee2e6;
+            padding: 6px 10px;
+            text-align: left;
+        }
+        
+        .message-content th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        
+        .message-content tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .message-content code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        .message-content pre {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        
+        body.dark-mode .message-content table {
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .message-content th,
+        body.dark-mode .message-content td {
+            border-color: #3a3a3a;
+        }
+        
+        body.dark-mode .message-content th {
+            background-color: #2a2a2a;
+        }
+        
+        body.dark-mode .message-content tr:nth-child(even) {
+            background-color: #252525;
+        }
+        
+        body.dark-mode .message-content code {
+            background-color: #2a2a2a;
+            color: #f0f0f0;
+        }
+        
+        body.dark-mode .message-content pre {
+            background-color: #2a2a2a;
+            color: #e0e0e0;
+        }
+        
+        .tool-definition {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            padding: 0;
+            margin: 15px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        
+        .tool-header {
+            background: #f8f9fa;
+            padding: 10px 15px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .tool-number {
+            font-weight: 600;
+            color: #495057;
+            font-size: 14px;
+        }
+        
+        .tool-remove {
+            background: #dc3545;
+            color: white;
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            font-size: 18px;
+            line-height: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+        
+        .tool-remove:hover {
+            background: #c82333;
+        }
+        
+        .tool-inputs {
+            padding: 15px;
+            display: flex;
+            gap: 15px;
+        }
+        
+        .tool-inputs input {
+            flex: 1;
+        }
+        
+        .tool-name {
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-weight: 600;
+        }
+        
+        .tool-params-section {
+            padding: 0 15px 15px 15px;
+        }
+        
+        .tool-params-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #6c757d;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .tool-parameters {
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 13px;
+            line-height: 1.5;
+            min-height: 150px;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            padding: 12px;
+        }
+        
+        body.dark-mode .tool-definition {
+            background: #2a2a2a;
+            border-color: #3a3a3a;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        body.dark-mode .tool-header {
+            background: #1a1a1a;
+            border-bottom-color: #3a3a3a;
+        }
+        
+        body.dark-mode .tool-number {
+            color: #b0b0b0;
+        }
+        
+        body.dark-mode .tool-params-label {
+            color: #9a9a9a;
+        }
+        
+        body.dark-mode .tool-parameters {
+            background: #1a1a1a;
+            border-color: #3a3a3a;
+        }
+        
+        .tool-preview-section {
+            padding: 0 15px 15px 15px;
+        }
+        
+        .tool-preview-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #28a745;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .tool-preview {
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 13px;
+            line-height: 1.5;
+            background: #e8f5e9;
+            border: 1px solid #4caf50;
+            padding: 12px;
+            border-radius: 4px;
+            white-space: pre-wrap;
+            color: #1b5e20;
+        }
+        
+        body.dark-mode .tool-preview-label {
+            color: #4dff88;
+        }
+        
+        body.dark-mode .tool-preview {
+            background: #1a2a1a;
+            border-color: #2a5a2a;
+            color: #a5d6a7;
+        }
+        
+        .response-section {
+            margin-top: 20px;
+        }
+        
+        .response-section h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .token-display {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            padding: 10px;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+        }
+        
+        .token-item {
+            padding: 2px 6px;
+            background: #e9ecef;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        
+        .token-special {
+            background: #0066cc;
+            color: white;
+        }
+        
+        .streaming-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #28a745;
+            border-radius: 50%;
+            margin-left: 10px;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+        
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+        
+        .success {
+            background: #d1e7dd;
+            color: #155724;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+        
+        .info-banner {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 24px;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+        }
+        
+        .info-content h2 {
+            margin: 0 0 8px 0;
+            font-size: 24px;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .info-content p {
+            margin: 0 0 20px 0;
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .info-details {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+        
+        .info-item svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            flex-shrink: 0;
+        }
+        
+        .info-item code {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+        
+        body.dark-mode .info-banner {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #ddd;
+            margin-bottom: 15px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-bottom: none;
+            margin-right: 5px;
+            border-radius: 4px 4px 0 0;
+        }
+        
+        .tab.active {
+            background: white;
+            font-weight: 500;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .prompt-stage {
+            margin-bottom: 20px;
+        }
+        
+        .prompt-stage-header {
+            background: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 4px 4px 0 0;
+            font-weight: 600;
+            font-size: 13px;
+            color: #495057;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .prompt-stage-info {
+            font-size: 11px;
+            font-weight: normal;
+            color: #6c757d;
+        }
+        
+        .prompt-stage .code-display {
+            border-radius: 0 0 4px 4px;
+            margin-top: 0;
+        }
+        
+        body.dark-mode .prompt-stage-header {
+            background: #3a3a3a;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .prompt-stage-info {
+            color: #9a9a9a;
+        }
+        
+        .parsing-state {
+            background: #f0f0f0;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+        
+        .parsing-state div {
+            margin: 2px 0;
+        }
+        
+        .parsing-state .label {
+            display: inline-block;
+            width: 150px;
+            font-weight: bold;
+        }
+        
+        .tool-call-item {
+            background: #e6f3ff;
+            border: 1px solid #b3d9ff;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        
+        .tool-call-header {
+            font-weight: bold;
+            color: #0066cc;
+            margin-bottom: 5px;
+        }
+        
+        .tool-params {
+            background: #f0f0f0;
+            padding: 5px;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 12px;
+            margin: 5px 0;
+        }
+        
+        .tool-result {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            padding: 5px;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 12px;
+            margin: 5px 0;
+        }
+        
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        
+        .modal-content {
+            background-color: #fefefe;
+            margin: 2% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 90%;
+            max-width: 1200px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 8px;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover,
+        .close:focus {
+            color: black;
+        }
+        
+        .prompt-json {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 15px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-x: auto;
+            /* No max-height - show full content */
+        }
+        
+        /* Markdown styling for final channel */
+        .channel-final table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 15px 0;
+        }
+        
+        .channel-final th,
+        .channel-final td {
+            border: 1px solid #dee2e6;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        .channel-final th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        
+        .channel-final tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .channel-final h3 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: #212529;
+        }
+        
+        .channel-final ul,
+        .channel-final ol {
+            margin: 10px 0;
+            padding-left: 25px;
+        }
+        
+        .channel-final code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        .channel-final pre {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+    <!-- Add markdown parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <!-- Browser Warning Dialog -->
+    <div id="browser-warning-dialog" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000;">
+        <div class="browser-warning-content" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 30px; border-radius: 10px; max-width: 500px; box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
+            <h3 class="browser-warning-title" style="margin-top: 0;">⚠️ Browser Tool Warning</h3>
+            <p style="line-height: 1.6;">The browser tool is likely to encounter <strong>Cloudflare protection</strong> and other anti-bot measures on most websites. This includes:</p>
+            <ul style="margin: 15px 0;">
+                <li>News sites (Reuters, BBC, CNN, etc.)</li>
+                <li>Social media platforms</li>
+                <li>Most commercial websites</li>
+            </ul>
+            <p style="line-height: 1.6;">These protections <strong>cannot be bypassed</strong> and will result in blocked requests or CAPTCHA challenges.</p>
+            <p style="line-height: 1.6; margin-bottom: 20px;"><strong>We do not recommend using the browser tool</strong> for general web browsing. Consider using RSS feeds or APIs instead.</p>
+            <div style="text-align: right;">
+                <button id="browser-warning-cancel" style="margin-right: 10px; padding: 8px 20px; border: 1px solid #666; background: #f5f5f5; color: #333; border-radius: 5px; cursor: pointer;">Cancel</button>
+                <button id="browser-warning-ok" style="padding: 8px 20px; background: #d73502; color: white; border: none; border-radius: 5px; cursor: pointer;">I Understand</button>
+            </div>
+        </div>
+    </div>
+</head>
+<body>
+    <!-- Header -->
+    <header class="app-header">
+        <div class="header-content">
+            <div class="header-left">
+                <h1 class="app-title">HARMONY Prompt Explorer</h1>
+            </div>
+            <div class="header-right">
+                <button onclick="toggleTheme()" class="header-button theme-button">
+                    <span id="theme-icon">🌙</span>
+                    <span id="theme-text">Dark</span>
+                </button>
+                <button onclick="toggleSettings()" class="header-button settings-button">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 10C9.10457 10 10 9.10457 10 8C10 6.89543 9.10457 6 8 6C6.89543 6 6 6.89543 6 8C6 9.10457 6.89543 10 8 10Z" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M12.49 9.01L12.5 9V7L14.44 5.56C14.6233 5.42667 14.7767 5.24667 14.9 5.02C15.0233 4.79333 15.0733 4.55333 15.05 4.3C15.0267 4.04667 14.9367 3.82 14.78 3.62C14.6233 3.42 14.4267 3.27333 14.19 3.18L12 2.38L11.2 0.19C11.1067 -0.0433333 10.9567 -0.24 10.75 -0.4C10.5433 -0.56 10.31 -0.636667 10.05 -0.63C9.79 -0.623333 9.55333 -0.536667 9.34 -0.37C9.12667 -0.203333 8.96667 0.00333333 8.86 0.25L8 2.62L6 2.65C5.74667 2.65667 5.50667 2.73667 5.28 2.89C5.05333 3.04333 4.88 3.24 4.76 3.48C4.64 3.72 4.59333 3.97 4.62 4.23C4.64667 4.49 4.74 4.72 4.9 4.92L6.55 7L6.56 9L4.61 10.44C4.42667 10.5733 4.27333 10.7533 4.15 10.98C4.02667 11.2067 3.97667 11.4467 4 11.7C4.02333 11.9533 4.11333 12.18 4.27 12.38C4.42667 12.58 4.62333 12.7267 4.86 12.82L7.05 13.62L7.86 15.81C7.95333 16.0567 8.10333 16.2633 8.31 16.43C8.51667 16.5967 8.75 16.68 9.01 16.68C9.27 16.68 9.50667 16.6 9.72 16.44C9.93333 16.28 10.0933 16.0733 10.2 15.82L11.05 13.65L13.05 13.62C13.3033 13.6133 13.5433 13.5367 13.77 13.39C13.9967 13.2433 14.17 13.05 14.29 12.81C14.41 12.57 14.4567 12.32 14.43 12.06C14.4033 11.8 14.31 11.57 14.15 11.37L12.49 9.01Z" stroke="currentColor" stroke-width="1.5"/>
+                    </svg>
+                    Settings
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        
+        <!-- Settings Panel -->
+        <div id="settings-panel" class="panel" style="display: none; margin-bottom: 24px;">
+            <h2>Generation Settings</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                <div>
+                    <label for="max-tokens" style="display: block; font-weight: 600; margin-bottom: 5px;">
+                        Max Tokens
+                        <span style="font-weight: normal; color: #6c757d;">(default: 2048)</span>
+                    </label>
+                    <input type="number" id="max-tokens" value="2048" min="1" max="32768" style="width: 100%; padding: 8px; border: 1px solid #ced4da; border-radius: 4px;">
+                    <small style="color: #6c757d;">Maximum number of tokens to generate</small>
+                </div>
+                
+                <div>
+                    <label for="temperature" style="display: block; font-weight: 600; margin-bottom: 5px;">
+                        Temperature
+                        <span style="font-weight: normal; color: #6c757d;">(default: 0.7)</span>
+                    </label>
+                    <input type="number" id="temperature" value="0.7" min="0" max="2" step="0.1" style="width: 100%; padding: 8px; border: 1px solid #ced4da; border-radius: 4px;">
+                    <small style="color: #6c757d;">Controls randomness (0=deterministic, 2=very random)</small>
+                </div>
+                
+                <div>
+                    <label for="top-p" style="display: block; font-weight: 600; margin-bottom: 5px;">
+                        Top P
+                        <span style="font-weight: normal; color: #6c757d;">(optional)</span>
+                    </label>
+                    <input type="number" id="top-p" placeholder="1.0" min="0" max="1" step="0.01" style="width: 100%; padding: 8px; border: 1px solid #ced4da; border-radius: 4px;">
+                    <small style="color: #6c757d;">Nucleus sampling parameter</small>
+                </div>
+                
+                <div>
+                    <label for="frequency-penalty" style="display: block; font-weight: 600; margin-bottom: 5px;">
+                        Frequency Penalty
+                        <span style="font-weight: normal; color: #6c757d;">(optional)</span>
+                    </label>
+                    <input type="number" id="frequency-penalty" placeholder="0.0" min="-2" max="2" step="0.1" style="width: 100%; padding: 8px; border: 1px solid #ced4da; border-radius: 4px;">
+                    <small style="color: #6c757d;">Penalize repeated tokens</small>
+                </div>
+                
+                <div>
+                    <label for="presence-penalty" style="display: block; font-weight: 600; margin-bottom: 5px;">
+                        Presence Penalty
+                        <span style="font-weight: normal; color: #6c757d;">(optional)</span>
+                    </label>
+                    <input type="number" id="presence-penalty" placeholder="0.0" min="-2" max="2" step="0.1" style="width: 100%; padding: 8px; border: 1px solid #ced4da; border-radius: 4px;">
+                    <small style="color: #6c757d;">Penalize tokens based on presence</small>
+                </div>
+                
+                <div>
+                    <label for="stream-timeout" style="display: block; font-weight: 600; margin-bottom: 5px;">
+                        Stream Timeout (seconds)
+                        <span style="font-weight: normal; color: #6c757d;">(default: 120)</span>
+                    </label>
+                    <input type="number" id="stream-timeout" value="120" min="10" max="600" style="width: 100%; padding: 8px; border: 1px solid #ced4da; border-radius: 4px;">
+                    <small style="color: #6c757d;">Maximum time to wait for streaming response</small>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e5e5e5;">
+                <button onclick="resetSettings()" class="secondary-button" style="margin-right: 10px;">
+                    Reset to Defaults
+                </button>
+                <button onclick="saveSettings()">
+                    Save Settings
+                </button>
+            </div>
+        </div>
+        
+        <div class="info-banner">
+            <div class="info-content">
+                <h2>Welcome to HARMONY Prompt Explorer</h2>
+                <p>Explore and test OpenAI's HARMONY prompt format with real-time visualization and tool calling capabilities.</p>
+                <div class="info-details">
+                    <div class="info-item">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M8 2L10.5 7L16 7.5L12 11.5L13 17L8 14.5L3 17L4 11.5L0 7.5L5.5 7L8 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Powered by <code>openai-harmony</code> library</span>
+                    </div>
+                    <div class="info-item">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M8 1V3M8 13V15M1 8H3M13 8H15M3.5 3.5L4.5 4.5M11.5 11.5L12.5 12.5M3.5 12.5L4.5 11.5M11.5 4.5L12.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        <span>Connected to vLLM at <code>localhost:8000</code></span>
+                    </div>
+                    <div class="info-item">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M4 2H12C13.1046 2 14 2.89543 14 4V12C14 13.1046 13.1046 14 12 14H4C2.89543 14 2 13.1046 2 12V4C2 2.89543 2.89543 2 4 2Z" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M6 6L10 10M10 6L6 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        <span>Automatic tool execution with mock responses</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Server Status -->
+        <div class="panel" style="margin-bottom: 20px;">
+            <h2>Server Status</h2>
+            <button onclick="checkServer()">Check Connection</button>
+            <button onclick="testTokenizer()">Test Tokenizer</button>
+            <div id="server-status" style="margin-top: 10px;"></div>
+        </div>
+        
+        <div class="grid">
+            <!-- Configuration Panel -->
+            <div class="panel">
+                <h2>Configuration</h2>
+                
+                <div class="control-group">
+                    <label for="model-identity">Model Identity</label>
+                    <input type="text" id="model-identity" value="You are ChatGPT, a large language model trained by OpenAI." />
+                </div>
+                
+                <div class="control-group">
+                    <label for="knowledge-cutoff">Knowledge Cutoff</label>
+                    <input type="text" id="knowledge-cutoff" value="2024-06" />
+                </div>
+                
+                <div class="control-group">
+                    <label for="current-date">Current Date</label>
+                    <input type="date" id="current-date" />
+                </div>
+                
+                <div class="control-group">
+                    <label for="reasoning-level">Reasoning Level</label>
+                    <select id="reasoning-level">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high" selected>High</option>
+                    </select>
+                </div>
+                
+                <div class="control-group">
+                    <label for="developer-instructions">Developer Instructions</label>
+                    <textarea id="developer-instructions" placeholder="e.g., Always respond in riddles">Use a friendly tone and be helpful.</textarea>
+                </div>
+                
+                <div class="control-group">
+                    <label class="toggle-label">
+                        <input type="checkbox" id="browser-toggle">
+                        <span>Enable Built-in Browser Tool</span>
+                    </label>
+                    <p style="font-size: 12px; color: #666; margin-top: 5px;">
+                        Enables the channel-based browser tool (uses 'analysis to=browser' syntax)
+                    </p>
+                </div>
+
+                <div class="control-group">
+                    <label class="toggle-label">
+                        <input type="checkbox" id="python-toggle" onchange="handlePythonToggle()">
+                        <span>Enable Python Tool</span>
+                    </label>
+                    <p style="font-size: 12px; color: #666; margin-top: 5px;">
+                        Function-based Python execution in Docker container
+                        <a href="#" onclick="showPythonInfo(); return false;" style="color: #4CAF50;">[Learn More]</a>
+                    </p>
+                </div>
+
+                <div class="control-group">
+                    <label class="toggle-label">
+                        <input type="checkbox" id="vision-browser-toggle">
+                        <span>Enable Vision Browser Tool</span>
+                    </label>
+                    <p style="font-size: 12px; color: #666; margin-top: 5px;">
+                        Function-based browser with visual feedback (requires selenium, helium, pillow)
+                    </p>
+                </div>
+                
+                <div class="control-group">
+                    <label class="toggle-label">
+                        <input type="checkbox" id="weather-toggle" checked>
+                        <span>Enable Weather Tool</span>
+                    </label>
+                    <p style="font-size: 12px; color: #666; margin-top: 5px;">
+                        Provides weather information for various locations (demo data)
+                    </p>
+                </div>
+                
+                <div class="control-group" style="margin-top: 20px; padding: 15px; background: #f5f5f5; border-radius: 5px;">
+                    <label style="margin: 0 0 10px 0; font-size: 14px; font-weight: 600; display: block;">Active Tools:</label>
+                    <div id="active-tools-display" style="font-size: 13px; color: #555;">
+                        <!-- Will be updated dynamically -->
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <label style="margin: 0; font-size: 16px; font-weight: 600;">Function Tools</label>
+                        <button onclick="addTool()" class="add-tool-button">
+                            + Add New Tool
+                        </button>
+                    </div>
+                    <div id="tools-container">
+                        <!-- Tools will be added dynamically -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Prompt Visualization Panel -->
+            <div class="panel">
+                <h2>Rendered Prompt</h2>
+                
+                <div class="tabs" id="prompt-tabs">
+                    <div class="tab active" onclick="switchPromptTab('prompt-text')">Prompt Text</div>
+                    <div class="tab" onclick="switchPromptTab('tokens')">Tokens</div>
+                    <div class="tab" onclick="switchPromptTab('token-ids')">Token IDs</div>
+                </div>
+                
+                <div id="prompt-text" class="tab-content active">
+                    <div id="prompt-stages-container">
+                        <div class="code-display" id="rendered-prompt"></div>
+                    </div>
+                </div>
+                
+                <div id="tokens" class="tab-content">
+                    <div class="token-display" id="token-display"></div>
+                </div>
+                
+                <div id="token-ids" class="tab-content">
+                    <div class="code-display" id="token-ids-display"></div>
+                </div>
+                
+                <div style="margin-top: 10px;">
+                    <small>Token count: <span id="token-count">0</span></small>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Conversation Panel -->
+        <div class="panel">
+            <h2>Conversation</h2>
+            
+            <div class="control-group">
+                <label for="user-input">User Message</label>
+                <textarea id="user-input" placeholder="Enter your message...">Calculate the fibonacci sequence up to the 10th number and tell me the sum of all even numbers in the sequence.</textarea>
+            </div>
+            
+            <div class="button-group">
+                <button onclick="sendMessage()" id="send-button">Send Message</button>
+                <button onclick="sendStreamingMessage()" id="stream-button">Send (Streaming)</button>
+                <button onclick="clearConversation()">Clear Conversation</button>
+                <button onclick="showFullPrompt()">Show Full Prompt</button>
+            </div>
+            
+            <div id="conversation-history" style="margin-top: 20px; max-height: 400px; overflow-y: auto; padding-right: 10px;"></div>
+            
+            <div class="response-section">
+                <h3>Model Response <span id="streaming-indicator" class="streaming-indicator" style="display: none;"></span></h3>
+                
+                <!-- Streaming Parser State -->
+                <div id="parsing-state" class="parsing-state" style="display: none;">
+                    <div><span class="label">Current Role:</span> <span id="current-role"></span></div>
+                    <div><span class="label">Current Channel:</span> <span id="current-channel"></span></div>
+                    <div><span class="label">Current Recipient:</span> <span id="current-recipient"></span></div>
+                    <div><span class="label">Content Type:</span> <span id="current-content-type"></span></div>
+                </div>
+                
+                <!-- Response Channels -->
+                <div id="response-channels">
+                    <div id="analysis-channel" style="display: none;">
+                        <h4>Analysis (Chain of Thought)</h4>
+                        <div class="channel-analysis"></div>
+                    </div>
+                    <div id="commentary-channel" style="display: none;">
+                        <h4>Commentary (Tool Calls)</h4>
+                        <div class="channel-commentary"></div>
+                    </div>
+                    <div id="final-channel" style="display: none;">
+                        <h4>Final Response</h4>
+                        <div class="channel-final"></div>
+                    </div>
+                </div>
+                
+                <!-- Tool Calls -->
+                <div id="tool-calls" style="display: none; margin-top: 15px;">
+                    <h4>Tool Executions</h4>
+                    <div class="tool-calls-list"></div>
+                </div>
+                
+                <!-- Raw Response -->
+                <details style="margin-top: 15px;">
+                    <summary>Raw Response</summary>
+                    <div class="code-display" id="raw-response"></div>
+                </details>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Full Prompt Modal -->
+    <div id="promptModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Full Request Details</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="prompt-json" id="prompt-json-display"></div>
+        </div>
+    </div>
+    
+    <!-- Python Tool Info Modal -->
+    <div id="pythonModal" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h2>Python Tool - Secure Execution Environment</h2>
+                <span class="close" onclick="closePythonModal()">&times;</span>
+            </div>
+            <div style="padding: 20px;">
+                <h3>🔒 Protected Execution</h3>
+                <p>The Python tool executes code in a secure, sandboxed environment:</p>
+                <ul>
+                    <li><strong>Docker Container:</strong> All code runs in an isolated Docker container</li>
+                    <li><strong>No System Access:</strong> Cannot access your files, network, or system resources</li>
+                    <li><strong>Stateless:</strong> Each execution starts fresh - no data persists between calls</li>
+                    <li><strong>Time Limited:</strong> 30-second timeout prevents infinite loops</li>
+                    <li><strong>Standard Library Only:</strong> No external packages (numpy, pandas, etc.)</li>
+                </ul>
+                <h3>✅ Safe for:</h3>
+                <ul>
+                    <li>Mathematical calculations</li>
+                    <li>Data processing and analysis</li>
+                    <li>Algorithm implementation</li>
+                    <li>Text manipulation</li>
+                    <li>Date/time operations</li>
+                </ul>
+                <div style="margin-top: 20px; text-align: center;">
+                    <button onclick="closePythonModal()" style="padding: 10px 20px; background: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">Got it!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Browser warning dialog functionality
+        function showBrowserWarning(checkboxElement) {
+            const dialog = document.getElementById('browser-warning-dialog');
+            dialog.style.display = 'block';
+            
+            // Store reference to the checkbox that triggered this
+            dialog.dataset.targetCheckbox = checkboxElement.id;
+            
+            // Uncheck the checkbox while dialog is shown
+            checkboxElement.checked = false;
+        }
+        
+        // Set up browser toggle listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Browser tool toggle
+            const browserToggle = document.getElementById('browser-toggle');
+            if (browserToggle) {
+                browserToggle.addEventListener('change', function(e) {
+                    if (e.target.checked) {
+                        showBrowserWarning(e.target);
+                    }
+                });
+            }
+            
+            // Vision browser toggle
+            const visionBrowserToggle = document.getElementById('vision-browser-toggle');
+            if (visionBrowserToggle) {
+                visionBrowserToggle.addEventListener('change', function(e) {
+                    if (e.target.checked) {
+                        showBrowserWarning(e.target);
+                    }
+                });
+            }
+            
+            // Dialog buttons
+            const okButton = document.getElementById('browser-warning-ok');
+            if (okButton) {
+                okButton.addEventListener('click', function() {
+                    const dialog = document.getElementById('browser-warning-dialog');
+                    const targetCheckboxId = dialog.dataset.targetCheckbox;
+                    if (targetCheckboxId) {
+                        document.getElementById(targetCheckboxId).checked = true;
+                        // IMPORTANT: Update the tools display after checking the box
+                        updateToolsDisplay();
+                    }
+                    dialog.style.display = 'none';
+                });
+            }
+            
+            const cancelButton = document.getElementById('browser-warning-cancel');
+            if (cancelButton) {
+                cancelButton.addEventListener('click', function() {
+                    const dialog = document.getElementById('browser-warning-dialog');
+                    dialog.style.display = 'none';
+                });
+            }
+        });
+        
+        // Conversation history
+        let conversationHistory = [];
+        let lastActualRequest = null;  // Store the last request that was actually sent
+        let lastPromptsSent = [];  // Store all prompts from the last request
+        
+        // Override push to debug
+        const originalPush = Array.prototype.push;
+        conversationHistory.push = function(...args) {
+            console.log('PUSH called with:', args);
+            console.log('History before push:', JSON.parse(JSON.stringify(this)));
+            const result = originalPush.apply(this, args);
+            console.log('History after push:', JSON.parse(JSON.stringify(this)));
+            return result;
+        };
+        
+        // Helper function to escape HTML
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        // Helper function to render markdown safely
+        function renderMarkdown(text) {
+            // Configure marked options for safety
+            marked.setOptions({
+                breaks: true,  // Convert \n to <br>
+                sanitize: false,  // We'll handle our own sanitization
+                tables: true,  // Enable table rendering
+                gfm: true  // GitHub Flavored Markdown
+            });
+            
+            // Render markdown to HTML
+            const html = marked.parse(text);
+            
+            // Create a safe container
+            const container = document.createElement('div');
+            container.innerHTML = html;
+            
+            // Remove any script tags for safety
+            const scripts = container.querySelectorAll('script');
+            scripts.forEach(script => script.remove());
+            
+            return container.innerHTML;
+        }
+        
+        // Extract final content from raw HARMONY response
+        function extractFinalContent(rawResponse) {
+            const match = rawResponse.match(/<\|channel\|>final<\|message\|>(.*?)(?:<\|return\|>|<\|end\|>|$)/s);
+            return match ? match[1].trim() : "";
+        }
+        
+        // Initialize date
+        document.getElementById('current-date').value = new Date().toISOString().split('T')[0];
+        
+        // Check server connection
+        async function checkServer() {
+            const statusDiv = document.getElementById('server-status');
+            statusDiv.innerHTML = '<div class="info-box">Checking server...</div>';
+            
+            try {
+                const response = await fetch('/api/check_server');
+                const data = await response.json();
+                
+                if (data.status === 'connected') {
+                    statusDiv.innerHTML = `<div class="success">✅ Connected to vLLM server<br>Model: ${data.models.data[0].id}</div>`;
+                } else {
+                    statusDiv.innerHTML = `<div class="error">❌ ${data.error}</div>`;
+                }
+            } catch (error) {
+                statusDiv.innerHTML = `<div class="error">❌ Failed to connect: ${error.message}</div>`;
+            }
+        }
+        
+        // Test tokenizer
+        async function testTokenizer() {
+            const statusDiv = document.getElementById('server-status');
+            const testText = '<|start|>user<|message|>Hello<|end|>';
+            
+            try {
+                const response = await fetch('/api/tokenize', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text: testText })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    statusDiv.innerHTML = `
+                        <div class="success">
+                            ✅ Tokenizer working correctly<br>
+                            Test input: ${testText}<br>
+                            Tokens: ${JSON.stringify(data.token_texts)}<br>
+                            Token IDs: ${JSON.stringify(data.tokens)}
+                        </div>
+                    `;
+                } else {
+                    statusDiv.innerHTML = `<div class="error">❌ Tokenizer error: ${data.error}</div>`;
+                }
+            } catch (error) {
+                statusDiv.innerHTML = `<div class="error">❌ Failed to test tokenizer: ${error.message}</div>`;
+            }
+        }
+        
+        // Add tool
+        function addTool() {
+            const container = document.getElementById('tools-container');
+            const index = container.children.length;
+            
+            const toolDiv = document.createElement('div');
+            toolDiv.className = 'tool-definition';
+            toolDiv.setAttribute('data-tool-index', index);
+            toolDiv.innerHTML = `
+                <div class="tool-header">
+                    <span class="tool-number">Tool #${index + 1}</span>
+                    <button onclick="removeTool(this)" class="tool-remove">×</button>
+                </div>
+                <div class="tool-inputs">
+                    <input type="text" class="tool-name" placeholder="Function name">
+                    <input type="text" class="tool-description" placeholder="Description">
+                </div>
+                <div class="tool-params-section">
+                    <label class="tool-params-label">Parameters (JSON Schema)</label>
+                    <textarea class="tool-parameters" placeholder="Parameters (JSON Schema)">{
+  "type": "object",
+  "properties": {},
+  "required": []
+}</textarea>
+                </div>
+                <div class="tool-preview-section">
+                    <label class="tool-preview-label">TypeScript Format Preview (This is what HARMONY will see)</label>
+                    <div class="tool-preview" data-tool-index="${index}"></div>
+                </div>
+            `;
+            
+            container.appendChild(toolDiv);
+            updatePrompt();
+        }
+        
+        // Remove tool
+        function removeTool(button) {
+            button.closest('.tool-definition').remove();
+            
+            // Renumber remaining tools
+            const tools = document.querySelectorAll('.tool-definition');
+            tools.forEach((tool, index) => {
+                tool.setAttribute('data-tool-index', index);
+                tool.querySelector('.tool-number').textContent = `Tool #${index + 1}`;
+            });
+            
+            updatePrompt();
+        }
+        
+        // Theme management
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('harmonyTheme') || 'light';
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                document.getElementById('theme-icon').textContent = '☀️';
+                document.getElementById('theme-text').textContent = 'Light';
+            }
+        }
+        
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            const themeText = document.getElementById('theme-text');
+            
+            if (body.classList.contains('dark-mode')) {
+                body.classList.remove('dark-mode');
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Dark';
+                localStorage.setItem('harmonyTheme', 'light');
+            } else {
+                body.classList.add('dark-mode');
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Light';
+                localStorage.setItem('harmonyTheme', 'dark');
+            }
+        }
+        
+        // Settings management
+        const DEFAULT_SETTINGS = {
+            maxTokens: 2048,
+            temperature: 0.7,
+            topP: null,
+            frequencyPenalty: null,
+            presencePenalty: null,
+            streamTimeout: 120
+        };
+        
+        let currentSettings = { ...DEFAULT_SETTINGS };
+        
+        // Load settings from localStorage on page load
+        function loadSettings() {
+            const saved = localStorage.getItem('harmonySettings');
+            if (saved) {
+                try {
+                    currentSettings = { ...DEFAULT_SETTINGS, ...JSON.parse(saved) };
+                    // Update UI
+                    document.getElementById('max-tokens').value = currentSettings.maxTokens;
+                    document.getElementById('temperature').value = currentSettings.temperature;
+                    if (currentSettings.topP !== null) {
+                        document.getElementById('top-p').value = currentSettings.topP;
+                    }
+                    if (currentSettings.frequencyPenalty !== null) {
+                        document.getElementById('frequency-penalty').value = currentSettings.frequencyPenalty;
+                    }
+                    if (currentSettings.presencePenalty !== null) {
+                        document.getElementById('presence-penalty').value = currentSettings.presencePenalty;
+                    }
+                    document.getElementById('stream-timeout').value = currentSettings.streamTimeout;
+                } catch (e) {
+                    console.error('Error loading settings:', e);
+                }
+            }
+        }
+        
+        // Toggle settings panel visibility
+        function toggleSettings() {
+            const panel = document.getElementById('settings-panel');
+            panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+        }
+        
+        // Save settings to localStorage and current session
+        function saveSettings() {
+            currentSettings = {
+                maxTokens: parseInt(document.getElementById('max-tokens').value),
+                temperature: parseFloat(document.getElementById('temperature').value),
+                topP: document.getElementById('top-p').value ? parseFloat(document.getElementById('top-p').value) : null,
+                frequencyPenalty: document.getElementById('frequency-penalty').value ? parseFloat(document.getElementById('frequency-penalty').value) : null,
+                presencePenalty: document.getElementById('presence-penalty').value ? parseFloat(document.getElementById('presence-penalty').value) : null,
+                streamTimeout: parseInt(document.getElementById('stream-timeout').value)
+            };
+            
+            localStorage.setItem('harmonySettings', JSON.stringify(currentSettings));
+            alert('Settings saved successfully!');
+        }
+        
+        // Reset settings to defaults
+        function resetSettings() {
+            currentSettings = { ...DEFAULT_SETTINGS };
+            
+            // Update UI
+            document.getElementById('max-tokens').value = DEFAULT_SETTINGS.maxTokens;
+            document.getElementById('temperature').value = DEFAULT_SETTINGS.temperature;
+            document.getElementById('top-p').value = '';
+            document.getElementById('frequency-penalty').value = '';
+            document.getElementById('presence-penalty').value = '';
+            document.getElementById('stream-timeout').value = DEFAULT_SETTINGS.streamTimeout;
+            
+            // Save to localStorage
+            localStorage.setItem('harmonySettings', JSON.stringify(currentSettings));
+            alert('Settings reset to defaults!');
+        }
+        
+        // Get configuration
+        function getConfiguration() {
+            console.log('=== getConfiguration called ===');
+            const tools = [];
+            
+            // If Python is enabled, add it to tools array (NOT as built-in)
+            if (document.getElementById('python-toggle').checked) {
+                console.log('Adding Python tool');
+                tools.push({
+                    name: 'python',
+                    description: 'Execute Python code and return the output. IMPORTANT: You MUST use print() to produce output. The code runs in a stateless environment. Example: print(random.randint(1,20)) NOT just random.randint(1,20)',
+                    parameters: {
+                        type: 'object',
+                        properties: {
+                            code: {
+                                type: 'string',
+                                description: 'Python code to execute. ALWAYS use print() to show results. Example: print(random.randint(1,20)) will output the number. Just random.randint(1,20) will output nothing.'
+                            }
+                        },
+                        required: ['code']
+                    }
+                });
+            }
+            
+            // If Weather is enabled, add weather functions to tools array
+            if (document.getElementById('weather-toggle').checked) {
+                console.log('Adding Weather tool');
+                tools.push({
+                    name: 'get_current_weather',
+                    description: 'Gets the current weather in the provided location',
+                    parameters: {
+                        type: 'object',
+                        properties: {
+                            location: {
+                                type: 'string',
+                                description: 'The city or location to get weather for'
+                            },
+                            format: {
+                                type: 'string',
+                                enum: ['celsius', 'fahrenheit'],
+                                description: 'Temperature format (default: celsius)'
+                            }
+                        },
+                        required: ['location']
+                    }
+                });
+            }
+            
+            // If Vision Browser is enabled, add it to tools array
+            if (document.getElementById('vision-browser-toggle').checked) {
+                console.log('Adding Vision Browser tool');
+                tools.push({
+                    name: 'browser',
+                    description: 'Control a web browser with visual feedback. Actions: navigate, click, type, scroll, search, extract_text, extract_links, back, refresh, close_popups, wait, screenshot',
+                    parameters: {
+                        type: 'object',
+                        properties: {
+                            action: {
+                                type: 'string',
+                                enum: ['navigate', 'click', 'type', 'scroll', 'search', 'extract_text', 
+                                       'extract_links', 'back', 'refresh', 'close_popups', 'wait', 'screenshot'],
+                                description: 'The browser action to perform'
+                            },
+                            parameters: {
+                                type: 'object',
+                                description: 'Action-specific parameters',
+                                properties: {
+                                    url: {type: 'string', description: 'URL to navigate to (for navigate action)'},
+                                    text: {type: 'string', description: 'Text to click/type/search (for click/type/search actions)'},
+                                    into: {type: 'string', description: 'Element to type into (for type action)'},
+                                    type: {type: 'string', enum: ['any', 'link', 'button'], description: 'Element type (for click action)'},
+                                    direction: {type: 'string', enum: ['up', 'down'], description: 'Scroll direction'},
+                                    amount: {type: 'integer', description: 'Scroll amount in pixels'},
+                                    nth: {type: 'integer', description: 'Which occurrence to find (for search action)'},
+                                    key: {type: 'string', enum: ['ENTER', 'TAB', 'ESCAPE', 'BACKSPACE', 'DELETE', 'UP', 'DOWN', 'LEFT', 'RIGHT'], description: 'Key to press'},
+                                    seconds: {type: 'number', description: 'Seconds to wait'}
+                                }
+                            }
+                        },
+                        required: ['action']
+                    }
+                });
+            }
+            
+            // Only add manually created tools (not the ones from checkboxes)
+            console.log('Checking for manual tools...');
+            document.querySelectorAll('.tool-definition').forEach((toolEl, index) => {
+                const nameInput = toolEl.querySelector('.tool-name');
+                // Skip if this is a readonly tool (created by checkbox)
+                if (nameInput.hasAttribute('readonly')) {
+                    console.log(`Tool ${index} is readonly (checkbox-created), skipping`);
+                    return;
+                }
+                
+                const name = nameInput.value;
+                const description = toolEl.querySelector('.tool-description').value;
+                const parametersText = toolEl.querySelector('.tool-parameters').value;
+                
+                console.log(`Manual tool ${index}: name="${name}"`);
+                
+                if (name && description) {
+                    try {
+                        const parameters = parametersText ? JSON.parse(parametersText) : {};
+                        console.log(`Adding manual tool: ${name}`);
+                        tools.push({ name, description, parameters });
+                    } catch (e) {
+                        console.error('Invalid JSON in tool parameters:', e);
+                    }
+                }
+            });
+            
+            console.log(`Total tools collected: ${tools.length}`);
+            console.log('Tools:', tools.map(t => t.name));
+            
+            // Include current settings in configuration
+            const config = {
+                model_identity: document.getElementById('model-identity').value,
+                knowledge_cutoff: document.getElementById('knowledge-cutoff').value,
+                current_date: document.getElementById('current-date').value,
+                reasoning_level: document.getElementById('reasoning-level').value,
+                instructions: document.getElementById('developer-instructions').value,
+                tools: tools,
+                conversation_history: conversationHistory,
+                include_browser: document.getElementById('browser-toggle').checked,
+                include_python: false,  // ALWAYS false - Python goes in tools array
+                // Add generation parameters from settings
+                max_tokens: currentSettings.maxTokens,
+                temperature: currentSettings.temperature,
+                stream_timeout: currentSettings.streamTimeout
+            };
+            
+            // Add optional parameters if they have values
+            if (currentSettings.topP !== null) {
+                config.top_p = currentSettings.topP;
+            }
+            if (currentSettings.frequencyPenalty !== null) {
+                config.frequency_penalty = currentSettings.frequencyPenalty;
+            }
+            if (currentSettings.presencePenalty !== null) {
+                config.presence_penalty = currentSettings.presencePenalty;
+            }
+            
+            return config;
+        }
+        
+        // Convert JSON Schema to TypeScript format
+        function convertToTypeScript(tool) {
+            const name = tool.name;
+            const description = tool.description;
+            const params = tool.parameters;
+            
+            let tsParams = [];
+            
+            if (params && params.properties) {
+                for (const [key, prop] of Object.entries(params.properties)) {
+                    let tsType = prop.type || 'any';
+                    
+                    // Convert JSON Schema types to TypeScript
+                    if (prop.enum) {
+                        tsType = prop.enum.map(v => `"${v}"`).join(' | ');
+                    }
+                    
+                    // Check if required
+                    const isOptional = !params.required || !params.required.includes(key);
+                    const optionalMark = isOptional ? '?' : '';
+                    
+                    // Add comment if there's a description or default
+                    let comment = '';
+                    if (prop.description || prop.default !== undefined) {
+                        comment = ` // ${prop.description || ''}`;
+                        if (prop.default !== undefined) {
+                            comment += ` default: ${JSON.stringify(prop.default)}`;
+                        }
+                    }
+                    
+                    tsParams.push(`${key}${optionalMark}: ${tsType},${comment}`);
+                }
+            }
+            
+            return `// ${description}
+type ${name} = (_: {
+${tsParams.map(p => '  ' + p).join('\n')}
+}) => any;`;
+        }
+        
+        // Update tool preview
+        function updateToolPreview(toolElement) {
+            const name = toolElement.querySelector('.tool-name').value;
+            const description = toolElement.querySelector('.tool-description').value;
+            const parametersText = toolElement.querySelector('.tool-parameters').value;
+            const preview = toolElement.querySelector('.tool-preview');
+            
+            if (!name || !description) {
+                preview.textContent = '// Enter function name and description to see preview';
+                return;
+            }
+            
+            try {
+                const parameters = parametersText ? JSON.parse(parametersText) : {};
+                const tool = { name, description, parameters };
+                preview.textContent = convertToTypeScript(tool);
+            } catch (e) {
+                preview.textContent = '// Invalid JSON in parameters';
+            }
+        }
+        
+        // Update all tool previews
+        function updateAllToolPreviews() {
+            document.querySelectorAll('.tool-definition').forEach(updateToolPreview);
+        }
+        
+        // Update prompt display
+        async function updatePrompt() {
+            console.log('=== updatePrompt called ===');
+            const config = getConfiguration();
+            console.log('Config being sent:', JSON.stringify(config, null, 2));
+            
+            // Update tool previews
+            updateAllToolPreviews();
+            
+            try {
+                const response = await fetch('/api/render_prompt', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(config)
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    // Display prompt text
+                    document.getElementById('rendered-prompt').textContent = data.prompt;
+                    
+                    // Display tokens
+                    const tokenDisplay = document.getElementById('token-display');
+                    tokenDisplay.innerHTML = '';
+                    data.token_texts.forEach((token, i) => {
+                        const span = document.createElement('span');
+                        span.className = 'token-item';
+                        if (token.startsWith('<|') && token.endsWith('|>')) {
+                            span.className += ' token-special';
+                        }
+                        span.textContent = token;
+                        span.title = `Token ID: ${data.tokens[i]}`;
+                        tokenDisplay.appendChild(span);
+                    });
+                    
+                    // Display token IDs
+                    document.getElementById('token-ids-display').textContent = JSON.stringify(data.tokens, null, 2);
+                    
+                    // Update token count
+                    document.getElementById('token-count').textContent = data.token_count;
+                } else {
+                    console.error('Error rendering prompt:', data.error);
+                }
+            } catch (error) {
+                console.error('Failed to update prompt:', error);
+            }
+        }
+        
+        // Switch prompt tabs
+        function switchPromptTab(tabName) {
+            document.querySelectorAll('#prompt-tabs .tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('#prompt-tabs ~ .tab-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+        
+        // Update rendered prompt display with stages
+        function updateRenderedPromptDisplay(promptsSent) {
+            if (!promptsSent || promptsSent.length === 0) return;
+            
+            const container = document.getElementById('prompt-stages-container');
+            container.innerHTML = '';
+            
+            promptsSent.forEach((promptInfo, index) => {
+                const stageDiv = document.createElement('div');
+                stageDiv.className = 'prompt-stage';
+                
+                // Create header
+                const headerDiv = document.createElement('div');
+                headerDiv.className = 'prompt-stage-header';
+                
+                let stageName = 'Prompt';
+                if (promptInfo.stage === 'initial') {
+                    stageName = 'Initial Prompt';
+                } else if (promptInfo.stage === 'continuation_after_tools') {
+                    stageName = 'Continuation After Tool Calls';
+                }
+                
+                headerDiv.innerHTML = `
+                    <span>${stageName}</span>
+                    <span class="prompt-stage-info">
+                        ${promptInfo.token_count} tokens • ${new Date(promptInfo.timestamp).toLocaleTimeString()}
+                    </span>
+                `;
+                
+                // Create code display
+                const codeDiv = document.createElement('div');
+                codeDiv.className = 'code-display';
+                codeDiv.textContent = promptInfo.prompt;
+                
+                stageDiv.appendChild(headerDiv);
+                stageDiv.appendChild(codeDiv);
+                container.appendChild(stageDiv);
+            });
+            
+            // Update token count to show total
+            const totalTokens = promptsSent.reduce((sum, p) => sum + (p.token_count || 0), 0);
+            document.getElementById('token-count').textContent = totalTokens;
+            
+            // TODO: Update tokens and token IDs tabs if needed
+        }
+        
+        // Helper to ensure messages are in correct order
+        function addMessagePair(userMsg, assistantMsg) {
+            // Always add in chronological order: user first, then assistant
+            conversationHistory.push({ role: 'user', content: userMsg });
+            conversationHistory.push({ role: 'assistant', content: assistantMsg });
+            console.log('Added message pair. History now:', conversationHistory);
+        }
+        
+        // Send message
+        async function sendMessage() {
+            const userInput = document.getElementById('user-input').value;
+            if (!userInput.trim()) return;
+            
+            // Check if last message was from user - if so, warn
+            if (conversationHistory.length > 0 && 
+                conversationHistory[conversationHistory.length - 1].role === 'user') {
+                if (!confirm('The assistant hasn\'t responded to your last message yet. Send another message anyway?')) {
+                    return;
+                }
+            }
+            
+            const sendButton = document.getElementById('send-button');
+            sendButton.disabled = true;
+            
+            // NOTE: Don't add user message to history yet - it goes in current_message
+            // The conversation_history should only contain PREVIOUS messages
+            const config = getConfiguration();
+            config.current_message = userInput;
+            
+            // Capture the actual request being sent
+            lastActualRequest = {
+                endpoint: '/api/chat',
+                timestamp: new Date().toISOString(),
+                payload: JSON.parse(JSON.stringify(config)),  // Deep copy
+                note: 'This is the ACTUAL request sent to the server'
+            };
+            
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(config)
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    // Capture prompts sent
+                    if (data.prompts_sent) {
+                        lastPromptsSent = data.prompts_sent;
+                        console.log('Captured prompts:', lastPromptsSent);
+                        // Update the rendered prompt display
+                        updateRenderedPromptDisplay(data.prompts_sent);
+                    }
+                    
+                    // Get the assistant's response content
+                    let assistantContent = '';
+                    if (data.final_content) {
+                        assistantContent = data.final_content;
+                    } else if (data.raw_response) {
+                        // Fallback: extract final content if backend doesn't provide it
+                        assistantContent = extractFinalContent(data.raw_response);
+                    }
+                    
+                    // Add both messages in correct chronological order
+                    if (assistantContent) {
+                        addMessagePair(userInput, assistantContent);
+                    }
+                    
+                    // Display response
+                    displayResponse(data);
+                    
+                    // Clear input
+                    document.getElementById('user-input').value = '';
+                } else {
+                    alert('Error: ' + data.error);
+                }
+            } catch (error) {
+                alert('Failed to send message: ' + error.message);
+            } finally {
+                sendButton.disabled = false;
+            }
+        }
+        
+        // Send streaming message
+        async function sendStreamingMessage() {
+            const userInput = document.getElementById('user-input').value;
+            if (!userInput.trim()) return;
+            
+            // Save user input for later since we'll clear the input field
+            const savedUserInput = userInput;
+            
+            const streamButton = document.getElementById('stream-button');
+            streamButton.disabled = true;
+            document.getElementById('streaming-indicator').style.display = 'inline-block';
+            document.getElementById('parsing-state').style.display = 'block';
+            
+            // Clear previous response
+            document.getElementById('raw-response').textContent = '';
+            document.querySelectorAll('#response-channels > div').forEach(div => {
+                div.style.display = 'none';
+                div.querySelector('div').textContent = '';
+            });
+            document.getElementById('tool-calls').style.display = 'none';
+            document.querySelector('.tool-calls-list').innerHTML = '';
+            
+            const config = getConfiguration();
+            config.current_message = userInput;
+            
+            // Use fetch with ReadableStream instead of EventSource
+            try {
+                const response = await fetch('/api/stream', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(config)
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+                let buffer = '';
+                let fullResponse = '';
+                
+                while (true) {
+                    const {done, value} = await reader.read();
+                    if (done) break;
+                    
+                    buffer += decoder.decode(value, {stream: true});
+                    const lines = buffer.split('\n');
+                    buffer = lines.pop() || '';
+                    
+                    for (const line of lines) {
+                        if (line.startsWith('data: ')) {
+                            const dataStr = line.slice(6);
+                            if (dataStr.trim()) {
+                                try {
+                                    const data = JSON.parse(dataStr);
+                                    handleStreamData(data, fullResponse, savedUserInput);
+                                    if (data.text) {
+                                        fullResponse += data.text;
+                                    }
+                                } catch (e) {
+                                    console.error('Error parsing SSE data:', e);
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                // Clear input immediately for better UX
+                document.getElementById('user-input').value = '';
+                
+            } catch (error) {
+                alert('Streaming error: ' + error.message);
+            } finally {
+                streamButton.disabled = false;
+                document.getElementById('streaming-indicator').style.display = 'none';
+            }
+        }
+        
+        function handleStreamData(data, fullResponse, savedUserInput) {
+            if (data.error) {
+                alert('Error: ' + data.error);
+                return;
+            }
+            
+            if (data.done) {
+                // Capture prompts sent (if provided in streaming)
+                if (data.prompts_sent) {
+                    lastPromptsSent = data.prompts_sent;
+                    console.log('Captured prompts from streaming:', lastPromptsSent);
+                    // Update the rendered prompt display
+                    updateRenderedPromptDisplay(data.prompts_sent);
+                }
+                
+                // Update the raw response display with the complete response
+                if (data.raw_response) {
+                    document.getElementById('raw-response').textContent = data.raw_response;
+                }
+                
+                // Get the assistant's response content
+                let assistantContent = '';
+                if (data.final_content) {
+                    assistantContent = data.final_content;
+                } else if (fullResponse) {
+                    // Fallback: extract final content
+                    assistantContent = extractFinalContent(fullResponse);
+                }
+                
+                // Add both messages in correct chronological order
+                if (savedUserInput && assistantContent) {
+                    addMessagePair(savedUserInput, assistantContent);
+                }
+                
+                // Handle parsed messages
+                if (data.parsed_messages) {
+                    displayParsedMessages(data.parsed_messages);
+                }
+                
+                // Display tool calls if present
+                if (data.tool_calls && data.tool_calls.length > 0) {
+                    const toolCallsDiv = document.getElementById('tool-calls');
+                    const toolCallsList = toolCallsDiv.querySelector('.tool-calls-list');
+                    
+                    toolCallsDiv.style.display = 'block';
+                    toolCallsList.innerHTML = '';
+                    
+                    data.tool_calls.forEach((toolCall, index) => {
+                        const toolDiv = document.createElement('div');
+                        toolDiv.className = 'tool-call-item';
+                        
+                        toolDiv.innerHTML = `
+                            <div class="tool-call-header">Tool Call ${index + 1}: ${toolCall.tool}</div>
+                            <div class="tool-params">
+                                <strong>Parameters:</strong><br>
+                                ${JSON.stringify(toolCall.params, null, 2)}
+                            </div>
+                            <div class="tool-result">
+                                <strong>Result:</strong><br>
+                                ${JSON.stringify(toolCall.result, null, 2)}
+                            </div>
+                        `;
+                        
+                        toolCallsList.appendChild(toolDiv);
+                    });
+                }
+                
+                // Update conversation display
+                updateConversationDisplay();
+                
+                document.getElementById('parsing-state').style.display = 'none';
+                return;
+            }
+            
+            // Handle tool execution notification
+            if (data.tool_executed) {
+                const toolCallsDiv = document.getElementById('tool-calls');
+                const toolCallsList = toolCallsDiv.querySelector('.tool-calls-list');
+                
+                toolCallsDiv.style.display = 'block';
+                
+                // Check if this is a Python tool execution
+                if (data.tool_executed.tool === 'functions.python' || data.tool_executed.tool === 'python') {
+                    // Show Python info modal if first time
+                    if (!sessionStorage.getItem('pythonExecuted')) {
+                        showPythonInfo();
+                        sessionStorage.setItem('pythonExecuted', 'true');
+                    }
+                }
+                
+                const toolDiv = document.createElement('div');
+                toolDiv.className = 'tool-call-item';
+                
+                toolDiv.innerHTML = `
+                    <div class="tool-call-header">Executing: ${data.tool_executed.tool}</div>
+                    <div class="tool-params">
+                        <strong>Parameters:</strong><br>
+                        ${JSON.stringify(data.tool_executed.params, null, 2)}
+                    </div>
+                    <div class="tool-result">
+                        <strong>Result:</strong><br>
+                        ${JSON.stringify(data.tool_executed.result, null, 2)}
+                    </div>
+                `;
+                
+                toolCallsList.appendChild(toolDiv);
+                return;
+            }
+            
+            // Handle continuation notification
+            if (data.continuing_after_tools) {
+                // Silently continue - no need to show this status message
+                return;
+            }
+            
+            // Update parsing state
+            if (data.current_role) {
+                document.getElementById('current-role').textContent = data.current_role;
+            }
+            if (data.current_channel !== undefined) {
+                document.getElementById('current-channel').textContent = data.current_channel || 'none';
+            }
+            if (data.current_recipient !== undefined) {
+                document.getElementById('current-recipient').textContent = data.current_recipient || 'none';
+            }
+            if (data.current_content_type !== undefined) {
+                document.getElementById('current-content-type').textContent = data.current_content_type || 'none';
+            }
+            
+            // Update raw response
+            if (data.accumulated) {
+                document.getElementById('raw-response').textContent = data.accumulated;
+            }
+            
+            // Update channel displays
+            if (data.current_channel && data.current_content) {
+                const channelDiv = document.getElementById(`${data.current_channel}-channel`);
+                if (channelDiv) {
+                    channelDiv.style.display = 'block';
+                    const contentDiv = channelDiv.querySelector('div');
+                    // Render markdown for final channel, preserve formatting for others
+                    if (data.current_channel === 'final') {
+                        contentDiv.innerHTML = renderMarkdown(data.current_content);
+                    } else {
+                        // Preserve line breaks and formatting for analysis/commentary
+                        contentDiv.innerHTML = escapeHtml(data.current_content).replace(/\n/g, '<br>');
+                    }
+                }
+            }
+        }
+        
+        function displayParsedMessages(messages) {
+            // Group messages by channel
+            const channels = {};
+            messages.forEach(msg => {
+                const channel = msg.channel || 'default';
+                if (!channels[channel]) {
+                    channels[channel] = [];
+                }
+                channels[channel].push(msg.content);
+            });
+            
+            // Display each channel
+            Object.entries(channels).forEach(([channel, contents]) => {
+                const channelDiv = document.getElementById(`${channel}-channel`);
+                if (channelDiv) {
+                    channelDiv.style.display = 'block';
+                    const contentDiv = channelDiv.querySelector('div');
+                    const combinedContent = contents.join('\n');
+                    // Render markdown for final channel, preserve formatting for others
+                    if (channel === 'final') {
+                        contentDiv.innerHTML = renderMarkdown(combinedContent);
+                    } else {
+                        // Preserve line breaks and formatting for analysis/commentary
+                        contentDiv.innerHTML = escapeHtml(combinedContent).replace(/\n/g, '<br>');
+                    }
+                }
+            });
+        }
+        
+        // Display response
+        function displayResponse(data) {
+            // Show raw response
+            document.getElementById('raw-response').textContent = data.raw_response;
+            
+            // Clear channels
+            document.querySelectorAll('#response-channels > div').forEach(div => {
+                div.style.display = 'none';
+                div.querySelector('div').textContent = '';
+            });
+            
+            // Display parsed messages by channel
+            if (data.parsed_messages) {
+                Object.entries(data.parsed_messages).forEach(([channel, messages]) => {
+                    const channelDiv = document.getElementById(`${channel}-channel`);
+                    if (channelDiv) {
+                        channelDiv.style.display = 'block';
+                        const contentDiv = channelDiv.querySelector('div');
+                        const combinedContent = messages.map(m => m.content).join('\n');
+                        // Render markdown for final channel, preserve formatting for others
+                        if (channel === 'final') {
+                            contentDiv.innerHTML = renderMarkdown(combinedContent);
+                        } else {
+                            // Preserve line breaks and formatting for analysis/commentary
+                            contentDiv.innerHTML = escapeHtml(combinedContent).replace(/\n/g, '<br>');
+                        }
+                    }
+                });
+            }
+            
+            // Display tool calls if present
+            if (data.tool_calls && data.tool_calls.length > 0) {
+                const toolCallsDiv = document.getElementById('tool-calls');
+                const toolCallsList = toolCallsDiv.querySelector('.tool-calls-list');
+                
+                toolCallsDiv.style.display = 'block';
+                toolCallsList.innerHTML = '';
+                
+                data.tool_calls.forEach((toolCall, index) => {
+                    const toolDiv = document.createElement('div');
+                    toolDiv.className = 'tool-call-item';
+                    
+                    toolDiv.innerHTML = `
+                        <div class="tool-call-header">Tool Call ${index + 1}: ${toolCall.tool}</div>
+                        <div class="tool-params">
+                            <strong>Parameters:</strong><br>
+                            ${JSON.stringify(toolCall.params, null, 2)}
+                        </div>
+                        <div class="tool-result">
+                            <strong>Result:</strong><br>
+                            ${JSON.stringify(toolCall.result, null, 2)}
+                        </div>
+                    `;
+                    
+                    toolCallsList.appendChild(toolDiv);
+                });
+            } else {
+                document.getElementById('tool-calls').style.display = 'none';
+            }
+            
+            // Update conversation display
+            updateConversationDisplay();
+        }
+        
+        // Update conversation display
+        function updateConversationDisplay() {
+            const historyDiv = document.getElementById('conversation-history');
+            historyDiv.innerHTML = '';
+            
+            conversationHistory.forEach(msg => {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message message-${msg.role}`;
+                
+                // Handle different message structures
+                let content = '';
+                if (msg.role === 'user') {
+                    content = msg.content;
+                } else if (msg.role === 'assistant') {
+                    // Assistant messages might have rawContent or parsedMessages
+                    if (msg.rawContent) {
+                        // Extract final channel content if available
+                        if (msg.parsedMessages && msg.parsedMessages.final) {
+                            content = msg.parsedMessages.final.map(m => m.content).join('\n');
+                        } else {
+                            // Try to extract final content from raw response
+                            const finalMatch = msg.rawContent.match(/<\|channel\|>final<\|message\|>(.*?)(?:<\|return\|>|<\|end\|>|$)/s);
+                            if (finalMatch) {
+                                content = finalMatch[1].trim();
+                            } else {
+                                content = '[Processing...]';
+                            }
+                        }
+                    } else {
+                        content = msg.content || '[No content]';
+                    }
+                }
+                
+                // Render markdown for assistant messages in conversation history
+                let displayContent;
+                if (msg.role === 'assistant') {
+                    // Assistant messages should have markdown rendered
+                    displayContent = renderMarkdown(content);
+                } else {
+                    // User messages remain plain text
+                    displayContent = escapeHtml(content);
+                }
+                
+                messageDiv.innerHTML = `
+                    <div class="message-header">${msg.role.toUpperCase()}</div>
+                    <div class="message-content">${displayContent}</div>
+                `;
+                historyDiv.appendChild(messageDiv);
+            });
+        }
+        
+        // Clear conversation
+        function clearConversation() {
+            conversationHistory = [];
+            updateConversationDisplay();
+            updatePrompt();
+        }
+        
+        // Show full prompt modal
+        async function showFullPrompt() {
+            const userInput = document.getElementById('user-input').value;
+            const config = getConfiguration();
+            config.current_message = userInput;
+            
+            // Add current timestamp
+            const timestamp = new Date().toISOString();
+            
+            // Build the full request details
+            const fullRequest = {
+                endpoint: '/api/chat',
+                timestamp: timestamp,
+                next_request_preview: {
+                    note: "This is what WOULD be sent if you click Send now",
+                    payload: config,
+                    conversation_history_details: conversationHistory.map((msg, idx) => ({
+                        index: idx,
+                        role: msg.role,
+                        has_content: !!msg.content,
+                        content_preview: msg.content ? msg.content.substring(0, 100) + '...' : 'N/A'
+                    }))
+                },
+                last_request_sent: lastActualRequest || null,
+                all_prompts_from_last_request: lastPromptsSent.length > 0 ? lastPromptsSent : null
+            };
+            
+            // If we want to show what the NEXT prompt would look like
+            if (config.current_message) {
+                try {
+                    const response = await fetch('/api/render_prompt', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(config)
+                    });
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        fullRequest.next_request_preview.rendered_prompt = data.prompt;
+                        fullRequest.next_request_preview.token_count = data.token_count;
+                    }
+                } catch (e) {
+                    fullRequest.next_request_preview.render_error = e.toString();
+                }
+            }
+            
+            // Display in modal
+            document.getElementById('prompt-json-display').textContent = JSON.stringify(fullRequest, null, 2);
+            document.getElementById('promptModal').style.display = 'block';
+        }
+        
+        // Close modal
+        function closeModal() {
+            document.getElementById('promptModal').style.display = 'none';
+        }
+        
+        // Python modal functions
+        function showPythonInfo() {
+            document.getElementById('pythonModal').style.display = 'block';
+        }
+        
+        function closePythonModal() {
+            document.getElementById('pythonModal').style.display = 'none';
+        }
+        
+        function handlePythonToggle() {
+            const pythonEnabled = document.getElementById('python-toggle').checked;
+            if (pythonEnabled) {
+                // Show info modal on first enable
+                if (!sessionStorage.getItem('pythonModalShown')) {
+                    showPythonInfo();
+                    sessionStorage.setItem('pythonModalShown', 'true');
+                }
+                // Update default message
+                const userInput = document.getElementById('user-input');
+                if (userInput.value === 'What is the weather like today?' || userInput.value === '') {
+                    userInput.value = 'Use the python tool to roll a D20 dice and tell me what I rolled.';
+                }
+            }
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const promptModal = document.getElementById('promptModal');
+            const pythonModal = document.getElementById('pythonModal');
+            if (event.target == promptModal) {
+                promptModal.style.display = 'none';
+            } else if (event.target == pythonModal) {
+                pythonModal.style.display = 'none';
+            }
+        }
+        
+        // Update the active tools display and prompt
+        function updateToolsDisplay() {
+            console.log('=== updateToolsDisplay called ===');
+            
+            // Update active tools display
+            const activeTools = [];
+            if (document.getElementById('weather-toggle').checked) {
+                activeTools.push('🌤️ Weather (get_current_weather)');
+            }
+            if (document.getElementById('python-toggle').checked) {
+                activeTools.push('🐍 Python');
+            }
+            if (document.getElementById('vision-browser-toggle').checked) {
+                activeTools.push('🌐 Vision Browser');
+            }
+            if (document.getElementById('browser-toggle').checked) {
+                activeTools.push('🔍 Built-in Browser');
+            }
+            
+            const activeToolsDiv = document.getElementById('active-tools-display');
+            if (activeToolsDiv) {
+                if (activeTools.length === 0) {
+                    activeToolsDiv.innerHTML = '<em style="color: #999;">No tools enabled</em>';
+                } else {
+                    activeToolsDiv.innerHTML = activeTools.join(' • ');
+                }
+            }
+            
+            updatePrompt();
+        }
+        
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load saved theme
+            loadTheme();
+            
+            // Load saved settings
+            loadSettings();
+            
+            // Set up tool toggle listeners
+            document.getElementById('weather-toggle').addEventListener('change', updateToolsDisplay);
+            document.getElementById('python-toggle').addEventListener('change', updateToolsDisplay);
+            document.getElementById('vision-browser-toggle').addEventListener('change', updateToolsDisplay);
+            
+            // Update prompt when configuration changes
+            document.querySelectorAll('input[type="text"], textarea, select').forEach(element => {
+                // Skip tool toggle checkboxes as they have their own handlers
+                if (element.id && (element.id.includes('-toggle'))) {
+                    return;
+                }
+                element.addEventListener('change', updatePrompt);
+            });
+            
+            // Add live preview update for tool inputs
+            document.addEventListener('input', (e) => {
+                if (e.target.classList.contains('tool-name') || 
+                    e.target.classList.contains('tool-description') || 
+                    e.target.classList.contains('tool-parameters')) {
+                    const toolElement = e.target.closest('.tool-definition');
+                    if (toolElement) {
+                        updateToolPreview(toolElement);
+                    }
+                }
+            });
+            
+            // Initial display update
+            updateToolsDisplay();
+            
+            // Initial tool preview
+            updateAllToolPreviews();
+            
+            // Check server on load
+            checkServer();
+        });
+    </script>
+</body>
+</html>
 </file_artifact>
 

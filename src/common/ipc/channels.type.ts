@@ -1,4 +1,4 @@
-// Updated on: C42 (Update batch generation channels)
+// Updated on: C43 (Update SendBatchGenerationComplete payload)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -102,5 +102,5 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.NotifySaveComplete ? { cycleId: number } :
     T extends ServerToClientChannel.SendSettings ? { settings: DceSettings } :
     T extends ServerToClientChannel.SendBatchGenerationResult ? { responses: string[], newCycleId: number } :
-    T extends ServerToClientChannel.SendBatchGenerationComplete ? { newCycleId: number } :
+    T extends ServerToClientChannel.SendBatchGenerationComplete ? { newCycleId: number; newMaxCycle: number; } :
     never;
