@@ -1,10 +1,10 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-21T19:58:53.451Z
+  Date Generated: 2025-09-21T20:17:07.095Z
   ---
-  Total Files: 183
-  Approx. Tokens: 469524
+  Total Files: 181
+  Approx. Tokens: 467596
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -13,7 +13,7 @@
 3. src\client\views\parallel-copilot.view\view.tsx (9355 tokens)
 4. src\Artifacts\A0. DCE Master Artifact List.md (8565 tokens)
 5. src\client\views\parallel-copilot.view\view.scss (5575 tokens)
-6. src\Artifacts\A11. DCE - Regression Case Studies.md (4979 tokens)
+6. src\Artifacts\A11. DCE - Regression Case Studies.md (5372 tokens)
 7. src\backend\services\prompt.service.ts (4919 tokens)
 8. src\backend\services\file-operation.service.ts (4526 tokens)
 9. src\client\components\tree-view\TreeView.tsx (4422 tokens)
@@ -32,7 +32,7 @@
 10. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
 11. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
 12. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
-13. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 154 - Chars: 19915 - Tokens: 4979
+13. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 163 - Chars: 21487 - Tokens: 5372
 14. src\Artifacts\A11.1 DCE - New Regression Case Studies.md - Lines: 391 - Chars: 46197 - Tokens: 11550
 15. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5687 - Tokens: 1422
 16. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
@@ -191,18 +191,16 @@
 169. src\Artifacts\A88. DCE - Native Diff Integration Plan.md - Lines: 43 - Chars: 4053 - Tokens: 1014
 170. src\backend\providers\ResponseContentProvider.ts - Lines: 24 - Chars: 1160 - Tokens: 290
 171. src\Artifacts\A89. DCE - vLLM Integration and API Proxy Plan.md - Lines: 61 - Chars: 3736 - Tokens: 934
-172. src\Artifacts\A90. AI Ascent - server.ts for DCE Proxy.md - Lines: 347 - Chars: 15394 - Tokens: 3849
-173. src\Artifacts\A91. AI Ascent - Caddyfile for DCE Proxy.md - Lines: 60 - Chars: 2596 - Tokens: 649
-174. src\Artifacts\A87. VCPG - vLLM High-Throughput Inference Plan.md - Lines: 56 - Chars: 4251 - Tokens: 1063
-175. src\Artifacts\A89. DCE - Phase 3 - Hosted LLM & vLLM Integration Plan.md - Lines: 85 - Chars: 6832 - Tokens: 1708
-176. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 65 - Chars: 2592 - Tokens: 648
-177. src\Artifacts\A91. AI Ascent - Caddyfile (Reference).md - Lines: 54 - Chars: 2305 - Tokens: 577
-178. src\Artifacts\A92. DCE - vLLM Setup Guide.md - Lines: 51 - Chars: 2864 - Tokens: 716
-179. src\Artifacts\A93. DCE - vLLM Encryption in Transit Guide.md - Lines: 65 - Chars: 3811 - Tokens: 953
-180. src\Artifacts\A94. DCE - Connecting to a Local LLM Guide.md - Lines: 42 - Chars: 2565 - Tokens: 642
-181. src\Artifacts\A95. DCE - LLM Connection Modes Plan.md - Lines: 69 - Chars: 5411 - Tokens: 1353
-182. src\backend\services\llm.service.ts - Lines: 68 - Chars: 2794 - Tokens: 699
-183. src\backend\services\settings.service.ts - Lines: 44 - Chars: 1670 - Tokens: 418
+172. src\Artifacts\A87. VCPG - vLLM High-Throughput Inference Plan.md - Lines: 56 - Chars: 4251 - Tokens: 1063
+173. src\Artifacts\A89. DCE - Phase 3 - Hosted LLM & vLLM Integration Plan.md - Lines: 85 - Chars: 6832 - Tokens: 1708
+174. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 249 - Chars: 10141 - Tokens: 2536
+175. src\Artifacts\A91. AI Ascent - Caddyfile (Reference).md - Lines: 54 - Chars: 2305 - Tokens: 577
+176. src\Artifacts\A92. DCE - vLLM Setup Guide.md - Lines: 70 - Chars: 4020 - Tokens: 1005
+177. src\Artifacts\A93. DCE - vLLM Encryption in Transit Guide.md - Lines: 65 - Chars: 3811 - Tokens: 953
+178. src\Artifacts\A94. DCE - Connecting to a Local LLM Guide.md - Lines: 42 - Chars: 2565 - Tokens: 642
+179. src\Artifacts\A95. DCE - LLM Connection Modes Plan.md - Lines: 69 - Chars: 5411 - Tokens: 1353
+180. src\backend\services\llm.service.ts - Lines: 68 - Chars: 2794 - Tokens: 699
+181. src\backend\services\settings.service.ts - Lines: 44 - Chars: 1670 - Tokens: 418
 
 <file path="public/copilot.svg">
 <metadata>
@@ -1256,7 +1254,7 @@ To enhance the data curation process, it is critical for the user to have immedi
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C39 (Add ETIMEDOUT error case)
+# Updated on: C40 (Add PowerShell curl alias case)
 
 ## 1. Purpose
 
@@ -1268,8 +1266,17 @@ This document serves as a living record of persistent or complex bugs that have 
 
 ---
 
-### Case Study 035: `connect ETIMEDOUT` on Batch Generation Request
+### Case Study 036: PowerShell `curl` Alias Fails with Header Errors
 
+-   **Artifacts Affected:** `src/Artifacts/A92. DCE - vLLM Setup Guide.md`
+-   **Cycles Observed:** C40
+-   **Symptom:** When running a standard `curl` command with headers (e.g., `curl -H "Content-Type: application/json" ...`) in a Windows PowerShell terminal, the command fails with an error: `Invoke-WebRequest : Cannot bind parameter 'Headers'. Cannot convert the "Content-Type: application/json" value of type "System.String" to type "System.Collections.IDictionary"`.
+-   **Root Cause Analysis (RCA):** In Windows PowerShell, `curl` is a built-in alias for the `Invoke-WebRequest` cmdlet. Unlike the standard `curl` executable, `Invoke-WebRequest` does not accept headers as a simple string via the `-H` parameter. Instead, it requires a PowerShell hashtable (which is a type of `IDictionary`) to be passed to its `-Headers` parameter. The error message is PowerShell's way of saying it received a string when it was expecting a hashtable object like `@{ "HeaderName" = "HeaderValue" }`.
+-   **Codified Solution & Best Practice:** When providing command-line instructions that may be run on Windows, it is crucial to account for PowerShell's aliases. The best practice is to provide platform-specific examples. Documentation should be updated to either provide the correct `Invoke-WebRequest` syntax for PowerShell users or instruct them to use `curl.exe` to bypass the alias and use the standard `curl` syntax. `A92` will be updated to include both correct options for Windows users.
+
+---
+
+### Case Study 035: `connect ETIMEDOUT` on Batch Generation Request
 -   **Artifacts Affected:** `src/backend/services/llm.service.ts`, `A89. DCE - Phase 3 - Hosted LLM & vLLM Integration Plan.md`
 -   **Cycles Observed:** C39
 -   **Symptom:** When clicking the "Generate responses" button in Demo Mode, the operation fails after a long delay, and the logs show an error: `Failed to generate batch responses: request to https://aiascent.game/api/dce/proxy failed, reason: connect ETIMEDOUT`.
@@ -24737,419 +24744,6 @@ The user will configure the connection in the DCE settings panel as follows:
 This architecture provides a secure, scalable, and highly performant solution for integrating the DCE with vLLM.
 </file_artifact>
 
-<file path="src/Artifacts/A90. AI Ascent - server.ts for DCE Proxy.md">
-# Artifact A90: AI Ascent - server.ts for DCE Proxy
-# Date Created: C29
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A proposed, modified version of the `server.ts` file for the `aiascent.game` project, including a new API endpoint to proxy requests from the DCE to a vLLM server.
-- **Tags:** code, server, proxy, vllm, nodejs, express
-
-## 1. Overview
-
-This artifact contains the proposed source code for the `server.ts` file from your `aiascent.game` project. The key addition is a new API endpoint, `/api/dce/llm-proxy`, designed to securely receive requests from the DCE extension and stream responses from a backend vLLM instance.
-
-## 2. Proposed Changes
-
-1.  **New Dependency:** The `node-fetch` library will be used to make the server-to-server request to the vLLM instance.
-2.  **New Environment Variable:** A new variable, `VLLM_URL`, will be added to the `.env` file to specify the address of the vLLM server (e.g., `VLLM_URL=http://localhost:8000/v1/chat/completions`).
-3.  **New API Route:** The `app.post('/api/dce/llm-proxy', ...)` route is added.
-    *   It receives the prompt and other parameters from the DCE extension.
-    *   It constructs a new request body in the OpenAI format that vLLM expects.
-    *   It makes a `fetch` call to the `VLLM_URL`.
-    *   Crucially, it pipes the `ReadableStream` from the vLLM response directly back to the client's response object, enabling efficient, low-latency streaming.
-    *   It includes error handling for cases where the vLLM server is unreachable.
-
-## 3. Full `server.ts` Code with Proposed Additions
-
-```typescript
-// Updated on: C1384 (Correct import path for generateSpeech from llmService.)
-// Updated on: C1383 (Add /api/tts/generate route handler.)
-// Updated on: C1355 (Add /api/report/vote route handler.)
-// PROPOSED UPDATE: C29 (DCE - Add /api/dce/llm-proxy route)
-import dotenv from 'dotenv';
-dotenv.config();
-
-import express from 'express';
-import http from 'http';
-import { Server as SocketIOServer } from 'socket.io';
-import NextAuth from 'next-auth';
-import { authOptions } from './pages/api/auth/[...nextauth]';
-import cors from 'cors';
-import { logInfo, logError, logWarn } from './logger';
-import cookieParser from 'cookie-parser';
-import path from 'path';
-import fs from 'fs';
-import { type PlayerDirection, type PlayerProfile, type PoetryBattleChatbotData } from './state/gameStoreTypes';
-import type { Founder } from './state';
-import { CompetitionSystem } from './game/systems/CompetitionSystem';
-import { PvpSystem } from './game/systems/PvpSystem';
-import { PoetryBattleSystem } from './game/systems/PoetryBattleSystem';
-import { handleAscentiaStream, handleAscentiaWelcome, loadAscentiaKnowledgeBase, loadReportKnowledgeBase, handleReportAscentiaStream } from './server/api/ascentiaHandler';
-import { handlePlayerProductStream, handlePlayerProductRequest, generateSpeech } from './server/llmService';
-import updateProfileHandler from './server/api/userProfileHandler';
-import { handleReportVote } from './server/api/reportHandler';
-import threadsHandler from './pages/api/bbs/threads';
-import postsHandler from './pages/api/bbs/posts';
-import voteHandler from './pages/api/bbs/vote';
-import tagsHandler from './pages/api/bbs/tags';
-import leaderboardHandler from './pages/api/leaderboard';
-import leaderboardUpdateHandler from './pages/api/leaderboard/update';
-import playersListHandler from './pages/api/players/list';
-import playerProfileHandler from './pages/api/players/[userId]';
-import prisma from './lib/prisma';
-import { Readable } from 'stream';
-import fetch from 'node-fetch'; // NEW: Added for proxying
-
-const app = express();
-const server = http.createServer(app);
-const port = process.env.PORT || 3001;
-const isProduction = process.env.NODE_ENV === 'production';
-
-let clientOrigin = 'http://localhost:8867';
-if (process.env.NEXTAUTH_URL) {
-    try {
-        const url = new URL(process.env.NEXTAUTH_URL);
-        clientOrigin = url.origin;
-    } catch (e) {
-        logError('[SERVER]', `Invalid NEXTAUTH_URL format: ${process.env.NEXTAUTH_URL}. Falling back to default localhost.`);
-    }
-} else {
-    logWarn('[SERVER]', 'NEXTAUTH_URL environment variable is not set. CORS may fail in production.');
-}
-
-logInfo('[SERVER]', `Server starting... Client Origin for CORS: ${clientOrigin}, Production: ${isProduction}`);
-
-// Instantiate systems
-const competitionSystem = new CompetitionSystem();
-const io = new SocketIOServer(server, {
-    path: "/api/socket.io",
-    cors: {
-        origin: clientOrigin,
-        methods: ["GET", "POST"]
-    },
-    connectTimeout: 90000,
-    pingTimeout: 90000,
-    pingInterval: 25000,
-});
-const pvpSystem = new PvpSystem(competitionSystem, io);
-const poetryBattleSystem = new PoetryBattleSystem(io);
-(global as any).world = { poetryBattleSystem };
-
-app.use(cors({
-    origin: [clientOrigin, 'vscode-webview://*'], // NEW: Allow requests from VS Code webviews
-    credentials: true,
-}));
-
-logInfo('[SERVER]', 'Socket.IO server initialized.');
-
-export interface PlayerState {
-    id: string; // socket.id
-    userId: string;
-    x: number;
-    y: number;
-    direction: PlayerDirection;
-    isMoving: boolean;
-    displayName: string;
-    founderKey: Founder;
-    countryCode: string | null;
-}
-const players: Record<string, PlayerState> = {};
-
-// --- Socket.IO Connection Handling ---
-// ... (existing socket.io logic remains unchanged) ...
-io.on('connection', (socket) => {
-    logInfo('[SOCKET.IO]', `Player connected: ${socket.id}`);
-    
-    (socket as any).playerState = {};
-
-    socket.on('identify', (data) => {
-        logInfo('[SOCKET.IO]', `Player identified: ${socket.id} as ${data.displayName} (User ID: ${data.userId})`);
-        const playerState: PlayerState = {
-            id: socket.id,
-            userId: data.userId,
-            x: data.x,
-            y: data.y,
-            direction: data.direction,
-            isMoving: false,
-            displayName: data.displayName,
-            founderKey: data.founderKey,
-            countryCode: data.countryCode,
-        };
-        players[socket.id] = playerState;
-        (socket as any).playerState = playerState;
-
-        socket.emit('playersUpdate', Object.values(players));
-        socket.broadcast.emit('playerJoined', players[socket.id]);
-        pvpSystem.handleRejoin(data.userId, socket.id);
-    });
-
-    socket.on('playerMove', (data) => {
-        if (players[socket.id]) {
-            players[socket.id] = { ...players[socket.id], ...data };
-            socket.broadcast.emit('playerMoved', players[socket.id]);
-        }
-    });
-
-    // --- Delegate Handlers ---
-    socket.on('get_ascentia_welcome', (payload) => handleAscentiaWelcome(socket, players, payload));
-    socket.on('start_ascentia_stream', (payload) => handleAscentiaStream(io, socket, players, payload));
-    socket.on('start_report_ascentia_stream', (payload) => handleReportAscentiaStream(io, socket, players, payload));
-    socket.on('start_chatbot_stream', (payload) => handlePlayerProductStream(socket, players, payload));
-
-    // --- PvP Handlers (Delegated to PvpSystem) ---
-    socket.on('send_pvp_challenge', (payload) => pvpSystem.handleChallenge(socket, players, payload));
-    socket.on('accept_pvp_challenge', (payload) => pvpSystem.handleAcceptChallenge(socket, players, payload));
-    socket.on('decline_pvp_challenge', (payload) => pvpSystem.handleDeclineChallenge(socket, players, payload));
-    socket.on('claim_pvp_rewards', (payload) => pvpSystem.claimRewards(players[socket.id]?.userId, payload.matchId));
-    socket.on('change_pvp_speed', (payload) => pvpSystem.handleChangeSpeed(players[socket.id]?.userId, payload.matchId, payload.requestedSpeed));
-    
-    socket.on('send_poetry_battle_challenge', (payload) => {
-        const challenger = players[socket.id];
-        const target = players[payload.targetSocketId];
-        logInfo('[[SERVER]]', `Received 'send_poetry_battle_challenge' from ${challenger?.displayName ?? 'Unknown'} to ${target?.displayName ?? 'Unknown'} (socketId: ${payload.targetSocketId})`);
-        pvpSystem.handlePoetryBattleChallenge(socket, players, payload);
-    });
-    socket.on('accept_poetry_battle_challenge', (payload) => pvpSystem.handleAcceptPoetryBattleChallenge(socket, players, payload));
-    socket.on('decline_poetry_battle_challenge', (payload) => pvpSystem.handleDeclinePoetryBattleChallenge(socket, players, payload));
-    socket.on('poetry_battle_submit_move', (payload) => poetryBattleSystem.handlePlayerMove(socket, payload));
-    
-    socket.on('submit_poetry_chatbot_data', (payload: { matchId: string, chatbotData: PoetryBattleChatbotData | null }) => {
-        pvpSystem.handleSubmitPoetryChatbotData(socket, players, payload);
-    });
-
-    socket.on('send_pvp_match_message', async (payload) => {
-        const logPrefix = '[SocketHandler:send_pvp_match_message]';
-        const senderState = players[socket.id];
-        if (!senderState) {
-            logWarn(logPrefix, `Received message from unidentified socket ${socket.id}`);
-            return;
-        }
-
-        try {
-            const senderDb = await prisma.leaderboardEntry.findUnique({
-                where: { userId: senderState.userId },
-                include: { user: { select: { displayName: true, countryCode: true } } }
-            });
-
-            if (!senderDb || !senderDb.user) {
-                logError(logPrefix, `Could not find DB entry for sender ${senderState.userId}`);
-                return;
-            }
-            
-            const senderProfile: PlayerProfile = {
-                userId: senderState.userId,
-                displayName: senderDb.user.displayName ?? 'Player',
-                companyName: senderDb.companyName ?? 'Company',
-                agentName: senderDb.gameAiAgentName ?? 'Agent',
-                elo: senderDb.highestGameAIElo,
-                countryCode: senderDb.user.countryCode,
-                socketId: senderState.id,
-            };
-            
-            pvpSystem.handleMatchChatMessage(senderState.userId, payload.matchId, payload.message, senderProfile);
-        } catch (error) {
-            logError(logPrefix, `Error constructing sender profile for chat message.`, error);
-        }
-    });
-
-    socket.on('sendMessage', (payload) => pvpSystem.handleLobbyChatMessage(io, socket, players, payload));
-    
-    socket.on('disconnect', (reason) => {
-        logInfo('[SOCKET.IO]', `Player disconnected: ${socket.id}. Reason: ${reason}`);
-        pvpSystem.handleDisconnect(socket.id, players);
-        delete players[socket.id];
-        io.emit('playerLeft', { id: socket.id });
-    });
-});
-
-// --- PvpSystem Global Timer ---
-setInterval(() => {
-    pvpSystem.tickMatches(1); // Tick every 1 second
-}, 1000);
-
-// --- Middleware and API Routes ---
-app.use(cookieParser());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-app.use((req, res, next) => {
-    (req as any).io = io;
-    (req as any).players = players;
-    next();
-});
-
-app.all('/api/auth/*', (req, res) => {
-    if (!(req.query as any).nextauth) {
-      const nextauth = req.path.split('/').slice(3);
-      (req.query as any).nextauth = nextauth;
-      logInfo('[SERVER:Auth]', `Manually setting req.query.nextauth to:`, nextauth);
-    }
-    return NextAuth(req as any, res as any, authOptions);
-});
-
-// --- API Routes ---
-app.get('/api/bbs/threads', (req, res) => threadsHandler(req as any, res as any));
-app.post('/api/bbs/threads', (req, res) => threadsHandler(req as any, res as any));
-app.put('/api/bbs/threads', (req, res) => threadsHandler(req as any, res as any));
-app.delete('/api/bbs/threads', (req, res) => threadsHandler(req as any, res as any));
-app.get('/api/bbs/posts', (req, res) => postsHandler(req as any, res as any));
-app.post('/api/bbs/posts', (req, res) => postsHandler(req as any, res as any));
-app.post('/api/bbs/vote', (req, res) => voteHandler(req as any, res as any));
-app.get('/api/bbs/tags', (req, res) => tagsHandler(req as any, res as any));
-app.get('/api/leaderboard', (req, res) => leaderboardHandler(req as any, res as any));
-app.post('/api/leaderboard/update', (req, res) => leaderboardUpdateHandler(req as any, res as any));
-app.get('/api/players/list', (req, res) => playersListHandler(req as any, res as any));
-app.get('/api/players/:userId', (req, res) => playerProfileHandler(req as any, res as any));
-app.post('/api/user/updateProfile', (req, res) => updateProfileHandler(req as any, res as any));
-app.post('/api/llm/proxy', (req, res) => handlePlayerProductRequest(req as any, res as any));
-app.post('/api/report/vote', (req, res) => handleReportVote(req as any, res as any));
-
-// NEW: DCE LLM Proxy Route
-app.post('/api/dce/llm-proxy', async (req, res) => {
-    const vllmUrl = process.env.VLLM_URL;
-    if (!vllmUrl) {
-        logError('[DCE Proxy]', 'VLLM_URL environment variable is not set.');
-        return res.status(500).send('vLLM endpoint is not configured on the server.');
-    }
-
-    try {
-        logInfo('[DCE Proxy]', `Forwarding request to vLLM at ${vllmUrl}`);
-        
-        const vllmResponse = await fetch(vllmUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                // Add any necessary authorization headers for vLLM here
-            },
-            body: JSON.stringify({
-                ...req.body, // Forward the body from the DCE extension
-                stream: true, // Ensure we request a stream
-            }),
-        });
-
-        if (!vllmResponse.ok) {
-            const errorBody = await vllmResponse.text();
-            logError('[DCE Proxy]', `vLLM server returned an error: ${vllmResponse.status} ${vllmResponse.statusText}`, errorBody);
-            return res.status(vllmResponse.status).send(errorBody);
-        }
-        
-        res.setHeader('Content-Type', 'text/event-stream');
-        res.setHeader('Cache-Control', 'no-cache');
-        res.setHeader('Connection', 'keep-alive');
-
-        // Pipe the stream from vLLM directly to the client response
-        vllmResponse.body.pipe(res);
-
-    } catch (error) {
-        logError('[DCE Proxy]', 'Error proxying request to vLLM', error);
-        res.status(500).send('Internal server error while contacting the vLLM service.');
-    }
-});
-
-
-// NEW: TTS Proxy Route
-app.post('/api/tts/generate', async (req, res) => {
-    // ... (existing TTS logic remains unchanged) ...
-});
-
-
-// --- Static File Serving (Production Only) ---
-// ... (existing static file logic remains unchanged) ...
-if (isProduction) {
-    const buildPath = path.join(__dirname);
-    logInfo('[SERVER]', `Production mode detected. Serving static files from: ${buildPath}`);
-    app.use(express.static(buildPath));
-
-    app.get('*', (req, res) => {
-        const indexPath = path.join(buildPath, 'index.html');
-        if (fs.existsSync(indexPath)) {
-            res.sendFile(indexPath);
-        } else {
-            res.status(404).send(`'index.html' not found.`);
-        }
-    });
-}
-
-// --- Server Startup ---
-server.listen(port, () => {
-    logInfo('[SERVER]', `Server listening on http://localhost:${port}`);
-    const publicPath = isProduction ? __dirname : path.join(__dirname, '..', 'public');
-    loadAscentiaKnowledgeBase(publicPath);
-    loadReportKnowledgeBase(publicPath);
-});
-
-process.on('SIGINT', () => {
-    logInfo('[SERVER]', 'Shutting down...');
-    io.close();
-    server.close(() => process.exit(0));
-});
-</file_artifact>
-
-<file path="src/Artifacts/A91. AI Ascent - Caddyfile for DCE Proxy.md">
-# Artifact A91: AI Ascent - Caddyfile for DCE Proxy
-# Date Created: C29
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A proposed version of the `Caddyfile` for the `aiascent.game` project, confirming that the existing configuration is sufficient for routing DCE proxy requests.
-- **Tags:** code, server, caddy, proxy, configuration
-
-## 1. Overview
-
-This artifact contains the `Caddyfile` from your `aiascent.game` project. Its purpose is to analyze whether any changes are needed to support the new `/api/dce/llm-proxy` endpoint that will be added to `server.ts`.
-
-## 2. Analysis and Conclusion
-
-**No changes are required.**
-
-The existing `Caddyfile` is already perfectly configured to support this new feature. The `reverse_proxy localhost:3001` directive acts as a "catch-all," forwarding *all* incoming requests for `aiascent.game` (including any new API routes like `/api/dce/llm-proxy`) to your Node.js server running on port 3001.
-
-The `header_up` directives are also correctly configured to handle WebSocket connections, which, while not used by this specific HTTP proxy route, are essential for the rest of your application and demonstrate a robust setup.
-
-## 3. Full `Caddyfile` Code (No Changes Needed)
-
-```caddy
-# Artifact 146: Caddyfile (Production)
-# Date Created: Cycle 1188
-# Author: AI Model
-# Updated on: C1268 (Refactor for production static file serving.)
-
-# This Caddyfile provides a robust configuration for running AI Ascent in a production
-# environment. It automatically handles HTTPS, serves the static client application,
-# and correctly routes API and WebSocket traffic to the backend Node.js server.
-
-aiascent.game {
-    # Caddy will automatically provision and renew a free SSL certificate from Let's Encrypt.
-    
-    # Enable gzip and zstd compression for better performance.
-    encode zstd gzip
-
-    # Log all requests and errors.
-    log {
-        output file aiascent_caddy.log
-    }
-
-    # Reverse proxy ALL incoming requests to the backend Node.js server,
-    # which is now responsible for handling API, WebSockets, and serving static files.
-    # The `header_up` directives ensure WebSocket connections can be established correctly.
-    reverse_proxy localhost:3001 {
-        header_up Host {host}
-        header_up X-Real-IP {remote_ip}
-        header_up X-Forwarded-For {remote_ip}
-        header_up X-Forwarded-Proto {scheme}
-        header_up Connection {>Connection}
-        header_up Upgrade {>Upgrade}
-    }
-}
-
-# Optional: Redirect www to the main domain
-www.aiascent.game {
-    redir https://aiascent.game{uri} permanent
-}
-</file_artifact>
-
 <file path="src/Artifacts/A87. VCPG - vLLM High-Throughput Inference Plan.md">
 # Artifact A87: VCPG - vLLM High-Throughput Inference Plan
 
@@ -25314,55 +24908,239 @@ This artifact contains the literal source code of the `server.ts` file from the 
 ## 2. Source Code (with enhanced logging)
 
 ```typescript
-// ... (imports and other server setup code remains the same) ...
-import fetch from 'node-fetch'; 
+// Updated on: C1384 (Correct import path for generateSpeech from llmService.)
+// Updated on: C1383 (Add /api/tts/generate route handler.)
+// Updated on: C1355 (Add /api/report/vote route handler.)
+// Updated on: C29 (DCE Integration: Add /api/dce/generate route for vLLM proxy)
+import dotenv from 'dotenv';
+dotenv.config();
 
-// ... (rest of the server code) ...
+import express from 'express';
+import http from 'http';
+import { Server as SocketIOServer } from 'socket.io';
+import NextAuth from 'next-auth';
+import { authOptions } from './pages/api/auth/[...nextauth]';
+import cors from 'cors';
+import { logInfo, logError, logWarn } from './logger';
+import cookieParser from 'cookie-parser';
+import path from 'path';
+import fs from 'fs';
+import { type PlayerDirection, type PlayerProfile, type PoetryBattleChatbotData } from './state/gameStoreTypes';
+import type { Founder } from './state';
+import { CompetitionSystem } from './game/systems/CompetitionSystem';
+import { PvpSystem } from './game/systems/PvpSystem';
+import { PoetryBattleSystem } from './game/systems/PoetryBattleSystem';
+import { handleAscentiaStream, handleAscentiaWelcome, loadAscentiaKnowledgeBase, loadReportKnowledgeBase, handleReportAscentiaStream } from './server/api/ascentiaHandler';
+import { handlePlayerProductStream, handlePlayerProductRequest, generateSpeech } from './server/llmService';
+import updateProfileHandler from './server/api/userProfileHandler';
+import { handleReportVote } from './server/api/reportHandler';
+import threadsHandler from './pages/api/bbs/threads';
+import postsHandler from './pages/api/bbs/posts';
+import voteHandler from './pages/api/bbs/vote';
+import tagsHandler from './pages/api/bbs/tags';
+import leaderboardHandler from './pages/api/leaderboard';
+import leaderboardUpdateHandler from './pages/api/leaderboard/update';
+import playersListHandler from './pages/api/players/list';
+import playerProfileHandler from './pages/api/players/[userId]';
+import prisma from './lib/prisma';
+import { Readable } from 'stream';
 
-// NEW: DCE LLM Proxy Route (Updated with enhanced logging)
-app.post('/api/dce/proxy', async (req, res) => {
-    const vllmUrl = process.env.VLLM_URL;
-    if (!vllmUrl) {
-        logError('[DCE Proxy]', 'VLLM_URL environment variable is not set.');
-        return res.status(500).send('vLLM endpoint is not configured on the server.');
+const app = express();
+const server = http.createServer(app);
+const port = process.env.PORT || 3001;
+const isProduction = process.env.NODE_ENV === 'production';
+
+// --- DCE/vLLM Integration Configuration ---
+const VLLM_ENDPOINT = process.env.VLLM_ENDPOINT || 'http://127.0.0.1:8000/v1/completions';
+const DCE_API_KEY = process.env.DCE_API_KEY; // A secret key to authenticate requests from the extension
+
+let clientOrigin = 'http://localhost:8867';
+if (process.env.NEXTAUTH_URL) {
+    try {
+        const url = new URL(process.env.NEXTAUTH_URL);
+        clientOrigin = url.origin;
+    } catch (e) {
+        logError('[SERVER]', `Invalid NEXTAUTH_URL format: ${process.env.NEXTAUTH_URL}. Falling back to default localhost.`);
+    }
+} else {
+    logWarn('[SERVER]', 'NEXTAUTH_URL environment variable is not set. CORS may fail in production.');
+}
+
+logInfo('[SERVER]', `Server starting... Client Origin for CORS: ${clientOrigin}, Production: ${isProduction}`);
+logInfo('[DCE]', `vLLM proxy endpoint configured for: ${VLLM_ENDPOINT}`);
+if (!DCE_API_KEY) {
+    logWarn('[DCE]', 'DCE_API_KEY is not set. The /api/dce/generate endpoint will be unsecured.');
+}
+
+// Instantiate systems
+const competitionSystem = new CompetitionSystem();
+const io = new SocketIOServer(server, {
+    path: "/api/socket.io",
+    cors: {
+        origin: [clientOrigin, 'vscode-webview://*'], // Allow requests from VS Code webviews
+        methods: ["GET", "POST"]
+    },
+    connectTimeout: 90000,
+    pingTimeout: 90000,
+    pingInterval: 25000,
+});
+const pvpSystem = new PvpSystem(competitionSystem, io);
+const poetryBattleSystem = new PoetryBattleSystem(io);
+(global as any).world = { poetryBattleSystem };
+
+app.use(cors({
+    origin: [clientOrigin, 'vscode-webview://*'], // Also apply CORS for standard HTTP requests
+    credentials: true,
+}));
+
+logInfo('[SERVER]', 'Socket.IO server initialized.');
+
+export interface PlayerState {
+    id: string; // socket.id
+    userId: string;
+    x: number;
+    y: number;
+    direction: PlayerDirection;
+    isMoving: boolean;
+    displayName: string;
+    founderKey: Founder;
+    countryCode: string | null;
+}
+const players: Record<string, PlayerState> = {};
+
+// --- Socket.IO Connection Handling (omitted for brevity, no changes) ---
+// ... (existing socket.io logic)
+
+// --- PvpSystem Global Timer (omitted for brevity, no changes) ---
+// ... (existing setInterval logic)
+
+// --- Middleware and API Routes ---
+app.use(cookieParser());
+app.use(express.json({ limit: '50mb' })); // Increase limit for large prompts
+app.use(express.urlencoded({ extended: true, limit: '50mb' }));
+
+app.use((req, res, next) => {
+    (req as any).io = io;
+    (req as any).players = players;
+    next();
+});
+
+app.all('/api/auth/*', (req, res) => {
+    if (!(req.query as any).nextauth) {
+      const nextauth = req.path.split('/').slice(3);
+      (req.query as any).nextauth = nextauth;
+      logInfo('[SERVER:Auth]', `Manually setting req.query.nextauth to:`, nextauth);
+    }
+    return NextAuth(req as any, res as any, authOptions);
+});
+
+// --- API Routes ---
+app.get('/api/bbs/threads', (req, res) => threadsHandler(req as any, res as any));
+app.post('/api/bbs/threads', (req, res) => threadsHandler(req as any, res as any));
+app.put('/api/bbs/threads', (req, res) => threadsHandler(req as any, res as any));
+app.delete('/api/bbs/threads', (req, res) => threadsHandler(req as any, res as any));
+app.get('/api/bbs/posts', (req, res) => postsHandler(req as any, res as any));
+app.post('/api/bbs/posts', (req, res) => postsHandler(req as any, res as any));
+app.post('/api/bbs/vote', (req, res) => voteHandler(req as any, res as any));
+app.get('/api/bbs/tags', (req, res) => tagsHandler(req as any, res as any));
+app.get('/api/leaderboard', (req, res) => leaderboardHandler(req as any, res as any));
+app.post('/api/leaderboard/update', (req, res) => leaderboardUpdateHandler(req as any, res as any));
+app.get('/api/players/list', (req, res) => playersListHandler(req as any, res as any));
+app.get('/api/players/:userId', (req, res) => playerProfileHandler(req as any, res as any));
+app.post('/api/user/updateProfile', (req, res) => updateProfileHandler(req as any, res as any));
+app.post('/api/llm/proxy', (req, res) => handlePlayerProductRequest(req as any, res as any));
+app.post('/api/report/vote', (req, res) => handleReportVote(req as any, res as any));
+
+// NEW: DCE vLLM Proxy Route
+app.post('/api/dce/generate', async (req, res) => {
+    logInfo('[DCE]', 'Received request on /api/dce/generate');
+
+    // Simple API Key Authentication
+    if (DCE_API_KEY) {
+        const authHeader = req.headers.authorization;
+        if (!authHeader || authHeader !== `Bearer ${DCE_API_KEY}`) {
+            logWarn('[DCE]', 'Unauthorized request: Missing or invalid API key.');
+            return res.status(401).json({ error: 'Unauthorized' });
+        }
     }
 
+    const { prompt, n = 10, max_tokens = 4096, stop = ["</file_artifact>"] } = req.body;
+
+    if (!prompt) {
+        logError('[DCE]', 'Bad request: Missing prompt content.');
+        return res.status(400).json({ error: 'Prompt content is required' });
+    }
+
+    logInfo('[DCE]', `Proxying prompt to vLLM. Requesting ${n} parallel responses.`);
+
     try {
-        logInfo('[DCE Proxy]', `Received request. Forwarding to vLLM at ${vllmUrl}`);
-        
-        const vllmResponse = await fetch(vllmUrl, {
+        const vllmResponse = await fetch(VLLM_ENDPOINT, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                ...req.body,
-                stream: true,
+                prompt,
+                n,
+                max_tokens,
+                stop,
+                // Add other OpenAI-compatible parameters as needed
+                temperature: 0.7, 
             }),
         });
 
         if (!vllmResponse.ok) {
             const errorBody = await vllmResponse.text();
-            logError('[DCE Proxy]', `vLLM server returned an error: ${vllmResponse.status} ${vllmResponse.statusText}`, errorBody);
-            return res.status(vllmResponse.status).send(errorBody);
+            throw new Error(`vLLM server returned an error: ${vllmResponse.status} ${vllmResponse.statusText} - ${errorBody}`);
         }
-        
-        logInfo('[DCE Proxy]', 'Successfully connected to vLLM. Piping stream back to client.');
-        res.setHeader('Content-Type', 'text/event-stream');
-        res.setHeader('Cache-Control', 'no-cache');
-        res.setHeader('Connection', 'keep-alive');
 
-        vllmResponse.body.pipe(res);
+        const data = await vllmResponse.json();
+        const responses = data.choices.map((choice: any) => choice.text);
+        
+        logInfo('[DCE]', `Successfully received ${responses.length} responses from vLLM.`);
+        res.status(200).json({ responses });
 
     } catch (error: any) {
-        // Log the specific error to help diagnose timeouts vs. other issues
-        logError('[DCE Proxy]', `Error proxying request to vLLM: ${error.message}`, error);
-        res.status(500).send(`Internal server error while contacting the vLLM service: ${error.message}`);
+        logError('[DCE]', 'Error proxying request to vLLM:', error.message);
+        res.status(500).json({ error: 'Failed to get responses from vLLM backend.' });
     }
 });
 
 
-// ... (rest of server.ts) ...
+// NEW: TTS Proxy Route (omitted for brevity, no changes)
+// ... (existing TTS logic)
+
+
+// --- Static File Serving (Production Only) ---
+if (isProduction) {
+    const buildPath = path.join(__dirname);
+    logInfo('[SERVER]', `Production mode detected. Serving static files from: ${buildPath}`);
+    app.use(express.static(buildPath));
+
+    app.get('*', (req, res) => {
+        const indexPath = path.join(buildPath, 'index.html');
+        if (fs.existsSync(indexPath)) {
+            res.sendFile(indexPath);
+        } else {
+            res.status(404).send(`'index.html' not found.`);
+        }
+    });
+}
+
+// --- Server Startup ---
+server.listen(port, () => {
+    logInfo('[SERVER]', `Server listening on http://localhost:${port}`);
+    const publicPath = isProduction ? __dirname : path.join(__dirname, '..', 'public');
+    loadAscentiaKnowledgeBase(publicPath);
+    loadReportKnowledgeBase(publicPath);
+});
+
+process.on('SIGINT', () => {
+    logInfo('[SERVER]', 'Shutting down...');
+    io.close();
+    server.close(() => process.exit(0));
+});
+```
 </file_artifact>
 
 <file path="src/Artifacts/A91. AI Ascent - Caddyfile (Reference).md">
@@ -25426,7 +25204,7 @@ www.aiascent.game {
 # Artifact A92: DCE - vLLM Setup Guide
 # Date Created: C30
 # Author: AI Model & Curator
-# Updated on: C39 (Add Troubleshooting section for connection timeouts)
+# Updated on: C40 (Add PowerShell-specific curl instructions)
 
 - **Key/Value for A0:**
 - **Description:** A step-by-step guide for setting up the vLLM inference server with an OpenAI-compatible API endpoint for use with the DCE.
@@ -25445,7 +25223,30 @@ This guide provides the necessary steps to install `vLLM` and run a large langua
 ... (Steps 1-6 remain the same) ...
 
 ### Step 7: Verifying the API Endpoint
+
 (No changes from C35)
+
+#### Note for Windows PowerShell Users
+
+The standard `curl` command provided in the previous step uses syntax that works on Linux, macOS, and with the `curl.exe` application on Windows. However, in a standard Windows PowerShell terminal, `curl` is an alias for a different command called `Invoke-WebRequest`, which uses a different syntax.
+
+If the command above fails with an error about converting a "String" to a "Dictionary", you have two options:
+
+**Option A (Recommended): Use the full `Invoke-WebRequest` command:**
+This is the native PowerShell way to make the request. Copy and paste the entire command into your PowerShell terminal.
+
+```powershell
+Invoke-WebRequest -Uri "https://aiascent.game/api/dce/proxy" -Method POST -Headers @{"Content-Type"="application/json"} -Body '{"model": "local-model", "prompt": "This is a connectivity test."}' -Verbose
+```
+
+**Option B: Use `curl.exe` to bypass the alias:**
+If you have `curl.exe` installed (common on modern Windows), you can specify it directly to use the standard syntax.
+
+```powershell
+curl.exe -X POST -H "Content-Type: application/json" -d "{\"model\": \"local-model\", \"prompt\": \"This is a connectivity test.\"}" https://aiascent.game/api/dce/llm-proxy -v
+```
+
+A successful response from either of these commands will be a JSON object, confirming your API endpoint is working correctly.
 
 ### Step 8: Connecting the DCE Extension
 (No changes from C35)
@@ -25459,11 +25260,7 @@ This guide provides the necessary steps to install `vLLM` and run a large langua
 
 #### Testing the Proxy Connection with `curl`
 
-Run the following command from a terminal on your main computer (e.g., PowerShell or Command Prompt, **not** the WSL terminal). This command simulates the request that the DCE extension sends.
-
-```bash
-curl -X POST https://aiascent.game/api/dce/proxy -H "Content-Type: application/json" -d "{\"model\": \"local-model\", \"prompt\": \"San Francisco is a\", \"max_tokens\": 7}"
-```
+Run the appropriate command from the "Note for Windows PowerShell Users" section above from a terminal on your main computer (e.g., PowerShell or Command Prompt, **not** the WSL terminal).
 
 **Analyzing the `curl` Result:**
 1.  **If the command also times out:** The problem is with the network connection to your proxy server.
