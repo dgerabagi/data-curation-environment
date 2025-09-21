@@ -1,4 +1,4 @@
-// Updated on: C38 (Use generatePromptString)
+// Updated on: C42 (Refactor batch generation handler)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -12,10 +12,11 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestBatchGeneration, async (data) => {
-        loggerService.log(`Received RequestBatchGeneration for ${data.count} responses.`);
+        loggerService.log(`Received RequestBatchGeneration for ${data.count} responses from cycle ${data.cycleData.cycleId}.`);
         const prompt = await promptService.generatePromptString(data.cycleData);
         const responses = await llmService.generateBatch(prompt, data.count, data.cycleData);
-        serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationResult, { responses });
+        const newCycleId = await historyService.createNewCycleWithResponses(responses, data.cycleData.tabCount || 4);
+        serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId });
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestSettings, async () => {

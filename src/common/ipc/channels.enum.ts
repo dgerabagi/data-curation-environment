@@ -44,6 +44,7 @@ export enum ClientToServerChannel {
 
     // Phase 2: PCPP
     RequestCreatePromptFile = "clientToServer.requestCreatePromptFile",
+    RequestBatchGeneration = "clientToServer.requestBatchGeneration",
     RequestCreateCycle0Prompt = "clientToServer.requestCreateCycle0Prompt",
     RequestFileExistence = "clientToServer.requestFileExistence",
     RequestSyntaxHighlight = "clientToServer.requestSyntaxHighlight",
@@ -65,7 +66,6 @@ export enum ClientToServerChannel {
     SaveLastViewedCycle = "clientToServer.saveLastViewedCycle",
     RequestSettings = "clientToServer.requestSettings",
     SaveSettings = "clientToServer.saveSettings",
-    RequestBatchGeneration = "clientToServer.requestBatchGeneration",
 }
 
 export enum ServerToClientChannel {
@@ -100,4 +100,5 @@ export enum ServerToClientChannel {
     NotifySaveComplete = "serverToClient.notifySaveComplete",
     SendSettings = "serverToClient.sendSettings",
     SendBatchGenerationResult = "serverToClient.sendBatchGenerationResult",
+    SendBatchGenerationComplete = "serverToClient.sendBatchGenerationComplete",
 }

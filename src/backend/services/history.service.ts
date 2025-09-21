@@ -1,9 +1,9 @@
 // src/backend/services/history.service.ts
-// Updated on: C26 (Remove logging)
+// Updated on: C42 (Add createNewCycleWithResponses)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
-import { PcppCycle, PcppHistoryFile } from '@/common/types/pcpp.types';
+import { PcppCycle, PcppHistoryFile, PcppResponse } from '@/common/types/pcpp.types';
 import { serverIPCs } from '@/client/views';
 import { VIEW_TYPES } from '@/common/view-types';
 import { ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -157,6 +157,31 @@ export class HistoryService {
         if (serverIpc) {
             serverIpc.sendToClient(ServerToClientChannel.NotifySaveComplete, { cycleId: cycleData.cycleId });
         }
+    }
+
+    public async createNewCycleWithResponses(responses: string[], tabCount: number): Promise<number> {
+        const history = await this._readHistoryFile();
+        const newCycleId = (history.cycles.reduce((maxId, cycle) => Math.max(maxId, cycle.cycleId), 0)) + 1;
+        
+        const newResponses: { [tabId: string]: PcppResponse } = {};
+        for(let i = 0; i < tabCount; i++) {
+            newResponses[(i+1).toString()] = { content: responses[i] || '' };
+        }
+
+        const newCycle: PcppCycle = {
+            cycleId: newCycleId,
+            timestamp: new Date().toISOString(),
+            title: 'Generated Responses',
+            cycleContext: '', // Should be inherited from previous cycle in a future version
+            ephemeralContext: '',
+            responses: newResponses,
+            tabCount: tabCount,
+        };
+
+        history.cycles.push(newCycle);
+        await this._writeHistoryFile(history);
+        Services.loggerService.log(`Created new cycle ${newCycleId} with ${responses.length} responses.`);
+        return newCycleId;
     }
 
     public async deleteCycle(cycleId: number): Promise<number> {

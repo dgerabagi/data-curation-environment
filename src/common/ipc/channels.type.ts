@@ -1,4 +1,4 @@
-// Updated on: C37 (Add new channels for settings and batch generation)
+// Updated on: C42 (Update batch generation channels)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -51,7 +51,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.SaveAutoAddState ? { enabled: boolean } :
     T extends ClientToServerChannel.VSCodeCommand ? { command: string, args?: any[] } :
     T extends ClientToServerChannel.RequestCreatePromptFile ? { cycleTitle: string; currentCycle: number; selectedFiles: string[] } :
-    T extends ClientToServerChannel.RequestBatchGeneration ? { cycleData: PcppCycle, count: number, selectedFiles: string[] } :
+    T extends ClientToServerChannel.RequestBatchGeneration ? { cycleData: PcppCycle, count: number } :
     T extends ClientToServerChannel.RequestCreateCycle0Prompt ? { projectScope: string } :
     T extends ClientToServerChannel.RequestFileExistence ? { paths: string[] } :
     T extends ClientToServerChannel.RequestSyntaxHighlight ? { code: string; lang: string, id: string } :
@@ -101,5 +101,6 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SendGitStatus ? { isClean: boolean } :
     T extends ServerToClientChannel.NotifySaveComplete ? { cycleId: number } :
     T extends ServerToClientChannel.SendSettings ? { settings: DceSettings } :
-    T extends ServerToClientChannel.SendBatchGenerationResult ? { responses: string[] } :
+    T extends ServerToClientChannel.SendBatchGenerationResult ? { responses: string[], newCycleId: number } :
+    T extends ServerToClientChannel.SendBatchGenerationComplete ? { newCycleId: number } :
     never;

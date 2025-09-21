@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 42 - updated server.ts, need a test curl command...
+Current Cycle 43 - not quite functional yet
+Cycle 42 - updated server.ts, need a test curl command...
 Cycle 41 - curls not yet working
 Cycle 40 - error with curl
 Cycle 39 - very close, attempted to send a batch request
@@ -752,6 +753,42 @@ No project scope defined.
 </M5. organized artifacts list>
 
 <M6. Cycles>
+
+<Cycle 43>
+<Cycle Context>
+okay, i rolled in this response without issue, however when i click generate responses, it does correctly create and send off the request, but i do not progress to the next cycle to await the incoming response stream(s). when i click generate responses i see the vllm terminal receive and start processing, however the in my dce output show (see ephemeral) that it fails to generate the responses, it doesnt like the response structure.
+
+finally, it did say that it created the new cycle and with 0 responses, but my pcpp pane never switched to this new cycle, which is the intention.
+
+
+</Cycle Context>
+<Ephemeral Context>
+[INFO] [4:37:38 PM] Received RequestBatchGeneration for 4 responses from cycle 2.
+[INFO] [4:37:38 PM] [SelectionService] Found 39 paths in persisted state. Validating...
+[INFO] [4:37:38 PM] [SelectionService] Returning 39 valid paths.
+[INFO] [4:37:38 PM] Sending batch request for 4 responses to: https://aiascent.game/api/dce/proxy
+[ERROR] [4:38:35 PM] Failed to generate batch responses: Invalid response structure from LLM endpoint.
+[INFO] [4:38:35 PM] Created new cycle 3 with 0 responses.
+</Ephemeral Context>
+<Previous Cycle 42 Summary of Actions>
+The `curl` test results from Cycle 41 are the breakthrough we needed. The `HTTP/1.1 404 Not Found` with the body `Cannot POST /api/dce/proxy` is definitive proof that the network connection is working perfectly, but the Express server running on `aiascent.game` does not have the correct route handler for our API endpoint.
+
+This is excellent news because it's a simple, solvable problem in the server's code, not a complex network or firewall issue. The most likely causes are either a typo in the route path in `server.ts` or, more commonly, the server process was not restarted after the new code was added.
+
+My course of action is to provide you with the updated documentation codifying this exact issue and a clear set of instructions to verify your `server.ts` file and restart the service, which will resolve the 404 error.
+
+1.  **Codify the Bug:** I will add a new case study to `A11. DCE - Regression Case Studies.md`.
+    *   **Name:** "Proxy Server `curl` Test Returns `404 Not Found`".
+    *   **Root Cause Analysis (RCA):** A `404 Not Found` error from a `curl` test, where the response body is `Cannot POST /path`, indicates that the request is successfully reaching the Node.js/Express server, but the server has no route handler defined for that specific path and HTTP method. This is typically caused by a typo in the route definition (e.g., `/api/dce/proxy` vs. `/api/dce/generate`) or by failing to restart the server process after adding the new route code.
+    *   **Codified Solution:** The curator must verify that the route in their `server.ts` file exactly matches the one being called by the client. After making any changes, they must stop and restart the Node.js server process to ensure the new code is loaded.
+
+2.  **Update Integration Plan:** I will update `A89. DCE - Phase 3 - Hosted LLM & vLLM Integration Plan.md` with a new subsection in the "Troubleshooting Connectivity" section.
+    *   **New Subsection:** "Interpreting a `404 Not Found` Error".
+    *   **Content:** This will explain that a 404 error is a positive sign that connectivity to the proxy exists. It will instruct the user to check their `server.ts` against the reference `A90` and to restart their Node.js server.
+
+3.  **Provide Curator Instructions:** I will provide a clear set of steps in the `<curator activity>` block for you to follow to resolve the issue.
+</Previous Cycle 42 Summary of Actions>
+</Cycle 43>
 
 <Cycle 42>
 <Cycle Context>
@@ -3129,16 +3166,16 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-21T21:20:19.605Z
+  Date Generated: 2025-09-21T21:45:12.254Z
   ---
   Total Files: 181
-  Approx. Tokens: 468168
+  Approx. Tokens: 468245
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (9355 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (9248 tokens)
 4. src\Artifacts\A0. DCE Master Artifact List.md (8565 tokens)
 5. src\Artifacts\A11. DCE - Regression Case Studies.md (5744 tokens)
 6. src\client\views\parallel-copilot.view\view.scss (5575 tokens)
@@ -3254,7 +3291,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 104. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
 105. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 106. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-107. src\backend\services\history.service.ts - Lines: 266 - Chars: 10521 - Tokens: 2631
+107. src\backend\services\history.service.ts - Lines: 291 - Chars: 11626 - Tokens: 2907
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 109. src\backend\services\prompt.service.ts - Lines: 372 - Chars: 19675 - Tokens: 4919
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
@@ -3282,18 +3319,18 @@ This file-centric approach helps in planning and prioritizing work, especially i
 132. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 79 - Chars: 3137 - Tokens: 785
 133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
 134. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-135. src\client\views\parallel-copilot.view\on-message.ts - Lines: 136 - Chars: 6564 - Tokens: 1641
+135. src\client\views\parallel-copilot.view\on-message.ts - Lines: 137 - Chars: 6731 - Tokens: 1683
 136. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 100 - Chars: 5002 - Tokens: 1251
 137. src\client\views\parallel-copilot.view\view.scss - Lines: 996 - Chars: 22300 - Tokens: 5575
 138. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 358 - Chars: 37418 - Tokens: 9355
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 350 - Chars: 36992 - Tokens: 9248
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
 143. src\client\views\settings.view\view.tsx - Lines: 120 - Chars: 6337 - Tokens: 1585
 144. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
-145. src\common\ipc\channels.enum.ts - Lines: 103 - Chars: 5609 - Tokens: 1403
-146. src\common\ipc\channels.type.ts - Lines: 105 - Chars: 8224 - Tokens: 2056
+145. src\common\ipc\channels.enum.ts - Lines: 104 - Chars: 5689 - Tokens: 1423
+146. src\common\ipc\channels.type.ts - Lines: 106 - Chars: 8292 - Tokens: 2073
 147. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 148. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 149. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
@@ -3326,7 +3363,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 176. src\Artifacts\A92. DCE - vLLM Setup Guide.md - Lines: 70 - Chars: 4020 - Tokens: 1005
 177. src\Artifacts\A93. DCE - vLLM Encryption in Transit Guide.md - Lines: 65 - Chars: 3811 - Tokens: 953
 178. src\Artifacts\A94. DCE - Connecting to a Local LLM Guide.md - Lines: 42 - Chars: 2565 - Tokens: 642
-179. src\Artifacts\A95. DCE - LLM Connection Modes Plan.md - Lines: 69 - Chars: 5411 - Tokens: 1353
+179. src\Artifacts\A95. DCE - LLM Connection Modes Plan.md - Lines: 54 - Chars: 4725 - Tokens: 1182
 180. src\backend\services\llm.service.ts - Lines: 68 - Chars: 2794 - Tokens: 699
 181. src\backend\services\settings.service.ts - Lines: 44 - Chars: 1670 - Tokens: 418
 
@@ -20285,11 +20322,11 @@ export class HighlightingService {
 
 <file path="src/backend/services/history.service.ts">
 // src/backend/services/history.service.ts
-// Updated on: C26 (Remove logging)
+// Updated on: C42 (Add createNewCycleWithResponses)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
-import { PcppCycle, PcppHistoryFile } from '@/common/types/pcpp.types';
+import { PcppCycle, PcppHistoryFile, PcppResponse } from '@/common/types/pcpp.types';
 import { serverIPCs } from '@/client/views';
 import { VIEW_TYPES } from '@/common/view-types';
 import { ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -20443,6 +20480,31 @@ export class HistoryService {
         if (serverIpc) {
             serverIpc.sendToClient(ServerToClientChannel.NotifySaveComplete, { cycleId: cycleData.cycleId });
         }
+    }
+
+    public async createNewCycleWithResponses(responses: string[], tabCount: number): Promise<number> {
+        const history = await this._readHistoryFile();
+        const newCycleId = (history.cycles.reduce((maxId, cycle) => Math.max(maxId, cycle.cycleId), 0)) + 1;
+        
+        const newResponses: { [tabId: string]: PcppResponse } = {};
+        for(let i = 0; i < tabCount; i++) {
+            newResponses[(i+1).toString()] = { content: responses[i] || '' };
+        }
+
+        const newCycle: PcppCycle = {
+            cycleId: newCycleId,
+            timestamp: new Date().toISOString(),
+            title: 'Generated Responses',
+            cycleContext: '', // Should be inherited from previous cycle in a future version
+            ephemeralContext: '',
+            responses: newResponses,
+            tabCount: tabCount,
+        };
+
+        history.cycles.push(newCycle);
+        await this._writeHistoryFile(history);
+        Services.loggerService.log(`Created new cycle ${newCycleId} with ${responses.length} responses.`);
+        return newCycleId;
     }
 
     public async deleteCycle(cycleId: number): Promise<number> {
@@ -23950,7 +24012,7 @@ export const viewConfig = {
 </file_artifact>
 
 <file path="src/client/views/parallel-copilot.view/on-message.ts">
-// Updated on: C38 (Use generatePromptString)
+// Updated on: C42 (Refactor batch generation handler)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -23964,10 +24026,11 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestBatchGeneration, async (data) => {
-        loggerService.log(`Received RequestBatchGeneration for ${data.count} responses.`);
+        loggerService.log(`Received RequestBatchGeneration for ${data.count} responses from cycle ${data.cycleData.cycleId}.`);
         const prompt = await promptService.generatePromptString(data.cycleData);
         const responses = await llmService.generateBatch(prompt, data.count, data.cycleData);
-        serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationResult, { responses });
+        const newCycleId = await historyService.createNewCycleWithResponses(responses, data.cycleData.tabCount || 4);
+        serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId });
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestSettings, async () => {
@@ -25205,7 +25268,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C37 (Add batch generation logic)
+// Updated on: C42 (Refactor batch generation handler)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -25437,16 +25500,8 @@ const App = () => {
     React.useEffect(() => { if (workflowStep === null) return; if (workflowStep === 'readyForNewCycle') return; if (workflowStep === 'awaitingGeneratePrompt') { if (isReadyForNextCycle) setWorkflowStep('awaitingGeneratePrompt'); return; } if (workflowStep === 'awaitingCycleTitle') { if (cycleTitle.trim() && cycleTitle.trim() !== 'New Cycle') { setWorkflowStep('awaitingGeneratePrompt'); } return; } if (workflowStep === 'awaitingCycleContext') { if (cycleContext.trim()) { setWorkflowStep('awaitingCycleTitle'); } return; } if (workflowStep === 'awaitingAccept') { return; } if (workflowStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestGitStatus, {}); return; } if (workflowStep === 'awaitingFileSelect') { if (selectedFilesForReplacement.size > 0) { setWorkflowStep('awaitingAccept'); } return; } if (workflowStep === 'awaitingResponseSelect') { if (selectedResponseId) { setWorkflowStep('awaitingBaseline'); } return; } if (workflowStep === 'awaitingSort') { if (isSortedByTokens) { setWorkflowStep('awaitingResponseSelect'); } return; } if (workflowStep === 'awaitingParse') { if (isParsedMode) { setWorkflowStep(isSortedByTokens ? 'awaitingResponseSelect' : 'awaitingSort'); } return; } const waitingForPaste = workflowStep?.startsWith('awaitingResponsePaste'); if (waitingForPaste) { for (let i = 1; i <= tabCount; i++) { if (!tabs[i.toString()]?.rawContent?.trim()) { setWorkflowStep(`awaitingResponsePaste_${i}`); return; } } setWorkflowStep('awaitingParse'); } }, [workflowStep, selectedFilesForReplacement, selectedResponseId, isSortedByTokens, isParsedMode, tabs, cycleContext, cycleTitle, tabCount, isReadyForNextCycle, clientIpc]);
     React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string, newMax?: number) => { setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setActiveTab(cycleData.activeTab || 1); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setWorkflowStep(cycleData.activeWorkflowStep || null); if (newMax) setMaxCycle(newMax); setSaveStatus('saved'); requestCostEstimation(); }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => { setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics)); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { logger.log(`[COST_ESTIMATION_RECEIVED] Tokens: ${totalTokens}, Cost: ${estimatedCost}`); setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { if (result.success) { setWorkflowStep(prevStep => { if (prevStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => { if (cycleId === stateRef.current.currentCycle) setSaveStatus('saved'); }); 
         clientIpc.onServerMessage(ServerToClientChannel.SendSettings, ({ settings }) => { setConnectionMode(settings.connectionMode) });
-        clientIpc.onServerMessage(ServerToClientChannel.SendBatchGenerationResult, ({ responses }) => {
-            setTabs(prev => {
-                const newTabs = {...prev};
-                responses.forEach((content, index) => {
-                    const tabId = (index + 1).toString();
-                    newTabs[tabId] = { rawContent: content, parsedContent: null };
-                });
-                return newTabs;
-            });
-            setIsParsedMode(true); // Auto-parse after receiving
+        clientIpc.onServerMessage(ServerToClientChannel.SendBatchGenerationComplete, ({ newCycleId }) => {
+            handleCycleChange(null, newCycleId);
         });
         clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); 
         clientIpc.sendToServer(ClientToServerChannel.RequestSettings, {});
@@ -25457,6 +25512,7 @@ const App = () => {
     const isNewCycleButtonDisabled = React.useMemo(() => { if (currentCycle === 0) return true; if (currentCycle !== maxCycle) return true; return !isReadyForNextCycle; }, [currentCycle, maxCycle, isReadyForNextCycle]);
 
     const handleGeneratePrompt = () => { if (currentCycle === null) return; clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle, selectedFiles: Array.from(selectedFilesForReplacement) }); setWorkflowStep('readyForNewCycle'); };
+    
     const handleGenerateResponses = () => {
         if (currentCycle === null) return;
         const cycleData = getCurrentCycleData();
@@ -25464,7 +25520,6 @@ const App = () => {
             clientIpc.sendToServer(ClientToServerChannel.RequestBatchGeneration, {
                 cycleData: cycleData as PcppCycle,
                 count: responseCount,
-                selectedFiles: Array.from(selectedFilesForReplacement) // Using this for context
             });
         }
     };
@@ -25512,7 +25567,7 @@ const App = () => {
     if (currentCycle === 0) return <OnboardingView projectScope={projectScope || ''} onScopeChange={onScopeChange} onNavigateToCycle={(id) => handleCycleChange(null, id)} latestCycleId={maxCycle} workflowStep={workflowStep} saveStatus={saveStatus} />;
     
     const collapsedNavigator = <div className="collapsed-navigator"><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0 || saveStatus !== 'saved'}>&lt;</button><span className="cycle-display">C{currentCycle}</span><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle || saveStatus !== 'saved'}>&gt;</button></div>;
-    const totalPromptCostDisplay = ( <span className="total-prompt-cost" title={costBreakdownTooltip}> Total Est: ({formatLargeNumber(totalPromptTokens, 1)} tk) ~ ${estimatedPromptCost.toFixed(4)} {tabCount > 1 && ` x ${tabCount} = $${(estimatedPromptCost * tabCount).toFixed(4)}`} </span> );
+    const totalPromptCostDisplay = ( <span className="total-prompt-cost" title={costBreakdownTooltip}> Total Est: ({formatLargeNumber(totalPromptTokens, 1)} tk) ~ ${estimatedPromptCost.toFixed(4)} {tabCount > 1 && ` x ${responseCount} = $${(estimatedPromptCost * responseCount).toFixed(4)}`} </span> );
 
     const SaveStatusIndicator = () => {
         let icon;
@@ -25935,6 +25990,7 @@ export enum ClientToServerChannel {
 
     // Phase 2: PCPP
     RequestCreatePromptFile = "clientToServer.requestCreatePromptFile",
+    RequestBatchGeneration = "clientToServer.requestBatchGeneration",
     RequestCreateCycle0Prompt = "clientToServer.requestCreateCycle0Prompt",
     RequestFileExistence = "clientToServer.requestFileExistence",
     RequestSyntaxHighlight = "clientToServer.requestSyntaxHighlight",
@@ -25956,7 +26012,6 @@ export enum ClientToServerChannel {
     SaveLastViewedCycle = "clientToServer.saveLastViewedCycle",
     RequestSettings = "clientToServer.requestSettings",
     SaveSettings = "clientToServer.saveSettings",
-    RequestBatchGeneration = "clientToServer.requestBatchGeneration",
 }
 
 export enum ServerToClientChannel {
@@ -25991,11 +26046,12 @@ export enum ServerToClientChannel {
     NotifySaveComplete = "serverToClient.notifySaveComplete",
     SendSettings = "serverToClient.sendSettings",
     SendBatchGenerationResult = "serverToClient.sendBatchGenerationResult",
+    SendBatchGenerationComplete = "serverToClient.sendBatchGenerationComplete",
 }
 </file_artifact>
 
 <file path="src/common/ipc/channels.type.ts">
-// Updated on: C37 (Add new channels for settings and batch generation)
+// Updated on: C42 (Update batch generation channels)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -26048,7 +26104,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.SaveAutoAddState ? { enabled: boolean } :
     T extends ClientToServerChannel.VSCodeCommand ? { command: string, args?: any[] } :
     T extends ClientToServerChannel.RequestCreatePromptFile ? { cycleTitle: string; currentCycle: number; selectedFiles: string[] } :
-    T extends ClientToServerChannel.RequestBatchGeneration ? { cycleData: PcppCycle, count: number, selectedFiles: string[] } :
+    T extends ClientToServerChannel.RequestBatchGeneration ? { cycleData: PcppCycle, count: number } :
     T extends ClientToServerChannel.RequestCreateCycle0Prompt ? { projectScope: string } :
     T extends ClientToServerChannel.RequestFileExistence ? { paths: string[] } :
     T extends ClientToServerChannel.RequestSyntaxHighlight ? { code: string; lang: string, id: string } :
@@ -26098,7 +26154,8 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SendGitStatus ? { isClean: boolean } :
     T extends ServerToClientChannel.NotifySaveComplete ? { cycleId: number } :
     T extends ServerToClientChannel.SendSettings ? { settings: DceSettings } :
-    T extends ServerToClientChannel.SendBatchGenerationResult ? { responses: string[] } :
+    T extends ServerToClientChannel.SendBatchGenerationResult ? { responses: string[], newCycleId: number } :
+    T extends ServerToClientChannel.SendBatchGenerationComplete ? { newCycleId: number } :
     never;
 </file_artifact>
 
@@ -28541,7 +28598,7 @@ The DCE extension is now configured to send its API requests to your local LLM s
 # Artifact A95: DCE - LLM Connection Modes Plan
 # Date Created: C36
 # Author: AI Model & Curator
-# Updated on: C37 (Add "Generate Responses" button and streaming metrics)
+# Updated on: C42 (Refine "Generate Responses" workflow to create a new cycle first)
 
 - **Key/Value for A0:**
 - **Description:** Outlines the plan for a multi-modal settings UI and the associated workflow changes, allowing users to switch between manual copy/paste, a pre-configured demo mode, and user-provided API URLs or Keys.
@@ -28559,52 +28616,37 @@ This plan refines and supersedes `A85. DCE - Model Card Management Plan.md` by f
 |---|---|---|
 | P3-CM-01 | **Use Manual Mode** | As a new user, I want the extension to default to a "Free (Manual)" mode, so I can use the core features by copying and pasting without any setup. | - The default setting is "Free Mode". <br> - In this mode, a "Generate prompt.md" button is shown. |
 | P3-CM-02 | **Use Demo Mode** | As a demo user, I want to select a "Demo Mode" that connects to a local vLLM endpoint, so I can experience the full automated workflow. | - A "Demo Mode" option is available. <br> - When selected, the "Generate prompt.md" button is replaced with a "Generate responses" button. |
-| P3-CM-03 | **Generate Multiple Responses** | As a user in an automated mode, I want to specify how many parallel responses to generate and see them stream into the UI, so I can leverage high-throughput models. | - A number input allows me to select the number of responses. <br> - Clicking "Generate responses" sends a batch request to the configured LLM. <br> - Responses stream into the PCPP tabs and are automatically parsed on completion. |
+| P3-CM-03 | **Generate Into New Cycle** | As a user in an automated mode, when I click "Generate responses" on Cycle `N`, I want the extension to automatically create a new Cycle `N+1` and place the generated responses there, so my new results are cleanly separated from the prompt that created them. | - Clicking "Generate responses" initiates a process that creates a new cycle. <br> - The generated responses from the LLM populate the tabs of the new cycle. <br> - The UI automatically navigates to the new cycle upon completion. |
 | P3-CM-04 | **Monitor Generation Speed** | As a user generating responses, I want to see a live "tokens per second" metric, so I have feedback on the generation performance. | - A "Tokens/sec" display appears near the "Generate responses" button during generation. <br> - It updates in real-time as token data streams in. |
 | P3-CM-05 | **Persistent Settings** | As a user, I want my selected connection mode to be saved, so I don't have to re-configure it every time I open VS Code. | - The selected connection mode and any associated URL/Key is persisted in the workspace settings. |
 
 ## 3. UI/UX Design
 
-### 3.1. Settings Panel
-The settings panel will use radio buttons for mode selection with conditional inputs.
-
-```
-[ Settings ]
-----------------------------------------------------------------------
-(•) Free Mode (Manual Copy/Paste)
-( ) Demo Mode (Local vLLM via aiascent.game)
-( ) API (URL) -> [ http://localhost:8000/v1 ]
-----------------------------------------------------------------------
-```
-
-### 3.2. Parallel Co-Pilot Panel
--   The "Generate prompt.md" button will be conditionally replaced by a "Generate responses" button.
--   A number input for `responseCount` will appear next to it.
--   A `Tokens/sec: [value]` display will appear during generation.
+(No changes from C37)
 
 ## 4. Technical Implementation Plan
 
-### 4.1. Settings Persistence (New `SettingsService`)
--   **`src/backend/services/settings.service.ts` (New):** This service will manage getting and setting the active connection mode and any associated URL. It will use `vscode.workspace.getConfiguration` to persist this data.
--   **IPC:** New channels (`RequestSettings`, `SendSettings`, `SaveSettings`) will be created to communicate between the `settings.view.tsx` and the new service.
--   **`settings.view.tsx`:** Will be refactored to fetch its state from and save its state to the new `SettingsService`, fixing the persistence bug.
+### 4.1. Settings Persistence
+(No changes from C37)
 
-### 4.2. "Generate Responses" Workflow
--   **`parallel-copilot.view/view.tsx`:**
-    -   Will fetch the active connection mode from the `SettingsService`.
-    -   Will conditionally render the UI elements based on the mode.
-    -   The "Generate responses" button `onClick` handler will:
-        1.  Call the `prompt.service.ts` to generate the prompt string *in memory*.
-        2.  Send a new `RequestBatchGeneration` IPC message with the prompt string and response count.
--   **`llm.service.ts` (New):**
-    -   This new service will handle all outgoing API calls.
-    -   Its `generateBatch` method will read the settings, construct the appropriate non-streaming `fetch` request to the vLLM endpoint, and return an array of response strings.
--   **IPC & Frontend Update:**
-    -   A `SendBatchGenerationResult` channel will return the array of responses.
-    *   The frontend handler will populate the `rawContent` of the response tabs and then trigger `parseAllTabs()`.
+### 4.2. "Generate Responses" Workflow (C42 Update)
+The workflow is now designed to be more robust and atomic, with the backend handling the creation of the new cycle.
+
+1.  **Frontend (`view.tsx`):**
+    *   The `handleGenerateResponses` `onClick` handler will gather the *current* cycle's data (`PcppCycle` object for Cycle `N`) and send it to the backend via a `RequestBatchGeneration` message.
+2.  **Backend (`on-message.ts`):**
+    *   The handler for `RequestBatchGeneration` receives the full data for Cycle `N`.
+    *   It first calls `prompt.service.ts` to generate the prompt string from Cycle `N`'s data.
+    *   It then calls `llm.service.ts` to get the array of response strings from the vLLM.
+    *   It then calls a new method in `history.service.ts`, `createNewCycleWithResponses`, passing in the array of responses.
+    *   The `history.service.ts` creates the new cycle (`N+1`), populates its response tabs, and saves the entire updated history.
+    *   Finally, the backend sends a `SendBatchGenerationComplete` message to the frontend, containing the `newCycleId`.
+3.  **Frontend (`view.tsx`):**
+    *   A new message handler for `SendBatchGenerationComplete` receives the ID of the new cycle.
+    *   It then calls the existing `handleCycleChange` logic to navigate the UI to this new cycle, which now contains all the generated responses.
 
 ### 4.3. Streaming & Metrics (Future Cycle)
--   The `llm.service.ts` will be updated to handle streaming responses.
+-   The backend `llm.service.ts` will be updated to handle streaming responses.
 -   New IPC channels (`StreamResponseChunk`, `StreamResponseEnd`) will be created.
 -   The frontend in `view.tsx` will be updated to handle these streaming messages, append content to the tabs in real-time, and calculate the tokens/second metric.
 </file_artifact>
