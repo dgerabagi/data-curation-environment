@@ -1,10 +1,10 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-21T20:17:07.095Z
+  Date Generated: 2025-09-21T21:20:19.605Z
   ---
   Total Files: 181
-  Approx. Tokens: 467596
+  Approx. Tokens: 468168
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -12,8 +12,8 @@
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
 3. src\client\views\parallel-copilot.view\view.tsx (9355 tokens)
 4. src\Artifacts\A0. DCE Master Artifact List.md (8565 tokens)
-5. src\client\views\parallel-copilot.view\view.scss (5575 tokens)
-6. src\Artifacts\A11. DCE - Regression Case Studies.md (5372 tokens)
+5. src\Artifacts\A11. DCE - Regression Case Studies.md (5744 tokens)
+6. src\client\views\parallel-copilot.view\view.scss (5575 tokens)
 7. src\backend\services\prompt.service.ts (4919 tokens)
 8. src\backend\services\file-operation.service.ts (4526 tokens)
 9. src\client\components\tree-view\TreeView.tsx (4422 tokens)
@@ -32,7 +32,7 @@
 10. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
 11. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
 12. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
-13. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 163 - Chars: 21487 - Tokens: 5372
+13. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 176 - Chars: 22976 - Tokens: 5744
 14. src\Artifacts\A11.1 DCE - New Regression Case Studies.md - Lines: 391 - Chars: 46197 - Tokens: 11550
 15. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5687 - Tokens: 1422
 16. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
@@ -192,8 +192,8 @@
 170. src\backend\providers\ResponseContentProvider.ts - Lines: 24 - Chars: 1160 - Tokens: 290
 171. src\Artifacts\A89. DCE - vLLM Integration and API Proxy Plan.md - Lines: 61 - Chars: 3736 - Tokens: 934
 172. src\Artifacts\A87. VCPG - vLLM High-Throughput Inference Plan.md - Lines: 56 - Chars: 4251 - Tokens: 1063
-173. src\Artifacts\A89. DCE - Phase 3 - Hosted LLM & vLLM Integration Plan.md - Lines: 85 - Chars: 6832 - Tokens: 1708
-174. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 249 - Chars: 10141 - Tokens: 2536
+173. src\Artifacts\A89. DCE - Phase 3 - Hosted LLM & vLLM Integration Plan.md - Lines: 95 - Chars: 7548 - Tokens: 1887
+174. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 249 - Chars: 10225 - Tokens: 2557
 175. src\Artifacts\A91. AI Ascent - Caddyfile (Reference).md - Lines: 54 - Chars: 2305 - Tokens: 577
 176. src\Artifacts\A92. DCE - vLLM Setup Guide.md - Lines: 70 - Chars: 4020 - Tokens: 1005
 177. src\Artifacts\A93. DCE - vLLM Encryption in Transit Guide.md - Lines: 65 - Chars: 3811 - Tokens: 953
@@ -1254,7 +1254,7 @@ To enhance the data curation process, it is critical for the user to have immedi
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C40 (Add PowerShell curl alias case)
+# Updated on: C41 (Add Proxy Server 404 case)
 
 ## 1. Purpose
 
@@ -1266,8 +1266,21 @@ This document serves as a living record of persistent or complex bugs that have 
 
 ---
 
-### Case Study 036: PowerShell `curl` Alias Fails with Header Errors
+### Case Study 037: Proxy Server `curl` Test Returns `404 Not Found`
 
+-   **Artifacts Affected:** `A90. AI Ascent - server.ts (Reference).md`, `A89. DCE - Phase 3 - Hosted LLM & vLLM Integration Plan.md`
+-   **Cycles Observed:** C41
+-   **Symptom:** When testing the proxy server endpoint with a `curl` command, the server responds with `HTTP/1.1 404 Not Found` and an HTML body containing `Cannot POST /api/dce/proxy`.
+-   **Root Cause Analysis (RCA):** This error is not a network failure; it's an application-level error from the Express.js server. It confirms the request successfully reached the server, but the server has no route handler defined that matches the specific path (`/api/dce/proxy`) and HTTP method (`POST`). [1, 2, 3] This is almost always caused by one of two things:
+    1.  A typo or mismatch in the route path defined in the `server.ts` file.
+    2.  The Node.js server process was not restarted after the new route handler code was added, so it is still running an old version of the code. [6]
+-   **Codified Solution & Best Practice:** When a `404 Not Found` is received from an Express server for a route that is believed to exist, the first diagnostic steps are always:
+    1.  Meticulously verify the route path and HTTP method in the server's code (e.g., `app.post('/api/dce/proxy', ...)`).
+    2.  Stop and restart the Node.js server process to ensure all code changes are loaded into memory. If using a process manager like `pm2`, use its restart command.
+
+---
+
+### Case Study 036: PowerShell `curl` Alias Fails with Header Errors
 -   **Artifacts Affected:** `src/Artifacts/A92. DCE - vLLM Setup Guide.md`
 -   **Cycles Observed:** C40
 -   **Symptom:** When running a standard `curl` command with headers (e.g., `curl -H "Content-Type: application/json" ...`) in a Windows PowerShell terminal, the command fails with an error: `Invoke-WebRequest : Cannot bind parameter 'Headers'. Cannot convert the "Content-Type: application/json" value of type "System.String" to type "System.Collections.IDictionary"`.
@@ -24807,7 +24820,7 @@ To securely connect the DCE extension to a powerful vLLM instance, we will use a
 # Artifact A89: DCE - Phase 3 - Hosted LLM & vLLM Integration Plan
 # Date Created: C29
 # Author: AI Model & Curator
-# Updated on: C39 (Add Troubleshooting section)
+# Updated on: C41 (Add guidance for 404 Not Found error)
 
 - **Key/Value for A0:**
 - **Description:** Outlines the architecture and roadmap for integrating the DCE extension with a remote, high-throughput vLLM backend via a secure proxy server.
@@ -24850,8 +24863,6 @@ The connection between the DCE Extension and the Proxy Server must be encrypted.
 
 ## 5. Troubleshooting Connectivity
 
-If the extension fails to connect to the proxy server with an `ETIMEDOUT` error, it signifies a network-level problem.
-
 ### Step 1: Test the Proxy Server from Your Laptop
 The first step is to verify that the proxy server is running and accessible from the machine running VS Code. Open a terminal (e.g., PowerShell, Command Prompt, or a Linux/macOS terminal) and run the following `curl` command.
 
@@ -24863,11 +24874,23 @@ https://aiascent.game/api/dce/proxy -v
 *   The `-v` (verbose) flag will provide detailed connection information.
 
 ### Step 2: Interpret the Results
--   **If `curl` also fails (e.g., times out or "Connection refused"):** The problem is with the `aiascent.game` server or the network path to it. The VS Code extension is not the cause.
+
+-   **If `curl` returns `ETIMEDOUT` (times out) or "Connection refused":** The problem is with the `aiascent.game` server or the network path to it. The VS Code extension is not the cause.
     -   Check if the Node.js server is running on the host machine.
     -   Check the Caddy server logs to see if requests are being received.
     -   Check for firewalls on the server or your client machine that might be blocking the connection.
--   **If `curl` succeeds:** This indicates the proxy server is working correctly, and the issue is likely specific to the VS Code extension's environment (e.g., a corporate proxy interfering with Node.js `fetch` calls). The next step would be to add more detailed error logging within the `llm.service.ts` file in the extension.
+
+-   **If `curl` returns a `404 Not Found` error:** This is a good sign! It means you have successfully connected to the proxy server, but the server's application logic (in `server.ts`) doesn't have a route defined for `/api/dce/proxy`.
+    -   **Solution:** Open your `server.ts` file on the `aiascent.game` server.
+    -   Verify that the route `app.post('/api/dce/proxy', ...)` exists and is spelled correctly.
+    -   **CRITICAL:** After verifying or changing the code, you **must restart** the Node.js server process for the changes to take effect.
+
+-   **If `curl` returns a `5xx` error (e.g., `502 Bad Gateway`):** This means the proxy server is reachable, but it failed to connect to the internal vLLM server.
+    -   Check the logs of your proxy server (`aiascent.game`).
+    -   Ensure your vLLM instance is running correctly inside WSL.
+    -   Verify the IP address and port in your `VLLM_URL` environment variable are correct.
+
+-   **If `curl` succeeds (returns JSON):** The public proxy is working correctly. The issue may be specific to the VS Code extension's environment (e.g., a corporate proxy interfering with Node.js `fetch` calls).
 
 ## 6. Technical Implementation Plan
 
@@ -24878,7 +24901,7 @@ https://aiascent.game/api/dce/proxy -v
 -   Ensure this server is running on an internal port (e.g., `8000`).
 
 ### Step 2: Proxy Server Modification (`server.ts`)
--   Add a new API endpoint to the Express server: `POST /api/dce/generate`.
+-   Add a new API endpoint to the Express server: `POST /api/dce/proxy`.
 -   This endpoint will read the prompt content from the request body.
 -   It will construct a new request to the internal vLLM server (e.g., `http://localhost:8000/v1/completions`).
 -   The request to vLLM will include `{ "prompt": ..., "n": 10, "max_tokens": 4096 }`.
@@ -24895,7 +24918,7 @@ https://aiascent.game/api/dce/proxy -v
 # Artifact A90: AI Ascent - server.ts (Reference)
 # Date Created: C29
 # Author: AI Model & Curator
-# Updated on: C39 (Add enhanced logging to proxy route)
+# Updated on: C41 (Correct proxy route path)
 
 - **Key/Value for A0:**
 - **Description:** A reference copy of the `server.ts` file from the `aiascent.game` project, used as a baseline for implementing the DCE LLM proxy.
@@ -24903,15 +24926,15 @@ https://aiascent.game/api/dce/proxy -v
 
 ## 1. Overview
 
-This artifact contains the literal source code of the `server.ts` file from the `aiascent.game` project. The key section is the `app.post('/api/dce/proxy', ...)` route, which has been updated with enhanced logging to help diagnose connection issues between the proxy and the backend vLLM server.
+This artifact contains the literal source code of the `server.ts` file from the `aiascent.game` project. The key section is the `app.post('/api/dce/proxy', ...)` route, which has been updated with enhanced logging to help diagnose connection issues between the proxy and the backend vLLM server. The route path has been corrected from `/api/dce/generate` to `/api/dce/proxy` to match the client's request.
 
-## 2. Source Code (with enhanced logging)
+## 2. Source Code (with corrected route)
 
 ```typescript
 // Updated on: C1384 (Correct import path for generateSpeech from llmService.)
 // Updated on: C1383 (Add /api/tts/generate route handler.)
 // Updated on: C1355 (Add /api/report/vote route handler.)
-// Updated on: C29 (DCE Integration: Add /api/dce/generate route for vLLM proxy)
+// Updated on: C41 (DCE Integration: Correct route to /api/dce/proxy)
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -24969,7 +24992,7 @@ if (process.env.NEXTAUTH_URL) {
 logInfo('[SERVER]', `Server starting... Client Origin for CORS: ${clientOrigin}, Production: ${isProduction}`);
 logInfo('[DCE]', `vLLM proxy endpoint configured for: ${VLLM_ENDPOINT}`);
 if (!DCE_API_KEY) {
-    logWarn('[DCE]', 'DCE_API_KEY is not set. The /api/dce/generate endpoint will be unsecured.');
+    logWarn('[DCE]', 'DCE_API_KEY is not set. The /api/dce/proxy endpoint will be unsecured.');
 }
 
 // Instantiate systems
@@ -25051,9 +25074,9 @@ app.post('/api/user/updateProfile', (req, res) => updateProfileHandler(req as an
 app.post('/api/llm/proxy', (req, res) => handlePlayerProductRequest(req as any, res as any));
 app.post('/api/report/vote', (req, res) => handleReportVote(req as any, res as any));
 
-// NEW: DCE vLLM Proxy Route
-app.post('/api/dce/generate', async (req, res) => {
-    logInfo('[DCE]', 'Received request on /api/dce/generate');
+// CORRECTED: DCE vLLM Proxy Route
+app.post('/api/dce/proxy', async (req, res) => {
+    logInfo('[DCE]', 'Received request on /api/dce/proxy');
 
     // Simple API Key Authentication
     if (DCE_API_KEY) {
