@@ -1,10 +1,10 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-21T22:28:15.406Z
+  Date Generated: 2025-09-21T23:00:47.214Z
   ---
-  Total Files: 199
-  Approx. Tokens: 539963
+  Total Files: 200
+  Approx. Tokens: 535457
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -13,16 +13,16 @@
 3. GPT-OSS\harmony_vllm_app.py (15557 tokens)
 4. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
 5. src\client\views\parallel-copilot.view\view.tsx (9334 tokens)
-6. src\Artifacts\A0. DCE Master Artifact List.md (8565 tokens)
+6. src\Artifacts\A0. DCE Master Artifact List.md (8646 tokens)
 7. GPT-OSS\hackernews_response.json (6355 tokens)
 8. GPT-OSS\python\openai_harmony\__init__.py (6132 tokens)
-9. src\Artifacts\A11. DCE - Regression Case Studies.md (6081 tokens)
-10. src\client\views\parallel-copilot.view\view.scss (5575 tokens)
+9. src\client\views\parallel-copilot.view\view.scss (5575 tokens)
+10. src\backend\services\prompt.service.ts (4919 tokens)
 
 <!-- Full File List -->
 1. public\copilot.svg - [Binary] Size: 445 Bytes
 2. public\spiral.svg - [Binary] Size: 459 Bytes
-3. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 504 - Chars: 34258 - Tokens: 8565
+3. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 508 - Chars: 34582 - Tokens: 8646
 4. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 5. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
 6. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
@@ -32,7 +32,7 @@
 10. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
 11. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
 12. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
-13. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 186 - Chars: 24323 - Tokens: 6081
+13. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 20 - Chars: 1090 - Tokens: 273
 14. src\Artifacts\A11.1 DCE - New Regression Case Studies.md - Lines: 391 - Chars: 46197 - Tokens: 11550
 15. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5687 - Tokens: 1422
 16. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
@@ -219,6 +219,7 @@
 197. GPT-OSS\vision_browser_tool.py - Lines: 318 - Chars: 12695 - Tokens: 3174
 198. GPT-OSS\vision_browser_wrapper.py - Lines: 258 - Chars: 10521 - Tokens: 2631
 199. GPT-OSS\templates\harmony_demo.html - Lines: 2859 - Chars: 111209 - Tokens: 27803
+200. src\Artifacts\A96. DCE - Harmony-Aligned Response Schema Plan.md - Lines: 69 - Chars: 4881 - Tokens: 1221
 
 <file path="public/copilot.svg">
 <metadata>
@@ -246,7 +247,7 @@
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C37 (Update A95)
+# Updated on: C44 (Add A96)
 
 ## 1. Purpose
 
@@ -663,6 +664,10 @@
 ### A95. DCE - LLM Connection Modes Plan
 - **Description:** Outlines the plan for a multi-modal settings UI to allow users to switch between manual copy/paste, a pre-configured demo mode, and user-provided API URLs or Keys.
 - **Tags:** feature plan, settings, ui, ux, llm, configuration, api
+
+### A96. DCE - Harmony-Aligned Response Schema Plan
+- **Description:** An analysis of the `openai_harmony` library and a proposed plan for migrating the DCE's vLLM interaction schema from XML tags to a more robust, token-based structured format.
+- **Tags:** plan, architecture, interaction schema, parsing, llm, vllm, harmony
 
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
@@ -1272,7 +1277,7 @@ To enhance the data curation process, it is critical for the user to have immedi
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C43 (Add API Contract Mismatch case)
+# Updated on: C44 (Add vLLM Truncation case)
 
 ## 1. Purpose
 
@@ -1284,177 +1289,11 @@ This document serves as a living record of persistent or complex bugs that have 
 
 ---
 
-### Case Study 038: API Contract Mismatch Causes `Invalid response structure` Error
+### Case Study 039: vLLM Responses Truncated at Stop Token
 
--   **Artifacts Affected:** `src/backend/services/llm.service.ts`, `A90. AI Ascent - server.ts (Reference).md`
--   **Cycles Observed:** C43
--   **Symptom:** When requesting batch generations, the process fails with the error `Failed to generate batch responses: Invalid response structure from LLM endpoint.`
--   **Root Cause Analysis (RCA):** This is a classic API contract mismatch. The client-side service (`llm.service.ts`) was programmed to expect a standard OpenAI-compatible response structure, which includes a top-level `choices` array (e.g., `{ "choices": [...] }`). However, the `aiascent.game` proxy server, which it was calling, was designed to pre-process this response and return a simplified object with a different key: `{ "responses": [...] }`. The client's parsing logic failed because it could not find the expected `choices` key in the actual response it received.
--   **Codified Solution & Best Practice:** When integrating two services, the client must be programmed to handle the exact data structure that the server provides. The server's API documentation or reference implementation (in this case, `A90`) is the source of truth. The client-side parsing logic must be aligned with the server's actual output format to prevent such errors.
-
----
-
-### Case Study 037: Proxy Server `curl` Test Returns `404 Not Found`
-
--   **Artifacts Affected:** `A90. AI Ascent - server.ts (Reference).md`, `A89. DCE - Phase 3 - Hosted LLM & vLLM Integration Plan.md`
--   **Cycles Observed:** C41
--   **Symptom:** When testing the proxy server endpoint with a `curl` command, the server responds with `HTTP/1.1 404 Not Found` and an HTML body containing `Cannot POST /api/dce/proxy`.
--   **Root Cause Analysis (RCA):** This error is not a network failure; it's an application-level error from the Express.js server. It confirms the request successfully reached the server, but the server has no route handler defined that matches the specific path (`/api/dce/proxy`) and HTTP method (`POST`). This is almost always caused by one of two things:
-    1.  A typo or mismatch in the route path defined in the `server.ts` file.
-    2.  The Node.js server process was not restarted after the new route handler code was added, so it is still running an old version of the code.
--   **Codified Solution & Best Practice:** When a `404 Not Found` is received from an Express server for a route that is believed to exist, the first diagnostic steps are always:
-    1.  Meticulously verify the route path and HTTP method in the server's code (e.g., `app.post('/api/dce/proxy', ...)`).
-    2.  Stop and restart the Node.js server process to ensure all code changes are loaded into memory. If using a process manager like `pm2`, use its restart command.
-
----
-
-### Case Study 036: PowerShell `curl` Alias Fails with Header Errors
--   **Artifacts Affected:** `src/Artifacts/A92. DCE - vLLM Setup Guide.md`
--   **Cycles Observed:** C40
--   **Symptom:** When running a standard `curl` command with headers (e.g., `curl -H "Content-Type: application/json" ...`) in a Windows PowerShell terminal, the command fails with an error: `Invoke-WebRequest : Cannot bind parameter 'Headers'. Cannot convert the "Content-Type: application/json" value of type "System.String" to type "System.Collections.IDictionary"`.
--   **Root Cause Analysis (RCA):** In Windows PowerShell, `curl` is a built-in alias for the `Invoke-WebRequest` cmdlet. Unlike the standard `curl` executable, `Invoke-WebRequest` does not accept headers as a simple string via the `-H` parameter. Instead, it requires a PowerShell hashtable (which is a type of `IDictionary`) to be passed to its `-Headers` parameter. The error message is PowerShell's way of saying it received a string when it was expecting a hashtable object like `@{ "HeaderName" = "HeaderValue" }`.
--   **Codified Solution & Best Practice:** When providing command-line instructions that may be run on Windows, it is crucial to account for PowerShell's aliases. The best practice is to provide platform-specific examples. Documentation should be updated to either provide the correct `Invoke-WebRequest` syntax for PowerShell users or instruct them to use `curl.exe` to bypass the alias and use the standard `curl` syntax. `A92` will be updated to include both correct options for Windows users.
-
----
-
-### Case Study 035: `connect ETIMEDOUT` on Batch Generation Request
--   **Artifacts Affected:** `src/backend/services/llm.service.ts`, `A89. DCE - Phase 3 - Hosted LLM & vLLM Integration Plan.md`
--   **Cycles Observed:** C39
--   **Symptom:** When clicking the "Generate responses" button in Demo Mode, the operation fails after a long delay, and the logs show an error: `Failed to generate batch responses: request to https://aiascent.game/api/dce/proxy failed, reason: connect ETIMEDOUT`.
--   **Root Cause Analysis (RCA):** The `ETIMEDOUT` error is a network-level issue, not an application logic bug. It signifies that the client (in this case, the Node.js `fetch` call within the VS Code extension) failed to establish a connection to the server (`https://aiascent.game`) within the allowed time. This can have several causes:
-    1.  **Server Unreachable:** The proxy server (`aiascent.game`) is down or not running.
-    2.  **Firewall:** A firewall on the client machine, the server machine, or the network in between is blocking the connection on port 443 (HTTPS).
-    3.  **DNS Issues:** The domain name `aiascent.game` is not resolving to the correct IP address.
-    4.  **Network Configuration:** A VPN or corporate proxy on the client machine is interfering with the connection.
--   **Codified Solution & Best Practice:** The first step in diagnosing any `ETIMEDOUT` error is to isolate the network layer from the application layer. The most effective tool for this is a simple `curl` command run from the client machine's terminal.
-    -   **Diagnostic Command:** `curl -X POST -H "Content-Type: application/json" -d '{"prompt": "test"}' https://aiascent.game/api/dce/proxy -v`
-    -   **Interpreting Results:**
-        -   If `curl` also times out, the problem is confirmed to be outside the extension (server down, firewall, etc.). The next step is to check the proxy server's logs (e.g., Caddy logs) to see if the request is even arriving.
-        -   If `curl` succeeds but the extension fails, the problem is specific to the Node.js environment within VS Code (e.g., it's being blocked by a different proxy or security setting).
-
----
-
-### Case Study 034: vLLM `uvloop` Dependency on Native Windows
-
--   **Artifacts Affected:** `src/Artifacts/A92. DCE - vLLM Setup Guide.md`
--   **Cycles Observed:** C33, C34
--   **Symptom:** When attempting to run the vLLM OpenAI-compatible API server on a native Windows environment, the script fails with `ModuleNotFoundError: No module named 'uvloop'`.
--   **Root Cause Analysis (RCA):** The vLLM API server's source code contains a hardcoded, non-optional import of the `uvloop` library (`import uvloop`). The `uvloop` library provides a high-performance event loop implementation but is built on top of `libuv`, which is fundamental to Node.js but not natively available in the same way for Python on Windows. Therefore, `uvloop` cannot be installed on native Windows. An alternative library, `winloop`, exists but does not act as a drop-in replacement for the `import uvloop` statement, so simply installing it has no effect.
--   **Codified Solution & Best Practice:** The definitive and recommended solution for running Linux-centric tools like vLLM on a Windows machine is to use the Windows Subsystem for Linux (WSL/WSL2). By setting up the Python virtual environment and installing `vllm` and `uvloop` *inside* the WSL environment, all dependencies are met correctly. WSL2 provides seamless network port forwarding, meaning a server running on `localhost:8000` inside WSL is accessible from the Windows host at the same address, making integration straightforward. All documentation must prioritize WSL for Windows users.
-
----
-
-### Case Study 033: Selection State Desynchronization Due to Auto-Add Race Condition
-
--   **Artifacts Affected:** `src/client/components/file-tree/FileTree.utils.ts`, `src/client/views/context-chooser.view/view.tsx`
--   **Cycles Observed:** C25, C26
--   **Symptom:** When "Automatically add new files to selection" is enabled, a newly created file is added to the "Selected Items" list but cannot be removed by unchecking its checkbox or its parent directory's checkbox. The UI state becomes desynchronized, leaving the item "stuck" in the selection.
--   **Root Cause Analysis (RCA):** The bug is caused by a race condition on the frontend. After a file is created, the backend sends two messages in close succession: an `ApplySelectionSet` message (to update the selection) and a `ForceRefresh` message (to update the file tree structure). It is possible for the user to interact with the UI after the selection state (`checkedFiles`) has been updated but before the file tree state (`files`) has been rebuilt. If the user unchecks a parent directory in this state, the uncheck logic traverses the *stale* file tree, fails to find the newly added file (as it's not in the old tree structure), and therefore fails to remove it from the selection set.
--   **Codified Solution & Best Practice:** The uncheck logic must be made resilient to a temporarily stale file tree. When unchecking a directory, in addition to removing descendants found via tree traversal, a secondary, path-based check must be performed. The logic must iterate through the current selection set and defensively remove any file path that is a string-descendant of the directory being unchecked (i.e., `filePath.startsWith(directoryPath)`). This ensures the user's intent is respected even if the component's state is momentarily out of sync.
-
----
-
-### Case Study 032: Duplicate Files in Flattened Context Due to Path Normalization Issues
-
--   **Artifacts Affected:** `src/backend/services/flattener.service.ts`
--   **Cycles Observed:** C22, C23
--   **Symptom:** When the user's selection includes both a parent directory (e.g., `src`) and files within that directory, the final `flattened_repo.md` contains duplicate entries for those files.
--   **Root Cause Analysis (RCA):** The `expandDirectories` function recursively gathered all file paths. If the input was `['c:/proj/src', 'c:/proj/src/main.ts']`, the function would add `c:/proj/src/main.ts` once from the recursive scan and a second time from the explicit file path. A subsequent de-duplication step using `new Set()` was intended to prevent this, but it failed. The failure was due to inconsistent path separators on Windows. The recursive traversal might produce paths with forward slashes (`/`), while other parts of the system might use backslashes (`\`). The `Set` treated `'c:/proj/src/main.ts'` and `'c:\proj\src\main.ts'` as two unique strings, defeating the de-duplication.
--   **Codified Solution & Best Practice:** All file paths must be normalized to a consistent format *before* being used in collections or for comparison. A simple utility function that replaces all backslashes (`\`) with forward slashes (`/`) should be applied to every path string as soon as it is read or constructed. This ensures that path comparisons and `Set`-based de-duplication are always reliable, regardless of the operating system.
-
----
-
-### Case Study 031: Duplicate Files in Context due to Incomplete Root Deselection
-
--   **Artifacts Affected:** `src/client/components/file-tree/FileTree.utils.ts`, `src/backend/services/flattener.service.ts`
--   **Cycles Observed:** C21
--   **Symptom:** When a user checks the root directory (selecting all files), then unchecks it, some files remain in the "Selected Items" list. If the user then re-checks the root directory, these leftover files are added again, resulting in duplicates in the `flattened_repo.md` file.
--   **Root Cause Analysis (RCA):** The bug has two layers. The primary cause is a flaw in the frontend state management logic in `FileTree.utils.ts`. The "uncheck" logic was not correctly removing all descendant files from the selection state when an ancestor checkbox was toggled off. This left a stale, incorrect selection state. The secondary issue is that the `flattener.service.ts` trusted its input implicitly and did not perform a final de-duplication pass before processing the files.
--   **Codified Solution & Best Practice:**
-    1.  **Backend Safeguard:** The `flattener.service.ts` must be made resilient to faulty input. Before processing, the `flatten` method must de-duplicate the incoming array of file paths using `[...new Set(paths)]`. This provides a robust, final guarantee against duplicates in the output.
-    2.  **Frontend Fix:** The selection logic in `FileTree.utils.ts` must be corrected. The `addRemovePathInSelectedFiles` function must ensure that when a node is unchecked, *all* of its descendant files are recursively found and removed from the selection set, ensuring perfect state synchronization.
-
----
-
-### Case Study 030: Project Plan Data Loss on Tab Switch (Cycle 0)
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`
--   **Cycles Observed:** C20
--   **Symptom:** When in the "Cycle 0" onboarding view, any text typed into the "Project Scope" text area is lost if the user navigates to a different VS Code tab and then returns to the PCPP.
--   **Root Cause Analysis (RCA):** The `OnboardingView` component's `onScopeChange` prop was wired directly to the `setCycleContext` state setter in the parent `view.tsx` component. This updated the state but bypassed the `onCycleContextChange` handler function, which is responsible for also setting the `saveStatus` to `'unsaved'`. Without the `saveStatus` change, the debounced auto-save mechanism was never triggered, and the unsaved changes were lost when the webview's state was reloaded on tab focus.
--   **Codified Solution & Best Practice:** When a child component needs to update a parent's state, it should be passed the full handler function (e.g., `onCycleContextChange`) as a prop, not just the raw state setter. This ensures all related logic, such as triggering saves or updating derived state (like token counts), is executed correctly. The parent component should pass `onScopeChange={onCycleContextChange}` to the child.
-
----
-
-### Case Study 029: Settings Panel Fails to Load Content in Extension Host
-
--   **Artifacts Affected:** `src/backend/services/file-operation.service.ts`
--   **Cycles Observed:** C18
--   **Symptom:** When running the extension in a debug host, the settings panel displays "README.md not found in workspace root." and "CHANGELOG.md not found in workspace root."
--   **Root Cause Analysis (RCA):** The `file-operation.service` was using `vscode.workspace.workspaceFolders.uri.fsPath` to construct the path to the README and CHANGELOG files. This path points to the root of the *user's currently open project*, not the extension's own installation directory. The asset files are bundled with the extension and are not present in the user's workspace.
--   **Codified Solution & Best Practice:** Backend services that need to read the extension's own bundled files must be initialized with or have access to the `vscode.ExtensionContext` object provided during activation. The correct, reliable path to bundled assets should be constructed using `context.extensionPath`. This ensures that the extension always looks inside its own directory for its own files, regardless of what workspace the user has open.
-
----
-
-### Case Study 028: Incorrect Checkbox State for Non-Selectable Folders
-
--   **Artifacts Affected:** `src/backend/services/file-tree.service.ts`
--   **Cycles Observed:** C16
--   **Symptom:** Special, non-selectable folders like `.git`, `.vscode`, and `node_modules` appear with a normal, enabled checkbox instead of a grayed-out, disabled one. The checkbox is still not clickable, but the visual cue that it is non-selectable is missing.
--   **Root Cause Analysis (RCA):** The pattern matching logic in the `_isSelectable` method of `file-tree.service.ts` was not robust enough. Patterns like `'/.git/'` were being checked with `filePath.includes(pattern)`, which fails for root-level directories where the path is simply `c:/project/.git` and does not contain surrounding slashes.
--   **Codified Solution & Best Practice:** The pattern matching must account for different path structures. The solution is to check if the normalized path *includes* the pattern (for nested cases) OR if the `basename` of the path *is* the pattern name (for root-level cases). This ensures that directories like `.git` are correctly identified as non-selectable regardless of their position in the path string.
-
----
-
-### Case Study 027: Dist Files Incorrectly Auto-Added to Selection
-
--   **Artifacts Affected:** `src/backend/services/file-tree.service.ts`
--   **Cycles Observed:** C14, C15
--   **Symptom:** When a build process creates new files inside an excluded directory like `dist/` or `apps/backend/dist/`, the "Automatically add new files to selection" feature incorrectly adds these new files to the selection set, even though the `dist` folder itself is correctly marked as non-selectable.
--   **Root Cause Analysis (RCA):** The logic for the `onDidCreate` file system watcher was incomplete. It was checking if the "auto-add" feature was enabled but was failing to also check if the newly created file's path matched any of the defined `NON_SELECTABLE_PATTERNS`. The initial pattern `'/dist/'` was also not robust enough as it only matched `dist` at the root.
--   **Codified Solution & Best Practice:**
-    1.  The exclusion patterns must be robust. A pattern like `'**/dist/**'` should be used to match `dist` directories at any depth.
-    2.  The `onDidCreate` handler in `file-tree.service.ts` must perform the same check that the UI rendering does. Before queuing a file for auto-addition, it must call the `_isSelectable(filePath, fileType)` helper method. If this method returns `false`, the file must be ignored. This ensures that the auto-add feature fully respects the project's exclusion rules.
-
----
-
-### Case Study 026: "Command Already Exists" Activation Error
-
--   **Artifacts Affected:** `src/extension.ts`, `src/backend/commands/commands.ts`
--   **Cycles Observed:** C11
--   **Symptom:** The extension fails to activate with a critical error: `Error during activation: command 'dce.openSettingsPanel' already exists`.
--   **Root Cause Analysis (RCA):** The command ID `dce.openSettingsPanel` was being registered in two different places. It was registered once via the loop in `registerCommands` (which reads from the `commands.ts` array) and then registered a second time explicitly with `vscode.commands.registerCommand` in `extension.ts`. VS Code's command registry requires all command IDs to be unique, and this duplication caused a fatal activation error.
--   **Codified Solution & Best Practice:** The established pattern in the project is to use an internal command alias for commands that need access to the `ExtensionContext`.
-    1.  The command defined in `commands.ts` (e.g., `dce.openSettingsPanel`) should be the "public" command triggered by the UI. Its callback should do nothing more than execute a different, "internal" command (e.g., `vscode.commands.executeCommand('dce.showSettingsPanel')`).
-    2.  The "internal" command (e.g., `dce.showSettingsPanel`) is the one registered explicitly in `extension.ts`. This is where the logic that requires the `context` (like creating a webview panel) resides. This pattern ensures each command ID is registered only once, preventing conflicts.
-
----
-
-### Case Study 025: Runtime vs. Build-time Syntax Errors
-
--   **Artifacts Affected:** `src/client/utils/response-parser.ts`
--   **Cycles Observed:** C188
--   **Symptom:** The Parallel Co-Pilot Panel appears as a completely blank white screen. No errors are visible in the extension host logs, but the webview fails to render any content.
--   **Root Cause Analysis (RCA):** The webview's JavaScript bundle contained a subtle but fatal syntax error that was not caught by the TypeScript/Babel build process. The code attempted to use an invalid form of optional chaining and nullish coalescing (`match?. ?? ''`) when trying to access properties of a regex match object. While the build completed successfully, the browser's JavaScript engine encountered this invalid syntax upon loading the script and immediately threw an `Uncaught SyntaxError`, halting all further execution and preventing React from rendering. The lack of build-time errors made this difficult to diagnose without inspecting the webview's own developer console.
--   **Codified Solution & Best Practice:**
-    1.  **Correct Syntax:** The only way to access an element from an array-like object (such as a regex match) using optional chaining is with bracket notation: `match?.`. The invalid `match?.` syntax must be corrected.
-    2.  **Best Practice:** When debugging a "blank screen" webview with no backend errors, the first step is always to open the Webview Developer Tools (`Developer: Open Webview Developer Tools` from the Command Palette). This provides access to the client-side console, which will immediately reveal any runtime JavaScript errors that are preventing the application from loading.
-
----
-
-### Case Study 024: PCPP Context/Title Data Loss or Corruption on Navigation
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/backend/services/history.service.ts`
--   **Cycles Observed:** C185, C189, C190, C2, C3, C4, C5
--   **Symptom:** Text entered into the "Cycle Context," "Ephemeral Context," or "Cycle Title" fields is lost or, more critically, data from one cycle is saved over another. This occurs when the user performs an action that reloads the view's state from disk, such as creating a new cycle or switching to a different cycle, especially when done quickly.
--   **Root Cause Analysis (RCA):** This is a critical data integrity bug caused by a race condition between a debounced (delayed) auto-save and the state loading event. When the user navigates to a new cycle, the state is reloaded from `dce_history.json` *before* the debounced save for the departing cycle has executed. This causes the UI's current state (with the old cycle's data) to be saved over the newly loaded cycle's data, corrupting the history file.
--   **Codified Solution & Best Practice:** The definitive solution is to prevent the user from initiating the race condition by making the save state explicit in the UI.
-    1.  **Stateful Save Status:** The UI must maintain a `saveStatus` state (`'unsaved'`, `'saving'`, `'saved'`). Any change to persisted data immediately sets the status to `'unsaved'`.
-    2.  **Navigation Locking:** All UI controls that trigger a cycle change (e.g., "Next," "Previous," "New Cycle" buttons) **must** be disabled whenever the `saveStatus` is not `'saved'`.
-    3.  **Asynchronous Save with Acknowledgement:** The debounced auto-save function, when it fires, must set the status to `'saving'`. The backend, upon successfully writing the data to disk, must send an explicit acknowledgement message back to the frontend.
-    4.  **UI Unlock:** The frontend, upon receiving the save acknowledgement for the current cycle, sets the status to `'saved'`, which re-enables the navigation controls. This creates a clear, safe, and transparent workflow for the user, making data loss impossible.
-
----
+-   **Artifacts Affected:** `A90. AI Ascent - server.ts (Reference).md`, `src/backend/services/llm.service.ts`
+-   **Cycles Observed:** C44
+-   **Symptom:** When generating batch responses from the vLLM server, the AI-generated text is cut off prematurely, often right before it would have written `
 </file_artifact>
 
 <file path="src/Artifacts/A11.1 DCE - New Regression Case Studies.md">
@@ -32351,5 +32190,77 @@ ${tsParams.map(p => '  ' + p).join('\n')}
     </script>
 </body>
 </html>
+</file_artifact>
+
+<file path="src/Artifacts/A96. DCE - Harmony-Aligned Response Schema Plan.md">
+# Artifact A96: DCE - Harmony-Aligned Response Schema Plan
+# Date Created: C44
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** An analysis of the `openai_harmony` library and a proposed plan for migrating the DCE's vLLM interaction schema from XML tags to a more robust, token-based structured format.
+- **Tags:** plan, architecture, interaction schema, parsing, llm, vllm, harmony
+
+## 1. Overview & Goal
+
+The current interaction schema (`A52.2`) relies on parsing XML-like tags (`<file>`, `<summary>`) and markdown headers from the LLM's free-text response. While functional, this approach is brittle. It is susceptible to minor formatting errors from the model and requires complex, string-based `stop` tokens that can prematurely truncate responses.
+
+The `GPT-OSS` repository introduces a more advanced approach, "Harmony," which uses a vocabulary of special control tokens (e.g., `<|start|>`, `<|channel|>`, `<|message|>`, `<|end|>`) to guide the model's generation into a structured, machine-readable format. This is a significantly more robust and powerful way to handle structured data generation and tool use with LLMs.
+
+The goal of this plan is to outline a phased migration from our current XML-based schema to a Harmony-aligned schema for all communication with the vLLM backend.
+
+## 2. Analysis of the Harmony Approach
+
+The `openai_harmony` library and `harmony_vllm_app.py` demonstrate a sophisticated workflow:
+
+1.  **Structured Prompt Rendering:** Instead of a single block of text, the prompt is constructed as a series of messages, each with a `role` (system, user, assistant), and potentially a `channel` (analysis, commentary, final) and `recipient` (e.g., a tool like `python` or `browser`). This entire structure is "rendered" into a sequence of tokens that includes the special control tokens.
+2.  **Guided Generation:** The model is trained or fine-tuned to understand these control tokens. It learns to "speak" in this format, for example, by placing its internal monologue in an `analysis` channel and its final answer in a `final` channel.
+3.  **Robust Parsing:** The response from the model is not just a block of text; it's a stream of tokens that can be parsed deterministically using the same control tokens. A `StreamableParser` can listen to the token stream and identify when the model is opening a new message, writing to a specific channel, or finishing its turn.
+
+This is fundamentally superior to our current regex-based parsing.
+
+## 3. Proposed Migration Plan
+
+This is a major architectural change and should be implemented in phases.
+
+### Phase 1: Adopt Harmony for File Formatting (Immediate)
+
+-   **Goal:** Replace the <file path> and <file_artifact> tags with a Harmony-style equivalent.
+-   **New Schema:**
+    -   Instead of XML tags, instruct the model to use:
+        `<|start_file| path="path/to/file.ts" |>`
+        `// file content here`
+        `<|end_file|>`
+-   **Implementation:**
+    -   **`A52.2`:** Update the interaction schema with these new instructions.
+    -   **`response-parser.ts`:** Update the `FILE_TAG_REGEX` to use this new format.
+    -   **`server.ts`:** The `stop` parameter (if passed from the client) would now be `<|end_file|>`. This is less likely to be generated by accident than `<file_artifact>`.
+
+### Phase 2: Adopt Harmony for Summary/Plan (Future Cycle)
+
+-   **Goal:** Replace `<summary>` and `<course_of_action>` with Harmony channels.
+-   **New Schema:**
+    -   Instruct the model to place its analysis in one channel and its final plan in another:
+        `<|start|><|assistant|><|channel|>analysis<|message|>`
+        `My thoughts and analysis...`
+        `<|end|>`
+        `<|start|><|assistant|><|channel|>final<|message|>`
+        `1. Update file A.`
+        `2. Update file B.`
+        `<|end|>`
+-   **Implementation:**
+    -   Requires a more significant rewrite of the `response-parser.ts` to understand channels.
+
+### Phase 3: Full Harmony Prompt Rendering (Long-Term)
+
+-   **Goal:** Fully adopt the `openai_harmony` library's approach.
+-   **Implementation:**
+    -   **`prompt.service.ts`:** Would need a major rewrite to build a `Conversation` object with `Message`s, instead of a single string.
+    -   **`server.ts` / `llm.service.ts`:** Would need to call a "render" function (potentially a Python microservice wrapping the Harmony library) to convert the `Conversation` object into the final tokenized prompt to be sent to vLLM.
+    -   **`response-parser.ts`:** Would be replaced with a parser that understands the full Harmony token stream.
+
+## 4. Immediate Next Steps
+
+For the next cycle, we will focus on **Phase 1**. This provides an immediate improvement in the robustness of our file parsing without requiring a complete architectural overhaul. It also serves as a good first step to align the AI's output with a more structured, token-based format.
 </file_artifact>
 
