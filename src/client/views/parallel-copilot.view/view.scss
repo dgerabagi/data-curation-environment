@@ -1,5 +1,5 @@
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C28 (Style native diff button)
+// Updated on: C38 (Add styles for generation controls)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -218,6 +218,23 @@ body {
     align-items: center;
     flex-shrink: 0;
     gap: 16px;
+}
+
+.generation-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    input {
+        width: 40px;
+        text-align: center;
+    }
+
+    .tokens-per-sec-display {
+        font-size: 11px;
+        color: var(--vscode-descriptionForeground);
+        font-style: italic;
+    }
 }
 
 .cycle-navigator {

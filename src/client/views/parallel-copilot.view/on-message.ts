@@ -1,4 +1,4 @@
-// Updated on: C37 (Add RequestBatchGeneration handler)
+// Updated on: C38 (Use generatePromptString)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -13,7 +13,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestBatchGeneration, async (data) => {
         loggerService.log(`Received RequestBatchGeneration for ${data.count} responses.`);
-        const prompt = await promptService.getFlattenedContent(data.selectedFiles);
+        const prompt = await promptService.generatePromptString(data.cycleData);
         const responses = await llmService.generateBatch(prompt, data.count, data.cycleData);
         serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationResult, { responses });
     });

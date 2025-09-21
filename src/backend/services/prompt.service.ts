@@ -1,4 +1,4 @@
-// Updated on: C31 (Enhance generateStateLog for cost debugging)
+// Updated on: C38 (Add generatePromptString for in-memory generation)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -186,6 +186,18 @@ ${staticContext.trim()}
         };
     }
 
+    public async generatePromptString(cycleData: PcppCycle): Promise<string> {
+        const lastSelection = await Services.selectionService.getLastSelection();
+        let flattenedContent = '<!-- No files selected for flattening -->';
+        if (lastSelection.length > 0) {
+            flattenedContent = await Services.flattenerService.getFlattenedContent(lastSelection);
+        }
+        
+        const promptParts = await this.getPromptParts(cycleData, flattenedContent);
+        const promptContent = Object.values(promptParts).join('\n\n');
+        return `<prompt.md>\n\n${promptContent}\n\n</prompt.md>`;
+    }
+
     public async handlePromptCostBreakdownRequest(cycleData: PcppCycle, serverIpc: ServerPostMessageManager) {
         Services.loggerService.log("--- COST CALCULATION DRY RUN ---");
         try {
@@ -260,14 +272,8 @@ ${staticContext.trim()}
             Services.loggerService.log(`Generating prompt.md file for cycle ${currentCycle}...`);
             
             const lastSelection = await Services.selectionService.getLastSelection();
-            let flattenedContent = '<!-- No files selected for flattening -->';
             if (lastSelection.length > 0) {
                 await Services.flattenerService.flatten(lastSelection);
-                 try {
-                    flattenedContent = await fs.readFile(path.join(rootPath, 'flattened_repo.md'), 'utf-8');
-                } catch (e) {
-                    Services.loggerService.warn("'flattened_repo.md' not found after flattening. Will be empty in prompt.");
-                }
             } else {
                 Services.loggerService.warn("No files selected for flattening. 'flattened_repo.md' may be stale or non-existent.");
             }
@@ -279,10 +285,7 @@ ${staticContext.trim()}
             }
             const currentCycleData = { ...currentCycleDataFromHistory, title: cycleTitle };
 
-            const promptParts = await this.getPromptParts(currentCycleData, flattenedContent);
-            
-            const promptContent = Object.values(promptParts).join('\n\n');
-            const finalPrompt = `<prompt.md>\n\n${promptContent}\n\n</prompt.md>`;
+            const finalPrompt = await this.generatePromptString(currentCycleData);
 
             await fs.writeFile(promptMdPath, finalPrompt, 'utf-8');
             vscode.window.showInformationMessage(`Successfully generated prompt.md for Cycle ${currentCycle}.`);

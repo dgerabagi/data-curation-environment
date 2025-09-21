@@ -1,8 +1,8 @@
 // src/client/views/settings.view/on-message.ts
-// Updated on: C37 (Add settings handlers)
+// Updated on: C38 (Add missing import)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
-import { ClientToServerChannel } from "@/common/ipc/channels.enum";
+import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
 
 export function onMessage(serverIpc: ServerPostMessageManager) {
     const { loggerService, fileOperationService, settingsService } = Services;
