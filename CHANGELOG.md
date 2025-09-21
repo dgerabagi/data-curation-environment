@@ -2,6 +2,16 @@
 
 All notable changes to the "Data Curation Environment" extension will be documented in this file.
 
+## [0.1.9] - Q3 2025
+
+### Added
+- **Native Diff Viewer:** Replaced the custom, in-panel diff viewer with an integration of VS Code's native diffing functionality (`vscode.diff`). This provides a much richer, more stable, and familiar user experience for comparing AI-generated code with workspace files.
+
+### Fixed
+- **File Duplication:** Resolved several bugs that could cause duplicate files to appear in the flattened context, particularly during the onboarding workflow and when using the "auto-add new files" feature.
+- **Data Loss Prevention:** Implemented a more robust, UI-driven autosave status indicator with navigation locking. This prevents race conditions when switching between cycles, significantly reducing the chance of data loss.
+- **Auto-Add Logic:** Fixed a race condition in the "auto-add new files" feature that caused newly created files to be "stuck" in the selection state and unable to be removed.
+
 ## [0.1.2] - Q3 2025
 
 ### Added

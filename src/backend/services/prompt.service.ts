@@ -1,4 +1,4 @@
-// Updated on: C23 (Add cost calculation logging)
+// Updated on: C30 (Refactor generateStateLog for cost debugging)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -221,34 +221,21 @@ ${staticContext.trim()}
         }
     }
 
-    public async generateStateLog(currentState: PcppCycle) {
+    public async generateStateLog(currentState: PcppCycle, costState: any) {
         Services.loggerService.log("--- GENERATING STATE LOG ---");
         try {
             const fullHistory = await Services.historyService.getFullHistory();
-            
-            const historyForLogging = JSON.parse(JSON.stringify(fullHistory));
-            historyForLogging.cycles.forEach((cycle: PcppCycle) => {
-                Object.keys(cycle.responses).forEach(respId => {
-                    cycle.responses[respId].content = truncateCodeForLogging(cycle.responses[respId].content);
-                });
-            });
-
             const maxCycleId = fullHistory.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0);
             const isReadyForNextCycle = currentState.title && currentState.title.trim() !== 'New Cycle' && currentState.title.trim() !== '' && currentState.cycleContext && currentState.cycleContext.trim() !== '' && currentState.selectedResponseId;
             const isNewCycleButtonDisabled = currentState.cycleId !== maxCycleId || !isReadyForNextCycle;
 
             const stateDump = {
-                "FRONTEND_STATE": {
+                "FRONTEND_CYCLE_STATE": {
                     "currentCycle": currentState.cycleId,
                     "maxCycle": maxCycleId,
                     "isNewCycleButtonDisabled": isNewCycleButtonDisabled,
-                    "conditions": {
-                        "hasTitle": !!currentState.title && currentState.title.trim() !== 'New Cycle' && currentState.title.trim() !== '',
-                        "hasContext": !!currentState.cycleContext && currentState.cycleContext.trim() !== '',
-                        "hasSelectedResponse": !!currentState.selectedResponseId
-                    }
                 },
-                "BACKEND_HISTORY_FILE": historyForLogging
+                "FRONTEND_COST_STATE": costState
             };
 
             const logMessage = `
