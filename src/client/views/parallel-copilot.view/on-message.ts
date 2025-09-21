@@ -1,14 +1,30 @@
-// Updated on: C27 (Add RequestNativeDiff handler)
+// Updated on: C37 (Add RequestBatchGeneration handler)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
 
 export function onMessage(serverIpc: ServerPostMessageManager) {
-    const { loggerService, promptService, fileOperationService, highlightingService, historyService, gitService, actionService } = Services;
+    const { loggerService, promptService, fileOperationService, highlightingService, historyService, gitService, actionService, llmService, settingsService } = Services;
     loggerService.log("Parallel Co-Pilot view message handler initialized.");
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestCreatePromptFile, (data) => {
         promptService.generatePromptFile(data.cycleTitle, data.currentCycle);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestBatchGeneration, async (data) => {
+        loggerService.log(`Received RequestBatchGeneration for ${data.count} responses.`);
+        const prompt = await promptService.getFlattenedContent(data.selectedFiles);
+        const responses = await llmService.generateBatch(prompt, data.count, data.cycleData);
+        serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationResult, { responses });
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestSettings, async () => {
+        const settings = await settingsService.getSettings();
+        serverIpc.sendToClient(ServerToClientChannel.SendSettings, { settings });
+    });
+    
+    serverIpc.onClientMessage(ClientToServerChannel.SaveSettings, (data) => {
+        settingsService.saveSettings(data.settings);
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestCreateCycle0Prompt, (data) => {

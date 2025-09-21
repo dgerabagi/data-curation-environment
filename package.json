@@ -20,6 +20,16 @@
     ],
     "main": "./dist/extension.js",
     "contributes": {
+        "configuration": {
+            "title": "Data Curation Environment",
+            "properties": {
+                "dce.connectionMode": {
+                    "type": "string",
+                    "default": "manual",
+                    "description": "The LLM connection mode (manual, demo, url, key)."
+                }
+            }
+        },
         "commands": [
             {
                 "command": "dce.saveCurrentSelection",
@@ -152,6 +162,7 @@
         "xlsx": "^0.18.5",
         "mammoth": "^1.8.0",
         "diff": "^5.2.0",
-        "@types/diff": "^5.2.1"
+        "@types/diff": "^5.2.1",
+        "node-fetch": "^2.6.7"
     }
 }

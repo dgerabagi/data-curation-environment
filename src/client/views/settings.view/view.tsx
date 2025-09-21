@@ -1,4 +1,5 @@
 // src/client/views/settings.view/view.tsx
+// Updated on: C37 (Implement settings persistence)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -6,8 +7,7 @@ import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
 import ReactMarkdown from 'react-markdown';
 import { VscChevronDown } from 'react-icons/vsc';
-
-type ConnectionMode = 'manual' | 'demo' | 'url' | 'key';
+import { ConnectionMode, DceSettings } from '@/backend/services/settings.service';
 
 const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; initialCollapsed?: boolean }> = ({ title, children, initialCollapsed = false }) => {
     const [isCollapsed, setIsCollapsed] = React.useState(initialCollapsed);
@@ -25,7 +25,7 @@ const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; i
 const App = () => {
     const [readmeContent, setReadmeContent] = React.useState('Loading...');
     const [changelogContent, setChangelogContent] = React.useState('Loading...');
-    const [connectionMode, setConnectionMode] = React.useState<ConnectionMode>('manual');
+    const [settings, setSettings] = React.useState<DceSettings>({ connectionMode: 'manual' });
     const clientIpc = ClientPostMessageManager.getInstance();
 
     React.useEffect(() => {
@@ -35,14 +35,27 @@ const App = () => {
         clientIpc.onServerMessage(ServerToClientChannel.SendChangelogContent, ({ content }) => {
             setChangelogContent(content);
         });
+        clientIpc.onServerMessage(ServerToClientChannel.SendSettings, ({ settings: receivedSettings }) => {
+            setSettings(receivedSettings);
+        });
 
         clientIpc.sendToServer(ClientToServerChannel.RequestReadmeContent, {});
         clientIpc.sendToServer(ClientToServerChannel.RequestChangelogContent, {});
+        clientIpc.sendToServer(ClientToServerChannel.RequestSettings, {});
     }, [clientIpc]);
 
+    const handleSettingsChange = (newSettings: Partial<DceSettings>) => {
+        const updatedSettings = { ...settings, ...newSettings };
+        setSettings(updatedSettings);
+        clientIpc.sendToServer(ClientToServerChannel.SaveSettings, { settings: updatedSettings });
+    };
+
     const handleModeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setConnectionMode(event.target.value as ConnectionMode);
-        // TODO: Send IPC message to save the new setting
+        handleSettingsChange({ connectionMode: event.target.value as ConnectionMode });
+    };
+    
+    const handleApiUrlChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        handleSettingsChange({ apiUrl: event.target.value });
     };
 
     return (
@@ -55,35 +68,35 @@ const App = () => {
                     <div className="mode-selection-group">
                         
                         <div className="radio-option">
-                            <input type="radio" id="mode-manual" name="mode" value="manual" checked={connectionMode === 'manual'} onChange={handleModeChange} />
+                            <input type="radio" id="mode-manual" name="mode" value="manual" checked={settings.connectionMode === 'manual'} onChange={handleModeChange} />
                             <label htmlFor="mode-manual">Free Mode (Manual Copy/Paste)</label>
                             <span className="description">Use the extension by manually copying and pasting responses. No setup required.</span>
                         </div>
 
                         <div className="radio-option">
-                            <input type="radio" id="mode-demo" name="mode" value="demo" checked={connectionMode === 'demo'} onChange={handleModeChange} />
+                            <input type="radio" id="mode-demo" name="mode" value="demo" checked={settings.connectionMode === 'demo'} onChange={handleModeChange} />
                             <label htmlFor="mode-demo">Demo Mode (Local vLLM via `aiascent.game`)</label>
-                            <span className="description">Connect to a pre-configured local vLLM instance via a proxy. Requires setup from A92.</span>
+                            <span className="description">Connect to a pre-configured local vLLM instance via a proxy.</span>
                         </div>
 
                         <div className="radio-option">
-                            <input type="radio" id="mode-url" name="mode" value="url" checked={connectionMode === 'url'} onChange={handleModeChange} />
+                            <input type="radio" id="mode-url" name="mode" value="url" checked={settings.connectionMode === 'url'} onChange={handleModeChange} />
                             <label htmlFor="mode-url">API (URL)</label>
                             <span className="description">Connect to your own self-hosted OpenAI-compatible endpoint.</span>
-                            {connectionMode === 'url' && (
+                            {settings.connectionMode === 'url' && (
                                 <div className="config-inputs">
-                                    <input type="text" id="api-url" placeholder="http://localhost:8000/v1" />
+                                    <input type="text" id="api-url" placeholder="http://localhost:8000/v1" value={settings.apiUrl || ''} onChange={handleApiUrlChange} />
                                 </div>
                             )}
                         </div>
 
                         <div className="radio-option">
-                            <input type="radio" id="mode-key" name="mode" value="key" checked={connectionMode === 'key'} onChange={handleModeChange} />
+                            <input type="radio" id="mode-key" name="mode" value="key" checked={settings.connectionMode === 'key'} onChange={handleModeChange} />
                             <label htmlFor="mode-key">API (KEY)</label>
-                            <span className="description">Connect to a cloud provider using an API key.</span>
-                            {connectionMode === 'key' && (
+                            <span className="description">Connect to a cloud provider using an API key. (Coming soon)</span>
+                            {settings.connectionMode === 'key' && (
                                 <div className="config-inputs">
-                                    <input type="password" id="api-key" placeholder="sk-..." />
+                                    <input type="password" id="api-key" placeholder="sk-..." disabled />
                                 </div>
                             )}
                         </div>

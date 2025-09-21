@@ -13,6 +13,8 @@ import { ContentExtractionService } from "./content-extraction.service";
 import { HighlightingService } from "./highlighting.service";
 import { GitService } from "./git.service";
 import { ResponseContentProvider } from "../providers/ResponseContentProvider";
+import { SettingsService } from "./settings.service";
+import { LlmService } from "./llm.service";
 
 class ServiceContainer {
     public fileTreeService!: FileTreeService;
@@ -27,6 +29,8 @@ class ServiceContainer {
     public historyService!: HistoryService;
     public promptService!: PromptService;
     public gitService = new GitService();
+    public settingsService = new SettingsService();
+    public llmService = new LlmService();
     public context!: vscode.ExtensionContext;
     public responseContentProvider = new ResponseContentProvider();
     

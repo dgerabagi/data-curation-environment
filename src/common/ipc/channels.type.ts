@@ -1,7 +1,8 @@
-// Updated on: C30 (Add costState to RequestLogState)
+// Updated on: C37 (Add new channels for settings and batch generation)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
+import { DceSettings } from "@/backend/services/settings.service";
 
 export type SelectionSet = { [name: string]: string[] };
 export type ProblemCountsMap = { [path: string]: { error: number; warning: number; } };
@@ -49,7 +50,8 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestLastSelection ? {} :
     T extends ClientToServerChannel.SaveAutoAddState ? { enabled: boolean } :
     T extends ClientToServerChannel.VSCodeCommand ? { command: string, args?: any[] } :
-    T extends ClientToServerChannel.RequestCreatePromptFile ? { cycleTitle: string; currentCycle: number } :
+    T extends ClientToServerChannel.RequestCreatePromptFile ? { cycleTitle: string; currentCycle: number; selectedFiles: string[] } :
+    T extends ClientToServerChannel.RequestBatchGeneration ? { cycleData: PcppCycle, count: number, selectedFiles: string[] } :
     T extends ClientToServerChannel.RequestCreateCycle0Prompt ? { projectScope: string } :
     T extends ClientToServerChannel.RequestFileExistence ? { paths: string[] } :
     T extends ClientToServerChannel.RequestSyntaxHighlight ? { code: string; lang: string, id: string } :
@@ -69,6 +71,8 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestGitRestore ? { filesToDelete: string[] } :
     T extends ClientToServerChannel.RequestGitStatus ? {} :
     T extends ClientToServerChannel.SaveLastViewedCycle ? { cycleId: number | null } :
+    T extends ClientToServerChannel.RequestSettings ? {} :
+    T extends ClientToServerChannel.SaveSettings ? { settings: DceSettings } :
     
     T extends ServerToClientChannel.SendWorkspaceFiles ? { files: FileNode[] } :
     T extends ServerToClientChannel.SendWorkspaceTrustState ? { isTrusted: boolean } :
@@ -96,4 +100,6 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.NotifyGitOperationResult ? { success: boolean; message: string; } :
     T extends ServerToClientChannel.SendGitStatus ? { isClean: boolean } :
     T extends ServerToClientChannel.NotifySaveComplete ? { cycleId: number } :
+    T extends ServerToClientChannel.SendSettings ? { settings: DceSettings } :
+    T extends ServerToClientChannel.SendBatchGenerationResult ? { responses: string[] } :
     never;

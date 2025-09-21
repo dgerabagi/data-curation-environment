@@ -63,6 +63,9 @@ export enum ClientToServerChannel {
     RequestGitRestore = "clientToServer.requestGitRestore",
     RequestGitStatus = "clientToServer.requestGitStatus",
     SaveLastViewedCycle = "clientToServer.saveLastViewedCycle",
+    RequestSettings = "clientToServer.requestSettings",
+    SaveSettings = "clientToServer.saveSettings",
+    RequestBatchGeneration = "clientToServer.requestBatchGeneration",
 }
 
 export enum ServerToClientChannel {
@@ -95,4 +98,6 @@ export enum ServerToClientChannel {
     NotifyGitOperationResult = "serverToClient.notifyGitOperationResult",
     SendGitStatus = "serverToClient.sendGitStatus",
     NotifySaveComplete = "serverToClient.notifySaveComplete",
+    SendSettings = "serverToClient.sendSettings",
+    SendBatchGenerationResult = "serverToClient.sendBatchGenerationResult",
 }

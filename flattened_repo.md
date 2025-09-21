@@ -1,17 +1,17 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-21T18:54:32.995Z
+  Date Generated: 2025-09-21T19:17:50.352Z
   ---
-  Total Files: 181
-  Approx. Tokens: 468815
+  Total Files: 183
+  Approx. Tokens: 471526
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (8724 tokens)
-4. src\Artifacts\A0. DCE Master Artifact List.md (8564 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (9355 tokens)
+4. src\Artifacts\A0. DCE Master Artifact List.md (8565 tokens)
 5. src\client\views\parallel-copilot.view\view.scss (5499 tokens)
 6. src\backend\services\prompt.service.ts (4904 tokens)
 7. src\backend\services\file-operation.service.ts (4526 tokens)
@@ -22,7 +22,7 @@
 <!-- Full File List -->
 1. public\copilot.svg - [Binary] Size: 445 Bytes
 2. public\spiral.svg - [Binary] Size: 459 Bytes
-3. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 504 - Chars: 34255 - Tokens: 8564
+3. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 504 - Chars: 34258 - Tokens: 8565
 4. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 5. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
 6. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
@@ -130,7 +130,7 @@
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 109. src\backend\services\prompt.service.ts - Lines: 369 - Chars: 19614 - Tokens: 4904
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
-111. src\backend\services\services.ts - Lines: 44 - Chars: 2053 - Tokens: 514
+111. src\backend\services\services.ts - Lines: 48 - Chars: 2245 - Tokens: 562
 112. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
 113. src\client\components\file-tree\FileTree.tsx - Lines: 176 - Chars: 11127 - Tokens: 2782
 114. src\client\components\file-tree\FileTree.utils.ts - Lines: 134 - Chars: 4721 - Tokens: 1181
@@ -154,18 +154,18 @@
 132. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 79 - Chars: 3137 - Tokens: 785
 133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
 134. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-135. src\client\views\parallel-copilot.view\on-message.ts - Lines: 120 - Chars: 5695 - Tokens: 1424
+135. src\client\views\parallel-copilot.view\on-message.ts - Lines: 136 - Chars: 6577 - Tokens: 1645
 136. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 100 - Chars: 5002 - Tokens: 1251
 137. src\client\views\parallel-copilot.view\view.scss - Lines: 979 - Chars: 21996 - Tokens: 5499
 138. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 307 - Chars: 34894 - Tokens: 8724
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 358 - Chars: 37418 - Tokens: 9355
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
-141. src\client\views\settings.view\on-message.ts - Lines: 17 - Chars: 762 - Tokens: 191
+141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1202 - Tokens: 301
 142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
-143. src\client\views\settings.view\view.tsx - Lines: 107 - Chars: 5501 - Tokens: 1376
+143. src\client\views\settings.view\view.tsx - Lines: 120 - Chars: 6337 - Tokens: 1585
 144. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
-145. src\common\ipc\channels.enum.ts - Lines: 98 - Chars: 5307 - Tokens: 1327
-146. src\common\ipc\channels.type.ts - Lines: 99 - Chars: 7679 - Tokens: 1920
+145. src\common\ipc\channels.enum.ts - Lines: 103 - Chars: 5609 - Tokens: 1403
+146. src\common\ipc\channels.type.ts - Lines: 105 - Chars: 8224 - Tokens: 2056
 147. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 148. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 149. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
@@ -181,7 +181,7 @@
 159. CHANGELOG.md - Lines: 38 - Chars: 2614 - Tokens: 654
 160. LICENSE - Lines: 21 - Chars: 1090 - Tokens: 273
 161. log-state-logs.md - Lines: 200 - Chars: 11855 - Tokens: 2964
-162. package.json - Lines: 157 - Chars: 5116 - Tokens: 1279
+162. package.json - Lines: 168 - Chars: 5502 - Tokens: 1376
 163. README.md - Lines: 28 - Chars: 2456 - Tokens: 614
 164. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
 165. webpack.config.js - Lines: 112 - Chars: 2987 - Tokens: 747
@@ -200,7 +200,9 @@
 178. src\Artifacts\A92. DCE - vLLM Setup Guide.md - Lines: 99 - Chars: 4307 - Tokens: 1077
 179. src\Artifacts\A93. DCE - vLLM Encryption in Transit Guide.md - Lines: 65 - Chars: 3811 - Tokens: 953
 180. src\Artifacts\A94. DCE - Connecting to a Local LLM Guide.md - Lines: 42 - Chars: 2565 - Tokens: 642
-181. src\Artifacts\A95. DCE - LLM Connection Modes Plan.md - Lines: 79 - Chars: 5149 - Tokens: 1288
+181. src\Artifacts\A95. DCE - LLM Connection Modes Plan.md - Lines: 69 - Chars: 5411 - Tokens: 1353
+182. src\backend\services\llm.service.ts - Lines: 68 - Chars: 2794 - Tokens: 699
+183. src\backend\services\settings.service.ts - Lines: 44 - Chars: 1670 - Tokens: 418
 
 <file path="public/copilot.svg">
 <metadata>
@@ -228,7 +230,7 @@
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C36 (Add A95)
+# Updated on: C37 (Update A95)
 
 ## 1. Purpose
 
@@ -17949,6 +17951,8 @@ import { ContentExtractionService } from "./content-extraction.service";
 import { HighlightingService } from "./highlighting.service";
 import { GitService } from "./git.service";
 import { ResponseContentProvider } from "../providers/ResponseContentProvider";
+import { SettingsService } from "./settings.service";
+import { LlmService } from "./llm.service";
 
 class ServiceContainer {
     public fileTreeService!: FileTreeService;
@@ -17963,6 +17967,8 @@ class ServiceContainer {
     public historyService!: HistoryService;
     public promptService!: PromptService;
     public gitService = new GitService();
+    public settingsService = new SettingsService();
+    public llmService = new LlmService();
     public context!: vscode.ExtensionContext;
     public responseContentProvider = new ResponseContentProvider();
     
@@ -20775,17 +20781,33 @@ export const viewConfig = {
 </file_artifact>
 
 <file path="src/client/views/parallel-copilot.view/on-message.ts">
-// Updated on: C27 (Add RequestNativeDiff handler)
+// Updated on: C37 (Add RequestBatchGeneration handler)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
 
 export function onMessage(serverIpc: ServerPostMessageManager) {
-    const { loggerService, promptService, fileOperationService, highlightingService, historyService, gitService, actionService } = Services;
+    const { loggerService, promptService, fileOperationService, highlightingService, historyService, gitService, actionService, llmService, settingsService } = Services;
     loggerService.log("Parallel Co-Pilot view message handler initialized.");
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestCreatePromptFile, (data) => {
         promptService.generatePromptFile(data.cycleTitle, data.currentCycle);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestBatchGeneration, async (data) => {
+        loggerService.log(`Received RequestBatchGeneration for ${data.count} responses.`);
+        const prompt = await promptService.getFlattenedContent(data.selectedFiles);
+        const responses = await llmService.generateBatch(prompt, data.count, data.cycleData);
+        serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationResult, { responses });
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestSettings, async () => {
+        const settings = await settingsService.getSettings();
+        serverIpc.sendToClient(ServerToClientChannel.SendSettings, { settings });
+    });
+    
+    serverIpc.onClientMessage(ClientToServerChannel.SaveSettings, (data) => {
+        settingsService.saveSettings(data.settings);
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestCreateCycle0Prompt, (data) => {
@@ -21997,7 +22019,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C32 (Fix cost estimation display)
+// Updated on: C37 (Add batch generation logic)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -22016,6 +22038,7 @@ import ResponsePane from './components/ResponsePane';
 import * as path from 'path-browserify';
 import WorkflowToolbar from './components/WorkflowToolbar';
 import { logger } from '../../utils/logger';
+import { ConnectionMode, DceSettings } from '@/backend/services/settings.service';
 
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -22039,6 +22062,7 @@ const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; i
 );
 
 const App = () => {
+    // State declarations...
     const [activeTab, setActiveTab] = React.useState(1);
     const [tabCount, setTabCount] = React.useState(4);
     const [currentCycle, setCurrentCycle] = React.useState<number | null>(null);
@@ -22068,19 +22092,24 @@ const App = () => {
     const [workflowStep, setWorkflowStep] = React.useState<string | null>(null);
     const [saveStatus, setSaveStatus] = React.useState<'saved' | 'saving' | 'unsaved'>('saved');
     const [associatedFileMenu, setAssociatedFileMenu] = React.useState<{ x: number; y: number; path: string } | null>(null);
+    const [connectionMode, setConnectionMode] = React.useState<ConnectionMode>('manual');
+    const [responseCount, setResponseCount] = React.useState(4);
 
     const clientIpc = ClientPostMessageManager.getInstance();
     
+    // ... (State Ref and other hooks)
     const stateRef = React.useRef({
-        currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, fileExistenceMap, workflowStep, totalPromptTokens, estimatedPromptCost, costBreakdown
+        currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, fileExistenceMap, workflowStep, totalPromptTokens, estimatedPromptCost, costBreakdown, connectionMode, responseCount
     });
 
     React.useEffect(() => {
         stateRef.current = {
-            currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, fileExistenceMap, workflowStep, totalPromptTokens, estimatedPromptCost, costBreakdown
+            currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, fileExistenceMap, workflowStep, totalPromptTokens, estimatedPromptCost, costBreakdown, connectionMode, responseCount
         };
-    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, fileExistenceMap, workflowStep, totalPromptTokens, estimatedPromptCost, costBreakdown]);
+    }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, fileExistenceMap, workflowStep, totalPromptTokens, estimatedPromptCost, costBreakdown, connectionMode, responseCount]);
 
+
+    // ... (saveCurrentCycleState, handleRawContentChange, handlePaste, etc.)
     const saveCurrentCycleState = React.useCallback(() => {
         const { currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, workflowStep } = stateRef.current;
         if (currentCycle === null) return;
@@ -22109,6 +22138,7 @@ const App = () => {
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
     }, [clientIpc]);
 
+    // ... (other handlers)
     const handleRawContentChange = (newContent: string, tabIndex: number) => { 
         setTabs(prev => ({ ...prev, [tabIndex.toString()]: { rawContent: newContent, parsedContent: null }})); 
         setSaveStatus('unsaved'); 
@@ -22219,12 +22249,41 @@ const App = () => {
     const newCycleButtonDisabledReason = React.useMemo(() => { const reasons: string[] = []; if (!cycleTitle || cycleTitle.trim() === 'New Cycle' || cycleTitle.trim() === '') reasons.push("- A cycle title is required."); if (!cycleContext || cycleContext.trim() === '') reasons.push("- Cycle context cannot be empty."); if (!selectedResponseId) reasons.push("- A response must be selected."); return reasons.join('\n'); }, [cycleTitle, cycleContext, selectedResponseId]);
 
     React.useEffect(() => { if (workflowStep === null) return; if (workflowStep === 'readyForNewCycle') return; if (workflowStep === 'awaitingGeneratePrompt') { if (isReadyForNextCycle) setWorkflowStep('awaitingGeneratePrompt'); return; } if (workflowStep === 'awaitingCycleTitle') { if (cycleTitle.trim() && cycleTitle.trim() !== 'New Cycle') { setWorkflowStep('awaitingGeneratePrompt'); } return; } if (workflowStep === 'awaitingCycleContext') { if (cycleContext.trim()) { setWorkflowStep('awaitingCycleTitle'); } return; } if (workflowStep === 'awaitingAccept') { return; } if (workflowStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestGitStatus, {}); return; } if (workflowStep === 'awaitingFileSelect') { if (selectedFilesForReplacement.size > 0) { setWorkflowStep('awaitingAccept'); } return; } if (workflowStep === 'awaitingResponseSelect') { if (selectedResponseId) { setWorkflowStep('awaitingBaseline'); } return; } if (workflowStep === 'awaitingSort') { if (isSortedByTokens) { setWorkflowStep('awaitingResponseSelect'); } return; } if (workflowStep === 'awaitingParse') { if (isParsedMode) { setWorkflowStep(isSortedByTokens ? 'awaitingResponseSelect' : 'awaitingSort'); } return; } const waitingForPaste = workflowStep?.startsWith('awaitingResponsePaste'); if (waitingForPaste) { for (let i = 1; i <= tabCount; i++) { if (!tabs[i.toString()]?.rawContent?.trim()) { setWorkflowStep(`awaitingResponsePaste_${i}`); return; } } setWorkflowStep('awaitingParse'); } }, [workflowStep, selectedFilesForReplacement, selectedResponseId, isSortedByTokens, isParsedMode, tabs, cycleContext, cycleTitle, tabCount, isReadyForNextCycle, clientIpc]);
-    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string, newMax?: number) => { setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setActiveTab(cycleData.activeTab || 1); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setWorkflowStep(cycleData.activeWorkflowStep || null); if (newMax) setMaxCycle(newMax); setSaveStatus('saved'); requestCostEstimation(); }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => { setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics)); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { logger.log(`[COST_ESTIMATION_RECEIVED] Tokens: ${totalTokens}, Cost: ${estimatedCost}`); setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { if (result.success) { setWorkflowStep(prevStep => { if (prevStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => { if (cycleId === stateRef.current.currentCycle) setSaveStatus('saved'); }); clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }, [clientIpc, requestCostEstimation]);
+    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string, newMax?: number) => { setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setActiveTab(cycleData.activeTab || 1); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setWorkflowStep(cycleData.activeWorkflowStep || null); if (newMax) setMaxCycle(newMax); setSaveStatus('saved'); requestCostEstimation(); }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => { setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics)); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { logger.log(`[COST_ESTIMATION_RECEIVED] Tokens: ${totalTokens}, Cost: ${estimatedCost}`); setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { if (result.success) { setWorkflowStep(prevStep => { if (prevStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => { if (cycleId === stateRef.current.currentCycle) setSaveStatus('saved'); }); 
+        clientIpc.onServerMessage(ServerToClientChannel.SendSettings, ({ settings }) => { setConnectionMode(settings.connectionMode) });
+        clientIpc.onServerMessage(ServerToClientChannel.SendBatchGenerationResult, ({ responses }) => {
+            setTabs(prev => {
+                const newTabs = {...prev};
+                responses.forEach((content, index) => {
+                    const tabId = (index + 1).toString();
+                    newTabs[tabId] = { rawContent: content, parsedContent: null };
+                });
+                return newTabs;
+            });
+            setIsParsedMode(true); // Auto-parse after receiving
+        });
+        clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); 
+        clientIpc.sendToServer(ClientToServerChannel.RequestSettings, {});
+    }, [clientIpc, requestCostEstimation]);
     React.useEffect(() => { if (isParsedMode) parseAllTabs(); }, [isParsedMode, tabs, parseAllTabs]);
     React.useEffect(() => { if (!selectedFilePath) return; const currentTabData = tabs[activeTab.toString()]; if (currentTabData?.parsedContent) { const fileExistsInTab = currentTabData.parsedContent.files.some(f => f.path === selectedFilePath); if (!fileExistsInTab) setSelectedFilePath(null); } }, [activeTab, tabs, selectedFilePath]);
 
     const isNewCycleButtonDisabled = React.useMemo(() => { if (currentCycle === 0) return true; if (currentCycle !== maxCycle) return true; return !isReadyForNextCycle; }, [currentCycle, maxCycle, isReadyForNextCycle]);
 
+    const handleGeneratePrompt = () => { if (currentCycle === null) return; clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle, selectedFiles: Array.from(selectedFilesForReplacement) }); setWorkflowStep('readyForNewCycle'); };
+    const handleGenerateResponses = () => {
+        if (currentCycle === null) return;
+        const cycleData = getCurrentCycleData();
+        if (cycleData) {
+            clientIpc.sendToServer(ClientToServerChannel.RequestBatchGeneration, {
+                cycleData: cycleData as PcppCycle,
+                count: responseCount,
+                selectedFiles: Array.from(selectedFilesForReplacement) // Using this for context
+            });
+        }
+    };
+
+    // ... (rest of handlers and component return)
     const handleCycleChange = (e: React.MouseEvent | null, newCycle: number) => { e?.stopPropagation(); if (saveStatus !== 'saved') return; if (newCycle >= 0 && newCycle <= maxCycle) { setSelectedFilesForReplacement(new Set()); setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycle }); setWorkflowStep(null); } };
     const handleSelectForViewing = (filePath: string) => { const newPath = selectedFilePath === filePath ? null : filePath; setSelectedFilePath(newPath); };
     const handleAcceptSelectedFiles = () => { if (selectedFilesForReplacement.size === 0) return; const filesToWrite: BatchWriteFile[] = []; selectedFilesForReplacement.forEach(compositeKey => { const [responseId, filePath] = compositeKey.split(':::'); const responseData = tabs[responseId]; if (responseData?.parsedContent) { const file = responseData.parsedContent.files.find(f => f.path === filePath); if (file) { const finalPath = pathOverrides.get(file.path) || file.path; filesToWrite.push({ path: finalPath, content: file.content }); } } }); if (filesToWrite.length > 0) { clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite }); } setWorkflowStep('awaitingCycleContext'); };
@@ -22242,13 +22301,12 @@ const App = () => {
     const handleGlobalParseToggle = () => { const newParseMode = !isParsedMode; setIsParsedMode(newParseMode); setSelectedFilePath(null); if (!newParseMode) setTabs(prev => { const newTabs = {...prev}; Object.keys(newTabs).forEach(key => { newTabs[key].parsedContent = null; }); return newTabs; }); setSaveStatus('unsaved'); };
     
     const handleNewCycle = (e: React.MouseEvent) => { e.stopPropagation(); if (saveStatus !== 'saved') return; const newCycleId = maxCycle + 1; const newTabs: { [key: string]: TabState } = {}; for (let i = 1; i <= tabCount; i++) newTabs[i.toString()] = { rawContent: '', parsedContent: null }; setMaxCycle(newCycleId); setCurrentCycle(newCycleId); setCycleTitle('New Cycle'); setCycleContext(''); setEphemeralContext(''); setTabs(newTabs); setIsParsedMode(false); setSelectedResponseId(null); setSelectedFilesForReplacement(new Set()); setWorkflowStep('awaitingResponsePaste_1'); clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycleId }); setSaveStatus('unsaved'); };
-    const handleGeneratePrompt = () => { if (currentCycle === null) return; clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle }); setWorkflowStep('readyForNewCycle'); }
     const handleDeleteCycle = () => { if(currentCycle !== null) clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle }); };
     const handleResetHistory = () => { clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {}); };
     const handleExportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestExportHistory, {});
     const handleImportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestImportHistory, {});
     const handleGitBaseline = () => { const commitMessage = `DCE Baseline: Cycle ${currentCycle} - ${cycleTitle || 'New Cycle'}`; clientIpc.sendToServer(ClientToServerChannel.RequestGitBaseline, { commitMessage }); };
-    const onGitRestore = () => { const { selectedFilesForReplacement, fileExistenceMap } = stateRef.current; const filesToDelete = Array.from(selectedFilesForReplacement).map(key => key.split(':::')).filter(fileParts => fileParts[1] && !fileExistenceMap.get(fileParts[1])).map(fileParts => fileParts[1]); clientIpc.sendToServer(ClientToServerChannel.RequestGitRestore, { filesToDelete }); };
+    const onGitRestore = () => { const { selectedFilesForReplacement, fileExistenceMap } = stateRef.current; const filesToDelete = Array.from(selectedFilesForReplacement).map(key => key.split(':::')).filter(fileParts => fileParts && !fileExistenceMap.get(fileParts)).map(fileParts => fileParts); clientIpc.sendToServer(ClientToServerChannel.RequestGitRestore, { filesToDelete }); };
     const handleFileSelectionToggle = (filePath: string) => { const currentTabId = activeTab.toString(); const compositeKeyForCurrent = `${currentTabId}:::${filePath}`; setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); let existingKey: string | undefined; for (const key of newSet) if (key.endsWith(`:::${filePath}`)) { existingKey = key; break; } if (existingKey) { if (existingKey === compositeKeyForCurrent) newSet.delete(existingKey); else { newSet.delete(existingKey); newSet.add(compositeKeyForCurrent); } } else newSet.add(compositeKeyForCurrent); return newSet; }); setSaveStatus('unsaved'); };
     const handleSelectAllAssociatedFiles = () => { if (!activeTabData?.parsedContent) return; const allFilesForTab = activeTabData.parsedContent.filesUpdated; setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); allFilesForTab.forEach(filePath => { for (const key of newSet) { if (key.endsWith(`:::${filePath}`)) { newSet.delete(key); } } }); allFilesForTab.forEach(filePath => newSet.add(`${activeTab}:::${filePath}`)); return newSet; }); setSaveStatus('unsaved'); };
     const isAllFilesSelected = React.useMemo(() => { if (!activeTabData?.parsedContent) return false; const allFiles = activeTabData.parsedContent.filesUpdated; if (allFiles.length === 0) return false; return allFiles.every(file => selectedFilesForReplacement.has(`${activeTab}:::${file}`)); }, [selectedFilesForReplacement, activeTabData, activeTab]);
@@ -22282,8 +22340,23 @@ const App = () => {
         return <div className="save-status-indicator" title={title}>{icon}</div>;
     };
 
+    const renderHeaderButtons = () => {
+        if (connectionMode === 'manual') {
+            return <button onClick={handleGeneratePrompt} title="Generate prompt.md" className={workflowStep === 'awaitingGeneratePrompt' ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button>;
+        } else {
+            return (
+                <div className="generation-controls">
+                    <button onClick={handleGenerateResponses} title="Generate responses from local LLM"><VscWand /> Generate responses</button>
+                    <input type="number" value={responseCount} onChange={e => setResponseCount(parseInt(e.target.value, 10))} min="1" max="20" />
+                    {/* Placeholder for tokens/sec display */}
+                    <span className="tokens-per-sec-display">Tokens/sec: --</span>
+                </div>
+            );
+        }
+    };
+
     return <div className="pc-view-container">
-        <div className="pc-header"><div className="pc-toolbar"><button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button><button onClick={handleGeneratePrompt} title="Generate prompt.md" className={workflowStep === 'awaitingGeneratePrompt' ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button><button onClick={handleLogState} title="For developer use only. Logs internal state to the output channel."><VscBug/></button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => {setTabCount(parseInt(e.target.value, 10) || 1); setSaveStatus('unsaved');}} /></div></div>
+        <div className="pc-header"><div className="pc-toolbar"><button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button>{renderHeaderButtons()}<button onClick={handleLogState} title="For developer use only. Logs internal state to the output channel."><VscBug/></button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => {setTabCount(parseInt(e.target.value, 10) || 1); setSaveStatus('unsaved');}} /></div></div>
         <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''} extraHeaderContent={<div style={{display: 'flex', alignItems: 'center', gap: '8px'}}><SaveStatusIndicator /> {totalPromptCostDisplay}</div>}>
             <CycleNavigator currentCycle={currentCycle} maxCycle={maxCycle} cycleTitle={cycleTitle} isNewCycleButtonDisabled={isNewCycleButtonDisabled} onCycleChange={handleCycleChange} onNewCycle={handleNewCycle} onTitleChange={(title) => { setCycleTitle(title); setSaveStatus('unsaved'); }} onDeleteCycle={handleDeleteCycle} onResetHistory={handleResetHistory} onExportHistory={handleExportHistory} onImportHistory={handleImportHistory} workflowStep={workflowStep} disabledReason={newCycleButtonDisabledReason} saveStatus={saveStatus} />
             <ContextInputs cycleContext={cycleContext} ephemeralContext={ephemeralContext} cycleContextTokens={cycleContextTokens} ephemeralContextTokens={ephemeralContextTokens} onCycleContextChange={onCycleContextChange} onEphemeralContextChange={onEphemeralContextChange} workflowStep={workflowStep} />
@@ -22318,12 +22391,13 @@ export const viewConfig = {
 
 <file path="src/client/views/settings.view/on-message.ts">
 // src/client/views/settings.view/on-message.ts
+// Updated on: C37 (Add settings handlers)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel } from "@/common/ipc/channels.enum";
 
 export function onMessage(serverIpc: ServerPostMessageManager) {
-    const { loggerService, fileOperationService } = Services;
+    const { loggerService, fileOperationService, settingsService } = Services;
     loggerService.log("Settings view message handler initialized.");
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestReadmeContent, () => {
@@ -22332,6 +22406,15 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestChangelogContent, () => {
         fileOperationService.handleChangelogContentRequest(serverIpc);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestSettings, async () => {
+        const settings = await settingsService.getSettings();
+        serverIpc.sendToClient(ServerToClientChannel.SendSettings, { settings });
+    });
+    
+    serverIpc.onClientMessage(ClientToServerChannel.SaveSettings, (data) => {
+        settingsService.saveSettings(data.settings);
     });
 }
 </file_artifact>
@@ -22456,6 +22539,7 @@ body {
 
 <file path="src/client/views/settings.view/view.tsx">
 // src/client/views/settings.view/view.tsx
+// Updated on: C37 (Implement settings persistence)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -22463,8 +22547,7 @@ import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
 import ReactMarkdown from 'react-markdown';
 import { VscChevronDown } from 'react-icons/vsc';
-
-type ConnectionMode = 'manual' | 'demo' | 'url' | 'key';
+import { ConnectionMode, DceSettings } from '@/backend/services/settings.service';
 
 const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; initialCollapsed?: boolean }> = ({ title, children, initialCollapsed = false }) => {
     const [isCollapsed, setIsCollapsed] = React.useState(initialCollapsed);
@@ -22482,7 +22565,7 @@ const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; i
 const App = () => {
     const [readmeContent, setReadmeContent] = React.useState('Loading...');
     const [changelogContent, setChangelogContent] = React.useState('Loading...');
-    const [connectionMode, setConnectionMode] = React.useState<ConnectionMode>('manual');
+    const [settings, setSettings] = React.useState<DceSettings>({ connectionMode: 'manual' });
     const clientIpc = ClientPostMessageManager.getInstance();
 
     React.useEffect(() => {
@@ -22492,14 +22575,27 @@ const App = () => {
         clientIpc.onServerMessage(ServerToClientChannel.SendChangelogContent, ({ content }) => {
             setChangelogContent(content);
         });
+        clientIpc.onServerMessage(ServerToClientChannel.SendSettings, ({ settings: receivedSettings }) => {
+            setSettings(receivedSettings);
+        });
 
         clientIpc.sendToServer(ClientToServerChannel.RequestReadmeContent, {});
         clientIpc.sendToServer(ClientToServerChannel.RequestChangelogContent, {});
+        clientIpc.sendToServer(ClientToServerChannel.RequestSettings, {});
     }, [clientIpc]);
 
+    const handleSettingsChange = (newSettings: Partial<DceSettings>) => {
+        const updatedSettings = { ...settings, ...newSettings };
+        setSettings(updatedSettings);
+        clientIpc.sendToServer(ClientToServerChannel.SaveSettings, { settings: updatedSettings });
+    };
+
     const handleModeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setConnectionMode(event.target.value as ConnectionMode);
-        // TODO: Send IPC message to save the new setting
+        handleSettingsChange({ connectionMode: event.target.value as ConnectionMode });
+    };
+    
+    const handleApiUrlChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        handleSettingsChange({ apiUrl: event.target.value });
     };
 
     return (
@@ -22512,35 +22608,35 @@ const App = () => {
                     <div className="mode-selection-group">
                         
                         <div className="radio-option">
-                            <input type="radio" id="mode-manual" name="mode" value="manual" checked={connectionMode === 'manual'} onChange={handleModeChange} />
+                            <input type="radio" id="mode-manual" name="mode" value="manual" checked={settings.connectionMode === 'manual'} onChange={handleModeChange} />
                             <label htmlFor="mode-manual">Free Mode (Manual Copy/Paste)</label>
                             <span className="description">Use the extension by manually copying and pasting responses. No setup required.</span>
                         </div>
 
                         <div className="radio-option">
-                            <input type="radio" id="mode-demo" name="mode" value="demo" checked={connectionMode === 'demo'} onChange={handleModeChange} />
+                            <input type="radio" id="mode-demo" name="mode" value="demo" checked={settings.connectionMode === 'demo'} onChange={handleModeChange} />
                             <label htmlFor="mode-demo">Demo Mode (Local vLLM via `aiascent.game`)</label>
-                            <span className="description">Connect to a pre-configured local vLLM instance via a proxy. Requires setup from A92.</span>
+                            <span className="description">Connect to a pre-configured local vLLM instance via a proxy.</span>
                         </div>
 
                         <div className="radio-option">
-                            <input type="radio" id="mode-url" name="mode" value="url" checked={connectionMode === 'url'} onChange={handleModeChange} />
+                            <input type="radio" id="mode-url" name="mode" value="url" checked={settings.connectionMode === 'url'} onChange={handleModeChange} />
                             <label htmlFor="mode-url">API (URL)</label>
                             <span className="description">Connect to your own self-hosted OpenAI-compatible endpoint.</span>
-                            {connectionMode === 'url' && (
+                            {settings.connectionMode === 'url' && (
                                 <div className="config-inputs">
-                                    <input type="text" id="api-url" placeholder="http://localhost:8000/v1" />
+                                    <input type="text" id="api-url" placeholder="http://localhost:8000/v1" value={settings.apiUrl || ''} onChange={handleApiUrlChange} />
                                 </div>
                             )}
                         </div>
 
                         <div className="radio-option">
-                            <input type="radio" id="mode-key" name="mode" value="key" checked={connectionMode === 'key'} onChange={handleModeChange} />
+                            <input type="radio" id="mode-key" name="mode" value="key" checked={settings.connectionMode === 'key'} onChange={handleModeChange} />
                             <label htmlFor="mode-key">API (KEY)</label>
-                            <span className="description">Connect to a cloud provider using an API key.</span>
-                            {connectionMode === 'key' && (
+                            <span className="description">Connect to a cloud provider using an API key. (Coming soon)</span>
+                            {settings.connectionMode === 'key' && (
                                 <div className="config-inputs">
-                                    <input type="password" id="api-key" placeholder="sk-..." />
+                                    <input type="password" id="api-key" placeholder="sk-..." disabled />
                                 </div>
                             )}
                         </div>
@@ -22672,6 +22768,9 @@ export enum ClientToServerChannel {
     RequestGitRestore = "clientToServer.requestGitRestore",
     RequestGitStatus = "clientToServer.requestGitStatus",
     SaveLastViewedCycle = "clientToServer.saveLastViewedCycle",
+    RequestSettings = "clientToServer.requestSettings",
+    SaveSettings = "clientToServer.saveSettings",
+    RequestBatchGeneration = "clientToServer.requestBatchGeneration",
 }
 
 export enum ServerToClientChannel {
@@ -22704,14 +22803,17 @@ export enum ServerToClientChannel {
     NotifyGitOperationResult = "serverToClient.notifyGitOperationResult",
     SendGitStatus = "serverToClient.sendGitStatus",
     NotifySaveComplete = "serverToClient.notifySaveComplete",
+    SendSettings = "serverToClient.sendSettings",
+    SendBatchGenerationResult = "serverToClient.sendBatchGenerationResult",
 }
 </file_artifact>
 
 <file path="src/common/ipc/channels.type.ts">
-// Updated on: C30 (Add costState to RequestLogState)
+// Updated on: C37 (Add new channels for settings and batch generation)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
+import { DceSettings } from "@/backend/services/settings.service";
 
 export type SelectionSet = { [name: string]: string[] };
 export type ProblemCountsMap = { [path: string]: { error: number; warning: number; } };
@@ -22759,7 +22861,8 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestLastSelection ? {} :
     T extends ClientToServerChannel.SaveAutoAddState ? { enabled: boolean } :
     T extends ClientToServerChannel.VSCodeCommand ? { command: string, args?: any[] } :
-    T extends ClientToServerChannel.RequestCreatePromptFile ? { cycleTitle: string; currentCycle: number } :
+    T extends ClientToServerChannel.RequestCreatePromptFile ? { cycleTitle: string; currentCycle: number; selectedFiles: string[] } :
+    T extends ClientToServerChannel.RequestBatchGeneration ? { cycleData: PcppCycle, count: number, selectedFiles: string[] } :
     T extends ClientToServerChannel.RequestCreateCycle0Prompt ? { projectScope: string } :
     T extends ClientToServerChannel.RequestFileExistence ? { paths: string[] } :
     T extends ClientToServerChannel.RequestSyntaxHighlight ? { code: string; lang: string, id: string } :
@@ -22779,6 +22882,8 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestGitRestore ? { filesToDelete: string[] } :
     T extends ClientToServerChannel.RequestGitStatus ? {} :
     T extends ClientToServerChannel.SaveLastViewedCycle ? { cycleId: number | null } :
+    T extends ClientToServerChannel.RequestSettings ? {} :
+    T extends ClientToServerChannel.SaveSettings ? { settings: DceSettings } :
     
     T extends ServerToClientChannel.SendWorkspaceFiles ? { files: FileNode[] } :
     T extends ServerToClientChannel.SendWorkspaceTrustState ? { isTrusted: boolean } :
@@ -22806,6 +22911,8 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.NotifyGitOperationResult ? { success: boolean; message: string; } :
     T extends ServerToClientChannel.SendGitStatus ? { isClean: boolean } :
     T extends ServerToClientChannel.NotifySaveComplete ? { cycleId: number } :
+    T extends ServerToClientChannel.SendSettings ? { settings: DceSettings } :
+    T extends ServerToClientChannel.SendBatchGenerationResult ? { responses: string[] } :
     never;
 </file_artifact>
 
@@ -23891,6 +23998,16 @@ I have analyzed the comprehensive feedback from Cycle 132. There are several reg
     ],
     "main": "./dist/extension.js",
     "contributes": {
+        "configuration": {
+            "title": "Data Curation Environment",
+            "properties": {
+                "dce.connectionMode": {
+                    "type": "string",
+                    "default": "manual",
+                    "description": "The LLM connection mode (manual, demo, url, key)."
+                }
+            }
+        },
         "commands": [
             {
                 "command": "dce.saveCurrentSelection",
@@ -24023,7 +24140,8 @@ I have analyzed the comprehensive feedback from Cycle 132. There are several reg
         "xlsx": "^0.18.5",
         "mammoth": "^1.8.0",
         "diff": "^5.2.0",
-        "@types/diff": "^5.2.1"
+        "@types/diff": "^5.2.1",
+        "node-fetch": "^2.6.7"
     }
 }
 </file_artifact>
@@ -25705,81 +25823,189 @@ The DCE extension is now configured to send its API requests to your local LLM s
 # Artifact A95: DCE - LLM Connection Modes Plan
 # Date Created: C36
 # Author: AI Model & Curator
+# Updated on: C37 (Add "Generate Responses" button and streaming metrics)
 
 - **Key/Value for A0:**
-- **Description:** Outlines the plan for a multi-modal settings UI to allow users to switch between manual copy/paste, a pre-configured demo mode, and user-provided API URLs or Keys.
-- **Tags:** feature plan, settings, ui, ux, llm, configuration, api
+- **Description:** Outlines the plan for a multi-modal settings UI and the associated workflow changes, allowing users to switch between manual copy/paste, a pre-configured demo mode, and user-provided API URLs or Keys.
+- **Tags:** feature plan, settings, ui, ux, llm, configuration, api, streaming
 
 ## 1. Overview & Goal
 
-To maximize the utility and accessibility of the DCE extension, users need a flexible way to connect to different LLM backends. This plan details the implementation of a multi-modal settings UI that allows users to seamlessly switch between different connection methods, from a simple manual workflow to advanced, automated API integrations.
+To maximize the utility and accessibility of the DCE extension, users need a flexible way to connect to different LLM backends. This plan details the implementation of a multi-modal settings UI and the corresponding changes to the main workflow. This will allow users to seamlessly switch between different connection methods, from a simple manual workflow to advanced, automated API integrations.
 
-This plan refines and supersedes the original `A85. DCE - Model Card Management Plan.md` by focusing on a more user-friendly, mode-based approach rather than a complex card management system.
+This plan refines and supersedes `A85. DCE - Model Card Management Plan.md` by focusing on a more user-friendly, mode-based approach.
 
 ## 2. User Stories
 
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
-| P3-CM-01 | **Use Manual Mode** | As a new user, I want the extension to default to a "Free (Manual)" mode, so I can use the core features by copying and pasting without any setup. | - The default setting is "Free Mode". <br> - In this mode, no API calls are made, and no configuration is required. |
-| P3-CM-02 | **Use Demo Mode** | As a demo user, I want to select a "Demo Mode" that automatically connects to a pre-configured local vLLM endpoint, so I can experience the full automated workflow with minimal setup. | - A "Demo Mode" option is available. <br> - When selected, it displays the pre-configured endpoint (`https://aiascent.game/api/dce/proxy`) but does not allow editing. |
-| P3-CM-03 | **Use Custom URL** | As an advanced user running my own LLM, I want to select an "API (URL)" mode and provide my own OpenAI-compatible endpoint, so I can use my own models. | - An "API (URL)" option is available. <br> - When selected, it shows a text input field for the endpoint URL. <br> - The entered URL is saved and used for API calls. |
-| P3-CM-04 | **Use API Key** | As a user of a cloud service, I want to select an "API (KEY)" mode, choose my provider, and securely enter my API key, so I can use services like OpenAI. | - An "API (KEY)" option is available. <br> - When selected, it shows a dropdown for the provider and a secure input for the API key. <br> - The key is stored securely using VS Code's `SecretStorage`. |
+| P3-CM-01 | **Use Manual Mode** | As a new user, I want the extension to default to a "Free (Manual)" mode, so I can use the core features by copying and pasting without any setup. | - The default setting is "Free Mode". <br> - In this mode, a "Generate prompt.md" button is shown. |
+| P3-CM-02 | **Use Demo Mode** | As a demo user, I want to select a "Demo Mode" that connects to a local vLLM endpoint, so I can experience the full automated workflow. | - A "Demo Mode" option is available. <br> - When selected, the "Generate prompt.md" button is replaced with a "Generate responses" button. |
+| P3-CM-03 | **Generate Multiple Responses** | As a user in an automated mode, I want to specify how many parallel responses to generate and see them stream into the UI, so I can leverage high-throughput models. | - A number input allows me to select the number of responses. <br> - Clicking "Generate responses" sends a batch request to the configured LLM. <br> - Responses stream into the PCPP tabs and are automatically parsed on completion. |
+| P3-CM-04 | **Monitor Generation Speed** | As a user generating responses, I want to see a live "tokens per second" metric, so I have feedback on the generation performance. | - A "Tokens/sec" display appears near the "Generate responses" button during generation. <br> - It updates in real-time as token data streams in. |
+| P3-CM-05 | **Persistent Settings** | As a user, I want my selected connection mode to be saved, so I don't have to re-configure it every time I open VS Code. | - The selected connection mode and any associated URL/Key is persisted in the workspace settings. |
 
-## 3. UI/UX Design (Settings Panel)
+## 3. UI/UX Design
 
-The "Settings" section of the settings panel will be redesigned as follows:
+### 3.1. Settings Panel
+The settings panel will use radio buttons for mode selection with conditional inputs.
 
 ```
 [ Settings ]
 ----------------------------------------------------------------------
-LLM Connection Mode:
-
 (•) Free Mode (Manual Copy/Paste)
-    | Use the extension by manually copying and pasting responses.
-
 ( ) Demo Mode (Local vLLM via aiascent.game)
-    | Connects to a pre-configured, high-performance local vLLM
-    | instance via the aiascent.game proxy. Requires setup from A92.
-    | Endpoint: https://aiascent.game/api/dce/proxy
-
-( ) API (URL)
-    | Connect to your own self-hosted OpenAI-compatible endpoint.
-    |
-    | [ API Endpoint URL: http://localhost:8000/v1           ]
-
-( ) API (KEY)
-    | Connect to a cloud provider using an API key.
-    |
-    | Provider: [ OpenAI v ]
-    | API Key:  [ sk-................................... ]
-
+( ) API (URL) -> [ http://localhost:8000/v1 ]
 ----------------------------------------------------------------------
 ```
 
--   **Radio Buttons:** A group of radio buttons controls the active mode.
--   **Conditional Rendering:** The input fields for `API (URL)` and `API (KEY)` only appear when their respective modes are selected.
+### 3.2. Parallel Co-Pilot Panel
+-   The "Generate prompt.md" button will be conditionally replaced by a "Generate responses" button.
+-   A number input for `responseCount` will appear next to it.
+-   A `Tokens/sec: [value]` display will appear during generation.
 
 ## 4. Technical Implementation Plan
 
-### 4.1. Frontend (`settings.view.tsx`)
--   **State:** A new state variable, `connectionMode`, will be added to manage which radio button is selected.
--   **UI Logic:** The component will use conditional rendering (`{connectionMode === 'URL' && ...}`) to show/hide the input fields.
--   **IPC:** New IPC channels will be created to save and load these settings.
+### 4.1. Settings Persistence (New `SettingsService`)
+-   **`src/backend/services/settings.service.ts` (New):** This service will manage getting and setting the active connection mode and any associated URL. It will use `vscode.workspace.getConfiguration` to persist this data.
+-   **IPC:** New channels (`RequestSettings`, `SendSettings`, `SaveSettings`) will be created to communicate between the `settings.view.tsx` and the new service.
+-   **`settings.view.tsx`:** Will be refactored to fetch its state from and save its state to the new `SettingsService`, fixing the persistence bug.
 
-### 4.2. Backend (`SettingsService` - New)
--   A new `SettingsService` will be created to handle the persistence of these settings.
--   **Storage:**
-    -   The active `connectionMode` and the `apiUrl` will be stored in the standard VS Code workspace settings using `vscode.workspace.getConfiguration`.
-    -   The `apiKey` will be stored securely using `vscode.ExtensionContext.secrets` (the `SecretStorage` API).
--   **Methods:** The service will expose methods like `getActiveMode()`, `getApiUrl()`, `getApiKey()`, `saveSettings(...)`, etc.
+### 4.2. "Generate Responses" Workflow
+-   **`parallel-copilot.view/view.tsx`:**
+    -   Will fetch the active connection mode from the `SettingsService`.
+    -   Will conditionally render the UI elements based on the mode.
+    -   The "Generate responses" button `onClick` handler will:
+        1.  Call the `prompt.service.ts` to generate the prompt string *in memory*.
+        2.  Send a new `RequestBatchGeneration` IPC message with the prompt string and response count.
+-   **`llm.service.ts` (New):**
+    -   This new service will handle all outgoing API calls.
+    -   Its `generateBatch` method will read the settings, construct the appropriate non-streaming `fetch` request to the vLLM endpoint, and return an array of response strings.
+-   **IPC & Frontend Update:**
+    -   A `SendBatchGenerationResult` channel will return the array of responses.
+    *   The frontend handler will populate the `rawContent` of the response tabs and then trigger `parseAllTabs()`.
 
-### 4.3. Backend (`LlmService` - New)
--   A new `LlmService` will be created to handle outgoing API calls.
--   When a request is made, it will first query the `SettingsService` to determine the active mode.
--   **Logic:**
-    -   If mode is `Manual` or `Demo`, it will construct the request for the appropriate endpoint (the `aiascent.game` proxy for demo).
-    -   If mode is `URL`, it will use the user-provided URL.
-    -   If mode is `KEY`, it will retrieve the secret key and use the appropriate provider's base URL.
--   This service will contain all the `fetch` logic for making the actual API calls.
+### 4.3. Streaming & Metrics (Future Cycle)
+-   The `llm.service.ts` will be updated to handle streaming responses.
+-   New IPC channels (`StreamResponseChunk`, `StreamResponseEnd`) will be created.
+-   The frontend in `view.tsx` will be updated to handle these streaming messages, append content to the tabs in real-time, and calculate the tokens/second metric.
+</file_artifact>
+
+<file path="src/backend/services/llm.service.ts">
+// src/backend/services/llm.service.ts
+// New file in C37
+import { Services } from './services';
+import fetch from 'node-fetch';
+import { PcppCycle } from '@/common/types/pcpp.types';
+
+export class LlmService {
+    public async generateBatch(prompt: string, count: number, cycleData: PcppCycle): Promise<string[]> {
+        const settings = await Services.settingsService.getSettings();
+        let endpointUrl = '';
+
+        switch (settings.connectionMode) {
+            case 'demo':
+                endpointUrl = 'https://aiascent.game/api/dce/proxy'; // Pre-configured
+                break;
+            case 'url':
+                endpointUrl = settings.apiUrl || '';
+                break;
+            default:
+                Services.loggerService.error("Attempted to call LLM in manual mode.");
+                return [];
+        }
+
+        if (!endpointUrl) {
+            Services.loggerService.error("LLM endpoint URL is not configured.");
+            return [];
+        }
+
+        try {
+            Services.loggerService.log(`Sending batch request for ${count} responses to: ${endpointUrl}`);
+            
+            // This is a simplified example. A real implementation would need to
+            // construct a proper OpenAI-compatible request body.
+            const response = await fetch(endpointUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    // Assuming the endpoint supports a similar structure to OpenAI completions
+                    model: "local-model", // This might need to be configurable
+                    prompt: prompt,
+                    n: count,
+                    max_tokens: 4096, // A reasonable default
+                    stream: false // For this cycle, we are not streaming
+                }),
+            });
+
+            if (!response.ok) {
+                const errorBody = await response.text();
+                throw new Error(`API request failed with status ${response.status}: ${errorBody}`);
+            }
+
+            const responseData = await response.json() as any;
+            
+            // Assuming OpenAI-like response structure
+            if (responseData.choices && Array.isArray(responseData.choices)) {
+                const results = responseData.choices.map((choice: any) => choice.text || '');
+                Services.loggerService.log(`Received ${results.length} responses from LLM.`);
+                return results;
+            } else {
+                throw new Error("Invalid response structure from LLM endpoint.");
+            }
+
+        } catch (error: any) {
+            Services.loggerService.error(`Failed to generate batch responses: ${error.message}`);
+            return [];
+        }
+    }
+}
+</file_artifact>
+
+<file path="src/backend/services/settings.service.ts">
+// src/backend/services/settings.service.ts
+// New file in C37
+import * as vscode from 'vscode';
+import { getContext } from '@/extension';
+import { Services } from './services';
+
+const CONNECTION_MODE_KEY = 'dce.connectionMode';
+const API_URL_KEY = 'dce.apiUrl';
+// API_KEY would be stored in SecretStorage
+
+export type ConnectionMode = 'manual' | 'demo' | 'url' | 'key';
+
+export interface DceSettings {
+    connectionMode: ConnectionMode;
+    apiUrl?: string;
+}
+
+export class SettingsService {
+    
+    private get context(): vscode.ExtensionContext {
+        return getContext();
+    }
+
+    public async getSettings(): Promise<DceSettings> {
+        const config = vscode.workspace.getConfiguration();
+        const connectionMode = config.get<ConnectionMode>(CONNECTION_MODE_KEY, 'manual');
+        const apiUrl = config.get<string>(API_URL_KEY);
+        
+        return { connectionMode, apiUrl };
+    }
+
+    public async saveSettings(settings: DceSettings): Promise<void> {
+        const config = vscode.workspace.getConfiguration();
+        try {
+            await config.update(CONNECTION_MODE_KEY, settings.connectionMode, vscode.ConfigurationTarget.Workspace);
+            await config.update(API_URL_KEY, settings.apiUrl, vscode.ConfigurationTarget.Workspace);
+            Services.loggerService.log(`Settings saved: Mode=${settings.connectionMode}, URL=${settings.apiUrl}`);
+            vscode.window.showInformationMessage("DCE settings saved.");
+        } catch (error: any) {
+            Services.loggerService.error(`Failed to save settings: ${error.message}`);
+            vscode.window.showErrorMessage("Failed to save DCE settings.");
+        }
+    }
+}
 </file_artifact>
 
