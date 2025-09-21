@@ -64,7 +64,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestLogState, (data) => {
-        promptService.generateStateLog(data.currentState, data.costState);
+        promptService.generateStateLog(data.currentState, data.costState, serverIpc);
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestFileComparison, (data) => {

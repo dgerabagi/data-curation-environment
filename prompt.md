@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 31 - determine problem with cost calculation and update a92 based on error
+Current Cycle 32 - try to fix est cost calculation display, vllm install error, how will we encrypt traffic in transit
+Cycle 31 - determine problem with cost calculation and update a92 based on error
 Cycle 30 - vLLM instructions
 Cycle 29 - implement vllm solution to experiment with parallelization
 Cycle 28 - style the diff viewer button
@@ -730,6 +731,81 @@ No project scope defined.
 
 <M6. Cycles>
 
+<Cycle 32>
+<Cycle Context>
+okay, tahts more better logs showing that the calculation is going but that the front end isnt receiving it, please fix!
+
+okay so i installed vllm but when i went to install oss i got an error (see ephemeral)
+
+and finally, so how will we encrypt the traffic in transit from the extension to my llm? u say the endpoint url is http not https?
+
+
+
+</Cycle Context>
+<Ephemeral Context>
+[INFO] [10:10:15 PM] --- GENERATING STATE LOG ---
+[INFO] [10:10:15 PM] 
+========================= FRONTEND STATE DUMP =========================
+{
+  "FRONTEND_COST_STATE": {
+    "totalPromptTokens": 0,
+    "estimatedPromptCost": 0,
+    "costBreakdown": null
+  }
+}
+======================================================================
+[INFO] [10:10:15 PM] --- COST CALCULATION DRY RUN ---
+[INFO] [10:10:15 PM] [SelectionService] Found 280 paths in persisted state. Validating...
+[INFO] [10:10:15 PM] [SelectionService] Returning 280 valid paths.
+[INFO] [10:10:15 PM] [CostCalc] Found 280 selected files.
+[INFO] [10:10:15 PM] [CostCalc] In-memory flattened content generated (252316 tokens).
+[INFO] [10:10:16 PM] [CostCalc] Calculating breakdown:
+[INFO] [10:10:16 PM]   - M1 Artifact Schema: 48 tokens
+[INFO] [10:10:16 PM]   - M2 Cycle Overview: 32 tokens
+[INFO] [10:10:16 PM]   - M3 Interaction Schema: 3949 tokens
+[INFO] [10:10:16 PM]   - M4 Project Scope: 100 tokens
+[INFO] [10:10:16 PM]   - M5 Artifact List: 8487 tokens
+[INFO] [10:10:16 PM]   - M6 Cycles: 11939 tokens
+[INFO] [10:10:16 PM]   - M7 Flattened Repo: 252327 tokens
+[INFO] [10:10:16 PM] [CostCalc] Total Tokens: 276882, Estimated Cost: $0.6922050000000001
+[INFO] [10:10:16 PM] [CostCalc] Sending estimation to client.
+
+
+
+
+
+
+(vllm-env) PS C:\Projects\vLLM> python -m vllm.entrypoints.openai.api_server --model "unsloth/gpt-oss-20b"
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Projects\vLLM\vllm-env\Lib\site-packages\vllm\entrypoints\openai\api_server.py", line 27, in <module>
+    import uvloop
+ModuleNotFoundError: No module named 'uvloop'
+(vllm-env) PS C:\Projects\vLLM>
+</Ephemeral Context>
+<Previous Cycle 31 Summary of Actions>
+I have analyzed the three requests for this cycle. My course of action is to create a new documentation artifact with instructions for setting up vLLM, update the `CHANGELOG.md` for the new version v0.1.9, and implement the requested diagnostic logging for the cost calculation feature.
+
+First, I will create a new artifact, `A92. DCE - vLLM Setup Guide.md`, to provide clear, step-by-step instructions for installing vLLM and running a model with an OpenAI-compatible API server. This guide will address the user's primary request and enable them to leverage high-throughput inference.
+
+Next, I will update the `CHANGELOG.md` to capture the significant progress made since the last version. This includes the integration of the native VS Code diff viewer, fixes for file duplication, and more robust data loss prevention.
+
+Finally, I will address the broken cost calculation by enhancing the "Log State" feature. I will modify the backend `prompt.service.ts` to remove the redundant history dump and instead log the specific cost-related state variables received from the frontend. This will require a small change to the frontend (`view.tsx`) to include this data in the IPC message, providing the necessary information to debug the disconnect.
+
+1.  **Documentation (New Artifacts & Updates):**
+    *   Create a new artifact, **`A92. DCE - vLLM Setup Guide.md`**, to provide instructions for installing and running vLLM.
+    *   Update **`A0. DCE Master Artifact List.md`** to include the new `A92` artifact.
+    *   Update **`CHANGELOG.md`** with a new entry for version `0.1.9`, detailing the recent major features and bug fixes.
+    *   Update **`package.json`** to reflect the new version number `0.1.9`.
+
+2.  **Add Diagnostic Logging for Cost Calculation:**
+    *   **`src/common/ipc/channels.type.ts`:** Update the payload for `ClientToServerChannel.RequestLogState` to include an optional `costState` object containing `totalPromptTokens`, `estimatedPromptCost`, and `costBreakdown`.
+    *   **`src/client/views/parallel-copilot.view/view.tsx`:** In the `handleLogState` function, gather the relevant cost state variables and include them in the IPC message payload.
+    *   **`src/backend/services/prompt.service.ts`:** Refactor the `generateStateLog` method. It will no longer include the full, spammy history dump. Instead, it will receive the `costState` from the frontend and format it into a new, clear "FRONTEND COST STATE" section in the log output, making it easy to see the disconnect.
+</Previous Cycle 31 Summary of Actions>
+</Cycle 32>
+
 <Cycle 31>
 <Cycle Context>
 okay cool, ive added the log state logs please continue revealing the appropriate context such that you reveal the actual problem. currently, you only attempted to reveal that which i already reported, which was the front-end is showing 0. im asking, why is it showing 0? please discover the problem. you can do this by revealing eveyrthing relevant to the calculation when i click log state logs, then i give you the results.
@@ -738,32 +814,6 @@ next, im following the guide in a92 but got stuck trying to run the first comman
 
 
 </Cycle Context>
-<Ephemeral Context>
-[INFO] [9:35:05 PM] --- GENERATING STATE LOG ---
-[INFO] [9:35:06 PM] 
-========================= CYCLE STATE DUMP =========================
-{
-  "FRONTEND_CYCLE_STATE": {
-    "maxCycle": 125,
-    "isNewCycleButtonDisabled": true
-  },
-  "FRONTEND_COST_STATE": {
-    "totalPromptTokens": 0,
-    "estimatedPromptCost": 0,
-    "costBreakdown": null
-  }
-}
-======================================================================
-
-Windows PowerShell
-Copyright (C) Microsoft Corporation. All rights reserved.
-
-Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
-
-PS C:\Projects\vLLM> python3 -m venv vllm-env
-Python was not found; run without arguments to install from the Microsoft Store, or disable this shortcut from Settings > Apps > Advanced app settings > App execution aliases.
-PS C:\Projects\vLLM>
-</Ephemeral Context>
 <Previous Cycle 30 Summary of Actions>
 This is an ambitious and exciting request that perfectly aligns with the project's goal of creating a high-performance, AI-assisted development environment. Your vision to combine the parallel response UI of the DCE with the parallel processing power of vLLM is a powerful concept. Leveraging your existing `aiascent.game` server as a proxy is also a smart, efficient approach.
 
@@ -2841,19 +2891,19 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-21T02:40:50.455Z
+  Date Generated: 2025-09-21T03:19:49.529Z
   ---
   Total Files: 179
-  Approx. Tokens: 464776
+  Approx. Tokens: 464689
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (8404 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (8440 tokens)
 4. src\Artifacts\A0. DCE Master Artifact List.md (8368 tokens)
 5. src\client\views\parallel-copilot.view\view.scss (5499 tokens)
-6. src\backend\services\prompt.service.ts (5053 tokens)
+6. src\backend\services\prompt.service.ts (4904 tokens)
 7. src\backend\services\file-operation.service.ts (4526 tokens)
 8. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 9. src\Artifacts\A11. DCE - Regression Case Studies.md (4059 tokens)
@@ -2968,7 +3018,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 106. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
 107. src\backend\services\history.service.ts - Lines: 266 - Chars: 10521 - Tokens: 2631
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
-109. src\backend\services\prompt.service.ts - Lines: 383 - Chars: 20212 - Tokens: 5053
+109. src\backend\services\prompt.service.ts - Lines: 369 - Chars: 19614 - Tokens: 4904
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 111. src\backend\services\services.ts - Lines: 44 - Chars: 2053 - Tokens: 514
 112. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
@@ -2994,11 +3044,11 @@ This file-centric approach helps in planning and prioritizing work, especially i
 132. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 79 - Chars: 3137 - Tokens: 785
 133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
 134. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-135. src\client\views\parallel-copilot.view\on-message.ts - Lines: 120 - Chars: 5684 - Tokens: 1421
+135. src\client\views\parallel-copilot.view\on-message.ts - Lines: 120 - Chars: 5695 - Tokens: 1424
 136. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 100 - Chars: 5002 - Tokens: 1251
 137. src\client\views\parallel-copilot.view\view.scss - Lines: 979 - Chars: 21996 - Tokens: 5499
 138. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 277 - Chars: 33615 - Tokens: 8404
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 278 - Chars: 33759 - Tokens: 8440
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 17 - Chars: 762 - Tokens: 191
 142. src\client\views\settings.view\view.scss - Lines: 87 - Chars: 1767 - Tokens: 442
@@ -3038,7 +3088,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 176. src\Artifacts\A89. DCE - Phase 3 - Hosted LLM & vLLM Integration Plan.md - Lines: 62 - Chars: 5097 - Tokens: 1275
 177. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 306 - Chars: 13156 - Tokens: 3289
 178. src\Artifacts\A91. AI Ascent - Caddyfile (Reference).md - Lines: 54 - Chars: 2305 - Tokens: 577
-179. src\Artifacts\A92. DCE - vLLM Setup Guide.md - Lines: 101 - Chars: 3903 - Tokens: 976
+179. src\Artifacts\A92. DCE - vLLM Setup Guide.md - Lines: 98 - Chars: 3995 - Tokens: 999
 
 <file path="public/copilot.svg">
 <metadata>
@@ -20255,7 +20305,7 @@ export class LoggerService {
 </file_artifact>
 
 <file path="src/backend/services/prompt.service.ts">
-// Updated on: C30 (Refactor generateStateLog for cost debugging)
+// Updated on: C31 (Enhance generateStateLog for cost debugging)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -20478,31 +20528,17 @@ ${staticContext.trim()}
         }
     }
 
-    public async generateStateLog(currentState: PcppCycle, costState: any) {
+    public async generateStateLog(currentState: PcppCycle, costState: any, serverIpc: ServerPostMessageManager) {
         Services.loggerService.log("--- GENERATING STATE LOG ---");
         try {
-            const fullHistory = await Services.historyService.getFullHistory();
-            const maxCycleId = fullHistory.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0);
-            const isReadyForNextCycle = currentState.title && currentState.title.trim() !== 'New Cycle' && currentState.title.trim() !== '' && currentState.cycleContext && currentState.cycleContext.trim() !== '' && currentState.selectedResponseId;
-            const isNewCycleButtonDisabled = currentState.cycleId !== maxCycleId || !isReadyForNextCycle;
+            // Log the frontend state as it was received
+            Services.loggerService.log(`\n========================= FRONTEND STATE DUMP =========================\n${JSON.stringify({ FRONTEND_COST_STATE: costState }, null, 2)}\n======================================================================`);
+            
+            // Perform a full dry run of the cost calculation and log it
+            await this.handlePromptCostBreakdownRequest(currentState, serverIpc);
 
-            const stateDump = {
-                "FRONTEND_CYCLE_STATE": {
-                    "currentCycle": currentState.cycleId,
-                    "maxCycle": maxCycleId,
-                    "isNewCycleButtonDisabled": isNewCycleButtonDisabled,
-                },
-                "FRONTEND_COST_STATE": costState
-            };
-
-            const logMessage = `
-========================= CYCLE STATE DUMP =========================
-${JSON.stringify(stateDump, null, 2)}
-======================================================================
-`;
-            Services.loggerService.log(logMessage);
             Services.loggerService.show();
-            vscode.window.showInformationMessage("State logged to 'Data Curation Environment' output channel.");
+            vscode.window.showInformationMessage("State and cost calculation logged to 'Data Curation Environment' output channel.");
         } catch (error: any) {
             Services.loggerService.error(`Failed to generate state log: ${error.message}`);
         }
@@ -23684,7 +23720,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestLogState, (data) => {
-        promptService.generateStateLog(data.currentState, data.costState);
+        promptService.generateStateLog(data.currentState, data.costState, serverIpc);
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestFileComparison, (data) => {
@@ -24840,7 +24876,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C30 (Add costState to handleLogState)
+// Updated on: C31 (Add logging to cost estimation handler)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -24858,6 +24894,7 @@ import ResponseTabs from './components/ResponseTabs';
 import ResponsePane from './components/ResponsePane';
 import * as path from 'path-browserify';
 import WorkflowToolbar from './components/WorkflowToolbar';
+import { logger } from '@/client/utils/logger';
 
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -25032,7 +25069,7 @@ const App = () => {
     const newCycleButtonDisabledReason = React.useMemo(() => { const reasons: string[] = []; if (!cycleTitle || cycleTitle.trim() === 'New Cycle' || cycleTitle.trim() === '') reasons.push("- A cycle title is required."); if (!cycleContext || cycleContext.trim() === '') reasons.push("- Cycle context cannot be empty."); if (!selectedResponseId) reasons.push("- A response must be selected."); return reasons.join('\n'); }, [cycleTitle, cycleContext, selectedResponseId]);
 
     React.useEffect(() => { if (workflowStep === null) return; if (workflowStep === 'readyForNewCycle') return; if (workflowStep === 'awaitingGeneratePrompt') { if (isReadyForNextCycle) setWorkflowStep('awaitingGeneratePrompt'); return; } if (workflowStep === 'awaitingCycleTitle') { if (cycleTitle.trim() && cycleTitle.trim() !== 'New Cycle') { setWorkflowStep('awaitingGeneratePrompt'); } return; } if (workflowStep === 'awaitingCycleContext') { if (cycleContext.trim()) { setWorkflowStep('awaitingCycleTitle'); } return; } if (workflowStep === 'awaitingAccept') { return; } if (workflowStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestGitStatus, {}); return; } if (workflowStep === 'awaitingFileSelect') { if (selectedFilesForReplacement.size > 0) { setWorkflowStep('awaitingAccept'); } return; } if (workflowStep === 'awaitingResponseSelect') { if (selectedResponseId) { setWorkflowStep('awaitingBaseline'); } return; } if (workflowStep === 'awaitingSort') { if (isSortedByTokens) { setWorkflowStep('awaitingResponseSelect'); } return; } if (workflowStep === 'awaitingParse') { if (isParsedMode) { setWorkflowStep(isSortedByTokens ? 'awaitingResponseSelect' : 'awaitingSort'); } return; } const waitingForPaste = workflowStep?.startsWith('awaitingResponsePaste'); if (waitingForPaste) { for (let i = 1; i <= tabCount; i++) { if (!tabs[i.toString()]?.rawContent?.trim()) { setWorkflowStep(`awaitingResponsePaste_${i}`); return; } } setWorkflowStep('awaitingParse'); } }, [workflowStep, selectedFilesForReplacement, selectedResponseId, isSortedByTokens, isParsedMode, tabs, cycleContext, cycleTitle, tabCount, isReadyForNextCycle, clientIpc]);
-    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string, newMax?: number) => { setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setActiveTab(cycleData.activeTab || 1); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setWorkflowStep(cycleData.activeWorkflowStep || null); if (newMax) setMaxCycle(newMax); setSaveStatus('saved'); requestCostEstimation(); }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => { setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics)); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { if (result.success) { setWorkflowStep(prevStep => { if (prevStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => { if (cycleId === stateRef.current.currentCycle) setSaveStatus('saved'); }); clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }, [clientIpc, requestCostEstimation]);
+    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string, newMax?: number) => { setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setActiveTab(cycleData.activeTab || 1); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setWorkflowStep(cycleData.activeWorkflowStep || null); if (newMax) setMaxCycle(newMax); setSaveStatus('saved'); requestCostEstimation(); }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => { setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics)); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { logger.log(`[COST_ESTIMATION_RECEIVED] Tokens: ${totalTokens}, Cost: ${estimatedCost}`); setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { if (result.success) { setWorkflowStep(prevStep => { if (prevStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => { if (cycleId === stateRef.current.currentCycle) setSaveStatus('saved'); }); clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }, [clientIpc, requestCostEstimation]);
     React.useEffect(() => { if (isParsedMode) parseAllTabs(); }, [isParsedMode, tabs, parseAllTabs]);
     React.useEffect(() => { if (!selectedFilePath) return; const currentTabData = tabs[activeTab.toString()]; if (currentTabData?.parsedContent) { const fileExistsInTab = currentTabData.parsedContent.files.some(f => f.path === selectedFilePath); if (!fileExistsInTab) setSelectedFilePath(null); } }, [activeTab, tabs, selectedFilePath]);
 
@@ -28262,6 +28299,7 @@ www.aiascent.game {
 # Artifact A92: DCE - vLLM Setup Guide
 # Date Created: C30
 # Author: AI Model & Curator
+# Updated on: C31 (Add Windows-specific instructions)
 
 - **Key/Value for A0:**
 - **Description:** A step-by-step guide for setting up the vLLM inference server with an OpenAI-compatible API endpoint for use with the DCE.
@@ -28284,17 +28322,20 @@ This guide provides the necessary steps to install `vLLM` and run a large langua
 
 It is crucial to install `vLLM` and its dependencies in an isolated environment.
 
+**Note on Python command:** On Windows, the Python executable is often named `python`, not `python3`. If the `python3` command fails, try using `python`.
+
 **Using `venv` (Recommended):**
 ```bash
 # Navigate to your desired directory
-python3 -m venv vllm-env
-source vllm-env/bin/activate
-```
+# On Windows, use 'python'. On Linux/macOS, 'python3' is common.
+python -m venv vllm-env
 
-**Using `conda`:**
-```bash
-conda create -n vllm-env python=3.12 -y
-conda activate vllm-env
+# --- Activate the environment ---
+# On Windows (in PowerShell or CMD):
+vllm-env\Scripts\activate
+
+# On Linux/macOS (in bash/zsh):
+# source vllm-env/bin/activate
 ```
 
 ### Step 2: Install vLLM
@@ -28304,13 +28345,6 @@ With your virtual environment activated, install `vLLM` using `pip`. The library
 ```bash
 pip install vllm
 ```
-
-**Verification (Optional):**
-To ensure the installation was successful, you can run:
-```bash
-python -m vllm.entrypoints.openai.api_server --help
-```
-This should display a list of command-line arguments for the server.
 
 ### Step 3: Launch the OpenAI-Compatible Server
 

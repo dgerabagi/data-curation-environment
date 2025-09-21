@@ -1,4 +1,4 @@
-// Updated on: C30 (Refactor generateStateLog for cost debugging)
+// Updated on: C31 (Enhance generateStateLog for cost debugging)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -221,31 +221,17 @@ ${staticContext.trim()}
         }
     }
 
-    public async generateStateLog(currentState: PcppCycle, costState: any) {
+    public async generateStateLog(currentState: PcppCycle, costState: any, serverIpc: ServerPostMessageManager) {
         Services.loggerService.log("--- GENERATING STATE LOG ---");
         try {
-            const fullHistory = await Services.historyService.getFullHistory();
-            const maxCycleId = fullHistory.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0);
-            const isReadyForNextCycle = currentState.title && currentState.title.trim() !== 'New Cycle' && currentState.title.trim() !== '' && currentState.cycleContext && currentState.cycleContext.trim() !== '' && currentState.selectedResponseId;
-            const isNewCycleButtonDisabled = currentState.cycleId !== maxCycleId || !isReadyForNextCycle;
+            // Log the frontend state as it was received
+            Services.loggerService.log(`\n========================= FRONTEND STATE DUMP =========================\n${JSON.stringify({ FRONTEND_COST_STATE: costState }, null, 2)}\n======================================================================`);
+            
+            // Perform a full dry run of the cost calculation and log it
+            await this.handlePromptCostBreakdownRequest(currentState, serverIpc);
 
-            const stateDump = {
-                "FRONTEND_CYCLE_STATE": {
-                    "currentCycle": currentState.cycleId,
-                    "maxCycle": maxCycleId,
-                    "isNewCycleButtonDisabled": isNewCycleButtonDisabled,
-                },
-                "FRONTEND_COST_STATE": costState
-            };
-
-            const logMessage = `
-========================= CYCLE STATE DUMP =========================
-${JSON.stringify(stateDump, null, 2)}
-======================================================================
-`;
-            Services.loggerService.log(logMessage);
             Services.loggerService.show();
-            vscode.window.showInformationMessage("State logged to 'Data Curation Environment' output channel.");
+            vscode.window.showInformationMessage("State and cost calculation logged to 'Data Curation Environment' output channel.");
         } catch (error: any) {
             Services.loggerService.error(`Failed to generate state log: ${error.message}`);
         }
