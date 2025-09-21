@@ -1,17 +1,17 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-20T21:25:35.497Z
+  Date Generated: 2025-09-20T22:28:30.778Z
   ---
-  Total Files: 172
-  Approx. Tokens: 452780
+  Total Files: 174
+  Approx. Tokens: 457471
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
 3. src\client\views\parallel-copilot.view\view.tsx (8347 tokens)
-4. src\Artifacts\A0. DCE Master Artifact List.md (8106 tokens)
+4. src\Artifacts\A0. DCE Master Artifact List.md (8326 tokens)
 5. src\client\views\parallel-copilot.view\view.scss (5499 tokens)
 6. src\backend\services\prompt.service.ts (5237 tokens)
 7. src\backend\services\file-operation.service.ts (4526 tokens)
@@ -22,7 +22,7 @@
 <!-- Full File List -->
 1. public\copilot.svg - [Binary] Size: 445 Bytes
 2. public\spiral.svg - [Binary] Size: 459 Bytes
-3. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 476 - Chars: 32424 - Tokens: 8106
+3. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 488 - Chars: 33302 - Tokens: 8326
 4. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 5. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
 6. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
@@ -109,7 +109,7 @@
 87. src\Artifacts\A83. DCE - Universal Task Checklist for Cycle 6.md - Lines: 95 - Chars: 5172 - Tokens: 1293
 88. src\Artifacts\A84. DCE - Universal Task Checklist for Cycle 10+.md - Lines: 55 - Chars: 2541 - Tokens: 636
 89. src\Artifacts\A85. DCE - Model Card Feature Plan.md - Lines: 28 - Chars: 3060 - Tokens: 765
-90. src\Artifacts\A85. DCE - Model Card Management Plan.md - Lines: 42 - Chars: 3466 - Tokens: 867
+90. src\Artifacts\A85. DCE - Model Card Management Plan.md - Lines: 54 - Chars: 4060 - Tokens: 1015
 91. src\Artifacts\A85. DCE - Phase 2 - Model Card Management Plan.md - Lines: 48 - Chars: 4046 - Tokens: 1012
 92. src\Artifacts\A85. DCE - Phase 3 - Model Cards Feature Plan.md - Lines: 53 - Chars: 4197 - Tokens: 1050
 93. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
@@ -188,10 +188,12 @@
 166. src\Artifacts\A86. DCE - PCPP Workflow Centralization and UI Persistence Plan.md - Lines: 74 - Chars: 5931 - Tokens: 1483
 167. src\Artifacts\A76. DCE - Word Wrap Line Numbering Challenges.md - Lines: 61 - Chars: 4895 - Tokens: 1224
 168. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
-169. src\Artifacts\A87. VCPG - vLLM High-Throughput Inference Plan.md - Lines: 60 - Chars: 4433 - Tokens: 1109
-170. src\Artifacts\A88. DCE - Native Diff Integration Plan.md - Lines: 43 - Chars: 4053 - Tokens: 1014
+169. src\Artifacts\A88. DCE - Native Diff Integration Plan.md - Lines: 43 - Chars: 4053 - Tokens: 1014
+170. src\backend\providers\ResponseContentProvider.ts - Lines: 24 - Chars: 1160 - Tokens: 290
 171. src\backend\providers\ResponseContentProvider.ts - Lines: 24 - Chars: 1160 - Tokens: 290
-172. src\backend\providers\ResponseContentProvider.ts - Lines: 24 - Chars: 1160 - Tokens: 290
+172. src\Artifacts\A89. DCE - vLLM Integration and API Proxy Plan.md - Lines: 61 - Chars: 3736 - Tokens: 934
+173. src\Artifacts\A90. AI Ascent - server.ts for DCE Proxy.md - Lines: 347 - Chars: 15394 - Tokens: 3849
+174. src\Artifacts\A91. AI Ascent - Caddyfile for DCE Proxy.md - Lines: 60 - Chars: 2596 - Tokens: 649
 
 <file path="public/copilot.svg">
 <metadata>
@@ -219,7 +221,7 @@
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C22 (Add A88)
+# Updated on: C29 (Add A89, A90, A91)
 
 ## 1. Purpose
 
@@ -608,6 +610,18 @@
 ### A88. DCE - Native Diff Integration Plan
 - **Description:** A plan to integrate VS Code's native diff viewer (`vscode.diff`) for comparing AI-generated file content against the current workspace file, leveraging a TextDocumentContentProvider for in-memory content.
 - **Tags:** feature plan, ui, ux, diff, vscode api, virtual document
+
+### A89. DCE - vLLM Integration and API Proxy Plan
+- **Description:** Details the end-to-end plan for integrating the DCE with a remote vLLM instance via a secure proxy server, enabling high-throughput, parallelized AI responses.
+- **Tags:** feature plan, vllm, llm, proxy, api, integration, performance
+
+### A90. AI Ascent - server.ts for DCE Proxy
+- **Description:** A proposed, modified version of the `server.ts` file for the `aiascent.game` project, including a new API endpoint to proxy requests from the DCE to a vLLM server.
+- **Tags:** code, server, proxy, vllm, nodejs, express
+
+### A91. AI Ascent - Caddyfile for DCE Proxy
+- **Description:** A proposed version of the `Caddyfile` for the `aiascent.game` project, confirming that the existing configuration is sufficient for routing DCE proxy requests.
+- **Tags:** code, server, caddy, proxy, configuration
 
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
@@ -6159,6 +6173,7 @@ The goal of this feature is to expand the settings panel to support "Model Cards
 # Artifact A85: DCE - Model Card Management Plan
 # Date Created: C18
 # Author: AI Model & Curator
+# Updated on: C29 (Add example for remote vLLM endpoint)
 
 - **Key/Value for A0:**
 - **Description:** A plan for an enhanced settings panel where users can create and manage "model cards" to easily switch between different LLM providers and configurations.
@@ -6198,6 +6213,17 @@ The "Settings" section of the settings panel will be redesigned.
 3.  **Actions:**
     *   "Save" and "Delete" buttons will be present in the form view.
     *   A visual indicator (e.g., a star icon or a "✓ Active" badge) will show which card is currently active.
+
+## 4. Example Model Card for Remote vLLM Proxy
+
+This example shows how a user would configure a model card to connect to the `aiascent.game` proxy server, which in turn connects to a vLLM instance.
+
+-   **Display Name:** `AI Ascent vLLM (Remote)`
+-   **Provider Type:** `OpenAI-Compatible`
+-   **API Endpoint URL:** `https://aiascent.game/api/dce/proxy`
+-   **API Key:** (Leave blank, as the proxy server manages authentication)
+-   **Model Name:** `unsloth/gpt-oss-20b`
+-   **Context Window Size:** `131072` (or as configured in vLLM)
 </file_artifact>
 
 <file path="src/Artifacts/A85. DCE - Phase 2 - Model Card Management Plan.md">
@@ -23750,7 +23776,7 @@ I have analyzed the comprehensive feedback from Cycle 132. There are several reg
     "publisher": "DCE-Developer",
     "displayName": "Data Curation Environment",
     "description": "A VS Code extension for curating context for Large Language Models.",
-    "version": "0.1.2",
+    "version": "0.1.9",
     "repository": {
         "type": "git",
         "url": "https://github.com/dgerabagi/data-curation-environment.git"
@@ -24320,69 +24346,6 @@ const WorkflowToolbar: React.FC<WorkflowToolbarProps> = ({
 export default WorkflowToolbar;
 </file_artifact>
 
-<file path="src/Artifacts/A87. VCPG - vLLM High-Throughput Inference Plan.md">
-# Artifact A87: VCPG - vLLM High-Throughput Inference Plan
-
-# Date Created: C78
-# Author: AI Model
-
-- **Key/Value for A0:**
-- **Description:** A research and planning document analyzing the potential of using vLLM for high-throughput, low-latency inference for JANE, particularly for batched tool calling.
-- **Tags:** guide, research, planning, ai, jane, llm, vllm, inference, performance
-
-## 1. Vision & Goal
-
-The goal is to investigate and plan the migration of the VCPG's AI inference backend from the current LM Studio setup to a more performant and scalable solution using **vLLM**. As described by the curator's research, vLLM offers significant performance gains through techniques like continuous batching, which could enable more advanced AI capabilities, such as near-real-time analysis of multiple data streams or providing concurrent, low-latency AI assistance to every user.
-
-## 2. Analysis of Curator's Research
-
-The provided Reddit post highlights several key advantages of vLLM, particularly with the `gpt-oss-20b` model:
--   **High Throughput:** The demonstration of 10,000 tokens/second on a single 4090 GPU is a massive performance increase.
--   **Continuous Batching:** vLLM's core innovation is its ability to dynamically batch incoming requests. This is highly efficient for a multi-user environment like VCPG, where many users might be querying JANE simultaneously. Instead of processing requests one-by-one, vLLM can process them in parallel batches.
--   **Low Latency:** The post mentions sub-100ms time-to-first-token (TTFT), which is critical for a responsive user experience.
--   **Efficient VRAM Usage:** The claim of running 100 agents, each with a large context window, on a single 24GB GPU suggests highly efficient memory management.
-
-The concept of "one vLLM per user" is likely a misunderstanding of the technology. The power of vLLM comes from a *single* instance serving *many* users concurrently through batching, not from running many instances.
-
-## 3. Proposed Architecture
-
-The plan is to replace the LM Studio API endpoint with a self-hosted, OpenAI-compatible server powered by vLLM.
-
-```
-+--------------------------+      +---------------------------+      +----------------------+
-|   VCPG Frontend (Client) |----->|   VCPG Backend (NestJS)   |----->|   vLLM Server (Python) |
-| (Asks JANE a question)   |      | (Acts as a secure proxy)  |      | (Hosts gpt-oss-20b)    |
-+--------------------------+      +---------------------------+      +----------------------+
-```
-
-### 3.1. vLLM Server Setup
-
--   **Deployment:** The vLLM server will be deployed as a dedicated Python application, likely within a Docker container on the AI Services Host (192.168.1.85).
--   **Model:** It will be configured to serve the `unsloth/gpt-oss-20b` model.
--   **Interface:** vLLM provides a built-in OpenAI-compatible server. This is critical, as it means our NestJS backend (`ai.service.ts`) will require minimal changes to its `fetch` logic—it will simply point to the new vLLM server URL.
-
-### 3.2. VCPG Backend Integration
-
--   The `LLM_API_URL` environment variable will be updated to point to the new vLLM server's endpoint.
--   The backend will continue to be responsible for prompt engineering, context injection (RAG), and state management. The backend sends the final prompt to vLLM; vLLM handles the high-speed inference.
-
-## 4. Implementation Plan (Future Cycle)
-
-1.  **Setup vLLM Server:**
-    *   Install vLLM and its dependencies on the AI Services Host.
-    *   Write a Python script to initialize the `LLM` engine and start the OpenAI-compatible server, loading the `gpt-oss-20b` model.
-    *   Containerize this setup using Docker for easy deployment and management.
-2.  **Test vLLM Endpoint:**
-    *   Directly test the new vLLM server using `curl` or a simple client to ensure it's responding correctly to OpenAI-compatible requests.
-3.  **Update VCPG Backend:**
-    *   Change the `LLM_API_URL` in the `.env` file to point to the vLLM server.
-    *   Test the full loop from the VCPG client, through the NestJS backend, to the vLLM server.
-4.  **Performance Benchmarking:**
-    *   Once integrated, conduct performance tests to measure the improvement in response time and throughput compared to the LM Studio setup.
-
-This migration promises to significantly enhance JANE's performance and scalability, paving the way for more complex and responsive AI-driven features in the future.
-</file_artifact>
-
 <file path="src/Artifacts/A88. DCE - Native Diff Integration Plan.md">
 # Artifact A88: DCE - Native Diff Integration Plan
 # Date Created: C22
@@ -24480,6 +24443,483 @@ export class ResponseContentProvider implements vscode.TextDocumentContentProvid
         // Notify VS Code that the content for this URI has changed (or is now available)
         this.onDidChangeEmitter.fire(uri);
     }
+}
+</file_artifact>
+
+<file path="src/Artifacts/A89. DCE - vLLM Integration and API Proxy Plan.md">
+# Artifact A89: DCE - vLLM Integration and API Proxy Plan
+# Date Created: C29
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** Details the end-to-end plan for integrating the DCE with a remote vLLM instance via a secure proxy server, enabling high-throughput, parallelized AI responses.
+- **Tags:** feature plan, vllm, llm, proxy, api, integration, performance
+
+## 1. Vision & Goal
+
+The goal of this integration is to unlock a new level of performance for the Data Curation Environment (DCE) by connecting its parallel response UI to a high-throughput vLLM backend. This will enable users to generate multiple, simultaneous AI responses with extremely low latency, dramatically accelerating the iterative development workflow.
+
+To achieve this securely and flexibly, we will use the curator's existing `aiascent.game` server as a proxy, which will receive requests from the DCE extension and forward them to a dedicated vLLM instance.
+
+## 2. End-to-End Architecture
+
+The data will flow through three distinct components:
+
+```
++---------------+      +---------------------------+      +----------------------+
+| DCE Extension |----->|   aiascent.game (Proxy)   |----->|   vLLM Server        |
+| (VS Code)     |      | (Node.js/Express Server)  |      | (Python Instance)    |
++---------------+      +---------------------------+      +----------------------+
+```
+
+1.  **DCE Extension (The Client):**
+    *   The user will configure a "Model Card" in the DCE settings pointing to the proxy server's endpoint: `https://aiascent.game/api/dce/proxy`.
+    *   When the user sends a prompt, the extension will make a `POST` request to this endpoint, sending the prompt data in the request body.
+    *   It will be configured to handle a streaming response.
+
+2.  **aiascent.game (The Proxy Server):**
+    *   This server acts as a secure intermediary.
+    *   A new API endpoint, `/api/dce/proxy`, will be added to `server.ts`.
+    *   This endpoint will receive the request from the DCE extension.
+    *   It will then create a new request to the internal vLLM server, whose address will be stored in an environment variable (e.g., `VLLM_URL=http://localhost:8000`).
+    *   It will stream the response from the vLLM server back to the DCE extension client.
+
+3.  **vLLM Server (The Inference Engine):**
+    *   This is a dedicated Python process running the vLLM library.
+    *   It will be configured to serve a specific model (e.g., `unsloth/gpt-oss-20b`) and will expose an OpenAI-compatible API endpoint.
+    *   Its primary job is to handle the computationally intensive task of model inference with high efficiency through continuous batching.
+
+## 3. Implementation Details
+
+### 3.1. `server.ts` Modifications
+A new route will be added to handle the proxy request. This route will use `node-fetch` or a similar library to make a server-to-server request to the vLLM instance and pipe the streaming response back.
+
+**See Artifact `A90` for the proposed code.**
+
+### 3.2. `Caddyfile` Configuration
+The existing `Caddyfile` is already configured to reverse proxy all traffic to the Node.js server on port 3001. This configuration is sufficient and automatically handles HTTPS termination and header forwarding, so no changes are required.
+
+**See Artifact `A91` for the full file and analysis.**
+
+### 3.3. DCE Extension Configuration
+The user will configure the connection in the DCE settings panel as follows:
+-   **Model Card Name:** `Remote vLLM via AI Ascent`
+-   **Endpoint URL:** `https://aiascent.game/api/dce/proxy`
+-   **API Key:** (None required, as the proxy handles authentication if needed)
+
+This architecture provides a secure, scalable, and highly performant solution for integrating the DCE with vLLM.
+</file_artifact>
+
+<file path="src/Artifacts/A90. AI Ascent - server.ts for DCE Proxy.md">
+# Artifact A90: AI Ascent - server.ts for DCE Proxy
+# Date Created: C29
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A proposed, modified version of the `server.ts` file for the `aiascent.game` project, including a new API endpoint to proxy requests from the DCE to a vLLM server.
+- **Tags:** code, server, proxy, vllm, nodejs, express
+
+## 1. Overview
+
+This artifact contains the proposed source code for the `server.ts` file from your `aiascent.game` project. The key addition is a new API endpoint, `/api/dce/llm-proxy`, designed to securely receive requests from the DCE extension and stream responses from a backend vLLM instance.
+
+## 2. Proposed Changes
+
+1.  **New Dependency:** The `node-fetch` library will be used to make the server-to-server request to the vLLM instance.
+2.  **New Environment Variable:** A new variable, `VLLM_URL`, will be added to the `.env` file to specify the address of the vLLM server (e.g., `VLLM_URL=http://localhost:8000/v1/chat/completions`).
+3.  **New API Route:** The `app.post('/api/dce/llm-proxy', ...)` route is added.
+    *   It receives the prompt and other parameters from the DCE extension.
+    *   It constructs a new request body in the OpenAI format that vLLM expects.
+    *   It makes a `fetch` call to the `VLLM_URL`.
+    *   Crucially, it pipes the `ReadableStream` from the vLLM response directly back to the client's response object, enabling efficient, low-latency streaming.
+    *   It includes error handling for cases where the vLLM server is unreachable.
+
+## 3. Full `server.ts` Code with Proposed Additions
+
+```typescript
+// Updated on: C1384 (Correct import path for generateSpeech from llmService.)
+// Updated on: C1383 (Add /api/tts/generate route handler.)
+// Updated on: C1355 (Add /api/report/vote route handler.)
+// PROPOSED UPDATE: C29 (DCE - Add /api/dce/llm-proxy route)
+import dotenv from 'dotenv';
+dotenv.config();
+
+import express from 'express';
+import http from 'http';
+import { Server as SocketIOServer } from 'socket.io';
+import NextAuth from 'next-auth';
+import { authOptions } from './pages/api/auth/[...nextauth]';
+import cors from 'cors';
+import { logInfo, logError, logWarn } from './logger';
+import cookieParser from 'cookie-parser';
+import path from 'path';
+import fs from 'fs';
+import { type PlayerDirection, type PlayerProfile, type PoetryBattleChatbotData } from './state/gameStoreTypes';
+import type { Founder } from './state';
+import { CompetitionSystem } from './game/systems/CompetitionSystem';
+import { PvpSystem } from './game/systems/PvpSystem';
+import { PoetryBattleSystem } from './game/systems/PoetryBattleSystem';
+import { handleAscentiaStream, handleAscentiaWelcome, loadAscentiaKnowledgeBase, loadReportKnowledgeBase, handleReportAscentiaStream } from './server/api/ascentiaHandler';
+import { handlePlayerProductStream, handlePlayerProductRequest, generateSpeech } from './server/llmService';
+import updateProfileHandler from './server/api/userProfileHandler';
+import { handleReportVote } from './server/api/reportHandler';
+import threadsHandler from './pages/api/bbs/threads';
+import postsHandler from './pages/api/bbs/posts';
+import voteHandler from './pages/api/bbs/vote';
+import tagsHandler from './pages/api/bbs/tags';
+import leaderboardHandler from './pages/api/leaderboard';
+import leaderboardUpdateHandler from './pages/api/leaderboard/update';
+import playersListHandler from './pages/api/players/list';
+import playerProfileHandler from './pages/api/players/[userId]';
+import prisma from './lib/prisma';
+import { Readable } from 'stream';
+import fetch from 'node-fetch'; // NEW: Added for proxying
+
+const app = express();
+const server = http.createServer(app);
+const port = process.env.PORT || 3001;
+const isProduction = process.env.NODE_ENV === 'production';
+
+let clientOrigin = 'http://localhost:8867';
+if (process.env.NEXTAUTH_URL) {
+    try {
+        const url = new URL(process.env.NEXTAUTH_URL);
+        clientOrigin = url.origin;
+    } catch (e) {
+        logError('[SERVER]', `Invalid NEXTAUTH_URL format: ${process.env.NEXTAUTH_URL}. Falling back to default localhost.`);
+    }
+} else {
+    logWarn('[SERVER]', 'NEXTAUTH_URL environment variable is not set. CORS may fail in production.');
+}
+
+logInfo('[SERVER]', `Server starting... Client Origin for CORS: ${clientOrigin}, Production: ${isProduction}`);
+
+// Instantiate systems
+const competitionSystem = new CompetitionSystem();
+const io = new SocketIOServer(server, {
+    path: "/api/socket.io",
+    cors: {
+        origin: clientOrigin,
+        methods: ["GET", "POST"]
+    },
+    connectTimeout: 90000,
+    pingTimeout: 90000,
+    pingInterval: 25000,
+});
+const pvpSystem = new PvpSystem(competitionSystem, io);
+const poetryBattleSystem = new PoetryBattleSystem(io);
+(global as any).world = { poetryBattleSystem };
+
+app.use(cors({
+    origin: [clientOrigin, 'vscode-webview://*'], // NEW: Allow requests from VS Code webviews
+    credentials: true,
+}));
+
+logInfo('[SERVER]', 'Socket.IO server initialized.');
+
+export interface PlayerState {
+    id: string; // socket.id
+    userId: string;
+    x: number;
+    y: number;
+    direction: PlayerDirection;
+    isMoving: boolean;
+    displayName: string;
+    founderKey: Founder;
+    countryCode: string | null;
+}
+const players: Record<string, PlayerState> = {};
+
+// --- Socket.IO Connection Handling ---
+// ... (existing socket.io logic remains unchanged) ...
+io.on('connection', (socket) => {
+    logInfo('[SOCKET.IO]', `Player connected: ${socket.id}`);
+    
+    (socket as any).playerState = {};
+
+    socket.on('identify', (data) => {
+        logInfo('[SOCKET.IO]', `Player identified: ${socket.id} as ${data.displayName} (User ID: ${data.userId})`);
+        const playerState: PlayerState = {
+            id: socket.id,
+            userId: data.userId,
+            x: data.x,
+            y: data.y,
+            direction: data.direction,
+            isMoving: false,
+            displayName: data.displayName,
+            founderKey: data.founderKey,
+            countryCode: data.countryCode,
+        };
+        players[socket.id] = playerState;
+        (socket as any).playerState = playerState;
+
+        socket.emit('playersUpdate', Object.values(players));
+        socket.broadcast.emit('playerJoined', players[socket.id]);
+        pvpSystem.handleRejoin(data.userId, socket.id);
+    });
+
+    socket.on('playerMove', (data) => {
+        if (players[socket.id]) {
+            players[socket.id] = { ...players[socket.id], ...data };
+            socket.broadcast.emit('playerMoved', players[socket.id]);
+        }
+    });
+
+    // --- Delegate Handlers ---
+    socket.on('get_ascentia_welcome', (payload) => handleAscentiaWelcome(socket, players, payload));
+    socket.on('start_ascentia_stream', (payload) => handleAscentiaStream(io, socket, players, payload));
+    socket.on('start_report_ascentia_stream', (payload) => handleReportAscentiaStream(io, socket, players, payload));
+    socket.on('start_chatbot_stream', (payload) => handlePlayerProductStream(socket, players, payload));
+
+    // --- PvP Handlers (Delegated to PvpSystem) ---
+    socket.on('send_pvp_challenge', (payload) => pvpSystem.handleChallenge(socket, players, payload));
+    socket.on('accept_pvp_challenge', (payload) => pvpSystem.handleAcceptChallenge(socket, players, payload));
+    socket.on('decline_pvp_challenge', (payload) => pvpSystem.handleDeclineChallenge(socket, players, payload));
+    socket.on('claim_pvp_rewards', (payload) => pvpSystem.claimRewards(players[socket.id]?.userId, payload.matchId));
+    socket.on('change_pvp_speed', (payload) => pvpSystem.handleChangeSpeed(players[socket.id]?.userId, payload.matchId, payload.requestedSpeed));
+    
+    socket.on('send_poetry_battle_challenge', (payload) => {
+        const challenger = players[socket.id];
+        const target = players[payload.targetSocketId];
+        logInfo('[[SERVER]]', `Received 'send_poetry_battle_challenge' from ${challenger?.displayName ?? 'Unknown'} to ${target?.displayName ?? 'Unknown'} (socketId: ${payload.targetSocketId})`);
+        pvpSystem.handlePoetryBattleChallenge(socket, players, payload);
+    });
+    socket.on('accept_poetry_battle_challenge', (payload) => pvpSystem.handleAcceptPoetryBattleChallenge(socket, players, payload));
+    socket.on('decline_poetry_battle_challenge', (payload) => pvpSystem.handleDeclinePoetryBattleChallenge(socket, players, payload));
+    socket.on('poetry_battle_submit_move', (payload) => poetryBattleSystem.handlePlayerMove(socket, payload));
+    
+    socket.on('submit_poetry_chatbot_data', (payload: { matchId: string, chatbotData: PoetryBattleChatbotData | null }) => {
+        pvpSystem.handleSubmitPoetryChatbotData(socket, players, payload);
+    });
+
+    socket.on('send_pvp_match_message', async (payload) => {
+        const logPrefix = '[SocketHandler:send_pvp_match_message]';
+        const senderState = players[socket.id];
+        if (!senderState) {
+            logWarn(logPrefix, `Received message from unidentified socket ${socket.id}`);
+            return;
+        }
+
+        try {
+            const senderDb = await prisma.leaderboardEntry.findUnique({
+                where: { userId: senderState.userId },
+                include: { user: { select: { displayName: true, countryCode: true } } }
+            });
+
+            if (!senderDb || !senderDb.user) {
+                logError(logPrefix, `Could not find DB entry for sender ${senderState.userId}`);
+                return;
+            }
+            
+            const senderProfile: PlayerProfile = {
+                userId: senderState.userId,
+                displayName: senderDb.user.displayName ?? 'Player',
+                companyName: senderDb.companyName ?? 'Company',
+                agentName: senderDb.gameAiAgentName ?? 'Agent',
+                elo: senderDb.highestGameAIElo,
+                countryCode: senderDb.user.countryCode,
+                socketId: senderState.id,
+            };
+            
+            pvpSystem.handleMatchChatMessage(senderState.userId, payload.matchId, payload.message, senderProfile);
+        } catch (error) {
+            logError(logPrefix, `Error constructing sender profile for chat message.`, error);
+        }
+    });
+
+    socket.on('sendMessage', (payload) => pvpSystem.handleLobbyChatMessage(io, socket, players, payload));
+    
+    socket.on('disconnect', (reason) => {
+        logInfo('[SOCKET.IO]', `Player disconnected: ${socket.id}. Reason: ${reason}`);
+        pvpSystem.handleDisconnect(socket.id, players);
+        delete players[socket.id];
+        io.emit('playerLeft', { id: socket.id });
+    });
+});
+
+// --- PvpSystem Global Timer ---
+setInterval(() => {
+    pvpSystem.tickMatches(1); // Tick every 1 second
+}, 1000);
+
+// --- Middleware and API Routes ---
+app.use(cookieParser());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use((req, res, next) => {
+    (req as any).io = io;
+    (req as any).players = players;
+    next();
+});
+
+app.all('/api/auth/*', (req, res) => {
+    if (!(req.query as any).nextauth) {
+      const nextauth = req.path.split('/').slice(3);
+      (req.query as any).nextauth = nextauth;
+      logInfo('[SERVER:Auth]', `Manually setting req.query.nextauth to:`, nextauth);
+    }
+    return NextAuth(req as any, res as any, authOptions);
+});
+
+// --- API Routes ---
+app.get('/api/bbs/threads', (req, res) => threadsHandler(req as any, res as any));
+app.post('/api/bbs/threads', (req, res) => threadsHandler(req as any, res as any));
+app.put('/api/bbs/threads', (req, res) => threadsHandler(req as any, res as any));
+app.delete('/api/bbs/threads', (req, res) => threadsHandler(req as any, res as any));
+app.get('/api/bbs/posts', (req, res) => postsHandler(req as any, res as any));
+app.post('/api/bbs/posts', (req, res) => postsHandler(req as any, res as any));
+app.post('/api/bbs/vote', (req, res) => voteHandler(req as any, res as any));
+app.get('/api/bbs/tags', (req, res) => tagsHandler(req as any, res as any));
+app.get('/api/leaderboard', (req, res) => leaderboardHandler(req as any, res as any));
+app.post('/api/leaderboard/update', (req, res) => leaderboardUpdateHandler(req as any, res as any));
+app.get('/api/players/list', (req, res) => playersListHandler(req as any, res as any));
+app.get('/api/players/:userId', (req, res) => playerProfileHandler(req as any, res as any));
+app.post('/api/user/updateProfile', (req, res) => updateProfileHandler(req as any, res as any));
+app.post('/api/llm/proxy', (req, res) => handlePlayerProductRequest(req as any, res as any));
+app.post('/api/report/vote', (req, res) => handleReportVote(req as any, res as any));
+
+// NEW: DCE LLM Proxy Route
+app.post('/api/dce/llm-proxy', async (req, res) => {
+    const vllmUrl = process.env.VLLM_URL;
+    if (!vllmUrl) {
+        logError('[DCE Proxy]', 'VLLM_URL environment variable is not set.');
+        return res.status(500).send('vLLM endpoint is not configured on the server.');
+    }
+
+    try {
+        logInfo('[DCE Proxy]', `Forwarding request to vLLM at ${vllmUrl}`);
+        
+        const vllmResponse = await fetch(vllmUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                // Add any necessary authorization headers for vLLM here
+            },
+            body: JSON.stringify({
+                ...req.body, // Forward the body from the DCE extension
+                stream: true, // Ensure we request a stream
+            }),
+        });
+
+        if (!vllmResponse.ok) {
+            const errorBody = await vllmResponse.text();
+            logError('[DCE Proxy]', `vLLM server returned an error: ${vllmResponse.status} ${vllmResponse.statusText}`, errorBody);
+            return res.status(vllmResponse.status).send(errorBody);
+        }
+        
+        res.setHeader('Content-Type', 'text/event-stream');
+        res.setHeader('Cache-Control', 'no-cache');
+        res.setHeader('Connection', 'keep-alive');
+
+        // Pipe the stream from vLLM directly to the client response
+        vllmResponse.body.pipe(res);
+
+    } catch (error) {
+        logError('[DCE Proxy]', 'Error proxying request to vLLM', error);
+        res.status(500).send('Internal server error while contacting the vLLM service.');
+    }
+});
+
+
+// NEW: TTS Proxy Route
+app.post('/api/tts/generate', async (req, res) => {
+    // ... (existing TTS logic remains unchanged) ...
+});
+
+
+// --- Static File Serving (Production Only) ---
+// ... (existing static file logic remains unchanged) ...
+if (isProduction) {
+    const buildPath = path.join(__dirname);
+    logInfo('[SERVER]', `Production mode detected. Serving static files from: ${buildPath}`);
+    app.use(express.static(buildPath));
+
+    app.get('*', (req, res) => {
+        const indexPath = path.join(buildPath, 'index.html');
+        if (fs.existsSync(indexPath)) {
+            res.sendFile(indexPath);
+        } else {
+            res.status(404).send(`'index.html' not found.`);
+        }
+    });
+}
+
+// --- Server Startup ---
+server.listen(port, () => {
+    logInfo('[SERVER]', `Server listening on http://localhost:${port}`);
+    const publicPath = isProduction ? __dirname : path.join(__dirname, '..', 'public');
+    loadAscentiaKnowledgeBase(publicPath);
+    loadReportKnowledgeBase(publicPath);
+});
+
+process.on('SIGINT', () => {
+    logInfo('[SERVER]', 'Shutting down...');
+    io.close();
+    server.close(() => process.exit(0));
+});
+</file_artifact>
+
+<file path="src/Artifacts/A91. AI Ascent - Caddyfile for DCE Proxy.md">
+# Artifact A91: AI Ascent - Caddyfile for DCE Proxy
+# Date Created: C29
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A proposed version of the `Caddyfile` for the `aiascent.game` project, confirming that the existing configuration is sufficient for routing DCE proxy requests.
+- **Tags:** code, server, caddy, proxy, configuration
+
+## 1. Overview
+
+This artifact contains the `Caddyfile` from your `aiascent.game` project. Its purpose is to analyze whether any changes are needed to support the new `/api/dce/llm-proxy` endpoint that will be added to `server.ts`.
+
+## 2. Analysis and Conclusion
+
+**No changes are required.**
+
+The existing `Caddyfile` is already perfectly configured to support this new feature. The `reverse_proxy localhost:3001` directive acts as a "catch-all," forwarding *all* incoming requests for `aiascent.game` (including any new API routes like `/api/dce/llm-proxy`) to your Node.js server running on port 3001.
+
+The `header_up` directives are also correctly configured to handle WebSocket connections, which, while not used by this specific HTTP proxy route, are essential for the rest of your application and demonstrate a robust setup.
+
+## 3. Full `Caddyfile` Code (No Changes Needed)
+
+```caddy
+# Artifact 146: Caddyfile (Production)
+# Date Created: Cycle 1188
+# Author: AI Model
+# Updated on: C1268 (Refactor for production static file serving.)
+
+# This Caddyfile provides a robust configuration for running AI Ascent in a production
+# environment. It automatically handles HTTPS, serves the static client application,
+# and correctly routes API and WebSocket traffic to the backend Node.js server.
+
+aiascent.game {
+    # Caddy will automatically provision and renew a free SSL certificate from Let's Encrypt.
+    
+    # Enable gzip and zstd compression for better performance.
+    encode zstd gzip
+
+    # Log all requests and errors.
+    log {
+        output file aiascent_caddy.log
+    }
+
+    # Reverse proxy ALL incoming requests to the backend Node.js server,
+    # which is now responsible for handling API, WebSockets, and serving static files.
+    # The `header_up` directives ensure WebSocket connections can be established correctly.
+    reverse_proxy localhost:3001 {
+        header_up Host {host}
+        header_up X-Real-IP {remote_ip}
+        header_up X-Forwarded-For {remote_ip}
+        header_up X-Forwarded-Proto {scheme}
+        header_up Connection {>Connection}
+        header_up Upgrade {>Upgrade}
+    }
+}
+
+# Optional: Redirect www to the main domain
+www.aiascent.game {
+    redir https://aiascent.game{uri} permanent
 }
 </file_artifact>
 
