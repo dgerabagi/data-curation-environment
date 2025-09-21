@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 36 - the llm in vllm responded, ready for next steps
+Current Cycle 37 - continue developing vllm integration solution
+Cycle 36 - the llm in vllm responded, ready for next steps
 Cycle 35 - started server process with vllm and oss, 404 with localhost:8000, but that was shown in logs, whats next
 Cycle 34 - winloop installed, still same error
 Cycle 33 - cost calc fixed, now uvloop install error
@@ -242,7 +243,7 @@ No project scope defined.
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C35 (Add A94)
+# Updated on: C36 (Add A95)
 
 ## 1. Purpose
 
@@ -504,7 +505,7 @@ No project scope defined.
 - **Description:** Details the plan to enhance the integrated diff viewer with background coloring for changes and WinMerge-like navigation controls to jump between differences.
 - **Tags:** feature plan, phase 2, ui, ux, diff, navigation, side-by-side
 
-### A57. DCE - Phase 2 - Cycle Management Features
+### A57. DCE - Phase 2 - Cycle Management Plan
 - **Description:** Details the plan for adding critical cycle management features to the Parallel Co-Pilot panel, including deleting the current cycle and resetting the entire history.
 - **Tags:** feature plan, phase 2, ui, ux, history, cycle management
 
@@ -656,6 +657,10 @@ No project scope defined.
 - **Description:** A step-by-step guide on how to configure the DCE extension to use a local LLM with an OpenAI-compatible API.
 - **Tags:** guide, setup, llm, vllm, model card, configuration, local
 
+### A95. DCE - LLM Connection Modes Plan
+- **Description:** Outlines the plan for a multi-modal settings UI to allow users to switch between manual copy/paste, a pre-configured demo mode, and user-provided API URLs or Keys.
+- **Tags:** feature plan, settings, ui, ux, llm, configuration, api
+
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
 - **Tags:** history, log, development process, cycles
@@ -743,6 +748,34 @@ No project scope defined.
 
 <M6. Cycles>
 
+<Cycle 37>
+<Cycle Context>
+nice! okay now... i can see the options now on the settings but it wrote requires setup from a92, im not sure what you mean, i had already setup everything that i was instructed to set up in a92. what else is there to do from that artifact? the last step is to receive a successful json response which i have.
+
+now it is a matter of, if the user has the `Demo Mode` selected (note: currently, the selection is not persistent, if i select demo mode then switch my view away in vs code and back to the settings, my selection is back on `Free Mode`) then instead of having a `Generate prompt.md` button, the user will instead have a `Generate responses` button. this button will still generate the prompt like the original button, but then it will send it in batch for as many responses as the user has chosen to our vllm. then, the responses should stream in to the pcpp panes response panels and get auto-parsed.
+
+i would also like an incoming tokens per second display. it can be up near where the new `Generate Responses` button is located.
+</Cycle Context>
+<Previous Cycle 36 Summary of Actions>
+Excellent progress! The server is running correctly, and the `404 Not Found` error you're seeing in the browser is completely normal and expected. That error confirms the server is up; it just doesn't have a webpage to show at the root URL. The next step is to verify that the API endpoint is working correctly and then connect your DCE extension to it.
+
+My course of action is to provide a definitive way to test the API using a `curl` command and then create a new, clear guide (`A94`) on how to configure the DCE extension to connect to this local server. This will bridge the final gap between your running vLLM instance and your development environment.
+
+1.  **Update `A92. DCE - vLLM Setup Guide.md`:** I will add a new section to the end of this guide to explain how to verify that the API server is functional.
+    *   **New Section: "Step 7: Verifying the API Endpoint"**: This section will explain that the `404` error is expected. It will provide a `curl` command that you can run from your WSL terminal to send a test prompt to the server's `completions` endpoint. A successful JSON response from this command will prove the server is working perfectly.
+
+2.  **Create New Guide (`A94`):** I will create a new artifact, **`A94. DCE - Connecting to a Local LLM Guide.md`**, to provide clear, step-by-step instructions for the final connection phase. This guide will:
+    *   Explain how to use the "Model Card" feature in the DCE settings, referencing `A85`.
+    *   Provide a concrete example of the Model Card configuration needed to connect to your local vLLM instance, specifying the correct API endpoint URL (`http://localhost:8000/v1`).
+    *   Clarify that if your WSL instance is on a different machine on your network, you should use that machine's IP address instead of `localhost`.
+    *   Explain how to set this new card as the "active" model for the extension.
+
+3.  **Update `A92` to Link to the New Guide:** I will add a final "Step 8" to `A92` that directs you to the new `A94` guide for the final step of connecting the extension.
+
+4.  **Update Master Artifact List (`A0`):** I will add the new `A94` artifact to our master list.
+</Previous Cycle 36 Summary of Actions>
+</Cycle 37>
+
 <Cycle 36>
 <Cycle Context>
 okay nice, so i got the response from the llm (see ephemeral). im looking at a94 and its close, but here are my thoughts after reviewing it:
@@ -753,19 +786,8 @@ here is my plan... i want to make a free/demo version of the extension which, wh
 our demo mode will use batch processing for as many number of responses the user requests. 
 
 then there will be two additional options, one being API (URL) and the second being API (KEY). the API (URL) is for if the user wants to use their own hosted AI, and then the API (KEY) is for folks who are using like the openai api and need to input their key. then, we can place the necessary configuration settings for each selection below that.
+
 </Cycle Context>
-<Ephemeral Context>
-dgerabagi@DESKTOP-GLRCE1V:/mnt/c/Projects/vLLM$ source vllm-env/bin/activate
-(vllm-env) dgerabagi@DESKTOP-GLRCE1V:/mnt/c/Projects/vLLM$ curl http://localhost:8000/v1/completions \
--H "Content-Type: application/json" \
--d '{
-    "model": "unsloth/gpt-oss-20b",
-    "prompt": "San Francisco is a",
-    "max_tokens": 7,
-    "temperature": 0
-}'
-{"id":"cmpl-db6ce7b16bd94b5c87eabaa18939e5d1","object":"text_completion","created":1758478333,"model":"unsloth/gpt-oss-20b","choices":[{"index":0,"text":" city in California, USA. It","logprobs":null,"finish_reason":"length","stop_reason":null,"token_ids":null,"prompt_logprobs":null,"prompt_token_ids":null}],"service_tier":null,"system_fingerprint":null,"usage":{"prompt_tokens":4,"total_tokens":11,"completion_tokens":7,"prompt_tokens_details":null},"kv_transfer_params":null}(vllm-env) dgerabagi@DESKTOP-GLRCE1V:/mnt/c/Projects/vLLM$
-</Ephemeral Context>
 <Previous Cycle 35 Summary of Actions>
 I have analyzed the situation, and my previous advice to install `winloop` was incorrect. I apologize for the misstep. The traceback confirms that vLLM's OpenAI-compatible server has a hardcoded dependency on the `uvloop` library, which is not available on native Windows. Installing `winloop` does not automatically replace this requirement in the source code.
 
@@ -2983,17 +3005,17 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-21T18:20:46.014Z
+  Date Generated: 2025-09-21T18:54:32.995Z
   ---
   Total Files: 181
-  Approx. Tokens: 467355
+  Approx. Tokens: 468815
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
 3. src\client\views\parallel-copilot.view\view.tsx (8724 tokens)
-4. src\Artifacts\A0. DCE Master Artifact List.md (8492 tokens)
+4. src\Artifacts\A0. DCE Master Artifact List.md (8564 tokens)
 5. src\client\views\parallel-copilot.view\view.scss (5499 tokens)
 6. src\backend\services\prompt.service.ts (4904 tokens)
 7. src\backend\services\file-operation.service.ts (4526 tokens)
@@ -3004,7 +3026,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!-- Full File List -->
 1. public\copilot.svg - [Binary] Size: 445 Bytes
 2. public\spiral.svg - [Binary] Size: 459 Bytes
-3. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 500 - Chars: 33966 - Tokens: 8492
+3. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 504 - Chars: 34255 - Tokens: 8564
 4. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 5. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
 6. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
@@ -3091,7 +3113,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 87. src\Artifacts\A83. DCE - Universal Task Checklist for Cycle 6.md - Lines: 95 - Chars: 5172 - Tokens: 1293
 88. src\Artifacts\A84. DCE - Universal Task Checklist for Cycle 10+.md - Lines: 55 - Chars: 2541 - Tokens: 636
 89. src\Artifacts\A85. DCE - Model Card Feature Plan.md - Lines: 28 - Chars: 3060 - Tokens: 765
-90. src\Artifacts\A85. DCE - Model Card Management Plan.md - Lines: 53 - Chars: 4016 - Tokens: 1004
+90. src\Artifacts\A85. DCE - Model Card Management Plan.md - Lines: 40 - Chars: 3127 - Tokens: 782
 91. src\Artifacts\A85. DCE - Phase 2 - Model Card Management Plan.md - Lines: 48 - Chars: 4046 - Tokens: 1012
 92. src\Artifacts\A85. DCE - Phase 3 - Model Cards Feature Plan.md - Lines: 53 - Chars: 4197 - Tokens: 1050
 93. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
@@ -3143,8 +3165,8 @@ This file-centric approach helps in planning and prioritizing work, especially i
 139. src\client\views\parallel-copilot.view\view.tsx - Lines: 307 - Chars: 34894 - Tokens: 8724
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 17 - Chars: 762 - Tokens: 191
-142. src\client\views\settings.view\view.scss - Lines: 87 - Chars: 1767 - Tokens: 442
-143. src\client\views\settings.view\view.tsx - Lines: 74 - Chars: 3291 - Tokens: 823
+142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
+143. src\client\views\settings.view\view.tsx - Lines: 107 - Chars: 5501 - Tokens: 1376
 144. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
 145. src\common\ipc\channels.enum.ts - Lines: 98 - Chars: 5307 - Tokens: 1327
 146. src\common\ipc\channels.type.ts - Lines: 99 - Chars: 7679 - Tokens: 1920
@@ -3172,17 +3194,17 @@ This file-centric approach helps in planning and prioritizing work, especially i
 168. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
 169. src\Artifacts\A88. DCE - Native Diff Integration Plan.md - Lines: 43 - Chars: 4053 - Tokens: 1014
 170. src\backend\providers\ResponseContentProvider.ts - Lines: 24 - Chars: 1160 - Tokens: 290
-171. src\backend\providers\ResponseContentProvider.ts - Lines: 24 - Chars: 1160 - Tokens: 290
-172. src\Artifacts\A89. DCE - vLLM Integration and API Proxy Plan.md - Lines: 61 - Chars: 3736 - Tokens: 934
-173. src\Artifacts\A90. AI Ascent - server.ts for DCE Proxy.md - Lines: 347 - Chars: 15394 - Tokens: 3849
-174. src\Artifacts\A91. AI Ascent - Caddyfile for DCE Proxy.md - Lines: 60 - Chars: 2596 - Tokens: 649
-175. src\Artifacts\A87. VCPG - vLLM High-Throughput Inference Plan.md - Lines: 56 - Chars: 4251 - Tokens: 1063
-176. src\Artifacts\A89. DCE - Phase 3 - Hosted LLM & vLLM Integration Plan.md - Lines: 64 - Chars: 5344 - Tokens: 1336
-177. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 306 - Chars: 13156 - Tokens: 3289
-178. src\Artifacts\A91. AI Ascent - Caddyfile (Reference).md - Lines: 54 - Chars: 2305 - Tokens: 577
-179. src\Artifacts\A92. DCE - vLLM Setup Guide.md - Lines: 99 - Chars: 4307 - Tokens: 1077
-180. src\Artifacts\A93. DCE - vLLM Encryption in Transit Guide.md - Lines: 65 - Chars: 3811 - Tokens: 953
-181. src\Artifacts\A94. DCE - Connecting to a Local LLM Guide.md - Lines: 49 - Chars: 2850 - Tokens: 713
+171. src\Artifacts\A89. DCE - vLLM Integration and API Proxy Plan.md - Lines: 61 - Chars: 3736 - Tokens: 934
+172. src\Artifacts\A90. AI Ascent - server.ts for DCE Proxy.md - Lines: 347 - Chars: 15394 - Tokens: 3849
+173. src\Artifacts\A91. AI Ascent - Caddyfile for DCE Proxy.md - Lines: 60 - Chars: 2596 - Tokens: 649
+174. src\Artifacts\A87. VCPG - vLLM High-Throughput Inference Plan.md - Lines: 56 - Chars: 4251 - Tokens: 1063
+175. src\Artifacts\A89. DCE - Phase 3 - Hosted LLM & vLLM Integration Plan.md - Lines: 64 - Chars: 5344 - Tokens: 1336
+176. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 306 - Chars: 13156 - Tokens: 3289
+177. src\Artifacts\A91. AI Ascent - Caddyfile (Reference).md - Lines: 54 - Chars: 2305 - Tokens: 577
+178. src\Artifacts\A92. DCE - vLLM Setup Guide.md - Lines: 99 - Chars: 4307 - Tokens: 1077
+179. src\Artifacts\A93. DCE - vLLM Encryption in Transit Guide.md - Lines: 65 - Chars: 3811 - Tokens: 953
+180. src\Artifacts\A94. DCE - Connecting to a Local LLM Guide.md - Lines: 42 - Chars: 2565 - Tokens: 642
+181. src\Artifacts\A95. DCE - LLM Connection Modes Plan.md - Lines: 79 - Chars: 5149 - Tokens: 1288
 
 <file path="public/copilot.svg">
 <metadata>
@@ -3210,7 +3232,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C35 (Add A94)
+# Updated on: C36 (Add A95)
 
 ## 1. Purpose
 
@@ -3472,7 +3494,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 - **Description:** Details the plan to enhance the integrated diff viewer with background coloring for changes and WinMerge-like navigation controls to jump between differences.
 - **Tags:** feature plan, phase 2, ui, ux, diff, navigation, side-by-side
 
-### A57. DCE - Phase 2 - Cycle Management Features
+### A57. DCE - Phase 2 - Cycle Management Plan
 - **Description:** Details the plan for adding critical cycle management features to the Parallel Co-Pilot panel, including deleting the current cycle and resetting the entire history.
 - **Tags:** feature plan, phase 2, ui, ux, history, cycle management
 
@@ -3623,6 +3645,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 ### A94. DCE - Connecting to a Local LLM Guide
 - **Description:** A step-by-step guide on how to configure the DCE extension to use a local LLM with an OpenAI-compatible API.
 - **Tags:** guide, setup, llm, vllm, model card, configuration, local
+
+### A95. DCE - LLM Connection Modes Plan
+- **Description:** Outlines the plan for a multi-modal settings UI to allow users to switch between manual copy/paste, a pre-configured demo mode, and user-provided API URLs or Keys.
+- **Tags:** feature plan, settings, ui, ux, llm, configuration, api
 
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
@@ -9184,56 +9210,43 @@ The goal of this feature is to expand the settings panel to support "Model Cards
 # Artifact A85: DCE - Model Card Management Plan
 # Date Created: C18
 # Author: AI Model & Curator
-# Updated on: C29 (Add example for remote vLLM endpoint)
+# Updated on: C36 (Refined into a multi-modal connection plan)
 
 - **Key/Value for A0:**
-- **Description:** A plan for an enhanced settings panel where users can create and manage "model cards" to easily switch between different LLM providers and configurations.
+- **Description:** A plan for an enhanced settings panel where users can manage different LLM connection modes, including manual, a pre-configured demo, and user-provided API URLs or keys.
 - **Tags:** feature plan, settings, ui, ux, llm, configuration, model management
 
 ## 1. Overview & Goal
 
-As the DCE project moves towards direct API integration (Phase 3), users will need a flexible way to manage configurations for different Large Language Models (LLMs). The current placeholder for a single local API URL is insufficient.
+As the DCE project moves towards direct API integration (Phase 3), users will need a flexible way to manage configurations for different Large Language Models (LLMs). A single placeholder for a local API URL is insufficient.
 
-The goal is to design an enhanced settings panel where users can create and manage "model cards." Each card will represent a specific LLM configuration, containing all the necessary information to interact with that model. This will allow users to easily switch between different models, such as a local model, various cloud providers, or different versions of the same model.
+The goal is to design an enhanced settings panel where users can select from several connection "modes." This will allow users to easily switch between the default manual workflow, a pre-configured "Demo Mode" for local vLLM, and advanced modes for connecting to their own custom endpoints or cloud services. This approach supersedes the original "Model Card" concept with a more user-friendly, mode-based interface.
 
-## 2. User Stories
+**For the full, detailed implementation plan, see `A95. DCE - LLM Connection Modes Plan.md`.**
 
-| ID | User Story | Acceptance Criteria |
-|---|---|---|
-| P3-MC-01 | **Create a New Model Card** | As a user, I want to create a new "model card" in the settings panel, so I can configure the extension to use a new LLM. | - A "New Model Card" button exists in the settings panel. <br> - Clicking it opens a form with fields for Display Name, API Endpoint URL, API Key, Context Window Size, and other relevant parameters. <br> - The default "AI Studio" (Free) mode is presented as a non-editable, built-in card. |
-| P3-MC-02 | **Save and Manage Cards** | As a user, I want to save my model cards and see a list of all my configured models, so I can manage my connections. | - Saved model cards are displayed in a list in the settings panel. <br> - I can select a card to view or edit its details. <br> - I can delete a card I no longer need. |
-| P3-MC-03 | **Select Active Model** | As a user, I want to select one of my model cards as the "active" model, so the extension knows which LLM to use for its API calls. | - A mechanism (e.g., a radio button or a "Set as Active" button) allows me to designate one model card as the active one. <br> - The extension's backend uses the configuration from the active model card for all subsequent API calls. |
+## 2. Connection Modes
 
-## 3. Proposed UI/UX
+### 1. Free Mode (Manual Copy/Paste)
+- **Description:** The default behavior of the extension. The user is responsible for generating responses externally and pasting them into the PCPP.
+- **UI:** This is the default selection. No additional configuration fields are shown.
 
-The "Settings" section of the settings panel will be redesigned.
+### 2. Demo Mode (Local vLLM via `aiascent.game`)
+- **Description:** A pre-configured mode for a free, high-performance demo. It's designed to connect to a local vLLM instance that is being proxied through the `aiascent.game` server.
+- **UI:** When selected, it displays read-only information about the pre-configured endpoint (`https://aiascent.game/api/dce/proxy`).
 
-1.  **Model Card List:**
-    *   A list or grid on the left will display all saved model cards.
-    *   The first item will be the default, non-editable "AI Studio (Free/Manual)" card.
-    *   A "+" button will allow users to create a new card.
-2.  **Configuration Form:**
-    *   Selecting a card from the list (or creating a new one) will display its configuration form on the right.
-    *   **Fields:**
-        *   **Display Name:** (e.g., "My Local Llama3", "Claude Sonnet 3.5")
-        *   **Provider Type:** (Dropdown: "Local URL", "OpenAI-Compatible", "Google Gemini", etc.)
-        *   **API Endpoint URL:** The URL for the model's API.
-        *   **API Key:** A field to securely input the API key.
-        *   **Context Window Size (Tokens):** A number input, as some calculations may depend on this.
-        *   **Other Parameters:** (Optional) Fields for temperature, top_p, etc.
-3.  **Actions:**
-    *   "Save" and "Delete" buttons will be present in the form view.
-    *   A visual indicator (e.g., a star icon or a "✓ Active" badge) will show which card is currently active.
+### 3. API Mode (URL)
+- **Description:** For users who host their own OpenAI-compatible LLM and want to connect to it directly.
+- **UI:** When selected, it displays a text input field for the user to enter their API endpoint URL.
 
-## 4. Example Model Card for Remote vLLM Proxy
+### 4. API Mode (KEY)
+- **Description:** For users who want to use a cloud-based service that requires an API key (e.g., OpenAI, Anthropic).
+- **UI:** When selected, it displays a dropdown to select the provider and a secure input field for the API key.
 
-This example shows how a user would configure a model card to connect to the `aiascent.game` proxy server, which in turn connects to a vLLM instance.
+## 3. High-Level Technical Plan
 
--   **Display Name:** `AI Ascent vLLM (Remote)`
--   **Provider Type:** `OpenAI-Compatible`
--   **API Endpoint URL:** `https://aiascent.game/api/dce/proxy`
--   **API Key:** (Leave blank, as the proxy server manages authentication)
--   **Context Window Size:** `8192` (or as configured in vLLM)
+-   **UI (`settings.view.tsx`):** The settings panel will be redesigned with a radio button group to select the active mode. Conditional rendering will be used to show the appropriate input fields for each mode.
+-   **Backend (`SettingsService`):** A new service will be responsible for storing and retrieving these settings. It will use `vscode.workspace.getConfiguration` for non-sensitive data (like the selected mode and URL) and `vscode.SecretStorage` for securely storing API keys.
+-   **Backend (`LlmService`):** A new service will be created to handle the actual API calls. It will read the active configuration from the `SettingsService` and construct the appropriate `fetch` request based on the selected mode.
 </file_artifact>
 
 <file path="src/Artifacts/A85. DCE - Phase 2 - Model Card Management Plan.md">
@@ -25391,7 +25404,8 @@ body {
         font-weight: bold;
     }
 
-    input[type="text"] {
+    input[type="text"],
+    input[type="password"] {
         width: 100%;
         background-color: var(--vscode-input-background);
         color: var(--vscode-input-foreground);
@@ -25406,13 +25420,40 @@ body {
     }
 }
 
-.radio-group {
+.mode-selection-group {
     display: flex;
-    align-items: center;
-    gap: 8px;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.radio-option {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-left: 24px;
+    position: relative;
+
+    input[type="radio"] {
+        position: absolute;
+        left: 0;
+        top: 2px;
+    }
 
     label {
-        font-weight: normal;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .description {
+        font-size: 12px;
+        color: var(--vscode-descriptionForeground);
+    }
+
+    .config-inputs {
+        padding-top: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
     }
 }
 </file_artifact>
@@ -25426,6 +25467,8 @@ import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
 import ReactMarkdown from 'react-markdown';
 import { VscChevronDown } from 'react-icons/vsc';
+
+type ConnectionMode = 'manual' | 'demo' | 'url' | 'key';
 
 const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; initialCollapsed?: boolean }> = ({ title, children, initialCollapsed = false }) => {
     const [isCollapsed, setIsCollapsed] = React.useState(initialCollapsed);
@@ -25443,6 +25486,7 @@ const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; i
 const App = () => {
     const [readmeContent, setReadmeContent] = React.useState('Loading...');
     const [changelogContent, setChangelogContent] = React.useState('Loading...');
+    const [connectionMode, setConnectionMode] = React.useState<ConnectionMode>('manual');
     const clientIpc = ClientPostMessageManager.getInstance();
 
     React.useEffect(() => {
@@ -25457,33 +25501,63 @@ const App = () => {
         clientIpc.sendToServer(ClientToServerChannel.RequestChangelogContent, {});
     }, [clientIpc]);
 
+    const handleModeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setConnectionMode(event.target.value as ConnectionMode);
+        // TODO: Send IPC message to save the new setting
+    };
+
     return (
         <div className="settings-view-container">
             <h1>DCE Settings & Help</h1>
             
             <CollapsibleSection title="Settings">
                 <div className="settings-group">
-                    <label htmlFor="api-url">Local API URL</label>
-                    <input type="text" id="api-url" placeholder="http://localhost:1234/v1/chat/completions" />
-                </div>
-                <div className="settings-group">
-                    <label>Mode</label>
-                    <div className="radio-group">
-                        <input type="radio" id="free-mode" name="mode" value="free" defaultChecked />
-                        <label htmlFor="free-mode">Free Mode (Manual Copy/Paste)</label>
-                    </div>
-                    <div className="radio-group">
-                        <input type="radio" id="local-mode" name="mode" value="local" />
-                        <label htmlFor="local-mode">Local LLM Mode</label>
+                    <label>LLM Connection Mode</label>
+                    <div className="mode-selection-group">
+                        
+                        <div className="radio-option">
+                            <input type="radio" id="mode-manual" name="mode" value="manual" checked={connectionMode === 'manual'} onChange={handleModeChange} />
+                            <label htmlFor="mode-manual">Free Mode (Manual Copy/Paste)</label>
+                            <span className="description">Use the extension by manually copying and pasting responses. No setup required.</span>
+                        </div>
+
+                        <div className="radio-option">
+                            <input type="radio" id="mode-demo" name="mode" value="demo" checked={connectionMode === 'demo'} onChange={handleModeChange} />
+                            <label htmlFor="mode-demo">Demo Mode (Local vLLM via `aiascent.game`)</label>
+                            <span className="description">Connect to a pre-configured local vLLM instance via a proxy. Requires setup from A92.</span>
+                        </div>
+
+                        <div className="radio-option">
+                            <input type="radio" id="mode-url" name="mode" value="url" checked={connectionMode === 'url'} onChange={handleModeChange} />
+                            <label htmlFor="mode-url">API (URL)</label>
+                            <span className="description">Connect to your own self-hosted OpenAI-compatible endpoint.</span>
+                            {connectionMode === 'url' && (
+                                <div className="config-inputs">
+                                    <input type="text" id="api-url" placeholder="http://localhost:8000/v1" />
+                                </div>
+                            )}
+                        </div>
+
+                        <div className="radio-option">
+                            <input type="radio" id="mode-key" name="mode" value="key" checked={connectionMode === 'key'} onChange={handleModeChange} />
+                            <label htmlFor="mode-key">API (KEY)</label>
+                            <span className="description">Connect to a cloud provider using an API key.</span>
+                            {connectionMode === 'key' && (
+                                <div className="config-inputs">
+                                    <input type="password" id="api-key" placeholder="sk-..." />
+                                </div>
+                            )}
+                        </div>
+
                     </div>
                 </div>
             </CollapsibleSection>
 
-            <CollapsibleSection title="Changelog">
+            <CollapsibleSection title="Changelog" initialCollapsed={true}>
                 <ReactMarkdown>{changelogContent}</ReactMarkdown>
             </CollapsibleSection>
 
-            <CollapsibleSection title="About (README)">
+            <CollapsibleSection title="About (README)" initialCollapsed={true}>
                 <ReactMarkdown>{readmeContent}</ReactMarkdown>
             </CollapsibleSection>
         </div>
@@ -27447,33 +27521,6 @@ export class ResponseContentProvider implements vscode.TextDocumentContentProvid
 }
 </file_artifact>
 
-<file path="src/backend/providers/ResponseContentProvider.ts">
-// src/backend/providers/ResponseContentProvider.ts
-// New file in C27
-import * as vscode from 'vscode';
-import { Services } from '../services/services';
-
-export class ResponseContentProvider implements vscode.TextDocumentContentProvider {
-    public readonly onDidChangeEmitter = new vscode.EventEmitter<vscode.Uri>();
-    public readonly onDidChange = this.onDidChangeEmitter.event;
-
-    // A simple cache to hold the in-memory content of AI responses
-    private contentCache = new Map<string, string>();
-
-    public provideTextDocumentContent(uri: vscode.Uri): string {
-        Services.loggerService.log(`[ResponseContentProvider] Providing content for URI: ${uri.toString()}`);
-        return this.contentCache.get(uri.toString()) || '// Content not found for this response.';
-    }
-
-    public cacheContent(uri: vscode.Uri, content: string): void {
-        Services.loggerService.log(`[ResponseContentProvider] Caching content for URI: ${uri.toString()}`);
-        this.contentCache.set(uri.toString(), content);
-        // Notify VS Code that the content for this URI has changed (or is now available)
-        this.onDidChangeEmitter.fire(uri);
-    }
-}
-</file_artifact>
-
 <file path="src/Artifacts/A89. DCE - vLLM Integration and API Proxy Plan.md">
 # Artifact A89: DCE - vLLM Integration and API Proxy Plan
 # Date Created: C29
@@ -28617,22 +28664,19 @@ This architecture is the industry standard for securing web services and is the 
 # Artifact A94: DCE - Connecting to a Local LLM Guide
 # Date Created: C35
 # Author: AI Model & Curator
+# Updated on: C36 (Align with new multi-modal settings UI)
 
 - **Key/Value for A0:**
-- **Description:** A step-by-step guide on how to configure the DCE extension to use a local LLM with an OpenAI-compatible API.
-- **Tags:** guide, setup, llm, vllm, model card, configuration, local
+- **Description:** A step-by-step guide on how to configure the DCE extension to use a local LLM with an OpenAI-compatible API via the new settings panel.
+- **Tags:** guide, setup, llm, vllm, configuration, local
 
 ## 1. Overview & Goal
 
 This guide explains how to configure the Data Curation Environment (DCE) extension to communicate with a locally hosted Large Language Model (LLM), such as the one set up via the `A92. DCE - vLLM Setup Guide`.
 
-The goal is to create a "Model Card" in the DCE settings. This card tells the extension where to send its API requests, allowing you to switch from the default manual workflow to a fully integrated, automated one.
+The goal is to switch the extension from its default "Manual" mode to one of the automated modes that can make API calls directly to your local model, streamlining the development workflow.
 
-## 2. The Model Card Feature
-
-The Model Card system allows you to define and save configurations for different LLMs. The extension can then be set to use any of these saved cards as its "active" model. For a more detailed overview of this feature, see `A85. DCE - Model Card Management Plan.md`.
-
-## 3. Step-by-Step Configuration
+## 2. Step-by-Step Configuration
 
 ### Step 1: Open the Settings Panel
 - Open the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P`).
@@ -28641,28 +28685,106 @@ The Model Card system allows you to define and save configurations for different
 ### Step 2: Navigate to the Settings Section
 - In the settings panel, find and expand the **"Settings"** section.
 
-### Step 3: Create a New Model Card
-- You will see a list of model cards (which will initially only contain the default "AI Studio" card).
-- Click the **"Add New Model Card"** button.
+### Step 3: Select Your Connection Mode
+You will see a list of connection modes. Choose the one that matches your setup.
 
-### Step 4: Configure the Model Card for vLLM
-- A form will appear. Fill it out with the following details for your local vLLM server:
-    - **Display Name:** `Local vLLM` (or any name you prefer).
-    - **Provider Type:** `OpenAI-Compatible`.
-    - **API Endpoint URL:** `http://localhost:8000/v1`
-        - **Important:** If you are running the vLLM server on a different machine on your local network, replace `localhost` with that machine's IP address (e.g., `http://192.168.1.100:8000/v1`).
-    - **API Key:** Leave this field blank. Your local server does not require an API key.
-    - **Context Window Size:** Enter the context window of the model you are serving (e.g., `8192`).
-- Click **"Save"**.
+#### Option A: Demo Mode (Recommended for `aiascent.game` users)
+This is the simplest option if you are using the pre-configured `aiascent.game` proxy.
+-   Select the radio button for **"Demo Mode (Local vLLM via `aiascent.game`)"**.
+-   The endpoint is pre-configured. No other steps are needed.
 
-### Step 5: Set the New Card as Active
-- Your new "Local vLLM" card will now appear in the list.
-- Click the **"Select"** or **"Activate"** button next to it.
-- A visual indicator should appear, confirming it is now the active model.
+#### Option B: API Mode (URL)
+Use this option if you are running your own vLLM server (or another OpenAI-compatible service) and want to connect to it directly without a proxy.
+-   Select the radio button for **"API (URL)"**.
+-   An input field will appear. Enter the full API endpoint URL. For a standard vLLM server, this will be `http://localhost:8000/v1`.
+    -   **Important:** If your LLM server is on a different machine, replace `localhost` with that machine's local network IP address (e.g., `http://192.168.1.100:8000/v1`).
+-   Save the settings.
 
 ## 4. Next Steps
 
-The DCE extension is now configured to send its API requests to your local vLLM server. You can now use the "Generate Responses" button (once implemented in Phase 3) in the Parallel Co-Pilot Panel to automatically populate the response tabs, completing the automated workflow.
+The DCE extension is now configured to send its API requests to your local LLM server. You can now use the "Generate Responses" button (once implemented) in the Parallel Co-Pilot Panel to automatically populate the response tabs, completing the automated workflow. To switch back to the manual copy/paste method, simply re-open the settings and select **"Free Mode (Manual Copy/Paste)"**.
+</file_artifact>
+
+<file path="src/Artifacts/A95. DCE - LLM Connection Modes Plan.md">
+# Artifact A95: DCE - LLM Connection Modes Plan
+# Date Created: C36
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** Outlines the plan for a multi-modal settings UI to allow users to switch between manual copy/paste, a pre-configured demo mode, and user-provided API URLs or Keys.
+- **Tags:** feature plan, settings, ui, ux, llm, configuration, api
+
+## 1. Overview & Goal
+
+To maximize the utility and accessibility of the DCE extension, users need a flexible way to connect to different LLM backends. This plan details the implementation of a multi-modal settings UI that allows users to seamlessly switch between different connection methods, from a simple manual workflow to advanced, automated API integrations.
+
+This plan refines and supersedes the original `A85. DCE - Model Card Management Plan.md` by focusing on a more user-friendly, mode-based approach rather than a complex card management system.
+
+## 2. User Stories
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| P3-CM-01 | **Use Manual Mode** | As a new user, I want the extension to default to a "Free (Manual)" mode, so I can use the core features by copying and pasting without any setup. | - The default setting is "Free Mode". <br> - In this mode, no API calls are made, and no configuration is required. |
+| P3-CM-02 | **Use Demo Mode** | As a demo user, I want to select a "Demo Mode" that automatically connects to a pre-configured local vLLM endpoint, so I can experience the full automated workflow with minimal setup. | - A "Demo Mode" option is available. <br> - When selected, it displays the pre-configured endpoint (`https://aiascent.game/api/dce/proxy`) but does not allow editing. |
+| P3-CM-03 | **Use Custom URL** | As an advanced user running my own LLM, I want to select an "API (URL)" mode and provide my own OpenAI-compatible endpoint, so I can use my own models. | - An "API (URL)" option is available. <br> - When selected, it shows a text input field for the endpoint URL. <br> - The entered URL is saved and used for API calls. |
+| P3-CM-04 | **Use API Key** | As a user of a cloud service, I want to select an "API (KEY)" mode, choose my provider, and securely enter my API key, so I can use services like OpenAI. | - An "API (KEY)" option is available. <br> - When selected, it shows a dropdown for the provider and a secure input for the API key. <br> - The key is stored securely using VS Code's `SecretStorage`. |
+
+## 3. UI/UX Design (Settings Panel)
+
+The "Settings" section of the settings panel will be redesigned as follows:
+
+```
+[ Settings ]
+----------------------------------------------------------------------
+LLM Connection Mode:
+
+(•) Free Mode (Manual Copy/Paste)
+    | Use the extension by manually copying and pasting responses.
+
+( ) Demo Mode (Local vLLM via aiascent.game)
+    | Connects to a pre-configured, high-performance local vLLM
+    | instance via the aiascent.game proxy. Requires setup from A92.
+    | Endpoint: https://aiascent.game/api/dce/proxy
+
+( ) API (URL)
+    | Connect to your own self-hosted OpenAI-compatible endpoint.
+    |
+    | [ API Endpoint URL: http://localhost:8000/v1           ]
+
+( ) API (KEY)
+    | Connect to a cloud provider using an API key.
+    |
+    | Provider: [ OpenAI v ]
+    | API Key:  [ sk-................................... ]
+
+----------------------------------------------------------------------
+```
+
+-   **Radio Buttons:** A group of radio buttons controls the active mode.
+-   **Conditional Rendering:** The input fields for `API (URL)` and `API (KEY)` only appear when their respective modes are selected.
+
+## 4. Technical Implementation Plan
+
+### 4.1. Frontend (`settings.view.tsx`)
+-   **State:** A new state variable, `connectionMode`, will be added to manage which radio button is selected.
+-   **UI Logic:** The component will use conditional rendering (`{connectionMode === 'URL' && ...}`) to show/hide the input fields.
+-   **IPC:** New IPC channels will be created to save and load these settings.
+
+### 4.2. Backend (`SettingsService` - New)
+-   A new `SettingsService` will be created to handle the persistence of these settings.
+-   **Storage:**
+    -   The active `connectionMode` and the `apiUrl` will be stored in the standard VS Code workspace settings using `vscode.workspace.getConfiguration`.
+    -   The `apiKey` will be stored securely using `vscode.ExtensionContext.secrets` (the `SecretStorage` API).
+-   **Methods:** The service will expose methods like `getActiveMode()`, `getApiUrl()`, `getApiKey()`, `saveSettings(...)`, etc.
+
+### 4.3. Backend (`LlmService` - New)
+-   A new `LlmService` will be created to handle outgoing API calls.
+-   When a request is made, it will first query the `SettingsService` to determine the active mode.
+-   **Logic:**
+    -   If mode is `Manual` or `Demo`, it will construct the request for the appropriate endpoint (the `aiascent.game` proxy for demo).
+    -   If mode is `URL`, it will use the user-provided URL.
+    -   If mode is `KEY`, it will retrieve the secret key and use the appropriate provider's base URL.
+-   This service will contain all the `fetch` logic for making the actual API calls.
 </file_artifact>
 
 
