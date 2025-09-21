@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 35 - started server process with vllm and oss, 404 with localhost:8000, but that was shown in logs, whats next
+Current Cycle 36 - the llm in vllm responded, ready for next steps
+Cycle 35 - started server process with vllm and oss, 404 with localhost:8000, but that was shown in logs, whats next
 Cycle 34 - winloop installed, still same error
 Cycle 33 - cost calc fixed, now uvloop install error
 Cycle 32 - try to fix est cost calculation display, vllm install error, how will we encrypt traffic in transit
@@ -241,7 +242,7 @@ No project scope defined.
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C32 (Add A93)
+# Updated on: C35 (Add A94)
 
 ## 1. Purpose
 
@@ -651,6 +652,10 @@ No project scope defined.
 - **Description:** Explains the standard architectural pattern of using a reverse proxy to provide HTTPS encryption for the vLLM API endpoint.
 - **Tags:** guide, security, encryption, https, proxy, caddy, vllm
 
+### A94. DCE - Connecting to a Local LLM Guide
+- **Description:** A step-by-step guide on how to configure the DCE extension to use a local LLM with an OpenAI-compatible API.
+- **Tags:** guide, setup, llm, vllm, model card, configuration, local
+
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
 - **Tags:** history, log, development process, cycles
@@ -738,19 +743,51 @@ No project scope defined.
 
 <M6. Cycles>
 
+<Cycle 36>
+<Cycle Context>
+okay nice, so i got the response from the llm (see ephemeral). im looking at a94 and its close, but here are my thoughts after reviewing it:
+
+
+here is my plan... i want to make a free/demo version of the extension which, when the users switches to Local LLM Mode, its automatically configured to communicate with our local llm in vllm via the aiascent.game route. if the user switches back to `Free Mode (Manual Copy/Paste)` then it just reverts back to the solution we've currently devised at this point, with the responses that are pasted in and then parsed.
+
+our demo mode will use batch processing for as many number of responses the user requests. 
+
+then there will be two additional options, one being API (URL) and the second being API (KEY). the API (URL) is for if the user wants to use their own hosted AI, and then the API (KEY) is for folks who are using like the openai api and need to input their key. then, we can place the necessary configuration settings for each selection below that.
+</Cycle Context>
+<Ephemeral Context>
+dgerabagi@DESKTOP-GLRCE1V:/mnt/c/Projects/vLLM$ source vllm-env/bin/activate
+(vllm-env) dgerabagi@DESKTOP-GLRCE1V:/mnt/c/Projects/vLLM$ curl http://localhost:8000/v1/completions \
+-H "Content-Type: application/json" \
+-d '{
+    "model": "unsloth/gpt-oss-20b",
+    "prompt": "San Francisco is a",
+    "max_tokens": 7,
+    "temperature": 0
+}'
+{"id":"cmpl-db6ce7b16bd94b5c87eabaa18939e5d1","object":"text_completion","created":1758478333,"model":"unsloth/gpt-oss-20b","choices":[{"index":0,"text":" city in California, USA. It","logprobs":null,"finish_reason":"length","stop_reason":null,"token_ids":null,"prompt_logprobs":null,"prompt_token_ids":null}],"service_tier":null,"system_fingerprint":null,"usage":{"prompt_tokens":4,"total_tokens":11,"completion_tokens":7,"prompt_tokens_details":null},"kv_transfer_params":null}(vllm-env) dgerabagi@DESKTOP-GLRCE1V:/mnt/c/Projects/vLLM$
+</Ephemeral Context>
+<Previous Cycle 35 Summary of Actions>
+I have analyzed the situation, and my previous advice to install `winloop` was incorrect. I apologize for the misstep. The traceback confirms that vLLM's OpenAI-compatible server has a hardcoded dependency on the `uvloop` library, which is not available on native Windows. Installing `winloop` does not automatically replace this requirement in the source code.
+
+The most robust and officially supported method for running tools like vLLM on a Windows machine is to use the Windows Subsystem for Linux (WSL). This provides a full Linux environment where `uvloop` and other dependencies can be installed without compatibility issues.
+
+My course of action is to provide you with a comprehensive guide to setting up vLLM within WSL. This will involve destroying the current, non-functional native Windows environment and recreating it correctly inside WSL. I will update our primary vLLM setup guide to make this the recommended path for all Windows users.
+
+1.  **Codify the Bug:** I will add a new case study to `A11. DCE - Regression Case Studies.md` to document the `uvloop` dependency issue on native Windows and codify WSL as the correct solution.
+2.  **Update vLLM Setup Guide:** I will perform a major rewrite of `A92. DCE - vLLM Setup Guide.md`.
+    *   A new, detailed section titled "Recommended Method for Windows: Using WSL2" will be added. This will become the primary guide for Windows users.
+    *   It will include instructions on how to install WSL, set up a Python environment within it, and then follow the standard Linux installation steps for `vLLM` and `uvloop`.
+    *   Crucially, it will explain that network ports are automatically forwarded from WSL to Windows, so the server will still be accessible at `http://localhost:8000` from the host machine.
+3.  **Provide Curator Instructions:** I will provide a set of commands in the `<curator_activity>` block for you to execute. This will guide you through cleaning up the old environment and setting up the new one inside WSL.
+</Previous Cycle 35 Summary of Actions>
+</Cycle 36>
+
 <Cycle 35>
 <Cycle Context>
 okay, i got through to step 5 of A92. when i try to hit localhost:8000 on the same box as running the WSL (the pc in my closet with the 3090) i see this (check ephemeral). it does appear to be running, my VRAM seems entirely consumed. i do not recall configuring any LLM specific configs like context size, so im curious about that.
 
 whats next? can we prove we can make an api call to this? if so, then next is to get my extension able to connect to it? ive already updated server.ts to have the dce redirect so if its coded correctly that part will function. whats next?
 </Cycle Context>
-<Ephemeral Context>
-(APIServer pid=439) INFO:     Started server process [439]
-(APIServer pid=439) INFO:     Waiting for application startup.
-(APIServer pid=439) INFO:     Application startup complete.
-(APIServer pid=439) INFO:     127.0.0.1:42466 - "GET / HTTP/1.1" 404 Not Found
-(APIServer pid=439) INFO:     127.0.0.1:42474 - "GET /favicon.ico HTTP/1.1" 404 Not Found
-</Ephemeral Context>
 <Previous Cycle 34 Summary of Actions>
 I have analyzed the request. The cost calculation fix needs to be added to the changelog, and the vLLM setup guide needs to be updated to address the `uvloop` installation error on Windows.
 
@@ -2946,17 +2983,17 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-21T16:46:01.220Z
+  Date Generated: 2025-09-21T18:20:46.014Z
   ---
-  Total Files: 180
-  Approx. Tokens: 466245
+  Total Files: 181
+  Approx. Tokens: 467355
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11550 tokens)
 3. src\client\views\parallel-copilot.view\view.tsx (8724 tokens)
-4. src\Artifacts\A0. DCE Master Artifact List.md (8430 tokens)
+4. src\Artifacts\A0. DCE Master Artifact List.md (8492 tokens)
 5. src\client\views\parallel-copilot.view\view.scss (5499 tokens)
 6. src\backend\services\prompt.service.ts (4904 tokens)
 7. src\backend\services\file-operation.service.ts (4526 tokens)
@@ -2967,7 +3004,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!-- Full File List -->
 1. public\copilot.svg - [Binary] Size: 445 Bytes
 2. public\spiral.svg - [Binary] Size: 459 Bytes
-3. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 496 - Chars: 33720 - Tokens: 8430
+3. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 500 - Chars: 33966 - Tokens: 8492
 4. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 5. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
 6. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
@@ -3143,8 +3180,9 @@ This file-centric approach helps in planning and prioritizing work, especially i
 176. src\Artifacts\A89. DCE - Phase 3 - Hosted LLM & vLLM Integration Plan.md - Lines: 64 - Chars: 5344 - Tokens: 1336
 177. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 306 - Chars: 13156 - Tokens: 3289
 178. src\Artifacts\A91. AI Ascent - Caddyfile (Reference).md - Lines: 54 - Chars: 2305 - Tokens: 577
-179. src\Artifacts\A92. DCE - vLLM Setup Guide.md - Lines: 74 - Chars: 2966 - Tokens: 742
+179. src\Artifacts\A92. DCE - vLLM Setup Guide.md - Lines: 99 - Chars: 4307 - Tokens: 1077
 180. src\Artifacts\A93. DCE - vLLM Encryption in Transit Guide.md - Lines: 65 - Chars: 3811 - Tokens: 953
+181. src\Artifacts\A94. DCE - Connecting to a Local LLM Guide.md - Lines: 49 - Chars: 2850 - Tokens: 713
 
 <file path="public/copilot.svg">
 <metadata>
@@ -3172,7 +3210,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C32 (Add A93)
+# Updated on: C35 (Add A94)
 
 ## 1. Purpose
 
@@ -3581,6 +3619,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 ### A93. DCE - vLLM Encryption in Transit Guide
 - **Description:** Explains the standard architectural pattern of using a reverse proxy to provide HTTPS encryption for the vLLM API endpoint.
 - **Tags:** guide, security, encryption, https, proxy, caddy, vllm
+
+### A94. DCE - Connecting to a Local LLM Guide
+- **Description:** A step-by-step guide on how to configure the DCE extension to use a local LLM with an OpenAI-compatible API.
+- **Tags:** guide, setup, llm, vllm, model card, configuration, local
 
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
@@ -28405,7 +28447,7 @@ www.aiascent.game {
 # Artifact A92: DCE - vLLM Setup Guide
 # Date Created: C30
 # Author: AI Model & Curator
-# Updated on: C34 (Make WSL2 the recommended method for Windows)
+# Updated on: C35 (Add API verification and link to connection guide)
 
 - **Key/Value for A0:**
 - **Description:** A step-by-step guide for setting up the vLLM inference server with an OpenAI-compatible API endpoint for use with the DCE.
@@ -28466,7 +28508,8 @@ pip install vllm uvloop
 ```
 
 ### Step 5: Launch the OpenAI-Compatible Server
-This command will download the specified model and start the server.```bash
+This command will download the specified model and start the server.
+```bash
 python -m vllm.entrypoints.openai.api_server --model "unsloth/gpt-oss-20b"
 ```
 The server will start on `http://localhost:8000` *inside* the WSL environment.
@@ -28474,7 +28517,32 @@ The server will start on `http://localhost:8000` *inside* the WSL environment.
 ### Step 6: Accessing the Server from Windows
 WSL2 automatically forwards network ports to your Windows host machine. This means you can access the vLLM server from your Windows applications (like the DCE extension or your browser) by navigating to **`http://localhost:8000`**.
 
----
+### Step 7: Verifying the API Endpoint
+When you navigate to `http://localhost:8000` in a web browser, you will see a `404 Not Found` error. This is expected and correct. The server is an API endpoint and is not designed to serve a webpage.
+
+To verify that the API is working, run the following `curl` command from your **WSL terminal** (the same one where the server is running). This sends a test prompt to the completions endpoint.
+
+```bash
+curl http://localhost:8000/v1/completions \
+-H "Content-Type: application/json" \
+-d '{
+    "model": "unsloth/gpt-oss-20b",
+    "prompt": "San Francisco is a",
+    "max_tokens": 7,
+    "temperature": 0
+}'
+```
+
+A successful response will be a JSON object that looks something like this:
+```json
+{"id":"cmpl-a1b2c3d4e5f6","object":"text_completion","created":1677652288,"model":"unsloth/gpt-oss-20b","choices":[{"index":0,"text":" city in Northern California,","logprobs":null,"finish_reason":"length"}],"usage":{"prompt_tokens":5,"total_tokens":12,"completion_tokens":7}}
+```
+If you receive this JSON response, your vLLM server is running correctly.
+
+### Step 8: Connecting the DCE Extension
+Once you have verified the API is running, you are ready to connect the DCE extension to it.
+
+For detailed instructions, please refer to the next guide: **`A94. DCE - Connecting to a Local LLM Guide.md`**.
 </file_artifact>
 
 <file path="src/Artifacts/A93. DCE - vLLM Encryption in Transit Guide.md">
@@ -28543,6 +28611,58 @@ Caddy is a modern web server that makes this process extremely simple.
 -   **Reference:** For a more detailed example of a production `Caddyfile` used in a similar project, see **`A91. AI Ascent - Caddyfile (Reference).md`**.
 
 This architecture is the industry standard for securing web services and is the recommended approach for deploying the vLLM server for use with the DCE.
+</file_artifact>
+
+<file path="src/Artifacts/A94. DCE - Connecting to a Local LLM Guide.md">
+# Artifact A94: DCE - Connecting to a Local LLM Guide
+# Date Created: C35
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A step-by-step guide on how to configure the DCE extension to use a local LLM with an OpenAI-compatible API.
+- **Tags:** guide, setup, llm, vllm, model card, configuration, local
+
+## 1. Overview & Goal
+
+This guide explains how to configure the Data Curation Environment (DCE) extension to communicate with a locally hosted Large Language Model (LLM), such as the one set up via the `A92. DCE - vLLM Setup Guide`.
+
+The goal is to create a "Model Card" in the DCE settings. This card tells the extension where to send its API requests, allowing you to switch from the default manual workflow to a fully integrated, automated one.
+
+## 2. The Model Card Feature
+
+The Model Card system allows you to define and save configurations for different LLMs. The extension can then be set to use any of these saved cards as its "active" model. For a more detailed overview of this feature, see `A85. DCE - Model Card Management Plan.md`.
+
+## 3. Step-by-Step Configuration
+
+### Step 1: Open the Settings Panel
+- Open the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P`).
+- Run the command: **`DCE: Open Settings & Help`**. This will open the settings panel in a new editor tab.
+
+### Step 2: Navigate to the Settings Section
+- In the settings panel, find and expand the **"Settings"** section.
+
+### Step 3: Create a New Model Card
+- You will see a list of model cards (which will initially only contain the default "AI Studio" card).
+- Click the **"Add New Model Card"** button.
+
+### Step 4: Configure the Model Card for vLLM
+- A form will appear. Fill it out with the following details for your local vLLM server:
+    - **Display Name:** `Local vLLM` (or any name you prefer).
+    - **Provider Type:** `OpenAI-Compatible`.
+    - **API Endpoint URL:** `http://localhost:8000/v1`
+        - **Important:** If you are running the vLLM server on a different machine on your local network, replace `localhost` with that machine's IP address (e.g., `http://192.168.1.100:8000/v1`).
+    - **API Key:** Leave this field blank. Your local server does not require an API key.
+    - **Context Window Size:** Enter the context window of the model you are serving (e.g., `8192`).
+- Click **"Save"**.
+
+### Step 5: Set the New Card as Active
+- Your new "Local vLLM" card will now appear in the list.
+- Click the **"Select"** or **"Activate"** button next to it.
+- A visual indicator should appear, confirming it is now the active model.
+
+## 4. Next Steps
+
+The DCE extension is now configured to send its API requests to your local vLLM server. You can now use the "Generate Responses" button (once implemented in Phase 3) in the Parallel Co-Pilot Panel to automatically populate the response tabs, completing the automated workflow.
 </file_artifact>
 
 
