@@ -11,7 +11,7 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 47 - issue persists
+Current Cycle 47 - issue resolved via rollback
 Cycle 46 - responses came in! little buggy though
 Cycle 45 - 404 error
 Cycle 44 - responses coming in but getting truncated at the stop sign
@@ -253,7 +253,7 @@ No project scope defined.
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C45 (Add A96)
+# Updated on: C47 (Update A11.1)
 
 ## 1. Purpose
 
@@ -764,18 +764,29 @@ No project scope defined.
 
 <Cycle 47>
 <Cycle Context>
-okay, i tried all your responses and none of them fixed the issue. ive further observed that if a cycle is already parsed, i cannot unparse, and vice versa.
+okay, i rolled `src\client\views\parallel-copilot.view\view.tsx` back to the version from cycle 43 and that fixed this re-render loop issue.
 
-to rule out some wonky state with my test environment, i started a new workspace and am testing a new project from the project scope page. i recognizing that we need to consider the necessary changes to the workflow for when the user has selected demo mode. essentially, the user will write their project scope, and they may or may not have already brought in curated data. once they're ready they would click the button at the bottom which is named `Generate Initial Artifacts Prompt` to something more appropriate, given that the workflow has changed to include sending off the generated prompt.
+i will now test our demo mode by clicking `Generate responses` on my cycle 2 thats ready.
 
-however before i can even begin the test, i realize the glitch is still occurring. i feel like we encountered this before, where i am unable to type anything into the project scope field. its this same bug that just appeared just viewed from another angle. can you fix this? i provided the logs that appear when i type something and that which i typed gets wiped.
+i think that we need a UI which appears to show that we are processing. currently, after i click generate responses, as the developer since i can see the vllm logs i can see progress, however i am wanting to surface this progress to the users in the extension. i think the best way we could do this is if we have a little stylistic UI or modal that appears which represents the number of responses coming back. each one could be a progress bar. i really want to get the tokens per second information and get that presented to the user here. can you create a artifac twhich mocks up a panel like that?
+
+also, im confused by the `max_tokens: 8192,` in `llm.service.ts`, because i thought it was just the context window size, so i set it to 131,000, but then whenever i tried to send a message to vllm i got a 400 error saying max token limit is 72 and ur message is 24k tokens and so its too big. i realized that the actual max is 131,072 and so for some reason it was taking the opposite of what i input, or rather the remainder of what i put. i since changed it to 8192 and i dont get that error, but this just confuses me on a) what it is doing and b) how it works.
+
+our model has be set to and loads with 131,072 token context window. all of that should be made available to the users in their responses. please do the needful.
+
+finally, my extension seemed to have received the responses back and claims to have created a new cycle, and indeed that new cycle does show up in the dce_history.json file, but my pcpp stays on cycle 2, and i actually dont seem to be able to manually navigate to cycle 3 with the `>` button.
+
+the idea is once i hit generate responses, we get the processing UI to indicate total tokens per second, and then once the responses are recieved, they are presented to the user, already parsed, but with the option still to un-parse in the event there were parsing errors that the user can fix (like adding a missing <summary>)
+
+
 </Cycle Context>
 <Ephemeral Context>
-[INFO] [7:32:44 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [7:32:44 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [7:32:46 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [7:32:46 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-
+[INFO] [7:55:34 PM] Received RequestBatchGeneration for 4 responses from cycle 2.
+[INFO] [7:55:34 PM] [SelectionService] Found 39 paths in persisted state. Validating...
+[INFO] [7:55:34 PM] [SelectionService] Returning 39 valid paths.
+[INFO] [7:55:34 PM] Sending batch request for 4 responses to: https://aiascent.game/api/dce/proxy
+[INFO] [7:57:32 PM] Received 4 responses from LLM.
+[INFO] [7:57:32 PM] Created new cycle 3 with 4 responses.
 </Ephemeral Context>
 <Previous Cycle 46 Summary of Actions>
 I have analyzed the error logs and your feedback. You are absolutely right to be confused, and I apologize for the misstep. The `404 Not Found` error with the message "The model `local-model` does not exist" is the definitive clue.
@@ -3307,16 +3318,16 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-22T00:33:48.361Z
+  Date Generated: 2025-09-22T01:07:06.491Z
   ---
   Total Files: 177
-  Approx. Tokens: 448396
+  Approx. Tokens: 448705
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
-2. src\client\views\parallel-copilot.view\view.tsx (9397 tokens)
-3. src\Artifacts\A0. DCE Master Artifact List.md (8646 tokens)
+2. src\client\views\parallel-copilot.view\view.tsx (9252 tokens)
+3. src\Artifacts\A0. DCE Master Artifact List.md (8647 tokens)
 4. src\client\views\parallel-copilot.view\view.scss (5575 tokens)
 5. src\backend\services\prompt.service.ts (4895 tokens)
 6. src\backend\services\file-operation.service.ts (4526 tokens)
@@ -3328,7 +3339,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!-- Full File List -->
 1. public\copilot.svg - [Binary] Size: 445 Bytes
 2. public\spiral.svg - [Binary] Size: 459 Bytes
-3. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 508 - Chars: 34582 - Tokens: 8646
+3. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 508 - Chars: 34587 - Tokens: 8647
 4. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 5. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
 6. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
@@ -3339,7 +3350,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 11. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
 12. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
 13. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 20 - Chars: 1090 - Tokens: 273
-14. src\Artifacts\A11.1 DCE - New Regression Case Studies.md - Lines: 45 - Chars: 3324 - Tokens: 831
+14. src\Artifacts\A11.1 DCE - New Regression Case Studies.md - Lines: 59 - Chars: 5133 - Tokens: 1284
 15. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5687 - Tokens: 1422
 16. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
 17. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
@@ -3459,7 +3470,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 131. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 100 - Chars: 5002 - Tokens: 1251
 132. src\client\views\parallel-copilot.view\view.scss - Lines: 996 - Chars: 22300 - Tokens: 5575
 133. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-134. src\client\views\parallel-copilot.view\view.tsx - Lines: 371 - Chars: 37586 - Tokens: 9397
+134. src\client\views\parallel-copilot.view\view.tsx - Lines: 350 - Chars: 37005 - Tokens: 9252
 135. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 136. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 137. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
@@ -3530,7 +3541,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C45 (Add A96)
+# Updated on: C47 (Update A11.1)
 
 ## 1. Purpose
 
@@ -4583,7 +4594,7 @@ This document serves as a living record of persistent or complex bugs that have 
 # Artifact A11.1: DCE - New Regression Case Studies
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C46 (Add case study for overactive useEffect)
+# Updated on: C47 (Add case study for useCallback dependency loop)
 
 - **Key/Value for A0:**
 - **Description:** A separate log for new regression case studies to avoid bloating the original A11 artifact.
@@ -4599,8 +4610,22 @@ This document serves as a living record of persistent or complex bugs that have 
 
 ---
 
-### Case Study 040: UI State Instability Caused by Overactive useEffect Dependencies
+### Case Study 041: UI Input Wiped Due to `useCallback` Dependency Loop
 
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`
+-   **Cycles Observed:** C47
+-   **Symptom:** In the Cycle 0 onboarding view, any character typed into the "Project Scope" `textarea` is immediately deleted. The debug console shows a flood of `RequestInitialCycleData` messages.
+-   **Root Cause Analysis (RCA):** A subtle but critical infinite re-render loop was created by a chain of dependencies between React hooks.
+    1.  Typing in the `textarea` called a handler that updated the `saveStatus` state to `'unsaved'`.
+    2.  A `useCallback` hook for the `handleCycleChange` function had `saveStatus` in its dependency array. When `saveStatus` changed, `handleCycleChange` received a new function reference.
+    3.  A main, top-level `useEffect` hook, responsible for initialization and message listeners, had `handleCycleChange` in its dependency array.
+    4.  Because `handleCycleChange`'s reference changed, the entire `useEffect` hook was re-executed.
+    5.  This re-execution would call `RequestInitialCycleData`, which reloaded all state from the backend, wiping out the user's input and starting the cycle over again.
+-   **Codified Solution & Best Practice:** `useCallback` dependency arrays must be minimal to prevent unintended re-creations of memoized functions. The check for `saveStatus` inside the `handleCycleChange` callback was redundant, as the UI buttons that call it are already disabled based on `saveStatus`. Removing the check and the dependency from the `useCallback` array broke the infinite loop and fixed the bug. Always ensure that state updates do not inadvertently cause cascading re-creations of memoized functions that are dependencies of top-level effects.
+
+---
+
+### Case Study 040: UI State Instability Caused by Overactive useEffect Dependencies
 -   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`
 -   **Cycles Observed:** C46
 -   **Symptom:** Multiple, severe UI bugs occurring simultaneously:
@@ -24634,7 +24659,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C46 (Fix infinite re-render loop causing UI instability and log spam)
+// Updated on: C42 (Refactor batch generation handler)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -24653,7 +24678,7 @@ import ResponsePane from './components/ResponsePane';
 import * as path from 'path-browserify';
 import WorkflowToolbar from './components/WorkflowToolbar';
 import { logger } from '../../utils/logger';
-import { ConnectionMode, DceSettings } from '@/backend/services/settings.service';
+import { ConnectionMode, DceSettings } from '../../../backend/services/settings.service';
 
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -24755,15 +24780,16 @@ const App = () => {
 
     // ... (other handlers)
     const handleRawContentChange = (newContent: string, tabIndex: number) => { 
-        setTabs(prev => ({ ...prev, [tabIndex.toString()]: { rawContent: newContent, parsedContent: prev[tabIndex.toString()]?.parsedContent || null }})); 
+        setTabs(prev => ({ ...prev, [tabIndex.toString()]: { rawContent: newContent, parsedContent: null }})); 
         setSaveStatus('unsaved'); 
     };
 
     const handlePaste = (e: React.ClipboardEvent, tabIndex: number) => {
         const pastedText = e.clipboardData.getData('text');
+        const currentContent = tabs[tabIndex.toString()]?.rawContent || '';
         const tokenCount = Math.ceil(pastedText.length / 4);
 
-        if (tokenCount > 1000 && tabIndex < tabCount) {
+        if (tokenCount > 1000 && currentContent.trim() === '' && tabIndex < tabCount) {
             handleRawContentChange(pastedText, tabIndex);
             setActiveTab(tabIndex + 1);
         } else {
@@ -24803,22 +24829,13 @@ const App = () => {
             activeWorkflowStep: workflowStep || undefined
         };
     }, []);
-    
     const requestCostEstimation = React.useCallback(() => { 
         const cycleData = getCurrentCycleData(); 
         if (cycleData?.cycleId) {
             clientIpc.sendToServer(ClientToServerChannel.RequestPromptCostBreakdown, { cycleData: cycleData as PcppCycle }); 
         }
     }, [clientIpc, getCurrentCycleData]);
-    
     const debouncedCostRequest = useDebounce(requestCostEstimation, 500);
-
-    // C46 FIX: This useEffect was the source of the infinite loop.
-    // The dependency array was too broad. Now it only depends on the specific
-    // pieces of content that actually affect the cost calculation.
-    React.useEffect(() => {
-        debouncedCostRequest();
-    }, [cycleContext, ephemeralContext, selectedResponseId, debouncedCostRequest]);
 
     React.useEffect(() => { if (saveStatus === 'unsaved') debouncedSave(); }, [saveStatus, debouncedSave]);
     React.useEffect(() => { const handleVisibilityChange = () => { if (document.visibilityState === 'hidden' && stateRef.current.currentCycle !== null) { clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: stateRef.current.currentCycle }); saveCurrentCycleState(); } }; document.addEventListener('visibilitychange', handleVisibilityChange); return () => document.removeEventListener('visibilitychange', handleVisibilityChange); }, [clientIpc, saveCurrentCycleState]);
@@ -24846,16 +24863,16 @@ const App = () => {
             const updatedTabs: TabMap = { ...prevTabs };
             let needsUpdate: boolean = false;
 
-            Object.entries(updatedTabs).forEach(([tabId, tabState]) => {
+            Object.values(updatedTabs).forEach((tabState: TabState) => {
                 if (tabState.rawContent && !tabState.parsedContent) {
                     needsUpdate = true;
                     const parsed: ParsedResponse = parseResponse(tabState.rawContent);
-                    updatedTabs[tabId] = { ...tabState, parsedContent: parsed };
+                    tabState.parsedContent = parsed;
                     parsed.filesUpdated.forEach((filePath: string) => allFilePaths.add(filePath));
                     requestAllMetrics(parsed);
                     parsed.files.forEach((file: ParsedFile) => {
                         const lang: string = path.extname(file.path).substring(1) || 'plaintext';
-                        const id: string = `${tabId}::${file.path}::${file.content}`;
+                        const id: string = `${file.path}::${file.content}`;
                         clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
                     });
                 } else if (tabState.parsedContent) {
@@ -24871,29 +24888,15 @@ const App = () => {
     const isReadyForNextCycle = React.useMemo(() => { const hasTitle = cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== ''; const hasContext = cycleContext.trim() !== ''; const hasSelectedResponse = selectedResponseId !== null; return hasTitle && hasContext && hasSelectedResponse; }, [cycleTitle, cycleContext, selectedResponseId]);
     const newCycleButtonDisabledReason = React.useMemo(() => { const reasons: string[] = []; if (!cycleTitle || cycleTitle.trim() === 'New Cycle' || cycleTitle.trim() === '') reasons.push("- A cycle title is required."); if (!cycleContext || cycleContext.trim() === '') reasons.push("- Cycle context cannot be empty."); if (!selectedResponseId) reasons.push("- A response must be selected."); return reasons.join('\n'); }, [cycleTitle, cycleContext, selectedResponseId]);
 
-    const handleCycleChange = React.useCallback((e: React.MouseEvent | null, newCycle: number) => {
-        e?.stopPropagation();
-        if (saveStatus !== 'saved') return;
-        // C43 Fix: Allow navigating to a cycle that is the new max cycle
-        if (newCycle >= 0 && (newCycle <= maxCycle || newCycle === maxCycle + 1)) {
-            setSelectedFilesForReplacement(new Set());
-            setCurrentCycle(newCycle);
-            clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle });
-            clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycle });
-            setWorkflowStep(null);
-        }
-    }, [saveStatus, maxCycle, clientIpc]);
-
     React.useEffect(() => { if (workflowStep === null) return; if (workflowStep === 'readyForNewCycle') return; if (workflowStep === 'awaitingGeneratePrompt') { if (isReadyForNextCycle) setWorkflowStep('awaitingGeneratePrompt'); return; } if (workflowStep === 'awaitingCycleTitle') { if (cycleTitle.trim() && cycleTitle.trim() !== 'New Cycle') { setWorkflowStep('awaitingGeneratePrompt'); } return; } if (workflowStep === 'awaitingCycleContext') { if (cycleContext.trim()) { setWorkflowStep('awaitingCycleTitle'); } return; } if (workflowStep === 'awaitingAccept') { return; } if (workflowStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestGitStatus, {}); return; } if (workflowStep === 'awaitingFileSelect') { if (selectedFilesForReplacement.size > 0) { setWorkflowStep('awaitingAccept'); } return; } if (workflowStep === 'awaitingResponseSelect') { if (selectedResponseId) { setWorkflowStep('awaitingBaseline'); } return; } if (workflowStep === 'awaitingSort') { if (isSortedByTokens) { setWorkflowStep('awaitingResponseSelect'); } return; } if (workflowStep === 'awaitingParse') { if (isParsedMode) { setWorkflowStep(isSortedByTokens ? 'awaitingResponseSelect' : 'awaitingSort'); } return; } const waitingForPaste = workflowStep?.startsWith('awaitingResponsePaste'); if (waitingForPaste) { for (let i = 1; i <= tabCount; i++) { if (!tabs[i.toString()]?.rawContent?.trim()) { setWorkflowStep(`awaitingResponsePaste_${i}`); return; } } setWorkflowStep('awaitingParse'); } }, [workflowStep, selectedFilesForReplacement, selectedResponseId, isSortedByTokens, isParsedMode, tabs, cycleContext, cycleTitle, tabCount, isReadyForNextCycle, clientIpc]);
-    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string, newMax?: number) => { setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setActiveTab(cycleData.activeTab || 1); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setWorkflowStep(cycleData.activeWorkflowStep || null); if (newMax) setMaxCycle(newMax); setSaveStatus('saved'); }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => { setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics)); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { if (result.success) { setWorkflowStep(prevStep => { if (prevStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => { if (cycleId === stateRef.current.currentCycle) setSaveStatus('saved'); }); 
+    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string, newMax?: number) => { setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setActiveTab(cycleData.activeTab || 1); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setWorkflowStep(cycleData.activeWorkflowStep || null); if (newMax) setMaxCycle(newMax); setSaveStatus('saved'); requestCostEstimation(); }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => { setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics)); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { logger.log(`[COST_ESTIMATION_RECEIVED] Tokens: ${totalTokens}, Cost: ${estimatedCost}`); setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { if (result.success) { setWorkflowStep(prevStep => { if (prevStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => { if (cycleId === stateRef.current.currentCycle) setSaveStatus('saved'); }); 
         clientIpc.onServerMessage(ServerToClientChannel.SendSettings, ({ settings }) => { setConnectionMode(settings.connectionMode) });
-        clientIpc.onServerMessage(ServerToClientChannel.SendBatchGenerationComplete, ({ newCycleId, newMaxCycle }) => {
-            setMaxCycle(newMaxCycle);
+        clientIpc.onServerMessage(ServerToClientChannel.SendBatchGenerationComplete, ({ newCycleId }) => {
             handleCycleChange(null, newCycleId);
         });
         clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); 
         clientIpc.sendToServer(ClientToServerChannel.RequestSettings, {});
-    }, [clientIpc, handleCycleChange]);
+    }, [clientIpc, requestCostEstimation]);
     React.useEffect(() => { if (isParsedMode) parseAllTabs(); }, [isParsedMode, tabs, parseAllTabs]);
     React.useEffect(() => { if (!selectedFilePath) return; const currentTabData = tabs[activeTab.toString()]; if (currentTabData?.parsedContent) { const fileExistsInTab = currentTabData.parsedContent.files.some(f => f.path === selectedFilePath); if (!fileExistsInTab) setSelectedFilePath(null); } }, [activeTab, tabs, selectedFilePath]);
 
@@ -24913,6 +24916,7 @@ const App = () => {
     };
 
     // ... (rest of handlers and component return)
+    const handleCycleChange = (e: React.MouseEvent | null, newCycle: number) => { e?.stopPropagation(); if (saveStatus !== 'saved') return; if (newCycle >= 0 && newCycle <= maxCycle) { setSelectedFilesForReplacement(new Set()); setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycle }); setWorkflowStep(null); } };
     const handleSelectForViewing = (filePath: string) => { const newPath = selectedFilePath === filePath ? null : filePath; setSelectedFilePath(newPath); };
     const handleAcceptSelectedFiles = () => { if (selectedFilesForReplacement.size === 0) return; const filesToWrite: BatchWriteFile[] = []; selectedFilesForReplacement.forEach(compositeKey => { const [responseId, filePath] = compositeKey.split(':::'); const responseData = tabs[responseId]; if (responseData?.parsedContent) { const file = responseData.parsedContent.files.find(f => f.path === filePath); if (file) { const finalPath = pathOverrides.get(file.path) || file.path; filesToWrite.push({ path: finalPath, content: file.content }); } } }); if (filesToWrite.length > 0) { clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite }); } setWorkflowStep('awaitingCycleContext'); };
     const handleLinkFile = (originalPath: string) => { if (tempOverridePath.trim()) { setPathOverrides(prev => new Map(prev).set(originalPath, tempOverridePath.trim())); setFileExistenceMap(prev => new Map(prev).set(originalPath, true)); setTempOverridePath(''); handleSelectForViewing(originalPath); } };
@@ -24921,7 +24925,7 @@ const App = () => {
     const onEphemeralContextChange = React.useCallback((value: string) => { setEphemeralContext(value); setEphemeralContextTokens(Math.ceil(value.length / 4)); setSaveStatus('unsaved'); }, []);
     const activeTabData = tabs[activeTab.toString()];
     const sortedTabIds = React.useMemo(() => { const tabIds = [...Array(tabCount)].map((_, i) => i + 1); if (isParsedMode && isSortedByTokens) tabIds.sort((a, b) => { const tokensA = tabs[a.toString()]?.parsedContent?.totalTokens ?? -1; const tokensB = tabs[b.toString()]?.parsedContent?.totalTokens ?? -1; return tokensB - tokensA; }); return tabIds; }, [tabs, isParsedMode, isSortedByTokens, tabCount]);
-    const viewableContent = React.useMemo(() => { if (!selectedFilePath || !activeTabData?.parsedContent) return undefined; const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath); if (!file) return '<div>Error: File data not found in parsed response.</div>'; const id = `${activeTab}::${file.path}::${file.content}`; return highlightedCodeBlocks.get(id); }, [selectedFilePath, activeTabData?.parsedContent, highlightedCodeBlocks, activeTab]);
+    const viewableContent = React.useMemo(() => { if (!selectedFilePath || !activeTabData?.parsedContent) return undefined; const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath); if (!file) return '<div>Error: File data not found in parsed response.</div>'; const id = `${file.path}::${file.content}`; return highlightedCodeBlocks.get(id); }, [selectedFilePath, activeTabData?.parsedContent, highlightedCodeBlocks]);
     
     const handleContextKeyDown = React.useCallback(() => { /* Placeholder for potential future use */ }, []);
     
