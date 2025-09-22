@@ -1,5 +1,5 @@
 // src/backend/services/llm.service.ts
-// Updated on: C43 (Fix response parsing)
+// Updated on: C48 (Remove hardcoded max_tokens)
 import { Services } from './services';
 import fetch from 'node-fetch';
 import { PcppCycle } from '@/common/types/pcpp.types';
@@ -36,7 +36,8 @@ export class LlmService {
                     model: "unsloth/gpt-oss-20b",
                     prompt: prompt,
                     n: count,
-                    max_tokens: 8192,
+                    // max_tokens is removed to let the server use its default.
+                    // This prevents errors where prompt_tokens + max_tokens > context_window.
                     stream: false
                 }),
             });
@@ -48,7 +49,6 @@ export class LlmService {
 
             const responseData = await response.json() as any;
             
-            // C43 Fix: The proxy returns a { "responses": [...] } object.
             if (responseData.responses && Array.isArray(responseData.responses)) {
                 const results = responseData.responses;
                 Services.loggerService.log(`Received ${results.length} responses from LLM.`);

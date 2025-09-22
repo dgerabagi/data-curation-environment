@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 47 - issue resolved via rollback
+Current Cycle 48 - continue vllm integration, super cool progress
+Cycle 47 - issue resolved via rollback
 Cycle 46 - responses came in! little buggy though
 Cycle 45 - 404 error
 Cycle 44 - responses coming in but getting truncated at the stop sign
@@ -253,7 +254,7 @@ No project scope defined.
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C47 (Update A11.1)
+# Updated on: C48 (Add A97)
 
 ## 1. Purpose
 
@@ -675,6 +676,10 @@ No project scope defined.
 - **Description:** An analysis of the `openai_harmony` library and a proposed plan for migrating the DCE's vLLM interaction schema from XML tags to a more robust, token-based structured format.
 - **Tags:** plan, architecture, interaction schema, parsing, llm, vllm, harmony
 
+### A97. DCE - vLLM Response Progress UI Plan
+- **Description:** A plan and textual mockup for a UI to display the progress of incoming vLLM responses, including progress bars and a tokens/second metric.
+- **Tags:** feature plan, ui, ux, vllm, progress indicator, metrics
+
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
 - **Tags:** history, log, development process, cycles
@@ -762,6 +767,33 @@ No project scope defined.
 
 <M6. Cycles>
 
+<Cycle 48>
+<Cycle Context>
+haha! nice! it worked! the responses came in! i switched manually to the new cycle, and the responses were parsed! amazing! i discovered one issue, while the model is planning, it talks about the parsing tags. in doing so, it triggers our parser when our perser reads it. it looks like we will want to ignore up until the model begins its `assistantfinal` response. the first response contained this: `... Let's craft final response.assistantfinal> <summary> ...`
+the next response contained this: `... Now produce final answer.assistantfinal]<summary> ...`
+trying to find a pattern. its very odd, here is the next one: `... Thus final.assistantfinal]<summary> ...`
+so the brackets change but i think `assistantfinal` is reliable enough to start looking for our parsing rules after this string?
+
+the next thing is that i had to manually progress to the next cycle, we'd want it to switch for the user once the response comes in.
+
+finally, how do you suppose we service the progress ui as outlined in a97? like i mean the users response generatino progress from vllm to the extension?
+</Cycle Context>
+<Previous Cycle 47 Summary of Actions>
+I have analyzed the bug report from Cycle 46. The symptoms you've described—UI state immediately reverting and a flood of cost calculation logs—point directly to a classic React infinite re-render loop on the frontend.
+
+The root cause is a `useEffect` hook in the Parallel Co-Pilot Panel (`view.tsx`) that is responsible for requesting the prompt cost estimation. Its dependency array is likely configured in a way that causes it to trigger on every single render. This creates a vicious cycle: an action causes a render, the effect runs and requests a cost update, the response to the cost update causes another render, and the loop repeats. This explains both the log spam and why any UI state changes (like parsing or deleting text) are immediately overwritten by the component re-rendering with its old state.
+
+My course of action is to fix this re-render loop by making the `useEffect` hook's dependencies stable. I will also clean up the now-unnecessary diagnostic logging from the cost calculation service.
+
+1.  **Fix Infinite Re-render Loop (`view.tsx`):**
+    *   I will locate the `useEffect` hook that triggers the `requestCostEstimation` function.
+    *   I will refactor its dependency array to only include the specific, stable values that actually affect the prompt cost (e.g., `cycleContext`, `ephemeralContext`, `selectedResponseId`). This will prevent the hook from running on every render and will break the infinite loop. This is the primary fix that will resolve both the UI instability and the log spam.
+
+2.  **Clean Up Log Spam (`prompt.service.ts`):**
+    *   To reduce noise in the logs now that the underlying issue is understood, I will remove the `--- COST CALCULATION DRY RUN ---` log message from the `handlePromptCostBreakdownRequest` method. The more detailed logs that follow it will be preserved as they are useful for debugging the calculation itself.
+</Previous Cycle 47 Summary of Actions>
+</Cycle 48>
+
 <Cycle 47>
 <Cycle Context>
 okay, i rolled `src\client\views\parallel-copilot.view\view.tsx` back to the version from cycle 43 and that fixed this re-render loop issue.
@@ -770,24 +802,12 @@ i will now test our demo mode by clicking `Generate responses` on my cycle 2 tha
 
 i think that we need a UI which appears to show that we are processing. currently, after i click generate responses, as the developer since i can see the vllm logs i can see progress, however i am wanting to surface this progress to the users in the extension. i think the best way we could do this is if we have a little stylistic UI or modal that appears which represents the number of responses coming back. each one could be a progress bar. i really want to get the tokens per second information and get that presented to the user here. can you create a artifac twhich mocks up a panel like that?
 
-also, im confused by the `max_tokens: 8192,` in `llm.service.ts`, because i thought it was just the context window size, so i set it to 131,000, but then whenever i tried to send a message to vllm i got a 400 error saying max token limit is 72 and ur message is 24k tokens and so its too big. i realized that the actual max is 131,072 and so for some reason it was taking the opposite of what i input, or rather the remainder of what i put. i since changed it to 8192 and i dont get that error, but this just confuses me on a) what it is doing and b) how it works.
-
-our model has be set to and loads with 131,072 token context window. all of that should be made available to the users in their responses. please do the needful.
-
 finally, my extension seemed to have received the responses back and claims to have created a new cycle, and indeed that new cycle does show up in the dce_history.json file, but my pcpp stays on cycle 2, and i actually dont seem to be able to manually navigate to cycle 3 with the `>` button.
 
 the idea is once i hit generate responses, we get the processing UI to indicate total tokens per second, and then once the responses are recieved, they are presented to the user, already parsed, but with the option still to un-parse in the event there were parsing errors that the user can fix (like adding a missing <summary>)
 
 
 </Cycle Context>
-<Ephemeral Context>
-[INFO] [7:55:34 PM] Received RequestBatchGeneration for 4 responses from cycle 2.
-[INFO] [7:55:34 PM] [SelectionService] Found 39 paths in persisted state. Validating...
-[INFO] [7:55:34 PM] [SelectionService] Returning 39 valid paths.
-[INFO] [7:55:34 PM] Sending batch request for 4 responses to: https://aiascent.game/api/dce/proxy
-[INFO] [7:57:32 PM] Received 4 responses from LLM.
-[INFO] [7:57:32 PM] Created new cycle 3 with 4 responses.
-</Ephemeral Context>
 <Previous Cycle 46 Summary of Actions>
 I have analyzed the error logs and your feedback. You are absolutely right to be confused, and I apologize for the misstep. The `404 Not Found` error with the message "The model `local-model` does not exist" is the definitive clue.
 
@@ -3318,16 +3338,16 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-22T01:07:06.491Z
+  Date Generated: 2025-09-22T01:49:12.694Z
   ---
-  Total Files: 177
-  Approx. Tokens: 448705
+  Total Files: 178
+  Approx. Tokens: 449699
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
-2. src\client\views\parallel-copilot.view\view.tsx (9252 tokens)
-3. src\Artifacts\A0. DCE Master Artifact List.md (8647 tokens)
+2. src\client\views\parallel-copilot.view\view.tsx (9263 tokens)
+3. src\Artifacts\A0. DCE Master Artifact List.md (8714 tokens)
 4. src\client\views\parallel-copilot.view\view.scss (5575 tokens)
 5. src\backend\services\prompt.service.ts (4895 tokens)
 6. src\backend\services\file-operation.service.ts (4526 tokens)
@@ -3339,7 +3359,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!-- Full File List -->
 1. public\copilot.svg - [Binary] Size: 445 Bytes
 2. public\spiral.svg - [Binary] Size: 459 Bytes
-3. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 508 - Chars: 34587 - Tokens: 8647
+3. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 512 - Chars: 34855 - Tokens: 8714
 4. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 5. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
 6. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
@@ -3350,7 +3370,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 11. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
 12. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
 13. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 20 - Chars: 1090 - Tokens: 273
-14. src\Artifacts\A11.1 DCE - New Regression Case Studies.md - Lines: 59 - Chars: 5133 - Tokens: 1284
+14. src\Artifacts\A11.1 DCE - New Regression Case Studies.md - Lines: 44 - Chars: 3700 - Tokens: 925
 15. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5687 - Tokens: 1422
 16. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
 17. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
@@ -3438,7 +3458,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 99. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
 100. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 101. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-102. src\backend\services\history.service.ts - Lines: 293 - Chars: 11799 - Tokens: 2950
+102. src\backend\services\history.service.ts - Lines: 294 - Chars: 11873 - Tokens: 2969
 103. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 104. src\backend\services\prompt.service.ts - Lines: 371 - Chars: 19579 - Tokens: 4895
 105. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
@@ -3470,7 +3490,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 131. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 100 - Chars: 5002 - Tokens: 1251
 132. src\client\views\parallel-copilot.view\view.scss - Lines: 996 - Chars: 22300 - Tokens: 5575
 133. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-134. src\client\views\parallel-copilot.view\view.tsx - Lines: 350 - Chars: 37005 - Tokens: 9252
+134. src\client\views\parallel-copilot.view\view.tsx - Lines: 351 - Chars: 37050 - Tokens: 9263
 135. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 136. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 137. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
@@ -3511,9 +3531,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 172. src\Artifacts\A93. DCE - vLLM Encryption in Transit Guide.md - Lines: 65 - Chars: 3811 - Tokens: 953
 173. src\Artifacts\A94. DCE - Connecting to a Local LLM Guide.md - Lines: 42 - Chars: 2565 - Tokens: 642
 174. src\Artifacts\A95. DCE - LLM Connection Modes Plan.md - Lines: 54 - Chars: 4725 - Tokens: 1182
-175. src\backend\services\llm.service.ts - Lines: 66 - Chars: 2582 - Tokens: 646
+175. src\backend\services\llm.service.ts - Lines: 66 - Chars: 2651 - Tokens: 663
 176. src\backend\services\settings.service.ts - Lines: 44 - Chars: 1670 - Tokens: 418
 177. src\Artifacts\A96. DCE - Harmony-Aligned Response Schema Plan.md - Lines: 33 - Chars: 2660 - Tokens: 665
+178. src\Artifacts\A97. DCE - vLLM Response Progress UI Plan.md - Lines: 67 - Chars: 4955 - Tokens: 1239
 
 <file path="public/copilot.svg">
 <metadata>
@@ -3541,7 +3562,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C47 (Update A11.1)
+# Updated on: C48 (Add A97)
 
 ## 1. Purpose
 
@@ -3962,6 +3983,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 ### A96. DCE - Harmony-Aligned Response Schema Plan
 - **Description:** An analysis of the `openai_harmony` library and a proposed plan for migrating the DCE's vLLM interaction schema from XML tags to a more robust, token-based structured format.
 - **Tags:** plan, architecture, interaction schema, parsing, llm, vllm, harmony
+
+### A97. DCE - vLLM Response Progress UI Plan
+- **Description:** A plan and textual mockup for a UI to display the progress of incoming vLLM responses, including progress bars and a tokens/second metric.
+- **Tags:** feature plan, ui, ux, vllm, progress indicator, metrics
 
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
@@ -4594,7 +4619,7 @@ This document serves as a living record of persistent or complex bugs that have 
 # Artifact A11.1: DCE - New Regression Case Studies
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C47 (Add case study for useCallback dependency loop)
+# Updated on: C48 (Add max_tokens and navigation bug case studies)
 
 - **Key/Value for A0:**
 - **Description:** A separate log for new regression case studies to avoid bloating the original A11 artifact.
@@ -4610,43 +4635,28 @@ This document serves as a living record of persistent or complex bugs that have 
 
 ---
 
-### Case Study 041: UI Input Wiped Due to `useCallback` Dependency Loop
+### Case Study 043: Navigation Fails After View Rollback
 
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/backend/services/history.service.ts`
 -   **Cycles Observed:** C47
--   **Symptom:** In the Cycle 0 onboarding view, any character typed into the "Project Scope" `textarea` is immediately deleted. The debug console shows a flood of `RequestInitialCycleData` messages.
--   **Root Cause Analysis (RCA):** A subtle but critical infinite re-render loop was created by a chain of dependencies between React hooks.
-    1.  Typing in the `textarea` called a handler that updated the `saveStatus` state to `'unsaved'`.
-    2.  A `useCallback` hook for the `handleCycleChange` function had `saveStatus` in its dependency array. When `saveStatus` changed, `handleCycleChange` received a new function reference.
-    3.  A main, top-level `useEffect` hook, responsible for initialization and message listeners, had `handleCycleChange` in its dependency array.
-    4.  Because `handleCycleChange`'s reference changed, the entire `useEffect` hook was re-executed.
-    5.  This re-execution would call `RequestInitialCycleData`, which reloaded all state from the backend, wiping out the user's input and starting the cycle over again.
--   **Codified Solution & Best Practice:** `useCallback` dependency arrays must be minimal to prevent unintended re-creations of memoized functions. The check for `saveStatus` inside the `handleCycleChange` callback was redundant, as the UI buttons that call it are already disabled based on `saveStatus`. Removing the check and the dependency from the `useCallback` array broke the infinite loop and fixed the bug. Always ensure that state updates do not inadvertently cause cascading re-creations of memoized functions that are dependencies of top-level effects.
+-   **Symptom:** After the backend successfully generates responses and creates a new cycle, the frontend UI does not navigate to the new cycle and the navigation buttons are unresponsive.
+-   **Root Cause Analysis (RCA):** The curator rolled back `view.tsx` to a version from Cycle 43 to fix a separate UI bug. This older version predated the fix implemented in Cycle 44 for this exact navigation issue. The bug is that the frontend's `maxCycle` state is not updated before the navigation is attempted. The navigation logic in `handleCycleChange` checks if the target cycle ID is less than or equal to `maxCycle`. Since `maxCycle` is stale, this check fails, and the navigation is silently aborted.
+-   **Codified Solution & Best Practice:** The backend must be the source of truth for state changes. The `createNewCycleWithResponses` method must return the new maximum cycle count. The frontend message handler for `SendBatchGenerationComplete` **must** update its `maxCycle` state *before* attempting to navigate to the new cycle. This ensures the UI state is synchronized before an action that depends on it is triggered.
 
 ---
 
-### Case Study 040: UI State Instability Caused by Overactive useEffect Dependencies
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`
--   **Cycles Observed:** C46
--   **Symptom:** Multiple, severe UI bugs occurring simultaneously:
-    1.  Text deleted from a `<textarea>` immediately reappears.
-    2.  A toggle button (`Parse All`) visually reverts its state immediately after being clicked.
-    3.  The debug console is flooded with logs from an expensive operation (e.g., cost calculation) on every single keystroke.
--   **Root Cause Analysis (RCA):** This cascade of failures was caused by a single flawed `useEffect` hook. An expensive, debounced operation (`requestCostEstimation`) had a dependency on a large, frequently-changing state object (the `tabs` object, which contained the raw content of all response text areas). Because this dependency was not specific, any change to the text in any tab would trigger the effect. This initiated a constant cycle of re-renders which, in turn, reverted any UI state changes (like text deletion or a toggle button's state) back to the last-known state *before* the user's action was fully processed and persisted.
--   **Codified Solution & Best Practice:** `useEffect` hooks for expensive or derived computations must have a minimal and precise dependency array.
-    1.  **Be Specific:** The dependency array should only include the specific primitive values that the effect's logic actually depends on.
-    2.  **Avoid Large Objects:** Do not list large, complex state objects (like `tabs`) in a dependency array if the effect only cares about a small piece of data within that object. Instead, derive the specific data point with `useMemo` and list that in the dependency array, or pass it directly.
-    3.  **The Fix:** The dependency array for the cost calculation was changed from `[..., tabs]` to `[..., cycleContext, ephemeralContext, selectedResponseId]`. This ensures the expensive calculation only runs when the actual inputs to the prompt change, not on every keystroke in an unrelated `textarea`. This stabilized the component and fixed all three downstream bugs.
+### Case Study 042: API Error 400 Due to `max_tokens` Misunderstanding
+
+-   **Artifacts Affected:** `src/backend/services/llm.service.ts`
+-   **Cycles Observed:** C47
+-   **Symptom:** When sending a request to the vLLM server with a large prompt, setting a high `max_tokens` value causes a `400 Bad Request` error.
+-   **Root Cause Analysis (RCA):** The `max_tokens` parameter in the OpenAI API does not define the model's total context window; it defines the maximum number of tokens to *generate in the completion*. The total token count of the prompt plus the `max_tokens` value cannot exceed the model's context length. The user, assuming `max_tokens` was the total context, set it to a very large value (e.g., 131,000). When added to a large prompt (e.g., 24,000 tokens), the sum exceeded the model's limit, resulting in a valid API error.
+-   **Codified Solution & Best Practice:** Do not hardcode a large, arbitrary `max_tokens` value on the client side. It is better to omit the parameter entirely and let the inference server (vLLM) use its own configured default. The server is better positioned to manage token limits. The client-side `llm.service.ts` was corrected by removing the `max_tokens` parameter from its `fetch` request body.
 
 ---
 
-### Case Study 001: PCPP Context Textarea Instability
-(No change from C187)
-
----
-
-### Case Study 002: FTV Flashing on PCPP Auto-Save
-(No change from C187)
+### Case Study 041: UI Input Wiped Due to `useCallback` Dependency Loop
+(No change from C47)
 
 ---
 ... (rest of the file remains the same) ...
@@ -19712,7 +19722,7 @@ export class HighlightingService {
 
 <file path="src/backend/services/history.service.ts">
 // src/backend/services/history.service.ts
-// Updated on: C43 (Return newMaxCycle from createNewCycleWithResponses)
+// Updated on: C48 (Add isParsedMode to new cycle, return newMaxCycle)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -19889,6 +19899,7 @@ export class HistoryService {
             ephemeralContext: '',
             responses: newResponses,
             tabCount: tabCount,
+            isParsedMode: true, // Default to parsed view for new responses
         };
 
         history.cycles.push(newCycle);
@@ -23403,7 +23414,7 @@ export const viewConfig = {
 </file_artifact>
 
 <file path="src/client/views/parallel-copilot.view/on-message.ts">
-// Updated on: C43 (Pass newMaxCycle to SendBatchGenerationComplete)
+// Updated on: C48 (Pass newMaxCycle to SendBatchGenerationComplete)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -24659,7 +24670,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C42 (Refactor batch generation handler)
+// Updated on: C48 (Re-implement navigation fix)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -24891,7 +24902,8 @@ const App = () => {
     React.useEffect(() => { if (workflowStep === null) return; if (workflowStep === 'readyForNewCycle') return; if (workflowStep === 'awaitingGeneratePrompt') { if (isReadyForNextCycle) setWorkflowStep('awaitingGeneratePrompt'); return; } if (workflowStep === 'awaitingCycleTitle') { if (cycleTitle.trim() && cycleTitle.trim() !== 'New Cycle') { setWorkflowStep('awaitingGeneratePrompt'); } return; } if (workflowStep === 'awaitingCycleContext') { if (cycleContext.trim()) { setWorkflowStep('awaitingCycleTitle'); } return; } if (workflowStep === 'awaitingAccept') { return; } if (workflowStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestGitStatus, {}); return; } if (workflowStep === 'awaitingFileSelect') { if (selectedFilesForReplacement.size > 0) { setWorkflowStep('awaitingAccept'); } return; } if (workflowStep === 'awaitingResponseSelect') { if (selectedResponseId) { setWorkflowStep('awaitingBaseline'); } return; } if (workflowStep === 'awaitingSort') { if (isSortedByTokens) { setWorkflowStep('awaitingResponseSelect'); } return; } if (workflowStep === 'awaitingParse') { if (isParsedMode) { setWorkflowStep(isSortedByTokens ? 'awaitingResponseSelect' : 'awaitingSort'); } return; } const waitingForPaste = workflowStep?.startsWith('awaitingResponsePaste'); if (waitingForPaste) { for (let i = 1; i <= tabCount; i++) { if (!tabs[i.toString()]?.rawContent?.trim()) { setWorkflowStep(`awaitingResponsePaste_${i}`); return; } } setWorkflowStep('awaitingParse'); } }, [workflowStep, selectedFilesForReplacement, selectedResponseId, isSortedByTokens, isParsedMode, tabs, cycleContext, cycleTitle, tabCount, isReadyForNextCycle, clientIpc]);
     React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string, newMax?: number) => { setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setActiveTab(cycleData.activeTab || 1); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setWorkflowStep(cycleData.activeWorkflowStep || null); if (newMax) setMaxCycle(newMax); setSaveStatus('saved'); requestCostEstimation(); }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => { setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics)); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { logger.log(`[COST_ESTIMATION_RECEIVED] Tokens: ${totalTokens}, Cost: ${estimatedCost}`); setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { if (result.success) { setWorkflowStep(prevStep => { if (prevStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => { if (cycleId === stateRef.current.currentCycle) setSaveStatus('saved'); }); 
         clientIpc.onServerMessage(ServerToClientChannel.SendSettings, ({ settings }) => { setConnectionMode(settings.connectionMode) });
-        clientIpc.onServerMessage(ServerToClientChannel.SendBatchGenerationComplete, ({ newCycleId }) => {
+        clientIpc.onServerMessage(ServerToClientChannel.SendBatchGenerationComplete, ({ newCycleId, newMaxCycle }) => {
+            setMaxCycle(newMaxCycle);
             handleCycleChange(null, newCycleId);
         });
         clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); 
@@ -28133,7 +28145,7 @@ The workflow is now designed to be more robust and atomic, with the backend hand
 
 <file path="src/backend/services/llm.service.ts">
 // src/backend/services/llm.service.ts
-// Updated on: C43 (Fix response parsing)
+// Updated on: C48 (Remove hardcoded max_tokens)
 import { Services } from './services';
 import fetch from 'node-fetch';
 import { PcppCycle } from '@/common/types/pcpp.types';
@@ -28170,7 +28182,8 @@ export class LlmService {
                     model: "unsloth/gpt-oss-20b",
                     prompt: prompt,
                     n: count,
-                    max_tokens: 8192,
+                    // max_tokens is removed to let the server use its default.
+                    // This prevents errors where prompt_tokens + max_tokens > context_window.
                     stream: false
                 }),
             });
@@ -28182,7 +28195,6 @@ export class LlmService {
 
             const responseData = await response.json() as any;
             
-            // C43 Fix: The proxy returns a { "responses": [...] } object.
             if (responseData.responses && Array.isArray(responseData.responses)) {
                 const results = responseData.responses;
                 Services.loggerService.log(`Received ${results.length} responses from LLM.`);
@@ -28281,6 +28293,76 @@ This is a major architectural change and should be implemented in phases.
 ### Phase 1: Adopt Harmony for File Formatting (Immediate)
 
 -   **Goal:** Replace the `<file path="...">` and `
+</file_artifact>
+
+<file path="src/Artifacts/A97. DCE - vLLM Response Progress UI Plan.md">
+# Artifact A97: DCE - vLLM Response Progress UI Plan
+# Date Created: C48
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A plan and textual mockup for a UI to display the progress of incoming vLLM responses, including progress bars and a tokens/second metric.
+- **Tags:** feature plan, ui, ux, vllm, progress indicator, metrics
+
+## 1. Vision & Goal
+
+When a user clicks "Generate responses," the extension communicates with a potentially remote vLLM server. This process can take anywhere from a few seconds to over a minute, depending on the model and prompt size. Currently, the UI provides no feedback during this time, which can make the application feel unresponsive or broken.
+
+The goal is to provide clear, real-time feedback to the user about the status of their request. This will be achieved with a new, non-modal UI element that appears during generation, showing the progress for each requested response and displaying a live tokens-per-second metric.
+
+## 2. User Stories
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| P3-PROG-01 | **See Generation Progress** | As a user, after I click "Generate responses," I want to see a visual indicator that the request is in progress, so I know the application is working. | - A progress display area appears in the UI (e.g., in the header) after "Generate responses" is clicked. <br> - This display shows one progress bar for each response being generated (e.g., 4 bars if 4 responses were requested). |
+| P3-PROG-02 | **Monitor Performance** | As a user, I want to see a live tokens-per-second (tok/s) metric, so I can gauge the performance of the LLM backend. | - The progress display includes a "Tokens/sec" counter. <br> - This counter updates in real-time as response data streams in from the backend. |
+| P3-PROG-03 | **View Streaming Responses** | As a user, I want to see the text of the responses appear in the tabs as they are being generated, so I can see the results immediately without waiting for all responses to be complete. | - As tokens are generated by the LLM, they are streamed to the appropriate response tab in the newly created cycle. |
+
+## 3. UI Mockup (Textual Description)
+
+The progress display will be a new element that appears within the main header (`pc-header`) of the Parallel Co-Pilot Panel, to the right of the "Generate responses" button.
+
+**State: Before Generation**
+```
+| [ Project Plan ] [ Generate responses ] [ 4 ] [ Log State ]                                       |
+```
+
+**State: During Generation**
+```
+| [ Project Plan ] [ Generating... (Disabled) ] [ 4 ] [ Abort ]                                     |
+|-------------------------------------------------------------------------------------------------|
+|  Tokens/sec: [ 1,234 ]                                                                          |
+|  Resp 1: [||||||||||||||||||||||||------------------] 50%                                          |
+|  Resp 2: [||||||||||||||||||||||||------------------] 50%                                          |
+|  Resp 3: [||||||||||||||||||------------------------] 40%                                          |
+|  Resp 4: [||||||||||--------------------------------] 30%                                          |
+|-------------------------------------------------------------------------------------------------|```
+
+### 3.1. Components Breakdown
+
+-   **Generate Button:** The button's text changes to "Generating..." and it becomes disabled.
+-   **Abort Button:** A new "Abort" button appears, allowing the user to cancel the request.
+-   **Tokens/sec Display:** A live counter showing the aggregate generation speed.
+-   **Progress Bars:**
+    -   One progress bar for each requested response.
+    -   The progress is based on the `max_tokens` requested vs. tokens received. If `max_tokens` isn't specified, it could be an indeterminate progress bar until the `finish_reason` is received.
+
+## 4. Technical Implementation Plan (High-Level)
+
+This feature depends on **streaming** responses from the vLLM server.
+
+1.  **Backend (`llm.service.ts`):**
+    *   The `generateBatch` method must be updated to handle `stream: true`.
+    *   It will need to process Server-Sent Events (SSE) from the vLLM response stream.
+2.  **IPC Channels:**
+    *   New channels will be needed to stream data to the frontend:
+        *   `StreamResponseChunk(payload: { responseId: number; chunk: string; })`
+        *   `StreamResponseEnd(payload: { responseId: number; finish_reason: string; })`
+        *   `UpdateTpsMetric(payload: { tps: number; })`
+3.  **Frontend (`view.tsx`):**
+    *   New state variables will be needed to manage the progress of each response and the TPS metric.
+    *   The UI will be updated to render the progress display conditionally.
+    *   New message handlers will listen for the streaming IPC events and update the state in real-time, appending text to the response tabs and updating the progress bars.
 </file_artifact>
 
 

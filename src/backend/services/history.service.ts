@@ -1,5 +1,5 @@
 // src/backend/services/history.service.ts
-// Updated on: C43 (Return newMaxCycle from createNewCycleWithResponses)
+// Updated on: C48 (Add isParsedMode to new cycle, return newMaxCycle)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -176,6 +176,7 @@ export class HistoryService {
             ephemeralContext: '',
             responses: newResponses,
             tabCount: tabCount,
+            isParsedMode: true, // Default to parsed view for new responses
         };
 
         history.cycles.push(newCycle);

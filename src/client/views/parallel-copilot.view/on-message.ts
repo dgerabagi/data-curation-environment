@@ -1,4 +1,4 @@
-// Updated on: C43 (Pass newMaxCycle to SendBatchGenerationComplete)
+// Updated on: C48 (Pass newMaxCycle to SendBatchGenerationComplete)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
