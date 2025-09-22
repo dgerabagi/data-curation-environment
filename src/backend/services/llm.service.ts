@@ -33,10 +33,10 @@ export class LlmService {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    model: "local-model",
+                    model: "unsloth/gpt-oss-20b",
                     prompt: prompt,
                     n: count,
-                    max_tokens: 4096,
+                    max_tokens: 8192,
                     stream: false
                 }),
             });

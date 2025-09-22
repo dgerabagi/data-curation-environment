@@ -1,4 +1,4 @@
-// Updated on: C38 (Add generatePromptString for in-memory generation)
+// Updated on: C46 (Remove spammy log message)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -199,7 +199,6 @@ ${staticContext.trim()}
     }
 
     public async handlePromptCostBreakdownRequest(cycleData: PcppCycle, serverIpc: ServerPostMessageManager) {
-        Services.loggerService.log("--- COST CALCULATION DRY RUN ---");
         try {
             const selectedFiles = await Services.selectionService.getLastSelection();
             Services.loggerService.log(`[CostCalc] Found ${selectedFiles.length} selected files.`);
